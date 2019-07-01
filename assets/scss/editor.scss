@@ -1,0 +1,14 @@
+@import "variables";
+
+$wide-content-selector: unquote('.block-editor-block-list__block[data-align=wide]') !default;
+$full-content-selector: unquote('.block-editor-block-list__block[data-align=full]') !default;
+
+@import "typography";
+@import "align";
+
+@import "blocks/core/button";
+
+.editor-block-list__layout {
+    @extend %block-container;
+    @extend %block-top-level-container;
+}

@@ -1,0 +1,80 @@
+/*!
+Theme Name: nova
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: __theme_txtd
+Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+
+@import "variables";
+@import "normalize";
+
+@import "blocks/core/button";
+
+*, :before, :after {
+    box-sizing: border-box;
+}
+
+* {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-size: 100%;
+    line-height: 1.5;
+}
+
+@import "typography";
+@import "align";
+
+.entry-content {
+    @extend %block-container;
+    @extend %block-top-level-container;
+
+    padding-left: var(--content-side-spacing);
+    padding-right: var(--content-side-spacing);
+
+    > #{$full-content-selector} {
+        margin-left: calc( -1 * var(--content-side-spacing) );
+        margin-right: calc( -1 * var(--content-side-spacing) );
+    }
+}
+
+[class*="__inner-container"] {
+    @extend %block-container;
+}
+
+.nova-media {
+    * + & {
+        margin-top: 56px;
+    }
+}
+
+.block-is-moderate,
+.block-is-highlighted,
+.nova-slideshow,
+.nova-hero {
+
+    & + & {
+        margin-top: 0;
+    }
+}
+
+.has-text-align-left {
+    text-align: left;
+}
+
+.has-text-align-center {
+    text-align: center;
+}
+
+.has-text-align-right {
+    text-align: right;
+}

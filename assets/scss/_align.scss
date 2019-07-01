@@ -1,0 +1,37 @@
+$wide-content-selector: unquote('.alignwide') !default;
+$full-content-selector: unquote('.alignfull') !default;
+
+%block-container {
+    --typography-spacing: 20px;
+
+    > * {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    > * + * {
+        margin-top: var(--typography-spacing)
+    }
+
+    > :not(#{$wide-content-selector}):not(#{$full-content-selector}) {
+        max-width: var(--content-width-normal);
+    }
+
+    > #{$wide-content-selector} {
+        max-width: var(--content-width-wide);
+    }
+
+    > #{$full-content-selector} {
+        max-width: none;
+    }
+}
+
+%block-top-level-container {
+    padding-left: var(--content-side-spacing);
+    padding-right: var(--content-side-spacing);
+
+    > #{$full-content-selector} {
+        margin-left: calc( -1 * var(--content-side-spacing) );
+        margin-right: calc( -1 * var(--content-side-spacing) );
+    }
+}
