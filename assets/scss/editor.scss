@@ -1,14 +1,25 @@
+@import "mixins";
 @import "variables";
 
-$wide-content-selector: unquote('.block-editor-block-list__block[data-align=wide]') !default;
-$full-content-selector: unquote('.block-editor-block-list__block[data-align=full]') !default;
+$wide-content-selector: unquote('[data-align=wide]') !default;
+$full-content-selector: unquote('[data-align=full]') !default;
 
 @import "typography";
-@import "align";
 
 @import "blocks/core/button";
 
-.editor-block-list__layout {
-    @extend %block-container;
-    @extend %block-top-level-container;
+.editor-block-list__layout,
+[class*="__inner-container"] {
+
+    > :not([data-align="wide"]):not([data-align="full"]) {
+        max-width: var(--content-width-normal);
+    }
+
+    > [data-align="wide"] {
+        max-width: var(--content-width-wide);
+    }
+
+    > [data-align="full"] {
+        max-width: none;
+    }
 }

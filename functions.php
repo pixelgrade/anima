@@ -23,5 +23,16 @@ add_action( 'wp_enqueue_scripts', 'nova_theme_scripts' );
 
 function nova_theme_setup() {
 	add_theme_support( 'align-wide' );
+	add_theme_support( 'customizer_style_manager' );
 }
 add_action( 'after_setup_theme', 'nova_theme_setup', 10 );
+
+function nova_add_customify_options( $config ) {
+	$config['opt-name'] = 'nova_options';
+
+	//start with a clean slate - no Customify default sections
+	$config['sections'] = array();
+
+	return $config;
+}
+add_filter( 'customify_filter_fields', 'nova_add_customify_options', 10, 1 );

@@ -1,36 +1,59 @@
 :root {
   --content-width-normal: 900px;
   --content-width-wide: 1200px;
-  --content-side-spacing: 56px; }
+  --nova-spacing-unit: 2px;
+  --content-side-spacing: calc( 7 * var(--nova-spacing-unit) ); }
+  @media only screen and (min-width: 768px) {
+    :root {
+      --nova-spacing-unit: 4px; } }
+  @media only screen and (min-width: 1024px) {
+    :root {
+      --nova-spacing-unit: 8px; } }
 
 blockquote {
-  font-family: Neuton;
-  font-size: 36px;
-  line-height: 1.16667;
+  --blockquote-font-family: Neuton, serif;
+  --blockquote-font-size: 36px;
+  --blockquote-line-height: 1.16667;
+  --blockquote-font-weight: 400;
+  --blockquote-color: var(--nova-dark-2);
+  font-family: var(--blockquote-font-family);
+  font-size: var(--blockquote-font-size);
+  line-height: var(--blockquote-line-height);
+  font-weight: var(--blockquote-font-weight);
+  color: var(--blockquote-color);
   margin: 0; }
 
-.editor-block-list__layout {
-  --typography-spacing: 20px; }
-  .editor-block-list__layout > * {
-    margin-left: auto;
-    margin-right: auto; }
-  .editor-block-list__layout > * + * {
-    margin-top: var(--typography-spacing); }
-  .editor-block-list__layout > :not(.block-editor-block-list__block[data-align=wide]):not(.block-editor-block-list__block[data-align=full]) {
-    max-width: var(--content-width-normal); }
-  .editor-block-list__layout > .block-editor-block-list__block[data-align=wide] {
-    max-width: var(--content-width-wide); }
-  .editor-block-list__layout > .block-editor-block-list__block[data-align=full] {
-    max-width: none; }
-
-.editor-block-list__layout {
-  padding-left: var(--content-side-spacing);
-  padding-right: var(--content-side-spacing); }
-  .editor-block-list__layout > .block-editor-block-list__block[data-align=full] {
-    margin-left: calc( -1 * var(--content-side-spacing));
-    margin-right: calc( -1 * var(--content-side-spacing)); }
+cite {
+  --cite-font-family: "Woodford Bourne", sans-serif;
+  --cite-font-size: 13px;
+  --cite-line-height: 1.23077;
+  --cite-font-weight: 700;
+  --cite-color: var(--nova-color-1);
+  font-family: var(--cite-font-family);
+  font-size: var(--cite-font-size);
+  line-height: var(--cite-line-height);
+  font-weight: var(--cite-font-weight);
+  color: var(--cite-color); }
 
 .wp-block-button__link {
+  --nova-button-background-color: var(--nova-color-2);
+  --nova-button-color: var(--nova-color-1);
+  --nova-button-border-color: var(--nova-color-2);
   display: inline-block;
   padding: 12px 24px;
-  border: 2px solid; }
+  background-color: var(--nova-button-background-color);
+  color: var(--nova-button-color);
+  border: var(--nova-button-border-width) solid var(--nova-button-border-color);
+  border-radius: 999em; }
+
+.editor-block-list__layout > :not([data-align="wide"]):not([data-align="full"]),
+[class*="__inner-container"] > :not([data-align="wide"]):not([data-align="full"]) {
+  max-width: var(--content-width-normal); }
+
+.editor-block-list__layout > [data-align="wide"],
+[class*="__inner-container"] > [data-align="wide"] {
+  max-width: var(--content-width-wide); }
+
+.editor-block-list__layout > [data-align="full"],
+[class*="__inner-container"] > [data-align="full"] {
+  max-width: none; }

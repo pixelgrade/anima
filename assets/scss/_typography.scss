@@ -1,7 +1,32 @@
+:root {
+}
+
 blockquote {
-    font-family: Neuton;
-    font-size: 36px;
-    line-height: (42/36);
+    --blockquote-font-family: Neuton, serif;
+    --blockquote-font-size: 36px;
+    --blockquote-line-height: #{(42/36)};
+    --blockquote-font-weight: 400;
+    --blockquote-color: var(--nova-dark-2);
+
+    font-family: var(--blockquote-font-family);
+    font-size: var(--blockquote-font-size);
+    line-height: var(--blockquote-line-height);
+    font-weight: var(--blockquote-font-weight);
+    color: var(--blockquote-color);
 
     margin: 0; // admin-styles
+}
+
+cite {
+    --cite-font-family: "Woodford Bourne", sans-serif;
+    --cite-font-size: 13px;
+    --cite-line-height: #{(16/13)};
+    --cite-font-weight: 700;
+    --cite-color: var(--nova-color-1);
+
+    font-family: var(--cite-font-family);
+    font-size: var(--cite-font-size);
+    line-height: var(--cite-line-height);
+    font-weight: var(--cite-font-weight);
+    color: var(--cite-color);
 }

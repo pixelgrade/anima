@@ -2,9 +2,17 @@
 @mixin button {
     display: inline-block;
     padding: 12px 24px;
-    border: 2px solid;
+
+    background-color: var(--nova-button-background-color);
+    color: var(--nova-button-color);
+    border: var(--nova-button-border-width) solid var(--nova-button-border-color);
+
+    border-radius: 999em;
 }
 
 .wp-block-button__link {
+    --nova-button-background-color: var(--nova-color-2);
+    --nova-button-color: var(--nova-color-1);
+    --nova-button-border-color: var(--nova-color-2);
     @include button;
 }

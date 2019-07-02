@@ -10,6 +10,7 @@ This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
 
+@import "mixins";
 @import "variables";
 @import "normalize";
 
@@ -31,29 +32,47 @@ body {
     line-height: 1.5;
 }
 
+:root {
+    --nova-typography-spacing: calc( 2 * var(--nova-spacing-unit) );
+}
+
 @import "typography";
-@import "align";
 
 .entry-content {
-    @extend %block-container;
-    @extend %block-top-level-container;
+}
 
+.entry-content,
+[class*="__inner-container"] {
     padding-left: var(--content-side-spacing);
     padding-right: var(--content-side-spacing);
 
-    > #{$full-content-selector} {
+    > * {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    > * + * {
+        margin-top: var(--nova-typography-spacing)
+    }
+
+    > :not(.alignwide):not(.alignfull) {
+        max-width: var(--content-width-normal);
+    }
+
+    > .alignwide {
+        max-width: var(--content-width-wide);
+    }
+
+    > .alignfull {
+        max-width: none;
         margin-left: calc( -1 * var(--content-side-spacing) );
         margin-right: calc( -1 * var(--content-side-spacing) );
     }
 }
 
-[class*="__inner-container"] {
-    @extend %block-container;
-}
-
 .nova-media {
     * + & {
-        margin-top: 56px;
+        margin-top: calc( 6 * var(--nova-spacing-unit) );
     }
 }
 
@@ -78,3 +97,5 @@ body {
 .has-text-align-right {
     text-align: right;
 }
+
+@import "shame";
