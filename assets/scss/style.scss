@@ -14,8 +14,6 @@ Use it to make something cool, have fun, and share what you've learned with othe
 @import "variables";
 @import "normalize";
 
-@import "blocks/core/button";
-
 *, :before, :after {
     box-sizing: border-box;
 }
@@ -26,20 +24,13 @@ Use it to make something cool, have fun, and share what you've learned with othe
     margin: 0;
 }
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    font-size: 100%;
-    line-height: 1.5;
-}
-
 :root {
-    --nova-typography-spacing: calc( 2 * var(--nova-spacing-unit) );
+    --nova-typography-spacing: calc( 3 * var(--nova-spacing-unit) );
 }
 
 @import "typography";
 
-.entry-content {
-}
+@import "blocks/core/button";
 
 .entry-content,
 [class*="__inner-container"] {
@@ -68,6 +59,10 @@ body {
         margin-left: calc( -1 * var(--content-side-spacing) );
         margin-right: calc( -1 * var(--content-side-spacing) );
     }
+}
+
+.nova-media__content {
+    --content-side-spacing: var(--nova-media-content-padding);
 }
 
 .nova-media {

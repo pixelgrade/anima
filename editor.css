@@ -10,8 +10,18 @@
     :root {
       --nova-spacing-unit: 8px; } }
 
+:root {
+  --nova-body-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  --nova-headings-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  --nova-alt-font-family: Neuton, serif; }
+
+body {
+  font-family: var(--nova-body-font-family);
+  font-size: 100%;
+  line-height: 1.5; }
+
 blockquote {
-  --blockquote-font-family: Neuton, serif;
+  --blockquote-font-family: var(--nova-alt-font-family);
   --blockquote-font-size: 36px;
   --blockquote-line-height: 1.16667;
   --blockquote-font-weight: 400;
@@ -24,7 +34,7 @@ blockquote {
   margin: 0; }
 
 cite {
-  --cite-font-family: "Woodford Bourne", sans-serif;
+  --cite-font-family: var(--nova-headings-font-family);
   --cite-font-size: 13px;
   --cite-line-height: 1.23077;
   --cite-font-weight: 700;
@@ -35,16 +45,87 @@ cite {
   font-weight: var(--cite-font-weight);
   color: var(--cite-color); }
 
+h1, h2, h3, h4, h5, h6 {
+  margin: 0; }
+
+h1 {
+  font-family: var(--nova-headings-font-family);
+  font-size: 60px;
+  line-height: 1;
+  text-transform: uppercase; }
+
+h2 {
+  font-family: var(--nova-headings-font-family);
+  font-size: 24px;
+  line-height: 1.25;
+  text-transform: uppercase; }
+
+h3 {
+  font-family: var(--nova-headings-font-family);
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: 0.07em;
+  text-transform: uppercase; }
+
+h4 {
+  font-family: var(--nova-headings-font-family);
+  font-size: 20px;
+  line-height: 1.15; }
+
+h5 {
+  font-family: var(--nova-headings-font-family);
+  font-size: 13px;
+  line-height: 1.167;
+  letter-spacing: 0.154em;
+  text-transform: uppercase; }
+
+h6 {
+  font-family: var(--nova-headings-font-family);
+  font-size: 11px;
+  line-height: 1.1818;
+  letter-spacing: 0.154em;
+  text-transform: uppercase; }
+
 .wp-block-button__link {
-  --nova-button-background-color: var(--nova-color-2);
-  --nova-button-color: var(--nova-color-1);
-  --nova-button-border-color: var(--nova-color-2);
   display: inline-block;
-  padding: 12px 24px;
-  background-color: var(--nova-button-background-color);
-  color: var(--nova-button-color);
+  padding: var(--nova-button-padding);
   border: var(--nova-button-border-width) solid var(--nova-button-border-color);
-  border-radius: 999em; }
+  border-radius: var(--nova-button-border-radius);
+  font-family: var(--nova-headings-font-family);
+  font-size: 13px;
+  line-height: 1.167;
+  letter-spacing: 0.154em;
+  text-transform: uppercase; }
+  .wp-block-button__link:not(.has-background) {
+    background-color: var(--nova-button-background-color); }
+    .wp-block-button__link:not(.has-background):hover {
+      background-color: var(--nova-button-hover-background-color); }
+  .wp-block-button__link:not(.has-text-color) {
+    color: var(--nova-button-color); }
+    .wp-block-button__link:not(.has-text-color):hover {
+      color: var(--nova-button-hover-color); }
+
+.wp-block-button {
+  --nova-button-background-color: var(--nova-color-2);
+  --nova-button-color: var(--nova-dark-3);
+  --nova-button-border-color: var(--nova-color-2);
+  --nova-button-hover-background-color: var(--nova-color-2);
+  --nova-button-hover-color: var(--nova-dark-3);
+  --nova-button-hover-border-color: var(--nova-color-2);
+  --nova-button-border-width: 2px;
+  --nova-button-border-radius: 999em;
+  --nova-button-y-padding: calc( 2 * var(--nova-spacing-unit) );
+  --nova-button-x-padding: calc( 4 * var(--nova-spacing-unit) );
+  --nova-button-padding: var(--nova-button-y-padding) var(--nova-button-x-padding); }
+  .wp-block-button.is-style-squared {
+    --nova-button-border-radius: 0; }
+  .wp-block-button.is-style-outline {
+    --nova-button-background-color: transparent;
+    --nova-button-color: currentColor;
+    --nova-button-border-color: currentColor;
+    --nova-button-hover-background-color: transparent;
+    --nova-button-hover-color: currentColor;
+    --nova-button-hover-border-color: currentColor; }
 
 .editor-block-list__layout > :not([data-align="wide"]):not([data-align="full"]),
 [class*="__inner-container"] > :not([data-align="wide"]):not([data-align="full"]) {
