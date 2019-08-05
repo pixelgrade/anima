@@ -24,7 +24,7 @@ add_action( 'wp_enqueue_scripts', 'nova_theme_scripts' );
 
 function nova_theme_setup() {
 	add_theme_support( 'align-wide' );
-	add_theme_support( 'site-logo' );
+	add_theme_support( 'custom-logo' );
 	add_theme_support( 'customizer_style_manager' );
 }
 add_action( 'after_setup_theme', 'nova_theme_setup', 10 );
