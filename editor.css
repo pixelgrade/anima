@@ -11,9 +11,11 @@
       --nova-spacing-unit: 8px; } }
 
 :root {
-  --nova-body-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  --nova-headings-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  --nova-alt-font-family: Neuton, serif; }
+  --nova-system-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  --nova-default-font-family: adelle-sans, sans-serif;
+  --nova-body-font-family: var(--nova-default-font-family);
+  --nova-headings-font-family: var(--nova-default-font-family);
+  --nova-alt-font-family: var(--nova-default-font-family); }
 
 body {
   font-family: var(--nova-body-font-family);
@@ -51,40 +53,46 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-family: var(--nova-headings-font-family);
   font-size: 60px;
-  line-height: 1;
-  text-transform: uppercase; }
+  font-weight: 700;
+  line-height: 1; }
 
 h2 {
   font-family: var(--nova-headings-font-family);
-  font-size: 24px;
-  line-height: 1.25;
-  text-transform: uppercase; }
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--nova-dark-3); }
 
 h3 {
   font-family: var(--nova-headings-font-family);
-  font-size: 16px;
-  line-height: 1.25;
-  letter-spacing: 0.07em;
-  text-transform: uppercase; }
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.25; }
 
 h4 {
   font-family: var(--nova-headings-font-family);
   font-size: 20px;
-  line-height: 1.15; }
+  font-weight: 700;
+  line-height: 1; }
 
 h5 {
   font-family: var(--nova-headings-font-family);
   font-size: 13px;
-  line-height: 1.167;
-  letter-spacing: 0.154em;
-  text-transform: uppercase; }
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--nova-color-1); }
 
 h6 {
   font-family: var(--nova-headings-font-family);
-  font-size: 11px;
-  line-height: 1.1818;
-  letter-spacing: 0.154em;
-  text-transform: uppercase; }
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--nova-dark-3); }
+
+.entry-content {
+  font-size: 18px; }
 
 .wp-block-button__link {
   display: inline-block;
@@ -92,10 +100,9 @@ h6 {
   border: var(--nova-button-border-width) solid var(--nova-button-border-color);
   border-radius: var(--nova-button-border-radius);
   font-family: var(--nova-headings-font-family);
-  font-size: 13px;
-  line-height: 1.167;
-  letter-spacing: 0.154em;
-  text-transform: uppercase; }
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1; }
   .wp-block-button__link:not(.has-background) {
     background-color: var(--nova-button-background-color); }
     .wp-block-button__link:not(.has-background):hover {
@@ -126,6 +133,12 @@ h6 {
     --nova-button-hover-background-color: transparent;
     --nova-button-hover-color: currentColor;
     --nova-button-hover-border-color: currentColor; }
+  .wp-block-button.alignleft {
+    text-align: left; }
+  .wp-block-button.aligncenter {
+    text-align: center; }
+  .wp-block-button.alignright {
+    text-align: right; }
 
 .editor-block-list__layout > :not([data-align="wide"]):not([data-align="full"]),
 [class*="__inner-container"] > :not([data-align="wide"]):not([data-align="full"]) {

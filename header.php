@@ -11,3 +11,5 @@
 
 <div id="page" class="site">
 	<div id="content" class="site-content">
+		<?php block_areas()->render( 'header' ); ?>
+

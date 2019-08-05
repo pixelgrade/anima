@@ -6,7 +6,7 @@
     border: var(--nova-button-border-width) solid var(--nova-button-border-color);
     border-radius: var(--nova-button-border-radius);
 
-    @include nova-h5-font;
+    @include nova-h4-font;
 
     &:not(.has-background) {
         background-color: var(--nova-button-background-color);
@@ -57,5 +57,11 @@
         --nova-button-hover-background-color: transparent;
         --nova-button-hover-color: currentColor;
         --nova-button-hover-border-color: currentColor;
+    }
+
+    @each $alignment in left, center, right {
+        &.align#{$alignment} {
+            text-align: #{$alignment};
+        }
     }
 }

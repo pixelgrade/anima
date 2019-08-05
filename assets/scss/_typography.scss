@@ -1,10 +1,9 @@
 :root {
-    //--nova-headings-font-family: "Woodford Bourne", sans-serif;
-    --nova-body-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    --nova-headings-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    //--nova-headings-font-family: "Roboto", sans-serif;
-    //--nova-body-font-family: "PT Serif", serif;
-    --nova-alt-font-family: Neuton, serif;
+    --nova-system-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    --nova-default-font-family: adelle-sans, sans-serif;
+    --nova-body-font-family: var(--nova-default-font-family);
+    --nova-headings-font-family: var(--nova-default-font-family);
+    --nova-alt-font-family: var(--nova-default-font-family);
 }
 
 body {
@@ -43,15 +42,21 @@ cite {
     color: var(--cite-color);
 }
 
+// modular scale
+// base: 16
+// ratio: 1.2
+// 11, 13, 16, 20, 26, 32, 40, 48, 58
+
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
 }
 
+
 @mixin nova-h1-font {
     font-family: var(--nova-headings-font-family);
     font-size: 60px;
+    font-weight: 700;
     line-height: 1;
-    text-transform: uppercase;
 }
 
 h1 {
@@ -60,9 +65,11 @@ h1 {
 
 @mixin nova-h2-font {
     font-family: var(--nova-headings-font-family);
-    font-size: 24px;
-    line-height: 1.25;
-    text-transform: uppercase;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.2;
+
+    color: var(--nova-dark-3);
 }
 
 h2 {
@@ -71,10 +78,9 @@ h2 {
 
 @mixin nova-h3-font {
     font-family: var(--nova-headings-font-family);
-    font-size: 16px;
+    font-size: 32px;
+    font-weight: 700;
     line-height: 1.25;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
 }
 
 h3 {
@@ -84,7 +90,8 @@ h3 {
 @mixin nova-h4-font {
     font-family: var(--nova-headings-font-family);
     font-size: 20px;
-    line-height: 1.15;
+    font-weight: 700;
+    line-height: 1;
 }
 
 h4 {
@@ -94,23 +101,22 @@ h4 {
 @mixin nova-h5-font {
     font-family: var(--nova-headings-font-family);
     font-size: 13px;
-    line-height: 1.167;
-    letter-spacing: 0.154em;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
+
+    color: var(--nova-color-1);
 }
 
 h5 {
     @include nova-h5-font;
 }
 
-@mixin nova-h6-font {
-    font-family: var(--nova-headings-font-family);
-    font-size: 11px;
-    line-height: 1.1818;
-    letter-spacing: 0.154em;
-    text-transform: uppercase;
+h6 {
+    @include nova-h2-font;
 }
 
-h6 {
-    @include nova-h6-font;
+.entry-content {
+    font-size: 18px;
 }

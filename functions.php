@@ -17,12 +17,14 @@ function nova_theme_enqueue_block_editor_assets() {
 add_action( 'enqueue_block_editor_assets', 'nova_theme_enqueue_block_editor_assets' );
 
 function nova_theme_scripts() {
+	wp_enqueue_style( 'nova-theme-adelle-sans', 'https://use.typekit.net/gsj4hyt.css', array(), wp_get_theme()->get( 'Version' ) );
 	wp_enqueue_style( 'nova-theme-styles', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
 }
 add_action( 'wp_enqueue_scripts', 'nova_theme_scripts' );
 
 function nova_theme_setup() {
 	add_theme_support( 'align-wide' );
+	add_theme_support( 'site-logo' );
 	add_theme_support( 'customizer_style_manager' );
 }
 add_action( 'after_setup_theme', 'nova_theme_setup', 10 );

@@ -2,3 +2,16 @@ body {
     background-color: var(--nova-light-1);
     color: var(--nova-dark-1);
 }
+
+.site-branding {
+    padding: 1em;
+}
+
+.site-title {
+    @include nova-h4-font;
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+}
