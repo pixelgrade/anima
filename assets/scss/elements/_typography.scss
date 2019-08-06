@@ -1,0 +1,47 @@
+/* Media */
+img,
+video {
+    max-width: 100%;
+    height: auto;
+}
+
+figure {
+    margin: 0;
+}
+
+/* Iframes */
+iframe {
+    width: 100%;
+    margin: 0;
+}
+
+/* Preformatted */
+pre {
+    overflow: auto;
+}
+
+/* Links */
+a {
+    color: var(--nova-color-1);
+}
+
+/* Blockquotes */
+blockquote {
+    @include nova-blockquote;
+}
+
+cite {
+    @include nova-cite;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+h1 { @include nova-h1-font }
+h2 { @include nova-h2-font }
+h3 { @include nova-h3-font }
+h4 { @include nova-h4-font }
+h5 { @include nova-h5-font }
+h6 { @include nova-h6-font }

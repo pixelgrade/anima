@@ -1,13 +1,10 @@
-@import "mixins";
-@import "variables";
+@import "setup/mixins";
+@import "setup/variables";
 
-$wide-content-selector: unquote('[data-align=wide]') !default;
-$full-content-selector: unquote('[data-align=full]') !default;
+@import "blocks/helpers";
+@import "blocks/editor";
 
-@import "typography";
-
-@import "blocks/core/button";
-
+/* Layout */
 .editor-block-list__layout,
 [class*="__inner-container"] {
 
@@ -21,5 +18,42 @@ $full-content-selector: unquote('[data-align=full]') !default;
 
     > [data-align="full"] {
         max-width: none;
+    }
+}
+
+/* Typography */
+.editor-styles-wrapper {
+
+    // increased specificity selector to overwrite default styles
+    &[class] {
+        @include nova-container-colors;
+        @include nova-container-font(var(--nova-content-font-size));
+    }
+
+    @import "elements/typography";
+
+    .block-library-list {
+
+        ul, ol {
+            margin: 0;
+            padding: 0;
+        }
+
+        @import "elements/lists";
+    }
+
+    @import "components/alignment";
+
+    blockquote {
+        margin: 0;
+    }
+}
+
+/* Post Title Block */
+.editor-post-title__block {
+    max-width: var(--content-width-normal);
+
+    .editor-post-title__input {
+        @include nova-h1-font;
     }
 }

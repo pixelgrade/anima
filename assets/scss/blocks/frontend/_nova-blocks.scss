@@ -1,0 +1,19 @@
+.nova-media__content {
+    --content-side-spacing: var(--nova-media-content-padding);
+}
+
+.nova-media {
+    * + & {
+        margin-top: calc( 6 * var(--nova-spacing-unit) );
+    }
+}
+
+.block-is-moderate,
+.block-is-highlighted,
+.nova-slideshow,
+.nova-hero {
+
+    & + & {
+        margin-top: 0;
+    }
+}

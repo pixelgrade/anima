@@ -10,6 +10,10 @@
 <body <?php body_class(); ?>>
 
 <div id="page" class="site">
+
+    <div class="site-header">
+	    <?php block_areas()->render( 'header' ); ?>
+    </div>
+
 	<div id="content" class="site-content">
-		<?php block_areas()->render( 'header' ); ?>
 

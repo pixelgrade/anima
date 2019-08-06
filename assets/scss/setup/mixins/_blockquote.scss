@@ -1,0 +1,23 @@
+/* Blockquote CSS Custom Properties */
+:root {
+    --blockquote-font-family: var(--nova-alt-font-family);
+    --blockquote-font-size: 24px;
+    --blockquote-large-font-size: 36px;
+    --blockquote-line-height: #{(42/36)};
+    --blockquote-font-weight: 400;
+    --blockquote-color: var(--nova-dark-2);
+}
+
+@mixin nova-blockquote {
+    font-family: var(--blockquote-font-family);
+    font-size: var(--blockquote-font-size);
+    line-height: var(--blockquote-line-height);
+    font-weight: var(--blockquote-font-weight);
+    color: var(--blockquote-color);
+
+    margin: 0; // admin-styles
+}
+
+@mixin nova-blockquote-large {
+    font-size: var(--blockquote-large-font-size);
+}

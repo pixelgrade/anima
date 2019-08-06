@@ -1,0 +1,19 @@
+:root {
+    --block-grid-spacing: 20px;
+}
+
+.wp-block-gallery {
+    list-style: none;
+    @include block-grid;
+
+    img {
+        display: block;
+    }
+
+    @for $i from 2 through 5 {
+
+        &.columns-#{$i} {
+            @include block-grid-count($i);
+        }
+    }
+}

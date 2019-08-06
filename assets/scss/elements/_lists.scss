@@ -1,0 +1,32 @@
+/* Lists */
+ul,
+ol {
+    list-style-position: inside;
+}
+
+li > ul,
+li > ol {
+    padding-left: var(--nova-typography-spacing);
+}
+
+/* Nested unordered lists */
+ul {
+    list-style-type: disc;
+}
+
+ul ul {
+    list-style-type: circle;
+}
+
+ul ul ul {
+    list-style-type: square;
+}
+
+/* Nested ordered lists */
+ol {
+    list-style-type: decimal;
+}
+
+ol ol {
+    list-style-type: lower-alpha;
+}

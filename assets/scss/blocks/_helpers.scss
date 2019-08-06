@@ -1,0 +1,50 @@
+$wp-colors: (
+    pale-pink: #f78da7,
+    vivid-red: #cf2e2e,
+    luminous-vivid-orange: #ff6900,
+    luminous-vivid-amber: #fcb900,
+    light-green-cyan: #7bdcb5,
+    vivid-green-cyan: #00d084,
+    pale-cyan-blue: #8ed1fc,
+    vivid-cyan-blue: #0693e3,
+    vivid-purple: #9b51e0,
+    very-light-gray: #eee,
+    cyan-bluish-gray: #abb8c3,
+    very-dark-gray: #313131,
+);
+
+/* Color Helper Classes */
+@each $name, $color in $wp-colors {
+
+    .has-#{$name}-background-color {
+        background-color: $color;
+    }
+
+    .has-#{$name}-color {
+        background-color: $color;
+    }
+}
+
+$wp-font-sizes: (
+    small: 13px,
+    normal: 16px,
+    medium: 20px,
+    large: 36px,
+    huge: 48px,
+);
+
+/* Font Size Helper Classes */
+@each $name, $font-size in $wp-font-sizes {
+
+    .has-#{$name}-font-size {
+        font-size: $font-size;
+    }
+}
+
+/* Alignment Helper Classes */
+@each $alignment in left, center, right {
+
+    .has-text-align-#{$alignment} {
+        text-align: $alignment;
+    }
+}

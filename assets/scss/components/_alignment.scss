@@ -1,0 +1,23 @@
+%alignleft {
+    margin-right: 2em;
+}
+
+%alignright {
+    margin-left: 2em;
+}
+
+%aligncenter {
+
+}
+
+%alignnone {
+
+}
+
+@each $alignment in left, right, center, none {
+
+    .align#{$alignment},
+    .block-editor-block-list__layout .block-editor-block-list__block[data-align=#{$alignment}] .block-editor-block-list__block-edit {
+        @extend %align#{$alignment} !optional;
+    }
+}

@@ -1,5 +1,5 @@
 /*!
-Theme Name: nova
+Theme Name: Nova Theme
 Version: 1.0.0
 License: GNU General Public License v2 or later
 License URI: LICENSE
@@ -10,88 +10,54 @@ This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
 
-@import "mixins";
-@import "variables";
-@import "normalize";
+/*
 
-*, :before, :after {
-    box-sizing: border-box;
-}
+Table of Contents
 
-* {
-    border: 0;
-    padding: 0;
-    margin: 0;
-}
+0.  Reset
+1.  Elements - HTML Entities
+2.  Components
+2.1 - Site Header
+2.2 - Site Content
+2.3 - Site Footer
+3.  Blocks
 
-:root {
-    --nova-typography-spacing: calc( 3 * var(--nova-spacing-unit) );
-}
+*/
 
-@import "typography";
 
-@import "blocks/core/button";
-@import "blocks/core/columns";
 
-.entry-content,
-[class*="__inner-container"] {
-    padding-left: var(--content-side-spacing);
-    padding-right: var(--content-side-spacing);
 
-    > * {
-        margin-left: auto;
-        margin-right: auto;
-    }
+@import "setup/mixins";
+@import "setup/variables";
 
-    > * + * {
-        margin-top: var(--nova-typography-spacing)
-    }
+/* 0. Reset */
+@import "generic/normalize";
+@import "generic/reset";
 
-    > :not(.alignwide):not(.alignfull) {
-        max-width: var(--content-width-normal);
-    }
+/* 1. Elements */
+@import "elements/body";
+@import "elements/typography";
+@import "elements/lists";
 
-    > .alignwide {
-        max-width: var(--content-width-wide);
-    }
+/* 2. Components */
+@import "components/alignment";
 
-    > .alignfull {
-        max-width: none;
-        margin-left: calc( -1 * var(--content-side-spacing) );
-        margin-right: calc( -1 * var(--content-side-spacing) );
-    }
-}
+/* 2.1 - Site Header */
+@import "components/site-header";
+@import "components/site-branding";
+@import "components/site-title";
 
-.nova-media__content {
-    --content-side-spacing: var(--nova-media-content-padding);
-}
+/* 2.2 - Site Content */
+@import "components/site-content";
 
-.nova-media {
-    * + & {
-        margin-top: calc( 6 * var(--nova-spacing-unit) );
-    }
-}
+/* 2.3 - Site Footer */
+@import "components/site-footer";
+@import "components/site-info";
 
-.block-is-moderate,
-.block-is-highlighted,
-.nova-slideshow,
-.nova-hero {
+@import "components/entry-content";
 
-    & + & {
-        margin-top: 0;
-    }
-}
-
-.has-text-align-left {
-    text-align: left;
-}
-
-.has-text-align-center {
-    text-align: center;
-}
-
-.has-text-align-right {
-    text-align: right;
-}
+/* 3. Blocks */
+@import "blocks/helpers";
+@import "blocks/frontend";
 
 @import "shame";

@@ -1,0 +1,29 @@
+@mixin block-grid {
+    display: flex;
+    flex-wrap: wrap;
+
+    > * {
+        flex: 0 0 auto;
+        margin-right: var(--block-grid-spacing);
+        margin-top: var(--block-grid-spacing);
+    }
+
+    > :last-child {
+        margin-right: 0;
+    }
+}
+
+@mixin block-grid-count($number) {
+
+    > * {
+        width: calc((100% - #{$number - 1} * var(--block-grid-spacing))/#{$number});
+    }
+
+    > :nth-child(-n + #{$number}) {
+        margin-top: 0;
+    }
+
+    > :nth-child(#{$number}n) {
+        margin-right: 0;
+    }
+}

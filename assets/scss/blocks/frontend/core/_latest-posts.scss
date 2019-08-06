@@ -1,0 +1,22 @@
+.wp-block-latest-posts[class] {
+    padding-left: 0;
+}
+
+.wp-block-latest-posts__list {
+
+    &.is-grid {
+        list-style: none;
+        @include block-grid;
+        @include block-grid-count(2);
+
+        a {
+            display: block;
+            padding: 2em;
+
+            text-align: center;
+            text-decoration: none;
+
+            background: #EEE;
+        }
+    }
+}
