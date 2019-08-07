@@ -1,0 +1,24 @@
+@media only screen and (min-width: 1000px) {
+
+    .site-header__content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        > :not(:last-child) {
+            margin-right: 1em;
+        }
+    }
+
+    .c-menu-toggle__checkbox,
+    .c-menu-toggle {
+        display: none;
+    }
+}
+
+@import "menu-toggle";
+
+@media not screen and (min-width: 1000px) {
+    @import "mobile";
+    @import "mobile-transitions";
+}

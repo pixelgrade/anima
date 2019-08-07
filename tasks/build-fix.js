@@ -29,7 +29,7 @@ gulp.task( 'build:fix:line-endings', maybeFixIncorrectLineEndings );
 // -----------------------------------------------------------------------------
 function pluginTextdomainReplace() {
 	return gulp.src( ['../build/' + plugin + '/**/*.php', '../build/' + plugin + '/**/*.js'] )
-	           .pipe( plugins.replace( /['|"]__plugin_txtd['|"]/g, '\'' + plugin + '\'' ) )
+	           .pipe( plugins.replace( /['|"]__theme_txtd['|"]/g, '\'' + plugin + '\'' ) )
 	           .pipe( gulp.dest( '../build/' + plugin ) );
 }
 gulp.task( 'build:fix:txtdomain', pluginTextdomainReplace );

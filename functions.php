@@ -1,6 +1,6 @@
 <?php
 
-function nova_deregister_gutenberg_styles() {
+function novablocks_deregister_gutenberg_styles() {
 	// Overwrite Core block styles with empty styles.
 	wp_deregister_style( 'wp-block-library' );
 	wp_register_style( 'wp-block-library',  '' );
@@ -9,21 +9,21 @@ function nova_deregister_gutenberg_styles() {
 	wp_deregister_style( 'wp-block-library-theme' );
 	wp_register_style( 'wp-block-library-theme', '' );
 }
-add_action( 'enqueue_block_assets', 'nova_deregister_gutenberg_styles' );
+add_action( 'enqueue_block_assets', 'novablocks_deregister_gutenberg_styles' );
 
-function nova_enqueue_block_editor_assets() {
+function novablocks_enqueue_theme_block_editor_assets() {
 	wp_enqueue_style( 'nova-adelle-sans', 'https://use.typekit.net/gsj4hyt.css', array(), wp_get_theme()->get( 'Version' ) );
 	wp_enqueue_style('nova-block-styles', get_template_directory_uri() . '/editor.css' );
 }
-add_action( 'enqueue_block_editor_assets', 'nova_enqueue_block_editor_assets' );
+add_action( 'enqueue_block_editor_assets', 'novablocks_enqueue_theme_block_editor_assets' );
 
-function nova_scripts() {
+function novablocks_scripts() {
 	wp_enqueue_style( 'nova-adelle-sans', 'https://use.typekit.net/gsj4hyt.css', array(), wp_get_theme()->get( 'Version' ) );
 	wp_enqueue_style( 'nova-style', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
 }
-add_action( 'wp_enqueue_scripts', 'nova_scripts', 10 );
+add_action( 'wp_enqueue_scripts', 'novablocks_scripts', 10 );
 
-function nova_setup() {
+function novablocks_setup() {
 	/**
 	 * Make theme available for translation.
 	 * Translations can be filed in the /languages/ directory.
@@ -130,7 +130,7 @@ function nova_setup() {
 		),
 	) );
 }
-add_action( 'after_setup_theme', 'nova_setup' );
+add_action( 'after_setup_theme', 'novablocks_setup' );
 
 /**
  * Customify integration for this theme.

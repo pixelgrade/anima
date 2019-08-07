@@ -14,7 +14,7 @@
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
 
-	<?php nova_post_thumbnail(); ?>
+	<?php novablocks_post_thumbnail(); ?>
 
 	<div class="entry-content">
 		<?php

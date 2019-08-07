@@ -22,14 +22,14 @@
 			?>
 			<div class="entry-meta">
 				<?php
-				nova_posted_on();
-				nova_posted_by();
+				novablocks_posted_on();
+				novablocks_posted_by();
 				?>
 			</div><!-- .entry-meta -->
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 
-	<?php nova_post_thumbnail(); ?>
+	<?php novablocks_post_thumbnail(); ?>
 
 	<div class="entry-content">
 		<?php
@@ -54,6 +54,6 @@
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
-		<?php nova_entry_footer(); ?>
+		<?php novablocks_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->
