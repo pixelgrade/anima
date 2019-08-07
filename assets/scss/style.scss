@@ -24,8 +24,7 @@ Table of Contents
 
 */
 
-
-
+$nova-lap-breakpoint: 1000px;
 
 @import "setup/mixins";
 @import "setup/variables";
@@ -62,13 +61,14 @@ Table of Contents
 @import "components/entry-footer";
 
 /* Comments */
-@import "components/comments-area";
-@import "components/comment";
+@import "components/comments/style";
 
 /* Navigation */
 @import "components/navigation";
 @import "components/post-navigation";
 @import "components/posts-navigation";
+
+@import "components/author";
 
 @import "components/screen-reader-text";
 

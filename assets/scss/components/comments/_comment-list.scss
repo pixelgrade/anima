@@ -1,0 +1,27 @@
+.comment-list {
+
+    list-style: none;
+
+    //@include spacing-y(var(--nova-y-spacing));
+    @include spacing(margin-top, 3rem);
+
+    .children {
+        list-style: none;
+
+        @include spacing(margin-left, 3rem);
+        @include spacing(margin-top, 2rem);
+
+        .children {
+            margin-left: 0;
+        }
+
+        @include below($nova-lap-breakpoint) {
+            margin-left: 20px;
+        }
+    }
+
+    > li + li {
+        @include spacing(margin-top, 2rem);
+    }
+
+}

@@ -1,0 +1,71 @@
+
+.comment {
+    position: relative;
+
+    .edit-link {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        transition: all .5s ease;
+    }
+}
+
+//.comment-list +
+.comment__wrapper {
+    display: flex;
+    align-items: flex-start;
+
+    &:not(:hover) .edit-link {
+        opacity: 0;
+    }
+}
+
+.comment__body {
+    @include spacing-y(0.5rem);
+}
+
+.comment__content {
+    @include spacing-y(var(--nova-typography-spacing));
+}
+
+.avatar {
+    display: block;
+    border-radius: 50%;
+}
+
+.comment__avatar {
+    margin-right: 20px;
+    flex: 0 0 auto;
+    overflow: hidden;
+
+    .avatar {
+
+    }
+
+    @include below($nova-lap-breakpoint) {
+        max-width: 32px;
+    }
+}
+
+.comment__metadata {
+    display: inline-block;
+    margin-left: 5px;
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
+
+.c-comments-toggle__label {
+    @include button;
+    display: block;
+    //background-color: $comments-toggle-label-background;
+}
+
+
+.comment__author {
+    @include nova-h4-font;
+}
