@@ -6,14 +6,56 @@
     list-style: none;
     @include block-grid;
 
+    @for $i from 2 through 9 {
+
+        &.columns-#{$i} {
+            @include block-grid-count($i);
+        }
+    }
+
     img {
         display: block;
     }
 
-    @for $i from 2 through 5 {
+    figure {
+        position: relative;
 
-        &.columns-#{$i} {
-            @include block-grid-count($i);
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+        height: 100%;
+    }
+
+    figcaption {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        overflow: hidden;
+
+        padding: 0.5em 0.75em;
+        color: #FFF;
+
+        font-size: 12px;
+        white-space: nowrap;
+
+        transform: translateZ(0);
+
+        &:after {
+            content: "";
+            @include stretch;
+            opacity: 0.6;
+            z-index: -1;
+            background: #000;
+        }
+    }
+
+    &.is-cropped {
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     }
 }

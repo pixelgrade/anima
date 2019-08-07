@@ -14,6 +14,10 @@ $wp-colors: (
 );
 
 /* Color Helper Classes */
+.has-background {
+    padding: 1em 1.25em;
+}
+
 @each $name, $color in $wp-colors {
 
     .has-#{$name}-background-color {

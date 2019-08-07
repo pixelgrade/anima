@@ -5,15 +5,25 @@
     align-items: center;
     justify-content: center;
 
+    padding: 2em;
     min-height: 430px;
 
+    text-align: center;
+
     color: #FFFFFF;
+    background-color: #000000;
     background-size: cover;
+
+    a {
+        color: inherit;
+    }
 
     &.has-background-dim:before {
         content: "";
         @include stretch;
+        z-index: 200;
         background-color: inherit;
+        opacity: 0.5;
     }
 
     @for $i from 1 through 10 {
@@ -21,8 +31,26 @@
             opacity: $i/10;
         }
     }
+
+    &.has-parallax {
+        background-attachment: fixed;
+    }
 }
 
-.wp-block-cover__inner-container {
+.wp-block-cover-text {
+    @include nova-h3-font;
+    color: inherit;
+}
+
+//.wp-block-cover-text,
+//.wp-block-cover__inner-container,
+.wp-block-cover > * {
     position: relative;
+    z-index: 300;
+}
+
+.wp-block-cover__video-background {
+    @include stretch;
+    object-fit: cover;
+    z-index: 100;
 }

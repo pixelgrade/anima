@@ -1,0 +1,38 @@
+@mixin container-side-spacing {
+    padding-left: var(--content-side-spacing);
+    padding-right: var(--content-side-spacing);
+
+
+    > .alignfull {
+        margin-left: calc( -1 * var(--content-side-spacing) );
+        margin-right: calc( -1 * var(--content-side-spacing) );
+    }
+}
+
+@mixin spacing-y($gap) {
+
+    > :not(:first-child) {
+        margin-top: $gap;
+    }
+}
+
+@mixin container {
+    @include container-side-spacing;
+
+    > * {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    > :not(.alignwide):not(.alignfull) {
+        max-width: var(--content-width-normal);
+    }
+
+    > .alignwide {
+        max-width: var(--content-width-wide);
+    }
+
+    > .alignfull {
+        max-width: none;
+    }
+}

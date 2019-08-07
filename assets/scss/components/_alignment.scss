@@ -1,9 +1,11 @@
 %alignleft {
     margin-right: 2em;
+    float: left;
 }
 
 %alignright {
     margin-left: 2em;
+    float: right;
 }
 
 %aligncenter {
@@ -14,9 +16,28 @@
 
 }
 
+%alignleft[class][class],
+%alignright[class][class] {
+    max-width: 40%;
+}
+
+%alignleft,
+%alignright,
+%aligncenter,
+%alignnone {
+
+    &:not(:first-child) {
+        margin-top: 2em;
+    }
+
+    &:not(:last-child) {
+        margin-bottom: 2em;
+    }
+}
+
 @each $alignment in left, right, center, none {
 
-    .align#{$alignment},
+    .entry-content > .align#{$alignment},
     .block-editor-block-list__layout .block-editor-block-list__block[data-align=#{$alignment}] .block-editor-block-list__block-edit {
         @extend %align#{$alignment} !optional;
     }

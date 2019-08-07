@@ -8,8 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-add_filter( 'customify_filter_fields', 'novablocks_add_customify_section', 20, 1 );
-add_filter( 'customify_filter_fields', 'novablocks_add_customify_style_manager_section', 20, 1 );
+add_filter( 'customify_filter_fields', 'nova_add_customify_section', 20, 1 );
+add_filter( 'customify_filter_fields', 'nova_add_customify_style_manager_section', 20, 1 );
 
 define( 'NOVABLOCKS_THEME_COLOR_PRIMARY', '#203AB6' ); // blue
 define( 'NOVABLOCKS_THEME_COLOR_SECONDARY', '#FFE42E' ); // yellow
@@ -23,7 +23,18 @@ define( 'NOVABLOCKS_THEME_LIGHT_PRIMARY', '#FFFFFF' ); // white
 define( 'NOVABLOCKS_THEME_LIGHT_SECONDARY', '#EEF1F2' ); // gray
 define( 'NOVABLOCKS_THEME_LIGHT_TERTIARY', '#EEF1F2' ); // gray
 
-function novablocks_add_customify_section( $config ) {
+
+function nova_add_customify_options( $config ) {
+	$config['opt-name'] = 'nova_options';
+
+	//start with a clean slate - no Customify default sections
+	$config['sections'] = array();
+
+	return $config;
+}
+add_filter( 'customify_filter_fields', 'nova_add_customify_options', 10, 1 );
+
+function nova_add_customify_section( $config ) {
 
 	$nova_section = array(
 		// Header
@@ -154,7 +165,7 @@ function novablocks_add_customify_section( $config ) {
 	return $config;
 }
 
-function novablocks_add_customify_style_manager_section( $options ) {
+function nova_add_customify_style_manager_section( $options ) {
 
 	if ( ! isset( $options['sections']['style_manager_section'] ) ) {
 		$options['sections']['style_manager_section'] = array();
