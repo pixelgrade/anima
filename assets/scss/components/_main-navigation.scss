@@ -4,20 +4,9 @@
     .menu > ul,
     .sub-menu,
     .children {
-
         padding-left: 0;
 
         list-style: none;
-
-        @media only screen and (min-width: 1000px) {
-            display: flex;
-            flex-wrap: wrap;
-        }
-    }
-
-    > ul.menu,
-    > .menu > ul {
-        justify-content: flex-end;
     }
 
     .menu-item-has-children,
@@ -33,10 +22,9 @@
                 display: block;
                 width: 7px;
                 height: 7px;
-                border: 1px solid transparent;
-                border-right-color: currentColor;
-                border-bottom-color: currentColor;
-                transform: rotate(45deg);
+                border-right: 2px solid currentColor;
+                border-bottom: 2px solid currentColor;
+                transform: translateY(-30%) rotate(45deg);
                 margin-left: 0.5em;
             }
         }
@@ -54,6 +42,14 @@
     }
 
     @media only screen and (min-width: 1000px) {
+
+        > ul.menu,
+        > .menu > ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
         .sub-menu,
         .children {
             position: absolute;
@@ -62,7 +58,16 @@
 
             width: 10em;
 
-            background: #FFF;
+            background: var(--nova-dark-1);
+            color: var(--nova-light-1);
+        }
+
+        .sub-menu .menu-item-has-children,
+        .children .page_item_has_children {
+
+            > a:after {
+                transform: translateY(-10%) rotate(-45deg);
+            }
         }
 
         .sub-menu .sub-menu,

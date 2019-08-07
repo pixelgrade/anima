@@ -433,6 +433,41 @@ ul.wp-block-categories__list[class] {
     height: 100%;
     object-fit: cover; }
 
+/*
+
+.wp-block-latest-comments.has-avatars .avatar {
+	margin-right: 10px;
+}
+
+.wp-block-latest-comments__comment-excerpt p {
+	font-size: 14px;
+	margin: 5px 0 20px;
+	padding-top: 0;
+}
+
+.wp-block-latest-comments.has-avatars .wp-block-latest-comments__comment {
+	min-height: 36px;
+}
+ */
+.wp-block-latest-comments {
+  list-style: none; }
+  .wp-block-latest-comments > :not(:first-child) {
+    margin-top: var(--nova-typography-spacing); }
+
+.wp-block-latest-comments__comment {
+  display: flex; }
+
+.wp-block-latest-comments__comment-date {
+  display: block; }
+
+.wp-block-latest-comments .avatar,
+.wp-block-latest-comments__comment-avatar {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin-right: 1em;
+  object-fit: cover; }
+
 .wp-block-latest-posts[class] {
   padding-left: 0; }
 
@@ -474,14 +509,6 @@ ul.wp-block-categories__list[class] {
   .wp-block-separator.is-style-dots {
     border-top-style: dotted; }
 
-.wp-block-table table {
-  width: 100%;
-  border-collapse: collapse; }
-
-.wp-block-table td {
-  border: 1px solid;
-  padding: 0.5em; }
-
 /* Layout */
 .editor-block-list__layout > :not([data-align="wide"]):not([data-align="full"]),
 [class*="__inner-container"] > :not([data-align="wide"]):not([data-align="full"]) {
@@ -502,7 +529,8 @@ ul.wp-block-categories__list[class] {
   /* Preformatted */
   /* Links */
   /* Blockquotes */
-  /* Headings */ }
+  /* Headings */
+  /* Tables */ }
   .editor-styles-wrapper[class] {
     color: var(--nova-dark-1);
     background-color: var(--nova-light-1);
@@ -571,6 +599,12 @@ ul.wp-block-categories__list[class] {
     color: var(--nova-color-1); }
   .editor-styles-wrapper h6 {
     color: var(--nova-dark-1); }
+  .editor-styles-wrapper table {
+    width: 100%;
+    border-collapse: collapse; }
+  .editor-styles-wrapper td, .editor-styles-wrapper th {
+    border: 1px solid;
+    padding: 0.5em; }
   .editor-styles-wrapper .block-library-list {
     /* Lists */
     /* Nested unordered lists */
