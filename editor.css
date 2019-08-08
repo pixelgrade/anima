@@ -36,16 +36,26 @@
   --nova-spacing-unit: 8px;
   --nova-content-width-normal: 900px;
   --nova-content-width-wide: 1200px;
-  --nova-wrapper-side-spacing: calc( 7 * var(--nova-spacing-unit) );
+  --nova-wrapper-side-spacing: 24px;
   --nova-x-spacing: calc( 7 * var(--nova-spacing-unit) );
   --nova-y-spacing: calc( 7 * var(--nova-spacing-unit) );
   --nova-body-font-family: adelle-sans, sans-serif;
   --nova-headings-font-family: adelle-sans, sans-serif;
   --nova-body-font-size: 16px;
   --nova-content-font-size: 18px;
-  --nova-element-spacing-normal: calc( 3 * var(--nova-spacing-unit) );
-  --nova-element-spacing-large: calc( 6 * var(--nova-spacing-unit) );
-  --nova-element-spacing: var(--nova-element-spacing-normal); }
+  --nova-element-spacing: var(--nova-element-spacing-normal);
+  --nova-element-spacing-normal: 12px;
+  --nova-element-spacing-large: 24px; }
+  @media only screen and (min-width: 1024px) {
+    :root {
+      --nova-wrapper-side-spacing: 48px; } }
+  @media only screen and (min-width: 1024px) {
+    :root {
+      --nova-element-spacing-normal: 24px;
+      --nova-element-spacing-large: 48px; } }
+  @media only screen and (min-width: 1366px) {
+    :root {
+      --nova-element-spacing-large: 56px; } }
 
 /* Color Helper Classes */
 .has-background {
