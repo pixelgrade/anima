@@ -17,13 +17,11 @@
 }
 
 @mixin button {
-    display: inline-block;
     padding: var(--nova-button-padding);
 
     border: var(--nova-button-border-width) solid var(--nova-button-border-color);
     border-radius: var(--nova-button-border-radius);
-
-    @include nova-h4-font;
+    cursor: pointer;
 
     &:not(.has-background) {
         background-color: var(--nova-button-background-color);

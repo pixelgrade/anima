@@ -3,35 +3,16 @@
 }
 
 @import "comments-area";
+@import "comments-toggle";
+
 @import "comment";
+@import "comment-form";
 @import "comment-list";
 @import "comment-respond";
 @import "comment-reply-title";
 
-// Should be in Customizer under H6 field
-.comment__metadata,
-.comment-reply-title,
-.edit-link,
-.reply,
-.logged-in-as {
-
-    a {
-        @include nova-h6-font;
-        opacity: 0.6;
-    }
-}
-
-.reply a {
-    @include spacing(margin-bottom, 1rem);
-    display: block;
-}
-
 .bypostauthor {
     color: inherit;
-
-    .comment__author {
-        //color: $comments-author-color;
-    }
 }
 
 .says {

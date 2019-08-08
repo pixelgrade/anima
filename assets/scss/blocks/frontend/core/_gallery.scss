@@ -4,12 +4,12 @@
 
 .wp-block-gallery {
     list-style: none;
-    @include block-grid;
+    @include grid;
 
     @for $i from 2 through 9 {
 
         &.columns-#{$i} {
-            @include block-grid-count($i);
+            @include grid-count($i);
         }
     }
 

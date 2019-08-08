@@ -1,27 +1,15 @@
-.comment-list {
-
+.comment-list,
+.comment-list .children {
     list-style: none;
+    @include spacing-y(var(--nova-y-spacing));
+}
 
-    //@include spacing-y(var(--nova-y-spacing));
-    @include spacing(margin-top, 3rem);
+.comment-list {
+    padding-left: 0;
 
     .children {
         list-style: none;
-
-        @include spacing(margin-left, 3rem);
-        @include spacing(margin-top, 2rem);
-
-        .children {
-            margin-left: 0;
-        }
-
-        @include below($nova-lap-breakpoint) {
-            margin-left: 20px;
-        }
+        margin-top: var(--nova-y-spacing);
+        padding-left: var(--nova-x-spacing);
     }
-
-    > li + li {
-        @include spacing(margin-top, 2rem);
-    }
-
 }

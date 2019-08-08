@@ -22,7 +22,7 @@
 }
 
 .wp-block-button__link {
-    @include button;
+    @extend %button !optional;
 
     text-decoration: none;
 }

@@ -28,22 +28,25 @@ if ( ! function_exists( 'pixelgrade_shape_comment' ) ) {
 			case 'trackback':
 				?>
 				<li class="post pingback">
-				<p><?php esc_html_e( 'Pingback:', '__components_txtd' ); ?><?php comment_author_link(); ?><?php edit_comment_link( esc_html__( '(Edit)', '__components_txtd' ), ' ' ); ?></p>
+				<p><?php esc_html_e( 'Pingback:', '__theme_txtd' ); ?><?php comment_author_link(); ?><?php edit_comment_link( esc_html__( '(Edit)', '__theme_txtd' ), ' ' ); ?></p>
 				<?php
 				break;
-			default:
-				?>
+			default: ?>
+
 			<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
 				<article id="div-comment-<?php comment_ID(); ?>" class="comment__wrapper">
 					<?php if ( 0 != $args['avatar_size'] ) : ?>
 						<div class="comment__avatar"><?php echo get_avatar( $comment, $args['avatar_size'] ); ?></div>
 					<?php endif; ?>
+
 					<div class="comment__body">
-						<header class="c-meta">
+
+						<header class="comment__header">
+
 							<div class="comment__author vcard">
 								<?php
 								/* translators: %s: comment author link */
-								printf( wp_kses_post( __( '%s <span class="says">says:</span>', '__components_txtd' ) ), sprintf( '<b class="fn">%s</b>', get_comment_author_link( $comment ) ) );
+								printf( wp_kses_post( __( '%s <span class="says">says:</span>', '__theme_txtd' ) ), sprintf( '<b class="fn">%s</b>', get_comment_author_link( $comment ) ) );
 								?>
 							</div><!-- .comment-author -->
 
@@ -52,16 +55,17 @@ if ( ! function_exists( 'pixelgrade_shape_comment' ) ) {
 									<time datetime="<?php esc_attr( get_comment_time( 'c' ) ); ?>">
 										<?php
 										/* translators: 1: comment date, 2: comment time */
-										printf( esc_html__( '%1$s at %2$s', '__components_txtd' ), esc_html( get_comment_date( '', $comment ) ), esc_html( get_comment_time() ) );
+										printf( esc_html__( '%1$s at %2$s', '__theme_txtd' ), esc_html( get_comment_date( '', $comment ) ), esc_html( get_comment_time() ) );
 										?>
 									</time>
 								</a>
-								<?php edit_comment_link( esc_html__( 'Edit', '__components_txtd' ), '<span class="edit-link">', '</span>' ); ?>
+								<?php edit_comment_link( esc_html__( 'Edit', '__theme_txtd' ), '<span class="comment__edit">', '</span>' ); ?>
 							</div><!-- .comment-metadata -->
 
 							<?php if ( '0' == $comment->comment_approved ) : ?>
-								<p class="comment-awaiting-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', '__components_txtd' ); ?></p>
+								<p class="comment-awaiting-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', '__theme_txtd' ); ?></p>
 							<?php endif; ?>
+
 						</header><!-- .comment-meta -->
 
 						<div class="comment__content">
@@ -75,7 +79,7 @@ if ( ! function_exists( 'pixelgrade_shape_comment' ) ) {
 									'add_below' => 'div-comment',
 									'depth'     => $depth,
 									'max_depth' => $args['max_depth'],
-									'before'    => '<div class="reply">',
+									'before'    => '<div class="comment__reply">',
 									'after'     => '</div>',
 								)
 							),

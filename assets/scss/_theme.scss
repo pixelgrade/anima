@@ -1,0 +1,58 @@
+%button {
+    @include nova-h4-font;
+}
+
+pre,
+code {
+    border: 1px solid;
+    border-radius: 0.2em;
+    background: var(--nova-light-2);
+}
+
+pre {
+    padding: 1em;
+}
+
+code {
+    padding: 0.1em;
+}
+
+pre code {
+    background: transparent;
+}
+
+.avatar {
+    display: block;
+    border-radius: 50%;
+}
+
+.comment__header {
+    a {
+        text-decoration: none;
+    }
+}
+
+.post-navigation {
+
+    .nav-links {
+        @include nova-h5-font;
+    }
+
+    a {
+        text-decoration: none;
+    }
+}
+
+.entry-header {
+    @include spacing-y(1em);
+
+    a {
+        text-decoration: none;
+    }
+}
+
+.entry-title {
+    a {
+        color: inherit;
+    }
+}
