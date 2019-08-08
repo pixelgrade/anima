@@ -618,6 +618,7 @@ label {
   display: flex;
   align-items: center;
   position: fixed;
+  top: 0;
   left: 0;
   z-index: 1100;
   padding: 1em;
@@ -682,6 +683,8 @@ label {
 
 @media not screen and (min-width: 1000px) {
   .site-header {
+    display: none;
+    overflow-y: auto;
     position: fixed;
     bottom: 0;
     left: 0;
