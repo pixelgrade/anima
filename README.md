@@ -3,6 +3,8 @@
 
 [View Demo](https://demos.pixelgrade.com/nova-blocks/) &nbsp;·&nbsp; [Download for Free](https://downloads.wordpress.org/theme/nova-blocks.latest-stable.zip)
 
+![nova_theme_github](https://user-images.githubusercontent.com/46342490/62714232-d3f30500-ba06-11e9-8f75-cfdfe0034823.png)
+
 [![](https://img.shields.io/github/issues-closed/pixelgrade/nova-theme.svg?color=6cc644&label=Issues)](https://github.com/pixelgrade/nova-theme/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aclosed+) [![](https://img.shields.io/github/issues/pixelgrade/nova-theme.svg?color=4078c0&label=%20)](https://github.com/pixelgrade/nova-theme/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen)
 
 ## Contributing
