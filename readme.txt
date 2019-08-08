@@ -1,6 +1,6 @@
 Theme Name: Nova Blocks
 Contributors: pixelgrade, razvanonofrei
-Theme URI: https://github.com/pixelgrade/nova-blocks-theme
+Theme URI: https://github.com/pixelgrade/nova-theme
 Author: Pixelgrade
 Author URI: https://pixelgrade.com/
 Description:
