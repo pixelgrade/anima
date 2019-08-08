@@ -1,10 +1,16 @@
 .nova-media__content {
-    --content-side-spacing: var(--nova-media-content-padding);
+    --nova-wrapper-side-spacing: var(--nova-media-content-padding);
 }
 
 .nova-media {
-    * + & {
-        margin-top: calc( 6 * var(--nova-spacing-unit) );
+
+    &, & + * {
+        --nova-element-spacing: var(--nova-element-spacing-large);
+    }
+
+    [class*="__inner-container"],
+    & + * [class*="__inner-container"] {
+        --nova-element-spacing: var(--nova-element-spacing-normal);
     }
 }
 
@@ -16,4 +22,9 @@
     & + & {
         margin-top: 0;
     }
+}
+
+.block-is-moderate + .block-is-moderate,
+.block-is-highlighted + .block-is-highlighted {
+    padding-top: 0;
 }

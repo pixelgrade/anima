@@ -1,51 +1,38 @@
-// Branding
-$nova-blue:                 #203AB6         !default;
-$nova-blue-dark:            #323067         !default;
-$nova-blue-darker:          #000043         !default;
 
-$nova-yellow:               #FFE42E         !default;
-$nova-gray:                 #EEF1F2         !default;
-$nova-text-color:           #272743         !default;
 
 /* Global CSS Custom Properties */
 :root {
-    --nova-color-1: #{$nova-blue};
-    --nova-color-2: #{$nova-yellow};
-    --nova-color-3: #{$nova-yellow};
 
-    --nova-dark-1: #{$nova-blue-darker};
-    --nova-dark-2: #{$nova-text-color};
-    --nova-dark-3: #{$nova-blue-dark};
+    // LAYOUT
 
-    --nova-light-1: #FFFFFF;
-    --nova-light-2: #EEF1F2;
-    --nova-light-3: #EEF1F2;
+    // spacing unit
+    --nova-spacing-unit: 8px;
 
-    --content-width-normal: 900px;
-    --content-width-wide: 1200px;
+    // content width
+    --nova-content-width-normal: 900px;
+    --nova-content-width-wide: 1200px;
 
-    --nova-spacing-unit: 2px;
-    --content-side-spacing: calc( 7 * var(--nova-spacing-unit) );
+    //
+    --nova-wrapper-side-spacing: calc( 7 * var(--nova-spacing-unit) );
 
+    //
     --nova-x-spacing: calc( 7 * var(--nova-spacing-unit) );
     --nova-y-spacing: calc( 7 * var(--nova-spacing-unit) );
 
-    --nova-typography-spacing: calc( 3 * var(--nova-spacing-unit) );
 
-    --nova-system-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    --nova-default-font-family: adelle-sans, sans-serif;
-    --nova-body-font-family: var(--nova-default-font-family);
-    --nova-headings-font-family: var(--nova-default-font-family);
-    --nova-alt-font-family: var(--nova-default-font-family);
+    // TYPOGRAPHY
 
+    // font families
+    --nova-body-font-family: adelle-sans, sans-serif;
+    --nova-headings-font-family: adelle-sans, sans-serif;
+
+    // font sizes
     --nova-body-font-size: 16px;
     --nova-content-font-size: 18px;
 
-    @include above(tablet) {
-        --nova-spacing-unit: 4px;
-    }
+    // element spacing
+    --nova-element-spacing-normal: calc( 3 * var(--nova-spacing-unit) );
+    --nova-element-spacing-large: calc( 6 * var(--nova-spacing-unit) );
 
-    @include above(desktop) {
-        --nova-spacing-unit: 8px;
-    }
+    --nova-element-spacing: var(--nova-element-spacing-normal);
 }

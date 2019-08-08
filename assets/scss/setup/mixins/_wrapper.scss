@@ -1,11 +1,11 @@
 @mixin wrapper-side-spacing {
-    padding-left: var(--content-side-spacing);
-    padding-right: var(--content-side-spacing);
+    padding-left: var(--nova-wrapper-side-spacing);
+    padding-right: var(--nova-wrapper-side-spacing);
 
 
     > .alignfull {
-        margin-left: calc( -1 * var(--content-side-spacing) );
-        margin-right: calc( -1 * var(--content-side-spacing) );
+        margin-left: calc( -1 * var(--nova-wrapper-side-spacing) );
+        margin-right: calc( -1 * var(--nova-wrapper-side-spacing) );
     }
 }
 
@@ -18,11 +18,11 @@
     }
 
     > :not(.alignwide):not(.alignfull) {
-        max-width: var(--content-width-normal);
+        max-width: var(--nova-content-width-normal);
     }
 
     > .alignwide {
-        max-width: var(--content-width-wide);
+        max-width: var(--nova-content-width-wide);
     }
 
     > .alignfull {
