@@ -14,23 +14,27 @@ Use it to make something cool, have fun, and share what you've learned with othe
 
 Table of Contents
 
-0.  Reset
-1.  Elements - HTML Entities
-2.  Components
-2.1 - Site Header
-2.2 - Site Content
-2.3 - Site Footer
-3.  Blocks
+0.    Reset
+1.    Elements - HTML Entities
+2.    Components
+2.1.  Site Header
+2.2.  Site Content
+2.3.  Site Footer
+3.    Blocks
+4.    Pages
+5.    Theming
+6.    Overwrites
 
 */
 /* Blockquote CSS Custom Properties */
 :root {
   --blockquote-font-family: var(--nova-alt-font-family);
   --blockquote-font-size: 24px;
-  --blockquote-large-font-size: 36px;
-  --blockquote-line-height: 1.16667;
+  --blockquote-line-height: 1.5;
   --blockquote-font-weight: 400;
-  --blockquote-color: var(--nova-dark-2); }
+  --blockquote-color: var(--nova-dark-2);
+  --blockquote-large-font-size: 36px;
+  --blockquote-large-line-height: 1.5; }
 
 /* Button CSS Custom Properties */
 :root {
@@ -552,6 +556,7 @@ ol ol {
 [type="url"]
 [type="week"]
 */
+/* Forms */
 input:not([type]), input[type="text"], input[type="email"], input[type="url"], textarea {
   display: block;
   width: 100%;
@@ -564,33 +569,28 @@ input:not([type]), input[type="text"], input[type="email"], input[type="url"], t
 textarea {
   resize: vertical; }
 
+label {
+  display: block; }
+
 [type="button"],
 [type="submit"],
-[type="reset"], .c-comments-toggle__label, .wp-block-button__link {
+[type="reset"] {
   display: inline-block;
   padding: var(--nova-button-padding);
   border: var(--nova-button-border-width) solid var(--nova-button-border-color);
   border-radius: var(--nova-button-border-radius);
-  cursor: pointer; }
-  :not(.has-background)[type="button"],
-  :not(.has-background)[type="submit"],
-  :not(.has-background)[type="reset"], .c-comments-toggle__label:not(.has-background), .wp-block-button__link:not(.has-background) {
-    background-color: var(--nova-button-background-color); }
-    :not(.has-background):hover[type="button"],
-    :not(.has-background):hover[type="submit"],
-    :not(.has-background):hover[type="reset"], .c-comments-toggle__label:not(.has-background):hover, .wp-block-button__link:not(.has-background):hover {
-      background-color: var(--nova-button-hover-background-color); }
-  :not(.has-text-color)[type="button"],
-  :not(.has-text-color)[type="submit"],
-  :not(.has-text-color)[type="reset"], .c-comments-toggle__label:not(.has-text-color), .wp-block-button__link:not(.has-text-color) {
-    color: var(--nova-button-color); }
-    :not(.has-text-color):hover[type="button"],
-    :not(.has-text-color):hover[type="submit"],
-    :not(.has-text-color):hover[type="reset"], .c-comments-toggle__label:not(.has-text-color):hover, .wp-block-button__link:not(.has-text-color):hover {
-      color: var(--nova-button-hover-color); }
-
-label {
-  display: block; }
+  text-decoration: none;
+  cursor: pointer;
+  background-color: var(--nova-button-background-color);
+  color: var(--nova-button-color); }
+  [type="button"]:hover,
+  [type="submit"]:hover,
+  [type="reset"]:hover {
+    background-color: var(--nova-button-hover-background-color); }
+  [type="button"]:hover,
+  [type="submit"]:hover,
+  [type="reset"]:hover {
+    color: var(--nova-button-hover-color); }
 
 /* 2. Components */
 .entry-content > .alignleft,
@@ -629,7 +629,7 @@ label {
 .block-editor-block-list__layout .block-editor-block-list__block[data-align=none] .block-editor-block-list__block-edit:not(:last-child) {
   margin-bottom: 2em; }
 
-/* 2.1 - Site Header */
+/* 2.1. Site Header */
 .c-menu-toggle__wrap {
   display: flex;
   align-items: center;
@@ -758,15 +758,9 @@ label {
 .site-logo + .site-info {
   margin-left: 1em; }
 
-.site-title {
-  font-family: var(--nova-headings-font-family);
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.2;
-  color: var(--nova-dark-1); }
-  .site-title a {
-    color: inherit;
-    text-decoration: none; }
+.site-title a {
+  color: inherit;
+  text-decoration: none; }
 
 .main-navigation ul.menu,
 .main-navigation .menu > ul,
@@ -825,12 +819,15 @@ label {
   .main-navigation :not(:hover) > .children {
     display: none; } }
 
-/* 2.2 - Site Content */
+/* 2.2. Site Content */
+.site-main > :not(:first-child) {
+  margin-top: var(--nova-y-spacing); }
+
 .site-content {
   padding-top: var(--nova-y-spacing);
   padding-bottom: var(--nova-y-spacing); }
 
-/* 2.3 - Site Footer */
+/* 2.3. Site Footer */
 .site-footer {
   padding-top: var(--nova-y-spacing);
   padding-bottom: var(--nova-y-spacing);
@@ -909,7 +906,7 @@ label {
   .entry-footer > :not(:first-child) {
     margin-top: var(--nova-typography-spacing); }
 
-/* Comments */
+/* 2.4. Comments */
 .comments-area {
   padding-left: var(--content-side-spacing);
   padding-right: var(--content-side-spacing); }
@@ -929,8 +926,20 @@ label {
     margin-top: var(--nova-y-spacing); }
 
 .c-comments-toggle__label {
+  display: inline-block;
+  padding: var(--nova-button-padding);
+  border: var(--nova-button-border-width) solid var(--nova-button-border-color);
+  border-radius: var(--nova-button-border-radius);
+  text-decoration: none;
+  cursor: pointer;
+  background-color: var(--nova-button-background-color);
+  color: var(--nova-button-color);
   display: block;
   text-align: center; }
+  .c-comments-toggle__label:hover {
+    background-color: var(--nova-button-hover-background-color); }
+  .c-comments-toggle__label:hover {
+    color: var(--nova-button-hover-color); }
 
 .c-comments-toggle__checkbox {
   display: none; }
@@ -1034,7 +1043,7 @@ label {
 .says {
   display: none; }
 
-/* Navigation */
+/* 2.5. Navigation */
 .navigation {
   padding-left: var(--content-side-spacing);
   padding-right: var(--content-side-spacing); }
@@ -1068,13 +1077,6 @@ label {
 
 .post-navigation .nav-next {
   text-align: right; }
-
-@media not screen and (min-width: 1000px) {
-  .c-author {
-    text-align: center; }
-  .c-author__avatar {
-    margin-left: auto;
-    margin-right: auto; } }
 
 /*--------------------------------------------------------------
 # Accessibility
@@ -1252,6 +1254,9 @@ label {
 .has-text-align-right {
   text-align: right; }
 
+[class*="wp-block"] {
+  clear: both; }
+
 /* Archives Block */
 .wp-block-archives-list {
   list-style: none; }
@@ -1291,7 +1296,21 @@ label {
   text-align: right; }
 
 .wp-block-button__link {
-  text-decoration: none; }
+  display: inline-block;
+  display: inline-block;
+  padding: var(--nova-button-padding);
+  border: var(--nova-button-border-width) solid var(--nova-button-border-color);
+  border-radius: var(--nova-button-border-radius);
+  text-decoration: none;
+  cursor: pointer; }
+  .wp-block-button__link:not(.has-background) {
+    background-color: var(--nova-button-background-color); }
+    .wp-block-button__link:not(.has-background):hover {
+      background-color: var(--nova-button-hover-background-color); }
+  .wp-block-button__link:not(.has-text-color) {
+    color: var(--nova-button-color); }
+    .wp-block-button__link:not(.has-text-color):hover {
+      color: var(--nova-button-hover-color); }
 
 /* Categories Block */
 .wp-block-categories {
@@ -1587,6 +1606,70 @@ label {
     text-decoration: none;
     background: #EEE; }
 
+/* Media Block */
+.wp-block-media-text {
+  display: grid;
+  grid-template-rows: auto;
+  align-items: center;
+  grid-template-areas: "media-text-media media-text-content";
+  grid-template-columns: 50% auto; }
+  .wp-block-media-text.has-media-on-the-right {
+    grid-template-areas: "media-text-content media-text-media";
+    grid-template-columns: auto 50%; }
+
+.wp-block-media-text.is-vertically-aligned-top {
+  align-items: start; }
+
+.wp-block-media-text.is-vertically-aligned-center {
+  align-items: center; }
+
+.wp-block-media-text.is-vertically-aligned-bottom {
+  align-items: end; }
+
+.wp-block-media-text .wp-block-media-text__media {
+  grid-area: media-text-media;
+  margin: 0; }
+
+.wp-block-media-text .wp-block-media-text__content {
+  word-break: break-word;
+  grid-area: media-text-content;
+  padding: 0 8% 0 8%; }
+
+.wp-block-media-text > figure > img,
+.wp-block-media-text > figure > video {
+  max-width: unset;
+  width: 100%;
+  vertical-align: middle; }
+
+.wp-block-media-text.is-image-fill figure {
+  height: 100%;
+  min-height: 250px;
+  background-size: cover; }
+
+.wp-block-media-text.is-image-fill figure > img {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0; }
+
+/*
+* Here we here not able to use a mobile first CSS approach.
+* Custom widths are set using inline styles, and on mobile,
+* we need 100% width, so we use important to overwrite the inline style.
+* If the style were set on mobile first, on desktop styles,
+* we would have no way of setting the style again to the inline style.
+*/
+@media (max-width: 600px) {
+  .wp-block-media-text.is-stacked-on-mobile {
+    grid-template-columns: 100% !important;
+    grid-template-areas: "media-text-media" "media-text-content"; }
+  .wp-block-media-text.is-stacked-on-mobile.has-media-on-the-right {
+    grid-template-areas: "media-text-content" "media-text-media"; } }
+
 /* Pullquote Block */
 .wp-block-pullquote__citation {
   font-family: var(--nova-cite-font-family);
@@ -1639,6 +1722,9 @@ label {
 .nova-hero {
   margin-top: 0; }
 
+/* 4. Pages */
+/* 4.1. Single Post */
+/* 5. Theming */
 [type="button"],
 [type="submit"],
 [type="reset"], .c-comments-toggle__label, .wp-block-button__link {
@@ -1691,9 +1777,13 @@ pre code {
 .entry-title a {
   color: inherit; }
 
-.hentry > :not(:first-child),
-.site-main > :not(:first-child) {
-  margin-top: var(--nova-y-spacing); }
+.site-title {
+  font-family: var(--nova-headings-font-family);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--nova-dark-1); }
 
-[class*="wp-block"] {
-  clear: both; }
+/* 6. Overwrites */
+.hentry > :not(:first-child) {
+  margin-top: var(--nova-y-spacing); }

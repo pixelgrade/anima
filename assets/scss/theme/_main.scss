@@ -1,4 +1,4 @@
-%button {
+%button-theme {
     @include nova-h4-font;
 }
 
@@ -44,7 +44,7 @@ pre code {
 }
 
 .entry-header {
-    @include spacing-y(1em);
+    @include space-children-y(1em);
 
     a {
         text-decoration: none;
@@ -55,4 +55,8 @@ pre code {
     a {
         color: inherit;
     }
+}
+
+.site-title {
+    @include nova-h4-font;
 }

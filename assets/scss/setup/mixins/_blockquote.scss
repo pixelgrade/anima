@@ -2,10 +2,12 @@
 :root {
     --blockquote-font-family: var(--nova-alt-font-family);
     --blockquote-font-size: 24px;
-    --blockquote-large-font-size: 36px;
-    --blockquote-line-height: #{(42/36)};
+    --blockquote-line-height: 1.5;
     --blockquote-font-weight: 400;
     --blockquote-color: var(--nova-dark-2);
+
+    --blockquote-large-font-size: 36px;
+    --blockquote-large-line-height: 1.5;
 }
 
 @mixin nova-blockquote {
@@ -20,4 +22,5 @@
 
 @mixin nova-blockquote-large {
     font-size: var(--blockquote-large-font-size);
+    line-height: var(--blockquote-large-line-height);
 }

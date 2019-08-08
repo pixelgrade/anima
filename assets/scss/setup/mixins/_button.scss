@@ -16,26 +16,39 @@
     --nova-button-padding: var(--nova-button-y-padding) var(--nova-button-x-padding);
 }
 
-@mixin button {
+@mixin button-base {
+    display: inline-block;
     padding: var(--nova-button-padding);
-
     border: var(--nova-button-border-width) solid var(--nova-button-border-color);
+
     border-radius: var(--nova-button-border-radius);
+    text-decoration: none;
     cursor: pointer;
+}
 
-    &:not(.has-background) {
-        background-color: var(--nova-button-background-color);
+@mixin button-background {
+    background-color: var(--nova-button-background-color);
 
-        &:hover {
-            background-color: var(--nova-button-hover-background-color);
-        }
+    &:hover {
+        background-color: var(--nova-button-hover-background-color);
     }
+}
 
-    &:not(.has-text-color) {
-        color: var(--nova-button-color);
+@mixin button-color {
+    color: var(--nova-button-color);
 
-        &:hover {
-            color: var(--nova-button-hover-color);
-        }
+    &:hover {
+        color: var(--nova-button-hover-color);
     }
+}
+
+@mixin button-theme {
+    @extend %button-theme !optional;
+}
+
+@mixin button {
+    @include button-base;
+    @include button-background;
+    @include button-color;
+    @include button-theme;
 }

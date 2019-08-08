@@ -1,10 +1,5 @@
 // Keep this as tidy as possible
 
-.hentry,
-.site-main {
-    @include spacing-y(var(--nova-y-spacing));
-}
-
-[class*="wp-block"] {
-    clear: both;
+.hentry {
+    @include space-children-y(var(--nova-y-spacing));
 }

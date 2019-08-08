@@ -14,13 +14,16 @@ Use it to make something cool, have fun, and share what you've learned with othe
 
 Table of Contents
 
-0.  Reset
-1.  Elements - HTML Entities
-2.  Components
-2.1 - Site Header
-2.2 - Site Content
-2.3 - Site Footer
-3.  Blocks
+0.    Reset
+1.    Elements - HTML Entities
+2.    Components
+2.1.  Site Header
+2.2.  Site Content
+2.3.  Site Footer
+3.    Blocks
+4.    Pages
+5.    Theming
+6.    Overwrites
 
 */
 
@@ -42,17 +45,18 @@ $nova-lap-breakpoint: 1000px;
 /* 2. Components */
 @import "components/alignment";
 
-/* 2.1 - Site Header */
+/* 2.1. Site Header */
 @import "components/site-header/style";
 @import "components/site-branding";
 @import "components/site-title";
 
 @import "components/main-navigation";
 
-/* 2.2 - Site Content */
+/* 2.2. Site Content */
+@import "components/site-main";
 @import "components/site-content";
 
-/* 2.3 - Site Footer */
+/* 2.3. Site Footer */
 @import "components/site-footer";
 @import "components/site-info";
 
@@ -61,15 +65,13 @@ $nova-lap-breakpoint: 1000px;
 @import "components/entry-content";
 @import "components/entry-footer";
 
-/* Comments */
+/* 2.4. Comments */
 @import "components/comments/style";
 
-/* Navigation */
+/* 2.5. Navigation */
 @import "components/navigation";
 @import "components/post-navigation";
 @import "components/posts-navigation";
-
-@import "components/author";
 
 @import "components/screen-reader-text";
 
@@ -77,6 +79,12 @@ $nova-lap-breakpoint: 1000px;
 @import "blocks/helpers";
 @import "blocks/frontend";
 
-@import "theme";
+/* 4. Pages */
+/* 4.1. Single Post */
+@import "pages/single";
 
+/* 5. Theming */
+@import "theme/main";
+
+/* 6. Overwrites */
 @import "shame";

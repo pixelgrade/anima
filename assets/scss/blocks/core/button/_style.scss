@@ -22,7 +22,15 @@
 }
 
 .wp-block-button__link {
-    @extend %button !optional;
+    display: inline-block;
+    @include button-base;
+    @include button-theme;
 
-    text-decoration: none;
+    &:not(.has-background) {
+        @include button-background;
+    }
+
+    &:not(.has-text-color) {
+        @include button-color;
+    }
 }

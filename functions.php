@@ -20,6 +20,10 @@ add_action( 'enqueue_block_editor_assets', 'novablocks_enqueue_theme_block_edito
 function novablocks_scripts() {
 	wp_enqueue_style( 'nova-adelle-sans', 'https://use.typekit.net/gsj4hyt.css', array(), wp_get_theme()->get( 'Version' ) );
 	wp_enqueue_style( 'nova-style', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
+
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+		wp_enqueue_script( 'comment-reply' );
+	}
 }
 add_action( 'wp_enqueue_scripts', 'novablocks_scripts', 10 );
 

@@ -1,4 +1,4 @@
-@mixin container-side-spacing {
+@mixin wrapper-side-spacing {
     padding-left: var(--content-side-spacing);
     padding-right: var(--content-side-spacing);
 
@@ -9,15 +9,8 @@
     }
 }
 
-@mixin spacing-y($gap) {
-
-    > :not(:first-child) {
-        margin-top: $gap;
-    }
-}
-
-@mixin container {
-    @include container-side-spacing;
+@mixin wrapper {
+    @include wrapper-side-spacing;
 
     > * {
         margin-left: auto;

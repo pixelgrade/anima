@@ -15,7 +15,7 @@
 }
 
 .comment__body {
-    @include spacing-y(0.5rem);
+    @include space-children-y(0.5rem);
     flex-grow: 1;
 }
 
@@ -40,5 +40,5 @@
 }
 
 .comment__content {
-    @include spacing-y(var(--nova-typography-spacing));
+    @include space-children-y(var(--nova-typography-spacing));
 }

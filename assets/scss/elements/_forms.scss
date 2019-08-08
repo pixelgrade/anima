@@ -23,6 +23,7 @@
 [type="week"]
 */
 
+/* Forms */
 %field {
     display: block;
     width: 100%;
@@ -54,11 +55,6 @@
 
 %select-multiple {
 
-}
-
-%button {
-    display: inline-block;
-    @include button;
 }
 
 %input-checkbox {
@@ -101,7 +97,7 @@ textarea {
 [type="button"],
 [type="submit"],
 [type="reset"] {
-    @extend %button !optional;
+    @include button;
 }
 
 select {
