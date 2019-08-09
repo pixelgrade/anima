@@ -962,6 +962,12 @@ pre code {
   --current-text-transform: var(--theme-heading-2-text-transform);
   --current-color: var(--theme-heading-2-color); }
 
+h1:not(:first-child), h2:not(:first-child), h3:not(:first-child), h4:not(:first-child), h5:not(:first-child), h6:not(:first-child) {
+  margin-top: 1em; }
+
+h1:not(:last-child), h2:not(:last-child), h3:not(:last-child), h4:not(:last-child), h5:not(:last-child), h6:not(:last-child) {
+  margin-bottom: 0.25em; }
+
 /* Layout */
 .editor-block-list__layout > :not([data-align="wide"]):not([data-align="full"]),
 [class*="__inner-container"] > :not([data-align="wide"]):not([data-align="full"]) {
@@ -1020,10 +1026,7 @@ pre code {
     font-weight: var(--nova-cite-font-weight);
     color: var(--nova-cite-color); }
   .editor-styles-wrapper h1, .editor-styles-wrapper h2, .editor-styles-wrapper h3, .editor-styles-wrapper h4, .editor-styles-wrapper h5, .editor-styles-wrapper h6 {
-    margin: 0;
-    margin-top: 1em; }
-    .editor-styles-wrapper h1:not(:last-child), .editor-styles-wrapper h2:not(:last-child), .editor-styles-wrapper h3:not(:last-child), .editor-styles-wrapper h4:not(:last-child), .editor-styles-wrapper h5:not(:last-child), .editor-styles-wrapper h6:not(:last-child) {
-      margin-bottom: 0.25em; }
+    margin: 0; }
   .editor-styles-wrapper table {
     width: 100%;
     border-collapse: collapse; }
