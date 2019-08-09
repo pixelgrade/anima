@@ -29,7 +29,7 @@
 
     //     font sizes
     // -------------------------------------------
-    --theme-body-font-size: 16px;
+    --theme-body-font-size: #{$nova-minimum-font-size};
     --theme-content-font-size: #{$nova-content-font-size};
     // ===========================================
 
@@ -38,17 +38,8 @@
     // -------------------------------------------
     --nova-element-spacing: var(--nova-element-spacing-normal);
 
-    --nova-element-spacing-normal: 12px;
-    --nova-element-spacing-large: 24px;
-
-    @include above(lap) {
-        --nova-element-spacing-normal: 24px;
-        --nova-element-spacing-large: 48px;
-    }
-
-    @include above(desktop) {
-        --nova-element-spacing-large: 56px;
-    }
+    --nova-element-spacing-normal: calc( 1.5 * var(--theme-body-font-size) );
+    --nova-element-spacing-large: calc( 3 * var(--theme-body-font-size) );
     // ===========================================
 
 }

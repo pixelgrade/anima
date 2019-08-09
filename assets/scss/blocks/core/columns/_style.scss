@@ -1,9 +1,7 @@
 .wp-block-columns {
-    display: flex;
-    --theme-column-spacing: var(--nova-x-spacing);
-    @include space-children-x(var(--theme-column-spacing));
-}
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(100px, 1fr) );
 
-.wp-block-column {
-    flex: 1 0 0;
+    --theme-column-spacing: var(--nova-element-spacing);
+    grid-gap: var(--theme-column-spacing);
 }

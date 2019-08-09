@@ -69,18 +69,11 @@ Table of Contents
   --theme-body-font-size: 16px;
   --theme-content-font-size: 22px;
   --nova-element-spacing: var(--nova-element-spacing-normal);
-  --nova-element-spacing-normal: 12px;
-  --nova-element-spacing-large: 24px; }
+  --nova-element-spacing-normal: calc( 1.5 * var(--theme-body-font-size) );
+  --nova-element-spacing-large: calc( 3 * var(--theme-body-font-size) ); }
   @media only screen and (min-width: 1024px) {
     :root {
       --nova-wrapper-side-spacing: 48px; } }
-  @media only screen and (min-width: 1024px) {
-    :root {
-      --nova-element-spacing-normal: 24px;
-      --nova-element-spacing-large: 48px; } }
-  @media only screen and (min-width: 1366px) {
-    :root {
-      --nova-element-spacing-large: 56px; } }
 
 /* 0. Reset */
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
@@ -1400,13 +1393,10 @@ label {
 
 /* Columns Blocks */
 .wp-block-columns {
-  display: flex;
-  --theme-column-spacing: var(--nova-x-spacing); }
-  .wp-block-columns > :not(:first-child) {
-    margin-left: var(--theme-column-spacing); }
-
-.wp-block-column {
-  flex: 1 0 0; }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  --theme-column-spacing: var(--nova-element-spacing);
+  grid-gap: var(--theme-column-spacing); }
 
 /* Cover Block */
 .wp-block-cover {
