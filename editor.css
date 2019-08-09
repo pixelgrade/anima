@@ -12,10 +12,10 @@
 /* Button CSS Custom Properties */
 :root {
   --nova-button-background-color: var(--nova-color-2);
-  --nova-button-color: var(--nova-dark-3);
+  --nova-button-color: var(--nova-dark-2);
   --nova-button-border-color: transparent;
   --nova-button-hover-background-color: var(--nova-color-2);
-  --nova-button-hover-color: var(--nova-dark-3);
+  --nova-button-hover-color: var(--nova-dark-2);
   --nova-button-hover-border-color: transparent;
   --nova-button-border-width: 2px;
   --nova-button-border-radius: 999em;
@@ -43,7 +43,8 @@
   --theme-content-font-size: 22px;
   --nova-element-spacing: var(--nova-element-spacing-normal);
   --nova-element-spacing-normal: calc( 1.5 * var(--theme-body-font-size) );
-  --nova-element-spacing-large: calc( 3 * var(--theme-body-font-size) ); }
+  --nova-element-spacing-large: calc( 2.5 * var(--theme-body-font-size) );
+  --nova-button-color: var(--nova-dark-2); }
   @media only screen and (min-width: 1024px) {
     :root {
       --nova-wrapper-side-spacing: 48px; } }
@@ -170,14 +171,12 @@
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
-  color: var(--current-color);
   --current-font-family: var(--theme-has-small-font-size-font-family);
   --current-font-size: var(--theme-has-small-font-size-font-size);
   --current-line-height: var(--theme-has-small-font-size-line-height);
   --current-font-weight: var(--theme-has-small-font-size-font-weight);
   --current-letter-spacing: var(--theme-has-small-font-size-letter-spacing);
-  --current-text-transform: var(--theme-has-small-font-size-text-transform);
-  --current-color: var(--theme-has-small-font-size-color); }
+  --current-text-transform: var(--theme-has-small-font-size-text-transform); }
   @media screen and (min-width: 0px) {
     .has-small-font-size {
       --theme-has-small-font-size-font-size-diff: calc(0px + 3 * ((100vw - 0px) / 1600)); } }
@@ -194,14 +193,12 @@
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
-  color: var(--current-color);
   --current-font-family: var(--theme-has-normal-font-size-font-family);
   --current-font-size: var(--theme-has-normal-font-size-font-size);
   --current-line-height: var(--theme-has-normal-font-size-line-height);
   --current-font-weight: var(--theme-has-normal-font-size-font-weight);
   --current-letter-spacing: var(--theme-has-normal-font-size-letter-spacing);
-  --current-text-transform: var(--theme-has-normal-font-size-text-transform);
-  --current-color: var(--theme-has-normal-font-size-color); }
+  --current-text-transform: var(--theme-has-normal-font-size-text-transform); }
   @media screen and (min-width: 0px) {
     .has-normal-font-size {
       --theme-has-normal-font-size-font-size-diff: calc(0px + 0 * ((100vw - 0px) / 1600)); } }
@@ -218,14 +215,12 @@
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
-  color: var(--current-color);
   --current-font-family: var(--theme-has-medium-font-size-font-family);
   --current-font-size: var(--theme-has-medium-font-size-font-size);
   --current-line-height: var(--theme-has-medium-font-size-line-height);
   --current-font-weight: var(--theme-has-medium-font-size-font-weight);
   --current-letter-spacing: var(--theme-has-medium-font-size-letter-spacing);
-  --current-text-transform: var(--theme-has-medium-font-size-text-transform);
-  --current-color: var(--theme-has-medium-font-size-color); }
+  --current-text-transform: var(--theme-has-medium-font-size-text-transform); }
   @media screen and (min-width: 0px) {
     .has-medium-font-size {
       --theme-has-medium-font-size-font-size-diff: calc(0px + 4 * ((100vw - 0px) / 1600)); } }
@@ -242,14 +237,12 @@
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
-  color: var(--current-color);
   --current-font-family: var(--theme-has-large-font-size-font-family);
   --current-font-size: var(--theme-has-large-font-size-font-size);
   --current-line-height: var(--theme-has-large-font-size-line-height);
   --current-font-weight: var(--theme-has-large-font-size-font-weight);
   --current-letter-spacing: var(--theme-has-large-font-size-letter-spacing);
-  --current-text-transform: var(--theme-has-large-font-size-text-transform);
-  --current-color: var(--theme-has-large-font-size-color); }
+  --current-text-transform: var(--theme-has-large-font-size-text-transform); }
   @media screen and (min-width: 0px) {
     .has-large-font-size {
       --theme-has-large-font-size-font-size-diff: calc(0px + 20 * ((100vw - 0px) / 1600)); } }
@@ -266,14 +259,12 @@
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
-  color: var(--current-color);
   --current-font-family: var(--theme-has-huge-font-size-font-family);
   --current-font-size: var(--theme-has-huge-font-size-font-size);
   --current-line-height: var(--theme-has-huge-font-size-line-height);
   --current-font-weight: var(--theme-has-huge-font-size-font-weight);
   --current-letter-spacing: var(--theme-has-huge-font-size-letter-spacing);
-  --current-text-transform: var(--theme-has-huge-font-size-text-transform);
-  --current-color: var(--theme-has-huge-font-size-color); }
+  --current-text-transform: var(--theme-has-huge-font-size-text-transform); }
   @media screen and (min-width: 0px) {
     .has-huge-font-size {
       --theme-has-huge-font-size-font-size-diff: calc(0px + 32 * ((100vw - 0px) / 1600)); } }
@@ -810,14 +801,12 @@ ul.wp-block-categories__list[class] {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
-  color: var(--current-color);
   --current-font-family: var(--theme-heading-1-font-family);
   --current-font-size: var(--theme-heading-1-font-size);
   --current-line-height: var(--theme-heading-1-line-height);
   --current-font-weight: var(--theme-heading-1-font-weight);
   --current-letter-spacing: var(--theme-heading-1-letter-spacing);
   --current-text-transform: var(--theme-heading-1-text-transform);
-  --current-color: var(--theme-heading-1-color);
   color: var(--nova-dark-1); }
 
 .editor-styles-wrapper h2 {
@@ -827,14 +816,12 @@ ul.wp-block-categories__list[class] {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
-  color: var(--current-color);
   --current-font-family: var(--theme-heading-2-font-family);
   --current-font-size: var(--theme-heading-2-font-size);
   --current-line-height: var(--theme-heading-2-line-height);
   --current-font-weight: var(--theme-heading-2-font-weight);
   --current-letter-spacing: var(--theme-heading-2-letter-spacing);
   --current-text-transform: var(--theme-heading-2-text-transform);
-  --current-color: var(--theme-heading-2-color);
   color: var(--nova-dark-1); }
 
 .editor-styles-wrapper h3,
@@ -845,14 +832,12 @@ ul.wp-block-categories__list[class] {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
-  color: var(--current-color);
   --current-font-family: var(--theme-heading-3-font-family);
   --current-font-size: var(--theme-heading-3-font-size);
   --current-line-height: var(--theme-heading-3-line-height);
   --current-font-weight: var(--theme-heading-3-font-weight);
   --current-letter-spacing: var(--theme-heading-3-letter-spacing);
   --current-text-transform: var(--theme-heading-3-text-transform);
-  --current-color: var(--theme-heading-3-color);
   color: var(--nova-dark-1); }
 
 .editor-styles-wrapper h5,
@@ -863,14 +848,12 @@ ul.wp-block-categories__list[class] {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
-  color: var(--current-color);
   --current-font-family: var(--theme-heading-5-font-family);
   --current-font-size: var(--theme-heading-5-font-size);
   --current-line-height: var(--theme-heading-5-line-height);
   --current-font-weight: var(--theme-heading-5-font-weight);
   --current-letter-spacing: var(--theme-heading-5-letter-spacing);
   --current-text-transform: var(--theme-heading-5-text-transform);
-  --current-color: var(--theme-heading-5-color);
   color: var(--nova-color-1); }
 
 .entry-title {
@@ -880,14 +863,12 @@ ul.wp-block-categories__list[class] {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
-  color: var(--current-color);
   --current-font-family: var(--theme-heading-1-font-family);
   --current-font-size: var(--theme-heading-1-font-size);
   --current-line-height: var(--theme-heading-1-line-height);
   --current-font-weight: var(--theme-heading-1-font-weight);
   --current-letter-spacing: var(--theme-heading-1-letter-spacing);
-  --current-text-transform: var(--theme-heading-1-text-transform);
-  --current-color: var(--theme-heading-1-color); }
+  --current-text-transform: var(--theme-heading-1-text-transform); }
 
 h1.entry-title {
   font-family: var(--current-font-family);
@@ -896,14 +877,12 @@ h1.entry-title {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
-  color: var(--current-color);
   --current-font-family: var(--theme-display-font-family);
   --current-font-size: var(--theme-display-font-size);
   --current-line-height: var(--theme-display-line-height);
   --current-font-weight: var(--theme-display-font-weight);
   --current-letter-spacing: var(--theme-display-letter-spacing);
-  --current-text-transform: var(--theme-display-text-transform);
-  --current-color: var(--theme-display-color); }
+  --current-text-transform: var(--theme-display-text-transform); }
 
 .wp-block-button__link {
   font-family: var(--current-font-family);
@@ -912,14 +891,12 @@ h1.entry-title {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
-  color: var(--current-color);
-  --current-font-family: var(--theme-heading-4-font-family);
-  --current-font-size: var(--theme-heading-4-font-size);
-  --current-line-height: var(--theme-heading-4-line-height);
-  --current-font-weight: var(--theme-heading-4-font-weight);
-  --current-letter-spacing: var(--theme-heading-4-letter-spacing);
-  --current-text-transform: var(--theme-heading-4-text-transform);
-  --current-color: var(--theme-heading-4-color); }
+  --current-font-family: var(--theme-heading-3-font-family);
+  --current-font-size: var(--theme-heading-3-font-size);
+  --current-line-height: var(--theme-heading-3-line-height);
+  --current-font-weight: var(--theme-heading-3-font-weight);
+  --current-letter-spacing: var(--theme-heading-3-letter-spacing);
+  --current-text-transform: var(--theme-heading-3-text-transform); }
 
 pre,
 code {
@@ -943,14 +920,12 @@ pre code {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
-  color: var(--current-color);
   --current-font-family: var(--theme-heading-2-font-family);
   --current-font-size: var(--theme-heading-2-font-size);
   --current-line-height: var(--theme-heading-2-line-height);
   --current-font-weight: var(--theme-heading-2-font-weight);
   --current-letter-spacing: var(--theme-heading-2-letter-spacing);
-  --current-text-transform: var(--theme-heading-2-text-transform);
-  --current-color: var(--theme-heading-2-color); }
+  --current-text-transform: var(--theme-heading-2-text-transform); }
 
 h1:not(:first-child), h2:not(:first-child), h3:not(:first-child), h4:not(:first-child), h5:not(:first-child), h6:not(:first-child) {
   margin-top: 1em; }
@@ -1089,12 +1064,10 @@ h1:not(:last-child), h2:not(:last-child), h3:not(:last-child), h4:not(:last-chil
     font-weight: var(--current-font-weight);
     letter-spacing: var(--current-letter-spacing);
     text-transform: var(--current-text-transform);
-    color: var(--current-color);
     --current-font-family: var(--theme-heading-1-font-family);
     --current-font-size: var(--theme-heading-1-font-size);
     --current-line-height: var(--theme-heading-1-line-height);
     --current-font-weight: var(--theme-heading-1-font-weight);
     --current-letter-spacing: var(--theme-heading-1-letter-spacing);
     --current-text-transform: var(--theme-heading-1-text-transform);
-    --current-color: var(--theme-heading-1-color);
     text-align: center; }
