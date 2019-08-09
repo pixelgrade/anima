@@ -61,15 +61,13 @@ Table of Contents
 /* Global CSS Custom Properties */
 :root {
   --nova-spacing-unit: 8px;
-  --nova-content-width-normal: 900px;
-  --nova-content-width-wide: 1200px;
   --nova-wrapper-side-spacing: 24px;
   --nova-x-spacing: calc( 7 * var(--nova-spacing-unit) );
   --nova-y-spacing: calc( 7 * var(--nova-spacing-unit) );
-  --nova-body-font-family: adelle-sans, sans-serif;
-  --nova-headings-font-family: adelle-sans, sans-serif;
-  --nova-body-font-size: 16px;
-  --nova-content-font-size: 18px;
+  --theme-body-font-family: adelle-sans, sans-serif;
+  --theme-headings-font-family: adelle-sans, sans-serif;
+  --theme-body-font-size: 16px;
+  --theme-content-font-size: 22px;
   --nova-element-spacing: var(--nova-element-spacing-normal);
   --nova-element-spacing-normal: 12px;
   --nova-element-spacing-large: 24px; }
@@ -400,8 +398,8 @@ template {
 
 /* 1. Elements */
 body {
-  font-family: var(--nova-body-font-family);
-  font-size: var(--nova-body-font-size);
+  font-family: var(--theme-body-font-family);
+  font-size: var(--theme-body-font-size);
   line-height: 1.5;
   color: var(--nova-dark-1);
   background-color: var(--nova-light-1); }
@@ -449,47 +447,10 @@ cite {
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
-  margin: 0; }
-
-h1 {
-  font-family: var(--nova-headings-font-family);
-  font-size: 60px;
-  font-weight: 700;
-  line-height: 1.2;
-  color: var(--nova-dark-1); }
-
-h2 {
-  font-family: var(--nova-headings-font-family);
-  font-size: 40px;
-  font-weight: 700;
-  line-height: 1.2;
-  color: var(--nova-dark-3); }
-
-h3 {
-  font-family: var(--nova-headings-font-family);
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 1.2;
-  color: var(--nova-dark-1); }
-
-h4 {
-  font-family: var(--nova-headings-font-family);
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.2;
-  color: var(--nova-dark-1); }
-
-h5 {
-  font-family: var(--nova-headings-font-family);
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.5;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--nova-color-1); }
-
-h6 {
-  color: var(--nova-dark-1); }
+  margin: 0;
+  margin-top: 1em; }
+  h1:not(:last-child), h2:not(:last-child), h3:not(:last-child), h4:not(:last-child), h5:not(:last-child), h6:not(:last-child) {
+    margin-bottom: 0.25em; }
 
 /* Tables */
 table {
@@ -857,8 +818,21 @@ label {
   .entry-header > .alignfull {
     max-width: none; }
 
-.entry-content {
-  font-size: var(--nova-content-font-size); }
+.content-area {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  color: var(--current-color);
+  --current-font-family: var(--theme-body-font-family);
+  --current-font-size: var(--theme-body-font-size);
+  --current-line-height: var(--theme-body-line-height);
+  --current-font-weight: var(--theme-body-font-weight);
+  --current-letter-spacing: var(--theme-body-letter-spacing);
+  --current-text-transform: var(--theme-body-text-transform);
+  --current-color: var(--theme-body-color); }
 
 .entry-content,
 [class*="__inner-container"] {
@@ -1227,19 +1201,124 @@ label {
 
 /* Font Size Helper Classes */
 .has-small-font-size {
-  font-size: 13px; }
+  --theme-has-small-font-size-font-size-diff: 0px;
+  --theme-has-small-font-size-font-size: calc( var(--theme-minimum-font-size) + var(--theme-has-small-font-size-font-size-diff) );
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  color: var(--current-color);
+  --current-font-family: var(--theme-has-small-font-size-font-family);
+  --current-font-size: var(--theme-has-small-font-size-font-size);
+  --current-line-height: var(--theme-has-small-font-size-line-height);
+  --current-font-weight: var(--theme-has-small-font-size-font-weight);
+  --current-letter-spacing: var(--theme-has-small-font-size-letter-spacing);
+  --current-text-transform: var(--theme-has-small-font-size-text-transform);
+  --current-color: var(--theme-has-small-font-size-color); }
+  @media screen and (min-width: 0px) {
+    .has-small-font-size {
+      --theme-has-small-font-size-font-size-diff: calc(0px + 3 * ((100vw - 0px) / 1600)); } }
+  @media screen and (min-width: 1600px) {
+    .has-small-font-size {
+      --theme-has-small-font-size-font-size-diff: -3px; } }
 
 .has-normal-font-size {
-  font-size: 16px; }
+  --theme-has-normal-font-size-font-size-diff: 0px;
+  --theme-has-normal-font-size-font-size: calc( var(--theme-minimum-font-size) + var(--theme-has-normal-font-size-font-size-diff) );
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  color: var(--current-color);
+  --current-font-family: var(--theme-has-normal-font-size-font-family);
+  --current-font-size: var(--theme-has-normal-font-size-font-size);
+  --current-line-height: var(--theme-has-normal-font-size-line-height);
+  --current-font-weight: var(--theme-has-normal-font-size-font-weight);
+  --current-letter-spacing: var(--theme-has-normal-font-size-letter-spacing);
+  --current-text-transform: var(--theme-has-normal-font-size-text-transform);
+  --current-color: var(--theme-has-normal-font-size-color); }
+  @media screen and (min-width: 0px) {
+    .has-normal-font-size {
+      --theme-has-normal-font-size-font-size-diff: calc(0px + 0 * ((100vw - 0px) / 1600)); } }
+  @media screen and (min-width: 1600px) {
+    .has-normal-font-size {
+      --theme-has-normal-font-size-font-size-diff: 0px; } }
 
 .has-medium-font-size {
-  font-size: 20px; }
+  --theme-has-medium-font-size-font-size-diff: 0px;
+  --theme-has-medium-font-size-font-size: calc( var(--theme-minimum-font-size) + var(--theme-has-medium-font-size-font-size-diff) );
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  color: var(--current-color);
+  --current-font-family: var(--theme-has-medium-font-size-font-family);
+  --current-font-size: var(--theme-has-medium-font-size-font-size);
+  --current-line-height: var(--theme-has-medium-font-size-line-height);
+  --current-font-weight: var(--theme-has-medium-font-size-font-weight);
+  --current-letter-spacing: var(--theme-has-medium-font-size-letter-spacing);
+  --current-text-transform: var(--theme-has-medium-font-size-text-transform);
+  --current-color: var(--theme-has-medium-font-size-color); }
+  @media screen and (min-width: 0px) {
+    .has-medium-font-size {
+      --theme-has-medium-font-size-font-size-diff: calc(0px + 4 * ((100vw - 0px) / 1600)); } }
+  @media screen and (min-width: 1600px) {
+    .has-medium-font-size {
+      --theme-has-medium-font-size-font-size-diff: 4px; } }
 
 .has-large-font-size {
-  font-size: 36px; }
+  --theme-has-large-font-size-font-size-diff: 0px;
+  --theme-has-large-font-size-font-size: calc( var(--theme-minimum-font-size) + var(--theme-has-large-font-size-font-size-diff) );
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  color: var(--current-color);
+  --current-font-family: var(--theme-has-large-font-size-font-family);
+  --current-font-size: var(--theme-has-large-font-size-font-size);
+  --current-line-height: var(--theme-has-large-font-size-line-height);
+  --current-font-weight: var(--theme-has-large-font-size-font-weight);
+  --current-letter-spacing: var(--theme-has-large-font-size-letter-spacing);
+  --current-text-transform: var(--theme-has-large-font-size-text-transform);
+  --current-color: var(--theme-has-large-font-size-color); }
+  @media screen and (min-width: 0px) {
+    .has-large-font-size {
+      --theme-has-large-font-size-font-size-diff: calc(0px + 20 * ((100vw - 0px) / 1600)); } }
+  @media screen and (min-width: 1600px) {
+    .has-large-font-size {
+      --theme-has-large-font-size-font-size-diff: 20px; } }
 
 .has-huge-font-size {
-  font-size: 48px; }
+  --theme-has-huge-font-size-font-size-diff: 0px;
+  --theme-has-huge-font-size-font-size: calc( var(--theme-minimum-font-size) + var(--theme-has-huge-font-size-font-size-diff) );
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  color: var(--current-color);
+  --current-font-family: var(--theme-has-huge-font-size-font-family);
+  --current-font-size: var(--theme-has-huge-font-size-font-size);
+  --current-line-height: var(--theme-has-huge-font-size-line-height);
+  --current-font-weight: var(--theme-has-huge-font-size-font-weight);
+  --current-letter-spacing: var(--theme-has-huge-font-size-letter-spacing);
+  --current-text-transform: var(--theme-has-huge-font-size-text-transform);
+  --current-color: var(--theme-has-huge-font-size-color); }
+  @media screen and (min-width: 0px) {
+    .has-huge-font-size {
+      --theme-has-huge-font-size-font-size-diff: calc(0px + 32 * ((100vw - 0px) / 1600)); } }
+  @media screen and (min-width: 1600px) {
+    .has-huge-font-size {
+      --theme-has-huge-font-size-font-size-diff: 32px; } }
 
 /* Alignment Helper Classes */
 .has-text-align-left {
@@ -1324,12 +1403,13 @@ label {
 
 /* Columns Blocks */
 .wp-block-columns {
-  display: flex; }
+  display: flex;
+  --theme-column-spacing: var(--nova-x-spacing); }
+  .wp-block-columns > :not(:first-child) {
+    margin-left: var(--theme-column-spacing); }
 
 .wp-block-column {
   flex: 1 0 0; }
-  .wp-block-column > :not(:first-child) {
-    margin-left: var(--nova-spacing-x); }
 
 /* Cover Block */
 .wp-block-cover {
@@ -1381,11 +1461,6 @@ label {
     background-attachment: fixed; }
 
 .wp-block-cover-text {
-  font-family: var(--nova-headings-font-family);
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 1.2;
-  color: var(--nova-dark-1);
   color: inherit; }
 
 .wp-block-cover > * {
@@ -1729,14 +1804,207 @@ label {
 /* 4. Pages */
 /* 4.1. Single Post */
 /* 5. Theming */
+:root {
+  --nova-content-width-normal: calc(35 * var(--theme-body-font-size));
+  --nova-content-width-wide: calc(50vw + var(--nova-content-width-normal) / 2 - var(--nova-wrapper-side-spacing));
+  --theme-minimum-font-size: 16px;
+  --theme-body-font-size-diff: 0px;
+  --theme-body-font-size: calc( var(--theme-minimum-font-size) + var(--theme-body-font-size-diff) );
+  --theme-display-font-family: var(--theme-headings-font-family);
+  --theme-display-line-height: 1.05;
+  --theme-display-font-weight: 700;
+  --theme-display-font-size-diff: 0px;
+  --theme-display-font-size: calc( var(--theme-minimum-font-size) + var(--theme-display-font-size-diff) );
+  --theme-heading-1-font-family: var(--theme-headings-font-family);
+  --theme-heading-1-line-height: 1.2;
+  --theme-heading-1-font-weight: 700;
+  --theme-heading-1-letter-spacing: -0.01em;
+  --theme-heading-1-font-size-diff: 0px;
+  --theme-heading-1-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-1-font-size-diff) );
+  --theme-heading-2-font-family: var(--theme-headings-font-family);
+  --theme-heading-2-line-height: 1.25;
+  --theme-heading-2-font-weight: 700;
+  --theme-heading-2-font-size-diff: 0px;
+  --theme-heading-2-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-2-font-size-diff) );
+  --theme-heading-3-font-family: var(--theme-headings-font-family);
+  --theme-heading-3-line-height: 1.25;
+  --theme-heading-3-font-weight: 700;
+  --theme-heading-3-letter-spacing: -0.01em;
+  --theme-heading-3-font-size-diff: 0px;
+  --theme-heading-3-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-3-font-size-diff) );
+  --theme-heading-5-font-family: var(--theme-headings-font-family);
+  --theme-heading-5-font-weight: 700;
+  --theme-heading-5-text-transform: uppercase;
+  --theme-heading-5-font-size-diff: 0px;
+  --theme-heading-5-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-5-font-size-diff) );
+  --theme-intro-font-family: var(--theme-headings-font-family);
+  --theme-intro-font-size-diff: 0px;
+  --theme-intro-font-size: calc( var(--theme-minimum-font-size) + var(--theme-intro-font-size-diff) ); }
+  @media only screen and (min-width: 1600px) {
+    :root {
+      --theme-minimum-font-size: 1vw; } }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-body-font-size-diff: calc(0px + 6 * ((100vw - 0px) / 1600)); } }
+  @media screen and (min-width: 1600px) {
+    :root {
+      --theme-body-font-size-diff: 6px; } }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-display-font-size-diff: calc(0px + 63 * ((100vw - 0px) / 1600)); } }
+  @media screen and (min-width: 1600px) {
+    :root {
+      --theme-display-font-size-diff: 63px; } }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-heading-1-font-size-diff: calc(0px + 29 * ((100vw - 0px) / 1600)); } }
+  @media screen and (min-width: 1600px) {
+    :root {
+      --theme-heading-1-font-size-diff: 29px; } }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-heading-2-font-size-diff: calc(0px + 12.6 * ((100vw - 0px) / 1600)); } }
+  @media screen and (min-width: 1600px) {
+    :root {
+      --theme-heading-2-font-size-diff: 12.6px; } }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-heading-3-font-size-diff: calc(0px + 5.4 * ((100vw - 0px) / 1600)); } }
+  @media screen and (min-width: 1600px) {
+    :root {
+      --theme-heading-3-font-size-diff: 5.4px; } }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-heading-5-font-size-diff: calc(0px + 0 * ((100vw - 0px) / 1600)); } }
+  @media screen and (min-width: 1600px) {
+    :root {
+      --theme-heading-5-font-size-diff: 0px; } }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-intro-font-size-diff: calc(0px + 10 * ((100vw - 0px) / 1600)); } }
+  @media screen and (min-width: 1600px) {
+    :root {
+      --theme-intro-font-size-diff: 10px; } }
+
+h1 {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  color: var(--current-color);
+  --current-font-family: var(--theme-heading-1-font-family);
+  --current-font-size: var(--theme-heading-1-font-size);
+  --current-line-height: var(--theme-heading-1-line-height);
+  --current-font-weight: var(--theme-heading-1-font-weight);
+  --current-letter-spacing: var(--theme-heading-1-letter-spacing);
+  --current-text-transform: var(--theme-heading-1-text-transform);
+  --current-color: var(--theme-heading-1-color);
+  color: var(--nova-dark-1); }
+
+h2 {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  color: var(--current-color);
+  --current-font-family: var(--theme-heading-2-font-family);
+  --current-font-size: var(--theme-heading-2-font-size);
+  --current-line-height: var(--theme-heading-2-line-height);
+  --current-font-weight: var(--theme-heading-2-font-weight);
+  --current-letter-spacing: var(--theme-heading-2-letter-spacing);
+  --current-text-transform: var(--theme-heading-2-text-transform);
+  --current-color: var(--theme-heading-2-color);
+  color: var(--nova-dark-1); }
+
+h3,
+h4 {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  color: var(--current-color);
+  --current-font-family: var(--theme-heading-3-font-family);
+  --current-font-size: var(--theme-heading-3-font-size);
+  --current-line-height: var(--theme-heading-3-line-height);
+  --current-font-weight: var(--theme-heading-3-font-weight);
+  --current-letter-spacing: var(--theme-heading-3-letter-spacing);
+  --current-text-transform: var(--theme-heading-3-text-transform);
+  --current-color: var(--theme-heading-3-color);
+  color: var(--nova-dark-1); }
+
+h5,
+h6 {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  color: var(--current-color);
+  --current-font-family: var(--theme-heading-5-font-family);
+  --current-font-size: var(--theme-heading-5-font-size);
+  --current-line-height: var(--theme-heading-5-line-height);
+  --current-font-weight: var(--theme-heading-5-font-weight);
+  --current-letter-spacing: var(--theme-heading-5-letter-spacing);
+  --current-text-transform: var(--theme-heading-5-text-transform);
+  --current-color: var(--theme-heading-5-color);
+  color: var(--nova-color-1); }
+
+.entry-title {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  color: var(--current-color);
+  --current-font-family: var(--theme-heading-1-font-family);
+  --current-font-size: var(--theme-heading-1-font-size);
+  --current-line-height: var(--theme-heading-1-line-height);
+  --current-font-weight: var(--theme-heading-1-font-weight);
+  --current-letter-spacing: var(--theme-heading-1-letter-spacing);
+  --current-text-transform: var(--theme-heading-1-text-transform);
+  --current-color: var(--theme-heading-1-color); }
+
+h1.entry-title {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  color: var(--current-color);
+  --current-font-family: var(--theme-display-font-family);
+  --current-font-size: var(--theme-display-font-size);
+  --current-line-height: var(--theme-display-line-height);
+  --current-font-weight: var(--theme-display-font-weight);
+  --current-letter-spacing: var(--theme-display-letter-spacing);
+  --current-text-transform: var(--theme-display-text-transform);
+  --current-color: var(--theme-display-color); }
+
 [type="button"],
 [type="submit"],
 [type="reset"], .c-comments-toggle__label, .wp-block-button__link {
-  font-family: var(--nova-headings-font-family);
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.2;
-  color: var(--nova-dark-1); }
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  color: var(--current-color);
+  --current-font-family: var(--theme-heading-4-font-family);
+  --current-font-size: var(--theme-heading-4-font-size);
+  --current-line-height: var(--theme-heading-4-line-height);
+  --current-font-weight: var(--theme-heading-4-font-weight);
+  --current-letter-spacing: var(--theme-heading-4-letter-spacing);
+  --current-text-transform: var(--theme-heading-4-text-transform);
+  --current-color: var(--theme-heading-4-color); }
 
 pre,
 code {
@@ -1753,6 +2021,22 @@ code {
 pre code {
   background: transparent; }
 
+.wp-block-cover-text {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  color: var(--current-color);
+  --current-font-family: var(--theme-heading-2-font-family);
+  --current-font-size: var(--theme-heading-2-font-size);
+  --current-line-height: var(--theme-heading-2-line-height);
+  --current-font-weight: var(--theme-heading-2-font-weight);
+  --current-letter-spacing: var(--theme-heading-2-letter-spacing);
+  --current-text-transform: var(--theme-heading-2-text-transform);
+  --current-color: var(--theme-heading-2-color); }
+
 .avatar {
   display: block;
   border-radius: 50%; }
@@ -1761,13 +2045,20 @@ pre code {
   text-decoration: none; }
 
 .post-navigation .nav-links {
-  font-family: var(--nova-headings-font-family);
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.5;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--nova-color-1); }
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  color: var(--current-color);
+  --current-font-family: var(--theme-heading-5-font-family);
+  --current-font-size: var(--theme-heading-5-font-size);
+  --current-line-height: var(--theme-heading-5-line-height);
+  --current-font-weight: var(--theme-heading-5-font-weight);
+  --current-letter-spacing: var(--theme-heading-5-letter-spacing);
+  --current-text-transform: var(--theme-heading-5-text-transform);
+  --current-color: var(--theme-heading-5-color); }
 
 .post-navigation a {
   text-decoration: none; }
@@ -1782,12 +2073,39 @@ pre code {
   color: inherit; }
 
 .site-title {
-  font-family: var(--nova-headings-font-family);
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.2;
-  color: var(--nova-dark-1); }
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  color: var(--current-color);
+  --current-font-family: var(--theme-heading-4-font-family);
+  --current-font-size: var(--theme-heading-4-font-size);
+  --current-line-height: var(--theme-heading-4-line-height);
+  --current-font-weight: var(--theme-heading-4-font-weight);
+  --current-letter-spacing: var(--theme-heading-4-letter-spacing);
+  --current-text-transform: var(--theme-heading-4-text-transform);
+  --current-color: var(--theme-heading-4-color); }
 
 /* 6. Overwrites */
 .hentry > :not(:first-child) {
   margin-top: var(--nova-y-spacing); }
+
+html {
+  height: 100%; }
+
+html, body, .site {
+  display: flex;
+  flex-direction: column; }
+
+body, .site {
+  flex-grow: 1; }
+  body > footer, .site > footer {
+    margin-top: auto; }
+
+.posted-on .updated {
+  display: none; }
+
+.wp-block-columns.alignfull {
+  --nova-wrapper-side-spacing: 0; }

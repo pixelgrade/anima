@@ -40,14 +40,22 @@ cite {
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
+
+    //&:not(:first-child) {
+        margin-top: 1em;
+    //}
+
+    &:not(:last-child) {
+        margin-bottom: 0.25em;
+    }
 }
 
-h1 { @include nova-h1-font }
-h2 { @include nova-h2-font }
-h3 { @include nova-h3-font }
-h4 { @include nova-h4-font }
-h5 { @include nova-h5-font }
-h6 { @include nova-h6-font }
+h1 { @extend %h1-font !optional }
+h2 { @extend %h2-font !optional }
+h3 { @extend %h3-font !optional }
+h4 { @extend %h4-font !optional }
+h5 { @extend %h5-font !optional }
+h6 { @extend %h6-font !optional }
 
 /* Tables */
 table {

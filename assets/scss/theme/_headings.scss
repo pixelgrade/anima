@@ -1,0 +1,90 @@
+:root {
+    --nova-content-width-normal: calc(35 * var(--theme-body-font-size));
+    --nova-content-width-wide: calc(50vw + var(--nova-content-width-normal) / 2 - var(--nova-wrapper-side-spacing));
+    --theme-minimum-font-size: #{$nova-minimum-font-size};
+
+    @include above($nova-minimum-font-size * 100) {
+        --theme-minimum-font-size: 1vw;
+    }
+
+    @include define-font(body, (
+        font-size: $nova-content-font-size,
+    ));
+
+    @include define-font(display, (
+        font-family: var(--theme-headings-font-family),
+        font-size: 79px,
+        line-height: 1.05,
+        font-weight: 700,
+    ));
+
+    @include define-font(heading-1, (
+        font-family: var(--theme-headings-font-family),
+        font-size: 45px,
+        line-height: 1.2,
+        font-weight: 700,
+        letter-spacing: -0.01em,
+    ));
+
+    @include define-font(heading-2, (
+        font-family: var(--theme-headings-font-family),
+        font-size: 28.6px,
+        font-weight: 700,
+        line-height: 1.25,
+    ));
+
+    @include define-font(heading-3, (
+        font-family: var(--theme-headings-font-family),
+        font-size: 21.4px,
+        font-weight: 700,
+        line-height: 1.25,
+        letter-spacing: -0.01em,
+    ));
+
+    @include define-font(heading-5, (
+        font-family: var(--theme-headings-font-family),
+        font-size: 16px,
+        font-weight: 700,
+        text-transform: uppercase,
+    ));
+
+    @include define-font(intro, (
+        font-family: var(--theme-headings-font-family),
+        font-size: 26px,
+    ));
+}
+
+%display {
+    @include apply-font(display);
+    color: var(--nova-dark-1),
+}
+
+%h1-font {
+    @include apply-font(heading-1);
+    color: var(--nova-dark-1),
+}
+
+%h2-font {
+    @include apply-font(heading-2);
+    color: var(--nova-dark-1),
+}
+
+%h3-font,
+%h4-font {
+    @include apply-font(heading-3);
+    color: var(--nova-dark-1),
+}
+
+%h5-font,
+%h6-font {
+    @include apply-font(heading-5);
+    color: var(--nova-color-1),
+}
+
+.entry-title {
+    @include apply-font(heading-1);
+}
+
+h1.entry-title {
+    @include apply-font(display);
+}

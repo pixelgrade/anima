@@ -1,5 +1,7 @@
+@import "headings";
+
 %button-theme {
-    @include nova-h4-font;
+    @include apply-font(heading-4);
 }
 
 pre,
@@ -20,3 +22,16 @@ code {
 pre code {
     background: transparent;
 }
+
+.wp-block-cover-text {
+    @include apply-font(heading-2);
+}
+
+//.wp-block-columns {
+//    --theme-column-spacing: 12px;
+//}
+//
+//.wp-block-column {
+//    padding: 12px;
+//    background: #EFEFEF;
+//}

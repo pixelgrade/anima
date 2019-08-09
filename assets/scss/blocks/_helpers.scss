@@ -48,7 +48,9 @@ $wp-font-sizes: (
 @each $name, $font-size in $wp-font-sizes {
 
     .has-#{$name}-font-size {
-        font-size: $font-size;
+        $font-name: has-#{$name}-font-size;
+        @include define-font(#{$font-name}, (font-size: $font-size));
+        @include apply-font(#{$font-name});
     }
 }
 

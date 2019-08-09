@@ -1,5 +1,4 @@
-@import "setup/mixins";
-@import "setup/variables";
+@import "setup";
 
 @import "blocks/helpers";
 @import "blocks/editor";
@@ -29,7 +28,7 @@
     // increased specificity selector to overwrite default styles
     &[class] {
         @include nova-container-colors;
-        @include nova-container-font(var(--nova-content-font-size));
+        @include nova-container-font(var(--theme-content-font-size));
     }
 
     @import "elements/typography";
@@ -56,7 +55,7 @@
     max-width: var(--nova-content-width-normal);
 
     .editor-post-title__input {
-        @include nova-h1-font;
+        @include apply-font(heading-1);
         text-align: center;
     }
 }

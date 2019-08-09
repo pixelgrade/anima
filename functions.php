@@ -98,6 +98,8 @@ function novablocks_setup() {
 	 */
 	add_theme_support( 'responsive-embeds' );
 
+	add_theme_support( 'disable-custom-font-sizes' );
+
 	/**
 	 * Add custom colors to the default Color palette control in the block editor
 	 */

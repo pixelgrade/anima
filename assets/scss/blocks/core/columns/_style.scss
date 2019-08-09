@@ -1,9 +1,9 @@
 .wp-block-columns {
     display: flex;
+    --theme-column-spacing: var(--nova-x-spacing);
+    @include space-children-x(var(--theme-column-spacing));
 }
 
 .wp-block-column {
     flex: 1 0 0;
-
-    @include space-children-x(var(--nova-spacing-x));
 }

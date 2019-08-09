@@ -3,3 +3,28 @@
 .hentry {
     @include space-children-y(var(--nova-y-spacing));
 }
+
+html {
+    height: 100%;
+}
+
+html, body, .site {
+    display: flex;
+    flex-direction: column;
+}
+
+body, .site {
+    flex-grow: 1;
+
+    > footer {
+        margin-top: auto;
+    }
+}
+
+.posted-on .updated {
+    display: none;
+}
+
+.wp-block-columns.alignfull {
+    --nova-wrapper-side-spacing: 0;
+}

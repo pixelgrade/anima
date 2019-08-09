@@ -1,0 +1,28 @@
+$nova-font-props: font-family, font-size, line-height, font-weight, letter-spacing, text-transform, color;
+
+@mixin define-font($name, $config) {
+
+    @each $prop in remove($nova-font-props, font-size) {
+        $value: map-get( $config, $prop );
+        @if ( map-get( $config, $prop ) ) {
+            --theme-#{$name}-#{$prop}: #{$value};
+        }
+    }
+
+    $diff: map-get($config, font-size) - $nova-minimum-font-size;
+
+    @include fluid(--theme-#{$name}-font-size-diff, 0px, 0px, $nova-minimum-font-size * 100, $diff);
+
+    --theme-#{$name}-font-size: calc( var(--theme-minimum-font-size) + var(--theme-#{$name}-font-size-diff) );
+}
+
+@mixin apply-font($name) {
+
+    @each $prop in $nova-font-props {
+        #{$prop}: var(--current-#{$prop});
+    }
+
+    @each $prop in $nova-font-props {
+        --current-#{$prop}: var(--theme-#{$name}-#{$prop});
+    }
+}

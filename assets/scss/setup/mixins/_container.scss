@@ -1,0 +1,15 @@
+@mixin nova-container-font($font-size: var(--theme-body-font-size)) {
+    font-family: var(--theme-body-font-family);
+    font-size: $font-size;
+    line-height: 1.5;
+}
+
+@mixin nova-container-colors {
+    color: var(--nova-dark-1);
+    background-color: var(--nova-light-1);
+}
+
+@mixin nova-container {
+    @include nova-container-font;
+    @include nova-container-colors;
+}
