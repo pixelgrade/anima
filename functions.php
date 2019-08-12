@@ -135,6 +135,39 @@ function novablocks_setup() {
 			'color' => '#EEF1F2',
 		),
 	) );
+
+	add_theme_support( 'editor-font-sizes', array(
+		array(
+			'name'      => __( 'Tiny', '__theme_txtd' ),
+			'size'      => 13,
+			'slug'      => 'tiny'
+		),
+		array(
+			'name'      => __( 'Small', '__theme_txtd' ),
+			'size'      => 16,
+			'slug'      => 'small'
+		),
+		array(
+			'name'      => __( 'Normal', '__theme_txtd' ),
+			'size'      => 22,
+			'slug'      => 'normal'
+		),
+		array(
+			'name'      => __( 'Medium', '__theme_txtd' ),
+			'size'      => 29,
+			'slug'      => 'medium'
+		),
+		array(
+			'name'      => __( 'Large', '__theme_txtd' ),
+			'size'      => 45,
+			'slug'      => 'large'
+		),
+		array(
+			'name'      => __( 'Huge', '__theme_txtd' ),
+			'size'      => 79,
+			'slug'      => 'huge'
+		),
+	) );
 }
 add_action( 'after_setup_theme', 'novablocks_setup' );
 

@@ -49,239 +49,6 @@
     :root {
       --nova-wrapper-side-spacing: 48px; } }
 
-/* Color Helper Classes */
-.has-background {
-  padding: 1em 1.25em; }
-
-.has-pale-pink-background-color {
-  background-color: #f78da7; }
-
-.has-pale-pink-color {
-  color: #f78da7; }
-
-.has-vivid-red-background-color {
-  background-color: #cf2e2e; }
-
-.has-vivid-red-color {
-  color: #cf2e2e; }
-
-.has-luminous-vivid-orange-background-color {
-  background-color: #ff6900; }
-
-.has-luminous-vivid-orange-color {
-  color: #ff6900; }
-
-.has-luminous-vivid-amber-background-color {
-  background-color: #fcb900; }
-
-.has-luminous-vivid-amber-color {
-  color: #fcb900; }
-
-.has-light-green-cyan-background-color {
-  background-color: #7bdcb5; }
-
-.has-light-green-cyan-color {
-  color: #7bdcb5; }
-
-.has-vivid-green-cyan-background-color {
-  background-color: #00d084; }
-
-.has-vivid-green-cyan-color {
-  color: #00d084; }
-
-.has-pale-cyan-blue-background-color {
-  background-color: #8ed1fc; }
-
-.has-pale-cyan-blue-color {
-  color: #8ed1fc; }
-
-.has-vivid-cyan-blue-background-color {
-  background-color: #0693e3; }
-
-.has-vivid-cyan-blue-color {
-  color: #0693e3; }
-
-.has-vivid-purple-background-color {
-  background-color: #9b51e0; }
-
-.has-vivid-purple-color {
-  color: #9b51e0; }
-
-.has-very-light-gray-background-color {
-  background-color: #eee; }
-
-.has-very-light-gray-color {
-  color: #eee; }
-
-.has-cyan-bluish-gray-background-color {
-  background-color: #abb8c3; }
-
-.has-cyan-bluish-gray-color {
-  color: #abb8c3; }
-
-.has-very-dark-gray-background-color {
-  background-color: #313131; }
-
-.has-very-dark-gray-color {
-  color: #313131; }
-
-.has-nova-blue-background-color {
-  background-color: #203AB6; }
-
-.has-nova-blue-color {
-  color: #203AB6; }
-
-.has-nova-yellow-background-color {
-  background-color: #FFE42E; }
-
-.has-nova-yellow-color {
-  color: #FFE42E; }
-
-.has-nova-almost-black-background-color {
-  background-color: #000043; }
-
-.has-nova-almost-black-color {
-  color: #000043; }
-
-.has-nova-darkest-blue-background-color {
-  background-color: #272743; }
-
-.has-nova-darkest-blue-color {
-  color: #272743; }
-
-.has-nova-white-background-color {
-  background-color: #FFFFFF; }
-
-.has-nova-white-color {
-  color: #FFFFFF; }
-
-.has-nova-gray-background-color {
-  background-color: #EEF1F2; }
-
-.has-nova-gray-color {
-  color: #EEF1F2; }
-
-/* Font Size Helper Classes */
-.has-small-font-size {
-  --theme-has-small-font-size-font-size-diff: 0px;
-  --theme-has-small-font-size-font-size: calc( var(--theme-minimum-font-size) + var(--theme-has-small-font-size-font-size-diff) );
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  --current-font-family: var(--theme-has-small-font-size-font-family);
-  --current-font-size: var(--theme-has-small-font-size-font-size);
-  --current-line-height: var(--theme-has-small-font-size-line-height);
-  --current-font-weight: var(--theme-has-small-font-size-font-weight);
-  --current-letter-spacing: var(--theme-has-small-font-size-letter-spacing);
-  --current-text-transform: var(--theme-has-small-font-size-text-transform); }
-  @media screen and (min-width: 0px) {
-    .has-small-font-size {
-      --theme-has-small-font-size-font-size-diff: calc(0px + 3 * ((100vw - 0px) / 1600)); } }
-  @media screen and (min-width: 1600px) {
-    .has-small-font-size {
-      --theme-has-small-font-size-font-size-diff: -3px; } }
-
-.has-normal-font-size {
-  --theme-has-normal-font-size-font-size-diff: 0px;
-  --theme-has-normal-font-size-font-size: calc( var(--theme-minimum-font-size) + var(--theme-has-normal-font-size-font-size-diff) );
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  --current-font-family: var(--theme-has-normal-font-size-font-family);
-  --current-font-size: var(--theme-has-normal-font-size-font-size);
-  --current-line-height: var(--theme-has-normal-font-size-line-height);
-  --current-font-weight: var(--theme-has-normal-font-size-font-weight);
-  --current-letter-spacing: var(--theme-has-normal-font-size-letter-spacing);
-  --current-text-transform: var(--theme-has-normal-font-size-text-transform); }
-  @media screen and (min-width: 0px) {
-    .has-normal-font-size {
-      --theme-has-normal-font-size-font-size-diff: calc(0px + 0 * ((100vw - 0px) / 1600)); } }
-  @media screen and (min-width: 1600px) {
-    .has-normal-font-size {
-      --theme-has-normal-font-size-font-size-diff: 0px; } }
-
-.has-medium-font-size {
-  --theme-has-medium-font-size-font-size-diff: 0px;
-  --theme-has-medium-font-size-font-size: calc( var(--theme-minimum-font-size) + var(--theme-has-medium-font-size-font-size-diff) );
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  --current-font-family: var(--theme-has-medium-font-size-font-family);
-  --current-font-size: var(--theme-has-medium-font-size-font-size);
-  --current-line-height: var(--theme-has-medium-font-size-line-height);
-  --current-font-weight: var(--theme-has-medium-font-size-font-weight);
-  --current-letter-spacing: var(--theme-has-medium-font-size-letter-spacing);
-  --current-text-transform: var(--theme-has-medium-font-size-text-transform); }
-  @media screen and (min-width: 0px) {
-    .has-medium-font-size {
-      --theme-has-medium-font-size-font-size-diff: calc(0px + 4 * ((100vw - 0px) / 1600)); } }
-  @media screen and (min-width: 1600px) {
-    .has-medium-font-size {
-      --theme-has-medium-font-size-font-size-diff: 4px; } }
-
-.has-large-font-size {
-  --theme-has-large-font-size-font-size-diff: 0px;
-  --theme-has-large-font-size-font-size: calc( var(--theme-minimum-font-size) + var(--theme-has-large-font-size-font-size-diff) );
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  --current-font-family: var(--theme-has-large-font-size-font-family);
-  --current-font-size: var(--theme-has-large-font-size-font-size);
-  --current-line-height: var(--theme-has-large-font-size-line-height);
-  --current-font-weight: var(--theme-has-large-font-size-font-weight);
-  --current-letter-spacing: var(--theme-has-large-font-size-letter-spacing);
-  --current-text-transform: var(--theme-has-large-font-size-text-transform); }
-  @media screen and (min-width: 0px) {
-    .has-large-font-size {
-      --theme-has-large-font-size-font-size-diff: calc(0px + 20 * ((100vw - 0px) / 1600)); } }
-  @media screen and (min-width: 1600px) {
-    .has-large-font-size {
-      --theme-has-large-font-size-font-size-diff: 20px; } }
-
-.has-huge-font-size {
-  --theme-has-huge-font-size-font-size-diff: 0px;
-  --theme-has-huge-font-size-font-size: calc( var(--theme-minimum-font-size) + var(--theme-has-huge-font-size-font-size-diff) );
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  --current-font-family: var(--theme-has-huge-font-size-font-family);
-  --current-font-size: var(--theme-has-huge-font-size-font-size);
-  --current-line-height: var(--theme-has-huge-font-size-line-height);
-  --current-font-weight: var(--theme-has-huge-font-size-font-weight);
-  --current-letter-spacing: var(--theme-has-huge-font-size-letter-spacing);
-  --current-text-transform: var(--theme-has-huge-font-size-text-transform); }
-  @media screen and (min-width: 0px) {
-    .has-huge-font-size {
-      --theme-has-huge-font-size-font-size-diff: calc(0px + 32 * ((100vw - 0px) / 1600)); } }
-  @media screen and (min-width: 1600px) {
-    .has-huge-font-size {
-      --theme-has-huge-font-size-font-size-diff: 32px; } }
-
-/* Alignment Helper Classes */
-.has-text-align-left {
-  text-align: left; }
-
-.has-text-align-center {
-  text-align: center; }
-
-.has-text-align-right {
-  text-align: right; }
-
 ul.wp-block-archives-list[class] {
   list-style: none;
   padding-left: 0; }
@@ -748,49 +515,49 @@ ul.wp-block-categories__list[class] {
   --theme-intro-font-family: var(--theme-headings-font-family);
   --theme-intro-font-size-diff: 0px;
   --theme-intro-font-size: calc( var(--theme-minimum-font-size) + var(--theme-intro-font-size-diff) ); }
-  @media only screen and (min-width: 1600px) {
+  @media only screen and (min-width: 1200px) {
     :root {
       --theme-minimum-font-size: 1vw; } }
   @media screen and (min-width: 0px) {
     :root {
-      --theme-body-font-size-diff: calc(0px + 6 * ((100vw - 0px) / 1600)); } }
-  @media screen and (min-width: 1600px) {
+      --theme-body-font-size-diff: calc(0px + 6 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
     :root {
       --theme-body-font-size-diff: 6px; } }
   @media screen and (min-width: 0px) {
     :root {
-      --theme-display-font-size-diff: calc(0px + 63 * ((100vw - 0px) / 1600)); } }
-  @media screen and (min-width: 1600px) {
+      --theme-display-font-size-diff: calc(0px + 63 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
     :root {
       --theme-display-font-size-diff: 63px; } }
   @media screen and (min-width: 0px) {
     :root {
-      --theme-heading-1-font-size-diff: calc(0px + 29 * ((100vw - 0px) / 1600)); } }
-  @media screen and (min-width: 1600px) {
+      --theme-heading-1-font-size-diff: calc(0px + 29 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
     :root {
       --theme-heading-1-font-size-diff: 29px; } }
   @media screen and (min-width: 0px) {
     :root {
-      --theme-heading-2-font-size-diff: calc(0px + 12.6 * ((100vw - 0px) / 1600)); } }
-  @media screen and (min-width: 1600px) {
+      --theme-heading-2-font-size-diff: calc(0px + 13 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
     :root {
-      --theme-heading-2-font-size-diff: 12.6px; } }
+      --theme-heading-2-font-size-diff: 13px; } }
   @media screen and (min-width: 0px) {
     :root {
-      --theme-heading-3-font-size-diff: calc(0px + 5.4 * ((100vw - 0px) / 1600)); } }
-  @media screen and (min-width: 1600px) {
+      --theme-heading-3-font-size-diff: calc(0px + 6 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
     :root {
-      --theme-heading-3-font-size-diff: 5.4px; } }
+      --theme-heading-3-font-size-diff: 6px; } }
   @media screen and (min-width: 0px) {
     :root {
-      --theme-heading-5-font-size-diff: calc(0px + 0 * ((100vw - 0px) / 1600)); } }
-  @media screen and (min-width: 1600px) {
+      --theme-heading-5-font-size-diff: calc(0px + 0 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
     :root {
       --theme-heading-5-font-size-diff: 0px; } }
   @media screen and (min-width: 0px) {
     :root {
-      --theme-intro-font-size-diff: calc(0px + 10 * ((100vw - 0px) / 1600)); } }
-  @media screen and (min-width: 1600px) {
+      --theme-intro-font-size-diff: calc(0px + 10 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
     :root {
       --theme-intro-font-size-diff: 10px; } }
 
@@ -954,7 +721,10 @@ h1:not(:last-child), h2:not(:last-child), h3:not(:last-child), h4:not(:last-chil
   /* Links */
   /* Blockquotes */
   /* Headings */
-  /* Tables */ }
+  /* Tables */
+  /* Color Helper Classes */
+  /* Font Size Helper Classes */
+  /* Alignment Helper Classes */ }
   .editor-styles-wrapper[class] {
     color: var(--nova-dark-1);
     background-color: var(--nova-light-1);
@@ -969,6 +739,7 @@ h1:not(:last-child), h2:not(:last-child), h3:not(:last-child), h4:not(:last-chil
     margin: 0; }
   .editor-styles-wrapper iframe {
     width: 100%;
+    max-width: 100%;
     margin: 0; }
   .editor-styles-wrapper pre {
     white-space: pre;
@@ -998,6 +769,152 @@ h1:not(:last-child), h2:not(:last-child), h3:not(:last-child), h4:not(:last-chil
   .editor-styles-wrapper td, .editor-styles-wrapper th {
     border: 1px solid;
     padding: 0.5em; }
+  .editor-styles-wrapper .has-background {
+    padding: 1em 1.25em; }
+  .editor-styles-wrapper .has-pale-pink-background-color {
+    background-color: #f78da7; }
+  .editor-styles-wrapper .has-pale-pink-color {
+    color: #f78da7; }
+  .editor-styles-wrapper .has-vivid-red-background-color {
+    background-color: #cf2e2e; }
+  .editor-styles-wrapper .has-vivid-red-color {
+    color: #cf2e2e; }
+  .editor-styles-wrapper .has-luminous-vivid-orange-background-color {
+    background-color: #ff6900; }
+  .editor-styles-wrapper .has-luminous-vivid-orange-color {
+    color: #ff6900; }
+  .editor-styles-wrapper .has-luminous-vivid-amber-background-color {
+    background-color: #fcb900; }
+  .editor-styles-wrapper .has-luminous-vivid-amber-color {
+    color: #fcb900; }
+  .editor-styles-wrapper .has-light-green-cyan-background-color {
+    background-color: #7bdcb5; }
+  .editor-styles-wrapper .has-light-green-cyan-color {
+    color: #7bdcb5; }
+  .editor-styles-wrapper .has-vivid-green-cyan-background-color {
+    background-color: #00d084; }
+  .editor-styles-wrapper .has-vivid-green-cyan-color {
+    color: #00d084; }
+  .editor-styles-wrapper .has-pale-cyan-blue-background-color {
+    background-color: #8ed1fc; }
+  .editor-styles-wrapper .has-pale-cyan-blue-color {
+    color: #8ed1fc; }
+  .editor-styles-wrapper .has-vivid-cyan-blue-background-color {
+    background-color: #0693e3; }
+  .editor-styles-wrapper .has-vivid-cyan-blue-color {
+    color: #0693e3; }
+  .editor-styles-wrapper .has-vivid-purple-background-color {
+    background-color: #9b51e0; }
+  .editor-styles-wrapper .has-vivid-purple-color {
+    color: #9b51e0; }
+  .editor-styles-wrapper .has-very-light-gray-background-color {
+    background-color: #eee; }
+  .editor-styles-wrapper .has-very-light-gray-color {
+    color: #eee; }
+  .editor-styles-wrapper .has-cyan-bluish-gray-background-color {
+    background-color: #abb8c3; }
+  .editor-styles-wrapper .has-cyan-bluish-gray-color {
+    color: #abb8c3; }
+  .editor-styles-wrapper .has-very-dark-gray-background-color {
+    background-color: #313131; }
+  .editor-styles-wrapper .has-very-dark-gray-color {
+    color: #313131; }
+  .editor-styles-wrapper .has-nova-blue-background-color {
+    background-color: #203AB6; }
+  .editor-styles-wrapper .has-nova-blue-color {
+    color: #203AB6; }
+  .editor-styles-wrapper .has-nova-yellow-background-color {
+    background-color: #FFE42E; }
+  .editor-styles-wrapper .has-nova-yellow-color {
+    color: #FFE42E; }
+  .editor-styles-wrapper .has-nova-almost-black-background-color {
+    background-color: #000043; }
+  .editor-styles-wrapper .has-nova-almost-black-color {
+    color: #000043; }
+  .editor-styles-wrapper .has-nova-darkest-blue-background-color {
+    background-color: #272743; }
+  .editor-styles-wrapper .has-nova-darkest-blue-color {
+    color: #272743; }
+  .editor-styles-wrapper .has-nova-white-background-color {
+    background-color: #FFFFFF; }
+  .editor-styles-wrapper .has-nova-white-color {
+    color: #FFFFFF; }
+  .editor-styles-wrapper .has-nova-gray-background-color {
+    background-color: #EEF1F2; }
+  .editor-styles-wrapper .has-nova-gray-color {
+    color: #EEF1F2; }
+  .editor-styles-wrapper .has-tiny-font-size {
+    --theme-tiny-font-size-diff: 0px;
+    --theme-tiny-font-size: calc( var(--theme-minimum-font-size) + var(--theme-tiny-font-size-diff) );
+    font-size: var(--current-font-size);
+    --current-font-size: var(--theme-tiny-font-size); }
+    @media screen and (min-width: 0px) {
+      .editor-styles-wrapper .has-tiny-font-size {
+        --theme-tiny-font-size-diff: calc(0px + 3 * ((100vw - 0px) / 1200)); } }
+    @media screen and (min-width: 1200px) {
+      .editor-styles-wrapper .has-tiny-font-size {
+        --theme-tiny-font-size-diff: -3px; } }
+  .editor-styles-wrapper .has-small-font-size {
+    --theme-small-font-size-diff: 0px;
+    --theme-small-font-size: calc( var(--theme-minimum-font-size) + var(--theme-small-font-size-diff) );
+    font-size: var(--current-font-size);
+    --current-font-size: var(--theme-small-font-size); }
+    @media screen and (min-width: 0px) {
+      .editor-styles-wrapper .has-small-font-size {
+        --theme-small-font-size-diff: calc(0px + 0 * ((100vw - 0px) / 1200)); } }
+    @media screen and (min-width: 1200px) {
+      .editor-styles-wrapper .has-small-font-size {
+        --theme-small-font-size-diff: 0px; } }
+  .editor-styles-wrapper .has-normal-font-size {
+    --theme-normal-font-size-diff: 0px;
+    --theme-normal-font-size: calc( var(--theme-minimum-font-size) + var(--theme-normal-font-size-diff) );
+    font-size: var(--current-font-size);
+    --current-font-size: var(--theme-normal-font-size); }
+    @media screen and (min-width: 0px) {
+      .editor-styles-wrapper .has-normal-font-size {
+        --theme-normal-font-size-diff: calc(0px + 6 * ((100vw - 0px) / 1200)); } }
+    @media screen and (min-width: 1200px) {
+      .editor-styles-wrapper .has-normal-font-size {
+        --theme-normal-font-size-diff: 6px; } }
+  .editor-styles-wrapper .has-medium-font-size {
+    --theme-medium-font-size-diff: 0px;
+    --theme-medium-font-size: calc( var(--theme-minimum-font-size) + var(--theme-medium-font-size-diff) );
+    font-size: var(--current-font-size);
+    --current-font-size: var(--theme-medium-font-size); }
+    @media screen and (min-width: 0px) {
+      .editor-styles-wrapper .has-medium-font-size {
+        --theme-medium-font-size-diff: calc(0px + 13 * ((100vw - 0px) / 1200)); } }
+    @media screen and (min-width: 1200px) {
+      .editor-styles-wrapper .has-medium-font-size {
+        --theme-medium-font-size-diff: 13px; } }
+  .editor-styles-wrapper .has-large-font-size {
+    --theme-large-font-size-diff: 0px;
+    --theme-large-font-size: calc( var(--theme-minimum-font-size) + var(--theme-large-font-size-diff) );
+    font-size: var(--current-font-size);
+    --current-font-size: var(--theme-large-font-size); }
+    @media screen and (min-width: 0px) {
+      .editor-styles-wrapper .has-large-font-size {
+        --theme-large-font-size-diff: calc(0px + 29 * ((100vw - 0px) / 1200)); } }
+    @media screen and (min-width: 1200px) {
+      .editor-styles-wrapper .has-large-font-size {
+        --theme-large-font-size-diff: 29px; } }
+  .editor-styles-wrapper .has-huge-font-size {
+    --theme-huge-font-size-diff: 0px;
+    --theme-huge-font-size: calc( var(--theme-minimum-font-size) + var(--theme-huge-font-size-diff) );
+    font-size: var(--current-font-size);
+    --current-font-size: var(--theme-huge-font-size); }
+    @media screen and (min-width: 0px) {
+      .editor-styles-wrapper .has-huge-font-size {
+        --theme-huge-font-size-diff: calc(0px + 63 * ((100vw - 0px) / 1200)); } }
+    @media screen and (min-width: 1200px) {
+      .editor-styles-wrapper .has-huge-font-size {
+        --theme-huge-font-size-diff: 63px; } }
+  .editor-styles-wrapper .has-text-align-left {
+    text-align: left; }
+  .editor-styles-wrapper .has-text-align-center {
+    text-align: center; }
+  .editor-styles-wrapper .has-text-align-right {
+    text-align: right; }
   .editor-styles-wrapper .block-library-list {
     /* Lists */
     /* Nested unordered lists */

@@ -3,7 +3,7 @@
     --nova-content-width-wide: calc(50vw + var(--nova-content-width-normal) / 2 - var(--nova-wrapper-side-spacing));
     --theme-minimum-font-size: #{$nova-minimum-font-size};
 
-    @include above($nova-minimum-font-size * 100) {
+    @include above($nova-minimum-font-size * 75) {
         --theme-minimum-font-size: 1vw;
     }
 
@@ -28,14 +28,14 @@
 
     @include define-font(heading-2, (
         font-family: var(--theme-headings-font-family),
-        font-size: 28.6px,
+        font-size: 29px,
         font-weight: 700,
         line-height: 1.25,
     ));
 
     @include define-font(heading-3, (
         font-family: var(--theme-headings-font-family),
-        font-size: 21.4px,
+        font-size: 22px,
         font-weight: 700,
         line-height: 1.25,
         letter-spacing: -0.01em,

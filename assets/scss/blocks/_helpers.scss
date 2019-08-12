@@ -37,11 +37,12 @@ $wp-colors: (
 }
 
 $wp-font-sizes: (
-    small: 13px,
-    normal: 16px,
-    medium: 20px,
-    large: 36px,
-    huge: 48px,
+    tiny: 13px,
+    small: 16px,
+    normal: 22px,
+    medium: 29px,
+    large: 45px,
+    huge: 79px,
 );
 
 /* Font Size Helper Classes */
@@ -49,8 +50,8 @@ $wp-font-sizes: (
 
     .has-#{$name}-font-size {
         $font-name: has-#{$name}-font-size;
-        @include define-font(#{$font-name}, (font-size: $font-size));
-        @include apply-font(#{$font-name});
+        @include define-font(#{$name}, (font-size: $font-size), font-size);
+        @include apply-font(#{$name}, font-size);
     }
 }
 
