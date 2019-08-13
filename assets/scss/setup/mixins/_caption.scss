@@ -1,0 +1,25 @@
+@mixin caption {
+    @include apply-font(small, font-size);
+}
+
+@mixin caption-overlay {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    padding: 0.5em 0.75em;
+    overflow: hidden;
+
+    color: var(--nova-light-1);
+    white-space: nowrap;
+    transform: translateZ(0);
+
+    &:after {
+        content: "";
+        @include stretch;
+        opacity: 0.6;
+        z-index: -1;
+        background: var(--nova-dark-2);
+    }
+}

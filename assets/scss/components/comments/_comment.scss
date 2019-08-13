@@ -9,13 +9,14 @@
 }
 
 .comment__avatar {
-    margin-right: 20px;
+    margin-right: var(--nova-comment-avatar-spacing);
+    max-width: var(--nova-comment-avatar-width);
     flex: 0 0 auto;
     overflow: hidden;
 }
 
 .comment__body {
-    @include space-children-y(0.5rem);
+    @include space-children-y(var(--nova-comment-body-spacing));
     flex-grow: 1;
 }
 
@@ -36,9 +37,9 @@
 }
 
 .comment__metadata {
-    margin-left: 0.5em;
+    margin-left: var(--nova-comment-metadata-spacing);
 }
 
 .comment__content {
-    @include space-children-y(var(--nova-element-spacing));
+    @include space-children-y(var(--nova-comment-content-spacing));
 }

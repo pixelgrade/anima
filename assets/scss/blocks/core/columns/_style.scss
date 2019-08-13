@@ -5,3 +5,7 @@
     --theme-column-spacing: var(--nova-element-spacing);
     grid-gap: var(--theme-column-spacing);
 }
+
+.wp-block-column {
+    @include space-children-y(var(--nova-element-spacing));
+}

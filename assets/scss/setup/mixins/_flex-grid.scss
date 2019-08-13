@@ -1,16 +1,16 @@
-@mixin grid($gap: var(--block-grid-spacing)) {
+@mixin flex-grid($gap: var(--block-grid-spacing)) {
     display: flex;
     flex-wrap: wrap;
 }
 
-@mixin grid-count($number, $gap: var(--block-grid-spacing)) {
+@mixin flex-grid-count($number, $gap: var(--block-grid-spacing)) {
     > * {
-        @include grid-item($gap);
-        @include grid-item-count($number);
+        @include flex-grid-item($gap);
+        @include flex-grid-item-count($number);
     }
 }
 
-@mixin grid-item($gap: var(--block-grid-spacing)) {
+@mixin flex-grid-item($gap: var(--block-grid-spacing)) {
     flex: 0 1 auto;
 
     margin-right: $gap;
@@ -21,7 +21,7 @@
     }
 }
 
-@mixin grid-item-count($number, $gap: var(--block-grid-spacing)) {
+@mixin flex-grid-item-count($number, $gap: var(--block-grid-spacing)) {
     width: calc((100% - #{$number - 1} * #{$gap})/#{$number});
 
     &:nth-child(-n + #{$number}) {

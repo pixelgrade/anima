@@ -6,17 +6,25 @@
 
     &.is-grid {
         list-style: none;
-        @include grid;
-        @include grid-count(2);
+        @include flex-grid;
+        @include flex-grid-count(2);
+
+        > li {
+            position: relative;
+            display: block;
+            padding: 2em;
+            text-align: center;
+            background: #EEE;
+        }
 
         a {
             display: block;
-            padding: 2em;
-
-            text-align: center;
             text-decoration: none;
 
-            background: #EEE;
+            &:after {
+                content: "";
+                @include stretch;
+            }
         }
     }
 }

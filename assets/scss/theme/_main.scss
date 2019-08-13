@@ -4,6 +4,14 @@
     @include apply-font(heading-3);
 }
 
+figure {
+    @include space-children-y( calc( var(--nova-element-spacing) / 4 ) );
+}
+
+figcaption {
+    @include caption;
+}
+
 pre,
 code {
     border: 1px solid;
@@ -23,17 +31,14 @@ pre code {
     background: transparent;
 }
 
-.wp-block-cover-text {
-    @include apply-font(heading-2);
+blockquote {
+
 }
 
-h1, h2, h3, h4, h5, h6 {
+cite {
+    @include apply-font(normal, font-size);
+}
 
-    &:not(:first-child) {
-        margin-top: 1em;
-    }
-
-    &:not(:last-child) {
-        margin-bottom: 0.25em;
-    }
+.wp-block-cover-text {
+    @include apply-font(medium, font-size);
 }

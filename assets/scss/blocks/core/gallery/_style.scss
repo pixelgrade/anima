@@ -4,12 +4,12 @@
 
 .wp-block-gallery {
     list-style: none;
-    @include grid;
+    @include flex-grid;
 
     @for $i from 2 through 9 {
 
         &.columns-#{$i} {
-            @include grid-count($i);
+            @include flex-grid-count($i);
         }
     }
 
@@ -27,27 +27,7 @@
     }
 
     figcaption {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        overflow: hidden;
-
-        padding: 0.5em 0.75em;
-        color: #FFF;
-
-        font-size: 12px;
-        white-space: nowrap;
-
-        transform: translateZ(0);
-
-        &:after {
-            content: "";
-            @include stretch;
-            opacity: 0.6;
-            z-index: -1;
-            background: #000;
-        }
+        @include caption-overlay;
     }
 
     &.is-cropped {

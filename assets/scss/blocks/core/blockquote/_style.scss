@@ -1,8 +1,8 @@
 
-.wp-block-blockquote {
-    @include nova-blockquote;
+.wp-block-quote {
+    @include space-children-y(var(--nova-element-spacing));
 
     &.is-style-large {
-        @include nova-blockquote-large;
+        @include apply-font(large, font-size);
     }
 }
