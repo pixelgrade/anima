@@ -1,8 +1,20 @@
 {
   "name": "nova",
-  "dependencies": {
+  "scripts": {
+    "dev": "cross-env webpack --watch",
+    "build": "cross-env NODE_ENV=production webpack -p"
+  },
+  "devDependencies": {
+    "@wordpress/babel-preset-default": "^1.2.0",
+    "autoprefixer": "^9.6.1",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.3",
+    "babel-loader": "^7.1.4",
     "child_process": "^1.0.2",
+    "cross-env": "^5.2.0",
+    "css-loader": "^3.2.0",
     "del": "^5.0.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "fs": "0.0.1-security",
     "gulp": "^4.0.0",
     "gulp-exec": "^4.0.0",
@@ -11,6 +23,16 @@
     "gulp-replace": "^1.0.0",
     "gulp-rsync": "0.0.8",
     "gulp-sass": "^4.0.2",
-    "map-stream": "0.0.7"
+    "map-stream": "0.0.7",
+    "mini-css-extract-plugin": "^0.8.0",
+    "path": "^0.12.7",
+    "postcss-loader": "^3.0.0",
+    "raw-loader": "^3.1.0",
+    "sass-loader": "^7.3.1",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7"
+  },
+  "dependencies": {
+    "babel-preset-react": "^6.24.1"
   }
 }

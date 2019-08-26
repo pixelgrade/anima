@@ -14,12 +14,22 @@ add_action( 'enqueue_block_assets', 'novablocks_deregister_gutenberg_styles' );
 function novablocks_enqueue_theme_block_editor_assets() {
 	wp_enqueue_style( 'nova-adelle-sans', 'https://use.typekit.net/gsj4hyt.css', array(), wp_get_theme()->get( 'Version' ) );
 	wp_enqueue_style('nova-block-styles', get_template_directory_uri() . '/editor.css' );
+	wp_enqueue_style('nova-theme-styles', get_template_directory_uri() . '/dist/js/editor.blocks.css' );
+
+	wp_enqueue_script(
+		'nova-theme-js',
+		get_template_directory_uri() . '/dist/js/editor.blocks.js',
+		array( 'wp-blocks', 'wp-dom', 'wp-hooks' ),
+		false,
+		true
+	);
 }
 add_action( 'enqueue_block_editor_assets', 'novablocks_enqueue_theme_block_editor_assets' );
 
 function novablocks_scripts() {
 	wp_enqueue_style( 'nova-adelle-sans', 'https://use.typekit.net/gsj4hyt.css', array(), wp_get_theme()->get( 'Version' ) );
 	wp_enqueue_style( 'nova-style', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_style( 'nova-theme-styles', get_template_directory_uri() . '/dist/js/editor.blocks.css' );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
