@@ -120,3 +120,49 @@ if ( ! function_exists( 'pixelgrade_get_comments_toggle_checked_attribute' ) ) {
 		return apply_filters( 'pixelgrade_get_comments_toggle_checked_attribute', 'checked="checked"' );
 	}
 }
+
+if ( ! function_exists( 'rosa_alter_nova_hero_block_template' ) ) {
+    function rosa_alter_nova_hero_block_template( $settings ) {
+        $settings['hero']['template'] = array(
+		    array(
+			    'core/heading',
+			    array(
+				    'content' => 'Welcome',
+				    'align' => 'center',
+				    'level' => 1,
+			    ),
+		    ),
+	        array(
+		        'core/heading',
+		        array(
+			        'content' => 'The Rosa',
+			        'align' => 'center',
+			        'level' => 1,
+		        ),
+	        ),
+		    array(
+			    'core/separator',
+			    array(
+				    'classname' => 'is-style-line-flower',
+			    ),
+		    ),
+		    array(
+			    'core/paragraph',
+			    array(
+				    'content' => 'Ready to be opened',
+				    'align' => 'center',
+			    ),
+		    ),
+		    array(
+			    'core/button',
+			    array(
+				    'text' => 'Explore',
+				    'align' => 'center',
+			    ),
+		    ),
+	    );
+
+        return $settings;
+    }
+}
+add_filter( 'novablocks_block_editor_settings', 'rosa_alter_nova_hero_block_template' );
