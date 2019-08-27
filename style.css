@@ -48,16 +48,34 @@ Table of Contents
   --nova-cite-font-weight: 700;
   --nova-cite-color: var(--nova-color-1); }
 
+:root {
+  --theme-minimum-font-size: 16px; }
+  @media only screen and (min-width: 1200px) {
+    :root {
+      --theme-minimum-font-size: 1.33333vw; } }
+
 /* Global CSS Custom Properties */
 :root {
+  --nova-content-width-normal: calc(40 * var(--theme-body-font-size));
+  --nova-content-width-wide: calc(50vw + var(--nova-content-width-normal) / 2 - var(--nova-wrapper-side-spacing));
   --nova-spacing-unit: 8px;
   --nova-wrapper-side-spacing: 24px;
   --nova-x-spacing: calc( 7 * var(--nova-spacing-unit) );
   --nova-y-spacing: calc( 7 * var(--nova-spacing-unit) );
-  --theme-body-font-family: adelle-sans, sans-serif;
-  --theme-headings-font-family: adelle-sans, sans-serif;
+  --theme-sm-color-1: #DDAB5D;
+  --theme-sm-color-2: #39497C;
+  --theme-sm-color-3: #B12C4A;
+  --theme-sm-dark-1: #252525;
+  --theme-sm-dark-2: #484B59;
+  --theme-sm-dark-3: #212B49;
+  --theme-sm-light-1: #FFFFFF;
+  --theme-sm-light-2: #CCCCCC;
+  --theme-sm-light-3: #EEEEEE;
+  --theme-body-font-family: Cabin, sans-serif;
+  --theme-headings-font-family: Source Sans Pro, sans-serif;
+  --theme-headings-alt-font-family: Herr Von Muellerhoff, cursive;
   --theme-body-font-size: 16px;
-  --theme-content-font-size: 22px;
+  --theme-content-font-size: 18px;
   --nova-element-spacing: var(--nova-element-spacing-normal);
   --nova-element-spacing-normal: calc( 1.5 * var(--theme-body-font-size) );
   --nova-element-spacing-large: calc( 2.5 * var(--theme-body-font-size) );
@@ -385,8 +403,8 @@ body {
   font-family: var(--theme-body-font-family);
   font-size: var(--theme-body-font-size);
   line-height: 1.5;
-  color: var(--nova-dark-1);
-  background-color: var(--nova-light-1); }
+  color: var(--theme-sm-dark-2);
+  background-color: var(--theme-sm-light-1); }
 
 /* Media */
 img,
@@ -1775,93 +1793,134 @@ label {
 /* 4.1. Single Post */
 /* 5. Theming */
 :root {
-  --nova-content-width-normal: calc(35 * var(--theme-body-font-size));
-  --nova-content-width-wide: calc(50vw + var(--nova-content-width-normal) / 2 - var(--nova-wrapper-side-spacing));
-  --theme-minimum-font-size: 16px; }
-  @media only screen and (min-width: 1200px) {
+  --theme-button-font-family: var(--theme-body-font-family);
+  --theme-button-line-height: 1;
+  --theme-button-font-weight: 700;
+  --theme-button-letter-spacing: 0.1em;
+  --theme-button-text-transform: uppercase;
+  --theme-button-font-size-diff: 0px;
+  --theme-button-font-size: calc( var(--theme-minimum-font-size) + var(--theme-button-font-size-diff) ); }
+  @media screen and (min-width: 0px) {
     :root {
-      --theme-minimum-font-size: 1vw; } }
-  :root {
-    --theme-body-font-size-diff: 0px;
-    --theme-body-font-size: calc( var(--theme-minimum-font-size) + var(--theme-body-font-size-diff) ); }
-    @media screen and (min-width: 0px) {
-      :root {
-        --theme-body-font-size-diff: calc(0px + 6 * ((100vw - 0px) / 1200)); } }
-    @media screen and (min-width: 1200px) {
-      :root {
-        --theme-body-font-size-diff: 6px; } }
-  :root {
-    --theme-display-font-family: var(--theme-headings-font-family);
-    --theme-display-line-height: 1.05;
-    --theme-display-font-weight: 700;
-    --theme-display-font-size-diff: 0px;
-    --theme-display-font-size: calc( var(--theme-minimum-font-size) + var(--theme-display-font-size-diff) ); }
-    @media screen and (min-width: 0px) {
-      :root {
-        --theme-display-font-size-diff: calc(0px + 63 * ((100vw - 0px) / 1200)); } }
-    @media screen and (min-width: 1200px) {
-      :root {
-        --theme-display-font-size-diff: 63px; } }
-  :root {
-    --theme-heading-1-font-family: var(--theme-headings-font-family);
-    --theme-heading-1-line-height: 1.2;
-    --theme-heading-1-font-weight: 700;
-    --theme-heading-1-letter-spacing: -0.01em;
-    --theme-heading-1-font-size-diff: 0px;
-    --theme-heading-1-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-1-font-size-diff) ); }
-    @media screen and (min-width: 0px) {
-      :root {
-        --theme-heading-1-font-size-diff: calc(0px + 29 * ((100vw - 0px) / 1200)); } }
-    @media screen and (min-width: 1200px) {
-      :root {
-        --theme-heading-1-font-size-diff: 29px; } }
-  :root {
-    --theme-heading-2-font-family: var(--theme-headings-font-family);
-    --theme-heading-2-line-height: 1.25;
-    --theme-heading-2-font-weight: 700;
-    --theme-heading-2-font-size-diff: 0px;
-    --theme-heading-2-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-2-font-size-diff) ); }
-    @media screen and (min-width: 0px) {
-      :root {
-        --theme-heading-2-font-size-diff: calc(0px + 13 * ((100vw - 0px) / 1200)); } }
-    @media screen and (min-width: 1200px) {
-      :root {
-        --theme-heading-2-font-size-diff: 13px; } }
-  :root {
-    --theme-heading-3-font-family: var(--theme-headings-font-family);
-    --theme-heading-3-line-height: 1.25;
-    --theme-heading-3-font-weight: 700;
-    --theme-heading-3-letter-spacing: -0.01em;
-    --theme-heading-3-font-size-diff: 0px;
-    --theme-heading-3-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-3-font-size-diff) ); }
-    @media screen and (min-width: 0px) {
-      :root {
-        --theme-heading-3-font-size-diff: calc(0px + 6 * ((100vw - 0px) / 1200)); } }
-    @media screen and (min-width: 1200px) {
-      :root {
-        --theme-heading-3-font-size-diff: 6px; } }
-  :root {
-    --theme-heading-5-font-family: var(--theme-headings-font-family);
-    --theme-heading-5-font-weight: 700;
-    --theme-heading-5-text-transform: uppercase;
-    --theme-heading-5-font-size-diff: 0px;
-    --theme-heading-5-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-5-font-size-diff) ); }
-    @media screen and (min-width: 0px) {
-      :root {
-        --theme-heading-5-font-size-diff: calc(0px + 0 * ((100vw - 0px) / 1200)); } }
-    @media screen and (min-width: 1200px) {
-      :root {
-        --theme-heading-5-font-size-diff: 0px; } }
-  :root {
-    --theme-intro-font-family: var(--theme-headings-font-family);
-    --theme-intro-font-size-diff: 0px;
-    --theme-intro-font-size: calc( var(--theme-minimum-font-size) + var(--theme-intro-font-size-diff) ); }
-    @media screen and (min-width: 0px) {
-      :root {
-        --theme-intro-font-size-diff: calc(0px + 10 * ((100vw - 0px) / 1200)); } }
-    @media screen and (min-width: 1200px) {
-      :root {
-        --theme-intro-font-size-diff: 10px; } }
+      --theme-button-font-size-diff: calc(0px + 2 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
+    :root {
+      --theme-button-font-size-diff: -2px; } }
+
+.wp-block-button {
+  --nova-button-padding: 0.55em 0.75em 0.55em 0.85em;
+  --nova-button-border-radius: 0.2em; }
+
+:root {
+  --theme-body-font-size-diff: 0px;
+  --theme-body-font-size: calc( var(--theme-minimum-font-size) + var(--theme-body-font-size-diff) ); }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-body-font-size-diff: calc(0px + 2 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
+    :root {
+      --theme-body-font-size-diff: 2px; } }
+
+:root {
+  --theme-display-font-family: var(--theme-headings-font-family);
+  --theme-display-line-height: 1;
+  --theme-display-font-weight: 900;
+  --theme-display-letter-spacing: 0.1em;
+  --theme-display-text-transform: uppercase;
+  --theme-display-font-size-diff: 0px;
+  --theme-display-font-size: calc( var(--theme-minimum-font-size) + var(--theme-display-font-size-diff) ); }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-display-font-size-diff: calc(0px + 44 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
+    :root {
+      --theme-display-font-size-diff: 44px; } }
+
+:root {
+  --theme-heading-1-font-family: var(--theme-headings-font-family);
+  --theme-heading-1-line-height: 1;
+  --theme-heading-1-font-weight: 900;
+  --theme-heading-1-letter-spacing: 0.1em;
+  --theme-heading-1-text-transform: uppercase;
+  --theme-heading-1-font-size-diff: 0px;
+  --theme-heading-1-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-1-font-size-diff) ); }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-heading-1-font-size-diff: calc(0px + 31 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
+    :root {
+      --theme-heading-1-font-size-diff: 31px; } }
+
+:root {
+  --theme-heading-2-font-family: var(--theme-headings-font-family);
+  --theme-heading-2-line-height: 1.13;
+  --theme-heading-2-font-weight: 600;
+  --theme-heading-2-letter-spacing: 0.1em;
+  --theme-heading-2-text-transform: uppercase;
+  --theme-heading-2-font-size-diff: 0px;
+  --theme-heading-2-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-2-font-size-diff) ); }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-heading-2-font-size-diff: calc(0px + 16 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
+    :root {
+      --theme-heading-2-font-size-diff: 16px; } }
+
+:root {
+  --theme-heading-3-font-family: var(--theme-headings-font-family);
+  --theme-heading-3-line-height: 1.5;
+  --theme-heading-3-font-weight: 600;
+  --theme-heading-3-letter-spacing: 0.1em;
+  --theme-heading-3-text-transform: uppercase;
+  --theme-heading-3-font-size-diff: 0px;
+  --theme-heading-3-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-3-font-size-diff) ); }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-heading-3-font-size-diff: calc(0px + 8 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
+    :root {
+      --theme-heading-3-font-size-diff: 8px; } }
+
+:root {
+  --theme-heading-4-font-family: var(--theme-headings-font-family);
+  --theme-heading-4-line-height: 1.5;
+  --theme-heading-4-font-weight: 600;
+  --theme-heading-4-letter-spacing: 0.1em;
+  --theme-heading-4-text-transform: uppercase;
+  --theme-heading-4-font-size-diff: 0px;
+  --theme-heading-4-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-4-font-size-diff) ); }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-heading-4-font-size-diff: calc(0px + 3 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
+    :root {
+      --theme-heading-4-font-size-diff: 3px; } }
+
+:root {
+  --theme-heading-5-font-family: var(--theme-headings-font-family);
+  --theme-heading-5-line-height: 1.5;
+  --theme-heading-5-font-weight: 600;
+  --theme-heading-5-letter-spacing: 0.32em;
+  --theme-heading-5-text-transform: uppercase;
+  --theme-heading-5-font-size-diff: 0px;
+  --theme-heading-5-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-5-font-size-diff) ); }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-heading-5-font-size-diff: calc(0px + 2 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
+    :root {
+      --theme-heading-5-font-size-diff: 2px; } }
+
+:root {
+  --theme-intro-font-family: var(--theme-headings-font-family);
+  --theme-intro-font-size-diff: 0px;
+  --theme-intro-font-size: calc( var(--theme-minimum-font-size) + var(--theme-intro-font-size-diff) ); }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-intro-font-size-diff: calc(0px + 10 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
+    :root {
+      --theme-intro-font-size-diff: 10px; } }
 
 h1 {
   font-family: var(--current-font-family);
@@ -1876,7 +1935,7 @@ h1 {
   --current-font-weight: var(--theme-heading-1-font-weight);
   --current-letter-spacing: var(--theme-heading-1-letter-spacing);
   --current-text-transform: var(--theme-heading-1-text-transform);
-  color: var(--nova-dark-1); }
+  color: var(--theme-sm-dark-1); }
 
 h2 {
   font-family: var(--current-font-family);
@@ -1891,10 +1950,9 @@ h2 {
   --current-font-weight: var(--theme-heading-2-font-weight);
   --current-letter-spacing: var(--theme-heading-2-letter-spacing);
   --current-text-transform: var(--theme-heading-2-text-transform);
-  color: var(--nova-dark-1); }
+  color: var(--theme-sm-dark-1); }
 
-h3,
-h4 {
+h3 {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
   line-height: var(--current-line-height);
@@ -1907,7 +1965,22 @@ h4 {
   --current-font-weight: var(--theme-heading-3-font-weight);
   --current-letter-spacing: var(--theme-heading-3-letter-spacing);
   --current-text-transform: var(--theme-heading-3-text-transform);
-  color: var(--nova-dark-1); }
+  color: var(--theme-sm-dark-1); }
+
+h4 {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  --current-font-family: var(--theme-heading-4-font-family);
+  --current-font-size: var(--theme-heading-4-font-size);
+  --current-line-height: var(--theme-heading-4-line-height);
+  --current-font-weight: var(--theme-heading-4-font-weight);
+  --current-letter-spacing: var(--theme-heading-4-letter-spacing);
+  --current-text-transform: var(--theme-heading-4-text-transform);
+  color: var(--theme-sm-dark-1); }
 
 h5,
 h6 {
@@ -1923,7 +1996,7 @@ h6 {
   --current-font-weight: var(--theme-heading-5-font-weight);
   --current-letter-spacing: var(--theme-heading-5-letter-spacing);
   --current-text-transform: var(--theme-heading-5-text-transform);
-  color: var(--nova-color-1); }
+  color: var(--theme-sm-dark-1); }
 
 h1:not(:first-child), h2:not(:first-child), h3:not(:first-child), h4:not(:first-child), h5:not(:first-child), h6:not(:first-child) {
   margin-top: 1em; }
@@ -1968,12 +2041,12 @@ h1.entry-title {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
-  --current-font-family: var(--theme-heading-3-font-family);
-  --current-font-size: var(--theme-heading-3-font-size);
-  --current-line-height: var(--theme-heading-3-line-height);
-  --current-font-weight: var(--theme-heading-3-font-weight);
-  --current-letter-spacing: var(--theme-heading-3-letter-spacing);
-  --current-text-transform: var(--theme-heading-3-text-transform); }
+  --current-font-family: var(--theme-button-font-family);
+  --current-font-size: var(--theme-button-font-size);
+  --current-line-height: var(--theme-button-line-height);
+  --current-font-weight: var(--theme-button-font-weight);
+  --current-letter-spacing: var(--theme-button-letter-spacing);
+  --current-text-transform: var(--theme-button-text-transform); }
 
 figure > :not(:first-child) {
   margin-top: calc( var(--nova-element-spacing) / 4); }

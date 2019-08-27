@@ -2,6 +2,8 @@
 :root {
 
     // LAYOUT
+    --nova-content-width-normal: calc(40 * var(--theme-body-font-size));
+    --nova-content-width-wide: calc(50vw + var(--nova-content-width-normal) / 2 - var(--nova-wrapper-side-spacing));
 
     // spacing unit
     --nova-spacing-unit: 8px;
@@ -17,6 +19,18 @@
     --nova-x-spacing: calc( 7 * var(--nova-spacing-unit) );
     --nova-y-spacing: calc( 7 * var(--nova-spacing-unit) );
 
+    // ===========================================
+    //     COLORS
+    // -------------------------------------------
+    --theme-sm-color-1: #{$theme-sm-color-1};
+    --theme-sm-color-2: #{$theme-sm-color-2};
+    --theme-sm-color-3: #{$theme-sm-color-3};
+    --theme-sm-dark-1: #{$theme-sm-dark-1};
+    --theme-sm-dark-2: #{$theme-sm-dark-2};
+    --theme-sm-dark-3: #{$theme-sm-dark-3};
+    --theme-sm-light-1: #{$theme-sm-light-1};
+    --theme-sm-light-2: #{$theme-sm-light-2};
+    --theme-sm-light-3: #{$theme-sm-light-3};
 
     // ===========================================
     //     TYPOGRAPHY
@@ -24,13 +38,14 @@
 
     //     font families
     // -------------------------------------------
-    --theme-body-font-family: adelle-sans, sans-serif;
-    --theme-headings-font-family: adelle-sans, sans-serif;
+    --theme-body-font-family: #{$theme-body-font-family};
+    --theme-headings-font-family: #{$theme-headings-font-family};
+    --theme-headings-alt-font-family: #{$theme-headings-alt-font-family};
 
     //     font sizes
     // -------------------------------------------
-    --theme-body-font-size: #{$nova-minimum-font-size};
-    --theme-content-font-size: #{$nova-content-font-size};
+    --theme-body-font-size: #{$theme-minimum-font-size};
+    --theme-content-font-size: #{$theme-content-font-size};
     // ===========================================
 
     // -------------------------------------------

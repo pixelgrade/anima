@@ -1,4 +1,14 @@
 $nova-font-props: font-family, font-size, line-height, font-weight, letter-spacing, text-transform;
+$nova-font-size-breakpoint: 1200px;
+$nova-font-size-minimum-vw: 100vw * $theme-minimum-font-size / $nova-font-size-breakpoint;
+
+:root {
+    --theme-minimum-font-size: #{$theme-minimum-font-size};
+
+    @include above($nova-font-size-breakpoint) {
+        --theme-minimum-font-size: #{$nova-font-size-minimum-vw};
+    }
+}
 
 @mixin define-font($name, $config, $props: $nova-font-props) {
 
@@ -13,9 +23,9 @@ $nova-font-props: font-family, font-size, line-height, font-weight, letter-spaci
                 }
             }
 
-            $diff: map-get($config, font-size) - $nova-minimum-font-size;
+            $diff: map-get($config, font-size) - $theme-minimum-font-size;
 
-            @include fluid(--theme-#{$name}-font-size-diff, 0px, 0px, $nova-minimum-font-size * 75, $diff);
+            @include fluid(--theme-#{$name}-font-size-diff, 0px, 0px, $nova-font-size-breakpoint, $diff);
 
             --theme-#{$name}-font-size: calc( var(--theme-minimum-font-size) + var(--theme-#{$name}-font-size-diff) );
         }
