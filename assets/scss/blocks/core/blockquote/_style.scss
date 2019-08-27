@@ -1,8 +1,12 @@
+$enable-blockquote-block-styles:        true !default;
 
-.wp-block-quote {
-    @include space-children-y(var(--nova-element-spacing));
+@if $enable-blockquote-block-styles == true {
+    /* Blockquote Block */
+    .wp-block-quote {
+        @include space-children-y(var(--nova-element-spacing));
 
-    &.is-style-large {
-        @include apply-font(large, font-size);
+        &.is-style-large {
+            @include apply-font(large, font-size);
+        }
     }
 }

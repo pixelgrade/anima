@@ -1,55 +1,60 @@
-.wp-block-cover {
-    position: relative;
+$enable-cover-block-styles:             true !default;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+@if $enable-cover-block-styles == true {
+    /* Cover Block */
+    .wp-block-cover {
+        position: relative;
 
-    padding: 2em;
-    min-height: 430px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-    text-align: center;
+        padding: 2em;
+        min-height: 430px;
 
-    color: #FFFFFF;
-    background-color: #000000;
-    background-size: cover;
+        text-align: center;
 
-    a {
-        color: inherit;
-    }
+        color: #FFFFFF;
+        background-color: #000000;
+        background-size: cover;
 
-    &.has-background-dim:before {
-        content: "";
-        @include stretch;
-        z-index: 200;
-        background-color: inherit;
-        opacity: 0.5;
-    }
+        a {
+            color: inherit;
+        }
 
-    @for $i from 1 through 10 {
-        &.has-background-dim-#{$i * 10}:before {
-            opacity: $i/10;
+        &.has-background-dim:before {
+            content: "";
+            @include stretch;
+            z-index: 200;
+            background-color: inherit;
+            opacity: 0.5;
+        }
+
+        @for $i from 1 through 10 {
+            &.has-background-dim-#{$i * 10}:before {
+                opacity: $i/10;
+            }
+        }
+
+        &.has-parallax {
+            background-attachment: fixed;
         }
     }
 
-    &.has-parallax {
-        background-attachment: fixed;
+    .wp-block-cover-text {
+        color: inherit;
     }
-}
 
-.wp-block-cover-text {
-    color: inherit;
-}
+    //.wp-block-cover-text,
+    //.wp-block-cover__inner-container,
+    .wp-block-cover > * {
+        position: relative;
+        z-index: 300;
+    }
 
-//.wp-block-cover-text,
-//.wp-block-cover__inner-container,
-.wp-block-cover > * {
-    position: relative;
-    z-index: 300;
-}
-
-.wp-block-cover__video-background {
-    @include stretch;
-    object-fit: cover;
-    z-index: 100;
+    .wp-block-cover__video-background {
+        @include stretch;
+        object-fit: cover;
+        z-index: 100;
+    }
 }

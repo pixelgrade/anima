@@ -1,29 +1,34 @@
-.wp-block-latest-posts[class] {
-    padding-left: 0;
-}
+$enable-latest-posts-block-styles:      true !default;
 
-.wp-block-latest-posts__list {
+@if $enable-latest-posts-block-styles == true {
+    /* Latest Posts Block */
+    .wp-block-latest-posts[class] {
+        padding-left: 0;
+    }
 
-    &.is-grid {
-        list-style: none;
-        @include flex-grid;
-        @include flex-grid-count(2);
+    .wp-block-latest-posts__list {
 
-        > li {
-            position: relative;
-            display: block;
-            padding: 2em;
-            text-align: center;
-            background: #EEE;
-        }
+        &.is-grid {
+            list-style: none;
+            @include flex-grid;
+            @include flex-grid-count(2);
 
-        a {
-            display: block;
-            text-decoration: none;
+            > li {
+                position: relative;
+                display: block;
+                padding: 2em;
+                text-align: center;
+                background: #EEE;
+            }
 
-            &:after {
-                content: "";
-                @include stretch;
+            a {
+                display: block;
+                text-decoration: none;
+
+                &:after {
+                    content: "";
+                    @include stretch;
+                }
             }
         }
     }

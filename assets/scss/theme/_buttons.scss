@@ -12,3 +12,39 @@
     --nova-button-border-radius: 0.2em;
 }
 
+.wp-block-button:not(.is-style-text) {
+
+    .wp-block-button__link {
+        @include button-base;
+        @include button-theme;
+
+        &:not(.has-background) {
+            @include button-background;
+        }
+
+        &:not(.has-text-color) {
+            @include button-color;
+        }
+    }
+}
+
+.wp-block-button.is-style-primary {
+    --nova-button-background-color: var(--theme-sm-color-1);
+    --nova-button-hover-background-color: var(--theme-sm-dark-1);
+}
+
+.wp-block-button.is-style-text {
+    --nova-button-color: var(--theme-sm-color-1);
+    --nova-button-background-color: transparent;
+    --nova-button-hover-color: var(--theme-sm-color-1);
+    --nova-button-hover-background-color: transparent;
+    --nova-button-border-radius: 0;
+
+    .wp-block-button__link {
+        padding: 0 !important;
+        background: none !important;
+
+        border-width: 0;
+        border-bottom: 0.1em solid;
+    }
+}

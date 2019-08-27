@@ -1,11 +1,17 @@
-.wp-block-columns {
-    display: grid;
-    grid-template-columns: repeat( auto-fit, minmax(100px, 1fr) );
+$enable-columns-block-styles:           true !default;
 
-    --theme-column-spacing: var(--nova-element-spacing);
-    grid-gap: var(--theme-column-spacing);
-}
+@if $enable-columns-block-styles == true {
 
-.wp-block-column {
-    @include space-children-y(var(--nova-element-spacing));
+    /* Columns Blocks */
+    .wp-block-columns {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+
+        --theme-column-spacing: var(--nova-element-spacing);
+        grid-gap: var(--theme-column-spacing);
+    }
+
+    .wp-block-column {
+        @include space-children-y(var(--nova-element-spacing));
+    }
 }

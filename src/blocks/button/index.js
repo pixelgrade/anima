@@ -4,6 +4,11 @@ wp.domReady( () => {
 	wp.blocks.unregisterBlockStyle( 'core/button', 'squared' );
 
 	wp.blocks.registerBlockStyle( 'core/button', {
+		name: 'primary',
+		label: 'Primary',
+	} );
+
+	wp.blocks.registerBlockStyle( 'core/button', {
 		name: 'text',
 		label: 'Text',
 	} );

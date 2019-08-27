@@ -1,14 +1,17 @@
-/*
-.wp-block-separator {
-    border: 0;
-    border-top: 1px solid;
+$enable-separator-block-styles: true !default;
 
-    &:not(.is-style-wide) {
-        width: 20em;
-    }
+@if $enable-separator-block-styles == true {
+    /* Separator Block */
+    .wp-block-separator {
+        border: 0;
+        border-top: 1px solid;
 
-    &.is-style-dots {
-        border-top-style: dotted;
+        &:not(.is-style-wide) {
+            width: 20em;
+        }
+
+        &.is-style-dots {
+            border-top-style: dotted;
+        }
     }
 }
-*/

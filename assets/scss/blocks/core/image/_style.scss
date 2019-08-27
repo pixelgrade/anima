@@ -1,7 +1,12 @@
-.wp-block-image {
-    @include space-children-y(calc(var(--nova-element-spacing)/4));
+$enable-image-block-styles:             true !default;
 
-    img {
-        display: block;
+@if $enable-image-block-styles == true {
+    /* Image Block */
+    .wp-block-image {
+        @include space-children-y(calc(var(--nova-element-spacing) / 4));
+
+        img {
+            display: block;
+        }
     }
 }

@@ -28,11 +28,11 @@ Table of Contents
 */
 /* Button CSS Custom Properties */
 :root {
-  --nova-button-background-color: var(--nova-color-2);
-  --nova-button-color: var(--nova-dark-2);
+  --nova-button-background-color: var(--theme-sm-dark-1);
+  --nova-button-color: var(--theme-sm-light-1);
   --nova-button-border-color: transparent;
-  --nova-button-hover-background-color: var(--nova-color-2);
-  --nova-button-hover-color: var(--nova-dark-2);
+  --nova-button-hover-background-color: var(--theme-sm-color-1);
+  --nova-button-hover-color: var(--theme-sm-light-1);
   --nova-button-hover-border-color: transparent;
   --nova-button-border-width: 2px;
   --nova-button-border-radius: 999em;
@@ -78,8 +78,7 @@ Table of Contents
   --theme-content-font-size: 18px;
   --nova-element-spacing: var(--nova-element-spacing-normal);
   --nova-element-spacing-normal: calc( 1.5 * var(--theme-body-font-size) );
-  --nova-element-spacing-large: calc( 2.5 * var(--theme-body-font-size) );
-  --nova-button-color: var(--nova-dark-2); }
+  --nova-element-spacing-large: calc( 2.5 * var(--theme-body-font-size) ); }
   @media only screen and (min-width: 1024px) {
     :root {
       --nova-wrapper-side-spacing: 48px; } }
@@ -515,11 +514,11 @@ label {
 [type="submit"],
 [type="reset"] {
   display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
   padding: var(--nova-button-padding);
   border: var(--nova-button-border-width) solid var(--nova-button-border-color);
   border-radius: var(--nova-button-border-radius);
-  text-decoration: none;
-  cursor: pointer;
   background-color: var(--nova-button-background-color);
   color: var(--nova-button-color); }
   [type="button"]:hover,
@@ -887,11 +886,11 @@ label {
 
 .c-comments-toggle__label {
   display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
   padding: var(--nova-button-padding);
   border: var(--nova-button-border-width) solid var(--nova-button-border-color);
   border-radius: var(--nova-button-border-radius);
-  text-decoration: none;
-  cursor: pointer;
   background-color: var(--nova-button-background-color);
   color: var(--nova-button-color);
   display: block;
@@ -1330,11 +1329,11 @@ label {
 .wp-block-button__link {
   display: inline-block;
   display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
   padding: var(--nova-button-padding);
   border: var(--nova-button-border-width) solid var(--nova-button-border-color);
-  border-radius: var(--nova-button-border-radius);
-  text-decoration: none;
-  cursor: pointer; }
+  border-radius: var(--nova-button-border-radius); }
   .wp-block-button__link:not(.has-background) {
     background-color: var(--nova-button-background-color); }
     .wp-block-button__link:not(.has-background):hover {
@@ -1588,7 +1587,7 @@ label {
 
 /* Image Block */
 .wp-block-image > :not(:first-child) {
-  margin-top: calc(var(--nova-element-spacing)/4); }
+  margin-top: calc(var(--nova-element-spacing) / 4); }
 
 .wp-block-image img {
   display: block; }
@@ -1709,12 +1708,12 @@ label {
   border: 0; }
 
 /*
-* Here we here not able to use a mobile first CSS approach.
-* Custom widths are set using inline styles, and on mobile,
-* we need 100% width, so we use important to overwrite the inline style.
-* If the style were set on mobile first, on desktop styles,
-* we would have no way of setting the style again to the inline style.
-*/
+    * Here we here not able to use a mobile first CSS approach.
+    * Custom widths are set using inline styles, and on mobile,
+    * we need 100% width, so we use important to overwrite the inline style.
+    * If the style were set on mobile first, on desktop styles,
+    * we would have no way of setting the style again to the inline style.
+    */
 @media (max-width: 600px) {
   .wp-block-media-text.is-stacked-on-mobile {
     grid-template-columns: 100% !important;
@@ -1730,21 +1729,6 @@ label {
   font-weight: var(--nova-cite-font-weight);
   color: var(--nova-cite-color); }
 
-/* Separator Block */
-/*
-.wp-block-separator {
-    border: 0;
-    border-top: 1px solid;
-
-    &:not(.is-style-wide) {
-        width: 20em;
-    }
-
-    &.is-style-dots {
-        border-top-style: dotted;
-    }
-}
-*/
 /* Table Block */
 /* Nova Blocks */
 .nova-media__content {
@@ -1810,6 +1794,35 @@ label {
 .wp-block-button {
   --nova-button-padding: 0.55em 0.75em 0.55em 0.85em;
   --nova-button-border-radius: 0.2em; }
+
+.wp-block-button:not(.is-style-text) .wp-block-button__link {
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer; }
+  .wp-block-button:not(.is-style-text) .wp-block-button__link:not(.has-background) {
+    background-color: var(--nova-button-background-color); }
+    .wp-block-button:not(.is-style-text) .wp-block-button__link:not(.has-background):hover {
+      background-color: var(--nova-button-hover-background-color); }
+  .wp-block-button:not(.is-style-text) .wp-block-button__link:not(.has-text-color) {
+    color: var(--nova-button-color); }
+    .wp-block-button:not(.is-style-text) .wp-block-button__link:not(.has-text-color):hover {
+      color: var(--nova-button-hover-color); }
+
+.wp-block-button.is-style-primary {
+  --nova-button-background-color: var(--theme-sm-color-1);
+  --nova-button-hover-background-color: var(--theme-sm-dark-1); }
+
+.wp-block-button.is-style-text {
+  --nova-button-color: var(--theme-sm-color-1);
+  --nova-button-background-color: transparent;
+  --nova-button-hover-color: var(--theme-sm-color-1);
+  --nova-button-hover-background-color: transparent;
+  --nova-button-border-radius: 0; }
+  .wp-block-button.is-style-text .wp-block-button__link {
+    padding: 0 !important;
+    background: none !important;
+    border-width: 0;
+    border-bottom: 0.1em solid; }
 
 :root {
   --theme-body-font-size-diff: 0px;
@@ -2034,7 +2047,7 @@ h1.entry-title {
 
 [type="button"],
 [type="submit"],
-[type="reset"], .c-comments-toggle__label, .wp-block-button__link {
+[type="reset"], .c-comments-toggle__label, .wp-block-button__link, .wp-block-button:not(.is-style-text) .wp-block-button__link {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
   line-height: var(--current-line-height);

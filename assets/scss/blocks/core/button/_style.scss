@@ -1,36 +1,43 @@
-.wp-block-button {
+$enable-button-block-styles:            true !default;
 
-    &.is-style-squared {
-        --nova-button-border-radius: 0;
-    }
+@if $enable-button-block-styles == true {
 
-    &.is-style-outline {
-        --nova-button-background-color: transparent;
-        --nova-button-color: currentColor;
-        --nova-button-border-color: currentColor;
+    /* Button Block */
+    .wp-block-button {
 
-        --nova-button-hover-background-color: transparent;
-        --nova-button-hover-color: currentColor;
-        --nova-button-hover-border-color: currentColor;
-    }
+        &.is-style-squared {
+            --nova-button-border-radius: 0;
+        }
 
-    @each $alignment in left, center, right {
-        &.align#{$alignment} {
-            text-align: #{$alignment};
+        &.is-style-outline {
+            --nova-button-background-color: transparent;
+            --nova-button-color: currentColor;
+            --nova-button-border-color: currentColor;
+
+            --nova-button-hover-background-color: transparent;
+            --nova-button-hover-color: currentColor;
+            --nova-button-hover-border-color: currentColor;
+        }
+
+        @each $alignment in left, center, right {
+            &.align#{$alignment} {
+                text-align: #{$alignment};
+            }
         }
     }
-}
 
-.wp-block-button__link {
-    display: inline-block;
-    @include button-base;
-    @include button-theme;
+    .wp-block-button__link {
+        display: inline-block;
+        @include button-base;
+        @include button-box;
+        @include button-theme;
 
-    &:not(.has-background) {
-        @include button-background;
-    }
+        &:not(.has-background) {
+            @include button-background;
+        }
 
-    &:not(.has-text-color) {
-        @include button-color;
+        &:not(.has-text-color) {
+            @include button-color;
+        }
     }
 }

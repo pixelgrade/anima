@@ -1,41 +1,46 @@
-:root {
-    --block-grid-spacing: 20px;
-}
+$enable-gallery-block-styles:           true !default;
 
-.wp-block-gallery {
-    list-style: none;
-    @include flex-grid;
+@if $enable-gallery-block-styles == true {
+    /* Gallery Block */
+    :root {
+        --block-grid-spacing: 20px;
+    }
 
-    @for $i from 2 through 9 {
+    .wp-block-gallery {
+        list-style: none;
+        @include flex-grid;
 
-        &.columns-#{$i} {
-            @include flex-grid-count($i);
+        @for $i from 2 through 9 {
+
+            &.columns-#{$i} {
+                @include flex-grid-count($i);
+            }
         }
-    }
-
-    img {
-        display: block;
-    }
-
-    figure {
-        position: relative;
-
-        display: flex;
-        align-items: flex-end;
-        justify-content: flex-start;
-        height: 100%;
-    }
-
-    figcaption {
-        @include caption-overlay;
-    }
-
-    &.is-cropped {
 
         img {
-            width: 100%;
+            display: block;
+        }
+
+        figure {
+            position: relative;
+
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
             height: 100%;
-            object-fit: cover;
+        }
+
+        figcaption {
+            @include caption-overlay;
+        }
+
+        &.is-cropped {
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
         }
     }
 }

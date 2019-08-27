@@ -1,11 +1,11 @@
 /* Button CSS Custom Properties */
 :root {
-    --nova-button-background-color: var(--nova-color-2);
-    --nova-button-color: var(--nova-dark-2);
+    --nova-button-background-color: var(--theme-sm-dark-1);
+    --nova-button-color: var(--theme-sm-light-1);
     --nova-button-border-color: transparent;
 
-    --nova-button-hover-background-color: var(--nova-color-2);
-    --nova-button-hover-color: var(--nova-dark-2);
+    --nova-button-hover-background-color: var(--theme-sm-color-1);
+    --nova-button-hover-color: var(--theme-sm-light-1);
     --nova-button-hover-border-color: transparent;
 
     --nova-button-border-width: 2px;
@@ -18,12 +18,14 @@
 
 @mixin button-base {
     display: inline-block;
-    padding: var(--nova-button-padding);
-    border: var(--nova-button-border-width) solid var(--nova-button-border-color);
-
-    border-radius: var(--nova-button-border-radius);
     text-decoration: none;
     cursor: pointer;
+}
+
+@mixin button-box {
+    padding: var(--nova-button-padding);
+    border: var(--nova-button-border-width) solid var(--nova-button-border-color);
+    border-radius: var(--nova-button-border-radius);
 }
 
 @mixin button-background {
@@ -48,6 +50,7 @@
 
 @mixin button {
     @include button-base;
+    @include button-box;
     @include button-background;
     @include button-color;
     @include button-theme;
