@@ -1,0 +1,33 @@
+// always display primary and secondary headlines on separate lines
+.c-headline__primary,
+.c-headline__secondary {
+    display: block;
+}
+
+// bring primary and secondary headlines closer together
+.c-headline__secondary + .c-headline__primary,
+.c-headline > .editor-rich-text + .editor-rich-text {
+    margin-top: -0.65em;
+}
+
+// raise secondary headline above primary
+.c-headline__secondary,
+.c-headline > .editor-rich-text:first-child {
+    position: relative;
+    z-index: 10;
+}
+
+.c-headline__secondary {
+    font-family: var(--theme-headings-alt-font-family);
+    font-weight: 400;
+    text-transform: none;
+    color: var(--theme-sm-color-1);
+    font-size: 2.127em;
+    letter-spacing: normal;
+
+    &::first-letter {
+        font-size: 1.22em;
+        line-height: (1/1.22);
+        letter-spacing: -0.07em;
+    }
+}

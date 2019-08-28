@@ -125,21 +125,14 @@ if ( ! function_exists( 'rosa_alter_nova_hero_block_template' ) ) {
     function rosa_alter_nova_hero_block_template( $settings ) {
         $settings['hero']['template'] = array(
 		    array(
-			    'core/heading',
+			    'novablocks/headline',
 			    array(
-				    'content' => 'Welcome',
+			        'primary' => 'The Rosa',
+				    'secondary' => 'Welcome',
 				    'align' => 'center',
 				    'level' => 1,
 			    ),
 		    ),
-	        array(
-		        'core/heading',
-		        array(
-			        'content' => 'The Rosa',
-			        'align' => 'center',
-			        'level' => 1,
-		        ),
-	        ),
 		    array(
 			    'core/separator',
 			    array(
@@ -147,10 +140,10 @@ if ( ! function_exists( 'rosa_alter_nova_hero_block_template' ) ) {
 			    ),
 		    ),
 		    array(
-			    'core/paragraph',
+			    'core/heading',
 			    array(
 				    'content' => 'Ready to be opened',
-				    'align' => 'center',
+				    'level' => '5',
 			    ),
 		    ),
 		    array(

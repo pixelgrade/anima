@@ -31,7 +31,6 @@
     }
 
     @import "elements/typography";
-    @import "blocks/helpers";
 
     .block-library-list {
 
@@ -48,6 +47,10 @@
     blockquote {
         margin: 0;
     }
+}
+
+.editor-styles-wrapper[class] {
+    @import "blocks/helpers";
 }
 
 /* Post Title Block */

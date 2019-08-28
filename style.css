@@ -77,7 +77,7 @@ Table of Contents
   --theme-body-font-size: 16px;
   --theme-content-font-size: 18px;
   --nova-element-spacing: var(--nova-element-spacing-normal);
-  --nova-element-spacing-normal: calc( 1.5 * var(--theme-body-font-size) );
+  --nova-element-spacing-normal: calc( 0.5 * var(--theme-body-font-size) );
   --nova-element-spacing-large: calc( 2.5 * var(--theme-body-font-size) ); }
   @media only screen and (min-width: 1024px) {
     :root {
@@ -1824,6 +1824,19 @@ label {
     border-width: 0;
     border-bottom: 0.1em solid; }
 
+.nova-hero .wp-block-button.is-style-default,
+.nova-hero .wp-block-button:not([class*="is-style"]) {
+  --nova-button-background-color: var(--theme-sm-light-1);
+  --nova-button-color: var(--theme-sm-dark-1);
+  --nova-button-hover-background-color: var(--theme-sm-color-1);
+  --nova-button-hover-color: var(--theme-sm-dark-1); }
+
+.nova-hero .wp-block-button.is-style-primary {
+  --nova-button-background-color: var(--theme-sm-color-1);
+  --nova-button-color: var(--theme-sm-dark-1);
+  --nova-button-hover-background-color: var(--theme-sm-light-1);
+  --nova-button-hover-color: var(--theme-sm-dark-1); }
+
 :root {
   --theme-body-font-size-diff: 0px;
   --theme-body-font-size: calc( var(--theme-minimum-font-size) + var(--theme-body-font-size-diff) ); }
@@ -2044,6 +2057,31 @@ h1.entry-title {
   --current-font-weight: var(--theme-display-font-weight);
   --current-letter-spacing: var(--theme-display-letter-spacing);
   --current-text-transform: var(--theme-display-text-transform); }
+
+.c-headline__primary,
+.c-headline__secondary {
+  display: block; }
+
+.c-headline__secondary + .c-headline__primary,
+.c-headline > .editor-rich-text + .editor-rich-text {
+  margin-top: -0.65em; }
+
+.c-headline__secondary,
+.c-headline > .editor-rich-text:first-child {
+  position: relative;
+  z-index: 10; }
+
+.c-headline__secondary {
+  font-family: var(--theme-headings-alt-font-family);
+  font-weight: 400;
+  text-transform: none;
+  color: var(--theme-sm-color-1);
+  font-size: 2.127em;
+  letter-spacing: normal; }
+  .c-headline__secondary::first-letter {
+    font-size: 1.22em;
+    line-height: 0.81967;
+    letter-spacing: -0.07em; }
 
 [type="button"],
 [type="submit"],

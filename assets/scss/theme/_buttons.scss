@@ -48,3 +48,21 @@
         border-bottom: 0.1em solid;
     }
 }
+
+.nova-hero {
+
+    .wp-block-button.is-style-default,
+    .wp-block-button:not([class*="is-style"]) {
+        --nova-button-background-color: var(--theme-sm-light-1);
+        --nova-button-color: var(--theme-sm-dark-1);
+        --nova-button-hover-background-color: var(--theme-sm-color-1);
+        --nova-button-hover-color: var(--theme-sm-dark-1);
+    }
+
+    .wp-block-button.is-style-primary {
+        --nova-button-background-color: var(--theme-sm-color-1);
+        --nova-button-color: var(--theme-sm-dark-1);
+        --nova-button-hover-background-color: var(--theme-sm-light-1);
+        --nova-button-hover-color: var(--theme-sm-dark-1);
+    }
+}

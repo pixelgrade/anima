@@ -12,7 +12,7 @@ function novablocks_deregister_gutenberg_styles() {
 add_action( 'enqueue_block_assets', 'novablocks_deregister_gutenberg_styles' );
 
 function novablocks_enqueue_theme_block_editor_assets() {
-	wp_enqueue_style( 'nova-adelle-sans', 'https://use.typekit.net/gsj4hyt.css', array(), wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_style( 'nova-google-webfonts', 'https://fonts.googleapis.com/css?family=Cabin:400,400i,700,700i|Herr+Von+Muellerhoff|Source+Sans+Pro:600,900&display=swap', array(), wp_get_theme()->get( 'Version' ) );
 	wp_enqueue_style('nova-block-styles', get_template_directory_uri() . '/editor.css' );
 	wp_enqueue_style('nova-theme-styles', get_template_directory_uri() . '/dist/js/editor.blocks.css' );
 
@@ -27,7 +27,7 @@ function novablocks_enqueue_theme_block_editor_assets() {
 add_action( 'enqueue_block_editor_assets', 'novablocks_enqueue_theme_block_editor_assets' );
 
 function novablocks_scripts() {
-	wp_enqueue_style( 'nova-adelle-sans', 'https://use.typekit.net/gsj4hyt.css', array(), wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_style( 'nova-google-webfonts', 'https://fonts.googleapis.com/css?family=Cabin:400,400i,700,700i|Herr+Von+Muellerhoff|Source+Sans+Pro:600,900&display=swap', array(), wp_get_theme()->get( 'Version' ) );
 	wp_enqueue_style( 'nova-style', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
 	wp_enqueue_style( 'nova-theme-styles', get_template_directory_uri() . '/dist/js/editor.blocks.css' );
 
