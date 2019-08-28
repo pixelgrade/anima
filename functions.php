@@ -31,8 +31,8 @@ function novablocks_scripts() {
 	wp_enqueue_style( 'nova-style', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
 	wp_enqueue_style( 'nova-theme-styles', get_template_directory_uri() . '/dist/js/editor.blocks.css' );
 
-	wp_register_script( 'nova-velocity-js', get_template_directory_uri() . '/vendor/velocity.min.js' );
-	wp_enqueue_script( 'nova-app', get_template_directory_uri() . '/dist/js/app.js', array( 'jquery', 'nova-velocity-js' ) );
+	wp_register_script( 'tween-max', '//cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js', array(), '2.1.3' );
+	wp_enqueue_script( 'nova-app', get_template_directory_uri() . '/dist/js/app.js', array( 'jquery', 'tween-max' ) );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
