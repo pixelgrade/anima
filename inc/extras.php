@@ -127,8 +127,8 @@ if ( ! function_exists( 'rosa_alter_nova_hero_block_template' ) ) {
 		    array(
 			    'novablocks/headline',
 			    array(
-			        'primary' => 'The Rosa',
 				    'secondary' => 'Welcome',
+			        'primary' => 'The Rosa',
 				    'align' => 'center',
 				    'level' => 1,
 			    ),
@@ -154,6 +154,39 @@ if ( ! function_exists( 'rosa_alter_nova_hero_block_template' ) ) {
 			    ),
 		    ),
 	    );
+
+        $settings['media']['template'] = array(
+	        array(
+		        'novablocks/headline',
+		        array(
+			        'secondary' => 'Discover',
+			        'primary' => 'Our Story',
+			        'align' => 'center',
+			        'level' => 1,
+		        ),
+	        ),
+	        array(
+		        'core/separator',
+		        array(
+                    'style' => 'flower',
+			        'classname' => 'is-style-flower',
+		        ),
+	        ),
+	        array(
+		        'core/paragraph',
+		        array(
+			        'content' => 'Rosa is a restaurant, bar and coffee roastery located on a busy corner site in Farringdon’s Exmouth Market. With glazed frontage on two sides of the building, overlooking the market and a bustling London intersection.',
+		        ),
+	        ),
+	        array(
+		        'core/button',
+		        array(
+			        'text' => 'About Us',
+			        'align' => 'center',
+                    'classname' => 'is-style-text'
+		        ),
+	        ),
+        );
 
         return $settings;
     }
