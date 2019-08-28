@@ -39,3 +39,13 @@ iframe.instagram-media {
     min-width: 0 !important;
     margin-right: 0 !important;
 }
+
+.nova-hero__inner-container {
+    > .c-headline:first-child .c-headline__primary,
+    > .c-headline:first-child .c-headline__secondary,
+    > :first-child:not(.c-headline),
+    > :not(:first-child) {
+        opacity: 0;
+        will-change: transform;
+    }
+}

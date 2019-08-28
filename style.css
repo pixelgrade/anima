@@ -2206,3 +2206,10 @@ iframe.instagram-media {
   max-width: 100% !important;
   min-width: 0 !important;
   margin-right: 0 !important; }
+
+.nova-hero__inner-container > .c-headline:first-child .c-headline__primary,
+.nova-hero__inner-container > .c-headline:first-child .c-headline__secondary,
+.nova-hero__inner-container > :first-child:not(.c-headline),
+.nova-hero__inner-container > :not(:first-child) {
+  opacity: 0;
+  will-change: transform; }
