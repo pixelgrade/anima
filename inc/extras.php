@@ -188,6 +188,12 @@ if ( ! function_exists( 'rosa_alter_nova_hero_block_template' ) ) {
 	        ),
         );
 
+        if ( ! empty( $settings['media']['blockAreaOptions'] ) ) {
+            $settings['media']['blockAreaOptions'] = array_filter( $settings['media']['blockAreaOptions'], function( $option ) {
+                return $option['value'] != 'highlighted';
+            } );
+        }
+
         return $settings;
     }
 }
