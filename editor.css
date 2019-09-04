@@ -44,6 +44,8 @@
   --theme-sm-light-1: #FFFFFF;
   --theme-sm-light-2: #CCCCCC;
   --theme-sm-light-3: #EEEEEE;
+  --theme-background-color: var(--theme-sm-light-1);
+  --theme-text-color: var(--theme-sm-dark-2);
   --theme-body-font-family: Cabin, sans-serif;
   --theme-headings-font-family: Source Sans Pro, sans-serif;
   --theme-headings-alt-font-family: Herr Von Muellerhoff, cursive;
@@ -883,8 +885,8 @@ ul.wp-block-categories__list[class] {
   /* Headings */
   /* Tables */ }
   .editor-styles-wrapper[class] {
-    color: var(--theme-sm-dark-2);
-    background-color: var(--theme-sm-light-1);
+    background-color: var(--theme-background-color);
+    color: var(--theme-text-color);
     font-family: var(--theme-body-font-family);
     font-size: var(--theme-content-font-size);
     line-height: 1.5; }

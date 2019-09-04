@@ -116,38 +116,38 @@ function novablocks_setup() {
 	/**
 	 * Add custom colors to the default Color palette control in the block editor
 	 */
-	add_theme_support( 'editor-color-palette', array(
-		array(
-			'name'  => __( 'Blue', '__theme_txtd' ),
-			'slug'  => 'nova-blue',
-			'color'	=> '#203AB6',
-		),
-		array(
-			'name'  => __( 'Yellow', '__theme_txtd' ),
-			'slug'  => 'nova-yellow',
-			'color' => '#FFE42E',
-		),
-		array(
-			'name'  => __( 'Almost Black', '__theme_txtd' ),
-			'slug'  => 'nova-almost-black',
-			'color' => '#000043',
-		),
-		array(
-			'name'  => __( 'Darkest Blue', '__theme_txtd' ),
-			'slug'  => 'nova-darkest-blue',
-			'color' => '#272743',
-		),
-		array(
-			'name'  => __( 'White', '__theme_txtd' ),
-			'slug'  => 'nova-white',
-			'color' => '#FFFFFF',
-		),
-		array(
-			'name'  => __( 'Gray', '__theme_txtd' ),
-			'slug'  => 'nova-gray',
-			'color' => '#EEF1F2',
-		),
-	) );
+//	add_theme_support( 'editor-color-palette', array(
+//		array(
+//			'name'  => __( 'Blue', '__theme_txtd' ),
+//			'slug'  => 'nova-blue',
+//			'color'	=> '#203AB6',
+//		),
+//		array(
+//			'name'  => __( 'Yellow', '__theme_txtd' ),
+//			'slug'  => 'nova-yellow',
+//			'color' => '#FFE42E',
+//		),
+//		array(
+//			'name'  => __( 'Almost Black', '__theme_txtd' ),
+//			'slug'  => 'nova-almost-black',
+//			'color' => '#000043',
+//		),
+//		array(
+//			'name'  => __( 'Darkest Blue', '__theme_txtd' ),
+//			'slug'  => 'nova-darkest-blue',
+//			'color' => '#272743',
+//		),
+//		array(
+//			'name'  => __( 'White', '__theme_txtd' ),
+//			'slug'  => 'nova-white',
+//			'color' => '#FFFFFF',
+//		),
+//		array(
+//			'name'  => __( 'Gray', '__theme_txtd' ),
+//			'slug'  => 'nova-gray',
+//			'color' => '#EEF1F2',
+//		),
+//	) );
 
 	add_theme_support( 'editor-font-sizes', array(
 		array(
@@ -181,6 +181,8 @@ function novablocks_setup() {
 			'slug'      => 'huge'
 		),
 	) );
+
+	add_theme_support( 'customizer_style_manager' );
 }
 add_action( 'after_setup_theme', 'novablocks_setup' );
 
