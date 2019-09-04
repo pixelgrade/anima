@@ -6,6 +6,6 @@ import Hero from './components/hero';
 	});
 
 	$(window).on('load', function() {
-		const HeroCollection = $( '.nova-hero' ).map( ( i, obj ) => new Hero( obj ) );
+		const HeroCollection = $( '.novablocks-hero' ).map( ( i, obj ) => new Hero( obj ) );
 	});
 })( jQuery );
