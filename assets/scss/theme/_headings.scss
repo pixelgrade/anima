@@ -1,58 +1,57 @@
 @include define-font(body, (
-    font-size: $theme-content-font-size,
+    font-family: unquote('Reforma1969, sans-serif'),
+));
+
+@include define-font(content, (
+    font-size: 18px,
 ));
 
 @include define-font(display, (
-    font-family: var(--theme-headings-font-family),
-    font-size: 60px,
-    line-height: 1,
-    font-weight: 900,
+    font-family: unquote('Reforma1969, sans-serif'),
+    font-size: 82px,
+    line-height: 1.03,
+    font-weight: 700,
     letter-spacing: 0.1em,
-    text-transform: uppercase,
 ));
 
 @include define-font(heading-1, (
-    font-family: var(--theme-headings-font-family),
-    font-size: 47px,
-    line-height: 1,
-    font-weight: 900,
+    font-family: unquote('Reforma1969, sans-serif'),
+    font-size: 66px,
+    line-height: 1.03,
+    font-weight: 700,
     letter-spacing: 0.1em,
-    text-transform: uppercase,
 ));
 
 @include define-font(heading-2, (
-    font-family: var(--theme-headings-font-family),
-    font-size: 32px,
-    font-weight: 600,
+    font-family: unquote('Reforma1918, sans-serif'),
+    font-size: 40px,
+    font-weight: 700,
     line-height: 1.13,
-    letter-spacing: 0.1em,
-    text-transform: uppercase,
+    letter-spacing: -0.02em,
 ));
 
 @include define-font(heading-3, (
-    font-family: var(--theme-headings-font-family),
-    font-size: 24px,
-    font-weight: 600,
-    line-height: 1.5,
-    letter-spacing: 0.1em,
-    text-transform: uppercase,
+    font-family: unquote('Reforma1918, sans-serif'),
+    font-size: 32px,
+    font-weight: 700,
+    line-height: 1.13,
+    letter-spacing: -0.02em,
 ));
 
 @include define-font(heading-4, (
-    font-family: var(--theme-headings-font-family),
-    font-size: 19px,
-    font-weight: 600,
-    line-height: 1.5,
-    letter-spacing: 0.1em,
-    text-transform: uppercase,
+    font-family: unquote('Reforma1918, sans-serif'),
+    font-size: 24px,
+    font-weight: 700,
+    line-height: 1.13,
+    letter-spacing: -0.02em,
 ));
 
 @include define-font(heading-5, (
-    font-family: var(--theme-headings-font-family),
-    font-size: 18px,
+    font-family: unquote('Archivo, sans-serif'),
+    font-size: 12px,
     font-weight: 600,
-    line-height: 1.5,
-    letter-spacing: 0.32em,
+    line-height: 2,
+    letter-spacing: 0.3em,
     text-transform: uppercase,
 ));
 
@@ -101,10 +100,6 @@ h1, h2, h3, h4, h5, h6 {
     &:not(:last-child) {
         margin-bottom: 0.25em;
     }
-}
-
-.entry-title {
-    @include apply-font(heading-1);
 }
 
 h1.entry-title {

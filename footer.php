@@ -33,6 +33,7 @@
                         ?>
                     </nav><!-- .footer-navigation -->
                 <?php endif; ?>
+                <p>Powered by WordPress</p>
             </div><!-- .site-info -->
         </div>
     </footer><!-- #colophon -->

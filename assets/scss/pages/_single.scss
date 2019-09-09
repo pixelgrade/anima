@@ -1,3 +1,46 @@
+body {
+    background: var(--theme-sm-light-3);
+}
+
+.single,
+.page {
+
+    .site-content {
+        background: var(--theme-sm-light-1);
+    }
+
+}
+
 .single {
 
+    .page-header {
+        background-color: var(--theme-sm-light-3);
+    }
+
+    .page-thumbnail {
+        position: relative;
+
+        &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background-color: var(--theme-sm-light-3);
+        }
+
+        > * {
+            position: relative;
+        }
+
+        img {
+            display: block;
+            width: auto;
+            height: auto;
+            max-height: 40vh;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
 }

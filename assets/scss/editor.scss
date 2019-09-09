@@ -9,11 +9,11 @@
 [class*="__inner-container"] {
 
     > :not([data-align="wide"]):not([data-align="full"]) {
-        max-width: var(--nova-content-width-normal);
+        max-width: var(--theme-content-width-normal);
     }
 
     > [data-align="wide"] {
-        max-width: var(--nova-content-width-wide);
+        max-width: var(--theme-content-width-wide);
     }
 
     > [data-align="full"] {
@@ -55,7 +55,7 @@
 
 /* Post Title Block */
 .editor-post-title__block {
-    max-width: var(--nova-content-width-normal);
+    max-width: var(--theme-content-width-normal);
 
     .editor-post-title__input {
         @include apply-font(heading-1);

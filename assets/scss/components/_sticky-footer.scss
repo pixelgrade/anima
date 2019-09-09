@@ -1,0 +1,16 @@
+html {
+    height: 100%;
+}
+
+html, body, .site {
+    display: flex;
+    flex-direction: column;
+}
+
+body, .site {
+    flex-grow: 1;
+
+    > footer {
+        margin-top: auto;
+    }
+}

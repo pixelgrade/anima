@@ -22,6 +22,7 @@ get_header();
 				?>
 			</header><!-- .page-header -->
 
+            <div class="c-post-list">
 			<?php
 			/* Start the Loop */
 			while ( have_posts() ) :
@@ -35,8 +36,10 @@ get_header();
 				get_template_part( 'template-parts/content', get_post_type() );
 
 			endwhile;
+			?>
+            </div>
 
-			the_posts_navigation();
+			<?php the_posts_navigation();
 
 		else :
 

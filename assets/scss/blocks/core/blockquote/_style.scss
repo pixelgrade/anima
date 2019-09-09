@@ -3,7 +3,7 @@ $enable-blockquote-block-styles:        true !default;
 @if $enable-blockquote-block-styles == true {
     /* Blockquote Block */
     .wp-block-quote {
-        @include space-children-y(var(--nova-element-spacing));
+        @include space-children-y(var(--theme-element-spacing));
 
         &.is-style-large {
             @include apply-font(large, font-size);

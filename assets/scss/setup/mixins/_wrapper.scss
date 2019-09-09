@@ -1,11 +1,11 @@
 @mixin wrapper-side-spacing {
-    padding-left: var(--nova-wrapper-side-spacing);
-    padding-right: var(--nova-wrapper-side-spacing);
+    padding-left: var(--theme-wrapper-side-spacing);
+    padding-right: var(--theme-wrapper-side-spacing);
 
 
     > .alignfull {
-        margin-left: calc( -1 * var(--nova-wrapper-side-spacing) );
-        margin-right: calc( -1 * var(--nova-wrapper-side-spacing) );
+        margin-left: calc( -1 * var(--theme-wrapper-side-spacing) );
+        margin-right: calc( -1 * var(--theme-wrapper-side-spacing) );
     }
 }
 
@@ -18,11 +18,11 @@
     }
 
     > :not(.alignwide):not(.alignfull) {
-        max-width: var(--nova-content-width-normal);
+        max-width: var(--theme-content-width-normal);
     }
 
     > .alignwide {
-        max-width: var(--nova-content-width-wide);
+        max-width: var(--theme-content-width-wide);
     }
 
     > .alignfull {

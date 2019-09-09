@@ -1,15 +1,15 @@
 @include define-font(button, (
-    font-family: var(--theme-body-font-family),
-    font-size: 14px,
+    font-family: unquote('Archivo, sans-serif'),
+    font-size: 12px,
     font-weight: 700,
-    line-height: 1,
-    letter-spacing: 0.1em,
+    line-height: 2,
+    letter-spacing: 0.03em,
     text-transform: uppercase,
 ));
 
-.wp-block-button {
-    --nova-button-padding: 0.55em 0.75em 0.55em 0.85em;
-    --nova-button-border-radius: 0.2em;
+:root {
+    --theme-button-padding: 0.55em 0.75em 0.55em 0.85em;
+    --theme-button-border-radius: 0.2em;
 }
 
 .wp-block-button:not(.is-style-text) {
@@ -28,17 +28,17 @@
     }
 }
 
-.wp-block-button.is-style-primary {
-    --nova-button-background-color: var(--theme-sm-color-1);
-    --nova-button-hover-background-color: var(--theme-sm-dark-1);
+.is-style-primary {
+    --theme-button-background-color: var(--theme-sm-color-1);
+    --theme-button-hover-background-color: var(--theme-sm-dark-1);
 }
 
-.wp-block-button.is-style-text {
-    --nova-button-color: var(--theme-sm-color-1);
-    --nova-button-background-color: transparent;
-    --nova-button-hover-color: var(--theme-sm-color-1);
-    --nova-button-hover-background-color: transparent;
-    --nova-button-border-radius: 0;
+.is-style-text {
+    --theme-button-color: var(--theme-sm-color-1);
+    --theme-button-background-color: transparent;
+    --theme-button-hover-color: var(--theme-sm-color-1);
+    --theme-button-hover-background-color: transparent;
+    --theme-button-border-radius: 0;
 
     .wp-block-button__link {
         padding: 0 !important;
@@ -49,20 +49,16 @@
     }
 }
 
-.nova-hero {
+.novablocks-hero {
+    --theme-button-background-color: var(--theme-sm-light-1);
+    --theme-button-color: var(--theme-sm-dark-1);
+    --theme-button-hover-background-color: var(--theme-sm-color-1);
+    --theme-button-hover-color: var(--theme-sm-dark-1);
 
-    .wp-block-button.is-style-default,
-    .wp-block-button:not([class*="is-style"]) {
-        --nova-button-background-color: var(--theme-sm-light-1);
-        --nova-button-color: var(--theme-sm-dark-1);
-        --nova-button-hover-background-color: var(--theme-sm-color-1);
-        --nova-button-hover-color: var(--theme-sm-dark-1);
-    }
-
-    .wp-block-button.is-style-primary {
-        --nova-button-background-color: var(--theme-sm-color-1);
-        --nova-button-color: var(--theme-sm-dark-1);
-        --nova-button-hover-background-color: var(--theme-sm-light-1);
-        --nova-button-hover-color: var(--theme-sm-dark-1);
+    .is-style-primary {
+        --theme-button-background-color: var(--theme-sm-color-1);
+        --theme-button-color: var(--theme-sm-dark-1);
+        --theme-button-hover-background-color: var(--theme-sm-light-1);
+        --theme-button-hover-color: var(--theme-sm-dark-1);
     }
 }

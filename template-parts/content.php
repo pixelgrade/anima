@@ -7,53 +7,40 @@
  * @package Nova
  */
 
+$classes = array(
+    'novablocks-media',
+    'wp-block-group',
+    'alignfull',
+    'block-is-moderate',
+    'content-is-moderate',
+    'has-background',
+);
+
+$classes[] = get_query_var( 'has_image_on_the_left' ) ? 'has-image-on-the-left' : 'has-image-on-the-right';
+
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php
-		if ( is_singular() ) :
-			the_title( '<h1 class="entry-title">', '</h1>' );
-		else :
-			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-		endif;
-
-		if ( 'post' === get_post_type() ) :
-			?>
-			<div class="entry-meta">
-				<?php
-				novablocks_posted_on();
-				novablocks_posted_by();
-				?>
-			</div><!-- .entry-meta -->
-		<?php endif; ?>
-	</header><!-- .entry-header -->
-
-	<?php novablocks_post_thumbnail(); ?>
-
-	<div class="entry-content">
-		<?php
-		the_content( sprintf(
-			wp_kses(
-				/* translators: %s: Name of current post. Only visible to screen readers */
-				__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'nova' ),
-				array(
-					'span' => array(
-						'class' => array(),
-					),
-				)
-			),
-			get_the_title()
-		) );
-
-		wp_link_pages( array(
-			'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'nova' ),
-			'after'  => '</div>',
-		) );
-		?>
-	</div><!-- .entry-content -->
-
-	<footer class="entry-footer">
-		<?php novablocks_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
+<article id="post-<?php the_ID(); ?>" <?php post_class( join( ' ', $classes ) ); ?>>
+    <div class="wp-block-group__inner-container">
+        <div class="wp-block alignwide"><!-- -->
+            <div class="novablocks-media__layout">
+                <div class="novablocks-media__content">
+                    <div class="novablocks-media__inner-container">
+                        <?php
+                        get_template_part( 'template-parts/entry-meta', get_post_type() );
+                        the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
+                        rosa_the_separator( 'flower' );
+                        the_excerpt();
+                        rosa_the_read_more_button();
+                        ?>
+                    </div>
+                </div>
+                <div class="novablocks-media__aside">
+                    <div class="novablocks-media__image">
+                        <?php novablocks_post_thumbnail(); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </article><!-- #post-<?php the_ID(); ?> -->

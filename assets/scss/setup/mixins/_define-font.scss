@@ -5,9 +5,9 @@ $nova-font-size-minimum-vw: 100vw * $theme-minimum-font-size / $nova-font-size-b
 :root {
     --theme-minimum-font-size: #{$theme-minimum-font-size};
 
-    @include above($nova-font-size-breakpoint) {
-        --theme-minimum-font-size: #{$nova-font-size-minimum-vw};
-    }
+    //@include above($nova-font-size-breakpoint) {
+    //    --theme-minimum-font-size: #{$nova-font-size-minimum-vw};
+    //}
 }
 
 @mixin define-font($name, $config, $props: $nova-font-props) {
@@ -16,18 +16,19 @@ $nova-font-size-minimum-vw: 100vw * $theme-minimum-font-size / $nova-font-size-b
 
         :root {
 
-            @each $prop in remove($props, font-size) {
+            @each $prop in $props {
+            //@each $prop in remove($props, font-size) {
                 $value: map-get( $config, $prop );
                 @if ( map-get( $config, $prop ) ) {
                     --theme-#{$name}-#{$prop}: #{$value};
                 }
             }
 
-            $diff: map-get($config, font-size) - $theme-minimum-font-size;
-
-            @include fluid(--theme-#{$name}-font-size-diff, 0px, 0px, $nova-font-size-breakpoint, $diff);
-
-            --theme-#{$name}-font-size: calc( var(--theme-minimum-font-size) + var(--theme-#{$name}-font-size-diff) );
+            //$diff: map-get($config, font-size) - $theme-minimum-font-size;
+            //
+            //@include fluid(--theme-#{$name}-font-size-diff, 0px, 0px, $nova-font-size-breakpoint, $diff);
+            //
+            //--theme-#{$name}-font-size: calc( var(--theme-minimum-font-size) + var(--theme-#{$name}-font-size-diff) );
         }
     }
 }

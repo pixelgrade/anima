@@ -1,0 +1,11 @@
+@mixin breadcrumbs( $separator: "/" ) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    list-style: none;
+
+    > :not(:last-child):after {
+        content: $separator;
+    }
+}

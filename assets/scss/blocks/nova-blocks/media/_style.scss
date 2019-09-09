@@ -1,0 +1,26 @@
+$enable-nova-blocks-styles:             true !default;
+
+@if $enable-nova-blocks-styles == true {
+    /* Nova Blocks */
+    .novablocks-media__inner-container {
+        --theme-wrapper-side-spacing: var(--novablocks-media-content-padding);
+    }
+
+    .novablocks-media {
+        --novablocks-media-spacing: var(--theme-element-spacing);
+
+        &, & + * {
+            --theme-element-spacing: var(--theme-element-spacing-large);
+        }
+
+        [class*="__inner-container"],
+        & + * [class*="__inner-container"] {
+            --theme-element-spacing: var(--theme-element-spacing-normal);
+        }
+    }
+
+    .block-is-moderate + .block-is-moderate,
+    .block-is-highlighted + .block-is-highlighted {
+        padding-top: 0;
+    }
+}

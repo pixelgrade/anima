@@ -1,3 +1,4 @@
-.site-main {
-    @include space-children-y(var(--nova-y-spacing));
+body:not(.has-fixed-site-header) .site-main {
+    padding-top: var(--theme-y-spacing);
+    padding-bottom: var(--theme-y-spacing);
 }

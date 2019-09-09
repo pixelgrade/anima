@@ -2,22 +2,24 @@
 :root {
 
     // LAYOUT
-    --nova-content-width-normal: calc(40 * var(--theme-body-font-size));
-    --nova-content-width-wide: calc(50vw + var(--nova-content-width-normal) / 2 - var(--nova-wrapper-side-spacing));
+    //--theme-content-width-normal: calc(37 * var(--theme-body-font-size));
+    //--theme-content-width-wide: calc(65 * var(--theme-body-font-size));
+    --theme-content-width-normal: 37em;
+    --theme-content-width-wide: 65em;
 
     // spacing unit
-    --nova-spacing-unit: 8px;
+    --theme-spacing-unit: 8px;
 
     //
-    --nova-wrapper-side-spacing: 24px;
+    --theme-wrapper-side-spacing: 24px;
 
     @include above(lap) {
-        --nova-wrapper-side-spacing: 48px;
+        --theme-wrapper-side-spacing: 48px;
     }
 
     //
-    --nova-x-spacing: calc( 7 * var(--nova-spacing-unit) );
-    --nova-y-spacing: calc( 7 * var(--nova-spacing-unit) );
+    --theme-x-spacing: calc( 7 * var(--theme-spacing-unit) );
+    --theme-y-spacing: calc( 7 * var(--theme-spacing-unit) );
 
     // ===========================================
     //     COLORS
@@ -54,9 +56,9 @@
     // -------------------------------------------
     //     element spacing
     // -------------------------------------------
-    --nova-element-spacing: var(--nova-element-spacing-normal);
+    --theme-element-spacing: var(--theme-element-spacing-normal);
 
-    --nova-element-spacing-normal: calc( 0.5 * var(--theme-body-font-size) );
-    --nova-element-spacing-large: calc( 2.5 * var(--theme-body-font-size) );
+    --theme-element-spacing-normal: calc( 0.5 * var(--theme-body-font-size) );
+    --theme-element-spacing-large: calc( 2.5 * var(--theme-body-font-size) );
     // ===========================================
 }

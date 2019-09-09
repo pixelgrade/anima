@@ -1,19 +1,19 @@
 /* Button CSS Custom Properties */
 :root {
-    --nova-button-background-color: var(--theme-sm-dark-1);
-    --nova-button-color: var(--theme-sm-light-1);
-    --nova-button-border-color: transparent;
+    --theme-button-background-color: var(--theme-sm-dark-1);
+    --theme-button-color: var(--theme-sm-light-1);
+    --theme-button-border-color: transparent;
 
-    --nova-button-hover-background-color: var(--theme-sm-color-1);
-    --nova-button-hover-color: var(--theme-sm-light-1);
-    --nova-button-hover-border-color: transparent;
+    --theme-button-hover-background-color: var(--theme-sm-color-1);
+    --theme-button-hover-color: var(--theme-sm-light-1);
+    --theme-button-hover-border-color: transparent;
 
-    --nova-button-border-width: 2px;
-    --nova-button-border-radius: 999em;
+    --theme-button-border-width: 2px;
+    --theme-button-border-radius: 999em;
 
-    --nova-button-y-padding: calc( 2 * var(--nova-spacing-unit) );
-    --nova-button-x-padding: calc( 4 * var(--nova-spacing-unit) );
-    --nova-button-padding: var(--nova-button-y-padding) var(--nova-button-x-padding);
+    --theme-button-y-padding: calc( 2 * var(--theme-spacing-unit) );
+    --theme-button-x-padding: calc( 4 * var(--theme-spacing-unit) );
+    --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
 }
 
 @mixin button-base {
@@ -23,24 +23,24 @@
 }
 
 @mixin button-box {
-    padding: var(--nova-button-padding);
-    border: var(--nova-button-border-width) solid var(--nova-button-border-color);
-    border-radius: var(--nova-button-border-radius);
+    padding: var(--theme-button-padding);
+    border: var(--theme-button-border-width) solid var(--theme-button-border-color);
+    border-radius: var(--theme-button-border-radius);
 }
 
 @mixin button-background {
-    background-color: var(--nova-button-background-color);
+    background-color: var(--theme-button-background-color);
 
     &:hover {
-        background-color: var(--nova-button-hover-background-color);
+        background-color: var(--theme-button-hover-background-color);
     }
 }
 
 @mixin button-color {
-    color: var(--nova-button-color);
+    color: var(--theme-button-color);
 
     &:hover {
-        color: var(--nova-button-hover-color);
+        color: var(--theme-button-hover-color);
     }
 }
 

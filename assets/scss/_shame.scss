@@ -1,34 +1,6 @@
 // Keep this as tidy as possible
 
-.hentry {
-    @include space-children-y(var(--nova-y-spacing));
-}
-
-html {
-    height: 100%;
-}
-
-html, body, .site {
-    display: flex;
-    flex-direction: column;
-}
-
-body, .site {
-    flex-grow: 1;
-
-    > footer {
-        margin-top: auto;
-    }
-}
-
-.posted-on .updated {
-    display: none;
-}
-
-.wp-block-columns.alignfull {
-    --nova-wrapper-side-spacing: 0;
-}
-
+/* Embeds */
 .fb_iframe_widget > span {
     display: block;
     max-width: 100%;
@@ -38,14 +10,4 @@ iframe.instagram-media {
     max-width: 100% !important;
     min-width: 0 !important;
     margin-right: 0 !important;
-}
-
-.novablocks-hero__inner-container {
-    > .c-headline:first-child .c-headline__primary,
-    > .c-headline:first-child .c-headline__secondary,
-    > :first-child:not(.c-headline),
-    > :not(:first-child) {
-        opacity: 0;
-        will-change: transform;
-    }
 }

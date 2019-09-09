@@ -43,8 +43,11 @@
     border-left: 0;
 }
 
-.c-separator.is-style-default {
-    @include separator-line;
+.wp-block-separator.is-style-default {
+
+    .c-separator {
+        @include separator-line;
+    }
 
     .c-separator__arrow,
     .c-separator__flower,
@@ -53,7 +56,7 @@
     }
 }
 
-.c-separator.is-style-flower {
+.wp-block-separator.is-style-flower {
 
     .c-separator__arrow,
     .c-separator__line {

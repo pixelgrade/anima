@@ -1,0 +1,21 @@
+.novablocks-media__layout {
+
+    .has-image-on-the-right & {
+        flex-direction: row-reverse;
+    }
+}
+
+.novablocks-media__content {
+    min-width: 28em;
+    max-width: 100%;
+    @include apply-font(body);
+    flex-basis: calc(50% - var(--novablocks-media-spacing));
+}
+
+.novablocks-media__aside {
+    flex-basis: calc(50% + var(--novablocks-media-spacing));
+
+    &[class] {
+        order: -1;
+    }
+}

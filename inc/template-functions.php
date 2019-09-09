@@ -12,6 +12,7 @@
  * @return array
  */
 function novablocks_body_classes( $classes ) {
+
 	// Adds a class of hfeed to non-singular pages.
 	if ( ! is_singular() ) {
 		$classes[] = 'hfeed';
@@ -20,6 +21,10 @@ function novablocks_body_classes( $classes ) {
 	// Adds a class of no-sidebar when there is no sidebar present.
 	if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 		$classes[] = 'no-sidebar';
+	}
+
+	if ( rosa_header_should_be_fixed() ) {
+		$classes[] = 'has-fixed-site-header';
 	}
 
 	return $classes;

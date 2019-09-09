@@ -194,7 +194,51 @@ if ( ! function_exists( 'rosa_alter_nova_hero_block_template' ) ) {
             } );
         }
 
+
+
         return $settings;
     }
 }
 add_filter( 'novablocks_block_editor_settings', 'rosa_alter_nova_hero_block_template' );
+
+if ( ! function_exists( 'rosa_alter_novablocks_separator_settings' ) ) {
+    function rosa_alter_novablocks_separator_settings( $settings ) {
+        $settings['separator']['markup'] = rosa_get_separator_markup();
+        return $settings;
+    }
+}
+add_filter( 'novablocks_block_editor_settings', 'rosa_alter_novablocks_separator_settings' );
+
+function rosa_the_read_more_button() {
+    echo rosa_get_read_more_button();
+}
+
+function rosa_get_read_more_button() {
+    global $post;
+	return
+        '<div class="wp-block-button aligncenter is-style-text">' .
+            '<a class="wp-block-button__link" href="' . get_permalink( $post->ID ) . '">' .
+                __( 'Read more', 'nova' ) .
+            '</a>' .
+        '</div>';
+}
+
+function rosa_admin_init() {
+	global $_wp_post_type_features;
+	$_wp_post_type_features[ 'post' ][ 'editor' ];
+}
+add_action( 'admin_init', 'rosa_admin_init' );
+remove_action( 'edit_form_after_title', '_wp_posts_page_notice' );
+
+function rosa_header_should_be_fixed() {
+	global $post;
+	
+	if ( has_blocks( $post->post_content ) ) {
+		$blocks = parse_blocks( $post->post_content );
+
+		if ( $blocks[0]['blockName'] === 'novablocks/hero' ) {
+			return true;
+		}
+	}
+	return false;
+}

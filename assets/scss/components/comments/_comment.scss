@@ -9,14 +9,14 @@
 }
 
 .comment__avatar {
-    margin-right: var(--nova-comment-avatar-spacing);
-    max-width: var(--nova-comment-avatar-width);
+    margin-right: var(--theme-comment-avatar-spacing);
+    max-width: var(--theme-comment-avatar-width);
     flex: 0 0 auto;
     overflow: hidden;
 }
 
 .comment__body {
-    @include space-children-y(var(--nova-comment-body-spacing));
+    @include space-children-y(var(--theme-comment-body-spacing));
     flex-grow: 1;
 }
 
@@ -37,9 +37,9 @@
 }
 
 .comment__metadata {
-    margin-left: var(--nova-comment-metadata-spacing);
+    margin-left: var(--theme-comment-metadata-spacing);
 }
 
 .comment__content {
-    @include space-children-y(var(--nova-comment-content-spacing));
+    @include space-children-y(var(--theme-comment-content-spacing));
 }

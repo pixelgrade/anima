@@ -27,7 +27,8 @@ function novablocks_enqueue_theme_block_editor_assets() {
 add_action( 'enqueue_block_editor_assets', 'novablocks_enqueue_theme_block_editor_assets' );
 
 function novablocks_scripts() {
-	wp_enqueue_style( 'nova-google-webfonts', 'https://fonts.googleapis.com/css?family=Cabin:400,400i,700,700i|Herr+Von+Muellerhoff|Source+Sans+Pro:600,900&display=swap', array(), wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_style( 'nova-webfonts', get_template_directory_uri() . '/dist/fonts/Reforma/fonts.css', array(), wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_style( 'nova-google-webfonts', '//fonts.googleapis.com/css?family=Archivo|Herr+Von+Muellerhoff&display=swap', array(), wp_get_theme()->get( 'Version' ) );
 	wp_enqueue_style( 'nova-style', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
 	wp_enqueue_style( 'nova-theme-styles', get_template_directory_uri() . '/dist/js/editor.blocks.css' );
 

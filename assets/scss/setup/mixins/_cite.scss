@@ -1,16 +1,16 @@
 /* Cite CSS Custom Properties */
 :root {
-    --nova-cite-font-family: var(--nova-headings-font-family);
-    --nova-cite-font-size: 13px;
-    --nova-cite-line-height: #{(16/13)};
-    --nova-cite-font-weight: 700;
-    --nova-cite-color: var(--nova-color-1);
+    --theme-cite-font-family: var(--theme-headings-font-family);
+    --theme-cite-font-size: 13px;
+    --theme-cite-line-height: #{(16/13)};
+    --theme-cite-font-weight: 700;
+    --theme-cite-color: var(--theme-sm-color-1);
 }
 
 @mixin nova-cite {
-    font-family: var(--nova-cite-font-family);
-    font-size: var(--nova-cite-font-size);
-    line-height: var(--nova-cite-line-height);
-    font-weight: var(--nova-cite-font-weight);
-    color: var(--nova-cite-color);
+    font-family: var(--theme-cite-font-family);
+    font-size: var(--theme-cite-font-size);
+    line-height: var(--theme-cite-line-height);
+    font-weight: var(--theme-cite-font-weight);
+    color: var(--theme-cite-color);
 }

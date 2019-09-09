@@ -2,6 +2,7 @@
 @import "headings";
 @import "headline";
 @import "main";
+@import "separator";
 
 .avatar {
     display: block;
@@ -25,17 +26,12 @@
     }
 }
 
-.entry-header {
-    @include space-children-y(1em);
+.entry-title,
+.entry-meta {
 
-    a {
-        text-decoration: none;
-    }
-}
-
-.entry-title {
     a {
         color: inherit;
+        text-decoration: none;
     }
 }
 

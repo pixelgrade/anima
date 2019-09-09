@@ -1,9 +1,9 @@
 .content-area {
-    @include apply-font(body);
+    @include apply-font(content);
 }
 
 .entry-content,
 [class*="__inner-container"] {
     @include wrapper;
-    @include space-children-y(var(--nova-element-spacing));
+    @include space-children-y(var(--theme-element-spacing));
 }

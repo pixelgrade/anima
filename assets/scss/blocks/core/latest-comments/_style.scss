@@ -5,7 +5,7 @@ $enable-latest-comments-block-styles:   true !default;
 	.wp-block-latest-comments {
 		list-style: none;
 
-		@include space-children-y(var(--nova-element-spacing));
+		@include space-children-y(var(--theme-element-spacing));
 	}
 
 	.wp-block-latest-comments__comment {
@@ -31,9 +31,9 @@ $enable-latest-comments-block-styles:   true !default;
 	.wp-block-latest-comments__comment-avatar {
 		display: block;
 		flex: 0 0 auto;
-		width: var(--nova-comment-avatar-width);
-		height: var(--nova-comment-avatar-width);
-		margin-right: var(--nova-comment-avatar-spacing);
+		width: var(--theme-comment-avatar-width);
+		height: var(--theme-comment-avatar-width);
+		margin-right: var(--theme-comment-avatar-spacing);
 
 		object-fit: cover;
 	}

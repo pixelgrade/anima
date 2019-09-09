@@ -3,7 +3,7 @@ $enable-image-block-styles:             true !default;
 @if $enable-image-block-styles == true {
     /* Image Block */
     .wp-block-image {
-        @include space-children-y(calc(var(--nova-element-spacing) / 4));
+        @include space-children-y(calc(var(--theme-element-spacing) / 4));
 
         img {
             display: block;

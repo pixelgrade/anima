@@ -12,73 +12,82 @@ if ( ! function_exists( 'novablocks_posted_on' ) ) :
 	 * Prints HTML with meta information for the current post-date/time.
 	 */
 	function novablocks_posted_on() {
-		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
-		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
-		}
+		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time>';
 
 		$time_string = sprintf( $time_string,
 			esc_attr( get_the_date( DATE_W3C ) ),
-			esc_html( get_the_date() ),
-			esc_attr( get_the_modified_date( DATE_W3C ) ),
-			esc_html( get_the_modified_date() )
+			esc_html( get_the_date() )
 		);
 
-		$posted_on = sprintf(
-			/* translators: %s: post date. */
-			esc_html_x( 'Posted on %s', 'post date', 'nova' ),
-			'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
-		);
-
-		echo '<span class="posted-on">' . $posted_on . '</span>'; // WPCS: XSS OK.
+        /* translators: before post date. */
+		echo '<div class="posted-on">' .
+            '<span class="screen-reader-text">' . esc_html_x( 'Posted on', 'post date', 'nova' ) . '</span>' .
+		     '<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>' .
+        '</div>';
 
 	}
 endif;
 
-if ( ! function_exists( 'novablocks_posted_by' ) ) :
+if ( ! function_exists( 'novablocks_posted_by' ) ) {
+
 	/**
 	 * Prints HTML with meta information for the current author.
 	 */
 	function novablocks_posted_by() {
-		$byline = sprintf(
-			/* translators: %s: post author. */
-			esc_html_x( 'by %s', 'post author', 'nova' ),
-			'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
-		);
+	    $author_url = esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) );
+	    $author_name = esc_html( get_the_author() );
 
-		echo '<span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
+		echo '<span class="byline">' .
+             '<div class="screen-reader-text">' . esc_html_x( 'by', 'post author', 'nova' ) . '</div>' .
+		     '<span class="author vcard"><a class="url fn n" href="' . $author_url . '">' . $author_name . '</a></span>' .
+         '</span>'; // WPCS: XSS OK.
 
 	}
-endif;
+}
 
-if ( ! function_exists( 'novablocks_entry_footer' ) ) :
-	/**
-	 * Prints HTML with meta information for the categories, tags and comments.
-	 */
-	function novablocks_entry_footer() {
+if ( ! function_exists( 'novablocks_posted_in' ) ) {
+    function novablocks_posted_in() {
+        novablocks_categories_posted_in();
+        novablocks_tags_posted_in();
+    }
+}
+
+if ( ! function_exists( 'novablocks_categories_posted_in' ) ) {
+	function novablocks_categories_posted_in() {
 		// Hide category and tag text for pages.
 		if ( 'post' === get_post_type() ) {
 			/* translators: used between list items, there is a space after the comma */
 			$categories_list = get_the_category_list( esc_html__( ', ', 'nova' ) );
 			if ( $categories_list ) {
-				/* translators: 1: list of categories. */
-				printf( '<div class="cat-links">' . esc_html__( 'Posted in %1$s', 'nova' ) . '</div>', $categories_list ); // WPCS: XSS OK.
+				/* translators: before list of categories. */
+				echo '<div class="cat-links"><span class="screen-reader-text">' . esc_html_x( 'Posted in', 'post categories', 'nova' ) . '</span>' .  $categories_list . '</div>';
 			}
+		}
+	}
+}
 
+if ( ! function_exists( 'novablocks_tags_posted_in' ) ) {
+	function novablocks_tags_posted_in() {
+		// Hide category and tag text for pages.
+		if ( 'post' === get_post_type() ) {
 			/* translators: used between list items, there is a space after the comma */
 			$tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', 'nova' ) );
 			if ( $tags_list ) {
-				/* translators: 1: list of tags. */
-				printf( '<div class="tags-links">' . esc_html__( 'Tagged %1$s', 'nova' ) . '</div>', $tags_list ); // WPCS: XSS OK.
+				/* translators: before list of tags. */
+				echo '<div class="tags-links"><span class="screen-reader-text">' . esc_html_x( 'Tagged', 'post tags', 'nova' ) . '</span>' .  $tags_list . '</div>';
 			}
 		}
+	}
+}
 
+if ( ! function_exists( 'novablocks_comments_link' ) ) {
+	function novablocks_comments_link() {
 		if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
 			echo '<div class="comments-link">';
 			comments_popup_link(
 				sprintf(
 					wp_kses(
-						/* translators: %s: post title */
+					/* translators: %s: post title */
 						__( 'Leave a Comment<span class="screen-reader-text"> on %s</span>', 'nova' ),
 						array(
 							'span' => array(
@@ -91,6 +100,14 @@ if ( ! function_exists( 'novablocks_entry_footer' ) ) :
 			);
 			echo '</div>';
 		}
+	}
+}
+
+if ( ! function_exists( 'novablocks_edit_post_link' ) ) {
+	/**
+	 * Prints HTML with meta information for the categories, tags and comments.
+	 */
+	function novablocks_edit_post_link() {
 
 		edit_post_link(
 			sprintf(
@@ -109,7 +126,7 @@ if ( ! function_exists( 'novablocks_entry_footer' ) ) :
 			'</div>'
 		);
 	}
-endif;
+}
 
 if ( ! function_exists( 'novablocks_post_thumbnail' ) ) :
 	/**
@@ -146,3 +163,23 @@ if ( ! function_exists( 'novablocks_post_thumbnail' ) ) :
 		endif; // End is_singular().
 	}
 endif;
+
+if ( ! function_exists( 'rosa_the_separator' ) ) {
+    function rosa_the_separator( $style = 'default' ) {
+        echo '<div class="wp-block-separator is-style-' . $style . '">' . rosa_get_separator_markup() . '</div>';
+    }
+}
+
+if ( ! function_exists( 'rosa_get_separator_markup' ) ) {
+    function rosa_get_separator_markup( $style = 'default' ) {
+        ob_start(); ?>
+        <div class="c-separator">
+            <div class="c-separator__arrow c-separator__arrow--left"></div>
+            <div class="c-separator__line c-separator__line--left"></div>
+            <div class="c-separator__flower">&#10043;</div>
+            <div class="c-separator__line c-separator__line--right"></div>
+            <div class="c-separator__arrow c-separator__arrow--right"></div>
+        </div>
+        <?php return apply_filters( 'rosa_separator_markup', ob_get_clean() );
+    }
+}
