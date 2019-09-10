@@ -44,8 +44,10 @@ export default class Hero {
 		};
 
 		// used to calculate animation progress
-		this.start = this.box.top + scrollY - windowHeight;
-		this.end = this.start + this.box.height + windowHeight;
+		const middle = scrollY + this.box.top + ( this.box.height - windowHeight ) * 0.5;
+		const length = windowHeight * 0.5;
+		this.start = middle - length * 0.5;
+		this.end = this.start + length;
 	}
 
 	getMarkupPieces() {
@@ -165,8 +167,12 @@ export default class Hero {
 			// in such a way that timelineProgress is 0.5 for middle and 1 for end
 			// because we don't want the animation to be stopped before the middle label
 			const tlProgress = ( time - middleTime ) / ( endTime - middleTime );
-			if ( ( tlProgress * 0.5 + 0.5 ) >= this.progress || 1 < this.progress || this.progress < 0 ) {
+			const pastMiddle = time > middleTime;
+			const pastScroll = ( tlProgress * 0.5 + 0.5 ) >= this.progress;
+
+			if ( pastMiddle && pastScroll ) {
 				tl.pause();
+				this.timeline.eventCallback( 'onUpdate', null );
 				this.paused = true;
 			}
 
@@ -175,17 +181,16 @@ export default class Hero {
 
 	updateOnScroll() {
 		const { scrollY } = GlobalService.getProps();
-		const progress = ( scrollY - this.start ) / ( this.end - this.start );
-		this.progress = progress;
-//		this.progress = Math.min( Math.max( 0, progress ), 1 );
+		this.progress = ( scrollY - this.start ) / ( this.end - this.start );
 	}
 
 	updateTimelineOnScroll() {
 
-		if ( ! this.paused || 1 < this.progress || this.progress < 0 ) {
+		if ( ! this.paused ) {
 			return;
 		}
 
+		const currentProgress = this.timeline.progress();
 		const middleTime = this.timeline.getLabelTime( 'middle' );
 		const endTime = this.timeline.getLabelTime( 'end' );
 
@@ -194,7 +199,12 @@ export default class Hero {
 		// newTlProgress = ( this.progress - 0.5 ) * 2 * ( 1 - minTlProgress ) + minTlProgress;
 		const minTlProgress = middleTime / endTime;
 		let newTlProgress = ( this.progress - 0.5 ) * 2 * ( 1 - minTlProgress ) + minTlProgress;
-		newTlProgress = Math.min( Math.max( 0, newTlProgress ), 1 );
+		newTlProgress = Math.min( Math.max( minTlProgress, newTlProgress ), 1 );
+
+		if ( currentProgress === newTlProgress ) {
+			return;
+		}
+
 		this.timeline.progress( newTlProgress );
 	}
 }

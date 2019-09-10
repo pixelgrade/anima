@@ -1,61 +1,138 @@
+$enable-site-header-fixed: true !default;
+$enable-site-header-transparent: true !default;
+$enable-site-header-inversed: false !default;
+
+$site-header-fixed-body-class: has-fixed-site-header !default;
+
+:root {
+    --theme-header-transition-speed: .15s;
+    --theme-header-background-color: var(--theme-sm-light-3);
+}
+
 @media only screen and (min-width: 1000px) {
 
     .site-header {
-        padding-top: calc( var(--theme-y-spacing) / 2 );
-        padding-bottom: calc( var(--theme-y-spacing) / 2 );
-        transition: all .3s ease-out;
-        transition-property: opacity, color;
-    }
-
-    .site-header--fixed {
-        position: fixed;
         top: 0;
         right: 0;
         left: 0;
         z-index: 1000;
         @include wp-offset(top, 0, true);
 
-        &:not(.site-header--normal) {
-            color: var(--theme-sm-light-1);
+        padding-top: calc( var(--theme-y-spacing) / 2 );
+        padding-bottom: calc( var(--theme-y-spacing) / 2 );
+
+        transition: all var(--theme-header-transition-speed) ease-out;
+        transition-property: opacity, color, background-color;
+        will-change: transform;
+    }
+
+    // used pseudo element to create site header border on its bottom
+    // in order to use currentColor and opacity for easier theming
+    // and avoiding altering its height
+    body:not(.#{$site-header-fixed-body-class}) {
+
+        .site-header:after {
+            content: "";
+            display: block;
+            @include cover;
+            box-shadow: currentColor 0 -1px 0 inset;
+            opacity: 0.2;
+            pointer-events: none;
+            transition: opacity var(--theme-header-transition-speed) ease-out;
+        }
+
+        .site-header--scrolled:after {
+            opacity: 0;
+        }
+    }
+}
+
+@mixin remove-page-padding-top {
+    #page {
+        padding-top: 0 !important;
+    }
+}
+
+// Fixed site header styles
+@if $enable-site-header-fixed {
+
+    @media only screen and (min-width: 1000px) {
+
+        .site-header--fixed {
+            position: fixed;
+        }
+
+        .site-header:not(.site-header--ready) {
+            opacity: 0;
+        }
+
+        .#{$site-header-fixed-body-class} .site-header:not(.site-header--ready) {
+            position: absolute;
         }
     }
 
-    .site-header:not(.site-header--ready) {
-        opacity: 0;
+    @media only screen and (max-width: 1000px) {
+        @include remove-page-padding-top;
     }
+
+    .#{$site-header-fixed-body-class} {
+        @include remove-page-padding-top;
+    }
+
+} @else {
+    @include remove-page-padding-top;
 }
 
-@media only screen and (max-width: 1000px) {
+// Inversed site header styles
+@media only screen and (min-width: 1000px) {
 
-    #page {
-        padding-top: 0 !important;
-    }
-}
+    @if $enable-site-header-transparent == true and
+        $enable-site-header-fixed == true {
 
-.has-fixed-site-header {
+        @if $enable-site-header-inversed == true {
 
-    #page {
-        padding-top: 0 !important;
-    }
+            .site-header--fixed:not(.site-header--normal) {
+                color: var(--theme-header-background-color);
+            }
 
-    .site-header:not(.site-header--ready) {
-        position: absolute;
-    }
-}
+        } @else {
 
-body:not(.has-fixed-site-header) {
+            .#{$site-header-fixed-body-class} .site-header:not(.site-header--scrolled) {
+                color: var(--theme-header-background-color);
+            }
 
-    .site-header:after {
-        content: "";
-        display: block;
-        @include cover;
-        box-shadow: currentColor 0 -1px 0 inset;
-        opacity: 0.2;
-        pointer-events: none;
-        transition: opacity .2s ease-out;
+            .site-header--scrolled {
+                background-color: var(--theme-header-background-color);
+            }
+        }
     }
 
-    .site-header--scrolled:after {
-        opacity: 0;
+    @if $enable-site-header-transparent == true and
+        $enable-site-header-fixed == false {
+
+        body.#{$site-header-fixed-body-class} {
+
+            .site-header {
+                position: absolute;
+                color: var(--theme-header-background-color);
+                background-color: transparent;
+            }
+        }
+    }
+
+    @if $enable-site-header-transparent == false {
+
+        .site-header {
+            background-color: var(--theme-header-background-color);
+        }
+    }
+
+    @if $enable-site-header-transparent == false and
+        $enable-site-header-fixed == true {
+    }
+
+    @if $enable-site-header-transparent == false and
+        $enable-site-header-fixed == false {
+        // nothing
     }
 }

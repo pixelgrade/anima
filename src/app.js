@@ -7,21 +7,26 @@ import { insideHalf } from "./utils";
 (function($, window) {
 
 	$(function() {
-		const heroes = document.getElementsByClassName( 'novablocks-hero' );
-		const HeroCollection = Array.from( heroes ).map( element => new Hero( element ) );
-		const siteHeader = new Header( $( '.site-header' ).get(0) );
+		const heroElements = document.getElementsByClassName( 'novablocks-hero' );
+		const heroElementsArray = Array.from( heroElements );
+		const HeroCollection = heroElementsArray.map( element => new Hero( element ) );
+		const firstHero = heroElementsArray[0];
+		const headerElement = $( '.site-header' ).get(0);
+		const header = new Header( headerElement, {
+			offsetTargetElement: firstHero || null
+		} );
 
 		GlobalService.registerRender( function() {
 			const overlap = HeroCollection.some( function( hero ) {
 				const { scrollY } = GlobalService.getProps();
 				return insideHalf( {
-					x: siteHeader.box.x,
-					y: siteHeader.box.y + scrollY,
-					width: siteHeader.box.width,
-					height: siteHeader.box.height,
+					x: header.box.x,
+					y: header.box.y + scrollY,
+					width: header.box.width,
+					height: header.box.height,
 				}, hero.view );
 			} );
-			siteHeader.render( overlap );
+			header.render( overlap );
 		} );
 	});
 
