@@ -4,23 +4,25 @@ export default class Hero {
 
 	constructor( element ) {
 		this.element = element;
-		this.progress = {
-			x: 0,
-			y: 0,
-		};
+		this.progress = 0;
 		this.timeline = new TimelineMax( { paused: true } );
 		this.pieces = this.getMarkupPieces();
-		this.initialized = false;
+		this.paused = false;
 		this.update();
+		this.updateOnScroll();
 		this.init();
-		this.updateTimelineOnScroll();
 	}
 
 	init() {
-		GlobalService.registerUpdate( () => {
+
+		GlobalService.registerUpdate(() => {
 			this.update();
+		});
+
+		GlobalService.registerRender( () => {
+			this.updateOnScroll();
 			this.updateTimelineOnScroll();
-		} );
+		});
 
 		this.addIntroToTimeline();
 		this.timeline.addLabel( 'middle' );
@@ -29,24 +31,21 @@ export default class Hero {
 
 		this.pauseTimelineOnScroll();
 		this.timeline.play();
-
-		this.initialized = true;
 	}
 
 	update() {
-		const { windowWidth, windowHeight, scrollX, scrollY } = GlobalService.getProps();
-
+		const { scrollY, windowHeight } = GlobalService.getProps();
 		this.box = this.element.getBoundingClientRect();
+		this.view = {
+			x: this.box.x,
+			y: this.box.y + scrollY,
+			width: this.box.width,
+			height: this.box.height,
+		};
 
-		const progress = {
-			x: ( windowWidth - this.box.left ) / ( windowWidth + this.box.width ),
-			y: ( windowHeight - this.box.top ) / ( windowHeight + this.box.height )
-		}
-
-		this.progress = {
-			x: Math.min( Math.max( 0, progress.x ), 1 ),
-			y: Math.min( Math.max( 0, progress.y ), 1 ),
-		}
+		// used to calculate animation progress
+		this.start = this.box.top + scrollY - windowHeight;
+		this.end = this.start + this.box.height + windowHeight;
 	}
 
 	getMarkupPieces() {
@@ -166,31 +165,36 @@ export default class Hero {
 			// in such a way that timelineProgress is 0.5 for middle and 1 for end
 			// because we don't want the animation to be stopped before the middle label
 			const tlProgress = ( time - middleTime ) / ( endTime - middleTime );
-			const scrollProgress = this.progress.y;
-
-			if ( ( tlProgress * 0.5 + 0.5 ) >= scrollProgress ) {
+			if ( ( tlProgress * 0.5 + 0.5 ) >= this.progress || 1 < this.progress || this.progress < 0 ) {
 				tl.pause();
+				this.paused = true;
 			}
 
 		}, [ "{self}" ] );
 	}
 
+	updateOnScroll() {
+		const { scrollY } = GlobalService.getProps();
+		const progress = ( scrollY - this.start ) / ( this.end - this.start );
+		this.progress = progress;
+//		this.progress = Math.min( Math.max( 0, progress ), 1 );
+	}
+
 	updateTimelineOnScroll() {
-		if ( ! this.initialized || ! this.timeline.paused() ) {
+
+		if ( ! this.paused || 1 < this.progress || this.progress < 0 ) {
 			return;
 		}
 
 		const middleTime = this.timeline.getLabelTime( 'middle' );
 		const endTime = this.timeline.getLabelTime( 'end' );
-		const scrollProgress = this.progress.y;
 
-		// ( scrollProgress - 0.5 ) / ( 1 - 0.5 ) = ( newTlProgress - minTlProgress ) / ( 1 - minTlProgress );
-		// ( scrollProgress - 0.5 ) * 2 * ( 1 - minTlProgress ) = ( newTlProgress - minTlProgress );
-		// newTlProgress = ( scrollProgress - 0.5 ) * 2 * ( 1 - minTlProgress ) + minTlProgress;
+		// ( this.progress - 0.5 ) / ( 1 - 0.5 ) = ( newTlProgress - minTlProgress ) / ( 1 - minTlProgress );
+		// ( this.progress - 0.5 ) * 2 * ( 1 - minTlProgress ) = ( newTlProgress - minTlProgress );
+		// newTlProgress = ( this.progress - 0.5 ) * 2 * ( 1 - minTlProgress ) + minTlProgress;
 		const minTlProgress = middleTime / endTime;
-		let newTlProgress = ( scrollProgress - 0.5 ) * 2 * ( 1 - minTlProgress ) + minTlProgress;
+		let newTlProgress = ( this.progress - 0.5 ) * 2 * ( 1 - minTlProgress ) + minTlProgress;
 		newTlProgress = Math.min( Math.max( 0, newTlProgress ), 1 );
-
 		this.timeline.progress( newTlProgress );
 	}
 }

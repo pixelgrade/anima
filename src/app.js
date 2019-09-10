@@ -13,7 +13,13 @@ import { insideHalf } from "./utils";
 
 		GlobalService.registerRender( function() {
 			const overlap = HeroCollection.some( function( hero ) {
-				return insideHalf( siteHeader.box, hero.box );
+				const { scrollY } = GlobalService.getProps();
+				return insideHalf( {
+					x: siteHeader.box.x,
+					y: siteHeader.box.y + scrollY,
+					width: siteHeader.box.width,
+					height: siteHeader.box.height,
+				}, hero.view );
 			} );
 			siteHeader.render( overlap );
 		} );

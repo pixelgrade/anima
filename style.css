@@ -824,10 +824,6 @@ body:not(.has-fixed-site-header) .site-header--scrolled:after {
     display: none; } }
 
 /* 2.2. Site Content */
-body:not(.has-fixed-site-header) .site-main {
-  padding-top: var(--theme-y-spacing);
-  padding-bottom: var(--theme-y-spacing); }
-
 /* 2.3. Site Footer */
 .site-footer {
   padding-top: var(--theme-y-spacing);
@@ -1861,6 +1857,9 @@ body, .site {
   .novablocks-media__aside[class] {
     order: -1; }
 
+.block-is-moderate {
+  --novablocks-media-background-color: var(--theme-sm-light-3); }
+
 .novablocks-hero__inner-container > .c-headline:first-child .c-headline__primary,
 .novablocks-hero__inner-container > .c-headline:first-child .c-headline__secondary,
 .novablocks-hero__inner-container > :first-child:not(.c-headline),
@@ -2293,3 +2292,7 @@ iframe.instagram-media {
   max-width: 100% !important;
   min-width: 0 !important;
   margin-right: 0 !important; }
+
+.page-header {
+  padding-top: var(--theme-element-spacing-large);
+  padding-bottom: var(--theme-element-spacing-large); }
