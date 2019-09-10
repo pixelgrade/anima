@@ -865,6 +865,12 @@ ul.wp-block-categories__list[class] {
   --current-text-transform: var(--theme-heading-5-text-transform);
   color: var(--theme-sm-dark-1); }
 
+.editor-styles-wrapper[class] h1:not(:first-child), .editor-styles-wrapper[class] h2:not(:first-child), .editor-styles-wrapper[class] h3:not(:first-child), .editor-styles-wrapper[class] h4:not(:first-child), .editor-styles-wrapper[class] h5:not(:first-child), .editor-styles-wrapper[class] h6:not(:first-child) {
+  margin-top: 1em; }
+
+.editor-styles-wrapper[class] h1:not(:last-child), .editor-styles-wrapper[class] h2:not(:last-child), .editor-styles-wrapper[class] h3:not(:last-child), .editor-styles-wrapper[class] h4:not(:last-child), .editor-styles-wrapper[class] h5:not(:last-child), .editor-styles-wrapper[class] h6:not(:last-child) {
+  margin-bottom: 0.25em; }
+
 .editor-styles-wrapper[class] h1.entry-title {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
