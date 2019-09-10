@@ -5,7 +5,7 @@ export default class Hero {
 	constructor( element ) {
 		this.element = element;
 		this.progress = 0;
-		this.timeline = new TimelineMax( { paused: true } );
+		this.timeline = new TimelineMax( { paused: true, onComplete: () => { this.paused = true } } );
 		this.pieces = this.getMarkupPieces();
 		this.paused = false;
 		this.update();
@@ -34,7 +34,7 @@ export default class Hero {
 	}
 
 	update() {
-		const { scrollY, windowHeight } = GlobalService.getProps();
+		const { scrollY, scrollHeight, windowHeight } = GlobalService.getProps();
 		this.box = this.element.getBoundingClientRect();
 		this.view = {
 			x: this.box.x,
@@ -44,9 +44,13 @@ export default class Hero {
 		};
 
 		// used to calculate animation progress
-		const middle = scrollY + this.box.top + ( this.box.height - windowHeight ) * 0.5;
 		const length = windowHeight * 0.5;
-		this.start = middle - length * 0.5;
+		const middleMin = 0;
+		const middleMax = scrollHeight - windowHeight - length * 0.5;
+		const middle = scrollY + this.box.top + ( this.box.height - windowHeight ) * 0.5;
+		const middleMid = Math.max( middleMin, Math.min( middle, middleMax ) );
+
+		this.start = middleMid - length * 0.5;
 		this.end = this.start + length;
 	}
 

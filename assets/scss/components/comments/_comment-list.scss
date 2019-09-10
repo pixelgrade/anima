@@ -1,7 +1,7 @@
 .comment-list,
 .comment-list .children {
     list-style: none;
-    @include space-children-y(var(--theme-y-spacing));
+    @include space-children-y(var(--theme-spacing-normal));
 }
 
 .comment-list {
@@ -9,7 +9,7 @@
 
     .children {
         list-style: none;
-        margin-top: var(--theme-y-spacing);
-        padding-left: var(--theme-x-spacing);
+        margin-top: var(--theme-spacing-normal);
+        padding-left: var(--theme-spacing-normal);
     }
 }

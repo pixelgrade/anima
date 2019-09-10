@@ -7,9 +7,8 @@ class GlobalService {
 		this.frameRendered = true;
 		const updateProps = this.updateProps.bind( this );
 		const updateScroll = this.updateScroll.bind( this );
-		updateProps();
 		document.addEventListener('DOMContentLoaded', updateProps );
-		window.addEventListener( 'resize', updateProps );
+		window.addEventListener( 'resize load', updateProps );
 		window.addEventListener( 'scroll', updateScroll );
 		window.requestAnimationFrame( this.renderLoop.bind( this ) );
 	}
@@ -53,10 +52,17 @@ class GlobalService {
 	}
 
 	updateProps() {
-		this.updateStuff();
+		const body = document.body;
+		const html = document.documentElement;
+		const bodyScrollHeight = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight );
+		const htmlScrollHeight = Math.max( html.scrollHeight, html.offsetHeight );
+
+		this.props.scrollHeight = Math.max( bodyScrollHeight, htmlScrollHeight );
+
 		this.props.windowWidth = window.innerWidth;
 		this.props.windowHeight = window.innerHeight;
 		this.updateScroll();
+		this.updateStuff();
 	}
 
 	getProps() {
