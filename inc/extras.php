@@ -145,14 +145,7 @@ if ( ! function_exists( 'rosa_alter_nova_hero_block_template' ) ) {
 				    'content' => 'Ready to be opened',
 				    'level' => '5',
 			    ),
-		    ),
-		    array(
-			    'core/button',
-			    array(
-				    'text' => 'Explore',
-				    'align' => 'center',
-			    ),
-		    ),
+		    )
 	    );
 
         $settings['media']['template'] = array(
