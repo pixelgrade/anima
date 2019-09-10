@@ -2,24 +2,20 @@
 :root {
 
     // LAYOUT
-    //--theme-content-width-normal: calc(37 * var(--theme-body-font-size));
-    //--theme-content-width-wide: calc(65 * var(--theme-body-font-size));
-    --theme-content-width-normal: 37em;
-    --theme-content-width-wide: 65em;
+    --theme-content-width-normal: calc(37 * var(--theme-body-font-size));
+    --theme-content-width-wide: calc(65 * var(--theme-body-font-size));
 
     // spacing unit
-    --theme-spacing-unit: 8px;
+    --theme-spacing:        16px;
+    --theme-spacing-micro:  calc( var( --theme-spacing ) / 4 );
+    --theme-spacing-tiny:   calc( var( --theme-spacing ) / 2 );
+    --theme-spacing-small:  calc( var( --theme-spacing ) * 2 );
+    --theme-spacing-normal: calc( var( --theme-spacing ) * 3 );
+    --theme-spacing-large:  calc( var( --theme-spacing ) * 4 );
+    --theme-spacing-huge:   calc( var( --theme-spacing ) * 5 );
 
-    //
-    --theme-wrapper-side-spacing: 24px;
-
-    @include above(lap) {
-        --theme-wrapper-side-spacing: 48px;
-    }
-
-    //
-    --theme-x-spacing: calc( 7 * var(--theme-spacing-unit) );
-    --theme-y-spacing: calc( 7 * var(--theme-spacing-unit) );
+    // wrapper-side-spacing mixin custom properties
+    --theme-wrapper-side-spacing: var( --theme-spacing-normal );
 
     // ===========================================
     //     COLORS
@@ -33,9 +29,6 @@
     --theme-sm-light-1: #{$theme-sm-light-1};
     --theme-sm-light-2: #{$theme-sm-light-2};
     --theme-sm-light-3: #{$theme-sm-light-3};
-
-    --theme-background-color: var(--theme-sm-light-1);
-    --theme-text-color: var(--theme-sm-dark-2);
 
     // ===========================================
     //     TYPOGRAPHY
@@ -51,14 +44,5 @@
     // -------------------------------------------
     --theme-body-font-size: #{$theme-minimum-font-size};
     --theme-content-font-size: #{$theme-content-font-size};
-    // ===========================================
-
-    // -------------------------------------------
-    //     element spacing
-    // -------------------------------------------
-    --theme-element-spacing: var(--theme-element-spacing-normal);
-
-    --theme-element-spacing-normal: calc( 0.5 * var(--theme-body-font-size) );
-    --theme-element-spacing-large: calc( 2.5 * var(--theme-body-font-size) );
     // ===========================================
 }

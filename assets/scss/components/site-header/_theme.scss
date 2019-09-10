@@ -18,8 +18,8 @@ $site-header-fixed-body-class: has-fixed-site-header !default;
         z-index: 1000;
         @include wp-offset(top, 0, true);
 
-        padding-top: calc( var(--theme-y-spacing) / 2 );
-        padding-bottom: calc( var(--theme-y-spacing) / 2 );
+        padding-top: calc( var(--theme-spacing) / 2 );
+        padding-bottom: calc( var(--theme-spacing) / 2 );
 
         transition: all var(--theme-header-transition-speed) ease-out;
         transition-property: opacity, color, background-color;

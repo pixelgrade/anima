@@ -7,7 +7,7 @@ $enable-columns-block-styles:           true !default;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 
-        --theme-column-spacing: var(--theme-element-spacing);
+        --theme-column-spacing: var(--theme-spacing-normal);
         grid-gap: var(--theme-column-spacing);
 
         &.alignfull {
@@ -16,6 +16,7 @@ $enable-columns-block-styles:           true !default;
     }
 
     .wp-block-column {
-        @include space-children-y(var(--theme-element-spacing));
+        --element-spacing: var(--theme-spacing-normal);
+        @include space-children-y;
     }
 }

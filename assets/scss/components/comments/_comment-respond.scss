@@ -1,3 +1,4 @@
 .comment-respond {
-    @include space-children-y(var(--theme-element-spacing));
+    --element-spacing: var(--theme-spacing-normal);
+    @include space-children-y;
 }

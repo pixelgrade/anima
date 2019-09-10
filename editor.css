@@ -30,12 +30,16 @@
 
 /* Global CSS Custom Properties */
 :root {
-  --theme-content-width-normal: 37em;
-  --theme-content-width-wide: 65em;
-  --theme-spacing-unit: 8px;
-  --theme-wrapper-side-spacing: 24px;
-  --theme-x-spacing: calc( 7 * var(--theme-spacing-unit) );
-  --theme-y-spacing: calc( 7 * var(--theme-spacing-unit) );
+  --theme-content-width-normal: calc(37 * var(--theme-body-font-size));
+  --theme-content-width-wide: calc(65 * var(--theme-body-font-size));
+  --theme-spacing:        16px;
+  --theme-spacing-micro:  calc( var( --theme-spacing ) / 4 );
+  --theme-spacing-tiny:   calc( var( --theme-spacing ) / 2 );
+  --theme-spacing-small:  calc( var( --theme-spacing ) * 2 );
+  --theme-spacing-normal: calc( var( --theme-spacing ) * 3 );
+  --theme-spacing-large:  calc( var( --theme-spacing ) * 4 );
+  --theme-spacing-huge:   calc( var( --theme-spacing ) * 5 );
+  --theme-wrapper-side-spacing: var( --theme-spacing-normal );
   --theme-sm-color-1: #DDAB5D;
   --theme-sm-color-2: #39497C;
   --theme-sm-color-3: #B12C4A;
@@ -45,19 +49,11 @@
   --theme-sm-light-1: #FFFFFF;
   --theme-sm-light-2: #CCCCCC;
   --theme-sm-light-3: #EEEFF2;
-  --theme-background-color: var(--theme-sm-light-1);
-  --theme-text-color: var(--theme-sm-dark-2);
   --theme-body-font-family: Archivo, sans-serif;
   --theme-headings-font-family: Reforma1969, sans-serif;
   --theme-headings-alt-font-family: Herr Von Muellerhoff, cursive;
   --theme-body-font-size: 16px;
-  --theme-content-font-size: 18px;
-  --theme-element-spacing: var(--theme-element-spacing-normal);
-  --theme-element-spacing-normal: calc( 0.5 * var(--theme-body-font-size) );
-  --theme-element-spacing-large: calc( 2.5 * var(--theme-body-font-size) ); }
-  @media only screen and (min-width: 1024px) {
-    :root {
-      --theme-wrapper-side-spacing: 48px; } }
+  --theme-content-font-size: 18px; }
 
 ul.wp-block-archives-list[class] {
   list-style: none;
@@ -133,13 +129,15 @@ ul.wp-block-categories__list[class] {
 .wp-block-columns {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  --theme-column-spacing: var(--theme-element-spacing);
+  --theme-column-spacing: var(--theme-spacing-normal);
   grid-gap: var(--theme-column-spacing); }
   .wp-block-columns.alignfull {
     --theme-wrapper-side-spacing: 0; }
 
-.wp-block-column > :not(:first-child) {
-  margin-top: var(--theme-element-spacing); }
+.wp-block-column {
+  --element-spacing: var(--theme-spacing-normal); }
+  .wp-block-column > :not(:first-child) {
+    margin-top: var(--element-spacing); }
 
 /* Cover Block */
 .wp-block-cover {
@@ -381,9 +379,10 @@ ul.wp-block-categories__list[class] {
  */
 /* Latest Comments Block */
 .wp-block-latest-comments {
-  list-style: none; }
+  list-style: none;
+  --element-spacing: var(--theme-spacing-normal); }
   .wp-block-latest-comments > :not(:first-child) {
-    margin-top: var(--theme-element-spacing); }
+    margin-top: var(--element-spacing); }
 
 .wp-block-latest-comments__comment {
   display: flex;
@@ -558,8 +557,18 @@ ul.wp-block-categories__list[class] {
   .novablocks-media__aside[class] {
     order: -1; }
 
+.novablocks-media {
+  --element-spacing: var(--theme-spacing-large); }
+
+.novablocks-media__inner-container {
+  --element-spacing: var(--theme-spacing-tiny); }
+
 .block-is-moderate {
   --novablocks-media-background-color: var(--theme-sm-light-3); }
+
+.novablocks-media {
+  --novablocks-media-content-padding: var(--theme-spacing-large);
+  --novablocks-media-spacing: var(--theme-spacing-normal); }
 
 :root {
   --theme-button-font-family: Reforma2018, sans-serif;
@@ -712,8 +721,10 @@ ul.wp-block-categories__list[class] {
   --current-letter-spacing: var(--theme-button-letter-spacing);
   --current-text-transform: var(--theme-button-text-transform); }
 
-.editor-styles-wrapper figure > :not(:first-child) {
-  margin-top: calc( var(--theme-element-spacing) / 4); }
+.editor-styles-wrapper figure {
+  --element-spacing: var(--theme-spacing-tiny); }
+  .editor-styles-wrapper figure > :not(:first-child) {
+    margin-top: var(--element-spacing); }
 
 .editor-styles-wrapper figcaption {
   font-size: var(--current-font-size);
@@ -747,7 +758,8 @@ ul.wp-block-categories__list[class] {
   --separator-arrow-width: 5px;
   display: flex;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  line-height: 1; }
 
 .editor-styles-wrapper .c-separator__flower {
   padding-left: 1em;
@@ -919,12 +931,6 @@ ul.wp-block-categories__list[class] {
   --current-text-transform: var(--theme-heading-5-text-transform);
   color: var(--theme-sm-dark-1); }
 
-.editor-styles-wrapper[class] h1:not(:first-child), .editor-styles-wrapper[class] h2:not(:first-child), .editor-styles-wrapper[class] h3:not(:first-child), .editor-styles-wrapper[class] h4:not(:first-child), .editor-styles-wrapper[class] h5:not(:first-child), .editor-styles-wrapper[class] h6:not(:first-child) {
-  margin-top: 1em; }
-
-.editor-styles-wrapper[class] h1:not(:last-child), .editor-styles-wrapper[class] h2:not(:last-child), .editor-styles-wrapper[class] h3:not(:last-child), .editor-styles-wrapper[class] h4:not(:last-child), .editor-styles-wrapper[class] h5:not(:last-child), .editor-styles-wrapper[class] h6:not(:last-child) {
-  margin-bottom: 0.25em; }
-
 .editor-styles-wrapper[class] h1.entry-title {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
@@ -961,8 +967,8 @@ ul.wp-block-categories__list[class] {
   /* Headings */
   /* Tables */ }
   .editor-styles-wrapper[class] {
-    background-color: var(--theme-background-color);
-    color: var(--theme-text-color);
+    background-color: var(--theme-sm-light-3);
+    color: var(--theme-sm-dark-2);
     font-family: var(--theme-body-font-family);
     font-size: var(--theme-content-font-size);
     line-height: 1.6;
@@ -1003,7 +1009,7 @@ ul.wp-block-categories__list[class] {
       list-style-position: inside; }
     .editor-styles-wrapper .block-library-list li > ul,
     .editor-styles-wrapper .block-library-list li > ol {
-      padding-left: var(--theme-element-spacing); }
+      padding-left: var(--theme-spacing-normal); }
     .editor-styles-wrapper .block-library-list ul {
       list-style-type: disc; }
     .editor-styles-wrapper .block-library-list ul ul {
