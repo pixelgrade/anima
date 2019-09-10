@@ -1,7 +1,8 @@
 .comment-list,
 .comment-list .children {
     list-style: none;
-    @include space-children-y(var(--theme-spacing-normal));
+    --element-spacing: var(--theme-spacing-normal);
+    @include space-children-y;
 }
 
 .comment-list {

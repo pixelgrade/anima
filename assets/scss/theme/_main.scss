@@ -3,7 +3,8 @@
 }
 
 figure {
-    @include space-children-y( var(--theme-spacing-micro) );
+    --element-spacing: var(--theme-spacing-tiny);
+    @include space-children-y;
 }
 
 figcaption {

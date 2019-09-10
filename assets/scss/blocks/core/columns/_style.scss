@@ -16,6 +16,7 @@ $enable-columns-block-styles:           true !default;
     }
 
     .wp-block-column {
-        @include space-children-y(var(--theme-spacing-normal));
+        --element-spacing: var(--theme-spacing-normal);
+        @include space-children-y;
     }
 }
