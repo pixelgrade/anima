@@ -38,6 +38,8 @@ function novablocks_scripts() {
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
+
+	wp_deregister_style('wc-block-style');
 }
 add_action( 'wp_enqueue_scripts', 'novablocks_scripts', 10 );
 
