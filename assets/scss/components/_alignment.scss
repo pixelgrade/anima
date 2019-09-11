@@ -1,44 +1,43 @@
-%alignleft {
-    margin-right: 2em;
-    float: left;
-}
-
-%alignright {
-    margin-left: 2em;
-    float: right;
-}
-
-%aligncenter {
-
-}
-
-%alignnone {
-
-}
-
-%alignleft[class][class],
-%alignright[class][class] {
-    max-width: 40%;
-}
-
-%alignleft,
-%alignright,
-%aligncenter,
-%alignnone {
-
-    &:not(:first-child) {
-        margin-top: 2em;
-    }
-
-    &:not(:last-child) {
-        margin-bottom: 2em;
-    }
-}
-
 @each $alignment in left, right, center, none {
 
     .entry-content > .align#{$alignment},
-    .block-editor-block-list__layout .block-editor-block-list__block[data-align=#{$alignment}] .block-editor-block-list__block-edit {
-        @extend %align#{$alignment} !optional;
+    .editor-styles-wrapper [data-align=#{$alignment}] [data-block] {
+
+        &:not(:first-child) {
+            margin-top: var(--theme-spacing);
+        }
+
+        &:not(:last-child) {
+            margin-bottom: var(--theme-spacing);
+        }
     }
+}
+
+@each $alignment in left, right {
+
+    .entry-content > .align#{$alignment} {
+        float: #{$alignment};
+    }
+
+    .editor-block-list__block[data-align=#{$alignment}] {
+        max-width: 100%;
+
+        .editor-block-list__block-edit {
+            max-width: 40%;
+        }
+
+        &[data-align] .block-editor-rich-text p {
+            font: inherit;
+        }
+    }
+}
+
+.entry-content > .alignright,
+.editor-block-list__block[data-align=right] .editor-block-list__block-edit {
+    margin-left: var(--theme-spacing);
+}
+
+.entry-content > .alignleft,
+.editor-block-list__block[data-align=left] .editor-block-list__block-edit {
+    margin-right: var(--theme-spacing);
 }

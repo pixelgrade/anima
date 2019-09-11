@@ -130,7 +130,9 @@ if ( ! function_exists( 'rosa_alter_nova_hero_block_template' ) ) {
 				    'secondary' => 'Welcome',
 			        'primary' => 'The Rosa',
 				    'align' => 'center',
-				    'level' => 1,
+				    'level' => 2,
+                    'fontSize' => 'huge',
+				    'className' => 'has-huge-font-size',
 			    ),
 		    ),
 		    array(
@@ -143,7 +145,9 @@ if ( ! function_exists( 'rosa_alter_nova_hero_block_template' ) ) {
 			    'core/heading',
 			    array(
 				    'content' => 'Ready to be opened',
-				    'level' => '5',
+				    'level' => 5,
+                    'fontSize' => 'tiny',
+                    'className' => 'has-tiny-font-size',
 			    ),
 		    ),
 		    array(
@@ -162,7 +166,9 @@ if ( ! function_exists( 'rosa_alter_nova_hero_block_template' ) ) {
 			        'secondary' => 'Discover',
 			        'primary' => 'Our Story',
 			        'align' => 'center',
-			        'level' => 1,
+			        'level' => 2,
+                    'fontSize' => 'large',
+			        'className' => 'has-large-font-size',
 		        ),
 	        ),
 	        array(
@@ -176,6 +182,7 @@ if ( ! function_exists( 'rosa_alter_nova_hero_block_template' ) ) {
 		        'core/paragraph',
 		        array(
 			        'content' => 'Rosa is a restaurant, bar and coffee roastery located on a busy corner site in Farringdon’s Exmouth Market. With glazed frontage on two sides of the building, overlooking the market and a bustling London intersection.',
+                    'align' => 'center',
 		        ),
 	        ),
 	        array(
@@ -188,13 +195,13 @@ if ( ! function_exists( 'rosa_alter_nova_hero_block_template' ) ) {
 	        ),
         );
 
+        $settings['media']['attributes']['horizontalAlignment']['default'] = 'center';
+
         if ( ! empty( $settings['media']['blockAreaOptions'] ) ) {
             $settings['media']['blockAreaOptions'] = array_filter( $settings['media']['blockAreaOptions'], function( $option ) {
                 return $option['value'] != 'highlighted';
             } );
         }
-
-
 
         return $settings;
     }
@@ -232,7 +239,7 @@ remove_action( 'edit_form_after_title', '_wp_posts_page_notice' );
 
 function rosa_header_should_be_fixed() {
 	global $post;
-	
+
 	if ( has_blocks( $post->post_content ) ) {
 		$blocks = parse_blocks( $post->post_content );
 

@@ -28,18 +28,9 @@
     &[class] {
         @include nova-container-colors;
         @include nova-container-font(var(--theme-content-font-size));
-    }
-
-    @import "elements/typography";
-
-    .block-library-list {
-
-        ul, ol {
-            margin: 0;
-            padding: 0;
-        }
 
         @import "elements/lists";
+        @import "elements/typography";
     }
 
     @import "components/alignment";
@@ -48,6 +39,7 @@
         margin: 0;
     }
 }
+
 
 .editor-styles-wrapper[class] {
     @import "blocks/helpers";
