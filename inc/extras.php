@@ -138,7 +138,7 @@ if ( ! function_exists( 'rosa_alter_nova_hero_block_template' ) ) {
 		    array(
 			    'core/separator',
 			    array(
-				    'classname' => 'is-style-line-flower',
+				    'className' => 'is-style-line-flower',
 			    ),
 		    ),
 		    array(
@@ -149,14 +149,7 @@ if ( ! function_exists( 'rosa_alter_nova_hero_block_template' ) ) {
                     'fontSize' => 'tiny',
                     'className' => 'has-tiny-font-size',
 			    ),
-		    ),
-		    array(
-			    'core/button',
-			    array(
-				    'text' => 'Explore',
-				    'align' => 'center',
-			    ),
-		    ),
+		    )
 	    );
 
         $settings['media']['template'] = array(
@@ -175,7 +168,7 @@ if ( ! function_exists( 'rosa_alter_nova_hero_block_template' ) ) {
 		        'core/separator',
 		        array(
                     'style' => 'flower',
-			        'classname' => 'is-style-flower',
+			        'className' => 'is-style-flower',
 		        ),
 	        ),
 	        array(
@@ -190,7 +183,7 @@ if ( ! function_exists( 'rosa_alter_nova_hero_block_template' ) ) {
 		        array(
 			        'text' => 'About Us',
 			        'align' => 'center',
-                    'classname' => 'is-style-text'
+                    'className' => 'is-style-text'
 		        ),
 	        ),
         );
