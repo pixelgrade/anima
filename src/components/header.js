@@ -10,12 +10,16 @@ class Header {
 		this.inversed = ! jQuery( this.element ).hasClass( 'site-header--normal' );
 		this.scrollOffset = 0;
 		this.options = Object.assign( {}, defaults, args );
+		this.offset = 0;
+
 		this.update();
-		this.init();
+		this.registerUpdate();
 	}
 
-	init() {
-		GlobalService.registerUpdate( this.update.bind( this ) );
+	registerUpdate() {
+		GlobalService.registerUpdate( () => {
+			this.update();
+		} );
 	}
 
 	update() {
@@ -28,8 +32,9 @@ class Header {
 			const offsetBox = offsetTargetElement.getBoundingClientRect();
 			this.scrollOffset = offsetBox.top + offsetBox.height + scrollY - this.box.height / 2;
 		}
-
-		page.style.paddingTop = this.box.height + 'px';
+		
+		this.element.style.marginTop = this.offset + 'px';
+		page.style.paddingTop = this.box.height + this.offset + 'px';
 
 		jQuery( this.element ).addClass( 'site-header--fixed site-header--ready' );
 	}

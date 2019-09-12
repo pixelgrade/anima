@@ -637,6 +637,30 @@ label {
 .editor-block-list__block[data-align=left] .editor-block-list__block-edit {
   margin-right: var(--theme-spacing); }
 
+.promo-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%; }
+  .admin-bar .promo-bar {
+    top: 32px; }
+  .demo-site .promo-bar {
+    top: 80px; }
+  .admin-bar.demo-site .promo-bar {
+    top: 112px; }
+  @media (max-width: 782px) {
+    .admin-bar .promo-bar {
+      top: 46px; }
+    .admin-bar.demo-site .promo-bar {
+      top: 126px; } }
+  @media (max-width: 700px) {
+    .admin-bar.demo-site .promo-bar {
+      top: 146px; } }
+  @media screen and (max-width: 600px) {
+    .admin-bar .promo-bar {
+      position: absolute; } }
+
 /* 2.1. Site Header */
 .c-menu-toggle__wrap {
   display: flex;
@@ -1896,6 +1920,16 @@ body, .site, .site-content {
   --novablocks-light-1: var(--theme-sm-light-1);
   --novablocks-light-2: var(--theme-sm-light-2);
   --novablocks-light-3: var(--theme-sm-light-3); }
+
+.novablocks-announcement-bar.is-hidden[class] {
+  display: block; }
+
+.novablocks-announcement-bar__wrapper {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translate(0, -50%); }
 
 /* Nova Blocks */
 .novablocks-media__inner-container {
