@@ -1,5 +1,4 @@
 .comments-area {
     @include wrapper;
-    --element-spacing: var(--theme-spacing-normal);
-    @include space-children-y;
+    @include space-children-y( var(--theme-spacing-normal) );
 }

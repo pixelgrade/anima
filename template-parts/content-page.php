@@ -11,45 +11,27 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-    <?php if ( ! rosa_header_should_be_fixed() ) { ?>
-        <header class="entry-header">
-            <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-        </header><!-- .entry-header -->
-    <?php } ?>
+	<?php if ( ! rosa_header_should_be_fixed() ) { ?>
+        <div class="entry-header entry-content">
+			<?php get_template_part( 'template-parts/entry-meta' ); ?>
+			<?php the_title( '<h1 class="entry-title has-text-align-center">', '</h1>' ); ?>
+            <div class="has-normal-font-size">
+				<?php rosa_the_separator( 'flower' ); ?>
+            </div>
+        </div>
+		<?php if ( has_post_thumbnail() ) { ?>
+            <div class="entry-thumbnail wp-block-group alignfull">
+                <div class="wp-block-group__inner-container">
+                    <div class="wp-block-image alignwide">
+						<?php the_post_thumbnail(); ?>
+                    </div>
+                </div>
+            </div>
+		<?php } ?>
+	<?php } ?>
 
-	<?php novablocks_post_thumbnail(); ?>
+    <div class="entry-content">
+		<?php the_content(); ?>
+    </div>
 
-	<div class="entry-content">
-		<?php
-		the_content();
-
-		wp_link_pages( array(
-			'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'nova' ),
-			'after'  => '</div>',
-		) );
-		?>
-	</div><!-- .entry-content -->
-
-	<?php if ( get_edit_post_link() ) : ?>
-		<footer class="entry-footer">
-			<?php
-			edit_post_link(
-				sprintf(
-					wp_kses(
-						/* translators: %s: Name of current post. Only visible to screen readers */
-						__( 'Edit <span class="screen-reader-text">%s</span>', 'nova' ),
-						array(
-							'span' => array(
-								'class' => array(),
-							),
-						)
-					),
-					get_the_title()
-				),
-				'<span class="edit-link">',
-				'</span>'
-			);
-			?>
-		</footer><!-- .entry-footer -->
-	<?php endif; ?>
 </article><!-- #post-<?php the_ID(); ?> -->

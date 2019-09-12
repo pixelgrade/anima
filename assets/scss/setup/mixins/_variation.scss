@@ -1,0 +1,27 @@
+$variations: (
+    default: (
+        color: color,
+        dark: dark,
+        light: light
+    ),
+    dark: (
+        color: color,
+        dark: light,
+        light: dark,
+    ),
+    monochrome: (
+        color: dark,
+        dark: dark,
+        light: light
+    ),
+);
+
+@mixin variation( $name ) {
+    $variation: map-get( $variations, $name );
+    @each $destination in (color, dark, light) {
+        $source: map-deep-get($variations, $name, $destination);
+        @for $i from 1 through 3 {
+            --theme-sm-#{$destination}-#{$i}: var(--sm-#{$source}-#{$i});
+        }
+    }
+}
