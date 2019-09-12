@@ -36,25 +36,6 @@ $wp-colors: (
     }
 }
 
-$wp-font-sizes: (
-    tiny: 13px,
-    small: 16px,
-    normal: 22px,
-    medium: 29px,
-    large: 45px,
-    huge: 79px,
-);
-
-/* Font Size Helper Classes */
-@each $name, $font-size in $wp-font-sizes {
-
-    .has-#{$name}-font-size {
-        $font-name: has-#{$name}-font-size;
-        @include define-font(#{$name}, (font-size: $font-size), font-size);
-        @include apply-font(#{$name}, font-size);
-    }
-}
-
 /* Alignment Helper Classes */
 @each $alignment in left, center, right {
 

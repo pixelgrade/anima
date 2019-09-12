@@ -3,8 +3,7 @@ $enable-image-block-styles:             true !default;
 @if $enable-image-block-styles == true {
     /* Image Block */
     .wp-block-image {
-        --element-spacing: var(--theme-spacing-micro);
-        @include space-children-y;
+        @include space-children-y( var(--theme-sacing-micro) );
 
         img {
             display: block;

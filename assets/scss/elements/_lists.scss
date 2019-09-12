@@ -1,12 +1,13 @@
 /* Lists */
 ul,
 ol {
-    list-style-position: inside;
+    list-style-position: outside;
+    padding-left: var(--theme-spacing);
+    @include space-children-y( var(--theme-spacing-tiny) );
 }
 
 li > ul,
 li > ol {
-    padding-left: var(--theme-spacing-normal);
 }
 
 /* Nested unordered lists */

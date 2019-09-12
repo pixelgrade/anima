@@ -12,9 +12,10 @@ function novablocks_deregister_gutenberg_styles() {
 add_action( 'enqueue_block_assets', 'novablocks_deregister_gutenberg_styles' );
 
 function novablocks_enqueue_theme_block_editor_assets() {
-	wp_enqueue_style( 'nova-google-webfonts', 'https://fonts.googleapis.com/css?family=Cabin:400,400i,700,700i|Herr+Von+Muellerhoff|Source+Sans+Pro:600,900&display=swap', array(), wp_get_theme()->get( 'Version' ) );
-	wp_enqueue_style('nova-block-styles', get_template_directory_uri() . '/editor.css' );
-	wp_enqueue_style('nova-theme-styles', get_template_directory_uri() . '/dist/js/editor.blocks.css' );
+	wp_enqueue_style( 'nova-webfonts', get_template_directory_uri() . '/dist/fonts/Reforma/fonts.css', array(), wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_style( 'nova-google-webfonts', '//fonts.googleapis.com/css?family=Archivo|Herr+Von+Muellerhoff&display=swap', array(), wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_style( 'nova-block-styles', get_template_directory_uri() . '/editor.css' );
+	wp_enqueue_style( 'nova-theme-styles', get_template_directory_uri() . '/dist/js/editor.blocks.css' );
 
 	wp_enqueue_script(
 		'nova-theme-js',
@@ -123,39 +124,7 @@ function novablocks_setup() {
 	add_theme_support( 'responsive-embeds' );
 
 	add_theme_support( 'disable-custom-font-sizes' );
-
-	add_theme_support( 'editor-font-sizes', array(
-		array(
-			'name'      => __( 'Tiny', '__theme_txtd' ),
-			'size'      => 13,
-			'slug'      => 'tiny'
-		),
-		array(
-			'name'      => __( 'Small', '__theme_txtd' ),
-			'size'      => 16,
-			'slug'      => 'small'
-		),
-		array(
-			'name'      => __( 'Normal', '__theme_txtd' ),
-			'size'      => 22,
-			'slug'      => 'normal'
-		),
-		array(
-			'name'      => __( 'Medium', '__theme_txtd' ),
-			'size'      => 29,
-			'slug'      => 'medium'
-		),
-		array(
-			'name'      => __( 'Large', '__theme_txtd' ),
-			'size'      => 45,
-			'slug'      => 'large'
-		),
-		array(
-			'name'      => __( 'Huge', '__theme_txtd' ),
-			'size'      => 79,
-			'slug'      => 'huge'
-		),
-	) );
+	add_theme_support( 'editor-font-sizes', array() );
 
 	add_theme_support( 'customizer_style_manager' );
 

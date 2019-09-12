@@ -1,6 +1,5 @@
 .c-comments-toggle__label {
     @include button;
-    @include button-fill-background;
 
     display: block;
     text-align: center;
@@ -12,4 +11,8 @@
     &:not(:checked) + .c-comments-toggle__label ~ * {
         display: none;
     }
+}
+
+.c-comments-toggle__checkbox + .c-comments-toggle__label {
+    --element-spacing: 0;
 }

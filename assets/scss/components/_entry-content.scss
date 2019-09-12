@@ -5,5 +5,5 @@
 .entry-content,
 [class*="__inner-container"] {
     @include wrapper;
-    @include space-children-y;
+    @include space-children-y( var(--theme-spacing-small) );
 }
