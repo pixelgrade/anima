@@ -183,3 +183,20 @@ if ( ! function_exists( 'rosa_get_separator_markup' ) ) {
         <?php return apply_filters( 'rosa_separator_markup', ob_get_clean() );
     }
 }
+
+if ( ! function_exists( ' rosa_woocommerce_pagination_args' ) ) {
+	function rosa_woocommerce_pagination_args() {
+
+		$args =  array(
+				'end_size'           => 1,
+				'mid_size'           => 2,
+				'type'               => 'list',
+				'type' => null,
+				'prev_text' => esc_html_x( 'Previous', 'previous set of posts', '__theme_txtd' ),
+				'next_text' => esc_html_x( 'Next', 'next set of posts', '__theme_txtd' ),
+			);
+
+		return $args;
+    }
+}
+

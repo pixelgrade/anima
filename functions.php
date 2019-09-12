@@ -39,7 +39,14 @@ function novablocks_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
-	wp_deregister_style('wc-block-style');
+	wp_enqueue_script( 'nova-woocommerce', get_template_directory_uri() . '/dist/js/woocommerce.js', array( 'jquery' ) );
+
+	wp_localize_script( 'nova-woocommerce', 'pixelgradeWooCommerceStrings', array(
+		'adding_to_cart' => esc_html__( 'Adding...', '__components_txtd' ),
+		'added_to_cart' => esc_html__( 'Added!', '__components_txtd' ),
+	) );
+
+//	wp_deregister_style('wc-block-style');
 }
 add_action( 'wp_enqueue_scripts', 'novablocks_scripts', 10 );
 
@@ -117,42 +124,6 @@ function novablocks_setup() {
 
 	add_theme_support( 'disable-custom-font-sizes' );
 
-	/**
-	 * Add custom colors to the default Color palette control in the block editor
-	 */
-//	add_theme_support( 'editor-color-palette', array(
-//		array(
-//			'name'  => __( 'Blue', '__theme_txtd' ),
-//			'slug'  => 'nova-blue',
-//			'color'	=> '#203AB6',
-//		),
-//		array(
-//			'name'  => __( 'Yellow', '__theme_txtd' ),
-//			'slug'  => 'nova-yellow',
-//			'color' => '#FFE42E',
-//		),
-//		array(
-//			'name'  => __( 'Almost Black', '__theme_txtd' ),
-//			'slug'  => 'nova-almost-black',
-//			'color' => '#000043',
-//		),
-//		array(
-//			'name'  => __( 'Darkest Blue', '__theme_txtd' ),
-//			'slug'  => 'nova-darkest-blue',
-//			'color' => '#272743',
-//		),
-//		array(
-//			'name'  => __( 'White', '__theme_txtd' ),
-//			'slug'  => 'nova-white',
-//			'color' => '#FFFFFF',
-//		),
-//		array(
-//			'name'  => __( 'Gray', '__theme_txtd' ),
-//			'slug'  => 'nova-gray',
-//			'color' => '#EEF1F2',
-//		),
-//	) );
-
 	add_theme_support( 'editor-font-sizes', array(
 		array(
 			'name'      => __( 'Tiny', '__theme_txtd' ),
@@ -187,6 +158,11 @@ function novablocks_setup() {
 	) );
 
 	add_theme_support( 'customizer_style_manager' );
+
+	add_theme_support( 'woocommerce' );
+	add_theme_support( 'wc-product-gallery-zoom');
+	add_theme_support( 'wc-product-gallery-lightbox' );
+	add_theme_support( 'wc-product-gallery-slider' );
 }
 add_action( 'after_setup_theme', 'novablocks_setup' );
 
@@ -205,3 +181,5 @@ require get_template_directory() . '/inc/template-tags.php';
  */
 require get_template_directory() . '/inc/template-functions.php';
 require get_template_directory() . '/inc/extras.php';
+
+require get_template_directory() . '/inc/integrations.php';

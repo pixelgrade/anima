@@ -1,34 +1,209 @@
+.wc-block-grid {
+  &.has-aligned-buttons {
+    .wc-block-grid__product {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  &.has-1-columns {
+
+    .wc-block-grid__products {
+      display: block;
+    }
+
+    .wc-block-grid__product {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  @for $i from 2 to 9 {
+    &.has-#{$i}-columns .wc-block-grid__product {
+      flex: 1 0 calc(#{ 100% / $i });
+      max-width: 100% / $i;
+    }
+  }
+}
+
 .wc-block-grid__products {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
   padding: 0;
-  margin: 0 0 24px;
+  margin: 0;
+
+  width: 100%;
 }
 
-
 .wc-block-grid__product {
-  display: grid;
+  --theme-product-inside-padding: var(--theme-spacing-tiny);
+  --column-gap: var(--theme-spacing-tiny);
+  --row-gap: var(--theme-spacing-tiny);
 
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  padding: 0 var(--column-gap) 0 0;
+  margin: 0 0 var(--row-gap) 0;
+  float: none;
+  width: auto;
+  position: relative;
+
+  text-align: left;
+
+  .add_to_cart_button:not(.loading):after {
+    content: "+";
+    padding-left: 0.5em;
+    right: 0;
+  }
+
 }
 
 .wc-block-grid__product-link {
-  grid-column: 1 / span 2;
-  grid-row: 1 /span 3;
+  display: block;
+
+  text-decoration: none;
+}
+
+.woocommerce-loop-product__link {
+  text-decoration: none;
+
+  .wc-block-grid__product-onsale {
+    @include specific(2) {
+      transform: none;
+    }
+  }
 }
 
 .wc-block-grid__product-add-to-cart {
-  grid-column: 1 / span 2;
-  grid-row: 3 / span 1;
-}
 
-.wc-block-grid__product-price {
-  grid-column: 1 / span 2;
+  text-align: center;
+
+  .add_to_cart_button {
+    --theme-button-background-color: transparent;
+    --theme-button-hover-background-color: transparent;
+    --theme-button-color: var(--theme-sm-color-1);
+    --theme-button-border-color: currentColor;
+    --theme-button-hover-color: var(--theme-sm-light-1);
+    --theme-button-hover-border-color: var(--theme-sm-color-1);
+
+    width: 100%;
+  }
 }
 
 .wc-block-grid__product-onsale {
-  grid-column: 1 / span 1;
-  grid-row: 1 / span 1;
+  position: absolute;
+
+  top: var(--theme-product-inside-padding);
+  left: var(--theme-product-inside-padding);
+  padding: 0.6em 1.1em 0.7em 1.2em;
+  background-color: var(--theme-sm-color-1);
+  
+  color: var(--theme-button-color);
+  text-align: center;
+}
+
+.wc-block-grid__product > :not(:last-child) {
+  margin-bottom: var(--theme-spacing-tiny);
+}
+
+.wc-block-grid__product-price {
+  color: var(--theme-sm-color-1);
+
+  del {
+    color: var(--theme-sm-dark-2);
+  }
+
+  ins {
+    text-decoration: none;
+  }
+}
+
+.wc-block-grid__product-image img {
+  width: 100%;
+}
+
+.wc-block-grid__product-title,
+.woocommerce-loop-product__title {
+  @include apply-font(heading-4);
+  color: var(--theme-sm-dark-1);
+}
+
+.wc-block-grid__product-rating {
+
+  .star-rating {
+    overflow: hidden;
+    position: relative;
+    width: 5.3em;
+    height: 1.618em;
+    line-height: 1.618;
+    font-size: 1em;
+    font-family: star; /* stylelint-disable-line */
+    font-weight: 400;
+    display: inline-block;
+    margin: 0 auto;
+    text-align: left;
+
+    &::before {
+      content: "\53\53\53\53\53";
+      top: 0;
+      left: 0;
+      right: 0;
+      position: absolute;
+      opacity: 0.5;
+      color: #aaa;
+    }
+
+    span {
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      right: 0;
+      position: absolute;
+      padding-top: 1.5em;
+    }
+
+    span::before {
+      content: "\53\53\53\53\53";
+      top: 0;
+      left: 0;
+      right: 0;
+      position: absolute;
+      color: #000;
+    }
+  }
+}
+
+
+.wp-block-button.wc-block-grid__product-add-to-cart {
+  transform: translateY(-10px);
+  opacity: 0;
+}
+
+.wc-block-grid__product:hover {
+  .wc-block-grid__product-add-to-cart {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .wc-block-grid__product-link,
+  .wc-block-grid__product-price,
+  .wc-block-grid__product-rating,
+  .wc-block-grid__product-onsale {
+    transform: translateY(-10px);
+    transition: transform .25s $easeOutQuad;
+  }
+}
+
+.wc-block-grid__product-link,
+.wc-block-grid__product-price,
+.wc-block-grid__product-rating,
+.wc-block-grid__product-onsale {
+  transition: transform .25s $easeOutQuad;
+}
+
+.wc-block-grid__product-add-to-cart {
+  transition: opacity .25s $easeOutQuad,
+              transform .25s $easeOutQuad;
+}
+
+.woocommerce img,
+.woocommerce-page img {
+  width: 100%
 }

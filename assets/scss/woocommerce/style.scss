@@ -1,2 +1,18 @@
 @import "archive";
 @import "product";
+@import "cart";
+@import "single-product";
+@import "page-numbers";
+
+
+/*
+ * Blocks
+ */
+
+@import "blocks/product-featured";
+@import "blocks/category-featured";
+
+.woocommerce ul.products li.product .price {
+  color: var(--theme-sm-color-1);
+  font-size: var(--current-font-size);
+}

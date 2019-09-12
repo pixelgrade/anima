@@ -30,6 +30,7 @@ $classes = array();
                     <?php the_post_thumbnail(); ?>
                 </div>
             <?php }
+
             the_content();
             ?>
         </div>

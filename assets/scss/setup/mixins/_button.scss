@@ -44,6 +44,7 @@
 
   &:hover {
     background-color: var(--theme-button-hover-background-color);
+    border-color: var(--theme-button-hover-border-color);
   }
 }
 
@@ -63,7 +64,7 @@
   position: relative;
   z-index: 1;
 
-  &:after {
+  &:before {
     position: absolute;
     content: '';
     top: 0;
@@ -76,7 +77,7 @@
     z-index: -1;
   }
 
-  &:hover:after {
+  &:hover:before {
     width: 100%;
   }
 }

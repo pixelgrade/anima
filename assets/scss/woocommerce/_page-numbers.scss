@@ -1,0 +1,124 @@
+// page numbers
+@mixin pagination {
+  position: relative;
+
+  &:before,
+  &:after {
+    content: '';
+
+    position: absolute;
+    top: 50%;
+    z-index: 100;
+
+    color: inherit;
+    transition-property: transform;
+  }
+
+  // The stick
+  &:before {
+    @include spacing(width, 12px);
+    height: 1px;
+
+    background-color: currentColor;
+  }
+
+  // The arrow
+  &:after {
+    display: block;
+    @include spacing(width, 7px);
+    @include spacing(height, 7px);
+
+    border: 1px solid transparent;
+  }
+}
+
+@mixin pagination--left {
+  @include spacing(padding-left, 25px);
+
+  &:before {
+    left: 0;
+  }
+
+  &:after {
+    left: 0;
+    border-top-color: currentColor;
+    border-left-color: currentColor;
+    transform: translate(0, calc(0.5px - 50%)) rotate(-45deg);
+  }
+}
+
+@mixin pagination--right {
+  @include spacing(padding-right, 25px);
+
+  &:before {
+    right: 0;
+  }
+
+  &:after {
+    right: 0;
+    border-top-color: currentColor;
+    border-right-color: currentColor;
+    transform: translate(0, calc(0.5px - 50%)) rotate(45deg);
+  }
+}
+
+.woocommerce-pagination,
+.nav-links {
+  display: flex;
+  justify-content: center;
+
+  @include spacing(margin-top, 5.5rem);
+  @include spacing(margin-bottom, 3rem);
+  @include spacing(margin-left, -0.5rem);
+
+  > .page-numbers {
+    text-decoration: none;
+    @include spacing(margin-left, 0.5rem);
+  }
+
+  > .prev {
+    @include pagination;
+    @include pagination--left;
+  }
+
+  > .next {
+    @include pagination;
+    @include pagination--right;
+  }
+
+  > .prev,
+  > .current:last-child {
+    margin-right: auto;
+  }
+
+  > .next,
+  > .current:first-child {
+    margin-left: auto;
+  }
+}
+
+a.page-numbers,
+span.page-numbers {
+
+  &[class][class] {
+    width: 3em;
+    height: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.current {
+      background-color: var(--theme-sm-color-1);
+      color: var(--theme-sm-light-1);
+    }
+
+    &:hover {
+      color: var(--theme-sm-dark-1);
+    }
+  }
+
+  &.next[class],
+  &.prev[class] {
+    width: auto;
+  }
+}

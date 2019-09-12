@@ -26,6 +26,7 @@ const extractConfig = {
 module.exports = {
   entry: {
     './dist/js/app' : './src/app.js',
+    './dist/js/woocommerce' : './src/woocommerce.js',
     './dist/js/editor.blocks' : './src/editor.js',
   },
   output: {
