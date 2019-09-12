@@ -7,17 +7,25 @@ body {
 
     .site-content {
         background: var(--theme-sm-light-1);
+        padding-bottom: var(--theme-spacing-large);
     }
 
 }
 
-.single {
+.single,
+.page {
 
-    .page-header {
-        background-color: var(--theme-sm-light-3);
+    .hentry {
+        @include space-children-y( var(--theme-spacing-large ) );
     }
 
-    .page-thumbnail {
+    .entry-header {
+        --theme-content-width-normal: var(--theme-content-width-wide);
+        background-color: var(--theme-sm-light-3);
+        @include space-children-y( var(--theme-spacing ) );
+    }
+
+    .entry-thumbnail {
         position: relative;
 
         &:before {

@@ -4,3 +4,9 @@
 @import "setup/mixins";
 @import "setup/custom-properties";
 @import "setup/easings";
+
+:root { @include variation(default) }
+
+.variation--default { @include variation(default) }
+.variation--dark { @include variation(dark) }
+.variation--monochrome { @include variation(monochrome) }

@@ -59,7 +59,7 @@ export default class Hero {
 		const headline = container.children().first().filter( '.c-headline' );
 		const title = headline.find( '.c-headline__primary' );
 		const subtitle = headline.find( '.c-headline__secondary' );
-		const separator = headline.next( '.c-separator' );
+		const separator = headline.next( '.wp-block-separator' );
 		const sepFlower = separator.find( '.c-separator__flower' );
 		const sepLine = separator.find( '.c-separator__line' );
 		const sepArrow = separator.find( '.c-separator__arrow' );
@@ -74,12 +74,9 @@ export default class Hero {
 
 		if ( title.length && title.text().trim().length ) {
 
-			timeline.fromTo( title, 0.72, {
+			timeline.from( title, 0.72, {
 				'letter-spacing': '1em',
-				'margin-right': '-0.9em'
-			}, {
-				'letter-spacing': '0.2em',
-				'margin-right': '-0.1em',
+				'margin-right': '-0.9em',
 				ease: Expo.easeOut
 			}, 0 );
 
@@ -178,6 +175,7 @@ export default class Hero {
 				tl.pause();
 				this.timeline.eventCallback( 'onUpdate', null );
 				this.paused = true;
+				this.timeline.progress( this.progress );
 			}
 
 		}, [ "{self}" ] );

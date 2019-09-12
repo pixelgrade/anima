@@ -12,9 +12,10 @@ function novablocks_deregister_gutenberg_styles() {
 add_action( 'enqueue_block_assets', 'novablocks_deregister_gutenberg_styles' );
 
 function novablocks_enqueue_theme_block_editor_assets() {
-	wp_enqueue_style( 'nova-google-webfonts', 'https://fonts.googleapis.com/css?family=Cabin:400,400i,700,700i|Herr+Von+Muellerhoff|Source+Sans+Pro:600,900&display=swap', array(), wp_get_theme()->get( 'Version' ) );
-	wp_enqueue_style('nova-block-styles', get_template_directory_uri() . '/editor.css' );
-	wp_enqueue_style('nova-theme-styles', get_template_directory_uri() . '/dist/js/editor.blocks.css' );
+	wp_enqueue_style( 'nova-webfonts', get_template_directory_uri() . '/dist/fonts/Reforma/fonts.css', array(), wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_style( 'nova-google-webfonts', '//fonts.googleapis.com/css?family=Archivo|Herr+Von+Muellerhoff&display=swap', array(), wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_style( 'nova-block-styles', get_template_directory_uri() . '/editor.css' );
+	wp_enqueue_style( 'nova-theme-styles', get_template_directory_uri() . '/dist/js/editor.blocks.css' );
 
 	wp_enqueue_script(
 		'nova-theme-js',
@@ -115,71 +116,35 @@ function novablocks_setup() {
 
 	add_theme_support( 'disable-custom-font-sizes' );
 
-	/**
-	 * Add custom colors to the default Color palette control in the block editor
-	 */
-//	add_theme_support( 'editor-color-palette', array(
-//		array(
-//			'name'  => __( 'Blue', '__theme_txtd' ),
-//			'slug'  => 'nova-blue',
-//			'color'	=> '#203AB6',
-//		),
-//		array(
-//			'name'  => __( 'Yellow', '__theme_txtd' ),
-//			'slug'  => 'nova-yellow',
-//			'color' => '#FFE42E',
-//		),
-//		array(
-//			'name'  => __( 'Almost Black', '__theme_txtd' ),
-//			'slug'  => 'nova-almost-black',
-//			'color' => '#000043',
-//		),
-//		array(
-//			'name'  => __( 'Darkest Blue', '__theme_txtd' ),
-//			'slug'  => 'nova-darkest-blue',
-//			'color' => '#272743',
-//		),
-//		array(
-//			'name'  => __( 'White', '__theme_txtd' ),
-//			'slug'  => 'nova-white',
-//			'color' => '#FFFFFF',
-//		),
-//		array(
-//			'name'  => __( 'Gray', '__theme_txtd' ),
-//			'slug'  => 'nova-gray',
-//			'color' => '#EEF1F2',
-//		),
-//	) );
-
 	add_theme_support( 'editor-font-sizes', array(
 		array(
 			'name'      => __( 'Tiny', '__theme_txtd' ),
-			'size'      => 13,
+			'size'      => 12,
 			'slug'      => 'tiny'
 		),
 		array(
 			'name'      => __( 'Small', '__theme_txtd' ),
-			'size'      => 16,
+			'size'      => 18,
 			'slug'      => 'small'
 		),
 		array(
 			'name'      => __( 'Normal', '__theme_txtd' ),
-			'size'      => 22,
+			'size'      => 24,
 			'slug'      => 'normal'
 		),
 		array(
 			'name'      => __( 'Medium', '__theme_txtd' ),
-			'size'      => 29,
+			'size'      => 32,
 			'slug'      => 'medium'
 		),
 		array(
 			'name'      => __( 'Large', '__theme_txtd' ),
-			'size'      => 45,
+			'size'      => 40,
 			'slug'      => 'large'
 		),
 		array(
 			'name'      => __( 'Huge', '__theme_txtd' ),
-			'size'      => 79,
+			'size'      => 60,
 			'slug'      => 'huge'
 		),
 	) );

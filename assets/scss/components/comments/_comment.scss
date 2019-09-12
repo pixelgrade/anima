@@ -16,8 +16,7 @@
 }
 
 .comment__body {
-    --element-spacing: var(--theme-comment-body-spacing);
-    @include space-children-y;
+    @include space-children-y( var(--theme-spacing-small) );
     flex-grow: 1;
 }
 
@@ -42,6 +41,5 @@
 }
 
 .comment__content {
-    --element-spacing: var(--theme-comment-content-spacing);
-    @include space-children-y;
+    @include space-children-y( var(--theme-spacing-small) );
 }
