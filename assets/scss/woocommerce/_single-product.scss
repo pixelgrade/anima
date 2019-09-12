@@ -294,6 +294,24 @@
   .price {
     margin-bottom: var(--theme-spacing-small);
   }
+
+  span.onsale {
+    position: absolute;
+    min-width: auto;
+    min-height: auto;
+
+    top: var(--theme-spacing-tiny);
+    left: var(--theme-spacing-tiny);
+    padding: 0.6em 1.1em 0.7em 1.2em;
+    background-color: var(--theme-sm-color-1);
+
+    color: var(--theme-button-color);
+    text-align: center;
+
+    border-radius: 0;
+    line-height: 1;
+    font-size: 1em;
+  }
 }
 
 .variations {
@@ -527,4 +545,21 @@
 .related.products > h2 {
   margin-bottom: var(--theme-spacing-small);
   @include apply-font(heading-4);
+}
+
+
+.woocommerce {
+  --theme-button-background-color: transparent;
+  --theme-button-hover-background-color: transparent;
+  --theme-button-color: var(--theme-sm-color-1);
+  --theme-button-border-color: currentColor;
+  --theme-button-hover-color: var(--theme-sm-light-1);
+  --theme-button-hover-border-color: var(--theme-sm-color-1);
+  @include specific(5) {
+    button,
+    .button {
+      @include button;
+      @include button-fill-background;
+    }
+  }
 }

@@ -2300,7 +2300,8 @@ h1.entry-title {
 
 [type="button"],
 [type="submit"],
-[type="reset"], .c-comments-toggle__label, .wp-block-button__link, .wp-block-button:not(.is-style-text) .wp-block-button__link, .add_to_cart_button {
+[type="reset"], .c-comments-toggle__label, .wp-block-button__link, .wp-block-button:not(.is-style-text) .wp-block-button__link, .add_to_cart_button, .woocommerce[class][class][class][class][class] button,
+.woocommerce[class][class][class][class][class] .button {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
   line-height: var(--current-line-height);
@@ -2545,7 +2546,6 @@ iframe.instagram-media {
   width: 100%; }
 
 .wc-block-grid__product {
-  --theme-product-inside-padding: var(--theme-spacing-tiny);
   --column-gap: var(--theme-spacing-tiny);
   --row-gap: var(--theme-spacing-tiny);
   padding: 0 var(--column-gap) 0 0;
@@ -2581,8 +2581,8 @@ iframe.instagram-media {
 
 .wc-block-grid__product-onsale {
   position: absolute;
-  top: var(--theme-product-inside-padding);
-  left: var(--theme-product-inside-padding);
+  top: var(--theme-spacing-tiny);
+  left: var(--theme-spacing-tiny);
   padding: 0.6em 1.1em 0.7em 1.2em;
   background-color: var(--theme-sm-color-1);
   color: var(--theme-button-color);
@@ -2967,6 +2967,20 @@ iframe.instagram-media {
 .c-product-main .price {
   margin-bottom: var(--theme-spacing-small); }
 
+.c-product-main span.onsale {
+  position: absolute;
+  min-width: auto;
+  min-height: auto;
+  top: var(--theme-spacing-tiny);
+  left: var(--theme-spacing-tiny);
+  padding: 0.6em 1.1em 0.7em 1.2em;
+  background-color: var(--theme-sm-color-1);
+  color: var(--theme-button-color);
+  text-align: center;
+  border-radius: 0;
+  line-height: 1;
+  font-size: 1em; }
+
 .variations,
 .variations tbody,
 .variations tr,
@@ -3152,6 +3166,52 @@ iframe.instagram-media {
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
   --current-text-transform: var(--theme-heading-4-text-transform); }
+
+.woocommerce {
+  --theme-button-background-color: transparent;
+  --theme-button-hover-background-color: transparent;
+  --theme-button-color: var(--theme-sm-color-1);
+  --theme-button-border-color: currentColor;
+  --theme-button-hover-color: var(--theme-sm-light-1);
+  --theme-button-hover-border-color: var(--theme-sm-color-1); }
+  .woocommerce[class][class][class][class][class] button,
+  .woocommerce[class][class][class][class][class] .button {
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+    padding: var(--theme-button-padding);
+    border: var(--theme-button-border-width) solid var(--theme-button-border-color);
+    border-radius: var(--theme-button-border-radius);
+    background-color: var(--theme-button-background-color);
+    color: var(--theme-button-color);
+    transition: var(--theme-button-transition);
+    position: relative;
+    z-index: 1; }
+    .woocommerce[class][class][class][class][class] button:hover,
+    .woocommerce[class][class][class][class][class] .button:hover {
+      --theme-button-border-color: var(--theme-button-hover-border-color); }
+    .woocommerce[class][class][class][class][class] button:hover,
+    .woocommerce[class][class][class][class][class] .button:hover {
+      background-color: var(--theme-button-hover-background-color);
+      border-color: var(--theme-button-hover-border-color); }
+    .woocommerce[class][class][class][class][class] button:hover,
+    .woocommerce[class][class][class][class][class] .button:hover {
+      color: var(--theme-button-hover-color); }
+    .woocommerce[class][class][class][class][class] button:before,
+    .woocommerce[class][class][class][class][class] .button:before {
+      position: absolute;
+      content: '';
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background-color: var(--theme-button-hover-border-color);
+      transform-origin: left;
+      transition: width 0.4s var(--theme-button-transition-easing);
+      z-index: -1; }
+    .woocommerce[class][class][class][class][class] button:hover:before,
+    .woocommerce[class][class][class][class][class] .button:hover:before {
+      width: 100%; }
 
 .woocommerce-pagination,
 .nav-links {
