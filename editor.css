@@ -873,7 +873,22 @@ ul.wp-block-categories__list[class] {
   --theme-intro-font-family: Reforma1969, sans-serif;
   --theme-intro-font-size: 22px; }
 
-.editor-styles-wrapper[class] h1 {
+.editor-styles-wrapper[class] h1.has-larger-font-size {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  --current-font-family: var(--theme-display-font-family);
+  --current-font-size: var(--theme-display-font-size);
+  --current-line-height: var(--theme-display-line-height);
+  --current-font-weight: var(--theme-display-font-weight);
+  --current-letter-spacing: var(--theme-display-letter-spacing);
+  --current-text-transform: var(--theme-display-text-transform); }
+
+.editor-styles-wrapper[class] h1,
+.editor-styles-wrapper[class] h2.has-larger-font-size {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
   line-height: var(--current-line-height);
@@ -885,10 +900,11 @@ ul.wp-block-categories__list[class] {
   --current-line-height: var(--theme-heading-1-line-height);
   --current-font-weight: var(--theme-heading-1-font-weight);
   --current-letter-spacing: var(--theme-heading-1-letter-spacing);
-  --current-text-transform: var(--theme-heading-1-text-transform);
-  color: var(--theme-sm-dark-1); }
+  --current-text-transform: var(--theme-heading-1-text-transform); }
 
-.editor-styles-wrapper[class] h2 {
+.editor-styles-wrapper[class] h1.has-smaller-font-size,
+.editor-styles-wrapper[class] h2,
+.editor-styles-wrapper[class] h3.has-larger-font-size {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
   line-height: var(--current-line-height);
@@ -900,9 +916,9 @@ ul.wp-block-categories__list[class] {
   --current-line-height: var(--theme-heading-2-line-height);
   --current-font-weight: var(--theme-heading-2-font-weight);
   --current-letter-spacing: var(--theme-heading-2-letter-spacing);
-  --current-text-transform: var(--theme-heading-2-text-transform);
-  color: var(--theme-sm-dark-1); }
+  --current-text-transform: var(--theme-heading-2-text-transform); }
 
+.editor-styles-wrapper[class] h2.has-smaller-font-size,
 .editor-styles-wrapper[class] h3 {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
@@ -915,10 +931,10 @@ ul.wp-block-categories__list[class] {
   --current-line-height: var(--theme-heading-3-line-height);
   --current-font-weight: var(--theme-heading-3-font-weight);
   --current-letter-spacing: var(--theme-heading-3-letter-spacing);
-  --current-text-transform: var(--theme-heading-3-text-transform);
-  color: var(--theme-sm-dark-1); }
+  --current-text-transform: var(--theme-heading-3-text-transform); }
 
-.editor-styles-wrapper[class] .novablocks-map__marker-name, .editor-styles-wrapper[class] h4 {
+.editor-styles-wrapper[class] .novablocks-map__marker-name, .editor-styles-wrapper[class] h3.has-smaller-font-size,
+.editor-styles-wrapper[class] h4 {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
   line-height: var(--current-line-height);
@@ -930,8 +946,7 @@ ul.wp-block-categories__list[class] {
   --current-line-height: var(--theme-heading-4-line-height);
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
-  --current-text-transform: var(--theme-heading-4-text-transform);
-  color: var(--theme-sm-dark-1); }
+  --current-text-transform: var(--theme-heading-4-text-transform); }
 
 .editor-styles-wrapper[class] h5,
 .editor-styles-wrapper[class] h6 {
@@ -946,8 +961,7 @@ ul.wp-block-categories__list[class] {
   --current-line-height: var(--theme-heading-5-line-height);
   --current-font-weight: var(--theme-heading-5-font-weight);
   --current-letter-spacing: var(--theme-heading-5-letter-spacing);
-  --current-text-transform: var(--theme-heading-5-text-transform);
-  color: var(--theme-sm-dark-1); }
+  --current-text-transform: var(--theme-heading-5-text-transform); }
 
 .editor-styles-wrapper[class] h1:not(:first-child), .editor-styles-wrapper[class] h2:not(:first-child), .editor-styles-wrapper[class] h3:not(:first-child), .editor-styles-wrapper[class] h4:not(:first-child), .editor-styles-wrapper[class] h5:not(:first-child), .editor-styles-wrapper[class] h6:not(:first-child) {
   margin-top: var(--theme-spacing); }
@@ -1091,7 +1105,6 @@ ul.wp-block-categories__list[class] {
 
 .editor-styles-wrapper[class] {
   /* Color Helper Classes */
-  /* Font Size Helper Classes */
   /* Alignment Helper Classes */ }
   .editor-styles-wrapper[class] .has-background {
     padding: 1em 1.25em; }
@@ -1167,18 +1180,6 @@ ul.wp-block-categories__list[class] {
     background-color: #EEF1F2; }
   .editor-styles-wrapper[class] .has-nova-gray-color {
     color: #EEF1F2; }
-  .editor-styles-wrapper[class] .has-huge-font-size {
-    font-size: var(--theme-heading-1-font-size); }
-  .editor-styles-wrapper[class] .has-large-font-size {
-    font-size: var(--theme-heading-2-font-size); }
-  .editor-styles-wrapper[class] .has-medium-font-size {
-    font-size: var(--theme-heading-3-font-size); }
-  .editor-styles-wrapper[class] .has-normal-font-size {
-    font-size: var(--theme-heading-4-font-size); }
-  .editor-styles-wrapper[class] .has-small-font-size {
-    font-size: var(--theme-body-font-size); }
-  .editor-styles-wrapper[class] .has-tiny-font-size {
-    font-size: var(--theme-heading-5-font-size); }
   .editor-styles-wrapper[class] .has-text-align-left {
     text-align: left; }
   .editor-styles-wrapper[class] .has-text-align-center {
@@ -1203,3 +1204,13 @@ ul.wp-block-categories__list[class] {
     --current-letter-spacing: var(--theme-heading-1-letter-spacing);
     --current-text-transform: var(--theme-heading-1-text-transform);
     text-align: center; }
+
+/* Hide Text Settings Panel */
+.blocks-font-size {
+  display: none; }
+
+/* Hide Useless Heading Values */
+.components-toolbar [aria-label="Heading 4"],
+.components-toolbar [aria-label="Heading 5"],
+.components-toolbar [aria-label="Heading 6"] {
+  display: none; }

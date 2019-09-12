@@ -115,39 +115,7 @@ function novablocks_setup() {
 	add_theme_support( 'responsive-embeds' );
 
 	add_theme_support( 'disable-custom-font-sizes' );
-
-	add_theme_support( 'editor-font-sizes', array(
-		array(
-			'name'      => __( 'Tiny', '__theme_txtd' ),
-			'size'      => 12,
-			'slug'      => 'tiny'
-		),
-		array(
-			'name'      => __( 'Small', '__theme_txtd' ),
-			'size'      => 18,
-			'slug'      => 'small'
-		),
-		array(
-			'name'      => __( 'Normal', '__theme_txtd' ),
-			'size'      => 24,
-			'slug'      => 'normal'
-		),
-		array(
-			'name'      => __( 'Medium', '__theme_txtd' ),
-			'size'      => 32,
-			'slug'      => 'medium'
-		),
-		array(
-			'name'      => __( 'Large', '__theme_txtd' ),
-			'size'      => 40,
-			'slug'      => 'large'
-		),
-		array(
-			'name'      => __( 'Huge', '__theme_txtd' ),
-			'size'      => 60,
-			'slug'      => 'huge'
-		),
-	) );
+	add_theme_support( 'editor-font-sizes', array() );
 
 	add_theme_support( 'customizer_style_manager' );
 }

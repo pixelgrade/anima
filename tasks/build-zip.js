@@ -1,7 +1,7 @@
 var gulp = require( 'gulp' ),
 	fs = require( 'fs' ),
 	plugins = require( 'gulp-load-plugins')(),
-	plugin = 'nova';
+	plugin = 'rosa2';
 
 // -----------------------------------------------------------------------------
 // Create the theme installer archive and delete the build folder

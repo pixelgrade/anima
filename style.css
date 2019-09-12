@@ -1375,25 +1375,6 @@ body, .site, .site-content {
 .has-nova-gray-color {
   color: #EEF1F2; }
 
-/* Font Size Helper Classes */
-.has-huge-font-size {
-  font-size: var(--theme-heading-1-font-size); }
-
-.has-large-font-size {
-  font-size: var(--theme-heading-2-font-size); }
-
-.has-medium-font-size {
-  font-size: var(--theme-heading-3-font-size); }
-
-.has-normal-font-size {
-  font-size: var(--theme-heading-4-font-size); }
-
-.has-small-font-size {
-  font-size: var(--theme-body-font-size); }
-
-.has-tiny-font-size {
-  font-size: var(--theme-heading-5-font-size); }
-
 /* Alignment Helper Classes */
 .has-text-align-left {
   text-align: left; }
@@ -2170,7 +2151,22 @@ body {
   --theme-intro-font-family: Reforma1969, sans-serif;
   --theme-intro-font-size: 22px; }
 
-h1 {
+h1.has-larger-font-size {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  --current-font-family: var(--theme-display-font-family);
+  --current-font-size: var(--theme-display-font-size);
+  --current-line-height: var(--theme-display-line-height);
+  --current-font-weight: var(--theme-display-font-weight);
+  --current-letter-spacing: var(--theme-display-letter-spacing);
+  --current-text-transform: var(--theme-display-text-transform); }
+
+h1,
+h2.has-larger-font-size {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
   line-height: var(--current-line-height);
@@ -2182,10 +2178,11 @@ h1 {
   --current-line-height: var(--theme-heading-1-line-height);
   --current-font-weight: var(--theme-heading-1-font-weight);
   --current-letter-spacing: var(--theme-heading-1-letter-spacing);
-  --current-text-transform: var(--theme-heading-1-text-transform);
-  color: var(--theme-sm-dark-1); }
+  --current-text-transform: var(--theme-heading-1-text-transform); }
 
-h2 {
+h1.has-smaller-font-size,
+h2,
+h3.has-larger-font-size {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
   line-height: var(--current-line-height);
@@ -2197,9 +2194,9 @@ h2 {
   --current-line-height: var(--theme-heading-2-line-height);
   --current-font-weight: var(--theme-heading-2-font-weight);
   --current-letter-spacing: var(--theme-heading-2-letter-spacing);
-  --current-text-transform: var(--theme-heading-2-text-transform);
-  color: var(--theme-sm-dark-1); }
+  --current-text-transform: var(--theme-heading-2-text-transform); }
 
+h2.has-smaller-font-size,
 h3 {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
@@ -2212,9 +2209,9 @@ h3 {
   --current-line-height: var(--theme-heading-3-line-height);
   --current-font-weight: var(--theme-heading-3-font-weight);
   --current-letter-spacing: var(--theme-heading-3-letter-spacing);
-  --current-text-transform: var(--theme-heading-3-text-transform);
-  color: var(--theme-sm-dark-1); }
+  --current-text-transform: var(--theme-heading-3-text-transform); }
 
+h3.has-smaller-font-size,
 h4, .novablocks-map__marker-name {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
@@ -2227,8 +2224,7 @@ h4, .novablocks-map__marker-name {
   --current-line-height: var(--theme-heading-4-line-height);
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
-  --current-text-transform: var(--theme-heading-4-text-transform);
-  color: var(--theme-sm-dark-1); }
+  --current-text-transform: var(--theme-heading-4-text-transform); }
 
 h5,
 h6 {
@@ -2243,8 +2239,7 @@ h6 {
   --current-line-height: var(--theme-heading-5-line-height);
   --current-font-weight: var(--theme-heading-5-font-weight);
   --current-letter-spacing: var(--theme-heading-5-letter-spacing);
-  --current-text-transform: var(--theme-heading-5-text-transform);
-  color: var(--theme-sm-dark-1); }
+  --current-text-transform: var(--theme-heading-5-text-transform); }
 
 h1:not(:first-child), h2:not(:first-child), h3:not(:first-child), h4:not(:first-child), h5:not(:first-child), h6:not(:first-child) {
   margin-top: var(--theme-spacing); }
