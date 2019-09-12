@@ -1003,10 +1003,32 @@ ul.wp-block-categories__list[class] {
     margin: 0; }
   .editor-styles-wrapper table {
     width: 100%;
-    border-collapse: collapse; }
-  .editor-styles-wrapper td, .editor-styles-wrapper th {
-    border: 1px solid;
-    padding: 0.5em; }
+    float: none;
+    border-collapse: collapse;
+    margin-bottom: 2em; }
+    .editor-styles-wrapper table th {
+      text-align: left; }
+    .editor-styles-wrapper table th,
+    .editor-styles-wrapper table td {
+      vertical-align: middle; }
+    .editor-styles-wrapper table tr,
+    .editor-styles-wrapper table thead,
+    .editor-styles-wrapper table tbody,
+    .editor-styles-wrapper table tfoot {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
+    .editor-styles-wrapper table th,
+    .editor-styles-wrapper table td {
+      padding: .5em;
+      max-width: 100%;
+      white-space: nowrap; }
+    .editor-styles-wrapper table caption {
+      padding: 5em 0; }
+    .editor-styles-wrapper table th:first-child,
+    .editor-styles-wrapper table td:first-child {
+      padding-left: 0; }
+    .editor-styles-wrapper table th:last-child,
+    .editor-styles-wrapper table td:last-child {
+      padding-right: 0; }
   .editor-styles-wrapper .block-library-list {
     /* Lists */
     /* Nested unordered lists */

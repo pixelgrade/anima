@@ -3,6 +3,8 @@
 remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10);
 remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar', 10);
 remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
+remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
+
 
 add_action( 'woocommerce_before_single_product_summary', 'addStartWrapperBeforeSingleProductSummary', 1 );
 add_action( 'woocommerce_after_single_product_summary', 'addEndWrapperAfterSingleProductSummary', 1 );
@@ -29,7 +31,15 @@ add_action('woocommerce_archive_description', 'woocommerce_display_categories', 
 add_filter( 'woocommerce_product_description_heading', '__return_false', 30 );
 add_filter( 'woocommerce_product_additional_information_heading', '__return_false', 30 );
 
+// Add Site title and Breadcrumbs to Checkout Page
+add_action( 'woocommerce_checkout_billing', 'outputCheckoutSiteIdentity', 1 );
+add_action( 'woocommerce_checkout_billing', 'outputCheckoutBreadcrumbs', 2 );
+add_action( 'woocommerce_checkout_billing', 'woocommerce_checkout_coupon_form', 10 );
+
 add_filter( 'woocommerce_pagination_args', 'rosa_woocommerce_pagination_args', 40, 1 );
+
+// Add coupon form outside checkout form
+add_action( 'woocommerce_before_checkout_form', 'woocommerceCoponForm', 10);
 
 function addStartWrapperBeforeSingleProductSummary() {
 	echo '<div class="c-product-main">';
@@ -71,6 +81,21 @@ function addStartMainContent() {
 function addEndMainContent() {
 	echo '</div></div>';
 }
+
+function outputCheckoutSiteIdentity() { ?>
+
+	<h1 class="woocommerce-checkout-title"><a href="<?php echo esc_url( get_home_url() ); ?>"><span><?php echo esc_html( get_bloginfo( 'name' ) ) ?></span></a></h1>
+
+<?php }
+
+function outputCheckoutBreadcrumbs() { ?>
+
+	<ul class="woocommerce-checkout-breadcrumbs">
+		<li><a href="<?php echo esc_url( wc_get_cart_url() ); ?>"><?php esc_html_e( 'Cart', '__components_txtd' ); ?></a></li>
+		<li><?php esc_html_e( 'Checkout', '__theme_txtd' ); ?></li>
+	</ul>
+
+<?php }
 
 function outputAjaxAddToCartButton() {
 	if ( 'product' !== get_post_type() ) {
@@ -127,3 +152,9 @@ if ( ! function_exists( 'woocommerce_display_categories' ) ) {
 		}
 	}
 }
+
+ if ( ! function_exists('woocommerceCoponForm' ) ) {
+ 	function woocommerceCoponForm() {
+ 		echo '<form class="checkout_coupon woocommerce-form-coupon" id="form-coupon" method="post" style="display:none"></form>';
+    }
+ }
