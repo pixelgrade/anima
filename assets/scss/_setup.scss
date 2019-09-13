@@ -6,4 +6,21 @@
 @import "setup/custom-properties";
 @import "setup/font-faces";
 
-:root { @include variation(default) }
+:root {
+    @include variation(default);
+}
+
+.is-style-dark {
+    @include variation(dark);
+
+    background-color: var(--theme-sm-light-1);
+    color: var(--theme-sm-dark-2);
+}
+
+.is-style-darker {
+    --sm-dark-4: #141928;
+    @include variation(darker);
+
+    background-color: var(--theme-sm-light-1);
+    color: var(--theme-sm-dark-2);
+}

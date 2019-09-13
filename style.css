@@ -259,6 +259,33 @@ Table of Contents
   --theme-sm-light-2: var(--sm-light-2);
   --theme-sm-light-3: var(--sm-light-3); }
 
+.is-style-dark {
+  --theme-sm-color-1: var(--sm-color-1);
+  --theme-sm-color-2: var(--sm-color-2);
+  --theme-sm-color-3: var(--sm-color-3);
+  --theme-sm-dark-1: var(--sm-light-2);
+  --theme-sm-dark-2: var(--sm-light-1);
+  --theme-sm-dark-3: var(--sm-light-3);
+  --theme-sm-light-1: var(--sm-dark-1);
+  --theme-sm-light-2: var(--sm-dark-2);
+  --theme-sm-light-3: var(--sm-dark-3);
+  background-color: var(--theme-sm-light-1);
+  color: var(--theme-sm-dark-2); }
+
+.is-style-darker {
+  --sm-dark-4: #141928;
+  --theme-sm-color-1: var(--sm-color-1);
+  --theme-sm-color-2: var(--sm-color-2);
+  --theme-sm-color-3: var(--sm-color-3);
+  --theme-sm-dark-1: var(--sm-light-2);
+  --theme-sm-dark-2: var(--sm-light-1);
+  --theme-sm-dark-3: var(--sm-light-3);
+  --theme-sm-light-1: var(--sm-dark-4);
+  --theme-sm-light-2: var(--sm-dark-2);
+  --theme-sm-light-3: var(--sm-dark-3);
+  background-color: var(--theme-sm-light-1);
+  color: var(--theme-sm-dark-2); }
+
 /* 0. Reset */
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
@@ -1658,8 +1685,11 @@ body, .site, .site-content {
     --theme-wrapper-side-spacing: 0; }
 
 .wp-block-column > :not(:first-child) {
-  --element-spacing: var(--theme-spacing-normal);
+  --element-spacing: var(--theme-spacing);
   margin-top: var(--element-spacing); }
+
+.wp-block-columns:not(:first-child) {
+  --element-spacing: var(--theme-spacing-huge); }
 
 /* Cover Block */
 .wp-block-cover {
@@ -1879,6 +1909,10 @@ body, .site, .site-content {
     width: 100%;
     height: 100%;
     object-fit: cover; }
+
+.wp-block-group {
+  padding-top: var(--theme-spacing-large);
+  padding-bottom: var(--theme-spacing-large); }
 
 /* Image Block */
 .wp-block-image > :not(:first-child) {

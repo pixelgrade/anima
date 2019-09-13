@@ -1,27 +1,56 @@
+$destinations: color-1, color-2, color-3, dark-1, dark-2, dark-3, light-1, light-2, light-3;
+
 $variations: (
     default: (
-        color: color,
-        dark: dark,
-        light: light
+        color-1: color-1,
+        color-2: color-2,
+        color-3: color-3,
+        dark-1: dark-1,
+        dark-2: dark-2,
+        dark-3: dark-3,
+        light-1: light-1,
+        light-2: light-2,
+        light-3: light-3
     ),
     dark: (
-        color: color,
-        dark: light,
-        light: dark,
+        color-1: color-1,
+        color-2: color-2,
+        color-3: color-3,
+        dark-1: light-2,
+        dark-2: light-1,
+        dark-3: light-3,
+        light-1: dark-1,
+        light-2: dark-2,
+        light-3: dark-3
+    ),
+    darker: (
+        color-1: color-1,
+        color-2: color-2,
+        color-3: color-3,
+        dark-1: light-2,
+        dark-2: light-1,
+        dark-3: light-3,
+        light-1: dark-4,
+        light-2: dark-2,
+        light-3: dark-3
     ),
     monochrome: (
-        color: dark,
-        dark: dark,
-        light: light
+        color-1: dark-1,
+        color-2: dark-2,
+        color-3: dark-3,
+        dark-1: dark-1,
+        dark-2: dark-2,
+        dark-3: dark-3,
+        light-1: light-1,
+        light-2: light-2,
+        light-3: light-3
     ),
 );
 
 @mixin variation( $name ) {
     $variation: map-get( $variations, $name );
-    @each $destination in (color, dark, light) {
+    @each $destination in $destinations {
         $source: map-deep-get($variations, $name, $destination);
-        @for $i from 1 through 3 {
-            --theme-sm-#{$destination}-#{$i}: var(--sm-#{$source}-#{$i});
-        }
+        --theme-sm-#{$destination}: var(--sm-#{$source});
     }
 }
