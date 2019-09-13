@@ -193,6 +193,12 @@
 .wc-block-grid__product-add-to-cart {
   transition: opacity .25s $easeOutQuad,
               transform .25s $easeOutQuad;
+
+  @include specific(4) {
+    .added_to_cart {
+      display: none;
+    }
+  }
 }
 
 .woocommerce img,

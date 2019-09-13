@@ -55,9 +55,6 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 		do_action( 'woocommerce_after_shop_loop_item_title' );
 		?>
     </div>
-    <div class="wp-block-button wc-block-grid__product-add-to-cart">
-		<?php woocommerce_template_loop_add_to_cart( array( 'class' => 'add_to_cart_button' ) ); ?>
-    </div>
 
 	<?php
 	/**

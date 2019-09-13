@@ -65,6 +65,21 @@
 
     .woocommerce-checkout {
       position: relative;
+      &:before {
+        display: block;
+
+        background-color: var(--sm-dark-1);
+
+        content: "";
+        position: absolute;
+        top: -9999vh;
+        right: -100vw;
+        bottom: -9999vh;
+        left: 55%;
+        pointer-events: none;
+
+        opacity: 0.1;
+      }
 
       &:after {
         content: " ";
@@ -196,6 +211,12 @@
     .site-content {
       padding-top: 0;
     }
+  }
+
+  .site-header,
+  .entry-header,
+  .site-footer {
+    display: none;
   }
 }
 
@@ -389,4 +410,31 @@ ul.order_details[class] {
 
 #form-coupon {
   display: none !important;
+}
+
+.checkout-button {
+  width: 100%;
+}
+
+.order-total .amount {
+  @include apply-font(heading-4);
+}
+
+.cart_totals  {
+  h2 {
+    @include apply-font(heading-3);
+    margin-bottom: var(--theme-spacing-small);
+  }
+}
+
+.cross-sells {
+  h2 {
+    @include apply-font(heading-4);
+    margin-bottom: var(--theme-spacing-small);
+  }
+
+  .wc-block-grid__product-title {
+    @include apply-font(heading-4);
+    font-weight: 400;
+  }
 }

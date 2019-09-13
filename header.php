@@ -15,6 +15,10 @@
 
     <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'nova' ); ?></a>
 
+
+    <?php do_action( 'rosa_before_header', 'main' ); ?>
+
+
     <?php if ( function_exists( 'block_areas' ) ) {
         block_areas()->render( 'header' );
     } else {

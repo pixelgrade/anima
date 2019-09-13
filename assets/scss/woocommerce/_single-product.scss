@@ -555,10 +555,24 @@
   --theme-button-hover-color: var(--sm-light-1);
   --theme-button-hover-background-color: transparent;
   --theme-button-hover-border-color: var(--sm-dark-1);
-  @include specific(3) {
+  @include specific(2) {
     button:not(.single_add_to_cart_button),
-    .button:not(.single_add_to_cart_button),
-    .add_to_cart_button{
+    .button:not(.single_add_to_cart_button) {
+      @include button;
+      @include button-fill-background;
+    }
+
+    .add_to_cart_button.ajax_add_to_cart,
+    .checkout-button,
+    #place_order,
+    .woocommerce-mini-cart__buttons .checkout {
+      --theme-button-background-color: var(--sm-dark-1);
+      --theme-button-color: var(--sm-light-1);
+      --theme-button-border-color: var(--sm-dark-1);
+      --theme-button-hover-color: var(--sm-dark-1);
+      --theme-button-hover-background-color:  var(--sm-dark-1);
+      --theme-button-hover-border-color: var(--sm-dark-1);
+
       @include button;
       @include button-fill-background;
     }
