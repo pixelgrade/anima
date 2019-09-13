@@ -1,4 +1,11 @@
 .wc-block-grid {
+  --column-gap: var(--theme-spacing-small);
+  --row-gap: var(--theme-spacing-small);
+
+ .woocommerce & {
+   margin-right: calc(var(--column-gap) * -1);
+ }
+
   &.has-aligned-buttons {
     .wc-block-grid__product {
       display: flex;
@@ -35,9 +42,6 @@
 }
 
 .wc-block-grid__product {
-  --column-gap: var(--theme-spacing-small);
-  --row-gap: var(--theme-spacing-small);
-
   padding: 0 var(--column-gap) 0 0;
   margin: 0 0 var(--row-gap) 0;
   float: none;
