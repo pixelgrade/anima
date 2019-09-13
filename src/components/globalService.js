@@ -58,11 +58,23 @@ class GlobalService {
 		const htmlScrollHeight = Math.max( html.scrollHeight, html.offsetHeight );
 
 		this.props.scrollHeight = Math.max( bodyScrollHeight, htmlScrollHeight );
+		this.props.adminBarHeight = this.getAdminBarHeight();
 
 		this.props.windowWidth = window.innerWidth;
 		this.props.windowHeight = window.innerHeight;
 		this.updateScroll();
 		this.updateStuff();
+	}
+
+	getAdminBarHeight() {
+		const adminBar = document.getElementById( 'wpadminbar' );
+
+		if ( adminBar ) {
+			const box = adminBar.getBoundingClientRect();
+			return box.height;
+		}
+
+		return 0;
 	}
 
 	getProps() {

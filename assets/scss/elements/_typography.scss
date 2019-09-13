@@ -24,12 +24,6 @@ pre {
     word-wrap: break-word;
 }
 
-/* Links */
-a {
-    color: var(--theme-sm-color-1);
-    text-decoration: none;
-}
-
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
@@ -70,48 +64,48 @@ h6 {
 
 /* Tables */
 table {
-    width: 100%;
-    float: none;
-    border-collapse: collapse;
+  width: 100%;
+  float: none;
+  border-collapse: collapse;
 
-    margin-bottom: 2em;
+  margin-bottom: 2em;
 
-    th {
-        text-align: left;
+  th {
+    text-align: left;
+  }
+
+  th,
+  td {
+    vertical-align: middle;
+  }
+
+  tr,
+  thead,
+  tbody,
+  tfoot {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+
+  th,
+  td {
+    padding: .5em;
+    max-width:100%;
+    white-space:nowrap;
+  }
+
+  caption {
+    padding: 5em 0;
+  }
+
+  th,
+  td {
+
+    &:first-child {
+      padding-left: 0;
     }
 
-    th,
-    td {
-        vertical-align: middle;
+    &:last-child {
+      padding-right: 0;
     }
-
-    tr,
-    thead,
-    tbody,
-    tfoot {
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
-
-    th,
-    td {
-        padding: .5em;
-        max-width:100%;
-        white-space:nowrap;
-    }
-
-    caption {
-        padding: 5em 0;
-    }
-
-    th,
-    td {
-
-        &:first-child {
-            padding-left: 0;
-        }
-
-        &:last-child {
-            padding-right: 0;
-        }
-    }
+  }
 }

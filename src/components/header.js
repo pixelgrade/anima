@@ -5,33 +5,51 @@ const defaults = {
 };
 
 class Header {
+
 	constructor( element, args ) {
 		this.element = element;
 		this.inversed = ! jQuery( this.element ).hasClass( 'site-header--normal' );
-		this.scrollOffset = 0;
 		this.options = Object.assign( {}, defaults, args );
+
+		this.offset = 0;
+		this.scrollOffset = 0;
+
 		this.update();
-		this.init();
+		this.registerUpdate();
 	}
 
-	init() {
-		GlobalService.registerUpdate( this.update.bind( this ) );
+	registerUpdate() {
+		GlobalService.registerUpdate( () => {
+			this.update();
+		} );
 	}
 
 	update() {
-		const { scrollY } = GlobalService.getProps();
-		const page = document.getElementById( 'page' );
-		const { offsetTargetElement } = this.options;
 		this.box = this.element.getBoundingClientRect();
-
-		if ( offsetTargetElement ) {
-			const offsetBox = offsetTargetElement.getBoundingClientRect();
-			this.scrollOffset = offsetBox.top + offsetBox.height + scrollY - this.box.height / 2;
-		}
-
-		page.style.paddingTop = this.box.height + 'px';
+		this.scrollOffset = this.getScrollOffset();
+		this.element.style.marginTop = this.offset + 'px';
+		this.updatePageOffset();
 
 		jQuery( this.element ).addClass( 'site-header--fixed site-header--ready' );
+	}
+
+	getScrollOffset() {
+		const { adminBarHeight, scrollY } = GlobalService.getProps();
+		const { offsetTargetElement } = this.options;
+
+		if ( offsetTargetElement ) {
+			const offsetTargetBox = offsetTargetElement.getBoundingClientRect();
+			const targetBottom = offsetTargetBox.top + scrollY + offsetTargetBox.height;
+			const headerOffset = adminBarHeight + this.offset + this.box.height / 2;
+			return targetBottom - headerOffset;
+		}
+
+		return 0;
+	}
+
+	updatePageOffset() {
+		const page = document.getElementById( 'page' );
+		page.style.paddingTop = this.box.height + this.offset + 'px';
 	}
 
 	render( inversed ) {

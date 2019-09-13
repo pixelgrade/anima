@@ -101,7 +101,8 @@ $site-header-fixed-body-class: has-fixed-site-header !default;
                 color: var(--theme-header-background-color);
             }
 
-            .site-header--scrolled {
+            body:not(.#{$site-header-fixed-body-class}) .site-header,
+            .#{$site-header-fixed-body-class} .site-header--scrolled {
                 background-color: var(--theme-header-background-color);
             }
         }
