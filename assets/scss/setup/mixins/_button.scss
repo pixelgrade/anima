@@ -16,7 +16,7 @@
   --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
 
   --theme-button-transition-duration: .2s;
-  --theme-button-transition-easing: #{$easeOut};
+  --theme-button-transition-easing: #{$ease};
 
   --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
 
@@ -60,52 +60,27 @@
   transition: var(--theme-button-transition);
 }
 
-@mixin button-fill-background( $direction ) {
+@mixin button-fill-background {
   position: relative;
   z-index: 1;
 
-  @if $direction == left {
+  &:before {
+    content: '';
 
-    &:before {
-      content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
 
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
+    width: 0;
+    height: 100%;
 
-      width: 0;
-      height: 100%;
+    background-color: var(--theme-button-color);
+    transition: width .4s var(--theme-button-transition-easing);
+  }
 
-      background-color: var(--theme-button-hover-border-color);
-      transform-origin: left;
-      transition: width .4s var(--theme-button-transition-easing);
-    }
-
-    &:hover:before {
-      width: 100%;
-    }
-  } @else if $direction == right {
-
-    &:before {
-      content: '';
-
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: -1;
-
-      width: 100%;
-      height: 100%;
-
-      background-color: var(--theme-button-border-color);
-      transform-origin: right;
-      transition: width .4s var(--theme-button-transition-easing);
-    }
-
-    &:hover:before {
-      width: 0;
-    }
+  &:hover:before {
+    width: 100%;
   }
 }
 
@@ -123,7 +98,7 @@
     height: .1em;
 
     background: currentColor;
-    transition: transform .3s var(--theme-button-transition-easing);
+    transition: transform .4s var(--theme-button-transition-easing);
     transform-origin: 100% 50%;
   }
 
@@ -151,16 +126,13 @@
     opacity: 0;
     transform: translate(0, -50%) rotate(180deg);
 
-    transition: opacity .1s var(--theme-button-transition-easing) .1s,
+    transition: opacity .2s var(--theme-button-transition-easing),
     transform .2s var(--theme-button-transition-easing);
   }
 
   &:hover:after {
     opacity: 1;
     transform: translate(5px, -50%) rotate(180deg);
-
-    transition: opacity .25s var(--theme-button-transition-easing),
-    transform .2s var(--theme-button-transition-easing) .1s;
   }
 }
 

@@ -106,7 +106,7 @@ function outputAjaxAddToCartButton() {
 
 	if ( $product->is_type( 'simple' ) ) {
 		woocommerce_template_loop_add_to_cart( array(
-			'class' => 'is-style-primary add_to_cart_button  ajax_add_to_cart'
+			'class' => 'add_to_cart_button  ajax_add_to_cart'
 		) );
 	}
 }

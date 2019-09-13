@@ -30,28 +30,28 @@
             @include button-color;
         }
 
-        @include button-fill-background(left);
+        @include button-fill-background;
     }
 
     &.is-style-primary {
         .wp-block-button__link {
-            @include button-fill-background(right);
+            @include button-fill-background;
         }
     }
 
     &.is-style-secondary {
         .wp-block-button__link {
-            @include button-fill-background(left);
+            @include button-fill-background;
         }
     }
 }
 
 .is-style-primary {
-    --theme-button-background-color: transparent;
-    --theme-button-hover-background-color: transparent;
+    --theme-button-background-color: var(--sm-dark-1);
     --theme-button-color: var(--sm-light-1);
     --theme-button-border-color: var(--sm-dark-1);
     --theme-button-hover-color: var(--sm-dark-1);
+    --theme-button-hover-background-color: var(--sm-light-1);
     --theme-button-hover-border-color: var(--sm-dark-1);
 }
 

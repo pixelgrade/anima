@@ -47,7 +47,7 @@ function novablocks_scripts() {
 		'added_to_cart' => esc_html__( 'Added!', '__components_txtd' ),
 	) );
 
-//	wp_deregister_style('wc-block-style');
+	wp_deregister_style('wc-block-style');
 }
 add_action( 'wp_enqueue_scripts', 'novablocks_scripts', 10 );
 

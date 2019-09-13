@@ -10,8 +10,7 @@
  * Blocks
  */
 
-@import "blocks/product-featured";
-@import "blocks/category-featured";
+@import "blocks/style";
 
 .woocommerce ul.products li.product .price {
   color: var(--theme-sm-color-1);
@@ -20,4 +19,8 @@
 
 .woocommerce {
   --theme-content-width-normal: var(--theme-content-width-wide);
+}
+
+.wc-block-grid__products {
+  list-style: none !important;
 }

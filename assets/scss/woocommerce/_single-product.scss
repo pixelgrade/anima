@@ -134,8 +134,8 @@
     width: 4em;
     padding-left: 1em;
     padding-right: 0.3em;
-    background-color: var(--theme-sm-color-1);
-    color: var(--theme-sm-light-1);
+    background-color:  var(--sm-dark-1);
+    color: var(--sm-light-1);
   }
 
   .woocommerce-grouped-product-list-item__price {
@@ -229,8 +229,8 @@
 
 // unstyle price
 .woocommerce[class] .product .price {
-  color: inherit;
   font-size: 1em;
+  color: var(--sm-dark-1);
 
   ins {
     font-weight: inherit;
@@ -303,9 +303,9 @@
     top: var(--theme-spacing-tiny);
     left: var(--theme-spacing-tiny);
     padding: 0.6em 1.1em 0.7em 1.2em;
-    background-color: var(--theme-sm-color-1);
+    background-color: var(--sm-color-1);
 
-    color: var(--theme-button-color);
+    color: var(--sm-light-1);
     text-align: center;
 
     border-radius: 0;
@@ -550,14 +550,15 @@
 
 .woocommerce {
   --theme-button-background-color: transparent;
-  --theme-button-hover-background-color: transparent;
-  --theme-button-color: var(--theme-sm-color-1);
+  --theme-button-color: var(--sm-dark-1);
   --theme-button-border-color: currentColor;
-  --theme-button-hover-color: var(--theme-sm-light-1);
-  --theme-button-hover-border-color: var(--theme-sm-color-1);
-  @include specific(5) {
-    button,
-    .button {
+  --theme-button-hover-color: var(--sm-light-1);
+  --theme-button-hover-background-color: transparent;
+  --theme-button-hover-border-color: var(--sm-dark-1);
+  @include specific(3) {
+    button:not(.single_add_to_cart_button),
+    .button:not(.single_add_to_cart_button),
+    .add_to_cart_button{
       @include button;
       @include button-fill-background;
     }
