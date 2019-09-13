@@ -15,8 +15,11 @@
 
     <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'nova' ); ?></a>
 
-    <?php if ( function_exists( 'block_areas' ) ) {
-        block_areas()->render( 'header' );
+    <?php if ( function_exists( 'block_areas' ) ) { ?>
+        <div class="promo-bar js-promo-bar">
+            <?php block_areas()->render( 'promo-bar' ); ?>
+        </div>
+        <?php block_areas()->render( 'header' );
     } else {
         get_template_part( 'template-parts/site-header' );
     } ?>

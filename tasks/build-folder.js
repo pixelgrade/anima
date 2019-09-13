@@ -2,7 +2,7 @@ var gulp = require( 'gulp' ),
 	plugins = require( 'gulp-load-plugins')(),
 	fs = require( 'fs' ),
 	del = require( 'del' ),
-	plugin = 'nova';
+	plugin = 'rosa2';
 
 // -----------------------------------------------------------------------------
 // Copy plugin folder outside in a build folder

@@ -23,3 +23,15 @@
     --novablocks-light-2: var(--theme-sm-light-2);
     --novablocks-light-3: var(--theme-sm-light-3);
 }
+
+.novablocks-announcement-bar.is-hidden[class] {
+    display: block;
+}
+
+.novablocks-announcement-bar__wrapper {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translate(0,-50%);
+}

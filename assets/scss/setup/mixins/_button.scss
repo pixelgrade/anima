@@ -1,57 +1,179 @@
 /* Button CSS Custom Properties */
 :root {
-    --theme-button-background-color: var(--theme-sm-dark-1);
-    --theme-button-color: var(--theme-sm-light-1);
-    --theme-button-border-color: transparent;
+  --theme-button-background-color: var(--theme-sm-dark-1);
+  --theme-button-color: var(--theme-sm-light-1);
+  --theme-button-border-color: transparent;
 
-    --theme-button-hover-background-color: var(--theme-sm-color-1);
-    --theme-button-hover-color: var(--theme-sm-light-1);
-    --theme-button-hover-border-color: transparent;
+  --theme-button-hover-background-color: var(--theme-sm-color-1);
+  --theme-button-hover-color: var(--theme-sm-light-1);
+  --theme-button-hover-border-color: transparent;
 
-    --theme-button-border-width: 2px;
-    --theme-button-border-radius: 999em;
+  --theme-button-border-width: 2px;
+  --theme-button-border-radius: 999em;
 
-    --theme-button-y-padding: calc( 2 * var(--theme-spacing-unit) );
-    --theme-button-x-padding: calc( 4 * var(--theme-spacing-unit) );
-    --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
+  --theme-button-y-padding: calc(2 * var(--theme-spacing-micro));
+  --theme-button-x-padding: calc(4 * var(--theme-spacing-micro));
+  --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
+
+  --theme-button-transition-duration: .2s;
+  --theme-button-transition-easing: #{$easeOut};
+
+  --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
+
+  --theme-button-arrow-size: 20px;
 }
 
 @mixin button-base {
-    display: inline-block;
-    text-decoration: none;
-    cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 @mixin button-box {
-    padding: var(--theme-button-padding);
-    border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-    border-radius: var(--theme-button-border-radius);
+  padding: var(--theme-button-padding);
+  border: var(--theme-button-border-width) solid var(--theme-button-border-color);
+  border-radius: var(--theme-button-border-radius);
+
+  &:hover {
+    --theme-button-border-color: var(--theme-button-hover-border-color);
+  }
 }
 
 @mixin button-background {
-    background-color: var(--theme-button-background-color);
+  background-color: var(--theme-button-background-color);
 
-    &:hover {
-        background-color: var(--theme-button-hover-background-color);
-    }
+  &:hover {
+    background-color: var(--theme-button-hover-background-color);
+  }
 }
 
 @mixin button-color {
-    color: var(--theme-button-color);
+  color: var(--theme-button-color);
 
-    &:hover {
-        color: var(--theme-button-hover-color);
+  &:hover {
+    color: var(--theme-button-hover-color);
+  }
+}
+
+@mixin button-transition {
+  transition: var(--theme-button-transition);
+}
+
+@mixin button-fill-background( $direction ) {
+  position: relative;
+  z-index: 1;
+
+  @if $direction == left {
+
+    &:before {
+      content: '';
+
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+
+      width: 0;
+      height: 100%;
+
+      background-color: var(--theme-button-hover-border-color);
+      transform-origin: left;
+      transition: width .4s var(--theme-button-transition-easing);
     }
+
+    &:hover:before {
+      width: 100%;
+    }
+  } @else if $direction == right {
+
+    &:before {
+      content: '';
+
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: -1;
+
+      width: 100%;
+      height: 100%;
+
+      background-color: var(--theme-button-border-color);
+      transform-origin: right;
+      transition: width .4s var(--theme-button-transition-easing);
+    }
+
+    &:hover:before {
+      width: 0;
+    }
+  }
+
+
+}
+
+@mixin button-with-arrow {
+  position: relative;
+
+  &:before {
+    content: '';
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: .1em;
+
+    background: currentColor;
+    transition: transform .3s var(--theme-button-transition-easing);
+    transform-origin: 100% 50%;
+  }
+
+  &:hover:before {
+    transform: scaleX(0);
+  }
+
+  &:after {
+    content: '';
+
+    position: absolute;
+    top: 50%;
+    left: 100%;
+
+    display: inline-block;
+    width: var(--theme-button-arrow-size);
+    height: var(--theme-button-arrow-size);
+
+    -webkit-mask: url('assets/images/icon-arrow.svg') no-repeat 50% 50%;
+    mask: url('assets/images/icon-arrow.svg') no-repeat 50% 50%;
+    mask-size: cover;
+    background-color: currentColor;
+    vertical-align: text-bottom;
+
+    opacity: 0;
+    transform: translate(0, -50%) rotate(180deg);
+
+    transition: opacity .1s var(--theme-button-transition-easing) .1s,
+    transform .2s var(--theme-button-transition-easing);
+  }
+
+  &:hover:after {
+    opacity: 1;
+    transform: translate(5px, -50%) rotate(180deg);
+
+    transition: opacity .25s var(--theme-button-transition-easing),
+    transform .2s var(--theme-button-transition-easing) .1s;
+  }
 }
 
 @mixin button-theme {
-    @extend %button-theme !optional;
+  @extend %button-theme !optional;
 }
 
 @mixin button {
-    @include button-base;
-    @include button-box;
-    @include button-background;
-    @include button-color;
-    @include button-theme;
+  @include button-base;
+  @include button-box;
+  @include button-background;
+  @include button-color;
+  @include button-transition;
+  @include button-theme;
 }

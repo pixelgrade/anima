@@ -1,7 +1,7 @@
 var gulp = require( 'gulp' ),
 	cp = require( 'child_process' ),
 	plugins = require( 'gulp-load-plugins')(),
-	plugin = 'nova';
+	plugin = 'rosa2';
 
 function maybeFixBuildDirPermissions(done) {
 	cp.execSync('find ./../build -type d -exec chmod 755 {} \\;');

@@ -34,12 +34,38 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0;
 }
 
-h1 { @extend %h1-font !optional }
-h2 { @extend %h2-font !optional }
-h3 { @extend %h3-font !optional }
-h4 { @extend %h4-font !optional }
-h5 { @extend %h5-font !optional }
-h6 { @extend %h6-font !optional }
+h1.has-larger-font-size {
+    @extend %h0-font !optional;
+}
+
+h1,
+h2.has-larger-font-size {
+    @extend %h1-font !optional;
+}
+
+h1.has-smaller-font-size,
+h2,
+h3.has-larger-font-size {
+    @extend %h2-font !optional;
+}
+
+h2.has-smaller-font-size,
+h3 {
+    @extend %h3-font !optional;
+}
+
+h3.has-smaller-font-size,
+h4 {
+    @extend %h4-font !optional;
+}
+
+h5 {
+    @extend %h5-font !optional;
+}
+
+h6 {
+    @extend %h6-font !optional;
+}
 
 /* Tables */
 table {

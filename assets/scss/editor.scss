@@ -54,3 +54,17 @@
         text-align: center;
     }
 }
+
+/* Hide Text Settings Panel */
+.blocks-font-size {
+    display: none;
+}
+
+/* Hide Useless Heading Values */
+.components-toolbar {
+    [aria-label="Heading 4"],
+    [aria-label="Heading 5"],
+    [aria-label="Heading 6"] {
+        display: none;
+    }
+}

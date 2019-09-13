@@ -1,18 +1,22 @@
 @include define-font(button, (
-    font-family: unquote('Archivo, sans-serif'),
-    font-size: 12px,
-    font-weight: 700,
-    line-height: 2,
+    font-family: unquote('Reforma2018, sans-serif'),
+    font-size: 17px,
+    font-weight: 500,
+    line-height: 1.58,
     letter-spacing: 0.03em,
-    text-transform: uppercase,
+    text-transform: capitalize,
 ));
 
 :root {
-    --theme-button-padding: 0.55em 0.75em 0.55em 0.85em;
     --theme-button-border-radius: 0.2em;
 }
 
+.wp-block-button__link {
+    @include button-transition;
+}
+
 .wp-block-button:not(.is-style-text) {
+    --theme-button-border-radius: 0;
 
     .wp-block-button__link {
         @include button-base;
@@ -25,18 +29,45 @@
         &:not(.has-text-color) {
             @include button-color;
         }
+
+        @include button-fill-background(left);
+    }
+
+    &.is-style-primary {
+        .wp-block-button__link {
+            @include button-fill-background(right);
+        }
+    }
+
+    &.is-style-secondary {
+        .wp-block-button__link {
+            @include button-fill-background(left);
+        }
     }
 }
 
 .is-style-primary {
-    --theme-button-background-color: var(--theme-sm-color-1);
-    --theme-button-hover-background-color: var(--theme-sm-dark-1);
+    --theme-button-background-color: transparent;
+    --theme-button-hover-background-color: transparent;
+    --theme-button-color: var(--sm-light-1);
+    --theme-button-border-color: var(--sm-dark-1);
+    --theme-button-hover-color: var(--sm-dark-1);
+    --theme-button-hover-border-color: var(--sm-dark-1);
+}
+
+.is-style-secondary {
+    --theme-button-background-color: transparent;
+    --theme-button-color: var(--sm-dark-1);
+    --theme-button-border-color: currentColor;
+    --theme-button-hover-color: var(--sm-light-1);
+    --theme-button-hover-background-color: transparent;
+    --theme-button-hover-border-color: var(--sm-dark-1);
 }
 
 .is-style-text {
-    --theme-button-color: var(--theme-sm-color-1);
+    --theme-button-color: var(--sm-color-1);
     --theme-button-background-color: transparent;
-    --theme-button-hover-color: var(--theme-sm-color-1);
+    --theme-button-hover-color:var(--sm-color-1);
     --theme-button-hover-background-color: transparent;
     --theme-button-border-radius: 0;
 
@@ -45,7 +76,8 @@
         background: none !important;
 
         border-width: 0;
-        border-bottom: 0.1em solid;
+
+        @include button-with-arrow;
     }
 }
 
