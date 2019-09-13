@@ -1,10 +1,21 @@
 .novablocks-hero__inner-container {
-    > .c-headline:first-child .c-headline__primary,
-    > .c-headline:first-child .c-headline__secondary,
-    > :first-child:not(.c-headline),
-    > :not(:first-child) {
+
+    > .c-headline {
+        .c-headline__primary,
+        .c-headline__secondary {
+            opacity: 0;
+        }
+    }
+
+    > .c-headline + .c-headline {
+        .c-headline__primary,
+        .c-headline__secondary {
+            opacity: 1;
+        }
+    }
+
+    > :not(.c-headline) {
         opacity: 0;
-        will-change: transform;
     }
 
     .c-separator__flower {

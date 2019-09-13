@@ -8,7 +8,7 @@
 
 @include define-font(display, (
     font-family: unquote('Reforma1969, sans-serif'),
-    font-size: 82px,
+    font-size: 100px,
     line-height: 1.03,
     font-weight: 700,
     letter-spacing: -0.03em,
@@ -47,17 +47,16 @@
 ));
 
 @include define-font(heading-5, (
-    font-family: unquote('Archivo, sans-serif'),
-    font-size: 12px,
-    font-weight: 600,
+    font-family: unquote('Reforma2018, sans-serif'),
+    font-size: 17px,
+    font-weight: 400,
     line-height: 1.5,
-    letter-spacing: 0.3em,
-    text-transform: uppercase,
 ));
 
 @include define-font(intro, (
     font-family: unquote('Reforma1969, sans-serif'),
-    font-size: 22px,
+    font-size: 24px,
+    letter-spacing: -0.02em,
 ));
 
 %h0-font {
@@ -83,12 +82,4 @@
 %h5-font,
 %h6-font {
     @include apply-font(heading-5);
-}
-
-h1, h2, h3, h4, h5, h6 {
-
-    &:not(:first-child) {
-        margin-top: var(--theme-spacing);
-    }
-
 }
