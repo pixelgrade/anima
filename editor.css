@@ -9,11 +9,11 @@
   --theme-button-hover-border-color: transparent;
   --theme-button-border-width: 2px;
   --theme-button-border-radius: 999em;
-  --theme-button-y-padding: calc(2 * var(--theme-spacing-micro));
-  --theme-button-x-padding: calc(4 * var(--theme-spacing-micro));
+  --theme-button-y-padding: calc(2 * var(--theme-spacing-tiny));
+  --theme-button-x-padding: calc(4 * var(--theme-spacing-tiny));
   --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
   --theme-button-transition-duration: .2s;
-  --theme-button-transition-easing: cubic-bezier(0, 0, 0.58, 1);
+  --theme-button-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
   --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
   --theme-button-arrow-size: 20px; }
 
@@ -150,7 +150,8 @@ ul.wp-block-archives-list[class] {
   .wp-block-button__link:not(.has-background) {
     background-color: var(--theme-button-background-color); }
     .wp-block-button__link:not(.has-background):hover {
-      background-color: var(--theme-button-hover-background-color); }
+      background-color: var(--theme-button-hover-background-color);
+      border-color: var(--theme-button-hover-border-color); }
   .wp-block-button__link:not(.has-text-color) {
     color: var(--theme-button-color); }
     .wp-block-button__link:not(.has-text-color):hover {
@@ -665,12 +666,12 @@ ul.wp-block-categories__list[class] {
   :root {
     --theme-button-font-family: Reforma2018, sans-serif;
     --theme-button-font-size: 17px;
-    --theme-button-line-height: 1.58;
+    --theme-button-line-height: 1.2;
     --theme-button-font-weight: 500;
     --theme-button-letter-spacing: 0.03em;
     --theme-button-text-transform: capitalize; }
   .editor-styles-wrapper :root {
-    --theme-button-border-radius: 0.2em; }
+    --theme-button-border-radius: 0; }
   .editor-styles-wrapper .wp-block-button__link {
     transition: var(--theme-button-transition); }
   .editor-styles-wrapper .wp-block-button:not(.is-style-text) {
@@ -684,7 +685,8 @@ ul.wp-block-categories__list[class] {
       .editor-styles-wrapper .wp-block-button:not(.is-style-text) .wp-block-button__link:not(.has-background) {
         background-color: var(--theme-button-background-color); }
         .editor-styles-wrapper .wp-block-button:not(.is-style-text) .wp-block-button__link:not(.has-background):hover {
-          background-color: var(--theme-button-hover-background-color); }
+          background-color: var(--theme-button-hover-background-color);
+          border-color: var(--theme-button-hover-border-color); }
       .editor-styles-wrapper .wp-block-button:not(.is-style-text) .wp-block-button__link:not(.has-text-color) {
         color: var(--theme-button-color); }
         .editor-styles-wrapper .wp-block-button:not(.is-style-text) .wp-block-button__link:not(.has-text-color):hover {
@@ -697,8 +699,7 @@ ul.wp-block-categories__list[class] {
         z-index: -1;
         width: 0;
         height: 100%;
-        background-color: var(--theme-button-hover-border-color);
-        transform-origin: left;
+        background-color: var(--theme-button-color);
         transition: width 0.4s var(--theme-button-transition-easing); }
       .editor-styles-wrapper .wp-block-button:not(.is-style-text) .wp-block-button__link:hover:before {
         width: 100%; }
@@ -709,15 +710,14 @@ ul.wp-block-categories__list[class] {
         content: '';
         position: absolute;
         top: 0;
-        right: 0;
+        left: 0;
         z-index: -1;
-        width: 100%;
+        width: 0;
         height: 100%;
-        background-color: var(--theme-button-border-color);
-        transform-origin: right;
+        background-color: var(--theme-button-color);
         transition: width 0.4s var(--theme-button-transition-easing); }
       .editor-styles-wrapper .wp-block-button:not(.is-style-text).is-style-primary .wp-block-button__link:hover:before {
-        width: 0; }
+        width: 100%; }
     .editor-styles-wrapper .wp-block-button:not(.is-style-text).is-style-secondary .wp-block-button__link {
       position: relative;
       z-index: 1; }
@@ -729,17 +729,16 @@ ul.wp-block-categories__list[class] {
         z-index: -1;
         width: 0;
         height: 100%;
-        background-color: var(--theme-button-hover-border-color);
-        transform-origin: left;
+        background-color: var(--theme-button-color);
         transition: width 0.4s var(--theme-button-transition-easing); }
       .editor-styles-wrapper .wp-block-button:not(.is-style-text).is-style-secondary .wp-block-button__link:hover:before {
         width: 100%; }
   .editor-styles-wrapper .is-style-primary {
-    --theme-button-background-color: transparent;
-    --theme-button-hover-background-color: transparent;
+    --theme-button-background-color: var(--sm-dark-1);
     --theme-button-color: var(--sm-light-1);
     --theme-button-border-color: var(--sm-dark-1);
     --theme-button-hover-color: var(--sm-dark-1);
+    --theme-button-hover-background-color:  var(--sm-dark-1);
     --theme-button-hover-border-color: var(--sm-dark-1); }
   .editor-styles-wrapper .is-style-secondary {
     --theme-button-background-color: transparent;
@@ -762,12 +761,12 @@ ul.wp-block-categories__list[class] {
       .editor-styles-wrapper .is-style-text .wp-block-button__link:before {
         content: '';
         position: absolute;
-        bottom: 0;
+        bottom: -5px;
         left: 0;
         width: 100%;
         height: .1em;
         background: currentColor;
-        transition: transform 0.3s var(--theme-button-transition-easing);
+        transition: transform 0.4s var(--theme-button-transition-easing);
         transform-origin: 100% 50%; }
       .editor-styles-wrapper .is-style-text .wp-block-button__link:hover:before {
         transform: scaleX(0); }
@@ -786,11 +785,10 @@ ul.wp-block-categories__list[class] {
         vertical-align: text-bottom;
         opacity: 0;
         transform: translate(0, -50%) rotate(180deg);
-        transition: opacity 0.1s var(--theme-button-transition-easing) 0.1s, transform 0.2s var(--theme-button-transition-easing); }
+        transition: opacity 0.2s var(--theme-button-transition-easing), transform 0.2s var(--theme-button-transition-easing); }
       .editor-styles-wrapper .is-style-text .wp-block-button__link:hover:after {
         opacity: 1;
-        transform: translate(5px, -50%) rotate(180deg);
-        transition: opacity 0.25s var(--theme-button-transition-easing), transform 0.2s var(--theme-button-transition-easing) 0.1s; }
+        transform: translate(5px, -50%) rotate(180deg); }
   .editor-styles-wrapper .novablocks-hero {
     --theme-button-background-color: var(--theme-sm-light-1);
     --theme-button-color: var(--theme-sm-dark-1);
@@ -1116,10 +1114,32 @@ ul.wp-block-categories__list[class] {
       margin: 0; }
     .editor-styles-wrapper[class] table {
       width: 100%;
-      border-collapse: collapse; }
-    .editor-styles-wrapper[class] td, .editor-styles-wrapper[class] th {
-      border: 1px solid;
-      padding: 0.5em; }
+      float: none;
+      border-collapse: collapse;
+      margin-bottom: 2em; }
+      .editor-styles-wrapper[class] table th {
+        text-align: left; }
+      .editor-styles-wrapper[class] table th,
+      .editor-styles-wrapper[class] table td {
+        vertical-align: middle; }
+      .editor-styles-wrapper[class] table tr,
+      .editor-styles-wrapper[class] table thead,
+      .editor-styles-wrapper[class] table tbody,
+      .editor-styles-wrapper[class] table tfoot {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
+      .editor-styles-wrapper[class] table th,
+      .editor-styles-wrapper[class] table td {
+        padding: .5em;
+        max-width: 100%;
+        white-space: nowrap; }
+      .editor-styles-wrapper[class] table caption {
+        padding: 5em 0; }
+      .editor-styles-wrapper[class] table th:first-child,
+      .editor-styles-wrapper[class] table td:first-child {
+        padding-left: 0; }
+      .editor-styles-wrapper[class] table th:last-child,
+      .editor-styles-wrapper[class] table td:last-child {
+        padding-right: 0; }
   .editor-styles-wrapper a {
     color: var(--theme-sm-color-1); }
   .editor-styles-wrapper .entry-content > .alignleft:not(:first-child),
