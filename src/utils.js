@@ -18,3 +18,14 @@ export function insideHalf( box1, box2 ) {
 	const insideY = box1.y + box1.height / 2 >= box2.y && box2.y + box2.height >= box1.y + box1.height / 2;
 	return insideX && insideY;
 }
+
+export function reloadRellax( element ) {
+	const rellax = jQuery( element ).data( 'rellax' );
+
+	if ( rellax ) {
+		rellax._reset();
+		rellax._cachePosition();
+		rellax._prepareElement();
+		rellax._updatePosition();
+	}
+}

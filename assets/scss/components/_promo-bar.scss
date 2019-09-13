@@ -7,4 +7,16 @@
     width: 100%;
 
     @include wp-offset(top, 0, true);
+
+    .novablocks-announcement-bar.is-hidden {
+        display: block;
+    }
+
+    .novablocks-announcement-bar__wrapper {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        transform: translate(0,-50%);
+    }
 }

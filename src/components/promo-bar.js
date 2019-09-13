@@ -2,16 +2,15 @@ import AnnouncementBar from "./announcement-bar";
 
 export default class PromoBar {
 
-	constructor( classname, args ) {
-		const announcementElements = document.getElementsByClassName( classname );
-		const announcementElementsArray = Array.from( announcementElements );
+	constructor( elements, args ) {
+		const announcementElementsArray = Array.from( elements );
 
 		this.bars = announcementElementsArray.map( element => new AnnouncementBar( element, {
 			parent: this,
 			transitionDuration: 0.5,
 			transitionEasing: Power4.easeInOut,
 		} ) );
-
+		this.height = 0;
 		this.onUpdate = args.onUpdate;
 		this.update();
 	}

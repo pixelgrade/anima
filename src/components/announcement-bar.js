@@ -11,12 +11,13 @@ export default class AnnouncementBar {
 		this.pieces = this.getPieces();
 		this.id = jQuery( element ).data( 'id' );
 		this.cookieName = 'novablocks-announcement-' + this.id + '-disabled';
+		this.height = 0;
 
 		const disabled = Cookies.get( this.cookieName );
+		const loggedIn = jQuery( 'body' ).hasClass( 'logged-in' );
 
-		if ( disabled ) {
+		if ( disabled && ! loggedIn ) {
 			jQuery( element ).remove();
-			this.height = 0;
 			return;
 		}
 
@@ -52,8 +53,6 @@ export default class AnnouncementBar {
 		const timeline = new TimelineMax( { paused: true } );
 		const height = wrapper.outerHeight();
 
-		timeline.fromTo( content, transitionDuration, { opacity: 0 }, { opacity: 1, ease: transitionEasing }, 0 );
-		timeline.fromTo( close, transitionDuration, { opacity: 0 }, { opacity: 1, ease: transitionEasing }, 0 );
 		timeline.to( element, transitionDuration, { height: height, ease: transitionEasing }, 0 );
 		timeline.to( { height: 0 }, transitionDuration, {
 			height: height,

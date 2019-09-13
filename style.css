@@ -471,10 +471,6 @@ pre {
   word-break: break-all;
   word-wrap: break-word; }
 
-/* Links */
-a {
-  color: var(--theme-sm-color-1); }
-
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
   margin: 0; }
@@ -487,6 +483,10 @@ table {
 td, th {
   border: 1px solid;
   padding: 0.5em; }
+
+/* Links */
+a {
+  color: var(--theme-sm-color-1); }
 
 /*
 [type="button"]
@@ -660,6 +660,14 @@ label {
   @media screen and (max-width: 600px) {
     .admin-bar .promo-bar {
       position: absolute; } }
+  .promo-bar .novablocks-announcement-bar.is-hidden {
+    display: block; }
+  .promo-bar .novablocks-announcement-bar__wrapper {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translate(0, -50%); }
 
 /* 2.1. Site Header */
 .c-menu-toggle__wrap {
@@ -866,7 +874,8 @@ label {
 @media only screen and (min-width: 1000px) {
   .has-fixed-site-header .site-header:not(.site-header--scrolled) {
     color: var(--theme-header-background-color); }
-  .site-header--scrolled {
+  body:not(.has-fixed-site-header) .site-header,
+  .has-fixed-site-header .site-header--scrolled {
     background-color: var(--theme-header-background-color); } }
 
 .site-branding {
@@ -1920,16 +1929,6 @@ body, .site, .site-content {
   --novablocks-light-1: var(--theme-sm-light-1);
   --novablocks-light-2: var(--theme-sm-light-2);
   --novablocks-light-3: var(--theme-sm-light-3); }
-
-.novablocks-announcement-bar.is-hidden[class] {
-  display: block; }
-
-.novablocks-announcement-bar__wrapper {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  transform: translate(0, -50%); }
 
 /* Nova Blocks */
 .novablocks-media__inner-container {
