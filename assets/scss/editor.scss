@@ -29,8 +29,13 @@
         @include nova-container-colors;
         @include nova-container-font(var(--theme-content-font-size));
 
+        //@import "elements/forms";
+        @import "elements/headings";
+        @import "elements/iframe";
+        @import "elements/media";
         @import "elements/lists";
-        @import "elements/typography";
+        @import "elements/pre";
+        @import "elements/tables";
     }
 
     @import "elements/links";
@@ -60,6 +65,10 @@
 /* Hide Text Settings Panel */
 .blocks-font-size {
     display: none;
+
+    &:first-child + .components-panel__body {
+        margin-top: 16px;
+    }
 }
 
 /* Hide Useless Heading Values */

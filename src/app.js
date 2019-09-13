@@ -45,10 +45,10 @@ import { insideHalf, reloadRellax } from "./utils";
 					width: header.box.width,
 					height: header.box.height,
 				}, {
-					x: hero.view.x,
-					y: hero.view.y + promo.height,
-					width: hero.view.width,
-					height: hero.view.height,
+					x: hero.box.x,
+					y: hero.box.y + promo.height,
+					width: hero.box.width,
+					height: hero.box.height,
 				} );
 			} );
 			header.render( overlap );

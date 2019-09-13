@@ -34,15 +34,7 @@ export default class Hero {
 	}
 
 	update() {
-		const { scrollX, scrollY } = GlobalService.getProps();
-
 		this.box = this.element.getBoundingClientRect();
-		this.view = {
-			x: this.box.x + scrollX,
-			y: this.box.y + scrollY,
-			width: this.box.width,
-			height: this.box.height,
-		}
 	}
 
 	updateOnScroll() {
@@ -52,7 +44,7 @@ export default class Hero {
 		const length = windowHeight * 0.5;
 		const middleMin = 0;
 		const middleMax = scrollHeight - windowHeight - length * 0.5;
-		const middle = this.box.y + ( this.box.height - windowHeight ) * 0.5 + this.offset;
+		const middle = this.box.y + ( this.box.height - windowHeight ) * 0.5;
 		const middleMid = Math.max( middleMin, Math.min( middle, middleMax ) );
 
 		this.start = middleMid - length * 0.5;
@@ -89,21 +81,22 @@ export default class Hero {
 
 	getMarkupPieces() {
 		const container = jQuery( this.element ).find( '.novablocks-hero__inner-container' );
-		const headline = container.children().first().filter( '.c-headline' );
+		const headline = container.children().filter( '.c-headline' ).first();
 		const title = headline.find( '.c-headline__primary' );
 		const subtitle = headline.find( '.c-headline__secondary' );
 		const separator = headline.next( '.wp-block-separator' );
 		const sepFlower = separator.find( '.c-separator__flower' );
 		const sepLine = separator.find( '.c-separator__line' );
 		const sepArrow = separator.find( '.c-separator__arrow' );
-		const others = container.children().not( headline ).not( separator );
+		const othersBefore = headline.prevAll();
+		const othersAfter = headline.nextAll().not( separator );
 
-		return { headline, title, subtitle, separator, sepFlower, sepLine, sepArrow, others };
+		return { headline, title, subtitle, separator, sepFlower, sepLine, sepArrow, othersBefore, othersAfter };
 	}
 
 	addIntroToTimeline() {
 		const timeline = this.timeline;
-		const { headline, title, subtitle, separator, sepFlower, sepLine, sepArrow, others } = this.pieces;
+		const { headline, title, subtitle, separator, sepFlower, sepLine, sepArrow, othersBefore, othersAfter } = this.pieces;
 
 		if ( title.length && title.text().trim().length ) {
 
@@ -149,16 +142,21 @@ export default class Hero {
 			timeline.fromTo(sepArrow, 0.2, {opacity: 0}, {opacity: 1, ease: Quint.easeOut}, '-=0.27');
 		}
 
-		if ( others.length ) {
-			timeline.fromTo(others, 0.5, {opacity: 0}, {opacity: 1, ease: Quint.easeOut}, '-=0.28');
-			timeline.fromTo(others, 0.75, {y: -20}, {y: 0}, '-=0.5');
+		if ( othersAfter.length ) {
+			timeline.fromTo(othersAfter, 0.5, {opacity: 0}, {opacity: 1, ease: Quint.easeOut}, '-=0.28');
+			timeline.fromTo(othersAfter, 0.75, {y: -20}, {y: 0}, '-=0.5');
+		}
+
+		if ( othersBefore.length ) {
+			timeline.fromTo(othersBefore, 0.5, {opacity: 0}, {opacity: 1, ease: Quint.easeOut}, '-=0.75');
+			timeline.fromTo(othersBefore, 0.75, {y: 20}, {y: 0}, '-=0.75');
 		}
 
 		this.timeline = timeline;
 	}
 
 	addOutroToTimeline() {
-		const { title, subtitle, others, separator, sepLine, sepFlower, sepArrow } = this.pieces;
+		const { title, subtitle, othersBefore, othersAfter, separator, sepLine, sepFlower, sepArrow } = this.pieces;
 		const timeline = this.timeline;
 
 		timeline.fromTo( title, 1.08, {
@@ -175,7 +173,13 @@ export default class Hero {
 			ease: Quad.easeIn
 		}, 'middle');
 
-		timeline.to( others, 1.08, {
+		timeline.to( othersBefore, 1.08, {
+			y: 60,
+			opacity: 0,
+			ease: Quad.easeIn
+		}, 'middle' );
+
+		timeline.to( othersAfter, 1.08, {
 			y: 60,
 			opacity: 0,
 			ease: Quad.easeIn
@@ -208,7 +212,6 @@ export default class Hero {
 				tl.pause();
 				this.timeline.eventCallback( 'onUpdate', null );
 				this.paused = true;
-				this.timeline.progress( this.progress );
 			}
 
 		}, [ "{self}" ] );
