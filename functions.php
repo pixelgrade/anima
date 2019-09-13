@@ -76,7 +76,8 @@ function novablocks_setup() {
 	 *
 	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
 	 */
-	add_theme_support( 'post-thumbnails' );
+	remove_theme_support( 'post-thumbnails' );
+	add_theme_support( 'post-thumbnails', array( 'post' ) );
 
 	/**
 	 * Switch default core markup for search form, comment form, and comments

@@ -1,32 +1,23 @@
 <?php
 /**
- * The template part used for displaying the checkout coupon form.
+ * Checkout coupon form
  *
- * This template part can be overridden by copying it to a child theme or in the same theme
- * by putting it in the root `/template-parts/checkout/form-coupon.php` or in `/template-parts/woocommerce/checkout/form-coupon.php`.
+ * This template can be overridden by copying it to yourtheme/woocommerce/checkout/form-coupon.php.
  *
- * @see pixelgrade_locate_component_template_part()
- *
- * HOWEVER, on occasion Pixelgrade will need to update template files and you
- * will need to copy the new files to your child theme to
+ * HOWEVER, on occasion WooCommerce will need to update template files and you
+ * (the theme developer) will need to copy the new files to your theme to
  * maintain compatibility. We try to do this as little as possible, but it does
  * happen. When this occurs the version of the template file will be bumped and
  * the readme will list any important changes.
  *
- * @see        https://pixelgrade.com
- * @author     Pixelgrade
- * @package    Components/Woocommerce
- * @version    1.0.0
+ * @see https://docs.woocommerce.com/document/template-structure/
+ * @package WooCommerce/Templates
+ * @version 3.4.4
  */
-
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
-
-if ( ! wc_coupons_enabled() ) {
+defined( 'ABSPATH' ) || exit;
+if ( ! wc_coupons_enabled() ) { // @codingStandardsIgnoreLine.
 	return;
 }
-
 ?>
 
 <div class="woocommerce-form-coupon-toggle">

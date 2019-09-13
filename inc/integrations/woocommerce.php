@@ -4,6 +4,7 @@ remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_ad
 remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
 remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
 remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
+remove_action('woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10);
 
 
 add_action( 'woocommerce_before_single_product_summary', 'addStartWrapperBeforeSingleProductSummary', 1 );
@@ -17,6 +18,12 @@ add_action( 'woocommerce_after_single_product_summary', 'addEndWrapperAfterUpsel
 // before and after related (priority 20)
 add_action( 'woocommerce_after_single_product_summary', 'addStartWrapperBeforeRelated', 19 );
 add_action( 'woocommerce_after_single_product_summary', 'addEndWrapperAfterRelated', 21 );
+add_action('woocommerce_before_shop_loop_item', 'addStartWrapperProduct', 20);
+add_action('woocommerce_shop_loop_item_title', 'addEndWrapperProduct', 20);
+add_action('woocommerce_shop_loop_item_title','newProductTitleMarkup', 10);
+
+add_action('woocommerce_shop_loop_item_title', 'addStartWrapperPrice', 30);
+add_action('woocommerce_after_shop_loop_item_title', 'addEndWrapperPrice', 30);
 
 add_action( 'woocommerce_before_main_content', 'addStartMainContent', 21 );
 add_action( 'woocommerce_after_main_content', 'addEndMainContent', 21 );
@@ -94,6 +101,26 @@ function addStartMainContent() {
 
 function addEndMainContent() {
 	echo '</div></div>';
+}
+
+function newProductTitleMarkup() {
+	echo '<h2 class="wc-block-grid__product-title">' . get_the_title() . '</h2>';
+}
+
+function addStartWrapperProduct() {
+	echo '<div class="wc-block-grid__product-link">';
+}
+
+function addEndWrapperProduct() {
+	echo '</div>';
+}
+
+function addStartWrapperPrice() {
+	echo '<div class="wc-block-grid__product-price price">';
+}
+
+function addEndWrapperPrice() {
+	echo '</div>';
 }
 
 function appendAddToCartButton()  {

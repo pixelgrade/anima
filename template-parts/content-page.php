@@ -19,15 +19,6 @@
 				<?php rosa_the_separator( 'flower' ); ?>
             </div>
         </div>
-		<?php if ( has_post_thumbnail() ) { ?>
-            <div class="entry-thumbnail wp-block-group alignfull">
-                <div class="wp-block-group__inner-container">
-                    <div class="wp-block-image alignwide">
-						<?php the_post_thumbnail(); ?>
-                    </div>
-                </div>
-            </div>
-		<?php } ?>
 	<?php } ?>
 
     <div class="entry-content">
