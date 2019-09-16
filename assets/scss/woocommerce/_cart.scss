@@ -1,4 +1,3 @@
-
 .woocommerce-cart {
 
   @include specific(2) {
@@ -7,14 +6,14 @@
     }
 
     .entry-header {
-      @include spacing(padding-bottom, 2rem);
+      padding-bottom: 2em;
     }
   }
 }
 
 .woocommerce-cart table.cart {
 
-  @include spacing(margin-bottom, 9rem);
+  margin-bottom: 9em;
 
   td {
     padding-top: 1.5em;
@@ -87,7 +86,7 @@
   }
 
   &[class] #shipping_method li {
-    @include spacing( margin-bottom, 20px );
+    margin-bottom: 1.5em;
   }
 
   .cart-subtotal,
@@ -125,7 +124,7 @@
 }
 
 .woocommerce-cart-form + .cart-collaterals {
-  @include spacing( margin-top, 120px );
+  margin-top: 120px;
 }
 
 .woocommerce-cart .actions .coupon {
@@ -153,7 +152,7 @@
 }
 
 .shop_table .shipping [data-title]:before {
-  @include spacing( margin-bottom, 20px );
+  margin-bottom: 1.5em;
 
   @include below( tablet ) {
     float: none;

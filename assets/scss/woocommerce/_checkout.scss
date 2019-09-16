@@ -18,12 +18,13 @@
   // order received page
   &.woocommerce-order-received .col2-set {
 
-    @include spacing(margin-left, -60px);
-    @include spacing(margin-top, -60px);
+    margin-left: calc(var(--theme-spacing-large) * -1);
+    margin-top: calc(var(--theme-spacing-large) * -1);
 
     > * {
-      @include spacing(padding-left, 60px);
-      @include spacing(padding-top, 60px);
+
+      padding-left: var(--theme-spacing-large);
+      padding-top: var(--theme-spacing-large);
     }
   }
 
@@ -33,7 +34,7 @@
     margin-bottom: 0;
 
     * + & {
-      @include spacing(margin-top, 60px);
+      margin-top: var(--theme-spacing-large);
     }
   }
 
@@ -146,12 +147,12 @@
     padding: 0;
 
     &:not(:last-child) {
-      @include spacing( margin-bottom, 24px );
+      margin-bottom: var(--theme-spacing-small);
     }
 
     label {
       font-weight: 700;
-      @include spacing( margin-bottom, 12px );
+      margin-bottom: var(--theme-spacing);
     }
 
     input.input-text,
@@ -174,16 +175,16 @@
     display: flex;
     flex-wrap: wrap;
     align-items: stretch;
-    @include spacing(margin-left, -20px);
+    margin-left: calc(var(--theme-spacing) * -1);
 
     > p:not([class]) {
       flex-basis: 100%;
-      @include spacing(margin-bottom, 20px);
+      margin-bottom: var(--theme-spacing);
     }
 
     > p {
       width: auto;
-      @include spacing(padding-left, 20px);
+      padding-left: var(--theme-spacing);
     }
 
     button {
@@ -195,7 +196,7 @@
     }
 
     + .woocommerce-billing-fields {
-      @include spacing(margin-top, 20px);
+      margin-top: var(--theme-spacing);
     }
   }
 
@@ -204,7 +205,7 @@
   }
 
   .woocommerce-info {
-    @include spacing(margin-bottom, 20px);
+    margin-bottom: var(--theme-spacing);
   }
 
   @include below(62.5em) {
@@ -301,7 +302,7 @@
 }
 
 .woocommerce-checkout-title[class] {
-  @include spacing(margin-bottom, 10px);
+  margin-bottom: var(--theme-spacing-tiny);
 
   a {
     color: inherit;
@@ -312,7 +313,7 @@
   list-style: none;
   padding-left: 0;
 
-  @include spacing(margin-bottom, 32px);
+  margin-bottom: var(--theme-spacing-small);
 
   li {
     display: inline-block;
@@ -346,21 +347,21 @@
 
 .woocommerce-billing-fields > h3,
 .woocommerce-additional-fields > h3 {
-  @include spacing(padding-bottom, 24px);
-  @include spacing(margin-bottom, 24px);
+  padding-bottom: var(--theme-spacing);
+  margin-bottom: var(--theme-spacing);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 [id="order_review_heading"] {
-  @include spacing(margin-bottom, 24px);
+  margin-bottom: var(--theme-spacing);
 }
 
 [id="customer_details"] .col-1 + .col-2 {
-  @include spacing(margin-top, 35px);
+  margin-top: var(--theme-spacing);
 }
 
 #ship-to-different-address {
-  @include spacing(margin-bottom, 24px);
+  margin-bottom: var(--theme-spacing);
 
   input[type="checkbox"] {
     margin-bottom: 0;
@@ -368,7 +369,7 @@
 }
 
 .woocommerce-shipping-fields {
-  @include spacing(margin-bottom, 35px);
+  margin-top: var(--theme-spacing);
 }
 
 .woocommerce .woocommerce-customer-details address {
@@ -379,13 +380,13 @@
 ul.order_details[class] {
   display: flex;
   flex-wrap: wrap;
-  @include spacing(margin-top, -40px);
-  @include spacing(margin-left, -40px);
+  margin-top: calc(var(--theme-spacing-small) * -1);
+  margin-left: calc(var(--theme-spacing-small) * -1);
 
   > li {
-    @include spacing(margin-top, 40px);
-    @include spacing(padding-left, 40px);
-    @include spacing(padding-right, 40px);
+    margin-top: var(--theme-spacing-normal);
+    padding-left: var(--theme-spacing-normal);
+    padding-right: var(--theme-spacing-normal);
     margin-right: 0;
 
     @include below( tablet ) {
