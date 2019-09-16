@@ -1,95 +1,37 @@
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
-    margin: 0;
+  margin: 0;
 }
 
 h1.has-larger-font-size {
-    @extend %h0-font !optional;
+  @extend %h0-font !optional;
 }
 
 h1,
 h2.has-larger-font-size {
-    @extend %h1-font !optional;
+  @extend %h1-font !optional;
 }
 
 h1.has-smaller-font-size,
 h2,
 h3.has-larger-font-size {
-    @extend %h2-font !optional;
+  @extend %h2-font !optional;
 }
 
 h2.has-smaller-font-size,
 h3 {
-    @extend %h3-font !optional;
+  @extend %h3-font !optional;
 }
 
 h3.has-smaller-font-size,
 h4 {
-    @extend %h4-font !optional;
+  @extend %h4-font !optional;
 }
 
 h5 {
-    @extend %h5-font !optional;
+  @extend %h5-font !optional;
 }
 
 h6 {
-    @extend %h6-font !optional;
+  @extend %h6-font !optional;
 }
-
-h1, h2, h3, h4, h5, h6 {
-
-  &:not(:first-child) {
-    margin-top: var(--theme-spacing);
-  }
-
-}
-
-
-/* Tables */
-table {
-  width: 100%;
-  float: none;
-  border-collapse: collapse;
-
-  margin-bottom: 2em;
-
-  th {
-    text-align: left;
-  }
-
-  th,
-  td {
-    vertical-align: middle;
-  }
-
-  tr,
-  thead,
-  tbody,
-  tfoot {
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-  }
-
-  th,
-  td {
-    padding: .5em;
-    max-width:100%;
-    white-space:nowrap;
-  }
-
-  caption {
-    padding: 5em 0;
-  }
-
-  th,
-  td {
-
-    &:first-child {
-      padding-left: 0;
-    }
-
-    &:last-child {
-      padding-right: 0;
-    }
-  }
-}
-
