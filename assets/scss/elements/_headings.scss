@@ -1,29 +1,3 @@
-/* Media */
-img,
-video {
-    max-width: 100%;
-    height: auto;
-}
-
-figure {
-    margin: 0;
-}
-
-/* Iframes */
-iframe {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-}
-
-/* Preformatted */
-pre {
-    white-space: pre;
-    white-space: pre-wrap;
-    word-break: break-all;
-    word-wrap: break-word;
-}
-
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
@@ -61,6 +35,15 @@ h5 {
 h6 {
     @extend %h6-font !optional;
 }
+
+h1, h2, h3, h4, h5, h6 {
+
+  &:not(:first-child) {
+    margin-top: var(--theme-spacing);
+  }
+
+}
+
 
 /* Tables */
 table {
@@ -109,3 +92,4 @@ table {
     }
   }
 }
+

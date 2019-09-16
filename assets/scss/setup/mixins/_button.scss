@@ -140,6 +140,32 @@
   @extend %button-theme !optional;
 }
 
+@mixin primary-button-settings {
+  --theme-button-background-color: var(--sm-dark-1);
+  --theme-button-color: var(--sm-light-1);
+  --theme-button-border-color: var(--sm-dark-1);
+  --theme-button-hover-color: var(--sm-dark-1);
+  --theme-button-hover-background-color:  var(--sm-dark-1);
+  --theme-button-hover-border-color: var(--sm-dark-1);
+}
+
+@mixin secondary-button-settings {
+  --theme-button-background-color: transparent;
+  --theme-button-color: var(--sm-dark-1);
+  --theme-button-border-color: currentColor;
+  --theme-button-hover-color: var(--sm-light-1);
+  --theme-button-hover-background-color: transparent;
+  --theme-button-hover-border-color: var(--sm-dark-1);
+}
+
+@mixin text-button-settings {
+  --theme-button-color: var(--sm-color-1);
+  --theme-button-background-color: transparent;
+  --theme-button-hover-color:var(--sm-color-1);
+  --theme-button-hover-background-color: transparent;
+  --theme-button-border-radius: 0;
+}
+
 @mixin button {
   @include button-base;
   @include button-box;

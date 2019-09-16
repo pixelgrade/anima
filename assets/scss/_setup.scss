@@ -4,9 +4,23 @@
 @import "setup/functions";
 @import "setup/mixins";
 @import "setup/custom-properties";
+@import "setup/font-faces";
 
-:root { @include variation(default) }
+:root {
+    @include variation(default);
+}
 
-.variation--default { @include variation(default) }
-.variation--dark { @include variation(dark) }
-.variation--monochrome { @include variation(monochrome) }
+.is-style-dark {
+    @include variation(dark);
+
+    background-color: var(--theme-sm-light-1);
+    color: var(--theme-sm-dark-2);
+}
+
+.is-style-darker {
+    --sm-dark-4: #141928;
+    @include variation(darker);
+
+    background-color: var(--theme-sm-light-1);
+    color: var(--theme-sm-dark-2);
+}
