@@ -1,7 +1,5 @@
 @import "setup";
 
-@import "blocks/editor";
-
 @import "theme/editor";
 
 /* Layout */
@@ -22,6 +20,8 @@
 
 /* Typography */
 .editor-styles-wrapper {
+
+    @import "blocks/editor";
 
     // increased specificity selector to overwrite default styles
     &[class] {

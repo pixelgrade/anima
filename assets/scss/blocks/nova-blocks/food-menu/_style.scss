@@ -1,0 +1,35 @@
+.nova-food-menu__header .section-title {
+  margin-bottom: var(--theme-spacing-small);
+}
+
+.nova-food-menu__section:not(:first-child) {
+  margin-top: var(--theme-spacing-small);
+}
+
+.nova-food-menu-item--highlighted {
+  border-color: var(--sm-color-1);
+}
+
+.nova-food-menu-item__highlight-label {
+  background-color: var(--sm-color-1);
+  padding-top: var(--theme-spacing-tiny);
+  padding-bottom: var(--theme-spacing-tiny);
+}
+
+.nova-food-menu-item__title {
+  --theme-heading-5-font-weight: 700;
+  .item-title {
+    @include apply-font(heading-5);
+    padding-right: var(--theme-spacing-tiny);
+  }
+}
+
+.nova-food-menu-item__prices {
+  padding-left: var(--theme-spacing-tiny);
+
+  font-feature-settings: "lnum";
+}
+
+.item-title {
+  background-color: var(--sm-light-3);
+}
