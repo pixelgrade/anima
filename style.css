@@ -59,6 +59,7 @@ Table of Contents
 :root {
   --theme-content-width-normal: calc(37 * var(--theme-body-font-size));
   --theme-content-width-wide: calc(65 * var(--theme-body-font-size));
+  --theme-background-color: var(--sm-light-1);
   --theme-spacing:        16px;
   --theme-spacing-micro:  calc( var( --theme-spacing ) / 4 );
   --theme-spacing-tiny:   calc( var( --theme-spacing ) / 2 );
@@ -606,7 +607,7 @@ body {
   font-size: var(--theme-body-font-size);
   line-height: 1.6;
   letter-spacing: -0.03em;
-  background-color: var(--theme-sm-light-3);
+  background-color: var(--theme-background-color);
   color: var(--theme-sm-dark-2); }
 
 /*
@@ -2203,6 +2204,64 @@ body, .site, .site-content {
   transform: translate(0, -50%); }
   .novablocks-map__marker-name[class][class][class] {
     font-size: 16px; }
+
+.nova-food-menu__header .section-title {
+  margin-bottom: var(--theme-spacing-small); }
+
+.nova-food-menu__section:not(:first-child) {
+  margin-top: var(--theme-spacing-small); }
+
+.nova-food-menu-item--highlighted {
+  border-color: var(--sm-color-1); }
+
+.nova-food-menu-item__highlight-label {
+  background-color: var(--sm-color-1);
+  padding-top: var(--theme-spacing-tiny);
+  padding-bottom: var(--theme-spacing-tiny); }
+
+.nova-food-menu-item__title {
+  --theme-heading-5-font-weight: 700; }
+  .nova-food-menu-item__title .item-title {
+    font-family: var(--current-font-family);
+    font-size: var(--current-font-size);
+    line-height: var(--current-line-height);
+    font-weight: var(--current-font-weight);
+    letter-spacing: var(--current-letter-spacing);
+    text-transform: var(--current-text-transform);
+    --current-font-family: var(--theme-heading-5-font-family);
+    --current-font-size: var(--theme-heading-5-font-size);
+    --current-line-height: var(--theme-heading-5-line-height);
+    --current-font-weight: var(--theme-heading-5-font-weight);
+    --current-letter-spacing: var(--theme-heading-5-letter-spacing);
+    --current-text-transform: var(--theme-heading-5-text-transform);
+    padding-right: var(--theme-spacing-tiny); }
+
+.nova-food-menu-item__prices {
+  padding-left: var(--theme-spacing-tiny);
+  font-feature-settings: "lnum"; }
+
+.ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button {
+  background: linear-gradient(to right, var(--sm-light-1) 50%, var(--sm-dark-1) 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  border: 2px solid var(--sm-dark-1);
+  transition: all 0.4s var(--theme-button-transition-easing);
+  border-radius: 0; }
+  .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button:hover {
+    background-position: left bottom;
+    color: var(--sm-dark-1); }
+
+.ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button {
+  background: linear-gradient(to right, var(--sm-dark-1) 50%, var(--sm-light-1) 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  border: 2px solid var(--sm-light-1);
+  transition: all 0.4s var(--theme-button-transition-easing);
+  border-radius: 0; }
+  .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button:hover {
+    background-position: left bottom;
+    border-color: currentColor;
+    color: var(--sm-light-1); }
 
 .wp-block-quote,
 .wp-block-pullquote {
