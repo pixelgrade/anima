@@ -200,3 +200,86 @@ if ( ! function_exists( ' rosa_woocommerce_pagination_args' ) ) {
     }
 }
 
+/**
+ * Determines whether the site has a custom transparent logo.
+ *
+ * @param int $blog_id Optional. ID of the blog in question. Default is the ID of the current blog.
+ * @return bool Whether the site has a custom logo or not.
+ */
+function rosa_has_custom_logo_transparent( $blog_id = 0 ) {
+	$switched_blog = false;
+
+	if ( is_multisite() && ! empty( $blog_id ) && get_current_blog_id() !== absint( $blog_id ) ) {
+		switch_to_blog( $blog_id );
+		$switched_blog = true;
+	}
+
+	$custom_logo_id = get_theme_mod( 'rosa_transparent_logo' );
+
+	if ( $switched_blog ) {
+		restore_current_blog();
+	}
+
+	return (bool) $custom_logo_id;
+}
+
+/**
+ * Returns a custom logo, linked to home.
+ *
+ * @param int $blog_id Optional. ID of the blog in question. Default is the ID of the current blog.
+ *
+ * @return string Custom logo transparent markup.
+ */
+function rosa_get_custom_logo_transparent( $blog_id = 0 ) {
+	$html          = '';
+	$switched_blog = false;
+
+	if ( is_multisite() && ! empty( $blog_id ) && get_current_blog_id() !== absint( $blog_id ) ) {
+		switch_to_blog( $blog_id );
+		$switched_blog = true;
+	}
+
+	$custom_logo_id = get_theme_mod( 'rosa_transparent_logo' );
+
+	// We have a logo. Logo is go.
+	if ( $custom_logo_id ) {
+		$html = sprintf(
+			'<a href="%1$s" class="custom-logo-link  custom-logo-link--inversed" rel="home" itemprop="url">%2$s</a>',
+			esc_url( home_url( '/' ) ),
+			wp_get_attachment_image(
+				$custom_logo_id, 'large', false, array(
+					'class'    => 'custom-logo--transparent',
+					'itemprop' => 'logo',
+				)
+			)
+		);
+	} // If no logo is set but we're in the Customizer, leave a placeholder (needed for the live preview).
+    elseif ( is_customize_preview() ) {
+		$html = sprintf(
+			'<a href="%1$s" class="custom-logo-link  custom-logo-link--inversed" style="display:none;"><img class="custom-logo--transparent"/></a>',
+			esc_url( home_url( '/' ) )
+		);
+	}
+
+	if ( $switched_blog ) {
+		restore_current_blog();
+	}
+
+	/**
+	 * Filters the custom logo output.
+	 *
+	 * @param string $html Custom logo HTML output.
+	 * @param int $blog_id ID of the blog to get the custom logo for.
+	 */
+	return apply_filters( 'rosa_get_custom_logo_transparent', $html, $blog_id );
+}
+
+/**
+ * Displays a custom logo transparent, linked to home.
+ *
+ * @param int $blog_id Optional. ID of the blog in question. Default is the ID of the current blog.
+ */
+function rosa_the_custom_logo_transparent( $blog_id = 0 ) {
+	echo rosa_get_custom_logo_transparent( $blog_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+}
+
