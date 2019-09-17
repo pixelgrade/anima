@@ -30,8 +30,8 @@
 
 /* Global CSS Custom Properties */
 :root {
-  --theme-content-width-normal: calc(37 * var(--theme-body-font-size));
-  --theme-content-width-wide: calc(65 * var(--theme-body-font-size));
+  --theme-content-width-normal: calc(42 * var(--theme-body-font-size));
+  --theme-content-width-wide: calc(74 * var(--theme-body-font-size));
   --theme-background-color: var(--sm-light-1);
   --theme-spacing:        16px;
   --theme-spacing-micro:  calc( var( --theme-spacing ) / 4 );
@@ -46,7 +46,7 @@
   --sm-color-3: #B12C4A;
   --sm-dark-1: #212B49;
   --sm-dark-2: #34394B;
-  --sm-dark-3: #34394B;
+  --sm-dark-3: #141928;
   --sm-light-1: #FFFFFF;
   --sm-light-2: #CCCCCC;
   --sm-light-3: #EEEFF2;
@@ -245,18 +245,36 @@
   --theme-sm-light-3: var(--sm-dark-3);
   background-color: var(--theme-sm-light-1);
   color: var(--theme-sm-dark-2); }
+  .is-style-dark a {
+    color: inherit;
+    text-decoration: underline; }
 
 .is-style-darker {
-  --sm-dark-4: #141928;
   --theme-sm-color-1: var(--sm-color-1);
   --theme-sm-color-2: var(--sm-color-2);
   --theme-sm-color-3: var(--sm-color-3);
   --theme-sm-dark-1: var(--sm-light-2);
   --theme-sm-dark-2: var(--sm-light-1);
   --theme-sm-dark-3: var(--sm-light-3);
-  --theme-sm-light-1: var(--sm-dark-4);
+  --theme-sm-light-1: var(--sm-dark-3);
   --theme-sm-light-2: var(--sm-dark-2);
-  --theme-sm-light-3: var(--sm-dark-3);
+  --theme-sm-light-3: var(--sm-dark-1);
+  background-color: var(--theme-sm-light-1);
+  color: var(--theme-sm-dark-2); }
+  .is-style-darker a {
+    color: inherit;
+    text-decoration: underline; }
+
+.is-style-accent {
+  --theme-sm-color-1: var(--sm-dark-1);
+  --theme-sm-color-2: var(--sm-dark-2);
+  --theme-sm-color-3: var(--sm-dark-3);
+  --theme-sm-dark-1: var(--sm-light-2);
+  --theme-sm-dark-2: var(--sm-light-1);
+  --theme-sm-dark-3: var(--sm-light-3);
+  --theme-sm-light-1: var(--sm-color-1);
+  --theme-sm-light-2: var(--sm-color-2);
+  --theme-sm-light-3: var(--sm-color-3);
   background-color: var(--theme-sm-light-1);
   color: var(--theme-sm-dark-2); }
 
@@ -1099,7 +1117,7 @@
     transform: translate(0, -50%); }
     .editor-styles-wrapper .novablocks-map__marker-name[class][class][class] {
       font-size: 16px; }
-  .has-image-on-the-right .editor-styles-wrapper .novablocks-media__layout {
+  .editor-styles-wrapper .has-image-on-the-right .novablocks-media__layout {
     flex-direction: row-reverse; }
   .editor-styles-wrapper .novablocks-media__content {
     min-width: 28em;
@@ -1462,21 +1480,12 @@
 
 /* Post Title Block */
 .editor-post-title__block {
-  max-width: var(--theme-content-width-normal); }
+  max-width: none; }
   .editor-post-title__block .editor-post-title__input {
-    font-family: var(--current-font-family);
-    font-size: var(--current-font-size);
-    line-height: var(--current-line-height);
-    font-weight: var(--current-font-weight);
-    letter-spacing: var(--current-letter-spacing);
-    text-transform: var(--current-text-transform);
-    --current-font-family: var(--theme-heading-1-font-family);
-    --current-font-size: var(--theme-heading-1-font-size);
-    --current-line-height: var(--theme-heading-1-line-height);
-    --current-font-weight: var(--theme-heading-1-font-weight);
-    --current-letter-spacing: var(--theme-heading-1-letter-spacing);
-    --current-text-transform: var(--theme-heading-1-text-transform);
-    text-align: center; }
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 1.4; }
 
 /* Hide Text Settings Panel */
 .blocks-font-size {

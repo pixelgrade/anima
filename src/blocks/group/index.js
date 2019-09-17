@@ -10,4 +10,9 @@ wp.domReady( () => {
 		label: 'Darker',
 	} );
 
+	wp.blocks.registerBlockStyle( 'core/group', {
+		name: 'accent',
+		label: 'Accent',
+	} );
+
 } );

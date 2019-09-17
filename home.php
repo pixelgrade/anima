@@ -17,10 +17,10 @@ $page_id = get_option( 'page_for_posts' );
 
 			<?php if ( have_posts() ) : ?>
 
-				<header class="page-header">
+				<header class="entry-header">
                     <div class="entry-content has-text-align-center">
                         <?php
-                        echo '<h1 class="page-title">' . get_the_title( $page_id ) . '</h1>';
+                        echo '<h1 class="page-title has-text-align-center">' . get_the_title( $page_id ) . '</h1>';
                         $categories = get_categories();
                         $categories = array_filter( $categories, function( $category ) {
                             return $category->term_id !== 1;

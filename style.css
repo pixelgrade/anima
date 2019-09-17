@@ -57,8 +57,8 @@ Table of Contents
 
 /* Global CSS Custom Properties */
 :root {
-  --theme-content-width-normal: calc(37 * var(--theme-body-font-size));
-  --theme-content-width-wide: calc(65 * var(--theme-body-font-size));
+  --theme-content-width-normal: calc(42 * var(--theme-body-font-size));
+  --theme-content-width-wide: calc(74 * var(--theme-body-font-size));
   --theme-background-color: var(--sm-light-1);
   --theme-spacing:        16px;
   --theme-spacing-micro:  calc( var( --theme-spacing ) / 4 );
@@ -73,7 +73,7 @@ Table of Contents
   --sm-color-3: #B12C4A;
   --sm-dark-1: #212B49;
   --sm-dark-2: #34394B;
-  --sm-dark-3: #34394B;
+  --sm-dark-3: #141928;
   --sm-light-1: #FFFFFF;
   --sm-light-2: #CCCCCC;
   --sm-light-3: #EEEFF2;
@@ -272,18 +272,36 @@ Table of Contents
   --theme-sm-light-3: var(--sm-dark-3);
   background-color: var(--theme-sm-light-1);
   color: var(--theme-sm-dark-2); }
+  .is-style-dark a {
+    color: inherit;
+    text-decoration: underline; }
 
 .is-style-darker {
-  --sm-dark-4: #141928;
   --theme-sm-color-1: var(--sm-color-1);
   --theme-sm-color-2: var(--sm-color-2);
   --theme-sm-color-3: var(--sm-color-3);
   --theme-sm-dark-1: var(--sm-light-2);
   --theme-sm-dark-2: var(--sm-light-1);
   --theme-sm-dark-3: var(--sm-light-3);
-  --theme-sm-light-1: var(--sm-dark-4);
+  --theme-sm-light-1: var(--sm-dark-3);
   --theme-sm-light-2: var(--sm-dark-2);
-  --theme-sm-light-3: var(--sm-dark-3);
+  --theme-sm-light-3: var(--sm-dark-1);
+  background-color: var(--theme-sm-light-1);
+  color: var(--theme-sm-dark-2); }
+  .is-style-darker a {
+    color: inherit;
+    text-decoration: underline; }
+
+.is-style-accent {
+  --theme-sm-color-1: var(--sm-dark-1);
+  --theme-sm-color-2: var(--sm-dark-2);
+  --theme-sm-color-3: var(--sm-dark-3);
+  --theme-sm-dark-1: var(--sm-light-2);
+  --theme-sm-dark-2: var(--sm-light-1);
+  --theme-sm-dark-3: var(--sm-light-3);
+  --theme-sm-light-1: var(--sm-color-1);
+  --theme-sm-light-2: var(--sm-color-2);
+  --theme-sm-light-3: var(--sm-color-3);
   background-color: var(--theme-sm-light-1);
   color: var(--theme-sm-dark-2); }
 
@@ -1197,10 +1215,6 @@ ul.menu a,
     opacity: 1; }
 
 /* 2.2. Site Content */
-.site-main > :not(:first-child) {
-  --element-spacing: var(--theme-spacing-large);
-  margin-top: var(--element-spacing); }
-
 /* 2.3. Site Footer */
 .site-footer {
   padding-top: var(--theme-spacing-normal);
@@ -1323,7 +1337,10 @@ body, .site, .site-content {
   --current-letter-spacing: var(--theme-heading-5-letter-spacing);
   --current-text-transform: var(--theme-heading-5-text-transform); }
   .entry-meta > :not(:last-child):after {
-    content: "/"; }
+    content: "·";
+    padding: 0 var(--theme-spacing-tiny); }
+  .entry-meta li {
+    --element-spacing: 0; }
 
 /* 2.4. Comments */
 :root {
@@ -2242,6 +2259,16 @@ body, .site, .site-content {
 .novablocks-hero__inner-container .c-separator__flower {
   color: var(--theme-sm-color-1); }
 
+.novablocks-u-content-align {
+  position: static; }
+
+.novablocks-hero__indicator {
+  width: 160px;
+  height: 50px;
+  color: var(--theme-sm-light-3); }
+  .novablocks-hero__indicator:after {
+    color: var(--theme-sm-dark-1); }
+
 .novablocks-map__marker-name {
   position: absolute;
   top: 50%;
@@ -2392,6 +2419,10 @@ body, .site, .site-content {
 .blog .novablocks-media__inner-container {
   text-align: center; }
 
+.archive .entry-header,
+.blog .entry-header {
+  padding-bottom: 0; }
+
 body {
   background: var(--theme-sm-light-3); }
 
@@ -2435,7 +2466,7 @@ body {
     display: block;
     width: auto;
     height: auto;
-    max-height: 40vh;
+    max-height: 60vh;
     margin-left: auto;
     margin-right: auto; }
 
