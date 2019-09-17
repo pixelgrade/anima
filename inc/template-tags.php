@@ -171,17 +171,29 @@ if ( ! function_exists( 'rosa_the_separator' ) ) {
 }
 
 if ( ! function_exists( 'rosa_get_separator_markup' ) ) {
-    function rosa_get_separator_markup( $style = 'default' ) {
-        ob_start(); ?>
+    function rosa_get_separator_markup() {
+        ob_start();
+        ?>
         <div class="c-separator">
             <div class="c-separator__arrow c-separator__arrow--left"></div>
             <div class="c-separator__line c-separator__line--left"></div>
-            <div class="c-separator__flower"><span>&#10043;</span></div>
+            <div class="c-separator__flower">
+                <span><?php echo rosa_get_separator_symbol(); ?></span>
+            </div>
             <div class="c-separator__line c-separator__line--right"></div>
             <div class="c-separator__arrow c-separator__arrow--right"></div>
         </div>
         <?php return apply_filters( 'rosa_separator_markup', ob_get_clean() );
     }
+}
+
+if ( ! function_exists( 'rosa_get_separator_symbol' ) ) {
+	function rosa_get_separator_symbol() {
+        ob_start();
+        $symbol = pixelgrade_option( 'separator_symbol', 'fleuron-1' );
+        get_template_part( 'template-parts/separators/' . $symbol . '-svg' );
+        return ob_get_clean();
+	}
 }
 
 if ( ! function_exists( ' rosa_woocommerce_pagination_args' ) ) {

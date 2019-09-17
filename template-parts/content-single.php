@@ -14,13 +14,13 @@ $classes = array();
 <article id="post-<?php the_ID(); ?>" <?php post_class( join( ' ', $classes ) ); ?>>
 
     <div>
-        <div class="entry-header">
+        <header class="entry-header">
 			<?php get_template_part( 'template-parts/entry-meta' ); ?>
 			<?php the_title( '<h1 class="entry-title has-text-align-center">', '</h1>' ); ?>
             <div class="has-normal-font-size">
-				<?php rosa_the_separator( 'flower' ); ?>
+				<?php rosa_the_separator( 'decorative' ); ?>
             </div>
-        </div>
+        </header>
 		<?php if ( has_post_thumbnail() ) { ?>
             <div class="entry-thumbnail">
                 <div class="entry-content">
