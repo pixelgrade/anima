@@ -1128,16 +1128,25 @@
   .editor-styles-wrapper .novablocks-media {
     --novablocks-media-content-padding: var(--theme-spacing-large);
     --novablocks-media-spacing: var(--theme-spacing-normal); }
+  .editor-styles-wrapper .nova-food-menu {
+    --menu-offset: 18px; }
   .editor-styles-wrapper .nova-food-menu__header .section-title {
     margin-bottom: var(--theme-spacing-small); }
   .editor-styles-wrapper .nova-food-menu__section:not(:first-child) {
     margin-top: var(--theme-spacing-small); }
   .editor-styles-wrapper .nova-food-menu-item--highlighted {
-    border-color: var(--sm-color-1); }
+    border-color: var(--sm-dark-1);
+    border-top: 0;
+    margin-left: calc(var(--menu-offset) * -1);
+    margin-right: calc(var(--menu-offset) * -1);
+    padding: 0 var(--menu-offset) 14px; }
   .editor-styles-wrapper .nova-food-menu-item__highlight-label {
-    background-color: var(--sm-color-1);
-    padding-top: var(--theme-spacing-tiny);
-    padding-bottom: var(--theme-spacing-tiny); }
+    background-color: var(--sm-dark-1);
+    padding: var(--theme-spacing-micro) 18px;
+    margin-left: calc(var(--menu-offset) * -1);
+    margin-right: calc(var(--menu-offset) * -1);
+    margin-bottom: 14px;
+    width: calc(100% + calc(var(--menu-ofset) * 2)); }
   .editor-styles-wrapper .nova-food-menu-item__title {
     --theme-heading-5-font-weight: 700; }
     .editor-styles-wrapper .nova-food-menu-item__title .item-title {
@@ -1147,16 +1156,33 @@
       font-weight: var(--current-font-weight);
       letter-spacing: var(--current-letter-spacing);
       text-transform: var(--current-text-transform);
-      --current-font-family: var(--theme-heading-5-font-family);
-      --current-font-size: var(--theme-heading-5-font-size);
-      --current-line-height: var(--theme-heading-5-line-height);
-      --current-font-weight: var(--theme-heading-5-font-weight);
-      --current-letter-spacing: var(--theme-heading-5-letter-spacing);
-      --current-text-transform: var(--theme-heading-5-text-transform);
+      --current-font-family: var(--theme-heading-4-font-family);
+      --current-font-size: var(--theme-heading-4-font-size);
+      --current-line-height: var(--theme-heading-4-line-height);
+      --current-font-weight: var(--theme-heading-4-font-weight);
+      --current-letter-spacing: var(--theme-heading-4-letter-spacing);
+      --current-text-transform: var(--theme-heading-4-text-transform);
       padding-right: var(--theme-spacing-tiny); }
   .editor-styles-wrapper .nova-food-menu-item__prices {
     padding-left: var(--theme-spacing-tiny);
-    font-feature-settings: "lnum"; }
+    font-feature-settings: 'tnum' on, 'lnum' on; }
+  .editor-styles-wrapper .nova-food-menu__header .section-title {
+    font-family: var(--current-font-family);
+    font-size: var(--current-font-size);
+    line-height: var(--current-line-height);
+    font-weight: var(--current-font-weight);
+    letter-spacing: var(--current-letter-spacing);
+    text-transform: var(--current-text-transform);
+    --current-font-family: var(--theme-heading-2-font-family);
+    --current-font-size: var(--theme-heading-2-font-size);
+    --current-line-height: var(--theme-heading-2-line-height);
+    --current-font-weight: var(--theme-heading-2-font-weight);
+    --current-letter-spacing: var(--theme-heading-2-letter-spacing);
+    --current-text-transform: var(--theme-heading-2-text-transform); }
+  .editor-styles-wrapper .nova-food-menu-item__title {
+    font-size: var(--theme-heading-4-font-size); }
+    .editor-styles-wrapper .nova-food-menu-item__title:before {
+      border-width: .15em; }
   .editor-styles-wrapper .item-title {
     background-color: var(--theme-background-color); }
   .editor-styles-wrapper .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button {

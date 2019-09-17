@@ -19,14 +19,18 @@ ul.menu,
         align-items: center;
 
         &:after {
-            content: "";
-            display: block;
-            width: 7px;
-            height: 7px;
-            border-right: 2px solid currentColor;
-            border-bottom: 2px solid currentColor;
-            transform: translateY(-30%) rotate(45deg);
-            margin-left: 0.5em;
+            content: '';
+
+            position: absolute;
+            top: 50%;
+            right: 0;
+
+            border: 5px solid transparent;
+            border-top-color: currentColor;
+
+            transform: translateY(-50%);
+
+            margin-left: var(--theme-spacing-tiny);
         }
     }
 }

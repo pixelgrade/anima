@@ -7,7 +7,10 @@
     left: 0;
     z-index: 1000;
 
-    background: #FFF;
+    width: 75vw;
+
+    background: var(--sm-dark-1);
+    color: var(--sm-light-1);
 
     @include wp-offset(top, 0, true);
 
@@ -22,7 +25,7 @@
 
 .site-header__inner-container[class] {
     margin-top: 3.5em;
-    border-top: 1px solid rgba(0,0,0,0.1);
+    border-top: 10;
     padding: 0;
 }
 
@@ -37,5 +40,32 @@
 
     @include specific(2) {
         margin: 0;
+    }
+}
+
+.site-header--fixed.site-header--normal .c-logo__default[class] {
+    opacity: 0;
+}
+
+.site-header--fixed.site-header--normal .c-logo__inverted[class] {
+    opacity: 1;
+}
+
+.wp-block-novablocks-navigation {
+    --theme-heading-6-text-transform: uppercase;
+    --theme-heading-6-font-weight: 700;
+    @include apply-font(heading-6);
+
+    ul.menu a,
+    .menu > ul a {
+        position: relative;
+        display: inline-block;
+    }
+
+    .menu-item-has-children,
+    .page_item_has_children {
+        > ul {
+            display: none;
+        }
     }
 }
