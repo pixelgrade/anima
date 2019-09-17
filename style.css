@@ -620,6 +620,9 @@ template {
   margin: 0; }
 
 /* 1. Elements */
+html {
+  -webkit-font-smoothing: antialiased; }
+
 body {
   font-family: var(--theme-body-font-family);
   font-size: var(--theme-body-font-size);
@@ -1160,6 +1163,26 @@ ul.menu a,
 .site-title a {
   color: inherit;
   text-decoration: none; }
+
+.c-logo {
+  position: relative; }
+
+.c-logo__inverted {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 100%; }
+  .site-header--fixed.site-header--scrolled .c-logo__inverted,
+  .site-header--fixed.site-header--normal .c-logo__inverted {
+    opacity: 0; }
+
+.c-logo__default {
+  opacity: 0; }
+  .site-header--fixed.site-header--scrolled .c-logo__default,
+  .site-header--fixed.site-header--normal .c-logo__default {
+    opacity: 1; }
 
 /* 2.2. Site Content */
 /* 2.3. Site Footer */
@@ -2232,6 +2255,9 @@ body, .site, .site-content {
   .novablocks-map__marker-name[class][class][class] {
     font-size: 16px; }
 
+.nova-food-menu {
+  --menu-offset: 18px; }
+
 .nova-food-menu__header .section-title {
   margin-bottom: var(--theme-spacing-small); }
 
@@ -2239,12 +2265,19 @@ body, .site, .site-content {
   margin-top: var(--theme-spacing-small); }
 
 .nova-food-menu-item--highlighted {
-  border-color: var(--sm-color-1); }
+  border-color: var(--sm-dark-1);
+  border-top: 0;
+  margin-left: calc(var(--menu-offset) * -1);
+  margin-right: calc(var(--menu-offset) * -1);
+  padding: 0 var(--menu-offset) 14px; }
 
 .nova-food-menu-item__highlight-label {
-  background-color: var(--sm-color-1);
-  padding-top: var(--theme-spacing-tiny);
-  padding-bottom: var(--theme-spacing-tiny); }
+  background-color: var(--sm-dark-1);
+  padding: var(--theme-spacing-micro) 18px;
+  margin-left: calc(var(--menu-offset) * -1);
+  margin-right: calc(var(--menu-offset) * -1);
+  margin-bottom: 14px;
+  width: calc(100% + calc(var(--menu-ofset) * 2)); }
 
 .nova-food-menu-item__title {
   --theme-heading-5-font-weight: 700; }
@@ -2255,17 +2288,36 @@ body, .site, .site-content {
     font-weight: var(--current-font-weight);
     letter-spacing: var(--current-letter-spacing);
     text-transform: var(--current-text-transform);
-    --current-font-family: var(--theme-heading-5-font-family);
-    --current-font-size: var(--theme-heading-5-font-size);
-    --current-line-height: var(--theme-heading-5-line-height);
-    --current-font-weight: var(--theme-heading-5-font-weight);
-    --current-letter-spacing: var(--theme-heading-5-letter-spacing);
-    --current-text-transform: var(--theme-heading-5-text-transform);
+    --current-font-family: var(--theme-heading-4-font-family);
+    --current-font-size: var(--theme-heading-4-font-size);
+    --current-line-height: var(--theme-heading-4-line-height);
+    --current-font-weight: var(--theme-heading-4-font-weight);
+    --current-letter-spacing: var(--theme-heading-4-letter-spacing);
+    --current-text-transform: var(--theme-heading-4-text-transform);
     padding-right: var(--theme-spacing-tiny); }
 
 .nova-food-menu-item__prices {
   padding-left: var(--theme-spacing-tiny);
-  font-feature-settings: "lnum"; }
+  font-feature-settings: 'tnum' on, 'lnum' on; }
+
+.nova-food-menu__header .section-title {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  --current-font-family: var(--theme-heading-2-font-family);
+  --current-font-size: var(--theme-heading-2-font-size);
+  --current-line-height: var(--theme-heading-2-line-height);
+  --current-font-weight: var(--theme-heading-2-font-weight);
+  --current-letter-spacing: var(--theme-heading-2-letter-spacing);
+  --current-text-transform: var(--theme-heading-2-text-transform); }
+
+.nova-food-menu-item__title {
+  font-size: var(--theme-heading-4-font-size); }
+  .nova-food-menu-item__title:before {
+    border-width: .15em; }
 
 .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button {
   background: linear-gradient(to right, var(--sm-light-1) 50%, var(--sm-dark-1) 50%);

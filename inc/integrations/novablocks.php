@@ -12,8 +12,8 @@ if ( ! function_exists( 'rosa_alter_novablocks_hero_settings' ) ) {
 			array(
 				'novablocks/headline',
 				array(
-					'secondary' => 'The true taste of',
-					'primary'   => 'Bangkok',
+					'secondary' => 'This is a catchy',
+					'primary'   => 'Headline',
 					'align'     => 'center',
 					'level'     => 1,
 					'className' => 'has-larger-font-size',
@@ -22,7 +22,7 @@ if ( ! function_exists( 'rosa_alter_novablocks_hero_settings' ) ) {
 			array(
 				'core/paragraph',
 				array(
-					'content'   => 'Ready to be opened',
+					'content'   => 'A brilliant subtitle to explain its catchiness',
 					'className' => 'is-style-lead',
 				),
 			)

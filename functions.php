@@ -106,6 +106,10 @@ function rosa2_setup() {
 		'width'       => 250,
 		'flex-width'  => true,
 		'flex-height' => true,
+		'header-text' => array(
+			'site-title',
+			'site-description',
+		)
 	) );
 
 	add_theme_support( 'align-wide' );
@@ -131,6 +135,8 @@ function rosa2_setup() {
 	add_theme_support( 'wc-product-gallery-slider' );
 }
 add_action( 'after_setup_theme', 'rosa2_setup' );
+
+require get_template_directory() . '/inc/customizer.php';
 
 /**
  * Custom template tags for this theme.

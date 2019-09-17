@@ -1,3 +1,7 @@
+.nova-food-menu {
+  --menu-offset: 18px;
+}
+
 .nova-food-menu__header .section-title {
   margin-bottom: var(--theme-spacing-small);
 }
@@ -7,19 +11,31 @@
 }
 
 .nova-food-menu-item--highlighted {
-  border-color: var(--sm-color-1);
+  border-color: var(--sm-dark-1);
+  border-top: 0;
+
+  margin-left: calc(var(--menu-offset) * -1);
+  margin-right: calc(var(--menu-offset) * -1);
+
+  padding: 0 var(--menu-offset) 14px;
 }
 
 .nova-food-menu-item__highlight-label {
-  background-color: var(--sm-color-1);
-  padding-top: var(--theme-spacing-tiny);
-  padding-bottom: var(--theme-spacing-tiny);
+  background-color: var(--sm-dark-1);
+
+  padding: var(--theme-spacing-micro) 18px;
+
+  margin-left: calc(var(--menu-offset) * -1);
+  margin-right: calc(var(--menu-offset) * -1);
+  margin-bottom: 14px;
+
+  width: calc(100% + calc(var(--menu-ofset) * 2));
 }
 
 .nova-food-menu-item__title {
   --theme-heading-5-font-weight: 700;
   .item-title {
-    @include apply-font(heading-5);
+    @include apply-font(heading-4);
     padding-right: var(--theme-spacing-tiny);
   }
 }
@@ -27,5 +43,19 @@
 .nova-food-menu-item__prices {
   padding-left: var(--theme-spacing-tiny);
 
-  font-feature-settings: "lnum";
+  font-feature-settings: 'tnum' on, 'lnum' on;
+}
+
+.nova-food-menu__header {
+  .section-title {
+    @include apply-font(heading-2);
+  }
+}
+
+.nova-food-menu-item__title {
+  font-size: var(--theme-heading-4-font-size);
+
+  &:before {
+    border-width: .15em;
+  }
 }
