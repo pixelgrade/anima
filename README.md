@@ -1,7 +1,7 @@
-# Nova Blocks Theme
+# Rosa II Theme
 ###
 
-[View Demo](https://demos.pixelgrade.com/nova-blocks/) &nbsp;·&nbsp; [Download for Free](https://downloads.wordpress.org/theme/nova-blocks.latest-stable.zip)
+[View Demo](https://demos.pixelgrade.com/rosa-ii/)
 
 ![nova_theme_github](https://user-images.githubusercontent.com/46342490/62714232-d3f30500-ba06-11e9-8f75-cfdfe0034823.png)
 
@@ -13,7 +13,7 @@ The essence of **open source** is that by freely sharing the code, you have the 
 It's great if you're willing to use your skills, knowledge, and experience to help further refine this project with your own improvements. We really appreciate it and you're 💯 welcome to submit an issue or pull request on any topic.
 
 ### How can you help?
--  🕵️‍♀️ **Discovered an issue?** Please report it [here](https://github.com/pixelgrade/nova-theme/issues/new "here") and help us fix it.
+-  🕵️♀️ **Discovered an issue?** Please report it [here](https://github.com/pixelgrade/nova-theme/issues/new "here") and help us fix it.
 - 🛠 **Fixed a bug?** That’s fantastic! Send a [pull request](https://github.com/pixelgrade/nova-theme/pulls "pull request") and we will look over it.
 - 🔮 **Need a feature?** Please take a moment to find out whether your idea fit the wider scope of this theme and provide as much detail and context as possible. Then propose it [here](https://github.com/pixelgrade/nova-theme/issues/new).
 - 💎 **Have you made something great?** [Share](https://github.com/pixelgrade/nova-theme/issues/new "Share") it with us.
@@ -24,6 +24,6 @@ A manually curated list that include all the valuable people that have contribut
 [![](https://github.com/georgeolaru.png?size=64)](https://github.com/georgeolaru) [![](https://github.com/vladolaru.png?size=64)](https://github.com/vladolaru) [![](https://github.com/razwan.png?size=64)](https://github.com/razwan)
 
 ## License
-Nova Blocks Theme source code is released under the [GNU GPL v2 license](https://www.gnu.org/licenses/gpl-2.0.html).
+Rosa II theme source code is released under the [GNU GPL v2 license or later](https://www.gnu.org/licenses/gpl-2.0.html).
 
 2019 © Pixelgrade.
