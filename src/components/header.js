@@ -29,6 +29,7 @@ class Header {
 		this.scrollOffset = this.getScrollOffset();
 		this.element.style.marginTop = this.offset + 'px';
 		this.updatePageOffset();
+		this.updateMenuToggleOffset();
 
 		jQuery( this.element ).addClass( 'site-header--fixed site-header--ready' );
 	}
@@ -50,6 +51,11 @@ class Header {
 	updatePageOffset() {
 		const page = document.getElementById( 'page' );
 		page.style.paddingTop = this.box.height + this.offset + 'px';
+	}
+
+	updateMenuToggleOffset() {
+		const menuToggle = document.querySelector('.c-menu-toggle__wrap');
+		menuToggle.style.marginTop = this.offset + 'px';
 	}
 
 	render( inversed ) {
