@@ -127,27 +127,19 @@ if ( ! function_exists( 'rosa_alter_nova_hero_block_template' ) ) {
 		    array(
 			    'novablocks/headline',
 			    array(
-				    'secondary' => 'Welcome',
-			        'primary' => 'The Rosa',
+				    'secondary' => 'This is a catchy',
+			        'primary' => 'Headline',
 				    'align' => 'center',
-				    'level' => 2,
-                    'fontSize' => 'huge',
-				    'className' => 'has-huge-font-size',
+				    'level' => 1,
+                    'fontSize' => 'larger',
+				    'className' => 'has-larger-font-size',
 			    ),
 		    ),
-		    array(
-			    'core/separator',
+		   	array(
+			    'core/paragraph',
 			    array(
-				    'className' => 'is-style-line-flower',
-			    ),
-		    ),
-		    array(
-			    'core/heading',
-			    array(
-				    'content' => 'Ready to be opened',
-				    'level' => 5,
-                    'fontSize' => 'tiny',
-                    'className' => 'has-tiny-font-size',
+				    'content' => 'A brilliant subtitle to explain its catchiness',
+                    'className' => 'is-style-lead',
 			    ),
 		    )
 	    );
@@ -160,7 +152,7 @@ if ( ! function_exists( 'rosa_alter_nova_hero_block_template' ) ) {
 			        'primary' => 'Our Story',
 			        'align' => 'center',
 			        'level' => 2,
-                    'fontSize' => 'large',
+                    'fontSize' => 'larger',
 			        'className' => 'has-large-font-size',
 		        ),
 	        ),
