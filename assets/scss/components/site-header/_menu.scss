@@ -10,27 +10,29 @@ ul.menu,
     }
 }
 
-.menu-item-has-children,
-.page_item_has_children {
-    position: relative;
+.site-header {
+    .menu-item-has-children,
+    .page_item_has_children {
+        position: relative;
 
-    &[class] > a {
-        display: flex;
-        align-items: center;
+        &[class] > a {
+            display: flex;
+            align-items: center;
 
-        &:after {
-            content: '';
+            &:after {
+                content: '';
 
-            position: absolute;
-            top: 50%;
-            right: 0;
+                position: absolute;
+                top: 50%;
+                right: 0;
 
-            border: 5px solid transparent;
-            border-top-color: currentColor;
+                border: 5px solid transparent;
+                border-top-color: currentColor;
 
-            transform: translateY(-50%);
+                transform: translateY(-50%);
 
-            margin-left: var(--theme-spacing-tiny);
+                margin-left: var(--theme-spacing-tiny);
+            }
         }
     }
 }
