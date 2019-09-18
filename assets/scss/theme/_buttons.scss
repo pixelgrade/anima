@@ -30,18 +30,18 @@
             @include button-color;
         }
 
-        @include button-fill-background;
+        @include button-fill-background-left;
     }
 
     &.is-style-primary {
         .wp-block-button__link {
-            @include button-fill-background;
+            @include button-fill-background-left;
         }
     }
 
     &.is-style-secondary {
         .wp-block-button__link {
-            @include button-fill-background;
+            @include button-fill-background-right;
         }
     }
 }
@@ -64,5 +64,17 @@
         border-width: 0;
 
         @include button-with-arrow;
+    }
+}
+
+.novablocks-hero{
+    &.novablocks-u-background-dark {
+        .is-style-primary {
+            @include primary-button-settings-inverted;
+        }
+
+        .is-style-secondary {
+            @include secondary-button-settings-inverted;
+        }
     }
 }
