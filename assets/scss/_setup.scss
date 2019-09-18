@@ -15,11 +15,27 @@
 
     background-color: var(--theme-sm-light-1);
     color: var(--theme-sm-dark-2);
+
+    a {
+        color: inherit;
+        text-decoration: underline;
+    }
 }
 
 .is-style-darker {
-    --sm-dark-4: #141928;
     @include variation(darker);
+
+    background-color: var(--theme-sm-light-1);
+    color: var(--theme-sm-dark-2);
+
+    a {
+        color: inherit;
+        text-decoration: underline;
+    }
+}
+
+.is-style-accent {
+    @include variation(accent);
 
     background-color: var(--theme-sm-light-1);
     color: var(--theme-sm-dark-2);

@@ -30,46 +30,32 @@
             @include button-color;
         }
 
-        @include button-fill-background;
+        @include button-fill-background-left;
     }
 
     &.is-style-primary {
         .wp-block-button__link {
-            @include button-fill-background;
+            @include button-fill-background-left;
         }
     }
 
     &.is-style-secondary {
         .wp-block-button__link {
-            @include button-fill-background;
+            @include button-fill-background-right;
         }
     }
 }
 
 .is-style-primary {
-    --theme-button-background-color: var(--sm-dark-1);
-    --theme-button-color: var(--sm-light-1);
-    --theme-button-border-color: var(--sm-dark-1);
-    --theme-button-hover-color: var(--sm-dark-1);
-    --theme-button-hover-background-color:  var(--sm-dark-1);
-    --theme-button-hover-border-color: var(--sm-dark-1);
+   @include primary-button-settings;
 }
 
 .is-style-secondary {
-    --theme-button-background-color: transparent;
-    --theme-button-color: var(--sm-dark-1);
-    --theme-button-border-color: currentColor;
-    --theme-button-hover-color: var(--sm-light-1);
-    --theme-button-hover-background-color: transparent;
-    --theme-button-hover-border-color: var(--sm-dark-1);
+   @include secondary-button-settings;
 }
 
 .is-style-text {
-    --theme-button-color: var(--sm-color-1);
-    --theme-button-background-color: transparent;
-    --theme-button-hover-color:var(--sm-color-1);
-    --theme-button-hover-background-color: transparent;
-    --theme-button-border-radius: 0;
+   @include text-button-settings;
 
     .wp-block-button__link {
         padding: 0 !important;
@@ -81,16 +67,14 @@
     }
 }
 
-.novablocks-hero {
-    --theme-button-background-color: var(--theme-sm-light-1);
-    --theme-button-color: var(--theme-sm-dark-1);
-    --theme-button-hover-background-color: var(--theme-sm-color-1);
-    --theme-button-hover-color: var(--theme-sm-dark-1);
+.novablocks-hero{
+    &.novablocks-u-background-dark {
+        .is-style-primary {
+            @include primary-button-settings-inverted;
+        }
 
-    .is-style-primary {
-        --theme-button-background-color: var(--theme-sm-color-1);
-        --theme-button-color: var(--theme-sm-dark-1);
-        --theme-button-hover-background-color: var(--theme-sm-light-1);
-        --theme-button-hover-color: var(--theme-sm-dark-1);
+        .is-style-secondary {
+            @include secondary-button-settings-inverted;
+        }
     }
 }

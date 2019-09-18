@@ -30,7 +30,7 @@ import { insideHalf, reloadRellax } from "./utils";
 					hero.updateOnScroll();
 
 					$( hero.element ).find( '.novablocks-hero__parallax' ).each( ( i, obj ) => {
-						reloadRellax( obj )
+						reloadRellax( obj );
 					} );
 				} );
 			}

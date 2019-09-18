@@ -85,7 +85,7 @@ export default class Hero {
 		const title = headline.find( '.c-headline__primary' );
 		const subtitle = headline.find( '.c-headline__secondary' );
 		const separator = headline.next( '.wp-block-separator' );
-		const sepFlower = separator.find( '.c-separator__flower' );
+		const sepFlower = separator.find( '.c-separator__symbol' );
 		const sepLine = separator.find( '.c-separator__line' );
 		const sepArrow = separator.find( '.c-separator__arrow' );
 		const othersBefore = headline.prevAll();

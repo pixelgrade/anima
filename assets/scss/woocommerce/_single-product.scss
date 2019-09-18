@@ -11,13 +11,13 @@
     }
 
     .flex-control-thumbs {
-      @include spacing(margin-left, -1rem);
-      @include spacing(margin-top, -1rem);
+      margin-left: calc(var(--theme-spacing) * -1);
+      margin-top: calc(var(--theme-spacing) * -1);
 
       > * {
-        @include spacing(max-width, 116px);
-        @include spacing(padding-left, 1rem);
-        @include spacing(padding-top, 1rem);
+        max-width: 116px;
+        padding-left: var(--theme-spacing);
+        padding-top: var(--theme-spacing);
       }
     }
   }
@@ -27,19 +27,19 @@
 
   @include specific(4) {
     width: auto;
-    @include spacing(margin-left, -1rem);
+    margin-left: calc(var(--theme-spacing) * -1);
 
     > * {
-      @include spacing(padding-left, 1rem);
+      padding-left: var(--theme-spacing);
     }
 
     > .woocommerce-product-gallery__image:first-child {
       padding-left: 0;
-      @include spacing(margin-left, 1rem);
+      margin-left: var(--theme-spacing);
     }
 
     > :nth-child(n+2) {
-      @include spacing(margin-top, 1rem);
+      margin-top: var(--theme-spacing);
     }
 
     .flex-viewport[class] & {
@@ -77,7 +77,7 @@
 
     .group_table {
       flex-basis: 100%;
-      @include spacing(margin-bottom, 20px);
+      margin-bottom: var(--theme-spacing);
 
       tbody, td {
         display: block;
@@ -96,7 +96,7 @@
       }
 
       tr ~ tr {
-        @include spacing(margin-top, 1rem);
+        margin-top: var(--theme-spacing);
       }
 
       td {
@@ -108,7 +108,7 @@
         width: auto;
         flex-basis: 100%;
 
-        @include spacing(margin-bottom, 0.5rem);
+        margin-bottom: var(--theme-spacing-tiny);
       }
 
       .qty {
@@ -116,7 +116,7 @@
       }
 
       .woocommerce-grouped-product-list-item__label {
-        @include spacing(margin-right, 1rem);
+        margin-right: var(--theme-spacing);
 
         a {
           text-decoration: none;
@@ -148,13 +148,13 @@
 
   .variations {
     @include specific(2) {
-      @include spacing(margin-bottom, 30px);
+      margin-bottom: var(--theme-spacing-small);
     }
   }
 }
 
 .woocommerce-product-details__short-description {
-  @include spacing(margin-bottom, 20px);
+  margin-bottom: var(--theme-spacing);
 }
 
 // single product - tabs styling
@@ -172,11 +172,19 @@
   padding-left: 0;
   list-style: none;
 
-  @include spacing(margin-left, -3rem);
-  @include spacing(margin-bottom, 3rem);
+  margin-left: calc(var(--theme-spacing-normal) * -1);
+  margin-bottom: var(--theme-spacing-normal);
+
+  li {
+    margin-top: 0;
+  }
+
+  a {
+    padding-bottom: var(--theme-spacing-tiny);
+  }
 
   > * {
-    @include spacing(margin-left, 3rem);
+    margin-left: var(--theme-spacing-normal);
   }
 
   > :not(.active) a {
@@ -190,7 +198,7 @@
   }
 
   > .active a {
-    padding-bottom: 4px;
+    padding-bottom: var(--theme-spacing-tiny);
 
     text-decoration: none;
     border-bottom: 2px solid currentColor;
@@ -199,7 +207,7 @@
 
 .woocommerce-product-gallery,
 .entry-summary {
-  @include spacing(margin-bottom, 6rem);
+  margin-bottom: var(--theme-spacing-huge);
 }
 
 .c-woo-section {
@@ -211,14 +219,14 @@
     background: currentColor;
     opacity: 0.2;
 
-    @include spacing(margin-top, 6rem);
-    @include spacing(margin-bottom, 6rem);
+    margin-top: var(--theme-spacing-huge);
+    margin-bottom: var(--theme-spacing-huge);
   }
 
   &:last-child:after {
     content: "";
     display: block;
-    @include spacing(margin-top, 6rem);
+    margin-top: var(--theme-spacing-huge);
   }
 }
 
@@ -247,12 +255,12 @@
 
 #content .c-product-main {
   position: relative;
-  @include spacing(margin-top, 6em);
+  margin-top: var(--theme-spacing-huge);
 
   @include specific(3) {
 
     .woocommerce-product-gallery + .entry-summary {
-      @include spacing( margin-top, 8rem );
+      margin-top: calc(var(--theme-spacing-huge) + var(--theme-spacing-small));
     }
 
     @include above( tablet ) {
@@ -268,7 +276,7 @@
         float: none;
         width: auto;
         flex: 0 0 35%;
-        @include spacing(margin-left, 6rem);
+        margin-left: var(--theme-spacing-huge);
       }
 
       .woocommerce-product-gallery + .entry-summary {
@@ -356,7 +364,7 @@
 
   .button {
     @include specific(3) {
-      @include spacing(margin-left, 10px);
+      margin-left: var(--theme-spacing-tiny);
     }
   }
 
@@ -375,7 +383,7 @@
 
 .woocommerce-variation-price,
 .woocommerce-variation-availability {
-  @include spacing(margin-bottom, 20px);
+  margin-bottom: var(--theme-spacing);
 
   &:empty {
     display: none;
@@ -418,7 +426,7 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  @include spacing( margin-bottom, 3rem );
+  margin-bottom: var(--theme-spacing-normal);
 
   &:before {
     content: "";
@@ -427,16 +435,16 @@
 
   > * + .product_title {
     @include specific(2) {
-      @include spacing(margin-top, 8px);
+      margin-top: var(--theme-spacing-tiny);
     }
   }
 
   > * + .woocommerce-product-rating {
-    @include spacing(margin-top, 12px);
+    margin-top: var(--theme-spacing-tiny);
   }
 
   > * + .price {
-    @include spacing(margin-top, 8px);
+    margin-top: var(--theme-spacing-tiny);
   }
 }
 
@@ -520,7 +528,7 @@
 
 .add_to_cart_button {
   @include button;
-  @include button-fill-background;
+  @include button-fill-background-left;
   text-align: center;
 }
 
@@ -549,32 +557,22 @@
 
 
 .woocommerce {
-  --theme-button-background-color: transparent;
-  --theme-button-color: var(--sm-dark-1);
-  --theme-button-border-color: currentColor;
-  --theme-button-hover-color: var(--sm-light-1);
-  --theme-button-hover-background-color: transparent;
-  --theme-button-hover-border-color: var(--sm-dark-1);
+  @include secondary-button-settings;
   @include specific(2) {
     button:not(.single_add_to_cart_button),
     .button:not(.single_add_to_cart_button) {
       @include button;
-      @include button-fill-background;
+      @include button-fill-background-right;
     }
 
     .add_to_cart_button.ajax_add_to_cart,
     .checkout-button,
     #place_order,
     .woocommerce-mini-cart__buttons .checkout {
-      --theme-button-background-color: var(--sm-dark-1);
-      --theme-button-color: var(--sm-light-1);
-      --theme-button-border-color: var(--sm-dark-1);
-      --theme-button-hover-color: var(--sm-dark-1);
-      --theme-button-hover-background-color:  var(--sm-dark-1);
-      --theme-button-hover-border-color: var(--sm-dark-1);
+      @include primary-button-settings;
 
       @include button;
-      @include button-fill-background;
+      @include button-fill-background-left;
     }
   }
 }

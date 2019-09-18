@@ -3,12 +3,13 @@
   flex-wrap: wrap;
   justify-content: center;
   padding-left: 0;
-  @include spacing(margin-left, -20px);
+  margin-left: -1.5em;
   list-style: none;
 
   > * {
-    @include spacing(margin-left, 20px);
+    margin-left: 1.5em;
   }
+
 
  a {
    color: var(--theme-sm-dark-1);
@@ -25,6 +26,10 @@
      border-bottom: .1em solid currentColor;
    }
  }
+
+  li {
+    margin-top: 0;
+  }
 }
 
 .woocommerce-categories[class] {
@@ -32,8 +37,8 @@
 }
 
 .woocommerce-products-header {
-  @include spacing(padding-top, 3em);
-  @include spacing(padding-bottom, 6em);
+  padding-top: 3em;
+  padding-bottom: 6em;
 }
 
 .woocommerce-products-header__title {

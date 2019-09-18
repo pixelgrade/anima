@@ -121,94 +121,6 @@ if ( ! function_exists( 'pixelgrade_get_comments_toggle_checked_attribute' ) ) {
 	}
 }
 
-if ( ! function_exists( 'rosa_alter_nova_hero_block_template' ) ) {
-    function rosa_alter_nova_hero_block_template( $settings ) {
-        $settings['hero']['template'] = array(
-		    array(
-			    'novablocks/headline',
-			    array(
-				    'secondary' => 'Welcome',
-			        'primary' => 'The Rosa',
-				    'align' => 'center',
-				    'level' => 2,
-                    'fontSize' => 'huge',
-				    'className' => 'has-huge-font-size',
-			    ),
-		    ),
-		    array(
-			    'core/separator',
-			    array(
-				    'className' => 'is-style-line-flower',
-			    ),
-		    ),
-		    array(
-			    'core/heading',
-			    array(
-				    'content' => 'Ready to be opened',
-				    'level' => 5,
-                    'fontSize' => 'tiny',
-                    'className' => 'has-tiny-font-size',
-			    ),
-		    )
-	    );
-
-        $settings['media']['template'] = array(
-	        array(
-		        'novablocks/headline',
-		        array(
-			        'secondary' => 'Discover',
-			        'primary' => 'Our Story',
-			        'align' => 'center',
-			        'level' => 2,
-                    'fontSize' => 'large',
-			        'className' => 'has-large-font-size',
-		        ),
-	        ),
-	        array(
-		        'core/separator',
-		        array(
-                    'style' => 'flower',
-			        'className' => 'is-style-flower',
-		        ),
-	        ),
-	        array(
-		        'core/paragraph',
-		        array(
-			        'content' => 'Rosa is a restaurant, bar and coffee roastery located on a busy corner site in Farringdon’s Exmouth Market. With glazed frontage on two sides of the building, overlooking the market and a bustling London intersection.',
-                    'align' => 'center',
-		        ),
-	        ),
-	        array(
-		        'core/button',
-		        array(
-			        'text' => 'About Us',
-			        'align' => 'center',
-                    'className' => 'is-style-text'
-		        ),
-	        ),
-        );
-
-        $settings['media']['attributes']['horizontalAlignment']['default'] = 'center';
-
-        if ( ! empty( $settings['media']['blockAreaOptions'] ) ) {
-            $settings['media']['blockAreaOptions'] = array_filter( $settings['media']['blockAreaOptions'], function( $option ) {
-                return $option['value'] != 'highlighted';
-            } );
-        }
-
-        return $settings;
-    }
-}
-add_filter( 'novablocks_block_editor_settings', 'rosa_alter_nova_hero_block_template' );
-
-if ( ! function_exists( 'rosa_alter_novablocks_separator_settings' ) ) {
-    function rosa_alter_novablocks_separator_settings( $settings ) {
-        $settings['separator']['markup'] = rosa_get_separator_markup();
-        return $settings;
-    }
-}
-add_filter( 'novablocks_block_editor_settings', 'rosa_alter_novablocks_separator_settings' );
-
 function rosa_the_read_more_button() {
     echo rosa_get_read_more_button();
 }
@@ -240,5 +152,6 @@ function rosa_header_should_be_fixed() {
 			return true;
 		}
 	}
+
 	return false;
 }

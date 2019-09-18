@@ -5,15 +5,10 @@
 [class*="wc-block-"] {
   .wp-block-button__link {
     @include specific(3){
-      --theme-button-background-color: transparent;
-      --theme-button-color: var(--sm-dark-1);
-      --theme-button-border-color: currentColor;
-      --theme-button-hover-color: var(--sm-light-1);
-      --theme-button-hover-background-color: transparent;
-      --theme-button-hover-border-color: var(--sm-dark-1);
+      @include secondary-button-settings;
 
       @include button;
-      @include button-fill-background;
+      @include button-fill-background-left;
     }
   }
 }

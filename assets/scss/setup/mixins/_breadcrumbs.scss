@@ -1,4 +1,4 @@
-@mixin breadcrumbs( $separator: "/" ) {
+@mixin breadcrumbs( $separator: '\00b7' ) {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -7,5 +7,6 @@
 
     > :not(:last-child):after {
         content: $separator;
+        padding: 0 var(--theme-spacing-tiny);
     }
 }

@@ -29,7 +29,7 @@ $classes[] = get_query_var( 'has_image_on_the_left' ) ? 'has-image-on-the-left' 
                         <?php
                         get_template_part( 'template-parts/entry-meta', get_post_type() );
                         the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-                        rosa_the_separator( 'flower' );
+                        rosa_the_separator( 'decorative' );
                         the_excerpt();
                         rosa_the_read_more_button();
                         ?>
