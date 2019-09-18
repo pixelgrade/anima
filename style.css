@@ -901,16 +901,17 @@ ul.menu,
     .site-header .menu-item-has-children[class] > a:after,
     .site-header .page_item_has_children[class] > a:after {
       content: "";
+      position: absolute;
+      top: 50%;
       display: inline-block;
-      width: 7px;
-      height: 7px;
-      border: 2px solid transparent;
-      border-right-color: currentColor;
-      border-bottom-color: currentColor;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
       -webkit-transform: rotate(45deg);
-      transform: rotate(45deg);
+      transform: translateY(-50%) rotate(45deg);
       opacity: .5;
-      margin-left: var(--theme-spacing-tiny); }
+      margin-left: var(--theme-spacing-micro); }
   .site-header .menu-item-has-children.hover > .sub-menu,
   .site-header .menu-item-has-children.hover > .children, .site-header .menu-item-has-children:focus-within > .sub-menu,
   .site-header .menu-item-has-children:focus-within > .children,
@@ -988,7 +989,7 @@ ul.menu a,
   top: 0;
   left: 0;
   z-index: 1100;
-  padding: 1em;
+  padding: var(--theme-spacing-small);
   cursor: pointer; }
   .admin-bar .c-menu-toggle__wrap {
     top: 32px; }
@@ -1064,6 +1065,9 @@ ul.menu a,
   .c-menu-toggle {
     display: none; } }
 
+.site-header--mobile {
+  display: none; }
+
 @media not screen and (min-width: 1000px) {
   .site-header {
     display: none;
@@ -1085,6 +1089,9 @@ ul.menu a,
       display: block; }
     .c-menu-toggle__checkbox:not(:checked) ~ .site-header {
       transform: translateX(-100%); }
+    .site-header .site-branding,
+    .site-header .menu-item--cart {
+      display: none; }
   .site-header__inner-container[class] {
     margin-top: 3.5em;
     border-top: 0;
@@ -1097,36 +1104,55 @@ ul.menu a,
       order: -1; }
     .site-header__content[class][class] {
       margin: 0; }
-  .site-header--fixed.site-header--normal .c-logo__default[class] {
-    opacity: 0; }
-  .site-header--fixed.site-header--normal .c-logo__inverted[class] {
-    opacity: 1; }
   .wp-block-novablocks-navigation ul.menu a,
   .wp-block-novablocks-navigation .menu > ul a {
     position: relative;
-    display: inline-block; }
+    display: inline-block;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: var(--theme-spacing-small); }
   .wp-block-novablocks-navigation .menu-item-has-children > ul,
   .wp-block-novablocks-navigation .page_item_has_children > ul {
     display: none; }
   .wp-block-novablocks-navigation .menu-item-has-children.hover > ul,
   .wp-block-novablocks-navigation .page_item_has_children.hover > ul {
     display: block; }
+  .wp-block-novablocks-navigation .menu-item-has-children a[class][class],
+  .wp-block-novablocks-navigation .page_item_has_children a[class][class] {
+    display: inline-block;
+    padding-bottom: var(--theme-spacing-micro);
+    margin-bottom: var(--theme-spacing);
+    border-bottom: 2px solid transparent; }
+    .wp-block-novablocks-navigation .menu-item-has-children a[class][class]:after,
+    .wp-block-novablocks-navigation .page_item_has_children a[class][class]:after {
+      transform: rotate(-45deg); }
+  .wp-block-novablocks-navigation .menu-item-has-children.hover > a[class][class],
+  .wp-block-novablocks-navigation .page_item_has_children.hover > a[class][class] {
+    border-color: currentColor; }
+  .wp-block-novablocks-navigation .sub-menu .menu-item,
+  .wp-block-novablocks-navigation .children .menu-item {
+    background-color: rgba(0, 0, 0, 0.3); }
   .site-header--mobile {
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
     left: 0;
-    z-index: 1000;
+    z-index: 900;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: var(--theme-spacing-small);
     color: var(--theme-sm-light-1); }
-    .site-header--mobile .c-branding {
-      padding: 1em; }
+    .admin-bar .site-header--mobile {
+      top: 32px; }
+    .demo-site .site-header--mobile {
+      top: 80px; }
+    .admin-bar.demo-site .site-header--mobile {
+      top: 112px; }
     .site-header--mobile .menu-item--cart {
       position: absolute;
       display: flex;
-      right: 1em;
+      right: var(--theme-spacing);
       top: 50%;
       transform: translateY(-50%); }
       .site-header--mobile .menu-item--cart a {

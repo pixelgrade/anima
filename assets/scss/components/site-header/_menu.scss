@@ -21,18 +21,19 @@ ul.menu,
 
             &:after {
                 content: "";
+                position: absolute;
+                top: 50%;
                 display: inline-block;
-                width: 7px;
-                height: 7px;
-                border: 2px solid transparent;
-                border-right-color: currentColor;
-                border-bottom-color: currentColor;
+                width: 8px;
+                height: 8px;
+                border-right: 2px solid currentColor;
+                border-bottom: 2px solid currentColor;
                 -webkit-transform: rotate(45deg);
-                transform: rotate(45deg);
+                transform: translateY(-50%) rotate(45deg);
 
                 opacity: .5;
 
-                margin-left: var(--theme-spacing-tiny);
+                margin-left: var(--theme-spacing-micro);
             }
         }
 

@@ -44,7 +44,6 @@ export default class Navbar {
 				sibling.classList.remove('hover');
 			});
 
-
 			this.parentNode.classList.add('hover');
 		}
 
@@ -57,17 +56,20 @@ export default class Navbar {
 	handleHoverMenuItems() {
 
 		const menuItems = jQuery('.menu-item');
+		const mq = window.matchMedia( "(min-width: 1000px)" );
 
 		function toggleSubMenu() {
 			jQuery(this).toggleClass('hover');
 		}
 
-		menuItems.hoverIntent(
-			{
-				out: toggleSubMenu,
-				over: toggleSubMenu,
-				timeout: 200
-			}
-		);
+		if (mq.matches) {
+			menuItems.hoverIntent(
+				{
+					out: toggleSubMenu,
+					over: toggleSubMenu,
+					timeout: 200
+				}
+			);
+		}
 	}
 }

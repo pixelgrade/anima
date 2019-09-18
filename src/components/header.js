@@ -14,12 +14,7 @@ class Header {
 		this.offset = 0;
 		this.scrollOffset = 0;
 
-		// construiesti markup
-		// clonezi elementele de care ai nevoie in el
-		// setezi o variabila pe true ca sa stii ca l-ai initializat si sa nu-l initializezi iar la resize
-
-		// la resize verifici daca trebuie initializat sau doar afisat / ascuns
-		// tot la resize poti sa iti faci in containerul respectiv un element
+		this.mobileMenuInitialized = false;
 
 		this.update();
 		this.registerUpdate();
@@ -28,6 +23,7 @@ class Header {
 	registerUpdate() {
 		GlobalService.registerUpdate( () => {
 			this.update();
+			this.handleMobileMenuMarkup();
 		} );
 	}
 
@@ -37,7 +33,6 @@ class Header {
 		this.element.style.marginTop = this.offset + 'px';
 		this.updatePageOffset();
 		this.updateMenuToggleOffset();
-		this.handleMobileMenuMarkup();
 
 		jQuery( this.element ).addClass( 'site-header--fixed site-header--ready' );
 	}
@@ -62,34 +57,35 @@ class Header {
 	}
 
 	updateMenuToggleOffset() {
+		if ( ! this.mobileMenuInitialized ) {
+			return;
+		}
+
 		const menuToggle = document.querySelector('.c-menu-toggle__wrap');
+		const headerMobile = document.querySelector('.site-header--mobile');
 		menuToggle.style.marginTop = this.offset + 'px';
+		headerMobile.style.marginTop = this.offset + 'px';
 	}
 
 	handleMobileMenuMarkup() {
-		console.log('test');
 
 		const mobileMenuMarkup = document.createElement('div');
-		const location = document.querySelector('.c-menu-toggle');
 		mobileMenuMarkup.classList.add('site-header--mobile');
+		const location = document.querySelector('.c-menu-toggle');
 		const branding = document.querySelector('.c-branding');
 		const shopItem = document.querySelector('.menu-item--cart');
 
-		const mq = window.matchMedia( "(max-width: 1000px)" );
 
-		if (mq.matches) {
-			jQuery(branding).detach();
-			jQuery(shopItem).detach();
+			const cloneBranding = jQuery(branding).clone();
+			const cloneShop = jQuery(shopItem).clone();
 
-			jQuery(mobileMenuMarkup).append(jQuery(branding));
-			jQuery(mobileMenuMarkup).append(jQuery(shopItem));
-		}
+			jQuery(mobileMenuMarkup).append(jQuery(cloneBranding));
+			jQuery(mobileMenuMarkup).append(jQuery(cloneShop));
 
-		console.log(branding);
+
+		this.mobileMenuInitialized = true;
 
 		location.after(mobileMenuMarkup);
-
-		console.log(mobileMenuMarkup);
 	}
 
 	render( inversed ) {
