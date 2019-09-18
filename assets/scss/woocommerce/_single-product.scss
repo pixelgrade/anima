@@ -528,7 +528,7 @@
 
 .add_to_cart_button {
   @include button;
-  @include button-fill-background;
+  @include button-fill-background-left;
   text-align: center;
 }
 
@@ -562,7 +562,7 @@
     button:not(.single_add_to_cart_button),
     .button:not(.single_add_to_cart_button) {
       @include button;
-      @include button-fill-background;
+      @include button-fill-background-right;
     }
 
     .add_to_cart_button.ajax_add_to_cart,
@@ -572,7 +572,7 @@
       @include primary-button-settings;
 
       @include button;
-      @include button-fill-background;
+      @include button-fill-background-left;
     }
   }
 }
