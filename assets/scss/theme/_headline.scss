@@ -37,8 +37,7 @@
 }
 
 h1.c-headline.has-larger-font-size {
-    --current-font-size: 115px;
-
+    @include apply-font(huge, font-size);
 
     .c-headline__secondary {
         font-size: 0.87em;

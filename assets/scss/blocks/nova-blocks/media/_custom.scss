@@ -3,10 +3,13 @@
 }
 
 .novablocks-media__content {
-    min-width: 28em;
     max-width: 100%;
     @include apply-font(body);
     flex-basis: calc(50% - var(--novablocks-media-spacing));
+
+    @media only screen and (min-width: 40em) {
+        min-width: 28em;
+    }
 }
 
 .novablocks-media__aside {

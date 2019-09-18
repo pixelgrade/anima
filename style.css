@@ -54,13 +54,16 @@ Table of Contents
 
 :root {
   --theme-minimum-font-size: 16px; }
+  @media only screen and (min-width: 1200px) {
+    :root {
+      --theme-minimum-font-size: 1.33333vw; } }
 
 /* Global CSS Custom Properties */
 :root {
-  --theme-content-width-normal: calc(42 * var(--theme-body-font-size));
-  --theme-content-width-wide: calc(74 * var(--theme-body-font-size));
+  --theme-content-width-normal: calc(40 * var(--theme-body-font-size));
+  --theme-content-width-wide: calc(60 * var(--theme-body-font-size));
   --theme-background-color: var(--sm-light-1);
-  --theme-spacing:        16px;
+  --theme-spacing: 0em;
   --theme-spacing-micro:  calc( var( --theme-spacing ) / 4 );
   --theme-spacing-tiny:   calc( var( --theme-spacing ) / 2 );
   --theme-spacing-small:  calc( var( --theme-spacing ) * 2 );
@@ -82,6 +85,12 @@ Table of Contents
   --theme-headings-alt-font-family: Billy Ohio, sans-serif;
   --theme-body-font-size: 16px;
   --theme-content-font-size: 18px; }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-spacing: calc(0em + 16 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
+    :root {
+      --theme-spacing: 16px; } }
 
 @font-face {
   font-family: 'Billy Ohio';
@@ -621,13 +630,13 @@ template {
 
 /* 1. Elements */
 html {
-  -webkit-font-smoothing: antialiased; }
-
-body {
+  -webkit-font-smoothing: antialiased;
   font-family: var(--theme-body-font-family);
   font-size: var(--theme-body-font-size);
   line-height: 1.6;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.03em; }
+
+body {
   background-color: var(--theme-background-color);
   color: var(--theme-sm-dark-2); }
 
@@ -2187,7 +2196,6 @@ body, .site, .site-content {
   flex-direction: row-reverse; }
 
 .novablocks-media__content {
-  min-width: 28em;
   max-width: 100%;
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
@@ -2202,6 +2210,9 @@ body, .site, .site-content {
   --current-letter-spacing: var(--theme-body-letter-spacing);
   --current-text-transform: var(--theme-body-text-transform);
   flex-basis: calc(50% - var(--novablocks-media-spacing)); }
+  @media only screen and (min-width: 40em) {
+    .novablocks-media__content {
+      min-width: 28em; } }
 
 .novablocks-media__aside {
   flex-basis: calc(50% + var(--novablocks-media-spacing)); }
@@ -2496,11 +2507,18 @@ body {
 /* 5. Theming */
 :root {
   --theme-button-font-family: Reforma2018, sans-serif;
-  --theme-button-font-size: 17px;
   --theme-button-line-height: 1.2;
   --theme-button-font-weight: 500;
   --theme-button-letter-spacing: 0.03em;
-  --theme-button-text-transform: capitalize; }
+  --theme-button-text-transform: capitalize;
+  --theme-button-font-size-diff: 0px;
+  --theme-button-font-size: calc( var(--theme-minimum-font-size) + var(--theme-button-font-size-diff) ); }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-button-font-size-diff: calc(0px + 1 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
+    :root {
+      --theme-button-font-size-diff: 1px; } }
 
 :root {
   --theme-button-border-radius: 0; }
@@ -2630,57 +2648,135 @@ body {
 
 :root {
   --theme-body-font-family: Reforma1969, sans-serif;
-  --theme-body-line-height: 1.7; }
+  --theme-body-line-height: 1.7;
+  --theme-body-font-size-diff: 0px;
+  --theme-body-font-size: calc( var(--theme-minimum-font-size) + var(--theme-body-font-size-diff) ); }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-body-font-size-diff: calc(0px + 0 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
+    :root {
+      --theme-body-font-size-diff: 0px; } }
 
 :root {
-  --theme-content-font-size: 18px;
-  --theme-content-line-height: 1.6; }
+  --theme-content-line-height: 1.6;
+  --theme-content-font-size-diff: 0px;
+  --theme-content-font-size: calc( var(--theme-minimum-font-size) + var(--theme-content-font-size-diff) ); }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-content-font-size-diff: calc(0px + 2 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
+    :root {
+      --theme-content-font-size-diff: 2px; } }
+
+:root {
+  --theme-huge-font-family: Reforma1969, sans-serif;
+  --theme-huge-line-height: 1.03;
+  --theme-huge-font-weight: 700;
+  --theme-huge-letter-spacing: -0.03em;
+  --theme-huge-font-size-diff: 0px;
+  --theme-huge-font-size: calc( var(--theme-minimum-font-size) + var(--theme-huge-font-size-diff) ); }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-huge-font-size-diff: calc(0px + 99 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
+    :root {
+      --theme-huge-font-size-diff: 99px; } }
 
 :root {
   --theme-display-font-family: Reforma1969, sans-serif;
-  --theme-display-font-size: 100px;
   --theme-display-line-height: 1.03;
   --theme-display-font-weight: 700;
-  --theme-display-letter-spacing: -0.03em; }
+  --theme-display-letter-spacing: -0.03em;
+  --theme-display-font-size-diff: 0px;
+  --theme-display-font-size: calc( var(--theme-minimum-font-size) + var(--theme-display-font-size-diff) ); }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-display-font-size-diff: calc(0px + 84 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
+    :root {
+      --theme-display-font-size-diff: 84px; } }
 
 :root {
   --theme-heading-1-font-family: Reforma1969, sans-serif;
-  --theme-heading-1-font-size: 66px;
   --theme-heading-1-line-height: 1.1;
   --theme-heading-1-font-weight: 700;
-  --theme-heading-1-letter-spacing: -0.03em; }
+  --theme-heading-1-letter-spacing: -0.03em;
+  --theme-heading-1-font-size-diff: 0px;
+  --theme-heading-1-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-1-font-size-diff) ); }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-heading-1-font-size-diff: calc(0px + 50 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
+    :root {
+      --theme-heading-1-font-size-diff: 50px; } }
 
 :root {
   --theme-heading-2-font-family: Reforma1918, sans-serif;
-  --theme-heading-2-font-size: 40px;
   --theme-heading-2-line-height: 1.2;
   --theme-heading-2-font-weight: 700;
-  --theme-heading-2-letter-spacing: -0.02em; }
+  --theme-heading-2-letter-spacing: -0.02em;
+  --theme-heading-2-font-size-diff: 0px;
+  --theme-heading-2-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-2-font-size-diff) ); }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-heading-2-font-size-diff: calc(0px + 24 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
+    :root {
+      --theme-heading-2-font-size-diff: 24px; } }
 
 :root {
   --theme-heading-3-font-family: Reforma1969, sans-serif;
-  --theme-heading-3-font-size: 32px;
   --theme-heading-3-line-height: 1.2;
   --theme-heading-3-font-weight: 700;
-  --theme-heading-3-letter-spacing: -0.02em; }
+  --theme-heading-3-letter-spacing: -0.02em;
+  --theme-heading-3-font-size-diff: 0px;
+  --theme-heading-3-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-3-font-size-diff) ); }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-heading-3-font-size-diff: calc(0px + 16 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
+    :root {
+      --theme-heading-3-font-size-diff: 16px; } }
 
 :root {
   --theme-heading-4-font-family: Reforma1969, sans-serif;
-  --theme-heading-4-font-size: 24px;
   --theme-heading-4-line-height: 1.2;
   --theme-heading-4-font-weight: 700;
-  --theme-heading-4-letter-spacing: -0.02em; }
+  --theme-heading-4-letter-spacing: -0.02em;
+  --theme-heading-4-font-size-diff: 0px;
+  --theme-heading-4-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-4-font-size-diff) ); }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-heading-4-font-size-diff: calc(0px + 8 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
+    :root {
+      --theme-heading-4-font-size-diff: 8px; } }
 
 :root {
   --theme-heading-5-font-family: Reforma2018, sans-serif;
-  --theme-heading-5-font-size: 17px;
   --theme-heading-5-line-height: 1.5;
-  --theme-heading-5-font-weight: 400; }
+  --theme-heading-5-font-weight: 400;
+  --theme-heading-5-font-size-diff: 0px;
+  --theme-heading-5-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-5-font-size-diff) ); }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-heading-5-font-size-diff: calc(0px + 1 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
+    :root {
+      --theme-heading-5-font-size-diff: 1px; } }
 
 :root {
   --theme-intro-font-family: Reforma1969, sans-serif;
-  --theme-intro-font-size: 24px;
-  --theme-intro-letter-spacing: -0.02em; }
+  --theme-intro-letter-spacing: -0.02em;
+  --theme-intro-font-size-diff: 0px;
+  --theme-intro-font-size: calc( var(--theme-minimum-font-size) + var(--theme-intro-font-size-diff) ); }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-intro-font-size-diff: calc(0px + 8 * ((100vw - 0px) / 1200)); } }
+  @media screen and (min-width: 1200px) {
+    :root {
+      --theme-intro-font-size-diff: 8px; } }
 
 h1.has-larger-font-size {
   font-family: var(--current-font-family);
@@ -2802,7 +2898,8 @@ h6 {
   white-space: nowrap; }
 
 h1.c-headline.has-larger-font-size {
-  --current-font-size: 115px; }
+  font-size: var(--current-font-size);
+  --current-font-size: var(--theme-huge-font-size); }
   h1.c-headline.has-larger-font-size .c-headline__secondary {
     font-size: 0.87em; }
   h1.c-headline.has-larger-font-size .c-headline__secondary + .c-headline__primary,

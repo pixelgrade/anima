@@ -2,13 +2,14 @@
 :root {
 
     // LAYOUT
-    --theme-content-width-normal: calc(42 * var(--theme-body-font-size));
-    --theme-content-width-wide: calc(74 * var(--theme-body-font-size));
+    --theme-content-width-normal: calc(40 * var(--theme-body-font-size));
+    --theme-content-width-wide: calc(60 * var(--theme-body-font-size));
 
     --theme-background-color: var(--sm-light-1);
 
     // spacing unit
-    --theme-spacing:        16px;
+    @include fluid(--theme-spacing, 0px, 0em, $nova-font-size-breakpoint, 16px );
+
     --theme-spacing-micro:  calc( var( --theme-spacing ) / 4 );
     --theme-spacing-tiny:   calc( var( --theme-spacing ) / 2 );
     --theme-spacing-small:  calc( var( --theme-spacing ) * 2 );
