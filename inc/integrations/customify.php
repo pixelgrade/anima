@@ -53,9 +53,19 @@ function rosa2_add_customify_section( $config ) {
 	}
 
 	$rosa2_section = array(
-		// Header
-		'rosa2_section' => array(
-			'title'   => esc_html__( 'Rosa', '__theme_txtd' ),
+		'content_section' => array(
+			'title'   => esc_html__( 'Content', '__theme_txtd' ),
+			'options' => array(
+				'separator_symbol' => array(
+					'type'    => 'radio_html',
+					'label'   => esc_html__( 'Separator Symbol', '__theme_txtd' ),
+					'default' => 'fleuron-1',
+					'choices' => $separator_symbol_choices,
+				),
+			),
+		),
+		'colors_section' => array(
+			'title'   => esc_html__( 'Colors', '__theme_txtd' ),
 			'options' => array(
 				'rosa2_color_1'       => array(
 					'type'    => 'color',
@@ -65,7 +75,7 @@ function rosa2_add_customify_section( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--nova-color-1',
+							'property' => '--sm-color-1',
 						),
 					),
 				),
@@ -77,7 +87,7 @@ function rosa2_add_customify_section( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--nova-color-2',
+							'property' => '--sm-color-2',
 						),
 					),
 				),
@@ -89,7 +99,7 @@ function rosa2_add_customify_section( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--nova-color-3',
+							'property' => '--sm-color-3',
 						),
 					),
 				),
@@ -101,7 +111,7 @@ function rosa2_add_customify_section( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--nova-dark-1',
+							'property' => '--sm-dark-1',
 						),
 					),
 				),
@@ -113,7 +123,7 @@ function rosa2_add_customify_section( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--nova-dark-2',
+							'property' => '--sm-dark-2',
 						),
 					),
 				),
@@ -125,7 +135,7 @@ function rosa2_add_customify_section( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--nova-dark-3',
+							'property' => '--sm-dark-3',
 						),
 					),
 				),
@@ -137,7 +147,7 @@ function rosa2_add_customify_section( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--nova-light-1',
+							'property' => '--sm-light-1',
 						),
 					),
 				),
@@ -149,7 +159,7 @@ function rosa2_add_customify_section( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--nova-light-2',
+							'property' => '--sm-light-2',
 						),
 					),
 				),
@@ -161,20 +171,9 @@ function rosa2_add_customify_section( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--nova-light-3',
+							'property' => '--sm-light-3',
 						),
 					),
-				),
-			),
-		),
-		'main_content' => array(
-			'title'   => esc_html__( 'Main Content', '__theme_txtd' ),
-			'options' => array(
-				'separator_symbol' => array(
-					'type'    => 'radio_html',
-					'label'   => esc_html__( 'Separator Symbol', '__theme_txtd' ),
-					'default' => 'fleuron-1',
-					'choices' => $separator_symbol_choices,
 				),
 			),
 		),
