@@ -30,7 +30,7 @@ function rosa2_scripts() {
 	wp_enqueue_style( 'rosa2-theme-styles', get_template_directory_uri() . '/dist/js/editor.blocks.css' );
 
 	wp_register_script( 'tween-max', '//cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js', array(), '2.1.3' );
-	wp_enqueue_script( 'rosa2-app', get_template_directory_uri() . '/dist/js/app.js', array( 'jquery', 'tween-max' ) );
+	wp_enqueue_script( 'rosa2-app', get_template_directory_uri() . '/dist/js/app.js', array( 'jquery', 'tween-max','hoverIntent' ) );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

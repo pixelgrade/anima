@@ -23,7 +23,6 @@ class Header {
 
 		this.update();
 		this.registerUpdate();
-		this.handleMobileMenu();
 	}
 
 	registerUpdate() {
@@ -32,16 +31,13 @@ class Header {
 		} );
 	}
 
-	handleMobileMenu() {
-		const branding = document.querySelector('.c-branding');
-	}
-
 	update() {
 		this.box = this.element.getBoundingClientRect();
 		this.scrollOffset = this.getScrollOffset();
 		this.element.style.marginTop = this.offset + 'px';
 		this.updatePageOffset();
 		this.updateMenuToggleOffset();
+		this.handleMobileMenuMarkup();
 
 		jQuery( this.element ).addClass( 'site-header--fixed site-header--ready' );
 	}
@@ -68,6 +64,32 @@ class Header {
 	updateMenuToggleOffset() {
 		const menuToggle = document.querySelector('.c-menu-toggle__wrap');
 		menuToggle.style.marginTop = this.offset + 'px';
+	}
+
+	handleMobileMenuMarkup() {
+		console.log('test');
+
+		const mobileMenuMarkup = document.createElement('div');
+		const location = document.querySelector('.c-menu-toggle');
+		mobileMenuMarkup.classList.add('site-header--mobile');
+		const branding = document.querySelector('.c-branding');
+		const shopItem = document.querySelector('.menu-item--cart');
+
+		const mq = window.matchMedia( "(max-width: 1000px)" );
+
+		if (mq.matches) {
+			jQuery(branding).detach();
+			jQuery(shopItem).detach();
+
+			jQuery(mobileMenuMarkup).append(jQuery(branding));
+			jQuery(mobileMenuMarkup).append(jQuery(shopItem));
+		}
+
+		console.log(branding);
+
+		location.after(mobileMenuMarkup);
+
+		console.log(mobileMenuMarkup);
 	}
 
 	render( inversed ) {

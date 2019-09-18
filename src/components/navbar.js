@@ -2,6 +2,7 @@ export default class Navbar {
 	constructor( element ) {
 		this.element = element;
 		this.handleSubMenus();
+		this.handleHoverMenuItems();
 	}
 
 	handleSubMenus() {
@@ -52,5 +53,21 @@ export default class Navbar {
 		});
 
 
+	}
+	handleHoverMenuItems() {
+
+		const menuItems = jQuery('.menu-item');
+
+		function toggleSubMenu() {
+			jQuery(this).toggleClass('hover');
+		}
+
+		menuItems.hoverIntent(
+			{
+				out: toggleSubMenu,
+				over: toggleSubMenu,
+				timeout: 200
+			}
+		);
 	}
 }

@@ -7,7 +7,7 @@
     left: 0;
     z-index: 1000;
 
-    width: 75vw;
+    width: 100vw;
 
     background: var(--sm-dark-1);
     color: var(--sm-light-1);
@@ -69,6 +69,36 @@
             > ul {
                 display: block;
             }
+        }
+    }
+}
+
+.site-header--mobile {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--theme-sm-light-1);
+
+    .c-branding {
+        padding: 1em;
+    }
+
+    .menu-item--cart {
+        position: absolute;
+
+        display: flex;
+        right: 1em;
+        top: 50%;
+        transform: translateY(-50%);
+        a {
+            color: currentColor;
         }
     }
 }
