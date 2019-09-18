@@ -13,13 +13,21 @@ $enable-columns-block-styles:           true !default;
         &.alignfull {
             --theme-wrapper-side-spacing: 0;
         }
+
+        // spacing for first level of rows
+        &:not(:first-child),
+        & + * {
+            --element-spacing: var(--theme-spacing-huge);
+        }
+
+        // spacing for deeper levels of rows
+        & &:not(:first-child),
+        & & + * {
+            --element-spacing: var(--theme-spacing-normal);
+        }
     }
 
     .wp-block-column {
         @include space-children-y( var(--theme-spacing) );
-    }
-
-    .wp-block-columns:not(:first-child) {
-        --element-spacing: var(--theme-spacing-huge);
     }
 }
