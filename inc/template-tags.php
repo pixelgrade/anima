@@ -19,11 +19,11 @@ if ( ! function_exists( 'novablocks_posted_on' ) ) :
 			esc_html( get_the_date() )
 		);
 
-        /* translators: before post date. */
+		/* translators: before post date. */
 		echo '<div class="posted-on">' .
-            '<span class="screen-reader-text">' . esc_html_x( 'Posted on', 'post date', 'nova' ) . '</span>' .
+		     '<span class="screen-reader-text">' . esc_html_x( 'Posted on', 'post date', 'nova' ) . '</span>' .
 		     '<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>' .
-        '</div>';
+		     '</div>';
 
 	}
 endif;
@@ -34,22 +34,22 @@ if ( ! function_exists( 'novablocks_posted_by' ) ) {
 	 * Prints HTML with meta information for the current author.
 	 */
 	function novablocks_posted_by() {
-	    $author_url = esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) );
-	    $author_name = esc_html( get_the_author() );
+		$author_url  = esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) );
+		$author_name = esc_html( get_the_author() );
 
 		echo '<span class="byline">' .
-             '<div class="screen-reader-text">' . esc_html_x( 'by', 'post author', 'nova' ) . '</div>' .
+		     '<div class="screen-reader-text">' . esc_html_x( 'by', 'post author', 'nova' ) . '</div>' .
 		     '<span class="author vcard"><a class="url fn n" href="' . $author_url . '">' . $author_name . '</a></span>' .
-         '</span>'; // WPCS: XSS OK.
+		     '</span>'; // WPCS: XSS OK.
 
 	}
 }
 
 if ( ! function_exists( 'novablocks_posted_in' ) ) {
-    function novablocks_posted_in() {
-        novablocks_categories_posted_in();
-        novablocks_tags_posted_in();
-    }
+	function novablocks_posted_in() {
+		novablocks_categories_posted_in();
+		novablocks_tags_posted_in();
+	}
 }
 
 if ( ! function_exists( 'novablocks_categories_posted_in' ) ) {
@@ -60,7 +60,7 @@ if ( ! function_exists( 'novablocks_categories_posted_in' ) ) {
 			$categories_list = get_the_category_list( esc_html__( ', ', 'nova' ) );
 			if ( $categories_list ) {
 				/* translators: before list of categories. */
-				echo '<div class="cat-links"><span class="screen-reader-text">' . esc_html_x( 'Posted in', 'post categories', 'nova' ) . '</span>' .  $categories_list . '</div>';
+				echo '<div class="cat-links"><span class="screen-reader-text">' . esc_html_x( 'Posted in', 'post categories', 'nova' ) . '</span>' . $categories_list . '</div>';
 			}
 		}
 	}
@@ -74,7 +74,7 @@ if ( ! function_exists( 'novablocks_tags_posted_in' ) ) {
 			$tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', 'nova' ) );
 			if ( $tags_list ) {
 				/* translators: before list of tags. */
-				echo '<div class="tags-links"><span class="screen-reader-text">' . esc_html_x( 'Tagged', 'post tags', 'nova' ) . '</span>' .  $tags_list . '</div>';
+				echo '<div class="tags-links"><span class="screen-reader-text">' . esc_html_x( 'Tagged', 'post tags', 'nova' ) . '</span>' . $tags_list . '</div>';
 			}
 		}
 	}
@@ -112,7 +112,7 @@ if ( ! function_exists( 'novablocks_edit_post_link' ) ) {
 		edit_post_link(
 			sprintf(
 				wp_kses(
-					/* translators: %s: Name of current post. Only visible to screen readers */
+				/* translators: %s: Name of current post. Only visible to screen readers */
 					__( 'Edit <span class="screen-reader-text">%s</span>', 'nova' ),
 					array(
 						'span' => array(
@@ -143,21 +143,21 @@ if ( ! function_exists( 'novablocks_post_thumbnail' ) ) :
 		if ( is_singular() ) :
 			?>
 
-			<div class="post-thumbnail">
+            <div class="post-thumbnail">
 				<?php the_post_thumbnail(); ?>
-			</div><!-- .post-thumbnail -->
+            </div><!-- .post-thumbnail -->
 
 		<?php else : ?>
 
-		<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
-			<?php
-			the_post_thumbnail( 'post-thumbnail', array(
-				'alt' => the_title_attribute( array(
-					'echo' => false,
-				) ),
-			) );
-			?>
-		</a>
+            <a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
+				<?php
+				the_post_thumbnail( 'post-thumbnail', array(
+					'alt' => the_title_attribute( array(
+						'echo' => false,
+					) ),
+				) );
+				?>
+            </a>
 
 		<?php
 		endif; // End is_singular().
@@ -165,15 +165,15 @@ if ( ! function_exists( 'novablocks_post_thumbnail' ) ) :
 endif;
 
 if ( ! function_exists( 'rosa_the_separator' ) ) {
-    function rosa_the_separator( $style = 'default' ) {
-        echo '<div class="wp-block-separator is-style-' . $style . '">' . rosa_get_separator_markup() . '</div>';
-    }
+	function rosa_the_separator( $style = 'default' ) {
+		echo '<div class="wp-block-separator is-style-' . $style . '">' . rosa_get_separator_markup() . '</div>';
+	}
 }
 
 if ( ! function_exists( 'rosa_get_separator_markup' ) ) {
-    function rosa_get_separator_markup() {
-        ob_start();
-        ?>
+	function rosa_get_separator_markup() {
+		ob_start();
+		?>
         <div class="c-separator">
             <div class="c-separator__arrow c-separator__arrow--left"></div>
             <div class="c-separator__line c-separator__line--left"></div>
@@ -183,16 +183,17 @@ if ( ! function_exists( 'rosa_get_separator_markup' ) ) {
             <div class="c-separator__line c-separator__line--right"></div>
             <div class="c-separator__arrow c-separator__arrow--right"></div>
         </div>
-        <?php return apply_filters( 'rosa_separator_markup', ob_get_clean() );
-    }
+		<?php return apply_filters( 'rosa_separator_markup', ob_get_clean() );
+	}
 }
 
 if ( ! function_exists( 'rosa_get_separator_symbol' ) ) {
 	function rosa_get_separator_symbol() {
-        ob_start();
-        $symbol = pixelgrade_option( 'separator_symbol', 'fleuron-1' );
-        get_template_part( 'template-parts/separators/' . $symbol . '-svg' );
-        return ob_get_clean();
+		ob_start();
+		$symbol = pixelgrade_option( 'separator_symbol', 'fleuron-1' );
+		get_template_part( 'template-parts/separators/' . $symbol . '-svg' );
+
+		return ob_get_clean();
 	}
 }
 
@@ -200,6 +201,7 @@ if ( ! function_exists( 'rosa_get_separator_symbol' ) ) {
  * Determines whether the site has a custom transparent logo.
  *
  * @param int $blog_id Optional. ID of the blog in question. Default is the ID of the current blog.
+ *
  * @return bool Whether the site has a custom logo or not.
  */
 function rosa_has_custom_logo_transparent( $blog_id = 0 ) {
@@ -278,14 +280,3 @@ function rosa_get_custom_logo_transparent( $blog_id = 0 ) {
 function rosa_the_custom_logo_transparent( $blog_id = 0 ) {
 	echo rosa_get_custom_logo_transparent( $blog_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
-
-
-
-if ( ! function_exists( 'rosa_menu_overlay' ) ) {
-	function rosa_menu_overlay() { ?>
-        <div class="c-menu__overlay"></div>
-		<?php
-	}
-}
-
-add_action('novablocks_header:after', 'rosa_menu_overlay');

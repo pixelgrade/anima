@@ -1053,7 +1053,7 @@ ul.menu a,
       transform: translateX(-100%); }
   .site-header__inner-container[class] {
     margin-top: 3.5em;
-    border-top: 10;
+    border-top: 0;
     padding: 0; }
   .site-header__content {
     display: flex;
@@ -1077,20 +1077,6 @@ ul.menu a,
   .wp-block-novablocks-navigation .menu-item-has-children.hover > ul,
   .wp-block-novablocks-navigation .page_item_has_children.hover > ul {
     display: block; }
-  .c-menu__overlay {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: var(--sm-dark-1);
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    pointer-events: none; }
-  .c-menu-toggle__checkbox:checked ~ .c-menu__overlay {
-    opacity: .4;
-    z-index: 1;
-    pointer-events: auto; }
   .site-header,
   .c-menu-toggle__slice {
     transition: transform .3s ease-out; }

@@ -14,14 +14,26 @@ class Header {
 		this.offset = 0;
 		this.scrollOffset = 0;
 
+		// construiesti markup
+		// clonezi elementele de care ai nevoie in el
+		// setezi o variabila pe true ca sa stii ca l-ai initializat si sa nu-l initializezi iar la resize
+
+		// la resize verifici daca trebuie initializat sau doar afisat / ascuns
+		// tot la resize poti sa iti faci in containerul respectiv un element
+
 		this.update();
 		this.registerUpdate();
+		this.handleMobileMenu();
 	}
 
 	registerUpdate() {
 		GlobalService.registerUpdate( () => {
 			this.update();
 		} );
+	}
+
+	handleMobileMenu() {
+		const branding = document.querySelector('.c-branding');
 	}
 
 	update() {
