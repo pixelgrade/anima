@@ -422,7 +422,7 @@
     display: block; }
   .editor-styles-wrapper .c-headline__secondary + .c-headline__primary,
   .editor-styles-wrapper .c-headline > .editor-rich-text + .editor-rich-text {
-    margin-top: -0.3em; }
+    margin-top: -0.5em; }
   .editor-styles-wrapper .c-headline__secondary,
   .editor-styles-wrapper .c-headline > .editor-rich-text:first-child {
     position: relative;
@@ -440,6 +440,9 @@
     --current-font-size: 115px; }
     .editor-styles-wrapper h1.c-headline.has-larger-font-size .c-headline__secondary {
       font-size: 0.87em; }
+    .editor-styles-wrapper h1.c-headline.has-larger-font-size .c-headline__secondary + .c-headline__primary,
+    .editor-styles-wrapper h1.c-headline.has-larger-font-size > .editor-rich-text + .editor-rich-text {
+      margin-top: -0.3em; }
   .editor-styles-wrapper .wp-block-button:not(.is-style-text) .wp-block-button__link, .editor-styles-wrapper .wp-block-button__link {
     font-family: var(--current-font-family);
     font-size: var(--current-font-size);
@@ -485,14 +488,15 @@
     line-height: 1; }
   .editor-styles-wrapper .c-separator__symbol {
     padding-left: 1em;
-    padding-right: 1em; }
+    padding-right: 1em;
+    opacity: 0.5; }
     .editor-styles-wrapper .c-separator__symbol svg {
-      max-width: 1.5em;
-      max-height: 1.5em;
+      max-width: 1.4em;
+      max-height: 1.4em;
       width: auto;
       height: auto; }
     .novablocks-hero .editor-styles-wrapper .c-separator__symbol {
-      font-size: 1.8em; }
+      opacity: 1; }
   .editor-styles-wrapper .c-separator__line {
     flex-grow: 1; }
     .editor-styles-wrapper .c-separator__line:after {
@@ -525,10 +529,12 @@
     display: none; }
 
 :root {
-  --theme-body-font-family: Reforma1969, sans-serif; }
+  --theme-body-font-family: Reforma1969, sans-serif;
+  --theme-body-line-height: 1.7; }
 
 :root {
-  --theme-content-font-size: 18px; }
+  --theme-content-font-size: 18px;
+  --theme-content-line-height: 1.6; }
 
 :root {
   --theme-display-font-family: Reforma1969, sans-serif;
@@ -539,7 +545,7 @@
 
 :root {
   --theme-heading-1-font-family: Reforma1969, sans-serif;
-  --theme-heading-1-font-size: 60px;
+  --theme-heading-1-font-size: 66px;
   --theme-heading-1-line-height: 1.1;
   --theme-heading-1-font-weight: 700;
   --theme-heading-1-letter-spacing: -0.03em; }
