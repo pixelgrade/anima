@@ -12,17 +12,17 @@ add_filter( 'customify_filter_fields', 'rosa2_add_customify_section', 20, 1 );
 add_filter( 'customify_filter_fields', 'rosa2_add_customify_style_manager_section', 20, 1 );
 
 
-define( 'ROSA2_THEME_COLOR_PRIMARY', '#203AB6' ); // blue
-define( 'ROSA2_THEME_COLOR_SECONDARY', '#FFE42E' ); // yellow
-define( 'ROSA2_THEME_COLOR_TERTIARY', '#FFE42E' ); // yellow
+define( 'ROSA2_THEME_COLOR_PRIMARY', '#DDAB5D' ); // gold
+define( 'ROSA2_THEME_COLOR_SECONDARY', '#39497C' ); // blue
+define( 'ROSA2_THEME_COLOR_TERTIARY', '#B12C4A' ); // red
 
-define( 'ROSA2_THEME_DARK_PRIMARY', '#000043' ); // blue darker
-define( 'ROSA2_THEME_DARK_SECONDARY', '#272743' ); // text color
-define( 'ROSA2_THEME_DARK_TERTIARY', '#323067' ); // blue dark
+define( 'ROSA2_THEME_DARK_PRIMARY', '#212B49' ); // dark blue
+define( 'ROSA2_THEME_DARK_SECONDARY', '#34394B' ); // dark light blue
+define( 'ROSA2_THEME_DARK_TERTIARY', '#141928' ); // darker blue
 
 define( 'ROSA2_THEME_LIGHT_PRIMARY', '#FFFFFF' ); // white
-define( 'ROSA2_THEME_LIGHT_SECONDARY', '#EEF1F2' ); // gray
-define( 'ROSA2_THEME_LIGHT_TERTIARY', '#EEF1F2' ); // gray
+define( 'ROSA2_THEME_LIGHT_SECONDARY', '#CCCCCC' ); // gray
+define( 'ROSA2_THEME_LIGHT_TERTIARY', '#EEEFF2' ); // light gray
 
 
 function rosa2_add_customify_options( $config ) {

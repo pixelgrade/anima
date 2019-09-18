@@ -14,17 +14,20 @@ iframe.instagram-media {
 
 .novablocks-media__inner-container {
 
-    > :not(:first-child) {
-        --element-spacing: var(--theme-spacing-tiny);
+    .wp-block-separator + * {
+        --element-spacing: var(--theme-spacing);
     }
 }
 
 .novablocks-hero__inner-container {
 
-    > .wp-block-novablocks-headline,
-    > .wp-block-novablocks-headline + .wp-block-separator,
-    > .wp-block-novablocks-headline + .wp-block-separator + .has-tiny-font-size {
-        --element-spacing: var(--theme-spacing-tiny);
+    > :not(:first-child) {
+        --element-spacing: var(--theme-spacing);
+    }
+
+    > .wp-block-separator:not(:first-child),
+    > .wp-block-separator + * {
+        --element-spacing: var(--theme-spacing-normal);
     }
 }
 

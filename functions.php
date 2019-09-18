@@ -149,6 +149,4 @@ require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/template-functions.php';
 require get_template_directory() . '/inc/extras.php';
 
-require get_template_directory() . '/src/blocks/separator/init.php';
-
 require get_template_directory() . '/inc/integrations.php';
