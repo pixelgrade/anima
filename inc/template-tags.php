@@ -4,7 +4,7 @@
  *
  * Eventually, some of the functionality here could be replaced by core features.
  *
- * @package Nova
+ * @package Rosa 2
  */
 
 if ( ! function_exists( 'novablocks_posted_on' ) ) :
@@ -279,3 +279,13 @@ function rosa_the_custom_logo_transparent( $blog_id = 0 ) {
 	echo rosa_get_custom_logo_transparent( $blog_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
+
+
+if ( ! function_exists( 'rosa_menu_overlay' ) ) {
+	function rosa_menu_overlay() { ?>
+        <div class="c-menu__overlay"></div>
+		<?php
+	}
+}
+
+add_action('novablocks_header:after', 'rosa_menu_overlay');

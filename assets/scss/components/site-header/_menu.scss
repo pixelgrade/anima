@@ -20,16 +20,17 @@ ul.menu,
             align-items: center;
 
             &:after {
-                content: '';
+                content: "";
+                display: inline-block;
+                width: 7px;
+                height: 7px;
+                border: 2px solid transparent;
+                border-right-color: currentColor;
+                border-bottom-color: currentColor;
+                -webkit-transform: rotate(45deg);
+                transform: rotate(45deg);
 
-                position: absolute;
-                top: 50%;
-                right: 0;
-
-                border: 5px solid transparent;
-                border-top-color: currentColor;
-
-                transform: translateY(-50%);
+                opacity: .5;
 
                 margin-left: var(--theme-spacing-tiny);
             }

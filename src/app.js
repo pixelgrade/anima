@@ -3,6 +3,8 @@ import Hero from './components/hero';
 import Header from './components/header';
 import PromoBar from "./components/promo-bar";
 
+import Navbar from "./components/navbar";
+
 import { insideHalf, reloadRellax } from "./utils";
 
 (function($, window) {
@@ -19,6 +21,8 @@ import { insideHalf, reloadRellax } from "./utils";
 		const header = new Header( headerElement, {
 			offsetTargetElement: firstHero || null
 		} );
+
+		const navbar = new Navbar();
 
 		// initialize hero
 		const promo = new PromoBar( document.querySelectorAll( '.promo-bar .novablocks-announcement-bar' ), {

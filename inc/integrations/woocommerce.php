@@ -71,9 +71,6 @@ add_action('woocommerce_after_shop_loop_item', 'appendAddToCartButton', 1);
 // Output fly-out cart markup
 add_action( 'rosa_before_header', 'outputMiniCart', 1 );
 
-// Append cart to menu
-add_filter( 'wp_nav_menu_items', 'appendCartIconToMenu', 10, 2 );
-
 // Hide tabs content titles
 add_filter( 'woocommerce_product_description_heading', '__return_false', 30 );
 add_filter( 'woocommerce_product_additional_information_heading', '__return_false', 30 );
