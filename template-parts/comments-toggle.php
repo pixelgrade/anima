@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     <span class="c-comments-toggle__text">
         <?php
         /* translators: 1: the number of comments */
-        printf( esc_html( _nx( '%1$s comment', '%1$s comments', get_comments_number(), 'comments title', '__components_txtd' ) ), wp_kses( number_format_i18n( get_comments_number() ), wp_kses_allowed_html() ) );
+        printf( esc_html( _nx( '%1$s comment', '%1$s comments', get_comments_number(), 'comments title', '__theme_txtd' ) ), wp_kses( number_format_i18n( get_comments_number() ), wp_kses_allowed_html() ) );
         ?>
     </span>
 </label>

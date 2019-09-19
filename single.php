@@ -4,11 +4,14 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
  *
- * @package Nova
+ * @package Rosa2
  */
 
-get_header();
-?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
+get_header(); ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main">
@@ -20,9 +23,9 @@ get_header();
 				the_post_navigation();
 
 				// If comments are open or we have at least one comment, load up the comment template.
-				if ( comments_open() || get_comments_number() ) :
+				if ( comments_open() || get_comments_number() ) {
 					comments_template();
-				endif;
+				}
 
 			endwhile; // End of the loop.
 			?>

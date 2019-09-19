@@ -187,7 +187,7 @@ function rosa2_outputCheckoutBreadcrumbs() { ?>
 
     <ul class="woocommerce-checkout-breadcrumbs">
         <li>
-            <a href="<?php echo esc_url( wc_get_cart_url() ); ?>"><?php esc_html_e( 'Cart', '__components_txtd' ); ?></a>
+            <a href="<?php echo esc_url( wc_get_cart_url() ); ?>"><?php esc_html_e( 'Cart', '__theme_txtd' ); ?></a>
         </li>
         <li><?php esc_html_e( 'Checkout', '__theme_txtd' ); ?></li>
     </ul>
@@ -222,7 +222,7 @@ function rosa2_outputMiniCart() {
             <div class="c-mini-cart__overlay"></div>
             <div class="c-mini-cart__flyout">
                 <div class="c-mini-cart__header">
-                    <h5 class="c-mini-cart__title"><?php esc_html_e( 'Your cart', '__components_txtd' ); ?></h5>
+                    <h5 class="c-mini-cart__title"><?php esc_html_e( 'Your cart', '__theme_txtd' ); ?></h5>
                     <div class="c-mini-cart__close"></div>
                 </div>
 				<?php the_widget( 'WC_Widget_Cart', 'title=' ); ?>
@@ -280,7 +280,7 @@ if ( ! function_exists( 'woocommerce_display_categories' ) ) {
 			// display the shop link first if there is one
 			if ( ! empty( $all_link ) ) {
 				// also if the current_term doesn't have a term_id it means we are quering the shop and the "all categories" should be active
-				echo '<li><a href="' . esc_url( $all_link ) . '" ' . ( ( ! isset( $current_term->term_id ) ) ? ' class="active"' : ' class="inactive"' ) . '>' . esc_html__( 'All Products', '__components_txtd' ) . '</a></li>';
+				echo '<li><a href="' . esc_url( $all_link ) . '" ' . ( ( ! isset( $current_term->term_id ) ) ? ' class="active"' : ' class="inactive"' ) . '>' . esc_html__( 'All Products', '__theme_txtd' ) . '</a></li>';
 			}
 
 			// display a link for each product category
@@ -299,7 +299,6 @@ if ( ! function_exists( 'woocommerce_display_categories' ) ) {
 		}
 	}
 }
-
 
 if ( ! function_exists( ' rosa2_woocommerce_pagination_args' ) ) {
 	function rosa2_woocommerce_pagination_args() {

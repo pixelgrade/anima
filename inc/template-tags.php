@@ -25,7 +25,7 @@ if ( ! function_exists( 'rosa2_posted_on' ) ) :
 
 		/* translators: before post date. */
 		echo '<div class="posted-on">' .
-		     '<span class="screen-reader-text">' . esc_html_x( 'Posted on', 'post date', 'nova' ) . '</span>' .
+		     '<span class="screen-reader-text">' . esc_html_x( 'Posted on', 'post date', '__theme_txtd' ) . '</span>' .
 		     '<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>' .
 		     '</div>';
 
@@ -42,7 +42,7 @@ if ( ! function_exists( 'rosa2_posted_by' ) ) {
 	    $author_name = esc_html( get_the_author() );
 
 		echo '<span class="byline">' .
-		     '<div class="screen-reader-text">' . esc_html_x( 'by', 'post author', 'nova' ) . '</div>' .
+		     '<div class="screen-reader-text">' . esc_html_x( 'by', 'post author', '__theme_txtd' ) . '</div>' .
 		     '<span class="author vcard"><a class="url fn n" href="' . $author_url . '">' . $author_name . '</a></span>' .
 		     '</span>'; // WPCS: XSS OK.
 
@@ -61,10 +61,10 @@ if ( ! function_exists( 'rosa2_categories_posted_in' ) ) {
 		// Hide category and tag text for pages.
 		if ( 'post' === get_post_type() ) {
 			/* translators: used between list items, there is a space after the comma */
-			$categories_list = get_the_category_list( esc_html__( ', ', 'nova' ) );
+			$categories_list = get_the_category_list( esc_html__( ', ', '__theme_txtd' ) );
 			if ( $categories_list ) {
 				/* translators: before list of categories. */
-				echo '<div class="cat-links"><span class="screen-reader-text">' . esc_html_x( 'Posted in', 'post categories', 'nova' ) . '</span>' . $categories_list . '</div>';
+				echo '<div class="cat-links"><span class="screen-reader-text">' . esc_html_x( 'Posted in', 'post categories', '__theme_txtd' ) . '</span>' . $categories_list . '</div>';
 			}
 		}
 	}
@@ -75,10 +75,10 @@ if ( ! function_exists( 'rosa2_tags_posted_in' ) ) {
 		// Hide category and tag text for pages.
 		if ( 'post' === get_post_type() ) {
 			/* translators: used between list items, there is a space after the comma */
-			$tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', 'nova' ) );
+			$tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', '__theme_txtd' ) );
 			if ( $tags_list ) {
 				/* translators: before list of tags. */
-				echo '<div class="tags-links"><span class="screen-reader-text">' . esc_html_x( 'Tagged', 'post tags', 'nova' ) . '</span>' . $tags_list . '</div>';
+				echo '<div class="tags-links"><span class="screen-reader-text">' . esc_html_x( 'Tagged', 'post tags', '__theme_txtd' ) . '</span>' . $tags_list . '</div>';
 			}
 		}
 	}
@@ -92,7 +92,7 @@ if ( ! function_exists( 'rosa2_comments_link' ) ) {
 				sprintf(
 					wp_kses(
 					/* translators: %s: post title */
-						__( 'Leave a Comment<span class="screen-reader-text"> on %s</span>', 'nova' ),
+						__( 'Leave a Comment<span class="screen-reader-text"> on %s</span>', '__theme_txtd' ),
 						array(
 							'span' => array(
 								'class' => array(),
@@ -117,7 +117,7 @@ if ( ! function_exists( 'rosa2_edit_post_link' ) ) {
 			sprintf(
 				wp_kses(
 				/* translators: %s: Name of current post. Only visible to screen readers */
-					__( 'Edit <span class="screen-reader-text">%s</span>', 'nova' ),
+					__( 'Edit <span class="screen-reader-text">%s</span>', '__theme_txtd' ),
 					array(
 						'span' => array(
 							'class' => array(),
@@ -197,21 +197,6 @@ if ( ! function_exists( 'rosa2_get_separator_symbol' ) ) {
         get_template_part( 'template-parts/separators/' . $symbol . '-svg' );
         return ob_get_clean();
 	}
-}
-
-if ( ! function_exists( ' rosa2_woocommerce_pagination_args' ) ) {
-	function rosa2_woocommerce_pagination_args() {
-
-		$args =  array(
-				'end_size'           => 1,
-				'mid_size'           => 2,
-				'type'               => 'list',
-				'prev_text' => esc_html_x( 'Previous', 'previous set of posts', '__theme_txtd' ),
-				'next_text' => esc_html_x( 'Next', 'next set of posts', '__theme_txtd' ),
-			);
-
-		return $args;
-    }
 }
 
 if ( ! function_exists( ' rosa2_has_custom_logo_transparent' ) ) {
