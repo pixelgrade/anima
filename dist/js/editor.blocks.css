@@ -1,48 +1,87 @@
-.c-separator {
-  --separator-line-thickness: 2px;
-  --separator-arrow-width: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
+:root {
+  --novablocks-content-padding-small: 5%;
+  --novablocks-content-padding-medium: 10%;
+  --novablocks-content-padding-large: 15%;
+  --novablocks-content-width-full: 100%;
+  --novablocks-content-width-large: 70%;
+  --novablocks-content-width-narrow: 30%; }
 
-.c-separator__flower {
-  padding-left: 1em;
-  padding-right: 1em; }
+.novablocks-u-content-width {
+  --novablocks-content-width: var(--novablocks-content-width-full); }
+  .novablocks-u-content-width-large .novablocks-u-content-width {
+    --novablocks-content-width: var(--novablocks-content-width-large); }
+  .novablocks-u-content-width-narrow .novablocks-u-content-width {
+    --novablocks-content-width: var(--novablocks-content-width-narrow); }
+  @media only screen and (min-width: 1000px) {
+    .novablocks-u-content-width {
+      max-width: var(--novablocks-content-width); } }
 
-.c-separator__line {
-  flex-grow: 1; }
-  .c-separator__line:after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: var(--separator-line-thickness);
-    background: currentColor; }
+.novablocks-u-content-padding {
+  --novablocks-content-padding: var(--novablocks-content-padding-small);
+  padding: var(--novablocks-content-padding); }
+  @media only screen and (min-width: 1000px) {
+    .novablocks-u-spacing-medium .novablocks-u-content-padding {
+      --novablocks-content-padding: var(--novablocks-content-padding-medium); }
+    .novablocks-u-spacing-large .novablocks-u-content-padding {
+      --novablocks-content-padding: var(--novablocks-content-padding-large); } }
 
-.c-separator__arrow {
-  height: var(--separator-line-thickness);
-  border: var(--separator-arrow-width) solid transparent; }
+:root {
+  --bg-master-dark: #000000;
+  --bg-master-light: #FFFFFF;
+  --bg-master-none: transparent; }
 
-.c-separator__arrow--left {
-  border-left-color: currentColor;
-  border-right: 0; }
+.novablocks-u-background-dark {
+  --element-background: var(--bg-master-dark); }
 
-.c-separator__arrow--right {
-  border-right-color: currentColor;
-  border-left: 0; }
+.novablocks-u-background-light {
+  --element-background: var(--bg-master-light); }
 
-.wp-separator-block.is-style-default .c-separator:after {
-  content: "";
-  display: block;
+.novablocks-u-background-none {
+  --element-background: var(--bg-master-none); }
+
+.novablocks-u-background {
+  background-color: var(--element-background);
+  -webkit-transition: background-color 0.4s ease-out;
+  transition: background-color 0.4s ease-out; }
+
+.nova-hide-clear-color .components-color-palette__custom-color {
+  margin-right: 0; }
+
+.nova-hide-clear-color .components-color-palette__clear {
+  display: none; }
+
+.novablocks-u-content-align {
+  position: relative;
   width: 100%;
-  height: var(--separator-line-thickness);
-  background: currentColor; }
-
-.wp-separator-block.is-style-default .c-separator__arrow,
-.wp-separator-block.is-style-default .c-separator__flower,
-.wp-separator-block.is-style-default .c-separator__line {
-  display: none; }
-
-.wp-separator-block.is-style-flower .c-separator__arrow,
-.wp-separator-block.is-style-flower .c-separator__line {
-  display: none; }
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+  .novablocks-u-halign-left .novablocks-u-content-align {
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    text-align: left; }
+  .novablocks-u-halign-center .novablocks-u-content-align {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    text-align: center; }
+  .novablocks-u-halign-right .novablocks-u-content-align {
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    text-align: right; }
+  .novablocks-u-valign-top .novablocks-u-content-align {
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start; }
+  .novablocks-u-valign-center .novablocks-u-content-align {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; }
+  .novablocks-u-valign-bottom .novablocks-u-content-align {
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end; }
 

@@ -13,7 +13,7 @@
 // bring primary and secondary headlines closer together
 .c-headline__secondary + .c-headline__primary,
 .c-headline > .editor-rich-text + .editor-rich-text {
-    margin-top: -0.3em;
+    margin-top: -0.5em;
 }
 
 // raise secondary headline above primary
@@ -37,9 +37,14 @@
 }
 
 h1.c-headline.has-larger-font-size {
-    --current-font-size: 115px;
+    @include apply-font(huge, font-size);
 
     .c-headline__secondary {
         font-size: 0.87em;
+    }
+
+    .c-headline__secondary + .c-headline__primary,
+    > .editor-rich-text + .editor-rich-text {
+        margin-top: -0.3em;
     }
 }

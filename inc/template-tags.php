@@ -177,7 +177,7 @@ if ( ! function_exists( 'rosa_get_separator_markup' ) ) {
         <div class="c-separator">
             <div class="c-separator__arrow c-separator__arrow--left"></div>
             <div class="c-separator__line c-separator__line--left"></div>
-            <div class="c-separator__flower">
+            <div class="c-separator__symbol">
                 <span><?php echo rosa_get_separator_symbol(); ?></span>
             </div>
             <div class="c-separator__line c-separator__line--right"></div>
