@@ -1,5 +1,6 @@
 import GlobalService from "./globalService";
 import Cookies from 'js-cookie';
+import $ from 'jquery';
 
 export default class AnnouncementBar {
 
@@ -9,15 +10,15 @@ export default class AnnouncementBar {
 		this.transitionDuration = args.transitionDuration || 0.5;
 		this.transitionEasing = args.transitionEasing || Power4.easeOut;
 		this.pieces = this.getPieces();
-		this.id = jQuery( element ).data( 'id' );
+		this.id = $( element ).data( 'id' );
 		this.cookieName = 'novablocks-announcement-' + this.id + '-disabled';
 		this.height = 0;
 
 		const disabled = Cookies.get( this.cookieName );
-		const loggedIn = jQuery( 'body' ).hasClass( 'logged-in' );
+		const loggedIn = $( 'body' ).hasClass( 'logged-in' );
 
 		if ( disabled && ! loggedIn ) {
-			jQuery( element ).remove();
+			$( element ).remove();
 			return;
 		}
 
@@ -28,7 +29,7 @@ export default class AnnouncementBar {
 	}
 
 	getPieces() {
-		const $element = jQuery( this.element );
+		const $element = $( this.element );
 
 		return {
 			element: $element,

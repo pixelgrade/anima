@@ -9,8 +9,8 @@
   --theme-button-hover-border-color: transparent;
   --theme-button-border-width: 2px;
   --theme-button-border-radius: 999em;
-  --theme-button-y-padding: calc(2 * var(--theme-spacing-tiny));
-  --theme-button-x-padding: calc(4 * var(--theme-spacing-tiny));
+  --theme-button-y-padding: 0.75em;
+  --theme-button-x-padding: 1.5em;
   --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
   --theme-button-transition-duration: .2s;
   --theme-button-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -36,7 +36,7 @@
   --theme-content-width-normal: calc(40 * var(--theme-body-font-size));
   --theme-content-width-wide: calc(60 * var(--theme-body-font-size));
   --theme-background-color: var(--sm-light-1);
-  --theme-spacing: 0em;
+  --theme-spacing: 0.3rem;
   --theme-spacing-micro:  calc( var( --theme-spacing ) / 4 );
   --theme-spacing-tiny:   calc( var( --theme-spacing ) / 2 );
   --theme-spacing-small:  calc( var( --theme-spacing ) * 2 );
@@ -58,12 +58,12 @@
   --theme-headings-alt-font-family: Billy Ohio, sans-serif;
   --theme-body-font-size: 16px;
   --theme-content-font-size: 18px; }
-  @media screen and (min-width: 0px) {
+  @media screen and (min-width: 320px) {
     :root {
-      --theme-spacing: calc(0em + 16 * ((100vw - 0px) / 1200)); } }
+      --theme-spacing: calc(0.3rem + 0.5 * ((100vw - 320px) / 880)); } }
   @media screen and (min-width: 1200px) {
     :root {
-      --theme-spacing: 16px; } }
+      --theme-spacing: 0.8rem; } }
 
 @font-face {
   font-family: 'Billy Ohio';

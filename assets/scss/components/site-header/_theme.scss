@@ -3,11 +3,7 @@ $enable-site-header-transparent: true !default;
 $enable-site-header-inversed: false !default;
 
 $site-header-fixed-body-class: has-fixed-site-header !default;
-
-:root {
-    --theme-header-transition-speed: .15s;
-    --theme-header-background-color: var(--theme-sm-light-3);
-}
+$site-header-transition-speed: .15s;
 
 @media only screen and (min-width: 1000px) {
 
@@ -21,7 +17,7 @@ $site-header-fixed-body-class: has-fixed-site-header !default;
         padding-top: 1em;
         padding-bottom: 1em;
 
-        transition: all var(--theme-header-transition-speed) ease-out;
+        transition: all $site-header-transition-speed ease-out;
         transition-property: opacity, color, background-color;
         will-change: transform;
     }
@@ -29,21 +25,14 @@ $site-header-fixed-body-class: has-fixed-site-header !default;
     // used pseudo element to create site header border on its bottom
     // in order to use currentColor and opacity for easier theming
     // and avoiding altering its height
-    body:not(.#{$site-header-fixed-body-class}) {
-
-        .site-header:after {
-            content: "";
-            display: block;
-            @include cover;
-            box-shadow: currentColor 0 -1px 0 inset;
-            opacity: 0.2;
-            pointer-events: none;
-            transition: opacity var(--theme-header-transition-speed) ease-out;
-        }
-
-        .site-header--scrolled:after {
-            opacity: 0;
-        }
+    .site-header:after {
+        content: "";
+        display: block;
+        @include cover;
+        box-shadow: currentColor 0 1px 2px;
+        opacity: 0.1;
+        pointer-events: none;
+        transition: opacity $site-header-transition-speed ease-out;
     }
 }
 
@@ -92,18 +81,22 @@ $site-header-fixed-body-class: has-fixed-site-header !default;
         @if $enable-site-header-inversed == true {
 
             .site-header--fixed:not(.site-header--normal) {
-                color: var(--theme-header-background-color);
+                color: var(--theme-sm-light-1);
             }
 
         } @else {
 
             .#{$site-header-fixed-body-class} .site-header:not(.site-header--scrolled) {
-                color: var(--theme-header-background-color);
+                color: var(--theme-sm-light-1);
+
+                &:after {
+                    opacity: 0;
+                }
             }
 
             body:not(.#{$site-header-fixed-body-class}) .site-header,
             .#{$site-header-fixed-body-class} .site-header--scrolled {
-                background-color: var(--theme-header-background-color);
+                background-color: var(--theme-sm-light-1);
             }
         }
     }
@@ -115,7 +108,7 @@ $site-header-fixed-body-class: has-fixed-site-header !default;
 
             .site-header {
                 position: absolute;
-                color: var(--theme-header-background-color);
+                color: var(--theme-sm-light-1);
                 background-color: transparent;
             }
         }
@@ -124,7 +117,7 @@ $site-header-fixed-body-class: has-fixed-site-header !default;
     @if $enable-site-header-transparent == false {
 
         .site-header {
-            background-color: var(--theme-header-background-color);
+            background-color: var(--theme-sm-light-1);
         }
     }
 

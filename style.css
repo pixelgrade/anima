@@ -36,8 +36,8 @@ Table of Contents
   --theme-button-hover-border-color: transparent;
   --theme-button-border-width: 2px;
   --theme-button-border-radius: 999em;
-  --theme-button-y-padding: calc(2 * var(--theme-spacing-tiny));
-  --theme-button-x-padding: calc(4 * var(--theme-spacing-tiny));
+  --theme-button-y-padding: 0.75em;
+  --theme-button-x-padding: 1.5em;
   --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
   --theme-button-transition-duration: .2s;
   --theme-button-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -63,7 +63,7 @@ Table of Contents
   --theme-content-width-normal: calc(40 * var(--theme-body-font-size));
   --theme-content-width-wide: calc(60 * var(--theme-body-font-size));
   --theme-background-color: var(--sm-light-1);
-  --theme-spacing: 0em;
+  --theme-spacing: 0.3rem;
   --theme-spacing-micro:  calc( var( --theme-spacing ) / 4 );
   --theme-spacing-tiny:   calc( var( --theme-spacing ) / 2 );
   --theme-spacing-small:  calc( var( --theme-spacing ) * 2 );
@@ -85,12 +85,12 @@ Table of Contents
   --theme-headings-alt-font-family: Billy Ohio, sans-serif;
   --theme-body-font-size: 16px;
   --theme-content-font-size: 18px; }
-  @media screen and (min-width: 0px) {
+  @media screen and (min-width: 320px) {
     :root {
-      --theme-spacing: calc(0em + 16 * ((100vw - 0px) / 1200)); } }
+      --theme-spacing: calc(0.3rem + 0.5 * ((100vw - 320px) / 880)); } }
   @media screen and (min-width: 1200px) {
     :root {
-      --theme-spacing: 16px; } }
+      --theme-spacing: 0.8rem; } }
 
 @font-face {
   font-family: 'Billy Ohio';
@@ -998,7 +998,7 @@ ul.menu a,
   top: 0;
   left: 0;
   z-index: 1100;
-  padding: var(--theme-spacing-small);
+  padding: 1em;
   cursor: pointer; }
   .admin-bar .c-menu-toggle__wrap {
     top: 32px; }
@@ -1032,7 +1032,7 @@ ul.menu a,
 .c-menu-toggle__slice {
   display: block;
   width: 1em;
-  height: 3px;
+  height: 0.1875em;
   background: currentColor; }
 
 .c-menu-toggle__slice--top,
@@ -1207,10 +1207,6 @@ ul.menu a,
   .site-header--mobile {
     position: absolute; } }
 
-:root {
-  --theme-header-transition-speed: .15s;
-  --theme-header-background-color: var(--theme-sm-light-3); }
-
 @media only screen and (min-width: 1000px) {
   .site-header {
     top: 0;
@@ -1219,7 +1215,7 @@ ul.menu a,
     z-index: 1000;
     padding-top: 1em;
     padding-bottom: 1em;
-    transition: all var(--theme-header-transition-speed) ease-out;
+    transition: all 0.15s ease-out;
     transition-property: opacity, color, background-color;
     will-change: transform; }
     .admin-bar .site-header {
@@ -1241,7 +1237,7 @@ ul.menu a,
       position: absolute; } }
 
 @media only screen and (min-width: 1000px) {
-  body:not(.has-fixed-site-header) .site-header:after {
+  .site-header:after {
     content: "";
     display: block;
     position: absolute;
@@ -1249,12 +1245,10 @@ ul.menu a,
     right: 0;
     bottom: 0;
     left: 0;
-    box-shadow: currentColor 0 -1px 0 inset;
-    opacity: 0.2;
+    box-shadow: currentColor 0 1px 2px;
+    opacity: 0.1;
     pointer-events: none;
-    transition: opacity var(--theme-header-transition-speed) ease-out; }
-  body:not(.has-fixed-site-header) .site-header--scrolled:after {
-    opacity: 0; } }
+    transition: opacity 0.15s ease-out; } }
 
 @media only screen and (min-width: 1000px) {
   .site-header--fixed {
@@ -1273,10 +1267,12 @@ ul.menu a,
 
 @media only screen and (min-width: 1000px) {
   .has-fixed-site-header .site-header:not(.site-header--scrolled) {
-    color: var(--theme-header-background-color); }
+    color: var(--theme-sm-light-1); }
+    .has-fixed-site-header .site-header:not(.site-header--scrolled):after {
+      opacity: 0; }
   body:not(.has-fixed-site-header) .site-header,
   .has-fixed-site-header .site-header--scrolled {
-    background-color: var(--theme-header-background-color); } }
+    background-color: var(--theme-sm-light-1); } }
 
 .site-branding {
   display: flex;
@@ -2368,8 +2364,7 @@ body, .site, .site-content {
 
 .novablocks-hero__indicator {
   width: 160px;
-  height: 50px;
-  color: var(--theme-sm-light-3); }
+  height: 50px; }
   .novablocks-hero__indicator:after {
     color: var(--theme-sm-dark-1); }
 
@@ -2624,6 +2619,11 @@ body {
   background: var(--theme-sm-light-1);
   padding-bottom: var(--theme-spacing-large);
   overflow: hidden; }
+
+.single .site-header:not(.site-header--scrolled) {
+  background-color: transparent; }
+  .single .site-header:not(.site-header--scrolled):after {
+    opacity: 0; }
 
 .single .hentry > :not(:first-child),
 .page .hentry > :not(:first-child) {

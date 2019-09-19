@@ -18,9 +18,7 @@ import { insideHalf, reloadRellax } from "./utils";
 		// initialize header
 		const firstHero = heroElementsArray[0];
 		const headerElement = $( '.site-header' ).get(0);
-		const header = new Header( headerElement, {
-			offsetTargetElement: firstHero || null
-		} );
+		const header = new Header( headerElement );
 
 		const navbar = new Navbar();
 

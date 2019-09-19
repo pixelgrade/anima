@@ -11,7 +11,17 @@ body {
 
         overflow: hidden;
     }
+}
 
+.single {
+
+    .site-header:not(.site-header--scrolled) {
+        background-color: transparent;
+
+        &:after {
+            opacity: 0;
+        }
+    }
 }
 
 .single,
