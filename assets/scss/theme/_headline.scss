@@ -3,6 +3,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    &.has-text-align-left {
+        align-items: flex-start;
+    }
+
+    &.has-text-align-right {
+        align-items: flex-end;
+    }
 }
 
 .c-headline__primary,
