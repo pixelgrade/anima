@@ -3,12 +3,6 @@ var gulp = require( 'gulp' ),
 
 sass.compiler = require('node-sass');
 
-function sass( src, dest ) {
-	return gulp.src( src )
-	           .pipe(sass().on('error', sass.logError))
-	           .pipe(gulp.dest( dest ));
-}
-
 function styles( cb ) {
 	cb();
 	return gulp.src('./assets/scss/*.scss')

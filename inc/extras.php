@@ -1,4 +1,11 @@
 <?php
+/**
+ * Custom functions that act independently of the theme templates.
+ *
+ * Eventually, some of the functionality here could be replaced by core features.
+ *
+ * @package Rosa 2
+ */
 
 if ( ! function_exists( 'wp_body_open' ) ) {
 	function wp_body_open() {
@@ -121,11 +128,11 @@ if ( ! function_exists( 'pixelgrade_get_comments_toggle_checked_attribute' ) ) {
 	}
 }
 
-function rosa_the_read_more_button() {
-    echo rosa_get_read_more_button();
+function rosa2_the_read_more_button() {
+    echo rosa2_get_read_more_button();
 }
 
-function rosa_get_read_more_button() {
+function rosa2_get_read_more_button() {
     global $post;
 	return
         '<div class="wp-block-button aligncenter is-style-text">' .
@@ -135,14 +142,14 @@ function rosa_get_read_more_button() {
         '</div>';
 }
 
-function rosa_admin_init() {
+function rosa2_admin_init() {
 	global $_wp_post_type_features;
 	$_wp_post_type_features[ 'post' ][ 'editor' ];
 }
-add_action( 'admin_init', 'rosa_admin_init' );
+add_action( 'admin_init', 'rosa2_admin_init' );
 remove_action( 'edit_form_after_title', '_wp_posts_page_notice' );
 
-function rosa_header_should_be_fixed() {
+function rosa2_header_should_be_fixed() {
 	global $post;
 
 	if ( has_blocks( $post->post_content ) ) {

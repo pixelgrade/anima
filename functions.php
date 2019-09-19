@@ -221,7 +221,7 @@ function wupdates_add_id_JxLn7( $ids = array() ) {
 
 	// Now add the predefined details about this product
 	// Do not tamper with these please!!!
-	$ids[ $slug ] = array( 'name' => 'Rosa 2', 'slug' => 'rosa-2', 'id' => 'JxLn7', 'type' => 'theme', 'digest' => '6e72e775343f8569b952de0e4bb32c55', );
+	$ids[ $slug ] = array( 'name' => 'Rosa2', 'slug' => 'rosa2', 'id' => 'JxLn7', 'type' => 'theme', 'digest' => '9e63c805181de3f54425520eb92861b8', );
 
 	return $ids;
 }

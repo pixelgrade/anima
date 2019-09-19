@@ -1,12 +1,21 @@
 <?php
+/**
+ * The template part used for displaying the comments toggle
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ *
+ * @package    Rosa2
+ */
 
-?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+} ?>
 
 <input type="checkbox" name="comments-toggle" id="nova-comments-toggle"
        class="c-comments-toggle__checkbox" <?php pixelgrade_comments_toggle_checked_attribute(); ?> />
 
 <label class="c-comments-toggle__label" for="nova-comments-toggle">
-    <span class="c-comments-toggle__icon"><?php // pixelgrade_get_component_template_part( Pixelgrade_Blog::COMPONENT_SLUG, 'svg/comments-toggle-icon' ); ?></span>
+    <span class="c-comments-toggle__icon"></span>
     <span class="c-comments-toggle__text">
         <?php
         /* translators: 1: the number of comments */

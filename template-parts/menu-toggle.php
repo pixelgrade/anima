@@ -1,4 +1,15 @@
 <?php
+/**
+ * Template part for displaying the menu toggle.
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ *
+ * @package Rosa2
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 global $novablocks_responsive_navigation_outputted;
 
@@ -13,10 +24,10 @@ if ( empty( $novablocks_responsive_navigation_outputted ) ) { ?>
                 <b class="c-menu-toggle__slice c-menu-toggle__slice--middle"></b>
                 <b class="c-menu-toggle__slice c-menu-toggle__slice--bottom"></b>
             </span>
-            <span class="c-menu-toggle__label"><?php _e( 'Menu', '__theme_txtd' ); ?></span>
+            <span class="c-menu-toggle__label"><?php esc_html_e( 'Menu', '__theme_txtd' ); ?></span>
         </span>
     </label>
 
-	<?php $novablocks_responsive_navigation_outputted = true;
-
+	<?php
+	$novablocks_responsive_navigation_outputted = true;
 }

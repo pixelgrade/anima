@@ -1,4 +1,15 @@
 <?php
+/**
+ * Template part for displaying the posts loop.
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ *
+ * @package Rosa2
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 $has_image_on_the_left = false;
 

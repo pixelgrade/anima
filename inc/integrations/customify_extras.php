@@ -104,52 +104,54 @@ if ( ! function_exists( 'pixelgrade_option' ) ) {
 	}
 }
 
-/**
- * Get the Customify configuration of a certain option.
- *
- * @param string $option_id
- * @param array  $config
- *
- * @return array|false The option config or false on failure.
- */
-function pixelgrade_get_option_customizer_config( $option_id, $config = array() ) {
-	if ( empty( $config ) ) {
-		// Fire the all-gathering-filter that Customify uses so we can get as much data about this option as possible.
-		$config = apply_filters( 'customify_filter_fields', array() );
-	}
+if ( ! function_exists( 'pixelgrade_get_option_customizer_config' ) ) {
+	/**
+	 * Get the Customify configuration of a certain option.
+	 *
+	 * @param string $option_id
+	 * @param array  $config
+	 *
+	 * @return array|false The option config or false on failure.
+	 */
+	function pixelgrade_get_option_customizer_config( $option_id, $config = array() ) {
+		if ( empty( $config ) ) {
+			// Fire the all-gathering-filter that Customify uses so we can get as much data about this option as possible.
+			$config = apply_filters( 'customify_filter_fields', array() );
+		}
 
-	if ( empty( $config ) ) {
-		return false;
-	}
+		if ( empty( $config ) ) {
+			return false;
+		}
 
-	// We need to search for the option configured under the given id (the array key)
-	if ( isset ( $config['panels'] ) ) {
-		foreach ( $config['panels'] as $panel_id => $panel_settings ) {
-			if ( isset( $panel_settings['sections'] ) ) {
-				foreach ( $panel_settings['sections'] as $section_id => $section_settings ) {
-					if ( isset( $section_settings['options'] ) ) {
-						foreach ( $section_settings['options'] as $id => $option_config ) {
-							if ( $id === $option_id ) {
-								return $option_config;
+		// We need to search for the option configured under the given id (the array key)
+		if ( isset ( $config['panels'] ) ) {
+			foreach ( $config['panels'] as $panel_id => $panel_settings ) {
+				if ( isset( $panel_settings['sections'] ) ) {
+					foreach ( $panel_settings['sections'] as $section_id => $section_settings ) {
+						if ( isset( $section_settings['options'] ) ) {
+							foreach ( $section_settings['options'] as $id => $option_config ) {
+								if ( $id === $option_id ) {
+									return $option_config;
+								}
 							}
 						}
 					}
 				}
 			}
 		}
-	}
 
-	if ( isset ( $config['sections'] ) ) {
-		foreach ( $config['sections'] as $section_id => $section_settings ) {
-			if ( isset( $section_settings['options'] ) ) {
-				foreach ( $section_settings['options'] as $id => $option_config ) {
-					if ( $id === $option_id ) {
-						return $option_config;
+		if ( isset ( $config['sections'] ) ) {
+			foreach ( $config['sections'] as $section_id => $section_settings ) {
+				if ( isset( $section_settings['options'] ) ) {
+					foreach ( $section_settings['options'] as $id => $option_config ) {
+						if ( $id === $option_id ) {
+							return $option_config;
+						}
 					}
 				}
 			}
 		}
-	}
 
-	return false;
+		return false;
+	}
 }
