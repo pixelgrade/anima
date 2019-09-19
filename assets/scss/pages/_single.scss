@@ -13,13 +13,16 @@ body {
     }
 }
 
-.single {
+@media only screen and (min-width: 1000px) {
 
-    .site-header:not(.site-header--scrolled) {
-        background-color: transparent;
+    .single {
 
-        &:after {
-            opacity: 0;
+        .site-header:not(.site-header--scrolled) {
+            background-color: transparent;
+
+            &:after {
+                opacity: 0;
+            }
         }
     }
 }

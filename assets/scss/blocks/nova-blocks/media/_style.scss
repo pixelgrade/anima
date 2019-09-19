@@ -6,21 +6,6 @@ $enable-nova-blocks-styles:             true !default;
         --theme-wrapper-side-spacing: var(--novablocks-media-content-padding);
     }
 
-    .novablocks-media {
-        //--novablocks-media-spacing: var(--theme-spacing-normal);
-
-        &, & + * {
-            // @todo check this out
-            //--theme-element-spacing: var(--theme-spacing-large);
-        }
-
-        [class*="__inner-container"],
-        & + * [class*="__inner-container"] {
-            // @todo check this out
-            //--theme-element-spacing: var(--theme-spacing-normal);
-        }
-    }
-
     .block-is-moderate + .block-is-moderate,
     .block-is-highlighted + .block-is-highlighted {
         padding-top: 0;

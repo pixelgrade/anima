@@ -40,13 +40,13 @@ class Header {
 		this.box = this.element.getBoundingClientRect();
 		this.scrollOffset = this.getScrollOffset();
 
-
 		const mobileHeaderHeight = this.$mobileHeader.css( 'height', '' ).outerHeight();
 		const toggleHeight = this.$toggleWrap.css( 'height', '' ).outerHeight();
 
 		this.mobileHeaderHeight = Math.max( mobileHeaderHeight, toggleHeight );
+		this.visibleHeaderHeight = this.$mobileHeader.is( ':visible' ) ? this.mobileHeaderHeight : this.box.height;
 
-		this.updateMobileHeaderOffset();
+		this.update();
 	}
 
 	updateHeaderOffset() {
@@ -86,7 +86,7 @@ class Header {
 
 	updatePageOffset() {
 		const page = document.getElementById( 'page' );
-		page.style.paddingTop = this.box.height + this.offset + 'px';
+		page.style.paddingTop = this.visibleHeaderHeight + this.offset + 'px';
 	}
 
 	createMobileHeader() {
@@ -113,6 +113,7 @@ class Header {
 		}
 
 		this.$header.toggleClass( 'site-header--scrolled', scrollY > this.scrollOffset );
+		this.$mobileHeader.toggleClass( 'site-header--scrolled', scrollY > this.scrollOffset );
 	}
 }
 

@@ -19,6 +19,10 @@
     cursor: default;
 }
 
+.c-menu-toggle {
+    transition: color .3s ease-out;
+}
+
 .c-menu-toggle__checkbox {
 
     &:not(:checked) {
@@ -32,6 +36,7 @@
     &:checked  {
 
         ~ .c-menu-toggle {
+            color: var(--theme-sm-light-1);
 
             .c-menu-toggle__slice--top {
                 transform: rotate(45deg);

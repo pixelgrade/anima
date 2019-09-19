@@ -240,7 +240,7 @@ function appendCartIconToMenu( $items, $args ) {
 		$cart_count_span = '<div class="cart-count"><span>0</span></div>';
     }
 
-	$cart_link               = '<li class="menu-item  menu-item--cart"><a class="js-open-cart" href="' . esc_url( get_permalink( wc_get_page_id( 'cart' ) ) ) . '">' . $cart_count_span . '</a></li>';
+	$cart_link = '<li class="menu-item  menu-item--cart"><a class="js-open-cart" href="' . esc_url( get_permalink( wc_get_page_id( 'cart' ) ) ) . '">' . $cart_count_span . '</a></li>';
 
 
 	// Add the cart link to the end of the menu.

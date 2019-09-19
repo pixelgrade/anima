@@ -1,25 +1,5 @@
 /* Global CSS Custom Properties */
 :root {
-
-    // LAYOUT
-    --theme-content-width-normal: calc(40 * var(--theme-body-font-size));
-    --theme-content-width-wide: calc(60 * var(--theme-body-font-size));
-
-    --theme-background-color: var(--sm-light-1);
-
-    // spacing unit
-    @include fluid(--theme-spacing, 320px, 0.3rem, $nova-font-size-breakpoint, 0.8rem );
-
-    --theme-spacing-micro:  calc( var( --theme-spacing ) / 4 );
-    --theme-spacing-tiny:   calc( var( --theme-spacing ) / 2 );
-    --theme-spacing-small:  calc( var( --theme-spacing ) * 2 );
-    --theme-spacing-normal: calc( var( --theme-spacing ) * 3 );
-    --theme-spacing-large:  calc( var( --theme-spacing ) * 4 );
-    --theme-spacing-huge:   calc( var( --theme-spacing ) * 5 );
-
-    // wrapper-side-spacing mixin custom properties
-    --theme-wrapper-side-spacing: var( --theme-spacing-normal );
-
     // ===========================================
     //     COLORS
     // -------------------------------------------
@@ -48,4 +28,23 @@
     --theme-body-font-size: #{$theme-minimum-font-size};
     --theme-content-font-size: #{$theme-content-font-size};
     // ===========================================
+
+    // LAYOUT
+    --theme-content-width-normal: calc(42 * var(--theme-body-font-size));
+    --theme-content-width-wide: calc(74 * var(--theme-body-font-size));
+
+    // SPACING
+    @include fluid(--theme-spacing, 20rem, 0.2rem, 80rem, 1rem );
+
+    --theme-spacing-micro:  var( --theme-spacing );
+    --theme-spacing-tiny:   var( --theme-spacing );
+    --theme-spacing-small:  calc( var( --theme-spacing ) * 2 );
+    --theme-spacing-normal: calc( var( --theme-spacing ) * 3 );
+    --theme-spacing-large:  calc( var( --theme-spacing ) * 4 );
+    --theme-spacing-huge:   calc( var( --theme-spacing ) * 5 );
+
+    @media only screen and (min-width: 80rem) {
+        --theme-spacing-micro:  calc( var( --theme-spacing ) / 4 );
+        --theme-spacing-tiny:   calc( var( --theme-spacing ) / 2 );
+    }
 }

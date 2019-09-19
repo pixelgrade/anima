@@ -27,23 +27,12 @@
 
 :root {
   --theme-minimum-font-size: 16px; }
-  @media only screen and (min-width: 1200px) {
+  @media only screen and (min-width: 1440px) {
     :root {
-      --theme-minimum-font-size: 1.33333vw; } }
+      --theme-minimum-font-size: 1.11111vw; } }
 
 /* Global CSS Custom Properties */
 :root {
-  --theme-content-width-normal: calc(40 * var(--theme-body-font-size));
-  --theme-content-width-wide: calc(60 * var(--theme-body-font-size));
-  --theme-background-color: var(--sm-light-1);
-  --theme-spacing: 0.3rem;
-  --theme-spacing-micro:  calc( var( --theme-spacing ) / 4 );
-  --theme-spacing-tiny:   calc( var( --theme-spacing ) / 2 );
-  --theme-spacing-small:  calc( var( --theme-spacing ) * 2 );
-  --theme-spacing-normal: calc( var( --theme-spacing ) * 3 );
-  --theme-spacing-large:  calc( var( --theme-spacing ) * 4 );
-  --theme-spacing-huge:   calc( var( --theme-spacing ) * 5 );
-  --theme-wrapper-side-spacing: var( --theme-spacing-normal );
   --sm-color-1: #DDAB5D;
   --sm-color-2: #39497C;
   --sm-color-3: #B12C4A;
@@ -57,13 +46,26 @@
   --theme-headings-font-family: Reforma1969, sans-serif;
   --theme-headings-alt-font-family: Billy Ohio, sans-serif;
   --theme-body-font-size: 16px;
-  --theme-content-font-size: 18px; }
-  @media screen and (min-width: 320px) {
+  --theme-content-font-size: 18px;
+  --theme-content-width-normal: calc(42 * var(--theme-body-font-size));
+  --theme-content-width-wide: calc(74 * var(--theme-body-font-size));
+  --theme-spacing: 0.2rem;
+  --theme-spacing-micro:  var( --theme-spacing );
+  --theme-spacing-tiny:   var( --theme-spacing );
+  --theme-spacing-small:  calc( var( --theme-spacing ) * 2 );
+  --theme-spacing-normal: calc( var( --theme-spacing ) * 3 );
+  --theme-spacing-large:  calc( var( --theme-spacing ) * 4 );
+  --theme-spacing-huge:   calc( var( --theme-spacing ) * 5 ); }
+  @media screen and (min-width: 20rem) {
     :root {
-      --theme-spacing: calc(0.3rem + 0.5 * ((100vw - 320px) / 880)); } }
-  @media screen and (min-width: 1200px) {
+      --theme-spacing: calc(0.2rem + 0.8 * ((100vw - 20rem) / 60)); } }
+  @media screen and (min-width: 80rem) {
     :root {
-      --theme-spacing: 0.8rem; } }
+      --theme-spacing: 1rem; } }
+  @media only screen and (min-width: 80rem) {
+    :root {
+      --theme-spacing-micro:  calc( var( --theme-spacing ) / 4 );
+      --theme-spacing-tiny:   calc( var( --theme-spacing ) / 2 ); } }
 
 @font-face {
   font-family: 'Billy Ohio';
@@ -307,8 +309,8 @@
     --theme-button-font-size: calc( var(--theme-minimum-font-size) + var(--theme-button-font-size-diff) ); }
     @media screen and (min-width: 0px) {
       :root {
-        --theme-button-font-size-diff: calc(0px + 1 * ((100vw - 0px) / 1200)); } }
-    @media screen and (min-width: 1200px) {
+        --theme-button-font-size-diff: calc(0px + 1 * ((100vw - 0px) / 1440)); } }
+    @media screen and (min-width: 1440px) {
       :root {
         --theme-button-font-size-diff: 1px; } }
   .editor-styles-wrapper :root {
@@ -531,16 +533,18 @@
   .editor-styles-wrapper .c-separator__arrow--right {
     border-right-color: currentColor;
     border-left: 0; }
-  .editor-styles-wrapper .wp-block-separator.is-style-simple .c-separator:after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: var(--separator-line-thickness);
-    background: currentColor; }
-  .editor-styles-wrapper .wp-block-separator.is-style-simple .c-separator__arrow,
-  .editor-styles-wrapper .wp-block-separator.is-style-simple .c-separator__symbol,
-  .editor-styles-wrapper .wp-block-separator.is-style-simple .c-separator__line {
-    display: none; }
+  .editor-styles-wrapper .wp-block-separator.is-style-simple {
+    width: 100%; }
+    .editor-styles-wrapper .wp-block-separator.is-style-simple .c-separator:after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: var(--separator-line-thickness);
+      background: currentColor; }
+    .editor-styles-wrapper .wp-block-separator.is-style-simple .c-separator__arrow,
+    .editor-styles-wrapper .wp-block-separator.is-style-simple .c-separator__symbol,
+    .editor-styles-wrapper .wp-block-separator.is-style-simple .c-separator__line {
+      display: none; }
   .editor-styles-wrapper .wp-block-separator.is-style-decorative .c-separator__arrow,
   .editor-styles-wrapper .wp-block-separator.is-style-decorative .c-separator__line {
     display: none; }
@@ -552,8 +556,8 @@
   --theme-body-font-size: calc( var(--theme-minimum-font-size) + var(--theme-body-font-size-diff) ); }
   @media screen and (min-width: 0px) {
     :root {
-      --theme-body-font-size-diff: calc(0px + 0 * ((100vw - 0px) / 1200)); } }
-  @media screen and (min-width: 1200px) {
+      --theme-body-font-size-diff: calc(0px + 0 * ((100vw - 0px) / 1440)); } }
+  @media screen and (min-width: 1440px) {
     :root {
       --theme-body-font-size-diff: 0px; } }
 
@@ -563,8 +567,8 @@
   --theme-content-font-size: calc( var(--theme-minimum-font-size) + var(--theme-content-font-size-diff) ); }
   @media screen and (min-width: 0px) {
     :root {
-      --theme-content-font-size-diff: calc(0px + 2 * ((100vw - 0px) / 1200)); } }
-  @media screen and (min-width: 1200px) {
+      --theme-content-font-size-diff: calc(0px + 2 * ((100vw - 0px) / 1440)); } }
+  @media screen and (min-width: 1440px) {
     :root {
       --theme-content-font-size-diff: 2px; } }
 
@@ -577,8 +581,8 @@
   --theme-huge-font-size: calc( var(--theme-minimum-font-size) + var(--theme-huge-font-size-diff) ); }
   @media screen and (min-width: 0px) {
     :root {
-      --theme-huge-font-size-diff: calc(0px + 99 * ((100vw - 0px) / 1200)); } }
-  @media screen and (min-width: 1200px) {
+      --theme-huge-font-size-diff: calc(0px + 99 * ((100vw - 0px) / 1440)); } }
+  @media screen and (min-width: 1440px) {
     :root {
       --theme-huge-font-size-diff: 99px; } }
 
@@ -591,8 +595,8 @@
   --theme-display-font-size: calc( var(--theme-minimum-font-size) + var(--theme-display-font-size-diff) ); }
   @media screen and (min-width: 0px) {
     :root {
-      --theme-display-font-size-diff: calc(0px + 84 * ((100vw - 0px) / 1200)); } }
-  @media screen and (min-width: 1200px) {
+      --theme-display-font-size-diff: calc(0px + 84 * ((100vw - 0px) / 1440)); } }
+  @media screen and (min-width: 1440px) {
     :root {
       --theme-display-font-size-diff: 84px; } }
 
@@ -605,8 +609,8 @@
   --theme-heading-1-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-1-font-size-diff) ); }
   @media screen and (min-width: 0px) {
     :root {
-      --theme-heading-1-font-size-diff: calc(0px + 50 * ((100vw - 0px) / 1200)); } }
-  @media screen and (min-width: 1200px) {
+      --theme-heading-1-font-size-diff: calc(0px + 50 * ((100vw - 0px) / 1440)); } }
+  @media screen and (min-width: 1440px) {
     :root {
       --theme-heading-1-font-size-diff: 50px; } }
 
@@ -619,8 +623,8 @@
   --theme-heading-2-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-2-font-size-diff) ); }
   @media screen and (min-width: 0px) {
     :root {
-      --theme-heading-2-font-size-diff: calc(0px + 24 * ((100vw - 0px) / 1200)); } }
-  @media screen and (min-width: 1200px) {
+      --theme-heading-2-font-size-diff: calc(0px + 24 * ((100vw - 0px) / 1440)); } }
+  @media screen and (min-width: 1440px) {
     :root {
       --theme-heading-2-font-size-diff: 24px; } }
 
@@ -633,8 +637,8 @@
   --theme-heading-3-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-3-font-size-diff) ); }
   @media screen and (min-width: 0px) {
     :root {
-      --theme-heading-3-font-size-diff: calc(0px + 16 * ((100vw - 0px) / 1200)); } }
-  @media screen and (min-width: 1200px) {
+      --theme-heading-3-font-size-diff: calc(0px + 16 * ((100vw - 0px) / 1440)); } }
+  @media screen and (min-width: 1440px) {
     :root {
       --theme-heading-3-font-size-diff: 16px; } }
 
@@ -647,8 +651,8 @@
   --theme-heading-4-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-4-font-size-diff) ); }
   @media screen and (min-width: 0px) {
     :root {
-      --theme-heading-4-font-size-diff: calc(0px + 8 * ((100vw - 0px) / 1200)); } }
-  @media screen and (min-width: 1200px) {
+      --theme-heading-4-font-size-diff: calc(0px + 8 * ((100vw - 0px) / 1440)); } }
+  @media screen and (min-width: 1440px) {
     :root {
       --theme-heading-4-font-size-diff: 8px; } }
 
@@ -660,8 +664,8 @@
   --theme-heading-5-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-5-font-size-diff) ); }
   @media screen and (min-width: 0px) {
     :root {
-      --theme-heading-5-font-size-diff: calc(0px + 1 * ((100vw - 0px) / 1200)); } }
-  @media screen and (min-width: 1200px) {
+      --theme-heading-5-font-size-diff: calc(0px + 1 * ((100vw - 0px) / 1440)); } }
+  @media screen and (min-width: 1440px) {
     :root {
       --theme-heading-5-font-size-diff: 1px; } }
 
@@ -672,8 +676,8 @@
   --theme-intro-font-size: calc( var(--theme-minimum-font-size) + var(--theme-intro-font-size-diff) ); }
   @media screen and (min-width: 0px) {
     :root {
-      --theme-intro-font-size-diff: calc(0px + 8 * ((100vw - 0px) / 1200)); } }
-  @media screen and (min-width: 1200px) {
+      --theme-intro-font-size-diff: calc(0px + 8 * ((100vw - 0px) / 1440)); } }
+  @media screen and (min-width: 1440px) {
     :root {
       --theme-intro-font-size-diff: 8px; } }
 
@@ -1314,7 +1318,7 @@
     .editor-styles-wrapper .nova-food-menu-item__title:before {
       border-width: .15em; }
   .editor-styles-wrapper .item-title {
-    background-color: var(--theme-background-color); }
+    background-color: var(--theme-sm-light-1); }
   .editor-styles-wrapper .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button {
     background: linear-gradient(to right, var(--sm-light-1) 50%, var(--sm-dark-1) 50%);
     background-size: 200% 100%;
@@ -1422,7 +1426,7 @@
     --current-text-transform: var(--theme-heading-5-text-transform);
     font-style: normal; }
   .editor-styles-wrapper[class] {
-    background-color: var(--theme-background-color);
+    background-color: var(--theme-sm-light-1);
     color: var(--theme-sm-dark-2);
     font-family: var(--theme-body-font-family);
     font-size: var(--theme-content-font-size);
@@ -1635,9 +1639,9 @@
     text-align: right; }
 
 /* Post Title Block */
-.editor-post-title__block {
+.post-type-page .editor-post-title__block {
   max-width: none; }
-  .editor-post-title__block .editor-post-title__input {
+  .post-type-page .editor-post-title__block .editor-post-title__input {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     font-size: 13px;
     font-weight: normal;

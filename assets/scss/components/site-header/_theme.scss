@@ -60,10 +60,6 @@ $site-header-transition-speed: .15s;
         }
     }
 
-    @media only screen and (max-width: 1000px) {
-        @include remove-page-padding-top;
-    }
-
     .#{$site-header-fixed-body-class} {
         @include remove-page-padding-top;
     }
@@ -73,19 +69,21 @@ $site-header-transition-speed: .15s;
 }
 
 // Inversed site header styles
-@media only screen and (min-width: 1000px) {
 
-    @if $enable-site-header-transparent == true and
-        $enable-site-header-fixed == true {
+@if $enable-site-header-transparent == true and
+    $enable-site-header-fixed == true {
 
-        @if $enable-site-header-inversed == true {
+    @if $enable-site-header-inversed == true {
 
+        @media only screen and (min-width: 1000px) {
             .site-header--fixed:not(.site-header--normal) {
                 color: var(--theme-sm-light-1);
             }
+        }
 
-        } @else {
+    } @else {
 
+        @media only screen and (min-width: 1000px) {
             .#{$site-header-fixed-body-class} .site-header:not(.site-header--scrolled) {
                 color: var(--theme-sm-light-1);
 
@@ -99,13 +97,21 @@ $site-header-transition-speed: .15s;
                 background-color: var(--theme-sm-light-1);
             }
         }
+
+        @media not screen and (min-width: 1000px) {
+            .#{$site-header-fixed-body-class} .site-header--mobile:not(.site-header--scrolled),
+            .#{$site-header-fixed-body-class} .c-menu-toggle {
+                color: var(--theme-sm-light-1);
+            }
+        }
     }
+}
 
-    @if $enable-site-header-transparent == true and
-        $enable-site-header-fixed == false {
+@if $enable-site-header-transparent == true and
+    $enable-site-header-fixed == false {
 
+    @media only screen and (min-width: 1000px) {
         body.#{$site-header-fixed-body-class} {
-
             .site-header {
                 position: absolute;
                 color: var(--theme-sm-light-1);
@@ -113,20 +119,21 @@ $site-header-transition-speed: .15s;
             }
         }
     }
+}
 
-    @if $enable-site-header-transparent == false {
-
+@if $enable-site-header-transparent == false {
+    @media only screen and (min-width: 1000px) {
         .site-header {
             background-color: var(--theme-sm-light-1);
         }
     }
+}
 
-    @if $enable-site-header-transparent == false and
-        $enable-site-header-fixed == true {
-    }
+@if $enable-site-header-transparent == false and
+    $enable-site-header-fixed == true {
+}
 
-    @if $enable-site-header-transparent == false and
-        $enable-site-header-fixed == false {
-        // nothing
-    }
+@if $enable-site-header-transparent == false and
+    $enable-site-header-fixed == false {
+    // nothing
 }

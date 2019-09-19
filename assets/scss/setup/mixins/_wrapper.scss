@@ -1,7 +1,8 @@
 @mixin wrapper-side-spacing {
+    --theme-wrapper-side-spacing: var(--theme-spacing-normal);
+
     padding-left: var(--theme-wrapper-side-spacing);
     padding-right: var(--theme-wrapper-side-spacing);
-
 
     > .alignfull {
         margin-left: calc( -1 * var(--theme-wrapper-side-spacing) );
