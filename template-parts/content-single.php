@@ -1,14 +1,17 @@
 <?php
 /**
- * Template part for displaying posts
+ * Template part for displaying single posts
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Nova
+ * @package Rosa2
  */
 
-$classes = array();
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
+$classes = array();
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( join( ' ', $classes ) ); ?>>
@@ -18,7 +21,7 @@ $classes = array();
 			<?php get_template_part( 'template-parts/entry-meta' ); ?>
 			<?php the_title( '<h1 class="entry-title has-text-align-center">', '</h1>' ); ?>
             <div class="has-normal-font-size">
-				<?php rosa_the_separator( 'decorative' ); ?>
+				<?php rosa2_the_separator( 'decorative' ); ?>
             </div>
         </header>
 		<?php if ( has_post_thumbnail() ) { ?>

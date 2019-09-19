@@ -2,7 +2,7 @@
 /**
  * Functions which enhance the theme by hooking into WordPress
  *
- * @package Nova
+ * @package Rosa2
  */
 
 /**
@@ -11,7 +11,7 @@
  * @param array $classes Classes for the body element.
  * @return array
  */
-function novablocks_body_classes( $classes ) {
+function rosa2_body_classes( $classes ) {
 
 	// Adds a class of hfeed to non-singular pages.
 	if ( ! is_singular() ) {
@@ -23,20 +23,20 @@ function novablocks_body_classes( $classes ) {
 		$classes[] = 'no-sidebar';
 	}
 
-	if ( rosa_header_should_be_fixed() ) {
+	if ( rosa2_header_should_be_fixed() ) {
 		$classes[] = 'has-fixed-site-header';
 	}
 
 	return $classes;
 }
-add_filter( 'body_class', 'novablocks_body_classes' );
+add_filter( 'body_class', 'rosa2_body_classes' );
 
 /**
  * Add a pingback url auto-discovery header for single posts, pages, or attachments.
  */
-function novablocks_pingback_header() {
+function rosa2_pingback_header() {
 	if ( is_singular() && pings_open() ) {
 		printf( '<link rel="pingback" href="%s">', esc_url( get_bloginfo( 'pingback_url' ) ) );
 	}
 }
-add_action( 'wp_head', 'novablocks_pingback_header' );
+add_action( 'wp_head', 'rosa2_pingback_header' );
