@@ -56,6 +56,26 @@ function rosa2_add_customify_section( $config ) {
 		'content_section' => array(
 			'title'   => esc_html__( 'Content', '__theme_txtd' ),
 			'options' => array(
+				'display_categories_on_archive' => array(
+					'type' => 'checkbox',
+					'label' => esc_html__( 'Display Categories on Archives', '__theme_txtd' ),
+					'default' => true,
+				),
+				'display_tags_on_archive' => array(
+					'type' => 'checkbox',
+					'label' => esc_html__( 'Display Tags on Archives', '__theme_txtd' ),
+					'default' => false,
+				),
+				'display_date_on_archive' => array(
+					'type' => 'checkbox',
+					'label' => esc_html__( 'Display Date on Archives', '__theme_txtd' ),
+					'default' => true,
+				),
+				'display_author_on_archive' => array(
+					'type' => 'checkbox',
+					'label' => esc_html__( 'Display Author on Archives', '__theme_txtd' ),
+					'default' => false,
+				),
 				'separator_symbol' => array(
 					'type'    => 'radio_html',
 					'label'   => esc_html__( 'Separator Symbol', '__theme_txtd' ),
