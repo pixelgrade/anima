@@ -35,6 +35,12 @@ export default class Hero {
 
 	update() {
 		this.box = this.element.getBoundingClientRect();
+		this.view = {
+			x: this.box.x,
+			y: this.box.y + scrollY,
+			width: this.box.width,
+			height: this.box.height,
+		};
 	}
 
 	updateOnScroll() {
@@ -44,7 +50,7 @@ export default class Hero {
 		const length = windowHeight * 0.5;
 		const middleMin = 0;
 		const middleMax = scrollHeight - windowHeight - length * 0.5;
-		const middle = this.box.y + ( this.box.height - windowHeight ) * 0.5;
+		const middle = this.view.y + ( this.box.height - windowHeight ) * 0.5;
 		const middleMid = Math.max( middleMin, Math.min( middle, middleMax ) );
 
 		this.start = middleMid - length * 0.5;

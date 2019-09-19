@@ -14,9 +14,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( 'post' === get_post_type() ) { ?>
 	<div class="entry-meta">
 		<?php
-		rosa2_categories_posted_in();
-		rosa2_tags_posted_in();
-		rosa2_posted_on();
-		?>
+
+		if ( pixelgrade_option( 'display_categories_on_archive' ) ) {
+            rosa2_categories_posted_in();
+		}
+
+        if ( pixelgrade_option( 'display_tags_on_archive' ) ) {
+            rosa2_tags_posted_in();
+		}
+
+    	if ( pixelgrade_option( 'display_date_on_archive' ) ) {
+		    rosa2_posted_on();
+    	}
+
+    	if ( pixelgrade_option( 'display_author_on_archive' ) ) {
+		    rosa2_posted_by();
+	    }
+        ?>
 	</div><!-- .entry-meta -->
-<?php }
+<?php
+}
