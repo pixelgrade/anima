@@ -60,4 +60,15 @@
     @import "mobile-transitions";
 }
 
+@media only screen and (min-width: 1000px) {
+    .site-header__inner-container {
+        margin-top: 0 !important;
+    }
+}
+
+.site-header,
+.site-header--mobile {
+    @include wp-offset(top, 0, true);
+}
+
 @import "theme";

@@ -8,7 +8,8 @@ class GlobalService {
 		const updateProps = this.updateProps.bind( this );
 		const updateScroll = this.updateScroll.bind( this );
 		document.addEventListener('DOMContentLoaded', updateProps );
-		window.addEventListener( 'resize load', updateProps );
+		window.addEventListener( 'resize', updateProps );
+		window.addEventListener( 'load', updateProps );
 		window.addEventListener( 'scroll', updateScroll );
 		window.requestAnimationFrame( this.renderLoop.bind( this ) );
 	}

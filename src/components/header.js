@@ -1,4 +1,5 @@
 import GlobalService from "./globalService";
+import $ from 'jquery';
 
 const defaults = {
 	offsetTargetElement: null,
@@ -8,33 +9,65 @@ class Header {
 
 	constructor( element, args ) {
 		this.element = element;
-		this.inversed = ! jQuery( this.element ).hasClass( 'site-header--normal' );
+
 		this.options = Object.assign( {}, defaults, args );
+
+		this.$header = $( this.element );
+		this.$toggle = $( '.c-menu-toggle' );
+		this.$toggleWrap = $( '.c-menu-toggle__wrap' );
+
+		this.inversed = ! this.$header.hasClass( 'site-header--normal' );
 
 		this.offset = 0;
 		this.scrollOffset = 0;
+		this.mobileHeaderHeight = 0;
 
-		this.mobileMenuInitialized = false;
+		this.createMobileHeader();
 
-		this.update();
-		this.registerUpdate();
-	}
+		this.onResize();
+		GlobalService.registerUpdate( this.onResize.bind( this ) );
 
-	registerUpdate() {
-		GlobalService.registerUpdate( () => {
-			this.update();
-			this.handleMobileMenuMarkup();
-		} );
+		this.$header.addClass( 'site-header--fixed site-header--ready' );
 	}
 
 	update() {
+		this.updatePageOffset();
+		this.updateHeaderOffset();
+		this.updateMobileHeaderOffset();
+	}
+
+	onResize() {
 		this.box = this.element.getBoundingClientRect();
 		this.scrollOffset = this.getScrollOffset();
-		this.element.style.marginTop = this.offset + 'px';
-		this.updatePageOffset();
-		this.updateMenuToggleOffset();
 
-		jQuery( this.element ).addClass( 'site-header--fixed site-header--ready' );
+
+		const mobileHeaderHeight = this.$mobileHeader.css( 'height', '' ).outerHeight();
+		const toggleHeight = this.$toggleWrap.css( 'height', '' ).outerHeight();
+
+		this.mobileHeaderHeight = Math.max( mobileHeaderHeight, toggleHeight );
+
+		this.updateMobileHeaderOffset();
+	}
+
+	updateHeaderOffset() {
+		this.element.style.marginTop = this.offset + 'px';
+	}
+
+	updateMobileHeaderOffset() {
+
+		this.$mobileHeader.css( {
+			height: this.mobileHeaderHeight,
+			marginTop: this.offset + 'px',
+		} );
+
+		$( '.site-header__inner-container' ).css( {
+			marginTop: this.mobileHeaderHeight
+		} );
+
+		this.$toggleWrap.css( {
+			height: this.mobileHeaderHeight,
+			marginTop: this.offset + 'px',
+		} );
 	}
 
 	getScrollOffset() {
@@ -56,47 +89,30 @@ class Header {
 		page.style.paddingTop = this.box.height + this.offset + 'px';
 	}
 
-	updateMenuToggleOffset() {
-		if ( ! this.mobileMenuInitialized ) {
+	createMobileHeader() {
+
+		if ( this.createdMobileHeader ) {
 			return;
 		}
 
-		const menuToggle = document.querySelector('.c-menu-toggle__wrap');
-		const headerMobile = document.querySelector('.site-header--mobile');
-		menuToggle.style.marginTop = this.offset + 'px';
-		headerMobile.style.marginTop = this.offset + 'px';
-	}
+		this.$mobileHeader = $( '<div class="site-header--mobile">' );
 
-	handleMobileMenuMarkup() {
+		$( '.c-branding' ).clone().appendTo( this.$mobileHeader );
+		$( '.menu-item--cart' ).clone().appendTo( this.$mobileHeader );
 
-		const mobileMenuMarkup = document.createElement('div');
-		mobileMenuMarkup.classList.add('site-header--mobile');
-		const location = document.querySelector('.c-menu-toggle');
-		const branding = document.querySelector('.c-branding');
-		const shopItem = document.querySelector('.menu-item--cart');
-
-
-			const cloneBranding = jQuery(branding).clone();
-			const cloneShop = jQuery(shopItem).clone();
-
-			jQuery(mobileMenuMarkup).append(jQuery(cloneBranding));
-			jQuery(mobileMenuMarkup).append(jQuery(cloneShop));
-
-
-		this.mobileMenuInitialized = true;
-
-		location.after(mobileMenuMarkup);
+		this.$mobileHeader.insertAfter( this.$toggle );
+		this.createdMobileHeader = true;
 	}
 
 	render( inversed ) {
 		const { scrollY } = GlobalService.getProps();
 
 		if ( inversed !== this.inversed ) {
-			jQuery( this.element ).toggleClass( 'site-header--normal', ! inversed );
+			this.$header.toggleClass( 'site-header--normal', ! inversed );
 			this.inversed = inversed;
 		}
 
-		jQuery( this.element ).toggleClass( 'site-header--scrolled', scrollY > this.scrollOffset );
+		this.$header.toggleClass( 'site-header--scrolled', scrollY > this.scrollOffset );
 	}
 }
 

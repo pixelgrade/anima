@@ -12,8 +12,6 @@
     background: var(--sm-dark-1);
     color: var(--sm-light-1);
 
-    @include wp-offset(top, 0, true);
-
     .c-menu-toggle__checkbox ~ & {
         display: block;
     }
@@ -28,12 +26,6 @@
     }
 }
 
-.site-header__inner-container[class] {
-    margin-top: 3.5em;
-    border-top: 0;
-    padding: 0;
-}
-
 .site-header__content {
     display: flex;
     flex-direction: column;
@@ -41,10 +33,6 @@
     .site-branding {
         padding: 1em;
         order: -1;
-    }
-
-    @include specific(2) {
-        margin: 0;
     }
 }
 
@@ -115,20 +103,19 @@
 
     color: var(--theme-sm-light-1);
 
-    @include wp-offset(top, 0, true);
-
     .menu-item--cart {
-        position: absolute;
-
         display: flex;
-        right: var(--theme-spacing);
+
+        position: absolute;
         top: 50%;
+        right: var(--theme-spacing);
+
         transform: translateY(-50%);
+
         a {
             color: currentColor;
         }
     }
-    
 }
 
 
