@@ -5,11 +5,21 @@
 }
 
 .site-logo {
+
     img {
         display: block;
     }
 }
 
+.site-info {
+    text-align: center;
+}
+
 .site-logo + .site-info {
-    margin-left: 1em;
+    text-align: left;
+
+    .site-title,
+    .site-description {
+        margin-left: 1em;
+    }
 }
