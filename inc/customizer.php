@@ -2,7 +2,7 @@
 /**
  * Rosa 2 Theme Customizer.
  *
- * @package Rosa 2
+ * @package Rosa2
  */
 
 /**
@@ -10,7 +10,7 @@
  *
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.
  */
-function rosa_customize_register( $wp_customize ) {
+function rosa2_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
@@ -18,11 +18,11 @@ function rosa_customize_register( $wp_customize ) {
 	if ( isset( $wp_customize->selective_refresh ) ) {
 		$wp_customize->selective_refresh->add_partial( 'blogname', array(
 			'selector' => '.site-title',
-			'render_callback' => 'rosa_customize_partial_blogname',
+			'render_callback' => 'rosa2_customize_partial_blogname',
 		) );
 		$wp_customize->selective_refresh->add_partial( 'blogdescription', array(
 			'selector' => '.site-description',
-			'render_callback' => 'rosa_customize_partial_blogdescription',
+			'render_callback' => 'rosa2_customize_partial_blogdescription',
 		) );
 	}
 
@@ -30,7 +30,7 @@ function rosa_customize_register( $wp_customize ) {
 	$wp_customize->add_setting('rosa_transparent_logo', array(
 		'theme_supports' => array( 'custom-logo' ),
 		'transport'      => 'postMessage',
-		'sanitize_callback' => 'rosa_sanitize_transparent_logo',
+		'sanitize_callback' => 'rosa2_sanitize_transparent_logo',
 	) );
 
 	// Add a control to upload the logo
@@ -59,17 +59,17 @@ function rosa_customize_register( $wp_customize ) {
 	$wp_customize->selective_refresh->add_partial( 'rosa_transparent_logo', array(
 		'settings'            => array( 'rosa_transparent_logo' ),
 		'selector'            => '.custom-logo-link--transparent',
-		'render_callback'     => 'rosa_customizer_partial_transparent_logo',
+		'render_callback'     => 'rosa2_customizer_partial_transparent_logo',
 		'container_inclusive' => true,
 	) );
 }
-add_action( 'customize_register', 'rosa_customize_register' );
+add_action( 'customize_register', 'rosa2_customize_register' );
 
 /* ============================
  * Customizer sanitization
  * ============================ */
 
-function rosa_sanitize_transparent_logo( $input ) {
+function rosa2_sanitize_transparent_logo( $input ) {
 	return $input;
 }
 
@@ -80,22 +80,22 @@ function rosa_sanitize_transparent_logo( $input ) {
 /**
  * Render the site title for the selective refresh partial.
  *
- * @see rosa_customize_register()
+ * @see rosa2_customize_register()
  *
  * @return void
  */
-function rosa_customize_partial_blogname() {
+function rosa2_customize_partial_blogname() {
 	return get_bloginfo( 'name', 'display' );
 }
 
 /**
  * Render the site tagline for the selective refresh partial.
  *
- * @see rosa_customize_register()
+ * @see rosa2_customize_register()
  *
  * @return void
  */
-function rosa_customize_partial_blogdescription() {
+function rosa2_customize_partial_blogdescription() {
 	return get_bloginfo( 'description', 'display' );
 }
 
@@ -112,6 +112,6 @@ function rosa_customize_partial_blogdescription() {
  *
  * @return string Custom logo transparent.
  */
-function rosa_customizer_partial_transparent_logo() {
-	return rosa_get_custom_logo_transparent();
+function rosa2_customizer_partial_transparent_logo() {
+	return rosa2_get_custom_logo_transparent();
 }

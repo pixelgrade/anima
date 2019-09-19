@@ -1,4 +1,112 @@
 <?php
+/**
+ * Rosa2 functions and definitions
+ *
+ * @package Rosa2
+ */
+
+if ( ! function_exists( 'rosa2_setup' ) ) {
+
+	/**
+	 * Sets up theme defaults and registers support for various WordPress features.
+	 *
+	 * Note that this function is hooked into the after_setup_theme hook, which
+	 * runs before the init hook. The init hook is too late for some features, such
+	 * as indicating support for post thumbnails.
+	 */
+	function rosa2_setup() {
+		/**
+		 * Make theme available for translation.
+		 * Translations can be filed in the /languages/ directory.
+		 * If you're building a theme based on Nova, use a find and replace
+		 * to change '__theme_txtd' to the name of your theme in all the template files.
+		 */
+		load_theme_textdomain( '__theme_txtd', get_template_directory() . '/languages' );
+
+		// Add default posts and comments RSS feed links to head.
+		add_theme_support( 'automatic-feed-links' );
+
+		/**
+		 * Let WordPress manage the document title.
+		 * By adding theme support, we declare that this theme does not use a
+		 * hard-coded <title> tag in the document head, and expect WordPress to
+		 * provide it for us.
+		 */
+		add_theme_support( 'title-tag' );
+
+		/**
+		 * Enable support for Post Thumbnails on posts only.
+		 *
+		 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+		 */
+		remove_theme_support( 'post-thumbnails' );
+		add_theme_support( 'post-thumbnails', array( 'post' ) );
+
+		/**
+		 * Switch default core markup for search form, comment form, and comments
+		 * to output valid HTML5.
+		 */
+		add_theme_support( 'html5', array(
+			'search-form',
+			'comment-form',
+			'comment-list',
+			'gallery',
+			'caption',
+		) );
+
+		// This theme uses wp_nav_menu() in one location.
+		register_nav_menus( array(
+			'primary'   => esc_html__( 'Primary Menu', '__theme_txtd' ),
+			'secondary' => esc_html__( 'Secondary Menu', '__theme_txtd' ),
+		) );
+
+		// Add theme support for selective refresh for widgets.
+		add_theme_support( 'customize-selective-refresh-widgets' );
+
+		/**
+		 * Add support for core custom logo.
+		 *
+		 * @link https://codex.wordpress.org/Theme_Logo
+		 */
+		add_theme_support( 'custom-logo', array(
+			'height'      => 250,
+			'width'       => 250,
+			'flex-width'  => true,
+			'flex-height' => true,
+			'header-text' => array(
+				'site-title',
+				'site-description',
+			)
+		) );
+		add_image_size( 'rosa2-site-logo', 250, 250, false );
+
+		add_theme_support( 'align-wide' );
+
+		/**
+		 * Add support for Style Manager section in Customizer.
+		 */
+		add_theme_support( 'customizer_style_manager' );
+
+		/**
+		 * Add theme support for responsive embeds
+		 */
+		add_theme_support( 'responsive-embeds' );
+
+		add_theme_support( 'disable-custom-font-sizes' );
+		add_theme_support( 'editor-font-sizes', array() );
+
+		/**
+		 * Enable support for the Style Manager Customizer section (via Customify).
+		 */
+		add_theme_support( 'customizer_style_manager' );
+
+		add_theme_support( 'woocommerce' );
+		add_theme_support( 'wc-product-gallery-zoom' );
+		add_theme_support( 'wc-product-gallery-lightbox' );
+		add_theme_support( 'wc-product-gallery-slider' );
+	}
+}
+add_action( 'after_setup_theme', 'rosa2_setup' );
 
 function rosa2_deregister_gutenberg_styles() {
 	// Overwrite Core block styles with empty styles.
@@ -26,7 +134,7 @@ function rosa2_enqueue_theme_block_editor_assets() {
 add_action( 'enqueue_block_editor_assets', 'rosa2_enqueue_theme_block_editor_assets' );
 
 function rosa2_scripts() {
-	wp_enqueue_style( 'rosa2-style', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_style( 'rosa2-style', get_template_directory_uri() . '/style.css', array(), wp_get_theme()->get( 'Version' ) );
 	wp_enqueue_style( 'rosa2-theme-styles', get_template_directory_uri() . '/dist/js/editor.blocks.css' );
 
 	wp_register_script( 'tween-max', '//cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js', array(), '2.1.3' );
@@ -37,104 +145,14 @@ function rosa2_scripts() {
 	}
 
 	wp_enqueue_script( 'rosa2-woocommerce', get_template_directory_uri() . '/dist/js/woocommerce.js', array( 'jquery' ) );
-
 	wp_localize_script( 'rosa2-woocommerce', 'pixelgradeWooCommerceStrings', array(
-		'adding_to_cart' => esc_html__( 'Adding...', '__components_txtd' ),
-		'added_to_cart' => esc_html__( 'Added!', '__components_txtd' ),
+		'adding_to_cart' => esc_html__( 'Adding...', '__theme_txtd' ),
+		'added_to_cart' => esc_html__( 'Added!', '__theme_txtd' ),
 	) );
 
 	wp_deregister_style('wc-block-style');
 }
 add_action( 'wp_enqueue_scripts', 'rosa2_scripts', 10 );
-
-function rosa2_setup() {
-	/**
-	 * Make theme available for translation.
-	 * Translations can be filed in the /languages/ directory.
-	 * If you're building a theme based on Nova, use a find and replace
-	 * to change '__theme_txtd' to the name of your theme in all the template files.
-	 */
-	load_theme_textdomain( '__theme_txtd', get_template_directory() . '/languages' );
-
-	// Add default posts and comments RSS feed links to head.
-	add_theme_support( 'automatic-feed-links' );
-
-	/**
-	 * Let WordPress manage the document title.
-	 * By adding theme support, we declare that this theme does not use a
-	 * hard-coded <title> tag in the document head, and expect WordPress to
-	 * provide it for us.
-	 */
-	add_theme_support( 'title-tag' );
-
-	/**
-	 * Enable support for Post Thumbnails on posts and pages.
-	 *
-	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-	 */
-	remove_theme_support( 'post-thumbnails' );
-	add_theme_support( 'post-thumbnails', array( 'post' ) );
-
-	/**
-	 * Switch default core markup for search form, comment form, and comments
-	 * to output valid HTML5.
-	 */
-	add_theme_support( 'html5', array(
-		'search-form',
-		'comment-form',
-		'comment-list',
-		'gallery',
-		'caption',
-	) );
-
-	// This theme uses wp_nav_menu() in one location.
-	register_nav_menus( array(
-		'primary' => esc_html__( 'Primary Menu', '__theme_txtd' ),
-		'secondary' => esc_html__( 'Secondary Menu', '__theme_txtd' ),
-	) );
-
-	// Add theme support for selective refresh for widgets.
-	add_theme_support( 'customize-selective-refresh-widgets' );
-
-	/**
-	 * Add support for core custom logo.
-	 *
-	 * @link https://codex.wordpress.org/Theme_Logo
-	 */
-	add_theme_support( 'custom-logo', array(
-		'height'      => 250,
-		'width'       => 250,
-		'flex-width'  => true,
-		'flex-height' => true,
-		'header-text' => array(
-			'site-title',
-			'site-description',
-		)
-	) );
-
-	add_theme_support( 'align-wide' );
-
-	/**
-	 * Add support for Style Manager section in Customizer.
-	 */
-	add_theme_support( 'customizer_style_manager' );
-
-	/**
-	 * Add theme support for responsive embeds
-	 */
-	add_theme_support( 'responsive-embeds' );
-
-	add_theme_support( 'disable-custom-font-sizes' );
-	add_theme_support( 'editor-font-sizes', array() );
-
-	add_theme_support( 'customizer_style_manager' );
-
-	add_theme_support( 'woocommerce' );
-	add_theme_support( 'wc-product-gallery-zoom');
-	add_theme_support( 'wc-product-gallery-lightbox' );
-	add_theme_support( 'wc-product-gallery-slider' );
-}
-add_action( 'after_setup_theme', 'rosa2_setup' );
 
 /* Automagical updates */
 function wupdates_check_JxLn7( $transient ) {
@@ -221,7 +239,7 @@ function wupdates_add_id_JxLn7( $ids = array() ) {
 
 	// Now add the predefined details about this product
 	// Do not tamper with these please!!!
-	$ids[ $slug ] = array( 'name' => 'Rosa 2', 'slug' => 'rosa-2', 'id' => 'JxLn7', 'type' => 'theme', 'digest' => '6e72e775343f8569b952de0e4bb32c55', );
+	$ids[ $slug ] = array( 'name' => 'Rosa2', 'slug' => 'rosa2', 'id' => 'JxLn7', 'type' => 'theme', 'digest' => '9e63c805181de3f54425520eb92861b8', );
 
 	return $ids;
 }

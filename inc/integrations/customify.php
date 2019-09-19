@@ -8,8 +8,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+add_filter( 'customify_filter_fields', 'rosa2_add_customify_options', 11, 1 );
+
 add_filter( 'customify_filter_fields', 'rosa2_add_customify_section', 20, 1 );
-add_filter( 'customify_filter_fields', 'rosa2_add_customify_style_manager_section', 20, 1 );
+add_filter( 'customify_filter_fields', 'rosa2_add_customify_style_manager_section', 12, 1 );
 
 
 define( 'ROSA2_THEME_COLOR_PRIMARY', '#DDAB5D' ); // gold
@@ -33,7 +35,6 @@ function rosa2_add_customify_options( $config ) {
 
 	return $config;
 }
-add_filter( 'customify_filter_fields', 'rosa2_add_customify_options', 10, 1 );
 
 function rosa2_add_customify_section( $config ) {
 
@@ -212,6 +213,10 @@ function rosa2_add_customify_section( $config ) {
 }
 
 function rosa2_add_customify_style_manager_section( $options ) {
+	// If the theme hasn't declared support for style manager, bail.
+	if ( ! current_theme_supports( 'customizer_style_manager' ) ) {
+		return $options;
+	}
 
 	if ( ! isset( $options['sections']['style_manager_section'] ) ) {
 		$options['sections']['style_manager_section'] = array();
@@ -305,5 +310,4 @@ function rosa2_add_default_color_palette( $color_palettes ) {
 
 	return $color_palettes;
 }
-
 add_filter( 'customify_get_color_palettes', 'rosa2_add_default_color_palette' );

@@ -1,8 +1,17 @@
 <?php
+/**
+ * Template part for displaying the site header.
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ *
+ * @package Rosa2
+ */
 
-?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+} ?>
 
-<?php get_template_part( 'template-parts/menu-toggle' ); ?>
+<? get_template_part( 'template-parts/menu-toggle' ); ?>
 
 <header id="masthead" class="site-header site-header--logo-center">
     <div class="site-header__inner-container">
@@ -14,7 +23,9 @@
 		            'menu_id'        => 'secondary-menu',
 	            ) ); ?>
             </nav><!-- #site-navigation -->
+
 			<?php get_template_part( 'template-parts/site-branding' ); ?>
+
             <nav class="wp-block-novablocks-navigation site-header__menu--primary">
 	            <?php wp_nav_menu( array(
 		            'container'      => false,

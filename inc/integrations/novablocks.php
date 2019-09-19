@@ -1,7 +1,15 @@
 <?php
+/**
+ * Handle the Nova Blocks integration logic.
+ */
 
-if ( ! function_exists( 'rosa_alter_novablocks_hero_settings' ) ) {
-	function rosa_alter_novablocks_hero_settings( $settings ) {
+// If this file is called directly, abort.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+if ( ! function_exists( 'rosa2_alter_novablocks_hero_settings' ) ) {
+	function rosa2_alter_novablocks_hero_settings( $settings ) {
 		$settings['hero']['template'] = array(
 			array(
 				'core/separator',
@@ -33,10 +41,10 @@ if ( ! function_exists( 'rosa_alter_novablocks_hero_settings' ) ) {
 		return $settings;
 	}
 }
-add_filter( 'novablocks_block_editor_settings', 'rosa_alter_novablocks_hero_settings' );
+add_filter( 'novablocks_block_editor_settings', 'rosa2_alter_novablocks_hero_settings' );
 
-if ( ! function_exists( 'rosa_alter_novablocks_media_settings' ) ) {
-	function rosa_alter_novablocks_media_settings( $settings ) {
+if ( ! function_exists( 'rosa2_alter_novablocks_media_settings' ) ) {
+	function rosa2_alter_novablocks_media_settings( $settings ) {
 		$settings['media']['template'] = array(
 			array(
 				'novablocks/headline',
@@ -83,17 +91,17 @@ if ( ! function_exists( 'rosa_alter_novablocks_media_settings' ) ) {
 		return $settings;
 	}
 }
-add_filter( 'novablocks_block_editor_settings', 'rosa_alter_novablocks_media_settings' );
+add_filter( 'novablocks_block_editor_settings', 'rosa2_alter_novablocks_media_settings' );
 
-if ( ! function_exists( 'rosa_alter_novablocks_separator_settings' ) ) {
-	function rosa_alter_novablocks_separator_settings( $settings ) {
+if ( ! function_exists( 'rosa2_alter_novablocks_separator_settings' ) ) {
+	function rosa2_alter_novablocks_separator_settings( $settings ) {
 		if ( empty( $settings['separator'] ) ) {
 			$settings['separator'] = array();
 		}
 
-		$settings['separator']['markup'] = rosa_get_separator_markup();
+		$settings['separator']['markup'] = rosa2_get_separator_markup();
 
 		return $settings;
 	}
 }
-add_filter( 'novablocks_block_editor_settings', 'rosa_alter_novablocks_separator_settings' );
+add_filter( 'novablocks_block_editor_settings', 'rosa2_alter_novablocks_separator_settings' );

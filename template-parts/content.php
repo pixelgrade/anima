@@ -4,8 +4,12 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Nova
+ * @package Rosa2
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 $classes = array(
     'novablocks-media',
@@ -29,15 +33,15 @@ $classes[] = get_query_var( 'has_image_on_the_left' ) ? 'has-image-on-the-left' 
                         <?php
                         get_template_part( 'template-parts/entry-meta', get_post_type() );
                         the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-                        rosa_the_separator( 'decorative' );
+                        rosa2_the_separator( 'decorative' );
                         the_excerpt();
-                        rosa_the_read_more_button();
+                        rosa2_the_read_more_button();
                         ?>
                     </div>
                 </div>
                 <div class="novablocks-media__aside">
                     <div class="novablocks-media__image">
-                        <?php novablocks_post_thumbnail(); ?>
+                        <?php rosa2_post_thumbnail(); ?>
                     </div>
                 </div>
             </div>
