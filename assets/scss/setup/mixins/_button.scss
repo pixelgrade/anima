@@ -1,11 +1,11 @@
 /* Button CSS Custom Properties */
 :root {
   --theme-button-background-color: var(--theme-sm-dark-1);
-  --theme-button-color: var(--theme-sm-light-1);
+  --theme-button-text-color: var(--theme-sm-light-1);
   --theme-button-border-color: transparent;
 
   --theme-button-hover-background-color: var(--theme-sm-color-1);
-  --theme-button-hover-color: var(--theme-sm-light-1);
+  --theme-button-hover-text-color: var(--theme-sm-light-1);
   --theme-button-hover-border-color: transparent;
 
   --theme-button-border-width: 2px;
@@ -18,14 +18,10 @@
   --theme-button-transition-duration: .4s;
   --theme-button-transition-easing: #{$ease};
 
-  --theme-button-transition:
-      color var(--theme-button-transition-duration) var(--theme-button-transition-easing),
-      background-position var(--theme-button-transition-duration) var(--theme-button-transition-easing),
-      background-color 0s var(--theme-button-transition-duration) var(--theme-button-transition-easing);
+  // omg
+  --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
 
-  --theme-button-hover-transition:
-      color var(--theme-button-transition-duration) var(--theme-button-transition-easing),
-      background-position var(--theme-button-transition-duration) var(--theme-button-transition-easing);
+  --theme-button-hover-transition: var(--theme-button-transition);
 
   --theme-button-arrow-size: 1.15em;
 }
@@ -34,67 +30,77 @@
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
+
+  @include button-vars;
+
+  &:hover {
+    @include button-hover-vars;
+  }
+}
+
+@mixin button-vars {
+  --current-button-background-color: var(--theme-button-background-color);
+  --current-button-border-color: var(--theme-button-border-color);
+  --current-button-text-color: var(--theme-button-text-color);
+  --current-button-transition: var(--theme-button-transition);
+}
+
+@mixin button-hover-vars {
+  --current-button-background-color: var(--theme-button-hover-background-color);
+  --current-button-border-color: var(--theme-button-hover-border-color);
+  --current-button-text-color: var(--theme-button-hover-text-color);
+  --current-button-transition: var(--theme-button-hover-transition);
 }
 
 @mixin button-box {
   padding: var(--theme-button-padding);
-  border: var(--theme-button-border-width) solid var(--theme-button-border-color);
+  border: var(--theme-button-border-width) solid transparent;
   border-radius: var(--theme-button-border-radius);
+}
 
-  &:hover {
-    --theme-button-border-color: var(--theme-button-hover-border-color);
-  }
+@mixin button-border-color {
+  border-color: var(--current-button-border-color);
 }
 
 @mixin button-background {
-  background-color: var(--theme-button-background-color);
-
-  &:hover {
-    background-color: var(--theme-button-hover-background-color);
-    border-color: var(--theme-button-hover-border-color);
-  }
+  background-color: var(--current-button-background-color);
 }
 
 @mixin button-color {
-  color: var(--theme-button-color);
-
-  &:hover {
-    color: var(--theme-button-hover-color);
-  }
+  color: var(--current-button-text-color);
 }
 
 @mixin button-transition {
-  transition: var(--theme-button-transition);
-
-  &:hover {
-    transition: var(--theme-button-hover-transition);
-  }
+  transition: var(--current-button-transition);
 }
 
-@mixin button-fill {
+@mixin button-fill-base {
   --theme-button-transition-duration: .4s;
 
-  background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%);
+  background-color: transparent;
   background-size: calc( 200% + 4 * var(--theme-button-border-width) ) calc( 100% + 4 * var(--theme-button-border-width) );
   background-position: calc( 100% + var(--theme-button-border-width) ) calc( -1 * var(--theme-button-border-width) );
 
   border: var(--theme-button-border-width) solid var(--theme-button-border-color);
   border-radius: 0;
-}
-
-@mixin button-fill-background-left {
-  @include button-fill;
 
   &:hover {
     background-position: calc( -1 * var(--theme-button-border-width) ) calc( -1 * var(--theme-button-border-width) );
   }
 }
 
-@mixin button-fill-background-right {
-  @include button-fill;
+@mixin button-fill {
+  @include button-fill-base;
+  background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%);
+}
+
+@mixin button-fill-reverse {
+  @include button-fill-base;
+  --current-button-text-color: var(--theme-button-hover-text-color);
+  background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%);
 
   &:hover {
-    background-position: calc( -1 * var(--theme-button-border-width) ) calc( -1 * var(--theme-button-border-width) );
+    --current-button-text-color: var(--theme-button-text-color);
   }
 }
 
@@ -127,10 +133,6 @@
     transform-origin: 100% 50%;
   }
 
-  &:hover:before {
-    transform: scaleX(0);
-  }
-
   &:after {
     content: '';
 
@@ -155,9 +157,16 @@
     transition-property: opacity, transform;
   }
 
-  &:hover:after {
-    opacity: 1;
-    transform: translate(.4em, -50%) cale(-1,1);
+  &:hover {
+
+    &:before {
+      transform: scaleX(0);
+    }
+
+    &:after {
+      opacity: 1;
+      transform: translate(.4em, -50%) scale(-1,1);
+    }
   }
 }
 
@@ -165,46 +174,29 @@
   @extend %button-theme !optional;
 }
 
-@mixin primary-button-settings {
+@mixin button-outline-vars {
+  --theme-button-text-color: var(--theme-sm-light-1);
   --theme-button-background-color: var(--theme-sm-dark-1);
-  --theme-button-color: var(--theme-sm-light-1);
   --theme-button-border-color: var(--theme-sm-dark-1);
-  --theme-button-hover-color: var(--theme-sm-dark-1);
+
+  --theme-button-hover-text-color: var(--theme-sm-dark-1);
   --theme-button-hover-background-color: transparent;
   --theme-button-hover-border-color: var(--theme-sm-dark-1);
 }
 
 @mixin primary-button-settings-inverted {
   --theme-button-background-color: var(--theme-sm-light-1);
-  --theme-button-color: var(--theme-sm-dark-1);
+  --theme-button-text-color: var(--theme-sm-dark-1);
   --theme-button-border-color: var(--theme-sm-light-1);
-  --theme-button-hover-color: var(--theme-sm-light-1);
-  --theme-button-hover-background-color: transparent;
-  --theme-button-hover-border-color: var(--theme-sm-light-1);
-}
-
-@mixin secondary-button-settings {
-  --theme-button-background-color: transparent;
-  --theme-button-color: var(--theme-sm-dark-1);
-  --theme-button-border-color: var(--theme-sm-dark-1);
-  --theme-button-hover-color: var(--theme-sm-light-1);
-  --theme-button-hover-background-color: transparent;
-  --theme-button-hover-border-color: var(--theme-sm-dark-1);
-}
-
-@mixin secondary-button-settings-inverted {
-  --theme-button-background-color: transparent;
-  --theme-button-color: var(--theme-sm-light-1);
-  --theme-button-border-color: var(--theme-sm-light-1);
-  --theme-button-hover-color: var(--theme-sm-dark-1);
+  --theme-button-hover-text-color: var(--theme-sm-light-1);
   --theme-button-hover-background-color: transparent;
   --theme-button-hover-border-color: var(--theme-sm-light-1);
 }
 
 @mixin text-button-settings {
-  --theme-button-color: var(--theme-sm-color-1);
+  --theme-button-text-color: var(--theme-sm-color-1);
   --theme-button-background-color: transparent;
-  --theme-button-hover-color: var(--theme-sm-color-1);
+  --theme-button-hover-text-color: var(--theme-sm-color-1);
   --theme-button-hover-background-color: transparent;
   --theme-button-border-radius: 0;
 }

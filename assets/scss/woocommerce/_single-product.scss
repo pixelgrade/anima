@@ -528,7 +528,7 @@
 
 .add_to_cart_button {
   @include button;
-  @include button-fill-background-left;
+  @include button-fill;
   text-align: center;
 }
 
@@ -557,22 +557,21 @@
 
 
 .woocommerce {
-  @include secondary-button-settings;
+  @include button-outline-vars;
+
   @include specific(2) {
     button:not(.single_add_to_cart_button),
     .button:not(.single_add_to_cart_button) {
       @include button;
-      @include button-fill-background-right;
     }
 
     .add_to_cart_button.ajax_add_to_cart,
     .checkout-button,
     #place_order,
     .woocommerce-mini-cart__buttons .checkout {
-      @include primary-button-settings;
+      @include button-outline-vars;
 
       @include button;
-      @include button-fill-background-left;
     }
   }
 }

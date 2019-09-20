@@ -1,14 +1,12 @@
 @import "product-featured";
 @import "category-featured";
 
-
 [class*="wc-block-"] {
-  .wp-block-button__link {
-    @include specific(3){
-      @include secondary-button-settings;
-
-      @include button;
-      @include button-fill-background-left;
+    .wp-block-button__link {
+        @include specific(3) {
+            @include button;
+            @include button-outline-vars;
+            @include button-fill-reverse;
+        }
     }
-  }
 }

@@ -11,6 +11,7 @@ ul.menu,
 }
 
 .site-header {
+
     .menu-item-has-children,
     .page_item_has_children {
         position: relative;
@@ -18,30 +19,29 @@ ul.menu,
         &[class] > a {
             display: flex;
             align-items: center;
+            padding-right: 1em;
 
             &:after {
                 content: "";
                 position: absolute;
                 top: 50%;
                 display: inline-block;
-                width: 8px;
-                height: 8px;
-                border-right: 2px solid currentColor;
-                border-bottom: 2px solid currentColor;
-                -webkit-transform: rotate(45deg);
-                transform: translateY(-50%) rotate(45deg);
-
+                width: 0.5em;
+                height: 0.5em;
+                border-right: 0.1em solid currentColor;
+                border-bottom: 0.1em solid currentColor;
+                transform: translateY(-80%) rotate(45deg);
                 opacity: .5;
-
-                margin-left: var(--theme-spacing-micro);
+                margin-left: 0;
             }
         }
 
         &.hover,
         &:focus-within {
+
            > .sub-menu,
            > .children {
-               transform: translate3d(0px, 10px, 0px);
+               transform: translate3d(0, 0.625em, 0);
                opacity: 1;
                pointer-events: auto;
            }
@@ -103,7 +103,12 @@ ul.menu,
         .children .page_item_has_children {
 
             > a:after {
-                transform: translateY(-10%) rotate(-45deg);
+                transform: translateY(-50%) rotate(-45deg);
+            }
+
+            > .sub-menu,
+            > .children {
+                transform: translate3d(0, -0.75em, 0);
             }
         }
 

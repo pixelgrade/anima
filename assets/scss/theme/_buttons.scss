@@ -15,10 +15,9 @@
     @include button-transition;
 }
 
-.wp-block-button:not(.is-style-text) {
-    --theme-button-border-radius: 0;
+.wp-block-button {
 
-    .wp-block-button__link {
+    &:not(.is-style-text) .wp-block-button__link {
         @include button-base;
         @include button-theme;
 
@@ -29,29 +28,27 @@
         &:not(.has-text-color) {
             @include button-color;
         }
-
-        @include button-fill-background-left;
     }
 
-    &.is-style-primary {
-        .wp-block-button__link {
-            @include button-fill-background-left;
+    &:not([class*="is-style"]) .wp-block-button__link {
+        &:not(.has-background) {
+            @include button-fill;
         }
     }
 
-    &.is-style-secondary {
-        .wp-block-button__link {
-            @include button-fill-background-right;
+    &.is-style-primary .wp-block-button__link {
+        &:not(.has-background) {
+            @include button-outline-vars;
+            @include button-fill;
         }
     }
-}
 
-.is-style-primary {
-   @include primary-button-settings;
-}
-
-.is-style-secondary {
-   @include secondary-button-settings;
+    &.is-style-secondary .wp-block-button__link {
+        &:not(.has-background) {
+            @include button-outline-vars;
+            @include button-fill-reverse;
+        }
+    }
 }
 
 .is-style-text {
@@ -65,12 +62,6 @@
 
 .novablocks-hero {
     &.novablocks-u-background-dark {
-        .is-style-primary {
-            @include primary-button-settings-inverted;
-        }
-
-        .is-style-secondary {
-            @include secondary-button-settings-inverted;
-        }
+        @include variation(dark);
     }
 }
