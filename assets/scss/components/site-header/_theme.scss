@@ -3,7 +3,7 @@ $enable-site-header-transparent: true !default;
 $enable-site-header-inversed: false !default;
 
 $site-header-fixed-body-class: has-fixed-site-header !default;
-$site-header-transition-speed: .15s !default;
+$site-header-transition-speed: .3s !default;
 
 @media only screen and (min-width: 1000px) {
 
@@ -17,7 +17,7 @@ $site-header-transition-speed: .15s !default;
         padding-top: 1em;
         padding-bottom: 1em;
 
-        transition: all $site-header-transition-speed ease-out;
+        transition: all $site-header-transition-speed ease;
         transition-property: opacity, color, background-color;
         will-change: transform;
     }
@@ -32,7 +32,7 @@ $site-header-transition-speed: .15s !default;
         box-shadow: currentColor 0 1px 2px;
         opacity: 0.1;
         pointer-events: none;
-        transition: opacity $site-header-transition-speed ease-out;
+        transition: opacity $site-header-transition-speed ease;
     }
 }
 
