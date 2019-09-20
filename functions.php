@@ -83,11 +83,6 @@ if ( ! function_exists( 'rosa2_setup' ) ) {
 		add_theme_support( 'align-wide' );
 
 		/**
-		 * Add support for Style Manager section in Customizer.
-		 */
-		add_theme_support( 'customizer_style_manager' );
-
-		/**
 		 * Add theme support for responsive embeds
 		 */
 		add_theme_support( 'responsive-embeds' );
@@ -99,6 +94,7 @@ if ( ! function_exists( 'rosa2_setup' ) ) {
 		 * Enable support for the Style Manager Customizer section (via Customify).
 		 */
 		add_theme_support( 'customizer_style_manager' );
+		add_theme_support( 'style_manager_font_palettes' );
 
 		add_theme_support( 'woocommerce' );
 		add_theme_support( 'wc-product-gallery-zoom' );

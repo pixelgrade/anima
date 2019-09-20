@@ -89,9 +89,6 @@ Table of Contents
   --sm-light-1: #FFFFFF;
   --sm-light-2: #CCCCCC;
   --sm-light-3: #EEEFF2;
-  --theme-body-font-family: Reforma1969, sans-serif;
-  --theme-headings-font-family: Reforma1969, sans-serif;
-  --theme-headings-alt-font-family: Billy Ohio, sans-serif;
   --theme-body-font-size: 16px;
   --theme-content-font-size: 18px;
   --theme-content-width-normal: calc(42 * var(--theme-body-font-size));
@@ -2830,6 +2827,16 @@ body {
       --theme-body-font-size-diff: 0px; } }
 
 :root {
+  --theme-primary-font-family: Reforma1969, sans-serif; }
+
+:root {
+  --theme-secondary-font-family: Reforma2018, sans-serif; }
+
+:root {
+  --theme-accent-font-family: Billy Ohio, sans-serif; }
+
+:root {
+  --theme-content-font-family: var(--theme-body-font-family);
   --theme-content-line-height: 1.6;
   --theme-content-font-size-diff: 0px;
   --theme-content-font-size: calc( var(--theme-minimum-font-size) + var(--theme-content-font-size-diff) ); }
@@ -2841,7 +2848,7 @@ body {
       --theme-content-font-size-diff: 2px; } }
 
 :root {
-  --theme-huge-font-family: Reforma1969, sans-serif;
+  --theme-huge-font-family: var(--theme-primary-font-family);
   --theme-huge-line-height: 1.03;
   --theme-huge-font-weight: 700;
   --theme-huge-letter-spacing: -0.03em;
@@ -2855,7 +2862,7 @@ body {
       --theme-huge-font-size-diff: 99px; } }
 
 :root {
-  --theme-display-font-family: Reforma1969, sans-serif;
+  --theme-display-font-family: var(--theme-primary-font-family);
   --theme-display-line-height: 1.03;
   --theme-display-font-weight: 700;
   --theme-display-letter-spacing: -0.03em;
@@ -2869,7 +2876,7 @@ body {
       --theme-display-font-size-diff: 84px; } }
 
 :root {
-  --theme-heading-1-font-family: Reforma1969, sans-serif;
+  --theme-heading-1-font-family: var(--theme-primary-font-family);
   --theme-heading-1-line-height: 1.1;
   --theme-heading-1-font-weight: 700;
   --theme-heading-1-letter-spacing: -0.03em;
@@ -2883,7 +2890,7 @@ body {
       --theme-heading-1-font-size-diff: 50px; } }
 
 :root {
-  --theme-heading-2-font-family: Reforma1918, sans-serif;
+  --theme-heading-2-font-family: var(--theme-primary-font-family);
   --theme-heading-2-line-height: 1.2;
   --theme-heading-2-font-weight: 700;
   --theme-heading-2-letter-spacing: -0.02em;
@@ -2897,7 +2904,7 @@ body {
       --theme-heading-2-font-size-diff: 24px; } }
 
 :root {
-  --theme-heading-3-font-family: Reforma1969, sans-serif;
+  --theme-heading-3-font-family: var(--theme-primary-font-family);
   --theme-heading-3-line-height: 1.2;
   --theme-heading-3-font-weight: 700;
   --theme-heading-3-letter-spacing: -0.02em;
@@ -2911,7 +2918,7 @@ body {
       --theme-heading-3-font-size-diff: 16px; } }
 
 :root {
-  --theme-heading-4-font-family: Reforma1969, sans-serif;
+  --theme-heading-4-font-family: var(--theme-primary-font-family);
   --theme-heading-4-line-height: 1.2;
   --theme-heading-4-font-weight: 700;
   --theme-heading-4-letter-spacing: -0.02em;
@@ -2925,7 +2932,7 @@ body {
       --theme-heading-4-font-size-diff: 8px; } }
 
 :root {
-  --theme-heading-5-font-family: Reforma2018, sans-serif;
+  --theme-heading-5-font-family: var(--theme-secondary-font-family);
   --theme-heading-5-line-height: 1.5;
   --theme-heading-5-font-weight: 400;
   --theme-heading-5-font-size-diff: 0px;
@@ -2938,7 +2945,19 @@ body {
       --theme-heading-5-font-size-diff: 1px; } }
 
 :root {
-  --theme-intro-font-family: Reforma1969, sans-serif;
+  --theme-heading-6-font-family: var(--theme-secondary-font-family);
+  --theme-heading-6-line-height: 1.5;
+  --theme-heading-6-font-weight: 400;
+  --theme-heading-6-font-size-diff: 0px;
+  --theme-heading-6-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-6-font-size-diff) ); }
+  @media screen and (min-width: 0px) {
+    :root {
+      --theme-heading-6-font-size-diff: calc(0px + 1 * ((100vw - 0px) / 1440)); } }
+  @media screen and (min-width: 1440px) {
+    :root {
+      --theme-heading-6-font-size-diff: 1px; } }
+
+:root {
   --theme-intro-letter-spacing: -0.02em;
   --theme-intro-font-size-diff: 0px;
   --theme-intro-font-size: calc( var(--theme-minimum-font-size) + var(--theme-intro-font-size-diff) ); }
@@ -3024,7 +3043,20 @@ h4, .novablocks-map__marker-name {
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
   --current-text-transform: var(--theme-heading-4-text-transform); }
 
-h5,
+h5 {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  --current-font-family: var(--theme-heading-5-font-family);
+  --current-font-size: var(--theme-heading-5-font-size);
+  --current-line-height: var(--theme-heading-5-line-height);
+  --current-font-weight: var(--theme-heading-5-font-weight);
+  --current-letter-spacing: var(--theme-heading-5-letter-spacing);
+  --current-text-transform: var(--theme-heading-5-text-transform); }
+
 h6 {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
@@ -3062,7 +3094,7 @@ h6 {
   z-index: 10; }
 
 .c-headline__secondary {
-  font-family: var(--theme-headings-alt-font-family);
+  font-family: var(--theme-accent-font-family);
   font-weight: 400;
   text-transform: none;
   color: var(--theme-sm-color-1);
