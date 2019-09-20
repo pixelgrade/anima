@@ -1,75 +1,89 @@
+import GlobalService from './globalService';
+
 export default class Navbar {
-	constructor( element ) {
-		this.element = element;
-		this.handleSubMenus();
-		this.handleHoverMenuItems();
+
+	constructor() {
+		this.$menuItems = jQuery( '.menu-item' );
+		this.$menuItemsWithChildren = this.$menuItems.filter( '.menu-item-has-children' ).removeClass( 'hover' );
+		this.$menuItemsWithChildrenLinks = this.$menuItemsWithChildren.children( 'a' );
+
+		this.initialize();
 	}
 
-	handleSubMenus() {
-		const menuItemsWithChildren = Array.from(document.querySelectorAll('.menu-item-has-children'));
-		const menuItemsWithChildrenLinks = Array.from(document.querySelectorAll('.menu-item-has-children > a'));
+	initialize() {
+		this.onResize();
+		this.initialized = true;
+		GlobalService.registerUpdate( this.onResize.bind( this ) );
+	}
 
-		// Make sure there are no open menu items
-		menuItemsWithChildren.map(( item ) => {
-			item.classList.remove('hover');
-		});
+	onResize() {
+		const mq = window.matchMedia( "only screen and (min-width: 1000px)" );
 
-		// Add a class so we know the items to handle
-		menuItemsWithChildrenLinks.map(( link ) => {
-			link.classList.add('prevent-one');
-		});
+		// we are on desktop
+		if ( mq.matches ) {
 
-		const prevent = Array.from(document.querySelectorAll('.prevent-one'));
-
-		let getSiblings = function (elem) {
-			return Array.prototype.filter.call(elem.parentNode.children, function (sibling) {
-				return sibling !== elem;
-			});
-		};
-
-		function changeClasses(e) {
-			e.preventDefault();
-
-			if ( this.classList.contains('active')) {
-				window.location.href = this.getAttribute( 'href' );
-				return;
+			if ( this.initialized && ! this.desktop ) {
+				this.unbindClick();
 			}
 
-			this.classList.remove('active');
-			this.classList.add('active');
+			if ( ! this.initialized || ! this.desktop ) {
+				this.bindHoverIntent();
+			}
 
-			let siblings = getSiblings(this.parentNode);
-
-			siblings.map(( sibling ) => {
-				sibling.classList.remove('hover');
-			});
-
-			this.parentNode.classList.add('hover');
+			this.desktop = true;
+			return;
 		}
 
-		prevent.forEach(( item ) => {
-			item.addEventListener('click', changeClasses);
-		});
+		if ( this.initialized && this.desktop ) {
+			this.unbindHoverIntent();
+		}
 
+		if ( ! this.initialized || this.desktop ) {
+			this.bindClick();
+		}
 
+		this.desktop = false;
+		return;
 	}
-	handleHoverMenuItems() {
 
-		const menuItems = jQuery('.menu-item');
-		const mq = window.matchMedia( "(min-width: 1000px)" );
+	onClickMobile( event ) {
+		const $link = jQuery( this );
+		const $siblings = $link.parent().siblings().not( $link );
 
-		function toggleSubMenu() {
-			jQuery(this).toggleClass('hover');
+		if ( $link.is( '.active' ) ) {
+			return;
 		}
 
-		if (mq.matches) {
-			menuItems.hoverIntent(
-				{
-					out: toggleSubMenu,
-					over: toggleSubMenu,
-					timeout: 200
-				}
-			);
-		}
+		event.preventDefault();
+
+		$link.addClass( 'active' ).parent().addClass( 'hover' );
+		$siblings.removeClass( 'hover' );
+		$siblings.find( '.active' ).removeClass( 'active' );
+	}
+
+	bindClick() {
+		this.$menuItemsWithChildrenLinks.on( 'click', this.onClickMobile );
+	}
+
+	unbindClick() {
+		this.$menuItemsWithChildrenLinks.off( 'click', this.onClickMobile );
+	}
+
+	bindHoverIntent() {
+		this.$menuItems.hoverIntent( {
+			out: function() {
+				jQuery( this ).removeClass( 'hover' );
+			},
+			over: function() {
+				jQuery( this ).addClass( 'hover' );
+			},
+			timeout: 200
+		} );
+	}
+
+	unbindHoverIntent() {
+		this.$menuItems.off( 'mousemove.hoverIntent mouseenter.hoverIntent mouseleave.hoverIntent' );
+		delete this.$menuItems.hoverIntent_t;
+		delete this.$menuItems.hoverIntent_s;
 	}
 }

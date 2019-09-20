@@ -19,32 +19,54 @@ ul.menu,
         &[class] > a {
             display: flex;
             align-items: center;
-            padding-right: 1em;
 
             &:after {
                 content: "";
-                position: absolute;
-                top: 50%;
+                position: static;
+
                 display: inline-block;
                 width: 0.5em;
                 height: 0.5em;
+                margin-left: 0.75em;
+
                 border-right: 0.1em solid currentColor;
                 border-bottom: 0.1em solid currentColor;
-                transform: translateY(-80%) rotate(45deg);
+
+                transform: translateY(-10%) rotate(45deg);
                 opacity: .5;
-                margin-left: 0;
             }
         }
 
-        &.hover,
-        &:focus-within {
+        @media only screen and (min-width: 1000px) {
+            &.hover,
+            &:focus-within {
 
-           > .sub-menu,
-           > .children {
-               transform: translate3d(0, 0.625em, 0);
-               opacity: 1;
-               pointer-events: auto;
-           }
+                > .sub-menu,
+                > .children {
+                    transform: translate3d(0, 0.625em, 0);
+                    opacity: 1;
+                    pointer-events: auto;
+                }
+            }
+        }
+
+        @media not screen and (min-width: 1000px) {
+
+            &:not(.hover) {
+                > .sub-menu,
+                > .children {
+                    display: none;
+                }
+            }
+
+            > .sub-menu,
+            > .children {
+                background: rgba(0,0,0,0.2);
+            }
+
+            &[class] > a:after {
+                transform: rotate(45deg);
+            }
         }
     }
 
@@ -103,7 +125,7 @@ ul.menu,
         .children .page_item_has_children {
 
             > a:after {
-                transform: translateY(-50%) rotate(-45deg);
+                transform: rotate(-45deg);
             }
 
             > .sub-menu,
