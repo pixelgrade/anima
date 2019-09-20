@@ -12,9 +12,15 @@
   --theme-button-y-padding: 0.75em;
   --theme-button-x-padding: 1.5em;
   --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
-  --theme-button-transition-duration: .2s;
+  --theme-button-transition-duration: .4s;
   --theme-button-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
-  --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
+  --theme-button-transition:
+      color var(--theme-button-transition-duration) var(--theme-button-transition-easing),
+      background-position var(--theme-button-transition-duration) var(--theme-button-transition-easing),
+      background-color 0s var(--theme-button-transition-duration) var(--theme-button-transition-easing);
+  --theme-button-hover-transition:
+      color var(--theme-button-transition-duration) var(--theme-button-transition-easing),
+      background-position var(--theme-button-transition-duration) var(--theme-button-transition-easing);
   --theme-button-arrow-size: 20px; }
 
 /* Cite CSS Custom Properties */
@@ -314,17 +320,19 @@
     --theme-button-border-radius: 0; }
   .editor-styles-wrapper .wp-block-button__link {
     transition: var(--theme-button-transition); }
+    .editor-styles-wrapper .wp-block-button__link:hover {
+      transition: var(--theme-button-hover-transition); }
   .editor-styles-wrapper .wp-block-button:not(.is-style-text) {
     --theme-button-border-radius: 0; }
     .editor-styles-wrapper .wp-block-button:not(.is-style-text) .wp-block-button__link {
       display: inline-block;
       text-decoration: none;
       cursor: pointer;
-      background: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%);
-      background-size: 201% 100%;
-      background-position: right bottom;
-      border: 2px solid var(--theme-button-border-color);
-      transition: all 0.4s var(--theme-button-transition-easing);
+      --theme-button-transition-duration: .4s;
+      background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%);
+      background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
+      background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+      border: var(--theme-button-border-width) solid var(--theme-button-border-color);
       border-radius: 0; }
       .editor-styles-wrapper .wp-block-button:not(.is-style-text) .wp-block-button__link:not(.has-background) {
         background-color: var(--theme-button-background-color); }
@@ -336,28 +344,25 @@
         .editor-styles-wrapper .wp-block-button:not(.is-style-text) .wp-block-button__link:not(.has-text-color):hover {
           color: var(--theme-button-hover-color); }
       .editor-styles-wrapper .wp-block-button:not(.is-style-text) .wp-block-button__link:hover {
-        background-position: left bottom;
-        color: var(--theme-button-hover-color); }
+        background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
     .editor-styles-wrapper .wp-block-button:not(.is-style-text).is-style-primary .wp-block-button__link {
-      background: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%);
-      background-size: 201% 100%;
-      background-position: right bottom;
-      border: 2px solid var(--theme-button-border-color);
-      transition: all 0.4s var(--theme-button-transition-easing);
+      --theme-button-transition-duration: .4s;
+      background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%);
+      background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
+      background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+      border: var(--theme-button-border-width) solid var(--theme-button-border-color);
       border-radius: 0; }
       .editor-styles-wrapper .wp-block-button:not(.is-style-text).is-style-primary .wp-block-button__link:hover {
-        background-position: left bottom;
-        color: var(--theme-button-hover-color); }
+        background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
     .editor-styles-wrapper .wp-block-button:not(.is-style-text).is-style-secondary .wp-block-button__link {
-      background: linear-gradient(to right, var(--theme-button-hover-border-color) 50%, var(--theme-button-background-color) 50%);
-      background-size: 201% 100%;
-      background-position: right bottom;
-      border: 2px solid var(--theme-button-border-color);
-      transition: all 0.4s var(--theme-button-transition-easing);
+      --theme-button-transition-duration: .4s;
+      background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%);
+      background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
+      background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+      border: var(--theme-button-border-width) solid var(--theme-button-border-color);
       border-radius: 0; }
       .editor-styles-wrapper .wp-block-button:not(.is-style-text).is-style-secondary .wp-block-button__link:hover {
-        background-position: left bottom;
-        color: var(--theme-button-hover-color); }
+        background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
   .editor-styles-wrapper .is-style-primary {
     --theme-button-background-color: var(--theme-sm-dark-1);
     --theme-button-color: var(--theme-sm-light-1);
@@ -379,27 +384,32 @@
     --theme-button-hover-background-color: transparent;
     --theme-button-border-radius: 0; }
     .editor-styles-wrapper .is-style-text .wp-block-button__link {
-      padding: 0 !important;
-      background: none !important;
+      padding: 0;
+      background: none;
       border-width: 0;
-      position: relative; }
+      position: relative;
+      padding-right: var(--theme-button-arrow-size);
+      margin-right: calc( -1 * var(--theme-button-arrow-size));
+      padding-bottom: .3em;
+      margin-bottom: -.3em; }
       .editor-styles-wrapper .is-style-text .wp-block-button__link:before {
         content: '';
         position: absolute;
-        bottom: -5px;
+        bottom: 0;
         left: 0;
-        width: 100%;
+        width: calc(100% - var(--theme-button-arrow-size));
         height: .1em;
         background: currentColor;
-        transition: transform 0.4s var(--theme-button-transition-easing);
+        transition: var(--theme-button-transition);
+        transition-property: transform;
         transform-origin: 100% 50%; }
       .editor-styles-wrapper .is-style-text .wp-block-button__link:hover:before {
         transform: scaleX(0); }
       .editor-styles-wrapper .is-style-text .wp-block-button__link:after {
         content: '';
         position: absolute;
-        top: 50%;
-        left: 100%;
+        top: calc(50% - .1em);
+        right: 0;
         display: inline-block;
         width: var(--theme-button-arrow-size);
         height: var(--theme-button-arrow-size);
@@ -410,7 +420,8 @@
         vertical-align: text-bottom;
         opacity: 0;
         transform: translate(0, -50%) rotate(180deg);
-        transition: opacity 0.2s var(--theme-button-transition-easing), transform 0.2s var(--theme-button-transition-easing); }
+        transition: var(--theme-button-transition);
+        transition-property: opacity, transform; }
       .editor-styles-wrapper .is-style-text .wp-block-button__link:hover:after {
         opacity: 1;
         transform: translate(5px, -50%) rotate(180deg); }

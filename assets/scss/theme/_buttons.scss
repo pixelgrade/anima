@@ -58,11 +58,7 @@
    @include text-button-settings;
 
     .wp-block-button__link {
-        padding: 0 !important;
-        background: none !important;
-
-        border-width: 0;
-
+        @include button-reset;
         @include button-with-arrow;
     }
 }
