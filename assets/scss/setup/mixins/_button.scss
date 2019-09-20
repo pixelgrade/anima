@@ -27,7 +27,7 @@
       color var(--theme-button-transition-duration) var(--theme-button-transition-easing),
       background-position var(--theme-button-transition-duration) var(--theme-button-transition-easing);
 
-  --theme-button-arrow-size: 20px;
+  --theme-button-arrow-size: 1.15em;
 }
 
 @mixin button-base {
@@ -149,7 +149,7 @@
     vertical-align: text-bottom;
 
     opacity: 0;
-    transform: translate(0, -50%) rotate(180deg);
+    transform: translate(0, -50%) scale(-1,1);
 
     transition: var(--theme-button-transition);
     transition-property: opacity, transform;
@@ -157,7 +157,7 @@
 
   &:hover:after {
     opacity: 1;
-    transform: translate(5px, -50%) rotate(180deg);
+    transform: translate(.4em, -50%) cale(-1,1);
   }
 }
 

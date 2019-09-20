@@ -85,6 +85,13 @@
     line-height: 1.5,
 ));
 
+@include define-font(navigation, (
+    font-family: var(--theme-secondary-font-family),
+    font-size: 17px,
+    font-weight: 400,
+    line-height: 1.5,
+));
+
 @include define-font(intro, (
     font-size: 24px,
     letter-spacing: -0.02em,
@@ -115,5 +122,5 @@
 }
 
 %h6-font {
-    @include apply-font(heading-5);
+    @include apply-font(heading-6);
 }
