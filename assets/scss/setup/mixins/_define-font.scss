@@ -7,6 +7,15 @@
 }
 
 @mixin define-font($name, $config, $props: $nova-font-props) {
+    $config: map_merge( (
+        font-family: inherit,
+        font-size: inherit,
+        line-height: inherit,
+        font-weight: inherit,
+        letter-spacing: inherit,
+        text-transform: inherit,
+        text-decoration: inherit,
+    ), $config );
 
     @at-root {
 
@@ -20,12 +29,19 @@
                 }
             }
 
-            @if ( map-get( $config, font-size ) ) {
+            $font-size: map-get( $config, font-size );
+
+            @if ( $font-size and $font-size != 'inherit' ) {
+
                 $diff: map-get($config, font-size) - $theme-minimum-font-size;
 
                 @include fluid(--theme-#{$name}-font-size-diff, 0px, 0px, $nova-font-size-breakpoint, $diff);
 
                 --theme-#{$name}-font-size: calc( var(--theme-minimum-font-size) + var(--theme-#{$name}-font-size-diff) );
+            }
+
+            @if ( $font-size == 'inherit' ) {
+                --theme-#{$name}-font-size: inherit;
             }
         }
     }

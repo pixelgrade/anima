@@ -1,10 +1,4 @@
-
-@include define-font(body, (
-    font-family: #{$theme-sm-font-body},
-    font-size: 16px,
-    line-height: 1.7,
-));
-
+// Helpers
 @include define-font(primary, (
     font-family: #{$theme-sm-font-primary},
 ));
@@ -17,23 +11,33 @@
     font-family: #{$theme-sm-font-accent},
 ));
 
+// Body
+@include define-font(body, (
+    font-family: #{$theme-sm-font-body},
+    font-size: 16px,
+    line-height: 1.7,
+    font-weight: 400,
+    letter-spacing: -0.03em
+));
+
 @include define-font(content, (
     font-family: var(--theme-body-font-family),
     font-size: 18px,
-    line-height: 1.6
-));
-
-@include define-font(huge, (
-    font-family: var(--theme-primary-font-family),
-    font-size: 115px,
-    line-height: 1.03,
-    font-weight: 700,
+    line-height: 1.6,
     letter-spacing: -0.03em,
 ));
 
+@include define-font(lead, (
+    font-family: var(--theme-body-font-family),
+    font-size: 24px,
+    line-height: 1.6,
+    letter-spacing: -0.02em,
+));
+
+// Headings
 @include define-font(display, (
     font-family: var(--theme-primary-font-family),
-    font-size: 100px,
+    font-size: 115px,
     line-height: 1.03,
     font-weight: 700,
     letter-spacing: -0.03em,
@@ -90,11 +94,6 @@
     font-size: 17px,
     font-weight: 400,
     line-height: 1.5,
-));
-
-@include define-font(intro, (
-    font-size: 24px,
-    letter-spacing: -0.02em,
 ));
 
 %h0-font {
