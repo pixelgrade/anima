@@ -306,7 +306,7 @@ if ( ! function_exists( ' rosa2_woocommerce_pagination_args' ) ) {
 		$args =  array(
 			'end_size'           => 1,
 			'mid_size'           => 2,
-			'type'               => 'list',
+			'type'               => 'plain',
 			'prev_text' => esc_html_x( 'Previous', 'previous set of posts', '__theme_txtd' ),
 			'next_text' => esc_html_x( 'Next', 'next set of posts', '__theme_txtd' ),
 		);

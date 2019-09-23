@@ -1,12 +1,13 @@
 @import "product-featured";
 @import "category-featured";
+@import "review-list-item";
 
 [class*="wc-block-"] {
     .wp-block-button__link {
         @include specific(3) {
             @include button;
             @include button-outline-vars;
-            @include button-fill-reverse;
+            @include button-fill;
         }
     }
 }

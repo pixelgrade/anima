@@ -16,8 +16,8 @@
 
   // The stick
   &:before {
-    width: 12px;
-    height: 1px;
+    width: .75em;
+    height: .0625em;
 
     background-color: currentColor;
   }
@@ -25,15 +25,15 @@
   // The arrow
   &:after {
     display: block;
-    width: 7px;
-    height: 7px;
+    width: .45em;
+    height: .45em;
 
-    border: 1px solid transparent;
+    border: .0625em solid transparent;
   }
 }
 
 @mixin pagination--left {
-  padding-left: 25px;
+  padding-left: 1.55em;
 
   &:before {
     left: 0;
@@ -48,7 +48,7 @@
 }
 
 @mixin pagination--right {
-  padding-right: 25px;
+  padding-right: 1.55em;
 
   &:before {
     right: 0;
@@ -66,6 +66,8 @@
 .nav-links {
   display: flex;
   justify-content: center;
+
+  font-feature-settings: "lnum";
 
   margin-top: var(--theme-spacing-huge);
   margin-bottom: var(--theme-spacing-normal);
@@ -100,6 +102,8 @@
 a.page-numbers,
 span.page-numbers {
 
+  color: var(--theme-sm-dark-2);
+
   &[class][class] {
     width: 3em;
     height: 3em;
@@ -108,11 +112,11 @@ span.page-numbers {
     align-items: center;
 
     &.current {
-      background-color: var(--theme-sm-color-1);
+      background-color: var(--theme-sm-dark-2);
       color: var(--theme-sm-light-1);
     }
 
-    &:hover {
+    &:not(.current):hover {
       color: var(--theme-sm-dark-1);
     }
   }
@@ -120,5 +124,13 @@ span.page-numbers {
   &.next[class],
   &.prev[class] {
     width: auto;
+  }
+
+  &:not(.prev):not(.next) {
+    display: none;
+    
+    @include above($theme-lap-breakpoint) {
+      display: flex;
+    }
   }
 }
