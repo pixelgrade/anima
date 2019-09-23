@@ -47,24 +47,6 @@ Table of Contents
 
 */
 /* Button CSS Custom Properties */
-:root {
-  --theme-button-background-color: var(--theme-sm-dark-1);
-  --theme-button-text-color: var(--theme-sm-light-1);
-  --theme-button-border-color: transparent;
-  --theme-button-hover-background-color: var(--theme-sm-color-1);
-  --theme-button-hover-text-color: var(--theme-sm-light-1);
-  --theme-button-hover-border-color: transparent;
-  --theme-button-border-width: 2px;
-  --theme-button-border-radius: 999em;
-  --theme-button-y-padding: 0.75em;
-  --theme-button-x-padding: 1.5em;
-  --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
-  --theme-button-transition-duration: .4s;
-  --theme-button-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
-  --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
-  --theme-button-hover-transition: var(--theme-button-transition);
-  --theme-button-arrow-size: 1.15em; }
-
 /* Cite CSS Custom Properties */
 :root {
   --theme-cite-font-family: var(--theme-headings-font-family);
@@ -293,8 +275,8 @@ Table of Contents
   --theme-sm-color-1: var(--sm-color-1);
   --theme-sm-color-2: var(--sm-color-2);
   --theme-sm-color-3: var(--sm-color-3);
-  --theme-sm-dark-1: var(--sm-light-2);
-  --theme-sm-dark-2: var(--sm-light-1);
+  --theme-sm-dark-1: var(--sm-light-1);
+  --theme-sm-dark-2: var(--sm-light-2);
   --theme-sm-dark-3: var(--sm-light-3);
   --theme-sm-light-1: var(--sm-dark-1);
   --theme-sm-light-2: var(--sm-dark-2);
@@ -706,6 +688,22 @@ label {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
+  --theme-button-background-color: var(--theme-sm-dark-1);
+  --theme-button-text-color: var(--theme-sm-light-1);
+  --theme-button-border-color: transparent;
+  --theme-button-hover-background-color: var(--theme-sm-color-1);
+  --theme-button-hover-text-color: var(--theme-sm-light-1);
+  --theme-button-hover-border-color: transparent;
+  --theme-button-border-width: 2px;
+  --theme-button-border-radius: 0;
+  --theme-button-y-padding: 0.75em;
+  --theme-button-x-padding: 1.5em;
+  --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
+  --theme-button-transition-duration: .4s;
+  --theme-button-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
+  --theme-button-hover-transition: var(--theme-button-transition);
+  --theme-button-arrow-size: 1.15em;
   --current-button-background-color: var(--theme-button-background-color);
   --current-button-border-color: var(--theme-button-border-color);
   --current-button-text-color: var(--theme-button-text-color);
@@ -1484,6 +1482,22 @@ body, .site, .site-content {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
+  --theme-button-background-color: var(--theme-sm-dark-1);
+  --theme-button-text-color: var(--theme-sm-light-1);
+  --theme-button-border-color: transparent;
+  --theme-button-hover-background-color: var(--theme-sm-color-1);
+  --theme-button-hover-text-color: var(--theme-sm-light-1);
+  --theme-button-hover-border-color: transparent;
+  --theme-button-border-width: 2px;
+  --theme-button-border-radius: 0;
+  --theme-button-y-padding: 0.75em;
+  --theme-button-x-padding: 1.5em;
+  --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
+  --theme-button-transition-duration: .4s;
+  --theme-button-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
+  --theme-button-hover-transition: var(--theme-button-transition);
+  --theme-button-arrow-size: 1.15em;
   --current-button-background-color: var(--theme-button-background-color);
   --current-button-border-color: var(--theme-button-border-color);
   --current-button-text-color: var(--theme-button-text-color);
@@ -2097,6 +2111,22 @@ body, .site, .site-content {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
+  --theme-button-background-color: var(--theme-sm-dark-1);
+  --theme-button-text-color: var(--theme-sm-light-1);
+  --theme-button-border-color: transparent;
+  --theme-button-hover-background-color: var(--theme-sm-color-1);
+  --theme-button-hover-text-color: var(--theme-sm-light-1);
+  --theme-button-hover-border-color: transparent;
+  --theme-button-border-width: 2px;
+  --theme-button-border-radius: 0;
+  --theme-button-y-padding: 0.75em;
+  --theme-button-x-padding: 1.5em;
+  --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
+  --theme-button-transition-duration: .4s;
+  --theme-button-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
+  --theme-button-hover-transition: var(--theme-button-transition);
+  --theme-button-arrow-size: 1.15em;
   --current-button-background-color: var(--theme-button-background-color);
   --current-button-border-color: var(--theme-button-border-color);
   --current-button-text-color: var(--theme-button-text-color);
@@ -2632,6 +2662,18 @@ body, .site, .site-content {
   .novablocks-hero__indicator:after {
     color: var(--theme-sm-dark-1); }
 
+.novablocks-u-background-dark {
+  --theme-sm-color-1: var(--sm-color-1);
+  --theme-sm-color-2: var(--sm-color-2);
+  --theme-sm-color-3: var(--sm-color-3);
+  --theme-sm-dark-1: var(--sm-light-1);
+  --theme-sm-dark-2: var(--sm-light-2);
+  --theme-sm-dark-3: var(--sm-light-3);
+  --theme-sm-light-1: var(--sm-dark-1);
+  --theme-sm-light-2: var(--sm-dark-2);
+  --theme-sm-light-3: var(--sm-dark-3);
+  color: var(--theme-sm-dark-2); }
+
 .novablocks-map__marker-name {
   position: absolute;
   top: 50%;
@@ -2952,9 +2994,6 @@ body {
     :root {
       --theme-button-font-size-diff: 1px; } }
 
-:root {
-  --theme-button-border-radius: 0; }
-
 .wp-block-button__link {
   transition: var(--current-button-transition); }
 
@@ -2962,6 +3001,22 @@ body {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
+  --theme-button-background-color: var(--theme-sm-dark-1);
+  --theme-button-text-color: var(--theme-sm-light-1);
+  --theme-button-border-color: transparent;
+  --theme-button-hover-background-color: var(--theme-sm-color-1);
+  --theme-button-hover-text-color: var(--theme-sm-light-1);
+  --theme-button-hover-border-color: transparent;
+  --theme-button-border-width: 2px;
+  --theme-button-border-radius: 0;
+  --theme-button-y-padding: 0.75em;
+  --theme-button-x-padding: 1.5em;
+  --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
+  --theme-button-transition-duration: .4s;
+  --theme-button-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
+  --theme-button-hover-transition: var(--theme-button-transition);
+  --theme-button-arrow-size: 1.15em;
   --current-button-background-color: var(--theme-button-background-color);
   --current-button-border-color: var(--theme-button-border-color);
   --current-button-text-color: var(--theme-button-text-color);
@@ -3024,65 +3079,50 @@ body {
   .wp-block-button.is-style-secondary .wp-block-button__link[class]:hover {
     --current-button-text-color: var(--theme-button-text-color); }
 
-.is-style-text {
+.is-style-text .wp-block-button__link {
+  padding: 0;
+  background: none;
+  border-width: 0;
   --theme-button-text-color: var(--theme-sm-color-1);
-  --theme-button-background-color: transparent;
   --theme-button-hover-text-color: var(--theme-sm-color-1);
-  --theme-button-hover-background-color: transparent;
-  --theme-button-border-radius: 0; }
-  .is-style-text .wp-block-button__link {
-    padding: 0;
-    background: none;
-    border-width: 0;
-    position: relative;
-    padding-right: var(--theme-button-arrow-size);
-    margin-right: calc( -1 * var(--theme-button-arrow-size));
-    padding-bottom: .3em;
-    margin-bottom: -.3em; }
-    .is-style-text .wp-block-button__link:before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: calc(100% - var(--theme-button-arrow-size));
-      height: .1em;
-      background: currentColor;
-      transition: var(--theme-button-transition);
-      transition-property: transform;
-      transform-origin: 100% 50%; }
-    .is-style-text .wp-block-button__link:after {
-      content: '';
-      position: absolute;
-      top: calc(50% - .1em);
-      right: 0;
-      display: inline-block;
-      width: var(--theme-button-arrow-size);
-      height: var(--theme-button-arrow-size);
-      -webkit-mask: url("assets/images/icon-arrow.svg") no-repeat 50% 50%;
-      mask: url("assets/images/icon-arrow.svg") no-repeat 50% 50%;
-      mask-size: cover;
-      background-color: currentColor;
-      vertical-align: text-bottom;
-      opacity: 0;
-      transform: translate(0, -50%) scale(-1, 1);
-      transition: var(--theme-button-transition);
-      transition-property: opacity, transform; }
-    .is-style-text .wp-block-button__link:hover:before {
-      transform: scaleX(0); }
-    .is-style-text .wp-block-button__link:hover:after {
-      opacity: 1;
-      transform: translate(0.4em, -50%) scale(-1, 1); }
-
-.novablocks-hero.novablocks-u-background-dark {
-  --theme-sm-color-1: var(--sm-color-1);
-  --theme-sm-color-2: var(--sm-color-2);
-  --theme-sm-color-3: var(--sm-color-3);
-  --theme-sm-dark-1: var(--sm-light-2);
-  --theme-sm-dark-2: var(--sm-light-1);
-  --theme-sm-dark-3: var(--sm-light-3);
-  --theme-sm-light-1: var(--sm-dark-1);
-  --theme-sm-light-2: var(--sm-dark-2);
-  --theme-sm-light-3: var(--sm-dark-3); }
+  position: relative;
+  padding-right: var(--theme-button-arrow-size);
+  margin-right: calc( -1 * var(--theme-button-arrow-size));
+  padding-bottom: .3em;
+  margin-bottom: -.3em; }
+  .is-style-text .wp-block-button__link:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: calc(100% - var(--theme-button-arrow-size));
+    height: .1em;
+    background: currentColor;
+    transition: var(--theme-button-transition);
+    transition-property: transform;
+    transform-origin: 100% 50%; }
+  .is-style-text .wp-block-button__link:after {
+    content: '';
+    position: absolute;
+    top: calc(50% - .1em);
+    right: 0;
+    display: inline-block;
+    width: var(--theme-button-arrow-size);
+    height: var(--theme-button-arrow-size);
+    -webkit-mask: url("assets/images/icon-arrow.svg") no-repeat 50% 50%;
+    mask: url("assets/images/icon-arrow.svg") no-repeat 50% 50%;
+    mask-size: cover;
+    background-color: currentColor;
+    vertical-align: text-bottom;
+    opacity: 0;
+    transform: translate(0, -50%) scale(-1, 1);
+    transition: var(--theme-button-transition);
+    transition-property: opacity, transform; }
+  .is-style-text .wp-block-button__link:hover:before {
+    transform: scaleX(0); }
+  .is-style-text .wp-block-button__link:hover:after {
+    opacity: 1;
+    transform: translate(0.4em, -50%) scale(-1, 1); }
 
 :root {
   --theme-body-font-family: Reforma1969, sans-serif;
@@ -4255,6 +4295,22 @@ iframe.instagram-media {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
+  --theme-button-background-color: var(--theme-sm-dark-1);
+  --theme-button-text-color: var(--theme-sm-light-1);
+  --theme-button-border-color: transparent;
+  --theme-button-hover-background-color: var(--theme-sm-color-1);
+  --theme-button-hover-text-color: var(--theme-sm-light-1);
+  --theme-button-hover-border-color: transparent;
+  --theme-button-border-width: 2px;
+  --theme-button-border-radius: 0;
+  --theme-button-y-padding: 0.75em;
+  --theme-button-x-padding: 1.5em;
+  --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
+  --theme-button-transition-duration: .4s;
+  --theme-button-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
+  --theme-button-hover-transition: var(--theme-button-transition);
+  --theme-button-arrow-size: 1.15em;
   --current-button-background-color: var(--theme-button-background-color);
   --current-button-border-color: var(--theme-button-border-color);
   --current-button-text-color: var(--theme-button-text-color);
@@ -4318,6 +4374,22 @@ iframe.instagram-media {
     display: inline-block;
     text-decoration: none;
     cursor: pointer;
+    --theme-button-background-color: var(--theme-sm-dark-1);
+    --theme-button-text-color: var(--theme-sm-light-1);
+    --theme-button-border-color: transparent;
+    --theme-button-hover-background-color: var(--theme-sm-color-1);
+    --theme-button-hover-text-color: var(--theme-sm-light-1);
+    --theme-button-hover-border-color: transparent;
+    --theme-button-border-width: 2px;
+    --theme-button-border-radius: 0;
+    --theme-button-y-padding: 0.75em;
+    --theme-button-x-padding: 1.5em;
+    --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
+    --theme-button-transition-duration: .4s;
+    --theme-button-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
+    --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
+    --theme-button-hover-transition: var(--theme-button-transition);
+    --theme-button-arrow-size: 1.15em;
     --current-button-background-color: var(--theme-button-background-color);
     --current-button-border-color: var(--theme-button-border-color);
     --current-button-text-color: var(--theme-button-text-color);
@@ -4347,6 +4419,22 @@ iframe.instagram-media {
     display: inline-block;
     text-decoration: none;
     cursor: pointer;
+    --theme-button-background-color: var(--theme-sm-dark-1);
+    --theme-button-text-color: var(--theme-sm-light-1);
+    --theme-button-border-color: transparent;
+    --theme-button-hover-background-color: var(--theme-sm-color-1);
+    --theme-button-hover-text-color: var(--theme-sm-light-1);
+    --theme-button-hover-border-color: transparent;
+    --theme-button-border-width: 2px;
+    --theme-button-border-radius: 0;
+    --theme-button-y-padding: 0.75em;
+    --theme-button-x-padding: 1.5em;
+    --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
+    --theme-button-transition-duration: .4s;
+    --theme-button-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
+    --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
+    --theme-button-hover-transition: var(--theme-button-transition);
+    --theme-button-arrow-size: 1.15em;
     --current-button-background-color: var(--theme-button-background-color);
     --current-button-border-color: var(--theme-button-border-color);
     --current-button-text-color: var(--theme-button-text-color);
@@ -5290,6 +5378,22 @@ ul.order_details[class] {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
+  --theme-button-background-color: var(--theme-sm-dark-1);
+  --theme-button-text-color: var(--theme-sm-light-1);
+  --theme-button-border-color: transparent;
+  --theme-button-hover-background-color: var(--theme-sm-color-1);
+  --theme-button-hover-text-color: var(--theme-sm-light-1);
+  --theme-button-hover-border-color: transparent;
+  --theme-button-border-width: 2px;
+  --theme-button-border-radius: 0;
+  --theme-button-y-padding: 0.75em;
+  --theme-button-x-padding: 1.5em;
+  --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
+  --theme-button-transition-duration: .4s;
+  --theme-button-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
+  --theme-button-hover-transition: var(--theme-button-transition);
+  --theme-button-arrow-size: 1.15em;
   --current-button-background-color: var(--theme-button-background-color);
   --current-button-border-color: var(--theme-button-border-color);
   --current-button-text-color: var(--theme-button-text-color);
