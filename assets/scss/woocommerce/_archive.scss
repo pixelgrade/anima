@@ -31,6 +31,7 @@
 
   li {
     margin-top: 0;
+    margin-bottom: 1em;
   }
 }
 
@@ -40,7 +41,7 @@
 
 .woocommerce-products-header {
   padding-top: var(--theme-spacing-normal);
-  padding-bottom: var(--theme-spacing-huge);
+  padding-bottom: var(--theme-spacing-normal);
 }
 
 .woocommerce-products-header__title {
@@ -84,7 +85,8 @@
     .checkout-button,
     #place_order,
     .woocommerce-mini-cart__buttons .checkout,
-    .wc-proceed-to-checkout .wc-forward {
+    .wc-proceed-to-checkout .wc-forward,
+    .grouped_form .single_add_to_cart_button {
       @include button;
       @include button-fill;
     }

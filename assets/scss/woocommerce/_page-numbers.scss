@@ -17,7 +17,7 @@
   // The stick
   &:before {
     width: .75em;
-    height: .0625em;
+    height: .0725em;
 
     background-color: currentColor;
   }
@@ -28,7 +28,7 @@
     width: .45em;
     height: .45em;
 
-    border: .1em solid transparent;
+    border: .0625em solid transparent;
   }
 }
 
@@ -66,6 +66,8 @@
 .nav-links {
   display: flex;
   justify-content: center;
+
+  font-feature-settings: "lnum";
 
   margin-top: var(--theme-spacing-huge);
   margin-bottom: var(--theme-spacing-normal);
@@ -122,5 +124,13 @@ span.page-numbers {
   &.next[class],
   &.prev[class] {
     width: auto;
+  }
+
+  &:not(.prev):not(.next) {
+    display: none;
+    
+    @include above($theme-lap-breakpoint) {
+      display: flex;
+    }
   }
 }
