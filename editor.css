@@ -9,7 +9,15 @@
   --theme-cite-color: var(--theme-sm-color-1); }
 
 :root {
-  --theme-minimum-font-size: 16; }
+  --theme-minimum-font-size: 16;
+  --theme-font-size-ratio-multiplier: 0;
+  --theme-font-size-addon-multiplier: 0;
+  --theme-font-size-grow-unit: 0px; }
+
+:root {
+  --theme-font-size-grow-unit: calc( 1vw - 1000px / 100 );
+  --theme-font-size-ratio-multiplier: 1;
+  --theme-font-size-addon-multiplier: 0; }
 
 /* Global CSS Custom Properties */
 :root {
@@ -22,10 +30,10 @@
   --sm-light-1: #FFFFFF;
   --sm-light-2: #CCCCCC;
   --sm-light-3: #EEEFF2;
-  --theme-body-font-size: 16px;
+  --theme-body-font-size: 8px;
   --theme-content-font-size: 18px;
-  --theme-content-width-normal: calc(42 * var(--theme-body-font-size));
-  --theme-content-width-wide: calc(74 * var(--theme-body-font-size));
+  --theme-content-width-normal: calc(38 * var(--theme-content-font-size));
+  --theme-content-width-wide: calc(65 * var(--theme-content-font-size));
   --theme-spacing: 0.2rem;
   --theme-spacing-micro:  var( --theme-spacing );
   --theme-spacing-tiny:   var( --theme-spacing );
@@ -285,9 +293,9 @@
     --theme-button-initial-font-size: 17;
     --theme-button-font-size-diff: calc( var( --theme-button-initial-font-size ) - var( --theme-minimum-font-size ) );
     --theme-button-font-size-diff-ratio: calc( var( --theme-button-font-size-diff ) / var( --theme-minimum-font-size ) );
-    --theme-button-font-size-vw-diff: calc( var( --theme-button-font-size-diff-ratio ) * 1vw );
-    --theme-button-font-size-px-diff: calc( var( --theme-button-font-size-diff-ratio ) * 1440px / 100 );
-    --theme-button-font-size: calc( var( --theme-button-initial-font-size ) * 1px + var( --theme-button-font-size-vw-diff ) - var( --theme-button-font-size-px-diff ) ); }
+    --theme-button-font-size-ratio: calc( var( --theme-button-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
+    --theme-button-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-button-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
+    --theme-button-font-size: calc( var( --theme-button-initial-font-size ) * 1px + var( --theme-button-font-size-addon ) ); }
   .editor-styles-wrapper .wp-block-button__link {
     transition: var(--current-button-transition); }
   .editor-styles-wrapper .wp-block-button:not(.is-style-text) .wp-block-button__link {
@@ -546,9 +554,9 @@
   --theme-body-initial-font-size: 16;
   --theme-body-font-size-diff: calc( var( --theme-body-initial-font-size ) - var( --theme-minimum-font-size ) );
   --theme-body-font-size-diff-ratio: calc( var( --theme-body-font-size-diff ) / var( --theme-minimum-font-size ) );
-  --theme-body-font-size-vw-diff: calc( var( --theme-body-font-size-diff-ratio ) * 1vw );
-  --theme-body-font-size-px-diff: calc( var( --theme-body-font-size-diff-ratio ) * 1440px / 100 );
-  --theme-body-font-size: calc( var( --theme-body-initial-font-size ) * 1px + var( --theme-body-font-size-vw-diff ) - var( --theme-body-font-size-px-diff ) ); }
+  --theme-body-font-size-ratio: calc( var( --theme-body-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
+  --theme-body-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-body-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
+  --theme-body-font-size: calc( var( --theme-body-initial-font-size ) * 1px + var( --theme-body-font-size-addon ) ); }
 
 :root {
   --theme-content-font-family: var(--theme-body-font-family);
@@ -559,9 +567,9 @@
   --theme-content-initial-font-size: 18;
   --theme-content-font-size-diff: calc( var( --theme-content-initial-font-size ) - var( --theme-minimum-font-size ) );
   --theme-content-font-size-diff-ratio: calc( var( --theme-content-font-size-diff ) / var( --theme-minimum-font-size ) );
-  --theme-content-font-size-vw-diff: calc( var( --theme-content-font-size-diff-ratio ) * 1vw );
-  --theme-content-font-size-px-diff: calc( var( --theme-content-font-size-diff-ratio ) * 1440px / 100 );
-  --theme-content-font-size: calc( var( --theme-content-initial-font-size ) * 1px + var( --theme-content-font-size-vw-diff ) - var( --theme-content-font-size-px-diff ) ); }
+  --theme-content-font-size-ratio: calc( var( --theme-content-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
+  --theme-content-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-content-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
+  --theme-content-font-size: calc( var( --theme-content-initial-font-size ) * 1px + var( --theme-content-font-size-addon ) ); }
 
 :root {
   --theme-lead-font-family: var(--theme-body-font-family);
@@ -572,9 +580,9 @@
   --theme-lead-initial-font-size: 24;
   --theme-lead-font-size-diff: calc( var( --theme-lead-initial-font-size ) - var( --theme-minimum-font-size ) );
   --theme-lead-font-size-diff-ratio: calc( var( --theme-lead-font-size-diff ) / var( --theme-minimum-font-size ) );
-  --theme-lead-font-size-vw-diff: calc( var( --theme-lead-font-size-diff-ratio ) * 1vw );
-  --theme-lead-font-size-px-diff: calc( var( --theme-lead-font-size-diff-ratio ) * 1440px / 100 );
-  --theme-lead-font-size: calc( var( --theme-lead-initial-font-size ) * 1px + var( --theme-lead-font-size-vw-diff ) - var( --theme-lead-font-size-px-diff ) ); }
+  --theme-lead-font-size-ratio: calc( var( --theme-lead-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
+  --theme-lead-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-lead-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
+  --theme-lead-font-size: calc( var( --theme-lead-initial-font-size ) * 1px + var( --theme-lead-font-size-addon ) ); }
 
 :root {
   --theme-display-font-family: var(--theme-primary-font-family);
@@ -585,9 +593,9 @@
   --theme-display-initial-font-size: 115;
   --theme-display-font-size-diff: calc( var( --theme-display-initial-font-size ) - var( --theme-minimum-font-size ) );
   --theme-display-font-size-diff-ratio: calc( var( --theme-display-font-size-diff ) / var( --theme-minimum-font-size ) );
-  --theme-display-font-size-vw-diff: calc( var( --theme-display-font-size-diff-ratio ) * 1vw );
-  --theme-display-font-size-px-diff: calc( var( --theme-display-font-size-diff-ratio ) * 1440px / 100 );
-  --theme-display-font-size: calc( var( --theme-display-initial-font-size ) * 1px + var( --theme-display-font-size-vw-diff ) - var( --theme-display-font-size-px-diff ) ); }
+  --theme-display-font-size-ratio: calc( var( --theme-display-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
+  --theme-display-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-display-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
+  --theme-display-font-size: calc( var( --theme-display-initial-font-size ) * 1px + var( --theme-display-font-size-addon ) ); }
 
 :root {
   --theme-heading-1-font-family: var(--theme-primary-font-family);
@@ -598,9 +606,9 @@
   --theme-heading-1-initial-font-size: 66;
   --theme-heading-1-font-size-diff: calc( var( --theme-heading-1-initial-font-size ) - var( --theme-minimum-font-size ) );
   --theme-heading-1-font-size-diff-ratio: calc( var( --theme-heading-1-font-size-diff ) / var( --theme-minimum-font-size ) );
-  --theme-heading-1-font-size-vw-diff: calc( var( --theme-heading-1-font-size-diff-ratio ) * 1vw );
-  --theme-heading-1-font-size-px-diff: calc( var( --theme-heading-1-font-size-diff-ratio ) * 1440px / 100 );
-  --theme-heading-1-font-size: calc( var( --theme-heading-1-initial-font-size ) * 1px + var( --theme-heading-1-font-size-vw-diff ) - var( --theme-heading-1-font-size-px-diff ) ); }
+  --theme-heading-1-font-size-ratio: calc( var( --theme-heading-1-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
+  --theme-heading-1-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-heading-1-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
+  --theme-heading-1-font-size: calc( var( --theme-heading-1-initial-font-size ) * 1px + var( --theme-heading-1-font-size-addon ) ); }
 
 :root {
   --theme-heading-2-font-family: var(--theme-primary-font-family);
@@ -611,9 +619,9 @@
   --theme-heading-2-initial-font-size: 40;
   --theme-heading-2-font-size-diff: calc( var( --theme-heading-2-initial-font-size ) - var( --theme-minimum-font-size ) );
   --theme-heading-2-font-size-diff-ratio: calc( var( --theme-heading-2-font-size-diff ) / var( --theme-minimum-font-size ) );
-  --theme-heading-2-font-size-vw-diff: calc( var( --theme-heading-2-font-size-diff-ratio ) * 1vw );
-  --theme-heading-2-font-size-px-diff: calc( var( --theme-heading-2-font-size-diff-ratio ) * 1440px / 100 );
-  --theme-heading-2-font-size: calc( var( --theme-heading-2-initial-font-size ) * 1px + var( --theme-heading-2-font-size-vw-diff ) - var( --theme-heading-2-font-size-px-diff ) ); }
+  --theme-heading-2-font-size-ratio: calc( var( --theme-heading-2-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
+  --theme-heading-2-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-heading-2-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
+  --theme-heading-2-font-size: calc( var( --theme-heading-2-initial-font-size ) * 1px + var( --theme-heading-2-font-size-addon ) ); }
 
 :root {
   --theme-heading-3-font-family: var(--theme-primary-font-family);
@@ -624,9 +632,9 @@
   --theme-heading-3-initial-font-size: 32;
   --theme-heading-3-font-size-diff: calc( var( --theme-heading-3-initial-font-size ) - var( --theme-minimum-font-size ) );
   --theme-heading-3-font-size-diff-ratio: calc( var( --theme-heading-3-font-size-diff ) / var( --theme-minimum-font-size ) );
-  --theme-heading-3-font-size-vw-diff: calc( var( --theme-heading-3-font-size-diff-ratio ) * 1vw );
-  --theme-heading-3-font-size-px-diff: calc( var( --theme-heading-3-font-size-diff-ratio ) * 1440px / 100 );
-  --theme-heading-3-font-size: calc( var( --theme-heading-3-initial-font-size ) * 1px + var( --theme-heading-3-font-size-vw-diff ) - var( --theme-heading-3-font-size-px-diff ) ); }
+  --theme-heading-3-font-size-ratio: calc( var( --theme-heading-3-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
+  --theme-heading-3-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-heading-3-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
+  --theme-heading-3-font-size: calc( var( --theme-heading-3-initial-font-size ) * 1px + var( --theme-heading-3-font-size-addon ) ); }
 
 :root {
   --theme-heading-4-font-family: var(--theme-primary-font-family);
@@ -637,9 +645,9 @@
   --theme-heading-4-initial-font-size: 24;
   --theme-heading-4-font-size-diff: calc( var( --theme-heading-4-initial-font-size ) - var( --theme-minimum-font-size ) );
   --theme-heading-4-font-size-diff-ratio: calc( var( --theme-heading-4-font-size-diff ) / var( --theme-minimum-font-size ) );
-  --theme-heading-4-font-size-vw-diff: calc( var( --theme-heading-4-font-size-diff-ratio ) * 1vw );
-  --theme-heading-4-font-size-px-diff: calc( var( --theme-heading-4-font-size-diff-ratio ) * 1440px / 100 );
-  --theme-heading-4-font-size: calc( var( --theme-heading-4-initial-font-size ) * 1px + var( --theme-heading-4-font-size-vw-diff ) - var( --theme-heading-4-font-size-px-diff ) ); }
+  --theme-heading-4-font-size-ratio: calc( var( --theme-heading-4-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
+  --theme-heading-4-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-heading-4-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
+  --theme-heading-4-font-size: calc( var( --theme-heading-4-initial-font-size ) * 1px + var( --theme-heading-4-font-size-addon ) ); }
 
 :root {
   --theme-heading-5-font-family: var(--theme-secondary-font-family);
@@ -650,9 +658,9 @@
   --theme-heading-5-initial-font-size: 17;
   --theme-heading-5-font-size-diff: calc( var( --theme-heading-5-initial-font-size ) - var( --theme-minimum-font-size ) );
   --theme-heading-5-font-size-diff-ratio: calc( var( --theme-heading-5-font-size-diff ) / var( --theme-minimum-font-size ) );
-  --theme-heading-5-font-size-vw-diff: calc( var( --theme-heading-5-font-size-diff-ratio ) * 1vw );
-  --theme-heading-5-font-size-px-diff: calc( var( --theme-heading-5-font-size-diff-ratio ) * 1440px / 100 );
-  --theme-heading-5-font-size: calc( var( --theme-heading-5-initial-font-size ) * 1px + var( --theme-heading-5-font-size-vw-diff ) - var( --theme-heading-5-font-size-px-diff ) ); }
+  --theme-heading-5-font-size-ratio: calc( var( --theme-heading-5-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
+  --theme-heading-5-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-heading-5-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
+  --theme-heading-5-font-size: calc( var( --theme-heading-5-initial-font-size ) * 1px + var( --theme-heading-5-font-size-addon ) ); }
 
 :root {
   --theme-heading-6-font-family: var(--theme-secondary-font-family);
@@ -663,9 +671,9 @@
   --theme-heading-6-initial-font-size: 17;
   --theme-heading-6-font-size-diff: calc( var( --theme-heading-6-initial-font-size ) - var( --theme-minimum-font-size ) );
   --theme-heading-6-font-size-diff-ratio: calc( var( --theme-heading-6-font-size-diff ) / var( --theme-minimum-font-size ) );
-  --theme-heading-6-font-size-vw-diff: calc( var( --theme-heading-6-font-size-diff-ratio ) * 1vw );
-  --theme-heading-6-font-size-px-diff: calc( var( --theme-heading-6-font-size-diff-ratio ) * 1440px / 100 );
-  --theme-heading-6-font-size: calc( var( --theme-heading-6-initial-font-size ) * 1px + var( --theme-heading-6-font-size-vw-diff ) - var( --theme-heading-6-font-size-px-diff ) ); }
+  --theme-heading-6-font-size-ratio: calc( var( --theme-heading-6-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
+  --theme-heading-6-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-heading-6-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
+  --theme-heading-6-font-size: calc( var( --theme-heading-6-initial-font-size ) * 1px + var( --theme-heading-6-font-size-addon ) ); }
 
 :root {
   --theme-navigation-font-family: var(--theme-secondary-font-family);
@@ -676,9 +684,9 @@
   --theme-navigation-initial-font-size: 17;
   --theme-navigation-font-size-diff: calc( var( --theme-navigation-initial-font-size ) - var( --theme-minimum-font-size ) );
   --theme-navigation-font-size-diff-ratio: calc( var( --theme-navigation-font-size-diff ) / var( --theme-minimum-font-size ) );
-  --theme-navigation-font-size-vw-diff: calc( var( --theme-navigation-font-size-diff-ratio ) * 1vw );
-  --theme-navigation-font-size-px-diff: calc( var( --theme-navigation-font-size-diff-ratio ) * 1440px / 100 );
-  --theme-navigation-font-size: calc( var( --theme-navigation-initial-font-size ) * 1px + var( --theme-navigation-font-size-vw-diff ) - var( --theme-navigation-font-size-px-diff ) ); }
+  --theme-navigation-font-size-ratio: calc( var( --theme-navigation-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
+  --theme-navigation-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-navigation-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
+  --theme-navigation-font-size: calc( var( --theme-navigation-initial-font-size ) * 1px + var( --theme-navigation-font-size-addon ) ); }
 
 .editor-styles-wrapper[class] h1.has-larger-font-size {
   font-family: var(--current-font-family);

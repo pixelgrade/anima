@@ -1,10 +1,31 @@
 :root {
-    --theme-minimum-font-size: #{ strip-unit( $theme-minimum-font-size ) };
-
-    //@include above($nova-font-size-breakpoint) {
-    //    --theme-minimum-font-size: #{$nova-font-size-minimum-vw};
-    //}
+    --theme-minimum-font-size: 16;
+    --theme-font-size-ratio-multiplier: 0;
+    --theme-font-size-addon-multiplier: 0;
+    --theme-font-size-grow-unit: 0px;
 }
+
+@mixin font-size-adjust( $fs-ratio-x: 0, $fs-addon-x: 0, $bp: null ) {
+
+    @at-root {
+        :root {
+            //@if ( $bp != null ) {
+            //    @media only screen and ( min-width: #{$bp} ) {
+                    --theme-font-size-grow-unit: calc( 1vw - #{$bp} / 100 );
+                    --theme-font-size-ratio-multiplier: #{$fs-ratio-x};
+                    --theme-font-size-addon-multiplier: #{$fs-addon-x};
+                //}
+            //} @else {
+            //    --theme-font-size-grow-unit: 0px;
+            //    --theme-font-size-ratio-multiplier: #{$fs-ratio-x};
+            //    --theme-font-size-addon-multiplier: #{$fs-addon-x};
+            //}
+        }
+    }
+}
+
+@include font-size-adjust( 1, 0, 1000px );
+
 
 @mixin define-font($name, $config, $props: $nova-font-props) {
     $config: map_merge( (
@@ -32,12 +53,18 @@
             $font-size: map-get( $config, font-size );
 
             @if ( $font-size and $font-size != 'inherit' ) {
+
                 --theme-#{$name}-initial-font-size: #{$font-size};
                 --theme-#{$name}-font-size-diff: calc( var( --theme-#{$name}-initial-font-size ) - var( --theme-minimum-font-size ) ); // 2
                 --theme-#{$name}-font-size-diff-ratio: calc( var( --theme-#{$name}-font-size-diff ) / var( --theme-minimum-font-size ) ); // 2 / 16
-                --theme-#{$name}-font-size-vw-diff: calc( var( --theme-#{$name}-font-size-diff-ratio ) * 1vw );
-                --theme-#{$name}-font-size-px-diff: calc( var( --theme-#{$name}-font-size-diff-ratio ) * 1440px / 100 );
-                --theme-#{$name}-font-size: calc( var( --theme-#{$name}-initial-font-size ) * 1px + var( --theme-#{$name}-font-size-vw-diff ) - var( --theme-#{$name}-font-size-px-diff ) );
+                --theme-#{$name}-font-size-ratio: calc( var( --theme-#{$name}-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
+                --theme-#{$name}-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-#{$name}-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
+                --theme-#{$name}-font-size: calc( var( --theme-#{$name}-initial-font-size ) * 1px + var( --theme-#{$name}-font-size-addon ) );
+
+                //@media only screen and (min-width: 1440px) {
+                //    //--theme-font-size-ratio-multiplier: 1;
+                //    //--theme-font-size-addon-multiplier: 3;
+                //}
             }
 
             @if ( $font-size == 'inherit' ) {
