@@ -633,7 +633,18 @@ template {
 /* 1. Elements */
 html {
   -webkit-font-smoothing: antialiased;
-  @apply-font (body); }
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  --current-font-family: var(--theme-body-font-family);
+  --current-font-size: var(--theme-body-font-size);
+  --current-line-height: var(--theme-body-line-height);
+  --current-font-weight: var(--theme-body-font-weight);
+  --current-letter-spacing: var(--theme-body-letter-spacing);
+  --current-text-transform: var(--theme-body-text-transform); }
 
 body {
   background-color: var(--theme-sm-light-1);

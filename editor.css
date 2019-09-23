@@ -1504,16 +1504,27 @@
     --current-text-transform: var(--theme-heading-5-text-transform);
     font-style: normal; }
   .editor-styles-wrapper[class] {
-    background-color: var(--theme-sm-light-1);
-    color: var(--theme-sm-dark-2);
-    @apply-font (body);
     /* Headings */
     /* Iframes */
     /* Lists */
     /* Nested unordered lists */
     /* Nested ordered lists */
     /* Preformatted */
-    /* Tables */ }
+    /* Tables */
+    font-family: var(--current-font-family);
+    font-size: var(--current-font-size);
+    line-height: var(--current-line-height);
+    font-weight: var(--current-font-weight);
+    letter-spacing: var(--current-letter-spacing);
+    text-transform: var(--current-text-transform);
+    --current-font-family: var(--theme-content-font-family);
+    --current-font-size: var(--theme-content-font-size);
+    --current-line-height: var(--theme-content-line-height);
+    --current-font-weight: var(--theme-content-font-weight);
+    --current-letter-spacing: var(--theme-content-letter-spacing);
+    --current-text-transform: var(--theme-content-text-transform);
+    background-color: var(--theme-sm-light-1);
+    color: var(--theme-sm-dark-2); }
     .editor-styles-wrapper[class] h1, .editor-styles-wrapper[class] h2, .editor-styles-wrapper[class] h3, .editor-styles-wrapper[class] h4, .editor-styles-wrapper[class] h5, .editor-styles-wrapper[class] h6 {
       margin: 0; }
     .editor-styles-wrapper[class] iframe {

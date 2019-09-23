@@ -25,15 +25,16 @@
 
     // increased specificity selector to overwrite default styles
     &[class] {
-        @include nova-container-colors;
-        @include nova-container-font(var(--theme-content-font-size));
-
         //@import "elements/forms";
         @import "elements/headings";
         @import "elements/iframe";
         @import "elements/lists";
         @import "elements/pre";
         @import "elements/tables";
+        @include apply-font(content);
+
+        background-color: var(--theme-sm-light-1);
+        color: var(--theme-sm-dark-2);
     }
 
     @import "elements/links";

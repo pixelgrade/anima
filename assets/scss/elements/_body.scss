@@ -1,8 +1,9 @@
 html {
     -webkit-font-smoothing: antialiased;
-    @include nova-container-font;
+    @include apply-font(body);
 }
 
 body {
-    @include nova-container-colors;
+    background-color: var(--theme-sm-light-1);
+    color: var(--theme-sm-dark-2);
 }
