@@ -199,7 +199,7 @@
       // restyle remove button
       background: none;
 
-      @include close(.625em, .05em, false);
+      @include close(.625em, .125em, false);
 
       // woocommerce thinks this should be important
       color: inherit !important;
@@ -228,7 +228,7 @@
 }
 
 .c-mini-cart__close {
-  @include close(1.125em, .125em);
+  @include close(1em, .1875em);
   margin-left: auto;
   cursor: pointer;
 }

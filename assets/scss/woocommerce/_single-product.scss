@@ -197,7 +197,7 @@
 
     &:hover {
       color: var(--theme-sm-color-1);
-      border-bottom: .1em solid currentColor;
+      border-bottom: .125em solid currentColor;
     }
   }
 
@@ -205,7 +205,7 @@
     padding-bottom: var(--theme-spacing-tiny);
 
     text-decoration: none;
-    border-bottom: .1em solid currentColor;
+    border-bottom: .125em solid currentColor;
   }
 }
 
@@ -219,7 +219,7 @@
   &:not(:empty):before {
     content: "";
     display: block;
-    height: .06em;
+    height: .0625em;
     background: currentColor;
     opacity: .2;
 
@@ -350,7 +350,7 @@
 
   .label {
     margin-top: .625em;
-    margin-bottom: .3em;
+    margin-bottom: .3125em;
   }
 }
 
@@ -531,6 +531,7 @@
 
 .add_to_cart_button {
   @include button;
+  @include button-outline-vars;
   @include button-fill;
   text-align: center;
 }
