@@ -1,5 +1,5 @@
 /* Button CSS Custom Properties */
-:root {
+@mixin vars-theme-button {
   --theme-button-background-color: var(--theme-sm-dark-1);
   --theme-button-text-color: var(--theme-sm-light-1);
   --theme-button-border-color: transparent;
@@ -9,7 +9,7 @@
   --theme-button-hover-border-color: transparent;
 
   --theme-button-border-width: 2px;
-  --theme-button-border-radius: 999em;
+  --theme-button-border-radius: 0;
 
   --theme-button-y-padding: 0.75em;
   --theme-button-x-padding: 1.5em;
@@ -18,12 +18,22 @@
   --theme-button-transition-duration: .4s;
   --theme-button-transition-easing: #{$ease};
 
-  // omg
   --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
-
   --theme-button-hover-transition: var(--theme-button-transition);
+}
 
-  --theme-button-arrow-size: 1.15em;
+@mixin vars-current-button {
+  --current-button-background-color: var(--theme-button-background-color);
+  --current-button-border-color: var(--theme-button-border-color);
+  --current-button-text-color: var(--theme-button-text-color);
+  --current-button-transition: var(--theme-button-transition);
+}
+
+@mixin vars-current-button-hover {
+  --current-button-background-color: var(--theme-button-hover-background-color);
+  --current-button-border-color: var(--theme-button-hover-border-color);
+  --current-button-text-color: var(--theme-button-hover-text-color);
+  --current-button-transition: var(--theme-button-hover-transition);
 }
 
 @mixin button-base {
@@ -31,25 +41,12 @@
   text-decoration: none;
   cursor: pointer;
 
-  @include button-vars;
+  @include vars-theme-button;
+  @include vars-current-button;
 
   &:hover {
-    @include button-hover-vars;
+    @include vars-current-button-hover;
   }
-}
-
-@mixin button-vars {
-  --current-button-background-color: var(--theme-button-background-color);
-  --current-button-border-color: var(--theme-button-border-color);
-  --current-button-text-color: var(--theme-button-text-color);
-  --current-button-transition: var(--theme-button-transition);
-}
-
-@mixin button-hover-vars {
-  --current-button-background-color: var(--theme-button-hover-background-color);
-  --current-button-border-color: var(--theme-button-hover-border-color);
-  --current-button-text-color: var(--theme-button-hover-text-color);
-  --current-button-transition: var(--theme-button-hover-transition);
 }
 
 @mixin button-box {
@@ -110,11 +107,15 @@
   border-width: 0;
 }
 
-@mixin button-with-arrow {
+@mixin button-text {
+  --theme-button-text-color: var(--theme-sm-color-1);
+  --theme-button-hover-text-color: var(--theme-sm-color-1);
+  --theme-button-arrow-size: 1.15em;
+
   position: relative;
   padding-right: var(--theme-button-arrow-size);
-  margin-right: calc( -1 * var(--theme-button-arrow-size) );
   padding-bottom: .3em;
+  margin-right: calc( -1 * var(--theme-button-arrow-size) );
   margin-bottom: -.3em;
 
   &:before {
@@ -144,9 +145,11 @@
     width: var(--theme-button-arrow-size);
     height: var(--theme-button-arrow-size);
 
-    -webkit-mask: url('assets/images/icon-arrow.svg') no-repeat 50% 50%;
     mask: url('assets/images/icon-arrow.svg') no-repeat 50% 50%;
+    -webkit-mask: url('assets/images/icon-arrow.svg') no-repeat 50% 50%;
     mask-size: cover;
+    -webkit-mask-size: cover;
+
     background-color: currentColor;
     vertical-align: text-bottom;
 
@@ -182,14 +185,6 @@
   --theme-button-hover-text-color: var(--theme-sm-dark-1);
   --theme-button-hover-background-color: transparent;
   --theme-button-hover-border-color: var(--theme-sm-dark-1);
-}
-
-@mixin text-button-settings {
-  --theme-button-text-color: var(--theme-sm-color-1);
-  --theme-button-background-color: transparent;
-  --theme-button-hover-text-color: var(--theme-sm-color-1);
-  --theme-button-hover-background-color: transparent;
-  --theme-button-border-radius: 0;
 }
 
 @mixin button {
