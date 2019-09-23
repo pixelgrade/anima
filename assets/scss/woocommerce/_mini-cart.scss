@@ -23,15 +23,15 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 10px;
-      opacity: 0.2;
+      height: .625em;
+      opacity: .2;
 
-      box-shadow: inset 0 10px 10px -10px currentColor;
+      box-shadow: inset 0 .625em .625em -.625em currentColor;
     }
   }
 
   .woocommerce-mini-cart[class] {
-    padding: 40px;
+    padding: 2.5em;
     padding-top: 0;
     overflow-y: auto;
     margin-bottom: 0;
@@ -44,21 +44,21 @@
 
     @include specific(2) {
       border-top: 0;
-      padding: 20px;
+      padding: 1.25em;
       margin: 0;
     }
 
     &:before {
       content: "";
       display: block;
-      height: 10px;
+      height: .625em;
       position: absolute;
       bottom: 100%;
       left: 0;
       right: 0;
       opacity: 0.2;
 
-      box-shadow: inset 0 -10px 10px -10px currentColor;
+      box-shadow: inset 0 -.625em .625em -.625em currentColor;
     }
 
     .amount {
@@ -67,7 +67,7 @@
   }
 
   .woocommerce-mini-cart__buttons {
-    padding: 20px;
+    padding: 1.25em;
     padding-top: 0;
 
     text-align: center;
@@ -81,14 +81,13 @@
       }
 
       > a:not(:last-child) {
-        margin-top: 10px;
+        margin-top: .625em;
       }
     }
 
     .wc-forward:not(.checkout) {
       @include specific(4) {
         position: relative;
-        background: none;
 
         &:after {
           content: "";
@@ -118,7 +117,7 @@
   }
 
   .woocommerce-mini-cart__empty-message {
-    padding: 20px;
+    padding: 1.25em;
   }
 }
 
@@ -130,7 +129,7 @@
   left: 0;
 
   background: #000000;
-  opacity: 0.2;
+  opacity: .2;
 }
 
 .c-mini-cart__flyout {
@@ -169,7 +168,7 @@
 
     li {
       padding: 0;
-      padding-top: 40px;
+      padding-top: 2.5em;
 
       // for proper positioning when scrolling product into view
       // we keep consistent padding of 40px
@@ -177,7 +176,7 @@
       &:before {
         content: "";
         display: block;
-        margin-top: -10px;
+        margin-top: -.625em;
       }
     }
 
@@ -186,19 +185,21 @@
       display: flex;
       flex-direction: column;
       text-decoration: none;
+
+      color: inherit;
     }
 
     // move the remove button to bottom right next to quantity
     a.remove[class] {
       top: auto;
       left: auto;
-      bottom: 0.25em;
+      bottom: .25em;
       right: 0;
 
       // restyle remove button
       background: none;
 
-      @include close(10px, 1px, false);
+      @include close(.625em, .05em, false);
 
       // woocommerce thinks this should be important
       color: inherit !important;
@@ -209,7 +210,7 @@
       float: none;
       width: auto;
       margin: 0;
-      margin-top: 6px;
+      margin-top: .375em;
       // reverse image and title order
       order: 10;
     }
@@ -219,7 +220,7 @@
 .c-mini-cart__header {
   display: flex;
   align-items: center;
-  padding: 20px;
+  padding: 1.25em;
 }
 
 .c-mini-cart__title[class] {
@@ -227,7 +228,7 @@
 }
 
 .c-mini-cart__close {
-  @include close(18px);
+  @include close(1.125em, .125em);
   margin-left: auto;
   cursor: pointer;
 }

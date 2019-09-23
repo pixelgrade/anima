@@ -131,7 +131,7 @@
     margin-bottom: 0;
 
     + li {
-      margin-top: 20px;
+      margin-top: 1.25em;
     }
   }
 
@@ -140,7 +140,7 @@
 
     display: block;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 1.25em;
   }
 
   form .form-row {
@@ -151,7 +151,6 @@
     }
 
     label {
-      font-weight: 700;
       margin-bottom: var(--theme-spacing);
     }
 
@@ -239,23 +238,23 @@
     align-items: center;
     font: inherit;
 
-    border-top: 1px solid rgba(0,0,0,.1);
-    padding-top: 24px;
-    padding-bottom: 24px;
+    border-top: .1em solid rgba(0,0,0,.1);
+    padding-top: .66em;
+    padding-bottom: .66em;
 
     label {
       display: flex;
       align-items: center;
 
       > * {
-        margin-left: 10px;
+        margin-left: .625em;
       }
     }
   }
 
   div.payment_box {
     flex-basis: 100%;
-    margin-left: 38px;
+    margin-left: 2.35em;
     margin-bottom: 0;
     padding: 0;
     opacity: 0.8;
@@ -279,9 +278,9 @@
 
   @include specific(2) {
     > * {
-      border-top: 1px solid rgba(0,0,0,.1);
-      padding-top: 24px;
-      padding-bottom: 24px;
+      border-top: .1em solid rgba(0,0,0,.1);
+      padding-top: 1.5em;
+      padding-bottom: 1.5em;
     }
 
     .validate-required {
@@ -295,7 +294,7 @@
 
       .woocommerce-form__input {
         margin-top: 0;
-        margin-right: 10px;
+        margin-right: .625em;
       }
     }
   }
@@ -329,18 +328,18 @@
 
       position: absolute;
       top: 50%;
-      left: 0.2em;
+      left: .2em;
 
       display: block;
-      width: 0.4em;
-      height: 0.4em;
+      width: .4em;
+      height: .4em;
 
-      border: 1px solid transparent;
+      border: .1em solid transparent;
       border-top-color: currentColor;
       border-right-color: currentColor;
 
-      transform: translate(0.1em,0.1em) translate(0,-50%) rotate(45deg);
-      opacity: 0.5;
+      transform: translate(.1em, .1em) translate(0,-50%) rotate(45deg);
+      opacity: .5;
     }
   }
 }
@@ -349,7 +348,7 @@
 .woocommerce-additional-fields > h3 {
   padding-bottom: var(--theme-spacing);
   margin-bottom: var(--theme-spacing);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: .1em solid rgba(0, 0, 0, 0.1);
 }
 
 [id="order_review_heading"] {
@@ -437,6 +436,5 @@ ul.order_details[class] {
 
   .wc-block-grid__product-title {
     @include apply-font(heading-4);
-    font-weight: 400;
   }
 }

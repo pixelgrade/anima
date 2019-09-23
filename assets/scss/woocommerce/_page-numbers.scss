@@ -16,8 +16,8 @@
 
   // The stick
   &:before {
-    width: 12px;
-    height: 1px;
+    width: .75em;
+    height: .0625em;
 
     background-color: currentColor;
   }
@@ -25,15 +25,15 @@
   // The arrow
   &:after {
     display: block;
-    width: 7px;
-    height: 7px;
+    width: .45em;
+    height: .45em;
 
-    border: 1px solid transparent;
+    border: .1em solid transparent;
   }
 }
 
 @mixin pagination--left {
-  padding-left: 25px;
+  padding-left: 1.55em;
 
   &:before {
     left: 0;
@@ -48,7 +48,7 @@
 }
 
 @mixin pagination--right {
-  padding-right: 25px;
+  padding-right: 1.55em;
 
   &:before {
     right: 0;
