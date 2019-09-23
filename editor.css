@@ -9,10 +9,7 @@
   --theme-cite-color: var(--theme-sm-color-1); }
 
 :root {
-  --theme-minimum-font-size: 16px; }
-  @media only screen and (min-width: 1440px) {
-    :root {
-      --theme-minimum-font-size: 1.11111vw; } }
+  --theme-minimum-font-size: 16; }
 
 /* Global CSS Custom Properties */
 :root {
@@ -285,14 +282,12 @@
     --theme-button-font-weight: 500;
     --theme-button-letter-spacing: 0.03em;
     --theme-button-text-transform: capitalize;
-    --theme-button-font-size-diff: 0px;
-    --theme-button-font-size: calc( var(--theme-minimum-font-size) + var(--theme-button-font-size-diff) ); }
-    @media screen and (min-width: 0px) {
-      :root {
-        --theme-button-font-size-diff: calc(0px + 1 * ((100vw - 0px) / 1440)); } }
-    @media screen and (min-width: 1440px) {
-      :root {
-        --theme-button-font-size-diff: 1px; } }
+    --theme-button-initial-font-size: 17;
+    --theme-button-font-size-diff: calc( var( --theme-button-initial-font-size ) - var( --theme-minimum-font-size ) );
+    --theme-button-font-size-diff-ratio: calc( var( --theme-button-font-size-diff ) / var( --theme-minimum-font-size ) );
+    --theme-button-font-size-vw-diff: calc( var( --theme-button-font-size-diff-ratio ) * 1vw );
+    --theme-button-font-size-px-diff: calc( var( --theme-button-font-size-diff-ratio ) * 1440px / 100 );
+    --theme-button-font-size: calc( var( --theme-button-initial-font-size ) * 1px + var( --theme-button-font-size-vw-diff ) - var( --theme-button-font-size-px-diff ) ); }
   .editor-styles-wrapper .wp-block-button__link {
     transition: var(--current-button-transition); }
   .editor-styles-wrapper .wp-block-button:not(.is-style-text) .wp-block-button__link {
@@ -445,14 +440,11 @@
   .editor-styles-wrapper .c-headline__secondary {
     font-size: 1.3636em;
     white-space: nowrap; }
-  .editor-styles-wrapper h1.c-headline.has-larger-font-size {
-    font-size: var(--current-font-size);
-    --current-font-size: var(--theme-display-font-size); }
-    .editor-styles-wrapper h1.c-headline.has-larger-font-size .c-headline__secondary {
-      font-size: 0.87em; }
-    .editor-styles-wrapper h1.c-headline.has-larger-font-size .c-headline__secondary + .c-headline__primary,
-    .editor-styles-wrapper h1.c-headline.has-larger-font-size > .editor-rich-text + .editor-rich-text {
-      margin-top: -0.3em; }
+  .editor-styles-wrapper h1.c-headline.has-larger-font-size .c-headline__secondary {
+    font-size: 0.87em; }
+  .editor-styles-wrapper h1.c-headline.has-larger-font-size .c-headline__secondary + .c-headline__primary,
+  .editor-styles-wrapper h1.c-headline.has-larger-font-size > .editor-rich-text + .editor-rich-text {
+    margin-top: -0.3em; }
   .editor-styles-wrapper .wp-block-button:not(.is-style-text) .wp-block-button__link, .editor-styles-wrapper .wp-block-button__link {
     font-family: var(--current-font-family);
     font-size: var(--current-font-size);
@@ -540,29 +532,10 @@
   .editor-styles-wrapper .wp-block-separator.is-style-decorative .c-separator__line {
     display: none; }
 
-:root {
+.editor-styles-wrapper[class] :root {
   --theme-primary-font-family: Reforma1969, sans-serif;
-  --theme-primary-line-height: inherit;
-  --theme-primary-font-weight: inherit;
-  --theme-primary-letter-spacing: inherit;
-  --theme-primary-text-transform: inherit;
-  --theme-primary-font-size: inherit; }
-
-:root {
   --theme-secondary-font-family: Reforma2018, sans-serif;
-  --theme-secondary-line-height: inherit;
-  --theme-secondary-font-weight: inherit;
-  --theme-secondary-letter-spacing: inherit;
-  --theme-secondary-text-transform: inherit;
-  --theme-secondary-font-size: inherit; }
-
-:root {
-  --theme-accent-font-family: Billy Ohio, sans-serif;
-  --theme-accent-line-height: inherit;
-  --theme-accent-font-weight: inherit;
-  --theme-accent-letter-spacing: inherit;
-  --theme-accent-text-transform: inherit;
-  --theme-accent-font-size: inherit; }
+  --theme-accent-font-family: Billy Ohio, sans-serif; }
 
 :root {
   --theme-body-font-family: Reforma1969, sans-serif;
@@ -570,14 +543,12 @@
   --theme-body-font-weight: 400;
   --theme-body-letter-spacing: -0.03em;
   --theme-body-text-transform: inherit;
-  --theme-body-font-size-diff: 0px;
-  --theme-body-font-size: calc( var(--theme-minimum-font-size) + var(--theme-body-font-size-diff) ); }
-  @media screen and (min-width: 0px) {
-    :root {
-      --theme-body-font-size-diff: calc(0px + 0 * ((100vw - 0px) / 1440)); } }
-  @media screen and (min-width: 1440px) {
-    :root {
-      --theme-body-font-size-diff: 0px; } }
+  --theme-body-initial-font-size: 16;
+  --theme-body-font-size-diff: calc( var( --theme-body-initial-font-size ) - var( --theme-minimum-font-size ) );
+  --theme-body-font-size-diff-ratio: calc( var( --theme-body-font-size-diff ) / var( --theme-minimum-font-size ) );
+  --theme-body-font-size-vw-diff: calc( var( --theme-body-font-size-diff-ratio ) * 1vw );
+  --theme-body-font-size-px-diff: calc( var( --theme-body-font-size-diff-ratio ) * 1440px / 100 );
+  --theme-body-font-size: calc( var( --theme-body-initial-font-size ) * 1px + var( --theme-body-font-size-vw-diff ) - var( --theme-body-font-size-px-diff ) ); }
 
 :root {
   --theme-content-font-family: var(--theme-body-font-family);
@@ -585,14 +556,12 @@
   --theme-content-font-weight: inherit;
   --theme-content-letter-spacing: -0.03em;
   --theme-content-text-transform: inherit;
-  --theme-content-font-size-diff: 0px;
-  --theme-content-font-size: calc( var(--theme-minimum-font-size) + var(--theme-content-font-size-diff) ); }
-  @media screen and (min-width: 0px) {
-    :root {
-      --theme-content-font-size-diff: calc(0px + 2 * ((100vw - 0px) / 1440)); } }
-  @media screen and (min-width: 1440px) {
-    :root {
-      --theme-content-font-size-diff: 2px; } }
+  --theme-content-initial-font-size: 18;
+  --theme-content-font-size-diff: calc( var( --theme-content-initial-font-size ) - var( --theme-minimum-font-size ) );
+  --theme-content-font-size-diff-ratio: calc( var( --theme-content-font-size-diff ) / var( --theme-minimum-font-size ) );
+  --theme-content-font-size-vw-diff: calc( var( --theme-content-font-size-diff-ratio ) * 1vw );
+  --theme-content-font-size-px-diff: calc( var( --theme-content-font-size-diff-ratio ) * 1440px / 100 );
+  --theme-content-font-size: calc( var( --theme-content-initial-font-size ) * 1px + var( --theme-content-font-size-vw-diff ) - var( --theme-content-font-size-px-diff ) ); }
 
 :root {
   --theme-lead-font-family: var(--theme-body-font-family);
@@ -600,14 +569,12 @@
   --theme-lead-font-weight: inherit;
   --theme-lead-letter-spacing: -0.02em;
   --theme-lead-text-transform: inherit;
-  --theme-lead-font-size-diff: 0px;
-  --theme-lead-font-size: calc( var(--theme-minimum-font-size) + var(--theme-lead-font-size-diff) ); }
-  @media screen and (min-width: 0px) {
-    :root {
-      --theme-lead-font-size-diff: calc(0px + 8 * ((100vw - 0px) / 1440)); } }
-  @media screen and (min-width: 1440px) {
-    :root {
-      --theme-lead-font-size-diff: 8px; } }
+  --theme-lead-initial-font-size: 24;
+  --theme-lead-font-size-diff: calc( var( --theme-lead-initial-font-size ) - var( --theme-minimum-font-size ) );
+  --theme-lead-font-size-diff-ratio: calc( var( --theme-lead-font-size-diff ) / var( --theme-minimum-font-size ) );
+  --theme-lead-font-size-vw-diff: calc( var( --theme-lead-font-size-diff-ratio ) * 1vw );
+  --theme-lead-font-size-px-diff: calc( var( --theme-lead-font-size-diff-ratio ) * 1440px / 100 );
+  --theme-lead-font-size: calc( var( --theme-lead-initial-font-size ) * 1px + var( --theme-lead-font-size-vw-diff ) - var( --theme-lead-font-size-px-diff ) ); }
 
 :root {
   --theme-display-font-family: var(--theme-primary-font-family);
@@ -615,14 +582,12 @@
   --theme-display-font-weight: 700;
   --theme-display-letter-spacing: -0.03em;
   --theme-display-text-transform: inherit;
-  --theme-display-font-size-diff: 0px;
-  --theme-display-font-size: calc( var(--theme-minimum-font-size) + var(--theme-display-font-size-diff) ); }
-  @media screen and (min-width: 0px) {
-    :root {
-      --theme-display-font-size-diff: calc(0px + 99 * ((100vw - 0px) / 1440)); } }
-  @media screen and (min-width: 1440px) {
-    :root {
-      --theme-display-font-size-diff: 99px; } }
+  --theme-display-initial-font-size: 115;
+  --theme-display-font-size-diff: calc( var( --theme-display-initial-font-size ) - var( --theme-minimum-font-size ) );
+  --theme-display-font-size-diff-ratio: calc( var( --theme-display-font-size-diff ) / var( --theme-minimum-font-size ) );
+  --theme-display-font-size-vw-diff: calc( var( --theme-display-font-size-diff-ratio ) * 1vw );
+  --theme-display-font-size-px-diff: calc( var( --theme-display-font-size-diff-ratio ) * 1440px / 100 );
+  --theme-display-font-size: calc( var( --theme-display-initial-font-size ) * 1px + var( --theme-display-font-size-vw-diff ) - var( --theme-display-font-size-px-diff ) ); }
 
 :root {
   --theme-heading-1-font-family: var(--theme-primary-font-family);
@@ -630,14 +595,12 @@
   --theme-heading-1-font-weight: 700;
   --theme-heading-1-letter-spacing: -0.03em;
   --theme-heading-1-text-transform: inherit;
-  --theme-heading-1-font-size-diff: 0px;
-  --theme-heading-1-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-1-font-size-diff) ); }
-  @media screen and (min-width: 0px) {
-    :root {
-      --theme-heading-1-font-size-diff: calc(0px + 50 * ((100vw - 0px) / 1440)); } }
-  @media screen and (min-width: 1440px) {
-    :root {
-      --theme-heading-1-font-size-diff: 50px; } }
+  --theme-heading-1-initial-font-size: 66;
+  --theme-heading-1-font-size-diff: calc( var( --theme-heading-1-initial-font-size ) - var( --theme-minimum-font-size ) );
+  --theme-heading-1-font-size-diff-ratio: calc( var( --theme-heading-1-font-size-diff ) / var( --theme-minimum-font-size ) );
+  --theme-heading-1-font-size-vw-diff: calc( var( --theme-heading-1-font-size-diff-ratio ) * 1vw );
+  --theme-heading-1-font-size-px-diff: calc( var( --theme-heading-1-font-size-diff-ratio ) * 1440px / 100 );
+  --theme-heading-1-font-size: calc( var( --theme-heading-1-initial-font-size ) * 1px + var( --theme-heading-1-font-size-vw-diff ) - var( --theme-heading-1-font-size-px-diff ) ); }
 
 :root {
   --theme-heading-2-font-family: var(--theme-primary-font-family);
@@ -645,14 +608,12 @@
   --theme-heading-2-font-weight: 700;
   --theme-heading-2-letter-spacing: -0.02em;
   --theme-heading-2-text-transform: inherit;
-  --theme-heading-2-font-size-diff: 0px;
-  --theme-heading-2-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-2-font-size-diff) ); }
-  @media screen and (min-width: 0px) {
-    :root {
-      --theme-heading-2-font-size-diff: calc(0px + 24 * ((100vw - 0px) / 1440)); } }
-  @media screen and (min-width: 1440px) {
-    :root {
-      --theme-heading-2-font-size-diff: 24px; } }
+  --theme-heading-2-initial-font-size: 40;
+  --theme-heading-2-font-size-diff: calc( var( --theme-heading-2-initial-font-size ) - var( --theme-minimum-font-size ) );
+  --theme-heading-2-font-size-diff-ratio: calc( var( --theme-heading-2-font-size-diff ) / var( --theme-minimum-font-size ) );
+  --theme-heading-2-font-size-vw-diff: calc( var( --theme-heading-2-font-size-diff-ratio ) * 1vw );
+  --theme-heading-2-font-size-px-diff: calc( var( --theme-heading-2-font-size-diff-ratio ) * 1440px / 100 );
+  --theme-heading-2-font-size: calc( var( --theme-heading-2-initial-font-size ) * 1px + var( --theme-heading-2-font-size-vw-diff ) - var( --theme-heading-2-font-size-px-diff ) ); }
 
 :root {
   --theme-heading-3-font-family: var(--theme-primary-font-family);
@@ -660,14 +621,12 @@
   --theme-heading-3-font-weight: 700;
   --theme-heading-3-letter-spacing: -0.02em;
   --theme-heading-3-text-transform: inherit;
-  --theme-heading-3-font-size-diff: 0px;
-  --theme-heading-3-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-3-font-size-diff) ); }
-  @media screen and (min-width: 0px) {
-    :root {
-      --theme-heading-3-font-size-diff: calc(0px + 16 * ((100vw - 0px) / 1440)); } }
-  @media screen and (min-width: 1440px) {
-    :root {
-      --theme-heading-3-font-size-diff: 16px; } }
+  --theme-heading-3-initial-font-size: 32;
+  --theme-heading-3-font-size-diff: calc( var( --theme-heading-3-initial-font-size ) - var( --theme-minimum-font-size ) );
+  --theme-heading-3-font-size-diff-ratio: calc( var( --theme-heading-3-font-size-diff ) / var( --theme-minimum-font-size ) );
+  --theme-heading-3-font-size-vw-diff: calc( var( --theme-heading-3-font-size-diff-ratio ) * 1vw );
+  --theme-heading-3-font-size-px-diff: calc( var( --theme-heading-3-font-size-diff-ratio ) * 1440px / 100 );
+  --theme-heading-3-font-size: calc( var( --theme-heading-3-initial-font-size ) * 1px + var( --theme-heading-3-font-size-vw-diff ) - var( --theme-heading-3-font-size-px-diff ) ); }
 
 :root {
   --theme-heading-4-font-family: var(--theme-primary-font-family);
@@ -675,14 +634,12 @@
   --theme-heading-4-font-weight: 700;
   --theme-heading-4-letter-spacing: -0.02em;
   --theme-heading-4-text-transform: inherit;
-  --theme-heading-4-font-size-diff: 0px;
-  --theme-heading-4-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-4-font-size-diff) ); }
-  @media screen and (min-width: 0px) {
-    :root {
-      --theme-heading-4-font-size-diff: calc(0px + 8 * ((100vw - 0px) / 1440)); } }
-  @media screen and (min-width: 1440px) {
-    :root {
-      --theme-heading-4-font-size-diff: 8px; } }
+  --theme-heading-4-initial-font-size: 24;
+  --theme-heading-4-font-size-diff: calc( var( --theme-heading-4-initial-font-size ) - var( --theme-minimum-font-size ) );
+  --theme-heading-4-font-size-diff-ratio: calc( var( --theme-heading-4-font-size-diff ) / var( --theme-minimum-font-size ) );
+  --theme-heading-4-font-size-vw-diff: calc( var( --theme-heading-4-font-size-diff-ratio ) * 1vw );
+  --theme-heading-4-font-size-px-diff: calc( var( --theme-heading-4-font-size-diff-ratio ) * 1440px / 100 );
+  --theme-heading-4-font-size: calc( var( --theme-heading-4-initial-font-size ) * 1px + var( --theme-heading-4-font-size-vw-diff ) - var( --theme-heading-4-font-size-px-diff ) ); }
 
 :root {
   --theme-heading-5-font-family: var(--theme-secondary-font-family);
@@ -690,14 +647,12 @@
   --theme-heading-5-font-weight: 400;
   --theme-heading-5-letter-spacing: inherit;
   --theme-heading-5-text-transform: inherit;
-  --theme-heading-5-font-size-diff: 0px;
-  --theme-heading-5-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-5-font-size-diff) ); }
-  @media screen and (min-width: 0px) {
-    :root {
-      --theme-heading-5-font-size-diff: calc(0px + 1 * ((100vw - 0px) / 1440)); } }
-  @media screen and (min-width: 1440px) {
-    :root {
-      --theme-heading-5-font-size-diff: 1px; } }
+  --theme-heading-5-initial-font-size: 17;
+  --theme-heading-5-font-size-diff: calc( var( --theme-heading-5-initial-font-size ) - var( --theme-minimum-font-size ) );
+  --theme-heading-5-font-size-diff-ratio: calc( var( --theme-heading-5-font-size-diff ) / var( --theme-minimum-font-size ) );
+  --theme-heading-5-font-size-vw-diff: calc( var( --theme-heading-5-font-size-diff-ratio ) * 1vw );
+  --theme-heading-5-font-size-px-diff: calc( var( --theme-heading-5-font-size-diff-ratio ) * 1440px / 100 );
+  --theme-heading-5-font-size: calc( var( --theme-heading-5-initial-font-size ) * 1px + var( --theme-heading-5-font-size-vw-diff ) - var( --theme-heading-5-font-size-px-diff ) ); }
 
 :root {
   --theme-heading-6-font-family: var(--theme-secondary-font-family);
@@ -705,14 +660,12 @@
   --theme-heading-6-font-weight: 400;
   --theme-heading-6-letter-spacing: inherit;
   --theme-heading-6-text-transform: inherit;
-  --theme-heading-6-font-size-diff: 0px;
-  --theme-heading-6-font-size: calc( var(--theme-minimum-font-size) + var(--theme-heading-6-font-size-diff) ); }
-  @media screen and (min-width: 0px) {
-    :root {
-      --theme-heading-6-font-size-diff: calc(0px + 1 * ((100vw - 0px) / 1440)); } }
-  @media screen and (min-width: 1440px) {
-    :root {
-      --theme-heading-6-font-size-diff: 1px; } }
+  --theme-heading-6-initial-font-size: 17;
+  --theme-heading-6-font-size-diff: calc( var( --theme-heading-6-initial-font-size ) - var( --theme-minimum-font-size ) );
+  --theme-heading-6-font-size-diff-ratio: calc( var( --theme-heading-6-font-size-diff ) / var( --theme-minimum-font-size ) );
+  --theme-heading-6-font-size-vw-diff: calc( var( --theme-heading-6-font-size-diff-ratio ) * 1vw );
+  --theme-heading-6-font-size-px-diff: calc( var( --theme-heading-6-font-size-diff-ratio ) * 1440px / 100 );
+  --theme-heading-6-font-size: calc( var( --theme-heading-6-initial-font-size ) * 1px + var( --theme-heading-6-font-size-vw-diff ) - var( --theme-heading-6-font-size-px-diff ) ); }
 
 :root {
   --theme-navigation-font-family: var(--theme-secondary-font-family);
@@ -720,14 +673,12 @@
   --theme-navigation-font-weight: 400;
   --theme-navigation-letter-spacing: inherit;
   --theme-navigation-text-transform: inherit;
-  --theme-navigation-font-size-diff: 0px;
-  --theme-navigation-font-size: calc( var(--theme-minimum-font-size) + var(--theme-navigation-font-size-diff) ); }
-  @media screen and (min-width: 0px) {
-    :root {
-      --theme-navigation-font-size-diff: calc(0px + 1 * ((100vw - 0px) / 1440)); } }
-  @media screen and (min-width: 1440px) {
-    :root {
-      --theme-navigation-font-size-diff: 1px; } }
+  --theme-navigation-initial-font-size: 17;
+  --theme-navigation-font-size-diff: calc( var( --theme-navigation-initial-font-size ) - var( --theme-minimum-font-size ) );
+  --theme-navigation-font-size-diff-ratio: calc( var( --theme-navigation-font-size-diff ) / var( --theme-minimum-font-size ) );
+  --theme-navigation-font-size-vw-diff: calc( var( --theme-navigation-font-size-diff-ratio ) * 1vw );
+  --theme-navigation-font-size-px-diff: calc( var( --theme-navigation-font-size-diff-ratio ) * 1440px / 100 );
+  --theme-navigation-font-size: calc( var( --theme-navigation-initial-font-size ) * 1px + var( --theme-navigation-font-size-vw-diff ) - var( --theme-navigation-font-size-px-diff ) ); }
 
 .editor-styles-wrapper[class] h1.has-larger-font-size {
   font-family: var(--current-font-family);

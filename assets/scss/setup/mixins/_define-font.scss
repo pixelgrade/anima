@@ -1,9 +1,9 @@
 :root {
-    --theme-minimum-font-size: #{$theme-minimum-font-size};
+    --theme-minimum-font-size: #{ strip-unit( $theme-minimum-font-size ) };
 
-    @include above($nova-font-size-breakpoint) {
-        --theme-minimum-font-size: #{$nova-font-size-minimum-vw};
-    }
+    //@include above($nova-font-size-breakpoint) {
+    //    --theme-minimum-font-size: #{$nova-font-size-minimum-vw};
+    //}
 }
 
 @mixin define-font($name, $config, $props: $nova-font-props) {
@@ -32,12 +32,12 @@
             $font-size: map-get( $config, font-size );
 
             @if ( $font-size and $font-size != 'inherit' ) {
-
-                $diff: map-get($config, font-size) - $theme-minimum-font-size;
-
-                @include fluid(--theme-#{$name}-font-size-diff, 0px, 0px, $nova-font-size-breakpoint, $diff);
-
-                --theme-#{$name}-font-size: calc( var(--theme-minimum-font-size) + var(--theme-#{$name}-font-size-diff) );
+                --theme-#{$name}-initial-font-size: #{$font-size};
+                --theme-#{$name}-font-size-diff: calc( var( --theme-#{$name}-initial-font-size ) - var( --theme-minimum-font-size ) ); // 2
+                --theme-#{$name}-font-size-diff-ratio: calc( var( --theme-#{$name}-font-size-diff ) / var( --theme-minimum-font-size ) ); // 2 / 16
+                --theme-#{$name}-font-size-vw-diff: calc( var( --theme-#{$name}-font-size-diff-ratio ) * 1vw );
+                --theme-#{$name}-font-size-px-diff: calc( var( --theme-#{$name}-font-size-diff-ratio ) * 1440px / 100 );
+                --theme-#{$name}-font-size: calc( var( --theme-#{$name}-initial-font-size ) * 1px + var( --theme-#{$name}-font-size-vw-diff ) - var( --theme-#{$name}-font-size-px-diff ) );
             }
 
             @if ( $font-size == 'inherit' ) {

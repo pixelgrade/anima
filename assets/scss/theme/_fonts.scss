@@ -1,20 +1,14 @@
 // Helpers
-@include define-font(primary, (
-    font-family: #{$theme-sm-font-primary},
-));
-
-@include define-font(secondary, (
-    font-family: #{$theme-sm-font-secondary},
-));
-
-@include define-font(accent, (
-    font-family: #{$theme-sm-font-accent},
-));
+:root {
+    --theme-primary-font-family: #{$theme-sm-font-primary};
+    --theme-secondary-font-family: #{$theme-sm-font-secondary};
+    --theme-accent-font-family: #{$theme-sm-font-accent};
+}
 
 // Body
 @include define-font(body, (
     font-family: #{$theme-sm-font-body},
-    font-size: 16px,
+    font-size: 16,
     line-height: 1.7,
     font-weight: 400,
     letter-spacing: -0.03em
@@ -22,14 +16,14 @@
 
 @include define-font(content, (
     font-family: var(--theme-body-font-family),
-    font-size: 18px,
+    font-size: 18,
     line-height: 1.6,
     letter-spacing: -0.03em,
 ));
 
 @include define-font(lead, (
     font-family: var(--theme-body-font-family),
-    font-size: 24px,
+    font-size: 24,
     line-height: 1.6,
     letter-spacing: -0.02em,
 ));
@@ -37,7 +31,7 @@
 // Headings
 @include define-font(display, (
     font-family: var(--theme-primary-font-family),
-    font-size: 115px,
+    font-size: 115,
     line-height: 1.03,
     font-weight: 700,
     letter-spacing: -0.03em,
@@ -45,7 +39,7 @@
 
 @include define-font(heading-1, (
     font-family: var(--theme-primary-font-family),
-    font-size: 66px,
+    font-size: 66,
     line-height: 1.1,
     font-weight: 700,
     letter-spacing: -0.03em,
@@ -53,7 +47,7 @@
 
 @include define-font(heading-2, (
     font-family: var(--theme-primary-font-family),
-    font-size: 40px,
+    font-size: 40,
     font-weight: 700,
     line-height: 1.2,
     letter-spacing: -0.02em,
@@ -61,7 +55,7 @@
 
 @include define-font(heading-3, (
     font-family: var(--theme-primary-font-family),
-    font-size: 32px,
+    font-size: 32,
     font-weight: 700,
     line-height: 1.2,
     letter-spacing: -0.02em,
@@ -69,7 +63,7 @@
 
 @include define-font(heading-4, (
     font-family: var(--theme-primary-font-family),
-    font-size: 24px,
+    font-size: 24,
     font-weight: 700,
     line-height: 1.2,
     letter-spacing: -0.02em,
@@ -77,21 +71,21 @@
 
 @include define-font(heading-5, (
     font-family: var(--theme-secondary-font-family),
-    font-size: 17px,
+    font-size: 17,
     font-weight: 400,
     line-height: 1.5,
 ));
 
 @include define-font(heading-6, (
     font-family: var(--theme-secondary-font-family),
-    font-size: 17px,
+    font-size: 17,
     font-weight: 400,
     line-height: 1.5,
 ));
 
 @include define-font(navigation, (
     font-family: var(--theme-secondary-font-family),
-    font-size: 17px,
+    font-size: 17,
     font-weight: 400,
     line-height: 1.5,
 ));
