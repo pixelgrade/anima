@@ -95,6 +95,8 @@ add_filter( 'woocommerce_upsell_display_args', 'rosa2_limitRelatedPostsCount', 2
 // Change args for WooCommerce pagination
 add_filter( 'woocommerce_pagination_args', 'rosa2_woocommerce_pagination_args', 40, 1 );
 
+add_filter( 'product_cat_class', 'rosa2_product_category_classes', 10, 1);
+
 function rosa2_addStartWrapperBeforeSingleProductSummary() {
 	echo '<div class="c-product-main">';
 }
@@ -251,7 +253,7 @@ function rosa2_appendCartIconToMenu( $items, $args ) {
 
 
 	// Add the cart link to the end of the menu.
-	if ( $args->theme_location === 'primary' || ! empty( $args->hasCartMenuItem ) ) {
+	if ( $args->theme_location === 'primary' ) {
 		$items = $items . $cart_link;
 	}
 
@@ -320,4 +322,11 @@ if ( ! function_exists( 'woocommerceCouponForm' ) ) {
 	function woocommerceCouponForm() {
 		echo '<form class="checkout_coupon woocommerce-form-coupon" id="form-coupon" method="post" style="display:none"></form>';
 	}
+}
+
+function rosa2_product_category_classes($class) {
+
+	$class[] = 'wc-block-grid__product';
+
+    return $class;
 }
