@@ -1,6 +1,7 @@
 const path = require( 'path' );
 const webpack = require( 'webpack' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
+const TerserPlugin = require('terser-webpack-plugin');
 
 // Configuration for the ExtractTextPlugin.
 const extractConfig = {
@@ -26,12 +27,21 @@ const extractConfig = {
 module.exports = {
   entry: {
     './dist/js/app' : './src/app.js',
+    './dist/js/app.min' : './src/app.js',
     './dist/js/woocommerce' : './src/woocommerce.js',
+    './dist/js/woocommerce.min' : './src/woocommerce.js',
     './dist/js/editor.blocks' : './src/editor.js',
+    './dist/js/editor.blocks.min' : './src/editor.js',
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin({
+      include: /\.min\.js$/,
+    })],
   },
   output: {
     path: path.resolve( __dirname ),
-    filename: '[name].js',
+    filename: '[name].js'
   },
   externals: {
     jquery: 'jQuery'
@@ -41,7 +51,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/, 
+        exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
         },
