@@ -9,15 +9,12 @@
   --theme-cite-color: var(--theme-sm-color-1); }
 
 :root {
-  --theme-minimum-font-size: 16;
-  --theme-font-size-ratio-multiplier: 0;
-  --theme-font-size-addon-multiplier: 0;
-  --theme-font-size-grow-unit: 0px; }
-
-:root {
-  --theme-font-size-grow-unit: calc( 1vw - 1000px / 100 );
-  --theme-font-size-ratio-multiplier: 1;
-  --theme-font-size-addon-multiplier: 0; }
+  --theme-slope: 1;
+  --theme-addon-multiplier: 0; }
+  @media only screen and (min-width: 90em) {
+    :root {
+      --theme-slope: 0.2;
+      --theme-addon-multiplier: 0.5; } }
 
 /* Global CSS Custom Properties */
 :root {
@@ -34,19 +31,13 @@
   --theme-content-font-size: 18px;
   --theme-content-width-normal: calc(38 * var(--theme-content-font-size));
   --theme-content-width-wide: calc(65 * var(--theme-content-font-size));
-  --theme-spacing: 0.2rem;
+  --theme-spacing: 1rem;
   --theme-spacing-micro:  var( --theme-spacing );
   --theme-spacing-tiny:   var( --theme-spacing );
   --theme-spacing-small:  calc( var( --theme-spacing ) * 2 );
   --theme-spacing-normal: calc( var( --theme-spacing ) * 3 );
   --theme-spacing-large:  calc( var( --theme-spacing ) * 4 );
   --theme-spacing-huge:   calc( var( --theme-spacing ) * 5 ); }
-  @media screen and (min-width: 20rem) {
-    :root {
-      --theme-spacing: calc(0.2rem + 0.8 * ((100vw - 20rem) / 60)); } }
-  @media screen and (min-width: 80rem) {
-    :root {
-      --theme-spacing: 1rem; } }
   @media only screen and (min-width: 80rem) {
     :root {
       --theme-spacing-micro:  calc( var( --theme-spacing ) / 4 );
@@ -291,11 +282,19 @@
     --theme-button-letter-spacing: 0.03em;
     --theme-button-text-transform: capitalize;
     --theme-button-initial-font-size: 17;
-    --theme-button-font-size-diff: calc( var( --theme-button-initial-font-size ) - var( --theme-minimum-font-size ) );
-    --theme-button-font-size-diff-ratio: calc( var( --theme-button-font-size-diff ) / var( --theme-minimum-font-size ) );
-    --theme-button-font-size-ratio: calc( var( --theme-button-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
-    --theme-button-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-button-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
-    --theme-button-font-size: calc( var( --theme-button-initial-font-size ) * 1px + var( --theme-button-font-size-addon ) ); }
+    --theme-button-x0: -1000;
+    --theme-button-y0: 16;
+    --theme-button-x1: 1440;
+    --theme-button-y1: var(--theme-button-initial-font-size);
+    --theme-button-y0-new: calc( var(--theme-button-y1) - ( var(--theme-button-y1) - var(--theme-button-y0) ) * var(--theme-slope));
+    --theme-button-addon-unit: calc( 1vw - 1440px / 100);
+    --theme-button-addon-ratio: calc( var(--theme-button-y0) / var(--theme-button-y1));
+    --theme-button-addon: calc( var(--theme-button-addon-unit) * var(--theme-button-addon-ratio) * var(--theme-addon-multiplier));
+    --theme-button-x2: 100vw;
+    --theme-button-a: calc( ( var(--theme-button-y1) - var(--theme-button-y0-new) ) / ( var(--theme-button-x1) - var(--theme-button-x0) ));
+    --theme-button-b: calc( var(--theme-button-y0-new) - var(--theme-button-a) * var(--theme-button-x0));
+    --theme-button-y2: calc( var(--theme-button-a) * 100vw + var(--theme-button-b) * 1px);
+    --theme-button-font-size: calc( var(--theme-button-y2) + var(--theme-button-addon)); }
   .editor-styles-wrapper .wp-block-button__link {
     transition: var(--current-button-transition); }
   .editor-styles-wrapper .wp-block-button:not(.is-style-text) .wp-block-button__link {
@@ -552,11 +551,19 @@
   --theme-body-letter-spacing: -0.03em;
   --theme-body-text-transform: inherit;
   --theme-body-initial-font-size: 16;
-  --theme-body-font-size-diff: calc( var( --theme-body-initial-font-size ) - var( --theme-minimum-font-size ) );
-  --theme-body-font-size-diff-ratio: calc( var( --theme-body-font-size-diff ) / var( --theme-minimum-font-size ) );
-  --theme-body-font-size-ratio: calc( var( --theme-body-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
-  --theme-body-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-body-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
-  --theme-body-font-size: calc( var( --theme-body-initial-font-size ) * 1px + var( --theme-body-font-size-addon ) ); }
+  --theme-body-x0: -1000;
+  --theme-body-y0: 16;
+  --theme-body-x1: 1440;
+  --theme-body-y1: var(--theme-body-initial-font-size);
+  --theme-body-y0-new: calc( var(--theme-body-y1) - ( var(--theme-body-y1) - var(--theme-body-y0) ) * var(--theme-slope));
+  --theme-body-addon-unit: calc( 1vw - 1440px / 100);
+  --theme-body-addon-ratio: calc( var(--theme-body-y0) / var(--theme-body-y1));
+  --theme-body-addon: calc( var(--theme-body-addon-unit) * var(--theme-body-addon-ratio) * var(--theme-addon-multiplier));
+  --theme-body-x2: 100vw;
+  --theme-body-a: calc( ( var(--theme-body-y1) - var(--theme-body-y0-new) ) / ( var(--theme-body-x1) - var(--theme-body-x0) ));
+  --theme-body-b: calc( var(--theme-body-y0-new) - var(--theme-body-a) * var(--theme-body-x0));
+  --theme-body-y2: calc( var(--theme-body-a) * 100vw + var(--theme-body-b) * 1px);
+  --theme-body-font-size: calc( var(--theme-body-y2) + var(--theme-body-addon)); }
 
 :root {
   --theme-content-font-family: var(--theme-body-font-family);
@@ -565,11 +572,19 @@
   --theme-content-letter-spacing: -0.03em;
   --theme-content-text-transform: inherit;
   --theme-content-initial-font-size: 18;
-  --theme-content-font-size-diff: calc( var( --theme-content-initial-font-size ) - var( --theme-minimum-font-size ) );
-  --theme-content-font-size-diff-ratio: calc( var( --theme-content-font-size-diff ) / var( --theme-minimum-font-size ) );
-  --theme-content-font-size-ratio: calc( var( --theme-content-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
-  --theme-content-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-content-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
-  --theme-content-font-size: calc( var( --theme-content-initial-font-size ) * 1px + var( --theme-content-font-size-addon ) ); }
+  --theme-content-x0: -1000;
+  --theme-content-y0: 16;
+  --theme-content-x1: 1440;
+  --theme-content-y1: var(--theme-content-initial-font-size);
+  --theme-content-y0-new: calc( var(--theme-content-y1) - ( var(--theme-content-y1) - var(--theme-content-y0) ) * var(--theme-slope));
+  --theme-content-addon-unit: calc( 1vw - 1440px / 100);
+  --theme-content-addon-ratio: calc( var(--theme-content-y0) / var(--theme-content-y1));
+  --theme-content-addon: calc( var(--theme-content-addon-unit) * var(--theme-content-addon-ratio) * var(--theme-addon-multiplier));
+  --theme-content-x2: 100vw;
+  --theme-content-a: calc( ( var(--theme-content-y1) - var(--theme-content-y0-new) ) / ( var(--theme-content-x1) - var(--theme-content-x0) ));
+  --theme-content-b: calc( var(--theme-content-y0-new) - var(--theme-content-a) * var(--theme-content-x0));
+  --theme-content-y2: calc( var(--theme-content-a) * 100vw + var(--theme-content-b) * 1px);
+  --theme-content-font-size: calc( var(--theme-content-y2) + var(--theme-content-addon)); }
 
 :root {
   --theme-lead-font-family: var(--theme-body-font-family);
@@ -578,11 +593,19 @@
   --theme-lead-letter-spacing: -0.02em;
   --theme-lead-text-transform: inherit;
   --theme-lead-initial-font-size: 24;
-  --theme-lead-font-size-diff: calc( var( --theme-lead-initial-font-size ) - var( --theme-minimum-font-size ) );
-  --theme-lead-font-size-diff-ratio: calc( var( --theme-lead-font-size-diff ) / var( --theme-minimum-font-size ) );
-  --theme-lead-font-size-ratio: calc( var( --theme-lead-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
-  --theme-lead-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-lead-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
-  --theme-lead-font-size: calc( var( --theme-lead-initial-font-size ) * 1px + var( --theme-lead-font-size-addon ) ); }
+  --theme-lead-x0: -1000;
+  --theme-lead-y0: 16;
+  --theme-lead-x1: 1440;
+  --theme-lead-y1: var(--theme-lead-initial-font-size);
+  --theme-lead-y0-new: calc( var(--theme-lead-y1) - ( var(--theme-lead-y1) - var(--theme-lead-y0) ) * var(--theme-slope));
+  --theme-lead-addon-unit: calc( 1vw - 1440px / 100);
+  --theme-lead-addon-ratio: calc( var(--theme-lead-y0) / var(--theme-lead-y1));
+  --theme-lead-addon: calc( var(--theme-lead-addon-unit) * var(--theme-lead-addon-ratio) * var(--theme-addon-multiplier));
+  --theme-lead-x2: 100vw;
+  --theme-lead-a: calc( ( var(--theme-lead-y1) - var(--theme-lead-y0-new) ) / ( var(--theme-lead-x1) - var(--theme-lead-x0) ));
+  --theme-lead-b: calc( var(--theme-lead-y0-new) - var(--theme-lead-a) * var(--theme-lead-x0));
+  --theme-lead-y2: calc( var(--theme-lead-a) * 100vw + var(--theme-lead-b) * 1px);
+  --theme-lead-font-size: calc( var(--theme-lead-y2) + var(--theme-lead-addon)); }
 
 :root {
   --theme-display-font-family: var(--theme-primary-font-family);
@@ -591,11 +614,19 @@
   --theme-display-letter-spacing: -0.03em;
   --theme-display-text-transform: inherit;
   --theme-display-initial-font-size: 115;
-  --theme-display-font-size-diff: calc( var( --theme-display-initial-font-size ) - var( --theme-minimum-font-size ) );
-  --theme-display-font-size-diff-ratio: calc( var( --theme-display-font-size-diff ) / var( --theme-minimum-font-size ) );
-  --theme-display-font-size-ratio: calc( var( --theme-display-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
-  --theme-display-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-display-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
-  --theme-display-font-size: calc( var( --theme-display-initial-font-size ) * 1px + var( --theme-display-font-size-addon ) ); }
+  --theme-display-x0: -1000;
+  --theme-display-y0: 16;
+  --theme-display-x1: 1440;
+  --theme-display-y1: var(--theme-display-initial-font-size);
+  --theme-display-y0-new: calc( var(--theme-display-y1) - ( var(--theme-display-y1) - var(--theme-display-y0) ) * var(--theme-slope));
+  --theme-display-addon-unit: calc( 1vw - 1440px / 100);
+  --theme-display-addon-ratio: calc( var(--theme-display-y0) / var(--theme-display-y1));
+  --theme-display-addon: calc( var(--theme-display-addon-unit) * var(--theme-display-addon-ratio) * var(--theme-addon-multiplier));
+  --theme-display-x2: 100vw;
+  --theme-display-a: calc( ( var(--theme-display-y1) - var(--theme-display-y0-new) ) / ( var(--theme-display-x1) - var(--theme-display-x0) ));
+  --theme-display-b: calc( var(--theme-display-y0-new) - var(--theme-display-a) * var(--theme-display-x0));
+  --theme-display-y2: calc( var(--theme-display-a) * 100vw + var(--theme-display-b) * 1px);
+  --theme-display-font-size: calc( var(--theme-display-y2) + var(--theme-display-addon)); }
 
 :root {
   --theme-heading-1-font-family: var(--theme-primary-font-family);
@@ -604,11 +635,19 @@
   --theme-heading-1-letter-spacing: -0.03em;
   --theme-heading-1-text-transform: inherit;
   --theme-heading-1-initial-font-size: 66;
-  --theme-heading-1-font-size-diff: calc( var( --theme-heading-1-initial-font-size ) - var( --theme-minimum-font-size ) );
-  --theme-heading-1-font-size-diff-ratio: calc( var( --theme-heading-1-font-size-diff ) / var( --theme-minimum-font-size ) );
-  --theme-heading-1-font-size-ratio: calc( var( --theme-heading-1-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
-  --theme-heading-1-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-heading-1-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
-  --theme-heading-1-font-size: calc( var( --theme-heading-1-initial-font-size ) * 1px + var( --theme-heading-1-font-size-addon ) ); }
+  --theme-heading-1-x0: -1000;
+  --theme-heading-1-y0: 16;
+  --theme-heading-1-x1: 1440;
+  --theme-heading-1-y1: var(--theme-heading-1-initial-font-size);
+  --theme-heading-1-y0-new: calc( var(--theme-heading-1-y1) - ( var(--theme-heading-1-y1) - var(--theme-heading-1-y0) ) * var(--theme-slope));
+  --theme-heading-1-addon-unit: calc( 1vw - 1440px / 100);
+  --theme-heading-1-addon-ratio: calc( var(--theme-heading-1-y0) / var(--theme-heading-1-y1));
+  --theme-heading-1-addon: calc( var(--theme-heading-1-addon-unit) * var(--theme-heading-1-addon-ratio) * var(--theme-addon-multiplier));
+  --theme-heading-1-x2: 100vw;
+  --theme-heading-1-a: calc( ( var(--theme-heading-1-y1) - var(--theme-heading-1-y0-new) ) / ( var(--theme-heading-1-x1) - var(--theme-heading-1-x0) ));
+  --theme-heading-1-b: calc( var(--theme-heading-1-y0-new) - var(--theme-heading-1-a) * var(--theme-heading-1-x0));
+  --theme-heading-1-y2: calc( var(--theme-heading-1-a) * 100vw + var(--theme-heading-1-b) * 1px);
+  --theme-heading-1-font-size: calc( var(--theme-heading-1-y2) + var(--theme-heading-1-addon)); }
 
 :root {
   --theme-heading-2-font-family: var(--theme-primary-font-family);
@@ -617,11 +656,19 @@
   --theme-heading-2-letter-spacing: -0.02em;
   --theme-heading-2-text-transform: inherit;
   --theme-heading-2-initial-font-size: 40;
-  --theme-heading-2-font-size-diff: calc( var( --theme-heading-2-initial-font-size ) - var( --theme-minimum-font-size ) );
-  --theme-heading-2-font-size-diff-ratio: calc( var( --theme-heading-2-font-size-diff ) / var( --theme-minimum-font-size ) );
-  --theme-heading-2-font-size-ratio: calc( var( --theme-heading-2-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
-  --theme-heading-2-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-heading-2-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
-  --theme-heading-2-font-size: calc( var( --theme-heading-2-initial-font-size ) * 1px + var( --theme-heading-2-font-size-addon ) ); }
+  --theme-heading-2-x0: -1000;
+  --theme-heading-2-y0: 16;
+  --theme-heading-2-x1: 1440;
+  --theme-heading-2-y1: var(--theme-heading-2-initial-font-size);
+  --theme-heading-2-y0-new: calc( var(--theme-heading-2-y1) - ( var(--theme-heading-2-y1) - var(--theme-heading-2-y0) ) * var(--theme-slope));
+  --theme-heading-2-addon-unit: calc( 1vw - 1440px / 100);
+  --theme-heading-2-addon-ratio: calc( var(--theme-heading-2-y0) / var(--theme-heading-2-y1));
+  --theme-heading-2-addon: calc( var(--theme-heading-2-addon-unit) * var(--theme-heading-2-addon-ratio) * var(--theme-addon-multiplier));
+  --theme-heading-2-x2: 100vw;
+  --theme-heading-2-a: calc( ( var(--theme-heading-2-y1) - var(--theme-heading-2-y0-new) ) / ( var(--theme-heading-2-x1) - var(--theme-heading-2-x0) ));
+  --theme-heading-2-b: calc( var(--theme-heading-2-y0-new) - var(--theme-heading-2-a) * var(--theme-heading-2-x0));
+  --theme-heading-2-y2: calc( var(--theme-heading-2-a) * 100vw + var(--theme-heading-2-b) * 1px);
+  --theme-heading-2-font-size: calc( var(--theme-heading-2-y2) + var(--theme-heading-2-addon)); }
 
 :root {
   --theme-heading-3-font-family: var(--theme-primary-font-family);
@@ -630,11 +677,19 @@
   --theme-heading-3-letter-spacing: -0.02em;
   --theme-heading-3-text-transform: inherit;
   --theme-heading-3-initial-font-size: 32;
-  --theme-heading-3-font-size-diff: calc( var( --theme-heading-3-initial-font-size ) - var( --theme-minimum-font-size ) );
-  --theme-heading-3-font-size-diff-ratio: calc( var( --theme-heading-3-font-size-diff ) / var( --theme-minimum-font-size ) );
-  --theme-heading-3-font-size-ratio: calc( var( --theme-heading-3-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
-  --theme-heading-3-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-heading-3-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
-  --theme-heading-3-font-size: calc( var( --theme-heading-3-initial-font-size ) * 1px + var( --theme-heading-3-font-size-addon ) ); }
+  --theme-heading-3-x0: -1000;
+  --theme-heading-3-y0: 16;
+  --theme-heading-3-x1: 1440;
+  --theme-heading-3-y1: var(--theme-heading-3-initial-font-size);
+  --theme-heading-3-y0-new: calc( var(--theme-heading-3-y1) - ( var(--theme-heading-3-y1) - var(--theme-heading-3-y0) ) * var(--theme-slope));
+  --theme-heading-3-addon-unit: calc( 1vw - 1440px / 100);
+  --theme-heading-3-addon-ratio: calc( var(--theme-heading-3-y0) / var(--theme-heading-3-y1));
+  --theme-heading-3-addon: calc( var(--theme-heading-3-addon-unit) * var(--theme-heading-3-addon-ratio) * var(--theme-addon-multiplier));
+  --theme-heading-3-x2: 100vw;
+  --theme-heading-3-a: calc( ( var(--theme-heading-3-y1) - var(--theme-heading-3-y0-new) ) / ( var(--theme-heading-3-x1) - var(--theme-heading-3-x0) ));
+  --theme-heading-3-b: calc( var(--theme-heading-3-y0-new) - var(--theme-heading-3-a) * var(--theme-heading-3-x0));
+  --theme-heading-3-y2: calc( var(--theme-heading-3-a) * 100vw + var(--theme-heading-3-b) * 1px);
+  --theme-heading-3-font-size: calc( var(--theme-heading-3-y2) + var(--theme-heading-3-addon)); }
 
 :root {
   --theme-heading-4-font-family: var(--theme-primary-font-family);
@@ -643,11 +698,19 @@
   --theme-heading-4-letter-spacing: -0.02em;
   --theme-heading-4-text-transform: inherit;
   --theme-heading-4-initial-font-size: 24;
-  --theme-heading-4-font-size-diff: calc( var( --theme-heading-4-initial-font-size ) - var( --theme-minimum-font-size ) );
-  --theme-heading-4-font-size-diff-ratio: calc( var( --theme-heading-4-font-size-diff ) / var( --theme-minimum-font-size ) );
-  --theme-heading-4-font-size-ratio: calc( var( --theme-heading-4-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
-  --theme-heading-4-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-heading-4-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
-  --theme-heading-4-font-size: calc( var( --theme-heading-4-initial-font-size ) * 1px + var( --theme-heading-4-font-size-addon ) ); }
+  --theme-heading-4-x0: -1000;
+  --theme-heading-4-y0: 16;
+  --theme-heading-4-x1: 1440;
+  --theme-heading-4-y1: var(--theme-heading-4-initial-font-size);
+  --theme-heading-4-y0-new: calc( var(--theme-heading-4-y1) - ( var(--theme-heading-4-y1) - var(--theme-heading-4-y0) ) * var(--theme-slope));
+  --theme-heading-4-addon-unit: calc( 1vw - 1440px / 100);
+  --theme-heading-4-addon-ratio: calc( var(--theme-heading-4-y0) / var(--theme-heading-4-y1));
+  --theme-heading-4-addon: calc( var(--theme-heading-4-addon-unit) * var(--theme-heading-4-addon-ratio) * var(--theme-addon-multiplier));
+  --theme-heading-4-x2: 100vw;
+  --theme-heading-4-a: calc( ( var(--theme-heading-4-y1) - var(--theme-heading-4-y0-new) ) / ( var(--theme-heading-4-x1) - var(--theme-heading-4-x0) ));
+  --theme-heading-4-b: calc( var(--theme-heading-4-y0-new) - var(--theme-heading-4-a) * var(--theme-heading-4-x0));
+  --theme-heading-4-y2: calc( var(--theme-heading-4-a) * 100vw + var(--theme-heading-4-b) * 1px);
+  --theme-heading-4-font-size: calc( var(--theme-heading-4-y2) + var(--theme-heading-4-addon)); }
 
 :root {
   --theme-heading-5-font-family: var(--theme-secondary-font-family);
@@ -656,11 +719,19 @@
   --theme-heading-5-letter-spacing: inherit;
   --theme-heading-5-text-transform: inherit;
   --theme-heading-5-initial-font-size: 17;
-  --theme-heading-5-font-size-diff: calc( var( --theme-heading-5-initial-font-size ) - var( --theme-minimum-font-size ) );
-  --theme-heading-5-font-size-diff-ratio: calc( var( --theme-heading-5-font-size-diff ) / var( --theme-minimum-font-size ) );
-  --theme-heading-5-font-size-ratio: calc( var( --theme-heading-5-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
-  --theme-heading-5-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-heading-5-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
-  --theme-heading-5-font-size: calc( var( --theme-heading-5-initial-font-size ) * 1px + var( --theme-heading-5-font-size-addon ) ); }
+  --theme-heading-5-x0: -1000;
+  --theme-heading-5-y0: 16;
+  --theme-heading-5-x1: 1440;
+  --theme-heading-5-y1: var(--theme-heading-5-initial-font-size);
+  --theme-heading-5-y0-new: calc( var(--theme-heading-5-y1) - ( var(--theme-heading-5-y1) - var(--theme-heading-5-y0) ) * var(--theme-slope));
+  --theme-heading-5-addon-unit: calc( 1vw - 1440px / 100);
+  --theme-heading-5-addon-ratio: calc( var(--theme-heading-5-y0) / var(--theme-heading-5-y1));
+  --theme-heading-5-addon: calc( var(--theme-heading-5-addon-unit) * var(--theme-heading-5-addon-ratio) * var(--theme-addon-multiplier));
+  --theme-heading-5-x2: 100vw;
+  --theme-heading-5-a: calc( ( var(--theme-heading-5-y1) - var(--theme-heading-5-y0-new) ) / ( var(--theme-heading-5-x1) - var(--theme-heading-5-x0) ));
+  --theme-heading-5-b: calc( var(--theme-heading-5-y0-new) - var(--theme-heading-5-a) * var(--theme-heading-5-x0));
+  --theme-heading-5-y2: calc( var(--theme-heading-5-a) * 100vw + var(--theme-heading-5-b) * 1px);
+  --theme-heading-5-font-size: calc( var(--theme-heading-5-y2) + var(--theme-heading-5-addon)); }
 
 :root {
   --theme-heading-6-font-family: var(--theme-secondary-font-family);
@@ -669,11 +740,19 @@
   --theme-heading-6-letter-spacing: inherit;
   --theme-heading-6-text-transform: inherit;
   --theme-heading-6-initial-font-size: 17;
-  --theme-heading-6-font-size-diff: calc( var( --theme-heading-6-initial-font-size ) - var( --theme-minimum-font-size ) );
-  --theme-heading-6-font-size-diff-ratio: calc( var( --theme-heading-6-font-size-diff ) / var( --theme-minimum-font-size ) );
-  --theme-heading-6-font-size-ratio: calc( var( --theme-heading-6-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
-  --theme-heading-6-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-heading-6-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
-  --theme-heading-6-font-size: calc( var( --theme-heading-6-initial-font-size ) * 1px + var( --theme-heading-6-font-size-addon ) ); }
+  --theme-heading-6-x0: -1000;
+  --theme-heading-6-y0: 16;
+  --theme-heading-6-x1: 1440;
+  --theme-heading-6-y1: var(--theme-heading-6-initial-font-size);
+  --theme-heading-6-y0-new: calc( var(--theme-heading-6-y1) - ( var(--theme-heading-6-y1) - var(--theme-heading-6-y0) ) * var(--theme-slope));
+  --theme-heading-6-addon-unit: calc( 1vw - 1440px / 100);
+  --theme-heading-6-addon-ratio: calc( var(--theme-heading-6-y0) / var(--theme-heading-6-y1));
+  --theme-heading-6-addon: calc( var(--theme-heading-6-addon-unit) * var(--theme-heading-6-addon-ratio) * var(--theme-addon-multiplier));
+  --theme-heading-6-x2: 100vw;
+  --theme-heading-6-a: calc( ( var(--theme-heading-6-y1) - var(--theme-heading-6-y0-new) ) / ( var(--theme-heading-6-x1) - var(--theme-heading-6-x0) ));
+  --theme-heading-6-b: calc( var(--theme-heading-6-y0-new) - var(--theme-heading-6-a) * var(--theme-heading-6-x0));
+  --theme-heading-6-y2: calc( var(--theme-heading-6-a) * 100vw + var(--theme-heading-6-b) * 1px);
+  --theme-heading-6-font-size: calc( var(--theme-heading-6-y2) + var(--theme-heading-6-addon)); }
 
 :root {
   --theme-navigation-font-family: var(--theme-secondary-font-family);
@@ -682,11 +761,19 @@
   --theme-navigation-letter-spacing: inherit;
   --theme-navigation-text-transform: inherit;
   --theme-navigation-initial-font-size: 17;
-  --theme-navigation-font-size-diff: calc( var( --theme-navigation-initial-font-size ) - var( --theme-minimum-font-size ) );
-  --theme-navigation-font-size-diff-ratio: calc( var( --theme-navigation-font-size-diff ) / var( --theme-minimum-font-size ) );
-  --theme-navigation-font-size-ratio: calc( var( --theme-navigation-font-size-diff-ratio ) * var( --theme-font-size-ratio-multiplier ) );
-  --theme-navigation-font-size-addon: calc( var( --theme-font-size-grow-unit ) * ( var( --theme-navigation-font-size-ratio ) + var( --theme-font-size-addon-multiplier ) ) );
-  --theme-navigation-font-size: calc( var( --theme-navigation-initial-font-size ) * 1px + var( --theme-navigation-font-size-addon ) ); }
+  --theme-navigation-x0: -1000;
+  --theme-navigation-y0: 16;
+  --theme-navigation-x1: 1440;
+  --theme-navigation-y1: var(--theme-navigation-initial-font-size);
+  --theme-navigation-y0-new: calc( var(--theme-navigation-y1) - ( var(--theme-navigation-y1) - var(--theme-navigation-y0) ) * var(--theme-slope));
+  --theme-navigation-addon-unit: calc( 1vw - 1440px / 100);
+  --theme-navigation-addon-ratio: calc( var(--theme-navigation-y0) / var(--theme-navigation-y1));
+  --theme-navigation-addon: calc( var(--theme-navigation-addon-unit) * var(--theme-navigation-addon-ratio) * var(--theme-addon-multiplier));
+  --theme-navigation-x2: 100vw;
+  --theme-navigation-a: calc( ( var(--theme-navigation-y1) - var(--theme-navigation-y0-new) ) / ( var(--theme-navigation-x1) - var(--theme-navigation-x0) ));
+  --theme-navigation-b: calc( var(--theme-navigation-y0-new) - var(--theme-navigation-a) * var(--theme-navigation-x0));
+  --theme-navigation-y2: calc( var(--theme-navigation-a) * 100vw + var(--theme-navigation-b) * 1px);
+  --theme-navigation-font-size: calc( var(--theme-navigation-y2) + var(--theme-navigation-addon)); }
 
 .editor-styles-wrapper[class] h1.has-larger-font-size {
   font-family: var(--current-font-family);
