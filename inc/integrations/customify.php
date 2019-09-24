@@ -81,9 +81,9 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 					'label'             => esc_html__( 'Body', '__theme_txtd' ),
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
-					'properties_prefix' => '--theme-body-initial-',
+					'properties_prefix' => '--theme-body-',
 					'default'           => array(
-						'font-family'     => 'Reforma1969, sans-serif',
+						'font-family'     => 'Reforma1969',
 						'font-size'       => 16,
 						'line-height'     => 1.7,
 						'font-weight'     => '400',
@@ -98,12 +98,12 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 					'label'             => esc_html__( 'Content', '__theme_txtd' ),
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
-					'properties_prefix' => '--theme-content-initial-',
+					'properties_prefix' => '--theme-content-',
 					'default'           => array(
-						'font-family'     => 'Reforma1969, sans-serif',
+						'font-family'     => 'Reforma1969',
 						'font-size'       => 18,
 						'line-height'     => 1.6,
-						'font-weight'     => '400',
+						'font-weight'     => '500',
 						'text-transform'  => 'none',
 						'text-decoration' => 'none',
 						'letter-spacing'  => - 0.03,
@@ -115,12 +115,12 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 					'label'             => esc_html__( 'Lead Paragraphs', '__theme_txtd' ),
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
-					'properties_prefix' => '--theme-lead-initial-',
+					'properties_prefix' => '--theme-lead-',
 					'default'           => array(
-						'font-family'     => 'Reforma1969, sans-serif',
+						'font-family'     => 'Reforma1969',
 						'font-size'       => 24,
 						'line-height'     => 1.6,
-						'font-weight'     => '400',
+						'font-weight'     => '500',
 						'text-transform'  => 'none',
 						'text-decoration' => 'none',
 						'letter-spacing'  => - 0.02,
@@ -136,9 +136,9 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 					'label'             => esc_html__( 'Display', '__theme_txtd' ),
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
-					'properties_prefix' => '--theme-display-initial-',
+					'properties_prefix' => '--theme-display-',
 					'default'           => array(
-						'font-family'     => 'Reforma1969, sans-serif',
+						'font-family'     => 'Reforma1969',
 						'font-size'       => 115,
 						'line-height'     => 1.03,
 						'font-weight'     => '700',
@@ -153,9 +153,9 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 					'label'             => esc_html__( 'Heading 1', '__theme_txtd' ),
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
-					'properties_prefix' => '--theme-heading-1-initial-',
+					'properties_prefix' => '--theme-heading-1-',
 					'default'           => array(
-						'font-family'     => 'Reforma1969, sans-serif',
+						'font-family'     => 'Reforma1969',
 						'font-size'       => 66,
 						'line-height'     => 1.1,
 						'font-weight'     => '700',
@@ -170,9 +170,9 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 					'label'             => esc_html__( 'Heading 2', '__theme_txtd' ),
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
-					'properties_prefix' => '--theme-heading-2-initial-',
+					'properties_prefix' => '--theme-heading-2-',
 					'default'           => array(
-						'font-family'     => 'Reforma1969, sans-serif',
+						'font-family'     => 'Reforma1969',
 						'font-size'       => 40,
 						'line-height'     => 1.2,
 						'font-weight'     => '700',
@@ -187,9 +187,9 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 					'label'             => esc_html__( 'Heading 3', '__theme_txtd' ),
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
-					'properties_prefix' => '--theme-heading-3-initial-',
+					'properties_prefix' => '--theme-heading-3-',
 					'default'           => array(
-						'font-family'     => 'Reforma1969, sans-serif',
+						'font-family'     => 'Reforma1969',
 						'font-size'       => 32,
 						'line-height'     => 1.2,
 						'font-weight'     => '700',
@@ -204,9 +204,9 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 					'label'             => esc_html__( 'Heading 4', '__theme_txtd' ),
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
-					'properties_prefix' => '--theme-heading-4-initial-',
+					'properties_prefix' => '--theme-heading-4-',
 					'default'           => array(
-						'font-family'     => 'Reforma1969, sans-serif',
+						'font-family'     => 'Reforma1969',
 						'font-size'       => 24,
 						'line-height'     => 1.2,
 						'font-weight'     => '700',
@@ -221,12 +221,12 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 					'label'             => esc_html__( 'Heading 5', '__theme_txtd' ),
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
-					'properties_prefix' => '--theme-heading-5-initial-',
+					'properties_prefix' => '--theme-heading-5-',
 					'default'           => array(
-						'font-family'     => 'Reforma2018, sans-serif',
+						'font-family'     => 'Reforma2018',
 						'font-size'       => 17,
 						'line-height'     => 1.5,
-						'font-weight'     => '400',
+						'font-weight'     => '500',
 						'text-transform'  => 'none',
 						'text-decoration' => 'none',
 						'letter-spacing'  => 0.017,
@@ -238,12 +238,12 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 					'label'             => esc_html__( 'Heading 6', '__theme_txtd' ),
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
-					'properties_prefix' => '--theme-heading-6-initial-',
+					'properties_prefix' => '--theme-heading-6-',
 					'default'           => array(
-						'font-family'     => 'Reforma2018, sans-serif',
+						'font-family'     => 'Reforma2018',
 						'font-size'       => 17,
 						'line-height'     => 1.5,
-						'font-weight'     => '400',
+						'font-weight'     => '500',
 						'text-transform'  => 'none',
 						'text-decoration' => 'none',
 						'letter-spacing'  => 0.017,
@@ -255,12 +255,12 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 					'label'             => esc_html__( 'Navigation', '__theme_txtd' ),
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
-					'properties_prefix' => '--theme-navigation-initial-',
+					'properties_prefix' => '--theme-navigation-',
 					'default'           => array(
-						'font-family'     => 'Reforma2018, sans-serif',
+						'font-family'     => 'Reforma2018',
 						'font-size'       => 17,
 						'line-height'     => 1.5,
-						'font-weight'     => '400',
+						'font-weight'     => '500',
 						'text-transform'  => 'none',
 						'text-decoration' => 'none',
 						'letter-spacing'  => 0.017,
@@ -272,9 +272,9 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 					'label'             => esc_html__( 'Accent', '__theme_txtd' ),
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
-					'properties_prefix' => '--theme-headings-alt-initial-',
+					'properties_prefix' => '--theme-headings-alt-',
 					'default'           => array(
-						'font-family' => 'Billy Ohio, cursive',
+						'font-family' => 'Billy Ohio',
 					),
 					'fields'            => array(
 						'font-size'       => false,
@@ -503,7 +503,7 @@ function rosa2_add_customify_connected_fields( $options ) {
 			'options' => array(
 				// Font Palettes Assignment.
 				'sm_font_palette'    => array(
-					'default' => 'rosa2',
+					'default' => 'exquisite',
 				),
 				'sm_font_primary'    => array(
 					'connected_fields' => array(
@@ -621,20 +621,17 @@ function rosa2_filter_color_palettes( $color_palettes ) {
 function rosa2_filter_font_palettes( $font_palettes ) {
 
 	$font_palettes = array(
-		'rosa2' => array(
-			'label'   => esc_html__( 'Theme Defaults', '__theme_txtd' ),
+		'exquisite'  => array(
+			'label'   => esc_html__( 'Exquisite', '__theme_txtd' ),
 			'preview' => array(
-				// Font Palette Name
-				'title'                => esc_html__( 'Rosa', '__theme_txtd' ),
-				'description'          => esc_html__( 'A graceful nature, truly tasteful and polished.', '__theme_txtd' ),
-				'background_image_url' => 'https://cloud.pixelgrade.com/wp-content/uploads/2018/09/font-palette-classic.png',
+				'title'                => esc_html__( 'Exquisite', '__theme_txtd' ),
+				'description'          => esc_html__( 'A warm comfort, truly simple and delightfull', '__theme_txtd' ),
+				'background_image_url' => 'https://cloud.pixelgrade.com/wp-content/uploads/2019/09/font-palette-exquisite.png',
 			),
-
 			'fonts_logic' => array(
-				// Primary is used for main headings [Display, H1, H2, H3]
 				'sm_font_primary'   => array(
 					'type'        => 'theme_font',
-					'font_family' => 'Reforma1969, sans-serif',
+					'font_family' => 'Reforma1969',
 					'font_size_to_line_height_points' => array(
 						array( 17, 1.5 ),
 						array( 24, 1.2 ),
@@ -646,7 +643,7 @@ function rosa2_filter_font_palettes( $font_palettes ) {
 					'font_styles_intervals' => array(
 						array(
 							'start'           => 0,
-							'font_weight'     => '400',
+							'font_weight'     => '500',
 							'letter_spacing'  => '-0.02em',
 							'text_transform'  => 'none',
 							'text_decoration' => 'none',
@@ -662,10 +659,9 @@ function rosa2_filter_font_palettes( $font_palettes ) {
 						),
 					),
 				),
-				// Secondary font is used for smaller headings [H4, H5, H6], including meta details
 				'sm_font_secondary' => array(
 					'type'                  => 'theme_font',
-					'font_family'           => 'Reforma2018, sans-serif',
+					'font_family'           => 'Reforma2018',
 					'font_size_to_line_height_points' => array(
 						array( 17, 1.5 ),
 						array( 100, 1 ),
@@ -673,17 +669,16 @@ function rosa2_filter_font_palettes( $font_palettes ) {
 					'font_styles_intervals' => array(
 						array(
 							'start'           => 0,
-							'font_weight'     => '400',
+							'font_weight'     => '500',
 							'letter_spacing'  => 'normal',
 							'text_transform'  => 'none',
 							'text_decoration' => 'none',
 						),
 					),
 				),
-				// Used for Body Font [eg. entry-content]
 				'sm_font_body'      => array(
 					'type'        => 'theme_font',
-					'font_family' => 'Reforma1969, sans-serif',
+					'font_family' => 'Reforma1969',
 					'font_size_to_line_height_points' => array(
 						array( 16, 1.7 ),
 						array( 18, 1.6 ),
@@ -692,7 +687,7 @@ function rosa2_filter_font_palettes( $font_palettes ) {
 					'font_styles_intervals' => array(
 						array(
 							'start'           => 0,
-							'font_weight'     => '400',
+							'font_weight'     => '500',
 							'letter_spacing'  => '-0.03em',
 							'text_transform'  => 'none',
 							'text_decoration' => 'none',
@@ -705,438 +700,188 @@ function rosa2_filter_font_palettes( $font_palettes ) {
 				),
 				'sm_font_accent'    => array(
 					'type'        => 'theme_font',
-					'font_family' => 'Billy Ohio, cursive',
+					'font_family' => 'Billy Ohio',
 				),
 			),
 		),
-		'gema'  => array(
-			'label'   => esc_html__( 'Gema', 'customify' ),
+		'lively'  => array(
+			'label'   => esc_html__( 'Lively', '__theme_txtd' ),
 			'preview' => array(
-				// Font Palette Name
-				'title'                => esc_html__( 'Gema', 'customify' ),
-				'description'          => esc_html__( 'A graceful nature, truly tasteful and polished.', 'customify' ),
-				'background_image_url' => 'https://cloud.pixelgrade.com/wp-content/uploads/2018/09/font-palette-thin.png',
+				'title'                => esc_html__( 'Lively', '__theme_txtd' ),
+				'description'          => esc_html__( 'Chic and energetic with a confident nature', '__theme_txtd' ),
+				'background_image_url' => 'https://cloud.pixelgrade.com/wp-content/uploads/2019/09/font-palette-lively.png',
 			),
-
 			'fonts_logic' => array(
-				// Primary is used for main headings [Display, H1, H2, H3]
 				'sm_font_primary'   => array(
-					// Define the font type ('google' or 'theme_font'). By default it's 'google'.
-					'type'                            => 'google',
-					// Font loaded when a palette is selected
-					'font_family'                     => 'Montserrat',
-					// Load all these fonts weights.
-					'font_weights'                    => array( 100, 300, 700 ),
-					// "Generate" the graph to be used for font-size and line-height.
+					'type'        => 'google',
+					'font_family' => 'Prata',
 					'font_size_to_line_height_points' => array(
-						array( 17, 1.7 ),
-						array( 48, 1.2 ),
+						array( 16, 1.5 ),
+						array( 80, 1.2 ),
 					),
-
-					// Define how fonts will look based on the font size.
-					'font_styles_intervals'           => array(
+					'font_styles_intervals' => array(
 						array(
-							'start'          => 10,
-							'font_weight'    => 300,
-							'letter_spacing' => '0.03em',
-							'text_transform' => 'uppercase',
-						),
-						array(
-							'start'          => 12,
-							'font_weight'    => 700,
-							'letter_spacing' => '0em',
-							'text_transform' => 'uppercase',
-						),
-						array(
-							'start'          => 18,
-							'font_weight'    => 100,
-							'letter_spacing' => '0.03em',
-							'text_transform' => 'uppercase',
+							'start'           => 0,
+							'font_weight'     => '400',
+							'letter_spacing'  => 'normal',
+							'text_transform'  => 'none',
+							'text_decoration' => 'none',
 						),
 					),
 				),
-
-				// Secondary font is used for smaller headings [H4, H5, H6], including meta details
 				'sm_font_secondary' => array(
-					'font_family'                     => 'Montserrat',
-					'font_weights'                    => array( 200, 400 ),
+					'type'        => 'google',
+					'font_family' => 'Prata',
 					'font_size_to_line_height_points' => array(
-						array( 10, 1.6 ),
-						array( 18, 1.5 )
+						array( 16, 1.5 ),
+						array( 80, 1.2 ),
 					),
-					'font_styles_intervals'           => array(
+					'font_styles_intervals' => array(
 						array(
-							'start'          => 0,
-							'font_weight'    => 200,
-							'letter_spacing' => '0.03em',
-							'text_transform' => 'uppercase',
-						),
-						array(
-							'start'          => 13,
-							'font_weight'    => 400,
-							'letter_spacing' => '0.015em',
-							'text_transform' => 'uppercase',
+							'start'           => 0,
+							'font_weight'     => '400',
+							'letter_spacing'  => 'normal',
+							'text_transform'  => 'none',
+							'text_decoration' => 'none',
 						),
 					),
 				),
-
-				// Used for Body Font [eg. entry-content]
 				'sm_font_body'      => array(
-					'font_family'                     => 'Montserrat',
-					'font_weights'                    => array( 200, '200italic', 700, '700italic' ),
-					'font_size_to_line_height_points' => array(
-						array( 15, 1.8 ),
-						array( 18, 1.7 ),
-					),
-
-					// Define how fonts will look based on their size
-					'font_styles_intervals'           => array(
-						array(
-							'start'          => 0,
-							'font_weight'    => 200,
-							'letter_spacing' => 0,
-							'text_transform' => 'none',
-						),
-						array(
-							'start'          => 20,
-							'font_weight'    => 400,
-							'letter_spacing' => 0,
-							'text_transform' => 'none',
-						),
-					),
-				),
-
-				'sm_font_accent' => array(
 					'type'        => 'theme_font',
-					'font_family' => '"Billy Ohio", sans-serif',
-				),
-			),
-		),
-		'julia' => array(
-			'label'   => esc_html__( 'Julia', 'customify' ),
-			'preview' => array(
-				// Font Palette Name
-				'title'                => esc_html__( 'Julia', 'customify' ),
-				'description'          => esc_html__( 'A graceful nature, truly tasteful and polished.', 'customify' ),
-				'background_image_url' => 'https://cloud.pixelgrade.com/wp-content/uploads/2018/09/font-palette-serif.png',
-
-				// Use the following options to style the preview card fonts
-				// Including font-family, size, line-height, weight, letter-spacing and text transform
-				'title_font'           => array(
-					'font' => 'font_primary',
-					'size' => 30,
-				),
-				'description_font'     => array(
-					'font' => 'font_body',
-					'size' => 17,
-				),
-			),
-
-			'fonts_logic' => array(
-				// Primary is used for main headings [Display, H1, H2, H3]
-				'sm_font_primary'   => array(
-					// Define the font type ('google' or 'theme_font'). By default it's 'google'.
-					'type'                            => 'google',
-					// Font loaded when a palette is selected
-					'font_family'                     => 'Lora',
-					// Load all these fonts weights.
-					'font_weights'                    => array( 700 ),
-					// "Generate" the graph to be used for font-size and line-height.
+					'font_family' => 'HK Grotesk',
 					'font_size_to_line_height_points' => array(
-						array( 24, 1.25 ),
-						array( 66, 1.15 ),
+						array( 16, 1.7 ),
+						array( 24, 1.6 ),
 					),
-
-					// Define how fonts will look based on the font size.
-					'font_styles_intervals'           => array(
+					'font_styles_intervals' => array(
 						array(
-							'start'          => 0,
-							'font_weight'    => 700,
-							'letter_spacing' => '0em',
-							'text_transform' => 'none',
-						),
-					),
-				),
-
-				// Secondary font is used for smaller headings [H4, H5, H6], including meta details
-				'sm_font_secondary' => array(
-					'font_family'                     => 'Montserrat',
-					'font_weights'                    => array( 'regular', 600 ),
-					'font_size_to_line_height_points' => array(
-						array( 14, 1.3 ),
-						array( 16, 1.2 )
-					),
-					'font_styles_intervals'           => array(
-						array(
-							'start'          => 0,
-							'font_weight'    => 600,
-							'letter_spacing' => '0.154em',
-							'text_transform' => 'uppercase',
-						),
-						array(
-							'start'          => 13,
-							'font_weight'    => 'regular',
-							'letter_spacing' => '0em',
-							'text_transform' => 'uppercase',
-						),
-						array(
-							'start'          => 14,
-							'font_weight'    => 'regular',
-							'letter_spacing' => '0.1em',
-							'text_transform' => 'uppercase',
-						),
-						array(
-							'start'          => 16,
-							'font_weight'    => 'regular',
-							'letter_spacing' => '0em',
-							'text_transform' => 'uppercase',
-						),
-						array(
-							'start'          => 17,
-							'font_weight'    => 'regular',
-							'letter_spacing' => '0em',
-							'text_transform' => 'none',
-						),
-					),
-				),
-
-				// Used for Body Font [eg. entry-content]
-				'sm_font_body'      => array(
-					'font_family'                     => 'PT Serif',
-					'font_weights'                    => array( 'regular', '400italic', 700, '700italic' ),
-					'font_size_to_line_height_points' => array(
-						array( 15, 1.7 ),
-						array( 18, 1.5 ),
-					),
-
-					// Define how fonts will look based on their size
-					'font_styles_intervals'           => array(
-						array(
-							'start'          => 0,
-							'font_weight'    => 'regular',
-							'letter_spacing' => 0,
-							'text_transform' => 'none',
+							'start'           => 0,
+							'font_weight'     => '400',
+							'letter_spacing'  => 'normal',
+							'text_transform'  => 'none',
+							'text_decoration' => 'none',
 						),
 					),
 				),
 			),
 		),
-		'patch' => array(
-			'label'   => esc_html__( 'Patch', 'customify' ),
+		'voltage'  => array(
+			'label'   => esc_html__( 'Voltage', '__theme_txtd' ),
 			'preview' => array(
-				// Font Palette Name
-				'title'                => esc_html__( 'Patch', 'customify' ),
-				'description'          => esc_html__( 'A graceful nature, truly tasteful and polished.', 'customify' ),
-				'background_image_url' => 'https://cloud.pixelgrade.com/wp-content/uploads/2018/09/font-palette-lofty.png',
-
-				// Use the following options to style the preview card fonts
-				// Including font-family, size, line-height, weight, letter-spacing and text transform
-				'title_font'           => array(
-					'font' => 'font_primary',
-					'size' => 26,
-				),
-				'description_font'     => array(
-					'font' => 'font_body',
-					'size' => 16,
-				),
+				'title'                => esc_html__( 'Voltage', '__theme_txtd' ),
+				'description'          => esc_html__( 'Bold and strong, ready to make an impact', '__theme_txtd' ),
+				'background_image_url' => 'https://cloud.pixelgrade.com/wp-content/uploads/2019/09/font-palette-voltage.png',
 			),
-
 			'fonts_logic' => array(
-				// Primary is used for main headings [Display, H1, H2, H3]
 				'sm_font_primary'   => array(
-					// Define the font type ('google' or 'theme_font'). By default it's 'google'.
-					'type'                            => 'google',
-					// Font loaded when a palette is selected
-					'font_family'                     => 'Oswald',
-					// Load all these fonts weights.
-					'font_weights'                    => array( 300, 400, 500 ),
-					// "Generate" the graph to be used for font-size and line-height.
+					'type'        => 'theme_font',
+					'font_family' => 'League Spartan, sans-serif',
 					'font_size_to_line_height_points' => array(
-						array( 20, 1.55 ),
-						array( 56, 1.25 ),
+						array( 16, 1.5 ),
+						array( 80, 1.2 ),
 					),
-
-					// Define how fonts will look based on the font size.
-					'font_styles_intervals'           => array(
+					'font_styles_intervals' => array(
 						array(
-							'start'          => 0,
-							'font_weight'    => 500,
-							'letter_spacing' => '0.04em',
-							'text_transform' => 'uppercase',
-						),
-						array(
-							'start'          => 24,
-							'font_weight'    => 300,
-							'letter_spacing' => '0.06em',
-							'text_transform' => 'uppercase',
-						),
-						array(
-							'start'          => 25,
-							'font_weight'    => 400,
-							'letter_spacing' => '0.04em',
-							'text_transform' => 'uppercase',
-						),
-						array(
-							'start'          => 26,
-							'font_weight'    => 500,
-							'letter_spacing' => '0.04em',
-							'text_transform' => 'uppercase',
+							'start'           => 0,
+							'font_weight'     => '400',
+							'letter_spacing'  => 'normal',
+							'text_transform'  => 'none',
+							'text_decoration' => 'none',
 						),
 					),
 				),
-
-				// Secondary font is used for smaller headings [H4, H5, H6], including meta details
 				'sm_font_secondary' => array(
-					'font_family'                     => 'Oswald',
-					'font_weights'                    => array( 200, '200italic', 500, '500italic' ),
+					'type'        => 'theme_font',
+					'font_family' => 'League Spartan, sans-serif',
 					'font_size_to_line_height_points' => array(
-						array( 14, 1.625 ),
-						array( 24, 1.5 ),
+						array( 16, 1.5 ),
+						array( 80, 1.2 ),
 					),
-					'font_styles_intervals'           => array(
+					'font_styles_intervals' => array(
 						array(
-							'start'          => 0,
-							'font_weight'    => 500,
-							'letter_spacing' => '0.01em',
-							'text_transform' => 'uppercase',
-						),
-						array(
-							'start'          => 20,
-							'font_weight'    => 500,
-							'letter_spacing' => '0em',
-							'text_transform' => 'uppercase',
-						),
-						array(
-							'start'          => 24,
-							'font_weight'    => 200,
-							'letter_spacing' => '0em',
-							'text_transform' => 'none',
+							'start'           => 0,
+							'font_weight'     => '400',
+							'letter_spacing'  => 'normal',
+							'text_transform'  => 'none',
+							'text_decoration' => 'none',
 						),
 					),
 				),
-
-				// Used for Body Font [eg. entry-content]
 				'sm_font_body'      => array(
-					'font_family'                     => 'Roboto',
-					'font_weights'                    => array( 300, '300italic', 400, '400italic', 500, '500italic' ),
+					'type'        => 'google',
+					'font_family' => 'Poppins',
 					'font_size_to_line_height_points' => array(
-						array( 14, 1.5 ),
-						array( 24, 1.45 ),
+						array( 16, 1.7 ),
+						array( 24, 1.6 ),
 					),
-
-					// Define how fonts will look based on their size
-					'font_styles_intervals'           => array(
+					'font_styles_intervals' => array(
 						array(
-							'start'          => 0,
-							'end'            => 10.9,
-							'font_weight'    => 500,
-							'letter_spacing' => '0.03em',
-							'text_transform' => 'none',
-						),
-						array(
-							'start'          => 10.9,
-							'end'            => 12,
-							'font_weight'    => 500,
-							'letter_spacing' => '0.02em',
-							'text_transform' => 'uppercase',
-						),
-						array(
-							'start'          => 12,
-							'font_weight'    => 300,
-							'letter_spacing' => 0,
-							'text_transform' => 'none',
+							'start'           => 0,
+							'font_weight'     => '400',
+							'letter_spacing'  => 'normal',
+							'text_transform'  => 'none',
+							'text_decoration' => 'none',
 						),
 					),
 				),
 			),
 		),
-		'hive'  => array(
-			'label'   => esc_html__( 'Hive', 'customify' ),
+		'self'  => array(
+			'label'   => esc_html__( 'Self', '__theme_txtd' ),
 			'preview' => array(
-				// Font Palette Name
-				'title'                => esc_html__( 'Hive', 'customify' ),
-				'description'          => esc_html__( 'A graceful nature, truly tasteful and polished.', 'customify' ),
-				'background_image_url' => 'https://cloud.pixelgrade.com/wp-content/uploads/2018/09/font-palette-classic.png',
-
-				// Use the following options to style the preview card fonts
-				// Including font-family, size, line-height, weight, letter-spacing and text transform
-				'title_font'           => array(
-					'font' => 'font_primary',
-					'size' => 36,
-				),
-				'description_font'     => array(
-					'font' => 'font_body',
-					'size' => 18,
-				),
+				'title'                => esc_html__( 'Self', '__theme_txtd' ),
+				'description'          => esc_html__( 'An adventurous spirit that\'s loud and proud', '__theme_txtd' ),
+				'background_image_url' => 'https://cloud.pixelgrade.com/wp-content/uploads/2019/09/font-palette-self.png',
 			),
-
 			'fonts_logic' => array(
-				// Primary is used for main headings [Display, H1, H2, H3]
 				'sm_font_primary'   => array(
-					// Define the font type ('google' or 'theme_font'). By default it's 'google'.
-					'type'                            => 'google',
-					// Font loaded when a palette is selected
-					'font_family'                     => 'Playfair Display',
-					// Load all these fonts weights.
-					'font_weights'                    => array( 400, '400italic', 700, '700italic', 900, '900italic' ),
-					// "Generate" the graph to be used for font-size and line-height.
+					'type'        => 'theme_font',
+					'font_family' => 'YoungSerif',
 					'font_size_to_line_height_points' => array(
-						array( 20, 1.55 ),
-						array( 65, 1.15 ),
+						array( 16, 1.5 ),
+						array( 80, 1.2 ),
 					),
-
-					// Define how fonts will look based on the font size.
-					'font_styles_intervals'           => array(
+					'font_styles_intervals' => array(
 						array(
-							'start'          => 0,
-							'font_weight'    => 400,
-							'letter_spacing' => '0em',
-							'text_transform' => 'none',
+							'start'           => 0,
+							'font_weight'     => '400',
+							'letter_spacing'  => 'normal',
+							'text_transform'  => 'none',
+							'text_decoration' => 'none',
 						),
 					),
 				),
-
-				// Secondary font is used for smaller headings [H4, H5, H6], including meta details
 				'sm_font_secondary' => array(
-					'font_family'                     => 'Noto Serif',
-					'font_weights'                    => array( 400, '400italic', 700, '700italic' ),
+					'type'        => 'theme_font',
+					'font_family' => 'YoungSerif',
 					'font_size_to_line_height_points' => array(
-						array( 13, 1.33 ),
-						array( 18, 1.5 ),
+						array( 16, 1.5 ),
+						array( 80, 1.2 ),
 					),
-					'font_styles_intervals'           => array(
+					'font_styles_intervals' => array(
 						array(
-							'start'          => 0,
-							'end'            => 15,
-							'font_weight'    => 400,
-							'letter_spacing' => '0em',
-							'text_transform' => 'none',
-						),
-						array(
-							'start'          => 15,
-							'font_weight'    => 700,
-							'letter_spacing' => '0em',
-							'text_transform' => 'none',
+							'start'           => 0,
+							'font_weight'     => '400',
+							'letter_spacing'  => 'normal',
+							'text_transform'  => 'none',
+							'text_decoration' => 'none',
 						),
 					),
 				),
-
-				// Used for Body Font [eg. entry-content]
 				'sm_font_body'      => array(
-					'font_family'                     => 'Noto Serif',
-					'font_weights'                    => array( 400, '400italic', 700, '700italic' ),
+					'type'        => 'google',
+					'font_family' => 'Lato',
 					'font_size_to_line_height_points' => array(
-						array( 13, 1.4 ),
-						array( 18, 1.5 ),
+						array( 16, 1.7 ),
+						array( 24, 1.6 ),
 					),
-
-					// Define how fonts will look based on their size
-					'font_styles_intervals'           => array(
+					'font_styles_intervals' => array(
 						array(
-							'start'          => 0,
-							'font_weight'    => 400,
-							'letter_spacing' => 0,
-							'text_transform' => 'none',
+							'start'           => 0,
+							'font_weight'     => '400',
+							'letter_spacing'  => 'normal',
+							'text_transform'  => 'none',
+							'text_decoration' => 'none',
 						),
 					),
 				),
@@ -1149,27 +894,39 @@ function rosa2_filter_font_palettes( $font_palettes ) {
 
 function rosa2_add_customify_theme_fonts( $fonts ) {
 
-	$fonts['reforma1918'] = array(
-		'family'   => 'Reforma1918',
-		'src'      => get_template_directory_uri() . '/assets/fonts/reforma1918/stylesheet.css',
-		'variants' => array( 'Blanca', 'BlancaItalica', 'Gris', 'GrisItalica', 'Negra', 'NegraItalica' )
+	$fonts['Reforma1969'] = array(
+		'family'   => 'Reforma1969',
+		'src'      => '//pxgcdn.com/fonts/reforma1969/stylesheet.css',
+		'variants' => array( '300', '500', '700' ),
 	);
 
-	$fonts['reforma1969'] = array(
-		'family'   => 'Reforma1969, sans-serif',
-		'src'      => get_template_directory_uri() . '/assets/fonts/reforma1969/stylesheet.css',
-		'variants' => array( '400', '700' )
+	$fonts['Reforma2018'] = array(
+		'family'   => 'Reforma2018',
+		'src'      => '//pxgcdn.com/fonts/reforma2018/stylesheet.css',
+		'variants' => array( '300', '500', '700', '900' ),
 	);
 
-	$fonts['reforma2018'] = array(
-		'family'   => 'Reforma2018, sans-serif',
-		'src'      => get_template_directory_uri() . '/assets/fonts/reforma2018/stylesheet.css',
-		'variants' => array( '400', '700' )
+	$fonts['Billy Ohio'] = array(
+		'family'   => 'Billy Ohio',
+		'src'      => '//pxgcdn.com/fonts/billy-ohio/stylesheet.css',
+		'variants' => array()
 	);
 
-	$fonts['billy-ohio'] = array(
-		'family'   => 'Billy Ohio, cursive',
-		'src'      => get_template_directory_uri() . '/assets/fonts/billy-ohio/stylesheet.css',
+	$fonts['League Spartan'] = array(
+		'family'   => 'League Spartan',
+		'src'      => '//pxgcdn.com/fonts/league-spartan/stylesheet.css',
+		'variants' => array()
+	);
+
+	$fonts['HK Grotesk'] = array(
+		'family'   => 'HK Grotesk',
+		'src'      => '//pxgcdn.com/fonts/hk-grotesk/stylesheet.css',
+		'variants' => array()
+	);
+
+	$fonts['YoungSerif'] = array(
+		'family'   => 'YoungSerif',
+		'src'      => '//pxgcdn.com/fonts/young-serif/stylesheet.css',
 		'variants' => array()
 	);
 
