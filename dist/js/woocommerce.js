@@ -1,1 +1,214 @@
-!function(t){var e={};function n(r){if(e[r])return e[r].exports;var o=e[r]={i:r,l:!1,exports:{}};return t[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=t,n.c=e,n.d=function(t,e,r){n.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:r})},n.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},n.t=function(t,e){if(1&e&&(t=n(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var r=Object.create(null);if(n.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var o in t)n.d(r,o,function(e){return t[e]}.bind(null,o));return r},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,"a",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p="",n(n.s=65)}({65:function(t,e){!function(t,e){t(function(){var n=t(e.body).not(".woocommerce-cart");t(".c-mini-cart__overlay, .c-mini-cart__close").on("click",function(){var e=t(".add_to_cart_button.added"),n=t(".added_to_cart"),r=e.data("label");e.removeClass("added").text(r),n.remove(),t(".c-mini-cart").removeClass("c-mini-cart--visible"),t(".c-card.hover").each(function(e,n){var r=t(n);setTimeout(function(){r.removeClass("hover")},100)})}),n.on("added_to_cart",function(r,o,i,a){var c="div.widget_shopping_cart_content",d=a.data("product_sku");c in o&&n.one("wc_fragments_loaded",function(){var n=t(c).find(".product_list_widget").find('[data-product_sku="'+d+'"]').closest(".mini_cart_item");n.length&&(e.documentElement.scrollIntoView&&n.get(0).scrollIntoView(),n.addClass("mini_cart_item--hidden"),setTimeout(function(){n.removeClass("mini_cart_item--hidden")},100))}),a.text(pixelgradeWooCommerceStrings.added_to_cart),t(".c-mini-cart").addClass("c-mini-cart--visible")}),n.on("added_to_cart removed_from_cart",function(e,n,r,o){var i="div.widget_shopping_cart_content";if(i in n){var a=0;t(n[i]).find(".mini_cart_item").each(function(e,n){var r=t(n).find(".quantity");r.children().remove(),a+=parseInt(r.text(),10)}),t(".menu-item--cart .cart-count span").text(a)}}),t(".js-open-cart").on("click",function(e){e.preventDefault(),e.stopPropagation(),t(".c-mini-cart").addClass("c-mini-cart--visible")}),n.on("wc_cart_button_updated",function(t,e){e.siblings(".added_to_cart").addClass("button")}),n.on("adding_to_cart",function(t,e,n){var r=e.text();e.data("label",r),e.closest(".wc-block-grid__product").addClass("hover"),e.text(pixelgradeWooCommerceStrings.adding_to_cart)})})}(jQuery,document)}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 66);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 66:
+/***/ (function(module, exports) {
+
+(function ($, document) {
+
+	$(function () {
+
+		var $body = $(document.body).not('.woocommerce-cart');
+
+		// show mini cart when a product is added to cart
+		function onAddedToCart(event, fragments, cart_hash, $button) {
+			var key = 'div.widget_shopping_cart_content';
+			var sku = $button.data('product_sku');
+
+			if (key in fragments) {
+				$body.one('wc_fragments_loaded', function () {
+					var $fragment = $(key);
+					var $productList = $fragment.find('.product_list_widget');
+					var $product = $productList.find('[data-product_sku="' + sku + '"]').closest('.mini_cart_item');
+
+					if ($product.length) {
+
+						// scroll the newly added product into view
+						if (document.documentElement.scrollIntoView) {
+							$product.get(0).scrollIntoView();
+						}
+
+						// prepare the fade-in animation for the updated product in the cart
+						$product.addClass('mini_cart_item--hidden');
+
+						// trigger the animation to show the updated product shortly after the cart slides into view
+						setTimeout(function () {
+							$product.removeClass('mini_cart_item--hidden');
+						}, 100);
+					}
+				});
+			}
+
+			$button.text(pixelgradeWooCommerceStrings.added_to_cart);
+
+			$('.c-mini-cart').addClass('c-mini-cart--visible');
+		}
+
+		// update cart items count in cart menu item
+		function updateCartMenuItemCount(event, fragments, cart_hash, $button) {
+			var key = 'div.widget_shopping_cart_content';
+
+			if (key in fragments) {
+				// initialize cart items sum count with 0
+				var products = 0;
+
+				// loop through every item in cart and sum up the quantity
+				$(fragments[key]).find('.mini_cart_item').each(function (i, obj) {
+					var $quantity = $(obj).find('.quantity');
+
+					// remove the price html tag to be able to parse number of items for that product
+					$quantity.children().remove();
+					products += parseInt($quantity.text(), 10);
+				});
+
+				// actually update the cart items count
+				$('.menu-item--cart .cart-count span').text(products);
+			}
+		}
+
+		// show mini cart when Cart menu item is clicked
+		function openMiniCart(event) {
+			event.preventDefault();
+			event.stopPropagation();
+			$('.c-mini-cart').addClass('c-mini-cart--visible');
+
+			debugger;
+		}
+
+		// close mini Cart
+		function closeMiniCart() {
+			var $add_to_cart_button = $('.add_to_cart_button.added');
+			var $view_cart_button = $('.added_to_cart');
+			var label = $add_to_cart_button.data('label');
+
+			$add_to_cart_button.removeClass('added').text(label);
+			$view_cart_button.remove();
+
+			$('.c-mini-cart').removeClass('c-mini-cart--visible');
+
+			$('.c-card.hover').each(function (i, obj) {
+				var $card = $(obj);
+
+				setTimeout(function () {
+					$card.removeClass('hover');
+				}, 100);
+			});
+		}
+
+		$('.c-mini-cart__overlay, .c-mini-cart__close').on('click', closeMiniCart);
+
+		$body.on('added_to_cart', onAddedToCart);
+		$body.on('added_to_cart removed_from_cart', updateCartMenuItemCount);
+
+		$('.js-open-cart').on('click', openMiniCart);
+
+		// in order to avoid template overwrites add the class used to style buttons programatically
+		$body.on('wc_cart_button_updated', function (event, $button) {
+			$button.siblings('.added_to_cart').addClass('button');
+		});
+
+		// replace the "Add to cart" label with string that provide more feedback
+		// when the cart gets updated
+		$body.on('adding_to_cart', function (event, $button, data) {
+			// cache old label and save it in a data-attribute
+			// in order to restore it once the mini cart gets closed
+			debugger;
+			var label = $button.text();
+			$button.data('label', label);
+
+			// replace the button label with a new one that provides more feedback
+			// "Add to cart" gets replaced with "Adding..."
+			$button.closest('.wc-block-grid__product').addClass('hover');
+			$button.text(pixelgradeWooCommerceStrings.adding_to_cart);
+		});
+	});
+})(jQuery, document);
+
+/***/ })
+
+/******/ });

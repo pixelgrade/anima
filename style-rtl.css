@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*!
 Theme Name: Rosa2
 Theme URI: https://demos.pixelgrade.com/rosa2
@@ -734,7 +735,7 @@ figure {
 ul,
 ol {
   list-style-position: outside;
-  padding-left: var(--theme-spacing); }
+  padding-right: var(--theme-spacing); }
   ul > :not(:first-child),
   ol > :not(:first-child) {
     --element-spacing: var(--theme-spacing-tiny);
@@ -776,7 +777,7 @@ table {
   border-collapse: collapse;
   margin-bottom: 2em; }
   table th {
-    text-align: left; }
+    text-align: right; }
   table th,
   table td {
     vertical-align: middle; }
@@ -794,10 +795,10 @@ table {
     padding: 5em 0; }
   table th:first-child,
   table td:first-child {
-    padding-left: 0; }
+    padding-right: 0; }
   table th:last-child,
   table td:last-child {
-    padding-right: 0; }
+    padding-left: 0; }
 
 /* 2. Components */
 .entry-content > .alignleft:not(:first-child),
@@ -833,7 +834,7 @@ table {
   margin-bottom: var(--theme-spacing); }
 
 .entry-content > .alignleft {
-  float: left; }
+  float: right; }
 
 .editor-block-list__block[data-align=left] {
   max-width: 100%; }
@@ -843,7 +844,7 @@ table {
     font: inherit; }
 
 .entry-content > .alignright {
-  float: right; }
+  float: left; }
 
 .editor-block-list__block[data-align=right] {
   max-width: 100%; }
@@ -854,16 +855,16 @@ table {
 
 .entry-content > .alignright,
 .editor-block-list__block[data-align=right] .editor-block-list__block-edit {
-  margin-left: var(--theme-spacing); }
+  margin-right: var(--theme-spacing); }
 
 .entry-content > .alignleft,
 .editor-block-list__block[data-align=left] .editor-block-list__block-edit {
-  margin-right: var(--theme-spacing); }
+  margin-left: var(--theme-spacing); }
 
 .promo-bar {
   position: fixed;
   top: 0;
-  left: 0;
+  right: 0;
   z-index: 1000;
   width: 100%; }
   .admin-bar .promo-bar {
@@ -888,7 +889,7 @@ table {
   .promo-bar .novablocks-announcement-bar__wrapper {
     position: absolute;
     top: 50%;
-    left: 0;
+    right: 0;
     width: 100%;
     transform: translate(0, -50%); }
 
@@ -897,7 +898,7 @@ ul.menu,
 .menu > ul,
 .sub-menu,
 .children {
-  padding-left: 0;
+  padding-right: 0;
   list-style: none; }
   ul.menu > li,
   .menu > ul > li,
@@ -919,10 +920,10 @@ ul.menu,
       display: inline-block;
       width: 0.5em;
       height: 0.5em;
-      margin-left: 0.75em;
-      border-right: 0.1em solid currentColor;
+      margin-right: 0.75em;
+      border-left: 0.1em solid currentColor;
       border-bottom: 0.1em solid currentColor;
-      transform: translateY(-10%) rotate(45deg);
+      transform: translateY(-10%) rotate(-45deg);
       opacity: .5; }
   @media only screen and (min-width: 1000px) {
     .site-header .menu-item-has-children.hover > .sub-menu,
@@ -948,7 +949,7 @@ ul.menu,
       background: rgba(0, 0, 0, 0.2); }
     .site-header .menu-item-has-children[class] > a:after,
     .site-header .page_item_has_children[class] > a:after {
-      transform: rotate(45deg); } }
+      transform: rotate(-45deg); } }
 
 @media only screen and (min-width: 1000px) {
   .site-header > ul.menu,
@@ -960,7 +961,7 @@ ul.menu,
   .site-header .children {
     position: absolute;
     top: 100%;
-    left: 0;
+    right: 0;
     transform: translateZ(0);
     opacity: 0;
     width: 15em;
@@ -976,18 +977,18 @@ ul.menu,
     .site-header .sub-menu a,
     .site-header .children a {
       position: relative;
-      padding-left: 20px;
-      padding-right: 30px; }
+      padding-right: 20px;
+      padding-left: 30px; }
       .site-header .sub-menu a:after,
       .site-header .children a:after {
         position: absolute;
-        right: 1em; }
+        left: 1em; }
     .site-header .sub-menu li:hover,
     .site-header .children li:hover {
       background-color: rgba(33, 43, 73, 0.05); }
   .site-header .sub-menu .menu-item-has-children > a:after,
   .site-header .children .page_item_has_children > a:after {
-    transform: rotate(-45deg); }
+    transform: rotate(45deg); }
   .site-header .sub-menu .menu-item-has-children > .sub-menu,
   .site-header .sub-menu .menu-item-has-children > .children,
   .site-header .children .page_item_has_children > .sub-menu,
@@ -996,7 +997,7 @@ ul.menu,
   .site-header .sub-menu .sub-menu,
   .site-header .children .children {
     top: 0;
-    left: 100%; }
+    right: 100%; }
   .site-header :not(:hover) > .sub-menu,
   .site-header :not(:hover) > .children {
     display: block; }
@@ -1016,7 +1017,7 @@ ul.menu a,
   align-items: center;
   position: fixed;
   top: 0;
-  left: 0;
+  right: 0;
   z-index: 1100;
   padding: 1em;
   cursor: pointer; }
@@ -1042,7 +1043,7 @@ ul.menu a,
   display: none; }
 
 .c-menu-toggle__label {
-  margin-left: 0.5em; }
+  margin-right: 0.5em; }
 
 .c-menu-toggle__icon {
   position: relative;
@@ -1059,7 +1060,7 @@ ul.menu a,
 .c-menu-toggle__slice--bottom {
   position: absolute;
   top: 0;
-  left: 0; }
+  right: 0; }
 
 .c-menu-toggle__slice--top {
   transform: translate3d(0, -0.375em, 0); }
@@ -1088,8 +1089,8 @@ ul.menu a,
     .site-header--logo-right .site-header__content {
       grid-template-columns: 1fr auto; }
     .site-header__content.alignfull[class] {
-      margin-left: 0;
-      margin-right: 0; }
+      margin-right: 0;
+      margin-left: 0; }
   .c-menu-toggle__checkbox,
   .c-menu-toggle {
     display: none; } }
@@ -1103,7 +1104,7 @@ ul.menu a,
     overflow-y: auto;
     position: fixed;
     bottom: 0;
-    left: 0;
+    right: 0;
     z-index: 1000;
     width: 100vw;
     background: var(--sm-dark-1);
@@ -1111,7 +1112,7 @@ ul.menu a,
     .c-menu-toggle__checkbox ~ .site-header {
       display: block; }
     .c-menu-toggle__checkbox:not(:checked) ~ .site-header {
-      transform: translateX(-100%); }
+      transform: translateX(100%); }
     .site-header .site-branding,
     .site-header .menu-item--cart {
       display: none; }
@@ -1124,8 +1125,8 @@ ul.menu a,
   .site-header--mobile {
     position: absolute;
     top: 0;
-    right: 0;
     left: 0;
+    right: 0;
     z-index: 900;
     display: flex;
     align-items: center;
@@ -1135,7 +1136,7 @@ ul.menu a,
       display: flex;
       position: absolute;
       top: 50%;
-      right: 1em;
+      left: 1em;
       transform: translateY(-50%); }
       .site-header--mobile .menu-item--cart > a {
         color: currentColor; }
@@ -1146,9 +1147,9 @@ ul.menu a,
     content: "";
     position: fixed;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
+    bottom: 0;
+    right: 0;
     z-index: 999;
     background: #000;
     opacity: 0.2;
@@ -1162,11 +1163,11 @@ ul.menu a,
   .c-menu-toggle__checkbox:checked ~ .c-menu-toggle {
     color: var(--theme-sm-light-1); }
     .c-menu-toggle__checkbox:checked ~ .c-menu-toggle .c-menu-toggle__slice--top {
-      transform: rotate(45deg); }
+      transform: rotate(-45deg); }
     .c-menu-toggle__checkbox:checked ~ .c-menu-toggle .c-menu-toggle__slice--middle {
       opacity: 0; }
     .c-menu-toggle__checkbox:checked ~ .c-menu-toggle .c-menu-toggle__slice--bottom {
-      transform: rotate(-45deg); } }
+      transform: rotate(45deg); } }
 
 @media only screen and (min-width: 1000px) {
   .site-header__inner-container {
@@ -1205,8 +1206,8 @@ ul.menu a,
 @media only screen and (min-width: 1000px) {
   .site-header {
     top: 0;
-    right: 0;
     left: 0;
+    right: 0;
     z-index: 1000;
     padding-top: 1em;
     padding-bottom: 1em;
@@ -1237,9 +1238,9 @@ ul.menu a,
     display: block;
     position: absolute;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
+    bottom: 0;
+    right: 0;
     box-shadow: currentColor 0 1px 2px;
     opacity: 0.1;
     pointer-events: none;
@@ -1282,10 +1283,10 @@ ul.menu a,
   text-align: center; }
 
 .site-logo + .site-info {
-  text-align: left; }
+  text-align: right; }
   .site-logo + .site-info .site-title,
   .site-logo + .site-info .site-description {
-    margin-left: 1em; }
+    margin-right: 1em; }
 
 .site-title a {
   color: inherit;
@@ -1297,9 +1298,9 @@ ul.menu a,
 .c-logo__inverted {
   position: absolute;
   top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  right: 50%;
+  -webkit-transform: translate(50%, -50%);
+  transform: translate(50%, -50%);
   width: 100%; }
   .site-header--fixed.site-header--scrolled .c-logo__inverted,
   .site-header--fixed.site-header--normal .c-logo__inverted {
@@ -1337,17 +1338,17 @@ body, .site, .site-content {
 /* Post Content */
 .entry-header {
   --theme-wrapper-side-spacing: var(--theme-spacing-normal);
-  padding-left: var(--theme-wrapper-side-spacing);
   padding-right: var(--theme-wrapper-side-spacing);
+  padding-left: var(--theme-wrapper-side-spacing);
   padding-top: var(--theme-spacing-normal);
   padding-bottom: var(--theme-spacing-normal);
   text-align: center; }
   .entry-header > .alignfull {
-    margin-left: calc( -1 * var(--theme-wrapper-side-spacing));
-    margin-right: calc( -1 * var(--theme-wrapper-side-spacing)); }
+    margin-right: calc( -1 * var(--theme-wrapper-side-spacing));
+    margin-left: calc( -1 * var(--theme-wrapper-side-spacing)); }
   .entry-header > * {
-    margin-left: auto;
-    margin-right: auto; }
+    margin-right: auto;
+    margin-left: auto; }
   .entry-header > :not(.alignwide):not(.alignfull) {
     max-width: var(--theme-content-width-normal); }
   .entry-header > .alignwide {
@@ -1372,16 +1373,16 @@ body, .site, .site-content {
 .entry-content,
 [class*="__inner-container"] {
   --theme-wrapper-side-spacing: var(--theme-spacing-normal);
-  padding-left: var(--theme-wrapper-side-spacing);
-  padding-right: var(--theme-wrapper-side-spacing); }
+  padding-right: var(--theme-wrapper-side-spacing);
+  padding-left: var(--theme-wrapper-side-spacing); }
   .entry-content > .alignfull,
   [class*="__inner-container"] > .alignfull {
-    margin-left: calc( -1 * var(--theme-wrapper-side-spacing));
-    margin-right: calc( -1 * var(--theme-wrapper-side-spacing)); }
+    margin-right: calc( -1 * var(--theme-wrapper-side-spacing));
+    margin-left: calc( -1 * var(--theme-wrapper-side-spacing)); }
   .entry-content > *,
   [class*="__inner-container"] > * {
-    margin-left: auto;
-    margin-right: auto; }
+    margin-right: auto;
+    margin-left: auto; }
   .entry-content > :not(.alignwide):not(.alignfull),
   [class*="__inner-container"] > :not(.alignwide):not(.alignfull) {
     max-width: var(--theme-content-width-normal); }
@@ -1398,14 +1399,14 @@ body, .site, .site-content {
 
 .entry-footer {
   --theme-wrapper-side-spacing: var(--theme-spacing-normal);
-  padding-left: var(--theme-wrapper-side-spacing);
-  padding-right: var(--theme-wrapper-side-spacing); }
+  padding-right: var(--theme-wrapper-side-spacing);
+  padding-left: var(--theme-wrapper-side-spacing); }
   .entry-footer > .alignfull {
-    margin-left: calc( -1 * var(--theme-wrapper-side-spacing));
-    margin-right: calc( -1 * var(--theme-wrapper-side-spacing)); }
+    margin-right: calc( -1 * var(--theme-wrapper-side-spacing));
+    margin-left: calc( -1 * var(--theme-wrapper-side-spacing)); }
   .entry-footer > * {
-    margin-left: auto;
-    margin-right: auto; }
+    margin-right: auto;
+    margin-left: auto; }
   .entry-footer > :not(.alignwide):not(.alignfull) {
     max-width: var(--theme-content-width-normal); }
   .entry-footer > .alignwide {
@@ -1449,14 +1450,14 @@ body, .site, .site-content {
 
 .comments-area {
   --theme-wrapper-side-spacing: var(--theme-spacing-normal);
-  padding-left: var(--theme-wrapper-side-spacing);
-  padding-right: var(--theme-wrapper-side-spacing); }
+  padding-right: var(--theme-wrapper-side-spacing);
+  padding-left: var(--theme-wrapper-side-spacing); }
   .comments-area > .alignfull {
-    margin-left: calc( -1 * var(--theme-wrapper-side-spacing));
-    margin-right: calc( -1 * var(--theme-wrapper-side-spacing)); }
+    margin-right: calc( -1 * var(--theme-wrapper-side-spacing));
+    margin-left: calc( -1 * var(--theme-wrapper-side-spacing)); }
   .comments-area > * {
-    margin-left: auto;
-    margin-right: auto; }
+    margin-right: auto;
+    margin-left: auto; }
   .comments-area > :not(.alignwide):not(.alignfull) {
     max-width: var(--theme-content-width-normal); }
   .comments-area > .alignwide {
@@ -1520,7 +1521,7 @@ body, .site, .site-content {
   align-items: flex-start; }
 
 .comment__avatar {
-  margin-right: var(--theme-comment-avatar-spacing);
+  margin-left: var(--theme-comment-avatar-spacing);
   max-width: var(--theme-comment-avatar-width);
   flex: 0 0 auto;
   overflow: hidden; }
@@ -1534,7 +1535,7 @@ body, .site, .site-content {
 .comment__edit {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   transition: all .5s ease; }
   .comment:not(:hover) .comment__edit {
     opacity: 0; }
@@ -1543,7 +1544,7 @@ body, .site, .site-content {
   display: flex; }
 
 .comment__metadata {
-  margin-left: var(--theme-comment-metadata-spacing); }
+  margin-right: var(--theme-comment-metadata-spacing); }
 
 .comment__content > :not(:first-child) {
   --element-spacing: var(--theme-spacing-small);
@@ -1554,16 +1555,16 @@ body, .site, .site-content {
   flex-wrap: wrap; }
   .comment-form > * {
     flex: 0 1 auto;
-    margin-right: var(--block-grid-spacing);
+    margin-left: var(--block-grid-spacing);
     margin-top: var(--block-grid-spacing); }
     .comment-form > *:last-child {
-      margin-right: 0; }
+      margin-left: 0; }
   .comment-form > :not(.comment-form-author):not(.comment-form-email) {
     width: calc((100% - 0 * var(--block-grid-spacing))/1); }
     .comment-form > :not(.comment-form-author):not(.comment-form-email):nth-child(-n + 1) {
       margin-top: 0; }
     .comment-form > :not(.comment-form-author):not(.comment-form-email):nth-child(1n) {
-      margin-right: 0; }
+      margin-left: 0; }
   .comment-form > .comment-form-author,
   .comment-form > .comment-form-email {
     width: calc((100% - 1 * var(--block-grid-spacing))/2); }
@@ -1572,7 +1573,7 @@ body, .site, .site-content {
       margin-top: 0; }
     .comment-form > .comment-form-author:nth-child(2n),
     .comment-form > .comment-form-email:nth-child(2n) {
-      margin-right: 0; }
+      margin-left: 0; }
 
 .comment-notes,
 .comment-form-author,
@@ -1584,7 +1585,7 @@ body, .site, .site-content {
   display: flex;
   align-items: baseline; }
   .comment-form-cookies-consent > input[type="checkbox"] {
-    margin-right: 1em; }
+    margin-left: 1em; }
 
 .comment-list,
 .comment-list .children {
@@ -1595,11 +1596,11 @@ body, .site, .site-content {
     margin-top: var(--element-spacing); }
 
 .comment-list {
-  padding-left: 0; }
+  padding-right: 0; }
   .comment-list .children {
     list-style: none;
     margin-top: var(--theme-spacing-normal);
-    padding-left: var(--theme-spacing-normal); }
+    padding-right: var(--theme-spacing-normal); }
 
 .comment-respond > :not(:first-child) {
   --element-spacing: var(--theme-spacing-tiny);
@@ -1617,14 +1618,14 @@ body, .site, .site-content {
 /* 2.5. Navigation */
 .navigation {
   --theme-wrapper-side-spacing: var(--theme-spacing-normal);
-  padding-left: var(--theme-wrapper-side-spacing);
-  padding-right: var(--theme-wrapper-side-spacing); }
+  padding-right: var(--theme-wrapper-side-spacing);
+  padding-left: var(--theme-wrapper-side-spacing); }
   .navigation > .alignfull {
-    margin-left: calc( -1 * var(--theme-wrapper-side-spacing));
-    margin-right: calc( -1 * var(--theme-wrapper-side-spacing)); }
+    margin-right: calc( -1 * var(--theme-wrapper-side-spacing));
+    margin-left: calc( -1 * var(--theme-wrapper-side-spacing)); }
   .navigation > * {
-    margin-left: auto;
-    margin-right: auto; }
+    margin-right: auto;
+    margin-left: auto; }
   .navigation > :not(.alignwide):not(.alignfull) {
     max-width: var(--theme-content-width-normal); }
   .navigation > .alignwide {
@@ -1637,18 +1638,18 @@ body, .site, .site-content {
   flex-wrap: wrap; }
   .post-navigation .nav-links > * {
     flex: 0 1 auto;
-    margin-right: var(--block-grid-spacing);
+    margin-left: var(--block-grid-spacing);
     margin-top: var(--block-grid-spacing);
     width: calc((100% - 1 * var(--block-grid-spacing))/2); }
     .post-navigation .nav-links > *:last-child {
-      margin-right: 0; }
+      margin-left: 0; }
     .post-navigation .nav-links > *:nth-child(-n + 2) {
       margin-top: 0; }
     .post-navigation .nav-links > *:nth-child(2n) {
-      margin-right: 0; }
+      margin-left: 0; }
 
 .post-navigation .nav-next {
-  text-align: right; }
+  text-align: left; }
 
 /*--------------------------------------------------------------
 # Accessibility
@@ -1668,7 +1669,7 @@ body, .site, .site-content {
   /* Many screen reader and browser combinations announce broken words as they would appear visually. */ }
   .screen-reader-text:focus {
     top: 5px;
-    left: 5px;
+    right: 5px;
     z-index: 100000;
     /* Above WP toolbar. */
     display: block;
@@ -1702,23 +1703,23 @@ body, .site, .site-content {
       --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-      background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+      background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
       border: var(--theme-button-border-width) solid var(--theme-button-border-color);
       border-radius: 0;
-      background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+      background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-color-primary-background-color[class][class][class].wp-block-button__link.is-style-primary:hover {
-        background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+        background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
     .has-sm-color-primary-background-color[class][class][class].wp-block-button__link.is-style-secondary {
       --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-      background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+      background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
       border: var(--theme-button-border-width) solid var(--theme-button-border-color);
       border-radius: 0;
       --current-button-text-color: var(--theme-button-hover-text-color);
-      background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+      background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-color-primary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
-        background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+        background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
       .has-sm-color-primary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
         --current-button-text-color: var(--theme-button-text-color); }
 
@@ -1741,23 +1742,23 @@ body, .site, .site-content {
       --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-      background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+      background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
       border: var(--theme-button-border-width) solid var(--theme-button-border-color);
       border-radius: 0;
-      background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+      background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-color-secondary-background-color[class][class][class].wp-block-button__link.is-style-primary:hover {
-        background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+        background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
     .has-sm-color-secondary-background-color[class][class][class].wp-block-button__link.is-style-secondary {
       --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-      background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+      background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
       border: var(--theme-button-border-width) solid var(--theme-button-border-color);
       border-radius: 0;
       --current-button-text-color: var(--theme-button-hover-text-color);
-      background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+      background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-color-secondary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
-        background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+        background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
       .has-sm-color-secondary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
         --current-button-text-color: var(--theme-button-text-color); }
 
@@ -1780,23 +1781,23 @@ body, .site, .site-content {
       --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-      background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+      background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
       border: var(--theme-button-border-width) solid var(--theme-button-border-color);
       border-radius: 0;
-      background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+      background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-color-tertiary-background-color[class][class][class].wp-block-button__link.is-style-primary:hover {
-        background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+        background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
     .has-sm-color-tertiary-background-color[class][class][class].wp-block-button__link.is-style-secondary {
       --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-      background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+      background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
       border: var(--theme-button-border-width) solid var(--theme-button-border-color);
       border-radius: 0;
       --current-button-text-color: var(--theme-button-hover-text-color);
-      background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+      background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-color-tertiary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
-        background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+        background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
       .has-sm-color-tertiary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
         --current-button-text-color: var(--theme-button-text-color); }
 
@@ -1819,23 +1820,23 @@ body, .site, .site-content {
       --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-      background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+      background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
       border: var(--theme-button-border-width) solid var(--theme-button-border-color);
       border-radius: 0;
-      background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+      background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-dark-primary-background-color[class][class][class].wp-block-button__link.is-style-primary:hover {
-        background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+        background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
     .has-sm-dark-primary-background-color[class][class][class].wp-block-button__link.is-style-secondary {
       --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-      background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+      background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
       border: var(--theme-button-border-width) solid var(--theme-button-border-color);
       border-radius: 0;
       --current-button-text-color: var(--theme-button-hover-text-color);
-      background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+      background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-dark-primary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
-        background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+        background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
       .has-sm-dark-primary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
         --current-button-text-color: var(--theme-button-text-color); }
 
@@ -1858,23 +1859,23 @@ body, .site, .site-content {
       --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-      background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+      background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
       border: var(--theme-button-border-width) solid var(--theme-button-border-color);
       border-radius: 0;
-      background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+      background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-dark-secondary-background-color[class][class][class].wp-block-button__link.is-style-primary:hover {
-        background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+        background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
     .has-sm-dark-secondary-background-color[class][class][class].wp-block-button__link.is-style-secondary {
       --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-      background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+      background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
       border: var(--theme-button-border-width) solid var(--theme-button-border-color);
       border-radius: 0;
       --current-button-text-color: var(--theme-button-hover-text-color);
-      background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+      background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-dark-secondary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
-        background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+        background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
       .has-sm-dark-secondary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
         --current-button-text-color: var(--theme-button-text-color); }
 
@@ -1897,23 +1898,23 @@ body, .site, .site-content {
       --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-      background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+      background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
       border: var(--theme-button-border-width) solid var(--theme-button-border-color);
       border-radius: 0;
-      background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+      background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-dark-tertiary-background-color[class][class][class].wp-block-button__link.is-style-primary:hover {
-        background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+        background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
     .has-sm-dark-tertiary-background-color[class][class][class].wp-block-button__link.is-style-secondary {
       --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-      background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+      background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
       border: var(--theme-button-border-width) solid var(--theme-button-border-color);
       border-radius: 0;
       --current-button-text-color: var(--theme-button-hover-text-color);
-      background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+      background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-dark-tertiary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
-        background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+        background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
       .has-sm-dark-tertiary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
         --current-button-text-color: var(--theme-button-text-color); }
 
@@ -1936,23 +1937,23 @@ body, .site, .site-content {
       --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-      background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+      background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
       border: var(--theme-button-border-width) solid var(--theme-button-border-color);
       border-radius: 0;
-      background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+      background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-light-primary-background-color[class][class][class].wp-block-button__link.is-style-primary:hover {
-        background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+        background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
     .has-sm-light-primary-background-color[class][class][class].wp-block-button__link.is-style-secondary {
       --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-      background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+      background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
       border: var(--theme-button-border-width) solid var(--theme-button-border-color);
       border-radius: 0;
       --current-button-text-color: var(--theme-button-hover-text-color);
-      background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+      background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-light-primary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
-        background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+        background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
       .has-sm-light-primary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
         --current-button-text-color: var(--theme-button-text-color); }
 
@@ -1975,23 +1976,23 @@ body, .site, .site-content {
       --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-      background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+      background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
       border: var(--theme-button-border-width) solid var(--theme-button-border-color);
       border-radius: 0;
-      background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+      background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-light-secondary-background-color[class][class][class].wp-block-button__link.is-style-primary:hover {
-        background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+        background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
     .has-sm-light-secondary-background-color[class][class][class].wp-block-button__link.is-style-secondary {
       --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-      background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+      background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
       border: var(--theme-button-border-width) solid var(--theme-button-border-color);
       border-radius: 0;
       --current-button-text-color: var(--theme-button-hover-text-color);
-      background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+      background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-light-secondary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
-        background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+        background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
       .has-sm-light-secondary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
         --current-button-text-color: var(--theme-button-text-color); }
 
@@ -2014,23 +2015,23 @@ body, .site, .site-content {
       --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-      background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+      background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
       border: var(--theme-button-border-width) solid var(--theme-button-border-color);
       border-radius: 0;
-      background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+      background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-light-tertiary-background-color[class][class][class].wp-block-button__link.is-style-primary:hover {
-        background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+        background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
     .has-sm-light-tertiary-background-color[class][class][class].wp-block-button__link.is-style-secondary {
       --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-      background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+      background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
       border: var(--theme-button-border-width) solid var(--theme-button-border-color);
       border-radius: 0;
       --current-button-text-color: var(--theme-button-hover-text-color);
-      background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+      background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-light-tertiary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
-        background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+        background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
       .has-sm-light-tertiary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
         --current-button-text-color: var(--theme-button-text-color); }
 
@@ -2045,13 +2046,13 @@ body, .site, .site-content {
 
 /* Alignment Helper Classes */
 .has-text-align-left {
-  text-align: left; }
+  text-align: right; }
 
 .has-text-align-center {
   text-align: center; }
 
 .has-text-align-right {
-  text-align: right; }
+  text-align: left; }
 
 [class*="wp-block"] {
   clear: both; }
@@ -2060,7 +2061,7 @@ body, .site, .site-content {
 .wp-block-archives-list {
   list-style: none; }
   .wp-block-archives-list ul {
-    padding-left: 0;
+    padding-right: 0;
     list-style: none;
     counter-reset: submenu; }
     .wp-block-archives-list ul a:before {
@@ -2086,13 +2087,13 @@ body, .site, .site-content {
   --theme-button-hover-border-color: currentColor; }
 
 .wp-block-button.alignleft {
-  text-align: left; }
+  text-align: right; }
 
 .wp-block-button.aligncenter {
   text-align: center; }
 
 .wp-block-button.alignright {
-  text-align: right; }
+  text-align: left; }
 
 .wp-block-button__link {
   display: inline-block;
@@ -2135,7 +2136,7 @@ body, .site, .site-content {
 .wp-block-categories {
   list-style: none; }
   .wp-block-categories ul {
-    padding-left: 0;
+    padding-right: 0;
     list-style: none;
     counter-reset: submenu; }
     .wp-block-categories ul a:before {
@@ -2181,9 +2182,9 @@ body, .site, .site-content {
     content: "";
     position: absolute;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
+    bottom: 0;
+    right: 0;
     width: 100%;
     height: 100%;
     z-index: 200;
@@ -2222,9 +2223,9 @@ body, .site, .site-content {
 .wp-block-cover__video-background {
   position: absolute;
   top: 0;
-  right: 0;
-  bottom: 0;
   left: 0;
+  bottom: 0;
+  right: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -2239,9 +2240,9 @@ body, .site, .site-content {
   .wp-block-embed.wp-has-aspect-ratio .wp-block-embed__wrapper > iframe {
     position: absolute;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
+    bottom: 0;
+    right: 0;
     width: 100%;
     height: 100%; }
 
@@ -2261,92 +2262,92 @@ body, .site, .site-content {
   flex-wrap: wrap; }
   .wp-block-gallery.columns-2 > * {
     flex: 0 1 auto;
-    margin-right: var(--block-grid-spacing);
+    margin-left: var(--block-grid-spacing);
     margin-top: var(--block-grid-spacing);
     width: calc((100% - 1 * var(--block-grid-spacing))/2); }
     .wp-block-gallery.columns-2 > *:last-child {
-      margin-right: 0; }
+      margin-left: 0; }
     .wp-block-gallery.columns-2 > *:nth-child(-n + 2) {
       margin-top: 0; }
     .wp-block-gallery.columns-2 > *:nth-child(2n) {
-      margin-right: 0; }
+      margin-left: 0; }
   .wp-block-gallery.columns-3 > * {
     flex: 0 1 auto;
-    margin-right: var(--block-grid-spacing);
+    margin-left: var(--block-grid-spacing);
     margin-top: var(--block-grid-spacing);
     width: calc((100% - 2 * var(--block-grid-spacing))/3); }
     .wp-block-gallery.columns-3 > *:last-child {
-      margin-right: 0; }
+      margin-left: 0; }
     .wp-block-gallery.columns-3 > *:nth-child(-n + 3) {
       margin-top: 0; }
     .wp-block-gallery.columns-3 > *:nth-child(3n) {
-      margin-right: 0; }
+      margin-left: 0; }
   .wp-block-gallery.columns-4 > * {
     flex: 0 1 auto;
-    margin-right: var(--block-grid-spacing);
+    margin-left: var(--block-grid-spacing);
     margin-top: var(--block-grid-spacing);
     width: calc((100% - 3 * var(--block-grid-spacing))/4); }
     .wp-block-gallery.columns-4 > *:last-child {
-      margin-right: 0; }
+      margin-left: 0; }
     .wp-block-gallery.columns-4 > *:nth-child(-n + 4) {
       margin-top: 0; }
     .wp-block-gallery.columns-4 > *:nth-child(4n) {
-      margin-right: 0; }
+      margin-left: 0; }
   .wp-block-gallery.columns-5 > * {
     flex: 0 1 auto;
-    margin-right: var(--block-grid-spacing);
+    margin-left: var(--block-grid-spacing);
     margin-top: var(--block-grid-spacing);
     width: calc((100% - 4 * var(--block-grid-spacing))/5); }
     .wp-block-gallery.columns-5 > *:last-child {
-      margin-right: 0; }
+      margin-left: 0; }
     .wp-block-gallery.columns-5 > *:nth-child(-n + 5) {
       margin-top: 0; }
     .wp-block-gallery.columns-5 > *:nth-child(5n) {
-      margin-right: 0; }
+      margin-left: 0; }
   .wp-block-gallery.columns-6 > * {
     flex: 0 1 auto;
-    margin-right: var(--block-grid-spacing);
+    margin-left: var(--block-grid-spacing);
     margin-top: var(--block-grid-spacing);
     width: calc((100% - 5 * var(--block-grid-spacing))/6); }
     .wp-block-gallery.columns-6 > *:last-child {
-      margin-right: 0; }
+      margin-left: 0; }
     .wp-block-gallery.columns-6 > *:nth-child(-n + 6) {
       margin-top: 0; }
     .wp-block-gallery.columns-6 > *:nth-child(6n) {
-      margin-right: 0; }
+      margin-left: 0; }
   .wp-block-gallery.columns-7 > * {
     flex: 0 1 auto;
-    margin-right: var(--block-grid-spacing);
+    margin-left: var(--block-grid-spacing);
     margin-top: var(--block-grid-spacing);
     width: calc((100% - 6 * var(--block-grid-spacing))/7); }
     .wp-block-gallery.columns-7 > *:last-child {
-      margin-right: 0; }
+      margin-left: 0; }
     .wp-block-gallery.columns-7 > *:nth-child(-n + 7) {
       margin-top: 0; }
     .wp-block-gallery.columns-7 > *:nth-child(7n) {
-      margin-right: 0; }
+      margin-left: 0; }
   .wp-block-gallery.columns-8 > * {
     flex: 0 1 auto;
-    margin-right: var(--block-grid-spacing);
+    margin-left: var(--block-grid-spacing);
     margin-top: var(--block-grid-spacing);
     width: calc((100% - 7 * var(--block-grid-spacing))/8); }
     .wp-block-gallery.columns-8 > *:last-child {
-      margin-right: 0; }
+      margin-left: 0; }
     .wp-block-gallery.columns-8 > *:nth-child(-n + 8) {
       margin-top: 0; }
     .wp-block-gallery.columns-8 > *:nth-child(8n) {
-      margin-right: 0; }
+      margin-left: 0; }
   .wp-block-gallery.columns-9 > * {
     flex: 0 1 auto;
-    margin-right: var(--block-grid-spacing);
+    margin-left: var(--block-grid-spacing);
     margin-top: var(--block-grid-spacing);
     width: calc((100% - 8 * var(--block-grid-spacing))/9); }
     .wp-block-gallery.columns-9 > *:last-child {
-      margin-right: 0; }
+      margin-left: 0; }
     .wp-block-gallery.columns-9 > *:nth-child(-n + 9) {
       margin-top: 0; }
     .wp-block-gallery.columns-9 > *:nth-child(9n) {
-      margin-right: 0; }
+      margin-left: 0; }
   .wp-block-gallery img {
     display: block; }
   .wp-block-gallery figure {
@@ -2357,9 +2358,9 @@ body, .site, .site-content {
     height: 100%; }
   .wp-block-gallery figcaption {
     position: absolute;
-    left: 0;
-    bottom: 0;
     right: 0;
+    bottom: 0;
+    left: 0;
     padding: 0.5em 0.75em;
     overflow: hidden;
     color: var(--theme-sm-light-1);
@@ -2369,9 +2370,9 @@ body, .site, .site-content {
       content: "";
       position: absolute;
       top: 0;
-      right: 0;
-      bottom: 0;
       left: 0;
+      bottom: 0;
+      right: 0;
       width: 100%;
       height: 100%;
       opacity: 0.6;
@@ -2419,12 +2420,12 @@ body, .site, .site-content {
   flex: 0 0 auto;
   width: var(--theme-comment-avatar-width);
   height: var(--theme-comment-avatar-width);
-  margin-right: var(--theme-comment-avatar-spacing);
+  margin-left: var(--theme-comment-avatar-spacing);
   object-fit: cover; }
 
 /* Latest Posts Block */
 .wp-block-latest-posts[class] {
-  padding-left: 0; }
+  padding-right: 0; }
 
 .wp-block-latest-posts__list.is-grid {
   list-style: none;
@@ -2432,15 +2433,15 @@ body, .site, .site-content {
   flex-wrap: wrap; }
   .wp-block-latest-posts__list.is-grid > * {
     flex: 0 1 auto;
-    margin-right: var(--block-grid-spacing);
+    margin-left: var(--block-grid-spacing);
     margin-top: var(--block-grid-spacing);
     width: calc((100% - 1 * var(--block-grid-spacing))/2); }
     .wp-block-latest-posts__list.is-grid > *:last-child {
-      margin-right: 0; }
+      margin-left: 0; }
     .wp-block-latest-posts__list.is-grid > *:nth-child(-n + 2) {
       margin-top: 0; }
     .wp-block-latest-posts__list.is-grid > *:nth-child(2n) {
-      margin-right: 0; }
+      margin-left: 0; }
   .wp-block-latest-posts__list.is-grid > li {
     position: relative;
     display: block;
@@ -2454,9 +2455,9 @@ body, .site, .site-content {
       content: "";
       position: absolute;
       top: 0;
-      right: 0;
-      bottom: 0;
       left: 0;
+      bottom: 0;
+      right: 0;
       width: 100%;
       height: 100%; }
 
@@ -2664,14 +2665,14 @@ body, .site, .site-content {
 .novablocks-map__marker-name {
   position: absolute;
   top: 50%;
-  left: 100%;
-  padding: 0.7em 1.2em 0.7em 1em;
-  border-left: 18px solid transparent;
-  margin-left: -18px;
+  right: 100%;
+  padding: 0.7em 1em 0.7em 1.2em;
+  border-right: 18px solid transparent;
+  margin-right: -18px;
   margin-top: -6px;
   box-shadow: 0 2px 10px -5px;
-  border-top-right-radius: 999em;
-  border-bottom-right-radius: 999em;
+  border-top-left-radius: 999em;
+  border-bottom-left-radius: 999em;
   background: #FFFFFF;
   transform: translate(0, -50%); }
   .novablocks-map__marker-name[class][class][class] {
@@ -2690,15 +2691,15 @@ body, .site, .site-content {
 .nova-food-menu-item--highlighted {
   border-color: var(--sm-dark-1);
   border-top: 0;
-  margin-left: calc(var(--menu-offset) * -1);
   margin-right: calc(var(--menu-offset) * -1);
+  margin-left: calc(var(--menu-offset) * -1);
   padding: 0 var(--menu-offset) 14px; }
 
 .nova-food-menu-item__highlight-label {
   background-color: var(--sm-dark-1);
   padding: var(--theme-spacing-micro) 18px;
-  margin-left: calc(var(--menu-offset) * -1);
   margin-right: calc(var(--menu-offset) * -1);
+  margin-left: calc(var(--menu-offset) * -1);
   margin-bottom: 14px;
   width: calc(100% + calc(var(--menu-ofset) * 2)); }
 
@@ -2717,10 +2718,10 @@ body, .site, .site-content {
     --current-font-weight: var(--theme-heading-4-font-weight);
     --current-letter-spacing: var(--theme-heading-4-letter-spacing);
     --current-text-transform: var(--theme-heading-4-text-transform);
-    padding-right: var(--theme-spacing-tiny); }
+    padding-left: var(--theme-spacing-tiny); }
 
 .nova-food-menu-item__prices {
-  padding-left: var(--theme-spacing-tiny);
+  padding-right: var(--theme-spacing-tiny);
   font-feature-settings: 'tnum' on, 'lnum' on; }
 
 .nova-food-menu__header .section-title {
@@ -2743,25 +2744,25 @@ body, .site, .site-content {
     border-width: .15em; }
 
 .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button {
-  background: linear-gradient(to right, var(--sm-light-1) 50%, var(--sm-dark-1) 50%);
+  background: linear-gradient(to left, var(--sm-light-1) 50%, var(--sm-dark-1) 50%);
   background-size: 200% 100%;
-  background-position: right bottom;
+  background-position: left bottom;
   border: 2px solid var(--sm-dark-1);
   transition: all 0.4s var(--theme-button-transition-easing);
   border-radius: 0; }
   .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button:hover {
-    background-position: left bottom;
+    background-position: right bottom;
     color: var(--sm-dark-1); }
 
 .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button {
-  background: linear-gradient(to right, var(--sm-dark-1) 50%, var(--sm-light-1) 50%);
+  background: linear-gradient(to left, var(--sm-dark-1) 50%, var(--sm-light-1) 50%);
   background-size: 200% 100%;
-  background-position: right bottom;
+  background-position: left bottom;
   border: 2px solid var(--sm-light-1);
   transition: all 0.4s var(--theme-button-transition-easing);
   border-radius: 0; }
   .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button:hover {
-    background-position: left bottom;
+    background-position: right bottom;
     border-color: currentColor;
     color: var(--sm-light-1); }
 
@@ -2788,7 +2789,7 @@ body, .site, .site-content {
     text-decoration: none; }
   .wp-block-novablocks-navigation ul.menu > li:not(:first-child),
   .wp-block-novablocks-navigation .menu > ul > li:not(:first-child) {
-    margin-left: 2em; }
+    margin-right: 2em; }
   .wp-block-novablocks-navigation ul.menu > li > a,
   .wp-block-novablocks-navigation .menu > ul > li > a {
     padding-bottom: 0.25em;
@@ -2796,7 +2797,7 @@ body, .site, .site-content {
     .wp-block-novablocks-navigation ul.menu > li > a:after,
     .wp-block-novablocks-navigation .menu > ul > li > a:after {
       position: absolute;
-      right: 0; }
+      left: 0; }
   .wp-block-novablocks-navigation ul.menu li:hover > a,
   .wp-block-novablocks-navigation .menu > ul li:hover > a {
     border-color: currentColor; }
@@ -2806,8 +2807,8 @@ body, .site, .site-content {
   .wp-block-novablocks-navigation .sub-menu li a,
   .wp-block-novablocks-navigation .children li a {
     border: 0;
-    padding-left: 1.25em;
-    padding-right: 1.25em; } }
+    padding-right: 1.25em;
+    padding-left: 1.25em; } }
 
 .novablocks-slideshow__arrow {
   background-color: transparent;
@@ -2820,7 +2821,7 @@ body, .site, .site-content {
 .novablocks-slideshow__arrow--prev:before {
   width: 32px;
   height: 32px;
-  transform: translate(-50%, -50%);
+  transform: translate(50%, -50%);
   -webkit-mask: url(assets/images/icon-arrow.svg) no-repeat 50% 50%;
   mask: url(assets/images/icon-arrow.svg) no-repeat 50% 50%;
   -webkit-mask-size: cover;
@@ -2833,7 +2834,7 @@ body, .site, .site-content {
 .novablocks-slideshow__arrow--next:before {
   width: 32px;
   height: 32px;
-  transform: translate(-50%, -50%) rotate(180deg);
+  transform: translate(50%, -50%) rotate(-180deg);
   -webkit-mask: url(assets/images/icon-arrow.svg) no-repeat 50% 50%;
   mask: url(assets/images/icon-arrow.svg) no-repeat 50% 50%;
   -webkit-mask-size: cover;
@@ -2949,8 +2950,8 @@ body {
     content: "";
     position: absolute;
     top: 0;
-    left: 0;
     right: 0;
+    left: 0;
     height: 40%;
     background-color: var(--theme-sm-light-3); }
   .single .entry-thumbnail > *,
@@ -2962,8 +2963,8 @@ body {
     width: auto;
     height: auto;
     max-height: 60vh;
-    margin-left: auto;
-    margin-right: auto; }
+    margin-right: auto;
+    margin-left: auto; }
 
 /* 5. Theming */
 :root {
@@ -3019,12 +3020,12 @@ body {
   --theme-button-transition-duration: .4s;
   background-color: transparent;
   background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-  background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+  background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
   border: var(--theme-button-border-width) solid var(--theme-button-border-color);
   border-radius: 0;
-  background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+  background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
   .wp-block-button:not([class*="is-style"]) .wp-block-button__link:not(.has-background):hover {
-    background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+    background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
 
 .wp-block-button.is-style-primary .wp-block-button__link[class] {
   --theme-button-text-color: var(--theme-sm-light-1);
@@ -3036,12 +3037,12 @@ body {
   --theme-button-transition-duration: .4s;
   background-color: transparent;
   background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-  background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+  background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
   border: var(--theme-button-border-width) solid var(--theme-button-border-color);
   border-radius: 0;
-  background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+  background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
   .wp-block-button.is-style-primary .wp-block-button__link[class]:hover {
-    background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+    background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
 
 .wp-block-button.is-style-secondary .wp-block-button__link[class] {
   --theme-button-text-color: var(--theme-sm-light-1);
@@ -3053,13 +3054,13 @@ body {
   --theme-button-transition-duration: .4s;
   background-color: transparent;
   background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-  background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+  background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
   border: var(--theme-button-border-width) solid var(--theme-button-border-color);
   border-radius: 0;
   --current-button-text-color: var(--theme-button-hover-text-color);
-  background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+  background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
   .wp-block-button.is-style-secondary .wp-block-button__link[class]:hover {
-    background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+    background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
   .wp-block-button.is-style-secondary .wp-block-button__link[class]:hover {
     --current-button-text-color: var(--theme-button-text-color); }
 
@@ -3071,26 +3072,26 @@ body {
   --theme-button-hover-text-color: var(--theme-sm-color-1);
   --theme-button-arrow-size: 1.15em;
   position: relative;
-  padding-right: var(--theme-button-arrow-size);
+  padding-left: var(--theme-button-arrow-size);
   padding-bottom: .3em;
-  margin-right: calc( -1 * var(--theme-button-arrow-size));
+  margin-left: calc( -1 * var(--theme-button-arrow-size));
   margin-bottom: -.3em; }
   .is-style-text .wp-block-button__link:before {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 0;
+    right: 0;
     width: calc(100% - var(--theme-button-arrow-size));
     height: .1em;
     background: currentColor;
     transition: var(--theme-button-transition);
     transition-property: transform;
-    transform-origin: 100% 50%; }
+    transform-origin: 0% 50%; }
   .is-style-text .wp-block-button__link:after {
     content: '';
     position: absolute;
     top: calc(50% - .1em);
-    right: 0;
+    left: 0;
     display: inline-block;
     width: var(--theme-button-arrow-size);
     height: var(--theme-button-arrow-size);
@@ -3108,7 +3109,7 @@ body {
     transform: scaleX(0); }
   .is-style-text .wp-block-button__link:hover:after {
     opacity: 1;
-    transform: translate(0.4em, -50%) scale(-1, 1); }
+    transform: translate(-0.4em, -50%) scale(-1, 1); }
 
 :root {
   --theme-primary-font-family: Reforma1969, sans-serif;
@@ -3464,8 +3465,8 @@ cite {
   line-height: 1; }
 
 .c-separator__symbol {
-  padding-left: 1em;
   padding-right: 1em;
+  padding-left: 1em;
   opacity: 0.5; }
   .c-separator__symbol svg {
     max-width: 1.4em;
@@ -3489,12 +3490,12 @@ cite {
   border: var(--separator-arrow-width) solid transparent; }
 
 .c-separator__arrow--left {
-  border-left-color: currentColor;
-  border-right: 0; }
-
-.c-separator__arrow--right {
   border-right-color: currentColor;
   border-left: 0; }
+
+.c-separator__arrow--right {
+  border-left-color: currentColor;
+  border-right: 0; }
 
 .wp-block-separator.is-style-simple {
   width: 100%; }
@@ -3565,7 +3566,7 @@ cite {
 iframe.instagram-media {
   max-width: 100% !important;
   min-width: 0 !important;
-  margin-right: 0 !important; }
+  margin-left: 0 !important; }
 
 .novablocks-media__inner-container .wp-block-separator + * {
   --element-spacing: var(--theme-spacing); }
@@ -3595,11 +3596,11 @@ iframe.instagram-media {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding-left: 0;
-  margin-left: -1.5em;
+  padding-right: 0;
+  margin-right: -1.5em;
   list-style: none; }
   .woocommerce-categories > * {
-    margin-left: 1.5em; }
+    margin-right: 1.5em; }
   .woocommerce-categories a {
     color: var(--theme-sm-dark-1);
     padding-bottom: .5em;
@@ -3638,7 +3639,7 @@ iframe.instagram-media {
   background: transparent;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background: url(assets/images/arrow-down.svg) calc(100% - 15px) center no-repeat;
+  background: url(assets/images/arrow-down.svg) calc(100% - (100% - 15px)) center no-repeat;
   background-size: 17px 9px; }
 
 .woocommerce[class][class] button:not(.single_add_to_cart_button),
@@ -3681,11 +3682,11 @@ iframe.instagram-media {
   --theme-button-transition-duration: .4s;
   background-color: transparent;
   background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-  background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+  background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
   border: var(--theme-button-border-width) solid var(--theme-button-border-color);
   border-radius: 0;
   --current-button-text-color: var(--theme-button-hover-text-color);
-  background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+  background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
   .woocommerce[class][class] button:not(.single_add_to_cart_button):hover,
   .woocommerce[class][class] .button:not(.single_add_to_cart_button):hover,
   .woocommerce[class][class] #respond .comment-form #submit:hover {
@@ -3696,7 +3697,7 @@ iframe.instagram-media {
   .woocommerce[class][class] button:not(.single_add_to_cart_button):hover,
   .woocommerce[class][class] .button:not(.single_add_to_cart_button):hover,
   .woocommerce[class][class] #respond .comment-form #submit:hover {
-    background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+    background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
   .woocommerce[class][class] button:not(.single_add_to_cart_button):hover,
   .woocommerce[class][class] .button:not(.single_add_to_cart_button):hover,
   .woocommerce[class][class] #respond .comment-form #submit:hover {
@@ -3745,10 +3746,10 @@ iframe.instagram-media {
   --theme-button-transition-duration: .4s;
   background-color: transparent;
   background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-  background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+  background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
   border: var(--theme-button-border-width) solid var(--theme-button-border-color);
   border-radius: 0;
-  background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+  background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
   .woocommerce[class][class] .add_to_cart_button.ajax_add_to_cart:hover,
   .woocommerce[class][class] .checkout-button:hover,
   .woocommerce[class][class] #place_order:hover,
@@ -3765,21 +3766,21 @@ iframe.instagram-media {
   .woocommerce[class][class] .woocommerce-mini-cart__buttons .checkout:hover,
   .woocommerce[class][class] .wc-proceed-to-checkout .wc-forward:hover,
   .woocommerce[class][class] .grouped_form .single_add_to_cart_button:hover {
-    background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+    background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
 
 .wc-block-grid {
   --column-gap: var(--theme-spacing-small);
   --row-gap: var(--theme-spacing-small); }
   .woocommerce .wc-block-grid {
-    margin-right: calc(var(--column-gap) * -1); }
+    margin-left: calc(var(--column-gap) * -1); }
   .wc-block-grid.has-aligned-buttons .wc-block-grid__product {
     display: flex;
     flex-direction: column; }
   .wc-block-grid.has-1-columns .wc-block-grid__products {
     display: block; }
   .wc-block-grid.has-1-columns .wc-block-grid__product {
-    margin-left: auto;
-    margin-right: auto; }
+    margin-right: auto;
+    margin-left: auto; }
   @media only screen and (min-width: 1000px) {
     .wc-block-grid.has-2-columns .wc-block-grid__product {
       flex: 1 0 calc(50%);
@@ -3816,17 +3817,17 @@ iframe.instagram-media {
     margin-top: 0; }
 
 .wc-block-grid__product {
-  padding: 0 var(--column-gap) 0 0;
+  padding: 0 0 0 var(--column-gap);
   margin: 0 0 var(--row-gap) 0;
   float: none;
   width: auto;
   position: relative;
-  text-align: left;
+  text-align: right;
   clear: both; }
   .wc-block-grid__product .add_to_cart_button:not(.loading):after {
     content: "+";
-    padding-left: .5em;
-    right: 0; }
+    padding-right: .5em;
+    left: 0; }
 
 .wc-block-grid__product-link {
   display: block;
@@ -3845,7 +3846,7 @@ iframe.instagram-media {
 .wc-block-grid__product-onsale {
   position: absolute;
   top: var(--theme-spacing-tiny);
-  left: var(--theme-spacing-tiny);
+  right: var(--theme-spacing-tiny);
   padding: .3em 1.1em;
   background-color: var(--theme-sm-color-1);
   color: var(--sm-light-1);
@@ -3892,27 +3893,27 @@ iframe.instagram-media {
   font-weight: 400;
   display: inline-block;
   margin: 0 auto;
-  text-align: left; }
+  text-align: right; }
   .wc-block-grid__product-rating .star-rating::before {
     content: "\53\53\53\53\53";
     top: 0;
-    left: 0;
     right: 0;
+    left: 0;
     position: absolute;
     opacity: .5;
     color: currentColor; }
   .wc-block-grid__product-rating .star-rating span {
     overflow: hidden;
     top: 0;
-    left: 0;
     right: 0;
+    left: 0;
     position: absolute;
     padding-top: 1.5em; }
   .wc-block-grid__product-rating .star-rating span::before {
     content: "\53\53\53\53\53";
     top: 0;
-    left: 0;
     right: 0;
+    left: 0;
     position: absolute;
     color: currentColor; }
 
@@ -3979,8 +3980,8 @@ iframe.instagram-media {
   border: 0; }
 
 .shop_table[class][class][class] {
-  border-left: 0;
   border-right: 0;
+  border-left: 0;
   border-radius: 0;
   margin-bottom: 0; }
   .cart-collaterals .shop_table[class][class][class] {
@@ -3990,16 +3991,16 @@ iframe.instagram-media {
     padding-bottom: var(--theme-spacing); }
     @media only screen and (min-width: 768px) {
       .shop_table[class][class][class] td:first-child, .shop_table[class][class][class] th:first-child {
-        padding-left: 0; }
+        padding-right: 0; }
       .shop_table[class][class][class] td:last-child, .shop_table[class][class][class] th:last-child {
-        padding-right: 0; } }
+        padding-left: 0; } }
 
 .shop_table[class] #shipping_method li {
   margin-bottom: var(--theme-spacing); }
 
 .shop_table .cart-subtotal td:last-child,
 .shop_table .order-total td:last-child {
-  text-align: right; }
+  text-align: left; }
 
 .cart_totals .checkout-button[class][class][class] {
   display: block; }
@@ -4023,17 +4024,17 @@ iframe.instagram-media {
 
 .woocommerce-cart .actions .coupon[class][class] {
   display: flex;
-  margin-left: -.625em; }
+  margin-right: -.625em; }
   .woocommerce-cart .actions .coupon[class][class] > .input-text,
   .woocommerce-cart .actions .coupon[class][class] > .button {
-    margin-left: .625em; }
+    margin-right: .625em; }
   .woocommerce-cart .actions .coupon[class][class] > .input-text {
     flex-grow: 1;
-    margin-right: auto; }
+    margin-left: auto; }
 
 .woocommerce .quantity .qty {
-  padding-left: 0;
-  padding-right: 0; }
+  padding-right: 0;
+  padding-left: 0; }
 
 .shop_table .shipping [data-title]:before {
   margin-bottom: 1.5em; }
@@ -4041,7 +4042,7 @@ iframe.instagram-media {
     .shop_table .shipping [data-title]:before {
       float: none;
       display: block;
-      text-align: left;
+      text-align: right;
       margin-bottom: 1.25em; } }
 
 .cart_list.product_list_widget {
@@ -4066,28 +4067,28 @@ iframe.instagram-media {
   .woocommerce-product-gallery[class][class][class] .flex-viewport + .flex-control-thumbs {
     margin-top: 0; }
   .woocommerce-product-gallery[class][class][class] .flex-control-thumbs {
-    margin-left: calc(var(--theme-spacing) * -1);
+    margin-right: calc(var(--theme-spacing) * -1);
     margin-top: calc(var(--theme-spacing) * -1); }
     .woocommerce-product-gallery[class][class][class] .flex-control-thumbs > * {
       max-width: 116px;
-      padding-left: var(--theme-spacing);
+      padding-right: var(--theme-spacing);
       padding-top: var(--theme-spacing); }
 
 .woocommerce-product-gallery__wrapper[class][class][class][class] {
   width: auto;
-  margin-left: calc(var(--theme-spacing) * -1); }
+  margin-right: calc(var(--theme-spacing) * -1); }
   .woocommerce-product-gallery__wrapper[class][class][class][class] > * {
-    padding-left: var(--theme-spacing); }
+    padding-right: var(--theme-spacing); }
   .woocommerce-product-gallery__wrapper[class][class][class][class] > .woocommerce-product-gallery__image:first-child {
-    padding-left: 0;
-    margin-left: var(--theme-spacing); }
+    padding-right: 0;
+    margin-right: var(--theme-spacing); }
   .woocommerce-product-gallery__wrapper[class][class][class][class] > :nth-child(n+2) {
     margin-top: var(--theme-spacing); }
   .flex-viewport[class] .woocommerce-product-gallery__wrapper[class][class][class][class] {
-    margin-left: 0; }
+    margin-right: 0; }
     .flex-viewport[class] .woocommerce-product-gallery__wrapper[class][class][class][class] > * {
-      padding-left: 0;
-      margin-left: 0; }
+      padding-right: 0;
+      margin-right: 0; }
     .flex-viewport[class] .woocommerce-product-gallery__wrapper[class][class][class][class] > :nth-child(n+2) {
       margin-top: 0; }
 
@@ -4126,25 +4127,25 @@ iframe.instagram-media {
       flex-basis: 100%;
       margin-bottom: var(--theme-spacing-tiny); }
     .woocommerce form.cart[class][class][class] .group_table .qty {
-      margin-right: .25em; }
+      margin-left: .25em; }
     .woocommerce form.cart[class][class][class] .group_table .woocommerce-grouped-product-list-item__label {
-      margin-right: var(--theme-spacing); }
+      margin-left: var(--theme-spacing); }
       .woocommerce form.cart[class][class][class] .group_table .woocommerce-grouped-product-list-item__label a {
         text-decoration: none; }
     .woocommerce form.cart[class][class][class] .group_table .woocommerce-grouped-product-list-item__price {
-      margin-left: auto; }
+      margin-right: auto; }
   .woocommerce form.cart[class][class][class] .reset_variations {
     font-size: 1em;
     margin-top: var(--theme-spacing); }
   .woocommerce form.cart .qty {
     height: 100%;
     width: 4em;
-    padding-left: 1em;
-    padding-right: .3em;
+    padding-right: 1em;
+    padding-left: .3em;
     background-color: var(--sm-dark-1);
     color: var(--sm-light-1); }
   .woocommerce form.cart .woocommerce-grouped-product-list-item__price {
-    text-align: right; }
+    text-align: left; }
   .woocommerce form.cart .added_to_cart {
     display: none; }
   .woocommerce form.cart .variations[class][class] {
@@ -4161,16 +4162,16 @@ iframe.instagram-media {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding-left: 0;
+  padding-right: 0;
   list-style: none;
-  margin-left: calc(var(--theme-spacing-normal) * -1);
+  margin-right: calc(var(--theme-spacing-normal) * -1);
   margin-bottom: var(--theme-spacing-normal); }
   .wc-tabs li {
     margin-top: 0; }
   .wc-tabs a {
     padding-bottom: var(--theme-spacing-tiny); }
   .wc-tabs > * {
-    margin-left: var(--theme-spacing-normal); }
+    margin-right: var(--theme-spacing-normal); }
   .wc-tabs > :not(.active) a {
     text-decoration: none;
     color: var(--theme-sm-dark-1); }
@@ -4212,8 +4213,8 @@ iframe.instagram-media {
 
 .c-product-main,
 .wc-tabs-wrapper {
-  margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+  margin-left: auto; }
 
 #content .c-product-main {
   position: relative;
@@ -4231,7 +4232,7 @@ iframe.instagram-media {
         float: none;
         width: auto;
         flex: 0 0 35%;
-        margin-left: var(--theme-spacing-huge); }
+        margin-right: var(--theme-spacing-huge); }
       #content .c-product-main[class][class][class] .woocommerce-product-gallery + .entry-summary {
         margin-top: 0; } }
 
@@ -4260,8 +4261,8 @@ iframe.instagram-media {
   min-width: auto;
   min-height: auto;
   top: var(--theme-spacing-tiny);
-  left: var(--theme-spacing-tiny);
-  padding: .6em 1.1em .7em 1.2em;
+  right: var(--theme-spacing-tiny);
+  padding: .6em 1.2em .7em 1.1em;
   background-color: var(--sm-color-1);
   color: var(--sm-light-1);
   text-align: center;
@@ -4298,7 +4299,7 @@ iframe.instagram-media {
   float: none; }
 
 .add_to_cart_inline .button[class][class][class] {
-  margin-left: var(--theme-spacing-tiny); }
+  margin-right: var(--theme-spacing-tiny); }
 
 .add_to_cart_inline ins {
   text-decoration: none; }
@@ -4358,8 +4359,8 @@ iframe.instagram-media {
 
 .shop_attributes[class][class][class] {
   max-width: 37.5em;
-  margin-left: auto;
   margin-right: auto;
+  margin-left: auto;
   border-top: 0;
   border-bottom: 0; }
   .shop_attributes[class][class][class] tr:last-child, .shop_attributes[class][class][class] tr:last-child th, .shop_attributes[class][class][class] tr:last-child td {
@@ -4378,7 +4379,7 @@ iframe.instagram-media {
     padding: .75em;
     font-size: inherit;
     line-height: inherit;
-    text-align: right;
+    text-align: left;
     border: 0; }
   .shop_attributes[class][class][class] td p {
     padding: 0; }
@@ -4390,8 +4391,8 @@ iframe.instagram-media {
   display: flex; }
   .woocommerce-product-category li + li:before {
     content: "/";
-    padding-left: .3em;
-    padding-right: .3em; }
+    padding-right: .3em;
+    padding-left: .3em; }
 
 .comment-form-subscriptions:empty {
   display: none; }
@@ -4434,10 +4435,10 @@ iframe.instagram-media {
   --theme-button-transition-duration: .4s;
   background-color: transparent;
   background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-  background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+  background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
   border: var(--theme-button-border-width) solid var(--theme-button-border-color);
   border-radius: 0;
-  background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%);
+  background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%);
   text-align: center; }
   .add_to_cart_button:hover {
     --current-button-background-color: var(--theme-button-hover-background-color);
@@ -4445,7 +4446,7 @@ iframe.instagram-media {
     --current-button-text-color: var(--theme-button-hover-text-color);
     --current-button-transition: var(--theme-button-hover-transition); }
   .add_to_cart_button:hover {
-    background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+    background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
 
 .woocommerce-breadcrumb[class] {
   color: var(--theme-sm-color-1); }
@@ -4481,15 +4482,15 @@ iframe.instagram-media {
   font-feature-settings: "lnum";
   margin-top: var(--theme-spacing-huge);
   margin-bottom: var(--theme-spacing-normal);
-  margin-left: calc(var(--theme-spacing-tiny) * -1); }
+  margin-right: calc(var(--theme-spacing-tiny) * -1); }
   .woocommerce-pagination > .page-numbers,
   .nav-links > .page-numbers {
     text-decoration: none;
-    margin-left: var(--theme-spacing-tiny); }
+    margin-right: var(--theme-spacing-tiny); }
   .woocommerce-pagination > .prev,
   .nav-links > .prev {
     position: relative;
-    padding-left: 1.55em; }
+    padding-right: 1.55em; }
     .woocommerce-pagination > .prev:before, .woocommerce-pagination > .prev:after,
     .nav-links > .prev:before,
     .nav-links > .prev:after {
@@ -4512,17 +4513,17 @@ iframe.instagram-media {
       border: .0625em solid transparent; }
     .woocommerce-pagination > .prev:before,
     .nav-links > .prev:before {
-      left: 0; }
+      right: 0; }
     .woocommerce-pagination > .prev:after,
     .nav-links > .prev:after {
-      left: 0;
+      right: 0;
       border-top-color: currentColor;
-      border-left-color: currentColor;
-      transform: translate(0, calc(0.5px - 50%)) rotate(-45deg); }
+      border-right-color: currentColor;
+      transform: translate(0, calc(0.5px - 50%)) rotate(45deg); }
   .woocommerce-pagination > .next,
   .nav-links > .next {
     position: relative;
-    padding-right: 1.55em; }
+    padding-left: 1.55em; }
     .woocommerce-pagination > .next:before, .woocommerce-pagination > .next:after,
     .nav-links > .next:before,
     .nav-links > .next:after {
@@ -4545,23 +4546,23 @@ iframe.instagram-media {
       border: .0625em solid transparent; }
     .woocommerce-pagination > .next:before,
     .nav-links > .next:before {
-      right: 0; }
+      left: 0; }
     .woocommerce-pagination > .next:after,
     .nav-links > .next:after {
-      right: 0;
+      left: 0;
       border-top-color: currentColor;
-      border-right-color: currentColor;
-      transform: translate(0, calc(0.5px - 50%)) rotate(45deg); }
+      border-left-color: currentColor;
+      transform: translate(0, calc(0.5px - 50%)) rotate(-45deg); }
   .woocommerce-pagination > .prev,
   .woocommerce-pagination > .current:last-child,
   .nav-links > .prev,
   .nav-links > .current:last-child {
-    margin-right: auto; }
+    margin-left: auto; }
   .woocommerce-pagination > .next,
   .woocommerce-pagination > .current:first-child,
   .nav-links > .next,
   .nav-links > .current:first-child {
-    margin-left: auto; }
+    margin-right: auto; }
 
 a.page-numbers,
 span.page-numbers {
@@ -4603,10 +4604,10 @@ span.page-numbers {
     width: auto; }
 
 .woocommerce-checkout.woocommerce-order-received .col2-set {
-  margin-left: calc(var(--theme-spacing-large) * -1);
+  margin-right: calc(var(--theme-spacing-large) * -1);
   margin-top: calc(var(--theme-spacing-large) * -1); }
   .woocommerce-checkout.woocommerce-order-received .col2-set > * {
-    padding-left: var(--theme-spacing-large);
+    padding-right: var(--theme-spacing-large);
     padding-top: var(--theme-spacing-large); }
 
 .woocommerce-checkout .woocommerce-customer-details,
@@ -4620,21 +4621,21 @@ span.page-numbers {
 
 @media only screen and (min-width: 768px) {
   .woocommerce-checkout:not(.woocommerce-order-received) .col2-set {
-    float: left;
+    float: right;
     width: 55%;
-    padding-left: 5.25%;
-    padding-right: 8.75%; }
+    padding-right: 5.25%;
+    padding-left: 8.75%; }
   .woocommerce-checkout.woocommerce-order-received .col2-set {
     display: flex; }
     .woocommerce-checkout.woocommerce-order-received .col2-set > * {
       flex: 0 0 50%; }
   .woocommerce-checkout [id="order_review_heading"],
   .woocommerce-checkout .woocommerce-checkout-review-order {
-    float: right;
-    clear: right;
+    float: left;
+    clear: left;
     width: 45%;
-    padding-left: 3.5%;
-    padding-right: 5.25%; }
+    padding-right: 3.5%;
+    padding-left: 5.25%; }
   .woocommerce-checkout .woocommerce-checkout {
     position: relative; }
     .woocommerce-checkout .woocommerce-checkout:before {
@@ -4643,9 +4644,9 @@ span.page-numbers {
       content: "";
       position: absolute;
       top: -9999vh;
-      right: -100vw;
+      left: -100vw;
       bottom: -9999vh;
-      left: 55%;
+      right: 55%;
       pointer-events: none;
       opacity: 0.1; }
     .woocommerce-checkout .woocommerce-checkout:after {
@@ -4657,9 +4658,9 @@ span.page-numbers {
       z-index: 20; } }
 
 .woocommerce-checkout table.shop_table {
-  border-right: 0;
-  border-bottom: 0;
   border-left: 0;
+  border-bottom: 0;
+  border-right: 0;
   border-radius: 0;
   margin: 0; }
   .woocommerce-checkout table.shop_table tbody,
@@ -4669,10 +4670,10 @@ span.page-numbers {
   .woocommerce-checkout table.shop_table[class] td, .woocommerce-checkout table.shop_table[class] th {
     font-weight: inherit; }
   .woocommerce-checkout table.shop_table td:first-child, .woocommerce-checkout table.shop_table th:first-child {
-    padding-left: 0; }
+    padding-right: 0; }
   .woocommerce-checkout table.shop_table td:last-child, .woocommerce-checkout table.shop_table th:last-child {
-    padding-right: 0;
-    text-align: right; }
+    padding-left: 0;
+    text-align: left; }
 
 .woocommerce-checkout #shipping_method[id] li {
   margin-bottom: 0; }
@@ -4707,13 +4708,13 @@ span.page-numbers {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-  margin-left: calc(var(--theme-spacing) * -1); }
+  margin-right: calc(var(--theme-spacing) * -1); }
   .woocommerce-checkout .woocommerce-form-coupon > p:not([class]) {
     flex-basis: 100%;
     margin-bottom: var(--theme-spacing); }
   .woocommerce-checkout .woocommerce-form-coupon > p {
     width: auto;
-    padding-left: var(--theme-spacing); }
+    padding-right: var(--theme-spacing); }
   .woocommerce-checkout .woocommerce-form-coupon button {
     height: 100%; }
   .woocommerce-checkout .woocommerce-form-coupon .form-row-first {
@@ -4765,12 +4766,12 @@ span.page-numbers {
       #add_payment_method #payment .wc_payment_method label > *,
       .woocommerce-cart #payment .wc_payment_method label > *,
       .woocommerce-checkout #payment .wc_payment_method label > * {
-        margin-left: .625em; }
+        margin-right: .625em; }
   #add_payment_method #payment div.payment_box,
   .woocommerce-cart #payment div.payment_box,
   .woocommerce-checkout #payment div.payment_box {
     flex-basis: 100%;
-    margin-left: 2.375em;
+    margin-right: 2.375em;
     margin-bottom: 0;
     padding: 0;
     opacity: 0.8;
@@ -4801,7 +4802,7 @@ span.page-numbers {
     margin-bottom: 0; }
   .woocommerce-terms-and-conditions-wrapper[class][class] .validate-required .woocommerce-form__input {
     margin-top: 0;
-    margin-right: .625em; }
+    margin-left: .625em; }
 
 .woocommerce-checkout-title[class] {
   margin-bottom: var(--theme-spacing-tiny); }
@@ -4810,26 +4811,26 @@ span.page-numbers {
 
 .woocommerce-checkout-breadcrumbs {
   list-style: none;
-  padding-left: 0;
+  padding-right: 0;
   margin-bottom: var(--theme-spacing-small); }
   .woocommerce-checkout-breadcrumbs li {
     display: inline-block;
     margin-bottom: 0; }
   .woocommerce-checkout-breadcrumbs li + li {
     position: relative;
-    padding-left: 1.4em; }
+    padding-right: 1.4em; }
     .woocommerce-checkout-breadcrumbs li + li:before {
       content: "";
       position: absolute;
       top: 50%;
-      left: .2em;
+      right: .2em;
       display: block;
       width: .4em;
       height: .4em;
       border: .125em solid transparent;
       border-top-color: currentColor;
-      border-right-color: currentColor;
-      transform: translate(0.1em, 0.1em) translate(0, -50%) rotate(45deg);
+      border-left-color: currentColor;
+      transform: translate(-0.1em, 0.1em) translate(0, -50%) rotate(-45deg);
       opacity: .5; }
 
 .woocommerce-billing-fields > h3,
@@ -4860,16 +4861,16 @@ ul.order_details[class] {
   display: flex;
   flex-wrap: wrap;
   margin-top: calc(var(--theme-spacing-small) * -1);
-  margin-left: calc(var(--theme-spacing-small) * -1); }
+  margin-right: calc(var(--theme-spacing-small) * -1); }
   ul.order_details[class] > li {
     margin-top: var(--theme-spacing-normal);
-    padding-left: var(--theme-spacing-normal);
     padding-right: var(--theme-spacing-normal);
-    margin-right: 0; }
+    padding-left: var(--theme-spacing-normal);
+    margin-left: 0; }
     @media not screen and (min-width: 768px) {
       ul.order_details[class] > li {
         flex: 0 0 100%;
-        border-right: 0; } }
+        border-left: 0; } }
 
 .woocommerce-order-received .woocommerce-order {
   display: flex;
@@ -4948,9 +4949,9 @@ ul.order_details[class] {
 .c-mini-cart {
   position: fixed;
   top: 0;
-  right: 0;
-  bottom: 0;
   left: 0;
+  bottom: 0;
+  right: 0;
   z-index: 10000; }
   .admin-bar .c-mini-cart {
     top: 32px; }
@@ -4975,8 +4976,8 @@ ul.order_details[class] {
       display: block;
       position: absolute;
       top: 0;
-      left: 0;
       right: 0;
+      left: 0;
       height: .625em;
       opacity: .2;
       box-shadow: inset 0 .625em .625em -.625em currentColor; }
@@ -4999,12 +5000,12 @@ ul.order_details[class] {
       height: .625em;
       position: absolute;
       bottom: 100%;
-      left: 0;
       right: 0;
+      left: 0;
       opacity: 0.2;
       box-shadow: inset 0 -.625em .625em -.625em currentColor; }
     .c-mini-cart .woocommerce-mini-cart__total .amount {
-      margin-left: auto; }
+      margin-right: auto; }
   .c-mini-cart .woocommerce-mini-cart__buttons {
     padding: 1.25em;
     padding-top: 0;
@@ -5022,9 +5023,9 @@ ul.order_details[class] {
         display: block;
         position: absolute;
         top: 0;
-        right: 0;
-        bottom: 0;
         left: 0;
+        bottom: 0;
+        right: 0;
         border-radius: inherit;
         pointer-events: none; }
   .c-mini-cart .mini_cart_item {
@@ -5041,16 +5042,16 @@ ul.order_details[class] {
 .c-mini-cart__overlay {
   position: absolute;
   top: 0;
-  right: 0;
-  bottom: 0;
   left: 0;
+  bottom: 0;
+  right: 0;
   background: #000000;
   opacity: .2; }
 
 .c-mini-cart__flyout {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   bottom: 0;
   width: 17em;
   background: #FFFFFF;
@@ -5087,9 +5088,9 @@ ul.order_details[class] {
 .c-mini-cart[class] .cart_list a.remove[class],
 .c-mini-cart[class] .product_list_widget a.remove[class] {
   top: auto;
-  left: auto;
+  right: auto;
   bottom: .25em;
-  right: 0;
+  left: 0;
   background: none;
   width: 0.625em;
   height: 0.625em;
@@ -5105,14 +5106,14 @@ ul.order_details[class] {
     height: 100%;
     position: absolute;
     top: 50%;
-    left: 50%;
+    right: 50%;
     background-color: currentColor; }
   .c-mini-cart[class] .cart_list a.remove[class]:before,
   .c-mini-cart[class] .product_list_widget a.remove[class]:before {
-    transform: translate(-50%, -50%) rotate(45deg); }
+    transform: translate(50%, -50%) rotate(-45deg); }
   .c-mini-cart[class] .cart_list a.remove[class]:after,
   .c-mini-cart[class] .product_list_widget a.remove[class]:after {
-    transform: translate(-50%, -50%) rotate(-45deg); }
+    transform: translate(50%, -50%) rotate(45deg); }
 
 .c-mini-cart[class] .cart_list img,
 .c-mini-cart[class] .product_list_widget img {
@@ -5137,7 +5138,7 @@ ul.order_details[class] {
   height: 1em;
   overflow: hidden;
   text-indent: -9999em;
-  margin-left: auto;
+  margin-right: auto;
   cursor: pointer; }
   .c-mini-cart__close:before, .c-mini-cart__close:after {
     content: "";
@@ -5146,12 +5147,12 @@ ul.order_details[class] {
     height: 100%;
     position: absolute;
     top: 50%;
-    left: 50%;
+    right: 50%;
     background-color: currentColor; }
   .c-mini-cart__close:before {
-    transform: translate(-50%, -50%) rotate(45deg); }
+    transform: translate(50%, -50%) rotate(-45deg); }
   .c-mini-cart__close:after {
-    transform: translate(-50%, -50%) rotate(-45deg); }
+    transform: translate(50%, -50%) rotate(45deg); }
 
 .c-mini-cart__overlay,
 .c-mini-cart__flyout {
@@ -5162,7 +5163,7 @@ ul.order_details[class] {
   .c-mini-cart:not(.c-mini-cart--visible) .c-mini-cart__overlay {
     opacity: 0; }
   .c-mini-cart:not(.c-mini-cart--visible) .c-mini-cart__flyout {
-    transform: translate3d(100%, 0, 0); }
+    transform: translate3d(-100%, 0, 0); }
 
 /*
  * Blocks
@@ -5192,16 +5193,16 @@ ul.order_details[class] {
     .wc-block-featured-product.has-left-content .wc-block-featured-product__variation,
     .wc-block-featured-product.has-left-content .wc-block-featured-product__description,
     .wc-block-featured-product.has-left-content .wc-block-featured-product__price {
-      margin-left: 0;
-      text-align: left; }
+      margin-right: 0;
+      text-align: right; }
   .wc-block-featured-product.has-right-content {
     justify-content: flex-end; }
     .wc-block-featured-product.has-right-content .wc-block-featured-product__title,
     .wc-block-featured-product.has-right-content .wc-block-featured-product__variation,
     .wc-block-featured-product.has-right-content .wc-block-featured-product__description,
     .wc-block-featured-product.has-right-content .wc-block-featured-product__price {
-      margin-right: 0;
-      text-align: right; }
+      margin-left: 0;
+      text-align: left; }
   .wc-block-featured-product .wc-block-featured-product__title,
   .wc-block-featured-product .wc-block-featured-product__variation,
   .wc-block-featured-product .wc-block-featured-product__description,
@@ -5252,9 +5253,9 @@ ul.order_details[class] {
     content: "";
     position: absolute;
     top: 0;
-    left: 0;
-    bottom: 0;
     right: 0;
+    bottom: 0;
+    left: 0;
     background-color: inherit;
     opacity: 0.5;
     z-index: 1; }
@@ -5316,15 +5317,15 @@ ul.order_details[class] {
     .wc-block-featured-category.has-left-content .wc-block-featured-category__title,
     .wc-block-featured-category.has-left-content .wc-block-featured-category__description,
     .wc-block-featured-category.has-left-content .wc-block-featured-category__price {
-      margin-left: 0;
-      text-align: left; }
+      margin-right: 0;
+      text-align: right; }
   .wc-block-featured-category.has-right-content {
     justify-content: flex-end; }
     .wc-block-featured-category.has-right-content .wc-block-featured-category__title,
     .wc-block-featured-category.has-right-content .wc-block-featured-category__description,
     .wc-block-featured-category.has-right-content .wc-block-featured-category__price {
-      margin-right: 0;
-      text-align: right; }
+      margin-left: 0;
+      text-align: left; }
   .wc-block-featured-category .wc-block-featured-category__title,
   .wc-block-featured-category .wc-block-featured-category__description,
   .wc-block-featured-category .wc-block-featured-category__price {
@@ -5362,9 +5363,9 @@ ul.order_details[class] {
     content: "";
     position: absolute;
     top: 0;
-    left: 0;
-    bottom: 0;
     right: 0;
+    bottom: 0;
+    left: 0;
     background-color: inherit;
     opacity: 0.5;
     z-index: 1; }
@@ -5458,7 +5459,7 @@ ul.order_details[class] {
   line-height: 1.3em;
   overflow: hidden;
   position: absolute;
-  right: -.45em;
+  left: -.45em;
   bottom: -.45em; }
   .wc-block-review-list-item__verified::before {
     width: 1.3em;
@@ -5481,13 +5482,13 @@ ul.order_details[class] {
   display: block;
   font-weight: bold;
   order: 1;
-  margin-right: .5em; }
+  margin-left: .5em; }
 
 .wc-block-review-list-item__author {
   display: block;
   font-weight: bold;
   order: 1;
-  margin-right: .5em; }
+  margin-left: .5em; }
 
 .wc-block-review-list-item__product + .wc-block-review-list-item__author {
   font-weight: normal;
@@ -5499,8 +5500,8 @@ ul.order_details[class] {
 .wc-block-review-list-item__author + .wc-block-review-list-item__published-date::before {
   content: "";
   display: inline-block;
-  margin-right: .5em;
-  border-right: 0.1em solid var(--theme-sm-light-3);
+  margin-left: .5em;
+  border-left: 0.1em solid var(--theme-sm-light-3);
   height: 1em;
   vertical-align: middle; }
 
@@ -5526,22 +5527,22 @@ ul.order_details[class] {
   .wc-block-review-list-item__rating > .wc-block-review-list-item__rating__stars::before {
     content: "\53\53\53\53\53";
     opacity: .25;
-    float: left;
+    float: right;
     top: 0;
-    left: 0;
+    right: 0;
     position: absolute; }
   .wc-block-review-list-item__rating > .wc-block-review-list-item__rating__stars span {
     overflow: hidden;
-    float: left;
+    float: right;
     top: 0;
-    left: 0;
+    right: 0;
     position: absolute;
     padding-top: 1.5em; }
   .wc-block-review-list-item__rating > .wc-block-review-list-item__rating__stars span::before {
     content: "\53\53\53\53\53";
     top: 0;
     position: absolute;
-    left: 0;
+    right: 0;
     color: var(--theme-sm-color-1); }
 
 [class*="wc-block-"] .wp-block-button__link[class][class][class] {
@@ -5582,17 +5583,17 @@ ul.order_details[class] {
   --theme-button-transition-duration: .4s;
   background-color: transparent;
   background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
-  background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+  background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
   border: var(--theme-button-border-width) solid var(--theme-button-border-color);
   border-radius: 0;
-  background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+  background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
   [class*="wc-block-"] .wp-block-button__link[class][class][class]:hover {
     --current-button-background-color: var(--theme-button-hover-background-color);
     --current-button-border-color: var(--theme-button-hover-border-color);
     --current-button-text-color: var(--theme-button-hover-text-color);
     --current-button-transition: var(--theme-button-hover-transition); }
   [class*="wc-block-"] .wp-block-button__link[class][class][class]:hover {
-    background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+    background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
 
 .woocommerce {
   --theme-content-width-normal: var(--theme-content-width-wide); }
