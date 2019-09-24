@@ -65,8 +65,6 @@
 			event.preventDefault();
 			event.stopPropagation();
 			$( '.c-mini-cart' ).addClass( 'c-mini-cart--visible' );
-
-			debugger;
 		}
 
 		// close mini Cart
@@ -106,7 +104,6 @@
 		$body.on( 'adding_to_cart', function( event, $button, data ) {
 			// cache old label and save it in a data-attribute
 			// in order to restore it once the mini cart gets closed
-			debugger;
 			var label = $button.text();
 			$button.data( 'label', label );
 

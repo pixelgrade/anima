@@ -2,18 +2,20 @@ $enable-gallery-block-styles:           true !default;
 
 @if $enable-gallery-block-styles == true {
     /* Gallery Block */
-    :root {
-        --block-grid-spacing: 20px;
-    }
-
+    
     .wp-block-gallery {
+        --block-grid-spacing: 20px;
+
         list-style: none;
         @include flex-grid;
 
         @for $i from 2 through 9 {
 
             &.columns-#{$i} {
-                @include flex-grid-count($i);
+
+                .blocks-gallery-grid {
+                    @include flex-grid-count($i);
+                }
             }
         }
 
@@ -42,5 +44,10 @@ $enable-gallery-block-styles:           true !default;
                 object-fit: cover;
             }
         }
+    }
+
+    .blocks-gallery-grid {
+        list-style: none;
+        @include flex-grid;
     }
 }

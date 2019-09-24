@@ -128,7 +128,8 @@
 }
 
 .wc-block-grid__product-title,
-.woocommerce-loop-product__title {
+.woocommerce-loop-product__title,
+.woocommerce-loop-category__title {
   @include apply-font(heading-4);
   color: var(--theme-sm-dark-1);
 }
@@ -220,4 +221,21 @@
 .woocommerce img,
 .woocommerce-page img {
   width: 100%
+}
+
+.product-category {
+ &:hover {
+   img {
+     transform: translateY(-10px);
+   }
+
+   .woocommerce-loop-category__title {
+     transform: translateY(10px);
+   }
+ }
+
+  img,
+  .woocommerce-loop-category__title {
+    transition: transform .25s $easeOutQuad;
+  }
 }
