@@ -1,10 +1,25 @@
 :root {
-    --theme-slope: 1;
+    --theme-font-size-breakpoint: 1440;
+
+    --theme-font-size-minimum-value: 16;
+    --theme-font-size-minimum-value-breakpoint: 320;
+
+    // use the --theme-font-size-slope-adjust variable to alter the slope of the resulted function
+    // in such a way that when this variable equals 0, the slope of the function results to also 0
+    // and the font sizes stay the same no matter the viewport
+    --theme-font-size-slope-adjust: 0.4;
+
+    // create a unit value that is relative to the viewport width to all font sizes
+    --theme-addon-unit: calc( 1vw - var(--theme-font-size-breakpoint) * 1px / 100 );
+    // use a multiplier variable to control how much of that unit is added to the font size at any given time
+    // initially we set this variable to 0  so nothing is added to the resulted font sizes
     --theme-addon-multiplier: 0;
 
-    @media only screen and (min-width: 90em) {
-        --theme-slope: 0.2;
-        --theme-addon-multiplier: 0.5;
+    --theme-addon: calc( var(--theme-addon-unit) * var(--theme-addon-multiplier) );
+
+    @media only screen and (min-width: 1440px) {
+        --theme-font-size-slope-adjust: 0.2;
+        --theme-addon-multiplier: 0.8;
     }
 }
 
@@ -39,28 +54,30 @@
 
                 #{$prefix}-initial-font-size: #{$font-size};
 
-                #{$prefix}-x0: -1000;
-                #{$prefix}-y0: 16;
 
-                #{$prefix}-x1: 1440;
+                // solving a first degree equation: y = ax + b
+
+                // x0 - viewport width at which font sizes should reach minimum value
+                // y0 - minimum font size
+                // x1 - viewport width at which we know the value for the font size
+                // y1 - known font size
+                --x0: var(--theme-font-size-minimum-value-breakpoint);
+                --y0: var(--theme-font-size-minimum-value);
+                --x1: var(--theme-font-size-breakpoint);
+
                 #{$prefix}-y1: var(#{$prefix}-initial-font-size);
+                #{$prefix}-y0-new: calc( var(#{$prefix}-y1) - ( var(#{$prefix}-y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) );
 
-                // fake y0
-                #{$prefix}-y0-new: calc( var(#{$prefix}-y1) - ( var(#{$prefix}-y1) - var(#{$prefix}-y0) ) * var(--theme-slope) );
+                // calculate the slope and the remainder for the equation
+                #{$prefix}-a: calc( ( var(#{$prefix}-y1) - var(#{$prefix}-y0-new) ) / ( var(--x1) - var(--x0) ) );
+                #{$prefix}-b: calc( var(#{$prefix}-y0-new) - var(#{$prefix}-a) * var(--x0) );
 
-                #{$prefix}-addon-unit: calc( 1vw - 1440px / 100 );
-                #{$prefix}-addon-ratio: calc( var(#{$prefix}-y0) / var(#{$prefix}-y1) );
-                #{$prefix}-addon: calc( var(#{$prefix}-addon-unit) * var(#{$prefix}-addon-ratio) * var(--theme-addon-multiplier) );
-
+                // x2 - viewport width at a given time
+                // y2 - font size value we need to find out
                 #{$prefix}-x2: 100vw;
+                #{$prefix}-y2: calc( var(#{$prefix}-a) * var(#{$prefix}-x2) + var(#{$prefix}-b) * 1px );
 
-                // y = ax + b
-                #{$prefix}-a: calc( ( var(#{$prefix}-y1) - var(#{$prefix}-y0-new) ) / ( var(#{$prefix}-x1) - var(#{$prefix}-x0) ) );
-
-                #{$prefix}-b: calc( var(#{$prefix}-y0-new) - var(#{$prefix}-a) * var(#{$prefix}-x0) );
-                #{$prefix}-y2: calc( var(#{$prefix}-a) * 100vw + var(#{$prefix}-b) * 1px );
-
-                #{$prefix}-font-size: calc( var(#{$prefix}-y2) + var(#{$prefix}-addon) );
+                #{$prefix}-font-size: calc( var(#{$prefix}-y2) + var(--theme-addon) );
             }
 
             @if ( $font-size == 'inherit' ) {
