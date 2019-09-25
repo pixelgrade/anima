@@ -813,6 +813,74 @@ table {
   table td:last-child {
     padding-right: 0; }
 
+p .alignleft {
+  margin-left: 0 !important;
+  margin-top: 3em;
+  margin-bottom: 3em;
+  margin-right: 3em; }
+
+p .alignright {
+  margin-right: 0 !important;
+  margin-top: 3em;
+  margin-bottom: 3em;
+  margin-left: 3em; }
+
+p .alignleft,
+p .alignright,
+p .aligncenter,
+p .alignnone {
+  clear: none; }
+
+p .alignnone {
+  display: inline-block; }
+
+.alignleft,
+.alignright,
+.aligncenter,
+.alignnone {
+  margin-top: 4em;
+  margin-bottom: 4em;
+  max-width: 100%; }
+  .alignleft:not(.wp-block-gallery), .alignleft img,
+  .alignright:not(.wp-block-gallery),
+  .alignright img,
+  .aligncenter:not(.wp-block-gallery),
+  .aligncenter img,
+  .alignnone:not(.wp-block-gallery),
+  .alignnone img {
+    display: block; }
+
+.aligncenter {
+  margin-left: auto;
+  margin-right: auto; }
+
+.entry-content .aligncenter + p, .entry-content
+.alignnone + p {
+  margin-top: 4em; }
+
+.alignleft.alignleft,
+.alignright.alignright {
+  max-width: 50%; }
+
+.alignleft {
+  margin-right: 4em;
+  float: left;
+  clear: left; }
+
+.alignright {
+  margin-left: 4em;
+  float: right;
+  clear: right; }
+
+.aligncenter, .aligncenter img {
+  margin-left: auto;
+  margin-right: auto; }
+
+figure {
+  max-width: 100%; }
+  figure.alignleft, figure.alignright, figure.aligncenter, figure.alignnone {
+    margin-top: 4em; }
+
 /* 2. Components */
 .entry-content > .alignleft:not(:first-child),
 .editor-styles-wrapper [data-align=left] [data-block]:not(:first-child) {

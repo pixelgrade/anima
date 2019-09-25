@@ -1,0 +1,106 @@
+$wp-align-image-vertical-padding: 4em !default;
+$wp-align-image-horizontal-padding: 4em !default;
+
+$wp-align-wrapped-image-vertical-padding: 3em !default;
+$wp-align-wrapped-image-horizontal-padding: 3em !default;
+
+$wp-align-image-size: 50% !default;
+
+p {
+	.alignleft {
+		margin-left: 0 !important;
+		margin-top: $wp-align-wrapped-image-vertical-padding;
+		margin-bottom: $wp-align-wrapped-image-vertical-padding;
+		margin-right: $wp-align-wrapped-image-horizontal-padding;
+	}
+
+	.alignright {
+		margin-right: 0 !important;
+		margin-top: $wp-align-wrapped-image-vertical-padding;
+		margin-bottom: $wp-align-wrapped-image-vertical-padding;
+		margin-left: $wp-align-wrapped-image-horizontal-padding;
+	}
+
+	.aligncenter,
+	.alignnone {
+
+	}
+
+	.alignleft,
+	.alignright,
+	.aligncenter,
+	.alignnone {
+		clear: none;
+	}
+
+	.alignnone {
+		display: inline-block;
+	}
+}
+
+// Images at the same level with paragraphs
+// <p>..</p>
+// <img>
+// <p>..</p>
+.alignleft,
+.alignright,
+.aligncenter,
+.alignnone {
+	margin-top: $wp-align-image-vertical-padding;
+	margin-bottom: $wp-align-image-vertical-padding;
+	max-width: 100%;
+
+	&:not(.wp-block-gallery), img {
+		display: block;
+	}
+}
+
+.aligncenter {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.aligncenter,
+.alignnone {
+
+  // @todo test universal selector (* instead of p)
+	.entry-content & + p {
+		margin-top: $wp-align-image-vertical-padding;
+	}
+}
+
+.alignleft.alignleft,
+.alignright.alignright {
+	max-width: $wp-align-image-size;
+}
+
+.alignleft {
+	margin-right: $wp-align-image-horizontal-padding;
+	float: left;
+	clear: left;
+}
+
+.alignright {
+	margin-left: $wp-align-image-horizontal-padding;
+	float: right;
+	clear: right;
+}
+
+.aligncenter {
+	&, img {
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+
+figure {
+  max-width: 100%;
+
+	&.alignleft,
+	&.alignright,
+	&.aligncenter,
+	&.alignnone {
+		margin-top: $wp-align-image-vertical-padding;
+	}
+}
