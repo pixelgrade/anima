@@ -192,8 +192,8 @@ if ( ! function_exists( 'rosa2_get_separator_markup' ) ) {
 
 if ( ! function_exists( 'rosa2_get_separator_symbol' ) ) {
 	function rosa2_get_separator_symbol() {
+		$symbol = pixelgrade_option( 'separator_symbol', 'fleuron-1' );
         ob_start();
-        $symbol = pixelgrade_option( 'separator_symbol', 'fleuron-1' );
         get_template_part( 'template-parts/separators/' . $symbol . '-svg' );
         return ob_get_clean();
 	}
