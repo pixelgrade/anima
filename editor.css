@@ -17,7 +17,7 @@
   --theme-addon: calc( var(--theme-addon-unit) * var(--theme-addon-multiplier) ); }
   @media only screen and (min-width: 1440px) {
     :root {
-      --theme-addon-multiplier: 0.6;
+      --theme-font-size-slope-adjust: 0.6;
       --theme-addon-multiplier: 0.4; } }
 
 /* Global CSS Custom Properties */
@@ -111,6 +111,10 @@
   --theme-sm-light-3: var(--sm-color-3);
   background-color: var(--theme-sm-light-1);
   color: var(--theme-sm-dark-2); }
+
+@media only screen and (min-width: 1440px) {
+  :root {
+    --theme-font-size-slope-adjust: 0; } }
 
 .editor-styles-wrapper {
   --novablocks-color-1: var(--theme-sm-color-1);
