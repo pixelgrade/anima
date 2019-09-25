@@ -250,6 +250,23 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 					),
 					'fields'            => $fields_config,
 				),
+				'meta_font'  => array(
+					'type'              => 'font',
+					'label'             => esc_html__( 'Meta', '__theme_txtd' ),
+					'desc'              => esc_html__( '', '__theme_txtd' ),
+					'selector'          => ':root',
+					'properties_prefix' => '--theme-meta-',
+					'default'           => array(
+						'font-family'     => 'Reforma2018',
+						'font-size'       => 17,
+						'line-height'     => 1.5,
+						'font-weight'     => '500',
+						'text-transform'  => 'none',
+						'text-decoration' => 'none',
+						'letter-spacing'  => 0.017,
+					),
+					'fields'            => $fields_config,
+				),
 				'navigation_font' => array(
 					'type'              => 'font',
 					'label'             => esc_html__( 'Navigation', '__theme_txtd' ),
@@ -272,18 +289,15 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 					'label'             => esc_html__( 'Accent', '__theme_txtd' ),
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
-					'properties_prefix' => '--theme-headings-alt-',
+					'properties_prefix' => '--theme-accent-',
 					'default'           => array(
 						'font-family' => 'Billy Ohio',
 					),
-					'fields'            => array(
-						'font-size'       => false,
-						'line-height'     => false,
-						'font-weight'     => false,
-						'text-transform'  => false,
-						'text-decoration' => false,
-						'letter-spacing'  => false,
-						'text-align'      => false,
+					'recommended'       => array(
+						'Billy Ohio',
+						'Mellony Dry Brush',
+						'Jandys Dua',
+						'Nermola Script',
 					),
 				),
 			),
@@ -507,7 +521,6 @@ function rosa2_add_customify_connected_fields( $options ) {
 				),
 				'sm_font_primary'    => array(
 					'connected_fields' => array(
-						'hude_font',
 						'display_font',
 						'heading_1_font',
 						'heading_2_font',
@@ -519,12 +532,15 @@ function rosa2_add_customify_connected_fields( $options ) {
 					'connected_fields' => array(
 						'heading_5_font',
 						'heading_6_font',
+						'navigation_font',
+						'meta_font',
 					),
 				),
 				'sm_font_body'       => array(
 					'connected_fields' => array(
 						'body_font',
 						'content_font',
+						'lead_font',
 					),
 				),
 				'sm_font_accent'     => array(
@@ -763,6 +779,10 @@ function rosa2_filter_font_palettes( $font_palettes ) {
 						),
 					),
 				),
+				'sm_font_accent' => array(
+					'type' => 'theme_font',
+					'font_family' => 'Mellony Dry Brush'
+				),
 			),
 		),
 		'voltage'  => array(
@@ -775,7 +795,7 @@ function rosa2_filter_font_palettes( $font_palettes ) {
 			'fonts_logic' => array(
 				'sm_font_primary'   => array(
 					'type'        => 'theme_font',
-					'font_family' => 'League Spartan, sans-serif',
+					'font_family' => 'League Spartan',
 					'font_size_to_line_height_points' => array(
 						array( 16, 1.5 ),
 						array( 80, 1.2 ),
@@ -792,7 +812,7 @@ function rosa2_filter_font_palettes( $font_palettes ) {
 				),
 				'sm_font_secondary' => array(
 					'type'        => 'theme_font',
-					'font_family' => 'League Spartan, sans-serif',
+					'font_family' => 'League Spartan',
 					'font_size_to_line_height_points' => array(
 						array( 16, 1.5 ),
 						array( 80, 1.2 ),
@@ -823,6 +843,10 @@ function rosa2_filter_font_palettes( $font_palettes ) {
 							'text_decoration' => 'none',
 						),
 					),
+				),
+				'sm_font_accent' => array(
+					'type' => 'theme_font',
+					'font_family' => 'Jandys Dua'
 				),
 			),
 		),
@@ -885,6 +909,10 @@ function rosa2_filter_font_palettes( $font_palettes ) {
 						),
 					),
 				),
+				'sm_font_accent' => array(
+					'type' => 'theme_font',
+					'font_family' => 'Nermola Script'
+				),
 			),
 		),
 	);
@@ -906,12 +934,6 @@ function rosa2_add_customify_theme_fonts( $fonts ) {
 		'variants' => array( '300', '500', '700', '900' ),
 	);
 
-	$fonts['Billy Ohio'] = array(
-		'family'   => 'Billy Ohio',
-		'src'      => '//pxgcdn.com/fonts/billy-ohio/stylesheet.css',
-		'variants' => array()
-	);
-
 	$fonts['League Spartan'] = array(
 		'family'   => 'League Spartan',
 		'src'      => '//pxgcdn.com/fonts/league-spartan/stylesheet.css',
@@ -927,6 +949,30 @@ function rosa2_add_customify_theme_fonts( $fonts ) {
 	$fonts['YoungSerif'] = array(
 		'family'   => 'YoungSerif',
 		'src'      => '//pxgcdn.com/fonts/young-serif/stylesheet.css',
+		'variants' => array()
+	);
+
+	$fonts['Billy Ohio'] = array(
+		'family'   => 'Billy Ohio',
+		'src'      => '//pxgcdn.com/fonts/billy-ohio/stylesheet.css',
+		'variants' => array()
+	);
+
+	$fonts['Mellony Dry Brush'] = array(
+		'family'   => 'Mellony Dry Brush',
+		'src'      => '//pxgcdn.com/fonts/mellony-dry-brush/stylesheet.css',
+		'variants' => array()
+	);
+
+	$fonts['Jandys Dua'] = array(
+		'family'   => 'Jandys Dua',
+		'src'      => '//pxgcdn.com/fonts/jandys-dua/stylesheet.css',
+		'variants' => array()
+	);
+
+	$fonts['Nermola Script'] = array(
+		'family'   => 'Nermola Script',
+		'src'      => '//pxgcdn.com/fonts/nermola-script/stylesheet.css',
 		'variants' => array()
 	);
 

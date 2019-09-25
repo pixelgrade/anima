@@ -7,6 +7,8 @@ class GlobalService {
 		this.frameRendered = true;
 		const updateProps = this.updateProps.bind( this );
 		const updateScroll = this.updateScroll.bind( this );
+		updateProps();
+		updateScroll();
 		document.addEventListener('DOMContentLoaded', updateProps );
 		window.addEventListener( 'resize', updateProps );
 		window.addEventListener( 'load', updateProps );

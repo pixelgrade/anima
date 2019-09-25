@@ -10,6 +10,13 @@ import { insideHalf, reloadRellax } from "./utils";
 (function($, window) {
 
 	$(function() {
+
+		$( window ).on( 'wf-active', () => {
+			initialize();
+		} )
+	});
+
+	function initialize() {
 		// initialize hero
 		const heroElements = document.getElementsByClassName( 'novablocks-hero' );
 		const heroElementsArray = Array.from( heroElements );
@@ -55,6 +62,6 @@ import { insideHalf, reloadRellax } from "./utils";
 			} );
 			header.render( overlap );
 		} );
-	});
+	}
 
 })( jQuery, window );

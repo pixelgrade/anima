@@ -102,15 +102,35 @@ export default class Hero {
 
 	addIntroToTimeline() {
 		const timeline = this.timeline;
+		const { windowWidth } = GlobalService.getProps();
 		const { headline, title, subtitle, separator, sepFlower, sepLine, sepArrow, othersBefore, othersAfter } = this.pieces;
 
 		if ( title.length && title.text().trim().length ) {
 
-			timeline.from( title, 0.72, {
-				'letter-spacing': '1em',
-				'margin-right': '-0.9em',
-				ease: Expo.easeOut
-			}, 0 );
+			const splitTitle = new SplitText( title, { wordsClass: 'c-headline__word' } );
+
+			splitTitle.lines.forEach( line => {
+				const words = Array.from( line.children );
+				const letters = [];
+
+				words.forEach( word => {
+					letters.push( ...word.children );
+				} );
+
+				letters.forEach( letter => {
+					const box = letter.getBoundingClientRect();
+					const width = letter.offsetWidth;
+					const offset = box.x - ( windowWidth / 2 );
+
+					const offsetPercent = 2 * offset / windowWidth;
+					const move = 400 * letters.length * offsetPercent;
+
+					timeline.from( letter, 0.72, {
+						x: move,
+						ease: Expo.easeOut
+					}, 0 );
+				} )
+			} );
 
 			timeline.fromTo( title, 0.89, {
 				opacity: 0
@@ -134,18 +154,21 @@ export default class Hero {
 			timeline.fromTo(subtitle, 0.9, {y: 30}, {y: 0, ease: Quint.easeOut}, '-=0.65');
 		}
 
-		if ( sepFlower.length ) {
-			timeline.fromTo(sepFlower, 0.15, {opacity: 0}, {opacity: 1, ease: Quint.easeOut}, '-=0.6');
-			timeline.fromTo(sepFlower, 0.55, {rotation: -270}, {rotation: 0, ease: Back.easeOut}, '-=0.5');
-		}
+		if ( separator.length ) {
 
-		if ( sepLine.length ) {
-			timeline.fromTo(sepLine, 0.6, {width: 0}, {width: '42%', opacity: 1, ease: Quint.easeOut}, '-=0.55');
-			timeline.fromTo(separator, 0.6, {width: 0}, {width: '100%', opacity: 1, ease: Quint.easeOut}, '-=0.6');
-		}
+			if ( sepFlower.length ) {
+				timeline.fromTo(sepFlower, 0.15, {opacity: 0}, {opacity: 1, ease: Quint.easeOut}, '-=0.6');
+				timeline.fromTo(sepFlower, 0.55, {rotation: -270}, {rotation: 0, ease: Back.easeOut}, '-=0.5');
+			}
 
-		if ( sepArrow.length ) {
-			timeline.fromTo(sepArrow, 0.2, {opacity: 0}, {opacity: 1, ease: Quint.easeOut}, '-=0.27');
+			if ( sepLine.length ) {
+				timeline.fromTo(sepLine, 0.6, {width: 0}, {width: '42%', opacity: 1, ease: Quint.easeOut}, '-=0.55');
+				timeline.fromTo(separator, 0.6, {width: 0}, {width: '100%', opacity: 1, ease: Quint.easeOut}, '-=0.6');
+			}
+
+			if ( sepArrow.length ) {
+				timeline.fromTo(sepArrow, 0.2, {opacity: 0}, {opacity: 1, ease: Quint.easeOut}, '-=0.27');
+			}
 		}
 
 		if ( othersAfter.length ) {
