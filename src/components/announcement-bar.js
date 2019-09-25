@@ -22,10 +22,38 @@ export default class AnnouncementBar {
 			return;
 		}
 
-		this.timeline = this.getTimeline();
+		this.onResize();
+		GlobalService.registerUpdate( this.onResize.bind( this ) );
+
+//		if ( typeof this.timeline !== "undefined" ) {
+//		console.log( this.timeline );
 		this.timeline.play();
+//		}
 
 		this.bindEvents();
+	}
+
+	onResize() {
+		let progress = 0;
+		let wasActive = false;
+		let wasReversed = false;
+
+		if ( typeof this.timeline !== "undefined" ) {
+			progress = this.timeline.progress();
+			wasActive = this.timeline.isActive();
+			wasReversed = this.timeline.reversed();
+			this.timeline.clear();
+			this.timeline.kill();
+			this.pieces.wrapper.css( 'height', '' );
+		}
+
+		this.timeline = this.getTimeline();
+		this.timeline.progress( progress );
+		this.timeline.reversed( wasReversed );
+
+		if ( wasActive ) {
+			this.timeline.resume();
+		}
 	}
 
 	getPieces() {
@@ -53,8 +81,7 @@ export default class AnnouncementBar {
 
 		const timeline = new TimelineMax( { paused: true } );
 		const height = wrapper.outerHeight();
-
-		timeline.to( element, transitionDuration, { height: height, ease: transitionEasing }, 0 );
+		timeline.fromTo( element, transitionDuration, { height: 0 }, { height: height, ease: transitionEasing }, 0 );
 		timeline.to( { height: 0 }, transitionDuration, {
 			height: height,
 			onUpdate: this.onHeightUpdate.bind( this ),
@@ -70,7 +97,9 @@ export default class AnnouncementBar {
 	}
 
 	onClose() {
-		this.timeline.reverse();
+		if ( typeof this.timeline !== "undefined" ) {
+			this.timeline.reverse();
+		}
 	}
 
 	onHeightUpdate( tween ) {
