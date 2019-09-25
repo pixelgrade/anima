@@ -33,8 +33,8 @@
   --sm-light-3: #EEEFF2;
   --theme-body-font-size: 8px;
   --theme-content-font-size: 18px;
-  --theme-content-width-normal: calc(38 * var(--theme-content-font-size));
-  --theme-content-width-wide: calc(65 * var(--theme-content-font-size));
+  --theme-content-width-normal: calc(38 * var(--theme-content-final-font-size));
+  --theme-content-width-wide: calc(65 * var(--theme-content-final-font-size));
   --theme-spacing: 1rem;
   --theme-spacing-micro:  calc( var( --theme-spacing ) / 4 );
   --theme-spacing-tiny:   calc( var( --theme-spacing ) / 2 );
@@ -55,172 +55,6 @@
   @media screen and (min-width: 80rem) {
     :root {
       --theme-spacing-fluid: 1rem; } }
-
-@font-face {
-  font-family: 'Billy Ohio';
-  src: url("assets/fonts/billy-ohio/billy-ohio-webfont.woff2") format("woff2"), url("assets/fonts/billy-ohio/billy-ohio-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'Reforma1918';
-  src: url("assets/fonts/reforma1918/Reforma1918-Blanca.woff2") format("woff2"), url("assets/fonts/reforma1918/Reforma1918-Blanca.woff") format("woff"), url("assets/fonts/reforma1918/Reforma1918-Blanca.eot") format("woff"), url("assets/fonts/reforma1918/Reforma1918-Blanca.ttf") format("truetype");
-  /* Safari, Android, iOS */
-  font-style: normal;
-  font-weight: 300;
-  text-rendering: optimizeLegibility; }
-
-@font-face {
-  font-family: 'Reforma1918';
-  src: url("assets/fonts/reforma1918/Reforma1918-BlancaItalica.woff2") format("woff2"), url("assets/fonts/reforma1918/Reforma1918-BlancaItalica.woff") format("woff"), url("assets/fonts/reforma1918/Reforma1918-BlancaItalica.eot") format("woff"), url("assets/fonts/reforma1918/Reforma1918-BlancaItalica.ttf") format("truetype");
-  /* Safari, Android, iOS */
-  font-style: italic;
-  font-weight: 300;
-  text-rendering: optimizeLegibility; }
-
-@font-face {
-  font-family: 'Reforma1918';
-  src: url("assets/fonts/reforma1918/Reforma1918-Gris.woff2") format("woff2"), url("assets/fonts/reforma1918/Reforma1918-Gris.woff") format("woff"), url("assets/fonts/reforma1918/Reforma1918-Gris.eot") format("woff"), url("assets/fonts/reforma1918/Reforma1918-Gris.ttf") format("truetype");
-  /* Safari, Android, iOS */
-  font-style: normal;
-  font-weight: 500;
-  text-rendering: optimizeLegibility; }
-
-@font-face {
-  font-family: 'Reforma1918';
-  src: url("assets/fonts/reforma1918/Reforma1918-GrisItalica.woff2") format("woff2"), url("assets/fonts/reforma1918/Reforma1918-GrisItalica.woff") format("woff"), url("assets/fonts/reforma1918/Reforma1918-GrisItalica.eot") format("woff"), url("assets/fonts/reforma1918/Reforma1918-GrisItalica.ttf") format("truetype");
-  /* Safari, Android, iOS */
-  font-style: italic;
-  font-weight: 500;
-  text-rendering: optimizeLegibility; }
-
-@font-face {
-  font-family: 'Reforma1918';
-  src: url("assets/fonts/reforma1918/Reforma1918-Negra.woff2") format("woff2"), url("assets/fonts/reforma1918/Reforma1918-Negra.woff") format("woff"), url("assets/fonts/reforma1918/Reforma1918-Negra.eot") format("woff"), url("assets/fonts/reforma1918/Reforma1918-Negra.ttf") format("truetype");
-  /* Safari, Android, iOS */
-  font-style: normal;
-  font-weight: 700;
-  text-rendering: optimizeLegibility; }
-
-@font-face {
-  font-family: 'Reforma1918';
-  src: url("assets/fonts/reforma1918/Reforma1918-NegraItalica.woff2") format("woff2"), url("assets/fonts/reforma1918/Reforma1918-NegraItalica.woff") format("woff"), url("assets/fonts/reforma1918/Reforma1918-NegraItalica.eot") format("woff"), url("assets/fonts/reforma1918/Reforma1918-NegraItalica.ttf") format("truetype");
-  /* Safari, Android, iOS */
-  font-style: italic;
-  font-weight: 700;
-  text-rendering: optimizeLegibility; }
-
-@font-face {
-  font-family: 'Reforma1969';
-  src: url("assets/fonts/reforma1969/Reforma1969-Blanca.woff2") format("woff2"), url("assets/fonts/reforma1969/Reforma1969-Blanca.woff") format("woff"), url("assets/fonts/reforma1969/Reforma1969-Blanca.eot") format("woff"), url("assets/fonts/reforma1969/Reforma1969-Blanca.ttf") format("truetype");
-  /* Safari, Android, iOS */
-  font-style: normal;
-  font-weight: 300;
-  text-rendering: optimizeLegibility; }
-
-@font-face {
-  font-family: 'Reforma1969';
-  src: url("assets/fonts/reforma1969/Reforma1969-BlancaItalica.woff2") format("woff2"), url("assets/fonts/reforma1969/Reforma1969-BlancaItalica.woff") format("woff"), url("assets/fonts/reforma1969/Reforma1969-BlancaItalica.eot") format("woff"), url("assets/fonts/reforma1969/Reforma1969-BlancaItalica.ttf") format("truetype");
-  /* Safari, Android, iOS */
-  font-style: italic;
-  font-weight: 300;
-  text-rendering: optimizeLegibility; }
-
-@font-face {
-  font-family: 'Reforma1969';
-  src: url("assets/fonts/reforma1969/Reforma1969-Gris.woff2") format("woff2"), url("assets/fonts/reforma1969/Reforma1969-Gris.woff") format("woff"), url("assets/fonts/reforma1969/Reforma1969-Gris.eot") format("woff"), url("assets/fonts/reforma1969/Reforma1969-Gris.ttf") format("truetype");
-  /* Safari, Android, iOS */
-  font-style: normal;
-  font-weight: 500;
-  text-rendering: optimizeLegibility; }
-
-@font-face {
-  font-family: 'Reforma1969';
-  src: url("assets/fonts/reforma1969/Reforma1969-GrisItalica.woff2") format("woff2"), url("assets/fonts/reforma1969/Reforma1969-GrisItalica.woff") format("woff"), url("assets/fonts/reforma1969/Reforma1969-GrisItalica.eot") format("woff"), url("assets/fonts/reforma1969/Reforma1969-GrisItalica.ttf") format("truetype");
-  /* Safari, Android, iOS */
-  font-style: italic;
-  font-weight: 500;
-  text-rendering: optimizeLegibility; }
-
-@font-face {
-  font-family: 'Reforma1969';
-  src: url("assets/fonts/reforma1969/Reforma1969-Negra.woff2") format("woff2"), url("assets/fonts/reforma1969/Reforma1969-Negra.woff") format("woff"), url("assets/fonts/reforma1969/Reforma1969-Negra.eot") format("woff"), url("assets/fonts/reforma1969/Reforma1969-Negra.ttf") format("truetype");
-  /* Safari, Android, iOS */
-  font-style: normal;
-  font-weight: 700;
-  text-rendering: optimizeLegibility; }
-
-@font-face {
-  font-family: 'Reforma1969';
-  src: url("assets/fonts/reforma1969/Reforma1969-NegraItalica.woff2") format("woff2"), url("assets/fonts/reforma1969/Reforma1969-NegraItalica.woff") format("woff"), url("assets/fonts/reforma1969/Reforma1969-NegraItalica.eot") format("woff"), url("assets/fonts/reforma1969/Reforma1969-NegraItalica.ttf") format("truetype");
-  /* Safari, Android, iOS */
-  font-style: italic;
-  font-weight: 700;
-  text-rendering: optimizeLegibility; }
-
-@font-face {
-  font-family: 'Reforma2018';
-  src: url("assets/fonts/reforma2018/Reforma2018-Blanca.woff2") format("woff2"), url("assets/fonts/reforma2018/Reforma2018-Blanca.woff") format("woff"), url("assets/fonts/reforma2018/Reforma2018-Blanca.eot") format("woff"), url("assets/fonts/reforma2018/Reforma2018-Blanca.ttf") format("truetype");
-  /* Safari, Android, iOS */
-  font-style: normal;
-  font-weight: 300;
-  text-rendering: optimizeLegibility; }
-
-@font-face {
-  font-family: 'Reforma2018';
-  src: url("assets/fonts/reforma2018/Reforma2018-BlancaItalica.woff2") format("woff2"), url("assets/fonts/reforma2018/Reforma2018-BlancaItalica.woff") format("woff"), url("assets/fonts/reforma2018/Reforma2018-BlancaItalica.eot") format("woff"), url("assets/fonts/reforma2018/Reforma2018-BlancaItalica.ttf") format("truetype");
-  /* Safari, Android, iOS */
-  font-style: italic;
-  font-weight: 300;
-  text-rendering: optimizeLegibility; }
-
-@font-face {
-  font-family: 'Reforma2018';
-  src: url("assets/fonts/reforma2018/Reforma2018-Gris.woff2") format("woff2"), url("assets/fonts/reforma2018/Reforma2018-Gris.woff") format("woff"), url("assets/fonts/reforma2018/Reforma2018-Gris.eot") format("woff"), url("assets/fonts/reforma2018/Reforma2018-Gris.ttf") format("truetype");
-  /* Safari, Android, iOS */
-  font-style: normal;
-  font-weight: 500;
-  text-rendering: optimizeLegibility; }
-
-@font-face {
-  font-family: 'Reforma2018';
-  src: url("assets/fonts/reforma2018/Reforma2018-GrisItalica.woff2") format("woff2"), url("assets/fonts/reforma2018/Reforma2018-GrisItalica.woff") format("woff"), url("assets/fonts/reforma2018/Reforma2018-GrisItalica.eot") format("woff"), url("assets/fonts/reforma2018/Reforma2018-GrisItalica.ttf") format("truetype");
-  /* Safari, Android, iOS */
-  font-style: italic;
-  font-weight: 500;
-  text-rendering: optimizeLegibility; }
-
-@font-face {
-  font-family: 'Reforma2018';
-  src: url("assets/fonts/reforma2018/Reforma2018-Negra.woff2") format("woff2"), url("assets/fonts/reforma2018/Reforma2018-Negra.woff") format("woff"), url("assets/fonts/reforma2018/Reforma2018-Negra.eot") format("woff"), url("assets/fonts/reforma2018/Reforma2018-Negra.ttf") format("truetype");
-  /* Safari, Android, iOS */
-  font-style: normal;
-  font-weight: 700;
-  text-rendering: optimizeLegibility; }
-
-@font-face {
-  font-family: 'Reforma2018';
-  src: url("assets/fonts/reforma2018/Reforma2018-NegraItalica.woff2") format("woff2"), url("assets/fonts/reforma2018/Reforma2018-NegraItalica.woff") format("woff"), url("assets/fonts/reforma2018/Reforma2018-NegraItalica.eot") format("woff"), url("assets/fonts/reforma2018/Reforma2018-NegraItalica.ttf") format("truetype");
-  /* Safari, Android, iOS */
-  font-style: italic;
-  font-weight: 700;
-  text-rendering: optimizeLegibility; }
-
-@font-face {
-  font-family: 'Reforma2018';
-  src: url("assets/fonts/reforma2018/Reforma2018-UltraNegra.woff2") format("woff2"), url("assets/fonts/reforma2018/Reforma2018-UltraNegra.woff") format("woff"), url("assets/fonts/reforma2018/Reforma2018-UltraNegra.eot") format("woff"), url("assets/fonts/reforma2018/Reforma2018-UltraNegra.ttf") format("truetype");
-  /* Safari, Android, iOS */
-  font-style: normal;
-  font-weight: 900;
-  text-rendering: optimizeLegibility; }
-
-@font-face {
-  font-family: 'Reforma2018';
-  src: url("assets/fonts/reforma2018/Reforma2018-UltraNegraItalica.woff2") format("woff2"), url("assets/fonts/reforma2018/Reforma2018-UltraNegraItalica.woff") format("woff"), url("assets/fonts/reforma2018/Reforma2018-UltraNegraItalica.eot") format("woff"), url("assets/fonts/reforma2018/Reforma2018-UltraNegraItalica.ttf") format("truetype");
-  /* Safari, Android, iOS */
-  font-style: italic;
-  font-weight: 900;
-  text-rendering: optimizeLegibility; }
 
 :root {
   --theme-sm-color-1: var(--sm-color-1);
@@ -294,17 +128,17 @@
     --theme-button-font-weight: 500;
     --theme-button-letter-spacing: 0.03em;
     --theme-button-text-transform: capitalize;
-    --theme-button-initial-font-size: 17;
+    --theme-button-font-size: 17;
     --x0: var(--theme-font-size-minimum-value-breakpoint);
     --y0: var(--theme-font-size-minimum-value);
     --x1: var(--theme-font-size-breakpoint);
-    --theme-button-y1: var(--theme-button-initial-font-size);
+    --theme-button-y1: var(--theme-button-font-size);
     --theme-button-y0-new: calc( var(--theme-button-y1) - ( var(--theme-button-y1) - var(--y0) ) * var(--theme-font-size-slope-adjust));
     --theme-button-a: calc( ( var(--theme-button-y1) - var(--theme-button-y0-new) ) / ( var(--x1) - var(--x0) ));
     --theme-button-b: calc( var(--theme-button-y0-new) - var(--theme-button-a) * var(--x0));
     --theme-button-x2: 100vw;
     --theme-button-y2: calc( var(--theme-button-a) * var(--theme-button-x2) + var(--theme-button-b) * 1px);
-    --theme-button-font-size: calc( var(--theme-button-y2) + var(--theme-addon)); }
+    --theme-button-final-font-size: calc( var(--theme-button-y2) + var(--theme-addon)); }
   .editor-styles-wrapper .wp-block-button__link {
     transition: var(--current-button-transition); }
   .editor-styles-wrapper .wp-block-button:not(.is-style-text) .wp-block-button__link {
@@ -470,7 +304,7 @@
     letter-spacing: var(--current-letter-spacing);
     text-transform: var(--current-text-transform);
     --current-font-family: var(--theme-button-font-family);
-    --current-font-size: var(--theme-button-font-size);
+    --current-font-size: var(--theme-button-final-font-size);
     --current-line-height: var(--theme-button-line-height);
     --current-font-weight: var(--theme-button-font-weight);
     --current-letter-spacing: var(--theme-button-letter-spacing);
@@ -480,7 +314,7 @@
     margin-top: var(--element-spacing); }
   .editor-styles-wrapper figcaption {
     font-size: var(--current-font-size);
-    --current-font-size: var(--theme-small-font-size); }
+    --current-font-size: var(--theme-small-final-font-size); }
   .editor-styles-wrapper pre,
   .editor-styles-wrapper code {
     border: 1px solid;
@@ -494,10 +328,10 @@
     background: transparent; }
   .editor-styles-wrapper cite {
     font-size: var(--current-font-size);
-    --current-font-size: var(--theme-normal-font-size); }
+    --current-font-size: var(--theme-normal-final-font-size); }
   .editor-styles-wrapper .wp-block-cover-text {
     font-size: var(--current-font-size);
-    --current-font-size: var(--theme-medium-font-size); }
+    --current-font-size: var(--theme-medium-final-font-size); }
   .editor-styles-wrapper .c-separator {
     --separator-line-thickness: 2px;
     --separator-arrow-width: 5px;
@@ -560,17 +394,17 @@
   --theme-body-font-weight: 400;
   --theme-body-letter-spacing: -0.03em;
   --theme-body-text-transform: inherit;
-  --theme-body-initial-font-size: 16;
+  --theme-body-font-size: 16;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
   --x1: var(--theme-font-size-breakpoint);
-  --theme-body-y1: var(--theme-body-initial-font-size);
+  --theme-body-y1: var(--theme-body-font-size);
   --theme-body-y0-new: calc( var(--theme-body-y1) - ( var(--theme-body-y1) - var(--y0) ) * var(--theme-font-size-slope-adjust));
   --theme-body-a: calc( ( var(--theme-body-y1) - var(--theme-body-y0-new) ) / ( var(--x1) - var(--x0) ));
   --theme-body-b: calc( var(--theme-body-y0-new) - var(--theme-body-a) * var(--x0));
   --theme-body-x2: 100vw;
   --theme-body-y2: calc( var(--theme-body-a) * var(--theme-body-x2) + var(--theme-body-b) * 1px);
-  --theme-body-font-size: calc( var(--theme-body-y2) + var(--theme-addon)); }
+  --theme-body-final-font-size: calc( var(--theme-body-y2) + var(--theme-addon)); }
 
 :root {
   --theme-content-font-family: var(--theme-body-font-family);
@@ -578,17 +412,17 @@
   --theme-content-font-weight: inherit;
   --theme-content-letter-spacing: -0.03em;
   --theme-content-text-transform: inherit;
-  --theme-content-initial-font-size: 18;
+  --theme-content-font-size: 18;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
   --x1: var(--theme-font-size-breakpoint);
-  --theme-content-y1: var(--theme-content-initial-font-size);
+  --theme-content-y1: var(--theme-content-font-size);
   --theme-content-y0-new: calc( var(--theme-content-y1) - ( var(--theme-content-y1) - var(--y0) ) * var(--theme-font-size-slope-adjust));
   --theme-content-a: calc( ( var(--theme-content-y1) - var(--theme-content-y0-new) ) / ( var(--x1) - var(--x0) ));
   --theme-content-b: calc( var(--theme-content-y0-new) - var(--theme-content-a) * var(--x0));
   --theme-content-x2: 100vw;
   --theme-content-y2: calc( var(--theme-content-a) * var(--theme-content-x2) + var(--theme-content-b) * 1px);
-  --theme-content-font-size: calc( var(--theme-content-y2) + var(--theme-addon)); }
+  --theme-content-final-font-size: calc( var(--theme-content-y2) + var(--theme-addon)); }
 
 :root {
   --theme-lead-font-family: var(--theme-body-font-family);
@@ -596,17 +430,17 @@
   --theme-lead-font-weight: inherit;
   --theme-lead-letter-spacing: -0.02em;
   --theme-lead-text-transform: inherit;
-  --theme-lead-initial-font-size: 24;
+  --theme-lead-font-size: 24;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
   --x1: var(--theme-font-size-breakpoint);
-  --theme-lead-y1: var(--theme-lead-initial-font-size);
+  --theme-lead-y1: var(--theme-lead-font-size);
   --theme-lead-y0-new: calc( var(--theme-lead-y1) - ( var(--theme-lead-y1) - var(--y0) ) * var(--theme-font-size-slope-adjust));
   --theme-lead-a: calc( ( var(--theme-lead-y1) - var(--theme-lead-y0-new) ) / ( var(--x1) - var(--x0) ));
   --theme-lead-b: calc( var(--theme-lead-y0-new) - var(--theme-lead-a) * var(--x0));
   --theme-lead-x2: 100vw;
   --theme-lead-y2: calc( var(--theme-lead-a) * var(--theme-lead-x2) + var(--theme-lead-b) * 1px);
-  --theme-lead-font-size: calc( var(--theme-lead-y2) + var(--theme-addon)); }
+  --theme-lead-final-font-size: calc( var(--theme-lead-y2) + var(--theme-addon)); }
 
 :root {
   --theme-display-font-family: var(--theme-primary-font-family);
@@ -614,17 +448,17 @@
   --theme-display-font-weight: 700;
   --theme-display-letter-spacing: -0.03em;
   --theme-display-text-transform: inherit;
-  --theme-display-initial-font-size: 115;
+  --theme-display-font-size: 115;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
   --x1: var(--theme-font-size-breakpoint);
-  --theme-display-y1: var(--theme-display-initial-font-size);
+  --theme-display-y1: var(--theme-display-font-size);
   --theme-display-y0-new: calc( var(--theme-display-y1) - ( var(--theme-display-y1) - var(--y0) ) * var(--theme-font-size-slope-adjust));
   --theme-display-a: calc( ( var(--theme-display-y1) - var(--theme-display-y0-new) ) / ( var(--x1) - var(--x0) ));
   --theme-display-b: calc( var(--theme-display-y0-new) - var(--theme-display-a) * var(--x0));
   --theme-display-x2: 100vw;
   --theme-display-y2: calc( var(--theme-display-a) * var(--theme-display-x2) + var(--theme-display-b) * 1px);
-  --theme-display-font-size: calc( var(--theme-display-y2) + var(--theme-addon)); }
+  --theme-display-final-font-size: calc( var(--theme-display-y2) + var(--theme-addon)); }
 
 :root {
   --theme-heading-1-font-family: var(--theme-primary-font-family);
@@ -632,17 +466,17 @@
   --theme-heading-1-font-weight: 700;
   --theme-heading-1-letter-spacing: -0.03em;
   --theme-heading-1-text-transform: inherit;
-  --theme-heading-1-initial-font-size: 66;
+  --theme-heading-1-font-size: 66;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
   --x1: var(--theme-font-size-breakpoint);
-  --theme-heading-1-y1: var(--theme-heading-1-initial-font-size);
+  --theme-heading-1-y1: var(--theme-heading-1-font-size);
   --theme-heading-1-y0-new: calc( var(--theme-heading-1-y1) - ( var(--theme-heading-1-y1) - var(--y0) ) * var(--theme-font-size-slope-adjust));
   --theme-heading-1-a: calc( ( var(--theme-heading-1-y1) - var(--theme-heading-1-y0-new) ) / ( var(--x1) - var(--x0) ));
   --theme-heading-1-b: calc( var(--theme-heading-1-y0-new) - var(--theme-heading-1-a) * var(--x0));
   --theme-heading-1-x2: 100vw;
   --theme-heading-1-y2: calc( var(--theme-heading-1-a) * var(--theme-heading-1-x2) + var(--theme-heading-1-b) * 1px);
-  --theme-heading-1-font-size: calc( var(--theme-heading-1-y2) + var(--theme-addon)); }
+  --theme-heading-1-final-font-size: calc( var(--theme-heading-1-y2) + var(--theme-addon)); }
 
 :root {
   --theme-heading-2-font-family: var(--theme-primary-font-family);
@@ -650,17 +484,17 @@
   --theme-heading-2-font-weight: 700;
   --theme-heading-2-letter-spacing: -0.02em;
   --theme-heading-2-text-transform: inherit;
-  --theme-heading-2-initial-font-size: 40;
+  --theme-heading-2-font-size: 40;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
   --x1: var(--theme-font-size-breakpoint);
-  --theme-heading-2-y1: var(--theme-heading-2-initial-font-size);
+  --theme-heading-2-y1: var(--theme-heading-2-font-size);
   --theme-heading-2-y0-new: calc( var(--theme-heading-2-y1) - ( var(--theme-heading-2-y1) - var(--y0) ) * var(--theme-font-size-slope-adjust));
   --theme-heading-2-a: calc( ( var(--theme-heading-2-y1) - var(--theme-heading-2-y0-new) ) / ( var(--x1) - var(--x0) ));
   --theme-heading-2-b: calc( var(--theme-heading-2-y0-new) - var(--theme-heading-2-a) * var(--x0));
   --theme-heading-2-x2: 100vw;
   --theme-heading-2-y2: calc( var(--theme-heading-2-a) * var(--theme-heading-2-x2) + var(--theme-heading-2-b) * 1px);
-  --theme-heading-2-font-size: calc( var(--theme-heading-2-y2) + var(--theme-addon)); }
+  --theme-heading-2-final-font-size: calc( var(--theme-heading-2-y2) + var(--theme-addon)); }
 
 :root {
   --theme-heading-3-font-family: var(--theme-primary-font-family);
@@ -668,17 +502,17 @@
   --theme-heading-3-font-weight: 700;
   --theme-heading-3-letter-spacing: -0.02em;
   --theme-heading-3-text-transform: inherit;
-  --theme-heading-3-initial-font-size: 32;
+  --theme-heading-3-font-size: 32;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
   --x1: var(--theme-font-size-breakpoint);
-  --theme-heading-3-y1: var(--theme-heading-3-initial-font-size);
+  --theme-heading-3-y1: var(--theme-heading-3-font-size);
   --theme-heading-3-y0-new: calc( var(--theme-heading-3-y1) - ( var(--theme-heading-3-y1) - var(--y0) ) * var(--theme-font-size-slope-adjust));
   --theme-heading-3-a: calc( ( var(--theme-heading-3-y1) - var(--theme-heading-3-y0-new) ) / ( var(--x1) - var(--x0) ));
   --theme-heading-3-b: calc( var(--theme-heading-3-y0-new) - var(--theme-heading-3-a) * var(--x0));
   --theme-heading-3-x2: 100vw;
   --theme-heading-3-y2: calc( var(--theme-heading-3-a) * var(--theme-heading-3-x2) + var(--theme-heading-3-b) * 1px);
-  --theme-heading-3-font-size: calc( var(--theme-heading-3-y2) + var(--theme-addon)); }
+  --theme-heading-3-final-font-size: calc( var(--theme-heading-3-y2) + var(--theme-addon)); }
 
 :root {
   --theme-heading-4-font-family: var(--theme-primary-font-family);
@@ -686,17 +520,17 @@
   --theme-heading-4-font-weight: 700;
   --theme-heading-4-letter-spacing: -0.02em;
   --theme-heading-4-text-transform: inherit;
-  --theme-heading-4-initial-font-size: 24;
+  --theme-heading-4-font-size: 24;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
   --x1: var(--theme-font-size-breakpoint);
-  --theme-heading-4-y1: var(--theme-heading-4-initial-font-size);
+  --theme-heading-4-y1: var(--theme-heading-4-font-size);
   --theme-heading-4-y0-new: calc( var(--theme-heading-4-y1) - ( var(--theme-heading-4-y1) - var(--y0) ) * var(--theme-font-size-slope-adjust));
   --theme-heading-4-a: calc( ( var(--theme-heading-4-y1) - var(--theme-heading-4-y0-new) ) / ( var(--x1) - var(--x0) ));
   --theme-heading-4-b: calc( var(--theme-heading-4-y0-new) - var(--theme-heading-4-a) * var(--x0));
   --theme-heading-4-x2: 100vw;
   --theme-heading-4-y2: calc( var(--theme-heading-4-a) * var(--theme-heading-4-x2) + var(--theme-heading-4-b) * 1px);
-  --theme-heading-4-font-size: calc( var(--theme-heading-4-y2) + var(--theme-addon)); }
+  --theme-heading-4-final-font-size: calc( var(--theme-heading-4-y2) + var(--theme-addon)); }
 
 :root {
   --theme-heading-5-font-family: var(--theme-secondary-font-family);
@@ -704,17 +538,17 @@
   --theme-heading-5-font-weight: 400;
   --theme-heading-5-letter-spacing: inherit;
   --theme-heading-5-text-transform: inherit;
-  --theme-heading-5-initial-font-size: 17;
+  --theme-heading-5-font-size: 17;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
   --x1: var(--theme-font-size-breakpoint);
-  --theme-heading-5-y1: var(--theme-heading-5-initial-font-size);
+  --theme-heading-5-y1: var(--theme-heading-5-font-size);
   --theme-heading-5-y0-new: calc( var(--theme-heading-5-y1) - ( var(--theme-heading-5-y1) - var(--y0) ) * var(--theme-font-size-slope-adjust));
   --theme-heading-5-a: calc( ( var(--theme-heading-5-y1) - var(--theme-heading-5-y0-new) ) / ( var(--x1) - var(--x0) ));
   --theme-heading-5-b: calc( var(--theme-heading-5-y0-new) - var(--theme-heading-5-a) * var(--x0));
   --theme-heading-5-x2: 100vw;
   --theme-heading-5-y2: calc( var(--theme-heading-5-a) * var(--theme-heading-5-x2) + var(--theme-heading-5-b) * 1px);
-  --theme-heading-5-font-size: calc( var(--theme-heading-5-y2) + var(--theme-addon)); }
+  --theme-heading-5-final-font-size: calc( var(--theme-heading-5-y2) + var(--theme-addon)); }
 
 :root {
   --theme-heading-6-font-family: var(--theme-secondary-font-family);
@@ -722,17 +556,17 @@
   --theme-heading-6-font-weight: 400;
   --theme-heading-6-letter-spacing: inherit;
   --theme-heading-6-text-transform: inherit;
-  --theme-heading-6-initial-font-size: 17;
+  --theme-heading-6-font-size: 17;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
   --x1: var(--theme-font-size-breakpoint);
-  --theme-heading-6-y1: var(--theme-heading-6-initial-font-size);
+  --theme-heading-6-y1: var(--theme-heading-6-font-size);
   --theme-heading-6-y0-new: calc( var(--theme-heading-6-y1) - ( var(--theme-heading-6-y1) - var(--y0) ) * var(--theme-font-size-slope-adjust));
   --theme-heading-6-a: calc( ( var(--theme-heading-6-y1) - var(--theme-heading-6-y0-new) ) / ( var(--x1) - var(--x0) ));
   --theme-heading-6-b: calc( var(--theme-heading-6-y0-new) - var(--theme-heading-6-a) * var(--x0));
   --theme-heading-6-x2: 100vw;
   --theme-heading-6-y2: calc( var(--theme-heading-6-a) * var(--theme-heading-6-x2) + var(--theme-heading-6-b) * 1px);
-  --theme-heading-6-font-size: calc( var(--theme-heading-6-y2) + var(--theme-addon)); }
+  --theme-heading-6-final-font-size: calc( var(--theme-heading-6-y2) + var(--theme-addon)); }
 
 :root {
   --theme-navigation-font-family: var(--theme-secondary-font-family);
@@ -740,17 +574,17 @@
   --theme-navigation-font-weight: 400;
   --theme-navigation-letter-spacing: inherit;
   --theme-navigation-text-transform: inherit;
-  --theme-navigation-initial-font-size: 17;
+  --theme-navigation-font-size: 17;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
   --x1: var(--theme-font-size-breakpoint);
-  --theme-navigation-y1: var(--theme-navigation-initial-font-size);
+  --theme-navigation-y1: var(--theme-navigation-font-size);
   --theme-navigation-y0-new: calc( var(--theme-navigation-y1) - ( var(--theme-navigation-y1) - var(--y0) ) * var(--theme-font-size-slope-adjust));
   --theme-navigation-a: calc( ( var(--theme-navigation-y1) - var(--theme-navigation-y0-new) ) / ( var(--x1) - var(--x0) ));
   --theme-navigation-b: calc( var(--theme-navigation-y0-new) - var(--theme-navigation-a) * var(--x0));
   --theme-navigation-x2: 100vw;
   --theme-navigation-y2: calc( var(--theme-navigation-a) * var(--theme-navigation-x2) + var(--theme-navigation-b) * 1px);
-  --theme-navigation-font-size: calc( var(--theme-navigation-y2) + var(--theme-addon)); }
+  --theme-navigation-final-font-size: calc( var(--theme-navigation-y2) + var(--theme-addon)); }
 
 .editor-styles-wrapper[class] h1.has-larger-font-size {
   font-family: var(--current-font-family);
@@ -760,7 +594,7 @@
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
   --current-font-family: var(--theme-display-font-family);
-  --current-font-size: var(--theme-display-font-size);
+  --current-font-size: var(--theme-display-final-font-size);
   --current-line-height: var(--theme-display-line-height);
   --current-font-weight: var(--theme-display-font-weight);
   --current-letter-spacing: var(--theme-display-letter-spacing);
@@ -775,7 +609,7 @@
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
   --current-font-family: var(--theme-heading-1-font-family);
-  --current-font-size: var(--theme-heading-1-font-size);
+  --current-font-size: var(--theme-heading-1-final-font-size);
   --current-line-height: var(--theme-heading-1-line-height);
   --current-font-weight: var(--theme-heading-1-font-weight);
   --current-letter-spacing: var(--theme-heading-1-letter-spacing);
@@ -791,7 +625,7 @@
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
   --current-font-family: var(--theme-heading-2-font-family);
-  --current-font-size: var(--theme-heading-2-font-size);
+  --current-font-size: var(--theme-heading-2-final-font-size);
   --current-line-height: var(--theme-heading-2-line-height);
   --current-font-weight: var(--theme-heading-2-font-weight);
   --current-letter-spacing: var(--theme-heading-2-letter-spacing);
@@ -806,7 +640,7 @@
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
   --current-font-family: var(--theme-heading-3-font-family);
-  --current-font-size: var(--theme-heading-3-font-size);
+  --current-font-size: var(--theme-heading-3-final-font-size);
   --current-line-height: var(--theme-heading-3-line-height);
   --current-font-weight: var(--theme-heading-3-font-weight);
   --current-letter-spacing: var(--theme-heading-3-letter-spacing);
@@ -821,7 +655,7 @@
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
   --current-font-family: var(--theme-heading-4-font-family);
-  --current-font-size: var(--theme-heading-4-font-size);
+  --current-font-size: var(--theme-heading-4-final-font-size);
   --current-line-height: var(--theme-heading-4-line-height);
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
@@ -835,7 +669,7 @@
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
   --current-font-family: var(--theme-heading-5-font-family);
-  --current-font-size: var(--theme-heading-5-font-size);
+  --current-font-size: var(--theme-heading-5-final-font-size);
   --current-line-height: var(--theme-heading-5-line-height);
   --current-font-weight: var(--theme-heading-5-font-weight);
   --current-letter-spacing: var(--theme-heading-5-letter-spacing);
@@ -849,7 +683,7 @@
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
   --current-font-family: var(--theme-heading-6-font-family);
-  --current-font-size: var(--theme-heading-6-font-size);
+  --current-font-size: var(--theme-heading-6-final-font-size);
   --current-line-height: var(--theme-heading-6-line-height);
   --current-font-weight: var(--theme-heading-6-font-weight);
   --current-letter-spacing: var(--theme-heading-6-letter-spacing);
@@ -1106,99 +940,98 @@
     padding-top: 75%; }
   .editor-styles-wrapper .wp-block-embed.wp-embed-aspect-16-9 .wp-block-embed__wrapper {
     padding-top: 56.25%; }
-  .editor-styles-wrapper :root {
-    --block-grid-spacing: 20px; }
   .editor-styles-wrapper .wp-block-gallery {
+    --block-grid-spacing: 20px;
     list-style: none;
     display: flex;
     flex-wrap: wrap; }
-    .editor-styles-wrapper .wp-block-gallery.columns-2 > * {
+    .editor-styles-wrapper .wp-block-gallery.columns-2 .blocks-gallery-grid > * {
       flex: 0 1 auto;
       margin-right: var(--block-grid-spacing);
       margin-top: var(--block-grid-spacing);
       width: calc((100% - 1 * var(--block-grid-spacing))/2); }
-      .editor-styles-wrapper .wp-block-gallery.columns-2 > *:last-child {
+      .editor-styles-wrapper .wp-block-gallery.columns-2 .blocks-gallery-grid > *:last-child {
         margin-right: 0; }
-      .editor-styles-wrapper .wp-block-gallery.columns-2 > *:nth-child(-n + 2) {
+      .editor-styles-wrapper .wp-block-gallery.columns-2 .blocks-gallery-grid > *:nth-child(-n + 2) {
         margin-top: 0; }
-      .editor-styles-wrapper .wp-block-gallery.columns-2 > *:nth-child(2n) {
+      .editor-styles-wrapper .wp-block-gallery.columns-2 .blocks-gallery-grid > *:nth-child(2n) {
         margin-right: 0; }
-    .editor-styles-wrapper .wp-block-gallery.columns-3 > * {
+    .editor-styles-wrapper .wp-block-gallery.columns-3 .blocks-gallery-grid > * {
       flex: 0 1 auto;
       margin-right: var(--block-grid-spacing);
       margin-top: var(--block-grid-spacing);
       width: calc((100% - 2 * var(--block-grid-spacing))/3); }
-      .editor-styles-wrapper .wp-block-gallery.columns-3 > *:last-child {
+      .editor-styles-wrapper .wp-block-gallery.columns-3 .blocks-gallery-grid > *:last-child {
         margin-right: 0; }
-      .editor-styles-wrapper .wp-block-gallery.columns-3 > *:nth-child(-n + 3) {
+      .editor-styles-wrapper .wp-block-gallery.columns-3 .blocks-gallery-grid > *:nth-child(-n + 3) {
         margin-top: 0; }
-      .editor-styles-wrapper .wp-block-gallery.columns-3 > *:nth-child(3n) {
+      .editor-styles-wrapper .wp-block-gallery.columns-3 .blocks-gallery-grid > *:nth-child(3n) {
         margin-right: 0; }
-    .editor-styles-wrapper .wp-block-gallery.columns-4 > * {
+    .editor-styles-wrapper .wp-block-gallery.columns-4 .blocks-gallery-grid > * {
       flex: 0 1 auto;
       margin-right: var(--block-grid-spacing);
       margin-top: var(--block-grid-spacing);
       width: calc((100% - 3 * var(--block-grid-spacing))/4); }
-      .editor-styles-wrapper .wp-block-gallery.columns-4 > *:last-child {
+      .editor-styles-wrapper .wp-block-gallery.columns-4 .blocks-gallery-grid > *:last-child {
         margin-right: 0; }
-      .editor-styles-wrapper .wp-block-gallery.columns-4 > *:nth-child(-n + 4) {
+      .editor-styles-wrapper .wp-block-gallery.columns-4 .blocks-gallery-grid > *:nth-child(-n + 4) {
         margin-top: 0; }
-      .editor-styles-wrapper .wp-block-gallery.columns-4 > *:nth-child(4n) {
+      .editor-styles-wrapper .wp-block-gallery.columns-4 .blocks-gallery-grid > *:nth-child(4n) {
         margin-right: 0; }
-    .editor-styles-wrapper .wp-block-gallery.columns-5 > * {
+    .editor-styles-wrapper .wp-block-gallery.columns-5 .blocks-gallery-grid > * {
       flex: 0 1 auto;
       margin-right: var(--block-grid-spacing);
       margin-top: var(--block-grid-spacing);
       width: calc((100% - 4 * var(--block-grid-spacing))/5); }
-      .editor-styles-wrapper .wp-block-gallery.columns-5 > *:last-child {
+      .editor-styles-wrapper .wp-block-gallery.columns-5 .blocks-gallery-grid > *:last-child {
         margin-right: 0; }
-      .editor-styles-wrapper .wp-block-gallery.columns-5 > *:nth-child(-n + 5) {
+      .editor-styles-wrapper .wp-block-gallery.columns-5 .blocks-gallery-grid > *:nth-child(-n + 5) {
         margin-top: 0; }
-      .editor-styles-wrapper .wp-block-gallery.columns-5 > *:nth-child(5n) {
+      .editor-styles-wrapper .wp-block-gallery.columns-5 .blocks-gallery-grid > *:nth-child(5n) {
         margin-right: 0; }
-    .editor-styles-wrapper .wp-block-gallery.columns-6 > * {
+    .editor-styles-wrapper .wp-block-gallery.columns-6 .blocks-gallery-grid > * {
       flex: 0 1 auto;
       margin-right: var(--block-grid-spacing);
       margin-top: var(--block-grid-spacing);
       width: calc((100% - 5 * var(--block-grid-spacing))/6); }
-      .editor-styles-wrapper .wp-block-gallery.columns-6 > *:last-child {
+      .editor-styles-wrapper .wp-block-gallery.columns-6 .blocks-gallery-grid > *:last-child {
         margin-right: 0; }
-      .editor-styles-wrapper .wp-block-gallery.columns-6 > *:nth-child(-n + 6) {
+      .editor-styles-wrapper .wp-block-gallery.columns-6 .blocks-gallery-grid > *:nth-child(-n + 6) {
         margin-top: 0; }
-      .editor-styles-wrapper .wp-block-gallery.columns-6 > *:nth-child(6n) {
+      .editor-styles-wrapper .wp-block-gallery.columns-6 .blocks-gallery-grid > *:nth-child(6n) {
         margin-right: 0; }
-    .editor-styles-wrapper .wp-block-gallery.columns-7 > * {
+    .editor-styles-wrapper .wp-block-gallery.columns-7 .blocks-gallery-grid > * {
       flex: 0 1 auto;
       margin-right: var(--block-grid-spacing);
       margin-top: var(--block-grid-spacing);
       width: calc((100% - 6 * var(--block-grid-spacing))/7); }
-      .editor-styles-wrapper .wp-block-gallery.columns-7 > *:last-child {
+      .editor-styles-wrapper .wp-block-gallery.columns-7 .blocks-gallery-grid > *:last-child {
         margin-right: 0; }
-      .editor-styles-wrapper .wp-block-gallery.columns-7 > *:nth-child(-n + 7) {
+      .editor-styles-wrapper .wp-block-gallery.columns-7 .blocks-gallery-grid > *:nth-child(-n + 7) {
         margin-top: 0; }
-      .editor-styles-wrapper .wp-block-gallery.columns-7 > *:nth-child(7n) {
+      .editor-styles-wrapper .wp-block-gallery.columns-7 .blocks-gallery-grid > *:nth-child(7n) {
         margin-right: 0; }
-    .editor-styles-wrapper .wp-block-gallery.columns-8 > * {
+    .editor-styles-wrapper .wp-block-gallery.columns-8 .blocks-gallery-grid > * {
       flex: 0 1 auto;
       margin-right: var(--block-grid-spacing);
       margin-top: var(--block-grid-spacing);
       width: calc((100% - 7 * var(--block-grid-spacing))/8); }
-      .editor-styles-wrapper .wp-block-gallery.columns-8 > *:last-child {
+      .editor-styles-wrapper .wp-block-gallery.columns-8 .blocks-gallery-grid > *:last-child {
         margin-right: 0; }
-      .editor-styles-wrapper .wp-block-gallery.columns-8 > *:nth-child(-n + 8) {
+      .editor-styles-wrapper .wp-block-gallery.columns-8 .blocks-gallery-grid > *:nth-child(-n + 8) {
         margin-top: 0; }
-      .editor-styles-wrapper .wp-block-gallery.columns-8 > *:nth-child(8n) {
+      .editor-styles-wrapper .wp-block-gallery.columns-8 .blocks-gallery-grid > *:nth-child(8n) {
         margin-right: 0; }
-    .editor-styles-wrapper .wp-block-gallery.columns-9 > * {
+    .editor-styles-wrapper .wp-block-gallery.columns-9 .blocks-gallery-grid > * {
       flex: 0 1 auto;
       margin-right: var(--block-grid-spacing);
       margin-top: var(--block-grid-spacing);
       width: calc((100% - 8 * var(--block-grid-spacing))/9); }
-      .editor-styles-wrapper .wp-block-gallery.columns-9 > *:last-child {
+      .editor-styles-wrapper .wp-block-gallery.columns-9 .blocks-gallery-grid > *:last-child {
         margin-right: 0; }
-      .editor-styles-wrapper .wp-block-gallery.columns-9 > *:nth-child(-n + 9) {
+      .editor-styles-wrapper .wp-block-gallery.columns-9 .blocks-gallery-grid > *:nth-child(-n + 9) {
         margin-top: 0; }
-      .editor-styles-wrapper .wp-block-gallery.columns-9 > *:nth-child(9n) {
+      .editor-styles-wrapper .wp-block-gallery.columns-9 .blocks-gallery-grid > *:nth-child(9n) {
         margin-right: 0; }
     .editor-styles-wrapper .wp-block-gallery img {
       display: block; }
@@ -1234,6 +1067,10 @@
       width: 100%;
       height: 100%;
       object-fit: cover; }
+  .editor-styles-wrapper .blocks-gallery-grid {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap; }
   .editor-styles-wrapper .wp-block-group {
     padding-top: var(--theme-spacing-fluid-large);
     padding-bottom: var(--theme-spacing-fluid-large); }
@@ -1371,7 +1208,7 @@
     letter-spacing: var(--current-letter-spacing);
     text-transform: var(--current-text-transform);
     --current-font-family: var(--theme-body-font-family);
-    --current-font-size: var(--theme-body-font-size);
+    --current-font-size: var(--theme-body-final-font-size);
     --current-line-height: var(--theme-body-line-height);
     --current-font-weight: var(--theme-body-font-weight);
     --current-letter-spacing: var(--theme-body-letter-spacing);
@@ -1421,7 +1258,7 @@
       letter-spacing: var(--current-letter-spacing);
       text-transform: var(--current-text-transform);
       --current-font-family: var(--theme-heading-4-font-family);
-      --current-font-size: var(--theme-heading-4-font-size);
+      --current-font-size: var(--theme-heading-4-final-font-size);
       --current-line-height: var(--theme-heading-4-line-height);
       --current-font-weight: var(--theme-heading-4-font-weight);
       --current-letter-spacing: var(--theme-heading-4-letter-spacing);
@@ -1438,7 +1275,7 @@
     letter-spacing: var(--current-letter-spacing);
     text-transform: var(--current-text-transform);
     --current-font-family: var(--theme-heading-2-font-family);
-    --current-font-size: var(--theme-heading-2-font-size);
+    --current-font-size: var(--theme-heading-2-final-font-size);
     --current-line-height: var(--theme-heading-2-line-height);
     --current-font-weight: var(--theme-heading-2-font-weight);
     --current-letter-spacing: var(--theme-heading-2-letter-spacing);
@@ -1449,6 +1286,11 @@
       border-width: .15em; }
   .editor-styles-wrapper .item-title {
     background-color: var(--theme-sm-light-1); }
+  .editor-styles-wrapper .item-title {
+    background-color: var(--theme-sm-light-1); }
+  .editor-styles-wrapper .nova-food-menu-item--highlighted {
+    margin-left: 0;
+    margin-right: 0; }
   .editor-styles-wrapper .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button {
     background: linear-gradient(to right, var(--sm-light-1) 50%, var(--sm-dark-1) 50%);
     background-size: 200% 100%;
@@ -1524,7 +1366,7 @@
     letter-spacing: var(--current-letter-spacing);
     text-transform: var(--current-text-transform);
     --current-font-family: var(--theme-heading-3-font-family);
-    --current-font-size: var(--theme-heading-3-font-size);
+    --current-font-size: var(--theme-heading-3-final-font-size);
     --current-line-height: var(--theme-heading-3-line-height);
     --current-font-weight: var(--theme-heading-3-font-weight);
     --current-letter-spacing: var(--theme-heading-3-letter-spacing);
@@ -1549,7 +1391,7 @@
     letter-spacing: var(--current-letter-spacing);
     text-transform: var(--current-text-transform);
     --current-font-family: var(--theme-heading-5-font-family);
-    --current-font-size: var(--theme-heading-5-font-size);
+    --current-font-size: var(--theme-heading-5-final-font-size);
     --current-line-height: var(--theme-heading-5-line-height);
     --current-font-weight: var(--theme-heading-5-font-weight);
     --current-letter-spacing: var(--theme-heading-5-letter-spacing);
@@ -1570,7 +1412,7 @@
     letter-spacing: var(--current-letter-spacing);
     text-transform: var(--current-text-transform);
     --current-font-family: var(--theme-content-font-family);
-    --current-font-size: var(--theme-content-font-size);
+    --current-font-size: var(--theme-content-final-font-size);
     --current-line-height: var(--theme-content-line-height);
     --current-font-weight: var(--theme-content-font-weight);
     --current-letter-spacing: var(--theme-content-letter-spacing);

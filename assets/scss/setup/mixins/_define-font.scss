@@ -34,15 +34,16 @@
         text-decoration: inherit,
     ), $config );
 
+    $prefix: --theme-#{$name};
+
     @at-root {
 
         :root {
 
-            //@each $prop in $props {
             @each $prop in remove($props, font-size) {
                 $value: map-get( $config, $prop );
                 @if ( map-get( $config, $prop ) ) {
-                    --theme-#{$name}-#{$prop}: #{$value};
+                    #{$prefix}-#{$prop}: #{$value};
                 }
             }
 
@@ -50,9 +51,8 @@
 
             @if ( $font-size and $font-size != 'inherit' ) {
 
-                $prefix: --theme-#{$name};
 
-                #{$prefix}-initial-font-size: #{$font-size};
+                #{$prefix}-font-size: #{$font-size};
 
 
                 // solving a first degree equation: y = ax + b
@@ -65,7 +65,7 @@
                 --y0: var(--theme-font-size-minimum-value);
                 --x1: var(--theme-font-size-breakpoint);
 
-                #{$prefix}-y1: var(#{$prefix}-initial-font-size);
+                #{$prefix}-y1: var(#{$prefix}-font-size);
                 #{$prefix}-y0-new: calc( var(#{$prefix}-y1) - ( var(#{$prefix}-y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) );
 
                 // calculate the slope and the remainder for the equation
@@ -77,11 +77,11 @@
                 #{$prefix}-x2: 100vw;
                 #{$prefix}-y2: calc( var(#{$prefix}-a) * var(#{$prefix}-x2) + var(#{$prefix}-b) * 1px );
 
-                #{$prefix}-font-size: calc( var(#{$prefix}-y2) + var(--theme-addon) );
+                #{$prefix}-final-font-size: calc( var(#{$prefix}-y2) + var(--theme-addon) );
             }
 
             @if ( $font-size == 'inherit' ) {
-                --theme-#{$name}-font-size: inherit;
+                #{$prefix}-font-size: inherit;
             }
         }
     }
@@ -94,6 +94,10 @@
     }
 
     @each $prop in $props {
-        --current-#{$prop}: var(--theme-#{$name}-#{$prop});
+        @if ($prop == 'font-size') {
+            --current-#{$prop}: var(--theme-#{$name}-final-#{$prop});
+        } @else {
+            --current-#{$prop}: var(--theme-#{$name}-#{$prop});
+        }
     }
 }
