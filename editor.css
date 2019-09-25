@@ -820,10 +820,10 @@
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
       --current-button-transition: var(--theme-button-hover-transition); }
-    .editor-styles-wrapper .wp-block-button__link:not(.has-background) {
-      background-color: var(--current-button-background-color); }
     .editor-styles-wrapper .wp-block-button__link:not(.has-text-color) {
       color: var(--current-button-text-color); }
+  .editor-styles-wrapper .wp-block-button:not(.is-style-text) .wp-block-button__link:not(.has-background) {
+    background-color: var(--current-button-background-color); }
   .editor-styles-wrapper ul.wp-block-categories__list[class] {
     list-style: none;
     padding-left: 0; }

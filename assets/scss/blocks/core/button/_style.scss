@@ -32,12 +32,16 @@ $enable-button-block-styles:            true !default;
         @include button-box;
         @include button-theme;
 
-        &:not(.has-background) {
-            @include button-background;
-        }
-
         &:not(.has-text-color) {
             @include button-color;
+        }
+    }
+
+    .wp-block-button:not(.is-style-text) {
+        .wp-block-button__link {
+            &:not(.has-background) {
+                @include button-background;
+            }
         }
     }
 }

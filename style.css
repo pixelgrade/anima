@@ -2269,10 +2269,11 @@ body, .site, .site-content {
     --current-button-border-color: var(--theme-button-hover-border-color);
     --current-button-text-color: var(--theme-button-hover-text-color);
     --current-button-transition: var(--theme-button-hover-transition); }
-  .wp-block-button__link:not(.has-background) {
-    background-color: var(--current-button-background-color); }
   .wp-block-button__link:not(.has-text-color) {
     color: var(--current-button-text-color); }
+
+.wp-block-button:not(.is-style-text) .wp-block-button__link:not(.has-background) {
+  background-color: var(--current-button-background-color); }
 
 /* Categories Block */
 .wp-block-categories {
