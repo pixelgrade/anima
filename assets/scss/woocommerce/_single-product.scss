@@ -211,7 +211,7 @@
 
 .woocommerce-product-gallery,
 .entry-summary {
-  margin-bottom: var(--theme-spacing-huge);
+  margin-bottom: var(--theme-spacing-xl);
 }
 
 .c-woo-section {
@@ -223,14 +223,14 @@
     background: currentColor;
     opacity: .2;
 
-    margin-top: var(--theme-spacing-huge);
-    margin-bottom: var(--theme-spacing-huge);
+    margin-top: var(--theme-spacing-xl);
+    margin-bottom: var(--theme-spacing-xl);
   }
 
   &:last-child:after {
     content: "";
     display: block;
-    margin-top: var(--theme-spacing-huge);
+    margin-top: var(--theme-spacing-xl);
   }
 }
 
@@ -258,12 +258,12 @@
 
 #content .c-product-main {
   position: relative;
-  margin-top: var(--theme-spacing-huge);
+  margin-top: var(--theme-spacing-xl);
 
   @include specific(3) {
 
     .woocommerce-product-gallery + .entry-summary {
-      margin-top: calc(var(--theme-spacing-huge) + var(--theme-spacing-small));
+      margin-top: calc(var(--theme-spacing-xl) + var(--theme-spacing-small));
     }
 
     @include above( tablet ) {
@@ -279,7 +279,7 @@
         float: none;
         width: auto;
         flex: 0 0 35%;
-        margin-left: var(--theme-spacing-huge);
+        margin-left: var(--theme-spacing-xl);
       }
 
       .woocommerce-product-gallery + .entry-summary {
