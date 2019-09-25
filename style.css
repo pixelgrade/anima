@@ -1266,6 +1266,24 @@ ul.menu a,
       transform: translateY(-50%); }
       .site-header--mobile .menu-item--cart > a {
         color: currentColor; }
+  body:not(.has-fixed-site-header) .site-header--mobile {
+    background-color: var(--sm-light-1); }
+    body:not(.has-fixed-site-header) .site-header--mobile:after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      box-shadow: currentColor 0 1px 2px;
+      opacity: 0.1;
+      pointer-events: none;
+      transition: opacity 0.3s ease; }
+    body:not(.has-fixed-site-header) .site-header--mobile .c-logo__default {
+      opacity: 1; }
+    body:not(.has-fixed-site-header) .site-header--mobile .c-logo__inverted {
+      opacity: 0; }
   .sub-menu {
     margin-left: -1em;
     margin-right: -1em; }
@@ -2809,9 +2827,6 @@ body, .site, .site-content {
   --element-spacing: var(--theme-spacing-large);
   --novablocks-media-content-padding: var(--theme-spacing-fluid-large);
   --novablocks-media-spacing: var(--theme-spacing-fluid-normal); }
-  .novablocks-media.wp-block-group {
-    padding-top: 0;
-    padding-bottom: 0; }
 
 @media not screen and (min-width: 768px) {
   .novablocks-media__content {
