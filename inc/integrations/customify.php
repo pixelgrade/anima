@@ -250,12 +250,29 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 					),
 					'fields'            => $fields_config,
 				),
-				'meta_font'  => array(
+				'buttons_font' => array(
 					'type'              => 'font',
-					'label'             => esc_html__( 'Meta', '__theme_txtd' ),
+					'label'             => esc_html__( 'Buttons', '__theme_txtd' ),
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
-					'properties_prefix' => '--theme-meta-',
+					'properties_prefix' => '--theme-button-',
+					'default'           => array(
+						'font-family'     => 'Reforma2018',
+						'font-size'       => 17,
+						'line-height'     => 1.2,
+						'font-weight'     => '500',
+						'text-transform'  => 'capitalize',
+						'text-decoration' => 'none',
+						'letter-spacing'  => 0.03,
+					),
+					'fields'            => $fields_config,
+				),
+				'navigation_font' => array(
+					'type'              => 'font',
+					'label'             => esc_html__( 'Navigation', '__theme_txtd' ),
+					'desc'              => esc_html__( '', '__theme_txtd' ),
+					'selector'          => ':root',
+					'properties_prefix' => '--theme-navigation-',
 					'default'           => array(
 						'font-family'     => 'Reforma2018',
 						'font-size'       => 17,
@@ -267,12 +284,12 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 					),
 					'fields'            => $fields_config,
 				),
-				'navigation_font' => array(
+				'meta_font'  => array(
 					'type'              => 'font',
-					'label'             => esc_html__( 'Navigation', '__theme_txtd' ),
+					'label'             => esc_html__( 'Meta', '__theme_txtd' ),
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
-					'properties_prefix' => '--theme-navigation-',
+					'properties_prefix' => '--theme-meta-',
 					'default'           => array(
 						'font-family'     => 'Reforma2018',
 						'font-size'       => 17,
@@ -533,6 +550,7 @@ function rosa2_add_customify_connected_fields( $options ) {
 						'heading_5_font',
 						'heading_6_font',
 						'navigation_font',
+						'buttons_font',
 						'meta_font',
 					),
 				),

@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /* Button CSS Custom Properties */
 /* Cite CSS Custom Properties */
 :root {
@@ -123,23 +122,6 @@
   --novablocks-light-1: var(--theme-sm-light-1);
   --novablocks-light-2: var(--theme-sm-light-2);
   --novablocks-light-3: var(--theme-sm-light-3); }
-  :root {
-    --theme-button-font-family: Reforma2018, sans-serif;
-    --theme-button-line-height: 1.2;
-    --theme-button-font-weight: 500;
-    --theme-button-letter-spacing: 0.03em;
-    --theme-button-text-transform: capitalize;
-    --theme-button-font-size: 17;
-    --x0: var(--theme-font-size-minimum-value-breakpoint);
-    --y0: var(--theme-font-size-minimum-value);
-    --x1: var(--theme-font-size-breakpoint);
-    --theme-button-y1: var(--theme-button-font-size);
-    --theme-button-y0-new: calc( var(--theme-button-y1) - ( var(--theme-button-y1) - var(--y0) ) * var(--theme-font-size-slope-adjust));
-    --theme-button-a: calc( ( var(--theme-button-y1) - var(--theme-button-y0-new) ) / ( var(--x1) - var(--x0) ));
-    --theme-button-b: calc( var(--theme-button-y0-new) - var(--theme-button-a) * var(--x0));
-    --theme-button-x2: 100vw;
-    --theme-button-y2: calc( var(--theme-button-a) * var(--theme-button-x2) + var(--theme-button-b) * 1px);
-    --theme-button-final-font-size: calc( var(--theme-button-y2) + var(--theme-addon)); }
   .editor-styles-wrapper .wp-block-button__link {
     transition: var(--current-button-transition); }
   .editor-styles-wrapper .wp-block-button:not(.is-style-text) .wp-block-button__link {
@@ -538,7 +520,7 @@
 :root {
   --theme-heading-5-font-family: var(--theme-secondary-font-family);
   --theme-heading-5-line-height: 1.5;
-  --theme-heading-5-font-weight: 400;
+  --theme-heading-5-font-weight: 500;
   --theme-heading-5-letter-spacing: inherit;
   --theme-heading-5-text-transform: inherit;
   --theme-heading-5-font-size: 17;
@@ -556,7 +538,7 @@
 :root {
   --theme-heading-6-font-family: var(--theme-secondary-font-family);
   --theme-heading-6-line-height: 1.5;
-  --theme-heading-6-font-weight: 400;
+  --theme-heading-6-font-weight: 500;
   --theme-heading-6-letter-spacing: inherit;
   --theme-heading-6-text-transform: inherit;
   --theme-heading-6-font-size: 17;
@@ -574,7 +556,7 @@
 :root {
   --theme-navigation-font-family: var(--theme-secondary-font-family);
   --theme-navigation-line-height: 1.5;
-  --theme-navigation-font-weight: 400;
+  --theme-navigation-font-weight: 500;
   --theme-navigation-letter-spacing: inherit;
   --theme-navigation-text-transform: inherit;
   --theme-navigation-font-size: 17;
@@ -592,7 +574,7 @@
 :root {
   --theme-meta-font-family: var(--theme-secondary-font-family);
   --theme-meta-line-height: 1.5;
-  --theme-meta-font-weight: 400;
+  --theme-meta-font-weight: 500;
   --theme-meta-letter-spacing: inherit;
   --theme-meta-text-transform: inherit;
   --theme-meta-font-size: 17;
@@ -606,6 +588,24 @@
   --theme-meta-x2: 100vw;
   --theme-meta-y2: calc( var(--theme-meta-a) * var(--theme-meta-x2) + var(--theme-meta-b) * 1px);
   --theme-meta-final-font-size: calc( var(--theme-meta-y2) + var(--theme-addon)); }
+
+:root {
+  --theme-button-font-family: var(--theme-secondary-font-family);
+  --theme-button-line-height: 1.2;
+  --theme-button-font-weight: 500;
+  --theme-button-letter-spacing: 0.03em;
+  --theme-button-text-transform: capitalize;
+  --theme-button-font-size: 17;
+  --x0: var(--theme-font-size-minimum-value-breakpoint);
+  --y0: var(--theme-font-size-minimum-value);
+  --x1: var(--theme-font-size-breakpoint);
+  --theme-button-y1: var(--theme-button-font-size);
+  --theme-button-y0-new: calc( var(--theme-button-y1) - ( var(--theme-button-y1) - var(--y0) ) * var(--theme-font-size-slope-adjust));
+  --theme-button-a: calc( ( var(--theme-button-y1) - var(--theme-button-y0-new) ) / ( var(--x1) - var(--x0) ));
+  --theme-button-b: calc( var(--theme-button-y0-new) - var(--theme-button-a) * var(--x0));
+  --theme-button-x2: 100vw;
+  --theme-button-y2: calc( var(--theme-button-a) * var(--theme-button-x2) + var(--theme-button-b) * 1px);
+  --theme-button-final-font-size: calc( var(--theme-button-y2) + var(--theme-addon)); }
 
 .editor-styles-wrapper[class] h1.has-larger-font-size {
   font-family: var(--current-font-family);
