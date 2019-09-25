@@ -105,8 +105,8 @@ Table of Contents
   --theme-sm-color-1: var(--sm-color-1);
   --theme-sm-color-2: var(--sm-color-2);
   --theme-sm-color-3: var(--sm-color-3);
-  --theme-sm-dark-1: var(--sm-light-1);
-  --theme-sm-dark-2: var(--sm-light-2);
+  --theme-sm-dark-1: var(--sm-light-2);
+  --theme-sm-dark-2: var(--sm-light-1);
   --theme-sm-dark-3: var(--sm-light-3);
   --theme-sm-light-1: var(--sm-dark-1);
   --theme-sm-light-2: var(--sm-dark-2);
@@ -1275,12 +1275,12 @@ body, .site, .site-content {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
-  --current-font-family: var(--theme-heading-5-font-family);
-  --current-font-size: var(--theme-heading-5-final-font-size);
-  --current-line-height: var(--theme-heading-5-line-height);
-  --current-font-weight: var(--theme-heading-5-font-weight);
-  --current-letter-spacing: var(--theme-heading-5-letter-spacing);
-  --current-text-transform: var(--theme-heading-5-text-transform); }
+  --current-font-family: var(--theme-meta-font-family);
+  --current-font-size: var(--theme-meta-final-font-size);
+  --current-line-height: var(--theme-meta-line-height);
+  --current-font-weight: var(--theme-meta-font-weight);
+  --current-letter-spacing: var(--theme-meta-letter-spacing);
+  --current-text-transform: var(--theme-meta-text-transform); }
   .entry-meta > :not(:last-child):after {
     content: "·";
     padding: 0 var(--theme-spacing-tiny); }
@@ -2539,13 +2539,14 @@ body, .site, .site-content {
   --theme-sm-color-1: var(--sm-color-1);
   --theme-sm-color-2: var(--sm-color-2);
   --theme-sm-color-3: var(--sm-color-3);
-  --theme-sm-dark-1: var(--sm-light-1);
-  --theme-sm-dark-2: var(--sm-light-2);
+  --theme-sm-dark-1: var(--sm-light-2);
+  --theme-sm-dark-2: var(--sm-light-1);
   --theme-sm-dark-3: var(--sm-light-3);
   --theme-sm-light-1: var(--sm-dark-1);
   --theme-sm-light-2: var(--sm-dark-2);
-  --theme-sm-light-3: var(--sm-dark-3);
-  color: var(--theme-sm-dark-2); }
+  --theme-sm-light-3: var(--sm-dark-3); }
+  .novablocks-u-background-dark .novablocks-hero__indicator:after {
+    color: var(--theme-sm-light-1); }
 
 .novablocks-map__marker-name {
   position: absolute;
@@ -3204,6 +3205,24 @@ body {
   --theme-navigation-y2: calc( var(--theme-navigation-a) * var(--theme-navigation-x2) + var(--theme-navigation-b) * 1px);
   --theme-navigation-final-font-size: calc( var(--theme-navigation-y2) + var(--theme-addon)); }
 
+:root {
+  --theme-meta-font-family: var(--theme-secondary-font-family);
+  --theme-meta-line-height: 1.5;
+  --theme-meta-font-weight: 400;
+  --theme-meta-letter-spacing: inherit;
+  --theme-meta-text-transform: inherit;
+  --theme-meta-font-size: 17;
+  --x0: var(--theme-font-size-minimum-value-breakpoint);
+  --y0: var(--theme-font-size-minimum-value);
+  --x1: var(--theme-font-size-breakpoint);
+  --theme-meta-y1: var(--theme-meta-font-size);
+  --theme-meta-y0-new: calc( var(--theme-meta-y1) - ( var(--theme-meta-y1) - var(--y0) ) * var(--theme-font-size-slope-adjust));
+  --theme-meta-a: calc( ( var(--theme-meta-y1) - var(--theme-meta-y0-new) ) / ( var(--x1) - var(--x0) ));
+  --theme-meta-b: calc( var(--theme-meta-y0-new) - var(--theme-meta-a) * var(--x0));
+  --theme-meta-x2: 100vw;
+  --theme-meta-y2: calc( var(--theme-meta-a) * var(--theme-meta-x2) + var(--theme-meta-b) * 1px);
+  --theme-meta-final-font-size: calc( var(--theme-meta-y2) + var(--theme-addon)); }
+
 h1.has-larger-font-size {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
@@ -3315,6 +3334,9 @@ h6 {
     align-items: flex-start; }
   .c-headline.has-text-align-right {
     align-items: flex-end; }
+
+.c-headline__word {
+  display: inline-flex !important; }
 
 .c-headline__primary,
 .c-headline__secondary {
