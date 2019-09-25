@@ -1,33 +1,86 @@
-$enable-columns-block-styles:           true !default;
+$enable-columns-block-styles: true !default;
 
 @if $enable-columns-block-styles == true {
 
     /* Columns Blocks */
     .wp-block-columns {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        display: flex;
+        flex-wrap: wrap;
 
-        --theme-column-spacing: var(--theme-spacing-normal);
-        grid-gap: var(--theme-column-spacing);
-
-        &.alignfull {
-            --theme-wrapper-side-spacing: 0;
+        @media (min-width: 782px) {
+            flex-wrap: nowrap
         }
 
         // spacing for first level of rows
         &:not(:first-child),
         & + * {
-            --element-spacing: var(--theme-spacing-huge);
+            --element-spacing: var(--theme-spacing-fluid-huge);
         }
 
         // spacing for deeper levels of rows
         & &:not(:first-child),
         & & + * {
-            --element-spacing: var(--theme-spacing-normal);
+            --element-spacing: var(--theme-spacing-fluid-normal);
         }
     }
 
     .wp-block-column {
-        @include space-children-y( var(--theme-spacing) );
+        margin-bottom: 1em;
+        flex-grow: 1;
+        min-width: 0;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        @include space-children-y( var(--theme-spacing-fluid) );
+
+
+        @media not screen and (min-width: 600px) {
+            flex-basis: 100% !important;
+        }
+
+        @media only screen and (min-width: 600px) {
+            flex-basis: calc(50% - 16px);
+            flex-grow: 0;
+
+            &:nth-child(2n) {
+                margin-left: 32px
+            }
+        }
+
+        @media (min-width: 782px) {
+            &:not(:first-child) {
+                margin-left: 32px
+            }
+        }
+    }
+
+
+    .wp-block-columns {
+
+        &.are-vertically-aligned-top {
+            align-items: flex-start
+        }
+
+        &.are-vertically-aligned-center {
+            align-items: center
+        }
+
+        &.are-vertically-aligned-bottom {
+            align-items: flex-end
+        }
+    }
+
+    .wp-block-column {
+
+        &.is-vertically-aligned-top {
+            align-self: flex-start
+        }
+
+        &.is-vertically-aligned-center {
+            align-self: center
+        }
+
+        &.is-vertically-aligned-bottom {
+            align-self: flex-end
+        }
     }
 }

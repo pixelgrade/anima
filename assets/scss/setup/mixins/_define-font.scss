@@ -1,9 +1,26 @@
 :root {
-    --theme-minimum-font-size: #{ strip-unit( $theme-minimum-font-size ) };
+    --theme-font-size-breakpoint: 1440;
 
-    //@include above($nova-font-size-breakpoint) {
-    //    --theme-minimum-font-size: #{$nova-font-size-minimum-vw};
-    //}
+    --theme-font-size-minimum-value: 16;
+    --theme-font-size-minimum-value-breakpoint: 320;
+
+    // use the --theme-font-size-slope-adjust variable to alter the slope of the resulted function
+    // in such a way that when this variable equals 0, the slope of the function results to also 0
+    // and the font sizes stay the same no matter the viewport
+    --theme-font-size-slope-adjust: 0.4;
+
+    // create a unit value that is relative to the viewport width to all font sizes
+    --theme-addon-unit: calc( 1vw - var(--theme-font-size-breakpoint) * 1px / 100 );
+    // use a multiplier variable to control how much of that unit is added to the font size at any given time
+    // initially we set this variable to 0  so nothing is added to the resulted font sizes
+    --theme-addon-multiplier: 0;
+
+    --theme-addon: calc( var(--theme-addon-unit) * var(--theme-addon-multiplier) );
+
+    @media only screen and (min-width: 1440px) {
+        --theme-font-size-slope-adjust: 0.2;
+        --theme-addon-multiplier: 0.8;
+    }
 }
 
 @mixin define-font($name, $config, $props: $nova-font-props) {
@@ -17,31 +34,54 @@
         text-decoration: inherit,
     ), $config );
 
+    $prefix: --theme-#{$name};
+
     @at-root {
 
         :root {
 
-            //@each $prop in $props {
             @each $prop in remove($props, font-size) {
                 $value: map-get( $config, $prop );
                 @if ( map-get( $config, $prop ) ) {
-                    --theme-#{$name}-#{$prop}: #{$value};
+                    #{$prefix}-#{$prop}: #{$value};
                 }
             }
 
             $font-size: map-get( $config, font-size );
 
             @if ( $font-size and $font-size != 'inherit' ) {
-                --theme-#{$name}-initial-font-size: #{$font-size};
-                --theme-#{$name}-font-size-diff: calc( var( --theme-#{$name}-initial-font-size ) - var( --theme-minimum-font-size ) ); // 2
-                --theme-#{$name}-font-size-diff-ratio: calc( var( --theme-#{$name}-font-size-diff ) / var( --theme-minimum-font-size ) ); // 2 / 16
-                --theme-#{$name}-font-size-vw-diff: calc( var( --theme-#{$name}-font-size-diff-ratio ) * 1vw );
-                --theme-#{$name}-font-size-px-diff: calc( var( --theme-#{$name}-font-size-diff-ratio ) * 1440px / 100 );
-                --theme-#{$name}-font-size: calc( var( --theme-#{$name}-initial-font-size ) * 1px + var( --theme-#{$name}-font-size-vw-diff ) - var( --theme-#{$name}-font-size-px-diff ) );
+
+
+                #{$prefix}-font-size: #{$font-size};
+
+
+                // solving a first degree equation: y = ax + b
+
+                // x0 - viewport width at which font sizes should reach minimum value
+                // y0 - minimum font size
+                // x1 - viewport width at which we know the value for the font size
+                // y1 - known font size
+                --x0: var(--theme-font-size-minimum-value-breakpoint);
+                --y0: var(--theme-font-size-minimum-value);
+                --x1: var(--theme-font-size-breakpoint);
+
+                #{$prefix}-y1: var(#{$prefix}-font-size);
+                #{$prefix}-y0-new: calc( var(#{$prefix}-y1) - ( var(#{$prefix}-y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) );
+
+                // calculate the slope and the remainder for the equation
+                #{$prefix}-a: calc( ( var(#{$prefix}-y1) - var(#{$prefix}-y0-new) ) / ( var(--x1) - var(--x0) ) );
+                #{$prefix}-b: calc( var(#{$prefix}-y0-new) - var(#{$prefix}-a) * var(--x0) );
+
+                // x2 - viewport width at a given time
+                // y2 - font size value we need to find out
+                #{$prefix}-x2: 100vw;
+                #{$prefix}-y2: calc( var(#{$prefix}-a) * var(#{$prefix}-x2) + var(#{$prefix}-b) * 1px );
+
+                #{$prefix}-final-font-size: calc( var(#{$prefix}-y2) + var(--theme-addon) );
             }
 
             @if ( $font-size == 'inherit' ) {
-                --theme-#{$name}-font-size: inherit;
+                #{$prefix}-font-size: inherit;
             }
         }
     }
@@ -54,6 +94,10 @@
     }
 
     @each $prop in $props {
-        --current-#{$prop}: var(--theme-#{$name}-#{$prop});
+        @if ($prop == 'font-size') {
+            --current-#{$prop}: var(--theme-#{$name}-final-#{$prop});
+        } @else {
+            --current-#{$prop}: var(--theme-#{$name}-#{$prop});
+        }
     }
 }
