@@ -39,11 +39,13 @@ $classes[] = get_query_var( 'has_image_on_the_left' ) ? 'has-image-on-the-left' 
                         ?>
                     </div>
                 </div>
-                <div class="novablocks-media__aside">
-                    <div class="novablocks-media__image">
-                        <?php rosa2_post_thumbnail(); ?>
+                <?php if(has_post_thumbnail()) { ?>
+                    <div class="novablocks-media__aside">
+                        <div class="novablocks-media__image">
+                            <?php rosa2_post_thumbnail(); ?>
+                        </div>
                     </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
     </div>
