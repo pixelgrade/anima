@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /*!
 Theme Name: Rosa2
 Theme URI: https://demos.pixelgrade.com/rosa2
@@ -793,7 +792,7 @@ ul.menu,
     .site-header .menu-item-has-children > .children,
     .site-header .page_item_has_children > .sub-menu,
     .site-header .page_item_has_children > .children {
-      background: rgba(0, 0, 0, 0.2); }
+      background: rgba(0, 0, 0, 0.3); }
     .site-header .menu-item-has-children[class] > a:after,
     .site-header .page_item_has_children[class] > a:after {
       transform: rotate(45deg); } }
@@ -899,9 +898,12 @@ ul.menu a,
 
 .c-menu-toggle__slice {
   display: block;
-  width: 1em;
-  height: 0.1875em;
+  width: 1.3em;
+  height: .125em;
   background: currentColor; }
+
+.c-menu-toggle__slice--middle {
+  width: 1em; }
 
 .c-menu-toggle__slice--top,
 .c-menu-toggle__slice--bottom {
@@ -910,10 +912,10 @@ ul.menu a,
   left: 0; }
 
 .c-menu-toggle__slice--top {
-  transform: translate3d(0, -0.375em, 0); }
+  transform: translate3d(0, -0.4375em, 0); }
 
 .c-menu-toggle__slice--bottom {
-  transform: translate3d(0, 0.375em, 0); }
+  transform: translate3d(0, 0.4375em, 0); }
 
 @media only screen and (min-width: 1000px) {
   .site-header__content {
@@ -955,7 +957,8 @@ ul.menu a,
     z-index: 1000;
     width: 100vw;
     background: var(--sm-dark-1);
-    color: var(--sm-light-1); }
+    color: var(--sm-light-1);
+    opacity: .97; }
     .c-menu-toggle__checkbox ~ .site-header {
       display: block; }
     .c-menu-toggle__checkbox:not(:checked) ~ .site-header {
@@ -963,9 +966,48 @@ ul.menu a,
     .site-header .site-branding,
     .site-header .menu-item--cart {
       display: none; }
+    .site-header .menu-item-has-children[class] > a,
+    .site-header .page_item_has_children[class] > a {
+      display: inline-block;
+      position: relative; }
+    .site-header .menu-item-has-children[class].hover > a:after,
+    .site-header .page_item_has_children[class].hover > a:after {
+      transform: translateY(-50%) rotate(-45deg);
+      opacity: 1; }
+    .site-header .menu-item-has-children[class].hover > a:before,
+    .site-header .page_item_has_children[class].hover > a:before {
+      opacity: 1; }
+    .site-header .menu-item-has-children[class] a:after,
+    .site-header .page_item_has_children[class] a:after {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+      transition: all 0.15s cubic-bezier(0.42, 0, 0.58, 1);
+      transition-property: transform, opacity;
+      margin-left: .5em; }
+    .site-header .menu-item-has-children[class] a:before,
+    .site-header .page_item_has_children[class] a:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: var(--sm-light-1);
+      bottom: .7em;
+      opacity: 0;
+      transition: opacity 0.1s cubic-bezier(0.42, 0, 0.58, 1); }
+    .site-header ul.menu a {
+      padding-left: 0;
+      padding-right: 0; }
+    .site-header .menu-item-has-children[class] > a:after,
+    .site-header .page_item_has_children[class] > a:after {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg); }
   .site-header__content {
     display: flex;
-    flex-direction: column; }
+    flex-direction: column;
+    padding-left: 1em;
+    padding-right: 1em; }
     .site-header__content .site-branding {
       padding: 1em;
       order: -1; }
@@ -987,6 +1029,12 @@ ul.menu a,
       transform: translateY(-50%); }
       .site-header--mobile .menu-item--cart > a {
         color: currentColor; }
+  .sub-menu {
+    margin-left: -1em;
+    margin-right: -1em; }
+    .sub-menu > li {
+      padding-left: 1em;
+      padding-right: 1em; }
   .site-header,
   .c-menu-toggle__slice {
     transition: transform .3s ease-out; }
@@ -2628,6 +2676,9 @@ body, .site, .site-content {
   font-size: var(--theme-heading-4-font-size); }
   .nova-food-menu-item__title:before {
     border-width: .15em; }
+
+.item-title {
+  background-color: var(--theme-sm-light-1); }
 
 .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button {
   background: linear-gradient(to right, var(--sm-light-1) 50%, var(--sm-dark-1) 50%);

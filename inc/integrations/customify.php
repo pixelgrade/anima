@@ -315,11 +315,11 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 
 function rosa2_add_colors_section_to_customify_config( $config ) {
 
-	$rosa2_colors_section = array(
+	$colors_section = array(
 		'colors_section' => array(
 			'title'   => esc_html__( 'Colors', '__theme_txtd' ),
 			'options' => array(
-				'rosa2_color_1'       => array(
+				'color_1'       => array(
 					'type'    => 'color',
 					'live'    => true,
 					'label'   => esc_html__( 'Rosa Primary Color', '__theme_txtd' ),
@@ -331,7 +331,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 						),
 					),
 				),
-				'rosa2_color_2'       => array(
+				'color_2'       => array(
 					'type'    => 'color',
 					'live'    => true,
 					'label'   => esc_html__( 'Rosa Secondary Color', '__theme_txtd' ),
@@ -343,7 +343,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 						),
 					),
 				),
-				'rosa2_color_3'       => array(
+				'color_3'       => array(
 					'type'    => 'color',
 					'live'    => true,
 					'label'   => esc_html__( 'Rosa Tertiary Color', '__theme_txtd' ),
@@ -355,7 +355,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 						),
 					),
 				),
-				'rosa2_color_dark_1'  => array(
+				'color_dark_1'  => array(
 					'type'    => 'color',
 					'live'    => true,
 					'label'   => esc_html__( 'Rosa Primary Dark Color', '__theme_txtd' ),
@@ -367,7 +367,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 						),
 					),
 				),
-				'rosa2_color_dark_2'  => array(
+				'color_dark_2'  => array(
 					'type'    => 'color',
 					'live'    => true,
 					'label'   => esc_html__( 'Rosa Secondary Dark Color', '__theme_txtd' ),
@@ -379,7 +379,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 						),
 					),
 				),
-				'rosa2_color_dark_3'  => array(
+				'color_dark_3'  => array(
 					'type'    => 'color',
 					'live'    => true,
 					'label'   => esc_html__( 'Rosa Tertiary Dark Color', '__theme_txtd' ),
@@ -391,7 +391,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 						),
 					),
 				),
-				'rosa2_color_light_1' => array(
+				'color_light_1' => array(
 					'type'    => 'color',
 					'live'    => true,
 					'label'   => esc_html__( 'Rosa Primary Light Color', '__theme_txtd' ),
@@ -403,7 +403,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 						),
 					),
 				),
-				'rosa2_color_light_2' => array(
+				'color_light_2' => array(
 					'type'    => 'color',
 					'live'    => true,
 					'label'   => esc_html__( 'Rosa Secondary Light Color', '__theme_txtd' ),
@@ -415,7 +415,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 						),
 					),
 				),
-				'rosa2_color_light_3' => array(
+				'color_light_3' => array(
 					'type'    => 'color',
 					'live'    => true,
 					'label'   => esc_html__( 'Rosa Tertiary Light Color', '__theme_txtd' ),
@@ -435,7 +435,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 		$config['sections'] = array();
 	}
 
-	$config['sections'] = $config['sections'] + $rosa2_colors_section;
+	$config['sections'] = $config['sections'] + $colors_section;
 
 	return $config;
 }
@@ -551,55 +551,55 @@ function rosa2_add_customify_connected_fields( $options ) {
 				'sm_color_primary'   => array(
 					'default'          => ROSA2_THEME_COLOR_PRIMARY,
 					'connected_fields' => array(
-						'rosa2_color_1'
+						'color_1'
 					),
 				),
 				'sm_color_secondary' => array(
 					'default'          => ROSA2_THEME_COLOR_SECONDARY,
 					'connected_fields' => array(
-						'rosa2_color_2'
+						'color_2'
 					),
 				),
 				'sm_color_tertiary'  => array(
 					'default'          => ROSA2_THEME_COLOR_TERTIARY,
 					'connected_fields' => array(
-						'rosa2_color_3'
+						'color_3'
 					),
 				),
 				'sm_dark_primary'    => array(
 					'default'          => ROSA2_THEME_DARK_PRIMARY,
 					'connected_fields' => array(
-						'rosa2_color_dark_1'
+						'color_dark_1'
 					),
 				),
 				'sm_dark_secondary'  => array(
 					'default'          => ROSA2_THEME_DARK_SECONDARY,
 					'connected_fields' => array(
-						'rosa2_color_dark_2'
+						'color_dark_2'
 					),
 				),
 				'sm_dark_tertiary'   => array(
 					'default'          => ROSA2_THEME_DARK_TERTIARY,
 					'connected_fields' => array(
-						'rosa2_color_dark_3'
+						'color_dark_3'
 					),
 				),
 				'sm_light_primary'   => array(
 					'default'          => ROSA2_THEME_LIGHT_PRIMARY,
 					'connected_fields' => array(
-						'rosa2_color_light_1'
+						'color_light_1'
 					),
 				),
 				'sm_light_secondary' => array(
 					'default'          => ROSA2_THEME_LIGHT_SECONDARY,
 					'connected_fields' => array(
-						'rosa2_color_light_2'
+						'color_light_2'
 					),
 				),
 				'sm_light_tertiary'  => array(
 					'default'          => ROSA2_THEME_LIGHT_TERTIARY,
 					'connected_fields' => array(
-						'rosa2_color_light_3'
+						'color_light_3'
 					),
 				),
 			),
