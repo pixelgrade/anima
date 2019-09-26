@@ -15,13 +15,16 @@
 .novablocks-media__aside {
     flex-basis: calc(50% + var(--novablocks-media-spacing));
 
-    &[class] {
-        order: -1;
+    @include above(tablet) {
+        &[class] {
+            order: -1;
+        }
     }
-}
 
-.novablocks-media {
-    --element-spacing: var(--theme-spacing-large);
+    @include below(tablet) {
+        min-height: 300px;
+    }
+
 }
 
 .block-is-moderate {
@@ -29,6 +32,24 @@
 }
 
 .novablocks-media {
+    --element-spacing: var(--theme-spacing-large);
     --novablocks-media-content-padding: var(--theme-spacing-fluid-large);
     --novablocks-media-spacing: var(--theme-spacing-fluid-normal);
+}
+
+.novablocks-media--blog {
+    --element-spacing: var(--theme-spacing-normal);
+}
+
+.novablocks-media--blog {
+    .novablocks-media__content {
+        margin-bottom: 0;
+    }
+}
+
+
+.novablocks-media__content {
+    @include below(tablet) {
+        margin-bottom: var(--element-spacing);
+    }
 }

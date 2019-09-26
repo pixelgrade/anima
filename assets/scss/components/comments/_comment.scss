@@ -3,6 +3,32 @@
     position: relative;
 }
 
+.comment {
+    position: relative;
+
+    .edit-link {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        opacity: 0;
+        transition: all .5s ease;
+    }
+
+    .children {
+        margin-left: var(--theme-spacing-normal);
+        margin-top: var(--theme-spacing-normal);
+
+        .children {
+            margin-left: 0;
+        }
+
+        @include below(lap) {
+            margin-left: 1.25em;
+        }
+    }
+}
+
 .comment__wrapper {
     display: flex;
     align-items: flex-start;
@@ -33,11 +59,15 @@
 }
 
 .comment__header {
-    display: flex;
+    @include above(tablet) {
+        display: flex;
+    }
 }
 
 .comment__metadata {
-    margin-left: var(--theme-comment-metadata-spacing);
+    @include above(tablet) {
+        margin-left: var(--theme-comment-metadata-spacing);
+    }
 }
 
 .comment__content {

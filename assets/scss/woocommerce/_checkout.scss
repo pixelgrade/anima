@@ -438,3 +438,25 @@ ul.order_details[class] {
     @include apply-font(heading-4);
   }
 }
+
+.woocommerce-error,
+.woocommerce-info,
+.woocommerce-message {
+  background-color: var(--current-light-tertiary);
+  color: var(--current-dark-primary);
+}
+
+#add_payment_method #payment div.payment_box,
+.woocommerce-cart #payment div.payment_box,
+.woocommerce-checkout #payment div.payment_box {
+  color: var(--current-dark-primary);
+}
+
+#ship-to-different-address {
+  @include apply-font(heading-4);
+
+  .woocommerce-form__label {
+    display: flex;
+    align-items: center;
+  }
+}

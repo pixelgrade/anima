@@ -42,7 +42,7 @@ $page_id = get_option( 'page_for_posts' ); ?>
 
 			<?php
                 get_template_part( 'template-parts/loop' );
-                the_posts_navigation();
+				rosa2_the_posts_pagination();
 			} else {
 				get_template_part( 'template-parts/content', 'none' );
 			} ?>
