@@ -1,0 +1,35 @@
+.wp-block[data-type="novablocks/header"] {
+  .editor-block-list__layout {
+    display: grid;
+    align-items: center;
+    grid-gap: 1em;
+    grid-template-columns: 1fr auto 1fr;
+
+    .wp-block {
+      margin: 0;
+      max-width: 100%;
+    }
+
+    > :last-child {
+      justify-content: flex-end;
+    }
+  }
+}
+
+.wp-block[data-type="novablocks/navigation"] {
+  display: flex;
+}
+
+.c-logo__inverted {
+  opacity: 0;
+}
+
+.is-dark-theme {
+  .c-logo__default {
+    opacity: 0;
+  }
+
+  .c-logo__inverted {
+    opacity: 1;
+  }
+}
