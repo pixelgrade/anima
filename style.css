@@ -1294,7 +1294,7 @@ ul.menu a,
     right: 0;
     bottom: 0;
     left: 0;
-    box-shadow: currentColor 0 1px 2px;
+    box-shadow: #000000 0 1px 2px;
     opacity: 0.1;
     pointer-events: none;
     transition: opacity 0.3s ease; } }
@@ -2768,6 +2768,17 @@ label.subscribe-label.subscribe-label {
   margin-top: var(--element-spacing); }
 
 /* Table Block */
+* {
+  --novablocks-color-1: var(--current-color-primary);
+  --novablocks-color-2: var(--current-color-secondary);
+  --novablocks-color-3: var(--current-color-tertiary);
+  --novablocks-dark-1: var(--current-dark-primary);
+  --novablocks-dark-2: var(--current-dark-secondary);
+  --novablocks-dark-3: var(--current-dark-tertiary);
+  --novablocks-light-1: var(--current-light-primary);
+  --novablocks-light-2: var(--current-light-secondary);
+  --novablocks-light-3: var(--current-light-tertiary); }
+
 /*.novablocks-media*/
 .block-is-moderate + .block-is-moderate,
 .block-is-highlighted + .block-is-moderate,
@@ -2796,23 +2807,39 @@ label.subscribe-label.subscribe-label {
 .novablocks-hero {
   margin-top: 0; }
 
-:root {
-  --novablocks-color-1: var(--current-color-primary);
-  --novablocks-color-2: var(--current-color-secondary);
-  --novablocks-color-3: var(--current-color-tertiary);
-  --novablocks-dark-1: var(--current-dark-primary);
-  --novablocks-dark-2: var(--current-dark-secondary);
-  --novablocks-dark-3: var(--current-dark-tertiary);
-  --novablocks-light-1: var(--current-light-primary);
-  --novablocks-light-2: var(--current-light-secondary);
-  --novablocks-light-3: var(--current-light-tertiary); }
-
 .novablocks-announcement-bar {
   --novablocks-announcement-color: var(--sm-light-primary);
   --novablocks-announcement-background-color: var(--sm-color-primary); }
 
 .is-style-alternative {
   --novablocks-announcement-background-color: var(--sm-color-secondary); }
+
+.novablocks-media.content-is-moderate {
+  --novablocks-media-content-box-shadow:
+            0 32px 128px rgba(0, 0, 0, 0.1),
+            0 16px 64px rgba(0, 0, 0, 0.1),
+            0 8px 16px rgba(0, 0, 0, 0.1); }
+
+.novablocks-media.novablocks-media--blog {
+  --novablocks-media-content-box-shadow: none; }
+
+.novablocks-media.novablocks-media--no-thumbnail .novablocks-media__image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--current-light-primary); }
+  .novablocks-media.novablocks-media--no-thumbnail .novablocks-media__image path {
+    fill: var(--current-color-primary); }
+
+.novablocks-media__inner-container .wp-block-separator + * {
+  --element-spacing: var(--theme-spacing); }
+
+.novablocks-hero__inner-container > :not(:first-child) {
+  --element-spacing: var(--theme-spacing); }
+
+.novablocks-hero__inner-container > .wp-block-separator:not(:first-child),
+.novablocks-hero__inner-container > .wp-block-separator + * {
+  --element-spacing: var(--theme-spacing-normal); }
 
 /* Nova Blocks */
 .novablocks-media__inner-container {
@@ -3200,17 +3227,6 @@ label.subscribe-label.subscribe-label {
 .blog .entry-header,
 .search .entry-header {
   padding-bottom: 0; }
-
-.novablocks-media--blog {
-  --novablocks-media-content-box-shadow: none; }
-
-.novablocks-media--no-thumbnail .novablocks-media__image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--current-light-primary); }
-  .novablocks-media--no-thumbnail .novablocks-media__image path {
-    fill: var(--current-color-primary); }
 
 body {
   background: var(--current-light-tertiary); }
@@ -3957,16 +3973,6 @@ iframe.instagram-media {
   max-width: 100% !important;
   min-width: 0 !important;
   margin-right: 0 !important; }
-
-.novablocks-media__inner-container .wp-block-separator + * {
-  --element-spacing: var(--theme-spacing); }
-
-.novablocks-hero__inner-container > :not(:first-child) {
-  --element-spacing: var(--theme-spacing); }
-
-.novablocks-hero__inner-container > .wp-block-separator:not(:first-child),
-.novablocks-hero__inner-container > .wp-block-separator + * {
-  --element-spacing: var(--theme-spacing-normal); }
 
 .is-style-lead {
   font-family: var(--current-font-family);

@@ -1294,7 +1294,7 @@ ul.menu a,
     left: 0;
     bottom: 0;
     right: 0;
-    box-shadow: currentColor 0 1px 2px;
+    box-shadow: #000000 0 1px 2px;
     opacity: 0.1;
     pointer-events: none;
     transition: opacity 0.3s ease; } }
@@ -3201,17 +3201,6 @@ label.subscribe-label.subscribe-label {
 .search .entry-header {
   padding-bottom: 0; }
 
-.novablocks-media--blog {
-  --novablocks-media-content-box-shadow: none; }
-
-.novablocks-media--no-thumbnail .novablocks-media__image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--current-light-primary); }
-  .novablocks-media--no-thumbnail .novablocks-media__image path {
-    fill: var(--current-color-primary); }
-
 body {
   background: var(--current-light-tertiary); }
 
@@ -3957,16 +3946,6 @@ iframe.instagram-media {
   max-width: 100% !important;
   min-width: 0 !important;
   margin-left: 0 !important; }
-
-.novablocks-media__inner-container .wp-block-separator + * {
-  --element-spacing: var(--theme-spacing); }
-
-.novablocks-hero__inner-container > :not(:first-child) {
-  --element-spacing: var(--theme-spacing); }
-
-.novablocks-hero__inner-container > .wp-block-separator:not(:first-child),
-.novablocks-hero__inner-container > .wp-block-separator + * {
-  --element-spacing: var(--theme-spacing-normal); }
 
 .is-style-lead {
   font-family: var(--current-font-family);
