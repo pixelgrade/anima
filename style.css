@@ -1200,12 +1200,18 @@ ul.menu a,
   .site-header--fixed.site-header--scrolled .c-logo__inverted,
   .site-header--fixed.site-header--normal .c-logo__inverted {
     opacity: 0; }
+    .is-dark-mode .site-header--fixed.site-header--scrolled .c-logo__inverted, .is-dark-mode
+    .site-header--fixed.site-header--normal .c-logo__inverted {
+      opacity: 1; }
 
 .c-logo__default {
   opacity: 0; }
   .site-header--fixed.site-header--scrolled .c-logo__default,
   .site-header--fixed.site-header--normal .c-logo__default {
     opacity: 1; }
+    .is-dark-mode .site-header--fixed.site-header--scrolled .c-logo__default, .is-dark-mode
+    .site-header--fixed.site-header--normal .c-logo__default {
+      opacity: 0; }
 
 /* 2.2. Site Content */
 /* 2.3. Site Footer */

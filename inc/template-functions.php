@@ -36,7 +36,7 @@ function rosa2_body_classes( $classes ) {
 		$classes[] = 'has-moderate-media-card-after-hero';
 	}
 
-	if ( ! empty( pixelgrade_option( 'sm_dark_mode' ) ) ) {
+	if ( 'on' === pixelgrade_option( 'sm_dark_mode' ) ) {
 		$classes[] = 'is-dark-mode';
 	}
 
