@@ -7,6 +7,11 @@
  * @package Rosa2
  */
 
+// If this file is called directly, abort.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Jetpack setup function.
  *

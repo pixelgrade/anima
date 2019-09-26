@@ -25,7 +25,7 @@ if ( post_password_required() ) {
     // You can start editing here -- including this comment!
     if ( have_comments() ) { ?>
 
-        <?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // Are there comments to navigate through? ?>
+        <?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) { // Are there comments to navigate through? ?>
             <nav id="comment-nav-above" class="navigation comment-navigation" role="navigation">
                 <h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', '__theme_txtd' ); ?></h2>
                 <div class="nav-links">
@@ -33,7 +33,7 @@ if ( post_password_required() ) {
                     <div class="nav-next"><?php next_comments_link( esc_html__( 'Newer Comments', '__theme_txtd' ) ); ?></div>
                 </div><!-- .nav-links -->
             </nav><!-- #comment-nav-above -->
-        <?php endif; // Check for comment navigation. ?>
+        <?php } // Check for comment navigation. ?>
 
         <ol class="comment-list">
             <?php
@@ -41,7 +41,7 @@ if ( post_password_required() ) {
                 array(
                     'style'       => 'ol',
                     'short_ping'  => true,
-                    'callback'    => 'pixelgrade_shape_comment',
+                    'callback'    => 'rosa2_shape_comment',
                     'avatar_size' => 56,
                 )
             );

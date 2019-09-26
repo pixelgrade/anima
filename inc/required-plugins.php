@@ -5,6 +5,11 @@
  * @package Rosa2
  */
 
+// If this file is called directly, abort.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 require_once trailingslashit( get_template_directory() ) . 'inc/required-plugins/class-tgm-plugin-activation.php';
 
 function rosa2_register_required_plugins() {
@@ -29,6 +34,7 @@ function rosa2_register_required_plugins() {
 		array(
 			'name'     => 'Customify',
 			'slug'     => 'customify',
+			'is_callable' => 'PixCustomifyPlugin',
 			'required' => true,
 		),
 		array(
@@ -37,9 +43,9 @@ function rosa2_register_required_plugins() {
 			'required' => true,
 		),
 		array(
-			'name'     => 'WooCommerce',
-			'slug'     => 'woocommerce',
-			'required' => false,
+			'name'     => 'Gutenberg',
+			'slug'     => 'gutenberg',
+			'required' => true,
 		),
 	);
 

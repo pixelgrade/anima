@@ -5,6 +5,11 @@
  * @package Rosa2
  */
 
+// If this file is called directly, abort.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Handle the specific Pixelgrade Care integration.
  */
@@ -180,7 +185,6 @@ function rosa2_pixcare_install_page() {
 	exit;
 }
 add_action( 'admin_init', 'rosa2_pixcare_install_page' );
-
 
 /**
  * @param $title

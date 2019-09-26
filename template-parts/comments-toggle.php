@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <input type="checkbox" name="comments-toggle" id="nova-comments-toggle"
-       class="c-comments-toggle__checkbox" <?php pixelgrade_comments_toggle_checked_attribute(); ?> />
+       class="c-comments-toggle__checkbox" <?php rosa2_comments_toggle_checked_attribute(); ?> />
 
 <label class="c-comments-toggle__label" for="nova-comments-toggle">
     <span class="c-comments-toggle__icon"></span>
