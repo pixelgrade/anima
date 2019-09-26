@@ -138,8 +138,8 @@
     width: 4em;
     padding-left: 1em;
     padding-right: .3em;
-    background-color:  var(--sm-dark-1);
-    color: var(--sm-light-1);
+    background-color:  var(--theme-dark-primary);
+    color: var(--theme-light-primary);
   }
 
   .woocommerce-grouped-product-list-item__price {
@@ -193,10 +193,10 @@
 
   > :not(.active) a {
     text-decoration: none;
-    color: var(--theme-sm-dark-1);
+    color: var(--current-dark-primary);
 
     &:hover {
-      color: var(--theme-sm-color-1);
+      color: var(--current-color-primary);
       border-bottom: .125em solid currentColor;
     }
   }
@@ -241,7 +241,7 @@
 
 // unstyle price
 .woocommerce[class] .product .price {
-  color: var(--sm-dark-1);
+  color: var(--theme-dark-primary);
 
   ins {
     font-weight: inherit;
@@ -314,9 +314,9 @@
     top: var(--theme-spacing-tiny);
     left: var(--theme-spacing-tiny);
     padding: .6em 1.1em .7em 1.2em;
-    background-color: var(--sm-color-1);
+    background-color: var(--theme-color-primary);
 
-    color: var(--sm-light-1);
+    color: var(--theme-light-primary);
     text-align: center;
 
     border-radius: 0;
@@ -539,12 +539,12 @@
 
 .woocommerce-breadcrumb {
   @include specific(1) {
-    color: var(--theme-sm-color-1);
+    color: var(--current-color-primary);
     a {
-      color: var(--theme-sm-color-1);
+      color: var(--current-color-primary);
 
       &:hover {
-        color: var(--theme-sm-dark-1);
+        color: var(--current-dark-primary);
       }
     }
   }

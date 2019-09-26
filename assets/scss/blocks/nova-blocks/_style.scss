@@ -11,15 +11,24 @@
 
 // hook Nova custom properties to the theme's
 :root {
-    --novablocks-color-1: var(--theme-sm-color-1);
-    --novablocks-color-2: var(--theme-sm-color-2);
-    --novablocks-color-3: var(--theme-sm-color-3);
+    --novablocks-color-1: var(--current-color-primary);
+    --novablocks-color-2: var(--current-color-secondary);
+    --novablocks-color-3: var(--current-color-tertiary);
 
-    --novablocks-dark-1: var(--theme-sm-dark-1);
-    --novablocks-dark-2: var(--theme-sm-dark-2);
-    --novablocks-dark-3: var(--theme-sm-dark-3);
+    --novablocks-dark-1: var(--current-dark-primary);
+    --novablocks-dark-2: var(--current-dark-secondary);
+    --novablocks-dark-3: var(--current-dark-tertiary);
 
-    --novablocks-light-1: var(--theme-sm-light-1);
-    --novablocks-light-2: var(--theme-sm-light-2);
-    --novablocks-light-3: var(--theme-sm-light-3);
+    --novablocks-light-1: var(--current-light-primary);
+    --novablocks-light-2: var(--current-light-secondary);
+    --novablocks-light-3: var(--current-light-tertiary);
+}
+
+.novablocks-announcement-bar {
+    --novablocks-announcement-color: var(--sm-light-primary);
+    --novablocks-announcement-background-color: var(--sm-color-primary);
+}
+
+.is-style-alternative {
+    --novablocks-announcement-background-color: var(--sm-color-secondary);
 }

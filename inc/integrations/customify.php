@@ -344,7 +344,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--sm-color-1',
+							'property' => '--theme-color-primary',
 						),
 					),
 				),
@@ -356,7 +356,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--sm-color-2',
+							'property' => '--theme-color-secondary',
 						),
 					),
 				),
@@ -368,7 +368,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--sm-color-3',
+							'property' => '--theme-color-tertiary',
 						),
 					),
 				),
@@ -380,7 +380,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--sm-dark-1',
+							'property' => '--theme-dark-primary',
 						),
 					),
 				),
@@ -392,7 +392,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--sm-dark-2',
+							'property' => '--theme-dark-secondary',
 						),
 					),
 				),
@@ -404,7 +404,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--sm-dark-3',
+							'property' => '--theme-dark-tertiary',
 						),
 					),
 				),
@@ -416,7 +416,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--sm-light-1',
+							'property' => '--theme-light-primary',
 						),
 					),
 				),
@@ -428,7 +428,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--sm-light-2',
+							'property' => '--theme-light-secondary',
 						),
 					),
 				),
@@ -440,7 +440,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--sm-light-3',
+							'property' => '--theme-light-tertiary',
 						),
 					),
 				),

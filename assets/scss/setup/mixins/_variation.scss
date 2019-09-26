@@ -1,80 +1,97 @@
-$destinations: color-1, color-2, color-3, dark-1, dark-2, dark-3, light-1, light-2, light-3;
+$destinations:
+    color-primary,
+    color-secondary,
+    color-tertiary,
+    dark-primary,
+    dark-secondary,
+    dark-tertiary,
+    light-primary,
+    light-secondary,
+    light-tertiary;
 
 $variations: (
     default: (
-        color-1: color-1,
-        color-2: color-2,
-        color-3: color-3,
-        dark-1: dark-1,
-        dark-2: dark-2,
-        dark-3: dark-3,
-        light-1: light-1,
-        light-2: light-2,
-        light-3: light-3,
-    ),
-    // this variation uses the connected fields and not the master colors
-    // and it is affected by the dark mode toggle in the customizer
-    inverted: (
-        color-1: color-1,
-        color-2: color-2,
-        color-3: color-3,
-        dark-1: light-2,
-        dark-2: light-1,
-        dark-3: light-3,
-        light-1: dark-1,
-        light-2: dark-2,
-        light-3: dark-3,
+        // color
+        color-primary: color-primary,
+        color-secondary: color-secondary,
+        color-tertiary: color-tertiary,
+        // dark
+        dark-primary: dark-primary,
+        dark-secondary: dark-secondary,
+        dark-tertiary: dark-tertiary,
+        // light
+        light-primary: light-primary,
+        light-secondary: light-secondary,
+        light-tertiary: light-tertiary,
     ),
     dark: (
-        color-1: color-primary,
-        color-2: color-secondary,
-        color-3: color-tertiary,
-        dark-1: light-secondary,
-        dark-2: light-primary,
-        dark-3: light-tertiary,
-        light-1: dark-primary,
-        light-2: dark-secondary,
-        light-3: dark-tertiary,
+        // color
+        color-primary: color-primary,
+        color-secondary: color-secondary,
+        color-tertiary: color-tertiary,
+        // dark
+        dark-primary: light-secondary,
+        dark-secondary: light-primary,
+        dark-tertiary: light-tertiary,
+        // light
+        light-primary: dark-primary,
+        light-secondary: dark-secondary,
+        light-tertiary: dark-tertiary,
     ),
     darker: (
-        color-1: color-primary,
-        color-2: color-secondary,
-        color-3: color-tertiary,
-        dark-1: light-secondary,
-        dark-2: light-primary,
-        dark-3: light-tertiary,
-        light-1: dark-tertiary,
-        light-2: dark-secondary,
-        light-3: dark-primary,
+        // color
+        color-primary: color-primary,
+        color-secondary: color-secondary,
+        color-tertiary: color-tertiary,
+        // dark
+        dark-primary: light-secondary,
+        dark-secondary: light-primary,
+        dark-tertiary: light-tertiary,
+        // light
+        light-primary: dark-tertiary,
+        light-secondary: dark-secondary,
+        light-tertiary: dark-primary,
     ),
     accent: (
-        color-1: dark-primary,
-        color-2: dark-secondary,
-        color-3: dark-tertiary,
-        dark-1: light-secondary,
-        dark-2: light-primary,
-        dark-3: light-tertiary,
-        light-1: color-primary,
-        light-2: color-secondary,
-        light-3: color-tertiary,
+        // color
+        color-primary: dark-primary,
+        color-secondary: dark-secondary,
+        color-tertiary: dark-tertiary,
+        // dark
+        dark-primary: light-secondary,
+        dark-secondary: light-primary,
+        dark-tertiary: light-tertiary,
+        // light
+        light-primary: color-primary,
+        light-secondary: color-secondary,
+        light-tertiary: color-tertiary,
     ),
     monochrome: (
-        color-1: dark-primary,
-        color-2: dark-secondary,
-        color-3: dark-tertiary,
-        dark-1: dark-primary,
-        dark-2: dark-secondary,
-        dark-3: dark-tertiary,
-        light-1: light-primary,
-        light-2: light-secondary,
-        light-3: light-tertiary,
+        // color
+        color-primary: dark-primary,
+        color-secondary: dark-secondary,
+        color-tertiary: dark-tertiary,
+        // dark
+        dark-primary: dark-primary,
+        dark-secondary: dark-secondary,
+        dark-tertiary: dark-tertiary,
+        // light
+        light-primary: light-primary,
+        light-secondary: light-secondary,
+        light-tertiary: light-tertiary,
     ),
 );
 
-@mixin variation( $name ) {
+@mixin variation( $name, $source-level: sm ) {
+    @if ( $source-level != theme and $source-level != sm ) {
+        @warn 'second parameter can be either "theme" or "sm"';
+    }
+
     $variation: map-get( $variations, $name );
     @each $destination in $destinations {
-        $source: map-deep-get($variations, $name, $destination);
-        --theme-sm-#{$destination}: var(--sm-#{$source});
+        $source-color: map-deep-get($variations, $name, $destination);
+        --current-#{$destination}: var(--#{$source-level}-#{$source-color});
+
+        @debug --current-#{$destination} --#{$source-level}-#{$source-color};
     }
 }
