@@ -39,8 +39,32 @@ function rosa2_header_should_be_fixed() {
 	return false;
 }
 
+function rosa2_has_moderate_media_card_after_hero() {
+	global $post;
+
+	if ( has_blocks( $post->post_content ) ) {
+		$blocks = parse_blocks( $post->post_content );
+		$blocks = array_filter( $blocks, 'rosa2_exclude_null_blocks' );
+		$blocks = array_values( $blocks );
+
+		if ( count( $blocks ) > 1 ) {
+		    $firstBlockIsHero = $blocks[0]['blockName'] === 'novablocks/hero';
+		    $secondBlockIsMedia = $blocks[1]['blockName'] === 'novablocks/media';
+		    $mediaBlockIsAltered = $blocks[1]['attrs']['blockStyle'] === 'moderate';
+			return $firstBlockIsHero && $secondBlockIsMedia && $mediaBlockIsAltered;
+		}
+	}
+
+	return false;
+}
+
+function rosa2_exclude_null_blocks( $block ) {
+    return ! empty( $block['blockName'] );
+}
+
 if ( ! function_exists( 'rosa2_alter_logo_markup' ) ) {
 	function rosa2_alter_logo_markup() {
+
 		if ( has_custom_logo() || rosa2_has_custom_logo_transparent() ) { ?>
 
 			<div class="c-logo site-logo">

@@ -101,9 +101,9 @@
   top: var(--theme-spacing-tiny);
   left: var(--theme-spacing-tiny);
   padding: .3em 1.1em;
-  background-color: var(--theme-sm-color-1);
+  background-color: var(--current-color-primary);
   
-  color: var(--sm-light-1);
+  color: var(--theme-light-primary);
   text-align: center;
 }
 
@@ -112,7 +112,7 @@
 }
 
 .wc-block-grid__product-price {
-  color: var(--sm-dark-1);
+  color: var(--theme-dark-primary);
 
   del {
     opacity: .5;
@@ -131,7 +131,7 @@
 .woocommerce-loop-product__title,
 .woocommerce-loop-category__title {
   @include apply-font(heading-4);
-  color: var(--theme-sm-dark-1);
+  color: var(--current-dark-primary);
 }
 
 .wc-block-grid__product-rating {

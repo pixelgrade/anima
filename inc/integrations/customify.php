@@ -344,7 +344,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--sm-color-1',
+							'property' => '--theme-color-primary',
 						),
 					),
 				),
@@ -356,7 +356,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--sm-color-2',
+							'property' => '--theme-color-secondary',
 						),
 					),
 				),
@@ -368,7 +368,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--sm-color-3',
+							'property' => '--theme-color-tertiary',
 						),
 					),
 				),
@@ -380,7 +380,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--sm-dark-1',
+							'property' => '--theme-dark-primary',
 						),
 					),
 				),
@@ -392,7 +392,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--sm-dark-2',
+							'property' => '--theme-dark-secondary',
 						),
 					),
 				),
@@ -404,7 +404,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--sm-dark-3',
+							'property' => '--theme-dark-tertiary',
 						),
 					),
 				),
@@ -416,7 +416,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--sm-light-1',
+							'property' => '--theme-light-primary',
 						),
 					),
 				),
@@ -428,7 +428,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--sm-light-2',
+							'property' => '--theme-light-secondary',
 						),
 					),
 				),
@@ -440,7 +440,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 					'css'     => array(
 						array(
 							'selector' => ':root',
-							'property' => '--sm-light-3',
+							'property' => '--theme-light-tertiary',
 						),
 					),
 				),
@@ -633,7 +633,7 @@ function rosa2_filter_color_palettes( $color_palettes ) {
 		'default' => array(
 			'label'   => 'Theme Default',
 			'preview' => array(
-				'background_image_url' => 'https://cloud.pixelgrade.com/wp-content/uploads/2019/08/nova-theme.jpg',
+				'background_image_url' => '//cloud.pixelgrade.com/wp-content/uploads/2018/07/rosa-palette.jpg',
 			),
 			'options' => array(
 				'sm_color_primary'   => ROSA2_THEME_COLOR_PRIMARY,
@@ -756,7 +756,7 @@ function rosa2_filter_font_palettes( $font_palettes ) {
 					'font_styles_intervals' => array(
 						array(
 							'start'           => 0,
-							'font_weight'     => '400',
+							'font_weight'     => 'regular',
 							'letter_spacing'  => 'normal',
 							'text_transform'  => 'none',
 							'text_decoration' => 'none',
@@ -773,7 +773,7 @@ function rosa2_filter_font_palettes( $font_palettes ) {
 					'font_styles_intervals' => array(
 						array(
 							'start'           => 0,
-							'font_weight'     => '400',
+							'font_weight'     => 'regular',
 							'letter_spacing'  => 'normal',
 							'text_transform'  => 'none',
 							'text_decoration' => 'none',
@@ -855,7 +855,7 @@ function rosa2_filter_font_palettes( $font_palettes ) {
 					'font_styles_intervals' => array(
 						array(
 							'start'           => 0,
-							'font_weight'     => '400',
+							'font_weight'     => 'regular',
 							'letter_spacing'  => 'normal',
 							'text_transform'  => 'none',
 							'text_decoration' => 'none',
@@ -920,7 +920,7 @@ function rosa2_filter_font_palettes( $font_palettes ) {
 					'font_styles_intervals' => array(
 						array(
 							'start'           => 0,
-							'font_weight'     => '400',
+							'font_weight'     => 'regular',
 							'letter_spacing'  => 'normal',
 							'text_transform'  => 'none',
 							'text_decoration' => 'none',
