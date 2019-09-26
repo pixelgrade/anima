@@ -14,13 +14,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $wp_query;
 
 $classes = array(
-    'novablocks-media',
-    'wp-block-group',
-    'alignfull',
-    'block-is-moderate',
-    'content-is-moderate',
-    'has-background',
+	'novablocks-media',
+	'novablocks-media--blog',
+	'wp-block-group',
+	'alignfull',
+	'content-is-moderate',
+	'block-is-moderate',
+	'has-background',
 );
+
+if (! has_post_thumbnail()) {
+	$classes[] = 'novablocks-media--no-thumbnail';
+}
 
 // We want the first post in the loop on the left, the next one on the right and so on. $wp_query->current_post starts at 0, not at 1.
 $classes[] = ( $wp_query->current_post % 2 ) ? 'has-image-on-the-right' : 'has-image-on-the-left';

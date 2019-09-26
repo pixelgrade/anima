@@ -114,6 +114,20 @@ function rosa2_skip_link_focus_fix() {
 // We will put this script inline since it is so small.
 add_action( 'wp_print_footer_scripts', 'rosa2_skip_link_focus_fix' );
 
+if ( ! function_exists( 'rosa2_custom_excerpt_length' ) ) {
+	/**
+	 * Filter the except length to 25 words.
+	 *
+	 * @param int $length Excerpt length.
+	 *
+	 * @return int (Maybe) modified excerpt length.
+	 */
+	function rosa2_custom_excerpt_length( $length ) {
+		return 25;
+	}
+}
+add_filter( 'excerpt_length', 'rosa2_custom_excerpt_length', 50 );
+
 if ( ! function_exists( 'pixelgrade_user_has_access' ) ) {
 	/**
 	 * Helper function used to check that the user has access to various features.
