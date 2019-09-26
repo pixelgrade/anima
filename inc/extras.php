@@ -264,3 +264,14 @@ if ( ! function_exists( 'rosa2_parse_content_tags' ) ) {
 		return apply_filters( 'pixelgrade_after_parse_content_tags', $content, $original_content );
 	}
 }
+
+if ( ! function_exists('rosa2_dark_mode_support')) {
+    function rosa2_dark_mode_support() {
+	    if ( 'on' === pixelgrade_option( 'sm_dark_mode' ) ) {
+            add_theme_support( 'editor-styles' );
+            add_theme_support( 'dark-editor-style' );
+	    }
+    }
+}
+
+add_action( 'after_setup_theme', 'rosa2_dark_mode_support', 10 );

@@ -1337,6 +1337,20 @@
       background-position: left bottom;
       border-color: currentColor;
       color: var(--theme-light-primary); }
+  .editor-styles-wrapper .wp-block[data-type="novablocks/header"] .editor-block-list__layout {
+    display: grid;
+    align-items: center;
+    grid-gap: 1em;
+    grid-template-columns: 1fr auto 1fr; }
+    .editor-styles-wrapper .wp-block[data-type="novablocks/header"] .editor-block-list__layout .wp-block {
+      margin: 0;
+      max-width: 100%; }
+    .editor-styles-wrapper .wp-block[data-type="novablocks/header"] .editor-block-list__layout > :last-child {
+      justify-content: flex-end; }
+  .editor-styles-wrapper .wp-block[data-type="novablocks/navigation"] {
+    display: flex; }
+  .editor-styles-wrapper .c-logo__inverted {
+    opacity: 0; }
   .editor-styles-wrapper .novablocks-slideshow__arrow {
     background-color: transparent;
     width: 50px;
