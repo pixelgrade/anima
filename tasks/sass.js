@@ -32,4 +32,4 @@ function watch( cb ) {
 const compile = gulp.series( styles, stylesRTL );
 
 gulp.task( 'compile:styles', compile );
-gulp.task( 'watch:styles', gulp.series( compile, watch );
+gulp.task( 'watch:styles', gulp.series( compile, watch ) );
