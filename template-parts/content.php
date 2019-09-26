@@ -13,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $classes = array(
 	'novablocks-media',
+	'novablocks-media--blog',
 	'wp-block-group',
 	'alignfull',
 	'block-is-moderate',

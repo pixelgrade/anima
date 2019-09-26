@@ -37,6 +37,17 @@
     --novablocks-media-spacing: var(--theme-spacing-fluid-normal);
 }
 
+.novablocks-media--blog {
+    --element-spacing: var(--theme-spacing-normal);
+}
+
+.novablocks-media--blog {
+    .novablocks-media__content {
+        margin-bottom: 0;
+    }
+}
+
+
 .novablocks-media__content {
     @include below(tablet) {
         margin-bottom: var(--element-spacing);
