@@ -14,19 +14,20 @@ function styles( cb ) {
     .pipe(gulp.dest('./'));
 }
 
+function stylesRtl() {
+	return gulp.src('style.css')
+	           .pipe(rtlcss())
+	           .pipe(rename('style-rtl.css'))
+	           .pipe(gulp.dest('.'))
+}
+stylesRtl.description = 'Generate style-rtl.css file based on style.css';
+
 function watch( cb ) {
 	cb();
 	gulp.watch( ['./assets/scss/**/*.scss'], styles );
 }
 
-gulp.task( 'compile:styles', gulp.series( styles, stylesRtl ) );
-gulp.task( 'watch:styles', gulp.series( styles, watch ) );
+const compile = gulp.series( styles, stylesRtl );
 
-function stylesRtl() {
-  return gulp.src('style.css')
-    .pipe(rtlcss())
-    .pipe(rename('style-rtl.css'))
-    .pipe(gulp.dest('.'))
-}
-stylesRtl.description = 'Generate style-rtl.css file based on style.css';
-gulp.task('styles-rtl', stylesRtl )
+gulp.task( 'compile:styles', compile );
+gulp.task( 'watch:styles', gulp.series( compile, watch ) );

@@ -5,7 +5,7 @@
   --theme-cite-font-size: 13px;
   --theme-cite-line-height: 1.23077;
   --theme-cite-font-weight: 700;
-  --theme-cite-color: var(--theme-sm-color-1); }
+  --theme-cite-color: var(--current-color-primary); }
 
 :root {
   --theme-font-size-breakpoint: 1440;
@@ -17,20 +17,20 @@
   --theme-addon: calc( var(--theme-addon-unit) * var(--theme-addon-multiplier) ); }
   @media only screen and (min-width: 1440px) {
     :root {
-      --theme-addon-multiplier: 0.6;
+      --theme-font-size-slope-adjust: 0.6;
       --theme-addon-multiplier: 0.4; } }
 
 /* Global CSS Custom Properties */
 :root {
-  --sm-color-1: #DDAB5D;
-  --sm-color-2: #39497C;
-  --sm-color-3: #B12C4A;
-  --sm-dark-1: #212B49;
-  --sm-dark-2: #34394B;
-  --sm-dark-3: #141928;
-  --sm-light-1: #FFFFFF;
-  --sm-light-2: #CCCCCC;
-  --sm-light-3: #EEEFF2;
+  --theme-color-primary: #DDAB5D;
+  --theme-color-secondary: #39497C;
+  --theme-color-tertiary: #B12C4A;
+  --theme-dark-primary: #212B49;
+  --theme-dark-secondary: #34394B;
+  --theme-dark-tertiary: #141928;
+  --theme-light-primary: #FFFFFF;
+  --theme-light-secondary: #CCCCCC;
+  --theme-light-tertiary: #EEEFF2;
   --theme-body-font-size: 8px;
   --theme-content-font-size: 18px;
   --theme-content-width-normal: calc(38 * var(--theme-content-final-font-size));
@@ -59,99 +59,86 @@
       --theme-spacing-fluid: 1rem; } }
 
 :root {
-  --theme-sm-color-1: var(--sm-color-1);
-  --theme-sm-color-2: var(--sm-color-2);
-  --theme-sm-color-3: var(--sm-color-3);
-  --theme-sm-dark-1: var(--sm-dark-1);
-  --theme-sm-dark-2: var(--sm-dark-2);
-  --theme-sm-dark-3: var(--sm-dark-3);
-  --theme-sm-light-1: var(--sm-light-1);
-  --theme-sm-light-2: var(--sm-light-2);
-  --theme-sm-light-3: var(--sm-light-3); }
+  --current-color-primary: var(--theme-color-primary);
+  --current-color-secondary: var(--theme-color-secondary);
+  --current-color-tertiary: var(--theme-color-tertiary);
+  --current-dark-primary: var(--theme-dark-primary);
+  --current-dark-secondary: var(--theme-dark-secondary);
+  --current-dark-tertiary: var(--theme-dark-tertiary);
+  --current-light-primary: var(--theme-light-primary);
+  --current-light-secondary: var(--theme-light-secondary);
+  --current-light-tertiary: var(--theme-light-tertiary); }
 
 .is-style-dark {
-  --theme-sm-color-1: var(--sm-color-1);
-  --theme-sm-color-2: var(--sm-color-2);
-  --theme-sm-color-3: var(--sm-color-3);
-  --theme-sm-dark-1: var(--sm-light-2);
-  --theme-sm-dark-2: var(--sm-light-1);
-  --theme-sm-dark-3: var(--sm-light-3);
-  --theme-sm-light-1: var(--sm-dark-1);
-  --theme-sm-light-2: var(--sm-dark-2);
-  --theme-sm-light-3: var(--sm-dark-3);
-  background-color: var(--theme-sm-light-1);
-  color: var(--theme-sm-dark-2); }
+  --current-color-primary: var(--sm-color-primary);
+  --current-color-secondary: var(--sm-color-secondary);
+  --current-color-tertiary: var(--sm-color-tertiary);
+  --current-dark-primary: var(--sm-light-secondary);
+  --current-dark-secondary: var(--sm-light-primary);
+  --current-dark-tertiary: var(--sm-light-tertiary);
+  --current-light-primary: var(--sm-dark-primary);
+  --current-light-secondary: var(--sm-dark-secondary);
+  --current-light-tertiary: var(--sm-dark-tertiary);
+  background-color: var(--current-light-primary);
+  color: var(--current-dark-secondary); }
   .is-style-dark a {
     color: inherit;
     text-decoration: underline; }
 
 .is-style-darker {
-  --theme-sm-color-1: var(--sm-color-1);
-  --theme-sm-color-2: var(--sm-color-2);
-  --theme-sm-color-3: var(--sm-color-3);
-  --theme-sm-dark-1: var(--sm-light-2);
-  --theme-sm-dark-2: var(--sm-light-1);
-  --theme-sm-dark-3: var(--sm-light-3);
-  --theme-sm-light-1: var(--sm-dark-3);
-  --theme-sm-light-2: var(--sm-dark-2);
-  --theme-sm-light-3: var(--sm-dark-1);
-  background-color: var(--theme-sm-light-1);
-  color: var(--theme-sm-dark-2); }
+  --current-color-primary: var(--sm-color-primary);
+  --current-color-secondary: var(--sm-color-secondary);
+  --current-color-tertiary: var(--sm-color-tertiary);
+  --current-dark-primary: var(--sm-light-secondary);
+  --current-dark-secondary: var(--sm-light-primary);
+  --current-dark-tertiary: var(--sm-light-tertiary);
+  --current-light-primary: var(--sm-dark-tertiary);
+  --current-light-secondary: var(--sm-dark-secondary);
+  --current-light-tertiary: var(--sm-dark-primary);
+  background-color: var(--current-light-primary);
+  color: var(--current-dark-secondary); }
   .is-style-darker a {
     color: inherit;
     text-decoration: underline; }
 
 .is-style-accent {
-  --theme-sm-color-1: var(--sm-dark-1);
-  --theme-sm-color-2: var(--sm-dark-2);
-  --theme-sm-color-3: var(--sm-dark-3);
-  --theme-sm-dark-1: var(--sm-light-2);
-  --theme-sm-dark-2: var(--sm-light-1);
-  --theme-sm-dark-3: var(--sm-light-3);
-  --theme-sm-light-1: var(--sm-color-1);
-  --theme-sm-light-2: var(--sm-color-2);
-  --theme-sm-light-3: var(--sm-color-3);
-  background-color: var(--theme-sm-light-1);
-  color: var(--theme-sm-dark-2); }
+  --current-color-primary: var(--sm-dark-primary);
+  --current-color-secondary: var(--sm-dark-secondary);
+  --current-color-tertiary: var(--sm-dark-tertiary);
+  --current-dark-primary: var(--sm-light-secondary);
+  --current-dark-secondary: var(--sm-light-primary);
+  --current-dark-tertiary: var(--sm-light-tertiary);
+  --current-light-primary: var(--sm-color-primary);
+  --current-light-secondary: var(--sm-color-secondary);
+  --current-light-tertiary: var(--sm-color-tertiary);
+  background-color: var(--current-light-primary);
+  color: var(--current-dark-secondary); }
+
+@media only screen and (min-width: 1440px) {
+  :root {
+    --theme-font-size-slope-adjust: 0; } }
 
 .editor-styles-wrapper {
-  --novablocks-color-1: var(--theme-sm-color-1);
-  --novablocks-color-2: var(--theme-sm-color-2);
-  --novablocks-color-3: var(--theme-sm-color-3);
-  --novablocks-dark-1: var(--theme-sm-dark-1);
-  --novablocks-dark-2: var(--theme-sm-dark-2);
-  --novablocks-dark-3: var(--theme-sm-dark-3);
-  --novablocks-light-1: var(--theme-sm-light-1);
-  --novablocks-light-2: var(--theme-sm-light-2);
-  --novablocks-light-3: var(--theme-sm-light-3); }
-  :root {
-    --theme-button-font-family: Reforma2018, sans-serif;
-    --theme-button-line-height: 1.2;
-    --theme-button-font-weight: 500;
-    --theme-button-letter-spacing: 0.03em;
-    --theme-button-text-transform: capitalize;
-    --theme-button-font-size: 17;
-    --x0: var(--theme-font-size-minimum-value-breakpoint);
-    --y0: var(--theme-font-size-minimum-value);
-    --x1: var(--theme-font-size-breakpoint);
-    --theme-button-y1: var(--theme-button-font-size);
-    --theme-button-y0-new: calc( var(--theme-button-y1) - ( var(--theme-button-y1) - var(--y0) ) * var(--theme-font-size-slope-adjust));
-    --theme-button-a: calc( ( var(--theme-button-y1) - var(--theme-button-y0-new) ) / ( var(--x1) - var(--x0) ));
-    --theme-button-b: calc( var(--theme-button-y0-new) - var(--theme-button-a) * var(--x0));
-    --theme-button-x2: 100vw;
-    --theme-button-y2: calc( var(--theme-button-a) * var(--theme-button-x2) + var(--theme-button-b) * 1px);
-    --theme-button-final-font-size: calc( var(--theme-button-y2) + var(--theme-addon)); }
+  --novablocks-color-1: var(--current-color-primary);
+  --novablocks-color-2: var(--current-color-secondary);
+  --novablocks-color-3: var(--current-color-tertiary);
+  --novablocks-dark-1: var(--current-dark-primary);
+  --novablocks-dark-2: var(--current-dark-secondary);
+  --novablocks-dark-3: var(--current-dark-tertiary);
+  --novablocks-light-1: var(--current-light-primary);
+  --novablocks-light-2: var(--current-light-secondary);
+  --novablocks-light-3: var(--current-light-tertiary); }
   .editor-styles-wrapper .wp-block-button__link {
     transition: var(--current-button-transition); }
   .editor-styles-wrapper .wp-block-button:not(.is-style-text) .wp-block-button__link {
     display: inline-block;
     text-decoration: none;
     cursor: pointer;
-    --theme-button-background-color: var(--theme-sm-dark-1);
-    --theme-button-text-color: var(--theme-sm-light-1);
+    --theme-button-background-color: var(--current-dark-primary);
+    --theme-button-text-color: var(--current-light-primary);
     --theme-button-border-color: transparent;
-    --theme-button-hover-background-color: var(--theme-sm-color-1);
-    --theme-button-hover-text-color: var(--theme-sm-light-1);
+    --theme-button-hover-background-color: var(--current-color-primary);
+    --theme-button-hover-text-color: var(--current-light-primary);
     --theme-button-hover-border-color: transparent;
     --theme-button-border-width: 2px;
     --theme-button-border-radius: 0;
@@ -186,12 +173,12 @@
     .editor-styles-wrapper .wp-block-button:not([class*="is-style"]) .wp-block-button__link:not(.has-background):hover {
       background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
   .editor-styles-wrapper .wp-block-button.is-style-primary .wp-block-button__link[class] {
-    --theme-button-text-color: var(--theme-sm-light-1);
-    --theme-button-background-color: var(--theme-sm-dark-1);
-    --theme-button-border-color: var(--theme-sm-dark-1);
-    --theme-button-hover-text-color: var(--theme-sm-dark-1);
+    --theme-button-text-color: var(--current-light-primary);
+    --theme-button-background-color: var(--current-dark-primary);
+    --theme-button-border-color: var(--current-dark-primary);
+    --theme-button-hover-text-color: var(--current-dark-primary);
     --theme-button-hover-background-color: transparent;
-    --theme-button-hover-border-color: var(--theme-sm-dark-1);
+    --theme-button-hover-border-color: var(--current-dark-primary);
     --theme-button-transition-duration: .4s;
     background-color: transparent;
     background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
@@ -202,12 +189,12 @@
     .editor-styles-wrapper .wp-block-button.is-style-primary .wp-block-button__link[class]:hover {
       background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
   .editor-styles-wrapper .wp-block-button.is-style-secondary .wp-block-button__link[class] {
-    --theme-button-text-color: var(--theme-sm-light-1);
-    --theme-button-background-color: var(--theme-sm-dark-1);
-    --theme-button-border-color: var(--theme-sm-dark-1);
-    --theme-button-hover-text-color: var(--theme-sm-dark-1);
+    --theme-button-text-color: var(--current-light-primary);
+    --theme-button-background-color: var(--current-dark-primary);
+    --theme-button-border-color: var(--current-dark-primary);
+    --theme-button-hover-text-color: var(--current-dark-primary);
     --theme-button-hover-background-color: transparent;
-    --theme-button-hover-border-color: var(--theme-sm-dark-1);
+    --theme-button-hover-border-color: var(--current-dark-primary);
     --theme-button-transition-duration: .4s;
     background-color: transparent;
     background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
@@ -224,8 +211,8 @@
     padding: 0;
     background: none;
     border-width: 0;
-    --theme-button-text-color: var(--theme-sm-color-1);
-    --theme-button-hover-text-color: var(--theme-sm-color-1);
+    --theme-button-text-color: var(--current-color-primary);
+    --theme-button-hover-text-color: var(--current-color-primary);
     --theme-button-arrow-size: 1.15em;
     position: relative;
     padding-right: var(--theme-button-arrow-size);
@@ -290,7 +277,7 @@
     font-family: var(--theme-accent-font-family);
     font-weight: 400;
     text-transform: none;
-    color: var(--theme-sm-color-1);
+    color: var(--current-color-primary);
     letter-spacing: normal; }
   .editor-styles-wrapper .c-headline__secondary {
     font-size: 1.3636em;
@@ -323,7 +310,7 @@
   .editor-styles-wrapper code {
     border: 1px solid;
     border-radius: 0.2em;
-    background: var(--theme-sm-light-2); }
+    background: var(--current-light-secondary); }
   .editor-styles-wrapper pre {
     padding: 1em; }
   .editor-styles-wrapper code {
@@ -539,7 +526,7 @@
 :root {
   --theme-heading-5-font-family: var(--theme-secondary-font-family);
   --theme-heading-5-line-height: 1.5;
-  --theme-heading-5-font-weight: 400;
+  --theme-heading-5-font-weight: 500;
   --theme-heading-5-letter-spacing: inherit;
   --theme-heading-5-text-transform: inherit;
   --theme-heading-5-font-size: 17;
@@ -557,7 +544,7 @@
 :root {
   --theme-heading-6-font-family: var(--theme-secondary-font-family);
   --theme-heading-6-line-height: 1.5;
-  --theme-heading-6-font-weight: 400;
+  --theme-heading-6-font-weight: 500;
   --theme-heading-6-letter-spacing: inherit;
   --theme-heading-6-text-transform: inherit;
   --theme-heading-6-font-size: 17;
@@ -575,7 +562,7 @@
 :root {
   --theme-navigation-font-family: var(--theme-secondary-font-family);
   --theme-navigation-line-height: 1.5;
-  --theme-navigation-font-weight: 400;
+  --theme-navigation-font-weight: 500;
   --theme-navigation-letter-spacing: inherit;
   --theme-navigation-text-transform: inherit;
   --theme-navigation-font-size: 17;
@@ -593,7 +580,7 @@
 :root {
   --theme-meta-font-family: var(--theme-secondary-font-family);
   --theme-meta-line-height: 1.5;
-  --theme-meta-font-weight: 400;
+  --theme-meta-font-weight: 500;
   --theme-meta-letter-spacing: inherit;
   --theme-meta-text-transform: inherit;
   --theme-meta-font-size: 17;
@@ -607,6 +594,24 @@
   --theme-meta-x2: 100vw;
   --theme-meta-y2: calc( var(--theme-meta-a) * var(--theme-meta-x2) + var(--theme-meta-b) * 1px);
   --theme-meta-final-font-size: calc( var(--theme-meta-y2) + var(--theme-addon)); }
+
+:root {
+  --theme-button-font-family: var(--theme-secondary-font-family);
+  --theme-button-line-height: 1.2;
+  --theme-button-font-weight: 500;
+  --theme-button-letter-spacing: 0.03em;
+  --theme-button-text-transform: capitalize;
+  --theme-button-font-size: 17;
+  --x0: var(--theme-font-size-minimum-value-breakpoint);
+  --y0: var(--theme-font-size-minimum-value);
+  --x1: var(--theme-font-size-breakpoint);
+  --theme-button-y1: var(--theme-button-font-size);
+  --theme-button-y0-new: calc( var(--theme-button-y1) - ( var(--theme-button-y1) - var(--y0) ) * var(--theme-font-size-slope-adjust));
+  --theme-button-a: calc( ( var(--theme-button-y1) - var(--theme-button-y0-new) ) / ( var(--x1) - var(--x0) ));
+  --theme-button-b: calc( var(--theme-button-y0-new) - var(--theme-button-a) * var(--x0));
+  --theme-button-x2: 100vw;
+  --theme-button-y2: calc( var(--theme-button-a) * var(--theme-button-x2) + var(--theme-button-b) * 1px);
+  --theme-button-final-font-size: calc( var(--theme-button-y2) + var(--theme-addon)); }
 
 .editor-styles-wrapper[class] h1.has-larger-font-size {
   font-family: var(--current-font-family);
@@ -796,11 +801,11 @@
     display: inline-block;
     text-decoration: none;
     cursor: pointer;
-    --theme-button-background-color: var(--theme-sm-dark-1);
-    --theme-button-text-color: var(--theme-sm-light-1);
+    --theme-button-background-color: var(--current-dark-primary);
+    --theme-button-text-color: var(--current-light-primary);
     --theme-button-border-color: transparent;
-    --theme-button-hover-background-color: var(--theme-sm-color-1);
-    --theme-button-hover-text-color: var(--theme-sm-light-1);
+    --theme-button-hover-background-color: var(--current-color-primary);
+    --theme-button-hover-text-color: var(--current-light-primary);
     --theme-button-hover-border-color: transparent;
     --theme-button-border-width: 2px;
     --theme-button-border-radius: 0;
@@ -1071,7 +1076,7 @@
       right: 0;
       padding: 0.5em 0.75em;
       overflow: hidden;
-      color: var(--theme-sm-light-1);
+      color: var(--current-light-primary);
       white-space: nowrap;
       transform: translateZ(0); }
       .editor-styles-wrapper .wp-block-gallery figcaption:after {
@@ -1085,7 +1090,7 @@
         height: 100%;
         opacity: 0.6;
         z-index: -1;
-        background: var(--theme-sm-dark-2); }
+        background: var(--current-dark-secondary); }
     .editor-styles-wrapper .wp-block-gallery.is-cropped img {
       width: 100%;
       height: 100%;
@@ -1249,7 +1254,7 @@
       .editor-styles-wrapper .novablocks-media__aside {
         min-height: 300px; } }
   .editor-styles-wrapper .block-is-moderate {
-    --novablocks-media-background-color: var(--theme-sm-light-3); }
+    --novablocks-media-background-color: var(--current-light-tertiary); }
   .editor-styles-wrapper .novablocks-media {
     --element-spacing: var(--theme-spacing-large);
     --novablocks-media-content-padding: var(--theme-spacing-fluid-large);
@@ -1269,13 +1274,13 @@
   .editor-styles-wrapper .nova-food-menu__section:not(:first-child) {
     margin-top: var(--theme-spacing-small); }
   .editor-styles-wrapper .nova-food-menu-item--highlighted {
-    border-color: var(--sm-dark-1);
+    border-color: var(--theme-dark-primary);
     border-top: 0;
     margin-left: calc(var(--menu-offset) * -1);
     margin-right: calc(var(--menu-offset) * -1);
     padding: 0 var(--menu-offset) 14px; }
   .editor-styles-wrapper .nova-food-menu-item__highlight-label {
-    background-color: var(--sm-dark-1);
+    background-color: var(--theme-dark-primary);
     padding: var(--theme-spacing-micro) 18px;
     margin-left: calc(var(--menu-offset) * -1);
     margin-right: calc(var(--menu-offset) * -1);
@@ -1318,33 +1323,33 @@
     .editor-styles-wrapper .nova-food-menu-item__title:before {
       border-width: .15em; }
   .editor-styles-wrapper .item-title {
-    background-color: var(--theme-sm-light-1); }
+    background-color: var(--current-light-primary); }
   .editor-styles-wrapper .item-title {
-    background-color: var(--theme-sm-light-1); }
+    background-color: var(--current-light-primary); }
   .editor-styles-wrapper .nova-food-menu-item--highlighted {
     margin-left: 0;
     margin-right: 0; }
   .editor-styles-wrapper .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button {
-    background: linear-gradient(to right, var(--sm-light-1) 50%, var(--sm-dark-1) 50%);
+    background: linear-gradient(to right, var(--theme-light-primary) 50%, var(--theme-dark-primary) 50%);
     background-size: 200% 100%;
     background-position: right bottom;
-    border: 2px solid var(--sm-dark-1);
+    border: 2px solid var(--theme-dark-primary);
     transition: all 0.4s var(--theme-button-transition-easing);
     border-radius: 0; }
     .editor-styles-wrapper .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button:hover {
       background-position: left bottom;
-      color: var(--sm-dark-1); }
+      color: var(--theme-dark-primary); }
   .editor-styles-wrapper .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button {
-    background: linear-gradient(to right, var(--sm-dark-1) 50%, var(--sm-light-1) 50%);
+    background: linear-gradient(to right, var(--theme-dark-primary) 50%, var(--theme-light-primary) 50%);
     background-size: 200% 100%;
     background-position: right bottom;
-    border: 2px solid var(--sm-light-1);
+    border: 2px solid var(--theme-light-primary);
     transition: all 0.4s var(--theme-button-transition-easing);
     border-radius: 0; }
     .editor-styles-wrapper .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button:hover {
       background-position: left bottom;
       border-color: currentColor;
-      color: var(--sm-light-1); }
+      color: var(--theme-light-primary); }
   .editor-styles-wrapper .novablocks-slideshow__arrow {
     background-color: transparent;
     width: 50px;
@@ -1421,7 +1426,7 @@
       content: "";
       display: block;
       height: 0.1em;
-      background-color: var(--theme-sm-color-1);
+      background-color: var(--current-color-primary);
       margin-bottom: var(--theme-spacing);
       max-width: 5em; }
   .editor-styles-wrapper .wp-block-quote cite,
@@ -1462,8 +1467,8 @@
     --current-font-weight: var(--theme-content-font-weight);
     --current-letter-spacing: var(--theme-content-letter-spacing);
     --current-text-transform: var(--theme-content-text-transform);
-    background-color: var(--theme-sm-light-1);
-    color: var(--theme-sm-dark-2); }
+    background-color: var(--current-light-primary);
+    color: var(--current-dark-secondary); }
     .editor-styles-wrapper[class] h1, .editor-styles-wrapper[class] h2, .editor-styles-wrapper[class] h3, .editor-styles-wrapper[class] h4, .editor-styles-wrapper[class] h5, .editor-styles-wrapper[class] h6 {
       margin: 0; }
     .editor-styles-wrapper[class] iframe {
@@ -1522,7 +1527,7 @@
       .editor-styles-wrapper[class] table td:last-child {
         padding-right: 0; }
   .editor-styles-wrapper a {
-    color: var(--theme-sm-color-1);
+    color: var(--current-color-primary);
     text-decoration: none; }
   .editor-styles-wrapper img,
   .editor-styles-wrapper video {
@@ -1585,10 +1590,10 @@
   .editor-styles-wrapper .has-background {
     padding: 1em 1.25em; }
   .editor-styles-wrapper .has-sm-color-primary-background-color {
-    background-color: var(--theme-sm-color-1); }
+    background-color: var(--current-color-primary); }
     .editor-styles-wrapper .has-sm-color-primary-background-color[class][class][class].wp-block-button__link {
       background-color: transparent !important;
-      --theme-button-background-color: var(--theme-sm-color-1);
+      --theme-button-background-color: var(--current-color-primary);
       --theme-button-hover-background-color: transparent; }
       .editor-styles-wrapper .has-sm-color-primary-background-color[class][class][class].wp-block-button__link.is-style-primary {
         --theme-button-transition-duration: .4s;
@@ -1614,18 +1619,18 @@
         .editor-styles-wrapper .has-sm-color-primary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
           --current-button-text-color: var(--theme-button-text-color); }
   .editor-styles-wrapper .has-sm-color-primary-color {
-    color: var(--theme-sm-color-1); }
+    color: var(--current-color-primary); }
     .editor-styles-wrapper .has-sm-color-primary-color[class][class][class].wp-block-button__link {
       color: var(--current-button-text-color) !important;
-      --theme-button-text-color: var(--theme-sm-color-1);
-      --theme-button-hover-text-color: var(--theme-sm-color-1);
-      --theme-button-border-color: var(--theme-sm-color-1);
-      --theme-button-hover-border-color: var(--theme-sm-color-1); }
+      --theme-button-text-color: var(--current-color-primary);
+      --theme-button-hover-text-color: var(--current-color-primary);
+      --theme-button-border-color: var(--current-color-primary);
+      --theme-button-hover-border-color: var(--current-color-primary); }
   .editor-styles-wrapper .has-sm-color-secondary-background-color {
-    background-color: var(--theme-sm-color-2); }
+    background-color: var(--current-color-secondary); }
     .editor-styles-wrapper .has-sm-color-secondary-background-color[class][class][class].wp-block-button__link {
       background-color: transparent !important;
-      --theme-button-background-color: var(--theme-sm-color-2);
+      --theme-button-background-color: var(--current-color-secondary);
       --theme-button-hover-background-color: transparent; }
       .editor-styles-wrapper .has-sm-color-secondary-background-color[class][class][class].wp-block-button__link.is-style-primary {
         --theme-button-transition-duration: .4s;
@@ -1651,18 +1656,18 @@
         .editor-styles-wrapper .has-sm-color-secondary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
           --current-button-text-color: var(--theme-button-text-color); }
   .editor-styles-wrapper .has-sm-color-secondary-color {
-    color: var(--theme-sm-color-2); }
+    color: var(--current-color-secondary); }
     .editor-styles-wrapper .has-sm-color-secondary-color[class][class][class].wp-block-button__link {
       color: var(--current-button-text-color) !important;
-      --theme-button-text-color: var(--theme-sm-color-2);
-      --theme-button-hover-text-color: var(--theme-sm-color-2);
-      --theme-button-border-color: var(--theme-sm-color-2);
-      --theme-button-hover-border-color: var(--theme-sm-color-2); }
+      --theme-button-text-color: var(--current-color-secondary);
+      --theme-button-hover-text-color: var(--current-color-secondary);
+      --theme-button-border-color: var(--current-color-secondary);
+      --theme-button-hover-border-color: var(--current-color-secondary); }
   .editor-styles-wrapper .has-sm-color-tertiary-background-color {
-    background-color: var(--theme-sm-color-3); }
+    background-color: var(--current-color-tertiary); }
     .editor-styles-wrapper .has-sm-color-tertiary-background-color[class][class][class].wp-block-button__link {
       background-color: transparent !important;
-      --theme-button-background-color: var(--theme-sm-color-3);
+      --theme-button-background-color: var(--current-color-tertiary);
       --theme-button-hover-background-color: transparent; }
       .editor-styles-wrapper .has-sm-color-tertiary-background-color[class][class][class].wp-block-button__link.is-style-primary {
         --theme-button-transition-duration: .4s;
@@ -1688,18 +1693,18 @@
         .editor-styles-wrapper .has-sm-color-tertiary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
           --current-button-text-color: var(--theme-button-text-color); }
   .editor-styles-wrapper .has-sm-color-tertiary-color {
-    color: var(--theme-sm-color-3); }
+    color: var(--current-color-tertiary); }
     .editor-styles-wrapper .has-sm-color-tertiary-color[class][class][class].wp-block-button__link {
       color: var(--current-button-text-color) !important;
-      --theme-button-text-color: var(--theme-sm-color-3);
-      --theme-button-hover-text-color: var(--theme-sm-color-3);
-      --theme-button-border-color: var(--theme-sm-color-3);
-      --theme-button-hover-border-color: var(--theme-sm-color-3); }
+      --theme-button-text-color: var(--current-color-tertiary);
+      --theme-button-hover-text-color: var(--current-color-tertiary);
+      --theme-button-border-color: var(--current-color-tertiary);
+      --theme-button-hover-border-color: var(--current-color-tertiary); }
   .editor-styles-wrapper .has-sm-dark-primary-background-color {
-    background-color: var(--theme-sm-dark-1); }
+    background-color: var(--current-dark-primary); }
     .editor-styles-wrapper .has-sm-dark-primary-background-color[class][class][class].wp-block-button__link {
       background-color: transparent !important;
-      --theme-button-background-color: var(--theme-sm-dark-1);
+      --theme-button-background-color: var(--current-dark-primary);
       --theme-button-hover-background-color: transparent; }
       .editor-styles-wrapper .has-sm-dark-primary-background-color[class][class][class].wp-block-button__link.is-style-primary {
         --theme-button-transition-duration: .4s;
@@ -1725,18 +1730,18 @@
         .editor-styles-wrapper .has-sm-dark-primary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
           --current-button-text-color: var(--theme-button-text-color); }
   .editor-styles-wrapper .has-sm-dark-primary-color {
-    color: var(--theme-sm-dark-1); }
+    color: var(--current-dark-primary); }
     .editor-styles-wrapper .has-sm-dark-primary-color[class][class][class].wp-block-button__link {
       color: var(--current-button-text-color) !important;
-      --theme-button-text-color: var(--theme-sm-dark-1);
-      --theme-button-hover-text-color: var(--theme-sm-dark-1);
-      --theme-button-border-color: var(--theme-sm-dark-1);
-      --theme-button-hover-border-color: var(--theme-sm-dark-1); }
+      --theme-button-text-color: var(--current-dark-primary);
+      --theme-button-hover-text-color: var(--current-dark-primary);
+      --theme-button-border-color: var(--current-dark-primary);
+      --theme-button-hover-border-color: var(--current-dark-primary); }
   .editor-styles-wrapper .has-sm-dark-secondary-background-color {
-    background-color: var(--theme-sm-dark-2); }
+    background-color: var(--current-dark-secondary); }
     .editor-styles-wrapper .has-sm-dark-secondary-background-color[class][class][class].wp-block-button__link {
       background-color: transparent !important;
-      --theme-button-background-color: var(--theme-sm-dark-2);
+      --theme-button-background-color: var(--current-dark-secondary);
       --theme-button-hover-background-color: transparent; }
       .editor-styles-wrapper .has-sm-dark-secondary-background-color[class][class][class].wp-block-button__link.is-style-primary {
         --theme-button-transition-duration: .4s;
@@ -1762,18 +1767,18 @@
         .editor-styles-wrapper .has-sm-dark-secondary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
           --current-button-text-color: var(--theme-button-text-color); }
   .editor-styles-wrapper .has-sm-dark-secondary-color {
-    color: var(--theme-sm-dark-2); }
+    color: var(--current-dark-secondary); }
     .editor-styles-wrapper .has-sm-dark-secondary-color[class][class][class].wp-block-button__link {
       color: var(--current-button-text-color) !important;
-      --theme-button-text-color: var(--theme-sm-dark-2);
-      --theme-button-hover-text-color: var(--theme-sm-dark-2);
-      --theme-button-border-color: var(--theme-sm-dark-2);
-      --theme-button-hover-border-color: var(--theme-sm-dark-2); }
+      --theme-button-text-color: var(--current-dark-secondary);
+      --theme-button-hover-text-color: var(--current-dark-secondary);
+      --theme-button-border-color: var(--current-dark-secondary);
+      --theme-button-hover-border-color: var(--current-dark-secondary); }
   .editor-styles-wrapper .has-sm-dark-tertiary-background-color {
-    background-color: var(--theme-sm-dark-3); }
+    background-color: var(--current-dark-tertiary); }
     .editor-styles-wrapper .has-sm-dark-tertiary-background-color[class][class][class].wp-block-button__link {
       background-color: transparent !important;
-      --theme-button-background-color: var(--theme-sm-dark-3);
+      --theme-button-background-color: var(--current-dark-tertiary);
       --theme-button-hover-background-color: transparent; }
       .editor-styles-wrapper .has-sm-dark-tertiary-background-color[class][class][class].wp-block-button__link.is-style-primary {
         --theme-button-transition-duration: .4s;
@@ -1799,18 +1804,18 @@
         .editor-styles-wrapper .has-sm-dark-tertiary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
           --current-button-text-color: var(--theme-button-text-color); }
   .editor-styles-wrapper .has-sm-dark-tertiary-color {
-    color: var(--theme-sm-dark-3); }
+    color: var(--current-dark-tertiary); }
     .editor-styles-wrapper .has-sm-dark-tertiary-color[class][class][class].wp-block-button__link {
       color: var(--current-button-text-color) !important;
-      --theme-button-text-color: var(--theme-sm-dark-3);
-      --theme-button-hover-text-color: var(--theme-sm-dark-3);
-      --theme-button-border-color: var(--theme-sm-dark-3);
-      --theme-button-hover-border-color: var(--theme-sm-dark-3); }
+      --theme-button-text-color: var(--current-dark-tertiary);
+      --theme-button-hover-text-color: var(--current-dark-tertiary);
+      --theme-button-border-color: var(--current-dark-tertiary);
+      --theme-button-hover-border-color: var(--current-dark-tertiary); }
   .editor-styles-wrapper .has-sm-light-primary-background-color {
-    background-color: var(--theme-sm-light-1); }
+    background-color: var(--current-light-primary); }
     .editor-styles-wrapper .has-sm-light-primary-background-color[class][class][class].wp-block-button__link {
       background-color: transparent !important;
-      --theme-button-background-color: var(--theme-sm-light-1);
+      --theme-button-background-color: var(--current-light-primary);
       --theme-button-hover-background-color: transparent; }
       .editor-styles-wrapper .has-sm-light-primary-background-color[class][class][class].wp-block-button__link.is-style-primary {
         --theme-button-transition-duration: .4s;
@@ -1836,18 +1841,18 @@
         .editor-styles-wrapper .has-sm-light-primary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
           --current-button-text-color: var(--theme-button-text-color); }
   .editor-styles-wrapper .has-sm-light-primary-color {
-    color: var(--theme-sm-light-1); }
+    color: var(--current-light-primary); }
     .editor-styles-wrapper .has-sm-light-primary-color[class][class][class].wp-block-button__link {
       color: var(--current-button-text-color) !important;
-      --theme-button-text-color: var(--theme-sm-light-1);
-      --theme-button-hover-text-color: var(--theme-sm-light-1);
-      --theme-button-border-color: var(--theme-sm-light-1);
-      --theme-button-hover-border-color: var(--theme-sm-light-1); }
+      --theme-button-text-color: var(--current-light-primary);
+      --theme-button-hover-text-color: var(--current-light-primary);
+      --theme-button-border-color: var(--current-light-primary);
+      --theme-button-hover-border-color: var(--current-light-primary); }
   .editor-styles-wrapper .has-sm-light-secondary-background-color {
-    background-color: var(--theme-sm-light-2); }
+    background-color: var(--current-light-secondary); }
     .editor-styles-wrapper .has-sm-light-secondary-background-color[class][class][class].wp-block-button__link {
       background-color: transparent !important;
-      --theme-button-background-color: var(--theme-sm-light-2);
+      --theme-button-background-color: var(--current-light-secondary);
       --theme-button-hover-background-color: transparent; }
       .editor-styles-wrapper .has-sm-light-secondary-background-color[class][class][class].wp-block-button__link.is-style-primary {
         --theme-button-transition-duration: .4s;
@@ -1873,18 +1878,18 @@
         .editor-styles-wrapper .has-sm-light-secondary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
           --current-button-text-color: var(--theme-button-text-color); }
   .editor-styles-wrapper .has-sm-light-secondary-color {
-    color: var(--theme-sm-light-2); }
+    color: var(--current-light-secondary); }
     .editor-styles-wrapper .has-sm-light-secondary-color[class][class][class].wp-block-button__link {
       color: var(--current-button-text-color) !important;
-      --theme-button-text-color: var(--theme-sm-light-2);
-      --theme-button-hover-text-color: var(--theme-sm-light-2);
-      --theme-button-border-color: var(--theme-sm-light-2);
-      --theme-button-hover-border-color: var(--theme-sm-light-2); }
+      --theme-button-text-color: var(--current-light-secondary);
+      --theme-button-hover-text-color: var(--current-light-secondary);
+      --theme-button-border-color: var(--current-light-secondary);
+      --theme-button-hover-border-color: var(--current-light-secondary); }
   .editor-styles-wrapper .has-sm-light-tertiary-background-color {
-    background-color: var(--theme-sm-light-3); }
+    background-color: var(--current-light-tertiary); }
     .editor-styles-wrapper .has-sm-light-tertiary-background-color[class][class][class].wp-block-button__link {
       background-color: transparent !important;
-      --theme-button-background-color: var(--theme-sm-light-3);
+      --theme-button-background-color: var(--current-light-tertiary);
       --theme-button-hover-background-color: transparent; }
       .editor-styles-wrapper .has-sm-light-tertiary-background-color[class][class][class].wp-block-button__link.is-style-primary {
         --theme-button-transition-duration: .4s;
@@ -1910,13 +1915,13 @@
         .editor-styles-wrapper .has-sm-light-tertiary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
           --current-button-text-color: var(--theme-button-text-color); }
   .editor-styles-wrapper .has-sm-light-tertiary-color {
-    color: var(--theme-sm-light-3); }
+    color: var(--current-light-tertiary); }
     .editor-styles-wrapper .has-sm-light-tertiary-color[class][class][class].wp-block-button__link {
       color: var(--current-button-text-color) !important;
-      --theme-button-text-color: var(--theme-sm-light-3);
-      --theme-button-hover-text-color: var(--theme-sm-light-3);
-      --theme-button-border-color: var(--theme-sm-light-3);
-      --theme-button-hover-border-color: var(--theme-sm-light-3); }
+      --theme-button-text-color: var(--current-light-tertiary);
+      --theme-button-hover-text-color: var(--current-light-tertiary);
+      --theme-button-border-color: var(--current-light-tertiary);
+      --theme-button-hover-border-color: var(--current-light-tertiary); }
   .editor-styles-wrapper .has-text-align-left {
     text-align: left; }
   .editor-styles-wrapper .has-text-align-center {

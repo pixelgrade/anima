@@ -27,6 +27,10 @@ function rosa2_body_classes( $classes ) {
 		$classes[] = 'has-fixed-site-header';
 	}
 
+	if ( rosa2_has_moderate_media_card_after_hero() ) {
+		$classes[] = 'has-moderate-media-card-after-hero';
+	}
+
 	return $classes;
 }
 add_filter( 'body_class', 'rosa2_body_classes' );

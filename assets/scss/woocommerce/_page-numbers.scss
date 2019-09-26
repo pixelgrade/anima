@@ -102,7 +102,7 @@
 a.page-numbers,
 span.page-numbers {
 
-  color: var(--theme-sm-dark-2);
+  color: var(--current-dark-secondary);
 
   &[class][class] {
     width: 3em;
@@ -112,12 +112,12 @@ span.page-numbers {
     align-items: center;
 
     &.current {
-      background-color: var(--theme-sm-dark-2);
-      color: var(--theme-sm-light-1);
+      background-color: var(--current-dark-secondary);
+      color: var(--current-light-primary);
     }
 
     &:not(.current):hover {
-      color: var(--theme-sm-dark-1);
+      color: var(--current-dark-primary);
     }
   }
 
