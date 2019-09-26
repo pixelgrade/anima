@@ -63,20 +63,12 @@
   --theme-spacing-fluid-small:  calc( var( --theme-spacing-fluid ) * 2 );
   --theme-spacing-fluid-normal: calc( var( --theme-spacing-fluid ) * 3 );
   --theme-spacing-fluid-large:  calc( var( --theme-spacing-fluid ) * 4 );
-<<<<<<< HEAD
-  --theme-spacing-fluid-huge:   calc( var( --theme-spacing-fluid ) * 5 ); }
+  --theme-spacing-fluid-xl:     calc( var( --theme-spacing-fluid ) * 5 );
+  --theme-spacing-fluid-xxl:    calc( var( --theme-spacing-fluid ) * 8 ); }
   @media screen and (min-width: 320px) {
     :root {
       --theme-spacing-fluid: calc(0.2rem + 0.8 * ((100vw - 320px) / 1120)); } }
   @media screen and (min-width: 1440px) {
-=======
-  --theme-spacing-fluid-xl:   calc( var( --theme-spacing-fluid ) * 5 );
-  --theme-spacing-fluid-xxl:    calc( var( --theme-spacing-fluid ) * 8 ); }
-  @media screen and (min-width: 320px) {
-    :root {
-      --theme-spacing-fluid: calc(0.2rem + 0.8 * ((100vw - 320px) / 960)); } }
-  @media screen and (min-width: 1280px) {
->>>>>>> 67743a7bdfa70dbb13803bc64a4f098e38b725d6
     :root {
       --theme-spacing-fluid: 1rem; } }
 
@@ -1299,12 +1291,9 @@
     --theme-button-background-color: var(--theme-dark-primary);
     --theme-button-border-color: var(--theme-dark-primary);
     --theme-button-text-color: var(--theme-light-primary);
-    --theme-button-transition-duration: .4s;
     background-color: transparent;
     background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
     background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-    border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-    border-radius: 0;
     background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%);
     transition: var(--current-button-transition);
     color: var(--theme-button-text-color); }
@@ -1318,12 +1307,9 @@
     --theme-button-background-color: var(--theme-light-primary);
     --theme-button-border-color: var(--theme-light-primary);
     --theme-button-text-color: var(--theme-dark-primary);
-    --theme-button-transition-duration: .4s;
     background-color: transparent;
     background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
     background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-    border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-    border-radius: 0;
     background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%);
     transition: var(--current-button-transition);
     color: var(--theme-button-text-color); }
