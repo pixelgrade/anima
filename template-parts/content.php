@@ -16,9 +16,14 @@ $classes = array(
 	'novablocks-media--blog',
 	'wp-block-group',
 	'alignfull',
+	'content-is-moderate',
 	'block-is-moderate',
 	'has-background',
 );
+
+if (! has_post_thumbnail()) {
+    $classes[] = 'novablocks-media--no-thumbnail';
+}
 
 $classes[] = get_query_var( 'has_image_on_the_left' ) ? 'has-image-on-the-left' : 'has-image-on-the-right';
 

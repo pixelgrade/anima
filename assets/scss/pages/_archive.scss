@@ -1,5 +1,6 @@
 .archive,
-.blog {
+.blog,
+.search {
 
     .novablocks-media__inner-container {
         text-align: center;
@@ -10,15 +11,11 @@
     }
 }
 
-article {
-    .wp-block-button {
-        margin-bottom: 0;
-    }
+.novablocks-media--blog {
+    --novablocks-media-content-box-shadow: none;
+}
 
-    .novablocks-media__inner-container {
-        background-color: var(--current-light-primary);
-    }
-
+.novablocks-media--no-thumbnail {
     .novablocks-media__image {
         display: flex;
         align-items: center;
