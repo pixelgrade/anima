@@ -825,8 +825,6 @@
       --current-button-transition: var(--theme-button-hover-transition); }
     .editor-styles-wrapper .wp-block-button__link:not(.has-text-color) {
       color: var(--current-button-text-color); }
-  .editor-styles-wrapper .wp-block-button:not(.is-style-text) .wp-block-button__link:not(.has-background) {
-    background-color: var(--current-button-background-color); }
   .editor-styles-wrapper ul.wp-block-categories__list[class] {
     list-style: none;
     padding-left: 0; }
@@ -1388,6 +1386,18 @@
     margin-top: 0;
     -webkit-transform: none;
     transform: none; }
+  .editor-styles-wrapper .novablocks-u-background-dark {
+    --theme-sm-color-1: var(--sm-color-1);
+    --theme-sm-color-2: var(--sm-color-2);
+    --theme-sm-color-3: var(--sm-color-3);
+    --theme-sm-dark-1: var(--sm-light-2);
+    --theme-sm-dark-2: var(--sm-light-1);
+    --theme-sm-dark-3: var(--sm-light-3);
+    --theme-sm-light-1: var(--sm-dark-1);
+    --theme-sm-light-2: var(--sm-dark-2);
+    --theme-sm-light-3: var(--sm-dark-3); }
+    .editor-styles-wrapper .novablocks-u-background-dark .novablocks-hero__indicator:after {
+      color: var(--theme-sm-light-1); }
   .editor-styles-wrapper .wp-block-quote,
   .editor-styles-wrapper .wp-block-pullquote {
     font-family: var(--current-font-family);
