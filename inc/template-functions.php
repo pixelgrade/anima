@@ -1,9 +1,14 @@
 <?php
 /**
- * Functions which enhance the theme by hooking into WordPress
+ * Functions which enhance the theme by hooking into WordPress.
  *
  * @package Rosa2
  */
+
+// If this file is called directly, abort.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Adds custom classes to the array of body classes.
@@ -29,6 +34,10 @@ function rosa2_body_classes( $classes ) {
 
 	if ( rosa2_has_moderate_media_card_after_hero() ) {
 		$classes[] = 'has-moderate-media-card-after-hero';
+	}
+
+	if ( 'on' === pixelgrade_option( 'sm_dark_mode' ) ) {
+		$classes[] = 'is-dark-mode';
 	}
 
 	return $classes;

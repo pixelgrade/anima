@@ -29,5 +29,6 @@ if ( empty( $novablocks_responsive_navigation_outputted ) ) { ?>
     </label>
 
 	<?php
+	// Remember the fact so we only output once.
 	$novablocks_responsive_navigation_outputted = true;
 }

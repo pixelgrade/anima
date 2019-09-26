@@ -18,136 +18,10 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 	}
 }
 
-if ( ! function_exists( 'pixelgrade_shape_comment' ) ) {
-	/**
-	 * Template for comments and pingbacks.
-	 *
-	 * Used as a callback by wp_list_comments() for displaying the comments.
-	 *
-	 * @param WP_Comment $comment
-	 * @param array $args
-	 * @param int $depth
-	 */
-	function pixelgrade_shape_comment( $comment, $args, $depth ) {
-		$GLOBALS['comment'] = $comment; // phpcs:ignore
-		switch ( $comment->comment_type ) :
-			case 'pingback':
-			case 'trackback':
-				?>
-                <li class="post pingback">
-                <p><?php esc_html_e( 'Pingback:', '__theme_txtd' ); ?><?php comment_author_link(); ?><?php edit_comment_link( esc_html__( '(Edit)', '__theme_txtd' ), ' ' ); ?></p>
-				<?php
-				break;
-			default: ?>
-
-                <li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
-                <article id="div-comment-<?php comment_ID(); ?>" class="comment__wrapper">
-					<?php if ( 0 != $args['avatar_size'] ) : ?>
-                        <div class="comment__avatar"><?php echo get_avatar( $comment, $args['avatar_size'] ); ?></div>
-					<?php endif; ?>
-
-                    <div class="comment__body">
-
-                        <header class="comment__header">
-
-                            <div class="comment__author vcard">
-								<?php
-								/* translators: %s: comment author link */
-								printf( wp_kses_post( __( '%s <span class="says">says:</span>', '__theme_txtd' ) ), sprintf( '<b class="fn">%s</b>', get_comment_author_link( $comment ) ) );
-								?>
-                            </div><!-- .comment-author -->
-
-                            <div class="comment__metadata">
-                                <a href="<?php echo esc_url( get_comment_link( $comment, $args ) ); ?>">
-                                    <time datetime="<?php esc_attr( get_comment_time( 'c' ) ); ?>">
-										<?php
-										/* translators: 1: comment date, 2: comment time */
-										printf( esc_html__( '%1$s at %2$s', '__theme_txtd' ), esc_html( get_comment_date( '', $comment ) ), esc_html( get_comment_time() ) );
-										?>
-                                    </time>
-                                </a>
-								<?php edit_comment_link( esc_html__( 'Edit', '__theme_txtd' ), '<span class="comment__edit">', '</span>' ); ?>
-                            </div><!-- .comment-metadata -->
-
-							<?php if ( '0' == $comment->comment_approved ) : ?>
-                                <p class="comment-awaiting-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', '__theme_txtd' ); ?></p>
-							<?php endif; ?>
-
-                        </header><!-- .comment-meta -->
-
-                        <div class="comment__content">
-							<?php comment_text( $comment ); ?>
-                        </div><!-- .comment-content -->
-
-						<?php
-						comment_reply_link(
-							array_merge(
-								$args, array(
-									'add_below' => 'div-comment',
-									'depth'     => $depth,
-									'max_depth' => $args['max_depth'],
-									'before'    => '<div class="comment__reply">',
-									'after'     => '</div>',
-								)
-							),
-							$comment
-						);
-						?>
-                    </div>
-                </article><!-- .comment-body -->
-				<?php
-				break;
-		endswitch;
-	} // function
-}
-
-
-if ( ! function_exists( 'pixelgrade_comments_toggle_checked_attribute' ) ) {
-	/**
-	 * Print the comment show/hide control's checked HTML attribute.
-	 *
-	 * We only accept two outcomes: either output 'checked="checked"' or nothing.
-	 */
-	function pixelgrade_comments_toggle_checked_attribute() {
-		// If the outcome is not falsy, output the attribute.
-		if ( pixelgrade_get_comments_toggle_checked_attribute() ) {
-			echo 'checked="checked"';
-		}
-	}
-}
-
-
-if ( ! function_exists( 'pixelgrade_get_comments_toggle_checked_attribute' ) ) {
-	/**
-	 * Return the comment show/hide control's checked HTML attribute.
-	 *
-	 * @return string
-	 */
-	function pixelgrade_get_comments_toggle_checked_attribute() {
-		return apply_filters( 'pixelgrade_get_comments_toggle_checked_attribute', 'checked="checked"' );
-	}
-}
-
-function rosa2_the_read_more_button() {
-	echo rosa2_get_read_more_button();
-}
-
-function rosa2_get_read_more_button() {
-	global $post;
-
-	return
-		'<div class="wp-block-button aligncenter is-style-text">' .
-		'<a class="wp-block-button__link" href="' . get_permalink( $post->ID ) . '">' .
-		__( 'Read more', '__theme_txtd' ) .
-		'</a>' .
-		'</div>';
-}
-
 function rosa2_admin_init() {
 	global $_wp_post_type_features;
 	$_wp_post_type_features['post']['editor'];
 }
-
 add_action( 'admin_init', 'rosa2_admin_init' );
 remove_action( 'edit_form_after_title', '_wp_posts_page_notice' );
 
@@ -188,27 +62,28 @@ function rosa2_exclude_null_blocks( $block ) {
     return ! empty( $block['blockName'] );
 }
 
-function rosa2_alter_logo_markup() {
+if ( ! function_exists( 'rosa2_alter_logo_markup' ) ) {
+	function rosa2_alter_logo_markup() {
 
-	if ( has_custom_logo() || rosa2_has_custom_logo_transparent() ) { ?>
+		if ( has_custom_logo() || rosa2_has_custom_logo_transparent() ) { ?>
 
-        <div class="c-logo site-logo">
-			<?php if ( has_custom_logo() ) { ?>
-                <div class="c-logo__default">
-					<?php the_custom_logo(); ?>
-                </div>
-			<?php } ?>
+			<div class="c-logo site-logo">
+				<?php if ( has_custom_logo() ) { ?>
+					<div class="c-logo__default">
+						<?php the_custom_logo(); ?>
+					</div>
+				<?php } ?>
 
-			<?php if ( rosa2_has_custom_logo_transparent() ) { ?>
-                <div class="c-logo__inverted">
-					<?php rosa2_the_custom_logo_transparent(); ?>
-                </div>
-			<?php } ?>
-        </div>
+				<?php if ( rosa2_has_custom_logo_transparent() ) { ?>
+					<div class="c-logo__inverted">
+						<?php rosa2_the_custom_logo_transparent(); ?>
+					</div>
+				<?php } ?>
+			</div>
 
-	<?php }
+		<?php }
+	}
 }
-
 add_filter( 'novablocks_logo_markup', 'rosa2_alter_logo_markup' );
 
 /**
@@ -236,7 +111,6 @@ function rosa2_skip_link_focus_fix() {
     </script>
 	<?php
 }
-
 // We will put this script inline since it is so small.
 add_action( 'wp_print_footer_scripts', 'rosa2_skip_link_focus_fix' );
 
@@ -253,3 +127,154 @@ if ( ! function_exists( 'rosa2_custom_excerpt_length' ) ) {
 	}
 }
 add_filter( 'excerpt_length', 'rosa2_custom_excerpt_length', 50 );
+
+if ( ! function_exists( 'pixelgrade_user_has_access' ) ) {
+	/**
+	 * Helper function used to check that the user has access to various features.
+	 *
+	 * @param string $feature
+	 *
+	 * @return bool
+	 */
+	function pixelgrade_user_has_access( $feature ) {
+		switch ( $feature ) {
+			case 'pro-features':
+				return apply_filters( 'pixelgrade_enable_pro_features', false );
+				break;
+			case 'woocommerce':
+				return apply_filters( 'pixelgrade_enable_woocommerce', false );
+				break;
+			default:
+				break;
+		}
+
+		return false;
+	}
+}
+
+if ( ! function_exists( 'pixelgrade_get_original_theme_name' ) ) {
+	/**
+	 * Get the current theme original name from the WUpdates code.
+	 *
+	 * @return string
+	 */
+	function pixelgrade_get_original_theme_name() {
+		// Get the id of the current theme
+		$wupdates_ids = apply_filters( 'wupdates_gather_ids', array() );
+		$slug         = basename( get_template_directory() );
+		if ( ! empty( $wupdates_ids[ $slug ]['name'] ) ) {
+			return $wupdates_ids[ $slug ]['name'];
+		}
+
+		// If we couldn't get the WUpdates name, we will fallback to the theme header name entry.
+		$theme_header_name = wp_get_theme( get_template() )->get( 'Name' );
+		if ( ! empty( $theme_header_name ) ) {
+			return ucwords( str_replace( array( '-', '_' ), ' ', $theme_header_name ) );
+		}
+
+		// The ultimate fallback is the template directory, uppercased.
+		return ucwords( str_replace( array( '-', '_' ), ' ', $slug ) );
+	}
+}
+
+function rosa2_woocommerce_setup() {
+	if ( function_exists( 'WC') && pixelgrade_user_has_access('woocommerce') ) {
+
+		// Add the necessary theme support flags
+		add_theme_support( 'woocommerce' );
+		add_theme_support( 'wc-product-gallery-zoom' );
+		add_theme_support( 'wc-product-gallery-lightbox' );
+		add_theme_support( 'wc-product-gallery-slider' );
+
+		// Enqueue static assets
+		add_action( 'wp_enqueue_scripts', 'rosa2_woocommerce_scripts', 10 );
+
+		// Load any custom logic
+		require_once trailingslashit( get_template_directory() ) . 'inc/integrations/woocommerce.php';
+	}
+}
+add_action( 'after_setup_theme', 'rosa2_woocommerce_setup', 10 );
+
+function rosa2_woocommerce_scripts() {
+	$theme  = wp_get_theme( get_template() );
+	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+
+	wp_enqueue_style( 'rosa2-style', get_template_directory_uri() . '/woocommerce.css', array( 'rosa2-style' ), $theme->get( 'Version' ) );
+
+	wp_enqueue_script( 'rosa2-woocommerce', get_template_directory_uri() . '/dist/js/woocommerce' . $suffix . '.js', array( 'jquery' ), $theme->get( 'Version' ), true );
+	wp_localize_script( 'rosa2-woocommerce', 'pixelgradeWooCommerceStrings', array(
+		'adding_to_cart' => esc_html__( 'Adding...', '__theme_txtd' ),
+		'added_to_cart' => esc_html__( 'Added!', '__theme_txtd' ),
+	) );
+
+	wp_deregister_style('wc-block-style');
+}
+
+if ( ! function_exists( 'rosa2_parse_content_tags' ) ) {
+	/**
+	 * Replace any content tags present in the content.
+	 *
+	 * @param string $content
+	 *
+	 * @return string
+	 */
+	function rosa2_parse_content_tags( $content ) {
+		$original_content = $content;
+
+		// Allow others to alter the content before we do our work
+		$content = apply_filters( 'pixelgrade_before_parse_content_tags', $content );
+
+		// Now we will replace all the supported tags with their value
+		// %year%
+		$content = str_replace( '%year%', date( 'Y' ), $content );
+
+		// %site-title% or %site_title%
+		$content = str_replace( '%site-title%', get_bloginfo( 'name' ), $content );
+		$content = str_replace( '%site_title%', get_bloginfo( 'name' ), $content );
+
+		// This is a little sketchy because who is the user?
+		// It is not necessarily the logged in user, nor the Administrator user...
+		// We will go with the author for cases where we are in a post/page context
+		// Since we need to dd some heavy lifting, we will only do it when necessary
+		if ( false !== strpos( $content, '%first_name%' ) ||
+		     false !== strpos( $content, '%last_name%' ) ||
+		     false !== strpos( $content, '%display_name%' ) ) {
+			$user_id = false;
+			// We need to get the current ID in more global manner
+			$current_object_id = get_queried_object_id();
+			$current_post      = get_post( $current_object_id );
+			if ( ! empty( $current_post->post_author ) ) {
+				$user_id = $current_post->post_author;
+			} else {
+				global $authordata;
+				$user_id = isset( $authordata->ID ) ? $authordata->ID : false;
+			}
+
+			// If we still haven't got a user ID, we will just use the first user on the site
+			if ( empty( $user_id ) ) {
+				$blogusers = get_users(
+					array(
+						'role'   => 'administrator',
+						'number' => 1,
+					)
+				);
+				if ( ! empty( $blogusers ) ) {
+					$blogusers = reset( $blogusers );
+					$user_id   = $blogusers->ID;
+				}
+			}
+
+			if ( ! empty( $user_id ) ) {
+				// %first_name%
+				$content = str_replace( '%first_name%', get_the_author_meta( 'first_name', $user_id ), $content );
+				// %last_name%
+				$content = str_replace( '%last_name%', get_the_author_meta( 'last_name', $user_id ), $content );
+				// %display_name%
+				$content = str_replace( '%display_name%', get_the_author_meta( 'display_name', $user_id ), $content );
+			}
+		}
+
+		// Allow others to alter the content after we did our work
+		return apply_filters( 'pixelgrade_after_parse_content_tags', $content, $original_content );
+	}
+}

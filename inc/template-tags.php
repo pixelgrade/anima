@@ -4,11 +4,7 @@
  *
  * Eventually, some of the functionality here could be replaced by core features.
  *
-<<<<<<< HEAD
- * @package Rosa 2
-=======
  * @package Rosa2
->>>>>>> master
  */
 
 if ( ! function_exists( 'rosa2_posted_on' ) ) :
@@ -301,7 +297,7 @@ if ( ! function_exists( 'rosa2_footer_the_copyright' ) ) {
 			$output       .= $copyright_text . "\n";
 			$hide_credits = pixelgrade_option( 'footer_hide_credits', false );
 			if ( empty( $hide_credits ) ) {
-				$output .= '<span class="c-footer__credits">' . sprintf( esc_html__( 'Made with love by %s', '__theme_txtd' ), '<a href="https://pixelgrade.com/?utm_source=rosa2-clients&utm_medium=footer&utm_campaign=rosa2" title="' . esc_html__( 'The Pixelgrade Website', '__theme_txtd' ) . '" rel="nofollow">Pixelgrade</a>' ) . '</span>' . "\n";
+				$output .= '<span class="c-footer__credits">' . sprintf( esc_html__( 'Theme: %1$s by %2$s.', '__theme_txtd' ), esc_html( pixelgrade_get_original_theme_name() ), '<a href="https://pixelgrade.com/?utm_source=rosa2-clients&utm_medium=footer&utm_campaign=rosa2" title="' . esc_html__( 'The Pixelgrade Website', '__theme_txtd' ) . '" rel="nofollow">Pixelgrade</a>' ) . '</span>' . "\n";
 			}
 			$output .= '</div>';
 		}
@@ -327,72 +323,128 @@ if ( ! function_exists( 'rosa2_footer_get_copyright_content' ) ) {
 	}
 }
 
-if ( ! function_exists( 'rosa2_parse_content_tags' ) ) {
+if ( ! function_exists( 'rosa2_shape_comment' ) ) {
 	/**
-	 * Replace any content tags present in the content.
+	 * Template for comments and pingbacks.
 	 *
-	 * @param string $content
+	 * Used as a callback by wp_list_comments() for displaying the comments.
+	 *
+	 * @param WP_Comment $comment
+	 * @param array $args
+	 * @param int $depth
+	 */
+	function rosa2_shape_comment( $comment, $args, $depth ) {
+		$GLOBALS['comment'] = $comment; // phpcs:ignore
+		switch ( $comment->comment_type ) {
+			case 'pingback':
+			case 'trackback': ?>
+
+				<li class="post pingback">
+				<p><?php esc_html_e( 'Pingback:', '__theme_txtd' ); ?><?php comment_author_link(); ?><?php edit_comment_link( esc_html__( '(Edit)', '__theme_txtd' ), ' ' ); ?></p>
+				<?php
+				break;
+			default: ?>
+
+			<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
+				<article id="div-comment-<?php comment_ID(); ?>" class="comment__wrapper">
+					<?php if ( 0 != $args['avatar_size'] ) : ?>
+						<div class="comment__avatar"><?php echo get_avatar( $comment, $args['avatar_size'] ); ?></div>
+					<?php endif; ?>
+
+					<div class="comment__body">
+
+						<header class="comment__header">
+
+							<div class="comment__author vcard">
+								<?php
+								/* translators: %s: comment author link */
+								printf( wp_kses_post( __( '%s <span class="says">says:</span>', '__theme_txtd' ) ), sprintf( '<b class="fn">%s</b>', get_comment_author_link( $comment ) ) );
+								?>
+							</div><!-- .comment-author -->
+
+							<div class="comment__metadata">
+								<a href="<?php echo esc_url( get_comment_link( $comment, $args ) ); ?>">
+									<time datetime="<?php esc_attr( get_comment_time( 'c' ) ); ?>">
+										<?php
+										/* translators: 1: comment date, 2: comment time */
+										printf( esc_html__( '%1$s at %2$s', '__theme_txtd' ), esc_html( get_comment_date( '', $comment ) ), esc_html( get_comment_time() ) );
+										?>
+									</time>
+								</a>
+								<?php edit_comment_link( esc_html__( 'Edit', '__theme_txtd' ), '<span class="comment__edit">', '</span>' ); ?>
+							</div><!-- .comment-metadata -->
+
+							<?php if ( '0' == $comment->comment_approved ) : ?>
+								<p class="comment-awaiting-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', '__theme_txtd' ); ?></p>
+							<?php endif; ?>
+
+						</header><!-- .comment-meta -->
+
+						<div class="comment__content">
+							<?php comment_text( $comment ); ?>
+						</div><!-- .comment-content -->
+
+						<?php
+						comment_reply_link(
+							array_merge(
+								$args, array(
+									'add_below' => 'div-comment',
+									'depth'     => $depth,
+									'max_depth' => $args['max_depth'],
+									'before'    => '<div class="comment__reply">',
+									'after'     => '</div>',
+								)
+							),
+							$comment
+						);
+						?>
+					</div>
+				</article><!-- .comment-body -->
+				<?php
+				break;
+		}
+	}
+}
+
+if ( ! function_exists( 'rosa2_comments_toggle_checked_attribute' ) ) {
+	/**
+	 * Print the comment show/hide control's checked HTML attribute.
+	 *
+	 * We only accept two outcomes: either output 'checked="checked"' or nothing.
+	 */
+	function rosa2_comments_toggle_checked_attribute() {
+		// If the outcome is not falsy, output the attribute.
+		if ( rosa2_get_comments_toggle_checked_attribute() ) {
+			echo 'checked="checked"';
+		}
+	}
+}
+
+
+if ( ! function_exists( 'rosa2_get_comments_toggle_checked_attribute' ) ) {
+	/**
+	 * Return the comment show/hide control's checked HTML attribute.
 	 *
 	 * @return string
 	 */
-	function rosa2_parse_content_tags( $content ) {
-		$original_content = $content;
+	function rosa2_get_comments_toggle_checked_attribute() {
+		return apply_filters( 'pixelgrade_get_comments_toggle_checked_attribute', 'checked="checked"' );
+	}
+}
 
-		// Allow others to alter the content before we do our work
-		$content = apply_filters( 'pixelgrade_before_parse_content_tags', $content );
+if ( ! function_exists( 'rosa2_the_read_more_button' ) ) {
+	function rosa2_the_read_more_button() {
+		echo rosa2_get_read_more_button();
+	}
+}
 
-		// Now we will replace all the supported tags with their value
-		// %year%
-		$content = str_replace( '%year%', date( 'Y' ), $content );
+if ( ! function_exists( 'rosa2_get_read_more_button' ) ) {
+	function rosa2_get_read_more_button() {
 
-		// %site-title% or %site_title%
-		$content = str_replace( '%site-title%', get_bloginfo( 'name' ), $content );
-		$content = str_replace( '%site_title%', get_bloginfo( 'name' ), $content );
-
-		// This is a little sketchy because who is the user?
-		// It is not necessarily the logged in user, nor the Administrator user...
-		// We will go with the author for cases where we are in a post/page context
-		// Since we need to dd some heavy lifting, we will only do it when necessary
-		if ( false !== strpos( $content, '%first_name%' ) ||
-		     false !== strpos( $content, '%last_name%' ) ||
-		     false !== strpos( $content, '%display_name%' ) ) {
-			$user_id = false;
-			// We need to get the current ID in more global manner
-			$current_object_id = get_queried_object_id();
-			$current_post      = get_post( $current_object_id );
-			if ( ! empty( $current_post->post_author ) ) {
-				$user_id = $current_post->post_author;
-			} else {
-				global $authordata;
-				$user_id = isset( $authordata->ID ) ? $authordata->ID : false;
-			}
-
-			// If we still haven't got a user ID, we will just use the first user on the site
-			if ( empty( $user_id ) ) {
-				$blogusers = get_users(
-					array(
-						'role'   => 'administrator',
-						'number' => 1,
-					)
-				);
-				if ( ! empty( $blogusers ) ) {
-					$blogusers = reset( $blogusers );
-					$user_id   = $blogusers->ID;
-				}
-			}
-
-			if ( ! empty( $user_id ) ) {
-				// %first_name%
-				$content = str_replace( '%first_name%', get_the_author_meta( 'first_name', $user_id ), $content );
-				// %last_name%
-				$content = str_replace( '%last_name%', get_the_author_meta( 'last_name', $user_id ), $content );
-				// %display_name%
-				$content = str_replace( '%display_name%', get_the_author_meta( 'display_name', $user_id ), $content );
-			}
-		}
-
-		// Allow others to alter the content after we did our work
-		return apply_filters( 'pixelgrade_after_parse_content_tags', $content, $original_content );
+		return
+			'<div class="wp-block-button aligncenter is-style-text">' .
+			'<a class="wp-block-button__link" href="' . esc_url( get_permalink() ) . '">' . esc_html__( 'Read more', '__theme_txtd' ) . '</a>' .
+			'</div>';
 	}
 }
 

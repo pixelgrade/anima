@@ -95,11 +95,6 @@ if ( ! function_exists( 'rosa2_setup' ) ) {
 		 */
 		add_theme_support( 'customizer_style_manager' );
 		add_theme_support( 'style_manager_font_palettes' );
-
-		add_theme_support( 'woocommerce' );
-		add_theme_support( 'wc-product-gallery-zoom' );
-		add_theme_support( 'wc-product-gallery-lightbox' );
-		add_theme_support( 'wc-product-gallery-slider' );
 	}
 }
 add_action( 'after_setup_theme', 'rosa2_setup' );
@@ -148,14 +143,6 @@ function rosa2_scripts() {
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
-
-	wp_enqueue_script( 'rosa2-woocommerce', get_template_directory_uri() . '/dist/js/woocommerce' . $suffix . '.js', array( 'jquery' ), $theme->get( 'Version' ), true );
-	wp_localize_script( 'rosa2-woocommerce', 'pixelgradeWooCommerceStrings', array(
-		'adding_to_cart' => esc_html__( 'Adding...', '__theme_txtd' ),
-		'added_to_cart' => esc_html__( 'Added!', '__theme_txtd' ),
-	) );
-
-	wp_deregister_style('wc-block-style');
 }
 add_action( 'wp_enqueue_scripts', 'rosa2_scripts', 10 );
 
@@ -239,12 +226,13 @@ function wupdates_check_JxLn7( $transient ) {
 add_filter( 'pre_set_site_transient_update_themes', 'wupdates_check_JxLn7' );
 
 function wupdates_add_id_JxLn7( $ids = array() ) {
+
 	// First get the theme directory name (unique)
 	$slug = basename( get_template_directory() );
 
 	// Now add the predefined details about this product
 	// Do not tamper with these please!!!
-	$ids[ $slug ] = array( 'name' => 'Rosa2', 'slug' => 'rosa2', 'id' => 'JxLn7', 'type' => 'theme', 'digest' => '9e63c805181de3f54425520eb92861b8', );
+	$ids[ $slug ] = array( 'name' => 'Rosa2', 'slug' => 'rosa2', 'id' => 'JxLn7', 'type' => 'theme_modular', 'digest' => '9e90ec2f184468ebb28a829843684498', );
 
 	return $ids;
 }

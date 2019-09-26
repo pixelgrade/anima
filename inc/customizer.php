@@ -1,9 +1,14 @@
 <?php
 /**
- * Rosa 2 Theme Customizer.
+ * Rosa 2 Theme Customizer logic.
  *
  * @package Rosa2
  */
+
+// If this file is called directly, abort.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Add postMessage support for site title and description for the Theme Customizer.

@@ -12,8 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 	</div><!-- #content -->
 
-	<?php if ( function_exists( 'block_areas' ) ) { ?>
-		<?php block_areas()->render( 'footer' );
+	<?php if ( function_exists( 'block_areas' ) ) {
+		block_areas()->render( 'footer' );
 	} else {
 		get_template_part( 'template-parts/site-footer' );
 	} ?>
