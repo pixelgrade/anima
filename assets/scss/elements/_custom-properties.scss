@@ -1,0 +1,70 @@
+/* Global CSS Custom Properties */
+:root {
+    // ===========================================
+    //     COLORS
+    // -------------------------------------------
+    --sm-color-primary: #{$theme-sm-color-1};
+    --sm-color-secondary: #{$theme-sm-color-2};
+    --sm-color-tertiary: #{$theme-sm-color-3};
+    --sm-dark-primary: #{$theme-sm-dark-1};
+    --sm-dark-secondary: #{$theme-sm-dark-2};
+    --sm-dark-tertiary: #{$theme-sm-dark-3};
+    --sm-light-primary: #{$theme-sm-light-1};
+    --sm-light-secondary: #{$theme-sm-light-2};
+    --sm-light-tertiary: #{$theme-sm-light-3};
+
+    @include variation(default, theme, sm);
+    @include variation(default, current, theme);
+
+    // ===========================================
+    //     TYPOGRAPHY
+    // -------------------------------------------
+
+    // font families
+    --theme-body-font-family: #{$theme-sm-font-body};
+    --theme-primary-font-family: #{$theme-sm-font-primary};
+    --theme-secondary-font-family: #{$theme-sm-font-secondary};
+    --theme-accent-font-family: #{$theme-sm-font-accent};
+
+    // fluid typography settings
+    --theme-font-size-breakpoint: #{strip-unit($nova-font-size-breakpoint)};
+    --theme-font-size-minimum-value: #{strip-unit($theme-minimum-font-size)};
+    --theme-font-size-minimum-value-breakpoint: #{strip-unit($nova-font-size-minimum-value-breakpoint)};
+
+    --theme-font-size-slope-adjust: #{$theme-font-size-slope-adjust};
+
+    // create a unit value that is relative to the viewport width to all font sizes
+    --theme-addon-unit: calc( 1vw - var(--theme-font-size-breakpoint) * 1px / 100 );
+    --theme-addon-multiplier: 0;
+    --theme-addon: calc( var(--theme-addon-unit) * var(--theme-addon-multiplier) );
+
+    @media only screen and (min-width: #{$nova-font-size-breakpoint}) {
+        --theme-font-size-slope-adjust: #{$theme-font-size-slope-adjust-desktop};
+        --theme-addon-multiplier: #{$theme-font-size-addon-multiplier-desktop};
+    }
+
+    // ===========================================
+    //     LAYOUT
+    // -------------------------------------------
+    --theme-content-width-normal: calc(#{strip-unit($theme-content-width-normal)} * var(--theme-content-final-font-size));
+    --theme-content-width-wide: calc(#{strip-unit($theme-content-width-wide)} * var(--theme-content-final-font-size));
+
+    // SPACING
+    --theme-spacing: 1rem;
+
+    --theme-spacing-micro:  calc( var( --theme-spacing ) / 4 );
+    --theme-spacing-tiny:   calc( var( --theme-spacing ) / 2 );
+    --theme-spacing-small:  calc( var( --theme-spacing ) * 2 );
+    --theme-spacing-normal: calc( var( --theme-spacing ) * 3 );
+    --theme-spacing-large:  calc( var( --theme-spacing ) * 4 );
+    --theme-spacing-huge:   calc( var( --theme-spacing ) * 5 );
+
+    @include fluid(--theme-spacing-fluid, $nova-font-size-minimum-value-breakpoint, 0.2rem, $nova-font-size-breakpoint, 1rem );
+
+    --theme-spacing-fluid-micro:  calc( var( --theme-spacing-fluid ) / 4 );
+    --theme-spacing-fluid-tiny:   calc( var( --theme-spacing-fluid ) / 2 );
+    --theme-spacing-fluid-small:  calc( var( --theme-spacing-fluid ) * 2 );
+    --theme-spacing-fluid-normal: calc( var( --theme-spacing-fluid ) * 3 );
+    --theme-spacing-fluid-large:  calc( var( --theme-spacing-fluid ) * 4 );
+    --theme-spacing-fluid-huge:   calc( var( --theme-spacing-fluid ) * 5 );
+}

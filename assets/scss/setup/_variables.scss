@@ -1,10 +1,4 @@
-// Font Palette
-$theme-sm-font-body: Reforma1969, sans-serif;
-$theme-sm-font-primary: Reforma1969, sans-serif;
-$theme-sm-font-secondary: Reforma2018, sans-serif;
-$theme-sm-font-accent: Billy Ohio, sans-serif;
-
-// Color Palette
+// Colors
 $theme-sm-color-1: #DDAB5D;
 $theme-sm-color-2: #39497C;
 $theme-sm-color-3: #B12C4A;
@@ -17,13 +11,36 @@ $theme-sm-light-1: #FFFFFF;
 $theme-sm-light-2: #CCCCCC;
 $theme-sm-light-3: #EEEFF2;
 
-// Font Sizes
+// Typography
+
+// font families
+$theme-sm-font-body: Reforma1969, sans-serif;
+$theme-sm-font-primary: Reforma1969, sans-serif;
+$theme-sm-font-secondary: Reforma2018, sans-serif;
+$theme-sm-font-accent: Billy Ohio, sans-serif;
+
+// fluid typography settings
+
+// these variables must be set in px
 $theme-minimum-font-size: 8px;
-$theme-content-font-size: 18px;
+$nova-font-size-breakpoint: 1440px;
+$nova-font-size-minimum-value-breakpoint: 320px;
+
+// use the --theme-font-size-slope-adjust variable to alter the slope of the resulted function
+// in such a way that when this variable equals 0, the slope of the function results to also 0
+// and the font sizes stay the same no matter the viewport
+$theme-font-size-slope-adjust: 0.4;
+$theme-font-size-slope-adjust-desktop: 0.6;
+
+// use a multiplier variable to control how much of that unit is added to the font size at any given time
+// on mobile devices the font size addon is set to 0 by default 0 so nothing is added to the resulted font sizes
+$theme-font-size-addon-multiplier-desktop: 0.4;
+
+// these variables must be set in em
+$theme-content-width-normal: 38em;
+$theme-content-width-wide: 65em;
 
 $nova-font-props: font-family, font-size, line-height, font-weight, letter-spacing, text-transform;
-$nova-font-size-breakpoint: 1440px;
-$nova-font-size-minimum-vw: 100vw * $theme-minimum-font-size / $nova-font-size-breakpoint;
 
 // Extra
 $theme-lap-breakpoint: 1000px;

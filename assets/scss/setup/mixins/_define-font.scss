@@ -1,28 +1,3 @@
-:root {
-    --theme-font-size-breakpoint: 1440;
-
-    --theme-font-size-minimum-value: 16;
-    --theme-font-size-minimum-value-breakpoint: 320;
-
-    // use the --theme-font-size-slope-adjust variable to alter the slope of the resulted function
-    // in such a way that when this variable equals 0, the slope of the function results to also 0
-    // and the font sizes stay the same no matter the viewport
-    --theme-font-size-slope-adjust: 0.4;
-
-    // create a unit value that is relative to the viewport width to all font sizes
-    --theme-addon-unit: calc( 1vw - var(--theme-font-size-breakpoint) * 1px / 100 );
-    // use a multiplier variable to control how much of that unit is added to the font size at any given time
-    // initially we set this variable to 0  so nothing is added to the resulted font sizes
-    --theme-addon-multiplier: 0;
-
-    --theme-addon: calc( var(--theme-addon-unit) * var(--theme-addon-multiplier) );
-
-    @media only screen and (min-width: 1440px) {
-        --theme-font-size-slope-adjust: 0.6;
-        --theme-addon-multiplier: 0.4;
-    }
-}
-
 @mixin define-font($name, $config, $props: $nova-font-props) {
     $config: map_merge( (
         font-family: inherit,

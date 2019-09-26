@@ -1,38 +1,43 @@
-/* Button CSS Custom Properties */
-/* Cite CSS Custom Properties */
+/* Global CSS Custom Properties */
 :root {
-  --theme-cite-font-family: var(--theme-headings-font-family);
-  --theme-cite-font-size: 13px;
-  --theme-cite-line-height: 1.23077;
-  --theme-cite-font-weight: 700;
-  --theme-cite-color: var(--current-color-primary); }
-
-:root {
+  --sm-color-primary: #DDAB5D;
+  --sm-color-secondary: #39497C;
+  --sm-color-tertiary: #B12C4A;
+  --sm-dark-primary: #212B49;
+  --sm-dark-secondary: #34394B;
+  --sm-dark-tertiary: #141928;
+  --sm-light-primary: #FFFFFF;
+  --sm-light-secondary: #CCCCCC;
+  --sm-light-tertiary: #EEEFF2;
+  --theme-color-primary: var(--sm-color-primary);
+  --theme-color-secondary: var(--sm-color-secondary);
+  --theme-color-tertiary: var(--sm-color-tertiary);
+  --theme-dark-primary: var(--sm-dark-primary);
+  --theme-dark-secondary: var(--sm-dark-secondary);
+  --theme-dark-tertiary: var(--sm-dark-tertiary);
+  --theme-light-primary: var(--sm-light-primary);
+  --theme-light-secondary: var(--sm-light-secondary);
+  --theme-light-tertiary: var(--sm-light-tertiary);
+  --current-color-primary: var(--theme-color-primary);
+  --current-color-secondary: var(--theme-color-secondary);
+  --current-color-tertiary: var(--theme-color-tertiary);
+  --current-dark-primary: var(--theme-dark-primary);
+  --current-dark-secondary: var(--theme-dark-secondary);
+  --current-dark-tertiary: var(--theme-dark-tertiary);
+  --current-light-primary: var(--theme-light-primary);
+  --current-light-secondary: var(--theme-light-secondary);
+  --current-light-tertiary: var(--theme-light-tertiary);
+  --theme-body-font-family: Reforma1969, sans-serif;
+  --theme-primary-font-family: Reforma1969, sans-serif;
+  --theme-secondary-font-family: Reforma2018, sans-serif;
+  --theme-accent-font-family: Billy Ohio, sans-serif;
   --theme-font-size-breakpoint: 1440;
-  --theme-font-size-minimum-value: 16;
+  --theme-font-size-minimum-value: 8;
   --theme-font-size-minimum-value-breakpoint: 320;
   --theme-font-size-slope-adjust: 0.4;
   --theme-addon-unit: calc( 1vw - var(--theme-font-size-breakpoint) * 1px / 100 );
   --theme-addon-multiplier: 0;
-  --theme-addon: calc( var(--theme-addon-unit) * var(--theme-addon-multiplier) ); }
-  @media only screen and (min-width: 1440px) {
-    :root {
-      --theme-font-size-slope-adjust: 0.6;
-      --theme-addon-multiplier: 0.4; } }
-
-/* Global CSS Custom Properties */
-:root {
-  --theme-color-primary: #DDAB5D;
-  --theme-color-secondary: #39497C;
-  --theme-color-tertiary: #B12C4A;
-  --theme-dark-primary: #212B49;
-  --theme-dark-secondary: #34394B;
-  --theme-dark-tertiary: #141928;
-  --theme-light-primary: #FFFFFF;
-  --theme-light-secondary: #CCCCCC;
-  --theme-light-tertiary: #EEEFF2;
-  --theme-body-font-size: 8px;
-  --theme-content-font-size: 18px;
+  --theme-addon: calc( var(--theme-addon-unit) * var(--theme-addon-multiplier) );
   --theme-content-width-normal: calc(38 * var(--theme-content-final-font-size));
   --theme-content-width-wide: calc(65 * var(--theme-content-final-font-size));
   --theme-spacing: 1rem;
@@ -49,68 +54,16 @@
   --theme-spacing-fluid-normal: calc( var( --theme-spacing-fluid ) * 3 );
   --theme-spacing-fluid-large:  calc( var( --theme-spacing-fluid ) * 4 );
   --theme-spacing-fluid-huge:   calc( var( --theme-spacing-fluid ) * 5 ); }
-  @media screen and (min-width: 20rem) {
+  @media only screen and (min-width: 1440px) {
     :root {
-      --theme-spacing-fluid: calc(0.2rem + 0.8 * ((100vw - 20rem) / 60)); } }
-  @media screen and (min-width: 80rem) {
+      --theme-font-size-slope-adjust: 0.6;
+      --theme-addon-multiplier: 0.4; } }
+  @media screen and (min-width: 320px) {
+    :root {
+      --theme-spacing-fluid: calc(0.2rem + 0.8 * ((100vw - 320px) / 1120)); } }
+  @media screen and (min-width: 1440px) {
     :root {
       --theme-spacing-fluid: 1rem; } }
-
-:root {
-  --current-color-primary: var(--theme-color-primary);
-  --current-color-secondary: var(--theme-color-secondary);
-  --current-color-tertiary: var(--theme-color-tertiary);
-  --current-dark-primary: var(--theme-dark-primary);
-  --current-dark-secondary: var(--theme-dark-secondary);
-  --current-dark-tertiary: var(--theme-dark-tertiary);
-  --current-light-primary: var(--theme-light-primary);
-  --current-light-secondary: var(--theme-light-secondary);
-  --current-light-tertiary: var(--theme-light-tertiary); }
-
-.is-style-dark {
-  --current-color-primary: var(--sm-color-primary);
-  --current-color-secondary: var(--sm-color-secondary);
-  --current-color-tertiary: var(--sm-color-tertiary);
-  --current-dark-primary: var(--sm-light-secondary);
-  --current-dark-secondary: var(--sm-light-primary);
-  --current-dark-tertiary: var(--sm-light-tertiary);
-  --current-light-primary: var(--sm-dark-primary);
-  --current-light-secondary: var(--sm-dark-secondary);
-  --current-light-tertiary: var(--sm-dark-tertiary);
-  background-color: var(--current-light-primary);
-  color: var(--current-dark-secondary); }
-  .is-style-dark a {
-    color: inherit;
-    text-decoration: underline; }
-
-.is-style-darker {
-  --current-color-primary: var(--sm-color-primary);
-  --current-color-secondary: var(--sm-color-secondary);
-  --current-color-tertiary: var(--sm-color-tertiary);
-  --current-dark-primary: var(--sm-light-secondary);
-  --current-dark-secondary: var(--sm-light-primary);
-  --current-dark-tertiary: var(--sm-light-tertiary);
-  --current-light-primary: var(--sm-dark-tertiary);
-  --current-light-secondary: var(--sm-dark-secondary);
-  --current-light-tertiary: var(--sm-dark-primary);
-  background-color: var(--current-light-primary);
-  color: var(--current-dark-secondary); }
-  .is-style-darker a {
-    color: inherit;
-    text-decoration: underline; }
-
-.is-style-accent {
-  --current-color-primary: var(--sm-dark-primary);
-  --current-color-secondary: var(--sm-dark-secondary);
-  --current-color-tertiary: var(--sm-dark-tertiary);
-  --current-dark-primary: var(--sm-light-secondary);
-  --current-dark-secondary: var(--sm-light-primary);
-  --current-dark-tertiary: var(--sm-light-tertiary);
-  --current-light-primary: var(--sm-color-primary);
-  --current-light-secondary: var(--sm-color-secondary);
-  --current-light-tertiary: var(--sm-color-tertiary);
-  background-color: var(--current-light-primary);
-  color: var(--current-dark-secondary); }
 
 @media only screen and (min-width: 1440px) {
   :root {
@@ -372,13 +325,8 @@
   .editor-styles-wrapper .wp-block-separator.is-style-decorative .c-separator__line {
     display: none; }
 
-.editor-styles-wrapper[class] :root {
-  --theme-primary-font-family: Reforma1969, sans-serif;
-  --theme-secondary-font-family: Reforma2018, sans-serif;
-  --theme-accent-font-family: Billy Ohio, sans-serif; }
-
 :root {
-  --theme-body-font-family: Reforma1969, sans-serif;
+  --theme-body-font-family: var(--theme-body-font-family);
   --theme-body-line-height: 1.7;
   --theme-body-font-weight: 400;
   --theme-body-letter-spacing: -0.03em;
@@ -1201,12 +1149,6 @@
       grid-template-areas: "media-text-media" "media-text-content"; }
     .editor-styles-wrapper .wp-block-media-text.is-stacked-on-mobile.has-media-on-the-right {
       grid-template-areas: "media-text-content" "media-text-media"; } }
-  .editor-styles-wrapper .wp-block-pullquote__citation {
-    font-family: var(--theme-cite-font-family);
-    font-size: var(--theme-cite-font-size);
-    line-height: var(--theme-cite-line-height);
-    font-weight: var(--theme-cite-font-weight);
-    color: var(--theme-cite-color); }
   .editor-styles-wrapper .novablocks-map__marker-name {
     position: absolute;
     top: 50%;

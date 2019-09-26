@@ -3,39 +3,3 @@
 @import "setup/easings";
 @import "setup/functions";
 @import "setup/mixins";
-@import "setup/custom-properties";
-
-:root {
-    @include variation(default, theme);
-}
-
-.is-style-dark {
-    @include variation(dark);
-
-    background-color: var(--current-light-primary);
-    color: var(--current-dark-secondary);
-
-    a {
-        color: inherit;
-        text-decoration: underline;
-    }
-}
-
-.is-style-darker {
-    @include variation(darker);
-
-    background-color: var(--current-light-primary);
-    color: var(--current-dark-secondary);
-
-    a {
-        color: inherit;
-        text-decoration: underline;
-    }
-}
-
-.is-style-accent {
-    @include variation(accent);
-
-    background-color: var(--current-light-primary);
-    color: var(--current-dark-secondary);
-}

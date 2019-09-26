@@ -1,13 +1,6 @@
-// Helpers
-:root {
-    --theme-primary-font-family: #{$theme-sm-font-primary};
-    --theme-secondary-font-family: #{$theme-sm-font-secondary};
-    --theme-accent-font-family: #{$theme-sm-font-accent};
-}
-
 // Body
 @include define-font(body, (
-    font-family: #{$theme-sm-font-body},
+    font-family: var(--theme-body-font-family),
     font-size: 16,
     line-height: 1.7,
     font-weight: 400,
