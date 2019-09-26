@@ -77,7 +77,7 @@ $site-header-transition-speed: .3s !default;
 
         @media only screen and (min-width: 1000px) {
             .site-header--fixed:not(.site-header--normal) {
-                color: var(--theme-sm-light-1);
+                color: var(--sm-light-primary);
             }
         }
 
@@ -85,7 +85,7 @@ $site-header-transition-speed: .3s !default;
 
         @media only screen and (min-width: 1000px) {
             .#{$site-header-fixed-body-class} .site-header:not(.site-header--scrolled) {
-                color: var(--theme-sm-light-1);
+                color: var(--sm-light-primary);
 
                 &:after {
                     opacity: 0;
@@ -101,7 +101,7 @@ $site-header-transition-speed: .3s !default;
         @media not screen and (min-width: 1000px) {
             .#{$site-header-fixed-body-class} .site-header--mobile:not(.site-header--scrolled),
             .#{$site-header-fixed-body-class} .c-menu-toggle {
-                color: var(--theme-sm-light-1);
+                color: var(--sm-light-primary);
             }
         }
     }
@@ -114,7 +114,7 @@ $site-header-transition-speed: .3s !default;
         body.#{$site-header-fixed-body-class} {
             .site-header {
                 position: absolute;
-                color: var(--theme-sm-light-1);
+                color: var(--sm-light-primary);
                 background-color: transparent;
             }
         }
@@ -124,7 +124,7 @@ $site-header-transition-speed: .3s !default;
 @if $enable-site-header-transparent == false {
     @media only screen and (min-width: 1000px) {
         .site-header {
-            background-color: var(--theme-sm-light-1);
+            background-color: var(--sm-light-primary);
         }
     }
 }

@@ -30,20 +30,17 @@
 .novablocks-hero__indicator {
     width: 160px;
     height: 50px;
+    color: var(--sm-light-1);
 
     &:after {
-        color: var(--theme-sm-dark-1);
+        color: var(--sm-dark-1);
     }
-}
 
-.novablocks {
-
+    .has-moderate-media-card-after-hero & {
+        color: var(--sm-light-3);
+    }
 }
 
 .novablocks-u-background-dark {
     @include variation(dark);
-
-    .novablocks-hero__indicator:after {
-        color: var(--theme-sm-light-1);
-    }
 }

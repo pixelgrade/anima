@@ -633,7 +633,7 @@ function rosa2_filter_color_palettes( $color_palettes ) {
 		'default' => array(
 			'label'   => 'Theme Default',
 			'preview' => array(
-				'background_image_url' => 'https://cloud.pixelgrade.com/wp-content/uploads/2019/08/nova-theme.jpg',
+				'background_image_url' => '//cloud.pixelgrade.com/wp-content/uploads/2018/07/rosa-palette.jpg',
 			),
 			'options' => array(
 				'sm_color_primary'   => ROSA2_THEME_COLOR_PRIMARY,
@@ -756,7 +756,7 @@ function rosa2_filter_font_palettes( $font_palettes ) {
 					'font_styles_intervals' => array(
 						array(
 							'start'           => 0,
-							'font_weight'     => '400',
+							'font_weight'     => 'regular',
 							'letter_spacing'  => 'normal',
 							'text_transform'  => 'none',
 							'text_decoration' => 'none',
@@ -773,7 +773,7 @@ function rosa2_filter_font_palettes( $font_palettes ) {
 					'font_styles_intervals' => array(
 						array(
 							'start'           => 0,
-							'font_weight'     => '400',
+							'font_weight'     => 'regular',
 							'letter_spacing'  => 'normal',
 							'text_transform'  => 'none',
 							'text_decoration' => 'none',
@@ -855,7 +855,7 @@ function rosa2_filter_font_palettes( $font_palettes ) {
 					'font_styles_intervals' => array(
 						array(
 							'start'           => 0,
-							'font_weight'     => '400',
+							'font_weight'     => 'regular',
 							'letter_spacing'  => 'normal',
 							'text_transform'  => 'none',
 							'text_decoration' => 'none',
@@ -920,7 +920,7 @@ function rosa2_filter_font_palettes( $font_palettes ) {
 					'font_styles_intervals' => array(
 						array(
 							'start'           => 0,
-							'font_weight'     => '400',
+							'font_weight'     => 'regular',
 							'letter_spacing'  => 'normal',
 							'text_transform'  => 'none',
 							'text_decoration' => 'none',

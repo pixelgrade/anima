@@ -101,15 +101,15 @@ Table of Contents
   --theme-sm-light-3: var(--sm-light-3); }
 
 .is-style-dark {
-  --theme-sm-color-1: var(--sm-color-1);
-  --theme-sm-color-2: var(--sm-color-2);
-  --theme-sm-color-3: var(--sm-color-3);
-  --theme-sm-dark-1: var(--sm-light-2);
-  --theme-sm-dark-2: var(--sm-light-1);
-  --theme-sm-dark-3: var(--sm-light-3);
-  --theme-sm-light-1: var(--sm-dark-1);
-  --theme-sm-light-2: var(--sm-dark-2);
-  --theme-sm-light-3: var(--sm-dark-3);
+  --theme-sm-color-1: var(--sm-color-primary);
+  --theme-sm-color-2: var(--sm-color-secondary);
+  --theme-sm-color-3: var(--sm-color-tertiary);
+  --theme-sm-dark-1: var(--sm-light-secondary);
+  --theme-sm-dark-2: var(--sm-light-primary);
+  --theme-sm-dark-3: var(--sm-light-tertiary);
+  --theme-sm-light-1: var(--sm-dark-primary);
+  --theme-sm-light-2: var(--sm-dark-secondary);
+  --theme-sm-light-3: var(--sm-dark-tertiary);
   background-color: var(--theme-sm-light-1);
   color: var(--theme-sm-dark-2); }
   .is-style-dark a {
@@ -117,15 +117,15 @@ Table of Contents
     text-decoration: underline; }
 
 .is-style-darker {
-  --theme-sm-color-1: var(--sm-color-1);
-  --theme-sm-color-2: var(--sm-color-2);
-  --theme-sm-color-3: var(--sm-color-3);
-  --theme-sm-dark-1: var(--sm-light-2);
-  --theme-sm-dark-2: var(--sm-light-1);
-  --theme-sm-dark-3: var(--sm-light-3);
-  --theme-sm-light-1: var(--sm-dark-3);
-  --theme-sm-light-2: var(--sm-dark-2);
-  --theme-sm-light-3: var(--sm-dark-1);
+  --theme-sm-color-1: var(--sm-color-primary);
+  --theme-sm-color-2: var(--sm-color-secondary);
+  --theme-sm-color-3: var(--sm-color-tertiary);
+  --theme-sm-dark-1: var(--sm-light-secondary);
+  --theme-sm-dark-2: var(--sm-light-primary);
+  --theme-sm-dark-3: var(--sm-light-tertiary);
+  --theme-sm-light-1: var(--sm-dark-tertiary);
+  --theme-sm-light-2: var(--sm-dark-secondary);
+  --theme-sm-light-3: var(--sm-dark-primary);
   background-color: var(--theme-sm-light-1);
   color: var(--theme-sm-dark-2); }
   .is-style-darker a {
@@ -133,15 +133,15 @@ Table of Contents
     text-decoration: underline; }
 
 .is-style-accent {
-  --theme-sm-color-1: var(--sm-dark-1);
-  --theme-sm-color-2: var(--sm-dark-2);
-  --theme-sm-color-3: var(--sm-dark-3);
-  --theme-sm-dark-1: var(--sm-light-2);
-  --theme-sm-dark-2: var(--sm-light-1);
-  --theme-sm-dark-3: var(--sm-light-3);
-  --theme-sm-light-1: var(--sm-color-1);
-  --theme-sm-light-2: var(--sm-color-2);
-  --theme-sm-light-3: var(--sm-color-3);
+  --theme-sm-color-1: var(--sm-dark-primary);
+  --theme-sm-color-2: var(--sm-dark-secondary);
+  --theme-sm-color-3: var(--sm-dark-tertiary);
+  --theme-sm-dark-1: var(--sm-light-secondary);
+  --theme-sm-dark-2: var(--sm-light-primary);
+  --theme-sm-dark-3: var(--sm-light-tertiary);
+  --theme-sm-light-1: var(--sm-color-primary);
+  --theme-sm-light-2: var(--sm-color-secondary);
+  --theme-sm-light-3: var(--sm-color-tertiary);
   background-color: var(--theme-sm-light-1);
   color: var(--theme-sm-dark-2); }
 
@@ -1154,7 +1154,7 @@ ul.menu a,
 
 @media only screen and (min-width: 1000px) {
   .has-fixed-site-header .site-header:not(.site-header--scrolled) {
-    color: var(--theme-sm-light-1); }
+    color: var(--sm-light-primary); }
     .has-fixed-site-header .site-header:not(.site-header--scrolled):after {
       opacity: 0; }
   body:not(.has-fixed-site-header) .site-header,
@@ -1164,7 +1164,7 @@ ul.menu a,
 @media not screen and (min-width: 1000px) {
   .has-fixed-site-header .site-header--mobile:not(.site-header--scrolled),
   .has-fixed-site-header .c-menu-toggle {
-    color: var(--theme-sm-light-1); } }
+    color: var(--sm-light-primary); } }
 
 .site-branding {
   display: flex;
@@ -2579,22 +2579,23 @@ body, .site, .site-content {
 
 .novablocks-hero__indicator {
   width: 160px;
-  height: 50px; }
+  height: 50px;
+  color: var(--sm-light-1); }
   .novablocks-hero__indicator:after {
-    color: var(--theme-sm-dark-1); }
+    color: var(--sm-dark-1); }
+  .has-moderate-media-card-after-hero .novablocks-hero__indicator {
+    color: var(--sm-light-3); }
 
 .novablocks-u-background-dark {
-  --theme-sm-color-1: var(--sm-color-1);
-  --theme-sm-color-2: var(--sm-color-2);
-  --theme-sm-color-3: var(--sm-color-3);
-  --theme-sm-dark-1: var(--sm-light-2);
-  --theme-sm-dark-2: var(--sm-light-1);
-  --theme-sm-dark-3: var(--sm-light-3);
-  --theme-sm-light-1: var(--sm-dark-1);
-  --theme-sm-light-2: var(--sm-dark-2);
-  --theme-sm-light-3: var(--sm-dark-3); }
-  .novablocks-u-background-dark .novablocks-hero__indicator:after {
-    color: var(--theme-sm-light-1); }
+  --theme-sm-color-1: var(--sm-color-primary);
+  --theme-sm-color-2: var(--sm-color-secondary);
+  --theme-sm-color-3: var(--sm-color-tertiary);
+  --theme-sm-dark-1: var(--sm-light-secondary);
+  --theme-sm-dark-2: var(--sm-light-primary);
+  --theme-sm-dark-3: var(--sm-light-tertiary);
+  --theme-sm-light-1: var(--sm-dark-primary);
+  --theme-sm-light-2: var(--sm-dark-secondary);
+  --theme-sm-light-3: var(--sm-dark-tertiary); }
 
 .novablocks-map__marker-name {
   position: absolute;
