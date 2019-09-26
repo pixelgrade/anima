@@ -91,7 +91,5 @@ $variations: (
     @each $destination in $destinations {
         $source-color: map-deep-get($variations, $name, $destination);
         --current-#{$destination}: var(--#{$source-level}-#{$source-color});
-
-        @debug --current-#{$destination} --#{$source-level}-#{$source-color};
     }
 }

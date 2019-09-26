@@ -3,8 +3,8 @@
     .ot-dtp-picker-form {
       .ot-dtp-picker-button {
         background: linear-gradient(to right, var(--theme-light-primary) 50%, var(--theme-dark-primary) 50%);
-        background-size: 200% 100%;
-        background-position: right bottom;
+        background-size: calc( 200% + 4 * var(--theme-button-border-width) ) calc( 100% + 4 * var(--theme-button-border-width) );
+        background-position: calc( 100% + var(--theme-button-border-width) ) calc( -1 * var(--theme-button-border-width) );
 
         border: 2px solid var(--theme-dark-primary);
         transition: all .4s var(--theme-button-transition-easing);
@@ -23,8 +23,8 @@
     .ot-dtp-picker-form {
       .ot-dtp-picker-button {
         background: linear-gradient(to right, var(--theme-dark-primary) 50%, var(--theme-light-primary) 50%);
-        background-size: 200% 100%;
-        background-position:right bottom;
+        background-size: calc( 200% + 4 * var(--theme-button-border-width) ) calc( 100% + 4 * var(--theme-button-border-width) );
+        background-position: calc( 100% + var(--theme-button-border-width) ) calc( -1 * var(--theme-button-border-width) );
 
         border: 2px solid var(--theme-light-primary);
         transition: all .4s var(--theme-button-transition-easing);
@@ -35,6 +35,27 @@
           background-position:left bottom;
           border-color: currentColor;
           color: var(--theme-light-primary);
+        }
+      }
+    }
+  }
+}
+
+
+.novablocks-opentable {
+  &.novablocks-opentable__wide[class] {
+    .ot-dtp-picker-selector[class][class] {
+      border-color: var(--current-dark-secondary);
+
+      .ot-dtp-picker-selector-link {
+        color: var(--current-dark-secondary);
+
+        &:before {
+          color: currentColor;
+        }
+
+        &:after {
+          color: currentColor;
         }
       }
     }

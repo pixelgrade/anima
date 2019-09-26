@@ -1,32 +1,32 @@
 // Forms General Options
 
 // @todo more semantic for these variables
-$color-dark: var(--sm-dark-2) !default;
-$color-white: var(--sm-light-1) !default;
+$color-dark: var(--current-dark-secondary) !default;
+$color-white: var(--current-light-primary) !default;
 
-$input-color: var(--sm-dark-2) !default;
-$input-border-color: var(--sm-light-3) !default;
+$input-color: var(--current-dark-secondary) !default;
+$input-border-color: var(--current-light-tertiary) !default;
 $input-border-width: .0625em !default;
-$input-background-color: var(--sm-light-1) !default;
+$input-background-color: var(--current-light-tertiary) !default;
 $input-padding: .8em 1.18em .93em !default;
-$input-focus-border-color: var(--sm-dark-1) !default;
-$input-focus-background-color: var(--sm-light-1) !default;
+$input-focus-border-color: var(--current-dark-primary) !default;
+$input-focus-background-color: var(--current-light-primary) !default;
 $input-border-radius: 0 !default;
-$input-disabled-color: var(--sm-dark-2) !default;
-$input-disabled-background-color: var(--sm-dark-2) !default;
-$input-disabled-border-color: var(--sm-dark-2) !default;
+$input-disabled-color: var(--current-dark-secondary) !default;
+$input-disabled-background-color: var(--current-dark-secondary) !default;
+$input-disabled-border-color: var(--current-dark-secondary) !default;
 
-$placeholder-color: var(--sm-dark-2) !default;
+$placeholder-color: var(--current-dark-secondary) !default;
 
-$label-color: var(--sm-dark-2) !default;
+$label-color: var(--current-dark-secondary) !default;
 
-$legend-color: var(--sm-dark-2) !default;
+$legend-color: var(--current-dark-secondary) !default;
 
-$button-color: var(--sm-light-1) !default;
-$button-background-color: var(--sm-dark-2) !default;
+$button-color: var(--current-light-primary) !default;
+$button-background-color: var(--current-dark-secondary) !default;
 
-$checkbox-color: var(--sm-dark-2) !default;
-$checkbox-background-color: var(--sm-light-1) !default;
+$checkbox-color: var(--current-dark-secondary) !default;
+$checkbox-background-color: var(--current-light-primary) !default;
 $checkbox-width: 1.5rem !default;
 $checkbox-height: 1.5rem !default;
 
@@ -42,6 +42,7 @@ $input-horizontal-spacing: 1rem !default; // Checkboxes and Radios
 
     color: $input-color;
     border-radius: $input-border-radius;
+    background-color: $input-background-color;
 
     font-family: inherit;
     -webkit-font-smoothing: initial;
@@ -255,13 +256,15 @@ fieldset {
 }
 
 .select2-container--default .select2-selection--single {
-    border: $input-border-width solid $input-border-color;
+    border: 0;
     border-radius: $input-border-radius;
     height: auto;
 
     .select2-selection__rendered {
         padding: $input-padding;
         color: $input-color;
+
+        background-color: $input-background-color;
     }
 
     .select2-selection__placeholder {
@@ -278,4 +281,17 @@ fieldset {
 .select2-dropdown,
 .select2-container--default .select2-search--dropdown .select2-search__field {
     border-color: $input-border-color;
+}
+
+.select2-dropdown {
+    background-color: $input-background-color;
+
+    .select2-search__field {
+        background-color: var(--current-light-secondary);
+    }
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: var(--current-color-primary);
+    color: var(--current-dark-primary);
 }
