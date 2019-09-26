@@ -185,7 +185,7 @@ function rosa2_woocommerce_scripts() {
 	$theme  = wp_get_theme( get_template() );
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-//	wp_enqueue_style( 'rosa2-style', get_template_directory_uri() . '/style.css', array(), $theme->get( 'Version' ) );
+	wp_enqueue_style( 'rosa2-style', get_template_directory_uri() . '/woocommerce.css', array( 'rosa2-style' ), $theme->get( 'Version' ) );
 
 	wp_enqueue_script( 'rosa2-woocommerce', get_template_directory_uri() . '/dist/js/woocommerce' . $suffix . '.js', array( 'jquery' ), $theme->get( 'Version' ), true );
 	wp_localize_script( 'rosa2-woocommerce', 'pixelgradeWooCommerceStrings', array(
