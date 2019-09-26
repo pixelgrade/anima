@@ -23,6 +23,15 @@
     }
 }
 
+.novablocks-hero {
+    .novablocks-u-content-padding {
+        @include below(tablet) {
+            padding-top: var(--theme-spacing-xxl);
+            padding-bottom: var(--theme-spacing-xxl);
+        }
+    }
+}
+
 .novablocks-hero .novablocks-u-content-align {
     position: static;
 }

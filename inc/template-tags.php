@@ -447,3 +447,40 @@ if ( ! function_exists( 'rosa2_get_read_more_button' ) ) {
 			'</div>';
 	}
 }
+
+if ( ! function_exists( 'rosa2_the_posts_pagination' ) ) {
+	/**
+	 * Displays a paginated navigation to next/previous set of posts, when applicable.
+	 *
+	 * @param array $args Optional. See paginate_links() for available arguments.
+	 *                    Default empty array.
+	 */
+	function rosa2_the_posts_pagination( $args = array() ) {
+		echo rosa2_get_the_posts_pagination( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	}
+}
+
+if ( ! function_exists( 'rosa2_get_the_posts_pagination' ) ) {
+	/**
+	 * Retrieves a paginated navigation to next/previous set of posts, when applicable.
+	 *
+	 * @param array $args Optional. See paginate_links() for options.
+	 *
+	 * @return string Markup for pagination links.
+	 */
+	function rosa2_get_the_posts_pagination( $args = array() ) {
+		// Put our own defaults in place
+		$args = wp_parse_args(
+			$args, array(
+				'end_size'           => 1,
+				'mid_size'           => 2,
+				'type'               => 'plain',
+				'prev_text'          => esc_html_x( 'Previous', 'previous set of posts', 'rosa2' ),
+				'next_text'          => esc_html_x( 'Next', 'next set of posts', 'rosa2' ),
+				'screen_reader_text' => esc_html__( 'Posts navigation', 'rosa2' ),
+			)
+		);
+
+		return get_the_posts_pagination( $args );
+	}
+}
