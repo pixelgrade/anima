@@ -1337,12 +1337,6 @@
       justify-content: flex-end; }
   .editor-styles-wrapper .wp-block[data-type="novablocks/navigation"] {
     display: flex; }
-  .editor-styles-wrapper .c-logo__inverted {
-    opacity: 0; }
-  .editor-styles-wrapper .is-dark-theme .c-logo__default {
-    opacity: 0; }
-  .editor-styles-wrapper .is-dark-theme .c-logo__inverted {
-    opacity: 1; }
   .editor-styles-wrapper .novablocks-slideshow__arrow {
     background-color: transparent;
     width: 50px;
@@ -1900,4 +1894,7 @@
 .components-toolbar [aria-label="Heading 4"],
 .components-toolbar [aria-label="Heading 5"],
 .components-toolbar [aria-label="Heading 6"] {
+  display: none; }
+
+.is-dark-theme .c-logo__default {
   display: none; }
