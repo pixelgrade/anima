@@ -1,4 +1,4 @@
-// Colors
+// COLORS
 $theme-sm-color-1: #DDAB5D;
 $theme-sm-color-2: #39497C;
 $theme-sm-color-3: #B12C4A;
@@ -11,7 +11,7 @@ $theme-sm-light-1: #FFFFFF;
 $theme-sm-light-2: #CCCCCC;
 $theme-sm-light-3: #EEEFF2;
 
-// Typography
+// TYPOGRAPHY
 
 // font families
 $theme-sm-font-body: Reforma1969, sans-serif;
@@ -36,11 +36,32 @@ $theme-font-size-slope-adjust-desktop: 0.6;
 // on mobile devices the font size addon is set to 0 by default 0 so nothing is added to the resulted font sizes
 $theme-font-size-addon-multiplier-desktop: 0.4;
 
+// LAYOUT
+
 // these variables must be set in em
 $theme-content-width-normal: 38em;
 $theme-content-width-wide: 65em;
 
-$nova-font-props: font-family, font-size, line-height, font-weight, letter-spacing, text-transform;
+// BUTTONS
+$theme-button-x-padding: 1.5em;
+$theme-button-y-padding: 0.75em;
+
+$theme-button-transition-duration: .4s;
+$theme-button-transition-easing: $ease;
+
+$theme-button-border-width: 2px;
+$theme-button-border-style: solid;
+$theme-button-border-radius: 0;
+
+$theme-button-text-color: var(--current-light-primary);
+$theme-button-background-color: var(--current-dark-primary);
+$theme-button-border-color: var(--current-dark-primary);
+
+$theme-button-hover-text-color: var(--current-dark-primary);
+$theme-button-hover-background-color: transparent;
+$theme-button-hover-border-color: var(--current-dark-primary);
+
+$theme-button-text-arrow-size: 1.15em;
 
 // Extra
 $theme-lap-breakpoint: 1000px;

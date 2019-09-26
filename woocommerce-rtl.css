@@ -54,18 +54,19 @@
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
-  --theme-button-background-color: var(--current-dark-primary);
   --theme-button-text-color: var(--current-light-primary);
-  --theme-button-border-color: transparent;
-  --theme-button-hover-background-color: var(--current-color-primary);
-  --theme-button-hover-text-color: var(--current-light-primary);
-  --theme-button-hover-border-color: transparent;
+  --theme-button-background-color: var(--current-dark-primary);
+  --theme-button-border-color: var(--current-dark-primary);
+  --theme-button-hover-text-color: var(--current-dark-primary);
+  --theme-button-hover-background-color: transparent;
+  --theme-button-hover-border-color: var(--current-dark-primary);
   --theme-button-border-width: 2px;
+  --theme-button-border-style: solid;
   --theme-button-border-radius: 0;
-  --theme-button-y-padding: 0.75em;
   --theme-button-x-padding: 1.5em;
+  --theme-button-y-padding: 0.75em;
   --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
-  --theme-button-transition-duration: .4s;
+  --theme-button-transition-duration: 0.4s;
   --theme-button-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
   --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
   --theme-button-hover-transition: var(--theme-button-transition);
@@ -74,23 +75,14 @@
   --current-button-text-color: var(--theme-button-text-color);
   --current-button-transition: var(--theme-button-transition);
   padding: var(--theme-button-padding);
-  border: var(--theme-button-border-width) solid transparent;
+  border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
   border-radius: var(--theme-button-border-radius);
   background-color: var(--current-button-background-color);
   color: var(--current-button-text-color);
   transition: var(--current-button-transition);
-  --theme-button-text-color: var(--current-light-primary);
-  --theme-button-background-color: var(--current-dark-primary);
-  --theme-button-border-color: var(--current-dark-primary);
-  --theme-button-hover-text-color: var(--current-dark-primary);
-  --theme-button-hover-background-color: transparent;
-  --theme-button-hover-border-color: var(--current-dark-primary);
-  --theme-button-transition-duration: .4s;
   background-color: transparent;
   background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
   background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
-  border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-  border-radius: 0;
   --current-button-text-color: var(--theme-button-hover-text-color);
   background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
   .woocommerce[class][class] button:not(.single_add_to_cart_button):hover,
@@ -118,18 +110,19 @@
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
-  --theme-button-background-color: var(--current-dark-primary);
   --theme-button-text-color: var(--current-light-primary);
-  --theme-button-border-color: transparent;
-  --theme-button-hover-background-color: var(--current-color-primary);
-  --theme-button-hover-text-color: var(--current-light-primary);
-  --theme-button-hover-border-color: transparent;
+  --theme-button-background-color: var(--current-dark-primary);
+  --theme-button-border-color: var(--current-dark-primary);
+  --theme-button-hover-text-color: var(--current-dark-primary);
+  --theme-button-hover-background-color: transparent;
+  --theme-button-hover-border-color: var(--current-dark-primary);
   --theme-button-border-width: 2px;
+  --theme-button-border-style: solid;
   --theme-button-border-radius: 0;
-  --theme-button-y-padding: 0.75em;
   --theme-button-x-padding: 1.5em;
+  --theme-button-y-padding: 0.75em;
   --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
-  --theme-button-transition-duration: .4s;
+  --theme-button-transition-duration: 0.4s;
   --theme-button-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
   --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
   --theme-button-hover-transition: var(--theme-button-transition);
@@ -138,23 +131,14 @@
   --current-button-text-color: var(--theme-button-text-color);
   --current-button-transition: var(--theme-button-transition);
   padding: var(--theme-button-padding);
-  border: var(--theme-button-border-width) solid transparent;
+  border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
   border-radius: var(--theme-button-border-radius);
   background-color: var(--current-button-background-color);
   color: var(--current-button-text-color);
   transition: var(--current-button-transition);
-  --theme-button-text-color: var(--current-light-primary);
-  --theme-button-background-color: var(--current-dark-primary);
-  --theme-button-border-color: var(--current-dark-primary);
-  --theme-button-hover-text-color: var(--current-dark-primary);
-  --theme-button-hover-background-color: transparent;
-  --theme-button-hover-border-color: var(--current-dark-primary);
-  --theme-button-transition-duration: .4s;
   background-color: transparent;
   background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
   background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
-  border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-  border-radius: 0;
   background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
   .woocommerce[class][class] .add_to_cart_button.ajax_add_to_cart:hover,
   .woocommerce[class][class] .checkout-button:hover,
@@ -280,12 +264,14 @@
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-size: var(--theme-heading-4-final-font-size);
   --current-line-height: var(--theme-heading-4-line-height);
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
   --current-text-transform: var(--theme-heading-4-text-transform);
+  --current-text-decoration: var(--theme-heading-4-text-decoration);
   color: var(--current-dark-primary); }
 
 .wc-block-grid__product-rating .star-rating {
@@ -663,12 +649,14 @@
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-3-font-family);
   --current-font-size: var(--theme-heading-3-final-font-size);
   --current-line-height: var(--theme-heading-3-line-height);
   --current-font-weight: var(--theme-heading-3-font-weight);
   --current-letter-spacing: var(--theme-heading-3-letter-spacing);
-  --current-text-transform: var(--theme-heading-3-text-transform); }
+  --current-text-transform: var(--theme-heading-3-text-transform);
+  --current-text-decoration: var(--theme-heading-3-text-decoration); }
 
 .c-product-main .price {
   margin-bottom: var(--theme-spacing-small); }
@@ -818,18 +806,19 @@
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
-  --theme-button-background-color: var(--current-dark-primary);
   --theme-button-text-color: var(--current-light-primary);
-  --theme-button-border-color: transparent;
-  --theme-button-hover-background-color: var(--current-color-primary);
-  --theme-button-hover-text-color: var(--current-light-primary);
-  --theme-button-hover-border-color: transparent;
+  --theme-button-background-color: var(--current-dark-primary);
+  --theme-button-border-color: var(--current-dark-primary);
+  --theme-button-hover-text-color: var(--current-dark-primary);
+  --theme-button-hover-background-color: transparent;
+  --theme-button-hover-border-color: var(--current-dark-primary);
   --theme-button-border-width: 2px;
+  --theme-button-border-style: solid;
   --theme-button-border-radius: 0;
-  --theme-button-y-padding: 0.75em;
   --theme-button-x-padding: 1.5em;
+  --theme-button-y-padding: 0.75em;
   --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
-  --theme-button-transition-duration: .4s;
+  --theme-button-transition-duration: 0.4s;
   --theme-button-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
   --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
   --theme-button-hover-transition: var(--theme-button-transition);
@@ -838,23 +827,14 @@
   --current-button-text-color: var(--theme-button-text-color);
   --current-button-transition: var(--theme-button-transition);
   padding: var(--theme-button-padding);
-  border: var(--theme-button-border-width) solid transparent;
+  border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
   border-radius: var(--theme-button-border-radius);
   background-color: var(--current-button-background-color);
   color: var(--current-button-text-color);
   transition: var(--current-button-transition);
-  --theme-button-text-color: var(--current-light-primary);
-  --theme-button-background-color: var(--current-dark-primary);
-  --theme-button-border-color: var(--current-dark-primary);
-  --theme-button-hover-text-color: var(--current-dark-primary);
-  --theme-button-hover-background-color: transparent;
-  --theme-button-hover-border-color: var(--current-dark-primary);
-  --theme-button-transition-duration: .4s;
   background-color: transparent;
   background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
   background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
-  border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-  border-radius: 0;
   background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%);
   text-align: center; }
   .add_to_cart_button:hover {
@@ -885,12 +865,14 @@
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-size: var(--theme-heading-4-final-font-size);
   --current-line-height: var(--theme-heading-4-line-height);
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
-  --current-text-transform: var(--theme-heading-4-text-transform); }
+  --current-text-transform: var(--theme-heading-4-text-transform);
+  --current-text-decoration: var(--theme-heading-4-text-decoration); }
 
 .woocommerce-pagination,
 .nav-links {
@@ -1312,12 +1294,14 @@ ul.order_details[class] {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-size: var(--theme-heading-4-final-font-size);
   --current-line-height: var(--theme-heading-4-line-height);
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
-  --current-text-transform: var(--theme-heading-4-text-transform); }
+  --current-text-transform: var(--theme-heading-4-text-transform);
+  --current-text-decoration: var(--theme-heading-4-text-decoration); }
 
 .cart_totals h2 {
   font-family: var(--current-font-family);
@@ -1326,12 +1310,14 @@ ul.order_details[class] {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-3-font-family);
   --current-font-size: var(--theme-heading-3-final-font-size);
   --current-line-height: var(--theme-heading-3-line-height);
   --current-font-weight: var(--theme-heading-3-font-weight);
   --current-letter-spacing: var(--theme-heading-3-letter-spacing);
   --current-text-transform: var(--theme-heading-3-text-transform);
+  --current-text-decoration: var(--theme-heading-3-text-decoration);
   margin-bottom: var(--theme-spacing-small); }
 
 .cross-sells h2 {
@@ -1341,12 +1327,14 @@ ul.order_details[class] {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-size: var(--theme-heading-4-final-font-size);
   --current-line-height: var(--theme-heading-4-line-height);
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
   --current-text-transform: var(--theme-heading-4-text-transform);
+  --current-text-decoration: var(--theme-heading-4-text-decoration);
   margin-bottom: var(--theme-spacing-small); }
 
 .cross-sells .wc-block-grid__product-title {
@@ -1356,12 +1344,14 @@ ul.order_details[class] {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-size: var(--theme-heading-4-final-font-size);
   --current-line-height: var(--theme-heading-4-line-height);
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
-  --current-text-transform: var(--theme-heading-4-text-transform); }
+  --current-text-transform: var(--theme-heading-4-text-transform);
+  --current-text-decoration: var(--theme-heading-4-text-decoration); }
 
 .c-mini-cart {
   position: fixed;
@@ -1966,18 +1956,19 @@ ul.order_details[class] {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
-  --theme-button-background-color: var(--current-dark-primary);
   --theme-button-text-color: var(--current-light-primary);
-  --theme-button-border-color: transparent;
-  --theme-button-hover-background-color: var(--current-color-primary);
-  --theme-button-hover-text-color: var(--current-light-primary);
-  --theme-button-hover-border-color: transparent;
+  --theme-button-background-color: var(--current-dark-primary);
+  --theme-button-border-color: var(--current-dark-primary);
+  --theme-button-hover-text-color: var(--current-dark-primary);
+  --theme-button-hover-background-color: transparent;
+  --theme-button-hover-border-color: var(--current-dark-primary);
   --theme-button-border-width: 2px;
+  --theme-button-border-style: solid;
   --theme-button-border-radius: 0;
-  --theme-button-y-padding: 0.75em;
   --theme-button-x-padding: 1.5em;
+  --theme-button-y-padding: 0.75em;
   --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
-  --theme-button-transition-duration: .4s;
+  --theme-button-transition-duration: 0.4s;
   --theme-button-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
   --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
   --theme-button-hover-transition: var(--theme-button-transition);
@@ -1986,23 +1977,14 @@ ul.order_details[class] {
   --current-button-text-color: var(--theme-button-text-color);
   --current-button-transition: var(--theme-button-transition);
   padding: var(--theme-button-padding);
-  border: var(--theme-button-border-width) solid transparent;
+  border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
   border-radius: var(--theme-button-border-radius);
   background-color: var(--current-button-background-color);
   color: var(--current-button-text-color);
   transition: var(--current-button-transition);
-  --theme-button-text-color: var(--current-light-primary);
-  --theme-button-background-color: var(--current-dark-primary);
-  --theme-button-border-color: var(--current-dark-primary);
-  --theme-button-hover-text-color: var(--current-dark-primary);
-  --theme-button-hover-background-color: transparent;
-  --theme-button-hover-border-color: var(--current-dark-primary);
-  --theme-button-transition-duration: .4s;
   background-color: transparent;
   background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
   background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
-  border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-  border-radius: 0;
   background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
   [class*="wc-block-"] .wp-block-button__link[class][class][class]:hover {
     --current-button-background-color: var(--theme-button-hover-background-color);

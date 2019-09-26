@@ -5,11 +5,9 @@
  * @package Rosa2
  */
 
-/**
- * Load WooCommerce compatibility file.
- */
-if ( function_exists( 'WC' ) ) {
-	require_once trailingslashit( get_template_directory() ) . 'inc/integrations/woocommerce.php';
+// If this file is called directly, abort.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
 /**

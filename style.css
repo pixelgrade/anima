@@ -31,6 +31,78 @@ Table of Contents
 6.    Overwrites
 
 */
+:root {
+  --sm-color-primary: #DDAB5D;
+  --sm-color-secondary: #39497C;
+  --sm-color-tertiary: #B12C4A;
+  --sm-dark-primary: #212B49;
+  --sm-dark-secondary: #34394B;
+  --sm-dark-tertiary: #141928;
+  --sm-light-primary: #FFFFFF;
+  --sm-light-secondary: #CCCCCC;
+  --sm-light-tertiary: #EEEFF2;
+  --theme-color-primary: var(--sm-color-primary);
+  --theme-color-secondary: var(--sm-color-secondary);
+  --theme-color-tertiary: var(--sm-color-tertiary);
+  --theme-dark-primary: var(--sm-dark-primary);
+  --theme-dark-secondary: var(--sm-dark-secondary);
+  --theme-dark-tertiary: var(--sm-dark-tertiary);
+  --theme-light-primary: var(--sm-light-primary);
+  --theme-light-secondary: var(--sm-light-secondary);
+  --theme-light-tertiary: var(--sm-light-tertiary);
+  --current-color-primary: var(--theme-color-primary);
+  --current-color-secondary: var(--theme-color-secondary);
+  --current-color-tertiary: var(--theme-color-tertiary);
+  --current-dark-primary: var(--theme-dark-primary);
+  --current-dark-secondary: var(--theme-dark-secondary);
+  --current-dark-tertiary: var(--theme-dark-tertiary);
+  --current-light-primary: var(--theme-light-primary);
+  --current-light-secondary: var(--theme-light-secondary);
+  --current-light-tertiary: var(--theme-light-tertiary); }
+
+:root {
+  --theme-body-font-family: Reforma1969, sans-serif;
+  --theme-primary-font-family: Reforma1969, sans-serif;
+  --theme-secondary-font-family: Reforma2018, sans-serif;
+  --theme-accent-font-family: Billy Ohio, sans-serif;
+  --theme-font-size-breakpoint: 1440;
+  --theme-font-size-minimum-value: 8;
+  --theme-font-size-minimum-value-breakpoint: 320;
+  --theme-font-size-slope-adjust: 0.4;
+  --theme-addon-unit: calc( 1vw - var(--theme-font-size-breakpoint) * 1px / 100 );
+  --theme-addon-multiplier: 0;
+  --theme-addon: calc( var(--theme-addon-unit) * var(--theme-addon-multiplier) ); }
+  @media only screen and (min-width: 1440px) {
+    :root {
+      --theme-font-size-slope-adjust: 0.6;
+      --theme-addon-multiplier: 0.4; } }
+
+:root {
+  --theme-content-width-normal: calc(38 * var(--theme-content-final-font-size));
+  --theme-content-width-wide: calc(65 * var(--theme-content-final-font-size)); }
+
+:root {
+  --theme-spacing: 1rem;
+  --theme-spacing-micro:  calc( var( --theme-spacing ) / 4 );
+  --theme-spacing-tiny:   calc( var( --theme-spacing ) / 2 );
+  --theme-spacing-small:  calc( var( --theme-spacing ) * 2 );
+  --theme-spacing-normal: calc( var( --theme-spacing ) * 3 );
+  --theme-spacing-large:  calc( var( --theme-spacing ) * 4 );
+  --theme-spacing-huge:   calc( var( --theme-spacing ) * 5 );
+  --theme-spacing-fluid: 0.2rem;
+  --theme-spacing-fluid-micro:  calc( var( --theme-spacing-fluid ) / 4 );
+  --theme-spacing-fluid-tiny:   calc( var( --theme-spacing-fluid ) / 2 );
+  --theme-spacing-fluid-small:  calc( var( --theme-spacing-fluid ) * 2 );
+  --theme-spacing-fluid-normal: calc( var( --theme-spacing-fluid ) * 3 );
+  --theme-spacing-fluid-large:  calc( var( --theme-spacing-fluid ) * 4 );
+  --theme-spacing-fluid-huge:   calc( var( --theme-spacing-fluid ) * 5 ); }
+  @media screen and (min-width: 320px) {
+    :root {
+      --theme-spacing-fluid: calc(0.2rem + 0.8 * ((100vw - 320px) / 1120)); } }
+  @media screen and (min-width: 1440px) {
+    :root {
+      --theme-spacing-fluid: 1rem; } }
+
 /* 0. Reset */
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
@@ -346,73 +418,6 @@ template {
   margin: 0; }
 
 /* 1. Elements */
-/* Global CSS Custom Properties */
-:root {
-  --sm-color-primary: #DDAB5D;
-  --sm-color-secondary: #39497C;
-  --sm-color-tertiary: #B12C4A;
-  --sm-dark-primary: #212B49;
-  --sm-dark-secondary: #34394B;
-  --sm-dark-tertiary: #141928;
-  --sm-light-primary: #FFFFFF;
-  --sm-light-secondary: #CCCCCC;
-  --sm-light-tertiary: #EEEFF2;
-  --theme-color-primary: var(--sm-color-primary);
-  --theme-color-secondary: var(--sm-color-secondary);
-  --theme-color-tertiary: var(--sm-color-tertiary);
-  --theme-dark-primary: var(--sm-dark-primary);
-  --theme-dark-secondary: var(--sm-dark-secondary);
-  --theme-dark-tertiary: var(--sm-dark-tertiary);
-  --theme-light-primary: var(--sm-light-primary);
-  --theme-light-secondary: var(--sm-light-secondary);
-  --theme-light-tertiary: var(--sm-light-tertiary);
-  --current-color-primary: var(--theme-color-primary);
-  --current-color-secondary: var(--theme-color-secondary);
-  --current-color-tertiary: var(--theme-color-tertiary);
-  --current-dark-primary: var(--theme-dark-primary);
-  --current-dark-secondary: var(--theme-dark-secondary);
-  --current-dark-tertiary: var(--theme-dark-tertiary);
-  --current-light-primary: var(--theme-light-primary);
-  --current-light-secondary: var(--theme-light-secondary);
-  --current-light-tertiary: var(--theme-light-tertiary);
-  --theme-body-font-family: Reforma1969, sans-serif;
-  --theme-primary-font-family: Reforma1969, sans-serif;
-  --theme-secondary-font-family: Reforma2018, sans-serif;
-  --theme-accent-font-family: Billy Ohio, sans-serif;
-  --theme-font-size-breakpoint: 1440;
-  --theme-font-size-minimum-value: 8;
-  --theme-font-size-minimum-value-breakpoint: 320;
-  --theme-font-size-slope-adjust: 0.4;
-  --theme-addon-unit: calc( 1vw - var(--theme-font-size-breakpoint) * 1px / 100 );
-  --theme-addon-multiplier: 0;
-  --theme-addon: calc( var(--theme-addon-unit) * var(--theme-addon-multiplier) );
-  --theme-content-width-normal: calc(38 * var(--theme-content-final-font-size));
-  --theme-content-width-wide: calc(65 * var(--theme-content-final-font-size));
-  --theme-spacing: 1rem;
-  --theme-spacing-micro:  calc( var( --theme-spacing ) / 4 );
-  --theme-spacing-tiny:   calc( var( --theme-spacing ) / 2 );
-  --theme-spacing-small:  calc( var( --theme-spacing ) * 2 );
-  --theme-spacing-normal: calc( var( --theme-spacing ) * 3 );
-  --theme-spacing-large:  calc( var( --theme-spacing ) * 4 );
-  --theme-spacing-huge:   calc( var( --theme-spacing ) * 5 );
-  --theme-spacing-fluid: 0.2rem;
-  --theme-spacing-fluid-micro:  calc( var( --theme-spacing-fluid ) / 4 );
-  --theme-spacing-fluid-tiny:   calc( var( --theme-spacing-fluid ) / 2 );
-  --theme-spacing-fluid-small:  calc( var( --theme-spacing-fluid ) * 2 );
-  --theme-spacing-fluid-normal: calc( var( --theme-spacing-fluid ) * 3 );
-  --theme-spacing-fluid-large:  calc( var( --theme-spacing-fluid ) * 4 );
-  --theme-spacing-fluid-huge:   calc( var( --theme-spacing-fluid ) * 5 ); }
-  @media only screen and (min-width: 1440px) {
-    :root {
-      --theme-font-size-slope-adjust: 0.6;
-      --theme-addon-multiplier: 0.4; } }
-  @media screen and (min-width: 320px) {
-    :root {
-      --theme-spacing-fluid: calc(0.2rem + 0.8 * ((100vw - 320px) / 1120)); } }
-  @media screen and (min-width: 1440px) {
-    :root {
-      --theme-spacing-fluid: 1rem; } }
-
 html {
   -webkit-font-smoothing: antialiased;
   font-family: var(--current-font-family);
@@ -421,12 +426,14 @@ html {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-body-font-family);
   --current-font-size: var(--theme-body-final-font-size);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
   --current-letter-spacing: var(--theme-body-letter-spacing);
-  --current-text-transform: var(--theme-body-text-transform); }
+  --current-text-transform: var(--theme-body-text-transform);
+  --current-text-decoration: var(--theme-body-text-decoration); }
 
 body {
   background-color: var(--current-light-primary);
@@ -478,18 +485,19 @@ label {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
-  --theme-button-background-color: var(--current-dark-primary);
   --theme-button-text-color: var(--current-light-primary);
-  --theme-button-border-color: transparent;
-  --theme-button-hover-background-color: var(--current-color-primary);
-  --theme-button-hover-text-color: var(--current-light-primary);
-  --theme-button-hover-border-color: transparent;
+  --theme-button-background-color: var(--current-dark-primary);
+  --theme-button-border-color: var(--current-dark-primary);
+  --theme-button-hover-text-color: var(--current-dark-primary);
+  --theme-button-hover-background-color: transparent;
+  --theme-button-hover-border-color: var(--current-dark-primary);
   --theme-button-border-width: 2px;
+  --theme-button-border-style: solid;
   --theme-button-border-radius: 0;
-  --theme-button-y-padding: 0.75em;
   --theme-button-x-padding: 1.5em;
+  --theme-button-y-padding: 0.75em;
   --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
-  --theme-button-transition-duration: .4s;
+  --theme-button-transition-duration: 0.4s;
   --theme-button-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
   --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
   --theme-button-hover-transition: var(--theme-button-transition);
@@ -498,7 +506,7 @@ label {
   --current-button-text-color: var(--theme-button-text-color);
   --current-button-transition: var(--theme-button-transition);
   padding: var(--theme-button-padding);
-  border: var(--theme-button-border-width) solid transparent;
+  border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
   border-radius: var(--theme-button-border-radius);
   background-color: var(--current-button-background-color);
   color: var(--current-button-text-color);
@@ -1153,12 +1161,18 @@ ul.menu a,
   .site-header--fixed.site-header--scrolled .c-logo__inverted,
   .site-header--fixed.site-header--normal .c-logo__inverted {
     opacity: 0; }
+    .is-dark-mode .site-header--fixed.site-header--scrolled .c-logo__inverted, .is-dark-mode
+    .site-header--fixed.site-header--normal .c-logo__inverted {
+      opacity: 1; }
 
 .c-logo__default {
   opacity: 0; }
   .site-header--fixed.site-header--scrolled .c-logo__default,
   .site-header--fixed.site-header--normal .c-logo__default {
     opacity: 1; }
+    .is-dark-mode .site-header--fixed.site-header--scrolled .c-logo__default, .is-dark-mode
+    .site-header--fixed.site-header--normal .c-logo__default {
+      opacity: 0; }
 
 /* 2.2. Site Content */
 /* 2.3. Site Footer */
@@ -1211,12 +1225,14 @@ body, .site, .site-content {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-content-font-family);
   --current-font-size: var(--theme-content-final-font-size);
   --current-line-height: var(--theme-content-line-height);
   --current-font-weight: var(--theme-content-font-weight);
   --current-letter-spacing: var(--theme-content-letter-spacing);
-  --current-text-transform: var(--theme-content-text-transform); }
+  --current-text-transform: var(--theme-content-text-transform);
+  --current-text-decoration: var(--theme-content-text-decoration); }
 
 .entry-content,
 [class*="__inner-container"] {
@@ -1276,12 +1292,14 @@ body, .site, .site-content {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-meta-font-family);
   --current-font-size: var(--theme-meta-final-font-size);
   --current-line-height: var(--theme-meta-line-height);
   --current-font-weight: var(--theme-meta-font-weight);
   --current-letter-spacing: var(--theme-meta-letter-spacing);
-  --current-text-transform: var(--theme-meta-text-transform); }
+  --current-text-transform: var(--theme-meta-text-transform);
+  --current-text-decoration: var(--theme-meta-text-decoration); }
   .entry-meta > :not(:last-child):after {
     content: "·";
     padding: 0 var(--theme-spacing-tiny); }
@@ -1320,18 +1338,19 @@ body, .site, .site-content {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
-  --theme-button-background-color: var(--current-dark-primary);
   --theme-button-text-color: var(--current-light-primary);
-  --theme-button-border-color: transparent;
-  --theme-button-hover-background-color: var(--current-color-primary);
-  --theme-button-hover-text-color: var(--current-light-primary);
-  --theme-button-hover-border-color: transparent;
+  --theme-button-background-color: var(--current-dark-primary);
+  --theme-button-border-color: var(--current-dark-primary);
+  --theme-button-hover-text-color: var(--current-dark-primary);
+  --theme-button-hover-background-color: transparent;
+  --theme-button-hover-border-color: var(--current-dark-primary);
   --theme-button-border-width: 2px;
+  --theme-button-border-style: solid;
   --theme-button-border-radius: 0;
-  --theme-button-y-padding: 0.75em;
   --theme-button-x-padding: 1.5em;
+  --theme-button-y-padding: 0.75em;
   --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
-  --theme-button-transition-duration: .4s;
+  --theme-button-transition-duration: 0.4s;
   --theme-button-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
   --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
   --theme-button-hover-transition: var(--theme-button-transition);
@@ -1340,7 +1359,7 @@ body, .site, .site-content {
   --current-button-text-color: var(--theme-button-text-color);
   --current-button-transition: var(--theme-button-transition);
   padding: var(--theme-button-padding);
-  border: var(--theme-button-border-width) solid transparent;
+  border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
   border-radius: var(--theme-button-border-radius);
   background-color: var(--current-button-background-color);
   color: var(--current-button-text-color);
@@ -1593,22 +1612,16 @@ body, .site, .site-content {
     --theme-button-background-color: var(--current-color-primary);
     --theme-button-hover-background-color: transparent; }
     .has-sm-color-primary-background-color[class][class][class].wp-block-button__link.is-style-primary {
-      --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
       background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-      border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-      border-radius: 0;
       background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-color-primary-background-color[class][class][class].wp-block-button__link.is-style-primary:hover {
         background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
     .has-sm-color-primary-background-color[class][class][class].wp-block-button__link.is-style-secondary {
-      --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
       background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-      border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-      border-radius: 0;
       --current-button-text-color: var(--theme-button-hover-text-color);
       background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-color-primary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
@@ -1632,22 +1645,16 @@ body, .site, .site-content {
     --theme-button-background-color: var(--current-color-secondary);
     --theme-button-hover-background-color: transparent; }
     .has-sm-color-secondary-background-color[class][class][class].wp-block-button__link.is-style-primary {
-      --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
       background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-      border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-      border-radius: 0;
       background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-color-secondary-background-color[class][class][class].wp-block-button__link.is-style-primary:hover {
         background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
     .has-sm-color-secondary-background-color[class][class][class].wp-block-button__link.is-style-secondary {
-      --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
       background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-      border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-      border-radius: 0;
       --current-button-text-color: var(--theme-button-hover-text-color);
       background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-color-secondary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
@@ -1671,22 +1678,16 @@ body, .site, .site-content {
     --theme-button-background-color: var(--current-color-tertiary);
     --theme-button-hover-background-color: transparent; }
     .has-sm-color-tertiary-background-color[class][class][class].wp-block-button__link.is-style-primary {
-      --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
       background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-      border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-      border-radius: 0;
       background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-color-tertiary-background-color[class][class][class].wp-block-button__link.is-style-primary:hover {
         background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
     .has-sm-color-tertiary-background-color[class][class][class].wp-block-button__link.is-style-secondary {
-      --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
       background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-      border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-      border-radius: 0;
       --current-button-text-color: var(--theme-button-hover-text-color);
       background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-color-tertiary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
@@ -1710,22 +1711,16 @@ body, .site, .site-content {
     --theme-button-background-color: var(--current-dark-primary);
     --theme-button-hover-background-color: transparent; }
     .has-sm-dark-primary-background-color[class][class][class].wp-block-button__link.is-style-primary {
-      --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
       background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-      border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-      border-radius: 0;
       background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-dark-primary-background-color[class][class][class].wp-block-button__link.is-style-primary:hover {
         background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
     .has-sm-dark-primary-background-color[class][class][class].wp-block-button__link.is-style-secondary {
-      --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
       background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-      border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-      border-radius: 0;
       --current-button-text-color: var(--theme-button-hover-text-color);
       background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-dark-primary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
@@ -1749,22 +1744,16 @@ body, .site, .site-content {
     --theme-button-background-color: var(--current-dark-secondary);
     --theme-button-hover-background-color: transparent; }
     .has-sm-dark-secondary-background-color[class][class][class].wp-block-button__link.is-style-primary {
-      --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
       background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-      border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-      border-radius: 0;
       background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-dark-secondary-background-color[class][class][class].wp-block-button__link.is-style-primary:hover {
         background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
     .has-sm-dark-secondary-background-color[class][class][class].wp-block-button__link.is-style-secondary {
-      --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
       background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-      border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-      border-radius: 0;
       --current-button-text-color: var(--theme-button-hover-text-color);
       background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-dark-secondary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
@@ -1788,22 +1777,16 @@ body, .site, .site-content {
     --theme-button-background-color: var(--current-dark-tertiary);
     --theme-button-hover-background-color: transparent; }
     .has-sm-dark-tertiary-background-color[class][class][class].wp-block-button__link.is-style-primary {
-      --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
       background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-      border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-      border-radius: 0;
       background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-dark-tertiary-background-color[class][class][class].wp-block-button__link.is-style-primary:hover {
         background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
     .has-sm-dark-tertiary-background-color[class][class][class].wp-block-button__link.is-style-secondary {
-      --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
       background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-      border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-      border-radius: 0;
       --current-button-text-color: var(--theme-button-hover-text-color);
       background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-dark-tertiary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
@@ -1827,22 +1810,16 @@ body, .site, .site-content {
     --theme-button-background-color: var(--current-light-primary);
     --theme-button-hover-background-color: transparent; }
     .has-sm-light-primary-background-color[class][class][class].wp-block-button__link.is-style-primary {
-      --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
       background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-      border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-      border-radius: 0;
       background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-light-primary-background-color[class][class][class].wp-block-button__link.is-style-primary:hover {
         background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
     .has-sm-light-primary-background-color[class][class][class].wp-block-button__link.is-style-secondary {
-      --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
       background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-      border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-      border-radius: 0;
       --current-button-text-color: var(--theme-button-hover-text-color);
       background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-light-primary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
@@ -1866,22 +1843,16 @@ body, .site, .site-content {
     --theme-button-background-color: var(--current-light-secondary);
     --theme-button-hover-background-color: transparent; }
     .has-sm-light-secondary-background-color[class][class][class].wp-block-button__link.is-style-primary {
-      --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
       background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-      border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-      border-radius: 0;
       background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-light-secondary-background-color[class][class][class].wp-block-button__link.is-style-primary:hover {
         background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
     .has-sm-light-secondary-background-color[class][class][class].wp-block-button__link.is-style-secondary {
-      --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
       background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-      border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-      border-radius: 0;
       --current-button-text-color: var(--theme-button-hover-text-color);
       background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-light-secondary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
@@ -1905,22 +1876,16 @@ body, .site, .site-content {
     --theme-button-background-color: var(--current-light-tertiary);
     --theme-button-hover-background-color: transparent; }
     .has-sm-light-tertiary-background-color[class][class][class].wp-block-button__link.is-style-primary {
-      --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
       background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-      border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-      border-radius: 0;
       background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-light-tertiary-background-color[class][class][class].wp-block-button__link.is-style-primary:hover {
         background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
     .has-sm-light-tertiary-background-color[class][class][class].wp-block-button__link.is-style-secondary {
-      --theme-button-transition-duration: .4s;
       background-color: transparent;
       background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
       background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-      border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-      border-radius: 0;
       --current-button-text-color: var(--theme-button-hover-text-color);
       background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
       .has-sm-light-tertiary-background-color[class][class][class].wp-block-button__link.is-style-secondary:hover {
@@ -1993,18 +1958,19 @@ body, .site, .site-content {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
-  --theme-button-background-color: var(--current-dark-primary);
   --theme-button-text-color: var(--current-light-primary);
-  --theme-button-border-color: transparent;
-  --theme-button-hover-background-color: var(--current-color-primary);
-  --theme-button-hover-text-color: var(--current-light-primary);
-  --theme-button-hover-border-color: transparent;
+  --theme-button-background-color: var(--current-dark-primary);
+  --theme-button-border-color: var(--current-dark-primary);
+  --theme-button-hover-text-color: var(--current-dark-primary);
+  --theme-button-hover-background-color: transparent;
+  --theme-button-hover-border-color: var(--current-dark-primary);
   --theme-button-border-width: 2px;
+  --theme-button-border-style: solid;
   --theme-button-border-radius: 0;
-  --theme-button-y-padding: 0.75em;
   --theme-button-x-padding: 1.5em;
+  --theme-button-y-padding: 0.75em;
   --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
-  --theme-button-transition-duration: .4s;
+  --theme-button-transition-duration: 0.4s;
   --theme-button-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
   --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
   --theme-button-hover-transition: var(--theme-button-transition);
@@ -2013,7 +1979,7 @@ body, .site, .site-content {
   --current-button-text-color: var(--theme-button-text-color);
   --current-button-transition: var(--theme-button-transition);
   padding: var(--theme-button-padding);
-  border: var(--theme-button-border-width) solid transparent;
+  border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
   border-radius: var(--theme-button-border-radius); }
   .wp-block-button__link:hover {
     --current-button-background-color: var(--theme-button-hover-background-color);
@@ -2462,10 +2428,6 @@ body, .site, .site-content {
   --element-spacing: var(--theme-spacing-normal);
   margin-top: var(--element-spacing); }
 
-.wp-block-quote.is-style-large {
-  font-size: var(--current-font-size);
-  --current-font-size: var(--theme-large-final-font-size); }
-
 /* Table Block */
 /*.novablocks-media*/
 .block-is-moderate + .block-is-moderate,
@@ -2532,12 +2494,14 @@ body, .site, .site-content {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-body-font-family);
   --current-font-size: var(--theme-body-final-font-size);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
   --current-letter-spacing: var(--theme-body-letter-spacing);
   --current-text-transform: var(--theme-body-text-transform);
+  --current-text-decoration: var(--theme-body-text-decoration);
   flex-basis: calc(50% - var(--novablocks-media-spacing)); }
   @media only screen and (min-width: 40em) {
     .novablocks-media__content {
@@ -2645,12 +2609,14 @@ body, .site, .site-content {
     font-weight: var(--current-font-weight);
     letter-spacing: var(--current-letter-spacing);
     text-transform: var(--current-text-transform);
+    text-decoration: var(--current-text-decoration);
     --current-font-family: var(--theme-heading-4-font-family);
     --current-font-size: var(--theme-heading-4-final-font-size);
     --current-line-height: var(--theme-heading-4-line-height);
     --current-font-weight: var(--theme-heading-4-font-weight);
     --current-letter-spacing: var(--theme-heading-4-letter-spacing);
     --current-text-transform: var(--theme-heading-4-text-transform);
+    --current-text-decoration: var(--theme-heading-4-text-decoration);
     padding-right: var(--theme-spacing-tiny); }
 
 .nova-food-menu-item__prices {
@@ -2664,12 +2630,14 @@ body, .site, .site-content {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-2-font-family);
   --current-font-size: var(--theme-heading-2-final-font-size);
   --current-line-height: var(--theme-heading-2-line-height);
   --current-font-weight: var(--theme-heading-2-font-weight);
   --current-letter-spacing: var(--theme-heading-2-letter-spacing);
-  --current-text-transform: var(--theme-heading-2-text-transform); }
+  --current-text-transform: var(--theme-heading-2-text-transform);
+  --current-text-decoration: var(--theme-heading-2-text-decoration); }
 
 .nova-food-menu-item__title {
   font-size: var(--theme-heading-4-font-size); }
@@ -2709,12 +2677,14 @@ body, .site, .site-content {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-navigation-font-family);
   --current-font-size: var(--theme-navigation-final-font-size);
   --current-line-height: var(--theme-navigation-line-height);
   --current-font-weight: var(--theme-navigation-font-weight);
   --current-letter-spacing: var(--theme-navigation-letter-spacing);
-  --current-text-transform: var(--theme-navigation-text-transform); }
+  --current-text-transform: var(--theme-navigation-text-transform);
+  --current-text-decoration: var(--theme-navigation-text-decoration); }
 
 @media only screen and (min-width: 1000px) {
   .wp-block-novablocks-navigation ul.menu a,
@@ -2803,12 +2773,14 @@ body, .site, .site-content {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-3-font-family);
   --current-font-size: var(--theme-heading-3-final-font-size);
   --current-line-height: var(--theme-heading-3-line-height);
   --current-font-weight: var(--theme-heading-3-font-weight);
   --current-letter-spacing: var(--theme-heading-3-letter-spacing);
-  --current-text-transform: var(--theme-heading-3-text-transform); }
+  --current-text-transform: var(--theme-heading-3-text-transform);
+  --current-text-decoration: var(--theme-heading-3-text-decoration); }
   .wp-block-quote:before,
   .wp-block-pullquote:before {
     content: "";
@@ -2829,12 +2801,14 @@ body, .site, .site-content {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-5-font-family);
   --current-font-size: var(--theme-heading-5-final-font-size);
   --current-line-height: var(--theme-heading-5-line-height);
   --current-font-weight: var(--theme-heading-5-font-weight);
   --current-letter-spacing: var(--theme-heading-5-letter-spacing);
   --current-text-transform: var(--theme-heading-5-text-transform);
+  --current-text-decoration: var(--theme-heading-5-text-decoration);
   font-style: normal; }
 
 /* 4. Pages */
@@ -2910,18 +2884,19 @@ body {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
-  --theme-button-background-color: var(--current-dark-primary);
   --theme-button-text-color: var(--current-light-primary);
-  --theme-button-border-color: transparent;
-  --theme-button-hover-background-color: var(--current-color-primary);
-  --theme-button-hover-text-color: var(--current-light-primary);
-  --theme-button-hover-border-color: transparent;
+  --theme-button-background-color: var(--current-dark-primary);
+  --theme-button-border-color: var(--current-dark-primary);
+  --theme-button-hover-text-color: var(--current-dark-primary);
+  --theme-button-hover-background-color: transparent;
+  --theme-button-hover-border-color: var(--current-dark-primary);
   --theme-button-border-width: 2px;
+  --theme-button-border-style: solid;
   --theme-button-border-radius: 0;
-  --theme-button-y-padding: 0.75em;
   --theme-button-x-padding: 1.5em;
+  --theme-button-y-padding: 0.75em;
   --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
-  --theme-button-transition-duration: .4s;
+  --theme-button-transition-duration: 0.4s;
   --theme-button-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
   --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
   --theme-button-hover-transition: var(--theme-button-transition);
@@ -2940,46 +2915,25 @@ body {
     color: var(--current-button-text-color); }
 
 .wp-block-button:not([class*="is-style"]) .wp-block-button__link:not(.has-background) {
-  --theme-button-transition-duration: .4s;
   background-color: transparent;
   background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
   background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-  border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-  border-radius: 0;
   background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
   .wp-block-button:not([class*="is-style"]) .wp-block-button__link:not(.has-background):hover {
     background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
 
 .wp-block-button.is-style-primary .wp-block-button__link[class] {
-  --theme-button-text-color: var(--current-light-primary);
-  --theme-button-background-color: var(--current-dark-primary);
-  --theme-button-border-color: var(--current-dark-primary);
-  --theme-button-hover-text-color: var(--current-dark-primary);
-  --theme-button-hover-background-color: transparent;
-  --theme-button-hover-border-color: var(--current-dark-primary);
-  --theme-button-transition-duration: .4s;
   background-color: transparent;
   background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
   background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-  border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-  border-radius: 0;
   background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
   .wp-block-button.is-style-primary .wp-block-button__link[class]:hover {
     background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
 
 .wp-block-button.is-style-secondary .wp-block-button__link[class] {
-  --theme-button-text-color: var(--current-light-primary);
-  --theme-button-background-color: var(--current-dark-primary);
-  --theme-button-border-color: var(--current-dark-primary);
-  --theme-button-hover-text-color: var(--current-dark-primary);
-  --theme-button-hover-background-color: transparent;
-  --theme-button-hover-border-color: var(--current-dark-primary);
-  --theme-button-transition-duration: .4s;
   background-color: transparent;
   background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
   background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-  border: var(--theme-button-border-width) solid var(--theme-button-border-color);
-  border-radius: 0;
   --current-button-text-color: var(--theme-button-hover-text-color);
   background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
   .wp-block-button.is-style-secondary .wp-block-button__link[class]:hover {
@@ -2991,20 +2945,20 @@ body {
   padding: 0;
   background: none;
   border-width: 0;
-  --theme-button-text-color: var(--current-color-primary);
-  --theme-button-hover-text-color: var(--current-color-primary);
-  --theme-button-arrow-size: 1.15em;
   position: relative;
-  padding-right: var(--theme-button-arrow-size);
+  padding-right: 1.15em;
   padding-bottom: .3em;
-  margin-right: calc( -1 * var(--theme-button-arrow-size));
-  margin-bottom: -.3em; }
+  margin-right: calc( -1 * 1.15em);
+  margin-bottom: -.3em;
+  text-decoration: none;
+  --theme-button-text-color: var(--current-color-primary);
+  --theme-button-hover-text-color: var(--current-color-primary); }
   .is-style-text .wp-block-button__link:before {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
-    width: calc(100% - var(--theme-button-arrow-size));
+    width: calc(100% - 1.15em);
     height: .1em;
     background: currentColor;
     transition: var(--theme-button-transition);
@@ -3016,8 +2970,8 @@ body {
     top: calc(50% - .1em);
     right: 0;
     display: inline-block;
-    width: var(--theme-button-arrow-size);
-    height: var(--theme-button-arrow-size);
+    width: 1.15em;
+    height: 1.15em;
     mask: url("assets/images/icon-arrow.svg") no-repeat 50% 50%;
     -webkit-mask: url("assets/images/icon-arrow.svg") no-repeat 50% 50%;
     mask-size: cover;
@@ -3040,6 +2994,7 @@ body {
   --theme-body-font-weight: 400;
   --theme-body-letter-spacing: -0.03em;
   --theme-body-text-transform: inherit;
+  --theme-body-text-decoration: inherit;
   --theme-body-font-size: 16;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
@@ -3058,6 +3013,7 @@ body {
   --theme-content-font-weight: inherit;
   --theme-content-letter-spacing: -0.03em;
   --theme-content-text-transform: inherit;
+  --theme-content-text-decoration: inherit;
   --theme-content-font-size: 18;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
@@ -3076,6 +3032,7 @@ body {
   --theme-lead-font-weight: inherit;
   --theme-lead-letter-spacing: -0.02em;
   --theme-lead-text-transform: inherit;
+  --theme-lead-text-decoration: inherit;
   --theme-lead-font-size: 24;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
@@ -3094,6 +3051,7 @@ body {
   --theme-display-font-weight: 700;
   --theme-display-letter-spacing: -0.03em;
   --theme-display-text-transform: inherit;
+  --theme-display-text-decoration: inherit;
   --theme-display-font-size: 115;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
@@ -3112,6 +3070,7 @@ body {
   --theme-heading-1-font-weight: 700;
   --theme-heading-1-letter-spacing: -0.03em;
   --theme-heading-1-text-transform: inherit;
+  --theme-heading-1-text-decoration: inherit;
   --theme-heading-1-font-size: 66;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
@@ -3130,6 +3089,7 @@ body {
   --theme-heading-2-font-weight: 700;
   --theme-heading-2-letter-spacing: -0.02em;
   --theme-heading-2-text-transform: inherit;
+  --theme-heading-2-text-decoration: inherit;
   --theme-heading-2-font-size: 40;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
@@ -3148,6 +3108,7 @@ body {
   --theme-heading-3-font-weight: 700;
   --theme-heading-3-letter-spacing: -0.02em;
   --theme-heading-3-text-transform: inherit;
+  --theme-heading-3-text-decoration: inherit;
   --theme-heading-3-font-size: 32;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
@@ -3166,6 +3127,7 @@ body {
   --theme-heading-4-font-weight: 700;
   --theme-heading-4-letter-spacing: -0.02em;
   --theme-heading-4-text-transform: inherit;
+  --theme-heading-4-text-decoration: inherit;
   --theme-heading-4-font-size: 24;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
@@ -3184,6 +3146,7 @@ body {
   --theme-heading-5-font-weight: 500;
   --theme-heading-5-letter-spacing: inherit;
   --theme-heading-5-text-transform: inherit;
+  --theme-heading-5-text-decoration: inherit;
   --theme-heading-5-font-size: 17;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
@@ -3202,6 +3165,7 @@ body {
   --theme-heading-6-font-weight: 500;
   --theme-heading-6-letter-spacing: inherit;
   --theme-heading-6-text-transform: inherit;
+  --theme-heading-6-text-decoration: inherit;
   --theme-heading-6-font-size: 17;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
@@ -3220,6 +3184,7 @@ body {
   --theme-navigation-font-weight: 500;
   --theme-navigation-letter-spacing: inherit;
   --theme-navigation-text-transform: inherit;
+  --theme-navigation-text-decoration: inherit;
   --theme-navigation-font-size: 17;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
@@ -3238,6 +3203,7 @@ body {
   --theme-meta-font-weight: 500;
   --theme-meta-letter-spacing: inherit;
   --theme-meta-text-transform: inherit;
+  --theme-meta-text-decoration: inherit;
   --theme-meta-font-size: 17;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
@@ -3256,6 +3222,7 @@ body {
   --theme-button-font-weight: 500;
   --theme-button-letter-spacing: 0.03em;
   --theme-button-text-transform: capitalize;
+  --theme-button-text-decoration: inherit;
   --theme-button-font-size: 17;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
@@ -3275,12 +3242,14 @@ h1.has-larger-font-size {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-display-font-family);
   --current-font-size: var(--theme-display-final-font-size);
   --current-line-height: var(--theme-display-line-height);
   --current-font-weight: var(--theme-display-font-weight);
   --current-letter-spacing: var(--theme-display-letter-spacing);
-  --current-text-transform: var(--theme-display-text-transform); }
+  --current-text-transform: var(--theme-display-text-transform);
+  --current-text-decoration: var(--theme-display-text-decoration); }
 
 h1,
 h2.has-larger-font-size {
@@ -3290,12 +3259,14 @@ h2.has-larger-font-size {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-1-font-family);
   --current-font-size: var(--theme-heading-1-final-font-size);
   --current-line-height: var(--theme-heading-1-line-height);
   --current-font-weight: var(--theme-heading-1-font-weight);
   --current-letter-spacing: var(--theme-heading-1-letter-spacing);
-  --current-text-transform: var(--theme-heading-1-text-transform); }
+  --current-text-transform: var(--theme-heading-1-text-transform);
+  --current-text-decoration: var(--theme-heading-1-text-decoration); }
 
 h1.has-smaller-font-size,
 h2,
@@ -3306,12 +3277,14 @@ h3.has-larger-font-size {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-2-font-family);
   --current-font-size: var(--theme-heading-2-final-font-size);
   --current-line-height: var(--theme-heading-2-line-height);
   --current-font-weight: var(--theme-heading-2-font-weight);
   --current-letter-spacing: var(--theme-heading-2-letter-spacing);
-  --current-text-transform: var(--theme-heading-2-text-transform); }
+  --current-text-transform: var(--theme-heading-2-text-transform);
+  --current-text-decoration: var(--theme-heading-2-text-decoration); }
 
 h2.has-smaller-font-size,
 h3 {
@@ -3321,12 +3294,14 @@ h3 {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-3-font-family);
   --current-font-size: var(--theme-heading-3-final-font-size);
   --current-line-height: var(--theme-heading-3-line-height);
   --current-font-weight: var(--theme-heading-3-font-weight);
   --current-letter-spacing: var(--theme-heading-3-letter-spacing);
-  --current-text-transform: var(--theme-heading-3-text-transform); }
+  --current-text-transform: var(--theme-heading-3-text-transform);
+  --current-text-decoration: var(--theme-heading-3-text-decoration); }
 
 h3.has-smaller-font-size,
 h4, .novablocks-map__marker-name {
@@ -3336,12 +3311,14 @@ h4, .novablocks-map__marker-name {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-size: var(--theme-heading-4-final-font-size);
   --current-line-height: var(--theme-heading-4-line-height);
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
-  --current-text-transform: var(--theme-heading-4-text-transform); }
+  --current-text-transform: var(--theme-heading-4-text-transform);
+  --current-text-decoration: var(--theme-heading-4-text-decoration); }
 
 h5 {
   font-family: var(--current-font-family);
@@ -3350,12 +3327,14 @@ h5 {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-5-font-family);
   --current-font-size: var(--theme-heading-5-final-font-size);
   --current-line-height: var(--theme-heading-5-line-height);
   --current-font-weight: var(--theme-heading-5-font-weight);
   --current-letter-spacing: var(--theme-heading-5-letter-spacing);
-  --current-text-transform: var(--theme-heading-5-text-transform); }
+  --current-text-transform: var(--theme-heading-5-text-transform);
+  --current-text-decoration: var(--theme-heading-5-text-decoration); }
 
 h6 {
   font-family: var(--current-font-family);
@@ -3364,12 +3343,14 @@ h6 {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-6-font-family);
   --current-font-size: var(--theme-heading-6-final-font-size);
   --current-line-height: var(--theme-heading-6-line-height);
   --current-font-weight: var(--theme-heading-6-font-weight);
   --current-letter-spacing: var(--theme-heading-6-letter-spacing);
-  --current-text-transform: var(--theme-heading-6-text-transform); }
+  --current-text-transform: var(--theme-heading-6-text-transform);
+  --current-text-decoration: var(--theme-heading-6-text-decoration); }
 
 .c-headline {
   display: flex;
@@ -3423,20 +3404,18 @@ h1.c-headline.has-larger-font-size > .editor-rich-text + .editor-rich-text {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-button-font-family);
   --current-font-size: var(--theme-button-final-font-size);
   --current-line-height: var(--theme-button-line-height);
   --current-font-weight: var(--theme-button-font-weight);
   --current-letter-spacing: var(--theme-button-letter-spacing);
-  --current-text-transform: var(--theme-button-text-transform); }
+  --current-text-transform: var(--theme-button-text-transform);
+  --current-text-decoration: var(--theme-button-text-decoration); }
 
 figure > :not(:first-child) {
   --element-spacing: var(--theme-spacing-tiny);
   margin-top: var(--element-spacing); }
-
-figcaption {
-  font-size: var(--current-font-size);
-  --current-font-size: var(--theme-small-final-font-size); }
 
 pre,
 code {
@@ -3452,14 +3431,6 @@ code {
 
 pre code {
   background: transparent; }
-
-cite {
-  font-size: var(--current-font-size);
-  --current-font-size: var(--theme-normal-final-font-size); }
-
-.wp-block-cover-text {
-  font-size: var(--current-font-size);
-  --current-font-size: var(--theme-medium-final-font-size); }
 
 .c-separator {
   --separator-line-thickness: 2px;
@@ -3533,12 +3504,14 @@ cite {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-size: var(--theme-heading-4-final-font-size);
   --current-line-height: var(--theme-heading-4-line-height);
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
-  --current-text-transform: var(--theme-heading-4-text-transform); }
+  --current-text-transform: var(--theme-heading-4-text-transform);
+  --current-text-decoration: var(--theme-heading-4-text-decoration); }
 
 .post-navigation a {
   text-decoration: none; }
@@ -3555,12 +3528,14 @@ cite {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-size: var(--theme-heading-4-final-font-size);
   --current-line-height: var(--theme-heading-4-line-height);
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
-  --current-text-transform: var(--theme-heading-4-text-transform); }
+  --current-text-transform: var(--theme-heading-4-text-transform);
+  --current-text-decoration: var(--theme-heading-4-text-decoration); }
 
 /* 6. Overwrites */
 /* Embeds */
@@ -3590,9 +3565,11 @@ iframe.instagram-media {
   font-weight: var(--current-font-weight);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-lead-font-family);
   --current-font-size: var(--theme-lead-final-font-size);
   --current-line-height: var(--theme-lead-line-height);
   --current-font-weight: var(--theme-lead-font-weight);
   --current-letter-spacing: var(--theme-lead-letter-spacing);
-  --current-text-transform: var(--theme-lead-text-transform); }
+  --current-text-transform: var(--theme-lead-text-transform);
+  --current-text-decoration: var(--theme-lead-text-decoration); }

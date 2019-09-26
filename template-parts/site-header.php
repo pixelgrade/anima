@@ -9,9 +9,9 @@
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
-} ?>
+}
 
-<? get_template_part( 'template-parts/menu-toggle' ); ?>
+get_template_part( 'template-parts/menu-toggle' ); ?>
 
 <header id="masthead" class="site-header site-header--logo-center">
     <div class="site-header__inner-container">

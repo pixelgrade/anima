@@ -10,11 +10,9 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
-$classes = array();
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class( join( ' ', $classes ) ); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
     <div>
         <header class="entry-header">

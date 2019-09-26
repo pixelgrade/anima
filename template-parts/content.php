@@ -11,6 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+global $wp_query;
+
 $classes = array(
     'novablocks-media',
     'wp-block-group',
@@ -20,8 +22,8 @@ $classes = array(
     'has-background',
 );
 
-$classes[] = get_query_var( 'has_image_on_the_left' ) ? 'has-image-on-the-left' : 'has-image-on-the-right';
-
+// We want the first post in the loop on the left, the next one on the right and so on. $wp_query->current_post starts at 0, not at 1.
+$classes[] = ( $wp_query->current_post % 2 ) ? 'has-image-on-the-right' : 'has-image-on-the-left';
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( join( ' ', $classes ) ); ?>>

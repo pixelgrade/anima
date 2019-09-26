@@ -24,12 +24,10 @@
     }
 
     &.is-style-primary .wp-block-button__link[class] {
-        @include button-outline-vars;
         @include button-fill;
     }
 
     &.is-style-secondary .wp-block-button__link[class] {
-        @include button-outline-vars;
         @include button-fill-reverse;
     }
 }
@@ -39,5 +37,8 @@
     .wp-block-button__link {
         @include button-reset;
         @include button-text;
+
+        --theme-button-text-color: var(--current-color-primary);
+        --theme-button-hover-text-color: var(--current-color-primary);
     }
 }

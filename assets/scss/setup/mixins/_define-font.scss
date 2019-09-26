@@ -1,4 +1,13 @@
-@mixin define-font($name, $config, $props: $nova-font-props) {
+$font-props:
+    font-family,
+    font-size,
+    line-height,
+    font-weight,
+    letter-spacing,
+    text-transform,
+    text-decoration;
+
+@mixin define-font($name, $config) {
     $config: map_merge( (
         font-family: inherit,
         font-size: inherit,
@@ -15,7 +24,7 @@
 
         :root {
 
-            @each $prop in remove($props, font-size) {
+            @each $prop in remove($font-props, font-size) {
                 $value: map-get( $config, $prop );
                 @if ( map-get( $config, $prop ) ) {
                     #{$prefix}-#{$prop}: #{$value};
@@ -62,13 +71,13 @@
     }
 }
 
-@mixin apply-font($name, $props: $nova-font-props) {
+@mixin apply-font($name) {
 
-    @each $prop in $props {
+    @each $prop in $font-props {
         #{$prop}: var(--current-#{$prop});
     }
 
-    @each $prop in $props {
+    @each $prop in $font-props {
         @if ($prop == 'font-size') {
             --current-#{$prop}: var(--theme-#{$name}-final-#{$prop});
         } @else {

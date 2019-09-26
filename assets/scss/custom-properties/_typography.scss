@@ -1,0 +1,28 @@
+
+// ATTENTION!
+// This file shouldn't be modified. Proceed with caution!
+
+:root {
+    // font families
+    --theme-body-font-family: #{$theme-sm-font-body};
+    --theme-primary-font-family: #{$theme-sm-font-primary};
+    --theme-secondary-font-family: #{$theme-sm-font-secondary};
+    --theme-accent-font-family: #{$theme-sm-font-accent};
+
+    // fluid typography settings
+    --theme-font-size-breakpoint: #{strip-unit($nova-font-size-breakpoint)};
+    --theme-font-size-minimum-value: #{strip-unit($theme-minimum-font-size)};
+    --theme-font-size-minimum-value-breakpoint: #{strip-unit($nova-font-size-minimum-value-breakpoint)};
+
+    --theme-font-size-slope-adjust: #{$theme-font-size-slope-adjust};
+
+    // create a unit value that is relative to the viewport width to all font sizes
+    --theme-addon-unit: calc( 1vw - var(--theme-font-size-breakpoint) * 1px / 100 );
+    --theme-addon-multiplier: 0;
+    --theme-addon: calc( var(--theme-addon-unit) * var(--theme-addon-multiplier) );
+
+    @media only screen and (min-width: #{$nova-font-size-breakpoint}) {
+        --theme-font-size-slope-adjust: #{$theme-font-size-slope-adjust-desktop};
+        --theme-addon-multiplier: #{$theme-font-size-addon-multiplier-desktop};
+    }
+}

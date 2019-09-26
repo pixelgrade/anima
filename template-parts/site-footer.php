@@ -14,8 +14,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <footer id="colophon" class="site-footer">
 	<div class="site-footer__inner-container">
-		<?php rosa2_footer_the_copyright(); ?>
-		<?php if ( has_nav_menu( 'footer' ) ) { ?>
+		<?php
+		rosa2_footer_the_copyright();
+
+		if ( has_nav_menu( 'footer' ) ) { ?>
 			<nav class="footer-navigation" aria-label="<?php esc_attr_e( 'Footer Menu', '__theme_txtd' ); ?>">
 				<?php
 				wp_nav_menu(
