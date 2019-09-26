@@ -415,7 +415,7 @@ if ( ! function_exists( 'rosa2_comments_toggle_checked_attribute' ) ) {
 	function rosa2_comments_toggle_checked_attribute() {
 		// If the outcome is not falsy, output the attribute.
 		if ( rosa2_get_comments_toggle_checked_attribute() ) {
-			echo 'checked="checked"';
+			echo '';
 		}
 	}
 }
