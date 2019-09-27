@@ -7,4 +7,10 @@
     --theme-transition-duration: #{$theme-transition-duration};
     --theme-transition-easing: #{$theme-transition-easing};
     --theme-transition: all var(--theme-transition-duration) var(--theme-transition-easing);
+
+    --theme-header-links-spacing-settings: 32;
+    --theme-header-links-spacing: calc( var(--theme-spacing-fluid) * var(--theme-header-links-spacing-settings) / var(--theme-body-font-size));
+
+    --theme-header-sides-spacing-settings: 48;
+    --theme-header-sides-spacing: calc( var(--theme-spacing-fluid) * var(--theme-header-sides-spacing-settings) /  var(--theme-body-font-size) );
 }

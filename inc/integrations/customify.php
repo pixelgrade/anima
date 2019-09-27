@@ -522,7 +522,7 @@ function rosa2_add_header_section_to_customify_config( $config ) {
 					),
 					'css'         => array(
 						array(
-							'property'        => '--theme-header-links-spacing',
+							'property'        => '--theme-header-links-spacing-settings',
 							'selector'        => ':root',
 							'unit'            => '',
 						),
@@ -543,7 +543,7 @@ function rosa2_add_header_section_to_customify_config( $config ) {
 					'label'       => esc_html__( 'Header Sides Spacing', '__theme_txtd' ),
 					'desc'        => esc_html__( 'Adjust the space separating the header and the sides of the browser.', '__theme_txtd' ),
 					'live'        => true,
-					'default'     => null, // this should be set by the theme (previously 40)
+					'default'     => 48, // this should be set by the theme (previously 40)
 					'input_attrs' => array(
 						'min'          => 0,
 						'max'          => 140,
@@ -552,9 +552,9 @@ function rosa2_add_header_section_to_customify_config( $config ) {
 					),
 					'css'         => array(
 						array(
-							'property'        => '--theme-header-sides-spacing',
+							'property'        => '--theme-header-sides-spacing-settings',
 							'selector'        => ':root',
-							'unit'            => 'px',
+							'unit'            => '',
 						),
 					),
 				),

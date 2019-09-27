@@ -40,6 +40,11 @@ $site-header-transition-speed: .3s !default;
     }
 }
 
+.site-header__inner-container[class] {
+    padding-left: var(--theme-header-sides-spacing);
+    padding-right: var(--theme-header-sides-spacing);
+}
+
 @mixin remove-page-padding-top {
     #page {
         padding-top: 0 !important;

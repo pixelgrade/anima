@@ -110,7 +110,11 @@ Table of Contents
 :root {
   --theme-transition-duration: 0.4s;
   --theme-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
-  --theme-transition: all var(--theme-transition-duration) var(--theme-transition-easing); }
+  --theme-transition: all var(--theme-transition-duration) var(--theme-transition-easing);
+  --theme-header-links-spacing-settings: 32;
+  --theme-header-links-spacing: calc( var(--theme-spacing-fluid) * var(--theme-header-links-spacing-settings) / var(--theme-body-font-size));
+  --theme-header-sides-spacing-settings: 48;
+  --theme-header-sides-spacing: calc( var(--theme-spacing-fluid) * var(--theme-header-sides-spacing-settings) /  var(--theme-body-font-size) ); }
 
 /* 0. Reset */
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
@@ -1017,7 +1021,7 @@ ul.menu a,
   top: 0;
   left: 0;
   z-index: 1100;
-  padding: 1em;
+  padding: 1em 1em 1em var(--theme-header-sides-spacing);
   cursor: pointer; }
   .admin-bar .c-menu-toggle__wrap {
     top: 32px; }
@@ -1172,18 +1176,18 @@ ul.menu a,
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1em; }
+    padding: 1em var(--theme-header-sides-spacing); }
     .site-header--mobile .menu-item--cart {
       display: flex;
       position: absolute;
       top: 50%;
-      right: 1em;
+      right: var(--theme-header-sides-spacing);
       transform: translateY(-50%); }
       .site-header--mobile .menu-item--cart > a {
         color: currentColor; }
-  body:not(.has-fixed-site-header) .site-header--mobile {
+  body:not(.has-site-header-fixed) .site-header--mobile {
     background-color: var(--current-light-primary); }
-    body:not(.has-fixed-site-header) .site-header--mobile:after {
+    body:not(.has-site-header-fixed) .site-header--mobile:after {
       content: "";
       display: block;
       position: absolute;
@@ -1195,20 +1199,20 @@ ul.menu a,
       opacity: 0.1;
       pointer-events: none;
       transition: opacity 0.3s ease; }
-    body:not(.has-fixed-site-header) .site-header--mobile .c-logo__default {
+    body:not(.has-site-header-fixed) .site-header--mobile .c-logo__default {
       opacity: 1; }
-    body:not(.has-fixed-site-header) .site-header--mobile .c-logo__inverted {
+    body:not(.has-site-header-fixed) .site-header--mobile .c-logo__inverted {
       opacity: 0; }
-  body:not(.has-fixed-site-header).is-dark-mode .site-header--mobile .c-logo__inverted {
+  body:not(.has-site-header-fixed).is-dark-mode .site-header--mobile .c-logo__inverted {
     opacity: 1; }
-  body:not(.has-fixed-site-header).is-dark-mode .site-header--mobile .c-logo__default {
+  body:not(.has-site-header-fixed).is-dark-mode .site-header--mobile .c-logo__default {
     opacity: 0; }
   .sub-menu {
-    margin-left: -1em;
-    margin-right: -1em; }
+    margin-left: calc(var(--theme-header-sides-spacing) * -1);
+    margin-right: calc(var(--theme-header-sides-spacing) * -1); }
     .sub-menu > li {
-      padding-left: 1em;
-      padding-right: 1em; }
+      padding-left: var(--theme-header-sides-spacing);
+      padding-right: var(--theme-header-sides-spacing); }
   .site-header,
   .c-menu-toggle__slice {
     transition: transform .3s ease-out; }
@@ -1320,6 +1324,10 @@ ul.menu a,
     pointer-events: none;
     transition: --theme-transition;
     transition-property: opacity; } }
+
+.site-header__inner-container[class] {
+  padding-left: var(--theme-header-sides-spacing);
+  padding-right: var(--theme-header-sides-spacing); }
 
 @media only screen and (min-width: 1000px) {
   .site-header--fixed {
@@ -3271,9 +3279,6 @@ span.page-numbers {
   --current-text-transform: var(--theme-navigation-text-transform);
   --current-text-decoration: var(--theme-navigation-text-decoration); }
 
-:root {
-  --theme-header-links-spacing: 32; }
-
 @media only screen and (min-width: 1000px) {
   .wp-block-novablocks-navigation ul.menu a,
   .wp-block-novablocks-navigation .menu > ul a {
@@ -3283,7 +3288,7 @@ span.page-numbers {
     text-decoration: none; }
   .wp-block-novablocks-navigation ul.menu > li:not(:first-child),
   .wp-block-novablocks-navigation .menu > ul > li:not(:first-child) {
-    margin-left: calc( var(--theme-header-links-spacing) * var(--theme-customify-unit)); }
+    margin-left: var(--theme-header-links-spacing); }
   .wp-block-novablocks-navigation ul.menu .customize-partial-edit-shortcut + > li:not(:first-child),
   .wp-block-novablocks-navigation .menu > ul .customize-partial-edit-shortcut + > li:not(:first-child) {
     margin-left: 0; }
