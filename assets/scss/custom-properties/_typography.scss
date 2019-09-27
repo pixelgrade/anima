@@ -25,7 +25,7 @@
     --theme-addon-multiplier: 0;
     --theme-addon: calc( var(--theme-addon-unit) * var(--theme-addon-multiplier) );
 
-    @media only screen and (min-width: #{$theme-font-size-breakpoint}) {
+    @include above($theme-font-size-breakpoint) {
         --theme-font-size-slope-adjust: #{$theme-font-size-slope-adjust-desktop};
         --theme-addon-multiplier: #{$theme-font-size-addon-multiplier-desktop};
     }
