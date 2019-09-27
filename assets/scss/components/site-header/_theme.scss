@@ -82,7 +82,7 @@ body.has-site-header-transparent  {
     &:not(.has-site-header-inversed) {
 
         @media only screen and (min-width: 1000px) {
-            &.has-site-header-fixed {
+            &.has-site-header-fixed.has-hero {
 
                 .site-header:not(.site-header--scrolled) {
                     color: var(--sm-light-primary);
@@ -99,7 +99,7 @@ body.has-site-header-transparent  {
             }
         }
 
-        &.has-site-header-fixed {
+        &.has-site-header-fixed.has-hero {
 
             @media not screen and (min-width: 1000px) {
                 .site-header--mobile:not(.site-header--scrolled),
