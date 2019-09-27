@@ -97,6 +97,36 @@ add_filter( 'woocommerce_pagination_args', 'rosa2_woocommerce_pagination_args', 
 
 add_filter( 'product_cat_class', 'rosa2_product_category_classes', 10, 1);
 
+// Change loop start
+add_filter( 'woocommerce_product_loop_start', 'rosa2_woocommerceLoopStart', 10, 1 );
+// Change loop end
+add_filter( 'woocommerce_product_loop_start', 'rosa2_woocommerceLoopEnd', 10, 1 );
+// Change sale flash
+add_filter( 'woocommerce_sale_flash', 'rosa2_woocommerceSaleFlash', 10, 1 );
+
+// Change product classes.
+add_filter( 'woocommerce_post_class', 'rosa2_woocommerceProductClass', 10, 2 );
+
+function rosa2_woocommerceProductClass( $classes, $product ) {
+	if ( ! is_product() ) {
+		$classes[] = 'wc-block-grid__product';
+	}
+
+	return $classes;
+}
+
+function rosa2_woocommerceLoopStart( $markup ) {
+	return '<div class="wc-block-grid has-' . esc_attr( wc_get_loop_prop( 'columns' ) ) . '-columns"><ul class="wc-block-grid__products">';
+}
+
+function rosa2_woocommerceLoopEnd( $markup ) {
+	return '</ul></div>';
+}
+
+function rosa2_woocommerceSaleFlash( $markup ) {
+	return '<span class="wc-block-grid__product-onsale">' . esc_html__( 'Sale!', '__theme_txtd' ) . '</span>';
+}
+
 function rosa2_addStartWrapperBeforeSingleProductSummary() {
 	echo '<div class="c-product-main">';
 }

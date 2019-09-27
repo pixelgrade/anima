@@ -20,8 +20,8 @@ if ( ! function_exists( 'rosa2_alter_novablocks_hero_settings' ) ) {
 			array(
 				'novablocks/headline',
 				array(
-					'secondary' => 'This is a catchy',
-					'primary'   => 'Headline',
+					'secondary' => esc_html__( 'This is a catchy', '__theme_txtd' ),
+					'primary'   => esc_html__( 'Headline', '__theme_txtd' ),
 					'align'     => 'center',
 					'level'     => 1,
 					'className' => 'has-larger-font-size',
@@ -30,7 +30,7 @@ if ( ! function_exists( 'rosa2_alter_novablocks_hero_settings' ) ) {
 			array(
 				'core/paragraph',
 				array(
-					'content'   => 'A brilliant subtitle to explain its catchiness',
+					'content'   => esc_html__( 'A brilliant subtitle to explain its catchiness', '__theme_txtd' ),
 					'className' => 'is-style-lead',
 				),
 			)
@@ -49,8 +49,8 @@ if ( ! function_exists( 'rosa2_alter_novablocks_media_settings' ) ) {
 			array(
 				'novablocks/headline',
 				array(
-					'secondary' => 'Discover',
-					'primary'   => 'Our Story',
+					'secondary' => esc_html__( 'Discover', '__theme_txtd' ),
+					'primary'   => esc_html__( 'Our Story', '__theme_txtd' ),
 					'align'     => 'center',
 					'level'     => 2,
 					'className' => 'has-larger-font-size',
@@ -66,14 +66,14 @@ if ( ! function_exists( 'rosa2_alter_novablocks_media_settings' ) ) {
 			array(
 				'core/paragraph',
 				array(
-					'content' => 'We have always defined ourselves by the ability to overcome the impossible. And we count these moments. These moments when we dare to aim higher, to break barriers, to make the unknown known.',
+					'content' => esc_html__( 'We have always defined ourselves by the ability to overcome the impossible. And we count these moments. These moments when we dare to aim higher, to break barriers, to make the unknown known.', '__theme_txtd' ),
 					'align'   => 'center',
 				),
 			),
 			array(
 				'core/button',
 				array(
-					'text'      => 'Learn More',
+					'text'      => esc_html__( 'Learn More', '__theme_txtd' ),
 					'align'     => 'center',
 					'className' => 'is-style-text'
 				),

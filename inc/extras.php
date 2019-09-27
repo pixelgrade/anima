@@ -50,8 +50,9 @@ function rosa2_has_moderate_media_card_after_hero() {
 		if ( count( $blocks ) > 1 ) {
 		    $firstBlockIsHero = $blocks[0]['blockName'] === 'novablocks/hero';
 		    $secondBlockIsMedia = $blocks[1]['blockName'] === 'novablocks/media';
-		    $mediaBlockIsAltered = $blocks[1]['attrs']['blockStyle'] === 'moderate';
-			return $firstBlockIsHero && $secondBlockIsMedia && $mediaBlockIsAltered;
+		    if ( $firstBlockIsHero && $secondBlockIsMedia ) {
+		    	return isset( $blocks[1]['attrs']['blockStyle'] ) && $blocks[1]['attrs']['blockStyle'] === 'moderate';
+		    }
 		}
 	}
 

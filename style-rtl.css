@@ -1525,6 +1525,7 @@ body, .site, .site-content {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding-right: 0;
   list-style: none;
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
@@ -1883,7 +1884,8 @@ label.subscribe-label.subscribe-label {
 
 .post-navigation .nav-links {
   display: flex;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  justify-content: space-between; }
   .post-navigation .nav-links > * {
     flex: 0 1 auto;
     margin-left: var(--block-grid-spacing);
