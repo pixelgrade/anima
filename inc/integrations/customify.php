@@ -487,7 +487,7 @@ function rosa2_add_header_section_to_customify_config( $config ) {
 					),
 					'css'         => array(
 						array(
-							'property' => '--theme-logo-height',
+							'property' => '--theme-header-logo-height-settings',
 							'selector' => ':root',
 							'unit'     => '',
 						),
@@ -507,7 +507,7 @@ function rosa2_add_header_section_to_customify_config( $config ) {
 					),
 					'css'         => array(
 						array(
-							'property' => '--theme-header-height',
+							'property' => '--theme-header-height-settings',
 							'selector' => ':root',
 							'unit'     => '',
 						),

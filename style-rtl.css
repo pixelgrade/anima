@@ -111,6 +111,10 @@ Table of Contents
   --theme-transition-duration: 0.4s;
   --theme-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
   --theme-transition: all var(--theme-transition-duration) var(--theme-transition-easing);
+  --theme-header-logo-height-settings: 22;
+  --theme-header-logo-height: calc(var(--theme-spacing-fluid) * var(--theme-header-logo-height-settings) / var(--theme-body-font-size));
+  --theme-header-height-settings: 118;
+  --theme-header-height: calc(var(--theme-spacing-fluid) * var(--theme-header-height-settings) / var(--theme-body-font-size));
   --theme-header-links-spacing-settings: 32;
   --theme-header-links-spacing: calc( var(--theme-spacing-fluid) * var(--theme-header-links-spacing-settings) / var(--theme-body-font-size));
   --theme-header-sides-spacing-settings: 48;
@@ -1284,7 +1288,7 @@ ul.menu a,
     z-index: 1000;
     display: flex;
     align-items: center;
-    min-height: calc( var(--theme-header-height) * var(--theme-customify-unit));
+    min-height: var(--theme-header-height);
     padding-top: 1em;
     padding-bottom: 1em;
     transition: var(--theme-transition);
@@ -1337,7 +1341,7 @@ ul.menu a,
   .has-site-header-fixed .site-header:not(.site-header--ready) {
     position: absolute; } }
 
-.has-site-header-fixed #page {
+.has-site-header-fixed.has-hero #page {
   padding-top: 0 !important; }
 
 @media only screen and (min-width: 1000px) {
@@ -1379,7 +1383,7 @@ ul.menu a,
 .site-logo img {
   display: block;
   max-width: 100%;
-  max-height: calc( var(--theme-logo-height) * var(--theme-customify-unit));
+  max-height: var(--theme-logo-height);
   width: auto;
   height: auto; }
 
@@ -3288,7 +3292,7 @@ span.page-numbers {
     text-decoration: none; }
   .wp-block-novablocks-navigation ul.menu > li:not(:first-child),
   .wp-block-novablocks-navigation .menu > ul > li:not(:first-child) {
-    margin-right: calc( var(--theme-header-links-spacing) * var(--theme-customify-unit)); }
+    margin-right: var(--theme-header-links-spacing); }
   .wp-block-novablocks-navigation ul.menu .customize-partial-edit-shortcut + > li:not(:first-child),
   .wp-block-novablocks-navigation .menu > ul .customize-partial-edit-shortcut + > li:not(:first-child) {
     margin-right: 0; }
