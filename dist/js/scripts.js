@@ -1681,7 +1681,7 @@ var hero_Hero = function () {
 			var sepLine = separator.find('.c-separator__line');
 			var sepArrow = separator.find('.c-separator__arrow');
 			var othersBefore = headline.prevAll();
-			var othersAfter = headline.nextAll().not(separator);
+			var othersAfter = headline.length ? headline.nextAll().not(separator) : container.children();
 
 			return { headline: headline, title: title, subtitle: subtitle, separator: separator, sepFlower: sepFlower, sepLine: sepLine, sepArrow: sepArrow, othersBefore: othersBefore, othersAfter: othersAfter };
 		}
