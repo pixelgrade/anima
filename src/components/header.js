@@ -16,7 +16,7 @@ class Header {
 		this.$toggle = $( '.c-menu-toggle' );
 		this.$toggleWrap = $( '.c-menu-toggle__wrap' );
 
-		this.inversed = ! this.$header.hasClass( 'site-header--normal' );
+//		this.inversed = ! this.$header.hasClass( 'site-header--normal' );
 
 		this.offset = 0;
 		this.scrollOffset = 0;
@@ -28,6 +28,7 @@ class Header {
 		GlobalService.registerUpdate( this.onResize.bind( this ) );
 
 		this.$header.addClass( 'site-header--fixed site-header--ready' );
+		this.$mobileHeader.addClass( 'site-header--fixed site-header--ready' );
 	}
 
 	update() {
@@ -107,12 +108,11 @@ class Header {
 		const { scrollY } = GlobalService.getProps();
 
 		if ( inversed !== this.inversed ) {
-			this.$header.toggleClass( 'site-header--normal', ! inversed );
+//			this.$header.toggleClass( 'site-header--normal', ! inversed );
 			this.inversed = inversed;
 		}
 
 		this.$header.toggleClass( 'site-header--scrolled', scrollY > this.scrollOffset );
-		this.$mobileHeader.toggleClass( 'site-header--scrolled', scrollY > this.scrollOffset );
 	}
 }
 

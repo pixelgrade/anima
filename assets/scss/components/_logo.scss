@@ -10,24 +10,5 @@
   transform: translate(-50%, -50%);
   width: 100%;
 
-  .site-header--fixed.site-header--scrolled &,
-  .site-header--fixed.site-header--normal & {
-    opacity: 0;
-
-    .is-dark-mode & {
-      opacity: 1;
-    }
-  }
-}
-
-.c-logo__default {
   opacity: 0;
-  .site-header--fixed.site-header--scrolled &,
-  .site-header--fixed.site-header--normal & {
-    opacity: 1;
-
-    .is-dark-mode & {
-      opacity: 0;
-    }
-  }
 }

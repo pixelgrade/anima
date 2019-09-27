@@ -1889,7 +1889,7 @@ var header_Header = function () {
 		this.$toggle = external_jQuery_default()('.c-menu-toggle');
 		this.$toggleWrap = external_jQuery_default()('.c-menu-toggle__wrap');
 
-		this.inversed = !this.$header.hasClass('site-header--normal');
+		//		this.inversed = ! this.$header.hasClass( 'site-header--normal' );
 
 		this.offset = 0;
 		this.scrollOffset = 0;
@@ -1901,6 +1901,7 @@ var header_Header = function () {
 		globalService.registerUpdate(this.onResize.bind(this));
 
 		this.$header.addClass('site-header--fixed site-header--ready');
+		this.$mobileHeader.addClass('site-header--fixed site-header--ready');
 	}
 
 	createClass_default()(Header, [{
@@ -1994,12 +1995,11 @@ var header_Header = function () {
 			    scrollY = _GlobalService$getPro2.scrollY;
 
 			if (inversed !== this.inversed) {
-				this.$header.toggleClass('site-header--normal', !inversed);
+				//			this.$header.toggleClass( 'site-header--normal', ! inversed );
 				this.inversed = inversed;
 			}
 
 			this.$header.toggleClass('site-header--scrolled', scrollY > this.scrollOffset);
-			this.$mobileHeader.toggleClass('site-header--scrolled', scrollY > this.scrollOffset);
 		}
 	}]);
 

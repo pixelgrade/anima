@@ -20,32 +20,34 @@ $page_id = get_option( 'page_for_posts' ); ?>
 
 			<?php if ( have_posts() ) { ?>
 
-			<header class="entry-header">
-				<div class="entry-content has-text-align-center">
-					<?php
-					echo '<h1 class="page-title has-text-align-center">' . get_the_title( $page_id ) . '</h1>';
-					$categories = get_categories();
-					$categories = array_filter( $categories, function ( $category ) {
-						return $category->term_id !== 1;
-					} );
-					if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) {
-						echo '<ul class="entry-meta">';
-						foreach ( $categories as $category ) {
-							$category_url = get_category_link( $category->term_id );
-							echo '<li><a href="' . $category_url . '">' . $category->name . '</a></li>';
-						}
-						echo '</ul>';
-					}
-					?>
-				</div>
-			</header><!-- .page-header -->
+                <header class="entry-header">
+                    <div class="entry-content has-text-align-center">
+                        <?php
+                        echo '<h1 class="page-title has-text-align-center">' . get_the_title( $page_id ) . '</h1>';
+                        $categories = get_categories();
+                        $categories = array_filter( $categories, function ( $category ) {
+                            return $category->term_id !== 1;
+                        } );
+                        if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) {
+                            echo '<ul class="entry-meta">';
+                            foreach ( $categories as $category ) {
+                                $category_url = get_category_link( $category->term_id );
+                                echo '<li><a href="' . $category_url . '">' . $category->name . '</a></li>';
+                            }
+                            echo '</ul>';
+                        }
+                        ?>
+                    </div>
+                </header><!-- .page-header -->
 
-			<?php
-                get_template_part( 'template-parts/loop' );
-				rosa2_the_posts_pagination();
-			} else {
-				get_template_part( 'template-parts/content', 'none' );
-			} ?>
+                <div class="entry-content">
+                    <?php
+                        get_template_part( 'template-parts/loop' );
+                        rosa2_the_posts_pagination();
+                    } else {
+                        get_template_part( 'template-parts/content', 'none' );
+                    } ?>
+                </div>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
