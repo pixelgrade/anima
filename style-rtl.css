@@ -1103,8 +1103,8 @@ ul.menu a,
     right: 0;
     z-index: 1000;
     width: 100vw;
-    background: var(--theme-dark-primary);
-    color: var(--theme-light-primary);
+    background: var(--sm-dark-primary);
+    color: var(--sm-light-primary);
     opacity: .97; }
     .c-menu-toggle__checkbox ~ .site-header {
       display: block; }
@@ -1138,7 +1138,7 @@ ul.menu a,
       position: absolute;
       width: 100%;
       height: 2px;
-      background-color: var(--theme-light-primary);
+      background-color: var(--sm-light-primary);
       bottom: .7em;
       opacity: 0;
       transition: opacity 0.1s cubic-bezier(0.42, 0, 0.58, 1); }
@@ -1194,6 +1194,10 @@ ul.menu a,
       opacity: 1; }
     body:not(.has-fixed-site-header) .site-header--mobile .c-logo__inverted {
       opacity: 0; }
+  body:not(.has-fixed-site-header).is-dark-mode .site-header--mobile .c-logo__inverted {
+    opacity: 1; }
+  body:not(.has-fixed-site-header).is-dark-mode .site-header--mobile .c-logo__default {
+    opacity: 0; }
   .sub-menu {
     margin-right: -1em;
     margin-left: -1em; }
@@ -1213,7 +1217,7 @@ ul.menu a,
     z-index: 999;
     background: #000;
     opacity: 0.2;
-    transition: opacity .3s ease-out;
+    transition: var(--theme-transition);
     cursor: default; }
   .c-menu-toggle {
     transition: color .3s ease-out; }
@@ -1221,7 +1225,7 @@ ul.menu a,
     pointer-events: none;
     opacity: 0; }
   .c-menu-toggle__checkbox:checked ~ .c-menu-toggle {
-    color: var(--current-light-primary); }
+    color: var(--sm-light-primary); }
     .c-menu-toggle__checkbox:checked ~ .c-menu-toggle .c-menu-toggle__slice--top {
       transform: rotate(-45deg); }
     .c-menu-toggle__checkbox:checked ~ .c-menu-toggle .c-menu-toggle__slice--middle {
@@ -1392,12 +1396,6 @@ ul.menu a,
   .site-logo + .site-info .site-title,
   .site-logo + .site-info .site-description {
     margin-right: 1rem; }
-  @media not screen and (min-width: 1000px) {
-    .site-logo + .site-info {
-      text-align: center; }
-      .site-logo + .site-info .site-title,
-      .site-logo + .site-info .site-description {
-        margin-right: 0; } }
 
 .site-title a {
   color: inherit;
