@@ -23,7 +23,7 @@
       margin-right: auto;
     }
   }
-  @include above($theme-lap-breakpoint) {
+  @include above(lap) {
     @for $i from 2 to 9 {
       &.has-#{$i}-columns .wc-block-grid__product {
         flex: 1 0 calc(#{ 100% / $i });
@@ -35,7 +35,7 @@
 
 .wc-block-grid__products {
 
-  @include above($theme-lap-breakpoint) {
+  @include above(lap) {
     display: flex;
     flex-wrap: wrap;
   }

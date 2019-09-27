@@ -95,7 +95,7 @@ export default class Hero {
 		const sepLine = separator.find( '.c-separator__line' );
 		const sepArrow = separator.find( '.c-separator__arrow' );
 		const othersBefore = headline.prevAll();
-		const othersAfter = headline.nextAll().not( separator );
+		const othersAfter = headline.length ? headline.nextAll().not( separator ) : container.children();
 
 		return { headline, title, subtitle, separator, sepFlower, sepLine, sepArrow, othersBefore, othersAfter };
 	}

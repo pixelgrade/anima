@@ -38,7 +38,7 @@
     }
   }
 
-  @include above( tablet ) {
+  @include above(tablet) {
 
     &:not(.woocommerce-order-received) .col2-set {
       float: left;
@@ -207,7 +207,7 @@
     margin-bottom: var(--theme-spacing);
   }
 
-  @include below(62.5em) {
+  @include below(lap) {
     .site-content {
       padding-top: 0;
     }
@@ -388,7 +388,7 @@ ul.order_details[class] {
     padding-right: var(--theme-spacing-normal);
     margin-right: 0;
 
-    @include below( tablet ) {
+    @include below(tablet) {
       flex: 0 0 100%;
       border-right: 0;
     }

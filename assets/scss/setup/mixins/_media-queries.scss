@@ -1,12 +1,12 @@
-$nova-breakpoints: (
+$theme-breakpoints: (
     mobile: 480px,
     tablet: 768px,
-    lap: 1024px,
-    desktop: 1366px,
+    lap: 1000px,
+    desktop: 1440px,
 );
 
 @mixin above( $value ) {
-    $breakpoint: map-get( $nova-breakpoints, $value );
+    $breakpoint: map-get( $theme-breakpoints, $value );
 
     @if ( $breakpoint != null ) {
         $value: $breakpoint;
@@ -20,7 +20,7 @@ $nova-breakpoints: (
 }
 
 @mixin below( $value ) {
-    $breakpoint: map-get( $nova-breakpoints, $value );
+    $breakpoint: map-get( $theme-breakpoints, $value );
 
     @if ( $breakpoint != null ) {
         $value: $breakpoint;

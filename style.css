@@ -1675,7 +1675,7 @@ body, .site, .site-content {
     margin-top: var(--theme-spacing-normal); }
     .comment .children .children {
       margin-left: 0; }
-    @media not screen and (min-width: 1024px) {
+    @media not screen and (min-width: 1000px) {
       .comment .children {
         margin-left: 1.25em; } }
 
@@ -1743,7 +1743,7 @@ body, .site, .site-content {
 .comment-form-email {
   flex: 0 0 47%; }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1000px) {
   .comment-form-subscriptions,
   .comment-form .form-submit {
     flex: 0 0 47%; }
@@ -1828,7 +1828,7 @@ label.subscribe-label.subscribe-label {
   .comment__avatar .avatar {
     display: block;
     margin: 0; }
-  @media not screen and (min-width: 1024px) {
+  @media not screen and (min-width: 1000px) {
     .comment__avatar {
       max-width: 2em; } }
 
@@ -1881,7 +1881,7 @@ label.subscribe-label.subscribe-label {
 .children > li + li {
   margin-top: var(--theme-spacing-normal); }
 
-@media not screen and (min-width: 1024px) {
+@media not screen and (min-width: 1000px) {
   .c-author {
     text-align: center; }
   .c-author__avatar {
@@ -3283,33 +3283,39 @@ span.page-numbers {
   --current-text-transform: var(--theme-navigation-text-transform);
   --current-text-decoration: var(--theme-navigation-text-decoration); }
 
+:root {
+  --theme-header-links-spacing: 32; }
+
 @media only screen and (min-width: 1000px) {
-  .wp-block-novablocks-navigation ul.menu a,
-  .wp-block-novablocks-navigation .menu > ul a {
-    display: block;
-    padding: 0.75em 0;
-    color: inherit;
-    text-decoration: none; }
-  .wp-block-novablocks-navigation ul.menu > li:not(:first-child),
-  .wp-block-novablocks-navigation .menu > ul > li:not(:first-child) {
-    margin-left: var(--theme-header-links-spacing); }
-  .wp-block-novablocks-navigation ul.menu .customize-partial-edit-shortcut + > li:not(:first-child),
-  .wp-block-novablocks-navigation .menu > ul .customize-partial-edit-shortcut + > li:not(:first-child) {
-    margin-left: 0; }
-  .wp-block-novablocks-navigation ul.menu > li > a,
-  .wp-block-novablocks-navigation .menu > ul > li > a {
-    padding-bottom: 0.25em;
-    margin-bottom: 0.5em; }
-    .wp-block-novablocks-navigation ul.menu > li > a:after,
-    .wp-block-novablocks-navigation .menu > ul > li > a:after {
-      position: absolute;
-      right: 0; }
-  .wp-block-novablocks-navigation ul.menu li:hover > a,
-  .wp-block-novablocks-navigation .menu > ul li:hover > a {
-    border-color: currentColor; }
-    .wp-block-novablocks-navigation ul.menu li:hover > a:after,
-    .wp-block-novablocks-navigation .menu > ul li:hover > a:after {
-      opacity: 1; }
+  .wp-block-novablocks-navigation ul.menu,
+  .wp-block-novablocks-navigation .menu > ul {
+    margin-left: calc( var(--theme-header-links-spacing) * var(--theme-customify-unit) * -1); }
+    .wp-block-novablocks-navigation ul.menu a,
+    .wp-block-novablocks-navigation .menu > ul a {
+      display: block;
+      padding: 0.75em 0;
+      color: inherit;
+      text-decoration: none; }
+    .wp-block-novablocks-navigation ul.menu > li,
+    .wp-block-novablocks-navigation .menu > ul > li {
+      margin-left: calc( var(--theme-header-links-spacing) * var(--theme-customify-unit)); }
+    .wp-block-novablocks-navigation ul.menu .customize-partial-edit-shortcut + > li:not(:first-child),
+    .wp-block-novablocks-navigation .menu > ul .customize-partial-edit-shortcut + > li:not(:first-child) {
+      margin-left: 0; }
+    .wp-block-novablocks-navigation ul.menu > li > a,
+    .wp-block-novablocks-navigation .menu > ul > li > a {
+      padding-bottom: 0.25em;
+      margin-bottom: 0.5em; }
+      .wp-block-novablocks-navigation ul.menu > li > a:after,
+      .wp-block-novablocks-navigation .menu > ul > li > a:after {
+        position: absolute;
+        right: 0; }
+    .wp-block-novablocks-navigation ul.menu li:hover > a,
+    .wp-block-novablocks-navigation .menu > ul li:hover > a {
+      border-color: currentColor; }
+      .wp-block-novablocks-navigation ul.menu li:hover > a:after,
+      .wp-block-novablocks-navigation .menu > ul li:hover > a:after {
+        opacity: 1; }
   .wp-block-novablocks-navigation .sub-menu li a,
   .wp-block-novablocks-navigation .children li a {
     border: 0;
