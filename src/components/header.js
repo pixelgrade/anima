@@ -45,7 +45,6 @@ class Header {
 
 		this.mobileHeaderHeight = Math.max( mobileHeaderHeight, toggleHeight );
 		this.visibleHeaderHeight = this.$mobileHeader.is( ':visible' ) ? this.mobileHeaderHeight : this.box.height;
-
 		this.update();
 	}
 

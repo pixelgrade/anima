@@ -1890,6 +1890,7 @@ var header_Header = function () {
 			this.mobileHeaderHeight = Math.max(mobileHeaderHeight, toggleHeight);
 			this.visibleHeaderHeight = this.$mobileHeader.is(':visible') ? this.mobileHeaderHeight : this.box.height;
 
+			this.updateSubmenusPosition();
 			this.update();
 		}
 	}, {
@@ -1955,6 +1956,23 @@ var header_Header = function () {
 
 			this.$mobileHeader.insertAfter(this.$toggle);
 			this.createdMobileHeader = true;
+		}
+	}, {
+		key: 'updateSubmenusPosition',
+		value: function updateSubmenusPosition() {
+			var menuItemsWithChildren = external_jQuery_default()('.menu-item-has-children');
+
+			menuItemsWithChildren.each(function () {
+				var subMenu = external_jQuery_default()(this).find('> .sub-menu'),
+				    subMenuWidth = subMenu.width(),
+				    subMenuOffSet = subMenu.offset(),
+				    windowWidth = external_jQuery_default()(window).width(),
+				    availableSpace = windowWidth - subMenuOffSet.left;
+
+				if (availableSpace < subMenuWidth) {
+					external_jQuery_default()(this).addClass('has-submenu--left');
+				}
+			});
 		}
 	}, {
 		key: 'render',

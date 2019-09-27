@@ -43,7 +43,7 @@ ul.menu,
 
                 > .sub-menu,
                 > .children {
-                    transform: translate3d(0, 0.625em, 0);
+                    transform: translateZ(0);
                     opacity: 1;
                     pointer-events: auto;
                 }
@@ -85,19 +85,18 @@ ul.menu,
             top: 100%;
             left: 0;
 
-            transform: translateZ(0);
+            transform: translate3d(0,-.75em,0);
             opacity: 0;
 
-            width: 15em;
-            padding: 12px 0;
+            width: 15.625em;
+            padding: .75em 0;
 
             background-color: var(--current-light-primary);
             color: var(--current-dark-primary);
 
-            border: 1px solid var(--current-light-tertiary);
             border-radius: 3px;
-            box-shadow: 0 4px 32px rgba(42, 54, 52, 0.1),
-                        0 2px 4px rgba(42, 54, 52, 0.1);
+            box-shadow: 0 4px 32px rgba(0, 0, 0, 0.1),
+                        0 2px 4px rgba(0, 0, 0, 0.1);
 
             transition: all 200ms $easeInOut;
 
@@ -121,6 +120,14 @@ ul.menu,
             }
         }
 
+        .has-submenu-left {
+
+            > .sub-menu,
+            > .children {
+                right: 0;
+            }
+        }
+
         .sub-menu .menu-item-has-children,
         .children .page_item_has_children {
 
@@ -128,16 +135,20 @@ ul.menu,
                 transform: rotate(-45deg);
             }
 
-            > .sub-menu,
-            > .children {
-                transform: translate3d(0, -0.75em, 0);
+            .sub-menu,
+            .children {
+                top: -.75em;
+                left: calc( 100% - .625em );
             }
-        }
 
-        .sub-menu .sub-menu,
-        .children .children {
-            top: 0;
-            left: 100%;
+            &.has-submenu-left {
+
+                .sub-menu,
+                .children {
+                    left: auto;
+                    right: calc( 100% - .625em );
+                }
+            }
         }
 
         :not(:hover) > .sub-menu,
@@ -157,8 +168,9 @@ ul.menu,
 
     a {
         display: block;
-        padding: 12px 0;
+        padding: .75em 0;
         color: inherit;
         text-decoration: none;
     }
 }
+

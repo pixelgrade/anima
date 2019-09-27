@@ -1,10 +1,17 @@
 import GlobalService from './globalService';
+import $ from "jquery";
+
+const MENU_ITEM = '.menu-item, .page_item';
+const MENU_ITEM_WITH_CHILDREN = '.menu-item-has-children, .page_item_has_children';
+const SUBMENU = '.sub-menu, .children';
+const SUBMENU_LEFT_CLASS = 'has-submenu-left';
+const HOVER_CLASS = 'hover';
 
 export default class Navbar {
 
 	constructor() {
-		this.$menuItems = jQuery( '.menu-item' );
-		this.$menuItemsWithChildren = this.$menuItems.filter( '.menu-item-has-children' ).removeClass( 'hover' );
+		this.$menuItems = $( MENU_ITEM );
+		this.$menuItemsWithChildren = this.$menuItems.filter( MENU_ITEM_WITH_CHILDREN ).removeClass( HOVER_CLASS );
 		this.$menuItemsWithChildrenLinks = this.$menuItemsWithChildren.children( 'a' );
 
 		this.initialize();
@@ -21,6 +28,7 @@ export default class Navbar {
 
 		// we are on desktop
 		if ( mq.matches ) {
+			this.addSubMenusLeftClass();
 
 			if ( this.initialized && ! this.desktop ) {
 				this.unbindClick();
@@ -34,6 +42,8 @@ export default class Navbar {
 			return;
 		}
 
+		this.removeSubMenusLeftClass();
+
 		if ( this.initialized && this.desktop ) {
 			this.unbindHoverIntent();
 		}
@@ -46,8 +56,28 @@ export default class Navbar {
 		return;
 	}
 
+	addSubMenusLeftClass() {
+		const { windowWidth } = GlobalService.getProps();
+
+		this.$menuItemsWithChildren.each( function( index, obj ) {
+			const $obj = $( obj );
+			const $subMenu = $obj.children( SUBMENU ),
+				subMenuWidth = $subMenu.outerWidth(),
+				subMenuOffSet = $subMenu.offset(),
+				availableSpace = windowWidth - subMenuOffSet.left;
+
+			if ( availableSpace < subMenuWidth ) {
+				$obj.addClass( SUBMENU_LEFT_CLASS );
+			}
+		} )
+	}
+
+	removeSubMenusLeftClass() {
+		this.$menuItemsWithChildren.removeClass( SUBMENU_LEFT_CLASS );
+	}
+
 	onClickMobile( event ) {
-		const $link = jQuery( this );
+		const $link = $( this );
 		const $siblings = $link.parent().siblings().not( $link );
 
 		if ( $link.is( '.active' ) ) {
@@ -56,8 +86,8 @@ export default class Navbar {
 
 		event.preventDefault();
 
-		$link.addClass( 'active' ).parent().addClass( 'hover' );
-		$siblings.removeClass( 'hover' );
+		$link.addClass( 'active' ).parent().addClass( HOVER_CLASS );
+		$siblings.removeClass( HOVER_CLASS );
 		$siblings.find( '.active' ).removeClass( 'active' );
 	}
 
@@ -72,10 +102,10 @@ export default class Navbar {
 	bindHoverIntent() {
 		this.$menuItems.hoverIntent( {
 			out: function() {
-				jQuery( this ).removeClass( 'hover' );
+				$( this ).removeClass( HOVER_CLASS );
 			},
 			over: function() {
-				jQuery( this ).addClass( 'hover' );
+				$( this ).addClass( HOVER_CLASS );
 			},
 			timeout: 200
 		} );
