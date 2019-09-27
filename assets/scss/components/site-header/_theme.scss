@@ -11,7 +11,7 @@ $site-header-transition-speed: .3s !default;
 
         display: flex;
         align-items: center;
-        min-height: calc( var(--theme-header-height) * var(--theme-customify-unit) );
+        min-height: var(--theme-header-height);
 
         padding-top: 1em;
         padding-bottom: 1em;
@@ -38,6 +38,11 @@ $site-header-transition-speed: .3s !default;
         transition: --theme-transition;
         transition-property: opacity;
     }
+}
+
+.site-header__inner-container[class] {
+    padding-left: var(--theme-header-sides-spacing);
+    padding-right: var(--theme-header-sides-spacing);
 }
 
 @mixin remove-page-padding-top {

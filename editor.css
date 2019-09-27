@@ -77,7 +77,15 @@
 :root {
   --theme-transition-duration: 0.4s;
   --theme-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
-  --theme-transition: all var(--theme-transition-duration) var(--theme-transition-easing); }
+  --theme-transition: all var(--theme-transition-duration) var(--theme-transition-easing);
+  --theme-header-logo-height-settings: 22;
+  --theme-header-logo-height: calc(var(--theme-spacing-fluid) * var(--theme-header-logo-height-settings) / var(--theme-body-font-size));
+  --theme-header-height-settings: 118;
+  --theme-header-height: calc(var(--theme-spacing-fluid) * var(--theme-header-height-settings) / var(--theme-body-font-size));
+  --theme-header-links-spacing-settings: 32;
+  --theme-header-links-spacing: calc( var(--theme-spacing-fluid) * var(--theme-header-links-spacing-settings) / var(--theme-body-font-size));
+  --theme-header-sides-spacing-settings: 48;
+  --theme-header-sides-spacing: calc( var(--theme-spacing-fluid) * var(--theme-header-sides-spacing-settings) /  var(--theme-body-font-size) ); }
 
 @media only screen and (min-width: 1440px) {
   :root {
