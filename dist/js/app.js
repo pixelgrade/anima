@@ -1877,7 +1877,6 @@ var header_Header = function () {
 			this.updatePageOffset();
 			this.updateHeaderOffset();
 			this.updateMobileHeaderOffset();
-			this.updateSubmenusPosition();
 		}
 	}, {
 		key: 'onResize',
@@ -1891,6 +1890,7 @@ var header_Header = function () {
 			this.mobileHeaderHeight = Math.max(mobileHeaderHeight, toggleHeight);
 			this.visibleHeaderHeight = this.$mobileHeader.is(':visible') ? this.mobileHeaderHeight : this.box.height;
 
+			this.updateSubmenusPosition();
 			this.update();
 		}
 	}, {
