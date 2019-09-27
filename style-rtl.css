@@ -1189,6 +1189,8 @@ ul.menu a,
       transform: translateY(-50%); }
       .site-header--mobile .menu-item--cart > a {
         color: currentColor; }
+    .site-header--mobile .site-logo img {
+      max-height: 30px; }
   body:not(.has-site-header-fixed) .site-header--mobile {
     background-color: var(--current-light-primary); }
     body:not(.has-site-header-fixed) .site-header--mobile:after {
@@ -1349,17 +1351,17 @@ ul.menu a,
     color: var(--sm-light-primary); } }
 
 @media only screen and (min-width: 1000px) {
-  body.has-site-header-transparent:not(.has-site-header-inversed).has-site-header-fixed .site-header:not(.site-header--scrolled) {
+  body.has-site-header-transparent:not(.has-site-header-inversed).has-site-header-fixed.has-hero .site-header:not(.site-header--scrolled) {
     color: var(--sm-light-primary); }
-    body.has-site-header-transparent:not(.has-site-header-inversed).has-site-header-fixed .site-header:not(.site-header--scrolled):after {
+    body.has-site-header-transparent:not(.has-site-header-inversed).has-site-header-fixed.has-hero .site-header:not(.site-header--scrolled):after {
       opacity: 0; }
   body.has-site-header-transparent:not(.has-site-header-inversed):not(.has-site-header-fixed) .site-header,
   body.has-site-header-transparent:not(.has-site-header-inversed).has-site-header-fixed .site-header--scrolled {
     background-color: var(--current-light-primary); } }
 
 @media not screen and (min-width: 1000px) {
-  body.has-site-header-transparent:not(.has-site-header-inversed).has-site-header-fixed .site-header--mobile:not(.site-header--scrolled),
-  body.has-site-header-transparent:not(.has-site-header-inversed).has-site-header-fixed .c-menu-toggle {
+  body.has-site-header-transparent:not(.has-site-header-inversed).has-site-header-fixed.has-hero .site-header--mobile:not(.site-header--scrolled),
+  body.has-site-header-transparent:not(.has-site-header-inversed).has-site-header-fixed.has-hero .c-menu-toggle {
     color: var(--sm-light-primary); } }
 
 @media only screen and (min-width: 1000px) {
@@ -3490,6 +3492,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: var(--theme-spacing-fluid-xl);
+  padding-bottom: var(--theme-spacing-fluid-xl);
   text-align: center; }
 
 .search-form {
