@@ -23,9 +23,10 @@ define( 'ROSA2_THEME_LIGHT_TERTIARY',   '#EEEFF2' );    // light gray
 add_filter( 'customify_filter_fields', 'rosa2_add_customify_options', 11, 1 );
 add_filter( 'customify_filter_fields', 'rosa2_add_customify_connected_fields', 12, 1 );
 add_filter( 'customify_filter_fields', 'rosa2_add_header_section_to_customify_config', 20, 1 );
-add_filter( 'customify_filter_fields', 'rosa2_add_content_section_to_customify_config', 21, 1 );
-add_filter( 'customify_filter_fields', 'rosa2_add_colors_section_to_customify_config', 22, 1 );
-add_filter( 'customify_filter_fields', 'rosa2_add_fonts_section_to_customify_config', 23, 1 );
+add_filter( 'customify_filter_fields', 'rosa2_add_separators_section_to_customify_config', 30, 1 );
+add_filter( 'customify_filter_fields', 'rosa2_add_content_section_to_customify_config', 40, 1 );
+add_filter( 'customify_filter_fields', 'rosa2_add_colors_section_to_customify_config', 50, 1 );
+add_filter( 'customify_filter_fields', 'rosa2_add_fonts_section_to_customify_config', 60, 1 );
 
 // Filter Style Manager color and font palettes
 add_filter( 'customify_get_color_palettes', 'rosa2_filter_color_palettes' );
@@ -77,6 +78,10 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 		'fonts_section' => array(
 			'title'   => esc_html__( 'Fonts', '__theme_txtd' ),
 			'options' => array(
+				'main_content_title_body_fonts_section' => array(
+					'type' => 'html',
+					'html' => '<span class="separator sub-section label">' . esc_html__( 'Body Fonts', '__theme_txtd' ) . '</span>',
+				),
 				'body_font'       => array(
 					'type'              => 'font',
 					'label'             => esc_html__( 'Body', '__theme_txtd' ),
@@ -128,9 +133,9 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 					),
 					'fields'            => $fields_config,
 				),
-				'main_content_title_headings_fonts_section' => array(
+				'main_content_title_heading_fonts_section' => array(
 					'type' => 'html',
-					'html' => '<span class="separator sub-section label">' . esc_html__( 'Headings Fonts', 'noah' ) . '</span>',
+					'html' => '<span class="separator sub-section label">' . esc_html__( 'Heading Fonts', '__theme_txtd' ) . '</span>',
 				),
 				'display_font'    => array(
 					'type'              => 'font',
@@ -251,22 +256,25 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 					),
 					'fields'            => $fields_config,
 				),
-				'buttons_font' => array(
+				'accent_font'     => array(
 					'type'              => 'font',
-					'label'             => esc_html__( 'Buttons', '__theme_txtd' ),
+					'label'             => esc_html__( 'Accent', '__theme_txtd' ),
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
-					'properties_prefix' => '--theme-button-',
+					'properties_prefix' => '--theme-accent-',
 					'default'           => array(
-						'font-family'     => 'Reforma2018',
-						'font-size'       => 17,
-						'line-height'     => 1.2,
-						'font-weight'     => '500',
-						'text-transform'  => 'capitalize',
-						'text-decoration' => 'none',
-						'letter-spacing'  => 0.03,
+						'font-family' => 'Billy Ohio',
 					),
-					'fields'            => $fields_config,
+					'recommended'       => array(
+						'Billy Ohio',
+						'Mellony Dry Brush',
+						'Jandys Dua',
+						'Nermola Script',
+					),
+				),
+				'main_content_title_other_fonts_section' => array(
+					'type' => 'html',
+					'html' => '<span class="separator sub-section label">' . esc_html__( 'Other Fonts', '__theme_txtd' ) . '</span>',
 				),
 				'navigation_font' => array(
 					'type'              => 'font',
@@ -282,6 +290,23 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 						'text-transform'  => 'none',
 						'text-decoration' => 'none',
 						'letter-spacing'  => 0.017,
+					),
+					'fields'            => $fields_config,
+				),
+				'buttons_font' => array(
+					'type'              => 'font',
+					'label'             => esc_html__( 'Buttons', '__theme_txtd' ),
+					'desc'              => esc_html__( '', '__theme_txtd' ),
+					'selector'          => ':root',
+					'properties_prefix' => '--theme-button-',
+					'default'           => array(
+						'font-family'     => 'Reforma2018',
+						'font-size'       => 17,
+						'line-height'     => 1.2,
+						'font-weight'     => '500',
+						'text-transform'  => 'capitalize',
+						'text-decoration' => 'none',
+						'letter-spacing'  => 0.03,
 					),
 					'fields'            => $fields_config,
 				),
@@ -301,22 +326,6 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 						'letter-spacing'  => 0.017,
 					),
 					'fields'            => $fields_config,
-				),
-				'accent_font'     => array(
-					'type'              => 'font',
-					'label'             => esc_html__( 'Accent', '__theme_txtd' ),
-					'desc'              => esc_html__( '', '__theme_txtd' ),
-					'selector'          => ':root',
-					'properties_prefix' => '--theme-accent-',
-					'default'           => array(
-						'font-family' => 'Billy Ohio',
-					),
-					'recommended'       => array(
-						'Billy Ohio',
-						'Mellony Dry Brush',
-						'Jandys Dua',
-						'Nermola Script',
-					),
 				),
 			),
 		)
@@ -569,22 +578,6 @@ function rosa2_add_header_section_to_customify_config( $config ) {
 
 function rosa2_add_content_section_to_customify_config( $config ) {
 
-	$separator_symbol_choices = array();
-
-	$separator_symbol_values = array(
-		'fleuron-1',
-		'fleuron-2',
-		'fleuron-3',
-		'fleuron-4',
-		'fleuron-5',
-	);
-
-	foreach ( $separator_symbol_values as $symbol ) {
-		ob_start();
-		get_template_part( 'template-parts/separators/' . $symbol . '-svg' );
-		$separator_symbol_choices[ $symbol ] = ob_get_clean();
-	}
-
 	$rosa2_content_section = array(
 		'content_section' => array(
 			'title'   => esc_html__( 'Content', '__theme_txtd' ),
@@ -609,6 +602,41 @@ function rosa2_add_content_section_to_customify_config( $config ) {
 					'label'   => esc_html__( 'Display Author on Archives', '__theme_txtd' ),
 					'default' => false,
 				),
+			),
+		),
+	);
+
+	if ( empty( $config['sections'] ) ) {
+		$config['sections'] = array();
+	}
+
+	$config['sections'] = $config['sections'] + $rosa2_content_section;
+
+	return $config;
+}
+
+function rosa2_add_separators_section_to_customify_config( $config ) {
+
+	$separator_symbol_choices = array();
+
+	$separator_symbol_values = array(
+		'fleuron-1',
+		'fleuron-2',
+		'fleuron-3',
+		'fleuron-4',
+		'fleuron-5',
+	);
+
+	foreach ( $separator_symbol_values as $symbol ) {
+		ob_start();
+		get_template_part( 'template-parts/separators/' . $symbol . '-svg' );
+		$separator_symbol_choices[ $symbol ] = ob_get_clean();
+	}
+
+	$rosa2_separators_section = array(
+		'separators_section' => array(
+			'title'   => esc_html__( 'Separators', '__theme_txtd' ),
+			'options' => array(
 				'separator_symbol'              => array(
 					'type'    => 'radio_html',
 					'label'   => esc_html__( 'Separator Symbol', '__theme_txtd' ),
@@ -623,7 +651,7 @@ function rosa2_add_content_section_to_customify_config( $config ) {
 		$config['sections'] = array();
 	}
 
-	$config['sections'] = $config['sections'] + $rosa2_content_section;
+	$config['sections'] = $config['sections'] + $rosa2_separators_section;
 
 	return $config;
 }
