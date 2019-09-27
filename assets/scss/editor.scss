@@ -84,12 +84,19 @@
             font-size: initial;
             font-weight: normal;
             line-height: 1.4;
-
         }
 
         &:not(.is-selected) .editor-post-title__input { 
             border-bottom: 1px dashed rgba(123,134,162,.3);
         }
+    }
+}
+
+.editor-post-title__block .editor-post-title__input {
+    color: var(--current-dark-primary);
+
+    &:focus {
+        color: var(--current-dark-primary);
     }
 }
 
@@ -111,5 +118,12 @@
     }
 }
 
+/* Center block appender */
+.block-list-appender {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .is-dark-theme .c-logo__default { display: none; }
+.is-dark-theme .c-logo__inverted { display: block; }
 
