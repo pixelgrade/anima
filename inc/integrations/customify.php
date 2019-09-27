@@ -464,10 +464,6 @@ function rosa2_add_header_section_to_customify_config( $config ) {
 		'header_section' => array(
 			'title'   => esc_html__( 'Header', '__theme_txtd' ),
 			'options' => array(
-				'header_title_layout_section'     => array(
-					'type' => 'html',
-					'html' => '<span id="section-title-header-layout" class="separator section label large">&#x1f4d0; ' . esc_html__( 'Layout', '__theme_txtd' ) . '</span>',
-				),
 				'header_logo_height'              => array(
 					'type'        => 'range',
 					'label'       => esc_html__( 'Logo Height', '__theme_txtd' ),
