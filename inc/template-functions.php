@@ -28,8 +28,14 @@ function rosa2_body_classes( $classes ) {
 		$classes[] = 'no-sidebar';
 	}
 
-	if ( rosa2_header_should_be_fixed() ) {
-		$classes[] = 'has-fixed-site-header';
+	$classes[] = 'has-site-header-transparent';
+
+	if ( pixelgrade_option( 'header_position', 'sticky' ) === 'sticky' ) {
+		$classes[] = 'has-site-header-fixed';
+	}
+
+	if ( rosa2_page_has_hero() ) {
+		$classes[] = 'has-hero';
 	}
 
 	if ( rosa2_has_moderate_media_card_after_hero() ) {

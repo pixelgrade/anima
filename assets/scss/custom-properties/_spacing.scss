@@ -3,7 +3,7 @@
 // This file shouldn't be modified. Proceed with caution!
 
 :root {
-    --theme-spacing: 1rem;
+    --theme-spacing: #{$theme-spacing-unit};
 
     --theme-spacing-micro:  calc( var( --theme-spacing ) / 4 );
     --theme-spacing-tiny:   calc( var( --theme-spacing ) / 2 );
@@ -13,7 +13,7 @@
     --theme-spacing-xl:     calc( var( --theme-spacing ) * 5 );
     --theme-spacing-xxl:    calc( var( --theme-spacing ) * 8 );
 
-    @include fluid(--theme-spacing-fluid, $nova-font-size-minimum-value-breakpoint, 0.2rem, $nova-font-size-breakpoint, 1rem );
+    @include fluid(--theme-spacing-fluid, $theme-font-size-minimum-value-breakpoint-em, $theme-spacing-unit-fluid-minimum, $theme-font-size-breakpoint-em, $theme-spacing-unit );
 
     --theme-spacing-fluid-micro:  calc( var( --theme-spacing-fluid ) / 4 );
     --theme-spacing-fluid-tiny:   calc( var( --theme-spacing-fluid ) / 2 );

@@ -2,6 +2,10 @@
     @include apply-font(navigation);
 }
 
+:root {
+    --theme-header-links-spacing: 32;
+}
+
 .wp-block-novablocks-navigation {
 
     @media only screen and (min-width: 1000px) {
@@ -17,7 +21,11 @@
             }
 
             > li:not(:first-child) {
-                margin-left: 2em
+                margin-left: calc( var(--theme-header-links-spacing) * var(--theme-customify-unit) );
+            }
+
+            .customize-partial-edit-shortcut + > li:not(:first-child) {
+                margin-left: 0;
             }
 
             > li > a {
