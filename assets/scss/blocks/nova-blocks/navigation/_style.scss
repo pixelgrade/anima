@@ -13,6 +13,8 @@
         ul.menu,
         .menu > ul {
 
+            margin-left: calc( var(--theme-header-links-spacing) * var(--theme-customify-unit) * -1 );
+
             a {
                 display: block;
                 padding: 0.75em 0;
@@ -20,7 +22,7 @@
                 text-decoration: none;
             }
 
-            > li:not(:first-child) {
+            > li {
                 margin-left: calc( var(--theme-header-links-spacing) * var(--theme-customify-unit) );
             }
 
