@@ -15,7 +15,7 @@
 
     background: #000;
     opacity: 0.2;
-    transition: opacity .3s ease-out;
+    transition: var(--theme-transition);
     cursor: default;
 }
 
@@ -36,7 +36,7 @@
     &:checked  {
 
         ~ .c-menu-toggle {
-            color: var(--current-light-primary);
+            color: var(--sm-light-primary);
 
             .c-menu-toggle__slice--top {
                 transform: rotate(45deg);

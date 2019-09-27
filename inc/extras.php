@@ -25,7 +25,7 @@ function rosa2_admin_init() {
 add_action( 'admin_init', 'rosa2_admin_init' );
 remove_action( 'edit_form_after_title', '_wp_posts_page_notice' );
 
-function rosa2_header_should_be_fixed() {
+function rosa2_page_has_hero() {
 	global $post;
 
 	if ( has_blocks( $post->post_content ) ) {

@@ -32,6 +32,8 @@
   --theme-primary-font-family: Reforma1969, sans-serif;
   --theme-secondary-font-family: Reforma2018, sans-serif;
   --theme-accent-font-family: Billy Ohio, sans-serif;
+  --theme-body-font-size: 16;
+  --theme-customify-unit: calc( 1em / var(--theme-body-font-size) );
   --theme-font-size-breakpoint: 1440;
   --theme-font-size-minimum-value: 8;
   --theme-font-size-minimum-value-breakpoint: 320;
@@ -65,12 +67,17 @@
   --theme-spacing-fluid-large:  calc( var( --theme-spacing-fluid ) * 4 );
   --theme-spacing-fluid-xl:     calc( var( --theme-spacing-fluid ) * 5 );
   --theme-spacing-fluid-xxl:    calc( var( --theme-spacing-fluid ) * 8 ); }
-  @media screen and (min-width: 320px) {
+  @media screen and (min-width: 20em) {
     :root {
-      --theme-spacing-fluid: calc(0.2rem + 0.8 * ((100vw - 320px) / 1120)); } }
-  @media screen and (min-width: 1440px) {
+      --theme-spacing-fluid: calc(0.2rem + 0.8 * ((100vw - 20em) / 70)); } }
+  @media screen and (min-width: 90em) {
     :root {
       --theme-spacing-fluid: 1rem; } }
+
+:root {
+  --theme-transition-duration: 0.4s;
+  --theme-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --theme-transition: all var(--theme-transition-duration) var(--theme-transition-easing); }
 
 @media only screen and (min-width: 1440px) {
   :root {
@@ -312,7 +319,7 @@
   --theme-body-letter-spacing: -0.03em;
   --theme-body-text-transform: inherit;
   --theme-body-text-decoration: inherit;
-  --theme-body-font-size: 16;
+  --theme-body-font-size: calc( var(--theme-body-font-size) * 1px);
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
   --x1: var(--theme-font-size-breakpoint);

@@ -22,9 +22,10 @@ define( 'ROSA2_THEME_LIGHT_TERTIARY',   '#EEEFF2' );    // light gray
 // Add new options to the Customify config
 add_filter( 'customify_filter_fields', 'rosa2_add_customify_options', 11, 1 );
 add_filter( 'customify_filter_fields', 'rosa2_add_customify_connected_fields', 12, 1 );
-add_filter( 'customify_filter_fields', 'rosa2_add_content_section_to_customify_config', 20, 1 );
-add_filter( 'customify_filter_fields', 'rosa2_add_colors_section_to_customify_config', 20, 1 );
-add_filter( 'customify_filter_fields', 'rosa2_add_fonts_section_to_customify_config', 20, 1 );
+add_filter( 'customify_filter_fields', 'rosa2_add_header_section_to_customify_config', 20, 1 );
+add_filter( 'customify_filter_fields', 'rosa2_add_content_section_to_customify_config', 21, 1 );
+add_filter( 'customify_filter_fields', 'rosa2_add_colors_section_to_customify_config', 22, 1 );
+add_filter( 'customify_filter_fields', 'rosa2_add_fonts_section_to_customify_config', 23, 1 );
 
 // Filter Style Manager color and font palettes
 add_filter( 'customify_get_color_palettes', 'rosa2_filter_color_palettes' );
@@ -453,6 +454,119 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 	}
 
 	$config['sections'] = $config['sections'] + $colors_section;
+
+	return $config;
+}
+
+function rosa2_add_header_section_to_customify_config( $config ) {
+
+	$rosa2_header_section = array(
+		'header_section' => array(
+			'title'   => esc_html__( 'Header', '__theme_txtd' ),
+			'options' => array(
+				'header_title_layout_section'     => array(
+					'type' => 'html',
+					'html' => '<span id="section-title-header-layout" class="separator section label large">&#x1f4d0; ' . esc_html__( 'Layout', '__theme_txtd' ) . '</span>',
+				),
+				'header_logo_height'              => array(
+					'type'        => 'range',
+					'label'       => esc_html__( 'Logo Height', '__theme_txtd' ),
+					'desc'        => esc_html__( 'Adjust the max height of your logo container.', '__theme_txtd' ),
+					'live'        => true,
+					'default'     => 22,
+					'input_attrs' => array(
+						'min'          => 20,
+						'max'          => 200,
+						'step'         => 1,
+						'data-preview' => true,
+					),
+					'css'         => array(
+						array(
+							'property' => '--theme-logo-height',
+							'selector' => ':root',
+							'unit'     => '',
+						),
+					),
+				),
+				'header_height'                   => array(
+					'type'        => 'range',
+					'label'       => esc_html__( 'Header Height', '__theme_txtd' ),
+					'desc'        => esc_html__( 'Adjust the header and navigation bar height.', '__theme_txtd' ),
+					'live'        => true,
+					'default'     => 118,
+					'input_attrs' => array(
+						'min'          => 40,
+						'max'          => 200,
+						'step'         => 10,
+						'data-preview' => true,
+					),
+					'css'         => array(
+						array(
+							'property' => '--theme-header-height',
+							'selector' => ':root',
+							'unit'     => '',
+						),
+					),
+				),
+				'header_navigation_links_spacing' => array(
+					'type'        => 'range',
+					'label'       => esc_html__( 'Navigation Link Spacing', '__theme_txtd' ),
+					'desc'        => esc_html__( 'Adjust the spacing between individual items in your navigation.', '__theme_txtd' ),
+					'live'        => true,
+					'default'     => 32,
+					'input_attrs' => array(
+						'min'          => 12,
+						'max'          => 75,
+						'step'         => 1,
+						'data-preview' => true,
+					),
+					'css'         => array(
+						array(
+							'property'        => '--theme-header-links-spacing',
+							'selector'        => ':root',
+							'unit'            => '',
+						),
+					),
+				),
+				'header_position'                 => array(
+					'type'    => 'select',
+					'label'   => esc_html__( 'Header Position', '__theme_txtd' ),
+					'desc'    => esc_html__( 'Choose if you want a static menu or a fixed (sticky) one that stays visible no matter how much you scroll the page.', '__theme_txtd' ),
+					'default' => 'sticky',
+					'choices' => array(
+						'static' => esc_html__( 'Static', '__theme_txtd' ),
+						'sticky' => esc_html__( 'Sticky (fixed)', '__theme_txtd' ),
+					),
+				),
+				'header_sides_spacing'            => array(
+					'type'        => 'range',
+					'label'       => esc_html__( 'Header Sides Spacing', '__theme_txtd' ),
+					'desc'        => esc_html__( 'Adjust the space separating the header and the sides of the browser.', '__theme_txtd' ),
+					'live'        => true,
+					'default'     => null, // this should be set by the theme (previously 40)
+					'input_attrs' => array(
+						'min'          => 0,
+						'max'          => 140,
+						'step'         => 1,
+						'data-preview' => true,
+					),
+					'css'         => array(
+						array(
+							'property'        => '--theme-header-sides-spacing',
+							'selector'        => ':root',
+							'unit'            => 'px',
+						),
+					),
+				),
+			),
+		),
+	);
+
+	if ( empty( $config['sections'] ) ) {
+		$config['sections'] = array();
+	}
+
+	$config['sections'] = $config['sections'] + $rosa2_header_section;
 
 	return $config;
 }

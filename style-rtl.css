@@ -65,6 +65,8 @@ Table of Contents
   --theme-primary-font-family: Reforma1969, sans-serif;
   --theme-secondary-font-family: Reforma2018, sans-serif;
   --theme-accent-font-family: Billy Ohio, sans-serif;
+  --theme-body-font-size: 16;
+  --theme-customify-unit: calc( 1em / var(--theme-body-font-size) );
   --theme-font-size-breakpoint: 1440;
   --theme-font-size-minimum-value: 8;
   --theme-font-size-minimum-value-breakpoint: 320;
@@ -98,12 +100,17 @@ Table of Contents
   --theme-spacing-fluid-large:  calc( var( --theme-spacing-fluid ) * 4 );
   --theme-spacing-fluid-xl:     calc( var( --theme-spacing-fluid ) * 5 );
   --theme-spacing-fluid-xxl:    calc( var( --theme-spacing-fluid ) * 8 ); }
-  @media screen and (min-width: 320px) {
+  @media screen and (min-width: 20em) {
     :root {
-      --theme-spacing-fluid: calc(0.2rem + 0.8 * ((100vw - 320px) / 1120)); } }
-  @media screen and (min-width: 1440px) {
+      --theme-spacing-fluid: calc(0.2rem + 0.8 * ((100vw - 20em) / 70)); } }
+  @media screen and (min-width: 90em) {
     :root {
       --theme-spacing-fluid: 1rem; } }
+
+:root {
+  --theme-transition-duration: 0.4s;
+  --theme-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --theme-transition: all var(--theme-transition-duration) var(--theme-transition-easing); }
 
 /* 0. Reset */
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
@@ -851,7 +858,7 @@ table {
   position: fixed;
   top: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 1100;
   width: 100%; }
   .admin-bar .promo-bar {
     top: 32px; }
@@ -1096,8 +1103,8 @@ ul.menu a,
     right: 0;
     z-index: 1000;
     width: 100vw;
-    background: var(--theme-dark-primary);
-    color: var(--theme-light-primary);
+    background: var(--sm-dark-primary);
+    color: var(--sm-light-primary);
     opacity: .97; }
     .c-menu-toggle__checkbox ~ .site-header {
       display: block; }
@@ -1131,7 +1138,7 @@ ul.menu a,
       position: absolute;
       width: 100%;
       height: 2px;
-      background-color: var(--theme-light-primary);
+      background-color: var(--sm-light-primary);
       bottom: .7em;
       opacity: 0;
       transition: opacity 0.1s cubic-bezier(0.42, 0, 0.58, 1); }
@@ -1210,7 +1217,7 @@ ul.menu a,
     z-index: 999;
     background: #000;
     opacity: 0.2;
-    transition: opacity .3s ease-out;
+    transition: var(--theme-transition);
     cursor: default; }
   .c-menu-toggle {
     transition: color .3s ease-out; }
@@ -1218,7 +1225,7 @@ ul.menu a,
     pointer-events: none;
     opacity: 0; }
   .c-menu-toggle__checkbox:checked ~ .c-menu-toggle {
-    color: var(--current-light-primary); }
+    color: var(--sm-light-primary); }
     .c-menu-toggle__checkbox:checked ~ .c-menu-toggle .c-menu-toggle__slice--top {
       transform: rotate(-45deg); }
     .c-menu-toggle__checkbox:checked ~ .c-menu-toggle .c-menu-toggle__slice--middle {
@@ -1266,9 +1273,12 @@ ul.menu a,
     left: 0;
     right: 0;
     z-index: 1000;
+    display: flex;
+    align-items: center;
+    min-height: calc( var(--theme-header-height) * var(--theme-customify-unit));
     padding-top: 1em;
     padding-bottom: 1em;
-    transition: all 0.3s ease;
+    transition: var(--theme-transition);
     transition-property: opacity, color, background-color;
     will-change: transform; }
     .admin-bar .site-header {
@@ -1290,6 +1300,8 @@ ul.menu a,
       position: absolute; } }
 
 @media only screen and (min-width: 1000px) {
+  .site-header__inner-container {
+    width: 100%; }
   .site-header:after {
     content: "";
     display: block;
@@ -1298,43 +1310,83 @@ ul.menu a,
     left: 0;
     bottom: 0;
     right: 0;
-    box-shadow: #000000 0 1px 2px;
+    box-shadow: #000 0 0.0625em 0.125em;
     opacity: 0.1;
     pointer-events: none;
-    transition: opacity 0.3s ease; } }
+    transition: --theme-transition;
+    transition-property: opacity; } }
 
 @media only screen and (min-width: 1000px) {
   .site-header--fixed {
     position: fixed; }
   .site-header:not(.site-header--ready) {
     opacity: 0; }
-  .has-fixed-site-header .site-header:not(.site-header--ready) {
+  .has-site-header-fixed .site-header:not(.site-header--ready) {
     position: absolute; } }
 
-.has-fixed-site-header #page {
+.has-site-header-fixed #page {
   padding-top: 0 !important; }
 
 @media only screen and (min-width: 1000px) {
-  .has-fixed-site-header .site-header:not(.site-header--scrolled) {
+  body.has-site-header-transparent.has-site-header-inversed .site-header--fixed:not(.site-header--normal) {
+    color: var(--sm-light-primary); } }
+
+@media only screen and (min-width: 1000px) {
+  body.has-site-header-transparent:not(.has-site-header-inversed).has-site-header-fixed .site-header:not(.site-header--scrolled) {
     color: var(--sm-light-primary); }
-    .has-fixed-site-header .site-header:not(.site-header--scrolled):after {
+    body.has-site-header-transparent:not(.has-site-header-inversed).has-site-header-fixed .site-header:not(.site-header--scrolled):after {
       opacity: 0; }
-  body:not(.has-fixed-site-header) .site-header,
-  .has-fixed-site-header .site-header--scrolled {
+  body.has-site-header-transparent:not(.has-site-header-inversed):not(.has-site-header-fixed) .site-header,
+  body.has-site-header-transparent:not(.has-site-header-inversed).has-site-header-fixed .site-header--scrolled {
     background-color: var(--current-light-primary); } }
 
 @media not screen and (min-width: 1000px) {
-  .has-fixed-site-header .site-header--mobile:not(.site-header--scrolled),
-  .has-fixed-site-header .c-menu-toggle {
+  body.has-site-header-transparent:not(.has-site-header-inversed).has-site-header-fixed .site-header--mobile:not(.site-header--scrolled),
+  body.has-site-header-transparent:not(.has-site-header-inversed).has-site-header-fixed .c-menu-toggle {
     color: var(--sm-light-primary); } }
+
+@media only screen and (min-width: 1000px) {
+  body.has-site-header-transparent:not(.has-site-header-fixed) .site-header {
+    position: absolute;
+    color: var(--sm-light-primary);
+    background-color: transparent; } }
+
+@media only screen and (min-width: 1000px) {
+  body:not(.has-site-header-transparent) .site-header {
+    background-color: var(--sm-light-primary); } }
 
 .site-branding {
   display: flex;
   align-items: center;
   flex-shrink: 0; }
 
-.site-logo img {
+.site-logo a {
   display: block; }
+
+.site-logo img {
+  display: block;
+  max-width: 100%;
+  max-height: calc( var(--theme-logo-height) * var(--theme-customify-unit));
+  width: auto;
+  height: auto; }
+
+.site-title {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
+  --current-font-family: var(--theme-heading-4-font-family);
+  --current-font-size: var(--theme-heading-4-final-font-size);
+  --current-line-height: var(--theme-heading-4-line-height);
+  --current-font-weight: var(--theme-heading-4-font-weight);
+  --current-letter-spacing: var(--theme-heading-4-letter-spacing);
+  --current-text-transform: var(--theme-heading-4-text-transform);
+  --current-text-decoration: var(--theme-heading-4-text-decoration);
+  --current-font-size: calc( var(--theme-logo-height) * var(--theme-customify-unit) * 1.8 );
+  --current-line-height: 1; }
 
 .site-info {
   text-align: center; }
@@ -1343,7 +1395,7 @@ ul.menu a,
   text-align: right; }
   .site-logo + .site-info .site-title,
   .site-logo + .site-info .site-description {
-    margin-right: 1em; }
+    margin-right: 1rem; }
 
 .site-title a {
   color: inherit;
@@ -3214,6 +3266,9 @@ span.page-numbers {
   --current-text-transform: var(--theme-navigation-text-transform);
   --current-text-decoration: var(--theme-navigation-text-decoration); }
 
+:root {
+  --theme-header-links-spacing: 32; }
+
 @media only screen and (min-width: 1000px) {
   .wp-block-novablocks-navigation ul.menu a,
   .wp-block-novablocks-navigation .menu > ul a {
@@ -3223,7 +3278,10 @@ span.page-numbers {
     text-decoration: none; }
   .wp-block-novablocks-navigation ul.menu > li:not(:first-child),
   .wp-block-novablocks-navigation .menu > ul > li:not(:first-child) {
-    margin-right: 2em; }
+    margin-right: calc( var(--theme-header-links-spacing) * var(--theme-customify-unit)); }
+  .wp-block-novablocks-navigation ul.menu .customize-partial-edit-shortcut + > li:not(:first-child),
+  .wp-block-novablocks-navigation .menu > ul .customize-partial-edit-shortcut + > li:not(:first-child) {
+    margin-right: 0; }
   .wp-block-novablocks-navigation ul.menu > li > a,
   .wp-block-novablocks-navigation .menu > ul > li > a {
     padding-bottom: 0.25em;
@@ -3359,7 +3417,7 @@ body {
   padding-bottom: var(--theme-spacing-large);
   overflow: hidden; }
 
-.page:not(.has-fixed-site-header) .site-content {
+.page:not(.has-hero) .site-content {
   padding-top: var(--theme-spacing-large); }
 
 @media only screen and (min-width: 1000px) {
@@ -3542,7 +3600,7 @@ body {
   --theme-body-letter-spacing: -0.03em;
   --theme-body-text-transform: inherit;
   --theme-body-text-decoration: inherit;
-  --theme-body-font-size: 16;
+  --theme-body-font-size: calc( var(--theme-body-font-size) * 1px);
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
   --x1: var(--theme-font-size-breakpoint);
@@ -4068,22 +4126,6 @@ pre code {
 .entry-meta a {
   color: inherit;
   text-decoration: none; }
-
-.site-title {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
-  --current-font-family: var(--theme-heading-4-font-family);
-  --current-font-size: var(--theme-heading-4-final-font-size);
-  --current-line-height: var(--theme-heading-4-line-height);
-  --current-font-weight: var(--theme-heading-4-font-weight);
-  --current-letter-spacing: var(--theme-heading-4-letter-spacing);
-  --current-text-transform: var(--theme-heading-4-text-transform);
-  --current-text-decoration: var(--theme-heading-4-text-decoration); }
 
 /* 6. Overwrites */
 /* Embeds */

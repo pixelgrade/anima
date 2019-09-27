@@ -1,8 +1,3 @@
-$enable-site-header-fixed: true !default;
-$enable-site-header-transparent: true !default;
-$enable-site-header-inversed: false !default;
-
-$site-header-fixed-body-class: has-fixed-site-header !default;
 $site-header-transition-speed: .3s !default;
 
 @media only screen and (min-width: 1000px) {
@@ -14,12 +9,20 @@ $site-header-transition-speed: .3s !default;
         z-index: 1000;
         @include wp-offset(top, 0, true);
 
+        display: flex;
+        align-items: center;
+        min-height: calc( var(--theme-header-height) * var(--theme-customify-unit) );
+
         padding-top: 1em;
         padding-bottom: 1em;
 
-        transition: all $site-header-transition-speed ease;
+        transition: var(--theme-transition);
         transition-property: opacity, color, background-color;
         will-change: transform;
+    }
+
+    .site-header__inner-container {
+        width: 100%;
     }
 
     // used pseudo element to create site header border on its bottom
@@ -29,10 +32,11 @@ $site-header-transition-speed: .3s !default;
         content: "";
         display: block;
         @include cover;
-        box-shadow: #000000 0 1px 2px;
+        box-shadow: #000 0 0.0625em 0.125em;
         opacity: 0.1;
         pointer-events: none;
-        transition: opacity $site-header-transition-speed ease;
+        transition: --theme-transition;
+        transition-property: opacity;
     }
 }
 
@@ -43,37 +47,29 @@ $site-header-transition-speed: .3s !default;
 }
 
 // Fixed site header styles
-@if $enable-site-header-fixed {
+@media only screen and (min-width: 1000px) {
 
-    @media only screen and (min-width: 1000px) {
-
-        .site-header--fixed {
-            position: fixed;
-        }
-
-        .site-header:not(.site-header--ready) {
-            opacity: 0;
-        }
-
-        .#{$site-header-fixed-body-class} .site-header:not(.site-header--ready) {
-            position: absolute;
-        }
+    .site-header--fixed {
+        position: fixed;
     }
 
-    .#{$site-header-fixed-body-class} {
-        @include remove-page-padding-top;
+    .site-header:not(.site-header--ready) {
+        opacity: 0;
     }
 
-} @else {
+    .has-site-header-fixed .site-header:not(.site-header--ready) {
+        position: absolute;
+    }
+}
+
+.has-site-header-fixed {
     @include remove-page-padding-top;
 }
 
 // Inversed site header styles
+body.has-site-header-transparent  {
 
-@if $enable-site-header-transparent == true and
-    $enable-site-header-fixed == true {
-
-    @if $enable-site-header-inversed == true {
+    &.has-site-header-inversed {
 
         @media only screen and (min-width: 1000px) {
             .site-header--fixed:not(.site-header--normal) {
@@ -81,59 +77,56 @@ $site-header-transition-speed: .3s !default;
             }
         }
 
-    } @else {
+    }
+
+    &:not(.has-site-header-inversed) {
 
         @media only screen and (min-width: 1000px) {
-            .#{$site-header-fixed-body-class} .site-header:not(.site-header--scrolled) {
-                color: var(--sm-light-primary);
+            &.has-site-header-fixed {
 
-                &:after {
-                    opacity: 0;
+                .site-header:not(.site-header--scrolled) {
+                    color: var(--sm-light-primary);
+
+                    &:after {
+                        opacity: 0;
+                    }
                 }
             }
 
-            body:not(.#{$site-header-fixed-body-class}) .site-header,
-            .#{$site-header-fixed-body-class} .site-header--scrolled {
+            &:not(.has-site-header-fixed) .site-header,
+            &.has-site-header-fixed .site-header--scrolled {
                 background-color: var(--current-light-primary);
             }
         }
 
-        @media not screen and (min-width: 1000px) {
-            .#{$site-header-fixed-body-class} .site-header--mobile:not(.site-header--scrolled),
-            .#{$site-header-fixed-body-class} .c-menu-toggle {
-                color: var(--sm-light-primary);
+        &.has-site-header-fixed {
+
+            @media not screen and (min-width: 1000px) {
+                .site-header--mobile:not(.site-header--scrolled),
+                .c-menu-toggle {
+                    color: var(--sm-light-primary);
+                }
             }
         }
     }
 }
 
-@if $enable-site-header-transparent == true and
-    $enable-site-header-fixed == false {
+body.has-site-header-transparent:not(.has-site-header-fixed) {
 
     @media only screen and (min-width: 1000px) {
-        body.#{$site-header-fixed-body-class} {
-            .site-header {
-                position: absolute;
-                color: var(--sm-light-primary);
-                background-color: transparent;
-            }
+        .site-header {
+            position: absolute;
+            color: var(--sm-light-primary);
+            background-color: transparent;
         }
     }
 }
 
-@if $enable-site-header-transparent == false {
+body:not(.has-site-header-transparent) {
+
     @media only screen and (min-width: 1000px) {
         .site-header {
             background-color: var(--sm-light-primary);
         }
     }
-}
-
-@if $enable-site-header-transparent == false and
-    $enable-site-header-fixed == true {
-}
-
-@if $enable-site-header-transparent == false and
-    $enable-site-header-fixed == false {
-    // nothing
 }

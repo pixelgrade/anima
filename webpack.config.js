@@ -26,8 +26,8 @@ const extractConfig = {
 
 module.exports = {
   entry: {
-    './dist/js/app' : './src/app.js',
-    './dist/js/app.min' : './src/app.js',
+    './dist/js/scripts' : './src/scripts.js',
+    './dist/js/scripts.min' : './src/scripts.js',
     './dist/js/woocommerce' : './src/woocommerce.js',
     './dist/js/woocommerce.min' : './src/woocommerce.js',
     './dist/js/editor.blocks' : './src/editor.js',

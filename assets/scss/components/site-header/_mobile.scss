@@ -9,8 +9,8 @@
 
     width: 100vw;
 
-    background: var(--theme-dark-primary);
-    color: var(--theme-light-primary);
+    background: var(--sm-dark-primary);
+    color: var(--sm-light-primary);
 
     opacity: .97;
 
@@ -66,7 +66,7 @@
             width: 100%;
             height: 2px;
 
-            background-color: var(--theme-light-primary);
+            background-color: var(--sm-light-primary);
             bottom: .7em;
 
             opacity: 0;
@@ -134,6 +134,7 @@
 }
 
 body:not(.has-fixed-site-header) {
+
     .site-header--mobile {
         background-color: var(--current-light-primary);
 
@@ -160,15 +161,14 @@ body:not(.has-fixed-site-header) {
         }
     }
 
-    &.is-dark-mode {
-        .site-header--mobile {
-            .c-logo__inverted {
-                opacity: 1;
-            }
+    &.is-dark-mode .site-header--mobile {
 
-            .c-logo__default {
-                opacity: 0;
-            }
+        .c-logo__inverted {
+            opacity: 1;
+        }
+
+        .c-logo__default {
+            opacity: 0;
         }
     }
 }
