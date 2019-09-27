@@ -986,7 +986,7 @@ ul.menu,
   .site-header .sub-menu .menu-item-has-children > .children,
   .site-header .children .page_item_has_children > .sub-menu,
   .site-header .children .page_item_has_children > .children {
-    transform: translate3d(0, -0.75em, 0); }
+    transform: translate3d(0, -0.5em, 0); }
   .site-header .sub-menu .sub-menu,
   .site-header .children .children {
     top: 0;
@@ -1004,6 +1004,10 @@ ul.menu a,
   padding: 12px 0;
   color: inherit;
   text-decoration: none; }
+
+.has-submenu--left .sub-menu[class] {
+  left: auto;
+  right: 100%; }
 
 .c-menu-toggle__wrap {
   display: flex;

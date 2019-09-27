@@ -130,7 +130,7 @@ ul.menu,
 
             > .sub-menu,
             > .children {
-                transform: translate3d(0, -0.75em, 0);
+                transform: translate3d(0, -0.5em, 0);
             }
         }
 
@@ -161,4 +161,12 @@ ul.menu,
         color: inherit;
         text-decoration: none;
     }
+}
+
+
+.has-submenu--left {
+    .sub-menu[class] {
+       left: auto;
+       right: 100%;
+   }
 }
