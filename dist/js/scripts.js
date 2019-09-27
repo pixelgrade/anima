@@ -1921,7 +1921,6 @@ var header_Header = function () {
 
 			this.mobileHeaderHeight = Math.max(mobileHeaderHeight, toggleHeight);
 			this.visibleHeaderHeight = this.$mobileHeader.is(':visible') ? this.mobileHeaderHeight : this.box.height;
-
 			this.update();
 		}
 	}, {
@@ -2190,12 +2189,19 @@ var promo_bar_PromoBar = function () {
 
 
 
+
+var MENU_ITEM = '.menu-item, .page_item';
+var MENU_ITEM_WITH_CHILDREN = '.menu-item-has-children, .page_item_has_children';
+var SUBMENU = '.sub-menu, .children';
+var SUBMENU_LEFT_CLASS = 'has-submenu-left';
+var HOVER_CLASS = 'hover';
+
 var navbar_Navbar = function () {
 	function Navbar() {
 		classCallCheck_default()(this, Navbar);
 
-		this.$menuItems = jQuery('.menu-item');
-		this.$menuItemsWithChildren = this.$menuItems.filter('.menu-item-has-children').removeClass('hover');
+		this.$menuItems = external_jQuery_default()(MENU_ITEM);
+		this.$menuItemsWithChildren = this.$menuItems.filter(MENU_ITEM_WITH_CHILDREN).removeClass(HOVER_CLASS);
 		this.$menuItemsWithChildrenLinks = this.$menuItemsWithChildren.children('a');
 
 		this.initialize();
@@ -2215,6 +2221,7 @@ var navbar_Navbar = function () {
 
 			// we are on desktop
 			if (mq.matches) {
+				this.addSubMenusLeftClass();
 
 				if (this.initialized && !this.desktop) {
 					this.unbindClick();
@@ -2228,6 +2235,8 @@ var navbar_Navbar = function () {
 				return;
 			}
 
+			this.removeSubMenusLeftClass();
+
 			if (this.initialized && this.desktop) {
 				this.unbindHoverIntent();
 			}
@@ -2240,9 +2249,32 @@ var navbar_Navbar = function () {
 			return;
 		}
 	}, {
+		key: 'addSubMenusLeftClass',
+		value: function addSubMenusLeftClass() {
+			var _GlobalService$getPro = globalService.getProps(),
+			    windowWidth = _GlobalService$getPro.windowWidth;
+
+			this.$menuItemsWithChildren.each(function (index, obj) {
+				var $obj = external_jQuery_default()(obj);
+				var $subMenu = $obj.children(SUBMENU),
+				    subMenuWidth = $subMenu.outerWidth(),
+				    subMenuOffSet = $subMenu.offset(),
+				    availableSpace = windowWidth - subMenuOffSet.left;
+
+				if (availableSpace < subMenuWidth) {
+					$obj.addClass(SUBMENU_LEFT_CLASS);
+				}
+			});
+		}
+	}, {
+		key: 'removeSubMenusLeftClass',
+		value: function removeSubMenusLeftClass() {
+			this.$menuItemsWithChildren.removeClass(SUBMENU_LEFT_CLASS);
+		}
+	}, {
 		key: 'onClickMobile',
 		value: function onClickMobile(event) {
-			var $link = jQuery(this);
+			var $link = external_jQuery_default()(this);
 			var $siblings = $link.parent().siblings().not($link);
 
 			if ($link.is('.active')) {
@@ -2251,8 +2283,8 @@ var navbar_Navbar = function () {
 
 			event.preventDefault();
 
-			$link.addClass('active').parent().addClass('hover');
-			$siblings.removeClass('hover');
+			$link.addClass('active').parent().addClass(HOVER_CLASS);
+			$siblings.removeClass(HOVER_CLASS);
 			$siblings.find('.active').removeClass('active');
 		}
 	}, {
@@ -2270,10 +2302,10 @@ var navbar_Navbar = function () {
 		value: function bindHoverIntent() {
 			this.$menuItems.hoverIntent({
 				out: function out() {
-					jQuery(this).removeClass('hover');
+					external_jQuery_default()(this).removeClass(HOVER_CLASS);
 				},
 				over: function over() {
-					jQuery(this).addClass('hover');
+					external_jQuery_default()(this).addClass(HOVER_CLASS);
 				},
 				timeout: 200
 			});

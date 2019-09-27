@@ -45,8 +45,6 @@ class Header {
 
 		this.mobileHeaderHeight = Math.max( mobileHeaderHeight, toggleHeight );
 		this.visibleHeaderHeight = this.$mobileHeader.is( ':visible' ) ? this.mobileHeaderHeight : this.box.height;
-
-		this.updateSubmenusPosition();
 		this.update();
 	}
 
@@ -103,22 +101,6 @@ class Header {
 
 		this.$mobileHeader.insertAfter( this.$toggle );
 		this.createdMobileHeader = true;
-	}
-
-	updateSubmenusPosition() {
-		const menuItemsWithChildren = $('.menu-item-has-children');
-
-		menuItemsWithChildren.each(function(){
-			const subMenu = $(this).find('> .sub-menu'),
-				  subMenuWidth = subMenu.width(),
-				  subMenuOffSet = subMenu.offset(),
-				  windowWidth = $(window).width(),
-				  availableSpace = windowWidth - subMenuOffSet.left;
-
-			if (availableSpace < subMenuWidth) {
-				$(this).addClass('has-submenu--left');
-			}
-		})
 	}
 
 	render( inversed ) {
