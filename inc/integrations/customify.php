@@ -769,7 +769,7 @@ function rosa2_filter_color_palettes( $color_palettes ) {
 
 	$color_palettes = array_merge( array(
 		'default' => array(
-			'label'   => 'Theme Default',
+			'label'   => esc_html__( 'Theme Default', '__theme_txtd' ),
 			'preview' => array(
 				'background_image_url' => '//cloud.pixelgrade.com/wp-content/uploads/2018/07/rosa-palette.jpg',
 			),
