@@ -1,12 +1,15 @@
-body {
+.single {
     background: var(--current-light-tertiary);
+
+    .site-content {
+        background: var(--current-light-primary);
+    }
 }
 
 .single,
 .page {
 
     .site-content {
-        background: var(--current-light-primary);
         padding-bottom: var(--theme-spacing-large);
 
         overflow: hidden;

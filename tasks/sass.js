@@ -1,5 +1,6 @@
 var gulp = require( 'gulp' ),
 	sass = require( 'gulp-sass' ),
+	sassUnicode = require('gulp-sass-unicode'),
 	rtlcss = require( 'gulp-rtlcss' ),
 	rename = require( 'gulp-rename' ),
 	replace = require( 'gulp-replace' );
@@ -9,6 +10,7 @@ sass.compiler = require( 'node-sass' );
 function styles( cb ) {
 	return gulp.src( './assets/scss/*.scss' )
 	           .pipe( sass().on( 'error', sass.logError ) )
+	           .pipe( sassUnicode() )
 	           .pipe( replace( /^@charset "UTF-8";\n/gm, '' ) )
 	           .pipe( gulp.dest( './' ) );
 }
