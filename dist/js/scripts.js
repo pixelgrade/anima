@@ -1448,7 +1448,34 @@ function reloadRellax(element) {
 		rellax._updatePosition();
 	}
 }
+
+var debounce = function debounce(func, wait) {
+	var timeout = null;
+
+	return function () {
+		var context = this;
+		var args = arguments;
+
+		var later = function later() {
+			func.apply(context, args);
+		};
+
+		clearTimeout(timeout);
+		timeout = setTimeout(later, wait);
+	};
+};
+// EXTERNAL MODULE: ./node_modules/babel-runtime/core-js/object/keys.js
+var keys = __webpack_require__(74);
+var keys_default = /*#__PURE__*/__webpack_require__.n(keys);
+
+// EXTERNAL MODULE: ./node_modules/babel-runtime/core-js/object/assign.js
+var object_assign = __webpack_require__(34);
+var assign_default = /*#__PURE__*/__webpack_require__.n(object_assign);
+
 // CONCATENATED MODULE: ./src/components/globalService.js
+
+
+
 
 
 
@@ -1469,12 +1496,43 @@ var globalService_GlobalService = function () {
 		window.addEventListener('load', updateProps);
 		window.addEventListener('scroll', updateScroll);
 		window.requestAnimationFrame(this.renderLoop.bind(this));
+
+		if (wp.customize) {
+			if (wp.customize.selectiveRefresh) {
+				wp.customize.selectiveRefresh.bind('partial-content-rendered', updateProps);
+			}
+			wp.customize.bind('change', updateProps);
+		}
+
+		this.observe();
 	}
 
 	createClass_default()(GlobalService, [{
+		key: 'observe',
+		value: function observe(callback) {
+			if (!window.MutationObserver) {
+				return;
+			}
+
+			var updateProps = debounce(this.updateProps.bind(this), 10);
+			var observer = new MutationObserver(function (mutationList) {
+				updateProps();
+			});
+
+			observer.observe(document.body, {
+				attributes: true,
+				attributeOldValue: false,
+				characterData: true,
+				characterDataOldValue: false,
+				childList: true,
+				subtree: true
+			});
+		}
+	}, {
 		key: 'renderLoop',
 		value: function renderLoop() {
 			if (!this.frameRendered) {
+				console.log('render');
 				this.renderStuff();
 				this.frameRendered = true;
 			}
@@ -1511,25 +1569,53 @@ var globalService_GlobalService = function () {
 	}, {
 		key: 'updateScroll',
 		value: function updateScroll() {
-			this.props.scrollY = window.scrollY;
-			this.props.scrollX = window.scrollX;
-			this.frameRendered = false;
+
+			var newProps = {
+				scrollY: window.scrollY,
+				scrollX: window.scrollX
+			};
+
+			if (this.checkNewProps(newProps)) {
+				this.props = assign_default()({}, this.props, newProps);
+				this.frameRendered = false;
+			}
+		}
+	}, {
+		key: 'checkNewProps',
+		value: function checkNewProps(newProps) {
+			var _this = this;
+
+			return keys_default()(newProps).some(function (key) {
+				return newProps[key] !== _this.props[key];
+			});
 		}
 	}, {
 		key: 'updateProps',
 		value: function updateProps() {
+			var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+			console.log('updateprops');
+
 			var body = document.body;
 			var html = document.documentElement;
 			var bodyScrollHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight);
 			var htmlScrollHeight = Math.max(html.scrollHeight, html.offsetHeight);
 
-			this.props.scrollHeight = Math.max(bodyScrollHeight, htmlScrollHeight);
-			this.props.adminBarHeight = this.getAdminBarHeight();
+			var newProps = {
+				scrollHeight: Math.max(bodyScrollHeight, htmlScrollHeight),
+				adminBarHeight: this.getAdminBarHeight(),
+				windowWidth: window.innerWidth,
+				windowHeight: window.innerHeight
+			};
 
-			this.props.windowWidth = window.innerWidth;
-			this.props.windowHeight = window.innerHeight;
 			this.updateScroll();
-			this.updateStuff();
+
+			if (this.checkNewProps(newProps) || force) {
+				this.props = assign_default()({}, this.props, newProps);
+
+				this.updateStuff();
+				this.frameRendered = false;
+			}
 		}
 	}, {
 		key: 'getAdminBarHeight',
@@ -1862,10 +1948,6 @@ var hero_Hero = function () {
 }();
 
 /* harmony default export */ var components_hero = (hero_Hero);
-// EXTERNAL MODULE: ./node_modules/babel-runtime/core-js/object/assign.js
-var object_assign = __webpack_require__(34);
-var assign_default = /*#__PURE__*/__webpack_require__.n(object_assign);
-
 // CONCATENATED MODULE: ./src/components/header.js
 
 
@@ -2468,6 +2550,51 @@ external_jQuery_default()(function () {
 		scripts_initialize();
 	}
 });
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__(75), __esModule: true };
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(76);
+module.exports = __webpack_require__(5).Object.keys;
+
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.14 Object.keys(O)
+var toObject = __webpack_require__(20);
+var $keys = __webpack_require__(24);
+
+__webpack_require__(77)('keys', function () {
+  return function keys(it) {
+    return $keys(toObject(it));
+  };
+});
+
+
+/***/ }),
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// most Object methods by ES6 should accept primitives
+var $export = __webpack_require__(9);
+var core = __webpack_require__(5);
+var fails = __webpack_require__(16);
+module.exports = function (KEY, exec) {
+  var fn = (core.Object || {})[KEY] || Object[KEY];
+  var exp = {};
+  exp[KEY] = exec(fn);
+  $export($export.S + $export.F * fails(function () { fn(1); }), 'Object', exp);
+};
+
 
 /***/ })
 /******/ ]);

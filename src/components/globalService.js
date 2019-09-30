@@ -1,3 +1,5 @@
+import { debounce } from '../utils';
+
 class GlobalService {
 
 	constructor() {
@@ -14,10 +16,40 @@ class GlobalService {
 		window.addEventListener( 'load', updateProps );
 		window.addEventListener( 'scroll', updateScroll );
 		window.requestAnimationFrame( this.renderLoop.bind( this ) );
+
+		if ( wp.customize ) {
+			if ( wp.customize.selectiveRefresh ) {
+				wp.customize.selectiveRefresh.bind( 'partial-content-rendered', updateProps );
+			}
+			wp.customize.bind( 'change', updateProps );
+		}
+
+		this.observe();
+	}
+
+	observe( callback ) {
+		if ( ! window.MutationObserver ) {
+			return;
+		}
+
+		const updateProps = debounce( this.updateProps.bind( this ), 10 );
+		const observer = new MutationObserver( ( mutationList ) => {
+			updateProps();
+		} );
+
+		observer.observe( document.body, {
+			attributes: true,
+			attributeOldValue: false,
+			characterData: true,
+			characterDataOldValue: false,
+			childList: true,
+			subtree: true
+		} );
 	}
 
 	renderLoop() {
 		if ( ! this.frameRendered ) {
+			console.log( 'render' );
 			this.renderStuff();
 			this.frameRendered = true;
 		}
@@ -49,24 +81,47 @@ class GlobalService {
 	}
 
 	updateScroll() {
-		this.props.scrollY = window.scrollY;
-		this.props.scrollX = window.scrollX;
-		this.frameRendered = false;
+
+		const newProps = {
+			scrollY: window.scrollY,
+			scrollX: window.scrollX,
+		}
+
+		if ( this.checkNewProps( newProps ) ) {
+			this.props = Object.assign( {}, this.props, newProps );
+			this.frameRendered = false;
+		}
 	}
 
-	updateProps() {
+	checkNewProps( newProps ) {
+		return Object.keys( newProps ).some( key => {
+			return newProps[key] !== this.props[key];
+		} )
+	}
+
+	updateProps( force = false ) {
+		console.log( 'updateprops' );
+
 		const body = document.body;
 		const html = document.documentElement;
 		const bodyScrollHeight = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight );
 		const htmlScrollHeight = Math.max( html.scrollHeight, html.offsetHeight );
 
-		this.props.scrollHeight = Math.max( bodyScrollHeight, htmlScrollHeight );
-		this.props.adminBarHeight = this.getAdminBarHeight();
+		const newProps = {
+			scrollHeight: Math.max( bodyScrollHeight, htmlScrollHeight ),
+			adminBarHeight: this.getAdminBarHeight(),
+			windowWidth: window.innerWidth,
+			windowHeight: window.innerHeight,
+		}
 
-		this.props.windowWidth = window.innerWidth;
-		this.props.windowHeight = window.innerHeight;
 		this.updateScroll();
-		this.updateStuff();
+
+		if ( this.checkNewProps( newProps ) || force ) {
+			this.props = Object.assign( {}, this.props, newProps );
+
+			this.updateStuff();
+			this.frameRendered = false;
+		}
 	}
 
 	getAdminBarHeight() {
