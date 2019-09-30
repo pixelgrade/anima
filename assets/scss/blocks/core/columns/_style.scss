@@ -42,13 +42,13 @@ $enable-columns-block-styles: true !default;
             flex-grow: 0;
 
             &:nth-child(2n) {
-                margin-left: 32px
+                margin-left: var(--theme-spacing);
             }
         }
 
         @media (min-width: 782px) {
             &:not(:first-child) {
-                margin-left: 32px
+                margin-left: var(--theme-spacing);
             }
         }
     }

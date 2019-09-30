@@ -845,10 +845,10 @@
         flex-basis: calc(50% - 16px);
         flex-grow: 0; }
         .editor-styles-wrapper .wp-block-column:nth-child(2n) {
-          margin-left: 32px; } }
+          margin-left: var(--theme-spacing); } }
     @media (min-width: 782px) {
       .editor-styles-wrapper .wp-block-column:not(:first-child) {
-        margin-left: 32px; } }
+        margin-left: var(--theme-spacing); } }
   .editor-styles-wrapper .wp-block-columns.are-vertically-aligned-top {
     align-items: flex-start; }
   .editor-styles-wrapper .wp-block-columns.are-vertically-aligned-center {
@@ -1347,6 +1347,8 @@
         color: currentColor; }
       .editor-styles-wrapper .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link:after {
         color: currentColor; }
+  .editor-styles-wrapper .ot-dtp-picker-selector-link {
+    text-decoration: none; }
   .editor-styles-wrapper .wp-block[data-type="novablocks/header"] .editor-block-list__layout {
     display: grid;
     align-items: center;

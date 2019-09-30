@@ -2018,16 +2018,16 @@ label.subscribe-label.subscribe-label {
   transition: all 0.5s cubic-bezier(0.18, 0.61, 0.43, 0.99);
   will-change: transform; }
   .post-navigation .nav-links__label:before {
-    width: 10px;
-    height: 1px;
+    width: 20px;
+    height: 3px;
     background-color: currentColor; }
   .post-navigation .nav-links__label:after {
     display: block;
     width: 0;
     height: 0;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    transform: translate(0, calc(0.5px - 50%)); }
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    transform: translate(0, calc(1px - 50%)); }
   .post-navigation .nav-links__label:before, .post-navigation .nav-links__label:after {
     content: '';
     position: absolute;
@@ -2039,20 +2039,20 @@ label.subscribe-label.subscribe-label {
   .post-navigation .nav-links__label.nav-links__label {
     margin-bottom: 0; }
   .post-navigation .nav-links__label--previous {
-    padding-right: 21px; }
+    padding-right: 31px; }
     .post-navigation .nav-links__label--previous:after {
       right: 0;
-      border-left: 5px solid currentColor; }
+      border-left: 8px solid currentColor; }
     .post-navigation .nav-links__label--previous:before {
-      right: 3px; }
+      right: 8px; }
   .post-navigation .nav-links__label--next {
-    padding-left: 21px;
+    padding-left: 31px;
     text-align: right; }
     .post-navigation .nav-links__label--next:after {
       left: 0;
-      border-right: 5px solid currentColor; }
+      border-right: 8px solid currentColor; }
     .post-navigation .nav-links__label--next:before {
-      left: 3px; }
+      left: 8px; }
 
 .post-navigation .nav-links .nav-title[class] {
   padding-top: 0;
@@ -2724,10 +2724,10 @@ span.page-numbers {
       flex-basis: calc(50% - 16px);
       flex-grow: 0; }
       .wp-block-column:nth-child(2n) {
-        margin-right: 32px; } }
+        margin-right: var(--theme-spacing); } }
   @media (min-width: 782px) {
     .wp-block-column:not(:first-child) {
-      margin-right: 32px; } }
+      margin-right: var(--theme-spacing); } }
 
 .wp-block-columns.are-vertically-aligned-top {
   align-items: flex-start; }
@@ -3426,6 +3426,9 @@ span.page-numbers {
       color: currentColor; }
     .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link:after {
       color: currentColor; }
+
+.ot-dtp-picker-selector-link {
+  text-decoration: none; }
 
 .wp-block-novablocks-navigation {
   font-family: var(--current-font-family);
