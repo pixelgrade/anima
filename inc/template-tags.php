@@ -413,10 +413,7 @@ if ( ! function_exists( 'rosa2_comments_toggle_checked_attribute' ) ) {
 	 * We only accept two outcomes: either output 'checked="checked"' or nothing.
 	 */
 	function rosa2_comments_toggle_checked_attribute() {
-		// If the outcome is not falsy, output the attribute.
-		if ( rosa2_get_comments_toggle_checked_attribute() ) {
-			echo '';
-		}
+		echo rosa2_get_comments_toggle_checked_attribute();
 	}
 }
 
@@ -428,7 +425,9 @@ if ( ! function_exists( 'rosa2_get_comments_toggle_checked_attribute' ) ) {
 	 * @return string
 	 */
 	function rosa2_get_comments_toggle_checked_attribute() {
-		return apply_filters( 'pixelgrade_get_comments_toggle_checked_attribute', 'checked="checked"' );
+		$attribute = '';
+
+		return apply_filters( 'pixelgrade_get_comments_toggle_checked_attribute', $attribute );
 	}
 }
 
@@ -443,7 +442,7 @@ if ( ! function_exists( 'rosa2_get_read_more_button' ) ) {
 
 		return
 			'<div class="wp-block-button aligncenter is-style-text">' .
-			'<a class="wp-block-button__link" href="' . esc_url( get_permalink() ) . '">' . esc_html__( 'Read more', '__theme_txtd' ) . '</a>' .
+			'<a class="wp-block-button__link" href="' . esc_url( get_permalink() ) . '">' . sprintf( wp_kses_post( __( 'Read more <span class="screen-reader-text">about "%s"</span>', '__theme_txtd' ) ), get_the_title() ) . '</a>' .
 			'</div>';
 	}
 }

@@ -22,9 +22,9 @@ if ( ! defined( 'ABSPATH' ) ) {
         $comments_number = absint( get_comments_number() );
 
         if ( ! have_comments() ) {
-	        esc_html_e( 'No Comments', 'twentytwenty' );
+	        esc_html_e( 'No Comments Yet', '__theme_txtd' );
         } elseif ( '1' === $comments_number ) {
-	        printf( esc_html_x( '1 Comment', 'comments title', 'twentytwenty' ) );
+	        printf( esc_html_x( '1 Comment', 'comments title', '__theme_txtd' ) );
         } else {
 	        echo esc_html(
 		        sprintf(
@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				        '%1$s Comments',
 				        $comments_number,
 				        'comments title',
-				        'twentytwenty'
+				        '__theme_txtd'
 			        ),
 			        number_format_i18n( $comments_number )
 		        )
