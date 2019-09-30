@@ -1,7 +1,7 @@
 var gulp = require( 'gulp' ),
 	cp = require( 'child_process' ),
 	plugins = require( 'gulp-load-plugins')(),
-	plugin = 'rosa2';
+	theme = 'rosa2';
 
 function maybeFixBuildDirPermissions(done) {
 	cp.execSync('find ./../build -type d -exec chmod 755 {} \\;');
@@ -28,9 +28,9 @@ gulp.task( 'build:fix:line-endings', maybeFixIncorrectLineEndings );
 // Replace the themes' text domain with the actual text domain (think variations)
 // -----------------------------------------------------------------------------
 function pluginTextdomainReplace() {
-	return gulp.src( ['../build/' + plugin + '/**/*.php', '../build/' + plugin + '/**/*.js'] )
-	           .pipe( plugins.replace( /['|"]__theme_txtd['|"]/g, '\'' + plugin + '\'' ) )
-	           .pipe( gulp.dest( '../build/' + plugin ) );
+	return gulp.src( ['../build/' + theme + '/**/*.php', '../build/' + theme + '/**/*.js', '../build/' + theme + '/**/*.css', '../build/' + theme + '/**/*.pot'] )
+	           .pipe( plugins.replace( /__theme_txtd/g, theme ) )
+	           .pipe( gulp.dest( '../build/' + theme ) );
 }
 gulp.task( 'build:fix:txtdomain', pluginTextdomainReplace );
 

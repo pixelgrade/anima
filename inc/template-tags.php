@@ -475,9 +475,9 @@ if ( ! function_exists( 'rosa2_get_the_posts_pagination' ) ) {
 				'end_size'           => 1,
 				'mid_size'           => 2,
 				'type'               => 'plain',
-				'prev_text'          => esc_html_x( 'Previous', 'previous set of posts', 'rosa2' ),
-				'next_text'          => esc_html_x( 'Next', 'next set of posts', 'rosa2' ),
-				'screen_reader_text' => esc_html__( 'Posts navigation', 'rosa2' ),
+				'prev_text'          => esc_html_x( 'Previous', 'previous set of posts', '__theme_txtd' ),
+				'next_text'          => esc_html_x( 'Next', 'next set of posts', '__theme_txtd' ),
+				'screen_reader_text' => esc_html__( 'Posts navigation', '__theme_txtd' ),
 			)
 		);
 

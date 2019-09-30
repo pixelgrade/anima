@@ -18,8 +18,28 @@ if ( ! defined( 'ABSPATH' ) ) {
     <span class="c-comments-toggle__icon"></span>
     <span class="c-comments-toggle__text">
         <?php
-        /* translators: 1: the number of comments */
-        printf( esc_html( _nx( '%1$s comment', '%1$s comments', get_comments_number(), 'comments title', '__theme_txtd' ) ), wp_kses( number_format_i18n( get_comments_number() ), wp_kses_allowed_html() ) );
+
+        $comments_number = absint( get_comments_number() );
+
+        if ( ! have_comments() ) {
+	        esc_html_e( 'No Comments', 'twentytwenty' );
+        } elseif ( '1' === $comments_number ) {
+	        printf( esc_html_x( '1 Comment', 'comments title', 'twentytwenty' ) );
+        } else {
+	        echo esc_html(
+		        sprintf(
+		        /* translators: 1: number of comments */
+			        _nx(
+				        '%1$s Comment',
+				        '%1$s Comments',
+				        $comments_number,
+				        'comments title',
+				        'twentytwenty'
+			        ),
+			        number_format_i18n( $comments_number )
+		        )
+	        );
+        }
         ?>
     </span>
 </label>
