@@ -14,6 +14,7 @@ export default class App {
 		this.initializeHeader();
 		this.initializeNavbar();
 		this.initializePromoBar();
+		this.checkWindowLocationComments();
 
 		GlobalService.registerRender( this.render.bind( this ) );
 	}
@@ -87,5 +88,11 @@ export default class App {
 				reloadRellax( obj );
 			} );
 		} );
+	}
+
+	checkWindowLocationComments() {
+		if (window.location.href.indexOf("#comment") === -1) {
+			$( ".c-comments-toggle__checkbox" ).prop( "checked", false );
+		}
 	}
 }

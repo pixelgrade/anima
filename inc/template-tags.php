@@ -345,7 +345,7 @@ if ( ! function_exists( 'rosa2_shape_comment' ) ) {
 				break;
 			default: ?>
 
-			<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
+			<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
 				<article id="div-comment-<?php comment_ID(); ?>" class="comment__wrapper">
 					<?php if ( 0 != $args['avatar_size'] ) : ?>
 						<div class="comment__avatar"><?php echo get_avatar( $comment, $args['avatar_size'] ); ?></div>
@@ -413,10 +413,7 @@ if ( ! function_exists( 'rosa2_comments_toggle_checked_attribute' ) ) {
 	 * We only accept two outcomes: either output 'checked="checked"' or nothing.
 	 */
 	function rosa2_comments_toggle_checked_attribute() {
-		// If the outcome is not falsy, output the attribute.
-		if ( rosa2_get_comments_toggle_checked_attribute() ) {
-			echo '';
-		}
+		echo rosa2_get_comments_toggle_checked_attribute();
 	}
 }
 
@@ -428,7 +425,9 @@ if ( ! function_exists( 'rosa2_get_comments_toggle_checked_attribute' ) ) {
 	 * @return string
 	 */
 	function rosa2_get_comments_toggle_checked_attribute() {
-		return apply_filters( 'pixelgrade_get_comments_toggle_checked_attribute', 'checked="checked"' );
+		$attribute = 'checked';
+
+		return apply_filters( 'pixelgrade_get_comments_toggle_checked_attribute', $attribute );
 	}
 }
 
@@ -443,7 +442,7 @@ if ( ! function_exists( 'rosa2_get_read_more_button' ) ) {
 
 		return
 			'<div class="wp-block-button aligncenter is-style-text">' .
-			'<a class="wp-block-button__link" href="' . esc_url( get_permalink() ) . '">' . esc_html__( 'Read more', '__theme_txtd' ) . '</a>' .
+			'<a class="wp-block-button__link" href="' . esc_url( get_permalink() ) . '">' . sprintf( wp_kses_post( __( 'Read more <span class="screen-reader-text">about "%s"</span>', '__theme_txtd' ) ), get_the_title() ) . '</a>' .
 			'</div>';
 	}
 }
@@ -482,5 +481,71 @@ if ( ! function_exists( 'rosa2_get_the_posts_pagination' ) ) {
 		);
 
 		return get_the_posts_pagination( $args );
+	}
+}
+
+/**
+ * Displays the navigation to next/previous post, when applicable.
+ *
+ * @param array $args Optional. See get_the_post_navigation() for available arguments.
+ *                    Default empty array.
+ * @return void
+ */
+function rosa2_the_post_navigation( $args = array() ) {
+	echo rosa2_get_the_post_navigation( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+}
+
+if ( ! function_exists( 'rosa2_get_the_post_navigation' ) ) {
+	/**
+	 * Retrieves the navigation to next/previous post, when applicable.
+	 *
+	 * @param array $args {
+	 *     Optional. Default post navigation arguments. Default empty array.
+	 *
+	 * @type string $prev_text Anchor text to display in the previous post link. Default '%title'.
+	 * @type string $next_text Anchor text to display in the next post link. Default '%title'.
+	 * @type bool $in_same_term Whether link should be in a same taxonomy term. Default false.
+	 * @type array|string $excluded_terms Array or comma-separated list of excluded term IDs. Default empty.
+	 * @type string $taxonomy Taxonomy, if `$in_same_term` is true. Default 'category'.
+	 * @type string $screen_reader_text Screen reader text for nav element. Default 'Post navigation'.
+	 * }
+	 * @return string Markup for post links.
+	 */
+	function rosa2_get_the_post_navigation( $args = array() ) {
+		$args = wp_parse_args(
+			$args, array(
+				'prev_text'          => '%title',
+				'next_text'          => '%title',
+				'in_same_term'       => false,
+				'excluded_terms'     => '',
+				'taxonomy'           => 'category',
+				'screen_reader_text' => esc_html__( 'Post navigation', 'rosa2' ),
+			)
+		);
+
+		$navigation = '';
+
+		$previous = get_previous_post_link(
+			'<div class="nav-previous"><span class="nav-links__label  nav-links__label--previous">' . esc_html__( 'Previous article', '__theme_txtd' ) . '</span><span class="nav-title  nav-title--previous">%link</span></div>',
+			$args['prev_text'],
+			$args['in_same_term'],
+			$args['excluded_terms'],
+			$args['taxonomy']
+		);
+
+		$next = get_next_post_link(
+			'<div class="nav-next"><span class="nav-links__label  nav-links__label--next">' . esc_html__( 'Next article', '__theme_txtd' ) . '</span><span class="nav-title  nav-title--next">%link</span></div>',
+			$args['next_text'],
+			$args['in_same_term'],
+			$args['excluded_terms'],
+			$args['taxonomy']
+		);
+
+		// Only add markup if there's somewhere to navigate to.
+		if ( $previous || $next ) {
+			$navigation = _navigation_markup( $previous . $next, 'post-navigation', $args['screen_reader_text'] );
+		}
+
+		return apply_filters( 'rosa2_get_the_post_navigation', $navigation, $args );
 	}
 }

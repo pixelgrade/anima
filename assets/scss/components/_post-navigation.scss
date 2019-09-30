@@ -1,16 +1,3 @@
-.post-navigation {
-
-    .nav-links {
-        @include flex-grid;
-        @include flex-grid-count(2);
-        justify-content: space-between;
-    }
-
-    .nav-next {
-        text-align: right;
-    }
-}
-
 // page numbers
 @mixin pagination {
     position: relative;
@@ -75,75 +62,204 @@
     }
 }
 
-.woocommerce-pagination,
-.nav-links {
-    display: flex;
-    justify-content: center;
+// SINGLE NAVIGATION
+.post-navigation {
 
-    font-feature-settings: "lnum";
+    --theme-content-width-wide: var(--theme-content-width-normal);
 
-    margin-top: var(--theme-spacing-xl);
-    margin-bottom: var(--theme-spacing-normal);
-    margin-left: calc(var(--theme-spacing-tiny) * -1);
+    .nav-links {
+        display: block;
 
-    > .page-numbers {
-        text-decoration: none;
-        margin-left: var(--theme-spacing-tiny);
-    }
-
-    > .prev {
-        @include pagination;
-        @include pagination--left;
-    }
-
-    > .next {
-        @include pagination;
-        @include pagination--right;
-    }
-
-    > .prev,
-    > .current:last-child {
-        margin-right: auto;
-    }
-
-    > .next,
-    > .current:first-child {
-        margin-left: auto;
-    }
-}
-
-a.page-numbers,
-span.page-numbers {
-
-    color: var(--current-dark-secondary);
-
-    &[class][class] {
-        width: 3em;
-        height: 3em;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        &.current {
-            background-color: var(--current-dark-secondary);
-            color: var(--current-light-primary);
-        }
-
-        &:not(.current):hover {
-            color: var(--current-dark-primary);
-        }
-    }
-
-    &.next[class],
-    &.prev[class] {
-        width: auto;
-    }
-
-    &:not(.prev):not(.next) {
-        display: none;
-
-        @include above(lap) {
+        @include above(tablet) {
             display: flex;
+            flex-wrap: wrap;
+        }
+
+        > * {
+            position: relative;
+            flex: 1;
+        }
+
+        [class*="title"] a {
+            color: inherit;
+            text-decoration: underline;
+            text-decoration-color: transparent;
+
+            &:hover,
+            &:focus {
+                text-decoration-color: var(--current-color-primary);
+            }
+        }
+
+        a {
+            text-decoration: underline;
+            text-decoration-color: transparent;
+        }
+    }
+
+    .nav-title {
+        display: block;
+    }
+
+    .nav-next {
+        text-align: right;
+    }
+
+    @include below(tablet) {
+
+        .nav-next,
+        .nav-previous { text-align: center; }
+
+        .nav-links__label { margin-bottom: 0; }
+
+        .nav-title { padding-top: 0; }
+    }
+}
+
+.nav-links__label {
+    @include apply-font(heading-5);
+    color: var(--current-color-primary);
+}
+
+.nav-title {
+    @include apply-font(heading-4);
+}
+
+.post-navigation {
+    .nav-links {
+        &__label {
+
+            position: relative;
+
+            border: 0;
+
+            background-color: transparent;
+
+            font-weight: normal;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+
+            transition: all .5s cubic-bezier(.18, .61, .43, .99);
+            will-change: transform;
+
+            &:before {
+                width: 10px;
+                height: 1px;
+                background-color: currentColor;
+            }
+
+            &:after {
+                display: block;
+                width: 0;
+                height: 0;
+                border-top: 5px solid transparent;
+                border-bottom: 5px solid transparent;
+                transform: translate(0, calc(0.5px - 50%));
+            }
+
+            &:before,
+            &:after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                z-index: 100;
+                color: inherit;
+                transition: transform 0.5s cubic-bezier(0.18, 0.61, 0.43, 0.99),
+                            opacity 0.5s cubic-bezier(0.18, 0.61, 0.43, 0.99);
+                will-change: transform, opacity;
+            }
+
+            &.nav-links__label {
+                margin-bottom: 0;
+            }
+
+            &--previous {
+                padding-left: 21px;
+
+                &:after {
+                    left: 0;
+                    border-right: 5px solid currentColor;
+                }
+
+                &:before {
+                    left: 3px;
+                }
+            }
+
+            &--next {
+                padding-right: 21px;
+                text-align: left;
+
+                &:after {
+                    right: 0;
+                    border-left: 5px solid currentColor;
+                }
+
+                &:before {
+                    right: 3px;
+                }
+            }
+        }
+
+        .nav-title[class] {
+            padding-top: 0;
+            padding-bottom: 0;
         }
     }
 }
+
+.nav-links__label {
+    padding-top: 0.6em;
+    padding-bottom: 0.5em;
+}
+
+.post-navigation {
+    .nav-previous {
+        text-align: left;
+
+        &:hover {
+
+            .nav-title {
+                transform: translateX(-10px);
+            }
+
+            .nav-links__label {
+                padding-left: 0;
+                transform: translateX(-10px);
+
+                &:before,
+                &:after {
+                    transform: translateX(-100%) translateY(-50%);
+                    opacity: 0;
+                }
+            }
+        }
+    }
+
+    .nav-next {
+        text-align: right;
+
+        &:hover {
+            .nav-title {
+                transform: translateX(10px);
+            }
+
+            .nav-links__label {
+                padding-right: 0;
+                transform: translateX(10px);
+
+                &:before,
+                &:after {
+                    transform: translateX(100%) translateY(-50%);
+                    opacity: 0;
+                }
+            }
+        }
+    }
+
+    .nav-title {
+        transition: transform 0.5s cubic-bezier(0.18, 0.61, 0.43, 0.99);
+        will-change: transform;
+    }
+}
+
