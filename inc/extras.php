@@ -28,7 +28,7 @@ remove_action( 'edit_form_after_title', '_wp_posts_page_notice' );
 function rosa2_page_has_hero() {
 	global $post;
 
-	if ( has_blocks( $post->post_content ) ) {
+	if ( ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
 		$blocks = parse_blocks( $post->post_content );
 
 		if ( $blocks[0]['blockName'] === 'novablocks/hero' ) {
@@ -42,7 +42,7 @@ function rosa2_page_has_hero() {
 function rosa2_has_moderate_media_card_after_hero() {
 	global $post;
 
-	if ( has_blocks( $post->post_content ) ) {
+	if ( ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
 		$blocks = parse_blocks( $post->post_content );
 		$blocks = array_filter( $blocks, 'rosa2_exclude_null_blocks' );
 		$blocks = array_values( $blocks );
@@ -283,7 +283,7 @@ if ( ! function_exists( 'rosa2_parse_content_tags' ) ) {
 
 if ( ! function_exists('rosa2_dark_mode_support')) {
     function rosa2_dark_mode_support() {
-	    if ( 'on' === pixelgrade_option( 'sm_dark_mode' ) ) {
+	    if ( 'on' === pixelgrade_option( 'sm_dark_mode', 'off' ) ) {
             add_theme_support( 'editor-styles' );
             add_theme_support( 'dark-editor-style' );
 	    }
@@ -294,12 +294,13 @@ add_action( 'after_setup_theme', 'rosa2_dark_mode_support', 10 );
 function rosa2_block_area_has_blocks( $slug ) {
 	$posts = get_posts( array(
 		'name'        => $slug,
-		'post_type'   => 'post',
+		'post_type'   => 'block_area',
 		'post_status' => 'publish',
-		'numberposts' => 1
+		'numberposts' => 1,
+		'fields' => 'ids',
 	) );
 
-	if ( $posts && has_blocks( $posts[0]->ID ) ) {
+	if ( ! empty( $posts ) && has_blocks( reset( $posts ) ) ) {
 	    return true;
     }
 
