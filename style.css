@@ -3,11 +3,11 @@ Theme Name: Rosa2
 Theme URI: https://demos.pixelgrade.com/rosa2
 Author: Pixelgrade
 Author URI: https://pixelgrade.com
-Description:  ROSA 2 is the top restaurant WordPress theme even better.
+Description: ROSA is an enchanting and easy-to-use parallax Restaurant WordPress theme that allows you to tell your story in a dynamic, narrative and enjoyable way, making it perfect for restaurants, bakeries, bars or coffee shops.
 Version: 1.0.0-alpha
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: rosa2
+Text Domain: __theme_txtd
 Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, fluid-layout, responsive-layout, parallax, translation-ready, restaurant
 Requires at least: 5.2.0
 Tested up to: 5.2.3
@@ -1545,7 +1545,7 @@ body, .site, .site-content {
   --current-text-transform: var(--theme-meta-text-transform);
   --current-text-decoration: var(--theme-meta-text-decoration); }
   .entry-meta > :not(:last-child):after {
-    content: "·";
+    content: "\b7";
     padding: 0 var(--theme-spacing-tiny); }
   .entry-meta li {
     --element-spacing: 0; }
@@ -2564,7 +2564,7 @@ span.page-numbers {
     list-style: none;
     counter-reset: submenu; }
     .wp-block-archives-list ul a:before {
-      content: "– " counters(submenu, "– ", none);
+      content: "\2013 " counters(submenu, "– ", none);
       counter-increment: submenu; }
   .wp-block-archives-list a {
     text-decoration: none; }
@@ -2638,7 +2638,7 @@ span.page-numbers {
     list-style: none;
     counter-reset: submenu; }
     .wp-block-categories ul a:before {
-      content: "– " counters(submenu, "– ", none);
+      content: "\2013 " counters(submenu, "– ", none);
       counter-increment: submenu; }
   .wp-block-categories a {
     text-decoration: none; }
@@ -3536,12 +3536,13 @@ span.page-numbers {
 .search .entry-header {
   padding-bottom: 0; }
 
-body {
+.single {
   background: var(--current-light-tertiary); }
+  .single .site-content {
+    background: var(--current-light-primary); }
 
 .single .site-content,
 .page .site-content {
-  background: var(--current-light-primary);
   padding-bottom: var(--theme-spacing-large);
   overflow: hidden; }
 
