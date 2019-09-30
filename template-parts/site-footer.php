@@ -30,5 +30,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 				?>
 			</nav><!-- .footer-navigation -->
 		<?php } ?>
-	</div>
+	</div><!-- .site-footer__inner-container -->
 </footer><!-- #colophon -->

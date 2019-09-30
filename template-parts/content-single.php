@@ -16,8 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     <div>
         <header class="entry-header">
-			<?php get_template_part( 'template-parts/entry-meta' ); ?>
-			<?php the_title( '<h1 class="entry-title has-text-align-center">', '</h1>' ); ?>
+			<?php
+			get_template_part( 'template-parts/entry-meta', get_post_type() );
+			the_title( '<h1 class="entry-title has-text-align-center">', '</h1>' ); ?>
             <div class="has-normal-font-size">
 				<?php rosa2_the_separator( 'decorative' ); ?>
             </div>

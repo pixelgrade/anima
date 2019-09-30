@@ -29,14 +29,16 @@ $page_id = get_option( 'page_for_posts' ); ?>
                         }
 
                         $categories = get_categories();
-                        $categories = array_filter( $categories, function ( $category ) {
-                            return $category->term_id !== 1;
-                        } );
+                        if ( ! empty( $categories ) ) {
+	                        $categories = array_filter( $categories, function ( $category ) {
+		                        return $category->term_id !== 1;
+	                        } );
+                        }
                         if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) {
                             echo '<ul class="entry-meta">';
                             foreach ( $categories as $category ) {
                                 $category_url = get_category_link( $category->term_id );
-                                echo '<li><a href="' . $category_url . '">' . $category->name . '</a></li>';
+                                echo '<li><a href="' . esc_url( $category_url ) . '">' . esc_html( $category->name ) . '</a></li>';
                             }
                             echo '</ul>';
                         }
