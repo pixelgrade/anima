@@ -13,9 +13,13 @@
     img {
         display: block;
         max-width: 100%;
-        max-height: var(--theme-header-logo-height);
+        max-height: 30px;
         width: auto;
         height: auto;
+
+        @include above(tablet) {
+            max-height: var(--theme-header-logo-height);
+        }
     }
 }
 
