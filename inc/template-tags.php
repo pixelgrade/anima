@@ -475,12 +475,78 @@ if ( ! function_exists( 'rosa2_get_the_posts_pagination' ) ) {
 				'end_size'           => 1,
 				'mid_size'           => 2,
 				'type'               => 'plain',
-				'prev_text'          => esc_html_x( 'Previous', 'previous set of posts', 'rosa2' ),
-				'next_text'          => esc_html_x( 'Next', 'next set of posts', 'rosa2' ),
-				'screen_reader_text' => esc_html__( 'Posts navigation', 'rosa2' ),
+				'prev_text'          => esc_html_x( 'Previous', 'previous set of posts', '__theme_txtd' ),
+				'next_text'          => esc_html_x( 'Next', 'next set of posts', '__theme_txtd' ),
+				'screen_reader_text' => esc_html__( 'Posts navigation', '__theme_txtd' ),
 			)
 		);
 
 		return get_the_posts_pagination( $args );
+	}
+}
+
+/**
+ * Displays the navigation to next/previous post, when applicable.
+ *
+ * @param array $args Optional. See get_the_post_navigation() for available arguments.
+ *                    Default empty array.
+ * @return void
+ */
+function rosa2_the_post_navigation( $args = array() ) {
+	echo rosa2_get_the_post_navigation( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+}
+
+if ( ! function_exists( 'rosa2_get_the_post_navigation' ) ) {
+	/**
+	 * Retrieves the navigation to next/previous post, when applicable.
+	 *
+	 * @param array $args {
+	 *     Optional. Default post navigation arguments. Default empty array.
+	 *
+	 * @type string $prev_text Anchor text to display in the previous post link. Default '%title'.
+	 * @type string $next_text Anchor text to display in the next post link. Default '%title'.
+	 * @type bool $in_same_term Whether link should be in a same taxonomy term. Default false.
+	 * @type array|string $excluded_terms Array or comma-separated list of excluded term IDs. Default empty.
+	 * @type string $taxonomy Taxonomy, if `$in_same_term` is true. Default 'category'.
+	 * @type string $screen_reader_text Screen reader text for nav element. Default 'Post navigation'.
+	 * }
+	 * @return string Markup for post links.
+	 */
+	function rosa2_get_the_post_navigation( $args = array() ) {
+		$args = wp_parse_args(
+			$args, array(
+				'prev_text'          => '%title',
+				'next_text'          => '%title',
+				'in_same_term'       => false,
+				'excluded_terms'     => '',
+				'taxonomy'           => 'category',
+				'screen_reader_text' => esc_html__( 'Post navigation', 'rosa2' ),
+			)
+		);
+
+		$navigation = '';
+
+		$previous = get_previous_post_link(
+			'<div class="nav-previous"><span class="nav-links__label  nav-links__label--previous">' . esc_html__( 'Previous article', '__theme_txtd' ) . '</span><span class="nav-title  nav-title--previous">%link</span></div>',
+			$args['prev_text'],
+			$args['in_same_term'],
+			$args['excluded_terms'],
+			$args['taxonomy']
+		);
+
+		$next = get_next_post_link(
+			'<div class="nav-next"><span class="nav-links__label  nav-links__label--next">' . esc_html__( 'Next article', '__theme_txtd' ) . '</span><span class="nav-title  nav-title--next">%link</span></div>',
+			$args['next_text'],
+			$args['in_same_term'],
+			$args['excluded_terms'],
+			$args['taxonomy']
+		);
+
+		// Only add markup if there's somewhere to navigate to.
+		if ( $previous || $next ) {
+			$navigation = _navigation_markup( $previous . $next, 'post-navigation', $args['screen_reader_text'] );
+		}
+
+		return apply_filters( 'rosa2_get_the_post_navigation', $navigation, $args );
 	}
 }

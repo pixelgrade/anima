@@ -1,5 +1,12 @@
 /* Links */
 a {
-    color: var(--current-color-primary);
-    text-decoration: none;
+    color: var(--current-dark-secondary);
+    text-decoration: underline;
+
+    transition: text-decoration-color .25s $easeInOut;
+
+    &:hover,
+    &:focus {
+        text-decoration-color: var(--current-color-primary);
+    }
 }

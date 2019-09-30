@@ -64,8 +64,12 @@
     display: inline-block;
 
     a {
-        text-decoration: none;
-        color: inherit;
+        text-decoration: underline;
+        text-decoration-color: transparent;
+
+        &:hover {
+            text-decoration-color: var(--current-color-primary);
+        }
     }
 }
 

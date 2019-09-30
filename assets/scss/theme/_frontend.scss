@@ -11,7 +11,11 @@
 
 .comment__header {
     a {
-        text-decoration: none;
+        text-decoration-color: transparent;
+
+        &:hover {
+            text-decoration-color: var(--current-color-primary);
+        }
     }
 }
 
@@ -30,7 +34,12 @@
 .entry-meta {
 
     a {
-        color: inherit;
-        text-decoration: none;
+        color: var(--current-dark-primary);
+        text-decoration: underline;
+        text-decoration-color: transparent;
     }
+}
+
+.entry-meta a:hover {
+    text-decoration-color: var(--current-color-primary);
 }
