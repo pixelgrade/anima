@@ -2,10 +2,6 @@
     @include apply-font(navigation);
 }
 
-:root {
-    --theme-header-links-spacing: 32;
-}
-
 .wp-block-novablocks-navigation {
 
     @include above(lap) {
@@ -13,7 +9,7 @@
         ul.menu,
         .menu > ul {
 
-            margin-left: calc( var(--theme-header-links-spacing) * var(--theme-customify-unit) * -1 );
+            margin-left: calc( var(--theme-header-links-spacing) * -1 );
 
             a {
                 display: block;
@@ -23,7 +19,7 @@
             }
 
             > li {
-                margin-left: calc( var(--theme-header-links-spacing) * var(--theme-customify-unit) );
+                margin-left: calc( var(--theme-header-links-spacing) );
             }
 
             .customize-partial-edit-shortcut + > li:not(:first-child) {

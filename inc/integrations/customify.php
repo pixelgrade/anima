@@ -487,7 +487,7 @@ function rosa2_add_header_section_to_customify_config( $config ) {
 					),
 					'css'         => array(
 						array(
-							'property' => '--theme-header-logo-height-settings',
+							'property' => '--theme-header-logo-height-setting',
 							'selector' => ':root',
 							'unit'     => '',
 						),
@@ -507,7 +507,7 @@ function rosa2_add_header_section_to_customify_config( $config ) {
 					),
 					'css'         => array(
 						array(
-							'property' => '--theme-header-height-settings',
+							'property' => '--theme-header-height-setting',
 							'selector' => ':root',
 							'unit'     => '',
 						),
@@ -527,7 +527,7 @@ function rosa2_add_header_section_to_customify_config( $config ) {
 					),
 					'css'         => array(
 						array(
-							'property'        => '--theme-header-links-spacing-settings',
+							'property'        => '--theme-header-links-spacing-setting',
 							'selector'        => ':root',
 							'unit'            => '',
 						),
@@ -557,7 +557,7 @@ function rosa2_add_header_section_to_customify_config( $config ) {
 					),
 					'css'         => array(
 						array(
-							'property'        => '--theme-header-sides-spacing-settings',
+							'property'        => '--theme-header-sides-spacing-setting',
 							'selector'        => ':root',
 							'unit'            => '',
 						),
