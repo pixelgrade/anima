@@ -1881,6 +1881,8 @@ var header_Header = function () {
 	function Header(element, args) {
 		classCallCheck_default()(this, Header);
 
+		if (!element) return;
+
 		this.element = element;
 
 		this.options = assign_default()({}, defaults, args);
@@ -1896,7 +1898,6 @@ var header_Header = function () {
 		this.mobileHeaderHeight = 0;
 
 		this.createMobileHeader();
-
 		this.onResize();
 		globalService.registerUpdate(this.onResize.bind(this));
 
@@ -1907,6 +1908,8 @@ var header_Header = function () {
 	createClass_default()(Header, [{
 		key: 'update',
 		value: function update() {
+			if (!this.element) return;
+
 			this.updatePageOffset();
 			this.updateHeaderOffset();
 			this.updateMobileHeaderOffset();
@@ -1914,6 +1917,8 @@ var header_Header = function () {
 	}, {
 		key: 'onResize',
 		value: function onResize() {
+			if (!this.element) return;
+
 			this.box = this.element.getBoundingClientRect();
 			this.scrollOffset = this.getScrollOffset();
 
@@ -1927,11 +1932,14 @@ var header_Header = function () {
 	}, {
 		key: 'updateHeaderOffset',
 		value: function updateHeaderOffset() {
+			if (!this.element) return;
+
 			this.element.style.marginTop = this.offset + 'px';
 		}
 	}, {
 		key: 'updateMobileHeaderOffset',
 		value: function updateMobileHeaderOffset() {
+			if (!this.element) return;
 
 			this.$mobileHeader.css({
 				height: this.mobileHeaderHeight,
@@ -1950,6 +1958,8 @@ var header_Header = function () {
 	}, {
 		key: 'getScrollOffset',
 		value: function getScrollOffset() {
+			if (!this.element) return;
+
 			var _GlobalService$getPro = globalService.getProps(),
 			    adminBarHeight = _GlobalService$getPro.adminBarHeight,
 			    scrollY = _GlobalService$getPro.scrollY;
@@ -1969,12 +1979,15 @@ var header_Header = function () {
 	}, {
 		key: 'updatePageOffset',
 		value: function updatePageOffset() {
+			if (!this.element) return;
+
 			var page = document.getElementById('page');
 			page.style.paddingTop = this.visibleHeaderHeight + this.offset + 'px';
 		}
 	}, {
 		key: 'createMobileHeader',
 		value: function createMobileHeader() {
+			if (!this.element) return;
 
 			if (this.createdMobileHeader) {
 				return;
@@ -1991,6 +2004,8 @@ var header_Header = function () {
 	}, {
 		key: 'render',
 		value: function render(inversed) {
+			if (!this.element) return;
+
 			var _GlobalService$getPro2 = globalService.getProps(),
 			    scrollY = _GlobalService$getPro2.scrollY;
 

@@ -289,5 +289,19 @@ if ( ! function_exists('rosa2_dark_mode_support')) {
 	    }
     }
 }
-
 add_action( 'after_setup_theme', 'rosa2_dark_mode_support', 10 );
+
+function rosa2_block_area_has_blocks( $slug ) {
+	$posts = get_posts( array(
+		'name'        => $slug,
+		'post_type'   => 'post',
+		'post_status' => 'publish',
+		'numberposts' => 1
+	) );
+
+	if ( $posts && has_blocks( $posts[0]->ID ) ) {
+	    return true;
+    }
+
+	return false;
+}

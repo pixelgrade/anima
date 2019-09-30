@@ -27,10 +27,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php do_action( 'rosa_before_header', 'main' ); ?>
 
     <?php if ( function_exists( 'block_areas' ) ) { ?>
-        <div class="promo-bar js-promo-bar">
-			<?php block_areas()->render( 'promo-bar' ); ?>
-        </div>
-		<?php block_areas()->render( 'header' );
+
+        <?php if ( rosa2_block_area_has_blocks( 'promo-bar' ) ) { ?>
+            <div class="promo-bar js-promo-bar">
+                <?php block_areas()->render( 'promo-bar' ); ?>
+            </div>
+        <?php } ?>
+
+		<?php if ( rosa2_block_area_has_blocks( 'header' ) ) {
+		    block_areas()->render( 'header' );
+	    } else {
+		    get_template_part( 'template-parts/site-header' );
+        }
 	} else {
 		get_template_part( 'template-parts/site-header' );
 	} ?>
