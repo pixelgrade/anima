@@ -3236,7 +3236,9 @@ span.page-numbers {
   --novablocks-media-spacing: var(--theme-spacing-fluid-normal); }
 
 .novablocks-media--blog[class] {
-  --element-spacing: var(--theme-spacing-small); }
+  margin-top: 0; }
+  .novablocks-media--blog[class]:not(:first-child) {
+    padding-top: var(--theme-spacing-small); }
   .novablocks-media--blog[class] .novablocks-media__content {
     margin-bottom: 0; }
 
