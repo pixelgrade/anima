@@ -25,6 +25,17 @@ function rosa2_setup_pixelgrade_care() {
 }
 add_action( 'after_setup_theme', 'rosa2_setup_pixelgrade_care', 10 );
 
+function rosa2_hide_pixelgrade_care_menu_item() {
+    ?>
+    <style>
+        [href="pixelgrade_care-install"] {
+            display: none !important;
+        }
+    </style>
+    <?php
+}
+add_action( 'admin_footer', 'rosa2_hide_pixelgrade_care_menu_item', 10 );
+
 /**
  * After the first theme activation we need to ensure that Pixelgrade Care is installed
  * So we add a transient which will be handled by the `rosa2_admin_redirect_to_pixcare_install_once` action

@@ -8,6 +8,8 @@ const defaults = {
 class Header {
 
 	constructor( element, args ) {
+		if ( ! element ) return;
+
 		this.element = element;
 
 		this.options = Object.assign( {}, defaults, args );
@@ -23,7 +25,6 @@ class Header {
 		this.mobileHeaderHeight = 0;
 
 		this.createMobileHeader();
-
 		this.onResize();
 		GlobalService.registerUpdate( this.onResize.bind( this ) );
 
@@ -32,12 +33,16 @@ class Header {
 	}
 
 	update() {
+		if ( ! this.element ) return;
+
 		this.updatePageOffset();
 		this.updateHeaderOffset();
 		this.updateMobileHeaderOffset();
 	}
 
 	onResize() {
+		if ( ! this.element ) return;
+
 		this.box = this.element.getBoundingClientRect();
 		this.scrollOffset = this.getScrollOffset();
 
@@ -50,10 +55,13 @@ class Header {
 	}
 
 	updateHeaderOffset() {
+		if ( ! this.element ) return;
+
 		this.element.style.marginTop = this.offset + 'px';
 	}
 
 	updateMobileHeaderOffset() {
+		if ( ! this.element ) return;
 
 		this.$mobileHeader.css( {
 			height: this.mobileHeaderHeight,
@@ -71,6 +79,8 @@ class Header {
 	}
 
 	getScrollOffset() {
+		if ( ! this.element ) return;
+
 		const { adminBarHeight, scrollY } = GlobalService.getProps();
 		const { offsetTargetElement } = this.options;
 
@@ -85,11 +95,14 @@ class Header {
 	}
 
 	updatePageOffset() {
+		if ( ! this.element ) return;
+
 		const page = document.getElementById( 'page' );
 		page.style.paddingTop = this.visibleHeaderHeight + this.offset + 'px';
 	}
 
 	createMobileHeader() {
+		if ( ! this.element ) return;
 
 		if ( this.createdMobileHeader ) {
 			return;
@@ -105,6 +118,8 @@ class Header {
 	}
 
 	render( inversed ) {
+		if ( ! this.element ) return;
+
 		const { scrollY } = GlobalService.getProps();
 
 		if ( inversed !== this.inversed ) {
