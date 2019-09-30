@@ -7,7 +7,6 @@ var gulp = require( 'gulp' ),
 sass.compiler = require( 'node-sass' );
 
 function styles( cb ) {
-	cb();
 	return gulp.src( './assets/scss/*.scss' )
 	           .pipe( sass().on( 'error', sass.logError ) )
 	           .pipe( replace( /^@charset "UTF-8";\n/gm, '' ) )
@@ -15,7 +14,6 @@ function styles( cb ) {
 }
 
 function stylesRTL( cb ) {
-	cb();
 	return gulp.src( ['style.css', 'woocommerce.css'] )
 	           .pipe( rtlcss() )
 	           .pipe( rename( function( path ) { path.basename += "-rtl"; } ) )
@@ -25,7 +23,6 @@ function stylesRTL( cb ) {
 stylesRTL.description = 'Generate style-rtl.css file based on style.css';
 
 function watch( cb ) {
-	cb();
 	gulp.watch( ['./assets/scss/**/*.scss'], compile );
 }
 
