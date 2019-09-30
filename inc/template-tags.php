@@ -345,7 +345,7 @@ if ( ! function_exists( 'rosa2_shape_comment' ) ) {
 				break;
 			default: ?>
 
-			<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
+			<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
 				<article id="div-comment-<?php comment_ID(); ?>" class="comment__wrapper">
 					<?php if ( 0 != $args['avatar_size'] ) : ?>
 						<div class="comment__avatar"><?php echo get_avatar( $comment, $args['avatar_size'] ); ?></div>

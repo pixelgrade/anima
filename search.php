@@ -20,18 +20,20 @@ get_header(); ?>
 
             <header class="entry-header">
                 <div class="entry-content has-text-align-center">
-	                <h1 class="page-title">
+	                <h1 class="page-title has-text-align-center">
 		                <?php printf( esc_html__( 'Search results for: %s', '__theme_txtd' ), get_search_query() ); ?>
 	                </h1>
                 </div>
 	        </header><!-- .page-header -->
 
-	        <?php
-				get_template_part( 'template-parts/loop' );
-				rosa2_the_posts_pagination();
-			} else {
-				get_template_part( 'template-parts/content', 'none' );
-			} ?>
+	        <div class="entry-content">
+		        <?php
+					get_template_part( 'template-parts/loop' );
+					rosa2_the_posts_pagination();
+				} else {
+					get_template_part( 'template-parts/content', 'none' );
+				} ?>
+	        </div>
 
         </main><!-- #main -->
     </div><!-- #primary -->

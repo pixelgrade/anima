@@ -21,18 +21,20 @@ get_header(); ?>
             <header class="entry-header">
                 <div class="entry-content has-text-align-center">
                     <?php
-                    the_archive_title( '<h1 class="page-title">', '</h1>' );
+                    the_archive_title( '<h1 class="page-title has-text-align-center">', '</h1>' );
                     the_archive_description( '<div class="archive-description">', '</div>' );
                     ?>
                 </div>
 	        </header><!-- .page-header -->
 
-	        <?php
-				get_template_part( 'template-parts/loop' );
-				rosa2_the_posts_pagination();
-			} else {
-				get_template_part( 'template-parts/content', 'none' );
-			} ?>
+	        <div class="entry-content">
+		        <?php
+					get_template_part( 'template-parts/loop' );
+					rosa2_the_posts_pagination();
+				} else {
+					get_template_part( 'template-parts/content', 'none' );
+				} ?>
+	        </div>
 
         </main><!-- #main -->
     </div><!-- #primary -->

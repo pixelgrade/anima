@@ -16,12 +16,14 @@ get_header(); ?>
     <div id="primary" class="content-area">
         <main id="main" class="site-main">
 
-			<?php if ( have_posts() ) {
-				get_template_part( 'template-parts/loop' );
-				rosa2_the_posts_pagination();
-			} else {
-				get_template_part( 'template-parts/content', 'none' );
-			} ?>
+	        <div class="entry-content">
+				<?php if ( have_posts() ) {
+					get_template_part( 'template-parts/loop' );
+					rosa2_the_posts_pagination();
+				} else {
+					get_template_part( 'template-parts/content', 'none' );
+				} ?>
+	        </div>
 
         </main><!-- #main -->
     </div><!-- #primary -->
