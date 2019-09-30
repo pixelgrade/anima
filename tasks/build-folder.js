@@ -2,7 +2,7 @@ var gulp = require( 'gulp' ),
 	plugins = require( 'gulp-load-plugins')(),
 	fs = require( 'fs' ),
 	del = require( 'del' ),
-	plugin = 'rosa2';
+	theme = 'rosa2';
 
 // -----------------------------------------------------------------------------
 // Copy plugin folder outside in a build folder
@@ -10,13 +10,13 @@ var gulp = require( 'gulp' ),
 function copyFolder() {
 	var dir = process.cwd();
 	return gulp.src( './*' )
-	           .pipe( plugins.exec( 'rm -Rf ./../build; mkdir -p ./../build/' + plugin + ';', {
+	           .pipe( plugins.exec( 'rm -Rf ./../build; mkdir -p ./../build/' + theme + ';', {
 		           silent: true,
 		           continueOnError: true // default: false
 	           } ) )
 	           .pipe(plugins.rsync({
 		           root: dir,
-		           destination: '../build/' + plugin + '/',
+		           destination: '../build/' + theme + '/',
 		           // archive: true,
 		           progress: false,
 		           silent: true,
@@ -42,7 +42,7 @@ async function removeUnneededFiles() {
 		path = path.trim();
 
 		if ( path ) {
-			files_to_remove.push('../build/' + plugin + '/' + path);
+			files_to_remove.push('../build/' + theme + '/' + path);
 		}
 	});
 
