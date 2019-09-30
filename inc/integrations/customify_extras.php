@@ -1,4 +1,7 @@
 <?php
+/**
+ * Handle Customify extra functionality needed to make things work smoothly.
+ */
 
 // This function should come from Customify, but we need to do our best to make things happen
 if ( ! function_exists( 'pixelgrade_option' ) ) {

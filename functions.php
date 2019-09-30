@@ -97,7 +97,7 @@ if ( ! function_exists( 'rosa2_setup' ) ) {
 		add_theme_support( 'style_manager_font_palettes' );
 	}
 }
-add_action( 'after_setup_theme', 'rosa2_setup' );
+add_action( 'after_setup_theme', 'rosa2_setup', 10 );
 
 function rosa2_deregister_gutenberg_styles() {
 	// Overwrite Core block styles with empty styles.
@@ -108,7 +108,7 @@ function rosa2_deregister_gutenberg_styles() {
 	wp_deregister_style( 'wp-block-library-theme' );
 	wp_register_style( 'wp-block-library-theme', '' );
 }
-add_action( 'enqueue_block_assets', 'rosa2_deregister_gutenberg_styles' );
+add_action( 'enqueue_block_assets', 'rosa2_deregister_gutenberg_styles', 10 );
 
 function rosa2_enqueue_theme_block_editor_assets() {
 	$theme  = wp_get_theme( get_template() );
@@ -125,7 +125,7 @@ function rosa2_enqueue_theme_block_editor_assets() {
 		true
 	);
 }
-add_action( 'enqueue_block_editor_assets', 'rosa2_enqueue_theme_block_editor_assets' );
+add_action( 'enqueue_block_editor_assets', 'rosa2_enqueue_theme_block_editor_assets', 10 );
 
 function rosa2_scripts() {
 	$theme  = wp_get_theme( get_template() );
@@ -136,8 +136,8 @@ function rosa2_scripts() {
 
 	wp_enqueue_style( 'rosa2-blocks-styles', get_template_directory_uri() . '/dist/js/editor.blocks.css', array(), $theme->get( 'Version' ) );
 
-	wp_register_script( 'gsap-split-text', '//pxgcdn.com/js/gsap/2.1.3/plugins/SplitText' . $suffix . '.js', array(), '3.0.0-beta.7', true );
-	wp_register_script( 'gsap', '//pxgcdn.com/js/gsap/2.1.3/TweenMax' . $suffix . '.js', array(), '3.0.0-beta.7', true );
+	wp_register_script( 'gsap-split-text', '//pxgcdn.com/js/gsap/2.1.3/plugins/SplitText' . $suffix . '.js', array(), null, true );
+	wp_register_script( 'gsap', '//pxgcdn.com/js/gsap/2.1.3/TweenMax' . $suffix . '.js', array(), null, true );
 	wp_enqueue_script( 'rosa2-app', get_template_directory_uri() . '/dist/js/scripts' . $suffix . '.js', array( 'jquery', 'gsap', 'gsap-split-text', 'hoverIntent' ), $theme->get( 'Version' ), true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -250,5 +250,6 @@ require get_template_directory() . '/inc/template-tags.php';
  */
 require get_template_directory() . '/inc/template-functions.php';
 require get_template_directory() . '/inc/extras.php';
+require get_template_directory() . '/inc/required-plugins.php';
 
 require get_template_directory() . '/inc/integrations.php';
