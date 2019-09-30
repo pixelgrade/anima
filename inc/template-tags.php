@@ -425,7 +425,7 @@ if ( ! function_exists( 'rosa2_get_comments_toggle_checked_attribute' ) ) {
 	 * @return string
 	 */
 	function rosa2_get_comments_toggle_checked_attribute() {
-		$attribute = '';
+		$attribute = 'checked';
 
 		return apply_filters( 'pixelgrade_get_comments_toggle_checked_attribute', $attribute );
 	}

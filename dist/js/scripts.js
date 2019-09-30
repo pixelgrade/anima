@@ -2359,6 +2359,7 @@ var app_App = function () {
 		this.initializeHeader();
 		this.initializeNavbar();
 		this.initializePromoBar();
+		this.checkWindowLocationComments();
 
 		globalService.registerRender(this.render.bind(this));
 	}
@@ -2443,6 +2444,13 @@ var app_App = function () {
 					reloadRellax(obj);
 				});
 			});
+		}
+	}, {
+		key: 'checkWindowLocationComments',
+		value: function checkWindowLocationComments() {
+			if (window.location.href.indexOf("#comment") === -1) {
+				external_jQuery_default()(".c-comments-toggle__checkbox").prop("checked", false);
+			}
 		}
 	}]);
 
