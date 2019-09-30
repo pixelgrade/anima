@@ -21,14 +21,14 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <div class="c-logo__default">
 					<?php the_custom_logo(); ?>
                 </div>
-			<?php } ?>
+			<?php }
 
-			<?php if ( rosa2_has_custom_logo_transparent() ) { ?>
+			if ( rosa2_has_custom_logo_transparent() ) { ?>
                 <div class="c-logo__inverted">
 					<?php rosa2_the_custom_logo_transparent(); ?>
                 </div>
 			<?php } ?>
-        </div>
+        </div><!-- .c-logo.site-logo -->
 
 	<?php }
 
@@ -37,20 +37,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	if ( ! empty( $blog_info ) || ! empty( $description ) ) { ?>
         <div class="site-info">
-			<?php if ( ! empty( $blog_info ) ) { ?>
-				<?php if ( is_front_page() || is_home() ) { ?>
+			<?php
+			if ( ! empty( $blog_info ) ) {
+				if ( is_front_page() || is_home() ) { ?>
                     <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 				<?php } else { ?>
                     <p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php } ?>
-			<?php }
+				<?php }
+			}
 
 			if ( $description || is_customize_preview() ) { ?>
-                <p class="site-description">
-					<?php echo $description; ?>
-                </p>
+                <p class="site-description"><?php echo $description; ?></p>
 			<?php } ?>
-        </div>
+        </div><!-- .site-info -->
 	<?php } ?>
 
-</div>
+</div><!-- .c-branding.site-branding -->

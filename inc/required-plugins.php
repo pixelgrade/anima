@@ -23,12 +23,13 @@ function rosa2_register_required_plugins() {
 		array(
 			'name'               => 'Pixelgrade Care',
 			'slug'               => 'pixelgrade-care',
-			'force_activation'   => true,
+			'is_callable'        => 'PixelgradeCare',
+			'force_activation'   => false,
 			'force_deactivation' => false,
 			'required'           => true,
 			'source'             => $protocol . '//wupdates.com/api_wupl_version/JxbVe/2v5t1czd3vw4kmb5xqmyxj1kkwmnt9q0463lhj393r5yxtshdyg05jssgd4jglnfx7A2vdxtfdcf78r9r1sm217k4ht3r2g7pkdng5f6tgwyrk23wryA0pjxvs7gwhhb',
 			'external_url'       => $protocol . '//github.com/pixelgrade/pixelgrade_care',
-			'version'            => '1.6.0',
+			'version'            => '1.6.2',
 			'is_automatic'       => true
 		),
 		array(
@@ -36,16 +37,19 @@ function rosa2_register_required_plugins() {
 			'slug'     => 'customify',
 			'is_callable' => 'PixCustomifyPlugin',
 			'required' => true,
+			'version'  => '2.5.3',
 		),
 		array(
 			'name'     => 'Nova Blocks',
 			'slug'     => 'nova-blocks',
 			'required' => true,
+			'version'  => '1.1.0',
 		),
 		array(
 			'name'     => 'Gutenberg',
 			'slug'     => 'gutenberg',
 			'required' => true,
+			'version'  => '6.5.0',
 		),
 	);
 

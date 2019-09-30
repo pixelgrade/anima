@@ -23,7 +23,7 @@ $classes = array(
 	'has-background',
 );
 
-if (! has_post_thumbnail()) {
+if ( ! has_post_thumbnail() ) {
 	$classes[] = 'novablocks-media--no-thumbnail';
 }
 
@@ -31,9 +31,9 @@ if (! has_post_thumbnail()) {
 $classes[] = ( $wp_query->current_post % 2 ) ? 'has-image-on-the-right' : 'has-image-on-the-left';
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class( join( ' ', $classes ) ); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class( $classes ); ?>>
     <div class="wp-block-group__inner-container">
-        <div class="wp-block alignwide"><!-- -->
+        <div class="wp-block alignwide">
             <div class="novablocks-media__layout">
                 <div class="novablocks-media__content">
                     <div class="novablocks-media__inner-container">
@@ -49,12 +49,10 @@ $classes[] = ( $wp_query->current_post % 2 ) ? 'has-image-on-the-right' : 'has-i
                 <div class="novablocks-media__aside">
                     <div class="novablocks-media__image">
 	                    <?php
-	                    if(has_post_thumbnail()) {
+	                    if( has_post_thumbnail() ) {
 		                    rosa2_post_thumbnail();
 	                    } else { ?>
-                            <svg width="144" height="144" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M84 36L61.5 66l17.1 22.8L69 96C58.86 82.5 42 60 42 60L6 108h132L84 36z" fill="#212B49"/>
-                            </svg>
+		                    <svg width="144" height="144" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M84 36L61.5 66l17.1 22.8L69 96C58.86 82.5 42 60 42 60L6 108h132L84 36z" fill="#212B49"/></svg>
 	                    <?php } ?>
                     </div>
                 </div>
