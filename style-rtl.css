@@ -3385,38 +3385,39 @@ span.page-numbers {
   color: var(--current-light-primary); }
 
 .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button {
-  --theme-button-hover-background-color: var(--theme-light-primary);
-  --theme-button-hover-text-color: var(--theme-dark-primary);
-  --theme-button-background-color: var(--theme-dark-primary);
-  --theme-button-border-color: var(--theme-dark-primary);
-  --theme-button-text-color: var(--theme-light-primary);
+  --theme-button-hover-background-color: var(--current-light-primary);
+  --theme-button-hover-text-color: var(--current-dark-primary);
+  --theme-button-background-color: var(--current-dark-primary);
+  --theme-button-border-color: var(--current-dark-primary);
+  --theme-button-text-color: var(--current-light-primary);
   background-color: transparent;
   background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
   background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
   background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%);
   transition: var(--current-button-transition);
-  color: var(--theme-button-text-color); }
+  color: var(--current-button-text-color); }
   .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button:hover {
     background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
   .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button:hover {
-    color: var(--theme-button-hover-text-color); }
+    color: var(--current-button-hover-text-color); }
 
 .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button {
-  --theme-button-hover-background-color: var(--theme-dark-primary);
-  --theme-button-hover-text-color: var(--theme-lightprimary);
-  --theme-button-background-color: var(--theme-light-primary);
-  --theme-button-border-color: var(--theme-light-primary);
-  --theme-button-text-color: var(--theme-dark-primary);
+  --theme-button-hover-background-color: var(--current-dark-primary);
+  --theme-button-hover-text-color: var(--current-light-primary);
+  --theme-button-background-color: var(--current-light-primary);
+  --theme-button-border-color: var(--current-light-primary);
+  --theme-button-hover-border-color: var(--current-light-primary);
+  --theme-button-text-color: var(--current-dark-primary);
   background-color: transparent;
   background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
   background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
   background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%);
   transition: var(--current-button-transition);
-  color: var(--theme-button-text-color); }
+  color: var(--current-button-text-color); }
   .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button:hover {
     background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
   .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button:hover {
-    color: var(--theme-button-hover-text-color); }
+    color: var(--current-button-hover-text-color); }
 
 .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] {
   border-color: var(--current-dark-secondary); }
@@ -3429,6 +3430,10 @@ span.page-numbers {
 
 .ot-dtp-picker-selector-link {
   text-decoration: none; }
+
+.is-dark-mode .novablocks-opentable.novablocks-opentable__standard[class] .ot-powered-by {
+  -webkit-filter: unset;
+  mix-blend-mode: unset; }
 
 .wp-block-novablocks-navigation {
   font-family: var(--current-font-family);
