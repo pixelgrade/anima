@@ -4,10 +4,6 @@
     .site-content {
         background: var(--current-light-primary);
     }
-
-    .post + .comments-area {
-        margin-top: var(--theme-spacing-normal);
-    }
 }
 
 .single,
@@ -17,6 +13,13 @@
         padding-bottom: var(--theme-spacing-large);
 
         overflow: hidden;
+    }
+}
+
+.post,
+.page {
+    + .comments-area {
+        margin-top: var(--theme-spacing-normal);
     }
 }
 
