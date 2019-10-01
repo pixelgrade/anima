@@ -3609,13 +3609,15 @@ span.page-numbers {
   background: var(--current-light-tertiary); }
   .single .site-content {
     background: var(--current-light-primary); }
-  .single .post + .comments-area {
-    margin-top: var(--theme-spacing-normal); }
 
 .single .site-content,
 .page .site-content {
   padding-bottom: var(--theme-spacing-large);
   overflow: hidden; }
+
+.post + .comments-area,
+.page + .comments-area {
+  margin-top: var(--theme-spacing-normal); }
 
 .page:not(.has-hero) .site-content {
   padding-top: var(--theme-spacing-large); }
