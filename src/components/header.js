@@ -11,20 +11,25 @@ class Header {
 		if ( ! element ) return;
 
 		this.element = element;
-
 		this.options = Object.assign( {}, defaults, args );
 
 		this.$header = $( this.element );
 		this.$toggle = $( '.c-menu-toggle' );
 		this.$toggleWrap = $( '.c-menu-toggle__wrap' );
 
-//		this.inversed = ! this.$header.hasClass( 'site-header--normal' );
+		this.scrolled = false;
+		this.inversed = false;
 
 		this.offset = 0;
 		this.scrollOffset = 0;
 		this.mobileHeaderHeight = 0;
 
 		this.createMobileHeader();
+		this.timeline = this.getInroTimeline();
+		this.timeline.play();
+	}
+
+	initialize() {
 		this.onResize();
 		GlobalService.registerUpdate( this.onResize.bind( this ) );
 
@@ -33,24 +38,60 @@ class Header {
 	}
 
 	update() {
-		if ( ! this.element ) return;
-
 		this.updatePageOffset();
 		this.updateHeaderOffset();
 		this.updateMobileHeaderOffset();
 	}
 
-	onResize() {
-		if ( ! this.element ) return;
+	getInroTimeline() {
+		const element = this.element;
+		const timeline = new TimelineMax( { paused: true } );
+		const height = $( element ).outerHeight();
+		const transitionEasing = Power4.easeOut;
+		const transitionDuration = 0.5;
+		timeline.to( element, transitionDuration, { opacity: 1, ease: transitionEasing }, 0 );
+		timeline.to( { height: 0 }, transitionDuration, {
+			height: height,
+			onUpdate: this.onHeightUpdate.bind( this ),
+			onUpdateParams: ["{self}"],
+			onComplete: this.initialize.bind( this ),
+			ease: transitionEasing
+		}, 0 );
 
-		this.box = this.element.getBoundingClientRect();
-		this.scrollOffset = this.getScrollOffset();
+		return timeline;
+	}
 
+	onHeightUpdate( tween ) {
+		this.getProps();
+		this.box = Object.assign( this.box, { height: tween.target.height } );
+		this.setVisibleHeaderHeight();
+		this.update();
+	}
+
+	getMobileHeaderHeight() {
 		const mobileHeaderHeight = this.$mobileHeader.css( 'height', '' ).outerHeight();
 		const toggleHeight = this.$toggleWrap.css( 'height', '' ).outerHeight();
 
-		this.mobileHeaderHeight = Math.max( mobileHeaderHeight, toggleHeight );
-		this.visibleHeaderHeight = this.$mobileHeader.is( ':visible' ) ? this.mobileHeaderHeight : this.box.height;
+		return Math.max( mobileHeaderHeight, toggleHeight );
+	}
+
+	isMobileHeaderVisibile() {
+		return this.$mobileHeader.is( ':visible' );
+	}
+
+	setVisibleHeaderHeight() {
+		this.visibleHeaderHeight = this.isMobileHeaderVisibile() ? this.mobileHeaderHeight : this.box.height;
+	}
+
+	getProps() {
+		this.box = this.element.getBoundingClientRect();
+		this.scrollOffset = this.getScrollOffset();
+		this.mobileHeaderHeight = this.getMobileHeaderHeight();
+	}
+
+	onResize() {
+		this.getProps();
+		this.setVisibleHeaderHeight();
 		this.update();
 	}
 
@@ -61,7 +102,7 @@ class Header {
 	}
 
 	updateMobileHeaderOffset() {
-		if ( ! this.element ) return;
+		if ( ! this.$mobileHeader ) return;
 
 		this.$mobileHeader.css( {
 			height: this.mobileHeaderHeight,
@@ -79,8 +120,6 @@ class Header {
 	}
 
 	getScrollOffset() {
-		if ( ! this.element ) return;
-
 		const { adminBarHeight, scrollY } = GlobalService.getProps();
 		const { offsetTargetElement } = this.options;
 
@@ -95,15 +134,11 @@ class Header {
 	}
 
 	updatePageOffset() {
-		if ( ! this.element ) return;
-
 		const page = document.getElementById( 'page' );
 		page.style.paddingTop = this.visibleHeaderHeight + this.offset + 'px';
 	}
 
 	createMobileHeader() {
-		if ( ! this.element ) return;
-
 		if ( this.createdMobileHeader ) {
 			return;
 		}
@@ -121,13 +156,17 @@ class Header {
 		if ( ! this.element ) return;
 
 		const { scrollY } = GlobalService.getProps();
+		const scrolled = scrollY > this.scrollOffset;
 
 		if ( inversed !== this.inversed ) {
-//			this.$header.toggleClass( 'site-header--normal', ! inversed );
+			this.$header.toggleClass( 'site-header--normal', ! inversed );
 			this.inversed = inversed;
 		}
 
-		this.$header.toggleClass( 'site-header--scrolled', scrollY > this.scrollOffset );
+		if ( scrolled !== this.scrolled ) {
+			this.$header.toggleClass( 'site-header--scrolled', scrollY > this.scrollOffset );
+			this.scrolled = scrolled;
+		}
 	}
 }
 
