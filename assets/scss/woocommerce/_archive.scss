@@ -37,6 +37,16 @@
   }
 }
 
+.woocommerce {
+  .woocommerce-ordering {
+    margin-bottom: var(--theme-spacing-normal);
+  }
+
+  .woocommerce-result-count {
+    margin: 0;
+  }
+}
+
 .woocommerce-categories[class] {
   line-height: 1;
 }
@@ -73,8 +83,8 @@
 
 .woocommerce {
   @include specific(2) {
-    button:not(.single_add_to_cart_button):not(:disabled),
-    .button:not(.single_add_to_cart_button):not(:disabled),
+    button:not(.single_add_to_cart_button),
+    .button:not(.single_add_to_cart_button),
     #respond .comment-form #submit {
       @include button;
       @include button-fill-reverse;

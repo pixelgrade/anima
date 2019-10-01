@@ -519,7 +519,7 @@ if ( ! function_exists( 'rosa2_get_the_post_navigation' ) ) {
 				'in_same_term'       => false,
 				'excluded_terms'     => '',
 				'taxonomy'           => 'category',
-				'screen_reader_text' => esc_html__( 'Post navigation', 'rosa2' ),
+				'screen_reader_text' => esc_html__( 'Post navigation', '__theme_txtd' ),
 			)
 		);
 

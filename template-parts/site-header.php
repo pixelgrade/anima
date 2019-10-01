@@ -21,6 +21,7 @@ get_template_part( 'template-parts/menu-toggle' ); ?>
 		            'container'      => false,
 		            'theme_location' => 'menu-1',
 		            'menu_id'        => 'secondary-menu',
+		            'fallback_cb'    => false,
 	            ) ); ?>
             </nav><!-- #site-navigation -->
 

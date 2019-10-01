@@ -108,9 +108,7 @@ add_filter( 'woocommerce_sale_flash', 'rosa2_woocommerceSaleFlash', 10, 1 );
 add_filter( 'woocommerce_post_class', 'rosa2_woocommerceProductClass', 10, 2 );
 
 function rosa2_woocommerceProductClass( $classes, $product ) {
-//	if ( ! is_product() ) {
-		$classes[] = 'wc-block-grid__product';
-//	}
+    $classes[] = 'wc-block-grid__product';
 
 	return $classes;
 }
