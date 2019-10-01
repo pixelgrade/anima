@@ -1898,6 +1898,10 @@ var header_Header = function () {
 		this.mobileHeaderHeight = 0;
 
 		this.createMobileHeader();
+
+		this.onResize();
+		globalService.registerUpdate(this.onResize.bind(this));
+
 		this.timeline = this.getInroTimeline();
 		this.timeline.play();
 	}
@@ -1905,9 +1909,6 @@ var header_Header = function () {
 	createClass_default()(Header, [{
 		key: 'initialize',
 		value: function initialize() {
-			this.onResize();
-			globalService.registerUpdate(this.onResize.bind(this));
-
 			this.$header.addClass('site-header--fixed site-header--ready');
 			this.$mobileHeader.addClass('site-header--fixed site-header--ready');
 		}
@@ -2031,14 +2032,20 @@ var header_Header = function () {
 	}, {
 		key: 'createMobileHeader',
 		value: function createMobileHeader() {
-			if (this.createdMobileHeader) {
+			if (this.createdMobileHeader) return;
+
+			var $mobileHeader = external_jQuery_default()('.site-header--mobile');
+
+			if ($mobileHeader.length) {
+				this.$mobileHeader = $mobileHeader;
+				this.createdMobileHeader = true;
 				return;
 			}
 
 			this.$mobileHeader = external_jQuery_default()('<div class="site-header--mobile">');
 
-			external_jQuery_default()('.c-branding').clone().appendTo(this.$mobileHeader);
-			external_jQuery_default()('.menu-item--cart').clone().appendTo(this.$mobileHeader);
+			external_jQuery_default()('.c-branding').first().clone().appendTo(this.$mobileHeader);
+			external_jQuery_default()('.menu-item--cart').first().clone().appendTo(this.$mobileHeader);
 
 			this.$mobileHeader.insertAfter(this.$toggle);
 			this.createdMobileHeader = true;
@@ -2059,7 +2066,7 @@ var header_Header = function () {
 			}
 
 			if (scrolled !== this.scrolled) {
-				this.$header.toggleClass('site-header--scrolled', scrollY > this.scrollOffset);
+				this.$header.toggleClass('site-header--scrolled', scrolled);
 				this.scrolled = scrolled;
 			}
 		}

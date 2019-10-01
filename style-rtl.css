@@ -1107,6 +1107,10 @@ ul.menu > .has-submenu-left .children,
 .c-menu-toggle__slice--bottom {
   transform: translate3d(0, 0.4375em, 0); }
 
+.site-header__inner-container > .site-header__content.alignfull {
+  margin-right: calc( -1 * var(--theme-header-sides-spacing));
+  margin-left: calc( -1 * var(--theme-header-sides-spacing)); }
+
 @media only screen and (min-width: 1000px) {
   .site-header__content {
     display: grid;
@@ -1198,8 +1202,6 @@ ul.menu > .has-submenu-left .children,
     display: flex;
     flex-direction: column; }
     [class*="__inner-container"] > .site-header__content {
-      margin-right: 0;
-      margin-left: 0;
       max-width: none; }
     .site-header__content .site-branding {
       padding: 1em;

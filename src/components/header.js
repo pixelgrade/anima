@@ -25,14 +25,15 @@ class Header {
 		this.mobileHeaderHeight = 0;
 
 		this.createMobileHeader();
+
+		this.onResize();
+		GlobalService.registerUpdate( this.onResize.bind( this ) );
+
 		this.timeline = this.getInroTimeline();
 		this.timeline.play();
 	}
 
 	initialize() {
-		this.onResize();
-		GlobalService.registerUpdate( this.onResize.bind( this ) );
-
 		this.$header.addClass( 'site-header--fixed site-header--ready' );
 		this.$mobileHeader.addClass( 'site-header--fixed site-header--ready' );
 	}
@@ -139,14 +140,20 @@ class Header {
 	}
 
 	createMobileHeader() {
-		if ( this.createdMobileHeader ) {
+		if ( this.createdMobileHeader ) return;
+
+		const $mobileHeader = $( '.site-header--mobile' );
+
+		if ( $mobileHeader.length ) {
+			this.$mobileHeader = $mobileHeader;
+			this.createdMobileHeader = true;
 			return;
 		}
 
 		this.$mobileHeader = $( '<div class="site-header--mobile">' );
 
-		$( '.c-branding' ).clone().appendTo( this.$mobileHeader );
-		$( '.menu-item--cart' ).clone().appendTo( this.$mobileHeader );
+		$( '.c-branding' ).first().clone().appendTo( this.$mobileHeader );
+		$( '.menu-item--cart' ).first().clone().appendTo( this.$mobileHeader );
 
 		this.$mobileHeader.insertAfter( this.$toggle );
 		this.createdMobileHeader = true;
@@ -164,7 +171,7 @@ class Header {
 		}
 
 		if ( scrolled !== this.scrolled ) {
-			this.$header.toggleClass( 'site-header--scrolled', scrollY > this.scrollOffset );
+			this.$header.toggleClass( 'site-header--scrolled', scrolled );
 			this.scrolled = scrolled;
 		}
 	}
