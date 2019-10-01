@@ -143,8 +143,8 @@
             will-change: transform;
 
             &:before {
-                width: 10px;
-                height: 1px;
+                width: 20px;
+                height: 3px;
                 background-color: currentColor;
             }
 
@@ -152,9 +152,9 @@
                 display: block;
                 width: 0;
                 height: 0;
-                border-top: 5px solid transparent;
-                border-bottom: 5px solid transparent;
-                transform: translate(0, calc(0.5px - 50%));
+                border-top: 8px solid transparent;
+                border-bottom: 8px solid transparent;
+                transform: translate(0, calc(1px - 50%));
             }
 
             &:before,
@@ -174,29 +174,29 @@
             }
 
             &--previous {
-                padding-left: 21px;
+                padding-left: 31px;
 
                 &:after {
                     left: 0;
-                    border-right: 5px solid currentColor;
+                    border-right: 8px solid currentColor;
                 }
 
                 &:before {
-                    left: 3px;
+                    left: 8px;
                 }
             }
 
             &--next {
-                padding-right: 21px;
+                padding-right: 31px;
                 text-align: left;
 
                 &:after {
                     right: 0;
-                    border-left: 5px solid currentColor;
+                    border-left: 8px solid currentColor;
                 }
 
                 &:before {
-                    right: 3px;
+                    right: 8px;
                 }
             }
         }

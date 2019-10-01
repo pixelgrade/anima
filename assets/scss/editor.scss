@@ -127,3 +127,11 @@
 .is-dark-theme .c-logo__default { display: none; }
 .is-dark-theme .c-logo__inverted { display: block; }
 
+.is-dark-theme {
+    .components-text-control__input {
+        @include placeholder() {
+            color: var(--sm-dark-primary) !important;
+        }
+    }
+}
+

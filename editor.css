@@ -845,10 +845,10 @@
         flex-basis: calc(50% - 16px);
         flex-grow: 0; }
         .editor-styles-wrapper .wp-block-column:nth-child(2n) {
-          margin-left: 32px; } }
+          margin-left: var(--theme-spacing); } }
     @media (min-width: 782px) {
       .editor-styles-wrapper .wp-block-column:not(:first-child) {
-        margin-left: 32px; } }
+        margin-left: var(--theme-spacing); } }
   .editor-styles-wrapper .wp-block-columns.are-vertically-aligned-top {
     align-items: flex-start; }
   .editor-styles-wrapper .wp-block-columns.are-vertically-aligned-center {
@@ -1308,37 +1308,38 @@
     margin-left: 0;
     margin-right: 0; }
   .editor-styles-wrapper .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button {
-    --theme-button-hover-background-color: var(--theme-light-primary);
-    --theme-button-hover-text-color: var(--theme-dark-primary);
-    --theme-button-background-color: var(--theme-dark-primary);
-    --theme-button-border-color: var(--theme-dark-primary);
-    --theme-button-text-color: var(--theme-light-primary);
+    --theme-button-hover-background-color: var(--current-light-primary);
+    --theme-button-hover-text-color: var(--current-dark-primary);
+    --theme-button-background-color: var(--current-dark-primary);
+    --theme-button-border-color: var(--current-dark-primary);
+    --theme-button-text-color: var(--current-light-primary);
     background-color: transparent;
     background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
     background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
     background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%);
     transition: var(--current-button-transition);
-    color: var(--theme-button-text-color); }
+    color: var(--current-button-text-color); }
     .editor-styles-wrapper .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button:hover {
       background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
     .editor-styles-wrapper .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button:hover {
-      color: var(--theme-button-hover-text-color); }
+      color: var(--current-button-hover-text-color); }
   .editor-styles-wrapper .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button {
-    --theme-button-hover-background-color: var(--theme-dark-primary);
-    --theme-button-hover-text-color: var(--theme-lightprimary);
-    --theme-button-background-color: var(--theme-light-primary);
-    --theme-button-border-color: var(--theme-light-primary);
-    --theme-button-text-color: var(--theme-dark-primary);
+    --theme-button-hover-background-color: var(--current-dark-primary);
+    --theme-button-hover-text-color: var(--current-light-primary);
+    --theme-button-background-color: var(--current-light-primary);
+    --theme-button-border-color: var(--current-light-primary);
+    --theme-button-hover-border-color: var(--current-light-primary);
+    --theme-button-text-color: var(--current-dark-primary);
     background-color: transparent;
     background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
     background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
     background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%);
     transition: var(--current-button-transition);
-    color: var(--theme-button-text-color); }
+    color: var(--current-button-text-color); }
     .editor-styles-wrapper .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button:hover {
       background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
     .editor-styles-wrapper .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button:hover {
-      color: var(--theme-button-hover-text-color); }
+      color: var(--current-button-hover-text-color); }
   .editor-styles-wrapper .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] {
     border-color: var(--current-dark-secondary); }
     .editor-styles-wrapper .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link {
@@ -1347,6 +1348,14 @@
         color: currentColor; }
       .editor-styles-wrapper .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link:after {
         color: currentColor; }
+  .editor-styles-wrapper .ot-dtp-picker-selector-link {
+    text-decoration: none; }
+  .editor-styles-wrapper .is-dark-mode .novablocks-opentable.novablocks-opentable__standard[class] .ot-powered-by {
+    -webkit-filter: unset;
+    mix-blend-mode: unset; }
+  .editor-styles-wrapper .is-dark-mode .novablocks-opentable.novablocks-opentable__wide[class] .ot-powered-by {
+    -webkit-filter: invert(1) saturate(0);
+    mix-blend-mode: lighten; }
   .editor-styles-wrapper .wp-block[data-type="novablocks/header"] .editor-block-list__layout {
     display: grid;
     align-items: center;
@@ -1949,3 +1958,15 @@
 
 .is-dark-theme .c-logo__inverted {
   display: block; }
+
+.is-dark-theme .components-text-control__input::-webkit-input-placeholder {
+  color: var(--sm-dark-primary) !important; }
+
+.is-dark-theme .components-text-control__input:-moz-placeholder {
+  color: var(--sm-dark-primary) !important; }
+
+.is-dark-theme .components-text-control__input::-moz-placeholder {
+  color: var(--sm-dark-primary) !important; }
+
+.is-dark-theme .components-text-control__input:-ms-input-placeholder {
+  color: var(--sm-dark-primary) !important; }
