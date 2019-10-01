@@ -822,12 +822,17 @@ function rosa2_filter_font_palettes( $font_palettes ) {
 						),
 						array(
 							'start'           => 24,
-							'font_weight'     => '700',
+							'font_weight'     => 700,
 							'letter_spacing'  => '-0.02em',
+							'text_transform'  => 'none',
+							'text_decoration' => 'none',
 						),
 						array(
 							'start'           => 66,
+							'font_weight'     => 700,
 							'letter_spacing'  => '-0.03em',
+							'text_transform'  => 'none',
+							'text_decoration' => 'none',
 						),
 					),
 				),

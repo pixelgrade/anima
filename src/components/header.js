@@ -25,14 +25,15 @@ class Header {
 		this.mobileHeaderHeight = 0;
 
 		this.createMobileHeader();
+
+		this.onResize();
+		GlobalService.registerUpdate( this.onResize.bind( this ) );
+
 		this.timeline = this.getInroTimeline();
 		this.timeline.play();
 	}
 
 	initialize() {
-		this.onResize();
-		GlobalService.registerUpdate( this.onResize.bind( this ) );
-
 		this.$header.addClass( 'site-header--fixed site-header--ready' );
 		this.$mobileHeader.addClass( 'site-header--fixed site-header--ready' );
 	}
@@ -164,7 +165,7 @@ class Header {
 		}
 
 		if ( scrolled !== this.scrolled ) {
-			this.$header.toggleClass( 'site-header--scrolled', scrollY > this.scrollOffset );
+			this.$header.toggleClass( 'site-header--scrolled', scrolled );
 			this.scrolled = scrolled;
 		}
 	}

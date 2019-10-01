@@ -1898,6 +1898,10 @@ var header_Header = function () {
 		this.mobileHeaderHeight = 0;
 
 		this.createMobileHeader();
+
+		this.onResize();
+		globalService.registerUpdate(this.onResize.bind(this));
+
 		this.timeline = this.getInroTimeline();
 		this.timeline.play();
 	}
@@ -1905,9 +1909,6 @@ var header_Header = function () {
 	createClass_default()(Header, [{
 		key: 'initialize',
 		value: function initialize() {
-			this.onResize();
-			globalService.registerUpdate(this.onResize.bind(this));
-
 			this.$header.addClass('site-header--fixed site-header--ready');
 			this.$mobileHeader.addClass('site-header--fixed site-header--ready');
 		}
@@ -2059,7 +2060,7 @@ var header_Header = function () {
 			}
 
 			if (scrolled !== this.scrolled) {
-				this.$header.toggleClass('site-header--scrolled', scrollY > this.scrollOffset);
+				this.$header.toggleClass('site-header--scrolled', scrolled);
 				this.scrolled = scrolled;
 			}
 		}
@@ -2408,7 +2409,7 @@ var app_App = function () {
 		this.initializePromoBar();
 		this.checkWindowLocationComments();
 
-		globalService.registerRender(this.render.bind(this));
+		//		GlobalService.registerRender( this.render.bind( this ) );
 	}
 
 	createClass_default()(App, [{
