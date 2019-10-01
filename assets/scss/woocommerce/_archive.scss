@@ -73,8 +73,8 @@
 
 .woocommerce {
   @include specific(2) {
-    button:not(.single_add_to_cart_button),
-    .button:not(.single_add_to_cart_button),
+    button:not(.single_add_to_cart_button):not(:disabled),
+    .button:not(.single_add_to_cart_button):not(:disabled),
     #respond .comment-form #submit {
       @include button;
       @include button-fill-reverse;
