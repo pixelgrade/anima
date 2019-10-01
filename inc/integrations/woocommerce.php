@@ -100,7 +100,7 @@ add_filter( 'product_cat_class', 'rosa2_product_category_classes', 10, 1);
 // Change loop start
 add_filter( 'woocommerce_product_loop_start', 'rosa2_woocommerceLoopStart', 10, 1 );
 // Change loop end
-add_filter( 'woocommerce_product_loop_start', 'rosa2_woocommerceLoopEnd', 10, 1 );
+add_filter( 'woocommerce_product_loop_end', 'rosa2_woocommerceLoopEnd', 10, 1 );
 // Change sale flash
 add_filter( 'woocommerce_sale_flash', 'rosa2_woocommerceSaleFlash', 10, 1 );
 
@@ -108,9 +108,9 @@ add_filter( 'woocommerce_sale_flash', 'rosa2_woocommerceSaleFlash', 10, 1 );
 add_filter( 'woocommerce_post_class', 'rosa2_woocommerceProductClass', 10, 2 );
 
 function rosa2_woocommerceProductClass( $classes, $product ) {
-	if ( ! is_product() ) {
+//	if ( ! is_product() ) {
 		$classes[] = 'wc-block-grid__product';
-	}
+//	}
 
 	return $classes;
 }
