@@ -1,5 +1,7 @@
-.has-image-on-the-right .novablocks-media__layout {
-    flex-direction: row-reverse;
+.novablocks-media__layout {
+    .has-image-on-the-left & {
+        flex-direction: row-reverse;
+    }
 }
 
 .novablocks-media__content {
@@ -14,17 +16,22 @@
 
 .novablocks-media__aside {
     flex-basis: calc(50% + var(--novablocks-media-spacing));
+    min-height: 0;
 
-    @include above(tablet) {
-        &[class] {
-            order: -1;
-        }
-    }
-
-    @include below(tablet) {
+    .novablocks-media:not(.novablocks-media--no-thumbnail) & {
         min-height: 300px;
     }
 
+    @include specific(1) {
+        order: 0;
+    }
+
+    .novablocks-media__image {
+        svg {
+            @include image-cover;
+            object-fit: contain;
+        }
+    }
 }
 
 .block-is-moderate {

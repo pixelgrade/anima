@@ -52,7 +52,7 @@ $classes[] = ( $wp_query->current_post % 2 ) ? 'has-image-on-the-right' : 'has-i
 	                    if( has_post_thumbnail() ) {
 		                    rosa2_post_thumbnail();
 	                    } else { ?>
-		                    <svg width="144" height="144" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M84 36L61.5 66l17.1 22.8L69 96C58.86 82.5 42 60 42 60L6 108h132L84 36z" fill="#212B49"/></svg>
+		                    <svg viewBox="-100 -100 344 344" width="144" height="144" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M84 36L61.5 66l17.1 22.8L69 96C58.86 82.5 42 60 42 60L6 108h132L84 36z" fill="#212B49"/></svg>
 	                    <?php } ?>
                     </div>
                 </div>
