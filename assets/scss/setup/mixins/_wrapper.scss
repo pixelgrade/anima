@@ -1,17 +1,17 @@
-@mixin wrapper-side-spacing {
-    --theme-wrapper-side-spacing: var(--theme-spacing-fluid-normal);
+@mixin wrapper-sides-spacing {
+    --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-normal);
 
-    padding-left: var(--theme-wrapper-side-spacing);
-    padding-right: var(--theme-wrapper-side-spacing);
+    padding-left: var(--theme-wrapper-sides-spacing);
+    padding-right: var(--theme-wrapper-sides-spacing);
 
     > .alignfull {
-        margin-left: calc( -1 * var(--theme-wrapper-side-spacing) );
-        margin-right: calc( -1 * var(--theme-wrapper-side-spacing) );
+        margin-left: calc( -1 * var(--theme-wrapper-sides-spacing) );
+        margin-right: calc( -1 * var(--theme-wrapper-sides-spacing) );
     }
 }
 
 @mixin wrapper {
-    @include wrapper-side-spacing;
+    @include wrapper-sides-spacing;
 
     > * {
         margin-left: auto;
