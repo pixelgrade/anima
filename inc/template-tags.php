@@ -526,7 +526,7 @@ if ( ! function_exists( 'rosa2_get_the_post_navigation' ) ) {
 		$navigation = '';
 
 		$previous = get_previous_post_link(
-			'<div class="nav-previous"><span class="nav-links__label  nav-links__label--previous">' . esc_html__( 'Previous article', '__theme_txtd' ) . '</span><span class="nav-title  nav-title--previous">%link</span></div>',
+			'<div class="post-navigation__link post-navigation__link--previous"><span class="post-navigation__link-label  post-navigation__link-label--previous">' . esc_html__( 'Previous article', '__theme_txtd' ) . '</span><span class="post-navigation__post-title  post-navigation__post-title--previous">%link</span></div>',
 			$args['prev_text'],
 			$args['in_same_term'],
 			$args['excluded_terms'],
@@ -534,7 +534,7 @@ if ( ! function_exists( 'rosa2_get_the_post_navigation' ) ) {
 		);
 
 		$next = get_next_post_link(
-			'<div class="nav-next"><span class="nav-links__label  nav-links__label--next">' . esc_html__( 'Next article', '__theme_txtd' ) . '</span><span class="nav-title  nav-title--next">%link</span></div>',
+			'<div class="post-navigation__link post-navigation__link--next"><span class="post-navigation__link-label  post-navigation__link-label--next">' . esc_html__( 'Next article', '__theme_txtd' ) . '</span><span class="post-navigation__post-title  post-navigation__post-title--next">%link</span></div>',
 			$args['next_text'],
 			$args['in_same_term'],
 			$args['excluded_terms'],

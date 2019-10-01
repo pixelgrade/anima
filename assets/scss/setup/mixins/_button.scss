@@ -87,6 +87,29 @@
   border-width: 0;
 }
 
+@mixin button-text-arrow {
+  position: absolute;
+  top: 50%;
+  right: 0;
+
+  display: inline-block;
+  width: #{$theme-button-text-arrow-size};
+  height: #{$theme-button-text-arrow-size};
+
+  mask: url('assets/images/icon-arrow.svg') no-repeat 50% 50%;
+  -webkit-mask: url('assets/images/icon-arrow.svg') no-repeat 50% 50%;
+  mask-size: cover;
+  -webkit-mask-size: cover;
+
+  background-color: currentColor;
+  vertical-align: text-bottom;
+
+  transform: translate(0, -50%);
+
+  transition: var(--theme-button-transition);
+  transition-property: opacity, transform;
+}
+
 @mixin button-text {
   position: relative;
   padding-right: #{$theme-button-text-arrow-size};
@@ -113,28 +136,9 @@
 
   &:after {
     content: '';
-
-    position: absolute;
-    top: calc(50% - .1em);
-    right: 0;
-
-    display: inline-block;
-    width: #{$theme-button-text-arrow-size};
-    height: #{$theme-button-text-arrow-size};
-
-    mask: url('assets/images/icon-arrow.svg') no-repeat 50% 50%;
-    -webkit-mask: url('assets/images/icon-arrow.svg') no-repeat 50% 50%;
-    mask-size: cover;
-    -webkit-mask-size: cover;
-
-    background-color: currentColor;
-    vertical-align: text-bottom;
-
+    @include button-text-arrow;
     opacity: 0;
     transform: translate(0, -50%) scale(-1,1);
-
-    transition: var(--theme-button-transition);
-    transition-property: opacity, transform;
   }
 
   &:hover {
