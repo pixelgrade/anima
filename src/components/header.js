@@ -140,14 +140,20 @@ class Header {
 	}
 
 	createMobileHeader() {
-		if ( this.createdMobileHeader ) {
+		if ( this.createdMobileHeader ) return;
+
+		const $mobileHeader = $( '.site-header--mobile' );
+
+		if ( $mobileHeader.length ) {
+			this.$mobileHeader = $mobileHeader;
+			this.createdMobileHeader = true;
 			return;
 		}
 
 		this.$mobileHeader = $( '<div class="site-header--mobile">' );
 
-		$( '.c-branding' ).clone().appendTo( this.$mobileHeader );
-		$( '.menu-item--cart' ).clone().appendTo( this.$mobileHeader );
+		$( '.c-branding' ).first().clone().appendTo( this.$mobileHeader );
+		$( '.menu-item--cart' ).first().clone().appendTo( this.$mobileHeader );
 
 		this.$mobileHeader.insertAfter( this.$toggle );
 		this.createdMobileHeader = true;

@@ -2032,14 +2032,20 @@ var header_Header = function () {
 	}, {
 		key: 'createMobileHeader',
 		value: function createMobileHeader() {
-			if (this.createdMobileHeader) {
+			if (this.createdMobileHeader) return;
+
+			var $mobileHeader = external_jQuery_default()('.site-header--mobile');
+
+			if ($mobileHeader.length) {
+				this.$mobileHeader = $mobileHeader;
+				this.createdMobileHeader = true;
 				return;
 			}
 
 			this.$mobileHeader = external_jQuery_default()('<div class="site-header--mobile">');
 
-			external_jQuery_default()('.c-branding').clone().appendTo(this.$mobileHeader);
-			external_jQuery_default()('.menu-item--cart').clone().appendTo(this.$mobileHeader);
+			external_jQuery_default()('.c-branding').first().clone().appendTo(this.$mobileHeader);
+			external_jQuery_default()('.menu-item--cart').first().clone().appendTo(this.$mobileHeader);
 
 			this.$mobileHeader.insertAfter(this.$toggle);
 			this.createdMobileHeader = true;
