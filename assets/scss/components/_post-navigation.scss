@@ -1,68 +1,8 @@
 // page numbers
-@mixin pagination {
-    position: relative;
-
-    &:before,
-    &:after {
-        content: '';
-
-        position: absolute;
-        top: 50%;
-        z-index: 100;
-
-        color: inherit;
-        transition-property: transform;
-    }
-
-    // The stick
-    &:before {
-        width: .75em;
-        height: .0625em;
-
-        background-color: currentColor;
-    }
-
-    // The arrow
-    &:after {
-        display: block;
-        width: .45em;
-        height: .45em;
-
-        border: .0625em solid transparent;
-    }
-}
-
-@mixin pagination--left {
-    padding-left: 1.55em;
-
-    &:before {
-        left: 0;
-    }
-
-    &:after {
-        left: 0;
-        border-top-color: currentColor;
-        border-left-color: currentColor;
-        transform: translate(0, calc(0.5px - 50%)) rotate(-45deg);
-    }
-}
-
-@mixin pagination--right {
-    padding-right: 1.55em;
-
-    &:before {
-        right: 0;
-    }
-
-    &:after {
-        right: 0;
-        border-top-color: currentColor;
-        border-right-color: currentColor;
-        transform: translate(0, calc(0.5px - 50%)) rotate(45deg);
-    }
-}
-
 @mixin post-navigation__links {
+    max-width: var(--theme-content-width-normal);
+    margin-left: auto;
+    margin-right: auto;
 
     @include above(tablet) {
         display: flex;
