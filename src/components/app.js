@@ -16,7 +16,7 @@ export default class App {
 		this.initializePromoBar();
 		this.checkWindowLocationComments();
 
-//		GlobalService.registerRender( this.render.bind( this ) );
+		GlobalService.registerRender( this.render.bind( this ) );
 	}
 
 	render() {

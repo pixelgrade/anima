@@ -2409,7 +2409,7 @@ var app_App = function () {
 		this.initializePromoBar();
 		this.checkWindowLocationComments();
 
-		//		GlobalService.registerRender( this.render.bind( this ) );
+		globalService.registerRender(this.render.bind(this));
 	}
 
 	createClass_default()(App, [{
