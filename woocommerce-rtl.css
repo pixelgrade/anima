@@ -11,6 +11,7 @@
     color: var(--current-dark-primary);
     padding-bottom: .5em;
     padding-top: .5em;
+    text-decoration: none;
     border-bottom: .1em solid transparent; }
     .woocommerce-categories a.active {
       color: var(--current-color-primary);
@@ -48,8 +49,8 @@
   background: url(assets/images/arrow-down.svg) calc(100% - (100% - 15px)) center no-repeat;
   background-size: 17px 9px; }
 
-.woocommerce[class][class] button:not(.single_add_to_cart_button),
-.woocommerce[class][class] .button:not(.single_add_to_cart_button),
+.woocommerce[class][class] button:not(.single_add_to_cart_button):not(:disabled),
+.woocommerce[class][class] .button:not(.single_add_to_cart_button):not(:disabled),
 .woocommerce[class][class] #respond .comment-form #submit {
   display: inline-block;
   text-decoration: none;
@@ -85,19 +86,19 @@
   background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
   --current-button-text-color: var(--theme-button-hover-text-color);
   background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
-  .woocommerce[class][class] button:not(.single_add_to_cart_button):hover,
-  .woocommerce[class][class] .button:not(.single_add_to_cart_button):hover,
+  .woocommerce[class][class] button:not(.single_add_to_cart_button):not(:disabled):hover,
+  .woocommerce[class][class] .button:not(.single_add_to_cart_button):not(:disabled):hover,
   .woocommerce[class][class] #respond .comment-form #submit:hover {
     --current-button-background-color: var(--theme-button-hover-background-color);
     --current-button-border-color: var(--theme-button-hover-border-color);
     --current-button-text-color: var(--theme-button-hover-text-color);
     --current-button-transition: var(--theme-button-hover-transition); }
-  .woocommerce[class][class] button:not(.single_add_to_cart_button):hover,
-  .woocommerce[class][class] .button:not(.single_add_to_cart_button):hover,
+  .woocommerce[class][class] button:not(.single_add_to_cart_button):not(:disabled):hover,
+  .woocommerce[class][class] .button:not(.single_add_to_cart_button):not(:disabled):hover,
   .woocommerce[class][class] #respond .comment-form #submit:hover {
     background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
-  .woocommerce[class][class] button:not(.single_add_to_cart_button):hover,
-  .woocommerce[class][class] .button:not(.single_add_to_cart_button):hover,
+  .woocommerce[class][class] button:not(.single_add_to_cart_button):not(:disabled):hover,
+  .woocommerce[class][class] .button:not(.single_add_to_cart_button):not(:disabled):hover,
   .woocommerce[class][class] #respond .comment-form #submit:hover {
     --current-button-text-color: var(--theme-button-text-color); }
 
@@ -243,7 +244,8 @@
   padding: .3em 1.1em;
   background-color: var(--current-color-primary);
   color: var(--theme-light-primary);
-  text-align: center; }
+  text-align: center;
+  z-index: 10; }
 
 .wc-block-grid__product > :not(:last-child) {
   margin-bottom: var(--theme-spacing-tiny); }
@@ -850,11 +852,12 @@
     background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
 
 .woocommerce-breadcrumb[class] {
-  color: var(--current-color-primary); }
+  color: var(--current-dark-primary); }
   .woocommerce-breadcrumb[class] a {
-    color: var(--current-color-primary); }
+    color: var(--current-dark-primary);
+    text-decoration-color: transparent; }
     .woocommerce-breadcrumb[class] a:hover {
-      color: var(--current-dark-primary); }
+      text-decoration-color: var(--current-color-primary); }
 
 .c-woo-section {
   --theme-content-width-normal: var(--theme-content-width-wide); }

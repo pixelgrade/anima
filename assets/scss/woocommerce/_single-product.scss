@@ -538,12 +538,13 @@
 
 .woocommerce-breadcrumb {
   @include specific(1) {
-    color: var(--current-color-primary);
+    color: var(--current-dark-primary);
     a {
-      color: var(--current-color-primary);
+      color: var(--current-dark-primary);
+      text-decoration-color: transparent;
 
       &:hover {
-        color: var(--current-dark-primary);
+        text-decoration-color: var(--current-color-primary);
       }
     }
   }
