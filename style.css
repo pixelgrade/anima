@@ -3187,7 +3187,7 @@ span.page-numbers {
 .block-is-highlighted + .block-is-highlighted {
   padding-top: 0; }
 
-.has-image-on-the-right .novablocks-media__layout {
+.has-image-on-the-left .novablocks-media__layout {
   flex-direction: row-reverse; }
 
 .novablocks-media__content {
@@ -3212,13 +3212,35 @@ span.page-numbers {
       min-width: 28em; } }
 
 .novablocks-media__aside {
-  flex-basis: calc(50% + var(--novablocks-media-spacing)); }
-  @media only screen and (min-width: 768px) {
-    .novablocks-media__aside[class] {
-      order: -1; } }
-  @media not screen and (min-width: 768px) {
-    .novablocks-media__aside {
-      min-height: 300px; } }
+  flex-basis: calc(50% + var(--novablocks-media-spacing));
+  min-height: 0; }
+  .novablocks-media:not(.novablocks-media--no-thumbnail) .novablocks-media__aside {
+    min-height: 300px; }
+  .novablocks-media__aside[class] {
+    order: 0; }
+  .novablocks-media__aside .novablocks-media__image svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: none;
+    width: auto;
+    height: auto;
+    object-fit: contain; }
+    @supports (transform: translate(-50%, -50%)) {
+      .novablocks-media__aside .novablocks-media__image svg {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); } }
+    @supports (object-fit: cover) {
+      .novablocks-media__aside .novablocks-media__image svg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        top: 0;
+        left: 0;
+        transform: none; } }
 
 .block-is-moderate {
   --novablocks-media-background-color: var(--current-light-tertiary); }

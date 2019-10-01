@@ -1193,7 +1193,7 @@
     transform: translate(0, -50%); }
     .editor-styles-wrapper .novablocks-map__marker-name[class][class][class] {
       font-size: 16px; }
-  .editor-styles-wrapper .has-image-on-the-right .novablocks-media__layout {
+  .has-image-on-the-left .editor-styles-wrapper .novablocks-media__layout {
     flex-direction: row-reverse; }
   .editor-styles-wrapper .novablocks-media__content {
     max-width: 100%;
@@ -1216,13 +1216,35 @@
       .editor-styles-wrapper .novablocks-media__content {
         min-width: 28em; } }
   .editor-styles-wrapper .novablocks-media__aside {
-    flex-basis: calc(50% + var(--novablocks-media-spacing)); }
-    @media only screen and (min-width: 768px) {
-      .editor-styles-wrapper .novablocks-media__aside[class] {
-        order: -1; } }
-    @media not screen and (min-width: 768px) {
-      .editor-styles-wrapper .novablocks-media__aside {
-        min-height: 300px; } }
+    flex-basis: calc(50% + var(--novablocks-media-spacing));
+    min-height: 0; }
+    .novablocks-media:not(.novablocks-media--no-thumbnail) .editor-styles-wrapper .novablocks-media__aside {
+      min-height: 300px; }
+    .editor-styles-wrapper .novablocks-media__aside[class] {
+      order: 0; }
+    .editor-styles-wrapper .novablocks-media__aside .novablocks-media__image svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      max-width: none;
+      width: auto;
+      height: auto;
+      object-fit: contain; }
+      @supports (transform: translate(-50%, -50%)) {
+        .editor-styles-wrapper .novablocks-media__aside .novablocks-media__image svg {
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%); } }
+      @supports (object-fit: cover) {
+        .editor-styles-wrapper .novablocks-media__aside .novablocks-media__image svg {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          top: 0;
+          left: 0;
+          transform: none; } }
   .editor-styles-wrapper .block-is-moderate {
     --novablocks-media-background-color: var(--current-light-tertiary); }
   .editor-styles-wrapper .novablocks-media {
