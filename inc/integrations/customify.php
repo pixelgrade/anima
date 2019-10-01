@@ -871,7 +871,10 @@ function rosa2_filter_font_palettes( $font_palettes ) {
 						),
 						array(
 							'start'           => 24,
+							'font_weight'     => 500,
 							'letter_spacing'  => '-0.02em',
+							'text_transform'  => 'none',
+							'text_decoration' => 'none',
 						),
 					),
 				),
