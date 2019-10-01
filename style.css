@@ -1402,6 +1402,9 @@ ul.menu a,
     .site-logo[class] img {
       max-height: var(--theme-header-logo-height); } }
 
+.c-logo__inverted .site-logo[class] img {
+  width: 100%; }
+
 .site-title {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
@@ -1459,16 +1462,6 @@ ul.menu a,
     text-decoration: none; }
     .site-footer a:hover {
       color: var(--current-light-primary); }
-
-html {
-  height: 100%; }
-
-html, body, .site {
-  display: flex;
-  flex-direction: column; }
-
-body, .site, .site-content {
-  flex-grow: 1; }
 
 /* Post Content */
 .entry-header {
