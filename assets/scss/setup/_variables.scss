@@ -25,7 +25,7 @@ $theme-body-font-size: 16px;
 // fluid typography settings
 
 // these variables must be set in px
-$theme-minimum-font-size: 8px;
+$theme-minimum-font-size: 16px;
 $theme-font-size-breakpoint: 1440px;
 $theme-font-size-breakpoint-em: 1em * $theme-font-size-breakpoint / $theme-body-font-size;
 $theme-font-size-minimum-value-breakpoint: 320px;
@@ -34,12 +34,12 @@ $theme-font-size-minimum-value-breakpoint-em: 1em * $theme-font-size-minimum-val
 // use the --theme-font-size-slope-adjust variable to alter the slope of the resulted function
 // in such a way that when this variable equals 0, the slope of the function results to also 0
 // and the font sizes stay the same no matter the viewport
-$theme-font-size-slope-adjust: 0.4;
-$theme-font-size-slope-adjust-desktop: 0.6;
+$theme-font-size-slope-adjust: 0.6;
+$theme-font-size-slope-adjust-desktop: 0.8;
 
 // use a multiplier variable to control how much of that unit is added to the font size at any given time
 // on mobile devices the font size addon is set to 0 by default 0 so nothing is added to the resulted font sizes
-$theme-font-size-addon-multiplier-desktop: 0.4;
+$theme-font-size-addon-multiplier-desktop: 0.2;
 
 // LAYOUT
 $theme-spacing-unit: 1rem;
