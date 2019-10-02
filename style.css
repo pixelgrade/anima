@@ -1485,6 +1485,18 @@ ul.menu a,
     color: inherit;
     text-decoration: underline; }
 
+html, body, .site {
+  height: 100%; }
+
+.site {
+  display: flex;
+  flex-direction: column; }
+  .site > * {
+    flex-shrink: 0; }
+
+.site-content {
+  flex-grow: 1; }
+
 /* Post Content */
 .entry-header {
   --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-normal);
@@ -4205,8 +4217,6 @@ pre code {
   padding-right: 1em;
   opacity: 0.5; }
   .c-separator__symbol svg {
-    max-width: 1.4em;
-    max-height: 1.4em;
     width: auto;
     height: auto; }
   .novablocks-hero .c-separator__symbol {
