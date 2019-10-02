@@ -1139,6 +1139,8 @@ ul.menu a,
   display: none; }
 
 @media not screen and (min-width: 1000px) {
+  .wp-block-novablocks-navigation[class] {
+    --current-font-size: 18px; }
   .site-header {
     display: none;
     overflow-y: auto;
@@ -3389,8 +3391,7 @@ span.page-numbers {
   --current-font-weight: var(--theme-navigation-font-weight);
   --current-letter-spacing: var(--theme-navigation-letter-spacing);
   --current-text-transform: var(--theme-navigation-text-transform);
-  --current-text-decoration: var(--theme-navigation-text-decoration);
-  --current-font-size: 18px; }
+  --current-text-decoration: var(--theme-navigation-text-decoration); }
 
 @media only screen and (min-width: 1000px) {
   .wp-block-novablocks-navigation ul.menu,
