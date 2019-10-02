@@ -143,6 +143,7 @@ function rosa2_scripts() {
 	echo '<script>
 		window.addEventListener( "DOMContentLoaded", ( event ) => {
 			document.body.classList.remove( "is-loading" );
+			document.body.classList.add( "has-loaded" );
 		} );
 		window.addEventListener( "beforeunload", function( event ) {
 			document.body.classList.add( "is-loading" );

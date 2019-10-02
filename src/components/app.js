@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-import { insideHalf, reloadRellax } from "../utils";
+import { insideHalf, reloadRellax, debounce } from "../utils";
 import GlobalService from './globalService';
 import Hero from './hero';
 import Header from './header';
@@ -15,7 +15,20 @@ export default class App {
 		this.initializeNavbar();
 		this.initializePromoBar();
 		this.checkWindowLocationComments();
-		this.initializeImages();
+
+		const initializeImages = this.initializeImages.bind( this );
+		initializeImages();
+
+		GlobalService.registerObserverCallback( function( mutationList ) {
+			mutationList.forEach( mutationRecord => {
+				mutationRecord.addedNodes.forEach( node => {
+					const nodeName = node.nodeName.toLowerCase();
+					if ( 'img' === nodeName || node.childNodes.length ) {
+						initializeImages( node );
+					}
+				} );
+			} );
+		} );
 
 		GlobalService.registerRender( this.render.bind( this ) );
 	}
@@ -44,8 +57,8 @@ export default class App {
 		header.render( overlap );
 	}
 
-	initializeImages() {
-		$( 'body' ).imagesLoaded().progress( ( instance, image ) => {
+	initializeImages( container = document.body ) {
+		$( container ).imagesLoaded().progress( ( instance, image ) => {
 			const className = image.isLoaded ? 'is-loaded' : 'is-broken';
 			$( image.img ).addClass( className );
 		} );

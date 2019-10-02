@@ -1488,15 +1488,25 @@ var globalService_GlobalService = function () {
 		this.updateCallbacks = [];
 		this.observeCallbacks = [];
 		this.frameRendered = true;
+
 		var updateProps = this.updateProps.bind(this);
 		var updateScroll = this.updateScroll.bind(this);
+		var renderLoop = this.renderLoop.bind(this);
+		var observeCallback = this.observeCallback.bind(this);
+		var observeAndUpdateProps = function observeAndUpdateProps() {
+			observeCallback.apply(undefined, arguments);
+			updateProps(true);
+		};
+		var debouncedObserveCallback = debounce(observeAndUpdateProps, 200);
+
 		updateProps();
 		updateScroll();
+
 		document.addEventListener('DOMContentLoaded', updateProps);
 		window.addEventListener('resize', updateProps);
 		window.addEventListener('load', updateProps);
 		window.addEventListener('scroll', updateScroll);
-		window.requestAnimationFrame(this.renderLoop.bind(this));
+		window.requestAnimationFrame(renderLoop);
 
 		if (wp.customize) {
 			if (wp.customize.selectiveRefresh) {
@@ -1505,37 +1515,38 @@ var globalService_GlobalService = function () {
 			wp.customize.bind('change', updateProps);
 		}
 
-		this.observe(this.observeCallback.bind(this));
+		this.observe(debouncedObserveCallback);
 	}
 
 	createClass_default()(GlobalService, [{
 		key: 'observeCallback',
 		value: function observeCallback() {
+			var _arguments = arguments;
+
 			this.observeCallbacks.forEach(function (fn) {
-				fn();
+				fn.apply(undefined, _arguments);
 			});
 		}
 	}, {
 		key: 'observe',
 		value: function observe(callback) {
-			var _arguments = arguments;
-
 			if (!window.MutationObserver) {
 				return;
 			}
 
-			var observer = new MutationObserver(function () {
-				callback.apply(undefined, _arguments);
-			});
+			var observer = new MutationObserver(callback);
 
 			observer.observe(document.body, {
-				attributes: true,
-				attributeOldValue: false,
-				characterData: true,
-				characterDataOldValue: false,
 				childList: true,
 				subtree: true
 			});
+		}
+	}, {
+		key: 'registerObserverCallback',
+		value: function registerObserverCallback(fn) {
+			if (typeof fn === "function" && this.observeCallbacks.indexOf(fn) < 0) {
+				this.observeCallbacks.push(fn);
+			}
 		}
 	}, {
 		key: 'renderLoop',
@@ -2502,7 +2513,20 @@ var app_App = function () {
 		this.initializeNavbar();
 		this.initializePromoBar();
 		this.checkWindowLocationComments();
-		this.initializeImages();
+
+		var initializeImages = this.initializeImages.bind(this);
+		initializeImages();
+
+		globalService.registerObserverCallback(function (mutationList) {
+			mutationList.forEach(function (mutationRecord) {
+				mutationRecord.addedNodes.forEach(function (node) {
+					var nodeName = node.nodeName.toLowerCase();
+					if ('img' === nodeName || node.childNodes.length) {
+						initializeImages(node);
+					}
+				});
+			});
+		});
 
 		globalService.registerRender(this.render.bind(this));
 	}
@@ -2537,7 +2561,9 @@ var app_App = function () {
 	}, {
 		key: 'initializeImages',
 		value: function initializeImages() {
-			external_jQuery_default()('body').imagesLoaded().progress(function (instance, image) {
+			var container = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document.body;
+
+			external_jQuery_default()(container).imagesLoaded().progress(function (instance, image) {
 				var className = image.isLoaded ? 'is-loaded' : 'is-broken';
 				external_jQuery_default()(image.img).addClass(className);
 			});
@@ -2615,22 +2641,17 @@ var app_App = function () {
 
 function scripts_initialize() {
 	new app();
-	external_jQuery_default()('body').removeClass('is-loading').addClass('has-loaded');
 }
 
 external_jQuery_default()(function () {
 	var $window = external_jQuery_default()(window);
 	var $html = external_jQuery_default()('html');
 
-	if (!$html.is('.wf-active')) {
-		$window.on('wf-active', scripts_initialize);
-	} else {
+	if ($html.is('.wf-active')) {
 		scripts_initialize();
+	} else {
+		$window.on('wf-active', scripts_initialize);
 	}
-
-	external_jQuery_default()(window).on('beforeunload', function () {
-		external_jQuery_default()('body').addClass('is-loading');
-	});
 });
 
 /***/ }),

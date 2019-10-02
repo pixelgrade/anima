@@ -8,15 +8,25 @@ class GlobalService {
 		this.updateCallbacks = [];
 		this.observeCallbacks = [];
 		this.frameRendered = true;
+
 		const updateProps = this.updateProps.bind( this );
 		const updateScroll = this.updateScroll.bind( this );
+		const renderLoop = this.renderLoop.bind( this );
+		const observeCallback = this.observeCallback.bind( this );
+		const observeAndUpdateProps = function() {
+			observeCallback( ...arguments );
+			updateProps( true );
+		};
+		const debouncedObserveCallback = debounce( observeAndUpdateProps, 200 );
+
 		updateProps();
 		updateScroll();
+
 		document.addEventListener('DOMContentLoaded', updateProps );
 		window.addEventListener( 'resize', updateProps );
 		window.addEventListener( 'load', updateProps );
 		window.addEventListener( 'scroll', updateScroll );
-		window.requestAnimationFrame( this.renderLoop.bind( this ) );
+		window.requestAnimationFrame( renderLoop );
 
 		if ( wp.customize ) {
 			if ( wp.customize.selectiveRefresh ) {
@@ -25,12 +35,12 @@ class GlobalService {
 			wp.customize.bind( 'change', updateProps );
 		}
 
-		this.observe( this.observeCallback.bind( this ) );
+		this.observe( debouncedObserveCallback );
 	}
 
 	observeCallback() {
 		this.observeCallbacks.forEach( fn => {
-			fn();
+			fn( ...arguments );
 		});
 	}
 
@@ -39,18 +49,18 @@ class GlobalService {
 			return;
 		}
 
-		const observer = new MutationObserver( () => {
-			callback( ...arguments );
-		} );
+		const observer = new MutationObserver( callback );
 
 		observer.observe( document.body, {
-			attributes: true,
-			attributeOldValue: false,
-			characterData: true,
-			characterDataOldValue: false,
 			childList: true,
 			subtree: true
 		} );
+	}
+
+	registerObserverCallback( fn ) {
+		if ( typeof fn === "function" && this.observeCallbacks.indexOf( fn ) < 0 ) {
+			this.observeCallbacks.push( fn );
+		}
 	}
 
 	renderLoop() {
