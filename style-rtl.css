@@ -2009,7 +2009,10 @@ span.page-numbers {
         display: flex; } }
 
 .post-navigation {
-  --current-arrow-padding: calc(.4em + 1.15em); }
+  --current-arrow-padding: calc(.4em + 1.15em);
+  --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-normal);
+  padding-right: var(--theme-wrapper-sides-spacing);
+  padding-left: var(--theme-wrapper-sides-spacing); }
   .post-navigation .nav-links {
     max-width: var(--theme-content-width-normal);
     margin-right: auto;
