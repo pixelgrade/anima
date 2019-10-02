@@ -1,12 +1,16 @@
-html {
+html, body, .site {
     height: 100%;
 }
 
-html, body, .site {
+.site {
     display: flex;
     flex-direction: column;
+
+    > * {
+        flex-shrink: 0;
+    }
 }
 
-body, .site, .site-content {
+.site-content {
     flex-grow: 1;
 }
