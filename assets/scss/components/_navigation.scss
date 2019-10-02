@@ -1,11 +1,14 @@
 .navigation {
-    --theme-wrapper-side-spacing: var(--theme-spacing-fluid-normal);
-    padding-left: var(--theme-wrapper-side-spacing);
-    padding-right: var(--theme-wrapper-side-spacing);
+    @include specific(2) {
+        margin-top: var(--theme-spacing-xl);
+        margin-bottom: var(--theme-spacing-xl);
+    }
+}
+
+.pagination {
+    --theme-content-width-normal: var(--theme-content-width-wide);
 
     .nav-links {
-        max-width: var(--theme-content-width-wide);
-        margin-left: auto;
-        margin-right: auto;
+        @include nav-links;
     }
 }

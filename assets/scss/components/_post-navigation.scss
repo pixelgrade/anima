@@ -1,149 +1,105 @@
+// page numbers
+@mixin post-navigation__links {
+    max-width: var(--theme-content-width-normal);
+    margin-left: auto;
+    margin-right: auto;
+
+    @include above(tablet) {
+        display: flex;
+        flex-wrap: wrap;
+
+        > * {
+            flex: 1;
+        }
+    }
+}
+
+
+// SINGLE NAVIGATION
 .post-navigation {
+    --current-arrow-padding: calc(.4em + #{$theme-button-text-arrow-size});
+    --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-normal);
+
+    padding-left: var(--theme-wrapper-sides-spacing);
+    padding-right: var(--theme-wrapper-sides-spacing);
 
     .nav-links {
-        @include flex-grid;
-        @include flex-grid-count(2);
-        justify-content: space-between;
+        @include post-navigation__links;
     }
 
-    .nav-next {
-        text-align: right;
+    a {
+        text-decoration: none;
+
+        &:after {
+            content: "";
+            @include cover;
+        }
     }
 }
 
-// page numbers
-@mixin pagination {
+.post-navigation__post-title {
+    @include apply-font(heading-4);
+}
+
+.post-navigation__post-title,
+.post-navigation__link-label {
+    display: block;
+}
+
+.post-navigation__link {
     position: relative;
 
-    &:before,
+    @include below(tablet) {
+        text-align: center;
+    }
+}
+
+.post-navigation__link-label {
+    position: relative;
+    color: var(--current-color-primary);
+    @include apply-font(button);
+    transition: var(--theme-transition);
+    transition-property: transform;
+
     &:after {
         content: '';
+        @include button-text-arrow;
+        transform: translate(0, -50%) scale(-1, 1);
+        transition: var(--theme-transition);
+        transition-property: opacity;
 
-        position: absolute;
-        top: 50%;
-        z-index: 100;
-
-        color: inherit;
-        transition-property: transform;
-    }
-
-    // The stick
-    &:before {
-        width: .75em;
-        height: .0625em;
-
-        background-color: currentColor;
-    }
-
-    // The arrow
-    &:after {
-        display: block;
-        width: .45em;
-        height: .45em;
-
-        border: .0625em solid transparent;
+        .post-navigation__link:hover & {
+            opacity: 0;
+        }
     }
 }
 
-@mixin pagination--left {
-    padding-left: 1.55em;
+.post-navigation__link--previous {
+    text-align: left;
+}
 
-    &:before {
+.post-navigation__link-label--previous {
+    padding-left: var(--current-arrow-padding);
+
+    &:after {
+        right: auto;
         left: 0;
+        transform: translate(0, -50%);
     }
 
-    &:after {
-        left: 0;
-        border-top-color: currentColor;
-        border-left-color: currentColor;
-        transform: translate(0, calc(0.5px - 50%)) rotate(-45deg);
+    .post-navigation__link:hover & {
+        transform: translateX( calc( -1 * var(--current-arrow-padding) ) );
     }
 }
 
-@mixin pagination--right {
-    padding-right: 1.55em;
-
-    &:before {
-        right: 0;
-    }
-
-    &:after {
-        right: 0;
-        border-top-color: currentColor;
-        border-right-color: currentColor;
-        transform: translate(0, calc(0.5px - 50%)) rotate(45deg);
-    }
+.post-navigation__link--next {
+    text-align: right;
 }
 
-.woocommerce-pagination,
-.nav-links {
-    display: flex;
-    justify-content: center;
+.post-navigation__link-label--next {
+    padding-right: var(--current-arrow-padding);
 
-    font-feature-settings: "lnum";
-
-    margin-top: var(--theme-spacing-xl);
-    margin-bottom: var(--theme-spacing-normal);
-    margin-left: calc(var(--theme-spacing-tiny) * -1);
-
-    > .page-numbers {
-        text-decoration: none;
-        margin-left: var(--theme-spacing-tiny);
-    }
-
-    > .prev {
-        @include pagination;
-        @include pagination--left;
-    }
-
-    > .next {
-        @include pagination;
-        @include pagination--right;
-    }
-
-    > .prev,
-    > .current:last-child {
-        margin-right: auto;
-    }
-
-    > .next,
-    > .current:first-child {
-        margin-left: auto;
-    }
-}
-
-a.page-numbers,
-span.page-numbers {
-
-    color: var(--current-dark-secondary);
-
-    &[class][class] {
-        width: 3em;
-        height: 3em;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        &.current {
-            background-color: var(--current-dark-secondary);
-            color: var(--current-light-primary);
-        }
-
-        &:not(.current):hover {
-            color: var(--current-dark-primary);
-        }
-    }
-
-    &.next[class],
-    &.prev[class] {
-        width: auto;
-    }
-
-    &:not(.prev):not(.next) {
-        display: none;
-
-        @include above(lap) {
-            display: flex;
-        }
+    .post-navigation__link:hover & {
+        transform: translateX( var(--current-arrow-padding) );
     }
 }

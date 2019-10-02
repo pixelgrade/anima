@@ -14,6 +14,8 @@ export default class App {
 		this.initializeHeader();
 		this.initializeNavbar();
 		this.initializePromoBar();
+		this.checkWindowLocationComments();
+		this.initializeImages();
 
 		GlobalService.registerRender( this.render.bind( this ) );
 	}
@@ -40,6 +42,13 @@ export default class App {
 		} );
 
 		header.render( overlap );
+	}
+
+	initializeImages() {
+		$( 'body' ).imagesLoaded().progress( ( instance, image ) => {
+			const className = image.isLoaded ? 'is-loaded' : 'is-broken';
+			$( image.img ).addClass( className );
+		} );
 	}
 
 	initializeHero() {
@@ -87,5 +96,11 @@ export default class App {
 				reloadRellax( obj );
 			} );
 		} );
+	}
+
+	checkWindowLocationComments() {
+		if ( window.location.href.indexOf( "#comment" ) === -1 ) {
+			$( ".c-comments-toggle__checkbox" ).prop( "checked", false );
+		}
 	}
 }

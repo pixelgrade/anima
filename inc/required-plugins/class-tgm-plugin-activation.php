@@ -55,7 +55,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 		 *
 		 * @const string Version number.
 		 */
-		const TGMPA_VERSION = '2.6.1';
+		const TGMPA_VERSION = '2.6.2';
 
 		/**
 		 * Regular expression to test if a URL is a WP plugin repo URL.
@@ -1467,6 +1467,10 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 
 			foreach ( $keys as $key ) {
 				if ( preg_match( '|^' . $slug . '/|', $key ) ) {
+					return $key;
+				}
+
+				if ( false !== strpos( $key, $slug . '.php' ) ) {
 					return $key;
 				}
 			}

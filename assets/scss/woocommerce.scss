@@ -6,6 +6,7 @@
 @import "woocommerce/single-product";
 @import "woocommerce/checkout";
 @import "woocommerce/mini-cart";
+@import "woocommerce/shame";
 
 
 /*
@@ -21,6 +22,11 @@
   th {
     border: 0;
   }
+}
+
+.woocommerce-pagination {
+  @include nav-links;
+  margin-bottom: var(--theme-spacing-xl);
 }
 
 .wc-block-grid__products {

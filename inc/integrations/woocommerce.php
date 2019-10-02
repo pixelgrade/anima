@@ -8,187 +8,192 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// Remove Add To Cart
-remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
-// Remove Sidebar
-remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
-// Remove Breadcrumbs
-remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
-// Remove coupon form
-remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
-// Remove product title
-remove_action('woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10);
+function rosa2_woocommerce_replace_hooks() {
 
+    // Remove Sidebar
+	remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
 
-// Open wrapper for single product
-add_action( 'woocommerce_before_single_product_summary', 'rosa2_addStartWrapperBeforeSingleProductSummary', 1 );
-// Close wrapper for single product
-add_action( 'woocommerce_after_single_product_summary', 'rosa2_addEndWrapperAfterSingleProductSummary', 1 );
-// Open wrapper for tabs
-add_action( 'woocommerce_after_single_product_summary', 'rosa2_addStartWrapperBeforeTabs', 9 );
-// Close wrapper for tabs
-add_action( 'woocommerce_after_single_product_summary', 'rosa2_addEndWrapperAfterTabs', 11 );
-// Open wrapper for upselling products
-add_action( 'woocommerce_after_single_product_summary', 'rosa2_addStartWrapperBeforeUpsells', 14 );
-// Close wrapper for upselling products
-add_action( 'woocommerce_after_single_product_summary', 'rosa2_addEndWrapperAfterUpsells', 16 );
+	// Remove Breadcrumbs
+	remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
 
-// Open wrapper for related products
-add_action( 'woocommerce_after_single_product_summary', 'rosa2_addStartWrapperBeforeRelated', 19 );
-// Close wrapper for related products
-add_action( 'woocommerce_after_single_product_summary', 'rosa2_addEndWrapperAfterRelated', 21 );
-// Open wrapper for product on archive
-add_action('woocommerce_before_shop_loop_item', 'rosa2_addStartWrapperProduct', 20);
-// Close wrapper for product on archive
-add_action('woocommerce_shop_loop_item_title', 'rosa2_addEndWrapperProduct', 20);
-// Change markup for product title on archive
-add_action('woocommerce_shop_loop_item_title', 'rosa2_newProductTitleMarkup', 10);
+	// 1. Remove coupon form
+    // 2. Move coupon form between Site Title and Checkout Form
+    // 3. Add hidden coupon form outside checkout form
+	remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 ); /* 1 */
+	add_action( 'woocommerce_checkout_billing', 'woocommerce_checkout_coupon_form', 10 ); /* 2 */
+	add_action( 'woocommerce_before_checkout_form', 'rosa2_woocommerce_coupon_form', 10 ); /* 3 */
 
-// Open wrapper for product price
-add_action('woocommerce_shop_loop_item_title', 'rosa2_addStartWrapperPrice', 30);
-// Close wrapper for product price
-add_action('woocommerce_after_shop_loop_item_title', 'rosa2_addEndWrapperPrice', 30);
+    // Add wrapper for summary on single product
+	add_action( 'woocommerce_before_single_product_summary', 'rosa2_add_start_wrapper_before_single_product_summary', 1 );
+	add_action( 'woocommerce_after_single_product_summary', 'rosa2_add_end_wrapper_after_single_product_summary', 1 );
 
-// Open wrapper for single product (container)
-add_action( 'woocommerce_before_main_content', 'rosa2_addStartMainContent', 21 );
-// Close wrapper for single product (container)
-add_action( 'woocommerce_after_main_content', 'rosa2_addEndMainContent', 21 );
+	// Add wrapper for tasb on single product
+	add_action( 'woocommerce_after_single_product_summary', 'rosa2_add_start_wrapper_before_tabs', 9 );
+	add_action( 'woocommerce_after_single_product_summary', 'rosa2_add_end_wrapper_after_tabs', 11 );
 
-// Add ajax button to products
-add_action( 'woocommerce_after_add_to_cart_quantity', 'rosa2_outputAjaxAddToCartButton' );
+	// Add wrapper for upsells
+	add_action( 'woocommerce_after_single_product_summary', 'rosa2_add_start_wrapper_before_upsells', 14 );
+	add_action( 'woocommerce_after_single_product_summary', 'rosa2_add_end_wrapper_after_upsells', 16 );
 
-// Add breadcrumbs on single product, right before title
-add_action( 'woocommerce_single_product_summary', 'woocommerce_breadcrumb', 1 );
+    // Add wrapper for related products
+	add_action( 'woocommerce_after_single_product_summary', 'rosa2_add_start_wrapper_before_related', 19 );
+	add_action( 'woocommerce_after_single_product_summary', 'rosa2_add_end_wrapper_after_related', 21 );
 
-// Add shop categories on archive, right after title
-add_action( 'woocommerce_archive_description', 'woocommerce_display_categories', 1 );
+    // Change class for the product link to match editor block markup
+	remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10 );
+	remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
+	add_action( 'woocommerce_before_shop_loop_item', 'rosa2_loop_product_link_open', 10 );
+	add_action( 'woocommerce_after_shop_loop_item', 'rosa2_loop_product_link_close', 5 );
 
-// Add Site title and Breadcrumbs to Checkout Page
-add_action( 'woocommerce_checkout_billing', 'rosa2_outputCheckoutSiteIdentity', 1 );
-add_action( 'woocommerce_checkout_billing', 'rosa2_outputCheckoutBreadcrumbs', 2 );
+	// Add wrapper for product thumbnail in loops to match editor block markup
+	add_action( 'woocommerce_before_shop_loop_item_title', 'rosa2_loop_product_thumbnail_wrapper_open', 9 );
+	add_action( 'woocommerce_before_shop_loop_item_title', 'rosa2_loop_product_thumbnail_wrapper_close', 11 );
 
-// Move coupon form between Site Title and Checkout Form
-add_action( 'woocommerce_checkout_billing', 'woocommerce_checkout_coupon_form', 10 );
+    // Change loop product title
+	remove_action('woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10);
+	add_action('woocommerce_shop_loop_item_title', 'rosa2_new_product_title_markup', 10);
 
-// Add hidden coupon form outside checkout form
-add_action( 'woocommerce_before_checkout_form', 'woocommerceCouponForm', 10 );
+	// Move sale flash outside the product link to match editor block markup
+	remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10 );
+	add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_show_product_loop_sale_flash', 5 );
 
-// Add ajax button to archive products
-add_action('woocommerce_after_shop_loop_item', 'rosa2_appendAddToCartButton', 1);
+	// Add wrapper for product price in loops and move it after sale flash
+	remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
+	add_action( 'woocommerce_after_shop_loop_item', 'rosa2_price_wrapper_start', 5 );
+	add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_price', 5 );
+	add_action( 'woocommerce_after_shop_loop_item', 'rosa2_price_wrapper_end', 5 );
 
-// Output fly-out cart markup
-add_action( 'rosa_before_header', 'rosa2_outputMiniCart', 1 );
+	// Replace Add To Cart button inside loops with ajax add to cart
+	remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
+	add_action('woocommerce_after_shop_loop_item', 'rosa2_append_add_to_cart_button', 5);
 
-// Hide tabs content titles
-add_filter( 'woocommerce_product_description_heading', '__return_false', 30 );
-add_filter( 'woocommerce_product_additional_information_heading', '__return_false', 30 );
+    // Add wrapper for single product (container)
+	add_action( 'woocommerce_before_main_content', 'rosa2_add_start_main_content', 21 );
+	add_action( 'woocommerce_after_main_content', 'rosa2_add_end_main_content', 21 );
 
-// Append cart to menu
-add_filter( 'wp_nav_menu_items', 'rosa2_appendCartIconToMenu', 10, 2 );
+    // Add ajax button to products
+	add_action( 'woocommerce_after_add_to_cart_quantity', 'rosa2_output_ajax_add_to_cart_button' );
 
-// Limit related posts number
-add_filter( 'woocommerce_output_related_products_args', 'rosa2_limitRelatedPostsCount', 20 );
+    // Add breadcrumbs on single product, right before title
+	add_action( 'woocommerce_single_product_summary', 'woocommerce_breadcrumb', 1 );
 
-// Limit upselling products number
-add_filter( 'woocommerce_upsell_display_args', 'rosa2_limitRelatedPostsCount', 20 );
+    // Add shop categories on archive, right after title
+	add_action( 'woocommerce_archive_description', 'woocommerce_display_categories', 1 );
 
-// Change args for WooCommerce pagination
-add_filter( 'woocommerce_pagination_args', 'rosa2_woocommerce_pagination_args', 40, 1 );
+    // Add Site title and Breadcrumbs to Checkout Page
+	add_action( 'woocommerce_checkout_billing', 'rosa2_output_checkout_site_identity', 1 );
+	add_action( 'woocommerce_checkout_billing', 'rosa2_output_checkout_breadcrumbs', 2 );
 
-add_filter( 'product_cat_class', 'rosa2_product_category_classes', 10, 1);
+    // Output fly-out cart markup
+	add_action( 'rosa_before_header', 'rosa2_output_mini_cart', 1 );
 
-// Change loop start
-add_filter( 'woocommerce_product_loop_start', 'rosa2_woocommerceLoopStart', 10, 1 );
-// Change loop end
-add_filter( 'woocommerce_product_loop_start', 'rosa2_woocommerceLoopEnd', 10, 1 );
-// Change sale flash
-add_filter( 'woocommerce_sale_flash', 'rosa2_woocommerceSaleFlash', 10, 1 );
+    // Hide tabs content titles
+	add_filter( 'woocommerce_product_description_heading', '__return_false', 30 );
+	add_filter( 'woocommerce_product_additional_information_heading', '__return_false', 30 );
 
-// Change product classes.
-add_filter( 'woocommerce_post_class', 'rosa2_woocommerceProductClass', 10, 2 );
+    // Append cart to menu
+	add_filter( 'wp_nav_menu_items', 'rosa2_append_cart_icon_to_menu', 10, 2 );
 
-function rosa2_woocommerceProductClass( $classes, $product ) {
-	if ( ! is_product() ) {
-		$classes[] = 'wc-block-grid__product';
-	}
+    // Limit related posts number
+	add_filter( 'woocommerce_output_related_products_args', 'rosa2_limit_related_posts_count', 20 );
+
+    // Limit upselling products number
+	add_filter( 'woocommerce_upsell_display_args', 'rosa2_limit_related_posts_count', 20 );
+
+    // Change args for WooCommerce pagination
+	add_filter( 'woocommerce_pagination_args', 'rosa2_woocommerce_pagination_args', 40, 1 );
+
+	add_filter( 'product_cat_class', 'rosa2_product_category_classes', 10, 1);
+
+    // Change loop start
+	add_filter( 'woocommerce_product_loop_start', 'rosa2_woocommerce_loop_start', 10, 1 );
+
+    // Change loop end
+	add_filter( 'woocommerce_product_loop_end', 'rosa2_woocommerce_loop_end', 10, 1 );
+
+    // Change sale flash
+	add_filter( 'woocommerce_sale_flash', 'rosa2_woocommerce_sale_flash', 10, 1 );
+}
+add_action( 'wp_loaded', 'rosa2_woocommerce_replace_hooks' );
+
+function rosa2_woocommerce_product_class( $classes, $product ) {
+    $classes[] = 'wc-block-grid__product';
 
 	return $classes;
 }
 
-function rosa2_woocommerceLoopStart( $markup ) {
+function rosa2_woocommerce_loop_start( $markup ) {
+    // Change product classes.
+	add_filter( 'woocommerce_post_class', 'rosa2_woocommerce_product_class', 10, 2 );
+
 	return '<div class="wc-block-grid has-' . esc_attr( wc_get_loop_prop( 'columns' ) ) . '-columns"><ul class="wc-block-grid__products">';
 }
 
-function rosa2_woocommerceLoopEnd( $markup ) {
+function rosa2_woocommerce_loop_end( $markup ) {
+	// Remove filter added in loop start.
+	remove_filter( 'woocommerce_post_class', 'rosa2_woocommerce_product_class', 10 );
+
 	return '</ul></div>';
 }
 
-function rosa2_woocommerceSaleFlash( $markup ) {
+function rosa2_woocommerce_sale_flash( $markup ) {
 	return '<span class="wc-block-grid__product-onsale">' . esc_html__( 'Sale!', '__theme_txtd' ) . '</span>';
 }
 
-function rosa2_addStartWrapperBeforeSingleProductSummary() {
+function rosa2_add_start_wrapper_before_single_product_summary() {
 	echo '<div class="c-product-main">';
 }
 
-function rosa2_addEndWrapperAfterSingleProductSummary() {
+function rosa2_add_end_wrapper_after_single_product_summary() {
 	echo '</div>';
 }
 
 
-function rosa2_addStartWrapperBeforeTabs() {
+function rosa2_add_start_wrapper_before_tabs() {
 	echo '<div class="c-woo-section  c-woo-tabs">';
 }
 
-function rosa2_addEndWrapperAfterTabs() {
+function rosa2_add_end_wrapper_after_tabs() {
 	echo '</div>';
 }
 
-function rosa2_addStartWrapperBeforeUpsells() {
+function rosa2_add_start_wrapper_before_upsells() {
 	echo '<div class="c-woo-section  c-woo-upsells">';
 }
 
-function rosa2_addEndWrapperAfterUpsells() {
+function rosa2_add_end_wrapper_after_upsells() {
 	echo '</div>';
 }
 
-function rosa2_addStartWrapperBeforeRelated() {
+function rosa2_add_start_wrapper_before_related() {
 	echo '<div class="c-woo-section  c-woo-related">';
 }
 
-function rosa2_addEndWrapperAfterRelated() {
+function rosa2_add_end_wrapper_after_related() {
 	echo '</div>';
 }
 
-function rosa2_addStartMainContent() {
+function rosa2_add_start_main_content() {
 	echo '<div class="wp-block-group__inner-container"><div class="wp-block alignwide">';
 }
 
-function rosa2_addEndMainContent() {
+function rosa2_add_end_main_content() {
 	echo '</div></div>';
 }
 
-function rosa2_newProductTitleMarkup() {
+function rosa2_new_product_title_markup() {
 	echo '<h2 class="wc-block-grid__product-title">' . get_the_title() . '</h2>';
 }
 
-function rosa2_addStartWrapperProduct() {
-	echo '<div class="wc-block-grid__product-link">';
-}
-
-function rosa2_addEndWrapperProduct() {
-	echo '</div>';
-}
-
-function rosa2_addStartWrapperPrice() {
+function rosa2_price_wrapper_start() {
 	echo '<div class="wc-block-grid__product-price price">';
 }
 
-function rosa2_addEndWrapperPrice() {
+function rosa2_price_wrapper_end() {
 	echo '</div>';
 }
 
-function rosa2_appendAddToCartButton()  {
+function rosa2_append_add_to_cart_button()  {
 
 	if ( 'product' !== get_post_type() ) {
 		return;
@@ -207,7 +212,7 @@ function rosa2_appendAddToCartButton()  {
 
 <?php }
 
-function rosa2_outputCheckoutSiteIdentity() { ?>
+function rosa2_output_checkout_site_identity() { ?>
 
     <h1 class="woocommerce-checkout-title"><a
                 href="<?php echo esc_url( get_home_url() ); ?>"><span><?php echo esc_html( get_bloginfo( 'name' ) ) ?></span></a>
@@ -215,7 +220,7 @@ function rosa2_outputCheckoutSiteIdentity() { ?>
 
 <?php }
 
-function rosa2_outputCheckoutBreadcrumbs() { ?>
+function rosa2_output_checkout_breadcrumbs() { ?>
 
     <ul class="woocommerce-checkout-breadcrumbs">
         <li>
@@ -226,14 +231,14 @@ function rosa2_outputCheckoutBreadcrumbs() { ?>
 
 <?php }
 
-function rosa2_limitRelatedPostsCount( $args ) {
+function rosa2_limit_related_posts_count( $args ) {
 	$args['posts_per_page'] = 3;
 	$args['columns']        = 3;
 
 	return $args;
 }
 
-function rosa2_outputAjaxAddToCartButton() {
+function rosa2_output_ajax_add_to_cart_button() {
 	if ( 'product' !== get_post_type() ) {
 		return;
 	}
@@ -247,7 +252,7 @@ function rosa2_outputAjaxAddToCartButton() {
 	}
 }
 
-function rosa2_outputMiniCart() {
+function rosa2_output_mini_cart() {
 	if ( ! is_cart() ) { ?>
 
         <div class="c-mini-cart">
@@ -265,7 +270,7 @@ function rosa2_outputMiniCart() {
 }
 
 
-function rosa2_appendCartIconToMenu( $items, $args ) {
+function rosa2_append_cart_icon_to_menu( $items, $args ) {
 
     if ( empty( WC()->cart ) ) {
         return $items;
@@ -348,8 +353,8 @@ if ( ! function_exists( ' rosa2_woocommerce_pagination_args' ) ) {
 }
 
 
-if ( ! function_exists( 'woocommerceCouponForm' ) ) {
-	function woocommerceCouponForm() {
+if ( ! function_exists( 'rosa2_woocommerce_coupon_form' ) ) {
+	function rosa2_woocommerce_coupon_form() {
 		echo '<form class="checkout_coupon woocommerce-form-coupon" id="form-coupon" method="post" style="display:none"></form>';
 	}
 }
@@ -359,4 +364,44 @@ function rosa2_product_category_classes($class) {
 	$class[] = 'wc-block-grid__product';
 
     return $class;
+}
+
+function rosa2_product_catalog_image_aspect_ratio() {
+    if ( function_exists( 'wc_get_image_size' ) ) {
+        $size = wc_get_image_size( 'thumbnail' );
+    } else {
+        $size = array(
+            'width' => 300,
+            'height' => 300
+        );
+    }
+
+
+	$css = '' .
+    '.wc-block-grid__product-link {
+        --current-aspect-ratio: ' . $size['width'] / $size['height'] . ';' .
+    '}';
+
+	wp_add_inline_style( 'rosa2-woocommerce', $css );
+}
+add_action( 'wp_enqueue_scripts', 'rosa2_product_catalog_image_aspect_ratio' );
+
+function rosa2_loop_product_link_open() {
+	global $product;
+
+	$link = apply_filters( 'woocommerce_loop_product_link', get_the_permalink(), $product );
+
+	echo '<a href="' . esc_url( $link ) . '" class="wc-block-grid__product-link">';
+}
+
+function rosa2_loop_product_link_close() {
+	echo '</a>';
+}
+
+function rosa2_loop_product_thumbnail_wrapper_open() {
+    echo '<div class="wc-block-grid__product-image">';
+}
+
+function rosa2_loop_product_thumbnail_wrapper_close() {
+    echo '</div>';
 }

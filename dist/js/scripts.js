@@ -1972,49 +1972,98 @@ var header_Header = function () {
 		if (!element) return;
 
 		this.element = element;
-
 		this.options = assign_default()({}, defaults, args);
 
 		this.$header = external_jQuery_default()(this.element);
 		this.$toggle = external_jQuery_default()('.c-menu-toggle');
 		this.$toggleWrap = external_jQuery_default()('.c-menu-toggle__wrap');
 
-		//		this.inversed = ! this.$header.hasClass( 'site-header--normal' );
+		this.scrolled = false;
+		this.inversed = false;
 
 		this.offset = 0;
 		this.scrollOffset = 0;
 		this.mobileHeaderHeight = 0;
 
 		this.createMobileHeader();
+
 		this.onResize();
 		globalService.registerUpdate(this.onResize.bind(this));
 
-		this.$header.addClass('site-header--fixed site-header--ready');
-		this.$mobileHeader.addClass('site-header--fixed site-header--ready');
+		this.timeline = this.getInroTimeline();
+		this.timeline.play();
 	}
 
 	createClass_default()(Header, [{
+		key: 'initialize',
+		value: function initialize() {
+			this.$header.addClass('site-header--fixed site-header--ready');
+			this.$mobileHeader.addClass('site-header--fixed site-header--ready');
+		}
+	}, {
 		key: 'update',
 		value: function update() {
-			if (!this.element) return;
-
 			this.updatePageOffset();
 			this.updateHeaderOffset();
 			this.updateMobileHeaderOffset();
 		}
 	}, {
-		key: 'onResize',
-		value: function onResize() {
-			if (!this.element) return;
+		key: 'getInroTimeline',
+		value: function getInroTimeline() {
+			var element = this.element;
+			var timeline = new TimelineMax({ paused: true });
+			var height = external_jQuery_default()(element).outerHeight();
+			var transitionEasing = Power4.easeOut;
+			var transitionDuration = 0.5;
+			timeline.to(element, transitionDuration, { opacity: 1, ease: transitionEasing }, 0);
+			timeline.to({ height: 0 }, transitionDuration, {
+				height: height,
+				onUpdate: this.onHeightUpdate.bind(this),
+				onUpdateParams: ["{self}"],
+				onComplete: this.initialize.bind(this),
+				ease: transitionEasing
+			}, 0);
 
-			this.box = this.element.getBoundingClientRect();
-			this.scrollOffset = this.getScrollOffset();
-
+			return timeline;
+		}
+	}, {
+		key: 'onHeightUpdate',
+		value: function onHeightUpdate(tween) {
+			this.getProps();
+			this.box = assign_default()(this.box, { height: tween.target.height });
+			this.setVisibleHeaderHeight();
+			this.update();
+		}
+	}, {
+		key: 'getMobileHeaderHeight',
+		value: function getMobileHeaderHeight() {
 			var mobileHeaderHeight = this.$mobileHeader.css('height', '').outerHeight();
 			var toggleHeight = this.$toggleWrap.css('height', '').outerHeight();
 
-			this.mobileHeaderHeight = Math.max(mobileHeaderHeight, toggleHeight);
-			this.visibleHeaderHeight = this.$mobileHeader.is(':visible') ? this.mobileHeaderHeight : this.box.height;
+			return Math.max(mobileHeaderHeight, toggleHeight);
+		}
+	}, {
+		key: 'isMobileHeaderVisibile',
+		value: function isMobileHeaderVisibile() {
+			return this.$mobileHeader.is(':visible');
+		}
+	}, {
+		key: 'setVisibleHeaderHeight',
+		value: function setVisibleHeaderHeight() {
+			this.visibleHeaderHeight = this.isMobileHeaderVisibile() ? this.mobileHeaderHeight : this.box.height;
+		}
+	}, {
+		key: 'getProps',
+		value: function getProps() {
+			this.box = this.element.getBoundingClientRect();
+			this.scrollOffset = this.getScrollOffset();
+			this.mobileHeaderHeight = this.getMobileHeaderHeight();
+		}
+	}, {
+		key: 'onResize',
+		value: function onResize() {
+			this.getProps();
+			this.setVisibleHeaderHeight();
 			this.update();
 		}
 	}, {
@@ -2027,7 +2076,7 @@ var header_Header = function () {
 	}, {
 		key: 'updateMobileHeaderOffset',
 		value: function updateMobileHeaderOffset() {
-			if (!this.element) return;
+			if (!this.$mobileHeader) return;
 
 			this.$mobileHeader.css({
 				height: this.mobileHeaderHeight,
@@ -2046,8 +2095,6 @@ var header_Header = function () {
 	}, {
 		key: 'getScrollOffset',
 		value: function getScrollOffset() {
-			if (!this.element) return;
-
 			var _GlobalService$getPro = globalService.getProps(),
 			    adminBarHeight = _GlobalService$getPro.adminBarHeight,
 			    scrollY = _GlobalService$getPro.scrollY;
@@ -2067,24 +2114,26 @@ var header_Header = function () {
 	}, {
 		key: 'updatePageOffset',
 		value: function updatePageOffset() {
-			if (!this.element) return;
-
 			var page = document.getElementById('page');
 			page.style.paddingTop = this.visibleHeaderHeight + this.offset + 'px';
 		}
 	}, {
 		key: 'createMobileHeader',
 		value: function createMobileHeader() {
-			if (!this.element) return;
+			if (this.createdMobileHeader) return;
 
-			if (this.createdMobileHeader) {
+			var $mobileHeader = external_jQuery_default()('.site-header--mobile');
+
+			if ($mobileHeader.length) {
+				this.$mobileHeader = $mobileHeader;
+				this.createdMobileHeader = true;
 				return;
 			}
 
 			this.$mobileHeader = external_jQuery_default()('<div class="site-header--mobile">');
 
-			external_jQuery_default()('.c-branding').clone().appendTo(this.$mobileHeader);
-			external_jQuery_default()('.menu-item--cart').clone().appendTo(this.$mobileHeader);
+			external_jQuery_default()('.c-branding').first().clone().appendTo(this.$mobileHeader);
+			external_jQuery_default()('.menu-item--cart').first().clone().appendTo(this.$mobileHeader);
 
 			this.$mobileHeader.insertAfter(this.$toggle);
 			this.createdMobileHeader = true;
@@ -2097,12 +2146,17 @@ var header_Header = function () {
 			var _GlobalService$getPro2 = globalService.getProps(),
 			    scrollY = _GlobalService$getPro2.scrollY;
 
+			var scrolled = scrollY > this.scrollOffset;
+
 			if (inversed !== this.inversed) {
-				//			this.$header.toggleClass( 'site-header--normal', ! inversed );
+				this.$header.toggleClass('site-header--normal', !inversed);
 				this.inversed = inversed;
 			}
 
-			this.$header.toggleClass('site-header--scrolled', scrollY > this.scrollOffset);
+			if (scrolled !== this.scrolled) {
+				this.$header.toggleClass('site-header--scrolled', scrolled);
+				this.scrolled = scrolled;
+			}
 		}
 	}]);
 
@@ -2447,6 +2501,8 @@ var app_App = function () {
 		this.initializeHeader();
 		this.initializeNavbar();
 		this.initializePromoBar();
+		this.checkWindowLocationComments();
+		this.initializeImages();
 
 		globalService.registerRender(this.render.bind(this));
 	}
@@ -2477,6 +2533,14 @@ var app_App = function () {
 			});
 
 			header.render(overlap);
+		}
+	}, {
+		key: 'initializeImages',
+		value: function initializeImages() {
+			external_jQuery_default()('body').imagesLoaded().progress(function (instance, image) {
+				var className = image.isLoaded ? 'is-loaded' : 'is-broken';
+				external_jQuery_default()(image.img).addClass(className);
+			});
 		}
 	}, {
 		key: 'initializeHero',
@@ -2532,6 +2596,13 @@ var app_App = function () {
 				});
 			});
 		}
+	}, {
+		key: 'checkWindowLocationComments',
+		value: function checkWindowLocationComments() {
+			if (window.location.href.indexOf("#comment") === -1) {
+				external_jQuery_default()(".c-comments-toggle__checkbox").prop("checked", false);
+			}
+		}
 	}]);
 
 	return App;
@@ -2544,6 +2615,7 @@ var app_App = function () {
 
 function scripts_initialize() {
 	new app();
+	external_jQuery_default()('body').removeClass('is-loading').addClass('has-loaded');
 }
 
 external_jQuery_default()(function () {
@@ -2555,6 +2627,10 @@ external_jQuery_default()(function () {
 	} else {
 		scripts_initialize();
 	}
+
+	external_jQuery_default()(window).on('beforeunload', function () {
+		external_jQuery_default()('body').addClass('is-loading');
+	});
 });
 
 /***/ }),

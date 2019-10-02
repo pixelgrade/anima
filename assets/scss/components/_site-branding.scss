@@ -13,9 +13,17 @@
     img {
         display: block;
         max-width: 100%;
-        max-height: var(--theme-header-logo-height);
+        max-height: 20px;
         width: auto;
         height: auto;
+
+        @include above(lap) {
+            max-height: var(--theme-header-logo-height);
+        }
+    }
+
+    .c-logo__inverted img {
+        width: 100%;
     }
 }
 

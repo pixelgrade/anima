@@ -1,3 +1,7 @@
+.wp-block-novablocks-navigation[class] {
+    --current-font-size: 18px;
+}
+
 .site-header {
     display: none;
     overflow-y: auto;
@@ -75,7 +79,8 @@
         }
     }
 
-    ul.menu a {
+    ul.menu a,
+    .menu>ul a {
         padding-left: 0;
         padding-right: 0;
     }
@@ -97,8 +102,6 @@
     flex-direction: column;
 
     [class*="__inner-container"] > & {
-        margin-left: 0;
-        margin-right: 0;
         max-width: none;
     }
 
@@ -115,11 +118,13 @@
     left: 0;
     z-index: 900;
 
+    width: 100%;
+
     display: flex;
     align-items: center;
     justify-content: center;
 
-    padding: 1em var(--theme-header-sides-spacing);
+    padding: 1.625em var(--theme-header-sides-spacing);
 
     .menu-item--cart {
         display: flex;
@@ -134,6 +139,11 @@
             color: currentColor;
         }
     }
+}
+
+.site-header__menu {
+    padding-left: var(--theme-header-sides-spacing);
+    padding-right: var(--theme-header-sides-spacing);
 }
 
 .has-hero,

@@ -180,13 +180,13 @@ wp.domReady(function () {
 	wp.blocks.unregisterBlockStyle('core/separator', 'dots');
 
 	wp.blocks.registerBlockStyle('core/separator', {
-		name: 'simple',
-		label: 'Simple'
+		name: 'decorative',
+		label: 'Decorative'
 	});
 
 	wp.blocks.registerBlockStyle('core/separator', {
-		name: 'decorative',
-		label: 'Decorative'
+		name: 'simple',
+		label: 'Simple'
 	});
 
 	wp.blocks.registerBlockStyle('core/separator', {
