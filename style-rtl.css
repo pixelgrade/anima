@@ -3686,12 +3686,12 @@ span.page-numbers {
     content: '';
     position: absolute;
     bottom: 0;
-    right: 0;
+    left: 1.15em;
     width: calc(100% - 1.15em);
     height: .125em;
     background: currentColor;
     transition: var(--theme-button-transition);
-    transition-property: transform;
+    transition-property: width;
     transform-origin: 0% 50%; }
   .is-style-text .wp-block-button__link:after {
     content: '';
@@ -3713,7 +3713,7 @@ span.page-numbers {
     opacity: 0;
     transform: translate(0, -50%) scale(-1, 1); }
   .is-style-text .wp-block-button__link:hover:before {
-    transform: scaleX(0); }
+    width: 0; }
   .is-style-text .wp-block-button__link:hover:after {
     opacity: 1;
     transform: translate(-0.4em, -50%) scale(-1, 1); }
