@@ -4254,33 +4254,6 @@ pre code {
 .entry-meta a:hover {
   text-decoration-color: var(--current-color-primary); }
 
-/* 6. Overwrites */
-/* Embeds */
-.fb_iframe_widget > span {
-  display: block;
-  max-width: 100%; }
-
-iframe.instagram-media {
-  max-width: 100% !important;
-  min-width: 0 !important;
-  margin-left: 0 !important; }
-
-.is-style-lead {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
-  --current-font-family: var(--theme-lead-font-family);
-  --current-font-size: var(--theme-lead-final-font-size);
-  --current-line-height: var(--theme-lead-line-height);
-  --current-font-weight: var(--theme-lead-font-weight);
-  --current-letter-spacing: var(--theme-lead-letter-spacing);
-  --current-text-transform: var(--theme-lead-text-transform);
-  --current-text-decoration: var(--theme-lead-text-decoration); }
-
 body {
   transition: var(--theme-transition);
   transition-property: opacity; }
@@ -4347,3 +4320,30 @@ body:not(.has-loaded) .c-comments-toggle__checkbox + .c-comments-toggle__label ~
   transition-property: opacity; }
   html:not(.wf-active) .comments-area {
     opacity: 0; }
+
+/* 6. Overwrites */
+/* Embeds */
+.fb_iframe_widget > span {
+  display: block;
+  max-width: 100%; }
+
+iframe.instagram-media {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin-left: 0 !important; }
+
+.is-style-lead {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration);
+  --current-font-family: var(--theme-lead-font-family);
+  --current-font-size: var(--theme-lead-final-font-size);
+  --current-line-height: var(--theme-lead-line-height);
+  --current-font-weight: var(--theme-lead-font-weight);
+  --current-letter-spacing: var(--theme-lead-letter-spacing);
+  --current-text-transform: var(--theme-lead-text-transform);
+  --current-text-decoration: var(--theme-lead-text-decoration); }
