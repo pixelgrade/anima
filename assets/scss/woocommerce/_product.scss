@@ -85,11 +85,40 @@
 
 .wc-block-grid__product-link {
   display: block;
-
   text-decoration: none;
+
+  @supports (--css: variables) {
+    --current-aspect-ratio: 1;
+    position: relative;
+
+    &,
+    &:before {
+      padding-top: calc(100% / var(--current-aspect-ratio));
+    }
+
+    &:before,
+    .wc-block-grid__product-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      display: block;
+      width: 100%;
+    }
+
+    &:before {
+      content: "";
+      background-color: var(--theme-light-tertiary);
+    }
+  }
+}
+
+.wc-block-grid__product-image img {
+  display: block;
 }
 
 .woocommerce-loop-product__link {
+  display: block;
   text-decoration: none;
 
   .wc-block-grid__product-onsale {
@@ -100,7 +129,6 @@
 }
 
 .wc-block-grid__product-add-to-cart {
-
   text-align: center;
 
   .add_to_cart_button {

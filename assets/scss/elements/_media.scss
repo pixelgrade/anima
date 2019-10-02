@@ -5,6 +5,14 @@ video {
     height: auto;
 }
 
+img {
+    transition: var(--theme-transition);
+    transition-property: opacity;
+}
+img:not(.is-loaded) {
+    opacity: 0;
+}
+
 figure {
     margin: 0;
 }

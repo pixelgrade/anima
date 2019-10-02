@@ -3,6 +3,7 @@ import App from './components/app';
 
 function initialize() {
 	new App();
+	$( 'body' ).removeClass( 'is-loading' ).addClass( 'has-loaded' );
 }
 
 $(function () {
@@ -14,4 +15,9 @@ $(function () {
 	} else {
 		initialize();
 	}
+
+	$( window ).on( 'beforeunload', () => {
+		$( 'body' ).addClass( 'is-loading' );
+	} );
+
 });

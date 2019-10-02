@@ -12,9 +12,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 	</div><!-- #content -->
 
-	<?php if ( function_exists( 'block_areas' ) ) {
-		block_areas()->render( 'footer' );
-	} else {
+	<?php if ( function_exists( 'block_areas' ) && rosa2_block_area_has_blocks( 'footer' ) ) { ?>
+        <footer id="colophon" class="site-footer">
+            <div class="site-footer__inner-container">
+		        <?php block_areas()->render( 'footer' ); ?>
+            </div>
+        </footer>
+	<?php } else {
 		get_template_part( 'template-parts/site-footer' );
 	} ?>
 

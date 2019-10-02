@@ -138,7 +138,16 @@ function rosa2_scripts() {
 
 	wp_register_script( 'gsap-split-text', '//pxgcdn.com/js/gsap/2.1.3/plugins/SplitText' . $suffix . '.js', array(), null, true );
 	wp_register_script( 'gsap', '//pxgcdn.com/js/gsap/2.1.3/TweenMax' . $suffix . '.js', array(), null, true );
-	wp_enqueue_script( 'rosa2-app', get_template_directory_uri() . '/dist/js/scripts' . $suffix . '.js', array( 'jquery', 'gsap', 'gsap-split-text', 'hoverIntent' ), $theme->get( 'Version' ), true );
+	wp_enqueue_script( 'rosa2-app', get_template_directory_uri() . '/dist/js/scripts' . $suffix . '.js', array( 'jquery', 'gsap', 'gsap-split-text', 'hoverIntent', 'imagesloaded' ), $theme->get( 'Version' ), true );
+
+	echo '<script>
+		window.addEventListener( "DOMContentLoaded", ( event ) => {
+			document.body.classList.remove( "is-loading" );
+		} );
+		window.addEventListener( "beforeunload", function( event ) {
+			document.body.classList.add( "is-loading" );
+		} );
+	</script>';
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

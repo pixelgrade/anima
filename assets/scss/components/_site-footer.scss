@@ -1,16 +1,14 @@
-.site-footer {
+.site-footer--fallback {
     padding-top: var(--theme-spacing-normal);
     padding-bottom: var(--theme-spacing-normal);
 
-    color: var(--current-light-primary);
-    background-color: var(--current-dark-primary);
+    @include variation(dark);
+
+    background-color: var(--current-light-primary);
+    color: var(--current-dark-secondary);
 
     a {
-        color: var(--current-light-secondary);
-        text-decoration: none;
-
-        &:hover {
-            color: var(--current-light-primary);
-        }
+        color: inherit;
+        text-decoration: underline;
     }
 }
