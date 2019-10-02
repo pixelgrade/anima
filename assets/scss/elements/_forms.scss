@@ -31,11 +31,12 @@ $checkbox-width: 1.5rem !default;
 $checkbox-height: 1.5rem !default;
 
 // Spacing
-$input-vertical-spacing: 1rem !default;
-$input-horizontal-spacing: 1rem !default; // Checkboxes and Radios
+$input-vertical-spacing: var(--theme-spacing-tiny) !default;
+$input-horizontal-spacing: var(--theme-spacing-tiny) !default; // Checkboxes and Radios
 
 @mixin field {
     width: 100%;
+    height: auto;
     max-width: 100%;
     padding: $input-padding;
     border: $input-border-width solid $input-border-color;
@@ -44,10 +45,9 @@ $input-horizontal-spacing: 1rem !default; // Checkboxes and Radios
     border-radius: $input-border-radius;
     background-color: $input-background-color;
 
-    font-family: inherit;
-    -webkit-font-smoothing: initial;
-
+    font: inherit;
     line-height: 1;
+    -webkit-font-smoothing: initial;
 
     &:focus,
     &:active {
@@ -85,27 +85,23 @@ $input-horizontal-spacing: 1rem !default; // Checkboxes and Radios
     -webkit-appearance: none;
 }
 
-@mixin taxonomy-select {
-    width: auto;
-    background: url('assets/images/select-arrow.svg') 100% center no-repeat;
-    background-size: .5em .687em;
-    padding: 0 .625em 0 0;
-    border: none;
-
-    &::-ms-expand {
-        display: none;
-    }
-}
-
 @mixin label {
     color: $label-color;
-    padding-bottom: $input-vertical-spacing;
+    font: inherit;
     margin: 0;
+
+    &:not(:first-child) {
+        margin-top: $input-vertical-spacing;
+    }
+
+    &:not(:last-child) {
+        margin-bottom: $input-vertical-spacing;
+    }
 
     cursor: pointer;
 }
 
-@mixin checkbox {
+@mixin checkbox-base {
     position: relative;
     left: 0;
 
@@ -124,6 +120,27 @@ $input-horizontal-spacing: 1rem !default; // Checkboxes and Radios
     cursor: pointer;
 
     -webkit-appearance: none;
+}
+
+@mixin checkbox {
+    @include checkbox-base;
+
+    &:checked {
+        border-color: $checkbox-color;
+        background: $checkbox-background-color url('assets/images/checkbox.svg') center center no-repeat;
+        background-size: 100% 100%;
+        outline: 0;
+    }
+}
+
+@mixin radio {
+    @include checkbox-base;
+    border-radius: 50%;
+
+    &:checked {
+        border: .43em solid $checkbox-color;
+        outline: 0;
+    }
 }
 
 @include placeholder() {
@@ -148,22 +165,10 @@ input {
 input[type="checkbox"] {
     @include checkbox;
 
-    &:checked {
-        border-color: $checkbox-color;
-        background: $checkbox-background-color url('assets/images/checkbox.svg') center center no-repeat;
-        background-size: 100% 100%;
-        outline: 0;
-    }
 }
 
 input[type="radio"] {
-    @include checkbox;
-    border-radius: 50%;
-
-    &:checked {
-        border: .43em solid $checkbox-color;
-        outline: 0;
-    }
+    @include radio;
 }
 
 input[type="submit"],

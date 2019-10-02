@@ -481,15 +481,16 @@ body {
 
 input[type="text"], input[type="tel"], input[type="number"], input[type="date"], input[type="email"], input[type="password"], input[type="url"], input[type="search"] {
   width: 100%;
+  height: auto;
   max-width: 100%;
   padding: 0.8em 1.18em 0.93em;
   border: 0.0625em solid var(--current-light-tertiary);
   color: var(--current-dark-secondary);
   border-radius: 0;
   background-color: var(--current-light-tertiary);
-  font-family: inherit;
-  -webkit-font-smoothing: initial;
-  line-height: 1; }
+  font: inherit;
+  line-height: 1;
+  -webkit-font-smoothing: initial; }
   input[type="text"]:focus, input[type="text"]:active, input[type="tel"]:focus, input[type="tel"]:active, input[type="number"]:focus, input[type="number"]:active, input[type="date"]:focus, input[type="date"]:active, input[type="email"]:focus, input[type="email"]:active, input[type="password"]:focus, input[type="password"]:active, input[type="url"]:focus, input[type="url"]:active, input[type="search"]:focus, input[type="search"]:active {
     outline: 0;
     box-shadow: none;
@@ -507,8 +508,8 @@ input[type="checkbox"] {
   border-radius: 0;
   width: 1.5rem !important;
   height: 1.5rem !important;
-  margin-left: 1rem;
-  margin-bottom: 1rem;
+  margin-left: var(--theme-spacing-tiny);
+  margin-bottom: var(--theme-spacing-tiny);
   background-color: var(--current-light-primary);
   cursor: pointer;
   -webkit-appearance: none; }
@@ -527,8 +528,8 @@ input[type="radio"] {
   border-radius: 0;
   width: 1.5rem !important;
   height: 1.5rem !important;
-  margin-left: 1rem;
-  margin-bottom: 1rem;
+  margin-left: var(--theme-spacing-tiny);
+  margin-bottom: var(--theme-spacing-tiny);
   background-color: var(--current-light-primary);
   cursor: pointer;
   -webkit-appearance: none;
@@ -620,15 +621,16 @@ input[disabled] {
 
 textarea {
   width: 100%;
+  height: auto;
   max-width: 100%;
   padding: 0.8em 1.18em 0.93em;
   border: 0.0625em solid var(--current-light-tertiary);
   color: var(--current-dark-secondary);
   border-radius: 0;
   background-color: var(--current-light-tertiary);
-  font-family: inherit;
-  -webkit-font-smoothing: initial;
+  font: inherit;
   line-height: 1;
+  -webkit-font-smoothing: initial;
   min-height: 7.5em;
   resize: vertical; }
   textarea:focus, textarea:active {
@@ -641,15 +643,16 @@ textarea {
 
 select {
   width: 100%;
+  height: auto;
   max-width: 100%;
   padding: 0.8em 1.18em 0.93em;
   border: 0.0625em solid var(--current-light-tertiary);
   color: var(--current-dark-secondary);
   border-radius: 0;
   background-color: var(--current-light-tertiary);
-  font-family: inherit;
-  -webkit-font-smoothing: initial;
+  font: inherit;
   line-height: 1;
+  -webkit-font-smoothing: initial;
   padding-left: 3.125em;
   background: var(--current-light-tertiary) url("assets/images/arrow-caret.svg") calc(100% - (100% - 17px)) center no-repeat;
   background-size: .56em .312em;
@@ -671,7 +674,7 @@ fieldset {
     color: var(--current-dark-secondary);
     padding: 0 !important; }
   fieldset > div {
-    margin-top: 1rem; }
+    margin-top: var(--theme-spacing-tiny); }
 
 .form-inline {
   display: flex; }
@@ -1753,9 +1756,13 @@ ul.menu a,
     display: block;
     font-size: 90%;
     color: var(--current-dark-secondary);
-    padding-bottom: 1rem;
+    font: inherit;
     margin: 0;
     cursor: pointer; }
+    .comment-form label:not(:first-child) {
+      margin-top: var(--theme-spacing-tiny); }
+    .comment-form label:not(:last-child) {
+      margin-bottom: var(--theme-spacing-tiny); }
 
 .comment-notes {
   font-size: 85%; }
@@ -4150,7 +4157,7 @@ h1.c-headline.has-larger-font-size > .editor-rich-text + .editor-rich-text {
 input[type="submit"],
 input[type="button"],
 button[type="submit"],
-button[type="reset"], .c-comments-toggle__label, .wp-block-button__link, .wp-block-button:not(.is-style-text) .wp-block-button__link {
+button[type="reset"], .c-comments-toggle__label, .wp-block-button__link, .wp-block-button:not(.is-style-text) .wp-block-button__link, .wpforms-container[class][class][class] .wpforms-submit[class] {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
   line-height: var(--current-line-height);
@@ -4329,6 +4336,171 @@ body:not(.has-loaded) .c-comments-toggle__checkbox + .c-comments-toggle__label ~
   transition-property: opacity; }
   html:not(.wf-active) .comments-area {
     opacity: 0; }
+
+.wpforms-container[class][class][class] {
+  margin-right: auto;
+  margin-left: auto; }
+  .wpforms-container[class][class][class] .wpforms-form > :not(:first-child),
+  .wpforms-container[class][class][class] .wpforms-field-container > :not(:first-child) {
+    --element-spacing: var(--theme-spacing);
+    margin-top: var(--element-spacing); }
+  .wpforms-container[class][class][class] .wpforms-form input,
+  .wpforms-container[class][class][class] .wpforms-form select,
+  .wpforms-container[class][class][class] .wpforms-form textarea {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    padding: 0.8em 1.18em 0.93em;
+    border: 0.0625em solid var(--current-light-tertiary);
+    color: var(--current-dark-secondary);
+    border-radius: 0;
+    background-color: var(--current-light-tertiary);
+    font: inherit;
+    line-height: 1;
+    -webkit-font-smoothing: initial; }
+    .wpforms-container[class][class][class] .wpforms-form input:focus, .wpforms-container[class][class][class] .wpforms-form input:active,
+    .wpforms-container[class][class][class] .wpforms-form select:focus,
+    .wpforms-container[class][class][class] .wpforms-form select:active,
+    .wpforms-container[class][class][class] .wpforms-form textarea:focus,
+    .wpforms-container[class][class][class] .wpforms-form textarea:active {
+      outline: 0;
+      box-shadow: none;
+      border-color: var(--current-dark-primary); }
+    .wpforms-container[class][class][class] .wpforms-form input[disabled],
+    .wpforms-container[class][class][class] .wpforms-form select[disabled],
+    .wpforms-container[class][class][class] .wpforms-form textarea[disabled] {
+      border-color: var(--current-dark-secondary);
+      background-color: var(--current-dark-secondary); }
+  .wpforms-container[class][class][class] .wpforms-form select {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    padding: 0.8em 1.18em 0.93em;
+    border: 0.0625em solid var(--current-light-tertiary);
+    color: var(--current-dark-secondary);
+    border-radius: 0;
+    background-color: var(--current-light-tertiary);
+    font: inherit;
+    line-height: 1;
+    -webkit-font-smoothing: initial;
+    padding-left: 3.125em;
+    background: var(--current-light-tertiary) url("assets/images/arrow-caret.svg") calc(100% - (100% - 17px)) center no-repeat;
+    background-size: .56em .312em;
+    -webkit-appearance: none; }
+    .wpforms-container[class][class][class] .wpforms-form select:focus, .wpforms-container[class][class][class] .wpforms-form select:active {
+      outline: 0;
+      box-shadow: none;
+      border-color: var(--current-dark-primary); }
+    .wpforms-container[class][class][class] .wpforms-form select[disabled] {
+      border-color: var(--current-dark-secondary);
+      background-color: var(--current-dark-secondary); }
+  .wpforms-container[class][class][class] .wpforms-form input[type="checkbox"] {
+    position: relative;
+    right: 0;
+    float: right;
+    clear: right;
+    border: 0.0625em solid var(--current-light-tertiary);
+    border-radius: 0;
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    margin-left: var(--theme-spacing-tiny);
+    margin-bottom: var(--theme-spacing-tiny);
+    background-color: var(--current-light-primary);
+    cursor: pointer;
+    -webkit-appearance: none; }
+    .wpforms-container[class][class][class] .wpforms-form input[type="checkbox"]:checked {
+      border-color: var(--current-dark-secondary);
+      background: var(--current-light-primary) url("assets/images/checkbox.svg") center center no-repeat;
+      background-size: 100% 100%;
+      outline: 0; }
+  .wpforms-container[class][class][class] .wpforms-form input[type="radio"] {
+    position: relative;
+    right: 0;
+    float: right;
+    clear: right;
+    border: 0.0625em solid var(--current-light-tertiary);
+    border-radius: 0;
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    margin-left: var(--theme-spacing-tiny);
+    margin-bottom: var(--theme-spacing-tiny);
+    background-color: var(--current-light-primary);
+    cursor: pointer;
+    -webkit-appearance: none;
+    border-radius: 50%; }
+    .wpforms-container[class][class][class] .wpforms-form input[type="radio"]:checked {
+      border: 0.43em solid var(--current-dark-secondary);
+      outline: 0; }
+  .wpforms-container[class][class][class] .wpforms-field-row {
+    max-width: none; }
+  .wpforms-container[class][class][class] .wpforms-field {
+    padding: 0; }
+  .wpforms-container[class][class][class] .wpforms-field-label,
+  .wpforms-container[class][class][class] .wpforms-field-sublabel,
+  .wpforms-container[class][class][class] .wpforms-field-label-inline {
+    color: var(--current-dark-secondary);
+    font: inherit;
+    margin: 0;
+    cursor: pointer; }
+    .wpforms-container[class][class][class] .wpforms-field-label:not(:first-child),
+    .wpforms-container[class][class][class] .wpforms-field-sublabel:not(:first-child),
+    .wpforms-container[class][class][class] .wpforms-field-label-inline:not(:first-child) {
+      margin-top: var(--theme-spacing-tiny); }
+    .wpforms-container[class][class][class] .wpforms-field-label:not(:last-child),
+    .wpforms-container[class][class][class] .wpforms-field-sublabel:not(:last-child),
+    .wpforms-container[class][class][class] .wpforms-field-label-inline:not(:last-child) {
+      margin-bottom: var(--theme-spacing-tiny); }
+  .wpforms-container[class][class][class] .wpforms-field-sublabel {
+    font-size: calc( 0.7 * var( --current-font-size )); }
+  .wpforms-container[class][class][class] .wpforms-submit[class][class][class] {
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+    --theme-button-text-color: var(--current-light-primary);
+    --theme-button-background-color: var(--current-dark-primary);
+    --theme-button-border-color: var(--current-dark-primary);
+    --theme-button-hover-text-color: var(--current-dark-primary);
+    --theme-button-hover-background-color: transparent;
+    --theme-button-hover-border-color: var(--current-dark-primary);
+    --theme-button-border-width: 2px;
+    --theme-button-border-style: solid;
+    --theme-button-border-radius: 0;
+    --theme-button-x-padding: 1.5em;
+    --theme-button-y-padding: 0.75em;
+    --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
+    --theme-button-transition-duration: 0.4s;
+    --theme-button-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
+    --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
+    --theme-button-hover-transition: var(--theme-button-transition);
+    --current-button-background-color: var(--theme-button-background-color);
+    --current-button-border-color: var(--theme-button-border-color);
+    --current-button-text-color: var(--theme-button-text-color);
+    --current-button-transition: var(--theme-button-transition);
+    padding: var(--theme-button-padding);
+    border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
+    border-radius: var(--theme-button-border-radius);
+    background-color: var(--current-button-background-color);
+    color: var(--current-button-text-color);
+    transition: var(--current-button-transition);
+    background-color: transparent;
+    background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
+    background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
+    background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+    .wpforms-container[class][class][class] .wpforms-submit[class][class][class]:hover {
+      --current-button-background-color: var(--theme-button-hover-background-color);
+      --current-button-border-color: var(--theme-button-hover-border-color);
+      --current-button-text-color: var(--theme-button-hover-text-color);
+      --current-button-transition: var(--theme-button-hover-transition); }
+    .wpforms-container[class][class][class] .wpforms-submit[class][class][class]:hover {
+      background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
+  .wpforms-container[class][class][class] .wpforms-field-radio li,
+  .wpforms-container[class][class][class] .wpforms-field-checkbox li {
+    display: flex;
+    align-items: center; }
+  .wpforms-container[class][class][class].half .wpforms-field {
+    width: 50%; }
+  .wpforms-container[class][class][class].half .wpforms-field-textarea {
+    width: 100%; }
 
 /* 6. Overwrites */
 /* Embeds */
