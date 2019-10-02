@@ -3,7 +3,7 @@ import App from './components/app';
 
 function initialize() {
 	new App();
-	$( 'body' ).removeClass( 'is-loading' );
+	$( 'body' ).removeClass( 'is-loading' ).addClass( 'has-loaded' );
 }
 
 $(function () {

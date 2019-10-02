@@ -99,7 +99,7 @@ export default class App {
 	}
 
 	checkWindowLocationComments() {
-		if (window.location.href.indexOf("#comment") === -1) {
+		if ( window.location.href.indexOf( "#comment" ) === -1 ) {
 			$( ".c-comments-toggle__checkbox" ).prop( "checked", false );
 		}
 	}

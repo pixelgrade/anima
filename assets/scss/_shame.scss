@@ -64,3 +64,36 @@ html:not(.wf-active) {
 .woocommerce-ordering {
     @include avoid-fout-opacity;
 }
+
+// Nova Blocks media card
+.novablocks-media__image {
+    background-color: var(--sm-light-tertiary);
+
+    .novablocks-media.block-is-moderate & {
+        background-color: var(--sm-light-primary);
+    }
+}
+
+.novablocks-media__inner-container > * {
+    @include avoid-fout-opacity;
+}
+
+.entry-content,
+[class*="__inner-container"] {
+    > :not(.wp-block-group):not(.novablocks-media) {
+        @include avoid-fout-opacity;
+    }
+}
+
+// tiny hack for cooler loading of novablocks media
+body:not(.wf-active) .novablocks-media .wp-block-group__inner-container > .wp-block {
+    opacity: 1;
+}
+
+body:not(.has-loaded) .c-comments-toggle__checkbox + .c-comments-toggle__label ~ * {
+    display: none;
+}
+
+.comments-area {
+    @include avoid-fout-opacity;
+}

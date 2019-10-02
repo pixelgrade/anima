@@ -2527,7 +2527,7 @@ var app_App = function () {
 
 function scripts_initialize() {
 	new app();
-	external_jQuery_default()('body').removeClass('is-loading');
+	external_jQuery_default()('body').removeClass('is-loading').addClass('has-loaded');
 }
 
 external_jQuery_default()(function () {
