@@ -6,6 +6,7 @@ class GlobalService {
 		this.props = {};
 		this.renderCallbacks = [];
 		this.updateCallbacks = [];
+		this.observeCallbacks = [];
 		this.frameRendered = true;
 		const updateProps = this.updateProps.bind( this );
 		const updateScroll = this.updateScroll.bind( this );
@@ -24,7 +25,13 @@ class GlobalService {
 			wp.customize.bind( 'change', updateProps );
 		}
 
-		this.observe();
+		this.observe( this.observeCallback.bind( this ) );
+	}
+
+	observeCallback() {
+		this.observeCallbacks.forEach( fn => {
+			fn();
+		});
 	}
 
 	observe( callback ) {
@@ -32,9 +39,8 @@ class GlobalService {
 			return;
 		}
 
-		const updateProps = debounce( this.updateProps.bind( this ), 10 );
-		const observer = new MutationObserver( ( mutationList ) => {
-			updateProps();
+		const observer = new MutationObserver( () => {
+			callback( ...arguments );
 		} );
 
 		observer.observe( document.body, {
@@ -49,7 +55,6 @@ class GlobalService {
 
 	renderLoop() {
 		if ( ! this.frameRendered ) {
-			console.log( 'render' );
 			this.renderStuff();
 			this.frameRendered = true;
 		}
@@ -100,8 +105,6 @@ class GlobalService {
 	}
 
 	updateProps( force = false ) {
-		console.log( 'updateprops' );
-
 		const body = document.body;
 		const html = document.documentElement;
 		const bodyScrollHeight = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight );
