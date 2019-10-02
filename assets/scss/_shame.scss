@@ -15,3 +15,52 @@ iframe.instagram-media {
 .is-style-lead {
     @include apply-font(lead);
 }
+
+body {
+    transition: var(--theme-transition);
+    transition-property: opacity;
+}
+
+body.is-loading {
+    opacity: 0;
+}
+
+html:not(.wf-active) {
+    pointer-events: none;
+}
+
+@mixin avoid-fout-color {
+    transition: var(--theme-transition);
+    transition-property: color;
+
+    html:not(.wf-active) & {
+        color: transparent;
+    }
+}
+
+@mixin avoid-fout-opacity {
+    transition: var(--theme-transition);
+    transition-property: opacity;
+
+    html:not(.wf-active) & {
+        opacity: 0;
+    }
+}
+
+// WooCommerce archives cards
+.wc-block-grid__product-onsale {
+    @include avoid-fout-color;
+}
+
+.wc-block-grid__product-title,
+.wc-block-grid__product-price {
+    @include avoid-fout-opacity;
+}
+
+// WooCommerce archives header
+.woocommerce-products-header,
+.woocommerce-notices-wrapper,
+.woocommerce-result-count,
+.woocommerce-ordering {
+    @include avoid-fout-opacity;
+}

@@ -2414,6 +2414,7 @@ var app_App = function () {
 		this.initializeNavbar();
 		this.initializePromoBar();
 		this.checkWindowLocationComments();
+		this.initializeImages();
 
 		globalService.registerRender(this.render.bind(this));
 	}
@@ -2444,6 +2445,14 @@ var app_App = function () {
 			});
 
 			header.render(overlap);
+		}
+	}, {
+		key: 'initializeImages',
+		value: function initializeImages() {
+			external_jQuery_default()('body').imagesLoaded().progress(function (instance, image) {
+				var className = image.isLoaded ? 'is-loaded' : 'is-broken';
+				external_jQuery_default()(image.img).addClass(className);
+			});
 		}
 	}, {
 		key: 'initializeHero',
@@ -2518,6 +2527,7 @@ var app_App = function () {
 
 function scripts_initialize() {
 	new app();
+	external_jQuery_default()('body').removeClass('is-loading');
 }
 
 external_jQuery_default()(function () {
@@ -2529,6 +2539,10 @@ external_jQuery_default()(function () {
 	} else {
 		scripts_initialize();
 	}
+
+	external_jQuery_default()(window).on('beforeunload', function () {
+		external_jQuery_default()('body').addClass('is-loading');
+	});
 });
 
 /***/ })

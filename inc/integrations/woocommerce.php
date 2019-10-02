@@ -358,3 +358,23 @@ function rosa2_product_category_classes($class) {
 
     return $class;
 }
+
+function rosa2_product_catalog_image_aspect_ratio() {
+    if ( function_exists( 'wc_get_image_size' ) ) {
+        $size = wc_get_image_size( 'thumbnail' );
+    } else {
+        $size = array(
+            'width' => 300,
+            'height' => 300
+        );
+    }
+
+
+	$css = '' .
+    '.wc-block-grid__product-link {
+        --current-aspect-ratio: ' . $size['width'] / $size['height'] . ';' .
+    '}';
+
+	wp_add_inline_style( 'rosa2-woocommerce', $css );
+}
+add_action( 'wp_enqueue_scripts', 'rosa2_product_catalog_image_aspect_ratio' );

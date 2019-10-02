@@ -70,10 +70,35 @@
 
 }
 
+
 .wc-block-grid__product-link {
   display: block;
-
   text-decoration: none;
+
+  @supports (--css: variables) {
+      --current-aspect-ratio: 1;
+      position: relative;
+
+      &,
+      &:before {
+        padding-top: calc( 100% / var(--current-aspect-ratio) );
+      }
+
+      &:before,
+      > img {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        display: block;
+        width: 100%;
+      }
+
+      &:before {
+        content: "";
+        background-color: var(--theme-light-tertiary);
+      }
+    }
 }
 
 .woocommerce-loop-product__link {
