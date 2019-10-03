@@ -180,7 +180,7 @@ input[type="button"],
 button[type="submit"],
 button[type="reset"] {
     @include button;
-    @include button-fill;
+    @include button-fill(false);
 }
 
 input[type="file"] {
