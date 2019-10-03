@@ -62,7 +62,7 @@
   will-change: transform;
   backface-visibility: hidden;
 
-  &:after {
+  &:before {
     content: '';
     position: absolute;
     left: 0;
@@ -89,13 +89,13 @@
 
 @mixin button-fill($pseudo: true) {
   @include button-fill-base($pseudo);
-  &:after {
+  &:before {
     transform: scale3d(1,1,1);
     transform-origin: right;
     background-color: var(--theme-button-background-color);
   }
 
-  &:hover:after {
+  &:hover:before {
     transform: scale3d(0,1,1);
   }
 
@@ -107,7 +107,7 @@
 @mixin button-fill-reverse($pseudo: true) {
   @include button-fill-base($pseudo);
   --current-button-text-color: var(--theme-button-hover-text-color);
-  &:after {
+  &:before {
     transform: scale3d(0,1,1);
     transform-origin: left;
     background-color: var(--theme-button-background-color);
@@ -115,7 +115,7 @@
 
   &:hover {
     --current-button-text-color: var(--theme-button-text-color);
-    &:after {
+    &:before {
       transform: scale3d(1,1,1);
     }
   }
@@ -137,26 +137,28 @@
 }
 
 @mixin button-text-arrow {
-  position: absolute;
-  top: 50%;
-  right: 0;
+  @supports ( ( mask-clip: initial ) or ( -webkit-mask-clip: initial ) ) {
+    position: absolute;
+    top: 50%;
+    right: 0;
 
-  display: inline-block;
-  width: #{$theme-button-text-arrow-size};
-  height: #{$theme-button-text-arrow-size};
+    display: inline-block;
+    width: #{$theme-button-text-arrow-size};
+    height: #{$theme-button-text-arrow-size};
 
-  mask: url('assets/images/icon-arrow.svg') no-repeat 50% 50%;
-  -webkit-mask: url('assets/images/icon-arrow.svg') no-repeat 50% 50%;
-  mask-size: cover;
-  -webkit-mask-size: cover;
+    mask: url('assets/images/icon-arrow.svg') no-repeat 50% 50%;
+    mask-size: cover;
 
-  background-color: currentColor;
-  vertical-align: text-bottom;
+    -webkit-mask: url('assets/images/icon-arrow.svg') no-repeat 50% 50%;
+    -webkit-mask-size: cover;
+    background-color: currentColor;
 
-  transform: translate(0, -50%);
+    vertical-align: text-bottom;
+    transform: translate(0, -50%);
 
-  transition: var(--theme-button-transition);
-  transition-property: opacity, transform;
+    transition: var(--theme-button-transition);
+    transition-property: opacity, transform;
+  }
 }
 
 @mixin button-text {
