@@ -3,6 +3,7 @@ import $ from 'jquery';
 import { insideHalf, reloadRellax, debounce } from "../utils";
 import GlobalService from './globalService';
 import Hero from './hero';
+import CommentsArea from './commentsArea';
 import Header from './header';
 import PromoBar from "./promo-bar";
 import Navbar from "./navbar";
@@ -14,21 +15,8 @@ export default class App {
 		this.initializeHeader();
 		this.initializeNavbar();
 		this.initializePromoBar();
-		this.checkWindowLocationComments();
-
-		const initializeImages = this.initializeImages.bind( this );
-		initializeImages();
-
-		GlobalService.registerObserverCallback( function( mutationList ) {
-			mutationList.forEach( mutationRecord => {
-				mutationRecord.addedNodes.forEach( node => {
-					const nodeName = node.nodeName.toLowerCase();
-					if ( 'img' === nodeName || node.childNodes.length ) {
-						initializeImages( node );
-					}
-				} );
-			} );
-		} );
+		this.initializeImages();
+		this.initializeCommentsArea();
 
 		GlobalService.registerRender( this.render.bind( this ) );
 	}
@@ -57,7 +45,23 @@ export default class App {
 		header.render( overlap );
 	}
 
-	initializeImages( container = document.body ) {
+	initializeImages() {
+		const showLoadedImages = this.showLoadedImages.bind( this );
+		showLoadedImages();
+
+		GlobalService.registerObserverCallback( function( mutationList ) {
+			mutationList.forEach( mutationRecord => {
+				mutationRecord.addedNodes.forEach( node => {
+					const nodeName = node.nodeName.toLowerCase();
+					if ( 'img' === nodeName || node.childNodes.length ) {
+						showLoadedImages( node );
+					}
+				} );
+			} );
+		} );
+	}
+
+	showLoadedImages( container = document.body ) {
 		$( container ).imagesLoaded().progress( ( instance, image ) => {
 			const className = image.isLoaded ? 'is-loaded' : 'is-broken';
 			$( image.img ).addClass( className );
@@ -72,10 +76,20 @@ export default class App {
 		this.firstHero = heroElementsArray[0];
 	}
 
-	initializeHeader() {
-		const headerElement = $( '.site-header' ).get(0);
+	initializeCommentsArea() {
+		const $commentsArea = $( '.comments-area' );
 
-		this.header = new Header( headerElement );
+		if ( $commentsArea.length ) {
+			this.commentsArea = new CommentsArea( $commentsArea.get(0) );
+		}
+	}
+
+	initializeHeader() {
+		const $header = $( '.site-header' );
+
+		if ( $header.length ) {
+			this.header = new Header( $header.get(0) );
+		}
 	}
 
 	initializeNavbar() {
@@ -109,11 +123,5 @@ export default class App {
 				reloadRellax( obj );
 			} );
 		} );
-	}
-
-	checkWindowLocationComments() {
-		if ( window.location.href.indexOf( "#comment" ) === -1 ) {
-			$( ".c-comments-toggle__checkbox" ).prop( "checked", false );
-		}
 	}
 }

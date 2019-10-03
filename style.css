@@ -1629,6 +1629,13 @@ ul.menu a,
     --element-spacing: var(--theme-spacing-normal);
     margin-top: var(--element-spacing); }
 
+.comments-area__wrap {
+  overflow: hidden; }
+
+.comments-area__content > :not(:first-child) {
+  --element-spacing: var(--theme-spacing-normal);
+  margin-top: var(--element-spacing); }
+
 .c-comments-toggle__label {
   display: inline-block;
   text-decoration: none;
@@ -1837,10 +1844,6 @@ label.subscribe-label.subscribe-label {
     list-style: none; }
   .comment-list > li + li {
     margin-top: var(--theme-spacing-normal); }
-
-.comment-list,
-.comment-respond {
-  margin-top: var(--theme-spacing-normal); }
 
 .comment-list + .comment-respond {
   margin-top: var(--theme-spacing-normal); }
