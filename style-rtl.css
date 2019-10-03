@@ -3132,7 +3132,12 @@ span.page-numbers {
 
 /* Nova Blocks */
 .novablocks-media__inner-container {
-  --theme-wrapper-sides-spacing: var(--novablocks-media-content-padding); }
+  --theme-wrapper-sides-spacing: 0; }
+  .novablocks-media--blog .novablocks-media__inner-container {
+    --theme-wrapper-sides-spacing: var(--novablocks-media-content-padding); }
+  @media only screen and (min-width: 1000px) {
+    .novablocks-media__inner-container {
+      --theme-wrapper-sides-spacing: var(--novablocks-media-content-padding); } }
 
 .block-is-moderate + .block-is-moderate,
 .block-is-highlighted + .block-is-highlighted {
