@@ -2,8 +2,7 @@
   "name": "rosa2",
   "scripts": {
     "dev": "cross-env webpack --watch & gulp dev",
-    "prevuild": "cross-env NODE_ENV=production webpack -p & gulp compile:styles",
-    "build": "gulp zip"
+    "build": "cross-env NODE_ENV=production webpack -p && gulp compile:styles && gulp zip"
   },
   "devDependencies": {
     "@wordpress/babel-preset-default": "^1.2.0",
