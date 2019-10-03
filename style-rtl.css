@@ -490,7 +490,8 @@ input[type="text"], input[type="tel"], input[type="number"], input[type="date"],
   background-color: var(--current-light-tertiary);
   font: inherit;
   line-height: 1.5;
-  -webkit-font-smoothing: initial; }
+  -webkit-font-smoothing: initial;
+  -webkit-appearance: none; }
   input[type="text"]:focus, input[type="text"]:active, input[type="tel"]:focus, input[type="tel"]:active, input[type="number"]:focus, input[type="number"]:active, input[type="date"]:focus, input[type="date"]:active, input[type="email"]:focus, input[type="email"]:active, input[type="password"]:focus, input[type="password"]:active, input[type="url"]:focus, input[type="url"]:active, input[type="search"]:focus, input[type="search"]:active {
     outline: 0;
     box-shadow: none;
@@ -631,6 +632,7 @@ textarea {
   font: inherit;
   line-height: 1.5;
   -webkit-font-smoothing: initial;
+  -webkit-appearance: none;
   min-height: 7.5em;
   resize: vertical; }
   textarea:focus, textarea:active {
@@ -653,6 +655,7 @@ select {
   font: inherit;
   line-height: 1.5;
   -webkit-font-smoothing: initial;
+  -webkit-appearance: none;
   padding-left: 3.125em;
   background-color: var(--current-light-tertiary);
   background-image: url("assets/images/arrow-caret.svg");
@@ -930,6 +933,22 @@ ul.menu,
 .site-header .menu-item-has-children,
 .site-header .page_item_has_children {
   position: relative; }
+  .site-header .menu-item-has-children .menu-item:after,
+  .site-header .page_item_has_children .menu-item:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--current-light-secondary);
+    opacity: 0;
+    transition: opacity 0.15s cubic-bezier(0.42, 0, 0.58, 1);
+    z-index: -1; }
+  .site-header .menu-item-has-children .menu-item:hover:after, .site-header .menu-item-has-children .menu-item:focus-within:after,
+  .site-header .page_item_has_children .menu-item:hover:after,
+  .site-header .page_item_has_children .menu-item:focus-within:after {
+    opacity: .2; }
   .site-header .menu-item-has-children[class] > a,
   .site-header .page_item_has_children[class] > a {
     display: flex;
@@ -956,26 +975,7 @@ ul.menu,
     .site-header .page_item_has_children:focus-within > .children {
       transform: translateZ(0);
       opacity: 1;
-      pointer-events: auto; }
-    .site-header .menu-item-has-children .menu-item-has-children .menu-item:after,
-    .site-header .menu-item-has-children .page_item_has_children .menu-item:after,
-    .site-header .page_item_has_children .menu-item-has-children .menu-item:after,
-    .site-header .page_item_has_children .page_item_has_children .menu-item:after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      background-color: var(--current-light-secondary);
-      opacity: 0;
-      transition: opacity 0.15s cubic-bezier(0.42, 0, 0.58, 1);
-      z-index: -1; }
-    .site-header .menu-item-has-children .menu-item-has-children .menu-item:hover:after,
-    .site-header .menu-item-has-children .page_item_has_children .menu-item:hover:after,
-    .site-header .page_item_has_children .menu-item-has-children .menu-item:hover:after,
-    .site-header .page_item_has_children .page_item_has_children .menu-item:hover:after {
-      opacity: .2; } }
+      pointer-events: auto; } }
   @media not screen and (min-width: 1000px) {
     .site-header .menu-item-has-children:not(.hover) > .sub-menu,
     .site-header .menu-item-has-children:not(.hover) > .children,
@@ -4373,7 +4373,8 @@ body:not(.has-loaded) .c-comments-toggle__checkbox + .c-comments-toggle__label ~
     background-color: var(--current-light-tertiary);
     font: inherit;
     line-height: 1.5;
-    -webkit-font-smoothing: initial; }
+    -webkit-font-smoothing: initial;
+    -webkit-appearance: none; }
     .wpforms-container[class][class][class] .wpforms-form input:focus, .wpforms-container[class][class][class] .wpforms-form input:active,
     .wpforms-container[class][class][class] .wpforms-form select:focus,
     .wpforms-container[class][class][class] .wpforms-form select:active,
@@ -4399,6 +4400,7 @@ body:not(.has-loaded) .c-comments-toggle__checkbox + .c-comments-toggle__label ~
     font: inherit;
     line-height: 1.5;
     -webkit-font-smoothing: initial;
+    -webkit-appearance: none;
     padding-left: 3.125em;
     background-color: var(--current-light-tertiary);
     background-image: url("assets/images/arrow-caret.svg");
