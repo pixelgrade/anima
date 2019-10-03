@@ -46,8 +46,9 @@ $input-horizontal-spacing: var(--theme-spacing-tiny) !default; // Checkboxes and
     background-color: $input-background-color;
 
     font: inherit;
-    line-height: 1;
+    line-height: 1.5;
     -webkit-font-smoothing: initial;
+    -webkit-appearance: none;
 
     &:focus,
     &:active {
@@ -79,7 +80,10 @@ $input-horizontal-spacing: var(--theme-spacing-tiny) !default; // Checkboxes and
 
     padding-right: 3.125em;
 
-    background: $input-background-color url('assets/images/arrow-caret.svg') calc(100% - 17px) center no-repeat;
+    background-color: var(--current-light-tertiary);
+    background-image: url("assets/images/arrow-caret.svg");
+    background-position: calc(100% - 17px) center;
+    background-repeat: no-repeat;
     background-size: .56em .312em;
 
     -webkit-appearance: none;
@@ -176,7 +180,7 @@ input[type="button"],
 button[type="submit"],
 button[type="reset"] {
     @include button;
-    @include button-fill;
+    @include button-fill(false);
 }
 
 input[type="file"] {

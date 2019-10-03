@@ -63,13 +63,21 @@
         }
       }
     }
+    .ot-dtp-picker-form:after {
+      clear: both;
+      content: "";
+      display: block;
+    }
   }
   &.novablocks-opentable__standard[class] {
-    .ot-powered-by {
+    padding: var(--theme-spacing-small);
 
+    .ot-party-size-picker {
+      margin-bottom: var(--theme-spacing-normal);
     }
   }
 }
+
 
 .ot-dtp-picker-selector-link {
   text-decoration: none;

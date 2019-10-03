@@ -216,8 +216,20 @@
   .site-header,
   .entry-header,
   .site-footer,
-  .entry-thumbnail {
+  .entry-thumbnail,
+  .site-header--mobile,
+  .c-menu-toggle {
     display: none;
+  }
+
+  #page {
+    padding-top: 0 !important;
+  }
+
+  .site-content {
+    @include specific(3) {
+      padding-top: 0;
+    }
   }
 }
 
