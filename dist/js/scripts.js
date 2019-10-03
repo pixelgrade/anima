@@ -1524,6 +1524,7 @@ var assign_default = /*#__PURE__*/__webpack_require__.n(object_assign);
 
 
 
+
 var globalService_GlobalService = function () {
 	function GlobalService() {
 		classCallCheck_default()(this, GlobalService);
@@ -1566,7 +1567,7 @@ var globalService_GlobalService = function () {
 	createClass_default()(GlobalService, [{
 		key: 'observeCallback',
 		value: function observeCallback() {
-			$.each(this.observeCallbacks, function (fn) {
+			external_jQuery_default.a.each(this.observeCallbacks, function (i, fn) {
 				fn.apply(undefined, arguments);
 			});
 		}
@@ -1610,7 +1611,7 @@ var globalService_GlobalService = function () {
 	}, {
 		key: 'renderStuff',
 		value: function renderStuff() {
-			$.each(this.renderCallbacks, function (fn) {
+			external_jQuery_default.a.each(this.renderCallbacks, function (i, fn) {
 				fn.apply(undefined, arguments);
 			});
 		}
@@ -1624,7 +1625,7 @@ var globalService_GlobalService = function () {
 	}, {
 		key: 'updateStuff',
 		value: function updateStuff() {
-			$.each(this.updateCallbacks, function (fn) {
+			external_jQuery_default.a.each(this.updateCallbacks, function (i, fn) {
 				fn.apply(undefined, arguments);
 			});
 		}
@@ -2662,8 +2663,8 @@ var app_App = function () {
 			showLoadedImages();
 
 			globalService.registerObserverCallback(function (mutationList) {
-				external_jQuery_default.a.each(mutationList, function (mutationRecord) {
-					external_jQuery_default.a.each(mutationRecord.addedNodes, function (node) {
+				external_jQuery_default.a.each(mutationList, function (i, mutationRecord) {
+					external_jQuery_default.a.each(mutationRecord.addedNodes, function (j, node) {
 						var nodeName = node.nodeName && node.nodeName.toLowerCase();
 						if ('img' === nodeName || node.childNodes.length) {
 							showLoadedImages(node);

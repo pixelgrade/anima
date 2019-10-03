@@ -50,8 +50,8 @@ export default class App {
 		showLoadedImages();
 
 		GlobalService.registerObserverCallback( function( mutationList ) {
-			$.each( mutationList, mutationRecord => {
-				$.each( mutationRecord.addedNodes, node => {
+			$.each( mutationList, ( i, mutationRecord ) => {
+				$.each( mutationRecord.addedNodes, ( j, node ) => {
 					const nodeName = node.nodeName && node.nodeName.toLowerCase();
 					if ( 'img' === nodeName || node.childNodes.length ) {
 						showLoadedImages( node );

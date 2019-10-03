@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import { debounce } from '../utils';
 
 class GlobalService {
@@ -39,7 +40,7 @@ class GlobalService {
 	}
 
 	observeCallback() {
-		$.each(this.observeCallbacks, function( fn ) {
+		$.each(this.observeCallbacks, function( i, fn ) {
 			fn( ...arguments );
 		});
 	}
@@ -78,7 +79,7 @@ class GlobalService {
 	}
 
 	renderStuff() {
-		$.each( this.renderCallbacks, function( fn ) {
+		$.each( this.renderCallbacks, function( i, fn ) {
 			fn( ...arguments );
 		} );
 	}
@@ -90,7 +91,7 @@ class GlobalService {
 	}
 
 	updateStuff() {
-		$.each( this.updateCallbacks, function( fn ) {
+		$.each( this.updateCallbacks, function( i, fn ) {
 			fn( ...arguments );
 		} );
 	}
