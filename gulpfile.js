@@ -1,5 +1,3 @@
-require( './tasks/sass' );
-
 var gulp = require( 'gulp' ),
 	map = require( 'map-stream' ),
 	del = require( 'del' ),
@@ -8,14 +6,10 @@ var gulp = require( 'gulp' ),
 var HubRegistry = require('gulp-hub');
 
 /* load some files into the registry */
-var hub = new HubRegistry(['tasks/*.js']);
+var hub = new HubRegistry( ['tasks/*.js'] );
 
 /* tell gulp to use the tasks just loaded */
-gulp.registry(hub);
+gulp.registry( hub );
 
-function zip(cb) {
-	return gulp.series( 'build:folder', 'build:fix', 'build:zip' )(cb);
-}
-zip.description = 'Creates the zip file';
-
-gulp.task( 'zip', zip );
+gulp.task( 'zip', gulp.series( 'build:folder', 'build:fix', 'build:zip' ) );
+gulp.task( 'dev', gulp.parallel( 'watch:styles', 'server' ) );

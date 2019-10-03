@@ -16,16 +16,15 @@ function styles( cb ) {
 }
 
 function stylesRTL( cb ) {
-	return gulp.src( ['style.css', 'woocommerce.css'] )
+	return gulp.src( [ 'style.css', 'woocommerce.css' ] )
 	           .pipe( rtlcss() )
 	           .pipe( rename( function( path ) { path.basename += "-rtl"; } ) )
 	           .pipe( gulp.dest( '.' ) );
 }
-
 stylesRTL.description = 'Generate style-rtl.css file based on style.css';
 
 function watch( cb ) {
-	gulp.watch( ['./assets/scss/**/*.scss'], compile );
+	gulp.watch( [ './assets/scss/**/*.scss' ], compile );
 }
 
 const compile = gulp.series( styles, stylesRTL );
