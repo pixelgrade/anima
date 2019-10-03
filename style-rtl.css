@@ -489,7 +489,7 @@ input[type="text"], input[type="tel"], input[type="number"], input[type="date"],
   border-radius: 0;
   background-color: var(--current-light-tertiary);
   font: inherit;
-  line-height: 1;
+  line-height: 1.5;
   -webkit-font-smoothing: initial; }
   input[type="text"]:focus, input[type="text"]:active, input[type="tel"]:focus, input[type="tel"]:active, input[type="number"]:focus, input[type="number"]:active, input[type="date"]:focus, input[type="date"]:active, input[type="email"]:focus, input[type="email"]:active, input[type="password"]:focus, input[type="password"]:active, input[type="url"]:focus, input[type="url"]:active, input[type="search"]:focus, input[type="search"]:active {
     outline: 0;
@@ -629,7 +629,7 @@ textarea {
   border-radius: 0;
   background-color: var(--current-light-tertiary);
   font: inherit;
-  line-height: 1;
+  line-height: 1.5;
   -webkit-font-smoothing: initial;
   min-height: 7.5em;
   resize: vertical; }
@@ -651,10 +651,13 @@ select {
   border-radius: 0;
   background-color: var(--current-light-tertiary);
   font: inherit;
-  line-height: 1;
+  line-height: 1.5;
   -webkit-font-smoothing: initial;
   padding-left: 3.125em;
-  background: var(--current-light-tertiary) url("assets/images/arrow-caret.svg") calc(100% - (100% - 17px)) center no-repeat;
+  background-color: var(--current-light-tertiary);
+  background-image: url("assets/images/arrow-caret.svg");
+  background-position: calc(100% - (100% - 17px)) center;
+  background-repeat: no-repeat;
   background-size: .56em .312em;
   -webkit-appearance: none; }
   select:focus, select:active {
@@ -4369,7 +4372,7 @@ body:not(.has-loaded) .c-comments-toggle__checkbox + .c-comments-toggle__label ~
     border-radius: 0;
     background-color: var(--current-light-tertiary);
     font: inherit;
-    line-height: 1;
+    line-height: 1.5;
     -webkit-font-smoothing: initial; }
     .wpforms-container[class][class][class] .wpforms-form input:focus, .wpforms-container[class][class][class] .wpforms-form input:active,
     .wpforms-container[class][class][class] .wpforms-form select:focus,
@@ -4394,10 +4397,13 @@ body:not(.has-loaded) .c-comments-toggle__checkbox + .c-comments-toggle__label ~
     border-radius: 0;
     background-color: var(--current-light-tertiary);
     font: inherit;
-    line-height: 1;
+    line-height: 1.5;
     -webkit-font-smoothing: initial;
     padding-left: 3.125em;
-    background: var(--current-light-tertiary) url("assets/images/arrow-caret.svg") calc(100% - (100% - 17px)) center no-repeat;
+    background-color: var(--current-light-tertiary);
+    background-image: url("assets/images/arrow-caret.svg");
+    background-position: calc(100% - (100% - 17px)) center;
+    background-repeat: no-repeat;
     background-size: .56em .312em;
     -webkit-appearance: none; }
     .wpforms-container[class][class][class] .wpforms-form select:focus, .wpforms-container[class][class][class] .wpforms-form select:active {
