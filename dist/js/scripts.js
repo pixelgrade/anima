@@ -2010,6 +2010,69 @@ var hero_Hero = function () {
 }();
 
 /* harmony default export */ var components_hero = (hero_Hero);
+// CONCATENATED MODULE: ./src/components/commentsArea.js
+
+
+
+
+var commentsArea_CommentsArea = function () {
+	function CommentsArea(element) {
+		classCallCheck_default()(this, CommentsArea);
+
+		this.$element = external_jQuery_default()(element);
+		this.$checkbox = this.$element.find('.c-comments-toggle__checkbox');
+		this.$content = this.$element.find('.comments-area__content');
+		this.$contentWrap = this.$element.find('.comments-area__wrap');
+
+		// overwrite CSS that hides the comments area content
+		this.$contentWrap.css('display', 'block');
+
+		this.$checkbox.on('change', this.onChange.bind(this));
+
+		this.checkWindowLocationComments();
+	}
+
+	createClass_default()(CommentsArea, [{
+		key: 'onChange',
+		value: function onChange() {
+			this.toggle(false);
+		}
+	}, {
+		key: 'toggle',
+		value: function toggle() {
+			var instant = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+			var $contentWrap = this.$contentWrap;
+			var isChecked = this.$checkbox.prop('checked');
+			var newHeight = isChecked ? this.$content.outerHeight() : 0;
+
+			if (instant) {
+				$contentWrap.css('height', newHeight);
+			} else {
+				TweenMax.to($contentWrap, .4, {
+					height: newHeight,
+					onComplete: function onComplete() {
+						if (isChecked) {
+							$contentWrap.css('height', '');
+						}
+					}
+				});
+			}
+		}
+	}, {
+		key: 'checkWindowLocationComments',
+		value: function checkWindowLocationComments() {
+			if (window.location.href.indexOf('#comment') === -1) {
+				this.$checkbox.prop('checked', false);
+				this.toggle(true);
+			}
+		}
+	}]);
+
+	return CommentsArea;
+}();
+
+/* harmony default export */ var commentsArea = (commentsArea_CommentsArea);
 // CONCATENATED MODULE: ./src/components/header.js
 
 
@@ -2549,6 +2612,7 @@ var navbar_Navbar = function () {
 
 
 
+
 var app_App = function () {
 	function App() {
 		classCallCheck_default()(this, App);
@@ -2557,21 +2621,8 @@ var app_App = function () {
 		this.initializeHeader();
 		this.initializeNavbar();
 		this.initializePromoBar();
-		this.checkWindowLocationComments();
-
-		var initializeImages = this.initializeImages.bind(this);
-		initializeImages();
-
-		globalService.registerObserverCallback(function (mutationList) {
-			mutationList.forEach(function (mutationRecord) {
-				mutationRecord.addedNodes.forEach(function (node) {
-					var nodeName = node.nodeName.toLowerCase();
-					if ('img' === nodeName || node.childNodes.length) {
-						initializeImages(node);
-					}
-				});
-			});
-		});
+		this.initializeImages();
+		this.initializeCommentsArea();
 
 		globalService.registerRender(this.render.bind(this));
 	}
@@ -2606,6 +2657,23 @@ var app_App = function () {
 	}, {
 		key: 'initializeImages',
 		value: function initializeImages() {
+			var showLoadedImages = this.showLoadedImages.bind(this);
+			showLoadedImages();
+
+			globalService.registerObserverCallback(function (mutationList) {
+				mutationList.forEach(function (mutationRecord) {
+					mutationRecord.addedNodes.forEach(function (node) {
+						var nodeName = node.nodeName.toLowerCase();
+						if ('img' === nodeName || node.childNodes.length) {
+							showLoadedImages(node);
+						}
+					});
+				});
+			});
+		}
+	}, {
+		key: 'showLoadedImages',
+		value: function showLoadedImages() {
 			var container = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document.body;
 
 			external_jQuery_default()(container).imagesLoaded().progress(function (instance, image) {
@@ -2625,11 +2693,22 @@ var app_App = function () {
 			this.firstHero = heroElementsArray[0];
 		}
 	}, {
+		key: 'initializeCommentsArea',
+		value: function initializeCommentsArea() {
+			var $commentsArea = external_jQuery_default()('.comments-area');
+
+			if ($commentsArea.length) {
+				this.commentsArea = new commentsArea($commentsArea.get(0));
+			}
+		}
+	}, {
 		key: 'initializeHeader',
 		value: function initializeHeader() {
-			var headerElement = external_jQuery_default()('.site-header').get(0);
+			var $header = external_jQuery_default()('.site-header');
 
-			this.header = new components_header(headerElement);
+			if ($header.length) {
+				this.header = new components_header($header.get(0));
+			}
 		}
 	}, {
 		key: 'initializeNavbar',
@@ -2666,13 +2745,6 @@ var app_App = function () {
 					reloadRellax(obj);
 				});
 			});
-		}
-	}, {
-		key: 'checkWindowLocationComments',
-		value: function checkWindowLocationComments() {
-			if (window.location.href.indexOf("#comment") === -1) {
-				external_jQuery_default()(".c-comments-toggle__checkbox").prop("checked", false);
-			}
 		}
 	}]);
 
