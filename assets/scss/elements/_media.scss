@@ -9,9 +9,15 @@ img {
     transition: var(--theme-transition);
     transition-property: opacity;
 }
+
 img:not(.is-loaded) {
     opacity: 0;
 }
+
+.gm-style img {
+    opacity: 1;
+}
+
 
 figure {
     margin: 0;

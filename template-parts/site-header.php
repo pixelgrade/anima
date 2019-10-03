@@ -19,7 +19,7 @@ get_template_part( 'template-parts/menu-toggle' ); ?>
             <nav class="wp-block-novablocks-navigation site-header__menu site-header__menu--secondary">
 	            <?php wp_nav_menu( array(
 		            'container'      => false,
-		            'theme_location' => 'menu-1',
+		            'theme_location' => 'secondary',
 		            'menu_id'        => 'secondary-menu',
 		            'fallback_cb'    => false,
 	            ) ); ?>
