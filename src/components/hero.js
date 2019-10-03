@@ -34,6 +34,8 @@ export default class Hero {
 	}
 
 	update() {
+		const { scrollY } = GlobalService.getProps();
+
 		this.box = this.element.getBoundingClientRect();
 		this.view = {
 			x: this.box.x,

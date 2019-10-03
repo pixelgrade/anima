@@ -140,21 +140,27 @@ function rosa2_scripts() {
 	wp_register_script( 'gsap', '//pxgcdn.com/js/gsap/2.1.3/TweenMax' . $suffix . '.js', array(), null, true );
 	wp_enqueue_script( 'rosa2-app', get_template_directory_uri() . '/dist/js/scripts' . $suffix . '.js', array( 'jquery', 'gsap', 'gsap-split-text', 'hoverIntent', 'imagesloaded' ), $theme->get( 'Version' ), true );
 
-	echo '<script>
-		window.addEventListener( "DOMContentLoaded", ( event ) => {
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+		wp_enqueue_script( 'comment-reply' );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'rosa2_scripts', 10 );
+
+function rosa2_print_scripts() {
+	ob_start(); ?>
+	<script>
+		window.addEventListener( "DOMContentLoaded", function( event ) {
 			document.body.classList.remove( "is-loading" );
 			document.body.classList.add( "has-loaded" );
 		} );
 		window.addEventListener( "beforeunload", function( event ) {
 			document.body.classList.add( "is-loading" );
 		} );
-	</script>';
+	</script>
 
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
+	<?php echo ob_get_clean();
 }
-add_action( 'wp_enqueue_scripts', 'rosa2_scripts', 10 );
+add_action( 'wp_print_scripts', 'rosa2_print_scripts', 10 );
 
 /* Automagical updates */
 function wupdates_check_JxLn7( $transient ) {

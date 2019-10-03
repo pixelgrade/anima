@@ -39,7 +39,7 @@ class GlobalService {
 	}
 
 	observeCallback() {
-		this.observeCallbacks.forEach( fn => {
+		$.each(this.observeCallbacks, function( fn ) {
 			fn( ...arguments );
 		});
 	}
@@ -78,9 +78,9 @@ class GlobalService {
 	}
 
 	renderStuff() {
-		this.renderCallbacks.forEach( fn => {
-			fn();
-		});
+		$.each( this.renderCallbacks, function( fn ) {
+			fn( ...arguments );
+		} );
 	}
 
 	registerUpdate( fn ) {
@@ -90,16 +90,16 @@ class GlobalService {
 	}
 
 	updateStuff() {
-		this.updateCallbacks.forEach( fn => {
-			fn();
-		});
+		$.each( this.updateCallbacks, function( fn ) {
+			fn( ...arguments );
+		} );
 	}
 
 	updateScroll() {
 
 		const newProps = {
-			scrollY: window.scrollY,
-			scrollX: window.scrollX,
+			scrollY: window.pageYOffset,
+			scrollX: window.pageXOffset,
 		}
 
 		if ( this.checkNewProps( newProps ) ) {

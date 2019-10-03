@@ -38,14 +38,19 @@ html:not(.wf-active) {
     }
 }
 
-.novablocks-media__inner-container > * {
-    @include avoid-fout-opacity;
-}
-
 .entry-content,
 [class*="__inner-container"] {
     > :not(.wp-block-group):not(.novablocks-media) {
         @include avoid-fout-opacity;
+    }
+}
+
+// avoid adding transitions to elements that will be added in js
+.novablocks-hero__inner-container {
+    @include specific(2) {
+        > * {
+            transition-property: none;
+        }
     }
 }
 

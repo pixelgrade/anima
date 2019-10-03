@@ -1566,10 +1566,8 @@ var globalService_GlobalService = function () {
 	createClass_default()(GlobalService, [{
 		key: 'observeCallback',
 		value: function observeCallback() {
-			var _arguments = arguments;
-
-			this.observeCallbacks.forEach(function (fn) {
-				fn.apply(undefined, _arguments);
+			$.each(this.observeCallbacks, function (fn) {
+				fn.apply(undefined, arguments);
 			});
 		}
 	}, {
@@ -1612,8 +1610,8 @@ var globalService_GlobalService = function () {
 	}, {
 		key: 'renderStuff',
 		value: function renderStuff() {
-			this.renderCallbacks.forEach(function (fn) {
-				fn();
+			$.each(this.renderCallbacks, function (fn) {
+				fn.apply(undefined, arguments);
 			});
 		}
 	}, {
@@ -1626,8 +1624,8 @@ var globalService_GlobalService = function () {
 	}, {
 		key: 'updateStuff',
 		value: function updateStuff() {
-			this.updateCallbacks.forEach(function (fn) {
-				fn();
+			$.each(this.updateCallbacks, function (fn) {
+				fn.apply(undefined, arguments);
 			});
 		}
 	}, {
@@ -1635,8 +1633,8 @@ var globalService_GlobalService = function () {
 		value: function updateScroll() {
 
 			var newProps = {
-				scrollY: window.scrollY,
-				scrollX: window.scrollX
+				scrollY: window.pageYOffset,
+				scrollX: window.pageXOffset
 			};
 
 			if (this.checkNewProps(newProps)) {
@@ -1761,6 +1759,9 @@ var hero_Hero = function () {
 	}, {
 		key: 'update',
 		value: function update() {
+			var _GlobalService$getPro = globalService.getProps(),
+			    scrollY = _GlobalService$getPro.scrollY;
+
 			this.box = this.element.getBoundingClientRect();
 			this.view = {
 				x: this.box.x,
@@ -1772,10 +1773,10 @@ var hero_Hero = function () {
 	}, {
 		key: 'updateOnScroll',
 		value: function updateOnScroll() {
-			var _GlobalService$getPro = globalService.getProps(),
-			    scrollY = _GlobalService$getPro.scrollY,
-			    scrollHeight = _GlobalService$getPro.scrollHeight,
-			    windowHeight = _GlobalService$getPro.windowHeight;
+			var _GlobalService$getPro2 = globalService.getProps(),
+			    scrollY = _GlobalService$getPro2.scrollY,
+			    scrollHeight = _GlobalService$getPro2.scrollHeight,
+			    windowHeight = _GlobalService$getPro2.windowHeight;
 
 			// used to calculate animation progress
 
@@ -1838,8 +1839,8 @@ var hero_Hero = function () {
 		value: function addIntroToTimeline() {
 			var timeline = this.timeline;
 
-			var _GlobalService$getPro2 = globalService.getProps(),
-			    windowWidth = _GlobalService$getPro2.windowWidth;
+			var _GlobalService$getPro3 = globalService.getProps(),
+			    windowWidth = _GlobalService$getPro3.windowWidth;
 
 			var _pieces = this.pieces,
 			    headline = _pieces.headline,
@@ -2661,9 +2662,9 @@ var app_App = function () {
 			showLoadedImages();
 
 			globalService.registerObserverCallback(function (mutationList) {
-				mutationList.forEach(function (mutationRecord) {
-					mutationRecord.addedNodes.forEach(function (node) {
-						var nodeName = node.nodeName.toLowerCase();
+				external_jQuery_default.a.each(mutationList, function (mutationRecord) {
+					external_jQuery_default.a.each(mutationRecord.addedNodes, function (node) {
+						var nodeName = node.nodeName && node.nodeName.toLowerCase();
 						if ('img' === nodeName || node.childNodes.length) {
 							showLoadedImages(node);
 						}

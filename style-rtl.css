@@ -4757,12 +4757,6 @@ html:not(.wf-active) {
   .novablocks-media.block-is-moderate .novablocks-media__image {
     background-color: var(--sm-light-primary); }
 
-.novablocks-media__inner-container > * {
-  transition: var(--theme-transition);
-  transition-property: opacity; }
-  html:not(.wf-active) .novablocks-media__inner-container > * {
-    opacity: 0; }
-
 .entry-content > :not(.wp-block-group):not(.novablocks-media),
 [class*="__inner-container"] > :not(.wp-block-group):not(.novablocks-media) {
   transition: var(--theme-transition);
@@ -4770,6 +4764,9 @@ html:not(.wf-active) {
   html:not(.wf-active) .entry-content > :not(.wp-block-group):not(.novablocks-media), html:not(.wf-active)
   [class*="__inner-container"] > :not(.wp-block-group):not(.novablocks-media) {
     opacity: 0; }
+
+.novablocks-hero__inner-container[class][class] > * {
+  transition-property: none; }
 
 body:not(.wf-active) .novablocks-media .wp-block-group__inner-container > .wp-block {
   opacity: 1; }
