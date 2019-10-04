@@ -24,7 +24,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.site-header__menu a{
+.site-header__menu a {
 
   &[href*="facebook"],
   &[href*="twitter"],
@@ -80,7 +80,7 @@
     }
 
     &:before {
-      font-size: 1.1rem;
+      font-size: calc( 1.1 * var(--current-font-size) );
       vertical-align: middle;
     }
   }
