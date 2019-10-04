@@ -1540,7 +1540,7 @@ var globalService_GlobalService = function () {
 		this.observeCallbacks = [];
 		this.frameRendered = true;
 
-		this.currentMutationList = [];
+		this.initializeMutationObserver();
 
 		var updateProps = this.updateProps.bind(this);
 		var updateScroll = this.updateScroll.bind(this);
@@ -1554,31 +1554,38 @@ var globalService_GlobalService = function () {
 		window.addEventListener('load', updateProps);
 		window.addEventListener('scroll', updateScroll);
 		window.requestAnimationFrame(renderLoop);
-
-		if (wp.customize) {
-			if (wp.customize.selectiveRefresh) {
-				wp.customize.selectiveRefresh.bind('partial-content-rendered', updateProps);
-			}
-			wp.customize.bind('change', updateProps);
-		}
-
-		var self = this;
-
-		var observeCallback = this.observeCallback.bind(this);
-		var observeAndUpdateProps = function observeAndUpdateProps() {
-			observeCallback(self.currentMutationList);
-			updateProps(true);
-			self.currentMutationList = [];
-		};
-		var debouncedObserveCallback = debounce(observeAndUpdateProps, 200);
-
-		this.observe(function (mutationList) {
-			self.currentMutationList = self.currentMutationList.concat(mutationList);
-			debouncedObserveCallback();
-		});
 	}
 
 	createClass_default()(GlobalService, [{
+		key: 'initializeMutationObserver',
+		value: function initializeMutationObserver() {
+			this.currentMutationList = [];
+
+			var self = this;
+			var observeCallback = this.observeCallback.bind(this);
+			var observeAndUpdateProps = function observeAndUpdateProps() {
+				observeCallback(self.currentMutationList);
+				self.updateProps(true);
+				self.currentMutationList = [];
+			};
+			var debouncedObserveCallback = debounce(observeAndUpdateProps, 200);
+
+			this.observe(function (mutationList) {
+				self.currentMutationList = self.currentMutationList.concat(mutationList);
+				debouncedObserveCallback();
+			});
+		}
+	}, {
+		key: 'initializeCustomizerCallbacks',
+		value: function initializeCustomizerCallbacks() {
+			if (typeof wp !== "undefined" && typeof wp.customize !== "undefined") {
+				if (typeof wp.customize.selectiveRefresh !== "undefined") {
+					wp.customize.selectiveRefresh.bind('partial-content-rendered', this.updateProps.bind(this));
+				}
+				wp.customize.bind('change', this.updateProps.bind(this));
+			}
+		}
+	}, {
 		key: 'observeCallback',
 		value: function observeCallback() {
 			var passedArguments = arguments;

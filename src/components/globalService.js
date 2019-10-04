@@ -10,8 +10,8 @@ class GlobalService {
 		this.observeCallbacks = [];
 		this.frameRendered = true;
 
+		this.initializeMutationObserver();
 
-		this.currentMutationList = [];
 
 		const updateProps = this.updateProps.bind( this );
 		const updateScroll = this.updateScroll.bind( this );
@@ -25,20 +25,16 @@ class GlobalService {
 		window.addEventListener( 'load', updateProps );
 		window.addEventListener( 'scroll', updateScroll );
 		window.requestAnimationFrame( renderLoop );
+	}
 
-		if ( wp.customize ) {
-			if ( wp.customize.selectiveRefresh ) {
-				wp.customize.selectiveRefresh.bind( 'partial-content-rendered', updateProps );
-			}
-			wp.customize.bind( 'change', updateProps );
-		}
+	initializeMutationObserver() {
+		this.currentMutationList = [];
 
 		const self = this;
-
 		const observeCallback = this.observeCallback.bind( this );
 		const observeAndUpdateProps = function() {
 			observeCallback( self.currentMutationList );
-			updateProps( true );
+			self.updateProps( true );
 			self.currentMutationList = [];
 		};
 		const debouncedObserveCallback = debounce( observeAndUpdateProps, 200 );
@@ -47,6 +43,15 @@ class GlobalService {
 			self.currentMutationList = self.currentMutationList.concat( mutationList );
 			debouncedObserveCallback();
 		} );
+	}
+
+	initializeCustomizerCallbacks() {
+		if ( typeof wp !== "undefined" && typeof wp.customize !== "undefined" ) {
+			if ( typeof wp.customize.selectiveRefresh !== "undefined" ) {
+				wp.customize.selectiveRefresh.bind( 'partial-content-rendered', this.updateProps.bind( this ) );
+			}
+			wp.customize.bind( 'change', this.updateProps.bind( this ) );
+		}
 	}
 
 	observeCallback() {
