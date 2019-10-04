@@ -1,0 +1,125 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('assets/fonts/icomoon.eot?kdq7n6');
+  src:  url('assets/fonts/icomoon.eot?kdq7n6#iefix') format('embedded-opentype'),
+  url('assets/fonts/icomoon.ttf?kdq7n6') format('truetype'),
+  url('assets/fonts/icomoon.woff?kdq7n6') format('woff'),
+  url('assets/fonts/icomoon.svg?kdq7n6#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.site-header__menu a:before {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.site-header__menu a {
+
+  &[href*="facebook"],
+  &[href*="twitter"],
+  &[href*="instagram"],
+  &[href*="youtube"],
+  &[href*="pinterest"],
+  &[href*="dropbox"],
+  &[href*="flickr"],
+  &[href*="tumblr"],
+  &[href*="apple"],
+  &[href*="dribbble"],
+  &[href*="skype"],
+  &[href*="foursquare"],
+  &[href*="vk"],
+  &[href*="wordpress"],
+  &[href*="reddit"],
+  &[href*="stumbleupon"],
+  &[href*="delicious"],
+  &[href*="digg"],
+  &[href*="behance"],
+  &[href*="spotify"],
+  &[href*="deviantart"],
+  &[href*="soundcloud"],
+  &[href*="codepen"],
+  &[href*="slideshare"],
+  &[href*="twitch"],
+  &[href*="yelp"],
+  &[href*="medium"],
+  &[href*="tripadvisor"],
+  &[href*="pocket"],
+  &[href*="500px"],
+  &[href*="amazon"],
+  &[href*="vimeo"],
+  &[href*="snapchat"],
+  &[href*="bandcamp"],
+  &[href*="etsy"],
+  &[href*="meetup"],
+  &[href*="tel:"],
+  &[href*="mailto:"],
+  &[href*="feed"] {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    font-size: 0;
+    transition: var(--theme-transition);
+    transition-property: opacity;
+
+    @include above(lap) {
+      margin-left: -.5rem;
+    }
+
+    &:before {
+      font-size: calc( 1.1 * var(--current-font-size) );
+      vertical-align: middle;
+    }
+  }
+
+  &[href*="facebook"]:before { content: "\f09a"; }
+  &[href*="twitter"]:before { content: "\f099"; }
+  &[href*="instagram"]:before { content: "\f16d"; }
+  &[href*="youtube"]:before { content: "\f167"; }
+  &[href*="pinterest"]:before { content: "\f0d2"; }
+  &[href*="dropbox"]:before { content: "\f16b"; }
+  &[href*="flickr"]:before { content: "\f16e"; }
+  &[href*="tumblr"]:before { content: "\f173"; }
+  &[href*="apple"]:before { content: "\f179"; }
+  &[href*="dribbble"]:before { content: "\f17d"; }
+  &[href*="skype"]:before { content: "\f17e"; }
+  &[href*="foursquare"]:before { content: "\f180"; }
+  &[href*="vk"]:before { content: "\f189"; }
+  &[href*="wordpress"]:before { content: "\f19a"; }
+  &[href*="reddit"]:before { content: "\f1a1"; }
+  &[href*="stumbleupon"]:before { content: "\f1a4"; }
+  &[href*="delicious"]:before { content: "\f1a5"; }
+  &[href*="digg"]:before { content: "\f1a6"; }
+  &[href*="behance"]:before { content: "\f1b4"; }
+  &[href*="spotify"]:before { content: "\f1bc"; }
+  &[href*="deviantart"]:before { content: "\f1bd"; }
+  &[href*="soundcloud"]:before { content: "\f1be"; }
+  &[href*="codepen"]:before { content: "\f1cb"; }
+  &[href*="slideshare"]:before { content: "\f1e7"; }
+  &[href*="twitch"]:before { content: "\f1e8"; }
+  &[href*="yelp"]:before { content: "\f1e9"; }
+  &[href*="medium"]:before { content: "\f23a"; }
+  &[href*="tripadvisor"]:before { content: "\f262"; }
+  &[href*="pocket"]:before { content: "\f265"; }
+  &[href*="500px"]:before { content: "\f26e"; }
+  &[href*="amazon"]:before { content: "\f270"; }
+  &[href*="vimeo"]:before { content: "\f27d"; }
+  &[href*="snapchat"]:before { content: "\f2ab"; }
+  &[href*="bandcamp"]:before { content: "\f2d5"; }
+  &[href*="etsy"]:before { content: "\f2d7"; }
+  &[href*="meetup"]:before { content: "\f2e0"; }
+  &[href*="tel:"]:before { content: "\f095"; }
+  &[href*="mailto:"]:before { content: "\f0e0"; }
+  &[href*="feed"]:before { content: "\f09e"; }
+}
+
+
