@@ -105,6 +105,13 @@
   margin-top: var(--theme-spacing-normal);
 }
 
+.woocommerce-error,
+.woocommerce-info,
+.woocommerce-message {
+  border-width: .125em;
+  border-radius: 4px;
+}
+
 .woocommerce {
   @include specific(2) {
     button:not(.single_add_to_cart_button),
