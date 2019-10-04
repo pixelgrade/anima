@@ -72,7 +72,9 @@ Table of Contents
   --theme-font-size-slope-adjust: 0.6;
   --theme-addon-unit: calc( 1vw - var(--theme-font-size-breakpoint) * 1px / 100 );
   --theme-addon-multiplier: 0;
-  --theme-addon: calc( var(--theme-addon-unit) * var(--theme-addon-multiplier) ); }
+  --theme-addon: calc( var(--theme-addon-unit) * var(--theme-addon-multiplier) );
+  --theme-headline-spacing-setting: -0.3;
+  --theme-headline-spacing: calc(var(--theme-headline-spacing-setting) * 1em); }
   @media only screen and (min-width: 1440px) {
     :root {
       --theme-font-size-slope-adjust: 0.6;
@@ -4592,7 +4594,7 @@ h6 {
 
 .c-headline__secondary + .c-headline__primary,
 .c-headline > .editor-rich-text + .editor-rich-text {
-  margin-top: -0.5em; }
+  margin-top: var(--theme-headline-spacing); }
 
 .c-headline__secondary,
 .c-headline > .editor-rich-text:first-child {

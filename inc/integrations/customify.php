@@ -272,6 +272,26 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 						'Nermola Script',
 					),
 				),
+				'headline_lines_spacings'   =>  array(
+					'type'        => 'range',
+					'label'       => esc_html__( 'Headline Lines Spacing', '__theme_txtd' ),
+					'desc'        => esc_html__( 'The vertical distance between primary and secondary titles.', '__theme_txtd' ),
+					'live'        => true,
+					'default'     => -0.3,
+					'input_attrs' => array(
+						'min'          => -1,
+						'max'          => 0.3,
+						'step'         => 0.1,
+						'data-preview' => true,
+					),
+					'css'         => array(
+						array(
+							'property' => '--theme-headline-spacing-setting',
+							'selector' => ':root',
+							'unit'     => '',
+						),
+					),
+				),
 				'main_content_title_other_fonts_section' => array(
 					'type' => 'html',
 					'html' => '<span class="separator sub-section label">' . esc_html__( 'Other Fonts', '__theme_txtd' ) . '</span>',
