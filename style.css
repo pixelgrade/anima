@@ -1262,7 +1262,7 @@ ul.menu a,
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.625em var(--theme-header-sides-spacing); }
+    padding: var(--theme-spacing-fluid-normal) var(--theme-header-sides-spacing); }
     .site-header--mobile .menu-item--cart {
       display: flex;
       position: absolute;
@@ -1272,8 +1272,8 @@ ul.menu a,
       .site-header--mobile .menu-item--cart > a {
         color: currentColor; }
   .site-header__menu {
-    padding-left: var(--theme-header-sides-spacing);
-    padding-right: var(--theme-header-sides-spacing); }
+    padding-left: var(--theme-wrapper-sides-spacing);
+    padding-right: var(--theme-wrapper-sides-spacing); }
   .has-hero .site-header--mobile,
   .has-hero .c-menu-toggle,
   .is-dark-mode .site-header--mobile,
@@ -1536,7 +1536,7 @@ ul.menu a,
 
 /* Post Content */
 .entry-header {
-  --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-normal);
+  --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-large);
   padding-left: var(--theme-wrapper-sides-spacing);
   padding-right: var(--theme-wrapper-sides-spacing);
   padding-top: var(--theme-spacing-normal);
@@ -1576,7 +1576,7 @@ ul.menu a,
 
 .entry-content,
 [class*="__inner-container"] {
-  --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-normal);
+  --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-large);
   padding-left: var(--theme-wrapper-sides-spacing);
   padding-right: var(--theme-wrapper-sides-spacing); }
   .entry-content > .alignfull,
@@ -1602,7 +1602,7 @@ ul.menu a,
     margin-top: var(--element-spacing); }
 
 .entry-footer {
-  --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-normal);
+  --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-large);
   padding-left: var(--theme-wrapper-sides-spacing);
   padding-right: var(--theme-wrapper-sides-spacing); }
   .entry-footer > .alignfull {
@@ -1656,7 +1656,7 @@ ul.menu a,
   --theme-comment-avatar-width: 56px; }
 
 .comments-area {
-  --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-normal);
+  --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-large);
   padding-left: var(--theme-wrapper-sides-spacing);
   padding-right: var(--theme-wrapper-sides-spacing); }
   .comments-area > .alignfull {
