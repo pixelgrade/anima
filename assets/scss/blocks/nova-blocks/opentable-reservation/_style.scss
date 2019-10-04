@@ -76,6 +76,14 @@
       margin-bottom: var(--theme-spacing-normal);
     }
   }
+
+  /* body.supports-mutation-observer */
+  transition: var(--theme-transition);
+  transition-property: opacity;
+
+  &:not(.is-loaded) {
+    opacity: 0;
+  }
 }
 
 

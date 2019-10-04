@@ -10,15 +10,12 @@ class GlobalService {
 		this.observeCallbacks = [];
 		this.frameRendered = true;
 
+
+		this.currentMutationList = [];
+
 		const updateProps = this.updateProps.bind( this );
 		const updateScroll = this.updateScroll.bind( this );
 		const renderLoop = this.renderLoop.bind( this );
-		const observeCallback = this.observeCallback.bind( this );
-		const observeAndUpdateProps = function() {
-			observeCallback( ...arguments );
-			updateProps( true );
-		};
-		const debouncedObserveCallback = debounce( observeAndUpdateProps, 200 );
 
 		updateProps();
 		updateScroll();
@@ -36,12 +33,26 @@ class GlobalService {
 			wp.customize.bind( 'change', updateProps );
 		}
 
-		this.observe( debouncedObserveCallback );
+		const self = this;
+
+		const observeCallback = this.observeCallback.bind( this );
+		const observeAndUpdateProps = function() {
+			observeCallback( self.currentMutationList );
+			updateProps( true );
+			self.currentMutationList = [];
+		};
+		const debouncedObserveCallback = debounce( observeAndUpdateProps, 200 );
+
+		this.observe( function( mutationList ) {
+			self.currentMutationList = self.currentMutationList.concat( mutationList );
+			debouncedObserveCallback();
+		} );
 	}
 
 	observeCallback() {
+		const passedArguments = arguments;
 		$.each(this.observeCallbacks, function( i, fn ) {
-			fn( ...arguments );
+			fn( ...passedArguments );
 		});
 	}
 
@@ -79,8 +90,9 @@ class GlobalService {
 	}
 
 	renderStuff() {
+		const passedArguments = arguments;
 		$.each( this.renderCallbacks, function( i, fn ) {
-			fn( ...arguments );
+			fn( ...passedArguments );
 		} );
 	}
 
@@ -91,8 +103,9 @@ class GlobalService {
 	}
 
 	updateStuff() {
+		const passedArguments = arguments;
 		$.each( this.updateCallbacks, function( i, fn ) {
-			fn( ...arguments );
+			fn( ...passedArguments );
 		} );
 	}
 

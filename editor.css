@@ -1444,22 +1444,28 @@
       transform: scale3d(0, 1, 1); }
     .editor-styles-wrapper .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button:hover {
       color: var(--current-button-hover-text-color); }
-  .editor-styles-wrapper .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] {
-    border-color: var(--current-dark-secondary); }
-    .editor-styles-wrapper .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link {
-      color: var(--current-dark-secondary); }
-      .editor-styles-wrapper .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link:before {
-        color: currentColor; }
-      .editor-styles-wrapper .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link:after {
-        color: currentColor; }
-  .editor-styles-wrapper .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-form:after {
-    clear: both;
-    content: "";
-    display: block; }
-  .editor-styles-wrapper .novablocks-opentable.novablocks-opentable__standard[class] {
-    padding: var(--theme-spacing-small); }
-    .editor-styles-wrapper .novablocks-opentable.novablocks-opentable__standard[class] .ot-party-size-picker {
-      margin-bottom: var(--theme-spacing-normal); }
+  .editor-styles-wrapper .novablocks-opentable {
+    /* body.supports-mutation-observer */
+    transition: var(--theme-transition);
+    transition-property: opacity; }
+    .editor-styles-wrapper .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] {
+      border-color: var(--current-dark-secondary); }
+      .editor-styles-wrapper .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link {
+        color: var(--current-dark-secondary); }
+        .editor-styles-wrapper .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link:before {
+          color: currentColor; }
+        .editor-styles-wrapper .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link:after {
+          color: currentColor; }
+    .editor-styles-wrapper .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-form:after {
+      clear: both;
+      content: "";
+      display: block; }
+    .editor-styles-wrapper .novablocks-opentable.novablocks-opentable__standard[class] {
+      padding: var(--theme-spacing-small); }
+      .editor-styles-wrapper .novablocks-opentable.novablocks-opentable__standard[class] .ot-party-size-picker {
+        margin-bottom: var(--theme-spacing-normal); }
+    .editor-styles-wrapper .novablocks-opentable:not(.is-loaded) {
+      opacity: 0; }
   .editor-styles-wrapper .ot-dtp-picker-selector-link {
     text-decoration: none; }
   .editor-styles-wrapper .is-dark-mode .novablocks-opentable.novablocks-opentable__standard[class] .ot-powered-by {

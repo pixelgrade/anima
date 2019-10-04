@@ -17,6 +17,7 @@ export default class App {
 		this.initializePromoBar();
 		this.initializeImages();
 		this.initializeCommentsArea();
+		this.initializeReservationForm();
 
 		GlobalService.registerRender( this.render.bind( this ) );
 	}
@@ -57,6 +58,19 @@ export default class App {
 						showLoadedImages( node );
 					}
 				} );
+			} );
+		} );
+	}
+
+	initializeReservationForm() {
+		GlobalService.registerObserverCallback( function( mutationList ) {
+			$.each( mutationList, ( i, mutationRecord ) => {
+				$.each( mutationRecord.addedNodes, ( j, node ) => {
+					const $node = $( node );
+					if ( $node.is( '#ot-reservation-widget' ) ) {
+						$node.closest( '.novablocks-opentable' ).addClass( 'is-loaded' );
+					}
+				} )
 			} );
 		} );
 	}

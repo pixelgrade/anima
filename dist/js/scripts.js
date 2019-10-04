@@ -1517,7 +1517,12 @@ var keys_default = /*#__PURE__*/__webpack_require__.n(keys);
 var object_assign = __webpack_require__(7);
 var assign_default = /*#__PURE__*/__webpack_require__.n(object_assign);
 
+// EXTERNAL MODULE: ./node_modules/babel-runtime/helpers/toConsumableArray.js
+var toConsumableArray = __webpack_require__(35);
+var toConsumableArray_default = /*#__PURE__*/__webpack_require__.n(toConsumableArray);
+
 // CONCATENATED MODULE: ./src/components/globalService.js
+
 
 
 
@@ -1535,15 +1540,11 @@ var globalService_GlobalService = function () {
 		this.observeCallbacks = [];
 		this.frameRendered = true;
 
+		this.currentMutationList = [];
+
 		var updateProps = this.updateProps.bind(this);
 		var updateScroll = this.updateScroll.bind(this);
 		var renderLoop = this.renderLoop.bind(this);
-		var observeCallback = this.observeCallback.bind(this);
-		var observeAndUpdateProps = function observeAndUpdateProps() {
-			observeCallback.apply(undefined, arguments);
-			updateProps(true);
-		};
-		var debouncedObserveCallback = debounce(observeAndUpdateProps, 200);
 
 		updateProps();
 		updateScroll();
@@ -1561,14 +1562,28 @@ var globalService_GlobalService = function () {
 			wp.customize.bind('change', updateProps);
 		}
 
-		this.observe(debouncedObserveCallback);
+		var self = this;
+
+		var observeCallback = this.observeCallback.bind(this);
+		var observeAndUpdateProps = function observeAndUpdateProps() {
+			observeCallback(self.currentMutationList);
+			updateProps(true);
+			self.currentMutationList = [];
+		};
+		var debouncedObserveCallback = debounce(observeAndUpdateProps, 200);
+
+		this.observe(function (mutationList) {
+			self.currentMutationList = self.currentMutationList.concat(mutationList);
+			debouncedObserveCallback();
+		});
 	}
 
 	createClass_default()(GlobalService, [{
 		key: 'observeCallback',
 		value: function observeCallback() {
+			var passedArguments = arguments;
 			external_jQuery_default.a.each(this.observeCallbacks, function (i, fn) {
-				fn.apply(undefined, arguments);
+				fn.apply(undefined, toConsumableArray_default()(passedArguments));
 			});
 		}
 	}, {
@@ -1611,8 +1626,9 @@ var globalService_GlobalService = function () {
 	}, {
 		key: 'renderStuff',
 		value: function renderStuff() {
+			var passedArguments = arguments;
 			external_jQuery_default.a.each(this.renderCallbacks, function (i, fn) {
-				fn.apply(undefined, arguments);
+				fn.apply(undefined, toConsumableArray_default()(passedArguments));
 			});
 		}
 	}, {
@@ -1625,8 +1641,9 @@ var globalService_GlobalService = function () {
 	}, {
 		key: 'updateStuff',
 		value: function updateStuff() {
+			var passedArguments = arguments;
 			external_jQuery_default.a.each(this.updateCallbacks, function (i, fn) {
-				fn.apply(undefined, arguments);
+				fn.apply(undefined, toConsumableArray_default()(passedArguments));
 			});
 		}
 	}, {
@@ -1706,10 +1723,6 @@ var globalService_GlobalService = function () {
 }();
 
 /* harmony default export */ var globalService = (new globalService_GlobalService());
-// EXTERNAL MODULE: ./node_modules/babel-runtime/helpers/toConsumableArray.js
-var toConsumableArray = __webpack_require__(35);
-var toConsumableArray_default = /*#__PURE__*/__webpack_require__.n(toConsumableArray);
-
 // CONCATENATED MODULE: ./src/components/hero.js
 
 
@@ -2625,6 +2638,7 @@ var app_App = function () {
 		this.initializePromoBar();
 		this.initializeImages();
 		this.initializeCommentsArea();
+		this.initializeReservationForm();
 
 		globalService.registerRender(this.render.bind(this));
 	}
@@ -2668,6 +2682,20 @@ var app_App = function () {
 						var nodeName = node.nodeName && node.nodeName.toLowerCase();
 						if ('img' === nodeName || node.childNodes.length) {
 							showLoadedImages(node);
+						}
+					});
+				});
+			});
+		}
+	}, {
+		key: 'initializeReservationForm',
+		value: function initializeReservationForm() {
+			globalService.registerObserverCallback(function (mutationList) {
+				external_jQuery_default.a.each(mutationList, function (i, mutationRecord) {
+					external_jQuery_default.a.each(mutationRecord.addedNodes, function (j, node) {
+						var $node = external_jQuery_default()(node);
+						if ($node.is('#ot-reservation-widget')) {
+							$node.closest('.novablocks-opentable').addClass('is-loaded');
 						}
 					});
 				});
