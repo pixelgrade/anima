@@ -967,22 +967,6 @@ ul.menu,
 .site-header .menu-item-has-children,
 .site-header .page_item_has_children {
   position: relative; }
-  .site-header .menu-item-has-children .menu-item:after,
-  .site-header .page_item_has_children .menu-item:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--current-light-secondary);
-    opacity: 0;
-    transition: opacity 0.15s cubic-bezier(0.42, 0, 0.58, 1);
-    z-index: -1; }
-  .site-header .menu-item-has-children .menu-item:hover:after, .site-header .menu-item-has-children .menu-item:focus-within:after,
-  .site-header .page_item_has_children .menu-item:hover:after,
-  .site-header .page_item_has_children .menu-item:focus-within:after {
-    opacity: .2; }
   .site-header .menu-item-has-children[class] > a,
   .site-header .page_item_has_children[class] > a {
     display: flex;
@@ -1026,6 +1010,22 @@ ul.menu,
       transform: rotate(45deg); } }
 
 @media only screen and (min-width: 1000px) {
+  .site-header .menu-item-has-children .menu-item:after,
+  .site-header .page_item_has_children .menu-item:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--current-light-secondary);
+    opacity: 0;
+    transition: opacity 0.15s cubic-bezier(0.42, 0, 0.58, 1);
+    z-index: -1; }
+  .site-header .menu-item-has-children .menu-item:hover:after, .site-header .menu-item-has-children .menu-item:focus-within:after,
+  .site-header .page_item_has_children .menu-item:hover:after,
+  .site-header .page_item_has_children .menu-item:focus-within:after {
+    opacity: .2; }
   .site-header > ul.menu,
   .site-header > .menu > ul {
     display: flex;
@@ -1286,11 +1286,11 @@ ul.menu a,
   .is-dark-mode .site-header--mobile .c-logo__default {
     opacity: 0; }
   .sub-menu {
-    margin-left: calc(var(--theme-header-sides-spacing) * -1);
-    margin-right: calc(var(--theme-header-sides-spacing) * -1); }
+    margin-left: calc(var(--theme-wrapper-sides-spacing) * -1);
+    margin-right: calc(var(--theme-wrapper-sides-spacing) * -1); }
     .sub-menu > li {
-      padding-left: var(--theme-header-sides-spacing);
-      padding-right: var(--theme-header-sides-spacing); }
+      padding-left: var(--theme-wrapper-sides-spacing);
+      padding-right: var(--theme-wrapper-sides-spacing); }
   .site-header,
   .c-menu-toggle__slice {
     transition: transform .3s ease-out; }
