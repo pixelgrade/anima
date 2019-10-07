@@ -472,3 +472,17 @@ ul.order_details[class] {
     align-items: center;
   }
 }
+
+.woocommerce-form-login-toggle[class][class],
+.woocommerce-form-login[class][class] {
+  @include above(tablet) {
+    position: relative;
+    z-index: 20;
+    float: left;
+    width: 55%;
+    padding-left: 5.25%;
+    padding-right: 8.75%;
+    margin: 0;
+    border: 0;
+  }
+}

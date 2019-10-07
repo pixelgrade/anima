@@ -79,6 +79,7 @@
   border-radius: 4px;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   padding-left: 1em; }
   .woocommerce-error:before,
   .woocommerce-info:before,
@@ -102,6 +103,12 @@
     line-height: 1;
     -webkit-font-smoothing: antialiased;
     border-radius: 50%; }
+  @media not screen and (min-width: 768px) {
+    .woocommerce-error a,
+    .woocommerce-info a,
+    .woocommerce-message a {
+      flex-basis: 100%;
+      padding-left: 2.3em; } }
 
 .woocommerce-error {
   flex-wrap: wrap; }
@@ -1452,6 +1459,18 @@ ul.order_details[class] {
   #ship-to-different-address .woocommerce-form__label {
     display: flex;
     align-items: center; }
+
+@media only screen and (min-width: 768px) {
+  .woocommerce-form-login-toggle[class][class],
+  .woocommerce-form-login[class][class] {
+    position: relative;
+    z-index: 20;
+    float: left;
+    width: 55%;
+    padding-left: 5.25%;
+    padding-right: 8.75%;
+    margin: 0;
+    border: 0; } }
 
 .c-mini-cart {
   position: fixed;

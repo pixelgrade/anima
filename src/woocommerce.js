@@ -6,6 +6,9 @@
 
 	$(function(){
 
+		var $loginForm = $('.woocommerce-form--login');
+		console.log($loginForm);
+
 		var $body = $( document.body ).not( '.woocommerce-cart' );
 
 		// show mini cart when a product is added to cart

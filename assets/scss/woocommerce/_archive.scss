@@ -113,6 +113,7 @@
 
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 
   padding-left: 1em;
 
@@ -142,6 +143,13 @@
     -webkit-font-smoothing: antialiased;
 
     border-radius: 50%;
+  }
+
+  a {
+    @include below(tablet) {
+      flex-basis: 100%;
+      padding-left: 2.3em;
+    }
   }
 }
 
