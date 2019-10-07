@@ -1,5 +1,9 @@
 (function($, document) {
 
+	$( document.body ).on( 'checkout_error', function() {
+		$('.woocommerce-NoticeGroup-checkout').insertBefore( '#customer_details .col-1 .woocommerce-billing-fields' );
+	} );
+
 	$(function(){
 
 		var $body = $( document.body ).not( '.woocommerce-cart' );

@@ -71,6 +71,8 @@
     transition: var(--theme-transition);
     transition-property: opacity;
 
+    --is-social: 1;
+
     @include above(lap) {
       margin-left: -.5rem;
       position: absolute;
@@ -123,6 +125,16 @@
   &[href*="tel:"]:before { content: "\f095"; }
   &[href*="mailto:"]:before { content: "\f0e0"; }
   &[href*="feed"]:before { content: "\f09e"; }
+}
+
+@include below(lap) {
+  .social-menu-item {
+    display:inline-block;
+    &:not(:last-child) {
+      margin-right: var(--theme-spacing-small);
+      margin-bottom: var(--theme-spacing-micro);
+    }
+  }
 }
 
 

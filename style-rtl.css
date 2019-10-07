@@ -1178,7 +1178,8 @@ ul.menu a,
   margin-bottom: 0;
   font-size: 0;
   transition: var(--theme-transition);
-  transition-property: opacity; }
+  transition-property: opacity;
+  --is-social: 1; }
   @media only screen and (min-width: 1000px) {
     .site-header__menu a[href*="facebook"], .site-header__menu a[href*="twitter"], .site-header__menu a[href*="instagram"], .site-header__menu a[href*="youtube"], .site-header__menu a[href*="pinterest"], .site-header__menu a[href*="dropbox"], .site-header__menu a[href*="flickr"], .site-header__menu a[href*="tumblr"], .site-header__menu a[href*="apple"], .site-header__menu a[href*="dribbble"], .site-header__menu a[href*="skype"], .site-header__menu a[href*="foursquare"], .site-header__menu a[href*="vk"], .site-header__menu a[href*="wordpress"], .site-header__menu a[href*="reddit"], .site-header__menu a[href*="stumbleupon"], .site-header__menu a[href*="delicious"], .site-header__menu a[href*="digg"], .site-header__menu a[href*="behance"], .site-header__menu a[href*="spotify"], .site-header__menu a[href*="deviantart"], .site-header__menu a[href*="soundcloud"], .site-header__menu a[href*="codepen"], .site-header__menu a[href*="slideshare"], .site-header__menu a[href*="twitch"], .site-header__menu a[href*="yelp"], .site-header__menu a[href*="medium"], .site-header__menu a[href*="tripadvisor"], .site-header__menu a[href*="pocket"], .site-header__menu a[href*="500px"], .site-header__menu a[href*="amazon"], .site-header__menu a[href*="vimeo"], .site-header__menu a[href*="snapchat"], .site-header__menu a[href*="bandcamp"], .site-header__menu a[href*="etsy"], .site-header__menu a[href*="meetup"], .site-header__menu a[href*="tel:"], .site-header__menu a[href*="mailto:"], .site-header__menu a[href*="feed"] {
       margin-right: -.5rem;
@@ -1305,6 +1306,13 @@ ul.menu a,
 
 .site-header__menu a[href*="feed"]:before {
   content: "\f09e"; }
+
+@media not screen and (min-width: 1000px) {
+  .social-menu-item {
+    display: inline-block; }
+    .social-menu-item:not(:last-child) {
+      margin-left: var(--theme-spacing-small);
+      margin-bottom: var(--theme-spacing-micro); } }
 
 .site-header__inner-container > .site-header__content.alignfull {
   margin-right: calc( -1 * var(--theme-header-sides-spacing));
