@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-function rosa2_woocommerce_replace_hooks() {
+function rosa2_woocommerce_setup_hooks() {
 
     // Remove Sidebar
 	remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
@@ -114,7 +114,8 @@ function rosa2_woocommerce_replace_hooks() {
     // Change sale flash
 	add_filter( 'woocommerce_sale_flash', 'rosa2_woocommerce_sale_flash', 10, 1 );
 }
-add_action( 'wp_loaded', 'rosa2_woocommerce_replace_hooks' );
+// We do this late so we can give all others room to play.
+add_action( 'wp_loaded', 'rosa2_woocommerce_setup_hooks' );
 
 function rosa2_woocommerce_product_class( $classes, $product ) {
     $classes[] = 'wc-block-grid__product';
@@ -122,22 +123,49 @@ function rosa2_woocommerce_product_class( $classes, $product ) {
 	return $classes;
 }
 
+/**
+ * Change the loop start markup.
+ *
+ * @param string $markup
+ *
+ * @return string
+ */
 function rosa2_woocommerce_loop_start( $markup ) {
-    // Change product classes.
+    // We only want to filter product classes when we are in a loop (not when rendering single products).
 	add_filter( 'woocommerce_post_class', 'rosa2_woocommerce_product_class', 10, 2 );
 
-	return '<div class="wc-block-grid has-' . esc_attr( wc_get_loop_prop( 'columns' ) ) . '-columns"><ul class="wc-block-grid__products">';
+	$markup = '<div class="wc-block-grid has-' . esc_attr( wc_get_loop_prop( 'columns' ) ) . '-columns"><ul class="wc-block-grid__products">';
+
+	return $markup;
 }
 
+/**
+ * Change the loop end markup.
+ *
+ * @param string $markup
+ *
+ * @return string
+ */
 function rosa2_woocommerce_loop_end( $markup ) {
 	// Remove filter added in loop start.
 	remove_filter( 'woocommerce_post_class', 'rosa2_woocommerce_product_class', 10 );
 
-	return '</ul></div>';
+	$markup = '</ul><!-- .wc-block-grid__products --></div><!-- .wc-block-grid -->';
+
+	return $markup;
 }
 
+/**
+ * Change the sale flash markup.
+ *
+ * @param string $markup
+ *
+ * @return string
+ */
 function rosa2_woocommerce_sale_flash( $markup ) {
-	return '<span class="wc-block-grid__product-onsale">' . esc_html__( 'Sale!', '__theme_txtd' ) . '</span>';
+	$markup = '<span class="wc-block-grid__product-onsale">' . esc_html__( 'Sale!', '__theme_txtd' ) . '</span>';
+
+	return $markup;
 }
 
 function rosa2_add_start_wrapper_before_single_product_summary() {
@@ -145,7 +173,7 @@ function rosa2_add_start_wrapper_before_single_product_summary() {
 }
 
 function rosa2_add_end_wrapper_after_single_product_summary() {
-	echo '</div>';
+	echo '</div><!-- .c-product-main -->';
 }
 
 
@@ -154,7 +182,7 @@ function rosa2_add_start_wrapper_before_tabs() {
 }
 
 function rosa2_add_end_wrapper_after_tabs() {
-	echo '</div>';
+	echo '</div><!-- .c-woo-section.c-woo-tabs -->';
 }
 
 function rosa2_add_start_wrapper_before_upsells() {
@@ -162,7 +190,7 @@ function rosa2_add_start_wrapper_before_upsells() {
 }
 
 function rosa2_add_end_wrapper_after_upsells() {
-	echo '</div>';
+	echo '</div><!-- .c-woo-section.c-woo-upsells -->';
 }
 
 function rosa2_add_start_wrapper_before_related() {
@@ -170,7 +198,7 @@ function rosa2_add_start_wrapper_before_related() {
 }
 
 function rosa2_add_end_wrapper_after_related() {
-	echo '</div>';
+	echo '</div><!-- .c-woo-section.c-woo-related -->';
 }
 
 function rosa2_add_start_main_content() {
@@ -178,7 +206,7 @@ function rosa2_add_start_main_content() {
 }
 
 function rosa2_add_end_main_content() {
-	echo '</div></div>';
+	echo '</div><!-- .wp-block.alignwide --></div><!-- .wp-block-group__inner-container -->';
 }
 
 function rosa2_new_product_title_markup() {
@@ -190,7 +218,7 @@ function rosa2_price_wrapper_start() {
 }
 
 function rosa2_price_wrapper_end() {
-	echo '</div>';
+	echo '</div><!-- .wc-block-grid__product-price.price -->';
 }
 
 function rosa2_append_add_to_cart_button()  {
@@ -200,8 +228,12 @@ function rosa2_append_add_to_cart_button()  {
 	}
 
 	$product = wc_get_product();
-	$class = 'add_to_cart_button';
+	if ( empty( $product ) ) {
+		// Bail if we don't have a current product.
+		return;
+	}
 
+	$class = 'add_to_cart_button';
 	if ( $product->is_type( 'simple' ) ) {
 		$class .= '  ajax_add_to_cart';
 	} ?>
@@ -214,9 +246,7 @@ function rosa2_append_add_to_cart_button()  {
 
 function rosa2_output_checkout_site_identity() { ?>
 
-    <h1 class="woocommerce-checkout-title"><a
-                href="<?php echo esc_url( get_home_url() ); ?>"><span><?php echo esc_html( get_bloginfo( 'name' ) ) ?></span></a>
-    </h1>
+    <h1 class="woocommerce-checkout-title"><a href="<?php echo esc_url( get_home_url() ); ?>" rel="home"><span><?php echo esc_html( get_bloginfo( 'name' ) ) ?></span></a></h1>
 
 <?php }
 
@@ -244,8 +274,7 @@ function rosa2_output_ajax_add_to_cart_button() {
 	}
 
 	$product = wc_get_product();
-
-	if ( $product->is_type( 'simple' ) ) {
+	if ( ! empty( $product ) && $product->is_type( 'simple' ) ) {
 		woocommerce_template_loop_add_to_cart( array(
 			'class' => 'add_to_cart_button  ajax_add_to_cart'
 		) );
@@ -277,18 +306,18 @@ function rosa2_append_cart_icon_to_menu( $items, $args ) {
     }
 
 	$cart_item_count = WC()->cart->get_cart_contents_count();
-
 	if ( $cart_item_count ) {
 		$cart_count_span = '<div class="cart-count"><span>' . esc_html( $cart_item_count ) . '</span></div>';
 	} else {
-		$cart_count_span = '<div class="cart-count"><span>0</span></div>';
+		/* translators: Zero items in cart.  */
+		$cart_count_span = '<div class="cart-count"><span>' . esc_html__( '0', '__theme_txtd' ) . '</span></div>';
     }
 
 	$cart_link = '<li class="menu-item  menu-item--cart"><a class="js-open-cart" href="' . esc_url( get_permalink( wc_get_page_id( 'cart' ) ) ) . '">' . $cart_count_span . '</a></li>';
 
 
 	// Add the cart link to the end of the menu.
-	if ( $args->theme_location === 'primary' ) {
+	if ( ! empty( $args->theme_location ) && $args->theme_location === 'primary' ) {
 		$items = $items . $cart_link;
 	}
 
@@ -299,18 +328,15 @@ if ( ! function_exists( 'woocommerce_display_categories' ) ) {
 
 	function woocommerce_display_categories() {
 
-		global $wp_query;
+		// If there is a category queried, cache it.
+		$current_term = get_queried_object();
 
-		// get all product categories
+		// Get all product categories.
 		$terms = get_terms( array(
 			'taxonomy' => 'product_cat',
 		) );
-
-		// if there is a category queried cache it
-		$current_term = get_queried_object();
-
 		if ( ! empty( $terms ) ) {
-			// create a link which should link to the shop
+			// Create a link which should link to the shop.
 			$all_link = get_post_type_archive_link( 'product' );
 
 			echo '<ul class="woocommerce-categories">';
@@ -320,19 +346,18 @@ if ( ! function_exists( 'woocommerce_display_categories' ) ) {
 				echo '<li><a href="' . esc_url( $all_link ) . '" ' . ( ( ! isset( $current_term->term_id ) ) ? ' class="active"' : ' class="inactive"' ) . '>' . esc_html__( 'All Products', '__theme_txtd' ) . '</a></li>';
 			}
 
-			// display a link for each product category
-			foreach ( $terms as $key => $term ) {
-				$link = get_term_link( $term, 'product_cat' );
-				if ( ! is_wp_error( $link ) ) {
-
-					if ( ! empty( $current_term->name ) && $current_term->name === $term->name ) {
-						echo '<li><span class="active">' . esc_html( $term->name ) . '</span></li>';
-					} else {
+			// Display a link for each product category.
+			foreach ( $terms as $term ) {
+				if ( ! empty( $current_term->name ) && $current_term->name === $term->name ) {
+					echo '<li><span class="active">' . esc_html( $term->name ) . '</span></li>';
+				} else {
+					$link = get_term_link( $term, 'product_cat' );
+					if ( ! is_wp_error( $link ) ) {
 						echo '<li><a href="' . esc_url( $link ) . '">' . esc_html( $term->name ) . '</a></li>';
 					}
 				}
 			}
-			echo '</ul>';
+			echo '</ul><!-- .woocommerce-categories -->';
 		}
 	}
 }
@@ -367,19 +392,18 @@ function rosa2_product_category_classes($class) {
 }
 
 function rosa2_product_catalog_image_aspect_ratio() {
+	$aspect_ratio = 1;
+
     if ( function_exists( 'wc_get_image_size' ) ) {
         $size = wc_get_image_size( 'thumbnail' );
-    } else {
-        $size = array(
-            'width' => 300,
-            'height' => 300
-        );
+	    if ( ! empty( $size['width'] ) && ! empty( $size['height'] ) ) {
+		    $aspect_ratio = $size['width'] / $size['height'];
+	    }
     }
-
 
 	$css = '' .
     '.wc-block-grid__product-link {
-        --current-aspect-ratio: ' . $size['width'] / $size['height'] . ';' .
+        --current-aspect-ratio: ' . $aspect_ratio . ';' .
     '}';
 
 	wp_add_inline_style( 'rosa2-woocommerce', $css );
@@ -395,7 +419,7 @@ function rosa2_loop_product_link_open() {
 }
 
 function rosa2_loop_product_link_close() {
-	echo '</a>';
+	echo '</a><!-- .wc-block-grid__product-link -->';
 }
 
 function rosa2_loop_product_thumbnail_wrapper_open() {
@@ -403,5 +427,5 @@ function rosa2_loop_product_thumbnail_wrapper_open() {
 }
 
 function rosa2_loop_product_thumbnail_wrapper_close() {
-    echo '</div>';
+    echo '</div><!-- .wc-block-grid__product-image -->';
 }

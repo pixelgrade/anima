@@ -637,8 +637,6 @@ function rosa2_add_content_section_to_customify_config( $config ) {
 
 function rosa2_add_separators_section_to_customify_config( $config ) {
 
-	$separator_symbol_choices = array();
-
 	$separator_symbol_values = array(
 		'fleuron-1',
 		'fleuron-2',
@@ -647,10 +645,16 @@ function rosa2_add_separators_section_to_customify_config( $config ) {
 		'fleuron-5',
 	);
 
+	$separator_symbol_choices = array();
 	foreach ( $separator_symbol_values as $symbol ) {
 		ob_start();
 		get_template_part( 'template-parts/separators/' . $symbol . '-svg' );
 		$separator_symbol_choices[ $symbol ] = ob_get_clean();
+	}
+
+	// Bail if we have not choices.
+	if ( empty( $separator_symbol_choices ) ) {
+		return $config;
 	}
 
 	$rosa2_separators_section = array(
