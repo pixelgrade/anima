@@ -15,3 +15,7 @@ iframe.instagram-media {
 .is-style-lead {
     @include apply-font(lead);
 }
+
+img:not(.is-loaded) {
+    opacity: 0;
+}

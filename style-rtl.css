@@ -772,9 +772,6 @@ img {
   transition: var(--theme-transition);
   transition-property: opacity; }
 
-img:not(.is-loaded) {
-  opacity: 0; }
-
 .gm-style img {
   opacity: 1; }
 
@@ -3665,9 +3662,6 @@ span.page-numbers {
 .block-is-highlighted + .block-is-highlighted {
   padding-top: 0; }
 
-.has-image-on-the-left .novablocks-media__layout {
-  flex-direction: row-reverse; }
-
 .novablocks-media__content {
   max-width: 100%;
   font-family: var(--current-font-family);
@@ -3694,8 +3688,6 @@ span.page-numbers {
   min-height: 0; }
   .novablocks-media:not(.novablocks-media--no-thumbnail) .novablocks-media__aside {
     min-height: 15em; }
-  .novablocks-media__aside[class] {
-    order: 0; }
   .novablocks-media__aside .novablocks-media__image svg {
     position: absolute;
     top: 0;
@@ -3734,6 +3726,10 @@ span.page-numbers {
     padding-top: var(--theme-spacing-small); }
   .novablocks-media--blog[class] .novablocks-media__content {
     margin-bottom: 0; }
+  .novablocks-media--blog[class] .novablocks-media__aside {
+    order: 0; }
+  .novablocks-media--blog[class].has-image-on-the-left .novablocks-media__layout {
+    flex-direction: row-reverse; }
 
 @media not screen and (min-width: 768px) {
   .novablocks-media__content {
@@ -5170,3 +5166,6 @@ iframe.instagram-media {
   --current-letter-spacing: var(--theme-lead-letter-spacing);
   --current-text-transform: var(--theme-lead-text-transform);
   --current-text-decoration: var(--theme-lead-text-decoration); }
+
+img:not(.is-loaded) {
+  opacity: 0; }
