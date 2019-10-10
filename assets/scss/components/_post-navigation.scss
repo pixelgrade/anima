@@ -23,6 +23,8 @@
     padding-left: var(--theme-wrapper-sides-spacing);
     padding-right: var(--theme-wrapper-sides-spacing);
 
+    clear: both;
+
     .nav-links {
         @include post-navigation__links;
     }
@@ -44,6 +46,8 @@
 .post-navigation__post-title,
 .post-navigation__link-label {
     display: block;
+
+    word-break: break-word;
 }
 
 .post-navigation__link {
