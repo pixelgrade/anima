@@ -19,6 +19,7 @@ export default class Navbar {
 
 	initialize() {
 		this.onResize();
+		this.addSocialMenuClass();
 		this.initialized = true;
 		GlobalService.registerUpdate( this.onResize.bind( this ) );
 	}
@@ -115,5 +116,19 @@ export default class Navbar {
 		this.$menuItems.off( 'mousemove.hoverIntent mouseenter.hoverIntent mouseleave.hoverIntent' );
 		delete this.$menuItems.hoverIntent_t;
 		delete this.$menuItems.hoverIntent_s;
+	}
+
+	addSocialMenuClass() {
+		const $menuItem = $('.menu-item a');
+
+
+		$menuItem.each(function(index, obj){
+			let elementStyle = window.getComputedStyle(obj),
+				elementValue = elementStyle.getPropertyValue('--is-social');
+
+			if ( elementValue !== '') {
+				$(this).parent().addClass('social-menu-item')
+			}
+		});
 	}
 }

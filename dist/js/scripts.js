@@ -2509,6 +2509,7 @@ var navbar_Navbar = function () {
 		key: 'initialize',
 		value: function initialize() {
 			this.onResize();
+			this.addSocialMenuClass();
 			this.initialized = true;
 			globalService.registerUpdate(this.onResize.bind(this));
 		}
@@ -2614,6 +2615,20 @@ var navbar_Navbar = function () {
 			this.$menuItems.off('mousemove.hoverIntent mouseenter.hoverIntent mouseleave.hoverIntent');
 			delete this.$menuItems.hoverIntent_t;
 			delete this.$menuItems.hoverIntent_s;
+		}
+	}, {
+		key: 'addSocialMenuClass',
+		value: function addSocialMenuClass() {
+			var $menuItem = external_jQuery_default()('.menu-item a');
+
+			$menuItem.each(function (index, obj) {
+				var elementStyle = window.getComputedStyle(obj),
+				    elementValue = elementStyle.getPropertyValue('--is-social');
+
+				if (elementValue !== '') {
+					external_jQuery_default()(this).parent().addClass('social-menu-item');
+				}
+			});
 		}
 	}]);
 
