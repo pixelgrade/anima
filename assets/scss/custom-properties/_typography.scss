@@ -4,13 +4,15 @@
 
 :root {
     // font families
-    --theme-body-font-family: #{$theme-sm-font-body};
+    --theme-root-font-family: #{$theme-sm-font-body};
     --theme-primary-font-family: #{$theme-sm-font-primary};
     --theme-secondary-font-family: #{$theme-sm-font-secondary};
     --theme-accent-font-family: #{$theme-sm-font-accent};
 
     // font sizes
-    --theme-body-font-size: #{strip-unit($theme-body-font-size)};
+    --theme-root-font-size: #{strip-unit($theme-body-font-size)};
+    --theme-customify-fluid-unit: calc( var(--theme-spacing-fluid) / var(--theme-root-font-size) );
+    --theme-customify-fluid-font-size: calc( 1em / var(--theme-root-font-size) );
 
     // fluid typography settings
     --theme-font-size-breakpoint: #{strip-unit($theme-font-size-breakpoint)};

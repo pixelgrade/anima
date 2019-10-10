@@ -61,11 +61,13 @@ Table of Contents
   --current-light-tertiary: var(--theme-light-tertiary); }
 
 :root {
-  --theme-body-font-family: Reforma1969, sans-serif;
+  --theme-root-font-family: Reforma1969, sans-serif;
   --theme-primary-font-family: Reforma1969, sans-serif;
   --theme-secondary-font-family: Reforma2018, sans-serif;
   --theme-accent-font-family: Billy Ohio, sans-serif;
-  --theme-body-font-size: 16;
+  --theme-root-font-size: 16;
+  --theme-customify-fluid-unit: calc( var(--theme-spacing-fluid) / var(--theme-root-font-size) );
+  --theme-customify-fluid-font-size: calc( 1em / var(--theme-root-font-size) );
   --theme-font-size-breakpoint: 1440;
   --theme-font-size-minimum-value: 16;
   --theme-font-size-minimum-value-breakpoint: 320;
@@ -121,9 +123,7 @@ Table of Contents
 :root {
   --theme-transition-duration: 0.4s;
   --theme-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
-  --theme-transition: all var(--theme-transition-duration) var(--theme-transition-easing);
-  --theme-customify-fluid-unit: calc( var(--theme-spacing-fluid) / var(--theme-body-font-size) );
-  --theme-customify-fluid-font-size: calc( 1em / var(--theme-body-font-size) ); }
+  --theme-transition: all var(--theme-transition-duration) var(--theme-transition-easing); }
 
 /* 0. Reset */
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
@@ -4370,13 +4370,13 @@ span.page-numbers {
     transform: translate(0.4em, -50%) scale(-1, 1); }
 
 :root {
-  --theme-body-font-family: var(--theme-body-font-family);
+  --theme-body-font-family: var(--theme-root-font-family);
   --theme-body-line-height: 1.7;
   --theme-body-font-weight: 400;
   --theme-body-letter-spacing: -0.03em;
   --theme-body-text-transform: inherit;
   --theme-body-text-decoration: inherit;
-  --theme-body-font-size: calc( var(--theme-body-font-size) * 1px);
+  --theme-body-font-size: calc( var(--theme-root-font-size) * 1px);
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
   --x1: var(--theme-font-size-breakpoint);
