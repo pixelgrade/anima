@@ -40,6 +40,10 @@ function rosa2_body_classes( $classes ) {
 		$classes[] = 'has-hero';
 	}
 
+	if ( rosa2_last_block_hero() ) {
+		$classes[] = 'has-no-padding-bottom';
+	}
+
 	if ( rosa2_has_moderate_media_card_after_hero() ) {
 		$classes[] = 'has-moderate-media-card-after-hero';
 	}

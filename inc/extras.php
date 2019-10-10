@@ -39,6 +39,24 @@ function rosa2_page_has_hero() {
 	return false;
 }
 
+function rosa2_last_block_hero() {
+	global $post;
+
+	if ( ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
+		$blocks = parse_blocks( $post->post_content );
+
+		$count = count($blocks);
+
+		if ( ($blocks[$count - 1]['blockName'] === 'novablocks/hero' ) || ($blocks[$count - 1]['blockName'] === 'novablocks/slideshow' )) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+add_action('rosa_before_header', 'rosa2_last_block_hero');
+
 function rosa2_has_moderate_media_card_after_hero() {
 	global $post;
 
