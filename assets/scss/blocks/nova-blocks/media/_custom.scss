@@ -17,6 +17,7 @@
     }
 
     .novablocks-media__image {
+
         svg {
             @include image-cover;
             object-fit: contain;
@@ -36,6 +37,7 @@
 
 .novablocks-media--blog[class] {
     margin-top: 0;
+
     &:not(:first-child) {
         padding-top: var(--theme-spacing-small);
     }

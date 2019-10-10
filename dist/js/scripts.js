@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 78);
+/******/ 	return __webpack_require__(__webpack_require__.s = 77);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1439,8 +1439,7 @@ exports.f = {}.propertyIsEnumerable;
 /* 74 */,
 /* 75 */,
 /* 76 */,
-/* 77 */,
-/* 78 */
+/* 77 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2820,7 +2819,6 @@ external_jQuery_default()(function () {
 	if ($html.is('.wf-active')) {
 		scripts_initialize();
 	} else {
-		console.log('aicea');
 		$window.on('wf-active', scripts_initialize);
 	}
 });

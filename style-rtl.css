@@ -3673,27 +3673,14 @@ span.page-numbers {
   --novablocks-light-2: var(--current-light-secondary);
   --novablocks-light-3: var(--current-light-tertiary); }
 
-/*.novablocks-media*/
-.block-is-moderate + .block-is-moderate,
-.block-is-highlighted + .block-is-moderate,
-.novablocks-slideshow + .block-is-moderate,
-.novablocks-hero + .block-is-moderate, .block-is-moderate +
-.block-is-highlighted,
-.block-is-highlighted +
-.block-is-highlighted,
-.novablocks-slideshow +
-.block-is-highlighted,
-.novablocks-hero +
-.block-is-highlighted, .block-is-moderate +
-.novablocks-slideshow,
-.block-is-highlighted +
+.novablocks-media + .novablocks-media,
+.novablocks-slideshow + .novablocks-media,
+.novablocks-hero + .novablocks-media, .novablocks-media +
 .novablocks-slideshow,
 .novablocks-slideshow +
 .novablocks-slideshow,
 .novablocks-hero +
-.novablocks-slideshow, .block-is-moderate +
-.novablocks-hero,
-.block-is-highlighted +
+.novablocks-slideshow, .novablocks-media +
 .novablocks-hero,
 .novablocks-slideshow +
 .novablocks-hero,
@@ -3723,8 +3710,7 @@ span.page-numbers {
 .novablocks-media.novablocks-media--no-thumbnail .novablocks-media__image {
   display: flex;
   align-items: center;
-  justify-content: center;
-  background-color: var(--current-light-primary); }
+  justify-content: center; }
   .novablocks-media.novablocks-media--no-thumbnail .novablocks-media__image path {
     fill: var(--current-color-primary); }
 
@@ -5039,11 +5025,11 @@ html:not(.wf-active) {
     background-color: var(--sm-light-primary); }
 
 .entry-content > :not(.wp-block-group):not(.novablocks-media):not(.disabled-avoid-fout),
-[class*="__inner-container"] > :not(.wp-block-group):not(.novablocks-media):not(.disabled-avoid-fout) {
+[class*="__inner-container"]:not(.novablocks-hero__inner-container) > :not(.wp-block-group):not(.novablocks-media):not(.disabled-avoid-fout) {
   transition: var(--theme-transition);
   transition-property: opacity; }
   html:not(.wf-active) .entry-content > :not(.wp-block-group):not(.novablocks-media):not(.disabled-avoid-fout), html:not(.wf-active)
-  [class*="__inner-container"] > :not(.wp-block-group):not(.novablocks-media):not(.disabled-avoid-fout) {
+  [class*="__inner-container"]:not(.novablocks-hero__inner-container) > :not(.wp-block-group):not(.novablocks-media):not(.disabled-avoid-fout) {
     opacity: 0; }
 
 .novablocks-hero__inner-container[class][class] > * {
