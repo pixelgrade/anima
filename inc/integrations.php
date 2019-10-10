@@ -18,8 +18,7 @@ require_once trailingslashit( get_template_directory() ) . 'inc/integrations/nov
 /**
  * Load Customify integration for this theme.
  */
-require_once trailingslashit( get_template_directory() ) . 'inc/integrations/customify.php';
-require_once trailingslashit( get_template_directory() ) . 'inc/integrations/customify_extras.php';
+require_once trailingslashit( get_template_directory() ) . 'inc/integrations/customify/customify.php';
 
 /**
  * Load Jetpack integration for this theme.

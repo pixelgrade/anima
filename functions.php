@@ -144,7 +144,49 @@ function rosa2_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
+
+function rosa2_webfonts_fallback() {
+
+	if ( class_exists( 'PixCustomifyPlugin' ) ) {
+		return;
+	}
+
+	ob_start(); ?>
+		var config = {
+			classes: true,
+			events: true,
+			custom: {
+				families: [
+					'Reforma1969',
+					'Reforma2018',
+					'Billy Ohio',
+				],
+				urls: [
+					'//pxgcdn.com/fonts/reforma1969/stylesheet.css',
+					'//pxgcdn.com/fonts/reforma2018/stylesheet.css',
+					'//pxgcdn.com/fonts/billy-ohio/stylesheet.css',
+				],
+			},
+			loading: function() {
+				jQuery( window ).trigger( 'wf-loading' );
+			},
+			active: function() {
+				jQuery( window ).trigger( 'wf-active' );
+			},
+			inactive: function() {
+				jQuery( window ).trigger( 'wf-inactive' );
+			},
+		};
+		WebFont.load( config );
+	<?php $webfontloader_inline_script = ob_get_clean();
+
+	wp_register_script( 'webfontloader', '//ajax.googleapis.com/ajax/libs/webfont/1.5.10/webfont.js', array( 'jquery' ), null, true );
+	wp_add_inline_script( 'webfontloader', $webfontloader_inline_script );
+	wp_enqueue_script( 'webfontloader' );
+
+}
 add_action( 'wp_enqueue_scripts', 'rosa2_scripts', 10 );
+add_action( 'wp_enqueue_scripts', 'rosa2_webfonts_fallback', 10 );
 
 function rosa2_print_scripts() {
 	ob_start(); ?>
