@@ -35,16 +35,14 @@
         padding-left: var(--current-arrow-padding);
 
         &:after {
+            right: auto;
             left: 0;
+            transform: translate(0, -50%);
         }
     }
 
     > .next {
         padding-right: var(--current-arrow-padding);
-
-        &:after {
-            transform: translate(0, -50%) scale(-1, 1);
-        }
     }
 
     > .prev,

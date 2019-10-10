@@ -50,6 +50,10 @@
 .single,
 .page {
 
+    .entry-header > * {
+        @include avoid-fout-opacity;
+    }
+
     .hentry {
         @include space-children-y( var(--theme-spacing-large) );
     }
@@ -82,8 +86,17 @@
             width: auto;
             height: auto;
             max-height: 60vh;
-            margin-left: auto;
-            margin-right: auto;
         }
+    }
+
+    .entry-thumbnail__wrapper {
+        display: flex;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .entry-thumbnail__container {
+        background-color: var(--current-light-secondary);
     }
 }

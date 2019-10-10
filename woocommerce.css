@@ -2186,16 +2186,17 @@ ul.order_details[class] {
           -webkit-mask-size: cover;
           background-color: currentColor;
           vertical-align: text-bottom;
+          transform: translate(0, -50%) scale(-1, 1);
           transition: var(--theme-button-transition);
           transition-property: opacity, transform; } }
   .woocommerce-pagination > .prev {
     padding-left: var(--current-arrow-padding); }
     .woocommerce-pagination > .prev:after {
-      left: 0; }
+      right: auto;
+      left: 0;
+      transform: translate(0, -50%); }
   .woocommerce-pagination > .next {
     padding-right: var(--current-arrow-padding); }
-    .woocommerce-pagination > .next:after {
-      transform: translate(0, -50%) scale(-1, 1); }
   .woocommerce-pagination > .prev,
   .woocommerce-pagination > .current:last-child {
     margin-right: auto; }

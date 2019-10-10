@@ -40,7 +40,7 @@ html:not(.wf-active) {
 
 .entry-content,
 [class*="__inner-container"] {
-    > :not(.wp-block-group):not(.novablocks-media) {
+    > :not(.wp-block-group):not(.novablocks-media):not(.disabled-avoid-fout) {
         @include avoid-fout-opacity;
     }
 }

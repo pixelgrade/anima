@@ -12,6 +12,7 @@ $(function () {
 	if ( $html.is( '.wf-active' ) ) {
 		initialize();
 	} else {
+		console.log( 'aicea' );
 		$window.on( 'wf-active', initialize );
 	}
 });

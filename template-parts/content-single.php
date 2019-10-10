@@ -26,8 +26,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php if ( has_post_thumbnail() ) { ?>
             <div class="entry-thumbnail">
                 <div class="entry-content">
-                    <div class="wp-block-image alignwide">
-						<?php the_post_thumbnail(); ?>
+                    <div class="entry-thumbnail__wrapper  alignwide  disabled-avoid-fout">
+                        <div class="entry-thumbnail__container">
+						    <?php the_post_thumbnail(); ?>
+                        </div>
                     </div>
                 </div>
             </div>
