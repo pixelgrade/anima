@@ -1682,7 +1682,6 @@ var globalService_GlobalService = function () {
 	}, {
 		key: '_resizeCallback',
 		value: function _resizeCallback() {
-			console.log('resize');
 			var passedArguments = arguments;
 			external_jQuery_default.a.each(this.resizeCallbacks, function (i, fn) {
 				fn.apply(undefined, toConsumableArray_default()(passedArguments));
@@ -1691,7 +1690,6 @@ var globalService_GlobalService = function () {
 	}, {
 		key: '_scrollCallback',
 		value: function _scrollCallback() {
-			console.log('scroll');
 			var passedArguments = arguments;
 			external_jQuery_default.a.each(this.scrollCallbacks, function (i, fn) {
 				fn.apply(undefined, toConsumableArray_default()(passedArguments));
@@ -2282,14 +2280,18 @@ var header_Header = function () {
 			var $header = external_jQuery_default()(this.element);
 			var wasScrolled = $header.hasClass('site-header--scrolled');
 
+			$header.css('transition', 'none');
 			$header.removeClass('site-header--scrolled');
 
 			this.getProps();
 			this.setVisibleHeaderHeight();
+			this.shouldMakeHeaderStatic();
 
 			$header.toggleClass('site-header--scrolled', wasScrolled);
+			requestIdleCallback(function () {
+				$header.css('transition', '');
+			});
 
-			this.shouldMakeHeaderStatic();
 			this.update();
 		}
 	}, {
@@ -2299,8 +2301,6 @@ var header_Header = function () {
 
 			var _GlobalService$getPro = globalService.getProps(),
 			    windowHeight = _GlobalService$getPro.windowHeight;
-
-			console.log(this.wasSticky, this.visibleHeaderHeight, windowHeight * 0.2);
 
 			if (this.wasSticky) {
 				$body.toggleClass('has-site-header-fixed', this.visibleHeaderHeight < windowHeight * 0.2);

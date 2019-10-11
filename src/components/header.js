@@ -96,22 +96,24 @@ class Header {
 		const $header = $( this.element );
 		const wasScrolled = $header.hasClass( 'site-header--scrolled' );
 
+		$header.css( 'transition', 'none' );
 		$header.removeClass( 'site-header--scrolled' );
 
 		this.getProps();
 		this.setVisibleHeaderHeight();
+		this.shouldMakeHeaderStatic();
 
 		$header.toggleClass( 'site-header--scrolled', wasScrolled );
+		requestIdleCallback( () => {
+			$header.css( 'transition', '' );
+		} );
 
-		this.shouldMakeHeaderStatic();
 		this.update();
 	}
 
 	shouldMakeHeaderStatic() {
 		const $body = $( 'body' );
 		const { windowHeight } = GlobalService.getProps();
-
-		console.log( this.wasSticky, this.visibleHeaderHeight, windowHeight * 0.2 );
 
 		if ( this.wasSticky ) {
 			$body.toggleClass( 'has-site-header-fixed', this.visibleHeaderHeight < windowHeight * 0.2 );

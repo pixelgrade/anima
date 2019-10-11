@@ -116,7 +116,6 @@ class GlobalService {
 	}
 
 	_resizeCallback() {
-		console.log( 'resize' );
 		const passedArguments = arguments;
 		$.each( this.resizeCallbacks, function( i, fn ) {
 			fn( ...passedArguments );
@@ -124,7 +123,6 @@ class GlobalService {
 	}
 
 	_scrollCallback() {
-		console.log( 'scroll' );
 		const passedArguments = arguments;
 		$.each( this.scrollCallbacks, function( i, fn ) {
 			fn( ...passedArguments );
