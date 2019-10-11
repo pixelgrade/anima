@@ -21,7 +21,7 @@ export default class Navbar {
 		this.onResize();
 		this.addSocialMenuClass();
 		this.initialized = true;
-		GlobalService.registerUpdate( this.onResize.bind( this ) );
+		GlobalService.registerOnResize( this.onResize.bind( this ) );
 	}
 
 	onResize() {

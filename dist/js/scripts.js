@@ -1509,6 +1509,28 @@ var debounce = function debounce(func, wait) {
 		timeout = setTimeout(later, wait);
 	};
 };
+
+var hasTouchScreen = function hasTouchScreen() {
+	var hasTouchScreen = false;
+
+	if ("maxTouchPoints" in navigator) {
+		hasTouchScreen = navigator.maxTouchPoints > 0;
+	} else if ("msMaxTouchPoints" in navigator) {
+		hasTouchScreen = navigator.msMaxTouchPoints > 0;
+	} else {
+		var mQ = window.matchMedia && matchMedia("(pointer:coarse)");
+		if (mQ && mQ.media === "(pointer:coarse)") {
+			hasTouchScreen = !!mQ.matches;
+		} else if ('orientation' in window) {
+			hasTouchScreen = true;
+		} else {
+			var UA = navigator.userAgent;
+			hasTouchScreen = /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) || /\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA);
+		}
+	}
+
+	return hasTouchScreen;
+};
 // EXTERNAL MODULE: ./node_modules/babel-runtime/core-js/object/keys.js
 var keys = __webpack_require__(35);
 var keys_default = /*#__PURE__*/__webpack_require__.n(keys);
@@ -1535,150 +1557,161 @@ var globalService_GlobalService = function () {
 		classCallCheck_default()(this, GlobalService);
 
 		this.props = {};
+		this.newProps = {};
 		this.renderCallbacks = [];
-		this.updateCallbacks = [];
+		this.resizeCallbacks = [];
 		this.observeCallbacks = [];
+		this.scrollCallbacks = [];
+		this.currentMutationList = [];
 		this.frameRendered = true;
 
-		this.initializeMutationObserver();
-
-		var updateProps = this.updateProps.bind(this);
-		var updateScroll = this.updateScroll.bind(this);
-		var renderLoop = this.renderLoop.bind(this);
-
-		updateProps();
-		updateScroll();
-
-		document.addEventListener('DOMContentLoaded', updateProps);
-		window.addEventListener('resize', updateProps);
-		window.addEventListener('load', updateProps);
-		window.addEventListener('scroll', updateScroll);
-		window.requestAnimationFrame(renderLoop);
+		this._init();
 	}
 
 	createClass_default()(GlobalService, [{
-		key: 'initializeMutationObserver',
-		value: function initializeMutationObserver() {
-			this.currentMutationList = [];
+		key: '_init',
+		value: function _init() {
+			var $window = external_jQuery_default()(window);
+			var updateProps = this._updateProps.bind(this);
+			var renderLoop = this._renderLoop.bind(this);
 
+			updateProps();
+
+			external_jQuery_default()(updateProps);
+
+			this._bindOnResize();
+			this._bindOnScroll();
+			this._bindOnLoad();
+			this._bindObserver();
+			this._bindCustomizer();
+
+			requestAnimationFrame(renderLoop);
+		}
+	}, {
+		key: '_bindOnResize',
+		value: function _bindOnResize() {
+			var $window = external_jQuery_default()(window);
+			var useOrientation = hasTouchScreen() && 'orientation' in window;
+			var updateProps = this._updateProps.bind(this);
+
+			if (useOrientation) {
+				$window.on('orientationchange', function () {
+					$window.one('resize', updateProps);
+				});
+			} else {
+				$window.on('resize', updateProps);
+			}
+		}
+	}, {
+		key: '_bindOnScroll',
+		value: function _bindOnScroll() {
+			external_jQuery_default()(window).on('scroll', this._updateScroll.bind(this));
+		}
+	}, {
+		key: '_bindOnLoad',
+		value: function _bindOnLoad() {
+			external_jQuery_default()(window).on('load', this._updateProps.bind(this));
+		}
+	}, {
+		key: '_bindObserver',
+		value: function _bindObserver() {
 			var self = this;
-			var observeCallback = this.observeCallback.bind(this);
+			var updateProps = this._updateProps.bind(this);
+			var observeCallback = this._observeCallback.bind(this);
+
 			var observeAndUpdateProps = function observeAndUpdateProps() {
-				observeCallback(self.currentMutationList);
-				self.updateProps(true);
+				observeCallback();
+				self._updateProps(true);
 				self.currentMutationList = [];
 			};
 			var debouncedObserveCallback = debounce(observeAndUpdateProps, 200);
 
-			this.observe(function (mutationList) {
+			if (!window.MutationObserver) {
+				return;
+			}
+
+			var observer = new MutationObserver(function (mutationList) {
 				self.currentMutationList = self.currentMutationList.concat(mutationList);
 				debouncedObserveCallback();
 			});
 		}
 	}, {
-		key: 'initializeCustomizerCallbacks',
-		value: function initializeCustomizerCallbacks() {
+		key: '_bindCustomizer',
+		value: function _bindCustomizer() {
 			if (typeof wp !== "undefined" && typeof wp.customize !== "undefined") {
 				if (typeof wp.customize.selectiveRefresh !== "undefined") {
-					wp.customize.selectiveRefresh.bind('partial-content-rendered', this.updateProps.bind(this));
+					wp.customize.selectiveRefresh.bind('partial-content-rendered', this._updateProps.bind(this));
 				}
-				wp.customize.bind('change', this.updateProps.bind(this));
+				wp.customize.bind('change', this._updateProps.bind(this));
 			}
 		}
 	}, {
-		key: 'observeCallback',
-		value: function observeCallback() {
-			var passedArguments = arguments;
+		key: '_updateProps',
+		value: function _updateProps() {
+			var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+			this._updateSize(force);
+			this._updateScroll(force);
+		}
+	}, {
+		key: '_observeCallback',
+		value: function _observeCallback() {
+			var mutationList = this.currentMutationList;
+
 			external_jQuery_default.a.each(this.observeCallbacks, function (i, fn) {
-				fn.apply(undefined, toConsumableArray_default()(passedArguments));
+				fn(mutationList);
 			});
 		}
 	}, {
-		key: 'observe',
-		value: function observe(callback) {
-			if (!window.MutationObserver) {
-				return;
-			}
-
-			var observer = new MutationObserver(callback);
-
-			observer.observe(document.body, {
-				childList: true,
-				subtree: true
-			});
-		}
-	}, {
-		key: 'registerObserverCallback',
-		value: function registerObserverCallback(fn) {
-			if (typeof fn === "function" && this.observeCallbacks.indexOf(fn) < 0) {
-				this.observeCallbacks.push(fn);
-			}
-		}
-	}, {
-		key: 'renderLoop',
-		value: function renderLoop() {
+		key: '_renderLoop',
+		value: function _renderLoop() {
 			if (!this.frameRendered) {
-				this.renderStuff();
+				this._renderCallback();
 				this.frameRendered = true;
 			}
-			window.requestAnimationFrame(this.renderLoop.bind(this));
+			window.requestAnimationFrame(this._renderLoop.bind(this));
 		}
 	}, {
-		key: 'registerRender',
-		value: function registerRender(fn) {
-			if (typeof fn === "function" && this.renderCallbacks.indexOf(fn) < 0) {
-				this.renderCallbacks.push(fn);
-			}
-		}
-	}, {
-		key: 'renderStuff',
-		value: function renderStuff() {
+		key: '_renderCallback',
+		value: function _renderCallback() {
 			var passedArguments = arguments;
 			external_jQuery_default.a.each(this.renderCallbacks, function (i, fn) {
 				fn.apply(undefined, toConsumableArray_default()(passedArguments));
 			});
 		}
 	}, {
-		key: 'registerUpdate',
-		value: function registerUpdate(fn) {
-			if (typeof fn === "function" && this.updateCallbacks.indexOf(fn) < 0) {
-				this.updateCallbacks.push(fn);
-			}
-		}
-	}, {
-		key: 'updateStuff',
-		value: function updateStuff() {
+		key: '_resizeCallback',
+		value: function _resizeCallback() {
+			console.log('resize');
 			var passedArguments = arguments;
-			external_jQuery_default.a.each(this.updateCallbacks, function (i, fn) {
+			external_jQuery_default.a.each(this.resizeCallbacks, function (i, fn) {
 				fn.apply(undefined, toConsumableArray_default()(passedArguments));
 			});
 		}
 	}, {
-		key: 'updateScroll',
-		value: function updateScroll() {
-
-			var newProps = {
-				scrollY: window.pageYOffset,
-				scrollX: window.pageXOffset
-			};
-
-			if (this.checkNewProps(newProps)) {
-				this.props = assign_default()({}, this.props, newProps);
-				this.frameRendered = false;
-			}
-		}
-	}, {
-		key: 'checkNewProps',
-		value: function checkNewProps(newProps) {
-			var _this = this;
-
-			return keys_default()(newProps).some(function (key) {
-				return newProps[key] !== _this.props[key];
+		key: '_scrollCallback',
+		value: function _scrollCallback() {
+			console.log('scroll');
+			var passedArguments = arguments;
+			external_jQuery_default.a.each(this.scrollCallbacks, function (i, fn) {
+				fn.apply(undefined, toConsumableArray_default()(passedArguments));
 			});
 		}
 	}, {
-		key: 'updateProps',
-		value: function updateProps() {
+		key: '_updateScroll',
+		value: function _updateScroll() {
+			var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+			this.newProps = assign_default()({}, this.newProps, {
+				scrollY: window.pageYOffset,
+				scrollX: window.pageXOffset
+			});
+
+			this._shouldUpdate(this._scrollCallback.bind(this));
+		}
+	}, {
+		key: '_updateSize',
+		value: function _updateSize() {
 			var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
 			var body = document.body;
@@ -1686,21 +1719,39 @@ var globalService_GlobalService = function () {
 			var bodyScrollHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight);
 			var htmlScrollHeight = Math.max(html.scrollHeight, html.offsetHeight);
 
-			var newProps = {
+			this.newProps = assign_default()({}, this.newProps, {
 				scrollHeight: Math.max(bodyScrollHeight, htmlScrollHeight),
 				adminBarHeight: this.getAdminBarHeight(),
-				windowWidth: window.innerWidth,
-				windowHeight: window.innerHeight
-			};
+				windowWidth: window.screen && window.screen.availWidth || window.innerWidth,
+				windowHeight: window.screen && window.screen.availHeight || window.innerHeight
+			});
 
-			this.updateScroll();
+			this._shouldUpdate(this._resizeCallback.bind(this));
+		}
+	}, {
+		key: '_shouldUpdate',
+		value: function _shouldUpdate(callback) {
+			var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-			if (this.checkNewProps(newProps) || force) {
-				this.props = assign_default()({}, this.props, newProps);
 
-				this.updateStuff();
+			if (this._hasNewProps() || force) {
+				this.props = assign_default()({}, this.props, this.newProps);
+				this.newProps = {};
 				this.frameRendered = false;
+
+				if (typeof callback === "function") {
+					callback();
+				}
 			}
+		}
+	}, {
+		key: '_hasNewProps',
+		value: function _hasNewProps() {
+			var _this = this;
+
+			return keys_default()(this.newProps).some(function (key) {
+				return _this.newProps[key] !== _this.props[key];
+			});
 		}
 	}, {
 		key: 'getAdminBarHeight',
@@ -1715,14 +1766,37 @@ var globalService_GlobalService = function () {
 			return 0;
 		}
 	}, {
+		key: 'registerOnResize',
+		value: function registerOnResize(fn) {
+			if (typeof fn === "function" && this.resizeCallbacks.indexOf(fn) < 0) {
+				this.resizeCallbacks.push(fn);
+			}
+		}
+	}, {
+		key: 'registerOnScroll',
+		value: function registerOnScroll(fn) {
+			if (typeof fn === "function" && this.scrollCallbacks.indexOf(fn) < 0) {
+				this.scrollCallbacks.push(fn);
+			}
+		}
+	}, {
+		key: 'registerObserverCallback',
+		value: function registerObserverCallback(fn) {
+			if (typeof fn === "function" && this.observeCallbacks.indexOf(fn) < 0) {
+				this.observeCallbacks.push(fn);
+			}
+		}
+	}, {
+		key: 'registerRender',
+		value: function registerRender(fn) {
+			if (typeof fn === "function" && this.renderCallbacks.indexOf(fn) < 0) {
+				this.renderCallbacks.push(fn);
+			}
+		}
+	}, {
 		key: 'getProps',
 		value: function getProps() {
 			return this.props;
-		}
-	}, {
-		key: 'getProp',
-		value: function getProp(propName) {
-			return this.props[propName];
 		}
 	}]);
 
@@ -1761,7 +1835,7 @@ var hero_Hero = function () {
 		value: function init() {
 			var _this2 = this;
 
-			globalService.registerUpdate(function () {
+			globalService.registerOnScroll(function () {
 				_this2.update();
 			});
 
@@ -2129,7 +2203,7 @@ var header_Header = function () {
 		this.createMobileHeader();
 
 		this.onResize();
-		globalService.registerUpdate(this.onResize.bind(this));
+		globalService.registerOnResize(this.onResize.bind(this));
 
 		this.timeline = this.getInroTimeline();
 		this.timeline.play();
@@ -2338,12 +2412,9 @@ var announcement_bar_AnnouncementBar = function () {
 		}
 
 		this.onResize();
-		globalService.registerUpdate(this.onResize.bind(this));
+		globalService.registerOnResize(this.onResize.bind(this));
 
-		//		if ( typeof this.timeline !== "undefined" ) {
-		//		console.log( this.timeline );
 		this.timeline.play();
-		//		}
 
 		this.bindEvents();
 	}
@@ -2511,7 +2582,7 @@ var navbar_Navbar = function () {
 			this.onResize();
 			this.addSocialMenuClass();
 			this.initialized = true;
-			globalService.registerUpdate(this.onResize.bind(this));
+			globalService.registerOnResize(this.onResize.bind(this));
 		}
 	}, {
 		key: 'onResize',

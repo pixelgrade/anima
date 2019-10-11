@@ -27,7 +27,7 @@ class Header {
 		this.createMobileHeader();
 
 		this.onResize();
-		GlobalService.registerUpdate( this.onResize.bind( this ) );
+		GlobalService.registerOnResize( this.onResize.bind( this ) );
 
 		this.timeline = this.getInroTimeline();
 		this.timeline.play();

@@ -23,12 +23,9 @@ export default class AnnouncementBar {
 		}
 
 		this.onResize();
-		GlobalService.registerUpdate( this.onResize.bind( this ) );
+		GlobalService.registerOnResize( this.onResize.bind( this ) );
 
-//		if ( typeof this.timeline !== "undefined" ) {
-//		console.log( this.timeline );
 		this.timeline.play();
-//		}
 
 		this.bindEvents();
 	}

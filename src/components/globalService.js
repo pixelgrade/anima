@@ -1,159 +1,178 @@
 import $ from 'jquery';
-import { debounce } from '../utils';
+import { debounce, hasTouchScreen } from '../utils';
 
 class GlobalService {
 
 	constructor() {
 		this.props = {};
+		this.newProps = {};
 		this.renderCallbacks = [];
-		this.updateCallbacks = [];
+		this.resizeCallbacks = [];
 		this.observeCallbacks = [];
+		this.scrollCallbacks = [];
+		this.currentMutationList = [];
 		this.frameRendered = true;
 
-		this.initializeMutationObserver();
-
-
-		const updateProps = this.updateProps.bind( this );
-		const updateScroll = this.updateScroll.bind( this );
-		const renderLoop = this.renderLoop.bind( this );
-
-		updateProps();
-		updateScroll();
-
-		document.addEventListener('DOMContentLoaded', updateProps );
-		window.addEventListener( 'resize', updateProps );
-		window.addEventListener( 'load', updateProps );
-		window.addEventListener( 'scroll', updateScroll );
-		window.requestAnimationFrame( renderLoop );
+		this._init();
 	}
 
-	initializeMutationObserver() {
-		this.currentMutationList = [];
+	_init() {
+		const $window = $( window );
+		const updateProps = this._updateProps.bind( this );
+		const renderLoop = this._renderLoop.bind( this );
 
+		updateProps();
+
+		$( updateProps );
+
+		this._bindOnResize();
+		this._bindOnScroll();
+		this._bindOnLoad();
+		this._bindObserver();
+		this._bindCustomizer();
+
+		requestAnimationFrame( renderLoop );
+	}
+
+	_bindOnResize() {
+		const $window = $( window );
+		const useOrientation = hasTouchScreen() && 'orientation' in window;
+		const updateProps = this._updateProps.bind( this );
+
+		if ( useOrientation ) {
+			$window.on( 'orientationchange', () => {
+				$window.one( 'resize', updateProps );
+			} );
+		} else {
+			$window.on( 'resize', updateProps );
+		}
+	}
+
+	_bindOnScroll() {
+		$( window ).on( 'scroll', this._updateScroll.bind( this ) );
+	}
+
+	_bindOnLoad() {
+		$( window ).on( 'load', this._updateProps.bind( this ) );
+	}
+
+	_bindObserver() {
 		const self = this;
-		const observeCallback = this.observeCallback.bind( this );
-		const observeAndUpdateProps = function() {
-			observeCallback( self.currentMutationList );
-			self.updateProps( true );
+		const updateProps = this._updateProps.bind( this );
+		const observeCallback = this._observeCallback.bind( this );
+
+		const observeAndUpdateProps = () => {
+			observeCallback();
+			self._updateProps( true );
 			self.currentMutationList = [];
 		};
 		const debouncedObserveCallback = debounce( observeAndUpdateProps, 200 );
 
-		this.observe( function( mutationList ) {
+		if ( ! window.MutationObserver ) {
+			return;
+		}
+
+		const observer = new MutationObserver( function( mutationList ) {
 			self.currentMutationList = self.currentMutationList.concat( mutationList );
 			debouncedObserveCallback();
 		} );
 	}
 
-	initializeCustomizerCallbacks() {
+	_bindCustomizer() {
 		if ( typeof wp !== "undefined" && typeof wp.customize !== "undefined" ) {
 			if ( typeof wp.customize.selectiveRefresh !== "undefined" ) {
-				wp.customize.selectiveRefresh.bind( 'partial-content-rendered', this.updateProps.bind( this ) );
+				wp.customize.selectiveRefresh.bind( 'partial-content-rendered', this._updateProps.bind( this ) );
 			}
-			wp.customize.bind( 'change', this.updateProps.bind( this ) );
+			wp.customize.bind( 'change', this._updateProps.bind( this ) );
 		}
 	}
 
-	observeCallback() {
-		const passedArguments = arguments;
+	_updateProps( force = false ) {
+		this._updateSize( force );
+		this._updateScroll( force );
+	}
+
+	_observeCallback() {
+		const mutationList = this.currentMutationList;
+
 		$.each(this.observeCallbacks, function( i, fn ) {
-			fn( ...passedArguments );
+			fn( mutationList );
 		});
 	}
 
-	observe( callback ) {
-		if ( ! window.MutationObserver ) {
-			return;
-		}
-
-		const observer = new MutationObserver( callback );
-
-		observer.observe( document.body, {
-			childList: true,
-			subtree: true
-		} );
-	}
-
-	registerObserverCallback( fn ) {
-		if ( typeof fn === "function" && this.observeCallbacks.indexOf( fn ) < 0 ) {
-			this.observeCallbacks.push( fn );
-		}
-	}
-
-	renderLoop() {
+	_renderLoop() {
 		if ( ! this.frameRendered ) {
-			this.renderStuff();
+			this._renderCallback();
 			this.frameRendered = true;
 		}
-		window.requestAnimationFrame( this.renderLoop.bind( this ) );
+		window.requestAnimationFrame( this._renderLoop.bind( this ) );
 	}
 
-	registerRender( fn ) {
-		if ( typeof fn === "function" && this.renderCallbacks.indexOf( fn ) < 0 ) {
-			this.renderCallbacks.push( fn );
-		}
-	}
-
-	renderStuff() {
+	_renderCallback() {
 		const passedArguments = arguments;
 		$.each( this.renderCallbacks, function( i, fn ) {
 			fn( ...passedArguments );
 		} );
 	}
 
-	registerUpdate( fn ) {
-		if ( typeof fn === "function" && this.updateCallbacks.indexOf( fn ) < 0 ) {
-			this.updateCallbacks.push( fn );
-		}
-	}
-
-	updateStuff() {
+	_resizeCallback() {
+		console.log( 'resize' );
 		const passedArguments = arguments;
-		$.each( this.updateCallbacks, function( i, fn ) {
+		$.each( this.resizeCallbacks, function( i, fn ) {
 			fn( ...passedArguments );
 		} );
 	}
 
-	updateScroll() {
+	_scrollCallback() {
+		console.log( 'scroll' );
+		const passedArguments = arguments;
+		$.each( this.scrollCallbacks, function( i, fn ) {
+			fn( ...passedArguments );
+		} );
+	}
 
-		const newProps = {
+	_updateScroll( force = false ) {
+		this.newProps = Object.assign( {}, this.newProps, {
 			scrollY: window.pageYOffset,
 			scrollX: window.pageXOffset,
-		}
+		} );
 
-		if ( this.checkNewProps( newProps ) ) {
-			this.props = Object.assign( {}, this.props, newProps );
-			this.frameRendered = false;
-		}
+		this._shouldUpdate( this._scrollCallback.bind( this ) );
 	}
 
-	checkNewProps( newProps ) {
-		return Object.keys( newProps ).some( key => {
-			return newProps[key] !== this.props[key];
-		} )
-	}
-
-	updateProps( force = false ) {
+	_updateSize( force = false ) {
 		const body = document.body;
 		const html = document.documentElement;
 		const bodyScrollHeight = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight );
 		const htmlScrollHeight = Math.max( html.scrollHeight, html.offsetHeight );
 
-		const newProps = {
+		this.newProps = Object.assign( {}, this.newProps, {
 			scrollHeight: Math.max( bodyScrollHeight, htmlScrollHeight ),
 			adminBarHeight: this.getAdminBarHeight(),
-			windowWidth: window.innerWidth,
-			windowHeight: window.innerHeight,
-		}
+			windowWidth: window.screen && window.screen.availWidth || window.innerWidth,
+			windowHeight: window.screen && window.screen.availHeight ||window.innerHeight,
+		} );
 
-		this.updateScroll();
+		this._shouldUpdate( this._resizeCallback.bind( this ) );
+	}
 
-		if ( this.checkNewProps( newProps ) || force ) {
-			this.props = Object.assign( {}, this.props, newProps );
+	_shouldUpdate( callback, force = false ) {
 
-			this.updateStuff();
+		if ( this._hasNewProps() || force ) {
+			this.props = Object.assign( {}, this.props, this.newProps );
+			this.newProps = {};
 			this.frameRendered = false;
+
+			if ( typeof callback === "function" ) {
+				callback();
+			}
 		}
+	}
+
+	_hasNewProps() {
+		return Object.keys( this.newProps ).some( key => {
+			return this.newProps[key] !== this.props[key];
+		} )
 	}
 
 	getAdminBarHeight() {
@@ -167,12 +186,32 @@ class GlobalService {
 		return 0;
 	}
 
-	getProps() {
-		return this.props;
+	registerOnResize( fn ) {
+		if ( typeof fn === "function" && this.resizeCallbacks.indexOf( fn ) < 0 ) {
+			this.resizeCallbacks.push( fn );
+		}
 	}
 
-	getProp( propName ) {
-		return this.props[ propName ];
+	registerOnScroll( fn ) {
+		if ( typeof fn === "function" && this.scrollCallbacks.indexOf( fn ) < 0 ) {
+			this.scrollCallbacks.push( fn );
+		}
+	}
+
+	registerObserverCallback( fn ) {
+		if ( typeof fn === "function" && this.observeCallbacks.indexOf( fn ) < 0 ) {
+			this.observeCallbacks.push( fn );
+		}
+	}
+
+	registerRender( fn ) {
+		if ( typeof fn === "function" && this.renderCallbacks.indexOf( fn ) < 0 ) {
+			this.renderCallbacks.push( fn );
+		}
+	}
+
+	getProps() {
+		return this.props;
 	}
 }
 
