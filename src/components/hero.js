@@ -16,7 +16,7 @@ export default class Hero {
 
 	init() {
 
-		GlobalService.registerUpdate(() => {
+		GlobalService.registerOnScroll(() => {
 			this.update();
 		});
 
