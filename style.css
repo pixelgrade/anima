@@ -1851,9 +1851,13 @@ ul.menu a,
     --element-spacing: var(--theme-spacing-small);
     margin-top: var(--element-spacing); }
   .entry-content > .nova-food-menu,
-  .entry-content > .wp-block-group:not([class*="is-style"]),
+  .entry-content > .wp-block-group,
+  .entry-content > .novablocks-hero,
+  .entry-content > .novablocks-slideshow,
   [class*="__inner-container"] > .nova-food-menu,
-  [class*="__inner-container"] > .wp-block-group:not([class*="is-style"]) {
+  [class*="__inner-container"] > .wp-block-group,
+  [class*="__inner-container"] > .novablocks-hero,
+  [class*="__inner-container"] > .novablocks-slideshow {
     --element-spacing: var(--theme-spacing-fluid-large); }
 
 .entry-footer {
@@ -3527,7 +3531,7 @@ span.page-numbers {
 .wp-block-group {
   padding-top: var(--theme-spacing-fluid-large);
   padding-bottom: var(--theme-spacing-fluid-large); }
-  .wp-block-group:not([class*="is-style"]) {
+  .wp-block-group:not([class*="is-style-"]):not([class*="novablocks-media"]), .wp-block-group.is-style-default {
     padding-top: 0;
     padding-bottom: 0;
     margin-bottom: var(--element-spacing); }
@@ -3688,20 +3692,23 @@ span.page-numbers {
   --novablocks-light-2: var(--current-light-secondary);
   --novablocks-light-3: var(--current-light-tertiary); }
 
-.novablocks-media + .novablocks-media,
-.novablocks-slideshow + .novablocks-media,
-.novablocks-hero + .novablocks-media, .novablocks-media +
+.novablocks-media.wp-block-group + .novablocks-media.wp-block-group,
+.novablocks-slideshow + .novablocks-media.wp-block-group,
+.novablocks-hero + .novablocks-media.wp-block-group, .novablocks-media.wp-block-group +
 .novablocks-slideshow,
 .novablocks-slideshow +
 .novablocks-slideshow,
 .novablocks-hero +
-.novablocks-slideshow, .novablocks-media +
+.novablocks-slideshow, .novablocks-media.wp-block-group +
 .novablocks-hero,
 .novablocks-slideshow +
 .novablocks-hero,
 .novablocks-hero +
 .novablocks-hero {
   --element-spacing: 0; }
+
+.novablocks-media.wp-block-group.block-is-basic + .novablocks-media.wp-block-group.block-is-basic {
+  padding-top: 0; }
 
 .novablocks-announcement-bar {
   --novablocks-announcement-color: var(--sm-light-primary);

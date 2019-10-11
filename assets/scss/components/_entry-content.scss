@@ -8,8 +8,14 @@
     @include space-children-y( var(--theme-spacing-small) );
 
 	// Larger spacing for specific blocks
+	// Food Menu Blocks
     > .nova-food-menu,
-    > .wp-block-group:not([class*="is-style"]) {
-		--element-spacing:: var(--theme-spacing-fluid-large);
+    // Group Block
+    > .wp-block-group,
+	// Hero/Slideshow Blocks
+	> .novablocks-hero,
+	> .novablocks-slideshow {
+		--element-spacing: var(--theme-spacing-fluid-large);
     }
+    // Columns Block is in /blocks/core/columns/_style.scss
 }

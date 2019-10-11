@@ -13,12 +13,20 @@
     --novablocks-light-3: var(--current-light-tertiary);
 }
 
-.novablocks-media,
+.novablocks-media.wp-block-group,
 .novablocks-slideshow,
 .novablocks-hero {
 
     & + & {
         --element-spacing: 0;
+    }
+}
+
+.novablocks-media.wp-block-group {
+    &.block-is-basic {
+        & + & {
+            padding-top: 0;
+        }
     }
 }
 

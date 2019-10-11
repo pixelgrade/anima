@@ -1290,7 +1290,7 @@
   .editor-styles-wrapper .wp-block-group {
     padding-top: var(--theme-spacing-fluid-large);
     padding-bottom: var(--theme-spacing-fluid-large); }
-    .editor-styles-wrapper .wp-block-group:not([class*="is-style"]) {
+    .editor-styles-wrapper .wp-block-group:not([class*="is-style-"]):not([class*="novablocks-media"]), .editor-styles-wrapper .wp-block-group.is-style-default {
       padding-top: 0;
       padding-bottom: 0;
       margin-bottom: var(--element-spacing); }

@@ -10,7 +10,8 @@
 
 	// No background 
 	// Set "large" spacing 
-	&:not([class*="is-style"]) {
+	&:not([class*="is-style-"]):not([class*="novablocks-media"]),
+	&.is-style-default {
 		padding-top: 0;
 		padding-bottom: 0;
 
