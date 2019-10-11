@@ -19,6 +19,7 @@ class Header {
 
 		this.scrolled = false;
 		this.inversed = false;
+		this.wasSticky = $( 'body' ).is( '.has-site-header-fixed' );
 
 		this.offset = 0;
 		this.scrollOffset = 0;
@@ -27,6 +28,7 @@ class Header {
 		this.createMobileHeader();
 
 		this.onResize();
+		this.render( false );
 		GlobalService.registerOnResize( this.onResize.bind( this ) );
 
 		this.timeline = this.getInroTimeline();
@@ -91,9 +93,31 @@ class Header {
 	}
 
 	onResize() {
+		const $header = $( this.element );
+		const wasScrolled = $header.hasClass( 'site-header--scrolled' );
+
+		$header.css( 'transition', 'none' );
+		$header.removeClass( 'site-header--scrolled' );
+
 		this.getProps();
 		this.setVisibleHeaderHeight();
+		this.shouldMakeHeaderStatic();
+
+		$header.toggleClass( 'site-header--scrolled', wasScrolled );
+		requestIdleCallback( () => {
+			$header.css( 'transition', '' );
+		} );
+
 		this.update();
+	}
+
+	shouldMakeHeaderStatic() {
+		const $body = $( 'body' );
+		const { windowHeight } = GlobalService.getProps();
+
+		if ( this.wasSticky ) {
+			$body.toggleClass( 'has-site-header-fixed', this.visibleHeaderHeight < windowHeight * 0.2 );
+		}
 	}
 
 	updateHeaderOffset() {

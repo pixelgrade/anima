@@ -1682,7 +1682,6 @@ var globalService_GlobalService = function () {
 	}, {
 		key: '_resizeCallback',
 		value: function _resizeCallback() {
-			console.log('resize');
 			var passedArguments = arguments;
 			external_jQuery_default.a.each(this.resizeCallbacks, function (i, fn) {
 				fn.apply(undefined, toConsumableArray_default()(passedArguments));
@@ -1691,7 +1690,6 @@ var globalService_GlobalService = function () {
 	}, {
 		key: '_scrollCallback',
 		value: function _scrollCallback() {
-			console.log('scroll');
 			var passedArguments = arguments;
 			external_jQuery_default.a.each(this.scrollCallbacks, function (i, fn) {
 				fn.apply(undefined, toConsumableArray_default()(passedArguments));
@@ -2195,6 +2193,7 @@ var header_Header = function () {
 
 		this.scrolled = false;
 		this.inversed = false;
+		this.wasSticky = external_jQuery_default()('body').is('.has-site-header-fixed');
 
 		this.offset = 0;
 		this.scrollOffset = 0;
@@ -2203,6 +2202,7 @@ var header_Header = function () {
 		this.createMobileHeader();
 
 		this.onResize();
+		this.render(false);
 		globalService.registerOnResize(this.onResize.bind(this));
 
 		this.timeline = this.getInroTimeline();
@@ -2277,9 +2277,34 @@ var header_Header = function () {
 	}, {
 		key: 'onResize',
 		value: function onResize() {
+			var $header = external_jQuery_default()(this.element);
+			var wasScrolled = $header.hasClass('site-header--scrolled');
+
+			$header.css('transition', 'none');
+			$header.removeClass('site-header--scrolled');
+
 			this.getProps();
 			this.setVisibleHeaderHeight();
+			this.shouldMakeHeaderStatic();
+
+			$header.toggleClass('site-header--scrolled', wasScrolled);
+			requestIdleCallback(function () {
+				$header.css('transition', '');
+			});
+
 			this.update();
+		}
+	}, {
+		key: 'shouldMakeHeaderStatic',
+		value: function shouldMakeHeaderStatic() {
+			var $body = external_jQuery_default()('body');
+
+			var _GlobalService$getPro = globalService.getProps(),
+			    windowHeight = _GlobalService$getPro.windowHeight;
+
+			if (this.wasSticky) {
+				$body.toggleClass('has-site-header-fixed', this.visibleHeaderHeight < windowHeight * 0.2);
+			}
 		}
 	}, {
 		key: 'updateHeaderOffset',
@@ -2310,9 +2335,9 @@ var header_Header = function () {
 	}, {
 		key: 'getScrollOffset',
 		value: function getScrollOffset() {
-			var _GlobalService$getPro = globalService.getProps(),
-			    adminBarHeight = _GlobalService$getPro.adminBarHeight,
-			    scrollY = _GlobalService$getPro.scrollY;
+			var _GlobalService$getPro2 = globalService.getProps(),
+			    adminBarHeight = _GlobalService$getPro2.adminBarHeight,
+			    scrollY = _GlobalService$getPro2.scrollY;
 
 			var offsetTargetElement = this.options.offsetTargetElement;
 
@@ -2358,8 +2383,8 @@ var header_Header = function () {
 		value: function render(inversed) {
 			if (!this.element) return;
 
-			var _GlobalService$getPro2 = globalService.getProps(),
-			    scrollY = _GlobalService$getPro2.scrollY;
+			var _GlobalService$getPro3 = globalService.getProps(),
+			    scrollY = _GlobalService$getPro3.scrollY;
 
 			var scrolled = scrollY > this.scrollOffset;
 

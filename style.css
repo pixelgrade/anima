@@ -1610,10 +1610,9 @@ ul.menu a,
     display: flex;
     align-items: center;
     min-height: var(--theme-header-height);
-    padding-top: var(--theme-spacing);
-    padding-bottom: var(--theme-spacing);
     transition: var(--theme-transition);
-    transition-property: opacity, color, background-color;
+    transition-property: opacity, color, background-color, min-height;
+    transition-easing: ease-in-out;
     will-change: transform; }
     .admin-bar .site-header {
       top: 32px; }
@@ -1634,6 +1633,8 @@ ul.menu a,
       position: absolute; } }
 
 @media only screen and (min-width: 1000px) {
+    .has-site-header-fixed .site-header.site-header--scrolled {
+      min-height: calc( var(--theme-header-height) * var(--theme-header-srolled-ratio, 0.75)); }
   .site-header__inner-container {
     width: 100%; }
   .site-header:after {
@@ -1711,7 +1712,10 @@ ul.menu a,
   height: auto; }
   @media only screen and (min-width: 1000px) {
     .site-logo[class] img {
-      max-height: var(--theme-header-logo-height); } }
+      max-height: var(--theme-header-logo-height); }
+      .site-logo[class] img[src*="svg"] {
+        max-height: none;
+        height: var(--theme-header-logo-height); } }
 
 .site-logo[class] .c-logo__inverted img {
   width: 100%; }
@@ -3280,7 +3284,7 @@ span.page-numbers {
       flex-basis: 100% !important; } }
   @media only screen and (min-width: 600px) {
     .wp-block-column {
-      flex-basis: calc(50% - var(--element-spacing));
+      flex-basis: 50%;
       flex-grow: 0; }
       .wp-block-column:nth-child(2n) {
         margin-left: var(--element-spacing); } }
