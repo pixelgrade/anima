@@ -6,4 +6,10 @@
 [class*="__inner-container"] {
     @include wrapper;
     @include space-children-y( var(--theme-spacing-small) );
+
+	// Larger spacing for specific blocks
+    > .nova-food-menu,
+    > .wp-block-group:not([class*="is-style"]) {
+		--element-spacing:: var(--theme-spacing-fluid-large);
+    }
 }

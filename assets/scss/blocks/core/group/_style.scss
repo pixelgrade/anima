@@ -7,4 +7,13 @@
     &[class*="is-style"] {
 
     }
+
+	// No background 
+	// Set "large" spacing 
+	&:not([class*="is-style"]) {
+		padding-top: 0;
+		padding-bottom: 0;
+
+		margin-bottom: var(--element-spacing);
+	}
 }
