@@ -10,9 +10,9 @@
     --theme-accent-font-family: #{$theme-sm-font-accent};
 
     // font sizes
-    --theme-root-font-size: #{strip-unit($theme-body-font-size)};
-    --theme-customify-fluid-unit: calc( var(--theme-spacing-fluid) / var(--theme-root-font-size) );
-    --theme-customify-fluid-font-size: calc( 1em / var(--theme-root-font-size) );
+    --theme-body-font-size: #{strip-unit($theme-body-font-size)};
+    --theme-customify-fluid-unit: calc( var(--theme-spacing-fluid) / var(--theme-body-font-size) );
+    --theme-customify-fluid-font-size: calc( 1em / var(--theme-body-font-size) );
 
     // fluid typography settings
     --theme-font-size-breakpoint: #{strip-unit($theme-font-size-breakpoint)};

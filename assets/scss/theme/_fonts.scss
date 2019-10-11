@@ -1,21 +1,21 @@
 // Body
 @include define-font(body, (
     font-family: var(--theme-root-font-family),
-    font-size: calc( var(--theme-root-font-size) * 1px ),
+    font-size: 16,
     line-height: 1.7,
     font-weight: 400,
     letter-spacing: -0.03em
 ));
 
 @include define-font(content, (
-    font-family: var(--theme-body-font-family),
+    font-family: var(--theme-root-font-family),
     font-size: 18,
     line-height: 1.6,
     letter-spacing: -0.03em,
 ));
 
 @include define-font(lead, (
-    font-family: var(--theme-body-font-family),
+    font-family: var(--theme-root-font-family),
     font-size: 24,
     line-height: 1.6,
     letter-spacing: -0.02em,
@@ -67,6 +67,7 @@
     font-size: 17,
     font-weight: 500,
     line-height: 1.5,
+    letter-spacing: 0.017em,
 ));
 
 @include define-font(heading-6, (
@@ -74,6 +75,7 @@
     font-size: 17,
     font-weight: 500,
     line-height: 1.5,
+    letter-spacing: 0.017em,
 ));
 
 @include define-font(navigation, (
@@ -81,6 +83,7 @@
     font-size: 17,
     font-weight: 500,
     line-height: 1.5,
+    letter-spacing: 0.017em,
 ));
 
 @include define-font(meta, (
@@ -88,6 +91,7 @@
     font-size: 17,
     font-weight: 500,
     line-height: 1.5,
+    letter-spacing: 0.017em,
 ));
 
 @include define-font(button, (

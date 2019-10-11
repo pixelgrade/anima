@@ -65,9 +65,9 @@ Table of Contents
   --theme-primary-font-family: Reforma1969, sans-serif;
   --theme-secondary-font-family: Reforma2018, sans-serif;
   --theme-accent-font-family: Billy Ohio, sans-serif;
-  --theme-root-font-size: 16;
-  --theme-customify-fluid-unit: calc( var(--theme-spacing-fluid) / var(--theme-root-font-size) );
-  --theme-customify-fluid-font-size: calc( 1em / var(--theme-root-font-size) );
+  --theme-body-font-size: 16;
+  --theme-customify-fluid-unit: calc( var(--theme-spacing-fluid) / var(--theme-body-font-size) );
+  --theme-customify-fluid-font-size: calc( 1em / var(--theme-body-font-size) );
   --theme-font-size-breakpoint: 1440;
   --theme-font-size-minimum-value: 16;
   --theme-font-size-minimum-value-breakpoint: 320;
@@ -113,7 +113,7 @@ Table of Contents
 :root {
   --theme-header-logo-height-setting: 22;
   --theme-header-logo-height: calc( var(--theme-header-logo-height-setting) * var(--theme-customify-fluid-unit) );
-  --theme-header-height-setting: 70;
+  --theme-header-height-setting: 118;
   --theme-header-height: calc( var(--theme-header-height-setting) * var(--theme-customify-fluid-unit) );
   --theme-header-links-spacing-setting: 32;
   --theme-header-links-spacing: calc( var(--theme-header-links-spacing-setting) * var(--theme-customify-fluid-font-size) );
@@ -4499,7 +4499,7 @@ span.page-numbers {
   --theme-body-letter-spacing: -0.03em;
   --theme-body-text-transform: inherit;
   --theme-body-text-decoration: inherit;
-  --theme-body-font-size: calc( var(--theme-root-font-size) * 1px);
+  --theme-body-font-size: 16;
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
   --x1: var(--theme-font-size-breakpoint);
@@ -4512,7 +4512,7 @@ span.page-numbers {
   --theme-body-final-font-size: calc( var(--theme-body-y2) + var(--theme-addon)); }
 
 :root {
-  --theme-content-font-family: var(--theme-body-font-family);
+  --theme-content-font-family: var(--theme-root-font-family);
   --theme-content-line-height: 1.6;
   --theme-content-font-weight: inherit;
   --theme-content-letter-spacing: -0.03em;
@@ -4531,7 +4531,7 @@ span.page-numbers {
   --theme-content-final-font-size: calc( var(--theme-content-y2) + var(--theme-addon)); }
 
 :root {
-  --theme-lead-font-family: var(--theme-body-font-family);
+  --theme-lead-font-family: var(--theme-root-font-family);
   --theme-lead-line-height: 1.6;
   --theme-lead-font-weight: inherit;
   --theme-lead-letter-spacing: -0.02em;
@@ -4648,7 +4648,7 @@ span.page-numbers {
   --theme-heading-5-font-family: var(--theme-secondary-font-family);
   --theme-heading-5-line-height: 1.5;
   --theme-heading-5-font-weight: 500;
-  --theme-heading-5-letter-spacing: inherit;
+  --theme-heading-5-letter-spacing: 0.017em;
   --theme-heading-5-text-transform: inherit;
   --theme-heading-5-text-decoration: inherit;
   --theme-heading-5-font-size: 17;
@@ -4667,7 +4667,7 @@ span.page-numbers {
   --theme-heading-6-font-family: var(--theme-secondary-font-family);
   --theme-heading-6-line-height: 1.5;
   --theme-heading-6-font-weight: 500;
-  --theme-heading-6-letter-spacing: inherit;
+  --theme-heading-6-letter-spacing: 0.017em;
   --theme-heading-6-text-transform: inherit;
   --theme-heading-6-text-decoration: inherit;
   --theme-heading-6-font-size: 17;
@@ -4686,7 +4686,7 @@ span.page-numbers {
   --theme-navigation-font-family: var(--theme-secondary-font-family);
   --theme-navigation-line-height: 1.5;
   --theme-navigation-font-weight: 500;
-  --theme-navigation-letter-spacing: inherit;
+  --theme-navigation-letter-spacing: 0.017em;
   --theme-navigation-text-transform: inherit;
   --theme-navigation-text-decoration: inherit;
   --theme-navigation-font-size: 17;
@@ -4705,7 +4705,7 @@ span.page-numbers {
   --theme-meta-font-family: var(--theme-secondary-font-family);
   --theme-meta-line-height: 1.5;
   --theme-meta-font-weight: 500;
-  --theme-meta-letter-spacing: inherit;
+  --theme-meta-letter-spacing: 0.017em;
   --theme-meta-text-transform: inherit;
   --theme-meta-text-decoration: inherit;
   --theme-meta-font-size: 17;
