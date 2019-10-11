@@ -40,7 +40,7 @@ $page_id = get_option( 'page_for_posts' ); ?>
                             <?php
 
                             if ( $has_title ) {
-                                echo '<h1 class="page-title has-text-align-center">' . get_the_title( $page_id ) . '</h1>';
+                                echo '<h1 class="page-title">' . get_the_title( $page_id ) . '</h1>';
                             }
 
                             if ( $has_categories ) {
