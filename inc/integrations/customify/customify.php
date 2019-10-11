@@ -71,7 +71,7 @@ function rosa2_add_header_section_to_customify_config( $config ) {
 					'label'       => esc_html__( 'Header Height', '__theme_txtd' ),
 					'desc'        => esc_html__( 'Adjust the header and navigation bar height.', '__theme_txtd' ),
 					'live'        => true,
-					'default'     => 70,
+					'default'     => 118,
 					'input_attrs' => array(
 						'min'          => 40,
 						'max'          => 200,
