@@ -5,4 +5,12 @@
     .novablocks-media__inner-container {
         text-align: center;
     }
+
+    @at-root body#{&} {
+		background-color: var(--current-light-tertiary);
+    }
+
+    .entry-header {
+    	margin-top: var(--theme-spacing-fluid-large);
+    }
 }
