@@ -1564,6 +1564,7 @@ var globalService_GlobalService = function () {
 		this.scrollCallbacks = [];
 		this.currentMutationList = [];
 		this.frameRendered = true;
+		this.useOrientation = hasTouchScreen() && 'orientation' in window;
 
 		this._init();
 	}
@@ -1591,10 +1592,9 @@ var globalService_GlobalService = function () {
 		key: '_bindOnResize',
 		value: function _bindOnResize() {
 			var $window = external_jQuery_default()(window);
-			var useOrientation = hasTouchScreen() && 'orientation' in window;
 			var updateProps = this._updateProps.bind(this);
 
-			if (useOrientation) {
+			if (this.useOrientation) {
 				$window.on('orientationchange', function () {
 					$window.one('resize', updateProps);
 				});
@@ -1720,8 +1720,8 @@ var globalService_GlobalService = function () {
 			this.newProps = assign_default()({}, this.newProps, {
 				scrollHeight: Math.max(bodyScrollHeight, htmlScrollHeight),
 				adminBarHeight: this.getAdminBarHeight(),
-				windowWidth: window.screen && window.screen.availWidth || window.innerWidth,
-				windowHeight: window.screen && window.screen.availHeight || window.innerHeight
+				windowWidth: this.useOrientation && window.screen && window.screen.availWidth || window.innerWidth,
+				windowHeight: this.useOrientation && window.screen && window.screen.availHeight || window.innerHeight
 			});
 
 			this._shouldUpdate(this._resizeCallback.bind(this));
