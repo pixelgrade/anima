@@ -772,9 +772,6 @@ img {
   transition: var(--theme-transition);
   transition-property: opacity; }
 
-.gm-style img {
-  opacity: 1; }
-
 figure {
   margin: 0; }
 
@@ -5293,3 +5290,5 @@ iframe.instagram-media {
 
 img:not(.is-loaded) {
   opacity: 0; }
+  .gm-style img:not(.is-loaded) {
+    opacity: 1; }
