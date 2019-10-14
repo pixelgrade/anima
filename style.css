@@ -4222,18 +4222,12 @@ span.page-numbers {
   font-style: normal; }
 
 /* 4. Pages */
-.archive .novablocks-media__inner-container,
-.blog .novablocks-media__inner-container,
-.search .novablocks-media__inner-container {
-  text-align: center; }
-
-body.archive, .blog, .search {
+body.archive, body.blog, body.search {
   background-color: var(--current-light-tertiary); }
-
-.archive .entry-header,
-.blog .entry-header,
-.search .entry-header {
-  margin-top: var(--theme-spacing-fluid-large); }
+  body.archive .novablocks-media__inner-container, body.blog .novablocks-media__inner-container, body.search .novablocks-media__inner-container {
+    text-align: center; }
+  body.archive .entry-header, body.blog .entry-header, body.search .entry-header {
+    margin-top: var(--theme-spacing-fluid-large); }
 
 .single [id="page"] {
   background: var(--current-light-tertiary); }

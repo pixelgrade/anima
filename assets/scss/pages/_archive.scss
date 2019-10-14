@@ -1,16 +1,15 @@
-.archive,
-.blog,
-.search {
+body {
+    &.archive,
+    &.blog,
+    &.search {
+        background-color: var(--current-light-tertiary);
 
-    .novablocks-media__inner-container {
-        text-align: center;
-    }
+        .novablocks-media__inner-container {
+            text-align: center;
+        }
 
-    @at-root body#{&} {
-		background-color: var(--current-light-tertiary);
-    }
-
-    .entry-header {
-    	margin-top: var(--theme-spacing-fluid-large);
+        .entry-header {
+            margin-top: var(--theme-spacing-fluid-large);
+        }
     }
 }
