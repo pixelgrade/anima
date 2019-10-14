@@ -5,10 +5,9 @@ $enable-columns-block-styles: true !default;
     /* Columns Blocks */
     .wp-block-columns {
         display: flex;
-        flex-wrap: wrap;
 
-        @media (min-width: 782px) {
-            flex-wrap: nowrap
+        @media not screen and (min-width: 782px) {
+            flex-wrap: wrap
         }
 
         // spacing for first level of rows
@@ -29,30 +28,41 @@ $enable-columns-block-styles: true !default;
     }
 
     .wp-block-column {
-        margin-bottom: 1em;
-        flex-grow: 1;
+        flex: 0 1 100%;
         min-width: 0;
         word-break: break-word;
         overflow-wrap: break-word;
-        @include space-children-y( var(--theme-spacing-fluid) );
 
+        --column-spacing: calc(var(--theme-spacing-fluid-normal) + var(--theme-spacing-fluid-tiny));
 
-        @media not screen and (min-width: 600px) {
-            flex-basis: 100% !important;
+        &:not(:last-child) {
+            margin-bottom: var(--column-spacing);
         }
 
         @media only screen and (min-width: 600px) {
-            flex-basis: 50%;
-            flex-grow: 0;
+            flex-basis: calc(50% - var(--column-spacing) / 2);
 
             &:nth-child(2n) {
-                margin-left: var(--element-spacing);
+                margin-left: var(--column-spacing);
+            }
+
+            // when there's an odd number of columns remove the margin only for the last one
+            &:last-child:nth-child(2n+1),
+            // when there's an event number of columns remove the from the last two
+            &:nth-last-child(2):nth-child(2n+1),
+            &:nth-last-child(2):nth-child(2n+1) + & {
+                margin-bottom: 0;
             }
         }
 
-        @media (min-width: 782px) {
+        @media only screen and (min-width: 782px) {
+
+            @include specific(2) {
+                margin-bottom: 0;
+            }
+
             &:not(:first-child) {
-                margin-left: var(--element-spacing);
+                margin-left: var(--column-spacing);
             }
         }
     }
