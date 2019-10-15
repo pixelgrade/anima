@@ -173,17 +173,17 @@ module.exports = { "default": __webpack_require__(37), __esModule: true };
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// Thank's IE8 for his funny defineProperty
-module.exports = !__webpack_require__(14)(function () {
-  return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
-});
-
+module.exports = { "default": __webpack_require__(66), __esModule: true };
 
 /***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = { "default": __webpack_require__(66), __esModule: true };
+// Thank's IE8 for his funny defineProperty
+module.exports = !__webpack_require__(14)(function () {
+  return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
+});
+
 
 /***/ }),
 /* 8 */
@@ -301,7 +301,7 @@ var IE8_DOM_DEFINE = __webpack_require__(42);
 var toPrimitive = __webpack_require__(43);
 var dP = Object.defineProperty;
 
-exports.f = __webpack_require__(6) ? Object.defineProperty : function defineProperty(O, P, Attributes) {
+exports.f = __webpack_require__(7) ? Object.defineProperty : function defineProperty(O, P, Attributes) {
   anObject(O);
   P = toPrimitive(P, true);
   anObject(Attributes);
@@ -320,7 +320,7 @@ exports.f = __webpack_require__(6) ? Object.defineProperty : function defineProp
 
 var dP = __webpack_require__(11);
 var createDesc = __webpack_require__(20);
-module.exports = __webpack_require__(6) ? function (object, key, value) {
+module.exports = __webpack_require__(7) ? function (object, key, value) {
   return dP.f(object, key, createDesc(1, value));
 } : function (object, key, value) {
   object[key] = value;
@@ -920,7 +920,7 @@ module.exports = function (it) {
 /* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = !__webpack_require__(6) && !__webpack_require__(14)(function () {
+module.exports = !__webpack_require__(7) && !__webpack_require__(14)(function () {
   return Object.defineProperty(__webpack_require__(26)('div'), 'a', { get: function () { return 7; } }).a != 7;
 });
 
@@ -1025,7 +1025,7 @@ var dP = __webpack_require__(11);
 var anObject = __webpack_require__(13);
 var getKeys = __webpack_require__(22);
 
-module.exports = __webpack_require__(6) ? Object.defineProperties : function defineProperties(O, Properties) {
+module.exports = __webpack_require__(7) ? Object.defineProperties : function defineProperties(O, Properties) {
   anObject(O);
   var keys = getKeys(Properties);
   var length = keys.length;
@@ -1313,7 +1313,7 @@ module.exports = function defineProperty(it, key, desc) {
 
 var $export = __webpack_require__(9);
 // 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-$export($export.S + $export.F * !__webpack_require__(6), 'Object', { defineProperty: __webpack_require__(11).f });
+$export($export.S + $export.F * !__webpack_require__(7), 'Object', { defineProperty: __webpack_require__(11).f });
 
 
 /***/ }),
@@ -1380,7 +1380,7 @@ $export($export.S + $export.F, 'Object', { assign: __webpack_require__(68) });
 "use strict";
 
 // 19.1.2.1 Object.assign(target, source, ...)
-var DESCRIPTORS = __webpack_require__(6);
+var DESCRIPTORS = __webpack_require__(7);
 var getKeys = __webpack_require__(22);
 var gOPS = __webpack_require__(69);
 var pIE = __webpack_require__(70);
@@ -1536,7 +1536,7 @@ var keys = __webpack_require__(35);
 var keys_default = /*#__PURE__*/__webpack_require__.n(keys);
 
 // EXTERNAL MODULE: ./node_modules/babel-runtime/core-js/object/assign.js
-var object_assign = __webpack_require__(7);
+var object_assign = __webpack_require__(6);
 var assign_default = /*#__PURE__*/__webpack_require__.n(object_assign);
 
 // EXTERNAL MODULE: ./node_modules/babel-runtime/helpers/toConsumableArray.js
@@ -1624,7 +1624,8 @@ var globalService_GlobalService = function () {
 				self._updateProps(true);
 				self.currentMutationList = [];
 			};
-			var debouncedObserveCallback = debounce(observeAndUpdateProps, 200);
+
+			var debouncedObserveCallback = debounce(observeAndUpdateProps, 300);
 
 			if (!window.MutationObserver) {
 				return;
@@ -1633,6 +1634,11 @@ var globalService_GlobalService = function () {
 			var observer = new MutationObserver(function (mutationList) {
 				self.currentMutationList = self.currentMutationList.concat(mutationList);
 				debouncedObserveCallback();
+			});
+
+			observer.observe(document.body, {
+				childList: true,
+				subtree: true
 			});
 		}
 	}, {
@@ -1657,6 +1663,7 @@ var globalService_GlobalService = function () {
 		key: '_observeCallback',
 		value: function _observeCallback() {
 			var mutationList = this.currentMutationList;
+			console.log('callback');
 
 			external_jQuery_default.a.each(this.observeCallbacks, function (i, fn) {
 				fn(mutationList);

@@ -66,7 +66,8 @@ class GlobalService {
 			self._updateProps( true );
 			self.currentMutationList = [];
 		};
-		const debouncedObserveCallback = debounce( observeAndUpdateProps, 200 );
+
+		const debouncedObserveCallback = debounce( observeAndUpdateProps, 300 );
 
 		if ( ! window.MutationObserver ) {
 			return;
@@ -75,6 +76,11 @@ class GlobalService {
 		const observer = new MutationObserver( function( mutationList ) {
 			self.currentMutationList = self.currentMutationList.concat( mutationList );
 			debouncedObserveCallback();
+		} );
+
+		observer.observe( document.body, {
+			childList: true,
+			subtree: true
 		} );
 	}
 
@@ -94,6 +100,7 @@ class GlobalService {
 
 	_observeCallback() {
 		const mutationList = this.currentMutationList;
+		console.log( 'callback' );
 
 		$.each(this.observeCallbacks, function( i, fn ) {
 			fn( mutationList );

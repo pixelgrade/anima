@@ -5,6 +5,11 @@
 .entry-content,
 [class*="__inner-container"] {
     @include wrapper;
+}
+
+.entry-content,
+.wp-block-column,
+[class*="__inner-container"] {
     @include space-children-y( var(--theme-spacing-small) );
 
 	// Larger spacing for specific blocks
