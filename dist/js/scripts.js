@@ -1663,7 +1663,6 @@ var globalService_GlobalService = function () {
 		key: '_observeCallback',
 		value: function _observeCallback() {
 			var mutationList = this.currentMutationList;
-			console.log('callback');
 
 			external_jQuery_default.a.each(this.observeCallbacks, function (i, fn) {
 				fn(mutationList);
@@ -2284,21 +2283,9 @@ var header_Header = function () {
 	}, {
 		key: 'onResize',
 		value: function onResize() {
-			var $header = external_jQuery_default()(this.element);
-			var wasScrolled = $header.hasClass('site-header--scrolled');
-
-			$header.css('transition', 'none');
-			$header.removeClass('site-header--scrolled');
-
 			this.getProps();
 			this.setVisibleHeaderHeight();
 			this.shouldMakeHeaderStatic();
-
-			$header.toggleClass('site-header--scrolled', wasScrolled);
-			requestIdleCallback(function () {
-				$header.css('transition', '');
-			});
-
 			this.update();
 		}
 	}, {
@@ -2361,8 +2348,11 @@ var header_Header = function () {
 	}, {
 		key: 'updatePageOffset',
 		value: function updatePageOffset() {
-			var page = document.getElementById('page');
-			page.style.paddingTop = this.visibleHeaderHeight + this.offset + 'px';
+			var $page = external_jQuery_default()('#page');
+			var $hero = external_jQuery_default()('.has-hero .novablocks-hero').first().find('.novablocks-hero__foreground');
+
+			$page.css('paddingTop', this.visibleHeaderHeight + this.offset + 'px');
+			$hero.css('marginTop', this.offset + 'px');
 		}
 	}, {
 		key: 'createMobileHeader',
@@ -2764,6 +2754,11 @@ var app_App = function () {
 		this.initializeImages();
 		this.initializeCommentsArea();
 		this.initializeReservationForm();
+
+		// trigger resize
+		globalService.registerObserverCallback(function (mutationList) {
+			external_jQuery_default()(window).trigger('orientationchange').trigger('resize');
+		});
 
 		globalService.registerRender(this.render.bind(this));
 	}

@@ -1,20 +1,12 @@
 .wp-block-group {
-    padding-top: var(--theme-spacing-fluid-large);
-    padding-bottom: var(--theme-spacing-fluid-large);
+	--wp-block-group-padding: var(--current-element-padding, var(--theme-spacing-fluid-large));
 
-    // pentru orice eventualitate
-    &.has-background,
-    &[class*="is-style"] {
+	&[class*="is-style"]:not(.is-style-default) {
+		padding-top: var(--wp-block-group-padding);
+		padding-bottom: var(--wp-block-group-padding);
 
-    }
-
-	// No background 
-	// Set "large" spacing 
-	&:not([class*="is-style-"]):not([class*="novablocks-media"]),
-	&.is-style-default {
-		padding-top: 0;
-		padding-bottom: 0;
-
-		margin-bottom: var(--element-spacing);
+		& + & {
+			--element-spacing: 0;
+		}
 	}
 }

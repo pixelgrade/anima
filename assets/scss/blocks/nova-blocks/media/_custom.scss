@@ -3,8 +3,8 @@
     @include apply-font(body);
     flex-basis: calc(50% - var(--novablocks-media-spacing));
 
-    @media only screen and (min-width: 40em) {
-        min-width: 28em;
+    @include below(tablet) {
+        flex-basis: 100%;
     }
 }
 
@@ -23,6 +23,13 @@
             object-fit: contain;
         }
     }
+
+    @include above(tablet) {
+
+        .has-image-on-the-left & {
+            order: -1;
+        }
+    }
 }
 
 .block-is-moderate {
@@ -32,15 +39,10 @@
 .novablocks-media {
     --element-spacing: var(--theme-spacing-large);
     --novablocks-media-content-padding: var(--theme-spacing-fluid-large);
-    --novablocks-media-spacing: var(--theme-spacing-fluid-normal);
+    --novablocks-media-spacing: var(--theme-spacing-fluid-medium);
 }
 
 .novablocks-media--blog[class] {
-    margin-top: 0;
-
-    &:not(:first-child) {
-        padding-top: var(--theme-spacing-small);
-    }
 
     .novablocks-media__content {
         margin-bottom: 0;

@@ -93,21 +93,9 @@ class Header {
 	}
 
 	onResize() {
-		const $header = $( this.element );
-		const wasScrolled = $header.hasClass( 'site-header--scrolled' );
-
-		$header.css( 'transition', 'none' );
-		$header.removeClass( 'site-header--scrolled' );
-
 		this.getProps();
 		this.setVisibleHeaderHeight();
 		this.shouldMakeHeaderStatic();
-
-		$header.toggleClass( 'site-header--scrolled', wasScrolled );
-		requestIdleCallback( () => {
-			$header.css( 'transition', '' );
-		} );
-
 		this.update();
 	}
 
@@ -159,8 +147,11 @@ class Header {
 	}
 
 	updatePageOffset() {
-		const page = document.getElementById( 'page' );
-		page.style.paddingTop = this.visibleHeaderHeight + this.offset + 'px';
+		const $page = $( '#page' );
+		const $hero = $( '.has-hero .novablocks-hero' ).first().find( '.novablocks-hero__foreground' );
+
+		$page.css( 'paddingTop', this.visibleHeaderHeight + this.offset + 'px' );
+		$hero.css( 'marginTop', this.offset + 'px' );
 	}
 
 	createMobileHeader() {
