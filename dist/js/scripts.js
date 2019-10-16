@@ -2211,15 +2211,20 @@ var header_Header = function () {
 		this.render(false);
 		globalService.registerOnResize(this.onResize.bind(this));
 
-		this.timeline = this.getInroTimeline();
-		this.timeline.play();
+		this.initialize();
 	}
 
 	createClass_default()(Header, [{
 		key: 'initialize',
 		value: function initialize() {
+			this.timeline = this.getInroTimeline();
+
+			external_jQuery_default()('.site-header__wrapper').css('transition', 'none');
+
 			this.$header.addClass('site-header--fixed site-header--ready');
 			this.$mobileHeader.addClass('site-header--fixed site-header--ready');
+
+			this.timeline.play();
 		}
 	}, {
 		key: 'update',
@@ -2241,7 +2246,9 @@ var header_Header = function () {
 				height: height,
 				onUpdate: this.onHeightUpdate.bind(this),
 				onUpdateParams: ["{self}"],
-				onComplete: this.initialize.bind(this),
+				onComplete: function onComplete() {
+					external_jQuery_default()('.site-header__wrapper').css('transition', '');
+				},
 				ease: transitionEasing
 			}, 0);
 
@@ -2283,9 +2290,9 @@ var header_Header = function () {
 	}, {
 		key: 'onResize',
 		value: function onResize() {
+			this.shouldMakeHeaderStatic();
 			this.getProps();
 			this.setVisibleHeaderHeight();
-			this.shouldMakeHeaderStatic();
 			this.update();
 		}
 	}, {

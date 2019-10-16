@@ -31,13 +31,18 @@ class Header {
 		this.render( false );
 		GlobalService.registerOnResize( this.onResize.bind( this ) );
 
-		this.timeline = this.getInroTimeline();
-		this.timeline.play();
+		this.initialize();
 	}
 
 	initialize() {
+		this.timeline = this.getInroTimeline();
+
+		$( '.site-header__wrapper' ).css( 'transition', 'none' );
+
 		this.$header.addClass( 'site-header--fixed site-header--ready' );
 		this.$mobileHeader.addClass( 'site-header--fixed site-header--ready' );
+
+		this.timeline.play();
 	}
 
 	update() {
@@ -57,7 +62,9 @@ class Header {
 			height: height,
 			onUpdate: this.onHeightUpdate.bind( this ),
 			onUpdateParams: ["{self}"],
-			onComplete: this.initialize.bind( this ),
+			onComplete: () => {
+				$( '.site-header__wrapper' ).css( 'transition', '' );
+			},
 			ease: transitionEasing
 		}, 0 );
 
@@ -93,9 +100,9 @@ class Header {
 	}
 
 	onResize() {
+		this.shouldMakeHeaderStatic();
 		this.getProps();
 		this.setVisibleHeaderHeight();
-		this.shouldMakeHeaderStatic();
 		this.update();
 	}
 

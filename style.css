@@ -2377,6 +2377,9 @@ label.subscribe-label.subscribe-label {
   margin-top: var(--theme-spacing-xl);
   margin-bottom: var(--theme-spacing-xl); }
 
+.novablocks-media--blog + .navigation[class] {
+  margin-top: var(--theme-spacing-small); }
+
 .pagination {
   --theme-content-width-normal: var(--theme-content-width-wide); }
   .pagination .nav-links {
@@ -3816,11 +3819,16 @@ span.page-numbers {
   --novablocks-light-2: var(--current-light-secondary);
   --novablocks-light-3: var(--current-light-tertiary); }
 
-.novablocks-slideshow + .novablocks-slideshow,
-.novablocks-media + .novablocks-slideshow,
-.novablocks-hero + .novablocks-slideshow,
-.novablocks-media +
-.novablocks-hero, .novablocks-slideshow +
+.novablocks-media + .novablocks-media,
+.novablocks-slideshow + .novablocks-media,
+.novablocks-hero + .novablocks-media, .novablocks-media +
+.novablocks-slideshow,
+.novablocks-slideshow +
+.novablocks-slideshow,
+.novablocks-hero +
+.novablocks-slideshow, .novablocks-media +
+.novablocks-hero,
+.novablocks-slideshow +
 .novablocks-hero,
 .novablocks-hero +
 .novablocks-hero {
@@ -3877,7 +3885,7 @@ span.page-numbers {
 
 .block-is-moderate + .block-is-moderate,
 .block-is-highlighted + .block-is-highlighted {
-  padding-top: 0; }
+  padding-top: var(--theme-spacing-fluid-small); }
 
 .novablocks-media__content {
   max-width: 100%;

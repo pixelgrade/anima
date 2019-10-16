@@ -13,11 +13,11 @@
     --novablocks-light-3: var(--current-light-tertiary);
 }
 
+.novablocks-media,
 .novablocks-slideshow,
 .novablocks-hero {
 
-    & + &,
-    .novablocks-media + & {
+    & + & {
         margin-top: 0;
     }
 }
