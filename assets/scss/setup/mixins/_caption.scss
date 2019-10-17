@@ -1,7 +1,4 @@
 @mixin caption {
-}
-
-@mixin caption-overlay {
     position: absolute;
     left: 0;
     bottom: 0;
@@ -16,7 +13,7 @@
 
     &:after {
         content: "";
-        @include stretch;
+        @include cover;
         opacity: 0.6;
         z-index: -1;
         background: var(--current-dark-secondary);

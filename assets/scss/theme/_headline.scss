@@ -36,11 +36,8 @@
 }
 
 .c-headline__secondary {
-    font-family: var(--theme-accent-font-family);
-    font-weight: 400;
-    text-transform: none;
+    @include apply-font(accent);
     color: var(--current-color-primary);
-    letter-spacing: normal;
 }
 
 .c-headline__secondary {
