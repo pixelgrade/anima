@@ -1,12 +1,32 @@
 <?php
 /**
  * Handle the WooCommerce integration logic.
+ *
+ * Everything here gets run at the `after_setup_theme` hook, priority 10.
+ * So only use hooks that come after that. The rest will not run.
  */
 
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+function rosa2_woocommerce_scripts() {
+	$theme  = wp_get_theme( get_template() );
+	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+
+	wp_enqueue_style( 'rosa2-woocommerce', get_template_directory_uri() . '/woocommerce.css', array( 'rosa2-style' ), $theme->get( 'Version' ) );
+	wp_style_add_data( 'rosa2-woocommerce', 'rtl', 'replace' );
+
+	wp_enqueue_script( 'rosa2-woocommerce', get_template_directory_uri() . '/dist/js/woocommerce' . $suffix . '.js', array( 'jquery' ), $theme->get( 'Version' ), true );
+	wp_localize_script( 'rosa2-woocommerce', 'pixelgradeWooCommerceStrings', array(
+		'adding_to_cart' => esc_html__( 'Adding...', '__theme_txtd' ),
+		'added_to_cart' => esc_html__( 'Added!', '__theme_txtd' ),
+	) );
+
+	wp_deregister_style('wc-block-style');
+}
+add_action( 'wp_enqueue_scripts', 'rosa2_woocommerce_scripts', 10 );
 
 function rosa2_woocommerce_setup_hooks() {
 
