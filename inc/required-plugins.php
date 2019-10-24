@@ -29,7 +29,7 @@ function rosa2_register_required_plugins() {
 			'required'           => true,
 			'source'             => $protocol . '//wupdates.com/api_wupl_version/JxbVe/2v5t1czd3vw4kmb5xqmyxj1kkwmnt9q0463lhj393r5yxtshdyg05jssgd4jglnfx7A2vdxtfdcf78r9r1sm217k4ht3r2g7pkdng5f6tgwyrk23wryA0pjxvs7gwhhb',
 			'external_url'       => $protocol . '//github.com/pixelgrade/pixelgrade_care',
-			'version'            => '1.6.4'
+			'version'            => '1.6.5'
 		),
 		array(
 			'name'     => 'Customify',
@@ -65,9 +65,10 @@ function rosa2_register_required_plugins() {
 			'installing'                      => esc_html__( 'Installing Plugin: %s', '__theme_txtd' ),
 			// %1$s = plugin name
 			'oops'                            => esc_html__( 'Something went wrong with the plugin API.', '__theme_txtd' ),
-			'notice_can_install_required'     => _n_noop( 'This theme requires the following plugin: %1$s.', 'This theme requires the following plugins: %1$s.', '__theme_txtd' ),
-			// %1$s = plugin name(s)
-			'notice_can_install_recommended'  => _n_noop( 'This theme recommends the following plugin: %1$s.', 'This theme recommends the following plugins: %1$s.', '__theme_txtd' ),
+			/* translators: %1$s = plugin name */
+			'notice_can_install_required'     => _n_noop( 'Rosa 2 requires the following plugin: %1$s.', 'Rosa 2 requires the following plugins: %1$s.', '__theme_txtd' ),
+			/* translators: %1$s = plugin name */
+			'notice_can_install_recommended'  => _n_noop( 'Rosa 2 recommends the following plugin: %1$s.', 'Rosa 2 recommends the following plugins: %1$s.', '__theme_txtd' ),
 			// %1$s = plugin name(s)
 			'notice_cannot_install'           => _n_noop( 'Sorry, but you do not have the correct permissions to install the %s plugin. Contact the administrator of this site for help on getting the plugin installed.', 'Sorry, but you do not have the correct permissions to install the %s plugins. Contact the administrator of this site for help on getting the plugins installed.', '__theme_txtd' ),
 			// %1$s = plugin name(s)
