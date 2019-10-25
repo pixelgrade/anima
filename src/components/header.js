@@ -104,9 +104,16 @@ class Header {
 		this.shouldMakeHeaderStatic();
 
 		$header.toggleClass( 'site-header--scrolled', wasScrolled );
-		requestIdleCallback( () => {
-			$header.css( 'transition', '' );
-		} );
+
+		if ( window.requestIdleCallback ) {
+			requestIdleCallback( () => {
+				$header.css( 'transition', '' );
+			} );
+		} else {
+			setTimeout( () => {
+				$header.css( 'transition', '' );
+			} );
+		}
 
 		this.update();
 	}

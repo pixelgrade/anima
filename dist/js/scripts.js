@@ -1663,7 +1663,6 @@ var globalService_GlobalService = function () {
 		key: '_observeCallback',
 		value: function _observeCallback() {
 			var mutationList = this.currentMutationList;
-			console.log('callback');
 
 			external_jQuery_default.a.each(this.observeCallbacks, function (i, fn) {
 				fn(mutationList);
@@ -2295,9 +2294,16 @@ var header_Header = function () {
 			this.shouldMakeHeaderStatic();
 
 			$header.toggleClass('site-header--scrolled', wasScrolled);
-			requestIdleCallback(function () {
-				$header.css('transition', '');
-			});
+
+			if (window.requestIdleCallback) {
+				requestIdleCallback(function () {
+					$header.css('transition', '');
+				});
+			} else {
+				setTimeout(function () {
+					$header.css('transition', '');
+				});
+			}
 
 			this.update();
 		}

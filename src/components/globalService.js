@@ -100,7 +100,6 @@ class GlobalService {
 
 	_observeCallback() {
 		const mutationList = this.currentMutationList;
-		console.log( 'callback' );
 
 		$.each(this.observeCallbacks, function( i, fn ) {
 			fn( mutationList );
