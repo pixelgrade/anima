@@ -2729,15 +2729,21 @@ var navbar_Navbar = function () {
 		key: 'addSocialMenuClass',
 		value: function addSocialMenuClass() {
 			var $menuItem = external_jQuery_default()('.menu-item a');
+			var bodyStyle = window.getComputedStyle(document.documentElement);
+			var enableSocialIconsProp = bodyStyle.getPropertyValue('--enable-social-icons');
+			var enableSocialIcons = !!parseInt(enableSocialIconsProp, 10);
 
-			$menuItem.each(function (index, obj) {
-				var elementStyle = window.getComputedStyle(obj),
-				    elementValue = elementStyle.getPropertyValue('--is-social');
+			if (enableSocialIcons) {
+				$menuItem.each(function (index, obj) {
+					var elementStyle = window.getComputedStyle(obj);
+					var elementIsSocialProp = elementStyle.getPropertyValue('--is-social');
+					var elementIsSocial = !!parseInt(elementIsSocialProp, 10);
 
-				if (elementValue !== '') {
-					external_jQuery_default()(this).parent().addClass('social-menu-item');
-				}
-			});
+					if (elementIsSocial) {
+						external_jQuery_default()(this).parent().addClass('social-menu-item');
+					}
+				});
+			}
 		}
 	}]);
 
