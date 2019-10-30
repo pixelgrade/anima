@@ -119,16 +119,21 @@ export default class Navbar {
 	}
 
 	addSocialMenuClass() {
-		const $menuItem = $('.menu-item a');
+		const $menuItem = $( '.menu-item a' );
+		const bodyStyle = window.getComputedStyle( document.documentElement );
+		const enableSocialIconsProp = bodyStyle.getPropertyValue( '--enable-social-icons' );
+		const enableSocialIcons = !! parseInt( enableSocialIconsProp, 10 );
 
+		if ( enableSocialIcons ) {
+			$menuItem.each( function( index, obj ) {
+				const elementStyle = window.getComputedStyle( obj );
+				const elementIsSocialProp = elementStyle.getPropertyValue( '--is-social' );
+				const elementIsSocial = !! parseInt( elementIsSocialProp, 10 );
 
-		$menuItem.each(function(index, obj){
-			let elementStyle = window.getComputedStyle(obj),
-				elementValue = elementStyle.getPropertyValue('--is-social');
-
-			if ( elementValue !== '') {
-				$(this).parent().addClass('social-menu-item')
-			}
-		});
+				if ( elementIsSocial ) {
+					$( this ).parent().addClass( 'social-menu-item' )
+				}
+			} );
+		}
 	}
 }

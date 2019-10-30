@@ -18,13 +18,6 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 	}
 }
 
-function rosa2_admin_init() {
-	global $_wp_post_type_features;
-	$_wp_post_type_features['post']['editor'];
-}
-add_action( 'admin_init', 'rosa2_admin_init' );
-remove_action( 'edit_form_after_title', '_wp_posts_page_notice' );
-
 function rosa2_page_has_hero() {
 	global $post;
 
@@ -44,17 +37,14 @@ function rosa2_last_block_hero() {
 
 	if ( ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
 		$blocks = parse_blocks( $post->post_content );
+		$count = count( $blocks );
+		$lastBlockName = $blocks[ $count - 1 ]['blockName'];
 
-		$count = count($blocks);
-
-		if ( ($blocks[$count - 1]['blockName'] === 'novablocks/hero' ) || ($blocks[$count - 1]['blockName'] === 'novablocks/slideshow' )) {
-			return true;
-		}
+        return $lastBlockName === 'novablocks/hero' || $lastBlockName === 'novablocks/slideshow';
 	}
 
 	return false;
 }
-
 add_action('rosa_before_header', 'rosa2_last_block_hero');
 
 function rosa2_has_moderate_media_card_after_hero() {
@@ -116,18 +106,9 @@ add_filter( 'novablocks_logo_markup', 'rosa2_alter_logo_markup' );
 function rosa2_skip_link_focus_fix() {
 	// The following is minified via `terser --compress --mangle -- js/skip-link-focus-fix.js`.
 	?>
-    <script>
-		/(trident|msie)/i.test( navigator.userAgent ) && document.getElementById && window.addEventListener && window.addEventListener( "hashchange", function() {
-			var t, e = location.hash.substring( 1 );
-			/^[A-z0-9_-]+$/.test( e ) && (
-				t = document.getElementById( e )
-			) && (
-				/^(?:a|select|input|button|textarea)$/i.test( t.tagName ) || (
-					t.tabIndex = - 1
-				), t.focus()
-			)
-		}, ! 1 );
-    </script>
+<script>
+  /(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+</script>
 	<?php
 }
 // We will put this script inline since it is so small.
@@ -197,7 +178,7 @@ if ( ! function_exists( 'pixelgrade_get_original_theme_name' ) ) {
 }
 
 function rosa2_woocommerce_setup() {
-	if ( function_exists( 'WC') && pixelgrade_user_has_access('woocommerce') ) {
+	if ( function_exists( 'WC' ) && pixelgrade_user_has_access( 'woocommerce' ) ) {
 
 		// Add the necessary theme support flags
 		add_theme_support( 'woocommerce' );
@@ -205,30 +186,14 @@ function rosa2_woocommerce_setup() {
 		add_theme_support( 'wc-product-gallery-lightbox' );
 		add_theme_support( 'wc-product-gallery-slider' );
 
-		// Enqueue static assets
-		add_action( 'wp_enqueue_scripts', 'rosa2_woocommerce_scripts', 10 );
 
-		// Load any custom logic
+		// Load the integration logic.
 		require_once trailingslashit( get_template_directory() ) . 'inc/integrations/woocommerce.php';
 	}
 }
 add_action( 'after_setup_theme', 'rosa2_woocommerce_setup', 10 );
 
-function rosa2_woocommerce_scripts() {
-	$theme  = wp_get_theme( get_template() );
-	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-	wp_enqueue_style( 'rosa2-woocommerce', get_template_directory_uri() . '/woocommerce.css', array( 'rosa2-style' ), $theme->get( 'Version' ) );
-	wp_style_add_data( 'rosa2-woocommerce', 'rtl', 'replace' );
-
-	wp_enqueue_script( 'rosa2-woocommerce', get_template_directory_uri() . '/dist/js/woocommerce' . $suffix . '.js', array( 'jquery' ), $theme->get( 'Version' ), true );
-	wp_localize_script( 'rosa2-woocommerce', 'pixelgradeWooCommerceStrings', array(
-		'adding_to_cart' => esc_html__( 'Adding...', '__theme_txtd' ),
-		'added_to_cart' => esc_html__( 'Added!', '__theme_txtd' ),
-	) );
-
-	wp_deregister_style('wc-block-style');
-}
 
 if ( ! function_exists( 'rosa2_parse_content_tags' ) ) {
 	/**
@@ -299,7 +264,7 @@ if ( ! function_exists( 'rosa2_parse_content_tags' ) ) {
 	}
 }
 
-if ( ! function_exists('rosa2_dark_mode_support')) {
+if ( ! function_exists( 'rosa2_dark_mode_support' ) ) {
     function rosa2_dark_mode_support() {
 	    if ( 'on' === pixelgrade_option( 'sm_dark_mode', 'off' ) ) {
             add_theme_support( 'editor-styles' );

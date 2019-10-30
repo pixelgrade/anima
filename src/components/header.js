@@ -100,9 +100,28 @@ class Header {
 	}
 
 	onResize() {
+		const $header = $( this.element );
+		const wasScrolled = $header.hasClass( 'site-header--scrolled' );
+
+		$header.css( 'transition', 'none' );
+		$header.removeClass( 'site-header--scrolled' );
+
 		this.shouldMakeHeaderStatic();
 		this.getProps();
 		this.setVisibleHeaderHeight();
+
+		$header.toggleClass( 'site-header--scrolled', wasScrolled );
+
+		if ( window.requestIdleCallback ) {
+			requestIdleCallback( () => {
+				$header.css( 'transition', '' );
+			} );
+		} else {
+			setTimeout( () => {
+				$header.css( 'transition', '' );
+			}, 0 );
+		}
+
 		this.update();
 	}
 
