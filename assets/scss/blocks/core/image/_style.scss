@@ -7,6 +7,11 @@ $enable-image-block-styles:             true !default;
 
         img {
             display: block;
+
+            // force images to fill their container
+            // because Safari doesn't download new images from the srcset when the browser is resized
+            width: 100%;
+            height: auto;
         }
     }
 }
