@@ -12,6 +12,10 @@ if ( ! function_exists( 'rosa2_novablocks_setup' ) ) {
 	function rosa2_novablocks_setup() {
 		add_theme_support( 'novablocks', array(
 			'announcement-bar' => true,
+			'header' => true,
+			'headline' => true,
+			'menu-food' => true,
+			'google-map' => true
 		) );
 	}
 }
