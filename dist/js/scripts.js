@@ -2211,15 +2211,20 @@ var header_Header = function () {
 		this.render(false);
 		globalService.registerOnResize(this.onResize.bind(this));
 
-		this.timeline = this.getInroTimeline();
-		this.timeline.play();
+		this.initialize();
 	}
 
 	createClass_default()(Header, [{
 		key: 'initialize',
 		value: function initialize() {
+			this.timeline = this.getInroTimeline();
+
+			external_jQuery_default()('.site-header__wrapper').css('transition', 'none');
+
 			this.$header.addClass('site-header--fixed site-header--ready');
 			this.$mobileHeader.addClass('site-header--fixed site-header--ready');
+
+			this.timeline.play();
 		}
 	}, {
 		key: 'update',
@@ -2241,7 +2246,9 @@ var header_Header = function () {
 				height: height,
 				onUpdate: this.onHeightUpdate.bind(this),
 				onUpdateParams: ["{self}"],
-				onComplete: this.initialize.bind(this),
+				onComplete: function onComplete() {
+					external_jQuery_default()('.site-header__wrapper').css('transition', '');
+				},
 				ease: transitionEasing
 			}, 0);
 
@@ -2289,9 +2296,9 @@ var header_Header = function () {
 			$header.css('transition', 'none');
 			$header.removeClass('site-header--scrolled');
 
+			this.shouldMakeHeaderStatic();
 			this.getProps();
 			this.setVisibleHeaderHeight();
-			this.shouldMakeHeaderStatic();
 
 			$header.toggleClass('site-header--scrolled', wasScrolled);
 
@@ -2302,7 +2309,7 @@ var header_Header = function () {
 			} else {
 				setTimeout(function () {
 					$header.css('transition', '');
-				});
+				}, 0);
 			}
 
 			this.update();
@@ -2367,8 +2374,11 @@ var header_Header = function () {
 	}, {
 		key: 'updatePageOffset',
 		value: function updatePageOffset() {
-			var page = document.getElementById('page');
-			page.style.paddingTop = this.visibleHeaderHeight + this.offset + 'px';
+			var $page = external_jQuery_default()('#page');
+			var $hero = external_jQuery_default()('.has-hero .novablocks-hero').first().find('.novablocks-hero__foreground');
+
+			$page.css('paddingTop', this.visibleHeaderHeight + this.offset + 'px');
+			$hero.css('marginTop', this.offset + 'px');
 		}
 	}, {
 		key: 'createMobileHeader',
@@ -2776,6 +2786,11 @@ var app_App = function () {
 		this.initializeImages();
 		this.initializeCommentsArea();
 		this.initializeReservationForm();
+
+		// trigger resize
+		globalService.registerObserverCallback(function (mutationList) {
+			external_jQuery_default()(window).trigger('orientationchange').trigger('resize');
+		});
 
 		globalService.registerRender(this.render.bind(this));
 	}

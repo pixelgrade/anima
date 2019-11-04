@@ -1,72 +1,95 @@
 $enable-columns-block-styles: true !default;
 
+@mixin wp-block-columns-spacing {
+    // spacing for first level of rows
+    &:not(:first-child),
+    & + :not(:first-child) {
+        --element-spacing: var(--theme-spacing-fluid-large);
+    }
+
+    // spacing for deeper levels of rows
+    & &:not(:first-child),
+    & & + :not(:first-child) {
+        --element-spacing: var(--theme-spacing-fluid-medium);
+    }
+}
+
+@mixin wp-block-columns-stack-2 {
+    flex-wrap: wrap;
+
+    > * {
+        flex-basis: calc(50% - var(--wp-block-columns-spacing) / 2) !important;
+        margin-bottom: var(--wp-block-columns-spacing);
+    }
+
+    > :nth-child(2n+1) {
+        margin-left: 0;
+    }
+
+    > :last-child,
+    > :nth-child(2n+1):nth-last-child(2) {
+        margin-bottom: 0;
+    }
+}
+
+@mixin wp-block-columns-stack-1 {
+    flex-wrap: wrap;
+
+    > * {
+        flex-basis: 100% !important;
+    }
+
+    // need at least the same specificity as the 2-stack mixin
+    > :nth-child(n) {
+        margin-left: 0;
+
+        &:not(:last-child) {
+            margin-bottom: var(--wp-block-columns-spacing);
+        }
+    }
+}
+
 @if $enable-columns-block-styles == true {
 
     /* Columns Blocks */
     .wp-block-columns {
-        display: flex;
-
-        @media not screen and (min-width: 782px) {
-            flex-wrap: wrap
-        }
-
-        // spacing for first level of rows
-        &:not(:first-child),
-        & + * {
-            --element-spacing: var(--theme-spacing-fluid-large);
-        }
-
-        // spacing for deeper levels of rows
-        & &:not(:first-child),
-        & & + * {
-            --element-spacing: var(--theme-spacing-fluid-normal);
-        }
-
-        .block-editor-inner-blocks {
-            width: 100%;
-        }
+        @include wp-block-columns-spacing;
     }
 
     .wp-block-column {
-        flex: 0 1 100%;
         min-width: 0;
         word-break: break-word;
         overflow-wrap: break-word;
 
-        --column-spacing: calc(var(--theme-spacing-fluid-normal) + var(--theme-spacing-fluid-tiny));
-
-        &:not(:last-child) {
-            margin-bottom: var(--column-spacing);
-        }
-
-        @media only screen and (min-width: 600px) {
-            flex-basis: calc(50% - var(--column-spacing) / 2);
-
-            &:nth-child(2n) {
-                margin-left: var(--column-spacing);
-            }
-
-            // when there's an odd number of columns remove the margin only for the last one
-            &:last-child:nth-child(2n+1),
-            // when there's an event number of columns remove the from the last two
-            &:nth-last-child(2):nth-child(2n+1),
-            &:nth-last-child(2):nth-child(2n+1) + & {
-                margin-bottom: 0;
-            }
-        }
-
-        @media only screen and (min-width: 782px) {
-
-            @include specific(2) {
-                margin-bottom: 0;
-            }
-
-            &:not(:first-child) {
-                margin-left: var(--column-spacing);
-            }
-        }
     }
 
+    :root {
+        --wp-block-columns-spacing: calc(var(--theme-spacing-fluid-medium) + var(--theme-spacing-fluid-tiny));
+    }
+
+    .wp-block-columns {
+        display: flex;
+
+        > * {
+            flex: 0 1 100%;
+        }
+
+        > :not(:first-child) {
+            margin-left: var(--wp-block-columns-spacing);
+        }
+
+        @include below(lap) {
+            @include wp-block-columns-stack-2;
+
+            & & {
+                @include wp-block-columns-stack-1;
+            }
+        }
+
+        @include below(tablet) {
+            @include wp-block-columns-stack-1;
+        }
+    }
 
     .wp-block-columns {
 

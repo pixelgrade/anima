@@ -84,7 +84,7 @@ $variations: (
 
 @mixin variation( $variation-name, $destination: current, $source: sm ) {
     @if ( $source != theme and $source != sm ) {
-        @warn 'second parameter can be either "theme" or "sm"';
+        @warn '$source parameter can be either "theme" or "sm"';
     }
 
     $variation: map-get( $variations, $variation-name );

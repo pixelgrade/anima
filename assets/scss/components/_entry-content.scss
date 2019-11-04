@@ -11,16 +11,16 @@
 .wp-block-column,
 [class*="__inner-container"] {
     @include space-children-y( var(--theme-spacing-small) );
+}
 
-	// Larger spacing for specific blocks
-	// Food Menu Blocks
-    > .nova-food-menu,
-    // Group Block
-    > .wp-block-group,
-	// Hero/Slideshow Blocks
-	> .novablocks-hero,
-	> .novablocks-slideshow {
-		--element-spacing: var(--theme-spacing-fluid-large);
+// Larger spacing for specific blocks
+.wp-block-group,
+.nova-food-menu,
+.novablocks-hero,
+.novablocks-slideshow {
+    --element-spacing: var(--theme-spacing-fluid-large);
+
+    + :not(:first-child) {
+        margin-top: var(--element-spacing);
     }
-    // Columns Block is in /blocks/core/columns/_style.scss
 }

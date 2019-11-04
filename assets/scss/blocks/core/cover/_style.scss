@@ -24,7 +24,7 @@ $enable-cover-block-styles:             true !default;
 
         &.has-background-dim:before {
             content: "";
-            @include stretch;
+            @include cover;
             z-index: 200;
             background-color: inherit;
             opacity: 0.5;
@@ -53,7 +53,7 @@ $enable-cover-block-styles:             true !default;
     }
 
     .wp-block-cover__video-background {
-        @include stretch;
+        @include cover;
         object-fit: cover;
         z-index: 100;
     }

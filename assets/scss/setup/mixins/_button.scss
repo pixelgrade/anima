@@ -205,15 +205,11 @@
   }
 }
 
-@mixin button-theme {
-  @extend %button-theme !optional;
-}
-
 @mixin button {
   @include button-base;
   @include button-box;
   @include button-background;
   @include button-color;
   @include button-transition;
-  @include button-theme;
+  @include apply-font(button);
 }

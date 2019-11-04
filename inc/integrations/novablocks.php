@@ -8,6 +8,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( ! function_exists( 'rosa2_novablocks_setup' ) ) {
+	function rosa2_novablocks_setup() {
+		add_theme_support( 'novablocks', array(
+			'announcement-bar' => true,
+			'header' => true,
+			'headline' => true,
+			'menu-food' => true,
+			'google-map' => true
+		) );
+	}
+}
+add_action( 'after_setup_theme', 'rosa2_novablocks_setup', 10 );
+
 if ( ! function_exists( 'rosa2_alter_novablocks_hero_settings' ) ) {
 	function rosa2_alter_novablocks_hero_settings( $settings ) {
 		$settings['hero']['template'] = array(

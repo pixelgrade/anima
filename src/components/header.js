@@ -31,13 +31,18 @@ class Header {
 		this.render( false );
 		GlobalService.registerOnResize( this.onResize.bind( this ) );
 
-		this.timeline = this.getInroTimeline();
-		this.timeline.play();
+		this.initialize();
 	}
 
 	initialize() {
+		this.timeline = this.getInroTimeline();
+
+		$( '.site-header__wrapper' ).css( 'transition', 'none' );
+
 		this.$header.addClass( 'site-header--fixed site-header--ready' );
 		this.$mobileHeader.addClass( 'site-header--fixed site-header--ready' );
+
+		this.timeline.play();
 	}
 
 	update() {
@@ -57,7 +62,9 @@ class Header {
 			height: height,
 			onUpdate: this.onHeightUpdate.bind( this ),
 			onUpdateParams: ["{self}"],
-			onComplete: this.initialize.bind( this ),
+			onComplete: () => {
+				$( '.site-header__wrapper' ).css( 'transition', '' );
+			},
 			ease: transitionEasing
 		}, 0 );
 
@@ -99,9 +106,9 @@ class Header {
 		$header.css( 'transition', 'none' );
 		$header.removeClass( 'site-header--scrolled' );
 
+		this.shouldMakeHeaderStatic();
 		this.getProps();
 		this.setVisibleHeaderHeight();
-		this.shouldMakeHeaderStatic();
 
 		$header.toggleClass( 'site-header--scrolled', wasScrolled );
 
@@ -112,7 +119,7 @@ class Header {
 		} else {
 			setTimeout( () => {
 				$header.css( 'transition', '' );
-			} );
+			}, 0 );
 		}
 
 		this.update();
@@ -166,8 +173,11 @@ class Header {
 	}
 
 	updatePageOffset() {
-		const page = document.getElementById( 'page' );
-		page.style.paddingTop = this.visibleHeaderHeight + this.offset + 'px';
+		const $page = $( '#page' );
+		const $hero = $( '.has-hero .novablocks-hero' ).first().find( '.novablocks-hero__foreground' );
+
+		$page.css( 'paddingTop', this.visibleHeaderHeight + this.offset + 'px' );
+		$hero.css( 'marginTop', this.offset + 'px' );
 	}
 
 	createMobileHeader() {
