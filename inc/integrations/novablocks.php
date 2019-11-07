@@ -10,13 +10,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! function_exists( 'rosa2_novablocks_setup' ) ) {
 	function rosa2_novablocks_setup() {
-		add_theme_support( 'novablocks', array(
-			'announcement-bar' => true,
-			'header' => true,
-			'headline' => true,
-			'menu-food' => true,
-			'google-map' => true
-		) );
+		add_theme_support( 'novablocks-announcement-bar' );
+		add_theme_support( 'novablocks-header' );
+		add_theme_support( 'novablocks-headline' );
+		add_theme_support( 'novablocks-menu-food' );
+		add_theme_support( 'novablocks-google-map' );
+		add_theme_support( 'novablocks-hero' );
+		add_theme_support( 'novablocks-logo' );
+		add_theme_support( 'novablocks-navigation' );
+		add_theme_support( 'novablocks-slideshow' );
 	}
 }
 add_action( 'after_setup_theme', 'rosa2_novablocks_setup', 10 );
