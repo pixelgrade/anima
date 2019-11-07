@@ -1205,6 +1205,11 @@ table {
   table th:last-child,
   table td:last-child {
     padding-left: 0; }
+  table.has-fixed-layout {
+    table-layout: fixed; }
+    table.has-fixed-layout th,
+    table.has-fixed-layout td {
+      white-space: normal; }
 
 /* 0.3 Fallbacks */
 @media only screen and (min-width: 1000px) {
@@ -4162,6 +4167,9 @@ span.page-numbers {
   margin-top: var(--element-spacing); }
 
 /* Table Block */
+.wp-block-table {
+  overflow-x: auto; }
+
 * {
   --novablocks-color-1: var(--current-color-primary);
   --novablocks-color-2: var(--current-color-secondary);

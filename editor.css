@@ -1275,6 +1275,8 @@
       grid-template-areas: "media-text-media" "media-text-content"; }
     .editor-styles-wrapper .wp-block-media-text.is-stacked-on-mobile.has-media-on-the-right {
       grid-template-areas: "media-text-content" "media-text-media"; } }
+  .editor-styles-wrapper .wp-block-table {
+    overflow-x: auto; }
   .editor-styles-wrapper .novablocks-map__marker-name {
     position: absolute;
     top: 50%;
@@ -1844,6 +1846,11 @@
       .editor-styles-wrapper[class] table th:last-child,
       .editor-styles-wrapper[class] table td:last-child {
         padding-right: 0; }
+      .editor-styles-wrapper[class] table.has-fixed-layout {
+        table-layout: fixed; }
+        .editor-styles-wrapper[class] table.has-fixed-layout th,
+        .editor-styles-wrapper[class] table.has-fixed-layout td {
+          white-space: normal; }
   .editor-styles-wrapper a {
     color: var(--current-dark-secondary);
     text-decoration: underline;
