@@ -3,12 +3,6 @@
 // This file shouldn't be modified. Proceed with caution!
 
 :root {
-    // font families
-    --theme-root-font-family: #{$theme-sm-font-body};
-    --theme-primary-font-family: #{$theme-sm-font-primary};
-    --theme-secondary-font-family: #{$theme-sm-font-secondary};
-    --theme-accent-font-family: #{$theme-sm-font-accent};
-
     // font sizes
     --theme-body-font-size: #{strip-unit($theme-body-font-size)};
     --theme-customify-fluid-unit: calc( var(--theme-spacing-fluid) / var(--theme-body-font-size) );
@@ -30,9 +24,10 @@
     --theme-headline-spacing-setting: -0.3;
     --theme-headline-spacing: calc(var(--theme-headline-spacing-setting) * 1em);
 
-
     @include above($theme-font-size-breakpoint) {
         --theme-font-size-slope-adjust: #{$theme-font-size-slope-adjust-desktop};
         --theme-addon-multiplier: #{$theme-font-size-addon-multiplier-desktop};
     }
+
+    @include define-fonts;
 }

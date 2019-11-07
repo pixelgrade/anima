@@ -30,7 +30,7 @@ $enable-button-block-styles:            true !default;
         display: inline-block;
         @include button-base;
         @include button-box;
-        @include button-theme;
+        @include apply-font(button);
 
         &:not(.has-text-color) {
             @include button-color;

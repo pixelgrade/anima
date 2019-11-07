@@ -37,12 +37,10 @@ function rosa2_last_block_hero() {
 
 	if ( ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
 		$blocks = parse_blocks( $post->post_content );
+		$count = count( $blocks );
+		$lastBlockName = $blocks[ $count - 1 ]['blockName'];
 
-		$count = count($blocks);
-
-		if ( ($blocks[$count - 1]['blockName'] === 'novablocks/hero' ) || ($blocks[$count - 1]['blockName'] === 'novablocks/slideshow' )) {
-			return true;
-		}
+        return $lastBlockName === 'novablocks/hero' || $lastBlockName === 'novablocks/slideshow';
 	}
 
 	return false;
@@ -180,7 +178,7 @@ if ( ! function_exists( 'pixelgrade_get_original_theme_name' ) ) {
 }
 
 function rosa2_woocommerce_setup() {
-	if ( function_exists( 'WC') && pixelgrade_user_has_access('woocommerce') ) {
+	if ( function_exists( 'WC' ) && pixelgrade_user_has_access( 'woocommerce' ) ) {
 
 		// Add the necessary theme support flags
 		add_theme_support( 'woocommerce' );

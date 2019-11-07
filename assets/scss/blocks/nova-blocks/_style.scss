@@ -13,39 +13,46 @@
     --novablocks-light-3: var(--current-light-tertiary);
 }
 
-.novablocks-media.wp-block-group,
+.novablocks-media,
 .novablocks-slideshow,
 .novablocks-hero {
 
     & + & {
-        --element-spacing: 0;
-    }
-}
-
-.novablocks-media.wp-block-group {
-    &.block-is-basic {
-        & + & {
-            padding-top: 0;
-        }
+        margin-top: 0;
     }
 }
 
 .novablocks-announcement-bar {
     --novablocks-announcement-color: var(--sm-light-primary);
-    --novablocks-announcement-background-color: var(--sm-color-primary);
-}
 
-.novablocks-announcement-bar {
-    a:hover{
+    &:not([class*="is-style-"]),
+    &.is-style-accent {
+        --novablocks-announcement-background-color: var(--sm-color-primary);
+    }
+
+    &.is-style-alternative {
+        --novablocks-announcement-background-color: var(--sm-color-secondary);
+    }
+
+    a:hover {
         color: currentColor;
     }
 }
 
-.is-style-alternative {
-    --novablocks-announcement-background-color: var(--sm-color-secondary);
-}
-
 .novablocks-media {
+    padding-top: var(--theme-spacing-fluid-large);
+    padding-bottom: var(--theme-spacing-fluid-large);
+
+    &.block-is-basic {
+
+        & + & {
+            padding-top: 0;
+        }
+    }
+
+    & + :not(.novablocks-media) {
+        margin-top: 0;
+    }
 
     &.content-is-moderate {
         --novablocks-media-content-box-shadow:
@@ -87,6 +94,6 @@
 
     > .wp-block-separator:not(:first-child),
     > .wp-block-separator + * {
-        --element-spacing: var(--theme-spacing-normal);
+        --element-spacing: var(--theme-spacing-medium);
     }
 }
