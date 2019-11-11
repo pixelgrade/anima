@@ -1195,7 +1195,8 @@ table {
   table td {
     padding: .5em;
     max-width: 100%;
-    white-space: nowrap; }
+    white-space: nowrap;
+    border: 0; }
   table caption {
     padding: 5em 0; }
   table th:first-child,
@@ -1204,6 +1205,11 @@ table {
   table th:last-child,
   table td:last-child {
     padding-right: 0; }
+  table.has-fixed-layout {
+    table-layout: fixed; }
+    table.has-fixed-layout th,
+    table.has-fixed-layout td {
+      white-space: normal; }
 
 /* 0.3 Fallbacks */
 @media only screen and (min-width: 1000px) {
@@ -4161,6 +4167,9 @@ span.page-numbers {
   margin-top: var(--element-spacing); }
 
 /* Table Block */
+.wp-block-table {
+  overflow-x: auto; }
+
 * {
   --novablocks-color-1: var(--current-color-primary);
   --novablocks-color-2: var(--current-color-secondary);

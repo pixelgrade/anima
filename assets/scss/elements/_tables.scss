@@ -27,6 +27,7 @@ table {
     padding: .5em;
     max-width:100%;
     white-space:nowrap;
+    border: 0;
   }
 
   caption {
@@ -42,6 +43,15 @@ table {
 
     &:last-child {
       padding-right: 0;
+    }
+  }
+
+  &.has-fixed-layout {
+    table-layout: fixed;
+
+    th,
+    td {
+      white-space: normal;
     }
   }
 }
