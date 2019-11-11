@@ -183,8 +183,8 @@ ul.menu,
     }
 
     .site-header__menu {
-      > ul.menu li,
-      > .menu > ul li {
+      > ul.menu li:not(.social-menu-item),
+      > .menu > ul li:not(.social-menu-item) {
         a {
           &:before {
             content: '';
