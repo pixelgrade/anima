@@ -6,6 +6,8 @@
 
     @include above(lap) {
 
+        --header-links-bottom-spacing: .5em;
+
         ul.menu,
         .menu > ul {
 
@@ -28,7 +30,7 @@
 
             > li > a {
                 padding-bottom: 0.25em;
-                margin-bottom: 0.5em;
+                margin-bottom: var(--header-links-bottom-spacing);
 
                 &:after {
                     position: absolute;

@@ -1525,6 +1525,8 @@ ul.menu,
       border-left: 0.1em solid currentColor;
       border-bottom: 0.1em solid currentColor;
       transform: translateY(-10%) rotate(-45deg);
+      transition: var(--theme-transition);
+      transition-property: opacity;
       opacity: .5; }
   @media only screen and (min-width: 1000px) {
     .site-header .menu-item-has-children.hover > .sub-menu,
@@ -1611,19 +1613,43 @@ ul.menu,
   .site-header .children .page_item_has_children .sub-menu,
   .site-header .children .page_item_has_children .children {
     top: -.75em;
-    right: calc( 100% - .625em); }
+    right: calc(100% - .625em); }
   .site-header .sub-menu .menu-item-has-children.has-submenu-left .sub-menu,
   .site-header .sub-menu .menu-item-has-children.has-submenu-left .children,
   .site-header .children .page_item_has_children.has-submenu-left .sub-menu,
   .site-header .children .page_item_has_children.has-submenu-left .children {
     right: auto;
-    left: calc( 100% - .625em); }
+    left: calc(100% - .625em); }
   .site-header :not(:hover) > .sub-menu,
   .site-header :not(:hover) > .children {
     display: block; }
-  .site-header a {
-    border-bottom: 0.125em solid transparent;
-    transition: border-color .3s ease; } }
+  .site-header .site-header__menu > ul.menu li:not(.social-menu-item) a:before,
+  .site-header .site-header__menu > .menu > ul li:not(.social-menu-item) a:before {
+    content: '';
+    position: absolute;
+    bottom: var(--header-links-bottom-spacing);
+    height: 3px;
+    background: currentColor;
+    transition: var(--theme-transition);
+    transition-property: transform;
+    width: 100%;
+    transform: scale3d(0, 1, 1);
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    transform-origin: left; }
+  .site-header .site-header__menu > ul.menu li:not(.social-menu-item) a:hover:before,
+  .site-header .site-header__menu > .menu > ul li:not(.social-menu-item) a:hover:before {
+    transform: scale3d(1, 1, 1);
+    transform-origin: right; }
+  .site-header .site-header__menu > ul.menu li:not(.social-menu-item).menu-item-has-children a:before,
+  .site-header .site-header__menu > .menu > ul li:not(.social-menu-item).menu-item-has-children a:before {
+    width: calc(100% - 1.25em);
+    left: 1.25em; }
+  .site-header .site-header__menu > ul.menu li:not(.social-menu-item) .menu-item-has-children a:before,
+  .site-header .site-header__menu > ul.menu li:not(.social-menu-item) .page_item_has_children a:before,
+  .site-header .site-header__menu > .menu > ul li:not(.social-menu-item) .menu-item-has-children a:before,
+  .site-header .site-header__menu > .menu > ul li:not(.social-menu-item) .page_item_has_children a:before {
+    content: none; } }
 
 ul.menu a,
 .menu > ul a {
@@ -1705,7 +1731,7 @@ ul.menu a,
 :root {
   --enable-social-icons: 1; }
 
-.site-header__menu [href*="facebook"], .site-header__menu [href*="twitter"], .site-header__menu [href*="instagram"], .site-header__menu [href*="youtube"], .site-header__menu [href*="pinterest"], .site-header__menu [href*="dropbox"], .site-header__menu [href*="flickr"], .site-header__menu [href*="tumblr"], .site-header__menu [href*="apple"], .site-header__menu [href*="dribbble"], .site-header__menu [href*="skype"], .site-header__menu [href*="foursquare"], .site-header__menu [href*="vk"], .site-header__menu [href*="wordpress"], .site-header__menu [href*="reddit"], .site-header__menu [href*="stumbleupon"], .site-header__menu [href*="delicious"], .site-header__menu [href*="digg"], .site-header__menu [href*="behance"], .site-header__menu [href*="spotify"], .site-header__menu [href*="deviantart"], .site-header__menu [href*="soundcloud"], .site-header__menu [href*="codepen"], .site-header__menu [href*="slideshare"], .site-header__menu [href*="twitch"], .site-header__menu [href*="yelp"], .site-header__menu [href*="medium"], .site-header__menu [href*="tripadvisor"], .site-header__menu [href*="pocket"], .site-header__menu [href*="500px"], .site-header__menu [href*="amazon"], .site-header__menu [href*="vimeo"], .site-header__menu [href*="snapchat"], .site-header__menu [href*="bandcamp"], .site-header__menu [href*="etsy"], .site-header__menu [href*="meetup"], .site-header__menu [href*="tel:"], .site-header__menu [href*="mailto:"], .site-header__menu [href*="feed"] {
+.site-header__menu [href*="facebook"], .site-header__menu [href*="twitter"], .site-header__menu [href*="instagram"], .site-header__menu [href*="youtube"], .site-header__menu [href*="pinterest"], .site-header__menu [href*="dropbox"], .site-header__menu [href*="flickr"], .site-header__menu [href*="tumblr"], .site-header__menu [href*="apple"], .site-header__menu [href*="dribbble"], .site-header__menu [href*="skype"], .site-header__menu [href*="foursquare"], .site-header__menu [href*="vk"], .site-header__menu [href*="reddit"], .site-header__menu [href*="stumbleupon"], .site-header__menu [href*="delicious"], .site-header__menu [href*="digg"], .site-header__menu [href*="behance"], .site-header__menu [href*="spotify"], .site-header__menu [href*="deviantart"], .site-header__menu [href*="soundcloud"], .site-header__menu [href*="codepen"], .site-header__menu [href*="slideshare"], .site-header__menu [href*="twitch"], .site-header__menu [href*="yelp"], .site-header__menu [href*="medium"], .site-header__menu [href*="tripadvisor"], .site-header__menu [href*="pocket"], .site-header__menu [href*="500px"], .site-header__menu [href*="amazon"], .site-header__menu [href*="vimeo"], .site-header__menu [href*="snapchat"], .site-header__menu [href*="bandcamp"], .site-header__menu [href*="etsy"], .site-header__menu [href*="meetup"], .site-header__menu [href*="tel:"], .site-header__menu [href*="mailto:"], .site-header__menu [href*="feed"] {
   --is-social: 1; }
 
 .social-menu-item > a {
@@ -1759,8 +1785,6 @@ ul.menu a,
     content: "\f180"; }
   .social-menu-item > a[href*="vk"]:before {
     content: "\f189"; }
-  .social-menu-item > a[href*="wordpress"]:before {
-    content: "\f19a"; }
   .social-menu-item > a[href*="reddit"]:before {
     content: "\f1a1"; }
   .social-menu-item > a[href*="stumbleupon"]:before {
@@ -4578,40 +4602,42 @@ span.page-numbers {
   --current-text-decoration: var(--theme-navigation-text-decoration); }
 
 @media only screen and (min-width: 1000px) {
-  .wp-block-novablocks-navigation ul.menu,
-  .wp-block-novablocks-navigation .menu > ul {
-    margin-right: calc( var(--theme-header-links-spacing) * -1); }
-    .wp-block-novablocks-navigation ul.menu a,
-    .wp-block-novablocks-navigation .menu > ul a {
-      display: block;
-      padding: 0.75em 0;
-      color: inherit;
-      text-decoration: none; }
-    .wp-block-novablocks-navigation ul.menu > li,
-    .wp-block-novablocks-navigation .menu > ul > li {
-      margin-right: var(--theme-header-links-spacing); }
-    .wp-block-novablocks-navigation ul.menu .customize-partial-edit-shortcut + > li:not(:first-child),
-    .wp-block-novablocks-navigation .menu > ul .customize-partial-edit-shortcut + > li:not(:first-child) {
-      margin-right: 0; }
-    .wp-block-novablocks-navigation ul.menu > li > a,
-    .wp-block-novablocks-navigation .menu > ul > li > a {
-      padding-bottom: 0.25em;
-      margin-bottom: 0.5em; }
-      .wp-block-novablocks-navigation ul.menu > li > a:after,
-      .wp-block-novablocks-navigation .menu > ul > li > a:after {
-        position: absolute;
-        left: 0; }
-    .wp-block-novablocks-navigation ul.menu li:hover > a,
-    .wp-block-novablocks-navigation .menu > ul li:hover > a {
-      border-color: currentColor; }
-      .wp-block-novablocks-navigation ul.menu li:hover > a:after,
-      .wp-block-novablocks-navigation .menu > ul li:hover > a:after {
-        opacity: 1; }
-  .wp-block-novablocks-navigation .sub-menu li a,
-  .wp-block-novablocks-navigation .children li a {
-    border: 0;
-    padding-right: 1.25em;
-    padding-left: 1.25em; } }
+  .wp-block-novablocks-navigation {
+    --header-links-bottom-spacing: .5em; }
+    .wp-block-novablocks-navigation ul.menu,
+    .wp-block-novablocks-navigation .menu > ul {
+      margin-right: calc( var(--theme-header-links-spacing) * -1); }
+      .wp-block-novablocks-navigation ul.menu a,
+      .wp-block-novablocks-navigation .menu > ul a {
+        display: block;
+        padding: 0.75em 0;
+        color: inherit;
+        text-decoration: none; }
+      .wp-block-novablocks-navigation ul.menu > li,
+      .wp-block-novablocks-navigation .menu > ul > li {
+        margin-right: var(--theme-header-links-spacing); }
+      .wp-block-novablocks-navigation ul.menu .customize-partial-edit-shortcut + > li:not(:first-child),
+      .wp-block-novablocks-navigation .menu > ul .customize-partial-edit-shortcut + > li:not(:first-child) {
+        margin-right: 0; }
+      .wp-block-novablocks-navigation ul.menu > li > a,
+      .wp-block-novablocks-navigation .menu > ul > li > a {
+        padding-bottom: 0.25em;
+        margin-bottom: var(--header-links-bottom-spacing); }
+        .wp-block-novablocks-navigation ul.menu > li > a:after,
+        .wp-block-novablocks-navigation .menu > ul > li > a:after {
+          position: absolute;
+          left: 0; }
+      .wp-block-novablocks-navigation ul.menu li:hover > a,
+      .wp-block-novablocks-navigation .menu > ul li:hover > a {
+        border-color: currentColor; }
+        .wp-block-novablocks-navigation ul.menu li:hover > a:after,
+        .wp-block-novablocks-navigation .menu > ul li:hover > a:after {
+          opacity: 1; }
+    .wp-block-novablocks-navigation .sub-menu li a,
+    .wp-block-novablocks-navigation .children li a {
+      border: 0;
+      padding-right: 1.25em;
+      padding-left: 1.25em; } }
 
 .novablocks-slideshow__arrow {
   background-color: transparent;
@@ -4961,11 +4987,14 @@ body.archive, body.blog, body.search {
     bottom: 0;
     left: 1.15em;
     width: calc(100% - 1.15em);
-    height: .125em;
+    height: .1em;
+    transform: scale3d(1, 1, 1);
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    transform-origin: right;
     background: currentColor;
     transition: var(--theme-button-transition);
-    transition-property: width;
-    transform-origin: 0% 50%; }
+    transition-property: transform; }
   .is-style-text .wp-block-button__link:after {
     content: '';
     opacity: 0;
@@ -4988,7 +5017,8 @@ body.archive, body.blog, body.search {
         transition: var(--theme-button-transition);
         transition-property: opacity, transform; } }
   .is-style-text .wp-block-button__link:hover:before {
-    width: 0; }
+    transform: scale3d(0, 1, 1);
+    transform-origin: left; }
   .is-style-text .wp-block-button__link:hover:after {
     opacity: 1;
     transform: translate(-0.4em, -50%) scale(-1, 1); }
