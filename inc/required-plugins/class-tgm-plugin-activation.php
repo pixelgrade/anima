@@ -8,7 +8,7 @@
  * or theme author for support.
  *
  * @package   TGM-Plugin-Activation
- * @version   2.6.1
+ * @version   2.6.3 enhanced by Pixelgrade
  * @link      http://tgmpluginactivation.com/
  * @author    Thomas Griffin, Gary Jones, Juliette Reinders Folmer
  * @copyright Copyright (c) 2011, Thomas Griffin
@@ -55,7 +55,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 		 *
 		 * @const string Version number.
 		 */
-		const TGMPA_VERSION = '2.6.2';
+		const TGMPA_VERSION = '2.6.3'; // Version bump by Pixelgrade!!!
 
 		/**
 		 * Regular expression to test if a URL is a WP plugin repo URL.
@@ -1324,6 +1324,24 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 		}
 
 		/**
+		 * Remove individual plugin from our collection of plugins.
+		 *
+		 * Pixelgrade addition!!!
+		 *
+		 * @since 2.6.2
+		 *
+		 * @param string $plugin_slug
+		 */
+		public function deregister( $plugin_slug ) {
+			if ( empty( $plugin_slug ) || ! is_string( $plugin_slug ) || isset( $this->plugins[ $plugin_slug ] ) ) {
+				return;
+			}
+
+			unset( $this->plugins[ $plugin_slug ] );
+			unset( $this->sort_order[ $plugin_slug ] );
+		}
+
+		/**
 		 * Determine what type of source the plugin comes from.
 		 *
 		 * @since 2.5.0
@@ -1470,7 +1488,11 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 					return $key;
 				}
 
-				if ( false !== strpos( $key, $slug . '.php' ) ) {
+				// This is a Pixelgrade addition!!!
+				// We want to be a little lenient and discover installed (but not activated) plugins
+				// that may have their directory changed, but that still have their main PHP file with the same name as the plugin slug.
+				// This is pretty safe.
+				if ( false !== strpos( $key, '/' . $slug . '.php' ) ) {
 					return $key;
 				}
 			}
