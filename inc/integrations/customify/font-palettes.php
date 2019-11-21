@@ -20,85 +20,16 @@ function rosa2_filter_font_palettes( $font_palettes ) {
 			),
 			'fonts_logic' => array(
 				'sm_font_primary'   => array(
-					'type'        => 'theme_font',
-					'font_family' => 'Reforma1969',
-					'font_size_to_line_height_points' => array(
-						array( 17, 1.5 ),
-						array( 24, 1.2 ),
-						array( 32, 1.2 ),
-						array( 40, 1.2 ),
-						array( 66, 1.1 ),
-						array( 115, 1.03 ),
-					),
-					'font_styles_intervals' => array(
-						array(
-							'start'           => 0,
-							'font_weight'     => 500,
-							'letter_spacing'  => '-0.02em',
-							'text_transform'  => 'none',
-							'text_decoration' => 'none',
-						),
-						array(
-							'start'           => 24,
-							'font_weight'     => 700,
-							'letter_spacing'  => '-0.02em',
-							'text_transform'  => 'none',
-							'text_decoration' => 'none',
-						),
-						array(
-							'start'           => 66,
-							'font_weight'     => 700,
-							'letter_spacing'  => '-0.03em',
-							'text_transform'  => 'none',
-							'text_decoration' => 'none',
-						),
-					),
+					'reset' => true,
 				),
 				'sm_font_secondary' => array(
-					'type'                  => 'theme_font',
-					'font_family'           => 'Reforma2018',
-					'font_size_to_line_height_points' => array(
-						array( 17, 1.5 ),
-						array( 100, 1 ),
-					),
-					'font_styles_intervals' => array(
-						array(
-							'start'           => 0,
-							'font_weight'     => 500,
-							'letter_spacing'  => 'normal',
-							'text_transform'  => 'none',
-							'text_decoration' => 'none',
-						),
-					),
+					'reset' => true,
 				),
 				'sm_font_body'      => array(
-					'type'        => 'theme_font',
-					'font_family' => 'Reforma1969',
-					'font_size_to_line_height_points' => array(
-						array( 16, 1.7 ),
-						array( 18, 1.6 ),
-						array( 24, 1.6 ),
-					),
-					'font_styles_intervals' => array(
-						array(
-							'start'           => 0,
-							'font_weight'     => 500,
-							'letter_spacing'  => '-0.03em',
-							'text_transform'  => 'none',
-							'text_decoration' => 'none',
-						),
-						array(
-							'start'           => 24,
-							'font_weight'     => 500,
-							'letter_spacing'  => '-0.02em',
-							'text_transform'  => 'none',
-							'text_decoration' => 'none',
-						),
-					),
+					'reset' => true,
 				),
 				'sm_font_accent'    => array(
-					'type'        => 'theme_font',
-					'font_family' => 'Billy Ohio',
+					'reset' => true,
 				),
 			),
 		),

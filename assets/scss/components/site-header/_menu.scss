@@ -214,14 +214,13 @@ ul.menu,
              width: calc(100% - 1.25em);
              right: 1.25em;
          }
-
-         .menu-item-has-children,
-         .page_item_has_children {
-           a:before {
-             content: none;
-           }
-         }
        }
+
+        .sub-menu {
+          li:not(.social-menu-item) a:before {
+            content: none;
+          }
+        }
       }
     }
   }
