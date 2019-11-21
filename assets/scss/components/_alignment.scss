@@ -1,24 +1,36 @@
+[class*="wp-block"] {
+    @extend %wp-block;
+}
+
 @each $alignment in left, right, center, none {
 
-    //.entry-content .align#{$alignment},
+    %wp-block.align#{$alignment},
+    %wp-block > .align#{$alignment},
     .editor-styles-wrapper [data-align=#{$alignment}] [data-block] {
 
         &:not(:first-child) {
-            margin-top: var(--theme-spacing);
+            margin-top: var(--theme-spacing-small);
         }
 
         &:not(:last-child) {
-            margin-bottom: var(--theme-spacing);
+            margin-bottom: var(--theme-spacing-small);
         }
     }
 }
 
 @each $alignment in left, right {
 
-    .entry-content .align#{$alignment} {
+    %wp-block.align#{$alignment},
+    %wp-block > .align#{$alignment} {
         float: #{$alignment};
     }
 
+    %wp-block > .align#{$alignment} {
+        margin-bottom: var(--theme-spacing-small);
+    }
+
+    %wp-block.align#{$alignment},
+    %wp-block > .align#{$alignment},
     .editor-block-list__block[data-align=#{$alignment}] {
         max-width: 100%;
 
@@ -32,19 +44,27 @@
     }
 }
 
-//.entry-content .alignright,
+%wp-block {
+    clear: both;
+}
+
+%wp-block.alignright,
+%wp-block > .alignright,
 .editor-block-list__block[data-align=right] .editor-block-list__block-edit {
-    margin-left: var(--theme-spacing);
+    margin-left: var(--theme-spacing-small);
 }
 
-//.entry-content .alignleft,
+%wp-block.alignleft,
+%wp-block > .alignleft,
 .editor-block-list__block[data-align=left] .editor-block-list__block-edit {
-    margin-right: var(--theme-spacing);
+    margin-right: var(--theme-spacing-small);
 }
 
-//.entry-content .aligncenter,
+%wp-block.aligncenter,
+%wp-block > .aligncenter,
 .editor-block-list__block[data-align=center] .editor-block-list__block-edit {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
 }
