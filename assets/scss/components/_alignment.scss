@@ -1,6 +1,6 @@
 @each $alignment in left, right, center, none {
 
-    .entry-content .align#{$alignment},
+    //.entry-content .align#{$alignment},
     .editor-styles-wrapper [data-align=#{$alignment}] [data-block] {
 
         &:not(:first-child) {
@@ -32,17 +32,17 @@
     }
 }
 
-.entry-content .alignright,
+//.entry-content .alignright,
 .editor-block-list__block[data-align=right] .editor-block-list__block-edit {
     margin-left: var(--theme-spacing);
 }
 
-.entry-content .alignleft,
+//.entry-content .alignleft,
 .editor-block-list__block[data-align=left] .editor-block-list__block-edit {
     margin-right: var(--theme-spacing);
 }
 
-.entry-content .aligncenter,
+//.entry-content .aligncenter,
 .editor-block-list__block[data-align=center] .editor-block-list__block-edit {
     display: block;
     margin-left: auto;

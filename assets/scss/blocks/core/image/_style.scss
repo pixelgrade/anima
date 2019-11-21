@@ -1,9 +1,10 @@
 $enable-image-block-styles:             true !default;
 
 @if $enable-image-block-styles == true {
+
     /* Image Block */
     .wp-block-image {
-        @include space-children-y( var(--theme-sacing-micro) );
+        clear: both;
 
         img {
             display: block;
@@ -13,5 +14,27 @@ $enable-image-block-styles:             true !default;
             width: 100%;
             height: auto;
         }
+
+        &.alignfull figcaption {
+            padding-left: var(--theme-wrapper-sides-spacing);
+            padding-right: var(--theme-wrapper-sides-spacing);
+        }
+    }
+
+    figure.wp-block-image:not(:first-child),
+    .wp-block-image:not(:first-child) > figure {
+        margin-top: var(--theme-spacing-small);
+    }
+
+    .wp-block-image:not(:last-child) > figure {
+
+        &.alignleft,
+        &.alignright {
+            margin-bottom: var(--theme-spacing-small);
+        }
+    }
+
+    div.wp-block-image:not(:first-child) {
+        margin-top: 0;
     }
 }

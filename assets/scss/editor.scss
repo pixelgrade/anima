@@ -61,21 +61,12 @@
     }
 }
 
-
 .editor-styles-wrapper {
     @import "blocks/helpers";
 }
 
 /* Post Title Block */
 .post-type-page {
-
-    .edit-post-visual-editor {
-
-    }
-
-    .editor-post-title {
-
-    }
 
     .editor-post-title__block {
         max-width: none;
@@ -112,6 +103,7 @@
 
 /* Hide Useless Heading Values */
 .components-toolbar {
+
     [aria-label="Heading 4"],
     [aria-label="Heading 5"],
     [aria-label="Heading 6"] {
@@ -125,11 +117,18 @@
     margin-right: auto;
 }
 
-.is-dark-theme .c-logo__default { display: none; }
-.is-dark-theme .c-logo__inverted { display: block; }
-
 .is-dark-theme {
+
+    .c-logo__default {
+        display: none;
+    }
+
+    .c-logo__inverted {
+        display: block;
+    }
+
     .components-text-control__input {
+
         @include placeholder() {
             color: var(--sm-dark-primary) !important;
         }
