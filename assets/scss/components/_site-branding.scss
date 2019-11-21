@@ -13,17 +13,12 @@
     img {
         display: block;
         max-width: 100%;
-        max-height: 20px;
         width: auto;
-        height: auto;
+        height: var(--theme-mobile-header-logo-height, 20px);
+        object-fit: contain;
 
         @include above(lap) {
-            max-height: var(--theme-header-logo-height);
-
-            &[src*="svg"] {
-                max-height: none;
-                height: var(--theme-header-logo-height);
-            }
+            height: var(--theme-header-logo-height);
         }
     }
 

@@ -49,7 +49,7 @@ function rosa2_add_header_section_to_customify_config( $config ) {
 				'header_logo_height'              => array(
 					'type'        => 'range',
 					'label'       => esc_html__( 'Logo Height', '__theme_txtd' ),
-					'desc'        => esc_html__( 'Adjust the max height of your logo container.', '__theme_txtd' ),
+					'desc'        => esc_html__( 'Adjust the height of your logo.', '__theme_txtd' ),
 					'live'        => true,
 					'default'     => 22,
 					'input_attrs' => array(
@@ -63,6 +63,26 @@ function rosa2_add_header_section_to_customify_config( $config ) {
 							'property' => '--theme-header-logo-height-setting',
 							'selector' => ':root',
 							'unit'     => '',
+						),
+					),
+				),
+				'mobile_header_logo_height'       => array(
+					'type'        => 'range',
+					'label'       => esc_html__( 'Mobile Logo Height', '__theme_txtd' ),
+					'desc'        => esc_html__( 'Adjust the height of your logo on small screens.', '__theme_txtd' ),
+					'live'        => true,
+					'default'     => 20,
+					'input_attrs' => array(
+						'min'          => 10,
+						'max'          => 150,
+						'step'         => 1,
+						'data-preview' => true,
+					),
+					'css'         => array(
+						array(
+							'property' => '--theme-mobile-header-logo-height',
+							'selector' => ':root',
+							'unit'     => 'px',
 						),
 					),
 				),
@@ -100,9 +120,9 @@ function rosa2_add_header_section_to_customify_config( $config ) {
 					),
 					'css'         => array(
 						array(
-							'property'        => '--theme-header-links-spacing-setting',
-							'selector'        => ':root',
-							'unit'            => '',
+							'property' => '--theme-header-links-spacing-setting',
+							'selector' => ':root',
+							'unit'     => '',
 						),
 					),
 				),
@@ -130,9 +150,9 @@ function rosa2_add_header_section_to_customify_config( $config ) {
 					),
 					'css'         => array(
 						array(
-							'property'        => '--theme-header-sides-spacing-setting',
-							'selector'        => ':root',
-							'unit'            => '',
+							'property' => '--theme-header-sides-spacing-setting',
+							'selector' => ':root',
+							'unit'     => '',
 						),
 					),
 				),

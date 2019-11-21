@@ -2148,15 +2148,12 @@ ul.menu a,
 .site-logo[class] img {
   display: block;
   max-width: 100%;
-  max-height: 20px;
   width: auto;
-  height: auto; }
+  height: var(--theme-mobile-header-logo-height, 20px);
+  object-fit: contain; }
   @media only screen and (min-width: 1000px) {
     .site-logo[class] img {
-      max-height: var(--theme-header-logo-height); }
-      .site-logo[class] img[src*="svg"] {
-        max-height: none;
-        height: var(--theme-header-logo-height); } }
+      height: var(--theme-header-logo-height); } }
 
 .site-logo[class] .c-logo__inverted img {
   width: 100%; }
