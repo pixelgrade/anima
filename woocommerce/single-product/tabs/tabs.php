@@ -11,13 +11,15 @@
  * happen. When this occurs the version of the template file will be bumped and
  * the readme will list any important changes.
  *
- * @see 	https://docs.woocommerce.com/document/template-structure/
+ * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce/Templates
- * @version 2.4.0
+ * @version 3.8.0
  */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
 /**
  * Filter tabs and allow third parties to add their own.
  *
@@ -42,6 +44,8 @@ if ( ! empty( $tabs ) ) { ?>
 				<?php if ( isset( $tab['callback'] ) ) { call_user_func( $tab['callback'], $key, $tab ); } ?>
 			</div>
 		<?php endforeach; ?>
+
+		<?php do_action( 'woocommerce_product_after_tabs' ); ?>
 	</div>
 
 <?php }
