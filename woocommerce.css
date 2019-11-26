@@ -767,9 +767,10 @@
   margin-left: calc(var(--theme-spacing-medium) * -1);
   margin-bottom: var(--theme-spacing-medium); }
   .wc-tabs li {
-    margin-top: 0; }
+    margin-top: 0;
+    margin-bottom: var(--theme-spacing-tiny); }
   .wc-tabs a {
-    padding-bottom: var(--theme-spacing-tiny); }
+    padding-bottom: var(--theme-spacing-micro); }
   .wc-tabs > * {
     margin-left: var(--theme-spacing-medium); }
   .wc-tabs > :not(.active) a {
@@ -779,7 +780,8 @@
       color: var(--current-color-primary);
       border-bottom: .125em solid currentColor; }
   .wc-tabs > .active a {
-    padding-bottom: var(--theme-spacing-tiny);
+    padding-bottom: var(--theme-spacing-micro);
+    color: var(--current-color-primary);
     text-decoration: none;
     border-bottom: .125em solid currentColor; }
 

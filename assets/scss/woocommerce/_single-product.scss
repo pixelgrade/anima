@@ -191,10 +191,11 @@
 
   li {
     margin-top: 0;
+    margin-bottom: var(--theme-spacing-tiny);
   }
 
   a {
-    padding-bottom: var(--theme-spacing-tiny);
+    padding-bottom: var(--theme-spacing-micro);
   }
 
   > * {
@@ -212,7 +213,8 @@
   }
 
   > .active a {
-    padding-bottom: var(--theme-spacing-tiny);
+    padding-bottom: var(--theme-spacing-micro);
+    color: var(--current-color-primary);
 
     text-decoration: none;
     border-bottom: .125em solid currentColor;
