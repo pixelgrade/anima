@@ -117,6 +117,10 @@
 			$button.closest( '.wc-block-grid__product' ).addClass( 'hover' );
 			$button.text( pixelgradeWooCommerceStrings.adding_to_cart );
 		} );
+
+		$('.c-product-main .cart').on('change', '.qty', function() {
+			$(this.form).find('.ajax_add_to_cart[data-quantity]').data('quantity', this.value);
+		});
 	})
 
 })(jQuery, document);
