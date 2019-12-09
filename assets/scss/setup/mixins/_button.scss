@@ -61,19 +61,21 @@
   transform: translateZ(0);
   will-change: transform;
   backface-visibility: hidden;
+  overflow: hidden;
 
   &:before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: calc(100% + var(--theme-button-border-width));
+    top: calc( -1 * var(--theme-button-border-width) );
+    right: calc( -1 * var(--theme-button-border-width) );
+    bottom: calc( -1 * var(--theme-button-border-width) );
+    left: calc( -1 * var(--theme-button-border-width) );
+    z-index: -1;
+
     will-change: transform;
     -webkit-backface-visibility: hidden;
     transition: var(--current-button-transition);
     transition-property: transform;
-    z-index: -1;
   }
 
   @if $pseudo == false {
@@ -89,6 +91,7 @@
 
 @mixin button-fill($pseudo: true) {
   @include button-fill-base($pseudo);
+
   &:before {
     transform: scale3d(1,1,1);
     transform-origin: right;
@@ -107,6 +110,7 @@
 @mixin button-fill-reverse($pseudo: true) {
   @include button-fill-base($pseudo);
   --current-button-text-color: var(--theme-button-hover-text-color);
+
   &:before {
     transform: scale3d(0,1,1);
     transform-origin: left;

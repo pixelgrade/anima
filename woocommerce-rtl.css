@@ -182,6 +182,7 @@
   transform: translateZ(0);
   will-change: transform;
   backface-visibility: hidden;
+  overflow: hidden;
   --current-button-text-color: var(--theme-button-hover-text-color); }
   .woocommerce[class][class] button:not(.single_add_to_cart_button):hover,
   .woocommerce[class][class] .button:not(.single_add_to_cart_button):hover,
@@ -195,15 +196,15 @@
   .woocommerce[class][class] #respond .comment-form #submit:before {
     content: '';
     position: absolute;
-    right: 0;
-    top: 0;
-    width: 100%;
-    height: calc(100% + var(--theme-button-border-width));
+    top: calc( -1 * var(--theme-button-border-width));
+    left: calc( -1 * var(--theme-button-border-width));
+    bottom: calc( -1 * var(--theme-button-border-width));
+    right: calc( -1 * var(--theme-button-border-width));
+    z-index: -1;
     will-change: transform;
     -webkit-backface-visibility: hidden;
     transition: var(--current-button-transition);
-    transition-property: transform;
-    z-index: -1; }
+    transition-property: transform; }
   .woocommerce[class][class] button:not(.single_add_to_cart_button):before,
   .woocommerce[class][class] .button:not(.single_add_to_cart_button):before,
   .woocommerce[class][class] #respond .comment-form #submit:before {
@@ -271,7 +272,8 @@
   background-color: transparent;
   transform: translateZ(0);
   will-change: transform;
-  backface-visibility: hidden; }
+  backface-visibility: hidden;
+  overflow: hidden; }
   .woocommerce[class][class] .add_to_cart_button.ajax_add_to_cart:hover,
   .woocommerce[class][class] .checkout-button:hover,
   .woocommerce[class][class] #place_order:hover,
@@ -290,15 +292,15 @@
   .woocommerce[class][class] .grouped_form .single_add_to_cart_button:before {
     content: '';
     position: absolute;
-    right: 0;
-    top: 0;
-    width: 100%;
-    height: calc(100% + var(--theme-button-border-width));
+    top: calc( -1 * var(--theme-button-border-width));
+    left: calc( -1 * var(--theme-button-border-width));
+    bottom: calc( -1 * var(--theme-button-border-width));
+    right: calc( -1 * var(--theme-button-border-width));
+    z-index: -1;
     will-change: transform;
     -webkit-backface-visibility: hidden;
     transition: var(--current-button-transition);
-    transition-property: transform;
-    z-index: -1; }
+    transition-property: transform; }
   .woocommerce[class][class] .add_to_cart_button.ajax_add_to_cart:before,
   .woocommerce[class][class] .checkout-button:before,
   .woocommerce[class][class] #place_order:before,
@@ -1051,6 +1053,7 @@
   transform: translateZ(0);
   will-change: transform;
   backface-visibility: hidden;
+  overflow: hidden;
   text-align: center; }
   .add_to_cart_button:hover {
     --current-button-background-color: var(--theme-button-hover-background-color);
@@ -1060,15 +1063,15 @@
   .add_to_cart_button:before {
     content: '';
     position: absolute;
-    right: 0;
-    top: 0;
-    width: 100%;
-    height: calc(100% + var(--theme-button-border-width));
+    top: calc( -1 * var(--theme-button-border-width));
+    left: calc( -1 * var(--theme-button-border-width));
+    bottom: calc( -1 * var(--theme-button-border-width));
+    right: calc( -1 * var(--theme-button-border-width));
+    z-index: -1;
     will-change: transform;
     -webkit-backface-visibility: hidden;
     transition: var(--current-button-transition);
-    transition-property: transform;
-    z-index: -1; }
+    transition-property: transform; }
   .add_to_cart_button:before {
     transform: scale3d(1, 1, 1);
     transform-origin: left;
@@ -2166,7 +2169,8 @@ ul.order_details[class] {
   background-color: transparent;
   transform: translateZ(0);
   will-change: transform;
-  backface-visibility: hidden; }
+  backface-visibility: hidden;
+  overflow: hidden; }
   [class*="wc-block-"] .wp-block-button__link[class][class][class]:hover {
     --current-button-background-color: var(--theme-button-hover-background-color);
     --current-button-border-color: var(--theme-button-hover-border-color);
@@ -2175,15 +2179,15 @@ ul.order_details[class] {
   [class*="wc-block-"] .wp-block-button__link[class][class][class]:before {
     content: '';
     position: absolute;
-    right: 0;
-    top: 0;
-    width: 100%;
-    height: calc(100% + var(--theme-button-border-width));
+    top: calc( -1 * var(--theme-button-border-width));
+    left: calc( -1 * var(--theme-button-border-width));
+    bottom: calc( -1 * var(--theme-button-border-width));
+    right: calc( -1 * var(--theme-button-border-width));
+    z-index: -1;
     will-change: transform;
     -webkit-backface-visibility: hidden;
     transition: var(--current-button-transition);
-    transition-property: transform;
-    z-index: -1; }
+    transition-property: transform; }
   [class*="wc-block-"] .wp-block-button__link[class][class][class]:before {
     transform: scale3d(1, 1, 1);
     transform-origin: left;

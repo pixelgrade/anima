@@ -81,120 +81,126 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 72);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 72:
+/******/ ([
+/* 0 */,
+/* 1 */,
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _blocks_button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(73);
+/* harmony import */ var _blocks_button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
 /* harmony import */ var _blocks_button__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_blocks_button__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _blocks_group__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(74);
+/* harmony import */ var _blocks_group__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
 /* harmony import */ var _blocks_group__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_blocks_group__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _blocks_paragraph__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(75);
-/* harmony import */ var _blocks_paragraph__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_blocks_paragraph__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _blocks_separator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(76);
-/* harmony import */ var _blocks_separator__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_blocks_separator__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _blocks_menu_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(15);
+/* harmony import */ var _blocks_menu_item__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_blocks_menu_item__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _blocks_paragraph__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(12);
+/* harmony import */ var _blocks_paragraph__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_blocks_paragraph__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _blocks_separator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(13);
+/* harmony import */ var _blocks_separator__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_blocks_separator__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
 
 
 /***/ }),
-
-/***/ 73:
+/* 10 */
 /***/ (function(module, exports) {
 
 wp.domReady(function () {
-
-	wp.blocks.unregisterBlockStyle('core/button', 'fill');
-	wp.blocks.unregisterBlockStyle('core/button', 'outline');
-	wp.blocks.unregisterBlockStyle('core/button', 'squared');
-
-	wp.blocks.registerBlockStyle('core/button', {
-		name: 'primary',
-		label: 'Primary',
-		isDefault: true
-	});
-
-	wp.blocks.registerBlockStyle('core/button', {
-		name: 'secondary',
-		label: 'Secondary'
-	});
-
-	wp.blocks.registerBlockStyle('core/button', {
-		name: 'text',
-		label: 'Text'
-	});
+  wp.blocks.unregisterBlockStyle('core/button', 'fill');
+  wp.blocks.unregisterBlockStyle('core/button', 'outline');
+  wp.blocks.unregisterBlockStyle('core/button', 'squared');
+  wp.blocks.registerBlockStyle('core/button', {
+    name: 'primary',
+    label: 'Primary',
+    isDefault: true
+  });
+  wp.blocks.registerBlockStyle('core/button', {
+    name: 'secondary',
+    label: 'Secondary'
+  });
+  wp.blocks.registerBlockStyle('core/button', {
+    name: 'text',
+    label: 'Text'
+  });
 });
 
 /***/ }),
-
-/***/ 74:
+/* 11 */
 /***/ (function(module, exports) {
 
 wp.domReady(function () {
-
-	wp.blocks.registerBlockStyle('core/group', {
-		name: 'dark',
-		label: 'Dark'
-	});
-
-	wp.blocks.registerBlockStyle('core/group', {
-		name: 'darker',
-		label: 'Darker'
-	});
-
-	wp.blocks.registerBlockStyle('core/group', {
-		name: 'accent',
-		label: 'Accent'
-	});
+  wp.blocks.registerBlockStyle('core/group', {
+    name: 'dark',
+    label: 'Dark'
+  });
+  wp.blocks.registerBlockStyle('core/group', {
+    name: 'darker',
+    label: 'Darker'
+  });
+  wp.blocks.registerBlockStyle('core/group', {
+    name: 'accent',
+    label: 'Accent'
+  });
 });
 
 /***/ }),
-
-/***/ 75:
+/* 12 */
 /***/ (function(module, exports) {
 
 wp.domReady(function () {
-
-	wp.blocks.registerBlockStyle('core/paragraph', {
-		name: 'lead',
-		label: 'Lead'
-	});
+  wp.blocks.registerBlockStyle('core/paragraph', {
+    name: 'lead',
+    label: 'Lead'
+  });
 });
 
 /***/ }),
-
-/***/ 76:
+/* 13 */
 /***/ (function(module, exports) {
 
 wp.domReady(function () {
+  wp.blocks.unregisterBlockStyle('core/separator', 'default');
+  wp.blocks.unregisterBlockStyle('core/separator', 'wide');
+  wp.blocks.unregisterBlockStyle('core/separator', 'dots');
+  wp.blocks.registerBlockStyle('core/separator', {
+    name: 'decorative',
+    label: 'Decorative'
+  });
+  wp.blocks.registerBlockStyle('core/separator', {
+    name: 'simple',
+    label: 'Simple'
+  });
+  wp.blocks.registerBlockStyle('core/separator', {
+    name: 'elaborate',
+    label: 'Elaborate'
+  });
+});
 
-	wp.blocks.unregisterBlockStyle('core/separator', 'default');
-	wp.blocks.unregisterBlockStyle('core/separator', 'wide');
-	wp.blocks.unregisterBlockStyle('core/separator', 'dots');
+/***/ }),
+/* 14 */,
+/* 15 */
+/***/ (function(module, exports) {
 
-	wp.blocks.registerBlockStyle('core/separator', {
-		name: 'decorative',
-		label: 'Decorative'
-	});
-
-	wp.blocks.registerBlockStyle('core/separator', {
-		name: 'simple',
-		label: 'Simple'
-	});
-
-	wp.blocks.registerBlockStyle('core/separator', {
-		name: 'elaborate',
-		label: 'Elaborate'
-	});
+wp.domReady(function () {
+  wp.blocks.registerBlockStyle('novablocks/menu-food-item', {
+    name: 'rounded',
+    label: 'Rounded'
+  });
 });
 
 /***/ })
-
-/******/ });
+/******/ ]);
