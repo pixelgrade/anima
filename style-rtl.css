@@ -31,6 +31,33 @@ Table of Contents
 6.    Overwrites
 
 */
+html, input[type="submit"],
+input[type="button"],
+button[type="submit"],
+button[type="reset"], h1.has-larger-font-size, h1,
+h2.has-larger-font-size, h1.has-smaller-font-size,
+h2,
+h3.has-larger-font-size, h2.has-smaller-font-size,
+h3, h3.has-smaller-font-size,
+h4, h5, h6, .site-title, .content-area, .entry-meta, .c-comments-toggle__label, .comment__metadata a,
+.comment-reply-title a,
+.edit-link a,
+.reply a,
+.logged-in-as a, .pagination .nav-links, .post-navigation__post-title, .post-navigation__link-label, .wp-block-button__link, .nova-food-menu-item__title .item-title, .nova-food-menu__header .section-title, .novablocks-media__content, .wp-block-novablocks-navigation, .wp-block-quote,
+.wp-block-pullquote, .wp-block-quote.has-smaller-font-size,
+.wp-block-pullquote.has-smaller-font-size, .wp-block-quote.has-larger-font-size,
+.wp-block-pullquote.has-larger-font-size, .wp-block-quote cite,
+.wp-block-quote__citation,
+.wp-block-pullquote cite,
+.wp-block-pullquote__citation, .wp-block-button:not(.is-style-text) .wp-block-button__link, .c-headline__secondary, .wpforms-container[class][class][class] .wpforms-submit[class], .is-style-lead {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration); }
+
 :root {
   --sm-color-primary: #DDAB5D;
   --sm-color-secondary: #39497C;
@@ -307,21 +334,25 @@ Table of Contents
       --theme-addon-multiplier: 1; } }
 
 :root {
-  --theme-content-width-normal: calc(38 * var(--theme-content-final-font-size));
-  --theme-content-width-wide: calc(65 * var(--theme-content-final-font-size));
+  --theme-content-width-wide-initial: 38;
+  --theme-content-width-normal: calc(var(--theme-content-width-normal-initial) * var(--theme-content-final-font-size));
+  --theme-content-width-wide-initial: 65;
+  --theme-content-width-wide: calc(var(--theme-content-width-wide-initial) * var(--theme-content-final-font-size));
   --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-medium); }
 
 :root {
-  --theme-spacing: 1rem;
-  --theme-spacing-micro:      calc( var( --theme-spacing ) / 4 );
-  --theme-spacing-tiny:       calc( var( --theme-spacing ) / 2 );
-  --theme-spacing-default:    calc( var( --theme-spacing ) * 1 );
-  --theme-spacing-small:      calc( var( --theme-spacing ) * 2 );
-  --theme-spacing-medium:     calc( var( --theme-spacing ) * 3 );
-  --theme-spacing-large:      calc( var( --theme-spacing ) * 4 );
-  --theme-spacing-xl:         calc( var( --theme-spacing ) * 5 );
-  --theme-spacing-xxl:        calc( var( --theme-spacing ) * 8 );
-  --theme-spacing-fluid: 0.45rem;
+  --theme-spacing-ratio: 1;
+  --theme-spacing:                calc( 1rem * var( --theme-spacing-ratio ) );
+  --theme-spacing-micro:          calc( var( --theme-spacing ) / 4 );
+  --theme-spacing-tiny:           calc( var( --theme-spacing ) / 2 );
+  --theme-spacing-default:        calc( var( --theme-spacing ) * 1 );
+  --theme-spacing-small:          calc( var( --theme-spacing ) * 2 );
+  --theme-spacing-medium:         calc( var( --theme-spacing ) * 3 );
+  --theme-spacing-large:          calc( var( --theme-spacing ) * 4 );
+  --theme-spacing-xl:             calc( var( --theme-spacing ) * 5 );
+  --theme-spacing-xxl:            calc( var( --theme-spacing ) * 8 );
+  --theme-spacing-fluid-ratio: 0.45rem;
+  --theme-spacing-fluid:          calc( var( --theme-spacing-ratio ) * var( --theme-spacing-fluid-ratio ) );
   --theme-spacing-fluid-micro:    calc( var( --theme-spacing-fluid ) / 4 );
   --theme-spacing-fluid-tiny:     calc( var( --theme-spacing-fluid ) / 2 );
   --theme-spacing-fluid-default:  calc( var( --theme-spacing-fluid ) * 1 );
@@ -332,10 +363,10 @@ Table of Contents
   --theme-spacing-fluid-xxl:      calc( var( --theme-spacing-fluid ) * 8 ); }
   @media screen and (min-width: 20em) {
     :root {
-      --theme-spacing-fluid: calc(0.45rem + 0.55 * ((100vw - 20em) / 70)); } }
+      --theme-spacing-fluid-ratio: calc(0.45rem + 0.55 * ((100vw - 20em) / 70)); } }
   @media screen and (min-width: 90em) {
     :root {
-      --theme-spacing-fluid: 1rem; } }
+      --theme-spacing-fluid-ratio: 1rem; } }
 
 :root {
   --theme-header-logo-height-setting: 22;
@@ -669,13 +700,6 @@ template {
 /* 0.2. Elements */
 html {
   -webkit-font-smoothing: antialiased;
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-body-font-family);
   --current-font-size: var(--theme-body-final-font-size);
   --current-line-height: var(--theme-body-line-height);
@@ -801,13 +825,6 @@ button[type="reset"] {
   background-color: var(--current-button-background-color);
   color: var(--current-button-text-color);
   transition: var(--current-button-transition);
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-button-font-family);
   --current-font-size: var(--theme-button-final-font-size);
   --current-line-height: var(--theme-button-line-height);
@@ -999,13 +1016,6 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0; }
 
 h1.has-larger-font-size {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-display-font-family);
   --current-font-size: var(--theme-display-final-font-size);
   --current-line-height: var(--theme-display-line-height);
@@ -1016,13 +1026,6 @@ h1.has-larger-font-size {
 
 h1,
 h2.has-larger-font-size {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-1-font-family);
   --current-font-size: var(--theme-heading-1-final-font-size);
   --current-line-height: var(--theme-heading-1-line-height);
@@ -1034,13 +1037,6 @@ h2.has-larger-font-size {
 h1.has-smaller-font-size,
 h2,
 h3.has-larger-font-size {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-2-font-family);
   --current-font-size: var(--theme-heading-2-final-font-size);
   --current-line-height: var(--theme-heading-2-line-height);
@@ -1051,13 +1047,6 @@ h3.has-larger-font-size {
 
 h2.has-smaller-font-size,
 h3 {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-3-font-family);
   --current-font-size: var(--theme-heading-3-final-font-size);
   --current-line-height: var(--theme-heading-3-line-height);
@@ -1068,13 +1057,6 @@ h3 {
 
 h3.has-smaller-font-size,
 h4 {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-size: var(--theme-heading-4-final-font-size);
   --current-line-height: var(--theme-heading-4-line-height);
@@ -1084,13 +1066,6 @@ h4 {
   --current-text-decoration: var(--theme-heading-4-text-decoration); }
 
 h5 {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-5-font-family);
   --current-font-size: var(--theme-heading-5-final-font-size);
   --current-line-height: var(--theme-heading-5-line-height);
@@ -1100,13 +1075,6 @@ h5 {
   --current-text-decoration: var(--theme-heading-5-text-decoration); }
 
 h6 {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-6-font-family);
   --current-font-size: var(--theme-heading-6-final-font-size);
   --current-line-height: var(--theme-heading-6-line-height);
@@ -1270,7 +1238,7 @@ table {
 .novablocks-media__aside {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-gap: 15px;
+  grid-gap: var(--theme-spacing);
   min-height: 400px; }
 
 .novablocks-media__image {
@@ -2207,13 +2175,6 @@ ul.menu a,
   width: 100%; }
 
 .site-title {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-size: var(--theme-heading-4-final-font-size);
   --current-line-height: var(--theme-heading-4-line-height);
@@ -2298,13 +2259,6 @@ ul.menu a,
   word-break: break-word; }
 
 .content-area {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-content-font-family);
   --current-font-size: var(--theme-content-final-font-size);
   --current-line-height: var(--theme-content-line-height);
@@ -2377,13 +2331,6 @@ ul.menu a,
   justify-content: center;
   padding-right: 0;
   list-style: none;
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-meta-font-family);
   --current-font-size: var(--theme-meta-final-font-size);
   --current-line-height: var(--theme-meta-line-height);
@@ -2462,13 +2409,6 @@ ul.menu a,
   background-color: var(--current-button-background-color);
   color: var(--current-button-text-color);
   transition: var(--current-button-transition);
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-button-font-family);
   --current-font-size: var(--theme-button-final-font-size);
   --current-line-height: var(--theme-button-line-height);
@@ -2698,13 +2638,6 @@ label.subscribe-label.subscribe-label {
 .edit-link a,
 .reply a,
 .logged-in-as a {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-6-font-family);
   --current-font-size: var(--theme-heading-6-final-font-size);
   --current-line-height: var(--theme-heading-6-line-height);
@@ -2783,13 +2716,6 @@ label.subscribe-label.subscribe-label {
     justify-content: center;
     font-feature-settings: "lnum";
     margin-right: calc(var(--theme-spacing-tiny) * -1);
-    font-family: var(--current-font-family);
-    font-size: var(--current-font-size);
-    line-height: var(--current-line-height);
-    font-weight: var(--current-font-weight);
-    letter-spacing: var(--current-letter-spacing);
-    text-transform: var(--current-text-transform);
-    text-decoration: var(--current-text-decoration);
     --current-font-family: var(--theme-button-font-family);
     --current-font-size: var(--theme-button-final-font-size);
     --current-line-height: var(--theme-button-line-height);
@@ -2900,13 +2826,6 @@ span.page-numbers {
       height: 100%; }
 
 .post-navigation__post-title {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-size: var(--theme-heading-4-final-font-size);
   --current-line-height: var(--theme-heading-4-line-height);
@@ -2929,13 +2848,6 @@ span.page-numbers {
 .post-navigation__link-label {
   position: relative;
   color: var(--current-color-primary);
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-button-font-family);
   --current-font-size: var(--theme-button-final-font-size);
   --current-line-height: var(--theme-button-line-height);
@@ -3757,13 +3669,6 @@ span.page-numbers {
   padding: var(--theme-button-padding);
   border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
   border-radius: var(--theme-button-border-radius);
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-button-font-family);
   --current-font-size: var(--theme-button-final-font-size);
   --current-line-height: var(--theme-button-line-height);
@@ -4647,13 +4552,6 @@ span.page-numbers {
 .nova-food-menu-item__title {
   --theme-heading-5-font-weight: 700; }
   .nova-food-menu-item__title .item-title {
-    font-family: var(--current-font-family);
-    font-size: var(--current-font-size);
-    line-height: var(--current-line-height);
-    font-weight: var(--current-font-weight);
-    letter-spacing: var(--current-letter-spacing);
-    text-transform: var(--current-text-transform);
-    text-decoration: var(--current-text-decoration);
     --current-font-family: var(--theme-heading-4-font-family);
     --current-font-size: var(--theme-heading-4-final-font-size);
     --current-line-height: var(--theme-heading-4-line-height);
@@ -4670,13 +4568,6 @@ span.page-numbers {
   font-feature-settings: 'tnum' on, 'lnum' on; }
 
 .nova-food-menu__header .section-title {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-2-font-family);
   --current-font-size: var(--theme-heading-2-final-font-size);
   --current-line-height: var(--theme-heading-2-line-height);
@@ -4698,6 +4589,9 @@ span.page-numbers {
 
 .wp-block-novablocks-menu-food-item.is-style-rounded {
   --item-border-radius: 0.4em; }
+
+.nova-food-menu-item--highlighted {
+  --item-padding: var( --theme-spacing ); }
 
 .novablocks-map__marker-name {
   position: absolute;
@@ -4782,13 +4676,6 @@ span.page-numbers {
 
 .novablocks-media__content {
   max-width: 100%;
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-body-font-family);
   --current-font-size: var(--theme-body-final-font-size);
   --current-line-height: var(--theme-body-line-height);
@@ -4855,13 +4742,6 @@ span.page-numbers {
     margin-bottom: var(--element-spacing); } }
 
 .wp-block-novablocks-navigation {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-navigation-font-family);
   --current-font-size: var(--theme-navigation-final-font-size);
   --current-line-height: var(--theme-navigation-line-height);
@@ -5062,13 +4942,6 @@ span.page-numbers {
 
 .wp-block-quote,
 .wp-block-pullquote {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-3-font-family);
   --current-font-size: var(--theme-heading-3-final-font-size);
   --current-line-height: var(--theme-heading-3-line-height);
@@ -5078,13 +4951,6 @@ span.page-numbers {
   --current-text-decoration: var(--theme-heading-3-text-decoration); }
   .wp-block-quote.has-smaller-font-size,
   .wp-block-pullquote.has-smaller-font-size {
-    font-family: var(--current-font-family);
-    font-size: var(--current-font-size);
-    line-height: var(--current-line-height);
-    font-weight: var(--current-font-weight);
-    letter-spacing: var(--current-letter-spacing);
-    text-transform: var(--current-text-transform);
-    text-decoration: var(--current-text-decoration);
     --current-font-family: var(--theme-heading-4-font-family);
     --current-font-size: var(--theme-heading-4-final-font-size);
     --current-line-height: var(--theme-heading-4-line-height);
@@ -5094,13 +4960,6 @@ span.page-numbers {
     --current-text-decoration: var(--theme-heading-4-text-decoration); }
   .wp-block-quote.has-larger-font-size,
   .wp-block-pullquote.has-larger-font-size {
-    font-family: var(--current-font-family);
-    font-size: var(--current-font-size);
-    line-height: var(--current-line-height);
-    font-weight: var(--current-font-weight);
-    letter-spacing: var(--current-letter-spacing);
-    text-transform: var(--current-text-transform);
-    text-decoration: var(--current-text-decoration);
     --current-font-family: var(--theme-heading-2-font-family);
     --current-font-size: var(--theme-heading-2-final-font-size);
     --current-line-height: var(--theme-heading-2-line-height);
@@ -5122,13 +4981,6 @@ span.page-numbers {
 .wp-block-pullquote cite,
 .wp-block-pullquote__citation {
   margin-top: var(--theme-spacing);
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-body-font-family);
   --current-font-size: var(--theme-body-final-font-size);
   --current-line-height: var(--theme-body-line-height);
@@ -5274,13 +5126,6 @@ body.archive, body.blog, body.search {
   --current-button-border-color: var(--theme-button-border-color);
   --current-button-text-color: var(--theme-button-text-color);
   --current-button-transition: var(--theme-button-transition);
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-button-font-family);
   --current-font-size: var(--theme-button-final-font-size);
   --current-line-height: var(--theme-button-line-height);
@@ -5456,13 +5301,6 @@ body.archive, body.blog, body.search {
   z-index: 10; }
 
 .c-headline__secondary {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-accent-font-family);
   --current-font-size: var(--theme-accent-final-font-size);
   --current-line-height: var(--theme-accent-line-height);
@@ -5792,13 +5630,6 @@ body:not(.has-loaded) .c-comments-toggle__checkbox + .c-comments-toggle__label ~
     background-color: var(--current-button-background-color);
     color: var(--current-button-text-color);
     transition: var(--current-button-transition);
-    font-family: var(--current-font-family);
-    font-size: var(--current-font-size);
-    line-height: var(--current-line-height);
-    font-weight: var(--current-font-weight);
-    letter-spacing: var(--current-letter-spacing);
-    text-transform: var(--current-text-transform);
-    text-decoration: var(--current-text-decoration);
     --current-font-family: var(--theme-button-font-family);
     --current-font-size: var(--theme-button-final-font-size);
     --current-line-height: var(--theme-button-line-height);
@@ -5855,13 +5686,6 @@ iframe.instagram-media {
   margin-left: 0 !important; }
 
 .is-style-lead {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-lead-font-family);
   --current-font-size: var(--theme-lead-final-font-size);
   --current-line-height: var(--theme-lead-line-height);
