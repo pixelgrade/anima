@@ -1,12 +1,27 @@
 (function($, document) {
 
+	// Handle Checkout Notifications
 	$( document.body ).on( 'checkout_error', function() {
 		$('.woocommerce-NoticeGroup-checkout').insertBefore( '#customer_details .col-1 .woocommerce-billing-fields' );
 	} );
 
+	// Handle Coupon Notifications on Checkout
+	$( document.body ).on( 'applied_coupon_in_checkout update_checkout', function() {
+		var wooErrorNotification = $('.woocommerce-error'),
+			wooMessageNotification = $('.woocommerce-message');
+		if ( wooErrorNotification.length) {
+			wooErrorNotification.insertBefore( '#customer_details .col-1 .woocommerce-billing-fields' );
+		}
+
+		if ( wooMessageNotification.length) {
+			wooMessageNotification.insertBefore( '#customer_details .col-1 .woocommerce-billing-fields' );
+		}
+
+		$('.coupon-value-js').val('');
+	});
+
 	$(function(){
 
-		var $loginForm = $('.woocommerce-form--login');
 		var $body = $( document.body ).not( '.woocommerce-cart' );
 
 		// show mini cart when a product is added to cart
@@ -120,6 +135,10 @@
 
 		$('.c-product-main .cart').on('change', '.qty', function() {
 			$(this.form).find('.ajax_add_to_cart[data-quantity]').data('quantity', this.value);
+		});
+
+		$('.coupon-value-js').on('change', function(){
+			$('.coupon-value').val($(this).val());
 		});
 	})
 
