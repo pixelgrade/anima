@@ -107,7 +107,7 @@
       wooMessageNotification.insertBefore('#customer_details .col-1 .woocommerce-billing-fields');
     }
 
-    $('.coupon-value-js').val('');
+    $('.js-coupon-value-source').val('');
   });
   $(function () {
     var $body = $(document.body).not('.woocommerce-cart'); // show mini cart when a product is added to cart
@@ -207,8 +207,8 @@
     $('.c-product-main .cart').on('change', '.qty', function () {
       $(this.form).find('.ajax_add_to_cart[data-quantity]').data('quantity', this.value);
     });
-    $('.coupon-value-js').on('change', function () {
-      $('.coupon-value').val($(this).val());
+    $('.js-coupon-value-source').on('change', function () {
+      $('.js-coupon-value-destination').val($(this).val());
     });
   });
 })(jQuery, document);

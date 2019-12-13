@@ -17,7 +17,7 @@
 			wooMessageNotification.insertBefore( '#customer_details .col-1 .woocommerce-billing-fields' );
 		}
 
-		$('.coupon-value-js').val('');
+		$('.js-coupon-value-source').val('');
 	});
 
 	$(function(){
@@ -137,8 +137,8 @@
 			$(this.form).find('.ajax_add_to_cart[data-quantity]').data('quantity', this.value);
 		});
 
-		$('.coupon-value-js').on('change', function(){
-			$('.coupon-value').val($(this).val());
+		$('.js-coupon-value-source').on('change', function(){
+			$('.js-coupon-value-destination').val($(this).val());
 		});
 	})
 
