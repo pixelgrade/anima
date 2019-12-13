@@ -29,7 +29,7 @@ if ( ! wc_coupons_enabled() ) { // @codingStandardsIgnoreLine.
 	<p><?php esc_html_e( 'If you have a coupon code, please apply it below.', '__theme_txtd' ); ?></p>
 
 	<p class="form-row form-row-first">
-		<input type="text" name="coupon_code" class="input-text" placeholder="<?php esc_attr_e( 'Coupon code', '__theme_txtd' ); ?>" id="coupon_code" value="" form="form-coupon" />
+		<input type="text" name="coupon_code" class="js-coupon-value-source input-text" placeholder="<?php esc_attr_e( 'Coupon code', '__theme_txtd' ); ?>" id="coupon_code" value="" form="form-coupon" />
 	</p>
 
 	<p class="form-row form-row-last">

@@ -400,7 +400,9 @@ if ( ! function_exists( ' rosa2_woocommerce_pagination_args' ) ) {
 
 if ( ! function_exists( 'rosa2_woocommerce_coupon_form' ) ) {
 	function rosa2_woocommerce_coupon_form() {
-		echo '<form class="checkout_coupon woocommerce-form-coupon" id="form-coupon" method="post" style="display:none"></form>';
+		echo '<form class="checkout_coupon woocommerce-form-coupon" id="form-coupon" method="post" style="display:none">
+                <input form="woocommerce-form-coupon" type="text" name="coupon_code" class="js-coupon-value-destination input-text" placeholder="Coupon code" id="coupon_code" value="">
+              </form>';
 	}
 }
 
