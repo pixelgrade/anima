@@ -137,7 +137,9 @@ class Header {
 	updateHeaderOffset() {
 		if ( ! this.element ) return;
 
-		this.element.style.marginTop = this.offset + 'px';
+		document.documentElement.style.setProperty(
+			'--theme-header-offset', this.offset + 'px'
+		)
 	}
 
 	updateMobileHeaderOffset() {

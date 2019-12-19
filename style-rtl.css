@@ -2083,6 +2083,7 @@ ul.menu a,
     right: 0;
     z-index: 1000;
     min-height: var(--theme-header-height);
+    margin-top: var(--theme-header-offset);
     transition: var(--theme-transition);
     transition-property: opacity;
     will-change: transform;
@@ -2157,7 +2158,7 @@ ul.menu a,
   right: 0;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 2.22%, rgba(0, 0, 0, 0.05) 84.86%, rgba(0, 0, 0, 0.058563) 84.87%, rgba(0, 0, 0, 0.4) 100%); }
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 2.22%, rgba(0, 0, 0, 0.05) 84.86%, rgba(0, 0, 0, 0.058563) calc(100% - calc(var(--theme-header-height) + var(--theme-header-offset))), rgba(0, 0, 0, 0.4) 100%); }
 
 .has-no-padding-bottom .site-content {
   padding-bottom: 0 !important; }
