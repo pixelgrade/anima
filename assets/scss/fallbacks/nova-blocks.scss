@@ -67,12 +67,17 @@
         opacity: var(--novablocks-media-content-background-opacity);
         pointer-events: none;
     }
+
+    &[class] > * {
+        margin-left: 0;
+        margin-right: 0;
+    }
 }
 
 .novablocks-media__aside {
     display: grid;
     grid-template-columns: repeat(12,1fr);
-    grid-gap: 15px;
+    grid-gap: var(--theme-spacing);
     min-height: 400px;
 }
 

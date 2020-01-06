@@ -1,3 +1,23 @@
+.woocommerce[class][class] button:not(.single_add_to_cart_button),
+.woocommerce[class][class] .button:not(.single_add_to_cart_button),
+.woocommerce[class][class] #respond .comment-form #submit, .woocommerce[class][class] .add_to_cart_button.ajax_add_to_cart,
+.woocommerce[class][class] .checkout-button,
+.woocommerce[class][class] #place_order,
+.woocommerce[class][class] .woocommerce-mini-cart__buttons .checkout,
+.woocommerce[class][class] .wc-proceed-to-checkout .wc-forward,
+.woocommerce[class][class] .grouped_form .single_add_to_cart_button, .wc-block-grid__product-title,
+.woocommerce-loop-product__title,
+.woocommerce-loop-category__title, .c-product-main .product_title, .add_to_cart_button, .related.products > h2,
+.upsells > h2,
+.wc-tabs .h3, .order-total .amount, .cart_totals h2, .cross-sells h2, .cross-sells .wc-block-grid__product-title, #ship-to-different-address, [class*="wc-block-"] .wp-block-button__link[class], .woocommerce-pagination {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  text-decoration: var(--current-text-decoration); }
+
 .woocommerce-categories {
   display: flex;
   flex-wrap: wrap;
@@ -164,13 +184,6 @@
   background-color: var(--current-button-background-color);
   color: var(--current-button-text-color);
   transition: var(--current-button-transition);
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-button-font-family);
   --current-font-size: var(--theme-button-final-font-size);
   --current-line-height: var(--theme-button-line-height);
@@ -182,6 +195,7 @@
   transform: translateZ(0);
   will-change: transform;
   backface-visibility: hidden;
+  overflow: hidden;
   --current-button-text-color: var(--theme-button-hover-text-color); }
   .woocommerce[class][class] button:not(.single_add_to_cart_button):hover,
   .woocommerce[class][class] .button:not(.single_add_to_cart_button):hover,
@@ -195,15 +209,15 @@
   .woocommerce[class][class] #respond .comment-form #submit:before {
     content: '';
     position: absolute;
-    right: 0;
-    top: 0;
-    width: 100%;
-    height: calc(100% + var(--theme-button-border-width));
+    top: calc( -1 * var(--theme-button-border-width));
+    left: calc( -1 * var(--theme-button-border-width));
+    bottom: calc( -1 * var(--theme-button-border-width));
+    right: calc( -1 * var(--theme-button-border-width));
+    z-index: -1;
     will-change: transform;
     -webkit-backface-visibility: hidden;
     transition: var(--current-button-transition);
-    transition-property: transform;
-    z-index: -1; }
+    transition-property: transform; }
   .woocommerce[class][class] button:not(.single_add_to_cart_button):before,
   .woocommerce[class][class] .button:not(.single_add_to_cart_button):before,
   .woocommerce[class][class] #respond .comment-form #submit:before {
@@ -254,13 +268,6 @@
   background-color: var(--current-button-background-color);
   color: var(--current-button-text-color);
   transition: var(--current-button-transition);
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-button-font-family);
   --current-font-size: var(--theme-button-final-font-size);
   --current-line-height: var(--theme-button-line-height);
@@ -271,7 +278,8 @@
   background-color: transparent;
   transform: translateZ(0);
   will-change: transform;
-  backface-visibility: hidden; }
+  backface-visibility: hidden;
+  overflow: hidden; }
   .woocommerce[class][class] .add_to_cart_button.ajax_add_to_cart:hover,
   .woocommerce[class][class] .checkout-button:hover,
   .woocommerce[class][class] #place_order:hover,
@@ -290,15 +298,15 @@
   .woocommerce[class][class] .grouped_form .single_add_to_cart_button:before {
     content: '';
     position: absolute;
-    right: 0;
-    top: 0;
-    width: 100%;
-    height: calc(100% + var(--theme-button-border-width));
+    top: calc( -1 * var(--theme-button-border-width));
+    left: calc( -1 * var(--theme-button-border-width));
+    bottom: calc( -1 * var(--theme-button-border-width));
+    right: calc( -1 * var(--theme-button-border-width));
+    z-index: -1;
     will-change: transform;
     -webkit-backface-visibility: hidden;
     transition: var(--current-button-transition);
-    transition-property: transform;
-    z-index: -1; }
+    transition-property: transform; }
   .woocommerce[class][class] .add_to_cart_button.ajax_add_to_cart:before,
   .woocommerce[class][class] .checkout-button:before,
   .woocommerce[class][class] #place_order:before,
@@ -447,13 +455,6 @@
 .wc-block-grid__product-title,
 .woocommerce-loop-product__title,
 .woocommerce-loop-category__title {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-size: var(--theme-heading-4-final-font-size);
   --current-line-height: var(--theme-heading-4-line-height);
@@ -844,13 +845,6 @@
   display: none; }
 
 .c-product-main .product_title {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-3-font-family);
   --current-font-size: var(--theme-heading-3-final-font-size);
   --current-line-height: var(--theme-heading-3-line-height);
@@ -1033,13 +1027,6 @@
   background-color: var(--current-button-background-color);
   color: var(--current-button-text-color);
   transition: var(--current-button-transition);
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-button-font-family);
   --current-font-size: var(--theme-button-final-font-size);
   --current-line-height: var(--theme-button-line-height);
@@ -1051,6 +1038,7 @@
   transform: translateZ(0);
   will-change: transform;
   backface-visibility: hidden;
+  overflow: hidden;
   text-align: center; }
   .add_to_cart_button:hover {
     --current-button-background-color: var(--theme-button-hover-background-color);
@@ -1060,15 +1048,15 @@
   .add_to_cart_button:before {
     content: '';
     position: absolute;
-    right: 0;
-    top: 0;
-    width: 100%;
-    height: calc(100% + var(--theme-button-border-width));
+    top: calc( -1 * var(--theme-button-border-width));
+    left: calc( -1 * var(--theme-button-border-width));
+    bottom: calc( -1 * var(--theme-button-border-width));
+    right: calc( -1 * var(--theme-button-border-width));
+    z-index: -1;
     will-change: transform;
     -webkit-backface-visibility: hidden;
     transition: var(--current-button-transition);
-    transition-property: transform;
-    z-index: -1; }
+    transition-property: transform; }
   .add_to_cart_button:before {
     transform: scale3d(1, 1, 1);
     transform-origin: left;
@@ -1091,13 +1079,6 @@
 .upsells > h2,
 .wc-tabs .h3 {
   margin-bottom: var(--theme-spacing-small);
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-size: var(--theme-heading-4-final-font-size);
   --current-line-height: var(--theme-heading-4-line-height);
@@ -1410,13 +1391,6 @@ ul.order_details[class] {
   width: 100%; }
 
 .order-total .amount {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-size: var(--theme-heading-4-final-font-size);
   --current-line-height: var(--theme-heading-4-line-height);
@@ -1426,13 +1400,6 @@ ul.order_details[class] {
   --current-text-decoration: var(--theme-heading-4-text-decoration); }
 
 .cart_totals h2 {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-3-font-family);
   --current-font-size: var(--theme-heading-3-final-font-size);
   --current-line-height: var(--theme-heading-3-line-height);
@@ -1443,13 +1410,6 @@ ul.order_details[class] {
   margin-bottom: var(--theme-spacing-small); }
 
 .cross-sells h2 {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-size: var(--theme-heading-4-final-font-size);
   --current-line-height: var(--theme-heading-4-line-height);
@@ -1460,13 +1420,6 @@ ul.order_details[class] {
   margin-bottom: var(--theme-spacing-small); }
 
 .cross-sells .wc-block-grid__product-title {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-size: var(--theme-heading-4-final-font-size);
   --current-line-height: var(--theme-heading-4-line-height);
@@ -1487,13 +1440,6 @@ ul.order_details[class] {
   color: var(--current-dark-primary); }
 
 #ship-to-different-address {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-size: var(--theme-heading-4-final-font-size);
   --current-line-height: var(--theme-heading-4-line-height);
@@ -2149,13 +2095,6 @@ ul.order_details[class] {
   background-color: var(--current-button-background-color);
   color: var(--current-button-text-color);
   transition: var(--current-button-transition);
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-button-font-family);
   --current-font-size: var(--theme-button-final-font-size);
   --current-line-height: var(--theme-button-line-height);
@@ -2166,7 +2105,8 @@ ul.order_details[class] {
   background-color: transparent;
   transform: translateZ(0);
   will-change: transform;
-  backface-visibility: hidden; }
+  backface-visibility: hidden;
+  overflow: hidden; }
   [class*="wc-block-"] .wp-block-button__link[class][class][class]:hover {
     --current-button-background-color: var(--theme-button-hover-background-color);
     --current-button-border-color: var(--theme-button-hover-border-color);
@@ -2175,15 +2115,15 @@ ul.order_details[class] {
   [class*="wc-block-"] .wp-block-button__link[class][class][class]:before {
     content: '';
     position: absolute;
-    right: 0;
-    top: 0;
-    width: 100%;
-    height: calc(100% + var(--theme-button-border-width));
+    top: calc( -1 * var(--theme-button-border-width));
+    left: calc( -1 * var(--theme-button-border-width));
+    bottom: calc( -1 * var(--theme-button-border-width));
+    right: calc( -1 * var(--theme-button-border-width));
+    z-index: -1;
     will-change: transform;
     -webkit-backface-visibility: hidden;
     transition: var(--current-button-transition);
-    transition-property: transform;
-    z-index: -1; }
+    transition-property: transform; }
   [class*="wc-block-"] .wp-block-button__link[class][class][class]:before {
     transform: scale3d(1, 1, 1);
     transform-origin: left;
@@ -2203,13 +2143,6 @@ ul.order_details[class] {
   justify-content: center;
   font-feature-settings: "lnum";
   margin-right: calc(var(--theme-spacing-tiny) * -1);
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  text-decoration: var(--current-text-decoration);
   --current-font-family: var(--theme-button-font-family);
   --current-font-size: var(--theme-button-final-font-size);
   --current-line-height: var(--theme-button-line-height);

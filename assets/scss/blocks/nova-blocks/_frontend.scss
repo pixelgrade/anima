@@ -1,0 +1,109 @@
+@import "style";
+
+.novablocks-media,
+.novablocks-slideshow,
+.novablocks-hero {
+
+    & + & {
+        margin-top: 0;
+    }
+}
+
+.novablocks-announcement-bar {
+    --novablocks-announcement-color: var(--sm-light-primary);
+
+    &:not([class*="is-style-"]),
+    &.is-style-accent {
+        --novablocks-announcement-background-color: var(--sm-color-primary);
+    }
+
+    &.is-style-alternative {
+        --novablocks-announcement-background-color: var(--sm-color-secondary);
+    }
+
+    a:hover {
+        color: currentColor;
+    }
+}
+
+.novablocks-media {
+    padding-top: var(--theme-spacing-fluid-large);
+    padding-bottom: var(--theme-spacing-fluid-large);
+
+    &.block-is-basic {
+
+        & + & {
+            padding-top: 0;
+        }
+    }
+
+    & + :not(.novablocks-media) {
+        margin-top: 0;
+    }
+
+    &.content-is-moderate {
+        --novablocks-media-content-box-shadow:
+            0 32px 128px rgba(0, 0, 0, 0.1),
+            0 16px 64px rgba(0, 0, 0, 0.1),
+            0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    &.novablocks-media--blog {
+        --novablocks-media-content-box-shadow: none;
+    }
+
+    &.novablocks-media--no-thumbnail {
+
+        .novablocks-media__image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            path {
+                fill: var(--current-color-primary);
+            }
+        }
+    }
+}
+
+.novablocks-media__inner-container {
+
+    .wp-block-separator + * {
+        --element-spacing: var(--theme-spacing);
+    }
+}
+
+.novablocks-hero__inner-container {
+
+    > :not(:first-child) {
+        --element-spacing: var(--theme-spacing);
+    }
+
+    > .wp-block-separator:not(:first-child),
+    > .wp-block-separator + * {
+        --element-spacing: var(--theme-spacing-medium);
+    }
+}
+
+// Nova - Food Menu
+@import "food-menu/style";
+
+// Nova - Google Map
+@import "google-map/style";
+
+// Nova - Hero
+@import "hero/style";
+@import "hero/custom";
+
+// Nova - Media
+@import "media/style";
+@import "media/custom";
+
+// Nova - Navigation
+@import "navigation/style";
+
+// Nova - OpenTable Reservation Form
+@import "opentable-reservation/style";
+
+// Nova - Slideshow
+@import "slideshow/style";

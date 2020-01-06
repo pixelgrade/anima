@@ -65,16 +65,20 @@ $font-config-defaults:
 }
 
 @mixin define-fonts {
+
     @each $name, $config in $theme-fonts {
         @include define-font($name, $config);
     }
 }
 
-@mixin apply-font( $name ) {
-
+%apply-font {
     @each $prop in $font-config-defaults {
         #{$prop}: var(--current-#{$prop});
     }
+}
+
+@mixin apply-font( $name ) {
+    @extend %apply-font;
 
     @each $prop in $font-config-defaults {
         @if ( $prop == 'font-size' ) {
