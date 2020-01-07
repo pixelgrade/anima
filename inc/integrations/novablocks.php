@@ -11,6 +11,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! function_exists( 'rosa2_novablocks_setup' ) ) {
 	function rosa2_novablocks_setup() {
 		add_theme_support( 'novablocks', array(
+			'doppler' => array(
+				'novablocks/hero',
+			),
 			'announcement-bar',
 			'google-map',
 			'header',
