@@ -37,7 +37,11 @@
     position: static;
 }
 
-.novablocks-hero__indicator {
+.novablocks-hero__indicator--middle svg {
+    opacity: 0;
+}
+
+.novablocks-hero__indicator--bottom:not(.novablocks-hero__indicator--middle) {
     width: 160px;
     height: 50px;
     color: var(--theme-light-primary);
