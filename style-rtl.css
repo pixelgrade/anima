@@ -3685,6 +3685,21 @@ span.page-numbers {
   .wp-block-button__link:not(.has-text-color) {
     color: var(--current-button-text-color); }
 
+.wp-block-buttons {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap; }
+  .wp-block-buttons .block-editor-block-list__layout {
+    display: flex;
+    align-items: center; }
+    .wp-block-buttons .block-editor-block-list__layout * {
+      margin-right: 0;
+      margin-left: 0; }
+  .wp-block-buttons .wp-block:not(:first-child),
+  .wp-block-buttons .wp-block-button {
+    display: flex;
+    margin-right: var(--theme-spacing); }
+
 /* Categories Block */
 .wp-block-categories {
   list-style: none; }

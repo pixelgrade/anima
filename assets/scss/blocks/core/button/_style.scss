@@ -36,4 +36,26 @@ $enable-button-block-styles:            true !default;
             @include button-color;
         }
     }
+
+    .wp-block-buttons {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .block-editor-block-list__layout {
+            display: flex;
+            align-items: center;
+
+            * {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+
+        .wp-block:not(:first-child),
+        .wp-block-button {
+            display: flex;
+            margin-left: var(--theme-spacing);
+        }
+    }
 }
