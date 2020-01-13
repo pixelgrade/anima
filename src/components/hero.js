@@ -38,8 +38,8 @@ export default class Hero {
 
 		this.box = this.element.getBoundingClientRect();
 		this.view = {
-			x: this.box.x,
-			y: this.box.y + scrollY,
+			left: this.box.left,
+			top: this.box.top + scrollY,
 			width: this.box.width,
 			height: this.box.height,
 		};
@@ -52,13 +52,14 @@ export default class Hero {
 		const length = windowHeight * 0.5;
 		const middleMin = 0;
 		const middleMax = scrollHeight - windowHeight - length * 0.5;
-		const middle = this.view.y + ( this.box.height - windowHeight ) * 0.5;
+		const middle = this.view.top + ( this.box.height - windowHeight ) * 0.5;
 		const middleMid = Math.max( middleMin, Math.min( middle, middleMax ) );
 
 		this.start = middleMid - length * 0.5;
 		this.end = this.start + length;
 
 		this.progress = ( scrollY - this.start ) / ( this.end - this.start );
+
 		this.updateTimelineOnScroll();
 	}
 
