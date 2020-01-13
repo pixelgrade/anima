@@ -42,9 +42,12 @@ $enable-button-block-styles:            true !default;
         align-items: center;
         flex-wrap: wrap;
 
+        margin-left: calc(var(--theme-spacing) * -1);
+
         .block-editor-block-list__layout {
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
 
             * {
                 margin-left: 0;
@@ -52,7 +55,7 @@ $enable-button-block-styles:            true !default;
             }
         }
 
-        .wp-block:not(:first-child),
+        .wp-block,
         .wp-block-button {
             display: flex;
             margin-left: var(--theme-spacing);

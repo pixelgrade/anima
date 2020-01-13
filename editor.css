@@ -899,14 +899,16 @@
   .editor-styles-wrapper .wp-block-buttons {
     display: flex;
     align-items: center;
-    flex-wrap: wrap; }
+    flex-wrap: wrap;
+    margin-left: calc(var(--theme-spacing) * -1); }
     .editor-styles-wrapper .wp-block-buttons .block-editor-block-list__layout {
       display: flex;
-      align-items: center; }
+      align-items: center;
+      flex-wrap: wrap; }
       .editor-styles-wrapper .wp-block-buttons .block-editor-block-list__layout * {
         margin-left: 0;
         margin-right: 0; }
-    .editor-styles-wrapper .wp-block-buttons .wp-block:not(:first-child),
+    .editor-styles-wrapper .wp-block-buttons .wp-block,
     .editor-styles-wrapper .wp-block-buttons .wp-block-button {
       display: flex;
       margin-left: var(--theme-spacing); }
