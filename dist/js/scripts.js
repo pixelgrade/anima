@@ -378,20 +378,20 @@ var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 // CONCATENATED MODULE: ./src/utils.js
 // checks if box1 and box2 overlap
 function overlapping(box1, box2) {
-  var overlappingX = box1.x + box1.width >= box2.x && box2.x + box2.width >= box1.x;
-  var overlappingY = box1.y + box1.height >= box2.y && box2.y + box2.height >= box1.y;
+  var overlappingX = box1.left + box1.width >= box2.left && box2.left + box2.width >= box1.left;
+  var overlappingY = box1.top + box1.height >= box2.top && box2.top + box2.height >= box1.top;
   return overlappingX && overlappingY;
 } // chechks if box1 is completely inside box2
 
 function inside(box1, box2) {
-  var insideX = box1.x >= box2.x && box1.x + box1.width <= box2.x + box2.width;
-  var insideY = box1.y >= box2.y && box1.y + box1.height <= box2.y + box2.height;
+  var insideX = box1.left >= box2.left && box1.left + box1.width <= box2.left + box2.width;
+  var insideY = box1.top >= box2.top && box1.top + box1.height <= box2.top + box2.height;
   return insideX && insideY;
 } // chechks if box1 is completely inside box2
 
 function insideHalf(box1, box2) {
-  var insideX = box1.x + box1.width / 2 >= box2.x && box2.x + box2.width >= box1.x + box1.width / 2;
-  var insideY = box1.y + box1.height / 2 >= box2.y && box2.y + box2.height >= box1.y + box1.height / 2;
+  var insideX = box1.left + box1.width / 2 >= box2.left && box2.left + box2.width >= box1.left + box1.width / 2;
+  var insideY = box1.top + box1.height / 2 >= box2.top && box2.top + box2.height >= box1.top + box1.height / 2;
   return insideX && insideY;
 }
 function reloadRellax(element) {
@@ -776,8 +776,8 @@ function () {
 
       this.box = this.element.getBoundingClientRect();
       this.view = {
-        x: this.box.x,
-        y: this.box.y + scrollY,
+        left: this.box.left,
+        top: this.box.top + scrollY,
         width: this.box.width,
         height: this.box.height
       };
@@ -794,7 +794,7 @@ function () {
       var length = windowHeight * 0.5;
       var middleMin = 0;
       var middleMax = scrollHeight - windowHeight - length * 0.5;
-      var middle = this.view.y + (this.box.height - windowHeight) * 0.5;
+      var middle = this.view.top + (this.box.height - windowHeight) * 0.5;
       var middleMid = Math.max(middleMin, Math.min(middle, middleMax));
       this.start = middleMid - length * 0.5;
       this.end = this.start + length;
@@ -1758,13 +1758,13 @@ function () {
       var HeroCollection = this.HeroCollection;
       var overlap = HeroCollection.some(function (hero) {
         return insideHalf({
-          x: header.box.x,
-          y: header.box.y + scrollY,
+          left: header.box.left,
+          top: header.box.top + scrollY,
           width: header.box.width,
           height: header.box.height
         }, {
-          x: hero.box.x,
-          y: hero.box.y + promoBar.height,
+          left: hero.box.left,
+          top: hero.box.top + promoBar.height,
           width: hero.box.width,
           height: hero.box.height
         });
