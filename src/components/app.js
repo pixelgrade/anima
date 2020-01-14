@@ -38,13 +38,13 @@ export default class App {
 
 		const overlap = HeroCollection.some( function( hero ) {
 			return insideHalf( {
-				x: header.box.x,
-				y: header.box.y + scrollY,
+				left: header.box.left,
+				top: header.box.top + scrollY,
 				width: header.box.width,
 				height: header.box.height,
 			}, {
-				x: hero.box.x,
-				y: hero.box.y + promoBar.height,
+				left: hero.box.left,
+				top: hero.box.top + promoBar.height,
 				width: hero.box.width,
 				height: hero.box.height,
 			} );
