@@ -37,7 +37,7 @@ $enable-button-block-styles:            true !default;
         }
     }
 
-    .wp-block-buttons {
+    .wp-block-buttons[class] {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
@@ -59,6 +59,18 @@ $enable-button-block-styles:            true !default;
         .wp-block-button {
             display: flex;
             margin-left: var(--theme-spacing);
+        }
+
+        &.aligncenter {
+            justify-content: center;
+        }
+
+        &.alignleft {
+            justify-content: flex-start;
+        }
+
+        &.alignright {
+            justify-content: flex-end;
         }
     }
 }

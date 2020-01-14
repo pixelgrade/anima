@@ -896,22 +896,28 @@
       --current-button-transition: var(--theme-button-hover-transition); }
     .editor-styles-wrapper .wp-block-button__link:not(.has-text-color) {
       color: var(--current-button-text-color); }
-  .editor-styles-wrapper .wp-block-buttons {
+  .editor-styles-wrapper .wp-block-buttons[class] {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     margin-left: calc(var(--theme-spacing) * -1); }
-    .editor-styles-wrapper .wp-block-buttons .block-editor-block-list__layout {
+    .editor-styles-wrapper .wp-block-buttons[class] .block-editor-block-list__layout {
       display: flex;
       align-items: center;
       flex-wrap: wrap; }
-      .editor-styles-wrapper .wp-block-buttons .block-editor-block-list__layout * {
+      .editor-styles-wrapper .wp-block-buttons[class] .block-editor-block-list__layout * {
         margin-left: 0;
         margin-right: 0; }
-    .editor-styles-wrapper .wp-block-buttons .wp-block,
-    .editor-styles-wrapper .wp-block-buttons .wp-block-button {
+    .editor-styles-wrapper .wp-block-buttons[class] .wp-block,
+    .editor-styles-wrapper .wp-block-buttons[class] .wp-block-button {
       display: flex;
       margin-left: var(--theme-spacing); }
+    .editor-styles-wrapper .wp-block-buttons[class].aligncenter {
+      justify-content: center; }
+    .editor-styles-wrapper .wp-block-buttons[class].alignleft {
+      justify-content: flex-start; }
+    .editor-styles-wrapper .wp-block-buttons[class].alignright {
+      justify-content: flex-end; }
   .editor-styles-wrapper ul.wp-block-categories__list[class] {
     list-style: none;
     padding-left: 0; }
@@ -1667,18 +1673,8 @@
     --theme-button-border-color: var(--novablocks-hero-text-color);
     --theme-button-hover-text-color: var(--novablocks-hero-text-color);
     --theme-button-hover-border-color: var(--novablocks-hero-text-color); }
-  .editor-styles-wrapper .novablocks-u-background-dark {
-    --current-color-primary: var(--sm-color-primary);
-    --current-color-secondary: var(--sm-color-secondary);
-    --current-color-tertiary: var(--sm-color-tertiary);
-    --current-dark-primary: var(--sm-light-secondary);
-    --current-dark-secondary: var(--sm-light-primary);
-    --current-dark-tertiary: var(--sm-light-tertiary);
-    --current-light-primary: var(--sm-dark-primary);
-    --current-light-secondary: var(--sm-dark-secondary);
-    --current-light-tertiary: var(--sm-dark-tertiary); }
-    .editor-styles-wrapper .novablocks-u-background-dark .novablocks-hero__indicator:after {
-      color: var(--theme-sm-light-1); }
+  .editor-styles-wrapper .novablocks-u-background-dark .novablocks-hero__indicator:after {
+    color: var(--theme-sm-light-1); }
   .editor-styles-wrapper .novablocks-media__content {
     max-width: 100%;
     --current-font-family: var(--theme-body-font-family);
