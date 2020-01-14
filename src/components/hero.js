@@ -9,6 +9,7 @@ export default class Hero {
 		this.pieces = this.getMarkupPieces();
 		this.paused = false;
 		this.offset = 0;
+		this.reduceMotion = false;
 		this.update();
 		this.updateOnScroll();
 		this.init();
@@ -24,13 +25,31 @@ export default class Hero {
 			this.updateOnScroll();
 		});
 
+		const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+		mediaQuery.addEventListener( 'change', () => {
+			this.reduceMotion = mediaQuery.matches;
+			this.updateOnScroll();
+		} );
+
+		this.reduceMotion = mediaQuery.matches;
+
 		this.addIntroToTimeline();
 		this.timeline.addLabel( 'middle' );
 		this.addOutroToTimeline();
 		this.timeline.addLabel( 'end' );
-
 		this.pauseTimelineOnScroll();
-		this.timeline.play();
+
+		if ( this.reduceMotion ) {
+			const middleTime = this.timeline.getLabelTime( 'middle' );
+			const endTime = this.timeline.getLabelTime( 'end' );
+			const minTlProgress = middleTime / endTime;
+
+			this.paused = true;
+			this.timeline.progress( minTlProgress );
+		} else {
+			this.timeline.play();
+		}
 	}
 
 	update() {
@@ -60,6 +79,14 @@ export default class Hero {
 
 		this.progress = ( scrollY - this.start ) / ( this.end - this.start );
 
+		if ( this.reduceMotion ) {
+			const middleTime = this.timeline.getLabelTime( 'middle' );
+			const endTime = this.timeline.getLabelTime( 'end' );
+			const minTlProgress = middleTime / endTime;
+
+			this.progress = minTlProgress;
+		}
+
 		this.updateTimelineOnScroll();
 	}
 
@@ -73,11 +100,8 @@ export default class Hero {
 		const currentProgress = this.timeline.progress();
 		const middleTime = this.timeline.getLabelTime( 'middle' );
 		const endTime = this.timeline.getLabelTime( 'end' );
-
-		// ( this.progress - 0.5 ) / ( 1 - 0.5 ) = ( newTlProgress - minTlProgress ) / ( 1 - minTlProgress );
-		// ( this.progress - 0.5 ) * 2 * ( 1 - minTlProgress ) = ( newTlProgress - minTlProgress );
-		// newTlProgress = ( this.progress - 0.5 ) * 2 * ( 1 - minTlProgress ) + minTlProgress;
 		const minTlProgress = middleTime / endTime;
+
 		let newTlProgress = ( this.progress - 0.5 ) * 2 * ( 1 - minTlProgress ) + minTlProgress;
 		newTlProgress = Math.min( Math.max( minTlProgress, newTlProgress ), 1 );
 

@@ -12,22 +12,18 @@
 @import "components/site-header/social-links";
 
 /* Layout */
-.editor-block-list__layout,
-.block-editor-block-list__layout {
+.editor-block-list__layout .wp-block,
+.block-editor-block-list__layout .wp-block {
 
-    > :not([data-align="wide"]):not([data-align="full"]) {
+    &:not([data-align="wide"]):not([data-align="full"]) {
         max-width: var(--theme-content-width-normal);
     }
 
-    .wp-block[data-align=wide] {
+    &[data-align=wide] {
         max-width: var(--theme-content-width-wide);
     }
 
-    > [data-align="wide"] {
-        max-width: var(--theme-content-width-wide);
-    }
-
-    > [data-align="full"] {
+    &[data-align="full"] {
         max-width: none;
     }
 }
