@@ -745,6 +745,7 @@ function () {
     this.pieces = this.getMarkupPieces();
     this.paused = false;
     this.offset = 0;
+    this.reduceMotion = false;
     this.update();
     this.updateOnScroll();
     this.init();
@@ -761,12 +762,28 @@ function () {
       globalService.registerRender(function () {
         _this2.updateOnScroll();
       });
+      var mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      mediaQuery.addEventListener('change', function () {
+        _this2.reduceMotion = mediaQuery.matches;
+
+        _this2.updateOnScroll();
+      });
+      this.reduceMotion = mediaQuery.matches;
       this.addIntroToTimeline();
       this.timeline.addLabel('middle');
       this.addOutroToTimeline();
       this.timeline.addLabel('end');
       this.pauseTimelineOnScroll();
-      this.timeline.play();
+
+      if (this.reduceMotion) {
+        var middleTime = this.timeline.getLabelTime('middle');
+        var endTime = this.timeline.getLabelTime('end');
+        var minTlProgress = middleTime / endTime;
+        this.paused = true;
+        this.timeline.progress(minTlProgress);
+      } else {
+        this.timeline.play();
+      }
     }
   }, {
     key: "update",
@@ -799,6 +816,14 @@ function () {
       this.start = middleMid - length * 0.5;
       this.end = this.start + length;
       this.progress = (scrollY - this.start) / (this.end - this.start);
+
+      if (this.reduceMotion) {
+        var middleTime = this.timeline.getLabelTime('middle');
+        var endTime = this.timeline.getLabelTime('end');
+        var minTlProgress = middleTime / endTime;
+        this.progress = minTlProgress;
+      }
+
       this.updateTimelineOnScroll();
     }
   }, {
@@ -810,10 +835,7 @@ function () {
 
       var currentProgress = this.timeline.progress();
       var middleTime = this.timeline.getLabelTime('middle');
-      var endTime = this.timeline.getLabelTime('end'); // ( this.progress - 0.5 ) / ( 1 - 0.5 ) = ( newTlProgress - minTlProgress ) / ( 1 - minTlProgress );
-      // ( this.progress - 0.5 ) * 2 * ( 1 - minTlProgress ) = ( newTlProgress - minTlProgress );
-      // newTlProgress = ( this.progress - 0.5 ) * 2 * ( 1 - minTlProgress ) + minTlProgress;
-
+      var endTime = this.timeline.getLabelTime('end');
       var minTlProgress = middleTime / endTime;
       var newTlProgress = (this.progress - 0.5) * 2 * (1 - minTlProgress) + minTlProgress;
       newTlProgress = Math.min(Math.max(minTlProgress, newTlProgress), 1);
