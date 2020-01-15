@@ -763,7 +763,7 @@ function () {
         _this2.updateOnScroll();
       });
       var mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-      mediaQuery.addEventListener('change', function () {
+      mediaQuery.addListener(function () {
         _this2.reduceMotion = mediaQuery.matches;
 
         _this2.updateOnScroll();

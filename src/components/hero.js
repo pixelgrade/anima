@@ -27,7 +27,7 @@ export default class Hero {
 
 		const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-		mediaQuery.addEventListener( 'change', () => {
+		mediaQuery.addListener( () => {
 			this.reduceMotion = mediaQuery.matches;
 			this.updateOnScroll();
 		} );
