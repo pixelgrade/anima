@@ -1,0 +1,23 @@
+.wc-block-product-categories {
+  &.is-dropdown {
+    display: flex;
+
+    select {
+      @include select;
+    }
+  }
+}
+
+.wc-block-product-categories__button {
+  @include button-base;
+  @include button();
+  @include button-fill();
+
+  path {
+    fill: var(--theme-button-text-color);
+  }
+
+  &:hover path {
+    fill: var(--theme-button-hover-text-color);
+  }
+}

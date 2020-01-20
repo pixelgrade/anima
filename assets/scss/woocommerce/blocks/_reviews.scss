@@ -1,3 +1,22 @@
+.wc-block-review-order-select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.wc-block-order-select__select {
+  @include specific(2) {
+    @include select;
+    width: auto;
+
+    &[disabled] {
+      border-color: var(--current-light-tertiary);
+      background-color: var(--current-light-tertiary);
+    }
+  }
+}
+
 .is-loading {
   .wc-block-review-list-item__text {
     @include placeholder();
@@ -191,4 +210,15 @@
     left: 0;
     color: var(--current-color-primary);
   }
+}
+
+.wc-block-review-list {
+  @include specific(3) {
+    margin-left: 0;
+    padding-left: 0;
+  }
+}
+
+.wc-block-review-order-select {
+  margin-bottom: var(--theme-spacing-small);
 }

@@ -1,6 +1,5 @@
 .wc-block-featured-product {
   position: relative;
-  background-color: var(--current-dark-primary);
   background-size: cover;
   background-position: center center;
   width: 100%;
@@ -9,6 +8,29 @@
   align-items: center;
   flex-wrap: wrap;
   align-content: center;
+
+  .wp-block-button {
+    &.is-style-secondary {
+      .wp-block-button__link {
+        @include specific(3) {
+          @include button-fill-reverse;
+        }
+      }
+    }
+    &.is-style-text {
+      .wp-block-button__link {
+        @include specific(3) {
+          @include button-reset;
+          @include button-text;
+          overflow: visible;
+
+          &:before {
+            top: unset;
+          }
+        }
+      }
+    }
+  }
 
   .wc-block-featured-product__wrapper {
     overflow: hidden;
@@ -48,7 +70,7 @@
   .wc-block-featured-product__variation,
   .wc-block-featured-product__description,
   .wc-block-featured-product__price {
-    color: var(--current-light-primary);
+    color: var(--current-dark-primary);
     line-height: 1.25;
     margin-bottom: 0;
     text-align: center;

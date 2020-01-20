@@ -1,0 +1,9 @@
+@import "setup";
+@import "woocommerce/product";
+@import "woocommerce/blocks/style";
+
+// Force add-to-cart button to be displayed without hover
+.wp-block-button.wc-block-grid__product-add-to-cart {
+  opacity: 1;
+  transform: translateY(0);
+}

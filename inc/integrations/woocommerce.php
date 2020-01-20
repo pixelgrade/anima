@@ -28,6 +28,13 @@ function rosa2_woocommerce_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'rosa2_woocommerce_scripts', 10 );
 
+function rosa2_enqueue_woocommerce_block_editor_assets() {
+	$theme  = wp_get_theme( get_template() );
+
+	wp_enqueue_style( 'rosa2-woocommerce-block-styles', get_template_directory_uri() . '/editor-woocommerce.css', array(), $theme->get( 'Version' ) );
+}
+add_action( 'enqueue_block_editor_assets', 'rosa2_enqueue_woocommerce_block_editor_assets', 10 );
+
 function rosa2_woocommerce_setup_hooks() {
 
     // Remove Sidebar
