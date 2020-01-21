@@ -1,13 +1,13 @@
 $wp-colors: (
-    sm-color-primary: var(--current-color-primary),
-    sm-color-secondary: var(--current-color-secondary),
-    sm-color-tertiary: var(--current-color-tertiary),
-    sm-dark-primary: var(--current-dark-primary),
-    sm-dark-secondary: var(--current-dark-secondary),
-    sm-dark-tertiary: var(--current-dark-tertiary),
-    sm-light-primary: var(--current-light-primary),
-    sm-light-secondary: var(--current-light-secondary),
-    sm-light-tertiary: var(--current-light-tertiary),
+    sm_color_primary: var(--current-color-primary),
+    sm_color_secondary: var(--current-color-secondary),
+    sm_color_tertiary: var(--current-color-tertiary),
+    sm_dark_primary: var(--current-dark-primary),
+    sm_dark_secondary: var(--current-dark-secondary),
+    sm_dark_tertiary: var(--current-dark-tertiary),
+    sm_light_primary: var(--current-light-primary),
+    sm_light_secondary: var(--current-light-secondary),
+    sm_light_tertiary: var(--current-light-tertiary),
 );
 
 /* Color Helper Classes */
@@ -17,7 +17,10 @@ $wp-colors: (
 
 @each $name, $color in $wp-colors {
 
-    .has-#{$name}-background-color {
+    $kebabName: str-replace($name, '_', '-');
+
+    .has-#{$name}-background-color,
+    .has-#{$kebabName}-background-color {
         background-color: $color;
 
         @include specific(3) {
@@ -39,7 +42,8 @@ $wp-colors: (
         }
     }
 
-    .has-#{$name}-color {
+    .has-#{$name}-color,
+    .has-#{$kebabName}-color {
         color: $color;
 
         @include specific(3) {
