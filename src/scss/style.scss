@@ -1,0 +1,92 @@
+/*!
+Theme Name: Rosa2
+Theme URI: https://demos.pixelgrade.com/rosa2
+Author: Pixelgrade
+Author URI: https://pixelgrade.com
+Description: ROSA 2 is an enchanting and easy-to-use parallax Restaurant WordPress theme that allows you to tell your story in a dynamic, narrative and enjoyable way, making it perfect for restaurants, bakeries, bars or coffee shops.
+Version: 1.0.6
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: __theme_txtd
+Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, fluid-layout, responsive-layout, parallax, translation-ready, restaurant
+Requires at least: 5.2.0
+Tested up to: 5.3.0
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+
+/*
+
+Table of Contents
+
+0.    Reset
+1.    Elements - HTML Entities
+2.    Components
+2.1.  Site Header
+2.2.  Site Content
+2.3.  Site Footer
+3.    Blocks
+4.    Pages
+5.    Theming
+6.    Overwrites
+
+*/
+
+/* 0.1. Reset */
+@import "generic/normalize";
+@import "generic/reset";
+
+@import "setup";
+
+/* 0.2. Elements */
+@import "elements/body";
+@import "elements/forms";
+@import "elements/headings";
+@import "elements/iframe";
+@import "elements/media";
+@import "elements/lists";
+@import "elements/links";
+@import "elements/pre";
+@import "elements/tables";
+@import "elements/styles";
+
+/* 2. Components */
+@import "components/promo-bar";
+@import "components/form-inline";
+
+/* 2.1. Site Header */
+@import "components/site-header/style";
+@import "components/site-branding";
+@import "components/site-title";
+@import "components/logo";
+
+/* 2.2. Site Content */
+@import "components/site-main";
+
+/* 2.3. Site Footer */
+@import "components/site-footer";
+
+/* Post Content */
+@import "components/entry-header";
+@import "components/entry-content";
+@import "components/entry-footer";
+@import "components/entry-meta";
+
+/* 2.4. Comments */
+@import "components/comments/style";
+
+/* 2.5. Navigation */
+@import "components/navigation";
+@import "components/page-numbers";
+@import "components/post-navigation";
+@import "components/screen-reader-text";
+
+@import "blocks/nova-blocks/hero/custom";
+
+/* 3. Blocks */
+@import "vendor/select2";
+@import "vendor/wpforms";
+
+/* 6. Overwrites */
+@import "shame";

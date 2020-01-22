@@ -26,12 +26,12 @@ const extractConfig = {
 
 module.exports = {
   entry: {
-    './dist/js/scripts' : './src/scripts.js',
-    './dist/js/scripts.min' : './src/scripts.js',
-    './dist/js/woocommerce' : './src/woocommerce.js',
-    './dist/js/woocommerce.min' : './src/woocommerce.js',
-    './dist/js/editor.blocks' : './src/editor.js',
-    './dist/js/editor.blocks.min' : './src/editor.js',
+    './dist/js/scripts' : './src/js/scripts.js',
+    './dist/js/scripts.min' : './src/js/scripts.js',
+    './dist/js/woocommerce' : './src/js/woocommerce.js',
+    './dist/js/woocommerce.min' : './src/js/woocommerce.js',
+    './dist/js/editor' : './src/js/editor.js',
+    './dist/js/editor.min' : './src/js/editor.js',
   },
   optimization: {
     minimize: true,

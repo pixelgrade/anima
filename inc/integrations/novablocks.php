@@ -8,6 +8,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+add_action( 'after_setup_theme', 'rosa2_novablocks_setup', 10 );
+
+add_filter( 'novablocks_block_editor_settings', 'rosa2_alter_novablocks_hero_settings' );
+add_filter( 'novablocks_block_editor_settings', 'rosa2_alter_novablocks_media_settings' );
+add_filter( 'novablocks_block_editor_settings', 'rosa2_alter_novablocks_separator_settings' );
+
 if ( ! function_exists( 'rosa2_novablocks_setup' ) ) {
 	function rosa2_novablocks_setup() {
 		add_theme_support( 'novablocks', array(
@@ -29,7 +35,6 @@ if ( ! function_exists( 'rosa2_novablocks_setup' ) ) {
 		) );
 	}
 }
-add_action( 'after_setup_theme', 'rosa2_novablocks_setup', 10 );
 
 if ( ! function_exists( 'rosa2_alter_novablocks_hero_settings' ) ) {
 	function rosa2_alter_novablocks_hero_settings( $settings ) {
@@ -65,7 +70,6 @@ if ( ! function_exists( 'rosa2_alter_novablocks_hero_settings' ) ) {
 		return $settings;
 	}
 }
-add_filter( 'novablocks_block_editor_settings', 'rosa2_alter_novablocks_hero_settings' );
 
 if ( ! function_exists( 'rosa2_alter_novablocks_media_settings' ) ) {
 	function rosa2_alter_novablocks_media_settings( $settings ) {
@@ -116,7 +120,6 @@ if ( ! function_exists( 'rosa2_alter_novablocks_media_settings' ) ) {
 		return $settings;
 	}
 }
-add_filter( 'novablocks_block_editor_settings', 'rosa2_alter_novablocks_media_settings' );
 
 if ( ! function_exists( 'rosa2_alter_novablocks_separator_settings' ) ) {
 	function rosa2_alter_novablocks_separator_settings( $settings ) {
@@ -129,4 +132,3 @@ if ( ! function_exists( 'rosa2_alter_novablocks_separator_settings' ) ) {
 		return $settings;
 	}
 }
-add_filter( 'novablocks_block_editor_settings', 'rosa2_alter_novablocks_separator_settings' );

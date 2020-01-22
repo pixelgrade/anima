@@ -7,7 +7,8 @@
  * @package Rosa2
  */
 
-if ( ! function_exists( 'rosa2_posted_on' ) ) :
+if ( ! function_exists( 'rosa2_posted_on' ) ) {
+
 	/**
 	 * Prints HTML with meta information for the current post-date/time.
 	 */
@@ -26,7 +27,7 @@ if ( ! function_exists( 'rosa2_posted_on' ) ) :
 		     '</div>';
 
 	}
-endif;
+}
 
 if ( ! function_exists( 'rosa2_posted_by' ) ) {
 
@@ -128,7 +129,7 @@ if ( ! function_exists( 'rosa2_edit_post_link' ) ) {
 	}
 }
 
-if ( ! function_exists( 'rosa2_post_thumbnail' ) ) :
+if ( ! function_exists( 'rosa2_post_thumbnail' ) ) {
 	/**
 	 * Displays an optional post thumbnail.
 	 *
@@ -148,23 +149,23 @@ if ( ! function_exists( 'rosa2_post_thumbnail' ) ) :
 
 		<?php } else { ?>
 
-			<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
+            <a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
 				<?php
 				the_post_thumbnail( 'post-thumbnail', array(
 					'alt' => the_title_attribute( array(
 						'echo' => false,
 					) ),
 				) ); ?>
-			</a>
+            </a>
 
 			<?php
 		}
 	}
-endif;
+}
 
 if ( ! function_exists( 'rosa2_the_separator' ) ) {
     function rosa2_the_separator( $style = 'default' ) {
-        echo '<div class="wp-block-separator is-style-' . esc_attr( $style ) . '">' . rosa2_get_separator_markup() . '</div>';
+        echo '<div class="wp-block-separator has-text-align-center is-style-' . esc_attr( $style ) . '">' . rosa2_get_separator_markup() . '</div>';
     }
 }
 
@@ -255,7 +256,7 @@ if ( ! function_exists( ' rosa2_get_custom_logo_transparent' ) ) {
 		} // If no logo is set but we're in the Customizer, leave a placeholder (needed for the live preview).
 		elseif ( is_customize_preview() ) {
 			$html = sprintf(
-				'<a href="%1$s" class="custom-logo-link  custom-logo-link--inversed" style="display:none;"><img class="custom-logo--transparent"/></a>',
+				'<a href="%1$s" class="custom-logo-link  custom-logo-link--inversed" style="display:none;"></a>',
 				esc_url( home_url( '/' ) )
 			);
 		}
@@ -416,7 +417,6 @@ if ( ! function_exists( 'rosa2_comments_toggle_checked_attribute' ) ) {
 		echo rosa2_get_comments_toggle_checked_attribute();
 	}
 }
-
 
 if ( ! function_exists( 'rosa2_get_comments_toggle_checked_attribute' ) ) {
 	/**

@@ -73,8 +73,8 @@ function rosa2_add_customify_theme_fonts( $fonts ) {
 function rosa2_add_fonts_section_to_customify_config( $config ) {
 
 	$font_size_config = array(
-		'min'  => 8,
-		'max'  => 120,
+		'min'  => 1,
+		'max'  => 20,
 		'step' => 1,
 		'unit' => '',
 	);
@@ -105,6 +105,48 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 		'fonts_section' => array(
 			'title'   => esc_html__( 'Fonts', '__theme_txtd' ),
 			'options' => array(
+				'main_content_title_global_settings_section' => array(
+					'type' => 'html',
+					'html' => '<span class="separator sub-section label">' . esc_html__( 'Global Settings', '__theme_txtd' ) . '</span>',
+				),
+				'modular_scale' => array(
+					'type'        => 'range',
+					'live'        => true,
+					'label'       => esc_html__( 'Modular Scale', '__theme_txtd' ),
+					'default'     => 1.125,
+					'input_attrs' => array(
+						'min'          => 1,
+						'max'          => 1.5,
+						'step'         => 0.025,
+						'data-preview' => true,
+					),
+					'css'         => array(
+						array(
+							'property' => '--theme-ms-ratio',
+							'selector' => ':root',
+							'unit'     => '',
+						),
+					),
+				),
+				'modular_scale_base' => array(
+					'type'        => 'range',
+					'live'        => true,
+					'label'       => esc_html__( 'Base Font Size', '__theme_txtd' ),
+					'default'     => 16,
+					'input_attrs' => array(
+						'min'          => 10,
+						'max'          => 24,
+						'step'         => 1,
+						'data-preview' => true,
+					),
+					'css'         => array(
+						array(
+							'property' => '--theme-ms-1',
+							'selector' => ':root',
+							'unit'     => '',
+						),
+					),
+				),
 				'main_content_title_body_fonts_section' => array(
 					'type' => 'html',
 					'html' => '<span class="separator sub-section label">' . esc_html__( 'Body Fonts', '__theme_txtd' ) . '</span>',
@@ -113,11 +155,12 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 					'type'              => 'font',
 					'label'             => esc_html__( 'Body', '__theme_txtd' ),
 					'desc'              => esc_html__( '', '__theme_txtd' ),
+					'callback'          => 'rosa2_font_size_to_modular_scale',
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-body-',
 					'default'           => array(
 						'font-family'     => 'Reforma1969',
-						'font-size'       => 16,
+						'font-size'       => 1,
 						'line-height'     => 1.7,
 						'font-weight'     => 500,
 						'text-transform'  => 'none',
@@ -129,12 +172,13 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 				'content_font'    => array(
 					'type'              => 'font',
 					'label'             => esc_html__( 'Content', '__theme_txtd' ),
+					'callback'          => 'rosa2_font_size_to_modular_scale',
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-content-',
 					'default'           => array(
 						'font-family'     => 'Reforma1969',
-						'font-size'       => 18,
+						'font-size'       => 2,
 						'line-height'     => 1.6,
 						'font-weight'     => 500,
 						'text-transform'  => 'none',
@@ -146,12 +190,13 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 				'lead_font'    => array(
 					'type'              => 'font',
 					'label'             => esc_html__( 'Lead Paragraphs', '__theme_txtd' ),
+					'callback'          => 'rosa2_font_size_to_modular_scale',
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-lead-',
 					'default'           => array(
 						'font-family'     => 'Reforma1969',
-						'font-size'       => 24,
+						'font-size'       => 4,
 						'line-height'     => 1.6,
 						'font-weight'     => 500,
 						'text-transform'  => 'none',
@@ -167,12 +212,13 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 				'display_font'    => array(
 					'type'              => 'font',
 					'label'             => esc_html__( 'Display', '__theme_txtd' ),
+					'callback'          => 'rosa2_font_size_to_modular_scale',
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-display-',
 					'default'           => array(
 						'font-family'     => 'Reforma1969',
-						'font-size'       => 115,
+						'font-size'       => 18,
 						'line-height'     => 1.03,
 						'font-weight'     => 700,
 						'text-transform'  => 'none',
@@ -184,29 +230,31 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 				'heading_1_font'  => array(
 					'type'              => 'font',
 					'label'             => esc_html__( 'Heading 1', '__theme_txtd' ),
+					'callback'          => 'rosa2_font_size_to_modular_scale',
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-heading-1-',
 					'default'           => array(
 						'font-family'     => 'Reforma1969',
-						'font-size'       => 66,
-						'line-height'     => 1.1,
+						'font-size'       => 9,
+						'line-height'     => 1.2,
 						'font-weight'     => 700,
 						'text-transform'  => 'none',
 						'text-decoration' => 'none',
-						'letter-spacing'  => - 0.03,
+						'letter-spacing'  => - 0.02,
 					),
 					'fields'            => $fields_config,
 				),
 				'heading_2_font'  => array(
 					'type'              => 'font',
 					'label'             => esc_html__( 'Heading 2', '__theme_txtd' ),
+					'callback'          => 'rosa2_font_size_to_modular_scale',
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-heading-2-',
 					'default'           => array(
 						'font-family'     => 'Reforma1969',
-						'font-size'       => 40,
+						'font-size'       => 9,
 						'line-height'     => 1.2,
 						'font-weight'     => 700,
 						'text-transform'  => 'none',
@@ -218,12 +266,13 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 				'heading_3_font'  => array(
 					'type'              => 'font',
 					'label'             => esc_html__( 'Heading 3', '__theme_txtd' ),
+					'callback'          => 'rosa2_font_size_to_modular_scale',
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-heading-3-',
 					'default'           => array(
 						'font-family'     => 'Reforma1969',
-						'font-size'       => 32,
+						'font-size'       => 7,
 						'line-height'     => 1.2,
 						'font-weight'     => 700,
 						'text-transform'  => 'none',
@@ -235,12 +284,13 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 				'heading_4_font'  => array(
 					'type'              => 'font',
 					'label'             => esc_html__( 'Heading 4', '__theme_txtd' ),
+					'callback'          => 'rosa2_font_size_to_modular_scale',
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-heading-4-',
 					'default'           => array(
 						'font-family'     => 'Reforma1969',
-						'font-size'       => 24,
+						'font-size'       => 4,
 						'line-height'     => 1.2,
 						'font-weight'     => 700,
 						'text-transform'  => 'none',
@@ -252,12 +302,13 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 				'heading_5_font'  => array(
 					'type'              => 'font',
 					'label'             => esc_html__( 'Heading 5', '__theme_txtd' ),
+					'callback'          => 'rosa2_font_size_to_modular_scale',
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-heading-5-',
 					'default'           => array(
 						'font-family'     => 'Reforma2018',
-						'font-size'       => 17,
+						'font-size'       => 2,
 						'line-height'     => 1.5,
 						'font-weight'     => 500,
 						'text-transform'  => 'none',
@@ -269,12 +320,13 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 				'heading_6_font'  => array(
 					'type'              => 'font',
 					'label'             => esc_html__( 'Heading 6', '__theme_txtd' ),
+					'callback'          => 'rosa2_font_size_to_modular_scale',
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-heading-6-',
 					'default'           => array(
 						'font-family'     => 'Reforma2018',
-						'font-size'       => 17,
+						'font-size'       => 2,
 						'line-height'     => 1.5,
 						'font-weight'     => 500,
 						'text-transform'  => 'none',
@@ -326,12 +378,13 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 				'navigation_font' => array(
 					'type'              => 'font',
 					'label'             => esc_html__( 'Navigation', '__theme_txtd' ),
+					'callback'          => 'rosa2_font_size_to_modular_scale',
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-navigation-',
 					'default'           => array(
 						'font-family'     => 'Reforma2018',
-						'font-size'       => 17,
+						'font-size'       => 2,
 						'line-height'     => 1.5,
 						'font-weight'     => 500,
 						'text-transform'  => 'none',
@@ -343,9 +396,27 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 				'buttons_font' => array(
 					'type'              => 'font',
 					'label'             => esc_html__( 'Buttons', '__theme_txtd' ),
+					'callback'          => 'rosa2_font_size_to_modular_scale',
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-button-',
+					'default'           => array(
+						'font-family'     => 'Reforma2018',
+						'font-size'       => 2,
+						'line-height'     => 1.2,
+						'font-weight'     => 500,
+						'text-transform'  => 'capitalize',
+						'text-decoration' => 'none',
+						'letter-spacing'  => 0.03,
+					),
+					'fields'            => $fields_config,
+				),
+				'input_font' => array(
+					'type'              => 'font',
+					'label'             => esc_html__( 'Fields', '__theme_txtd' ),
+					'desc'              => esc_html__( '', '__theme_txtd' ),
+					'selector'          => ':root',
+					'properties_prefix' => '--theme-input-',
 					'default'           => array(
 						'font-family'     => 'Reforma2018',
 						'font-size'       => 17,
@@ -360,12 +431,13 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 				'meta_font'  => array(
 					'type'              => 'font',
 					'label'             => esc_html__( 'Meta', '__theme_txtd' ),
+					'callback'          => 'rosa2_font_size_to_modular_scale',
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-meta-',
 					'default'           => array(
 						'font-family'     => 'Reforma2018',
-						'font-size'       => 17,
+						'font-size'       => 2,
 						'line-height'     => 1.5,
 						'font-weight'     => 500,
 						'text-transform'  => 'none',
@@ -386,3 +458,27 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 
 	return $config;
 }
+
+function rosa2_font_size_to_modular_scale( $value, $font ) {
+	$output = '';
+
+	$output .= ':root {' .
+       $font['properties_prefix'] . 'final-font-size: var(--theme-ms-' . $value['font_size'] . '-final-font-size);' .
+	' } ';
+
+	return $output;
+}
+
+function rosa2_font_size_to_modular_scale_customizer_preview() {
+
+	$js = "
+function rosa2_font_size_to_modular_scale(values, font) {
+	var css = ':root { ' +
+		font['properties_prefix'] + 'final-font-size: var(--theme-ms-' + values['font-size'] + '-final-font-size);' +
+	' } ';
+	return css;
+}";
+
+	wp_add_inline_script( 'customify-previewer-scripts', $js );
+}
+add_action( 'customize_preview_init', 'rosa2_font_size_to_modular_scale_customizer_preview', 20 );

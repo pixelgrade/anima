@@ -1,0 +1,13 @@
+// Helper Classes for Humans & Nature
+// <div class="form-inline">  <input> <input type="submit">  </div>
+.form-inline {
+    display: flex;
+
+    input[type="submit"],
+    input[type="button"],
+    button[type="submit"],
+    button[type="reset"] {
+        flex-shrink: 0;
+        margin-top: 0;
+    }
+}

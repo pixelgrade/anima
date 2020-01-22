@@ -1,0 +1,14 @@
+
+
+@mixin apply-font( $name ) {
+    $config: map-get( $theme-fonts, $name );
+
+    --initial-font-size: var(--theme-#{$name}-font-size);
+    font-size: var(--final-font-size);
+
+    @each $prop, $value in $config {
+        @if $prop != font-size {
+            #{ $prop }: var(--theme-#{ $name }-#{ $prop });
+        }
+    }
+}

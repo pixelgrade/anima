@@ -10,14 +10,14 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 } ?><!doctype html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?> id="html">
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="https://gmpg.org/xfn/11">
 	<?php wp_head(); ?>
 </head>
-<body <?php body_class(); ?>>
+<body <?php body_class(); ?> id="body">
 <?php wp_body_open(); ?>
 
 <div id="page" class="site">

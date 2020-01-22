@@ -1,0 +1,49 @@
+// BREAKPOINTS
+$theme-breakpoints: (
+    mobile: 480px,
+    tablet: 768px,
+    lap: 1000px,
+    desktop: 1440px,
+);
+
+// COLORS
+$theme-colors: (
+    color-primary: #DDAB5D,
+    color-secondary: #39497C,
+    color-tertiary: #B12C4A,
+    dark-primary: #212B49,
+    dark-secondary: #34394B,
+    dark-tertiary: #141928,
+    light-primary: #FFFFFF,
+    light-secondary: #CCCCCC,
+    light-tertiary: #EEEFF2,
+);
+
+$sm-color-classnames: ();
+
+@each $category in color, dark, light {
+    @each $order in primary, secondary, tertiary {
+        $sm-color-classnames: map_merge( $sm-color-classnames, (
+            sm_#{$category}_#{$order}: var(--current-#{$category}-#{$order}),
+            sm-#{$category}-#{$order}: var(--current-#{$category}-#{$order}),
+        ) );
+    }
+}
+
+
+// LAYOUT
+$theme-spacing-unit: 1rem;
+
+$theme-spacing-modifiers: (
+    micro: 1/4,
+    tiny: 1/2,
+    default: 1,
+    small: 2,
+    medium: 3,
+    large: 4,
+    xl: 5,
+    xxl: 8,
+);
+
+// BUTTONS
+$theme-button-text-arrow-size: 1.15em;

@@ -1,0 +1,11 @@
+@each $name, $value in $theme-spacing-modifiers {
+    @each $prop in padding, margin {
+        .has-#{$name}-#{$prop} {
+            --current-element-#{$prop}: var(--theme-spacing-#{$name});
+        }
+
+        .has-#{$name}-#{$prop}-fluid {
+            --current-element-#{$prop}: var(--theme-spacing-fluid-#{$name});
+        }
+    }
+}

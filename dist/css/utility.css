@@ -1,0 +1,408 @@
+/* Alignment Helper Classes */
+.has-text-align-left {
+  text-align: left; }
+
+.has-text-align-center {
+  text-align: center; }
+
+.has-text-align-right {
+  text-align: right; }
+
+.alignleft:not(:first-child)[class*="wp-block"],
+[class*="wp-block"] > .alignleft:not(:first-child),
+.editor-styles-wrapper [data-align=left] [data-block]:not(:first-child) {
+  margin-top: var(--theme-spacing-small); }
+
+.alignleft:not(:last-child)[class*="wp-block"],
+[class*="wp-block"] > .alignleft:not(:last-child),
+.editor-styles-wrapper [data-align=left] [data-block]:not(:last-child) {
+  margin-bottom: var(--theme-spacing-small); }
+
+.alignright:not(:first-child)[class*="wp-block"],
+[class*="wp-block"] > .alignright:not(:first-child),
+.editor-styles-wrapper [data-align=right] [data-block]:not(:first-child) {
+  margin-top: var(--theme-spacing-small); }
+
+.alignright:not(:last-child)[class*="wp-block"],
+[class*="wp-block"] > .alignright:not(:last-child),
+.editor-styles-wrapper [data-align=right] [data-block]:not(:last-child) {
+  margin-bottom: var(--theme-spacing-small); }
+
+.aligncenter:not(:first-child)[class*="wp-block"],
+[class*="wp-block"] > .aligncenter:not(:first-child),
+.editor-styles-wrapper [data-align=center] [data-block]:not(:first-child) {
+  margin-top: var(--theme-spacing-small); }
+
+.aligncenter:not(:last-child)[class*="wp-block"],
+[class*="wp-block"] > .aligncenter:not(:last-child),
+.editor-styles-wrapper [data-align=center] [data-block]:not(:last-child) {
+  margin-bottom: var(--theme-spacing-small); }
+
+.alignnone:not(:first-child)[class*="wp-block"],
+[class*="wp-block"] > .alignnone:not(:first-child),
+.editor-styles-wrapper [data-align=none] [data-block]:not(:first-child) {
+  margin-top: var(--theme-spacing-small); }
+
+.alignnone:not(:last-child)[class*="wp-block"],
+[class*="wp-block"] > .alignnone:not(:last-child),
+.editor-styles-wrapper [data-align=none] [data-block]:not(:last-child) {
+  margin-bottom: var(--theme-spacing-small); }
+
+.alignleft[class*="wp-block"],
+[class*="wp-block"] > .alignleft {
+  float: left;
+  margin-left: 0; }
+
+
+[class*="wp-block"] > .alignleft {
+  margin-bottom: var(--theme-spacing-small); }
+
+.alignleft[class*="wp-block"] .editor-block-list__block-edit,
+[class*="wp-block"] > .alignleft .editor-block-list__block-edit,
+.editor-block-list__block[data-align=left] .editor-block-list__block-edit,
+.block-editor-block-list__block[data-align=left] .editor-block-list__block-edit {
+  max-width: 40%; }
+
+.alignleft[data-align][class*="wp-block"] .block-editor-rich-text p,
+[class*="wp-block"] > .alignleft[data-align] .block-editor-rich-text p,
+.editor-block-list__block[data-align=left][data-align] .block-editor-rich-text p,
+.block-editor-block-list__block[data-align=left][data-align] .block-editor-rich-text p {
+  font: inherit; }
+
+.alignright[class*="wp-block"],
+[class*="wp-block"] > .alignright {
+  float: right;
+  margin-right: 0; }
+
+
+[class*="wp-block"] > .alignright {
+  margin-bottom: var(--theme-spacing-small); }
+
+.alignright[class*="wp-block"] .editor-block-list__block-edit,
+[class*="wp-block"] > .alignright .editor-block-list__block-edit,
+.editor-block-list__block[data-align=right] .editor-block-list__block-edit,
+.block-editor-block-list__block[data-align=right] .editor-block-list__block-edit {
+  max-width: 40%; }
+
+.alignright[data-align][class*="wp-block"] .block-editor-rich-text p,
+[class*="wp-block"] > .alignright[data-align] .block-editor-rich-text p,
+.editor-block-list__block[data-align=right][data-align] .block-editor-rich-text p,
+.block-editor-block-list__block[data-align=right][data-align] .block-editor-rich-text p {
+  font: inherit; }
+
+[class*="wp-block"] {
+  clear: both; }
+
+.alignright[class*="wp-block"],
+[class*="wp-block"] > .alignright,
+.editor-block-list__block[data-align=right] .editor-block-list__block-edit,
+.block-editor-block-list__block[data-align=right] .editor-block-list__block-edit {
+  margin-left: var(--theme-spacing-small); }
+
+.alignleft[class*="wp-block"],
+[class*="wp-block"] > .alignleft,
+.editor-block-list__block[data-align=left] .editor-block-list__block-edit,
+.block-editor-block-list__block[data-align=left] .editor-block-list__block-edit {
+  margin-right: var(--theme-spacing-small); }
+
+.aligncenter[class*="wp-block"],
+[class*="wp-block"] > .aligncenter,
+.editor-block-list__block[data-align=center] .editor-block-list__block-edit,
+.block-editor-block-list__block[data-align=center] .editor-block-list__block-edit {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center; }
+
+/* Color Helper Classes */
+.has-background {
+  padding: 1em 1.25em; }
+
+.has-background-dim {
+  background-color: var(--sm-dark-primary, #000); }
+  .has-background-dim:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: inherit;
+    opacity: 0.5;
+    pointer-events: none; }
+
+.has-background-dim-10:before {
+  opacity: 0.1; }
+
+.has-background-dim-20:before {
+  opacity: 0.2; }
+
+.has-background-dim-30:before {
+  opacity: 0.3; }
+
+.has-background-dim-40:before {
+  opacity: 0.4; }
+
+.has-background-dim-50:before {
+  opacity: 0.5; }
+
+.has-background-dim-60:before {
+  opacity: 0.6; }
+
+.has-background-dim-70:before {
+  opacity: 0.7; }
+
+.has-background-dim-80:before {
+  opacity: 0.8; }
+
+.has-background-dim-90:before {
+  opacity: 0.9; }
+
+.has-background-dim-100:before {
+  opacity: 1; }
+
+.has-sm_color_primary-background-color {
+  background-color: var(--current-color-primary); }
+
+.has-sm-color-primary-background-color {
+  background-color: var(--current-color-primary); }
+
+.has-sm_color_secondary-background-color {
+  background-color: var(--current-color-secondary); }
+
+.has-sm-color-secondary-background-color {
+  background-color: var(--current-color-secondary); }
+
+.has-sm_color_tertiary-background-color {
+  background-color: var(--current-color-tertiary); }
+
+.has-sm-color-tertiary-background-color {
+  background-color: var(--current-color-tertiary); }
+
+.has-sm_dark_primary-background-color {
+  background-color: var(--current-dark-primary); }
+
+.has-sm-dark-primary-background-color {
+  background-color: var(--current-dark-primary); }
+
+.has-sm_dark_secondary-background-color {
+  background-color: var(--current-dark-secondary); }
+
+.has-sm-dark-secondary-background-color {
+  background-color: var(--current-dark-secondary); }
+
+.has-sm_dark_tertiary-background-color {
+  background-color: var(--current-dark-tertiary); }
+
+.has-sm-dark-tertiary-background-color {
+  background-color: var(--current-dark-tertiary); }
+
+.has-sm_light_primary-background-color {
+  background-color: var(--current-light-primary); }
+
+.has-sm-light-primary-background-color {
+  background-color: var(--current-light-primary); }
+
+.has-sm_light_secondary-background-color {
+  background-color: var(--current-light-secondary); }
+
+.has-sm-light-secondary-background-color {
+  background-color: var(--current-light-secondary); }
+
+.has-sm_light_tertiary-background-color {
+  background-color: var(--current-light-tertiary); }
+
+.has-sm-light-tertiary-background-color {
+  background-color: var(--current-light-tertiary); }
+
+.has-sm_color_primary-color {
+  color: var(--current-color-primary); }
+
+.has-sm-color-primary-color {
+  color: var(--current-color-primary); }
+
+.has-sm_color_secondary-color {
+  color: var(--current-color-secondary); }
+
+.has-sm-color-secondary-color {
+  color: var(--current-color-secondary); }
+
+.has-sm_color_tertiary-color {
+  color: var(--current-color-tertiary); }
+
+.has-sm-color-tertiary-color {
+  color: var(--current-color-tertiary); }
+
+.has-sm_dark_primary-color {
+  color: var(--current-dark-primary); }
+
+.has-sm-dark-primary-color {
+  color: var(--current-dark-primary); }
+
+.has-sm_dark_secondary-color {
+  color: var(--current-dark-secondary); }
+
+.has-sm-dark-secondary-color {
+  color: var(--current-dark-secondary); }
+
+.has-sm_dark_tertiary-color {
+  color: var(--current-dark-tertiary); }
+
+.has-sm-dark-tertiary-color {
+  color: var(--current-dark-tertiary); }
+
+.has-sm_light_primary-color {
+  color: var(--current-light-primary); }
+
+.has-sm-light-primary-color {
+  color: var(--current-light-primary); }
+
+.has-sm_light_secondary-color {
+  color: var(--current-light-secondary); }
+
+.has-sm-light-secondary-color {
+  color: var(--current-light-secondary); }
+
+.has-sm_light_tertiary-color {
+  color: var(--current-light-tertiary); }
+
+.has-sm-light-tertiary-color {
+  color: var(--current-light-tertiary); }
+
+.has-parallax {
+  background-attachment: fixed; }
+
+.has-micro-padding {
+  --current-element-padding: var(--theme-spacing-micro); }
+
+.has-micro-padding-fluid {
+  --current-element-padding: var(--theme-spacing-fluid-micro); }
+
+.has-micro-margin {
+  --current-element-margin: var(--theme-spacing-micro); }
+
+.has-micro-margin-fluid {
+  --current-element-margin: var(--theme-spacing-fluid-micro); }
+
+.has-tiny-padding {
+  --current-element-padding: var(--theme-spacing-tiny); }
+
+.has-tiny-padding-fluid {
+  --current-element-padding: var(--theme-spacing-fluid-tiny); }
+
+.has-tiny-margin {
+  --current-element-margin: var(--theme-spacing-tiny); }
+
+.has-tiny-margin-fluid {
+  --current-element-margin: var(--theme-spacing-fluid-tiny); }
+
+.has-default-padding {
+  --current-element-padding: var(--theme-spacing-default); }
+
+.has-default-padding-fluid {
+  --current-element-padding: var(--theme-spacing-fluid-default); }
+
+.has-default-margin {
+  --current-element-margin: var(--theme-spacing-default); }
+
+.has-default-margin-fluid {
+  --current-element-margin: var(--theme-spacing-fluid-default); }
+
+.has-small-padding {
+  --current-element-padding: var(--theme-spacing-small); }
+
+.has-small-padding-fluid {
+  --current-element-padding: var(--theme-spacing-fluid-small); }
+
+.has-small-margin {
+  --current-element-margin: var(--theme-spacing-small); }
+
+.has-small-margin-fluid {
+  --current-element-margin: var(--theme-spacing-fluid-small); }
+
+.has-medium-padding {
+  --current-element-padding: var(--theme-spacing-medium); }
+
+.has-medium-padding-fluid {
+  --current-element-padding: var(--theme-spacing-fluid-medium); }
+
+.has-medium-margin {
+  --current-element-margin: var(--theme-spacing-medium); }
+
+.has-medium-margin-fluid {
+  --current-element-margin: var(--theme-spacing-fluid-medium); }
+
+.has-large-padding {
+  --current-element-padding: var(--theme-spacing-large); }
+
+.has-large-padding-fluid {
+  --current-element-padding: var(--theme-spacing-fluid-large); }
+
+.has-large-margin {
+  --current-element-margin: var(--theme-spacing-large); }
+
+.has-large-margin-fluid {
+  --current-element-margin: var(--theme-spacing-fluid-large); }
+
+.has-xl-padding {
+  --current-element-padding: var(--theme-spacing-xl); }
+
+.has-xl-padding-fluid {
+  --current-element-padding: var(--theme-spacing-fluid-xl); }
+
+.has-xl-margin {
+  --current-element-margin: var(--theme-spacing-xl); }
+
+.has-xl-margin-fluid {
+  --current-element-margin: var(--theme-spacing-fluid-xl); }
+
+.has-xxl-padding {
+  --current-element-padding: var(--theme-spacing-xxl); }
+
+.has-xxl-padding-fluid {
+  --current-element-padding: var(--theme-spacing-fluid-xxl); }
+
+.has-xxl-margin {
+  --current-element-margin: var(--theme-spacing-xxl); }
+
+.has-xxl-margin-fluid {
+  --current-element-margin: var(--theme-spacing-fluid-xxl); }
+
+.is-style-dark, .is-style-darker, .is-style-accent {
+  background-color: var(--current-light-primary);
+  color: var(--current-dark-secondary); }
+
+.is-style-dark {
+  --current-color-primary: var(--sm-color-primary);
+  --current-color-secondary: var(--sm-color-secondary);
+  --current-color-tertiary: var(--sm-color-tertiary);
+  --current-dark-primary: var(--sm-light-secondary);
+  --current-dark-secondary: var(--sm-light-primary);
+  --current-dark-tertiary: var(--sm-light-tertiary);
+  --current-light-primary: var(--sm-dark-primary);
+  --current-light-secondary: var(--sm-dark-secondary);
+  --current-light-tertiary: var(--sm-dark-tertiary); }
+
+.is-style-darker {
+  --current-color-primary: var(--sm-color-primary);
+  --current-color-secondary: var(--sm-color-secondary);
+  --current-color-tertiary: var(--sm-color-tertiary);
+  --current-dark-primary: var(--sm-light-secondary);
+  --current-dark-secondary: var(--sm-light-primary);
+  --current-dark-tertiary: var(--sm-light-tertiary);
+  --current-light-primary: var(--sm-dark-tertiary);
+  --current-light-secondary: var(--sm-dark-secondary);
+  --current-light-tertiary: var(--sm-dark-primary); }
+
+.is-style-accent {
+  --current-color-primary: var(--sm-dark-primary);
+  --current-color-secondary: var(--sm-dark-secondary);
+  --current-color-tertiary: var(--sm-dark-tertiary);
+  --current-dark-primary: var(--sm-light-secondary);
+  --current-dark-secondary: var(--sm-light-primary);
+  --current-dark-tertiary: var(--sm-light-tertiary);
+  --current-light-primary: var(--sm-color-primary);
+  --current-light-secondary: var(--sm-color-secondary);
+  --current-light-tertiary: var(--sm-color-tertiary); }

@@ -1,0 +1,56 @@
+
+// ATTENTION!
+// This file shouldn't be modified. Proceed with caution!
+
+:root {
+    // font sizes
+    --theme-customify-fluid-unit: calc( var(--theme-spacing-fluid) / var(--theme-body-font-size) );
+    --theme-customify-fluid-font-size: calc( 1em / var(--theme-body-font-size) );
+
+    // fluid typography settings
+    --theme-font-size-breakpoint: #{strip-unit($theme-font-size-breakpoint)};
+    --theme-font-size-minimum-value: #{strip-unit($theme-minimum-font-size)};
+    --theme-font-size-minimum-value-breakpoint: #{strip-unit($theme-font-size-minimum-value-breakpoint)};
+
+    --theme-font-size-slope-adjust: #{$theme-font-size-slope-adjust};
+
+    // create a unit value that is relative to the viewport width to all font sizes
+    --theme-addon-unit: calc( 1vw - var(--theme-font-size-breakpoint) * 1px / 100 );
+    --theme-addon-multiplier: 0;
+    --theme-addon: calc( var(--theme-addon-unit) * var(--theme-addon-multiplier) );
+
+    @include above($theme-font-size-breakpoint) {
+        --theme-font-size-slope-adjust: #{$theme-font-size-slope-adjust-desktop};
+        --theme-addon-multiplier: #{$theme-font-size-addon-multiplier-desktop};
+    }
+
+    @each $name, $config in $theme-fonts {
+        @each $prop, $value in $config {
+            --theme-#{ $name }-#{ $prop }: #{ $value };
+        }
+    }
+}
+
+* {
+    // x0 - viewport width at which font sizes should reach minimum value
+    // y0 - minimum font size
+    // x1 - viewport width at which we know the value for the font size
+    // y1 - known font size
+    --x0: var(--theme-font-size-minimum-value-breakpoint);
+    --y0: var(--theme-font-size-minimum-value);
+    --x1: var(--theme-font-size-breakpoint);
+
+    // solving a first degree equation: y = ax + b
+    --y1: var(--initial-font-size);
+    --y0-new: calc( var(--y1) - ( var(--y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) );
+
+    // calculate the slope and the remainder for the equation
+    --a: calc( ( var(--y1) - var(--y0-new) ) / ( var(--x1) - var(--x0) ) );
+    --b: calc( var(--y0-new) - var(--a) * var(--x0) );
+
+    // x2 - viewport width at a given time
+    // y2 - font size value we need to find out
+    --y2: calc( var(--a) * 100vw + var(--b) * 1px );
+
+    --final-font-size: calc( var(--y2) + var(--theme-addon) );
+}
