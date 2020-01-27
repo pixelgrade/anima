@@ -32,7 +32,8 @@
 
     %wp-block.align#{$alignment},
     %wp-block > .align#{$alignment},
-    .editor-block-list__block[data-align=#{$alignment}] {
+    .editor-block-list__block[data-align=#{$alignment}],
+    .block-editor-block-list__block[data-align=#{$alignment}] {
 
         .editor-block-list__block-edit {
             max-width: 40%;
@@ -50,19 +51,22 @@
 
 %wp-block.alignright,
 %wp-block > .alignright,
-.editor-block-list__block[data-align=right] .editor-block-list__block-edit {
+.editor-block-list__block[data-align=right] .editor-block-list__block-edit,
+.block-editor-block-list__block[data-align=right] .editor-block-list__block-edit {
     margin-left: var(--theme-spacing-small);
 }
 
 %wp-block.alignleft,
 %wp-block > .alignleft,
-.editor-block-list__block[data-align=left] .editor-block-list__block-edit {
+.editor-block-list__block[data-align=left] .editor-block-list__block-edit,
+.block-editor-block-list__block[data-align=left] .editor-block-list__block-edit {
     margin-right: var(--theme-spacing-small);
 }
 
 %wp-block.aligncenter,
 %wp-block > .aligncenter,
-.editor-block-list__block[data-align=center] .editor-block-list__block-edit {
+.editor-block-list__block[data-align=center] .editor-block-list__block-edit,
+.block-editor-block-list__block[data-align=center] .editor-block-list__block-edit {
     display: block;
     margin-left: auto;
     margin-right: auto;
