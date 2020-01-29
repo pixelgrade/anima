@@ -1,15 +1,11 @@
-$theme-caption-style: 'overlay' !default;
-
 @mixin caption {
-    @include apply-font(body);
-    @if $theme-caption-style == 'overlay' {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        max-height: 100%;
-        overflow: auto;
-        color: var(--current-light-primary);
-        text-align: center;
-        background: linear-gradient(0deg,rgba(0,0,0,.7),rgba(0,0,0,.3) 70%,transparent);
-    }
+  @include apply-font(body);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  max-height: 100%;
+  overflow: auto;
+  color: var(--current-light-primary);
+  text-align: center;
+  background: linear-gradient(0deg, rgba(0, 0, 0, .7), rgba(0, 0, 0, .3) 70%, transparent);
 }
