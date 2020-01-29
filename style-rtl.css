@@ -357,7 +357,7 @@ h4, h5, h6, .site-title, .content-area, .entry-meta, .c-comments-toggle__label, 
 .comment-reply-title a,
 .edit-link a,
 .reply a,
-.logged-in-as a, .pagination .nav-links, .post-navigation__post-title, .post-navigation__link-label, .wp-block-button__link, .nova-food-menu-item__title .item-title, .nova-food-menu__header .section-title, .novablocks-media__content, .wp-block-novablocks-navigation, .wp-block-quote,
+.logged-in-as a, .pagination .nav-links, .post-navigation__post-title, .post-navigation__link-label, .wp-block-button__link, .wp-block-gallery figcaption:not(.blocks-gallery-caption), .wp-block-gallery .blocks-gallery-caption, .wp-block-image figcaption, .nova-food-menu-item__title .item-title, .nova-food-menu__header .section-title, .novablocks-media__content, .wp-block-novablocks-navigation, .wp-block-quote,
 .wp-block-pullquote, .wp-block-quote.has-smaller-font-size,
 .wp-block-pullquote.has-smaller-font-size, .wp-block-quote.has-larger-font-size,
 .wp-block-pullquote.has-larger-font-size, .wp-block-quote cite,
@@ -4096,40 +4096,46 @@ span.page-numbers {
   .wp-block-gallery figure {
     position: relative;
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
     justify-content: flex-start;
     height: 100%; }
-  .wp-block-gallery figcaption {
+  .wp-block-gallery figcaption:not(.blocks-gallery-caption) {
+    --current-font-family: var(--theme-body-font-family);
+    --current-font-size: var(--theme-body-final-font-size);
+    --current-line-height: var(--theme-body-line-height);
+    --current-font-weight: var(--theme-body-font-weight);
+    --current-letter-spacing: var(--theme-body-letter-spacing);
+    --current-text-transform: var(--theme-body-text-transform);
+    --current-text-decoration: var(--theme-body-text-decoration);
     position: absolute;
-    right: 0;
     bottom: 0;
-    left: 0;
-    padding: 0.5em 0.75em;
-    overflow: hidden;
+    width: 100%;
+    max-height: 100%;
+    overflow: auto;
     color: var(--current-light-primary);
-    white-space: nowrap;
-    transform: translateZ(0); }
-    .wp-block-gallery figcaption:after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0.6;
-      z-index: -1;
-      background: var(--current-dark-secondary); }
+    text-align: center;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3) 70%, transparent); }
+  .wp-block-gallery .blocks-gallery-caption {
+    --current-font-family: var(--theme-body-font-family);
+    --current-font-size: var(--theme-body-final-font-size);
+    --current-line-height: var(--theme-body-line-height);
+    --current-font-weight: var(--theme-body-font-weight);
+    --current-letter-spacing: var(--theme-body-letter-spacing);
+    --current-text-transform: var(--theme-body-text-transform);
+    --current-text-decoration: var(--theme-body-text-decoration); }
   .wp-block-gallery.is-cropped img {
     width: 100%;
     height: 100%;
     object-fit: cover; }
+  .wp-block-gallery .components-form-file-upload {
+    width: 100%; }
 
 .blocks-gallery-grid {
   list-style: none;
   display: flex;
   flex-wrap: wrap; }
+  .blocks-gallery-grid[class] {
+    padding-right: 0; }
 
 .wp-block-group {
   --wp-block-group-padding: var(--current-element-padding, var(--theme-spacing-fluid-large)); }
@@ -4142,6 +4148,15 @@ span.page-numbers {
 /* Image Block */
 .wp-block-image img {
   display: block; }
+
+.wp-block-image figcaption {
+  --current-font-family: var(--theme-body-font-family);
+  --current-font-size: var(--theme-body-final-font-size);
+  --current-line-height: var(--theme-body-line-height);
+  --current-font-weight: var(--theme-body-font-weight);
+  --current-letter-spacing: var(--theme-body-letter-spacing);
+  --current-text-transform: var(--theme-body-text-transform);
+  --current-text-decoration: var(--theme-body-text-decoration); }
 
 .wp-block-image.alignwide img, .wp-block-image.alignfull img,
 .wp-block-image > .alignwide img,

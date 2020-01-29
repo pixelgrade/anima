@@ -27,13 +27,17 @@ $enable-gallery-block-styles:           true !default;
             position: relative;
 
             display: flex;
-            align-items: flex-end;
+            flex-direction: column;
             justify-content: flex-start;
             height: 100%;
         }
 
-        figcaption {
+        figcaption:not(.blocks-gallery-caption) {
             @include caption;
+        }
+
+        .blocks-gallery-caption {
+            @include apply-font(body);
         }
 
         &.is-cropped {
@@ -44,10 +48,18 @@ $enable-gallery-block-styles:           true !default;
                 object-fit: cover;
             }
         }
+
+        .components-form-file-upload {
+            width: 100%;
+        }
     }
 
     .blocks-gallery-grid {
         list-style: none;
         @include flex-grid;
+
+        &[class] {
+            padding-left: 0;
+        }
     }
 }
