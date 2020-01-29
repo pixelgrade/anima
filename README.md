@@ -1,9 +1,9 @@
 # Rosa II Theme
 ###
 
-[View Demo](https://demos.pixelgrade.com/rosa-ii/)
+[View Demo](https://demos.pixelgrade.com/rosa2)
 
-![nova_theme_github](https://user-images.githubusercontent.com/46342490/62714232-d3f30500-ba06-11e9-8f75-cfdfe0034823.png)
+![rosa2_github](https://user-images.githubusercontent.com/46342490/73248468-b172c500-41bb-11ea-843e-bcc9e401e71b.jpg)
 
 [![](https://img.shields.io/github/issues-closed/pixelgrade/nova-theme.svg?color=6cc644&label=Issues)](https://github.com/pixelgrade/nova-theme/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aclosed+) [![](https://img.shields.io/github/issues/pixelgrade/nova-theme.svg?color=4078c0&label=%20)](https://github.com/pixelgrade/nova-theme/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen)
 

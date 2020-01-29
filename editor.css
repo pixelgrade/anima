@@ -1,4 +1,5 @@
-.editor-styles-wrapper .wp-block-button:not(.is-style-text) .wp-block-button__link, .editor-styles-wrapper .c-headline__secondary, .editor-styles-wrapper .wp-block-button__link, .editor-styles-wrapper .nova-food-menu-item__title .item-title, .editor-styles-wrapper .nova-food-menu__header .section-title, .editor-styles-wrapper .novablocks-media__content, .editor-styles-wrapper .wp-block-quote,
+.editor-styles-wrapper .wp-block-button:not(.is-style-text) .wp-block-button__link, .editor-styles-wrapper .c-headline__secondary, .editor-styles-wrapper .wp-block-button__link, .editor-styles-wrapper .wp-block-gallery figcaption:not(.blocks-gallery-caption), .editor-styles-wrapper .wp-block-gallery .blocks-gallery-caption, .editor-styles-wrapper .editor-block-list__block .wp-block-image figcaption,
+.editor-styles-wrapper .block-editor-block-list__block .wp-block-image figcaption, .editor-styles-wrapper .nova-food-menu-item__title .item-title, .editor-styles-wrapper .nova-food-menu__header .section-title, .editor-styles-wrapper .novablocks-media__content, .editor-styles-wrapper .wp-block-quote,
 .editor-styles-wrapper .wp-block-pullquote, .editor-styles-wrapper .wp-block-quote.has-smaller-font-size,
 .editor-styles-wrapper .wp-block-pullquote.has-smaller-font-size, .editor-styles-wrapper .wp-block-quote.has-larger-font-size,
 .editor-styles-wrapper .wp-block-pullquote.has-larger-font-size, .editor-styles-wrapper .wp-block-quote cite,
@@ -1165,39 +1166,45 @@
     .editor-styles-wrapper .wp-block-gallery figure {
       position: relative;
       display: flex;
-      align-items: flex-end;
+      flex-direction: column;
       justify-content: flex-start;
       height: 100%; }
-    .editor-styles-wrapper .wp-block-gallery figcaption {
+    .editor-styles-wrapper .wp-block-gallery figcaption:not(.blocks-gallery-caption) {
+      --current-font-family: var(--theme-body-font-family);
+      --current-font-size: var(--theme-body-final-font-size);
+      --current-line-height: var(--theme-body-line-height);
+      --current-font-weight: var(--theme-body-font-weight);
+      --current-letter-spacing: var(--theme-body-letter-spacing);
+      --current-text-transform: var(--theme-body-text-transform);
+      --current-text-decoration: var(--theme-body-text-decoration);
       position: absolute;
-      left: 0;
       bottom: 0;
-      right: 0;
-      padding: 0.5em 0.75em;
-      overflow: hidden;
+      width: 100%;
+      max-height: 100%;
+      overflow: auto;
       color: var(--current-light-primary);
-      white-space: nowrap;
-      transform: translateZ(0); }
-      .editor-styles-wrapper .wp-block-gallery figcaption:after {
-        content: "";
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 0.6;
-        z-index: -1;
-        background: var(--current-dark-secondary); }
+      text-align: center;
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3) 70%, transparent); }
+    .editor-styles-wrapper .wp-block-gallery .blocks-gallery-caption {
+      --current-font-family: var(--theme-body-font-family);
+      --current-font-size: var(--theme-body-final-font-size);
+      --current-line-height: var(--theme-body-line-height);
+      --current-font-weight: var(--theme-body-font-weight);
+      --current-letter-spacing: var(--theme-body-letter-spacing);
+      --current-text-transform: var(--theme-body-text-transform);
+      --current-text-decoration: var(--theme-body-text-decoration); }
     .editor-styles-wrapper .wp-block-gallery.is-cropped img {
       width: 100%;
       height: 100%;
       object-fit: cover; }
+    .editor-styles-wrapper .wp-block-gallery .components-form-file-upload {
+      width: 100%; }
   .editor-styles-wrapper .blocks-gallery-grid {
     list-style: none;
     display: flex;
     flex-wrap: wrap; }
+    .editor-styles-wrapper .blocks-gallery-grid[class] {
+      padding-left: 0; }
   .editor-styles-wrapper .wp-block-group {
     --wp-block-group-padding: var(--current-element-padding, var(--theme-spacing-fluid-large)); }
     .editor-styles-wrapper .wp-block-group[class*="is-style"]:not(.is-style-default) {
@@ -1211,6 +1218,15 @@
     .editor-styles-wrapper .editor-block-list__block .wp-block-image img,
     .editor-styles-wrapper .block-editor-block-list__block .wp-block-image img {
       display: block; }
+    .editor-styles-wrapper .editor-block-list__block .wp-block-image figcaption,
+    .editor-styles-wrapper .block-editor-block-list__block .wp-block-image figcaption {
+      --current-font-family: var(--theme-body-font-family);
+      --current-font-size: var(--theme-body-final-font-size);
+      --current-line-height: var(--theme-body-line-height);
+      --current-font-weight: var(--theme-body-font-weight);
+      --current-letter-spacing: var(--theme-body-letter-spacing);
+      --current-text-transform: var(--theme-body-text-transform);
+      --current-text-decoration: var(--theme-body-text-decoration); }
     .editor-styles-wrapper .editor-block-list__block[data-align="full"] .wp-block-image figcaption,
     .editor-styles-wrapper .block-editor-block-list__block[data-align="full"] .wp-block-image figcaption {
       padding-left: var(--theme-wrapper-sides-spacing);
