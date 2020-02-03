@@ -5144,9 +5144,9 @@ span.page-numbers {
   font-style: normal; }
 
 /* 4. Pages */
-body.archive, body.blog, body.search {
+body.archive, body.blog, body.search:not(.search-no-results) {
   background-color: var(--current-light-tertiary); }
-  body.archive .novablocks-media__inner-container, body.blog .novablocks-media__inner-container, body.search .novablocks-media__inner-container {
+  body.archive .novablocks-media__inner-container, body.blog .novablocks-media__inner-container, body.search:not(.search-no-results) .novablocks-media__inner-container {
     text-align: center; }
 
 .single [id="page"] {
