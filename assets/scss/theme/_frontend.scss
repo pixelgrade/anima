@@ -33,6 +33,9 @@
 }
 
 .site-content {
-    will-change: transform;
     backface-visibility: hidden;
+
+    .blog & {
+        will-change: transform;
+    }
 }

@@ -2040,7 +2040,7 @@ ul.menu a,
     position: fixed; } }
 
 .has-hero #page .site-content {
-  transform: translateY(0) !important; }
+  margin-top: 0 !important; }
 
 .has-hero .novablocks-hero:first-child:after {
   content: '';
@@ -5569,8 +5569,9 @@ pre code {
   text-decoration-color: var(--current-color-primary); }
 
 .site-content {
-  will-change: transform;
   backface-visibility: hidden; }
+  .blog .site-content {
+    will-change: transform; }
 
 body {
   transition: var(--theme-transition);

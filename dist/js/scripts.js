@@ -1356,7 +1356,9 @@ function () {
     key: "updatePageOffset",
     value: function updatePageOffset() {
       TweenMax.set(this.$page, {
-        y: this.visibleHeaderHeight
+        css: {
+          marginTop: this.visibleHeaderHeight
+        }
       });
       TweenMax.set(this.$hero, {
         y: this.offset
