@@ -25,6 +25,9 @@ class Header {
 		this.scrollOffset = 0;
 		this.mobileHeaderHeight = 0;
 
+		this.$page = $( '#page .site-content' );
+		this.$hero = $( '.has-hero .novablocks-hero' ).first().find( '.novablocks-hero__foreground' );
+
 		this.createMobileHeader();
 
 		this.onResize();
@@ -55,7 +58,7 @@ class Header {
 		const element = this.element;
 		const timeline = new TimelineMax( { paused: true } );
 		const height = $( element ).outerHeight();
-		const transitionEasing = Power4.easeOut;
+		const transitionEasing = Power4.easeInOut;
 		const transitionDuration = 0.5;
 		timeline.to( element, transitionDuration, { opacity: 1, ease: transitionEasing }, 0 );
 		timeline.to( { height: 0 }, transitionDuration, {
@@ -137,9 +140,7 @@ class Header {
 	updateHeaderOffset() {
 		if ( ! this.element ) return;
 
-		document.documentElement.style.setProperty(
-			'--theme-header-offset', this.offset + 'px'
-		)
+		this.element.style.marginTop = this.offset + 'px';
 	}
 
 	updateMobileHeaderOffset() {
@@ -175,11 +176,8 @@ class Header {
 	}
 
 	updatePageOffset() {
-		const $page = $( '#page' );
-		const $hero = $( '.has-hero .novablocks-hero' ).first().find( '.novablocks-hero__foreground' );
-
-		$page.css( 'paddingTop', this.visibleHeaderHeight + this.offset + 'px' );
-		$hero.css( 'marginTop', this.offset + 'px' );
+		TweenMax.set( this.$page, { y: this.visibleHeaderHeight } );
+		TweenMax.set( this.$hero, { y: this.offset } );
 	}
 
 	createMobileHeader() {

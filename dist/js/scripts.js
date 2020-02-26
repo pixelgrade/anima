@@ -1190,6 +1190,8 @@ function () {
     this.offset = 0;
     this.scrollOffset = 0;
     this.mobileHeaderHeight = 0;
+    this.$page = external_jQuery_default()('#page .site-content');
+    this.$hero = external_jQuery_default()('.has-hero .novablocks-hero').first().find('.novablocks-hero__foreground');
     this.createMobileHeader();
     this.onResize();
     this.render(false);
@@ -1221,7 +1223,7 @@ function () {
         paused: true
       });
       var height = external_jQuery_default()(element).outerHeight();
-      var transitionEasing = Power4.easeOut;
+      var transitionEasing = Power4.easeInOut;
       var transitionDuration = 0.5;
       timeline.to(element, transitionDuration, {
         opacity: 1,
@@ -1314,7 +1316,7 @@ function () {
     key: "updateHeaderOffset",
     value: function updateHeaderOffset() {
       if (!this.element) return;
-      document.documentElement.style.setProperty('--theme-header-offset', this.offset + 'px');
+      this.element.style.marginTop = this.offset + 'px';
     }
   }, {
     key: "updateMobileHeaderOffset",
@@ -1353,10 +1355,12 @@ function () {
   }, {
     key: "updatePageOffset",
     value: function updatePageOffset() {
-      var $page = external_jQuery_default()('#page');
-      var $hero = external_jQuery_default()('.has-hero .novablocks-hero').first().find('.novablocks-hero__foreground');
-      $page.css('paddingTop', this.visibleHeaderHeight + this.offset + 'px');
-      $hero.css('marginTop', this.offset + 'px');
+      TweenMax.set(this.$page, {
+        y: this.visibleHeaderHeight
+      });
+      TweenMax.set(this.$hero, {
+        y: this.offset
+      });
     }
   }, {
     key: "createMobileHeader",
@@ -1887,7 +1891,6 @@ function () {
         hero.updateOnScroll();
         var parallaxSelector = '.novablocks-slideshow__parallax, .novablocks-hero__parallax, .novablocks-map__parallax';
         var $parallaxBlocks = external_jQuery_default()('.has-parallax');
-        var $parallaxElements = $parallaxBlocks.find('.novablocks-hero__parallax');
         $parallaxBlocks.find(parallaxSelector).each(function (i, obj) {
           reloadRellax(obj);
         });
