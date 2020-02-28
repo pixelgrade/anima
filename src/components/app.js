@@ -138,7 +138,6 @@ export default class App {
 
 			const parallaxSelector = '.novablocks-slideshow__parallax, .novablocks-hero__parallax, .novablocks-map__parallax';
 			const $parallaxBlocks = $( '.has-parallax' );
-			const $parallaxElements = $parallaxBlocks.find( '.novablocks-hero__parallax' );
 
 			$parallaxBlocks.find( parallaxSelector ).each( ( i, obj ) => {
 				reloadRellax( obj );

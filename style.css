@@ -1975,7 +1975,6 @@ ul.menu a,
     left: 0;
     z-index: 1000;
     min-height: var(--theme-header-height);
-    margin-top: var(--theme-header-offset);
     transition: var(--theme-transition);
     transition-property: opacity;
     will-change: transform;
@@ -2040,8 +2039,8 @@ ul.menu a,
   .has-site-header-fixed .site-header--fixed.site-header--ready {
     position: fixed; } }
 
-.has-hero #page {
-  padding-top: 0 !important; }
+.has-hero #page .site-content {
+  margin-top: 0 !important; }
 
 .has-hero .novablocks-hero:first-child:after {
   content: '';
@@ -5568,6 +5567,11 @@ pre code {
 
 .entry-meta a:hover {
   text-decoration-color: var(--current-color-primary); }
+
+.site-content {
+  backface-visibility: hidden; }
+  .blog .site-content {
+    will-change: transform; }
 
 body {
   transition: var(--theme-transition);

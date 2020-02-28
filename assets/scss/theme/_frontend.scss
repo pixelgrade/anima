@@ -31,3 +31,11 @@
 .entry-meta a:hover {
     text-decoration-color: var(--current-color-primary);
 }
+
+.site-content {
+    backface-visibility: hidden;
+
+    .blog & {
+        will-change: transform;
+    }
+}
