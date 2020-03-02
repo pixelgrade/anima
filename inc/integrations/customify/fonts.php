@@ -98,6 +98,7 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 		'line-height'    => $line_height_config,
 		'letter-spacing' => $letter_spacing_config,
 		'text-align'     => false,
+		'text-transform' => 'none'
 	);
 
 	$rosa2_fonts_section = array(
