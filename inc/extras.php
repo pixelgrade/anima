@@ -289,3 +289,10 @@ function rosa2_block_area_has_blocks( $slug ) {
 
 	return false;
 }
+
+function rosa2_custom_gutenberg_settings() {
+	add_theme_support( 'editor-gradient-presets', array() );
+	add_theme_support( 'disable-custom-gradients' );
+}
+
+add_action( 'after_setup_theme', 'rosa2_custom_gutenberg_settings', 10 );
