@@ -32,9 +32,7 @@ $enable-button-block-styles:            true !default;
         @include button-box;
         @include apply-font(button);
 
-        &:not(.has-text-color) {
-            @include button-color;
-        }
+        @include button-color;
     }
 
     .wp-block-buttons[class] {
