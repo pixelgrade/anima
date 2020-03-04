@@ -54,5 +54,9 @@
 }
 
 .nova-food-menu-item--highlighted {
-  --item-padding: var( --theme-spacing );
+  --item-padding: var( --theme-spacing-tiny );
+
+  @include above(tablet) {
+    --item-padding: var( --theme-spacing );
+  }
 }

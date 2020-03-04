@@ -1630,7 +1630,10 @@
   .editor-styles-wrapper .wp-block-novablocks-menu-food-item.is-style-rounded {
     --item-border-radius: 0.4em; }
   .editor-styles-wrapper .nova-food-menu-item--highlighted {
-    --item-padding: var( --theme-spacing ); }
+    --item-padding: var( --theme-spacing-tiny ); }
+    @media only screen and (min-width: 768px) {
+      .editor-styles-wrapper .nova-food-menu-item--highlighted {
+        --item-padding: var( --theme-spacing ); } }
   .editor-styles-wrapper .item-title {
     background-color: var(--current-light-primary); }
   .editor-styles-wrapper .nova-food-menu-item--highlighted {

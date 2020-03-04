@@ -4759,7 +4759,10 @@ span.page-numbers {
   --item-border-radius: 0.4em; }
 
 .nova-food-menu-item--highlighted {
-  --item-padding: var( --theme-spacing ); }
+  --item-padding: var( --theme-spacing-tiny ); }
+  @media only screen and (min-width: 768px) {
+    .nova-food-menu-item--highlighted {
+      --item-padding: var( --theme-spacing ); } }
 
 .novablocks-map__marker-name {
   position: absolute;
