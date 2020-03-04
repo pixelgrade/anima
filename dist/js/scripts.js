@@ -1361,7 +1361,9 @@ function () {
         }
       });
       TweenMax.set(this.$hero, {
-        y: this.offset
+        css: {
+          marginTop: this.offset
+        }
       });
     }
   }, {
