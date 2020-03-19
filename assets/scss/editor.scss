@@ -62,10 +62,6 @@
     }
 }
 
-.editor-styles-wrapper {
-    @import "blocks/helpers";
-}
-
 /* Post Title Block */
 .post-type-page {
 
@@ -132,6 +128,27 @@
 
         @include placeholder() {
             color: var(--sm-dark-primary) !important;
+        }
+    }
+}
+
+.wp-block[data-type="core/buttons"] {
+
+    .block-editor-inner-blocks {
+        width: 100%;
+    }
+
+    &[data-align="center"] {
+
+        .block-editor-block-list__layout {
+            justify-content: center;
+        }
+    }
+
+    &[data-align="right"] {
+
+        .block-editor-block-list__layout {
+            justify-content: flex-end;
         }
     }
 }
