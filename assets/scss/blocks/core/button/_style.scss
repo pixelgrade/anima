@@ -43,8 +43,8 @@ $enable-button-block-styles:            true !default;
         justify-content: flex-start;
         margin-top: calc(-1 * var(--theme-spacing));
 
-        > .wp-block,
-        > .wp-block-button {
+        .wp-block,
+        .wp-block-button {
             margin-left: 0;
             margin-right: var(--theme-spacing);
             margin-top: var(--theme-spacing);
@@ -64,8 +64,8 @@ $enable-button-block-styles:            true !default;
         &.aligncenter {
             justify-content: center;
 
-            > .wp-block,
-            > .wp-block-button {
+            .wp-block,
+            .wp-block-button {
                 margin-left: calc( var(--theme-spacing) / 2 );
                 margin-right: calc( var(--theme-spacing) / 2 );
             }
@@ -74,8 +74,8 @@ $enable-button-block-styles:            true !default;
         &.alignright {
             justify-content: flex-end;
 
-            > .wp-block,
-            > .wp-block-button {
+            .wp-block,
+            .wp-block-button {
                 margin-left: var(--theme-spacing);
                 margin-right: 0;
             }
