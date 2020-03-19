@@ -17,8 +17,7 @@ $wp-colors: (
 
 @each $name, $color in $wp-colors {
 
-    $kebabName: str-replace($name, '_', '-');
-
+$kebabName: str-replace($name, '_', '-');
     .has-#{$name}-background-color,
     .has-#{$kebabName}-background-color {
         background-color: $color;
@@ -27,17 +26,12 @@ $wp-colors: (
 
             &.wp-block-button__link {
 
-                &.is-style-primary {
-                    @include button-fill;
-                }
-
-                &.is-style-secondary {
-                    @include button-fill-reverse;
-                }
-
                 background-color: transparent !important;
                 --theme-button-background-color: #{$color};
+                --theme-button-border-color: #{$color};
                 --theme-button-hover-background-color: transparent;
+                --theme-button-hover-border-color: #{$color};
+                --theme-button-hover-text-color: #{$color};
             }
         }
     }
@@ -49,10 +43,20 @@ $wp-colors: (
         @include specific(3) {
             &.wp-block-button__link {
                 color: var(--current-button-text-color) !important;
+                --theme-button-hover-text-color: var(--theme-button-background-color);
                 --theme-button-text-color: #{$color};
-                --theme-button-hover-text-color: #{$color};
-                --theme-button-border-color: #{$color};
-                --theme-button-hover-border-color: #{$color};
+            }
+        }
+    }
+
+    .is-style-text {
+        .has-#{$name}-color,
+        .has-#{$kebabName}-color {
+            @include specific(3) {
+                &.wp-block-button__link {
+                    --theme-button-text-color: #{$color};
+                    --theme-button-hover-text-color: #{$color};
+                }
             }
         }
     }
