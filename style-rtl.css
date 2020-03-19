@@ -1540,8 +1540,8 @@ ul.menu,
   .site-header :not(:hover) > .sub-menu,
   .site-header :not(:hover) > .children {
     display: block; }
-  .site-header .site-header__menu > ul.menu li:not(.social-menu-item) a:before,
-  .site-header .site-header__menu > .menu > ul li:not(.social-menu-item) a:before {
+  .site-header .site-header__menu > ul.menu li:not(.social-menu-item):not([class*="weglot"]) a:before,
+  .site-header .site-header__menu > .menu > ul li:not(.social-menu-item):not([class*="weglot"]) a:before {
     content: '';
     position: absolute;
     bottom: var(--header-links-bottom-spacing);
@@ -1554,12 +1554,12 @@ ul.menu,
     will-change: transform;
     -webkit-backface-visibility: hidden;
     transform-origin: left; }
-  .site-header .site-header__menu > ul.menu li:not(.social-menu-item) a:hover:before,
-  .site-header .site-header__menu > .menu > ul li:not(.social-menu-item) a:hover:before {
+  .site-header .site-header__menu > ul.menu li:not(.social-menu-item):not([class*="weglot"]) a:hover:before,
+  .site-header .site-header__menu > .menu > ul li:not(.social-menu-item):not([class*="weglot"]) a:hover:before {
     transform: scale3d(1, 1, 1);
     transform-origin: right; }
-  .site-header .site-header__menu > ul.menu li:not(.social-menu-item).menu-item-has-children a:before,
-  .site-header .site-header__menu > .menu > ul li:not(.social-menu-item).menu-item-has-children a:before {
+  .site-header .site-header__menu > ul.menu li:not(.social-menu-item):not([class*="weglot"]).menu-item-has-children a:before,
+  .site-header .site-header__menu > .menu > ul li:not(.social-menu-item):not([class*="weglot"]).menu-item-has-children a:before {
     width: calc(100% - 1.25em);
     left: 1.25em; }
   .site-header .site-header__menu > ul.menu .sub-menu li:not(.social-menu-item) a:before,
