@@ -30,3 +30,8 @@ require_once trailingslashit( get_template_directory() ) . 'inc/integrations/jet
  * http://pixelgrade.com/
  */
 require_once trailingslashit( get_template_directory() ) . 'inc/integrations/pixelgrade-care.php';
+
+/**
+ * Admin Dashboard logic.
+ */
+require trailingslashit( get_template_directory() ) . 'inc/admin/admin.php'; // phpcs:ignore

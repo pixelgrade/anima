@@ -29,26 +29,26 @@ function rosa2_register_required_plugins() {
 			'required'           => true,
 			'source'             => $protocol . '//wupdates.com/api_wupl_version/JxbVe/2v5t1czd3vw4kmb5xqmyxj1kkwmnt9q0463lhj393r5yxtshdyg05jssgd4jglnfx7A2vdxtfdcf78r9r1sm217k4ht3r2g7pkdng5f6tgwyrk23wryA0pjxvs7gwhhb',
 			'external_url'       => $protocol . '//github.com/pixelgrade/pixelgrade_care',
-			'version'            => '1.6.6'
+			'version'            => '1.7.4'
 		),
 		array(
 			'name'     => 'Customify',
 			'slug'     => 'customify',
 			'is_callable' => 'PixCustomifyPlugin',
 			'required' => true,
-			'version'  => '2.5.4',
+			'version'  => '2.6.0',
 		),
 		array(
 			'name'     => 'Nova Blocks',
 			'slug'     => 'nova-blocks',
 			'required' => true,
-			'version'  => '1.1.4',
+			'version'  => '1.2.2',
 		),
 		array(
 			'name'     => 'Gutenberg',
 			'slug'     => 'gutenberg',
 			'required' => true,
-			'version'  => '6.5.0',
+			'version'  => '7.6.0',
 		),
 	);
 
