@@ -282,14 +282,6 @@ function rosa2_pixcare_install_page() {
 }
 add_action( 'admin_init', 'rosa2_pixcare_install_page' );
 
-function rosa2_adjust_pixcare_sce_import_post_args( $post_args, $post ) {
-	// For now we will just slash the content to make the blocks content work on import.
-	$post_args['post_content'] = wp_slash( $post['post_content'] );
-
-	return $post_args;
-}
-add_filter( 'pixcare_sce_insert_post_args', 'rosa2_adjust_pixcare_sce_import_post_args', 10, 2 );
-
 function rosa2_force_pixcare_sce_overwrite_existing_post( $should_overwrite, $existing_post_id, $post ) {
 	if ( ! empty( $post['post_type'] ) && 'block_area' === $post['post_type'] ) {
 		$should_overwrite = true;
