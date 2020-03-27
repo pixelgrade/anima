@@ -22,7 +22,7 @@ function rosa2_add_customify_theme_fonts( $fonts ) {
 	$fonts['Reforma2018'] = array(
 		'family'   => 'Reforma2018',
 		'src'      => '//pxgcdn.com/fonts/reforma2018/stylesheet.css',
-		'variants' => array( 300, 500, 700, 900 ),
+		'variants' => array( 300, 500, 700 ),
 	);
 
 	$fonts['League Spartan'] = array(
