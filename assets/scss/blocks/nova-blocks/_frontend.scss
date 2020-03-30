@@ -27,8 +27,6 @@
 }
 
 .novablocks-media {
-    padding-top: var(--theme-spacing-fluid-large);
-    padding-bottom: var(--theme-spacing-fluid-large);
 
     &.block-is-basic {
 
@@ -42,14 +40,14 @@
     }
 
     &.content-is-moderate {
-        --novablocks-media-content-box-shadow:
+        --novablocks-block-content-box-shadow:
             0 32px 128px rgba(0, 0, 0, 0.1),
             0 16px 64px rgba(0, 0, 0, 0.1),
             0 8px 16px rgba(0, 0, 0, 0.1);
     }
 
     &.novablocks-media--blog {
-        --novablocks-media-content-box-shadow: none;
+        --novablocks-block-content-box-shadow: none;
     }
 
     &.novablocks-media--no-thumbnail {

@@ -1226,12 +1226,12 @@
   .novablocks-media + :not(.novablocks-media) {
     margin-top: 0; }
   .novablocks-media.content-is-moderate {
-    --novablocks-media-content-box-shadow:
+    --novablocks-block-content-box-shadow:
             0 32px 128px rgba(0, 0, 0, 0.1),
             0 16px 64px rgba(0, 0, 0, 0.1),
             0 8px 16px rgba(0, 0, 0, 0.1); }
   .novablocks-media.novablocks-media--blog {
-    --novablocks-media-content-box-shadow: none; }
+    --novablocks-block-content-box-shadow: none; }
   .novablocks-media.novablocks-media--no-thumbnail .novablocks-media__image {
     display: flex;
     align-items: center;
@@ -1330,7 +1330,7 @@
 
 :root {
   --novablocks-spacing: var(--theme-spacing-fluid-medium);
-  --novablocks-media-content-padding: var(--theme-spacing-fluid-large); }
+  --novablocks-block-content-padding: var(--theme-spacing-fluid-large); }
 
 .novablocks-media__content {
   --current-font-family: var(--theme-body-font-family);
@@ -1369,7 +1369,7 @@
       transform: none; } }
 
 .block-is-moderate {
-  --novablocks-media-background-color: var(--current-light-tertiary); }
+  --novablocks-block-background-color: var(--current-light-tertiary); }
 
 .novablocks-media--blog[class] .novablocks-media__content {
   margin-bottom: 0; }
@@ -1384,11 +1384,11 @@
   .novablocks-media__content {
     flex-basis: 100%; }
   .novablocks-media {
-    --novablocks-media-background-color: transparent; }
+    --novablocks-block-background-color: transparent; }
   .novablocks-media__inner-container {
-    --novablocks-media-content-padding: 0;
-    --novablocks-media-content-background-color: transparent;
-    --novablocks-media-text-color: var(--theme-dark-primary);
+    --novablocks-block-content-padding: 0;
+    --novablocks-block-content-background-color: transparent;
+    --novablocks-block-text-color: var(--theme-dark-primary);
     box-shadow: none; } }
 
 .wp-block-novablocks-navigation {

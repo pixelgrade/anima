@@ -2,7 +2,7 @@
 
     :root {
         --novablocks-spacing: var(--theme-spacing-fluid-medium);
-        --novablocks-media-content-padding: var(--theme-spacing-fluid-large);
+        --novablocks-block-content-padding: var(--theme-spacing-fluid-large);
     }
 }
 
@@ -31,7 +31,7 @@
 }
 
 .block-is-moderate {
-    --novablocks-media-background-color: var(--current-light-tertiary);
+    --novablocks-block-background-color: var(--current-light-tertiary);
 }
 
 .novablocks-media--blog[class] {
@@ -57,14 +57,14 @@
         flex-basis: 100%;
     }
 
-    .novablocks-media {
-        --novablocks-media-background-color: transparent;
+    .novablocks-block {
+        --novablocks-block-background-color: transparent;
     }
 
-    .novablocks-media__inner-container {
-        --novablocks-media-content-padding: 0;
-        --novablocks-media-content-background-color: transparent;
-        --novablocks-media-text-color: var(--theme-dark-primary);
+    .novablocks-block__content {
+        --novablocks-block-content-padding: 0;
+        --novablocks-block-content-background-color: transparent;
+        --novablocks-block-text-color: var(--theme-dark-primary);
         box-shadow: none;
     }
 }
