@@ -4,7 +4,8 @@
 :root {
 
     @include above($theme-font-size-breakpoint) {
-        --theme-font-size-slope-adjust: 0;
+        --theme-font-size-slope-adjust: #{$theme-font-size-slope-adjust-desktop};
+        --theme-addon-multiplier: #{$theme-font-size-addon-multiplier-desktop};
     }
 }
 
