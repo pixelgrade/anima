@@ -349,12 +349,12 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
-  margin-top: calc(-1 * var(--theme-spacing)); }
+  margin-top: calc(-1 * var(--element-spacing)); }
   .wp-block-buttons[class][class] .wp-block,
   .wp-block-buttons[class][class] .wp-block-button {
-    margin-left: 0;
-    margin-right: var(--theme-spacing);
-    margin-top: var(--theme-spacing); }
+    margin: 0;
+    margin-right: var(--element-spacing);
+    margin-top: var(--element-spacing); }
   .wp-block-buttons[class][class] .block-editor-block-list__layout {
     display: flex;
     align-items: center;
@@ -366,13 +366,13 @@
     justify-content: center; }
     .wp-block-buttons[class][class].aligncenter .wp-block,
     .wp-block-buttons[class][class].aligncenter .wp-block-button {
-      margin-left: calc( var(--theme-spacing) / 2);
-      margin-right: calc( var(--theme-spacing) / 2); }
+      margin-left: calc( var(--element-spacing) / 2);
+      margin-right: calc( var(--element-spacing) / 2); }
   .wp-block-buttons[class][class].alignright {
     justify-content: flex-end; }
     .wp-block-buttons[class][class].alignright .wp-block,
     .wp-block-buttons[class][class].alignright .wp-block-button {
-      margin-left: var(--theme-spacing);
+      margin-left: var(--element-spacing);
       margin-right: 0; }
   .wp-block-buttons[class][class] .wp-block-button__link[class] {
     display: block; }
@@ -1385,12 +1385,7 @@
   .novablocks-media__content {
     flex-basis: 100%; }
   .novablocks-block {
-    --novablocks-block-background-color: transparent; }
-  .novablocks-block__content {
-    --novablocks-block-content-padding: 0;
-    --novablocks-block-content-background-color: transparent;
-    --novablocks-block-text-color: var(--theme-dark-primary);
-    box-shadow: none; } }
+    --novablocks-block-background-color: transparent; } }
 
 .wp-block-novablocks-navigation {
   --current-font-family: var(--theme-navigation-font-family);
