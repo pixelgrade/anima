@@ -353,11 +353,11 @@ h2.has-larger-font-size, h1.has-smaller-font-size,
 h2,
 h3.has-larger-font-size, h2.has-smaller-font-size,
 h3, h3.has-smaller-font-size,
-h4, h5, h6, .site-title, .content-area, .entry-meta, .c-comments-toggle__label, .comment__metadata a,
+h4, h5, h6, .is-style-lead, .is-style-meta, .site-title, .content-area, .entry-meta, .c-comments-toggle__label, .comment__metadata a,
 .comment-reply-title a,
 .edit-link a,
 .reply a,
-.logged-in-as a, .pagination .nav-links, .post-navigation__post-title, .post-navigation__link-label, .wp-block-button:not(.is-style-text) .wp-block-button__link, .c-headline__secondary, .wpforms-container[class][class][class] .wpforms-submit[class], .is-style-lead {
+.logged-in-as a, .pagination .nav-links, .post-navigation__post-title, .post-navigation__link-label, .wp-block-button:not(.is-style-text) .wp-block-button__link, .c-headline__secondary, .wpforms-container[class][class][class] .wpforms-submit[class] {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
   line-height: var(--current-line-height);
@@ -1170,6 +1170,24 @@ table {
     table.has-fixed-layout th,
     table.has-fixed-layout td {
       white-space: normal; }
+
+.is-style-lead {
+  --current-font-family: var(--theme-lead-font-family);
+  --current-font-size: var(--theme-lead-final-font-size);
+  --current-line-height: var(--theme-lead-line-height);
+  --current-font-weight: var(--theme-lead-font-weight);
+  --current-letter-spacing: var(--theme-lead-letter-spacing);
+  --current-text-transform: var(--theme-lead-text-transform);
+  --current-text-decoration: var(--theme-lead-text-decoration); }
+
+.is-style-meta {
+  --current-font-family: var(--theme-meta-font-family);
+  --current-font-size: var(--theme-meta-final-font-size);
+  --current-line-height: var(--theme-meta-line-height);
+  --current-font-weight: var(--theme-meta-font-weight);
+  --current-letter-spacing: var(--theme-meta-letter-spacing);
+  --current-text-transform: var(--theme-meta-text-transform);
+  --current-text-decoration: var(--theme-meta-text-decoration); }
 
 /* 1. Utility classes */
 .has-micro-padding {
@@ -2207,6 +2225,16 @@ ul.menu a,
 [class*="__inner-container"] > :not(:first-child) {
   --element-spacing: var(--theme-spacing-small);
   margin-top: var(--element-spacing); }
+
+.wp-block-column > :not(:first-child),
+[class*="__inner-container"] > :not(:first-child) {
+  --element-spacing: var(--theme-spacing); }
+
+.wp-block-column .wp-block-column > :not(:first-child),
+.wp-block-column [class*="__inner-container"] > :not(:first-child),
+[class*="__inner-container"] .wp-block-column > :not(:first-child),
+[class*="__inner-container"] [class*="__inner-container"] > :not(:first-child) {
+  --element-spacing: var(--theme-spacing-tiny); }
 
 .wp-block-group,
 .nova-food-menu,
@@ -3637,15 +3665,6 @@ iframe.instagram-media {
   max-width: 100% !important;
   min-width: 0 !important;
   margin-right: 0 !important; }
-
-.is-style-lead {
-  --current-font-family: var(--theme-lead-font-family);
-  --current-font-size: var(--theme-lead-final-font-size);
-  --current-line-height: var(--theme-lead-line-height);
-  --current-font-weight: var(--theme-lead-font-weight);
-  --current-letter-spacing: var(--theme-lead-letter-spacing);
-  --current-text-transform: var(--theme-lead-text-transform);
-  --current-text-decoration: var(--theme-lead-text-decoration); }
 
 img:not(.is-loaded) {
   opacity: 0; }
