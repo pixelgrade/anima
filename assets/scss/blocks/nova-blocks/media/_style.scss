@@ -6,11 +6,6 @@
     }
 }
 
-//.block-is-moderate + .block-is-moderate,
-//.block-is-highlighted + .block-is-highlighted {
-//    padding-top: var(--theme-spacing-fluid-small);
-//}
-
 .novablocks-media__content {
     @include apply-font(body);
 }
@@ -57,14 +52,14 @@
         flex-basis: 100%;
     }
 
-    .novablocks-block {
+    .novablocks-block[class][class] {
+        --novablocks-block-padding: 0;
         --novablocks-block-background-color: transparent;
+        --novablocks-block-content-text-color: var(--current-dark-secondary);
     }
 
-    //.novablocks-block__content {
-    //    --novablocks-block-content-padding: 0;
-    //    --novablocks-block-content-background-color: transparent;
-    //    --novablocks-block-text-color: var(--theme-dark-primary);
-    //    box-shadow: none;
-    //}
+    .novablocks-block__content {
+        --novablocks-block-content-padding: 0;
+        box-shadow: none;
+    }
 }

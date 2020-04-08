@@ -1384,8 +1384,13 @@
 @media not screen and (min-width: 768px) {
   .novablocks-media__content {
     flex-basis: 100%; }
-  .novablocks-block {
-    --novablocks-block-background-color: transparent; } }
+  .novablocks-block[class][class] {
+    --novablocks-block-padding: 0;
+    --novablocks-block-background-color: transparent;
+    --novablocks-block-content-text-color: var(--current-dark-secondary); }
+  .novablocks-block__content {
+    --novablocks-block-content-padding: 0;
+    box-shadow: none; } }
 
 .wp-block-novablocks-navigation {
   --current-font-family: var(--theme-navigation-font-family);
