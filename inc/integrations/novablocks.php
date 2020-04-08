@@ -15,6 +15,7 @@ if ( ! function_exists( 'rosa2_novablocks_setup' ) ) {
 				'novablocks/hero',
 			),
 			'announcement-bar',
+			'cards-collection',
 			'google-map',
 			'header',
 			'headline',
