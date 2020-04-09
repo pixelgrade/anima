@@ -391,12 +391,12 @@
     text-decoration: none; }
 
 /* Columns Blocks */
-.wp-block-columns:not(:first-child),
-.wp-block-columns + :not(:first-child) {
+.wp-block-columns[class]:not(:first-child),
+.wp-block-columns[class] + :not(:first-child) {
   --element-spacing: var(--theme-spacing-fluid-large); }
 
-.wp-block-columns .wp-block-columns:not(:first-child),
-.wp-block-columns .wp-block-columns + :not(:first-child) {
+.wp-block-columns[class] .wp-block-columns[class]:not(:first-child),
+.wp-block-columns[class] .wp-block-columns[class] + :not(:first-child) {
   --element-spacing: var(--theme-spacing-fluid-medium); }
 
 .wp-block-column {

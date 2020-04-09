@@ -52,7 +52,7 @@ $enable-columns-block-styles: true !default;
 @if $enable-columns-block-styles == true {
 
     /* Columns Blocks */
-    .wp-block-columns {
+    .wp-block-columns[class] {
         @include wp-block-columns-spacing;
     }
 
