@@ -1194,19 +1194,22 @@
   --nova-food-menu-item-highlight-color: var(--current-dark-primary);
   --novablocks-sides-spacings: var(--theme-wrapper-sides-spacing); }
 
-.novablocks-media + .novablocks-media,
-.novablocks-slideshow + .novablocks-media,
-.novablocks-hero + .novablocks-media, .novablocks-media +
-.novablocks-slideshow,
-.novablocks-slideshow +
-.novablocks-slideshow,
-.novablocks-hero +
-.novablocks-slideshow, .novablocks-media +
-.novablocks-hero,
-.novablocks-slideshow +
-.novablocks-hero,
-.novablocks-hero +
-.novablocks-hero {
+.novablocks-block.novablocks-media {
+  --novablocks-block-padding: var(--novablocks-spacing); }
+
+.novablocks-media[class] + .novablocks-media[class],
+.novablocks-slideshow[class] + .novablocks-media[class],
+.novablocks-hero[class] + .novablocks-media[class], .novablocks-media[class] +
+.novablocks-slideshow[class],
+.novablocks-slideshow[class] +
+.novablocks-slideshow[class],
+.novablocks-hero[class] +
+.novablocks-slideshow[class], .novablocks-media[class] +
+.novablocks-hero[class],
+.novablocks-slideshow[class] +
+.novablocks-hero[class],
+.novablocks-hero[class] +
+.novablocks-hero[class] {
   margin-top: 0; }
 
 .novablocks-announcement-bar {
