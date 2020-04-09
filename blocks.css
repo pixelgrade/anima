@@ -409,7 +409,7 @@
 
 .wp-block-columns {
   display: flex; }
-  .wp-block-columns > * {
+  .wp-block-columns > *:not(.block-list-appender) {
     flex: 0 1 100%; }
   .wp-block-columns > :not(:first-child) {
     margin-left: var(--wp-block-columns-spacing); }
