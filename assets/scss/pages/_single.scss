@@ -1,8 +1,6 @@
 .single {
 
-    [id="page"] {
-        background: var(--current-light-tertiary);
-    }
+    background: var(--current-light-tertiary);
 
     .site-content {
         background: var(--current-light-primary);
@@ -52,10 +50,6 @@
 
     .entry-header > * {
         @include avoid-fout-opacity;
-    }
-
-    .hentry {
-        @include space-children-y( var(--theme-spacing-large) );
     }
 
     .entry-header {

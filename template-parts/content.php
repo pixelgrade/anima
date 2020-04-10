@@ -36,7 +36,7 @@ $classes[] = ( $wp_query->current_post % 2 ) ? 'has-image-on-the-right' : 'has-i
         <div class="wp-block alignwide">
             <div class="novablocks-media__layout">
                 <div class="novablocks-media__content">
-                    <div class="novablocks-media__inner-container">
+                    <div class="novablocks-media__inner-container novablocks-block__content">
                         <?php
                         get_template_part( 'template-parts/entry-meta', get_post_type() );
                         the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );

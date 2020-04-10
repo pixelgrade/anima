@@ -44,12 +44,6 @@ function rosa2_register_required_plugins() {
 			'required' => true,
 			'version'  => '1.2.2',
 		),
-		array(
-			'name'     => 'Gutenberg',
-			'slug'     => 'gutenberg',
-			'required' => true,
-			'version'  => '7.6.0',
-		),
 	);
 
 	$config = array(

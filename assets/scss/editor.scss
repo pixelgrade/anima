@@ -4,7 +4,8 @@
 :root {
 
     @include above($theme-font-size-breakpoint) {
-        --theme-font-size-slope-adjust: 0;
+        --theme-font-size-slope-adjust: #{$theme-font-size-slope-adjust-desktop};
+        --theme-addon-multiplier: #{$theme-font-size-addon-multiplier-desktop};
     }
 }
 
@@ -12,14 +13,13 @@
 @import "components/site-header/social-links";
 
 /* Layout */
-.editor-block-list__layout .wp-block,
-.block-editor-block-list__layout .wp-block {
+.wp-block {
 
     &:not([data-align="wide"]):not([data-align="full"]) {
         max-width: var(--theme-content-width-normal);
     }
 
-    &[data-align=wide] {
+    &[data-align="wide"] {
         max-width: var(--theme-content-width-wide);
     }
 
@@ -30,8 +30,36 @@
 
 /* Typography */
 .editor-styles-wrapper {
+    --element-spacing: var(--theme-spacing-small);
 
     @import "blocks/editor";
+
+    [class*="__inner-container"] {
+        @include wrapper-sides-spacing;
+    }
+
+    .wp-block-column,
+    .novablocks-cards-collection {
+        --element-spacing: var(--theme-spacing);
+    }
+
+    .novablocks-cards-collection__cards {
+        --element-spacing: var(--theme-spacing-small);
+    }
+
+    .novablocks-card__inner-container {
+        --element-spacing: var(--theme-spacing-tiny);
+    }
+
+    p,
+    .block-editor-block-list__block {
+        margin-top: var(--element-spacing);
+        margin-bottom: var(--element-spacing);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
 
     // increased specificity selector to overwrite default styles
     &[class] {
@@ -41,10 +69,16 @@
         @import "elements/lists";
         @import "elements/pre";
         @import "elements/tables";
+        @import "elements/styles";
+
         @include apply-font(content);
 
         background-color: var(--current-light-primary);
         color: var(--current-dark-secondary);
+
+        p {
+            font: inherit;
+        }
     }
 
     @import "elements/links";
