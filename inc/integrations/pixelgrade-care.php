@@ -175,9 +175,10 @@ function rosa2_pixcare_install_page() {
 
 	<?php wp_print_footer_scripts(); ?>
 	<script type="text/javascript">
-      // this script is trying to force the installation of Pixelgrade Care plugin
+      // this script is trying to handle the installation of Pixelgrade Care plugin
       (function ($) {
-        $(document).ready(function () {
+        // On document ready.
+        $(function () {
           var temp_url = wp.ajax.settings.url,
             pluginStatus = "<?php echo $plugin_status; ?>",
             $plugin = $('.plugin'),

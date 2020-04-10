@@ -2,7 +2,7 @@
 /**
  * Pixelgrade Care install/activate notice class.
  *
- * @package Felt
+ * @version 1.0.0
  */
 
 class PixelgradeCare_Install_Notice {
@@ -66,6 +66,9 @@ class PixelgradeCare_Install_Notice {
 		// Pixelgrade Care plugin installed, but not activated.
 		if ( ! class_exists( 'PixelgradeCare' ) && file_exists( WP_PLUGIN_DIR . '/pixelgrade-care/pixelgrade-care.php' ) ) {
 			$button_text = __( 'Activate the Pixelgrade Care&reg; plugin', '__theme_txtd' );
+		} elseif ( class_exists( 'PixelgradeCare' ) ) {
+			// The plugin is actually active.
+			$button_text = __( 'Start the Pixelgrade Care&reg; setup', '__theme_txtd' );
 		}
 
 		?>
@@ -201,6 +204,8 @@ class PixelgradeCare_Install_Notice {
 				'btnInstalling' => esc_html__( 'Installing Pixelgrade Care&reg;...', '__theme_txtd' ),
 				'btnActivate' => esc_html__( 'Activate the Pixelgrade Care&reg; plugin', '__theme_txtd' ),
 				'btnActivating' => esc_html__( 'Activating Pixelgrade Care&reg;...', '__theme_txtd' ),
+				'btnOpenSetup' => esc_html__( 'Start the Pixelgrade Care&reg; setup', '__theme_txtd' ),
+				'btnOpeningSetup' => esc_html__( 'Opening the Pixelgrade Care&reg; setup...', '__theme_txtd' ),
 				'btnRedirectingToSetup' => esc_html__( 'Opening the Pixelgrade Care&reg; setup...', '__theme_txtd' ),
 				'btnError' => esc_html__( 'Please refresh the page 🙏 and try again...', '__theme_txtd' ),
 				'installedSuccessfully' => esc_html__( 'Plugin installed successfully.', '__theme_txtd' ),

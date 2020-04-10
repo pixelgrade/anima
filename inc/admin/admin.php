@@ -5,12 +5,19 @@
  * @package Rosa2
  */
 
+// If this file is called directly, abort.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 function rosa2_admin_setup() {
 
 	/**
 	 * Load and initialize Pixelgrade Care notice logic.
 	 */
-	require_once 'pixcare-notice/class-notice.php'; // phpcs:ignore
+	if ( ! class_exists( 'PixelgradeCare_Install_Notice' ) ) {
+		require_once 'pixcare-notice/class-notice.php'; // phpcs:ignore
+	}
 	PixelgradeCare_Install_Notice::init();
 }
 add_action( 'after_setup_theme', 'rosa2_admin_setup' );

@@ -1,138 +1,153 @@
 (function ($) {
-	$(document).ready(function () {
-		var temp_url = wp.ajax.settings.url,
-			$noticeContainer = $( '.pixcare-notice__container' ),
-			$button = $noticeContainer.find( '.js-handle-pixcare' ),
-			$text = $noticeContainer.find( '.pixcare-notice-button__text' ),
-			$status = $noticeContainer.find( '.js-plugin-message' ),
-			buttonBox;
+  $(function () {
+    var temp_url = wp.ajax.settings.url,
+      $noticeContainer = $('.pixcare-notice__container'),
+      $button = $noticeContainer.find('.js-handle-pixcare'),
+      $text = $noticeContainer.find('.pixcare-notice-button__text'),
+      $status = $noticeContainer.find('.js-plugin-message'),
+      buttonBox
 
-		if ( $button.length ) {
-			buttonBox = $button[0].getBoundingClientRect();
-			$button.css( 'width', buttonBox.right - buttonBox.left );
-		}
+    if ($button.length) {
+      buttonBox = $button[0].getBoundingClientRect()
+      $button.css('width', buttonBox.right - buttonBox.left)
+    }
 
-		$button.on('click', function() {
-			let installedSuccessfully = -1,
-				activatedSuccessfully = -1,
-				activatedAlready = -1,
-				noActionTaken = -1,
-				folderAlreadyExists = -1
+    $button.on('click', function () {
+      let installedSuccessfully = -1,
+        activatedSuccessfully = -1,
+        activatedAlready = -1,
+        noActionTaken = -1,
+        folderAlreadyExists = -1
 
-			// Put the button in a loading state
-			$button.css( 'width', $button.parent().width() );
-			$button.addClass('state--plugin-installing').prop('disabled', true);
+      /*
+       * We need to determine what to do first, install, activate, or start the setup.
+       */
+      if (pixcareNotice.status === 'missing') {
+        $text.html(pixcareNotice.i18n.btnInstalling)
+        wp.ajax.settings.url = pixcareNotice.installUrl
 
-			/*
-			 * We need to determine what to do first, install or activate.
-			 */
-			if ( pixcareNotice.status === 'missing' ) {
-				$text.html(pixcareNotice.i18n.btnInstalling);
-				wp.ajax.settings.url = pixcareNotice.installUrl;
-			} else if ( pixcareNotice.status === 'installed' ) {
-				$text.html(pixcareNotice.i18n.btnActivating);
-				wp.ajax.settings.url = pixcareNotice.activateUrl;
-			}
+        // Put the button in a loading state
+        $button.css('width', $button.parent().width())
+        $button.addClass('state--plugin-installing').prop('disabled', true)
+      } else if (pixcareNotice.status === 'installed') {
+        $text.html(pixcareNotice.i18n.btnActivating)
+        wp.ajax.settings.url = pixcareNotice.activateUrl
 
-			wp.a11y.speak($text.html());
+        // Put the button in a loading state
+        $button.css('width', $button.parent().width())
+        $button.addClass('state--plugin-activating').prop('disabled', true)
+      } else if (pixcareNotice.status === 'active') {
+        $text.html(pixcareNotice.i18n.btnOpeningSetup)
 
-			wp.ajax.send({type: 'GET'}).always(function (response) {
-				installedSuccessfully = -1
-				activatedSuccessfully = -1
-				activatedAlready = -1
-				noActionTaken = -1
-				folderAlreadyExists = -1
+        // Put the button in a loading state
+        $button.css('width', $button.parent().width())
+        $button.addClass('state--plugin-redirecting').prop('disabled', true)
+        setTimeout(function () {
+          // Skip the welcome state of the wizard.
+          window.location.href = pixcareNotice.pixcareSetupUrl + '&skip-welcome=true'
+        }, 1000)
+        return
+      }
 
-				if (typeof response === 'string') {
-					installedSuccessfully = response.indexOf('<p>' + pixcareNotice.i18n.installedSuccessfully + '</p>');
-					activatedSuccessfully = response.indexOf('<div id="message" class="updated"><p>');
-					noActionTaken = response.indexOf('<div id="message" class="error"><p>No action taken.');
-					folderAlreadyExists = response.indexOf('<p>' + pixcareNotice.i18n.folderAlreadyExists + '</p>');
-				}
+      wp.a11y.speak($text.html())
 
-				if (installedSuccessfully !== -1) {
-					wp.a11y.speak(pixcareNotice.i18n.installedSuccessfully);
+      wp.ajax.send({type: 'GET'}).always(function (response) {
+        installedSuccessfully = -1
+        activatedSuccessfully = -1
+        activatedAlready = -1
+        noActionTaken = -1
+        folderAlreadyExists = -1
 
-					/*
-					 * We need to activate the plugin
-					 */
+        if (typeof response === 'string') {
+          installedSuccessfully = response.indexOf('<p>' + pixcareNotice.i18n.installedSuccessfully + '</p>')
+          activatedSuccessfully = response.indexOf('<div id="message" class="updated"><p>')
+          noActionTaken = response.indexOf('<div id="message" class="error"><p>No action taken.')
+          folderAlreadyExists = response.indexOf('<p>' + pixcareNotice.i18n.folderAlreadyExists + '</p>')
+        }
 
-					$text.html(pixcareNotice.i18n.btnActivating);
-					wp.a11y.speak(pixcareNotice.i18n.btnActivating);
+        if (installedSuccessfully !== -1) {
+          wp.a11y.speak(pixcareNotice.i18n.installedSuccessfully)
 
-					wp.ajax.settings.url = pixcareNotice.activateUrl;
+          /*
+           * We need to activate the plugin
+           */
 
-					$button.removeClass( 'state--plugin-installing' ).addClass( 'state--plugin-activating' );
+          $text.html(pixcareNotice.i18n.btnActivating)
+          wp.a11y.speak(pixcareNotice.i18n.btnActivating)
 
-					wp.ajax.send({type: 'GET'}).always(function (response) {
-						activatedSuccessfully = -1
-						noActionTaken = -1
+          wp.ajax.settings.url = pixcareNotice.activateUrl
 
-						if (typeof response === 'string') {
-							activatedSuccessfully = response.indexOf('<div id="message" class="updated"><p>');
-							noActionTaken = response.indexOf('<div id="message" class="error"><p>No action taken.');
-						}
+          $button.removeClass('state--plugin-installing').addClass('state--plugin-activating')
 
-						if (activatedSuccessfully !== -1 || noActionTaken !== -1) {
-							wp.a11y.speak(pixcareNotice.i18n.activatedSuccessfully);
+          wp.ajax.send({type: 'GET'}).always(function (response) {
+            activatedSuccessfully = -1
+            noActionTaken = -1
 
-							$text.html(pixcareNotice.i18n.btnRedirectingToSetup);
-							wp.a11y.speak(pixcareNotice.i18n.redirectingToSetup);
+            if (typeof response === 'string') {
+              activatedSuccessfully = response.indexOf('<div id="message" class="updated"><p>')
+              noActionTaken = response.indexOf('<div id="message" class="error"><p>No action taken.')
+            }
 
-							$button.removeClass( 'state--plugin-activating' ).addClass( 'state--plugin-redirecting' );
+            if (activatedSuccessfully !== -1 || noActionTaken !== -1) {
+              wp.a11y.speak(pixcareNotice.i18n.activatedSuccessfully)
 
-							setTimeout(function () {
-								window.location.href = pixcareNotice.pixcareSetupUrl;
-							}, 2000);
-						} else {
-							$button.removeClass( 'state--plugin-activating' ).addClass( 'state--plugin-invalidated' );
-							$text.html(pixcareNotice.i18n.btnError);
+              $text.html(pixcareNotice.i18n.btnRedirectingToSetup)
+              wp.a11y.speak(pixcareNotice.i18n.redirectingToSetup)
 
-							$status.html(pixcareNotice.i18n.error);
+              $button.removeClass('state--plugin-activating').addClass('state--plugin-redirecting')
 
-							wp.a11y.speak(pixcareNotice.i18n.error);
-						}
+              setTimeout(function () {
+                window.location.href = pixcareNotice.pixcareSetupUrl
+              }, 2000)
+            } else {
+              $button.removeClass('state--plugin-activating').addClass('state--plugin-invalidated')
+              $text.html(pixcareNotice.i18n.btnError)
 
-						wp.ajax.settings.url = temp_url;
-					});
+              $status.html(pixcareNotice.i18n.error)
 
-				} else if (folderAlreadyExists !== -1 || activatedSuccessfully !== -1 || noActionTaken !== -1) {
-					wp.a11y.speak(pixcareNotice.i18n.activatedSuccessfully);
+              wp.a11y.speak(pixcareNotice.i18n.error)
+            }
 
-					$text.html(pixcareNotice.i18n.btnRedirectingToSetup);
-					wp.a11y.speak(pixcareNotice.i18n.redirectingToSetup);
-					setTimeout(function () {
-						window.location.href = pixcareNotice.pixcareSetupUrl;
-					}, 2000);
-				} else {
-					$button.removeClass( 'state--plugin-activating' ).addClass( 'state--plugin-invalidated' );
-					$text.html(pixcareNotice.i18n.btnError);
+            wp.ajax.settings.url = temp_url
+          })
 
-					$status.html(pixcareNotice.i18n.error);
+        } else if (folderAlreadyExists !== -1 || activatedSuccessfully !== -1 || noActionTaken !== -1) {
+          wp.a11y.speak(pixcareNotice.i18n.activatedSuccessfully)
 
-					wp.a11y.speak(pixcareNotice.i18n.error);
-				}
+          $text.html(pixcareNotice.i18n.btnRedirectingToSetup)
+          wp.a11y.speak(pixcareNotice.i18n.redirectingToSetup)
+          setTimeout(function () {
+            window.location.href = pixcareNotice.pixcareSetupUrl
+          }, 2000)
+        } else {
+          $button.removeClass('state--plugin-activating').addClass('state--plugin-invalidated')
+          $text.html(pixcareNotice.i18n.btnError)
 
-				wp.ajax.settings.url = temp_url;
-			});
-			wp.ajax.settings.url = temp_url;
-		})
+          $status.html(pixcareNotice.i18n.error)
 
-		// Send ajax on click of dismiss icon
-		$noticeContainer.on( 'click', '.notice-dismiss', function() {
-			ajaxDismiss( $(this) );
-		});
+          wp.a11y.speak(pixcareNotice.i18n.error)
+        }
 
-		// Send ajax
-		function ajaxDismiss( dismissElement ) {
-			$.ajax({
-				url: pixcareNotice.ajaxurl,
-				type: 'post',
-				data: {
-					action: 'pixcare_install_dismiss_admin_notice',
-					nonce_dismiss: $noticeContainer.find('#nonce-pixcare_install-dismiss').val()
-				}
-			})
-		}
-	});
-})(jQuery);
+        wp.ajax.settings.url = temp_url
+      })
+      wp.ajax.settings.url = temp_url
+    })
+
+    // Send ajax on click of dismiss icon
+    $noticeContainer.on('click', '.notice-dismiss', function () {
+      ajaxDismiss($(this))
+    })
+
+    // Send ajax
+    function ajaxDismiss (dismissElement) {
+      $.ajax({
+        url: pixcareNotice.ajaxurl,
+        type: 'post',
+        data: {
+          action: 'pixcare_install_dismiss_admin_notice',
+          nonce_dismiss: $noticeContainer.find('#nonce-pixcare_install-dismiss').val()
+        }
+      })
+    }
+  })
+})(jQuery)
