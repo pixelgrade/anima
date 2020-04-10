@@ -34,4 +34,4 @@ require_once trailingslashit( get_template_directory() ) . 'inc/integrations/pix
 /**
  * Admin Dashboard logic.
  */
-require trailingslashit( get_template_directory() ) . 'inc/admin/admin.php'; // phpcs:ignore
+require_once trailingslashit( get_template_directory() ) . 'inc/admin/admin.php'; // phpcs:ignore

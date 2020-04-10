@@ -8,7 +8,7 @@
  * or theme author for support.
  *
  * @package   TGM-Plugin-Activation
- * @version   2.6.3 enhanced by Pixelgrade
+ * @version   2.6.4 for Boilerplate
  * @link      http://tgmpluginactivation.com/
  * @author    Thomas Griffin, Gary Jones, Juliette Reinders Folmer
  * @copyright Copyright (c) 2011, Thomas Griffin
@@ -55,7 +55,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 		 *
 		 * @const string Version number.
 		 */
-		const TGMPA_VERSION = '2.6.3'; // Version bump by Pixelgrade!!!
+		const TGMPA_VERSION = '2.6.4'; // Version bump by Pixelgrade!!!
 
 		/**
 		 * Regular expression to test if a URL is a WP plugin repo URL.
@@ -1023,6 +1023,12 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 				return;
 			}
 
+			// Pixelgrade addition!!!
+			// Allow others to prevent notices.
+			if ( ! apply_filters( 'tgmpa_show_admin_notices', true ) ) {
+				return;
+			}
+
 			// Store for the plugin slugs by message type.
 			$message = array();
 
@@ -1333,7 +1339,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 		 * @param string $plugin_slug
 		 */
 		public function deregister( $plugin_slug ) {
-			if ( empty( $plugin_slug ) || ! is_string( $plugin_slug ) || isset( $this->plugins[ $plugin_slug ] ) ) {
+			if ( empty( $plugin_slug ) || ! is_string( $plugin_slug ) || ! isset( $this->plugins[ $plugin_slug ] ) ) {
 				return;
 			}
 
