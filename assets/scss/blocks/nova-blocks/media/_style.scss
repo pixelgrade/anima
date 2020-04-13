@@ -2,15 +2,85 @@
 
     :root {
         --novablocks-spacing: var(--theme-spacing-fluid-medium);
-        --novablocks-block-content-padding: var(--theme-spacing-fluid-large);
+        --novablocks-media-spacing: var(--novablocks-spacing);
+    }
+
+}
+
+@media only screen and (min-width: 1000px) {
+
+    .site-header {
+
+        ul.menu,
+        .menu > ul {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+}
+
+.novablocks-block[class] {
+    padding: var(--novablocks-block-padding) 0;
+    color: var(--novablocks-block-text-color);
+    background-color: var(--novablocks-block-background-color);
+}
+
+.novablocks-block__content {
+    position: relative;
+
+    color: var(--novablocks-block-content-text-color);
+    box-shadow: var(--novablocks-block-content-box-shadow);
+    transform: translateZ(0);
+
+    &[class] {
+        padding: var(--novablocks-block-content-padding);
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+
+        display: block;
+        background-color: var(--novablocks-block-content-background-color);
+        opacity: var(--novablocks-block-content-background-opacity);
+        pointer-events: none;
+    }
+}
+
+.novablocks-media__image {
+    position: relative;
+    height: 100%;
+
+    img {
+        @include image-cover;
+    }
+}
+
+.novablocks-media__inner-container {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+
+    word-break: break-word;
+}
+
+.novablocks-media--blog {
+
+    .novablocks-media__image {
+        height: 100%;
+        min-height: 400px;
     }
 }
 
 .novablocks-media__content {
     max-width: 100%;
     @include apply-font(body);
-
-    --novablocks-block-content-padding: var(--novablocks-spacing);
 
     &[class] {
         flex-basis: calc(50% - var(--novablocks-media-spacing));
@@ -19,24 +89,22 @@
 
 .novablocks-media__aside {
 
-    // 0.5px to help Edge resolve the calc
-    flex-basis: calc(50% + var(--novablocks-media-spacing) - 0.5px);
+    &[class] {
+        // 0.5px to help Edge resolve the calc
+        flex-basis: calc(50% + var(--novablocks-media-spacing) - 0.5px);
+    }
 
     .novablocks-media:not(.novablocks-media--no-thumbnail) & {
         min-height: 15em;
     }
-
-    .novablocks-media__image {
-
-        svg {
-            @include image-cover;
-            object-fit: contain;
-        }
-    }
 }
 
-.block-is-moderate {
-    --novablocks-block-background-color: var(--current-light-tertiary);
+.novablocks-media__image {
+
+    svg {
+        @include image-cover;
+        object-fit: contain;
+    }
 }
 
 .novablocks-media--blog[class] {
@@ -49,27 +117,7 @@
         order: 0;
     }
 
-    &.has-image-on-the-left {
-        .novablocks-media__layout {
-            flex-direction: row-reverse;
-        }
-    }
-}
-
-@include below(tablet) {
-
-    .novablocks-media__content {
-        flex-basis: 100%;
-    }
-
-    .novablocks-block[class][class] {
-        --novablocks-block-padding: 0;
-        --novablocks-block-background-color: transparent;
-        --novablocks-block-content-text-color: var(--current-dark-secondary);
-    }
-
-    .novablocks-block__content {
-        --novablocks-block-content-padding: 0;
-        box-shadow: none;
+    &.has-image-on-the-left .novablocks-media__layout {
+        flex-direction: row-reverse;
     }
 }

@@ -1181,7 +1181,7 @@
 .wp-block-table {
   overflow-x: auto; }
 
-:root:root {
+html:root {
   --novablocks-color-1: var(--current-color-primary);
   --novablocks-color-2: var(--current-color-secondary);
   --novablocks-color-3: var(--current-color-tertiary);
@@ -1194,17 +1194,26 @@
   --nova-food-menu-item-highlight-color: var(--current-dark-primary);
   --novablocks-sides-spacings: var(--theme-wrapper-sides-spacing); }
 
-.novablocks-block.novablocks-media {
-  --novablocks-block-padding: var(--novablocks-spacing); }
-
-.novablocks-media[class] + .novablocks-media[class],
-.novablocks-slideshow[class] + .novablocks-media[class],
-.novablocks-hero[class] + .novablocks-media[class], .novablocks-media[class] +
+.block-is-moderate[class] + .block-is-moderate[class],
+.block-is-highlighted[class] + .block-is-moderate[class],
+.novablocks-slideshow[class] + .block-is-moderate[class],
+.novablocks-hero[class] + .block-is-moderate[class], .block-is-moderate[class] +
+.block-is-highlighted[class],
+.block-is-highlighted[class] +
+.block-is-highlighted[class],
+.novablocks-slideshow[class] +
+.block-is-highlighted[class],
+.novablocks-hero[class] +
+.block-is-highlighted[class], .block-is-moderate[class] +
+.novablocks-slideshow[class],
+.block-is-highlighted[class] +
 .novablocks-slideshow[class],
 .novablocks-slideshow[class] +
 .novablocks-slideshow[class],
 .novablocks-hero[class] +
-.novablocks-slideshow[class], .novablocks-media[class] +
+.novablocks-slideshow[class], .block-is-moderate[class] +
+.novablocks-hero[class],
+.block-is-highlighted[class] +
 .novablocks-hero[class],
 .novablocks-slideshow[class] +
 .novablocks-hero[class],
@@ -1334,7 +1343,75 @@
 
 :root {
   --novablocks-spacing: var(--theme-spacing-fluid-medium);
-  --novablocks-block-content-padding: var(--theme-spacing-fluid-large); }
+  --novablocks-media-spacing: var(--novablocks-spacing); }
+
+@media only screen and (min-width: 1000px) {
+  .site-header ul.menu,
+  .site-header .menu > ul {
+    display: flex;
+    flex-wrap: wrap; } }
+
+.novablocks-block[class] {
+  padding: var(--novablocks-block-padding) 0;
+  color: var(--novablocks-block-text-color);
+  background-color: var(--novablocks-block-background-color); }
+
+.novablocks-block__content {
+  position: relative;
+  color: var(--novablocks-block-content-text-color);
+  box-shadow: var(--novablocks-block-content-box-shadow);
+  transform: translateZ(0); }
+  .novablocks-block__content[class] {
+    padding: var(--novablocks-block-content-padding); }
+  .novablocks-block__content:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    display: block;
+    background-color: var(--novablocks-block-content-background-color);
+    opacity: var(--novablocks-block-content-background-opacity);
+    pointer-events: none; }
+
+.novablocks-media__image {
+  position: relative;
+  height: 100%; }
+  .novablocks-media__image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: none;
+    width: auto;
+    height: auto; }
+    @supports (transform: translate(-50%, -50%)) {
+      .novablocks-media__image img {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); } }
+    @supports (object-fit: cover) {
+      .novablocks-media__image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        top: 0;
+        left: 0;
+        transform: none; } }
+
+.novablocks-media__inner-container {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  word-break: break-word; }
+
+.novablocks-media--blog .novablocks-media__image {
+  height: 100%;
+  min-height: 400px; }
 
 .novablocks-media__content {
   max-width: 100%;
@@ -1344,41 +1421,39 @@
   --current-font-weight: var(--theme-body-font-weight);
   --current-letter-spacing: var(--theme-body-letter-spacing);
   --current-text-transform: var(--theme-body-text-transform);
-  --current-text-decoration: var(--theme-body-text-decoration);
-  --novablocks-block-content-padding: var(--novablocks-spacing); }
+  --current-text-decoration: var(--theme-body-text-decoration); }
   .novablocks-media__content[class] {
     flex-basis: calc(50% - var(--novablocks-media-spacing)); }
 
-.novablocks-media__aside {
+.novablocks-media__aside[class] {
   flex-basis: calc(50% + var(--novablocks-media-spacing) - 0.5px); }
-  .novablocks-media:not(.novablocks-media--no-thumbnail) .novablocks-media__aside {
-    min-height: 15em; }
-  .novablocks-media__aside .novablocks-media__image svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    min-height: 100%;
-    max-width: none;
-    width: auto;
-    height: auto;
-    object-fit: contain; }
-    @supports (transform: translate(-50%, -50%)) {
-      .novablocks-media__aside .novablocks-media__image svg {
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%); } }
-    @supports (object-fit: cover) {
-      .novablocks-media__aside .novablocks-media__image svg {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        top: 0;
-        left: 0;
-        transform: none; } }
 
-.block-is-moderate {
-  --novablocks-block-background-color: var(--current-light-tertiary); }
+.novablocks-media:not(.novablocks-media--no-thumbnail) .novablocks-media__aside {
+  min-height: 15em; }
+
+.novablocks-media__image svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  max-width: none;
+  width: auto;
+  height: auto;
+  object-fit: contain; }
+  @supports (transform: translate(-50%, -50%)) {
+    .novablocks-media__image svg {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); } }
+  @supports (object-fit: cover) {
+    .novablocks-media__image svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      top: 0;
+      left: 0;
+      transform: none; } }
 
 .novablocks-media--blog[class] .novablocks-media__content {
   margin-bottom: 0; }
@@ -1388,17 +1463,6 @@
 
 .novablocks-media--blog[class].has-image-on-the-left .novablocks-media__layout {
   flex-direction: row-reverse; }
-
-@media not screen and (min-width: 768px) {
-  .novablocks-media__content {
-    flex-basis: 100%; }
-  .novablocks-block[class][class] {
-    --novablocks-block-padding: 0;
-    --novablocks-block-background-color: transparent;
-    --novablocks-block-content-text-color: var(--current-dark-secondary); }
-  .novablocks-block__content {
-    --novablocks-block-content-padding: 0;
-    box-shadow: none; } }
 
 .wp-block-novablocks-navigation {
   --current-font-family: var(--theme-navigation-font-family);
