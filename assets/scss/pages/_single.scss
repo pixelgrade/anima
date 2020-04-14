@@ -1,5 +1,4 @@
 .single {
-
     background: var(--current-light-tertiary);
 
     .site-content {
@@ -10,9 +9,12 @@
 .single,
 .page {
 
+    .hentry {
+        @include space-children-y( var(--theme-spacing-large) );
+    }
+
     .site-content {
         padding-bottom: var(--theme-spacing-fluid-large);
-
         overflow: hidden;
     }
 }
