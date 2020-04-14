@@ -21,7 +21,7 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 function rosa2_page_has_hero() {
 	global $post;
 
-	if ( ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
+	if ( is_page() && ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
 		$blocks = parse_blocks( $post->post_content );
 
 		if ( $blocks[0]['blockName'] === 'novablocks/hero' || $blocks[0]['blockName'] === 'novablocks/slideshow' ) {

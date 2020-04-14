@@ -2932,36 +2932,6 @@ span.page-numbers {
   background-color: var(--current-light-primary);
   color: var(--current-dark-secondary); }
 
-/* 3.0 Fallbacks */
-.novablocks-media > .wp-block-group__inner-container {
-  padding-top: 1px; }
-
-.novablocks-media__layout {
-  margin-top: calc( -1 * var(--novablocks-media-spacing));
-  margin-left: calc( -1 * var(--novablocks-media-spacing)); }
-  .novablocks-media__layout > * {
-    padding-left: var(--novablocks-media-spacing);
-    margin-top: var(--novablocks-media-spacing); }
-  @media only screen and (min-width: 768px) {
-    .novablocks-media__layout {
-      display: flex;
-      flex-wrap: wrap; }
-      .novablocks-media__layout > * {
-        flex: 1 0 50%; } }
-
-.novablocks-media--blog {
-  --novablocks-block-background-color: var(--current-light-tertiary); }
-
-.block-is-moderate,
-.block-is-highlighted {
-  --novablocks-block-padding: var(--novablocks-spacing); }
-
-@media only screen and (min-width: 768px) {
-  .novablocks-block__content {
-    --novablocks-block-content-padding: var(--novablocks-spacing); }
-  .content-is-moderate {
-    --novablocks-block-content-background-color: var(--current-light-primary); } }
-
 .novablocks-hero__inner-container > .c-headline .c-headline__primary,
 .novablocks-hero__inner-container > .c-headline .c-headline__secondary {
   opacity: 0; }
@@ -3008,6 +2978,11 @@ body.archive, body.blog, body.search:not(.search-no-results) {
   background: var(--current-light-tertiary); }
   .single .site-content {
     background: var(--current-light-primary); }
+
+.single .hentry > :not(:first-child),
+.page .hentry > :not(:first-child) {
+  --element-spacing: var(--theme-spacing-large);
+  margin-top: var(--element-spacing); }
 
 .single .site-content,
 .page .site-content {

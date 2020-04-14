@@ -1,84 +1,6 @@
-@at-root {
-
-    :root {
-        --novablocks-spacing: var(--theme-spacing-fluid-medium);
-        --novablocks-media-spacing: var(--novablocks-spacing);
-    }
-
-}
-
-@media only screen and (min-width: 1000px) {
-
-    .site-header {
-
-        ul.menu,
-        .menu > ul {
-            display: flex;
-            flex-wrap: wrap;
-        }
-    }
-}
-
-.novablocks-block[class] {
-    padding: var(--novablocks-block-padding) 0;
-    color: var(--novablocks-block-text-color);
-    background-color: var(--novablocks-block-background-color);
-}
-
-.novablocks-block__content {
-    position: relative;
-
-    color: var(--novablocks-block-content-text-color);
-    transform: translateZ(0);
-
-    &[class] {
-        padding: var(--novablocks-block-content-padding);
-    }
-
-    @include above(tablet) {
-        box-shadow: var(--novablocks-block-content-box-shadow);
-
-        &:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            z-index: -1;
-
-            display: block;
-            background-color: var(--novablocks-block-content-background-color);
-            opacity: var(--novablocks-block-content-background-opacity);
-            pointer-events: none;
-        }
-    }
-}
-
-.novablocks-media__image {
-    position: relative;
-    height: 100%;
-
-    img {
-        @include image-cover;
-    }
-}
-
-.novablocks-media__inner-container {
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    justify-content: center;
-
-    word-break: break-word;
-}
-
-.novablocks-media--blog {
-
-    .novablocks-media__image {
-        height: 100%;
-        min-height: 400px;
-    }
+// hack to contain negative margin-top of .novablocks-media__layout
+.novablocks-media > .wp-block-group__inner-container {
+    padding-top: 1px;
 }
 
 .novablocks-media__content {
@@ -110,10 +32,20 @@
     }
 }
 
-.novablocks-media--blog[class] {
+.novablocks-block__content {
 
-    .novablocks-media__content {
-        margin-bottom: 0;
+    @include above(tablet) {
+        --novablocks-block-content-padding: var(--novablocks-spacing);
+    }
+}
+
+.novablocks-media--blog[class] {
+    --novablocks-block-content-box-shadow: none;
+    --novablocks-block-background-color: var(--current-light-tertiary);
+
+    .novablocks-media__image {
+        height: 100%;
+        min-height: 400px;
     }
 
     .novablocks-media__aside {
