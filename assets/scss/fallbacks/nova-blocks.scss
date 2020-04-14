@@ -33,8 +33,11 @@
 
 @include above(tablet) {
 
-    .content-is-moderate  {
+    .novablocks-block__content {
         --novablocks-block-content-padding: var(--novablocks-spacing);
+    }
+    
+    .content-is-moderate  {
         --novablocks-block-content-background-color: var(--current-light-primary);
     }
 }

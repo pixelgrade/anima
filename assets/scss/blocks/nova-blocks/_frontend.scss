@@ -1,13 +1,18 @@
 @import "style";
 
-.block-is-moderate[class],
-.block-is-highlighted[class],
-.novablocks-slideshow[class],
-.novablocks-hero[class] {
+.block-is-moderate,
+.block-is-highlighted,
+.novablocks-slideshow,
+.novablocks-hero {
 
-    & + & {
+    & + &[class] {
         margin-top: 0;
     }
+}
+
+.block-is-moderate + .block-is-moderate:not(.novablocks-media),
+.block-is-highlighted + .block-is-highlighted[class] {
+    padding-top: 0;
 }
 
 .novablocks-announcement-bar {
@@ -27,25 +32,14 @@
     }
 }
 
+.content-is-moderate {
+    --novablocks-block-content-box-shadow:
+        0 32px 128px rgba(0, 0, 0, 0.1),
+        0 16px 64px rgba(0, 0, 0, 0.1),
+        0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
 .novablocks-media {
-
-    &.block-is-basic {
-
-        & + & {
-            padding-top: 0;
-        }
-    }
-
-    & + :not(.novablocks-media) {
-        margin-top: 0;
-    }
-
-    &.content-is-moderate {
-        --novablocks-block-content-box-shadow:
-            0 32px 128px rgba(0, 0, 0, 0.1),
-            0 16px 64px rgba(0, 0, 0, 0.1),
-            0 8px 16px rgba(0, 0, 0, 0.1);
-    }
 
     &.novablocks-media--blog {
         --novablocks-block-content-box-shadow: none;
