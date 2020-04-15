@@ -87,11 +87,27 @@ body.archive, body.blog, body.search:not(.search-no-results) {
   body.archive .novablocks-media__inner-container, body.blog .novablocks-media__inner-container, body.search:not(.search-no-results) .novablocks-media__inner-container {
     text-align: center; }
 
-.single [id="page"] {
+.single {
   background: var(--current-light-tertiary); }
+  .single .site-content {
+    background: var(--current-light-primary); }
 
-.single .site-content {
-  background: var(--current-light-primary); }
+.single .hentry > :not(:first-child),
+.page .hentry > :not(:first-child) {
+  --element-spacing: var(--theme-spacing-large);
+  margin-top: var(--element-spacing); }
+
+.single .site-content,
+.page .site-content {
+  padding-bottom: var(--theme-spacing-fluid-large);
+  overflow: hidden; }
+
+.post + .comments-area,
+.page + .comments-area {
+  margin-top: var(--theme-spacing-fluid-medium); }
+
+.page:not(.has-hero) .site-content {
+  padding-top: var(--theme-spacing-fluid-large); }
 
 @media only screen and (min-width: 1000px) {
   .single .site-header:not(.site-header--scrolled) {
@@ -106,11 +122,6 @@ body.archive, body.blog, body.search:not(.search-no-results) {
   html:not(.wf-active) .single .entry-header > *, html:not(.wf-active)
   .page .entry-header > * {
     opacity: 0; }
-
-.single .hentry > :not(:first-child),
-.page .hentry > :not(:first-child) {
-  --element-spacing: var(--theme-spacing-large);
-  margin-top: var(--element-spacing); }
 
 .single .entry-header,
 .page .entry-header {

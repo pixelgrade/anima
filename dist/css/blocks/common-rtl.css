@@ -48,7 +48,8 @@
   font-weight: var(--theme-button-font-weight);
   line-height: var(--theme-button-line-height);
   letter-spacing: var(--theme-button-letter-spacing);
-  text-transform: var(--theme-button-text-transform); }
+  text-transform: var(--theme-button-text-transform);
+  color: var(--current-button-text-color); }
   .wp-block-button__link:not([disabled]) {
     cursor: pointer; }
     .wp-block-button__link:not([disabled]):hover {
@@ -56,41 +57,47 @@
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
       --current-button-transition: var(--theme-button-hover-transition); }
-  .wp-block-button__link:not(.has-background) {
-    background-color: var(--current-button-background-color); }
-  .wp-block-button__link:not(.has-text-color) {
-    color: var(--current-button-text-color); }
 
-.wp-block-buttons[class] {
+.wp-block-buttons[class][class] {
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
-  margin-right: calc(var(--theme-spacing) * -1); }
-  .wp-block-buttons[class] .block-editor-block-list__layout {
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: calc(-1 * var(--element-spacing)); }
+  .wp-block-buttons[class][class] .wp-block,
+  .wp-block-buttons[class][class] .wp-block-button {
+    margin: 0;
+    margin-left: var(--element-spacing);
+    margin-top: var(--element-spacing); }
+  .wp-block-buttons[class][class] .block-editor-block-list__layout {
     display: flex;
     align-items: center;
     flex-wrap: wrap; }
-    .wp-block-buttons[class] .block-editor-block-list__layout * {
+    .wp-block-buttons[class][class] .block-editor-block-list__layout > * {
       margin-right: 0;
       margin-left: 0; }
-  .wp-block-buttons[class] .wp-block,
-  .wp-block-buttons[class] .wp-block-button {
-    display: flex;
-    margin-right: var(--theme-spacing); }
-  .wp-block-buttons[class].aligncenter {
+  .wp-block-buttons[class][class].aligncenter {
     justify-content: center; }
-  .wp-block-buttons[class].alignleft {
-    justify-content: flex-start; }
-  .wp-block-buttons[class].alignright {
+    .wp-block-buttons[class][class].aligncenter .wp-block,
+    .wp-block-buttons[class][class].aligncenter .wp-block-button {
+      margin-right: calc( var(--element-spacing) / 2);
+      margin-left: calc( var(--element-spacing) / 2); }
+  .wp-block-buttons[class][class].alignright {
     justify-content: flex-end; }
+    .wp-block-buttons[class][class].alignright .wp-block,
+    .wp-block-buttons[class][class].alignright .wp-block-button {
+      margin-right: var(--element-spacing);
+      margin-left: 0; }
+  .wp-block-buttons[class][class] .wp-block-button__link[class] {
+    display: block; }
 
 /* Columns Blocks */
-.wp-block-columns:not(:first-child),
-.wp-block-columns + :not(:first-child) {
+.wp-block-columns[class]:not(:first-child),
+.wp-block-columns[class] + :not(:first-child) {
   --element-spacing: var(--theme-spacing-fluid-large); }
 
-.wp-block-columns .wp-block-columns:not(:first-child),
-.wp-block-columns .wp-block-columns + :not(:first-child) {
+.wp-block-columns[class] .wp-block-columns[class]:not(:first-child),
+.wp-block-columns[class] .wp-block-columns[class] + :not(:first-child) {
   --element-spacing: var(--theme-spacing-fluid-medium); }
 
 .wp-block-column {
@@ -103,7 +110,7 @@
 
 .wp-block-columns {
   display: flex; }
-  .wp-block-columns > * {
+  .wp-block-columns > *:not(.block-list-appender) {
     flex: 0 1 100%; }
   .wp-block-columns > :not(:first-child) {
     margin-right: var(--wp-block-columns-spacing); }
@@ -782,7 +789,7 @@
 .wp-block-table {
   overflow-x: auto; }
 
-:root {
+html:root {
   --novablocks-color-1: var(--current-color-primary);
   --novablocks-color-2: var(--current-color-secondary);
   --novablocks-color-3: var(--current-color-tertiary);
@@ -793,6 +800,8 @@
   --novablocks-light-2: var(--current-light-secondary);
   --novablocks-light-3: var(--current-light-tertiary);
   --nova-food-menu-item-highlight-color: var(--current-dark-primary);
+  --novablocks-spacing: var(--theme-spacing-fluid-medium);
+  --novablocks-media-spacing: var(--novablocks-spacing);
   --novablocks-sides-spacings: var(--theme-wrapper-sides-spacing); }
 
 .wp-block-quote,

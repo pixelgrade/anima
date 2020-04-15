@@ -1,14 +1,52 @@
+// Forms General Options
+
+// @todo more semantic for these variables
+$color-dark: var(--current-dark-secondary) !default;
+$color-white: var(--current-light-primary) !default;
+
+$input-color: var(--current-dark-secondary) !default;
+$input-border-color: var(--current-light-tertiary) !default;
+$input-border-width: .0625em !default;
+$input-background-color: var(--current-light-tertiary) !default;
+$input-padding: .8em 1.18em .93em !default;
+$input-focus-border-color: var(--current-dark-primary) !default;
+$input-focus-background-color: var(--current-light-primary) !default;
+$input-border-radius: 0 !default;
+$input-disabled-color: var(--current-dark-secondary) !default;
+$input-disabled-background-color: var(--current-dark-secondary) !default;
+$input-disabled-border-color: var(--current-dark-secondary) !default;
+
+$placeholder-color: var(--current-dark-secondary) !default;
+
+$label-color: var(--current-dark-secondary) !default;
+
+$legend-color: var(--current-dark-secondary) !default;
+
+$button-color: var(--current-light-primary) !default;
+$button-background-color: var(--current-dark-secondary) !default;
+
+$checkbox-color: var(--current-dark-secondary) !default;
+$checkbox-background-color: var(--current-light-primary) !default;
+$checkbox-width: 1.5rem !default;
+$checkbox-height: 1.5rem !default;
+
+// Spacing
+$input-vertical-spacing: var(--theme-spacing-tiny) !default;
+$input-horizontal-spacing: var(--theme-spacing-tiny) !default; // Checkboxes and Radios
+
 @mixin field {
+  width: 100%;
   height: auto;
   max-width: 100%;
-  padding: var(--theme-input-padding);
-  border: var(--theme-input-border);
+  padding: $input-padding;
+  border: $input-border-width solid $input-border-color;
 
-  color: var(--theme-input-color);
-  border-radius: var(--theme-input-border-radius);
-  background-color: var(--theme-input-background-color);
+  color: $input-color;
+  border-radius: $input-border-radius;
+  background-color: $input-background-color;
 
-  @include apply-font(field);
+  font: inherit;
+  line-height: 1.5;
   -webkit-font-smoothing: initial;
   -webkit-appearance: none;
 
@@ -16,15 +54,15 @@
   &:active {
     outline: 0;
     box-shadow: none;
-    border-color: var(--theme-input-focus-border-color);
+    border-color: $input-focus-border-color;
   }
 
-  &.disabled,
   &[disabled] {
-    border-color: var(--theme-input-disabled-border);
-    background-color: var(--theme-input-disabled-background-color);
+    border-color: $input-disabled-border-color;
+    background-color: $input-disabled-background-color;
   }
 }
+
 
 @mixin input {
   @include field;
@@ -32,7 +70,7 @@
 
 @mixin textarea {
   @include field;
-  display: block;
+
   min-height: 7.5em;
   resize: vertical;
 }
@@ -43,8 +81,8 @@
   padding-right: 3.125em;
 
   background-color: var(--current-light-tertiary);
-  background-image: url($caret-svg-path);
-  background-position: calc(100% - 1em) center;
+  background-image: url("assets/images/arrow-caret.svg");
+  background-position: calc(100% - 17px) center;
   background-repeat: no-repeat;
   background-size: .56em .312em;
 
@@ -52,16 +90,16 @@
 }
 
 @mixin label {
-  color: var(--theme-input-label-color);
+  color: $label-color;
   font: inherit;
   margin: 0;
 
   &:not(:first-child) {
-    margin-top: var(--theme-input-vertical-spacing);
+    margin-top: $input-vertical-spacing;
   }
 
   &:not(:last-child) {
-    margin-bottom: var(--theme-input-vertical-spacing);
+    margin-bottom: $input-vertical-spacing;
   }
 
   cursor: pointer;
@@ -74,15 +112,15 @@
   float: left;
   clear: left;
 
-  border: var(--theme-input-border);
-  border-radius: var(--theme-input-border-radius);
+  border: $input-border-width solid $input-border-color;
+  border-radius: $input-border-radius;
 
-  width: var(--theme-checkbox-width) !important;
-  height: var(--theme-checkbox-height) !important;
-  margin-right: var(--theme-input-horizontal-spacing);
-  margin-bottom: var(--theme-input-vertical-spacing);
+  width: $checkbox-width !important;
+  height: $checkbox-height !important;
+  margin-right: $input-horizontal-spacing;
+  margin-bottom: $input-vertical-spacing;
 
-  background-color: var(--theme-checkbox-background-color);
+  background-color: $color-white;
   cursor: pointer;
 
   -webkit-appearance: none;
@@ -92,10 +130,8 @@
   @include checkbox-base;
 
   &:checked {
-    border-color: var(--theme-checkbox-border-color);
-    background-image: url($checkbox-svg-path);
-    background-position: center center;
-    background-repeat: no-repeat;
+    border-color: $checkbox-color;
+    background: $checkbox-background-color url('assets/images/checkbox.svg') center center no-repeat;
     background-size: 100% 100%;
     outline: 0;
   }
@@ -106,7 +142,7 @@
   border-radius: 50%;
 
   &:checked {
-    border: .43em solid var(--theme-checkbox-border-color);
+    border: .43em solid $checkbox-color;
     outline: 0;
   }
 }

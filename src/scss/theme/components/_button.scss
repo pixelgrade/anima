@@ -46,15 +46,16 @@
             &.has-#{$name}-background-color {
                 background-color: transparent !important;
                 --theme-button-background-color: #{$color};
+                --theme-button-border-color: #{$color};
                 --theme-button-hover-background-color: transparent;
+                --theme-button-hover-border-color: #{$color};
+                --theme-button-hover-text-color: #{$color};
             }
 
             &.has-#{$name}-color {
                 color: var(--current-button-text-color) !important;
+                --theme-button-hover-text-color: var(--theme-button-background-color);
                 --theme-button-text-color: #{$color};
-                --theme-button-hover-text-color: #{$color};
-                --theme-button-border-color: #{$color};
-                --theme-button-hover-border-color: #{$color};
             }
         }
     }
