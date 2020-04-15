@@ -103,18 +103,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _blocks_button__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_blocks_button__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _blocks_group__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
 /* harmony import */ var _blocks_group__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_blocks_group__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _blocks_heading__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(12);
-/* harmony import */ var _blocks_heading__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_blocks_heading__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _blocks_headline__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(13);
-/* harmony import */ var _blocks_headline__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_blocks_headline__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _blocks_menu_item__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(14);
-/* harmony import */ var _blocks_menu_item__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_blocks_menu_item__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _blocks_paragraph__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(15);
-/* harmony import */ var _blocks_paragraph__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_blocks_paragraph__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _blocks_separator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(16);
-/* harmony import */ var _blocks_separator__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_blocks_separator__WEBPACK_IMPORTED_MODULE_6__);
-
-
+/* harmony import */ var _blocks_menu_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(12);
+/* harmony import */ var _blocks_menu_item__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_blocks_menu_item__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _blocks_paragraph__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(13);
+/* harmony import */ var _blocks_paragraph__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_blocks_paragraph__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _blocks_separator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(14);
+/* harmony import */ var _blocks_separator__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_blocks_separator__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
@@ -168,28 +162,6 @@ wp.domReady(function () {
 /***/ (function(module, exports) {
 
 wp.domReady(function () {
-  wp.blocks.registerBlockStyle('core/heading', {
-    name: 'display',
-    label: 'Display'
-  });
-});
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports) {
-
-wp.domReady(function () {
-  wp.blocks.registerBlockStyle('novablocks/headline', {
-    name: 'display',
-    label: 'Display'
-  });
-});
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-wp.domReady(function () {
   wp.blocks.registerBlockStyle('novablocks/menu-food-item', {
     name: 'rounded',
     label: 'Rounded'
@@ -197,7 +169,7 @@ wp.domReady(function () {
 });
 
 /***/ }),
-/* 15 */
+/* 13 */
 /***/ (function(module, exports) {
 
 wp.domReady(function () {
@@ -208,7 +180,7 @@ wp.domReady(function () {
 });
 
 /***/ }),
-/* 16 */
+/* 14 */
 /***/ (function(module, exports) {
 
 wp.domReady(function () {
