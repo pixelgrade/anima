@@ -162,14 +162,6 @@ function rosa2_enqueue_theme_block_editor_assets() {
 }
 add_action( 'enqueue_block_editor_assets', 'rosa2_enqueue_theme_block_editor_assets', 10 );
 
-function rosa2_enqueue_theme_block_assets() {
-	$theme  = wp_get_theme( get_template() );
-	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-
-	wp_enqueue_style( 'rosa2-block-styles', get_template_directory_uri() . '/blocks.css', array(), $theme->get( 'Version' ) );
-}
-add_action( 'enqueue_block_assets', 'rosa2_enqueue_theme_block_assets', 10 );
-
 function rosa2_scripts() {
 	$theme  = wp_get_theme( get_template() );
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
