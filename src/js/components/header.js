@@ -176,7 +176,7 @@ class Header {
 	}
 
 	updatePageOffset() {
-		TweenMax.set( this.$page, { css: { marginTop: this.visibleHeaderHeight} } );
+		TweenMax.set( this.$page, { css: { marginTop: this.visibleHeaderHeight + this.offset } } );
 		TweenMax.set( this.$hero, { css: { marginTop: this.offset } } );
 	}
 
