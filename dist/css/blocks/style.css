@@ -29,12 +29,12 @@
   display: block; }
 
 .wp-block-image figcaption {
-  --initial-font-size: var(--theme-body-font-size);
+  --font-size: var(--theme-body-font-size);
   font-size: var(--final-font-size);
-  font-family: var(--theme-body-font-family);
-  line-height: var(--theme-body-line-height);
-  font-weight: var(--theme-body-font-weight);
-  letter-spacing: var(--theme-body-letter-spacing); }
+  --current-font-family: var(--theme-body-font-family);
+  --current-line-height: var(--theme-body-line-height);
+  --current-font-weight: var(--theme-body-font-weight);
+  --current-letter-spacing: var(--theme-body-letter-spacing); }
 
 .wp-block-image.alignwide img, .wp-block-image.alignfull img,
 .wp-block-image > .alignwide img,
@@ -155,12 +155,12 @@
 .nova-food-menu-item__title {
   --theme-heading-5-font-weight: 700; }
   .nova-food-menu-item__title .item-title {
-    --initial-font-size: var(--theme-heading-4-font-size);
+    --font-size: var(--theme-heading-4-font-size);
     font-size: var(--final-font-size);
-    font-family: var(--theme-heading-4-font-family);
-    font-weight: var(--theme-heading-4-font-weight);
-    line-height: var(--theme-heading-4-line-height);
-    letter-spacing: var(--theme-heading-4-letter-spacing);
+    --current-font-family: var(--theme-heading-4-font-family);
+    --current-font-weight: var(--theme-heading-4-font-weight);
+    --current-line-height: var(--theme-heading-4-line-height);
+    --current-letter-spacing: var(--theme-heading-4-letter-spacing);
     padding-right: var(--theme-spacing-tiny); }
   .nova-food-menu-item__title:before {
     bottom: 0.5em; }
@@ -170,12 +170,12 @@
   font-feature-settings: 'tnum' on, 'lnum' on; }
 
 .nova-food-menu__header .section-title {
-  --initial-font-size: var(--theme-heading-2-font-size);
+  --font-size: var(--theme-heading-2-font-size);
   font-size: var(--final-font-size);
-  font-family: var(--theme-heading-2-font-family);
-  font-weight: var(--theme-heading-2-font-weight);
-  line-height: var(--theme-heading-2-line-height);
-  letter-spacing: var(--theme-heading-2-letter-spacing); }
+  --current-font-family: var(--theme-heading-2-font-family);
+  --current-font-weight: var(--theme-heading-2-font-weight);
+  --current-line-height: var(--theme-heading-2-line-height);
+  --current-letter-spacing: var(--theme-heading-2-letter-spacing); }
 
 .nova-food-menu-item__title {
   font-size: var(--theme-heading-4-font-size); }
@@ -231,12 +231,12 @@
 
 .novablocks-media__content {
   max-width: 100%;
-  --initial-font-size: var(--theme-body-font-size);
+  --font-size: var(--theme-body-font-size);
   font-size: var(--final-font-size);
-  font-family: var(--theme-body-font-family);
-  line-height: var(--theme-body-line-height);
-  font-weight: var(--theme-body-font-weight);
-  letter-spacing: var(--theme-body-letter-spacing); }
+  --current-font-family: var(--theme-body-font-family);
+  --current-line-height: var(--theme-body-line-height);
+  --current-font-weight: var(--theme-body-font-weight);
+  --current-letter-spacing: var(--theme-body-letter-spacing); }
   .novablocks-media__content[class] {
     flex-basis: calc(50% - var(--novablocks-media-spacing)); }
 
@@ -286,12 +286,12 @@
     flex-direction: row-reverse; }
 
 .wp-block-novablocks-navigation {
-  --initial-font-size: var(--theme-navigation-font-size);
+  --font-size: var(--theme-navigation-font-size);
   font-size: var(--final-font-size);
-  font-family: var(--theme-navigation-font-family);
-  font-weight: var(--theme-navigation-font-weight);
-  line-height: var(--theme-navigation-line-height);
-  letter-spacing: var(--theme-navigation-letter-spacing); }
+  --current-font-family: var(--theme-navigation-font-family);
+  --current-font-weight: var(--theme-navigation-font-weight);
+  --current-line-height: var(--theme-navigation-line-height);
+  --current-letter-spacing: var(--theme-navigation-letter-spacing); }
 
 @media only screen and (min-width: 1000px) {
   .wp-block-novablocks-navigation {

@@ -38,12 +38,12 @@ ul.wp-block-categories__list[class] {
     display: block; }
   .editor-block-list__block .wp-block-image figcaption,
   .block-editor-block-list__block .wp-block-image figcaption {
-    --initial-font-size: var(--theme-body-font-size);
+    --font-size: var(--theme-body-font-size);
     font-size: var(--final-font-size);
-    font-family: var(--theme-body-font-family);
-    line-height: var(--theme-body-line-height);
-    font-weight: var(--theme-body-font-weight);
-    letter-spacing: var(--theme-body-letter-spacing); }
+    --current-font-family: var(--theme-body-font-family);
+    --current-line-height: var(--theme-body-line-height);
+    --current-font-weight: var(--theme-body-font-weight);
+    --current-letter-spacing: var(--theme-body-letter-spacing); }
   .editor-block-list__block[data-align="full"] .wp-block-image figcaption,
   .block-editor-block-list__block[data-align="full"] .wp-block-image figcaption {
     padding-right: var(--theme-wrapper-sides-spacing);
@@ -68,12 +68,12 @@ ul.wp-block-categories__list[class] {
 .nova-food-menu-item__title {
   --theme-heading-5-font-weight: 700; }
   .nova-food-menu-item__title .item-title {
-    --initial-font-size: var(--theme-heading-4-font-size);
+    --font-size: var(--theme-heading-4-font-size);
     font-size: var(--final-font-size);
-    font-family: var(--theme-heading-4-font-family);
-    font-weight: var(--theme-heading-4-font-weight);
-    line-height: var(--theme-heading-4-line-height);
-    letter-spacing: var(--theme-heading-4-letter-spacing);
+    --current-font-family: var(--theme-heading-4-font-family);
+    --current-font-weight: var(--theme-heading-4-font-weight);
+    --current-line-height: var(--theme-heading-4-line-height);
+    --current-letter-spacing: var(--theme-heading-4-letter-spacing);
     padding-left: var(--theme-spacing-tiny); }
   .nova-food-menu-item__title:before {
     bottom: 0.5em; }
@@ -83,12 +83,12 @@ ul.wp-block-categories__list[class] {
   font-feature-settings: 'tnum' on, 'lnum' on; }
 
 .nova-food-menu__header .section-title {
-  --initial-font-size: var(--theme-heading-2-font-size);
+  --font-size: var(--theme-heading-2-font-size);
   font-size: var(--final-font-size);
-  font-family: var(--theme-heading-2-font-family);
-  font-weight: var(--theme-heading-2-font-weight);
-  line-height: var(--theme-heading-2-line-height);
-  letter-spacing: var(--theme-heading-2-letter-spacing); }
+  --current-font-family: var(--theme-heading-2-font-family);
+  --current-font-weight: var(--theme-heading-2-font-weight);
+  --current-line-height: var(--theme-heading-2-line-height);
+  --current-letter-spacing: var(--theme-heading-2-letter-spacing); }
 
 .nova-food-menu-item__title {
   font-size: var(--theme-heading-4-font-size); }

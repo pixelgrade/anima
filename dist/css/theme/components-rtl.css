@@ -16,13 +16,13 @@
   --current-button-transition: var(--theme-button-transition);
   background-color: var(--current-button-background-color);
   color: var(--current-button-text-color);
-  --initial-font-size: var(--theme-button-font-size);
+  --font-size: var(--theme-button-font-size);
   font-size: var(--final-font-size);
-  font-family: var(--theme-button-font-family);
-  font-weight: var(--theme-button-font-weight);
-  line-height: var(--theme-button-line-height);
-  letter-spacing: var(--theme-button-letter-spacing);
-  text-transform: var(--theme-button-text-transform); }
+  --current-font-family: var(--theme-button-font-family);
+  --current-font-weight: var(--theme-button-font-weight);
+  --current-line-height: var(--theme-button-line-height);
+  --current-letter-spacing: var(--theme-button-letter-spacing);
+  --current-text-transform: var(--theme-button-text-transform); }
   .wp-block-button:not(.is-style-text) .wp-block-button__link:not([disabled]) {
     cursor: pointer; }
     .wp-block-button:not(.is-style-text) .wp-block-button__link:not([disabled]):hover {
@@ -430,24 +430,20 @@
   z-index: 10; }
 
 .c-headline__secondary {
-  --initial-font-size: var(--theme-accent-font-size);
-  font-size: var(--final-font-size);
-  font-family: var(--theme-accent-font-family);
-  font-weight: var(--theme-accent-font-weight);
-  text-transform: var(--theme-accent-text-transform);
-  letter-spacing: var(--theme-accent-letter-spacing);
+  --current-font-family: var(--theme-accent-font-family);
+  --current-font-weight: var(--theme-accent-font-weight);
+  --current-text-transform: var(--theme-accent-text-transform);
+  --current-letter-spacing: var(--theme-accent-letter-spacing);
   color: var(--current-color-primary); }
 
 .c-headline__secondary {
   font-size: 1.3636em;
+  line-height: 0.9;
   white-space: nowrap; }
 
-.c-headline.is-style-display .c-headline__secondary {
-  font-size: .87em; }
-
-.c-headline.is-style-display .c-headline__secondary + .c-headline__primary,
-.c-headline.is-style-display > .editor-rich-text + .editor-rich-text {
-  margin-top: -.3em; }
+h1.c-headline.has-larger-font-size .c-headline__secondary {
+  font-size: .87em;
+  line-height: 1.1; }
 
 .c-separator {
   --separator-line-thickness: 2px;

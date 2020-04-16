@@ -250,12 +250,12 @@
   margin-top: var(--theme-spacing-tiny);
   margin-bottom: 0;
   color: var(--current-dark-primary);
-  --initial-font-size: var(--theme-heading-4-font-size);
+  --font-size: var(--theme-heading-4-font-size);
   font-size: var(--final-font-size);
-  font-family: var(--theme-heading-4-font-family);
-  font-weight: var(--theme-heading-4-font-weight);
-  line-height: var(--theme-heading-4-line-height);
-  letter-spacing: var(--theme-heading-4-letter-spacing); }
+  --current-font-family: var(--theme-heading-4-font-family);
+  --current-font-weight: var(--theme-heading-4-font-weight);
+  --current-line-height: var(--theme-heading-4-line-height);
+  --current-letter-spacing: var(--theme-heading-4-letter-spacing); }
 
 [class][class][class] .wc-block-grid__product-link {
   --current-aspect-ratio: 1;
@@ -440,13 +440,13 @@
   background-color: var(--current-button-background-color);
   color: var(--current-button-text-color);
   transition: var(--current-button-transition);
-  --initial-font-size: var(--theme-button-font-size);
+  --font-size: var(--theme-button-font-size);
   font-size: var(--final-font-size);
-  font-family: var(--theme-button-font-family);
-  font-weight: var(--theme-button-font-weight);
-  line-height: var(--theme-button-line-height);
-  letter-spacing: var(--theme-button-letter-spacing);
-  text-transform: var(--theme-button-text-transform);
+  --current-font-family: var(--theme-button-font-family);
+  --current-font-weight: var(--theme-button-font-weight);
+  --current-line-height: var(--theme-button-line-height);
+  --current-letter-spacing: var(--theme-button-letter-spacing);
+  --current-text-transform: var(--theme-button-text-transform);
   background-color: transparent;
   transform: translateZ(0);
   will-change: transform;

@@ -39,9 +39,10 @@
     --x0: var(--theme-font-size-minimum-value-breakpoint);
     --y0: var(--theme-font-size-minimum-value);
     --x1: var(--theme-font-size-breakpoint);
+    --font-size-modifier: 1;
 
     // solving a first degree equation: y = ax + b
-    --y1: var(--initial-font-size);
+    --y1: var(--font-size);
     --y0-new: calc( var(--y1) - ( var(--y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) );
 
     // calculate the slope and the remainder for the equation
@@ -52,5 +53,12 @@
     // y2 - font size value we need to find out
     --y2: calc( var(--a) * 100vw + var(--b) * 1px );
 
-    --final-font-size: calc( var(--y2) + var(--theme-addon) );
+    --final-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+
+    font-size: var(--current-font-size);
+    font-weight: var(--current-font-weight);
+    font-family: var(--current-font-family);
+    line-height: var(--current-line-height);
+    letter-spacing: var(--current-letter-spacing);
+    text-transform: var(--current-text-transform);
 }

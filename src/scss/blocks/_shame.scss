@@ -1,14 +1,6 @@
 .wp-block-quote,
 .wp-block-pullquote {
     @include quote;
-
-    &.has-smaller-font-size {
-        @include apply-font(heading-4);
-    }
-
-    &.has-larger-font-size {
-        @include apply-font(heading-2);
-    }
 }
 
 .wp-block-pullquote {
