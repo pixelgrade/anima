@@ -1,57 +1,57 @@
 .novablocks-slideshow__arrow {
-  background-color: transparent;
-  width: 50px;
-  height: 50px;
+    width: 50px;
+    height: 50px;
 
-  transform: translateY(-50%);
+    background-color: transparent;
+    transform: translateY(-50%);
 
-  &:hover {
-    &:after {
-      opacity: .1;
+    &:hover:after {
+        opacity: .1;
     }
-  }
+}
+
+.novablocks-slideshow__arrow--prev:before,
+.novablocks-slideshow__arrow--next:before {
+    content: "";
+
+    display: block;
+    width: 32px;
+    height: 32px;
+
+    margin: 0;
+    border: 0;
+    padding: 0;
+
+    mask: url($icon-arrow-svg-path) no-repeat 50% 50%;
+    mask-size: cover;
+    -webkit-mask: url($icon-arrow-svg-path) no-repeat 50% 50%;
+    -webkit-mask-size: cover;
+
+    background-color: var(--current-light-primary);
 }
 
 .novablocks-slideshow__arrow--prev:before {
-  width: 32px;
-  height: 32px;
-  transform: translate(-50%, -50%);
-  -webkit-mask: url(assets/images/icon-arrow.svg) no-repeat 50% 50%;
-  mask: url(assets/images/icon-arrow.svg) no-repeat 50% 50%;
-  -webkit-mask-size: cover;
-  mask-size: cover;
-  background-color: #ffffff;
-  border: 0;
-  margin: 0;
-  padding: 0;
+    transform: translate(-50%, -50%);
 }
 
 .novablocks-slideshow__arrow--next:before {
-  width: 32px;
-  height: 32px;
-  transform: translate(-50%, -50%) rotate(180deg);
-  -webkit-mask: url(assets/images/icon-arrow.svg) no-repeat 50% 50%;
-  mask: url(assets/images/icon-arrow.svg) no-repeat 50% 50%;
-  -webkit-mask-size: cover;
-  mask-size: cover;
-  background-color: #ffffff;
-  border: 0;
-  margin: 0;
-  padding: 0;
+    transform: translate(-50%, -50%) rotate(180deg);
 }
 
 .novablocks-slideshow__arrow:after {
-  content: '';
-  display: block;
-  width: 50px;
-  height: 50px;
-  background-color: #FFFFFF;
-  opacity: 0;
-  border-radius: 50%;
-  -webkit-transition: opacity 0.15s ease-in;
-  transition: opacity 0.15s ease-in;
-  border: 0;
-  margin-top: 0;
-  -webkit-transform: none;
-  transform: none;
+    content: "";
+
+    display: block;
+    width: 50px;
+    height: 50px;
+
+    margin-top: 0;
+    border: 0;
+    border-radius: 50%;
+
+    background-color: var(--current-light-primary);
+    opacity: 0;
+
+    transition: opacity 0.15s ease-in;
+    transform: none;
 }

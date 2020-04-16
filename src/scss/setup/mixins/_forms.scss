@@ -81,7 +81,7 @@ $input-horizontal-spacing: var(--theme-spacing-tiny) !default; // Checkboxes and
   padding-right: 3.125em;
 
   background-color: var(--current-light-tertiary);
-  background-image: url("assets/images/arrow-caret.svg");
+  background-image: url($caret-svg-path);
   background-position: calc(100% - 17px) center;
   background-repeat: no-repeat;
   background-size: .56em .312em;
@@ -131,7 +131,7 @@ $input-horizontal-spacing: var(--theme-spacing-tiny) !default; // Checkboxes and
 
   &:checked {
     border-color: $checkbox-color;
-    background: $checkbox-background-color url('assets/images/checkbox.svg') center center no-repeat;
+    background: $checkbox-background-color url($checkbox-svg-path) center center no-repeat;
     background-size: 100% 100%;
     outline: 0;
   }
