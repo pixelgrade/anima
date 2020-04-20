@@ -197,7 +197,8 @@ class PixelgradeCare_Install_Notice {
 			'installUrl' => esc_url_raw( $install_url ),
 			'activateUrl' => esc_url_raw( $activate_url ),
 			'themesPluginsUrl' => esc_url( admin_url( 'themes.php?page=install-required-plugins' ) ),
-			'pixcareSetupUrl' => esc_url( admin_url( 'index.php?page=pixelgrade_care-setup-wizard' ) ),
+			// Since we are displaying a notice with the details, we want to skip the welcome screen of the wizard.
+			'pixcareSetupUrl' => esc_url( admin_url( 'admin.php?page=pixelgrade_care-setup-wizard&skip-welcome=true' ) ),
 			'status' => $plugin_status,
 			'i18n' => array(
 				'btnInstall' => esc_html__( 'Install the Pixelgrade Care&reg; plugin', '__theme_txtd' ),
