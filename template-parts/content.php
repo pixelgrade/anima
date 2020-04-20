@@ -15,6 +15,7 @@ global $wp_query;
 
 $classes = array(
 	'novablocks-media',
+	'novablocks-block',
 	'novablocks-media--blog',
 	'wp-block-group',
 	'alignfull',

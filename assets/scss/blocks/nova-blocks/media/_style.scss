@@ -1,16 +1,11 @@
-@at-root {
-
-    :root {
-        --novablocks-spacing: var(--theme-spacing-fluid-medium);
-        --novablocks-block-content-padding: var(--theme-spacing-fluid-large);
-    }
+// hack to contain negative margin-top of .novablocks-media__layout
+.novablocks-media > .wp-block-group__inner-container {
+    padding-top: 1px;
 }
 
 .novablocks-media__content {
     max-width: 100%;
     @include apply-font(body);
-
-    --novablocks-block-content-padding: var(--novablocks-spacing);
 
     &[class] {
         flex-basis: calc(50% - var(--novablocks-media-spacing));
@@ -19,57 +14,45 @@
 
 .novablocks-media__aside {
 
-    // 0.5px to help Edge resolve the calc
-    flex-basis: calc(50% + var(--novablocks-media-spacing) - 0.5px);
+    &[class] {
+        // 0.5px to help Edge resolve the calc
+        flex-basis: calc(50% + var(--novablocks-media-spacing) - 0.5px);
+    }
 
     .novablocks-media:not(.novablocks-media--no-thumbnail) & {
         min-height: 15em;
     }
+}
 
-    .novablocks-media__image {
+.novablocks-media__image {
 
-        svg {
-            @include image-cover;
-            object-fit: contain;
-        }
+    svg {
+        @include image-cover;
+        object-fit: contain;
     }
 }
 
-.block-is-moderate {
-    --novablocks-block-background-color: var(--current-light-tertiary);
+.novablocks-block__content {
+
+    @include above(tablet) {
+        --novablocks-block-content-padding: var(--novablocks-spacing);
+    }
 }
 
 .novablocks-media--blog[class] {
+    --novablocks-block-content-box-shadow: none;
+    --novablocks-block-background-color: var(--current-light-tertiary);
 
-    .novablocks-media__content {
-        margin-bottom: 0;
+    .novablocks-media__image {
+        height: 100%;
+        min-height: 400px;
     }
 
     .novablocks-media__aside {
         order: 0;
     }
 
-    &.has-image-on-the-left {
-        .novablocks-media__layout {
-            flex-direction: row-reverse;
-        }
-    }
-}
-
-@include below(tablet) {
-
-    .novablocks-media__content {
-        flex-basis: 100%;
-    }
-
-    .novablocks-block[class][class] {
-        --novablocks-block-padding: 0;
-        --novablocks-block-background-color: transparent;
-        --novablocks-block-content-text-color: var(--current-dark-secondary);
-    }
-
-    .novablocks-block__content {
-        --novablocks-block-content-padding: 0;
-        box-shadow: none;
+    &.has-image-on-the-left .novablocks-media__layout {
+        flex-direction: row-reverse;
     }
 }

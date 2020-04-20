@@ -9,11 +9,11 @@
     .editor-styles-wrapper [data-align=#{$alignment}] [data-block] {
 
         &:not(:first-child) {
-            margin-top: var(--theme-spacing-small);
+            margin-top: var(--element-spacing);
         }
 
         &:not(:last-child) {
-            margin-bottom: var(--theme-spacing-small);
+            margin-bottom: var(--element-spacing);
         }
     }
 }
@@ -27,7 +27,7 @@
     }
 
     %wp-block > .align#{$alignment} {
-        margin-bottom: var(--theme-spacing-small);
+        margin-bottom: var(--element-spacing);
     }
 
     %wp-block.align#{$alignment},
@@ -53,14 +53,14 @@
 %wp-block > .alignright,
 .editor-block-list__block[data-align=right] .editor-block-list__block-edit,
 .block-editor-block-list__block[data-align=right] .editor-block-list__block-edit {
-    margin-left: var(--theme-spacing-small);
+    margin-left: var(--element-spacing);
 }
 
 %wp-block.alignleft,
 %wp-block > .alignleft,
 .editor-block-list__block[data-align=left] .editor-block-list__block-edit,
 .block-editor-block-list__block[data-align=left] .editor-block-list__block-edit {
-    margin-right: var(--theme-spacing-small);
+    margin-right: var(--element-spacing);
 }
 
 %wp-block.aligncenter,
