@@ -25,6 +25,7 @@ if ( ! function_exists( 'rosa2_novablocks_setup' ) ) {
 			'menu-food',
 			'navigation',
 			'opentable',
+			'openhours',
 			'slideshow',
 		) );
 	}
