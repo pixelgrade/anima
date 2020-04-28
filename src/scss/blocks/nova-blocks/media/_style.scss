@@ -25,9 +25,18 @@
 }
 
 .novablocks-media__image {
+    position: relative;
 
+    a {
+        @include cover;
+    }
+
+    img,
     svg {
         @include image-cover;
+    }
+
+    svg {
         object-fit: contain;
     }
 }
@@ -42,6 +51,10 @@
 .novablocks-media--blog[class] {
     --novablocks-block-content-box-shadow: none;
     --novablocks-block-background-color: var(--current-light-tertiary);
+
+    .novablocks-media__layout {
+        align-items: stretch;
+    }
 
     .novablocks-media__image {
         height: 100%;
