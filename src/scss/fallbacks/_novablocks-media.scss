@@ -1,3 +1,12 @@
+.novablocks-media__aside {
+
+    @include above(tablet) {
+        .has-image-on-the-left & {
+            order: -1;
+        }
+    }
+}
+
 .novablocks-media__image {
     position: relative;
 

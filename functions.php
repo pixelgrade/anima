@@ -178,7 +178,7 @@ function rosa2_scripts() {
 	wp_style_add_data( 'rosa2-style', 'rtl', 'replace' );
 
     if ( ! in_array( 'nova-blocks/nova-blocks.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-        wp_enqueue_style( 'rosa2-novablocks-fallback-style', get_template_directory_uri() . '/novablocks-fallback.css', array(), $theme->get( 'Version' ) );
+        wp_enqueue_style( 'rosa2-novablocks-fallback-style', get_template_directory_uri() . '/dist/css/novablocks-fallback.css', array(), $theme->get( 'Version' ) );
     }
 
 	wp_register_script( 'gsap-split-text', '//pxgcdn.com/js/gsap/2.1.3/plugins/SplitText' . $suffix . '.js', array(), null, true );
