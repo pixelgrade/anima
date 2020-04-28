@@ -20,6 +20,7 @@ if ( ! function_exists( 'rosa2_novablocks_setup' ) ) {
 			'doppler' => array(
 				'novablocks/hero',
 			),
+			'advanced-gallery',
 			'announcement-bar',
 			'cards-collection',
 			'google-map',
