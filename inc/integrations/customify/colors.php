@@ -81,6 +81,10 @@ function pixelgrade_add_colors_section_to_customify_config( $config ) {
 		),
 	) );
 
+	if ( ! isset( $config['sections']['colors_section'] ) ) {
+		$config['sections']['colors_section'] = array();
+	}
+
 	$config['sections']['colors_section'] = Customify_Array::array_merge_recursive_distinct( $config['sections']['colors_section'], array(
 		'title'   => esc_html__( 'Colors', '__theme_txtd' ),
 		'options' => array(
