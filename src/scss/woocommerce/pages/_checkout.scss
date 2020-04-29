@@ -496,3 +496,26 @@ ul.order_details[class] {
     }
   }
 }
+
+.woocommerce-checkout-breadcrumbs[class] li {
+  + li {
+    padding-left: 10px;
+
+    &:before {
+      content: "";
+      position: static;
+      display: inline-block;
+      width: 0.5em;
+      height: 0.5em;
+      margin-right: 20px;
+      border-right: 0.1em solid currentColor;
+      border-bottom: 0.1em solid currentColor;
+      border-top: 0;
+      border-left: 0;
+      transform: translateY(-10%) rotate(-45deg);
+      transition: var(--theme-transition);
+      transition-property: opacity;
+      opacity: .5;
+    }
+  }
+}

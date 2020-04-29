@@ -1475,6 +1475,24 @@ ul.order_details[class] {
 .wc_payment_methods .wc_payment_method:only-child .payment_box {
   margin-right: 0 !important; }
 
+.woocommerce-checkout-breadcrumbs[class] li + li {
+  padding-right: 10px; }
+  .woocommerce-checkout-breadcrumbs[class] li + li:before {
+    content: "";
+    position: static;
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    margin-left: 20px;
+    border-left: 0.1em solid currentColor;
+    border-bottom: 0.1em solid currentColor;
+    border-top: 0;
+    border-right: 0;
+    transform: translateY(-10%) rotate(45deg);
+    transition: var(--theme-transition);
+    transition-property: opacity;
+    opacity: .5; }
+
 .wc-block-featured-category {
   position: relative;
   background-size: cover;
