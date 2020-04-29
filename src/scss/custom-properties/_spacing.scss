@@ -1,0 +1,17 @@
+
+// ATTENTION!
+// This file shouldn't be modified. Proceed with caution!
+
+:root {
+    --theme-spacing-ratio: 1;
+
+    --theme-spacing:                calc( var( --theme-body-final-font-size ) * var( --theme-spacing-ratio ) );
+    --theme-spacing-fluid:          calc( var( --theme-spacing-ratio ) * var( --theme-spacing-fluid-ratio ) );
+
+    @include fluid(--theme-spacing-fluid-ratio, $theme-font-size-minimum-value-breakpoint-em, 0.45rem, $theme-font-size-breakpoint-em, 1rem );
+
+    @each $name, $value in $theme-spacing-modifiers {
+        --theme-spacing-#{$name}:          calc( var( --theme-spacing ) * #{$value} );
+        --theme-spacing-fluid-#{$name}:    calc( var( --theme-spacing-fluid ) * #{$value} );
+    }
+}

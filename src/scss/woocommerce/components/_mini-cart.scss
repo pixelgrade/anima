@@ -1,0 +1,258 @@
+// cart
+:root {
+    --theme-mini-cart-transition-property: all;
+    --theme-mini-cart-transition-duration: .3s;
+    --theme-mini-cart-transition-easing: #{ $easeOutQuart };
+    --theme-mini-cart-transition: var(--theme-mini-cart-transition-property) var(--theme-mini-cart-transition-duration) var(--theme-mini-cart-transition-easing);
+}
+.c-mini-cart {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10000;
+
+    @include wp-offset(top, 0);
+
+    .widgettitle {
+        display: none;
+    }
+
+    .widget_shopping_cart {
+        position: relative;
+
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: .625em;
+            opacity: .2;
+
+            box-shadow: inset 0 .625em .625em -.625em #000000;
+        }
+    }
+
+    .woocommerce-mini-cart[class] {
+        padding: 2.5em;
+        padding-top: 0;
+        overflow-y: auto;
+        margin-bottom: 0;
+    }
+
+    .woocommerce-mini-cart__total {
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+
+        @include specific(2) {
+            border-top: 0;
+            padding: 1.25em;
+            margin: 0;
+        }
+
+        &:before {
+            content: "";
+            display: block;
+            height: .625em;
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            right: 0;
+            opacity: 0.2;
+
+            box-shadow: inset 0 -.625em .625em -.625em #000000;
+        }
+
+        .amount {
+            margin-left: auto;
+        }
+    }
+
+    .woocommerce-mini-cart__buttons {
+        padding: 1.25em;
+        padding-top: 0;
+
+        text-align: center;
+
+        display: flex;
+        flex-direction: column-reverse;;
+
+        @include specific(4) {
+            > a {
+                display: block;
+            }
+
+            > a:not(:last-child) {
+                margin-top: .625em;
+            }
+        }
+
+        .wc-forward:not(.checkout) {
+            @include specific(4) {
+                position: relative;
+
+                &:after {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    border-radius: inherit;
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+
+    .mini_cart_item {
+        display: block;
+        transition: var(--theme-mini-cart-transition);
+        transition-property: opacity, transform;
+    }
+
+    .mini_cart_item--hidden {
+        opacity: 0;
+        transform: translate3d(0, 1rem, 0);
+        transition: none;
+    }
+
+    .woocommerce-mini-cart__empty-message {
+        padding: 1.25em;
+    }
+}
+
+.c-mini-cart__overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background: #000000;
+    opacity: .2;
+}
+
+.c-mini-cart__flyout {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 17em;
+    background-color: var(--current-light-primary);
+    pointer-events: auto;
+
+    // stretch elements vertically
+    &,
+    .widget_shopping_cart,
+    .widget_shopping_cart_content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .widget_shopping_cart,
+    .widget_shopping_cart_content,
+    .woocommerce-mini-cart {
+        flex-grow: 1;
+    }
+
+    .widget_shopping_cart_content > :not(.woocommerce-mini-cart) {
+        flex-shrink: 0;
+    }
+}
+
+.c-mini-cart[class] {
+
+    .cart_list,
+    .product_list_widget {
+
+        li {
+            padding: 0;
+            padding-top: 2.5em;
+
+            // for proper positioning when scrolling product into view
+            // we keep consistent padding of 40px
+            // but reduce it using negative margin on the ::before pseudo-element
+            &:before {
+                content: "";
+                display: block;
+                margin-top: -.625em;
+            }
+        }
+
+        // put the image on its own row and remove woocommerce styles
+        a:not(.remove) {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+
+            color: inherit;
+        }
+
+        // move the remove button to bottom right next to quantity
+        a.remove[class] {
+            top: auto;
+            left: auto;
+            bottom: .25em;
+            right: 0;
+
+            // restyle remove button
+            background: none;
+
+            @include close(.625em, .125em, false);
+
+            // woocommerce thinks this should be important
+            color: inherit !important;
+        }
+
+        img {
+            display: block;
+            float: none;
+            width: auto;
+            margin: 0;
+            margin-top: .375em;
+            // reverse image and title order
+            order: 10;
+        }
+    }
+}
+
+.c-mini-cart__header {
+    display: flex;
+    align-items: center;
+    padding: 1.25em;
+}
+
+.c-mini-cart__title[class] {
+    margin-bottom: 0;
+}
+
+.c-mini-cart__close {
+    @include close(1em, .1875em);
+    margin-left: auto;
+    cursor: pointer;
+}
+
+// show / hide for c-mini-cart
+.c-mini-cart__overlay,
+.c-mini-cart__flyout {
+    transition: var(--theme-mini-cart-transition);
+}
+
+.c-mini-cart:not(.c-mini-cart--visible) {
+    pointer-events: none;
+
+    .c-mini-cart__overlay {
+        opacity: 0;
+    }
+
+    .c-mini-cart__flyout {
+        transform: translate3d(100%, 0, 0);
+    }
+}

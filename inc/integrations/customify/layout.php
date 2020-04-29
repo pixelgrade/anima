@@ -33,20 +33,20 @@ function rosa2_add_layout_section_to_customify_config( $config ) {
 						),
 					),
 				),
-				'content_wide_width' => array(
+				'content_wide_width_addon' => array(
 					'type'        => 'range',
 					'live'        => true,
 					'label'       => esc_html__( 'Container Width', '__theme_txtd' ),
-					'default'     => 65,
+					'default'     => 27,
 					'input_attrs' => array(
-						'min'          => 20,
-						'max'          => 100,
+						'min'          => 0,
+						'max'          => 50,
 						'step'         => 1,
 						'data-preview' => true,
 					),
 					'css'         => array(
 						array(
-							'property' => '--theme-content-width-wide-initial',
+							'property' => '--theme-content-width-wide-addon',
 							'selector' => ':root',
 							'unit'     => '',
 						),

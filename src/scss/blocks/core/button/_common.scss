@@ -1,0 +1,85 @@
+$enable-button-block-styles:            true !default;
+
+@if $enable-button-block-styles == true {
+
+    /* Button Block */
+    .wp-block-button {
+
+        &.is-style-squared {
+            --theme-button-border-radius: 0;
+        }
+
+        &.is-style-outline {
+            --theme-button-background-color: transparent;
+            --theme-button-text-color: currentColor;
+            --theme-button-border-color: currentColor;
+
+            --theme-button-hover-background-color: transparent;
+            --theme-button-hover-text-color: currentColor;
+            --theme-button-hover-border-color: currentColor;
+        }
+
+        @each $alignment in left, center, right {
+            &.align#{$alignment} {
+                text-align: #{$alignment};
+            }
+        }
+    }
+
+    .wp-block-button__link {
+        @include button-base;
+        @include button-box;
+        @include apply-font(button);
+        @include button-color;
+    }
+
+    .wp-block-buttons[class][class] {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-start;
+        margin-top: 0;
+
+        .wp-block,
+        .wp-block-button {
+            margin: 0;
+            margin-right: var(--element-spacing);
+            margin-top: var(--element-spacing);
+        }
+
+        .block-editor-block-list__layout {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+
+            > * {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+
+        &.aligncenter {
+            justify-content: center;
+
+            .wp-block,
+            .wp-block-button {
+                margin-left: calc( var(--element-spacing) / 2 );
+                margin-right: calc( var(--element-spacing) / 2 );
+            }
+        }
+
+        &.alignright {
+            justify-content: flex-end;
+
+            .wp-block,
+            .wp-block-button {
+                margin-left: var(--element-spacing);
+                margin-right: 0;
+            }
+        }
+
+        .wp-block-button__link[class] {
+            display: block;
+        }
+    }
+}

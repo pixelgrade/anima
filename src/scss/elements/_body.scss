@@ -1,0 +1,10 @@
+html {
+    -webkit-font-smoothing: antialiased;
+    --theme-body-final-font-size: var(--final-font-size);
+    @include apply-font(body);
+}
+
+body {
+    background-color: var(--current-light-primary);
+    color: var(--current-dark-secondary);
+}

@@ -1,0 +1,22 @@
+/* Links */
+a {
+    --theme-links-color: var(--current-dark-secondary);
+    --theme-links-decoration-color: var(--current-dark-secondary);
+
+    --theme-links-hover-color: var(--current-dark-secondary);
+    --theme-links-hover-decoration-color: var(--current-color-primary);
+
+    --theme-links-current-color: var(--theme-links-color);
+    --theme-links-current-decoration-color: var(--theme-links-decoration-color);
+
+    color: var(--theme-links-current-color);
+    text-decoration: underline;
+    text-decoration-color: var(--theme-links-current-decoration-color);
+    transition: var(--theme-links-transition);
+
+    &:hover,
+    &:focus {
+        --theme-links-current-color: var(--theme-links-hover-color);
+        --theme-links-decoration-color: var(--theme-links-hover-decoration-color);
+    }
+}

@@ -21,7 +21,7 @@ if ( ! wc_coupons_enabled() ) { // @codingStandardsIgnoreLine.
 ?>
 
 <div class="woocommerce-form-coupon-toggle">
-	<?php wc_print_notice( apply_filters( 'woocommerce_checkout_coupon_message', esc_html__( 'Have a coupon?', '__theme_txtd' ) . ' <a href="#" class="showcoupon">' . esc_html__( 'Click here to enter your code', '__theme_txtd' ) . '</a>' ), 'notice' ); ?>
+	<?php wc_print_notice( apply_filters( 'woocommerce_checkout_coupon_message', esc_html__( 'Have a coupon?&nbsp;', '__theme_txtd' ) . ' <a href="#" class="showcoupon">' . esc_html__( 'Click here to enter your code', '__theme_txtd' ) . '</a>' ), 'notice' ); ?>
 </div>
 
 <div class="checkout_coupon woocommerce-form-coupon" method="post" style="display:none">

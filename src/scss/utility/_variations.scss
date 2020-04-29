@@ -1,0 +1,11 @@
+%theme-variation {
+    background-color: var(--current-light-primary);
+    color: var(--current-dark-secondary);
+}
+
+@each $variation in dark, darker, accent {
+    .is-style-#{$variation} {
+        @extend %theme-variation;
+        @include variation($variation);
+    }
+}

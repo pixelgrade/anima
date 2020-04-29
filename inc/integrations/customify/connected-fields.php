@@ -33,6 +33,7 @@ function rosa2_add_customify_connected_fields( $options ) {
 						'heading_2_font',
 						'heading_3_font',
 						'heading_4_font',
+						'quote_font',
 					),
 				),
 				'sm_font_secondary'  => array(
@@ -49,65 +50,12 @@ function rosa2_add_customify_connected_fields( $options ) {
 						'body_font',
 						'content_font',
 						'lead_font',
+						'cite_font',
 					),
 				),
 				'sm_font_accent'     => array(
 					'connected_fields' => array(
 						'accent_font',
-					),
-				),
-				'sm_color_primary'   => array(
-					'default'          => ROSA2_THEME_COLOR_PRIMARY,
-					'connected_fields' => array(
-						'color_1'
-					),
-				),
-				'sm_color_secondary' => array(
-					'default'          => ROSA2_THEME_COLOR_SECONDARY,
-					'connected_fields' => array(
-						'color_2'
-					),
-				),
-				'sm_color_tertiary'  => array(
-					'default'          => ROSA2_THEME_COLOR_TERTIARY,
-					'connected_fields' => array(
-						'color_3'
-					),
-				),
-				'sm_dark_primary'    => array(
-					'default'          => ROSA2_THEME_DARK_PRIMARY,
-					'connected_fields' => array(
-						'color_dark_1'
-					),
-				),
-				'sm_dark_secondary'  => array(
-					'default'          => ROSA2_THEME_DARK_SECONDARY,
-					'connected_fields' => array(
-						'color_dark_2'
-					),
-				),
-				'sm_dark_tertiary'   => array(
-					'default'          => ROSA2_THEME_DARK_TERTIARY,
-					'connected_fields' => array(
-						'color_dark_3'
-					),
-				),
-				'sm_light_primary'   => array(
-					'default'          => ROSA2_THEME_LIGHT_PRIMARY,
-					'connected_fields' => array(
-						'color_light_1'
-					),
-				),
-				'sm_light_secondary' => array(
-					'default'          => ROSA2_THEME_LIGHT_SECONDARY,
-					'connected_fields' => array(
-						'color_light_2'
-					),
-				),
-				'sm_light_tertiary'  => array(
-					'default'          => ROSA2_THEME_LIGHT_TERTIARY,
-					'connected_fields' => array(
-						'color_light_3'
 					),
 				),
 			),

@@ -1,0 +1,96 @@
+@include placeholder() {
+    color: var(--theme-input-color);
+    opacity: .6;
+    font-style: italic;
+}
+
+input {
+    &[type="text"],
+    &[type="tel"],
+    &[type="number"],
+    &[type="date"],
+    &[type="email"],
+    &[type="password"],
+    &[type="url"],
+    &[type="search"] {
+        @include input;
+    }
+}
+
+input[type="checkbox"] {
+    @include checkbox;
+
+}
+
+input[type="radio"] {
+    @include radio;
+}
+
+input[type="submit"],
+input[type="button"] {
+    @include button;
+    @include button-fill(false);
+}
+
+button[type="submit"],
+button[type="reset"] {
+    @include button;
+    @include button-fill;
+}
+
+input[type="file"] {
+    width: 100%;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    display: block;
+    margin-bottom: 0 !important;
+    padding: .75em 1.75em;
+    border: 0 solid transparent;
+    border-right-width: 1em;
+    background-clip: padding-box;
+    overflow: visible;
+
+    font-weight: 600;
+    text-align: center;
+
+    color: var(--theme-input-color);
+    background-color: var(--theme-input-background-color);
+
+    vertical-align: middle;
+    cursor: pointer;
+
+    &:hover,
+    &:focus,
+    &:active {
+        outline: 0;
+        box-shadow: none;
+        background-color: var(--theme-input-background-color);
+    }
+}
+
+textarea {
+    @include textarea;
+}
+
+select {
+    @include select;
+
+    &[multiple] {
+        background: none;
+        padding-right: .8125em;
+    }
+}
+
+fieldset {
+    border: 0;
+
+    legend {
+        color: var(--theme-input-legend-color);
+        padding: 0 !important;
+    }
+
+    > div {
+        margin-top: var(--theme-input-vertical-spacing);
+    }
+}

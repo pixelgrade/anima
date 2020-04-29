@@ -22,7 +22,7 @@ gulp.task( 'server', function() {
 	console.log( gulpconfig, config );
 	// Serve files from the root of this project
 	browserSync.init( {
-		proxy: 'rosa2.work',
+		proxy: gulpconfig.server.domain,
 		open: 'external',
 	} );
 

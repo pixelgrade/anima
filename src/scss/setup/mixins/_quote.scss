@@ -1,0 +1,21 @@
+@mixin quote {
+    @include apply-font(heading-3);
+}
+
+@mixin quote-decorated {
+
+    &:before {
+        content: "";
+        display: block;
+        height: 0.1em;
+        background-color: var(--current-color-primary);
+        margin-bottom: var(--theme-spacing);
+        max-width: 5em;
+    }
+}
+
+@mixin quote__cite {
+    margin-top: var(--theme-spacing);
+    @include apply-font(body);
+    font-style: normal;
+}

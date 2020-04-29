@@ -1,0 +1,64 @@
+// always display primary and secondary headlines on separate lines
+
+:root {
+    // Headline Lines Spacing
+    --theme-headline-spacing-setting: -0.3;
+    --theme-headline-spacing: calc(var(--theme-headline-spacing-setting) * 1em);
+}
+
+.c-headline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+
+    &.has-text-align-left {
+        align-items: flex-start;
+    }
+
+    &.has-text-align-right {
+        align-items: flex-end;
+    }
+}
+
+.c-headline__word {
+    display: inline-flex !important;
+}
+
+.c-headline__primary,
+.c-headline__secondary {
+    display: block;
+}
+
+// bring primary and secondary headlines closer together
+.c-headline__secondary + .c-headline__primary,
+.c-headline > .editor-rich-text + .editor-rich-text {
+    margin-top: var(--theme-headline-spacing);
+}
+
+// raise secondary headline above primary
+.c-headline__secondary,
+.c-headline > .editor-rich-text:first-child {
+    position: relative;
+    z-index: 10;
+}
+
+.c-headline__secondary {
+    @include apply-font(accent);
+    color: var(--current-color-primary);
+}
+
+.c-headline__secondary {
+    font-size: 1.3636em;
+    line-height: 0.9;
+    white-space: nowrap;
+}
+
+h1.c-headline.has-larger-font-size {
+
+    .c-headline__secondary {
+        font-size: .87em;
+        line-height: 1.1;
+    }
+}
