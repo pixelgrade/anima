@@ -1056,6 +1056,9 @@
 .woocommerce-cart-form[class][class][class][class][class] .button:disabled {
   cursor: not-allowed; }
 
+.woocommerce-cart-form[class][class][class][class][class] .coupon button {
+  overflow: visible !important; }
+
 .woocommerce-cart .actions .coupon[class][class] {
   display: flex;
   margin-right: -.625em; }
@@ -1465,6 +1468,9 @@ ul.order_details[class] {
     padding-left: 8.75%;
     margin: 0;
     border: 0; } }
+
+.woocommerce-checkout-review-order-table td {
+  white-space: initial; }
 
 .wc-block-featured-category {
   position: relative;
@@ -2356,7 +2362,7 @@ ul.order_details[class] {
   margin-top: var(--theme-spacing-tiny); }
 
 .woocommerce {
-  --theme-content-width-normal-initial: var(--theme-content-width-wide-initial); }
+  --theme-content-width-normal: var(--theme-content-width-wide); }
   .woocommerce td,
   .woocommerce th {
     border: 0; }
