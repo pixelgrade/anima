@@ -50,7 +50,9 @@ export default class App {
 			} );
 		} );
 
-		header.render( overlap );
+		if ( !! header ) {
+			header.render( overlap );
+		}
 	}
 
 	initializeImages() {
@@ -128,12 +130,15 @@ export default class App {
 	onPromoBarUpdate( promoBar ) {
 		const header = this.header;
 		const HeroCollection = this.HeroCollection;
+		const promoBarHeight = !! promoBar ? promoBar.height : 0;
 
-		header.offset = promoBar.height;
-		header.update();
+		if ( !! header ) {
+			header.offset = promoBarHeight;
+			header.update();
+		}
 
 		HeroCollection.forEach( hero => {
-			hero.offset = promoBar.height;
+			hero.offset = promoBarHeight;
 			hero.updateOnScroll();
 		} );
 	}

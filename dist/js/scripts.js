@@ -1786,7 +1786,10 @@ function () {
           height: hero.box.height
         });
       });
-      header.render(overlap);
+
+      if (!!header) {
+        header.render(overlap);
+      }
     }
   }, {
     key: "initializeImages",
@@ -1875,10 +1878,15 @@ function () {
     value: function onPromoBarUpdate(promoBar) {
       var header = this.header;
       var HeroCollection = this.HeroCollection;
-      header.offset = promoBar.height;
-      header.update();
+      var promoBarHeight = !!promoBar ? promoBar.height : 0;
+
+      if (!!header) {
+        header.offset = promoBarHeight;
+        header.update();
+      }
+
       HeroCollection.forEach(function (hero) {
-        hero.offset = promoBar.height;
+        hero.offset = promoBarHeight;
         hero.updateOnScroll();
       });
     }
