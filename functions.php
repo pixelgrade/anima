@@ -5,6 +5,16 @@
  * @package Rosa2
  */
 
+define( 'THEME_COLOR_PRIMARY',    '#DDAB5D' );    // gold
+define( 'THEME_COLOR_SECONDARY',  '#39497C' );    // blue
+define( 'THEME_COLOR_TERTIARY',   '#B12C4A' );    // red
+define( 'THEME_DARK_PRIMARY',     '#212B49' );    // dark blue
+define( 'THEME_DARK_SECONDARY',   '#34394B' );    // dark light blue
+define( 'THEME_DARK_TERTIARY',    '#141928' );    // darker blue
+define( 'THEME_LIGHT_PRIMARY',    '#FFFFFF' );    // white
+define( 'THEME_LIGHT_SECONDARY',  '#CCCCCC' );    // gray
+define( 'THEME_LIGHT_TERTIARY',   '#EEEFF2' );    // light gray
+
 if ( ! function_exists( 'rosa2_setup' ) ) {
 
 	/**
@@ -110,15 +120,41 @@ function rosa2_deregister_gutenberg_styles() {
 }
 add_action( 'enqueue_block_assets', 'rosa2_deregister_gutenberg_styles', 10 );
 
+function rosa2_register_scripts() {
+	$theme  = wp_get_theme( get_template() );
+
+	wp_register_style( 'rosa2-custom-properties', get_template_directory_uri() . '/dist/css/custom-properties.css', array(), $theme->get( 'Version' ) );
+	wp_register_style( 'rosa2-social-links', get_template_directory_uri() . '/dist/css/social-links.css', array(), $theme->get( 'Version' ) );
+	wp_register_style( 'rosa2-theme', get_template_directory_uri() . '/dist/css/theme/style.css', array(), $theme->get( 'Version' ) );
+	wp_register_style( 'rosa2-theme-components', get_template_directory_uri() . '/dist/css/theme/components.css', array(), $theme->get( 'Version' ) );
+	wp_register_style( 'rosa2-utility', get_template_directory_uri() . '/dist/css/utility.css', array(), $theme->get( 'Version' ) );
+
+	wp_register_style( 'rosa2-blocks-common', get_template_directory_uri() . '/dist/css/blocks/common.css', array(), $theme->get( 'Version' ) );
+	wp_register_style( 'rosa2-blocks-editor', get_template_directory_uri() . '/dist/css/blocks/editor.css', array( 'rosa2-blocks-common' ), $theme->get( 'Version' ) );
+	wp_register_style( 'rosa2-blocks-style', get_template_directory_uri() . '/dist/css/blocks/style.css', array( 'rosa2-blocks-common'), $theme->get( 'Version' ) );
+
+	wp_style_add_data( 'rosa2-theme', 'rtl', 'replace' );
+	wp_style_add_data( 'rosa2-theme-components', 'rtl', 'replace' );
+}
+add_action( 'wp_enqueue_scripts', 'rosa2_register_scripts', 5 );
+
 function rosa2_enqueue_theme_block_editor_assets() {
 	$theme  = wp_get_theme( get_template() );
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-	wp_enqueue_style( 'rosa2-editor-styles', get_template_directory_uri() . '/editor.css', array(), $theme->get( 'Version' ) );
+	// @todo ????
+	rosa2_register_scripts();
+
+	wp_enqueue_style( 'rosa2-block-editor-styles', get_template_directory_uri() . '/dist/css/block-editor.css', array(
+        'rosa2-custom-properties',
+        'rosa2-theme-components',
+        'rosa2-blocks-editor',
+        'rosa2-utility',
+    ), $theme->get( 'Version' ) );
 
 	wp_enqueue_script(
 		'rosa2-editor-js',
-		get_template_directory_uri() . '/dist/js/editor.blocks' . $suffix . '.js',
+		get_template_directory_uri() . '/dist/js/editor' . $suffix . '.js',
 		array( 'wp-blocks', 'wp-dom', 'wp-hooks' ),
 		$theme->get( 'Version' ),
 		true
@@ -126,23 +162,23 @@ function rosa2_enqueue_theme_block_editor_assets() {
 }
 add_action( 'enqueue_block_editor_assets', 'rosa2_enqueue_theme_block_editor_assets', 10 );
 
-function rosa2_enqueue_theme_block_assets() {
-	$theme  = wp_get_theme( get_template() );
-	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-
-	wp_enqueue_style( 'rosa2-block-styles', get_template_directory_uri() . '/blocks.css', array(), $theme->get( 'Version' ) );
-}
-add_action( 'enqueue_block_assets', 'rosa2_enqueue_theme_block_assets', 10 );
-
 function rosa2_scripts() {
 	$theme  = wp_get_theme( get_template() );
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-	wp_enqueue_style( 'rosa2-style', get_template_directory_uri() . '/style.css', array(), $theme->get( 'Version' ) );
+	wp_enqueue_style( 'rosa2-style', get_template_directory_uri() . '/style.css', array(
+        'rosa2-social-links',
+        'rosa2-custom-properties',
+		'rosa2-theme',
+        'rosa2-theme-components',
+		'rosa2-blocks-style',
+		'rosa2-utility',
+    ), $theme->get( 'Version' ) );
+
 	wp_style_add_data( 'rosa2-style', 'rtl', 'replace' );
 
     if ( ! in_array( 'nova-blocks/nova-blocks.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-        wp_enqueue_style( 'rosa2-novablocks-fallback-style', get_template_directory_uri() . '/novablocks-fallback.css', array(), $theme->get( 'Version' ) );
+        wp_enqueue_style( 'rosa2-novablocks-fallback-style', get_template_directory_uri() . '/dist/css/novablocks-fallback.css', array(), $theme->get( 'Version' ) );
     }
 
 	wp_register_script( 'gsap-split-text', '//pxgcdn.com/js/gsap/2.1.3/plugins/SplitText' . $suffix . '.js', array(), null, true );

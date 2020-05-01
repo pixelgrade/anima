@@ -1,0 +1,62 @@
+$assets-folder-path: '../../../assets';
+
+@import "../setup";
+
+@import "fields";
+
+@import "components/mini-cart";
+
+@import "pages/archive";
+@import "pages/single-product";
+@import "pages/cart";
+@import "pages/checkout";
+
+@import "blocks";
+
+@import "shame";
+
+.woocommerce {
+  --theme-content-width-normal: var(--theme-content-width-wide);
+
+  td,
+  th {
+    border: 0;
+  }
+}
+
+.woocommerce-pagination {
+  @include nav-links;
+  margin-bottom: var(--theme-spacing-xl);
+}
+
+.wc-block-grid__products {
+  list-style: none !important;
+}
+
+.woocommerce-Reviews {
+  @include space-children-y(var(--theme-spacing-small));
+
+  > [id="comments"] {
+    @include space-children-y(var(--theme-spacing));
+  }
+}
+
+.woocommerce #review_form #respond [id="commentform"] {
+  @include space-children-y(var(--theme-spacing));
+
+  > p {
+    margin-bottom: 0;
+  }
+
+  > .form-submit {
+    margin-left: auto;
+  }
+}
+
+.comment-form-rating .stars > span {
+  display: flex;
+}
+
+.woocommerce form .form-row label {
+  line-height: inherit;
+}

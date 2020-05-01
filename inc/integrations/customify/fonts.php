@@ -73,8 +73,8 @@ function rosa2_add_customify_theme_fonts( $fonts ) {
 function rosa2_add_fonts_section_to_customify_config( $config ) {
 
 	$font_size_config = array(
-		'min'  => 8,
-		'max'  => 120,
+		'min'  => 1,
+		'max'  => 20,
 		'step' => 1,
 		'unit' => '',
 	);
@@ -194,7 +194,7 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 						'font-weight'     => 700,
 						'text-transform'  => 'none',
 						'text-decoration' => 'none',
-						'letter-spacing'  => - 0.03,
+						'letter-spacing'  => - 0.02,
 					),
 					'fields'            => $fields_config,
 				),
@@ -346,6 +346,23 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-button-',
+					'default'           => array(
+						'font-family'     => 'Reforma2018',
+						'font-size'       => 17,
+						'line-height'     => 1.2,
+						'font-weight'     => 500,
+						'text-transform'  => 'capitalize',
+						'text-decoration' => 'none',
+						'letter-spacing'  => 0.03,
+					),
+					'fields'            => $fields_config,
+				),
+				'input_font' => array(
+					'type'              => 'font',
+					'label'             => esc_html__( 'Fields', '__theme_txtd' ),
+					'desc'              => esc_html__( '', '__theme_txtd' ),
+					'selector'          => ':root',
+					'properties_prefix' => '--theme-input-',
 					'default'           => array(
 						'font-family'     => 'Reforma2018',
 						'font-size'       => 17,

@@ -1,0 +1,136 @@
+// TYPOGRAPHY
+
+// font families
+$theme-sm-font-body: Reforma1969, sans-serif;
+$theme-sm-font-primary: Reforma1969, sans-serif;
+$theme-sm-font-secondary: Reforma2018, sans-serif;
+$theme-sm-font-accent: Billy Ohio, sans-serif;
+
+// font sizing
+$theme-body-font-size: 16px;
+
+// fluid typography settings
+// these variables can be set in px
+$theme-minimum-font-size: 16px;
+$theme-font-size-breakpoint: 1440px;
+$theme-font-size-breakpoint-em: 1em * $theme-font-size-breakpoint / $theme-body-font-size;
+$theme-font-size-minimum-value-breakpoint: 320px;
+$theme-font-size-minimum-value-breakpoint-em: 1em * $theme-font-size-minimum-value-breakpoint / $theme-body-font-size;
+
+// use the --theme-font-size-slope-adjust variable to alter the slope of the resulted function
+// in such a way that when this variable equals 0, the slope of the function results to also 0
+// and the font sizes stay the same no matter the viewport
+$theme-font-size-slope-adjust: 0.6;
+$theme-font-size-slope-adjust-desktop: 0.4;
+
+// use a multiplier variable to control how much of that unit is added to the font size at any given time
+// on mobile devices the font size addon is set to 0 by default 0 so nothing is added to the resulted font sizes
+$theme-font-size-addon-multiplier-desktop: 1;
+
+// define font styles
+$theme-fonts: (
+    body: (
+        font-family: $theme-sm-font-body,
+        font-size: 16,
+        line-height: 1.7,
+        font-weight: 400,
+        letter-spacing: -0.03em
+    ),
+    content: (
+        font-family: $theme-sm-font-body,
+        font-size: 18,
+        line-height: 1.6,
+        letter-spacing: -0.03em,
+    ),
+    lead: (
+        font-family: $theme-sm-font-body,
+        font-size: 24,
+        line-height: 1.6,
+        letter-spacing: -0.02em,
+    ),
+    display: (
+        font-family: $theme-sm-font-primary,
+        font-size: 115,
+        line-height: 1.03,
+        font-weight: 700,
+        letter-spacing: -0.03em,
+    ),
+    heading-1: (
+        font-family: $theme-sm-font-primary,
+        font-size: 66,
+        line-height: 1.1,
+        font-weight: 700,
+        letter-spacing: -0.03em,
+    ),
+    heading-2: (
+        font-family: $theme-sm-font-primary,
+        font-size: 40,
+        font-weight: 700,
+        line-height: 1.2,
+        letter-spacing: -0.02em,
+    ),
+    heading-3: (
+        font-family: $theme-sm-font-primary,
+        font-size: 32,
+        font-weight: 700,
+        line-height: 1.2,
+        letter-spacing: -0.02em,
+    ),
+    heading-4: (
+        font-family: $theme-sm-font-primary,
+        font-size: 24,
+        font-weight: 700,
+        line-height: 1.2,
+        letter-spacing: -0.02em,
+    ),
+    heading-5: (
+        font-family: $theme-sm-font-secondary,
+        font-size: 17,
+        font-weight: 500,
+        line-height: 1.5,
+        letter-spacing: 0.017em,
+    ),
+    heading-6: (
+        font-family: $theme-sm-font-secondary,
+        font-size: 17,
+        font-weight: 500,
+        line-height: 1.5,
+        letter-spacing: 0.017em,
+    ),
+    navigation: (
+        font-family: $theme-sm-font-secondary,
+        font-size: 17,
+        font-weight: 500,
+        line-height: 1.5,
+        letter-spacing: 0.017em,
+    ),
+    meta: (
+        font-family: $theme-sm-font-secondary,
+        font-size: 17,
+        font-weight: 500,
+        line-height: 1.5,
+        letter-spacing: 0.017em,
+    ),
+    button: (
+        font-family: $theme-sm-font-secondary,
+        font-size: 17,
+        font-weight: 500,
+        line-height: 1.2,
+        letter-spacing: 0.03em,
+        text-transform: none,
+    ),
+    field: (
+        font-family: $theme-sm-font-secondary,
+        font-size: 17,
+        font-weight: 500,
+        line-height: 1.2,
+        letter-spacing: 0.03em,
+        text-transform: capitalize,
+    ),
+    accent: (
+        font-family: $theme-sm-font-accent,
+        font-weight: 400,
+        text-transform: none,
+        letter-spacing: normal,
+    ),
+);

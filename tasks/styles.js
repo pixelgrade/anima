@@ -7,27 +7,42 @@ var gulp = require( 'gulp' ),
 
 sass.compiler = require( 'node-sass' );
 
-function styles( cb ) {
-	return gulp.src( './assets/scss/*.scss' )
+function stylesBase( src, dest, cb ) {
+	return gulp.src( src )
 	           .pipe( sass().on( 'error', sass.logError ) )
 	           .pipe( sassUnicode() )
 	           .pipe( replace( /^@charset "UTF-8";\n/gm, '' ) )
-	           .pipe( gulp.dest( './' ) );
+	           .pipe( gulp.dest( dest ) );
+}
+
+const stylesRoot = './src/scss/';
+const rootStyles = [ stylesRoot + 'style.scss' ];
+const notRootStyles = rootStyles.map( path => '!' + path );
+
+notRootStyles.unshift( stylesRoot + '**/*.scss' );
+
+function compileRootStyles( cb ) {
+	return stylesBase( rootStyles, './', cb );
+}
+
+function compileNotRootStyles( cb ) {
+	return stylesBase( notRootStyles, './dist/css/', cb );
 }
 
 function stylesRTL( cb ) {
-	return gulp.src( [ 'style.css', 'woocommerce.css' ] )
+	return gulp.src( [ 'style.css', './dist/css/**/*.css', '!./dist/css/**/*-rtl.css' ], { base: './' } )
 	           .pipe( rtlcss() )
 	           .pipe( rename( function( path ) { path.basename += "-rtl"; } ) )
 	           .pipe( gulp.dest( '.' ) );
 }
+
 stylesRTL.description = 'Generate style-rtl.css file based on style.css';
 
 function watch( cb ) {
-	gulp.watch( [ './assets/scss/**/*.scss' ], compile );
+	gulp.watch( [ './src/scss/**/*.scss' ], compile );
 }
 
-const compile = gulp.series( styles, stylesRTL );
+const compile = gulp.series( gulp.parallel( compileRootStyles, compileNotRootStyles ), stylesRTL );
 
 gulp.task( 'compile:styles', compile );
 gulp.task( 'watch:styles', gulp.series( compile, watch ) );

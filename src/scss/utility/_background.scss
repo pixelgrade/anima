@@ -1,0 +1,30 @@
+/* Color Helper Classes */
+// @todo maybe use some variables?
+.has-background {
+    padding: 1em 1.25em;
+}
+
+.has-background-dim {
+    background-color: var(--sm-dark-primary, #000);
+
+    &:before {
+        content: "";
+        @include cover;
+        background-color: inherit;
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}
+
+@for $i from 1 through 10 {
+    .has-background-dim-#{$i * 10}:before {
+        opacity: $i/10;
+    }
+}
+
+@each $name, $color in $sm-color-classnames {
+
+    .has-#{$name}-background-color {
+        background-color: $color;
+    }
+}

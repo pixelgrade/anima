@@ -15,7 +15,7 @@ function rosa2_woocommerce_scripts() {
 	$theme  = wp_get_theme( get_template() );
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-	wp_enqueue_style( 'rosa2-woocommerce', get_template_directory_uri() . '/woocommerce.css', array( 'rosa2-style' ), $theme->get( 'Version' ) );
+	wp_enqueue_style( 'rosa2-woocommerce', get_template_directory_uri() . '/dist/css/woocommerce/style.css', array( 'rosa2-style' ), $theme->get( 'Version' ) );
 	wp_style_add_data( 'rosa2-woocommerce', 'rtl', 'replace' );
 
 	wp_enqueue_script( 'rosa2-woocommerce', get_template_directory_uri() . '/dist/js/woocommerce' . $suffix . '.js', array( 'jquery' ), $theme->get( 'Version' ), true );
@@ -24,14 +24,14 @@ function rosa2_woocommerce_scripts() {
 		'added_to_cart' => esc_html__( 'Added!', '__theme_txtd' ),
 	) );
 
-	wp_deregister_style('wc-block-style');
+	wp_deregister_style('wc-block-style' );
 }
 add_action( 'wp_enqueue_scripts', 'rosa2_woocommerce_scripts', 10 );
 
 function rosa2_enqueue_woocommerce_block_editor_assets() {
 	$theme  = wp_get_theme( get_template() );
 
-	wp_enqueue_style( 'rosa2-woocommerce-block-styles', get_template_directory_uri() . '/editor-woocommerce.css', array(), $theme->get( 'Version' ) );
+	wp_enqueue_style( 'rosa2-woocommerce-block-styles', get_template_directory_uri() . '/dist/css/woocommerce/block-editor.css', array(), $theme->get( 'Version' ) );
 }
 add_action( 'enqueue_block_editor_assets', 'rosa2_enqueue_woocommerce_block_editor_assets', 10 );
 

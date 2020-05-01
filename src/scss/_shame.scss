@@ -1,0 +1,62 @@
+// Keep this as tidy as possible
+
+/* Embeds */
+.fb_iframe_widget > span {
+    display: block;
+    max-width: 100%;
+}
+
+iframe.instagram-media {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-right: 0 !important;
+}
+
+.is-style-lead {
+    @include apply-font(lead);
+}
+
+img:not(.is-loaded) {
+    opacity: 0;
+
+    .gm-style & {
+        opacity: 1;
+    }
+}
+
+.entry-title,
+.entry-meta {
+
+    a {
+        color: var(--current-dark-primary);
+        text-decoration-color: transparent;
+    }
+}
+
+.entry-meta a:hover {
+    text-decoration-color: var(--current-color-primary);
+}
+
+.single,
+.page {
+
+    .site-content {
+        padding-bottom: var(--theme-spacing-fluid-large);
+
+        overflow: hidden;
+    }
+}
+
+.post,
+.page {
+    + .comments-area {
+        margin-top: var(--theme-spacing-fluid-medium);
+    }
+}
+
+.page:not(.has-hero) {
+
+    .site-content {
+        padding-top: var(--theme-spacing-fluid-large);
+    }
+}

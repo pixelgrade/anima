@@ -375,7 +375,7 @@ var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
 var createClass = __webpack_require__(2);
 var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 
-// CONCATENATED MODULE: ./src/utils.js
+// CONCATENATED MODULE: ./src/js/utils.js
 // checks if box1 and box2 overlap
 function overlapping(box1, box2) {
   var overlappingX = box1.left + box1.width >= box2.left && box2.left + box2.width >= box1.left;
@@ -393,19 +393,6 @@ function insideHalf(box1, box2) {
   var insideX = box1.left + box1.width / 2 >= box2.left && box2.left + box2.width >= box1.left + box1.width / 2;
   var insideY = box1.top + box1.height / 2 >= box2.top && box2.top + box2.height >= box1.top + box1.height / 2;
   return insideX && insideY;
-}
-function reloadRellax(element) {
-  var rellax = jQuery(element).data('rellax');
-
-  if (rellax) {
-    rellax._reset();
-
-    rellax._cachePosition();
-
-    rellax._prepareElement();
-
-    rellax._updatePosition();
-  }
 }
 var debounce = function debounce(func, wait) {
   var timeout = null;
@@ -447,7 +434,7 @@ var hasTouchScreen = function hasTouchScreen() {
 var toConsumableArray = __webpack_require__(3);
 var toConsumableArray_default = /*#__PURE__*/__webpack_require__.n(toConsumableArray);
 
-// CONCATENATED MODULE: ./src/components/globalService.js
+// CONCATENATED MODULE: ./src/js/components/globalService.js
 
 
 
@@ -720,7 +707,7 @@ function () {
 }();
 
 /* harmony default export */ var globalService = (new globalService_GlobalService());
-// CONCATENATED MODULE: ./src/components/hero.js
+// CONCATENATED MODULE: ./src/js/components/hero.js
 
 
 
@@ -1102,7 +1089,7 @@ function () {
 }();
 
 
-// CONCATENATED MODULE: ./src/components/commentsArea.js
+// CONCATENATED MODULE: ./src/js/components/commentsArea.js
 
 
 
@@ -1163,7 +1150,7 @@ function () {
 }();
 
 
-// CONCATENATED MODULE: ./src/components/header.js
+// CONCATENATED MODULE: ./src/js/components/header.js
 
 
 
@@ -1357,7 +1344,7 @@ function () {
     value: function updatePageOffset() {
       TweenMax.set(this.$page, {
         css: {
-          marginTop: this.visibleHeaderHeight
+          marginTop: this.visibleHeaderHeight + this.offset
         }
       });
       TweenMax.set(this.$hero, {
@@ -1414,7 +1401,7 @@ function () {
 var js_cookie = __webpack_require__(4);
 var js_cookie_default = /*#__PURE__*/__webpack_require__.n(js_cookie);
 
-// CONCATENATED MODULE: ./src/components/announcement-bar.js
+// CONCATENATED MODULE: ./src/js/components/announcement-bar.js
 
 
 
@@ -1541,7 +1528,7 @@ function () {
 }();
 
 
-// CONCATENATED MODULE: ./src/components/promo-bar.js
+// CONCATENATED MODULE: ./src/js/components/promo-bar.js
 
 
 
@@ -1586,7 +1573,7 @@ function () {
 }();
 
 
-// CONCATENATED MODULE: ./src/components/navbar.js
+// CONCATENATED MODULE: ./src/js/components/navbar.js
 
 
 
@@ -1744,7 +1731,7 @@ function () {
 }();
 
 
-// CONCATENATED MODULE: ./src/components/app.js
+// CONCATENATED MODULE: ./src/js/components/app.js
 
 
 
@@ -1799,7 +1786,10 @@ function () {
           height: hero.box.height
         });
       });
-      header.render(overlap);
+
+      if (!!header) {
+        header.render(overlap);
+      }
     }
   }, {
     key: "initializeImages",
@@ -1888,16 +1878,16 @@ function () {
     value: function onPromoBarUpdate(promoBar) {
       var header = this.header;
       var HeroCollection = this.HeroCollection;
-      header.offset = promoBar.height;
-      header.update();
+      var promoBarHeight = !!promoBar ? promoBar.height : 0;
+
+      if (!!header) {
+        header.offset = promoBarHeight;
+        header.update();
+      }
+
       HeroCollection.forEach(function (hero) {
-        hero.offset = promoBar.height;
+        hero.offset = promoBarHeight;
         hero.updateOnScroll();
-        var parallaxSelector = '.novablocks-slideshow__parallax, .novablocks-hero__parallax, .novablocks-map__parallax';
-        var $parallaxBlocks = external_jQuery_default()('.has-parallax');
-        $parallaxBlocks.find(parallaxSelector).each(function (i, obj) {
-          reloadRellax(obj);
-        });
       });
     }
   }]);
@@ -1906,7 +1896,7 @@ function () {
 }();
 
 
-// CONCATENATED MODULE: ./src/scripts.js
+// CONCATENATED MODULE: ./src/js/scripts.js
 
 
 
