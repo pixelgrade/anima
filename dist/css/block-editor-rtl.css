@@ -226,6 +226,9 @@ html {
     --theme-button-background-color: var(--current-dark-primary);
     --theme-button-border-color: var(--current-dark-primary);
     --theme-button-text-color: var(--current-light-primary);
+    padding: var(--theme-button-padding);
+    border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
+    border-radius: var(--theme-button-border-radius);
     background-color: transparent;
     transform: translateZ(0);
     will-change: transform;
@@ -260,6 +263,9 @@ html {
     --theme-button-border-color: var(--current-light-primary);
     --theme-button-hover-border-color: var(--current-light-primary);
     --theme-button-text-color: var(--current-dark-primary);
+    padding: var(--theme-button-padding);
+    border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
+    border-radius: var(--theme-button-border-radius);
     background-color: transparent;
     transform: translateZ(0);
     will-change: transform;
@@ -287,6 +293,15 @@ html {
       transform: scale3d(0, 1, 1); }
     .editor-styles-wrapper .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button:hover {
       color: var(--current-button-hover-text-color); }
+  .editor-styles-wrapper .ot-dtp-picker input[type="submit"][class][class] {
+    --font-size: var(--theme-button-font-size);
+    font-size: var(--final-font-size);
+    --current-font-family: var(--theme-button-font-family);
+    --current-font-weight: var(--theme-button-font-weight);
+    --current-line-height: var(--theme-button-line-height);
+    --current-letter-spacing: var(--theme-button-letter-spacing);
+    --current-text-transform: var(--theme-button-text-transform);
+    text-transform: none; }
   .editor-styles-wrapper .novablocks-opentable {
     /* body.supports-mutation-observer */
     transition: var(--theme-transition);
@@ -317,6 +332,27 @@ html {
   .editor-styles-wrapper .is-dark-mode .novablocks-opentable.novablocks-opentable__wide[class] .ot-powered-by {
     -webkit-filter: invert(1) saturate(0);
     mix-blend-mode: lighten; }
+  .editor-styles-wrapper .ot-dtp-picker-form {
+    --font-size: var(--theme-field-font-size);
+    font-size: var(--final-font-size);
+    --current-font-family: var(--theme-field-font-family);
+    --current-font-weight: var(--theme-field-font-weight);
+    --current-line-height: var(--theme-field-line-height);
+    --current-letter-spacing: var(--theme-field-letter-spacing);
+    --current-text-transform: var(--theme-field-text-transform); }
+  .editor-styles-wrapper .ot-dtp-picker .ot-dtp-picker-selector[class] {
+    height: auto; }
+    .editor-styles-wrapper .ot-dtp-picker .ot-dtp-picker-selector[class] .ot-dtp-picker-selector-link {
+      display: flex;
+      align-items: center; }
+      .editor-styles-wrapper .ot-dtp-picker .ot-dtp-picker-selector[class] .ot-dtp-picker-selector-link:before {
+        top: 50%;
+        transform: translateY(-50%); }
+  .editor-styles-wrapper .picker__nav--prev[class],
+  .editor-styles-wrapper .picker__nav--next[class] {
+    border: 0; }
+  .editor-styles-wrapper .picker__frame {
+    --current-font-size: 16px; }
   .editor-styles-wrapper [class*="__inner-container"] {
     padding-right: var(--theme-wrapper-sides-spacing);
     padding-left: var(--theme-wrapper-sides-spacing); }

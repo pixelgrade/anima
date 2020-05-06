@@ -8,7 +8,7 @@
     }
 
     .button,
-    input[type="submit"] {
+    input[type="submit"]:not(.ot-button) {
         @include button;
     }
 
@@ -29,7 +29,7 @@
     }
 
     input.button,
-    input[type="submit"] {
+    input[type="submit"]:not(.ot-button) {
 
         &:not(.alt) {
             @include button-fill-reverse(false);
