@@ -13,8 +13,20 @@
 
 .woocommerce table.shop_table {
 
+    border: 0;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 1px;
+        background-color: var(--current-dark-primary);
+        opacity: .2;
+    }
+
     th, td {
-        padding: var(--theme-spacing);
+        padding: var(--theme-spacing-xsmall);
     }
 }
 
@@ -67,6 +79,8 @@
 
     tr {
         border: 0;
+        display: flex;
+        justify-content: space-between;
     }
 
     @include specific(3) {
@@ -80,8 +94,22 @@
             border-bottom: 0;
         }
 
-        td, th {
+        tr:not(.order-total) {
+            position: relative;
 
+            &:after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                height: 1px;
+                background-color: var(--current-dark-primary);
+                opacity: .2;
+            }
+        }
+
+        td, th {
+            border: 0;
             @include above(tablet) {
 
                 &:first-child {

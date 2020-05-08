@@ -1,3 +1,30 @@
+:root {
+  --theme-input-color: var(--current-dark-secondary);
+  --theme-input-placeholder-color: var(--curent-dark-primary);
+  --theme-input-placeholder-opacity: 0.5;
+  --theme-input-error-color: #C8164B;
+  --theme-input-border-color: rgba(33, 43, 73, 0.3);
+  --theme-input-focus-border-color: rgba(221, 171, 93, 0.5);
+  --theme-input-hover-border-color: rgba(33, 43, 73, 0.6);
+  --theme-input-error-border-color: rgba(221, 171, 93, 0.5);
+  --theme-input-border-width: 0.0625em;
+  --theme-input-border-radius: 0px;
+  --theme-input-background-color: var(--current-light-primary);
+  --theme-input-box-shadow:   0px 0px 0px 1px rgba(var(--opacity-color), 0.70),
+                        0px 0px 0px 1px var(--current-dark-primary);
+  --theme-input-focus-box-shadow: 0px 0px 0px 2px rgba(var(--opacity-color), 0.40),
+                            0px 0px 0px 2px var(--current-color-primary),
+                            0px 0px 27px 5px var(--current-light-primary),
+                            0px 0px 10px 0px var(--current-color-primary);
+  --theme-input-hover-box-shadow: 0px 0px 0px 1px rgba(var(--opacity-color), 0.30),
+                            0px 0px 0px 1px var(--current-dark-primary);
+  --theme-input-error-box-shadow: 0px 0px 0px 1px var(--theme-input-error-color);
+  --theme-input-padding: 0.35em;
+  --opacity-color: 255, 255, 255; }
+  @media only screen and (min-width: 768px) {
+    :root {
+      --theme-input-padding: 0.833em; } }
+
 .wc-block-featured-category {
   position: relative;
   background-size: cover;
@@ -385,13 +412,21 @@
     width: 100%;
     height: auto;
     max-width: 100%;
-    padding: 0.8em 1.18em 0.93em;
-    border: 0.0625em solid var(--current-light-tertiary);
-    color: var(--current-dark-secondary);
-    border-radius: 0;
-    background-color: var(--current-light-tertiary);
-    font: inherit;
-    line-height: 1.5;
+    padding: var(--theme-input-padding);
+    color: var(--theme-input-color);
+    border-radius: var(--theme-input-border-radius);
+    background-color: var(--theme-input-background-color);
+    box-shadow: var(--theme-input-box-shadow);
+    border: 0;
+    transition: all .2s ease-in-out;
+    --font-size: var(--theme-field-font-size);
+    font-size: var(--final-font-size);
+    --current-font-family: var(--theme-field-font-family);
+    --current-font-weight: var(--theme-field-font-weight);
+    --current-line-height: var(--theme-field-line-height);
+    --current-letter-spacing: var(--theme-field-letter-spacing);
+    --current-text-transform: var(--theme-field-text-transform);
+    font-family: inherit;
     -webkit-font-smoothing: initial;
     -webkit-appearance: none;
     padding-right: 3.125em;
@@ -401,13 +436,20 @@
     background-repeat: no-repeat;
     background-size: .56em .312em;
     -webkit-appearance: none; }
+    .wc-block-product-categories.is-dropdown select:hover {
+      --theme-input-box-shadow: var(--theme-input-hover-box-shadow); }
     .wc-block-product-categories.is-dropdown select:focus, .wc-block-product-categories.is-dropdown select:active {
-      outline: 0;
-      box-shadow: none;
-      border-color: var(--current-dark-primary); }
+      --theme-input-border-color: var(--theme-input-focus-border-color);
+      --theme-input-box-shadow: var(--theme-input-focus-box-shadow);
+      outline: 0; }
     .wc-block-product-categories.is-dropdown select[disabled] {
       border-color: var(--current-dark-secondary);
       background-color: var(--current-dark-secondary); }
+    [class*="invalid"] .wc-block-product-categories.is-dropdown select {
+      --theme-input-box-shadow: var(--theme-input-error-box-shadow);
+      --theme-input-color: var(--theme-input-error-color);
+      --theme-input-placeholder-color: var(--theme-input-error-color);
+      --theme-input-placeholder-opacity: 0; }
 
 .wc-block-product-categories__button {
   display: inline-block;
@@ -676,13 +718,21 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  padding: 0.8em 1.18em 0.93em;
-  border: 0.0625em solid var(--current-light-tertiary);
-  color: var(--current-dark-secondary);
-  border-radius: 0;
-  background-color: var(--current-light-tertiary);
-  font: inherit;
-  line-height: 1.5;
+  padding: var(--theme-input-padding);
+  color: var(--theme-input-color);
+  border-radius: var(--theme-input-border-radius);
+  background-color: var(--theme-input-background-color);
+  box-shadow: var(--theme-input-box-shadow);
+  border: 0;
+  transition: all .2s ease-in-out;
+  --font-size: var(--theme-field-font-size);
+  font-size: var(--final-font-size);
+  --current-font-family: var(--theme-field-font-family);
+  --current-font-weight: var(--theme-field-font-weight);
+  --current-line-height: var(--theme-field-line-height);
+  --current-letter-spacing: var(--theme-field-letter-spacing);
+  --current-text-transform: var(--theme-field-text-transform);
+  font-family: inherit;
   -webkit-font-smoothing: initial;
   -webkit-appearance: none;
   padding-right: 3.125em;
@@ -693,13 +743,20 @@
   background-size: .56em .312em;
   -webkit-appearance: none;
   width: auto; }
+  .wc-block-order-select__select[class][class]:hover {
+    --theme-input-box-shadow: var(--theme-input-hover-box-shadow); }
   .wc-block-order-select__select[class][class]:focus, .wc-block-order-select__select[class][class]:active {
-    outline: 0;
-    box-shadow: none;
-    border-color: var(--current-dark-primary); }
+    --theme-input-border-color: var(--theme-input-focus-border-color);
+    --theme-input-box-shadow: var(--theme-input-focus-box-shadow);
+    outline: 0; }
   .wc-block-order-select__select[class][class][disabled] {
     border-color: var(--current-dark-secondary);
     background-color: var(--current-dark-secondary); }
+  [class*="invalid"] .wc-block-order-select__select[class][class] {
+    --theme-input-box-shadow: var(--theme-input-error-box-shadow);
+    --theme-input-color: var(--theme-input-error-color);
+    --theme-input-placeholder-color: var(--theme-input-error-color);
+    --theme-input-placeholder-opacity: 0; }
   .wc-block-order-select__select[class][class][disabled] {
     border-color: var(--current-light-tertiary);
     background-color: var(--current-light-tertiary); }

@@ -10,12 +10,32 @@
     .select2-selection__placeholder {
         display: block;
     }
+}
 
-    .select2-selection__arrow {
-        top: 50%;
-        right: 1.18em;
-        transform: translate(50%, -50%);
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: normal;
+}
+
+.select2-container .select2-selection--single {
+    margin-bottom: 0;
+}
+
+.select2-container {
+
+    .select2-selection--single {
+        outline: 0;
     }
+    &--open,
+    &--focus,
+    &:focus,
+    &:active {
+        .select2-selection--single {
+            --theme-input-border-color: var(--theme-input-focus-border-color);
+            --theme-input-box-shadow: var(--theme-input-focus-box-shadow);
+            outline: 0;
+        }
+    }
+
 }
 
 .select2-dropdown,
@@ -24,14 +44,127 @@
 }
 
 .select2-dropdown {
-    background-color: var(--theme-input-background-color);
+    background-color: var(--current-light-primary);
 
     .select2-search__field {
         background-color: var(--current-light-primary);
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--theme-dark-primary);
+        z-index: -1;
+        opacity: .04;
     }
 }
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
     background-color: var(--current-color-primary);
-    color: var(--current-dark-primary);
+    color: var(--current-light-primary);
+}
+
+.select2-container--default .select2-results__option[data-selected=true]:not([aria-selected="true"]) {
+    background: transparent;
+    pointer-events: none;
+    opacity: .5;
+}
+
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    //background-image: url($arrow-down-svg-path);
+    //background-position: calc(100% - 17px) center;
+    //background-repeat: no-repeat;
+    //width: 100%;
+    //height: 100%;
+
+    mask: url($arrow-down-svg-path) no-repeat 50% 50%;
+    mask-size: cover;
+    -webkit-mask: url($arrow-down-svg-path) no-repeat 50% 50%;
+    -webkit-mask-size: contain;
+
+    background-color: var(--current-dark-primary);
+    width: .55em;
+    height: .55em;
+    right: var(--theme-input-padding);
+    top: 50%;
+    display: block;
+    transform: translateY(-50%);
+
+
+    b {
+        border: 0;
+    }
+}
+
+.select2-dropdown {
+    box-shadow: var(--theme-input-box-shadow);
+}
+
+.select2-search--dropdown {
+    padding: var(--theme-input-padding);
+}
+
+.select2-search__field[class],
+.select2-results__option {
+    padding: calc(var(--theme-input-padding)/2);
+    padding-left: var(--theme-input-padding);
+
+    &:focus,
+    &:active {
+        outline: 0;
+    }
+}
+
+.select2-selection__clear {
+    padding-right: calc(var(--theme-input-padding)*2);
+}
+
+// Multiple
+.select2-container {
+
+    &--focus {
+        .select2-selection--multiple[class][class] {
+            border: 0;
+            --theme-input-border-color: var(--theme-input-focus-border-color);
+            --theme-input-box-shadow: var(--theme-input-focus-box-shadow);
+            outline: 0;
+        }
+    }
+
+    .select2-selection--multiple {
+        border: 0;
+        border-radius: var(--theme-input-border-radius);
+        height: auto;
+        box-shadow: var(--theme-input-box-shadow);
+
+        .select2-selection__choice {
+            background-color: var(--current-color-primary);
+            color: var(--current-light-primary);
+            border: none;
+            border-radius: var(--theme-input-border-radius);
+            font-size: .75em;
+
+        }
+
+        .select2-selection__choice__remove {
+            color: var(--current-light-primary);
+            margin-right: var(--theme-spacing-tiny);
+        }
+
+        .select2-selection__rendered {
+            display: flex;
+            align-items: center;
+            padding: var(--theme-input-padding);
+
+            li {
+                margin-top: 0;
+            }
+        }
+    }
+
 }

@@ -1,3 +1,30 @@
+:root {
+  --theme-input-color: var(--current-dark-secondary);
+  --theme-input-placeholder-color: var(--curent-dark-primary);
+  --theme-input-placeholder-opacity: 0.5;
+  --theme-input-error-color: #C8164B;
+  --theme-input-border-color: rgba(33, 43, 73, 0.3);
+  --theme-input-focus-border-color: rgba(221, 171, 93, 0.5);
+  --theme-input-hover-border-color: rgba(33, 43, 73, 0.6);
+  --theme-input-error-border-color: rgba(221, 171, 93, 0.5);
+  --theme-input-border-width: 0.0625em;
+  --theme-input-border-radius: 0px;
+  --theme-input-background-color: var(--current-light-primary);
+  --theme-input-box-shadow:   0px 0px 0px 1px rgba(var(--opacity-color), 0.70),
+                        0px 0px 0px 1px var(--current-dark-primary);
+  --theme-input-focus-box-shadow: 0px 0px 0px 2px rgba(var(--opacity-color), 0.40),
+                            0px 0px 0px 2px var(--current-color-primary),
+                            0px 0px 27px 5px var(--current-light-primary),
+                            0px 0px 10px 0px var(--current-color-primary);
+  --theme-input-hover-box-shadow: 0px 0px 0px 1px rgba(var(--opacity-color), 0.30),
+                            0px 0px 0px 1px var(--current-dark-primary);
+  --theme-input-error-box-shadow: 0px 0px 0px 1px var(--theme-input-error-color);
+  --theme-input-padding: 0.35em;
+  --opacity-color: 255, 255, 255; }
+  @media only screen and (min-width: 768px) {
+    :root {
+      --theme-input-padding: 0.833em; } }
+
 ul.wp-block-archives-list[class] {
   list-style: none;
   padding-left: 0; }

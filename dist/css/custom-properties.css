@@ -1,4 +1,31 @@
 :root {
+  --theme-input-color: var(--current-dark-secondary);
+  --theme-input-placeholder-color: var(--curent-dark-primary);
+  --theme-input-placeholder-opacity: 0.5;
+  --theme-input-error-color: #C8164B;
+  --theme-input-border-color: rgba(33, 43, 73, 0.3);
+  --theme-input-focus-border-color: rgba(221, 171, 93, 0.5);
+  --theme-input-hover-border-color: rgba(33, 43, 73, 0.6);
+  --theme-input-error-border-color: rgba(221, 171, 93, 0.5);
+  --theme-input-border-width: 0.0625em;
+  --theme-input-border-radius: 0px;
+  --theme-input-background-color: var(--current-light-primary);
+  --theme-input-box-shadow:   0px 0px 0px 1px rgba(var(--opacity-color), 0.70),
+                        0px 0px 0px 1px var(--current-dark-primary);
+  --theme-input-focus-box-shadow: 0px 0px 0px 2px rgba(var(--opacity-color), 0.40),
+                            0px 0px 0px 2px var(--current-color-primary),
+                            0px 0px 27px 5px var(--current-light-primary),
+                            0px 0px 10px 0px var(--current-color-primary);
+  --theme-input-hover-box-shadow: 0px 0px 0px 1px rgba(var(--opacity-color), 0.30),
+                            0px 0px 0px 1px var(--current-dark-primary);
+  --theme-input-error-box-shadow: 0px 0px 0px 1px var(--theme-input-error-color);
+  --theme-input-padding: 0.35em;
+  --opacity-color: 255, 255, 255; }
+  @media only screen and (min-width: 768px) {
+    :root {
+      --theme-input-padding: 0.833em; } }
+
+:root {
   --sm-color-primary: var(--wp--color--color-primary, #DDAB5D);
   --theme-color-primary: var(--sm-color-primary);
   --current-color-primary: var(--theme-color-primary);
@@ -101,10 +128,10 @@
   --theme-button-line-height: 1.2;
   --theme-button-letter-spacing: 0.03em;
   --theme-button-text-transform: none;
-  --theme-field-font-family: Reforma2018, sans-serif;
-  --theme-field-font-size: 17;
+  --theme-field-font-family: Reforma1969, sans-serif;
+  --theme-field-font-size: 16;
   --theme-field-font-weight: 500;
-  --theme-field-line-height: 1.2;
+  --theme-field-line-height: 1.3;
   --theme-field-letter-spacing: 0.03em;
   --theme-field-text-transform: capitalize;
   --theme-accent-font-family: Billy Ohio, sans-serif;
@@ -159,6 +186,8 @@
   --theme-spacing-fluid-tiny:    calc( var( --theme-spacing-fluid ) * 0.5 );
   --theme-spacing-default:          calc( var( --theme-spacing ) * 1 );
   --theme-spacing-fluid-default:    calc( var( --theme-spacing-fluid ) * 1 );
+  --theme-spacing-xsmall:          calc( var( --theme-spacing ) * 1.5 );
+  --theme-spacing-fluid-xsmall:    calc( var( --theme-spacing-fluid ) * 1.5 );
   --theme-spacing-small:          calc( var( --theme-spacing ) * 2 );
   --theme-spacing-fluid-small:    calc( var( --theme-spacing-fluid ) * 2 );
   --theme-spacing-medium:          calc( var( --theme-spacing ) * 3 );
