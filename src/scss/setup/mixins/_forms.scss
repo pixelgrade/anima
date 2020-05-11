@@ -1,97 +1,3 @@
-// Forms General Options
-
-$color-error: #C8164B;
-
-// @todo more semantic for these variables
-$color-dark: var(--current-dark-secondary) !default;
-$color-white: var(--current-light-primary) !default;
-
-$input-color: var(--current-dark-secondary) !default;
-$input-disabled-color: var(--current-dark-secondary) !default;
-$input-placeholder-color: var(--curent-dark-primary) !default;
-$input-placeholder-opacity: .5 !default;
-
-// Border
-$input-border-color: rgba(map_get($theme_colors, dark-primary), 0.3);
-$input-focus-border-color: rgba(map_get($theme_colors, color-primary), 0.5);
-$input-hover-border-color: rgba(map_get($theme_colors, dark-primary), 0.6);
-$input-error-border-color: rgba(map_get($theme_colors, color-primary), 0.5);
-$input-disabled-border-color: var(--current-dark-secondary) !default;
-
-$input-border-width: .0625em !default;
-
-$input-border-radius: 0px !default;
-
-
-// Background Color
-$input-background-color: var(--current-light-primary) !default;
-$input-disabled-background-color: var(--current-dark-secondary) !default;
-
-// Box Shadow
-$input-box-shadow-color: rgba(map_get($theme_colors, dark-primary), 0.3) !default;
-$input-focus-box-shadow-color: rgba(map_get($theme_colors, color-primary), 0.5);
-
-// Box
-$input-padding: .833em !default;
-$input-padding-mobiles: .35em !default;
-
-
-$placeholder-color: var(--current-dark-secondary) !default;
-
-$label-color: var(--current-dark-secondary) !default;
-
-$legend-color: var(--current-dark-secondary) !default;
-
-$button-color: var(--current-light-primary) !default;
-$button-background-color: var(--current-dark-secondary) !default;
-
-$checkbox-color: var(--current-color-primary) !default;
-$checkbox-background-color: var(--current-color-primary) !default;
-$checkbox-width: 1.25rem !default;
-$checkbox-height: 1.25rem !default;
-$background-image-checkbox: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="301 20 13 9" enable-background="new 0 0 13 9" xml:space="preserve" width="13px" height="9px"><g><polygon points="313 20 314 21 306 29 301 24 302 23 306 27" x="0" y="0" style="fill:rgb(0,0,0);stroke-width:0"></polygon></g></svg>';
-
-// Spacing
-$input-vertical-spacing: var(--theme-spacing-tiny) !default;
-$input-horizontal-spacing: var(--theme-spacing-tiny) !default; // Checkboxes and Radios
-
-
-:root {
-  --theme-input-color: #{$input-color};
-  --theme-input-placeholder-color: #{$input-placeholder-color};
-  --theme-input-placeholder-opacity: #{$input-placeholder-opacity};
-  --theme-input-error-color: #{$color-error};
-  --theme-input-border-color: #{$input-border-color};
-  --theme-input-focus-border-color: #{$input-focus-border-color};
-  --theme-input-hover-border-color: #{$input-hover-border-color};
-  --theme-input-error-border-color: #{$input-error-border-color};
-
-  --theme-input-border-width: #{$input-border-width};
-  --theme-input-border-radius: #{$input-border-radius};
-  --theme-input-background-color: var(--current-light-primary);
-
-  --theme-input-box-shadow:   0px 0px 0px 1px rgba(var(--opacity-color), 0.70),
-                        0px 0px 0px 1px var(--current-dark-primary);
-
-  --theme-input-focus-box-shadow: 0px 0px 0px 2px rgba(var(--opacity-color), 0.40),
-                            0px 0px 0px 2px var(--current-color-primary),
-                            0px 0px 27px 5px var(--current-light-primary),
-                            0px 0px 10px 0px var(--current-color-primary);
-
-  --theme-input-hover-box-shadow: 0px 0px 0px 1px rgba(var(--opacity-color), 0.30),
-                            0px 0px 0px 1px var(--current-dark-primary);
-
-  --theme-input-error-box-shadow: 0px 0px 0px 1px var(--theme-input-error-color);
-
-  --theme-input-padding: #{$input-padding-mobiles};
-
-  @include above(tablet) {
-    --theme-input-padding: #{$input-padding};
-  }
-
-  --opacity-color: 255, 255, 255;
-}
-
 @mixin field {
   width: 100%;
   height: auto;
@@ -107,7 +13,7 @@ $input-horizontal-spacing: var(--theme-spacing-tiny) !default; // Checkboxes and
 
   transition: all .2s ease-in-out;
 
-  @include apply-font(field);
+  @include apply-font(input);
   font-family: inherit;
   -webkit-font-smoothing: initial;
   -webkit-appearance: none;
@@ -166,7 +72,7 @@ $input-horizontal-spacing: var(--theme-spacing-tiny) !default; // Checkboxes and
   color: $label-color;
   display: flex;
   align-items: center;
-  @include apply-font(field);
+  @include apply-font(input);
   --current-font-weight: bold;
   margin: 0;
 
@@ -197,7 +103,7 @@ $input-horizontal-spacing: var(--theme-spacing-tiny) !default; // Checkboxes and
   margin-right: $input-horizontal-spacing;
   //margin-bottom: $input-vertical-spacing;
 
-  background-color: $color-white;
+  background-color: var(--current-light-primary);
   cursor: pointer;
 
   -webkit-appearance: none;

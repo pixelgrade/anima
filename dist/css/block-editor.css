@@ -1,30 +1,6 @@
-:root {
-  --theme-input-color: var(--current-dark-secondary);
-  --theme-input-placeholder-color: var(--curent-dark-primary);
-  --theme-input-placeholder-opacity: 0.5;
-  --theme-input-error-color: #C8164B;
-  --theme-input-border-color: rgba(33, 43, 73, 0.3);
-  --theme-input-focus-border-color: rgba(221, 171, 93, 0.5);
-  --theme-input-hover-border-color: rgba(33, 43, 73, 0.6);
-  --theme-input-error-border-color: rgba(221, 171, 93, 0.5);
-  --theme-input-border-width: 0.0625em;
-  --theme-input-border-radius: 0px;
-  --theme-input-background-color: var(--current-light-primary);
-  --theme-input-box-shadow:   0px 0px 0px 1px rgba(var(--opacity-color), 0.70),
-                        0px 0px 0px 1px var(--current-dark-primary);
-  --theme-input-focus-box-shadow: 0px 0px 0px 2px rgba(var(--opacity-color), 0.40),
-                            0px 0px 0px 2px var(--current-color-primary),
-                            0px 0px 27px 5px var(--current-light-primary),
-                            0px 0px 10px 0px var(--current-color-primary);
-  --theme-input-hover-box-shadow: 0px 0px 0px 1px rgba(var(--opacity-color), 0.30),
-                            0px 0px 0px 1px var(--current-dark-primary);
-  --theme-input-error-box-shadow: 0px 0px 0px 1px var(--theme-input-error-color);
-  --theme-input-padding: 0.35em;
-  --opacity-color: 255, 255, 255; }
-  @media only screen and (min-width: 768px) {
-    :root {
-      --theme-input-padding: 0.833em; } }
-
+/*
+ * INPUTS
+ */
 /* Layout */
 .wp-block:not([data-align="wide"]):not([data-align="full"]) {
   max-width: var(--theme-content-width-normal); }
@@ -43,34 +19,11 @@ html {
 .editor-styles-wrapper {
   -webkit-font-smoothing: antialiased;
   --element-spacing: var(--theme-spacing-small);
+  /*
+ * INPUTS
+ */
   /* Links */
   /* Media */ }
-  .editor-styles-wrapper :root {
-    --theme-input-color: var(--current-dark-secondary);
-    --theme-input-placeholder-color: var(--curent-dark-primary);
-    --theme-input-placeholder-opacity: 0.5;
-    --theme-input-error-color: #C8164B;
-    --theme-input-border-color: rgba(33, 43, 73, 0.3);
-    --theme-input-focus-border-color: rgba(221, 171, 93, 0.5);
-    --theme-input-hover-border-color: rgba(33, 43, 73, 0.6);
-    --theme-input-error-border-color: rgba(221, 171, 93, 0.5);
-    --theme-input-border-width: 0.0625em;
-    --theme-input-border-radius: 0px;
-    --theme-input-background-color: var(--current-light-primary);
-    --theme-input-box-shadow:   0px 0px 0px 1px rgba(var(--opacity-color), 0.70),
-                        0px 0px 0px 1px var(--current-dark-primary);
-    --theme-input-focus-box-shadow: 0px 0px 0px 2px rgba(var(--opacity-color), 0.40),
-                            0px 0px 0px 2px var(--current-color-primary),
-                            0px 0px 27px 5px var(--current-light-primary),
-                            0px 0px 10px 0px var(--current-color-primary);
-    --theme-input-hover-box-shadow: 0px 0px 0px 1px rgba(var(--opacity-color), 0.30),
-                            0px 0px 0px 1px var(--current-dark-primary);
-    --theme-input-error-box-shadow: 0px 0px 0px 1px var(--theme-input-error-color);
-    --theme-input-padding: 0.35em;
-    --opacity-color: 255, 255, 255; }
-    @media only screen and (min-width: 768px) {
-      .editor-styles-wrapper :root {
-        --theme-input-padding: 0.833em; } }
   .editor-styles-wrapper ul.wp-block-archives-list[class] {
     list-style: none;
     padding-left: 0; }
@@ -386,13 +339,13 @@ html {
     -webkit-filter: invert(1) saturate(0);
     mix-blend-mode: lighten; }
   .editor-styles-wrapper .ot-dtp-picker-form {
-    --font-size: var(--theme-field-font-size);
+    --font-size: var(--theme-input-font-size);
     font-size: var(--final-font-size);
-    --current-font-family: var(--theme-field-font-family);
-    --current-font-weight: var(--theme-field-font-weight);
-    --current-line-height: var(--theme-field-line-height);
-    --current-letter-spacing: var(--theme-field-letter-spacing);
-    --current-text-transform: var(--theme-field-text-transform); }
+    --current-font-family: var(--theme-input-font-family);
+    --current-font-weight: var(--theme-input-font-weight);
+    --current-line-height: var(--theme-input-line-height);
+    --current-letter-spacing: var(--theme-input-letter-spacing);
+    --current-text-transform: var(--theme-input-text-transform); }
   .editor-styles-wrapper .ot-dtp-picker .ot-dtp-picker-selector[class] {
     height: auto; }
     .editor-styles-wrapper .ot-dtp-picker .ot-dtp-picker-selector[class] .ot-dtp-picker-selector-link {
