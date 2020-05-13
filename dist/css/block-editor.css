@@ -59,7 +59,8 @@ html {
       --current-font-family: var(--theme-body-font-family);
       --current-line-height: var(--theme-body-line-height);
       --current-font-weight: var(--theme-body-font-weight);
-      --current-letter-spacing: var(--theme-body-letter-spacing); }
+      --current-letter-spacing: var(--theme-body-letter-spacing);
+      --current-text-transform: var(--theme-body-text-transform); }
     .editor-styles-wrapper .editor-block-list__block[data-align="full"] .wp-block-image figcaption,
     .editor-styles-wrapper .block-editor-block-list__block[data-align="full"] .wp-block-image figcaption {
       padding-left: var(--theme-wrapper-sides-spacing);
@@ -85,6 +86,7 @@ html {
       --current-font-weight: var(--theme-heading-4-font-weight);
       --current-line-height: var(--theme-heading-4-line-height);
       --current-letter-spacing: var(--theme-heading-4-letter-spacing);
+      --current-text-transform: var(--theme-heading-4-text-transform);
       padding-right: var(--theme-spacing-tiny); }
     .editor-styles-wrapper .nova-food-menu-item__title:before {
       bottom: 0.5em; }
@@ -97,7 +99,8 @@ html {
     --current-font-family: var(--theme-heading-2-font-family);
     --current-font-weight: var(--theme-heading-2-font-weight);
     --current-line-height: var(--theme-heading-2-line-height);
-    --current-letter-spacing: var(--theme-heading-2-letter-spacing); }
+    --current-letter-spacing: var(--theme-heading-2-letter-spacing);
+    --current-text-transform: var(--theme-heading-2-text-transform); }
   .editor-styles-wrapper .nova-food-menu-item__title {
     font-size: var(--theme-heading-4-font-size); }
     .editor-styles-wrapper .nova-food-menu-item__title:before {
@@ -163,7 +166,8 @@ html {
     --current-font-family: var(--theme-body-font-family);
     --current-line-height: var(--theme-body-line-height);
     --current-font-weight: var(--theme-body-font-weight);
-    --current-letter-spacing: var(--theme-body-letter-spacing); }
+    --current-letter-spacing: var(--theme-body-letter-spacing);
+    --current-text-transform: var(--theme-body-text-transform); }
     .editor-styles-wrapper .novablocks-media__content[class] {
       flex-basis: calc(50% - var(--novablocks-media-spacing)); }
   .editor-styles-wrapper .novablocks-media__aside[class] {
@@ -349,6 +353,7 @@ html {
     --current-font-family: var(--theme-content-font-family);
     --current-line-height: var(--theme-content-line-height);
     --current-letter-spacing: var(--theme-content-letter-spacing);
+    --current-text-transform: var(--theme-content-text-transform);
     background-color: var(--current-light-primary);
     color: var(--current-dark-secondary); }
     .editor-styles-wrapper[class] h1, .editor-styles-wrapper[class] h2, .editor-styles-wrapper[class] h3, .editor-styles-wrapper[class] h4, .editor-styles-wrapper[class] h5, .editor-styles-wrapper[class] h6 {
@@ -359,42 +364,50 @@ html {
       --current-font-family: var(--theme-heading-1-font-family);
       --current-line-height: var(--theme-heading-1-line-height);
       --current-font-weight: var(--theme-heading-1-font-weight);
-      --current-letter-spacing: var(--theme-heading-1-letter-spacing); }
+      --current-letter-spacing: var(--theme-heading-1-letter-spacing);
+      --current-text-transform: var(--theme-heading-1-text-transform);
+      --current-font-feature: "liga", "dlig", "onum"; }
     .editor-styles-wrapper[class] h2, .editor-styles-wrapper[class] .h2 {
       --font-size: var(--theme-heading-2-font-size);
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-heading-2-font-family);
       --current-font-weight: var(--theme-heading-2-font-weight);
       --current-line-height: var(--theme-heading-2-line-height);
-      --current-letter-spacing: var(--theme-heading-2-letter-spacing); }
+      --current-letter-spacing: var(--theme-heading-2-letter-spacing);
+      --current-text-transform: var(--theme-heading-2-text-transform);
+      --current-font-feature: "liga", "dlig", "onum"; }
     .editor-styles-wrapper[class] h3, .editor-styles-wrapper[class] .h3 {
       --font-size: var(--theme-heading-3-font-size);
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-heading-3-font-family);
       --current-font-weight: var(--theme-heading-3-font-weight);
       --current-line-height: var(--theme-heading-3-line-height);
-      --current-letter-spacing: var(--theme-heading-3-letter-spacing); }
+      --current-letter-spacing: var(--theme-heading-3-letter-spacing);
+      --current-text-transform: var(--theme-heading-3-text-transform); }
     .editor-styles-wrapper[class] h4, .editor-styles-wrapper[class] .h4 {
       --font-size: var(--theme-heading-4-font-size);
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-heading-4-font-family);
       --current-font-weight: var(--theme-heading-4-font-weight);
       --current-line-height: var(--theme-heading-4-line-height);
-      --current-letter-spacing: var(--theme-heading-4-letter-spacing); }
+      --current-letter-spacing: var(--theme-heading-4-letter-spacing);
+      --current-text-transform: var(--theme-heading-4-text-transform); }
     .editor-styles-wrapper[class] h5, .editor-styles-wrapper[class] .h5 {
       --font-size: var(--theme-heading-5-font-size);
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-heading-5-font-family);
       --current-font-weight: var(--theme-heading-5-font-weight);
       --current-line-height: var(--theme-heading-5-line-height);
-      --current-letter-spacing: var(--theme-heading-5-letter-spacing); }
+      --current-letter-spacing: var(--theme-heading-5-letter-spacing);
+      --current-text-transform: var(--theme-heading-5-text-transform); }
     .editor-styles-wrapper[class] h6, .editor-styles-wrapper[class] .h6 {
       --font-size: var(--theme-heading-6-font-size);
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-heading-6-font-family);
       --current-font-weight: var(--theme-heading-6-font-weight);
       --current-line-height: var(--theme-heading-6-line-height);
-      --current-letter-spacing: var(--theme-heading-6-letter-spacing); }
+      --current-letter-spacing: var(--theme-heading-6-letter-spacing);
+      --current-text-transform: var(--theme-heading-6-text-transform); }
     .editor-styles-wrapper[class] iframe {
       width: 100%;
       max-width: 100%;
@@ -461,14 +474,16 @@ html {
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-lead-font-family);
       --current-line-height: var(--theme-lead-line-height);
-      --current-letter-spacing: var(--theme-lead-letter-spacing); }
+      --current-letter-spacing: var(--theme-lead-letter-spacing);
+      --current-text-transform: var(--theme-lead-text-transform); }
     .editor-styles-wrapper[class] .is-style-meta {
       --font-size: var(--theme-meta-font-size);
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-meta-font-family);
       --current-font-weight: var(--theme-meta-font-weight);
       --current-line-height: var(--theme-meta-line-height);
-      --current-letter-spacing: var(--theme-meta-letter-spacing); }
+      --current-letter-spacing: var(--theme-meta-letter-spacing);
+      --current-text-transform: var(--theme-meta-text-transform); }
     .editor-styles-wrapper[class] p {
       font: inherit; }
   .editor-styles-wrapper a {
