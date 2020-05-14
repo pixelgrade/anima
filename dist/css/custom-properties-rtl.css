@@ -45,59 +45,71 @@
   --theme-body-line-height: 1.7;
   --theme-body-font-weight: 400;
   --theme-body-letter-spacing: -0.03em;
+  --theme-body-text-transform: none;
   --theme-content-font-family: Reforma1969, sans-serif;
   --theme-content-font-size: 18;
   --theme-content-line-height: 1.6;
   --theme-content-letter-spacing: -0.03em;
+  --theme-content-text-transform: none;
   --theme-lead-font-family: Reforma1969, sans-serif;
   --theme-lead-font-size: 24;
   --theme-lead-line-height: 1.6;
   --theme-lead-letter-spacing: -0.02em;
+  --theme-lead-text-transform: none;
   --theme-display-font-family: Reforma1969, sans-serif;
   --theme-display-font-size: 115;
   --theme-display-line-height: 1.03;
   --theme-display-font-weight: 700;
   --theme-display-letter-spacing: -0.03em;
+  --theme-display-text-transform: none;
   --theme-heading-1-font-family: Reforma1969, sans-serif;
   --theme-heading-1-font-size: 66;
   --theme-heading-1-line-height: 1.1;
   --theme-heading-1-font-weight: 700;
   --theme-heading-1-letter-spacing: -0.03em;
+  --theme-heading-1-text-transform: none;
   --theme-heading-2-font-family: Reforma1969, sans-serif;
   --theme-heading-2-font-size: 40;
   --theme-heading-2-font-weight: 700;
   --theme-heading-2-line-height: 1.2;
   --theme-heading-2-letter-spacing: -0.02em;
+  --theme-heading-2-text-transform: none;
   --theme-heading-3-font-family: Reforma1969, sans-serif;
   --theme-heading-3-font-size: 32;
   --theme-heading-3-font-weight: 700;
   --theme-heading-3-line-height: 1.2;
   --theme-heading-3-letter-spacing: -0.02em;
+  --theme-heading-3-text-transform: none;
   --theme-heading-4-font-family: Reforma1969, sans-serif;
   --theme-heading-4-font-size: 24;
   --theme-heading-4-font-weight: 700;
   --theme-heading-4-line-height: 1.2;
   --theme-heading-4-letter-spacing: -0.02em;
+  --theme-heading-4-text-transform: none;
   --theme-heading-5-font-family: Reforma2018, sans-serif;
   --theme-heading-5-font-size: 17;
   --theme-heading-5-font-weight: 500;
   --theme-heading-5-line-height: 1.5;
   --theme-heading-5-letter-spacing: 0.017em;
+  --theme-heading-5-text-transform: none;
   --theme-heading-6-font-family: Reforma2018, sans-serif;
   --theme-heading-6-font-size: 17;
   --theme-heading-6-font-weight: 500;
   --theme-heading-6-line-height: 1.5;
   --theme-heading-6-letter-spacing: 0.017em;
+  --theme-heading-6-text-transform: none;
   --theme-navigation-font-family: Reforma2018, sans-serif;
   --theme-navigation-font-size: 17;
   --theme-navigation-font-weight: 500;
   --theme-navigation-line-height: 1.5;
   --theme-navigation-letter-spacing: 0.017em;
+  --theme-navigation-text-transform: none;
   --theme-meta-font-family: Reforma2018, sans-serif;
   --theme-meta-font-size: 17;
   --theme-meta-font-weight: 500;
   --theme-meta-line-height: 1.5;
   --theme-meta-letter-spacing: 0.017em;
+  --theme-meta-text-transform: none;
   --theme-button-font-family: Reforma2018, sans-serif;
   --theme-button-font-size: 17;
   --theme-button-font-weight: 500;
@@ -112,8 +124,9 @@
   --theme-input-text-transform: capitalize;
   --theme-accent-font-family: Billy Ohio, sans-serif;
   --theme-accent-font-weight: 400;
+  --theme-accent-letter-spacing: normal;
   --theme-accent-text-transform: none;
-  --theme-accent-letter-spacing: normal; }
+  --current-font-feature: none; }
   @media only screen and (min-width: 1440px) {
     :root {
       --theme-font-size-slope-adjust: 0.4;
@@ -135,7 +148,8 @@
   font-family: var(--current-font-family);
   line-height: var(--current-line-height);
   letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform); }
+  text-transform: var(--current-text-transform);
+  font-feature-settings: var(--current-font-feature); }
 
 :root {
   --theme-content-width-normal-initial: 38;

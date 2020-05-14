@@ -349,7 +349,8 @@ html {
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
-  --current-letter-spacing: var(--theme-body-letter-spacing); }
+  --current-letter-spacing: var(--theme-body-letter-spacing);
+  --current-text-transform: var(--theme-body-text-transform); }
 
 body {
   background-color: var(--current-light-primary);
@@ -749,7 +750,9 @@ h1, .h1 {
   --current-font-family: var(--theme-heading-1-font-family);
   --current-line-height: var(--theme-heading-1-line-height);
   --current-font-weight: var(--theme-heading-1-font-weight);
-  --current-letter-spacing: var(--theme-heading-1-letter-spacing); }
+  --current-letter-spacing: var(--theme-heading-1-letter-spacing);
+  --current-text-transform: var(--theme-heading-1-text-transform);
+  --current-font-feature: "liga", "dlig", "onum"; }
 
 h2, .h2 {
   --font-size: var(--theme-heading-2-font-size);
@@ -757,7 +760,9 @@ h2, .h2 {
   --current-font-family: var(--theme-heading-2-font-family);
   --current-font-weight: var(--theme-heading-2-font-weight);
   --current-line-height: var(--theme-heading-2-line-height);
-  --current-letter-spacing: var(--theme-heading-2-letter-spacing); }
+  --current-letter-spacing: var(--theme-heading-2-letter-spacing);
+  --current-text-transform: var(--theme-heading-2-text-transform);
+  --current-font-feature: "liga", "dlig", "onum"; }
 
 h3, .h3 {
   --font-size: var(--theme-heading-3-font-size);
@@ -765,7 +770,8 @@ h3, .h3 {
   --current-font-family: var(--theme-heading-3-font-family);
   --current-font-weight: var(--theme-heading-3-font-weight);
   --current-line-height: var(--theme-heading-3-line-height);
-  --current-letter-spacing: var(--theme-heading-3-letter-spacing); }
+  --current-letter-spacing: var(--theme-heading-3-letter-spacing);
+  --current-text-transform: var(--theme-heading-3-text-transform); }
 
 h4, .h4 {
   --font-size: var(--theme-heading-4-font-size);
@@ -773,7 +779,8 @@ h4, .h4 {
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-line-height: var(--theme-heading-4-line-height);
-  --current-letter-spacing: var(--theme-heading-4-letter-spacing); }
+  --current-letter-spacing: var(--theme-heading-4-letter-spacing);
+  --current-text-transform: var(--theme-heading-4-text-transform); }
 
 h5, .h5 {
   --font-size: var(--theme-heading-5-font-size);
@@ -781,7 +788,8 @@ h5, .h5 {
   --current-font-family: var(--theme-heading-5-font-family);
   --current-font-weight: var(--theme-heading-5-font-weight);
   --current-line-height: var(--theme-heading-5-line-height);
-  --current-letter-spacing: var(--theme-heading-5-letter-spacing); }
+  --current-letter-spacing: var(--theme-heading-5-letter-spacing);
+  --current-text-transform: var(--theme-heading-5-text-transform); }
 
 h6, .h6 {
   --font-size: var(--theme-heading-6-font-size);
@@ -789,7 +797,8 @@ h6, .h6 {
   --current-font-family: var(--theme-heading-6-font-family);
   --current-font-weight: var(--theme-heading-6-font-weight);
   --current-line-height: var(--theme-heading-6-line-height);
-  --current-letter-spacing: var(--theme-heading-6-letter-spacing); }
+  --current-letter-spacing: var(--theme-heading-6-letter-spacing);
+  --current-text-transform: var(--theme-heading-6-text-transform); }
 
 /* Iframes */
 iframe {
@@ -901,7 +910,8 @@ table {
   font-size: var(--final-font-size);
   --current-font-family: var(--theme-lead-font-family);
   --current-line-height: var(--theme-lead-line-height);
-  --current-letter-spacing: var(--theme-lead-letter-spacing); }
+  --current-letter-spacing: var(--theme-lead-letter-spacing);
+  --current-text-transform: var(--theme-lead-text-transform); }
 
 .is-style-meta {
   --font-size: var(--theme-meta-font-size);
@@ -909,7 +919,8 @@ table {
   --current-font-family: var(--theme-meta-font-family);
   --current-font-weight: var(--theme-meta-font-weight);
   --current-line-height: var(--theme-meta-line-height);
-  --current-letter-spacing: var(--theme-meta-letter-spacing); }
+  --current-letter-spacing: var(--theme-meta-letter-spacing);
+  --current-text-transform: var(--theme-meta-text-transform); }
 
 /* 2. Components */
 .promo-bar {
@@ -1512,6 +1523,7 @@ ul.menu a,
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-line-height: var(--theme-heading-4-line-height);
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
+  --current-text-transform: var(--theme-heading-4-text-transform);
   --final-font-size: calc( var(--theme-header-logo-height) * 1.8 );
   line-height: 1; }
 
@@ -1593,7 +1605,8 @@ ul.menu a,
   font-size: var(--final-font-size);
   --current-font-family: var(--theme-content-font-family);
   --current-line-height: var(--theme-content-line-height);
-  --current-letter-spacing: var(--theme-content-letter-spacing); }
+  --current-letter-spacing: var(--theme-content-letter-spacing);
+  --current-text-transform: var(--theme-content-text-transform); }
 
 .entry-content {
   overflow-wrap: break-word; }
@@ -1681,7 +1694,8 @@ ul.menu a,
   --current-font-family: var(--theme-meta-font-family);
   --current-font-weight: var(--theme-meta-font-weight);
   --current-line-height: var(--theme-meta-line-height);
-  --current-letter-spacing: var(--theme-meta-letter-spacing); }
+  --current-letter-spacing: var(--theme-meta-letter-spacing);
+  --current-text-transform: var(--theme-meta-text-transform); }
   .entry-meta > :not(:last-child):after {
     content: "\b7";
     padding: 0 var(--theme-spacing-tiny); }
@@ -1995,6 +2009,7 @@ label.subscribe-label.subscribe-label {
   --current-font-weight: var(--theme-heading-6-font-weight);
   --current-line-height: var(--theme-heading-6-line-height);
   --current-letter-spacing: var(--theme-heading-6-letter-spacing);
+  --current-text-transform: var(--theme-heading-6-text-transform);
   opacity: .6; }
 
 .comment__metadata {
@@ -2181,7 +2196,8 @@ span.page-numbers {
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-line-height: var(--theme-heading-4-line-height);
-  --current-letter-spacing: var(--theme-heading-4-letter-spacing); }
+  --current-letter-spacing: var(--theme-heading-4-letter-spacing);
+  --current-text-transform: var(--theme-heading-4-text-transform); }
 
 .post-navigation__post-title,
 .post-navigation__link-label {
@@ -2754,7 +2770,8 @@ iframe.instagram-media {
   font-size: var(--final-font-size);
   --current-font-family: var(--theme-lead-font-family);
   --current-line-height: var(--theme-lead-line-height);
-  --current-letter-spacing: var(--theme-lead-letter-spacing); }
+  --current-letter-spacing: var(--theme-lead-letter-spacing);
+  --current-text-transform: var(--theme-lead-text-transform); }
 
 img:not(.is-loaded) {
   opacity: 0; }
