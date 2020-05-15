@@ -399,6 +399,21 @@
   --theme-button-hover-text-color: var(--theme-button-background-color);
   --theme-button-text-color: var(--current-light-tertiary); }
 
+.button--small {
+  --theme-button-x-padding: 1em;
+  --theme-button-y-padding: .5em;
+  padding: var(--theme-button-y-padding) var(--theme-button-x-padding); }
+
+.button--large {
+  --theme-button-x-padding: 2em;
+  --theme-button-y-padding: .6em;
+  padding: var(--theme-button-y-padding) var(--theme-button-x-padding); }
+
+.button--huge {
+  --theme-button-x-padding: 2.5em;
+  --theme-button-y-padding: 1em;
+  padding: var(--theme-button-y-padding) var(--theme-button-x-padding); }
+
 :root {
   --theme-headline-spacing-setting: -0.3;
   --theme-headline-spacing: calc(var(--theme-headline-spacing-setting) * 1em); }
@@ -432,8 +447,8 @@
 .c-headline__secondary {
   --current-font-family: var(--theme-accent-font-family);
   --current-font-weight: var(--theme-accent-font-weight);
-  --current-text-transform: var(--theme-accent-text-transform);
   --current-letter-spacing: var(--theme-accent-letter-spacing);
+  --current-text-transform: var(--theme-accent-text-transform);
   color: var(--current-color-primary); }
 
 .c-headline__secondary {

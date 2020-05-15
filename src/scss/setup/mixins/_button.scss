@@ -205,6 +205,24 @@
   }
 }
 
+@mixin button-small {
+  --theme-button-x-padding: 1em;
+  --theme-button-y-padding: .5em;
+  padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
+}
+
+@mixin button-large {
+  --theme-button-x-padding: 2em;
+  --theme-button-y-padding: .6em;
+  padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
+}
+
+@mixin button-huge {
+  --theme-button-x-padding: 2.5em;
+  --theme-button-y-padding: 1em;
+  padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
+}
+
 @mixin button {
   @include button-base;
   @include button-box;

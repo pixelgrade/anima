@@ -51,6 +51,7 @@ function rosa2_add_customify_connected_fields( $options ) {
 						'content_font',
 						'lead_font',
 						'cite_font',
+						'input_font'
 					),
 				),
 				'sm_font_accent'     => array(

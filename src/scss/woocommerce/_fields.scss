@@ -3,10 +3,6 @@
 // @todo find a more reliable selector
 #html #body #page {
 
-    .input-text:not(.qty) {
-        @include input;
-    }
-
     .button,
     input[type="submit"]:not(.ot-button) {
         @include button;
@@ -38,5 +34,28 @@
         &.alt {
             @include button-fill(false);
         }
+    }
+
+    .checkout-button {
+        @include button-huge;
+        --theme-button-background-color: var(--current-color-primary);
+        --theme-button-border-color: var(--current-color-primary);
+        --theme-button-hover-text-color: var(--current-color-primary);
+        --theme-button-hover-border-color: var(--current-color-primary);
+    }
+
+    .actions {
+        .button {
+            padding: var(--theme-input-padding);
+        }
+    }
+
+    #place_order {
+        --theme-button-background-color: var(--current-color-primary);
+        --theme-button-border-color: var(--current-color-primary);
+        --theme-button-hover-text-color: var(--current-color-primary);
+        --theme-button-hover-border-color: var(--current-color-primary);
+
+        @include button-huge;
     }
 }

@@ -161,6 +161,7 @@
     --current-font-weight: var(--theme-heading-4-font-weight);
     --current-line-height: var(--theme-heading-4-line-height);
     --current-letter-spacing: var(--theme-heading-4-letter-spacing);
+    --current-text-transform: var(--theme-heading-4-text-transform);
     padding-right: var(--theme-spacing-tiny); }
   .nova-food-menu-item__title:before {
     bottom: 0.5em; }
@@ -175,7 +176,8 @@
   --current-font-family: var(--theme-heading-2-font-family);
   --current-font-weight: var(--theme-heading-2-font-weight);
   --current-line-height: var(--theme-heading-2-line-height);
-  --current-letter-spacing: var(--theme-heading-2-letter-spacing); }
+  --current-letter-spacing: var(--theme-heading-2-letter-spacing);
+  --current-text-transform: var(--theme-heading-2-text-transform); }
 
 .nova-food-menu-item__title {
   font-size: var(--theme-heading-4-font-size); }
@@ -238,7 +240,8 @@
   --current-font-weight: var(--theme-body-font-weight);
   --current-letter-spacing: var(--theme-body-letter-spacing); }
   .novablocks-media__content[class] {
-    flex-basis: calc(50% - var(--novablocks-media-spacing)); }
+    flex-basis: calc(50% - var(--novablocks-media-spacing));
+    min-width: 0; }
 
 .novablocks-media__aside[class] {
   flex-basis: calc(50% + var(--novablocks-media-spacing) - 0.5px); }
@@ -303,7 +306,8 @@
   --current-font-family: var(--theme-navigation-font-family);
   --current-font-weight: var(--theme-navigation-font-weight);
   --current-line-height: var(--theme-navigation-line-height);
-  --current-letter-spacing: var(--theme-navigation-letter-spacing); }
+  --current-letter-spacing: var(--theme-navigation-letter-spacing);
+  --current-text-transform: var(--theme-navigation-text-transform); }
 
 @media only screen and (min-width: 1000px) {
   .wp-block-novablocks-navigation {
@@ -463,13 +467,13 @@
   mix-blend-mode: lighten; }
 
 .ot-dtp-picker-form {
-  --font-size: var(--theme-field-font-size);
+  --font-size: var(--theme-input-font-size);
   font-size: var(--final-font-size);
-  --current-font-family: var(--theme-field-font-family);
-  --current-font-weight: var(--theme-field-font-weight);
-  --current-line-height: var(--theme-field-line-height);
-  --current-letter-spacing: var(--theme-field-letter-spacing);
-  --current-text-transform: var(--theme-field-text-transform); }
+  --current-font-family: var(--theme-input-font-family);
+  --current-font-weight: var(--theme-input-font-weight);
+  --current-line-height: var(--theme-input-line-height);
+  --current-letter-spacing: var(--theme-input-letter-spacing);
+  --current-text-transform: var(--theme-input-text-transform); }
 
 .ot-dtp-picker .ot-dtp-picker-selector[class] {
   height: auto; }
