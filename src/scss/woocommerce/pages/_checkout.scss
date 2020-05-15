@@ -245,9 +245,6 @@
   }
 
   @include specific(4) {
-    label {
-      display: flex;
-    }
 
     input[type="checkbox"] {
       margin-bottom: 0;
@@ -331,12 +328,6 @@
 
     .validate-required {
       margin-bottom: 0;
-
-      .woocommerce-form__label {
-        display: flex;
-        align-items: center;
-        margin-bottom: 0;
-      }
 
       .woocommerce-form__input {
         margin-top: 0;
@@ -700,4 +691,8 @@ ul.order_details[class] {
 
 .woocommerce form .form-row.woocommerce-invalid input.input-text {
   border-color: var(--theme-input-error-color);
+}
+
+.woocommerce-invalid #terms {
+  outline: 0;
 }

@@ -193,6 +193,48 @@
   --theme-button-hover-text-color: var(--current-color-primary);
   --theme-button-hover-border-color: var(--current-color-primary); }
 
+#html #body #page textarea {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  padding: var(--theme-input-padding);
+  color: var(--theme-input-color);
+  border-radius: var(--theme-input-border-radius);
+  background-color: var(--theme-input-background-color);
+  box-shadow: var(--theme-input-box-shadow);
+  border: 0;
+  transition: all .2s ease-in-out;
+  --font-size: var(--theme-input-font-size);
+  font-size: var(--final-font-size);
+  --current-font-family: var(--theme-input-font-family);
+  --current-font-weight: var(--theme-input-font-weight);
+  --current-line-height: var(--theme-input-line-height);
+  --current-letter-spacing: var(--theme-input-letter-spacing);
+  --current-text-transform: var(--theme-input-text-transform);
+  font-family: inherit;
+  -webkit-font-smoothing: initial;
+  -webkit-appearance: none;
+  min-height: 7.5em;
+  resize: vertical; }
+  #html #body #page textarea:hover {
+    --theme-input-box-shadow: var(--theme-input-hover-box-shadow); }
+  #html #body #page textarea:focus, #html #body #page textarea:active {
+    --theme-input-border-color: var(--theme-input-focus-border-color);
+    --theme-input-box-shadow: var(--theme-input-focus-box-shadow);
+    outline: 0; }
+  #html #body #page textarea[disabled] {
+    border-color: var(--theme-input-disabled-border-color);
+    background-color: var(--theme-input-disabled-background-color); }
+  [class*="invalid"] #html #body #page textarea {
+    --theme-input-box-shadow: var(--theme-input-error-box-shadow);
+    --theme-input-color: var(--theme-input-error-color);
+    --theme-input-placeholder-color: var(--theme-input-error-color);
+    --theme-input-placeholder-opacity: 0; }
+    [class*="invalid"] #html #body #page textarea:hover {
+      --theme-input-box-shadow: var(--theme-input-error-box-shadow); }
+    [class*="invalid"] #html #body #page textarea:focus, [class*="invalid"] #html #body #page textarea:active {
+      --theme-input-box-shadow: var(--theme-input-focus-error-box-shadow); }
+
 #html #body #page .actions .button {
   padding: var(--theme-input-padding); }
 
@@ -1370,9 +1412,6 @@
 .woocommerce-checkout .site-content[class][class][class] {
   padding-top: 0; }
 
-.woocommerce-checkout[class][class][class][class] label {
-  display: flex; }
-
 .woocommerce-checkout[class][class][class][class] input[type="checkbox"] {
   margin-bottom: 0;
   margin-top: 0; }
@@ -1443,10 +1482,6 @@
 
 .woocommerce-terms-and-conditions-wrapper[class][class] .validate-required {
   margin-bottom: 0; }
-  .woocommerce-terms-and-conditions-wrapper[class][class] .validate-required .woocommerce-form__label {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0; }
   .woocommerce-terms-and-conditions-wrapper[class][class] .validate-required .woocommerce-form__input {
     margin-top: 0;
     margin-right: .625em; }
@@ -1730,6 +1765,9 @@ ul.order_details[class] {
 
 .woocommerce form .form-row.woocommerce-invalid input.input-text {
   border-color: var(--theme-input-error-color); }
+
+.woocommerce-invalid #terms {
+  outline: 0; }
 
 .wc-block-featured-category {
   position: relative;
