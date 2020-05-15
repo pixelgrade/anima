@@ -94,6 +94,8 @@
         background: url($arrow-down-svg-path) calc(100% - 15px) center no-repeat;
         background-size: 17px 9px;
 
+        box-shadow: none;
+
         @include below(tablet) {
             border: 1px solid var(--current-light-secondary);
             padding: var(--theme-spacing);
@@ -145,6 +147,13 @@
         border-radius: 50%;
     }
 
+    .checkout & {
+        &:before {
+            position: absolute;
+            top: 1em;
+        }
+    }
+
     a {
         @include below(tablet) {
             flex-basis: 100%;
@@ -158,6 +167,7 @@
 }
 
 .woocommerce-error {
+    border-top-color: var(--theme-input-error-color);
     > li {
         flex-basis: 100%;
         padding-left: 2.3em !important;
@@ -167,10 +177,17 @@
             padding-left: 0 !important;
         }
     }
+
+    .checkout & {
+        > li:first-child {
+            padding-left: 2.3em !important;
+        }
+    }
 }
 
 .woocommerce-error:before {
     content: "\f057";
+    color: var(--theme-input-error-color);
     border-color: rgba(#b81c23, .5)
 }
 

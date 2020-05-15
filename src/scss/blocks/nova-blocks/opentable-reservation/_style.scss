@@ -9,6 +9,7 @@
         --theme-button-border-color: var(--current-dark-primary);
         --theme-button-text-color: var(--current-light-primary);
 
+        @include button-box;
         @include button-fill;
         @include button-transition;
 
@@ -32,6 +33,7 @@
         --theme-button-hover-border-color: var(--current-light-primary);
         --theme-button-text-color: var(--current-dark-primary);
 
+        @include button-box;
         @include button-fill;
         @include button-transition;
 
@@ -41,6 +43,13 @@
           color: var(--current-button-hover-text-color);
         }
       }
+    }
+  }
+
+  input[type="submit"] {
+    @include specific(2) {
+      @include apply-font(button);
+      text-transform: none;
     }
   }
 }
@@ -108,4 +117,32 @@
       }
     }
   }
+}
+
+.ot-dtp-picker-form {
+  @include apply-font(input);
+}
+
+.ot-dtp-picker {
+  .ot-dtp-picker-selector[class] {
+    height: auto;
+    .ot-dtp-picker-selector-link {
+      display: flex;
+      align-items: center;
+
+      &:before {
+        top:50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+}
+
+.picker__nav--prev[class],
+.picker__nav--next[class] {
+  border: 0;
+}
+
+.picker__frame {
+  --current-font-size: 16px;
 }
