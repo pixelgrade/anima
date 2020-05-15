@@ -618,6 +618,11 @@ ul.order_details[class] {
     td {
       padding-left: 0;
       padding-top: 0;
+      background-color: transparent !important;
+
+      @include below(tablet) {
+        padding: var(--theme-spacing-default);
+      }
     }
   }
 
@@ -671,9 +676,24 @@ ul.order_details[class] {
   margin-top: 0 !important;
 }
 
-#html #body #page #place_order {
-  --theme-button-background-color: var(--current-color-primary);
-  --theme-button-border-color: var(--current-color-primary);
-  --theme-button-hover-text-color: var(--current-color-primary);
-  --theme-button-hover-border-color: var(--current-color-primary);
+.woocommerce-shipping-destination {
+  white-space: normal;
+}
+
+.woocommerce {
+  .form-row {
+    &.woocommerce-invalid {
+      @include specific(3) {
+        label {
+          color: var(--theme-input-error-color);
+        }
+      }
+    }
+
+    .required {
+      @include specific(3) {
+        color: var(--theme-input-error-color);
+      }
+    }
+  }
 }

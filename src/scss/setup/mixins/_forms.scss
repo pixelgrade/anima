@@ -30,8 +30,8 @@
   }
 
   &[disabled] {
-    border-color: $input-disabled-border-color;
-    background-color: $input-disabled-background-color;
+    border-color: var(--theme-input-disabled-border-color);
+    background-color: var(--theme-input-disabled-background-color);
   }
 
   [class*="invalid"] & {
@@ -59,17 +59,17 @@
 
   padding-right: 3.125em;
 
-  background-color: var(--current-light-tertiary);
-  background-image: url($caret-svg-path);
+  background-color: var(--current-light-primary);
+  background-image: url($arrow-down-svg-path);
   background-position: calc(100% - 17px) center;
   background-repeat: no-repeat;
-  background-size: .56em .312em;
+  background-size: .58em .58em;
 
   -webkit-appearance: none;
 }
 
 @mixin label {
-  color: $label-color;
+  color: var(--theme-input-label-color);
   display: flex;
   align-items: center;
   @include apply-font(input);
@@ -77,11 +77,11 @@
   margin: 0;
 
   &:not(:first-child) {
-    margin-top: $input-vertical-spacing;
+    margin-top: var(--theme-input-vertical-spacing);
   }
 
   &:not(:last-child) {
-    margin-bottom: $input-vertical-spacing;
+    margin-bottom: var(--theme-input-vertical-spacing);
   }
 
   cursor: pointer;
@@ -96,12 +96,11 @@
 
   box-shadow: var(--theme-input-box-shadow);
 
-  border-radius: $input-border-radius;
+  border-radius: var(--theme-input-border-radius);
 
-  width: $checkbox-width !important;
-  height: $checkbox-height !important;
-  margin-right: $input-horizontal-spacing;
-  //margin-bottom: $input-vertical-spacing;
+  width: var(--theme-checkbox-width) !important;
+  height: var(--theme-checkbox-height) !important;
+  margin-right: var(--theme-input-horizontal-spacing);
 
   background-color: var(--current-light-primary);
   cursor: pointer;
@@ -111,8 +110,10 @@
 
 @mixin checkbox {
   @include checkbox-base;
-  border-color: $checkbox-color;
+  border-color: var(--current-color-primary);
   transition: all .2s ease-in-out;
+
+  color: var(--current-light-primary);
 
   &:after {
     content: "";
@@ -120,7 +121,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: $checkbox-background-color;
+    background-color: var(--current-color-primary);
     background-image: url($checkbox-svg-path);
     background-size: 70% 70%;
     background-position: center center;
@@ -170,7 +171,7 @@
   }
 
   &:checked {
-    border: .375em solid $checkbox-color;
+    border: .375em solid var(--current-color-primary);
     box-shadow: 0 0 0 1px var(--current-color-primary);
     outline: 0;
   }
