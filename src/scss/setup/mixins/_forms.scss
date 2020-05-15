@@ -39,6 +39,15 @@
     --theme-input-color: var(--theme-input-error-color);
     --theme-input-placeholder-color: var(--theme-input-error-color);
     --theme-input-placeholder-opacity: 0;
+
+    &:hover {
+      --theme-input-box-shadow: var(--theme-input-error-box-shadow);
+    }
+
+    &:focus,
+    &:active {
+      --theme-input-box-shadow: var(--theme-input-focus-error-box-shadow);
+    }
   }
 }
 

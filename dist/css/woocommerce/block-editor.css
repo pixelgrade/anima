@@ -424,6 +424,10 @@
       --theme-input-color: var(--theme-input-error-color);
       --theme-input-placeholder-color: var(--theme-input-error-color);
       --theme-input-placeholder-opacity: 0; }
+      [class*="invalid"] .wc-block-product-categories.is-dropdown select:hover {
+        --theme-input-box-shadow: var(--theme-input-error-box-shadow); }
+      [class*="invalid"] .wc-block-product-categories.is-dropdown select:focus, [class*="invalid"] .wc-block-product-categories.is-dropdown select:active {
+        --theme-input-box-shadow: var(--theme-input-focus-error-box-shadow); }
 
 .wc-block-product-categories__button {
   display: inline-block;
@@ -731,6 +735,10 @@
     --theme-input-color: var(--theme-input-error-color);
     --theme-input-placeholder-color: var(--theme-input-error-color);
     --theme-input-placeholder-opacity: 0; }
+    [class*="invalid"] .wc-block-order-select__select[class][class]:hover {
+      --theme-input-box-shadow: var(--theme-input-error-box-shadow); }
+    [class*="invalid"] .wc-block-order-select__select[class][class]:focus, [class*="invalid"] .wc-block-order-select__select[class][class]:active {
+      --theme-input-box-shadow: var(--theme-input-focus-error-box-shadow); }
   .wc-block-order-select__select[class][class][disabled] {
     border-color: var(--current-light-tertiary);
     background-color: var(--current-light-tertiary); }

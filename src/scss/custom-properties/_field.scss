@@ -35,7 +35,14 @@
   --theme-input-hover-box-shadow: var(--theme-input-hover-overlay-shadow),
                                   var(--theme-input-hover-colored-shadow);
 
+  --theme-input-error-focus-overlay-shadow: 0px 0px 0px 2px rgba(var(--opacity-color), 0.40);
+  --theme-input-error-focus-colored-shadow:  0px 0px 0px 2px var(--theme-input-error-color);
+  --theme-input-error-focus-shadow: 0 0 9px -3px var(--theme-input-error-color);
+
   --theme-input-error-box-shadow: 0px 0px 0px 1px var(--theme-input-error-color);
+  --theme-input-focus-error-box-shadow: var(--theme-input-error-focus-overlay-shadow),
+                                        var(--theme-input-error-focus-colored-shadow),
+                                        var(--theme-input-error-focus-shadow);
 
   --theme-input-placeholder-color: var(--curent-dark-primary);
   --theme-input-placeholder-opacity: .5;

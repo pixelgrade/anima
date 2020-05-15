@@ -404,6 +404,10 @@ input[type="text"], input[type="tel"], input[type="number"], input[type="date"],
     --theme-input-color: var(--theme-input-error-color);
     --theme-input-placeholder-color: var(--theme-input-error-color);
     --theme-input-placeholder-opacity: 0; }
+    [class*="invalid"] input[type="text"]:hover, [class*="invalid"] input[type="tel"]:hover, [class*="invalid"] input[type="number"]:hover, [class*="invalid"] input[type="date"]:hover, [class*="invalid"] input[type="email"]:hover, [class*="invalid"] input[type="password"]:hover, [class*="invalid"] input[type="url"]:hover, [class*="invalid"] input[type="search"]:hover {
+      --theme-input-box-shadow: var(--theme-input-error-box-shadow); }
+    [class*="invalid"] input[type="text"]:focus, [class*="invalid"] input[type="text"]:active, [class*="invalid"] input[type="tel"]:focus, [class*="invalid"] input[type="tel"]:active, [class*="invalid"] input[type="number"]:focus, [class*="invalid"] input[type="number"]:active, [class*="invalid"] input[type="date"]:focus, [class*="invalid"] input[type="date"]:active, [class*="invalid"] input[type="email"]:focus, [class*="invalid"] input[type="email"]:active, [class*="invalid"] input[type="password"]:focus, [class*="invalid"] input[type="password"]:active, [class*="invalid"] input[type="url"]:focus, [class*="invalid"] input[type="url"]:active, [class*="invalid"] input[type="search"]:focus, [class*="invalid"] input[type="search"]:active {
+      --theme-input-box-shadow: var(--theme-input-focus-error-box-shadow); }
 
 input[type="checkbox"] {
   position: relative;
@@ -665,6 +669,10 @@ textarea {
     --theme-input-color: var(--theme-input-error-color);
     --theme-input-placeholder-color: var(--theme-input-error-color);
     --theme-input-placeholder-opacity: 0; }
+    [class*="invalid"] textarea:hover {
+      --theme-input-box-shadow: var(--theme-input-error-box-shadow); }
+    [class*="invalid"] textarea:focus, [class*="invalid"] textarea:active {
+      --theme-input-box-shadow: var(--theme-input-focus-error-box-shadow); }
 
 select {
   width: 100%;
@@ -708,6 +716,10 @@ select {
     --theme-input-color: var(--theme-input-error-color);
     --theme-input-placeholder-color: var(--theme-input-error-color);
     --theme-input-placeholder-opacity: 0; }
+    [class*="invalid"] select:hover {
+      --theme-input-box-shadow: var(--theme-input-error-box-shadow); }
+    [class*="invalid"] select:focus, [class*="invalid"] select:active {
+      --theme-input-box-shadow: var(--theme-input-focus-error-box-shadow); }
   select[multiple] {
     background: none;
     padding-right: .8125em; }
@@ -2384,6 +2396,10 @@ span.page-numbers {
       --theme-input-color: var(--theme-input-error-color);
       --theme-input-placeholder-color: var(--theme-input-error-color);
       --theme-input-placeholder-opacity: 0; }
+      [class*="invalid"] .select2-container .select2-selection--single .select2-selection__rendered:hover {
+        --theme-input-box-shadow: var(--theme-input-error-box-shadow); }
+      [class*="invalid"] .select2-container .select2-selection--single .select2-selection__rendered:focus, [class*="invalid"] .select2-container .select2-selection--single .select2-selection__rendered:active {
+        --theme-input-box-shadow: var(--theme-input-focus-error-box-shadow); }
   .select2-container .select2-selection--single .select2-selection__placeholder {
     display: block; }
   .select2-container .select2-selection--single .select2-selection__arrow {
@@ -2550,6 +2566,16 @@ span.page-numbers {
       --theme-input-color: var(--theme-input-error-color);
       --theme-input-placeholder-color: var(--theme-input-error-color);
       --theme-input-placeholder-opacity: 0; }
+      [class*="invalid"] .wpforms-container[class][class][class] .wpforms-form input:hover, [class*="invalid"]
+      .wpforms-container[class][class][class] .wpforms-form select:hover, [class*="invalid"]
+      .wpforms-container[class][class][class] .wpforms-form textarea:hover {
+        --theme-input-box-shadow: var(--theme-input-error-box-shadow); }
+      [class*="invalid"] .wpforms-container[class][class][class] .wpforms-form input:focus, [class*="invalid"] .wpforms-container[class][class][class] .wpforms-form input:active, [class*="invalid"]
+      .wpforms-container[class][class][class] .wpforms-form select:focus, [class*="invalid"]
+      .wpforms-container[class][class][class] .wpforms-form select:active, [class*="invalid"]
+      .wpforms-container[class][class][class] .wpforms-form textarea:focus, [class*="invalid"]
+      .wpforms-container[class][class][class] .wpforms-form textarea:active {
+        --theme-input-box-shadow: var(--theme-input-focus-error-box-shadow); }
   .wpforms-container[class][class][class] .wpforms-form select {
     width: 100%;
     height: auto;
@@ -2592,6 +2618,10 @@ span.page-numbers {
       --theme-input-color: var(--theme-input-error-color);
       --theme-input-placeholder-color: var(--theme-input-error-color);
       --theme-input-placeholder-opacity: 0; }
+      [class*="invalid"] .wpforms-container[class][class][class] .wpforms-form select:hover {
+        --theme-input-box-shadow: var(--theme-input-error-box-shadow); }
+      [class*="invalid"] .wpforms-container[class][class][class] .wpforms-form select:focus, [class*="invalid"] .wpforms-container[class][class][class] .wpforms-form select:active {
+        --theme-input-box-shadow: var(--theme-input-focus-error-box-shadow); }
   .wpforms-container[class][class][class] .wpforms-form input[type="checkbox"] {
     position: relative;
     left: 0;
