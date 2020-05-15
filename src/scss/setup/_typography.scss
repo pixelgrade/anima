@@ -27,7 +27,7 @@ $theme-font-size-slope-adjust-desktop: 0.4;
 // on mobile devices the font size addon is set to 0 by default 0 so nothing is added to the resulted font sizes
 $theme-font-size-addon-multiplier-desktop: 1;
 
-// define font styles
+// Define the default font styles and all *available* properties through Style Manager
 $theme-fonts: (
     body: (
         font-family: $theme-sm-font-body,
@@ -35,14 +35,12 @@ $theme-fonts: (
         line-height: 1.7,
         font-weight: 400,
         letter-spacing: -0.03em,
-        text-transform: none,
     ),
     content: (
         font-family: $theme-sm-font-body,
         font-size: 18,
         line-height: 1.6,
         letter-spacing: -0.03em,
-        text-transform: none,
     ),
     lead: (
         font-family: $theme-sm-font-body,
@@ -50,7 +48,6 @@ $theme-fonts: (
         line-height: 1.6,
         letter-spacing: -0.02em,
         text-transform: none,
-
     ),
     display: (
         font-family: $theme-sm-font-primary,
