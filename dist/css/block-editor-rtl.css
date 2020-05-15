@@ -167,7 +167,8 @@ html {
     --current-font-weight: var(--theme-body-font-weight);
     --current-letter-spacing: var(--theme-body-letter-spacing); }
     .editor-styles-wrapper .novablocks-media__content[class] {
-      flex-basis: calc(50% - var(--novablocks-media-spacing)); }
+      flex-basis: calc(50% - var(--novablocks-media-spacing));
+      min-width: 0; }
   .editor-styles-wrapper .novablocks-media__aside[class] {
     flex-basis: calc(50% + var(--novablocks-media-spacing) - 0.5px); }
   .novablocks-media:not(.novablocks-media--no-thumbnail) .editor-styles-wrapper .novablocks-media__aside {
