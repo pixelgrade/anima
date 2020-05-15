@@ -992,6 +992,45 @@
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
   --current-text-transform: var(--theme-heading-4-text-transform); }
 
+.woocommerce #reviews #comments ol.commentlist {
+  padding-right: 0; }
+  .woocommerce #reviews #comments ol.commentlist li {
+    position: relative;
+    margin-bottom: 1.5em; }
+    .woocommerce #reviews #comments ol.commentlist li .comment-text {
+      border: 0;
+      padding: 0;
+      margin-right: 3em; }
+      .woocommerce #reviews #comments ol.commentlist li .comment-text p {
+        margin-bottom: 0; }
+    .woocommerce #reviews #comments ol.commentlist li .meta {
+      color: var(--current-dark-primary); }
+    .woocommerce #reviews #comments ol.commentlist li img.avatar {
+      padding: 0;
+      width: 2.5em;
+      height: 2.5em;
+      background: transparent;
+      border: 0;
+      margin: 0;
+      object-fit: contain; }
+    .woocommerce #reviews #comments ol.commentlist li:not(:last-child):after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background-color: var(--current-dark-primary);
+      opacity: .2; }
+
+.woocommerce-Reviews .woocommerce-Reviews-title {
+  margin-bottom: var(--theme-spacing-default); }
+
+.woocommerce-Reviews .comment_container {
+  padding-bottom: 1.5em; }
+
+.woocommerce-Reviews .woocommerce-review__author {
+  text-transform: capitalize; }
+
 .woocommerce-cart[class][class] .entry-title {
   max-width: none; }
 
@@ -2712,3 +2751,6 @@ ul.order_details[class] {
 
 .woocommerce form .form-row label {
   line-height: inherit; }
+
+.woocommerce .star-rating span {
+  font: inherit; }
