@@ -111,12 +111,12 @@
   --theme-button-line-height: 1.2;
   --theme-button-letter-spacing: 0.03em;
   --theme-button-text-transform: none;
-  --theme-field-font-family: Reforma2018, sans-serif;
-  --theme-field-font-size: 17;
-  --theme-field-font-weight: 500;
-  --theme-field-line-height: 1.2;
-  --theme-field-letter-spacing: 0.03em;
-  --theme-field-text-transform: capitalize;
+  --theme-input-font-family: Reforma1969, sans-serif;
+  --theme-input-font-size: 16;
+  --theme-input-font-weight: 500;
+  --theme-input-line-height: 1.3;
+  --theme-input-letter-spacing: 0.03em;
+  --theme-input-text-transform: capitalize;
   --theme-accent-font-family: Billy Ohio, sans-serif;
   --theme-accent-font-weight: 400;
   --theme-accent-letter-spacing: normal;
@@ -171,6 +171,8 @@
   --theme-spacing-fluid-tiny:    calc( var( --theme-spacing-fluid ) * 0.5 );
   --theme-spacing-default:          calc( var( --theme-spacing ) * 1 );
   --theme-spacing-fluid-default:    calc( var( --theme-spacing-fluid ) * 1 );
+  --theme-spacing-xsmall:          calc( var( --theme-spacing ) * 1.5 );
+  --theme-spacing-fluid-xsmall:    calc( var( --theme-spacing-fluid ) * 1.5 );
   --theme-spacing-small:          calc( var( --theme-spacing ) * 2 );
   --theme-spacing-fluid-small:    calc( var( --theme-spacing-fluid ) * 2 );
   --theme-spacing-medium:          calc( var( --theme-spacing ) * 3 );
@@ -218,24 +220,45 @@
   --theme-button-hover-transition: var(--theme-button-transition); }
 
 :root {
-  --theme-input-x-padding: 1em;
-  --theme-input-y-padding: .75em;
-  --theme-input-padding: var(--theme-input-y-padding) var(--theme-input-x-padding);
+  --theme-input-padding: .35em;
   --theme-input-color: var(--current-dark-secondary);
-  --theme-input-background-color: var(--current-light-tertiary);
-  --theme-input-border-width: 1px;
-  --theme-input-border-style: solid;
-  --theme-input-border-color: var(--current-light-secondary);
-  --theme-input-border-radius: 0;
-  --theme-input-border: var(--theme-input-border-width) var(--theme-input-border-style) var(--theme-input-border-color);
-  --theme-input-focus-border-color: var(--current-dark-primary);
+  --theme-input-error-color: var(--theme-error-color);
+  --theme-input-background-color: var(--current-light-primary);
   --theme-input-disabled-background-color: var(--current-dark-secondary);
+  --theme-input-overlay-shadow: 0px 0px 0px 1px rgba(var(--opacity-color), 0.70);
+  --theme-input-colored-shadow: 0px 0px 0px 1px var(--current-dark-primary);
+  --theme-input-box-shadow:   var(--theme-input-overlay-shadow),
+                              var(--theme-input-colored-shadow);
+  --theme-input-border-color:  var(--current-light-tertiary);
+  --theme-input-error-border-color: var(--theme-input-error-color);
   --theme-input-disabled-border-color: var(--current-dark-secondary);
-  --theme-checkbox-border-color: var(--current-dark-secondary);
-  --theme-checkbox-background-color: var(--current-light-primary);
-  --theme-checkbox-width: 1.5rem;
-  --theme-checkbox-height: 1.5rem;
+  --theme-input-border-radius: 0px;
+  --theme-input-focus-overlay-shadow: 0px 0px 0px 2px rgba(var(--opacity-color), 0.40);
+  --theme-input-focus-colored-shadow:  0px 0px 0px 2px var(--current-color-primary);
+  --theme-input-focus-shadow: 0 0 9px -3px var(--current-color-primary);
+  --theme-input-focus-box-shadow: var(--theme-input-focus-overlay-shadow),
+                                  var(--theme-input-focus-colored-shadow),
+                                  var(--theme-input-focus-shadow);
+  --theme-input-hover-overlay-shadow: 0px 0px 0px 1px rgba(var(--opacity-color), 0.30);
+  --theme-input-hover-colored-shadow: 0px 0px 0px 1px var(--current-dark-primary);
+  --theme-input-hover-box-shadow: var(--theme-input-hover-overlay-shadow),
+                                  var(--theme-input-hover-colored-shadow);
+  --theme-input-error-focus-overlay-shadow: 0px 0px 0px 2px rgba(var(--opacity-color), 0.40);
+  --theme-input-error-focus-colored-shadow:  0px 0px 0px 2px var(--theme-input-error-color);
+  --theme-input-error-focus-shadow: 0 0 9px -3px var(--theme-input-error-color);
+  --theme-input-error-box-shadow: 0px 0px 0px 1px var(--theme-input-error-color);
+  --theme-input-focus-error-box-shadow: var(--theme-input-error-focus-overlay-shadow),
+                                        var(--theme-input-error-focus-colored-shadow),
+                                        var(--theme-input-error-focus-shadow);
+  --theme-input-placeholder-color: var(--curent-dark-primary);
+  --theme-input-placeholder-opacity: .5;
+  --theme-checkbox-width: 1.25rem;
+  --theme-checkbox-height: 1.25rem;
+  --theme-input-label-color: var(--current-dark-secondary);
+  --theme-input-legend-color: var(--current-dark-secondary);
   --theme-input-vertical-spacing: var(--theme-spacing-tiny);
   --theme-input-horizontal-spacing: var(--theme-spacing-tiny);
-  --theme-input-label-color: var(--current-dark-secondary);
-  --theme-input-legend-color: var(--current-dark-secondary); }
+  --opacity-color: 255, 255, 255; }
+  @media only screen and (min-width: 768px) {
+    :root {
+      --theme-input-padding: .833em; } }

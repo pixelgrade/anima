@@ -1,7 +1,6 @@
 @include placeholder() {
-    color: var(--theme-input-color);
-    opacity: .6;
-    font-style: italic;
+    color: var(--theme-input-placeholder-color);
+    opacity: var(--theme-input-placeholder-opacity);
 }
 
 input {
@@ -93,4 +92,8 @@ fieldset {
     > div {
         margin-top: var(--theme-input-vertical-spacing);
     }
+}
+
+label {
+    @include label;
 }
