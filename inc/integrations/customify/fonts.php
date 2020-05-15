@@ -79,6 +79,13 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 		'unit' => '',
 	);
 
+	$font_size_config_large = array(
+		'min'  => 1,
+		'max'  => 120,
+		'step' => 1,
+		'unit' => '',
+	);
+
 	$line_height_config = array(
 		'min' => 0.8,
 		'max' => 2,
@@ -95,6 +102,16 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 
 	$fields_config = array(
 		'font-size'      => $font_size_config,
+		'font-weight'    => true,
+		'line-height'    => $line_height_config,
+		'letter-spacing' => $letter_spacing_config,
+		'text-align'     => false,
+		'text-transform' => 'none'
+	);
+
+	$fields_config_large = array(
+		'font-size'      => $font_size_config_large,
+		'font-weight'    => true,
 		'line-height'    => $line_height_config,
 		'letter-spacing' => $letter_spacing_config,
 		'text-align'     => false,
@@ -179,7 +196,7 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 						'text-decoration' => 'none',
 						'letter-spacing'  => - 0.03,
 					),
-					'fields'            => $fields_config,
+					'fields'            => $fields_config_large,
 				),
 				'heading_1_font'  => array(
 					'type'              => 'font',
@@ -196,7 +213,7 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 						'text-decoration' => 'none',
 						'letter-spacing'  => - 0.02,
 					),
-					'fields'            => $fields_config,
+					'fields'            => $fields_config_large,
 				),
 				'heading_2_font'  => array(
 					'type'              => 'font',
@@ -213,7 +230,7 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 						'text-decoration' => 'none',
 						'letter-spacing'  => - 0.02,
 					),
-					'fields'            => $fields_config,
+					'fields'            => $fields_config_large,
 				),
 				'heading_3_font'  => array(
 					'type'              => 'font',
@@ -230,7 +247,7 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 						'text-decoration' => 'none',
 						'letter-spacing'  => - 0.02,
 					),
-					'fields'            => $fields_config,
+					'fields'            => $fields_config_large,
 				),
 				'heading_4_font'  => array(
 					'type'              => 'font',
