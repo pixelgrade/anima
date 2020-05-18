@@ -1225,21 +1225,26 @@
 .cart_list.product_list_widget {
   flex-basis: 0; }
 
-.menu-item--cart > a {
-  border-bottom: 0;
-  text-decoration: none; }
-
-.menu-item--cart .cart-count {
+.menu-item--cart {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.75em;
-  height: 1.75em;
-  border: .125em solid currentColor;
-  border-radius: 50%;
-  font-weight: 700;
-  line-height: 1;
-  font-feature-settings: "lnum"; }
+  align-items: center; }
+  .menu-item--cart > a {
+    border-bottom: 0;
+    text-decoration: none; }
+  .menu-item--cart[class][class][class][class] a {
+    padding: 0;
+    margin: 0; }
+  .menu-item--cart .cart-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75em;
+    height: 1.75em;
+    border: .125em solid currentColor;
+    border-radius: 50%;
+    font-weight: 700;
+    line-height: 1;
+    font-feature-settings: "lnum"; }
 
 #add_payment_method table.cart td.actions .coupon .input-text,
 .woocommerce-cart table.cart td.actions .coupon .input-text,
