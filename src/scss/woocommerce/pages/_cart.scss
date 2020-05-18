@@ -273,10 +273,14 @@
     text-decoration: none;
   }
 
-  @include specific(4) {
+  @include specific(5) {
     a {
       padding: 0;
       margin: 0;
+
+      &:before {
+        content: none;
+      }
     }
   }
 
