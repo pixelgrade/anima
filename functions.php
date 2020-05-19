@@ -225,7 +225,7 @@ function rosa2_webfonts_fallback() {
 		WebFont.load( config );
 	<?php $webfontloader_inline_script = ob_get_clean();
 
-	wp_register_script( 'webfontloader', '//ajax.googleapis.com/ajax/libs/webfont/1.5.10/webfont.js', array( 'jquery' ), null, true );
+	wp_register_script( 'webfontloader', '//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js', array( 'jquery' ), null, true );
 	wp_add_inline_script( 'webfontloader', $webfontloader_inline_script );
 	wp_enqueue_script( 'webfontloader' );
 
