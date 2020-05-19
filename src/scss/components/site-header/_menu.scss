@@ -217,6 +217,25 @@ ul.menu,
          }
        }
 
+        li {
+          &[class*="current"] {
+            @include specific(3) {
+              a {
+                &:before {
+                  transform: scale3d(1, 1, 1);
+                }
+
+                &:hover {
+                  &:before {
+                    transform: scale3d(0, 1, 1);
+                    transform-origin: right;
+                  }
+                }
+              }
+            }
+          }
+        }
+
         .sub-menu {
           li:not(.social-menu-item) a:before {
             content: none;
