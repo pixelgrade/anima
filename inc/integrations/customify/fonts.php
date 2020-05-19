@@ -16,13 +16,13 @@ function rosa2_add_customify_theme_fonts( $fonts ) {
 	$fonts['Reforma1969'] = array(
 		'family'   => 'Reforma1969',
 		'src'      => '//pxgcdn.com/fonts/reforma1969/stylesheet.css',
-		'variants' => array( 300, 500, 700 ),
+		'variants' => array( '300', '300italic', '500', '500italic', '700', '700italic' ),
 	);
 
 	$fonts['Reforma2018'] = array(
 		'family'   => 'Reforma2018',
 		'src'      => '//pxgcdn.com/fonts/reforma2018/stylesheet.css',
-		'variants' => array( 300, 500, 700 ),
+		'variants' => array( '300', '300italic', '500', '500italic', '700', '700italic' ),
 	);
 
 	$fonts['League Spartan'] = array(
@@ -141,7 +141,8 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 						'text-decoration' => 'none',
 						'letter-spacing'  => - 0.03,
 					),
-					'fields'            => $fields_config,
+					// We want all the font variants for this field since it is a rich content one.
+					'fields'            => wp_parse_args( [ 'font-weight' => [ 'loadAllVariants' => true ] ], $fields_config ),
 				),
 				'content_font'    => array(
 					'type'              => 'font',
@@ -153,12 +154,13 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 						'font-family'     => 'Reforma1969',
 						'font-size'       => 18,
 						'line-height'     => 1.6,
-						'font-weight'     => 500,
+						'font-weight'     => '500',
 						'text-transform'  => 'none',
 						'text-decoration' => 'none',
 						'letter-spacing'  => - 0.03,
 					),
-					'fields'            => $fields_config,
+					// We want all the font variants for this field since it is a rich content one.
+					'fields'            => wp_parse_args( [ 'font-weight' => [ 'loadAllVariants' => true ] ], $fields_config ),
 				),
 				'lead_font'    => array(
 					'type'              => 'font',
@@ -175,7 +177,8 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 						'text-decoration' => 'none',
 						'letter-spacing'  => - 0.02,
 					),
-					'fields'            => $fields_config,
+					// We want all the font variants for this field since it is a rich content one.
+					'fields'            => wp_parse_args( [ 'font-weight' => [ 'loadAllVariants' => true ] ], $fields_config ),
 				),
 				'main_content_title_heading_fonts_section' => array(
 					'type' => 'html',
