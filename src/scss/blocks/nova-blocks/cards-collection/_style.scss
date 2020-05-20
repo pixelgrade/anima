@@ -7,16 +7,11 @@
   .content-is-highlighted:not(.block-is-highlighted) & {
     .wp-block-button:not(.is-style-text) {
       .wp-block-button__link {
-        --theme-button-text-color: var(--current-dark-primary);
-        --theme-button-background-color: var(--current-light-primary);
-        --theme-button-border-color: var(--current-light-primary);
-        --theme-button-hover-text-color: var(--current-light-primary);
-        --theme-button-hover-background-color: transparent;
-        --theme-button-hover-border-color: var(--current-light-primary);
+        @include button-inverted;
       }
     }
 
-    a {
+    a:not(.wp-block-button__link) {
       color: inherit;
       text-decoration-color: inherit;
     }

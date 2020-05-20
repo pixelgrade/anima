@@ -163,11 +163,12 @@ ul.wp-block-categories__list[class] {
   padding-right: var(--theme-header-sides-spacing); }
 
 .novablocks-hero .wp-block-button:not(.is-style-text) .wp-block-button__link {
-  --theme-button-background-color: var(--novablocks-hero-text-color);
-  --theme-button-border-color: var(--novablocks-hero-text-color);
-  --theme-button-text-color: var(--theme-dark-primary);
-  --theme-button-hover-text-color: var(--novablocks-hero-text-color);
-  --theme-button-hover-border-color: var(--novablocks-hero-text-color); }
+  --theme-button-text-color: var(--current-dark-primary);
+  --theme-button-background-color: var(--current-light-primary);
+  --theme-button-border-color: var(--current-light-primary);
+  --theme-button-hover-text-color: var(--current-light-primary);
+  --theme-button-hover-background-color: transparent;
+  --theme-button-hover-border-color: var(--current-light-primary); }
 
 .novablocks-u-background-dark .novablocks-hero__indicator:after {
   color: var(--theme-sm-light-1); }
@@ -408,7 +409,7 @@ ul.wp-block-categories__list[class] {
   --theme-button-hover-background-color: transparent;
   --theme-button-hover-border-color: var(--current-light-primary); }
 
-.block-is-highlighted:not(.content-is-highlighted) .novablocks-card a,
-.content-is-highlighted:not(.block-is-highlighted) .novablocks-card a {
+.block-is-highlighted:not(.content-is-highlighted) .novablocks-card a:not(.wp-block-button__link),
+.content-is-highlighted:not(.block-is-highlighted) .novablocks-card a:not(.wp-block-button__link) {
   color: inherit;
   text-decoration-color: inherit; }
