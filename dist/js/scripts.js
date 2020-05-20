@@ -878,10 +878,10 @@ function () {
           othersAfter = _this$pieces.othersAfter;
 
       if (title.length && title.text().trim().length) {
-        var splitTitle = new SplitText(title, {
+        this.splitTitle = new SplitText(title, {
           wordsClass: 'c-headline__word'
         });
-        splitTitle.lines.forEach(function (line) {
+        this.splitTitle.lines.forEach(function (line) {
           var words = Array.from(line.children);
           var letters = [];
           words.forEach(function (word) {
@@ -1059,6 +1059,13 @@ function () {
       this.timeline = timeline;
     }
   }, {
+    key: "revertTitle",
+    value: function revertTitle() {
+      if (typeof this.splitTitle !== "undefined") {
+        this.splitTitle.revert();
+      }
+    }
+  }, {
     key: "pauseTimelineOnScroll",
     value: function pauseTimelineOnScroll() {
       var _this3 = this;
@@ -1076,6 +1083,8 @@ function () {
 
         if (pastMiddle && pastScroll) {
           tl.pause();
+
+          _this3.revertTitle();
 
           _this3.timeline.eventCallback('onUpdate', null);
 
