@@ -60,3 +60,16 @@ img:not(.is-loaded) {
         padding-top: var(--theme-spacing-fluid-large);
     }
 }
+
+// We need this to overwrite normalize font: inherit
+// @todo: Mode to a more appropriate file
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    font-family: var(--current-font-family);
+    text-transform: var(--current-tex-transform);
+    font-weight: var(--current-font-weight);
+}
