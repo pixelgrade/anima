@@ -205,7 +205,7 @@
       $button.text(pixelgradeWooCommerceStrings.adding_to_cart);
     });
     $('.c-product-main .cart').on('change', '.qty', function () {
-      $(this.form).find('.ajax_add_to_cart[data-quantity]').data('quantity', this.value);
+      $(this.form).find('.ajax_add_to_cart[data-quantity]').attr('data-quantity', this.value);
     });
     $('.js-coupon-value-source').on('change', function () {
       $('.js-coupon-value-destination').val($(this).val());
