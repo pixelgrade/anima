@@ -106,9 +106,9 @@
         content: none;
     }
 
-    .site-header--scrolled[class] & {
-        color: var(--current-dark-primary);
-    }
+    //.site-header--scrolled[class] & {
+    //    color: var(--current-dark-primary);
+    //}
 }
 
 .site-header__content {
@@ -139,11 +139,11 @@
     justify-content: center;
 
     padding: var(--theme-spacing-fluid-medium) var(--theme-header-sides-spacing);
-    
-    .site-header--scrolled & {
-        position: fixed;
-        margin-top: 0;
-    }
+
+    //.site-header--scrolled & {
+    //    position: fixed;
+    //    margin-top: 0;
+    //}
 
     .menu-item--cart {
         display: flex;
@@ -188,25 +188,25 @@
         z-index: -1;
     }
 
-    .site-header--scrolled[class] & {
-        color: var(--current-dark-primary);
-
-        &:before {
-            opacity: .95;
-        }
-
-        &:after {
-            opacity: .1;
-        }
-
-        .c-logo__default {
-            opacity: 1;
-        }
-
-        .c-logo__inverted {
-            opacity: 0;
-        }
-    }
+    //.site-header--scrolled[class] & {
+    //    color: var(--current-dark-primary);
+    //
+    //    &:before {
+    //        opacity: .95;
+    //    }
+    //
+    //    &:after {
+    //        opacity: .1;
+    //    }
+    //
+    //    .c-logo__default {
+    //        opacity: 1;
+    //    }
+    //
+    //    .c-logo__inverted {
+    //        opacity: 0;
+    //    }
+    //}
 }
 
 .site-header__menu {
@@ -244,11 +244,53 @@
     }
 }
 
-.site-header--mobile,
-.c-menu-toggle__wrap,
-.site-header--scrolled {
-    .site-header--scrolled & {
-        margin-top: 0 !important;
+//.site-header--mobile,
+//.c-menu-toggle__wrap,
+//.site-header--scrolled {
+//    .site-header--scrolled & {
+//        margin-top: 0 !important;
+//    }
+//}
+
+.has-site-header-fixed {
+
+  &.site-header--scrolled  {
+
+    .site-header--mobile,
+    .c-menu-toggle__wrap,
+    .site-header--scrolled {
+      margin-top: 0 !important;
     }
+
+    .site-header--mobile {
+      position: fixed;
+
+      color: var(--current-dark-primary);
+
+      &:before {
+        opacity: .95;
+      }
+
+      &:after {
+        opacity: .1;
+      }
+
+      .c-logo__default {
+        opacity: 1;
+      }
+
+      .c-logo__inverted {
+        opacity: 0;
+      }
+    }
+
+    .c-menu-toggle {
+      color: var(--current-dark-primary);
+    }
+
+    .c-menu-toggle__wrap {
+      position: fixed;
+    }
+  }
 }
 
