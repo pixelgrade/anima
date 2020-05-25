@@ -17,7 +17,7 @@
 }
 
 /* Typography */
-html {
+body {
     --font-size: var(--theme-body-font-size);
     --theme-body-final-font-size: var(--final-font-size);
 }
@@ -46,18 +46,19 @@ html {
     }
 
     p,
+    .wp-block,
     .block-editor-block-list__block {
-        margin-top: var(--element-spacing);
-        margin-bottom: var(--element-spacing);
+        margin-top: 0;
+        margin-bottom: 0;
 
-        &:last-child {
-            margin-bottom: 0;
+        &:not(:first-child) {
+            margin-top: var(--element-spacing);
         }
+
     }
 
     // increased specificity selector to overwrite default styles
     &[class] {
-        //@import "elements/forms";
         @import "elements/headings";
         @import "elements/iframe";
         @import "elements/lists";

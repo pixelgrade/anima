@@ -569,3 +569,73 @@
   margin-bottom: var(--theme-spacing-small);
   @include apply-font(heading-4);
 }
+
+.woocommerce {
+
+  #reviews #comments {
+
+    ol.commentlist {
+      padding-left: 0;
+
+      li {
+        position: relative;
+        margin-bottom: 1.5em;
+
+        .comment-text {
+          border: 0;
+          padding: 0;
+          margin-left: 3em;
+
+          p {
+            margin-bottom: 0;
+          }
+        }
+
+        .meta {
+          color: var(--current-dark-primary);
+        }
+
+        img.avatar {
+          padding: 0;
+          width: 2.5em;
+          height: 2.5em;
+          background: transparent;
+          border: 0;
+          margin: 0;
+          object-fit: contain;
+        }
+
+        &:not(:last-child) {
+          &:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--current-dark-primary);
+            opacity: .2;
+          }
+        }
+      }
+    }
+  }
+}
+
+.woocommerce-Reviews {
+
+  .woocommerce-Reviews-title {
+    margin-bottom: var(--theme-spacing-default);
+  }
+
+  .comment_container {
+    padding-bottom: 1.5em;
+  }
+
+  .woocommerce-review__author {
+    text-transform: capitalize;
+  }
+}
+
+.zoomImg {
+  transition: none !important;
+}

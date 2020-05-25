@@ -1,0 +1,19 @@
+.novablocks-block__content {
+  @include apply-font(body);
+}
+
+.novablocks-card {
+  .block-is-highlighted:not(.content-is-highlighted) &,
+  .content-is-highlighted:not(.block-is-highlighted) & {
+    .wp-block-button:not(.is-style-text) {
+      .wp-block-button__link {
+        @include button-inverted;
+      }
+    }
+
+    a:not(.wp-block-button__link) {
+      color: inherit;
+      text-decoration-color: inherit;
+    }
+  }
+}

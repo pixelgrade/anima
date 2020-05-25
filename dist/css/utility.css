@@ -271,63 +271,8 @@
 .has-sm-light-tertiary-color {
   color: var(--current-light-tertiary); }
 
-.has-smaller-font-size {
-  --font-size: inherit;
-  --font-size-modifier: 0.8;
-  font-size: var(--final-font-size); }
-
-.has-larger-font-size {
-  --font-size: inherit;
-  --font-size-modifier: 1.25;
-  font-size: var(--final-font-size); }
-
-h1.has-larger-font-size {
-  --font-size: var(--theme-display-font-size);
-  font-size: var(--final-font-size);
-  --current-font-family: var(--theme-display-font-family);
-  --current-line-height: var(--theme-display-line-height);
-  --current-font-weight: var(--theme-display-font-weight);
-  --current-letter-spacing: var(--theme-display-letter-spacing);
-  --font-size-modifier: 1; }
-
-h2.has-larger-font-size {
-  --font-size: var(--theme-heading-1-font-size);
-  font-size: var(--final-font-size);
-  --current-font-family: var(--theme-heading-1-font-family);
-  --current-line-height: var(--theme-heading-1-line-height);
-  --current-font-weight: var(--theme-heading-1-font-weight);
-  --current-letter-spacing: var(--theme-heading-1-letter-spacing);
-  --font-size-modifier: 1; }
-
-h1.has-smaller-font-size,
-h3.has-larger-font-size {
-  --font-size: var(--theme-heading-2-font-size);
-  font-size: var(--final-font-size);
-  --current-font-family: var(--theme-heading-2-font-family);
-  --current-font-weight: var(--theme-heading-2-font-weight);
-  --current-line-height: var(--theme-heading-2-line-height);
-  --current-letter-spacing: var(--theme-heading-2-letter-spacing);
-  --font-size-modifier: 1; }
-
-h2.has-smaller-font-size,
-h4.has-larger-font-size {
-  --font-size: var(--theme-heading-3-font-size);
-  font-size: var(--final-font-size);
-  --current-font-family: var(--theme-heading-3-font-family);
-  --current-font-weight: var(--theme-heading-3-font-weight);
-  --current-line-height: var(--theme-heading-3-line-height);
-  --current-letter-spacing: var(--theme-heading-3-letter-spacing);
-  --font-size-modifier: 1; }
-
-h3.has-smaller-font-size,
-h5.has-larger-font-size {
-  --font-size: var(--theme-heading-4-font-size);
-  font-size: var(--final-font-size);
-  --current-font-family: var(--theme-heading-4-font-family);
-  --current-font-weight: var(--theme-heading-4-font-weight);
-  --current-line-height: var(--theme-heading-4-line-height);
-  --current-letter-spacing: var(--theme-heading-4-letter-spacing);
-  --font-size-modifier: 1; }
+:root {
+  --theme-error-color: #C8164B; }
 
 .has-parallax {
   background-attachment: fixed; }
@@ -367,6 +312,18 @@ h5.has-larger-font-size {
 
 .has-default-margin-fluid {
   --current-element-margin: var(--theme-spacing-fluid-default); }
+
+.has-xsmall-padding {
+  --current-element-padding: var(--theme-spacing-xsmall); }
+
+.has-xsmall-padding-fluid {
+  --current-element-padding: var(--theme-spacing-fluid-xsmall); }
+
+.has-xsmall-margin {
+  --current-element-margin: var(--theme-spacing-xsmall); }
+
+.has-xsmall-margin-fluid {
+  --current-element-margin: var(--theme-spacing-fluid-xsmall); }
 
 .has-small-padding {
   --current-element-padding: var(--theme-spacing-small); }
@@ -464,3 +421,66 @@ h5.has-larger-font-size {
   --current-light-primary: var(--sm-color-primary);
   --current-light-secondary: var(--sm-color-secondary);
   --current-light-tertiary: var(--sm-color-tertiary); }
+
+[class][class] .has-smaller-font-size {
+  --font-size: inherit;
+  --font-size-modifier: 0.8;
+  font-size: var(--final-font-size); }
+
+[class][class] .has-larger-font-size {
+  --font-size: inherit;
+  --font-size-modifier: 1.25;
+  font-size: var(--final-font-size); }
+
+[class][class] h1.has-larger-font-size {
+  --font-size: var(--theme-display-font-size);
+  font-size: var(--final-font-size);
+  --current-font-family: var(--theme-display-font-family);
+  --current-line-height: var(--theme-display-line-height);
+  --current-font-weight: var(--theme-display-font-weight);
+  --current-letter-spacing: var(--theme-display-letter-spacing);
+  --current-text-transform: var(--theme-display-text-transform);
+  --font-size-modifier: 1; }
+
+[class][class] h2.has-larger-font-size {
+  --font-size: var(--theme-heading-1-font-size);
+  font-size: var(--final-font-size);
+  --current-font-family: var(--theme-heading-1-font-family);
+  --current-line-height: var(--theme-heading-1-line-height);
+  --current-font-weight: var(--theme-heading-1-font-weight);
+  --current-letter-spacing: var(--theme-heading-1-letter-spacing);
+  --current-text-transform: var(--theme-heading-1-text-transform);
+  --font-size-modifier: 1; }
+
+[class][class] h1.has-smaller-font-size,
+[class][class] h3.has-larger-font-size {
+  --font-size: var(--theme-heading-2-font-size);
+  font-size: var(--final-font-size);
+  --current-font-family: var(--theme-heading-2-font-family);
+  --current-font-weight: var(--theme-heading-2-font-weight);
+  --current-line-height: var(--theme-heading-2-line-height);
+  --current-letter-spacing: var(--theme-heading-2-letter-spacing);
+  --current-text-transform: var(--theme-heading-2-text-transform);
+  --font-size-modifier: 1; }
+
+[class][class] h2.has-smaller-font-size,
+[class][class] h4.has-larger-font-size {
+  --font-size: var(--theme-heading-3-font-size);
+  font-size: var(--final-font-size);
+  --current-font-family: var(--theme-heading-3-font-family);
+  --current-font-weight: var(--theme-heading-3-font-weight);
+  --current-line-height: var(--theme-heading-3-line-height);
+  --current-letter-spacing: var(--theme-heading-3-letter-spacing);
+  --current-text-transform: var(--theme-heading-3-text-transform);
+  --font-size-modifier: 1; }
+
+[class][class] h3.has-smaller-font-size,
+[class][class] h5.has-larger-font-size {
+  --font-size: var(--theme-heading-4-font-size);
+  font-size: var(--final-font-size);
+  --current-font-family: var(--theme-heading-4-font-family);
+  --current-font-weight: var(--theme-heading-4-font-weight);
+  --current-line-height: var(--theme-heading-4-line-height);
+  --current-letter-spacing: var(--theme-heading-4-letter-spacing);
+  --current-text-transform: var(--theme-heading-4-text-transform);
+  --font-size-modifier: 1; }

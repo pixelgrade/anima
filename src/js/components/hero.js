@@ -134,9 +134,9 @@ export default class Hero {
 
 		if ( title.length && title.text().trim().length ) {
 
-			const splitTitle = new SplitText( title, { wordsClass: 'c-headline__word' } );
+			this.splitTitle = new SplitText( title, { wordsClass: 'c-headline__word' } );
 
-			splitTitle.lines.forEach( line => {
+			this.splitTitle.lines.forEach( line => {
 				const words = Array.from( line.children );
 				const letters = [];
 
@@ -250,6 +250,12 @@ export default class Hero {
 		this.timeline = timeline;
 	}
 
+	revertTitle() {
+		if ( typeof this.splitTitle !== "undefined" ) {
+			this.splitTitle.revert();
+		}
+	}
+
 	pauseTimelineOnScroll() {
 		const middleTime = this.timeline.getLabelTime( 'middle' );
 		const endTime = this.timeline.getLabelTime( 'end' );
@@ -266,6 +272,7 @@ export default class Hero {
 
 			if ( pastMiddle && pastScroll ) {
 				tl.pause();
+				this.revertTitle();
 				this.timeline.eventCallback( 'onUpdate', null );
 				this.paused = true;
 			}

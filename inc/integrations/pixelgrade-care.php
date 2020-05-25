@@ -28,7 +28,8 @@ add_action( 'after_setup_theme', 'rosa2_setup_pixelgrade_care', 10 );
 function rosa2_hide_pixelgrade_care_menu_item() {
     ?>
     <style>
-        [href="pixelgrade_care-install"] {
+        [href="pixelgrade_care-install"],
+        [href="themes.php?page=pixelgrade_care-install"] {
             display: none !important;
         }
     </style>

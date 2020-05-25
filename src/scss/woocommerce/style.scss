@@ -16,7 +16,7 @@ $assets-folder-path: '../../../assets';
 @import "shame";
 
 .woocommerce {
-  --theme-content-width-normal-initial: var(--theme-content-width-wide-initial);
+  --theme-content-width-normal: var(--theme-content-width-wide);
 
   td,
   th {
@@ -55,4 +55,12 @@ $assets-folder-path: '../../../assets';
 
 .comment-form-rating .stars > span {
   display: flex;
+}
+
+.woocommerce form .form-row label {
+  line-height: inherit;
+}
+
+.woocommerce .star-rating span {
+  font: inherit;
 }

@@ -15,9 +15,7 @@ if ( class_exists( 'PixCustomifyPlugin' ) ) {
 
 	require_once __DIR__ . '/colors.php';
 	require_once __DIR__ . '/fonts.php';
-	require_once __DIR__ . '/font-palettes.php';
 	require_once __DIR__ . '/connected-fields.php';
-//	require_once __DIR__ . '/layout.php';
 
 	// Add new options to the Customify config
 	add_filter( 'customify_filter_fields', 'rosa2_add_customify_options', 11, 1 );

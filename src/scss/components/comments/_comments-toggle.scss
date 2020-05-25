@@ -4,6 +4,11 @@
 
     display: block;
     text-align: center;
+
+    // overwrite margin set on label:not(:last-child)
+    &[class] {
+        margin-bottom: 0;
+    }
 }
 
 .c-comments-toggle__checkbox {
@@ -12,8 +17,4 @@
     &:not(:checked) + .c-comments-toggle__label ~ * {
         display: none;
     }
-}
-
-.c-comments-toggle__checkbox + .c-comments-toggle__label {
-    --element-spacing: 0;
 }

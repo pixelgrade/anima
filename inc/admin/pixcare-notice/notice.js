@@ -43,8 +43,7 @@
         $button.css('width', $button.parent().width())
         $button.addClass('state--plugin-redirecting').prop('disabled', true)
         setTimeout(function () {
-          // Skip the welcome state of the wizard.
-          window.location.href = pixcareNotice.pixcareSetupUrl + '&skip-welcome=true'
+          window.location.href = pixcareNotice.pixcareSetupUrl
         }, 1000)
         return
       }
