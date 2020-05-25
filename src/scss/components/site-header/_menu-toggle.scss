@@ -6,16 +6,20 @@
     display: flex;
     align-items: center;
 
-    position: fixed;
-    top: 0;
-    left: 0;
+    position: relative;
     z-index: 1100;
 
     padding: 1em 1em 1em var(--theme-header-sides-spacing);
+    margin-top: var(--promo-bar-height);
 
     cursor: pointer;
 
     @include wp-offset(top, 0, true);
+
+    .site-header--scrolled & {
+        position: fixed;
+        margin-top: 0;
+    }
 }
 
 .c-menu-toggle__checkbox {

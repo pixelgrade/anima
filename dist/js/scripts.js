@@ -1182,12 +1182,15 @@ function () {
     this.$toggleWrap = external_jQuery_default()('.c-menu-toggle__wrap');
     this.scrolled = false;
     this.inversed = false;
+    this.abovePromoBar = false;
     this.wasSticky = external_jQuery_default()('body').is('.has-site-header-fixed');
     this.offset = 0;
     this.scrollOffset = 0;
     this.mobileHeaderHeight = 0;
+    this.promoBarHeight = 0;
     this.$page = external_jQuery_default()('#page .site-content');
     this.$hero = external_jQuery_default()('.has-hero .novablocks-hero').first().find('.novablocks-hero__foreground');
+    this.$promoBar = external_jQuery_default()('.novablocks-announcement-bar');
     this.createMobileHeader();
     this.onResize();
     this.render(false);
@@ -1207,8 +1210,6 @@ function () {
   }, {
     key: "update",
     value: function update() {
-      this.updatePageOffset();
-      this.updateHeaderOffset();
       this.updateMobileHeaderOffset();
     }
   }, {
@@ -1271,6 +1272,10 @@ function () {
       this.box = this.element.getBoundingClientRect();
       this.scrollOffset = this.getScrollOffset();
       this.mobileHeaderHeight = this.getMobileHeaderHeight();
+
+      if (this.$promoBar.length) {
+        this.promoBarHeight = this.$promoBar.outerHeight();
+      }
     }
   }, {
     key: "onResize",
@@ -1309,26 +1314,19 @@ function () {
       }
     }
   }, {
-    key: "updateHeaderOffset",
-    value: function updateHeaderOffset() {
-      if (!this.element) return;
-      this.element.style.marginTop = this.offset + 'px';
-    }
-  }, {
     key: "updateMobileHeaderOffset",
     value: function updateMobileHeaderOffset() {
       if (!this.$mobileHeader) return;
       this.$mobileHeader.css({
-        height: this.mobileHeaderHeight,
-        marginTop: this.offset + 'px'
+        height: this.mobileHeaderHeight
       });
       external_jQuery_default()('.site-header__inner-container').css({
         marginTop: this.mobileHeaderHeight
       });
       this.$toggleWrap.css({
-        height: this.mobileHeaderHeight,
-        marginTop: this.offset + 'px'
+        height: this.mobileHeaderHeight
       });
+      document.documentElement.style.setProperty('--promo-bar-height', this.offset + "px");
     }
   }, {
     key: "getScrollOffset",
@@ -1347,20 +1345,6 @@ function () {
       }
 
       return 0;
-    }
-  }, {
-    key: "updatePageOffset",
-    value: function updatePageOffset() {
-      TweenMax.set(this.$page, {
-        css: {
-          marginTop: this.visibleHeaderHeight + this.offset
-        }
-      });
-      TweenMax.set(this.$hero, {
-        css: {
-          marginTop: this.offset
-        }
-      });
     }
   }, {
     key: "createMobileHeader",
@@ -1389,6 +1373,7 @@ function () {
           scrollY = _GlobalService$getPro3.scrollY;
 
       var scrolled = scrollY > this.scrollOffset;
+      var abovePromoBar = scrollY >= this.promoBarHeight;
 
       if (inversed !== this.inversed) {
         this.$header.toggleClass('site-header--normal', !inversed);
@@ -1398,6 +1383,16 @@ function () {
       if (scrolled !== this.scrolled) {
         this.$header.toggleClass('site-header--scrolled', scrolled);
         this.scrolled = scrolled;
+      }
+
+      if (abovePromoBar !== this.abovePromoBar) {
+        if (this.$promoBar.length && !this.$promoBar.hasClass('is-hidden')) {
+          external_jQuery_default()(body).toggleClass('site-header--scrolled', abovePromoBar);
+          this.abovePromoBar = abovePromoBar;
+        } else {
+          external_jQuery_default()(body).toggleClass('site-header--scrolled', scrolled);
+          this.scrolled = scrolled;
+        }
       }
     }
   }]);

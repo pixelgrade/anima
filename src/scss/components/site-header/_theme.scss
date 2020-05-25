@@ -16,6 +16,8 @@ $site-header-transition-speed: .3s !default;
 
         will-change: transform;
         pointer-events: none;
+
+        margin-top: var(--promo-bar-height);
     }
 
     .site-header__wrapper {
@@ -50,6 +52,32 @@ $site-header-transition-speed: .3s !default;
         pointer-events: none;
         transition: --theme-transition;
         transition-property: opacity;
+    }
+
+    .has-site-header-transparent {
+
+        .site-header__wrapper {
+            &:before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: var(--current-light-primary);
+                opacity: 0;
+
+                transition: opacity .2s ease;
+            }
+        }
+
+        &.has-site-header-fixed {
+            .site-header--scrolled .site-header__wrapper {
+                &:before {
+                    opacity: .95;
+                }
+            }
+        }
     }
 }
 
@@ -135,7 +163,6 @@ body.has-site-header-transparent  {
         }
 
         &.has-site-header-fixed .site-header--scrolled .site-header__wrapper {
-            background-color: var(--current-light-primary);
 
             &:after {
                 opacity: 0.1;

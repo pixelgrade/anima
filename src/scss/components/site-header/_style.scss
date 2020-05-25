@@ -58,6 +58,10 @@
 
 .site-header--mobile {
     display: none;
+
+    &.site-header--scrolled {
+        color: var(--current-dark-primary);
+    }
 }
 
 @media not screen and (min-width: 1000px) {
@@ -73,7 +77,7 @@
 
 .site-header,
 .site-header--mobile {
-    @include wp-offset(top, 0, true);
+    @include wp-offset(top, 0, false);
 }
 
 @import "theme";

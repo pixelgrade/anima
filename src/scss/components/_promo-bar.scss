@@ -1,10 +1,14 @@
 .promo-bar {
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     z-index: 1100;
 
     width: 100%;
+    
+    @include above(lap) {
+        position: fixed;
+    }
 
     @include wp-offset(top, 0, true);
 
@@ -18,5 +22,14 @@
         left: 0;
         width: 100%;
         transform: translate(0,-50%);
+
+        padding-left: var(--theme-header-sides-spacing);
+        padding-right: var(--theme-header-sides-spacing);
+    }
+}
+
+.novablocks-announcement-bar__close {
+    @include below(lap) {
+        display: none;
     }
 }
