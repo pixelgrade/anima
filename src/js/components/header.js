@@ -19,14 +19,17 @@ class Header {
 
 		this.scrolled = false;
 		this.inversed = false;
+		this.abovePromoBar = false;
 		this.wasSticky = $( 'body' ).is( '.has-site-header-fixed' );
 
 		this.offset = 0;
 		this.scrollOffset = 0;
 		this.mobileHeaderHeight = 0;
+		this.promoBarHeight = 0;
 
 		this.$page = $( '#page .site-content' );
 		this.$hero = $( '.has-hero .novablocks-hero' ).first().find( '.novablocks-hero__foreground' );
+		this.$promoBar = $('.novablocks-announcement-bar');
 
 		this.createMobileHeader();
 
@@ -49,8 +52,6 @@ class Header {
 	}
 
 	update() {
-		this.updatePageOffset();
-		this.updateHeaderOffset();
 		this.updateMobileHeaderOffset();
 	}
 
@@ -100,6 +101,10 @@ class Header {
 		this.box = this.element.getBoundingClientRect();
 		this.scrollOffset = this.getScrollOffset();
 		this.mobileHeaderHeight = this.getMobileHeaderHeight();
+
+		if ( this.$promoBar.length ) {
+			this.promoBarHeight = this.$promoBar.outerHeight();
+		}
 	}
 
 	onResize() {
@@ -137,18 +142,11 @@ class Header {
 		}
 	}
 
-	updateHeaderOffset() {
-		if ( ! this.element ) return;
-
-		this.element.style.marginTop = this.offset + 'px';
-	}
-
 	updateMobileHeaderOffset() {
 		if ( ! this.$mobileHeader ) return;
 
 		this.$mobileHeader.css( {
 			height: this.mobileHeaderHeight,
-			marginTop: this.offset + 'px',
 		} );
 
 		$( '.site-header__inner-container' ).css( {
@@ -157,8 +155,10 @@ class Header {
 
 		this.$toggleWrap.css( {
 			height: this.mobileHeaderHeight,
-			marginTop: this.offset + 'px',
 		} );
+
+		document.documentElement.style
+		        .setProperty('--promo-bar-height', this.offset + "px");
 	}
 
 	getScrollOffset() {
@@ -173,11 +173,6 @@ class Header {
 		}
 
 		return 0;
-	}
-
-	updatePageOffset() {
-		TweenMax.set( this.$page, { css: { marginTop: this.visibleHeaderHeight + this.offset } } );
-		TweenMax.set( this.$hero, { css: { marginTop: this.offset } } );
 	}
 
 	createMobileHeader() {
@@ -205,6 +200,8 @@ class Header {
 
 		const { scrollY } = GlobalService.getProps();
 		const scrolled = scrollY > this.scrollOffset;
+		const abovePromoBar = scrollY >= this.promoBarHeight;
+
 
 		if ( inversed !== this.inversed ) {
 			this.$header.toggleClass( 'site-header--normal', ! inversed );
@@ -214,6 +211,16 @@ class Header {
 		if ( scrolled !== this.scrolled ) {
 			this.$header.toggleClass( 'site-header--scrolled', scrolled );
 			this.scrolled = scrolled;
+		}
+
+		if ( ( abovePromoBar !== this.abovePromoBar ) ) {
+			if( this.$promoBar.length && ! this.$promoBar.hasClass('is-hidden') ) {
+				$ (body ).toggleClass( 'site-header--scrolled', abovePromoBar );
+				this.abovePromoBar = abovePromoBar;
+			} else {
+				$ (body ).toggleClass( 'site-header--scrolled', scrolled );
+				this.scrolled = scrolled;
+			}
 		}
 	}
 }
