@@ -52,6 +52,8 @@ class Header {
 	}
 
 	update() {
+		this.updatePageOffset();
+		this.updateHeaderOffset();
 		this.updateMobileHeaderOffset();
 	}
 
@@ -137,9 +139,15 @@ class Header {
 		const $body = $( 'body' );
 		const { windowHeight } = GlobalService.getProps();
 
-		if ( this.wasSticky ) {
+		if ( this.wasSticky && this.visibleHeaderHeight !== undefined ) {
 			$body.toggleClass( 'has-site-header-fixed', this.visibleHeaderHeight < windowHeight * 0.2 );
 		}
+	}
+
+	updateHeaderOffset() {
+		if ( ! this.element ) return;
+
+		this.element.style.marginTop = this.offset + 'px';
 	}
 
 	updateMobileHeaderOffset() {
@@ -147,6 +155,7 @@ class Header {
 
 		this.$mobileHeader.css( {
 			height: this.mobileHeaderHeight,
+			marginTop: this.offset + 'px',
 		} );
 
 		$( '.site-header__inner-container' ).css( {
@@ -155,10 +164,8 @@ class Header {
 
 		this.$toggleWrap.css( {
 			height: this.mobileHeaderHeight,
+			marginTop: this.offset + 'px',
 		} );
-
-		document.documentElement.style
-		        .setProperty('--promo-bar-height', this.offset + "px");
 	}
 
 	getScrollOffset() {
@@ -173,6 +180,11 @@ class Header {
 		}
 
 		return 0;
+	}
+
+	updatePageOffset() {
+		TweenMax.set( this.$page, { css: { marginTop: this.visibleHeaderHeight + this.offset } } );
+		TweenMax.set( this.$hero, { css: { marginTop: this.offset } } );
 	}
 
 	createMobileHeader() {

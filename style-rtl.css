@@ -1167,7 +1167,6 @@ ul.menu a,
   position: relative;
   z-index: 1100;
   padding: 1em var(--theme-header-sides-spacing) 1em 1em;
-  margin-top: var(--promo-bar-height);
   cursor: pointer; }
   .admin-bar .c-menu-toggle__wrap {
     top: 32px; }
@@ -1317,8 +1316,6 @@ ul.menu a,
       position: absolute;
       top: 50%;
       transform: translateY(-50%) rotate(-45deg); }
-    .site-header:not(.site-header--scrolled) .site-header__wrapper {
-      padding-top: var(--promo-bar-height); }
   .c-menu-toggle {
     position: absolute;
     top: 0;
@@ -1345,8 +1342,7 @@ ul.menu a,
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--theme-spacing-fluid-medium) var(--theme-header-sides-spacing);
-    margin-top: var(--promo-bar-height); }
+    padding: var(--theme-spacing-fluid-medium) var(--theme-header-sides-spacing); }
     .site-header--scrolled .site-header--mobile {
       position: fixed;
       margin-top: 0; }
@@ -1357,7 +1353,8 @@ ul.menu a,
       left: var(--theme-header-sides-spacing);
       transform: translateY(-50%); }
       .site-header--mobile .menu-item--cart > a {
-        color: currentColor; }
+        color: currentColor;
+        transition: color .3s ease-out; }
     .site-header--mobile:before {
       content: '';
       position: absolute;
@@ -1411,6 +1408,10 @@ ul.menu a,
     .sub-menu > li {
       padding-right: var(--theme-wrapper-sides-spacing);
       padding-left: var(--theme-wrapper-sides-spacing); }
+  .site-header--scrolled .site-header--mobile, .site-header--scrolled
+  .c-menu-toggle__wrap, .site-header--scrolled
+  .site-header--scrolled {
+    margin-top: 0 !important; }
   .site-header,
   .c-menu-toggle__slice {
     transition: transform .3s ease-out; }
@@ -1467,8 +1468,7 @@ ul.menu a,
     transition: var(--theme-transition);
     transition-property: opacity;
     will-change: transform;
-    pointer-events: none;
-    margin-top: var(--promo-bar-height); }
+    pointer-events: none; }
     .admin-bar .site-header {
       top: 32px; }
     .demo-site .site-header {
@@ -1629,6 +1629,10 @@ ul.menu a,
   opacity: 0; }
   .is-dark-mode .c-logo__inverted {
     opacity: 1; }
+
+.c-logo__default,
+.c-logo__inverted {
+  transition: opacity .3s ease-out; }
 
 /* 2.2. Site Content */
 /* 2.3. Site Footer */

@@ -1210,6 +1210,8 @@ function () {
   }, {
     key: "update",
     value: function update() {
+      this.updatePageOffset();
+      this.updateHeaderOffset();
       this.updateMobileHeaderOffset();
     }
   }, {
@@ -1309,24 +1311,31 @@ function () {
       var _GlobalService$getPro = globalService.getProps(),
           windowHeight = _GlobalService$getPro.windowHeight;
 
-      if (this.wasSticky) {
+      if (this.wasSticky && this.visibleHeaderHeight !== undefined) {
         $body.toggleClass('has-site-header-fixed', this.visibleHeaderHeight < windowHeight * 0.2);
       }
+    }
+  }, {
+    key: "updateHeaderOffset",
+    value: function updateHeaderOffset() {
+      if (!this.element) return;
+      this.element.style.marginTop = this.offset + 'px';
     }
   }, {
     key: "updateMobileHeaderOffset",
     value: function updateMobileHeaderOffset() {
       if (!this.$mobileHeader) return;
       this.$mobileHeader.css({
-        height: this.mobileHeaderHeight
+        height: this.mobileHeaderHeight,
+        marginTop: this.offset + 'px'
       });
       external_jQuery_default()('.site-header__inner-container').css({
         marginTop: this.mobileHeaderHeight
       });
       this.$toggleWrap.css({
-        height: this.mobileHeaderHeight
+        height: this.mobileHeaderHeight,
+        marginTop: this.offset + 'px'
       });
-      document.documentElement.style.setProperty('--promo-bar-height', this.offset + "px");
     }
   }, {
     key: "getScrollOffset",
@@ -1345,6 +1354,20 @@ function () {
       }
 
       return 0;
+    }
+  }, {
+    key: "updatePageOffset",
+    value: function updatePageOffset() {
+      TweenMax.set(this.$page, {
+        css: {
+          marginTop: this.visibleHeaderHeight + this.offset
+        }
+      });
+      TweenMax.set(this.$hero, {
+        css: {
+          marginTop: this.offset
+        }
+      });
     }
   }, {
     key: "createMobileHeader",
