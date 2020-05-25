@@ -1750,13 +1750,19 @@ ul.menu a,
   .comments-area > :not(:first-child) {
     --element-spacing: var(--theme-spacing-medium);
     margin-top: var(--element-spacing); }
+  .comments-area:not(:first-child) {
+    margin-top: var(--theme-spacing-fluid-medium); }
 
 .comments-area__wrap {
   overflow: hidden; }
+  .comments-area__wrap[class] {
+    margin-top: 0; }
 
-.comments-area__content > :not(:first-child) {
-  --element-spacing: var(--theme-spacing-medium);
-  margin-top: var(--element-spacing); }
+.comments-area__content {
+  padding-top: var(--element-spacing); }
+  .comments-area__content > :not(:first-child) {
+    --element-spacing: var(--theme-spacing-medium);
+    margin-top: var(--element-spacing); }
 
 .c-comments-toggle__label {
   display: inline-block;
@@ -1816,14 +1822,13 @@ ul.menu a,
     background-color: var(--theme-button-background-color); }
   .c-comments-toggle__label:not([disabled]):hover:before {
     transform: scale3d(0, 1, 1); }
+  .c-comments-toggle__label[class] {
+    margin-bottom: 0; }
 
 .c-comments-toggle__checkbox {
   display: none; }
   .c-comments-toggle__checkbox:not(:checked) + .c-comments-toggle__label ~ * {
     display: none; }
-
-.c-comments-toggle__checkbox + .c-comments-toggle__label {
-  --element-spacing: 0; }
 
 .comment {
   position: relative; }
@@ -2087,8 +2092,10 @@ label.subscribe-label.subscribe-label {
   display: none; }
 
 /* 2.5. Navigation */
-.navigation[class][class] {
-  margin-top: var(--theme-spacing-xl);
+.navigation[class]:not(first-child) {
+  margin-top: var(--theme-spacing-xl); }
+
+.navigation[class]:not(last-child) {
   margin-bottom: var(--theme-spacing-xl); }
 
 .novablocks-media--blog + .navigation[class] {
@@ -2825,18 +2832,6 @@ img:not(.is-loaded) {
 
 .entry-meta a:hover {
   text-decoration-color: var(--current-color-primary); }
-
-.single .site-content,
-.page .site-content {
-  padding-bottom: var(--theme-spacing-fluid-large);
-  overflow: hidden; }
-
-.post + .comments-area,
-.page + .comments-area {
-  margin-top: var(--theme-spacing-fluid-medium); }
-
-.page:not(.has-hero) .site-content {
-  padding-top: var(--theme-spacing-fluid-large); }
 
 button,
 input,

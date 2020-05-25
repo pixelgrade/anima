@@ -37,30 +37,6 @@ img:not(.is-loaded) {
     text-decoration-color: var(--current-color-primary);
 }
 
-.single,
-.page {
-
-    .site-content {
-        padding-bottom: var(--theme-spacing-fluid-large);
-
-        overflow: hidden;
-    }
-}
-
-.post,
-.page {
-    + .comments-area {
-        margin-top: var(--theme-spacing-fluid-medium);
-    }
-}
-
-.page:not(.has-hero) {
-
-    .site-content {
-        padding-top: var(--theme-spacing-fluid-large);
-    }
-}
-
 // We need this to overwrite normalize font: inherit
 // @todo: Mode to a more appropriate file
 
