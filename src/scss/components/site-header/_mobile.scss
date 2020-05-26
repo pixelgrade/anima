@@ -13,10 +13,19 @@
 
     width: 100vw;
 
-    background: var(--sm-dark-primary);
     color: var(--sm-light-primary);
+    background: transparent;
 
-    opacity: .97;
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--sm-dark-primary);
+        opacity: 0.95;
+    }
 
     .c-menu-toggle__checkbox ~ & {
         display: block;
