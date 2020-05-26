@@ -1326,15 +1326,19 @@ function () {
     value: function updateMobileHeaderOffset() {
       if (!this.$mobileHeader) return;
       this.$mobileHeader.css({
-        height: this.mobileHeaderHeight,
-        marginTop: this.offset + 'px'
+        height: this.mobileHeaderHeight
+      });
+      TweenMax.to(this.$mobileHeader, .2, {
+        y: this.offset
       });
       external_jQuery_default()('.site-header__inner-container').css({
         marginTop: this.mobileHeaderHeight
       });
       this.$toggleWrap.css({
-        height: this.mobileHeaderHeight,
-        marginTop: this.offset + 'px'
+        height: this.mobileHeaderHeight
+      });
+      TweenMax.to(this.$toggleWrap, .2, {
+        y: this.offset
       });
     }
   }, {
@@ -1408,7 +1412,7 @@ function () {
           scrollY = _GlobalService$getPro4.scrollY;
 
       var scrolled = scrollY > this.scrollOffset;
-      var abovePromoBar = scrollY >= this.promoBarHeight;
+      var abovePromoBar = scrollY > this.promoBarHeight;
       this.updateMobileNavigationOffset();
 
       if (inversed !== this.inversed) {

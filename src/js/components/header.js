@@ -155,8 +155,9 @@ class Header {
 
 		this.$mobileHeader.css( {
 			height: this.mobileHeaderHeight,
-			marginTop: this.offset + 'px',
 		} );
+
+		TweenMax.to(this.$mobileHeader, .2, {y: this.offset});
 
 		$( '.site-header__inner-container' ).css( {
 			marginTop: this.mobileHeaderHeight
@@ -164,8 +165,9 @@ class Header {
 
 		this.$toggleWrap.css( {
 			height: this.mobileHeaderHeight,
-			marginTop: this.offset + 'px',
 		} );
+
+		TweenMax.to(this.$toggleWrap, .2, {y: this.offset});
 	}
 
 	getScrollOffset() {
@@ -221,7 +223,7 @@ class Header {
 
 		const { scrollY } = GlobalService.getProps();
 		const scrolled = scrollY > this.scrollOffset;
-		const abovePromoBar = scrollY >= this.promoBarHeight;
+		const abovePromoBar = scrollY > this.promoBarHeight;
 
 		this.updateMobileNavigationOffset();
 
