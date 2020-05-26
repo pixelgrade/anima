@@ -1370,6 +1370,18 @@ function () {
       });
     }
   }, {
+    key: "updateMobileNavigationOffset",
+    value: function updateMobileNavigationOffset() {
+      var mq = window.matchMedia("only screen and (max-width: 1000px)");
+
+      var _GlobalService$getPro3 = globalService.getProps(),
+          scrollY = _GlobalService$getPro3.scrollY;
+
+      if (mq.matches && this.$promoBar.length) {
+        this.element.style.marginTop = Math.max(this.promoBarHeight - scrollY, 0) + 'px';
+      }
+    }
+  }, {
     key: "createMobileHeader",
     value: function createMobileHeader() {
       if (this.createdMobileHeader) return;
@@ -1392,11 +1404,12 @@ function () {
     value: function render(inversed) {
       if (!this.element) return;
 
-      var _GlobalService$getPro3 = globalService.getProps(),
-          scrollY = _GlobalService$getPro3.scrollY;
+      var _GlobalService$getPro4 = globalService.getProps(),
+          scrollY = _GlobalService$getPro4.scrollY;
 
       var scrolled = scrollY > this.scrollOffset;
       var abovePromoBar = scrollY >= this.promoBarHeight;
+      this.updateMobileNavigationOffset();
 
       if (inversed !== this.inversed) {
         this.$header.toggleClass('site-header--normal', !inversed);

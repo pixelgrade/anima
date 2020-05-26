@@ -187,6 +187,15 @@ class Header {
 		TweenMax.set( this.$hero, { css: { marginTop: this.offset } } );
 	}
 
+	updateMobileNavigationOffset() {
+		const mq = window.matchMedia( "only screen and (max-width: 1000px)" );
+		const { scrollY } = GlobalService.getProps();
+
+		if ( mq.matches && this.$promoBar.length ) {
+			this.element.style.marginTop = Math.max(( this.promoBarHeight - scrollY ), 0) + 'px';
+		}
+	}
+
 	createMobileHeader() {
 		if ( this.createdMobileHeader ) return;
 
@@ -214,6 +223,7 @@ class Header {
 		const scrolled = scrollY > this.scrollOffset;
 		const abovePromoBar = scrollY >= this.promoBarHeight;
 
+		this.updateMobileNavigationOffset();
 
 		if ( inversed !== this.inversed ) {
 			this.$header.toggleClass( 'site-header--normal', ! inversed );
