@@ -1389,7 +1389,7 @@ function () {
       var abovePromoBar = scrollY > this.promoBarHeight;
 
       if (abovePromoBar !== this.abovePromoBar) {
-        external_jQuery_default()(body).toggleClass('site-header--scrolled', abovePromoBar);
+        external_jQuery_default()(body).toggleClass('site-header-mobile--scrolled', abovePromoBar);
         this.abovePromoBar = abovePromoBar;
       }
     }

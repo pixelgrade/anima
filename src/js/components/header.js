@@ -202,7 +202,7 @@ class Header {
 		const abovePromoBar = scrollY > this.promoBarHeight;
 
 		if ( ( abovePromoBar !== this.abovePromoBar ) ) {
-			$(body).toggleClass( 'site-header--scrolled', abovePromoBar );
+			$(body).toggleClass( 'site-header-mobile--scrolled', abovePromoBar );
 			this.abovePromoBar = abovePromoBar;
 		}
 	}
