@@ -186,7 +186,6 @@ class Header {
 
 	updatePageOffset() {
 		TweenMax.set( this.$page, { css: { marginTop: this.visibleHeaderHeight + this.offset } } );
-		TweenMax.set( this.$hero, { css: { marginTop: this.offset } } );
 	}
 
 	updateMobileNavigationOffset() {
@@ -195,6 +194,32 @@ class Header {
 
 		if ( mq.matches && this.$promoBar.length ) {
 			this.element.style.marginTop = Math.max(( this.promoBarHeight - scrollY ), 0) + 'px';
+		}
+	}
+
+	updateMobileHeaderState() {
+		const { scrollY } = GlobalService.getProps();
+		const abovePromoBar = scrollY > this.promoBarHeight;
+
+		if ( ( abovePromoBar !== this.abovePromoBar ) ) {
+			$(body).toggleClass( 'site-header--scrolled', abovePromoBar );
+			this.abovePromoBar = abovePromoBar;
+		}
+	}
+
+	updateDesktopHeaderState(inversed) {
+
+		const { scrollY } = GlobalService.getProps();
+		const scrolled = scrollY > this.scrollOffset;
+
+		if ( inversed !== this.inversed ) {
+			this.$header.toggleClass( 'site-header--normal', ! inversed );
+			this.inversed = inversed;
+		}
+
+		if ( scrolled !== this.scrolled ) {
+			this.$header.toggleClass( 'site-header--scrolled', scrolled );
+			this.scrolled = scrolled;
 		}
 	}
 
@@ -221,31 +246,9 @@ class Header {
 	render( inversed ) {
 		if ( ! this.element ) return;
 
-		const { scrollY } = GlobalService.getProps();
-		const scrolled = scrollY > this.scrollOffset;
-		const abovePromoBar = scrollY > this.promoBarHeight;
-
 		this.updateMobileNavigationOffset();
-
-		if ( inversed !== this.inversed ) {
-			this.$header.toggleClass( 'site-header--normal', ! inversed );
-			this.inversed = inversed;
-		}
-
-		if ( scrolled !== this.scrolled ) {
-			this.$header.toggleClass( 'site-header--scrolled', scrolled );
-			this.scrolled = scrolled;
-		}
-
-		if ( ( abovePromoBar !== this.abovePromoBar ) ) {
-			if( this.$promoBar.length && ! this.$promoBar.hasClass('is-hidden') ) {
-				$ (body ).toggleClass( 'site-header--scrolled', abovePromoBar );
-				this.abovePromoBar = abovePromoBar;
-			} else {
-				$ (body ).toggleClass( 'site-header--scrolled', scrolled );
-				this.scrolled = scrolled;
-			}
-		}
+		this.updateMobileHeaderState();
+		this.updateDesktopHeaderState();
 	}
 }
 

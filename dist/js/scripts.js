@@ -1367,11 +1367,6 @@ function () {
           marginTop: this.visibleHeaderHeight + this.offset
         }
       });
-      TweenMax.set(this.$hero, {
-        css: {
-          marginTop: this.offset
-        }
-      });
     }
   }, {
     key: "updateMobileNavigationOffset",
@@ -1383,6 +1378,37 @@ function () {
 
       if (mq.matches && this.$promoBar.length) {
         this.element.style.marginTop = Math.max(this.promoBarHeight - scrollY, 0) + 'px';
+      }
+    }
+  }, {
+    key: "updateMobileHeaderState",
+    value: function updateMobileHeaderState() {
+      var _GlobalService$getPro4 = globalService.getProps(),
+          scrollY = _GlobalService$getPro4.scrollY;
+
+      var abovePromoBar = scrollY > this.promoBarHeight;
+
+      if (abovePromoBar !== this.abovePromoBar) {
+        external_jQuery_default()(body).toggleClass('site-header--scrolled', abovePromoBar);
+        this.abovePromoBar = abovePromoBar;
+      }
+    }
+  }, {
+    key: "updateDesktopHeaderState",
+    value: function updateDesktopHeaderState(inversed) {
+      var _GlobalService$getPro5 = globalService.getProps(),
+          scrollY = _GlobalService$getPro5.scrollY;
+
+      var scrolled = scrollY > this.scrollOffset;
+
+      if (inversed !== this.inversed) {
+        this.$header.toggleClass('site-header--normal', !inversed);
+        this.inversed = inversed;
+      }
+
+      if (scrolled !== this.scrolled) {
+        this.$header.toggleClass('site-header--scrolled', scrolled);
+        this.scrolled = scrolled;
       }
     }
   }, {
@@ -1407,33 +1433,9 @@ function () {
     key: "render",
     value: function render(inversed) {
       if (!this.element) return;
-
-      var _GlobalService$getPro4 = globalService.getProps(),
-          scrollY = _GlobalService$getPro4.scrollY;
-
-      var scrolled = scrollY > this.scrollOffset;
-      var abovePromoBar = scrollY > this.promoBarHeight;
       this.updateMobileNavigationOffset();
-
-      if (inversed !== this.inversed) {
-        this.$header.toggleClass('site-header--normal', !inversed);
-        this.inversed = inversed;
-      }
-
-      if (scrolled !== this.scrolled) {
-        this.$header.toggleClass('site-header--scrolled', scrolled);
-        this.scrolled = scrolled;
-      }
-
-      if (abovePromoBar !== this.abovePromoBar) {
-        if (this.$promoBar.length && !this.$promoBar.hasClass('is-hidden')) {
-          external_jQuery_default()(body).toggleClass('site-header--scrolled', abovePromoBar);
-          this.abovePromoBar = abovePromoBar;
-        } else {
-          external_jQuery_default()(body).toggleClass('site-header--scrolled', scrolled);
-          this.scrolled = scrolled;
-        }
-      }
+      this.updateMobileHeaderState();
+      this.updateDesktopHeaderState();
     }
   }]);
 
