@@ -430,6 +430,18 @@ var hasTouchScreen = function hasTouchScreen() {
 
   return hasTouchScreen;
 };
+var mq = function mq(direction, string) {
+  var $temp = jQuery('<div class="u-mq-' + direction + '-' + string + '">').appendTo('body'),
+      response = $temp.is(':visible');
+  $temp.remove();
+  return response;
+};
+var below = function below(string) {
+  return mq('below', string);
+};
+var above = function above(string) {
+  return mq('above', string);
+};
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/toConsumableArray.js
 var toConsumableArray = __webpack_require__(3);
 var toConsumableArray_default = /*#__PURE__*/__webpack_require__.n(toConsumableArray);
@@ -1164,6 +1176,7 @@ function () {
 
 
 
+
 var defaults = {
   offsetTargetElement: null
 };
@@ -1193,7 +1206,7 @@ function () {
     this.$promoBar = external_jQuery_default()('.novablocks-announcement-bar');
     this.createMobileHeader();
     this.onResize();
-    this.render(false);
+    this.render();
     globalService.registerOnResize(this.onResize.bind(this));
     this.initialize();
   }
@@ -1286,9 +1299,9 @@ function () {
       var wasScrolled = $header.hasClass('site-header--scrolled');
       $header.css('transition', 'none');
       $header.removeClass('site-header--scrolled');
-      this.shouldMakeHeaderStatic();
       this.getProps();
       this.setVisibleHeaderHeight();
+      this.shouldMakeHeaderStatic();
       $header.toggleClass('site-header--scrolled', wasScrolled);
 
       if (window.requestIdleCallback) {
@@ -1311,7 +1324,7 @@ function () {
       var _GlobalService$getPro = globalService.getProps(),
           windowHeight = _GlobalService$getPro.windowHeight;
 
-      if (this.wasSticky && this.visibleHeaderHeight !== undefined) {
+      if (this.wasSticky) {
         $body.toggleClass('has-site-header-fixed', this.visibleHeaderHeight < windowHeight * 0.2);
       }
     }
@@ -1332,7 +1345,7 @@ function () {
         y: this.offset
       });
       external_jQuery_default()('.site-header__inner-container').css({
-        marginTop: this.mobileHeaderHeight
+        transform: "translateY(".concat(this.mobileHeaderHeight, "px)")
       });
       this.$toggleWrap.css({
         height: this.mobileHeaderHeight
@@ -1371,12 +1384,10 @@ function () {
   }, {
     key: "updateMobileNavigationOffset",
     value: function updateMobileNavigationOffset() {
-      var mq = window.matchMedia("only screen and (max-width: 1000px)");
-
       var _GlobalService$getPro3 = globalService.getProps(),
           scrollY = _GlobalService$getPro3.scrollY;
 
-      if (mq.matches && this.$promoBar.length) {
+      if (below('lap')) {
         this.element.style.marginTop = Math.max(this.promoBarHeight - scrollY, 0) + 'px';
       }
     }
@@ -1431,11 +1442,11 @@ function () {
     }
   }, {
     key: "render",
-    value: function render(inversed) {
+    value: function render() {
       if (!this.element) return;
       this.updateMobileNavigationOffset();
       this.updateMobileHeaderState();
-      this.updateDesktopHeaderState();
+      this.updateDesktopHeaderState(false);
     }
   }]);
 

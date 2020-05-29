@@ -1,3 +1,42 @@
+[class*="u-mq"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  visibility: hidden; }
+
+@media only screen and (min-width: 480px) {
+  .u-mq-below-mobile {
+    display: none; } }
+
+@media not screen and (min-width: 480px) {
+  .u-mq-above-mobile {
+    display: none; } }
+
+@media only screen and (min-width: 768px) {
+  .u-mq-below-tablet {
+    display: none; } }
+
+@media not screen and (min-width: 768px) {
+  .u-mq-above-tablet {
+    display: none; } }
+
+@media only screen and (min-width: 1000px) {
+  .u-mq-below-lap {
+    display: none; } }
+
+@media not screen and (min-width: 1000px) {
+  .u-mq-above-lap {
+    display: none; } }
+
+@media only screen and (min-width: 1440px) {
+  .u-mq-below-desktop {
+    display: none; } }
+
+@media not screen and (min-width: 1440px) {
+  .u-mq-above-desktop {
+    display: none; } }
+
 .wc-block-featured-category {
   position: relative;
   background-size: cover;

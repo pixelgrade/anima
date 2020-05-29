@@ -76,7 +76,8 @@
 
 .comment__metadata a,
 .reply.reply a {
-    transition: opacity .2s ease;
+    transition: var(--theme-transition);
+    transition-property: opacity;
 
     &:hover {
         opacity: .8;

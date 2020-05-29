@@ -27,3 +27,26 @@ $theme-breakpoints: () !default;
         }
     }
 }
+
+[class*="u-mq"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+@each $name, $value in $theme-breakpoints {
+    .u-mq-below-#{$name} {
+        @include above($name) {
+            display: none;
+        }
+    }
+
+    .u-mq-above-#{$name} {
+        @include below($name) {
+            display: none;
+        }
+    }
+}
+

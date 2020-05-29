@@ -1,4 +1,5 @@
 import GlobalService from "./globalService";
+import { below } from '../utils';
 import $ from 'jquery';
 
 const defaults = {
@@ -34,7 +35,7 @@ class Header {
 		this.createMobileHeader();
 
 		this.onResize();
-		this.render( false );
+		this.render() ;
 		GlobalService.registerOnResize( this.onResize.bind( this ) );
 
 		this.initialize();
@@ -116,9 +117,9 @@ class Header {
 		$header.css( 'transition', 'none' );
 		$header.removeClass( 'site-header--scrolled' );
 
-		this.shouldMakeHeaderStatic();
 		this.getProps();
 		this.setVisibleHeaderHeight();
+		this.shouldMakeHeaderStatic();
 
 		$header.toggleClass( 'site-header--scrolled', wasScrolled );
 
@@ -139,7 +140,7 @@ class Header {
 		const $body = $( 'body' );
 		const { windowHeight } = GlobalService.getProps();
 
-		if ( this.wasSticky && this.visibleHeaderHeight !== undefined ) {
+		if ( this.wasSticky ) {
 			$body.toggleClass( 'has-site-header-fixed', this.visibleHeaderHeight < windowHeight * 0.2 );
 		}
 	}
@@ -160,7 +161,7 @@ class Header {
 		TweenMax.to(this.$mobileHeader, .2, {y: this.offset});
 
 		$( '.site-header__inner-container' ).css( {
-			marginTop: this.mobileHeaderHeight
+			transform:  `translateY(${this.mobileHeaderHeight}px)`
 		} );
 
 		this.$toggleWrap.css( {
@@ -189,10 +190,9 @@ class Header {
 	}
 
 	updateMobileNavigationOffset() {
-		const mq = window.matchMedia( "only screen and (max-width: 1000px)" );
 		const { scrollY } = GlobalService.getProps();
 
-		if ( mq.matches && this.$promoBar.length ) {
+		if ( below('lap') ) {
 			this.element.style.marginTop = Math.max(( this.promoBarHeight - scrollY ), 0) + 'px';
 		}
 	}
@@ -243,12 +243,12 @@ class Header {
 		this.createdMobileHeader = true;
 	}
 
-	render( inversed ) {
+	render() {
 		if ( ! this.element ) return;
 
 		this.updateMobileNavigationOffset();
 		this.updateMobileHeaderState();
-		this.updateDesktopHeaderState();
+		this.updateDesktopHeaderState(false);
 	}
 }
 
