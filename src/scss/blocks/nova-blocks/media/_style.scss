@@ -8,17 +8,11 @@
     @include apply-font(body);
 
     &[class] {
-        flex-basis: calc(50% - var(--novablocks-media-spacing));
         min-width: 0;
     }
 }
 
 .novablocks-media__aside {
-
-    &[class] {
-        // 0.5px to help Edge resolve the calc
-        flex-basis: calc(50% + var(--novablocks-media-spacing) - 0.5px);
-    }
 
     .novablocks-media:not(.novablocks-media--no-thumbnail) & {
         min-height: 15em;
@@ -47,11 +41,30 @@
     @include above(tablet) {
         --novablocks-block-content-padding: var(--novablocks-spacing);
     }
+
+    .novablocks-media--blog & {
+        --novablocks-block-content-box-shadow: none;
+    }
 }
 
 .novablocks-media--blog[class] {
-    --novablocks-block-content-box-shadow: none;
+    --block-top-spacing: 2;
+    --block-bottom-spacing: 2;
+
+    &:first-child {
+        --block-top-spacing: 0;
+    }
+
     --novablocks-block-background-color: var(--current-light-tertiary);
+
+    .novablocks-media__content {
+        flex-basis: calc(50% - var(--novablocks-media-spacing));
+    }
+
+    .novablocks-media__aside {
+        // 0.5px to help Edge resolve the calc
+        flex-basis: calc(50% + var(--novablocks-media-spacing) - 0.5px);
+    }
 
     .novablocks-media__layout {
         align-items: stretch;
