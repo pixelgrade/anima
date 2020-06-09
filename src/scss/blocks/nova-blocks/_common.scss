@@ -1,5 +1,7 @@
+
 @at-root {
 
+    // specificity greater then the one in the plugin
     html:root {
         --novablocks-color-1: var(--current-color-primary);
         --novablocks-color-2: var(--current-color-secondary);
@@ -18,5 +20,14 @@
         --novablocks-spacing: var(--theme-spacing-fluid-medium);
         --novablocks-media-spacing: var(--novablocks-spacing);
         --novablocks-sides-spacings: var(--theme-wrapper-sides-spacing);
+    }
+
+    .novablocks-hero__inner-container,
+    .novablocks-slideshow__inner-container {
+        --theme-wrapper-sides-spacing: 0;
+    }
+
+    .novablocks-u-content-width {
+        --theme-content-width-normal: 100%;
     }
 }
