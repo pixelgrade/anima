@@ -102,22 +102,23 @@ if ( ! function_exists( 'rosa2_alter_novablocks_media_settings' ) ) {
 				),
 			),
 			array(
-				'core/button',
+				'core/buttons',
 				array(
-					'text'      => esc_html__( 'Learn More', '__theme_txtd' ),
 					'align'     => 'center',
-					'className' => 'is-style-text'
 				),
+				array(
+					array(
+						'core/button',
+						array(
+							'text'      => esc_html__( 'Learn More', '__theme_txtd' ),
+							'className' => 'is-style-text'
+						),
+					),
+				)
 			),
 		);
 
 		$settings['media']['attributes']['horizontalAlignment']['default'] = 'center';
-
-//		if ( ! empty( $settings['media']['blockAreaOptions'] ) ) {
-//			$settings['media']['blockAreaOptions'] = array_filter( $settings['media']['blockAreaOptions'], function ( $option ) {
-//				return $option['value'] != 'highlighted';
-//			} );
-//		}
 
 		return $settings;
 	}
