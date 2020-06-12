@@ -6,6 +6,6 @@
 @each $variation in dark, darker, accent {
     .is-style-#{$variation} {
         @extend %theme-variation;
-        @include variation($variation);
+        @include variation($variation, current, theme);
     }
 }
