@@ -21,10 +21,6 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 function rosa2_page_has_hero() {
 	global $post;
 
-	if ( ! in_array( 'nova-blocks/nova-blocks.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-	    return false;
-	}
-
     if ( is_page() && ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
 		$blocks = parse_blocks( $post->post_content );
 
