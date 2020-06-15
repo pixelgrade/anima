@@ -1022,10 +1022,14 @@ ul.menu,
       opacity: .5; }
   @media only screen and (min-width: 1000px) {
     .site-header .menu-item-has-children.hover > .sub-menu,
-    .site-header .menu-item-has-children.hover > .children, .site-header .menu-item-has-children:focus-within > .sub-menu,
-    .site-header .menu-item-has-children:focus-within > .children,
+    .site-header .menu-item-has-children.hover > .children,
     .site-header .page_item_has_children.hover > .sub-menu,
-    .site-header .page_item_has_children.hover > .children,
+    .site-header .page_item_has_children.hover > .children {
+      transform: translateZ(0);
+      opacity: 1;
+      pointer-events: auto; }
+    .site-header .menu-item-has-children:focus-within > .sub-menu,
+    .site-header .menu-item-has-children:focus-within > .children,
     .site-header .page_item_has_children:focus-within > .sub-menu,
     .site-header .page_item_has_children:focus-within > .children {
       transform: translateZ(0);
@@ -1059,8 +1063,10 @@ ul.menu,
     opacity: 0;
     transition: opacity 0.15s cubic-bezier(0.42, 0, 0.58, 1);
     z-index: -1; }
-  .site-header .menu-item-has-children .menu-item:hover:after, .site-header .menu-item-has-children .menu-item:focus-within:after,
-  .site-header .page_item_has_children .menu-item:hover:after,
+  .site-header .menu-item-has-children .menu-item:hover:after,
+  .site-header .page_item_has_children .menu-item:hover:after {
+    opacity: .2; }
+  .site-header .menu-item-has-children .menu-item:focus-within:after,
   .site-header .page_item_has_children .menu-item:focus-within:after {
     opacity: .2; }
   .site-header > ul.menu,
@@ -1288,12 +1294,14 @@ ul.menu a,
     .site-header .page_item_has_children[class] > a {
       display: inline-block;
       position: relative; }
-    .site-header .menu-item-has-children[class].hover > a:after,
-    .site-header .page_item_has_children[class].hover > a:after {
+    .site-header .menu-item-has-children[class].hover > a:after, .site-header .menu-item-has-children[class]:hover > a:after,
+    .site-header .page_item_has_children[class].hover > a:after,
+    .site-header .page_item_has_children[class]:hover > a:after {
       transform: translateY(-50%) rotate(45deg);
       opacity: 1; }
-    .site-header .menu-item-has-children[class].hover > a:before,
-    .site-header .page_item_has_children[class].hover > a:before {
+    .site-header .menu-item-has-children[class].hover > a:before, .site-header .menu-item-has-children[class]:hover > a:before,
+    .site-header .page_item_has_children[class].hover > a:before,
+    .site-header .page_item_has_children[class]:hover > a:before {
       opacity: 1; }
     .site-header .menu-item-has-children[class] a:after,
     .site-header .page_item_has_children[class] a:after {

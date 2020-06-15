@@ -40,7 +40,16 @@ ul.menu,
     }
 
     @media only screen and (min-width: 1000px) {
-      &.hover,
+      &.hover {
+
+        > .sub-menu,
+        > .children {
+          transform: translateZ(0);
+          opacity: 1;
+          pointer-events: auto;
+        }
+      }
+
       &:focus-within {
 
         > .sub-menu,
@@ -94,7 +103,12 @@ ul.menu,
           z-index: -1;
         }
 
-        &:hover,
+        &:hover {
+          &:after {
+            opacity: .2;
+          }
+        }
+
         &:focus-within {
           &:after {
             opacity: .2;
