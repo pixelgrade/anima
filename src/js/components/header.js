@@ -1,4 +1,5 @@
 import GlobalService from "./globalService";
+import { below } from '../utils';
 import $ from 'jquery';
 
 const defaults = {
@@ -19,19 +20,22 @@ class Header {
 
 		this.scrolled = false;
 		this.inversed = false;
+		this.abovePromoBar = false;
 		this.wasSticky = $( 'body' ).is( '.has-site-header-fixed' );
 
 		this.offset = 0;
 		this.scrollOffset = 0;
 		this.mobileHeaderHeight = 0;
+		this.promoBarHeight = 0;
 
 		this.$page = $( '#page .site-content' );
 		this.$hero = $( '.has-hero .novablocks-hero' ).first().find( '.novablocks-hero__foreground' );
+		this.$promoBar = $('.novablocks-announcement-bar');
 
 		this.createMobileHeader();
 
 		this.onResize();
-		this.render( false );
+		this.render() ;
 		GlobalService.registerOnResize( this.onResize.bind( this ) );
 
 		this.initialize();
@@ -100,6 +104,10 @@ class Header {
 		this.box = this.element.getBoundingClientRect();
 		this.scrollOffset = this.getScrollOffset();
 		this.mobileHeaderHeight = this.getMobileHeaderHeight();
+
+		if ( this.$promoBar.length ) {
+			this.promoBarHeight = this.$promoBar.outerHeight();
+		}
 	}
 
 	onResize() {
@@ -109,9 +117,9 @@ class Header {
 		$header.css( 'transition', 'none' );
 		$header.removeClass( 'site-header--scrolled' );
 
-		this.shouldMakeHeaderStatic();
 		this.getProps();
 		this.setVisibleHeaderHeight();
+		this.shouldMakeHeaderStatic();
 
 		$header.toggleClass( 'site-header--scrolled', wasScrolled );
 
@@ -148,17 +156,19 @@ class Header {
 
 		this.$mobileHeader.css( {
 			height: this.mobileHeaderHeight,
-			marginTop: this.offset + 'px',
 		} );
 
+		TweenMax.to(this.$mobileHeader, .2, {y: this.offset});
+
 		$( '.site-header__inner-container' ).css( {
-			marginTop: this.mobileHeaderHeight
+			transform:  `translateY(${this.mobileHeaderHeight}px)`
 		} );
 
 		this.$toggleWrap.css( {
 			height: this.mobileHeaderHeight,
-			marginTop: this.offset + 'px',
 		} );
+
+		TweenMax.to(this.$toggleWrap, .2, {y: this.offset});
 	}
 
 	getScrollOffset() {
@@ -177,7 +187,40 @@ class Header {
 
 	updatePageOffset() {
 		TweenMax.set( this.$page, { css: { marginTop: this.visibleHeaderHeight + this.offset } } );
-		TweenMax.set( this.$hero, { css: { marginTop: this.offset } } );
+	}
+
+	updateMobileNavigationOffset() {
+		const { scrollY } = GlobalService.getProps();
+
+		if ( below('lap') ) {
+			this.element.style.marginTop = Math.max(( this.promoBarHeight - scrollY ), 0) + 'px';
+		}
+	}
+
+	updateMobileHeaderState() {
+		const { scrollY } = GlobalService.getProps();
+		const abovePromoBar = scrollY > this.promoBarHeight;
+
+		if ( ( abovePromoBar !== this.abovePromoBar ) ) {
+			$(body).toggleClass( 'site-header-mobile--scrolled', abovePromoBar );
+			this.abovePromoBar = abovePromoBar;
+		}
+	}
+
+	updateDesktopHeaderState(inversed) {
+
+		const { scrollY } = GlobalService.getProps();
+		const scrolled = scrollY > this.scrollOffset;
+
+		if ( inversed !== this.inversed ) {
+			this.$header.toggleClass( 'site-header--normal', ! inversed );
+			this.inversed = inversed;
+		}
+
+		if ( scrolled !== this.scrolled ) {
+			this.$header.toggleClass( 'site-header--scrolled', scrolled );
+			this.scrolled = scrolled;
+		}
 	}
 
 	createMobileHeader() {
@@ -200,21 +243,12 @@ class Header {
 		this.createdMobileHeader = true;
 	}
 
-	render( inversed ) {
+	render() {
 		if ( ! this.element ) return;
 
-		const { scrollY } = GlobalService.getProps();
-		const scrolled = scrollY > this.scrollOffset;
-
-		if ( inversed !== this.inversed ) {
-			this.$header.toggleClass( 'site-header--normal', ! inversed );
-			this.inversed = inversed;
-		}
-
-		if ( scrolled !== this.scrolled ) {
-			this.$header.toggleClass( 'site-header--scrolled', scrolled );
-			this.scrolled = scrolled;
-		}
+		this.updateMobileNavigationOffset();
+		this.updateMobileHeaderState();
+		this.updateDesktopHeaderState(false);
 	}
 }
 

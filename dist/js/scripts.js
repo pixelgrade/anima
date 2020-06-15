@@ -430,6 +430,18 @@ var hasTouchScreen = function hasTouchScreen() {
 
   return hasTouchScreen;
 };
+var mq = function mq(direction, string) {
+  var $temp = jQuery('<div class="u-mq-' + direction + '-' + string + '">').appendTo('body'),
+      response = $temp.is(':visible');
+  $temp.remove();
+  return response;
+};
+var below = function below(string) {
+  return mq('below', string);
+};
+var above = function above(string) {
+  return mq('above', string);
+};
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/toConsumableArray.js
 var toConsumableArray = __webpack_require__(3);
 var toConsumableArray_default = /*#__PURE__*/__webpack_require__.n(toConsumableArray);
@@ -1164,6 +1176,7 @@ function () {
 
 
 
+
 var defaults = {
   offsetTargetElement: null
 };
@@ -1182,15 +1195,18 @@ function () {
     this.$toggleWrap = external_jQuery_default()('.c-menu-toggle__wrap');
     this.scrolled = false;
     this.inversed = false;
+    this.abovePromoBar = false;
     this.wasSticky = external_jQuery_default()('body').is('.has-site-header-fixed');
     this.offset = 0;
     this.scrollOffset = 0;
     this.mobileHeaderHeight = 0;
+    this.promoBarHeight = 0;
     this.$page = external_jQuery_default()('#page .site-content');
     this.$hero = external_jQuery_default()('.has-hero .novablocks-hero').first().find('.novablocks-hero__foreground');
+    this.$promoBar = external_jQuery_default()('.novablocks-announcement-bar');
     this.createMobileHeader();
     this.onResize();
-    this.render(false);
+    this.render();
     globalService.registerOnResize(this.onResize.bind(this));
     this.initialize();
   }
@@ -1271,6 +1287,10 @@ function () {
       this.box = this.element.getBoundingClientRect();
       this.scrollOffset = this.getScrollOffset();
       this.mobileHeaderHeight = this.getMobileHeaderHeight();
+
+      if (this.$promoBar.length) {
+        this.promoBarHeight = this.$promoBar.outerHeight();
+      }
     }
   }, {
     key: "onResize",
@@ -1279,9 +1299,9 @@ function () {
       var wasScrolled = $header.hasClass('site-header--scrolled');
       $header.css('transition', 'none');
       $header.removeClass('site-header--scrolled');
-      this.shouldMakeHeaderStatic();
       this.getProps();
       this.setVisibleHeaderHeight();
+      this.shouldMakeHeaderStatic();
       $header.toggleClass('site-header--scrolled', wasScrolled);
 
       if (window.requestIdleCallback) {
@@ -1319,15 +1339,19 @@ function () {
     value: function updateMobileHeaderOffset() {
       if (!this.$mobileHeader) return;
       this.$mobileHeader.css({
-        height: this.mobileHeaderHeight,
-        marginTop: this.offset + 'px'
+        height: this.mobileHeaderHeight
+      });
+      TweenMax.to(this.$mobileHeader, .2, {
+        y: this.offset
       });
       external_jQuery_default()('.site-header__inner-container').css({
-        marginTop: this.mobileHeaderHeight
+        transform: "translateY(".concat(this.mobileHeaderHeight, "px)")
       });
       this.$toggleWrap.css({
-        height: this.mobileHeaderHeight,
-        marginTop: this.offset + 'px'
+        height: this.mobileHeaderHeight
+      });
+      TweenMax.to(this.$toggleWrap, .2, {
+        y: this.offset
       });
     }
   }, {
@@ -1356,11 +1380,47 @@ function () {
           marginTop: this.visibleHeaderHeight + this.offset
         }
       });
-      TweenMax.set(this.$hero, {
-        css: {
-          marginTop: this.offset
-        }
-      });
+    }
+  }, {
+    key: "updateMobileNavigationOffset",
+    value: function updateMobileNavigationOffset() {
+      var _GlobalService$getPro3 = globalService.getProps(),
+          scrollY = _GlobalService$getPro3.scrollY;
+
+      if (below('lap')) {
+        this.element.style.marginTop = Math.max(this.promoBarHeight - scrollY, 0) + 'px';
+      }
+    }
+  }, {
+    key: "updateMobileHeaderState",
+    value: function updateMobileHeaderState() {
+      var _GlobalService$getPro4 = globalService.getProps(),
+          scrollY = _GlobalService$getPro4.scrollY;
+
+      var abovePromoBar = scrollY > this.promoBarHeight;
+
+      if (abovePromoBar !== this.abovePromoBar) {
+        external_jQuery_default()(body).toggleClass('site-header-mobile--scrolled', abovePromoBar);
+        this.abovePromoBar = abovePromoBar;
+      }
+    }
+  }, {
+    key: "updateDesktopHeaderState",
+    value: function updateDesktopHeaderState(inversed) {
+      var _GlobalService$getPro5 = globalService.getProps(),
+          scrollY = _GlobalService$getPro5.scrollY;
+
+      var scrolled = scrollY > this.scrollOffset;
+
+      if (inversed !== this.inversed) {
+        this.$header.toggleClass('site-header--normal', !inversed);
+        this.inversed = inversed;
+      }
+
+      if (scrolled !== this.scrolled) {
+        this.$header.toggleClass('site-header--scrolled', scrolled);
+        this.scrolled = scrolled;
+      }
     }
   }, {
     key: "createMobileHeader",
@@ -1382,23 +1442,11 @@ function () {
     }
   }, {
     key: "render",
-    value: function render(inversed) {
+    value: function render() {
       if (!this.element) return;
-
-      var _GlobalService$getPro3 = globalService.getProps(),
-          scrollY = _GlobalService$getPro3.scrollY;
-
-      var scrolled = scrollY > this.scrollOffset;
-
-      if (inversed !== this.inversed) {
-        this.$header.toggleClass('site-header--normal', !inversed);
-        this.inversed = inversed;
-      }
-
-      if (scrolled !== this.scrolled) {
-        this.$header.toggleClass('site-header--scrolled', scrolled);
-        this.scrolled = scrolled;
-      }
+      this.updateMobileNavigationOffset();
+      this.updateMobileHeaderState();
+      this.updateDesktopHeaderState(false);
     }
   }]);
 

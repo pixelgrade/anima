@@ -1,6 +1,36 @@
 @import "menu";
 @import "menu-toggle";
 
+@mixin header-background {
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--current-light-primary);
+        opacity: var(--header-background-opacity, 0);
+
+        transition: var(--theme-transition);
+        transition-property: opacity;
+    }
+}
+
+@mixin header-shadow {
+    &:after {
+        content: "";
+        display: block;
+        @include cover;
+        box-shadow: var(--shadow-color, #000000) 0 var(--shadow-y-offset, 0.0625em) var(--shadow-blur, 0.125em);
+        opacity: 0;
+        pointer-events: none;
+        transition: var(--theme-transition);
+        transition-property: opacity;
+        z-index: -1;
+    }
+}
+
 .site-header__inner-container > .site-header__content.alignfull {
     margin-left: calc( -1 * var(--theme-header-sides-spacing) );
     margin-right: calc( -1 * var(--theme-header-sides-spacing) );
@@ -58,6 +88,10 @@
 
 .site-header--mobile {
     display: none;
+
+    &.site-header--scrolled {
+        color: var(--current-dark-primary);
+    }
 }
 
 @media not screen and (min-width: 1000px) {
@@ -67,13 +101,13 @@
 
 @media only screen and (min-width: 1000px) {
     .site-header__inner-container {
-        margin-top: 0 !important;
+        transform: none !important;
     }
 }
 
 .site-header,
 .site-header--mobile {
-    @include wp-offset(top, 0, true);
+    @include wp-offset(top, 0, false);
 }
 
 @import "theme";

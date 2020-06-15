@@ -57,4 +57,20 @@ export const hasTouchScreen = function() {
 	}
 
 	return hasTouchScreen;
-}
+};
+
+export const mq = function(direction, string) {
+	var $temp = jQuery( '<div class="u-mq-' + direction + '-' + string + '">' ).appendTo( 'body' ),
+		response = $temp.is( ':visible' );
+
+	$temp.remove();
+	return response;
+};
+
+export const below = function(string) {
+	return mq( 'below', string );
+};
+
+export const above = function(string) {
+	return mq( 'above', string );
+};
