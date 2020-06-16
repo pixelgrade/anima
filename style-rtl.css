@@ -2899,9 +2899,9 @@ iframe.instagram-media {
   --current-letter-spacing: var(--theme-lead-letter-spacing);
   --current-text-transform: var(--theme-lead-text-transform); }
 
-img:not(.is-loaded) {
+img:not([srcset]):not(.is-loaded) {
   opacity: 0; }
-  .gm-style img:not(.is-loaded) {
+  .gm-style img:not([srcset]):not(.is-loaded) {
     opacity: 1; }
 
 .entry-title a,

@@ -1884,7 +1884,8 @@ function () {
     key: "showLoadedImages",
     value: function showLoadedImages() {
       var container = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document.body;
-      external_jQuery_default()(container).imagesLoaded().progress(function (instance, image) {
+      var $images = external_jQuery_default()(container).find('img').not('[srcset], .is-loaded, .is-broken');
+      $images.imagesLoaded().progress(function (instance, image) {
         var className = image.isLoaded ? 'is-loaded' : 'is-broken';
         external_jQuery_default()(image.img).addClass(className);
       });

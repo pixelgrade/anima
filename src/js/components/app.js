@@ -85,7 +85,9 @@ export default class App {
 	}
 
 	showLoadedImages( container = document.body ) {
-		$( container ).imagesLoaded().progress( ( instance, image ) => {
+		const $images = $( container ).find( 'img' ).not( '[srcset], .is-loaded, .is-broken' );
+
+		$images.imagesLoaded().progress( ( instance, image ) => {
 			const className = image.isLoaded ? 'is-loaded' : 'is-broken';
 			$( image.img ).addClass( className );
 		} );
