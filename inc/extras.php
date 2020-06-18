@@ -32,20 +32,28 @@ function rosa2_page_has_hero() {
 	return false;
 }
 
-function rosa2_last_block_hero() {
+function rosa2_no_padding_bottom() {
 	global $post;
 
 	if ( ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
 		$blocks = parse_blocks( $post->post_content );
 		$count = count( $blocks );
-		$lastBlockName = $blocks[ $count - 1 ]['blockName'];
+		$lastBlock = $blocks[ $count - 1 ];
+		$lastBlockName = $lastBlock['blockName'];
 
-        return $lastBlockName === 'novablocks/hero' || $lastBlockName === 'novablocks/slideshow';
+		$lastBlockIsMap = $lastBlockName === 'novablocks/google-map' &&
+            isset( $lastBlock['attrs']['align'] ) &&
+            $lastBlock['attrs']['align'] === 'full';
+
+        return
+            $lastBlockName === 'novablocks/hero' ||
+            $lastBlockName === 'novablocks/slideshow' ||
+            $lastBlockIsMap;
 	}
 
 	return false;
 }
-add_action('rosa_before_header', 'rosa2_last_block_hero');
+add_action( 'rosa_before_header', 'rosa2_no_padding_bottom' );
 
 function rosa2_has_moderate_media_card_after_hero() {
 	global $post;

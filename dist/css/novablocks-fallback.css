@@ -48,7 +48,10 @@
         flex: 1 0 50%; } }
 
 .novablocks-block[class] {
-  padding: var(--novablocks-block-padding) 0;
+  padding-top: calc( var(--emphasis-top-spacing, 1) * var(--novablocks-spacing) * var(--novablocks-element-spacing-multiplier, 1));
+  padding-bottom: calc( var(--emphasis-bottom-spacing, 1) * var(--novablocks-spacing) * var(--novablocks-element-spacing-multiplier, 1));
+  margin-top: calc( var(--block-top-spacing, 1) * var(--novablocks-spacing) * var(--novablocks-element-spacing-multiplier, 1));
+  margin-bottom: calc( var(--block-bottom-spacing, 1) * var(--novablocks-spacing) * var(--novablocks-element-spacing-multiplier, 1));
   color: var(--novablocks-block-text-color);
   background-color: var(--novablocks-block-background-color); }
 
