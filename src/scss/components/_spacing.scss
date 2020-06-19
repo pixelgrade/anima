@@ -1,50 +1,6 @@
-:root {
-    --novablocks-element-spacing-level-1-multiplier: 1;
-    --novablocks-element-spacing-level-2-multiplier: 0.5;
-    --novablocks-element-spacing-level-3-multiplier: 0.25;
-}
-
-.block-editor-block-list__layout {
-
-    & {
-        --novablocks-element-spacing-multiplier: var(--novablocks-element-spacing-level-1-multiplier);
-    }
-
-    & & {
-        --novablocks-element-spacing-multiplier: var(--novablocks-element-spacing-level-2-multiplier);
-    }
-
-    & & & {
-        --novablocks-element-spacing-multiplier: var(--novablocks-element-spacing-level-3-multiplier);
-    }
-}
-
-@mixin block-spacing {
-    --block-top-spacing: 0;
-    --block-bottom-spacing: 0;
+.wp-block,
+.entry-content > *,
+.wp-block-column > *,
+[class*="__inner-container"] > * {
     --element-spacing: calc( var(--novablocks-spacing) * var(--novablocks-element-spacing-multiplier, 1) );
-
-    &:not(:first-child) {
-        --block-top-spacing: 1;
-    }
-
-    margin-top: calc( var(--block-top-spacing) * var(--novablocks-spacing) * var(--novablocks-element-spacing-multiplier, 1) );
-    margin-bottom: calc( var(--block-bottom-spacing) * var(--novablocks-spacing) * var(--novablocks-element-spacing-multiplier, 1) );
-}
-
-.entry-content,
-.wp-block-column,
-[class*="__inner-container"] {
-
-    > * {
-        @include block-spacing;
-    }
-}
-
-.wp-block-column,
-[class*="__inner-container"] {
-
-    > * {
-        --novablocks-element-spacing-multiplier: 0.5;
-    }
 }
