@@ -128,10 +128,12 @@ function rosa2_register_scripts() {
 	wp_register_style( 'rosa2-theme', get_template_directory_uri() . '/dist/css/theme/style.css', array(), $theme->get( 'Version' ) );
 	wp_register_style( 'rosa2-theme-components', get_template_directory_uri() . '/dist/css/theme/components.css', array(), $theme->get( 'Version' ) );
 	wp_register_style( 'rosa2-utility', get_template_directory_uri() . '/dist/css/utility.css', array(), $theme->get( 'Version' ) );
+	wp_register_style( 'rosa2-gutenberg-legacy-frontend', get_template_directory_uri() . '/dist/css/gutenberg-legacy-frontend.css', array(), $theme->get( 'Version' ) );
 
 	wp_register_style( 'rosa2-blocks-common', get_template_directory_uri() . '/dist/css/blocks/common.css', array(), $theme->get( 'Version' ) );
 	wp_register_style( 'rosa2-blocks-editor', get_template_directory_uri() . '/dist/css/blocks/editor.css', array( 'rosa2-blocks-common' ), $theme->get( 'Version' ) );
 	wp_register_style( 'rosa2-blocks-style', get_template_directory_uri() . '/dist/css/blocks/style.css', array( 'rosa2-blocks-common'), $theme->get( 'Version' ) );
+	wp_register_style( 'rosa2-gutenberg-legacy-editor', get_template_directory_uri() . '/dist/css/gutenberg-legacy-editor.css', array(), $theme->get( 'Version' ) );
 
 	wp_style_add_data( 'rosa2-theme', 'rtl', 'replace' );
 	wp_style_add_data( 'rosa2-theme-components', 'rtl', 'replace' );
@@ -141,6 +143,10 @@ add_action( 'wp_enqueue_scripts', 'rosa2_register_scripts', 5 );
 function rosa2_enqueue_theme_block_editor_assets() {
 	$theme  = wp_get_theme( get_template() );
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+
+	global $wp_version;
+	$is_old_wp_version = version_compare( $wp_version, '5.5', '<' );
+	$is_gutenberg_plugin_active = defined( 'GUTENBERG_VERSION' );
 
 	// @todo ????
 	rosa2_register_scripts();
@@ -159,12 +165,20 @@ function rosa2_enqueue_theme_block_editor_assets() {
 		$theme->get( 'Version' ),
 		true
 	);
+
+	if ( $is_old_wp_version && ! $is_gutenberg_plugin_active ) {
+		wp_enqueue_style( 'rosa2-gutenberg-legacy-editor' );
+    }
 }
 add_action( 'enqueue_block_editor_assets', 'rosa2_enqueue_theme_block_editor_assets', 10 );
 
 function rosa2_scripts() {
 	$theme  = wp_get_theme( get_template() );
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+
+	global $wp_version;
+	$is_old_wp_version = version_compare( $wp_version, '5.5', '<' );
+	$is_gutenberg_plugin_active = defined( 'GUTENBERG_VERSION' );
 
 	wp_enqueue_style( 'rosa2-style', get_template_directory_uri() . '/style.css', array(
         'rosa2-social-links',
@@ -187,6 +201,10 @@ function rosa2_scripts() {
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
+	}
+
+	if ( $is_old_wp_version && ! $is_gutenberg_plugin_active ) {
+		wp_enqueue_style( 'rosa2-gutenberg-legacy-frontend' );
 	}
 }
 
