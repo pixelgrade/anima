@@ -235,13 +235,37 @@ add_action( 'wp_enqueue_scripts', 'rosa2_webfonts_fallback', 10 );
 
 function rosa2_print_scripts() {
 	ob_start(); ?>
+
 	<script>
 		window.addEventListener( "DOMContentLoaded", function( event ) {
 			document.body.classList.remove( "is-loading" );
 			document.body.classList.add( "has-loaded" );
 		} );
+
+		function isUndefined( target ) {
+			return typeof target === "undefined";
+        }
+
+		function shouldCancelFadeOut( e ) {
+
+			if ( isUndefined( e.target ) ||
+                 isUndefined( e.target.activeElement ) ||
+                 isUndefined( e.target.activeElement ) ||
+                 isUndefined( e.target.activeElement.getAttribute( 'href' ) ) ) {
+				return false;
+            }
+
+			var href = e.target.activeElement.getAttribute( 'href' );
+			var isMail = href.indexOf( 'mailto:' ) === 0;
+			var isTel = href.indexOf( 'tel:' ) === 0;
+
+			return isMail || isTel;
+        }
+
 		window.addEventListener( "beforeunload", function( event ) {
-			document.body.classList.add( "is-loading" );
+			if ( ! shouldCancelFadeOut( event ) ) {
+			    document.body.classList.add( "is-loading" );
+            }
 		} );
 	</script>
 
