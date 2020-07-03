@@ -19,13 +19,6 @@ export default class App {
 		this.initializeCommentsArea();
 		this.initializeReservationForm();
 
-		// trigger resize
-		GlobalService.registerObserverCallback( function( mutationList ) {
-			$( window )
-				.trigger( 'orientationchange' )
-				.trigger( 'resize' );
-		} );
-
 		GlobalService.registerRender( this.render.bind( this ) );
 	}
 

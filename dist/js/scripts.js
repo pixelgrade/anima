@@ -1812,11 +1812,7 @@ function () {
     this.initializePromoBar();
     this.initializeImages();
     this.initializeCommentsArea();
-    this.initializeReservationForm(); // trigger resize
-
-    globalService.registerObserverCallback(function (mutationList) {
-      external_jQuery_default()(window).trigger('orientationchange').trigger('resize');
-    });
+    this.initializeReservationForm();
     globalService.registerRender(this.render.bind(this));
   }
 
