@@ -63,4 +63,17 @@
 
         @include button-huge;
     }
+
+    .woocommerce-notices-wrapper {
+        .button {
+            @include specific(5) {
+                @include button-fill;
+                --current-button-text-color: var(--theme-button-text-color);
+
+                &:hover {
+                    --current-button-text-color: var(--theme-button-hover-text-color);
+                }
+            }
+        }
+    }
 }

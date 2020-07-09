@@ -2880,6 +2880,27 @@ span.page-numbers {
   .wpforms-container[class][class][class].half .wpforms-field-textarea {
     width: 100%; }
 
+.wpforms-confirmation-container-full {
+  position: relative;
+  background: transparent;
+  border: 0;
+  padding: 1em;
+  color: var(--current-dark-primary);
+  --theme-notification-color: var(--theme-notification-succes-color);
+  --theme-notification-opacity: 0.15; }
+  .wpforms-confirmation-container-full:after {
+    position: absolute;
+    content: '';
+    display: block;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--theme-notification-color);
+    opacity: var(--theme-notification-opacity);
+    border-radius: 4px;
+    z-index: -1; }
+
 /* 6. Overwrites */
 /* Embeds */
 .fb_iframe_widget > span {
