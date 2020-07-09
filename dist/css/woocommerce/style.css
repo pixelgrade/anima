@@ -624,6 +624,9 @@
   grid-column-gap: 0.5em;
   width: 100%;
   padding: 1em; }
+  .theme-woocommerce-notice,
+  .theme-woocommerce-notice * {
+    line-height: 1; }
 
 .theme-woocommerce-notice__icon {
   grid-area: icon;
@@ -631,8 +634,7 @@
   width: var(--theme-notification-icon-width);
   height: var(--theme-notification-icon-height);
   background-color: currentColor;
-  align-self: start;
-  margin-top: 5px; }
+  align-self: start; }
   @media not screen and (min-width: 1000px) {
     .theme-woocommerce-notice__icon {
       display: none; } }

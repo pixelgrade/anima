@@ -127,6 +127,11 @@
   width: 100%;
 
   padding: 1em;
+
+  &,
+  * {
+    line-height: 1;
+  }
 }
 
 .theme-woocommerce-notice__icon {
@@ -140,7 +145,6 @@
   background-color: currentColor;
 
   align-self: start;
-  margin-top: 5px;
 
   @include below(lap) {
     display: none;
