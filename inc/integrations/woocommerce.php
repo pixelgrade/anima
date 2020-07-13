@@ -140,6 +140,9 @@ function rosa2_woocommerce_setup_hooks() {
 
     // Change sale flash
 	add_filter( 'woocommerce_sale_flash', 'rosa2_woocommerce_sale_flash', 10, 1 );
+
+	// Remove Sale Flash on Single Product
+	remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_sale_flash', 10 );
 }
 // We do this late so we can give all others room to play.
 add_action( 'wp_loaded', 'rosa2_woocommerce_setup_hooks' );

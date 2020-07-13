@@ -718,21 +718,30 @@
       border: 1px solid var(--current-light-secondary);
       padding: var(--theme-spacing); } }
 
+.woocommerce-notices-wrapper:not(:empty) {
+  margin-top: var(--theme-spacing-medium); }
+
 .woocommerce-product-gallery[class][class][class] {
   margin-bottom: 0; }
   .woocommerce-product-gallery[class][class][class] .flex-viewport + .flex-control-thumbs {
     margin-top: 0; }
   .woocommerce-product-gallery[class][class][class] .flex-control-thumbs {
-    margin-left: calc(var(--theme-spacing) * -1);
+    margin-left: 0;
     margin-top: calc(var(--theme-spacing) * -1); }
     .woocommerce-product-gallery[class][class][class] .flex-control-thumbs > * {
       max-width: 116px;
-      padding-left: var(--theme-spacing);
       padding-top: var(--theme-spacing); }
+      @media not screen and (min-width: 1000px) {
+        .woocommerce-product-gallery[class][class][class] .flex-control-thumbs > * {
+          padding-left: var(--theme-spacing); }
+          .woocommerce-product-gallery[class][class][class] .flex-control-thumbs > *:first-child {
+            margin-left: calc(-1 * var(--theme-spacing)); } }
 
-.single-product .woocommerce-message .button {
-  order: 2;
-  margin-left: auto; }
+.single-product {
+  --theme-content-width-wide: 100%; }
+  .single-product .woocommerce-message .button {
+    order: 2;
+    margin-left: auto; }
 
 .woocommerce-product-gallery__wrapper[class][class][class][class] {
   width: auto;
@@ -756,6 +765,11 @@
   display: block;
   padding: 0;
   background-color: transparent; }
+
+.woocommerce-product-gallery__image img {
+  margin-left: auto;
+  margin-right: auto;
+  max-height: 30em; }
 
 .woocommerce div.product div.summary {
   margin-bottom: 0; }
@@ -884,10 +898,10 @@
 
 #content .c-product-main {
   position: relative;
-  margin-top: var(--theme-spacing-xl); }
+  margin-top: var(--theme-spacing); }
   #content .c-product-main[class][class][class] .woocommerce-product-gallery + .entry-summary {
     margin-top: var(--theme-spacing); }
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: 1000px) {
     #content .c-product-main[class][class][class] {
       display: flex; }
       #content .c-product-main[class][class][class] > .woocommerce-product-gallery {
@@ -897,12 +911,16 @@
       #content .c-product-main[class][class][class] > .entry-summary {
         float: none;
         width: auto;
-        flex: 0 0 35%;
-        margin-left: var(--theme-spacing-xl); }
+        flex: 0 0 calc(35% - var(--theme-spacing-xl));
+        margin-left: var(--theme-spacing-xl);
+        margin-right: var(--theme-spacing-xl); }
       #content .c-product-main[class][class][class] .woocommerce-product-gallery + .entry-summary {
         margin-top: 0; } }
   #content .c-product-main[class][class][class] .variations select {
     display: block; }
+  #content .c-product-main .woocommerce-product-gallery--with-images,
+  #content .c-product-main .entry-summary {
+    width: 100% !important; }
 
 .c-product-main .product_title {
   --font-size: var(--theme-heading-3-font-size);
@@ -1179,6 +1197,37 @@
 
 .zoomImg {
   transition: none !important; }
+
+.woocommerce-product-gallery[class][class][class] {
+  display: grid;
+  grid-template-areas: 'thumbnails big-image';
+  grid-template-columns: 5em 1fr;
+  grid-column-gap: 1em; }
+  @media not screen and (min-width: 1000px) {
+    .woocommerce-product-gallery[class][class][class] {
+      grid-template-columns: 1fr;
+      grid-template-areas: 'big-image' 'thumbnails'; } }
+  .woocommerce-product-gallery[class][class][class] img {
+    width: auto; }
+  .woocommerce-product-gallery[class][class][class] > .woocommerce-product-gallery__wrapper {
+    grid-column: span 2; }
+  .woocommerce-product-gallery[class][class][class] .flex-viewport {
+    grid-area: big-image;
+    max-height: 100vh; }
+  @media only screen and (min-width: 1000px) {
+    .woocommerce-product-gallery[class][class][class] .flex-control-thumbs {
+      grid-area: thumbnails;
+      display: flex;
+      flex-direction: column; }
+      .woocommerce-product-gallery[class][class][class] .flex-control-thumbs li {
+        max-width: 100%;
+        width: 100%; }
+        .woocommerce-product-gallery[class][class][class] .flex-control-thumbs li:first-child {
+          padding-top: 0; }
+      .woocommerce-product-gallery[class][class][class] .flex-control-thumbs img {
+        width: 100%; } }
+  .woocommerce-product-gallery[class][class][class] img {
+    object-fit: contain; }
 
 .woocommerce-cart[class][class] .entry-title {
   max-width: none; }
