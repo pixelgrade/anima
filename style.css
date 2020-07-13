@@ -2389,6 +2389,61 @@ span.page-numbers {
 .wp-block-column > *,
 [class*="__inner-container"] > * {
   --element-spacing: calc( var(--novablocks-spacing) * var(--novablocks-element-spacing-multiplier, 1) ); }
+  .wp-block:not(:first-child),
+  .entry-content > *:not(:first-child),
+  .wp-block-column > *:not(:first-child),
+  [class*="__inner-container"] > *:not(:first-child) {
+    margin-top: var(--element-spacing); }
+
+.novablocks-media + .novablocks-media[class],
+.novablocks-hero + .novablocks-media[class],
+.novablocks-slidehsow + .novablocks-media[class],
+.novablocks-map.alignfull + .novablocks-media[class],
+.novablocks-collection + .novablocks-media[class], .novablocks-media +
+.novablocks-hero[class],
+.novablocks-hero +
+.novablocks-hero[class],
+.novablocks-slidehsow +
+.novablocks-hero[class],
+.novablocks-map.alignfull +
+.novablocks-hero[class],
+.novablocks-collection +
+.novablocks-hero[class], .novablocks-media +
+.novablocks-slidehsow[class],
+.novablocks-hero +
+.novablocks-slidehsow[class],
+.novablocks-slidehsow +
+.novablocks-slidehsow[class],
+.novablocks-map.alignfull +
+.novablocks-slidehsow[class],
+.novablocks-collection +
+.novablocks-slidehsow[class], .novablocks-media +
+.novablocks-map.alignfull[class],
+.novablocks-hero +
+.novablocks-map.alignfull[class],
+.novablocks-slidehsow +
+.novablocks-map.alignfull[class],
+.novablocks-map.alignfull +
+.novablocks-map.alignfull[class],
+.novablocks-collection +
+.novablocks-map.alignfull[class], .novablocks-media +
+.novablocks-collection[class],
+.novablocks-hero +
+.novablocks-collection[class],
+.novablocks-slidehsow +
+.novablocks-collection[class],
+.novablocks-map.alignfull +
+.novablocks-collection[class],
+.novablocks-collection +
+.novablocks-collection[class] {
+  --novablocks-element-spacing-multiplier: 0; }
+
+.wp-block-column > :not(:first-child),
+[class*="__inner-container"] > :not(:first-child) {
+  --novablocks-element-spacing-multiplier: 0.5; }
+
+.novablocks-collection > .wp-block-group__inner-container > :not(.novablocks-collection__cards) {
+  --novablocks-element-spacing-multiplier: 0.5; }
 
 .novablocks-hero__inner-container > .c-headline .c-headline__primary,
 .novablocks-hero__inner-container > .c-headline .c-headline__secondary {

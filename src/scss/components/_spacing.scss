@@ -3,4 +3,34 @@
 .wp-block-column > *,
 [class*="__inner-container"] > * {
     --element-spacing: calc( var(--novablocks-spacing) * var(--novablocks-element-spacing-multiplier, 1) );
+
+    &:not(:first-child) {
+        margin-top: var(--element-spacing);
+    }
+}
+
+.novablocks-media,
+.novablocks-hero,
+.novablocks-slidehsow,
+.novablocks-map.alignfull,
+.novablocks-collection {
+
+    & + &[class] {
+        --novablocks-element-spacing-multiplier: 0;
+    }
+}
+
+.wp-block-column,
+[class*="__inner-container"] {
+
+    > :not(:first-child) {
+        --novablocks-element-spacing-multiplier: 0.5;
+    }
+}
+
+.novablocks-collection > .wp-block-group__inner-container {
+
+    > :not(.novablocks-collection__cards) {
+        --novablocks-element-spacing-multiplier: 0.5;
+    }
 }

@@ -24,6 +24,7 @@
 
 .editor-styles-wrapper {
     -webkit-font-smoothing: antialiased;
+    --element-spacing: var(--theme-spacing-small);
 
     @import "blocks/editor";
 
@@ -59,6 +60,34 @@
 
     [class*="wp-block"] {
         clear: none;
+    }
+}
+
+// Block Editor Spacing
+p,
+h1, h2, h3, h4, h5, h6,
+.wp-block,
+.block-editor-block-list__block {
+
+    .editor-styles-wrapper[class] & {
+        margin-top: 0;
+        margin-bottom: 0;
+
+        &:not(:first-child) {
+            margin-top: var(--element-spacing);
+        }
+    }
+}
+
+[data-type="novablocks/media"],
+[data-type="novablocks/hero"],
+[data-type="novablocks/slideshow"],
+[data-type="novablocks/google-map"][data-align="full"],
+[data-type="novablocks/cards-collection"],
+[data-type="novablocks/posts-collection"] {
+
+    .editor-styles-wrapper & + &[data-type] {
+        margin-top: 0;
     }
 }
 

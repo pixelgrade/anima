@@ -32,28 +32,36 @@ function rosa2_page_has_hero() {
 	return false;
 }
 
-function rosa2_no_padding_bottom() {
+function rosa2_remove_site_padding_bottom() {
 	global $post;
 
 	if ( ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
 		$blocks = parse_blocks( $post->post_content );
 		$count = count( $blocks );
 		$lastBlock = $blocks[ $count - 1 ];
-		$lastBlockName = $lastBlock['blockName'];
+		$blockName = $lastBlock['blockName'];
+		$attributes = $lastBlock['attrs'];
 
-		$lastBlockIsMap = $lastBlockName === 'novablocks/google-map' &&
-            isset( $lastBlock['attrs']['align'] ) &&
-            $lastBlock['attrs']['align'] === 'full';
+		if ( $blockName === 'novablocks/hero' ||
+		     $blockName === 'novablocks/slideshow' ) {
+		    return true;
+        }
 
-        return
-            $lastBlockName === 'novablocks/hero' ||
-            $lastBlockName === 'novablocks/slideshow' ||
-            $lastBlockIsMap;
+		if ( $blockName === 'novablocks/google-map' && $attributes['align'] === 'full' ) {
+		    return true;
+		}
+
+		$couldHaveBackground = $blockName === 'novablocks/cards-collection' || $blockName === 'novablocks/posts-collection';
+		$doesHaveBackground = $attributes['blockStyle'] === 'moderate' || $attributes['blockStyle'] === 'highlighted';
+
+        if ( $couldHaveBackground && $doesHaveBackground ) {
+            return true;
+        }
+
 	}
 
 	return false;
 }
-add_action( 'rosa_before_header', 'rosa2_no_padding_bottom' );
 
 function rosa2_has_moderate_media_card_after_hero() {
 	global $post;

@@ -40,7 +40,7 @@ function rosa2_body_classes( $classes ) {
 		$classes[] = 'has-hero';
 	}
 
-	if ( rosa2_no_padding_bottom() ) {
+	if ( rosa2_remove_site_padding_bottom() ) {
 		$classes[] = 'has-no-padding-bottom';
 	}
 
