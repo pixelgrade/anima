@@ -2,11 +2,9 @@
 .entry-content > *,
 .wp-block-column > *,
 [class*="__inner-container"] > * {
-    --element-spacing: calc( var(--novablocks-spacing) * var(--novablocks-element-spacing-multiplier, 1) );
-
-    &:not(:first-child) {
-        margin-top: var(--element-spacing);
-    }
+    --element-spacing: calc( var(--block-top-spacing, 1) * var(--novablocks-spacing) * var(--novablocks-element-spacing-multiplier, 1) );
+    margin-top: var(--element-spacing);
+    margin-bottom: calc( var(--block-bottom-spacing, 1) * var(--novablocks-spacing) * var(--novablocks-element-spacing-multiplier, 1) );
 }
 
 .novablocks-media,
