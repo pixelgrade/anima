@@ -1276,7 +1276,10 @@
   .quantity .qty {
     appearance: textfield;
     box-shadow: none;
-    width: 2em; }
+    width: 2em;
+    font-feature-settings: "lnum"; }
+  .quantity label {
+    margin-bottom: 0; }
   .quantity .qty_button {
     position: relative;
     background-color: transparent;
@@ -1286,6 +1289,7 @@
     width: 2em;
     height: 2em;
     padding: 0;
+    font-family: system-font-sans-serif-clear, "SF Pro Display", "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitsream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif;
     box-shadow: var(--theme-input-box-shadow);
     border-radius: 50%; }
     .quantity .qty_button.button--is-disabled {
