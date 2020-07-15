@@ -317,6 +317,8 @@
 
     .variations select {
       display: block;
+
+      width: var(--variation-input-width);
     }
   }
 
@@ -330,6 +332,11 @@
 
   --thumbnails-gap: 10px;
   --columns-gap: calc( var(--columns-gap) * 2 );
+  --variation-input-width: 100%;
+
+  @include above(tablet) {
+    --variation-input-width: 14em;
+  }
 
   .product_title {
     @include apply-font(heading-3);
@@ -765,7 +772,7 @@
     justify-content: space-between;
 
     .quantity__wrapper {
-      width: 11.8em;
+      width: var(--variation-input-width);
     }
 
   }
@@ -782,7 +789,9 @@
   }
 
   label {
-    margin-bottom: 0;
+    @include above(tablet) {
+      margin-bottom: 0;
+    }
   }
 
   .qty_button {

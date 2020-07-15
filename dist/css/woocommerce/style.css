@@ -927,14 +927,19 @@
       #content .c-product-main[class][class][class] .woocommerce-product-gallery + .entry-summary {
         margin-top: 0; } }
   #content .c-product-main[class][class][class] .variations select {
-    display: block; }
+    display: block;
+    width: var(--variation-input-width); }
   #content .c-product-main .woocommerce-product-gallery--with-images,
   #content .c-product-main .entry-summary {
     width: 100% !important; }
 
 .c-product-main {
   --thumbnails-gap: 10px;
-  --columns-gap: calc( var(--columns-gap) * 2 ); }
+  --columns-gap: calc( var(--columns-gap) * 2 );
+  --variation-input-width: 100%; }
+  @media only screen and (min-width: 768px) {
+    .c-product-main {
+      --variation-input-width: 14em; } }
   .c-product-main .product_title {
     --font-size: var(--theme-heading-3-font-size);
     font-size: var(--final-font-size);
@@ -1274,14 +1279,15 @@
       grid-column-gap: 10px;
       justify-content: space-between; }
       .quantity .quantity__wrapper {
-        width: 11.8em; } }
+        width: var(--variation-input-width); } }
   .quantity .qty {
     appearance: textfield;
     box-shadow: none;
     width: 2em;
     font-feature-settings: "lnum"; }
-  .quantity label {
-    margin-bottom: 0; }
+  @media only screen and (min-width: 768px) {
+    .quantity label {
+      margin-bottom: 0; } }
   .quantity .qty_button {
     position: relative;
     background-color: transparent;
