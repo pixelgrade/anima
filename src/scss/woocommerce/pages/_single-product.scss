@@ -393,8 +393,6 @@
 }
 
 .woocommerce .product .cart .quantity[class] {
-  display: block;
-
   margin-bottom: var(--theme-spacing-xsmall);
 }
 
@@ -761,7 +759,7 @@
   align-items: center;
 
   @include above(tablet) {
-    display: grid !important;
+    display: grid;
     grid-template-columns: repeat(2, max-content);
     grid-column-gap: 10px;
     justify-content: space-between;
