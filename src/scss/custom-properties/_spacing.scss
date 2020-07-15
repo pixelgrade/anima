@@ -5,10 +5,8 @@
 :root {
     --theme-spacing-ratio: 1;
 
-    --theme-spacing:                calc( var( --theme-body-final-font-size ) * var( --theme-spacing-ratio ) );
-    --theme-spacing-fluid:          calc( var( --theme-spacing-ratio ) * var( --theme-spacing-fluid-ratio ) );
-
-    @include fluid(--theme-spacing-fluid-ratio, $theme-font-size-minimum-value-breakpoint-em, 0.45rem, $theme-font-size-breakpoint-em, 1rem );
+    --theme-spacing:                calc( var( --theme-body-font-size ) * 1px * var( --theme-spacing-ratio ) );
+    --theme-spacing-fluid:          calc( var( --theme-body-final-font-size ) * var( --theme-spacing-ratio ) );
 
     @each $name, $value in $theme-spacing-modifiers {
         --theme-spacing-#{$name}:          calc( var( --theme-spacing ) * #{$value} );

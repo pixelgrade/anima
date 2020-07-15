@@ -147,8 +147,8 @@
   font-feature-settings: var(--current-font-feature); }
 
 :root {
-  --theme-content-width-normal-initial: 38;
-  --theme-content-width-wide-addon: 27;
+  --theme-content-width-normal-initial: 40;
+  --theme-content-width-wide-addon: 32;
   --theme-content-width-wide-initial: calc(var(--theme-content-width-normal-initial) + var(--theme-content-width-wide-addon));
   --theme-content-width-normal: calc(var(--theme-content-width-normal-initial) * var(--theme-body-final-font-size));
   --theme-content-width-wide: calc(var(--theme-content-width-wide-initial) * var(--theme-body-final-font-size));
@@ -162,9 +162,8 @@
 
 :root {
   --theme-spacing-ratio: 1;
-  --theme-spacing:                calc( var( --theme-body-final-font-size ) * var( --theme-spacing-ratio ) );
-  --theme-spacing-fluid:          calc( var( --theme-spacing-ratio ) * var( --theme-spacing-fluid-ratio ) );
-  --theme-spacing-fluid-ratio: 0.45rem;
+  --theme-spacing:                calc( var( --theme-body-font-size ) * 1px * var( --theme-spacing-ratio ) );
+  --theme-spacing-fluid:          calc( var( --theme-body-final-font-size ) * var( --theme-spacing-ratio ) );
   --theme-spacing-micro:          calc( var( --theme-spacing ) * 0.25 );
   --theme-spacing-fluid-micro:    calc( var( --theme-spacing-fluid ) * 0.25 );
   --theme-spacing-tiny:          calc( var( --theme-spacing ) * 0.5 );
@@ -183,12 +182,6 @@
   --theme-spacing-fluid-xl:    calc( var( --theme-spacing-fluid ) * 5 );
   --theme-spacing-xxl:          calc( var( --theme-spacing ) * 8 );
   --theme-spacing-fluid-xxl:    calc( var( --theme-spacing-fluid ) * 8 ); }
-  @media screen and (min-width: 20rem) {
-    :root {
-      --theme-spacing-fluid-ratio: calc(0.45rem + 0.55 * ((100vw - 20rem) / 70)); } }
-  @media screen and (min-width: 90rem) {
-    :root {
-      --theme-spacing-fluid-ratio: 1rem; } }
 
 :root {
   --theme-transition-duration: .4s;

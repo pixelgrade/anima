@@ -50,14 +50,6 @@ function rosa2_remove_site_padding_bottom() {
 		if ( $blockName === 'novablocks/google-map' && $attributes['align'] === 'full' ) {
 		    return true;
 		}
-
-		$couldHaveBackground = $blockName === 'novablocks/cards-collection' || $blockName === 'novablocks/posts-collection';
-		$doesHaveBackground = $attributes['blockStyle'] === 'moderate' || $attributes['blockStyle'] === 'highlighted';
-
-        if ( $couldHaveBackground && $doesHaveBackground ) {
-            return true;
-        }
-
 	}
 
 	return false;
