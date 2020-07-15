@@ -232,9 +232,6 @@ ul.wp-block-categories__list[class] {
   .novablocks-block__content {
     --novablocks-block-content-padding: var(--novablocks-spacing); } }
 
-.novablocks-media--blog .novablocks-block__content {
-  --novablocks-block-content-box-shadow: none; }
-
 .novablocks-media--blog[class] {
   --block-top-spacing: 2;
   --block-bottom-spacing: 2;
@@ -419,3 +416,46 @@ ul.wp-block-categories__list[class] {
 .content-is-highlighted:not(.block-is-highlighted) .novablocks-card a:not(.wp-block-button__link) {
   color: inherit;
   text-decoration-color: inherit; }
+
+[data-type="novablocks/media"] + [data-type="novablocks/media"],
+[data-type="novablocks/cards-collection"] + [data-type="novablocks/media"],
+[data-type="novablocks/posts-collection"] + [data-type="novablocks/media"],
+[data-type="novablocks/hero"] + [data-type="novablocks/media"],
+[data-type="novablocks/slideshow"] + [data-type="novablocks/media"], [data-type="novablocks/media"] +
+[data-type="novablocks/cards-collection"],
+[data-type="novablocks/cards-collection"] +
+[data-type="novablocks/cards-collection"],
+[data-type="novablocks/posts-collection"] +
+[data-type="novablocks/cards-collection"],
+[data-type="novablocks/hero"] +
+[data-type="novablocks/cards-collection"],
+[data-type="novablocks/slideshow"] +
+[data-type="novablocks/cards-collection"], [data-type="novablocks/media"] +
+[data-type="novablocks/posts-collection"],
+[data-type="novablocks/cards-collection"] +
+[data-type="novablocks/posts-collection"],
+[data-type="novablocks/posts-collection"] +
+[data-type="novablocks/posts-collection"],
+[data-type="novablocks/hero"] +
+[data-type="novablocks/posts-collection"],
+[data-type="novablocks/slideshow"] +
+[data-type="novablocks/posts-collection"], [data-type="novablocks/media"] +
+[data-type="novablocks/hero"],
+[data-type="novablocks/cards-collection"] +
+[data-type="novablocks/hero"],
+[data-type="novablocks/posts-collection"] +
+[data-type="novablocks/hero"],
+[data-type="novablocks/hero"] +
+[data-type="novablocks/hero"],
+[data-type="novablocks/slideshow"] +
+[data-type="novablocks/hero"], [data-type="novablocks/media"] +
+[data-type="novablocks/slideshow"],
+[data-type="novablocks/cards-collection"] +
+[data-type="novablocks/slideshow"],
+[data-type="novablocks/posts-collection"] +
+[data-type="novablocks/slideshow"],
+[data-type="novablocks/hero"] +
+[data-type="novablocks/slideshow"],
+[data-type="novablocks/slideshow"] +
+[data-type="novablocks/slideshow"] {
+  margin-top: 0; }
