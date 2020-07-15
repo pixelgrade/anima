@@ -152,7 +152,7 @@
   --theme-content-width-wide-initial: calc(var(--theme-content-width-normal-initial) + var(--theme-content-width-wide-addon));
   --theme-content-width-normal: calc(var(--theme-content-width-normal-initial) * var(--theme-body-final-font-size));
   --theme-content-width-wide: calc(var(--theme-content-width-wide-initial) * var(--theme-body-final-font-size));
-  --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-medium); }
+  --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-small); }
 
 :root {
   --theme-links-transition-property: text-decoration-color;
@@ -161,9 +161,15 @@
   --theme-links-transition: var(--theme-links-transition-property) var(--theme-links-transition-duration) var(--theme-links-transition-easing); }
 
 :root {
-  --theme-spacing-ratio: 1;
-  --theme-spacing:                calc( var( --theme-body-font-size ) * 1px * var( --theme-spacing-ratio ) );
-  --theme-spacing-fluid:          calc( var( --theme-body-final-font-size ) * var( --theme-spacing-ratio ) );
+  --spacing-x0: var(--theme-font-size-minimum-value-breakpoint);
+  --spacing-y0: 10;
+  --spacing-x1: var(--theme-font-size-breakpoint);
+  --spacing-y1: 16;
+  --spacing-y0-new: calc( var(--spacing-y1) - ( var(--spacing-y1) - var(--spacing-y0) ) );
+  --spacing-a: calc( ( var(--spacing-y1) - var(--spacing-y0-new) ) / ( var(--spacing-x1) - var(--spacing-x0) ) );
+  --spacing-b: calc( var(--spacing-y0-new) - var(--spacing-a) * var(--spacing-x0) );
+  --theme-spacing: calc(--spacing-y1);
+  --theme-spacing-fluid: calc( var(--spacing-a) * 100vw + var(--spacing-b) * 1px );
   --theme-spacing-micro:          calc( var( --theme-spacing ) * 0.25 );
   --theme-spacing-fluid-micro:    calc( var( --theme-spacing-fluid ) * 0.25 );
   --theme-spacing-tiny:          calc( var( --theme-spacing ) * 0.5 );

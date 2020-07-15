@@ -3,10 +3,28 @@
 // This file shouldn't be modified. Proceed with caution!
 
 :root {
-    --theme-spacing-ratio: 1;
+    // x0 - viewport width at which font sizes should reach minimum value
+    // y0 - minimum font size
+    // x1 - viewport width at which we know the value for the font size
+    // y1 - known font size
+    --spacing-x0: var(--theme-font-size-minimum-value-breakpoint);
+    --spacing-y0: 10;
 
-    --theme-spacing:                calc( var( --theme-body-font-size ) * 1px * var( --theme-spacing-ratio ) );
-    --theme-spacing-fluid:          calc( var( --theme-body-final-font-size ) * var( --theme-spacing-ratio ) );
+    --spacing-x1: var(--theme-font-size-breakpoint);
+    --spacing-y1: 16;
+
+    // solving a first degree equation: y = ax + b
+    --spacing-y0-new: calc( var(--spacing-y1) - ( var(--spacing-y1) - var(--spacing-y0) ) );
+
+    // calculate the slope and the remainder for the equation
+    --spacing-a: calc( ( var(--spacing-y1) - var(--spacing-y0-new) ) / ( var(--spacing-x1) - var(--spacing-x0) ) );
+    --spacing-b: calc( var(--spacing-y0-new) - var(--spacing-a) * var(--spacing-x0) );
+
+
+    // x2 - viewport width at a given time
+    // y2 - font size value we need to find out
+    --theme-spacing: calc(--spacing-y1);
+    --theme-spacing-fluid: calc( var(--spacing-a) * 100vw + var(--spacing-b) * 1px );
 
     @each $name, $value in $theme-spacing-modifiers {
         --theme-spacing-#{$name}:          calc( var( --theme-spacing ) * #{$value} );
