@@ -34,13 +34,15 @@ $enable-button-block-styles:            true !default;
     }
 
     .wp-block-buttons[class][class] {
-        margin-top: 0;
+
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
 
         .wp-block,
         .wp-block-button {
-            margin: 0;
             margin-right: var(--element-spacing);
-            margin-top: var(--element-spacing);
+            margin-top: 0 !important;
         }
 
         .block-editor-block-list__layout {
