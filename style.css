@@ -2446,8 +2446,11 @@ span.page-numbers {
 [class*="__inner-container"] > :not(:first-child) {
   --novablocks-element-spacing-multiplier: 0.5; }
 
+.novablocks-collection > .wp-block-group__inner-container > :not(:first-child) {
+  --novablocks-element-spacing-multiplier: 1; }
+
 .novablocks-collection > .wp-block-group__inner-container > :not(.novablocks-collection__cards) {
-  --novablocks-element-spacing-multiplier: 0.5; }
+  --novablocks-element-spacing-multiplier: 0.25; }
 
 .novablocks-hero__inner-container > .c-headline .c-headline__primary,
 .novablocks-hero__inner-container > .c-headline .c-headline__secondary {

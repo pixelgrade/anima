@@ -2,7 +2,7 @@
 .entry-content > *,
 .wp-block-column > *,
 [class*="__inner-container"] > * {
-    --element-spacing: calc( var(--block-top-spacing, 1) * var(--theme-spacing-fluid-small) * var(--novablocks-element-spacing-multiplier, 1) );
+    @include element-spacing;
     margin-top: var(--element-spacing);
     margin-bottom: calc( var(--block-bottom-spacing, 1) * var(--theme-spacing-fluid-small) * var(--novablocks-element-spacing-multiplier, 1) );
 }
@@ -37,7 +37,11 @@
 
 .novablocks-collection > .wp-block-group__inner-container {
 
+    > :not(:first-child) {
+        --novablocks-element-spacing-multiplier: 1;
+    }
+
     > :not(.novablocks-collection__cards) {
-        --novablocks-element-spacing-multiplier: 0.5;
+        --novablocks-element-spacing-multiplier: 0.25;
     }
 }
