@@ -2436,6 +2436,12 @@ span.page-numbers {
 .novablocks-collection[class] {
   --novablocks-element-spacing-multiplier: 0; }
 
+.novablocks-media--blog[class][class][class] {
+  --block-top-spacing: 2;
+  --block-bottom-spacing: 2; }
+  .novablocks-media--blog[class][class][class]:first-child {
+    --block-top-spacing: 0; }
+
 .wp-block-column > :not(:first-child),
 [class*="__inner-container"] > :not(:first-child) {
   --novablocks-element-spacing-multiplier: 0.5; }
