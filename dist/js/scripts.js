@@ -526,15 +526,10 @@ function () {
     value: function _bindObserver() {
       var self = this;
 
-      var updateProps = this._updateProps.bind(this);
-
       var observeCallback = this._observeCallback.bind(this);
 
       var observeAndUpdateProps = function observeAndUpdateProps() {
         observeCallback();
-
-        self._updateProps(true);
-
         self.currentMutationList = [];
       };
 

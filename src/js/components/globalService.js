@@ -58,12 +58,10 @@ class GlobalService {
 
 	_bindObserver() {
 		const self = this;
-		const updateProps = this._updateProps.bind( this );
 		const observeCallback = this._observeCallback.bind( this );
 
 		const observeAndUpdateProps = () => {
 			observeCallback();
-			self._updateProps( true );
 			self.currentMutationList = [];
 		};
 
