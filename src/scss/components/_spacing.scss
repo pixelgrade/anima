@@ -19,11 +19,11 @@
 }
 
 .novablocks-media--blog[class][class][class] {
-
     --block-top-spacing: 2;
+    --block-bottom-spacing: 2;
 
-    &:last-child {
-        --block-bottom-spacing: 1;
+    &:first-child {
+        --block-top-spacing: 0;
     }
 }
 
