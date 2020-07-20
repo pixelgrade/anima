@@ -1,8 +1,6 @@
-.novablocks-block__content {
-  @include apply-font(body);
-}
-
 .novablocks-card {
+  @include apply-font(body);
+
   .block-is-highlighted:not(.content-is-highlighted) &,
   .content-is-highlighted:not(.block-is-highlighted) & {
     .wp-block-button:not(.is-style-text) {
