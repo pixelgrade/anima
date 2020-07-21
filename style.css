@@ -337,6 +337,25 @@ template {
   padding: 0;
   margin: 0; }
 
+:root, :root * {
+  --x0: var(--theme-font-size-minimum-value-breakpoint);
+  --y0: var(--theme-font-size-minimum-value);
+  --x1: var(--theme-font-size-breakpoint);
+  --font-size-modifier: 1;
+  --y1: var(--font-size);
+  --y0-new: calc( var(--y1) - ( var(--y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) );
+  --a: calc( ( var(--y1) - var(--y0-new) ) / ( var(--x1) - var(--x0) ) );
+  --b: calc( var(--y0-new) - var(--a) * var(--x0) );
+  --y2: calc( var(--a) * 100vw + var(--b) * 1px );
+  --final-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+  font-size: var(--final-font-size);
+  font-weight: var(--current-font-weight);
+  font-family: var(--current-font-family);
+  line-height: var(--current-line-height);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform);
+  font-feature-settings: var(--current-font-feature-settings); }
+
 /* 0.2. Elements */
 html {
   -webkit-font-smoothing: antialiased;
@@ -759,7 +778,7 @@ h1, .h1 {
   --current-font-weight: var(--theme-heading-1-font-weight);
   --current-letter-spacing: var(--theme-heading-1-letter-spacing);
   --current-text-transform: var(--theme-heading-1-text-transform);
-  --current-font-feature: "liga", "dlig", "onum"; }
+  --current-font-feature-settings: var(--theme-heading-1-font-feature-settings); }
 
 h2, .h2 {
   --font-size: var(--theme-heading-2-font-size);
@@ -769,7 +788,7 @@ h2, .h2 {
   --current-line-height: var(--theme-heading-2-line-height);
   --current-letter-spacing: var(--theme-heading-2-letter-spacing);
   --current-text-transform: var(--theme-heading-2-text-transform);
-  --current-font-feature: "liga", "dlig", "onum"; }
+  --current-font-feature-settings: var(--theme-heading-2-font-feature-settings); }
 
 h3, .h3 {
   --font-size: var(--theme-heading-3-font-size);

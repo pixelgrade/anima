@@ -18,11 +18,14 @@
 
 /* Typography */
 :root {
-    --font-size: var(--theme-body-font-size);
-    --theme-body-final-font-size: var(--final-font-size);
 }
 
 .editor-styles-wrapper {
+    @include typography-root;
+
+    --font-size: var(--theme-body-font-size);
+    --theme-body-final-font-size: var(--final-font-size);
+
     -webkit-font-smoothing: antialiased;
 
     @import "blocks/editor";
@@ -46,7 +49,7 @@
         color: var(--current-dark-secondary);
 
         p {
-            font: inherit;
+            @include apply-font-properties;
         }
     }
 

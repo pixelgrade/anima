@@ -63,12 +63,14 @@
   --theme-heading-1-font-weight: 700;
   --theme-heading-1-letter-spacing: -0.03em;
   --theme-heading-1-text-transform: none;
+  --theme-heading-1-font-feature-settings: liga, dlig, onum;
   --theme-heading-2-font-family: Reforma1969, sans-serif;
   --theme-heading-2-font-size: 40;
   --theme-heading-2-font-weight: 700;
   --theme-heading-2-line-height: 1.2;
   --theme-heading-2-letter-spacing: -0.02em;
   --theme-heading-2-text-transform: none;
+  --theme-heading-2-font-feature-settings: liga, dlig, onum;
   --theme-heading-3-font-family: Reforma1969, sans-serif;
   --theme-heading-3-font-size: 32;
   --theme-heading-3-font-weight: 700;
@@ -120,31 +122,11 @@
   --theme-accent-font-family: Billy Ohio, sans-serif;
   --theme-accent-font-weight: 400;
   --theme-accent-letter-spacing: normal;
-  --theme-accent-text-transform: none;
-  --current-font-feature: none; }
+  --theme-accent-text-transform: none; }
   @media only screen and (min-width: 1440px) {
     :root {
       --theme-font-size-slope-adjust: 0.4;
       --theme-addon-multiplier: 1; } }
-
-* {
-  --x0: var(--theme-font-size-minimum-value-breakpoint);
-  --y0: var(--theme-font-size-minimum-value);
-  --x1: var(--theme-font-size-breakpoint);
-  --font-size-modifier: 1;
-  --y1: var(--font-size);
-  --y0-new: calc( var(--y1) - ( var(--y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) );
-  --a: calc( ( var(--y1) - var(--y0-new) ) / ( var(--x1) - var(--x0) ) );
-  --b: calc( var(--y0-new) - var(--a) * var(--x0) );
-  --y2: calc( var(--a) * 100vw + var(--b) * 1px );
-  --final-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
-  font-size: var(--current-font-size);
-  font-weight: var(--current-font-weight);
-  font-family: var(--current-font-family);
-  line-height: var(--current-line-height);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform);
-  font-feature-settings: var(--current-font-feature); }
 
 :root {
   --theme-content-width-normal-initial: 40;
