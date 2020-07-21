@@ -82,9 +82,9 @@ body:not(.has-loaded) .c-comments-toggle__checkbox + .c-comments-toggle__label ~
     opacity: 0; }
 
 /* Pages */
-body.archive, body.blog, body.search:not(.search-no-results) {
+body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-results) {
   background-color: var(--current-light-tertiary); }
-  body.archive .novablocks-media__inner-container, body.blog .novablocks-media__inner-container, body.search:not(.search-no-results) .novablocks-media__inner-container {
+  body.archive:not(.woocommerce-page) .novablocks-media__inner-container, body.blog .novablocks-media__inner-container, body.search:not(.search-no-results) .novablocks-media__inner-container {
     text-align: center; }
 
 .single.single-post {

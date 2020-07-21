@@ -331,7 +331,7 @@
 .c-product-main {
 
   --thumbnails-gap: 10px;
-  --columns-gap: calc( var(--columns-gap) * 2 );
+  --columns-gap: calc( var(--thumbnails-gap) * 2 );
   --variation-input-width: 100%;
 
   @include above(tablet) {
@@ -748,7 +748,7 @@
         width: 100%;
         height: 1px;
 
-        background-color: var(--current-color-primary);
+        background-color: var(--current-dark-primary);
         opacity: .2;
       }
     }
