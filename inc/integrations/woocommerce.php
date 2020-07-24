@@ -272,7 +272,7 @@ function rosa2_append_add_to_cart_button()  {
 	}
 
 	$class = 'add_to_cart_button';
-	if ( $product->is_type( 'simple' ) ) {
+	if ( $product->is_type( 'simple' ) && 'yes' === get_option( 'woocommerce_enable_ajax_add_to_cart' ) ) {
 		$class .= '  ajax_add_to_cart';
 	} ?>
 
@@ -312,7 +312,7 @@ function rosa2_output_ajax_add_to_cart_button() {
 	}
 
 	$product = wc_get_product();
-	if ( ! empty( $product ) && $product->is_type( 'simple' ) ) {
+	if ( ! empty( $product ) && $product->is_type( 'simple' ) && 'yes' === get_option( 'woocommerce_enable_ajax_add_to_cart' ) ) {
 		woocommerce_template_loop_add_to_cart( array(
 			'class' => 'add_to_cart_button  ajax_add_to_cart'
 		) );
