@@ -124,8 +124,8 @@ function rosa2_add_header_section_to_customify_config( $config ) {
 				),
 				'header_position'                 => array(
 					'type'    => 'select',
-					'label'   => esc_html__( 'Header Position', '__theme_txtd' ),
-					'desc'    => esc_html__( 'Choose if you want a static menu or a fixed (sticky) one that stays visible no matter how much you scroll the page.', '__theme_txtd' ),
+					'label'   => esc_html__( 'Header Position on Scroll', '__theme_txtd' ),
+					'desc'    => esc_html__( 'Note: to prevent your content from being annoyingly hidden behind the Header on smaller screens, the Sticky option will remain active only if the Header height is larger than 20% of the browser window height.', '__theme_txtd' ),
 					'default' => 'sticky',
 					'choices' => array(
 						'static' => esc_html__( 'Static', '__theme_txtd' ),
