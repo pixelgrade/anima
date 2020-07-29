@@ -1,0 +1,43 @@
+.wc-pao-addon,
+[id="product-addons-total"] {
+  width: 100%;
+}
+
+
+.wc-pao-addon {
+  @include above(tablet) {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    grid-column-gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  label {
+    margin: 0;
+  }
+
+  select{
+    @include specific(2) {
+      width: var(--variation-input-width);
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  .wc-pao-addon-wrap[class][class] {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.wc-pao-addon-container {
+  margin-bottom: var(--theme-spacing-small);
+  margin-top: calc( -1 * calc(var(--theme-spacing-xsmall)/2));
+}
+
+.product-addon-totals {
+  ul {
+    padding-left: 0;
+  }
+}

@@ -165,6 +165,19 @@
     .widget_shopping_cart_content > :not(.woocommerce-mini-cart) {
         flex-shrink: 0;
     }
+
+    .mini_cart_item {
+        .variation {
+            padding-left: 0;
+            border: 0;
+            margin-top: .5em;
+
+            dl,
+            dd {
+                padding: 0 !important;
+            }
+        }
+    }
 }
 
 .c-mini-cart[class] {
