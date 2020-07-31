@@ -5,13 +5,7 @@
 
 
 .wc-pao-addon {
-  @include above(tablet) {
-    display: grid;
-    grid-template-columns: repeat(2, max-content);
-    grid-column-gap: 10px;
-    justify-content: space-between;
-    align-items: center;
-  }
+  @include variation-field-grid;
 
   label {
     margin: 0;
@@ -32,11 +26,34 @@
 }
 
 .wc-pao-addon-container {
-  margin-bottom: var(--theme-spacing-small);
-  margin-top: calc( -1 * calc(var(--theme-spacing-xsmall)/2));
+ @include variation-field-spacing;
 }
 
 .product-addon-totals {
+  
+  position: relative;
+
+  @include specific(2) {
+    margin-top: 0;
+    padding-top: 0;
+
+    border: 0;
+
+    @include variation-field-spacing;
+  }
+  
+  .wc-pao-subtotal-line {
+    position: relative;
+
+    @include specific(2) {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      padding-top: 0;
+
+      border: 0;
+    }
+  }
+
   ul {
     padding-left: 0;
   }

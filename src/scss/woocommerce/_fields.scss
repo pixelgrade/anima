@@ -101,4 +101,38 @@
             }
         }
     }
+
+    .qty_button {
+        border-radius: 50%;
+        color: var(--theme-input-color);
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background-color: currentColor;
+        }
+
+
+        &.minus {
+            &:after {
+                mask-size: contain;
+                mask: url($icon-minus-path) no-repeat 50% 50%;
+                -webkit-mask:url($icon-minus-path) no-repeat 50% 50%;
+            }
+        }
+
+        &.plus {
+           &:after {
+               mask-size: contain;
+               mask: url($icon-plus-path) no-repeat 50% 50%;
+               -webkit-mask:url($icon-plus-path) no-repeat 50% 50%;
+           }
+        }
+    }
 }
