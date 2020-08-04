@@ -1,4 +1,4 @@
-.wp-block[data-type="novablocks/header"] {
+[data-type="novablocks/header"][class] {
   .editor-block-list__layout,
   .block-editor-block-list__layout {
     display: grid;
@@ -12,6 +12,10 @@
 
     > :last-child {
       justify-content: flex-end;
+    }
+
+    .wp-block {
+      margin-top: 0 !important;
     }
   }
 }
@@ -53,7 +57,7 @@
 
 .wp-block-novablocks-navigation ul.menu > li,
 .wp-block-novablocks-navigation .menu > ul > li {
-  margin-left: var(--theme-header-links-spacing);
+  margin-left: 0;
 }
 
 .site-header > div:first-child {
