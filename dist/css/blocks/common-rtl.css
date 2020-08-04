@@ -63,6 +63,9 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap; }
+  .wp-block-buttons[class][class]:first-child {
+    --block-top-spacing: 1;
+    --element-spacing: calc( var(--block-top-spacing, 1) * var(--theme-spacing-fluid-small) * var(--novablocks-element-spacing-multiplier, 1) ); }
   .wp-block-buttons[class][class] .wp-block,
   .wp-block-buttons[class][class] .wp-block-button {
     margin-left: var(--element-spacing);

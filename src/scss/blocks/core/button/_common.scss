@@ -40,6 +40,12 @@ $enable-button-block-styles:            true !default;
         align-items: center;
         flex-wrap: wrap;
 
+        &:first-child {
+            --block-top-spacing: 1;
+            @include element-spacing;
+        }
+
+
         .wp-block,
         .wp-block-button {
             margin-right: var(--element-spacing);
