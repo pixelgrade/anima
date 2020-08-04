@@ -25,3 +25,14 @@
 
 // Nova - Cards Collection
 @import "cards-collection/editor";
+
+[data-type="novablocks/media"],
+[data-type="novablocks/cards-collection"],
+[data-type="novablocks/posts-collection"],
+[data-type="novablocks/hero"],
+[data-type="novablocks/slideshow"] {
+
+    & + & {
+        margin-top: 0;
+    }
+}

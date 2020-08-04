@@ -1,5 +1,7 @@
 .novablocks-block[class] {
-    padding: var(--novablocks-block-padding) 0;
+    padding-top: calc( var(--emphasis-top-spacing, 1) * var(--novablocks-spacing) * var(--novablocks-element-spacing-multiplier, 1) );
+    padding-bottom: calc( var(--emphasis-bottom-spacing, 1) * var(--novablocks-spacing) * var(--novablocks-element-spacing-multiplier, 1) );
+
     color: var(--novablocks-block-text-color);
     background-color: var(--novablocks-block-background-color);
 }
@@ -11,7 +13,6 @@
     transform: translateZ(0);
 
     @include above(tablet) {
-        box-shadow: var(--novablocks-block-content-box-shadow);
 
         &:after {
             content: '';

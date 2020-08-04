@@ -172,6 +172,10 @@
     }
   }
 
+  & form {
+    margin-top: var(--theme-spacing-large);
+  }
+
   .woocommerce-form-coupon-toggle,
   .woocommerce-form-coupon {
     position: relative;
@@ -484,13 +488,6 @@ ul.order_details[class] {
     @include apply-font(heading-4);
     margin-bottom: var(--theme-spacing-small);
   }
-}
-
-.woocommerce-error,
-.woocommerce-info,
-.woocommerce-message {
-  background-color: var(--current-light-tertiary);
-  color: var(--current-dark-primary);
 }
 
 #add_payment_method #payment div.payment_box,

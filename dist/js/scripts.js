@@ -526,15 +526,10 @@ function () {
     value: function _bindObserver() {
       var self = this;
 
-      var updateProps = this._updateProps.bind(this);
-
       var observeCallback = this._observeCallback.bind(this);
 
       var observeAndUpdateProps = function observeAndUpdateProps() {
         observeCallback();
-
-        self._updateProps(true);
-
         self.currentMutationList = [];
       };
 
@@ -1812,11 +1807,7 @@ function () {
     this.initializePromoBar();
     this.initializeImages();
     this.initializeCommentsArea();
-    this.initializeReservationForm(); // trigger resize
-
-    globalService.registerObserverCallback(function (mutationList) {
-      external_jQuery_default()(window).trigger('orientationchange').trigger('resize');
-    });
+    this.initializeReservationForm();
     globalService.registerRender(this.render.bind(this));
   }
 

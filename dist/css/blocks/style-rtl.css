@@ -52,6 +52,9 @@
   padding-right: var(--theme-wrapper-sides-spacing);
   padding-left: var(--theme-wrapper-sides-spacing); }
 
+.wp-block-image.is-style-rounded img {
+  border-radius: 50%; }
+
 /* Latest Comments Block */
 .wp-block-latest-comments {
   list-style: none; }
@@ -80,33 +83,6 @@
   margin-left: var(--theme-comment-avatar-spacing);
   object-fit: cover; }
 
-.block-is-moderate + .block-is-moderate[class],
-.block-is-highlighted + .block-is-moderate[class],
-.novablocks-slideshow + .block-is-moderate[class],
-.novablocks-hero + .block-is-moderate[class], .block-is-moderate +
-.block-is-highlighted[class],
-.block-is-highlighted +
-.block-is-highlighted[class],
-.novablocks-slideshow +
-.block-is-highlighted[class],
-.novablocks-hero +
-.block-is-highlighted[class], .block-is-moderate +
-.novablocks-slideshow[class],
-.block-is-highlighted +
-.novablocks-slideshow[class],
-.novablocks-slideshow +
-.novablocks-slideshow[class],
-.novablocks-hero +
-.novablocks-slideshow[class], .block-is-moderate +
-.novablocks-hero[class],
-.block-is-highlighted +
-.novablocks-hero[class],
-.novablocks-slideshow +
-.novablocks-hero[class],
-.novablocks-hero +
-.novablocks-hero[class] {
-  margin-top: 0; }
-
 .block-is-moderate + .block-is-moderate:not(.novablocks-media--blog),
 .block-is-highlighted + .block-is-highlighted[class] {
   padding-top: 0; }
@@ -120,12 +96,6 @@
   .novablocks-announcement-bar a:hover {
     color: currentColor; }
 
-.content-is-moderate {
-  --novablocks-block-content-box-shadow:
-        0 32px 128px rgba(0, 0, 0, 0.1),
-        0 16px 64px rgba(0, 0, 0, 0.1),
-        0 8px 16px rgba(0, 0, 0, 0.1); }
-
 .novablocks-media.novablocks-media--no-thumbnail .novablocks-media__image {
   display: flex;
   align-items: center;
@@ -133,15 +103,12 @@
   .novablocks-media.novablocks-media--no-thumbnail .novablocks-media__image path {
     fill: var(--current-color-primary); }
 
-.novablocks-media__inner-container .wp-block-separator + * {
-  --element-spacing: var(--theme-spacing); }
-
-.novablocks-hero__inner-container > :not(:first-child) {
-  --element-spacing: var(--theme-spacing); }
-
 .novablocks-hero__inner-container > .wp-block-separator:not(:first-child),
-.novablocks-hero__inner-container > .wp-block-separator + * {
-  --element-spacing: var(--theme-spacing-medium); }
+.novablocks-hero__inner-container > .wp-block-separator[class] + * {
+  --novablocks-element-spacing-multiplier: 1; }
+
+.novablocks-media__inner-container .wp-block-separator {
+  width: 100%; }
 
 .nova-food-menu {
   --theme-content-width-normal: var(--theme-content-width-wide); }
@@ -221,14 +188,6 @@
     display: flex;
     flex-wrap: wrap; } }
 
-.novablocks-hero .wp-block-button:not(.is-style-text) .wp-block-button__link {
-  --theme-button-text-color: var(--current-dark-primary);
-  --theme-button-background-color: var(--current-light-primary);
-  --theme-button-border-color: var(--current-light-primary);
-  --theme-button-hover-text-color: var(--current-light-primary);
-  --theme-button-hover-background-color: transparent;
-  --theme-button-hover-border-color: var(--current-light-primary); }
-
 .novablocks-media > .wp-block-group__inner-container {
   padding-top: 1px; }
 
@@ -242,9 +201,6 @@
   --current-letter-spacing: var(--theme-body-letter-spacing); }
   .novablocks-media__content[class] {
     min-width: 0; }
-
-.novablocks-media:not(.novablocks-media--no-thumbnail) .novablocks-media__aside {
-  min-height: 15em; }
 
 .novablocks-media__image {
   position: relative; }
@@ -288,15 +244,8 @@
   .novablocks-block__content {
     --novablocks-block-content-padding: var(--novablocks-spacing); } }
 
-.novablocks-media--blog .novablocks-block__content {
-  --novablocks-block-content-box-shadow: none; }
-
 .novablocks-media--blog[class] {
-  --block-top-spacing: 2;
-  --block-bottom-spacing: 2;
   --novablocks-block-background-color: var(--current-light-tertiary); }
-  .novablocks-media--blog[class]:first-child {
-    --block-top-spacing: 0; }
   .novablocks-media--blog[class] .novablocks-media__content {
     flex-basis: calc(50% - var(--novablocks-media-spacing)); }
   .novablocks-media--blog[class] .novablocks-media__aside {
@@ -540,24 +489,22 @@
   transition: opacity 0.15s ease-in;
   transform: none; }
 
-.novablocks-block__content {
+.novablocks-card {
   --font-size: var(--theme-body-font-size);
   font-size: var(--final-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
   --current-letter-spacing: var(--theme-body-letter-spacing); }
-
-.block-is-highlighted:not(.content-is-highlighted) .novablocks-card .wp-block-button:not(.is-style-text) .wp-block-button__link,
-.content-is-highlighted:not(.block-is-highlighted) .novablocks-card .wp-block-button:not(.is-style-text) .wp-block-button__link {
-  --theme-button-text-color: var(--current-dark-primary);
-  --theme-button-background-color: var(--current-light-primary);
-  --theme-button-border-color: var(--current-light-primary);
-  --theme-button-hover-text-color: var(--current-light-primary);
-  --theme-button-hover-background-color: transparent;
-  --theme-button-hover-border-color: var(--current-light-primary); }
-
-.block-is-highlighted:not(.content-is-highlighted) .novablocks-card a:not(.wp-block-button__link),
-.content-is-highlighted:not(.block-is-highlighted) .novablocks-card a:not(.wp-block-button__link) {
-  color: inherit;
-  text-decoration-color: inherit; }
+  .block-is-highlighted:not(.content-is-highlighted) .novablocks-card .wp-block-button:not(.is-style-text) .wp-block-button__link,
+  .content-is-highlighted:not(.block-is-highlighted) .novablocks-card .wp-block-button:not(.is-style-text) .wp-block-button__link {
+    --theme-button-text-color: var(--current-dark-primary);
+    --theme-button-background-color: var(--current-light-primary);
+    --theme-button-border-color: var(--current-light-primary);
+    --theme-button-hover-text-color: var(--current-light-primary);
+    --theme-button-hover-background-color: transparent;
+    --theme-button-hover-border-color: var(--current-light-primary); }
+  .block-is-highlighted:not(.content-is-highlighted) .novablocks-card a:not(.wp-block-button__link),
+  .content-is-highlighted:not(.block-is-highlighted) .novablocks-card a:not(.wp-block-button__link) {
+    color: inherit;
+    text-decoration-color: inherit; }

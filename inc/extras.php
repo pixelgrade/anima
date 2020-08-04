@@ -32,20 +32,28 @@ function rosa2_page_has_hero() {
 	return false;
 }
 
-function rosa2_last_block_hero() {
+function rosa2_remove_site_padding_bottom() {
 	global $post;
 
 	if ( ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
 		$blocks = parse_blocks( $post->post_content );
 		$count = count( $blocks );
-		$lastBlockName = $blocks[ $count - 1 ]['blockName'];
+		$lastBlock = $blocks[ $count - 1 ];
+		$blockName = $lastBlock['blockName'];
+		$attributes = $lastBlock['attrs'];
 
-        return $lastBlockName === 'novablocks/hero' || $lastBlockName === 'novablocks/slideshow';
+		if ( $blockName === 'novablocks/hero' ||
+		     $blockName === 'novablocks/slideshow' ) {
+		    return true;
+        }
+
+		if ( $blockName === 'novablocks/google-map' && $attributes['align'] === 'full' ) {
+		    return true;
+		}
 	}
 
 	return false;
 }
-add_action('rosa_before_header', 'rosa2_last_block_hero');
 
 function rosa2_has_moderate_media_card_after_hero() {
 	global $post;
@@ -182,7 +190,6 @@ function rosa2_woocommerce_setup() {
 
 		// Add the necessary theme support flags
 		add_theme_support( 'woocommerce' );
-		add_theme_support( 'wc-product-gallery-zoom' );
 		add_theme_support( 'wc-product-gallery-lightbox' );
 		add_theme_support( 'wc-product-gallery-slider' );
 

@@ -4,13 +4,13 @@ Theme URI: https://demos.pixelgrade.com/rosa2
 Author: Pixelgrade
 Author URI: https://pixelgrade.com
 Description: ROSA 2 is an enchanting and easy-to-use parallax Restaurant WordPress theme that allows you to tell your story in a dynamic, narrative and enjoyable way, making it perfect for restaurants, bakeries, bars or coffee shops.
-Version: 1.2.0
+Version: 1.3.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: __theme_txtd
 Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, fluid-layout, responsive-layout, parallax, translation-ready, restaurant
 Requires at least: 5.2.0
-Tested up to: 5.4.1
+Tested up to: 5.4.2
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
@@ -870,7 +870,7 @@ a {
   transition: var(--theme-links-transition); }
   a:hover, a:focus {
     --theme-links-current-color: var(--theme-links-hover-color);
-    --theme-links-decoration-color: var(--theme-links-hover-decoration-color); }
+    --theme-links-current-decoration-color: var(--theme-links-hover-decoration-color); }
   a[href^=tel] {
     color: inherit; }
 
@@ -943,8 +943,7 @@ table {
   width: 100%; }
   @media not screen and (min-width: 1000px) {
     .promo-bar[class][class] {
-      position: relative;
-      top: 0; } }
+      position: absolute; } }
   .admin-bar .promo-bar {
     top: 32px; }
   .demo-site .promo-bar {
@@ -1687,7 +1686,8 @@ ul.menu a,
   padding-right: var(--theme-wrapper-sides-spacing);
   padding-top: var(--theme-spacing-fluid-xl);
   padding-bottom: var(--theme-spacing-fluid-xl);
-  text-align: center; }
+  text-align: center;
+  --novablocks-element-spacing-multiplier: 0.5; }
   .entry-header > .alignfull {
     margin-left: calc( -1 * var(--theme-wrapper-sides-spacing));
     margin-right: calc( -1 * var(--theme-wrapper-sides-spacing)); }
@@ -1739,30 +1739,6 @@ ul.menu a,
   .entry-content > .alignfull,
   [class*="__inner-container"] > .alignfull {
     max-width: none; }
-
-.entry-content > :not(:first-child),
-.wp-block-column > :not(:first-child),
-[class*="__inner-container"] > :not(:first-child) {
-  --element-spacing: var(--theme-spacing-small);
-  margin-top: var(--element-spacing); }
-
-.wp-block-column > :not(:first-child),
-[class*="__inner-container"] > :not(:first-child) {
-  --element-spacing: var(--theme-spacing); }
-
-.novablocks-collection > .wp-block-group__inner-container > :not(.novablocks-collection__cards) {
-  --element-spacing: var(--theme-spacing); }
-
-.wp-block-group,
-.nova-food-menu,
-.novablocks-hero,
-.novablocks-slideshow {
-  --element-spacing: var(--theme-spacing-fluid-large); }
-  .wp-block-group + :not(:first-child),
-  .nova-food-menu + :not(:first-child),
-  .novablocks-hero + :not(:first-child),
-  .novablocks-slideshow + :not(:first-child) {
-    margin-top: var(--element-spacing); }
 
 .entry-footer {
   padding-left: var(--theme-wrapper-sides-spacing);
@@ -2271,7 +2247,7 @@ span.page-numbers {
 
 .post-navigation {
   --current-arrow-padding: calc(.4em + 1.15em);
-  --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-medium);
+  --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-small);
   padding-left: var(--theme-wrapper-sides-spacing);
   padding-right: var(--theme-wrapper-sides-spacing);
   clear: both; }
@@ -2410,6 +2386,67 @@ span.page-numbers {
     text-decoration: none;
     clip: auto !important;
     clip-path: none; }
+
+.wp-block,
+.entry-content > *,
+.wp-block-column > *,
+[class*="__inner-container"] > * {
+  --element-spacing: calc( var(--block-top-spacing, 1) * var(--theme-spacing-fluid-small) * var(--novablocks-element-spacing-multiplier, 1) );
+  margin-top: var(--element-spacing);
+  margin-bottom: calc( var(--block-bottom-spacing, 1) * var(--theme-spacing-fluid-small) * var(--novablocks-element-spacing-multiplier, 1)); }
+
+.novablocks-media + .novablocks-media[class],
+.novablocks-hero + .novablocks-media[class],
+.novablocks-slideshow + .novablocks-media[class],
+.novablocks-map.alignfull + .novablocks-media[class],
+.novablocks-collection + .novablocks-media[class], .novablocks-media +
+.novablocks-hero[class],
+.novablocks-hero +
+.novablocks-hero[class],
+.novablocks-slideshow +
+.novablocks-hero[class],
+.novablocks-map.alignfull +
+.novablocks-hero[class],
+.novablocks-collection +
+.novablocks-hero[class], .novablocks-media +
+.novablocks-slideshow[class],
+.novablocks-hero +
+.novablocks-slideshow[class],
+.novablocks-slideshow +
+.novablocks-slideshow[class],
+.novablocks-map.alignfull +
+.novablocks-slideshow[class],
+.novablocks-collection +
+.novablocks-slideshow[class], .novablocks-media +
+.novablocks-map.alignfull[class],
+.novablocks-hero +
+.novablocks-map.alignfull[class],
+.novablocks-slideshow +
+.novablocks-map.alignfull[class],
+.novablocks-map.alignfull +
+.novablocks-map.alignfull[class],
+.novablocks-collection +
+.novablocks-map.alignfull[class], .novablocks-media +
+.novablocks-collection[class],
+.novablocks-hero +
+.novablocks-collection[class],
+.novablocks-slideshow +
+.novablocks-collection[class],
+.novablocks-map.alignfull +
+.novablocks-collection[class],
+.novablocks-collection +
+.novablocks-collection[class] {
+  --novablocks-element-spacing-multiplier: 0; }
+
+.novablocks-media--blog[class][class][class] {
+  --block-top-spacing: 2;
+  --block-bottom-spacing: 2; }
+  .novablocks-media--blog[class][class][class]:first-child {
+    --block-top-spacing: 0; }
+
+.wp-block-column > :not(:first-child),
+[class*="__inner-container"] > :not(:first-child) {
+  --novablocks-element-spacing-multiplier: 0.5; }
 
 .novablocks-hero__inner-container > .c-headline .c-headline__primary,
 .novablocks-hero__inner-container > .c-headline .c-headline__secondary {
@@ -2880,6 +2917,27 @@ span.page-numbers {
   .wpforms-container[class][class][class].half .wpforms-field-textarea {
     width: 100%; }
 
+.wpforms-confirmation-container-full {
+  position: relative;
+  background: transparent;
+  border: 0;
+  padding: 1em;
+  color: var(--current-dark-primary);
+  --theme-notification-color: var(--theme-notification-succes-color);
+  --theme-notification-opacity: 0.15; }
+  .wpforms-confirmation-container-full:after {
+    position: absolute;
+    content: '';
+    display: block;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--theme-notification-color);
+    opacity: var(--theme-notification-opacity);
+    border-radius: 4px;
+    z-index: -1; }
+
 /* 6. Overwrites */
 /* Embeds */
 .fb_iframe_widget > span {
@@ -2918,5 +2976,5 @@ optgroup,
 select,
 textarea {
   font-family: var(--current-font-family);
-  text-transform: var(--current-tex-transform);
+  text-transform: var(--current-text-transform);
   font-weight: var(--current-font-weight); }

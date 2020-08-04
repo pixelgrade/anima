@@ -9,6 +9,12 @@
         @include button;
     }
 
+    .customize-partial-edit-shortcut-button {
+        padding: 3px;
+        border: 0;
+        border-radius: 50%;
+    }
+
     .ajax_add_to_cart ~ .button {
         display: none;
     }
@@ -62,5 +68,71 @@
         --theme-button-hover-border-color: var(--current-color-primary);
 
         @include button-huge;
+    }
+
+    .add_to_cart_button,
+    .single_add_to_cart_button {
+        --theme-button-background-color: var(--current-color-primary);
+        --theme-button-border-color: var(--current-color-primary);
+        --theme-button-hover-text-color: var(--current-color-primary);
+        --theme-button-hover-border-color: var(--current-color-primary);
+
+        width: 100%;
+    }
+
+    .qty_button {
+        padding: 0;
+        background-color: transparent;
+        border: 0;
+        box-shadow: none;
+
+        color: var(--current-dark-primary);
+    }
+
+    .woocommerce-notices-wrapper {
+        .button {
+            @include specific(5) {
+                @include button-fill;
+                --current-button-text-color: var(--theme-button-text-color);
+
+                &:hover {
+                    --current-button-text-color: var(--theme-button-hover-text-color);
+                }
+            }
+        }
+    }
+
+    .qty_button {
+        border-radius: 50%;
+        color: var(--theme-input-color);
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background-color: currentColor;
+        }
+
+
+        &.minus {
+            &:after {
+                mask-size: contain;
+                mask: url($icon-minus-path) no-repeat 50% 50%;
+                -webkit-mask:url($icon-minus-path) no-repeat 50% 50%;
+            }
+        }
+
+        &.plus {
+           &:after {
+               mask-size: contain;
+               mask: url($icon-plus-path) no-repeat 50% 50%;
+               -webkit-mask:url($icon-plus-path) no-repeat 50% 50%;
+           }
+        }
     }
 }

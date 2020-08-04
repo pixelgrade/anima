@@ -65,12 +65,15 @@
   flex-wrap: wrap; }
   .wp-block-buttons[class][class] .wp-block,
   .wp-block-buttons[class][class] .wp-block-button {
-    margin: 0;
-    margin-right: var(--element-spacing); }
+    margin-right: var(--element-spacing);
+    margin-top: 0 !important; }
   .wp-block-buttons[class][class] .block-editor-block-list__layout {
     display: flex;
     align-items: center;
     flex-wrap: wrap; }
+    .wp-block-buttons[class][class] .block-editor-block-list__layout > * {
+      margin-left: 0;
+      margin-right: 0; }
   .wp-block-buttons[class][class].aligncenter {
     justify-content: center; }
     .wp-block-buttons[class][class].aligncenter .wp-block,
@@ -784,6 +787,24 @@
 .wp-block-table {
   overflow-x: auto; }
 
+.novablocks-hero[class] a {
+  --theme-links-color: var(--novablocks-hero-text-color);
+  --theme-links-hover-color: var(--novablocks-hero-text-color);
+  --theme-links-decoration-color: var(--novablocks-hero-text-color); }
+
+.novablocks-hero .wp-block-button:not(.is-style-text) .wp-block-button__link {
+  --theme-button-text-color: var(--current-dark-primary);
+  --theme-button-background-color: var(--current-light-primary);
+  --theme-button-border-color: var(--current-light-primary);
+  --theme-button-hover-text-color: var(--current-light-primary);
+  --theme-button-hover-background-color: transparent;
+  --theme-button-hover-border-color: var(--current-light-primary); }
+
+.novablocks-slideshow[class] a {
+  --theme-links-color: var(--novablocks-slideshow-text-color);
+  --theme-links-hover-color: var(--novablocks-slideshow-text-color);
+  --theme-links-decoration-color: var(--novablocks-slideshow-text-color); }
+
 html:root {
   --novablocks-color-1: var(--current-color-primary);
   --novablocks-color-2: var(--current-color-secondary);
@@ -795,9 +816,13 @@ html:root {
   --novablocks-light-2: var(--current-light-secondary);
   --novablocks-light-3: var(--current-light-tertiary);
   --nova-food-menu-item-highlight-color: var(--current-dark-primary);
-  --novablocks-spacing: var(--theme-spacing-fluid-medium);
+  --novablocks-spacing: var(--theme-spacing-fluid-large);
   --novablocks-media-spacing: var(--novablocks-spacing);
-  --novablocks-sides-spacings: var(--theme-wrapper-sides-spacing); }
+  --novablocks-sides-spacings: var(--theme-wrapper-sides-spacing);
+  --novablocks-block-content-box-shadow:
+            0 32px 128px rgba(0, 0, 0, 0.1),
+            0 16px 64px rgba(0, 0, 0, 0.1),
+            0 8px 16px rgba(0, 0, 0, 0.1); }
 
 .novablocks-hero__inner-container,
 .novablocks-slideshow__inner-container {

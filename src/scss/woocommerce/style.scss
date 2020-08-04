@@ -5,11 +5,14 @@ $assets-folder-path: '../../../assets';
 @import "fields";
 
 @import "components/mini-cart";
+@import "components/notifications";
 
 @import "pages/archive";
 @import "pages/single-product";
 @import "pages/cart";
 @import "pages/checkout";
+
+@import "plugins/product-addons";
 
 @import "blocks";
 
@@ -63,4 +66,8 @@ $assets-folder-path: '../../../assets';
 
 .woocommerce .star-rating span {
   font: inherit;
+
+  &:before {
+    color: var(--current-color-primary);
+  }
 }

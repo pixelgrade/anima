@@ -18,7 +18,7 @@ function rosa2_add_layout_section_to_customify_config( $config ) {
 					'type'        => 'range',
 					'live'        => true,
 					'label'       => esc_html__( 'Content Width', '__theme_txtd' ),
-					'default'     => 38,
+					'default'     => 40,
 					'input_attrs' => array(
 						'min'          => 20,
 						'max'          => 100,
@@ -37,7 +37,7 @@ function rosa2_add_layout_section_to_customify_config( $config ) {
 					'type'        => 'range',
 					'live'        => true,
 					'label'       => esc_html__( 'Container Width', '__theme_txtd' ),
-					'default'     => 27,
+					'default'     => 32,
 					'input_attrs' => array(
 						'min'          => 0,
 						'max'          => 50,

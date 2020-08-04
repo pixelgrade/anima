@@ -12,13 +12,6 @@
     }
 }
 
-.novablocks-media__aside {
-
-    .novablocks-media:not(.novablocks-media--no-thumbnail) & {
-        min-height: 15em;
-    }
-}
-
 .novablocks-media__image {
     position: relative;
 
@@ -41,20 +34,9 @@
     @include above(tablet) {
         --novablocks-block-content-padding: var(--novablocks-spacing);
     }
-
-    .novablocks-media--blog & {
-        --novablocks-block-content-box-shadow: none;
-    }
 }
 
 .novablocks-media--blog[class] {
-    --block-top-spacing: 2;
-    --block-bottom-spacing: 2;
-
-    &:first-child {
-        --block-top-spacing: 0;
-    }
-
     --novablocks-block-background-color: var(--current-light-tertiary);
 
     .novablocks-media__content {

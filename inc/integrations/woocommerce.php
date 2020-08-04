@@ -140,6 +140,23 @@ function rosa2_woocommerce_setup_hooks() {
 
     // Change sale flash
 	add_filter( 'woocommerce_sale_flash', 'rosa2_woocommerce_sale_flash', 10, 1 );
+
+	// Remove Sale Flash on Single Product
+	remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_sale_flash', 10 );
+
+	// Change several of the breadcrumb defaults
+	add_filter( 'woocommerce_breadcrumb_defaults', 'rosa2_woocommerce_breadcrumbs' );
+
+    // Replace the shop link URL
+	add_filter( 'woocommerce_breadcrumb_home_url', 'rosa2_woocommerce_custom_breadrumb_home_url' );
+
+	// Add minus to quantity input
+    add_action('woocommerce_before_quantity_input_field', 'rosa2_woocommerce_quantity_label', 10);
+    add_action('woocommerce_before_quantity_input_field', 'rosa2_woocommerce_quantity_input_before', 20);
+	add_action('woocommerce_after_quantity_input_field', 'rosa2_woocommerce_quantity_input_after');
+
+    // Add label before stock
+	add_filter( 'woocommerce_get_availability', 'rosa2_add_label_to_availability_display' );
 }
 // We do this late so we can give all others room to play.
 add_action( 'wp_loaded', 'rosa2_woocommerce_setup_hooks' );
@@ -261,7 +278,7 @@ function rosa2_append_add_to_cart_button()  {
 	}
 
 	$class = 'add_to_cart_button';
-	if ( $product->is_type( 'simple' ) ) {
+	if ( $product->is_type( 'simple' ) && 'yes' === get_option( 'woocommerce_enable_ajax_add_to_cart' ) ) {
 		$class .= '  ajax_add_to_cart';
 	} ?>
 
@@ -301,7 +318,7 @@ function rosa2_output_ajax_add_to_cart_button() {
 	}
 
 	$product = wc_get_product();
-	if ( ! empty( $product ) && $product->is_type( 'simple' ) ) {
+	if ( ! empty( $product ) && $product->is_type( 'simple' ) && 'yes' === get_option( 'woocommerce_enable_ajax_add_to_cart' ) ) {
 		woocommerce_template_loop_add_to_cart( array(
 			'class' => 'add_to_cart_button  ajax_add_to_cart'
 		) );
@@ -457,4 +474,45 @@ function rosa2_loop_product_thumbnail_wrapper_open() {
 
 function rosa2_loop_product_thumbnail_wrapper_close() {
     echo '</div><!-- .wc-block-grid__product-image -->';
+}
+
+function rosa2_woocommerce_breadcrumbs() {
+	return array(
+		'delimiter'   => ' &#47; ',
+		'wrap_before' => '<nav class="woocommerce-breadcrumb" itemprop="breadcrumb">',
+		'wrap_after'  => '</nav>',
+		'before'      => '<span>',
+		'after'       => '</span>',
+		'home'        => _x( 'Shop', 'breadcrumb', 'woocommerce' ),
+	);
+}
+
+function rosa2_woocommerce_quantity_input_before() {
+    echo '<button class="qty_button minus button--is-disabled"></button>';
+}
+
+function rosa2_woocommerce_quantity_input_after() {
+	echo '<button class="qty_button plus"></button></div>';
+}
+
+function rosa2_woocommerce_quantity_label() {
+
+	$label = '<label for="quantity">' . esc_html__( 'Quantity', '__theme_txtd' ) . '</label><div class="quantity__wrapper">';
+
+	echo $label;
+}
+
+function rosa2_add_label_to_availability_display( $availability ) {
+    global $product;
+
+	if( is_product() && $product-> get_manage_stock() ){
+		$label = __( '<span>Stock</span>', 'woocommerce' );
+		$availability['availability'] = $label . '<span>' .$availability['availability'] . '</span>';
+	}
+
+	return $availability;
+}
+
+function rosa2_woocommerce_custom_breadrumb_home_url() {
+	return get_permalink( wc_get_page_id( 'shop' ) );
 }
