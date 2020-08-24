@@ -58,38 +58,41 @@
       --current-button-text-color: var(--theme-button-hover-text-color);
       --current-button-transition: var(--theme-button-hover-transition); }
 
-.wp-block-buttons[class][class] {
+.wp-block-buttons[class][class][class] {
   margin-top: var(--element-spacing);
   display: flex;
   align-items: center;
   flex-wrap: wrap; }
-  .wp-block-buttons[class][class]:first-child {
+  .wp-block-buttons[class][class][class]:first-child {
     --block-top-spacing: 1;
     --element-spacing: calc( var(--block-top-spacing, 1) * var(--theme-spacing-fluid-small) * var(--novablocks-element-spacing-multiplier, 1) ); }
-  .wp-block-buttons[class][class] .wp-block,
-  .wp-block-buttons[class][class] .wp-block-button {
-    margin-left: var(--element-spacing);
+  .wp-block-buttons[class][class][class] .wp-block,
+  .wp-block-buttons[class][class][class] .wp-block-button {
     margin-top: 0 !important; }
-  .wp-block-buttons[class][class] .block-editor-block-list__layout {
+    .wp-block-buttons[class][class][class] .wp-block:not(:last-child), .wp-block-buttons[class][class][class] .wp-block:not(:first-child):not(:last-child),
+    .wp-block-buttons[class][class][class] .wp-block-button:not(:last-child),
+    .wp-block-buttons[class][class][class] .wp-block-button:not(:first-child):not(:last-child) {
+      margin-left: var(--element-spacing); }
+  .wp-block-buttons[class][class][class] .block-editor-block-list__layout {
     display: flex;
     align-items: center;
     flex-wrap: wrap; }
-    .wp-block-buttons[class][class] .block-editor-block-list__layout > * {
+    .wp-block-buttons[class][class][class] .block-editor-block-list__layout > * {
       margin-right: 0;
       margin-left: 0; }
-  .wp-block-buttons[class][class].aligncenter {
+  .wp-block-buttons[class][class][class].aligncenter {
     justify-content: center; }
-    .wp-block-buttons[class][class].aligncenter .wp-block,
-    .wp-block-buttons[class][class].aligncenter .wp-block-button {
+    .wp-block-buttons[class][class][class].aligncenter .wp-block,
+    .wp-block-buttons[class][class][class].aligncenter .wp-block-button {
       margin-right: calc( var(--element-spacing) / 2);
       margin-left: calc( var(--element-spacing) / 2); }
-  .wp-block-buttons[class][class].alignright {
+  .wp-block-buttons[class][class][class].alignright {
     justify-content: flex-end; }
-    .wp-block-buttons[class][class].alignright .wp-block,
-    .wp-block-buttons[class][class].alignright .wp-block-button {
+    .wp-block-buttons[class][class][class].alignright .wp-block,
+    .wp-block-buttons[class][class][class].alignright .wp-block-button {
       margin-right: var(--element-spacing);
       margin-left: 0; }
-  .wp-block-buttons[class][class] .wp-block-button__link[class] {
+  .wp-block-buttons[class][class][class] .wp-block-button__link[class] {
     display: block; }
 
 /* Columns Blocks */
