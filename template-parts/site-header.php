@@ -33,6 +33,7 @@ get_template_part( 'template-parts/menu-toggle' ); ?>
                         'container'      => false,
                         'theme_location' => 'primary',
                         'menu_id'        => 'primary-menu',
+                        'fallback_cb'    => false,
                     ) ); ?>
                 </nav><!-- #site-navigation -->
             </div>
