@@ -1,0 +1,60 @@
+.wc-pao-addon,
+[id="product-addons-total"] {
+  width: 100%;
+}
+
+
+.wc-pao-addon {
+  @include variation-field-grid;
+
+  label {
+    margin: 0;
+  }
+
+  select{
+    @include specific(2) {
+      width: var(--variation-input-width);
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  .wc-pao-addon-wrap[class][class] {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.wc-pao-addon-container {
+ @include variation-field-spacing;
+}
+
+.product-addon-totals {
+  
+  position: relative;
+
+  @include specific(2) {
+    margin-top: 0;
+    padding-top: 0;
+
+    border: 0;
+
+    @include variation-field-spacing;
+  }
+  
+  .wc-pao-subtotal-line {
+    position: relative;
+
+    @include specific(2) {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      padding-top: 0;
+
+      border: 0;
+    }
+  }
+
+  ul {
+    padding-left: 0;
+  }
+}

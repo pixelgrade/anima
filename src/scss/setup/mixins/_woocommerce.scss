@@ -1,0 +1,28 @@
+@mixin variation-field-spacing {
+
+  position: relative;
+
+  margin-bottom: var(--variation-field-spacing);
+  padding-bottom: var(--variation-field-spacing);
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--current-dark-primary);
+    opacity: .3;
+  }
+}
+
+@mixin variation-field-grid {
+  @include above(tablet) {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    grid-column-gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

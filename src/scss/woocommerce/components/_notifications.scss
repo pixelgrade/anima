@@ -7,7 +7,6 @@
 
 .woocommerce-notices-wrapper {
   position: relative;
-  margin-top: var(--theme-spacing-medium);
 
   --theme-notification-color: var(--theme-notification-neutral-color);
   --theme-notification-opacity: 0.04;
@@ -16,6 +15,10 @@
 
   .button {
     @include button-fill-reverse();
+  }
+
+  &:not(:empty) {
+    margin-top: var(--theme-spacing-medium);
   }
 }
 
