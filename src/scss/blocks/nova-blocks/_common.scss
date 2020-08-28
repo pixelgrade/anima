@@ -38,6 +38,14 @@
         --theme-content-width-normal: 100%;
     }
 
+    .novablocks-advanced-gallery__grid-item {
+
+        &[class] .credits[class] {
+            --font-size: 12;
+            font-size: var(--final-font-size);
+        }
+    }
+
     .novablocks-advanced-gallery__grid-item-caption {
         @include apply-font(heading-4);
     }
