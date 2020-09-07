@@ -109,6 +109,20 @@
 
     $('.js-coupon-value-source').val('');
   });
+
+  function enableMinusButton() {
+    var $minusButton = $('.qty_button.minus'),
+        qtyValue = $('.quantity__wrapper .qty').val();
+
+    if (qtyValue > 1) {
+      $minusButton.removeClass('button--is-disabled');
+    }
+  }
+
+  enableMinusButton();
+  $(document.body).on('updated_cart_totals', function () {
+    enableMinusButton();
+  });
   $(function () {
     var $body = $(document.body).not('.woocommerce-cart'); // show mini cart when a product is added to cart
 
@@ -254,8 +268,10 @@
         if (min && currentVal <= min) {
           $qty.val(min);
           $minusButton.addClass('button--is-disabled');
-        } else if (currentVal > 0) {
+        } else if (currentVal > 1) {
           $qty.val((currentVal - parseFloat(step)).toFixed(step.getDecimals()));
+        } else {
+          $minusButton.addClass('button--is-disabled');
         }
       } // Trigger change event
 
