@@ -14,6 +14,8 @@ add_filter( 'novablocks_block_editor_settings', 'rosa2_alter_novablocks_hero_set
 add_filter( 'novablocks_block_editor_settings', 'rosa2_alter_novablocks_media_settings' );
 add_filter( 'novablocks_block_editor_settings', 'rosa2_alter_novablocks_separator_settings' );
 
+add_filter( 'novablocks_block_editor_settings', 'rosa2_alter_novablocks_map_settings' );
+
 if ( ! function_exists( 'rosa2_novablocks_setup' ) ) {
 	function rosa2_novablocks_setup() {
 		add_theme_support( 'novablocks', array(
@@ -131,6 +133,19 @@ if ( ! function_exists( 'rosa2_alter_novablocks_separator_settings' ) ) {
 		}
 
 		$settings['separator']['markup'] = rosa2_get_separator_markup();
+
+		return $settings;
+	}
+}
+
+
+if ( ! function_exists( 'rosa2_alter_novablocks_map_settings' ) ) {
+	function rosa2_alter_novablocks_map_settings( $settings ) {
+		if ( empty( $settings['map'] ) ) {
+			$settings['map'] = array();
+		}
+
+		$settings['map']['accentColor'] = pixelgrade_option( 'sm_color_primary', '#DDAB5D' );
 
 		return $settings;
 	}
