@@ -33,6 +33,7 @@ if ( ! function_exists( 'rosa2_novablocks_setup' ) ) {
 			'navigation',
 			'opentable',
 			'openhours',
+			'posts-collection',
 			'slideshow',
 		) );
 	}
