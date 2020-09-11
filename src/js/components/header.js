@@ -246,6 +246,8 @@ class Header {
 	render() {
 		if ( ! this.element ) return;
 
+		window.document.body.style.setProperty( '--site-header-height', this.visibleHeaderHeight + this.promoBarHeight + 'px' );
+
 		this.updateMobileNavigationOffset();
 		this.updateMobileHeaderState();
 		this.updateDesktopHeaderState(false);
