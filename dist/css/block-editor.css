@@ -361,6 +361,43 @@
     border: 0; }
   .editor-styles-wrapper .picker__frame {
     --current-font-size: 16px; }
+  .editor-styles-wrapper .novablocks-slideshow__arrow {
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    transform: translateY(-50%); }
+    .editor-styles-wrapper .novablocks-slideshow__arrow:hover:after {
+      opacity: .1; }
+  .editor-styles-wrapper .novablocks-slideshow__arrow--prev:before,
+  .editor-styles-wrapper .novablocks-slideshow__arrow--next:before {
+    content: "";
+    display: block;
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    mask: url("../../assets/images/icon-arrow.svg") no-repeat 50% 50%;
+    mask-size: cover;
+    -webkit-mask: url("../../assets/images/icon-arrow.svg") no-repeat 50% 50%;
+    -webkit-mask-size: cover;
+    background-color: var(--current-light-primary); }
+  .editor-styles-wrapper .novablocks-slideshow__arrow--prev:before {
+    transform: translate(-50%, -50%); }
+  .editor-styles-wrapper .novablocks-slideshow__arrow--next:before {
+    transform: translate(-50%, -50%) rotate(180deg); }
+  .editor-styles-wrapper .novablocks-slideshow__arrow:after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin-top: 0;
+    border: 0;
+    border-radius: 50%;
+    background-color: var(--current-light-primary);
+    opacity: 0;
+    transition: opacity 0.15s ease-in;
+    transform: none; }
   .editor-styles-wrapper .novablocks-card {
     --font-size: var(--theme-body-font-size);
     font-size: var(--final-font-size);
