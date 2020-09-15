@@ -58,6 +58,7 @@
       --current-font-family: var(--theme-body-font-family);
       --current-line-height: var(--theme-body-line-height);
       --current-font-weight: var(--theme-body-font-weight);
+      --current-font-style: var(--theme-body-font-style);
       --current-letter-spacing: var(--theme-body-letter-spacing); }
     .editor-styles-wrapper .editor-block-list__block.is-style-rounded img,
     .editor-styles-wrapper .block-editor-block-list__block.is-style-rounded img {
@@ -85,6 +86,7 @@
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-heading-4-font-family);
       --current-font-weight: var(--theme-heading-4-font-weight);
+      --current-font-style: var(--theme-heading-4-font-style);
       --current-line-height: var(--theme-heading-4-line-height);
       --current-letter-spacing: var(--theme-heading-4-letter-spacing);
       --current-text-transform: var(--theme-heading-4-text-transform);
@@ -98,6 +100,7 @@
     --font-size: var(--theme-heading-2-font-size);
     font-size: var(--final-font-size);
     --current-font-family: var(--theme-heading-2-font-family);
+    --current-font-style: var(--theme-heading-2-font-style);
     --current-font-weight: var(--theme-heading-2-font-weight);
     --current-line-height: var(--theme-heading-2-line-height);
     --current-letter-spacing: var(--theme-heading-2-letter-spacing);
@@ -170,6 +173,7 @@
     --current-font-family: var(--theme-body-font-family);
     --current-line-height: var(--theme-body-line-height);
     --current-font-weight: var(--theme-body-font-weight);
+    --current-font-style: var(--theme-body-font-style);
     --current-letter-spacing: var(--theme-body-letter-spacing); }
     .editor-styles-wrapper .novablocks-media__content[class] {
       min-width: 0; }
@@ -306,6 +310,7 @@
     font-size: var(--final-font-size);
     --current-font-family: var(--theme-button-font-family);
     --current-font-weight: var(--theme-button-font-weight);
+    --current-font-style: var(--theme-button-font-style);
     --current-line-height: var(--theme-button-line-height);
     --current-letter-spacing: var(--theme-button-letter-spacing);
     --current-text-transform: var(--theme-button-text-transform);
@@ -345,6 +350,7 @@
     font-size: var(--final-font-size);
     --current-font-family: var(--theme-input-font-family);
     --current-font-weight: var(--theme-input-font-weight);
+    --current-font-style: var(--theme-input-font-style);
     --current-line-height: var(--theme-input-line-height);
     --current-letter-spacing: var(--theme-input-letter-spacing);
     --current-text-transform: var(--theme-input-text-transform); }
@@ -404,6 +410,7 @@
     --current-font-family: var(--theme-body-font-family);
     --current-line-height: var(--theme-body-line-height);
     --current-font-weight: var(--theme-body-font-weight);
+    --current-font-style: var(--theme-body-font-style);
     --current-letter-spacing: var(--theme-body-letter-spacing); }
     .block-is-highlighted:not(.content-is-highlighted) .editor-styles-wrapper .novablocks-card .wp-block-button:not(.is-style-text) .wp-block-button__link,
     .content-is-highlighted:not(.block-is-highlighted) .editor-styles-wrapper .novablocks-card .wp-block-button:not(.is-style-text) .wp-block-button__link {
@@ -476,6 +483,7 @@
     font-size: var(--final-font-size);
     --current-font-family: var(--theme-content-font-family);
     --current-line-height: var(--theme-content-line-height);
+    --current-font-style: var(--theme-content-font-style);
     --current-letter-spacing: var(--theme-content-letter-spacing);
     background-color: var(--current-light-primary);
     color: var(--current-dark-secondary); }
@@ -485,6 +493,7 @@
       --font-size: var(--theme-heading-1-font-size);
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-heading-1-font-family);
+      --current-font-style: var(--theme-heading-1-font-style);
       --current-line-height: var(--theme-heading-1-line-height);
       --current-font-weight: var(--theme-heading-1-font-weight);
       --current-letter-spacing: var(--theme-heading-1-letter-spacing);
@@ -494,6 +503,7 @@
       --font-size: var(--theme-heading-2-font-size);
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-heading-2-font-family);
+      --current-font-style: var(--theme-heading-2-font-style);
       --current-font-weight: var(--theme-heading-2-font-weight);
       --current-line-height: var(--theme-heading-2-line-height);
       --current-letter-spacing: var(--theme-heading-2-letter-spacing);
@@ -503,6 +513,7 @@
       --font-size: var(--theme-heading-3-font-size);
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-heading-3-font-family);
+      --current-font-style: var(--theme-heading-3-font-style);
       --current-font-weight: var(--theme-heading-3-font-weight);
       --current-line-height: var(--theme-heading-3-line-height);
       --current-letter-spacing: var(--theme-heading-3-letter-spacing);
@@ -512,6 +523,7 @@
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-heading-4-font-family);
       --current-font-weight: var(--theme-heading-4-font-weight);
+      --current-font-style: var(--theme-heading-4-font-style);
       --current-line-height: var(--theme-heading-4-line-height);
       --current-letter-spacing: var(--theme-heading-4-letter-spacing);
       --current-text-transform: var(--theme-heading-4-text-transform); }
@@ -520,6 +532,7 @@
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-heading-5-font-family);
       --current-font-weight: var(--theme-heading-5-font-weight);
+      --current-font-style: var(--theme-heading-5-font-style);
       --current-line-height: var(--theme-heading-5-line-height);
       --current-letter-spacing: var(--theme-heading-5-letter-spacing);
       --current-text-transform: var(--theme-heading-5-text-transform); }
@@ -528,6 +541,7 @@
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-heading-6-font-family);
       --current-font-weight: var(--theme-heading-6-font-weight);
+      --current-font-style: var(--theme-heading-6-font-style);
       --current-line-height: var(--theme-heading-6-line-height);
       --current-letter-spacing: var(--theme-heading-6-letter-spacing);
       --current-text-transform: var(--theme-heading-6-text-transform); }
@@ -596,6 +610,7 @@
       --font-size: var(--theme-lead-font-size);
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-lead-font-family);
+      --current-font-style: var(--theme-lead-font-style);
       --current-line-height: var(--theme-lead-line-height);
       --current-letter-spacing: var(--theme-lead-letter-spacing);
       --current-text-transform: var(--theme-lead-text-transform); }
@@ -604,6 +619,7 @@
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-meta-font-family);
       --current-font-weight: var(--theme-meta-font-weight);
+      --current-font-style: var(--theme-meta-font-style);
       --current-line-height: var(--theme-meta-line-height);
       --current-letter-spacing: var(--theme-meta-letter-spacing);
       --current-text-transform: var(--theme-meta-text-transform); }

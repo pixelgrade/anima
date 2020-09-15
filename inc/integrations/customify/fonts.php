@@ -103,6 +103,7 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 	$fields_config = array(
 		'font-size'      => $font_size_config,
 		'font-weight'    => true,
+		'font-style'    => true,
 		'line-height'    => $line_height_config,
 		'letter-spacing' => $letter_spacing_config,
 		'text-align'     => false,
@@ -112,6 +113,7 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 	$fields_config_large = array(
 		'font-size'      => $font_size_config_large,
 		'font-weight'    => true,
+		'font-style'    => true,
 		'line-height'    => $line_height_config,
 		'letter-spacing' => $letter_spacing_config,
 		'text-align'     => false,
