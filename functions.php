@@ -191,7 +191,7 @@ function rosa2_scripts() {
 
 	wp_style_add_data( 'rosa2-style', 'rtl', 'replace' );
 
-    if ( ! in_array( 'nova-blocks/nova-blocks.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+    if ( rosa2_should_enqueue_novablocks_fallbacks() ) {
         wp_enqueue_style( 'rosa2-novablocks-fallback-style', get_template_directory_uri() . '/dist/css/novablocks-fallback.css', array(), $theme->get( 'Version' ) );
     }
 

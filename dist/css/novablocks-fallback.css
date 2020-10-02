@@ -35,17 +35,22 @@
   word-break: break-word; }
 
 .novablocks-media__layout {
-  margin-top: calc( -1 * var(--novablocks-media-spacing));
-  margin-left: calc( -1 * var(--novablocks-media-spacing)); }
+  margin-top: calc( -1 * var(--novablocks-media-gutter));
+  margin-left: calc( -1 * var(--novablocks-media-gutter));
+  pointer-events: none; }
   .novablocks-media__layout > * {
-    padding-left: var(--novablocks-media-spacing);
-    margin-top: var(--novablocks-media-spacing); }
+    padding-left: var(--novablocks-media-gutter);
+    margin-top: var(--novablocks-media-gutter);
+    pointer-events: auto; }
   @media only screen and (min-width: 768px) {
     .novablocks-media__layout {
       display: flex;
-      flex-wrap: wrap; }
-      .novablocks-media__layout > * {
-        flex: 1 0 50%; } }
+      flex-wrap: wrap;
+      align-items: stretch; }
+      .novablocks-media__layout .novablocks-media__aside {
+        flex: 1 1 calc( 100% - var(--novablocks-media-content-width, 50%)); }
+      .novablocks-media__layout .novablocks-media__content {
+        flex: 1 1 var(--novablocks-media-content-width, 50%); } }
 
 .novablocks-block[class] {
   padding-top: calc( var(--emphasis-top-spacing, 1) * var(--novablocks-spacing) * var(--novablocks-element-spacing-multiplier, 1));
