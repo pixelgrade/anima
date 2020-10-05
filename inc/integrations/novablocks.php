@@ -26,6 +26,7 @@ if ( ! function_exists( 'rosa2_novablocks_setup' ) ) {
 			'announcement-bar',
 			'cards-collection',
 			'posts-collection',
+			'card',
 			'google-map',
 			'header',
 			'headline',
