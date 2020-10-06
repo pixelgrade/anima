@@ -111,6 +111,9 @@
 .novablocks-media__inner-container .wp-block-separator {
   width: 100%; }
 
+.novablocks-grid__column:first-child .novablocks-grid__area:first-child:last-child {
+  top: calc( var(--novablocks-grid-spacing) * var(--novablocks-grid-spacing-modifier, 1) + var(--site-header-height, 0)); }
+
 .nova-food-menu {
   --theme-content-width-normal: var(--theme-content-width-wide); }
 
@@ -516,3 +519,7 @@
   .content-is-highlighted:not(.block-is-highlighted) .novablocks-card a:not(.wp-block-button__link) {
     color: inherit;
     text-decoration-color: inherit; }
+
+.novablocks-card__inner-container[class] {
+  padding-right: 0;
+  padding-left: 0; }
