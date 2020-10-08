@@ -53,4 +53,28 @@
     .novablocks-advanced-gallery__grid-item-description {
         @include apply-font(body);
     }
+
+    .novablocks-block {
+
+        .c-headline__secondary {
+            color: var(--novablocks-block-accent-color);
+        }
+
+        .wp-block-button.is-style-text .wp-block-button__link {
+            --theme-button-text-color: var(--novablocks-block-accent-color);
+            --theme-button-hover-text-color: var(--novablocks-block-accent-color);
+        }
+    }
+
+    .novablocks-block__content {
+
+        .c-headline__secondary {
+            color: var(--novablocks-block-content-accent-color);
+        }
+
+        .wp-block-button.is-style-text .wp-block-button__link {
+            --theme-button-text-color: var(--novablocks-block-content-accent-color);
+            --theme-button-hover-text-color: var(--novablocks-block-content-accent-color);
+        }
+    }
 }
