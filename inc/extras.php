@@ -315,3 +315,130 @@ function rosa2_should_enqueue_novablocks_fallbacks() {
 
     return false;
 }
+
+function rosa2_add_custom_menu_items() {
+	global $pagenow;
+	if( 'nav-menus.php' == $pagenow ) {
+		add_meta_box( 'rosa2-add-search-links', esc_html__( 'Search', 'listable' ), 'wp_nav_menu_item_search_rosa2', 'nav-menus', 'side', 'low' );
+	}
+}
+add_action( 'admin_init', 'rosa2_add_custom_menu_items' );
+
+function wp_nav_menu_item_search_rosa2( $object ) {
+
+	global $nav_menu_selected_id;
+
+	$menu_items = array(
+		'#rosa2_search' => array(
+			'title' => esc_html__( 'Search', '__theme_txtd' ),
+			'label' => esc_html__( 'Search', '__theme_txtd' ),
+		)
+	);
+	$menu_items_obj = array();
+
+	foreach ( $menu_items as $id => $item ) {
+		$menu_items_obj[$id] = new stdClass;
+		$menu_items_obj[$id]->ID			    = esc_attr( $id );
+		$menu_items_obj[$id]->object_id			= esc_attr( $id );
+		$menu_items_obj[$id]->title				= esc_attr( $item['title'] );
+		$menu_items_obj[$id]->url				= esc_attr( $id );
+		$menu_items_obj[$id]->description 		= 'description';
+		$menu_items_obj[$id]->db_id 				= 0;
+		$menu_items_obj[$id]->object 			= '__theme_txtd';
+		$menu_items_obj[$id]->menu_item_parent 	= 0;
+		$menu_items_obj[$id]->type 				= 'custom';
+		$menu_items_obj[$id]->target 			= '';
+		$menu_items_obj[$id]->attr_title 		= '';
+		$menu_items_obj[$id]->label 		        = esc_attr( $item['label'] );
+		$menu_items_obj[$id]->classes 			= array();
+		$menu_items_obj[$id]->xfn 				= '';
+	}
+	$walker = new Walker_Nav_Menu_Checklist( array() );
+	?>
+
+    <div id="rosa2-user-menu-links" class="taxonomydiv">
+        <div id="tabs-panel-rosa2-links-all" class="tabs-panel tabs-panel-view-all tabs-panel-active">
+
+            <ul id="rosa2-user-menu-linkschecklist" class="list:rosa2-user-menu-links categorychecklist form-no-clear">
+				<?php echo walk_nav_menu_tree( array_map( 'wp_setup_nav_menu_item', $menu_items_obj ), 0, (object)array( 'walker' => $walker ) ); ?>
+            </ul>
+
+        </div>
+        <p class="button-controls">
+				<span class="add-to-menu">
+					<input type="submit"<?php disabled( $nav_menu_selected_id, 0 ); ?> class="button-secondary submit-add-to-menu right" value="<?php esc_attr_e( 'Add to Menu', '__theme_txtd' ); ?>" name="add-rosa2-user-menu-links-menu-item" id="submit-rosa2-user-menu-links" />
+				</span>
+        </p>
+    </div>
+
+	<?php
+}
+
+function rosa2_output_search_overlay() {
+
+	$menu_locations = get_nav_menu_locations();
+
+	$menu_id = $menu_locations['primary'];
+
+	$primary_nav = wp_get_nav_menu_items($menu_id);
+
+	$has_search_item = false;
+
+	foreach ( $primary_nav as $nav_item ) {
+
+		if ( $nav_item->url === '#rosa2_search' ) {
+			$has_search_item = true;
+		}
+	}
+
+	if (!$has_search_item) {
+	    return;
+    }
+
+    ?>
+
+    <div class="c-search-overlay">
+        <div class="c-search-overlay__content">
+            <div class="c-search-overlay__form">
+                <?php get_search_form(); ?>
+                <button class="c-search-overlay__cancel"><?php esc_html_e( 'Cancel', '__theme_txtd' )?></button>
+            </div>
+
+            <div class="c-search-overlay__suggestions">
+                <p><?php esc_html_e( 'Or, browse through the popular tags: ', '__theme_txtd' )?></p>
+                <?php wp_nav_menu( array(
+                    'container'      => false,
+                    'theme_location' => 'search-suggestions',
+                    'menu_id'        => 'search-suggestions-menu',
+                    'fallback_cb'    => false,
+                ) ); ?>
+            </div><!-- .c-search-overlay__suggestions -->
+        </div><!-- .c-search-overlay__content -->
+    </div><!-- .c-search-overlay -->
+
+    <?php
+}
+
+add_action('rosa2_after_footer', 'rosa2_output_search_overlay', 10);
+
+/**
+ * Rosa2 custom search form
+ *
+ * @param string $form Form HTML.
+ * @return string Modified form HTML.
+ */
+function rosa2_custom_search_form( $form ) {
+
+    $placeholder = 'Search ' . esc_html( get_bloginfo( 'name' ) );
+
+	$form = '<form role="search" ' . $aria_label . 'method="get" class="search-form" action="' . esc_url( home_url( '/' ) ) . '">
+				<label>
+					<span class="screen-reader-text">' . _x( 'Search for:', 'label' ) . '</span>
+					<input type="search" class="search-field" placeholder="' . esc_attr_x( $placeholder, 'placeholder' ) . '" value="' . get_search_query() . '" name="s" />
+				</label>
+				<input type="submit" class="search-submit" value="' . esc_attr_x( 'Search', 'submit button' ) . '" />
+			</form>';
+
+	return $form;
+}
+add_filter( 'get_search_form', 'rosa2_custom_search_form' );

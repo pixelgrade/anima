@@ -66,8 +66,9 @@ if ( ! function_exists( 'rosa2_setup' ) ) {
 
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
-			'primary'   => esc_html__( 'Primary Menu', '__theme_txtd' ),
-			'secondary' => esc_html__( 'Secondary Menu', '__theme_txtd' ),
+			'primary'            => esc_html__( 'Primary Menu', '__theme_txtd' ),
+			'secondary'          => esc_html__( 'Secondary Menu', '__theme_txtd' ),
+			'search-suggestions' => esc_html__( 'Search Suggestions', '__theme_txtd' )
 		) );
 
 		// Add theme support for selective refresh for widgets.

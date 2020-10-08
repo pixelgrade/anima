@@ -1646,6 +1646,8 @@ function () {
     this.$menuItems = external_jQuery_default()(MENU_ITEM);
     this.$menuItemsWithChildren = this.$menuItems.filter(MENU_ITEM_WITH_CHILDREN).removeClass(HOVER_CLASS);
     this.$menuItemsWithChildrenLinks = this.$menuItemsWithChildren.children('a');
+    this.searchOverlayButton = external_jQuery_default()('.menu-item a[href*="rosa2_search"]');
+    this.searchOverlayCancelButton = external_jQuery_default()('.c-search-overlay__cancel');
     this.initialize();
   }
 
@@ -1656,6 +1658,8 @@ function () {
       this.addSocialMenuClass();
       this.initialized = true;
       globalService.registerOnResize(this.onResize.bind(this));
+      this.searchOverlayButton.on('click', this.onClickSearchButton);
+      this.searchOverlayCancelButton.on('click', this.onClickCancelSearchButton);
     }
   }, {
     key: "onResize",
@@ -1727,6 +1731,18 @@ function () {
       $link.addClass('active').parent().addClass(HOVER_CLASS);
       $siblings.removeClass(HOVER_CLASS);
       $siblings.find('.active').removeClass('active');
+    }
+  }, {
+    key: "onClickSearchButton",
+    value: function onClickSearchButton(event) {
+      event.preventDefault();
+      external_jQuery_default()('body').toggleClass('search-overlay--open');
+    }
+  }, {
+    key: "onClickCancelSearchButton",
+    value: function onClickCancelSearchButton(event) {
+      event.preventDefault();
+      external_jQuery_default()('body').removeClass('search-overlay--open');
     }
   }, {
     key: "bindClick",

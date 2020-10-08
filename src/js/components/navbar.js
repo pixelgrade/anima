@@ -14,6 +14,9 @@ export default class Navbar {
 		this.$menuItemsWithChildren = this.$menuItems.filter( MENU_ITEM_WITH_CHILDREN ).removeClass( HOVER_CLASS );
 		this.$menuItemsWithChildrenLinks = this.$menuItemsWithChildren.children( 'a' );
 
+		this.searchOverlayButton = $('.menu-item a[href*="rosa2_search"]');
+		this.searchOverlayCancelButton = $('.c-search-overlay__cancel');
+
 		this.initialize();
 	}
 
@@ -22,6 +25,9 @@ export default class Navbar {
 		this.addSocialMenuClass();
 		this.initialized = true;
 		GlobalService.registerOnResize( this.onResize.bind( this ) );
+
+		this.searchOverlayButton.on( 'click', this.onClickSearchButton );
+		this.searchOverlayCancelButton.on( 'click', this.onClickCancelSearchButton );
 	}
 
 	onResize() {
@@ -90,6 +96,16 @@ export default class Navbar {
 		$link.addClass( 'active' ).parent().addClass( HOVER_CLASS );
 		$siblings.removeClass( HOVER_CLASS );
 		$siblings.find( '.active' ).removeClass( 'active' );
+	}
+
+	onClickSearchButton( event ) {
+		event.preventDefault();
+		$('body').toggleClass('search-overlay--open');
+	}
+
+	onClickCancelSearchButton( event ) {
+		event.preventDefault();
+		$('body').removeClass('search-overlay--open');
 	}
 
 	bindClick() {
