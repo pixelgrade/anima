@@ -164,44 +164,46 @@
 
 .menu-item {
 
-  &:not(.no-icon) {
-    a[href='#rosa2_search'] {
-      --search-icon-width: 25px;
+  @include above(lap) {
+    &:not(.no-icon) {
+      a[href='#rosa2_search'] {
+        --search-icon-width: 25px;
 
-      padding-left: calc(var(--search-icon-width) + 8px) !important;
-      //
-      &:after {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 50%;
-        margin-right: 8px;
-        transform: translateY(-50%);
+        padding-left: calc(var(--search-icon-width) + 8px) !important;
+        //
+        &:after {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 50%;
+          margin-right: 8px;
+          transform: translateY(-50%);
 
-        display: block;
-        width: var(--search-icon-width);
-        height: var(--search-icon-width);
+          display: block;
+          width: var(--search-icon-width);
+          height: var(--search-icon-width);
 
-        border: 0;
-        padding: 0;
+          border: 0;
+          padding: 0;
 
-        mask: url($icon-search-path ) no-repeat 50% 50%;
-        mask-size: cover;
-        -webkit-mask: url($icon-search-path ) no-repeat 50% 50%;
-        -webkit-mask-size: cover;
+          mask: url($icon-search-path ) no-repeat 50% 50%;
+          mask-size: cover;
+          -webkit-mask: url($icon-search-path ) no-repeat 50% 50%;
+          -webkit-mask-size: cover;
 
-        background-color: currentColor;
-      }
+          background-color: currentColor;
+        }
 
-      &:before {
-        width: calc(100% - var(--search-icon-width) - 8px) !important;
+        &:before {
+          width: calc(100% - var(--search-icon-width) - 8px) !important;
+        }
       }
     }
-  }
 
-  &.icon-only {
-    a[href='#rosa2_search'] {
-      text-indent: -9999px;
+    &.icon-only {
+      a[href='#rosa2_search'] {
+        text-indent: -9999px;
+      }
     }
   }
 }

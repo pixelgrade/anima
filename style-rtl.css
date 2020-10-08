@@ -1797,31 +1797,31 @@ ul.menu a,
 .search-overlay--open {
   overflow: hidden; }
 
-.menu-item:not(.no-icon) a[href='#rosa2_search'] {
-  --search-icon-width: 25px;
-  padding-right: calc(var(--search-icon-width) + 8px) !important; }
-  .menu-item:not(.no-icon) a[href='#rosa2_search']:after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 50%;
-    margin-left: 8px;
-    transform: translateY(-50%);
-    display: block;
-    width: var(--search-icon-width);
-    height: var(--search-icon-width);
-    border: 0;
-    padding: 0;
-    mask: url("./assets/images/icon-search.svg") no-repeat 50% 50%;
-    mask-size: cover;
-    -webkit-mask: url("./assets/images/icon-search.svg") no-repeat 50% 50%;
-    -webkit-mask-size: cover;
-    background-color: currentColor; }
-  .menu-item:not(.no-icon) a[href='#rosa2_search']:before {
-    width: calc(100% - var(--search-icon-width) - 8px) !important; }
-
-.menu-item.icon-only a[href='#rosa2_search'] {
-  text-indent: -9999px; }
+@media only screen and (min-width: 1000px) {
+  .menu-item:not(.no-icon) a[href='#rosa2_search'] {
+    --search-icon-width: 25px;
+    padding-right: calc(var(--search-icon-width) + 8px) !important; }
+    .menu-item:not(.no-icon) a[href='#rosa2_search']:after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      margin-left: 8px;
+      transform: translateY(-50%);
+      display: block;
+      width: var(--search-icon-width);
+      height: var(--search-icon-width);
+      border: 0;
+      padding: 0;
+      mask: url("./assets/images/icon-search.svg") no-repeat 50% 50%;
+      mask-size: cover;
+      -webkit-mask: url("./assets/images/icon-search.svg") no-repeat 50% 50%;
+      -webkit-mask-size: cover;
+      background-color: currentColor; }
+    .menu-item:not(.no-icon) a[href='#rosa2_search']:before {
+      width: calc(100% - var(--search-icon-width) - 8px) !important; }
+  .menu-item.icon-only a[href='#rosa2_search'] {
+    text-indent: -9999px; } }
 
 /* 2.2. Site Content */
 /* 2.3. Site Footer */
