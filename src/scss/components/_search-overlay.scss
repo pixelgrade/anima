@@ -18,7 +18,7 @@
 
   z-index: 1200; // Bigger than Announcement Bar
 
-  transition: transform .3s $easeInOut;
+  transition: transform .45s $easeInCubic .1s;
 
   --theme-button-padding: .6em 1.7em;
   --theme-input-search-focus-overlay-shadow: inset 0px 0px 0px 2px rgba(var(--opacity-color), 1);
@@ -30,19 +30,29 @@
   --theme-input-hover-box-shadow: var(--theme-search-input-focus);
 
 
+  &__form {
+    transition: opacity .1s $easeOut .025s;
+  }
+
+  &__suggestions {
+    transition: opacity .1s $easeOut 0s;
+  }
+
   @include wp-offset();
 
   .search-overlay--open & {
     transform: translateY(0);
 
+    transition: transform .45s $easeOutCubic;
+
     &__form {
       opacity: 1;
-      transition: opacity .1s $easeInOut .125s;
+      transition: opacity .1s $easeIn .2s;
     }
 
     &__suggestions {
       opacity: 1;
-      transition: opacity .1s $easeInOut .15s;
+      transition: opacity .1s $easeIn .225s;
     }
   }
 
@@ -61,7 +71,6 @@
     align-items: center;
 
     opacity: 0;
-    transition: opacity .1s $easeInOut .05s;
   }
 
   &__suggestions {
@@ -91,7 +100,7 @@
 
         padding: 0;
 
-        box-shadow: var(--theme-search-input-focus);
+        border: 2px solid currentColor;
 
         transition: all .15s $easeInOut;
 
@@ -109,7 +118,7 @@
 
   .search-field {
     border: 0;
-    padding: 0 .8em;
+    padding: 0 .8em 0 1.8em;
 
     font-weight: bold;
 
@@ -117,13 +126,43 @@
     color: var(--current-light-primary);
 
     --font-size: 23;
-
   }
 
   .search-form {
+    position: relative;
     margin-top: 0;
-
     width: 100%;
+
+    &:focus,
+    &:focus-within {
+      .search-icon {
+        opacity: 1;
+      }
+    }
+  }
+
+  .search-icon {
+    content: '';
+    position: absolute;
+    left: .8em;
+    top: 50%;
+    transform: translateY(-50%);
+
+    display: block;
+    width: 1.2em;
+    height: 1.2em;
+
+    border: 0;
+    padding: 0;
+
+    mask: url($icon-search-path) no-repeat 50% 50%;
+    mask-size: cover;
+    -webkit-mask: url($icon-search-path) no-repeat 50% 50%;
+    -webkit-mask-size: cover;
+
+    background-color: var(--current-light-primary);
+    opacity: .5;
+    transition: opacity .15s $ease;
   }
 
   .search-submit {
@@ -164,46 +203,52 @@
 
 .menu-item {
 
-  @include above(lap) {
-    &:not(.no-icon) {
-      a[href='#rosa2_search'] {
-        --search-icon-width: 25px;
+  &:not(.no-icon) {
+    a[href='#search'] {
+      --search-icon-width: 1em;
 
-        padding-left: calc(var(--search-icon-width) + 8px) !important;
-        //
-        &:after {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: 50%;
-          margin-right: 8px;
-          transform: translateY(-50%);
+      padding-left: calc(var(--search-icon-width) + 8px) !important;
 
-          display: block;
-          width: var(--search-icon-width);
-          height: var(--search-icon-width);
+      @include below(lap) {
+        padding-left: calc(var(--search-icon-width) + 8px + 1em) !important;
+      }
+      //
+      &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        margin-right: 8px;
+        transform: translateY(-50%);
 
-          border: 0;
-          padding: 0;
+        display: block;
+        width: var(--search-icon-width);
+        height: var(--search-icon-width);
 
-          mask: url($icon-search-path ) no-repeat 50% 50%;
-          mask-size: cover;
-          -webkit-mask: url($icon-search-path ) no-repeat 50% 50%;
-          -webkit-mask-size: cover;
+        border: 0;
+        padding: 0;
 
-          background-color: currentColor;
+        mask: url($icon-search-path) no-repeat 50% 50%;
+        mask-size: cover;
+        -webkit-mask: url($icon-search-path) no-repeat 50% 50%;
+        -webkit-mask-size: cover;
+
+        background-color: currentColor;
+
+        @include below(lap) {
+          margin-left: 1em;
         }
+      }
 
-        &:before {
-          width: calc(100% - var(--search-icon-width) - 8px) !important;
-        }
+      &:before {
+        width: calc(100% - var(--search-icon-width) - 8px) !important;
       }
     }
+  }
 
-    &.icon-only {
-      a[href='#rosa2_search'] {
-        text-indent: -9999px;
-      }
+  &.icon-only {
+    a[href='#search'] {
+      text-indent: -9999px;
     }
   }
 }

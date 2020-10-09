@@ -329,7 +329,7 @@ function wp_nav_menu_item_search_rosa2( $object ) {
 	global $nav_menu_selected_id;
 
 	$menu_items = array(
-		'#rosa2_search' => array(
+		'#search' => array(
 			'title' => esc_html__( 'Search', '__theme_txtd' ),
 			'label' => esc_html__( 'Search', '__theme_txtd' ),
 		)
@@ -353,7 +353,9 @@ function wp_nav_menu_item_search_rosa2( $object ) {
 		$menu_items_obj[$id]->classes 			= array();
 		$menu_items_obj[$id]->xfn 				= '';
 	}
+
 	$walker = new Walker_Nav_Menu_Checklist( array() );
+
 	?>
 
     <div id="rosa2-user-menu-links" class="taxonomydiv">
@@ -378,22 +380,25 @@ function rosa2_output_search_overlay() {
 
 	$menu_locations = get_nav_menu_locations();
 
-	$menu_id = $menu_locations['primary'];
-
-	$primary_nav = wp_get_nav_menu_items($menu_id);
-
 	$has_search_item = false;
 
-	foreach ( $primary_nav as $nav_item ) {
+	foreach ( $menu_locations as $location ) {
 
-		if ( $nav_item->url === '#rosa2_search' ) {
-			$has_search_item = true;
+		$menu_location = wp_get_nav_menu_items( $location );
+
+		foreach ( $menu_location as $menu_item ) {
+
+			if ( $menu_item->url === '#search' ) {
+				$has_search_item = true;
+			}
 		}
 	}
 
-	if (!$has_search_item) {
+	if ( !$has_search_item || ! rosa2_block_area_has_blocks( 'header' ) ) {
 	    return;
     }
+
+	if ('')
 
     ?>
 
@@ -429,16 +434,35 @@ add_action('rosa2_after_footer', 'rosa2_output_search_overlay', 10);
  */
 function rosa2_custom_search_form( $form ) {
 
-    $placeholder = 'Search ' . esc_html( get_bloginfo( 'name' ) );
+    $placeholder = 'Search ' . esc_html( get_bloginfo( 'name' ) ) . ' ...';
 
 	$form = '<form role="search" ' . $aria_label . 'method="get" class="search-form" action="' . esc_url( home_url( '/' ) ) . '">
 				<label>
 					<span class="screen-reader-text">' . _x( 'Search for:', 'label' ) . '</span>
 					<input type="search" class="search-field" placeholder="' . esc_attr_x( $placeholder, 'placeholder' ) . '" value="' . get_search_query() . '" name="s" />
+					<span class="search-icon"></span>
 				</label>
 				<input type="submit" class="search-submit" value="' . esc_attr_x( 'Search', 'submit button' ) . '" />
 			</form>';
 
 	return $form;
 }
+
 add_filter( 'get_search_form', 'rosa2_custom_search_form' );
+
+function rosa2_is_nav_menus_page( $new_edit = null ) {
+	global $pagenow;
+	//make sure we are on the backend
+
+	if ( ! is_admin() ) {
+		return false;
+	}
+
+	if( 'nav-menus.php' == $pagenow ) {
+		return true;
+	}
+
+	return false;
+}
+
+

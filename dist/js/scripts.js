@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -357,7 +357,8 @@ module.exports = _nonIterableSpread;
 /* 12 */,
 /* 13 */,
 /* 14 */,
-/* 15 */
+/* 15 */,
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1646,7 +1647,7 @@ function () {
     this.$menuItems = external_jQuery_default()(MENU_ITEM);
     this.$menuItemsWithChildren = this.$menuItems.filter(MENU_ITEM_WITH_CHILDREN).removeClass(HOVER_CLASS);
     this.$menuItemsWithChildrenLinks = this.$menuItemsWithChildren.children('a');
-    this.searchOverlayButton = external_jQuery_default()('.menu-item a[href*="rosa2_search"]');
+    this.searchOverlayButton = external_jQuery_default()('.menu-item a[href*="#search"]');
     this.searchOverlayCancelButton = external_jQuery_default()('.c-search-overlay__cancel');
     this.initialize();
   }

@@ -209,6 +209,14 @@ function rosa2_scripts() {
 	}
 }
 
+function rosa2_admin_scripts() {
+	if( rosa2_is_nav_menus_page() ) {
+		wp_enqueue_script( 'rosa2-admin-nav-menus-scripts', get_template_directory_uri() . '/dist/js/admin/edit-nav-menus.js', array( 'jquery' ), '1.0.0', true );
+	}
+}
+
+add_action( 'admin_enqueue_scripts', 'rosa2_admin_scripts' );
+
 function rosa2_webfonts_fallback() {
 
 	if ( class_exists( 'PixCustomifyPlugin' ) ) {
