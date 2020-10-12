@@ -113,10 +113,13 @@
   function enableMinusButton() {
     var $minusButton = $('.qty_button.minus'),
         qtyValue = $('.quantity__wrapper .qty').val();
+    $minusButton.each(function (i, obj) {
+      qtyValue = $(obj).parent().find('.qty').val();
 
-    if (qtyValue > 1) {
-      $minusButton.removeClass('button--is-disabled');
-    }
+      if (qtyValue > 1) {
+        $(this).removeClass('button--is-disabled');
+      }
+    });
   }
 
   enableMinusButton();
@@ -224,7 +227,7 @@
     $('.js-coupon-value-source').on('change', function () {
       $('.js-coupon-value-destination').val($(this).val());
     });
-    $(body).on('click', '.plus, .minus', updateProductQuantity);
+    $('body').on('click', '.plus, .minus', updateProductQuantity);
 
     function updateProductQuantity(e) {
       e.preventDefault();
@@ -246,8 +249,7 @@
           currentVal = parseFloat($qty.val()),
           max = parseFloat($qty.attr('max')),
           min = parseFloat($qty.attr('min')),
-          step = $qty.attr('step'),
-          $minusButton = $('.qty_button.minus'); // Format values
+          step = $qty.attr('step'); // Format values
 
       if (!currentVal || currentVal === '' || currentVal === 'NaN') currentVal = 0;
       if (max === '' || max === 'NaN') max = '';
@@ -255,6 +257,8 @@
       if (step === 'any' || step === '' || step === undefined || parseFloat(step) === 'NaN') step = 1;
 
       if ($(this).is('.plus')) {
+        $minusButton = $(this).parent().find('.minus');
+
         if ($minusButton.hasClass('button--is-disabled')) {
           $minusButton.removeClass('button--is-disabled');
         }
@@ -267,11 +271,11 @@
       } else {
         if (min && currentVal <= min) {
           $qty.val(min);
-          $minusButton.addClass('button--is-disabled');
+          $(this).addClass('button--is-disabled');
         } else if (currentVal > 1) {
           $qty.val((currentVal - parseFloat(step)).toFixed(step.getDecimals()));
         } else {
-          $minusButton.addClass('button--is-disabled');
+          $(this).addClass('button--is-disabled');
         }
       } // Trigger change event
 
