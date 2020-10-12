@@ -1737,13 +1737,13 @@ function () {
     key: "onClickSearchButton",
     value: function onClickSearchButton(event) {
       event.preventDefault();
-      external_jQuery_default()('body').toggleClass('search-overlay--open');
+      external_jQuery_default()('body').toggleClass('has-search-overlay');
     }
   }, {
     key: "onClickCancelSearchButton",
     value: function onClickCancelSearchButton(event) {
       event.preventDefault();
-      external_jQuery_default()('body').removeClass('search-overlay--open');
+      external_jQuery_default()('body').removeClass('has-search-overlay');
     }
   }, {
     key: "bindClick",

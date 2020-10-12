@@ -100,12 +100,12 @@ export default class Navbar {
 
 	onClickSearchButton( event ) {
 		event.preventDefault();
-		$('body').toggleClass('search-overlay--open');
+		$('body').toggleClass('has-search-overlay');
 	}
 
 	onClickCancelSearchButton( event ) {
 		event.preventDefault();
-		$('body').removeClass('search-overlay--open');
+		$('body').removeClass('has-search-overlay');
 	}
 
 	bindClick() {

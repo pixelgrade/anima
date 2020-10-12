@@ -319,7 +319,7 @@ function rosa2_should_enqueue_novablocks_fallbacks() {
 function rosa2_add_custom_menu_items() {
 	global $pagenow;
 	if( 'nav-menus.php' == $pagenow ) {
-		add_meta_box( 'rosa2-add-search-links', esc_html__( 'Search Menu', '__theme_txtd' ), 'wp_nav_menu_item_search_rosa2', 'nav-menus', 'side', 'low' );
+		add_meta_box( 'rosa2-add-search-links', esc_html__( 'Extras', '__theme_txtd' ), 'wp_nav_menu_item_search_rosa2', 'nav-menus', 'side', 'low' );
 	}
 }
 add_action( 'admin_init', 'rosa2_add_custom_menu_items' );
@@ -398,8 +398,6 @@ function rosa2_output_search_overlay() {
 	    return;
     }
 
-	if ('')
-
     ?>
 
     <div class="c-search-overlay">
@@ -409,15 +407,17 @@ function rosa2_output_search_overlay() {
                 <button class="c-search-overlay__cancel"><?php esc_html_e( 'Cancel', '__theme_txtd' )?></button>
             </div>
 
-            <div class="c-search-overlay__suggestions">
-                <p><?php esc_html_e( 'Or, browse through the popular tags: ', '__theme_txtd' )?></p>
-                <?php wp_nav_menu( array(
-                    'container'      => false,
-                    'theme_location' => 'search-suggestions',
-                    'menu_id'        => 'search-suggestions-menu',
-                    'fallback_cb'    => false,
-                ) ); ?>
-            </div><!-- .c-search-overlay__suggestions -->
+            <?php if ( has_nav_menu( 'search-suggestions' ) ) { ?>
+                <div class="c-search-overlay__suggestions">
+                    <p><?php esc_html_e( 'Or, browse through the popular tags: ', '__theme_txtd' )?></p>
+                    <?php wp_nav_menu( array(
+                        'container'      => false,
+                        'theme_location' => 'search-suggestions',
+                        'menu_id'        => 'search-suggestions-menu',
+                        'fallback_cb'    => false,
+                    ) ); ?>
+                </div><!-- .c-search-overlay__suggestions -->
+            <?php } ?>
         </div><!-- .c-search-overlay__content -->
     </div><!-- .c-search-overlay -->
 
