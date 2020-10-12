@@ -1732,6 +1732,13 @@ ul.menu a,
     display: flex;
     align-items: center;
     opacity: 0; }
+    @media not screen and (min-width: 1000px) {
+      .c-search-overlay__form {
+        flex-direction: column;
+        align-items: flex-start; }
+        .c-search-overlay__form .c-search-overlay__cancel {
+          padding-right: 0 !important;
+          padding-left: 0 !important; } }
   .c-search-overlay__suggestions {
     margin-top: 5.5em;
     opacity: 0;
