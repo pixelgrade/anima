@@ -257,7 +257,7 @@
       if (step === 'any' || step === '' || step === undefined || parseFloat(step) === 'NaN') step = 1;
 
       if ($(this).is('.plus')) {
-        $minusButton = $(this).parent().find('.minus');
+        var $minusButton = $(this).parent().find('.minus');
 
         if ($minusButton.hasClass('button--is-disabled')) {
           $minusButton.removeClass('button--is-disabled');

@@ -191,7 +191,7 @@
 
 			if ( $( this ).is( '.plus' ) ) {
 
-				$minusButton = $(this).parent().find('.minus');
+				let $minusButton = $(this).parent().find('.minus');
 
 				if( $minusButton.hasClass('button--is-disabled')) {
 					$minusButton.removeClass('button--is-disabled');
