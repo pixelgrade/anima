@@ -319,7 +319,7 @@ function rosa2_should_enqueue_novablocks_fallbacks() {
 function rosa2_add_custom_menu_items() {
 	global $pagenow;
 	if( 'nav-menus.php' == $pagenow ) {
-		add_meta_box( 'rosa2-add-search-links', esc_html__( 'Search Menu', 'listable' ), 'wp_nav_menu_item_search_rosa2', 'nav-menus', 'side', 'low' );
+		add_meta_box( 'rosa2-add-search-links', esc_html__( 'Search Menu', '__theme_txtd' ), 'wp_nav_menu_item_search_rosa2', 'nav-menus', 'side', 'low' );
 	}
 }
 add_action( 'admin_init', 'rosa2_add_custom_menu_items' );
