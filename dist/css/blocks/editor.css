@@ -245,11 +245,12 @@ ul.wp-block-categories__list[class] {
     height: 100%;
     min-height: 400px; }
 
-.wp-block-novablocks-navigation .menu > li {
-  margin-left: 0; }
-
-.wp-block-novablocks-navigation .menu a {
-  display: flex; }
+.wp-block-novablocks-navigation[class] .menu {
+  padding-top: 0; }
+  .wp-block-novablocks-navigation[class] .menu > li {
+    margin-left: 0; }
+    .wp-block-novablocks-navigation[class] .menu > li a {
+      display: flex; }
 
 .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button {
   --theme-button-hover-background-color: var(--current-light-primary);
