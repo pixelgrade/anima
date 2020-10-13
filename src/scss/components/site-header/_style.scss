@@ -1,5 +1,16 @@
 @import "mixins";
 
+@include specific(1) {
+    @import "menu";
+    @import "menu-toggle";
+    @import "theme";
+
+    @media not screen and (min-width: 1000px) {
+        @import "mobile";
+        @import "mobile-transitions";
+    }
+}
+
 .site-header--mobile {
     display: none;
 
@@ -8,24 +19,26 @@
     }
 }
 
-@media not screen and (min-width: 1000px) {
-    @import "mobile";
-    @import "mobile-transitions";
-}
-
 .site-header,
 .site-header--mobile {
     @include wp-offset(top, 0, false);
 }
 
-.site-header__inner-container > .site-header__content.alignfull {
-    margin-left: calc( -1 * var(--theme-header-sides-spacing) );
-    margin-right: calc( -1 * var(--theme-header-sides-spacing) );
-}
+.site-header__inner-container[class] {
+    padding-left: var(--theme-header-sides-spacing);
+    padding-right: var(--theme-header-sides-spacing);
 
-
-@media only screen and (min-width: 1000px) {
-    .site-header__inner-container {
+    @media only screen and (min-width: 1000px) {
         transform: none !important;
+    }
+
+    > .site-header__content.alignfull {
+        margin-left: calc( -1 * var(--theme-header-sides-spacing) );
+        margin-right: calc( -1 * var(--theme-header-sides-spacing) );
+
+        @media only screen and (min-width: 1000px) {
+            margin-left: 0;
+            margin-right: 0;
+        }
     }
 }

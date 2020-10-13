@@ -1,9 +1,14 @@
-.wp-block[data-type="novablocks/navigation"] {
-  ul.menu a {
-    display: flex;
-  }
-}
+.wp-block-novablocks-navigation {
 
-.menu {
-  padding-top: 0;
+    .menu {
+        //padding-top: 0;
+
+        > li {
+            margin-left: 0;
+        }
+
+        a {
+            display: flex;
+        }
+    }
 }

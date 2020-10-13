@@ -1,7 +1,3 @@
-.wp-block-novablocks-navigation[class] {
-    --final-font-size: 18px;
-}
-
 .site-header {
     display: none;
     overflow-y: auto;
@@ -46,10 +42,20 @@
         > a {
             display: inline-block;
             position: relative;
+
+            &:after {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%) rotate(45deg);
+
+                transition-duration: var(--theme-transition-duration-quick);
+                transition-timing-function: $easeOut;
+
+                margin-left: .5em;
+            }
         }
 
-        &.hover,
-        &:hover {
+        &.hover {
 
             > a:after {
                 transform: translateY(-50%) rotate(-45deg);
@@ -58,50 +64,6 @@
 
             > a:before {
                 opacity: 1;
-            }
-        }
-
-        a:after {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%) rotate(45deg);
-
-
-            transition: all .15s $easeInOut;
-            transition-property: transform, opacity;
-
-            margin-left: .5em;
-        }
-
-        a:before {
-            content: '';
-            position: absolute;
-
-            width: 100%;
-            height: 2px;
-
-            background-color: var(--sm-light-primary);
-            bottom: .7em;
-
-            opacity: 0;
-
-            transition: opacity .1s $easeInOut;
-        }
-    }
-
-    ul.menu a,
-    .menu>ul a {
-        padding-left: 0;
-        padding-right: 0;
-    }
-
-    .menu-item-has-children,
-    .page_item_has_children {
-        &[class] > a {
-            &:after {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%) rotate(45deg);
             }
         }
     }
