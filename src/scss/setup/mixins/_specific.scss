@@ -5,7 +5,9 @@
         $selector: $selector + '[class]';
     }
 
-    $selector: unquote('&' + $selector);
+    @if ( & != null ) {
+        $selector: unquote('&' + $selector);
+    }
 
     #{$selector} {
         @content;

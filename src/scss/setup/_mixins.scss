@@ -25,3 +25,15 @@
 @import "mixins/wp-offset";
 @import "mixins/wrapper";
 @import "mixins/woocommerce";
+
+@mixin remove-site-content-padding-bottom {
+    .site-content {
+        padding-bottom: 0 !important;
+    }
+}
+
+@mixin remove-page-spacing-top {
+    #page .site-content {
+        margin-top: 0 !important;
+    }
+}

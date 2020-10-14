@@ -206,7 +206,11 @@
   --theme-spacing-fluid-xxl:    calc( var( --theme-spacing-fluid ) * 8 ); }
 
 :root {
-  --theme-transition-duration: .4s;
+  --theme-transition-duration-slow: 1s;
+  --theme-transition-duration-normal: .4s;
+  --theme-transition-duration-fast: .3s;
+  --theme-transition-duration-quick: .15s;
+  --theme-transition-duration: var(--theme-transition-duration-normal);
   --theme-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
   --theme-transition: all var(--theme-transition-duration) var(--theme-transition-easing); }
 

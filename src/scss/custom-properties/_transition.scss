@@ -1,5 +1,10 @@
 :root {
-    --theme-transition-duration: .4s;
+    --theme-transition-duration-slow: 1s;
+    --theme-transition-duration-normal: .4s;
+    --theme-transition-duration-fast: .3s;
+    --theme-transition-duration-quick: .15s;
+
+    --theme-transition-duration: var(--theme-transition-duration-normal);
     --theme-transition-easing: #{ $ease };
     --theme-transition: all var(--theme-transition-duration) var(--theme-transition-easing);
 }

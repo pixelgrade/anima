@@ -1,88 +1,13 @@
-@import "menu";
-@import "menu-toggle";
+@import "mixins";
 
-@mixin header-background {
-    &:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: var(--current-light-primary);
-        opacity: var(--header-background-opacity, 0);
+@include specific(1) {
+    @import "menu";
+    @import "menu-toggle";
+    @import "theme";
 
-        transition: var(--theme-transition);
-        transition-property: opacity;
-    }
-}
-
-@mixin header-shadow {
-    &:after {
-        content: "";
-        display: block;
-        @include cover;
-        box-shadow: var(--shadow-color, #000000) 0 var(--shadow-y-offset, 0.0625em) var(--shadow-blur, 0.125em);
-        opacity: 0;
-        pointer-events: none;
-        transition: var(--theme-transition);
-        transition-property: opacity;
-        z-index: -1;
-    }
-}
-
-.site-header__inner-container > .site-header__content.alignfull {
-    margin-left: calc( -1 * var(--theme-header-sides-spacing) );
-    margin-right: calc( -1 * var(--theme-header-sides-spacing) );
-}
-
-@media only screen and (min-width: 1000px) {
-
-    .site-header__content {
-        display: grid;
-        align-items: center;
-        grid-gap: 1em;
-
-        > * {
-            justify-content: center;
-        }
-
-        > :first-child {
-            justify-content: flex-start;
-        }
-
-        > :last-child {
-            justify-content: flex-end;
-        }
-
-        > .wp-block-novablocks-navigation {
-            > ul.menu,
-            > .menu > ul {
-                justify-content: inherit;
-            }
-        }
-
-        .site-header--logo-left & {
-            grid-template-columns: auto 1fr;
-        }
-
-        .site-header--logo-center & {
-            grid-template-columns: 1fr auto 1fr;
-        }
-
-        .site-header--logo-right & {
-            grid-template-columns: 1fr auto;
-        }
-
-        &.alignfull[class] {
-            margin-left: 0;
-            margin-right: 0;
-        }
-    }
-
-    .c-menu-toggle__checkbox,
-    .c-menu-toggle {
-        display: none;
+    @media not screen and (min-width: 1000px) {
+        @import "mobile";
+        @import "mobile-transitions";
     }
 }
 
@@ -94,20 +19,26 @@
     }
 }
 
-@media not screen and (min-width: 1000px) {
-    @import "mobile";
-    @import "mobile-transitions";
-}
-
-@media only screen and (min-width: 1000px) {
-    .site-header__inner-container {
-        transform: none !important;
-    }
-}
-
 .site-header,
 .site-header--mobile {
     @include wp-offset(top, 0, false);
 }
 
-@import "theme";
+.site-header__inner-container[class] {
+    padding-left: var(--theme-header-sides-spacing);
+    padding-right: var(--theme-header-sides-spacing);
+
+    @media only screen and (min-width: 1000px) {
+        transform: none !important;
+    }
+
+    > .site-header__content.alignfull {
+        margin-left: calc( -1 * var(--theme-header-sides-spacing) );
+        margin-right: calc( -1 * var(--theme-header-sides-spacing) );
+
+        @media only screen and (min-width: 1000px) {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+}

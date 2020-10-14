@@ -1,3 +1,10 @@
+.novablocks-block__content {
+
+    @include above(tablet) {
+        --novablocks-block-content-padding: var(--novablocks-spacing);
+    }
+}
+
 .block-is-moderate + .block-is-moderate:not(.novablocks-media--blog),
 .block-is-highlighted + .block-is-highlighted[class] {
     padding-top: 0;
@@ -17,37 +24,6 @@
 
     a:hover {
         color: currentColor;
-    }
-}
-
-.novablocks-media {
-
-    &.novablocks-media--no-thumbnail {
-
-        .novablocks-media__image {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            path {
-                fill: var(--current-color-primary);
-            }
-        }
-    }
-}
-
-.novablocks-hero__inner-container {
-
-    > .wp-block-separator:not(:first-child),
-    > .wp-block-separator[class] + * {
-        --novablocks-element-spacing-multiplier: 1;
-    }
-}
-
-.novablocks-media__inner-container {
-
-    .wp-block-separator {
-        width: 100%;
     }
 }
 

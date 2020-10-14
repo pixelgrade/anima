@@ -49,3 +49,24 @@ textarea {
     text-transform: var(--current-text-transform);
     font-weight: var(--current-font-weight);
 }
+
+// remove lists styles from menus and submenus
+ul.menu,
+.menu > ul,
+.sub-menu,
+.children {
+    padding-left: 0;
+    list-style: none;
+
+    > * {
+        margin-top: 0;
+    }
+}
+
+.has-hero {
+    @include remove-page-spacing-top;
+}
+
+.has-no-padding-bottom {
+    @include remove-site-content-padding-bottom;
+}
