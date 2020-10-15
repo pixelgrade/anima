@@ -1645,7 +1645,7 @@ table {
   background-color: var(--current-color-primary);
   color: var(--sm-light-primary);
   z-index: 1200;
-  --theme-button-padding: .6em 1.7em;
+  --theme-button-padding: .25em 1em;
   --theme-input-search-focus-overlay-shadow: inset 0px 0px 0px 2px rgba(var(--opacity-color), 1);
   --theme-search-input-focus: var(--theme-input-search-focus-overlay-shadow),
   var(--theme-input-focus-colored-shadow),
@@ -2715,24 +2715,25 @@ span.page-numbers {
   .search-form .search-submit {
     max-width: 200px;
     margin-left: .5em; }
-  .search-form .search-icon {
-    content: '';
-    position: absolute;
-    left: .8em;
-    top: 50%;
-    transform: translateY(-50%);
-    display: block;
-    width: 1.2em;
-    height: 1.2em;
-    border: 0;
-    padding: 0;
-    mask: url("./assets/images/icon-search.svg") no-repeat 50% 50%;
-    mask-size: cover;
-    -webkit-mask: url("./assets/images/icon-search.svg") no-repeat 50% 50%;
-    -webkit-mask-size: cover;
-    background-color: var(--sm-light-primary);
-    opacity: .5;
-    transition: opacity 0.15s cubic-bezier(0.25, 0.1, 0.25, 1); }
+  @media only screen and (min-width: 1000px) {
+    .search-form .search-icon {
+      content: '';
+      position: absolute;
+      left: .8em;
+      top: 50%;
+      transform: translateY(-50%);
+      display: block;
+      width: 1.2em;
+      height: 1.2em;
+      border: 0;
+      padding: 0;
+      mask: url("./assets/images/icon-search.svg") no-repeat 50% 50%;
+      mask-size: cover;
+      -webkit-mask: url("./assets/images/icon-search.svg") no-repeat 50% 50%;
+      -webkit-mask-size: cover;
+      background-color: var(--sm-light-primary);
+      opacity: .5;
+      transition: opacity 0.15s cubic-bezier(0.25, 0.1, 0.25, 1); } }
   .search-form .search-submit {
     margin-left: 0;
     --theme-button-background-color: var(--sm-light-primary);
@@ -2753,11 +2754,14 @@ span.page-numbers {
       color: var(--sm-dark-primary); }
   .search-form .search-field {
     border: 0;
-    padding: 0 .8em 0 1.8em;
+    padding: 0 .8em;
     font-weight: bold;
     background-color: transparent;
     color: var(--sm-light-primary);
     --font-size: 23; }
+    @media only screen and (min-width: 1000px) {
+      .search-form .search-field {
+        padding: 0 .8em 0 1.8em; } }
 
 /* 3. Blocks */
 /*

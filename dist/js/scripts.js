@@ -1472,7 +1472,7 @@ function () {
     key: "updateSearchOverlayOffset",
     value: function updateSearchOverlayOffset() {
       if (below('lap')) {
-        this.$searchOverlay[0].style.marginTop = this.offset + 'px';
+        this.$searchOverlay[0].paddingTop = Math.max(this.promoBarHeight - scrollY, 0) + 'px';
       }
     }
   }, {
