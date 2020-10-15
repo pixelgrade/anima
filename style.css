@@ -1005,7 +1005,7 @@ table {
 
 /* 2.1. Site Header */
 [class] .site-header {
-  --theme-button-padding: .25em 1.5em;
+  --theme-button-padding: .25em 1em;
   --theme-button-text-color: var(--sm-dark-primary);
   --theme-button-background-color: var(--sm-light-primary);
   --theme-button-border-color: var(--sm-light-primary);
@@ -1695,11 +1695,14 @@ table {
       transition: opacity 0.1s cubic-bezier(0.42, 0, 1, 1) 0.225s; }
   .c-search-overlay__content {
     position: relative;
-    padding-top: 6.8em;
+    padding-top: 4.8em;
     max-width: 62.5em;
     width: 100%;
     margin-left: auto;
     margin-right: auto; }
+    @media only screen and (min-width: 1000px) {
+      .c-search-overlay__content {
+        padding-top: 6.8em; } }
   .c-search-overlay__form {
     display: flex;
     align-items: center;
@@ -1712,7 +1715,7 @@ table {
           padding-left: 0 !important;
           padding-right: 0 !important; } }
   .c-search-overlay__suggestions {
-    margin-top: 5.5em;
+    margin-top: 3em;
     opacity: 0;
     transition: opacity 0.1s cubic-bezier(0.42, 0, 0.58, 1) 0s;
     --font-size: var(--theme-body-font-size);
@@ -1726,6 +1729,7 @@ table {
     --current-font-weight: bold; }
     @media only screen and (min-width: 1000px) {
       .c-search-overlay__suggestions {
+        margin-top: 5.5em;
         max-width: 65%; } }
     .c-search-overlay__suggestions .menu {
       display: flex;
@@ -2704,7 +2708,8 @@ span.page-numbers {
     opacity: 1; }
   .search-form[class] > label {
     flex: 1;
-    margin-bottom: 0; }
+    margin-bottom: 0;
+    margin-top: 0; }
   .search-form[class] .search-field {
     height: 100%; }
   .search-form .search-submit {
@@ -2732,8 +2737,8 @@ span.page-numbers {
     margin-left: 0;
     --theme-button-background-color: var(--sm-light-primary);
     --theme-button-border-color: var(--sm-light-primary);
-    --theme-button-text-color: var(--sm-color-primary);
-    --theme-button-hover-background-color: var(--sm-color-primary);
+    --theme-button-text-color: var(--current-color-primary);
+    --theme-button-hover-background-color: var(--current-color-primary);
     --theme-button-hover-border-color: var(--sm-light-primary);
     --theme-button-hover-text-color: var(--sm-light-primary);
     --font-size: 23;

@@ -74,12 +74,15 @@
 
   &__content {
     position: relative;
-
-    padding-top: 6.8em;
+    padding-top: 4.8em;
     max-width: 62.5em;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
+
+    @include above(lap) {
+      padding-top: 6.8em;
+    }
   }
 
   &__form {
@@ -100,12 +103,13 @@
   }
 
   &__suggestions {
-    margin-top: 5.5em;
+    margin-top: 3em;
 
     opacity: 0;
     transition: opacity .1s $easeInOut 0s;
 
     @include above(lap) {
+      margin-top: 5.5em;
       max-width: 65%;
     }
 

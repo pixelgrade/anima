@@ -281,7 +281,9 @@ class Header {
 	}
 
 	updateSearchOverlayOffset() {
-		this.$searchOverlay[0].style.marginTop = this.offset + 'px';
+		if ( below( 'lap' ) ) {
+			this.$searchOverlay[0].style.marginTop = this.offset + 'px';
+		}
 	}
 
 	render() {
