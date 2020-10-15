@@ -1,5 +1,5 @@
 import GlobalService from "./globalService";
-import { below } from '../utils';
+import { below, debounce } from '../utils';
 import $ from 'jquery';
 
 const defaults = {
@@ -17,6 +17,8 @@ class Header {
 		this.$header = $( this.element );
 		this.$toggle = $( '.c-menu-toggle' );
 		this.$toggleWrap = $( '.c-menu-toggle__wrap' );
+		this.$searchCancelButton = $( '.c-search-overlay__cancel' );
+		this.$searchOverlay = $('.c-search-overlay');
 
 		this.scrolled = false;
 		this.inversed = false;
@@ -56,6 +58,8 @@ class Header {
 		this.updatePageOffset();
 		this.updateHeaderOffset();
 		this.updateMobileHeaderOffset();
+		this.updateSearchButtonsHeight();
+		this.updateSearchOverlayOffset();
 	}
 
 	getInroTimeline() {
@@ -243,6 +247,43 @@ class Header {
 		this.createdMobileHeader = true;
 	}
 
+	moveSearchButton() {
+
+		if ( this.movedSearchButton || ! below('lap') ) return;
+
+		const $searchButton = $( '.is-search-button' ),
+			  $searchButtonWrapper = $('.search-button__wrapper');
+
+
+		if ( $searchButtonWrapper.length ) {
+			this.$searchButtonWrapper = $searchButtonWrapper;
+			this.movedSearchButton = true;
+			return;
+		}
+
+		this.$searchButtonWrapper = $( '<div class="search-button__wrapper">' );
+
+		$searchButton.first().clone().appendTo( this.$searchButtonWrapper);
+
+		this.$searchButtonWrapper.insertAfter( '.site-header__wrapper');
+		this.movedSearchButton = true;
+	}
+
+	updateSearchButtonsHeight() {
+		this.$searchCancelButton.css({
+			height: this.mobileHeaderHeight,
+		});
+
+
+		$('.search-button__wrapper').css({
+			height: this.mobileHeaderHeight,
+		});
+	}
+
+	updateSearchOverlayOffset() {
+		this.$searchOverlay[0].style.marginTop = this.offset + 'px';
+	}
+
 	render() {
 		if ( ! this.element ) return;
 
@@ -251,6 +292,7 @@ class Header {
 		this.updateMobileNavigationOffset();
 		this.updateMobileHeaderState();
 		this.updateDesktopHeaderState(false);
+		this.moveSearchButton();
 	}
 }
 

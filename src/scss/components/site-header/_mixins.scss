@@ -78,3 +78,65 @@
         }
     }
 }
+
+@mixin header-menu-item-is-external-link {
+
+    position: relative;
+
+    a {
+
+        &:after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            margin-left: 5px;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid currentColor;
+            transform: rotate(45deg);
+            right: auto;
+            opacity: .5;
+        }
+    }
+}
+
+@mixin header-menu-item-is-cta-button {
+
+    display: flex;
+    align-items: center;
+
+    a {
+        // Apply button properties
+        @include button-box;
+        @include button-background;
+        @include button-color;
+        @include apply-font(button);
+        @include button-fill;
+
+        transition: var(--theme-button-transition);
+
+        // Overwrite default button colors
+        --current-button-background-color: var(--theme-button-background-color);
+        --current-button-border-color: var(--theme-button-border-color);
+        --current-button-text-color: var(--theme-button-text-color);
+        --current-button-transition: var(--theme-button-transition);
+
+        margin-bottom: 0;
+
+        @include below(lap) {
+            width: 100%;
+            margin: .75em 0;
+
+            text-align: center;
+        }
+
+        &:hover {
+            // Overwrite default button hover colors
+            --current-button-background-color: var(--theme-button-hover-background-color);
+            --current-button-border-color: var(--theme-button-hover-border-color);
+            --current-button-text-color: var(--theme-button-hover-text-color);
+            --current-button-transition: var(--theme-button-hover-transition);
+        }
+    }
+}

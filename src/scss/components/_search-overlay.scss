@@ -7,18 +7,17 @@
 
   width: 100%;
 
-  transform: translateY(-100vh);
-
-  padding-left: var(--theme-header-sides-spacing);
-  padding-right: var(--theme-header-sides-spacing);
+  padding-left: var(--theme-wrapper-sides-spacing);
+  padding-right: var(--theme-wrapper-sides-spacing);
 
   background-color: var(--current-color-primary);
-  color: var(--current-light-primary);
+
+  // We want to keep light primary,
+  // so we are going to use --sm-
+  color: var(--sm-light-primary);
 
 
   z-index: 1200; // Bigger than Announcement Bar
-
-  transition: transform .45s $easeInCubic .1s;
 
   --theme-button-padding: .6em 1.7em;
   --theme-input-search-focus-overlay-shadow: inset 0px 0px 0px 2px rgba(var(--opacity-color), 1);
@@ -28,6 +27,16 @@
   --theme-input-box-shadow: var(--theme-search-input-focus);
   --theme-input-focus-box-shadow: var(--theme-search-input-focus);
   --theme-input-hover-box-shadow: var(--theme-search-input-focus);
+
+  @include above(lap) {
+    transform: translateY(-100vh);
+    transition: transform .45s $easeInCubic .1s;
+  }
+
+  @include below(lap) {
+    transform: translateX(-100vw);
+    transition: transform .3s ease-out;
+  }
 
 
   &__form {
@@ -41,9 +50,16 @@
   @include wp-offset();
 
   .has-search-overlay & {
-    transform: translateY(0);
 
     transition: transform .45s $easeOutCubic;
+
+    @include above(lap) {
+      transform: translateY(0);
+    }
+
+    @include below(lap) {
+      transform: translateX(0);
+    }
 
     &__form {
       opacity: 1;
@@ -89,10 +105,13 @@
     opacity: 0;
     transition: opacity .1s $easeInOut 0s;
 
-    max-width: 65%;
+    @include above(lap) {
+      max-width: 65%;
+    }
 
     @include apply-font(body);
-    --font-size: 23;
+    --font-size: 21;
+    --current-font-weight: bold;
 
     .menu {
       display: flex;
@@ -108,18 +127,18 @@
         margin-left: .5em;
         margin-bottom: .5em;
 
-        padding: 0;
+        padding: var(--theme-button-padding);
 
-        border: 2px solid currentColor;
+        border: 2px solid var(--current-button-border-color);
 
         @include button-base();
-        --theme-button-background-color: var(--current-light-primary);
-        --theme-button-border-color: var(--current-light-primary);
-        --theme-button-text-color: var(--current-color-primary);
+        --theme-button-background-color: var(--sm-light-primary);
+        --theme-button-border-color: var(--sm-light-primary);
+        --theme-button-text-color: var(--sm-color-primary);
 
-        --theme-button-hover-background-color: var(--current-color-primary);
-        --theme-button-hover-border-color: var(--current-light-primary);
-        --theme-button-hover-text-color: var(--current-color-primary);
+        --theme-button-hover-background-color: var(--sm-color-primary);
+        --theme-button-hover-border-color: var(--sm-light-primary);
+        --theme-button-hover-text-color: var(--sm-color-primary);
         @include button-fill-reverse();
 
         &:hover {
@@ -129,8 +148,11 @@
         }
 
         a {
+
+          color: currentColor;
+          text-decoration: none;
+
           transition: color .3s ease;
-          padding: var(--theme-button-padding);
         }
       }
     }
@@ -141,14 +163,51 @@
   }
 
   .c-search-overlay__cancel {
-    background-color: transparent !important;
-    border: 0 !important;
+    cursor: pointer;
 
-    --font-size: 23 !important;
+    display: flex;
+    align-items: center;
+
+    padding: var(--theme-button-padding);
+
+    @include apply-font(button);
+    --font-size: 21;
 
     &:hover {
       color: currentColor !important;
       opacity: .8;
+    }
+
+    &:after {
+      content: 'Cancel';
+    }
+    
+    @include below(lap) {
+      position: absolute;
+
+      top: 0;
+      left: 0;
+
+
+      font-weight: 500;
+
+      padding: 0;
+
+      &:before {
+        content: '';
+
+        width: .7em;
+        height: .7em;
+        border-top: 2px solid currentColor;
+        border-left: 2px solid currentColor;
+        transform: rotate(-45deg);
+
+        margin-right: 3px;
+      }
+
+      &:after {
+        content: 'Back';
+      }
     }
   }
 }
@@ -157,16 +216,17 @@
   overflow: hidden;
 }
 
-.menu-item {
+.is-search-button {
 
   &:not(.no-icon) {
     a[href='#search'] {
-      --search-icon-width: 22px;
+      --search-icon-width: .9em;
 
-      padding-left: calc(var(--search-icon-width) + 8px) !important;
+      padding-left: calc(var(--search-icon-width) + 6px) !important;
+      overflow: visible;
 
       @include below(lap) {
-        padding-left: calc(var(--search-icon-width) + 8px + 1em) !important;
+        padding-left: calc(var(--search-icon-width) + 6px + 1em) !important;
       }
       //
       &:after {
@@ -174,7 +234,6 @@
         position: absolute;
         left: 0;
         top: 50%;
-        margin-right: 8px;
         transform: translateY(-50%);
 
         display: block;
@@ -185,11 +244,13 @@
         padding: 0;
 
         mask: url($icon-search-path) no-repeat 50% 50%;
-        mask-size: cover;
+        mask-size: contain;
         -webkit-mask: url($icon-search-path) no-repeat 50% 50%;
-        -webkit-mask-size: cover;
+        -webkit-mask-size: contain;
 
         background-color: currentColor;
+
+        overflow: visible;
 
         @include below(lap) {
           margin-left: 1em;
@@ -205,6 +266,42 @@
   &.icon-only {
     a[href='#search'] {
       text-indent: -9999px;
+    }
+  }
+
+  .site-header__menu & {
+    @include below(lap) {
+      display: none;
+    }
+  }
+
+  .search-button__wrapper & {
+
+  }
+}
+
+.search-button__wrapper {
+  position: absolute;
+  top: 0;
+  right: var(--theme-wrapper-sides-spacing);
+
+  display: flex;
+  align-items: center;
+
+  @include apply-font(body);
+  --font-size: 21;
+  
+  @include above(lap) {
+    display: none;
+  }
+
+  li {
+    list-style: none;
+
+    a {
+      color: currentColor;
+      text-decoration: none;
+      font-weight: 500;
     }
   }
 }

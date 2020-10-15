@@ -101,6 +101,8 @@ export default class Navbar {
 	onClickSearchButton( event ) {
 		event.preventDefault();
 		$('body').toggleClass('has-search-overlay');
+		$('.c-search-overlay__form .search-field').focus();
+
 	}
 
 	onClickCancelSearchButton( event ) {

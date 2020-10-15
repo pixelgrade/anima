@@ -1189,6 +1189,8 @@ function () {
     this.$header = external_jQuery_default()(this.element);
     this.$toggle = external_jQuery_default()('.c-menu-toggle');
     this.$toggleWrap = external_jQuery_default()('.c-menu-toggle__wrap');
+    this.$searchCancelButton = external_jQuery_default()('.c-search-overlay__cancel');
+    this.$searchOverlay = external_jQuery_default()('.c-search-overlay');
     this.scrolled = false;
     this.inversed = false;
     this.abovePromoBar = false;
@@ -1222,6 +1224,8 @@ function () {
       this.updatePageOffset();
       this.updateHeaderOffset();
       this.updateMobileHeaderOffset();
+      this.updateSearchButtonsHeight();
+      this.updateSearchOverlayOffset();
     }
   }, {
     key: "getInroTimeline",
@@ -1437,6 +1441,39 @@ function () {
       this.createdMobileHeader = true;
     }
   }, {
+    key: "moveSearchButton",
+    value: function moveSearchButton() {
+      if (this.movedSearchButton || !below('lap')) return;
+      var $searchButton = external_jQuery_default()('.is-search-button'),
+          $searchButtonWrapper = external_jQuery_default()('.search-button__wrapper');
+
+      if ($searchButtonWrapper.length) {
+        this.$searchButtonWrapper = $searchButtonWrapper;
+        this.movedSearchButton = true;
+        return;
+      }
+
+      this.$searchButtonWrapper = external_jQuery_default()('<div class="search-button__wrapper">');
+      $searchButton.first().clone().appendTo(this.$searchButtonWrapper);
+      this.$searchButtonWrapper.insertAfter('.site-header__wrapper');
+      this.movedSearchButton = true;
+    }
+  }, {
+    key: "updateSearchButtonsHeight",
+    value: function updateSearchButtonsHeight() {
+      this.$searchCancelButton.css({
+        height: this.mobileHeaderHeight
+      });
+      external_jQuery_default()('.search-button__wrapper').css({
+        height: this.mobileHeaderHeight
+      });
+    }
+  }, {
+    key: "updateSearchOverlayOffset",
+    value: function updateSearchOverlayOffset() {
+      this.$searchOverlay[0].style.marginTop = this.offset + 'px';
+    }
+  }, {
     key: "render",
     value: function render() {
       if (!this.element) return;
@@ -1444,6 +1481,7 @@ function () {
       this.updateMobileNavigationOffset();
       this.updateMobileHeaderState();
       this.updateDesktopHeaderState(false);
+      this.moveSearchButton();
     }
   }]);
 
@@ -1738,6 +1776,7 @@ function () {
     value: function onClickSearchButton(event) {
       event.preventDefault();
       external_jQuery_default()('body').toggleClass('has-search-overlay');
+      external_jQuery_default()('.c-search-overlay__form .search-field').focus();
     }
   }, {
     key: "onClickCancelSearchButton",

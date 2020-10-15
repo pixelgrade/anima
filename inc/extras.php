@@ -322,6 +322,7 @@ function rosa2_add_custom_menu_items() {
 		add_meta_box( 'rosa2-add-search-links', esc_html__( 'Extras', '__theme_txtd' ), 'wp_nav_menu_item_search_rosa2', 'nav-menus', 'side', 'low' );
 	}
 }
+
 add_action( 'admin_init', 'rosa2_add_custom_menu_items' );
 
 function wp_nav_menu_item_search_rosa2( $object ) {
@@ -344,13 +345,13 @@ function wp_nav_menu_item_search_rosa2( $object ) {
 		$menu_items_obj[$id]->url				= esc_attr( $id );
 		$menu_items_obj[$id]->description 		= 'description';
 		$menu_items_obj[$id]->db_id 			= 0;
-		$menu_items_obj[$id]->object 			= '__theme_txtd';
+		$menu_items_obj[$id]->object 			= 'rosa2';
 		$menu_items_obj[$id]->menu_item_parent 	= 0;
 		$menu_items_obj[$id]->type 				= 'custom';
 		$menu_items_obj[$id]->target 			= '';
 		$menu_items_obj[$id]->attr_title 		= '';
 		$menu_items_obj[$id]->label 		    = esc_attr( $item['label'] );
-		$menu_items_obj[$id]->classes 			= array();
+		$menu_items_obj[$id]->classes 			= array('is-search-button');
 		$menu_items_obj[$id]->xfn 				= '';
 	}
 
@@ -404,12 +405,16 @@ function rosa2_output_search_overlay() {
         <div class="c-search-overlay__content">
             <div class="c-search-overlay__form">
                 <?php get_search_form(); ?>
-                <button class="c-search-overlay__cancel"><?php esc_html_e( 'Cancel', '__theme_txtd' )?></button>
+                <span class="c-search-overlay__cancel"></span>
             </div>
 
-            <?php if ( has_nav_menu( 'search-suggestions' ) ) { ?>
+            <?php if ( has_nav_menu( 'search-suggestions' ) ) {
+
+	            $menu_name = wp_get_nav_menu_name('search-suggestions' );
+
+	            ?>
                 <div class="c-search-overlay__suggestions">
-                    <p><?php esc_html_e( 'Or, browse through the popular tags: ', '__theme_txtd' )?></p>
+                    <p><?php _e( $menu_name, '__theme_txtd' )?></p>
                     <?php wp_nav_menu( array(
                         'container'      => false,
                         'theme_location' => 'search-suggestions',
