@@ -1012,14 +1012,15 @@ table {
   --theme-button-hover-text-color: var(--sm-light-primary);
   --theme-button-hover-background-color: transparent;
   --theme-button-hover-border-color: var(--sm-light-primary); }
-  [class] .site-header--scrolled,
-  body:not(.has-hero) [class] .site-header {
-    --theme-button-text-color: var(--current-light-primary);
-    --theme-button-background-color: var(--current-dark-primary);
-    --theme-button-border-color: var(--current-dark-primary);
-    --theme-button-hover-text-color: var(--current-dark-primary);
-    --theme-button-hover-background-color: transparent;
-    --theme-button-hover-border-color: var(--current-dark-primary); }
+  @media only screen and (min-width: 1000px) {
+    [class] .site-header--scrolled,
+    body:not(.has-hero) [class] .site-header {
+      --theme-button-text-color: var(--current-light-primary);
+      --theme-button-background-color: var(--current-dark-primary);
+      --theme-button-border-color: var(--current-dark-primary);
+      --theme-button-hover-text-color: var(--current-dark-primary);
+      --theme-button-hover-background-color: transparent;
+      --theme-button-hover-border-color: var(--current-dark-primary); } }
   [class] .site-header .menu-item-has-children[class] > a:after,
   [class] .site-header .page_item_has_children[class] > a:after {
     content: "";
@@ -1229,6 +1230,9 @@ table {
     [class] .site-header .site-header__menu > .menu > ul > li[class*="current"] > a:hover:before {
       transform: scale3d(0, 1, 1);
       transform-origin: right; } }
+
+[class] .navigation-is-open {
+  overflow: hidden; }
 
 [class] .c-menu-toggle {
   margin: 0 !important; }

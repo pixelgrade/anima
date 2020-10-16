@@ -13,13 +13,15 @@
 
     &--scrolled,
     body:not(.has-hero) & {
-        --theme-button-text-color: var(--current-light-primary);
-        --theme-button-background-color: var(--current-dark-primary);
-        --theme-button-border-color: var(--current-dark-primary);
+       @include above(lap) {
+           --theme-button-text-color: var(--current-light-primary);
+           --theme-button-background-color: var(--current-dark-primary);
+           --theme-button-border-color: var(--current-dark-primary);
 
-        --theme-button-hover-text-color: var(--current-dark-primary);
-        --theme-button-hover-background-color: transparent;
-        --theme-button-hover-border-color: var(--current-dark-primary);
+           --theme-button-hover-text-color: var(--current-dark-primary);
+           --theme-button-hover-background-color: transparent;
+           --theme-button-hover-border-color: var(--current-dark-primary);
+       }
     }
 
     .menu-item-has-children,
@@ -219,4 +221,8 @@
             }
         }
     }
+}
+
+.navigation-is-open {
+    overflow: hidden;
 }

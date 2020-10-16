@@ -1216,6 +1216,7 @@ function () {
       external_jQuery_default()('.site-header__wrapper').css('transition', 'none');
       this.$header.addClass('site-header--fixed site-header--ready');
       this.$mobileHeader.addClass('site-header--fixed site-header--ready');
+      this.initToggleClick();
       this.timeline.play();
     }
   }, {
@@ -1476,6 +1477,15 @@ function () {
       }
     }
   }, {
+    key: "initToggleClick",
+    value: function initToggleClick() {
+      var $body = external_jQuery_default()('body'),
+          NAVIGATION_OPEN_CLASS = 'navigation-is-open';
+      this.$toggle.on('click', function () {
+        $body.toggleClass(NAVIGATION_OPEN_CLASS);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       if (!this.element) return;
@@ -1677,6 +1687,7 @@ var MENU_ITEM_WITH_CHILDREN = '.menu-item-has-children, .page_item_has_children'
 var SUBMENU = '.sub-menu, .children';
 var SUBMENU_LEFT_CLASS = 'has-submenu-left';
 var HOVER_CLASS = 'hover';
+var SEARCH_OVERLAY_OPEN_CLASS = 'has-search-overlay';
 
 var navbar_Navbar =
 /*#__PURE__*/
@@ -1777,14 +1788,14 @@ function () {
     key: "onClickSearchButton",
     value: function onClickSearchButton(event) {
       event.preventDefault();
-      external_jQuery_default()('body').toggleClass('has-search-overlay');
+      external_jQuery_default()('body').toggleClass(SEARCH_OVERLAY_OPEN_CLASS);
       external_jQuery_default()('.c-search-overlay__form .search-field').focus();
     }
   }, {
     key: "onClickCancelSearchButton",
     value: function onClickCancelSearchButton(event) {
       event.preventDefault();
-      external_jQuery_default()('body').removeClass('has-search-overlay');
+      external_jQuery_default()('body').removeClass(SEARCH_OVERLAY_OPEN_CLASS);
     }
   }, {
     key: "bindClick",

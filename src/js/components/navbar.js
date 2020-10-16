@@ -6,6 +6,7 @@ const MENU_ITEM_WITH_CHILDREN = '.menu-item-has-children, .page_item_has_childre
 const SUBMENU = '.sub-menu, .children';
 const SUBMENU_LEFT_CLASS = 'has-submenu-left';
 const HOVER_CLASS = 'hover';
+const SEARCH_OVERLAY_OPEN_CLASS = 'has-search-overlay';
 
 export default class Navbar {
 
@@ -100,14 +101,14 @@ export default class Navbar {
 
 	onClickSearchButton( event ) {
 		event.preventDefault();
-		$('body').toggleClass('has-search-overlay');
+		$('body').toggleClass(SEARCH_OVERLAY_OPEN_CLASS);
 		$('.c-search-overlay__form .search-field').focus();
 
 	}
 
 	onClickCancelSearchButton( event ) {
 		event.preventDefault();
-		$('body').removeClass('has-search-overlay');
+		$('body').removeClass(SEARCH_OVERLAY_OPEN_CLASS);
 	}
 
 	bindClick() {

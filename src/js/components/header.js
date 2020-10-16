@@ -50,6 +50,7 @@ class Header {
 
 		this.$header.addClass( 'site-header--fixed site-header--ready' );
 		this.$mobileHeader.addClass( 'site-header--fixed site-header--ready' );
+		this.initToggleClick();
 
 		this.timeline.play();
 	}
@@ -284,6 +285,15 @@ class Header {
 		if ( below( 'lap' ) ) {
 			this.$searchOverlay[0].paddingTop = Math.max(( this.promoBarHeight - scrollY ), 0) + 'px';
 		}
+	}
+
+	initToggleClick() {
+		const $body = $( 'body' ),
+			  NAVIGATION_OPEN_CLASS = 'navigation-is-open';
+
+		this.$toggle.on('click', function(){
+			$body.toggleClass(NAVIGATION_OPEN_CLASS);
+		});
 	}
 
 	render() {
