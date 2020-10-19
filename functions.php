@@ -66,8 +66,9 @@ if ( ! function_exists( 'rosa2_setup' ) ) {
 
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
-			'primary'   => esc_html__( 'Primary Menu', '__theme_txtd' ),
-			'secondary' => esc_html__( 'Secondary Menu', '__theme_txtd' ),
+			'primary'            => esc_html__( 'Primary Menu', '__theme_txtd' ),
+			'secondary'          => esc_html__( 'Secondary Menu', '__theme_txtd' ),
+			'search-suggestions' => esc_html__( 'Search Suggestions', '__theme_txtd' )
 		) );
 
 		// Add theme support for selective refresh for widgets.
@@ -207,6 +208,14 @@ function rosa2_scripts() {
 		wp_enqueue_style( 'rosa2-gutenberg-legacy-frontend' );
 	}
 }
+
+function rosa2_admin_scripts() {
+	if( rosa2_is_nav_menus_page() ) {
+		wp_enqueue_script( 'rosa2-admin-nav-menus-scripts', get_template_directory_uri() . '/dist/js/admin/edit-nav-menus.js', array( 'jquery' ), '1.0.0', true );
+	}
+}
+
+add_action( 'admin_enqueue_scripts', 'rosa2_admin_scripts' );
 
 function rosa2_webfonts_fallback() {
 

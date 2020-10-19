@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -357,7 +357,8 @@ module.exports = _nonIterableSpread;
 /* 12 */,
 /* 13 */,
 /* 14 */,
-/* 15 */
+/* 15 */,
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1188,6 +1189,8 @@ function () {
     this.$header = external_jQuery_default()(this.element);
     this.$toggle = external_jQuery_default()('.c-menu-toggle');
     this.$toggleWrap = external_jQuery_default()('.c-menu-toggle__wrap');
+    this.$searchCancelButton = external_jQuery_default()('.c-search-overlay__cancel');
+    this.$searchOverlay = external_jQuery_default()('.c-search-overlay');
     this.scrolled = false;
     this.inversed = false;
     this.abovePromoBar = false;
@@ -1213,6 +1216,7 @@ function () {
       external_jQuery_default()('.site-header__wrapper').css('transition', 'none');
       this.$header.addClass('site-header--fixed site-header--ready');
       this.$mobileHeader.addClass('site-header--fixed site-header--ready');
+      this.initToggleClick();
       this.timeline.play();
     }
   }, {
@@ -1221,6 +1225,8 @@ function () {
       this.updatePageOffset();
       this.updateHeaderOffset();
       this.updateMobileHeaderOffset();
+      this.updateSearchButtonsHeight();
+      this.updateSearchOverlayOffset();
     }
   }, {
     key: "getInroTimeline",
@@ -1436,6 +1442,50 @@ function () {
       this.createdMobileHeader = true;
     }
   }, {
+    key: "moveSearchButton",
+    value: function moveSearchButton() {
+      if (this.movedSearchButton || !below('lap')) return;
+      var $searchButton = external_jQuery_default()('.is-search-button'),
+          $searchButtonWrapper = external_jQuery_default()('.search-button__wrapper');
+
+      if ($searchButtonWrapper.length) {
+        this.$searchButtonWrapper = $searchButtonWrapper;
+        this.movedSearchButton = true;
+        return;
+      }
+
+      this.$searchButtonWrapper = external_jQuery_default()('<div class="search-button__wrapper">');
+      $searchButton.first().clone().appendTo(this.$searchButtonWrapper);
+      this.$searchButtonWrapper.insertAfter('.site-header__wrapper');
+      this.movedSearchButton = true;
+    }
+  }, {
+    key: "updateSearchButtonsHeight",
+    value: function updateSearchButtonsHeight() {
+      this.$searchCancelButton.css({
+        height: this.mobileHeaderHeight
+      });
+      external_jQuery_default()('.search-button__wrapper').css({
+        height: this.mobileHeaderHeight
+      });
+    }
+  }, {
+    key: "updateSearchOverlayOffset",
+    value: function updateSearchOverlayOffset() {
+      if (below('lap') && this.$searchOverlay.length) {
+        this.$searchOverlay[0].paddingTop = Math.max(this.promoBarHeight - scrollY, 0) + 'px';
+      }
+    }
+  }, {
+    key: "initToggleClick",
+    value: function initToggleClick() {
+      var $body = external_jQuery_default()('body'),
+          NAVIGATION_OPEN_CLASS = 'navigation-is-open';
+      this.$toggle.on('click', function () {
+        $body.toggleClass(NAVIGATION_OPEN_CLASS);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       if (!this.element) return;
@@ -1443,6 +1493,7 @@ function () {
       this.updateMobileNavigationOffset();
       this.updateMobileHeaderState();
       this.updateDesktopHeaderState(false);
+      this.moveSearchButton();
     }
   }]);
 
@@ -1636,6 +1687,7 @@ var MENU_ITEM_WITH_CHILDREN = '.menu-item-has-children, .page_item_has_children'
 var SUBMENU = '.sub-menu, .children';
 var SUBMENU_LEFT_CLASS = 'has-submenu-left';
 var HOVER_CLASS = 'hover';
+var SEARCH_OVERLAY_OPEN_CLASS = 'has-search-overlay';
 
 var navbar_Navbar =
 /*#__PURE__*/
@@ -1646,6 +1698,8 @@ function () {
     this.$menuItems = external_jQuery_default()(MENU_ITEM);
     this.$menuItemsWithChildren = this.$menuItems.filter(MENU_ITEM_WITH_CHILDREN).removeClass(HOVER_CLASS);
     this.$menuItemsWithChildrenLinks = this.$menuItemsWithChildren.children('a');
+    this.searchOverlayButton = external_jQuery_default()('.menu-item a[href*="#search"]');
+    this.searchOverlayCancelButton = external_jQuery_default()('.c-search-overlay__cancel');
     this.initialize();
   }
 
@@ -1656,6 +1710,8 @@ function () {
       this.addSocialMenuClass();
       this.initialized = true;
       globalService.registerOnResize(this.onResize.bind(this));
+      this.searchOverlayButton.on('click', this.onClickSearchButton);
+      this.searchOverlayCancelButton.on('click', this.onClickCancelSearchButton);
     }
   }, {
     key: "onResize",
@@ -1727,6 +1783,19 @@ function () {
       $link.addClass('active').parent().addClass(HOVER_CLASS);
       $siblings.removeClass(HOVER_CLASS);
       $siblings.find('.active').removeClass('active');
+    }
+  }, {
+    key: "onClickSearchButton",
+    value: function onClickSearchButton(event) {
+      event.preventDefault();
+      external_jQuery_default()('body').toggleClass(SEARCH_OVERLAY_OPEN_CLASS);
+      external_jQuery_default()('.c-search-overlay__form .search-field').focus();
+    }
+  }, {
+    key: "onClickCancelSearchButton",
+    value: function onClickCancelSearchButton(event) {
+      event.preventDefault();
+      external_jQuery_default()('body').removeClass(SEARCH_OVERLAY_OPEN_CLASS);
     }
   }, {
     key: "bindClick",
