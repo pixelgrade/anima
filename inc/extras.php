@@ -330,9 +330,14 @@ function wp_nav_menu_item_search_rosa2( $object ) {
 	global $nav_menu_selected_id;
 
 	$menu_items = array(
-		'#search' => array(
+		'search' => array(
 			'title' => esc_html__( 'Search', '__theme_txtd' ),
 			'label' => esc_html__( 'Search', '__theme_txtd' ),
+		),
+
+		'lights' => array(
+			'title' => esc_html__( 'Switcher', '__theme_txtd' ),
+			'label' => esc_html__( 'Switcher', '__theme_txtd' ),
 		)
 	);
 	$menu_items_obj = array();
@@ -342,7 +347,7 @@ function wp_nav_menu_item_search_rosa2( $object ) {
 		$menu_items_obj[$id]->ID			    = esc_attr( $id );
 		$menu_items_obj[$id]->object_id			= esc_attr( $id );
 		$menu_items_obj[$id]->title				= esc_attr( $item['title'] );
-		$menu_items_obj[$id]->url				= esc_attr( $id );
+		$menu_items_obj[$id]->url				= esc_attr( '#' );
 		$menu_items_obj[$id]->description 		= 'description';
 		$menu_items_obj[$id]->db_id 			= 0;
 		$menu_items_obj[$id]->object 			= 'rosa2';
@@ -351,7 +356,7 @@ function wp_nav_menu_item_search_rosa2( $object ) {
 		$menu_items_obj[$id]->target 			= '';
 		$menu_items_obj[$id]->attr_title 		= '';
 		$menu_items_obj[$id]->label 		    = esc_attr( $item['label'] );
-		$menu_items_obj[$id]->classes 			= array('is-search-button');
+		$menu_items_obj[$id]->classes 			= array('is-' .$id . '-button');
 		$menu_items_obj[$id]->xfn 				= '';
 	}
 
@@ -389,7 +394,7 @@ function rosa2_output_search_overlay() {
 
 		foreach ( $menu_location as $menu_item ) {
 
-			if ( $menu_item->url === '#search' ) {
+			if ( $menu_item->classes[0] === 'is-search-button' ) {
 				$has_search_item = true;
 			}
 		}

@@ -1846,14 +1846,14 @@ table {
 .has-search-overlay {
   overflow: hidden; }
 
-.is-search-button:not(.no-icon) a[href='#search'] {
+.is-search-button:not(.no-icon) a {
   --search-icon-width: .9em;
   padding-left: calc(var(--search-icon-width) + 6px) !important;
   overflow: visible; }
   @media not screen and (min-width: 1000px) {
-    .is-search-button:not(.no-icon) a[href='#search'] {
+    .is-search-button:not(.no-icon) a {
       padding-left: calc(var(--search-icon-width) + 6px + 1em) !important; } }
-  .is-search-button:not(.no-icon) a[href='#search']:after {
+  .is-search-button:not(.no-icon) a:after {
     content: '';
     position: absolute;
     left: 0;
@@ -1871,12 +1871,12 @@ table {
     background-color: currentColor;
     overflow: visible; }
     @media not screen and (min-width: 1000px) {
-      .is-search-button:not(.no-icon) a[href='#search']:after {
+      .is-search-button:not(.no-icon) a:after {
         margin-left: 1em; } }
-  .is-search-button:not(.no-icon) a[href='#search']:before {
+  .is-search-button:not(.no-icon) a:before {
     width: calc(100% - var(--search-icon-width) - 8px) !important; }
 
-.is-search-button.icon-only a[href='#search'] {
+.is-search-button.icon-only a {
   text-indent: -9999px; }
 
 @media not screen and (min-width: 1000px) {
@@ -1906,6 +1906,35 @@ table {
       color: currentColor;
       text-decoration: none;
       font-weight: 500; }
+
+.is-lights-button {
+  display: flex;
+  align-items: center; }
+  .is-lights-button a {
+    position: relative;
+    text-indent: -9999px;
+    width: 1em;
+    height: 1em;
+    background-color: currentColor;
+    box-shadow: 0 0 0 2px currentColor;
+    border-radius: 1em;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+    transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1); }
+    .is-lights-button a:after {
+      content: '';
+      width: 100%;
+      height: 50%;
+      left: 0;
+      top: 0;
+      background-color: currentColor;
+      border-top-left-radius: 1em;
+      border-top-right-radius: 1em;
+      filter: invert(1); }
+  .light-mode .is-lights-button a {
+    transform: rotate(-45deg); }
+  .dark-mode .is-lights-button a {
+    transform: rotate(135deg); }
 
 /* 2.2. Site Content */
 /* 2.3. Site Footer */
@@ -3300,3 +3329,14 @@ ul.menu,
 
 .has-no-padding-bottom .site-content {
   padding-bottom: 0 !important; }
+
+.dark-mode {
+  --current-color-primary: var(--sm-color-primary);
+  --current-color-secondary: var(--sm-color-secondary);
+  --current-color-tertiary: var(--sm-color-tertiary);
+  --current-dark-primary: var(--sm-light-secondary);
+  --current-dark-secondary: var(--sm-light-primary);
+  --current-dark-tertiary: var(--sm-light-tertiary);
+  --current-light-primary: var(--sm-dark-primary);
+  --current-light-secondary: var(--sm-dark-secondary);
+  --current-light-tertiary: var(--sm-dark-tertiary); }

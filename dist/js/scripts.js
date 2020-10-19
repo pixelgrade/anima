@@ -1698,7 +1698,7 @@ function () {
     this.$menuItems = external_jQuery_default()(MENU_ITEM);
     this.$menuItemsWithChildren = this.$menuItems.filter(MENU_ITEM_WITH_CHILDREN).removeClass(HOVER_CLASS);
     this.$menuItemsWithChildrenLinks = this.$menuItemsWithChildren.children('a');
-    this.searchOverlayButton = external_jQuery_default()('.menu-item a[href*="#search"]');
+    this.searchOverlayButton = external_jQuery_default()('.is-search-button a');
     this.searchOverlayCancelButton = external_jQuery_default()('.c-search-overlay__cancel');
     this.initialize();
   }
@@ -1853,7 +1853,62 @@ function () {
 }();
 
 
+// CONCATENATED MODULE: ./src/js/components/lights-switcher.js
+
+
+
+var LIGHT_THEME = 'light-mode',
+    DARK_THEME = 'dark-mode';
+var theme;
+
+var lights_switcher_LightsSwitcher =
+/*#__PURE__*/
+function () {
+  function LightsSwitcher(element) {
+    classCallCheck_default()(this, LightsSwitcher);
+
+    this.$element = external_jQuery_default()(element);
+    this.$lightsSwitcher = this.$element.find('a');
+    this.checkLocalStorage();
+    this.$lightsSwitcher.on('click', this.switchTheme.bind(this));
+  }
+
+  createClass_default()(LightsSwitcher, [{
+    key: "checkLocalStorage",
+    value: function checkLocalStorage() {
+      if (localStorage) {
+        theme = localStorage.getItem("theme");
+      }
+
+      if (theme === LIGHT_THEME || theme === DARK_THEME) {
+        body.classList.add(theme);
+      } else {
+        body.classList.add(LIGHT_THEME);
+      }
+    }
+  }, {
+    key: "switchTheme",
+    value: function switchTheme(event) {
+      event.preventDefault();
+
+      if (theme === DARK_THEME) {
+        body.classList.replace(DARK_THEME, LIGHT_THEME);
+        localStorage.setItem("theme", "light-mode");
+        theme = LIGHT_THEME;
+      } else {
+        body.classList.replace(LIGHT_THEME, DARK_THEME);
+        localStorage.setItem("theme", "dark-mode");
+        theme = DARK_THEME;
+      }
+    }
+  }]);
+
+  return LightsSwitcher;
+}();
+
+
 // CONCATENATED MODULE: ./src/js/components/app.js
+
 
 
 
@@ -1875,6 +1930,7 @@ function () {
     this.initializeHeader();
     this.initializeNavbar();
     this.initializePromoBar();
+    this.initializeLightsSwitcher();
     this.initializeImages();
     this.initializeCommentsArea();
     this.initializeReservationForm();
@@ -1991,6 +2047,15 @@ function () {
       this.promoBar = new promo_bar_PromoBar(announcementBars, {
         onUpdate: this.onPromoBarUpdate.bind(this)
       });
+    }
+  }, {
+    key: "initializeLightsSwitcher",
+    value: function initializeLightsSwitcher() {
+      var $lightsSwitcher = external_jQuery_default()('.is-lights-button');
+
+      if ($lightsSwitcher.length) {
+        this.lightsSwitcher = new lights_switcher_LightsSwitcher($lightsSwitcher.get(0));
+      }
     }
   }, {
     key: "onPromoBarUpdate",

@@ -15,7 +15,7 @@ export default class Navbar {
 		this.$menuItemsWithChildren = this.$menuItems.filter( MENU_ITEM_WITH_CHILDREN ).removeClass( HOVER_CLASS );
 		this.$menuItemsWithChildrenLinks = this.$menuItemsWithChildren.children( 'a' );
 
-		this.searchOverlayButton = $('.menu-item a[href*="#search"]');
+		this.searchOverlayButton = $('.is-search-button a');
 		this.searchOverlayCancelButton = $('.c-search-overlay__cancel');
 
 		this.initialize();

@@ -104,7 +104,7 @@
     var $this = $(menu_item);
     var urlField = $this.find('.edit-menu-item-url').first();
 
-    if (urlField.val() === '#search') {
+    if (urlField.val() === '#') {
       $this.find('.field-url').first().hide();
     }
   }
