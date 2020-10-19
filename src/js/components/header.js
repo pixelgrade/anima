@@ -282,7 +282,7 @@ class Header {
 	}
 
 	updateSearchOverlayOffset() {
-		if ( below( 'lap' ) ) {
+		if ( below( 'lap' ) && this.$searchOverlay.length ) {
 			this.$searchOverlay[0].paddingTop = Math.max(( this.promoBarHeight - scrollY ), 0) + 'px';
 		}
 	}
