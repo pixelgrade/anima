@@ -2767,6 +2767,20 @@ span.page-numbers {
     @media only screen and (min-width: 1000px) {
       .search-form .search-field {
         padding: 0 .8em 0 1.8em; } }
+  .error404 .search-form .search-submit,
+  .search-no-results .search-form .search-submit {
+    --theme-button-background-color: var(--sm-color-primary);
+    --theme-button-border-color: var(--sm-color-primary);
+    --theme-button-text-color: var(--sm-light-primary);
+    --theme-button-hover-background-color: transparent;
+    --theme-button-hover-border-color: var(--sm-color-primary);
+    --theme-button-hover-text-color: var(--sm-color-primary); }
+  .error404 .search-form .search-field,
+  .search-no-results .search-form .search-field {
+    color: var(--current-dark-primary); }
+  .error404 .search-form .search-icon,
+  .search-no-results .search-form .search-icon {
+    background-color: var(--current-dark-primary); }
 
 /* 3. Blocks */
 /*
