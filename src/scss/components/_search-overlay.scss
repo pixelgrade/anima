@@ -321,8 +321,8 @@
     text-indent: -9999px;
     width: 1em;
     height: 1em;
-    background-color: currentColor;
-    box-shadow: 0 0 0 2px currentColor;
+    background-color: var(--current-dark-primary);
+    border: 2px solid currentColor;
     border-radius: 1em;
 
     padding-bottom: 0 !important;
@@ -336,13 +336,10 @@
       height: 50%;
       left: 0;
       top: 0;
-      background-color: currentColor;
+      background-color: var(--current-light-primary);
 
       border-top-left-radius: 1em;
       border-top-right-radius: 1em;
-
-      filter: invert(1);
-
     }
   }
 

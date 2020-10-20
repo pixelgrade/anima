@@ -1877,13 +1877,21 @@ function () {
     key: "checkLocalStorage",
     value: function checkLocalStorage() {
       if (localStorage) {
-        theme = localStorage.getItem("theme");
+        theme = localStorage.getItem('theme');
+      }
+
+      if (body.classList.contains('is-dark-mode') && theme === null) {
+        localStorage.setItem('theme', 'dark-mode');
+        theme = localStorage.getItem('theme'); // @todo: Razvan check this
+
+        html.classList.add(DARK_THEME);
+        return;
       }
 
       if (theme === LIGHT_THEME || theme === DARK_THEME) {
-        body.classList.add(theme);
+        html.classList.add(theme);
       } else {
-        body.classList.add(LIGHT_THEME);
+        html.classList.add(LIGHT_THEME);
       }
     }
   }, {
@@ -1892,12 +1900,12 @@ function () {
       event.preventDefault();
 
       if (theme === DARK_THEME) {
-        body.classList.replace(DARK_THEME, LIGHT_THEME);
-        localStorage.setItem("theme", "light-mode");
+        html.classList.replace(DARK_THEME, LIGHT_THEME);
+        localStorage.setItem('theme', 'light-mode');
         theme = LIGHT_THEME;
       } else {
-        body.classList.replace(LIGHT_THEME, DARK_THEME);
-        localStorage.setItem("theme", "dark-mode");
+        html.classList.replace(LIGHT_THEME, DARK_THEME);
+        localStorage.setItem('theme', 'dark-mode');
         theme = DARK_THEME;
       }
     }
