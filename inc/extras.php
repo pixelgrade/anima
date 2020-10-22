@@ -319,12 +319,12 @@ function rosa2_should_enqueue_novablocks_fallbacks() {
 function rosa2_add_custom_menu_items() {
 	global $pagenow;
 	if( 'nav-menus.php' == $pagenow ) {
-		add_meta_box( 'rosa2-add-search-links', esc_html__( 'Extras', '__theme_txtd' ), 'wp_nav_menu_item_search_rosa2', 'nav-menus', 'side', 'low' );
+		add_meta_box( 'rosa2-add-search-links', esc_html__( 'Extras', '__theme_txtd' ), 'rosa2_nav_menu_item_search', 'nav-menus', 'side', 'low' );
 	}
 }
 add_action( 'admin_init', 'rosa2_add_custom_menu_items' );
 
-function wp_nav_menu_item_search_rosa2( $object ) {
+function rosa2_nav_menu_item_search( $object ) {
 	global $nav_menu_selected_id;
 
 	$menu_items = array(
@@ -357,20 +357,22 @@ function wp_nav_menu_item_search_rosa2( $object ) {
 
 	?>
 
-    <div id="rosa2-user-menu-links" class="taxonomydiv">
-        <div id="tabs-panel-rosa2-links-all" class="tabs-panel tabs-panel-view-all tabs-panel-active">
+	<div id="rosa2-user-menu-links" class="taxonomydiv">
+		<div id="tabs-panel-rosa2-links-all" class="tabs-panel tabs-panel-view-all tabs-panel-active">
 
-            <ul id="rosa2-user-menu-linkschecklist" class="list:rosa2-user-menu-links categorychecklist form-no-clear">
-				<?php echo walk_nav_menu_tree( array_map( 'wp_setup_nav_menu_item', $menu_items_obj ), 0, (object)array( 'walker' => $walker ) ); ?>
-            </ul>
+			<ul id="rosa2-user-menu-linkschecklist" class="list:rosa2-user-menu-links categorychecklist form-no-clear">
+				<?php echo walk_nav_menu_tree( array_map( 'wp_setup_nav_menu_item', $menu_items_obj ), 0, (object) array( 'walker' => $walker ) ); ?>
+			</ul>
 
-        </div>
-        <p class="button-controls">
+		</div>
+		<p class="button-controls">
 				<span class="add-to-menu">
-					<input type="submit" <?php disabled( $nav_menu_selected_id, 0 ); ?> class="button-secondary submit-add-to-menu right" value="<?php esc_attr_e( 'Add to Menu', '__theme_txtd' ); ?>" name="add-rosa2-user-menu-links-menu-item" id="submit-rosa2-user-menu-links" />
+					<input type="submit" <?php disabled( $nav_menu_selected_id, 0 ); ?> class="button-secondary submit-add-to-menu right"
+					       value="<?php esc_attr_e( 'Add to Menu', '__theme_txtd' ); ?>"
+					       name="add-rosa2-user-menu-links-menu-item" id="submit-rosa2-user-menu-links"/>
 				</span>
-        </p>
-    </div>
+		</p>
+	</div>
 
 	<?php
 }
@@ -400,7 +402,7 @@ function rosa2_output_search_overlay() {
 		}
 	}
 
-	if ( ! $has_search_item || ! rosa2_block_area_has_blocks( 'header' ) ) {
+	if ( ! $has_search_item ) {
 	    return;
     } ?>
 
@@ -422,7 +424,7 @@ function rosa2_output_search_overlay() {
                         'container'      => false,
                         'theme_location' => 'search-suggestions',
                         'menu_id'        => 'search-suggestions-menu',
-                        'fallback_cb'    => false,
+                        'fallback_cb'    => fal
                     ) ); ?>
                 </div><!-- .c-search-overlay__suggestions -->
             <?php } ?>
@@ -431,7 +433,7 @@ function rosa2_output_search_overlay() {
 
     <?php
 }
-add_action('rosa2_after_footer', 'rosa2_output_search_overlay', 10);
+add_action( 'rosa2_after_footer', 'rosa2_output_search_overlay', 10 );
 
 /**
  * Rosa2 custom search form.
