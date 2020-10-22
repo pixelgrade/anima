@@ -392,8 +392,6 @@ function wupdates_add_id_JxLn7( $ids = array() ) {
 }
 add_filter( 'wupdates_gather_ids', 'wupdates_add_id_JxLn7', 10, 1 );
 
-require get_template_directory() . '/inc/customizer.php';
-
 /**
  * Custom template tags for this theme.
  */
