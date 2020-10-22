@@ -1881,7 +1881,7 @@ function () {
       }
 
       if (body.classList.contains('is-dark-mode') && theme === null) {
-        localStorage.setItem('theme', 'dark-mode');
+        localStorage.setItem('theme', DARK_THEME);
         theme = localStorage.getItem('theme'); // @todo: Razvan check this
 
         html.classList.add(DARK_THEME);
@@ -1901,11 +1901,11 @@ function () {
 
       if (theme === DARK_THEME) {
         html.classList.replace(DARK_THEME, LIGHT_THEME);
-        localStorage.setItem('theme', 'light-mode');
+        localStorage.setItem('theme', LIGHT_THEME);
         theme = LIGHT_THEME;
       } else {
         html.classList.replace(LIGHT_THEME, DARK_THEME);
-        localStorage.setItem('theme', 'dark-mode');
+        localStorage.setItem('theme', DARK_THEME);
         theme = DARK_THEME;
       }
     }
