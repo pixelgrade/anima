@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
-const LIGHT_THEME = 'light-mode',
-	  DARK_THEME = 'dark-mode';
+const LIGHT_THEME = 'user-light-mode',
+	  DARK_THEME = 'user-dark-mode';
 
 let theme;
 

@@ -1857,8 +1857,8 @@ function () {
 
 
 
-var LIGHT_THEME = 'light-mode',
-    DARK_THEME = 'dark-mode';
+var LIGHT_THEME = 'user-light-mode',
+    DARK_THEME = 'user-dark-mode';
 var theme;
 
 var lights_switcher_LightsSwitcher =
