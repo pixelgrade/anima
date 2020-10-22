@@ -309,7 +309,7 @@ function rosa2_should_enqueue_novablocks_fallbacks() {
         return true;
     }
 
-    if( is_home() && ! wp_style_is('novablocks/media-style', 'enqueued')) {
+    if( ( is_home() || is_search() || is_archive() ) && ! wp_style_is('novablocks/media-style', 'enqueued')) {
         return true;
     }
 
