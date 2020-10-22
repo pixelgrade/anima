@@ -420,12 +420,12 @@ function rosa2_output_search_overlay() {
 	            ?>
                 <div class="c-search-overlay__suggestions">
                     <p><?php echo wp_kses( $menu_name, wp_kses_allowed_html() ); ?></p>
-                    <?php wp_nav_menu( array(
-                        'container'      => false,
-                        'theme_location' => 'search-suggestions',
-                        'menu_id'        => 'search-suggestions-menu',
-                        'fallback_cb'    => fal
-                    ) ); ?>
+		            <?php wp_nav_menu( array(
+			            'container'      => false,
+			            'theme_location' => 'search-suggestions',
+			            'menu_id'        => 'search-suggestions-menu',
+			            'fallback_cb'    => false
+		            ) ); ?>
                 </div><!-- .c-search-overlay__suggestions -->
             <?php } ?>
         </div><!-- .c-search-overlay__content -->
