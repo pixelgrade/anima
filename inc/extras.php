@@ -322,11 +322,9 @@ function rosa2_add_custom_menu_items() {
 		add_meta_box( 'rosa2-add-search-links', esc_html__( 'Extras', '__theme_txtd' ), 'wp_nav_menu_item_search_rosa2', 'nav-menus', 'side', 'low' );
 	}
 }
-
 add_action( 'admin_init', 'rosa2_add_custom_menu_items' );
 
 function wp_nav_menu_item_search_rosa2( $object ) {
-
 	global $nav_menu_selected_id;
 
 	$menu_items = array(
@@ -369,7 +367,7 @@ function wp_nav_menu_item_search_rosa2( $object ) {
         </div>
         <p class="button-controls">
 				<span class="add-to-menu">
-					<input type="submit"<?php disabled( $nav_menu_selected_id, 0 ); ?> class="button-secondary submit-add-to-menu right" value="<?php esc_attr_e( 'Add to Menu', '__theme_txtd' ); ?>" name="add-rosa2-user-menu-links-menu-item" id="submit-rosa2-user-menu-links" />
+					<input type="submit" <?php disabled( $nav_menu_selected_id, 0 ); ?> class="button-secondary submit-add-to-menu right" value="<?php esc_attr_e( 'Add to Menu', '__theme_txtd' ); ?>" name="add-rosa2-user-menu-links-menu-item" id="submit-rosa2-user-menu-links" />
 				</span>
         </p>
     </div>
@@ -381,25 +379,30 @@ function rosa2_output_search_overlay() {
 
 	$menu_locations = get_nav_menu_locations();
 
+	// Determine if any menu location has a search menu item so we can output the overlay markup.
 	$has_search_item = false;
+	foreach ( $menu_locations as $menu_location ) {
+		$menu_items = wp_get_nav_menu_items( $menu_location );
+		if ( ! $menu_items ) {
+			continue;
+		}
 
-	foreach ( $menu_locations as $location ) {
-
-		$menu_location = wp_get_nav_menu_items( $location );
-
-		foreach ( $menu_location as $menu_item ) {
-
-			if ( $menu_item->url === '#search' ) {
+		foreach ( $menu_items as $menu_item ) {
+			if ( '#search' === $menu_item->url ) {
 				$has_search_item = true;
+				break;
 			}
+		}
+
+		// No need to continue if we have found one.
+		if ( $has_search_item ) {
+			break;
 		}
 	}
 
-	if ( !$has_search_item || ! rosa2_block_area_has_blocks( 'header' ) ) {
+	if ( ! $has_search_item || ! rosa2_block_area_has_blocks( 'header' ) ) {
 	    return;
-    }
-
-    ?>
+    } ?>
 
     <div class="c-search-overlay">
         <div class="c-search-overlay__content">
@@ -414,7 +417,7 @@ function rosa2_output_search_overlay() {
 
 	            ?>
                 <div class="c-search-overlay__suggestions">
-                    <p><?php _e( $menu_name, '__theme_txtd' )?></p>
+                    <p><?php echo wp_kses( $menu_name, wp_kses_allowed_html() ); ?></p>
                     <?php wp_nav_menu( array(
                         'container'      => false,
                         'theme_location' => 'search-suggestions',
@@ -428,37 +431,32 @@ function rosa2_output_search_overlay() {
 
     <?php
 }
-
 add_action('rosa2_after_footer', 'rosa2_output_search_overlay', 10);
 
 /**
- * Rosa2 custom search form
+ * Rosa2 custom search form.
  *
  * @param string $form Form HTML.
  * @return string Modified form HTML.
  */
 function rosa2_custom_search_form( $form ) {
-
-    $placeholder = 'Search ' . esc_html( get_bloginfo( 'name' ) ) . ' ...';
-
 	$form = '<form role="search" method="get" class="search-form" action="' . esc_url( home_url( '/' ) ) . '">
 				<label>
-					<span class="screen-reader-text">' . _x( 'Search for:', 'label' ) . '</span>
-					<input type="search" class="search-field" placeholder="' . esc_attr_x( $placeholder, 'placeholder' ) . '" value="' . get_search_query() . '" name="s" />
+					<span class="screen-reader-text">' . _x( 'Search for:', 'label', '__theme_txtd' ) . '</span>
+					<input type="search" class="search-field" placeholder="' . esc_attr( sprintf( __( 'Search %s...', '__theme_txtd' ), esc_html( get_bloginfo( 'name' ) ) ) ) . '" value="' . get_search_query() . '" name="s" />
 					<span class="search-icon"></span>
 				</label>
-				<input type="submit" class="search-submit" value="' . esc_attr_x( 'Search', 'submit button' ) . '" />
+				<input type="submit" class="search-submit" value="' . esc_attr_x( 'Search', 'submit button', '__theme_txtd' ) . '" />
 			</form>';
 
 	return $form;
 }
-
 add_filter( 'get_search_form', 'rosa2_custom_search_form' );
 
 function rosa2_is_nav_menus_page( $new_edit = null ) {
 	global $pagenow;
-	//make sure we are on the backend
 
+	// Make sure we are on the backend.
 	if ( ! is_admin() ) {
 		return false;
 	}
