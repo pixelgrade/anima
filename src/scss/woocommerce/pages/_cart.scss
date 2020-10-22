@@ -288,6 +288,10 @@
     border-bottom: 0;
 
     text-decoration: none;
+
+    &:before {
+      content: none !important;
+    }
   }
 
   @include specific(5) {
