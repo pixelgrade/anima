@@ -70,37 +70,3 @@ ul.menu,
 .has-no-padding-bottom {
     @include remove-site-content-padding-bottom;
 }
-
-
-// @todo:  This should be moved in a separate SCSS file
-
-.user-dark-mode {
-    @include variation(dark);
-}
-
-.user-light-mode {
-    @include variation(default);
-}
-
-@include below(lap) {
-    .user-dark-mode {
-
-        .c-logo__default {
-            opacity: 0;
-        }
-
-        .site-header-mobile--scrolled  {
-
-            .site-header--mobile {
-
-                .c-logo__default {
-                    opacity: 0;
-                }
-
-                .c-logo__inverted {
-                    opacity: 1;
-                }
-            }
-        }
-    }
-}

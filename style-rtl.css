@@ -1914,6 +1914,28 @@ table {
       text-decoration: none;
       font-weight: 500; }
 
+.user-dark-mode {
+  --current-color-primary: var(--sm-color-primary);
+  --current-color-secondary: var(--sm-color-secondary);
+  --current-color-tertiary: var(--sm-color-tertiary);
+  --current-dark-primary: var(--sm-light-secondary);
+  --current-dark-secondary: var(--sm-light-primary);
+  --current-dark-tertiary: var(--sm-light-tertiary);
+  --current-light-primary: var(--sm-dark-primary);
+  --current-light-secondary: var(--sm-dark-secondary);
+  --current-light-tertiary: var(--sm-dark-tertiary); }
+
+.user-light-mode {
+  --current-color-primary: var(--sm-color-primary);
+  --current-color-secondary: var(--sm-color-secondary);
+  --current-color-tertiary: var(--sm-color-tertiary);
+  --current-dark-primary: var(--sm-dark-primary);
+  --current-dark-secondary: var(--sm-dark-secondary);
+  --current-dark-tertiary: var(--sm-dark-tertiary);
+  --current-light-primary: var(--sm-light-primary);
+  --current-light-secondary: var(--sm-light-secondary);
+  --current-light-tertiary: var(--sm-light-tertiary); }
+
 .is-lights-button {
   display: flex;
   align-items: center; }
@@ -1942,6 +1964,14 @@ table {
     transform: rotate(45deg); }
   .user-dark-mode .is-lights-button a {
     transform: rotate(-135deg); }
+
+@media not screen and (min-width: 1000px) {
+  .user-dark-mode .c-logo__default {
+    opacity: 0; }
+  .user-dark-mode .site-header-mobile--scrolled .site-header--mobile .c-logo__default {
+    opacity: 0; }
+  .user-dark-mode .site-header-mobile--scrolled .site-header--mobile .c-logo__inverted {
+    opacity: 1; } }
 
 /* 2.2. Site Content */
 /* 2.3. Site Footer */
@@ -3336,33 +3366,3 @@ ul.menu,
 
 .has-no-padding-bottom .site-content {
   padding-bottom: 0 !important; }
-
-.user-dark-mode {
-  --current-color-primary: var(--sm-color-primary);
-  --current-color-secondary: var(--sm-color-secondary);
-  --current-color-tertiary: var(--sm-color-tertiary);
-  --current-dark-primary: var(--sm-light-secondary);
-  --current-dark-secondary: var(--sm-light-primary);
-  --current-dark-tertiary: var(--sm-light-tertiary);
-  --current-light-primary: var(--sm-dark-primary);
-  --current-light-secondary: var(--sm-dark-secondary);
-  --current-light-tertiary: var(--sm-dark-tertiary); }
-
-.user-light-mode {
-  --current-color-primary: var(--sm-color-primary);
-  --current-color-secondary: var(--sm-color-secondary);
-  --current-color-tertiary: var(--sm-color-tertiary);
-  --current-dark-primary: var(--sm-dark-primary);
-  --current-dark-secondary: var(--sm-dark-secondary);
-  --current-dark-tertiary: var(--sm-dark-tertiary);
-  --current-light-primary: var(--sm-light-primary);
-  --current-light-secondary: var(--sm-light-secondary);
-  --current-light-tertiary: var(--sm-light-tertiary); }
-
-@media not screen and (min-width: 1000px) {
-  .user-dark-mode .c-logo__default {
-    opacity: 0; }
-  .user-dark-mode .site-header-mobile--scrolled .site-header--mobile .c-logo__default {
-    opacity: 0; }
-  .user-dark-mode .site-header-mobile--scrolled .site-header--mobile .c-logo__inverted {
-    opacity: 1; } }

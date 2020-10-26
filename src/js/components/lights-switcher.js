@@ -9,10 +9,13 @@ export default class LightsSwitcher {
 
 	constructor( element ) {
 		this.$element = $( element );
-		this.$lightsSwitcher = this.$element.find('a');
+		this.$lightsSwitcher = document.querySelectorAll('.is-lights-button a');
 
 		this.checkLocalStorage();
-		this.$lightsSwitcher.on('click', this.switchTheme.bind(this));
+
+		this.$lightsSwitcher.forEach(switcher => {
+			switcher.addEventListener('click', this.switchTheme );
+		});
 	}
 
 	checkLocalStorage() {
@@ -21,10 +24,10 @@ export default class LightsSwitcher {
 			theme = localStorage.getItem('theme')
 		}
 
-		if( body.classList.contains('is-dark-mode') && theme === null ) {
+		if( $('body').is( '.is-dark-mode' ) && theme === null ) {
 
 			localStorage.setItem('theme', DARK_THEME);
-			theme = localStorage.getItem('theme'); // @todo: Razvan check this
+			theme = localStorage.getItem('theme');
 			html.classList.add(DARK_THEME);
 
 			return;
