@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Add colors section and options to the Customify config
-add_filter( 'customify_filter_fields', 'pixelgrade_add_colors_section_to_customify_config', 50, 1 );
+add_filter( 'customify_filter_fields', 'pixelgrade_add_colors_section_to_customify_config', 120, 1 );
 
 // Prepend theme color palette to the default color palettes list
 add_filter( 'customify_get_color_palettes', 'pixelgrade_add_default_color_palettes' );
@@ -78,8 +78,25 @@ function pixelgrade_add_colors_section_to_customify_config( $config ) {
 					'color_light_3'
 				),
 			),
+
+			'sm_dark_mode'       => array(
+				'type'         => 'sm_radio',
+				'label'        => esc_html__( 'Appearance', 'customify' ),
+				'default'      => 'auto',
+			),
 		),
 	) );
+
+	if ( ! isset( $config['sections']['style_manager_section']['options']['sm_dark_mode']['choices'] ) ) {
+		$config['sections']['style_manager_section']['options']['sm_dark_mode']['choices'] = array();
+	}
+
+	// We want new options for sm_dark_mode so we are going to create a new array
+	$config['sections']['style_manager_section']['options']['sm_dark_mode']['choices'] = array(
+		'auto'  => esc_html__( 'Auto', 'customify' ),
+		'light' => esc_html__( 'Light', 'customify' ),
+		'dark'  => esc_html__( 'Dark', 'customify' ),
+	);
 
 	if ( ! isset( $config['sections']['colors_section'] ) ) {
 		$config['sections']['colors_section'] = array();

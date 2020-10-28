@@ -1471,16 +1471,16 @@ table {
   [class] .has-hero .c-menu-toggle,
   [class] .is-dark-mode .site-header--mobile,
   [class] .is-dark-mode .c-menu-toggle,
-  [class] .user-dark-mode .site-header--mobile,
-  [class] .user-dark-mode .c-menu-toggle {
+  [class] .color-scheme-dark .site-header--mobile,
+  [class] .color-scheme-dark .c-menu-toggle {
     color: var(--sm-light-primary); }
   [class] .has-hero .site-header--mobile .c-logo__inverted,
   [class] .is-dark-mode .site-header--mobile .c-logo__inverted,
-  [class] .user-dark-mode .site-header--mobile .c-logo__inverted {
+  [class] .color-scheme-dark .site-header--mobile .c-logo__inverted {
     opacity: 1; }
   [class] .has-hero .site-header--mobile .c-logo__default,
   [class] .is-dark-mode .site-header--mobile .c-logo__default,
-  [class] .user-dark-mode .site-header--mobile .c-logo__default {
+  [class] .color-scheme-dark .site-header--mobile .c-logo__default {
     opacity: 0; }
   [class] .sub-menu {
     margin-right: calc(var(--theme-wrapper-sides-spacing) * -1);
@@ -1636,9 +1636,9 @@ table {
   width: 100%;
   opacity: 0; }
   .is-dark-mode .c-logo__inverted,
-  .user-dark-mode .c-logo__inverted {
+  .color-scheme-dark .c-logo__inverted {
     opacity: 1; }
-  .user-light-mode .c-logo__inverted {
+  .color-scheme-light .c-logo__inverted {
     opacity: 0; }
 
 .c-logo__default,
@@ -1914,7 +1914,7 @@ table {
       text-decoration: none;
       font-weight: 500; }
 
-.user-dark-mode {
+.color-scheme-dark {
   --current-color-primary: var(--sm-color-primary);
   --current-color-secondary: var(--sm-color-secondary);
   --current-color-tertiary: var(--sm-color-tertiary);
@@ -1925,7 +1925,7 @@ table {
   --current-light-secondary: var(--sm-dark-secondary);
   --current-light-tertiary: var(--sm-dark-tertiary); }
 
-.user-light-mode {
+.color-scheme-light {
   --current-color-primary: var(--sm-color-primary);
   --current-color-secondary: var(--sm-color-secondary);
   --current-color-tertiary: var(--sm-color-tertiary);
@@ -1935,6 +1935,30 @@ table {
   --current-light-primary: var(--sm-light-primary);
   --current-light-secondary: var(--sm-light-secondary);
   --current-light-tertiary: var(--sm-light-tertiary); }
+
+@media (prefers-color-scheme: light) {
+  .color-scheme-auto {
+    --current-color-primary: var(--sm-color-primary);
+    --current-color-secondary: var(--sm-color-secondary);
+    --current-color-tertiary: var(--sm-color-tertiary);
+    --current-dark-primary: var(--sm-dark-primary);
+    --current-dark-secondary: var(--sm-dark-secondary);
+    --current-dark-tertiary: var(--sm-dark-tertiary);
+    --current-light-primary: var(--sm-light-primary);
+    --current-light-secondary: var(--sm-light-secondary);
+    --current-light-tertiary: var(--sm-light-tertiary); } }
+
+@media (prefers-color-scheme: dark) {
+  .color-scheme-auto {
+    --current-color-primary: var(--sm-color-primary);
+    --current-color-secondary: var(--sm-color-secondary);
+    --current-color-tertiary: var(--sm-color-tertiary);
+    --current-dark-primary: var(--sm-light-secondary);
+    --current-dark-secondary: var(--sm-light-primary);
+    --current-dark-tertiary: var(--sm-light-tertiary);
+    --current-light-primary: var(--sm-dark-primary);
+    --current-light-secondary: var(--sm-dark-secondary);
+    --current-light-tertiary: var(--sm-dark-tertiary); } }
 
 .is-lights-button {
   display: flex;
@@ -1960,18 +1984,69 @@ table {
       background-color: var(--current-light-primary);
       border-top-right-radius: 1em;
       border-top-left-radius: 1em; }
-  .user-light-mode .is-lights-button a {
+  .color-scheme-light .is-lights-button a {
     transform: rotate(45deg); }
-  .user-dark-mode .is-lights-button a {
+  .color-scheme-dark .is-lights-button a {
     transform: rotate(-135deg); }
 
 @media not screen and (min-width: 1000px) {
-  .user-dark-mode .c-logo__default {
+  .color-scheme-dark .c-logo__default {
     opacity: 0; }
-  .user-dark-mode .site-header-mobile--scrolled .site-header--mobile .c-logo__default {
+  .color-scheme-dark .site-header-mobile--scrolled .site-header--mobile .c-logo__default {
     opacity: 0; }
-  .user-dark-mode .site-header-mobile--scrolled .site-header--mobile .c-logo__inverted {
+  .color-scheme-dark .site-header-mobile--scrolled .site-header--mobile .c-logo__inverted {
     opacity: 1; } }
+
+/*
+ * Dark Mode
+ */
+@media (prefers-color-scheme: dark) {
+  .color-scheme-auto {
+    --current-color-primary: var(--sm-color-primary);
+    --current-color-secondary: var(--sm-color-secondary);
+    --current-color-tertiary: var(--sm-color-tertiary);
+    --current-dark-primary: var(--sm-light-secondary);
+    --current-dark-secondary: var(--sm-light-primary);
+    --current-dark-tertiary: var(--sm-light-tertiary);
+    --current-light-primary: var(--sm-dark-primary);
+    --current-light-secondary: var(--sm-dark-secondary);
+    --current-light-tertiary: var(--sm-dark-tertiary); }
+    .color-scheme-auto .site-header--mobile,
+    .color-scheme-auto .c-menu-toggle {
+      color: var(--sm-light-primary); }
+    .color-scheme-auto .site-header--mobile .c-logo__inverted {
+      opacity: 1; }
+    .color-scheme-auto .site-header--mobile .c-logo__default {
+      opacity: 0; }
+    .color-scheme-auto .c-logo__inverted {
+      opacity: 1; }
+    .color-scheme-auto .novablocks-opentable.novablocks-opentable__standard[class] .ot-powered-by {
+      -webkit-filter: unset;
+      mix-blend-mode: unset; }
+    .color-scheme-auto .novablocks-opentable.novablocks-opentable__wide[class] .ot-powered-by {
+      -webkit-filter: invert(1) saturate(0);
+      mix-blend-mode: lighten; }
+    .color-scheme-auto .is-lights-button a {
+      transform: rotate(-135deg); } }
+
+/*
+ * Light Mode
+ */
+@media (prefers-color-scheme: light) {
+  .color-scheme-auto {
+    --current-color-primary: var(--sm-color-primary);
+    --current-color-secondary: var(--sm-color-secondary);
+    --current-color-tertiary: var(--sm-color-tertiary);
+    --current-dark-primary: var(--sm-dark-primary);
+    --current-dark-secondary: var(--sm-dark-secondary);
+    --current-dark-tertiary: var(--sm-dark-tertiary);
+    --current-light-primary: var(--sm-light-primary);
+    --current-light-secondary: var(--sm-light-secondary);
+    --current-light-tertiary: var(--sm-light-tertiary); }
+    .color-scheme-auto .c-logo__inverted {
+      opacity: 0; }
+    .color-scheme-auto .is-lights-button a {
+      transform: rotate(45deg); } }
 
 /* 2.2. Site Content */
 /* 2.3. Site Footer */

@@ -1,9 +1,19 @@
-.user-dark-mode {
+.color-scheme-dark {
   @include variation(dark);
 }
 
-.user-light-mode {
+.color-scheme-light {
   @include variation(default);
+}
+
+.color-scheme-auto {
+  @media(prefers-color-scheme: light) {
+    @include variation(default);
+  }
+
+  @media(prefers-color-scheme: dark) {
+    @include variation(dark);
+  }
 }
 
 .is-lights-button {
@@ -38,13 +48,13 @@
     }
   }
 
-  .user-light-mode & {
+  .color-scheme-light & {
     a {
       transform: rotate(-45deg);
     }
   }
 
-  .user-dark-mode & {
+  .color-scheme-dark & {
     a {
       transform: rotate(135deg);
     }
@@ -54,7 +64,7 @@
 // Adjust logo based on Lights Mode
 
 @include below(lap) {
-  .user-dark-mode {
+  .color-scheme-dark {
 
     .c-logo__default {
       opacity: 0;
@@ -72,6 +82,96 @@
           opacity: 1;
         }
       }
+    }
+  }
+}
+
+
+/*
+ * Dark Mode
+ */
+
+.color-scheme-auto {
+  @media(prefers-color-scheme: dark) {
+
+    @include variation(dark);
+
+    .site-header--mobile,
+    .c-menu-toggle {
+      color: var(--sm-light-primary);
+    }
+
+    .site-header--mobile {
+
+      .c-logo__inverted {
+        opacity: 1;
+      }
+
+      .c-logo__default {
+        opacity: 0;
+      }
+    }
+
+    .c-logo__inverted {
+      opacity: 1;
+    }
+
+    .novablocks-opentable {
+      &.novablocks-opentable__standard[class] {
+        .ot-powered-by {
+          -webkit-filter: unset;
+          mix-blend-mode: unset;
+        }
+      }
+
+      &.novablocks-opentable__wide[class] {
+        .ot-powered-by {
+          -webkit-filter: invert(1) saturate(0);
+          mix-blend-mode: lighten;
+        }
+      }
+    }
+
+    .is-lights-button a {
+        transform: rotate(135deg);
+    }
+
+    @include below(lap) {
+
+      .c-logo__default {
+        opacity: 0;
+      }
+
+      .site-header-mobile--scrolled  {
+
+        .site-header--mobile {
+
+          .c-logo__default {
+            opacity: 0;
+          }
+
+          .c-logo__inverted {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*
+ * Light Mode
+ */
+.color-scheme-auto {
+  @media(prefers-color-scheme: light) {
+    @include variation(default);
+
+    .c-logo__inverted {
+      opacity: 0;
+    }
+
+    .is-lights-button a {
+      transform: rotate(-45deg);
     }
   }
 }

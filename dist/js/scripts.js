@@ -1857,44 +1857,75 @@ function () {
 
 
 
-var LIGHT_THEME = 'user-light-mode',
-    DARK_THEME = 'user-dark-mode';
-var theme;
+var LIGHT_THEME = 'color-scheme-light',
+    DARK_THEME = 'color-scheme-dark',
+    AUTO_THEME = 'color-scheme-auto',
+    COLOR_SCHEME_BUTTON = '.is-lights-button',
+    USER_PREFER_DARK = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+var lights_switcher_$body = external_jQuery_default()('body');
 
 var lights_switcher_LightsSwitcher =
 /*#__PURE__*/
 function () {
   function LightsSwitcher(element) {
-    var _this = this;
-
     classCallCheck_default()(this, LightsSwitcher);
 
     this.$element = external_jQuery_default()(element);
-    this.$lightsSwitcher = document.querySelectorAll('.is-lights-button a');
-    this.checkLocalStorage();
-    this.$lightsSwitcher.forEach(function (switcher) {
-      switcher.addEventListener('click', _this.switchTheme);
-    });
+    this.$colorSchemeButtons = external_jQuery_default()(COLOR_SCHEME_BUTTON);
+    this.$colorSchemeButtonsLink = this.$colorSchemeButtons.children('a');
+    this.theme = null;
+    this.initialize();
   }
 
   createClass_default()(LightsSwitcher, [{
+    key: "initialize",
+    value: function initialize() {
+      this.checkLocalStorage();
+      this.bindClicks();
+    }
+  }, {
+    key: "bindClicks",
+    value: function bindClicks() {
+      this.$colorSchemeButtonsLink.on('click', this.switchTheme);
+    }
+  }, {
     key: "checkLocalStorage",
     value: function checkLocalStorage() {
+      // Checking local storage for color scheme value.
       if (localStorage) {
-        theme = localStorage.getItem('theme');
-      }
+        this.theme = localStorage.getItem('theme');
+      } // If color scheme is set on auto and
+      // theme was not defined by the user, do nothing.
 
-      if (external_jQuery_default()('body').is('.is-dark-mode') && theme === null) {
-        localStorage.setItem('theme', DARK_THEME);
-        theme = localStorage.getItem('theme');
-        html.classList.add(DARK_THEME);
+
+      if (lights_switcher_$body.hasClass(AUTO_THEME) && this.theme === null) {
         return;
-      }
+      } // If color scheme has been defined by the use
+      // make sure we remove color-scheme-auto class.
 
-      if (theme === LIGHT_THEME || theme === DARK_THEME) {
-        html.classList.add(theme);
-      } else {
-        html.classList.add(LIGHT_THEME);
+
+      if (this.theme !== null) {
+        if (lights_switcher_$body.hasClass(AUTO_THEME)) {
+          lights_switcher_$body.removeClass(AUTO_THEME);
+        }
+      } // When theme is set to dark,
+      // add color-scheme-dark class and
+      // remove color-scheme-light class
+      // and vice-versa if theme is set to light.
+
+
+      if (this.theme === DARK_THEME) {
+        lights_switcher_$body.addClass(DARK_THEME);
+
+        if (lights_switcher_$body.hasClass(LIGHT_THEME)) {
+          lights_switcher_$body.removeClass(LIGHT_THEME);
+        }
+      } else if (this.theme === LIGHT_THEME) {
+        lights_switcher_$body.addClass(LIGHT_THEME);
+
+        if (lights_switcher_$body.hasClass(DARK_THEME)) {
+          lights_switcher_$body.removeClass(DARK_THEME);
+        }
       }
     }
   }, {
@@ -1902,14 +1933,63 @@ function () {
     value: function switchTheme(event) {
       event.preventDefault();
 
-      if (theme === DARK_THEME) {
-        html.classList.replace(DARK_THEME, LIGHT_THEME);
+      if (localStorage) {
+        this.theme = localStorage.getItem('theme');
+      } // User choose a theme, so we are going
+      // to remove color-scheme-auto.
+
+
+      if (lights_switcher_$body.hasClass(AUTO_THEME)) {
+        lights_switcher_$body.removeClass(AUTO_THEME);
+      }
+
+      if (this.theme === DARK_THEME) {
+        // If theme was dark, we are going
+        // to change it on light
+        lights_switcher_$body.removeClass(DARK_THEME).addClass(LIGHT_THEME);
         localStorage.setItem('theme', LIGHT_THEME);
-        theme = LIGHT_THEME;
-      } else {
-        html.classList.replace(LIGHT_THEME, DARK_THEME);
+        this.theme = LIGHT_THEME;
+      } else if (this.theme === LIGHT_THEME) {
+        // If theme was light, we are going
+        // to change it on dark
+        lights_switcher_$body.removeClass(LIGHT_THEME).addClass(DARK_THEME);
         localStorage.setItem('theme', DARK_THEME);
-        theme = DARK_THEME;
+        this.theme = DARK_THEME;
+      } else {
+        // Before first click, color scheme
+        // is not defined so we are going
+        // to define it considering color scheme setting
+        // or user system preference.
+        // When color scheme is set on light
+        // we are going to switch it on dark
+        if (lights_switcher_$body.hasClass(LIGHT_THEME)) {
+          lights_switcher_$body.removeClass(LIGHT_THEME).addClass(DARK_THEME);
+          localStorage.setItem('theme', DARK_THEME);
+          this.theme = DARK_THEME;
+        } else if (lights_switcher_$body.hasClass(DARK_THEME)) {
+          // When color scheme is set on dark
+          // we are going to switch it on light
+          lights_switcher_$body.removeClass(DARK_THEME).addClass(LIGHT_THEME);
+          localStorage.setItem('theme', LIGHT_THEME);
+          this.theme = LIGHT_THEME;
+        } else {
+          // When color scheme is set on auto,
+          // we are going to consider user system preferences.
+          if (USER_PREFER_DARK) {
+            // User prefer dark, website is currently dark
+            // and we are switch it to light.
+            lights_switcher_$body.removeClass(DARK_THEME).addClass(LIGHT_THEME);
+            localStorage.setItem('theme', LIGHT_THEME);
+            this.theme = LIGHT_THEME;
+          } else {
+            // User is not preferring dark,
+            // website is currently light and we
+            // are going to switch it to dark.
+            lights_switcher_$body.removeClass(LIGHT_THEME).addClass(DARK_THEME);
+            localStorage.setItem('theme', DARK_THEME);
+            this.theme = DARK_THEME;
+          }
+        }
       }
     }
   }]);
