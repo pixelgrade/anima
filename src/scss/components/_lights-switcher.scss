@@ -1,5 +1,5 @@
 .color-scheme-dark {
-  @include variation(dark);
+  @include variation(darker);
 }
 
 .color-scheme-light {
@@ -12,7 +12,7 @@
   }
 
   @media(prefers-color-scheme: dark) {
-    @include variation(dark);
+    @include variation(darker);
   }
 }
 
@@ -94,7 +94,7 @@
 .color-scheme-auto {
   @media(prefers-color-scheme: dark) {
 
-    @include variation(dark);
+    @include variation(darker);
 
     .site-header--mobile,
     .c-menu-toggle {
@@ -164,7 +164,6 @@
  */
 .color-scheme-auto {
   @media(prefers-color-scheme: light) {
-    @include variation(default);
 
     .c-logo__inverted {
       opacity: 0;

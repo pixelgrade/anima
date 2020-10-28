@@ -1863,6 +1863,7 @@ var LIGHT_THEME = 'color-scheme-light',
     COLOR_SCHEME_BUTTON = '.is-lights-button',
     USER_PREFER_DARK = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 var lights_switcher_$body = external_jQuery_default()('body');
+var lights_switcher_$html = external_jQuery_default()('html');
 
 var lights_switcher_LightsSwitcher =
 /*#__PURE__*/
@@ -1915,16 +1916,16 @@ function () {
 
 
       if (this.theme === DARK_THEME) {
-        lights_switcher_$body.addClass(DARK_THEME);
+        lights_switcher_$html.addClass(DARK_THEME);
 
-        if (lights_switcher_$body.hasClass(LIGHT_THEME)) {
-          lights_switcher_$body.removeClass(LIGHT_THEME);
+        if (lights_switcher_$html.hasClass(LIGHT_THEME)) {
+          lights_switcher_$html.removeClass(LIGHT_THEME);
         }
       } else if (this.theme === LIGHT_THEME) {
-        lights_switcher_$body.addClass(LIGHT_THEME);
+        lights_switcher_$html.addClass(LIGHT_THEME);
 
-        if (lights_switcher_$body.hasClass(DARK_THEME)) {
-          lights_switcher_$body.removeClass(DARK_THEME);
+        if (lights_switcher_$html.hasClass(DARK_THEME)) {
+          lights_switcher_$html.removeClass(DARK_THEME);
         }
       }
     }
@@ -1946,13 +1947,13 @@ function () {
       if (this.theme === DARK_THEME) {
         // If theme was dark, we are going
         // to change it on light
-        lights_switcher_$body.removeClass(DARK_THEME).addClass(LIGHT_THEME);
+        lights_switcher_$html.removeClass(DARK_THEME).addClass(LIGHT_THEME);
         localStorage.setItem('theme', LIGHT_THEME);
         this.theme = LIGHT_THEME;
       } else if (this.theme === LIGHT_THEME) {
         // If theme was light, we are going
         // to change it on dark
-        lights_switcher_$body.removeClass(LIGHT_THEME).addClass(DARK_THEME);
+        lights_switcher_$html.removeClass(LIGHT_THEME).addClass(DARK_THEME);
         localStorage.setItem('theme', DARK_THEME);
         this.theme = DARK_THEME;
       } else {
@@ -1962,14 +1963,14 @@ function () {
         // or user system preference.
         // When color scheme is set on light
         // we are going to switch it on dark
-        if (lights_switcher_$body.hasClass(LIGHT_THEME)) {
-          lights_switcher_$body.removeClass(LIGHT_THEME).addClass(DARK_THEME);
+        if (lights_switcher_$html.hasClass(LIGHT_THEME)) {
+          lights_switcher_$html.removeClass(LIGHT_THEME).addClass(DARK_THEME);
           localStorage.setItem('theme', DARK_THEME);
           this.theme = DARK_THEME;
         } else if (lights_switcher_$body.hasClass(DARK_THEME)) {
           // When color scheme is set on dark
           // we are going to switch it on light
-          lights_switcher_$body.removeClass(DARK_THEME).addClass(LIGHT_THEME);
+          lights_switcher_$html.removeClass(DARK_THEME).addClass(LIGHT_THEME);
           localStorage.setItem('theme', LIGHT_THEME);
           this.theme = LIGHT_THEME;
         } else {
@@ -1978,14 +1979,14 @@ function () {
           if (USER_PREFER_DARK) {
             // User prefer dark, website is currently dark
             // and we are switch it to light.
-            lights_switcher_$body.removeClass(DARK_THEME).addClass(LIGHT_THEME);
+            lights_switcher_$html.removeClass(DARK_THEME).addClass(LIGHT_THEME);
             localStorage.setItem('theme', LIGHT_THEME);
             this.theme = LIGHT_THEME;
           } else {
             // User is not preferring dark,
             // website is currently light and we
             // are going to switch it to dark.
-            lights_switcher_$body.removeClass(LIGHT_THEME).addClass(DARK_THEME);
+            lights_switcher_$html.removeClass(LIGHT_THEME).addClass(DARK_THEME);
             localStorage.setItem('theme', DARK_THEME);
             this.theme = DARK_THEME;
           }

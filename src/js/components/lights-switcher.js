@@ -7,6 +7,7 @@ const LIGHT_THEME = 'color-scheme-light',
 	USER_PREFER_DARK = window.matchMedia && window.matchMedia( '(prefers-color-scheme: dark)' ).matches;
 
 const $body = $( 'body' );
+const $html = $( 'html' );
 
 export default class LightsSwitcher {
 
@@ -62,18 +63,18 @@ export default class LightsSwitcher {
 
 		if ( this.theme === DARK_THEME ) {
 
-			$body.addClass( DARK_THEME );
+			$html.addClass( DARK_THEME );
 
-			if ( $body.hasClass( LIGHT_THEME ) ) {
-				$body.removeClass( LIGHT_THEME )
+			if ( $html.hasClass( LIGHT_THEME ) ) {
+				$html.removeClass( LIGHT_THEME )
 			}
 
 		} else if ( this.theme === LIGHT_THEME ) {
 
-			$body.addClass( LIGHT_THEME );
+			$html.addClass( LIGHT_THEME );
 
-			if ( $body.hasClass( DARK_THEME ) ) {
-				$body.removeClass( DARK_THEME )
+			if ( $html.hasClass( DARK_THEME ) ) {
+				$html.removeClass( DARK_THEME )
 			}
 		}
 	}
@@ -98,7 +99,7 @@ export default class LightsSwitcher {
 			// If theme was dark, we are going
 			// to change it on light
 
-			$body.removeClass( DARK_THEME ).addClass( LIGHT_THEME );
+			$html.removeClass( DARK_THEME ).addClass( LIGHT_THEME );
 			localStorage.setItem( 'theme', LIGHT_THEME );
 			this.theme = LIGHT_THEME;
 
@@ -107,7 +108,7 @@ export default class LightsSwitcher {
 			// If theme was light, we are going
 			// to change it on dark
 
-			$body.removeClass( LIGHT_THEME ).addClass( DARK_THEME );
+			$html.removeClass( LIGHT_THEME ).addClass( DARK_THEME );
 			localStorage.setItem( 'theme', DARK_THEME );
 			this.theme = DARK_THEME;
 
@@ -122,8 +123,8 @@ export default class LightsSwitcher {
 			// When color scheme is set on light
 			// we are going to switch it on dark
 
-			if ( $body.hasClass( LIGHT_THEME ) ) {
-				$body.removeClass( LIGHT_THEME ).addClass( DARK_THEME );
+			if ( $html.hasClass( LIGHT_THEME ) ) {
+				$html.removeClass( LIGHT_THEME ).addClass( DARK_THEME );
 				localStorage.setItem( 'theme', DARK_THEME );
 				this.theme = DARK_THEME;
 			} else if ( $body.hasClass( DARK_THEME ) ) {
@@ -131,7 +132,7 @@ export default class LightsSwitcher {
 				// When color scheme is set on dark
 				// we are going to switch it on light
 
-				$body.removeClass( DARK_THEME ).addClass( LIGHT_THEME );
+				$html.removeClass( DARK_THEME ).addClass( LIGHT_THEME );
 				localStorage.setItem( 'theme', LIGHT_THEME );
 				this.theme = LIGHT_THEME;
 			} else {
@@ -144,7 +145,7 @@ export default class LightsSwitcher {
 					// User prefer dark, website is currently dark
 					// and we are switch it to light.
 
-					$body.removeClass( DARK_THEME ).addClass( LIGHT_THEME );
+					$html.removeClass( DARK_THEME ).addClass( LIGHT_THEME );
 					localStorage.setItem( 'theme', LIGHT_THEME );
 					this.theme = LIGHT_THEME;
 
@@ -154,7 +155,7 @@ export default class LightsSwitcher {
 					// website is currently light and we
 					// are going to switch it to dark.
 
-					$body.removeClass( LIGHT_THEME ).addClass( DARK_THEME );
+					$html.removeClass( LIGHT_THEME ).addClass( DARK_THEME );
 					localStorage.setItem( 'theme', DARK_THEME );
 					this.theme = DARK_THEME;
 
