@@ -6,7 +6,6 @@ const LIGHT_THEME = 'color-scheme-light',
 	COLOR_SCHEME_BUTTON = '.is-lights-button',
 	USER_PREFER_DARK = window.matchMedia && window.matchMedia( '(prefers-color-scheme: dark)' ).matches;
 
-const $body = $( 'body' );
 const $html = $( 'html' );
 
 export default class LightsSwitcher {
@@ -43,7 +42,10 @@ export default class LightsSwitcher {
 		// If color scheme is set on auto and
 		// theme was not defined by the user, do nothing.
 
-		if ( $body.hasClass( AUTO_THEME ) && this.theme === null ) {
+		if ( $html.hasClass( AUTO_THEME ) && this.theme === null ) {
+
+			$html.addClass(AUTO_THEME);
+
 			return;
 		}
 
@@ -51,8 +53,8 @@ export default class LightsSwitcher {
 		// make sure we remove color-scheme-auto class.
 
 		if ( this.theme !== null ) {
-			if ( $body.hasClass( AUTO_THEME ) ) {
-				$body.removeClass( AUTO_THEME )
+			if ( $html.hasClass( AUTO_THEME ) ) {
+				$html.removeClass( AUTO_THEME )
 			}
 		}
 
@@ -90,8 +92,8 @@ export default class LightsSwitcher {
 		// User choose a theme, so we are going
 		// to remove color-scheme-auto.
 
-		if ( $body.hasClass( AUTO_THEME ) ) {
-			$body.removeClass( AUTO_THEME );
+		if ( $html.hasClass( AUTO_THEME ) ) {
+			$html.removeClass( AUTO_THEME );
 		}
 
 		if ( this.theme === DARK_THEME ) {
@@ -127,7 +129,7 @@ export default class LightsSwitcher {
 				$html.removeClass( LIGHT_THEME ).addClass( DARK_THEME );
 				localStorage.setItem( 'theme', DARK_THEME );
 				this.theme = DARK_THEME;
-			} else if ( $body.hasClass( DARK_THEME ) ) {
+			} else if ( $html.hasClass( DARK_THEME ) ) {
 
 				// When color scheme is set on dark
 				// we are going to switch it on light

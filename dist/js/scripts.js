@@ -1862,7 +1862,6 @@ var LIGHT_THEME = 'color-scheme-light',
     AUTO_THEME = 'color-scheme-auto',
     COLOR_SCHEME_BUTTON = '.is-lights-button',
     USER_PREFER_DARK = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-var lights_switcher_$body = external_jQuery_default()('body');
 var lights_switcher_$html = external_jQuery_default()('html');
 
 var lights_switcher_LightsSwitcher =
@@ -1899,15 +1898,16 @@ function () {
       // theme was not defined by the user, do nothing.
 
 
-      if (lights_switcher_$body.hasClass(AUTO_THEME) && this.theme === null) {
+      if (lights_switcher_$html.hasClass(AUTO_THEME) && this.theme === null) {
+        lights_switcher_$html.addClass(AUTO_THEME);
         return;
       } // If color scheme has been defined by the use
       // make sure we remove color-scheme-auto class.
 
 
       if (this.theme !== null) {
-        if (lights_switcher_$body.hasClass(AUTO_THEME)) {
-          lights_switcher_$body.removeClass(AUTO_THEME);
+        if (lights_switcher_$html.hasClass(AUTO_THEME)) {
+          lights_switcher_$html.removeClass(AUTO_THEME);
         }
       } // When theme is set to dark,
       // add color-scheme-dark class and
@@ -1940,8 +1940,8 @@ function () {
       // to remove color-scheme-auto.
 
 
-      if (lights_switcher_$body.hasClass(AUTO_THEME)) {
-        lights_switcher_$body.removeClass(AUTO_THEME);
+      if (lights_switcher_$html.hasClass(AUTO_THEME)) {
+        lights_switcher_$html.removeClass(AUTO_THEME);
       }
 
       if (this.theme === DARK_THEME) {
@@ -1967,7 +1967,7 @@ function () {
           lights_switcher_$html.removeClass(LIGHT_THEME).addClass(DARK_THEME);
           localStorage.setItem('theme', DARK_THEME);
           this.theme = DARK_THEME;
-        } else if (lights_switcher_$body.hasClass(DARK_THEME)) {
+        } else if (lights_switcher_$html.hasClass(DARK_THEME)) {
           // When color scheme is set on dark
           // we are going to switch it on light
           lights_switcher_$html.removeClass(DARK_THEME).addClass(LIGHT_THEME);

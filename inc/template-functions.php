@@ -48,8 +48,6 @@ function rosa2_body_classes( $classes ) {
 		$classes[] = 'has-moderate-media-card-after-hero';
 	}
 
-	$classes[] = 'color-scheme-' . pixelgrade_option('sm_dark_mode');
-
 	return $classes;
 }
 add_filter( 'body_class', 'rosa2_body_classes' );
