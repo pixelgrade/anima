@@ -1925,8 +1925,9 @@ table {
     text-indent: -9999px;
     width: 1.2em;
     height: 1.2em;
-    background-color: var(--sm-dark-primary);
-    box-shadow: 0 0 0 2px currentColor;
+    color: inherit;
+    background-color: transparent;
+    box-shadow: inset 0 0 0 2px currentColor;
     border-radius: 1em;
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
@@ -1939,7 +1940,7 @@ table {
       height: 50%;
       left: 0;
       top: 0;
-      background-color: var(--sm-light-primary);
+      background-color: currentColor;
       border-top-left-radius: 1em;
       border-top-right-radius: 1em; }
   .is-dark .color-scheme-switcher-button a {
