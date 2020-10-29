@@ -333,7 +333,7 @@ function rosa2_nav_menu_item_search( $object ) {
 			'label' => esc_html__( 'Search', '__theme_txtd' ),
 		),
 
-		'#lights' => array(
+		'#color-scheme-switcher' => array(
 			'title' => esc_html__( 'Dark Mode Switcher', '__theme_txtd' ),
 			'label' => esc_html__( 'Dark Mode Switcher', '__theme_txtd' ),
 		)

@@ -70,3 +70,40 @@ ul.menu,
 .has-no-padding-bottom {
     @include remove-site-content-padding-bottom;
 }
+
+
+@media not screen and (min-width: 1000px) {
+    .c-menu-toggle__checkbox ~ .site-header {
+        display: grid !important;
+        grid-template-columns: 1fr auto auto;
+    }
+
+    .site-header__wrapper {
+        grid-column: 1/4;
+        grid-row: 1;
+        
+        .color-scheme-switcher-button {
+            display: none;
+        }
+    }
+
+    .scheme-switcher__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        grid-column: 2/3;
+        grid-row: 1;
+
+        order: 2;
+
+        height: 83px;
+        margin-left: 1em;
+        padding-right: var(--theme-wrapper-sides-spacing);
+    }
+
+    .search-button__wrapper {
+        grid-column: 1/2;
+        grid-row: 1;
+        justify-self: flex-end;
+    }
+}

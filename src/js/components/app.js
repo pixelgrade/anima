@@ -7,7 +7,7 @@ import CommentsArea from './commentsArea';
 import Header from './header';
 import PromoBar from "./promo-bar";
 import Navbar from "./navbar";
-import LightsSwitcher from "./lights-switcher";
+import DarkMode from "./dark-mode";
 
 export default class App {
 
@@ -16,7 +16,7 @@ export default class App {
 		this.initializeHeader();
 		this.initializeNavbar();
 		this.initializePromoBar();
-		this.initializeLightsSwitcher();
+		this.initializeDarkMode();
 		this.initializeImages();
 		this.initializeCommentsArea();
 		this.initializeReservationForm();
@@ -124,12 +124,8 @@ export default class App {
 		});
 	}
 
-	initializeLightsSwitcher() {
-		const $lightsSwitcher = $('.is-lights-button');
-
-		if($lightsSwitcher.length) {
-			this.lightsSwitcher = new LightsSwitcher( $lightsSwitcher.get(0) );
-		}
+	initializeDarkMode() {
+		this.DarkMode = new DarkMode();
 	}
 
 	onPromoBarUpdate( promoBar ) {

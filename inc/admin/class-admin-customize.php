@@ -132,11 +132,11 @@ if ( ! class_exists( 'Rosa2_Admin_Customize', false ) ) :
 			);
 
 			$items[] = array(
-					'id'         => '#lights',
-					'title'      => esc_html__( 'Dark Mode Switcher', '__theme_txtd' ),
+					'id'         => '#color-scheme-switcher',
+					'title'      => esc_html__( 'Color Scheme Switcher', '__theme_txtd' ),
 					'type_label' => esc_html__( 'Switcher Link', '__theme_txtd' ),
-					'url'        => esc_url_raw( '#lights' ),
-					'classes'    => 'is-lights-button'
+					'url'        => esc_url_raw( '#color-scheme-switcher' ),
+					'classes'    => 'color-scheme-switcher-button'
 			);
 
 			return $items;

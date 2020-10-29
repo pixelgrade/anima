@@ -1190,6 +1190,7 @@ function () {
     this.$toggle = external_jQuery_default()('.c-menu-toggle');
     this.$toggleWrap = external_jQuery_default()('.c-menu-toggle__wrap');
     this.$searchCancelButton = external_jQuery_default()('.c-search-overlay__cancel');
+    this.$colorSchemeSwitcher = external_jQuery_default()('.color-scheme-switcher-button');
     this.$searchOverlay = external_jQuery_default()('.c-search-overlay');
     this.scrolled = false;
     this.inversed = false;
@@ -1226,6 +1227,7 @@ function () {
       this.updateHeaderOffset();
       this.updateMobileHeaderOffset();
       this.updateSearchButtonsHeight();
+      this.updateColorSchemeButtonHeight();
       this.updateSearchOverlayOffset();
     }
   }, {
@@ -1460,12 +1462,44 @@ function () {
       this.movedSearchButton = true;
     }
   }, {
+    key: "moveColorSchemeSwitcherButton",
+    value: function moveColorSchemeSwitcherButton() {
+      if (this.movedColorSchemeSwitcherButton || !below('lap')) return;
+      var $colorSchemeSwitcherButton = external_jQuery_default()('.color-scheme-switcher-button'),
+          $colorSchemeSwitcherWrapper = external_jQuery_default()('.scheme-switcher__wrapper');
+
+      if ($colorSchemeSwitcherWrapper.length) {
+        this.$colorSchemeSwitcherWrapper = $colorSchemeSwitcherWrapper;
+        this.movedColorSchemeSwitcherButton = true;
+        return;
+      }
+
+      this.$colorSchemeSwitcherWrapper = external_jQuery_default()('<div class="scheme-switcher__wrapper">');
+      $colorSchemeSwitcherButton.first().clone().appendTo(this.$colorSchemeSwitcherWrapper);
+      this.$colorSchemeSwitcherWrapper.insertAfter('.site-header__wrapper');
+      this.movedColorSchemeSwitcherButton = true;
+    }
+  }, {
     key: "updateSearchButtonsHeight",
     value: function updateSearchButtonsHeight() {
       this.$searchCancelButton.css({
         height: this.mobileHeaderHeight
       });
       external_jQuery_default()('.search-button__wrapper').css({
+        height: this.mobileHeaderHeight
+      });
+    }
+  }, {
+    key: "updateColorSchemeButtonHeight",
+    value: function updateColorSchemeButtonHeight() {
+      if (!below('lap')) {
+        return;
+      }
+
+      this.$colorSchemeSwitcher.css({
+        height: this.mobileHeaderHeight
+      });
+      external_jQuery_default()('.scheme-switcher__wrapper').css({
         height: this.mobileHeaderHeight
       });
     }
@@ -1494,6 +1528,7 @@ function () {
       this.updateMobileHeaderState();
       this.updateDesktopHeaderState(false);
       this.moveSearchButton();
+      this.moveColorSchemeSwitcherButton();
     }
   }]);
 
@@ -1853,22 +1888,19 @@ function () {
 }();
 
 
-// CONCATENATED MODULE: ./src/js/components/lights-switcher.js
+// CONCATENATED MODULE: ./src/js/components/dark-mode.js
 
 
 
-var LIGHT_THEME = 'color-scheme-light',
-    DARK_THEME = 'color-scheme-dark',
-    AUTO_THEME = 'color-scheme-auto',
-    COLOR_SCHEME_BUTTON = '.is-lights-button',
-    USER_PREFER_DARK = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-var lights_switcher_$html = external_jQuery_default()('html');
+var COLOR_SCHEME_BUTTON = '.color-scheme-switcher-button',
+    STORAGE_ITEM = 'color-scheme-dark',
+    dark_mode_$html = external_jQuery_default()('html');
 
-var lights_switcher_LightsSwitcher =
+var dark_mode_DarkMode =
 /*#__PURE__*/
 function () {
-  function LightsSwitcher(element) {
-    classCallCheck_default()(this, LightsSwitcher);
+  function DarkMode(element) {
+    classCallCheck_default()(this, DarkMode);
 
     this.$element = external_jQuery_default()(element);
     this.$colorSchemeButtons = external_jQuery_default()(COLOR_SCHEME_BUTTON);
@@ -1877,125 +1909,59 @@ function () {
     this.initialize();
   }
 
-  createClass_default()(LightsSwitcher, [{
+  createClass_default()(DarkMode, [{
     key: "initialize",
     value: function initialize() {
-      this.checkLocalStorage();
-      this.bindClicks();
+      this.bindEvents();
+      this.update();
     }
   }, {
-    key: "bindClicks",
-    value: function bindClicks() {
-      this.$colorSchemeButtonsLink.on('click', this.switchTheme);
+    key: "bindEvents",
+    value: function bindEvents() {
+      this.$colorSchemeButtonsLink.on('click', this.onClick.bind(this));
     }
   }, {
-    key: "checkLocalStorage",
-    value: function checkLocalStorage() {
-      // Checking local storage for color scheme value.
-      if (localStorage) {
-        this.theme = localStorage.getItem('theme');
-      } // If color scheme is set on auto and
-      // theme was not defined by the user, do nothing.
-
-
-      if (lights_switcher_$html.hasClass(AUTO_THEME) && this.theme === null) {
-        lights_switcher_$html.addClass(AUTO_THEME);
-        return;
-      } // If color scheme has been defined by the use
-      // make sure we remove color-scheme-auto class.
-
-
-      if (this.theme !== null) {
-        if (lights_switcher_$html.hasClass(AUTO_THEME)) {
-          lights_switcher_$html.removeClass(AUTO_THEME);
-        }
-      } // When theme is set to dark,
-      // add color-scheme-dark class and
-      // remove color-scheme-light class
-      // and vice-versa if theme is set to light.
-
-
-      if (this.theme === DARK_THEME) {
-        lights_switcher_$html.addClass(DARK_THEME);
-
-        if (lights_switcher_$html.hasClass(LIGHT_THEME)) {
-          lights_switcher_$html.removeClass(LIGHT_THEME);
-        }
-      } else if (this.theme === LIGHT_THEME) {
-        lights_switcher_$html.addClass(LIGHT_THEME);
-
-        if (lights_switcher_$html.hasClass(DARK_THEME)) {
-          lights_switcher_$html.removeClass(DARK_THEME);
-        }
-      }
+    key: "onClick",
+    value: function onClick(e) {
+      e.preventDefault();
+      var isDark = this.isCompiledDark();
+      localStorage.setItem(STORAGE_ITEM, !!isDark ? 'light' : 'dark');
+      this.update();
     }
   }, {
-    key: "switchTheme",
-    value: function switchTheme(event) {
-      event.preventDefault();
+    key: "isSystemDark",
+    value: function isSystemDark() {
+      var darkModeSetting = dark_mode_$html.data('dark-mode-advanced'),
+          USER_PREFER_DARK = !!window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var isDark = darkModeSetting === 'dark';
 
-      if (localStorage) {
-        this.theme = localStorage.getItem('theme');
-      } // User choose a theme, so we are going
-      // to remove color-scheme-auto.
-
-
-      if (lights_switcher_$html.hasClass(AUTO_THEME)) {
-        lights_switcher_$html.removeClass(AUTO_THEME);
+      if (darkModeSetting === 'auto' && USER_PREFER_DARK) {
+        isDark = true;
       }
 
-      if (this.theme === DARK_THEME) {
-        // If theme was dark, we are going
-        // to change it on light
-        lights_switcher_$html.removeClass(DARK_THEME).addClass(LIGHT_THEME);
-        localStorage.setItem('theme', LIGHT_THEME);
-        this.theme = LIGHT_THEME;
-      } else if (this.theme === LIGHT_THEME) {
-        // If theme was light, we are going
-        // to change it on dark
-        lights_switcher_$html.removeClass(LIGHT_THEME).addClass(DARK_THEME);
-        localStorage.setItem('theme', DARK_THEME);
-        this.theme = DARK_THEME;
-      } else {
-        // Before first click, color scheme
-        // is not defined so we are going
-        // to define it considering color scheme setting
-        // or user system preference.
-        // When color scheme is set on light
-        // we are going to switch it on dark
-        if (lights_switcher_$html.hasClass(LIGHT_THEME)) {
-          lights_switcher_$html.removeClass(LIGHT_THEME).addClass(DARK_THEME);
-          localStorage.setItem('theme', DARK_THEME);
-          this.theme = DARK_THEME;
-        } else if (lights_switcher_$html.hasClass(DARK_THEME)) {
-          // When color scheme is set on dark
-          // we are going to switch it on light
-          lights_switcher_$html.removeClass(DARK_THEME).addClass(LIGHT_THEME);
-          localStorage.setItem('theme', LIGHT_THEME);
-          this.theme = LIGHT_THEME;
-        } else {
-          // When color scheme is set on auto,
-          // we are going to consider user system preferences.
-          if (USER_PREFER_DARK) {
-            // User prefer dark, website is currently dark
-            // and we are switch it to light.
-            lights_switcher_$html.removeClass(DARK_THEME).addClass(LIGHT_THEME);
-            localStorage.setItem('theme', LIGHT_THEME);
-            this.theme = LIGHT_THEME;
-          } else {
-            // User is not preferring dark,
-            // website is currently light and we
-            // are going to switch it to dark.
-            lights_switcher_$html.removeClass(LIGHT_THEME).addClass(DARK_THEME);
-            localStorage.setItem('theme', DARK_THEME);
-            this.theme = DARK_THEME;
-          }
-        }
+      return isDark;
+    }
+  }, {
+    key: "isCompiledDark",
+    value: function isCompiledDark() {
+      var isDark = this.isSystemDark();
+      var colorSchemeStorageValue = localStorage.getItem(STORAGE_ITEM);
+
+      if (colorSchemeStorageValue !== null) {
+        isDark = colorSchemeStorageValue === 'dark';
       }
+
+      return isDark;
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      var isDark = this.isCompiledDark();
+      dark_mode_$html.toggleClass('is-dark', isDark);
     }
   }]);
 
-  return LightsSwitcher;
+  return DarkMode;
 }();
 
 
@@ -2022,7 +1988,7 @@ function () {
     this.initializeHeader();
     this.initializeNavbar();
     this.initializePromoBar();
-    this.initializeLightsSwitcher();
+    this.initializeDarkMode();
     this.initializeImages();
     this.initializeCommentsArea();
     this.initializeReservationForm();
@@ -2141,13 +2107,9 @@ function () {
       });
     }
   }, {
-    key: "initializeLightsSwitcher",
-    value: function initializeLightsSwitcher() {
-      var $lightsSwitcher = external_jQuery_default()('.is-lights-button');
-
-      if ($lightsSwitcher.length) {
-        this.lightsSwitcher = new lights_switcher_LightsSwitcher($lightsSwitcher.get(0));
-      }
+    key: "initializeDarkMode",
+    value: function initializeDarkMode() {
+      this.DarkMode = new dark_mode_DarkMode();
     }
   }, {
     key: "onPromoBarUpdate",
