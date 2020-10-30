@@ -1,12 +1,14 @@
+@import "../../../setup/variables";
+@import "../../../setup/mixins/media-queries";
+
 .wp-block-novablocks-navigation {
-    @include apply-font(navigation);
 
     @media not screen and (min-width: 1000px) {
         --final-font-size: 18px;
     }
 }
 
-.wp-block-novablocks-navigation[class] {
+.wp-block-novablocks-navigation {
 
     ul.menu,
     .menu > ul {

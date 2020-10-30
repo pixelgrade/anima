@@ -309,11 +309,26 @@ function rosa2_should_enqueue_novablocks_fallbacks() {
         return true;
     }
 
-    if( ( is_home() || is_search() || is_archive() ) && ! wp_style_is('novablocks/media-style', 'enqueued')) {
+    if( ( is_home() || is_search() || is_archive() ) && ! wp_style_is( 'novablocks/media-style', 'enqueued' ) ) {
         return true;
     }
 
-    return false;
+	return false;
+}
+
+function rosa2_is_using_block( $slug, $isblockarea ) {
+
+	if ( has_block( 'novablocks/' . $slug ) ) {
+		return true;
+	}
+
+	if ( $isblockarea ) {
+		if ( rosa2_block_area_has_blocks( $slug ) ) {
+			return true;
+		}
+	}
+
+	return false;
 }
 
 function rosa2_add_custom_menu_items() {

@@ -40,7 +40,7 @@
                 border-right: 0.1em solid currentColor;
                 border-bottom: 0.1em solid currentColor;
 
-                transform: translateY(-50%) rotate(45deg);
+                transform: translateY(-10%) rotate(45deg);
                 transition: var(--theme-transition);
                 transition-property: transform, opacity;
 
@@ -110,6 +110,8 @@
             .menu-item {
 
                 &:after {
+                    content: '';
+
                     position: absolute;
                     top: 0;
                     left: 0;
