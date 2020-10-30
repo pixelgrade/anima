@@ -1,22 +1,20 @@
 @import "mixins";
 
-@include specific(1) {
-    @import "menu";
-    @import "menu-toggle";
-    @import "theme";
-
-    @media not screen and (min-width: 1000px) {
-        @import "mobile";
-        @import "mobile-transitions";
-    }
-}
-
 .site-header--mobile {
     display: none;
 
     &.site-header--scrolled {
         color: var(--current-dark-primary);
     }
+}
+
+@import "menu";
+@import "menu-toggle";
+@import "theme";
+
+@media not screen and (min-width: 1000px) {
+    @import "mobile";
+    @import "mobile-transitions";
 }
 
 .site-header,
