@@ -8,9 +8,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Add colors section and options to the Customify config
 add_filter( 'customify_filter_fields', 'pixelgrade_add_colors_section_to_customify_config', 50, 1 );
 
-// Override Dark Mode control
-add_filter( 'customify_filter_fields', 'rosa2_add_new_dark_mode_control', 120, 1 );
-
 // Prepend theme color palette to the default color palettes list
 add_filter( 'customify_get_color_palettes', 'pixelgrade_add_default_color_palettes' );
 
@@ -229,39 +226,4 @@ function pixelgrade_add_default_color_palettes( $color_palettes ) {
 	), $color_palettes );
 
 	return $color_palettes;
-}
-
-function rosa2_add_new_dark_mode_control ( $config ) {
-
-	if ( empty( $config['sections'] ) ) {
-		$config['sections'] = array();
-	}
-
-	if ( ! isset( $config['sections']['style_manager_section'] ) ) {
-		$config['sections']['style_manager_section'] = array();
-	}
-
-	// The section might be already defined, thus we merge, not replace the entire section config.
-	$config['sections']['style_manager_section'] = Customify_Array::array_merge_recursive_distinct( $config['sections']['style_manager_section'], array(
-		'options' => array(
-			'sm_dark_mode'       => array(
-				'type'         => 'sm_radio',
-				'label'        => esc_html__( 'Appearance', 'customify' ),
-				'default'      => 'auto',
-			),
-		),
-	) );
-
-	if ( ! isset( $config['sections']['style_manager_section']['options']['sm_dark_mode']['choices'] ) ) {
-		$config['sections']['style_manager_section']['options']['sm_dark_mode']['choices'] = array();
-	}
-
-	// We want new options for sm_dark_mode so we are going to create a new array
-	$config['sections']['style_manager_section']['options']['sm_dark_mode']['choices'] = array(
-		'auto'  => esc_html__( 'Auto', 'customify' ),
-		'light' => esc_html__( 'Light', 'customify' ),
-		'dark'  => esc_html__( 'Dark', 'customify' ),
-	);
-
-	return $config;
 }

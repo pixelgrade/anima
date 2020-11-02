@@ -106,6 +106,7 @@ if ( ! function_exists( 'rosa2_setup' ) ) {
 		 */
 		add_theme_support( 'customizer_style_manager' );
 		add_theme_support( 'style_manager_font_palettes' );
+		add_theme_support( 'style_manager_advanced_dark_mode' );
 	}
 }
 add_action( 'after_setup_theme', 'rosa2_setup', 10 );
