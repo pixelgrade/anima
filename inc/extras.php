@@ -490,4 +490,25 @@ function rosa2_is_nav_menus_page( $new_edit = null ) {
 	return false;
 }
 
+/**
+ * Add Color Scheme attribute to <html> tag.
+ *
+ *
+ * @since 1.6.0
+ *
+ * @param string $output A space-separated list of language attributes.
+ * @param string $doctype The type of html document (xhtml|html).
+ *
+ * @return string $output A space-separated list of language attributes.
+ */
+function rosa2_add_color_scheme_attribute( $output, $doctype ) {
+	if ( 'html' !== $doctype ) {
+		return $output;
+	}
 
+	$output .= ' data-dark-mode-advanced=' . pixelgrade_option('sm_dark_mode');
+
+	return $output;
+}
+
+add_filter( 'language_attributes', 'rosa2_add_color_scheme_attribute', 10, 2 );
