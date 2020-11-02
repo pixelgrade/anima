@@ -506,7 +506,7 @@ function rosa2_add_color_scheme_attribute( $output, $doctype ) {
 		return $output;
 	}
 
-	$output .= ' data-dark-mode-advanced=' . pixelgrade_option('sm_dark_mode');
+	$output .= ' data-dark-mode-advanced=' . pixelgrade_option( 'sm_dark_mode_advanced', 'light' );
 
 	return $output;
 }
