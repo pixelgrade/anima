@@ -4,6 +4,13 @@ const COLOR_SCHEME_BUTTON = '.color-scheme-switcher-button',
 	STORAGE_ITEM = 'color-scheme-dark',
 	$html = $( 'html' );
 
+var in_customizer = false;
+
+if ( typeof wp !== 'undefined' ) {
+	in_customizer =  typeof wp.customize !== 'undefined';
+}
+
+
 export default class DarkMode {
 
 	constructor( element ) {
@@ -40,7 +47,7 @@ export default class DarkMode {
 		const darkModeSetting = $html.data( 'dark-mode-advanced' ),
 			USER_PREFER_DARK = !! window.matchMedia && window.matchMedia( '(prefers-color-scheme: dark)' ).matches;
 
-		let isDark = darkModeSetting === 'dark';
+		let isDark = darkModeSetting === 'on';
 
 		if( darkModeSetting === 'auto' && USER_PREFER_DARK ) {
 			isDark = true;
@@ -64,6 +71,10 @@ export default class DarkMode {
 
 	update() {
 		const isDark = this.isCompiledDark();
-		$html.toggleClass( 'is-dark', isDark );
+
+		if ( ! in_customizer ) {
+			$html.toggleClass( 'is-dark', isDark );
+		}
+
 	}
 }

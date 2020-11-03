@@ -1895,6 +1895,11 @@ function () {
 var COLOR_SCHEME_BUTTON = '.color-scheme-switcher-button',
     STORAGE_ITEM = 'color-scheme-dark',
     dark_mode_$html = external_jQuery_default()('html');
+var in_customizer = false;
+
+if (typeof wp !== 'undefined') {
+  in_customizer = typeof wp.customize !== 'undefined';
+}
 
 var dark_mode_DarkMode =
 /*#__PURE__*/
@@ -1933,7 +1938,7 @@ function () {
     value: function isSystemDark() {
       var darkModeSetting = dark_mode_$html.data('dark-mode-advanced'),
           USER_PREFER_DARK = !!window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      var isDark = darkModeSetting === 'dark';
+      var isDark = darkModeSetting === 'on';
 
       if (darkModeSetting === 'auto' && USER_PREFER_DARK) {
         isDark = true;
@@ -1957,7 +1962,10 @@ function () {
     key: "update",
     value: function update() {
       var isDark = this.isCompiledDark();
-      dark_mode_$html.toggleClass('is-dark', isDark);
+
+      if (!in_customizer) {
+        dark_mode_$html.toggleClass('is-dark', isDark);
+      }
     }
   }]);
 

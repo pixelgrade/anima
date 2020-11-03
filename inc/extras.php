@@ -502,11 +502,16 @@ function rosa2_is_nav_menus_page( $new_edit = null ) {
  * @return string $output A space-separated list of language attributes.
  */
 function rosa2_add_color_scheme_attribute( $output, $doctype ) {
+
+    if( is_admin() ) {
+        return;
+    }
+
 	if ( 'html' !== $doctype ) {
 		return $output;
 	}
 
-	$output .= ' data-dark-mode-advanced=' . pixelgrade_option( 'sm_dark_mode_advanced', 'light' );
+	$output .= ' data-dark-mode-advanced=' . pixelgrade_option( 'sm_dark_mode_advanced', 'off' );
 
 	return $output;
 }
