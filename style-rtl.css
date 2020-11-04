@@ -1918,10 +1918,10 @@ table {
   --current-light-secondary: var(--sm-dark-secondary);
   --current-light-tertiary: var(--sm-dark-primary); }
 
-.color-scheme-switcher-button {
+.is-color-scheme-switcher-button {
   display: flex;
   align-items: center; }
-  .color-scheme-switcher-button a {
+  .is-color-scheme-switcher-button a {
     position: relative;
     text-indent: -9999px;
     width: 1.2em;
@@ -1934,7 +1934,7 @@ table {
     margin-bottom: 0 !important;
     transform: rotate(45deg);
     transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1); }
-    .color-scheme-switcher-button a:after {
+    .is-color-scheme-switcher-button a:after {
       content: '';
       position: absolute;
       width: 100%;
@@ -1944,7 +1944,7 @@ table {
       background-color: currentColor;
       border-top-right-radius: 1em;
       border-top-left-radius: 1em; }
-  .is-dark .color-scheme-switcher-button a {
+  .is-dark .is-color-scheme-switcher-button a {
     transform: rotate(-135deg); }
 
 @media only screen and (min-width: 1000px) {
@@ -3389,7 +3389,7 @@ ul.menu,
   .site-header__wrapper {
     grid-column: 1/4;
     grid-row: 1; }
-    .site-header__wrapper .color-scheme-switcher-button {
+    .site-header__wrapper .is-color-scheme-switcher-button {
       display: none; }
   .scheme-switcher__wrapper {
     display: flex;

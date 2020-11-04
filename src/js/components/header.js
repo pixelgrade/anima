@@ -18,7 +18,7 @@ class Header {
 		this.$toggle = $( '.c-menu-toggle' );
 		this.$toggleWrap = $( '.c-menu-toggle__wrap' );
 		this.$searchCancelButton = $( '.c-search-overlay__cancel' );
-		this.$colorSchemeSwitcher = $( '.color-scheme-switcher-button' );
+		this.$colorSchemeSwitcher = $( '.is-color-scheme-switcher-button' );
 		this.$searchOverlay = $('.c-search-overlay');
 
 		this.scrolled = false;
@@ -275,7 +275,7 @@ class Header {
 	moveColorSchemeSwitcherButton() {
 		if ( this.movedColorSchemeSwitcherButton || ! below('lap') ) return;
 
-		const $colorSchemeSwitcherButton = $('.color-scheme-switcher-button'),
+		const $colorSchemeSwitcherButton = $('.is-color-scheme-switcher-button'),
 			  $colorSchemeSwitcherWrapper  = $('.scheme-switcher__wrapper');
 
 		if( $colorSchemeSwitcherWrapper.length ) {

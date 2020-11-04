@@ -1190,7 +1190,7 @@ function () {
     this.$toggle = external_jQuery_default()('.c-menu-toggle');
     this.$toggleWrap = external_jQuery_default()('.c-menu-toggle__wrap');
     this.$searchCancelButton = external_jQuery_default()('.c-search-overlay__cancel');
-    this.$colorSchemeSwitcher = external_jQuery_default()('.color-scheme-switcher-button');
+    this.$colorSchemeSwitcher = external_jQuery_default()('.is-color-scheme-switcher-button');
     this.$searchOverlay = external_jQuery_default()('.c-search-overlay');
     this.scrolled = false;
     this.inversed = false;
@@ -1465,7 +1465,7 @@ function () {
     key: "moveColorSchemeSwitcherButton",
     value: function moveColorSchemeSwitcherButton() {
       if (this.movedColorSchemeSwitcherButton || !below('lap')) return;
-      var $colorSchemeSwitcherButton = external_jQuery_default()('.color-scheme-switcher-button'),
+      var $colorSchemeSwitcherButton = external_jQuery_default()('.is-color-scheme-switcher-button'),
           $colorSchemeSwitcherWrapper = external_jQuery_default()('.scheme-switcher__wrapper');
 
       if ($colorSchemeSwitcherWrapper.length) {
@@ -1892,7 +1892,7 @@ function () {
 
 
 
-var COLOR_SCHEME_BUTTON = '.color-scheme-switcher-button',
+var COLOR_SCHEME_BUTTON = '.is-color-scheme-switcher-button',
     STORAGE_ITEM = 'color-scheme-dark',
     dark_mode_$html = external_jQuery_default()('html');
 var in_customizer = false;

@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-const COLOR_SCHEME_BUTTON = '.color-scheme-switcher-button',
+const COLOR_SCHEME_BUTTON = '.is-color-scheme-switcher-button',
 	STORAGE_ITEM = 'color-scheme-dark',
 	$html = $( 'html' );
 

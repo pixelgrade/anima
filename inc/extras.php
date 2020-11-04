@@ -334,12 +334,12 @@ function rosa2_is_using_block( $slug, $isblockarea ) {
 function rosa2_add_custom_menu_items() {
 	global $pagenow;
 	if( 'nav-menus.php' == $pagenow ) {
-		add_meta_box( 'rosa2-add-search-links', esc_html__( 'Extras', '__theme_txtd' ), 'rosa2_nav_menu_item_search', 'nav-menus', 'side', 'low' );
+		add_meta_box( 'rosa2-add-search-links', esc_html__( 'Extras', '__theme_txtd' ), 'rosa2_nav_menu_extras_items', 'nav-menus', 'side', 'low' );
 	}
 }
 add_action( 'admin_init', 'rosa2_add_custom_menu_items' );
 
-function rosa2_nav_menu_item_search( $object ) {
+function rosa2_nav_menu_extras_items( $object ) {
 	global $nav_menu_selected_id;
 
 	$menu_items = array(
