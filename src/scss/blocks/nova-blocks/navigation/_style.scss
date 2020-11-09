@@ -1,16 +1,28 @@
+@import "../../../setup/variables";
+@import "../../../setup/mixins/media-queries";
+
 .wp-block-novablocks-navigation {
-    @include apply-font(navigation);
+
+    @media not screen and (min-width: 1000px) {
+        --final-font-size: 18px;
+    }
 }
 
-.wp-block-novablocks-navigation[class] {
+.wp-block-novablocks-navigation {
+
+    ul.menu,
+    .menu > ul {
+
+        a {
+            padding: .75em 0;
+        }
+    }
 
     @include above(lap) {
-
         --header-links-bottom-spacing: .5em;
 
         ul.menu,
         .menu > ul {
-
             margin-left: calc( var(--theme-header-links-spacing) * -1 );
 
             a {

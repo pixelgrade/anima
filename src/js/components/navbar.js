@@ -6,6 +6,7 @@ const MENU_ITEM_WITH_CHILDREN = '.menu-item-has-children, .page_item_has_childre
 const SUBMENU = '.sub-menu, .children';
 const SUBMENU_LEFT_CLASS = 'has-submenu-left';
 const HOVER_CLASS = 'hover';
+const SEARCH_OVERLAY_OPEN_CLASS = 'has-search-overlay';
 
 export default class Navbar {
 
@@ -13,6 +14,9 @@ export default class Navbar {
 		this.$menuItems = $( MENU_ITEM );
 		this.$menuItemsWithChildren = this.$menuItems.filter( MENU_ITEM_WITH_CHILDREN ).removeClass( HOVER_CLASS );
 		this.$menuItemsWithChildrenLinks = this.$menuItemsWithChildren.children( 'a' );
+
+		this.searchOverlayButton = $('.menu-item a[href*="#search"]');
+		this.searchOverlayCancelButton = $('.c-search-overlay__cancel');
 
 		this.initialize();
 	}
@@ -22,6 +26,9 @@ export default class Navbar {
 		this.addSocialMenuClass();
 		this.initialized = true;
 		GlobalService.registerOnResize( this.onResize.bind( this ) );
+
+		this.searchOverlayButton.on( 'click', this.onClickSearchButton );
+		this.searchOverlayCancelButton.on( 'click', this.onClickCancelSearchButton );
 	}
 
 	onResize() {
@@ -90,6 +97,18 @@ export default class Navbar {
 		$link.addClass( 'active' ).parent().addClass( HOVER_CLASS );
 		$siblings.removeClass( HOVER_CLASS );
 		$siblings.find( '.active' ).removeClass( 'active' );
+	}
+
+	onClickSearchButton( event ) {
+		event.preventDefault();
+		$('body').toggleClass(SEARCH_OVERLAY_OPEN_CLASS);
+		$('.c-search-overlay__form .search-field').focus();
+
+	}
+
+	onClickCancelSearchButton( event ) {
+		event.preventDefault();
+		$('body').removeClass(SEARCH_OVERLAY_OPEN_CLASS);
 	}
 
 	bindClick() {

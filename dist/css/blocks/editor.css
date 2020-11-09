@@ -163,10 +163,6 @@ ul.wp-block-categories__list[class] {
 .c-logo__inverted {
   display: none; }
 
-.wp-block-novablocks-navigation ul.menu > li,
-.wp-block-novablocks-navigation .menu > ul > li {
-  margin-left: 0; }
-
 .site-header > div:first-child {
   padding-left: var(--theme-header-sides-spacing);
   padding-right: var(--theme-header-sides-spacing); }
@@ -174,8 +170,18 @@ ul.wp-block-categories__list[class] {
 .novablocks-u-background-dark .novablocks-hero__indicator:after {
   color: var(--theme-sm-light-1); }
 
+.novablocks-media.novablocks-media--no-thumbnail .novablocks-media__image {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .novablocks-media.novablocks-media--no-thumbnail .novablocks-media__image path {
+    fill: var(--current-color-primary); }
+
 .novablocks-media > .wp-block-group__inner-container {
   padding-top: 1px; }
+
+.novablocks-media__inner-container .wp-block-separator {
+  width: 100%; }
 
 .novablocks-media__content {
   max-width: 100%;
@@ -227,10 +233,6 @@ ul.wp-block-categories__list[class] {
   .novablocks-media__image svg {
     object-fit: contain; }
 
-@media only screen and (min-width: 768px) {
-  .novablocks-block__content {
-    --novablocks-block-content-padding: var(--novablocks-spacing); } }
-
 .novablocks-media--blog[class] {
   --novablocks-block-background-color: var(--current-light-tertiary); }
   .novablocks-media--blog[class] .novablocks-media__content {
@@ -243,11 +245,12 @@ ul.wp-block-categories__list[class] {
     height: 100%;
     min-height: 400px; }
 
-.wp-block[data-type="novablocks/navigation"] ul.menu a {
-  display: flex; }
-
-.menu {
+.wp-block-novablocks-navigation[class] .menu {
   padding-top: 0; }
+  .wp-block-novablocks-navigation[class] .menu > li {
+    margin-left: 0; }
+    .wp-block-novablocks-navigation[class] .menu > li a {
+      display: flex; }
 
 .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button {
   --theme-button-hover-background-color: var(--current-light-primary);

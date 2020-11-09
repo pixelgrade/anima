@@ -32,6 +32,8 @@ module.exports = {
     './dist/js/woocommerce.min' : './src/js/woocommerce.js',
     './dist/js/editor' : './src/js/editor.js',
     './dist/js/editor.min' : './src/js/editor.js',
+    './dist/js/admin/edit-nav-menus' : './src/js/admin/edit-nav-menus.js',
+    './dist/js/admin/edit-nav-menus.min' : './src/js/admin/edit-nav-menus.js',
   },
   optimization: {
     minimize: true,

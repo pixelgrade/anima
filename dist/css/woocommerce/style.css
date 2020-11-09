@@ -1,6 +1,6 @@
 #html #body #page .button,
 #html #body #page button,
-#html #body #page input[type="submit"]:not(.ot-button) {
+#html #body #page input[type="submit"]:not(.ot-button):not(.search-submit) {
   display: inline-block;
   text-decoration: none;
   --theme-button-text-color: var(--current-light-primary);
@@ -29,11 +29,11 @@
   --current-text-transform: var(--theme-button-text-transform); }
   #html #body #page .button:not([disabled]),
   #html #body #page button:not([disabled]),
-  #html #body #page input[type="submit"]:not(.ot-button):not([disabled]) {
+  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not([disabled]) {
     cursor: pointer; }
     #html #body #page .button:not([disabled]):hover,
     #html #body #page button:not([disabled]):hover,
-    #html #body #page input[type="submit"]:not(.ot-button):not([disabled]):hover {
+    #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not([disabled]):hover {
       --current-button-background-color: var(--theme-button-hover-background-color);
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
@@ -114,7 +114,7 @@
     transform: scale3d(0, 1, 1); }
 
 #html #body #page input.button:not(.alt),
-#html #body #page input[type="submit"]:not(.ot-button):not(.alt) {
+#html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt) {
   background-color: transparent;
   transform: translateZ(0);
   will-change: transform;
@@ -127,7 +127,7 @@
   --current-button-text-color: var(--theme-button-hover-text-color);
   background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
   #html #body #page input.button:not(.alt):before,
-  #html #body #page input[type="submit"]:not(.ot-button):not(.alt):before {
+  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):before {
     content: '';
     position: absolute;
     top: calc( -1 * var(--theme-button-border-width));
@@ -140,25 +140,25 @@
     transition: var(--current-button-transition);
     transition-property: transform; }
   #html #body #page input.button:not(.alt):not([disabled]):hover,
-  #html #body #page input[type="submit"]:not(.ot-button):not(.alt):not([disabled]):hover {
+  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):hover {
     background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
   #html #body #page input.button:not(.alt):before,
-  #html #body #page input[type="submit"]:not(.ot-button):not(.alt):before {
+  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):before {
     transform: scale3d(0, 1, 1);
     transform-origin: left;
     background-color: var(--theme-button-background-color); }
   #html #body #page input.button:not(.alt):not([disabled]):hover,
-  #html #body #page input[type="submit"]:not(.ot-button):not(.alt):not([disabled]):hover {
+  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):hover {
     --current-button-text-color: var(--theme-button-text-color); }
     #html #body #page input.button:not(.alt):not([disabled]):hover:before,
-    #html #body #page input[type="submit"]:not(.ot-button):not(.alt):not([disabled]):hover:before {
+    #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):hover:before {
       transform: scale3d(1, 1, 1); }
   #html #body #page input.button:not(.alt):not([disabled]):hover,
-  #html #body #page input[type="submit"]:not(.ot-button):not(.alt):not([disabled]):hover {
+  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):hover {
     --current-button-text-color: var(--theme-button-text-color); }
 
 #html #body #page input.button.alt,
-#html #body #page input[type="submit"]:not(.ot-button).alt {
+#html #body #page input[type="submit"]:not(.ot-button):not(.search-submit).alt {
   background-color: transparent;
   transform: translateZ(0);
   will-change: transform;
@@ -169,7 +169,7 @@
   background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
   background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
   #html #body #page input.button.alt:before,
-  #html #body #page input[type="submit"]:not(.ot-button).alt:before {
+  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:before {
     content: '';
     position: absolute;
     top: calc( -1 * var(--theme-button-border-width));
@@ -182,15 +182,15 @@
     transition: var(--current-button-transition);
     transition-property: transform; }
   #html #body #page input.button.alt:not([disabled]):hover,
-  #html #body #page input[type="submit"]:not(.ot-button).alt:not([disabled]):hover {
+  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:not([disabled]):hover {
     background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
   #html #body #page input.button.alt:before,
-  #html #body #page input[type="submit"]:not(.ot-button).alt:before {
+  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:before {
     transform: scale3d(1, 1, 1);
     transform-origin: right;
     background-color: var(--theme-button-background-color); }
   #html #body #page input.button.alt:not([disabled]):hover:before,
-  #html #body #page input[type="submit"]:not(.ot-button).alt:not([disabled]):hover:before {
+  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:not([disabled]):hover:before {
     transform: scale3d(0, 1, 1); }
 
 #html #body #page .checkout-button {

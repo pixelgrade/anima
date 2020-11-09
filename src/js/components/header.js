@@ -1,5 +1,5 @@
 import GlobalService from "./globalService";
-import { below } from '../utils';
+import { below, debounce, setAndResetElementStyles } from '../utils';
 import $ from 'jquery';
 
 const defaults = {
@@ -17,6 +17,8 @@ class Header {
 		this.$header = $( this.element );
 		this.$toggle = $( '.c-menu-toggle' );
 		this.$toggleWrap = $( '.c-menu-toggle__wrap' );
+		this.$searchCancelButton = $( '.c-search-overlay__cancel' );
+		this.$searchOverlay = $('.c-search-overlay');
 
 		this.scrolled = false;
 		this.inversed = false;
@@ -48,6 +50,7 @@ class Header {
 
 		this.$header.addClass( 'site-header--fixed site-header--ready' );
 		this.$mobileHeader.addClass( 'site-header--fixed site-header--ready' );
+		this.initToggleClick();
 
 		this.timeline.play();
 	}
@@ -56,6 +59,8 @@ class Header {
 		this.updatePageOffset();
 		this.updateHeaderOffset();
 		this.updateMobileHeaderOffset();
+		this.updateSearchButtonsHeight();
+		this.updateSearchOverlayOffset();
 	}
 
 	getInroTimeline() {
@@ -114,7 +119,8 @@ class Header {
 		const $header = $( this.element );
 		const wasScrolled = $header.hasClass( 'site-header--scrolled' );
 
-		$header.css( 'transition', 'none' );
+		setAndResetElementStyles( $header, { transition: 'none'});
+		setAndResetElementStyles( this.$searchOverlay, {transition: 'none'} );
 		$header.removeClass( 'site-header--scrolled' );
 
 		this.getProps();
@@ -122,16 +128,6 @@ class Header {
 		this.shouldMakeHeaderStatic();
 
 		$header.toggleClass( 'site-header--scrolled', wasScrolled );
-
-		if ( window.requestIdleCallback ) {
-			requestIdleCallback( () => {
-				$header.css( 'transition', '' );
-			} );
-		} else {
-			setTimeout( () => {
-				$header.css( 'transition', '' );
-			}, 0 );
-		}
 
 		this.update();
 	}
@@ -243,6 +239,54 @@ class Header {
 		this.createdMobileHeader = true;
 	}
 
+	moveSearchButton() {
+
+		if ( this.movedSearchButton || ! below('lap') ) return;
+
+		const $searchButton = $( '.is-search-button' ),
+			  $searchButtonWrapper = $('.search-button__wrapper');
+
+
+		if ( $searchButtonWrapper.length ) {
+			this.$searchButtonWrapper = $searchButtonWrapper;
+			this.movedSearchButton = true;
+			return;
+		}
+
+		this.$searchButtonWrapper = $( '<div class="search-button__wrapper">' );
+
+		$searchButton.first().clone().appendTo( this.$searchButtonWrapper);
+
+		this.$searchButtonWrapper.insertAfter( '.site-header__wrapper');
+		this.movedSearchButton = true;
+	}
+
+	updateSearchButtonsHeight() {
+		this.$searchCancelButton.css({
+			height: this.mobileHeaderHeight,
+		});
+
+
+		$('.search-button__wrapper').css({
+			height: this.mobileHeaderHeight,
+		});
+	}
+
+	updateSearchOverlayOffset() {
+		if ( below( 'lap' ) && this.$searchOverlay.length ) {
+			this.$searchOverlay[0].paddingTop = Math.max(( this.promoBarHeight - scrollY ), 0) + 'px';
+		}
+	}
+
+	initToggleClick() {
+		const $body = $( 'body' ),
+			  NAVIGATION_OPEN_CLASS = 'navigation-is-open';
+
+		this.$toggle.on('click', function(){
+			$body.toggleClass(NAVIGATION_OPEN_CLASS);
+		});
+	}
+
 	render() {
 		if ( ! this.element ) return;
 
@@ -251,6 +295,7 @@ class Header {
 		this.updateMobileNavigationOffset();
 		this.updateMobileHeaderState();
 		this.updateDesktopHeaderState(false);
+		this.moveSearchButton();
 	}
 }
 

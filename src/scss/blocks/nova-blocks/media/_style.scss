@@ -1,6 +1,29 @@
-// hack to contain negative margin-top of .novablocks-media__layout
-.novablocks-media > .wp-block-group__inner-container {
-    padding-top: 1px;
+.novablocks-media {
+
+    &.novablocks-media--no-thumbnail {
+
+        .novablocks-media__image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            path {
+                fill: var(--current-color-primary);
+            }
+        }
+    }
+
+    // hack to contain negative margin-top of .novablocks-media__layout
+    > .wp-block-group__inner-container {
+        padding-top: 1px;
+    }
+}
+
+.novablocks-media__inner-container {
+
+    .wp-block-separator {
+        width: 100%;
+    }
 }
 
 .novablocks-media__content {
@@ -26,13 +49,6 @@
 
     svg {
         object-fit: contain;
-    }
-}
-
-.novablocks-block__content {
-
-    @include above(tablet) {
-        --novablocks-block-content-padding: var(--novablocks-spacing);
     }
 }
 
