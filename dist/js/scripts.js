@@ -377,7 +377,8 @@ var createClass = __webpack_require__(2);
 var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 
 // CONCATENATED MODULE: ./src/js/utils.js
-// checks if box1 and box2 overlap
+ // checks if box1 and box2 overlap
+
 function overlapping(box1, box2) {
   var overlappingX = box1.left + box1.width >= box2.left && box2.left + box2.width >= box1.left;
   var overlappingY = box1.top + box1.height >= box2.top && box2.top + box2.height >= box1.top;
@@ -443,6 +444,23 @@ var below = function below(string) {
 var above = function above(string) {
   return mq('above', string);
 };
+function setAndResetElementStyles(element) {
+  var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  external_jQuery_default()(element).css(props);
+  Object.keys(props).forEach(function (key) {
+    props[key] = '';
+  });
+
+  if (window.requestIdleCallback) {
+    requestIdleCallback(function () {
+      external_jQuery_default()(element).css(props);
+    });
+  } else {
+    setTimeout(function () {
+      external_jQuery_default()(element).css(props);
+    }, 0);
+  }
+}
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/toConsumableArray.js
 var toConsumableArray = __webpack_require__(3);
 var toConsumableArray_default = /*#__PURE__*/__webpack_require__.n(toConsumableArray);
@@ -1300,23 +1318,17 @@ function () {
     value: function onResize() {
       var $header = external_jQuery_default()(this.element);
       var wasScrolled = $header.hasClass('site-header--scrolled');
-      $header.css('transition', 'none');
+      setAndResetElementStyles($header, {
+        transition: 'none'
+      });
+      setAndResetElementStyles(this.$searchOverlay, {
+        transition: 'none'
+      });
       $header.removeClass('site-header--scrolled');
       this.getProps();
       this.setVisibleHeaderHeight();
       this.shouldMakeHeaderStatic();
       $header.toggleClass('site-header--scrolled', wasScrolled);
-
-      if (window.requestIdleCallback) {
-        requestIdleCallback(function () {
-          $header.css('transition', '');
-        });
-      } else {
-        setTimeout(function () {
-          $header.css('transition', '');
-        }, 0);
-      }
-
       this.update();
     }
   }, {

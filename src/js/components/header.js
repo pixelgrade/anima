@@ -1,5 +1,5 @@
 import GlobalService from "./globalService";
-import { below, debounce } from '../utils';
+import { below, debounce, setAndResetElementStyles } from '../utils';
 import $ from 'jquery';
 
 const defaults = {
@@ -121,7 +121,8 @@ class Header {
 		const $header = $( this.element );
 		const wasScrolled = $header.hasClass( 'site-header--scrolled' );
 
-		$header.css( 'transition', 'none' );
+		setAndResetElementStyles( $header, { transition: 'none'});
+		setAndResetElementStyles( this.$searchOverlay, {transition: 'none'} );
 		$header.removeClass( 'site-header--scrolled' );
 
 		this.getProps();
@@ -129,16 +130,6 @@ class Header {
 		this.shouldMakeHeaderStatic();
 
 		$header.toggleClass( 'site-header--scrolled', wasScrolled );
-
-		if ( window.requestIdleCallback ) {
-			requestIdleCallback( () => {
-				$header.css( 'transition', '' );
-			} );
-		} else {
-			setTimeout( () => {
-				$header.css( 'transition', '' );
-			}, 0 );
-		}
 
 		this.update();
 	}

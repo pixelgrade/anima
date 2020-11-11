@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 // checks if box1 and box2 overlap
 export function overlapping( box1, box2 ) {
 	const overlappingX = box1.left + box1.width >= box2.left && box2.left + box2.width >= box1.left;
@@ -74,3 +76,21 @@ export const below = function(string) {
 export const above = function(string) {
 	return mq( 'above', string );
 };
+
+export function setAndResetElementStyles( element, props = {} ) {
+
+	$(element).css(props);
+	Object.keys( props ).forEach( key => { props[ key ] = '' } )
+
+   if ( window.requestIdleCallback ) {
+		requestIdleCallback( () => {
+			$(element).css(props);
+		} );
+	} else {
+		setTimeout( () => {
+			$(element).css(props);
+		}, 0 );
+	}
+}
+
+
