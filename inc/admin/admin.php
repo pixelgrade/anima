@@ -18,6 +18,11 @@ function rosa2_admin_setup() {
 	require_once 'class-admin-customize.php'; // phpcs:ignore
 
 	/**
+	 * Load and initialize the nav menus logic.
+	 */
+	require_once 'class-admin-nav-menus.php'; // phpcs:ignore
+
+	/**
 	 * Load and initialize Pixelgrade Care notice logic.
 	 */
 	if ( ! class_exists( 'PixelgradeCare_Install_Notice' ) ) {
