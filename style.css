@@ -1928,31 +1928,35 @@ table {
 .is-color-scheme-switcher-button {
   display: flex;
   align-items: center; }
+  .is-color-scheme-switcher-button:not(.no-icon) {
+    --switcher-icon-width: 1em; }
+    .is-dark .is-color-scheme-switcher-button:not(.no-icon) a:after {
+      transform: translateY(-50%) rotate(180deg); }
+    .is-color-scheme-switcher-button:not(.no-icon) a {
+      padding-left: calc(1em + 6px) !important; }
+      .is-color-scheme-switcher-button:not(.no-icon) a:after {
+        content: '';
+        position: absolute;
+        width: var(--switcher-icon-width);
+        height: var(--switcher-icon-width);
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: currentColor;
+        mask: url("./assets/images/icon-dark-mode.svg") no-repeat 50% 50%;
+        mask-size: cover;
+        -webkit-mask: url("./assets/images/icon-dark-mode.svg") no-repeat 50% 50%;
+        -webkit-mask-size: cover;
+        transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1); }
+      .is-color-scheme-switcher-button:not(.no-icon) a:before {
+        width: calc(100% - var(--switcher-icon-width)) !important; }
+    .is-color-scheme-switcher-button:not(.no-icon).is-dark:before {
+      transform: rotate(135deg); }
+  .is-color-scheme-switcher-button.icon-only a {
+    text-indent: -999999px; }
   .is-color-scheme-switcher-button a {
-    position: relative;
-    text-indent: -9999px;
-    width: 1.2em;
-    height: 1.2em;
-    color: inherit;
-    background-color: transparent;
-    box-shadow: inset 0 0 0 2px currentColor;
-    border-radius: 1em;
-    padding-bottom: 0 !important;
-    margin-bottom: 0 !important;
-    transform: rotate(-45deg);
-    transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1); }
-    .is-color-scheme-switcher-button a:after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 50%;
-      left: 0;
-      top: 0;
-      background-color: currentColor;
-      border-top-left-radius: 1em;
-      border-top-right-radius: 1em; }
-  .is-dark .is-color-scheme-switcher-button a {
-    transform: rotate(135deg); }
+    color: currentColor;
+    text-decoration: none; }
 
 @media only screen and (min-width: 1000px) {
   .scheme-switcher__wrapper {
