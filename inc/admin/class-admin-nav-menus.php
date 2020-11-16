@@ -320,7 +320,7 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 								case 'icon':
 									$menu_item->classes[] = 'icon-only';
 									break;
-								case 'text':
+								case 'label':
 									$menu_item->classes[] = 'no-icon';
 									break;
 								default:
