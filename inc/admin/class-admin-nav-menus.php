@@ -40,14 +40,14 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 							'classes'       => array( 'is-search-button' ),
 							'custom_fields' => array(
 								'visual_style' => array(
-									'type'    => 'select',
-									'label'   => esc_html__( '', '__theme_txtd' ),
+									'type'        => 'select',
+									'label'       => esc_html__( '', '__theme_txtd' ),
 									'description' => esc_html__( 'Choose a visual style suitable to your goals.', '__theme_txtd' ),
-									'default' => 'icon_text',
-									'options' => array(
-										'icon_text' => esc_html__( 'Icon+Text', '__theme_txtd' ),
-										'text'      => esc_html__( 'Text Only', '__theme_txtd' ),
-										'icon'      => esc_html__( 'Icon Only', '__theme_txtd' ),
+									'default'     => 'label_icon',
+									'options'     => array(
+										'label'      => esc_html__( 'Label', '__theme_txtd' ),
+										'icon'       => esc_html__( 'Icon', '__theme_txtd' ),
+										'label_icon' => esc_html__( 'Label with icon', '__theme_txtd' ),
 									),
 								),
 							),
