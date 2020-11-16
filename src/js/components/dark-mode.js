@@ -1,16 +1,23 @@
 import $ from 'jquery';
 
-const COLOR_SCHEME_BUTTON = '.is-color-scheme-switcher-button',
-	STORAGE_ITEM = 'color-scheme-dark',
-	$html = $( 'html' );
+const COLOR_SCHEME_BUTTON = '.is-color-scheme-switcher-button';
+const STORAGE_ITEM = 'color-scheme-dark';
+const TEMP_STORAGE_ITEM = 'color-scheme-dark-temp'
+const $html = $( 'html' );
+const api = wp?.customize;
+const ignoreStorage = !! api;
 
 export default class DarkMode {
 
 	constructor( element ) {
+
 		this.$element = $( element );
 
 		this.$colorSchemeButtons = $( COLOR_SCHEME_BUTTON );
 		this.$colorSchemeButtonsLink = this.$colorSchemeButtons.children( 'a' );
+
+		this.matchMedia = window.matchMedia( '(prefers-color-scheme: dark)' );
+		this.darkModeSetting = $html.data( 'dark-mode-advanced' );
 
 		this.theme = null;
 
@@ -18,31 +25,52 @@ export default class DarkMode {
 	}
 
 	initialize() {
+		localStorage.removeItem( TEMP_STORAGE_ITEM );
+
 		this.bindEvents();
+		this.bindCustomizer();
 		this.update();
 	}
 
 	bindEvents() {
 		this.$colorSchemeButtonsLink.on( 'click', this.onClick.bind( this ) );
+
+		this.matchMedia.addEventListener( 'change', () => {
+			localStorage.removeItem( TEMP_STORAGE_ITEM );
+			this.update();
+		} );
+	}
+
+	bindCustomizer() {
+
+		if ( ! api ) {
+			return;
+		}
+
+		api( 'sm_dark_mode_advanced' ).bind( ( newValue, oldValue ) => {
+			localStorage.removeItem( TEMP_STORAGE_ITEM );
+			this.darkModeSetting = newValue;
+			this.update();
+		} );
 	}
 
 	onClick( e ) {
 		e.preventDefault();
-
 		let isDark = this.isCompiledDark();
 
-		localStorage.setItem( STORAGE_ITEM, !! isDark ? 'light' : 'dark' );
+		localStorage.setItem( this.getStorageItemKey(), !! isDark ? 'light' : 'dark' );
 
 		this.update();
 	};
 
+	getStorageItemKey() {
+		return ! ignoreStorage ? STORAGE_ITEM : TEMP_STORAGE_ITEM;
+	};
+
 	isSystemDark() {
-		const darkModeSetting = $html.data( 'dark-mode-advanced' ),
-			USER_PREFER_DARK = !! window.matchMedia && window.matchMedia( '(prefers-color-scheme: dark)' ).matches;
+		let isDark = this.darkModeSetting === 'on';
 
-		let isDark = darkModeSetting === 'on';
-
-		if( darkModeSetting === 'auto' && USER_PREFER_DARK ) {
+		if ( this.darkModeSetting === 'auto' && this.matchMedia.matches ) {
 			isDark = true;
 		}
 
@@ -51,8 +79,7 @@ export default class DarkMode {
 
 	isCompiledDark() {
 		let isDark = this.isSystemDark();
-
-		let colorSchemeStorageValue = localStorage.getItem( STORAGE_ITEM );
+		let colorSchemeStorageValue = localStorage.getItem( this.getStorageItemKey() );
 
 		if ( colorSchemeStorageValue !== null ) {
 			isDark = colorSchemeStorageValue === 'dark';
@@ -60,7 +87,6 @@ export default class DarkMode {
 
 		return isDark;
 	}
-
 
 	update() {
 		$html.toggleClass( 'is-dark', this.isCompiledDark() );
