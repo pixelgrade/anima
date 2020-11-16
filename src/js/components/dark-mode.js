@@ -4,13 +4,6 @@ const COLOR_SCHEME_BUTTON = '.is-color-scheme-switcher-button',
 	STORAGE_ITEM = 'color-scheme-dark',
 	$html = $( 'html' );
 
-var in_customizer = false;
-
-if ( typeof wp !== 'undefined' ) {
-	in_customizer =  typeof wp.customize !== 'undefined';
-}
-
-
 export default class DarkMode {
 
 	constructor( element ) {
@@ -70,11 +63,6 @@ export default class DarkMode {
 
 
 	update() {
-		const isDark = this.isCompiledDark();
-
-		if ( ! in_customizer ) {
-			$html.toggleClass( 'is-dark', isDark );
-		}
-
+		$html.toggleClass( 'is-dark', this.isCompiledDark() );
 	}
 }

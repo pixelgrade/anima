@@ -33,16 +33,17 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 						'search' => array(
 							'type'          => 'custom-pxg',
 							'type_label'    => esc_html__( 'Custom', '__theme_txtd' ),
-							'title'         => esc_html__( 'Search for something you seek', '__theme_txtd' ),
+							'title'         => esc_html__( 'Search', '__theme_txtd' ),
 							'label'         => esc_html__( 'Search', '__theme_txtd' ),
 							'url'           => '#search',
+							'attr_title'         => esc_html__( 'Search for something you seek', '__theme_txtd' ),
 							// These are classes that will be merged with the user defined classes.
 							'classes'       => array( 'is-search-button' ),
 							'custom_fields' => array(
 								'visual_style' => array(
 									'type'        => 'select',
-									'label'       => esc_html__( '', '__theme_txtd' ),
-									'description' => esc_html__( 'Choose a visual style suitable to your goals.', '__theme_txtd' ),
+									'label'       => esc_html__( 'Visual Style', '__theme_txtd' ),
+									'description' => esc_html__( 'Choose a visual style suitable to your goals and audience.', '__theme_txtd' ),
 									'default'     => 'label_icon',
 									'options'     => array(
 										'label'      => esc_html__( 'Label', '__theme_txtd' ),
@@ -55,11 +56,25 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 						'color-scheme-switcher' => array(
 							'type'        => 'custom-pxg',
 							'type_label'  => esc_html__( 'Custom', '__theme_txtd' ),
-							'title'       => esc_html__( 'Switch between dark and light color mode', '__theme_txtd' ),
+							'title'       => esc_html__( 'Light/Dark Mode', '__theme_txtd' ),
 							'label'       => esc_html__( 'Dark Mode Switcher', '__theme_txtd' ),
 							'url'         => '#color-scheme-switcher',
+							'attr_title'       => esc_html__( 'Switch between dark and light color mode', '__theme_txtd' ),
 							// These are classes that will be merged with the user defined classes.
 							'classes'     => array( 'is-color-scheme-switcher-button' ),
+							'custom_fields' => array(
+								'visual_style' => array(
+									'type'        => 'select',
+									'label'       => esc_html__( 'Visual Style', '__theme_txtd' ),
+									'description' => esc_html__( 'Choose a visual style suitable to your goals and audience.', '__theme_txtd' ),
+									'default'     => 'icon',
+									'options'     => array(
+										'label'      => esc_html__( 'Label', '__theme_txtd' ),
+										'icon'       => esc_html__( 'Icon', '__theme_txtd' ),
+										'label_icon' => esc_html__( 'Label with icon', '__theme_txtd' ),
+									),
+								),
+							),
 						),
 					),
 				),
@@ -134,7 +149,7 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 					// Gather up the HTML details of the custom field.
 					$field_id = 'edit-menu-item-' . $name . '-' . $item_id;
 					$field_name = 'menu-item-' . $name . '[' . $item_id . ']';
-					$field_classes = array( 'wide', 'edit-menu-item-' . $name, );
+					$field_classes = array( 'widefat', 'edit-menu-item-' . $name, );
 					if ( ! empty( $config['classes'] ) && is_array( $config['classes'] ) ) {
 						$field_classes = array_unique( array_merge( $field_classes, $config['classes'] ) );
 					}
@@ -247,7 +262,7 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 			foreach ( $this->menu_items_boxes_config['pxg-extras']['menu_items'] as $id => $item ) {
 				$menu_items_obj[ $id ]                   = new stdClass;
 				$menu_items_obj[ $id ]->ID               = $id;
-				$menu_items_obj[ $id ]->title            = $item['label'];
+				$menu_items_obj[ $id ]->title            = $item['title'];
 				$menu_items_obj[ $id ]->description      = '';
 				$menu_items_obj[ $id ]->db_id            = 0;
 				$menu_items_obj[ $id ]->object           = 'pxg-extras__' . $id;
@@ -258,7 +273,7 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 				$menu_items_obj[ $id ]->target           = '';
 				$menu_items_obj[ $id ]->attr_title       = '';
 				$menu_items_obj[ $id ]->label            = $item['label'];
-				$menu_items_obj[ $id ]->attr_title       = $item['title'];
+				$menu_items_obj[ $id ]->attr_title       = $item['attr_title'];
 				$menu_items_obj[ $id ]->classes          = array();
 				$menu_items_obj[ $id ]->xfn              = '';
 			}
@@ -320,7 +335,7 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 								case 'icon':
 									$menu_item->classes[] = 'icon-only';
 									break;
-								case 'text':
+								case 'label':
 									$menu_item->classes[] = 'no-icon';
 									break;
 								default:
@@ -394,12 +409,12 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 			foreach ( $this->menu_items_boxes_config['pxg-extras']['menu_items'] as $id => $item ) {
 				$items[] = array(
 					'id'         => $id,
-					'title'      => $item['label'],
+					'title'      => $item['title'],
 					'type'       => $item['type'],
 					'type_label' => $item['type_label'],
 					'object'     => 'pxg-extras__' . $id,
 					'classes'    => '',
-					'attr_title' => $item['title'],
+					'attr_title' => $item['attr_title'],
 				);
 			}
 
@@ -407,18 +422,19 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 		}
 
 		public function add_customize_custom_fields_templates() {
+			foreach ( $this->menu_items_boxes_config['pxg-extras']['menu_items'] as $box_name => $box_config ) {
 			?>
 
-			<# if ( "custom-pxg" === data.item_type && data.el_classes.indexOf("pxg-extras__search") !== -1 ) { #>
+			<# if ( "custom-pxg" === data.item_type && data.el_classes.indexOf("pxg-extras__<?php echo $box_name; ?>") !== -1 ) { #>
 			<?php
-				$item_config = $this->menu_items_boxes_config['pxg-extras']['menu_items']['search'];
+				$box_config = $this->menu_items_boxes_config['pxg-extras']['menu_items'][ $box_name ];
 
-				if ( empty( $item_config['custom_fields'] ) ) {
+				if ( empty( $box_config['custom_fields'] ) ) {
 					return;
 				}
 
 				// Take each custom field config and output the HTML.
-				foreach ( $item_config['custom_fields'] as $name => $config ) {
+				foreach ( $box_config['custom_fields'] as $name => $config ) {
 					if ( ! in_array( $config['type'], array( 'select', 'textarea', ) ) ) {
 						continue;
 					}
@@ -469,6 +485,7 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 			<# } #>
 
 			<?php
+			}
 		}
 
 		/**
@@ -523,12 +540,17 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 				return null;
 			}
 
+			$allowed_visual_style_values = array(
+				'label',
+				'icon',
+				'label_icon',
+			);
+
 			$unsanitized_post_value = $setting->manager->unsanitized_post_values()[ $setting->id ];
 			if ( isset( $unsanitized_post_value['visual_style'] ) ) {
 				$value = $unsanitized_post_value['visual_style'];
 
-				if ( ! empty( $this->menu_items_boxes_config['pxg-extras']['menu_items']['search']['custom_fields']['visual_style']['options'] ) &&
-					in_array( $value, array_keys( $this->menu_items_boxes_config['pxg-extras']['menu_items']['search']['custom_fields']['visual_style']['options'] ) ) ) {
+				if ( in_array( $value, $allowed_visual_style_values ) ) {
 					return $value;
 				}
 			}

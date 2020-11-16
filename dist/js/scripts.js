@@ -1907,11 +1907,6 @@ function () {
 var COLOR_SCHEME_BUTTON = '.is-color-scheme-switcher-button',
     STORAGE_ITEM = 'color-scheme-dark',
     dark_mode_$html = external_jQuery_default()('html');
-var in_customizer = false;
-
-if (typeof wp !== 'undefined') {
-  in_customizer = typeof wp.customize !== 'undefined';
-}
 
 var dark_mode_DarkMode =
 /*#__PURE__*/
@@ -1973,11 +1968,7 @@ function () {
   }, {
     key: "update",
     value: function update() {
-      var isDark = this.isCompiledDark();
-
-      if (!in_customizer) {
-        dark_mode_$html.toggleClass('is-dark', isDark);
-      }
+      dark_mode_$html.toggleClass('is-dark', this.isCompiledDark());
     }
   }]);
 

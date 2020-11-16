@@ -145,7 +145,7 @@
 
 
   function updateControlFields(control) {
-    var visualStyle = control.setting().visual_style || 'icon_text';
+    var visualStyle = control.setting().visual_style || 'label_icon';
     control.visualStyleField.find('select').val(visualStyle);
   }
 })();

@@ -61,7 +61,7 @@
 	 * @param {wp.customize.Menus.MenuItemControl} control
 	 */
 	function updateControlFields( control ) {
-		const visualStyle = control.setting().visual_style || 'icon_text';
+		const visualStyle = control.setting().visual_style || 'label_icon';
 
 		control.visualStyleField.find( 'select' ).val(visualStyle);
 	}
