@@ -1904,14 +1904,15 @@ function () {
 
 
 
-var COLOR_SCHEME_BUTTON = '.is-color-scheme-switcher-button',
-    STORAGE_ITEM = 'color-scheme-dark',
-    dark_mode_$html = external_jQuery_default()('html');
-var in_customizer = false;
+var _wp;
 
-if (typeof wp !== 'undefined') {
-  in_customizer = typeof wp.customize !== 'undefined';
-}
+
+var COLOR_SCHEME_BUTTON = '.is-color-scheme-switcher-button';
+var STORAGE_ITEM = 'color-scheme-dark';
+var TEMP_STORAGE_ITEM = 'color-scheme-dark-temp';
+var dark_mode_$html = external_jQuery_default()('html');
+var api = (_wp = wp) === null || _wp === void 0 ? void 0 : _wp.customize;
+var ignoreStorage = !!api;
 
 var dark_mode_DarkMode =
 /*#__PURE__*/
@@ -1922,6 +1923,8 @@ function () {
     this.$element = external_jQuery_default()(element);
     this.$colorSchemeButtons = external_jQuery_default()(COLOR_SCHEME_BUTTON);
     this.$colorSchemeButtonsLink = this.$colorSchemeButtons.children('a');
+    this.matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
+    this.darkModeSetting = dark_mode_$html.data('dark-mode-advanced');
     this.theme = null;
     this.initialize();
   }
@@ -1929,30 +1932,58 @@ function () {
   createClass_default()(DarkMode, [{
     key: "initialize",
     value: function initialize() {
+      localStorage.removeItem(TEMP_STORAGE_ITEM);
       this.bindEvents();
+      this.bindCustomizer();
       this.update();
     }
   }, {
     key: "bindEvents",
     value: function bindEvents() {
+      var _this = this;
+
       this.$colorSchemeButtonsLink.on('click', this.onClick.bind(this));
+      this.matchMedia.addEventListener('change', function () {
+        localStorage.removeItem(TEMP_STORAGE_ITEM);
+
+        _this.update();
+      });
+    }
+  }, {
+    key: "bindCustomizer",
+    value: function bindCustomizer() {
+      var _this2 = this;
+
+      if (!api) {
+        return;
+      }
+
+      api('sm_dark_mode_advanced').bind(function (newValue, oldValue) {
+        localStorage.removeItem(TEMP_STORAGE_ITEM);
+        _this2.darkModeSetting = newValue;
+
+        _this2.update();
+      });
     }
   }, {
     key: "onClick",
     value: function onClick(e) {
       e.preventDefault();
       var isDark = this.isCompiledDark();
-      localStorage.setItem(STORAGE_ITEM, !!isDark ? 'light' : 'dark');
+      localStorage.setItem(this.getStorageItemKey(), !!isDark ? 'light' : 'dark');
       this.update();
+    }
+  }, {
+    key: "getStorageItemKey",
+    value: function getStorageItemKey() {
+      return !ignoreStorage ? STORAGE_ITEM : TEMP_STORAGE_ITEM;
     }
   }, {
     key: "isSystemDark",
     value: function isSystemDark() {
-      var darkModeSetting = dark_mode_$html.data('dark-mode-advanced'),
-          USER_PREFER_DARK = !!window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      var isDark = darkModeSetting === 'on';
+      var isDark = this.darkModeSetting === 'on';
 
-      if (darkModeSetting === 'auto' && USER_PREFER_DARK) {
+      if (this.darkModeSetting === 'auto' && this.matchMedia.matches) {
         isDark = true;
       }
 
@@ -1962,7 +1993,7 @@ function () {
     key: "isCompiledDark",
     value: function isCompiledDark() {
       var isDark = this.isSystemDark();
-      var colorSchemeStorageValue = localStorage.getItem(STORAGE_ITEM);
+      var colorSchemeStorageValue = localStorage.getItem(this.getStorageItemKey());
 
       if (colorSchemeStorageValue !== null) {
         isDark = colorSchemeStorageValue === 'dark';
@@ -1974,10 +2005,7 @@ function () {
     key: "update",
     value: function update() {
       var isDark = this.isCompiledDark();
-
-      if (!in_customizer) {
-        dark_mode_$html.toggleClass('is-dark', isDark);
-      }
+      dark_mode_$html.toggleClass('is-dark', isDark);
     }
   }]);
 
