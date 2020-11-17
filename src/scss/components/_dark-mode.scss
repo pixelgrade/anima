@@ -1,5 +1,11 @@
 .is-dark {
-  @include variation(darker);
+  @include variation(darker, current, theme);
+
+  // << highlighted >> blocks that have alternate style set, are usually white text on colored background
+  // and they should stay that way even for the dark theme
+  .is-style-alternate .novablocks-block.block-is-highlighted {
+    @include variation(default, current, theme);
+  }
 }
 
 .is-color-scheme-switcher-button {
