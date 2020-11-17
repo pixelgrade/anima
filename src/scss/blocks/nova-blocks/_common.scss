@@ -30,6 +30,10 @@
             0 8px 16px rgba(0, 0, 0, 0.1);
     }
 
+    * {
+        @include variation( default, novablocks-current, current );
+    }
+
     .novablocks-hero__inner-container,
     .novablocks-slideshow__inner-container {
         --theme-wrapper-sides-spacing: 0;
