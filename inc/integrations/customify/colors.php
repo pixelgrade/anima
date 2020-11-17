@@ -78,6 +78,7 @@ function pixelgrade_add_colors_section_to_customify_config( $config ) {
 					'color_light_3'
 				),
 			),
+
 		),
 	) );
 

@@ -18,6 +18,7 @@ class Header {
 		this.$toggle = $( '.c-menu-toggle' );
 		this.$toggleWrap = $( '.c-menu-toggle__wrap' );
 		this.$searchCancelButton = $( '.c-search-overlay__cancel' );
+		this.$colorSchemeSwitcher = $( '.is-color-scheme-switcher-button' );
 		this.$searchOverlay = $('.c-search-overlay');
 
 		this.scrolled = false;
@@ -60,6 +61,7 @@ class Header {
 		this.updateHeaderOffset();
 		this.updateMobileHeaderOffset();
 		this.updateSearchButtonsHeight();
+		this.updateColorSchemeButtonHeight();
 		this.updateSearchOverlayOffset();
 	}
 
@@ -261,6 +263,24 @@ class Header {
 		this.movedSearchButton = true;
 	}
 
+	moveColorSchemeSwitcherButton() {
+		if ( this.movedColorSchemeSwitcherButton || ! below('lap') ) return;
+
+		const $colorSchemeSwitcherButton = $('.is-color-scheme-switcher-button'),
+			  $colorSchemeSwitcherWrapper  = $('.scheme-switcher__wrapper');
+
+		if( $colorSchemeSwitcherWrapper.length ) {
+			this.$colorSchemeSwitcherWrapper = $colorSchemeSwitcherWrapper;
+			this.movedColorSchemeSwitcherButton = true;
+			return;
+		}
+
+		this.$colorSchemeSwitcherWrapper = $( '<div class="scheme-switcher__wrapper">' );
+		$colorSchemeSwitcherButton.first().clone().appendTo( this.$colorSchemeSwitcherWrapper);
+		this.$colorSchemeSwitcherWrapper.insertAfter( '.site-header__wrapper');
+		this.movedColorSchemeSwitcherButton = true;
+	}
+
 	updateSearchButtonsHeight() {
 		this.$searchCancelButton.css({
 			height: this.mobileHeaderHeight,
@@ -268,6 +288,22 @@ class Header {
 
 
 		$('.search-button__wrapper').css({
+			height: this.mobileHeaderHeight,
+		});
+	}
+
+	updateColorSchemeButtonHeight() {
+
+		if ( ! below('lap') ) {
+			return;
+		}
+
+		this.$colorSchemeSwitcher.css({
+			height: this.mobileHeaderHeight,
+		});
+
+
+		$('.scheme-switcher__wrapper').css({
 			height: this.mobileHeaderHeight,
 		});
 	}
@@ -296,6 +332,7 @@ class Header {
 		this.updateMobileHeaderState();
 		this.updateDesktopHeaderState(false);
 		this.moveSearchButton();
+		this.moveColorSchemeSwitcherButton();
 	}
 }
 

@@ -22,10 +22,6 @@ if ( ! class_exists( 'Rosa2_Admin_Customize', false ) ) :
 		 */
 		public function __construct() {
 			add_action( 'customize_register', array( $this, 'customize_register' ) );
-
-			// Include custom items to customizer nav menu settings.
-			add_filter( 'customize_nav_menu_available_item_types', array( $this, 'register_customize_nav_menu_item_types' ) );
-			add_filter( 'customize_nav_menu_available_items', array( $this, 'register_customize_nav_menu_items' ), 10, 4 );
 		}
 
 		/**
@@ -85,52 +81,6 @@ if ( ! class_exists( 'Rosa2_Admin_Customize', false ) ) :
 				'render_callback'     => array( $this, 'customizer_partial_transparent_logo' ),
 				'container_inclusive' => true,
 			) );
-		}
-
-		/**
-		 * Register customize new nav menu item types.
-		 *
-		 * @param  array $item_types Menu item types.
-		 * @return array
-		 */
-		public function register_customize_nav_menu_item_types( $item_types ) {
-			$item_types[] = array(
-				'title'      => __( 'Extras', '__theme_txtd' ),
-				'type_label' => __( 'Extras', '__theme_txtd' ),
-				'type'       => 'custom',
-				'object'     => 'rosa2',
-			);
-
-			return $item_types;
-		}
-
-		/**
-		 * Add our extra menu items to customize nav menu items.
-		 *
-		 * @param  array   $items  List of nav menu items.
-		 * @param  string  $type   Nav menu type.
-		 * @param  string  $object Nav menu object.
-		 * @param  integer $page   Page number.
-		 * @return array
-		 */
-		public function register_customize_nav_menu_items( $items = array(), $type = '', $object = '', $page = 0 ) {
-			if ( 'rosa2' !== $object ) {
-				return $items;
-			}
-
-			// Don't allow pagination since all items are loaded at once.
-			if ( 0 < $page ) {
-				return $items;
-			}
-
-			$items[] = array(
-				'id'         => '#search',
-				'title'      => esc_html__( 'Search', '__theme_txtd' ),
-				'type_label' => esc_html__( 'Search Link', '__theme_txtd' ),
-				'url'        => esc_url_raw( '#search' ),
-			);
-
-			return $items;
 		}
 
 		/* ============================

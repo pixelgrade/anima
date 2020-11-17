@@ -89,30 +89,66 @@
 /***/ 15:
 /***/ (function(module, exports) {
 
-(function ($) {
-  $(document).ready(function () {
-    hide_all_custom_menu_items_url();
+/**
+ * Started from this wonderful solution provided by Weston Ruter: https://gist.github.com/westonruter/7f2b9c18113f0576a72e0aca3ce3dbcb
+ */
+(function () {
+  // Augment each menu item control once it is added and embedded.
+  wp.customize.control.bind('add', function (control) {
+    if (control.extended(wp.customize.Menus.MenuItemControl)) {
+      control.deferred.embedded.done(function () {
+        extendControl(control);
+      });
+    }
   });
+  /**
+   * Extend the control with our custom fields information.
+   *
+   * @param {wp.customize.Menus.MenuItemControl} control
+   */
 
-  function hide_all_custom_menu_items_url() {
-    $('#menu-to-edit').find('.menu-item-custom').each(function (idx, menu_item) {
-      hide_custom_menu_item_url(menu_item);
+  function extendControl(control) {
+    if (control.container.find('.field-visual_style').length < 1) {
+      return;
+    }
+
+    control.visualStyleField = control.container.find('.field-visual_style'); // Set the initial UI state.
+
+    updateControlFields(control); // Update the UI state when the setting changes programmatically.
+
+    control.setting.bind(function () {
+      updateControlFields(control);
+    }); // Update the setting when the inputs are modified.
+
+    control.visualStyleField.find('select').on('change', function () {
+      setSettingVisualStyle(control.setting, this.value);
     });
   }
+  /**
+   * Extend the setting with roles information.
+   *
+   * @param {wp.customize.Setting} setting
+   * @param {string} visual_style
+   */
 
-  function hide_custom_menu_item_url(menu_item) {
-    var $this = $(menu_item);
-    var urlField = $this.find('.edit-menu-item-url').first();
 
-    if (urlField.val() === '#') {
-      $this.find('.field-url').first().hide();
-    }
+  function setSettingVisualStyle(setting, visual_style) {
+    setting.set(Object.assign({}, _.clone(setting()), {
+      visual_style: visual_style
+    }));
   }
+  /**
+   * Apply the control's setting value to the control's fields.
+   *
+   * @param {wp.customize.Menus.MenuItemControl} control
+   */
 
-  $(document).on('menu-item-added', function () {
-    hide_custom_menu_item_url('#menu-to-edit .menu-item');
-  });
-})(jQuery);
+
+  function updateControlFields(control) {
+    var visualStyle = control.setting().visual_style || 'label_icon';
+    control.visualStyleField.find('select').val(visualStyle);
+  }
+})();
 
 /***/ })
 

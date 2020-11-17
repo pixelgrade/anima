@@ -1208,6 +1208,7 @@ function () {
     this.$toggle = external_jQuery_default()('.c-menu-toggle');
     this.$toggleWrap = external_jQuery_default()('.c-menu-toggle__wrap');
     this.$searchCancelButton = external_jQuery_default()('.c-search-overlay__cancel');
+    this.$colorSchemeSwitcher = external_jQuery_default()('.is-color-scheme-switcher-button');
     this.$searchOverlay = external_jQuery_default()('.c-search-overlay');
     this.scrolled = false;
     this.inversed = false;
@@ -1244,6 +1245,7 @@ function () {
       this.updateHeaderOffset();
       this.updateMobileHeaderOffset();
       this.updateSearchButtonsHeight();
+      this.updateColorSchemeButtonHeight();
       this.updateSearchOverlayOffset();
     }
   }, {
@@ -1472,12 +1474,44 @@ function () {
       this.movedSearchButton = true;
     }
   }, {
+    key: "moveColorSchemeSwitcherButton",
+    value: function moveColorSchemeSwitcherButton() {
+      if (this.movedColorSchemeSwitcherButton || !below('lap')) return;
+      var $colorSchemeSwitcherButton = external_jQuery_default()('.is-color-scheme-switcher-button'),
+          $colorSchemeSwitcherWrapper = external_jQuery_default()('.scheme-switcher__wrapper');
+
+      if ($colorSchemeSwitcherWrapper.length) {
+        this.$colorSchemeSwitcherWrapper = $colorSchemeSwitcherWrapper;
+        this.movedColorSchemeSwitcherButton = true;
+        return;
+      }
+
+      this.$colorSchemeSwitcherWrapper = external_jQuery_default()('<div class="scheme-switcher__wrapper">');
+      $colorSchemeSwitcherButton.first().clone().appendTo(this.$colorSchemeSwitcherWrapper);
+      this.$colorSchemeSwitcherWrapper.insertAfter('.site-header__wrapper');
+      this.movedColorSchemeSwitcherButton = true;
+    }
+  }, {
     key: "updateSearchButtonsHeight",
     value: function updateSearchButtonsHeight() {
       this.$searchCancelButton.css({
         height: this.mobileHeaderHeight
       });
       external_jQuery_default()('.search-button__wrapper').css({
+        height: this.mobileHeaderHeight
+      });
+    }
+  }, {
+    key: "updateColorSchemeButtonHeight",
+    value: function updateColorSchemeButtonHeight() {
+      if (!below('lap')) {
+        return;
+      }
+
+      this.$colorSchemeSwitcher.css({
+        height: this.mobileHeaderHeight
+      });
+      external_jQuery_default()('.scheme-switcher__wrapper').css({
         height: this.mobileHeaderHeight
       });
     }
@@ -1506,6 +1540,7 @@ function () {
       this.updateMobileHeaderState();
       this.updateDesktopHeaderState(false);
       this.moveSearchButton();
+      this.moveColorSchemeSwitcherButton();
     }
   }]);
 
@@ -1710,7 +1745,7 @@ function () {
     this.$menuItems = external_jQuery_default()(MENU_ITEM);
     this.$menuItemsWithChildren = this.$menuItems.filter(MENU_ITEM_WITH_CHILDREN).removeClass(HOVER_CLASS);
     this.$menuItemsWithChildrenLinks = this.$menuItemsWithChildren.children('a');
-    this.searchOverlayButton = external_jQuery_default()('.menu-item a[href*="#search"]');
+    this.searchOverlayButton = external_jQuery_default()('.is-search-button a');
     this.searchOverlayCancelButton = external_jQuery_default()('.c-search-overlay__cancel');
     this.initialize();
   }
@@ -1865,7 +1900,120 @@ function () {
 }();
 
 
+// CONCATENATED MODULE: ./src/js/components/dark-mode.js
+
+
+
+var _wp;
+
+
+var COLOR_SCHEME_BUTTON = '.is-color-scheme-switcher-button';
+var STORAGE_ITEM = 'color-scheme-dark';
+var TEMP_STORAGE_ITEM = 'color-scheme-dark-temp';
+var dark_mode_$html = external_jQuery_default()('html');
+var api = (_wp = wp) === null || _wp === void 0 ? void 0 : _wp.customize;
+var ignoreStorage = !!api;
+
+var dark_mode_DarkMode =
+/*#__PURE__*/
+function () {
+  function DarkMode(element) {
+    classCallCheck_default()(this, DarkMode);
+
+    this.$element = external_jQuery_default()(element);
+    this.$colorSchemeButtons = external_jQuery_default()(COLOR_SCHEME_BUTTON);
+    this.$colorSchemeButtonsLink = this.$colorSchemeButtons.children('a');
+    this.matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
+    this.darkModeSetting = dark_mode_$html.data('dark-mode-advanced');
+    this.theme = null;
+    this.initialize();
+  }
+
+  createClass_default()(DarkMode, [{
+    key: "initialize",
+    value: function initialize() {
+      localStorage.removeItem(TEMP_STORAGE_ITEM);
+      this.bindEvents();
+      this.bindCustomizer();
+      this.update();
+    }
+  }, {
+    key: "bindEvents",
+    value: function bindEvents() {
+      var _this = this;
+
+      this.$colorSchemeButtonsLink.on('click', this.onClick.bind(this));
+      this.matchMedia.addEventListener('change', function () {
+        localStorage.removeItem(TEMP_STORAGE_ITEM);
+
+        _this.update();
+      });
+    }
+  }, {
+    key: "bindCustomizer",
+    value: function bindCustomizer() {
+      var _this2 = this;
+
+      if (!api) {
+        return;
+      }
+
+      api('sm_dark_mode_advanced').bind(function (newValue, oldValue) {
+        localStorage.removeItem(TEMP_STORAGE_ITEM);
+        _this2.darkModeSetting = newValue;
+
+        _this2.update();
+      });
+    }
+  }, {
+    key: "onClick",
+    value: function onClick(e) {
+      e.preventDefault();
+      var isDark = this.isCompiledDark();
+      localStorage.setItem(this.getStorageItemKey(), !!isDark ? 'light' : 'dark');
+      this.update();
+    }
+  }, {
+    key: "getStorageItemKey",
+    value: function getStorageItemKey() {
+      return !ignoreStorage ? STORAGE_ITEM : TEMP_STORAGE_ITEM;
+    }
+  }, {
+    key: "isSystemDark",
+    value: function isSystemDark() {
+      var isDark = this.darkModeSetting === 'on';
+
+      if (this.darkModeSetting === 'auto' && this.matchMedia.matches) {
+        isDark = true;
+      }
+
+      return isDark;
+    }
+  }, {
+    key: "isCompiledDark",
+    value: function isCompiledDark() {
+      var isDark = this.isSystemDark();
+      var colorSchemeStorageValue = localStorage.getItem(this.getStorageItemKey());
+
+      if (colorSchemeStorageValue !== null) {
+        isDark = colorSchemeStorageValue === 'dark';
+      }
+
+      return isDark;
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      dark_mode_$html.toggleClass('is-dark', this.isCompiledDark());
+    }
+  }]);
+
+  return DarkMode;
+}();
+
+
 // CONCATENATED MODULE: ./src/js/components/app.js
+
 
 
 
@@ -1887,6 +2035,7 @@ function () {
     this.initializeHeader();
     this.initializeNavbar();
     this.initializePromoBar();
+    this.initializeDarkMode();
     this.initializeImages();
     this.initializeCommentsArea();
     this.initializeReservationForm();
@@ -2003,6 +2152,11 @@ function () {
       this.promoBar = new promo_bar_PromoBar(announcementBars, {
         onUpdate: this.onPromoBarUpdate.bind(this)
       });
+    }
+  }, {
+    key: "initializeDarkMode",
+    value: function initializeDarkMode() {
+      this.DarkMode = new dark_mode_DarkMode();
     }
   }, {
     key: "onPromoBarUpdate",
