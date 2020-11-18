@@ -298,8 +298,6 @@ class Header {
 			return;
 		}
 
-		console.log( $buttons );
-
 		$buttons.css( 'height', this.mobileHeaderHeight );
 	}
 
