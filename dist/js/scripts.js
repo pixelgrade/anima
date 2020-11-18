@@ -446,7 +446,6 @@ var above = function above(string) {
 };
 function setAndResetElementStyles($element) {
   var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  console.log('before', $element, props);
   Object.keys(props).forEach(function (key) {
     props[key] = '';
   });

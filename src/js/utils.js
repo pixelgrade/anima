@@ -79,8 +79,6 @@ export const above = function(string) {
 
 export function setAndResetElementStyles( $element, props = {} ) {
 
-	console.log( 'before', $element, props );
-
 	Object.keys( props ).forEach( key => { props[ key ] = '' } )
 
    if ( window.requestIdleCallback ) {
