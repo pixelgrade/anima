@@ -328,3 +328,19 @@ function rosa2_is_using_block( $slug, $isblockarea ) {
 
 	return false;
 }
+
+function rosa2_init_upgrades_logic() {
+	// We don't want to do upgrade logic in the frontend or on ajax calls.
+	if ( ! is_admin() || ( function_exists( 'wp_doing_ajax' ) ? wp_doing_ajax() : defined( 'DOING_AJAX' ) ) ) {
+		return;
+	}
+
+	require_once( trailingslashit( get_template_directory() ) . 'inc/upgrade/class-Rosa2_Upgrade.php' );
+
+	$current_theme = wp_get_theme( get_template() );
+
+	// Make sure the upgrade class is initialized.
+	// The slug will be hard-coded to avoid loss of data due to modifications by the user.
+	Rosa2_Upgrade::instance( 'rosa2', $current_theme->get('Version' ), $current_theme->get('Name') );
+}
+add_action( 'after_setup_theme', 'rosa2_init_upgrades_logic', 10 );

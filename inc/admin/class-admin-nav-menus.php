@@ -91,7 +91,7 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 			add_action( 'wp_nav_menu_item_custom_fields', array( $this, 'add_custom_fields' ), 5, 2 );
 			add_action( 'wp_update_nav_menu_item', array( $this, 'save_custom_fields' ), 10, 3 );
 			// Make sure that out menu boxes appear by default (the core hides them by default).
-			add_filter( "update_user_metadata", array( $this, 'unhide_our_menu_boxes' ), 10, 5 );
+			add_filter( "update_user_metadata", array( $this, 'unhide_our_menu_boxes_for_initial_metaboxes' ), 10, 5 );
 
 			add_filter( 'wp_setup_nav_menu_item', array( $this, 'setup_nav_menu_item' ), 10, 1 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts_styles' ), 10, 1 );
@@ -256,7 +256,20 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 			}
 		}
 
-		public function unhide_our_menu_boxes( $check, $object_id, $meta_key, $meta_value, $prev_value ) {
+		/**
+		 * Make sure that our metaboxes are not hidden on the initial nav menus metaboxes.
+		 *
+		 * @see wp_initial_nav_menu_meta_boxes()
+		 *
+		 * @param $check
+		 * @param $object_id
+		 * @param $meta_key
+		 * @param $meta_value
+		 * @param $prev_value
+		 *
+		 * @return false|int
+		 */
+		public function unhide_our_menu_boxes_for_initial_metaboxes( $check, $object_id, $meta_key, $meta_value, $prev_value ) {
 			global $wp_meta_boxes;
 
 			if ( $meta_key !== 'metaboxhidden_nav-menus' || ! is_array( $meta_value ) || get_user_option( 'metaboxhidden_nav-menus' ) !== false || ! is_array( $wp_meta_boxes ) ) {
@@ -271,7 +284,12 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 				}
 			}
 
-			return add_metadata( 'user', $object_id, $meta_key, $meta_value );
+			// On failure, let it pass.
+			if ( false === $meta_id = add_metadata( 'user', $object_id, $meta_key, $meta_value ) ) {
+				return $check;
+			}
+
+			return $meta_id;
 		}
 
 		public function add_extras_items( $object ) {
