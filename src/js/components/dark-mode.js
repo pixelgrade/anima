@@ -33,7 +33,7 @@ export default class DarkMode {
 	}
 
 	bindEvents() {
-		this.$colorSchemeButtonsLink.on( 'click', this.onClick.bind( this ) );
+		$( document ).on( 'click', COLOR_SCHEME_BUTTON, this.onClick.bind( this ) );
 
 		this.matchMedia.addEventListener( 'change', () => {
 			localStorage.removeItem( TEMP_STORAGE_ITEM );

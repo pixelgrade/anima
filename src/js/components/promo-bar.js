@@ -23,7 +23,7 @@ export default class PromoBar {
 		} );
 
 		this.height = promoBarHeight;
-
+		
 		if ( typeof this.onUpdate === "function" ) {
 			this.onUpdate( this );
 		}

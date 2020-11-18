@@ -35,7 +35,7 @@ class Header {
 
 		this.$page = $( '#page .site-content' );
 		this.$hero = $( '.has-hero .novablocks-hero' ).first().find( '.novablocks-hero__foreground' );
-		this.$promoBar = $('.novablocks-announcement-bar');
+		this.$promoBar = $( '.novablocks-announcement-bar' );
 
 		this.createMobileHeader();
 
@@ -151,9 +151,12 @@ class Header {
 	}
 
 	updateHeaderOffset() {
-		if ( ! this.element ) return;
-
-		this.element.style.marginTop = this.offset + 'px';
+		requestAnimationFrame(() => {
+			if ( ! this?.element?.style ) {
+				return;
+			}
+			this.element.style.marginTop = this.offset + 'px';
+		} );
 	}
 
 	updateMobileHeaderOffset() {

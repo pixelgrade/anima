@@ -1351,8 +1351,17 @@ function () {
   }, {
     key: "updateHeaderOffset",
     value: function updateHeaderOffset() {
-      if (!this.element) return;
-      this.element.style.marginTop = this.offset + 'px';
+      var _this = this;
+
+      requestAnimationFrame(function () {
+        var _this$element;
+
+        if (!(_this === null || _this === void 0 ? void 0 : (_this$element = _this.element) === null || _this$element === void 0 ? void 0 : _this$element.style)) {
+          return;
+        }
+
+        _this.element.style.marginTop = _this.offset + 'px';
+      });
     }
   }, {
     key: "updateMobileHeaderOffset",
@@ -1736,8 +1745,6 @@ function () {
     this.$menuItems = external_jQuery_default()(MENU_ITEM);
     this.$menuItemsWithChildren = this.$menuItems.filter(MENU_ITEM_WITH_CHILDREN).removeClass(HOVER_CLASS);
     this.$menuItemsWithChildrenLinks = this.$menuItemsWithChildren.children('a');
-    this.searchOverlayButton = external_jQuery_default()('.is-search-button a');
-    this.searchOverlayCancelButton = external_jQuery_default()('.c-search-overlay__cancel');
     this.initialize();
   }
 
@@ -1748,8 +1755,8 @@ function () {
       this.addSocialMenuClass();
       this.initialized = true;
       globalService.registerOnResize(this.onResize.bind(this));
-      this.searchOverlayButton.on('click', this.onClickSearchButton);
-      this.searchOverlayCancelButton.on('click', this.onClickCancelSearchButton);
+      external_jQuery_default()(document).on('click', '.is-search-button a', this.onClickSearchButton);
+      external_jQuery_default()(document).on('click', '.c-search-overlay__cancel', this.onClickCancelSearchButton);
     }
   }, {
     key: "onResize",
@@ -1782,7 +1789,6 @@ function () {
       }
 
       this.desktop = false;
-      return;
     }
   }, {
     key: "addSubMenusLeftClass",
@@ -1933,7 +1939,7 @@ function () {
     value: function bindEvents() {
       var _this = this;
 
-      this.$colorSchemeButtonsLink.on('click', this.onClick.bind(this));
+      external_jQuery_default()(document).on('click', COLOR_SCHEME_BUTTON, this.onClick.bind(this));
       this.matchMedia.addEventListener('change', function () {
         localStorage.removeItem(TEMP_STORAGE_ITEM);
 

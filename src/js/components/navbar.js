@@ -15,9 +15,6 @@ export default class Navbar {
 		this.$menuItemsWithChildren = this.$menuItems.filter( MENU_ITEM_WITH_CHILDREN ).removeClass( HOVER_CLASS );
 		this.$menuItemsWithChildrenLinks = this.$menuItemsWithChildren.children( 'a' );
 
-		this.searchOverlayButton = $('.is-search-button a');
-		this.searchOverlayCancelButton = $('.c-search-overlay__cancel');
-
 		this.initialize();
 	}
 
@@ -27,8 +24,8 @@ export default class Navbar {
 		this.initialized = true;
 		GlobalService.registerOnResize( this.onResize.bind( this ) );
 
-		this.searchOverlayButton.on( 'click', this.onClickSearchButton );
-		this.searchOverlayCancelButton.on( 'click', this.onClickCancelSearchButton );
+		$( document ).on( 'click', '.is-search-button a', this.onClickSearchButton );
+		$( document ).on( 'click', '.c-search-overlay__cancel', this.onClickCancelSearchButton );
 	}
 
 	onResize() {
@@ -61,7 +58,6 @@ export default class Navbar {
 		}
 
 		this.desktop = false;
-		return;
 	}
 
 	addSubMenusLeftClass() {
