@@ -11,7 +11,10 @@
 }
 
 .novablocks-announcement-bar {
-    --novablocks-announcement-color: var(--theme-light-primary);
+
+    &[class*="is-style"] {
+        --novablocks-announcement-color: var(--theme-light-primary);
+    }
 
     &:not([class*="is-style-"]),
     &.is-style-accent {

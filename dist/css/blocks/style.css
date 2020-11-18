@@ -92,14 +92,17 @@
 .block-is-highlighted + .block-is-highlighted[class] {
   padding-top: 0; }
 
-.novablocks-announcement-bar {
+.novablocks-announcement-bar[class*="is-style"] {
   --novablocks-announcement-color: var(--theme-light-primary); }
-  .novablocks-announcement-bar:not([class*="is-style-"]), .novablocks-announcement-bar.is-style-accent {
-    --novablocks-announcement-background-color: var(--theme-color-primary); }
-  .novablocks-announcement-bar.is-style-alternative {
-    --novablocks-announcement-background-color: var(--theme-color-secondary); }
-  .novablocks-announcement-bar a:hover {
-    color: currentColor; }
+
+.novablocks-announcement-bar:not([class*="is-style-"]), .novablocks-announcement-bar.is-style-accent {
+  --novablocks-announcement-background-color: var(--theme-color-primary); }
+
+.novablocks-announcement-bar.is-style-alternative {
+  --novablocks-announcement-background-color: var(--theme-color-secondary); }
+
+.novablocks-announcement-bar a:hover {
+  color: currentColor; }
 
 .novablocks-grid__column:first-child .novablocks-grid__area:first-child:last-child {
   top: calc( var(--novablocks-grid-spacing) * var(--novablocks-grid-spacing-modifier, 1) + var(--site-header-height, 0)); }
