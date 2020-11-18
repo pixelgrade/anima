@@ -10,24 +10,35 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+
+$rosa2_has_transparent_logo = rosa2_has_custom_logo_transparent();
 ?>
 
 <div class="c-branding site-branding">
 
-	<?php if ( has_custom_logo() || rosa2_has_custom_logo_transparent() ) { ?>
+	<?php if ( has_custom_logo() || $rosa2_has_transparent_logo ) { ?>
 
         <div class="c-logo site-logo">
 			<?php if ( has_custom_logo() ) { ?>
                 <div class="c-logo__default">
 					<?php the_custom_logo(); ?>
                 </div>
-			<?php }
-
-			if ( rosa2_has_custom_logo_transparent() ) { ?>
-                <div class="c-logo__inverted">
-					<?php rosa2_the_custom_logo_transparent(); ?>
-                </div>
 			<?php } ?>
+
+                <div class="c-logo__inverted">
+                    <?php
+                        /**
+                         * If transparent logo is not loaded,
+                         * use the custom logo.
+                         */
+                        if ( $rosa2_has_transparent_logo ) {
+	                        rosa2_the_custom_logo_transparent();
+                        } else {
+	                        the_custom_logo();
+                        }
+                    ?>
+
+                </div>
         </div><!-- .c-logo.site-logo -->
 
 	<?php }

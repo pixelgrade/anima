@@ -98,6 +98,9 @@ if ( ! function_exists( 'rosa2_setup' ) ) {
 		 */
 		add_theme_support( 'responsive-embeds' );
 
+		/**
+		 * Remove Typography settings for Gutenberg Editor.
+		 */
 		add_theme_support( 'disable-custom-font-sizes' );
 		add_theme_support( 'editor-font-sizes', array() );
 
@@ -106,6 +109,7 @@ if ( ! function_exists( 'rosa2_setup' ) ) {
 		 */
 		add_theme_support( 'customizer_style_manager' );
 		add_theme_support( 'style_manager_font_palettes' );
+		add_theme_support( 'style_manager_advanced_dark_mode' );
 
 		/**
 		 * Remove Theme support for Core Block Patterns.
@@ -226,14 +230,6 @@ function rosa2_scripts() {
 		wp_enqueue_style( 'rosa2-gutenberg-legacy-frontend' );
 	}
 }
-
-function rosa2_admin_scripts() {
-	if( rosa2_is_nav_menus_page() ) {
-		wp_enqueue_script( 'rosa2-admin-nav-menus-scripts', get_template_directory_uri() . '/dist/js/admin/edit-nav-menus.js', array( 'jquery' ), '1.0.0', true );
-	}
-}
-
-add_action( 'admin_enqueue_scripts', 'rosa2_admin_scripts' );
 
 function rosa2_webfonts_fallback() {
 

@@ -1,0 +1,160 @@
+.is-dark {
+  @include variation(darker, current, theme);
+
+  // << highlighted >> blocks that have alternate style set, are usually white text on colored background
+  // and they should stay that way even for the dark theme
+  .is-style-alternate .novablocks-block.block-is-highlighted {
+    @include variation(default, current, theme);
+  }
+}
+
+.is-color-scheme-switcher-button {
+  display: flex;
+  align-items: center;
+
+  &:not(.no-icon) {
+    --switcher-icon-width: 1em;
+
+    .is-dark & {
+      a:after {
+        transform: translateY(-50%) rotate(180deg);
+      }
+    }
+
+    a {
+      padding-left: calc(1em + 6px) !important;
+
+      &:after {
+        content: '';
+        position: absolute;
+        width: var(--switcher-icon-width);
+        height: var(--switcher-icon-width);
+
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: currentColor;
+
+        mask: url($icon-dark-mode-path) no-repeat 50% 50%;
+        mask-size: cover;
+        -webkit-mask: url($icon-dark-mode-path) no-repeat 50% 50%;
+        -webkit-mask-size: cover;
+
+        transition: transform .25s $easeInOutCubic;
+      }
+
+      &:before {
+        width: calc(100% - var(--switcher-icon-width)) !important;
+      }
+    }
+
+    &.is-dark {
+      &:before {
+        transform: rotate(135deg);
+      }
+    }
+  }
+
+  &.icon-only {
+
+    a {
+      text-indent: -999999px;
+    }
+  }
+
+  a {
+    color: currentColor;
+    text-decoration: none;
+  }
+}
+
+.scheme-switcher__wrapper {
+  @include above(lap) {
+    display: none;
+  }
+}
+
+// Adjust logo based on Dark Mode
+
+@include below(lap) {
+  .is-dark {
+
+    .c-logo__default {
+      opacity: 0;
+    }
+
+    .site-header-mobile--scrolled  {
+
+      .site-header--mobile {
+
+        .c-logo__default {
+          opacity: 0;
+        }
+
+        .c-logo__inverted {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+.is-dark {
+
+  .site-header--mobile,
+  .c-menu-toggle {
+    color: var(--sm-light-primary);
+  }
+
+  .c-logo__inverted {
+    opacity: 1;
+  }
+
+  .site-header--mobile {
+
+    .c-logo__inverted {
+      opacity: 1;
+    }
+
+    .c-logo__default {
+      opacity: 0;
+    }
+  }
+
+  .novablocks-opentable {
+    &.novablocks-opentable__standard[class] {
+      .ot-powered-by {
+        -webkit-filter: unset;
+        mix-blend-mode: unset;
+      }
+    }
+
+    &.novablocks-opentable__wide[class] {
+      .ot-powered-by {
+        -webkit-filter: invert(1) saturate(0);
+        mix-blend-mode: lighten;
+      }
+    }
+  }
+
+  @include below(lap) {
+
+    .c-logo__default {
+      opacity: 0;
+    }
+
+    .site-header-mobile--scrolled  {
+
+      .site-header--mobile {
+
+        .c-logo__default {
+          opacity: 0;
+        }
+
+        .c-logo__inverted {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

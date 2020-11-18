@@ -177,10 +177,11 @@
   --theme-links-transition: var(--theme-links-transition-property) var(--theme-links-transition-duration) var(--theme-links-transition-easing); }
 
 :root {
+  --theme-spacing-ratio: 1;
   --spacing-x0: var(--theme-font-size-minimum-value-breakpoint);
   --spacing-y0: 10;
   --spacing-x1: var(--theme-font-size-breakpoint);
-  --spacing-y1: 16;
+  --spacing-y1: calc(16 * var(--theme-spacing-ratio));
   --spacing-y0-new: calc( var(--spacing-y1) - ( var(--spacing-y1) - var(--spacing-y0) ) );
   --spacing-a: calc( ( var(--spacing-y1) - var(--spacing-y0-new) ) / ( var(--spacing-x1) - var(--spacing-x0) ) );
   --spacing-b: calc( var(--spacing-y0-new) - var(--spacing-a) * var(--spacing-x0) );

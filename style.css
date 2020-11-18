@@ -1808,6 +1808,7 @@ table {
         .c-search-overlay__suggestions .menu li:hover a {
           color: var(--theme-button-hover-text-color); }
         .c-search-overlay__suggestions .menu li a {
+          padding: 0;
           color: currentColor;
           text-decoration: none;
           transition: color .3s ease; }
@@ -1853,14 +1854,14 @@ table {
 .has-search-overlay {
   overflow: hidden; }
 
-.is-search-button:not(.no-icon) a[href='#search'] {
+.is-search-button:not(.no-icon) a {
   --search-icon-width: .9em;
   padding-left: calc(var(--search-icon-width) + 6px) !important;
   overflow: visible; }
   @media not screen and (min-width: 1000px) {
-    .is-search-button:not(.no-icon) a[href='#search'] {
+    .is-search-button:not(.no-icon) a {
       padding-left: calc(var(--search-icon-width) + 6px + 1em) !important; } }
-  .is-search-button:not(.no-icon) a[href='#search']:after {
+  .is-search-button:not(.no-icon) a:after {
     content: '';
     position: absolute;
     left: 0;
@@ -1878,12 +1879,12 @@ table {
     background-color: currentColor;
     overflow: visible; }
     @media not screen and (min-width: 1000px) {
-      .is-search-button:not(.no-icon) a[href='#search']:after {
+      .is-search-button:not(.no-icon) a:after {
         margin-left: 1em; } }
-  .is-search-button:not(.no-icon) a[href='#search']:before {
+  .is-search-button:not(.no-icon) a:before {
     width: calc(100% - var(--search-icon-width) - 8px) !important; }
 
-.is-search-button.icon-only a[href='#search'] {
+.is-search-button.icon-only a {
   text-indent: -9999px; }
 
 @media not screen and (min-width: 1000px) {
@@ -1893,7 +1894,6 @@ table {
 .search-button__wrapper {
   position: absolute;
   top: 0;
-  right: var(--theme-wrapper-sides-spacing);
   display: flex;
   align-items: center;
   --font-size: var(--theme-body-font-size);
@@ -1913,6 +1913,101 @@ table {
       color: currentColor;
       text-decoration: none;
       font-weight: 500; }
+
+.is-dark {
+  --current-color-primary: var(--theme-color-primary);
+  --current-color-secondary: var(--theme-color-secondary);
+  --current-color-tertiary: var(--theme-color-tertiary);
+  --current-dark-primary: var(--theme-light-secondary);
+  --current-dark-secondary: var(--theme-light-primary);
+  --current-dark-tertiary: var(--theme-light-tertiary);
+  --current-light-primary: var(--theme-dark-tertiary);
+  --current-light-secondary: var(--theme-dark-secondary);
+  --current-light-tertiary: var(--theme-dark-primary); }
+  .is-dark .is-style-alternate .novablocks-block.block-is-highlighted {
+    --current-color-primary: var(--theme-color-primary);
+    --current-color-secondary: var(--theme-color-secondary);
+    --current-color-tertiary: var(--theme-color-tertiary);
+    --current-dark-primary: var(--theme-dark-primary);
+    --current-dark-secondary: var(--theme-dark-secondary);
+    --current-dark-tertiary: var(--theme-dark-tertiary);
+    --current-light-primary: var(--theme-light-primary);
+    --current-light-secondary: var(--theme-light-secondary);
+    --current-light-tertiary: var(--theme-light-tertiary); }
+
+.is-color-scheme-switcher-button {
+  display: flex;
+  align-items: center; }
+  .is-color-scheme-switcher-button:not(.no-icon) {
+    --switcher-icon-width: 1em; }
+    .is-dark .is-color-scheme-switcher-button:not(.no-icon) a:after {
+      transform: translateY(-50%) rotate(180deg); }
+    .is-color-scheme-switcher-button:not(.no-icon) a {
+      padding-left: calc(1em + 6px) !important; }
+      .is-color-scheme-switcher-button:not(.no-icon) a:after {
+        content: '';
+        position: absolute;
+        width: var(--switcher-icon-width);
+        height: var(--switcher-icon-width);
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: currentColor;
+        mask: url("./assets/images/icon-dark-mode.svg") no-repeat 50% 50%;
+        mask-size: cover;
+        -webkit-mask: url("./assets/images/icon-dark-mode.svg") no-repeat 50% 50%;
+        -webkit-mask-size: cover;
+        transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1); }
+      .is-color-scheme-switcher-button:not(.no-icon) a:before {
+        width: calc(100% - var(--switcher-icon-width)) !important; }
+    .is-color-scheme-switcher-button:not(.no-icon).is-dark:before {
+      transform: rotate(135deg); }
+  .is-color-scheme-switcher-button.icon-only a {
+    text-indent: -999999px; }
+  .is-color-scheme-switcher-button a {
+    color: currentColor;
+    text-decoration: none; }
+
+@media only screen and (min-width: 1000px) {
+  .scheme-switcher__wrapper {
+    display: none; } }
+
+@media not screen and (min-width: 1000px) {
+  .is-dark .c-logo__default {
+    opacity: 0; }
+  .is-dark .site-header-mobile--scrolled .site-header--mobile .c-logo__default {
+    opacity: 0; }
+  .is-dark .site-header-mobile--scrolled .site-header--mobile .c-logo__inverted {
+    opacity: 1; } }
+
+.is-dark .site-header--mobile,
+.is-dark .c-menu-toggle {
+  color: var(--sm-light-primary); }
+
+.is-dark .c-logo__inverted {
+  opacity: 1; }
+
+.is-dark .site-header--mobile .c-logo__inverted {
+  opacity: 1; }
+
+.is-dark .site-header--mobile .c-logo__default {
+  opacity: 0; }
+
+.is-dark .novablocks-opentable.novablocks-opentable__standard[class] .ot-powered-by {
+  -webkit-filter: unset;
+  mix-blend-mode: unset; }
+
+.is-dark .novablocks-opentable.novablocks-opentable__wide[class] .ot-powered-by {
+  -webkit-filter: invert(1) saturate(0);
+  mix-blend-mode: lighten; }
+
+@media not screen and (min-width: 1000px) {
+  .is-dark .c-logo__default {
+    opacity: 0; }
+  .is-dark .site-header-mobile--scrolled .site-header--mobile .c-logo__default {
+    opacity: 0; }
+  .is-dark .site-header-mobile--scrolled .site-header--mobile .c-logo__inverted {
+    opacity: 1; } }
 
 /* 2.2. Site Content */
 /* 2.3. Site Footer */
@@ -3307,3 +3402,27 @@ ul.menu,
 
 .has-no-padding-bottom .site-content {
   padding-bottom: 0 !important; }
+
+@media not screen and (min-width: 1000px) {
+  .c-menu-toggle__checkbox ~ .site-header {
+    display: grid !important;
+    grid-template-columns: 1fr auto auto; }
+  .site-header__wrapper {
+    grid-column: 1/4;
+    grid-row: 1; }
+    .site-header__wrapper .is-color-scheme-switcher-button {
+      display: none; }
+  .scheme-switcher__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-column: 2/3;
+    grid-row: 1;
+    order: 2;
+    height: 83px;
+    margin-left: 1em;
+    padding-right: var(--theme-wrapper-sides-spacing); }
+  .search-button__wrapper {
+    grid-column: 1/2;
+    grid-row: 1;
+    justify-self: flex-end; } }
