@@ -1,10 +1,12 @@
 import GlobalService from "./globalService";
-import { below, debounce, setAndResetElementStyles } from '../utils';
+import { below, setAndResetElementStyles } from '../utils';
 import $ from 'jquery';
 
 const defaults = {
 	offsetTargetElement: null,
 };
+
+const NAVIGATION_OPEN_CLASS = 'navigation-is-open'
 
 class Header {
 
@@ -19,7 +21,7 @@ class Header {
 		this.$toggleWrap = $( '.c-menu-toggle__wrap' );
 		this.$searchCancelButton = $( '.c-search-overlay__cancel' );
 		this.$colorSchemeSwitcher = $( '.is-color-scheme-switcher-button' );
-		this.$searchOverlay = $('.c-search-overlay');
+		this.$searchOverlay = $( '.c-search-overlay' );
 
 		this.scrolled = false;
 		this.inversed = false;
@@ -38,7 +40,7 @@ class Header {
 		this.createMobileHeader();
 
 		this.onResize();
-		this.render() ;
+		this.render();
 		GlobalService.registerOnResize( this.onResize.bind( this ) );
 
 		this.initialize();
@@ -60,8 +62,7 @@ class Header {
 		this.updatePageOffset();
 		this.updateHeaderOffset();
 		this.updateMobileHeaderOffset();
-		this.updateSearchButtonsHeight();
-		this.updateColorSchemeButtonHeight();
+		this.updateHeaderButtonsHeight();
 		this.updateSearchOverlayOffset();
 	}
 
@@ -121,8 +122,8 @@ class Header {
 		const $header = $( this.element );
 		const wasScrolled = $header.hasClass( 'site-header--scrolled' );
 
-		setAndResetElementStyles( $header, { transition: 'none'});
-		setAndResetElementStyles( this.$searchOverlay, {transition: 'none'} );
+		setAndResetElementStyles( $header, { transition: 'none' } );
+		setAndResetElementStyles( this.$searchOverlay, { transition: 'none' } );
 		$header.removeClass( 'site-header--scrolled' );
 
 		this.getProps();
@@ -130,6 +131,13 @@ class Header {
 		this.shouldMakeHeaderStatic();
 
 		$header.toggleClass( 'site-header--scrolled', wasScrolled );
+
+		this.initHeaderButtons();
+		this.updateHeaderButtonsHeight();
+
+		if ( ! this.hasMobileNav() ) {
+			$( 'body' ).removeClass( NAVIGATION_OPEN_CLASS );
+		}
 
 		this.update();
 	}
@@ -200,7 +208,7 @@ class Header {
 		const abovePromoBar = scrollY > this.promoBarHeight;
 
 		if ( ( abovePromoBar !== this.abovePromoBar ) ) {
-			$(body).toggleClass( 'site-header-mobile--scrolled', abovePromoBar );
+			$( body ).toggleClass( 'site-header-mobile--scrolled', abovePromoBar );
 			this.abovePromoBar = abovePromoBar;
 		}
 	}
@@ -241,86 +249,74 @@ class Header {
 		this.createdMobileHeader = true;
 	}
 
-	moveSearchButton() {
+	initHeaderButtons() {
 
-		if ( this.movedSearchButton || ! below('lap') ) return;
+		if ( this.hasMobileNav() ) {
+			this.initHeaderSearchButton();
+			this.initHeaderLightsButton();
+		}
 
-		const $searchButton = $( '.is-search-button' ),
-			  $searchButtonWrapper = $('.search-button__wrapper');
+	}
 
+	initHeaderSearchButton() {
 
-		if ( $searchButtonWrapper.length ) {
-			this.$searchButtonWrapper = $searchButtonWrapper;
-			this.movedSearchButton = true;
+		if ( this.movedSearchButton ) {
 			return;
 		}
 
 		this.$searchButtonWrapper = $( '<div class="search-button__wrapper">' );
 
-		$searchButton.first().clone().appendTo( this.$searchButtonWrapper);
+		$( '.is-search-button' ).first().clone().appendTo( this.$searchButtonWrapper );
 
-		this.$searchButtonWrapper.insertAfter( '.site-header__wrapper');
+		this.$searchButtonWrapper.insertAfter( '.site-header__wrapper' );
 		this.movedSearchButton = true;
 	}
 
-	moveColorSchemeSwitcherButton() {
-		if ( this.movedColorSchemeSwitcherButton || ! below('lap') ) return;
+	initHeaderLightsButton() {
 
-		const $colorSchemeSwitcherButton = $('.is-color-scheme-switcher-button'),
-			  $colorSchemeSwitcherWrapper  = $('.scheme-switcher__wrapper');
-
-		if( $colorSchemeSwitcherWrapper.length ) {
-			this.$colorSchemeSwitcherWrapper = $colorSchemeSwitcherWrapper;
-			this.movedColorSchemeSwitcherButton = true;
+		if ( this.movedColorSchemeSwitcherButton ) {
 			return;
 		}
 
 		this.$colorSchemeSwitcherWrapper = $( '<div class="scheme-switcher__wrapper">' );
-		$colorSchemeSwitcherButton.first().clone().appendTo( this.$colorSchemeSwitcherWrapper);
-		this.$colorSchemeSwitcherWrapper.insertAfter( '.site-header__wrapper');
+
+		$( '.is-color-scheme-switcher-button' ).first().clone().appendTo( this.$colorSchemeSwitcherWrapper );
+
+		this.$colorSchemeSwitcherWrapper.insertAfter( '.site-header__wrapper' );
 		this.movedColorSchemeSwitcherButton = true;
 	}
 
-	updateSearchButtonsHeight() {
-		this.$searchCancelButton.css({
-			height: this.mobileHeaderHeight,
-		});
+	updateHeaderButtonsHeight() {
 
+		const $searchButtonWrapper = $( '.search-button__wrapper' );
+		const $lightsButtonWrapper = $(' .scheme-switcher__wrapper' );
+		const $buttons = this.$searchCancelButton.add( $searchButtonWrapper, this.$colorSchemeSwitcher, $lightsButtonWrapper );
 
-		$('.search-button__wrapper').css({
-			height: this.mobileHeaderHeight,
-		});
-	}
-
-	updateColorSchemeButtonHeight() {
+		$buttons.css( 'height', '' );
 
 		if ( ! below('lap') ) {
 			return;
 		}
 
-		this.$colorSchemeSwitcher.css({
-			height: this.mobileHeaderHeight,
-		});
-
-
-		$('.scheme-switcher__wrapper').css({
-			height: this.mobileHeaderHeight,
-		});
+		$buttons.css( 'height', this.mobileHeaderHeight );
 	}
 
 	updateSearchOverlayOffset() {
-		if ( below( 'lap' ) && this.$searchOverlay.length ) {
+		if ( this.hasMobileNav() && this.$searchOverlay.length ) {
 			this.$searchOverlay[0].paddingTop = Math.max(( this.promoBarHeight - scrollY ), 0) + 'px';
 		}
 	}
 
 	initToggleClick() {
-		const $body = $( 'body' ),
-			  NAVIGATION_OPEN_CLASS = 'navigation-is-open';
+		const $body = $( 'body' );
 
-		this.$toggle.on('click', function(){
-			$body.toggleClass(NAVIGATION_OPEN_CLASS);
-		});
+		this.$toggle.on( 'click', function() {
+			$body.toggleClass( NAVIGATION_OPEN_CLASS );
+		} );
+	}
+
+	hasMobileNav() {
+		return below( 'lap' );
 	}
 
 	render() {
@@ -331,8 +327,6 @@ class Header {
 		this.updateMobileNavigationOffset();
 		this.updateMobileHeaderState();
 		this.updateDesktopHeaderState(false);
-		this.moveSearchButton();
-		this.moveColorSchemeSwitcherButton();
 	}
 }
 

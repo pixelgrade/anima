@@ -77,18 +77,19 @@ export const above = function(string) {
 	return mq( 'above', string );
 };
 
-export function setAndResetElementStyles( element, props = {} ) {
+export function setAndResetElementStyles( $element, props = {} ) {
 
-	$(element).css(props);
+	console.log( 'before', $element, props );
+
 	Object.keys( props ).forEach( key => { props[ key ] = '' } )
 
    if ( window.requestIdleCallback ) {
-		requestIdleCallback( () => {
-			$(element).css(props);
+	   window.requestIdleCallback( () => {
+			$element.css( props );
 		} );
 	} else {
 		setTimeout( () => {
-			$(element).css(props);
+			$element.css( props );
 		}, 0 );
 	}
 }
