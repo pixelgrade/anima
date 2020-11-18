@@ -259,10 +259,6 @@
         background-color: currentColor;
 
         overflow: visible;
-
-        @include below(lap) {
-          margin-left: 1em;
-        }
       }
 
       &:before {
@@ -272,8 +268,24 @@
   }
 
   &.icon-only {
+    text-indent: -9999px;
+
     a {
-      text-indent: -9999px;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-height: 45px;
+        min-width: 45px;
+        transform: translate(-50%, -50%);
+      }
+
+      &:after {
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
     }
   }
 
@@ -281,10 +293,6 @@
     @include below(lap) {
       display: none;
     }
-  }
-
-  .search-button__wrapper & {
-
   }
 }
 
