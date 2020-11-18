@@ -444,20 +444,19 @@ var below = function below(string) {
 var above = function above(string) {
   return mq('above', string);
 };
-function setAndResetElementStyles(element) {
+function setAndResetElementStyles($element) {
   var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  external_jQuery_default()(element).css(props);
   Object.keys(props).forEach(function (key) {
     props[key] = '';
   });
 
   if (window.requestIdleCallback) {
-    requestIdleCallback(function () {
-      external_jQuery_default()(element).css(props);
+    window.requestIdleCallback(function () {
+      $element.css(props);
     });
   } else {
     setTimeout(function () {
-      external_jQuery_default()(element).css(props);
+      $element.css(props);
     }, 0);
   }
 }
@@ -1194,6 +1193,7 @@ function () {
 var defaults = {
   offsetTargetElement: null
 };
+var NAVIGATION_OPEN_CLASS = 'navigation-is-open';
 
 var header_Header =
 /*#__PURE__*/
@@ -1244,8 +1244,7 @@ function () {
       this.updatePageOffset();
       this.updateHeaderOffset();
       this.updateMobileHeaderOffset();
-      this.updateSearchButtonsHeight();
-      this.updateColorSchemeButtonHeight();
+      this.updateHeaderButtonsHeight();
       this.updateSearchOverlayOffset();
     }
   }, {
@@ -1329,6 +1328,12 @@ function () {
       this.setVisibleHeaderHeight();
       this.shouldMakeHeaderStatic();
       $header.toggleClass('site-header--scrolled', wasScrolled);
+      this.initHeaderButtons();
+
+      if (!this.hasMobileNav()) {
+        external_jQuery_default()('body').removeClass(NAVIGATION_OPEN_CLASS);
+      }
+
       this.update();
     }
   }, {
@@ -1402,7 +1407,7 @@ function () {
       var _GlobalService$getPro3 = globalService.getProps(),
           scrollY = _GlobalService$getPro3.scrollY;
 
-      if (below('lap')) {
+      if (this.hasMobileNav()) {
         this.element.style.marginTop = Math.max(this.promoBarHeight - scrollY, 0) + 'px';
       }
     }
@@ -1456,80 +1461,68 @@ function () {
       this.createdMobileHeader = true;
     }
   }, {
-    key: "moveSearchButton",
-    value: function moveSearchButton() {
-      if (this.movedSearchButton || !below('lap')) return;
-      var $searchButton = external_jQuery_default()('.is-search-button'),
-          $searchButtonWrapper = external_jQuery_default()('.search-button__wrapper');
-
-      if ($searchButtonWrapper.length) {
-        this.$searchButtonWrapper = $searchButtonWrapper;
-        this.movedSearchButton = true;
+    key: "initHeaderButtons",
+    value: function initHeaderButtons() {
+      if (this.hasMobileNav()) {
+        this.initHeaderSearchButton();
+        this.initHeaderLightsButton();
+      }
+    }
+  }, {
+    key: "initHeaderSearchButton",
+    value: function initHeaderSearchButton() {
+      if (this.movedSearchButton) {
         return;
       }
 
       this.$searchButtonWrapper = external_jQuery_default()('<div class="search-button__wrapper">');
-      $searchButton.first().clone().appendTo(this.$searchButtonWrapper);
+      external_jQuery_default()('.is-search-button').first().clone().appendTo(this.$searchButtonWrapper);
       this.$searchButtonWrapper.insertAfter('.site-header__wrapper');
       this.movedSearchButton = true;
     }
   }, {
-    key: "moveColorSchemeSwitcherButton",
-    value: function moveColorSchemeSwitcherButton() {
-      if (this.movedColorSchemeSwitcherButton || !below('lap')) return;
-      var $colorSchemeSwitcherButton = external_jQuery_default()('.is-color-scheme-switcher-button'),
-          $colorSchemeSwitcherWrapper = external_jQuery_default()('.scheme-switcher__wrapper');
-
-      if ($colorSchemeSwitcherWrapper.length) {
-        this.$colorSchemeSwitcherWrapper = $colorSchemeSwitcherWrapper;
-        this.movedColorSchemeSwitcherButton = true;
+    key: "initHeaderLightsButton",
+    value: function initHeaderLightsButton() {
+      if (this.movedColorSchemeSwitcherButton) {
         return;
       }
 
       this.$colorSchemeSwitcherWrapper = external_jQuery_default()('<div class="scheme-switcher__wrapper">');
-      $colorSchemeSwitcherButton.first().clone().appendTo(this.$colorSchemeSwitcherWrapper);
+      external_jQuery_default()('.is-color-scheme-switcher-button').first().clone().appendTo(this.$colorSchemeSwitcherWrapper);
       this.$colorSchemeSwitcherWrapper.insertAfter('.site-header__wrapper');
       this.movedColorSchemeSwitcherButton = true;
     }
   }, {
-    key: "updateSearchButtonsHeight",
-    value: function updateSearchButtonsHeight() {
-      this.$searchCancelButton.css({
-        height: this.mobileHeaderHeight
-      });
-      external_jQuery_default()('.search-button__wrapper').css({
-        height: this.mobileHeaderHeight
-      });
-    }
-  }, {
-    key: "updateColorSchemeButtonHeight",
-    value: function updateColorSchemeButtonHeight() {
-      if (!below('lap')) {
+    key: "updateHeaderButtonsHeight",
+    value: function updateHeaderButtonsHeight() {
+      var $buttons = this.$searchCancelButton.add(this.$colorSchemeSwitcher).add('.search-button__wrapper').add('.scheme-switcher__wrapper');
+      $buttons.css('height', '');
+
+      if (!this.hasMobileNav()) {
         return;
       }
 
-      this.$colorSchemeSwitcher.css({
-        height: this.mobileHeaderHeight
-      });
-      external_jQuery_default()('.scheme-switcher__wrapper').css({
-        height: this.mobileHeaderHeight
-      });
+      $buttons.css('height', this.mobileHeaderHeight);
     }
   }, {
     key: "updateSearchOverlayOffset",
     value: function updateSearchOverlayOffset() {
-      if (below('lap') && this.$searchOverlay.length) {
+      if (this.hasMobileNav() && this.$searchOverlay.length) {
         this.$searchOverlay[0].paddingTop = Math.max(this.promoBarHeight - scrollY, 0) + 'px';
       }
     }
   }, {
     key: "initToggleClick",
     value: function initToggleClick() {
-      var $body = external_jQuery_default()('body'),
-          NAVIGATION_OPEN_CLASS = 'navigation-is-open';
+      var $body = external_jQuery_default()('body');
       this.$toggle.on('click', function () {
         $body.toggleClass(NAVIGATION_OPEN_CLASS);
       });
+    }
+  }, {
+    key: "hasMobileNav",
+    value: function hasMobileNav() {
+      return below('lap');
     }
   }, {
     key: "render",
@@ -1539,8 +1532,6 @@ function () {
       this.updateMobileNavigationOffset();
       this.updateMobileHeaderState();
       this.updateDesktopHeaderState(false);
-      this.moveSearchButton();
-      this.moveColorSchemeSwitcherButton();
     }
   }]);
 
