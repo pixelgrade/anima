@@ -1209,11 +1209,11 @@ table {
     .site-header :not(:hover) > .sub-menu,
     .site-header :not(:hover) > .children {
       display: block; }
-    .site-header .site-header__menu > ul.menu > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button),
-    .site-header .site-header__menu > .menu > ul > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button) {
+    .site-header .site-header__menu > ul.menu > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only),
+    .site-header .site-header__menu > .menu > ul > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) {
       position: relative; }
-      .site-header .site-header__menu > ul.menu > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button) > a:before,
-      .site-header .site-header__menu > .menu > ul > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button) > a:before {
+      .site-header .site-header__menu > ul.menu > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) > a:before,
+      .site-header .site-header__menu > .menu > ul > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) > a:before {
         content: '';
         position: absolute;
         bottom: var(--header-links-bottom-spacing);
@@ -1226,12 +1226,12 @@ table {
         transition-property: transform;
         will-change: transform;
         -webkit-backface-visibility: hidden; }
-      .site-header .site-header__menu > ul.menu > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button) > a:hover:before,
-      .site-header .site-header__menu > .menu > ul > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button) > a:hover:before {
+      .site-header .site-header__menu > ul.menu > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) > a:hover:before,
+      .site-header .site-header__menu > .menu > ul > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) > a:hover:before {
         transform: scale3d(1, 1, 1);
         transform-origin: right; }
-      .site-header .site-header__menu > ul.menu > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button).menu-item-has-children > a:before,
-      .site-header .site-header__menu > .menu > ul > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button).menu-item-has-children > a:before {
+      .site-header .site-header__menu > ul.menu > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only).menu-item-has-children > a:before,
+      .site-header .site-header__menu > .menu > ul > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only).menu-item-has-children > a:before {
         width: calc(100% - 1.25em);
         left: 1.25em; }
     .site-header .site-header__menu > ul.menu > li[class*="current"] > a:before,
@@ -1878,14 +1878,22 @@ table {
     -webkit-mask-size: contain;
     background-color: currentColor;
     overflow: visible; }
-    @media not screen and (min-width: 1000px) {
-      .is-search-button:not(.no-icon) a:after {
-        margin-right: 1em; } }
   .is-search-button:not(.no-icon) a:before {
     width: calc(100% - var(--search-icon-width) - 8px) !important; }
 
-.is-search-button.icon-only a {
+.is-search-button.icon-only {
   text-indent: -9999px; }
+  .is-search-button.icon-only a:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    min-height: 45px;
+    min-width: 45px;
+    transform: translate(50%, -50%); }
+  .is-search-button.icon-only a:after {
+    right: 50%;
+    transform: translate(50%, -50%); }
 
 @media not screen and (min-width: 1000px) {
   .site-header__menu .is-search-button {
@@ -1940,8 +1948,6 @@ table {
   align-items: center; }
   .is-color-scheme-switcher-button:not(.no-icon) {
     --switcher-icon-width: 1em; }
-    .is-dark .is-color-scheme-switcher-button:not(.no-icon) a:after {
-      transform: translateY(-50%) rotate(-180deg); }
     .is-color-scheme-switcher-button:not(.no-icon) a {
       padding-right: calc(1em + 6px) !important; }
       .is-color-scheme-switcher-button:not(.no-icon) a:after {
@@ -1951,7 +1957,6 @@ table {
         height: var(--switcher-icon-width);
         right: 0;
         top: 50%;
-        transform: translateY(-50%);
         background-color: currentColor;
         mask: url("./assets/images/icon-dark-mode.svg") no-repeat 50% 50%;
         mask-size: cover;
@@ -1960,10 +1965,26 @@ table {
         transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1); }
       .is-color-scheme-switcher-button:not(.no-icon) a:before {
         width: calc(100% - var(--switcher-icon-width)) !important; }
-    .is-color-scheme-switcher-button:not(.no-icon).is-dark:before {
-      transform: rotate(-135deg); }
+    .is-color-scheme-switcher-button:not(.no-icon):not(.icon-only) a:after {
+      transform: translateY(-50%); }
+      .is-dark .is-color-scheme-switcher-button:not(.no-icon):not(.icon-only) a:after {
+        transform: translateY(-50%) rotate(-180deg); }
+  .is-dark .is-color-scheme-switcher-button.icon-only a:after {
+    transform: translate(50%, -50%) rotate(-180deg); }
   .is-color-scheme-switcher-button.icon-only a {
-    text-indent: -999999px; }
+    text-indent: -999999px;
+    height: 100%; }
+    .is-color-scheme-switcher-button.icon-only a:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 50%;
+      min-height: 45px;
+      min-width: 45px;
+      transform: translate(50%, -50%); }
+    .is-color-scheme-switcher-button.icon-only a:after {
+      right: 50%;
+      transform: translate(50%, -50%); }
   .is-color-scheme-switcher-button a {
     color: currentColor;
     text-decoration: none; }
@@ -1971,6 +1992,10 @@ table {
 @media only screen and (min-width: 1000px) {
   .scheme-switcher__wrapper {
     display: none; } }
+
+@media not screen and (min-width: 1000px) {
+  .scheme-switcher__wrapper .menu-item {
+    margin-right: 1em; } }
 
 @media not screen and (min-width: 1000px) {
   .is-dark .c-logo__default {

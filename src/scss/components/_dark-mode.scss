@@ -15,12 +15,6 @@
   &:not(.no-icon) {
     --switcher-icon-width: 1em;
 
-    .is-dark & {
-      a:after {
-        transform: translateY(-50%) rotate(180deg);
-      }
-    }
-
     a {
       padding-left: calc(1em + 6px) !important;
 
@@ -32,7 +26,6 @@
 
         left: 0;
         top: 50%;
-        transform: translateY(-50%);
         background-color: currentColor;
 
         mask: url($icon-dark-mode-path) no-repeat 50% 50%;
@@ -48,17 +41,41 @@
       }
     }
 
-    &.is-dark {
-      &:before {
-        transform: rotate(135deg);
+    &:not(.icon-only) a:after {
+      transform: translateY(-50%);
+
+      .is-dark & {
+        transform: translateY(-50%) rotate(180deg);
       }
     }
+  }
+
+  .is-dark &.icon-only a:after {
+    transform: translate(-50%, -50%) rotate(180deg);
+
+    @debug &;
   }
 
   &.icon-only {
 
     a {
       text-indent: -999999px;
+      height: 100%;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-height: 45px;
+        min-width: 45px;
+        transform: translate(-50%, -50%);
+      }
+
+      &:after {
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
     }
   }
 
@@ -71,6 +88,12 @@
 .scheme-switcher__wrapper {
   @include above(lap) {
     display: none;
+  }
+
+  @include below(lap) {
+    .menu-item {
+      margin-left: 1em;
+    }
   }
 }
 
