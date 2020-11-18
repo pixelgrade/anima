@@ -1329,7 +1329,6 @@ function () {
       this.shouldMakeHeaderStatic();
       $header.toggleClass('site-header--scrolled', wasScrolled);
       this.initHeaderButtons();
-      this.updateHeaderButtonsHeight();
 
       if (!this.hasMobileNav()) {
         external_jQuery_default()('body').removeClass(NAVIGATION_OPEN_CLASS);

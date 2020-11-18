@@ -133,7 +133,6 @@ class Header {
 		$header.toggleClass( 'site-header--scrolled', wasScrolled );
 
 		this.initHeaderButtons();
-		this.updateHeaderButtonsHeight();
 
 		if ( ! this.hasMobileNav() ) {
 			$( 'body' ).removeClass( NAVIGATION_OPEN_CLASS );
