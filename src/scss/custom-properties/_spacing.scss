@@ -3,15 +3,17 @@
 // This file shouldn't be modified. Proceed with caution!
 
 :root {
+    --theme-spacing-ratio: 1;
+
     // x0 - viewport width at which font sizes should reach minimum value
     // y0 - minimum font size
     // x1 - viewport width at which we know the value for the font size
     // y1 - known font size
     --spacing-x0: var(--theme-font-size-minimum-value-breakpoint);
-    --spacing-y0: 10;
+    --spacing-y0: #{$theme-spacing-mobile-unit-value};
 
     --spacing-x1: var(--theme-font-size-breakpoint);
-    --spacing-y1: 16;
+    --spacing-y1: calc(#{$theme-spacing-unit-value} * var(--theme-spacing-ratio));
 
     // solving a first degree equation: y = ax + b
     --spacing-y0-new: calc( var(--spacing-y1) - ( var(--spacing-y1) - var(--spacing-y0) ) );
