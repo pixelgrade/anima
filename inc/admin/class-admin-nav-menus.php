@@ -498,7 +498,7 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 									if ( empty( $config['options'] ) ) {
 										break;
 									} ?>
-									<select id="<?php echo esc_attr( $field_id ); ?>" name="<?php echo esc_attr( $field_name ); ?>" class="<?php echo esc_attr( $field_classes ); ?>">
+									<select id="<?php echo esc_attr( $field_id ); ?>" name="<?php echo esc_attr( $field_name ); ?>" class="<?php echo esc_attr( $field_classes ); ?>"<?php echo isset( $config['default'] ) ? ' data-default="' . esc_attr( $config['default'] ) . '"' : ''; ?>>
 										<?php foreach ( $config['options'] as $option_value => $option_label ) { ?>
 											<option value="<?php echo esc_attr( $option_value ); ?>"><?php echo esc_html( $option_label ); ?></option>
 										<?php } ?>
@@ -614,7 +614,7 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 			add_filter(
 				'get_post_metadata',
 				static function ( $value, $object_id, $meta_key ) use ( $setting, $visual_style ) {
-					if ( $object_id === $setting->post_id && '_menu_item_visual_style' === $meta_key ) {
+					if ( absint( $object_id ) === absint( $setting->post_id ) && '_menu_item_visual_style' === $meta_key ) {
 						return $visual_style;
 					}
 					return $value;
