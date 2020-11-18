@@ -25,9 +25,6 @@
 
 		control.visualStyleField = control.container.find( '.field-visual_style' );
 
-		// Set the initial UI state.
-		updateControlFields( control );
-
 		// Update the UI state when the setting changes programmatically.
 		control.setting.bind( () => {
 			updateControlFields( control );
@@ -37,6 +34,12 @@
 		control.visualStyleField.find( 'select' ).on( 'change', function () {
 			setSettingVisualStyle( control.setting, this.value );
 		} );
+
+		// Set the initial UI state.
+		let initialVisualStyle = updateControlFields( control );
+
+		// Update the initial setting value.
+		setSettingVisualStyle( control.setting, initialVisualStyle );
 	}
 
 	/**
@@ -56,13 +59,16 @@
 	}
 
 	/**
-	 * Apply the control's setting value to the control's fields.
+	 * Apply the control's setting value to the control's fields (or the default value if that's the case).
 	 *
 	 * @param {wp.customize.Menus.MenuItemControl} control
 	 */
 	function updateControlFields( control ) {
-		const visualStyle = control.setting().visual_style || 'label_icon';
+		const defaultVisualStyle = control.visualStyleField.find( 'select' ).data('default') || 'label_icon';
+		const visualStyle = control.setting().visual_style || defaultVisualStyle;
 
 		control.visualStyleField.find( 'select' ).val(visualStyle);
+
+		return visualStyle;
 	}
 })();
