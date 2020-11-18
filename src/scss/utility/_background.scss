@@ -1,7 +1,6 @@
 /* Color Helper Classes */
-// @todo maybe use some variables?
-.has-background {
-    padding: 1em 1.25em;
+.has-background:not([class*="wp-block-button"]) {
+    padding: var(--theme-spacing-fluid) var(--theme-spacing-fluid-xsmall);
 }
 
 .has-background-dim {

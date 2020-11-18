@@ -24,8 +24,8 @@ $sm-color-classnames: ();
 @each $category in color, dark, light {
     @each $order in primary, secondary, tertiary {
         $sm-color-classnames: map_merge( $sm-color-classnames, (
-            sm_#{$category}_#{$order}: var(--current-#{$category}-#{$order}),
-            sm-#{$category}-#{$order}: var(--current-#{$category}-#{$order}),
+            sm_#{$category}_#{$order}: var(--sm-#{$category}-#{$order}),
+            sm-#{$category}-#{$order}: var(--sm-#{$category}-#{$order}),
         ) );
     }
 }
