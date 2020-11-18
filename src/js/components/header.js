@@ -287,15 +287,18 @@ class Header {
 
 	updateHeaderButtonsHeight() {
 
-		const $searchButtonWrapper = $( '.search-button__wrapper' );
-		const $lightsButtonWrapper = $(' .scheme-switcher__wrapper' );
-		const $buttons = this.$searchCancelButton.add( $searchButtonWrapper, this.$colorSchemeSwitcher, $lightsButtonWrapper );
+		const $buttons = this.$searchCancelButton
+		                     .add( this.$colorSchemeSwitcher )
+		                     .add( '.search-button__wrapper' )
+		                     .add( '.scheme-switcher__wrapper' );
 
 		$buttons.css( 'height', '' );
 
 		if ( ! this.hasMobileNav() ) {
 			return;
 		}
+
+		console.log( $buttons );
 
 		$buttons.css( 'height', this.mobileHeaderHeight );
 	}

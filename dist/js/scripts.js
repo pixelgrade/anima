@@ -1495,15 +1495,14 @@ function () {
   }, {
     key: "updateHeaderButtonsHeight",
     value: function updateHeaderButtonsHeight() {
-      var $searchButtonWrapper = external_jQuery_default()('.search-button__wrapper');
-      var $lightsButtonWrapper = external_jQuery_default()(' .scheme-switcher__wrapper');
-      var $buttons = this.$searchCancelButton.add($searchButtonWrapper, this.$colorSchemeSwitcher, $lightsButtonWrapper);
+      var $buttons = this.$searchCancelButton.add(this.$colorSchemeSwitcher).add('.search-button__wrapper').add('.scheme-switcher__wrapper');
       $buttons.css('height', '');
 
       if (!this.hasMobileNav()) {
         return;
       }
 
+      console.log($buttons);
       $buttons.css('height', this.mobileHeaderHeight);
     }
   }, {
