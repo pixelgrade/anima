@@ -1407,7 +1407,7 @@ function () {
       var _GlobalService$getPro3 = globalService.getProps(),
           scrollY = _GlobalService$getPro3.scrollY;
 
-      if (below('lap')) {
+      if (this.hasMobileNav()) {
         this.element.style.marginTop = Math.max(this.promoBarHeight - scrollY, 0) + 'px';
       }
     }
@@ -1500,7 +1500,7 @@ function () {
       var $buttons = this.$searchCancelButton.add($searchButtonWrapper, this.$colorSchemeSwitcher, $lightsButtonWrapper);
       $buttons.css('height', '');
 
-      if (!below('lap')) {
+      if (!this.hasMobileNav()) {
         return;
       }
 

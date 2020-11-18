@@ -197,7 +197,7 @@ class Header {
 	updateMobileNavigationOffset() {
 		const { scrollY } = GlobalService.getProps();
 
-		if ( below('lap') ) {
+		if ( this.hasMobileNav() ) {
 			this.element.style.marginTop = Math.max(( this.promoBarHeight - scrollY ), 0) + 'px';
 		}
 	}
@@ -293,7 +293,7 @@ class Header {
 
 		$buttons.css( 'height', '' );
 
-		if ( ! below('lap') ) {
+		if ( ! this.hasMobileNav() ) {
 			return;
 		}
 
