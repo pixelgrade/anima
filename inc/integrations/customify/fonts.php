@@ -73,14 +73,21 @@ function rosa2_add_customify_theme_fonts( $fonts ) {
 function rosa2_add_fonts_section_to_customify_config( $config ) {
 
 	$font_size_config = array(
-		'min'  => 1,
-		'max'  => 20,
+		'min'  => 12,
+		'max'  => 24,
+		'step' => 1,
+		'unit' => '',
+	);
+
+	$font_size_config_medium = array(
+		'min'  => 16,
+		'max'  => 36,
 		'step' => 1,
 		'unit' => '',
 	);
 
 	$font_size_config_large = array(
-		'min'  => 1,
+		'min'  => 16,
 		'max'  => 120,
 		'step' => 1,
 		'unit' => '',
@@ -100,8 +107,19 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 		'unit' => 'em',
 	);
 
+
 	$fields_config = array(
 		'font-size'      => $font_size_config,
+		'font-weight'    => true,
+		'font-style'    => true,
+		'line-height'    => $line_height_config,
+		'letter-spacing' => $letter_spacing_config,
+		'text-align'     => false,
+		'text-transform' => 'none'
+	);
+
+	$fields_config_medium = array(
+		'font-size'      => $font_size_config_medium,
 		'font-weight'    => true,
 		'font-style'    => true,
 		'line-height'    => $line_height_config,
@@ -119,6 +137,7 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 		'text-align'     => false,
 		'text-transform' => 'none'
 	);
+
 
 	$rosa2_fonts_section = array(
 		'fonts_section' => array(
@@ -180,7 +199,7 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 						'letter-spacing'  => - 0.02,
 					),
 					// We want all the font variants for this field since it is a rich content one.
-					'fields'            => wp_parse_args( [ 'font-weight' => [ 'loadAllVariants' => true ] ], $fields_config ),
+					'fields'            => wp_parse_args( [ 'font-weight' => [ 'loadAllVariants' => true ] ], $fields_config_medium ),
 				),
 				'main_content_title_heading_fonts_section' => array(
 					'type' => 'html',
@@ -269,7 +288,7 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 						'text-decoration' => 'none',
 						'letter-spacing'  => - 0.02,
 					),
-					'fields'            => $fields_config,
+					'fields'            => $fields_config_medium,
 				),
 				'heading_5_font'  => array(
 					'type'              => 'font',
@@ -286,7 +305,7 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 						'text-decoration' => 'none',
 						'letter-spacing'  => 0.017,
 					),
-					'fields'            => $fields_config,
+					'fields'            => $fields_config_medium,
 				),
 				'heading_6_font'  => array(
 					'type'              => 'font',
@@ -303,7 +322,7 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 						'text-decoration' => 'none',
 						'letter-spacing'  => 0.017,
 					),
-					'fields'            => $fields_config,
+					'fields'            => $fields_config_medium,
 				),
 				'accent_font'     => array(
 					'type'              => 'font',
