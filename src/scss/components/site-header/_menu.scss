@@ -218,7 +218,9 @@
                 }
 
                 > li[class*="current"] {
-                    @include header-menu-item-with-active-state;
+                    @include specific(3) {
+                        @include header-menu-item-with-active-state;
+                    }
                 }
             }
         }
