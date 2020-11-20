@@ -1234,12 +1234,12 @@ table {
       .site-header .site-header__menu > .menu > ul > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only).menu-item-has-children > a:before {
         width: calc(100% - 1.25em);
         right: 1.25em; }
-    .site-header .site-header__menu > ul.menu > li[class*="current"][class][class][class] > a:before,
-    .site-header .site-header__menu > .menu > ul > li[class*="current"][class][class][class] > a:before {
+    .site-header .site-header__menu > ul.menu > li[class*="current"]:not(.menu-item-home)[class][class][class] > a:before,
+    .site-header .site-header__menu > .menu > ul > li[class*="current"]:not(.menu-item-home)[class][class][class] > a:before {
       transform: scale3d(1, 1, 1);
       transform-origin: left; }
-    .site-header .site-header__menu > ul.menu > li[class*="current"][class][class][class] > a:hover:before,
-    .site-header .site-header__menu > .menu > ul > li[class*="current"][class][class][class] > a:hover:before {
+    .site-header .site-header__menu > ul.menu > li[class*="current"]:not(.menu-item-home)[class][class][class] > a:hover:before,
+    .site-header .site-header__menu > .menu > ul > li[class*="current"]:not(.menu-item-home)[class][class][class] > a:hover:before {
       transform: scale3d(0, 1, 1);
       transform-origin: right; } }
 

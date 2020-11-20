@@ -217,7 +217,7 @@
                     @include header-menu-item-with-hover-animation;
                 }
 
-                > li[class*="current"] {
+                > li[class*="current"]:not(.menu-item-home) {
                     @include specific(3) {
                         @include header-menu-item-with-active-state;
                     }
