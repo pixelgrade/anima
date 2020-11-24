@@ -3,7 +3,8 @@
 
 @at-root {
 
-    // specificity greater then the one in the plugin
+    // Use a greater specificity in theme 
+    // than the one in the Nova Blocks plugin
     html:root {
 
         --novablocks-color-1: var(--theme-color-primary);
@@ -48,15 +49,27 @@
         &[class] .credits[class] {
             --font-size: 12;
             font-size: var(--final-font-size);
+            opacity: 0.7;
+        }
+    }
+
+    // ToDO:
+    // Find a better way to overwrite the 
+    // default "links" rule from the Editor: 
+    // ".editor-styles-wrapper a {...}"
+    .novablocks-advanced-gallery__grid-item-info {
+        a {
+            color: inherit !important;
+            text-decoration: inherit !important;
         }
     }
 
     .novablocks-advanced-gallery__grid-item-caption {
-        @include apply-font(heading-4);
+        font-size: 80%;
     }
 
     .novablocks-advanced-gallery__grid-item-description {
-        @include apply-font(body);
+        font-size: 70%;
     }
 
     .novablocks-block {
