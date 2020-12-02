@@ -193,10 +193,12 @@
   #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:not([disabled]):hover:before {
     transform: scale3d(0, 1, 1); }
 
-#html #body #page .checkout-button {
+#html #body #page .checkout-button,
+#html #body #page [id="place_order"] {
   --theme-button-x-padding: 2.5em;
   --theme-button-y-padding: 1em;
   padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
+  --theme-button-text-color: var(--theme-light-primary);
   --theme-button-background-color: var(--current-color-primary);
   --theme-button-border-color: var(--current-color-primary);
   --theme-button-hover-text-color: var(--current-color-primary);
@@ -259,6 +261,7 @@
 
 #html #body #page .add_to_cart_button,
 #html #body #page .single_add_to_cart_button {
+  --theme-button-text-color: var(--theme-light-primary);
   --theme-button-background-color: var(--current-color-primary);
   --theme-button-border-color: var(--current-color-primary);
   --theme-button-hover-text-color: var(--current-color-primary);
@@ -761,7 +764,7 @@
 .woocommerce-ordering select {
   padding-top: var(--theme-spacing-tiny);
   padding-bottom: var(--theme-spacing-tiny);
-  color: var(--theme-dark-primary);
+  color: var(--current-dark-secondary);
   border: 0;
   border-bottom: .1875em solid currentColor;
   border-radius: 0;
@@ -936,7 +939,7 @@
   text-align: center; }
 
 .woocommerce[class] .product .price {
-  color: var(--theme-dark-primary); }
+  color: var(--current-dark-primary); }
   .woocommerce[class] .product .price ins {
     font-weight: inherit;
     text-decoration: none; }
