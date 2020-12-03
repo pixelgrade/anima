@@ -575,3 +575,19 @@ body.has-hero .novablocks-hero:first-child:after {
 .novablocks-card__inner-container[class] {
   padding-left: 0;
   padding-right: 0; }
+
+.novablocks-sharing__overlay {
+  --current-color-primary: var(--sm-color-primary);
+  --current-color-secondary: var(--sm-color-secondary);
+  --current-color-tertiary: var(--sm-color-tertiary);
+  --current-dark-primary: var(--sm-light-secondary);
+  --current-dark-secondary: var(--sm-light-primary);
+  --current-dark-tertiary: var(--sm-light-tertiary);
+  --current-light-primary: var(--sm-dark-primary);
+  --current-light-secondary: var(--sm-dark-secondary);
+  --current-light-tertiary: var(--sm-dark-tertiary); }
+  .novablocks-sharing__overlay .wp-block-button__link[class] {
+    --theme-button-background-color: var(--current-color-primary);
+    --theme-button-border-color: var(--current-color-primary);
+    --theme-button-hover-text-color: var(--current-color-primary);
+    --theme-button-hover-border-color: var(--current-color-primary); }

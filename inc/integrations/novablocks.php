@@ -26,6 +26,7 @@ if ( ! function_exists( 'rosa2_novablocks_setup' ) ) {
 				'novablocks/media',
 				'novablocks/advanced-gallery',
 			),
+			'sharing-overlay',
 			'advanced-gallery',
 			'announcement-bar',
 			'cards-collection',
@@ -42,6 +43,9 @@ if ( ! function_exists( 'rosa2_novablocks_setup' ) ) {
 			'opentable',
 			'openhours',
 			'posts-collection',
+			'post-comments',
+			'post-comments-form',
+			'post-comments-list',
 			'slideshow',
 		) );
 	}
