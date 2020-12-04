@@ -65,14 +65,18 @@
 
 @mixin select {
   @include field;
+  --select-icon-size: 6px;
+
+  @include above(tablet) {
+    --select-icon-size: 8px;
+  }
 
   padding-right: 3.125em;
 
-  background-color: var(--current-light-primary);
-  background-image: url($arrow-down-svg-path);
-  background-position: calc(100% - 17px) center;
+  background-image: linear-gradient(45deg, transparent 50%, var(--current-dark-primary) 50%), linear-gradient(135deg, var(--current-dark-primary) 50%, transparent 50%);
+  background-position: calc(100% - var(--theme-input-padding) - var(--select-icon-size)) center, calc(100% - var(--theme-input-padding)) center;
+  background-size: var(--select-icon-size) var(--select-icon-size), var(--select-icon-size) var(--select-icon-size);
   background-repeat: no-repeat;
-  background-size: .58em .58em;
 
   -webkit-appearance: none;
 }

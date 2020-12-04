@@ -81,6 +81,8 @@
 
         color: var(--current-dark-secondary);
 
+        @include select;
+
         border: 0;
         border-bottom: .1875em solid currentColor;
         border-radius: 0;
@@ -88,11 +90,6 @@
         line-height: 1.3;
 
         width: 100%;
-        background: transparent;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        background: url($arrow-down-svg-path) calc(100% - 15px) center no-repeat;
-        background-size: 17px 9px;
 
         box-shadow: none;
 

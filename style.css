@@ -704,12 +704,12 @@ select {
   font-family: inherit;
   -webkit-font-smoothing: initial;
   -webkit-appearance: none;
+  --select-icon-size: 6px;
   padding-right: 3.125em;
-  background-color: var(--current-light-primary);
-  background-image: url("./assets/images/arrow-down.svg");
-  background-position: calc(100% - 17px) center;
+  background-image: linear-gradient(45deg, transparent 50%, var(--current-dark-primary) 50%), linear-gradient(135deg, var(--current-dark-primary) 50%, transparent 50%);
+  background-position: calc(100% - var(--theme-input-padding) - var(--select-icon-size)) center, calc(100% - var(--theme-input-padding)) center;
+  background-size: var(--select-icon-size) var(--select-icon-size), var(--select-icon-size) var(--select-icon-size);
   background-repeat: no-repeat;
-  background-size: .58em .58em;
   -webkit-appearance: none; }
   select:hover {
     --theme-input-box-shadow: var(--theme-input-hover-box-shadow); }
@@ -729,6 +729,9 @@ select {
       --theme-input-box-shadow: var(--theme-input-error-box-shadow); }
     [class*="invalid"] select:focus, [class*="invalid"] select:active {
       --theme-input-box-shadow: var(--theme-input-focus-error-box-shadow); }
+  @media only screen and (min-width: 768px) {
+    select {
+      --select-icon-size: 8px; } }
   select[multiple] {
     background: none;
     padding-right: .8125em; }
@@ -3163,12 +3166,12 @@ span.page-numbers {
     font-family: inherit;
     -webkit-font-smoothing: initial;
     -webkit-appearance: none;
+    --select-icon-size: 6px;
     padding-right: 3.125em;
-    background-color: var(--current-light-primary);
-    background-image: url("./assets/images/arrow-down.svg");
-    background-position: calc(100% - 17px) center;
+    background-image: linear-gradient(45deg, transparent 50%, var(--current-dark-primary) 50%), linear-gradient(135deg, var(--current-dark-primary) 50%, transparent 50%);
+    background-position: calc(100% - var(--theme-input-padding) - var(--select-icon-size)) center, calc(100% - var(--theme-input-padding)) center;
+    background-size: var(--select-icon-size) var(--select-icon-size), var(--select-icon-size) var(--select-icon-size);
     background-repeat: no-repeat;
-    background-size: .58em .58em;
     -webkit-appearance: none; }
     .wpforms-container[class][class][class] .wpforms-form select:hover {
       --theme-input-box-shadow: var(--theme-input-hover-box-shadow); }
@@ -3188,6 +3191,9 @@ span.page-numbers {
         --theme-input-box-shadow: var(--theme-input-error-box-shadow); }
       [class*="invalid"] .wpforms-container[class][class][class] .wpforms-form select:focus, [class*="invalid"] .wpforms-container[class][class][class] .wpforms-form select:active {
         --theme-input-box-shadow: var(--theme-input-focus-error-box-shadow); }
+    @media only screen and (min-width: 768px) {
+      .wpforms-container[class][class][class] .wpforms-form select {
+        --select-icon-size: 8px; } }
   .wpforms-container[class][class][class] .wpforms-form input[type="checkbox"] {
     position: relative;
     left: 0;
