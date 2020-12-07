@@ -54,7 +54,7 @@ function rosa2_woocommerce_setup_hooks() {
 	add_action( 'woocommerce_before_single_product_summary', 'rosa2_add_start_wrapper_before_single_product_summary', 1 );
 	add_action( 'woocommerce_after_single_product_summary', 'rosa2_add_end_wrapper_after_single_product_summary', 1 );
 
-	// Add wrapper for tasb on single product
+	// Add wrapper for tabs on single product
 	add_action( 'woocommerce_after_single_product_summary', 'rosa2_add_start_wrapper_before_tabs', 9 );
 	add_action( 'woocommerce_after_single_product_summary', 'rosa2_add_end_wrapper_after_tabs', 11 );
 
@@ -222,11 +222,19 @@ function rosa2_add_end_wrapper_after_single_product_summary() {
 
 
 function rosa2_add_start_wrapper_before_tabs() {
-	echo '<div class="c-woo-section  c-woo-tabs">';
+	$product_tabs = apply_filters( 'woocommerce_product_tabs', array() );
+
+	if ( ! empty( $product_tabs ) ) {
+		echo '<div class="c-woo-section  c-woo-tabs">';
+    }
 }
 
 function rosa2_add_end_wrapper_after_tabs() {
-	echo '</div><!-- .c-woo-section.c-woo-tabs -->';
+	$product_tabs = apply_filters( 'woocommerce_product_tabs', array() );
+
+	if ( ! empty( $product_tabs ) ) {
+		echo '</div><!-- .c-woo-section.c-woo-tabs -->';
+	}
 }
 
 function rosa2_add_start_wrapper_before_upsells() {
