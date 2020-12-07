@@ -76,12 +76,12 @@
     }
 
     select {
-        padding-top: var(--theme-spacing-tiny);
-        padding-bottom: var(--theme-spacing-tiny);
-
         color: var(--current-dark-secondary);
 
         @include select;
+
+        padding: var(--theme-spacing-tiny) 0;
+        background-position: calc(100% - var(--select-icon-size)) center, 100% center;
 
         border: 0;
         border-bottom: .1875em solid currentColor;

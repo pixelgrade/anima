@@ -762,8 +762,6 @@
     width: 100%; } }
 
 .woocommerce-ordering select {
-  padding-top: var(--theme-spacing-tiny);
-  padding-bottom: var(--theme-spacing-tiny);
   color: var(--current-dark-secondary);
   width: 100%;
   height: auto;
@@ -793,6 +791,8 @@
   background-size: var(--select-icon-size) var(--select-icon-size), var(--select-icon-size) var(--select-icon-size);
   background-repeat: no-repeat;
   -webkit-appearance: none;
+  padding: var(--theme-spacing-tiny) 0;
+  background-position: calc(100% - (100% - var(--select-icon-size))) center, 0% center;
   border: 0;
   border-bottom: .1875em solid currentColor;
   border-radius: 0;
