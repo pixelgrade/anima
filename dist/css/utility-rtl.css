@@ -459,6 +459,30 @@
   .u-mq-above-desktop {
     display: none; } }
 
+.has-hero #page .site-content {
+  margin-top: 0 !important; }
+
+.has-media-card .entry-content .novablocks-media:first-child {
+  --block-top-spacing: 0;
+  --block-bottom-spacing: 0;
+  padding-top: 0;
+  padding-bottom: 0; }
+  .has-media-card .entry-content .novablocks-media:first-child > .novablocks-block {
+    padding-top: 10em; }
+    @media only screen and (min-width: 1000px) {
+      .has-media-card .entry-content .novablocks-media:first-child > .novablocks-block {
+        padding-top: var(--theme-header-height); } }
+    @media not screen and (min-width: 1000px) {
+      .has-media-card .entry-content .novablocks-media:first-child > .novablocks-block.block-is-highlighted {
+        --novablocks-block-background-color: var(--novablocks-current-dark-tertiary);
+        --novablocks-block-content-text-color: var(--novablocks-current-light-primary);
+        --novablocks-block-content-titles-color: var(--novablocks-current-light-primary); }
+      .has-media-card .entry-content .novablocks-media:first-child > .novablocks-block.block-is-moderate {
+        --novablocks-block-background-color: var(--novablocks-current-light-tertiary);
+        --novablocks-block-content-text-color: var(--novablocks-current-dark-primary);
+        --novablocks-block-content-titles-color: var(--novablocks-current-dark-primary);
+        --novablocks-block-content-accent-color: var(--novablocks-block-current-accent-color); } }
+
 [class][class] .has-smaller-font-size {
   --font-size: inherit;
   --font-size-modifier: 0.8;

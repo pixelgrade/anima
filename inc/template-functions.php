@@ -40,6 +40,10 @@ function rosa2_body_classes( $classes ) {
 		$classes[] = 'has-hero';
 	}
 
+	if ( rosa2_media_card_has_background() ) {
+		$classes[] = 'has-hero has-media-card';
+	}
+
 	if ( rosa2_remove_site_padding_bottom() ) {
 		$classes[] = 'has-no-padding-bottom';
 	}

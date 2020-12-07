@@ -1,0 +1,39 @@
+.has-hero {
+  @include remove-page-spacing-top;
+}
+
+.has-media-card {
+  .entry-content {
+
+    .novablocks-media:first-child {
+      --block-top-spacing: 0;
+      --block-bottom-spacing: 0;
+
+      padding-top: 0;
+      padding-bottom: 0;
+
+      > .novablocks-block {
+        padding-top: 10em;
+
+        @include above(lap) {
+          padding-top: var(--theme-header-height);
+        }
+
+        @include below(lap) {
+          &.block-is-highlighted {
+            --novablocks-block-background-color: var(--novablocks-current-dark-tertiary);
+            --novablocks-block-content-text-color: var(--novablocks-current-light-primary);
+            --novablocks-block-content-titles-color: var(--novablocks-current-light-primary);
+          }
+
+          &.block-is-moderate {
+            --novablocks-block-background-color: var(--novablocks-current-light-tertiary);
+            --novablocks-block-content-text-color: var(--novablocks-current-dark-primary);
+            --novablocks-block-content-titles-color: var(--novablocks-current-dark-primary);
+            --novablocks-block-content-accent-color: var(--novablocks-block-current-accent-color);
+          }
+        }
+      }
+    }
+  }
+}
