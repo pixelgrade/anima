@@ -505,7 +505,7 @@ function rosa2_woocommerce_quantity_input_after() {
 
 function rosa2_woocommerce_quantity_label() {
 
-	$label = '<label for="quantity">' . esc_html__( 'Quantity', '__theme_txtd' ) . '</label><div class="quantity__wrapper">';
+	$label = '<label for="quantity">' . esc_html__( 'Quantity', 'woocommerce' ) . '</label><div class="quantity__wrapper">';
 
 	echo $label;
 }
@@ -514,7 +514,7 @@ function rosa2_add_label_to_availability_display( $availability ) {
     global $product;
 
 	if( is_product() && $product-> get_manage_stock() ){
-		$label = __( '<span>Stock</span>', 'woocommerce' );
+		$label = '<span>' . esc_html__( 'Stock', 'woocommerce' ) . '</span>';
 		$availability['availability'] = $label . '<span>' .$availability['availability'] . '</span>';
 	}
 
