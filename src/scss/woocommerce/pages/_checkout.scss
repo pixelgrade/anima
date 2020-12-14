@@ -434,8 +434,8 @@
 ul.order_details[class] {
   display: flex;
   flex-wrap: wrap;
-  margin-top: calc(var(--theme-spacing-small) * -1);
-  margin-left: calc(var(--theme-spacing-small) * -1);
+  padding-left: 0;
+  margin-left: calc(var(--theme-spacing-medium) * -1);
 
   > li {
     margin-top: var(--theme-spacing-medium);
@@ -451,14 +451,7 @@ ul.order_details[class] {
 }
 
 .woocommerce-order-received .woocommerce-order {
-  display: flex;
-  flex-direction: column;
   margin-top: var(--theme-spacing-xxl);
-
-  > .woocommerce-checkout-title,
-  > .woocommerce-checkout-breadcrumbs {
-    order: -1;
-  }
 }
 
 .woocommerce-checkout:not(.woocommerce-order-received) {
