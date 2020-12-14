@@ -1,13 +1,4 @@
 .novablocks-sharing__overlay {
     @include variation(dark);
-
-    .wp-block-button__link {
-        @include specific(1) {
-            --theme-button-background-color: var(--current-color-primary);
-            --theme-button-border-color: var(--current-color-primary);
-
-            --theme-button-hover-text-color: var(--current-color-primary);
-            --theme-button-hover-border-color: var(--current-color-primary);
-        }
-    }
+    @include apply-font(body);
 }
