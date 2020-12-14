@@ -111,8 +111,8 @@ function rosa2_woocommerce_setup_hooks() {
 	add_action( 'woocommerce_checkout_billing', 'rosa2_output_checkout_site_identity', 1 );
 	add_action( 'woocommerce_checkout_billing', 'rosa2_output_checkout_breadcrumbs', 2 );
 
-	add_action( 'woocommerce_before_thankyou', 'rosa2_output_checkout_site_identity', 1 );
-	add_action( 'woocommerce_before_thankyou', 'rosa2_output_checkout_breadcrumbs', 2 );
+//	add_action( 'woocommerce_before_thankyou', 'rosa2_output_checkout_site_identity', 1 );
+//	add_action( 'woocommerce_before_thankyou', 'rosa2_output_checkout_breadcrumbs', 2 );
 
     // Output fly-out cart markup
 	add_action( 'rosa_before_header', 'rosa2_output_mini_cart', 1 );

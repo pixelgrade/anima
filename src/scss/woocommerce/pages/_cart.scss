@@ -16,7 +16,6 @@
 }
 
 .woocommerce table.shop_table {
-
   border: 0;
 
   th, td {
@@ -24,15 +23,21 @@
 
     @include above(tablet) {
       padding: var(--theme-spacing-xsmall);
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 0;
+      }
     }
   }
 
-  td {
-    &.actions {
-      @include below(tablet) {
-        padding-left: 0;
-        padding-right: 0;
-      }
+  td.actions {
+    @include below(tablet) {
+      padding-left: 0;
+      padding-right: 0;
     }
   }
 }
