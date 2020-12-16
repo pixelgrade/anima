@@ -245,7 +245,7 @@ class Header {
 		this.$mobileHeader = $( '<div class="site-header--mobile">' );
 
 		$( '.c-branding' ).first().clone().appendTo( this.$mobileHeader );
-		$( '.menu-item--cart' ).first().clone().appendTo( this.$mobileHeader );
+		this.$header.find( '.menu-item--cart' ).first().clone().appendTo( this.$mobileHeader );
 
 		this.$mobileHeader.insertAfter( this.$toggle );
 		this.createdMobileHeader = true;
