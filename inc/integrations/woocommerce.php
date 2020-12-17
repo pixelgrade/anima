@@ -28,7 +28,8 @@ function rosa2_woocommerce_setup() {
 		add_action( 'wp_loaded', 'rosa2_woocommerce_setup_hooks' );
 
         // Add Cart Menu Item to Rosa2 extras box
-		add_filter( 'rosa2_menu_items_boxes_config', 'rosa2_add_cart_to_menu_items' );
+		add_filter( 'rosa2_menu_items_boxes_config', 'rosa2_add_cart_to_extras_menu_items', 10, 1 );
+
 		add_action( 'wp_enqueue_scripts', 'rosa2_product_catalog_image_aspect_ratio' );
 
 	}
@@ -427,7 +428,7 @@ if ( ! function_exists( ' rosa2_woocommerce_pagination_args' ) ) {
 if ( ! function_exists( 'rosa2_woocommerce_coupon_form' ) ) {
 	function rosa2_woocommerce_coupon_form() {
 		echo '<form class="checkout_coupon woocommerce-form-coupon" id="form-coupon" method="post" style="display:none">
-                <input form="woocommerce-form-coupon" type="text" name="coupon_code" class="js-coupon-value-destination input-text" placeholder="Coupon code" id="coupon_code" value="">
+                <input form="woocommerce-form-coupon" type="text" name="coupon_code" class="js-coupon-value-destination input-text" placeholder="' . esc_attr__( 'Coupon code', '__theme_txtd' ) . '" id="coupon_code" value="">
               </form>';
 	}
 }
@@ -484,7 +485,7 @@ function rosa2_woocommerce_breadcrumbs() {
 		'wrap_after'  => '</nav>',
 		'before'      => '<span>',
 		'after'       => '</span>',
-		'home'        => _x( 'Shop', 'breadcrumb', 'woocommerce' ),
+		'home'        => esc_html_x( 'Shop', 'breadcrumb', '__theme_txtd' ),
 	);
 }
 
@@ -498,41 +499,57 @@ function rosa2_woocommerce_quantity_input_after() {
 
 function rosa2_woocommerce_quantity_label() {
 
-	$label = '<label for="quantity">' . esc_html__( 'Quantity', 'woocommerce' ) . '</label><div class="quantity__wrapper">';
+	$label = '<label for="quantity">' . esc_html__( 'Quantity', '__theme_txtd' ) . '</label><div class="quantity__wrapper">';
 
 	echo $label;
 }
 
+/**
+ * @param array $availability
+ *
+ * @return array
+ */
 function rosa2_add_label_to_availability_display( $availability ) {
     global $product;
 
 	if( is_product() && $product-> get_manage_stock() ){
-		$label = '<span>' . esc_html__( 'Stock', 'woocommerce' ) . '</span>';
+		$label = '<span>' . esc_html__( 'Stock', '__theme_txtd' ) . '</span>';
 		$availability['availability'] = $label . '<span>' .$availability['availability'] . '</span>';
 	}
 
 	return $availability;
 }
 
+/**
+ * @return false|string|WP_Error
+ */
 function rosa2_woocommerce_custom_breadrumb_home_url() {
 	return get_permalink( wc_get_page_id( 'shop' ) );
 }
 
-function rosa2_add_cart_to_menu_items( $items ) {
-
-    if ( ! isset( $items['pxg-extras'] ) ) {
+/**
+ * @param array $items
+ *
+ * @return array
+ */
+function rosa2_add_cart_to_extras_menu_items( $items ) {
+	if ( empty( $items ) ) {
+		$items = array();
+	}
+    if ( empty( $items['pxg-extras'] ) ) {
         $items['pxg-extras'] = array();
     }
-
-    if ( ! isset( $items['pxg-extras']['menu_items'] ) ) {
+    if ( empty( $items['pxg-extras']['menu_items'] ) ) {
         $items['pxg-extras']['menu_items'] = array();
     }
 
 	$items['pxg-extras']['menu_items']['cart'] = array(
 		'type'        => 'custom-pxg',
 		'type_label'  => esc_html__( 'Custom', '__theme_txtd' ),
+		// This is used for the default Navigation Label value once the menu item is added in a menu.
 		'title'       => esc_html__( 'Cart', '__theme_txtd' ),
-		'label'       => esc_html__( 'Cart', '__theme_txtd' ),
+		// This is the label used for the menu items list.
+		'label'       => esc_html__( 'WooCommerce Cart', '__theme_txtd' ),
 		'url'         => esc_url( get_permalink( wc_get_page_id( 'cart' ) ) ),
 		'attr_title'  => esc_html__( 'Toggle visibility of cart panel', '__theme_txtd' ),
 		// These are classes that will be merged with the user defined classes.
@@ -550,6 +567,10 @@ function rosa2_add_cart_to_menu_items( $items ) {
 				),
 			),
 		),
+		// Specify the menu item fields we should force-hide via inline CSS for this menu item.
+		// This means that despite the Screen Options, these fields will not be shown.
+		// Use the value used by core in classes like "field-xfn" -> the 'xfn' value to use.
+		'hidden_fields' => array( 'link-target', 'xfn', 'description', ),
 	);
 
     return $items;
