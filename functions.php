@@ -283,28 +283,28 @@ function rosa2_print_scripts() {
 			document.body.classList.add( "has-loaded" );
 		} );
 
-		function isUndefined( target ) {
-			return typeof target === "undefined";
+		function rosa2IsUndefined( target ) {
+			return typeof target === "undefined" || target === null;
         }
 
-		function shouldCancelFadeOut( e ) {
+		function rosa2ShouldCancelFadeOut( e ) {
 
-			if ( isUndefined( e.target ) ||
-                 isUndefined( e.target.activeElement ) ||
-                 isUndefined( e.target.activeElement ) ||
-                 isUndefined( e.target.activeElement.getAttribute( 'href' ) ) ) {
+			if ( rosa2IsUndefined( e.target ) ||
+                 rosa2IsUndefined( e.target.activeElement ) ||
+                 rosa2IsUndefined( e.target.activeElement ) ||
+                 rosa2IsUndefined( e.target.activeElement.getAttribute( 'href' ) ) ) {
 				return false;
             }
 
 			var href = e.target.activeElement.getAttribute( 'href' );
-			var isMail = href.indexOf( 'mailto:' ) === 0;
-			var isTel = href.indexOf( 'tel:' ) === 0;
+			var isMail = typeof href === 'string' && href.indexOf( 'mailto:' ) === 0;
+			var isTel = typeof href === 'string' && href.indexOf( 'tel:' ) === 0;
 
 			return isMail || isTel;
         }
 
 		window.addEventListener( "beforeunload", function( event ) {
-			if ( ! shouldCancelFadeOut( event ) ) {
+			if ( ! rosa2ShouldCancelFadeOut( event ) ) {
 			    document.body.classList.add( "is-loading" );
             }
 		} );

@@ -404,12 +404,12 @@
     font-family: inherit;
     -webkit-font-smoothing: initial;
     -webkit-appearance: none;
+    --select-icon-size: 6px;
     padding-right: 3.125em;
-    background-color: var(--current-light-primary);
-    background-image: url("../../../assets/images/arrow-down.svg");
-    background-position: calc(100% - 17px) center;
+    background-image: linear-gradient(45deg, transparent 50%, var(--current-dark-primary) 50%), linear-gradient(135deg, var(--current-dark-primary) 50%, transparent 50%);
+    background-position: calc(100% - var(--theme-input-padding) - var(--select-icon-size)) center, calc(100% - var(--theme-input-padding)) center;
+    background-size: var(--select-icon-size) var(--select-icon-size), var(--select-icon-size) var(--select-icon-size);
     background-repeat: no-repeat;
-    background-size: .58em .58em;
     -webkit-appearance: none; }
     .wc-block-product-categories.is-dropdown select:hover {
       --theme-input-box-shadow: var(--theme-input-hover-box-shadow); }
@@ -429,6 +429,9 @@
         --theme-input-box-shadow: var(--theme-input-error-box-shadow); }
       [class*="invalid"] .wc-block-product-categories.is-dropdown select:focus, [class*="invalid"] .wc-block-product-categories.is-dropdown select:active {
         --theme-input-box-shadow: var(--theme-input-focus-error-box-shadow); }
+    @media only screen and (min-width: 768px) {
+      .wc-block-product-categories.is-dropdown select {
+        --select-icon-size: 8px; } }
 
 .wc-block-product-categories__button {
   display: inline-block;
@@ -715,12 +718,12 @@
   font-family: inherit;
   -webkit-font-smoothing: initial;
   -webkit-appearance: none;
+  --select-icon-size: 6px;
   padding-right: 3.125em;
-  background-color: var(--current-light-primary);
-  background-image: url("../../../assets/images/arrow-down.svg");
-  background-position: calc(100% - 17px) center;
+  background-image: linear-gradient(45deg, transparent 50%, var(--current-dark-primary) 50%), linear-gradient(135deg, var(--current-dark-primary) 50%, transparent 50%);
+  background-position: calc(100% - var(--theme-input-padding) - var(--select-icon-size)) center, calc(100% - var(--theme-input-padding)) center;
+  background-size: var(--select-icon-size) var(--select-icon-size), var(--select-icon-size) var(--select-icon-size);
   background-repeat: no-repeat;
-  background-size: .58em .58em;
   -webkit-appearance: none;
   width: auto; }
   .wc-block-order-select__select[class][class]:hover {
@@ -741,6 +744,9 @@
       --theme-input-box-shadow: var(--theme-input-error-box-shadow); }
     [class*="invalid"] .wc-block-order-select__select[class][class]:focus, [class*="invalid"] .wc-block-order-select__select[class][class]:active {
       --theme-input-box-shadow: var(--theme-input-focus-error-box-shadow); }
+  @media only screen and (min-width: 768px) {
+    .wc-block-order-select__select[class][class] {
+      --select-icon-size: 8px; } }
   .wc-block-order-select__select[class][class][disabled] {
     border-color: var(--current-light-tertiary);
     background-color: var(--current-light-tertiary); }
@@ -893,6 +899,12 @@
 
 .wc-block-review-order-select {
   margin-bottom: var(--theme-spacing-small); }
+
+.wc-block-product-search__fields {
+  display: flex; }
+
+.wc-block-product-search__button svg {
+  fill: currentColor; }
 
 [class][class][class] .wp-block-button.wc-block-grid__product-add-to-cart {
   opacity: 1;

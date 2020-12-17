@@ -5,6 +5,10 @@
 .wp-block-audio audio {
   width: 100%; }
 
+/* Audio Block */
+.wp-block-video video {
+  width: 100%; }
+
 /* Button Block */
 .wp-block-button.is-style-squared {
   --theme-button-border-radius: 0; }
@@ -362,10 +366,10 @@
 
 .wp-block-group {
   --wp-block-group-padding: var(--current-element-padding, var(--theme-spacing-fluid-large)); }
-  .wp-block-group[class*="is-style"] {
+  .wp-block-group[class*="is-style"]:not(.is-style-default) {
     padding-top: var(--wp-block-group-padding);
     padding-bottom: var(--wp-block-group-padding); }
-    .wp-block-group[class*="is-style"] + .wp-block-group[class*="is-style"] {
+    .wp-block-group[class*="is-style"]:not(.is-style-default) + .wp-block-group[class*="is-style"]:not(.is-style-default) {
       --element-spacing: 0; }
 
 /* Latest Posts Block */

@@ -43,8 +43,10 @@
         }
     }
 
-    .checkout-button {
+    .checkout-button,
+    [id="place_order"] {
         @include button-huge;
+        --theme-button-text-color: var(--theme-light-primary);
         --theme-button-background-color: var(--current-color-primary);
         --theme-button-border-color: var(--current-color-primary);
         --theme-button-hover-text-color: var(--current-color-primary);
@@ -72,6 +74,7 @@
 
     .add_to_cart_button,
     .single_add_to_cart_button {
+        --theme-button-text-color: var(--theme-light-primary);
         --theme-button-background-color: var(--current-color-primary);
         --theme-button-border-color: var(--current-color-primary);
         --theme-button-hover-text-color: var(--current-color-primary);

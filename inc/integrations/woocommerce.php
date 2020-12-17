@@ -54,7 +54,7 @@ function rosa2_woocommerce_setup_hooks() {
 	add_action( 'woocommerce_before_single_product_summary', 'rosa2_add_start_wrapper_before_single_product_summary', 1 );
 	add_action( 'woocommerce_after_single_product_summary', 'rosa2_add_end_wrapper_after_single_product_summary', 1 );
 
-	// Add wrapper for tasb on single product
+	// Add wrapper for tabs on single product
 	add_action( 'woocommerce_after_single_product_summary', 'rosa2_add_start_wrapper_before_tabs', 9 );
 	add_action( 'woocommerce_after_single_product_summary', 'rosa2_add_end_wrapper_after_tabs', 11 );
 
@@ -111,15 +111,15 @@ function rosa2_woocommerce_setup_hooks() {
 	add_action( 'woocommerce_checkout_billing', 'rosa2_output_checkout_site_identity', 1 );
 	add_action( 'woocommerce_checkout_billing', 'rosa2_output_checkout_breadcrumbs', 2 );
 
+//	add_action( 'woocommerce_before_thankyou', 'rosa2_output_checkout_site_identity', 1 );
+//	add_action( 'woocommerce_before_thankyou', 'rosa2_output_checkout_breadcrumbs', 2 );
+
     // Output fly-out cart markup
 	add_action( 'rosa_before_header', 'rosa2_output_mini_cart', 1 );
 
     // Hide tabs content titles
 	add_filter( 'woocommerce_product_description_heading', '__return_false', 30 );
 	add_filter( 'woocommerce_product_additional_information_heading', '__return_false', 30 );
-
-    // Append cart to menu
-	add_filter( 'wp_nav_menu_items', 'rosa2_append_cart_icon_to_menu', 10, 2 );
 
     // Limit related posts number
 	add_filter( 'woocommerce_output_related_products_args', 'rosa2_limit_related_posts_count', 20 );
@@ -222,11 +222,19 @@ function rosa2_add_end_wrapper_after_single_product_summary() {
 
 
 function rosa2_add_start_wrapper_before_tabs() {
-	echo '<div class="c-woo-section  c-woo-tabs">';
+	$product_tabs = apply_filters( 'woocommerce_product_tabs', array() );
+
+	if ( ! empty( $product_tabs ) ) {
+		echo '<div class="c-woo-section  c-woo-tabs">';
+    }
 }
 
 function rosa2_add_end_wrapper_after_tabs() {
-	echo '</div><!-- .c-woo-section.c-woo-tabs -->';
+	$product_tabs = apply_filters( 'woocommerce_product_tabs', array() );
+
+	if ( ! empty( $product_tabs ) ) {
+		echo '</div><!-- .c-woo-section.c-woo-tabs -->';
+	}
 }
 
 function rosa2_add_start_wrapper_before_upsells() {
@@ -340,32 +348,6 @@ function rosa2_output_mini_cart() {
         </div>
 
 	<?php }
-}
-
-
-function rosa2_append_cart_icon_to_menu( $items, $args ) {
-
-    if ( empty( WC()->cart ) ) {
-        return $items;
-    }
-
-	$cart_item_count = WC()->cart->get_cart_contents_count();
-	if ( $cart_item_count ) {
-		$cart_count_span = '<div class="cart-count"><span>' . esc_html( $cart_item_count ) . '</span></div>';
-	} else {
-		/* translators: Zero items in cart.  */
-		$cart_count_span = '<div class="cart-count"><span>' . esc_html__( '0', '__theme_txtd' ) . '</span></div>';
-    }
-
-	$cart_link = '<li class="menu-item  menu-item--cart"><a class="js-open-cart" href="' . esc_url( get_permalink( wc_get_page_id( 'cart' ) ) ) . '">' . $cart_count_span . '</a></li>';
-
-
-	// Add the cart link to the end of the menu.
-	if ( ! empty( $args->theme_location ) && $args->theme_location === 'primary' ) {
-		$items = $items . $cart_link;
-	}
-
-	return $items;
 }
 
 if ( ! function_exists( 'woocommerce_display_categories' ) ) {
@@ -497,7 +479,7 @@ function rosa2_woocommerce_quantity_input_after() {
 
 function rosa2_woocommerce_quantity_label() {
 
-	$label = '<label for="quantity">' . esc_html__( 'Quantity', '__theme_txtd' ) . '</label><div class="quantity__wrapper">';
+	$label = '<label for="quantity">' . esc_html__( 'Quantity', 'woocommerce' ) . '</label><div class="quantity__wrapper">';
 
 	echo $label;
 }
@@ -506,7 +488,7 @@ function rosa2_add_label_to_availability_display( $availability ) {
     global $product;
 
 	if( is_product() && $product-> get_manage_stock() ){
-		$label = __( '<span>Stock</span>', 'woocommerce' );
+		$label = '<span>' . esc_html__( 'Stock', 'woocommerce' ) . '</span>';
 		$availability['availability'] = $label . '<span>' .$availability['availability'] . '</span>';
 	}
 

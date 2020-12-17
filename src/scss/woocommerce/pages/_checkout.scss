@@ -1,4 +1,4 @@
-.woocommerce-checkout {
+.woocommerce-checkout:not(.woocommerce-order-received) {
 
   // contain order review background
   .site-main {
@@ -19,44 +19,13 @@
     }
   }
 
-  // order received page
-  &.woocommerce-order-received .col2-set {
-
-    margin-left: calc(var(--theme-spacing-large) * -1);
-    margin-top: calc(var(--theme-spacing-large) * -1);
-
-    > * {
-
-      padding-left: var(--theme-spacing-large);
-      padding-top: var(--theme-spacing-large);
-    }
-  }
-
-  .woocommerce-customer-details,
-  .woocommerce-order-details,
-  .woocommerce-order-downloads {
-    margin-bottom: 0;
-
-    * + & {
-      margin-top: var(--theme-spacing-large);
-    }
-  }
-
   @include above(tablet) {
 
-    &:not(.woocommerce-order-received) .col2-set {
+    .col2-set {
       float: left;
       width: 55%;
       padding-left: 5.25%;
       padding-right: 8.75%;
-    }
-
-    &.woocommerce-order-received .col2-set {
-      display: flex;
-
-      > * {
-        flex: 0 0 50%;
-      }
     }
 
     [id="order_review_heading"],
@@ -70,6 +39,7 @@
 
     .woocommerce-checkout {
       position: relative;
+
       &:before {
         display: block;
 
@@ -434,8 +404,9 @@
 ul.order_details[class] {
   display: flex;
   flex-wrap: wrap;
-  margin-top: calc(var(--theme-spacing-small) * -1);
-  margin-left: calc(var(--theme-spacing-small) * -1);
+  padding-left: 0;
+  margin-left: calc(var(--theme-spacing-medium) * -1);
+  margin-bottom: var(--theme-spacing-medium);
 
   > li {
     margin-top: var(--theme-spacing-medium);
@@ -447,17 +418,6 @@ ul.order_details[class] {
       flex: 0 0 100%;
       border-right: 0;
     }
-  }
-}
-
-.woocommerce-order-received .woocommerce-order {
-  display: flex;
-  flex-direction: column;
-  margin-top: var(--theme-spacing-xxl);
-
-  > .woocommerce-checkout-title,
-  > .woocommerce-checkout-breadcrumbs {
-    order: -1;
   }
 }
 
@@ -698,4 +658,45 @@ ul.order_details[class] {
 
 .woocommerce-invalid #terms {
   outline: 0;
+}
+
+.woocommerce-customer-details,
+.woocommerce-order-details,
+.woocommerce-order-downloads {
+
+  .woocommerce-checkout & {
+    margin-bottom: 0;
+  }
+
+  .woocommerce-checkout * + & {
+    margin-top: var(--theme-spacing-large);
+  }
+}
+
+.woocommerce-customer-details,
+.woocommerce-order-details,
+.woocommerce-order-downloads {
+  @include specific(1) {
+    margin-bottom: 0;
+  }
+}
+
+.woocommerce-checkout .entry-content > .woocommerce {
+  --block-top-spacing: 0;
+  --block-bottom-spacing: 0;
+}
+
+.woocommerce-order-received {
+
+  .woocommerce-customer-details .woocommerce-columns {
+    margin-top: calc( var(--theme-spacing-small) * -1 );
+
+    > * {
+      margin-top: var(--theme-spacing-small);
+    }
+  }
+
+  .woocommerce-column__title {
+    margin-bottom: var(--theme-spacing-small);
+  }
 }
