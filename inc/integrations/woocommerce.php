@@ -11,6 +11,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+function rosa2_woocommerce_setup() {
+
+	if ( function_exists( 'WC' ) && pixelgrade_user_has_access( 'woocommerce' ) ) {
+
+		// Add the necessary theme support flags
+		add_theme_support( 'woocommerce' );
+		add_theme_support( 'wc-product-gallery-lightbox' );
+		add_theme_support( 'wc-product-gallery-slider' );
+
+		// Load the integration logic.
+		add_action( 'wp_enqueue_scripts', 'rosa2_woocommerce_scripts', 10 );
+		add_action( 'enqueue_block_editor_assets', 'rosa2_enqueue_woocommerce_block_editor_assets', 10 );
+
+        // We do this late so we can give all others room to play.
+		add_action( 'wp_loaded', 'rosa2_woocommerce_setup_hooks' );
+
+        // Add Cart Menu Item to Rosa2 extras box
+		add_filter( 'rosa2_menu_items_boxes_config', 'rosa2_add_cart_to_menu_items' );
+		add_action( 'wp_enqueue_scripts', 'rosa2_product_catalog_image_aspect_ratio' );
+
+	}
+}
+add_action( 'after_setup_theme', 'rosa2_woocommerce_setup', 10 );
+
 function rosa2_woocommerce_scripts() {
 	$theme  = wp_get_theme( get_template() );
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
@@ -26,14 +50,12 @@ function rosa2_woocommerce_scripts() {
 
 	wp_deregister_style('wc-block-style' );
 }
-add_action( 'wp_enqueue_scripts', 'rosa2_woocommerce_scripts', 10 );
 
 function rosa2_enqueue_woocommerce_block_editor_assets() {
 	$theme  = wp_get_theme( get_template() );
 
 	wp_enqueue_style( 'rosa2-woocommerce-block-styles', get_template_directory_uri() . '/dist/css/woocommerce/block-editor.css', array(), $theme->get( 'Version' ) );
 }
-add_action( 'enqueue_block_editor_assets', 'rosa2_enqueue_woocommerce_block_editor_assets', 10 );
 
 function rosa2_woocommerce_setup_hooks() {
 
@@ -158,8 +180,6 @@ function rosa2_woocommerce_setup_hooks() {
     // Add label before stock
 	add_filter( 'woocommerce_get_availability', 'rosa2_add_label_to_availability_display' );
 }
-// We do this late so we can give all others room to play.
-add_action( 'wp_loaded', 'rosa2_woocommerce_setup_hooks' );
 
 function rosa2_woocommerce_product_class( $classes, $product ) {
     $classes[] = 'wc-block-grid__product';
@@ -436,7 +456,6 @@ function rosa2_product_catalog_image_aspect_ratio() {
 
 	wp_add_inline_style( 'rosa2-woocommerce', $css );
 }
-add_action( 'wp_enqueue_scripts', 'rosa2_product_catalog_image_aspect_ratio' );
 
 function rosa2_loop_product_link_open() {
 	global $product;
@@ -497,4 +516,41 @@ function rosa2_add_label_to_availability_display( $availability ) {
 
 function rosa2_woocommerce_custom_breadrumb_home_url() {
 	return get_permalink( wc_get_page_id( 'shop' ) );
+}
+
+function rosa2_add_cart_to_menu_items( $items ) {
+
+    if ( ! isset( $items['pxg-extras'] ) ) {
+        $items['pxg-extras'] = array();
+    }
+
+    if ( ! isset( $items['pxg-extras']['menu_items'] ) ) {
+        $items['pxg-extras']['menu_items'] = array();
+    }
+
+	$items['pxg-extras']['menu_items']['cart'] = array(
+		'type'        => 'custom-pxg',
+		'type_label'  => esc_html__( 'Custom', '__theme_txtd' ),
+		'title'       => esc_html__( 'Cart', '__theme_txtd' ),
+		'label'       => esc_html__( 'Cart', '__theme_txtd' ),
+		'url'         => esc_url( get_permalink( wc_get_page_id( 'cart' ) ) ),
+		'attr_title'  => esc_html__( 'Toggle visibility of cart panel', '__theme_txtd' ),
+		// These are classes that will be merged with the user defined classes.
+		'classes'     => array( 'menu-item--cart' ),
+		'custom_fields' => array(
+			'visual_style' => array(
+				'type'        => 'select',
+				'label'       => esc_html__( 'Visual Style', '__theme_txtd' ),
+				'description' => esc_html__( 'Choose a visual style suitable to your goals and audience.', '__theme_txtd' ),
+				'default'     => 'icon',
+				'options'     => array(
+					'label'      => esc_html__( 'Label', '__theme_txtd' ),
+					'icon'       => esc_html__( 'Icon', '__theme_txtd' ),
+					'label_icon' => esc_html__( 'Label with icon', '__theme_txtd' ),
+				),
+			),
+		),
+	);
+
+    return $items;
 }

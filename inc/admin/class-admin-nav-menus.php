@@ -80,34 +80,6 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 				),
 			);
 
-//			$cart_item_count = WC()->cart->get_cart_contents_count();
-
-			if ( function_exists( 'WC' ) && pixelgrade_user_has_access( 'woocommerce' ) ) {
-				$this->menu_items_boxes_config['pxg-extras']['menu_items']['cart'] = array(
-					'type'        => 'custom-pxg',
-					'type_label'  => esc_html__( 'Custom', '__theme_txtd' ),
-					'title'       => esc_html__( 'Cart', '__theme_txtd' ),
-					'label'       => esc_html__( 'Cart', '__theme_txtd' ),
-					'url'         => esc_url( get_permalink( wc_get_page_id( 'cart' ) ) ),
-					'attr_title'  => esc_html__( 'Toggle visibility of cart panel', '__theme_txtd' ),
-					// These are classes that will be merged with the user defined classes.
-					'classes'     => array( 'menu-item--cart' ),
-					'custom_fields' => array(
-						'visual_style' => array(
-							'type'        => 'select',
-							'label'       => esc_html__( 'Visual Style', '__theme_txtd' ),
-							'description' => esc_html__( 'Choose a visual style suitable to your goals and audience.', '__theme_txtd' ),
-							'default'     => 'icon',
-							'options'     => array(
-								'label'      => esc_html__( 'Label', '__theme_txtd' ),
-								'icon'       => esc_html__( 'Icon', '__theme_txtd' ),
-								'label_icon' => esc_html__( 'Label with icon', '__theme_txtd' ),
-							),
-						),
-					),
-				);
-			}
-
             // Allow others to have a say in this.
 			$this->menu_items_boxes_config = apply_filters( 'rosa2_menu_items_boxes_config', $this->menu_items_boxes_config );
 

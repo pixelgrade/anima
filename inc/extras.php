@@ -183,23 +183,6 @@ if ( ! function_exists( 'pixelgrade_get_original_theme_name' ) ) {
 	}
 }
 
-function rosa2_woocommerce_setup() {
-	if ( function_exists( 'WC' ) && pixelgrade_user_has_access( 'woocommerce' ) ) {
-
-		// Add the necessary theme support flags
-		add_theme_support( 'woocommerce' );
-		add_theme_support( 'wc-product-gallery-lightbox' );
-		add_theme_support( 'wc-product-gallery-slider' );
-
-
-		// Load the integration logic.
-		require_once trailingslashit( get_template_directory() ) . 'inc/integrations/woocommerce.php';
-	}
-}
-add_action( 'after_setup_theme', 'rosa2_woocommerce_setup', 10 );
-
-
-
 if ( ! function_exists( 'rosa2_parse_content_tags' ) ) {
 	/**
 	 * Replace any content tags present in the content.
