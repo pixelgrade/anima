@@ -128,22 +128,25 @@
   });
   $(function () {
     var $body = $(document.body).not('.woocommerce-cart');
-    var $cartMenuItem = $('.site-header__menu .menu > .menu-item--cart');
-    var $cartMenuItemLink = $cartMenuItem.children('a');
-    var cartMenuItemText = $cartMenuItemLink.text();
-    var $cartMenuItemCount = $('<span class="menu-item__icon">0</span>');
-    $cartMenuItemLink.html("<span class=\"menu-item__label\">".concat(cartMenuItemText, " </span>"));
-    $cartMenuItemCount.appendTo($cartMenuItemLink);
-    var fragmentKey = 'div.widget_shopping_cart_content';
-    var $fragment = $(fragmentKey);
+    var $cartMenuItems = $('.site-header__menu .menu > .menu-item--cart');
+    $cartMenuItems.each(function (i, obj) {
+      var $cartMenuItem = $(obj);
+      var $cartMenuItemLink = $cartMenuItem.children('a');
+      var cartMenuItemText = $cartMenuItemLink.text();
+      var $cartMenuItemCount = $('<span class="menu-item__icon">0</span>');
+      $cartMenuItemLink.html("<span class=\"menu-item__label\">".concat(cartMenuItemText, " </span>"));
+      $cartMenuItemCount.appendTo($cartMenuItemLink);
+      var fragmentKey = 'div.widget_shopping_cart_content';
+      var $fragment = $(fragmentKey);
 
-    if ($fragment.length) {
-      var fragments = {};
-      fragments[fragmentKey] = $fragment.html();
-      updateCartMenuItemCount(false, fragments);
-    }
-
-    $cartMenuItem.on('click', openMiniCart); // show mini cart when a product is added to cart
+      if ($fragment.length) {
+        var fragments = {};
+        fragments[fragmentKey] = $fragment.html();
+        var itemCount = getCartMenuItemCount(fragments);
+        updateCardMenuItems($cartMenuItems, itemCount);
+      }
+    });
+    $cartMenuItems.on('click', openMiniCart); // show mini cart when a product is added to cart
 
     function onAddedToCart(event, fragments, cart_hash, $button) {
       var key = 'div.widget_shopping_cart_content';
@@ -176,22 +179,21 @@
     } // update cart items count in cart menu item
 
 
-    function updateCartMenuItemCount(event, fragments, cart_hash, $button) {
+    function getCartMenuItemCount(fragments) {
       var key = 'div.widget_shopping_cart_content';
+      var count = 0;
 
       if (key in fragments) {
-        // initialize cart items sum count with 0
-        var products = 0; // loop through every item in cart and sum up the quantity
-
+        // loop through every item in cart and sum up the quantity
         $(fragments[key]).find('.mini_cart_item').each(function (i, obj) {
           var $quantity = $(obj).find('.quantity'); // remove the price html tag to be able to parse number of items for that product
 
           $quantity.children().remove();
-          products += parseInt($quantity.text(), 10);
-        }); // actually update the cart items count
-
-        $cartMenuItemCount.text(products);
+          count += parseInt($quantity.text(), 10);
+        });
       }
+
+      return count;
     } // show mini cart when Cart menu item is clicked
 
 
@@ -218,8 +220,20 @@
     }
 
     $('.c-mini-cart__overlay, .c-mini-cart__close').on('click', closeMiniCart);
+
+    function updateCardMenuItems($cartMenuItems, count) {
+      $cartMenuItems.each(function (i, obj) {
+        var $cartMenuItem = $(obj);
+        var $cartMenuItemCount = $cartMenuItem.find('.menu-item__icon');
+        $cartMenuItemCount.text(count);
+      });
+    }
+
     $body.on('added_to_cart', onAddedToCart);
-    $body.on('added_to_cart removed_from_cart', updateCartMenuItemCount); // in order to avoid template overwrites add the class used to style buttons programatically
+    $body.on('added_to_cart removed_from_cart', function (event, fragments, cart_hash, $button) {
+      var itemCount = getCartMenuItemCount(fragments);
+      updateCardMenuItems($cartMenuItems, itemCount);
+    }); // in order to avoid template overwrites add the class used to style buttons programatically
 
     $body.on('wc_cart_button_updated', function (event, $button) {
       $button.siblings('.added_to_cart').addClass('button');
