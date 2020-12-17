@@ -33,7 +33,9 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 						'search' => array(
 							'type'          => 'custom-pxg',
 							'type_label'    => esc_html__( 'Custom', '__theme_txtd' ),
+							// This is used for the default Navigation Label value once the menu item is added in a menu.
 							'title'         => esc_html__( 'Search', '__theme_txtd' ),
+							// This is the label used for the menu items list.
 							'label'         => esc_html__( 'Search', '__theme_txtd' ),
 							'url'           => '#search',
 							'attr_title'         => esc_html__( 'Search for something you seek', '__theme_txtd' ),
@@ -52,11 +54,17 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 									),
 								),
 							),
+							// Specify the menu item fields we should force-hide via inline CSS for this menu item.
+							// This means that despite the Screen Options, these fields will not be shown.
+							// Use the value used by core in classes like "field-xfn" -> the 'xfn' value to use.
+							'hidden_fields' => array( 'link-target', 'xfn', 'description', ),
 						),
 						'color-scheme-switcher' => array(
 							'type'        => 'custom-pxg',
 							'type_label'  => esc_html__( 'Custom', '__theme_txtd' ),
+							// This is used for the default Navigation Label value once the menu item is added in a menu.
 							'title'       => esc_html__( 'Light/Dark Mode', '__theme_txtd' ),
+							// This is the label used for the menu items list.
 							'label'       => esc_html__( 'Dark Mode Switcher', '__theme_txtd' ),
 							'url'         => '#color-scheme-switcher',
 							'attr_title'       => esc_html__( 'Switch between dark and light color mode', '__theme_txtd' ),
@@ -80,34 +88,6 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 				),
 			);
 
-//			$cart_item_count = WC()->cart->get_cart_contents_count();
-
-			if ( function_exists( 'WC' ) && pixelgrade_user_has_access( 'woocommerce' ) ) {
-				$this->menu_items_boxes_config['pxg-extras']['menu_items']['cart'] = array(
-					'type'        => 'custom-pxg',
-					'type_label'  => esc_html__( 'Custom', '__theme_txtd' ),
-					'title'       => esc_html__( 'Cart', '__theme_txtd' ),
-					'label'       => esc_html__( 'Cart', '__theme_txtd' ),
-					'url'         => esc_url( get_permalink( wc_get_page_id( 'cart' ) ) ),
-					'attr_title'  => esc_html__( 'Toggle visibility of cart panel', '__theme_txtd' ),
-					// These are classes that will be merged with the user defined classes.
-					'classes'     => array( 'menu-item--cart' ),
-					'custom_fields' => array(
-						'visual_style' => array(
-							'type'        => 'select',
-							'label'       => esc_html__( 'Visual Style', '__theme_txtd' ),
-							'description' => esc_html__( 'Choose a visual style suitable to your goals and audience.', '__theme_txtd' ),
-							'default'     => 'icon',
-							'options'     => array(
-								'label'      => esc_html__( 'Label', '__theme_txtd' ),
-								'icon'       => esc_html__( 'Icon', '__theme_txtd' ),
-								'label_icon' => esc_html__( 'Label with icon', '__theme_txtd' ),
-							),
-						),
-					),
-				);
-			}
-
             // Allow others to have a say in this.
 			$this->menu_items_boxes_config = apply_filters( 'rosa2_menu_items_boxes_config', $this->menu_items_boxes_config );
 
@@ -117,6 +97,8 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 			add_action( 'admin_init', array( $this, 'add_custom_menu_items_boxes' ) );
 			// Handle custom fields
 			add_action( 'wp_nav_menu_item_custom_fields', array( $this, 'add_custom_fields' ), 5, 2 );
+			// Handle hiding some menu item fields via inline CSS.
+			add_action( 'wp_nav_menu_item_custom_fields', array( $this, 'inline_css_to_hide_menu_item_fields' ), 5, 2 );
 			add_action( 'wp_update_nav_menu_item', array( $this, 'save_custom_fields' ), 10, 3 );
 			// Make sure that out menu boxes appear by default (the core hides them by default).
 			add_filter( "update_user_metadata", array( $this, 'unhide_our_menu_boxes_for_initial_metaboxes' ), 10, 5 );
@@ -162,70 +144,113 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 				return;
 			}
 
+			$item_config = array();
+
 			$details = explode( '__', (string) $item->object );
 			if ( count( $details ) === 2 && isset( $this->menu_items_boxes_config[ $details[0] ]['menu_items'][ $details[1] ] ) ) {
 				$item_config = $this->menu_items_boxes_config[ $details[0] ]['menu_items'][ $details[1] ];
-
-				if ( empty( $item_config['custom_fields'] ) ) {
-					return;
-				}
-
-				// Take each custom field config and output the HTML.
-				foreach ( $item_config['custom_fields'] as $name => $config ) {
-					if ( ! in_array( $config['type'], array( 'select', 'textarea', ) ) ) {
-						continue;
-					}
-
-					// Gather up the HTML details of the custom field.
-					$field_id = 'edit-menu-item-' . $name . '-' . $item_id;
-					$field_name = 'menu-item-' . $name . '[' . $item_id . ']';
-					$field_classes = array( 'widefat', 'edit-menu-item-' . $name, );
-					if ( ! empty( $config['classes'] ) && is_array( $config['classes'] ) ) {
-						$field_classes = array_unique( array_merge( $field_classes, $config['classes'] ) );
-					}
-					$field_classes = implode( ' ', $field_classes );
-
-					$field_value = '';
-					if ( isset( $item->$name ) ) {
-						$field_value = $item->$name;
-					} else if ( isset( $config['default'] ) ) {
-						$field_value = $config['default'];
-					} ?>
-
-					<p class="field-<?php echo $name ?> description description-wide">
-						<label for="<?php echo $field_id ?>">
-
-						<?php if ( ! empty( $config['label'] ) ) { ?>
-							<?php echo $config['label']; ?><br />
-						<?php } ?>
-
-					<?php switch ( $config['type'] ) {
-						case 'select':
-							if ( empty( $config['options'] ) ) {
-								break;
-							} ?>
-							<select id="<?php echo esc_attr( $field_id ); ?>" name="<?php echo esc_attr( $field_name ); ?>" class="<?php echo esc_attr( $field_classes ); ?>">
-								<?php foreach ( $config['options'] as $option_value => $option_label ) { ?>
-									<option <?php selected( $field_value, $option_value ); ?> value="<?php echo esc_attr( $option_value ); ?>"><?php echo esc_html( $option_label ); ?></option>
-								<?php } ?>
-							</select>
-							<?php break;
-						case 'textarea': ?>
-							<textarea id="<?php echo esc_attr( $field_id ); ?>" name="<?php echo esc_attr( $field_name ); ?>" class="<?php echo esc_attr( $field_classes ); ?>" rows="3" cols="20"><?php echo esc_textarea( $field_value ); ?></textarea>
-							<?php break;
-						default:
-							break;
-					}
-
-					if ( ! empty( $config['description'] ) ) { ?>
-							<span class="description"><?php echo wp_kses_post( $config['description'] ); ?></span>
-						<?php } ?>
-
-						</label>
-					</p>
-					<?php
-				}
 			}
+
+			// Bail if we have no custom_fields defined.
+			if ( empty( $item_config['custom_fields'] ) ) {
+				return;
+			}
+
+			// Take each custom field config and output the HTML.
+			foreach ( $item_config['custom_fields'] as $name => $config ) {
+				if ( ! in_array( $config['type'], array( 'select', 'textarea', ) ) ) {
+					continue;
+				}
+
+				// Gather up the HTML details of the custom field.
+				$field_id = 'edit-menu-item-' . $name . '-' . $item_id;
+				$field_name = 'menu-item-' . $name . '[' . $item_id . ']';
+				$field_classes = array( 'widefat', 'edit-menu-item-' . $name, );
+				if ( ! empty( $config['classes'] ) && is_array( $config['classes'] ) ) {
+					$field_classes = array_unique( array_merge( $field_classes, $config['classes'] ) );
+				}
+				$field_classes = implode( ' ', $field_classes );
+
+				$field_value = '';
+				if ( isset( $item->$name ) ) {
+					$field_value = $item->$name;
+				} else if ( isset( $config['default'] ) ) {
+					$field_value = $config['default'];
+				} ?>
+
+				<p class="field-<?php echo $name ?> description description-wide">
+					<label for="<?php echo $field_id ?>">
+
+					<?php if ( ! empty( $config['label'] ) ) { ?>
+						<?php echo $config['label']; ?><br />
+					<?php } ?>
+
+				<?php switch ( $config['type'] ) {
+					case 'select':
+						if ( empty( $config['options'] ) ) {
+							break;
+						} ?>
+						<select id="<?php echo esc_attr( $field_id ); ?>" name="<?php echo esc_attr( $field_name ); ?>" class="<?php echo esc_attr( $field_classes ); ?>">
+							<?php foreach ( $config['options'] as $option_value => $option_label ) { ?>
+								<option <?php selected( $field_value, $option_value ); ?> value="<?php echo esc_attr( $option_value ); ?>"><?php echo esc_html( $option_label ); ?></option>
+							<?php } ?>
+						</select>
+						<?php break;
+					case 'textarea': ?>
+						<textarea id="<?php echo esc_attr( $field_id ); ?>" name="<?php echo esc_attr( $field_name ); ?>" class="<?php echo esc_attr( $field_classes ); ?>" rows="3" cols="20"><?php echo esc_textarea( $field_value ); ?></textarea>
+						<?php break;
+					default:
+						break;
+				}
+
+				if ( ! empty( $config['description'] ) ) { ?>
+						<span class="description"><?php echo wp_kses_post( $config['description'] ); ?></span>
+					<?php } ?>
+
+					</label>
+				</p>
+				<?php
+			}
+		}
+
+		/**
+		 * @param int      $item_id Menu item ID.
+		 * @param WP_Post  $item    Menu item data object.
+		 */
+		public function inline_css_to_hide_menu_item_fields( $item_id, $item ) {
+			if ( 'custom-pxg' !== $item->type ) {
+				return;
+			}
+
+			$item_config = array();
+
+			$details = explode( '__', (string) $item->object );
+			if ( count( $details ) === 2 && isset( $this->menu_items_boxes_config[ $details[0] ]['menu_items'][ $details[1] ] ) ) {
+				$item_config = $this->menu_items_boxes_config[ $details[0] ]['menu_items'][ $details[1] ];
+			}
+
+			// Bail if we have no hidden_fields defined.
+			if ( empty( $item_config['hidden_fields'] ) ) {
+				return;
+			}
+
+			if ( is_string( $item_config['hidden_fields'] ) ) {
+				$item_config['hidden_fields'] = array( $item_config['hidden_fields'] );
+			}
+
+			// Add the '.field-' prefix to all provided field keys.
+			$css_selectors = array_map( function( $str ){ return '.field-' . $str; }, $item_config['hidden_fields'] );
+			// Now scope the classes to this specific menu item's settings.
+			$css_selectors = array_map( function( $str ) use ( $item_id ) { return '#menu-item-settings-' . $item_id . ' > ' . $str; }, $css_selectors );
+			// Finally output the CSS rule. ?>
+			<style>
+				<?php echo implode( ', ', $css_selectors ); ?> {
+					display:none;
+					visibility: hidden;
+				}
+			</style>
+			<?php
+
 		}
 
 		/**

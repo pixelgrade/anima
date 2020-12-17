@@ -30,4 +30,4 @@ function rosa2_admin_setup() {
 	}
 	PixelgradeCare_Install_Notice::init();
 }
-add_action( 'after_setup_theme', 'rosa2_admin_setup' );
+add_action( 'after_setup_theme', 'rosa2_admin_setup', 99 );
