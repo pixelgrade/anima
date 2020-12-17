@@ -418,4 +418,12 @@ require get_template_directory() . '/inc/template-functions.php';
 require get_template_directory() . '/inc/extras.php';
 require get_template_directory() . '/inc/required-plugins.php';
 
-require get_template_directory() . '/inc/integrations.php';
+/**
+ * Admin Dashboard logic.
+ */
+require_once trailingslashit( get_template_directory() ) . 'inc/admin/admin.php'; // phpcs:ignore
+
+/**
+ * Various integrations with plugins to keep things smooth and easy.
+ */
+require_once trailingslashit( get_template_directory() ) . '/inc/integrations.php';

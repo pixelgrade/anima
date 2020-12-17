@@ -36,8 +36,3 @@ require_once trailingslashit( get_template_directory() ) . 'inc/integrations/pix
  * This has to be loaded before inc/admin/admin.php
  */
 require_once trailingslashit( get_template_directory() ) . 'inc/integrations/woocommerce.php';
-
-/**
- * Admin Dashboard logic.
- */
-require_once trailingslashit( get_template_directory() ) . 'inc/admin/admin.php'; // phpcs:ignore
