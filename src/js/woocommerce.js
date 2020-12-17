@@ -50,6 +50,15 @@
 		$cartMenuItemLink.html( `<span class="menu-item__label">${ cartMenuItemText } </span>` );
 		$cartMenuItemCount.appendTo( $cartMenuItemLink );
 
+		var fragmentKey = 'div.widget_shopping_cart_content';
+		var $fragment = $( fragmentKey );
+
+		if ( $fragment.length ) {
+			var fragments = {};
+			fragments[fragmentKey] = $fragment.html();
+			updateCartMenuItemCount( false, fragments );
+		}
+
 		$cartMenuItem.on( 'click', openMiniCart );
 
 		// show mini cart when a product is added to cart
@@ -104,7 +113,7 @@
 				});
 
 				// actually update the cart items count
-				$cartMenuItem.text( products );
+				$cartMenuItemCount.text( products );
 			}
 		}
 

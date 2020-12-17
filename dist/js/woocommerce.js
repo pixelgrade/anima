@@ -134,6 +134,15 @@
     var $cartMenuItemCount = $('<span class="menu-item__icon">0</span>');
     $cartMenuItemLink.html("<span class=\"menu-item__label\">".concat(cartMenuItemText, " </span>"));
     $cartMenuItemCount.appendTo($cartMenuItemLink);
+    var fragmentKey = 'div.widget_shopping_cart_content';
+    var $fragment = $(fragmentKey);
+
+    if ($fragment.length) {
+      var fragments = {};
+      fragments[fragmentKey] = $fragment.html();
+      updateCartMenuItemCount(false, fragments);
+    }
+
     $cartMenuItem.on('click', openMiniCart); // show mini cart when a product is added to cart
 
     function onAddedToCart(event, fragments, cart_hash, $button) {
@@ -181,7 +190,7 @@
           products += parseInt($quantity.text(), 10);
         }); // actually update the cart items count
 
-        $cartMenuItem.text(products);
+        $cartMenuItemCount.text(products);
       }
     } // show mini cart when Cart menu item is clicked
 
