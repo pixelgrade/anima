@@ -127,14 +127,7 @@
     enableMinusButton();
   });
   $(function () {
-    var $body = $(document.body).not('.woocommerce-cart');
-    var $cartMenuItem = $('.site-header__menu .menu > .menu-item--cart');
-    var $cartMenuItemLink = $cartMenuItem.children('a');
-    var cartMenuItemText = $cartMenuItemLink.text();
-    var $cartMenuItemCount = $('<span class="menu-item__icon">0</span>');
-    $cartMenuItemLink.html("<span class=\"menu-item__label\">".concat(cartMenuItemText, " </span>"));
-    $cartMenuItemCount.appendTo($cartMenuItemLink);
-    $cartMenuItem.on('click', openMiniCart); // show mini cart when a product is added to cart
+    var $body = $(document.body).not('.woocommerce-cart'); // show mini cart when a product is added to cart
 
     function onAddedToCart(event, fragments, cart_hash, $button) {
       var key = 'div.widget_shopping_cart_content';
@@ -181,7 +174,7 @@
           products += parseInt($quantity.text(), 10);
         }); // actually update the cart items count
 
-        $cartMenuItem.text(products);
+        $('.menu-item--cart .cart-count span').text(products);
       }
     } // show mini cart when Cart menu item is clicked
 
@@ -210,7 +203,8 @@
 
     $('.c-mini-cart__overlay, .c-mini-cart__close').on('click', closeMiniCart);
     $body.on('added_to_cart', onAddedToCart);
-    $body.on('added_to_cart removed_from_cart', updateCartMenuItemCount); // in order to avoid template overwrites add the class used to style buttons programatically
+    $body.on('added_to_cart removed_from_cart', updateCartMenuItemCount);
+    $('.js-open-cart').on('click', openMiniCart); // in order to avoid template overwrites add the class used to style buttons programatically
 
     $body.on('wc_cart_button_updated', function (event, $button) {
       $button.siblings('.added_to_cart').addClass('button');

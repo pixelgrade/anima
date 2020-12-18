@@ -42,15 +42,6 @@
 	$(function(){
 
 		var $body = $( document.body ).not( '.woocommerce-cart' );
-		var $cartMenuItem = $( '.site-header__menu .menu > .menu-item--cart' );
-		var $cartMenuItemLink = $cartMenuItem.children( 'a' );
-		var cartMenuItemText = $cartMenuItemLink.text();
-		var $cartMenuItemCount = $( '<span class="menu-item__icon">0</span>' );
-
-		$cartMenuItemLink.html( `<span class="menu-item__label">${ cartMenuItemText } </span>` );
-		$cartMenuItemCount.appendTo( $cartMenuItemLink );
-
-		$cartMenuItem.on( 'click', openMiniCart );
 
 		// show mini cart when a product is added to cart
 		function onAddedToCart( event, fragments, cart_hash, $button ) {
@@ -104,7 +95,7 @@
 				});
 
 				// actually update the cart items count
-				$cartMenuItem.text( products );
+				$( '.menu-item--cart .cart-count span' ).text( products );
 			}
 		}
 
@@ -139,6 +130,8 @@
 
 		$body.on( 'added_to_cart', onAddedToCart );
 		$body.on( 'added_to_cart removed_from_cart', updateCartMenuItemCount );
+
+		$( '.js-open-cart' ).on( 'click', openMiniCart );
 
 		// in order to avoid template overwrites add the class used to style buttons programatically
 		$body.on( 'wc_cart_button_updated', function( event, $button ) {

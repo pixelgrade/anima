@@ -290,45 +290,44 @@
 
 .menu-item--cart {
 
+  display: flex;
+  align-items: center;
+
   > a {
+    border-bottom: 0;
+
     text-decoration: none;
-  }
 
-  &:not(.no-icon) > a:before {
-    content: none !important;
-  }
-
-  &.no-icon .menu-item__icon,
-  &.icon-only .menu-item__label {
-    display: none;
-  }
-
-  &:not(.icon-only) .menu-item__label + .menu-item__icon {
-    margin-left: 0.75em;
-  }
-
-  .menu-item__icon {
-    position: relative;
-    width: 1.75em;
-
-    font-feature-settings: "lnum";
-
-    &:after {
-      content: "";
-
-      display: block;
-      width: 1.75em;
-      height: 1.75em;
-
-      border: .125em solid currentColor;
-      border-radius: 50%;
-
-      position: absolute;
-      top: 50%;
-      left: 50%;
-
-      transform: translate(-50%, -50%);
+    &:before {
+      content: none !important;
     }
+  }
+
+  @include specific(5) {
+    a {
+      padding: 0;
+      margin: 0;
+
+      &:before {
+        content: none;
+      }
+    }
+  }
+
+  .cart-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 1.75em;
+    height: 1.75em;
+
+    border: .125em solid currentColor;
+    border-radius: 50%;
+
+    font-weight: 700;
+    line-height: 1;
+    font-feature-settings: "lnum";
   }
 }
 
