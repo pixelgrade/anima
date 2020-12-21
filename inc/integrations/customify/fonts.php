@@ -300,7 +300,7 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 						'font-family'     => 'Reforma2018',
 						'font-size'       => 17,
 						'line-height'     => 1.5,
-						'font-weight'     => 500,
+						'font-weight'     => 700,
 						'text-transform'  => 'none',
 						'text-decoration' => 'none',
 						'letter-spacing'  => 0.017,
