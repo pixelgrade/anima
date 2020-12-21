@@ -594,11 +594,15 @@ body.has-hero .novablocks-hero:first-child:after {
   --current-font-style: var(--theme-body-font-style);
   --current-letter-spacing: var(--theme-body-letter-spacing); }
 
-.novablocks-sharing__link {
+.novablocks-sharing__link[class] {
   padding: calc( var(--block-spacing) / 2) calc( var(--block-spacing) * 3 / 4); }
-  .novablocks-sharing__group--copy-link .novablocks-sharing__link {
-    background-color: var(--sm-color-primary); }
 
-.novablocks-sharing__copy-input,
-.novablocks-sharing__list {
+.novablocks-sharing__group--copy-link .novablocks-sharing__link {
+  background-color: var(--sm-color-primary); }
+
+.novablocks-sharing__copy-input[class],
+.novablocks-sharing__list[class] {
   border-radius: 0.25em; }
+
+.novablocks-sharing__copy-input[class][class] {
+  --theme-input-box-shadow: none; }
