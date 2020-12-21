@@ -4,7 +4,7 @@
 #html #body #page {
 
     .button,
-    button,
+    button:not([class]),
     input[type="submit"]:not(.ot-button):not(.search-submit) {
         @include button;
     }

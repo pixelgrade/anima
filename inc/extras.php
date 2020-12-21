@@ -269,6 +269,15 @@ if ( ! function_exists( 'rosa2_parse_content_tags' ) ) {
 	}
 }
 
+if ( ! function_exists( 'rosa2_render_sharing_block' ) ) {
+    function rosa2_render_sharing_block() {
+        if ( is_singular( 'post' ) ) {
+            echo do_blocks( '<!-- wp:novablocks/sharing-overlay /-->' );
+        }
+    }
+}
+add_action( 'rosa2_after_content', 'rosa2_render_sharing_block' );
+
 if ( ! function_exists( 'rosa2_dark_mode_support' ) ) {
     function rosa2_dark_mode_support() {
 	    if ( 'on' === pixelgrade_option( 'sm_dark_mode', 'off' ) ) {
