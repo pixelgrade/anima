@@ -580,8 +580,8 @@ body.has-hero .novablocks-hero:first-child:after {
   --current-color-primary: var(--sm-color-primary);
   --current-color-secondary: var(--sm-color-secondary);
   --current-color-tertiary: var(--sm-color-tertiary);
-  --current-dark-primary: var(--sm-light-secondary);
-  --current-dark-secondary: var(--sm-light-primary);
+  --current-dark-primary: var(--sm-light-primary);
+  --current-dark-secondary: var(--sm-light-secondary);
   --current-dark-tertiary: var(--sm-light-tertiary);
   --current-light-primary: var(--sm-dark-primary);
   --current-light-secondary: var(--sm-dark-secondary);
@@ -593,3 +593,12 @@ body.has-hero .novablocks-hero:first-child:after {
   --current-font-weight: var(--theme-body-font-weight);
   --current-font-style: var(--theme-body-font-style);
   --current-letter-spacing: var(--theme-body-letter-spacing); }
+
+.novablocks-sharing__link {
+  padding: calc( var(--block-spacing) / 2) calc( var(--block-spacing) * 3 / 4); }
+  .novablocks-sharing__group--copy-link .novablocks-sharing__link {
+    background-color: var(--sm-color-primary); }
+
+.novablocks-sharing__copy-input,
+.novablocks-sharing__list {
+  border-radius: 0.25em; }

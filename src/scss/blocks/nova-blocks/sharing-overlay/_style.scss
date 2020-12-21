@@ -2,3 +2,16 @@
     @include variation(dark);
     @include apply-font(body);
 }
+
+.novablocks-sharing__link {
+    padding: calc( var(--block-spacing) / 2) calc( var(--block-spacing) * 3 / 4);
+
+    .novablocks-sharing__group--copy-link & {
+        background-color: var(--sm-color-primary);
+    }
+}
+
+.novablocks-sharing__copy-input,
+.novablocks-sharing__list {
+    border-radius: 0.25em;
+}
