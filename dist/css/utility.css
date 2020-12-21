@@ -459,29 +459,42 @@
   .u-mq-above-desktop {
     display: none; } }
 
-.has-hero #page .site-content {
+.has-no-spacing-top #page .site-content {
   margin-top: 0 !important; }
 
-.has-media-card .entry-content .novablocks-media:first-child {
+.has-no-spacing-top .entry-content .novablocks-media:first-child {
   --block-top-spacing: 0;
-  --block-bottom-spacing: 0;
-  padding-top: 0;
-  padding-bottom: 0; }
-  .has-media-card .entry-content .novablocks-media:first-child > .novablocks-block {
-    padding-top: 10em; }
-    @media only screen and (min-width: 1000px) {
-      .has-media-card .entry-content .novablocks-media:first-child > .novablocks-block {
-        padding-top: var(--theme-header-height); } }
+  --emphasis-top-spacing: 0; }
+  .has-no-spacing-top .entry-content .novablocks-media:first-child > .novablocks-block {
+    padding-top: calc( var(--theme-header-height)); }
     @media not screen and (min-width: 1000px) {
-      .has-media-card .entry-content .novablocks-media:first-child > .novablocks-block.block-is-highlighted {
-        --novablocks-block-background-color: var(--novablocks-current-dark-tertiary);
-        --novablocks-block-content-text-color: var(--novablocks-current-light-primary);
-        --novablocks-block-content-titles-color: var(--novablocks-current-light-primary); }
-      .has-media-card .entry-content .novablocks-media:first-child > .novablocks-block.block-is-moderate {
-        --novablocks-block-background-color: var(--novablocks-current-light-tertiary);
-        --novablocks-block-content-text-color: var(--novablocks-current-dark-primary);
-        --novablocks-block-content-titles-color: var(--novablocks-current-dark-primary);
-        --novablocks-block-content-accent-color: var(--novablocks-block-current-accent-color); } }
+      .has-no-spacing-top .entry-content .novablocks-media:first-child > .novablocks-block {
+        padding-top: calc(var(--theme-mobile-header-logo-height) + 2 * var(--theme-spacing-fluid-medium) + var(--admin-bar-height, 0)); } }
+
+@media not screen and (min-width: 1000px) {
+  .has-no-spacing-top[class*='first-block-is-media'].first-block-is-media--moderate .site-header--mobile,
+  .has-no-spacing-top[class*='first-block-is-media'].first-block-is-media--moderate .c-menu-toggle {
+    --novablocks-block-content-text-color: var(--current-dark-primary); }
+  .has-no-spacing-top[class*='first-block-is-media'].first-block-is-media--highlighted .site-header--mobile,
+  .has-no-spacing-top[class*='first-block-is-media'].first-block-is-media--highlighted .c-menu-toggle {
+    --novablocks-block-content-text-color: var(--current-light-primary); }
+  .has-no-spacing-top[class*='first-block-is-media'] .c-menu-toggle,
+  .has-no-spacing-top[class*='first-block-is-media'] .site-header--mobile {
+    color: var(--novablocks-block-content-text-color); } }
+
+@media only screen and (min-width: 1000px) {
+  .has-no-spacing-top.has-site-header-transparent[class*='first-block-is-media'].first-block-is-media--moderate .site-header {
+    --novablocks-block-content-text-color: var(--current-dark-primary); }
+  .has-no-spacing-top.has-site-header-transparent[class*='first-block-is-media'].first-block-is-media--highlighted .site-header {
+    --novablocks-block-content-text-color: var(--current-light-primary); }
+  .has-no-spacing-top.has-site-header-transparent[class*='first-block-is-media'] .site-header:not(.site-header--scrolled) .site-header__wrapper {
+    color: var(--novablocks-block-content-text-color); } }
+
+.admin-bar {
+  --admin-bar-height: 32px; }
+  @media screen and (max-width: 782px) {
+    .admin-bar {
+      --admin-bar-height: 46px; } }
 
 [class][class] .has-smaller-font-size {
   --font-size: inherit;

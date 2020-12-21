@@ -1,37 +1,66 @@
-.has-hero {
+.has-no-spacing-top {
   @include remove-page-spacing-top;
 }
 
-.has-media-card {
+.has-no-spacing-top {
+
   .entry-content {
 
     .novablocks-media:first-child {
       --block-top-spacing: 0;
-      --block-bottom-spacing: 0;
-
-      padding-top: 0;
-      padding-bottom: 0;
+      --emphasis-top-spacing: 0;
 
       > .novablocks-block {
-        padding-top: 10em;
 
-        @include above(lap) {
-          padding-top: var(--theme-header-height);
-        }
+        // This should always be equal with desktop
+        padding-top: calc( var(--theme-header-height) );
 
         @include below(lap) {
-          &.block-is-highlighted {
-            --novablocks-block-background-color: var(--novablocks-current-dark-tertiary);
-            --novablocks-block-content-text-color: var(--novablocks-current-light-primary);
-            --novablocks-block-content-titles-color: var(--novablocks-current-light-primary);
-          }
 
-          &.block-is-moderate {
-            --novablocks-block-background-color: var(--novablocks-current-light-tertiary);
-            --novablocks-block-content-text-color: var(--novablocks-current-dark-primary);
-            --novablocks-block-content-titles-color: var(--novablocks-current-dark-primary);
-            --novablocks-block-content-accent-color: var(--novablocks-block-current-accent-color);
-          }
+          // This should be always equal with mobile header height.
+          // Logo Height + 2 * padding (top and bottom) + Admin Bar Height.
+          padding-top: calc(var(--theme-mobile-header-logo-height) + 2 * var(--theme-spacing-fluid-medium) + var(--admin-bar-height, 0) );
+        }
+      }
+    }
+  }
+
+  @include below(lap) {
+    &[class*='first-block-is-media'] {
+
+      &.first-block-is-media--moderate .site-header--mobile,
+      &.first-block-is-media--moderate .c-menu-toggle {
+        --novablocks-block-content-text-color: var(--current-dark-primary);
+      }
+
+      &.first-block-is-media--highlighted .site-header--mobile,
+      &.first-block-is-media--highlighted .c-menu-toggle {
+        --novablocks-block-content-text-color: var(--current-light-primary);
+      }
+
+      .c-menu-toggle,
+      .site-header--mobile {
+        color: var(--novablocks-block-content-text-color);
+      }
+    }
+  }
+
+  @include above(lap) {
+
+    &.has-site-header-transparent {
+
+      &[class*='first-block-is-media'] {
+
+        &.first-block-is-media--moderate .site-header {
+          --novablocks-block-content-text-color: var(--current-dark-primary);
+        }
+
+        &.first-block-is-media--highlighted .site-header {
+          --novablocks-block-content-text-color: var(--current-light-primary);
+        }
+
+        .site-header:not(.site-header--scrolled) .site-header__wrapper {
+          color: var(--novablocks-block-content-text-color);
         }
       }
     }

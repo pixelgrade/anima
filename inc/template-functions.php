@@ -36,12 +36,8 @@ function rosa2_body_classes( $classes ) {
 		$classes[] = 'has-site-header-fixed';
 	}
 
-	if ( rosa2_page_has_hero() ) {
-		$classes[] = 'has-hero';
-	}
-
-	if ( rosa2_media_card_has_background() ) {
-		$classes[] = 'has-hero has-media-card';
+	if ( rosa2_first_block_is_hero() || rosa2_media_card_has_background() ) {
+		$classes[] = 'has-no-spacing-top';
 	}
 
 	if ( rosa2_remove_site_padding_bottom() ) {
@@ -50,6 +46,10 @@ function rosa2_body_classes( $classes ) {
 
 	if ( rosa2_has_moderate_media_card_after_hero() ) {
 		$classes[] = 'has-moderate-media-card-after-hero';
+	}
+
+	if ( rosa2_first_block_is_media() ) {
+		$classes[] = 'first-block-is-media--' . rosa2_first_media_block_style();
 	}
 
 	if ( 'on' === pixelgrade_option( 'sm_dark_mode' ) ) {
