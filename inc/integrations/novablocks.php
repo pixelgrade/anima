@@ -18,7 +18,7 @@ add_filter( 'novablocks_block_editor_settings', 'rosa2_alter_novablocks_map_sett
 
 if ( ! function_exists( 'rosa2_novablocks_setup' ) ) {
 	function rosa2_novablocks_setup() {
-		add_theme_support( 'novablocks', array(
+		$rosa2_novablocks_config = array(
 			'doppler' => array(
 				'novablocks/hero',
 			),
@@ -41,9 +41,15 @@ if ( ! function_exists( 'rosa2_novablocks_setup' ) ) {
 			'navigation',
 			'opentable',
 			'openhours',
+			'post-comments',
 			'posts-collection',
+			'sharing-overlay',
 			'slideshow',
-		) );
+		);
+
+		$rosa2_novablocks_config = apply_filters( 'rosa2_novablocks_config', $rosa2_novablocks_config );
+
+		add_theme_support( 'novablocks', $rosa2_novablocks_config );
 	}
 }
 
