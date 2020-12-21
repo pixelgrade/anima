@@ -521,6 +521,9 @@ ul.order_details[class] {
   @include specific(4) {
     li label {
       display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
     }
   }
 }
