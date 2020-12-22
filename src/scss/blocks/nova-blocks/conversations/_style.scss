@@ -19,7 +19,7 @@
   --comment-highlighted-color: #FFF2CE;
   --label-font-size: var(--final-font-size);
   --label-bg-color: var(--current-dark-primary);
-  --label-highlighted-bg-color: var(--component-accent-color);
+  --label-highlighted-bg-color: var(--theme-dark-primary);
   --label-border-radius: 999em;
   --comment-footer-font-size: var(--final-font-size);
   --field-description-font-size: var(--final-font-size);
@@ -49,6 +49,11 @@
 
   .comment-form label {
     --font-size: 14;
+  }
+
+  .comment-highlighted {
+    --component-accent-color: var(--theme-dark-primary);
+    --comment-author-color: var(--theme-dark-primary);
   }
 
   .comment-highlightedby-humans {
@@ -193,6 +198,7 @@
 
 .novablocks-conversation__starter-subtitle {
   --font-size: 16;
+  --component-accent-color: var(--theme-dark-primary);
   font-size: var(--final-font-size);
 }
 

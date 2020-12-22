@@ -11,7 +11,7 @@
   --comment-highlighted-color: #FFF2CE;
   --label-font-size: var(--final-font-size);
   --label-bg-color: var(--current-dark-primary);
-  --label-highlighted-bg-color: var(--component-accent-color);
+  --label-highlighted-bg-color: var(--theme-dark-primary);
   --label-border-radius: 999em;
   --comment-footer-font-size: var(--final-font-size);
   --field-description-font-size: var(--final-font-size);
@@ -30,6 +30,9 @@
     font-size: var(--final-font-size); }
   .novablocks-conversations .comment-form label {
     --font-size: 14; }
+  .novablocks-conversations .comment-highlighted {
+    --component-accent-color: var(--theme-dark-primary);
+    --comment-author-color: var(--theme-dark-primary); }
   .novablocks-conversations .comment-highlightedby-humans {
     padding-left: 0; }
   .novablocks-conversations .comment-form p:not(:last-child) {
@@ -115,6 +118,7 @@
 
 .novablocks-conversation__starter-subtitle {
   --font-size: 16;
+  --component-accent-color: var(--theme-dark-primary);
   font-size: var(--final-font-size); }
 
 .novablocks-conversation__starter-message[class] {
