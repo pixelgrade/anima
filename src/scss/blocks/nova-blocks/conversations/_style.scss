@@ -1,0 +1,269 @@
+@import "../../../setup/typography";
+@import "../../../setup/mixins/specific";
+@import "../../../setup/variables";
+@import "../../../setup/mixins/media-queries";
+@import "../../../setup/mixins/placeholder";
+@import "../../../setup/mixins/font";
+@import "../../../setup/mixins/forms";
+
+.novablocks-conversations {
+  --avatar-column-size: 2.8rem;
+  --comments-grid-gap: .625rem;
+  --component-accent-color: var(--current-color-primary);
+  --novablocks-conversations-width: 48em;
+  --field-description-color: var(--current-dark-primary);
+  --conversations-bg-color: rgba(0, 0, 0, 0.1);
+  --comment-author-color: var(--component-accent-color);
+  --comment-font-size: calc(var(--theme-body-final-font-size) * 1.05);
+  --comment-links-color: var(--component-accent-color);
+  --comment-highlighted-color: #FFF2CE;
+  --label-font-size: var(--final-font-size);
+  --label-bg-color: var(--current-dark-primary);
+  --label-highlighted-bg-color: var(--component-accent-color);
+  --label-border-radius: 999em;
+  --comment-footer-font-size: var(--final-font-size);
+  --field-description-font-size: var(--final-font-size);
+
+  --font-size: 15;
+
+  .is-dark & {
+    --conversations-bg-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .comment-list[class] {
+    --novablocks-element-spacing-multiplier: 1.5;
+  }
+
+  .comment-footer-meta {
+    --font-size: 14;
+  }
+
+  .comment-footer-highlights[class],
+  .comment-dropdown-toggle,
+  .commenter-background-label {
+    --font-size: 13;
+    --current-font-weight: regular;
+
+    font-size: var(--final-font-size);
+  }
+
+  .comment-form label {
+    --font-size: 14;
+  }
+
+  .comment-highlightedby-humans {
+    padding-left: 0;
+  }
+
+  .comment-form p:not(:last-child) {
+    margin-bottom: 0;
+  }
+
+  .comment-dropdown-menu[class] {
+    min-width: 220px;
+  }
+
+  .form-submit {
+    width: 100%;
+  }
+
+  [id="submit"] {
+    --current-font-weight: regular !important;
+  }
+
+  .comment-footer-highlights {
+    --current-font-weight: bold;
+  }
+
+  .comment {
+
+    .comment-highlighted {
+      &,
+      .comment-dropdown-toggle {
+        color: var(--theme-dark-primary);
+      }
+    }
+
+    @include below(lap) {
+      margin-left: calc( -1 * var(--theme-wrapper-sides-spacing) );
+      margin-right: calc( -1 * var(--theme-wrapper-sides-spacing) );
+
+      > .comment-wrapper {
+        padding-left: var(--theme-wrapper-sides-spacing);
+        padding-right: var(--theme-wrapper-sides-spacing);
+      }
+
+      &.parent {
+        > .comment {
+          margin-left: 0;
+          margin-right: 0;
+        }
+
+        > .comment-wrapper {
+          color: var(--current-dark-primary);
+        }
+      }
+
+      .comment-respond {
+        padding-left: var(--theme-wrapper-sides-spacing);
+        padding-right: var(--theme-wrapper-sides-spacing);
+      }
+    }
+  }
+
+  .comment-author-name {
+    --font-size: 16;
+    font-size: var(--final-font-size);
+  }
+
+  .comment-dropdown-menu {
+    background-color: var(--current-light-primary);
+    color: var(--current-dark-primary);
+
+    &:after {
+      border-color: transparent transparent var(--current-light-primary);
+    }
+  }
+
+  .commenter-background-label[class] {
+    position: relative;
+    background: none;
+    overflow: hidden;
+    z-index: 1;
+
+    color: var(--theme-light-primary);
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--label-bg-color);
+      z-index: -1;
+      opacity: .5;
+    }
+  }
+
+  .comment-highlighted,
+  .bypostauthor {
+
+    .commenter-background-label {
+
+      &:before {
+        opacity: 1;
+      }
+
+    }
+  }
+}
+
+.novablocks-conversations__header {
+  display: flex;
+  align-items: baseline;
+  border-bottom: 4px solid;
+  padding-bottom: .3em;
+}
+
+.novablocks-conversations__title {
+  --current-font-weight: bold;
+  padding-right: .25em;
+}
+
+.novablocks-conversations__comments-count {
+  --font-size: 16;
+  color: var(--field-description-color);
+
+  font-size: var(--final-font-size);
+  opacity: .5
+}
+
+.novablocks-conversations__notification-text[class] {
+  background-color: var(--current-dark-primary);
+  color: var(--current-light-primary);
+}
+
+.novablocks-conversation__starter {
+  @include below(lap) {
+    margin-left: calc(-1*var(--theme-wrapper-sides-spacing));
+    margin-right: calc(-1*var(--theme-wrapper-sides-spacing));
+  }
+}
+
+.novablocks-conversation__starter-subtitle {
+  --font-size: 16;
+  font-size: var(--final-font-size);
+}
+
+.novablocks-conversation__starter-message[class] {
+  --font-size: 18;
+  color: var(--theme-dark-primary);
+  font-size: var(--final-font-size);
+}
+
+.comments-area {
+  .entry-content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.fake-input-button {
+  @include field;
+
+  @include specific(1) {
+    color: rgba( 0, 0, 0, 0.5 );
+  }
+
+  .is-dark & {
+    color: rgba( 255, 255, 255, 0.5 );
+  }
+}
+
+.trix-contained-input[class] {
+  --trix-input-bg-color: var(--theme-input-background-color);
+  --trix-toolbar-border-color: rgba(0, 0, 0, 0.3);
+
+  .is-dark & {
+    --trix-toolbar-border-color: rgb(255, 255, 255);
+  }
+}
+
+trix-editor {
+  &[id][id][id] {
+
+    &:before {
+      color: var(--theme-input-placeholder-color);
+      opacity: var(--theme-input-placeholder-opacity);
+      --current-font-weight: regular;
+    }
+  }
+}
+
+trix-editor,
+trix-toolbar {
+  @include field;
+  max-width: none;
+
+  &[id] {
+    border: 0;
+  }
+}
+
+trix-toolbar {
+  &[id] {
+    padding: 0;
+    box-shadow: none;
+    border: 1px solid var(--trix-toolbar-border-color);
+    border-bottom: 0;
+  }
+}
+
+.trix-button--icon {
+  .is-dark & {
+    &:before {
+      filter: invert(1);
+    }
+  }
+}

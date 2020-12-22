@@ -3,8 +3,8 @@
 // @todo find a more reliable selector
 #html #body #page {
 
-    .button,
-    button,
+    .button:not(.trix-button),
+    button:not(.fake-input-button):not(.trix-button),
     input[type="submit"]:not(.ot-button):not(.search-submit) {
         @include button;
     }

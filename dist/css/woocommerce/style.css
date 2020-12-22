@@ -1,5 +1,5 @@
-#html #body #page .button,
-#html #body #page button,
+#html #body #page .button:not(.trix-button),
+#html #body #page button:not(.fake-input-button):not(.trix-button),
 #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit) {
   display: inline-block;
   text-decoration: none;
@@ -27,12 +27,12 @@
   --current-line-height: var(--theme-button-line-height);
   --current-letter-spacing: var(--theme-button-letter-spacing);
   --current-text-transform: var(--theme-button-text-transform); }
-  #html #body #page .button:not([disabled]),
-  #html #body #page button:not([disabled]),
+  #html #body #page .button:not(.trix-button):not([disabled]),
+  #html #body #page button:not(.fake-input-button):not(.trix-button):not([disabled]),
   #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not([disabled]) {
     cursor: pointer; }
-    #html #body #page .button:not([disabled]):hover,
-    #html #body #page button:not([disabled]):hover,
+    #html #body #page .button:not(.trix-button):not([disabled]):hover,
+    #html #body #page button:not(.fake-input-button):not(.trix-button):not([disabled]):hover,
     #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not([disabled]):hover {
       --current-button-background-color: var(--theme-button-hover-background-color);
       --current-button-border-color: var(--theme-button-hover-border-color);

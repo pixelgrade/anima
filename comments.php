@@ -16,6 +16,8 @@ if ( post_password_required() ) {
 	return;
 } ?>
 
-<div class="entry-content">
-    <?php echo do_blocks( '<!-- wp:novablocks/post-comments --><!-- /wp:novablocks/post-comments -->' ); ?>
+<div class="comments-area">
+    <div class="entry-content">
+        <?php echo do_blocks( '<!-- wp:novablocks/post-comments --><!-- /wp:novablocks/post-comments -->' ); ?>
+    </div>
 </div>
