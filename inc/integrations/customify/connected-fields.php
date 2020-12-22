@@ -27,6 +27,7 @@ function rosa2_add_customify_connected_fields( $options ) {
 					'default' => 'exquisite',
 				),
 				'sm_font_primary'    => array(
+					'default' => 'Reforma1969',
 					'connected_fields' => array(
 						'display_font',
 						'heading_1_font',
@@ -37,6 +38,7 @@ function rosa2_add_customify_connected_fields( $options ) {
 					),
 				),
 				'sm_font_secondary'  => array(
+					'default' => 'Reforma2018',
 					'connected_fields' => array(
 						'heading_5_font',
 						'heading_6_font',
@@ -46,6 +48,7 @@ function rosa2_add_customify_connected_fields( $options ) {
 					),
 				),
 				'sm_font_body'       => array(
+					'default' => 'Reforma1969',
 					'connected_fields' => array(
 						'body_font',
 						'content_font',
@@ -55,6 +58,7 @@ function rosa2_add_customify_connected_fields( $options ) {
 					),
 				),
 				'sm_font_accent'     => array(
+					'default' => 'Billy Ohio',
 					'connected_fields' => array(
 						'accent_font',
 					),

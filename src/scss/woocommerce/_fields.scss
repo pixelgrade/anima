@@ -4,7 +4,7 @@
 #html #body #page {
 
     .button:not(.trix-button),
-    button:not(.fake-input-button):not(.trix-button),
+    button:not([class]),
     input[type="submit"]:not(.ot-button):not(.search-submit) {
         @include button;
     }
