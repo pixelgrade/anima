@@ -179,6 +179,22 @@
     margin-top: 0;
     margin-bottom: 0;
   }
+  
+  .comments-pagination {
+    
+    .page-numbers > li {
+      margin-top: 0;
+    }
+  
+    .page-numbers .page-numbers:not(.current) {
+        border-color: var(--current-dark-primary);
+      
+        &:hover {
+          border-color: var(--component-accent-color);
+          color: var(--theme-light-primary);
+        }
+    }
+  }
 }
 
 .novablocks-conversations__header {
