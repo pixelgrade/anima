@@ -14,13 +14,6 @@
 
         // This should always be equal with desktop
         padding-top: calc( var(--theme-header-height) );
-
-        @include below(lap) {
-
-          // This should be always equal with mobile header height.
-          // Logo Height + 2 * padding (top and bottom) + Admin Bar Height.
-          padding-top: calc(var(--theme-mobile-header-logo-height) + 2 * var(--theme-spacing-fluid-medium) + var(--admin-bar-height, 0) );
-        }
       }
     }
   }
@@ -47,7 +40,7 @@
 
   @include above(lap) {
 
-    &.has-site-header-transparent {
+    &.has-site-header-transparent[class] {
 
       &[class*='first-block-is-media'] {
 
