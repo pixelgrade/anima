@@ -12,7 +12,8 @@
   --component-accent-color: var(--current-color-primary);
   --novablocks-conversations-width: 48em;
   --field-description-color: var(--current-dark-primary);
-  --conversations-bg-color: rgba(0, 0, 0, 0.1);
+  --conversations-bg-color: var(--current-light-primary);
+  --conversations-reply-bg-color: var(--current-light-tertiary);
   --comment-author-color: var(--component-accent-color);
   --comment-font-size: calc(var(--theme-body-final-font-size) * 1.05);
   --comment-links-color: var(--component-accent-color);
@@ -25,10 +26,6 @@
   --field-description-font-size: var(--final-font-size);
 
   --font-size: 15;
-
-  .is-dark & {
-    --conversations-bg-color: rgba(255, 255, 255, 0.1);
-  }
 
   .comment-list[class] {
     --novablocks-element-spacing-multiplier: 1.5;
