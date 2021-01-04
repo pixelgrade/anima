@@ -8,7 +8,7 @@
 
 .novablocks-conversations {
   --avatar-column-size: 2.8rem;
-  --comments-grid-gap: .625rem;
+  --comments-grid-gap: 1.5rem;
   --component-accent-color: var(--current-color-primary);
   --novablocks-conversations-width: 48em;
   --field-description-color: var(--current-dark-primary);
@@ -30,7 +30,7 @@
     --novablocks-element-spacing-multiplier: 1.5;
   }
 
-  .comment-footer-meta {
+  .comment-footer-meta[class] {
     --font-size: 14;
     font-size: var(--final-font-size);
     
@@ -48,9 +48,16 @@
     font-size: var(--final-font-size);
   }
 
-  .comment-form label {
-    --font-size: 14;
+  .comment-form {
+    label {
+      --font-size: 14;
+      
+      + .field-description:not(:empty) {
+        margin-top: calc(-1 * var(--theme-input-vertical-spacing));
+      }
+    }
   }
+  
 
   .comment-highlighted {
     --component-accent-color: var(--theme-dark-primary);

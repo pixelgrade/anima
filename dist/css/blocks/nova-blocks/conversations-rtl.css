@@ -1,6 +1,6 @@
 .novablocks-conversations {
   --avatar-column-size: 2.8rem;
-  --comments-grid-gap: .625rem;
+  --comments-grid-gap: 1.5rem;
   --component-accent-color: var(--current-color-primary);
   --novablocks-conversations-width: 48em;
   --field-description-color: var(--current-dark-primary);
@@ -19,10 +19,10 @@
   --novablocks-spacing: var(--theme-spacing-fluid-medium); }
   .novablocks-conversations .comment-list[class] {
     --novablocks-element-spacing-multiplier: 1.5; }
-  .novablocks-conversations .comment-footer-meta {
+  .novablocks-conversations .comment-footer-meta[class] {
     --font-size: 14;
     font-size: var(--final-font-size); }
-    .novablocks-conversations .comment-footer-meta * {
+    .novablocks-conversations .comment-footer-meta[class] * {
       font-size: inherit; }
   .novablocks-conversations .comment-footer-highlights[class],
   .novablocks-conversations .comment-dropdown-toggle,
@@ -32,6 +32,8 @@
     font-size: var(--final-font-size); }
   .novablocks-conversations .comment-form label {
     --font-size: 14; }
+    .novablocks-conversations .comment-form label + .field-description:not(:empty) {
+      margin-top: calc(-1 * var(--theme-input-vertical-spacing)); }
   .novablocks-conversations .comment-highlighted {
     --component-accent-color: var(--theme-dark-primary);
     --comment-author-color: var(--theme-dark-primary); }
