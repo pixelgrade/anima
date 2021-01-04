@@ -4,31 +4,31 @@
 
 .has-no-spacing-top {
 
-  .entry-content {
-
-    .novablocks-media:first-child {
-      --block-top-spacing: 0;
-      --emphasis-top-spacing: 0;
-
-      > .novablocks-block {
-
-        // This should always be equal with desktop
-        padding-top: calc( var(--theme-header-height) );
-      }
-    }
-  }
-
   @include below(lap) {
     &[class*='first-block-is-media'] {
 
-      &.first-block-is-media--moderate .site-header--mobile,
-      &.first-block-is-media--moderate .c-menu-toggle {
-        --novablocks-block-content-text-color: var(--current-dark-primary);
+      &.first-block-is-media--moderate {
+        .site-header--mobile,
+        .c-menu-toggle {
+          --novablocks-block-content-text-color: var(--current-dark-primary);
+        }
+        
       }
 
-      &.first-block-is-media--highlighted .site-header--mobile,
-      &.first-block-is-media--highlighted .c-menu-toggle {
-        --novablocks-block-content-text-color: var(--current-light-primary);
+      &.first-block-is-media--highlighted  {
+        
+        .site-header--mobile,
+        .c-menu-toggle {
+          --novablocks-block-content-text-color: var(--sm-light-primary);
+  
+        }
+        
+        &.site-header-mobile--scrolled {
+          .site-header--mobile,
+          .c-menu-toggle {
+            --novablocks-block-content-text-color: var(--current-dark-primary);
+          }
+        }
       }
 
       .c-menu-toggle,
@@ -49,11 +49,69 @@
         }
 
         &.first-block-is-media--highlighted .site-header {
-          --novablocks-block-content-text-color: var(--current-light-primary);
+          // We want to keep to color to be always light
+          --novablocks-block-content-text-color: var(--sm-light-primary);
         }
 
         .site-header:not(.site-header--scrolled) .site-header__wrapper {
           color: var(--novablocks-block-content-text-color);
+        }
+      }
+    }
+  }
+  
+  .novablocks-hero:first-child {
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(0deg,
+        rgba(0, 0, 0, 0) 2.22%,
+        rgba(0, 0, 0, 0.05) 84.86%,
+        rgba(0, 0, 0, 0.058563) calc(100% - calc(var(--theme-header-height) + var(--theme-header-offset))),
+        rgba(0, 0, 0, 0.4) 100%);
+    }
+  }
+}
+
+.first-block-is-media {
+  
+  .entry-content {
+    
+    .novablocks-media:first-child {
+      --block-top-spacing: 0;
+      --emphasis-top-spacing: 0;
+      
+      > .novablocks-block {
+        
+        // This should always be equal with desktop
+        padding-top: calc( var(--theme-header-height) + calc( var(--novablocks-media-spacing) * 0.5))
+      }
+    }
+  }
+}
+
+html:not(.is-dark) {
+  .has-no-spacing-top {
+    // Handle logo variation
+    // based on first Media Card,
+    // only when we are on Light Mode.
+    
+    &.has-site-header-transparent {
+      &.has-site-header-fixed.first-block-is-media--moderate {
+        
+        .site-header:not(.site-header--scrolled) .site-header__wrapper,
+        .site-header--mobile {
+          .c-logo__default {
+            opacity: 1;
+          }
+          
+          .c-logo__inverted {
+            opacity: 0;
+          }
         }
       }
     }

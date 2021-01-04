@@ -49,7 +49,7 @@ function rosa2_body_classes( $classes ) {
 	}
 
 	if ( rosa2_first_block_is_media() ) {
-		$classes[] = 'first-block-is-media--' . rosa2_first_media_block_style();
+		$classes[] = 'first-block-is-media first-block-is-media--' . rosa2_first_media_block_style();
 	}
 
 	if ( 'on' === pixelgrade_option( 'sm_dark_mode' ) ) {
