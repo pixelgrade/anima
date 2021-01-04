@@ -129,6 +129,12 @@
     &:after {
       border-color: transparent transparent var(--current-light-primary);
     }
+    
+    @include above(tablet) {
+      // Dropdown menu top will be always equal with
+      // text height which is font-size * line-height.
+      top: calc(var(--current-line-height) * var(--final-font-size));
+    }
   }
 
   .commenter-background-label[class] {
@@ -212,6 +218,15 @@
   
   .trix-hidden-input {
     box-shadow: none;
+  }
+  
+  .novablocks-conversations__notification-text {
+    padding: .5em 1em;
+    border-radius: 999em;
+  }
+  
+  .fake-input-button {
+    grid-row: 1/span 2;
   }
 }
 
