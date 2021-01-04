@@ -7,20 +7,23 @@
   --conversations-bg-color: var(--current-light-primary);
   --conversations-reply-bg-color: var(--current-light-tertiary);
   --comment-author-color: var(--component-accent-color);
-  --comment-font-size: calc(var(--theme-body-final-font-size) * 1.05);
   --comment-links-color: var(--component-accent-color);
   --comment-highlighted-color: #FFF2CE;
+  --comment-font-size: calc(var(--theme-body-final-font-size) * 1.05);
   --label-font-size: var(--final-font-size);
   --label-bg-color: var(--current-dark-primary);
   --label-highlighted-bg-color: var(--theme-dark-primary);
   --label-border-radius: 999em;
   --comment-footer-font-size: var(--final-font-size);
   --field-description-font-size: var(--final-font-size);
-  --font-size: 15; }
+  --novablocks-spacing: var(--theme-spacing-fluid-medium); }
   .novablocks-conversations .comment-list[class] {
     --novablocks-element-spacing-multiplier: 1.5; }
   .novablocks-conversations .comment-footer-meta {
-    --font-size: 14; }
+    --font-size: 14;
+    font-size: var(--final-font-size); }
+    .novablocks-conversations .comment-footer-meta * {
+      font-size: inherit; }
   .novablocks-conversations .comment-footer-highlights[class],
   .novablocks-conversations .comment-dropdown-toggle,
   .novablocks-conversations .commenter-background-label {
@@ -104,6 +107,10 @@
     .novablocks-conversations .comments-pagination .page-numbers .page-numbers:not(.current):hover {
       border-color: var(--component-accent-color);
       color: var(--theme-light-primary); }
+  .novablocks-conversations .fake-form-placeholder {
+    --novablocks-spacing: var(--theme-spacing-fluid-large); }
+  .novablocks-conversations .comment-form-comment .field-description {
+    margin-bottom: var(--theme-input-vertical-spacing); }
 
 .novablocks-conversations__header {
   display: flex;
@@ -131,7 +138,7 @@
     margin-left: calc(-1*var(--theme-wrapper-sides-spacing)); } }
 
 .novablocks-conversation__starter-subtitle {
-  --font-size: 16;
+  --font-size: 19.5;
   --component-accent-color: var(--theme-dark-primary);
   font-size: var(--final-font-size); }
 
