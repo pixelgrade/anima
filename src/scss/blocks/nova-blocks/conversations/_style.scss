@@ -243,6 +243,11 @@
   .novablocks-conversations__notification-text {
     padding: .5em 1em;
     border-radius: 999em;
+    
+    @include below(mobile) {
+      width: 20em;
+      text-align: center;
+    }
   }
   
   .fake-input-button {
