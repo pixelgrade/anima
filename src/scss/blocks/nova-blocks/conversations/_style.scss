@@ -8,7 +8,7 @@
 
 .novablocks-conversations {
   --avatar-column-size: 2.8rem;
-  --comments-grid-gap: 1.5rem;
+  --comments-grid-gap: 1.4rem;
   --component-accent-color: var(--current-color-primary);
   --novablocks-conversations-width: 48em;
   --field-description-color: var(--current-dark-primary);
@@ -31,20 +31,29 @@
   }
 
   .comment-footer-meta[class] {
-    --font-size: 14;
-    font-size: var(--final-font-size);
     
     * {
       font-size: inherit;
     }
   }
-
+  
   .comment-footer-highlights[class],
-  .comment-dropdown-toggle,
   .commenter-background-label {
     --font-size: 13;
     --current-font-weight: regular;
 
+    font-size: var(--final-font-size);
+  }
+  
+  .comment-dropdown-toggle {
+    --font-size: 15;
+    --current-font-weight: regular;
+    
+    font-size: var(--final-font-size);
+  }
+  
+  .comment-footer-meta[class] {
+    --font-size: 16;
     font-size: var(--final-font-size);
   }
 
@@ -56,8 +65,12 @@
         margin-top: calc(-1 * var(--theme-input-vertical-spacing));
       }
     }
-  }
   
+    .field-description[class] {
+      --font-size: 15;
+      font-size: var(--final-font-size);
+    }
+  }
 
   .comment-highlighted {
     --component-accent-color: var(--theme-dark-primary);
@@ -235,6 +248,33 @@
   .fake-input-button {
     grid-row: 1/span 2;
   }
+  
+  #cancel-comment-reply-link {
+    opacity: 1;
+    color: var(--theme-button-background-color);
+  }
+  
+  @include below(mobile) {
+    .comment-form-cookies-consent[class] {
+      display: block;
+      
+      label {
+        margin-left: calc(var(--theme-checkbox-width) + 10px);
+      }
+      
+      input[type="checkbox"] {
+        margin-top: 5px;
+      }
+    }
+    
+    input {
+      line-height: normal;
+    }
+  
+    .commenter-background-label[class] {
+      padding-top: .2em;
+    }
+  }
 }
 
 .novablocks-conversations__header {
@@ -317,6 +357,10 @@ trix-editor {
       opacity: var(--theme-input-placeholder-opacity);
       --current-font-weight: regular;
     }
+  }
+  
+  h1 {
+    @include apply-font(heading-4);
   }
 }
 
