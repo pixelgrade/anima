@@ -1219,7 +1219,7 @@ function () {
     this.mobileHeaderHeight = 0;
     this.promoBarHeight = 0;
     this.$page = external_jQuery_default()('#page .site-content');
-    this.$hero = external_jQuery_default()('.has-hero .novablocks-hero').first().find('.novablocks-hero__foreground');
+    this.$hero = external_jQuery_default()('.has-no-spacing-top .novablocks-hero').first().find('.novablocks-hero__foreground');
     this.$promoBar = external_jQuery_default()('.novablocks-announcement-bar');
     this.createMobileHeader();
     this.onResize();
