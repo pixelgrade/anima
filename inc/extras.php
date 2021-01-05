@@ -273,6 +273,10 @@ if ( ! function_exists( 'rosa2_render_sharing_block' ) ) {
 
     function rosa2_render_sharing_block() {
 
+        if ( is_page() ) {
+            return;
+        }
+
 	    if ( ! pixelgrade_option( 'display_sharing_button_on_single', false ) ) {
 	        return;
         }

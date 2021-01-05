@@ -240,14 +240,9 @@
     box-shadow: none;
   }
   
-  .novablocks-conversations__notification-text {
+  .novablocks-conversations__notification-text span {
     padding: .5em 1em;
     border-radius: 999em;
-    
-    @include below(mobile) {
-      width: 20em;
-      text-align: center;
-    }
   }
   
   .fake-input-button {
@@ -302,7 +297,7 @@
   opacity: .5
 }
 
-.novablocks-conversations__notification-text[class] {
+.novablocks-conversations__notification-text[class] span {
   background-color: var(--current-dark-primary);
   color: var(--current-light-primary);
 }

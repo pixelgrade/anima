@@ -124,13 +124,9 @@
     margin-bottom: var(--theme-input-vertical-spacing); }
   .novablocks-conversations .trix-hidden-input {
     box-shadow: none; }
-  .novablocks-conversations .novablocks-conversations__notification-text {
+  .novablocks-conversations .novablocks-conversations__notification-text span {
     padding: .5em 1em;
     border-radius: 999em; }
-    @media not screen and (min-width: 480px) {
-      .novablocks-conversations .novablocks-conversations__notification-text {
-        width: 20em;
-        text-align: center; } }
   .novablocks-conversations .fake-input-button {
     grid-row: 1/span 2; }
   .novablocks-conversations #cancel-comment-reply-link {
@@ -164,7 +160,7 @@
   font-size: var(--final-font-size);
   opacity: .5; }
 
-.novablocks-conversations__notification-text[class] {
+.novablocks-conversations__notification-text[class] span {
   background-color: var(--current-dark-primary);
   color: var(--current-light-primary); }
 
