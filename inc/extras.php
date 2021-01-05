@@ -270,7 +270,13 @@ if ( ! function_exists( 'rosa2_parse_content_tags' ) ) {
 }
 
 if ( ! function_exists( 'rosa2_render_sharing_block' ) ) {
+
     function rosa2_render_sharing_block() {
+
+	    if ( ! pixelgrade_option( 'display_sharing_button_on_single', false ) ) {
+	        return;
+        }
+
         if ( is_singular( 'post' ) ) {
             echo do_blocks( '<!-- wp:novablocks/sharing-overlay /-->' );
         }
