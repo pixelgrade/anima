@@ -1,3 +1,7 @@
+:root {
+  --sm-button-background-color: var(--current-dark-primary);
+  --sm-button-foreground-color: var(--current-light-primary); }
+
 .wc-block-featured-category {
   position: relative;
   background-size: cover;
@@ -436,24 +440,24 @@
 .wc-block-product-categories__button {
   display: inline-block;
   text-decoration: none;
-  --theme-button-text-color: var(--current-light-primary);
-  --theme-button-background-color: var(--current-dark-primary);
-  --theme-button-border-color: var(--current-dark-primary);
-  --theme-button-hover-text-color: var(--current-dark-primary);
+  --theme-button-text-color: var(--sm-button-foreground-color);
+  --theme-button-background-color: var(--sm-button-background-color);
+  --theme-button-border-color: var(--sm-button-background-color);
+  --theme-button-hover-text-color: var(--sm-button-background-color);
   --theme-button-hover-background-color: transparent;
-  --theme-button-hover-border-color: var(--current-dark-primary);
+  --theme-button-hover-border-color: var(--sm-button-background-color);
   --current-button-background-color: var(--theme-button-background-color);
   --current-button-border-color: var(--theme-button-border-color);
   --current-button-text-color: var(--theme-button-text-color);
   --current-button-transition: var(--theme-button-transition);
   display: inline-block;
   text-decoration: none;
-  --theme-button-text-color: var(--current-light-primary);
-  --theme-button-background-color: var(--current-dark-primary);
-  --theme-button-border-color: var(--current-dark-primary);
-  --theme-button-hover-text-color: var(--current-dark-primary);
+  --theme-button-text-color: var(--sm-button-foreground-color);
+  --theme-button-background-color: var(--sm-button-background-color);
+  --theme-button-border-color: var(--sm-button-background-color);
+  --theme-button-hover-text-color: var(--sm-button-background-color);
   --theme-button-hover-background-color: transparent;
-  --theme-button-hover-border-color: var(--current-dark-primary);
+  --theme-button-hover-border-color: var(--sm-button-background-color);
   --current-button-background-color: var(--theme-button-background-color);
   --current-button-border-color: var(--theme-button-border-color);
   --current-button-text-color: var(--theme-button-text-color);

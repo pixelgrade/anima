@@ -1,3 +1,7 @@
+:root {
+  --sm-button-background-color: var(--current-dark-primary);
+  --sm-button-foreground-color: var(--current-light-primary); }
+
 .wp-block-button__link {
   transition: var(--current-button-transition); }
 
@@ -6,12 +10,12 @@
   .wp-block-button:not(.is-style-text) .wp-block-button__link {
     display: inline-block;
     text-decoration: none;
-    --theme-button-text-color: var(--current-light-primary);
-    --theme-button-background-color: var(--current-dark-primary);
-    --theme-button-border-color: var(--current-dark-primary);
-    --theme-button-hover-text-color: var(--current-dark-primary);
+    --theme-button-text-color: var(--sm-button-foreground-color);
+    --theme-button-background-color: var(--sm-button-background-color);
+    --theme-button-border-color: var(--sm-button-background-color);
+    --theme-button-hover-text-color: var(--sm-button-background-color);
     --theme-button-hover-background-color: transparent;
-    --theme-button-hover-border-color: var(--current-dark-primary);
+    --theme-button-hover-border-color: var(--sm-button-background-color);
     --current-button-background-color: var(--theme-button-background-color);
     --current-button-border-color: var(--theme-button-border-color);
     --current-button-text-color: var(--theme-button-text-color);
@@ -447,8 +451,7 @@
   --current-font-weight: var(--theme-accent-font-weight);
   --current-font-style: var(--theme-accent-font-style);
   --current-letter-spacing: var(--theme-accent-letter-spacing);
-  --current-text-transform: var(--theme-accent-text-transform);
-  color: var(--current-color-primary); }
+  --current-text-transform: var(--theme-accent-text-transform); }
 
 .c-headline__secondary {
   font-size: 1.3636em;
