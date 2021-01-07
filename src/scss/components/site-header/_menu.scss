@@ -34,15 +34,20 @@
                 position: static;
 
                 display: inline-block;
-                width: 0.5em;
-                height: 0.5em;
-
-                border-right: 0.1em solid currentColor;
-                border-bottom: 0.1em solid currentColor;
-
-                transform: translateY(-10%) rotate(45deg);
-                transition: var(--theme-transition);
-                transition-property: transform, opacity;
+                width: 0.75em;
+                height: 0.75em;
+    
+                mask: url($arrow-down-svg-path) no-repeat 50% 50%;
+                mask-size: contain;
+                mask-position: center;
+                -webkit-mask: url($arrow-down-svg-path) no-repeat 50% 50%;
+                -webkit-mask-size: contain;
+                -webkit-mask-position: center;
+    
+                background-color: currentColor;
+                
+                border: 0;
+                transform: none;
 
                 margin-left: 0.75em;
                 opacity: .5;
@@ -184,7 +189,7 @@
         .children .page_item_has_children {
 
             > a:after {
-                transform: rotate(-45deg);
+                transform: rotate(-90deg);
             }
 
             .sub-menu,
@@ -222,6 +227,12 @@
                         @include header-menu-item-with-active-state;
                     }
                 }
+            }
+        }
+    
+        .sub-menu .sub-menu[class] {
+            .menu-item-has-children > a:after {
+                transform: rotate(-90deg);
             }
         }
     }

@@ -1041,13 +1041,17 @@ table {
     content: "";
     position: static;
     display: inline-block;
-    width: 0.5em;
-    height: 0.5em;
-    border-left: 0.1em solid currentColor;
-    border-bottom: 0.1em solid currentColor;
-    transform: translateY(-10%) rotate(-45deg);
-    transition: var(--theme-transition);
-    transition-property: transform, opacity;
+    width: 0.75em;
+    height: 0.75em;
+    mask: url("./assets/images/arrow-down.svg") no-repeat 50% 50%;
+    mask-size: contain;
+    mask-position: center;
+    -webkit-mask: url("./assets/images/arrow-down.svg") no-repeat 50% 50%;
+    -webkit-mask-size: contain;
+    -webkit-mask-position: center;
+    background-color: currentColor;
+    border: 0;
+    transform: none;
     margin-right: 0.75em;
     opacity: .5; }
   @media only screen and (min-width: 1000px) {
@@ -1197,7 +1201,7 @@ table {
       left: 0; }
     .site-header .sub-menu .menu-item-has-children > a:after,
     .site-header .children .page_item_has_children > a:after {
-      transform: rotate(45deg); }
+      transform: rotate(90deg); }
     .site-header .sub-menu .menu-item-has-children .sub-menu,
     .site-header .sub-menu .menu-item-has-children .children,
     .site-header .children .page_item_has_children .sub-menu,
@@ -1245,7 +1249,9 @@ table {
     .site-header .site-header__menu > ul.menu > li[class*="current"]:not(.menu-item-home)[class][class][class] > a:hover:before,
     .site-header .site-header__menu > .menu > ul > li[class*="current"]:not(.menu-item-home)[class][class][class] > a:hover:before {
       transform: scale3d(0, 1, 1);
-      transform-origin: left; } }
+      transform-origin: left; }
+    .site-header .sub-menu .sub-menu[class] .menu-item-has-children > a:after {
+      transform: rotate(90deg); } }
 
 .navigation-is-open {
   overflow: hidden; }
@@ -1406,13 +1412,13 @@ table {
       .site-header .page_item_has_children[class] > a:after {
         position: absolute;
         top: 50%;
-        transform: translateY(-50%) rotate(-45deg);
+        transform: translateY(-50%);
         transition-duration: var(--theme-transition-duration-quick);
         transition-timing-function: cubic-bezier(0, 0, 0.58, 1);
         margin-right: .5em; }
     .site-header .menu-item-has-children[class].hover > a:after,
     .site-header .page_item_has_children[class].hover > a:after {
-      transform: translateY(-50%) rotate(45deg);
+      transform: translateY(-50%) rotate(90deg);
       opacity: 1; }
     .site-header .menu-item-has-children[class].hover > a:before,
     .site-header .page_item_has_children[class].hover > a:before {
@@ -1817,7 +1823,8 @@ table {
           text-decoration: none;
           transition: color .3s ease; }
   .c-search-overlay .search-form {
-    margin-top: 0; }
+    margin-top: 0;
+    overflow: hidden; }
   .c-search-overlay .c-search-overlay__cancel {
     cursor: pointer;
     display: flex;
@@ -1846,11 +1853,17 @@ table {
         padding: 0; }
         .c-search-overlay .c-search-overlay__cancel:before {
           content: '';
-          width: .7em;
-          height: .7em;
-          border-top: 2px solid currentColor;
-          border-right: 2px solid currentColor;
-          transform: rotate(45deg);
+          display: inline-block;
+          width: 1em;
+          height: 1em;
+          mask: url("./assets/images/arrow-down.svg") no-repeat 50% 50%;
+          mask-size: contain;
+          mask-position: center;
+          -webkit-mask: url("./assets/images/arrow-down.svg") no-repeat 50% 50%;
+          -webkit-mask-size: contain;
+          -webkit-mask-position: center;
+          transform: rotate(-90deg);
+          background-color: currentColor;
           margin-left: 3px; }
         .c-search-overlay .c-search-overlay__cancel:after {
           content: 'Back'; } }
@@ -2967,9 +2980,9 @@ span.page-numbers {
   .select2-container .select2-selection--single .select2-selection__placeholder {
     display: block; }
   .select2-container .select2-selection--single .select2-selection__arrow {
-    mask: url("./assets/images/arrow-down.svg") no-repeat 50% 50%;
+    mask: url("./assets/images/arrow-caret.svg") no-repeat 50% 50%;
     mask-size: cover;
-    -webkit-mask: url("./assets/images/arrow-down.svg") no-repeat 50% 50%;
+    -webkit-mask: url("./assets/images/arrow-caret.svg") no-repeat 50% 50%;
     -webkit-mask-size: contain;
     background-color: var(--current-dark-primary);
     width: .58em;

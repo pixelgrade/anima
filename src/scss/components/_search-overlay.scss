@@ -168,6 +168,7 @@
 
   .search-form {
     margin-top: 0;
+    overflow: hidden;
   }
 
   .c-search-overlay__cancel {
@@ -203,12 +204,22 @@
 
       &:before {
         content: '';
-
-        width: .7em;
-        height: .7em;
-        border-top: 2px solid currentColor;
-        border-left: 2px solid currentColor;
-        transform: rotate(-45deg);
+  
+        display: inline-block;
+        
+        width: 1em;
+        height: 1em;
+  
+        mask: url($arrow-down-svg-path) no-repeat 50% 50%;
+        mask-size: contain;
+        mask-position: center;
+        -webkit-mask: url($arrow-down-svg-path) no-repeat 50% 50%;
+        -webkit-mask-size: contain;
+        -webkit-mask-position: center;
+  
+        transform: rotate(90deg);
+  
+        background-color: currentColor;
 
         margin-right: 3px;
       }
