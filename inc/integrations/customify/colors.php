@@ -89,6 +89,41 @@ function pixelgrade_add_colors_section_to_customify_config( $config ) {
 	$config['sections']['colors_section'] = Customify_Array::array_merge_recursive_distinct( $config['sections']['colors_section'], array(
 		'title'   => esc_html__( 'Colors', '__theme_txtd' ),
 		'options' => array(
+			'heading_1_color' => rosa2_get_color_source_config( 'Heading 1 Color', 'h1', 'titles' ),
+			'heading_2_color' => rosa2_get_color_source_config( 'Heading 2 Color', 'h2', 'titles' ),
+			'heading_3_color' => rosa2_get_color_source_config( 'Heading 3 Color', 'h3', 'titles' ),
+			'heading_4_color' => rosa2_get_color_source_config( 'Heading 4 Color', 'h4', 'titles' ),
+			'heading_5_color' => rosa2_get_color_source_config( 'Heading 5 Color', 'h5', 'titles' ),
+			'heading_6_color' => rosa2_get_color_source_config( 'Heading 6 Color', 'h6', 'titles' ),
+
+			'novablocks_headline_primary' => rosa2_get_color_source_config( 'Headline Primary', '.c-headline__primary', 'titles' ),
+			'novablocks_headline_secondary' => rosa2_get_color_source_config( 'Headline Secondary', '.c-headline__secondary', 'accent' ),
+
+			'text_button' => rosa2_get_color_source_config( 'Text Button Color', '.wp-block-button.is-style-text .wp-block-button__link', 'accent' ),
+			'solid_button' => rosa2_get_color_source_config( 'Solid Button Color', ':root', 'titles', '--sm-button-background-color' ),
+
+			'blog_items_aspect_ratio'             => array(
+				'type'            => 'range',
+				'label'           => esc_html__( 'Items Aspect Ratio', '__components_txtd' ),
+				'desc'            => esc_html__( 'Change the images ratio from landscape to portrait.', '__components_txtd' ),
+				'live'            => true,
+				'default'         => null, // this should be set by the theme (previously 130)
+				'input_attrs'     => array(
+					'min'          => 0,
+					'max'          => 200,
+					'step'         => 10,
+					'data-preview' => true,
+				),
+				'css'             => array(
+					array(
+						'property'        => 'dummy',
+						'selector'        => '.c-gallery--blog.c-gallery--regular .c-card__frame',
+						'callback_filter' => 'pixelgrade_aspect_ratio_cb',
+						'unit'            => '%',
+					),
+				),
+			),
+
 			'color_1'       => array(
 				'type'    => 'color',
 				'live'    => true,
@@ -227,3 +262,173 @@ function pixelgrade_add_default_color_palettes( $color_palettes ) {
 
 	return $color_palettes;
 }
+
+function rosa2_get_color_source_config( $label, $selector, $default, $properties = [ 'color' ] ) {
+
+	$css = array();
+
+	if ( ! is_array( $properties ) ) {
+		$properties = [ $properties ];
+	}
+
+	foreach ( $properties as $property ) {
+		$css[] = array(
+			'property' => $property,
+			'selector' => $selector,
+			'callback_filter' => 'rosa2_color_source_cb',
+		);
+	}
+	return array(
+		'type'    => 'select',
+		'label'   => esc_html__( $label, '__theme_txtd' ),
+		'live'    => true,
+		'default' => $default,
+		'css'     => $css,
+		'choices' => array(
+			'text'       => esc_html__( 'Text', '__theme_txtd' ),
+			'titles'     => esc_html__( 'Title', '__theme_txtd' ),
+			'accent'     => esc_html__( 'Accent', '__theme_txtd' ),
+			'background' => esc_html__( 'Background', '__theme_txtd' ),
+		),
+	);
+}
+
+function rosa2_color_source_cb( $value, $selector, $property ) {
+	$output = '';
+
+	$output .= $selector . ' {' . PHP_EOL .
+	           $property . ': var(--novablocks-current-' . $value . '-color);' . PHP_EOL .
+	           '}' . PHP_EOL;
+
+	return $output;
+}
+
+function rosa2_color_source_cb_customizer_preview() {
+	$js = "";
+
+	$js .= "
+function rosa2_color_source_cb(value, selector, property) {
+	console.log( 'apeleaza-ma' );
+    var css = '',
+        string = selector + property,
+        id = string.hashCode(),
+        idAttr = 'rosa2_color_source' + id;
+        style = document.getElementById( idAttr ),
+        head = document.head || document.getElementsByTagName('head')[0];
+
+    css += selector + ' {' +
+        property + ': var(--novablocks-current-' + value + '-color);' +
+        '}';
+    
+    console.log( idAttr, style, css );
+
+    if ( style !== null ) {
+        style.innerHTML = css;
+    } else {
+        style = document.createElement('style');
+        style.setAttribute( 'id', idAttr );
+
+        style.type = 'text/css';
+        if ( style.styleSheet ) {
+            style.styleSheet.cssText = css;
+        } else {
+            style.appendChild(document.createTextNode(css));
+        }
+
+        head.appendChild(style);
+    }" . PHP_EOL .
+	       "}" . PHP_EOL;
+
+	wp_add_inline_script( 'customify-previewer-scripts', $js );
+}
+add_action( 'customize_preview_init', 'rosa2_color_source_cb_customizer_preview', 20 );
+
+//
+
+
+if ( ! function_exists( 'pixelgrade_aspect_ratio_cb' ) ) :
+	/**
+	 * Returns the custom CSS rules for the aspect ratio depending on the Customizer settings.
+	 *
+	 * @param mixed  $value The value of the option.
+	 * @param string $selector The CSS selector for this option.
+	 * @param string $property The CSS property of the option.
+	 * @param string $unit The CSS unit used by this option.
+	 *
+	 * @return string
+	 */
+	function pixelgrade_aspect_ratio_cb( $value, $selector, $property, $unit ) {
+		$min = 0;
+		$max = 200;
+
+		$value  = intval( $value );
+		$center = ( $max - $min ) / 2;
+		$offset = $value / $center - 1;
+
+		if ( $offset >= 0 ) {
+			$padding = 100 + $offset * 100 . '%';
+		} else {
+			$padding = 100 + $offset * 50 . '%';
+		}
+
+		$output = '';
+
+		$output .= $selector . ' {' . PHP_EOL .
+		           'padding-top: ' . $padding . ';' . PHP_EOL .
+		           '}' . PHP_EOL;
+
+		return $output;
+	}
+endif;
+
+if ( ! function_exists( 'pixelgrade_aspect_ratio_cb_customizer_preview' ) ) :
+	/**
+	 * Outputs the inline JS code used in the Customizer for the aspect ratio live preview.
+	 */
+	function pixelgrade_aspect_ratio_cb_customizer_preview() {
+
+		$js = "
+function pixelgrade_aspect_ratio_cb( value, selector, property, unit ) {
+
+    var css = '',
+        style = document.getElementById('pixelgrade_aspect_ratio_cb_style_tag'),
+        head = document.head || document.getElementsByTagName('head')[0];
+
+    var min = 0,
+        max = 200,
+        center = (max - min) / 2,
+        offset = value / center - 1,
+        padding;
+
+    if ( offset >= 0 ) {
+        padding = 100 + offset * 100 + '%';
+    } else {
+        padding = 100 + offset * 50 + '%';
+    }
+
+    css += selector + ' {' +
+        'padding-top: ' + padding +
+        '}';
+
+    if ( style !== null ) {
+        style.innerHTML = css;
+    } else {
+        style = document.createElement('style');
+        style.setAttribute('id', 'pixelgrade_aspect_ratio_cb_style_tag');
+
+        style.type = 'text/css';
+        if ( style.styleSheet ) {
+            style.styleSheet.cssText = css;
+        } else {
+            style.appendChild(document.createTextNode(css));
+        }
+
+        head.appendChild(style);
+    }
+}" . PHP_EOL;
+
+		wp_add_inline_script( 'customify-previewer-scripts', $js );
+	}
+endif;
+add_action( 'customize_preview_init', 'pixelgrade_aspect_ratio_cb_customizer_preview', 20 );
+
