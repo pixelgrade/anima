@@ -42,10 +42,13 @@
         > a {
             display: inline-block;
             position: relative;
+            
+            width: 100%;
 
             &:after {
                 position: absolute;
                 top: 50%;
+                right: 0;
                 transform: translateY(-50%);
 
                 transition-duration: var(--theme-transition-duration-quick);

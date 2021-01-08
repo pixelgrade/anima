@@ -46,7 +46,10 @@ ul.menu,
 		.sub-menu .menu-item-has-children,
 		.children .page_item_has_children {
 			> a:after {
-				transform: rotate(-90deg);
+				position: absolute;
+				right: 1.25em;
+				top: 50%;
+				transform: translateY(-50%) rotate(-90deg);
 			}
 		}
 	}

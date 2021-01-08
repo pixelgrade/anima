@@ -28,14 +28,16 @@
     .page_item_has_children {
 
         &[class] > a {
+            
+            display: block;
 
             &:after {
                 content: "";
                 position: static;
 
                 display: inline-block;
-                width: 0.75em;
-                height: 0.75em;
+                width: var(--dropdown-icon-size);
+                height: var(--dropdown-icon-size);
     
                 mask: url($arrow-down-svg-path) no-repeat 50% 50%;
                 mask-size: contain;
@@ -94,18 +96,7 @@
         }
     }
 
-    .menu-item {
-
-        position: relative;
-
-        &.is-external-link {
-            @include header-menu-item-is-external-link;
-        }
-
-        &.is-cta-button {
-            @include header-menu-item-is-cta-button;
-        }
-    }
+    @import 'menu-item';
 
     @media only screen and (min-width: 1000px) {
 
@@ -189,7 +180,10 @@
         .children .page_item_has_children {
 
             > a:after {
-                transform: rotate(-90deg);
+                position: absolute;
+                right: 1.25em;
+                top: 50%;
+                transform: translateY(-50%) rotate(-90deg);
             }
 
             .sub-menu,
@@ -232,7 +226,10 @@
     
         .sub-menu .sub-menu[class] {
             .menu-item-has-children > a:after {
-                transform: rotate(-90deg);
+                position: absolute;
+                right: 1.25em;
+                top: 50%;
+                transform: translateY(-50%) rotate(-90deg);
             }
         }
     }

@@ -416,3 +416,28 @@ function rosa2_init_upgrades_logic() {
 	Rosa2_Upgrade::instance( 'rosa2', $current_theme->get('Version' ), $current_theme->get('Name') );
 }
 add_action( 'after_setup_theme', 'rosa2_init_upgrades_logic', 10 );
+
+if ( ! function_exists( 'rosa2_add_primary_menu_item_description' ) ) {
+
+	/**
+	 * Add menu item description
+     *
+     * @param string   $item_output The menu item's starting HTML output.
+	 * @param WP_Post  $item        Menu item data object.
+	 * @param int      $depth       Depth of menu item. Used for padding.
+	 * @param stdClass $args        An object of wp_nav_menu() arguments.
+     * @return string Nav menu item start element.
+	 */
+
+	function rosa2_add_primary_menu_item_description( $item_output, $item, $depth, $args ) {
+
+		if ( ( 'primary' == $args->theme_location || 'secondary' == $args->theme_location ) && $depth && $item->description ) {
+			$item_output = str_replace( '</a>', '<span class="menu-description">' . $item->description . '</span></a>', $item_output );
+		}
+
+		return $item_output;
+
+	}
+}
+
+add_filter( 'walker_nav_menu_start_el', 'rosa2_add_primary_menu_item_description', 10, 4 );
