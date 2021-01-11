@@ -1,4 +1,5 @@
-:root {
+:root,
+.novablocks-block {
   --sm-button-background-color: var(--current-dark-primary);
   --sm-button-foreground-color: var(--current-light-primary); }
 
@@ -123,6 +124,7 @@
 .nova-food-menu-item__title {
   --theme-heading-5-font-weight: 700; }
   .nova-food-menu-item__title .item-title {
+    color: inherit;
     --font-size: var(--theme-heading-4-font-size);
     font-size: var(--final-font-size);
     --current-font-family: var(--theme-heading-4-font-family);

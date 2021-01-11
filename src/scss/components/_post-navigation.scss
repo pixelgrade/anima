@@ -60,7 +60,6 @@
 
 .post-navigation__link-label {
     position: relative;
-    color: var(--current-color-primary);
     @include apply-font(button);
     transition: var(--theme-transition);
     transition-property: transform;
@@ -75,6 +74,12 @@
         .post-navigation__link:hover & {
             opacity: 0;
         }
+    }
+}
+
+.post-navigation__post-title {
+    a {
+        color: inherit;
     }
 }
 

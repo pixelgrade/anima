@@ -340,7 +340,8 @@ template {
   padding: 0;
   margin: 0; }
 
-:root {
+:root,
+.novablocks-block {
   --sm-button-background-color: var(--current-dark-primary);
   --sm-button-foreground-color: var(--current-light-primary); }
 
@@ -357,10 +358,6 @@ html {
   --current-font-weight: var(--theme-body-font-weight);
   --current-font-style: var(--theme-body-font-style);
   --current-letter-spacing: var(--theme-body-letter-spacing); }
-
-body {
-  background-color: var(--current-light-primary);
-  color: var(--current-dark-secondary); }
 
 ::-webkit-input-placeholder {
   color: var(--theme-input-placeholder-color);
@@ -888,10 +885,6 @@ ol ol {
 
 /* Links */
 a {
-  --theme-links-color: var(--current-dark-secondary);
-  --theme-links-decoration-color: var(--current-dark-secondary);
-  --theme-links-hover-color: var(--current-dark-secondary);
-  --theme-links-hover-decoration-color: var(--current-color-primary);
   --theme-links-current-color: var(--theme-links-color);
   --theme-links-current-decoration-color: var(--theme-links-decoration-color);
   color: var(--theme-links-current-color);
@@ -2687,7 +2680,6 @@ span.page-numbers {
 
 .post-navigation__link-label {
   position: relative;
-  color: var(--current-color-primary);
   --font-size: var(--theme-button-font-size);
   font-size: var(--final-font-size);
   --current-font-family: var(--theme-button-font-family);
@@ -2722,6 +2714,9 @@ span.page-numbers {
         transition-property: opacity, transform; } }
     .post-navigation__link:hover .post-navigation__link-label:after {
       opacity: 0; }
+
+.post-navigation__post-title a {
+  color: inherit; }
 
 .post-navigation__link--previous {
   text-align: right; }
@@ -3403,14 +3398,6 @@ img:not([srcset]):not(.is-loaded) {
   opacity: 0; }
   .gm-style img:not([srcset]):not(.is-loaded) {
     opacity: 1; }
-
-.entry-title a,
-.entry-meta a {
-  color: var(--current-dark-primary);
-  text-decoration-color: transparent; }
-
-.entry-meta a:hover {
-  text-decoration-color: var(--current-color-primary); }
 
 button,
 input,
