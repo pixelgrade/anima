@@ -114,8 +114,13 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 			add_filter( 'get_search_form', array( $this, 'custom_search_form' ), 10, 1 );
 			add_filter( 'language_attributes', array( $this, 'add_color_scheme_attribute' ), 10, 2 );
 
+			// Add Badge Custom Field in Menus Section
 			add_action( 'wp_nav_menu_item_custom_fields', array($this, 'add_badge_custom_field'), 10, 2 );
+			// Add Badge Custom Field in Customizer
+			add_action( 'wp_nav_menu_item_custom_fields_customize_template', array($this, 'customizer_badge_menu_item_field'), 10 );
+			// Save Badge Custom Field Meta Data
 			add_action( 'wp_update_nav_menu_item', array($this, 'save_badge_menu_item_meta'), 10, 2 );
+			// Handle Menu Item Badge Frontend Output
 			add_filter( 'nav_menu_item_title', array($this, 'output_badge_menu_item'), 10, 2 );
 		}
 
@@ -399,7 +404,6 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 
 		public function admin_scripts_styles( $hook_suffix ) {
 			if( 'nav-menus.php' === $hook_suffix ) {
-//				wp_enqueue_script( 'rosa2-admin-nav-menus-scripts', get_template_directory_uri() . '/dist/js/admin/edit-nav-menus.js', array( 'jquery' ), '1.0.0', true );
 				wp_enqueue_style( 'rosa2-admin-nav-menus-styles', get_template_directory_uri() . '/dist/css/admin/edit-nav-menus.css', array( 'nav-menus' ), '1.0.0' );
 			}
 		}
@@ -755,16 +759,17 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 		 */
 		public function add_badge_custom_field( $item_id, $item ) {
 
-			wp_nonce_field( 'custom_menu_meta_nonce', '_custom_menu_meta_nonce_name' );
-			$custom_menu_meta = get_post_meta( $item_id, '_custom_menu_meta', true );
+			wp_nonce_field( 'badge_menu_meta_nonce', '_badge_menu_meta_nonce_name' );
+			$badge_menu_meta = get_post_meta( $item_id, '_badge_menu_meta', true );
+			$default_placeholder = 'e.g. New, Popular, Free, Sales';
 			?>
 
             <p class="description description-wide">
-                <label for="custom-menu-meta-for-<?php echo $item_id ;?>">
+                <label for="badge_menu_meta-for-<?php echo $item_id ;?>">
 					<?php _e( 'Badge' ); ?><br />
-                    <input type="text" name="custom_menu_meta[<?php echo $item_id ;?>]" class="widefat" id="custom-menu-meta-for-<?php echo $item_id ;?>" value="<?php echo esc_attr( $custom_menu_meta ); ?>" />
+                    <input type="text" name="badge_menu_meta[<?php echo $item_id ;?>]" class="widefat" id="badge_menu_meta-for-<?php echo $item_id ;?>" value="<?php echo esc_attr( $badge_menu_meta ); ?>" placeholder="<?php echo esc_attr($default_placeholder) ?>" />
                 </label>
-                <span class="description"><?php _e( 'The description will be displayed in the menu if the current theme supports it.' ); ?></span>
+                <span class="description"><?php _e( 'A badge is a short text indicator used to make a menu item stand out and inform the user that something special warrants its attention.' ); ?></span>
             </p>
 
 			<?php
@@ -779,15 +784,15 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 		public function save_badge_menu_item_meta( $menu_id, $menu_item_db_id ) {
 
 			// Verify this came from our screen and with proper authorization.
-			if ( ! isset( $_POST['_custom_menu_meta_nonce_name'] ) || ! wp_verify_nonce( $_POST['_custom_menu_meta_nonce_name'], 'custom_menu_meta_nonce' ) ) {
+			if ( ! isset( $_POST['_badge_menu_meta_nonce_name'] ) || ! wp_verify_nonce( $_POST['_badge_menu_meta_nonce_name'], 'badge_menu_meta_nonce' ) ) {
 				return $menu_id;
 			}
 
-			if ( isset( $_POST['custom_menu_meta'][$menu_item_db_id]  ) ) {
-				$sanitized_data = sanitize_text_field( $_POST['custom_menu_meta'][$menu_item_db_id] );
-				update_post_meta( $menu_item_db_id, '_custom_menu_meta', $sanitized_data );
+			if ( isset( $_POST['badge_menu_meta'][$menu_item_db_id]  ) ) {
+				$sanitized_data = sanitize_text_field( $_POST['badge_menu_meta'][$menu_item_db_id] );
+				update_post_meta( $menu_item_db_id, '_badge_menu_meta', $sanitized_data );
 			} else {
-				delete_post_meta( $menu_item_db_id, '_custom_menu_meta' );
+				delete_post_meta( $menu_item_db_id, '_badge_menu_meta' );
 			}
 		}
 
@@ -802,13 +807,32 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 
 			if( is_object( $item ) && isset( $item->ID ) ) {
 
-				$custom_menu_meta = get_post_meta( $item->ID, '_custom_menu_meta', true );
+				$badge_menu_meta = get_post_meta( $item->ID, '_badge_menu_meta', true );
 
-				if ( ! empty( $custom_menu_meta ) ) {
-					$title .= '<span class="menu-item-label">' . $custom_menu_meta . '</span>';
+				if ( ! empty( $badge_menu_meta ) ) {
+					$title .= '<span class="menu-item-label">' . $badge_menu_meta . '</span>';
 				}
 			}
 			return $title;
+		}
+
+		public function customizer_badge_menu_item_field() {
+			wp_nonce_field( 'badge_menu_meta_nonce', '_badge_menu_meta_nonce_name' );
+			$item_id = '{{ data.menu_item_id }}';
+			$badge_menu_meta = get_post_meta( $item_id, '_badge_menu_meta', true );
+			$default_placeholder = 'e.g. New, Popular, Free, Sales';
+			?>
+
+            <p class="field-badge-value description description-wide">
+                <?php echo $badge_menu_meta; ?>
+                <label for="badge-menu-meta-for-<?php echo $item_id ;?>">
+					<?php _e( 'Badge' ); ?><br />
+                    <input type="text" name="badge_menu_meta[<?php echo $item_id ;?>]" class="widefat" id="badge_menu_meta-for-<?php echo $item_id ;?>" value="<?php echo esc_attr( $badge_menu_meta ); ?>" placeholder="<?php echo esc_attr($default_placeholder) ?>" />
+                </label>
+                <span class="description"><?php _e( 'A badge is a short text indicator used to make a menu item stand out and inform the user that something special warrants its attention.' ); ?></span>
+            </p>
+
+			<?php
 		}
 	}
 
