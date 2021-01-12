@@ -113,6 +113,10 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 			add_action( 'rosa2_after_footer', array( $this, 'output_search_overlay' ), 10 );
 			add_filter( 'get_search_form', array( $this, 'custom_search_form' ), 10, 1 );
 			add_filter( 'language_attributes', array( $this, 'add_color_scheme_attribute' ), 10, 2 );
+
+			add_action( 'wp_nav_menu_item_custom_fields', array($this, 'add_badge_custom_field'), 10, 2 );
+			add_action( 'wp_update_nav_menu_item', array($this, 'save_badge_menu_item_meta'), 10, 2 );
+			add_filter( 'nav_menu_item_title', array($this, 'output_badge_menu_item'), 10, 2 );
 		}
 
 		public function add_custom_menu_items_boxes() {
@@ -738,6 +742,73 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 			}
 
 			return false;
+		}
+
+		/**
+		 * Add custom fields to menu item
+		 *
+		 * This will allow us to play nicely with any other plugin that is adding the same hook
+		 *
+		 * @param  int $item_id
+		 * @params obj $item - the menu item
+		 * @params array $args
+		 */
+		public function add_badge_custom_field( $item_id, $item ) {
+
+			wp_nonce_field( 'custom_menu_meta_nonce', '_custom_menu_meta_nonce_name' );
+			$custom_menu_meta = get_post_meta( $item_id, '_custom_menu_meta', true );
+			?>
+
+            <p class="description description-wide">
+                <label for="custom-menu-meta-for-<?php echo $item_id ;?>">
+					<?php _e( 'Badge' ); ?><br />
+                    <input type="text" name="custom_menu_meta[<?php echo $item_id ;?>]" class="widefat" id="custom-menu-meta-for-<?php echo $item_id ;?>" value="<?php echo esc_attr( $custom_menu_meta ); ?>" />
+                </label>
+                <span class="description"><?php _e( 'The description will be displayed in the menu if the current theme supports it.' ); ?></span>
+            </p>
+
+			<?php
+		}
+
+		/**
+		 * Save the menu item meta
+		 *
+		 * @param int $menu_id
+		 * @param int $menu_item_db_id
+		 */
+		public function save_badge_menu_item_meta( $menu_id, $menu_item_db_id ) {
+
+			// Verify this came from our screen and with proper authorization.
+			if ( ! isset( $_POST['_custom_menu_meta_nonce_name'] ) || ! wp_verify_nonce( $_POST['_custom_menu_meta_nonce_name'], 'custom_menu_meta_nonce' ) ) {
+				return $menu_id;
+			}
+
+			if ( isset( $_POST['custom_menu_meta'][$menu_item_db_id]  ) ) {
+				$sanitized_data = sanitize_text_field( $_POST['custom_menu_meta'][$menu_item_db_id] );
+				update_post_meta( $menu_item_db_id, '_custom_menu_meta', $sanitized_data );
+			} else {
+				delete_post_meta( $menu_item_db_id, '_custom_menu_meta' );
+			}
+		}
+
+		/**
+		 * Displays badge on the front-end.
+		 *
+		 * @param string   $title The menu item's title.
+		 * @param WP_Post  $item  The current menu item.
+		 * @return string
+		 */
+		public function output_badge_menu_item( $title, $item ) {
+
+			if( is_object( $item ) && isset( $item->ID ) ) {
+
+				$custom_menu_meta = get_post_meta( $item->ID, '_custom_menu_meta', true );
+
+				if ( ! empty( $custom_menu_meta ) ) {
+					$title .= '<span class="menu-item-label">' . $custom_menu_meta . '</span>';
+				}
+			}
+			return $title;
 		}
 	}
 

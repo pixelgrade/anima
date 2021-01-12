@@ -1157,27 +1157,10 @@ table {
           --current-button-border-color: var(--theme-button-hover-border-color);
           --current-button-text-color: var(--theme-button-hover-text-color);
           --current-button-transition: var(--theme-button-hover-transition); }
-    .site-header .menu-item.has-label:not([class*="has-children"]) a[title] {
-      display: flex !important;
-      align-items: center;
-      flex-wrap: wrap; }
-      .site-header .menu-item.has-label:not([class*="has-children"]) a[title]:after {
-        content: attr(title);
-        position: relative !important;
-        right: 0;
-        font-size: 50%;
-        font-weight: bold;
-        text-transform: uppercase;
-        margin-left: 10px;
-        background-color: var(--sm-color-primary);
-        background-image: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1));
-        color: var(--sm-light-primary);
-        border-radius: 10px;
-        padding: 2px 8px; }
     .site-header .menu-item .menu-description {
       display: block;
       order: 2;
-      font-size: 75%;
+      font-size: 0.75em;
       opacity: .5;
       line-height: 1.5;
       font-weight: 400;
@@ -1185,6 +1168,17 @@ table {
       @media not screen and (min-width: 1000px) {
         .site-header .menu-item .menu-description {
           width: 100%; } }
+  .site-header .menu-item-label {
+    background-color: var(--sm-color-primary);
+    background-image: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1));
+    color: var(--sm-light-primary);
+    font-size: 0.5em;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 1em;
+    padding: .25em .9em;
+    vertical-align: middle;
+    margin-left: 0.5em; }
   @media only screen and (min-width: 1000px) {
     .site-header .menu-item-has-children .menu-item:after,
     .site-header .page_item_has_children .menu-item:after {

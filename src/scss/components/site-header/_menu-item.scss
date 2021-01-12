@@ -5,46 +5,21 @@
 	position: relative;
 	--dropdown-icon-size: 0.75em;
 	
-	// External Link Style
+	// External Link
 	&.is-external-link {
 		@include header-menu-item-is-external-link;
 	}
 	
-	// Cta Button Style
+	// CTA Button
 	&.is-cta-button {
 		@include header-menu-item-is-cta-button;
-	}
-	
-	// Badge Style
-	&.has-label:not([class*="has-children"]) {
-		
-		a[title] {
-			
-			display: flex !important;
-			align-items:center;
-			flex-wrap: wrap;
-			
-			&:after {
-				content: attr(title);
-				
-				position: relative !important;
-				right: 0;
-				
-				font-size: 50%;
-				font-weight: bold;
-				text-transform: uppercase;
-				margin-left: 10px;
-				
-				@include badge;
-			}
-		}
 	}
 	
 	.menu-description {
 		display: block;
 		order: 2;
 		
-		font-size: 75%;
+		font-size: 0.75em;
 		opacity: .5;
 		line-height: 1.5;
 		font-weight: 400;
@@ -55,4 +30,10 @@
 			width: 100%;
 		}
 	}
+}
+
+.menu-item-label {
+	@include badge;
+	vertical-align: middle;
+	margin-left: 0.5em;
 }
