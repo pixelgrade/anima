@@ -251,6 +251,8 @@ function rosa2_woocommerce_setup() {
 
 		// Load the integration logic.
 		require_once trailingslashit( get_template_directory() ) . 'inc/integrations/woocommerce.php';
+
+		require_once trailingslashit( get_template_directory() ) . 'inc/integrations/stripe.php';
 	}
 }
 add_action( 'after_setup_theme', 'rosa2_woocommerce_setup', 10 );
