@@ -7,6 +7,7 @@
 
   .site-content {
     margin-top: 0 !important;
+    padding-bottom: 0;
   }
 
   .col2-set {
@@ -144,6 +145,7 @@
 
   & form {
     margin-top: var(--theme-spacing-large);
+    padding-bottom: var(--theme-spacing-large);
   }
 
   .woocommerce-form-coupon-toggle,
@@ -161,6 +163,10 @@
     flex-wrap: wrap;
     align-items: stretch;
     margin-left: calc(var(--theme-spacing) * -1);
+    
+    .input-text {
+      height: 100%;
+    }
 
     > p:not([class]) {
       flex-basis: 100%;
