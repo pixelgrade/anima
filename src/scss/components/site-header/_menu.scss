@@ -119,10 +119,21 @@
 
                     opacity: 0;
                 }
-
-                &:hover:after,
-                &:focus-within:after {
-                    opacity: .2;
+                
+                a {
+                    transition: color .15s $easeInOut;
+                }
+                
+                &:hover,
+                &:focus-within {
+                    
+                    &:after {
+                        opacity: .2;
+                    }
+                    
+                    > a {
+                        color: var(--current-color-primary);
+                    }
                 }
             }
         }
@@ -219,6 +230,10 @@
                 > li[class*="current"]:not(.menu-item-home) {
                     @include specific(3) {
                         @include header-menu-item-with-active-state;
+                        
+                        > a {
+                            color: var(--current-color-primary);
+                        }
                     }
                 }
             }

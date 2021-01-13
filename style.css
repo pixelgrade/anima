@@ -1161,13 +1161,15 @@ table {
       display: block;
       order: 2;
       font-size: 0.75em;
+      color: var(--current-dark-primary);
       opacity: .5;
       line-height: 1.5;
       font-weight: 400;
       padding-right: var(--dropdown-icon-size); }
       @media not screen and (min-width: 1000px) {
         .site-header .menu-item .menu-description {
-          width: 100%; } }
+          width: 100%;
+          color: var(--sm-light-primary); } }
   .site-header .menu-item-label {
     background-color: var(--sm-color-primary);
     background-image: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1));
@@ -1191,10 +1193,17 @@ table {
       height: 100%;
       background-color: var(--current-light-secondary);
       opacity: 0; }
+    .site-header .menu-item-has-children .menu-item a,
+    .site-header .page_item_has_children .menu-item a {
+      transition: color 0.15s cubic-bezier(0.42, 0, 0.58, 1); }
     .site-header .menu-item-has-children .menu-item:hover:after, .site-header .menu-item-has-children .menu-item:focus-within:after,
     .site-header .page_item_has_children .menu-item:hover:after,
     .site-header .page_item_has_children .menu-item:focus-within:after {
       opacity: .2; }
+    .site-header .menu-item-has-children .menu-item:hover > a, .site-header .menu-item-has-children .menu-item:focus-within > a,
+    .site-header .page_item_has_children .menu-item:hover > a,
+    .site-header .page_item_has_children .menu-item:focus-within > a {
+      color: var(--current-color-primary); }
     .site-header > ul.menu,
     .site-header > .menu > ul {
       display: flex;
@@ -1280,6 +1289,9 @@ table {
     .site-header .site-header__menu > .menu > ul > li[class*="current"]:not(.menu-item-home)[class][class][class] > a:hover:before {
       transform: scale3d(0, 1, 1);
       transform-origin: right; }
+    .site-header .site-header__menu > ul.menu > li[class*="current"]:not(.menu-item-home)[class][class][class] > a,
+    .site-header .site-header__menu > .menu > ul > li[class*="current"]:not(.menu-item-home)[class][class][class] > a {
+      color: var(--current-color-primary); }
     .site-header .sub-menu .sub-menu[class] .menu-item-has-children > a:after {
       position: absolute;
       right: 1.25em;
