@@ -4,13 +4,13 @@ Theme URI: https://demos.pixelgrade.com/rosa2
 Author: Pixelgrade
 Author URI: https://pixelgrade.com
 Description: ROSA 2 is an enchanting and easy-to-use parallax Restaurant WordPress theme that allows you to tell your story in a dynamic, narrative and enjoyable way, making it perfect for restaurants, bakeries, bars or coffee shops.
-Version: 1.6.1
+Version: 1.7.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: __theme_txtd
 Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, fluid-layout, responsive-layout, parallax, translation-ready, restaurant
 Requires at least: 5.2.0
-Tested up to: 5.5.3
+Tested up to: 5.6.0
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
@@ -1029,7 +1029,7 @@ table {
   --theme-button-hover-border-color: var(--sm-light-primary); }
   @media only screen and (min-width: 1000px) {
     .site-header--scrolled,
-    body:not(.has-hero) .site-header {
+    body:not(.has-no-spacing-top) .site-header {
       --theme-button-text-color: var(--current-light-primary);
       --theme-button-background-color: var(--current-dark-primary);
       --theme-button-border-color: var(--current-dark-primary);
@@ -1041,13 +1041,17 @@ table {
     content: "";
     position: static;
     display: inline-block;
-    width: 0.5em;
-    height: 0.5em;
-    border-left: 0.1em solid currentColor;
-    border-bottom: 0.1em solid currentColor;
-    transform: translateY(-10%) rotate(-45deg);
-    transition: var(--theme-transition);
-    transition-property: transform, opacity;
+    width: 0.75em;
+    height: 0.75em;
+    mask: url("./assets/images/arrow-down.svg") no-repeat 50% 50%;
+    mask-size: contain;
+    mask-position: center;
+    -webkit-mask: url("./assets/images/arrow-down.svg") no-repeat 50% 50%;
+    -webkit-mask-size: contain;
+    -webkit-mask-position: center;
+    background-color: currentColor;
+    border: 0;
+    transform: none;
     margin-right: 0.75em;
     opacity: .5; }
   @media only screen and (min-width: 1000px) {
@@ -1197,7 +1201,7 @@ table {
       left: 0; }
     .site-header .sub-menu .menu-item-has-children > a:after,
     .site-header .children .page_item_has_children > a:after {
-      transform: rotate(45deg); }
+      transform: rotate(90deg); }
     .site-header .sub-menu .menu-item-has-children .sub-menu,
     .site-header .sub-menu .menu-item-has-children .children,
     .site-header .children .page_item_has_children .sub-menu,
@@ -1245,7 +1249,9 @@ table {
     .site-header .site-header__menu > ul.menu > li[class*="current"]:not(.menu-item-home)[class][class][class] > a:hover:before,
     .site-header .site-header__menu > .menu > ul > li[class*="current"]:not(.menu-item-home)[class][class][class] > a:hover:before {
       transform: scale3d(0, 1, 1);
-      transform-origin: left; } }
+      transform-origin: left; }
+    .site-header .sub-menu .sub-menu[class] .menu-item-has-children > a:after {
+      transform: rotate(90deg); } }
 
 .navigation-is-open {
   overflow: hidden; }
@@ -1357,16 +1363,16 @@ table {
     position: fixed; } }
 
 @media only screen and (min-width: 1000px) {
-  body.has-site-header-transparent.has-hero.has-site-header-fixed .site-header:not(.site-header--scrolled) .site-header__wrapper,
-  body.has-site-header-transparent.has-hero:not(.has-site-header-fixed) .site-header .site-header__wrapper {
+  body.has-site-header-transparent.has-no-spacing-top.has-site-header-fixed .site-header:not(.site-header--scrolled) .site-header__wrapper,
+  body.has-site-header-transparent.has-no-spacing-top:not(.has-site-header-fixed) .site-header .site-header__wrapper {
     color: var(--sm-light-primary); }
-    body.has-site-header-transparent.has-hero.has-site-header-fixed .site-header:not(.site-header--scrolled) .site-header__wrapper .c-logo__inverted,
-    body.has-site-header-transparent.has-hero:not(.has-site-header-fixed) .site-header .site-header__wrapper .c-logo__inverted {
+    body.has-site-header-transparent.has-no-spacing-top.has-site-header-fixed .site-header:not(.site-header--scrolled) .site-header__wrapper .c-logo__inverted,
+    body.has-site-header-transparent.has-no-spacing-top:not(.has-site-header-fixed) .site-header .site-header__wrapper .c-logo__inverted {
       opacity: 1; }
-    body.has-site-header-transparent.has-hero.has-site-header-fixed .site-header:not(.site-header--scrolled) .site-header__wrapper .c-logo__default,
-    body.has-site-header-transparent.has-hero:not(.has-site-header-fixed) .site-header .site-header__wrapper .c-logo__default {
+    body.has-site-header-transparent.has-no-spacing-top.has-site-header-fixed .site-header:not(.site-header--scrolled) .site-header__wrapper .c-logo__default,
+    body.has-site-header-transparent.has-no-spacing-top:not(.has-site-header-fixed) .site-header .site-header__wrapper .c-logo__default {
       opacity: 0; }
-  body.has-site-header-transparent.has-hero .c-menu-toggle {
+  body.has-site-header-transparent.has-no-spacing-top .c-menu-toggle {
     color: var(--sm-light-primary); }
   body.has-site-header-transparent.has-site-header-fixed .site-header--scrolled .site-header__wrapper:after {
     opacity: 0.1; } }
@@ -1406,13 +1412,13 @@ table {
       .site-header .page_item_has_children[class] > a:after {
         position: absolute;
         top: 50%;
-        transform: translateY(-50%) rotate(-45deg);
+        transform: translateY(-50%);
         transition-duration: var(--theme-transition-duration-quick);
         transition-timing-function: cubic-bezier(0, 0, 0.58, 1);
         margin-right: .5em; }
     .site-header .menu-item-has-children[class].hover > a:after,
     .site-header .page_item_has_children[class].hover > a:after {
-      transform: translateY(-50%) rotate(45deg);
+      transform: translateY(-50%) rotate(90deg);
       opacity: 1; }
     .site-header .menu-item-has-children[class].hover > a:before,
     .site-header .page_item_has_children[class].hover > a:before {
@@ -1483,15 +1489,15 @@ table {
   .site-header__menu {
     padding-right: var(--theme-wrapper-sides-spacing);
     padding-left: var(--theme-wrapper-sides-spacing); }
-  .has-hero .site-header--mobile,
-  .has-hero .c-menu-toggle,
+  .has-no-spacing-top .site-header--mobile,
+  .has-no-spacing-top .c-menu-toggle,
   .is-dark-mode .site-header--mobile,
   .is-dark-mode .c-menu-toggle {
     color: var(--sm-light-primary); }
-  .has-hero .site-header--mobile .c-logo__inverted,
+  .has-no-spacing-top .site-header--mobile .c-logo__inverted,
   .is-dark-mode .site-header--mobile .c-logo__inverted {
     opacity: 1; }
-  .has-hero .site-header--mobile .c-logo__default,
+  .has-no-spacing-top .site-header--mobile .c-logo__default,
   .is-dark-mode .site-header--mobile .c-logo__default {
     opacity: 0; }
   .sub-menu {
@@ -1817,7 +1823,8 @@ table {
           text-decoration: none;
           transition: color .3s ease; }
   .c-search-overlay .search-form {
-    margin-top: 0; }
+    margin-top: 0;
+    overflow: hidden; }
   .c-search-overlay .c-search-overlay__cancel {
     cursor: pointer;
     display: flex;
@@ -1846,11 +1853,17 @@ table {
         padding: 0; }
         .c-search-overlay .c-search-overlay__cancel:before {
           content: '';
-          width: .7em;
-          height: .7em;
-          border-top: 2px solid currentColor;
-          border-right: 2px solid currentColor;
-          transform: rotate(45deg);
+          display: inline-block;
+          width: 1em;
+          height: 1em;
+          mask: url("./assets/images/arrow-down.svg") no-repeat 50% 50%;
+          mask-size: contain;
+          mask-position: center;
+          -webkit-mask: url("./assets/images/arrow-down.svg") no-repeat 50% 50%;
+          -webkit-mask-size: contain;
+          -webkit-mask-position: center;
+          transform: rotate(-90deg);
+          background-color: currentColor;
           margin-left: 3px; }
         .c-search-overlay .c-search-overlay__cancel:after {
           content: 'Back'; } }
@@ -1927,7 +1940,7 @@ table {
   --current-color-primary: var(--theme-color-primary);
   --current-color-secondary: var(--theme-color-secondary);
   --current-color-tertiary: var(--theme-color-tertiary);
-  --current-dark-primary: var(--theme-light-secondary);
+  --current-dark-primary: var(--theme-light-primary);
   --current-dark-secondary: var(--theme-light-primary);
   --current-dark-tertiary: var(--theme-light-tertiary);
   --current-light-primary: var(--theme-dark-primary);
@@ -2043,7 +2056,7 @@ table {
   --current-color-primary: var(--sm-color-primary);
   --current-color-secondary: var(--sm-color-secondary);
   --current-color-tertiary: var(--sm-color-tertiary);
-  --current-dark-primary: var(--sm-light-secondary);
+  --current-dark-primary: var(--sm-light-primary);
   --current-dark-secondary: var(--sm-light-primary);
   --current-dark-tertiary: var(--sm-light-tertiary);
   --current-light-primary: var(--sm-dark-primary);
@@ -2365,8 +2378,7 @@ table {
   .comment-form input[type="checkbox"] {
     vertical-align: middle; }
     .comment-form input[type="checkbox"] + label {
-      margin-top: 0;
-      margin-bottom: var(--theme-input-vertical-spacing); }
+      margin-top: 0; }
 
 .comment-notes {
   font-size: 85%; }
@@ -2968,9 +2980,9 @@ span.page-numbers {
   .select2-container .select2-selection--single .select2-selection__placeholder {
     display: block; }
   .select2-container .select2-selection--single .select2-selection__arrow {
-    mask: url("./assets/images/arrow-down.svg") no-repeat 50% 50%;
+    mask: url("./assets/images/arrow-caret.svg") no-repeat 50% 50%;
     mask-size: cover;
-    -webkit-mask: url("./assets/images/arrow-down.svg") no-repeat 50% 50%;
+    -webkit-mask: url("./assets/images/arrow-caret.svg") no-repeat 50% 50%;
     -webkit-mask-size: contain;
     background-color: var(--current-dark-primary);
     width: .58em;
@@ -3429,9 +3441,6 @@ ul.menu,
   .sub-menu > *,
   .children > * {
     margin-top: 0; }
-
-.has-hero #page .site-content {
-  margin-top: 0 !important; }
 
 .has-no-padding-bottom .site-content {
   padding-bottom: 0 !important; }

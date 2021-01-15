@@ -391,7 +391,7 @@
   --current-color-primary: var(--theme-color-primary);
   --current-color-secondary: var(--theme-color-secondary);
   --current-color-tertiary: var(--theme-color-tertiary);
-  --current-dark-primary: var(--theme-light-secondary);
+  --current-dark-primary: var(--theme-light-primary);
   --current-dark-secondary: var(--theme-light-primary);
   --current-dark-tertiary: var(--theme-light-tertiary);
   --current-light-primary: var(--theme-dark-primary);
@@ -402,7 +402,7 @@
   --current-color-primary: var(--theme-color-primary);
   --current-color-secondary: var(--theme-color-secondary);
   --current-color-tertiary: var(--theme-color-tertiary);
-  --current-dark-primary: var(--theme-light-secondary);
+  --current-dark-primary: var(--theme-light-primary);
   --current-dark-secondary: var(--theme-light-primary);
   --current-dark-tertiary: var(--theme-light-tertiary);
   --current-light-primary: var(--theme-dark-tertiary);
@@ -458,6 +458,60 @@
 @media not screen and (min-width: 1440px) {
   .u-mq-above-desktop {
     display: none; } }
+
+.has-no-spacing-top #page .site-content {
+  margin-top: 0 !important; }
+
+@media not screen and (min-width: 1000px) {
+  .has-no-spacing-top[class*='first-block-is-media'].first-block-is-media--moderate .site-header--mobile,
+  .has-no-spacing-top[class*='first-block-is-media'].first-block-is-media--moderate .c-menu-toggle {
+    --novablocks-block-content-text-color: var(--current-dark-primary); }
+  .has-no-spacing-top[class*='first-block-is-media'].first-block-is-media--highlighted .site-header--mobile,
+  .has-no-spacing-top[class*='first-block-is-media'].first-block-is-media--highlighted .c-menu-toggle {
+    --novablocks-block-content-text-color: var(--sm-light-primary); }
+  .has-no-spacing-top[class*='first-block-is-media'].first-block-is-media--highlighted.site-header-mobile--scrolled .site-header--mobile,
+  .has-no-spacing-top[class*='first-block-is-media'].first-block-is-media--highlighted.site-header-mobile--scrolled .c-menu-toggle {
+    --novablocks-block-content-text-color: var(--current-dark-primary); }
+  .has-no-spacing-top[class*='first-block-is-media'] .c-menu-toggle,
+  .has-no-spacing-top[class*='first-block-is-media'] .site-header--mobile {
+    color: var(--novablocks-block-content-text-color); } }
+
+@media only screen and (min-width: 1000px) {
+  .has-no-spacing-top.has-site-header-transparent[class][class*='first-block-is-media'].first-block-is-media--moderate .site-header {
+    --novablocks-block-content-text-color: var(--current-dark-primary); }
+  .has-no-spacing-top.has-site-header-transparent[class][class*='first-block-is-media'].first-block-is-media--highlighted .site-header {
+    --novablocks-block-content-text-color: var(--sm-light-primary); }
+  .has-no-spacing-top.has-site-header-transparent[class][class*='first-block-is-media'] .site-header:not(.site-header--scrolled) .site-header__wrapper {
+    color: var(--novablocks-block-content-text-color); } }
+
+.has-no-spacing-top .novablocks-hero:first-child:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.03) calc(2 * var(--theme-header-height)), rgba(0, 0, 0, 0) 100%); }
+
+.first-block-is-media .entry-content .novablocks-media:first-child {
+  --block-top-spacing: 0;
+  --emphasis-top-spacing: 0; }
+  .first-block-is-media .entry-content .novablocks-media:first-child > .novablocks-block {
+    padding-top: calc( var(--theme-header-height) +  var(--novablocks-media-spacing) * 0.5); }
+
+html:not(.is-dark) .has-no-spacing-top.has-site-header-transparent.has-site-header-fixed.first-block-is-media--moderate .site-header:not(.site-header--scrolled) .site-header__wrapper .c-logo__default,
+html:not(.is-dark) .has-no-spacing-top.has-site-header-transparent.has-site-header-fixed.first-block-is-media--moderate .site-header--mobile .c-logo__default {
+  opacity: 1; }
+
+html:not(.is-dark) .has-no-spacing-top.has-site-header-transparent.has-site-header-fixed.first-block-is-media--moderate .site-header:not(.site-header--scrolled) .site-header__wrapper .c-logo__inverted,
+html:not(.is-dark) .has-no-spacing-top.has-site-header-transparent.has-site-header-fixed.first-block-is-media--moderate .site-header--mobile .c-logo__inverted {
+  opacity: 0; }
+
+.admin-bar {
+  --admin-bar-height: 32px; }
+  @media screen and (max-width: 782px) {
+    .admin-bar {
+      --admin-bar-height: 46px; } }
 
 [class][class] .has-smaller-font-size {
   --font-size: inherit;

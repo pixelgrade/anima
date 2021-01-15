@@ -255,46 +255,6 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 		}
 
 		/**
-		 * @param int      $item_id Menu item ID.
-		 * @param WP_Post  $item    Menu item data object.
-		 */
-		public function inline_css_to_hide_menu_item_fields( $item_id, $item ) {
-			if ( 'custom-pxg' !== $item->type ) {
-				return;
-			}
-
-			$item_config = array();
-
-			$details = explode( '__', (string) $item->object );
-			if ( count( $details ) === 2 && isset( $this->menu_items_boxes_config[ $details[0] ]['menu_items'][ $details[1] ] ) ) {
-				$item_config = $this->menu_items_boxes_config[ $details[0] ]['menu_items'][ $details[1] ];
-			}
-
-			// Bail if we have no hidden_fields defined.
-			if ( empty( $item_config['hidden_fields'] ) ) {
-				return;
-			}
-
-			if ( is_string( $item_config['hidden_fields'] ) ) {
-				$item_config['hidden_fields'] = array( $item_config['hidden_fields'] );
-			}
-
-			// Add the '.field-' prefix to all provided field keys.
-			$css_selectors = array_map( function( $str ){ return '.field-' . $str; }, $item_config['hidden_fields'] );
-			// Now scope the classes to this specific menu item's settings.
-			$css_selectors = array_map( function( $str ) use ( $item_id ) { return '#menu-item-settings-' . $item_id . ' > ' . $str; }, $css_selectors );
-			// Finally output the CSS rule. ?>
-			<style>
-				<?php echo implode( ', ', $css_selectors ); ?> {
-					display:none;
-					visibility: hidden;
-				}
-			</style>
-			<?php
-
-		}
-
-		/**
 		 * @see wp_update_nav_menu_item()
 		 *
 		 * @param int   $menu_id         ID of the updated menu.

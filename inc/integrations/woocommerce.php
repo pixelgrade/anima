@@ -144,6 +144,9 @@ function rosa2_woocommerce_setup_hooks() {
 	add_filter( 'woocommerce_product_description_heading', '__return_false', 30 );
 	add_filter( 'woocommerce_product_additional_information_heading', '__return_false', 30 );
 
+    // Append cart to menu
+	add_filter( 'wp_nav_menu_items', 'rosa2_append_cart_icon_to_menu', 10, 2 );
+
     // Limit related posts number
 	add_filter( 'woocommerce_output_related_products_args', 'rosa2_limit_related_posts_count', 20 );
 
@@ -369,6 +372,32 @@ function rosa2_output_mini_cart() {
         </div>
 
 	<?php }
+}
+
+
+function rosa2_append_cart_icon_to_menu( $items, $args ) {
+
+    if ( empty( WC()->cart ) ) {
+        return $items;
+    }
+
+	$cart_item_count = WC()->cart->get_cart_contents_count();
+	if ( $cart_item_count ) {
+		$cart_count_span = '<div class="cart-count"><span>' . esc_html( $cart_item_count ) . '</span></div>';
+	} else {
+		/* translators: Zero items in cart.  */
+		$cart_count_span = '<div class="cart-count"><span>' . esc_html__( '0', '__theme_txtd' ) . '</span></div>';
+    }
+
+	$cart_link = '<li class="menu-item  menu-item--cart"><a class="js-open-cart" href="' . esc_url( get_permalink( wc_get_page_id( 'cart' ) ) ) . '">' . $cart_count_span . '</a></li>';
+
+
+	// Add the cart link to the end of the menu.
+	if ( ! empty( $args->theme_location ) && $args->theme_location === 'primary' ) {
+		$items = $items . $cart_link;
+	}
+
+	return $items;
 }
 
 if ( ! function_exists( 'woocommerce_display_categories' ) ) {

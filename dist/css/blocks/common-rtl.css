@@ -71,6 +71,9 @@
   .wp-block-buttons[class][class][class]:first-child {
     --block-top-spacing: 1;
     --element-spacing: calc( var(--block-top-spacing, 1) * var(--theme-spacing-fluid-small) * var(--novablocks-element-spacing-multiplier, 1) ); }
+  .wp-block-buttons[class][class][class][class*="align"] {
+    margin-right: 0;
+    margin-left: 0; }
   .wp-block-buttons[class][class][class] .wp-block,
   .wp-block-buttons[class][class][class] .wp-block-button {
     margin-top: 0 !important; }
@@ -99,6 +102,9 @@
       margin-left: 0; }
   .wp-block-buttons[class][class][class] .wp-block-button__link[class] {
     display: block; }
+  .wp-block-buttons[class][class][class] > .wp-block {
+    margin-right: 0;
+    margin-left: 0; }
 
 /* Columns Blocks */
 .wp-block-columns[class]:not(:first-child),
@@ -209,7 +215,7 @@
   .wp-block-embed.wp-has-aspect-ratio .wp-block-embed__wrapper:before {
     content: "";
     display: block; }
-  .wp-block-embed.wp-has-aspect-ratio .wp-block-embed__wrapper > iframe {
+  .wp-block-embed.wp-has-aspect-ratio .wp-block-embed__wrapper iframe {
     position: absolute;
     top: 0;
     left: 0;

@@ -44,6 +44,11 @@ $enable-button-block-styles:            true !default;
             --block-top-spacing: 1;
             @include element-spacing;
         }
+        
+        &[class*="align"] {
+            margin-left: 0;
+            margin-right: 0;
+        }
 
 
         .wp-block,
@@ -89,6 +94,11 @@ $enable-button-block-styles:            true !default;
 
         .wp-block-button__link[class] {
             display: block;
+        }
+        
+        > .wp-block {
+            margin-left: 0;
+            margin-right: 0;
         }
     }
 }

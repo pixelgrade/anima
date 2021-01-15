@@ -1,0 +1,30 @@
+.novablocks-sharing__overlay {
+    @include variation(dark);
+    @include apply-font(body);
+}
+
+.novablocks-sharing__link {
+
+    @include specific(1) {
+        padding: calc( var(--block-spacing) / 2) calc( var(--block-spacing) * 3 / 4);
+    }
+
+    .novablocks-sharing__group--copy-link & {
+        background-color: var(--sm-color-primary);
+    }
+}
+
+.novablocks-sharing__copy-input,
+.novablocks-sharing__list {
+
+    @include specific(1) {
+        border-radius: 0.25em;
+    }
+}
+
+.novablocks-sharing__copy-input {
+
+    @include specific(2) {
+        --theme-input-box-shadow: none;
+    }
+}

@@ -34,7 +34,7 @@ class Header {
 		this.promoBarHeight = 0;
 
 		this.$page = $( '#page .site-content' );
-		this.$hero = $( '.has-hero .novablocks-hero' ).first().find( '.novablocks-hero__foreground' );
+		this.$hero = $( '.has-no-spacing-top .novablocks-hero' ).first().find( '.novablocks-hero__foreground' );
 		this.$promoBar = $( '.novablocks-announcement-bar' );
 
 		this.createMobileHeader();
@@ -245,7 +245,7 @@ class Header {
 		this.$mobileHeader = $( '<div class="site-header--mobile">' );
 
 		$( '.c-branding' ).first().clone().appendTo( this.$mobileHeader );
-		this.$header.find( '.menu-item--cart' ).first().clone().appendTo( this.$mobileHeader );
+		$( '.menu-item--cart' ).first().clone().appendTo( this.$mobileHeader );
 
 		this.$mobileHeader.insertAfter( this.$toggle );
 		this.createdMobileHeader = true;
