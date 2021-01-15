@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // We will only add the menu item to the primary location menu since that is where Rosa2 previously outputted the cart menu item.
-if ( has_nav_menu( 'primary ' ) ) {
+if ( has_nav_menu( 'primary' ) ) {
 	$locations = get_nav_menu_locations();
 	$menu = wp_get_nav_menu_object( $locations[ 'primary' ] );
 
@@ -17,6 +17,8 @@ if ( has_nav_menu( 'primary ' ) ) {
 		'menu-item-attr-title' => esc_html__( 'Toggle visibility of cart panel', '__theme_txtd' ),
 		'menu-item-url'     => esc_url( get_permalink( wc_get_page_id( 'cart' ) ) ),
 		'menu-item-status'  => 'publish',
+		'menu-item-object'  => 'pxg-extras__cart',
+		'menu-item-object-id'  => 'cart',
 	] );
 
 	// Set the visual style to icon, the same as it was previously in Rosa 2.
