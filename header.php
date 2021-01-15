@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <body <?php body_class(); ?> id="body">
 <?php wp_body_open(); ?>
 
-<div id="page" class="site">
+<div id="page" class="site sm-variation-0">
     <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', '__theme_txtd' ); ?></a>
 
 	<?php do_action( 'rosa_before_header', 'main' ); ?>

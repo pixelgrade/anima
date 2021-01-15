@@ -1,7 +1,7 @@
 :root,
 .novablocks-block {
-  --sm-button-background-color: var(--current-dark-primary);
-  --sm-button-foreground-color: var(--current-light-primary); }
+  --sm-button-background-color: var(--sm-current-darker-color);
+  --sm-button-foreground-color: var(--sm-current-background-color); }
 
 /* Archives Block */
 .wp-block-archives-list {
@@ -97,18 +97,6 @@
 .block-is-highlighted + .block-is-highlighted[class] {
   padding-top: 0; }
 
-.novablocks-announcement-bar[class*="is-style"] {
-  --novablocks-announcement-color: var(--theme-light-primary); }
-
-.novablocks-announcement-bar:not([class*="is-style-"]), .novablocks-announcement-bar.is-style-accent {
-  --novablocks-announcement-background-color: var(--theme-color-primary); }
-
-.novablocks-announcement-bar.is-style-alternative {
-  --novablocks-announcement-background-color: var(--theme-color-secondary); }
-
-.novablocks-announcement-bar a:hover {
-  color: currentColor; }
-
 .novablocks-grid__column:first-child .novablocks-grid__area:first-child:last-child {
   top: calc( var(--novablocks-grid-spacing) * var(--novablocks-grid-spacing-modifier, 1) + var(--site-header-height, 0)); }
 
@@ -157,7 +145,7 @@
     border-width: .15em; }
 
 .item-title {
-  background-color: var(--current-light-primary); }
+  background-color: var(--sm-current-background-color); }
 
 .wp-block-novablocks-menu-food-item.is-style-rounded {
   --item-border-radius: 0.4em; }
@@ -210,7 +198,7 @@
   opacity: 0; }
 
 .novablocks-hero__inner-container .c-separator__symbol {
-  color: var(--current-color-primary); }
+  color: var(--sm-current-accent-color); }
 
 .novablocks-hero__inner-container > .wp-block-separator:not(:first-child),
 .novablocks-hero__inner-container > .wp-block-separator[class] + * {
@@ -223,19 +211,19 @@
   width: 160px;
   height: 50px;
   top: 100%;
-  color: var(--current-light-primary);
+  color: var(--sm-current-background-color);
   z-index: 1; }
   .novablocks-hero__indicator:not(.novablocks-hero__indicator--middle):after {
-    color: var(--current-dark-primary); }
+    color: var(--sm-current-darker-color); }
   .has-moderate-media-card-after-hero .novablocks-hero__indicator:not(.novablocks-hero__indicator--middle) {
-    color: var(--current-light-tertiary); }
+    color: var(--sm-current-background-color); }
 
 .novablocks-media.novablocks-media--no-thumbnail .novablocks-media__image {
   display: flex;
   align-items: center;
   justify-content: center; }
   .novablocks-media.novablocks-media--no-thumbnail .novablocks-media__image path {
-    fill: var(--current-color-primary); }
+    fill: var(--sm-current-accent-color); }
 
 .novablocks-media > .wp-block-group__inner-container {
   padding-top: 1px; }
@@ -294,7 +282,7 @@
     object-fit: contain; }
 
 .novablocks-media--blog[class] {
-  --novablocks-block-background-color: var(--current-light-tertiary); }
+  --novablocks-block-background-color: var(--sm-current-background-color); }
   .novablocks-media--blog[class] .novablocks-media__content {
     flex-basis: calc(50% - var(--novablocks-media-spacing)); }
   .novablocks-media--blog[class] .novablocks-media__aside {
@@ -361,11 +349,11 @@
       padding-right: 1.25em; } }
 
 .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button {
-  --theme-button-hover-background-color: var(--current-light-primary);
-  --theme-button-hover-text-color: var(--current-dark-primary);
-  --theme-button-background-color: var(--current-dark-primary);
-  --theme-button-border-color: var(--current-dark-primary);
-  --theme-button-text-color: var(--current-light-primary);
+  --theme-button-hover-background-color: var(--sm-current-background-color);
+  --theme-button-hover-text-color: var(--sm-current-darker-color);
+  --theme-button-background-color: var(--sm-current-darker-color);
+  --theme-button-border-color: var(--sm-current-darker-color);
+  --theme-button-text-color: var(--sm-current-background-color);
   padding: var(--theme-button-padding);
   border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
   border-radius: var(--theme-button-border-radius);
@@ -398,12 +386,12 @@
     color: var(--current-button-hover-text-color); }
 
 .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button {
-  --theme-button-hover-background-color: var(--current-dark-primary);
-  --theme-button-hover-text-color: var(--current-light-primary);
-  --theme-button-background-color: var(--current-light-primary);
-  --theme-button-border-color: var(--current-light-primary);
-  --theme-button-hover-border-color: var(--current-light-primary);
-  --theme-button-text-color: var(--current-dark-primary);
+  --theme-button-hover-background-color: var(--sm-current-darker-color);
+  --theme-button-hover-text-color: var(--sm-current-background-color);
+  --theme-button-background-color: var(--sm-current-background-color);
+  --theme-button-border-color: var(--sm-current-background-color);
+  --theme-button-hover-border-color: var(--sm-current-background-color);
+  --theme-button-text-color: var(--sm-current-darker-color);
   padding: var(--theme-button-padding);
   border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
   border-radius: var(--theme-button-border-radius);
@@ -451,9 +439,9 @@
   transition: var(--theme-transition);
   transition-property: opacity; }
   .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] {
-    border-color: var(--current-dark-secondary); }
+    border-color: var(--sm-current-dark-color); }
     .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link {
-      color: var(--current-dark-secondary); }
+      color: var(--sm-current-dark-color); }
       .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link:before {
         color: currentColor; }
       .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link:after {
@@ -527,7 +515,7 @@
   mask-size: cover;
   -webkit-mask: url("../../../assets/images/icon-arrow.svg") no-repeat 50% 50%;
   -webkit-mask-size: cover;
-  background-color: var(--current-light-primary); }
+  background-color: var(--sm-current-background-color); }
 
 .novablocks-slideshow__arrow--prev:before {
   transform: translate(-50%, -50%); }
@@ -543,7 +531,7 @@
   margin-top: 0;
   border: 0;
   border-radius: 50%;
-  background-color: var(--current-light-primary);
+  background-color: var(--sm-current-background-color);
   opacity: 0;
   transition: opacity 0.15s ease-in;
   transform: none; }

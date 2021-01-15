@@ -41,8 +41,8 @@
 
         @include apply-font(content);
 
-        background-color: var(--current-light-primary);
-        color: var(--current-dark-secondary);
+        background-color: var(--sm-current-background-color);
+        color: var(--sm-current-dark-color);
 
         p {
             font: inherit;
@@ -116,10 +116,10 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .editor-post-title__block .editor-post-title__input {
-    color: var(--current-dark-primary);
+    color: var(--sm-current-darker-color);
 
     &:focus {
-        color: var(--current-dark-primary);
+        color: var(--sm-current-darker-color);
     }
 }
 

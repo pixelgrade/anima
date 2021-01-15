@@ -141,10 +141,9 @@ function rosa2_register_scripts() {
 	wp_register_style( 'rosa2-gutenberg-legacy-frontend', get_template_directory_uri() . '/dist/css/gutenberg-legacy-frontend.css', array(), $theme->get( 'Version' ) );
 
 	// Nova Blocks Fallbacks
-    wp_register_style('rosa2-novablocks-header', get_template_directory_uri() . '/dist/css/blocks/nova-blocks/header.css', array(), '1.6.2');
-    wp_register_style('rosa2-novablocks-navigation', get_template_directory_uri() . '/dist/css/blocks/nova-blocks/navigation.css', array(), '1.6.2');
-    wp_register_style('rosa2-novablocks-media', get_template_directory_uri() . '/dist/css/blocks/nova-blocks/media.css', array(), '1.6.2');
-    wp_register_style('rosa2-novablocks-conversations', get_template_directory_uri() . '/dist/css/blocks/nova-blocks/conversations.css', array(), '1.8.0');
+    wp_register_style('novablocks/header', get_template_directory_uri() . '/fallbacks/nova-blocks/blocks/header/style.css', array(), '1.8.1');
+    wp_register_style('novablocks/navigation', get_template_directory_uri() . '/fallbacks/nova-blocks/blocks/navigation/style.css', array(), '1.8.1');
+    wp_register_style('novablocks/media', get_template_directory_uri() . '/fallbacks/nova-blocks/blocks/media/style.css', array(), '1.8.1');
 
 	wp_register_style( 'rosa2-blocks-common', get_template_directory_uri() . '/dist/css/blocks/common.css', array(), $theme->get( 'Version' ) );
 	wp_register_style( 'rosa2-blocks-editor', get_template_directory_uri() . '/dist/css/blocks/editor.css', array( 'rosa2-blocks-common' ), $theme->get( 'Version' ) );
@@ -177,7 +176,7 @@ function rosa2_enqueue_theme_block_editor_assets() {
 	wp_enqueue_script(
 		'rosa2-editor-js',
 		get_template_directory_uri() . '/dist/js/editor' . $suffix . '.js',
-		array( 'wp-blocks', 'wp-dom', 'wp-hooks' ),
+		array( 'wp-hooks' ),
 		$theme->get( 'Version' ),
 		true
 	);
@@ -200,7 +199,7 @@ function rosa2_scripts() {
 
 	foreach( $used_blocks as $block ) {
 		if ( ! rosa2_is_using_block( $block, true ) ) {
-			wp_enqueue_style('rosa2-novablocks-' . $block );
+			wp_enqueue_style('novablocks/' . $block );
 		}
 	}
 

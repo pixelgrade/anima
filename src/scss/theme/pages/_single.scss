@@ -1,11 +1,8 @@
-.single {
-
-    &.single-post {
-        background: var(--current-light-tertiary);
-    }
+body.single-post {
+    background-color: var(--sm-current-background-color);
 
     .site-content {
-        background: var(--current-light-primary);
+        background-color: var(--sm-current-background-color);
     }
 }
 
@@ -51,7 +48,7 @@
 
     .entry-header {
         --theme-content-width-normal: var(--theme-content-width-wide);
-        background-color: var(--current-light-tertiary);
+        background-color: var(--sm-current-background-color);
         @include space-children-y( var(--theme-spacing) );
     }
 
@@ -65,7 +62,7 @@
             left: 0;
             right: 0;
             height: 40%;
-            background-color: var(--current-light-tertiary);
+            background-color: var(--sm-current-background-color);
         }
 
         > * {
@@ -88,7 +85,7 @@
     }
 
     .entry-thumbnail__container {
-        background-color: var(--current-light-secondary);
+        background-color: var(--sm-current-background-color);
     }
 }
 

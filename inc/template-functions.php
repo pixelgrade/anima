@@ -56,6 +56,10 @@ function rosa2_body_classes( $classes ) {
 		$classes[] = 'is-dark-mode';
 	}
 
+	if ( is_singular( 'post') ) {
+		$classes[] = 'sm-variation-1';
+	}
+
 	return $classes;
 }
 add_filter( 'body_class', 'rosa2_body_classes' );

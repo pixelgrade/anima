@@ -1,7 +1,7 @@
 :root,
 .novablocks-block {
-  --sm-button-background-color: var(--current-dark-primary);
-  --sm-button-foreground-color: var(--current-light-primary); }
+  --sm-button-background-color: var(--sm-current-darker-color);
+  --sm-button-foreground-color: var(--sm-current-background-color); }
 
 .novablocks-block[class] {
   padding-top: calc( var(--emphasis-top-spacing, 1) * var(--novablocks-spacing) * var(--novablocks-element-spacing-multiplier, 1));
@@ -34,4 +34,4 @@
 @media only screen and (min-width: 768px) {
   .content-is-moderate {
     --novablocks-block-content-padding: var(--novablocks-spacing);
-    --novablocks-block-content-background-color: var(--current-light-primary); } }
+    --novablocks-block-content-background-color: var(--sm-current-background-color); } }

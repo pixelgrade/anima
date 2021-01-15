@@ -1,7 +1,7 @@
 :root,
 .novablocks-block {
-  --sm-button-background-color: var(--current-dark-primary);
-  --sm-button-foreground-color: var(--current-light-primary); }
+  --sm-button-background-color: var(--sm-current-darker-color);
+  --sm-button-foreground-color: var(--sm-current-background-color); }
 
 /* Layout */
 .wp-block:not([data-align="wide"]):not([data-align="full"]) {
@@ -41,8 +41,8 @@
     --current-line-height: var(--theme-content-line-height);
     --current-font-style: var(--theme-content-font-style);
     --current-letter-spacing: var(--theme-content-letter-spacing);
-    background-color: var(--current-light-primary);
-    color: var(--current-dark-secondary); }
+    background-color: var(--sm-current-background-color);
+    color: var(--sm-current-dark-color); }
     .editor-styles-wrapper[class] h1, .editor-styles-wrapper[class] h2, .editor-styles-wrapper[class] h3, .editor-styles-wrapper[class] h4, .editor-styles-wrapper[class] h5, .editor-styles-wrapper[class] h6 {
       margin-bottom: 0; }
     .editor-styles-wrapper[class] h1, .editor-styles-wrapper[class] .h1 {
@@ -302,9 +302,9 @@ h1, .editor-styles-wrapper[class] h2, .editor-styles-wrapper[class] h3, .editor-
     border-bottom: 1px dashed rgba(123, 134, 162, 0.3); }
 
 .editor-post-title__block .editor-post-title__input {
-  color: var(--current-dark-primary); }
+  color: var(--sm-current-darker-color); }
   .editor-post-title__block .editor-post-title__input:focus {
-    color: var(--current-dark-primary); }
+    color: var(--sm-current-darker-color); }
 
 /* Hide Text Settings Panel */
 .blocks-font-size {

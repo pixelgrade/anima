@@ -1,7 +1,7 @@
 :root,
 .novablocks-block {
-  --sm-button-background-color: var(--current-dark-primary);
-  --sm-button-foreground-color: var(--current-light-primary); }
+  --sm-button-background-color: var(--sm-current-darker-color);
+  --sm-button-foreground-color: var(--sm-current-background-color); }
 
 [class*="wp-block"] {
   clear: both; }
@@ -347,7 +347,7 @@
     width: 100%;
     max-height: 100%;
     overflow: auto;
-    color: var(--current-light-primary);
+    color: var(--sm-current-background-color);
     text-align: center;
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3) 70%, transparent); }
   .wp-block-gallery .blocks-gallery-caption {
@@ -374,10 +374,10 @@
 
 .wp-block-group {
   --wp-block-group-padding: var(--current-element-padding, var(--theme-spacing-fluid-large)); }
-  .wp-block-group[class*="is-style"]:not(.is-style-default) {
+  .wp-block-group[class*="is-style"]:not(.is-style-default), .wp-block-group[class*="sm-variation"]:not(.sm-variation-0) {
     padding-top: var(--wp-block-group-padding);
     padding-bottom: var(--wp-block-group-padding); }
-    .wp-block-group[class*="is-style"]:not(.is-style-default) + .wp-block-group[class*="is-style"]:not(.is-style-default) {
+    .wp-block-group[class*="is-style"]:not(.is-style-default) + .wp-block-group[class*="is-style"]:not(.is-style-default), .wp-block-group[class*="sm-variation"]:not(.sm-variation-0) + .wp-block-group[class*="is-style"]:not(.is-style-default), .wp-block-group[class*="is-style"]:not(.is-style-default) + .wp-block-group[class*="sm-variation"]:not(.sm-variation-0), .wp-block-group[class*="sm-variation"]:not(.sm-variation-0) + .wp-block-group[class*="sm-variation"]:not(.sm-variation-0) {
       --element-spacing: 0; }
 
 /* Latest Posts Block */
@@ -836,7 +836,7 @@ html:root {
   --novablocks-light-1: var(--theme-light-primary);
   --novablocks-light-2: var(--theme-light-secondary);
   --novablocks-light-3: var(--theme-light-tertiary);
-  --nova-food-menu-item-highlight-color: var(--current-dark-primary);
+  --nova-food-menu-item-highlight-color: var(--sm-current-darker-color);
   --novablocks-spacing: var(--theme-spacing-fluid-large);
   --novablocks-media-spacing: var(--novablocks-spacing);
   --novablocks-sides-spacings: var(--theme-wrapper-sides-spacing);
@@ -893,7 +893,7 @@ html:root {
   content: "";
   display: block;
   height: 0.1em;
-  background-color: var(--current-color-primary);
+  background-color: var(--sm-current-accent-color);
   margin-bottom: var(--theme-spacing);
   max-width: 5em; }
 

@@ -10,26 +10,6 @@
     padding-top: 0;
 }
 
-.novablocks-announcement-bar {
-
-    &[class*="is-style"] {
-        --novablocks-announcement-color: var(--theme-light-primary);
-    }
-
-    &:not([class*="is-style-"]),
-    &.is-style-accent {
-        --novablocks-announcement-background-color: var(--theme-color-primary);
-    }
-
-    &.is-style-alternative {
-        --novablocks-announcement-background-color: var(--theme-color-secondary);
-    }
-
-    a:hover {
-        color: currentColor;
-    }
-}
-
 .novablocks-grid__column:first-child .novablocks-grid__area:first-child:last-child {
     top: calc( var(--novablocks-grid-spacing) * var(--novablocks-grid-spacing-modifier, 1) + var(--site-header-height, 0) );
 }

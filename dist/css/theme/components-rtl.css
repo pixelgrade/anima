@@ -1,7 +1,7 @@
 :root,
 .novablocks-block {
-  --sm-button-background-color: var(--current-dark-primary);
-  --sm-button-foreground-color: var(--current-light-primary); }
+  --sm-button-background-color: var(--sm-current-darker-color);
+  --sm-button-foreground-color: var(--sm-current-background-color); }
 
 .wp-block-button__link {
   transition: var(--current-button-transition); }
@@ -122,8 +122,8 @@
     margin-left: calc( -1 * 1.15em);
     background: none !important;
     text-decoration: none;
-    --theme-button-text-color: var(--current-color-primary);
-    --theme-button-hover-text-color: var(--current-color-primary); }
+    --theme-button-text-color: var(--sm-current-accent-color);
+    --theme-button-hover-text-color: var(--sm-current-accent-color); }
     .wp-block-button.is-style-text .wp-block-button__link:before {
       content: '';
       position: absolute;

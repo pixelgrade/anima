@@ -14,13 +14,13 @@
     &--scrolled,
     body:not(.has-no-spacing-top) & {
        @include above(lap) {
-           --theme-button-text-color: var(--current-light-primary);
-           --theme-button-background-color: var(--current-dark-primary);
-           --theme-button-border-color: var(--current-dark-primary);
+           --theme-button-text-color: var(--sm-current-background-color);
+           --theme-button-background-color: var(--sm-current-darker-color);
+           --theme-button-border-color: var(--sm-current-darker-color);
 
-           --theme-button-hover-text-color: var(--current-dark-primary);
+           --theme-button-hover-text-color: var(--sm-current-darker-color);
            --theme-button-hover-background-color: transparent;
-           --theme-button-hover-border-color: var(--current-dark-primary);
+           --theme-button-hover-border-color: var(--sm-current-darker-color);
        }
     }
 
@@ -119,7 +119,7 @@
 
                     width: 100%;
                     height: 100%;
-                    background-color: var(--current-light-secondary);
+                    background-color: var(--sm-current-background-color);
 
                     opacity: 0;
                 }
@@ -147,8 +147,8 @@
             width: 15.625em;
             padding: .75em 0;
 
-            background-color: var(--current-light-primary);
-            color: var(--current-dark-primary);
+            background-color: var(--sm-current-background-color);
+            color: var(--sm-current-darker-color);
 
             border-radius: 0.1875em;
             box-shadow: 0 0.25em 2em rgba(0, 0, 0, 0.1), 0 0.125em 0.25em rgba(0, 0, 0, 0.1);

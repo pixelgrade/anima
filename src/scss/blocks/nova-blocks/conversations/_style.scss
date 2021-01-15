@@ -9,17 +9,17 @@
 .novablocks-conversations {
   --avatar-column-size: 2.8rem;
   --comments-grid-gap: 1.4rem;
-  --component-accent-color: var(--current-color-primary);
+  --component-accent-color: var(--sm-current-accent-color);
   --novablocks-conversations-width: 48em;
-  --field-description-color: var(--current-dark-primary);
-  --conversations-bg-color: var(--current-light-primary);
-  --conversations-reply-bg-color: var(--current-light-tertiary);
+  --field-description-color: var(--sm-current-darker-color);
+  --conversations-bg-color: var(--sm-current-background-color);
+  --conversations-reply-bg-color: var(--sm-current-background-color);
   --comment-author-color: var(--component-accent-color);
   --comment-links-color: var(--component-accent-color);
   --comment-highlighted-color: #FFF2CE;
   --comment-font-size: calc(var(--theme-body-final-font-size) * 1.05);
   --label-font-size: var(--final-font-size);
-  --label-bg-color: var(--current-dark-primary);
+  --label-bg-color: var(--sm-current-darker-color);
   --label-highlighted-bg-color: var(--theme-dark-primary);
   --label-border-radius: 999em;
   --comment-footer-font-size: var(--final-font-size);
@@ -126,7 +126,7 @@
         }
 
         > .comment-wrapper {
-          color: var(--current-dark-primary);
+          color: var(--sm-current-darker-color);
         }
       }
 
@@ -143,11 +143,11 @@
   }
 
   .comment-dropdown-menu {
-    background-color: var(--current-light-primary);
-    color: var(--current-dark-primary);
+    background-color: var(--sm-current-background-color);
+    color: var(--sm-current-darker-color);
 
     &:after {
-      border-color: transparent transparent var(--current-light-primary);
+      border-color: transparent transparent var(--sm-current-background-color);
     }
     
     @include above(tablet) {
@@ -217,7 +217,7 @@
     }
   
     .page-numbers .page-numbers:not(.current) {
-        border-color: var(--current-dark-primary);
+        border-color: var(--sm-current-darker-color);
       
         &:hover {
           border-color: var(--component-accent-color);
@@ -298,8 +298,8 @@
 }
 
 .novablocks-conversations__notification-text[class] span {
-  background-color: var(--current-dark-primary);
-  color: var(--current-light-primary);
+  background-color: var(--sm-current-darker-color);
+  color: var(--sm-current-background-color);
 }
 
 .novablocks-conversation__starter {

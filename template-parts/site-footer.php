@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<footer id="colophon" class="site-footer  site-footer--fallback">
+<footer id="colophon" class="site-footer  site-footer--fallback  sm-variation-10">
 	<div class="site-footer__inner-container">
 		<?php
 		rosa2_footer_the_copyright();

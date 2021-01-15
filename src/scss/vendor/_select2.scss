@@ -27,7 +27,7 @@
       -webkit-mask: url($arrow-down-svg-path) no-repeat 50% 50%;
       -webkit-mask-size: contain;
 
-      background-color: var(--current-dark-primary);
+      background-color: var(--sm-current-darker-color);
       width: .58em;
       height: .58em;
       right: var(--theme-input-padding);
@@ -62,8 +62,8 @@
   }
 
   .select2-results__option--highlighted[aria-selected] {
-    background-color: var(--current-color-primary);
-    color: var(--current-light-primary);
+    background-color: var(--sm-current-accent-color);
+    color: var(--sm-current-background-color);
   }
 
   .select2-results__option[data-selected=true]:not([aria-selected="true"]) {
@@ -105,14 +105,14 @@
     .select2-selection {
 
       &__choice {
-        background-color: var(--current-color-primary);
-        color: var(--current-light-primary);
+        background-color: var(--sm-current-accent-color);
+        color: var(--sm-current-background-color);
         border: none;
         border-radius: var(--theme-input-border-radius);
         font-size: .75em;
 
         &__remove {
-          color: var(--current-light-primary);
+          color: var(--sm-current-background-color);
           margin-right: var(--theme-spacing-tiny);
 
           &:hover {
@@ -151,10 +151,10 @@
 
 .select2-dropdown {
   box-shadow: var(--theme-input-box-shadow);
-  background-color: var(--current-light-primary);
+  background-color: var(--sm-current-background-color);
 
   .select2-search__field {
-    background-color: var(--current-light-primary);
+    background-color: var(--sm-current-background-color);
   }
 
   &:after {
