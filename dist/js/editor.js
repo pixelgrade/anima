@@ -101,15 +101,12 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _blocks_button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
 /* harmony import */ var _blocks_button__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_blocks_button__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _blocks_group__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
-/* harmony import */ var _blocks_group__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_blocks_group__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _blocks_menu_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(12);
-/* harmony import */ var _blocks_menu_item__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_blocks_menu_item__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _blocks_paragraph__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(13);
-/* harmony import */ var _blocks_paragraph__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_blocks_paragraph__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _blocks_separator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(14);
-/* harmony import */ var _blocks_separator__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_blocks_separator__WEBPACK_IMPORTED_MODULE_4__);
-
+/* harmony import */ var _blocks_menu_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
+/* harmony import */ var _blocks_menu_item__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_blocks_menu_item__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _blocks_paragraph__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(12);
+/* harmony import */ var _blocks_paragraph__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_blocks_paragraph__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _blocks_separator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(13);
+/* harmony import */ var _blocks_separator__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_blocks_separator__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
@@ -142,73 +139,6 @@ wp.domReady(function () {
 /* 11 */
 /***/ (function(module, exports) {
 
-var _wp$blockEditor = wp.blockEditor,
-    InnerBlocks = _wp$blockEditor.InnerBlocks,
-    getColorClassName = _wp$blockEditor.getColorClassName;
-var deprecatedStyles = {
-  'is-style-accent': '6',
-  'is-style-dark': '9',
-  'is-style-darker': '10'
-};
-
-function addDeprecatedGroup(settings, name) {
-  if (name !== 'core/group') {
-    return settings;
-  }
-
-  var newSettings = Object.assign({}, settings, {
-    attributes: Object.assign({}, settings.attributes, {
-      paletteVariation: {
-        type: "string"
-      }
-    }),
-    deprecated: [{
-      attributes: settings.attributes,
-      migrate: function migrate(attributes, innerBlocks) {
-        var classAttr = attributes.className;
-        var classes = classAttr.split(/\b\s+/);
-        var paletteVariation = '0';
-        var newClasses = classes.filter(function (className) {
-          var isDeprecated = typeof deprecatedStyles[className] !== "undefined";
-
-          if (isDeprecated) {
-            paletteVariation = deprecatedStyles[className];
-            return false;
-          }
-
-          return true;
-        });
-        newClasses.push("sm-variation-".concat(paletteVariation));
-        return [Object.assign({}, attributes, {
-          paletteVariation: paletteVariation,
-          className: newClasses.join(" ")
-        }), innerBlocks];
-      },
-      isEligible: function isEligible(attributes, innerBlocks) {
-        var classAttr = attributes.className;
-
-        if (typeof classAttr !== "string") {
-          return false;
-        }
-
-        var classes = classAttr.split(/\b\s+/);
-        return classes.some(function (className) {
-          return Object.keys(deprecatedStyles).includes(className);
-        });
-      },
-      save: settings.save
-    }].concat(settings.deprecated)
-  });
-  console.log(newSettings);
-  return newSettings;
-}
-
-wp.hooks.addFilter('blocks.registerBlockType', 'nova-blocks/deprecate-group', addDeprecatedGroup);
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports) {
-
 wp.domReady(function () {
   wp.blocks.registerBlockStyle('novablocks/menu-food-item', {
     name: 'rounded',
@@ -217,7 +147,7 @@ wp.domReady(function () {
 });
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports) {
 
 wp.domReady(function () {
@@ -228,7 +158,7 @@ wp.domReady(function () {
 });
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports) {
 
 wp.domReady(function () {
