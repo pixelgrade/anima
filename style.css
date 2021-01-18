@@ -2020,9 +2020,9 @@ table {
         top: 50%;
         background-color: currentColor;
         mask: url("./assets/images/icon-dark-mode.svg") no-repeat 50% 50%;
-        mask-size: cover;
+        mask-size: contain;
         -webkit-mask: url("./assets/images/icon-dark-mode.svg") no-repeat 50% 50%;
-        -webkit-mask-size: cover;
+        -webkit-mask-size: contain;
         transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1); }
       .is-color-scheme-switcher-button:not(.no-icon) a:before {
         width: calc(100% - var(--switcher-icon-width)) !important; }
