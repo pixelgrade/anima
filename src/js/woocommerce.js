@@ -44,27 +44,39 @@
 		var $body = $( document.body ).not( '.woocommerce-cart' );
 		var $cartMenuItems = $( '.site-header__menu .menu > .menu-item--cart' );
 
-		$cartMenuItems.each( function( i, obj ) {
-			var $cartMenuItem = $( obj );
-			var $cartMenuItemLink = $cartMenuItem.children( 'a' );
-			var cartMenuItemText = $cartMenuItemLink.text();
-			var $cartMenuItemCount = $( '<span class="menu-item__icon">0</span>' );
+		initializeCartMenuItems( $cartMenuItems );
 
-			$cartMenuItemLink.html( `<span class="menu-item__label">${ cartMenuItemText } </span>` );
-			$cartMenuItemCount.appendTo( $cartMenuItemLink );
+		if ( typeof wp.customize !== "undefined" && typeof wp.customize.selectiveRefresh !== "undefined" ) {
+			wp.customize.selectiveRefresh.bind( 'partial-content-rendered', function( placement ) {
+				const $container = $( placement.container ).filter( '.site-header__menu .menu' );
+				const $items = $container.children( '.menu-item--cart' );
+				initializeCartMenuItems( $items );
+			} );
+		}
 
-			var fragmentKey = 'div.widget_shopping_cart_content';
-			var $fragment = $( fragmentKey );
+		function initializeCartMenuItems( $cartMenuItems ) {
+			$cartMenuItems.each( function( i, obj ) {
+				var $cartMenuItem = $( obj );
+				var $cartMenuItemLink = $cartMenuItem.children( 'a' );
+				var cartMenuItemText = $cartMenuItemLink.text();
+				var $cartMenuItemCount = $( '<span class="menu-item__icon">0</span>' );
 
-			if ( $fragment.length ) {
-				var fragments = {};
-				fragments[fragmentKey] = $fragment.html();
-				var itemCount = getCartMenuItemCount( fragments );
-				updateCardMenuItems( $cartMenuItems, itemCount );
-			}
-		} );
+				$cartMenuItemLink.html( `<span class="menu-item__label">${ cartMenuItemText } </span>` );
+				$cartMenuItemCount.appendTo( $cartMenuItemLink );
 
-		$cartMenuItems.on( 'click', openMiniCart );
+				var fragmentKey = 'div.widget_shopping_cart_content';
+				var $fragment = $( fragmentKey );
+
+				if ( $fragment.length ) {
+					var fragments = {};
+					fragments[fragmentKey] = $fragment.html();
+					var itemCount = getCartMenuItemCount( fragments );
+					updateCardMenuItems( $cartMenuItems, itemCount );
+				}
+			} );
+
+			$cartMenuItems.on( 'click', openMiniCart );
+		}
 
 		// show mini cart when a product is added to cart
 		function onAddedToCart( event, fragments, cart_hash, $button ) {

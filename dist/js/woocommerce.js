@@ -129,24 +129,37 @@
   $(function () {
     var $body = $(document.body).not('.woocommerce-cart');
     var $cartMenuItems = $('.site-header__menu .menu > .menu-item--cart');
-    $cartMenuItems.each(function (i, obj) {
-      var $cartMenuItem = $(obj);
-      var $cartMenuItemLink = $cartMenuItem.children('a');
-      var cartMenuItemText = $cartMenuItemLink.text();
-      var $cartMenuItemCount = $('<span class="menu-item__icon">0</span>');
-      $cartMenuItemLink.html("<span class=\"menu-item__label\">".concat(cartMenuItemText, " </span>"));
-      $cartMenuItemCount.appendTo($cartMenuItemLink);
-      var fragmentKey = 'div.widget_shopping_cart_content';
-      var $fragment = $(fragmentKey);
+    initializeCartMenuItems($cartMenuItems);
 
-      if ($fragment.length) {
-        var fragments = {};
-        fragments[fragmentKey] = $fragment.html();
-        var itemCount = getCartMenuItemCount(fragments);
-        updateCardMenuItems($cartMenuItems, itemCount);
-      }
-    });
-    $cartMenuItems.on('click', openMiniCart); // show mini cart when a product is added to cart
+    if (typeof wp.customize !== "undefined" && typeof wp.customize.selectiveRefresh !== "undefined") {
+      wp.customize.selectiveRefresh.bind('partial-content-rendered', function (placement) {
+        var $container = $(placement.container).filter('.site-header__menu .menu');
+        var $items = $container.children('.menu-item--cart');
+        initializeCartMenuItems($items);
+      });
+    }
+
+    function initializeCartMenuItems($cartMenuItems) {
+      $cartMenuItems.each(function (i, obj) {
+        var $cartMenuItem = $(obj);
+        var $cartMenuItemLink = $cartMenuItem.children('a');
+        var cartMenuItemText = $cartMenuItemLink.text();
+        var $cartMenuItemCount = $('<span class="menu-item__icon">0</span>');
+        $cartMenuItemLink.html("<span class=\"menu-item__label\">".concat(cartMenuItemText, " </span>"));
+        $cartMenuItemCount.appendTo($cartMenuItemLink);
+        var fragmentKey = 'div.widget_shopping_cart_content';
+        var $fragment = $(fragmentKey);
+
+        if ($fragment.length) {
+          var fragments = {};
+          fragments[fragmentKey] = $fragment.html();
+          var itemCount = getCartMenuItemCount(fragments);
+          updateCardMenuItems($cartMenuItems, itemCount);
+        }
+      });
+      $cartMenuItems.on('click', openMiniCart);
+    } // show mini cart when a product is added to cart
+
 
     function onAddedToCart(event, fragments, cart_hash, $button) {
       var key = 'div.widget_shopping_cart_content';
