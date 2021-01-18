@@ -233,8 +233,7 @@
     $body.on('added_to_cart removed_from_cart', function (event, fragments, cart_hash, $button) {
       var itemCount = getCartMenuItemCount(fragments);
       updateCardMenuItems($cartMenuItems, itemCount);
-    });
-    $('.js-open-cart').on('click', openMiniCart); // in order to avoid template overwrites add the class used to style buttons programatically
+    }); // in order to avoid template overwrites add the class used to style buttons programatically
 
     $body.on('wc_cart_button_updated', function (event, $button) {
       $button.siblings('.added_to_cart').addClass('button');

@@ -205,12 +205,12 @@ msgstr ""
 msgid "Read more <span class=\"screen-reader-text\">about \"%s\"</span>"
 msgstr ""
 
-#: inc/template-tags.php:477, inc/integrations/woocommerce.php:448
+#: inc/template-tags.php:477, inc/integrations/woocommerce.php:419
 msgctxt "previous set of posts"
 msgid "Previous"
 msgstr ""
 
-#: inc/template-tags.php:478, inc/integrations/woocommerce.php:449
+#: inc/template-tags.php:478, inc/integrations/woocommerce.php:420
 msgctxt "next set of posts"
 msgid "Next"
 msgstr ""
@@ -304,7 +304,7 @@ msgstr ""
 msgid "Extras"
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:35, inc/admin/class-admin-nav-menus.php:64, inc/integrations/woocommerce.php:577
+#: inc/admin/class-admin-nav-menus.php:35, inc/admin/class-admin-nav-menus.php:64, inc/admin/class-admin-nav-menus.php:96, inc/integrations/woocommerce.php:548
 msgid "Custom"
 msgstr ""
 
@@ -316,23 +316,23 @@ msgstr ""
 msgid "Search for something you seek"
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:47, inc/admin/class-admin-nav-menus.php:76, inc/integrations/woocommerce.php:589
+#: inc/admin/class-admin-nav-menus.php:47, inc/admin/class-admin-nav-menus.php:76, inc/admin/class-admin-nav-menus.php:106, inc/integrations/woocommerce.php:560
 msgid "Visual Style"
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:48, inc/admin/class-admin-nav-menus.php:77, inc/integrations/woocommerce.php:590
+#: inc/admin/class-admin-nav-menus.php:48, inc/admin/class-admin-nav-menus.php:77, inc/admin/class-admin-nav-menus.php:107, inc/integrations/woocommerce.php:561
 msgid "Choose a visual style suitable to your goals and audience."
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:51, inc/admin/class-admin-nav-menus.php:80, inc/integrations/woocommerce.php:593
+#: inc/admin/class-admin-nav-menus.php:51, inc/admin/class-admin-nav-menus.php:80, inc/admin/class-admin-nav-menus.php:110, inc/integrations/woocommerce.php:564
 msgid "Label"
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:52, inc/admin/class-admin-nav-menus.php:81, inc/integrations/woocommerce.php:594
+#: inc/admin/class-admin-nav-menus.php:52, inc/admin/class-admin-nav-menus.php:81, inc/admin/class-admin-nav-menus.php:111, inc/integrations/woocommerce.php:565
 msgid "Icon"
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:53, inc/admin/class-admin-nav-menus.php:82, inc/integrations/woocommerce.php:595
+#: inc/admin/class-admin-nav-menus.php:53, inc/admin/class-admin-nav-menus.php:82, inc/admin/class-admin-nav-menus.php:112, inc/integrations/woocommerce.php:566
 msgid "Label with icon"
 msgstr ""
 
@@ -348,20 +348,28 @@ msgstr ""
 msgid "Switch between dark and light color mode"
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:388
+#: inc/admin/class-admin-nav-menus.php:97, inc/admin/class-admin-nav-menus.php:98, inc/integrations/woocommerce.php:330, inc/integrations/woocommerce.php:550, inc/upgrade/migrations/1.8.0-insert-cart-link-in-primary-menu.php:15
+msgid "Cart"
+msgstr ""
+
+#: inc/admin/class-admin-nav-menus.php:100, inc/integrations/woocommerce.php:554, inc/upgrade/migrations/1.8.0-insert-cart-link-in-primary-menu.php:17
+msgid "Toggle visibility of cart panel"
+msgstr ""
+
+#: inc/admin/class-admin-nav-menus.php:416
 msgid "Add to Menu"
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:747
+#: inc/admin/class-admin-nav-menus.php:775
 msgctxt "label"
 msgid "Search for:"
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:748
+#: inc/admin/class-admin-nav-menus.php:776
 msgid "Search %s..."
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:751
+#: inc/admin/class-admin-nav-menus.php:779
 msgctxt "submit button"
 msgid "Search"
 msgstr ""
@@ -446,54 +454,41 @@ msgstr ""
 msgid "Added!"
 msgstr ""
 
-#: inc/integrations/woocommerce.php:234
+#: inc/integrations/woocommerce.php:231
 msgid "Sale!"
 msgstr ""
 
-#: inc/integrations/woocommerce.php:333, inc/integrations/woocommerce.php:579, inc/upgrade/migrations/1.8.0-insert-cart-link-in-primary-menu.php:15
-msgid "Cart"
-msgstr ""
-
-#: inc/integrations/woocommerce.php:335
+#: inc/integrations/woocommerce.php:332
 msgid "Checkout"
 msgstr ""
 
-#: inc/integrations/woocommerce.php:367
+#: inc/integrations/woocommerce.php:364
 msgid "Your cart"
 msgstr ""
 
-#. translators: Zero items in cart.
-#: inc/integrations/woocommerce.php:389
-msgid "0"
-msgstr ""
-
-#: inc/integrations/woocommerce.php:422
+#: inc/integrations/woocommerce.php:393
 msgid "All Products"
 msgstr ""
 
-#: inc/integrations/woocommerce.php:460, woocommerce/checkout/form-coupon.php:32
+#: inc/integrations/woocommerce.php:431, woocommerce/checkout/form-coupon.php:32
 msgid "Coupon code"
 msgstr ""
 
-#: inc/integrations/woocommerce.php:517
+#: inc/integrations/woocommerce.php:488
 msgctxt "breadcrumb"
 msgid "Shop"
 msgstr ""
 
-#: inc/integrations/woocommerce.php:531
+#: inc/integrations/woocommerce.php:502
 msgid "Quantity"
 msgstr ""
 
-#: inc/integrations/woocommerce.php:545
+#: inc/integrations/woocommerce.php:516
 msgid "Stock"
 msgstr ""
 
-#: inc/integrations/woocommerce.php:581
+#: inc/integrations/woocommerce.php:552
 msgid "WooCommerce Cart"
-msgstr ""
-
-#: inc/integrations/woocommerce.php:583, inc/upgrade/migrations/1.8.0-insert-cart-link-in-primary-menu.php:17
-msgid "Toggle visibility of cart panel"
 msgstr ""
 
 #. translators: %s: plugin name.
