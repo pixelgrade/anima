@@ -115,9 +115,6 @@
 					$quantity.children().remove();
 					count += parseInt( $quantity.text(), 10 );
 				});
-
-				// actually update the cart items count
-				$( '.menu-item--cart .cart-count span' ).text( products );
 			}
 
 			return count;
