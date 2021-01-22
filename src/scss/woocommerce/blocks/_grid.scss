@@ -4,6 +4,10 @@
         --column-gap: var(--theme-spacing-small);
         --row-gap: var(--theme-spacing-small);
         clear: both;
+        
+        @include below(tablet) {
+            overflow-x: hidden;
+        }
 
         &.has-aligned-buttons {
             .wc-block-grid__product {
