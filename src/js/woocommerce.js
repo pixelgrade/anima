@@ -42,6 +42,41 @@
 	$(function(){
 
 		var $body = $( document.body ).not( '.woocommerce-cart' );
+		var $cartMenuItems = $( '.site-header__menu .menu > .menu-item--cart' );
+
+		initializeCartMenuItems( $cartMenuItems );
+
+		if ( typeof wp.customize !== "undefined" && typeof wp.customize.selectiveRefresh !== "undefined" ) {
+			wp.customize.selectiveRefresh.bind( 'partial-content-rendered', function( placement ) {
+				const $container = $( placement.container ).filter( '.site-header__menu .menu' );
+				const $items = $container.children( '.menu-item--cart' );
+				initializeCartMenuItems( $items );
+			} );
+		}
+
+		function initializeCartMenuItems( $cartMenuItems ) {
+			$cartMenuItems.each( function( i, obj ) {
+				var $cartMenuItem = $( obj );
+				var $cartMenuItemLink = $cartMenuItem.children( 'a' );
+				var cartMenuItemText = $cartMenuItemLink.text();
+				var $cartMenuItemCount = $( '<span class="menu-item__icon">0</span>' );
+
+				$cartMenuItemLink.html( `<span class="menu-item__label">${ cartMenuItemText } </span>` );
+				$cartMenuItemCount.appendTo( $cartMenuItemLink );
+
+				var fragmentKey = 'div.widget_shopping_cart_content';
+				var $fragment = $( fragmentKey );
+
+				if ( $fragment.length ) {
+					var fragments = {};
+					fragments[fragmentKey] = $fragment.html();
+					var itemCount = getCartMenuItemCount( fragments );
+					updateCardMenuItems( $cartMenuItems, itemCount );
+				}
+			} );
+
+			$cartMenuItems.on( 'click', openMiniCart );
+		}
 
 		// show mini cart when a product is added to cart
 		function onAddedToCart( event, fragments, cart_hash, $button ) {
@@ -78,25 +113,23 @@
 		}
 
 		// update cart items count in cart menu item
-		function updateCartMenuItemCount( event, fragments, cart_hash, $button ) {
+		function getCartMenuItemCount( fragments ) {
+
 			var key = 'div.widget_shopping_cart_content';
+			var count = 0;
 
 			if ( key in fragments ) {
-				// initialize cart items sum count with 0
-				var products = 0;
-
 				// loop through every item in cart and sum up the quantity
 				$( fragments[key] ).find( '.mini_cart_item' ).each( function(i, obj) {
 					var $quantity = $( obj ).find( '.quantity' );
 
 					// remove the price html tag to be able to parse number of items for that product
 					$quantity.children().remove();
-					products += parseInt( $quantity.text(), 10 );
+					count += parseInt( $quantity.text(), 10 );
 				});
-
-				// actually update the cart items count
-				$( '.menu-item--cart .cart-count span' ).text( products );
 			}
+
+			return count;
 		}
 
 		// show mini cart when Cart menu item is clicked
@@ -126,12 +159,22 @@
 			});
 		}
 
-		$( '.c-mini-cart__overlay, .c-mini-cart__close').on( 'click', closeMiniCart);
+		$( '.c-mini-cart__overlay, .c-mini-cart__close' ).on( 'click', closeMiniCart );
+
+		function updateCardMenuItems( $cartMenuItems, count ) {
+			$cartMenuItems.each( function( i, obj ) {
+				var $cartMenuItem = $( obj );
+				var $cartMenuItemCount = $cartMenuItem.find( '.menu-item__icon' );
+
+				$cartMenuItemCount.text( count );
+			} );
+		}
 
 		$body.on( 'added_to_cart', onAddedToCart );
-		$body.on( 'added_to_cart removed_from_cart', updateCartMenuItemCount );
-
-		$( '.js-open-cart' ).on( 'click', openMiniCart );
+		$body.on( 'added_to_cart removed_from_cart', function ( event, fragments, cart_hash, $button ) {
+			var itemCount = getCartMenuItemCount( fragments );
+			updateCardMenuItems( $cartMenuItems, itemCount );
+		} );
 
 		// in order to avoid template overwrites add the class used to style buttons programatically
 		$body.on( 'wc_cart_button_updated', function( event, $button ) {
@@ -152,15 +195,15 @@
 			$button.text( pixelgradeWooCommerceStrings.adding_to_cart );
 		} );
 
-		$('.c-product-main .cart').on('change', '.qty', function() {
-			$(this.form).find('.ajax_add_to_cart[data-quantity]').attr('data-quantity', this.value);
-		});
+		$( '.c-product-main .cart' ).on( 'change', '.qty', function() {
+			$( this.form ).find( '.ajax_add_to_cart[data-quantity]' ).attr( 'data-quantity', this.value );
+		} );
 
-		$('.js-coupon-value-source').on('change', function(){
-			$('.js-coupon-value-destination').val($(this).val());
-		});
+		$( '.js-coupon-value-source' ).on( 'change', function() {
+			$( '.js-coupon-value-destination' ).val( $( this ).val() );
+		} );
 
-		$('body').on('click', '.plus, .minus', updateProductQuantity);
+		$( 'body' ).on( 'click', '.plus, .minus', updateProductQuantity );
 
 		function updateProductQuantity(e) {
 

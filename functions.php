@@ -416,13 +416,21 @@ add_filter( 'wupdates_gather_ids', 'wupdates_add_id_JxLn7', 10, 1 );
 /**
  * Custom template tags for this theme.
  */
-require get_template_directory() . '/inc/template-tags.php';
+require_once trailingslashit( get_template_directory() ) . 'inc/template-tags.php';
 
 /**
  * Functions which enhance the theme by hooking into WordPress.
  */
-require get_template_directory() . '/inc/template-functions.php';
-require get_template_directory() . '/inc/extras.php';
-require get_template_directory() . '/inc/required-plugins.php';
+require_once trailingslashit( get_template_directory() ) . 'inc/template-functions.php';
+require_once trailingslashit( get_template_directory() ) . 'inc/extras.php';
+require_once trailingslashit( get_template_directory() ) . 'inc/required-plugins.php';
 
-require get_template_directory() . '/inc/integrations.php';
+/**
+ * Admin Dashboard logic.
+ */
+require_once trailingslashit( get_template_directory() ) . 'inc/admin/admin.php'; // phpcs:ignore
+
+/**
+ * Various integrations with plugins to keep things smooth and easy.
+ */
+require_once trailingslashit( get_template_directory() ) . '/inc/integrations.php';

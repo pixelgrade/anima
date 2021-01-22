@@ -1465,7 +1465,7 @@ function () {
 
       this.$mobileHeader = external_jQuery_default()('<div class="site-header--mobile">');
       external_jQuery_default()('.c-branding').first().clone().appendTo(this.$mobileHeader);
-      external_jQuery_default()('.menu-item--cart').first().clone().appendTo(this.$mobileHeader);
+      this.$header.find('.menu-item--cart').first().clone().appendTo(this.$mobileHeader);
       this.$mobileHeader.insertAfter(this.$toggle);
       this.createdMobileHeader = true;
     }
