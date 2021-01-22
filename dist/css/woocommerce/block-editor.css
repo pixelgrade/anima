@@ -236,11 +236,14 @@
   left: var(--theme-spacing-tiny);
   z-index: 10;
   margin: 0;
-  padding: var(--theme-spacing-micro) var(--theme-spacing);
-  border: 0;
-  border-radius: 0;
-  background-color: var(--current-color-primary);
-  color: var(--theme-light-primary);
+  background-color: var(--sm-color-primary);
+  background-image: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1));
+  color: var(--sm-light-primary);
+  font-size: 0.5em;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: 1em;
+  padding: .25em .9em;
   font: inherit;
   text-transform: inherit;
   text-align: center; }

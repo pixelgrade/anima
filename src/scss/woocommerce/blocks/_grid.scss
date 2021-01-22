@@ -95,12 +95,7 @@
         z-index: 10;
 
         margin: 0;
-        padding: var(--theme-spacing-micro) var(--theme-spacing);
-        border: 0;
-        border-radius: 0;
-
-        background-color: var(--current-color-primary);
-        color: var(--theme-light-primary);
+        @include badge;
 
         font: inherit;
         text-transform: inherit;

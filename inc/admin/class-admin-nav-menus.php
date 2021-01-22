@@ -107,12 +107,31 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 			// Set up previewing the custom fields in the Customizer.
 			add_action( 'customize_register', array( $this, 'customizer_preview_custom_fields' ), 1000 );
 
+			/*
+			 * HANDLE CUSTOM FIELDS FOR ALL MENU ITEMS, NOT JUST OUR CUSTOM BOXES.
+			 */
+			// Add Badge Custom Field in Menus Section
+			add_action( 'wp_nav_menu_item_custom_fields', array($this, 'add_badge_custom_field'), 5, 2 );
+			// Save Badge Custom Field Meta Data
+			add_action( 'wp_update_nav_menu_item', array($this, 'save_badge_menu_item_meta'), 10, 2 );
+
+			add_filter( 'wp_setup_nav_menu_item', array( $this, 'setup_nav_menu_item_badge' ), 10, 1 );
+
+			// Add Badge Custom Field in Customizer
+			add_action( 'wp_nav_menu_item_custom_fields_customize_template', array(
+				$this,
+				'add_customize_badge_custom_field_template',
+			), 5 );
+
 			/* ===============
 			 * Frontend effects
 			 */
 			add_action( 'rosa2_after_footer', array( $this, 'output_search_overlay' ), 10 );
 			add_filter( 'get_search_form', array( $this, 'custom_search_form' ), 10, 1 );
 			add_filter( 'language_attributes', array( $this, 'add_color_scheme_attribute' ), 10, 2 );
+
+			// Handle Menu Item Badge Frontend Output
+			add_filter( 'nav_menu_item_title', array($this, 'output_badge_menu_item'), 10, 2 );
 		}
 
 		public function add_custom_menu_items_boxes() {
@@ -395,7 +414,6 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 
 		public function admin_scripts_styles( $hook_suffix ) {
 			if( 'nav-menus.php' === $hook_suffix ) {
-//				wp_enqueue_script( 'rosa2-admin-nav-menus-scripts', get_template_directory_uri() . '/dist/js/admin/edit-nav-menus.js', array( 'jquery' ), '1.0.0', true );
 				wp_enqueue_style( 'rosa2-admin-nav-menus-styles', get_template_directory_uri() . '/dist/css/admin/edit-nav-menus.css', array( 'nav-menus' ), '1.0.0' );
 			}
 		}
@@ -564,6 +582,11 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 			if ( null !== $visual_style ) {
 				update_post_meta( $setting->post_id, '_menu_item_visual_style', $visual_style );
 			}
+
+			$badge = $this->get_sanitized_badge_post_data( $setting );
+			if ( null !== $badge ) {
+				update_post_meta( $setting->post_id, '_menu_item_badge', $badge );
+			}
 		}
 
 		/**
@@ -573,7 +596,7 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 		 *
 		 * @return array|string|null Visual Style value or null if no posted value present.
 		 */
-		protected function get_sanitized_visual_style_post_data( $setting ) {
+		protected function get_sanitized_visual_style_post_data( WP_Customize_Nav_Menu_Item_Setting $setting ) {
 			if ( ! $setting->post_value() ) {
 				return null;
 			}
@@ -597,6 +620,26 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 		}
 
 		/**
+		 * Get sanitized posted value for a setting's badge.
+		 *
+		 * @param WP_Customize_Nav_Menu_Item_Setting $setting Setting.
+		 *
+		 * @return array|string|null Badge value or null if no posted value present.
+		 */
+		protected function get_sanitized_badge_post_data( $setting ) {
+			if ( ! $setting->post_value() ) {
+				return null;
+			}
+
+			$unsanitized_post_value = $setting->manager->unsanitized_post_values()[ $setting->id ];
+			if ( isset( $unsanitized_post_value['badge'] ) ) {
+				return wp_kses( $unsanitized_post_value['badge'], wp_kses_allowed_html() );
+			}
+
+			return '';
+		}
+
+		/**
 		 * Preview changes to the nav menu item roles.
 		 *
 		 * Note the unimplemented to-do in the doc block for the setting's preview method.
@@ -607,16 +650,25 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 		 */
 		public function preview_nav_menu_setting_postmeta( $setting ) {
 			$visual_style = $this->get_sanitized_visual_style_post_data( $setting );
-			if ( null === $visual_style ) {
+			$badge = $this->get_sanitized_badge_post_data( $setting );
+			if ( null === $visual_style && null === $badge ) {
+				// No need to continue since we have nothing to preview.
 				return;
 			}
 
 			add_filter(
 				'get_post_metadata',
-				static function ( $value, $object_id, $meta_key ) use ( $setting, $visual_style ) {
-					if ( absint( $object_id ) === absint( $setting->post_id ) && '_menu_item_visual_style' === $meta_key ) {
-						return $visual_style;
+				static function ( $value, $object_id, $meta_key ) use ( $setting, $visual_style, $badge ) {
+					if ( absint( $object_id ) === absint( $setting->post_id ) ) {
+						if ( '_menu_item_visual_style' === $meta_key ) {
+							return $visual_style;
+						}
+
+						if ( '_menu_item_badge' === $meta_key ) {
+							return $badge;
+						}
 					}
+
 					return $value;
 				},
 				10,
@@ -738,6 +790,125 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 			}
 
 			return false;
+		}
+
+		/**
+		 * Add custom fields to menu item
+		 *
+		 * This will allow us to play nicely with any other plugin that is adding the same hook
+		 *
+		 * @param  int $item_id
+		 * @param WP_Post  $item    Menu item data object.
+		 */
+		public function add_badge_custom_field( $item_id, $item ) {
+			// The name of the custom menu meta.
+			$name = 'badge';
+
+			// Gather up the HTML details of the custom field.
+			$field_id = 'edit-menu-item-' . $name . '-' . $item_id;
+			$field_name = 'menu-item-' . $name . '[' . $item_id . ']';
+			$field_classes = array( 'widefat', 'edit-menu-item-' . $name, );
+			$field_classes = implode( ' ', $field_classes );
+			$field_label = __( 'Badge', '__theme_txtd' );
+			$field_placeholder = __( 'e.g. New, Popular, Free, Sales', '__theme_txtd' );
+			$field_description = __( 'A badge is <strong>a short text indicator</strong> used to inform visitors that something\'s special about this menu item.', '__theme_txtd' );
+
+			$field_value = '';
+			if ( isset( $item->$name ) ) {
+				$field_value = $item->$name;
+			} ?>
+
+            <p class="field-<?php echo $name ?> description description-wide">
+                <label for="<?php echo $field_id ?>">
+					<?php echo esc_html( $field_label ); ?><br />
+                    <input type="text" id="<?php echo esc_attr( $field_id ); ?>" name="<?php echo esc_attr( $field_name ); ?>" class="<?php echo esc_attr( $field_classes ); ?>" value="<?php echo esc_attr( $field_value ); ?>" placeholder="<?php echo esc_attr( $field_placeholder ); ?>" />
+	                <span class="description"><?php echo wp_kses( $field_description, wp_kses_allowed_html() ); ?></span>
+                </label>
+            </p>
+
+			<?php
+		}
+
+		/**
+		 * Save the menu item badge meta
+		 *
+		 * @see wp_update_nav_menu_item()
+		 *
+		 * @param int $menu_id
+		 * @param int $menu_item_db_id
+		 */
+		public function save_badge_menu_item_meta( $menu_id, $menu_item_db_id ) {
+			// The name of the custom menu meta.
+			$name = 'badge';
+
+			$new_value = '';
+			if ( isset( $_POST["menu-item-$name"][ $menu_item_db_id ] ) ) {
+				$new_value = sanitize_text_field( wp_kses( $_POST["menu-item-$name"][ $menu_item_db_id ], wp_kses_allowed_html() ) );
+			}
+
+			// Finally update the menu item post meta.
+			update_post_meta( $menu_item_db_id, "_menu_item_$name", $new_value );
+		}
+
+		/**
+		 * @param object $menu_item The menu item object.
+		 *
+		 * @return object
+		 */
+		public function setup_nav_menu_item_badge( $menu_item ) {
+			// The name of the custom menu meta.
+			$name = 'badge';
+
+			$menu_item->$name = get_post_meta( $menu_item->db_id, "_menu_item_$name", true );
+
+			return $menu_item;
+		}
+
+		public function add_customize_badge_custom_field_template() {
+			// The name of the custom menu meta.
+			$name = 'badge';
+
+			// Gather up the HTML details of the custom field.
+			$field_id = 'edit-menu-item-' . $name . '-{{ data.menu_item_id }}';
+			$field_name = 'menu-item-' . $name;
+			$field_classes = array( 'widefat', 'edit-menu-item-' . $name, );
+			if ( ! empty( $config['classes'] ) && is_array( $config['classes'] ) ) {
+				$field_classes = array_unique( array_merge( $field_classes, $config['classes'] ) );
+			}
+			$field_classes = implode( ' ', $field_classes );
+
+			$field_label = __( 'Badge', '__theme_txtd' );
+			$field_placeholder = __( 'e.g. New, Popular, Free, Sales', '__theme_txtd' );
+			$field_description = __( 'A badge is <strong>a short text indicator</strong> used to inform visitors that something\'s special about this menu item.', '__theme_txtd' );
+			?>
+
+            <p class="field-<?php echo $name ?> description description-thin">
+	            <label for="<?php echo $field_id; ?>">
+					<?php echo esc_html( $field_label ); ?><br />
+                    <input type="text" id="<?php echo esc_attr( $field_id ); ?>" name="<?php echo esc_attr( $field_name ); ?>" class="<?php echo esc_attr( $field_classes ); ?>" value="{{ data.<?php echo $name; ?> }}" placeholder="<?php echo esc_attr( $field_placeholder ); ?>" />
+		            <span class="description"><?php echo wp_kses( $field_description, wp_kses_allowed_html() ); ?></span>
+	            </label>
+            </p>
+
+			<?php
+		}
+
+		/**
+		 * Appends the menu item badge to the menu item title (frontend).
+		 *
+		 * @param string   $title The menu item's title.
+		 * @param WP_Post  $item  The current menu item.
+		 * @return string
+		 */
+		public function output_badge_menu_item( $title, $item ) {
+			if ( is_object( $item ) && ! empty( $item->badge ) ) {
+				if ( empty( $title ) ) {
+					$title = '';
+				}
+				$title .= '<span class="menu-item-label">' . $item->badge . '</span>';
+			}
+
+			return $title;
 		}
 	}
 
