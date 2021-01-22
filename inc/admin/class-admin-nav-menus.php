@@ -88,8 +88,6 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 				),
 			);
 
-//			$cart_item_count = WC()->cart->get_cart_contents_count();
-
 			if ( function_exists( 'WC' ) && pixelgrade_user_has_access( 'woocommerce' ) ) {
 				$this->menu_items_boxes_config['pxg-extras']['menu_items']['cart'] = array(
 					'type'        => 'custom-pxg',
