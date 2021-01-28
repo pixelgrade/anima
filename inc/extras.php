@@ -424,3 +424,58 @@ if ( ! function_exists( 'rosa2_add_primary_menu_item_description' ) ) {
 }
 
 add_filter( 'walker_nav_menu_start_el', 'rosa2_add_primary_menu_item_description', 10, 4 );
+
+if ( ! function_exists( 'rosa2_should_add_sticky_markup' ) ) {
+
+	/**
+	 * Helper function used to check that the sticky attribute on Header Block Rows.
+	 *
+	 * @return bool
+	 */
+
+	function rosa2_should_add_sticky_markup() {
+
+	    // Get Header Block Area.
+		$block_area_header = get_posts( array(
+			'name'        => 'header',
+			'post_type'   => 'block_area',
+			'post_status' => 'publish',
+			'numberposts' => 1,
+			'fields'      => 'ids',
+		) );
+
+		// Header Block Area ID.
+		$block_area_id = $block_area_header[0];
+
+		// Header Block Area Post.
+		$post          = get_post( $block_area_id );
+
+		// Check if we have any blocks inside.
+		if ( ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
+
+		    // Get all blocks inside Block Area;
+			$blocks = parse_blocks( $post->post_content );
+
+			foreach ( $blocks as $block ) {
+
+			    // Make sure we are on Nova Blocks Header block
+                // and it has innerBlocks.
+				if ( $block['blockName'] === 'novablocks/header' && ! empty( $block['innerBlocks'] ) ) {
+
+					$innerBlocks = $block['innerBlocks'];
+
+					foreach ( $innerBlocks as $innerBlock ) {
+
+					    // If we find shouldBeSticky attribute
+                        // and it true, we should add the sticky markup.
+						if ( $innerBlock['attrs']['shouldBeSticky'] === true ) {
+							return true;
+						}
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+}

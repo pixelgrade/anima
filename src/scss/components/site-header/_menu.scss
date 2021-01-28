@@ -1,4 +1,5 @@
-.site-header {
+.site-header,
+.site-header-sticky {
 
     // Load default settings for buttons
     --theme-button-padding: .25em 1em;
@@ -219,20 +220,22 @@
         }
 
         .site-header__menu {
-
-            > ul.menu,
-            > .menu > ul {
-
-                > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) {
-                    @include header-menu-item-with-hover-animation;
-                }
-
-                > li[class*="current"]:not(.menu-item-home) {
-                    @include specific(3) {
-                        @include header-menu-item-with-active-state;
-                        
-                        > a {
-                            color: var(--current-color-primary);
+            
+            > nav {
+                > ul.menu,
+                > .menu > ul {
+        
+                    > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) {
+                        @include header-menu-item-with-hover-animation;
+                    }
+        
+                    > li[class*="current"]:not(.menu-item-home) {
+                        @include specific(3) {
+                            @include header-menu-item-with-active-state;
+                
+                            > a {
+                                color: var(--current-color-primary);
+                            }
                         }
                     }
                 }

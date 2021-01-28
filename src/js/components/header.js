@@ -27,6 +27,12 @@ class Header {
 		this.inversed = false;
 		this.abovePromoBar = false;
 		this.wasSticky = $( 'body' ).is( '.has-site-header-fixed' );
+		this.stickyRow = $('.site-header .site-header-row--sticky');
+		this.stickyHeader = $('.js-site-header-sticky');
+		this.primaryHeaderRow = $('.site-header--primary-row');
+		this.primaryRowIsSticky = this.primaryHeaderRow.hasClass('site-header-row--sticky');
+		this.isSticky = false;
+		this.stickyHeaderShown = false;
 
 		this.offset = 0;
 		this.scrollOffset = 0;
@@ -54,6 +60,7 @@ class Header {
 		this.$header.addClass( 'site-header--fixed site-header--ready' );
 		this.$mobileHeader.addClass( 'site-header--fixed site-header--ready' );
 		this.initToggleClick();
+		this.moveStickyRow();
 
 		this.timeline.play();
 	}
@@ -318,6 +325,41 @@ class Header {
 		} );
 	}
 
+	moveStickyRow() {
+
+		// Check if we have the mark-up for sticky header,
+		// and if user has applied sticky on a row.
+		if ( this.stickyHeader.length || this.stickyRow.length ) {
+			this.stickyRow.clone().appendTo(this.stickyHeader);
+		}
+
+		// Check if primary row is not sticky,
+		// and if is not, append the primary row to the sticky header,
+		// so we can show it on hover.
+		if ( ! this.primaryRowIsSticky ) {
+			this.primaryHeaderRow.clone().appendTo(this.stickyHeader);
+		}
+	}
+
+	updateHeaderStateOnScroll() {
+		const { scrollY } = GlobalService.getProps();
+
+		// If we don't have a sticky row, do nothing.
+		if(! this.stickyRow.length) {
+			return;
+		}
+
+		this.stickyRowOffset = this.stickyRow.offset().top;
+		this.isSticky = scrollY >  this.stickyRowOffset;
+
+		// Make header sticky,
+		// if the it hasn't been yet.
+		if (this.isSticky !== this.stickyHeaderShown) {
+			this.stickyHeader.toggleClass('site-header-sticky--is-visible');
+			this.stickyHeaderShown = this.isSticky;
+		}
+	}
+
 	hasMobileNav() {
 		return below( 'lap' );
 	}
@@ -330,6 +372,7 @@ class Header {
 		this.updateMobileNavigationOffset();
 		this.updateMobileHeaderState();
 		this.updateDesktopHeaderState(false);
+		this.updateHeaderStateOnScroll();
 	}
 }
 

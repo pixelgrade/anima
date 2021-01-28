@@ -1214,6 +1214,12 @@ function () {
     this.inversed = false;
     this.abovePromoBar = false;
     this.wasSticky = external_jQuery_default()('body').is('.has-site-header-fixed');
+    this.stickyRow = external_jQuery_default()('.site-header .site-header-row--sticky');
+    this.stickyHeader = external_jQuery_default()('.js-site-header-sticky');
+    this.primaryHeaderRow = external_jQuery_default()('.site-header--primary-row');
+    this.primaryRowIsSticky = this.primaryHeaderRow.hasClass('site-header-row--sticky');
+    this.isSticky = false;
+    this.stickyHeaderShown = false;
     this.offset = 0;
     this.scrollOffset = 0;
     this.mobileHeaderHeight = 0;
@@ -1236,6 +1242,7 @@ function () {
       this.$header.addClass('site-header--fixed site-header--ready');
       this.$mobileHeader.addClass('site-header--fixed site-header--ready');
       this.initToggleClick();
+      this.moveStickyRow();
       this.timeline.play();
     }
   }, {
@@ -1529,6 +1536,42 @@ function () {
       });
     }
   }, {
+    key: "moveStickyRow",
+    value: function moveStickyRow() {
+      // Check if we have the mark-up for sticky header,
+      // and if user has applied sticky on a row.
+      if (this.stickyHeader.length || this.stickyRow.length) {
+        this.stickyRow.clone().appendTo(this.stickyHeader);
+      } // Check if primary row is not sticky,
+      // and if is not, append the primary row to the sticky header,
+      // so we can show it on hover.
+
+
+      if (!this.primaryRowIsSticky) {
+        this.primaryHeaderRow.clone().appendTo(this.stickyHeader);
+      }
+    }
+  }, {
+    key: "updateHeaderStateOnScroll",
+    value: function updateHeaderStateOnScroll() {
+      var _GlobalService$getPro6 = globalService.getProps(),
+          scrollY = _GlobalService$getPro6.scrollY; // If we don't have a sticky row, do nothing.
+
+
+      if (!this.stickyRow.length) {
+        return;
+      }
+
+      this.stickyRowOffset = this.stickyRow.offset().top;
+      this.isSticky = scrollY > this.stickyRowOffset; // Make header sticky,
+      // if the it hasn't been yet.
+
+      if (this.isSticky !== this.stickyHeaderShown) {
+        this.stickyHeader.toggleClass('site-header-sticky--is-visible');
+        this.stickyHeaderShown = this.isSticky;
+      }
+    }
+  }, {
     key: "hasMobileNav",
     value: function hasMobileNav() {
       return below('lap');
@@ -1541,6 +1584,7 @@ function () {
       this.updateMobileNavigationOffset();
       this.updateMobileHeaderState();
       this.updateDesktopHeaderState(false);
+      this.updateHeaderStateOnScroll();
     }
   }]);
 

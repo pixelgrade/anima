@@ -549,3 +549,23 @@ if ( ! function_exists( 'rosa2_get_the_post_navigation' ) ) {
 		return apply_filters( 'rosa2_get_the_post_navigation', $navigation, $args );
 	}
 }
+
+if ( ! function_exists('rosa2_add_sticky_header_markup') ) {
+
+	/**
+	 * Generate mark-up for the Sticky Header
+	 */
+
+	function rosa2_add_sticky_header_markup() {
+
+		if ( ! rosa2_should_add_sticky_markup() ) {
+			return;
+		} ?>
+
+        <div class="site-header-sticky js-site-header-sticky"></div>
+
+		<?php
+	}
+}
+
+add_action('rosa_before_header', 'rosa2_add_sticky_header_markup');
