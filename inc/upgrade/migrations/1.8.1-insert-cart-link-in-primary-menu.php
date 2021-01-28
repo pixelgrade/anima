@@ -9,7 +9,23 @@ if ( has_nav_menu( 'primary' ) && function_exists( 'WC' ) && pixelgrade_user_has
 	$locations = get_nav_menu_locations();
 	$menu = wp_get_nav_menu_object( $locations[ 'primary' ] );
 
-	// Add a menu item at the end.
+	if ( empty( $menu ) ) {
+		return;
+	}
+
+	// Search through the menu items and check if there is already an item for the WooCommerce cart; stop if there is.
+	$menu_existing_items = wp_get_nav_menu_items( $menu );
+	foreach ( $menu_existing_items as $menu_item ) {
+		if ( ! empty( $menu_item->object ) && 'pxg-extras__cart' === $menu_item->object ) {
+			return;
+		}
+
+		if ( ! empty( $menu_item->title ) && 'cart' === strtolower( $menu_item->title ) ) {
+			return;
+		}
+	}
+
+	// If we've reached this point, add a menu cart item at the end.
 	$menu_item_db_id = wp_update_nav_menu_item( $menu->term_id, 0, [
 		'menu-item-type'        => 'custom-pxg',
 		'menu-item-title'   => esc_html__( 'Cart', '__theme_txtd' ),
