@@ -47,6 +47,10 @@ $site-header-transition-speed: .3s !default;
 
     .has-site-header-transparent {
 
+        .site-header {
+            background: none;
+        }
+
         .site-header__wrapper {
             @include header-background;
         }
@@ -90,9 +94,9 @@ body.has-site-header-transparent  {
     @include above(lap) {
 
         &.has-no-spacing-top {
+
             &.has-site-header-fixed .site-header:not(.site-header--scrolled) .site-header__wrapper,
             &:not(.has-site-header-fixed) .site-header .site-header__wrapper {
-                color: var(--sm-color-0);
 
                 .c-logo__inverted {
                     opacity: 1;

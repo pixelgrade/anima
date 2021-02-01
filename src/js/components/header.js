@@ -39,8 +39,16 @@ class Header {
 
 		this.createMobileHeader();
 
+		let $firstBlock = $( '.entry-content' ).children().first();
+		let $novaBlock = $firstBlock.find( '.novablocks-block' );
+		let $blockColors = $novaBlock.length ? $novaBlock : $firstBlock;
+
+		this.initialColorClasses = this.getColorSetClasses( this.$header ).join( ' ' );
+		this.transparentColorClasses = this.getColorSetClasses( $blockColors ).join( ' ' );
+
 		this.onResize();
 		this.render();
+
 		GlobalService.registerOnResize( this.onResize.bind( this ) );
 
 		this.initialize();
@@ -118,19 +126,43 @@ class Header {
 		}
 	}
 
+	removeScrolledClassNames() {
+		this.$header
+		    .removeClass( `site-header--scrolled ${ this.initialColorClasses }` )
+			.addClass( this.transparentColorClasses );
+
+	}
+
+	addScrolledClassNames() {
+		this.$header
+		    .removeClass( this.transparentColorClasses )
+		    .addClass( `site-header--scrolled ${ this.initialColorClasses }` );
+	}
+
+	getColorSetClasses( $element ) {
+		const classAttr = $element.attr( 'class' );
+		const classes = classAttr.split( /\b\s+/ );
+		return classes.filter( classname => {
+			return classname.search( 'sm-palette-' ) !== -1 || classname.search( 'sm-variation-' ) !== -1 || classname === 'sm-palette--shifted';
+		} );
+	}
+
 	onResize() {
 		const $header = $( this.element );
 		const wasScrolled = $header.hasClass( 'site-header--scrolled' );
 
 		setAndResetElementStyles( $header, { transition: 'none' } );
 		setAndResetElementStyles( this.$searchOverlay, { transition: 'none' } );
-		$header.removeClass( 'site-header--scrolled' );
+
+		this.removeScrolledClassNames();
 
 		this.getProps();
 		this.setVisibleHeaderHeight();
 		this.shouldMakeHeaderStatic();
 
-		$header.toggleClass( 'site-header--scrolled', wasScrolled );
+		if ( wasScrolled ) {
+			this.addScrolledClassNames();
+		}
 
 		this.initHeaderButtons();
 
@@ -194,7 +226,7 @@ class Header {
 	}
 
 	updatePageOffset() {
-		TweenMax.set( this.$page, { css: { marginTop: this.visibleHeaderHeight + this.offset } } );
+//		TweenMax.set( this.$page, { css: { marginTop: this.visibleHeaderHeight + this.offset } } );
 	}
 
 	updateMobileNavigationOffset() {
@@ -226,7 +258,11 @@ class Header {
 		}
 
 		if ( scrolled !== this.scrolled ) {
-			this.$header.toggleClass( 'site-header--scrolled', scrolled );
+			if ( scrolled ) {
+				this.addScrolledClassNames();
+			} else {
+				this.removeScrolledClassNames();
+			}
 			this.scrolled = scrolled;
 		}
 	}

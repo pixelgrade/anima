@@ -11,19 +11,6 @@
     --theme-button-hover-background-color: transparent;
     --theme-button-hover-border-color: var(--sm-light-primary);
 
-    &--scrolled,
-    body:not(.has-no-spacing-top) & {
-       @include above(lap) {
-           --theme-button-text-color: var(--sm-current-background-color);
-           --theme-button-background-color: var(--sm-current-darker-color);
-           --theme-button-border-color: var(--sm-current-darker-color);
-
-           --theme-button-hover-text-color: var(--sm-current-darker-color);
-           --theme-button-hover-background-color: transparent;
-           --theme-button-hover-border-color: var(--sm-current-darker-color);
-       }
-    }
-
     .menu-item-has-children,
     .page_item_has_children {
 

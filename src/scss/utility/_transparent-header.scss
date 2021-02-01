@@ -1,66 +1,8 @@
 .has-no-spacing-top {
   @include remove-page-spacing-top;
-}
 
-.has-no-spacing-top {
-
-  @include below(lap) {
-    &[class*='first-block-is-media'] {
-
-      &.first-block-is-media--moderate {
-        .site-header--mobile,
-        .c-menu-toggle {
-          --novablocks-block-content-text-color: var(--sm-current-darker-color);
-        }
-        
-      }
-
-      &.first-block-is-media--highlighted  {
-        
-        .site-header--mobile,
-        .c-menu-toggle {
-          --novablocks-block-content-text-color: var(--sm-light-primary);
-  
-        }
-        
-        &.site-header-mobile--scrolled {
-          .site-header--mobile,
-          .c-menu-toggle {
-            --novablocks-block-content-text-color: var(--sm-current-darker-color);
-          }
-        }
-      }
-
-      .c-menu-toggle,
-      .site-header--mobile {
-        color: var(--novablocks-block-content-text-color);
-      }
-    }
-  }
-
-  @include above(lap) {
-
-    &.has-site-header-transparent[class] {
-
-      &[class*='first-block-is-media'] {
-
-        &.first-block-is-media--moderate .site-header {
-          --novablocks-block-content-text-color: var(--sm-current-darker-color);
-        }
-
-        &.first-block-is-media--highlighted .site-header {
-          // We want to keep to color to be always light
-          --novablocks-block-content-text-color: var(--sm-light-primary);
-        }
-
-        .site-header:not(.site-header--scrolled) .site-header__wrapper {
-          color: var(--novablocks-block-content-text-color);
-        }
-      }
-    }
-  }
-  
   .novablocks-hero:first-child {
+
     &:after {
       content: '';
       position: absolute;

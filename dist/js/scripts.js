@@ -1221,6 +1221,11 @@ function () {
     this.$hero = external_jQuery_default()('.has-no-spacing-top .novablocks-hero').first().find('.novablocks-hero__foreground');
     this.$promoBar = external_jQuery_default()('.novablocks-announcement-bar');
     this.createMobileHeader();
+    var $firstBlock = external_jQuery_default()('.entry-content').children().first();
+    var $novaBlock = $firstBlock.find('.novablocks-block');
+    var $blockColors = $novaBlock.length ? $novaBlock : $firstBlock;
+    this.initialColorClasses = this.getColorSetClasses(this.$header).join(' ');
+    this.transparentColorClasses = this.getColorSetClasses($blockColors).join(' ');
     this.onResize();
     this.render();
     globalService.registerOnResize(this.onResize.bind(this));
@@ -1312,6 +1317,25 @@ function () {
       }
     }
   }, {
+    key: "removeScrolledClassNames",
+    value: function removeScrolledClassNames() {
+      this.$header.removeClass("site-header--scrolled ".concat(this.initialColorClasses)).addClass(this.transparentColorClasses);
+    }
+  }, {
+    key: "addScrolledClassNames",
+    value: function addScrolledClassNames() {
+      this.$header.removeClass(this.transparentColorClasses).addClass("site-header--scrolled ".concat(this.initialColorClasses));
+    }
+  }, {
+    key: "getColorSetClasses",
+    value: function getColorSetClasses($element) {
+      var classAttr = $element.attr('class');
+      var classes = classAttr.split(/\b\s+/);
+      return classes.filter(function (classname) {
+        return classname.search('sm-palette-') !== -1 || classname.search('sm-variation-') !== -1 || classname === 'sm-palette--shifted';
+      });
+    }
+  }, {
     key: "onResize",
     value: function onResize() {
       var $header = external_jQuery_default()(this.element);
@@ -1322,11 +1346,15 @@ function () {
       setAndResetElementStyles(this.$searchOverlay, {
         transition: 'none'
       });
-      $header.removeClass('site-header--scrolled');
+      this.removeScrolledClassNames();
       this.getProps();
       this.setVisibleHeaderHeight();
       this.shouldMakeHeaderStatic();
-      $header.toggleClass('site-header--scrolled', wasScrolled);
+
+      if (wasScrolled) {
+        this.addScrolledClassNames();
+      }
+
       this.initHeaderButtons();
 
       if (!this.hasMobileNav()) {
@@ -1402,12 +1430,7 @@ function () {
     }
   }, {
     key: "updatePageOffset",
-    value: function updatePageOffset() {
-      TweenMax.set(this.$page, {
-        css: {
-          marginTop: this.visibleHeaderHeight + this.offset
-        }
-      });
+    value: function updatePageOffset() {//		TweenMax.set( this.$page, { css: { marginTop: this.visibleHeaderHeight + this.offset } } );
     }
   }, {
     key: "updateMobileNavigationOffset",
@@ -1446,7 +1469,12 @@ function () {
       }
 
       if (scrolled !== this.scrolled) {
-        this.$header.toggleClass('site-header--scrolled', scrolled);
+        if (scrolled) {
+          this.addScrolledClassNames();
+        } else {
+          this.removeScrolledClassNames();
+        }
+
         this.scrolled = scrolled;
       }
     }

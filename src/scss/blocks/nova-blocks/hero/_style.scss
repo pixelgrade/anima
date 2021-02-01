@@ -1,6 +1,7 @@
 .novablocks-hero {
 
     .novablocks-u-content-padding {
+
         @include below(tablet) {
             padding-top: var(--theme-spacing-xxl);
             padding-bottom: var(--theme-spacing-xxl);
@@ -15,6 +16,7 @@
 .novablocks-hero__inner-container {
 
     > .c-headline {
+
         .c-headline__primary,
         .c-headline__secondary {
             opacity: 0;
@@ -22,6 +24,7 @@
     }
 
     > .c-headline + .c-headline {
+
         .c-headline__primary,
         .c-headline__secondary {
             opacity: 1;
