@@ -6,7 +6,8 @@ const defaults = {
 	offsetTargetElement: null,
 };
 
-const NAVIGATION_OPEN_CLASS = 'navigation-is-open'
+const NAVIGATION_OPEN_CLASS = 'navigation-is-open';
+const STICKY_HEADER_IS_VISIBLE = '.site-header-sticky--is-visible';
 
 class Header {
 
@@ -27,10 +28,16 @@ class Header {
 		this.inversed = false;
 		this.abovePromoBar = false;
 		this.wasSticky = $( 'body' ).is( '.has-site-header-fixed' );
-		this.stickyRow = $('.site-header .site-header-row--sticky');
+		this.stickyRowSelector = this.element.getAttribute("class").match(/[\w-]*is-sticky[\w-]*/g);
+
+		if( this.stickyRowSelector !== null ) {
+			this.stickyRowClass = '.' + this.stickyRowSelector.toString().replace('-is-sticky', '');
+		}
+
+		this.stickyRow = $( this.stickyRowClass );
 		this.stickyHeader = $('.js-site-header-sticky');
-		this.primaryHeaderRow = $('.site-header--primary-row');
-		this.primaryRowIsSticky = this.primaryHeaderRow.hasClass('site-header-row--sticky');
+		this.primaryHeaderRow = $('.site-header__row--primary');
+		this.primaryRowIsSticky = this.stickyRowClass === '.site-header__row--primary';
 		this.isSticky = false;
 		this.stickyHeaderShown = false;
 
@@ -71,6 +78,7 @@ class Header {
 		this.updateMobileHeaderOffset();
 		this.updateHeaderButtonsHeight();
 		this.updateSearchOverlayOffset();
+		this.animateStickyLogo();
 	}
 
 	getInroTimeline() {
@@ -327,7 +335,11 @@ class Header {
 
 	moveStickyRow() {
 
-		// Check if we have the mark-up for sticky header,
+		if (! this.stickyHeader.length ) {
+			return;
+		}
+
+		// Check if we have the markup for sticky header,
 		// and if user has applied sticky on a row.
 		if ( this.stickyHeader.length || this.stickyRow.length ) {
 			this.stickyRow.clone().appendTo(this.stickyHeader);
@@ -360,6 +372,21 @@ class Header {
 		}
 	}
 
+	animateStickyLogo() {
+		this.stickyLogo = this.stickyHeader.find('.c-logo__default img');
+
+		let headerResized = false;
+
+		if( this.stickyHeader.is(STICKY_HEADER_IS_VISIBLE) && ! headerResized) {
+			TweenMax.to(this.stickyLogo, 0.4, { height: 50 });
+			headerResized = true;
+		}
+
+		if ( ! this.stickyHeader.is(STICKY_HEADER_IS_VISIBLE) ) {
+			this.stickyLogo.removeAttr("style")
+		}
+	}
+
 	hasMobileNav() {
 		return below( 'lap' );
 	}
@@ -373,6 +400,7 @@ class Header {
 		this.updateMobileHeaderState();
 		this.updateDesktopHeaderState(false);
 		this.updateHeaderStateOnScroll();
+		this.animateStickyLogo();
 	}
 }
 

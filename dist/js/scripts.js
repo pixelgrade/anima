@@ -1194,6 +1194,7 @@ var defaults = {
   offsetTargetElement: null
 };
 var NAVIGATION_OPEN_CLASS = 'navigation-is-open';
+var STICKY_HEADER_IS_VISIBLE = '.site-header-sticky--is-visible';
 
 var header_Header =
 /*#__PURE__*/
@@ -1214,10 +1215,16 @@ function () {
     this.inversed = false;
     this.abovePromoBar = false;
     this.wasSticky = external_jQuery_default()('body').is('.has-site-header-fixed');
-    this.stickyRow = external_jQuery_default()('.site-header .site-header-row--sticky');
+    this.stickyRowSelector = this.element.getAttribute("class").match(/[\w-]*is-sticky[\w-]*/g);
+
+    if (this.stickyRowSelector !== null) {
+      this.stickyRowClass = '.' + this.stickyRowSelector.toString().replace('-is-sticky', '');
+    }
+
+    this.stickyRow = external_jQuery_default()(this.stickyRowClass);
     this.stickyHeader = external_jQuery_default()('.js-site-header-sticky');
-    this.primaryHeaderRow = external_jQuery_default()('.site-header--primary-row');
-    this.primaryRowIsSticky = this.primaryHeaderRow.hasClass('site-header-row--sticky');
+    this.primaryHeaderRow = external_jQuery_default()('.site-header__row--primary');
+    this.primaryRowIsSticky = this.stickyRowClass === '.site-header__row--primary';
     this.isSticky = false;
     this.stickyHeaderShown = false;
     this.offset = 0;
@@ -1253,6 +1260,7 @@ function () {
       this.updateMobileHeaderOffset();
       this.updateHeaderButtonsHeight();
       this.updateSearchOverlayOffset();
+      this.animateStickyLogo();
     }
   }, {
     key: "getInroTimeline",
@@ -1538,8 +1546,12 @@ function () {
   }, {
     key: "moveStickyRow",
     value: function moveStickyRow() {
-      // Check if we have the mark-up for sticky header,
+      if (!this.stickyHeader.length) {
+        return;
+      } // Check if we have the markup for sticky header,
       // and if user has applied sticky on a row.
+
+
       if (this.stickyHeader.length || this.stickyRow.length) {
         this.stickyRow.clone().appendTo(this.stickyHeader);
       } // Check if primary row is not sticky,
@@ -1572,6 +1584,23 @@ function () {
       }
     }
   }, {
+    key: "animateStickyLogo",
+    value: function animateStickyLogo() {
+      this.stickyLogo = this.stickyHeader.find('.c-logo__default img');
+      var headerResized = false;
+
+      if (this.stickyHeader.is(STICKY_HEADER_IS_VISIBLE) && !headerResized) {
+        TweenMax.to(this.stickyLogo, 0.4, {
+          height: 50
+        });
+        headerResized = true;
+      }
+
+      if (!this.stickyHeader.is(STICKY_HEADER_IS_VISIBLE)) {
+        this.stickyLogo.removeAttr("style");
+      }
+    }
+  }, {
     key: "hasMobileNav",
     value: function hasMobileNav() {
       return below('lap');
@@ -1585,6 +1614,7 @@ function () {
       this.updateMobileHeaderState();
       this.updateDesktopHeaderState(false);
       this.updateHeaderStateOnScroll();
+      this.animateStickyLogo();
     }
   }]);
 

@@ -12,7 +12,7 @@
 	pointer-events: none;
 	visibility: hidden;
 	
-	transition: opacity .2s ease;
+	transition: opacity .3s $easeIn;
 	
 	&--is-visible {
 		top: var(--admin-bar-height, 0);
@@ -21,39 +21,16 @@
 		visibility: visible;
 	}
 	
-	// Header Sticky Background
-	&:before {
-		content: '';
-		position: absolute;
-		left: 0;
-		top: 0;
-		width: 100%;
-		height: 100%;
-		background-color: var(--current-light-primary);
-		opacity: 0.95;
-		transition: var(--theme-transition);
-		transition-property: opacity;
-	}
+	--header-background-opacity: 0.95;
 	
-	// Header Sticky Box Shadow
+	@include header-background;
+	@include header-shadow;
+	
 	&:after {
-		content: "";
-		display: block;
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		box-shadow: var(--shadow-color, #000000) 0 var(--shadow-y-offset, 0.0625em) var(--shadow-blur, 0.125em);
 		opacity: 0.1;
-		transition: var(--theme-transition);
-		transition-property: opacity;
-		z-index: -1;
 	}
 	
-	.site-header--logo-row {
+	.site-header__row--logo {
 		margin-top: var(--theme-spacing-tiny);
 		margin-bottom: var(--theme-spacing-tiny);
 	}
@@ -66,7 +43,7 @@
 		}
 	}
 	
-	.site-header--primary-row:only-child {
+	.site-header__row--primary:only-child {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -90,52 +67,29 @@
 	}
 	
 	&:hover {
-		.site-header--primary-row:not(:only-child) {
+		.site-header__row--primary:not(:only-child) {
 			opacity: 1;
 			pointer-events: auto;
 			transform: translateY(0);
 		}
 	}
 	
-	.site-header--primary-row:not(:only-child) {
+	.site-header__row--primary:not(:only-child) {
 		position: absolute;
 		width: 100%;
 		margin-left: calc(-1 * var(--theme-header-sides-spacing));
 		margin-right: calc(-1 * var(--theme-header-sides-spacing));
 		transform: translateY(-100%);
 		opacity: 0;
+		z-index: -1;
 		pointer-events: none;
 		transition: transform 0.2s ease 0s, opacity 0.1s ease 0.1s;
 		
-		&:before {
-			content: '';
-			position: absolute;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			background-color: var(--current-light-primary);
-			opacity: 0.95;
-			transition: var(--theme-transition);
-			transition-property: opacity;
-			border-top: 1px solid rgba(0, 0, 0, .1);
-		}
+		@include header-background;
+		@include header-shadow;
 		
 		&:after {
-			content: "";
-			display: block;
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			box-shadow: var(--shadow-color, #000000) 0 var(--shadow-y-offset, 0.0625em) var(--shadow-blur, 0.125em);
 			opacity: 0.1;
-			transition: var(--theme-transition);
-			transition-property: opacity;
-			z-index: -1;
 		}
 	}
 }

@@ -550,7 +550,7 @@ if ( ! function_exists( 'rosa2_get_the_post_navigation' ) ) {
 	}
 }
 
-if ( ! function_exists('rosa2_add_sticky_header_markup') ) {
+if ( ! function_exists( 'rosa2_add_sticky_header_markup' ) ) {
 
 	/**
 	 * Generate mark-up for the Sticky Header
@@ -560,12 +560,21 @@ if ( ! function_exists('rosa2_add_sticky_header_markup') ) {
 
 		if ( ! rosa2_should_add_sticky_markup() ) {
 			return;
-		} ?>
+		}
 
-        <div class="site-header-sticky js-site-header-sticky"></div>
+		$header_variation = rosa2_get_header_variation();
+
+		$classes = array('site-header-sticky js-site-header-sticky');
+
+		if ( ! empty($header_variation) ) {
+		    $classes[] = 'site-header--' . $header_variation;
+        }
+		?>
+
+        <div class="<?php echo esc_attr( join( ' ', $classes ) ); ?>"></div>
 
 		<?php
 	}
 }
 
-add_action('rosa_before_header', 'rosa2_add_sticky_header_markup');
+add_action( 'rosa_before_header', 'rosa2_add_sticky_header_markup' );
