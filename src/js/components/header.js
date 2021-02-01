@@ -47,7 +47,6 @@ class Header {
 		this.promoBarHeight = 0;
 
 		this.$page = $( '#page .site-content' );
-		this.$hero = $( '.has-no-spacing-top .novablocks-hero' ).first().find( '.novablocks-hero__foreground' );
 		this.$promoBar = $( '.novablocks-announcement-bar' );
 
 		this.createMobileHeader();
@@ -60,7 +59,7 @@ class Header {
 	}
 
 	initialize() {
-		this.timeline = this.getInroTimeline();
+		this.timeline = this.getIntroTimeline();
 
 		$( '.site-header__wrapper' ).css( 'transition', 'none' );
 
@@ -81,7 +80,7 @@ class Header {
 		this.animateStickyLogo();
 	}
 
-	getInroTimeline() {
+	getIntroTimeline() {
 		const element = this.element;
 		const timeline = new TimelineMax( { paused: true } );
 		const height = $( element ).outerHeight();
@@ -125,7 +124,6 @@ class Header {
 
 	getProps() {
 		this.box = this.element.getBoundingClientRect();
-		this.scrollOffset = this.getScrollOffset();
 		this.mobileHeaderHeight = this.getMobileHeaderHeight();
 
 		if ( this.$promoBar.length ) {
@@ -194,20 +192,6 @@ class Header {
 		TweenMax.to(this.$toggleWrap, .2, {y: this.offset});
 	}
 
-	getScrollOffset() {
-		const { adminBarHeight, scrollY } = GlobalService.getProps();
-		const { offsetTargetElement } = this.options;
-
-		if ( offsetTargetElement ) {
-			const offsetTargetBox = offsetTargetElement.getBoundingClientRect();
-			const targetBottom = offsetTargetBox.top + scrollY + offsetTargetBox.height;
-			const headerOffset = adminBarHeight + this.offset + this.box.height / 2;
-			return targetBottom - headerOffset;
-		}
-
-		return 0;
-	}
-
 	updatePageOffset() {
 		TweenMax.set( this.$page, { css: { marginTop: this.visibleHeaderHeight + this.offset } } );
 	}
@@ -227,22 +211,6 @@ class Header {
 		if ( ( abovePromoBar !== this.abovePromoBar ) ) {
 			$( body ).toggleClass( 'site-header-mobile--scrolled', abovePromoBar );
 			this.abovePromoBar = abovePromoBar;
-		}
-	}
-
-	updateDesktopHeaderState(inversed) {
-
-		const { scrollY } = GlobalService.getProps();
-		const scrolled = scrollY > this.scrollOffset;
-
-		if ( inversed !== this.inversed ) {
-			this.$header.toggleClass( 'site-header--normal', ! inversed );
-			this.inversed = inversed;
-		}
-
-		if ( scrolled !== this.scrolled ) {
-			this.$header.toggleClass( 'site-header--scrolled', scrolled );
-			this.scrolled = scrolled;
 		}
 	}
 
@@ -394,11 +362,8 @@ class Header {
 	render() {
 		if ( ! this.element ) return;
 
-		window.document.body.style.setProperty( '--site-header-height', ( this.visibleHeaderHeight * 0.75 ) + this.promoBarHeight + 'px' );
-
 		this.updateMobileNavigationOffset();
 		this.updateMobileHeaderState();
-		this.updateDesktopHeaderState(false);
 		this.updateHeaderStateOnScroll();
 		this.animateStickyLogo();
 	}

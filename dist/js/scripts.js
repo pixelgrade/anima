@@ -1232,7 +1232,6 @@ function () {
     this.mobileHeaderHeight = 0;
     this.promoBarHeight = 0;
     this.$page = external_jQuery_default()('#page .site-content');
-    this.$hero = external_jQuery_default()('.has-no-spacing-top .novablocks-hero').first().find('.novablocks-hero__foreground');
     this.$promoBar = external_jQuery_default()('.novablocks-announcement-bar');
     this.createMobileHeader();
     this.onResize();
@@ -1244,7 +1243,7 @@ function () {
   createClass_default()(Header, [{
     key: "initialize",
     value: function initialize() {
-      this.timeline = this.getInroTimeline();
+      this.timeline = this.getIntroTimeline();
       external_jQuery_default()('.site-header__wrapper').css('transition', 'none');
       this.$header.addClass('site-header--fixed site-header--ready');
       this.$mobileHeader.addClass('site-header--fixed site-header--ready');
@@ -1263,8 +1262,8 @@ function () {
       this.animateStickyLogo();
     }
   }, {
-    key: "getInroTimeline",
-    value: function getInroTimeline() {
+    key: "getIntroTimeline",
+    value: function getIntroTimeline() {
       var element = this.element;
       var timeline = new TimelineMax({
         paused: true
@@ -1320,7 +1319,6 @@ function () {
     key: "getProps",
     value: function getProps() {
       this.box = this.element.getBoundingClientRect();
-      this.scrollOffset = this.getScrollOffset();
       this.mobileHeaderHeight = this.getMobileHeaderHeight();
 
       if (this.$promoBar.length) {
@@ -1399,24 +1397,6 @@ function () {
       });
     }
   }, {
-    key: "getScrollOffset",
-    value: function getScrollOffset() {
-      var _GlobalService$getPro2 = globalService.getProps(),
-          adminBarHeight = _GlobalService$getPro2.adminBarHeight,
-          scrollY = _GlobalService$getPro2.scrollY;
-
-      var offsetTargetElement = this.options.offsetTargetElement;
-
-      if (offsetTargetElement) {
-        var offsetTargetBox = offsetTargetElement.getBoundingClientRect();
-        var targetBottom = offsetTargetBox.top + scrollY + offsetTargetBox.height;
-        var headerOffset = adminBarHeight + this.offset + this.box.height / 2;
-        return targetBottom - headerOffset;
-      }
-
-      return 0;
-    }
-  }, {
     key: "updatePageOffset",
     value: function updatePageOffset() {
       TweenMax.set(this.$page, {
@@ -1428,8 +1408,8 @@ function () {
   }, {
     key: "updateMobileNavigationOffset",
     value: function updateMobileNavigationOffset() {
-      var _GlobalService$getPro3 = globalService.getProps(),
-          scrollY = _GlobalService$getPro3.scrollY;
+      var _GlobalService$getPro2 = globalService.getProps(),
+          scrollY = _GlobalService$getPro2.scrollY;
 
       if (this.hasMobileNav()) {
         this.element.style.marginTop = Math.max(this.promoBarHeight - scrollY, 0) + 'px';
@@ -1438,32 +1418,14 @@ function () {
   }, {
     key: "updateMobileHeaderState",
     value: function updateMobileHeaderState() {
-      var _GlobalService$getPro4 = globalService.getProps(),
-          scrollY = _GlobalService$getPro4.scrollY;
+      var _GlobalService$getPro3 = globalService.getProps(),
+          scrollY = _GlobalService$getPro3.scrollY;
 
       var abovePromoBar = scrollY > this.promoBarHeight;
 
       if (abovePromoBar !== this.abovePromoBar) {
         external_jQuery_default()(body).toggleClass('site-header-mobile--scrolled', abovePromoBar);
         this.abovePromoBar = abovePromoBar;
-      }
-    }
-  }, {
-    key: "updateDesktopHeaderState",
-    value: function updateDesktopHeaderState(inversed) {
-      var _GlobalService$getPro5 = globalService.getProps(),
-          scrollY = _GlobalService$getPro5.scrollY;
-
-      var scrolled = scrollY > this.scrollOffset;
-
-      if (inversed !== this.inversed) {
-        this.$header.toggleClass('site-header--normal', !inversed);
-        this.inversed = inversed;
-      }
-
-      if (scrolled !== this.scrolled) {
-        this.$header.toggleClass('site-header--scrolled', scrolled);
-        this.scrolled = scrolled;
       }
     }
   }, {
@@ -1566,8 +1528,8 @@ function () {
   }, {
     key: "updateHeaderStateOnScroll",
     value: function updateHeaderStateOnScroll() {
-      var _GlobalService$getPro6 = globalService.getProps(),
-          scrollY = _GlobalService$getPro6.scrollY; // If we don't have a sticky row, do nothing.
+      var _GlobalService$getPro4 = globalService.getProps(),
+          scrollY = _GlobalService$getPro4.scrollY; // If we don't have a sticky row, do nothing.
 
 
       if (!this.stickyRow.length) {
@@ -1609,10 +1571,8 @@ function () {
     key: "render",
     value: function render() {
       if (!this.element) return;
-      window.document.body.style.setProperty('--site-header-height', this.visibleHeaderHeight * 0.75 + this.promoBarHeight + 'px');
       this.updateMobileNavigationOffset();
       this.updateMobileHeaderState();
-      this.updateDesktopHeaderState(false);
       this.updateHeaderStateOnScroll();
       this.animateStickyLogo();
     }
