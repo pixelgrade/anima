@@ -1,4 +1,5 @@
 import GlobalService from "./globalService";
+import { getColorSetClasses } from '../utils';
 
 export default class Hero {
 
@@ -24,6 +25,24 @@ export default class Hero {
 		GlobalService.registerRender( () => {
 			this.updateOnScroll();
 		});
+
+		let indicator = this.element.querySelectorAll( '.novablocks-hero__indicator' );
+		let nextSibling = this.element.nextElementSibling;
+		let next = nextSibling.querySelectorAll( '.novablocks-block' );
+
+		next = !! next && next.length ? next[0] : nextSibling;
+
+		if ( !! indicator && indicator.length ) {
+
+			let colorClasses = getColorSetClasses( next );
+
+			console.log( next, colorClasses );
+
+			colorClasses.forEach( className => {
+				indicator[0].classList.add( className );
+			} );
+
+		}
 
 		const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 

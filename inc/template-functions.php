@@ -36,7 +36,7 @@ function rosa2_body_classes( $classes ) {
 		$classes[] = 'has-site-header-fixed';
 	}
 
-	if ( rosa2_first_block_is_hero() || rosa2_media_card_has_background() ) {
+	if ( rosa2_first_block_is( array( 'novablocks/hero', 'novablocks/media' ) ) ) {
 		$classes[] = 'has-no-spacing-top';
 	}
 
@@ -48,15 +48,11 @@ function rosa2_body_classes( $classes ) {
 		$classes[] = 'has-moderate-media-card-after-hero';
 	}
 
-	if ( rosa2_first_block_is_media() ) {
-		$classes[] = 'first-block-is-media first-block-is-media--' . rosa2_first_media_block_style();
-	}
-
 	if ( 'on' === pixelgrade_option( 'sm_dark_mode' ) ) {
 		$classes[] = 'is-dark-mode';
 	}
 
-	if ( is_singular( 'post') ) {
+	if ( is_singular( 'post' ) ) {
 		$classes[] = 'sm-variation-1';
 	}
 

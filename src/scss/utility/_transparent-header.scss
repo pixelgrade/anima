@@ -19,18 +19,18 @@
   }
 }
 
-.first-block-is-media {
+.has-site-header-transparent {
   
   .entry-content {
     
-    .novablocks-media:first-child {
+    > :first-child {
       --block-top-spacing: 0;
       --emphasis-top-spacing: 0;
       
       > .novablocks-block {
         
         // This should always be equal with desktop
-        padding-top: calc( var(--theme-header-height) + calc( var(--novablocks-media-spacing) * 0.5))
+        padding-top: calc( var(--site-header-height) + var(--site-promo-bar-height) );
       }
     }
   }

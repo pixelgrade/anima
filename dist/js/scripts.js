@@ -459,6 +459,13 @@ function setAndResetElementStyles($element) {
     }, 0);
   }
 }
+var getColorSetClasses = function getColorSetClasses(element) {
+  var classAttr = element.getAttribute('class');
+  var classes = classAttr.split(/\b\s+/);
+  return classes.filter(function (classname) {
+    return classname.search('sm-palette-') !== -1 || classname.search('sm-variation-') !== -1 || classname === 'sm-palette--shifted';
+  });
+};
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/toConsumableArray.js
 var toConsumableArray = __webpack_require__(3);
 var toConsumableArray_default = /*#__PURE__*/__webpack_require__.n(toConsumableArray);
@@ -737,6 +744,7 @@ function () {
 
 
 
+
 var hero_Hero =
 /*#__PURE__*/
 function () {
@@ -773,6 +781,19 @@ function () {
       globalService.registerRender(function () {
         _this2.updateOnScroll();
       });
+      var indicator = this.element.querySelectorAll('.novablocks-hero__indicator');
+      var nextSibling = this.element.nextElementSibling;
+      var next = nextSibling.querySelectorAll('.novablocks-block');
+      next = !!next && next.length ? next[0] : nextSibling;
+
+      if (!!indicator && indicator.length) {
+        var colorClasses = getColorSetClasses(next);
+        console.log(next, colorClasses);
+        colorClasses.forEach(function (className) {
+          indicator[0].classList.add(className);
+        });
+      }
+
       var mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
       mediaQuery.addListener(function () {
         _this2.reduceMotion = mediaQuery.matches;
@@ -1224,8 +1245,8 @@ function () {
     var $firstBlock = external_jQuery_default()('.entry-content').children().first();
     var $novaBlock = $firstBlock.find('.novablocks-block');
     var $blockColors = $novaBlock.length ? $novaBlock : $firstBlock;
-    this.initialColorClasses = this.getColorSetClasses(this.$header).join(' ');
-    this.transparentColorClasses = this.getColorSetClasses($blockColors).join(' ');
+    this.initialColorClasses = getColorSetClasses(this.element).join(' ');
+    this.transparentColorClasses = getColorSetClasses($blockColors[0]).join(' ');
     this.onResize();
     this.render();
     globalService.registerOnResize(this.onResize.bind(this));
@@ -1327,15 +1348,6 @@ function () {
       this.$header.removeClass(this.transparentColorClasses).addClass("site-header--scrolled ".concat(this.initialColorClasses));
     }
   }, {
-    key: "getColorSetClasses",
-    value: function getColorSetClasses($element) {
-      var classAttr = $element.attr('class');
-      var classes = classAttr.split(/\b\s+/);
-      return classes.filter(function (classname) {
-        return classname.search('sm-palette-') !== -1 || classname.search('sm-variation-') !== -1 || classname === 'sm-palette--shifted';
-      });
-    }
-  }, {
     key: "onResize",
     value: function onResize() {
       var $header = external_jQuery_default()(this.element);
@@ -1430,7 +1442,12 @@ function () {
     }
   }, {
     key: "updatePageOffset",
-    value: function updatePageOffset() {//		TweenMax.set( this.$page, { css: { marginTop: this.visibleHeaderHeight + this.offset } } );
+    value: function updatePageOffset() {
+      TweenMax.set(this.$page, {
+        css: {
+          marginTop: this.visibleHeaderHeight + this.offset
+        }
+      });
     }
   }, {
     key: "updateMobileNavigationOffset",
@@ -1564,7 +1581,8 @@ function () {
     key: "render",
     value: function render() {
       if (!this.element) return;
-      window.document.body.style.setProperty('--site-header-height', this.visibleHeaderHeight * 0.75 + this.promoBarHeight + 'px');
+      window.document.body.style.setProperty('--site-header-height', "".concat(this.visibleHeaderHeight, "px"));
+      window.document.body.style.setProperty('--site-promo-bar-height', "".concat(this.promoBarHeight, "px"));
       this.updateMobileNavigationOffset();
       this.updateMobileHeaderState();
       this.updateDesktopHeaderState(false);

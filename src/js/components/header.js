@@ -1,5 +1,5 @@
 import GlobalService from "./globalService";
-import { below, setAndResetElementStyles } from '../utils';
+import { below, setAndResetElementStyles, getColorSetClasses } from '../utils';
 import $ from 'jquery';
 
 const defaults = {
@@ -43,8 +43,8 @@ class Header {
 		let $novaBlock = $firstBlock.find( '.novablocks-block' );
 		let $blockColors = $novaBlock.length ? $novaBlock : $firstBlock;
 
-		this.initialColorClasses = this.getColorSetClasses( this.$header ).join( ' ' );
-		this.transparentColorClasses = this.getColorSetClasses( $blockColors ).join( ' ' );
+		this.initialColorClasses = getColorSetClasses( this.element ).join( ' ' );
+		this.transparentColorClasses = getColorSetClasses( $blockColors[0] ).join( ' ' );
 
 		this.onResize();
 		this.render();
@@ -139,14 +139,6 @@ class Header {
 		    .addClass( `site-header--scrolled ${ this.initialColorClasses }` );
 	}
 
-	getColorSetClasses( $element ) {
-		const classAttr = $element.attr( 'class' );
-		const classes = classAttr.split( /\b\s+/ );
-		return classes.filter( classname => {
-			return classname.search( 'sm-palette-' ) !== -1 || classname.search( 'sm-variation-' ) !== -1 || classname === 'sm-palette--shifted';
-		} );
-	}
-
 	onResize() {
 		const $header = $( this.element );
 		const wasScrolled = $header.hasClass( 'site-header--scrolled' );
@@ -226,7 +218,7 @@ class Header {
 	}
 
 	updatePageOffset() {
-//		TweenMax.set( this.$page, { css: { marginTop: this.visibleHeaderHeight + this.offset } } );
+		TweenMax.set( this.$page, { css: { marginTop: this.visibleHeaderHeight + this.offset } } );
 	}
 
 	updateMobileNavigationOffset() {
@@ -247,7 +239,7 @@ class Header {
 		}
 	}
 
-	updateDesktopHeaderState(inversed) {
+	updateDesktopHeaderState( inversed ) {
 
 		const { scrollY } = GlobalService.getProps();
 		const scrolled = scrollY > this.scrollOffset;
@@ -342,7 +334,7 @@ class Header {
 
 	updateSearchOverlayOffset() {
 		if ( this.hasMobileNav() && this.$searchOverlay.length ) {
-			this.$searchOverlay[0].paddingTop = Math.max(( this.promoBarHeight - scrollY ), 0) + 'px';
+			this.$searchOverlay[0].paddingTop = Math.max( ( this.promoBarHeight - scrollY ), 0 ) + 'px';
 		}
 	}
 
@@ -361,11 +353,12 @@ class Header {
 	render() {
 		if ( ! this.element ) return;
 
-		window.document.body.style.setProperty( '--site-header-height', ( this.visibleHeaderHeight * 0.75 ) + this.promoBarHeight + 'px' );
+		window.document.body.style.setProperty( '--site-header-height', `${ this.visibleHeaderHeight }px` );
+		window.document.body.style.setProperty( '--site-promo-bar-height', `${ this.promoBarHeight }px` );
 
 		this.updateMobileNavigationOffset();
 		this.updateMobileHeaderState();
-		this.updateDesktopHeaderState(false);
+		this.updateDesktopHeaderState( false );
 	}
 }
 
