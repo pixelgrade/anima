@@ -461,6 +461,11 @@ function setAndResetElementStyles($element) {
 }
 var getColorSetClasses = function getColorSetClasses(element) {
   var classAttr = element.getAttribute('class');
+
+  if (!classAttr) {
+    return [];
+  }
+
   var classes = classAttr.split(/\b\s+/);
   return classes.filter(function (classname) {
     return classname.search('sm-palette-') !== -1 || classname.search('sm-variation-') !== -1 || classname === 'sm-palette--shifted';

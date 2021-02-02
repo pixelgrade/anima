@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
     <div>
-        <header class="entry-header sm-variation-1">
+        <header class="entry-header">
 			<?php
 			get_template_part( 'template-parts/entry-meta', get_post_type() );
 			the_title( '<h1 class="entry-title has-text-align-center">', '</h1>' ); ?>
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             </div>
         </header>
 		<?php if ( has_post_thumbnail() ) { ?>
-            <div class="entry-thumbnail sm-variation-1">
+            <div class="entry-thumbnail">
                 <div class="entry-content">
                     <div class="entry-thumbnail__wrapper  alignwide  disabled-avoid-fout">
                         <div class="entry-thumbnail__container">
