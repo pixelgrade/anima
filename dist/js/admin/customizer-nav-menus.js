@@ -108,23 +108,36 @@
    */
 
   function extendControl(control) {
-    if (control.container.find('.field-visual_style').length < 1) {
-      return;
+    if (control.container.find('.field-visual_style').length) {
+      control.visualStyleField = control.container.find('.field-visual_style'); // Update the UI state when the setting changes programmatically.
+
+      control.setting.bind(function () {
+        updateVisualStyleControlFields(control);
+      }); // Update the setting when the inputs are modified.
+
+      control.visualStyleField.find('select').on('change', function () {
+        setSettingVisualStyle(control.setting, this.value);
+      }); // Set the initial UI state.
+
+      var initialVisualStyle = updateVisualStyleControlFields(control); // Update the initial setting value.
+
+      setSettingVisualStyle(control.setting, initialVisualStyle);
     }
 
-    control.visualStyleField = control.container.find('.field-visual_style'); // Update the UI state when the setting changes programmatically.
+    if (control.container.find('.field-badge').length) {
+      control.badgeField = control.container.find('.field-badge'); // Update the UI state when the setting changes programmatically.
 
-    control.setting.bind(function () {
-      updateControlFields(control);
-    }); // Update the setting when the inputs are modified.
+      control.setting.bind(function () {
+        updateBadgeControlFields(control);
+      });
+      control.badgeField.find('input').on('input', function () {
+        setSettingBadge(control.setting, this.value);
+      }); // Set the initial UI state.
 
-    control.visualStyleField.find('select').on('change', function () {
-      setSettingVisualStyle(control.setting, this.value);
-    }); // Set the initial UI state.
+      var initialBadge = updateBadgeControlFields(control); // Update the initial setting value.
 
-    var initialVisualStyle = updateControlFields(control); // Update the initial setting value.
-
-    setSettingVisualStyle(control.setting, initialVisualStyle);
+      setSettingBadge(control.setting, initialBadge);
+    }
   }
   /**
    * Extend the setting with roles information.
@@ -140,17 +153,43 @@
     }));
   }
   /**
+   * Extend the setting with roles information.
+   *
+   * @param {wp.customize.Setting} setting
+   * @param {string} badge
+   */
+
+
+  function setSettingBadge(setting, badge) {
+    setting.set(Object.assign({}, _.clone(setting()), {
+      badge: badge
+    }));
+  }
+  /**
    * Apply the control's setting value to the control's fields (or the default value if that's the case).
    *
    * @param {wp.customize.Menus.MenuItemControl} control
    */
 
 
-  function updateControlFields(control) {
+  function updateVisualStyleControlFields(control) {
     var defaultVisualStyle = control.visualStyleField.find('select').data('default') || 'label_icon';
     var visualStyle = control.setting().visual_style || defaultVisualStyle;
     control.visualStyleField.find('select').val(visualStyle);
     return visualStyle;
+  }
+  /**
+   * Apply the control's setting value to the control's fields (or the default value if that's the case).
+   *
+   * @param {wp.customize.Menus.MenuItemControl} control
+   */
+
+
+  function updateBadgeControlFields(control) {
+    var defaultBadge = control.badgeField.find('input').data('default') || '';
+    var badge = control.setting().badge || defaultBadge;
+    control.badgeField.find('input').val(badge);
+    return badge;
   }
 })();
 

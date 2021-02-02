@@ -42,11 +42,14 @@
         > a {
             display: inline-block;
             position: relative;
+            
+            width: 100%;
 
             &:after {
                 position: absolute;
                 top: 50%;
-                transform: translateY(-50%) rotate(45deg);
+                right: 0;
+                transform: translateY(-50%);
 
                 transition-duration: var(--theme-transition-duration-quick);
                 transition-timing-function: $easeOut;
@@ -58,7 +61,7 @@
         &.hover {
 
             > a:after {
-                transform: translateY(-50%) rotate(-45deg);
+                transform: translateY(-50%) rotate(-90deg);
                 opacity: 1;
             }
 

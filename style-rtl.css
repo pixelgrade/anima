@@ -4,7 +4,7 @@ Theme URI: https://demos.pixelgrade.com/rosa2
 Author: Pixelgrade
 Author URI: https://pixelgrade.com
 Description: ROSA 2 is an enchanting and easy-to-use parallax Restaurant WordPress theme that allows you to tell your story in a dynamic, narrative and enjoyable way, making it perfect for restaurants, bakeries, bars or coffee shops.
-Version: 1.7.0
+Version: 1.8.1
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: __theme_txtd
@@ -1024,20 +1024,27 @@ table {
   --theme-button-hover-text-color: var(--sm-light-primary);
   --theme-button-hover-background-color: transparent;
   --theme-button-hover-border-color: var(--sm-light-primary); }
-  .site-header .menu-item-has-children[class] > a:after,
-  .site-header .page_item_has_children[class] > a:after {
-    content: "";
-    position: static;
-    display: inline-block;
-    width: 0.5em;
-    height: 0.5em;
-    border-left: 0.1em solid currentColor;
-    border-bottom: 0.1em solid currentColor;
-    transform: translateY(-10%) rotate(-45deg);
-    transition: var(--theme-transition);
-    transition-property: transform, opacity;
-    margin-right: 0.75em;
-    opacity: .5; }
+  .site-header .menu-item-has-children[class] > a,
+  .site-header .page_item_has_children[class] > a {
+    display: block; }
+    .site-header .menu-item-has-children[class] > a:after,
+    .site-header .page_item_has_children[class] > a:after {
+      content: "";
+      position: static;
+      display: inline-block;
+      width: var(--dropdown-icon-size);
+      height: var(--dropdown-icon-size);
+      mask: url("./assets/images/arrow-down.svg") no-repeat 50% 50%;
+      mask-size: contain;
+      mask-position: center;
+      -webkit-mask: url("./assets/images/arrow-down.svg") no-repeat 50% 50%;
+      -webkit-mask-size: contain;
+      -webkit-mask-position: center;
+      background-color: currentColor;
+      border: 0;
+      transform: none;
+      margin-right: 0.75em;
+      opacity: .5; }
   @media only screen and (min-width: 1000px) {
     .site-header .menu-item-has-children.hover > .sub-menu,
     .site-header .menu-item-has-children.hover > .children,
@@ -1065,7 +1072,9 @@ table {
     .site-header .page_item_has_children > .children {
       background: rgba(0, 0, 0, 0.3); } }
   .site-header .menu-item {
-    position: relative; }
+    margin-top: 0;
+    position: relative;
+    --dropdown-icon-size: 0.75em; }
     .site-header .menu-item.is-external-link {
       position: relative; }
       .site-header .menu-item.is-external-link a:after {
@@ -1136,6 +1145,30 @@ table {
           --current-button-border-color: var(--theme-button-hover-border-color);
           --current-button-text-color: var(--theme-button-hover-text-color);
           --current-button-transition: var(--theme-button-hover-transition); }
+    .site-header .menu-item .menu-description {
+      display: block;
+      order: 2;
+      font-size: 0.75em;
+      color: var(--current-dark-primary);
+      opacity: .5;
+      line-height: 1.5;
+      font-weight: 400;
+      padding-left: var(--dropdown-icon-size); }
+      @media not screen and (min-width: 1000px) {
+        .site-header .menu-item .menu-description {
+          width: 100%;
+          color: var(--sm-light-primary); } }
+  .site-header .menu-item-label {
+    background-color: var(--sm-color-primary);
+    background-image: linear-gradient(to left, transparent, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1));
+    color: var(--sm-light-primary);
+    font-size: 0.5em;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 1em;
+    padding: .25em .9em;
+    vertical-align: middle;
+    margin-right: 0.5em; }
   @media only screen and (min-width: 1000px) {
     .site-header .menu-item-has-children .menu-item:after,
     .site-header .page_item_has_children .menu-item:after {
@@ -1185,7 +1218,10 @@ table {
       left: 0; }
     .site-header .sub-menu .menu-item-has-children > a:after,
     .site-header .children .page_item_has_children > a:after {
-      transform: rotate(45deg); }
+      position: absolute;
+      left: 1.25em;
+      top: 50%;
+      transform: translateY(-50%) rotate(90deg); }
     .site-header .sub-menu .menu-item-has-children .sub-menu,
     .site-header .sub-menu .menu-item-has-children .children,
     .site-header .children .page_item_has_children .sub-menu,
@@ -1233,7 +1269,15 @@ table {
     .site-header .site-header__menu > ul.menu > li[class*="current"]:not(.menu-item-home)[class][class][class] > a:hover:before,
     .site-header .site-header__menu > .menu > ul > li[class*="current"]:not(.menu-item-home)[class][class][class] > a:hover:before {
       transform: scale3d(0, 1, 1);
-      transform-origin: left; } }
+      transform-origin: left; }
+    .site-header .site-header__menu > ul.menu > li[class*="current"]:not(.menu-item-home)[class][class][class] > a,
+    .site-header .site-header__menu > .menu > ul > li[class*="current"]:not(.menu-item-home)[class][class][class] > a {
+      color: var(--current-color-primary); }
+    .site-header .sub-menu .sub-menu[class] .menu-item-has-children > a:after {
+      position: absolute;
+      left: 1.25em;
+      top: 50%;
+      transform: translateY(-50%) rotate(90deg); } }
 
 .navigation-is-open {
   overflow: hidden; }
@@ -1388,18 +1432,20 @@ table {
     .site-header .menu-item-has-children[class] > a,
     .site-header .page_item_has_children[class] > a {
       display: inline-block;
-      position: relative; }
+      position: relative;
+      width: 100%; }
       .site-header .menu-item-has-children[class] > a:after,
       .site-header .page_item_has_children[class] > a:after {
         position: absolute;
         top: 50%;
-        transform: translateY(-50%) rotate(-45deg);
+        left: 0;
+        transform: translateY(-50%);
         transition-duration: var(--theme-transition-duration-quick);
         transition-timing-function: cubic-bezier(0, 0, 0.58, 1);
         margin-right: .5em; }
     .site-header .menu-item-has-children[class].hover > a:after,
     .site-header .page_item_has_children[class].hover > a:after {
-      transform: translateY(-50%) rotate(45deg);
+      transform: translateY(-50%) rotate(90deg);
       opacity: 1; }
     .site-header .menu-item-has-children[class].hover > a:before,
     .site-header .page_item_has_children[class].hover > a:before {
@@ -1804,7 +1850,8 @@ table {
           text-decoration: none;
           transition: color .3s ease; }
   .c-search-overlay .search-form {
-    margin-top: 0; }
+    margin-top: 0;
+    overflow: hidden; }
   .c-search-overlay .c-search-overlay__cancel {
     cursor: pointer;
     display: flex;
@@ -1833,11 +1880,17 @@ table {
         padding: 0; }
         .c-search-overlay .c-search-overlay__cancel:before {
           content: '';
-          width: .7em;
-          height: .7em;
-          border-top: 2px solid currentColor;
-          border-right: 2px solid currentColor;
-          transform: rotate(45deg);
+          display: inline-block;
+          width: 1em;
+          height: 1em;
+          mask: url("./assets/images/arrow-down.svg") no-repeat 50% 50%;
+          mask-size: contain;
+          mask-position: center;
+          -webkit-mask: url("./assets/images/arrow-down.svg") no-repeat 50% 50%;
+          -webkit-mask-size: contain;
+          -webkit-mask-position: center;
+          transform: rotate(-90deg);
+          background-color: currentColor;
           margin-left: 3px; }
         .c-search-overlay .c-search-overlay__cancel:after {
           content: 'Back'; } }
@@ -1947,9 +2000,9 @@ table {
         top: 50%;
         background-color: currentColor;
         mask: url("./assets/images/icon-dark-mode.svg") no-repeat 50% 50%;
-        mask-size: cover;
+        mask-size: contain;
         -webkit-mask: url("./assets/images/icon-dark-mode.svg") no-repeat 50% 50%;
-        -webkit-mask-size: cover;
+        -webkit-mask-size: contain;
         transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1); }
       .is-color-scheme-switcher-button:not(.no-icon) a:before {
         width: calc(100% - var(--switcher-icon-width)) !important; }
@@ -2947,9 +3000,9 @@ span.page-numbers {
   .select2-container .select2-selection--single .select2-selection__placeholder {
     display: block; }
   .select2-container .select2-selection--single .select2-selection__arrow {
-    mask: url("./assets/images/arrow-down.svg") no-repeat 50% 50%;
+    mask: url("./assets/images/arrow-caret.svg") no-repeat 50% 50%;
     mask-size: cover;
-    -webkit-mask: url("./assets/images/arrow-down.svg") no-repeat 50% 50%;
+    -webkit-mask: url("./assets/images/arrow-caret.svg") no-repeat 50% 50%;
     -webkit-mask-size: contain;
     background-color: var(--sm-current-darker-color);
     width: .58em;

@@ -16,20 +16,27 @@
 
         &[class] > a {
 
+            display: block;
+
             &:after {
                 content: "";
                 position: static;
 
                 display: inline-block;
-                width: 0.5em;
-                height: 0.5em;
+                width: var(--dropdown-icon-size);
+                height: var(--dropdown-icon-size);
 
-                border-right: 0.1em solid currentColor;
-                border-bottom: 0.1em solid currentColor;
+                mask: url($arrow-down-svg-path) no-repeat 50% 50%;
+                mask-size: contain;
+                mask-position: center;
+                -webkit-mask: url($arrow-down-svg-path) no-repeat 50% 50%;
+                -webkit-mask-size: contain;
+                -webkit-mask-position: center;
 
-                transform: translateY(-10%) rotate(45deg);
-                transition: var(--theme-transition);
-                transition-property: transform, opacity;
+                background-color: currentColor;
+
+                border: 0;
+                transform: none;
 
                 margin-left: 0.75em;
                 opacity: .5;
@@ -76,18 +83,7 @@
         }
     }
 
-    .menu-item {
-
-        position: relative;
-
-        &.is-external-link {
-            @include header-menu-item-is-external-link;
-        }
-
-        &.is-cta-button {
-            @include header-menu-item-is-cta-button;
-        }
-    }
+    @import 'menu-item';
 
     @media only screen and (min-width: 1000px) {
 
@@ -171,7 +167,10 @@
         .children .page_item_has_children {
 
             > a:after {
-                transform: rotate(-45deg);
+                position: absolute;
+                right: 1.25em;
+                top: 50%;
+                transform: translateY(-50%) rotate(-90deg);
             }
 
             .sub-menu,
@@ -207,8 +206,21 @@
                 > li[class*="current"]:not(.menu-item-home) {
                     @include specific(3) {
                         @include header-menu-item-with-active-state;
+
+                        > a {
+                            color: var(--current-color-primary);
+                        }
                     }
                 }
+            }
+        }
+
+        .sub-menu .sub-menu[class] {
+            .menu-item-has-children > a:after {
+                position: absolute;
+                right: 1.25em;
+                top: 50%;
+                transform: translateY(-50%) rotate(-90deg);
             }
         }
     }

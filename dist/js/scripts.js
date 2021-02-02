@@ -1509,7 +1509,7 @@ function () {
 
       this.$mobileHeader = external_jQuery_default()('<div class="site-header--mobile">');
       external_jQuery_default()('.c-branding').first().clone().appendTo(this.$mobileHeader);
-      external_jQuery_default()('.menu-item--cart').first().clone().appendTo(this.$mobileHeader);
+      this.$header.find('.menu-item--cart').first().clone().appendTo(this.$mobileHeader);
       this.$mobileHeader.insertAfter(this.$toggle);
       this.createdMobileHeader = true;
     }
@@ -1780,6 +1780,7 @@ var SUBMENU = '.sub-menu, .children';
 var SUBMENU_LEFT_CLASS = 'has-submenu-left';
 var HOVER_CLASS = 'hover';
 var SEARCH_OVERLAY_OPEN_CLASS = 'has-search-overlay';
+var ESC_KEY_CODE = 27;
 
 var navbar_Navbar =
 /*#__PURE__*/
@@ -1800,8 +1801,9 @@ function () {
       this.addSocialMenuClass();
       this.initialized = true;
       globalService.registerOnResize(this.onResize.bind(this));
-      external_jQuery_default()(document).on('click', '.is-search-button a', this.onClickSearchButton);
-      external_jQuery_default()(document).on('click', '.c-search-overlay__cancel', this.onClickCancelSearchButton);
+      external_jQuery_default()(document).on('click', '.is-search-button a', this.openSearchOverlay);
+      external_jQuery_default()(document).on('click', '.c-search-overlay__cancel', this.closeSearchOverlay);
+      external_jQuery_default()(document).on('keydown', this.closeSearchOverlayOnEsc);
     }
   }, {
     key: "onResize",
@@ -1874,16 +1876,24 @@ function () {
       $siblings.find('.active').removeClass('active');
     }
   }, {
-    key: "onClickSearchButton",
-    value: function onClickSearchButton(event) {
-      event.preventDefault();
+    key: "openSearchOverlay",
+    value: function openSearchOverlay(e) {
+      e.preventDefault();
       external_jQuery_default()('body').toggleClass(SEARCH_OVERLAY_OPEN_CLASS);
       external_jQuery_default()('.c-search-overlay__form .search-field').focus();
     }
   }, {
-    key: "onClickCancelSearchButton",
-    value: function onClickCancelSearchButton(event) {
-      event.preventDefault();
+    key: "closeSearchOverlayOnEsc",
+    value: function closeSearchOverlayOnEsc(e) {
+      if (e.keyCode === ESC_KEY_CODE) {
+        external_jQuery_default()('body').removeClass(SEARCH_OVERLAY_OPEN_CLASS);
+        external_jQuery_default()('.c-search-overlay__form .search-field').blur();
+      }
+    }
+  }, {
+    key: "closeSearchOverlay",
+    value: function closeSearchOverlay(e) {
+      e.preventDefault();
       external_jQuery_default()('body').removeClass(SEARCH_OVERLAY_OPEN_CLASS);
     }
   }, {

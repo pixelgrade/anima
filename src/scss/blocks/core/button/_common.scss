@@ -44,6 +44,11 @@ $enable-button-block-styles:            true !default;
             --block-top-spacing: 1;
             @include element-spacing;
         }
+        
+        &[class*="align"] {
+            margin-left: 0;
+            margin-right: 0;
+        }
 
 
         .wp-block,

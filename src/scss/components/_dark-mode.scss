@@ -29,9 +29,9 @@
         background-color: currentColor;
 
         mask: url($icon-dark-mode-path) no-repeat 50% 50%;
-        mask-size: cover;
+        mask-size: contain;
         -webkit-mask: url($icon-dark-mode-path) no-repeat 50% 50%;
-        -webkit-mask-size: cover;
+        -webkit-mask-size: contain;
 
         transition: transform .25s $easeInOutCubic;
       }

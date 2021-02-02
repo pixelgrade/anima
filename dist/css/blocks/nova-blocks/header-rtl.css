@@ -99,7 +99,10 @@
     .site-header .sub-menu .children .page_item_has_children > a:after,
     .site-header .children .sub-menu .menu-item-has-children > a:after,
     .site-header .children .children .page_item_has_children > a:after {
-      transform: translateY(-10%) rotate(45deg); }
+      position: absolute;
+      left: 1.25em;
+      top: 50%;
+      transform: translateY(-50%) rotate(90deg); }
   .site-header .sub-menu .sub-menu,
   .site-header .children .children {
     top: 0;

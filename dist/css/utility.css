@@ -474,13 +474,13 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 2.22%, rgba(0, 0, 0, 0.05) 84.86%, rgba(0, 0, 0, 0.058563) calc(100% - calc(var(--theme-header-height) + var(--theme-header-offset))), rgba(0, 0, 0, 0.4) 100%); }
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.03) calc(2 * var(--theme-header-height)), rgba(0, 0, 0, 0) 100%); }
 
 .has-site-header-transparent .entry-content > :first-child {
   --block-top-spacing: 0;
   --emphasis-top-spacing: 0; }
   .has-site-header-transparent .entry-content > :first-child > .novablocks-block {
-    padding-top: calc( var(--site-header-height) + var(--site-promo-bar-height)); }
+    padding-top: calc( var(--theme-header-height) +  var(--novablocks-media-spacing) * 0.5); }
 
 html:not(.is-dark) .has-no-spacing-top.has-site-header-transparent.has-site-header-fixed.first-block-is-media--moderate .site-header:not(.site-header--scrolled) .site-header__wrapper .c-logo__default,
 html:not(.is-dark) .has-no-spacing-top.has-site-header-transparent.has-site-header-fixed.first-block-is-media--moderate .site-header--mobile .c-logo__default {
