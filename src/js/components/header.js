@@ -6,8 +6,7 @@ const defaults = {
 	offsetTargetElement: null,
 };
 
-const NAVIGATION_OPEN_CLASS = 'navigation-is-open';
-const STICKY_HEADER_IS_VISIBLE = '.site-header-sticky--is-visible';
+const NAVIGATION_OPEN_CLASS = 'navigation-is-open'
 
 class Header {
 
@@ -28,18 +27,7 @@ class Header {
 		this.inversed = false;
 		this.abovePromoBar = false;
 		this.wasSticky = $( 'body' ).is( '.has-site-header-fixed' );
-		this.stickyRowSelector = this.element.getAttribute("class").match(/[\w-]*is-sticky[\w-]*/g);
-
-		if( this.stickyRowSelector !== null ) {
-			this.stickyRowClass = '.' + this.stickyRowSelector.toString().replace('-is-sticky', '');
-		}
-
-		this.stickyRow = $( this.stickyRowClass );
-		this.stickyHeader = $('.js-site-header-sticky');
-		this.primaryHeaderRow = $('.site-header__row--primary');
-		this.primaryRowIsSticky = this.stickyRowClass === '.site-header__row--primary';
-		this.isSticky = false;
-		this.stickyHeaderShown = false;
+		this.siteHeaderSticky = $( '.site-header-sticky' );
 
 		this.offset = 0;
 		this.scrollOffset = 0;
@@ -66,7 +54,6 @@ class Header {
 		this.$header.addClass( 'site-header--fixed site-header--ready' );
 		this.$mobileHeader.addClass( 'site-header--fixed site-header--ready' );
 		this.initToggleClick();
-		this.moveStickyRow();
 
 		this.timeline.play();
 	}
@@ -74,10 +61,10 @@ class Header {
 	update() {
 		this.updatePageOffset();
 		this.updateHeaderOffset();
+		this.updateStickyHeaderOffset();
 		this.updateMobileHeaderOffset();
 		this.updateHeaderButtonsHeight();
 		this.updateSearchOverlayOffset();
-		this.animateStickyLogo();
 	}
 
 	getIntroTimeline() {
@@ -124,6 +111,7 @@ class Header {
 
 	getProps() {
 		this.box = this.element.getBoundingClientRect();
+		this.scrollOffset = this.getScrollOffset();
 		this.mobileHeaderHeight = this.getMobileHeaderHeight();
 
 		if ( this.$promoBar.length ) {
@@ -133,7 +121,6 @@ class Header {
 
 	onResize() {
 		const $header = $( this.element );
-		const wasScrolled = $header.hasClass( 'site-header--scrolled' );
 
 		setAndResetElementStyles( $header, { transition: 'none' } );
 		setAndResetElementStyles( this.$searchOverlay, { transition: 'none' } );
@@ -142,8 +129,6 @@ class Header {
 		this.getProps();
 		this.setVisibleHeaderHeight();
 		this.shouldMakeHeaderStatic();
-
-		$header.toggleClass( 'site-header--scrolled', wasScrolled );
 
 		this.initHeaderButtons();
 
@@ -172,6 +157,21 @@ class Header {
 		} );
 	}
 
+	updateStickyHeaderOffset() {
+		requestAnimationFrame( () => {
+
+			if ( ! this.siteHeaderSticky.length ) {
+				return;
+			}
+
+			this.siteHeaderSticky.css (
+				{
+					marginTop: this.offset + 'px'
+				}
+			)
+		})
+	}
+
 	updateMobileHeaderOffset() {
 		if ( ! this.$mobileHeader ) return;
 
@@ -192,25 +192,54 @@ class Header {
 		TweenMax.to(this.$toggleWrap, .2, {y: this.offset});
 	}
 
+	getScrollOffset() {
+		const { adminBarHeight, scrollY } = GlobalService.getProps();
+		const { offsetTargetElement } = this.options;
+
+		if ( offsetTargetElement ) {
+			const offsetTargetBox = offsetTargetElement.getBoundingClientRect();
+			const targetBottom = offsetTargetBox.top + scrollY + offsetTargetBox.height;
+			const headerOffset = adminBarHeight + this.offset + this.box.height / 2;
+			return targetBottom - headerOffset;
+		}
+
+		return 0;
+	}
+
 	updatePageOffset() {
 		TweenMax.set( this.$page, { css: { marginTop: this.visibleHeaderHeight + this.offset } } );
 	}
 
 	updateMobileNavigationOffset() {
-		const { scrollY } = GlobalService.getProps();
 
-		if ( this.hasMobileNav() ) {
-			this.element.style.marginTop = Math.max(( this.promoBarHeight - scrollY ), 0) + 'px';
+		if ( ! this.hasMobileNav() ) {
+			return;
 		}
+
+		const { scrollY } = GlobalService.getProps();
+		this.element.style.marginTop = Math.max(( this.promoBarHeight - scrollY ), 0) + 'px';
 	}
 
 	updateMobileHeaderState() {
+
+		if ( ! this.hasMobileNav() ) {
+			return;
+		}
+
 		const { scrollY } = GlobalService.getProps();
 		const abovePromoBar = scrollY > this.promoBarHeight;
 
 		if ( ( abovePromoBar !== this.abovePromoBar ) ) {
 			$( body ).toggleClass( 'site-header-mobile--scrolled', abovePromoBar );
 			this.abovePromoBar = abovePromoBar;
+		}
+	}
+
+	updateDesktopHeaderState(inversed) {
+
+		if ( inversed !== this.inversed ) {
+			this.$header.toggleClass( 'site-header--normal', ! inversed );
+			this.inversed = inversed;
 		}
 	}
 
@@ -301,60 +330,6 @@ class Header {
 		} );
 	}
 
-	moveStickyRow() {
-
-		if (! this.stickyHeader.length ) {
-			return;
-		}
-
-		// Check if we have the markup for sticky header,
-		// and if user has applied sticky on a row.
-		if ( this.stickyHeader.length || this.stickyRow.length ) {
-			this.stickyRow.clone().appendTo(this.stickyHeader);
-		}
-
-		// Check if primary row is not sticky,
-		// and if is not, append the primary row to the sticky header,
-		// so we can show it on hover.
-		if ( ! this.primaryRowIsSticky ) {
-			this.primaryHeaderRow.clone().appendTo(this.stickyHeader);
-		}
-	}
-
-	updateHeaderStateOnScroll() {
-		const { scrollY } = GlobalService.getProps();
-
-		// If we don't have a sticky row, do nothing.
-		if(! this.stickyRow.length) {
-			return;
-		}
-
-		this.stickyRowOffset = this.stickyRow.offset().top;
-		this.isSticky = scrollY >  this.stickyRowOffset;
-
-		// Make header sticky,
-		// if the it hasn't been yet.
-		if (this.isSticky !== this.stickyHeaderShown) {
-			this.stickyHeader.toggleClass('site-header-sticky--is-visible');
-			this.stickyHeaderShown = this.isSticky;
-		}
-	}
-
-	animateStickyLogo() {
-		this.stickyLogo = this.stickyHeader.find('.c-logo__default img');
-
-		let headerResized = false;
-
-		if( this.stickyHeader.is(STICKY_HEADER_IS_VISIBLE) && ! headerResized) {
-			TweenMax.to(this.stickyLogo, 0.4, { height: 50 });
-			headerResized = true;
-		}
-
-		if ( ! this.stickyHeader.is(STICKY_HEADER_IS_VISIBLE) ) {
-			this.stickyLogo.removeAttr("style")
-		}
-	}
-
 	hasMobileNav() {
 		return below( 'lap' );
 	}
@@ -364,8 +339,7 @@ class Header {
 
 		this.updateMobileNavigationOffset();
 		this.updateMobileHeaderState();
-		this.updateHeaderStateOnScroll();
-		this.animateStickyLogo();
+		this.updateDesktopHeaderState(false);
 	}
 }
 

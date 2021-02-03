@@ -16,6 +16,18 @@ $site-header-transition-speed: .3s !default;
 
         will-change: transform;
         pointer-events: none;
+    
+        .site-header__row {
+            &--secondary {
+                padding-top: var(--theme-spacing-default);
+                padding-bottom: var(--theme-spacing-tiny);
+            }
+        
+            &--logo {
+                padding-top: var(--theme-spacing-xsmall);
+                padding-bottom: var(--theme-spacing-small);
+            }
+        }
     }
 
     .site-header__wrapper {
@@ -59,6 +71,8 @@ $site-header-transition-speed: .3s !default;
             }
         }
     }
+    
+    
 }
 
 .site-header__inner-container[class] {
@@ -73,14 +87,14 @@ $site-header-transition-speed: .3s !default;
         opacity: 0;
     }
 
-    .has-site-header-fixed .site-header:not(.site-header--ready),
-    body:not(.has-site-header-fixed) .site-header {
-        position: absolute;
-    }
+    //.has-site-header-fixed .site-header:not(.site-header--ready),
+    //body:not(.has-site-header-fixed) .site-header {
+    //    position: absolute;
+    //}
 
-    .has-site-header-fixed .site-header--fixed.site-header--ready {
-        position: fixed;
-    }
+    //.has-site-header-fixed .site-header--fixed.site-header--ready {
+    //    position: fixed;
+    //}
 }
 
 
@@ -90,8 +104,9 @@ body.has-site-header-transparent  {
     @include above(lap) {
 
         &.has-no-spacing-top {
-            &.has-site-header-fixed .site-header:not(.site-header--scrolled) .site-header__wrapper,
-            &:not(.has-site-header-fixed) .site-header .site-header__wrapper {
+            //&.has-site-header-fixed .site-header:not(.site-header--scrolled) .site-header__wrapper,
+            //&:not(.has-site-header-fixed) .site-header .site-header__wrapper,
+            .site-header:not([class*="site-header--is-sticky"]) {
                 color: var(--sm-light-primary);
 
                 .c-logo__inverted {
@@ -115,4 +130,8 @@ body.has-site-header-transparent  {
             }
         }
     }
+}
+
+.site-header__row {
+    --block-top-spacing: 0;
 }

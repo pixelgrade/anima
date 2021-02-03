@@ -13,7 +13,8 @@
     --theme-button-hover-border-color: var(--sm-light-primary);
 
     &--scrolled,
-    body:not(.has-no-spacing-top) & {
+    body:not(.has-no-spacing-top) &,
+    &--is-sticky {
        @include above(lap) {
            --theme-button-text-color: var(--current-light-primary);
            --theme-button-background-color: var(--current-dark-primary);

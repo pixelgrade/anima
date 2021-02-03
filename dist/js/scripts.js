@@ -1194,7 +1194,6 @@ var defaults = {
   offsetTargetElement: null
 };
 var NAVIGATION_OPEN_CLASS = 'navigation-is-open';
-var STICKY_HEADER_IS_VISIBLE = '.site-header-sticky--is-visible';
 
 var header_Header =
 /*#__PURE__*/
@@ -1215,18 +1214,7 @@ function () {
     this.inversed = false;
     this.abovePromoBar = false;
     this.wasSticky = external_jQuery_default()('body').is('.has-site-header-fixed');
-    this.stickyRowSelector = this.element.getAttribute("class").match(/[\w-]*is-sticky[\w-]*/g);
-
-    if (this.stickyRowSelector !== null) {
-      this.stickyRowClass = '.' + this.stickyRowSelector.toString().replace('-is-sticky', '');
-    }
-
-    this.stickyRow = external_jQuery_default()(this.stickyRowClass);
-    this.stickyHeader = external_jQuery_default()('.js-site-header-sticky');
-    this.primaryHeaderRow = external_jQuery_default()('.site-header__row--primary');
-    this.primaryRowIsSticky = this.stickyRowClass === '.site-header__row--primary';
-    this.isSticky = false;
-    this.stickyHeaderShown = false;
+    this.siteHeaderSticky = external_jQuery_default()('.site-header-sticky');
     this.offset = 0;
     this.scrollOffset = 0;
     this.mobileHeaderHeight = 0;
@@ -1248,7 +1236,6 @@ function () {
       this.$header.addClass('site-header--fixed site-header--ready');
       this.$mobileHeader.addClass('site-header--fixed site-header--ready');
       this.initToggleClick();
-      this.moveStickyRow();
       this.timeline.play();
     }
   }, {
@@ -1256,10 +1243,10 @@ function () {
     value: function update() {
       this.updatePageOffset();
       this.updateHeaderOffset();
+      this.updateStickyHeaderOffset();
       this.updateMobileHeaderOffset();
       this.updateHeaderButtonsHeight();
       this.updateSearchOverlayOffset();
-      this.animateStickyLogo();
     }
   }, {
     key: "getIntroTimeline",
@@ -1319,6 +1306,7 @@ function () {
     key: "getProps",
     value: function getProps() {
       this.box = this.element.getBoundingClientRect();
+      this.scrollOffset = this.getScrollOffset();
       this.mobileHeaderHeight = this.getMobileHeaderHeight();
 
       if (this.$promoBar.length) {
@@ -1329,7 +1317,6 @@ function () {
     key: "onResize",
     value: function onResize() {
       var $header = external_jQuery_default()(this.element);
-      var wasScrolled = $header.hasClass('site-header--scrolled');
       setAndResetElementStyles($header, {
         transition: 'none'
       });
@@ -1340,7 +1327,6 @@ function () {
       this.getProps();
       this.setVisibleHeaderHeight();
       this.shouldMakeHeaderStatic();
-      $header.toggleClass('site-header--scrolled', wasScrolled);
       this.initHeaderButtons();
 
       if (!this.hasMobileNav()) {
@@ -1377,6 +1363,21 @@ function () {
       });
     }
   }, {
+    key: "updateStickyHeaderOffset",
+    value: function updateStickyHeaderOffset() {
+      var _this2 = this;
+
+      requestAnimationFrame(function () {
+        if (!_this2.siteHeaderSticky.length) {
+          return;
+        }
+
+        _this2.siteHeaderSticky.css({
+          marginTop: _this2.offset + 'px'
+        });
+      });
+    }
+  }, {
     key: "updateMobileHeaderOffset",
     value: function updateMobileHeaderOffset() {
       if (!this.$mobileHeader) return;
@@ -1397,6 +1398,24 @@ function () {
       });
     }
   }, {
+    key: "getScrollOffset",
+    value: function getScrollOffset() {
+      var _GlobalService$getPro2 = globalService.getProps(),
+          adminBarHeight = _GlobalService$getPro2.adminBarHeight,
+          scrollY = _GlobalService$getPro2.scrollY;
+
+      var offsetTargetElement = this.options.offsetTargetElement;
+
+      if (offsetTargetElement) {
+        var offsetTargetBox = offsetTargetElement.getBoundingClientRect();
+        var targetBottom = offsetTargetBox.top + scrollY + offsetTargetBox.height;
+        var headerOffset = adminBarHeight + this.offset + this.box.height / 2;
+        return targetBottom - headerOffset;
+      }
+
+      return 0;
+    }
+  }, {
     key: "updatePageOffset",
     value: function updatePageOffset() {
       TweenMax.set(this.$page, {
@@ -1408,24 +1427,38 @@ function () {
   }, {
     key: "updateMobileNavigationOffset",
     value: function updateMobileNavigationOffset() {
-      var _GlobalService$getPro2 = globalService.getProps(),
-          scrollY = _GlobalService$getPro2.scrollY;
-
-      if (this.hasMobileNav()) {
-        this.element.style.marginTop = Math.max(this.promoBarHeight - scrollY, 0) + 'px';
+      if (!this.hasMobileNav()) {
+        return;
       }
+
+      var _GlobalService$getPro3 = globalService.getProps(),
+          scrollY = _GlobalService$getPro3.scrollY;
+
+      this.element.style.marginTop = Math.max(this.promoBarHeight - scrollY, 0) + 'px';
     }
   }, {
     key: "updateMobileHeaderState",
     value: function updateMobileHeaderState() {
-      var _GlobalService$getPro3 = globalService.getProps(),
-          scrollY = _GlobalService$getPro3.scrollY;
+      if (!this.hasMobileNav()) {
+        return;
+      }
+
+      var _GlobalService$getPro4 = globalService.getProps(),
+          scrollY = _GlobalService$getPro4.scrollY;
 
       var abovePromoBar = scrollY > this.promoBarHeight;
 
       if (abovePromoBar !== this.abovePromoBar) {
         external_jQuery_default()(body).toggleClass('site-header-mobile--scrolled', abovePromoBar);
         this.abovePromoBar = abovePromoBar;
+      }
+    }
+  }, {
+    key: "updateDesktopHeaderState",
+    value: function updateDesktopHeaderState(inversed) {
+      if (inversed !== this.inversed) {
+        this.$header.toggleClass('site-header--normal', !inversed);
+        this.inversed = inversed;
       }
     }
   }, {
@@ -1506,63 +1539,6 @@ function () {
       });
     }
   }, {
-    key: "moveStickyRow",
-    value: function moveStickyRow() {
-      if (!this.stickyHeader.length) {
-        return;
-      } // Check if we have the markup for sticky header,
-      // and if user has applied sticky on a row.
-
-
-      if (this.stickyHeader.length || this.stickyRow.length) {
-        this.stickyRow.clone().appendTo(this.stickyHeader);
-      } // Check if primary row is not sticky,
-      // and if is not, append the primary row to the sticky header,
-      // so we can show it on hover.
-
-
-      if (!this.primaryRowIsSticky) {
-        this.primaryHeaderRow.clone().appendTo(this.stickyHeader);
-      }
-    }
-  }, {
-    key: "updateHeaderStateOnScroll",
-    value: function updateHeaderStateOnScroll() {
-      var _GlobalService$getPro4 = globalService.getProps(),
-          scrollY = _GlobalService$getPro4.scrollY; // If we don't have a sticky row, do nothing.
-
-
-      if (!this.stickyRow.length) {
-        return;
-      }
-
-      this.stickyRowOffset = this.stickyRow.offset().top;
-      this.isSticky = scrollY > this.stickyRowOffset; // Make header sticky,
-      // if the it hasn't been yet.
-
-      if (this.isSticky !== this.stickyHeaderShown) {
-        this.stickyHeader.toggleClass('site-header-sticky--is-visible');
-        this.stickyHeaderShown = this.isSticky;
-      }
-    }
-  }, {
-    key: "animateStickyLogo",
-    value: function animateStickyLogo() {
-      this.stickyLogo = this.stickyHeader.find('.c-logo__default img');
-      var headerResized = false;
-
-      if (this.stickyHeader.is(STICKY_HEADER_IS_VISIBLE) && !headerResized) {
-        TweenMax.to(this.stickyLogo, 0.4, {
-          height: 50
-        });
-        headerResized = true;
-      }
-
-      if (!this.stickyHeader.is(STICKY_HEADER_IS_VISIBLE)) {
-        this.stickyLogo.removeAttr("style");
-      }
-    }
-  }, {
     key: "hasMobileNav",
     value: function hasMobileNav() {
       return below('lap');
@@ -1573,8 +1549,7 @@ function () {
       if (!this.element) return;
       this.updateMobileNavigationOffset();
       this.updateMobileHeaderState();
-      this.updateHeaderStateOnScroll();
-      this.animateStickyLogo();
+      this.updateDesktopHeaderState(false);
     }
   }]);
 
