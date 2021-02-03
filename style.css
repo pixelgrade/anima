@@ -1587,7 +1587,7 @@ table {
     .site-header-sticky .site-header__row--primary:not(:only-child):after {
       opacity: 0.1; }
   .site-header-sticky .site-header__row--logo .site-logo img {
-    height: calc(var(--theme-header-logo-height) * 0.5); }
+    height: calc(var(--theme-header-logo-height) * 0.35); }
 
 @media only screen and (min-width: 1000px) {
   .site-header--is-sticky {
@@ -1877,9 +1877,12 @@ table {
   .is-dark-mode .c-logo__inverted {
     opacity: 1; }
 
+.is-dark .c-logo__default {
+  opacity: 0; }
+
 .c-logo__default,
 .c-logo__inverted {
-  transition: opacity .3s ease-out; }
+  transition: opacity .3s ease-out 0.075s; }
 
 .c-search-overlay {
   position: fixed;

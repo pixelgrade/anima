@@ -17,7 +17,14 @@
   }
 }
 
+.c-logo__default {
+  
+  .is-dark & {
+    opacity: 0;
+  }
+}
+
 .c-logo__default,
 .c-logo__inverted {
-  transition: opacity .3s ease-out;
+  transition: opacity .3s ease-out 0.075s;
 }
