@@ -7,7 +7,6 @@ import CommentsArea from './commentsArea';
 import Header from './header';
 import PromoBar from "./promo-bar";
 import Navbar from "./navbar";
-import DarkMode from "./dark-mode";
 
 export default class App {
 
@@ -16,7 +15,6 @@ export default class App {
 		this.initializeHeader();
 		this.initializeNavbar();
 		this.initializePromoBar();
-		this.initializeDarkMode();
 		this.initializeImages();
 		this.initializeCommentsArea();
 		this.initializeReservationForm();
@@ -122,10 +120,6 @@ export default class App {
 		this.promoBar = new PromoBar( announcementBars, {
 			onUpdate: this.onPromoBarUpdate.bind( this )
 		});
-	}
-
-	initializeDarkMode() {
-		this.DarkMode = new DarkMode();
 	}
 
 	onPromoBarUpdate( promoBar ) {

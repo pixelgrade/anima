@@ -164,7 +164,6 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 			 */
 			add_action( 'rosa2_after_footer', array( $this, 'output_search_overlay' ), 10 );
 			add_filter( 'get_search_form', array( $this, 'custom_search_form' ), 10, 1 );
-			add_filter( 'language_attributes', array( $this, 'add_color_scheme_attribute' ), 10, 2 );
 
 			// Handle Menu Item Badge Frontend Output
 			add_filter( 'nav_menu_item_title', array($this, 'output_badge_menu_item'), 10, 2 );
@@ -830,31 +829,6 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 			</form>';
 
 			return $form;
-		}
-
-		/**
-		 * Add Color Scheme attribute to <html> tag.
-		 *
-		 * @since 1.6.0
-		 *
-		 * @param string $output A space-separated list of language attributes.
-		 * @param string $doctype The type of html document (xhtml|html).
-		 *
-		 * @return string $output A space-separated list of language attributes.
-		 */
-		public function add_color_scheme_attribute( $output, $doctype ) {
-
-			if( is_admin() ) {
-				return;
-			}
-
-			if ( 'html' !== $doctype ) {
-				return $output;
-			}
-
-			$output .= ' data-dark-mode-advanced=' . pixelgrade_option( 'sm_dark_mode_advanced', 'off' );
-
-			return $output;
 		}
 
 		public function is_nav_menus_page( $new_edit = null ) {
