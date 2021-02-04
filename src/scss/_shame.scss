@@ -90,3 +90,35 @@ ul.menu,
         justify-self: flex-end;
     }
 }
+
+.woocommerce-message,
+.woocommerce-info,
+.woocommerce-error {
+
+    &[class] {
+        color: var(--sm-color-11);
+
+        &:after {
+            border: 1px solid var(--sm-color-11);
+            background-color: var(--sm-color-4);
+            opacity: 1;
+        }
+
+        .theme-woocommerce-notice__icon {
+            background-color: var(--sm-color-9);
+            opacity: 1;
+        }
+    }
+}
+
+.woocommerce-error {
+    @include apply-palette(error);
+}
+
+.woocommerce-message {
+    @include apply-palette(success);
+}
+
+.woocommerce-info {
+    @include apply-palette(info);
+}
