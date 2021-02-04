@@ -2186,6 +2186,51 @@ table {
     --current-light-secondary: var(--theme-light-secondary);
     --current-light-tertiary: var(--theme-light-tertiary); }
 
+@media only screen and (min-width: 1000px) {
+  .scheme-switcher__wrapper {
+    display: none; } }
+
+@media not screen and (min-width: 1000px) {
+  .scheme-switcher__wrapper .menu-item {
+    margin-left: 1em; } }
+
+@media not screen and (min-width: 1000px) {
+  .is-dark .c-logo__default {
+    opacity: 0; }
+  .is-dark .site-header-mobile--scrolled .site-header--mobile .c-logo__default {
+    opacity: 0; }
+  .is-dark .site-header-mobile--scrolled .site-header--mobile .c-logo__inverted {
+    opacity: 1; } }
+
+.is-dark .site-header--mobile,
+.is-dark .c-menu-toggle {
+  color: var(--sm-light-primary); }
+
+.is-dark .c-logo__inverted {
+  opacity: 1; }
+
+.is-dark .site-header--mobile .c-logo__inverted {
+  opacity: 1; }
+
+.is-dark .site-header--mobile .c-logo__default {
+  opacity: 0; }
+
+.is-dark .novablocks-opentable.novablocks-opentable__standard[class] .ot-powered-by {
+  -webkit-filter: unset;
+  mix-blend-mode: unset; }
+
+.is-dark .novablocks-opentable.novablocks-opentable__wide[class] .ot-powered-by {
+  -webkit-filter: invert(1) saturate(0);
+  mix-blend-mode: lighten; }
+
+@media not screen and (min-width: 1000px) {
+  .is-dark .c-logo__default {
+    opacity: 0; }
+  .is-dark .site-header-mobile--scrolled .site-header--mobile .c-logo__default {
+    opacity: 0; }
+  .is-dark .site-header-mobile--scrolled .site-header--mobile .c-logo__inverted {
+    opacity: 1; } }
+
 .is-color-scheme-switcher-button {
   display: flex;
   align-items: center; }
@@ -2231,51 +2276,6 @@ table {
   .is-color-scheme-switcher-button a {
     color: currentColor;
     text-decoration: none; }
-
-@media only screen and (min-width: 1000px) {
-  .scheme-switcher__wrapper {
-    display: none; } }
-
-@media not screen and (min-width: 1000px) {
-  .scheme-switcher__wrapper .menu-item {
-    margin-left: 1em; } }
-
-@media not screen and (min-width: 1000px) {
-  .is-dark .c-logo__default {
-    opacity: 0; }
-  .is-dark .site-header-mobile--scrolled .site-header--mobile .c-logo__default {
-    opacity: 0; }
-  .is-dark .site-header-mobile--scrolled .site-header--mobile .c-logo__inverted {
-    opacity: 1; } }
-
-.is-dark .site-header--mobile,
-.is-dark .c-menu-toggle {
-  color: var(--sm-light-primary); }
-
-.is-dark .c-logo__inverted {
-  opacity: 1; }
-
-.is-dark .site-header--mobile .c-logo__inverted {
-  opacity: 1; }
-
-.is-dark .site-header--mobile .c-logo__default {
-  opacity: 0; }
-
-.is-dark .novablocks-opentable.novablocks-opentable__standard[class] .ot-powered-by {
-  -webkit-filter: unset;
-  mix-blend-mode: unset; }
-
-.is-dark .novablocks-opentable.novablocks-opentable__wide[class] .ot-powered-by {
-  -webkit-filter: invert(1) saturate(0);
-  mix-blend-mode: lighten; }
-
-@media not screen and (min-width: 1000px) {
-  .is-dark .c-logo__default {
-    opacity: 0; }
-  .is-dark .site-header-mobile--scrolled .site-header--mobile .c-logo__default {
-    opacity: 0; }
-  .is-dark .site-header-mobile--scrolled .site-header--mobile .c-logo__inverted {
-    opacity: 1; } }
 
 /* 2.2. Site Content */
 /* 2.3. Site Footer */
