@@ -125,14 +125,15 @@ function _createClass(Constructor, protoProps, staticProps) {
 module.exports = _createClass;
 
 /***/ }),
-/* 3 */
+/* 3 */,
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayWithoutHoles = __webpack_require__(5);
+var arrayWithoutHoles = __webpack_require__(6);
 
-var iterableToArray = __webpack_require__(6);
+var iterableToArray = __webpack_require__(7);
 
-var nonIterableSpread = __webpack_require__(7);
+var nonIterableSpread = __webpack_require__(8);
 
 function _toConsumableArray(arr) {
   return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
@@ -141,7 +142,7 @@ function _toConsumableArray(arr) {
 module.exports = _toConsumableArray;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -314,7 +315,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 function _arrayWithoutHoles(arr) {
@@ -330,7 +331,7 @@ function _arrayWithoutHoles(arr) {
 module.exports = _arrayWithoutHoles;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 function _iterableToArray(iter) {
@@ -340,7 +341,7 @@ function _iterableToArray(iter) {
 module.exports = _iterableToArray;
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 function _nonIterableSpread() {
@@ -350,7 +351,6 @@ function _nonIterableSpread() {
 module.exports = _nonIterableSpread;
 
 /***/ }),
-/* 8 */,
 /* 9 */,
 /* 10 */,
 /* 11 */,
@@ -461,7 +461,7 @@ function setAndResetElementStyles($element) {
   }
 }
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/toConsumableArray.js
-var toConsumableArray = __webpack_require__(3);
+var toConsumableArray = __webpack_require__(4);
 var toConsumableArray_default = /*#__PURE__*/__webpack_require__.n(toConsumableArray);
 
 // CONCATENATED MODULE: ./src/js/components/globalService.js
@@ -1559,7 +1559,7 @@ function () {
 
 /* harmony default export */ var components_header = (header_Header);
 // EXTERNAL MODULE: ./node_modules/js-cookie/src/js.cookie.js
-var js_cookie = __webpack_require__(4);
+var js_cookie = __webpack_require__(5);
 var js_cookie_default = /*#__PURE__*/__webpack_require__.n(js_cookie);
 
 // CONCATENATED MODULE: ./src/js/components/announcement-bar.js
@@ -1763,7 +1763,6 @@ function () {
     key: "initialize",
     value: function initialize() {
       this.onResize();
-      this.addSocialMenuClass();
       this.initialized = true;
       globalService.registerOnResize(this.onResize.bind(this));
       external_jQuery_default()(document).on('click', '.is-search-button a', this.openSearchOverlay);
@@ -1890,26 +1889,6 @@ function () {
       this.$menuItems.off('mousemove.hoverIntent mouseenter.hoverIntent mouseleave.hoverIntent');
       delete this.$menuItems.hoverIntent_t;
       delete this.$menuItems.hoverIntent_s;
-    }
-  }, {
-    key: "addSocialMenuClass",
-    value: function addSocialMenuClass() {
-      var $menuItem = external_jQuery_default()('.menu-item a');
-      var bodyStyle = window.getComputedStyle(document.documentElement);
-      var enableSocialIconsProp = bodyStyle.getPropertyValue('--enable-social-icons');
-      var enableSocialIcons = !!parseInt(enableSocialIconsProp, 10);
-
-      if (enableSocialIcons) {
-        $menuItem.each(function (index, obj) {
-          var elementStyle = window.getComputedStyle(obj);
-          var elementIsSocialProp = elementStyle.getPropertyValue('--is-social');
-          var elementIsSocial = !!parseInt(elementIsSocialProp, 10);
-
-          if (elementIsSocial) {
-            external_jQuery_default()(this).parent().addClass('social-menu-item');
-          }
-        });
-      }
     }
   }]);
 
