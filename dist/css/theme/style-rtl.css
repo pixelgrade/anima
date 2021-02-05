@@ -102,7 +102,8 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
 .page .site-content {
   padding-bottom: var(--theme-spacing-fluid-large); }
 
-.page:not(.has-no-spacing-top):not(.first-block-is-media) .site-content {
+.page :not(.has-no-spacing-top):not(.first-block-is-media) .site-content,
+.single-product :not(.has-no-spacing-top):not(.first-block-is-media) .site-content {
   padding-top: var(--theme-spacing-fluid-large); }
 
 @media only screen and (min-width: 1000px) {

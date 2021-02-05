@@ -21,10 +21,13 @@
     }
 }
 
-.page:not(.has-no-spacing-top):not(.first-block-is-media) {
-
-    .site-content {
-        padding-top: var(--theme-spacing-fluid-large);
+.page,
+.single-product {
+    :not(.has-no-spacing-top):not(.first-block-is-media) {
+        
+        .site-content {
+            padding-top: var(--theme-spacing-fluid-large);
+        }
     }
 }
 
