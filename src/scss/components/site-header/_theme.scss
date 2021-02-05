@@ -18,10 +18,6 @@ $site-header-transition-speed: .3s !default;
         pointer-events: none;
     
         .site-header__row {
-            &--secondary {
-                padding-top: var(--theme-spacing-default);
-                padding-bottom: var(--theme-spacing-tiny);
-            }
         
             &--logo {
                 padding-top: var(--theme-spacing-xsmall);
@@ -134,4 +130,8 @@ body.has-site-header-transparent  {
 
 .site-header__row {
     --block-top-spacing: 0;
+    
+    &--secondary {
+    
+    }
 }
