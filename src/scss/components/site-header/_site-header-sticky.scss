@@ -20,6 +20,13 @@
 		}
 	}
 	
+	&:not(.primary-menu--is-visible) {
+		
+		.site-header__row--primary:not(:only-child) {
+			display: none;
+		}
+	}
+	
 	.site-header__row--primary:not(:only-child) {
 		position: absolute;
 		width: 100%;

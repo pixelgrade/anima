@@ -1547,6 +1547,8 @@ table {
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0); }
+  .site-header-sticky:not(.primary-menu--is-visible) .site-header__row--primary:not(:only-child) {
+    display: none; }
   .site-header-sticky .site-header__row--primary:not(:only-child) {
     position: absolute;
     width: 100%;
@@ -1882,7 +1884,8 @@ table {
 
 .c-logo__default,
 .c-logo__inverted {
-  transition: opacity .3s ease-out 0.075s; }
+  transition: var(--theme-transition);
+  transition-property: opacity; }
 
 .c-search-overlay {
   position: fixed;
