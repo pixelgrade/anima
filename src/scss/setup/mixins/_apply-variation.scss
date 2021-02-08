@@ -1,6 +1,6 @@
 @mixin apply-variation( $i ) {
+    --sm-current-bg-color: var(--sm-bg-color-#{ $i });
     --sm-current-accent-color: var(--sm-accent-color-#{ $i });
-    --sm-current-background-color: var(--sm-color-#{ $i });
-    --sm-current-dark-color: var(--sm-dark-color-#{ $i });
-    --sm-current-darker-color: var(--sm-darker-color-#{ $i });
+    --sm-current-fg1-color: var(--sm-fg1-color-#{ $i });
+    --sm-current-fg2-color: var(--sm-fg2-color-#{ $i });
 }

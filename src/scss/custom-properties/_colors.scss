@@ -1,16 +1,31 @@
-
 // ATTENTION!
 // This file shouldn't be modified. Proceed with caution!
 
-//:root {
-//    @each $category in color, dark, light {
-//        @each $level in primary, secondary, tertiary {
-//            // copies values from --wp--color--color-name to --sm-color-name
-//            --sm-#{$category}-#{$level}: var(--wp--color--#{$category}-#{$level}, #{map-get( $theme-colors, #{$category}-#{$level} )});
-//            // copies values from --sm-color-name to --theme-color-name
-//            --theme-#{$category}-#{$level}: var(--sm-#{$category}-#{$level});
-//            // copies values from --theme-color-name to --current-color-name
-//            --current-#{$category}-#{$level}: var(--theme-#{$category}-#{$level});
-//        }
-//    }
-//}
+html {
+    @include apply-palette(1);
+    @include apply-variation(1);
+}
+
+@for $i from 1 through 12 {
+
+    .sm-variation-#{ $i } {
+        @include apply-variation($i);
+    }
+}
+
+@each $id in 1, 2, 3, success, error, warning, info {
+
+    .sm-palette-#{ $id } {
+        @include apply-palette( $id );
+    }
+
+    .sm-palette-#{ $id }.sm-palette--shifted {
+        @include apply-palette( $id, true );
+    }
+}
+
+html,
+[class*="sm-variation-"] {
+    background-color: var(--sm-current-bg-color);
+    color: var(--sm-current-fg1-color);
+}
