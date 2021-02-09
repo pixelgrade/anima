@@ -2,7 +2,7 @@
 	
 	&:not(.no-icon) {
 		a {
-			--search-icon-width: .9em;
+			--search-icon-width: calc( var(--icons-size-multiplier) * var(--final-font-size) );
 			
 			padding-left: calc(var(--search-icon-width) + 6px) !important;
 			overflow: visible;

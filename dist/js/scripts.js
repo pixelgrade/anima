@@ -1233,6 +1233,11 @@ function () {
     value: function initialize() {
       this.timeline = this.getIntroTimeline();
       external_jQuery_default()('.site-header__wrapper').css('transition', 'none');
+
+      if (this.$promoBar.length) {
+        this.promoBarHeight = this.$promoBar.outerHeight();
+      }
+
       this.$header.addClass('site-header--fixed site-header--ready');
       this.$mobileHeader.addClass('site-header--fixed site-header--ready');
       this.initToggleClick();
@@ -1308,10 +1313,6 @@ function () {
       this.box = this.element.getBoundingClientRect();
       this.scrollOffset = this.getScrollOffset();
       this.mobileHeaderHeight = this.getMobileHeaderHeight();
-
-      if (this.$promoBar.length) {
-        this.promoBarHeight = this.$promoBar.outerHeight();
-      }
     }
   }, {
     key: "onResize",

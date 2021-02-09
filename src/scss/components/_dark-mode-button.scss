@@ -3,10 +3,10 @@
 	align-items: center;
 	
 	&:not(.no-icon) {
-		--switcher-icon-width: 1em;
+		--switcher-icon-width: calc( var(--icons-size-multiplier) * var(--final-font-size) );
 		
 		a {
-			padding-left: calc(1em + 6px) !important;
+			padding-left: calc(var(--switcher-icon-width) + 6px) !important;
 			
 			&:after {
 				content: '';

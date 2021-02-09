@@ -36,6 +36,12 @@
 
             > li {
                 margin-left: var(--theme-header-links-spacing);
+                
+                &.social-menu-item,
+                &.is-color-scheme-switcher-button,
+                &.is-search-button {
+                    margin-left: calc( var(--theme-header-links-spacing) / 2);
+                }
             }
 
             .customize-partial-edit-shortcut + > li:not(:first-child) {

@@ -335,6 +335,11 @@
       .wp-block-novablocks-navigation ul.menu > li,
       .wp-block-novablocks-navigation .menu > ul > li {
         margin-left: var(--theme-header-links-spacing); }
+        .wp-block-novablocks-navigation ul.menu > li.social-menu-item, .wp-block-novablocks-navigation ul.menu > li.is-color-scheme-switcher-button, .wp-block-novablocks-navigation ul.menu > li.is-search-button,
+        .wp-block-novablocks-navigation .menu > ul > li.social-menu-item,
+        .wp-block-novablocks-navigation .menu > ul > li.is-color-scheme-switcher-button,
+        .wp-block-novablocks-navigation .menu > ul > li.is-search-button {
+          margin-left: calc( var(--theme-header-links-spacing) / 2); }
       .wp-block-novablocks-navigation ul.menu .customize-partial-edit-shortcut + > li:not(:first-child),
       .wp-block-novablocks-navigation .menu > ul .customize-partial-edit-shortcut + > li:not(:first-child) {
         margin-left: 0; }
