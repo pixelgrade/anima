@@ -1,0 +1,92 @@
+.is-search-button {
+	
+	&:not(.no-icon) {
+		a {
+			--search-icon-width: calc( var(--icons-size-multiplier) * var(--final-font-size) );
+			
+			padding-left: calc(var(--search-icon-width) + 6px) !important;
+			overflow: visible;
+			
+			&:after {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 50%;
+				transform: translateY(-50%);
+				
+				display: block;
+				width: var(--search-icon-width);
+				height: var(--search-icon-width);
+				
+				border: 0;
+				padding: 0;
+				
+				mask: url($icon-search-path) no-repeat 50% 50%;
+				mask-size: contain;
+				-webkit-mask: url($icon-search-path) no-repeat 50% 50%;
+				-webkit-mask-size: contain;
+				
+				background-color: currentColor;
+				
+				overflow: visible;
+			}
+			
+			&:before {
+				width: calc(100% - var(--search-icon-width) - 8px) !important;
+			}
+		}
+	}
+	
+	&.icon-only {
+		text-indent: -9999px;
+		
+		a {
+			
+			&:before {
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				min-height: 45px;
+				min-width: 45px;
+				transform: translate(-50%, -50%);
+			}
+			
+			&:after {
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+		}
+	}
+	
+	.site-header__menu & {
+		@include below(lap) {
+			display: none;
+		}
+	}
+}
+
+.search-button__wrapper {
+	position: absolute;
+	top: 0;
+	
+	display: flex;
+	align-items: center;
+	
+	@include apply-font(body);
+	--font-size: 21;
+	
+	@include above(lap) {
+		display: none;
+	}
+	
+	li {
+		list-style: none;
+		
+		a {
+			color: currentColor;
+			text-decoration: none;
+			font-weight: 500;
+		}
+	}
+}

@@ -21,7 +21,6 @@ export default class Navbar {
 
 	initialize() {
 		this.onResize();
-		this.addSocialMenuClass();
 		this.initialized = true;
 		GlobalService.registerOnResize( this.onResize.bind( this ) );
 
@@ -139,24 +138,5 @@ export default class Navbar {
 		this.$menuItems.off( 'mousemove.hoverIntent mouseenter.hoverIntent mouseleave.hoverIntent' );
 		delete this.$menuItems.hoverIntent_t;
 		delete this.$menuItems.hoverIntent_s;
-	}
-
-	addSocialMenuClass() {
-		const $menuItem = $( '.menu-item a' );
-		const bodyStyle = window.getComputedStyle( document.documentElement );
-		const enableSocialIconsProp = bodyStyle.getPropertyValue( '--enable-social-icons' );
-		const enableSocialIcons = !! parseInt( enableSocialIconsProp, 10 );
-
-		if ( enableSocialIcons ) {
-			$menuItem.each( function( index, obj ) {
-				const elementStyle = window.getComputedStyle( obj );
-				const elementIsSocialProp = elementStyle.getPropertyValue( '--is-social' );
-				const elementIsSocial = !! parseInt( elementIsSocialProp, 10 );
-
-				if ( elementIsSocial ) {
-					$( this ).parent().addClass( 'social-menu-item' )
-				}
-			} );
-		}
 	}
 }
