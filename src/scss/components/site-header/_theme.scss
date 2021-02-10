@@ -56,6 +56,12 @@ $site-header-transition-speed: .3s !default;
     // and avoiding altering its height
     .site-header__wrapper {
        @include header-shadow;
+        
+        .site-header--sticky & {
+            &:after {
+                opacity: 0.1;
+            }
+        }
     }
 
     .has-site-header-transparent {
