@@ -1538,13 +1538,13 @@ table {
     width: 100vw;
     color: var(--sm-light-primary);
     background: transparent; }
-    .site-header:before {
+    .site-header:before, .site-header__content:before {
       content: '';
       position: absolute;
       right: 0;
       top: 0;
+      bottom: 0;
       width: 100%;
-      height: 100%;
       background-color: var(--sm-dark-primary);
       opacity: 0.95; }
     .c-menu-toggle__checkbox ~ .site-header {
