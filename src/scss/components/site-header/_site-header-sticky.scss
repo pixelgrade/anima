@@ -1,9 +1,6 @@
-.site-header-sticky {
-	
+.site-header--secondary {
 	padding-left: var(--theme-header-sides-spacing);
 	padding-right: var(--theme-header-sides-spacing);
-	
-	--header-background-opacity: 0.95;
 	
 	@include header-background;
 	@include header-shadow;
@@ -54,11 +51,16 @@
 	}
 }
 
+.site-header--sticky {
+	
+	--header-background-opacity: 0.95;
+}
+
 @include above(lap) {
 	
-	.site-header {
+	.site-header--main {
 		
-		&--is-sticky {
+		&--sticky {
 			--header-background-opacity: 1;
 			
 			.site-header__wrapper {
@@ -74,7 +76,7 @@
 			position: absolute;
 		}
 		
-		&.site-header--simple[data-sticky='primary'] {
+		&.site-header[data-sticky="true"] {
 			position: fixed;
 		}
 	}
