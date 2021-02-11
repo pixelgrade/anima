@@ -205,7 +205,12 @@ function rosa2_scripts() {
 		}
 	}
 
-	wp_enqueue_style( 'rosa2-style', get_template_directory_uri() . '/style.css', array(
+    // Nova Blocks Header Block frontend.js fallback
+	if ( ! rosa2_is_using_block( 'header', true ) ) {
+		wp_enqueue_script( 'novablocks/header/frontend', get_template_directory_uri() . '/dist/nova-blocks/block-library/blocks/header/frontend' . $suffix . '.js', array(), null, true );
+    }
+
+		wp_enqueue_style( 'rosa2-style', get_template_directory_uri() . '/style.css', array(
         'rosa2-social-links',
         'rosa2-custom-properties',
 		'rosa2-theme',

@@ -12,9 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 get_template_part( 'template-parts/menu-toggle' );
+
+$site_header_is_sticky = pixelgrade_option( 'header_position', 'sticky' ) === 'sticky';
+$sticky_attribute = $site_header_is_sticky ? 'data-sticky=true' : '';
 ?>
 
-<header id="masthead" class="site-header site-header--main site-header--logo-center">
+<header id="masthead" class="site-header site-header--main site-header--logo-center" <?php echo $sticky_attribute; ?>>
     <div class="site-header__wrapper">
         <div class="site-header__inner-container">
             <div class="site-header__content alignfull">
