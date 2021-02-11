@@ -2,7 +2,9 @@ $site-header-transition-speed: .3s !default;
 
 @media only screen and (min-width: 1000px) {
 
-    .site-header--main {
+    .site-header--main,
+    // Temporary fix for users that are not using Nova Blocks 1.9.0
+    .site-header:not(.site-header--main):not(.site-header--secondary) {
         top: 0;
         right: 0;
         left: 0;
@@ -95,7 +97,10 @@ $site-header-transition-speed: .3s !default;
     }
 
     .has-site-header-fixed .site-header--main:not(.site-header--ready),
-    body:not(.has-site-header-fixed) .site-header--main {
+    body:not(.has-site-header-fixed) .site-header--main,
+        // Temporary fix for users that are not using Nova Blocks 1.9.0
+    body:not(.has-site-header-fixed) .site-header:not(.site-header--main):not(.site-header--secondary),
+    .has-site-header-fixed .site-header:not(.site-header--main):not(.site-header--secondary) {
         position: absolute;
     }
 }
