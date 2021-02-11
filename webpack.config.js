@@ -34,6 +34,8 @@ module.exports = {
     './dist/js/editor.min' : './src/js/editor.js',
     './dist/js/admin/customizer-nav-menus' : './src/js/admin/customizer-nav-menus.js',
     './dist/js/admin/customizer-nav-menus.min' : './src/js/admin/customizer-nav-menus.js',
+    './dist/js/fallbacks/header-frontend' : './src/js/fallbacks/header-frontend.js',
+    './dist/js/fallbacks/header-frontend.min' : './src/js/fallbacks/header-frontend.js',
   },
   optimization: {
     minimize: true,
