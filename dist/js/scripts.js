@@ -1239,12 +1239,12 @@ function () {
     this.inversed = false;
     this.abovePromoBar = false;
     this.wasSticky = external_jQuery_default()('body').is('.has-site-header-fixed');
+    this.siteHeaderSticky = external_jQuery_default()('.site-header-sticky');
     this.offset = 0;
     this.scrollOffset = 0;
     this.mobileHeaderHeight = 0;
     this.promoBarHeight = 0;
     this.$page = external_jQuery_default()('#page .site-content');
-    this.$hero = external_jQuery_default()('.has-no-spacing-top .novablocks-hero').first().find('.novablocks-hero__foreground');
     this.$promoBar = external_jQuery_default()('.novablocks-announcement-bar');
     this.createMobileHeader();
     var $firstBlock = external_jQuery_default()('.entry-content').children().first();
@@ -1261,8 +1261,13 @@ function () {
   createClass_default()(Header, [{
     key: "initialize",
     value: function initialize() {
-      this.timeline = this.getInroTimeline();
+      this.timeline = this.getIntroTimeline();
       external_jQuery_default()('.site-header__wrapper').css('transition', 'none');
+
+      if (this.$promoBar.length) {
+        this.promoBarHeight = this.$promoBar.outerHeight();
+      }
+
       this.$header.addClass('site-header--fixed site-header--ready');
       this.$mobileHeader.addClass('site-header--fixed site-header--ready');
       this.initToggleClick();
@@ -1273,13 +1278,14 @@ function () {
     value: function update() {
       this.updatePageOffset();
       this.updateHeaderOffset();
+      this.updateStickyHeaderOffset();
       this.updateMobileHeaderOffset();
       this.updateHeaderButtonsHeight();
       this.updateSearchOverlayOffset();
     }
   }, {
-    key: "getInroTimeline",
-    value: function getInroTimeline() {
+    key: "getIntroTimeline",
+    value: function getIntroTimeline() {
       var element = this.element;
       var timeline = new TimelineMax({
         paused: true
@@ -1337,10 +1343,6 @@ function () {
       this.box = this.element.getBoundingClientRect();
       this.scrollOffset = this.getScrollOffset();
       this.mobileHeaderHeight = this.getMobileHeaderHeight();
-
-      if (this.$promoBar.length) {
-        this.promoBarHeight = this.$promoBar.outerHeight();
-      }
     }
   }, {
     key: "removeScrolledClassNames",
@@ -1356,7 +1358,6 @@ function () {
     key: "onResize",
     value: function onResize() {
       var $header = external_jQuery_default()(this.element);
-      var wasScrolled = $header.hasClass('site-header--scrolled');
       setAndResetElementStyles($header, {
         transition: 'none'
       });
@@ -1405,6 +1406,21 @@ function () {
         }
 
         _this.element.style.marginTop = _this.offset + 'px';
+      });
+    }
+  }, {
+    key: "updateStickyHeaderOffset",
+    value: function updateStickyHeaderOffset() {
+      var _this2 = this;
+
+      requestAnimationFrame(function () {
+        if (!_this2.siteHeaderSticky.length) {
+          return;
+        }
+
+        _this2.siteHeaderSticky.css({
+          marginTop: _this2.offset + 'px'
+        });
       });
     }
   }, {
@@ -1457,16 +1473,22 @@ function () {
   }, {
     key: "updateMobileNavigationOffset",
     value: function updateMobileNavigationOffset() {
+      if (!this.hasMobileNav()) {
+        return;
+      }
+
       var _GlobalService$getPro3 = globalService.getProps(),
           scrollY = _GlobalService$getPro3.scrollY;
 
-      if (this.hasMobileNav()) {
-        this.element.style.marginTop = Math.max(this.promoBarHeight - scrollY, 0) + 'px';
-      }
+      this.element.style.marginTop = Math.max(this.promoBarHeight - scrollY, 0) + 'px';
     }
   }, {
     key: "updateMobileHeaderState",
     value: function updateMobileHeaderState() {
+      if (!this.hasMobileNav()) {
+        return;
+      }
+
       var _GlobalService$getPro4 = globalService.getProps(),
           scrollY = _GlobalService$getPro4.scrollY;
 
@@ -1480,11 +1502,6 @@ function () {
   }, {
     key: "updateDesktopHeaderState",
     value: function updateDesktopHeaderState(inversed) {
-      var _GlobalService$getPro5 = globalService.getProps(),
-          scrollY = _GlobalService$getPro5.scrollY;
-
-      var scrolled = scrollY > this.scrollOffset;
-
       if (inversed !== this.inversed) {
         this.$header.toggleClass('site-header--normal', !inversed);
         this.inversed = inversed;
@@ -1586,7 +1603,7 @@ function () {
     key: "render",
     value: function render() {
       if (!this.element) return;
-      window.document.body.style.setProperty('--site-header-height', "".concat(this.visibleHeaderHeight, "px"));
+      window.document.body.style.setProperty('--site-header-height', "".concat(this.visibleHeaderHeight + this.promoBarHeight, "px"));
       window.document.body.style.setProperty('--site-promo-bar-height', "".concat(this.promoBarHeight, "px"));
       this.updateMobileNavigationOffset();
       this.updateMobileHeaderState();
@@ -1803,7 +1820,6 @@ function () {
     key: "initialize",
     value: function initialize() {
       this.onResize();
-      this.addSocialMenuClass();
       this.initialized = true;
       globalService.registerOnResize(this.onResize.bind(this));
       external_jQuery_default()(document).on('click', '.is-search-button a', this.openSearchOverlay);
@@ -1930,26 +1946,6 @@ function () {
       this.$menuItems.off('mousemove.hoverIntent mouseenter.hoverIntent mouseleave.hoverIntent');
       delete this.$menuItems.hoverIntent_t;
       delete this.$menuItems.hoverIntent_s;
-    }
-  }, {
-    key: "addSocialMenuClass",
-    value: function addSocialMenuClass() {
-      var $menuItem = external_jQuery_default()('.menu-item a');
-      var bodyStyle = window.getComputedStyle(document.documentElement);
-      var enableSocialIconsProp = bodyStyle.getPropertyValue('--enable-social-icons');
-      var enableSocialIcons = !!parseInt(enableSocialIconsProp, 10);
-
-      if (enableSocialIcons) {
-        $menuItem.each(function (index, obj) {
-          var elementStyle = window.getComputedStyle(obj);
-          var elementIsSocialProp = elementStyle.getPropertyValue('--is-social');
-          var elementIsSocial = !!parseInt(elementIsSocialProp, 10);
-
-          if (elementIsSocial) {
-            external_jQuery_default()(this).parent().addClass('social-menu-item');
-          }
-        });
-      }
     }
   }]);
 

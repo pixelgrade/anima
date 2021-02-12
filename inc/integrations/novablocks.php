@@ -34,6 +34,7 @@ if ( ! function_exists( 'rosa2_novablocks_setup' ) ) {
 			'card',
 			'google-map',
 			'header',
+			'header-row',
 			'headline',
 			'hero',
 			'logo',

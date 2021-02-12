@@ -105,7 +105,8 @@ body.single-post {
 .page .site-content {
   padding-bottom: var(--theme-spacing-fluid-large); }
 
-.page:not(.has-no-spacing-top) .site-content {
+.page:not(.has-no-spacing-top):not(.first-block-is-media) .site-content,
+.single-product:not(.has-no-spacing-top):not(.first-block-is-media) .site-content {
   padding-top: var(--theme-spacing-fluid-large); }
 
 @media only screen and (min-width: 1000px) {
