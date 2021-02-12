@@ -8,7 +8,7 @@
  * or theme author for support.
  *
  * @package   TGM-Plugin-Activation
- * @version   2.6.5 for Theme
+ * @version   2.6.6 for Pixelgrade Care
  * @link      http://tgmpluginactivation.com/
  * @author    Thomas Griffin, Gary Jones, Juliette Reinders Folmer
  * @copyright Copyright (c) 2011, Thomas Griffin
@@ -55,7 +55,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 		 *
 		 * @const string Version number.
 		 */
-		const TGMPA_VERSION = '2.6.5'; // Version bump by Pixelgrade!!!
+		const TGMPA_VERSION = '2.6.6'; // Version bump by Pixelgrade!!!
 
 		/**
 		 * Regular expression to test if a URL is a WP plugin repo URL.
@@ -345,8 +345,8 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 				),
 				'notice_ask_to_update'            => _n_noop(
 				/* translators: 1: plugin name(s). */
-					'The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s.',
-					'The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s.',
+					'⚠️ The following plugin needs to be updated to its latest version to ensure maximum compatibility with your theme: %1$s.',
+					'⚠️ The following plugins need to be updated to their latest version to ensure maximum compatibility with your theme: %1$s.',
 					'__theme_txtd'
 				),
 				'notice_ask_to_update_maybe'      => _n_noop(
@@ -1018,14 +1018,11 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 		 * @return null Returns early if we're on the Install page.
 		 */
 		public function notices() {
+			// Pixelgrade addition and modification!!!
+			// Allow others to override the default behavior:
 			// Remove nag on the install page / Return early if the nag message has been dismissed or user < author.
-			if ( ( $this->is_tgmpa_page() || $this->is_core_update_page() ) || get_user_meta( get_current_user_id(), 'tgmpa_dismissed_notice_' . $this->id, true ) || ! current_user_can( apply_filters( 'tgmpa_show_admin_notice_capability', 'publish_posts' ) ) ) {
-				return;
-			}
-
-			// Pixelgrade addition!!!
-			// Allow others to prevent notices.
-			if ( ! apply_filters( 'tgmpa_show_admin_notices', true ) ) {
+			// But, since there are situations when we want to show the notice regardless if the user has dismissed the notice, we need handle the dismissal via filters.
+			if ( apply_filters( 'tgmpa_prevent_admin_notices', ( ( $this->is_tgmpa_page() || $this->is_core_update_page() ) || ! current_user_can( apply_filters( 'tgmpa_show_admin_notice_capability', 'publish_posts' ) ) ) ) ) {
 				return;
 			}
 
