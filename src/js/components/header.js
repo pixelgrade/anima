@@ -23,7 +23,6 @@ class Header {
 		this.$colorSchemeSwitcher = $( '.is-color-scheme-switcher-button' );
 		this.$searchOverlay = $( '.c-search-overlay' );
 
-		this.scrolled = false;
 		this.inversed = false;
 		this.abovePromoBar = false;
 		this.wasSticky = $( 'body' ).is( '.has-site-header-fixed' );
@@ -127,34 +126,15 @@ class Header {
 		this.mobileHeaderHeight = this.getMobileHeaderHeight();
 	}
 
-	removeScrolledClassNames() {
-		this.$header
-		    .removeClass( `site-header--scrolled ${ this.initialColorClasses }` )
-			.addClass( this.transparentColorClasses );
-
-	}
-
-	addScrolledClassNames() {
-		this.$header
-		    .removeClass( this.transparentColorClasses )
-		    .addClass( `site-header--scrolled ${ this.initialColorClasses }` );
-	}
-
 	onResize() {
 		const $header = $( this.element );
 
 		setAndResetElementStyles( $header, { transition: 'none' } );
 		setAndResetElementStyles( this.$searchOverlay, { transition: 'none' } );
 
-		this.removeScrolledClassNames();
-
 		this.getProps();
 		this.setVisibleHeaderHeight();
 		this.shouldMakeHeaderStatic();
-
-		if ( wasScrolled ) {
-			this.addScrolledClassNames();
-		}
 
 		this.initHeaderButtons();
 
@@ -268,14 +248,6 @@ class Header {
 			this.inversed = inversed;
 		}
 
-		if ( scrolled !== this.scrolled ) {
-			if ( scrolled ) {
-				this.addScrolledClassNames();
-			} else {
-				this.removeScrolledClassNames();
-			}
-			this.scrolled = scrolled;
-		}
 	}
 
 	createMobileHeader() {

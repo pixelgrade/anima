@@ -1235,7 +1235,6 @@ function () {
     this.$searchCancelButton = external_jQuery_default()('.c-search-overlay__cancel');
     this.$colorSchemeSwitcher = external_jQuery_default()('.is-color-scheme-switcher-button');
     this.$searchOverlay = external_jQuery_default()('.c-search-overlay');
-    this.scrolled = false;
     this.inversed = false;
     this.abovePromoBar = false;
     this.wasSticky = external_jQuery_default()('body').is('.has-site-header-fixed');
@@ -1345,16 +1344,6 @@ function () {
       this.mobileHeaderHeight = this.getMobileHeaderHeight();
     }
   }, {
-    key: "removeScrolledClassNames",
-    value: function removeScrolledClassNames() {
-      this.$header.removeClass("site-header--scrolled ".concat(this.initialColorClasses)).addClass(this.transparentColorClasses);
-    }
-  }, {
-    key: "addScrolledClassNames",
-    value: function addScrolledClassNames() {
-      this.$header.removeClass(this.transparentColorClasses).addClass("site-header--scrolled ".concat(this.initialColorClasses));
-    }
-  }, {
     key: "onResize",
     value: function onResize() {
       var $header = external_jQuery_default()(this.element);
@@ -1364,15 +1353,9 @@ function () {
       setAndResetElementStyles(this.$searchOverlay, {
         transition: 'none'
       });
-      this.removeScrolledClassNames();
       this.getProps();
       this.setVisibleHeaderHeight();
       this.shouldMakeHeaderStatic();
-
-      if (wasScrolled) {
-        this.addScrolledClassNames();
-      }
-
       this.initHeaderButtons();
 
       if (!this.hasMobileNav()) {
@@ -1505,16 +1488,6 @@ function () {
       if (inversed !== this.inversed) {
         this.$header.toggleClass('site-header--normal', !inversed);
         this.inversed = inversed;
-      }
-
-      if (scrolled !== this.scrolled) {
-        if (scrolled) {
-          this.addScrolledClassNames();
-        } else {
-          this.removeScrolledClassNames();
-        }
-
-        this.scrolled = scrolled;
       }
     }
   }, {
