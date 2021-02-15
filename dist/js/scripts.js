@@ -585,13 +585,14 @@ function () {
           wp.customize.selectiveRefresh.bind('partial-content-rendered', this._updateProps.bind(this));
         }
 
-        wp.customize.bind('change', this._updateProps.bind(this));
+        wp.customize.bind('change', debounce(this._updateProps.bind(this), 100));
       }
     }
   }, {
     key: "_updateProps",
     value: function _updateProps() {
       var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      console.log('changed');
 
       this._updateSize(force);
 

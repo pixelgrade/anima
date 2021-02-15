@@ -87,11 +87,12 @@ class GlobalService {
 			if ( typeof wp.customize.selectiveRefresh !== "undefined" ) {
 				wp.customize.selectiveRefresh.bind( 'partial-content-rendered', this._updateProps.bind( this ) );
 			}
-			wp.customize.bind( 'change', this._updateProps.bind( this ) );
+			wp.customize.bind( 'change', debounce( this._updateProps.bind( this ), 100 ) );
 		}
 	}
 
 	_updateProps( force = false ) {
+		console.log( 'changed' );
 		this._updateSize( force );
 		this._updateScroll( force );
 	}
