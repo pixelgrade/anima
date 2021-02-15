@@ -1,7 +1,7 @@
 :root,
 .novablocks-block {
-  --sm-button-background-color: var(--sm-current-darker-color);
-  --sm-button-foreground-color: var(--sm-current-background-color); }
+  --sm-button-background-color: var(--sm-current-fg2-color);
+  --sm-button-foreground-color: var(--sm-current-bg-color); }
 
 /* Archives Block */
 .wp-block-archives-list {
@@ -148,7 +148,7 @@
     border-width: .15em; }
 
 .item-title {
-  background-color: var(--sm-current-background-color); }
+  background-color: var(--sm-current-bg-color); }
 
 .wp-block-novablocks-menu-food-item.is-style-rounded {
   --item-border-radius: 0.4em; }
@@ -214,11 +214,11 @@
   width: 160px;
   height: 50px;
   top: 100%;
-  color: var(--sm-current-background-color);
+  color: var(--sm-current-bg-color);
   background: none;
   z-index: 1; }
   .novablocks-hero__indicator:not(.novablocks-hero__indicator--middle):after {
-    color: var(--sm-current-darker-color); }
+    color: var(--sm-current-fg2-color); }
 
 @media not screen and (min-width: 1000px) {
   .c-bully {
@@ -288,7 +288,7 @@
     object-fit: contain; }
 
 .novablocks-media--blog[class] {
-  --novablocks-block-background-color: var(--sm-current-background-color); }
+  --novablocks-block-background-color: var(--sm-current-bg-color); }
   .novablocks-media--blog[class] .novablocks-media__content {
     flex-basis: calc(50% - var(--novablocks-media-spacing)); }
   .novablocks-media--blog[class] .novablocks-media__aside {
@@ -360,11 +360,11 @@
       padding-right: 1.25em; } }
 
 .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button {
-  --theme-button-hover-background-color: var(--sm-current-background-color);
-  --theme-button-hover-text-color: var(--sm-current-darker-color);
-  --theme-button-background-color: var(--sm-current-darker-color);
-  --theme-button-border-color: var(--sm-current-darker-color);
-  --theme-button-text-color: var(--sm-current-background-color);
+  --theme-button-hover-background-color: var(--sm-current-bg-color);
+  --theme-button-hover-text-color: var(--sm-current-fg2-color);
+  --theme-button-background-color: var(--sm-current-fg2-color);
+  --theme-button-border-color: var(--sm-current-fg2-color);
+  --theme-button-text-color: var(--sm-current-bg-color);
   padding: var(--theme-button-padding);
   border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
   border-radius: var(--theme-button-border-radius);
@@ -397,12 +397,12 @@
     color: var(--current-button-hover-text-color); }
 
 .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button {
-  --theme-button-hover-background-color: var(--sm-current-darker-color);
-  --theme-button-hover-text-color: var(--sm-current-background-color);
-  --theme-button-background-color: var(--sm-current-background-color);
-  --theme-button-border-color: var(--sm-current-background-color);
-  --theme-button-hover-border-color: var(--sm-current-background-color);
-  --theme-button-text-color: var(--sm-current-darker-color);
+  --theme-button-hover-background-color: var(--sm-current-fg2-color);
+  --theme-button-hover-text-color: var(--sm-current-bg-color);
+  --theme-button-background-color: var(--sm-current-bg-color);
+  --theme-button-border-color: var(--sm-current-bg-color);
+  --theme-button-hover-border-color: var(--sm-current-bg-color);
+  --theme-button-text-color: var(--sm-current-fg2-color);
   padding: var(--theme-button-padding);
   border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
   border-radius: var(--theme-button-border-radius);
@@ -450,9 +450,9 @@
   transition: var(--theme-transition);
   transition-property: opacity; }
   .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] {
-    border-color: var(--sm-current-dark-color); }
+    border-color: var(--sm-current-fg1-color); }
     .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link {
-      color: var(--sm-current-dark-color); }
+      color: var(--sm-current-fg1-color); }
       .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link:before {
         color: currentColor; }
       .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link:after {
@@ -526,7 +526,7 @@
   mask-size: cover;
   -webkit-mask: url("../../../assets/images/icon-arrow.svg") no-repeat 50% 50%;
   -webkit-mask-size: cover;
-  background-color: var(--sm-current-background-color); }
+  background-color: var(--sm-current-bg-color); }
 
 .novablocks-slideshow__arrow--prev:before {
   transform: translate(-50%, -50%); }
@@ -542,7 +542,7 @@
   margin-top: 0;
   border: 0;
   border-radius: 50%;
-  background-color: var(--sm-current-background-color);
+  background-color: var(--sm-current-bg-color);
   opacity: 0;
   transition: opacity 0.15s ease-in;
   transform: none; }

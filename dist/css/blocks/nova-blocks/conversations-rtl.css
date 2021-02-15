@@ -3,15 +3,15 @@
   --comments-grid-gap: 1.4rem;
   --component-accent-color: var(--sm-current-accent-color);
   --novablocks-conversations-width: 48em;
-  --field-description-color: var(--sm-current-darker-color);
-  --conversations-bg-color: var(--sm-current-background-color);
-  --conversations-reply-bg-color: var(--sm-current-background-color);
+  --field-description-color: var(--sm-current-fg2-color);
+  --conversations-bg-color: var(--sm-current-bg-color);
+  --conversations-reply-bg-color: var(--sm-current-bg-color);
   --comment-author-color: var(--component-accent-color);
   --comment-links-color: var(--component-accent-color);
   --comment-highlighted-color: #FFF2CE;
   --comment-font-size: calc(var(--theme-body-final-font-size) * 1.05);
   --label-font-size: var(--final-font-size);
-  --label-bg-color: var(--sm-current-darker-color);
+  --label-bg-color: var(--sm-current-fg2-color);
   --label-highlighted-bg-color: var(--theme-dark-primary);
   --label-border-radius: 999em;
   --comment-footer-font-size: var(--final-font-size);
@@ -69,7 +69,7 @@
         margin-right: 0;
         margin-left: 0; }
       .novablocks-conversations .comment.parent > .comment-wrapper {
-        color: var(--sm-current-darker-color); }
+        color: var(--sm-current-fg2-color); }
       .novablocks-conversations .comment .comment-respond {
         padding-right: var(--theme-wrapper-sides-spacing);
         padding-left: var(--theme-wrapper-sides-spacing); } }
@@ -77,10 +77,10 @@
     --font-size: 16;
     font-size: var(--final-font-size); }
   .novablocks-conversations .comment-dropdown-menu {
-    background-color: var(--sm-current-background-color);
-    color: var(--sm-current-darker-color); }
+    background-color: var(--sm-current-bg-color);
+    color: var(--sm-current-fg2-color); }
     .novablocks-conversations .comment-dropdown-menu:after {
-      border-color: transparent transparent var(--sm-current-background-color); }
+      border-color: transparent transparent var(--sm-current-bg-color); }
     @media only screen and (min-width: 768px) {
       .novablocks-conversations .comment-dropdown-menu {
         top: calc(var(--current-line-height) * var(--final-font-size)); } }
@@ -114,7 +114,7 @@
   .novablocks-conversations .comments-pagination .page-numbers > li {
     margin-top: 0; }
   .novablocks-conversations .comments-pagination .page-numbers .page-numbers:not(.current) {
-    border-color: var(--sm-current-darker-color); }
+    border-color: var(--sm-current-fg2-color); }
     .novablocks-conversations .comments-pagination .page-numbers .page-numbers:not(.current):hover {
       border-color: var(--component-accent-color);
       color: var(--theme-light-primary); }
@@ -161,8 +161,8 @@
   opacity: .5; }
 
 .novablocks-conversations__notification-text[class] span {
-  background-color: var(--sm-current-darker-color);
-  color: var(--sm-current-background-color); }
+  background-color: var(--sm-current-fg2-color);
+  color: var(--sm-current-bg-color); }
 
 @media not screen and (min-width: 1000px) {
   .novablocks-conversation__starter {

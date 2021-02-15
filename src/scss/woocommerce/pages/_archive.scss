@@ -12,7 +12,7 @@
 
 
     a {
-        color: var(--sm-current-darker-color);
+        color: var(--sm-current-fg2-color);
         padding-bottom: .5em;
         padding-top: .5em;
 
@@ -88,7 +88,7 @@
     }
 
     select {
-        color: var(--sm-current-dark-color);
+        color: var(--sm-current-fg1-color);
 
         @include select;
 
@@ -106,7 +106,7 @@
         box-shadow: none;
 
         @include below(tablet) {
-            border: 1px solid var(--sm-current-background-color);
+            border: 1px solid var(--sm-current-bg-color);
             padding: var(--theme-spacing);
         }
     }

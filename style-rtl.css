@@ -342,8 +342,8 @@ template {
 
 :root,
 .novablocks-block {
-  --sm-button-background-color: var(--sm-current-darker-color);
-  --sm-button-foreground-color: var(--sm-current-background-color); }
+  --sm-button-background-color: var(--sm-current-fg2-color);
+  --sm-button-foreground-color: var(--sm-current-bg-color); }
 
 /* 0.2. Elements */
 html {
@@ -426,12 +426,12 @@ input[type="checkbox"] {
   width: var(--theme-checkbox-width) !important;
   height: var(--theme-checkbox-height) !important;
   margin-left: var(--theme-input-horizontal-spacing);
-  background-color: var(--sm-current-background-color);
+  background-color: var(--sm-current-bg-color);
   cursor: pointer;
   -webkit-appearance: none;
   border-color: var(--sm-current-accent-color);
   transition: all .2s ease-in-out;
-  color: var(--sm-current-background-color); }
+  color: var(--sm-current-bg-color); }
   input[type="checkbox"]:after {
     content: "";
     display: block;
@@ -466,7 +466,7 @@ input[type="radio"] {
   width: var(--theme-checkbox-width) !important;
   height: var(--theme-checkbox-height) !important;
   margin-left: var(--theme-input-horizontal-spacing);
-  background-color: var(--sm-current-background-color);
+  background-color: var(--sm-current-bg-color);
   cursor: pointer;
   -webkit-appearance: none;
   border-radius: 50%;
@@ -708,7 +708,7 @@ select {
   -webkit-appearance: none;
   --select-icon-size: 6px;
   padding-left: 3.125em;
-  background-image: linear-gradient(-45deg, transparent 50%, var(--sm-current-darker-color) 50%), linear-gradient(-135deg, var(--sm-current-darker-color) 50%, transparent 50%);
+  background-image: linear-gradient(-45deg, transparent 50%, var(--sm-current-fg2-color) 50%), linear-gradient(-135deg, var(--sm-current-fg2-color) 50%, transparent 50%);
   background-position: calc(100% - (100% - var(--theme-input-padding) - var(--select-icon-size))) center, calc(100% - (100% - var(--theme-input-padding))) center;
   background-size: var(--select-icon-size) var(--select-icon-size), var(--select-icon-size) var(--select-icon-size);
   background-repeat: no-repeat;
@@ -1018,7 +1018,7 @@ table {
 .site-header--mobile {
   display: none; }
   .site-header--mobile.site-header--scrolled {
-    color: var(--sm-current-darker-color); }
+    color: var(--sm-current-fg2-color); }
 
 .site-header {
   --theme-button-padding: .25em 1em;
@@ -1165,7 +1165,7 @@ table {
   .site-header .menu-item-label {
     background-color: var(--sm-current-accent-color);
     background-image: linear-gradient(to left, transparent, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1));
-    color: var(--sm-current-background-color);
+    color: var(--sm-current-bg-color);
     font-size: 0.5em;
     text-transform: uppercase;
     font-weight: bold;
@@ -1200,8 +1200,8 @@ table {
       opacity: 0;
       width: 15.625em;
       padding: .75em 0;
-      background-color: var(--sm-current-background-color);
-      color: var(--sm-current-darker-color);
+      background-color: var(--sm-current-bg-color);
+      color: var(--sm-current-fg2-color);
       border-radius: 0.1875em;
       box-shadow: 0 0.25em 2em rgba(0, 0, 0, 0.1), 0 0.125em 0.25em rgba(0, 0, 0, 0.1);
       transition: all 0.2s cubic-bezier(0.42, 0, 0.58, 1);
@@ -1392,7 +1392,7 @@ table {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--sm-current-background-color);
+    background-color: var(--sm-current-bg-color);
     opacity: var(--header-background-opacity, 0);
     transition: var(--theme-transition);
     transition-property: opacity; }
@@ -1435,7 +1435,7 @@ table {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--sm-current-background-color);
+    background-color: var(--sm-current-bg-color);
     opacity: var(--header-background-opacity, 0);
     transition: var(--theme-transition);
     transition-property: opacity; }
@@ -1480,7 +1480,7 @@ table {
       top: 0;
       width: 100%;
       height: 100%;
-      background-color: var(--sm-current-background-color);
+      background-color: var(--sm-current-bg-color);
       opacity: var(--header-background-opacity, 0);
       transition: var(--theme-transition);
       transition-property: opacity; }
@@ -1602,7 +1602,7 @@ table {
       top: 0;
       width: 100%;
       height: 100%;
-      background-color: var(--sm-current-background-color);
+      background-color: var(--sm-current-bg-color);
       opacity: var(--header-background-opacity, 0);
       transition: var(--theme-transition);
       transition-property: opacity; }
@@ -1655,7 +1655,7 @@ table {
     z-index: 1000; }
   .site-header-mobile--scrolled.has-site-header-fixed .site-header--mobile {
     position: fixed;
-    color: var(--sm-current-darker-color); }
+    color: var(--sm-current-fg2-color); }
     .site-header-mobile--scrolled.has-site-header-fixed .site-header--mobile:before {
       --header-background-opacity: .95; }
     .site-header-mobile--scrolled.has-site-header-fixed .site-header--mobile:after {
@@ -1667,7 +1667,7 @@ table {
   .site-header-mobile--scrolled.has-site-header-fixed .c-menu-toggle__wrap {
     position: fixed; }
   .site-header-mobile--scrolled.has-site-header-fixed .c-menu-toggle {
-    color: var(--sm-current-darker-color); }
+    color: var(--sm-current-fg2-color); }
   .site-header-mobile--scrolled.has-site-header-fixed .site-header--mobile,
   .site-header-mobile--scrolled.has-site-header-fixed .c-menu-toggle__wrap {
     transform: translateY(0) !important; }
@@ -2202,8 +2202,8 @@ table {
 .site-footer--fallback {
   padding-top: var(--theme-spacing-medium);
   padding-bottom: var(--theme-spacing-medium);
-  background-color: var(--sm-current-background-color);
-  color: var(--sm-current-dark-color); }
+  background-color: var(--sm-current-bg-color);
+  color: var(--sm-current-fg1-color); }
   .site-footer--fallback a {
     color: inherit;
     text-decoration: underline; }
@@ -2654,7 +2654,7 @@ label.subscribe-label.subscribe-label {
 .bypostauthor {
   color: inherit; }
   .bypostauthor .comment__author {
-    color: var(--sm-current-darker-color); }
+    color: var(--sm-current-fg2-color); }
 
 .says {
   display: none; }
@@ -2758,7 +2758,7 @@ label.subscribe-label.subscribe-label {
 
 a.page-numbers,
 span.page-numbers {
-  color: var(--sm-current-dark-color); }
+  color: var(--sm-current-fg1-color); }
   a.page-numbers[class][class],
   span.page-numbers[class][class] {
     width: 3em;
@@ -2768,11 +2768,11 @@ span.page-numbers {
     align-items: center; }
     a.page-numbers[class][class].current,
     span.page-numbers[class][class].current {
-      background-color: var(--sm-current-dark-color);
-      color: var(--sm-current-background-color); }
+      background-color: var(--sm-current-fg1-color);
+      color: var(--sm-current-bg-color); }
     a.page-numbers[class][class]:not(.current):hover,
     span.page-numbers[class][class]:not(.current):hover {
-      color: var(--sm-current-darker-color); }
+      color: var(--sm-current-fg2-color); }
   a.page-numbers.next[class], a.page-numbers.prev[class],
   span.page-numbers.next[class],
   span.page-numbers.prev[class] {
@@ -2919,8 +2919,8 @@ span.page-numbers {
     width: auto;
     height: auto;
     padding: 15px 23px 14px;
-    color: var(--sm-current-darker-color);
-    background-color: var(--sm-current-background-color);
+    color: var(--sm-current-fg2-color);
+    background-color: var(--sm-current-bg-color);
     box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
     border-radius: 3px;
     font-size: 14px;
@@ -3030,13 +3030,13 @@ span.page-numbers {
     --font-size: 23;
     max-width: 100%; }
     .search-form .search-submit::-webkit-input-placeholder {
-      color: var(--sm-current-dark-color); }
+      color: var(--sm-current-fg1-color); }
     .search-form .search-submit:-moz-placeholder {
-      color: var(--sm-current-dark-color); }
+      color: var(--sm-current-fg1-color); }
     .search-form .search-submit::-moz-placeholder {
-      color: var(--sm-current-dark-color); }
+      color: var(--sm-current-fg1-color); }
     .search-form .search-submit:-ms-input-placeholder {
-      color: var(--sm-current-dark-color); }
+      color: var(--sm-current-fg1-color); }
   .search-form .search-field {
     border: 0;
     padding: 0 .8em;
@@ -3057,10 +3057,10 @@ span.page-numbers {
     --theme-button-hover-text-color: var(--sm-color-primary); }
   .error404 .search-form .search-field,
   .search-no-results .search-form .search-field {
-    color: var(--sm-current-darker-color); }
+    color: var(--sm-current-fg2-color); }
   .error404 .search-form .search-icon,
   .search-no-results .search-form .search-icon {
-    background-color: var(--sm-current-darker-color); }
+    background-color: var(--sm-current-fg2-color); }
 
 /* 3. Blocks */
 /*
@@ -3120,7 +3120,7 @@ span.page-numbers {
     mask-size: cover;
     -webkit-mask: url("./assets/images/arrow-caret.svg") no-repeat 50% 50%;
     -webkit-mask-size: contain;
-    background-color: var(--sm-current-darker-color);
+    background-color: var(--sm-current-fg2-color);
     width: .58em;
     height: .58em;
     left: var(--theme-input-padding);
@@ -3142,7 +3142,7 @@ span.page-numbers {
 
 .select2-container .select2-results__option--highlighted[aria-selected] {
   background-color: var(--sm-current-accent-color);
-  color: var(--sm-current-background-color); }
+  color: var(--sm-current-bg-color); }
 
 .select2-container .select2-results__option[data-selected=true]:not([aria-selected="true"]) {
   background: transparent;
@@ -3168,12 +3168,12 @@ span.page-numbers {
     margin: 0; }
   .select2-container .select2-selection--multiple .select2-selection__choice {
     background-color: var(--sm-current-accent-color);
-    color: var(--sm-current-background-color);
+    color: var(--sm-current-bg-color);
     border: none;
     border-radius: var(--theme-input-border-radius);
     font-size: .75em; }
     .select2-container .select2-selection--multiple .select2-selection__choice__remove {
-      color: var(--sm-current-background-color);
+      color: var(--sm-current-bg-color);
       margin-left: var(--theme-spacing-tiny); }
       .select2-container .select2-selection--multiple .select2-selection__choice__remove:hover {
         color: inherit;
@@ -3196,9 +3196,9 @@ span.page-numbers {
 
 .select2-dropdown {
   box-shadow: var(--theme-input-box-shadow);
-  background-color: var(--sm-current-background-color); }
+  background-color: var(--sm-current-bg-color); }
   .select2-dropdown .select2-search__field {
-    background-color: var(--sm-current-background-color); }
+    background-color: var(--sm-current-bg-color); }
   .select2-dropdown:after {
     content: '';
     position: absolute;
@@ -3314,7 +3314,7 @@ span.page-numbers {
     -webkit-appearance: none;
     --select-icon-size: 6px;
     padding-left: 3.125em;
-    background-image: linear-gradient(-45deg, transparent 50%, var(--sm-current-darker-color) 50%), linear-gradient(-135deg, var(--sm-current-darker-color) 50%, transparent 50%);
+    background-image: linear-gradient(-45deg, transparent 50%, var(--sm-current-fg2-color) 50%), linear-gradient(-135deg, var(--sm-current-fg2-color) 50%, transparent 50%);
     background-position: calc(100% - (100% - var(--theme-input-padding) - var(--select-icon-size))) center, calc(100% - (100% - var(--theme-input-padding))) center;
     background-size: var(--select-icon-size) var(--select-icon-size), var(--select-icon-size) var(--select-icon-size);
     background-repeat: no-repeat;
@@ -3350,12 +3350,12 @@ span.page-numbers {
     width: var(--theme-checkbox-width) !important;
     height: var(--theme-checkbox-height) !important;
     margin-left: var(--theme-input-horizontal-spacing);
-    background-color: var(--sm-current-background-color);
+    background-color: var(--sm-current-bg-color);
     cursor: pointer;
     -webkit-appearance: none;
     border-color: var(--sm-current-accent-color);
     transition: all .2s ease-in-out;
-    color: var(--sm-current-background-color); }
+    color: var(--sm-current-bg-color); }
     .wpforms-container[class][class][class] .wpforms-form input[type="checkbox"]:after {
       content: "";
       display: block;
@@ -3389,7 +3389,7 @@ span.page-numbers {
     width: var(--theme-checkbox-width) !important;
     height: var(--theme-checkbox-height) !important;
     margin-left: var(--theme-input-horizontal-spacing);
-    background-color: var(--sm-current-background-color);
+    background-color: var(--sm-current-bg-color);
     cursor: pointer;
     -webkit-appearance: none;
     border-radius: 50%;
@@ -3508,7 +3508,7 @@ span.page-numbers {
   background: transparent;
   border: 0;
   padding: 1em;
-  color: var(--sm-current-darker-color);
+  color: var(--sm-current-fg2-color);
   --theme-notification-color: var(--theme-notification-succes-color);
   --theme-notification-opacity: 0.15; }
   .wpforms-confirmation-container-full:after {

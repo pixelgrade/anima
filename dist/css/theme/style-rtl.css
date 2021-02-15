@@ -1,7 +1,7 @@
 :root,
 .novablocks-block {
-  --sm-button-background-color: var(--sm-current-darker-color);
-  --sm-button-foreground-color: var(--sm-current-background-color); }
+  --sm-button-background-color: var(--sm-current-fg2-color);
+  --sm-button-foreground-color: var(--sm-current-bg-color); }
 
 figure > :not(:first-child) {
   --element-spacing: var(--theme-spacing-tiny);
@@ -11,7 +11,7 @@ pre,
 code {
   border: 1px solid;
   border-radius: 0.2em;
-  background: var(--sm-current-background-color); }
+  background: var(--sm-current-bg-color); }
 
 pre {
   padding: 1em; }
@@ -59,7 +59,7 @@ html:not(.wf-active) {
     opacity: 0; }
 
 .novablocks-media__image {
-  background-color: var(--sm-current-background-color);
+  background-color: var(--sm-current-bg-color);
   border: 2px solid var(--sm-current-color-3); }
 
 .entry-content > :not(.wp-block-group):not(.novablocks-media):not(.disabled-avoid-fout),
@@ -87,14 +87,14 @@ body:not(.has-loaded) .c-comments-toggle__checkbox + .c-comments-toggle__label ~
 
 /* Pages */
 body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-results) {
-  background-color: var(--sm-current-background-color); }
+  background-color: var(--sm-current-bg-color); }
   body.archive:not(.woocommerce-page) .novablocks-media__inner-container, body.blog .novablocks-media__inner-container, body.search:not(.search-no-results) .novablocks-media__inner-container {
     text-align: center; }
 
 body.single-post {
-  background-color: var(--sm-current-background-color); }
+  background-color: var(--sm-current-bg-color); }
   body.single-post .site-content {
-    background-color: var(--sm-current-background-color); }
+    background-color: var(--sm-current-bg-color); }
 
 .single .hentry > :not(:first-child),
 .page .hentry > :not(:first-child) {
@@ -126,7 +126,7 @@ body.single-post {
 .single .entry-header,
 .page .entry-header {
   --theme-content-width-normal: var(--theme-content-width-wide);
-  background-color: var(--sm-current-background-color); }
+  background-color: var(--sm-current-bg-color); }
   .single .entry-header > :not(:first-child),
   .page .entry-header > :not(:first-child) {
     --element-spacing: var(--theme-spacing);
@@ -143,7 +143,7 @@ body.single-post {
     right: 0;
     left: 0;
     height: 40%;
-    background-color: var(--sm-current-background-color); }
+    background-color: var(--sm-current-bg-color); }
   .single .entry-thumbnail > *,
   .page .entry-thumbnail > * {
     position: relative; }
@@ -163,7 +163,7 @@ body.single-post {
 
 .single .entry-thumbnail__container,
 .page .entry-thumbnail__container {
-  background-color: var(--sm-current-background-color); }
+  background-color: var(--sm-current-bg-color); }
 
 .post-password-form input[type="submit"] {
   width: 100%;

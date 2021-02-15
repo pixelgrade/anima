@@ -218,7 +218,7 @@
 
   > :not(.active) a {
     text-decoration: none;
-    color: var(--sm-current-darker-color);
+    color: var(--sm-current-fg2-color);
 
     &:hover {
       color: var(--sm-current-accent-color);
@@ -267,7 +267,7 @@
 
 // unstyle price
 .woocommerce[class] .product .price {
-  color: var(--sm-current-darker-color);
+  color: var(--sm-current-fg2-color);
 
   ins {
     font-weight: inherit;
@@ -652,9 +652,9 @@
 
 .woocommerce-breadcrumb {
   @include specific(1) {
-    color: var(--sm-current-darker-color);
+    color: var(--sm-current-fg2-color);
     a {
-      color: var(--sm-current-darker-color);
+      color: var(--sm-current-fg2-color);
       text-decoration-color: transparent;
 
       &:hover {
@@ -705,7 +705,7 @@
         }
 
         .meta {
-          color: var(--sm-current-darker-color);
+          color: var(--sm-current-fg2-color);
         }
 
         img.avatar {
@@ -725,7 +725,7 @@
             bottom: 0;
             width: 100%;
             height: 1px;
-            background-color: var(--sm-current-darker-color);
+            background-color: var(--sm-current-fg2-color);
             opacity: .3;
           }
         }
@@ -864,7 +864,7 @@
     
     background-color: transparent;
     background-image: none;
-    color: var(--sm-current-darker-color);
+    color: var(--sm-current-fg2-color);
     border: 0;
 
     width: 2em;
@@ -889,7 +889,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      border: 1px solid var(--sm-current-darker-color);
+      border: 1px solid var(--sm-current-fg2-color);
       border-radius: 50%;
       opacity: .3;
 

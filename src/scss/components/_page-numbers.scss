@@ -1,7 +1,7 @@
 a.page-numbers,
 span.page-numbers {
 
-    color: var(--sm-current-dark-color);
+    color: var(--sm-current-fg1-color);
 
     &[class][class] {
         width: 3em;
@@ -11,12 +11,12 @@ span.page-numbers {
         align-items: center;
 
         &.current {
-            background-color: var(--sm-current-dark-color);
-            color: var(--sm-current-background-color);
+            background-color: var(--sm-current-fg1-color);
+            color: var(--sm-current-bg-color);
         }
 
         &:not(.current):hover {
-            color: var(--sm-current-darker-color);
+            color: var(--sm-current-fg2-color);
         }
     }
 

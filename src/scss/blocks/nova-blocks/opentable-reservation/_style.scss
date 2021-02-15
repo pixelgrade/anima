@@ -3,11 +3,11 @@
     .ot-dtp-picker-form {
       .ot-dtp-picker-button {
 
-        --theme-button-hover-background-color: var(--sm-current-background-color);
-        --theme-button-hover-text-color: var(--sm-current-darker-color);
-        --theme-button-background-color: var(--sm-current-darker-color);
-        --theme-button-border-color: var(--sm-current-darker-color);
-        --theme-button-text-color: var(--sm-current-background-color);
+        --theme-button-hover-background-color: var(--sm-current-bg-color);
+        --theme-button-hover-text-color: var(--sm-current-fg2-color);
+        --theme-button-background-color: var(--sm-current-fg2-color);
+        --theme-button-border-color: var(--sm-current-fg2-color);
+        --theme-button-text-color: var(--sm-current-bg-color);
 
         @include button-box;
         @include button-fill;
@@ -26,12 +26,12 @@
     .ot-dtp-picker-form {
       .ot-dtp-picker-button {
 
-        --theme-button-hover-background-color: var(--sm-current-darker-color);
-        --theme-button-hover-text-color: var(--sm-current-background-color);
-        --theme-button-background-color: var(--sm-current-background-color);
-        --theme-button-border-color: var(--sm-current-background-color);
-        --theme-button-hover-border-color: var(--sm-current-background-color);
-        --theme-button-text-color: var(--sm-current-darker-color);
+        --theme-button-hover-background-color: var(--sm-current-fg2-color);
+        --theme-button-hover-text-color: var(--sm-current-bg-color);
+        --theme-button-background-color: var(--sm-current-bg-color);
+        --theme-button-border-color: var(--sm-current-bg-color);
+        --theme-button-hover-border-color: var(--sm-current-bg-color);
+        --theme-button-text-color: var(--sm-current-fg2-color);
 
         @include button-box;
         @include button-fill;
@@ -58,10 +58,10 @@
 .novablocks-opentable {
   &.novablocks-opentable__wide[class] {
     .ot-dtp-picker-selector[class][class] {
-      border-color: var(--sm-current-dark-color);
+      border-color: var(--sm-current-fg1-color);
 
       .ot-dtp-picker-selector-link {
-        color: var(--sm-current-dark-color);
+        color: var(--sm-current-fg1-color);
 
         &:before {
           color: currentColor;

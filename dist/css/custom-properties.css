@@ -1,7 +1,7 @@
 :root,
 .novablocks-block {
-  --sm-button-background-color: var(--sm-current-darker-color);
-  --sm-button-foreground-color: var(--sm-current-background-color); }
+  --sm-button-background-color: var(--sm-current-fg2-color);
+  --sm-button-foreground-color: var(--sm-current-bg-color); }
 
 html {
   --sm-bg-color-1: var(--sm-color-palette-1-bg-color-1);
@@ -1048,17 +1048,17 @@ html,
 
 :root {
   --theme-input-padding: .35em;
-  --theme-input-color: var(--sm-current-dark-color);
+  --theme-input-color: var(--sm-current-fg1-color);
   --theme-input-error-color: var(--theme-error-color);
-  --theme-input-background-color: var(--sm-current-background-color);
-  --theme-input-disabled-background-color: var(--sm-current-dark-color);
+  --theme-input-background-color: var(--sm-current-bg-color);
+  --theme-input-disabled-background-color: var(--sm-current-fg1-color);
   --theme-input-overlay-shadow: inset 0px 0px 0px 1px rgba(var(--opacity-color), 0.70);
-  --theme-input-colored-shadow: inset 0px 0px 0px 1px var(--sm-current-darker-color);
+  --theme-input-colored-shadow: inset 0px 0px 0px 1px var(--sm-current-fg2-color);
   --theme-input-box-shadow:   var(--theme-input-overlay-shadow),
   var(--theme-input-colored-shadow);
-  --theme-input-border-color:  var(--sm-current-background-color);
+  --theme-input-border-color:  var(--sm-current-bg-color);
   --theme-input-error-border-color: var(--theme-input-error-color);
-  --theme-input-disabled-border-color: var(--sm-current-dark-color);
+  --theme-input-disabled-border-color: var(--sm-current-fg1-color);
   --theme-input-border-radius: 0px;
   --theme-input-focus-overlay-shadow: inset 0px 0px 0px 2px rgba(var(--opacity-color), 0.40);
   --theme-input-focus-colored-shadow:  inset 0px 0px 0px 2px var(--sm-current-accent-color);
@@ -1067,7 +1067,7 @@ html,
   var(--theme-input-focus-colored-shadow),
   var(--theme-input-focus-shadow);
   --theme-input-hover-overlay-shadow: inset 0px 0px 0px 1px rgba(var(--opacity-color), 0.30);
-  --theme-input-hover-colored-shadow: inset 0px 0px 0px 1px var(--sm-current-darker-color);
+  --theme-input-hover-colored-shadow: inset 0px 0px 0px 1px var(--sm-current-fg2-color);
   --theme-input-hover-box-shadow: var(--theme-input-hover-overlay-shadow),
   var(--theme-input-hover-colored-shadow);
   --theme-input-error-focus-overlay-shadow: 0px 0px 0px 2px rgba(var(--opacity-color), 0.40);
@@ -1081,8 +1081,8 @@ html,
   --theme-input-placeholder-opacity: .5;
   --theme-checkbox-width: 1.25rem;
   --theme-checkbox-height: 1.25rem;
-  --theme-input-label-color: var(--sm-current-dark-color);
-  --theme-input-legend-color: var(--sm-current-dark-color);
+  --theme-input-label-color: var(--sm-current-fg1-color);
+  --theme-input-legend-color: var(--sm-current-fg1-color);
   --theme-input-vertical-spacing: var(--theme-spacing-tiny);
   --theme-input-horizontal-spacing: var(--theme-spacing-tiny);
   --opacity-color: 255, 255, 255; }
