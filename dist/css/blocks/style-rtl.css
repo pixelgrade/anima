@@ -308,56 +308,47 @@
   --current-line-height: var(--theme-navigation-line-height);
   --current-letter-spacing: var(--theme-navigation-letter-spacing);
   --current-text-transform: var(--theme-navigation-text-transform); }
-  @media not screen and (min-width: 1000px) {
+  .wp-block-novablocks-navigation ul.menu a,
+  .wp-block-novablocks-navigation .menu > ul a {
+    padding: 0.75em 0; }
+  @media only screen and (min-width: 1000px) {
     .wp-block-novablocks-navigation {
-      --final-font-size: 18px; } }
-
-.wp-block-novablocks-navigation ul.menu a,
-.wp-block-novablocks-navigation .menu > ul a {
-  padding: .75em 0; }
-
-@media only screen and (min-width: 1000px) {
-  .wp-block-novablocks-navigation {
-    --header-links-bottom-spacing: .5em; }
-    .wp-block-novablocks-navigation ul.menu,
-    .wp-block-novablocks-navigation .menu > ul {
-      margin-right: calc( var(--theme-header-links-spacing) * -1); }
-      .wp-block-novablocks-navigation ul.menu a,
-      .wp-block-novablocks-navigation .menu > ul a {
-        display: block;
-        padding: 0.75em 0;
-        color: inherit;
-        text-decoration: none; }
-      .wp-block-novablocks-navigation ul.menu > li,
-      .wp-block-novablocks-navigation .menu > ul > li {
-        margin-right: var(--theme-header-links-spacing); }
-        .wp-block-novablocks-navigation ul.menu > li.social-menu-item, .wp-block-novablocks-navigation ul.menu > li.is-color-scheme-switcher-button, .wp-block-novablocks-navigation ul.menu > li.is-search-button,
-        .wp-block-novablocks-navigation .menu > ul > li.social-menu-item,
-        .wp-block-novablocks-navigation .menu > ul > li.is-color-scheme-switcher-button,
-        .wp-block-novablocks-navigation .menu > ul > li.is-search-button {
-          margin-right: calc( var(--theme-header-links-spacing) / var(--icons-horizontal-spacing-reducer)); }
-      .wp-block-novablocks-navigation ul.menu .customize-partial-edit-shortcut + > li:not(:first-child),
-      .wp-block-novablocks-navigation .menu > ul .customize-partial-edit-shortcut + > li:not(:first-child) {
-        margin-right: 0; }
-      .wp-block-novablocks-navigation ul.menu > li > a,
-      .wp-block-novablocks-navigation .menu > ul > li > a {
-        padding-bottom: 0.25em;
-        margin-bottom: var(--header-links-bottom-spacing); }
-        .wp-block-novablocks-navigation ul.menu > li > a:after,
-        .wp-block-novablocks-navigation .menu > ul > li > a:after {
-          position: absolute;
-          left: 0; }
-      .wp-block-novablocks-navigation ul.menu li:hover > a,
-      .wp-block-novablocks-navigation .menu > ul li:hover > a {
-        border-color: currentColor; }
-        .wp-block-novablocks-navigation ul.menu li:hover > a:after,
-        .wp-block-novablocks-navigation .menu > ul li:hover > a:after {
-          opacity: 1; }
-    .wp-block-novablocks-navigation .sub-menu li a,
-    .wp-block-novablocks-navigation .children li a {
-      border: 0;
-      padding-right: 1.25em;
-      padding-left: 1.25em; } }
+      --final-font-size: 18px;
+      --header-links-bottom-spacing: .5em; }
+      .wp-block-novablocks-navigation ul.menu,
+      .wp-block-novablocks-navigation .menu > ul {
+        margin-right: calc( var(--theme-header-links-spacing) * -1); }
+        .wp-block-novablocks-navigation ul.menu a,
+        .wp-block-novablocks-navigation .menu > ul a {
+          display: block;
+          color: inherit;
+          text-decoration: none; }
+        .wp-block-novablocks-navigation ul.menu > li,
+        .wp-block-novablocks-navigation .menu > ul > li {
+          margin-right: var(--theme-header-links-spacing); }
+          .wp-block-novablocks-navigation ul.menu > li.social-menu-item, .wp-block-novablocks-navigation ul.menu > li.is-color-scheme-switcher-button, .wp-block-novablocks-navigation ul.menu > li.is-search-button,
+          .wp-block-novablocks-navigation .menu > ul > li.social-menu-item,
+          .wp-block-novablocks-navigation .menu > ul > li.is-color-scheme-switcher-button,
+          .wp-block-novablocks-navigation .menu > ul > li.is-search-button {
+            margin-right: calc( var(--theme-header-links-spacing) / var(--icons-horizontal-spacing-reducer)); }
+        .wp-block-novablocks-navigation ul.menu .customize-partial-edit-shortcut + > li:not(:first-child),
+        .wp-block-novablocks-navigation .menu > ul .customize-partial-edit-shortcut + > li:not(:first-child) {
+          margin-right: 0; }
+        .wp-block-novablocks-navigation ul.menu > li > a,
+        .wp-block-novablocks-navigation .menu > ul > li > a {
+          padding-bottom: 0.25em;
+          margin-bottom: var(--header-links-bottom-spacing); }
+        .wp-block-novablocks-navigation ul.menu li:hover > a,
+        .wp-block-novablocks-navigation .menu > ul li:hover > a {
+          border-color: currentColor; }
+          .wp-block-novablocks-navigation ul.menu li:hover > a:after,
+          .wp-block-novablocks-navigation .menu > ul li:hover > a:after {
+            opacity: 1; }
+      .wp-block-novablocks-navigation .sub-menu li a,
+      .wp-block-novablocks-navigation .children li a {
+        border: 0;
+        padding-right: 1.25em;
+        padding-left: 1.25em; } }
 
 .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button {
   --theme-button-hover-background-color: var(--sm-current-bg-color);

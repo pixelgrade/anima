@@ -43,7 +43,9 @@ class Header {
 		let $blockColors = $novaBlock.length ? $novaBlock : $firstBlock;
 
 		this.initialColorClasses = getColorSetClasses( this.element ).join( ' ' );
-		this.transparentColorClasses = getColorSetClasses( $blockColors[0] ).join( ' ' );
+		this.transparentColorClasses = getColorSetClasses( $blockColors[0] ).join( ' ' ) + ' site-header--transparent';
+
+		this.$header.addClass( this.transparentColorClasses );
 
 		this.onResize();
 		this.render();
