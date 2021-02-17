@@ -1,12 +1,14 @@
 import GlobalService from "./globalService";
-import { below, setAndResetElementStyles, getColorSetClasses } from '../utils';
+import MenuToggle from './menu-toggle';
+
+import { below, setAndResetElementStyles, getColorSetClasses, toggleClasses } from '../utils';
 import $ from 'jquery';
 
 const defaults = {
 	offsetTargetElement: null,
 };
 
-const NAVIGATION_OPEN_CLASS = 'navigation-is-open'
+//const NAVIGATION_OPEN_CLASS = 'navigation-is-open'
 
 class Header {
 
@@ -17,12 +19,10 @@ class Header {
 		this.options = Object.assign( {}, defaults, args );
 
 		this.$header = $( this.element );
-		this.$toggle = $( '.c-menu-toggle' );
-		this.$toggleCheckbox = $( '.c-menu-toggle__checkbox' );
-		this.$toggleWrap = $( '.c-menu-toggle__wrap' );
-		this.$searchCancelButton = $( '.c-search-overlay__cancel' );
-		this.$colorSchemeSwitcher = $( '.is-color-scheme-switcher-button' );
-		this.$searchOverlay = $( '.c-search-overlay' );
+
+		this.menuToggle = new MenuToggle( document.getElementById( 'nova-menu-toggle' ), {
+			onChange: this.onToggleChange.bind( this )
+		} );
 
 		this.abovePromoBar = false;
 		this.wasSticky = $( 'body' ).is( '.has-site-header-fixed' );
@@ -37,7 +37,20 @@ class Header {
 		this.$promoBar = $( '.novablocks-announcement-bar' );
 
 		this.createMobileHeader();
+		this.initializeColors();
+		this.onResize();
+		this.render();
 
+		this.initialize();
+	}
+
+	onToggleChange( event, menuToggle ) {
+		const { checked } = event.target;
+		document.body.style.overflow = checked ? 'hidden' : '';
+		toggleClasses( menuToggle.element, checked, this.transparentColorClasses, this.initialColorClasses );
+	}
+
+	initializeColors() {
 		let $firstBlock = $( '.entry-content' ).children().first();
 		let $novaBlock = $firstBlock.find( '.novablocks-block' );
 		let $blockColors = $novaBlock.length ? $novaBlock : $firstBlock;
@@ -47,13 +60,6 @@ class Header {
 
 		this.$header.addClass( this.transparentColorClasses );
 		this.$mobileHeader.addClass( this.transparentColorClasses );
-
-		this.onResize();
-		this.render();
-
-		GlobalService.registerOnResize( this.onResize.bind( this ) );
-
-		this.initialize();
 	}
 
 	initialize() {
@@ -61,10 +67,8 @@ class Header {
 
 		$( '.site-header__wrapper' ).css( 'transition', 'none' );
 
-
 		this.$header.addClass( 'site-header--fixed site-header--ready' );
 		this.$mobileHeader.addClass( 'site-header--fixed site-header--ready' );
-		this.initToggleClick();
 
 		this.timeline.play();
 	}
@@ -74,8 +78,8 @@ class Header {
 		this.updateHeaderOffset();
 		this.updateStickyHeaderOffset();
 		this.updateMobileHeaderOffset();
-		this.updateHeaderButtonsHeight();
-		this.updateSearchOverlayOffset();
+
+//		this.updateHeaderButtonsHeight();
 	}
 
 	getIntroTimeline() {
@@ -107,9 +111,8 @@ class Header {
 
 	getMobileHeaderHeight() {
 		const mobileHeaderHeight = this.$mobileHeader.css( 'height', '' ).outerHeight();
-		const toggleHeight = this.$toggleWrap.css( 'height', '' ).outerHeight();
 
-		return Math.max( mobileHeaderHeight, toggleHeight );
+		return Math.max( mobileHeaderHeight, this.menuToggle.getHeight() );
 	}
 
 	isMobileHeaderVisibile() {
@@ -138,16 +141,13 @@ class Header {
 		const $header = $( this.element );
 
 		setAndResetElementStyles( $header, { transition: 'none' } );
-		setAndResetElementStyles( this.$searchOverlay, { transition: 'none' } );
 
 		this.getProps();
 		this.setVisibleHeaderHeight();
 		this.shouldMakeHeaderStatic();
 
-		this.initHeaderButtons();
-
 		if ( ! this.hasMobileNav() ) {
-			$( 'body' ).removeClass( NAVIGATION_OPEN_CLASS );
+			$( 'body' ).css( 'overflow', '' );
 		}
 
 		this.update();
@@ -189,11 +189,9 @@ class Header {
 	updateMobileHeaderOffset() {
 		if ( ! this.$mobileHeader ) return;
 
-		const $target = this.$mobileHeader.add( this.$toggle );
-
-		TweenMax.set( $target, { height: this.mobileHeaderHeight } );
+		TweenMax.set( this.$mobileHeader, { height: this.mobileHeaderHeight } );
 		TweenMax.set( '.site-header__content', { paddingTop: this.mobileHeaderHeight } );
-		TweenMax.to( $target, .2, { y: this.offset } );
+		TweenMax.to( this.$mobileHeader, .2, { y: this.offset } );
 	}
 
 	getScrollOffset() {
@@ -232,13 +230,10 @@ class Header {
 
 		const { scrollY } = GlobalService.getProps();
 		const abovePromoBar = scrollY > ( this.promoBarOffset.top + this.promoBarHeight );
-		const $target = this.$mobileHeader.add( this.$toggle );
 
 		if ( ( abovePromoBar !== this.abovePromoBar ) ) {
 			$( body ).toggleClass( 'has-fixed-mobile-site-header', abovePromoBar );
-			$target.removeClass( ! abovePromoBar ? this.initialColorClasses : this.transparentColorClasses );
-			$target.addClass( abovePromoBar ? this.initialColorClasses : this.transparentColorClasses );
-
+			toggleClasses( this.$mobileHeader[0], abovePromoBar, this.initialColorClasses, this.transparentColorClasses );
 			this.abovePromoBar = abovePromoBar;
 		}
 	}
@@ -259,45 +254,8 @@ class Header {
 		$( '.c-branding' ).first().clone().appendTo( this.$mobileHeader );
 		this.$header.find( '.menu-item--cart' ).first().clone().appendTo( this.$mobileHeader );
 
-		this.$mobileHeader.insertAfter( this.$toggle );
+		this.$mobileHeader.insertAfter( this.menuToggle.element );
 		this.createdMobileHeader = true;
-	}
-
-	initHeaderButtons() {
-
-		if ( this.hasMobileNav() ) {
-			this.initHeaderSearchButton();
-			this.initHeaderLightsButton();
-		}
-
-	}
-
-	initHeaderSearchButton() {
-
-		if ( this.movedSearchButton ) {
-			return;
-		}
-
-		this.$searchButtonWrapper = $( '<div class="search-button__wrapper">' );
-
-		$( '.is-search-button' ).first().clone().appendTo( this.$searchButtonWrapper );
-
-		this.$searchButtonWrapper.insertAfter( '.site-header__wrapper' );
-		this.movedSearchButton = true;
-	}
-
-	initHeaderLightsButton() {
-
-		if ( this.movedColorSchemeSwitcherButton ) {
-			return;
-		}
-
-		this.$colorSchemeSwitcherWrapper = $( '<div class="scheme-switcher__wrapper">' );
-
-		$( '.is-color-scheme-switcher-button' ).first().clone().appendTo( this.$colorSchemeSwitcherWrapper );
-
-		this.$colorSchemeSwitcherWrapper.insertAfter( '.site-header__wrapper' );
-		this.movedColorSchemeSwitcherButton = true;
 	}
 
 	updateHeaderButtonsHeight() {
@@ -314,25 +272,6 @@ class Header {
 		}
 
 		$buttons.css( 'height', this.mobileHeaderHeight );
-	}
-
-	updateSearchOverlayOffset() {
-		if ( this.hasMobileNav() && this.$searchOverlay.length ) {
-			this.$searchOverlay[0].paddingTop = Math.max( ( this.promoBarHeight - scrollY ), 0 ) + 'px';
-		}
-	}
-
-	initToggleClick() {
-		const $body = $( 'body' );
-
-		this.$toggleCheckbox.on( 'change', () => {
-			const isOpen = this.$toggleCheckbox.prop( 'checked' );
-
-			this.$toggle.removeClass( isOpen ? this.initialColorClasses : this.transparentColorClasses );
-			this.$toggle.addClass( ! isOpen ? this.initialColorClasses : this.transparentColorClasses );
-
-			$body.toggleClass( NAVIGATION_OPEN_CLASS );
-		} );
 	}
 
 	hasMobileNav() {

@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 20);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -358,6 +358,98 @@ module.exports = _nonIterableSpread;
 /* 13 */,
 /* 14 */,
 /* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _typeof = __webpack_require__(17);
+
+var assertThisInitialized = __webpack_require__(18);
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return assertThisInitialized(self);
+}
+
+module.exports = _possibleConstructorReturn;
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var setPrototypeOf = __webpack_require__(19);
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) setPrototypeOf(subClass, superClass);
+}
+
+module.exports = _inherits;
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports) {
+
+function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
+
+function _typeof(obj) {
+  if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return _typeof2(obj);
+    };
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+    };
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports) {
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+module.exports = _assertThisInitialized;
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports) {
+
+function _setPrototypeOf(o, p) {
+  module.exports = _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+module.exports = _setPrototypeOf;
+
+/***/ }),
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -375,7 +467,12 @@ var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
 var createClass = __webpack_require__(2);
 var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/toConsumableArray.js
+var toConsumableArray = __webpack_require__(3);
+var toConsumableArray_default = /*#__PURE__*/__webpack_require__.n(toConsumableArray);
+
 // CONCATENATED MODULE: ./src/js/utils.js
+
  // checks if box1 and box2 overlap
 
 function overlapping(box1, box2) {
@@ -471,10 +568,35 @@ var getColorSetClasses = function getColorSetClasses(element) {
     return classname.search('sm-palette-') !== -1 || classname.search('sm-variation-') !== -1 || classname === 'sm-palette--shifted';
   });
 };
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/toConsumableArray.js
-var toConsumableArray = __webpack_require__(3);
-var toConsumableArray_default = /*#__PURE__*/__webpack_require__.n(toConsumableArray);
+var utils_addClass = function addClass(element, classes) {
+  var classesArray = classes.split(/\b\s+/);
 
+  if (classesArray.length) {
+    var _console, _element$classList;
+
+    (_console = console).log.apply(_console, toConsumableArray_default()(classesArray));
+
+    (_element$classList = element.classList).add.apply(_element$classList, toConsumableArray_default()(classesArray));
+  }
+};
+var utils_removeClass = function removeClass(element, classes) {
+  var classesArray = classes.split(/\b\s+/);
+
+  if (classesArray.length) {
+    var _console2, _element$classList2;
+
+    (_console2 = console).log.apply(_console2, toConsumableArray_default()(classesArray));
+
+    (_element$classList2 = element.classList).remove.apply(_element$classList2, toConsumableArray_default()(classesArray));
+  }
+};
+var toggleClasses = function toggleClasses(element, check) {
+  var trueClasses = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  var falseClasses = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+  console.log(element, trueClasses, falseClasses);
+  utils_removeClass(element, !!check ? falseClasses : trueClasses);
+  utils_addClass(element, !!check ? trueClasses : falseClasses);
+};
 // CONCATENATED MODULE: ./src/js/components/globalService.js
 
 
@@ -1210,16 +1332,62 @@ function () {
 }();
 
 
+// CONCATENATED MODULE: ./src/js/components/menu-toggle.js
+
+
+
+var menu_toggle_MenuToggle =
+/*#__PURE__*/
+function () {
+  function MenuToggle(input, options) {
+    classCallCheck_default()(this, MenuToggle);
+
+    var id = input.getAttribute('id');
+    var toggleLabels = document.querySelectorAll("[for=\"".concat(id, "\"]"));
+    var defaults = {
+      onChange: this.onChange
+    };
+    this.options = Object.assign({}, defaults, options);
+    this.input = input;
+    this.element = toggleLabels.length ? toggleLabels[0] : null;
+    this.bindEvents();
+  }
+
+  createClass_default()(MenuToggle, [{
+    key: "bindEvents",
+    value: function bindEvents() {
+      var _this = this;
+
+      this.input.addEventListener('change', function (event) {
+        _this.options.onChange.call(_this, event, _this);
+      });
+    }
+  }, {
+    key: "onChange",
+    value: function onChange(isChecked, menuToggle) {}
+  }, {
+    key: "getHeight",
+    value: function getHeight() {
+      var _this$element;
+
+      return (this === null || this === void 0 ? void 0 : (_this$element = this.element) === null || _this$element === void 0 ? void 0 : _this$element.offsetHeight) || 0;
+    }
+  }]);
+
+  return MenuToggle;
+}();
+
+/* harmony default export */ var menu_toggle = (menu_toggle_MenuToggle);
 // CONCATENATED MODULE: ./src/js/components/header.js
 
 
 
 
 
-var defaults = {
+
+var header_defaults = {
   offsetTargetElement: null
-};
-var NAVIGATION_OPEN_CLASS = 'navigation-is-open';
+}; //const NAVIGATION_OPEN_CLASS = 'navigation-is-open'
 
 var header_Header =
 /*#__PURE__*/
@@ -1229,14 +1397,11 @@ function () {
 
     if (!element) return;
     this.element = element;
-    this.options = Object.assign({}, defaults, args);
+    this.options = Object.assign({}, header_defaults, args);
     this.$header = external_jQuery_default()(this.element);
-    this.$toggle = external_jQuery_default()('.c-menu-toggle');
-    this.$toggleCheckbox = external_jQuery_default()('.c-menu-toggle__checkbox');
-    this.$toggleWrap = external_jQuery_default()('.c-menu-toggle__wrap');
-    this.$searchCancelButton = external_jQuery_default()('.c-search-overlay__cancel');
-    this.$colorSchemeSwitcher = external_jQuery_default()('.is-color-scheme-switcher-button');
-    this.$searchOverlay = external_jQuery_default()('.c-search-overlay');
+    this.menuToggle = new menu_toggle(document.getElementById('nova-menu-toggle'), {
+      onChange: this.onToggleChange.bind(this)
+    });
     this.abovePromoBar = false;
     this.wasSticky = external_jQuery_default()('body').is('.has-site-header-fixed');
     this.siteHeaderSticky = external_jQuery_default()('.site-header--secondary');
@@ -1247,27 +1412,37 @@ function () {
     this.$page = external_jQuery_default()('#page .site-content');
     this.$promoBar = external_jQuery_default()('.novablocks-announcement-bar');
     this.createMobileHeader();
-    var $firstBlock = external_jQuery_default()('.entry-content').children().first();
-    var $novaBlock = $firstBlock.find('.novablocks-block');
-    var $blockColors = $novaBlock.length ? $novaBlock : $firstBlock;
-    this.initialColorClasses = getColorSetClasses(this.element).join(' ');
-    this.transparentColorClasses = getColorSetClasses($blockColors[0]).join(' ') + ' site-header--transparent';
-    this.$header.addClass(this.transparentColorClasses);
-    this.$mobileHeader.addClass(this.transparentColorClasses);
+    this.initializeColors();
     this.onResize();
     this.render();
-    globalService.registerOnResize(this.onResize.bind(this));
     this.initialize();
   }
 
   createClass_default()(Header, [{
+    key: "onToggleChange",
+    value: function onToggleChange(event, menuToggle) {
+      var checked = event.target.checked;
+      document.body.style.overflow = checked ? 'hidden' : '';
+      toggleClasses(menuToggle.element, checked, this.transparentColorClasses, this.initialColorClasses);
+    }
+  }, {
+    key: "initializeColors",
+    value: function initializeColors() {
+      var $firstBlock = external_jQuery_default()('.entry-content').children().first();
+      var $novaBlock = $firstBlock.find('.novablocks-block');
+      var $blockColors = $novaBlock.length ? $novaBlock : $firstBlock;
+      this.initialColorClasses = getColorSetClasses(this.element).join(' ');
+      this.transparentColorClasses = getColorSetClasses($blockColors[0]).join(' ') + ' site-header--transparent';
+      this.$header.addClass(this.transparentColorClasses);
+      this.$mobileHeader.addClass(this.transparentColorClasses);
+    }
+  }, {
     key: "initialize",
     value: function initialize() {
       this.timeline = this.getIntroTimeline();
       external_jQuery_default()('.site-header__wrapper').css('transition', 'none');
       this.$header.addClass('site-header--fixed site-header--ready');
       this.$mobileHeader.addClass('site-header--fixed site-header--ready');
-      this.initToggleClick();
       this.timeline.play();
     }
   }, {
@@ -1276,9 +1451,7 @@ function () {
       this.updatePageOffset();
       this.updateHeaderOffset();
       this.updateStickyHeaderOffset();
-      this.updateMobileHeaderOffset();
-      this.updateHeaderButtonsHeight();
-      this.updateSearchOverlayOffset();
+      this.updateMobileHeaderOffset(); //		this.updateHeaderButtonsHeight();
     }
   }, {
     key: "getIntroTimeline",
@@ -1321,8 +1494,7 @@ function () {
     key: "getMobileHeaderHeight",
     value: function getMobileHeaderHeight() {
       var mobileHeaderHeight = this.$mobileHeader.css('height', '').outerHeight();
-      var toggleHeight = this.$toggleWrap.css('height', '').outerHeight();
-      return Math.max(mobileHeaderHeight, toggleHeight);
+      return Math.max(mobileHeaderHeight, this.menuToggle.getHeight());
     }
   }, {
     key: "isMobileHeaderVisibile",
@@ -1359,16 +1531,12 @@ function () {
       setAndResetElementStyles($header, {
         transition: 'none'
       });
-      setAndResetElementStyles(this.$searchOverlay, {
-        transition: 'none'
-      });
       this.getProps();
       this.setVisibleHeaderHeight();
       this.shouldMakeHeaderStatic();
-      this.initHeaderButtons();
 
       if (!this.hasMobileNav()) {
-        external_jQuery_default()('body').removeClass(NAVIGATION_OPEN_CLASS);
+        external_jQuery_default()('body').css('overflow', '');
       }
 
       this.update();
@@ -1419,14 +1587,13 @@ function () {
     key: "updateMobileHeaderOffset",
     value: function updateMobileHeaderOffset() {
       if (!this.$mobileHeader) return;
-      var $target = this.$mobileHeader.add(this.$toggle);
-      TweenMax.set($target, {
+      TweenMax.set(this.$mobileHeader, {
         height: this.mobileHeaderHeight
       });
       TweenMax.set('.site-header__content', {
         paddingTop: this.mobileHeaderHeight
       });
-      TweenMax.to($target, .2, {
+      TweenMax.to(this.$mobileHeader, .2, {
         y: this.offset
       });
     }
@@ -1480,12 +1647,10 @@ function () {
           scrollY = _GlobalService$getPro4.scrollY;
 
       var abovePromoBar = scrollY > this.promoBarOffset.top + this.promoBarHeight;
-      var $target = this.$mobileHeader.add(this.$toggle);
 
       if (abovePromoBar !== this.abovePromoBar) {
         external_jQuery_default()(body).toggleClass('has-fixed-mobile-site-header', abovePromoBar);
-        $target.removeClass(!abovePromoBar ? this.initialColorClasses : this.transparentColorClasses);
-        $target.addClass(abovePromoBar ? this.initialColorClasses : this.transparentColorClasses);
+        toggleClasses(this.$mobileHeader[0], abovePromoBar, this.initialColorClasses, this.transparentColorClasses);
         this.abovePromoBar = abovePromoBar;
       }
     }
@@ -1504,40 +1669,8 @@ function () {
       this.$mobileHeader = external_jQuery_default()('<div class="site-header--mobile site-header-background site-header-shadow">');
       external_jQuery_default()('.c-branding').first().clone().appendTo(this.$mobileHeader);
       this.$header.find('.menu-item--cart').first().clone().appendTo(this.$mobileHeader);
-      this.$mobileHeader.insertAfter(this.$toggle);
+      this.$mobileHeader.insertAfter(this.menuToggle.element);
       this.createdMobileHeader = true;
-    }
-  }, {
-    key: "initHeaderButtons",
-    value: function initHeaderButtons() {
-      if (this.hasMobileNav()) {
-        this.initHeaderSearchButton();
-        this.initHeaderLightsButton();
-      }
-    }
-  }, {
-    key: "initHeaderSearchButton",
-    value: function initHeaderSearchButton() {
-      if (this.movedSearchButton) {
-        return;
-      }
-
-      this.$searchButtonWrapper = external_jQuery_default()('<div class="search-button__wrapper">');
-      external_jQuery_default()('.is-search-button').first().clone().appendTo(this.$searchButtonWrapper);
-      this.$searchButtonWrapper.insertAfter('.site-header__wrapper');
-      this.movedSearchButton = true;
-    }
-  }, {
-    key: "initHeaderLightsButton",
-    value: function initHeaderLightsButton() {
-      if (this.movedColorSchemeSwitcherButton) {
-        return;
-      }
-
-      this.$colorSchemeSwitcherWrapper = external_jQuery_default()('<div class="scheme-switcher__wrapper">');
-      external_jQuery_default()('.is-color-scheme-switcher-button').first().clone().appendTo(this.$colorSchemeSwitcherWrapper);
-      this.$colorSchemeSwitcherWrapper.insertAfter('.site-header__wrapper');
-      this.movedColorSchemeSwitcherButton = true;
     }
   }, {
     key: "updateHeaderButtonsHeight",
@@ -1550,29 +1683,6 @@ function () {
       }
 
       $buttons.css('height', this.mobileHeaderHeight);
-    }
-  }, {
-    key: "updateSearchOverlayOffset",
-    value: function updateSearchOverlayOffset() {
-      if (this.hasMobileNav() && this.$searchOverlay.length) {
-        this.$searchOverlay[0].paddingTop = Math.max(this.promoBarHeight - scrollY, 0) + 'px';
-      }
-    }
-  }, {
-    key: "initToggleClick",
-    value: function initToggleClick() {
-      var _this3 = this;
-
-      var $body = external_jQuery_default()('body');
-      this.$toggleCheckbox.on('change', function () {
-        var isOpen = _this3.$toggleCheckbox.prop('checked');
-
-        _this3.$toggle.removeClass(isOpen ? _this3.initialColorClasses : _this3.transparentColorClasses);
-
-        _this3.$toggle.addClass(!isOpen ? _this3.initialColorClasses : _this3.transparentColorClasses);
-
-        $body.toggleClass(NAVIGATION_OPEN_CLASS);
-      });
     }
   }, {
     key: "hasMobileNav",
@@ -1932,7 +2042,151 @@ function () {
 }();
 
 
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
+var possibleConstructorReturn = __webpack_require__(15);
+var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
+var getPrototypeOf = __webpack_require__(21);
+var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
+var inherits = __webpack_require__(16);
+var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
+
+// CONCATENATED MODULE: ./src/js/components/base-component.js
+
+
+
+
+var base_component_BaseComponent =
+/*#__PURE__*/
+function () {
+  function BaseComponent() {
+    classCallCheck_default()(this, BaseComponent);
+
+    globalService.registerOnResize(this.onResize.bind(this));
+  }
+
+  createClass_default()(BaseComponent, [{
+    key: "onResize",
+    value: function onResize() {}
+  }]);
+
+  return BaseComponent;
+}();
+
+/* harmony default export */ var base_component = (base_component_BaseComponent);
+// CONCATENATED MODULE: ./src/js/components/color-scheme-switcher.js
+
+
+
+
+
+
+
+
+
+var color_scheme_switcher_ColorSchemeSwitcher =
+/*#__PURE__*/
+function (_BaseComponent) {
+  inherits_default()(ColorSchemeSwitcher, _BaseComponent);
+
+  function ColorSchemeSwitcher() {
+    var _this;
+
+    classCallCheck_default()(this, ColorSchemeSwitcher);
+
+    _this = possibleConstructorReturn_default()(this, getPrototypeOf_default()(ColorSchemeSwitcher).call(this));
+
+    _this.initializeToggle();
+
+    return _this;
+  }
+
+  createClass_default()(ColorSchemeSwitcher, [{
+    key: "initializeToggle",
+    value: function initializeToggle() {
+      if (this.movedColorSchemeSwitcherButton) {
+        return;
+      }
+
+      this.$colorSchemeSwitcherWrapper = external_jQuery_default()('<div class="scheme-switcher__wrapper">');
+      external_jQuery_default()('.is-color-scheme-switcher-button').first().clone().appendTo(this.$colorSchemeSwitcherWrapper);
+      this.$colorSchemeSwitcherWrapper.insertAfter('.site-header__wrapper');
+      this.movedColorSchemeSwitcherButton = true;
+    }
+  }]);
+
+  return ColorSchemeSwitcher;
+}(base_component);
+
+/* harmony default export */ var color_scheme_switcher = (color_scheme_switcher_ColorSchemeSwitcher);
+// CONCATENATED MODULE: ./src/js/components/search-overlay.js
+
+
+
+
+
+
+
+
+
+var search_overlay_SearchOverlay =
+/*#__PURE__*/
+function (_BaseComponent) {
+  inherits_default()(SearchOverlay, _BaseComponent);
+
+  function SearchOverlay() {
+    var _this;
+
+    classCallCheck_default()(this, SearchOverlay);
+
+    _this = possibleConstructorReturn_default()(this, getPrototypeOf_default()(SearchOverlay).call(this));
+    _this.$searchCancelButton = external_jQuery_default()('.c-search-overlay__cancel');
+    _this.$searchOverlay = external_jQuery_default()('.c-search-overlay');
+
+    _this.initializeToggle();
+
+    _this.onResize();
+
+    return _this;
+  }
+
+  createClass_default()(SearchOverlay, [{
+    key: "onResize",
+    value: function onResize() {
+      setAndResetElementStyles(this.$searchOverlay, {
+        transition: 'none'
+      });
+    }
+  }, {
+    key: "initializeToggle",
+    value: function initializeToggle() {
+      if (this.movedSearchButton) {
+        return;
+      }
+
+      this.$searchButtonWrapper = external_jQuery_default()('<div class="search-button__wrapper">');
+      external_jQuery_default()('.is-search-button').first().clone().appendTo(this.$searchButtonWrapper);
+      this.$searchButtonWrapper.insertAfter('.site-header__wrapper');
+      this.movedSearchButton = true;
+    }
+  }, {
+    key: "updateSearchOverlayOffset",
+    value: function updateSearchOverlayOffset() {//		if ( this.hasMobileNav() && this.$searchOverlay.length ) {
+      //			this.$searchOverlay[0].paddingTop = Math.max( ( this.promoBarHeight - scrollY ), 0 ) + 'px';
+      //		}
+    }
+  }]);
+
+  return SearchOverlay;
+}(base_component);
+
+/* harmony default export */ var search_overlay = (search_overlay_SearchOverlay);
 // CONCATENATED MODULE: ./src/js/components/app.js
+
+
 
 
 
@@ -1953,6 +2207,8 @@ function () {
     this.initializeHero();
     this.initializeHeader();
     this.initializeNavbar();
+    this.searchOverlay = new search_overlay();
+    this.colorSchemeSwitcher = new color_scheme_switcher();
     this.initializePromoBar();
     this.initializeImages();
     this.initializeCommentsArea();
@@ -2112,6 +2368,19 @@ external_jQuery_default()(function () {
     $window.on('wf-active', scripts_initialize);
   }
 });
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports) {
+
+function _getPrototypeOf(o) {
+  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+module.exports = _getPrototypeOf;
 
 /***/ })
 /******/ ]);

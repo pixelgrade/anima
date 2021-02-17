@@ -100,9 +100,32 @@ export const getColorSetClasses = ( element ) => {
 	}
 
 	const classes = classAttr.split( /\b\s+/ );
+
 	return classes.filter( classname => {
 		return classname.search( 'sm-palette-' ) !== -1 || classname.search( 'sm-variation-' ) !== -1 || classname === 'sm-palette--shifted';
 	} );
 }
 
+export const addClass = ( element, classes ) => {
+	const classesArray = classes.split( /\b\s+/ );
 
+	if ( classesArray.length ) {
+		console.log( ...classesArray );
+		element.classList.add( ...classesArray );
+	}
+}
+
+export const removeClass = ( element, classes ) => {
+	const classesArray = classes.split( /\b\s+/ );
+
+	if ( classesArray.length ) {
+		console.log( ...classesArray );
+		element.classList.remove( ...classesArray );
+	}
+}
+
+export const toggleClasses = ( element, check, trueClasses = '', falseClasses = '' ) => {
+	console.log( element, trueClasses, falseClasses );
+	removeClass( element, !! check ? falseClasses : trueClasses );
+	addClass( element, !! check ? trueClasses : falseClasses );
+}
