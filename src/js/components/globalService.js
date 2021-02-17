@@ -92,7 +92,6 @@ class GlobalService {
 	}
 
 	_updateProps( force = false ) {
-		console.log( 'changed' );
 		this._updateSize( force );
 		this._updateScroll( force );
 	}

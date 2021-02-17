@@ -36,8 +36,6 @@ export default class Hero {
 
 			let colorClasses = getColorSetClasses( next );
 
-			console.log( next, colorClasses );
-
 			colorClasses.forEach( className => {
 				indicator[0].classList.add( className );
 			} );

@@ -572,9 +572,7 @@ var utils_addClass = function addClass(element, classes) {
   var classesArray = classes.split(/\b\s+/);
 
   if (classesArray.length) {
-    var _console, _element$classList;
-
-    (_console = console).log.apply(_console, toConsumableArray_default()(classesArray));
+    var _element$classList;
 
     (_element$classList = element.classList).add.apply(_element$classList, toConsumableArray_default()(classesArray));
   }
@@ -583,9 +581,7 @@ var utils_removeClass = function removeClass(element, classes) {
   var classesArray = classes.split(/\b\s+/);
 
   if (classesArray.length) {
-    var _console2, _element$classList2;
-
-    (_console2 = console).log.apply(_console2, toConsumableArray_default()(classesArray));
+    var _element$classList2;
 
     (_element$classList2 = element.classList).remove.apply(_element$classList2, toConsumableArray_default()(classesArray));
   }
@@ -593,7 +589,6 @@ var utils_removeClass = function removeClass(element, classes) {
 var toggleClasses = function toggleClasses(element, check) {
   var trueClasses = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
   var falseClasses = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
-  console.log(element, trueClasses, falseClasses);
   utils_removeClass(element, !!check ? falseClasses : trueClasses);
   utils_addClass(element, !!check ? trueClasses : falseClasses);
 };
@@ -714,7 +709,6 @@ function () {
     key: "_updateProps",
     value: function _updateProps() {
       var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      console.log('changed');
 
       this._updateSize(force);
 
@@ -916,7 +910,6 @@ function () {
 
       if (!!indicator && indicator.length) {
         var colorClasses = getColorSetClasses(next);
-        console.log(next, colorClasses);
         colorClasses.forEach(function (className) {
           indicator[0].classList.add(className);
         });
