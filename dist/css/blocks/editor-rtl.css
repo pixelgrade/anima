@@ -1,8 +1,3 @@
-:root,
-.novablocks-block {
-  --sm-button-background-color: var(--sm-current-fg2-color);
-  --sm-button-foreground-color: var(--sm-current-bg-color); }
-
 ul.wp-block-archives-list[class] {
   list-style: none;
   padding-right: 0; }
@@ -451,11 +446,11 @@ ul.wp-block-categories__list[class] {
   .block-is-highlighted:not(.content-is-highlighted) .novablocks-card .wp-block-button:not(.is-style-text) .wp-block-button__link,
   .content-is-highlighted:not(.block-is-highlighted) .novablocks-card .wp-block-button:not(.is-style-text) .wp-block-button__link {
     --theme-button-text-color: var(--sm-button-background-color);
-    --theme-button-background-color: var(--sm-button-foreground-color);
-    --theme-button-border-color: var(--sm-button-foreground-color);
-    --theme-button-hover-text-color: var(--sm-button-foreground-color);
+    --theme-button-background-color: var(--sm-current-bg-color);
+    --theme-button-border-color: var(--sm-current-bg-color);
+    --theme-button-hover-text-color: var(--sm-current-bg-color);
     --theme-button-hover-background-color: transparent;
-    --theme-button-hover-border-color: var(--sm-button-foreground-color); }
+    --theme-button-hover-border-color: var(--sm-current-bg-color); }
   .block-is-highlighted:not(.content-is-highlighted) .novablocks-card a:not(.wp-block-button__link),
   .content-is-highlighted:not(.block-is-highlighted) .novablocks-card a:not(.wp-block-button__link) {
     color: inherit;

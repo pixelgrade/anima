@@ -18,6 +18,7 @@ class Header {
 
 		this.$header = $( this.element );
 		this.$toggle = $( '.c-menu-toggle' );
+		this.$toggleCheckbox = $( '.c-menu-toggle__checkbox' );
 		this.$toggleWrap = $( '.c-menu-toggle__wrap' );
 		this.$searchCancelButton = $( '.c-search-overlay__cancel' );
 		this.$colorSchemeSwitcher = $( '.is-color-scheme-switcher-button' );
@@ -25,7 +26,7 @@ class Header {
 
 		this.abovePromoBar = false;
 		this.wasSticky = $( 'body' ).is( '.has-site-header-fixed' );
-		this.siteHeaderSticky = $( '.site-header-sticky' );
+		this.siteHeaderSticky = $( '.site-header--secondary' );
 
 		this.offset = 0;
 		this.scrollOffset = 0;
@@ -191,11 +192,8 @@ class Header {
 		const $target = this.$mobileHeader.add( this.$toggle );
 
 		TweenMax.set( $target, { height: this.mobileHeaderHeight } );
+		TweenMax.set( '.site-header__content', { paddingTop: this.mobileHeaderHeight } );
 		TweenMax.to( $target, .2, { y: this.offset } );
-
-		$( '.site-header__inner-container' ).css( {
-			transform:  `translateY(${this.mobileHeaderHeight}px)`
-		} );
 	}
 
 	getScrollOffset() {
@@ -234,11 +232,12 @@ class Header {
 
 		const { scrollY } = GlobalService.getProps();
 		const abovePromoBar = scrollY > ( this.promoBarOffset.top + this.promoBarHeight );
+		const $target = this.$mobileHeader.add( this.$toggle );
 
 		if ( ( abovePromoBar !== this.abovePromoBar ) ) {
 			$( body ).toggleClass( 'has-fixed-mobile-site-header', abovePromoBar );
-			this.$mobileHeader.removeClass( ! abovePromoBar ? this.initialColorClasses : this.transparentColorClasses );
-			this.$mobileHeader.addClass( abovePromoBar ? this.initialColorClasses : this.transparentColorClasses );
+			$target.removeClass( ! abovePromoBar ? this.initialColorClasses : this.transparentColorClasses );
+			$target.addClass( abovePromoBar ? this.initialColorClasses : this.transparentColorClasses );
 
 			this.abovePromoBar = abovePromoBar;
 		}
@@ -326,7 +325,12 @@ class Header {
 	initToggleClick() {
 		const $body = $( 'body' );
 
-		this.$toggle.on( 'click', function() {
+		this.$toggleCheckbox.on( 'change', () => {
+			const isOpen = this.$toggleCheckbox.prop( 'checked' );
+
+			this.$toggle.removeClass( isOpen ? this.initialColorClasses : this.transparentColorClasses );
+			this.$toggle.addClass( ! isOpen ? this.initialColorClasses : this.transparentColorClasses );
+
 			$body.toggleClass( NAVIGATION_OPEN_CLASS );
 		} );
 	}

@@ -8,12 +8,14 @@
 
   &:focus,
   &:focus-within {
+
     .search-icon {
       opacity: 1;
     }
   }
 
   &[class] {
+
     > label {
       flex: 1;
       margin-bottom: 0;
@@ -31,6 +33,7 @@
   }
 
   @include above(lap) {
+
     .search-icon {
       content: '';
       position: absolute;
@@ -50,58 +53,35 @@
       -webkit-mask: url($icon-search-path) no-repeat 50% 50%;
       -webkit-mask-size: cover;
 
-      background-color: var(--sm-light-primary);
+      background-color: var(--sm-current-fg1-color);
       opacity: .5;
       transition: opacity .15s $ease;
     }
   }
 
   .search-submit {
+    max-width: 100%;
     margin-left: 0;
 
     --font-size: 23;
-
-    max-width: 100%;
-
-    @include placeholder() {
-      color: var(--sm-current-fg1-color);
-    }
   }
 
   .search-field {
     border: 0;
     padding: 0 .8em;
 
-    font-weight: bold;
-
     background-color: transparent;
-    color: var(--sm-light-primary);
+    color: var(--sm-current-fg1-color);
 
     --font-size: 23;
+    font-weight: bold;
 
     @include above(lap) {
       padding: 0 .8em 0 1.8em;
     }
-  }
 
-  .error404 &,
-  .search-no-results & {
-    .search-submit {
-      --theme-button-background-color: var(--sm-color-primary);
-      --theme-button-border-color: var(--sm-color-primary);
-      --theme-button-text-color: var(--sm-light-primary);
-
-      --theme-button-hover-background-color: transparent;
-      --theme-button-hover-border-color: var(--sm-color-primary);
-      --theme-button-hover-text-color: var(--sm-color-primary);
-    }
-
-    .search-field {
-      color: var(--sm-current-fg2-color);
-    }
-
-    .search-icon {
-      background-color: var(--sm-current-fg2-color);
+    @include placeholder() {
+      color: var(--sm-current-fg1-color);
     }
   }
 }

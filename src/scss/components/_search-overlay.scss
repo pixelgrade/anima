@@ -1,29 +1,21 @@
 .c-search-overlay {
-
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
+  z-index: 9999; // bigger than c-bully
 
   width: 100%;
 
   padding-left: var(--theme-wrapper-sides-spacing);
   padding-right: var(--theme-wrapper-sides-spacing);
 
-  background-color: var(--sm-current-accent-color);
-
-  // We want to keep light primary,
-  // so we are going to use --sm-
-  color: var(--sm-light-primary);
-
-
-  z-index: 1200; // Bigger than Announcement Bar
-
   --theme-button-padding: .6em 1.7em;
   --theme-input-search-focus-overlay-shadow: inset 0px 0px 0px 2px rgba(var(--opacity-color), 1);
-  --theme-search-input-focus: var(--theme-input-search-focus-overlay-shadow),
-  var(--theme-input-focus-colored-shadow),
-  var(--theme-input-focus-shadow);
+  --theme-search-input-focus:
+      var(--theme-input-search-focus-overlay-shadow),
+      var(--theme-input-focus-colored-shadow),
+      var(--theme-input-focus-shadow);
   --theme-input-box-shadow: var(--theme-search-input-focus);
   --theme-input-focus-box-shadow: var(--theme-search-input-focus);
   --theme-input-hover-box-shadow: var(--theme-search-input-focus);
@@ -127,7 +119,6 @@
       margin-top: 1em;
 
       li {
-
         --current-line-height: 1.3;
 
         margin-left: .5em;
@@ -137,21 +128,8 @@
 
         border: 2px solid var(--current-button-border-color);
 
-        @include button-base();
-        --theme-button-background-color: var(--sm-light-primary);
-        --theme-button-border-color: var(--sm-light-primary);
-        --theme-button-text-color: var(--sm-color-primary);
-
-        --theme-button-hover-background-color: var(--sm-color-primary);
-        --theme-button-hover-border-color: var(--sm-light-primary);
-        --theme-button-hover-text-color: var(--sm-color-primary);
-        @include button-fill-reverse();
-
-        &:hover {
-          a {
-            color: var(--theme-button-hover-text-color);
-          }
-        }
+        @include button-base;
+        @include button-fill-reverse;
 
         a {
 
@@ -161,6 +139,10 @@
           text-decoration: none;
 
           transition: color .3s ease;
+        }
+
+        &:hover a {
+          color: var(--theme-button-hover-text-color);
         }
       }
     }

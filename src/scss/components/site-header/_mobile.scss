@@ -1,69 +1,3 @@
-.site-header {
-
-    width: 100vw;
-
-    //color: var(--sm-light-primary);
-    //background: transparent;
-
-    //&,
-    //&__content {
-    //    &:before {
-    //        content: '';
-    //        position: absolute;
-    //        left: 0;
-    //        top: 0;
-    //        bottom: 0;
-    //        width: 100%;
-    //        background-color: var(--sm-dark-primary);
-    //        opacity: 0.95;
-    //    }
-    //}
-
-    .site-branding,
-    .menu-item--cart {
-        display: none;
-    }
-
-    .menu-item-has-children[class],
-    .page_item_has_children[class] {
-
-        > a {
-            display: inline-block;
-            position: relative;
-            
-            width: 100%;
-
-            &:after {
-                position: absolute;
-                top: 50%;
-                right: 0;
-                transform: translateY(-50%);
-
-                transition-duration: var(--theme-transition-duration-quick);
-                transition-timing-function: $easeOut;
-
-                margin-left: .5em;
-            }
-        }
-
-        &.hover {
-
-            > a:after {
-                transform: translateY(-50%) rotate(-90deg);
-                opacity: 1;
-            }
-
-            > a:before {
-                opacity: 1;
-            }
-        }
-    }
-}
-
-.c-menu-toggle {
-    margin: 0 !important;
-}
-
 .site-header--mobile {
     position: fixed;
     top: 0;
@@ -83,16 +17,12 @@
     --shadow-y-offset: 4px;
     --shadow-blur: 4px;
 
-    @include above(lap) {
-        display: none;
-    }
-
     .menu-item--cart {
         display: flex;
 
         position: absolute;
         top: 50%;
-        right: calc(var(--theme-wrapper-sides-spacing) + .5em );
+        right: calc( var(--theme-wrapper-sides-spacing) + .5em );
 
         transform: translateY(-50%);
 
@@ -103,23 +33,72 @@
     }
 }
 
-.site-header__menu {
-    padding-left: var(--theme-wrapper-sides-spacing);
-    padding-right: var(--theme-wrapper-sides-spacing);
-}
+.site-header {
 
-.sub-menu {
-    margin-left: calc(var(--theme-wrapper-sides-spacing) * -1);
-    margin-right: calc(var(--theme-wrapper-sides-spacing) * -1);
-
-    > li {
-        padding-left: var(--theme-wrapper-sides-spacing);
-        padding-right: var(--theme-wrapper-sides-spacing);
+    [class*="__inner-container"] > .alignfull {
+        margin-left: 0;
+        margin-right: 0;
     }
 }
 
+@include above(lap) {
+
+    .site-header__content {
+        padding-top: 0 !important;
+    }
+
+    .site-header--mobile {
+        display: none;
+    }
+}
+
+@include below(lap) {
+
+    .site-header--main:before {
+        opacity: 0.95;
+    }
+
+    .site-header--main .site-branding,
+    .menu-item--cart {
+        display: none !important;
+    }
+
+    .site-header__menu {
+
+        .sub-menu {
+            margin-left: calc(var(--theme-wrapper-sides-spacing) * -1);
+            margin-right: calc(var(--theme-wrapper-sides-spacing) * -1);
+
+            > li {
+                padding-left: var(--theme-wrapper-sides-spacing);
+                padding-right: var(--theme-wrapper-sides-spacing);
+            }
+        }
+    }
+
+    .site-header__content,
+    .search-button__wrapper {
+
+        @include specific(3) {
+
+            .c-menu-toggle__checkbox:checked ~ .site-header & {
+                opacity: 1;
+                transition: opacity .1s $easeOut .25s;
+            }
+
+            .c-menu-toggle__checkbox:not(:checked) ~ .site-header & {
+                opacity: 0;
+                transition: opacity .075s $easeOut 0s;
+            }
+        }
+    }
+}
 
 .has-fixed-mobile-site-header {
+
+    .site-header {
+        top: 0;
+    }
 
     .site-header--mobile,
     .c-menu-toggle {
@@ -133,22 +112,5 @@ body:not(.has-fixed-mobile-site-header) {
     .c-menu-toggle {
         position: absolute;
         top: var(--admin-bar-height, 0);
-    }
-}
-
-.site-header__content,
-.search-button__wrapper {
-
-    @include specific(3) {
-
-        .c-menu-toggle__checkbox:checked ~ .site-header & {
-           opacity: 1;
-           transition: opacity .1s $easeOut .25s;
-        }
-
-        .c-menu-toggle__checkbox:not(:checked) ~ .site-header & {
-            opacity: 0;
-            transition: opacity .075s $easeOut 0s;
-        }
     }
 }

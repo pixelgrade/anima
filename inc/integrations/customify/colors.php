@@ -137,7 +137,7 @@ function pixelgrade_add_colors_section_to_customify_config( $config ) {
 				'html' => '<span class="separator sub-section label">' . esc_html__( 'Buttons', '__theme_txtd' ) . '</span>',
 			),
 			'text_button' => sm_get_color_switch_dark_config( 'Text Button Color', '.wp-block-button.is-style-text .wp-block-button__link', 'off', array( '--theme-button-text-color' ) ),
-			'solid_button' => sm_get_color_switch_dark_config( 'Solid Button Color', ':root', 'off', '--sm-button-background-color' ),
+			'solid_button' => sm_get_color_switch_dark_config( 'Solid Button Color', '*', 'off', '--sm-button-background-color' ),
 
 			'colors_header_section_title' => array(
 				'type' => 'html',

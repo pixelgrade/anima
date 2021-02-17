@@ -1232,13 +1232,14 @@ function () {
     this.options = Object.assign({}, defaults, args);
     this.$header = external_jQuery_default()(this.element);
     this.$toggle = external_jQuery_default()('.c-menu-toggle');
+    this.$toggleCheckbox = external_jQuery_default()('.c-menu-toggle__checkbox');
     this.$toggleWrap = external_jQuery_default()('.c-menu-toggle__wrap');
     this.$searchCancelButton = external_jQuery_default()('.c-search-overlay__cancel');
     this.$colorSchemeSwitcher = external_jQuery_default()('.is-color-scheme-switcher-button');
     this.$searchOverlay = external_jQuery_default()('.c-search-overlay');
     this.abovePromoBar = false;
     this.wasSticky = external_jQuery_default()('body').is('.has-site-header-fixed');
-    this.siteHeaderSticky = external_jQuery_default()('.site-header-sticky');
+    this.siteHeaderSticky = external_jQuery_default()('.site-header--secondary');
     this.offset = 0;
     this.scrollOffset = 0;
     this.mobileHeaderHeight = 0;
@@ -1422,11 +1423,11 @@ function () {
       TweenMax.set($target, {
         height: this.mobileHeaderHeight
       });
+      TweenMax.set('.site-header__content', {
+        paddingTop: this.mobileHeaderHeight
+      });
       TweenMax.to($target, .2, {
         y: this.offset
-      });
-      external_jQuery_default()('.site-header__inner-container').css({
-        transform: "translateY(".concat(this.mobileHeaderHeight, "px)")
       });
     }
   }, {
@@ -1479,11 +1480,12 @@ function () {
           scrollY = _GlobalService$getPro4.scrollY;
 
       var abovePromoBar = scrollY > this.promoBarOffset.top + this.promoBarHeight;
+      var $target = this.$mobileHeader.add(this.$toggle);
 
       if (abovePromoBar !== this.abovePromoBar) {
         external_jQuery_default()(body).toggleClass('has-fixed-mobile-site-header', abovePromoBar);
-        this.$mobileHeader.removeClass(!abovePromoBar ? this.initialColorClasses : this.transparentColorClasses);
-        this.$mobileHeader.addClass(abovePromoBar ? this.initialColorClasses : this.transparentColorClasses);
+        $target.removeClass(!abovePromoBar ? this.initialColorClasses : this.transparentColorClasses);
+        $target.addClass(abovePromoBar ? this.initialColorClasses : this.transparentColorClasses);
         this.abovePromoBar = abovePromoBar;
       }
     }
@@ -1559,8 +1561,16 @@ function () {
   }, {
     key: "initToggleClick",
     value: function initToggleClick() {
+      var _this3 = this;
+
       var $body = external_jQuery_default()('body');
-      this.$toggle.on('click', function () {
+      this.$toggleCheckbox.on('change', function () {
+        var isOpen = _this3.$toggleCheckbox.prop('checked');
+
+        _this3.$toggle.removeClass(isOpen ? _this3.initialColorClasses : _this3.transparentColorClasses);
+
+        _this3.$toggle.addClass(!isOpen ? _this3.initialColorClasses : _this3.transparentColorClasses);
+
         $body.toggleClass(NAVIGATION_OPEN_CLASS);
       });
     }

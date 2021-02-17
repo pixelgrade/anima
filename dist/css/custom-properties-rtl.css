@@ -1,8 +1,3 @@
-:root,
-.novablocks-block {
-  --sm-button-background-color: var(--sm-current-fg2-color);
-  --sm-button-foreground-color: var(--sm-current-bg-color); }
-
 html {
   --sm-bg-color-1: var(--sm-color-palette-1-bg-color-1);
   --sm-accent-color-1: var(--sm-color-palette-1-accent-color-1);
@@ -833,6 +828,9 @@ html,
 [class*="sm-variation-"] {
   background-color: var(--sm-current-bg-color);
   color: var(--sm-current-fg1-color); }
+
+:root {
+  --sm-button-background-color: var(--sm-current-fg2-color); }
 
 :root {
   --theme-customify-fluid-unit: calc( var(--theme-spacing-fluid) / var(--theme-body-font-size) );

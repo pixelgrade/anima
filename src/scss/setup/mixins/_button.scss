@@ -1,14 +1,8 @@
-:root,
-.novablocks-block {
-  --sm-button-background-color: var(--sm-current-fg2-color);
-  --sm-button-foreground-color: var(--sm-current-bg-color);
-}
-
 @mixin button-base {
   display: inline-block;
   text-decoration: none;
 
-  --theme-button-text-color: var(--sm-button-foreground-color);
+  --theme-button-text-color: var(--sm-current-bg-color);
   --theme-button-background-color: var(--sm-button-background-color);
   --theme-button-border-color: var(--sm-button-background-color);
 
@@ -231,11 +225,11 @@
 
 @mixin button-inverted {
   --theme-button-text-color: var(--sm-button-background-color);
-  --theme-button-background-color: var(--sm-button-foreground-color);
-  --theme-button-border-color: var(--sm-button-foreground-color);
-  --theme-button-hover-text-color: var(--sm-button-foreground-color);
+  --theme-button-background-color: var(--sm-current-bg-color);
+  --theme-button-border-color: var(--sm-current-bg-color);
+  --theme-button-hover-text-color: var(--sm-current-bg-color);
   --theme-button-hover-background-color: transparent;
-  --theme-button-hover-border-color: var(--sm-button-foreground-color);
+  --theme-button-hover-border-color: var(--sm-current-bg-color);
 }
 
 @mixin button {

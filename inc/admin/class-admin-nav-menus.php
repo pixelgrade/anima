@@ -784,7 +784,7 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 				return;
 			} ?>
 
-			<div class="c-search-overlay">
+			<div class="c-search-overlay sm-palette-1 sm-palette--shifted sm-variation-1">
 				<div class="c-search-overlay__content">
 					<div class="c-search-overlay__form">
 						<?php get_search_form(); ?>
