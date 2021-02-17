@@ -1236,7 +1236,6 @@ function () {
     this.$searchCancelButton = external_jQuery_default()('.c-search-overlay__cancel');
     this.$colorSchemeSwitcher = external_jQuery_default()('.is-color-scheme-switcher-button');
     this.$searchOverlay = external_jQuery_default()('.c-search-overlay');
-    this.inversed = false;
     this.abovePromoBar = false;
     this.wasSticky = external_jQuery_default()('body').is('.has-site-header-fixed');
     this.siteHeaderSticky = external_jQuery_default()('.site-header-sticky');
@@ -1253,6 +1252,7 @@ function () {
     this.initialColorClasses = getColorSetClasses(this.element).join(' ');
     this.transparentColorClasses = getColorSetClasses($blockColors[0]).join(' ') + ' site-header--transparent';
     this.$header.addClass(this.transparentColorClasses);
+    this.$mobileHeader.addClass(this.transparentColorClasses);
     this.onResize();
     this.render();
     globalService.registerOnResize(this.onResize.bind(this));
@@ -1264,11 +1264,6 @@ function () {
     value: function initialize() {
       this.timeline = this.getIntroTimeline();
       external_jQuery_default()('.site-header__wrapper').css('transition', 'none');
-
-      if (this.$promoBar.length) {
-        this.promoBarHeight = this.$promoBar.outerHeight();
-      }
-
       this.$header.addClass('site-header--fixed site-header--ready');
       this.$mobileHeader.addClass('site-header--fixed site-header--ready');
       this.initToggleClick();
@@ -1344,6 +1339,17 @@ function () {
       this.box = this.element.getBoundingClientRect();
       this.scrollOffset = this.getScrollOffset();
       this.mobileHeaderHeight = this.getMobileHeaderHeight();
+      this.getPromoBarProps();
+    }
+  }, {
+    key: "getPromoBarProps",
+    value: function getPromoBarProps() {
+      var _this$$promoBar;
+
+      if (this === null || this === void 0 ? void 0 : (_this$$promoBar = this.$promoBar) === null || _this$$promoBar === void 0 ? void 0 : _this$$promoBar.length) {
+        this.promoBarHeight = this.$promoBar.outerHeight();
+        this.promoBarOffset = this.$promoBar.offset();
+      }
     }
   }, {
     key: "onResize",
@@ -1412,20 +1418,15 @@ function () {
     key: "updateMobileHeaderOffset",
     value: function updateMobileHeaderOffset() {
       if (!this.$mobileHeader) return;
-      this.$mobileHeader.css({
+      var $target = this.$mobileHeader.add(this.$toggle);
+      TweenMax.set($target, {
         height: this.mobileHeaderHeight
       });
-      TweenMax.to(this.$mobileHeader, .2, {
+      TweenMax.to($target, .2, {
         y: this.offset
       });
       external_jQuery_default()('.site-header__inner-container').css({
         transform: "translateY(".concat(this.mobileHeaderHeight, "px)")
-      });
-      this.$toggleWrap.css({
-        height: this.mobileHeaderHeight
-      });
-      TweenMax.to(this.$toggleWrap, .2, {
-        y: this.offset
       });
     }
   }, {
@@ -1477,19 +1478,13 @@ function () {
       var _GlobalService$getPro4 = globalService.getProps(),
           scrollY = _GlobalService$getPro4.scrollY;
 
-      var abovePromoBar = scrollY > this.promoBarHeight;
+      var abovePromoBar = scrollY > this.promoBarOffset.top + this.promoBarHeight;
 
       if (abovePromoBar !== this.abovePromoBar) {
-        external_jQuery_default()(body).toggleClass('site-header-mobile--scrolled', abovePromoBar);
+        external_jQuery_default()(body).toggleClass('has-fixed-mobile-site-header', abovePromoBar);
+        this.$mobileHeader.removeClass(!abovePromoBar ? this.initialColorClasses : this.transparentColorClasses);
+        this.$mobileHeader.addClass(abovePromoBar ? this.initialColorClasses : this.transparentColorClasses);
         this.abovePromoBar = abovePromoBar;
-      }
-    }
-  }, {
-    key: "updateDesktopHeaderState",
-    value: function updateDesktopHeaderState(inversed) {
-      if (inversed !== this.inversed) {
-        this.$header.toggleClass('site-header--normal', !inversed);
-        this.inversed = inversed;
       }
     }
   }, {
@@ -1504,7 +1499,7 @@ function () {
         return;
       }
 
-      this.$mobileHeader = external_jQuery_default()('<div class="site-header--mobile">');
+      this.$mobileHeader = external_jQuery_default()('<div class="site-header--mobile site-header-background site-header-shadow">');
       external_jQuery_default()('.c-branding').first().clone().appendTo(this.$mobileHeader);
       this.$header.find('.menu-item--cart').first().clone().appendTo(this.$mobileHeader);
       this.$mobileHeader.insertAfter(this.$toggle);
@@ -1582,7 +1577,6 @@ function () {
       window.document.body.style.setProperty('--site-promo-bar-height', "".concat(this.promoBarHeight, "px"));
       this.updateMobileNavigationOffset();
       this.updateMobileHeaderState();
-      this.updateDesktopHeaderState(false);
     }
   }]);
 

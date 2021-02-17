@@ -7,18 +7,6 @@
     // than the one in the Nova Blocks plugin
     html:root {
 
-        --novablocks-color-1: var(--theme-color-primary);
-        --novablocks-color-2: var(--theme-color-secondary);
-        --novablocks-color-3: var(--theme-color-tertiary);
-
-        --novablocks-dark-1: var(--theme-dark-primary);
-        --novablocks-dark-2: var(--theme-dark-secondary);
-        --novablocks-dark-3: var(--theme-dark-tertiary);
-
-        --novablocks-light-1: var(--theme-light-primary);
-        --novablocks-light-2: var(--theme-light-secondary);
-        --novablocks-light-3: var(--theme-light-tertiary);
-
         --nova-food-menu-item-highlight-color: var(--sm-current-fg2-color);
 
         --novablocks-spacing: var(--theme-spacing-fluid-large);
@@ -32,7 +20,10 @@
     }
 
     * {
-        @include variation( default, novablocks-current, current );
+        --novablocks-bg-color: var(--sm-current-bg-color);
+        --novablocks-accent-color: var(--sm-current-accent-color);
+        --novablocks-fg1-color: var(--sm-current-fg1-color);
+        --novablocks-fg2-color: var(--sm-current-fg2-color);
     }
 
     .novablocks-hero__inner-container,

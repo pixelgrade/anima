@@ -23,7 +23,6 @@ class Header {
 		this.$colorSchemeSwitcher = $( '.is-color-scheme-switcher-button' );
 		this.$searchOverlay = $( '.c-search-overlay' );
 
-		this.inversed = false;
 		this.abovePromoBar = false;
 		this.wasSticky = $( 'body' ).is( '.has-site-header-fixed' );
 		this.siteHeaderSticky = $( '.site-header-sticky' );
@@ -46,6 +45,7 @@ class Header {
 		this.transparentColorClasses = getColorSetClasses( $blockColors[0] ).join( ' ' ) + ' site-header--transparent';
 
 		this.$header.addClass( this.transparentColorClasses );
+		this.$mobileHeader.addClass( this.transparentColorClasses );
 
 		this.onResize();
 		this.render();
@@ -60,9 +60,6 @@ class Header {
 
 		$( '.site-header__wrapper' ).css( 'transition', 'none' );
 
-		if ( this.$promoBar.length ) {
-			this.promoBarHeight = this.$promoBar.outerHeight();
-		}
 
 		this.$header.addClass( 'site-header--fixed site-header--ready' );
 		this.$mobileHeader.addClass( 'site-header--fixed site-header--ready' );
@@ -126,6 +123,14 @@ class Header {
 		this.box = this.element.getBoundingClientRect();
 		this.scrollOffset = this.getScrollOffset();
 		this.mobileHeaderHeight = this.getMobileHeaderHeight();
+		this.getPromoBarProps();
+	}
+
+	getPromoBarProps() {
+		if ( this?.$promoBar?.length ) {
+			this.promoBarHeight = this.$promoBar.outerHeight();
+			this.promoBarOffset = this.$promoBar.offset();
+		}
 	}
 
 	onResize() {
@@ -183,21 +188,14 @@ class Header {
 	updateMobileHeaderOffset() {
 		if ( ! this.$mobileHeader ) return;
 
-		this.$mobileHeader.css( {
-			height: this.mobileHeaderHeight,
-		} );
+		const $target = this.$mobileHeader.add( this.$toggle );
 
-		TweenMax.to(this.$mobileHeader, .2, {y: this.offset});
+		TweenMax.set( $target, { height: this.mobileHeaderHeight } );
+		TweenMax.to( $target, .2, { y: this.offset } );
 
 		$( '.site-header__inner-container' ).css( {
 			transform:  `translateY(${this.mobileHeaderHeight}px)`
 		} );
-
-		this.$toggleWrap.css( {
-			height: this.mobileHeaderHeight,
-		} );
-
-		TweenMax.to(this.$toggleWrap, .2, {y: this.offset});
 	}
 
 	getScrollOffset() {
@@ -235,21 +233,15 @@ class Header {
 		}
 
 		const { scrollY } = GlobalService.getProps();
-		const abovePromoBar = scrollY > this.promoBarHeight;
+		const abovePromoBar = scrollY > ( this.promoBarOffset.top + this.promoBarHeight );
 
 		if ( ( abovePromoBar !== this.abovePromoBar ) ) {
-			$( body ).toggleClass( 'site-header-mobile--scrolled', abovePromoBar );
+			$( body ).toggleClass( 'has-fixed-mobile-site-header', abovePromoBar );
+			this.$mobileHeader.removeClass( ! abovePromoBar ? this.initialColorClasses : this.transparentColorClasses );
+			this.$mobileHeader.addClass( abovePromoBar ? this.initialColorClasses : this.transparentColorClasses );
+
 			this.abovePromoBar = abovePromoBar;
 		}
-	}
-
-	updateDesktopHeaderState( inversed ) {
-
-		if ( inversed !== this.inversed ) {
-			this.$header.toggleClass( 'site-header--normal', ! inversed );
-			this.inversed = inversed;
-		}
-
 	}
 
 	createMobileHeader() {
@@ -263,7 +255,7 @@ class Header {
 			return;
 		}
 
-		this.$mobileHeader = $( '<div class="site-header--mobile">' );
+		this.$mobileHeader = $( '<div class="site-header--mobile site-header-background site-header-shadow">' );
 
 		$( '.c-branding' ).first().clone().appendTo( this.$mobileHeader );
 		this.$header.find( '.menu-item--cart' ).first().clone().appendTo( this.$mobileHeader );
@@ -351,7 +343,6 @@ class Header {
 
 		this.updateMobileNavigationOffset();
 		this.updateMobileHeaderState();
-		this.updateDesktopHeaderState( false );
 	}
 }
 

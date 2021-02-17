@@ -20,31 +20,6 @@
   }
 }
 
-// Adjust logo based on Dark Mode
-
-@include below(lap) {
-  .is-dark {
-
-    .c-logo__default {
-      opacity: 0;
-    }
-
-    .site-header-mobile--scrolled  {
-
-      .site-header--mobile {
-
-        .c-logo__default {
-          opacity: 0;
-        }
-
-        .c-logo__inverted {
-          opacity: 1;
-        }
-      }
-    }
-  }
-}
-
 .is-dark {
 
   .site-header--mobile,
