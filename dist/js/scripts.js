@@ -540,8 +540,9 @@ var below = function below(string) {
 var above = function above(string) {
   return mq('above', string);
 };
-function setAndResetElementStyles($element) {
+function setAndResetElementStyles(element) {
   var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var $element = external_jQuery_default()(element);
   $element.css(props);
   Object.keys(props).forEach(function (key) {
     props[key] = '';
@@ -558,7 +559,7 @@ function setAndResetElementStyles($element) {
   }
 }
 var getColorSetClasses = function getColorSetClasses(element) {
-  var classAttr = element.getAttribute('class');
+  var classAttr = element === null || element === void 0 ? void 0 : element.getAttribute('class');
 
   if (!classAttr) {
     return [];
@@ -570,7 +571,9 @@ var getColorSetClasses = function getColorSetClasses(element) {
   });
 };
 var utils_addClass = function addClass(element, classes) {
-  var classesArray = classes.split(/\b\s+/);
+  var classesArray = classes.split(/\b\s+/).filter(function (x) {
+    return x.trim().length;
+  });
 
   if (classesArray.length) {
     var _element$classList;
@@ -579,7 +582,9 @@ var utils_addClass = function addClass(element, classes) {
   }
 };
 var utils_removeClass = function removeClass(element, classes) {
-  var classesArray = classes.split(/\b\s+/);
+  var classesArray = classes.split(/\b\s+/).filter(function (x) {
+    return x.trim().length;
+  });
 
   if (classesArray.length) {
     var _element$classList2;
@@ -593,6 +598,16 @@ var toggleClasses = function toggleClasses(element, check) {
   utils_removeClass(element, !!check ? falseClasses : trueClasses);
   utils_addClass(element, !!check ? trueClasses : falseClasses);
 };
+function getFirstChild(el) {
+  var firstChild = el.firstChild;
+
+  while (firstChild != null && firstChild.nodeType == 3) {
+    // skip TextNodes
+    firstChild = firstChild.nextSibling;
+  }
+
+  return firstChild;
+}
 // CONCATENATED MODULE: ./src/js/components/globalService.js
 
 
@@ -1332,7 +1347,101 @@ function () {
 }();
 
 
-// CONCATENATED MODULE: ./src/js/components/menu-toggle.js
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
+var possibleConstructorReturn = __webpack_require__(15);
+var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
+var getPrototypeOf = __webpack_require__(21);
+var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
+var inherits = __webpack_require__(16);
+var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
+
+// CONCATENATED MODULE: ./src/js/components/header/header-base.js
+
+
+
+
+
+var header_base_HeaderBase =
+/*#__PURE__*/
+function () {
+  function HeaderBase() {
+    classCallCheck_default()(this, HeaderBase);
+
+    this.offset = 0;
+  }
+
+  createClass_default()(HeaderBase, [{
+    key: "initialize",
+    value: function initialize() {
+      this.initializeColors();
+      utils_addClass(this.element, this.transparentColorClasses);
+      utils_addClass(this.element, 'site-header--fixed site-header--ready');
+      globalService.registerRender(this.render.bind(this));
+      globalService.registerOnResize(this.onResize.bind(this));
+      this.render();
+    }
+  }, {
+    key: "onResize",
+    value: function onResize() {
+      this.box = this.element.getBoundingClientRect();
+    }
+  }, {
+    key: "render",
+    value: function render(forceUpdate) {
+      this.maybeUpdateStickyStyles(forceUpdate);
+    }
+  }, {
+    key: "maybeUpdateStickyStyles",
+    value: function maybeUpdateStickyStyles(forceUpdate) {
+      var _globalService$getPro = globalService.getProps(),
+          scrollY = _globalService$getPro.scrollY;
+
+      var shouldBeSticky = scrollY > this.offset;
+
+      if (this.shouldBeSticky === shouldBeSticky && !forceUpdate) {
+        return;
+      }
+
+      this.shouldBeSticky = shouldBeSticky;
+      this.updateStickyStyles();
+    }
+  }, {
+    key: "updateStickyStyles",
+    value: function updateStickyStyles() {
+      this.applyStickyStyles(this.element);
+    }
+  }, {
+    key: "applyStickyStyles",
+    value: function applyStickyStyles(element) {
+      if (this.shouldBeSticky) {
+        element.style.position = 'fixed';
+        element.style.removeProperty('top');
+      } else {
+        element.style.position = 'absolute';
+        element.style.top = "".concat(this.offset, "px");
+      }
+    }
+  }, {
+    key: "initializeColors",
+    value: function initializeColors() {
+      var content = document.querySelector('.site-main .entry-content');
+      var firstBlock = getFirstChild(content);
+      var novablocksBlock = firstBlock.querySelector('.novablocks-block');
+      var blockWithColors = novablocksBlock || firstBlock;
+      this.initialColorClasses = getColorSetClasses(this.element).join(' ');
+      this.transparentColorClasses = getColorSetClasses(blockWithColors).join(' ') + ' site-header--transparent';
+    }
+  }]);
+
+  return HeaderBase;
+}();
+
+/* harmony default export */ var header_base = (header_base_HeaderBase);
+// CONCATENATED MODULE: ./src/js/components/header/menu-toggle.js
 
 
 
@@ -1378,41 +1487,46 @@ function () {
 }();
 
 /* harmony default export */ var menu_toggle = (menu_toggle_MenuToggle);
-// CONCATENATED MODULE: ./src/js/components/header.js
+// CONCATENATED MODULE: ./src/js/components/header/header-mobile.js
 
 
 
 
 
 
-var header_defaults = {};
 
-var header_Header =
+
+
+
+var header_mobile_HeaderMobile =
 /*#__PURE__*/
-function () {
-  function Header(element, options) {
-    classCallCheck_default()(this, Header);
+function (_HeaderBase) {
+  inherits_default()(HeaderMobile, _HeaderBase);
 
-    if (!element) return;
-    this.element = element;
-    this.options = Object.assign({}, header_defaults, options);
-    this.$header = external_jQuery_default()(this.element);
-    this.initializeMenuToggle();
-    this.wasSticky = external_jQuery_default()('body').is('.has-site-header-fixed');
-    this.siteHeaderSticky = external_jQuery_default()('.site-header--secondary');
-    this.offset = 0;
-    this.mobileHeaderHeight = 0;
-    this.promoBarHeight = 0;
-    this.$page = external_jQuery_default()('#page .site-content');
-    this.$promoBar = external_jQuery_default()('.novablocks-announcement-bar');
-    this.createMobileHeader();
-    this.initializeColors();
-    this.onResize();
-    this.render();
-    this.initialize();
+  function HeaderMobile(parent) {
+    var _this;
+
+    classCallCheck_default()(this, HeaderMobile);
+
+    _this = possibleConstructorReturn_default()(this, getPrototypeOf_default()(HeaderMobile).call(this));
+    _this.parent = parent;
+    _this.parentContainer = parent.querySelector('.site-header__inner-container');
+
+    _this.initialize();
+
+    _this.onResize();
+
+    return _this;
   }
 
-  createClass_default()(Header, [{
+  createClass_default()(HeaderMobile, [{
+    key: "initialize",
+    value: function initialize() {
+      this.initializeMenuToggle();
+      this.createMobileHeader();
+      header_base.prototype.initialize.call(this);
+    }
+  }, {
     key: "initializeMenuToggle",
     value: function initializeMenuToggle() {
       var menuToggleCheckbox = document.getElementById('nova-menu-toggle');
@@ -1420,6 +1534,35 @@ function () {
       this.menuToggle = new menu_toggle(menuToggleCheckbox, {
         onChange: this.onToggleChange.bind(this)
       });
+    }
+  }, {
+    key: "createMobileHeader",
+    value: function createMobileHeader() {
+      this.element = document.createElement('div');
+      this.element.setAttribute('class', 'site-header--mobile site-header-background site-header-shadow');
+      this.copyElementFromParent('.c-branding');
+      this.copyElementFromParent('.menu-item--cart');
+      this.menuToggle.element.insertAdjacentElement('afterend', this.element);
+    }
+  }, {
+    key: "updateStickyStyles",
+    value: function updateStickyStyles() {
+      header_base.prototype.updateStickyStyles.call(this);
+      this.applyStickyStyles(this.menuToggle.element);
+      toggleClasses(this.element, this.shouldBeSticky, this.initialColorClasses, this.transparentColorClasses);
+      this.updateToggleClasses();
+    }
+  }, {
+    key: "onResize",
+    value: function onResize() {
+      header_base.prototype.onResize.call(this);
+      this.update();
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      this.menuToggle.element.style.height = "".concat(this.box.height, "px");
+      this.parentContainer.style.paddingTop = "".concat(this.box.height, "px");
     }
   }, {
     key: "onToggleChange",
@@ -1433,63 +1576,102 @@ function () {
     key: "updateToggleClasses",
     value: function updateToggleClasses() {
       var navigationIsOpen = this.navigationIsOpen,
-          abovePromoBar = this.abovePromoBar,
+          shouldBeSticky = this.shouldBeSticky,
           initialColorClasses = this.initialColorClasses,
           transparentColorClasses = this.transparentColorClasses;
-      var isTransparent = navigationIsOpen || !abovePromoBar;
+      var isTransparent = navigationIsOpen || !shouldBeSticky;
       toggleClasses(this.menuToggle.element, isTransparent, transparentColorClasses, initialColorClasses);
     }
   }, {
-    key: "initializeColors",
-    value: function initializeColors() {
-      var $firstBlock = external_jQuery_default()('.entry-content').children().first();
-      var $novaBlock = $firstBlock.find('.novablocks-block');
-      var $blockColors = $novaBlock.length ? $novaBlock : $firstBlock;
-      this.initialColorClasses = getColorSetClasses(this.element).join(' ');
-      this.transparentColorClasses = getColorSetClasses($blockColors[0]).join(' ') + ' site-header--transparent';
-      this.$header.addClass(this.transparentColorClasses);
-      this.$mobileHeader.addClass(this.transparentColorClasses);
+    key: "copyElementFromParent",
+    value: function copyElementFromParent(selector) {
+      var element = this.parent.querySelector(selector);
+      var elementClone = element === null || element === void 0 ? void 0 : element.cloneNode(true);
+
+      if (elementClone) {
+        this.element.appendChild(elementClone);
+      }
     }
-  }, {
+  }]);
+
+  return HeaderMobile;
+}(header_base);
+
+/* harmony default export */ var header_mobile = (header_mobile_HeaderMobile);
+// CONCATENATED MODULE: ./src/js/components/header/index.js
+
+
+
+
+
+
+
+
+
+
+var header_defaults = {};
+
+var header_Header =
+/*#__PURE__*/
+function (_HeaderBase) {
+  inherits_default()(Header, _HeaderBase);
+
+  function Header(element, options) {
+    var _this;
+
+    classCallCheck_default()(this, Header);
+
+    _this = possibleConstructorReturn_default()(this, getPrototypeOf_default()(Header).call(this));
+    if (!element) return possibleConstructorReturn_default()(_this);
+    _this.options = Object.assign({}, header_defaults, options);
+    _this.element = element;
+    _this.mobileHeader = new header_mobile(_this.element);
+    _this.secondaryHeader = _this.getSecondaryHeader();
+
+    _this.initialize();
+
+    _this.onResize();
+
+    return _this;
+  }
+
+  createClass_default()(Header, [{
     key: "initialize",
     value: function initialize() {
+      header_base.prototype.initialize.call(this);
       this.timeline = this.getIntroTimeline();
-      external_jQuery_default()('.site-header__wrapper').css('transition', 'none');
-      this.$header.addClass('site-header--fixed site-header--ready');
-      this.$mobileHeader.addClass('site-header--fixed site-header--ready');
       this.timeline.play();
     }
   }, {
-    key: "update",
-    value: function update() {
-      var _this = this;
+    key: "getSecondaryHeader",
+    value: function getSecondaryHeader() {
+      var nextSibling = this.element.nextElementSibling;
 
-      requestAnimationFrame(function () {
-        var _this$element;
+      if (nextSibling.classList.contains('site-header--secondary')) {
+        return nextSibling;
+      }
 
-        _this.$page[0].style.marginTop = "".concat(_this.visibleHeaderHeight + _this.offset, "px");
-
-        if (_this === null || _this === void 0 ? void 0 : (_this$element = _this.element) === null || _this$element === void 0 ? void 0 : _this$element.style) {
-          _this.element.style.marginTop = "".concat(_this.offset, "px");
-        }
-
-        if (_this.siteHeaderSticky.length) {
-          _this.siteHeaderSticky[0].style.marginTop = "".concat(_this.offset, "px");
-        }
-      });
-      this.updateMobileHeaderOffset(); //		this.updateHeaderButtonsHeight();
+      return null;
+    }
+  }, {
+    key: "updateStickyStyles",
+    value: function updateStickyStyles() {
+      header_base.prototype.updateStickyStyles.call(this);
+      this.element.style.marginTop = "".concat(this.offset, "px");
+      this.secondaryHeader.style.top = "".concat(this.offset, "px");
     }
   }, {
     key: "getIntroTimeline",
     value: function getIntroTimeline() {
-      var element = this.element;
+      var _this2 = this;
+
       var timeline = new TimelineMax({
         paused: true
       });
-      var height = external_jQuery_default()(element).outerHeight();
+      var height = this.element.offsetHeight;
       var transitionEasing = Power4.easeInOut;
       var transitionDuration = 0.5;
-      timeline.to(element, transitionDuration, {
+      timeline.to(this.element, transitionDuration, {
         opacity: 1,
         ease: transitionEasing
       }, 0);
@@ -1497,184 +1679,30 @@ function () {
         height: 0
       }, transitionDuration, {
         height: height,
-        onUpdate: this.onHeightUpdate.bind(this),
-        onUpdateParams: ["{self}"],
-        onComplete: function onComplete() {
-          external_jQuery_default()('.site-header__wrapper').css('transition', '');
+        onUpdate: function onUpdate(tween) {
+          _this2.box = Object.assign({}, _this2.box, {
+            height: tween.target.height
+          });
         },
+        onUpdateParams: ["{self}"],
         ease: transitionEasing
       }, 0);
       return timeline;
     }
   }, {
-    key: "onHeightUpdate",
-    value: function onHeightUpdate(tween) {
-      this.getProps();
-      this.box = Object.assign(this.box, {
-        height: tween.target.height
-      });
-      this.setVisibleHeaderHeight();
-      this.update();
-    }
-  }, {
-    key: "getMobileHeaderHeight",
-    value: function getMobileHeaderHeight() {
-      var mobileHeaderHeight = this.$mobileHeader.css('height', '').outerHeight();
-      return Math.max(mobileHeaderHeight, this.menuToggle.getHeight());
-    }
-  }, {
-    key: "isMobileHeaderVisibile",
-    value: function isMobileHeaderVisibile() {
-      return this.$mobileHeader.is(':visible');
-    }
-  }, {
-    key: "setVisibleHeaderHeight",
-    value: function setVisibleHeaderHeight() {
-      this.visibleHeaderHeight = this.isMobileHeaderVisibile() ? this.mobileHeaderHeight : this.box.height;
-    }
-  }, {
-    key: "getProps",
-    value: function getProps() {
-      this.box = this.element.getBoundingClientRect();
-      this.mobileHeaderHeight = this.getMobileHeaderHeight();
-      this.getPromoBarProps();
-    }
-  }, {
-    key: "getPromoBarProps",
-    value: function getPromoBarProps() {
-      var _this$$promoBar;
-
-      if (this === null || this === void 0 ? void 0 : (_this$$promoBar = this.$promoBar) === null || _this$$promoBar === void 0 ? void 0 : _this$$promoBar.length) {
-        this.promoBarHeight = this.$promoBar.outerHeight();
-        this.promoBarOffset = this.$promoBar.offset();
-      }
-    }
-  }, {
     key: "onResize",
     value: function onResize() {
-      var $header = external_jQuery_default()(this.element);
-      setAndResetElementStyles($header, {
+      header_base.prototype.onResize.call(this);
+      setAndResetElementStyles(this.element, {
         transition: 'none'
       });
-      this.getProps();
-      this.setVisibleHeaderHeight();
-      this.shouldMakeHeaderStatic();
-
-      if (!this.hasMobileNav()) {
-        external_jQuery_default()('body').css('overflow', '');
-      }
-
-      this.update();
-    }
-  }, {
-    key: "shouldMakeHeaderStatic",
-    value: function shouldMakeHeaderStatic() {
-      var $body = external_jQuery_default()('body');
-
-      var _GlobalService$getPro = globalService.getProps(),
-          windowHeight = _GlobalService$getPro.windowHeight;
-
-      if (this.wasSticky) {
-        $body.toggleClass('has-site-header-fixed', this.visibleHeaderHeight < windowHeight * 0.2);
-      }
-    }
-  }, {
-    key: "updateMobileHeaderOffset",
-    value: function updateMobileHeaderOffset() {
-      if (!this.$mobileHeader) return;
-      TweenMax.set('.site-header__inner-container', {
-        paddingTop: this.mobileHeaderHeight
-      });
-      TweenMax.set(this.$mobileHeader, {
-        height: this.mobileHeaderHeight
-      });
-      TweenMax.to(this.$mobileHeader, .2, {
-        y: this.offset
-      });
-      this.menuToggle.element.style.height = "".concat(this.mobileHeaderHeight, "px");
-      this.menuToggle.element.style.transform = "translate3d(0,".concat(this.offset, "px,0)");
-    }
-  }, {
-    key: "updateMobileNavigationOffset",
-    value: function updateMobileNavigationOffset() {
-      if (!this.hasMobileNav()) {
-        return;
-      }
-
-      var _GlobalService$getPro2 = globalService.getProps(),
-          scrollY = _GlobalService$getPro2.scrollY;
-
-      this.element.style.marginTop = Math.max(this.promoBarHeight - scrollY, 0) + 'px';
-    }
-  }, {
-    key: "updateMobileHeaderState",
-    value: function updateMobileHeaderState() {
-      if (!this.hasMobileNav()) {
-        return;
-      }
-
-      var _GlobalService$getPro3 = globalService.getProps(),
-          scrollY = _GlobalService$getPro3.scrollY;
-
-      var abovePromoBar = scrollY > this.promoBarOffset.top + this.promoBarHeight;
-
-      if (abovePromoBar !== this.abovePromoBar) {
-        this.abovePromoBar = abovePromoBar;
-        external_jQuery_default()(body).toggleClass('has-fixed-mobile-site-header', this.abovePromoBar);
-        toggleClasses(this.$mobileHeader[0], this.abovePromoBar, this.initialColorClasses, this.transparentColorClasses);
-        this.updateToggleClasses();
-      }
-    }
-  }, {
-    key: "createMobileHeader",
-    value: function createMobileHeader() {
-      if (this.createdMobileHeader) return;
-      var $mobileHeader = external_jQuery_default()('.site-header--mobile');
-
-      if ($mobileHeader.length) {
-        this.$mobileHeader = $mobileHeader;
-        this.createdMobileHeader = true;
-        return;
-      }
-
-      this.$mobileHeader = external_jQuery_default()('<div class="site-header--mobile site-header-background site-header-shadow">');
-      external_jQuery_default()('.c-branding').first().clone().appendTo(this.$mobileHeader);
-      this.$header.find('.menu-item--cart').first().clone().appendTo(this.$mobileHeader);
-      this.$mobileHeader.insertAfter(this.menuToggle.element);
-      this.createdMobileHeader = true;
-    }
-  }, {
-    key: "updateHeaderButtonsHeight",
-    value: function updateHeaderButtonsHeight() {
-      var $buttons = this.$searchCancelButton.add(this.$colorSchemeSwitcher).add('.search-button__wrapper').add('.scheme-switcher__wrapper');
-      $buttons.css('height', '');
-
-      if (!this.hasMobileNav()) {
-        return;
-      }
-
-      $buttons.css('height', this.mobileHeaderHeight);
-    }
-  }, {
-    key: "hasMobileNav",
-    value: function hasMobileNav() {
-      return below('lap');
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      if (!this.element) return;
-      window.document.body.style.setProperty('--site-header-height', "".concat(this.visibleHeaderHeight + this.promoBarHeight, "px"));
-      window.document.body.style.setProperty('--site-promo-bar-height', "".concat(this.promoBarHeight, "px"));
-      this.updateMobileNavigationOffset();
-      this.updateMobileHeaderState();
     }
   }]);
 
   return Header;
-}();
+}(header_base);
 
-/* harmony default export */ var components_header = (header_Header);
+/* harmony default export */ var header = (header_Header);
 // EXTERNAL MODULE: ./node_modules/js-cookie/src/js.cookie.js
 var js_cookie = __webpack_require__(4);
 var js_cookie_default = /*#__PURE__*/__webpack_require__.n(js_cookie);
@@ -2013,18 +2041,6 @@ function () {
 }();
 
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__(15);
-var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
-var getPrototypeOf = __webpack_require__(21);
-var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
-var inherits = __webpack_require__(16);
-var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
-
 // CONCATENATED MODULE: ./src/js/components/base-component.js
 
 
@@ -2184,38 +2200,9 @@ function () {
     this.initializeImages();
     this.initializeCommentsArea();
     this.initializeReservationForm();
-    globalService.registerRender(this.render.bind(this));
   }
 
   createClass_default()(App, [{
-    key: "render",
-    value: function render() {
-      var _GlobalService$getPro = globalService.getProps(),
-          scrollY = _GlobalService$getPro.scrollY,
-          adminBarHeight = _GlobalService$getPro.adminBarHeight;
-
-      var promoBar = this.promoBar;
-      var header = this.header;
-      var HeroCollection = this.HeroCollection;
-      var overlap = HeroCollection.some(function (hero) {
-        return insideHalf({
-          left: header.box.left,
-          top: header.box.top + scrollY,
-          width: header.box.width,
-          height: header.box.height
-        }, {
-          left: hero.box.left,
-          top: hero.box.top + promoBar.height,
-          width: hero.box.width,
-          height: hero.box.height
-        });
-      });
-
-      if (!!header) {
-        header.render(overlap);
-      }
-    }
-  }, {
     key: "initializeImages",
     value: function initializeImages() {
       var showLoadedImages = this.showLoadedImages.bind(this);
@@ -2282,7 +2269,7 @@ function () {
       var $header = external_jQuery_default()('.site-header');
 
       if ($header.length) {
-        this.header = new components_header($header.get(0));
+        this.header = new header($header.get(0));
       }
     }
   }, {
@@ -2307,7 +2294,9 @@ function () {
 
       if (!!header) {
         header.offset = promoBarHeight;
-        header.update();
+        header.render(true);
+        header.mobileHeader.offset = promoBarHeight;
+        header.mobileHeader.render(true);
       }
 
       HeroCollection.forEach(function (hero) {

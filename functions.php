@@ -142,7 +142,6 @@ function rosa2_register_scripts() {
 	wp_register_style( 'rosa2-gutenberg-legacy-frontend', get_template_directory_uri() . '/dist/css/gutenberg-legacy-frontend.css', array(), $theme->get( 'Version' ) );
 
 	// Nova Blocks Fallbacks
-    wp_register_style('novablocks/header', get_template_directory_uri() . '/fallbacks/nova-blocks/blocks/header/style.css', array(), '1.8.1');
     wp_register_style('novablocks/navigation', get_template_directory_uri() . '/fallbacks/nova-blocks/blocks/navigation/style.css', array(), '1.8.1');
     wp_register_style('novablocks/media', get_template_directory_uri() . '/fallbacks/nova-blocks/blocks/media/style.css', array(), '1.8.1');
 

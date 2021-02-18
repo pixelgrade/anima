@@ -31,27 +31,3 @@
     }
   }
 }
-
-html:not(.is-dark) {
-  .has-no-spacing-top {
-    // Handle logo variation
-    // based on first Media Card,
-    // only when we are on Light Mode.
-    
-    &.has-site-header-transparent {
-      &.has-site-header-fixed.first-block-is-media--moderate {
-        
-        .site-header:not(.site-header--scrolled) .site-header__wrapper,
-        .site-header--mobile {
-          .c-logo__default {
-            opacity: 1;
-          }
-          
-          .c-logo__inverted {
-            opacity: 0;
-          }
-        }
-      }
-    }
-  }
-}

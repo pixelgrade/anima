@@ -15,6 +15,18 @@
     --theme-button-hover-border-color: var(--sm-light-primary);
 }
 
+.site-header--main {
+
+    @include above(lap) {
+        position: absolute !important;
+        top: 0 !important;
+    }
+
+    @include below(lap) {
+        margin-top: 0 !important;
+    }
+}
+
 // External Link
 .is-external-link {
     @include header-menu-item-is-external-link;

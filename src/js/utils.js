@@ -77,14 +77,18 @@ export const above = function(string) {
 	return mq( 'above', string );
 };
 
-export function setAndResetElementStyles( $element, props = {} ) {
+export function setAndResetElementStyles( element, props = {} ) {
+
+	const $element = $( element );
 
 	$element.css( props );
 
-	Object.keys( props ).forEach( key => { props[ key ] = '' } )
+	Object.keys( props ).forEach( key => {
+		props[key] = ''
+	} )
 
-   if ( window.requestIdleCallback ) {
-	   window.requestIdleCallback( () => {
+	if ( window.requestIdleCallback ) {
+		window.requestIdleCallback( () => {
 			$element.css( props );
 		} );
 	} else {
@@ -95,7 +99,7 @@ export function setAndResetElementStyles( $element, props = {} ) {
 }
 
 export const getColorSetClasses = ( element ) => {
-	const classAttr = element.getAttribute( 'class' );
+	const classAttr = element?.getAttribute( 'class' );
 
 	if ( ! classAttr ) {
 		return [];
@@ -109,7 +113,7 @@ export const getColorSetClasses = ( element ) => {
 }
 
 export const addClass = ( element, classes ) => {
-	const classesArray = classes.split( /\b\s+/ );
+	const classesArray = classes.split( /\b\s+/ ).filter( x => x.trim().length );
 
 	if ( classesArray.length ) {
 		element.classList.add( ...classesArray );
@@ -117,7 +121,7 @@ export const addClass = ( element, classes ) => {
 }
 
 export const removeClass = ( element, classes ) => {
-	const classesArray = classes.split( /\b\s+/ );
+	const classesArray = classes.split(/\b\s+/).filter( x => x.trim().length );
 
 	if ( classesArray.length ) {
 		element.classList.remove( ...classesArray );
@@ -127,4 +131,12 @@ export const removeClass = ( element, classes ) => {
 export const toggleClasses = ( element, check, trueClasses = '', falseClasses = '' ) => {
 	removeClass( element, !! check ? falseClasses : trueClasses );
 	addClass( element, !! check ? trueClasses : falseClasses );
+}
+
+export function getFirstChild( el ){
+	var firstChild = el.firstChild;
+	while ( firstChild != null && firstChild.nodeType == 3 ) { // skip TextNodes
+		firstChild = firstChild.nextSibling;
+	}
+	return firstChild;
 }

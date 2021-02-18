@@ -93,24 +93,3 @@
         }
     }
 }
-
-.has-fixed-mobile-site-header {
-
-    .site-header {
-        top: 0;
-    }
-
-    .site-header--mobile,
-    .c-menu-toggle {
-        transform: none !important;
-    }
-}
-
-body:not(.has-fixed-mobile-site-header) {
-
-    .site-header--mobile,
-    .c-menu-toggle {
-        position: absolute;
-        top: var(--admin-bar-height, 0);
-    }
-}

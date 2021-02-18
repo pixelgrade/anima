@@ -964,23 +964,6 @@ table {
   @media not screen and (min-width: 1000px) {
     .promo-bar[class][class] {
       position: absolute; } }
-  .admin-bar .promo-bar {
-    top: 32px; }
-  .demo-site .promo-bar {
-    top: 80px; }
-  .admin-bar.demo-site .promo-bar {
-    top: 112px; }
-  @media (max-width: 782px) {
-    .admin-bar .promo-bar {
-      top: 46px; }
-    .admin-bar.demo-site .promo-bar {
-      top: 126px; } }
-  @media (max-width: 700px) {
-    .admin-bar.demo-site .promo-bar {
-      top: 146px; } }
-  @media screen and (max-width: 600px) {
-    .admin-bar .promo-bar {
-      position: absolute; } }
   .promo-bar .novablocks-announcement-bar.is-hidden {
     display: block; }
   .promo-bar .novablocks-announcement-bar__wrapper {
@@ -1061,18 +1044,6 @@ table {
     opacity: 0;
     transition: opacity 0.075s cubic-bezier(0, 0, 0.58, 1) 0s; } }
 
-.has-fixed-mobile-site-header .site-header {
-  top: 0; }
-
-.has-fixed-mobile-site-header .site-header--mobile,
-.has-fixed-mobile-site-header .c-menu-toggle {
-  transform: none !important; }
-
-body:not(.has-fixed-mobile-site-header) .site-header--mobile,
-body:not(.has-fixed-mobile-site-header) .c-menu-toggle {
-  position: absolute;
-  top: var(--admin-bar-height, 0); }
-
 .c-menu-toggle,
 .c-menu-toggle__slice {
   transition: var(--theme-transition); }
@@ -1099,6 +1070,15 @@ body:not(.has-fixed-mobile-site-header) .c-menu-toggle {
   --theme-button-hover-text-color: var(--sm-light-primary);
   --theme-button-hover-background-color: transparent;
   --theme-button-hover-border-color: var(--sm-light-primary); }
+
+@media only screen and (min-width: 1000px) {
+  .site-header--main {
+    position: absolute !important;
+    top: 0 !important; } }
+
+@media not screen and (min-width: 1000px) {
+  .site-header--main {
+    margin-top: 0 !important; } }
 
 .is-external-link {
   position: relative; }

@@ -4,7 +4,7 @@ import { insideHalf, debounce } from "../utils";
 import GlobalService from './globalService';
 import Hero from './hero';
 import CommentsArea from './commentsArea';
-import Header from './header';
+import Header from './header/index';
 import PromoBar from "./promo-bar";
 import Navbar from "./navbar";
 
@@ -23,34 +23,6 @@ export default class App {
 		this.initializeImages();
 		this.initializeCommentsArea();
 		this.initializeReservationForm();
-
-		GlobalService.registerRender( this.render.bind( this ) );
-	}
-
-	render() {
-		const { scrollY, adminBarHeight } = GlobalService.getProps();
-
-		const promoBar = this.promoBar;
-		const header = this.header;
-		const HeroCollection = this.HeroCollection;
-
-		const overlap = HeroCollection.some( function( hero ) {
-			return insideHalf( {
-				left: header.box.left,
-				top: header.box.top + scrollY,
-				width: header.box.width,
-				height: header.box.height,
-			}, {
-				left: hero.box.left,
-				top: hero.box.top + promoBar.height,
-				width: hero.box.width,
-				height: hero.box.height,
-			} );
-		} );
-
-		if ( !! header ) {
-			header.render( overlap );
-		}
 	}
 
 	initializeImages() {
@@ -134,7 +106,10 @@ export default class App {
 
 		if ( !! header ) {
 			header.offset = promoBarHeight;
-			header.update();
+			header.render( true );
+
+			header.mobileHeader.offset = promoBarHeight;
+			header.mobileHeader.render( true );
 		}
 
 		HeroCollection.forEach( hero => {
