@@ -4,32 +4,24 @@ import MenuToggle from './menu-toggle';
 import { below, setAndResetElementStyles, getColorSetClasses, toggleClasses } from '../utils';
 import $ from 'jquery';
 
-const defaults = {
-	offsetTargetElement: null,
-};
-
-//const NAVIGATION_OPEN_CLASS = 'navigation-is-open'
+const defaults = {}
 
 class Header {
 
-	constructor( element, args ) {
+	constructor( element, options ) {
 		if ( ! element ) return;
 
 		this.element = element;
-		this.options = Object.assign( {}, defaults, args );
+		this.options = Object.assign( {}, defaults, options );
 
 		this.$header = $( this.element );
 
-		this.menuToggle = new MenuToggle( document.getElementById( 'nova-menu-toggle' ), {
-			onChange: this.onToggleChange.bind( this )
-		} );
+		this.initializeMenuToggle();
 
-		this.abovePromoBar = false;
 		this.wasSticky = $( 'body' ).is( '.has-site-header-fixed' );
 		this.siteHeaderSticky = $( '.site-header--secondary' );
 
 		this.offset = 0;
-		this.scrollOffset = 0;
 		this.mobileHeaderHeight = 0;
 		this.promoBarHeight = 0;
 
@@ -44,10 +36,26 @@ class Header {
 		this.initialize();
 	}
 
+	initializeMenuToggle() {
+		const menuToggleCheckbox = document.getElementById( 'nova-menu-toggle' );
+
+		this.navigationIsOpen = menuToggleCheckbox.checked;
+		this.menuToggle = new MenuToggle( menuToggleCheckbox, {
+			onChange: this.onToggleChange.bind( this )
+		} );
+	}
+
 	onToggleChange( event, menuToggle ) {
 		const { checked } = event.target;
 		document.body.style.overflow = checked ? 'hidden' : '';
-		toggleClasses( menuToggle.element, checked, this.transparentColorClasses, this.initialColorClasses );
+		this.navigationIsOpen = !! checked;
+		this.updateToggleClasses();
+	}
+
+	updateToggleClasses() {
+		const { navigationIsOpen, abovePromoBar, initialColorClasses, transparentColorClasses } = this;
+		const isTransparent = navigationIsOpen || ! abovePromoBar;
+		toggleClasses( this.menuToggle.element, isTransparent, transparentColorClasses, initialColorClasses );
 	}
 
 	initializeColors() {
@@ -74,9 +82,19 @@ class Header {
 	}
 
 	update() {
-		this.updatePageOffset();
-		this.updateHeaderOffset();
-		this.updateStickyHeaderOffset();
+
+		requestAnimationFrame(() => {
+			this.$page[0].style.marginTop = `${ this.visibleHeaderHeight + this.offset }px`
+
+			if ( this?.element?.style ) {
+				this.element.style.marginTop = `${ this.offset }px`;
+			}
+
+			if ( this.siteHeaderSticky.length ) {
+				this.siteHeaderSticky[0].style.marginTop = `${ this.offset }px`;
+			}
+		} );
+
 		this.updateMobileHeaderOffset();
 
 //		this.updateHeaderButtonsHeight();
@@ -125,7 +143,6 @@ class Header {
 
 	getProps() {
 		this.box = this.element.getBoundingClientRect();
-		this.scrollOffset = this.getScrollOffset();
 		this.mobileHeaderHeight = this.getMobileHeaderHeight();
 		this.getPromoBarProps();
 	}
@@ -162,54 +179,15 @@ class Header {
 		}
 	}
 
-	updateHeaderOffset() {
-		requestAnimationFrame(() => {
-			if ( ! this?.element?.style ) {
-				return;
-			}
-			this.element.style.marginTop = this.offset + 'px';
-		} );
-	}
-
-	updateStickyHeaderOffset() {
-		requestAnimationFrame( () => {
-
-			if ( ! this.siteHeaderSticky.length ) {
-				return;
-			}
-
-			this.siteHeaderSticky.css (
-				{
-					marginTop: this.offset + 'px'
-				}
-			)
-		})
-	}
-
 	updateMobileHeaderOffset() {
 		if ( ! this.$mobileHeader ) return;
 
+		TweenMax.set( '.site-header__inner-container', { paddingTop: this.mobileHeaderHeight } );
 		TweenMax.set( this.$mobileHeader, { height: this.mobileHeaderHeight } );
-		TweenMax.set( '.site-header__content', { paddingTop: this.mobileHeaderHeight } );
 		TweenMax.to( this.$mobileHeader, .2, { y: this.offset } );
-	}
 
-	getScrollOffset() {
-		const { adminBarHeight, scrollY } = GlobalService.getProps();
-		const { offsetTargetElement } = this.options;
-
-		if ( offsetTargetElement ) {
-			const offsetTargetBox = offsetTargetElement.getBoundingClientRect();
-			const targetBottom = offsetTargetBox.top + scrollY + offsetTargetBox.height;
-			const headerOffset = adminBarHeight + this.offset + this.box.height / 2;
-			return targetBottom - headerOffset;
-		}
-
-		return 0;
-	}
-
-	updatePageOffset() {
-		TweenMax.set( this.$page, { css: { marginTop: this.visibleHeaderHeight + this.offset } } );
+		this.menuToggle.element.style.height = `${ this.mobileHeaderHeight }px`;
+		this.menuToggle.element.style.transform = `translate3d(0,${ this.offset }px,0)`;
 	}
 
 	updateMobileNavigationOffset() {
@@ -232,9 +210,11 @@ class Header {
 		const abovePromoBar = scrollY > ( this.promoBarOffset.top + this.promoBarHeight );
 
 		if ( ( abovePromoBar !== this.abovePromoBar ) ) {
-			$( body ).toggleClass( 'has-fixed-mobile-site-header', abovePromoBar );
-			toggleClasses( this.$mobileHeader[0], abovePromoBar, this.initialColorClasses, this.transparentColorClasses );
 			this.abovePromoBar = abovePromoBar;
+
+			$( body ).toggleClass( 'has-fixed-mobile-site-header', this.abovePromoBar );
+			toggleClasses( this.$mobileHeader[0], this.abovePromoBar, this.initialColorClasses, this.transparentColorClasses );
+			this.updateToggleClasses();
 		}
 	}
 

@@ -542,6 +542,7 @@ var above = function above(string) {
 };
 function setAndResetElementStyles($element) {
   var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  $element.css(props);
   Object.keys(props).forEach(function (key) {
     props[key] = '';
   });
@@ -808,6 +809,12 @@ function () {
       return Object.keys(this.newProps).some(function (key) {
         return _this.newProps[key] !== _this.props[key];
       });
+    }
+  }, {
+    key: "below",
+    value: function below(breakpointName) {
+      var mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      return !!mediaQuery.matches;
     }
   }, {
     key: "getAdminBarHeight",
@@ -1378,28 +1385,22 @@ function () {
 
 
 
-var header_defaults = {
-  offsetTargetElement: null
-}; //const NAVIGATION_OPEN_CLASS = 'navigation-is-open'
+var header_defaults = {};
 
 var header_Header =
 /*#__PURE__*/
 function () {
-  function Header(element, args) {
+  function Header(element, options) {
     classCallCheck_default()(this, Header);
 
     if (!element) return;
     this.element = element;
-    this.options = Object.assign({}, header_defaults, args);
+    this.options = Object.assign({}, header_defaults, options);
     this.$header = external_jQuery_default()(this.element);
-    this.menuToggle = new menu_toggle(document.getElementById('nova-menu-toggle'), {
-      onChange: this.onToggleChange.bind(this)
-    });
-    this.abovePromoBar = false;
+    this.initializeMenuToggle();
     this.wasSticky = external_jQuery_default()('body').is('.has-site-header-fixed');
     this.siteHeaderSticky = external_jQuery_default()('.site-header--secondary');
     this.offset = 0;
-    this.scrollOffset = 0;
     this.mobileHeaderHeight = 0;
     this.promoBarHeight = 0;
     this.$page = external_jQuery_default()('#page .site-content');
@@ -1412,11 +1413,31 @@ function () {
   }
 
   createClass_default()(Header, [{
+    key: "initializeMenuToggle",
+    value: function initializeMenuToggle() {
+      var menuToggleCheckbox = document.getElementById('nova-menu-toggle');
+      this.navigationIsOpen = menuToggleCheckbox.checked;
+      this.menuToggle = new menu_toggle(menuToggleCheckbox, {
+        onChange: this.onToggleChange.bind(this)
+      });
+    }
+  }, {
     key: "onToggleChange",
     value: function onToggleChange(event, menuToggle) {
       var checked = event.target.checked;
       document.body.style.overflow = checked ? 'hidden' : '';
-      toggleClasses(menuToggle.element, checked, this.transparentColorClasses, this.initialColorClasses);
+      this.navigationIsOpen = !!checked;
+      this.updateToggleClasses();
+    }
+  }, {
+    key: "updateToggleClasses",
+    value: function updateToggleClasses() {
+      var navigationIsOpen = this.navigationIsOpen,
+          abovePromoBar = this.abovePromoBar,
+          initialColorClasses = this.initialColorClasses,
+          transparentColorClasses = this.transparentColorClasses;
+      var isTransparent = navigationIsOpen || !abovePromoBar;
+      toggleClasses(this.menuToggle.element, isTransparent, transparentColorClasses, initialColorClasses);
     }
   }, {
     key: "initializeColors",
@@ -1441,9 +1462,21 @@ function () {
   }, {
     key: "update",
     value: function update() {
-      this.updatePageOffset();
-      this.updateHeaderOffset();
-      this.updateStickyHeaderOffset();
+      var _this = this;
+
+      requestAnimationFrame(function () {
+        var _this$element;
+
+        _this.$page[0].style.marginTop = "".concat(_this.visibleHeaderHeight + _this.offset, "px");
+
+        if (_this === null || _this === void 0 ? void 0 : (_this$element = _this.element) === null || _this$element === void 0 ? void 0 : _this$element.style) {
+          _this.element.style.marginTop = "".concat(_this.offset, "px");
+        }
+
+        if (_this.siteHeaderSticky.length) {
+          _this.siteHeaderSticky[0].style.marginTop = "".concat(_this.offset, "px");
+        }
+      });
       this.updateMobileHeaderOffset(); //		this.updateHeaderButtonsHeight();
     }
   }, {
@@ -1503,7 +1536,6 @@ function () {
     key: "getProps",
     value: function getProps() {
       this.box = this.element.getBoundingClientRect();
-      this.scrollOffset = this.getScrollOffset();
       this.mobileHeaderHeight = this.getMobileHeaderHeight();
       this.getPromoBarProps();
     }
@@ -1547,75 +1579,20 @@ function () {
       }
     }
   }, {
-    key: "updateHeaderOffset",
-    value: function updateHeaderOffset() {
-      var _this = this;
-
-      requestAnimationFrame(function () {
-        var _this$element;
-
-        if (!(_this === null || _this === void 0 ? void 0 : (_this$element = _this.element) === null || _this$element === void 0 ? void 0 : _this$element.style)) {
-          return;
-        }
-
-        _this.element.style.marginTop = _this.offset + 'px';
-      });
-    }
-  }, {
-    key: "updateStickyHeaderOffset",
-    value: function updateStickyHeaderOffset() {
-      var _this2 = this;
-
-      requestAnimationFrame(function () {
-        if (!_this2.siteHeaderSticky.length) {
-          return;
-        }
-
-        _this2.siteHeaderSticky.css({
-          marginTop: _this2.offset + 'px'
-        });
-      });
-    }
-  }, {
     key: "updateMobileHeaderOffset",
     value: function updateMobileHeaderOffset() {
       if (!this.$mobileHeader) return;
+      TweenMax.set('.site-header__inner-container', {
+        paddingTop: this.mobileHeaderHeight
+      });
       TweenMax.set(this.$mobileHeader, {
         height: this.mobileHeaderHeight
-      });
-      TweenMax.set('.site-header__content', {
-        paddingTop: this.mobileHeaderHeight
       });
       TweenMax.to(this.$mobileHeader, .2, {
         y: this.offset
       });
-    }
-  }, {
-    key: "getScrollOffset",
-    value: function getScrollOffset() {
-      var _GlobalService$getPro2 = globalService.getProps(),
-          adminBarHeight = _GlobalService$getPro2.adminBarHeight,
-          scrollY = _GlobalService$getPro2.scrollY;
-
-      var offsetTargetElement = this.options.offsetTargetElement;
-
-      if (offsetTargetElement) {
-        var offsetTargetBox = offsetTargetElement.getBoundingClientRect();
-        var targetBottom = offsetTargetBox.top + scrollY + offsetTargetBox.height;
-        var headerOffset = adminBarHeight + this.offset + this.box.height / 2;
-        return targetBottom - headerOffset;
-      }
-
-      return 0;
-    }
-  }, {
-    key: "updatePageOffset",
-    value: function updatePageOffset() {
-      TweenMax.set(this.$page, {
-        css: {
-          marginTop: this.visibleHeaderHeight + this.offset
-        }
-      });
+      this.menuToggle.element.style.height = "".concat(this.mobileHeaderHeight, "px");
+      this.menuToggle.element.style.transform = "translate3d(0,".concat(this.offset, "px,0)");
     }
   }, {
     key: "updateMobileNavigationOffset",
@@ -1624,8 +1601,8 @@ function () {
         return;
       }
 
-      var _GlobalService$getPro3 = globalService.getProps(),
-          scrollY = _GlobalService$getPro3.scrollY;
+      var _GlobalService$getPro2 = globalService.getProps(),
+          scrollY = _GlobalService$getPro2.scrollY;
 
       this.element.style.marginTop = Math.max(this.promoBarHeight - scrollY, 0) + 'px';
     }
@@ -1636,15 +1613,16 @@ function () {
         return;
       }
 
-      var _GlobalService$getPro4 = globalService.getProps(),
-          scrollY = _GlobalService$getPro4.scrollY;
+      var _GlobalService$getPro3 = globalService.getProps(),
+          scrollY = _GlobalService$getPro3.scrollY;
 
       var abovePromoBar = scrollY > this.promoBarOffset.top + this.promoBarHeight;
 
       if (abovePromoBar !== this.abovePromoBar) {
-        external_jQuery_default()(body).toggleClass('has-fixed-mobile-site-header', abovePromoBar);
-        toggleClasses(this.$mobileHeader[0], abovePromoBar, this.initialColorClasses, this.transparentColorClasses);
         this.abovePromoBar = abovePromoBar;
+        external_jQuery_default()(body).toggleClass('has-fixed-mobile-site-header', this.abovePromoBar);
+        toggleClasses(this.$mobileHeader[0], this.abovePromoBar, this.initialColorClasses, this.transparentColorClasses);
+        this.updateToggleClasses();
       }
     }
   }, {
