@@ -1543,6 +1543,39 @@ function (_HeaderBase) {
       this.copyElementFromParent('.c-branding');
       this.copyElementFromParent('.menu-item--cart');
       this.menuToggle.element.insertAdjacentElement('afterend', this.element);
+      this.createButtonMenu();
+    }
+  }, {
+    key: "createButtonMenu",
+    value: function createButtonMenu() {
+      var _this2 = this;
+
+      var buttonCount = 0;
+      this.buttonMenu = document.createElement('ul');
+      utils_addClass(this.buttonMenu, 'menu menu--buttons');
+      var buttonSelectors = ['.menu-item--search', '.menu-item--dark-mode'];
+      buttonSelectors.forEach(function (selector) {
+        var button = _this2.parent.querySelector(selector);
+
+        console.log(selector, button);
+
+        if (button) {
+          var buttonClone = button.cloneNode(true);
+
+          _this2.buttonMenu.appendChild(buttonClone);
+
+          buttonCount = buttonCount + 1;
+        }
+      });
+
+      if (buttonCount) {
+        // create a fake navigation block to inherit styles
+        // @todo hopefully find a better solution for styling
+        var navigationBlock = document.createElement('div');
+        utils_addClass(navigationBlock, 'wp-block-novablocks-navigation');
+        navigationBlock.appendChild(this.buttonMenu);
+        this.parent.appendChild(navigationBlock);
+      }
     }
   }, {
     key: "updateStickyStyles",
@@ -1563,6 +1596,7 @@ function (_HeaderBase) {
     value: function update() {
       this.menuToggle.element.style.height = "".concat(this.box.height, "px");
       this.parentContainer.style.paddingTop = "".concat(this.box.height, "px");
+      this.buttonMenu.style.height = "".concat(this.box.height, "px");
     }
   }, {
     key: "onToggleChange",
@@ -1609,8 +1643,6 @@ function (_HeaderBase) {
 
 
 
-var header_defaults = {};
-
 var header_Header =
 /*#__PURE__*/
 function (_HeaderBase) {
@@ -1623,7 +1655,6 @@ function (_HeaderBase) {
 
     _this = possibleConstructorReturn_default()(this, getPrototypeOf_default()(Header).call(this));
     if (!element) return possibleConstructorReturn_default()(_this);
-    _this.options = Object.assign({}, header_defaults, options);
     _this.element = element;
     _this.mobileHeader = new header_mobile(_this.element);
     _this.secondaryHeader = _this.getSecondaryHeader();
@@ -1641,6 +1672,14 @@ function (_HeaderBase) {
       header_base.prototype.initialize.call(this);
       this.timeline = this.getIntroTimeline();
       this.timeline.play();
+    }
+  }, {
+    key: "onResize",
+    value: function onResize() {
+      header_base.prototype.onResize.call(this);
+      setAndResetElementStyles(this.element, {
+        transition: 'none'
+      });
     }
   }, {
     key: "getSecondaryHeader",
@@ -1688,14 +1727,6 @@ function (_HeaderBase) {
         ease: transitionEasing
       }, 0);
       return timeline;
-    }
-  }, {
-    key: "onResize",
-    value: function onResize() {
-      header_base.prototype.onResize.call(this);
-      setAndResetElementStyles(this.element, {
-        transition: 'none'
-      });
     }
   }]);
 
@@ -1889,8 +1920,6 @@ var MENU_ITEM_WITH_CHILDREN = '.menu-item-has-children, .page_item_has_children'
 var SUBMENU = '.sub-menu, .children';
 var SUBMENU_LEFT_CLASS = 'has-submenu-left';
 var HOVER_CLASS = 'hover';
-var SEARCH_OVERLAY_OPEN_CLASS = 'has-search-overlay';
-var ESC_KEY_CODE = 27;
 
 var navbar_Navbar =
 /*#__PURE__*/
@@ -1910,9 +1939,6 @@ function () {
       this.onResize();
       this.initialized = true;
       globalService.registerOnResize(this.onResize.bind(this));
-      external_jQuery_default()(document).on('click', '.is-search-button a', this.openSearchOverlay);
-      external_jQuery_default()(document).on('click', '.c-search-overlay__cancel', this.closeSearchOverlay);
-      external_jQuery_default()(document).on('keydown', this.closeSearchOverlayOnEsc);
     }
   }, {
     key: "onResize",
@@ -1985,27 +2011,6 @@ function () {
       $siblings.find('.active').removeClass('active');
     }
   }, {
-    key: "openSearchOverlay",
-    value: function openSearchOverlay(e) {
-      e.preventDefault();
-      external_jQuery_default()('body').toggleClass(SEARCH_OVERLAY_OPEN_CLASS);
-      external_jQuery_default()('.c-search-overlay__form .search-field').focus();
-    }
-  }, {
-    key: "closeSearchOverlayOnEsc",
-    value: function closeSearchOverlayOnEsc(e) {
-      if (e.keyCode === ESC_KEY_CODE) {
-        external_jQuery_default()('body').removeClass(SEARCH_OVERLAY_OPEN_CLASS);
-        external_jQuery_default()('.c-search-overlay__form .search-field').blur();
-      }
-    }
-  }, {
-    key: "closeSearchOverlay",
-    value: function closeSearchOverlay(e) {
-      e.preventDefault();
-      external_jQuery_default()('body').removeClass(SEARCH_OVERLAY_OPEN_CLASS);
-    }
-  }, {
     key: "bindClick",
     value: function bindClick() {
       this.$menuItemsWithChildrenLinks.on('click', this.onClickMobile);
@@ -2064,51 +2069,6 @@ function () {
 }();
 
 /* harmony default export */ var base_component = (base_component_BaseComponent);
-// CONCATENATED MODULE: ./src/js/components/color-scheme-switcher.js
-
-
-
-
-
-
-
-
-
-var color_scheme_switcher_ColorSchemeSwitcher =
-/*#__PURE__*/
-function (_BaseComponent) {
-  inherits_default()(ColorSchemeSwitcher, _BaseComponent);
-
-  function ColorSchemeSwitcher() {
-    var _this;
-
-    classCallCheck_default()(this, ColorSchemeSwitcher);
-
-    _this = possibleConstructorReturn_default()(this, getPrototypeOf_default()(ColorSchemeSwitcher).call(this));
-
-    _this.initializeToggle();
-
-    return _this;
-  }
-
-  createClass_default()(ColorSchemeSwitcher, [{
-    key: "initializeToggle",
-    value: function initializeToggle() {
-      if (this.movedColorSchemeSwitcherButton) {
-        return;
-      }
-
-      this.$colorSchemeSwitcherWrapper = external_jQuery_default()('<div class="scheme-switcher__wrapper">');
-      external_jQuery_default()('.is-color-scheme-switcher-button').first().clone().appendTo(this.$colorSchemeSwitcherWrapper);
-      this.$colorSchemeSwitcherWrapper.insertAfter('.site-header__wrapper');
-      this.movedColorSchemeSwitcherButton = true;
-    }
-  }]);
-
-  return ColorSchemeSwitcher;
-}(base_component);
-
-/* harmony default export */ var color_scheme_switcher = (color_scheme_switcher_ColorSchemeSwitcher);
 // CONCATENATED MODULE: ./src/js/components/search-overlay.js
 
 
@@ -2118,6 +2078,8 @@ function (_BaseComponent) {
 
 
 
+var SEARCH_OVERLAY_OPEN_CLASS = 'has-search-overlay';
+var ESC_KEY_CODE = 27;
 
 var search_overlay_SearchOverlay =
 /*#__PURE__*/
@@ -2130,10 +2092,9 @@ function (_BaseComponent) {
     classCallCheck_default()(this, SearchOverlay);
 
     _this = possibleConstructorReturn_default()(this, getPrototypeOf_default()(SearchOverlay).call(this));
-    _this.$searchCancelButton = external_jQuery_default()('.c-search-overlay__cancel');
     _this.$searchOverlay = external_jQuery_default()('.c-search-overlay');
 
-    _this.initializeToggle();
+    _this.initialize();
 
     _this.onResize();
 
@@ -2141,6 +2102,13 @@ function (_BaseComponent) {
   }
 
   createClass_default()(SearchOverlay, [{
+    key: "initialize",
+    value: function initialize() {
+      external_jQuery_default()(document).on('click', '.menu-item--search a', this.openSearchOverlay);
+      external_jQuery_default()(document).on('click', '.c-search-overlay__cancel', this.closeSearchOverlay);
+      external_jQuery_default()(document).on('keydown', this.closeSearchOverlayOnEsc);
+    }
+  }, {
     key: "onResize",
     value: function onResize() {
       setAndResetElementStyles(this.$searchOverlay, {
@@ -2148,22 +2116,25 @@ function (_BaseComponent) {
       });
     }
   }, {
-    key: "initializeToggle",
-    value: function initializeToggle() {
-      if (this.movedSearchButton) {
-        return;
-      }
-
-      this.$searchButtonWrapper = external_jQuery_default()('<div class="search-button__wrapper">');
-      external_jQuery_default()('.is-search-button').first().clone().appendTo(this.$searchButtonWrapper);
-      this.$searchButtonWrapper.insertAfter('.site-header__wrapper');
-      this.movedSearchButton = true;
+    key: "openSearchOverlay",
+    value: function openSearchOverlay(e) {
+      e.preventDefault();
+      external_jQuery_default()('body').toggleClass(SEARCH_OVERLAY_OPEN_CLASS);
+      external_jQuery_default()('.c-search-overlay__form .search-field').focus();
     }
   }, {
-    key: "updateSearchOverlayOffset",
-    value: function updateSearchOverlayOffset() {//		if ( this.hasMobileNav() && this.$searchOverlay.length ) {
-      //			this.$searchOverlay[0].paddingTop = Math.max( ( this.promoBarHeight - scrollY ), 0 ) + 'px';
-      //		}
+    key: "closeSearchOverlayOnEsc",
+    value: function closeSearchOverlayOnEsc(e) {
+      if (e.keyCode === ESC_KEY_CODE) {
+        external_jQuery_default()('body').removeClass(SEARCH_OVERLAY_OPEN_CLASS);
+        external_jQuery_default()('.c-search-overlay__form .search-field').blur();
+      }
+    }
+  }, {
+    key: "closeSearchOverlay",
+    value: function closeSearchOverlay(e) {
+      e.preventDefault();
+      external_jQuery_default()('body').removeClass(SEARCH_OVERLAY_OPEN_CLASS);
     }
   }]);
 
@@ -2172,7 +2143,6 @@ function (_BaseComponent) {
 
 /* harmony default export */ var search_overlay = (search_overlay_SearchOverlay);
 // CONCATENATED MODULE: ./src/js/components/app.js
-
 
 
 
@@ -2195,7 +2165,6 @@ function () {
     this.initializeHeader();
     this.initializeNavbar();
     this.searchOverlay = new search_overlay();
-    this.colorSchemeSwitcher = new color_scheme_switcher();
     this.initializePromoBar();
     this.initializeImages();
     this.initializeCommentsArea();

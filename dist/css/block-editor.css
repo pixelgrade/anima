@@ -117,11 +117,11 @@
         margin-right: var(--theme-spacing-small);
         margin-bottom: var(--theme-spacing-micro); } }
 
-.is-search-button:not(.no-icon) a {
+.menu-item--search:not(.no-icon) a {
   --search-icon-width: calc( var(--icons-size-multiplier) * var(--final-font-size) );
   padding-left: calc(var(--search-icon-width) + 6px) !important;
   overflow: visible; }
-  .is-search-button:not(.no-icon) a:after {
+  .menu-item--search:not(.no-icon) a:after {
     content: '';
     position: absolute;
     left: 0;
@@ -138,12 +138,12 @@
     -webkit-mask-size: contain;
     background-color: currentColor;
     overflow: visible; }
-  .is-search-button:not(.no-icon) a:before {
+  .menu-item--search:not(.no-icon) a:before {
     width: calc(100% - var(--search-icon-width) - 8px) !important; }
 
-.is-search-button.icon-only {
+.menu-item--search.icon-only {
   text-indent: -9999px; }
-  .is-search-button.icon-only a:before {
+  .menu-item--search.icon-only a:before {
     content: '';
     position: absolute;
     top: 50%;
@@ -151,45 +151,22 @@
     min-height: 45px;
     min-width: 45px;
     transform: translate(-50%, -50%); }
-  .is-search-button.icon-only a:after {
+  .menu-item--search.icon-only a:after {
     left: 50%;
     transform: translate(-50%, -50%); }
 
 @media not screen and (min-width: 1000px) {
-  .site-header__menu .is-search-button {
+  .site-header__menu .menu-item--search {
     display: none; } }
 
-.search-button__wrapper {
-  position: absolute;
-  top: 0;
-  display: flex;
-  align-items: center;
-  --font-size: var(--theme-body-font-size);
-  font-size: var(--final-font-size);
-  --current-font-family: var(--theme-body-font-family);
-  --current-line-height: var(--theme-body-line-height);
-  --current-font-weight: var(--theme-body-font-weight);
-  --current-font-style: var(--theme-body-font-style);
-  --current-letter-spacing: var(--theme-body-letter-spacing);
-  --font-size: 21; }
-  @media only screen and (min-width: 1000px) {
-    .search-button__wrapper {
-      display: none; } }
-  .search-button__wrapper li {
-    list-style: none; }
-    .search-button__wrapper li a {
-      color: currentColor;
-      text-decoration: none;
-      font-weight: 500; }
-
-.is-color-scheme-switcher-button {
+.menu-item--dark-mode {
   display: flex;
   align-items: center; }
-  .is-color-scheme-switcher-button:not(.no-icon) {
+  .menu-item--dark-mode:not(.no-icon) {
     --switcher-icon-width: calc( var(--icons-size-multiplier) * var(--final-font-size) ); }
-    .is-color-scheme-switcher-button:not(.no-icon) a {
+    .menu-item--dark-mode:not(.no-icon) a {
       padding-left: calc(var(--switcher-icon-width) + 6px) !important; }
-      .is-color-scheme-switcher-button:not(.no-icon) a:after {
+      .menu-item--dark-mode:not(.no-icon) a:after {
         content: '';
         position: absolute;
         width: var(--switcher-icon-width);
@@ -202,18 +179,18 @@
         -webkit-mask: url("../../assets/images/icon-dark-mode.svg") no-repeat 50% 50%;
         -webkit-mask-size: contain;
         transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1); }
-      .is-color-scheme-switcher-button:not(.no-icon) a:before {
+      .menu-item--dark-mode:not(.no-icon) a:before {
         width: calc(100% - var(--switcher-icon-width)) !important; }
-    .is-color-scheme-switcher-button:not(.no-icon):not(.icon-only) a:after {
+    .menu-item--dark-mode:not(.no-icon):not(.icon-only) a:after {
       transform: translateY(-50%); }
-      .is-dark .is-color-scheme-switcher-button:not(.no-icon):not(.icon-only) a:after {
+      .is-dark .menu-item--dark-mode:not(.no-icon):not(.icon-only) a:after {
         transform: translateY(-50%) rotate(180deg); }
-  .is-dark .is-color-scheme-switcher-button.icon-only a:after {
+  .is-dark .menu-item--dark-mode.icon-only a:after {
     transform: translate(-50%, -50%) rotate(180deg); }
-  .is-color-scheme-switcher-button.icon-only a {
+  .menu-item--dark-mode.icon-only a {
     text-indent: -999999px;
     height: 100%; }
-    .is-color-scheme-switcher-button.icon-only a:before {
+    .menu-item--dark-mode.icon-only a:before {
       content: '';
       position: absolute;
       top: 50%;
@@ -221,10 +198,10 @@
       min-height: 45px;
       min-width: 45px;
       transform: translate(-50%, -50%); }
-    .is-color-scheme-switcher-button.icon-only a:after {
+    .menu-item--dark-mode.icon-only a:after {
       left: 50%;
       transform: translate(-50%, -50%); }
-  .is-color-scheme-switcher-button a {
+  .menu-item--dark-mode a {
     color: currentColor;
     text-decoration: none; }
 

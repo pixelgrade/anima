@@ -1,9 +1,8 @@
 import globalService from '../globalService';
-
 import HeaderBase from './header-base';
 import MenuToggle from './menu-toggle';
 
-import { toggleClasses } from '../../utils';
+import { addClass, toggleClasses } from '../../utils';
 
 class HeaderMobile extends HeaderBase {
 
@@ -38,6 +37,41 @@ class HeaderMobile extends HeaderBase {
 		this.copyElementFromParent( '.c-branding' );
 		this.copyElementFromParent( '.menu-item--cart' );
 		this.menuToggle.element.insertAdjacentElement( 'afterend', this.element );
+		this.createButtonMenu();
+	}
+
+	createButtonMenu() {
+		let buttonCount = 0;
+
+		this.buttonMenu = document.createElement( 'ul' );
+		addClass( this.buttonMenu, 'menu menu--buttons' );
+
+		const buttonSelectors = [
+			'.menu-item--search',
+			'.menu-item--dark-mode'
+		];
+
+		buttonSelectors.forEach( selector => {
+			const button = this.parent.querySelector( selector );
+
+			console.log( selector, button );
+
+			if ( button ) {
+				const buttonClone = button.cloneNode( true );
+				this.buttonMenu.appendChild( buttonClone );
+				buttonCount = buttonCount + 1;
+			}
+		} );
+
+		if ( buttonCount ) {
+			// create a fake navigation block to inherit styles
+			// @todo hopefully find a better solution for styling
+			const navigationBlock = document.createElement( 'div' );
+			addClass( navigationBlock, 'wp-block-novablocks-navigation' );
+
+			navigationBlock.appendChild( this.buttonMenu );
+			this.parent.appendChild( navigationBlock );
+		}
 	}
 
 	updateStickyStyles() {
@@ -56,6 +90,7 @@ class HeaderMobile extends HeaderBase {
 	update() {
 		this.menuToggle.element.style.height = `${ this.box.height }px`;
 		this.parentContainer.style.paddingTop = `${ this.box.height }px`;
+		this.buttonMenu.style.height = `${ this.box.height }px`;
 	}
 
 	onToggleChange( event, menuToggle ) {

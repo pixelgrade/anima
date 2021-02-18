@@ -58,9 +58,18 @@
         opacity: 0.95;
     }
 
-    .site-header--main .site-branding,
-    .menu-item--cart {
+    .site-header--main .site-branding {
         display: none !important;
+    }
+
+    .menu-item--cart,
+    .menu-item--dark-mode,
+    .menu-item--search {
+
+        .site-header--main .menu:not(.menu--buttons) & {
+            display: none !important;
+        }
+
     }
 
     .site-header__menu {
@@ -76,20 +85,16 @@
         }
     }
 
-    .site-header__inner-container,
-    .search-button__wrapper {
+    .site-header__inner-container {
 
-        @include specific(3) {
+        .c-menu-toggle__checkbox:checked ~ .site-header & {
+            opacity: 1;
+            transition: opacity .1s $easeOut .25s;
+        }
 
-            .c-menu-toggle__checkbox:checked ~ .site-header & {
-                opacity: 1;
-                transition: opacity .1s $easeOut .25s;
-            }
-
-            .c-menu-toggle__checkbox:not(:checked) ~ .site-header & {
-                opacity: 0;
-                transition: opacity .075s $easeOut 0s;
-            }
+        .c-menu-toggle__checkbox:not(:checked) ~ .site-header & {
+            opacity: 0;
+            transition: opacity .075s $easeOut 0s;
         }
     }
 }

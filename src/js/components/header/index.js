@@ -1,17 +1,7 @@
 import GlobalService from "../globalService";
 import HeaderBase from './header-base'
 import HeaderMobile from './header-mobile';
-import {
-	below,
-	setAndResetElementStyles,
-	getColorSetClasses,
-	addClass,
-	toggleClasses
-} from '../../utils';
-
-import $ from 'jquery';
-
-const defaults = {};
+import { addClass, below, setAndResetElementStyles, getColorSetClasses, toggleClasses } from '../../utils';
 
 class Header extends HeaderBase {
 
@@ -19,8 +9,6 @@ class Header extends HeaderBase {
 		super();
 
 		if ( ! element ) return;
-
-		this.options = Object.assign( {}, defaults, options );
 
 		this.element = element;
 		this.mobileHeader = new HeaderMobile( this.element );
@@ -35,6 +23,11 @@ class Header extends HeaderBase {
 
 		this.timeline = this.getIntroTimeline();
 		this.timeline.play();
+	}
+
+	onResize() {
+		HeaderBase.prototype.onResize.call( this );
+		setAndResetElementStyles( this.element, { transition: 'none' } );
 	}
 
 	getSecondaryHeader() {
@@ -70,11 +63,6 @@ class Header extends HeaderBase {
 		}, 0 );
 
 		return timeline;
-	}
-
-	onResize() {
-		HeaderBase.prototype.onResize.call( this );
-		setAndResetElementStyles( this.element, { transition: 'none' } );
 	}
 }
 

@@ -8,7 +8,6 @@ import Header from './header/index';
 import PromoBar from "./promo-bar";
 import Navbar from "./navbar";
 
-import ColorSchemeSwitcher from './color-scheme-switcher';
 import SearchOverlay from './search-overlay';
 
 export default class App {
@@ -18,7 +17,6 @@ export default class App {
 		this.initializeHeader();
 		this.initializeNavbar();
 		this.searchOverlay = new SearchOverlay();
-		this.colorSchemeSwitcher = new ColorSchemeSwitcher();
 		this.initializePromoBar();
 		this.initializeImages();
 		this.initializeCommentsArea();

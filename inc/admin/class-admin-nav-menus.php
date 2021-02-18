@@ -40,7 +40,7 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 							'url'           => '#search',
 							'attr_title'         => esc_html__( 'Search for something you seek', '__theme_txtd' ),
 							// These are classes that will be merged with the user defined classes.
-							'classes'       => array( 'is-search-button' ),
+							'classes'       => array( 'menu-item--search' ),
 							'custom_fields' => array(
 								'visual_style' => array(
 									'type'        => 'select',
@@ -69,7 +69,7 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 							'url'         => '#color-scheme-switcher',
 							'attr_title'       => esc_html__( 'Switch between dark and light color mode', '__theme_txtd' ),
 							// These are classes that will be merged with the user defined classes.
-							'classes'     => array( 'is-color-scheme-switcher-button' ),
+							'classes'     => array( 'menu-item--dark-mode' ),
 							'custom_fields' => array(
 								'visual_style' => array(
 									'type'        => 'select',
