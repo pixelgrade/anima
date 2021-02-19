@@ -33,14 +33,6 @@
     }
 }
 
-.site-header {
-
-    [class*="__inner-container"] > .alignfull {
-        margin-left: 0;
-        margin-right: 0;
-    }
-}
-
 @include above(lap) {
 
     .site-header__inner-container {
@@ -85,7 +77,8 @@
         }
     }
 
-    .site-header__inner-container {
+    .site-header__inner-container,
+    .site-header__buttons-menu {
 
         .c-menu-toggle__checkbox:checked ~ .site-header & {
             opacity: 1;

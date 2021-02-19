@@ -67,10 +67,13 @@ class HeaderMobile extends HeaderBase {
 			// create a fake navigation block to inherit styles
 			// @todo hopefully find a better solution for styling
 			const navigationBlock = document.createElement( 'div' );
+			const wrapper = document.createElement( 'div' );
 			addClass( navigationBlock, 'wp-block-novablocks-navigation' );
+			addClass( wrapper, 'site-header__buttons-menu wp-block-group__inner-container' );
 
+			wrapper.appendChild( navigationBlock );
 			navigationBlock.appendChild( this.buttonMenu );
-			this.parent.appendChild( navigationBlock );
+			this.parent.appendChild( wrapper );
 		}
 	}
 

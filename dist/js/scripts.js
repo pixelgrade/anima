@@ -1572,9 +1572,12 @@ function (_HeaderBase) {
         // create a fake navigation block to inherit styles
         // @todo hopefully find a better solution for styling
         var navigationBlock = document.createElement('div');
+        var wrapper = document.createElement('div');
         utils_addClass(navigationBlock, 'wp-block-novablocks-navigation');
+        utils_addClass(wrapper, 'site-header__buttons-menu wp-block-group__inner-container');
+        wrapper.appendChild(navigationBlock);
         navigationBlock.appendChild(this.buttonMenu);
-        this.parent.appendChild(navigationBlock);
+        this.parent.appendChild(wrapper);
       }
     }
   }, {

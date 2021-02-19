@@ -1,3 +1,20 @@
+.site-header__buttons-menu {
+    @include header-links-spacing;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    .menu {
+        display: flex;
+        align-items: center;
+    }
+
+    @include above( lap ) {
+        display: none;
+    }
+}
+
 .wp-block-novablocks-navigation {
 
     @include apply-font(navigation);
@@ -14,24 +31,15 @@
         --final-font-size: 18px;
         --header-links-bottom-spacing: .5em;
 
+        @include header-links-spacing;
+
         ul.menu,
         .menu > ul {
-            margin-left: calc( var(--theme-header-links-spacing) * -1 );
 
             a {
                 display: block;
                 color: inherit;
                 text-decoration: none;
-            }
-
-            > li {
-                margin-left: var(--theme-header-links-spacing);
-                
-                &.social-menu-item,
-                &.menu-item--dark-mode,
-                &.menu-item--search {
-                    margin-left: calc( var(--theme-header-links-spacing) / var(--icons-horizontal-spacing-reducer));
-                }
             }
 
             .customize-partial-edit-shortcut + > li:not(:first-child) {

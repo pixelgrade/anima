@@ -54,21 +54,10 @@ ul.menu,
     @include remove-site-content-padding-bottom;
 }
 
-.menu--buttons {
-    position: absolute;
-    top: 0;
-    right: 0;
-
-    display: flex;
-    align-items: center;
-
-    a {
-        color: inherit;
-    }
-
-    @include above( lap ) {
-        display: none;
-    }
+.social-menu-item,
+.menu-item--dark-mode,
+.menu-item--search {
+    --theme-header-links-spacing-multiplier: 0.5;
 }
 
 .woocommerce-message,
