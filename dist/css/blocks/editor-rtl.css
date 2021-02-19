@@ -246,80 +246,51 @@ ul.wp-block-categories__list[class] {
       padding-right: 0;
       padding-left: 0; }
 
+.ot-dtp-picker[class] .ot-dtp-picker-form .ot-dtp-picker-button {
+  padding: var(--theme-button-padding);
+  border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
+  border-radius: var(--theme-button-border-radius);
+  background-color: transparent;
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  overflow: hidden;
+  transition: var(--current-button-transition);
+  color: var(--current-button-text-color); }
+  .ot-dtp-picker[class] .ot-dtp-picker-form .ot-dtp-picker-button:before {
+    content: '';
+    position: absolute;
+    top: calc( -1 * var(--theme-button-border-width));
+    left: calc( -1 * var(--theme-button-border-width));
+    bottom: calc( -1 * var(--theme-button-border-width));
+    right: calc( -1 * var(--theme-button-border-width));
+    z-index: -1;
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    transition: var(--current-button-transition);
+    transition-property: transform; }
+  .ot-dtp-picker[class] .ot-dtp-picker-form .ot-dtp-picker-button:before {
+    transform: scale3d(1, 1, 1);
+    transform-origin: left;
+    background-color: var(--theme-button-background-color); }
+  .ot-dtp-picker[class] .ot-dtp-picker-form .ot-dtp-picker-button:not([disabled]):hover:before {
+    transform: scale3d(0, 1, 1); }
+
 .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button {
   --theme-button-hover-background-color: var(--sm-current-bg-color);
+  --theme-button-hover-border-color: var(--sm-current-bg-color);
   --theme-button-hover-text-color: var(--sm-current-fg2-color);
   --theme-button-background-color: var(--sm-current-fg2-color);
   --theme-button-border-color: var(--sm-current-fg2-color);
-  --theme-button-text-color: var(--sm-current-bg-color);
-  padding: var(--theme-button-padding);
-  border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
-  border-radius: var(--theme-button-border-radius);
-  background-color: transparent;
-  transform: translateZ(0);
-  will-change: transform;
-  backface-visibility: hidden;
-  overflow: hidden;
-  transition: var(--current-button-transition);
-  color: var(--current-button-text-color); }
-  .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button:before {
-    content: '';
-    position: absolute;
-    top: calc( -1 * var(--theme-button-border-width));
-    left: calc( -1 * var(--theme-button-border-width));
-    bottom: calc( -1 * var(--theme-button-border-width));
-    right: calc( -1 * var(--theme-button-border-width));
-    z-index: -1;
-    will-change: transform;
-    -webkit-backface-visibility: hidden;
-    transition: var(--current-button-transition);
-    transition-property: transform; }
-  .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button:before {
-    transform: scale3d(1, 1, 1);
-    transform-origin: left;
-    background-color: var(--theme-button-background-color); }
-  .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button:not([disabled]):hover:before {
-    transform: scale3d(0, 1, 1); }
-  .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button:hover {
-    color: var(--current-button-hover-text-color); }
+  --theme-button-text-color: var(--sm-current-bg-color); }
 
 .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button {
-  --theme-button-hover-background-color: var(--sm-current-fg2-color);
-  --theme-button-hover-text-color: var(--sm-current-bg-color);
   --theme-button-background-color: var(--sm-current-bg-color);
-  --theme-button-border-color: var(--sm-current-bg-color);
-  --theme-button-hover-border-color: var(--sm-current-bg-color);
+  --theme-button-border-color: var(--sm-current-fg2-color);
   --theme-button-text-color: var(--sm-current-fg2-color);
-  padding: var(--theme-button-padding);
-  border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
-  border-radius: var(--theme-button-border-radius);
-  background-color: transparent;
-  transform: translateZ(0);
-  will-change: transform;
-  backface-visibility: hidden;
-  overflow: hidden;
-  transition: var(--current-button-transition);
-  color: var(--current-button-text-color); }
-  .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button:before {
-    content: '';
-    position: absolute;
-    top: calc( -1 * var(--theme-button-border-width));
-    left: calc( -1 * var(--theme-button-border-width));
-    bottom: calc( -1 * var(--theme-button-border-width));
-    right: calc( -1 * var(--theme-button-border-width));
-    z-index: -1;
-    will-change: transform;
-    -webkit-backface-visibility: hidden;
-    transition: var(--current-button-transition);
-    transition-property: transform; }
-  .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button:before {
-    transform: scale3d(1, 1, 1);
-    transform-origin: left;
-    background-color: var(--theme-button-background-color); }
-  .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button:not([disabled]):hover:before {
-    transform: scale3d(0, 1, 1); }
-  .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button:hover {
-    color: var(--current-button-hover-text-color); }
+  --theme-button-hover-background-color: var(--sm-current-fg2-color);
+  --theme-button-hover-border-color: var(--sm-current-fg2-color);
+  --theme-button-hover-text-color: var(--sm-current-bg-color); }
 
 .ot-dtp-picker input[type="submit"][class][class] {
   --font-size: var(--theme-button-font-size);
@@ -340,9 +311,7 @@ ul.wp-block-categories__list[class] {
     border-color: var(--sm-current-fg1-color); }
     .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link {
       color: var(--sm-current-fg1-color); }
-      .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link:before {
-        color: currentColor; }
-      .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link:after {
+      .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link:before, .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link:after {
         color: currentColor; }
   .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-form:after {
     clear: both;

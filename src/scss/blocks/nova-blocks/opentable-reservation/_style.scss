@@ -1,148 +1,130 @@
-.ot-dtp-picker {
-  &.wide {
-    .ot-dtp-picker-form {
-      .ot-dtp-picker-button {
+.ot-dtp-picker-form .ot-dtp-picker-button {
 
+    .ot-dtp-picker[class] & {
+      @include button-box;
+      @include button-fill;
+      @include button-transition;
+
+      color: var(--current-button-text-color);
+    }
+
+    .ot-dtp-picker.wide & {
         --theme-button-hover-background-color: var(--sm-current-bg-color);
+        --theme-button-hover-border-color: var(--sm-current-bg-color);
         --theme-button-hover-text-color: var(--sm-current-fg2-color);
         --theme-button-background-color: var(--sm-current-fg2-color);
         --theme-button-border-color: var(--sm-current-fg2-color);
         --theme-button-text-color: var(--sm-current-bg-color);
-
-        @include button-box;
-        @include button-fill;
-        @include button-transition;
-
-        color: var(--current-button-text-color);
-
-        &:hover {
-          color: var(--current-button-hover-text-color);
-        }
-      }
     }
-  }
 
-  &.standard {
-    .ot-dtp-picker-form {
-      .ot-dtp-picker-button {
-
-        --theme-button-hover-background-color: var(--sm-current-fg2-color);
-        --theme-button-hover-text-color: var(--sm-current-bg-color);
+    .ot-dtp-picker.standard & {
         --theme-button-background-color: var(--sm-current-bg-color);
-        --theme-button-border-color: var(--sm-current-bg-color);
-        --theme-button-hover-border-color: var(--sm-current-bg-color);
+        --theme-button-border-color: var(--sm-current-fg2-color);
         --theme-button-text-color: var(--sm-current-fg2-color);
+        --theme-button-hover-background-color: var(--sm-current-fg2-color);
+        --theme-button-hover-border-color: var(--sm-current-fg2-color);
+        --theme-button-hover-text-color: var(--sm-current-bg-color);
+    }
+}
 
-        @include button-box;
-        @include button-fill;
-        @include button-transition;
+.ot-dtp-picker {
 
-        color: var(--current-button-text-color);
-
-        &:hover {
-          color: var(--current-button-hover-text-color);
+    input[type="submit"] {
+        @include specific(2) {
+            @include apply-font(button);
+            text-transform: none;
         }
-      }
     }
-  }
-
-  input[type="submit"] {
-    @include specific(2) {
-      @include apply-font(button);
-      text-transform: none;
-    }
-  }
 }
 
 
 .novablocks-opentable {
-  &.novablocks-opentable__wide[class] {
-    .ot-dtp-picker-selector[class][class] {
-      border-color: var(--sm-current-fg1-color);
+    &.novablocks-opentable__wide[class] {
+        .ot-dtp-picker-selector[class][class] {
+            border-color: var(--sm-current-fg1-color);
 
-      .ot-dtp-picker-selector-link {
-        color: var(--sm-current-fg1-color);
+            .ot-dtp-picker-selector-link {
+                color: var(--sm-current-fg1-color);
 
-        &:before {
-          color: currentColor;
+                &:before,
+                &:after {
+                    color: currentColor;
+                }
+            }
         }
 
-        &:after {
-          color: currentColor;
+        .ot-dtp-picker-form:after {
+            clear: both;
+            content: "";
+            display: block;
         }
-      }
     }
-    .ot-dtp-picker-form:after {
-      clear: both;
-      content: "";
-      display: block;
+
+    &.novablocks-opentable__standard[class] {
+        padding: var(--theme-spacing-fluid-small);
+
+        .ot-party-size-picker {
+            margin-bottom: var(--theme-spacing-medium);
+        }
     }
-  }
 
-  &.novablocks-opentable__standard[class] {
-    padding: var(--theme-spacing-fluid-small);
+    /* body.supports-mutation-observer */
+    transition: var(--theme-transition);
+    transition-property: opacity;
 
-    .ot-party-size-picker {
-      margin-bottom: var(--theme-spacing-medium);
+    &:not(.is-loaded) {
+        opacity: 0;
     }
-  }
-
-  /* body.supports-mutation-observer */
-  transition: var(--theme-transition);
-  transition-property: opacity;
-
-  &:not(.is-loaded) {
-    opacity: 0;
-  }
 }
 
 
 .ot-dtp-picker-selector-link {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .is-dark-mode {
-  .novablocks-opentable {
-    &.novablocks-opentable__standard[class] {
-      .ot-powered-by {
-        -webkit-filter: unset;
-        mix-blend-mode: unset;
-      }
-    }
+    .novablocks-opentable {
+        &.novablocks-opentable__standard[class] {
+            .ot-powered-by {
+                -webkit-filter: unset;
+                mix-blend-mode: unset;
+            }
+        }
 
-    &.novablocks-opentable__wide[class] {
-      .ot-powered-by {
-        -webkit-filter: invert(1) saturate(0);
-        mix-blend-mode: lighten;
-      }
+        &.novablocks-opentable__wide[class] {
+            .ot-powered-by {
+                -webkit-filter: invert(1) saturate(0);
+                mix-blend-mode: lighten;
+            }
+        }
     }
-  }
 }
 
 .ot-dtp-picker-form {
-  @include apply-font(input);
+    @include apply-font(input);
 }
 
 .ot-dtp-picker {
-  .ot-dtp-picker-selector[class] {
-    height: auto;
-    .ot-dtp-picker-selector-link {
-      display: flex;
-      align-items: center;
+    .ot-dtp-picker-selector[class] {
+        height: auto;
 
-      &:before {
-        top:50%;
-        transform: translateY(-50%);
-      }
+        .ot-dtp-picker-selector-link {
+            display: flex;
+            align-items: center;
+
+            &:before {
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
     }
-  }
 }
 
 .picker__nav--prev[class],
 .picker__nav--next[class] {
-  border: 0;
+    border: 0;
 }
 
 .picker__frame {
-  --current-font-size: 16px;
+    --current-font-size: 16px;
 }
