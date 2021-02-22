@@ -24,6 +24,10 @@ class HeaderBase {
 		this.box = this.element.getBoundingClientRect();
 	}
 
+	getHeight() {
+		return this?.box?.height;
+	}
+
 	render( forceUpdate ) {
 		this.maybeUpdateStickyStyles( forceUpdate );
 	}

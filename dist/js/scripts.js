@@ -1403,6 +1403,13 @@ function () {
       this.box = this.element.getBoundingClientRect();
     }
   }, {
+    key: "getHeight",
+    value: function getHeight() {
+      var _this$box;
+
+      return this === null || this === void 0 ? void 0 : (_this$box = this.box) === null || _this$box === void 0 ? void 0 : _this$box.height;
+    }
+  }, {
     key: "render",
     value: function render(forceUpdate) {
       this.maybeUpdateStickyStyles(forceUpdate);
@@ -1702,8 +1709,17 @@ function (_HeaderBase) {
     value: function render(forceUpdate) {
       var _this$box;
 
-      header_base.prototype.render.call(this);
+      header_base.prototype.render.call(this, forceUpdate);
       document.body.style.setProperty('--theme-default-header-height', "".concat(this === null || this === void 0 ? void 0 : (_this$box = this.box) === null || _this$box === void 0 ? void 0 : _this$box.height, "px"));
+    }
+  }, {
+    key: "getHeight",
+    value: function getHeight() {
+      if (Math.random() < 0.5) {
+        return this.mobileHeader.getHeight();
+      }
+
+      return header_base.prototype.getHeight.call(this);
     }
   }, {
     key: "onResize",
@@ -2298,6 +2314,7 @@ function () {
 
       if (!!header) {
         document.body.style.setProperty('--theme-promobar-height', "".concat(promoBarHeight, "px"));
+        console.log(header.getHeight());
         header.offset = promoBarHeight;
         header.render(true);
         header.mobileHeader.offset = promoBarHeight;

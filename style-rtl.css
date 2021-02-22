@@ -1561,7 +1561,6 @@ table {
 .entry-header {
   padding-right: var(--theme-wrapper-sides-spacing);
   padding-left: var(--theme-wrapper-sides-spacing);
-  padding-top: var(--theme-spacing-fluid-xl);
   padding-bottom: var(--theme-spacing-fluid-xl);
   text-align: center;
   --novablocks-element-spacing-multiplier: 0.5; }
@@ -1653,6 +1652,8 @@ table {
   .entry-meta > :not(:last-child):after {
     content: "\b7";
     padding: 0 var(--theme-spacing-tiny); }
+  .entry-meta > :not(:first-child) {
+    margin-top: 0; }
 
 /* 2.4. Comments */
 :root {

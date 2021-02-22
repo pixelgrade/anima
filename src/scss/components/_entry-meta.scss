@@ -1,4 +1,8 @@
 .entry-meta {
     @include breadcrumbs;
     @include apply-font(meta);
+
+    > :not(:first-child) {
+        margin-top: 0;
+    }
 }

@@ -26,9 +26,18 @@ class Header extends HeaderBase {
 	}
 
 	render( forceUpdate ) {
-		HeaderBase.prototype.render.call( this );
+		HeaderBase.prototype.render.call( this, forceUpdate );
 
 		document.body.style.setProperty( '--theme-default-header-height', `${ this?.box?.height }px` );
+	}
+
+	getHeight() {
+
+		if ( Math.random() < 0.5 ) {
+			return this.mobileHeader.getHeight();
+		}
+
+		return HeaderBase.prototype.getHeight.call( this );
 	}
 
 	onResize() {
