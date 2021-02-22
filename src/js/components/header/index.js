@@ -44,7 +44,10 @@ class Header extends HeaderBase {
 		HeaderBase.prototype.updateStickyStyles.call( this );
 
 		this.element.style.marginTop = `${ this.offset }px`;
-		this.secondaryHeader.style.top = `${ this.offset }px`;
+
+		if ( this.secondaryHeader ) {
+			this.secondaryHeader.style.top = `${ this.offset }px`;
+		}
 	}
 
 	getIntroTimeline() {

@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 20);
+/******/ 	return __webpack_require__(__webpack_require__.s = 21);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -128,11 +128,11 @@ module.exports = _createClass;
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayWithoutHoles = __webpack_require__(5);
+var arrayWithoutHoles = __webpack_require__(8);
 
-var iterableToArray = __webpack_require__(6);
+var iterableToArray = __webpack_require__(9);
 
-var nonIterableSpread = __webpack_require__(7);
+var nonIterableSpread = __webpack_require__(10);
 
 function _toConsumableArray(arr) {
   return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
@@ -142,6 +142,60 @@ module.exports = _toConsumableArray;
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _typeof = __webpack_require__(11);
+
+var assertThisInitialized = __webpack_require__(12);
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return assertThisInitialized(self);
+}
+
+module.exports = _possibleConstructorReturn;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+function _getPrototypeOf(o) {
+  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+module.exports = _getPrototypeOf;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var setPrototypeOf = __webpack_require__(13);
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) setPrototypeOf(subClass, superClass);
+}
+
+module.exports = _inherits;
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -314,7 +368,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 
 /***/ }),
-/* 5 */
+/* 8 */
 /***/ (function(module, exports) {
 
 function _arrayWithoutHoles(arr) {
@@ -330,7 +384,7 @@ function _arrayWithoutHoles(arr) {
 module.exports = _arrayWithoutHoles;
 
 /***/ }),
-/* 6 */
+/* 9 */
 /***/ (function(module, exports) {
 
 function _iterableToArray(iter) {
@@ -340,7 +394,7 @@ function _iterableToArray(iter) {
 module.exports = _iterableToArray;
 
 /***/ }),
-/* 7 */
+/* 10 */
 /***/ (function(module, exports) {
 
 function _nonIterableSpread() {
@@ -350,55 +404,7 @@ function _nonIterableSpread() {
 module.exports = _nonIterableSpread;
 
 /***/ }),
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _typeof = __webpack_require__(17);
-
-var assertThisInitialized = __webpack_require__(18);
-
-function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof(call) === "object" || typeof call === "function")) {
-    return call;
-  }
-
-  return assertThisInitialized(self);
-}
-
-module.exports = _possibleConstructorReturn;
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var setPrototypeOf = __webpack_require__(19);
-
-function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function");
-  }
-
-  subClass.prototype = Object.create(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      writable: true,
-      configurable: true
-    }
-  });
-  if (superClass) setPrototypeOf(subClass, superClass);
-}
-
-module.exports = _inherits;
-
-/***/ }),
-/* 17 */
+/* 11 */
 /***/ (function(module, exports) {
 
 function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
@@ -420,7 +426,7 @@ function _typeof(obj) {
 module.exports = _typeof;
 
 /***/ }),
-/* 18 */
+/* 12 */
 /***/ (function(module, exports) {
 
 function _assertThisInitialized(self) {
@@ -434,7 +440,7 @@ function _assertThisInitialized(self) {
 module.exports = _assertThisInitialized;
 
 /***/ }),
-/* 19 */
+/* 13 */
 /***/ (function(module, exports) {
 
 function _setPrototypeOf(o, p) {
@@ -449,7 +455,14 @@ function _setPrototypeOf(o, p) {
 module.exports = _setPrototypeOf;
 
 /***/ }),
-/* 20 */
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -571,7 +584,7 @@ var getColorSetClasses = function getColorSetClasses(element) {
   });
 };
 var utils_addClass = function addClass(element, classes) {
-  var classesArray = classes.split(/\b\s+/).filter(function (x) {
+  var classesArray = classes.split(/\s+/).filter(function (x) {
     return x.trim().length;
   });
 
@@ -582,7 +595,7 @@ var utils_addClass = function addClass(element, classes) {
   }
 };
 var utils_removeClass = function removeClass(element, classes) {
-  var classesArray = classes.split(/\b\s+/).filter(function (x) {
+  var classesArray = classes.split(/\s+/).filter(function (x) {
     return x.trim().length;
   });
 
@@ -1348,15 +1361,15 @@ function () {
 
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__(15);
+var possibleConstructorReturn = __webpack_require__(4);
 var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
-var getPrototypeOf = __webpack_require__(21);
+var getPrototypeOf = __webpack_require__(5);
 var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
-var inherits = __webpack_require__(16);
+var inherits = __webpack_require__(6);
 var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
 
 // CONCATENATED MODULE: ./src/js/components/header/header-base.js
@@ -1700,7 +1713,10 @@ function (_HeaderBase) {
     value: function updateStickyStyles() {
       header_base.prototype.updateStickyStyles.call(this);
       this.element.style.marginTop = "".concat(this.offset, "px");
-      this.secondaryHeader.style.top = "".concat(this.offset, "px");
+
+      if (this.secondaryHeader) {
+        this.secondaryHeader.style.top = "".concat(this.offset, "px");
+      }
     }
   }, {
     key: "getIntroTimeline",
@@ -1738,7 +1754,7 @@ function (_HeaderBase) {
 
 /* harmony default export */ var header = (header_Header);
 // EXTERNAL MODULE: ./node_modules/js-cookie/src/js.cookie.js
-var js_cookie = __webpack_require__(4);
+var js_cookie = __webpack_require__(7);
 var js_cookie_default = /*#__PURE__*/__webpack_require__.n(js_cookie);
 
 // CONCATENATED MODULE: ./src/js/components/announcement-bar.js
@@ -2300,19 +2316,6 @@ external_jQuery_default()(function () {
     $window.on('wf-active', scripts_initialize);
   }
 });
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports) {
-
-function _getPrototypeOf(o) {
-  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  return _getPrototypeOf(o);
-}
-
-module.exports = _getPrototypeOf;
 
 /***/ })
 /******/ ]);

@@ -113,7 +113,7 @@ export const getColorSetClasses = ( element ) => {
 }
 
 export const addClass = ( element, classes ) => {
-	const classesArray = classes.split( /\b\s+/ ).filter( x => x.trim().length );
+	const classesArray = classes.split( /\s+/ ).filter( x => x.trim().length );
 
 	if ( classesArray.length ) {
 		element.classList.add( ...classesArray );
@@ -121,7 +121,7 @@ export const addClass = ( element, classes ) => {
 }
 
 export const removeClass = ( element, classes ) => {
-	const classesArray = classes.split(/\b\s+/).filter( x => x.trim().length );
+	const classesArray = classes.split(/\s+/).filter( x => x.trim().length );
 
 	if ( classesArray.length ) {
 		element.classList.remove( ...classesArray );
