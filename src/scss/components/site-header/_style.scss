@@ -35,7 +35,7 @@
     }
 }
 
-.site-header--main {
+.site-header--main:not(.site-header--sticky) {
 
     @include above(lap) {
         position: absolute !important;
@@ -45,6 +45,18 @@
     @include below(lap) {
         margin-top: 0 !important;
     }
+}
+
+.site-header--sticky:not(.site-header--main) {
+
+    @include above(lap) {
+        margin-top: 0 !important;
+    }
+}
+
+.site-header--sticky.site-header--main {
+    position: fixed !important;
+    top: 0 !important;
 }
 
 // External Link
