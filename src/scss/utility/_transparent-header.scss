@@ -10,7 +10,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: linear-gradient( rgba(0,0, 0, 0.2), rgba(0, 0, 0, 0.03) calc(2 * var(--theme-header-height)), rgba(0, 0, 0, 0) 100%);
+      background-image: linear-gradient( rgba(0,0, 0, 0.2) var(--theme-promobar-height, 0), rgba(0, 0, 0, 0.03) calc(2 * var(--theme-header-height)), rgba(0, 0, 0, 0) 100%);
     }
   }
 }
@@ -24,9 +24,7 @@
       --emphasis-top-spacing: 0;
       
       > .novablocks-block {
-        
-        // This should always be equal with desktop
-        padding-top: calc( var(--theme-header-height) +  var(--novablocks-media-spacing) * 0.5);
+        padding-top: calc( var(--theme-header-height, 0) + var(--theme-promobar-height, 0) +  var(--novablocks-media-spacing) * 0.5);
       }
     }
   }

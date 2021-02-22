@@ -1540,6 +1540,14 @@ function (_HeaderBase) {
       header_base.prototype.initialize.call(this);
     }
   }, {
+    key: "render",
+    value: function render(forceUpdate) {
+      var _this$box;
+
+      header_base.prototype.render.call(this);
+      document.body.style.setProperty('--theme-mobile-header-height', "".concat(this === null || this === void 0 ? void 0 : (_this$box = this.box) === null || _this$box === void 0 ? void 0 : _this$box.height, "px"));
+    }
+  }, {
     key: "initializeMenuToggle",
     value: function initializeMenuToggle() {
       var menuToggleCheckbox = document.getElementById('nova-menu-toggle');
@@ -1688,6 +1696,14 @@ function (_HeaderBase) {
       header_base.prototype.initialize.call(this);
       this.timeline = this.getIntroTimeline();
       this.timeline.play();
+    }
+  }, {
+    key: "render",
+    value: function render(forceUpdate) {
+      var _this$box;
+
+      header_base.prototype.render.call(this);
+      document.body.style.setProperty('--theme-default-header-height', "".concat(this === null || this === void 0 ? void 0 : (_this$box = this.box) === null || _this$box === void 0 ? void 0 : _this$box.height, "px"));
     }
   }, {
     key: "onResize",
@@ -2281,6 +2297,7 @@ function () {
       var promoBarHeight = !!promoBar ? promoBar.height : 0;
 
       if (!!header) {
+        document.body.style.setProperty('--theme-promobar-height', "".concat(promoBarHeight, "px"));
         header.offset = promoBarHeight;
         header.render(true);
         header.mobileHeader.offset = promoBarHeight;

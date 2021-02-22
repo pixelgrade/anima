@@ -103,6 +103,8 @@ export default class App {
 		const promoBarHeight = !! promoBar ? promoBar.height : 0;
 
 		if ( !! header ) {
+			document.body.style.setProperty( '--theme-promobar-height', `${ promoBarHeight }px` );
+
 			header.offset = promoBarHeight;
 			header.render( true );
 

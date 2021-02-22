@@ -11,42 +11,42 @@
 [class*="wp-block"].alignleft:not(:first-child),
 [class*="wp-block"] > .alignleft:not(:first-child),
 .editor-styles-wrapper [data-align=left] [data-block]:not(:first-child) {
-  margin-top: var(--element-spacing); }
+  margin-top: var(--theme-content-spacing); }
 
 [class*="wp-block"].alignleft:not(:last-child),
 [class*="wp-block"] > .alignleft:not(:last-child),
 .editor-styles-wrapper [data-align=left] [data-block]:not(:last-child) {
-  margin-bottom: var(--element-spacing); }
+  margin-bottom: var(--theme-content-spacing); }
 
 [class*="wp-block"].alignright:not(:first-child),
 [class*="wp-block"] > .alignright:not(:first-child),
 .editor-styles-wrapper [data-align=right] [data-block]:not(:first-child) {
-  margin-top: var(--element-spacing); }
+  margin-top: var(--theme-content-spacing); }
 
 [class*="wp-block"].alignright:not(:last-child),
 [class*="wp-block"] > .alignright:not(:last-child),
 .editor-styles-wrapper [data-align=right] [data-block]:not(:last-child) {
-  margin-bottom: var(--element-spacing); }
+  margin-bottom: var(--theme-content-spacing); }
 
 [class*="wp-block"].aligncenter:not(:first-child),
 [class*="wp-block"] > .aligncenter:not(:first-child),
 .editor-styles-wrapper [data-align=center] [data-block]:not(:first-child) {
-  margin-top: var(--element-spacing); }
+  margin-top: var(--theme-content-spacing); }
 
 [class*="wp-block"].aligncenter:not(:last-child),
 [class*="wp-block"] > .aligncenter:not(:last-child),
 .editor-styles-wrapper [data-align=center] [data-block]:not(:last-child) {
-  margin-bottom: var(--element-spacing); }
+  margin-bottom: var(--theme-content-spacing); }
 
 [class*="wp-block"].alignnone:not(:first-child),
 [class*="wp-block"] > .alignnone:not(:first-child),
 .editor-styles-wrapper [data-align=none] [data-block]:not(:first-child) {
-  margin-top: var(--element-spacing); }
+  margin-top: var(--theme-content-spacing); }
 
 [class*="wp-block"].alignnone:not(:last-child),
 [class*="wp-block"] > .alignnone:not(:last-child),
 .editor-styles-wrapper [data-align=none] [data-block]:not(:last-child) {
-  margin-bottom: var(--element-spacing); }
+  margin-bottom: var(--theme-content-spacing); }
 
 [class*="wp-block"].alignleft,
 [class*="wp-block"] > .alignleft {
@@ -54,7 +54,7 @@
   margin-right: 0; }
 
 [class*="wp-block"] > .alignleft {
-  margin-bottom: var(--element-spacing); }
+  margin-bottom: var(--theme-content-spacing); }
 
 [class*="wp-block"].alignleft .editor-block-list__block-edit,
 [class*="wp-block"] > .alignleft .editor-block-list__block-edit,
@@ -74,7 +74,7 @@
   margin-left: 0; }
 
 [class*="wp-block"] > .alignright {
-  margin-bottom: var(--element-spacing); }
+  margin-bottom: var(--theme-content-spacing); }
 
 [class*="wp-block"].alignright .editor-block-list__block-edit,
 [class*="wp-block"] > .alignright .editor-block-list__block-edit,
@@ -95,13 +95,13 @@
 [class*="wp-block"] > .alignright,
 .editor-block-list__block[data-align=right] .editor-block-list__block-edit,
 .block-editor-block-list__block[data-align=right] .editor-block-list__block-edit {
-  margin-right: var(--element-spacing); }
+  margin-right: var(--theme-content-spacing); }
 
 [class*="wp-block"].alignleft,
 [class*="wp-block"] > .alignleft,
 .editor-block-list__block[data-align=left] .editor-block-list__block-edit,
 .block-editor-block-list__block[data-align=left] .editor-block-list__block-edit {
-  margin-left: var(--element-spacing); }
+  margin-left: var(--theme-content-spacing); }
 
 [class*="wp-block"].aligncenter,
 [class*="wp-block"] > .aligncenter,
@@ -469,13 +469,13 @@
   right: 0;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.03) calc(2 * var(--theme-header-height)), rgba(0, 0, 0, 0) 100%); }
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2) var(--theme-promobar-height, 0), rgba(0, 0, 0, 0.03) calc(2 * var(--theme-header-height)), rgba(0, 0, 0, 0) 100%); }
 
 .has-site-header-transparent .entry-content > :first-child {
   --block-top-spacing: 0;
   --emphasis-top-spacing: 0; }
   .has-site-header-transparent .entry-content > :first-child > .novablocks-block {
-    padding-top: calc( var(--theme-header-height) +  var(--novablocks-media-spacing) * 0.5); }
+    padding-top: calc( var(--theme-header-height, 0) + var(--theme-promobar-height, 0) +  var(--novablocks-media-spacing) * 0.5); }
 
 .admin-bar {
   --admin-bar-height: 32px; }

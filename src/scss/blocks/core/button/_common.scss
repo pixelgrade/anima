@@ -34,22 +34,16 @@ $enable-button-block-styles:            true !default;
     }
 
     .wp-block-buttons[class][class][class] {
-        margin-top: var(--element-spacing);
+        margin-top: var(--theme-content-spacing);
 
         display: flex;
         align-items: center;
         flex-wrap: wrap;
-
-        &:first-child {
-            --block-top-spacing: 1;
-            @include element-spacing;
-        }
         
         &[class*="align"] {
             margin-left: 0;
             margin-right: 0;
         }
-
 
         .wp-block,
         .wp-block-button {
@@ -57,7 +51,7 @@ $enable-button-block-styles:            true !default;
 
             &:not(:last-child),
             &:not(:first-child):not(:last-child) {
-                margin-right: var(--element-spacing);
+                margin-right: var(--theme-content-spacing);
             }
         }
 
@@ -77,8 +71,8 @@ $enable-button-block-styles:            true !default;
 
             .wp-block,
             .wp-block-button {
-                margin-left: calc( var(--element-spacing) / 2 );
-                margin-right: calc( var(--element-spacing) / 2 );
+                margin-left: calc( var(--theme-content-spacing) / 2 );
+                margin-right: calc( var(--theme-content-spacing) / 2 );
             }
         }
 
@@ -87,7 +81,7 @@ $enable-button-block-styles:            true !default;
 
             .wp-block,
             .wp-block-button {
-                margin-left: var(--element-spacing);
+                margin-left: var(--theme-content-spacing);
                 margin-right: 0;
             }
         }

@@ -22,6 +22,13 @@ class HeaderMobile extends HeaderBase {
 		HeaderBase.prototype.initialize.call( this );
 	}
 
+	render( forceUpdate ) {
+		HeaderBase.prototype.render.call( this );
+
+		document.body.style.setProperty( '--theme-mobile-header-height', `${ this?.box?.height }px` );
+	}
+
+
 	initializeMenuToggle() {
 		const menuToggleCheckbox = document.getElementById( 'nova-menu-toggle' );
 

@@ -25,6 +25,12 @@ class Header extends HeaderBase {
 		this.timeline.play();
 	}
 
+	render( forceUpdate ) {
+		HeaderBase.prototype.render.call( this );
+
+		document.body.style.setProperty( '--theme-default-header-height', `${ this?.box?.height }px` );
+	}
+
 	onResize() {
 		HeaderBase.prototype.onResize.call( this );
 		setAndResetElementStyles( this.element, { transition: 'none' } );

@@ -344,7 +344,7 @@ template {
 html {
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
-  scroll-padding-top: var(--theme-header-height);
+  scroll-padding-top: var(--theme-header-height, 0);
   --theme-body-final-font-size: var(--final-font-size);
   --font-size: var(--theme-body-font-size);
   font-size: var(--final-font-size);
@@ -858,8 +858,7 @@ ol {
   padding-right: var(--theme-spacing); }
   ul > :not(:first-child),
   ol > :not(:first-child) {
-    --element-spacing: var(--theme-spacing-tiny);
-    margin-top: var(--element-spacing); }
+    margin-top: var(--theme-spacing-tiny); }
 
 /* Nested unordered lists */
 ul {
@@ -1635,8 +1634,7 @@ table {
   .entry-footer > .alignfull {
     max-width: none; }
   .entry-footer > :not(:first-child) {
-    --element-spacing: var(--theme-spacing-medium);
-    margin-top: var(--element-spacing); }
+    margin-top: var(--theme-spacing-medium); }
 
 .entry-meta {
   display: flex;
@@ -1655,8 +1653,6 @@ table {
   .entry-meta > :not(:last-child):after {
     content: "\b7";
     padding: 0 var(--theme-spacing-tiny); }
-  .entry-meta li {
-    --element-spacing: 0; }
 
 /* 2.4. Comments */
 :root {
@@ -1683,8 +1679,7 @@ table {
   .comments-area > .alignfull {
     max-width: none; }
   .comments-area > :not(:first-child) {
-    --element-spacing: var(--theme-spacing-medium);
-    margin-top: var(--element-spacing); }
+    margin-top: var(--theme-spacing-medium); }
   .comments-area:not(:first-child) {
     margin-top: var(--theme-spacing-fluid-medium); }
 
@@ -1694,10 +1689,9 @@ table {
     margin-top: 0; }
 
 .comments-area__content {
-  padding-top: var(--element-spacing); }
+  padding-top: var(--theme-content-spacing); }
   .comments-area__content > :not(:first-child) {
-    --element-spacing: var(--theme-spacing-medium);
-    margin-top: var(--element-spacing); }
+    margin-top: var(--theme-spacing-medium); }
 
 .c-comments-toggle__label {
   display: inline-block;
@@ -1799,8 +1793,7 @@ table {
 .comment__body {
   flex-grow: 1; }
   .comment__body > :not(:first-child) {
-    --element-spacing: var(--theme-spacing-small);
-    margin-top: var(--element-spacing); }
+    margin-top: var(--theme-spacing-small); }
 
 .comment__edit {
   position: absolute;
@@ -1819,8 +1812,7 @@ table {
     margin-right: var(--theme-comment-metadata-spacing); } }
 
 .comment__content > :not(:first-child) {
-  --element-spacing: var(--theme-spacing-small);
-  margin-top: var(--element-spacing); }
+  margin-top: var(--theme-spacing-small); }
 
 .comment__reply a {
   text-decoration-color: transparent; }
@@ -2013,8 +2005,7 @@ label.subscribe-label.subscribe-label {
     margin-left: auto; } }
 
 .comment-respond > :not(:first-child) {
-  --element-spacing: var(--theme-spacing-tiny);
-  margin-top: var(--element-spacing); }
+  margin-top: var(--theme-spacing-tiny); }
 
 .comment-reply-title[class] {
   margin-bottom: var(--theme-spacing-small); }
@@ -2508,8 +2499,7 @@ span.page-numbers {
   margin-left: auto; }
   .wpforms-container[class][class][class] .wpforms-form > :not(:first-child),
   .wpforms-container[class][class][class] .wpforms-field-container > :not(:first-child) {
-    --element-spacing: var(--theme-spacing);
-    margin-top: var(--element-spacing); }
+    margin-top: var(--theme-spacing); }
   .wpforms-container[class][class][class] .wpforms-form input,
   .wpforms-container[class][class][class] .wpforms-form select,
   .wpforms-container[class][class][class] .wpforms-form textarea {
@@ -3021,3 +3011,9 @@ textarea {
   --current-text-transform: var(--theme-heading-4-text-transform);
   --final-font-size: calc( var(--theme-header-logo-height) * 1.8 );
   line-height: 1; }
+
+body {
+  --theme-header-height: var(--theme-default-header-height); }
+  @media not screen and (min-width: 1000px) {
+    body {
+      --theme-header-height: var(--theme-mobile-header-height); } }

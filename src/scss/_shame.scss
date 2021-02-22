@@ -85,3 +85,11 @@ textarea {
     --final-font-size: calc( var(--theme-header-logo-height) * 1.8 );
     line-height: 1;
 }
+
+body {
+    --theme-header-height: var(--theme-default-header-height);
+
+    @include below(lap) {
+        --theme-header-height: var(--theme-mobile-header-height);
+    }
+}
