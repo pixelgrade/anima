@@ -37,19 +37,6 @@ textarea {
     font-weight: var(--current-font-weight);
 }
 
-// remove lists styles from menus and submenus
-ul.menu,
-.menu > ul,
-.sub-menu,
-.children {
-    padding-left: 0;
-    list-style: none;
-
-    > * {
-        margin-top: 0;
-    }
-}
-
 .has-no-padding-bottom {
     @include remove-site-content-padding-bottom;
 }
@@ -90,4 +77,11 @@ ul.menu,
 
 .woocommerce-info {
     @include apply-palette(info);
+}
+
+.site-title {
+    @include apply-font(heading-4);
+
+    --final-font-size: calc( var(--theme-header-logo-height) * 1.8 );
+    line-height: 1;
 }

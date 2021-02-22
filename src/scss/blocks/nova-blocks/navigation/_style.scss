@@ -1,37 +1,8 @@
-.site-header__buttons-menu {
-    @include header-links-spacing;
-
-    position: absolute;
-    top: 0;
-    right: 0;
-
-    .menu {
-        display: flex;
-        align-items: center;
-    }
-
-    @include above( lap ) {
-        display: none;
-    }
-}
-
 .wp-block-novablocks-navigation {
 
-    @include apply-font(navigation);
-
-    ul.menu,
-    .menu > ul {
-
-        a {
-            padding: 0.75em 0;
-        }
-    }
-
     @include above(lap) {
-        --font-size: 18px;
-        --header-links-bottom-spacing: .5em;
-
-        @include header-links-spacing;
+        --font-size: 18;
+        --novablocks-navigation-item-bottom-margin: .5em;
 
         ul.menu,
         .menu > ul {
@@ -47,8 +18,8 @@
             }
 
             > li > a {
-                padding-bottom: 0.25em;
-                margin-bottom: var(--header-links-bottom-spacing);
+                padding-bottom: calc( var(--novablocks-navigation-item-padding-y) - var(--novablocks-navigation-item-bottom-margin) );
+                margin-bottom: var(--novablocks-navigation-item-bottom-margin);
             }
 
             li:hover {

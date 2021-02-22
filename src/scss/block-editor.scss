@@ -30,6 +30,8 @@ $assets-folder-path: '../../assets';
 .editor-styles-wrapper {
     -webkit-font-smoothing: antialiased;
 
+    @import "elements/lists";
+
     [class*="__inner-container"] {
         @include wrapper-sides-spacing;
     }
@@ -39,7 +41,6 @@ $assets-folder-path: '../../assets';
         @import "elements/headings";
         @import "elements/base";
         @import "elements/iframe";
-        @import "elements/lists";
         @import "elements/pre";
         @import "elements/tables";
         @import "elements/styles";
@@ -73,33 +74,21 @@ $assets-folder-path: '../../assets';
 }
 
 // Block Editor Spacing
-p,
-h1, h2, h3, h4, h5, h6,
-.wp-block,
-.block-editor-block-list__block {
-
-    .editor-styles-wrapper[class] & {
-        margin-top: 0;
-        margin-bottom: 0;
-
-        &:not(:first-child) {
-            @include element-spacing;
-            margin-top: var(--element-spacing);
-        }
-    }
-}
-
-[data-type="novablocks/media"],
-[data-type="novablocks/hero"],
-[data-type="novablocks/slideshow"],
-[data-type="novablocks/google-map"][data-align="full"],
-[data-type="novablocks/cards-collection"],
-[data-type="novablocks/posts-collection"] {
-
-    .editor-styles-wrapper & + &[data-type] {
-        margin-top: 0;
-    }
-}
+//p,
+//h1, h2, h3, h4, h5, h6,
+//.wp-block,
+//.block-editor-block-list__block {
+//
+//    .editor-styles-wrapper[class] & {
+//        margin-top: 0;
+//        margin-bottom: 0;
+//
+//        &:not(:first-child) {
+//            @include element-spacing;
+//            margin-top: var(--element-spacing);
+//        }
+//    }
+//}
 
 /* Post Title Block */
 .post-type-page {

@@ -20,6 +20,21 @@
     }
 }
 
+.site-header__buttons-menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    .menu {
+        display: flex;
+        align-items: center;
+    }
+
+    @include above( lap ) {
+        display: none;
+    }
+}
+
 .site-header--main {
 
     @include above(lap) {
