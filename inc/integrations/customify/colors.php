@@ -106,10 +106,10 @@ function pixelgrade_add_colors_section_to_customify_config( $config ) {
 				'type' => 'html',
 				'html' => '<span class="separator sub-section label">' . esc_html__( 'Links', '__theme_txtd' ) . '</span>',
 			),
-			'links_color' => sm_get_color_switch_dark_config( 'Link', ':root', 'off', '--theme-links-color' ),
-            'links_decoration_color' => sm_get_color_select_dark_config( 'Link Decoration', ':root', 'dark', '--theme-links-decoration-color' ),
-            'links_hover_color' => sm_get_color_switch_dark_config( 'Active Link', ':root', 'off', '--theme-links-hover-color' ),
-            'links_hover_decoration_color' => sm_get_color_select_dark_config( 'Active Link Decoration', ':root', 'accent', '--theme-links-hover-decoration-color' ),
+			'links_color' => sm_get_color_switch_dark_config( 'Link', '*', 'off', '--theme-links-color' ),
+            'links_decoration_color' => sm_get_color_select_dark_config( 'Link Decoration', '*', 'dark', '--theme-links-decoration-color' ),
+            'links_hover_color' => sm_get_color_switch_dark_config( 'Active Link', '*', 'off', '--theme-links-hover-color' ),
+            'links_hover_decoration_color' => sm_get_color_select_dark_config( 'Active Link Decoration', '*', 'accent', '--theme-links-hover-decoration-color' ),
 
 			'colors_article_section_title' => array(
 				'type' => 'html',

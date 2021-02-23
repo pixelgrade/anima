@@ -1,4 +1,5 @@
 import GlobalService from "../globalService";
+import mqService from '../mqService';
 import HeaderBase from './header-base'
 import HeaderMobile from './header-mobile';
 import { addClass, below, setAndResetElementStyles, getColorSetClasses, toggleClasses } from '../../utils';
@@ -10,9 +11,15 @@ class Header extends HeaderBase {
 
 		if ( ! element ) return;
 
+		this.onUpdate = options.onUpdate;
+
 		this.element = element;
 		this.mobileHeader = new HeaderMobile( this.element );
 		this.secondaryHeader = this.getSecondaryHeader();
+
+		if ( this.secondaryHeader ) {
+			addClass( this.secondaryHeader, 'site-header--ready' );
+		}
 
 		this.initialize();
 		this.onResize();
@@ -28,12 +35,14 @@ class Header extends HeaderBase {
 	render( forceUpdate ) {
 		HeaderBase.prototype.render.call( this, forceUpdate );
 
-		document.body.style.setProperty( '--theme-default-header-height', `${ this?.box?.height }px` );
+		if ( typeof this.onUpdate === "function" ) {
+			this.onUpdate();
+		}
 	}
 
 	getHeight() {
 
-		if ( Math.random() < 0.5 ) {
+		if ( !! mqService.below.lap ) {
 			return this.mobileHeader.getHeight();
 		}
 

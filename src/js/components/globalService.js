@@ -177,12 +177,6 @@ class GlobalService {
 		} )
 	}
 
-	below( breakpointName ) {
-
-		const mediaQuery = window.matchMedia( '(prefers-reduced-motion: reduce)' );
-		return !! mediaQuery.matches;
-	}
-
 	getAdminBarHeight() {
 		const adminBar = document.getElementById( 'wpadminbar' );
 

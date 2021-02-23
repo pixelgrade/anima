@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-import { insideHalf, debounce } from "../utils";
+import { debounce } from "../utils";
 import GlobalService from './globalService';
 import Hero from './hero';
 import CommentsArea from './commentsArea';
@@ -81,7 +81,9 @@ export default class App {
 		const $header = $( '.site-header' );
 
 		if ( $header.length ) {
-			this.header = new Header( $header.get(0) );
+			this.header = new Header( $header.get(0), {
+				onUpdate: this.onHeaderUpdate.bind( this )
+			} );
 		}
 	}
 
@@ -103,10 +105,6 @@ export default class App {
 		const promoBarHeight = !! promoBar ? promoBar.height : 0;
 
 		if ( !! header ) {
-			document.body.style.setProperty( '--theme-promobar-height', `${ promoBarHeight }px` );
-
-			console.log( header.getHeight() );
-
 			header.offset = promoBarHeight;
 			header.render( true );
 
@@ -118,5 +116,17 @@ export default class App {
 			hero.offset = promoBarHeight;
 			hero.updateOnScroll();
 		} );
+	}
+
+	onHeaderUpdate() {
+		const promoBarHeight = this.promoBar?.height || 0;
+		const headerHeight = this.header?.getHeight() || 0;
+
+		$( 'body:not(.has-no-spacing-top) .site-content' ).css( 'marginTop', `${ promoBarHeight + headerHeight }px` );
+		$( 'html' ).css( 'scrollPaddingTop', `${ headerHeight }px` );
+
+		const $firstBlock = $( '.has-site-header-transparent .entry-content > :first-child > .novablocks-block' );
+		const firstBlockPaddingTop = $firstBlock.css( 'paddingTop', '' ).css( 'paddingTop' );
+		$firstBlock.css( 'paddingTop', firstBlockPaddingTop + headerHeight + promoBarHeight );
 	}
 }

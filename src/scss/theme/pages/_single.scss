@@ -19,7 +19,7 @@ body.single-post {
 }
 
 body:not(.has-no-spacing-top) .site-content {
-    padding-top: calc( var(--theme-promobar-height,0) + var(--theme-header-height, 0) + var(--theme-spacing-fluid-large, 0) );
+    padding-top: var(--theme-spacing-fluid-large, 0);
 }
 
 @include above(lap) {

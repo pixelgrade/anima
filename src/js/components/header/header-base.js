@@ -12,7 +12,7 @@ class HeaderBase {
 		this.initializeColors();
 
 		addClass( this.element, this.transparentColorClasses );
-		addClass( this.element, 'site-header--fixed site-header--ready' );
+		addClass( this.element, 'site-header--ready' );
 
 		globalService.registerRender( this.render.bind( this ) );
 		globalService.registerOnResize( this.onResize.bind( this ) );

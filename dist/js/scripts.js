@@ -486,25 +486,7 @@ var toConsumableArray_default = /*#__PURE__*/__webpack_require__.n(toConsumableA
 
 // CONCATENATED MODULE: ./src/js/utils.js
 
- // checks if box1 and box2 overlap
 
-function overlapping(box1, box2) {
-  var overlappingX = box1.left + box1.width >= box2.left && box2.left + box2.width >= box1.left;
-  var overlappingY = box1.top + box1.height >= box2.top && box2.top + box2.height >= box1.top;
-  return overlappingX && overlappingY;
-} // chechks if box1 is completely inside box2
-
-function inside(box1, box2) {
-  var insideX = box1.left >= box2.left && box1.left + box1.width <= box2.left + box2.width;
-  var insideY = box1.top >= box2.top && box1.top + box1.height <= box2.top + box2.height;
-  return insideX && insideY;
-} // chechks if box1 is completely inside box2
-
-function insideHalf(box1, box2) {
-  var insideX = box1.left + box1.width / 2 >= box2.left && box2.left + box2.width >= box1.left + box1.width / 2;
-  var insideY = box1.top + box1.height / 2 >= box2.top && box2.top + box2.height >= box1.top + box1.height / 2;
-  return insideX && insideY;
-}
 var debounce = function debounce(func, wait) {
   var timeout = null;
   return function () {
@@ -540,18 +522,6 @@ var hasTouchScreen = function hasTouchScreen() {
   }
 
   return hasTouchScreen;
-};
-var mq = function mq(direction, string) {
-  var $temp = jQuery('<div class="u-mq-' + direction + '-' + string + '">').appendTo('body'),
-      response = $temp.is(':visible');
-  $temp.remove();
-  return response;
-};
-var below = function below(string) {
-  return mq('below', string);
-};
-var above = function above(string) {
-  return mq('above', string);
 };
 function setAndResetElementStyles(element) {
   var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -837,12 +807,6 @@ function () {
       return Object.keys(this.newProps).some(function (key) {
         return _this.newProps[key] !== _this.props[key];
       });
-    }
-  }, {
-    key: "below",
-    value: function below(breakpointName) {
-      var mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-      return !!mediaQuery.matches;
     }
   }, {
     key: "getAdminBarHeight",
@@ -1372,6 +1336,45 @@ var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 var inherits = __webpack_require__(6);
 var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
 
+// CONCATENATED MODULE: ./src/js/components/mqService.js
+
+
+
+
+var mqService_mqService =
+/*#__PURE__*/
+function () {
+  function mqService() {
+    classCallCheck_default()(this, mqService);
+
+    this.breakpoints = {
+      mobile: 480,
+      tablet: 768,
+      lap: 1000,
+      desktop: 1440
+    };
+    this.above = {};
+    this.below = {};
+    globalService.registerOnResize(this.onResize.bind(this));
+  }
+
+  createClass_default()(mqService, [{
+    key: "onResize",
+    value: function onResize() {
+      var _this = this;
+
+      Object.keys(this.breakpoints).forEach(function (key) {
+        var breakpoint = _this.breakpoints[key];
+        _this.above[key] = !!window.matchMedia("not screen and (min-width: ".concat(breakpoint, ")")).matches;
+        _this.below[key] = !!window.matchMedia("not screen and (min-width: ".concat(breakpoint, ")")).matches;
+      });
+    }
+  }]);
+
+  return mqService;
+}();
+
+/* harmony default export */ var components_mqService = (new mqService_mqService());
 // CONCATENATED MODULE: ./src/js/components/header/header-base.js
 
 
@@ -1392,7 +1395,7 @@ function () {
     value: function initialize() {
       this.initializeColors();
       utils_addClass(this.element, this.transparentColorClasses);
-      utils_addClass(this.element, 'site-header--fixed site-header--ready');
+      utils_addClass(this.element, 'site-header--ready');
       globalService.registerRender(this.render.bind(this));
       globalService.registerOnResize(this.onResize.bind(this));
       this.render();
@@ -1549,10 +1552,7 @@ function (_HeaderBase) {
   }, {
     key: "render",
     value: function render(forceUpdate) {
-      var _this$box;
-
       header_base.prototype.render.call(this);
-      document.body.style.setProperty('--theme-mobile-header-height', "".concat(this === null || this === void 0 ? void 0 : (_this$box = this.box) === null || _this$box === void 0 ? void 0 : _this$box.height, "px"));
     }
   }, {
     key: "initializeMenuToggle",
@@ -1674,6 +1674,7 @@ function (_HeaderBase) {
 
 
 
+
 var header_Header =
 /*#__PURE__*/
 function (_HeaderBase) {
@@ -1686,9 +1687,14 @@ function (_HeaderBase) {
 
     _this = possibleConstructorReturn_default()(this, getPrototypeOf_default()(Header).call(this));
     if (!element) return possibleConstructorReturn_default()(_this);
+    _this.onUpdate = options.onUpdate;
     _this.element = element;
     _this.mobileHeader = new header_mobile(_this.element);
     _this.secondaryHeader = _this.getSecondaryHeader();
+
+    if (_this.secondaryHeader) {
+      utils_addClass(_this.secondaryHeader, 'site-header--ready');
+    }
 
     _this.initialize();
 
@@ -1707,15 +1713,16 @@ function (_HeaderBase) {
   }, {
     key: "render",
     value: function render(forceUpdate) {
-      var _this$box;
-
       header_base.prototype.render.call(this, forceUpdate);
-      document.body.style.setProperty('--theme-default-header-height', "".concat(this === null || this === void 0 ? void 0 : (_this$box = this.box) === null || _this$box === void 0 ? void 0 : _this$box.height, "px"));
+
+      if (typeof this.onUpdate === "function") {
+        this.onUpdate();
+      }
     }
   }, {
     key: "getHeight",
     value: function getHeight() {
-      if (Math.random() < 0.5) {
+      if (!!components_mqService.below.lap) {
         return this.mobileHeader.getHeight();
       }
 
@@ -2289,7 +2296,9 @@ function () {
       var $header = external_jQuery_default()('.site-header');
 
       if ($header.length) {
-        this.header = new header($header.get(0));
+        this.header = new header($header.get(0), {
+          onUpdate: this.onHeaderUpdate.bind(this)
+        });
       }
     }
   }, {
@@ -2313,8 +2322,6 @@ function () {
       var promoBarHeight = !!promoBar ? promoBar.height : 0;
 
       if (!!header) {
-        document.body.style.setProperty('--theme-promobar-height', "".concat(promoBarHeight, "px"));
-        console.log(header.getHeight());
         header.offset = promoBarHeight;
         header.render(true);
         header.mobileHeader.offset = promoBarHeight;
@@ -2325,6 +2332,19 @@ function () {
         hero.offset = promoBarHeight;
         hero.updateOnScroll();
       });
+    }
+  }, {
+    key: "onHeaderUpdate",
+    value: function onHeaderUpdate() {
+      var _this$promoBar, _this$header;
+
+      var promoBarHeight = ((_this$promoBar = this.promoBar) === null || _this$promoBar === void 0 ? void 0 : _this$promoBar.height) || 0;
+      var headerHeight = ((_this$header = this.header) === null || _this$header === void 0 ? void 0 : _this$header.getHeight()) || 0;
+      external_jQuery_default()('body:not(.has-no-spacing-top) .site-content').css('marginTop', "".concat(promoBarHeight + headerHeight, "px"));
+      external_jQuery_default()('html').css('scrollPaddingTop', "".concat(headerHeight, "px"));
+      var $firstBlock = external_jQuery_default()('.has-site-header-transparent .entry-content > :first-child > .novablocks-block');
+      var firstBlockPaddingTop = $firstBlock.css('paddingTop', '').css('paddingTop');
+      $firstBlock.css('paddingTop', firstBlockPaddingTop + headerHeight + promoBarHeight);
     }
   }]);
 

@@ -10,6 +10,7 @@ export default class PromoBar {
 			transitionDuration: 0.5,
 			transitionEasing: Power4.easeInOut,
 		} ) );
+
 		this.height = 0;
 		this.onUpdate = args.onUpdate;
 		this.update();

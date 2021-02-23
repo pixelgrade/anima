@@ -86,10 +86,10 @@ textarea {
     line-height: 1;
 }
 
-body {
-    --theme-header-height: var(--theme-default-header-height);
+.is-style-dark {
+    @include apply-variation(9);
+}
 
-    @include below(lap) {
-        --theme-header-height: var(--theme-mobile-header-height);
-    }
+.is-style-darker {
+    @include apply-variation(10);
 }
