@@ -517,6 +517,10 @@
   .novablocks-slideshow__arrow:hover:after {
     opacity: .1; }
 
+.novablocks-slideshow .novablocks-u-content-padding {
+  padding-left: calc(var(--theme-wrapper-sides-spacing) + 50px);
+  padding-right: calc(var(--theme-wrapper-sides-spacing) + 50px); }
+
 .novablocks-slideshow__arrow--prev:before,
 .novablocks-slideshow__arrow--next:before {
   content: "";
@@ -606,3 +610,7 @@
 
 .novablocks-sharing__copy-input[class][class] {
   --theme-input-box-shadow: none; }
+
+@media not screen and (min-width: 1000px) {
+  .novablocks-collection--carousel .novablocks-collection__layout {
+    margin-right: calc(-1 * var(--theme-wrapper-sides-spacing)); } }
