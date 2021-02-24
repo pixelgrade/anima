@@ -881,6 +881,13 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 		 * @param WP_Post  $item    Menu item data object.
 		 */
 		public function add_badge_custom_field( $item_id, $item ) {
+
+		    // We don't need badge for the
+            // menu items created by us.
+		    if ( $item->type === 'custom-pxg' ) {
+		        return;
+		    }
+
 			// The name of the custom menu meta.
 			$name = 'badge';
 
@@ -945,6 +952,7 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 		}
 
 		public function add_customize_badge_custom_field_template() {
+
 			// The name of the custom menu meta.
 			$name = 'badge';
 
