@@ -493,7 +493,7 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 		}
 
 		public function admin_scripts_styles( $hook_suffix ) {
-			if( 'nav-menus.php' === $hook_suffix ) {
+			if( 'nav-menus.php' === $hook_suffix || is_customize_preview() ) {
 				wp_enqueue_style( 'rosa2-admin-nav-menus-styles', get_template_directory_uri() . '/dist/css/admin/edit-nav-menus.css', array( 'nav-menus' ), '1.0.0' );
 			}
 		}
