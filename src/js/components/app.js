@@ -126,7 +126,8 @@ export default class App {
 		$( 'html' ).css( 'scrollPaddingTop', `${ headerHeight }px` );
 
 		const $firstBlock = $( '.has-site-header-transparent .entry-content > :first-child > .novablocks-block' );
-		const firstBlockPaddingTop = $firstBlock.css( 'paddingTop', '' ).css( 'paddingTop' );
+		const firstBlockPaddingTop = parseInt( $firstBlock.css( 'paddingTop', '' ).css( 'paddingTop' ), 0 );
+
 		$firstBlock.css( 'paddingTop', firstBlockPaddingTop + headerHeight + promoBarHeight );
 	}
 }

@@ -58,8 +58,6 @@ class HeaderMobile extends HeaderBase {
 		buttonSelectors.forEach( selector => {
 			const button = this.parent.querySelector( selector );
 
-			console.log( selector, button );
-
 			if ( button ) {
 				const buttonClone = button.cloneNode( true );
 				this.buttonMenu.appendChild( buttonClone );

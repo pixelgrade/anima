@@ -26,7 +26,7 @@ function pixelgrade_add_colors_section_to_customify_config( $config ) {
 		'options' => array(
 			'sm_text_color_switch_master' => array(
 				'connected_fields' => array(
-					'body',
+					'body_color',
 
 					'links_color',
 					'links_hover_color',

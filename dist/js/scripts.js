@@ -1585,8 +1585,6 @@ function (_HeaderBase) {
       buttonSelectors.forEach(function (selector) {
         var button = _this2.parent.querySelector(selector);
 
-        console.log(selector, button);
-
         if (button) {
           var buttonClone = button.cloneNode(true);
 
@@ -2343,7 +2341,7 @@ function () {
       external_jQuery_default()('body:not(.has-no-spacing-top) .site-content').css('marginTop', "".concat(promoBarHeight + headerHeight, "px"));
       external_jQuery_default()('html').css('scrollPaddingTop', "".concat(headerHeight, "px"));
       var $firstBlock = external_jQuery_default()('.has-site-header-transparent .entry-content > :first-child > .novablocks-block');
-      var firstBlockPaddingTop = $firstBlock.css('paddingTop', '').css('paddingTop');
+      var firstBlockPaddingTop = parseInt($firstBlock.css('paddingTop', '').css('paddingTop'), 0);
       $firstBlock.css('paddingTop', firstBlockPaddingTop + headerHeight + promoBarHeight);
     }
   }]);
