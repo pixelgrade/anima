@@ -1,4 +1,4 @@
-# Rosa II Theme
+# Rosa 2 Theme
 ###
 
 [View Demo](https://demos.pixelgrade.com/rosa2)
@@ -24,6 +24,6 @@ A manually curated list that include all the valuable people that have contribut
 [![](https://github.com/georgeolaru.png?size=64)](https://github.com/georgeolaru) [![](https://github.com/vladolaru.png?size=64)](https://github.com/vladolaru) [![](https://github.com/razwan.png?size=64)](https://github.com/razwan)
 
 ## License
-Rosa II theme source code is released under the [GNU GPL v2 license or later](https://www.gnu.org/licenses/gpl-2.0.html).
+Rosa 2 theme source code is released under the [GNU GPL v2 license or later](https://www.gnu.org/licenses/gpl-2.0.html).
 
-2019 © Pixelgrade.
+2019-2021 © Pixelgrade.
