@@ -37,7 +37,6 @@
 }
 
 .site-header--secondary {
-  
   width: 100%;
   z-index: 1100;
   
@@ -45,6 +44,11 @@
   pointer-events: none;
   
   transition: opacity .15s ease-in;
+
+  .site-header__row {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 .is-visible {
@@ -86,7 +90,6 @@
 @include above(lap) {
   
   .site-header__row {
-    
     display: flex;
     align-items: center;
     

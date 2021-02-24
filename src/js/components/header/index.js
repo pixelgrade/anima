@@ -2,7 +2,8 @@ import GlobalService from "../globalService";
 import mqService from '../mqService';
 import HeaderBase from './header-base'
 import HeaderMobile from './header-mobile';
-import { addClass, below, setAndResetElementStyles, getColorSetClasses, toggleClasses } from '../../utils';
+
+import { addClass, hasClass, setAndResetElementStyles, getColorSetClasses } from '../../utils';
 
 class Header extends HeaderBase {
 
@@ -30,6 +31,14 @@ class Header extends HeaderBase {
 
 		this.timeline = this.getIntroTimeline();
 		this.timeline.play();
+	}
+
+	updateStickyStyles() {
+		HeaderBase.prototype.updateStickyStyles.call( this );
+
+		if ( hasClass( element, 'site-header--main' ) ) {
+			toggleClasses( this.element, this.shouldBeSticky, this.initialColorClasses, this.transparentColorClasses );
+		}
 	}
 
 	render( forceUpdate ) {

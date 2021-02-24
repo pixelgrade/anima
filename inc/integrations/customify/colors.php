@@ -100,7 +100,7 @@ function pixelgrade_add_colors_section_to_customify_config( $config ) {
 	$config['sections']['colors_section'] = Customify_Array::array_merge_recursive_distinct( $config['sections']['colors_section'], array(
 		'title'   => esc_html__( 'Colors', '__theme_txtd' ),
 		'options' => array(
-			'body_color' => sm_get_color_switch_dark_config( 'Body', ':root', 'off' ),
+			'body_color' => sm_get_color_switch_dark_config( 'Body', 'html, [class*="sm-variation-"]', 'off' ),
 
 			'colors_links_section_title' => array(
 				'type' => 'html',

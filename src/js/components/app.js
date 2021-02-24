@@ -125,8 +125,13 @@ export default class App {
 		$( 'body:not(.has-no-spacing-top) .site-content' ).css( 'marginTop', `${ promoBarHeight + headerHeight }px` );
 		$( 'html' ).css( 'scrollPaddingTop', `${ headerHeight }px` );
 
-		const $firstBlock = $( '.has-site-header-transparent .entry-content > :first-child > .novablocks-block' );
-		const firstBlockPaddingTop = parseInt( $firstBlock.css( 'paddingTop', '' ).css( 'paddingTop' ), 0 );
+		const $firstBlock = $( '.has-site-header-transparent .entry-content > :first-child' );
+		const $firstBlockFg = $firstBlock.find( '.novablocks-foreground' );
+		const firstBlockFgPaddingTop = parseInt( $firstBlockFg.css( 'paddingTop', '' ).css( 'paddingTop' ), 0 );
+		$firstBlockFg.css( 'paddingTop', Math.max( firstBlockFgPaddingTop, headerHeight + promoBarHeight ) );
+
+		const $firstNovaBlock = $firstBlock.children( '.novablocks-block' );
+		const firstBlockPaddingTop = parseInt( $firstNovaBlock.css( 'paddingTop', '' ).css( 'paddingTop' ), 0 );
 
 		$firstBlock.css( 'paddingTop', firstBlockPaddingTop + headerHeight + promoBarHeight );
 	}

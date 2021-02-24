@@ -91,6 +91,10 @@ export const removeClass = ( element, classes ) => {
 	}
 }
 
+export const hasClass = ( element, classes ) => {
+	return el.classList.contains( className );
+}
+
 export const toggleClasses = ( element, check, trueClasses = '', falseClasses = '' ) => {
 	removeClass( element, !! check ? falseClasses : trueClasses );
 	addClass( element, !! check ? trueClasses : falseClasses );

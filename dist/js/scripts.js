@@ -575,7 +575,10 @@ var utils_removeClass = function removeClass(element, classes) {
     (_element$classList2 = element.classList).remove.apply(_element$classList2, toConsumableArray_default()(classesArray));
   }
 };
-var toggleClasses = function toggleClasses(element, check) {
+var hasClass = function hasClass(element, classes) {
+  return el.classList.contains(className);
+};
+var utils_toggleClasses = function toggleClasses(element, check) {
   var trueClasses = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
   var falseClasses = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
   utils_removeClass(element, !!check ? falseClasses : trueClasses);
@@ -1611,7 +1614,7 @@ function (_HeaderBase) {
     value: function updateStickyStyles() {
       header_base.prototype.updateStickyStyles.call(this);
       this.applyStickyStyles(this.menuToggle.element);
-      toggleClasses(this.element, this.shouldBeSticky, this.initialColorClasses, this.transparentColorClasses);
+      utils_toggleClasses(this.element, this.shouldBeSticky, this.initialColorClasses, this.transparentColorClasses);
       this.updateToggleClasses();
     }
   }, {
@@ -1643,7 +1646,7 @@ function (_HeaderBase) {
           initialColorClasses = this.initialColorClasses,
           transparentColorClasses = this.transparentColorClasses;
       var isTransparent = navigationIsOpen || !shouldBeSticky;
-      toggleClasses(this.menuToggle.element, isTransparent, transparentColorClasses, initialColorClasses);
+      utils_toggleClasses(this.menuToggle.element, isTransparent, transparentColorClasses, initialColorClasses);
     }
   }, {
     key: "copyElementFromParent",
@@ -1707,6 +1710,15 @@ function (_HeaderBase) {
       header_base.prototype.initialize.call(this);
       this.timeline = this.getIntroTimeline();
       this.timeline.play();
+    }
+  }, {
+    key: "updateStickyStyles",
+    value: function updateStickyStyles() {
+      header_base.prototype.updateStickyStyles.call(this);
+
+      if (hasClass(element, 'site-header--main')) {
+        toggleClasses(this.element, this.shouldBeSticky, this.initialColorClasses, this.transparentColorClasses);
+      }
     }
   }, {
     key: "render",
@@ -2340,8 +2352,12 @@ function () {
       var headerHeight = ((_this$header = this.header) === null || _this$header === void 0 ? void 0 : _this$header.getHeight()) || 0;
       external_jQuery_default()('body:not(.has-no-spacing-top) .site-content').css('marginTop', "".concat(promoBarHeight + headerHeight, "px"));
       external_jQuery_default()('html').css('scrollPaddingTop', "".concat(headerHeight, "px"));
-      var $firstBlock = external_jQuery_default()('.has-site-header-transparent .entry-content > :first-child > .novablocks-block');
-      var firstBlockPaddingTop = parseInt($firstBlock.css('paddingTop', '').css('paddingTop'), 0);
+      var $firstBlock = external_jQuery_default()('.has-site-header-transparent .entry-content > :first-child');
+      var $firstBlockFg = $firstBlock.find('.novablocks-foreground');
+      var firstBlockFgPaddingTop = parseInt($firstBlockFg.css('paddingTop', '').css('paddingTop'), 0);
+      $firstBlockFg.css('paddingTop', Math.max(firstBlockFgPaddingTop, headerHeight + promoBarHeight));
+      var $firstNovaBlock = $firstBlock.children('.novablocks-block');
+      var firstBlockPaddingTop = parseInt($firstNovaBlock.css('paddingTop', '').css('paddingTop'), 0);
       $firstBlock.css('paddingTop', firstBlockPaddingTop + headerHeight + promoBarHeight);
     }
   }]);
