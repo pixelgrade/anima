@@ -11,7 +11,7 @@ class HeaderBase {
 	initialize() {
 		this.initializeColors();
 
-		addClass( this.element, this.transparentColorClasses );
+		toggleClasses( this.element, true, this.transparentColorClasses, this.initialColorClasses );
 		addClass( this.element, 'site-header--ready' );
 
 		globalService.registerRender( this.render.bind( this ) );

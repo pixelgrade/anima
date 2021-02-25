@@ -1397,7 +1397,7 @@ function () {
     key: "initialize",
     value: function initialize() {
       this.initializeColors();
-      utils_addClass(this.element, this.transparentColorClasses);
+      utils_toggleClasses(this.element, true, this.transparentColorClasses, this.initialColorClasses);
       utils_addClass(this.element, 'site-header--ready');
       globalService.registerRender(this.render.bind(this));
       globalService.registerOnResize(this.onResize.bind(this));
@@ -1693,11 +1693,12 @@ function (_HeaderBase) {
     _this.mobileHeader = new header_mobile(_this.element);
     _this.secondaryHeader = _this.getSecondaryHeader();
 
+    _this.initialize();
+
     if (_this.secondaryHeader) {
       utils_addClass(_this.secondaryHeader, 'site-header--ready');
+      utils_addClass(_this.secondaryHeader, _this.initialColorClasses);
     }
-
-    _this.initialize();
 
     _this.onResize();
 

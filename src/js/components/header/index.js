@@ -18,11 +18,13 @@ class Header extends HeaderBase {
 		this.mobileHeader = new HeaderMobile( this.element );
 		this.secondaryHeader = this.getSecondaryHeader();
 
+		this.initialize();
+
 		if ( this.secondaryHeader ) {
 			addClass( this.secondaryHeader, 'site-header--ready' );
+			addClass( this.secondaryHeader, this.initialColorClasses );
 		}
 
-		this.initialize();
 		this.onResize();
 	}
 
