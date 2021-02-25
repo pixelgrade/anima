@@ -674,6 +674,10 @@ ul.wp-block-categories__list[class] {
 .picker__frame {
   --current-font-size: 16px; }
 
+.novablocks-slideshow .novablocks-u-content-padding {
+  padding-right: calc(var(--theme-wrapper-sides-spacing) + 50px);
+  padding-left: calc(var(--theme-wrapper-sides-spacing) + 50px); }
+
 .novablocks-slideshow__arrow {
   width: 50px;
   height: 50px;
@@ -681,10 +685,6 @@ ul.wp-block-categories__list[class] {
   transform: translateY(-50%); }
   .novablocks-slideshow__arrow:hover:after {
     opacity: .1; }
-
-.novablocks-slideshow .novablocks-u-content-padding {
-  padding-right: calc(var(--theme-wrapper-sides-spacing) + 50px);
-  padding-left: calc(var(--theme-wrapper-sides-spacing) + 50px); }
 
 .novablocks-slideshow__arrow--prev:before,
 .novablocks-slideshow__arrow--next:before {
