@@ -15,14 +15,15 @@ class Header extends HeaderBase {
 		this.onUpdate = options.onUpdate;
 
 		this.element = element;
+
 		this.mobileHeader = new HeaderMobile( this.element );
 		this.secondaryHeader = this.getSecondaryHeader();
 
 		this.initialize();
 
 		if ( this.secondaryHeader ) {
-			addClass( this.secondaryHeader, 'site-header--ready' );
-			addClass( this.secondaryHeader, this.initialColorClasses );
+			addClass( this.secondaryHeader, 'novablocks-header--ready' );
+//			addClass( this.secondaryHeader, this.initialColorClasses );
 		}
 
 		this.onResize();
@@ -38,7 +39,7 @@ class Header extends HeaderBase {
 	updateStickyStyles() {
 		HeaderBase.prototype.updateStickyStyles.call( this );
 
-		if ( hasClass( element, 'site-header--main' ) ) {
+		if ( hasClass( element, 'novablocks-header--main' ) ) {
 			toggleClasses( this.element, this.shouldBeSticky, this.initialColorClasses, this.transparentColorClasses );
 		}
 	}
@@ -68,7 +69,7 @@ class Header extends HeaderBase {
 	getSecondaryHeader() {
 		const nextSibling = this.element.nextElementSibling;
 
-		if ( nextSibling.classList.contains( 'site-header--secondary' ) ) {
+		if ( nextSibling.classList.contains( 'novablocks-header--secondary' ) ) {
 			return nextSibling;
 		}
 

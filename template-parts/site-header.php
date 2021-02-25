@@ -22,7 +22,7 @@ $sticky_attribute = $site_header_is_sticky ? 'data-sticky=true' : '';
         <div class="site-header__inner-container">
             <div class="site-header__content alignfull">
                 <div class="wp-block-novablocks-header-row site-header__row site-header__row--primary">
-                    <nav class="wp-block-novablocks-navigation site-header__menu site-header__menu--secondary">
+                    <nav class="wp-block-novablocks-navigation novablocks-navigation novablocks-navigation--secondary">
                         <?php wp_nav_menu( array(
                             'container'      => false,
                             'theme_location' => 'secondary',
@@ -33,7 +33,7 @@ $sticky_attribute = $site_header_is_sticky ? 'data-sticky=true' : '';
 
                     <?php get_template_part( 'template-parts/site-branding' ); ?>
 
-                    <nav class="wp-block-novablocks-navigation site-header__menu site-header__menu--primary">
+                    <nav class="wp-block-novablocks-navigation novablocks-navigation novablocks-navigation--primary">
                         <?php wp_nav_menu( array(
                             'container'      => false,
                             'theme_location' => 'primary',

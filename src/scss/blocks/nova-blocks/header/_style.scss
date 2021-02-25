@@ -1,11 +1,79 @@
-@media only screen and (min-width: 1000px) {
+@import "mixins";
+@import "mobile";
+@import "menu-toggle";
 
-    .site-header {
+.novablocks-header {
+    // Load default settings for buttons
+    --theme-button-padding: .25em 1em;
 
-        ul.menu,
-        .menu > ul {
-            display: flex;
-            flex-wrap: wrap;
-        }
+    --theme-button-text-color: var(--sm-dark-primary);
+    --theme-button-background-color: var(--sm-light-primary);
+    --theme-button-border-color: var(--sm-light-primary);
+
+    --theme-button-hover-text-color: var(--sm-light-primary);
+    --theme-button-hover-background-color: transparent;
+    --theme-button-hover-border-color: var(--sm-light-primary);
+}
+
+.novablocks-header--main:not(.novablocks-header--sticky) {
+
+    @include above(lap) {
+        position: absolute !important;
+        top: 0 !important;
     }
+
+    @include below(lap) {
+        margin-top: 0 !important;
+    }
+}
+
+.novablocks-header:not(.novablocks-header--ready) {
+    opacity: 0;
+}
+
+.novablocks-header--transparent:not(.novablocks-header--sticky) {
+    --header-background-opacity: 0;
+}
+
+.novablocks-header--sticky:not(.novablocks-header--main) {
+
+    @include above(lap) {
+        margin-top: 0 !important;
+    }
+}
+
+.novablocks-header--sticky.novablocks-header--main {
+    position: fixed !important;
+    top: 0 !important;
+}
+
+.novablocks-header__buttons-menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    .menu {
+        display: flex;
+        align-items: center;
+    }
+
+    @include above( lap ) {
+        display: none;
+    }
+}
+
+// External Link
+.is-external-link {
+    @include header-menu-item-is-external-link;
+}
+
+// CTA Button
+.is-cta-button {
+    @include header-menu-item-is-cta-button;
+}
+
+.menu-item-label {
+    @include badge;
+    vertical-align: middle;
+    margin-left: 0.5em;
 }

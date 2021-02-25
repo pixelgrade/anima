@@ -5,22 +5,6 @@ $assets-folder-path: '../../assets';
 @import "components/search-button";
 @import "components/dark-mode-button";
 
-/* Layout */
-.wp-block {
-
-    &:not([data-align="wide"]):not([data-align="full"]) {
-        max-width: var(--theme-content-width-normal);
-    }
-
-    &[data-align="wide"] {
-        max-width: var(--theme-content-width-wide);
-    }
-
-    &[data-align="full"] {
-        max-width: none;
-    }
-}
-
 /* Typography */
 :root {
     --font-size: var(--theme-body-font-size);
@@ -33,7 +17,7 @@ $assets-folder-path: '../../assets';
     @import "elements/lists";
 
     [class*="__inner-container"] {
-        @include wrapper-sides-spacing;
+        @include wrapper( true );
     }
 
     // increased specificity selector to overwrite default styles

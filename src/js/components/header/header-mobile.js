@@ -10,7 +10,7 @@ class HeaderMobile extends HeaderBase {
 		super();
 
 		this.parent = parent;
-		this.parentContainer = parent.querySelector( '.site-header__inner-container' );
+		this.parentContainer = parent.querySelector( '.novablocks-header__inner-container' );
 		this.initialize();
 		this.onResize();
 	}
@@ -37,7 +37,7 @@ class HeaderMobile extends HeaderBase {
 
 	createMobileHeader() {
 		this.element = document.createElement( 'div' );
-		this.element.setAttribute( 'class', 'site-header--mobile site-header-background site-header-shadow' );
+		this.element.setAttribute( 'class', 'novablocks-header--mobile novablocks-header-background novablocks-header-shadow' );
 		this.copyElementFromParent( '.c-branding' );
 		this.copyElementFromParent( '.menu-item--cart' );
 		this.menuToggle.element.insertAdjacentElement( 'afterend', this.element );
@@ -71,7 +71,7 @@ class HeaderMobile extends HeaderBase {
 			const navigationBlock = document.createElement( 'div' );
 			const wrapper = document.createElement( 'div' );
 			addClass( navigationBlock, 'wp-block-novablocks-navigation' );
-			addClass( wrapper, 'site-header__buttons-menu wp-block-group__inner-container' );
+			addClass( wrapper, 'novablocks-header__buttons-menu wp-block-group__inner-container' );
 
 			wrapper.appendChild( navigationBlock );
 			navigationBlock.appendChild( this.buttonMenu );

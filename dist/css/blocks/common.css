@@ -375,6 +375,14 @@
     .wp-block-group + .wp-block-group, .wp-block-group[class*="is-style"]:not(.is-style-default) + .wp-block-group, .wp-block-group + .wp-block-group[class*="is-style"]:not(.is-style-default), .wp-block-group[class*="is-style"]:not(.is-style-default) + .wp-block-group[class*="is-style"]:not(.is-style-default) {
       --element-spacing: 0; }
 
+.wp-block-group {
+  --wp-block-group-padding: var(--current-element-padding, var(--theme-spacing-fluid-large)); }
+  .wp-block-group, .wp-block-group[class*="is-style"]:not(.is-style-default) {
+    padding-top: var(--wp-block-group-padding);
+    padding-bottom: var(--wp-block-group-padding); }
+    .wp-block-group + .wp-block-group, .wp-block-group[class*="is-style"]:not(.is-style-default) + .wp-block-group, .wp-block-group + .wp-block-group[class*="is-style"]:not(.is-style-default), .wp-block-group[class*="is-style"]:not(.is-style-default) + .wp-block-group[class*="is-style"]:not(.is-style-default) {
+      --element-spacing: 0; }
+
 /* Latest Posts Block */
 .wp-block-latest-posts[class] {
   padding-left: 0; }
@@ -801,6 +809,11 @@
 /* Table Block */
 .wp-block-table {
   overflow-x: auto; }
+
+.novablocks-header-row__inner-container[class][class] > .alignfull,
+.novablocks-header-row__inner-container[class][class] > [data-align="full"] {
+  margin-left: auto;
+  margin-right: auto; }
 
 .novablocks-hero[class] a {
   --theme-links-color: var(--novablocks-hero-text-color);

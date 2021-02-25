@@ -1,30 +1,43 @@
-@mixin wrapper-sides-spacing {
+@function align-selector( $align, $editor: false ) {
+    @if $editor != false {
+        @return unquote( "[data-align=#{ $align }]" );
+    } @else {
+        @return unquote( ".align#{ $align }" )
+    }
+}
+
+@mixin wrapper-sides-spacing( $editor: false ) {
     padding-left: var(--theme-wrapper-sides-spacing);
     padding-right: var(--theme-wrapper-sides-spacing);
 
-    > .alignfull {
+    $full: align-selector( full, $editor );
+
+    > #{ $full } {
         margin-left: calc( -1 * var(--theme-wrapper-sides-spacing) );
         margin-right: calc( -1 * var(--theme-wrapper-sides-spacing) );
     }
 }
 
-@mixin wrapper {
-    @include wrapper-sides-spacing;
+@mixin wrapper( $editor: false ) {
+    @include wrapper-sides-spacing( $editor );
+
+    $full: align-selector( full, $editor );
+    $wide: align-selector( wide, $editor );
 
     > * {
         margin-left: auto;
         margin-right: auto;
     }
 
-    > :not(.alignwide):not(.alignfull) {
+    > :not( #{ $wide } ):not( #{ $full } ) {
         max-width: var(--theme-content-width-normal);
     }
 
-    > .alignwide {
+    > #{ $wide } {
         max-width: var(--theme-content-width-wide);
     }
 
-    > .alignfull {
+    > #{ $full } {
         max-width: none;
     }
 }

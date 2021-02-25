@@ -1396,12 +1396,23 @@ function () {
   createClass_default()(HeaderBase, [{
     key: "initialize",
     value: function initialize() {
+      this.isTransparent = false;
       this.initializeColors();
-      utils_toggleClasses(this.element, true, this.transparentColorClasses, this.initialColorClasses);
-      utils_addClass(this.element, 'site-header--ready');
+      utils_toggleClasses(this.element, this.isTransparent, this.transparentColorClasses, this.initialColorClasses);
+      utils_addClass(this.element, 'novablocks-header--ready');
       globalService.registerRender(this.render.bind(this));
       globalService.registerOnResize(this.onResize.bind(this));
       this.render();
+    }
+  }, {
+    key: "initializeColors",
+    value: function initializeColors() {
+      var content = document.querySelector('.site-main .entry-content');
+      var firstBlock = getFirstChild(content);
+      var novablocksBlock = firstBlock.querySelector('.novablocks-block');
+      var blockWithColors = novablocksBlock || firstBlock;
+      this.initialColorClasses = getColorSetClasses(this.element).join(' ');
+      this.transparentColorClasses = getColorSetClasses(blockWithColors).join(' ') + ' novablocks-header--transparent';
     }
   }, {
     key: "onResize",
@@ -1450,16 +1461,6 @@ function () {
         element.style.position = 'absolute';
         element.style.top = "".concat(this.offset, "px");
       }
-    }
-  }, {
-    key: "initializeColors",
-    value: function initializeColors() {
-      var content = document.querySelector('.site-main .entry-content');
-      var firstBlock = getFirstChild(content);
-      var novablocksBlock = firstBlock.querySelector('.novablocks-block');
-      var blockWithColors = novablocksBlock || firstBlock;
-      this.initialColorClasses = getColorSetClasses(this.element).join(' ');
-      this.transparentColorClasses = getColorSetClasses(blockWithColors).join(' ') + ' site-header--transparent';
     }
   }]);
 
@@ -1536,7 +1537,7 @@ function (_HeaderBase) {
 
     _this = possibleConstructorReturn_default()(this, getPrototypeOf_default()(HeaderMobile).call(this));
     _this.parent = parent;
-    _this.parentContainer = parent.querySelector('.site-header__inner-container');
+    _this.parentContainer = parent.querySelector('.novablocks-header__inner-container');
 
     _this.initialize();
 
@@ -1570,7 +1571,7 @@ function (_HeaderBase) {
     key: "createMobileHeader",
     value: function createMobileHeader() {
       this.element = document.createElement('div');
-      this.element.setAttribute('class', 'site-header--mobile site-header-background site-header-shadow');
+      this.element.setAttribute('class', 'novablocks-header--mobile novablocks-header-background novablocks-header-shadow');
       this.copyElementFromParent('.c-branding');
       this.copyElementFromParent('.menu-item--cart');
       this.menuToggle.element.insertAdjacentElement('afterend', this.element);
@@ -1603,7 +1604,7 @@ function (_HeaderBase) {
         var navigationBlock = document.createElement('div');
         var wrapper = document.createElement('div');
         utils_addClass(navigationBlock, 'wp-block-novablocks-navigation');
-        utils_addClass(wrapper, 'site-header__buttons-menu wp-block-group__inner-container');
+        utils_addClass(wrapper, 'novablocks-header__buttons-menu wp-block-group__inner-container');
         wrapper.appendChild(navigationBlock);
         navigationBlock.appendChild(this.buttonMenu);
         this.parent.appendChild(wrapper);
@@ -1696,8 +1697,7 @@ function (_HeaderBase) {
     _this.initialize();
 
     if (_this.secondaryHeader) {
-      utils_addClass(_this.secondaryHeader, 'site-header--ready');
-      utils_addClass(_this.secondaryHeader, _this.initialColorClasses);
+      utils_addClass(_this.secondaryHeader, 'novablocks-header--ready'); //			addClass( this.secondaryHeader, this.initialColorClasses );
     }
 
     _this.onResize();
@@ -1717,7 +1717,7 @@ function (_HeaderBase) {
     value: function updateStickyStyles() {
       header_base.prototype.updateStickyStyles.call(this);
 
-      if (hasClass(element, 'site-header--main')) {
+      if (hasClass(element, 'novablocks-header--main')) {
         toggleClasses(this.element, this.shouldBeSticky, this.initialColorClasses, this.transparentColorClasses);
       }
     }
@@ -1752,7 +1752,7 @@ function (_HeaderBase) {
     value: function getSecondaryHeader() {
       var nextSibling = this.element.nextElementSibling;
 
-      if (nextSibling.classList.contains('site-header--secondary')) {
+      if (nextSibling.classList.contains('novablocks-header--secondary')) {
         return nextSibling;
       }
 
@@ -2304,7 +2304,7 @@ function () {
   }, {
     key: "initializeHeader",
     value: function initializeHeader() {
-      var $header = external_jQuery_default()('.site-header');
+      var $header = external_jQuery_default()('.novablocks-header');
 
       if ($header.length) {
         this.header = new header($header.get(0), {
@@ -2353,7 +2353,7 @@ function () {
       var headerHeight = ((_this$header = this.header) === null || _this$header === void 0 ? void 0 : _this$header.getHeight()) || 0;
       external_jQuery_default()('body:not(.has-no-spacing-top) .site-content').css('marginTop', "".concat(promoBarHeight + headerHeight, "px"));
       external_jQuery_default()('html').css('scrollPaddingTop', "".concat(headerHeight, "px"));
-      var $firstBlock = external_jQuery_default()('.has-site-header-transparent .entry-content > :first-child');
+      var $firstBlock = external_jQuery_default()('.has-novablocks-header-transparent .entry-content > :first-child');
       var $firstBlockFg = $firstBlock.find('.novablocks-foreground');
       var firstBlockFgPaddingTop = parseInt($firstBlockFg.css('paddingTop', '').css('paddingTop'), 0);
       $firstBlockFg.css('paddingTop', Math.max(firstBlockFgPaddingTop, headerHeight + promoBarHeight));

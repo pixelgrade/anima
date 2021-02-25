@@ -143,10 +143,10 @@ function pixelgrade_add_colors_section_to_customify_config( $config ) {
 				'type' => 'html',
 				'html' => '<span class="separator sub-section label">' . esc_html__( 'Header', '__theme_txtd' ) . '</span>',
 			),
-			'menu_item_color' => sm_get_color_switch_dark_config( 'Menu Item', '.site-header__menu', 'off' ),
-			'menu_active_item_color' => sm_get_color_switch_dark_config( 'Menu Active Item', '.site-header__menu > ul > li[class*="current"]', 'off' ),
-			'submenu_item_color' => sm_get_color_switch_dark_config( 'Submenu Item', '.site-header__menu .sub-menu', 'off' ),
-			'submenu_active_item_color' => sm_get_color_switch_dark_config( 'Submenu Active Item', '.site-header__menu .sub-menu > li[class*="current"]', 'off' ),
+			'menu_item_color' => sm_get_color_switch_dark_config( 'Menu Item', '.novablocks-navigation', 'off' ),
+			'menu_active_item_color' => sm_get_color_switch_dark_config( 'Menu Active Item', '.novablocks-navigation > ul > li[class*="current"]', 'off' ),
+			'submenu_item_color' => sm_get_color_switch_dark_config( 'Submenu Item', '.novablocks-navigation .sub-menu', 'off' ),
+			'submenu_active_item_color' => sm_get_color_switch_dark_config( 'Submenu Active Item', '.novablocks-navigation .sub-menu > li[class*="current"]', 'off' ),
 
 			'colors_post_navigation_section_title' => array(
 				'type' => 'html',

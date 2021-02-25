@@ -9,7 +9,7 @@
 :root {
   --enable-social-icons: 1; }
 
-.site-header__menu [href*="facebook"], .site-header__menu [href*="twitter"], .site-header__menu [href*="instagram"], .site-header__menu [href*="youtube"], .site-header__menu [href*="pinterest"], .site-header__menu [href*="dropbox"], .site-header__menu [href*="flickr"], .site-header__menu [href*="tumblr"], .site-header__menu [href*="apple"], .site-header__menu [href*="dribbble"], .site-header__menu [href*="skype"], .site-header__menu [href*="foursquare"], .site-header__menu [href*="vk"], .site-header__menu [href*="reddit"], .site-header__menu [href*="stumbleupon"], .site-header__menu [href*="delicious"], .site-header__menu [href*="digg"], .site-header__menu [href*="behance"], .site-header__menu [href*="spotify"], .site-header__menu [href*="deviantart"], .site-header__menu [href*="soundcloud"], .site-header__menu [href*="codepen"], .site-header__menu [href*="slideshare"], .site-header__menu [href*="twitch"], .site-header__menu [href*="yelp"], .site-header__menu [href*="medium"], .site-header__menu [href*="tripadvisor"], .site-header__menu [href*="pocket.com"], .site-header__menu [href*="500px"], .site-header__menu [href*="amazon"], .site-header__menu [href*="vimeo"], .site-header__menu [href*="snapchat"], .site-header__menu [href*="bandcamp"], .site-header__menu [href*="etsy"], .site-header__menu [href*="meetup"], .site-header__menu [href*="tel:"], .site-header__menu [href*="mailto:"], .site-header__menu [href*="feed"] {
+.novablocks-navigation [href*="facebook"], .novablocks-navigation [href*="twitter"], .novablocks-navigation [href*="instagram"], .novablocks-navigation [href*="youtube"], .novablocks-navigation [href*="pinterest"], .novablocks-navigation [href*="dropbox"], .novablocks-navigation [href*="flickr"], .novablocks-navigation [href*="tumblr"], .novablocks-navigation [href*="apple"], .novablocks-navigation [href*="dribbble"], .novablocks-navigation [href*="skype"], .novablocks-navigation [href*="foursquare"], .novablocks-navigation [href*="vk"], .novablocks-navigation [href*="reddit"], .novablocks-navigation [href*="stumbleupon"], .novablocks-navigation [href*="delicious"], .novablocks-navigation [href*="digg"], .novablocks-navigation [href*="behance"], .novablocks-navigation [href*="spotify"], .novablocks-navigation [href*="deviantart"], .novablocks-navigation [href*="soundcloud"], .novablocks-navigation [href*="codepen"], .novablocks-navigation [href*="slideshare"], .novablocks-navigation [href*="twitch"], .novablocks-navigation [href*="yelp"], .novablocks-navigation [href*="medium"], .novablocks-navigation [href*="tripadvisor"], .novablocks-navigation [href*="pocket.com"], .novablocks-navigation [href*="500px"], .novablocks-navigation [href*="amazon"], .novablocks-navigation [href*="vimeo"], .novablocks-navigation [href*="snapchat"], .novablocks-navigation [href*="bandcamp"], .novablocks-navigation [href*="etsy"], .novablocks-navigation [href*="meetup"], .novablocks-navigation [href*="tel:"], .novablocks-navigation [href*="mailto:"], .novablocks-navigation [href*="feed"] {
   --is-social: 1; }
 
 .social-menu-item {
@@ -156,7 +156,7 @@
     transform: translate(50%, -50%); }
 
 @media not screen and (min-width: 1000px) {
-  .site-header__menu .menu-item--search {
+  .novablocks-navigation .menu-item--search {
     display: none; } }
 
 .menu-item--dark-mode {
@@ -205,16 +205,6 @@
     color: currentColor;
     text-decoration: none; }
 
-/* Layout */
-.wp-block:not([data-align="wide"]):not([data-align="full"]) {
-  max-width: var(--theme-content-width-normal); }
-
-.wp-block[data-align="wide"] {
-  max-width: var(--theme-content-width-wide); }
-
-.wp-block[data-align="full"] {
-  max-width: none; }
-
 /* Typography */
 :root {
   --font-size: var(--theme-body-font-size);
@@ -247,9 +237,18 @@
   .editor-styles-wrapper [class*="__inner-container"] {
     padding-right: var(--theme-wrapper-sides-spacing);
     padding-left: var(--theme-wrapper-sides-spacing); }
-    .editor-styles-wrapper [class*="__inner-container"] > .alignfull {
+    .editor-styles-wrapper [class*="__inner-container"] > [data-align=full] {
       margin-right: calc( -1 * var(--theme-wrapper-sides-spacing));
       margin-left: calc( -1 * var(--theme-wrapper-sides-spacing)); }
+    .editor-styles-wrapper [class*="__inner-container"] > * {
+      margin-right: auto;
+      margin-left: auto; }
+    .editor-styles-wrapper [class*="__inner-container"] > :not([data-align=wide]):not([data-align=full]) {
+      max-width: var(--theme-content-width-normal); }
+    .editor-styles-wrapper [class*="__inner-container"] > [data-align=wide] {
+      max-width: var(--theme-content-width-wide); }
+    .editor-styles-wrapper [class*="__inner-container"] > [data-align=full] {
+      max-width: none; }
   .editor-styles-wrapper[class] {
     /* Iframes */
     /* Preformatted */

@@ -78,7 +78,7 @@ export default class App {
 	}
 
 	initializeHeader() {
-		const $header = $( '.site-header' );
+		const $header = $( '.novablocks-header' );
 
 		if ( $header.length ) {
 			this.header = new Header( $header.get(0), {
@@ -125,7 +125,7 @@ export default class App {
 		$( 'body:not(.has-no-spacing-top) .site-content' ).css( 'marginTop', `${ promoBarHeight + headerHeight }px` );
 		$( 'html' ).css( 'scrollPaddingTop', `${ headerHeight }px` );
 
-		const $firstBlock = $( '.has-site-header-transparent .entry-content > :first-child' );
+		const $firstBlock = $( '.has-novablocks-header-transparent .entry-content > :first-child' );
 		const $firstBlockFg = $firstBlock.find( '.novablocks-foreground' );
 		const firstBlockFgPaddingTop = parseInt( $firstBlockFg.css( 'paddingTop', '' ).css( 'paddingTop' ), 0 );
 		$firstBlockFg.css( 'paddingTop', Math.max( firstBlockFgPaddingTop, headerHeight + promoBarHeight ) );
