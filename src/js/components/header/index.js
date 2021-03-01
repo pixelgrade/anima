@@ -30,7 +30,7 @@ class Header extends HeaderBase {
 			addClass( this.secondaryHeader, 'novablocks-header--ready' );
 		}
 
-//		this.onResize();
+		this.onResize();
 	}
 
 	initialize() {

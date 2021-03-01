@@ -1748,8 +1748,9 @@ function (_HeaderBase) {
 
     if (_this.secondaryHeader) {
       utils_addClass(_this.secondaryHeader, 'novablocks-header--ready');
-    } //		this.onResize();
+    }
 
+    _this.onResize();
 
     return _this;
   }
