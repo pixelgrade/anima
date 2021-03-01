@@ -30,13 +30,7 @@ function rosa2_body_classes( $classes ) {
 		$classes[] = 'no-sidebar';
 	}
 
-	if ( is_singular() ) {
-		$classes[] = 'has-site-header-transparent';
-	}
-
-	if ( pixelgrade_option( 'header_position', 'sticky' ) === 'sticky' ) {
-		$classes[] = 'has-site-header-fixed';
-	}
+	$classes[] = 'has-novablocks-header-transparent';
 
 	if ( rosa2_first_block_is( array( 'novablocks/hero', 'novablocks/media' ) ) ) {
 		$classes[] = 'has-no-spacing-top';

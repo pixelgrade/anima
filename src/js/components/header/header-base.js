@@ -1,6 +1,6 @@
-import globalService from '../globalService';
+import { addClass } from '../../utils';
 
-import { addClass, getFirstChild, getColorSetClasses, toggleClasses } from '../../utils';
+import globalService from '../globalService';
 
 class HeaderBase {
 
@@ -9,27 +9,12 @@ class HeaderBase {
 	}
 
 	initialize() {
-		this.isTransparent = false;
-
-		this.initializeColors();
-
-		toggleClasses( this.element, this.isTransparent, this.transparentColorClasses, this.initialColorClasses );
 		addClass( this.element, 'novablocks-header--ready' );
 
 		globalService.registerRender( this.render.bind( this ) );
 		globalService.registerOnResize( this.onResize.bind( this ) );
 
 		this.render();
-	}
-
-	initializeColors() {
-		const content = document.querySelector( '.site-main .entry-content' );
-		const firstBlock = getFirstChild( content );
-		const novablocksBlock = firstBlock.querySelector( '.novablocks-block' );
-		const blockWithColors = novablocksBlock || firstBlock;
-
-		this.initialColorClasses = getColorSetClasses( this.element ).join( ' ' );
-		this.transparentColorClasses = getColorSetClasses( blockWithColors ).join( ' ' ) + ' novablocks-header--transparent';
 	}
 
 	onResize() {

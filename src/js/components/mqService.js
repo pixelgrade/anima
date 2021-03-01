@@ -5,16 +5,18 @@ class mqService {
 	constructor() {
 
 		this.breakpoints = {
-			mobile: 480,
-			tablet: 768,
-			lap: 1000,
-			desktop: 1440,
+			mobile: '480px',
+			tablet: '768px',
+			lap: '1000px',
+			desktop: '1440px',
 		}
 
 		this.above = {};
 		this.below = {};
 
 		globalService.registerOnResize( this.onResize.bind( this ) );
+
+		this.onResize();
 	}
 
 	onResize() {

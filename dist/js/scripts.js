@@ -578,7 +578,7 @@ var utils_removeClass = function removeClass(element, classes) {
 var hasClass = function hasClass(element, classes) {
   return el.classList.contains(className);
 };
-var utils_toggleClasses = function toggleClasses(element, check) {
+var toggleClasses = function toggleClasses(element, check) {
   var trueClasses = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
   var falseClasses = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
   utils_removeClass(element, !!check ? falseClasses : trueClasses);
@@ -1335,6 +1335,10 @@ var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possi
 var getPrototypeOf = __webpack_require__(5);
 var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/assertThisInitialized.js
+var assertThisInitialized = __webpack_require__(12);
+var assertThisInitialized_default = /*#__PURE__*/__webpack_require__.n(assertThisInitialized);
+
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
 var inherits = __webpack_require__(6);
 var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
@@ -1351,14 +1355,15 @@ function () {
     classCallCheck_default()(this, mqService);
 
     this.breakpoints = {
-      mobile: 480,
-      tablet: 768,
-      lap: 1000,
-      desktop: 1440
+      mobile: '480px',
+      tablet: '768px',
+      lap: '1000px',
+      desktop: '1440px'
     };
     this.above = {};
     this.below = {};
     globalService.registerOnResize(this.onResize.bind(this));
+    this.onResize();
   }
 
   createClass_default()(mqService, [{
@@ -1396,23 +1401,10 @@ function () {
   createClass_default()(HeaderBase, [{
     key: "initialize",
     value: function initialize() {
-      this.isTransparent = false;
-      this.initializeColors();
-      utils_toggleClasses(this.element, this.isTransparent, this.transparentColorClasses, this.initialColorClasses);
       utils_addClass(this.element, 'novablocks-header--ready');
       globalService.registerRender(this.render.bind(this));
       globalService.registerOnResize(this.onResize.bind(this));
       this.render();
-    }
-  }, {
-    key: "initializeColors",
-    value: function initializeColors() {
-      var content = document.querySelector('.site-main .entry-content');
-      var firstBlock = getFirstChild(content);
-      var novablocksBlock = firstBlock.querySelector('.novablocks-block');
-      var blockWithColors = novablocksBlock || firstBlock;
-      this.initialColorClasses = getColorSetClasses(this.element).join(' ');
-      this.transparentColorClasses = getColorSetClasses(blockWithColors).join(' ') + ' novablocks-header--transparent';
     }
   }, {
     key: "onResize",
@@ -1468,6 +1460,49 @@ function () {
 }();
 
 /* harmony default export */ var header_base = (header_base_HeaderBase);
+// CONCATENATED MODULE: ./src/js/components/header/header-colors.js
+
+
+
+
+
+var header_colors_HeaderColors =
+/*#__PURE__*/
+function () {
+  function HeaderColors(element, initialColorsSource, transparentColorsSource) {
+    classCallCheck_default()(this, HeaderColors);
+
+    this.element = element;
+    this.initialColorsSource = initialColorsSource ? initialColorsSource : element;
+    this.transparentColorsSource = transparentColorsSource ? transparentColorsSource : this.getFirstBlockElement();
+    this.initializeColors();
+  }
+
+  createClass_default()(HeaderColors, [{
+    key: "getFirstBlockElement",
+    value: function getFirstBlockElement() {
+      var content = document.querySelector('.site-main .entry-content');
+      var firstBlock = getFirstChild(content);
+      var novablocksBlock = firstBlock.querySelector('.novablocks-block');
+      return novablocksBlock || firstBlock;
+    }
+  }, {
+    key: "initializeColors",
+    value: function initializeColors() {
+      this.initialColorClasses = getColorSetClasses(this.initialColorsSource).join(' ');
+      this.transparentColorClasses = getColorSetClasses(this.transparentColorsSource).join(' ') + ' novablocks-header--transparent';
+    }
+  }, {
+    key: "toggleColors",
+    value: function toggleColors(isTransparent) {
+      toggleClasses(this.element, isTransparent, this.transparentColorClasses, this.initialColorClasses);
+    }
+  }]);
+
+  return HeaderColors;
+}();
+
+/* harmony default export */ var header_colors = (header_colors_HeaderColors);
 // CONCATENATED MODULE: ./src/js/components/header/menu-toggle.js
 
 
@@ -1525,6 +1560,7 @@ function () {
 
 
 
+
 var header_mobile_HeaderMobile =
 /*#__PURE__*/
 function (_HeaderBase) {
@@ -1537,7 +1573,7 @@ function (_HeaderBase) {
 
     _this = possibleConstructorReturn_default()(this, getPrototypeOf_default()(HeaderMobile).call(this));
     _this.parent = parent;
-    _this.parentContainer = parent.querySelector('.novablocks-header__inner-container');
+    _this.parentContainer = parent.element.querySelector('.novablocks-header__inner-container');
 
     _this.initialize();
 
@@ -1551,6 +1587,12 @@ function (_HeaderBase) {
     value: function initialize() {
       this.initializeMenuToggle();
       this.createMobileHeader();
+      var logoRow = this.parent.rows.find(function (row) {
+        return row.element.querySelector('.site-logo');
+      });
+      this.headerClasses = getColorSetClasses(this.parent.element).join(' ');
+      this.colors = new header_colors(this.element, logoRow === null || logoRow === void 0 ? void 0 : logoRow.element);
+      this.menuToggleColors = new header_colors(this.menuToggle.element, logoRow === null || logoRow === void 0 ? void 0 : logoRow.element);
       header_base.prototype.initialize.call(this);
     }
   }, {
@@ -1587,7 +1629,7 @@ function (_HeaderBase) {
       utils_addClass(this.buttonMenu, 'menu menu--buttons');
       var buttonSelectors = ['.menu-item--search', '.menu-item--dark-mode'];
       buttonSelectors.forEach(function (selector) {
-        var button = _this2.parent.querySelector(selector);
+        var button = _this2.parent.element.querySelector(selector);
 
         if (button) {
           var buttonClone = button.cloneNode(true);
@@ -1607,7 +1649,7 @@ function (_HeaderBase) {
         utils_addClass(wrapper, 'novablocks-header__buttons-menu wp-block-group__inner-container');
         wrapper.appendChild(navigationBlock);
         navigationBlock.appendChild(this.buttonMenu);
-        this.parent.appendChild(wrapper);
+        this.parent.element.appendChild(wrapper);
       }
     }
   }, {
@@ -1615,7 +1657,7 @@ function (_HeaderBase) {
     value: function updateStickyStyles() {
       header_base.prototype.updateStickyStyles.call(this);
       this.applyStickyStyles(this.menuToggle.element);
-      utils_toggleClasses(this.element, this.shouldBeSticky, this.initialColorClasses, this.transparentColorClasses);
+      this.colors.toggleColors(!this.shouldBeSticky);
       this.updateToggleClasses();
     }
   }, {
@@ -1642,17 +1684,18 @@ function (_HeaderBase) {
   }, {
     key: "updateToggleClasses",
     value: function updateToggleClasses() {
-      var navigationIsOpen = this.navigationIsOpen,
-          shouldBeSticky = this.shouldBeSticky,
-          initialColorClasses = this.initialColorClasses,
-          transparentColorClasses = this.transparentColorClasses;
-      var isTransparent = navigationIsOpen || !shouldBeSticky;
-      utils_toggleClasses(this.menuToggle.element, isTransparent, transparentColorClasses, initialColorClasses);
+      if (this.navigationIsOpen) {
+        utils_removeClass(this.menuToggle.element, "".concat(this.menuToggleColors.transparentColorClasses, " ").concat(this.menuToggleColors.initialColorClasses));
+        utils_addClass(this.menuToggle.element, this.headerClasses);
+      } else {
+        utils_removeClass(this.menuToggle.element, this.headerClasses);
+        this.menuToggleColors.toggleColors(this.shouldBeSticky);
+      }
     }
   }, {
     key: "copyElementFromParent",
     value: function copyElementFromParent(selector) {
-      var element = this.parent.querySelector(selector);
+      var element = this.parent.element.querySelector(selector);
       var elementClone = element === null || element === void 0 ? void 0 : element.cloneNode(true);
 
       if (elementClone) {
@@ -1666,6 +1709,8 @@ function (_HeaderBase) {
 
 /* harmony default export */ var header_mobile = (header_mobile_HeaderMobile);
 // CONCATENATED MODULE: ./src/js/components/header/index.js
+
+
 
 
 
@@ -1691,16 +1736,20 @@ function (_HeaderBase) {
     if (!element) return possibleConstructorReturn_default()(_this);
     _this.onUpdate = options.onUpdate;
     _this.element = element;
-    _this.mobileHeader = new header_mobile(_this.element);
+    _this.rows = _this.getHeaderRows();
+    _this.mobileHeader = new header_mobile(assertThisInitialized_default()(_this));
     _this.secondaryHeader = _this.getSecondaryHeader();
 
     _this.initialize();
 
-    if (_this.secondaryHeader) {
-      utils_addClass(_this.secondaryHeader, 'novablocks-header--ready'); //			addClass( this.secondaryHeader, this.initialColorClasses );
-    }
+    _this.toggleRowsColors(true);
 
-    _this.onResize();
+    utils_addClass(_this.element, 'novablocks-header--transparent');
+
+    if (_this.secondaryHeader) {
+      utils_addClass(_this.secondaryHeader, 'novablocks-header--ready');
+    } //		this.onResize();
+
 
     return _this;
   }
@@ -1709,17 +1758,11 @@ function (_HeaderBase) {
     key: "initialize",
     value: function initialize() {
       header_base.prototype.initialize.call(this);
+      this.rows.forEach(function (row) {
+        row.initializeColors();
+      });
       this.timeline = this.getIntroTimeline();
       this.timeline.play();
-    }
-  }, {
-    key: "updateStickyStyles",
-    value: function updateStickyStyles() {
-      header_base.prototype.updateStickyStyles.call(this);
-
-      if (hasClass(element, 'novablocks-header--main')) {
-        toggleClasses(this.element, this.shouldBeSticky, this.initialColorClasses, this.transparentColorClasses);
-      }
     }
   }, {
     key: "render",
@@ -1757,6 +1800,26 @@ function (_HeaderBase) {
       }
 
       return null;
+    }
+  }, {
+    key: "getHeaderRows",
+    value: function getHeaderRows() {
+      var rows = this.element.querySelectorAll('.novablocks-header-row');
+
+      if (rows) {
+        return Array.from(rows).map(function (element) {
+          return new header_colors(element);
+        });
+      }
+
+      return [];
+    }
+  }, {
+    key: "toggleRowsColors",
+    value: function toggleRowsColors(isTransparent) {
+      this.rows.forEach(function (row) {
+        row.toggleColors(isTransparent);
+      });
     }
   }, {
     key: "updateStickyStyles",
@@ -2359,7 +2422,7 @@ function () {
       $firstBlockFg.css('paddingTop', Math.max(firstBlockFgPaddingTop, headerHeight + promoBarHeight));
       var $firstNovaBlock = $firstBlock.children('.novablocks-block');
       var firstBlockPaddingTop = parseInt($firstNovaBlock.css('paddingTop', '').css('paddingTop'), 0);
-      $firstBlock.css('paddingTop', firstBlockPaddingTop + headerHeight + promoBarHeight);
+      $firstNovaBlock.css('paddingTop', firstBlockPaddingTop + headerHeight + promoBarHeight);
     }
   }]);
 

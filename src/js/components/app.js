@@ -132,7 +132,6 @@ export default class App {
 
 		const $firstNovaBlock = $firstBlock.children( '.novablocks-block' );
 		const firstBlockPaddingTop = parseInt( $firstNovaBlock.css( 'paddingTop', '' ).css( 'paddingTop' ), 0 );
-
-		$firstBlock.css( 'paddingTop', firstBlockPaddingTop + headerHeight + promoBarHeight );
+		$firstNovaBlock.css( 'paddingTop', firstBlockPaddingTop + headerHeight + promoBarHeight );
 	}
 }

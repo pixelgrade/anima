@@ -1,6 +1,7 @@
 import GlobalService from "../globalService";
 import mqService from '../mqService';
-import HeaderBase from './header-base'
+import HeaderBase from './header-base';
+import HeaderColors from './header-colors';
 import HeaderMobile from './header-mobile';
 
 import { addClass, hasClass, setAndResetElementStyles, getColorSetClasses } from '../../utils';
@@ -15,33 +16,32 @@ class Header extends HeaderBase {
 		this.onUpdate = options.onUpdate;
 
 		this.element = element;
+		this.rows = this.getHeaderRows();
 
-		this.mobileHeader = new HeaderMobile( this.element );
+		this.mobileHeader = new HeaderMobile( this );
 		this.secondaryHeader = this.getSecondaryHeader();
 
 		this.initialize();
+		this.toggleRowsColors( true );
+
+		addClass( this.element, 'novablocks-header--transparent' );
 
 		if ( this.secondaryHeader ) {
 			addClass( this.secondaryHeader, 'novablocks-header--ready' );
-//			addClass( this.secondaryHeader, this.initialColorClasses );
 		}
 
-		this.onResize();
+//		this.onResize();
 	}
 
 	initialize() {
 		HeaderBase.prototype.initialize.call( this );
 
+		this.rows.forEach( row => {
+			row.initializeColors();
+		} )
+
 		this.timeline = this.getIntroTimeline();
 		this.timeline.play();
-	}
-
-	updateStickyStyles() {
-		HeaderBase.prototype.updateStickyStyles.call( this );
-
-		if ( hasClass( element, 'novablocks-header--main' ) ) {
-			toggleClasses( this.element, this.shouldBeSticky, this.initialColorClasses, this.transparentColorClasses );
-		}
 	}
 
 	render( forceUpdate ) {
@@ -74,6 +74,24 @@ class Header extends HeaderBase {
 		}
 
 		return null;
+	}
+
+	getHeaderRows() {
+		const rows = this.element.querySelectorAll( '.novablocks-header-row' );
+
+		if ( rows ) {
+			return Array.from( rows ).map( element => {
+				return new HeaderColors( element );
+			} )
+		}
+
+		return [];
+	}
+
+	toggleRowsColors( isTransparent ) {
+		this.rows.forEach( row => {
+			row.toggleColors( isTransparent );
+		} );
 	}
 
 	updateStickyStyles() {

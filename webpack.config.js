@@ -46,6 +46,7 @@ module.exports = {
     filename: '[name].js'
   },
   externals: {
+    react: 'React',
     jquery: 'jQuery'
   },
   watch: 'production' !== process.env.NODE_ENV,

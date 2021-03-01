@@ -1,8 +1,9 @@
 import globalService from '../globalService';
 import HeaderBase from './header-base';
+import HeaderColors from './header-colors';
 import MenuToggle from './menu-toggle';
 
-import { addClass, toggleClasses } from '../../utils';
+import { addClass, removeClass, getColorSetClasses, toggleClasses } from '../../utils';
 
 class HeaderMobile extends HeaderBase {
 
@@ -10,7 +11,8 @@ class HeaderMobile extends HeaderBase {
 		super();
 
 		this.parent = parent;
-		this.parentContainer = parent.querySelector( '.novablocks-header__inner-container' );
+		this.parentContainer = parent.element.querySelector( '.novablocks-header__inner-container' );
+
 		this.initialize();
 		this.onResize();
 	}
@@ -18,6 +20,15 @@ class HeaderMobile extends HeaderBase {
 	initialize() {
 		this.initializeMenuToggle();
 		this.createMobileHeader();
+
+		const logoRow = this.parent.rows.find( row => {
+			return row.element.querySelector( '.site-logo' );
+		} );
+
+		this.headerClasses = getColorSetClasses( this.parent.element ).join( ' ' );
+
+		this.colors = new HeaderColors( this.element, logoRow?.element );
+		this.menuToggleColors = new HeaderColors( this.menuToggle.element, logoRow?.element );
 
 		HeaderBase.prototype.initialize.call( this );
 	}
@@ -56,7 +67,7 @@ class HeaderMobile extends HeaderBase {
 		];
 
 		buttonSelectors.forEach( selector => {
-			const button = this.parent.querySelector( selector );
+			const button = this.parent.element.querySelector( selector );
 
 			if ( button ) {
 				const buttonClone = button.cloneNode( true );
@@ -75,15 +86,14 @@ class HeaderMobile extends HeaderBase {
 
 			wrapper.appendChild( navigationBlock );
 			navigationBlock.appendChild( this.buttonMenu );
-			this.parent.appendChild( wrapper );
+			this.parent.element.appendChild( wrapper );
 		}
 	}
 
 	updateStickyStyles() {
 		HeaderBase.prototype.updateStickyStyles.call( this );
 		this.applyStickyStyles( this.menuToggle.element );
-
-		toggleClasses( this.element, this.shouldBeSticky, this.initialColorClasses, this.transparentColorClasses );
+		this.colors.toggleColors( ! this.shouldBeSticky );
 		this.updateToggleClasses();
 	}
 
@@ -106,14 +116,19 @@ class HeaderMobile extends HeaderBase {
 	}
 
 	updateToggleClasses() {
-		const { navigationIsOpen, shouldBeSticky, initialColorClasses, transparentColorClasses } = this;
-		const isTransparent = navigationIsOpen || ! shouldBeSticky;
 
-		toggleClasses( this.menuToggle.element, isTransparent, transparentColorClasses, initialColorClasses );
+		if ( this.navigationIsOpen ) {
+			removeClass( this.menuToggle.element, `${ this.menuToggleColors.transparentColorClasses } ${ this.menuToggleColors.initialColorClasses }` );
+			addClass( this.menuToggle.element, this.headerClasses );
+		} else {
+			removeClass( this.menuToggle.element, this.headerClasses );
+			this.menuToggleColors.toggleColors( this.shouldBeSticky );
+		}
+
 	}
 
 	copyElementFromParent( selector ) {
-		const element = this.parent.querySelector( selector );
+		const element = this.parent.element.querySelector( selector );
 		const elementClone = element?.cloneNode( true );
 
 		if ( elementClone ) {

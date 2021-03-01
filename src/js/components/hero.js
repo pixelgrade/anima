@@ -42,7 +42,7 @@ export default class Hero {
 
 		}
 
-		const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+		const mediaQuery = window.matchMedia( '(prefers-reduced-motion: reduce)' );
 
 		mediaQuery.addListener( () => {
 			this.reduceMotion = mediaQuery.matches;
@@ -73,6 +73,7 @@ export default class Hero {
 		const { scrollY } = GlobalService.getProps();
 
 		this.box = this.element.getBoundingClientRect();
+
 		this.view = {
 			left: this.box.left,
 			top: this.box.top + scrollY,
