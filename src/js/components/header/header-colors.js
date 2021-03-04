@@ -14,8 +14,8 @@ class HeaderColors {
 
 	getFirstBlockElement() {
 		const content = document.querySelector( '.site-main .entry-content' );
-		const firstBlock = getFirstChild( content );
-		const novablocksBlock = firstBlock.querySelector( '.novablocks-block' );
+		const firstBlock = content ? getFirstChild( content ) : null;
+		const novablocksBlock = firstBlock ? firstBlock.querySelector( '.novablocks-block' ) : null;
 
 		return novablocksBlock || firstBlock;
 	}

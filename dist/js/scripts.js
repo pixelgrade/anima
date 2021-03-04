@@ -1482,8 +1482,8 @@ function () {
     key: "getFirstBlockElement",
     value: function getFirstBlockElement() {
       var content = document.querySelector('.site-main .entry-content');
-      var firstBlock = getFirstChild(content);
-      var novablocksBlock = firstBlock.querySelector('.novablocks-block');
+      var firstBlock = content ? getFirstChild(content) : null;
+      var novablocksBlock = firstBlock ? firstBlock.querySelector('.novablocks-block') : null;
       return novablocksBlock || firstBlock;
     }
   }, {
