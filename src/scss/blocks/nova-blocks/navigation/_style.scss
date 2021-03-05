@@ -1,4 +1,48 @@
-.wp-block-novablocks-navigation {
+@import "mixins";
+
+.novablocks-navigation {
+    --theme-button-y-padding: .25em;
+    --theme-button-x-padding: 1em;
+
+    --theme-button-text-color: var(--sm-current-bg-color);
+    --theme-button-background-color: var(--sm-current-fg1-color);
+    --theme-button-border-color: var(--sm-current-fg1-color);
+
+    --theme-button-hover-text-color: var(--sm-current-fg1-color);
+    --theme-button-hover-background-color: transparent;
+    --theme-button-hover-border-color: var(--sm-current-fg1-color);
+
+    > ul.menu,
+    > .menu > ul {
+
+        > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) {
+            @include navigation-item-with-hover-animation;
+        }
+
+        > li[class*="current"]:not(.menu-item-home) {
+            @include navigation-item-with-active-state;
+        }
+    }
+}
+
+.novablocks-navigation {
+
+    ul.menu,
+    .menu > ul {
+
+        // External Link
+        > .is-external-link {
+            @include navigation-item-is-external-link;
+        }
+
+        // CTA Button
+        > .is-cta-button {
+            @include navigation-item-is-cta-button;
+        }
+    }
+}
+
+.novablocks-navigation {
 
     @include above(lap) {
         --font-size: 18;

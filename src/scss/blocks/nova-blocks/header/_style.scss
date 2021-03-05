@@ -2,19 +2,6 @@
 @import "mobile";
 @import "menu-toggle";
 
-.novablocks-header {
-    // Load default settings for buttons
-    --theme-button-padding: .25em 1em;
-
-    --theme-button-text-color: var(--sm-dark-primary);
-    --theme-button-background-color: var(--sm-light-primary);
-    --theme-button-border-color: var(--sm-light-primary);
-
-    --theme-button-hover-text-color: var(--sm-light-primary);
-    --theme-button-hover-background-color: transparent;
-    --theme-button-hover-border-color: var(--sm-light-primary);
-}
-
 .novablocks-header--main:not(.novablocks-header--sticky) {
 
     @include above(lap) {
@@ -60,16 +47,6 @@
     @include above( lap ) {
         display: none;
     }
-}
-
-// External Link
-.is-external-link {
-    @include header-menu-item-is-external-link;
-}
-
-// CTA Button
-.is-cta-button {
-    @include header-menu-item-is-cta-button;
 }
 
 .menu-item-label {

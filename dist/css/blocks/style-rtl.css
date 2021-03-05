@@ -238,15 +238,6 @@
   .c-menu-toggle__checkbox:checked ~ .c-menu-toggle .c-menu-toggle__slice--bottom {
     transform: rotate(45deg); }
 
-.novablocks-header {
-  --theme-button-padding: .25em 1em;
-  --theme-button-text-color: var(--sm-dark-primary);
-  --theme-button-background-color: var(--sm-light-primary);
-  --theme-button-border-color: var(--sm-light-primary);
-  --theme-button-hover-text-color: var(--sm-light-primary);
-  --theme-button-hover-background-color: transparent;
-  --theme-button-hover-border-color: var(--sm-light-primary); }
-
 @media only screen and (min-width: 1000px) {
   .novablocks-header--main:not(.novablocks-header--sticky) {
     position: absolute !important;
@@ -280,78 +271,6 @@
   @media only screen and (min-width: 1000px) {
     .novablocks-header__buttons-menu {
       display: none; } }
-
-.is-external-link {
-  position: relative; }
-  .is-external-link a:after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 0;
-    margin-right: 5px;
-    border-right: 5px solid transparent;
-    border-left: 5px solid transparent;
-    border-bottom: 5px solid currentColor;
-    transform: rotate(-45deg);
-    left: auto;
-    opacity: .5; }
-
-.is-cta-button {
-  display: flex;
-  align-items: center; }
-  .is-cta-button a {
-    padding: var(--theme-button-padding);
-    border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
-    border-radius: var(--theme-button-border-radius);
-    background-color: var(--current-button-background-color);
-    color: var(--current-button-text-color);
-    --font-size: var(--theme-button-font-size);
-    font-size: var(--final-font-size);
-    --current-font-family: var(--theme-button-font-family);
-    --current-font-weight: var(--theme-button-font-weight);
-    --current-font-style: var(--theme-button-font-style);
-    --current-line-height: var(--theme-button-line-height);
-    --current-letter-spacing: var(--theme-button-letter-spacing);
-    --current-text-transform: var(--theme-button-text-transform);
-    background-color: transparent;
-    transform: translateZ(0);
-    will-change: transform;
-    backface-visibility: hidden;
-    overflow: hidden;
-    transition: var(--theme-button-transition);
-    --current-button-background-color: var(--theme-button-background-color);
-    --current-button-border-color: var(--theme-button-border-color);
-    --current-button-text-color: var(--theme-button-text-color);
-    --current-button-transition: var(--theme-button-transition);
-    margin-bottom: 0; }
-    .is-cta-button a:before {
-      content: '';
-      position: absolute;
-      top: calc( -1 * var(--theme-button-border-width));
-      left: calc( -1 * var(--theme-button-border-width));
-      bottom: calc( -1 * var(--theme-button-border-width));
-      right: calc( -1 * var(--theme-button-border-width));
-      z-index: -1;
-      will-change: transform;
-      -webkit-backface-visibility: hidden;
-      transition: var(--current-button-transition);
-      transition-property: transform; }
-    .is-cta-button a:before {
-      transform: scale3d(1, 1, 1);
-      transform-origin: left;
-      background-color: var(--theme-button-background-color); }
-    .is-cta-button a:not([disabled]):hover:before {
-      transform: scale3d(0, 1, 1); }
-    @media not screen and (min-width: 1000px) {
-      .is-cta-button a {
-        width: 100%;
-        margin: .75em 0;
-        text-align: center; } }
-    .is-cta-button a:hover {
-      --current-button-background-color: var(--theme-button-hover-background-color);
-      --current-button-border-color: var(--theme-button-hover-border-color);
-      --current-button-text-color: var(--theme-button-hover-text-color);
-      --current-button-transition: var(--theme-button-hover-transition); }
 
 .menu-item-label {
   background-color: var(--sm-current-accent-color);
@@ -490,30 +409,154 @@
     height: 100%;
     min-height: 400px; }
 
+.novablocks-navigation {
+  --theme-button-y-padding: .25em;
+  --theme-button-x-padding: 1em;
+  --theme-button-text-color: var(--sm-current-bg-color);
+  --theme-button-background-color: var(--sm-current-fg1-color);
+  --theme-button-border-color: var(--sm-current-fg1-color);
+  --theme-button-hover-text-color: var(--sm-current-fg1-color);
+  --theme-button-hover-background-color: transparent;
+  --theme-button-hover-border-color: var(--sm-current-fg1-color); }
+  .novablocks-navigation > ul.menu > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only),
+  .novablocks-navigation > .menu > ul > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) {
+    position: relative; }
+    .novablocks-navigation > ul.menu > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) > a:before,
+    .novablocks-navigation > .menu > ul > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) > a:before {
+      content: '';
+      position: absolute;
+      bottom: var(--novablocks-navigation-item-bottom-margin);
+      width: 100%;
+      height: 3px;
+      background: currentColor;
+      transform: scale3d(0, 1, 1);
+      transform-origin: left;
+      transition: var(--novablocks-transition);
+      transition-property: transform;
+      will-change: transform;
+      -webkit-backface-visibility: hidden; }
+    .novablocks-navigation > ul.menu > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) > a:hover:before,
+    .novablocks-navigation > .menu > ul > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) > a:hover:before {
+      transform: scale3d(1, 1, 1);
+      transform-origin: right; }
+    .novablocks-navigation > ul.menu > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only).menu-item-has-children > a:before,
+    .novablocks-navigation > .menu > ul > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only).menu-item-has-children > a:before {
+      width: calc(100% - 1.25em);
+      left: 1.25em; }
+  .novablocks-navigation > ul.menu > li[class*="current"]:not(.menu-item-home) > a:before,
+  .novablocks-navigation > .menu > ul > li[class*="current"]:not(.menu-item-home) > a:before {
+    transform: scale3d(1, 1, 1);
+    transform-origin: right; }
+  .novablocks-navigation > ul.menu > li[class*="current"]:not(.menu-item-home) > a:hover:before,
+  .novablocks-navigation > .menu > ul > li[class*="current"]:not(.menu-item-home) > a:hover:before {
+    transform: scale3d(0, 1, 1);
+    transform-origin: left; }
+
+.novablocks-navigation ul.menu > .is-external-link,
+.novablocks-navigation .menu > ul > .is-external-link {
+  position: relative; }
+  .novablocks-navigation ul.menu > .is-external-link > a:after,
+  .novablocks-navigation .menu > ul > .is-external-link > a:after {
+    content: "";
+    position: absolute;
+    left: auto;
+    width: 0;
+    height: 0;
+    margin-right: 5px;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    border-bottom: 5px solid currentColor;
+    transform: rotate(-45deg);
+    opacity: .5; }
+
+.novablocks-navigation ul.menu > .is-cta-button,
+.novablocks-navigation .menu > ul > .is-cta-button {
+  display: flex;
+  align-items: center; }
+  .novablocks-navigation ul.menu > .is-cta-button > a,
+  .novablocks-navigation .menu > ul > .is-cta-button > a {
+    padding: var(--theme-button-padding);
+    border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
+    border-radius: var(--theme-button-border-radius);
+    background-color: var(--current-button-background-color);
+    color: var(--current-button-text-color);
+    --font-size: var(--theme-button-font-size);
+    font-size: var(--final-font-size);
+    --current-font-family: var(--theme-button-font-family);
+    --current-font-weight: var(--theme-button-font-weight);
+    --current-font-style: var(--theme-button-font-style);
+    --current-line-height: var(--theme-button-line-height);
+    --current-letter-spacing: var(--theme-button-letter-spacing);
+    --current-text-transform: var(--theme-button-text-transform);
+    background-color: transparent;
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+    overflow: hidden;
+    transition: var(--theme-button-transition);
+    --current-button-background-color: var(--theme-button-background-color);
+    --current-button-border-color: var(--theme-button-border-color);
+    --current-button-text-color: var(--theme-button-text-color);
+    --current-button-transition: var(--theme-button-transition);
+    margin-bottom: 0; }
+    .novablocks-navigation ul.menu > .is-cta-button > a:before,
+    .novablocks-navigation .menu > ul > .is-cta-button > a:before {
+      content: '';
+      position: absolute;
+      top: calc( -1 * var(--theme-button-border-width));
+      left: calc( -1 * var(--theme-button-border-width));
+      bottom: calc( -1 * var(--theme-button-border-width));
+      right: calc( -1 * var(--theme-button-border-width));
+      z-index: -1;
+      will-change: transform;
+      -webkit-backface-visibility: hidden;
+      transition: var(--current-button-transition);
+      transition-property: transform; }
+    .novablocks-navigation ul.menu > .is-cta-button > a:before,
+    .novablocks-navigation .menu > ul > .is-cta-button > a:before {
+      transform: scale3d(1, 1, 1);
+      transform-origin: left;
+      background-color: var(--theme-button-background-color); }
+    .novablocks-navigation ul.menu > .is-cta-button > a:not([disabled]):hover:before,
+    .novablocks-navigation .menu > ul > .is-cta-button > a:not([disabled]):hover:before {
+      transform: scale3d(0, 1, 1); }
+    @media not screen and (min-width: 1000px) {
+      .novablocks-navigation ul.menu > .is-cta-button > a,
+      .novablocks-navigation .menu > ul > .is-cta-button > a {
+        width: 100%;
+        margin: .75em 0;
+        text-align: center; } }
+    .novablocks-navigation ul.menu > .is-cta-button > a:hover,
+    .novablocks-navigation .menu > ul > .is-cta-button > a:hover {
+      --current-button-background-color: var(--theme-button-hover-background-color);
+      --current-button-border-color: var(--theme-button-hover-border-color);
+      --current-button-text-color: var(--theme-button-hover-text-color);
+      --current-button-transition: var(--theme-button-hover-transition); }
+
 @media only screen and (min-width: 1000px) {
-  .wp-block-novablocks-navigation {
+  .novablocks-navigation {
     --font-size: 18;
     --novablocks-navigation-item-bottom-margin: .5em; }
-    .wp-block-novablocks-navigation ul.menu a,
-    .wp-block-novablocks-navigation .menu > ul a {
+    .novablocks-navigation ul.menu a,
+    .novablocks-navigation .menu > ul a {
       display: block;
       color: inherit;
       text-decoration: none; }
-    .wp-block-novablocks-navigation ul.menu .customize-partial-edit-shortcut + > li:not(:first-child),
-    .wp-block-novablocks-navigation .menu > ul .customize-partial-edit-shortcut + > li:not(:first-child) {
+    .novablocks-navigation ul.menu .customize-partial-edit-shortcut + > li:not(:first-child),
+    .novablocks-navigation .menu > ul .customize-partial-edit-shortcut + > li:not(:first-child) {
       margin-right: 0; }
-    .wp-block-novablocks-navigation ul.menu > li > a,
-    .wp-block-novablocks-navigation .menu > ul > li > a {
+    .novablocks-navigation ul.menu > li > a,
+    .novablocks-navigation .menu > ul > li > a {
       padding-bottom: calc( var(--novablocks-navigation-item-padding-y) - var(--novablocks-navigation-item-bottom-margin));
       margin-bottom: var(--novablocks-navigation-item-bottom-margin); }
-    .wp-block-novablocks-navigation ul.menu li:hover > a,
-    .wp-block-novablocks-navigation .menu > ul li:hover > a {
+    .novablocks-navigation ul.menu li:hover > a,
+    .novablocks-navigation .menu > ul li:hover > a {
       border-color: currentColor; }
-      .wp-block-novablocks-navigation ul.menu li:hover > a:after,
-      .wp-block-novablocks-navigation .menu > ul li:hover > a:after {
+      .novablocks-navigation ul.menu li:hover > a:after,
+      .novablocks-navigation .menu > ul li:hover > a:after {
         opacity: 1; }
-    .wp-block-novablocks-navigation .sub-menu li a,
-    .wp-block-novablocks-navigation .children li a {
+    .novablocks-navigation .sub-menu li a,
+    .novablocks-navigation .children li a {
       border: 0;
       padding-right: 1.25em;
       padding-left: 1.25em; } }
@@ -722,7 +765,8 @@
   padding: calc( var(--block-spacing) / 2) calc( var(--block-spacing) * 3 / 4); }
 
 .novablocks-sharing__group--copy-link .novablocks-sharing__link {
-  background-color: var(--sm-color-primary); }
+  background-color: var(--sm-current-accent-color);
+  color: var(--sm-current-bg-color); }
 
 .novablocks-sharing__copy-input[class],
 .novablocks-sharing__list[class] {
