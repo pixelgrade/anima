@@ -194,6 +194,8 @@ function rosa2_scripts() {
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
 	global $wp_version;
+	global $post;
+
 	$is_old_wp_version = version_compare( $wp_version, '5.5', '<' );
 	$is_gutenberg_plugin_active = defined( 'GUTENBERG_VERSION' );
 
@@ -229,7 +231,11 @@ function rosa2_scripts() {
 	wp_register_script( 'gsap', '//pxgcdn.com/js/gsap/2.1.3/TweenMax' . $suffix . '.js', array( 'wp-mediaelement' ), null, true );
 	wp_enqueue_script( 'rosa2-app', get_template_directory_uri() . '/dist/js/scripts' . $suffix . '.js', array( 'jquery', 'gsap', 'gsap-split-text', 'hoverIntent', 'imagesloaded' ), $theme->get( 'Version' ), true );
 
-	if ( is_singular() && comments_open() ) {
+
+	// Load Conversation CSS only when we need it:
+    // 1. Comments are open.
+    // 2. When there are comments on a post and the conversation has been closed.
+	if ( is_singular() && ( comments_open() || ! comments_open() && get_comments_number($post) > 0 ) ) {
 
 		wp_enqueue_style('rosa2-novablocks-conversations');
 
