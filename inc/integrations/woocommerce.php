@@ -156,7 +156,7 @@ function rosa2_woocommerce_setup_hooks() {
 	add_filter( 'product_cat_class', 'rosa2_product_category_classes', 10, 1);
 
     // Change loop start
-	add_filter( 'woocommerce_product_loop_start', 'rosa2_woocommerce_loop_start', 10, 1 );
+	add_filter( 'woocommerce_product_loop_start', 'rosa2_woocommerce_loop_start', 9, 1 );
 
     // Change loop end
 	add_filter( 'woocommerce_product_loop_end', 'rosa2_woocommerce_loop_end', 10, 1 );
