@@ -1550,7 +1550,7 @@ table {
     width: 100vw;
     color: var(--sm-light-primary);
     background: transparent; }
-    .site-header:before, .site-header__content:before {
+    .site-header:before {
       content: '';
       position: absolute;
       left: 0;
@@ -3620,7 +3620,8 @@ ul.menu,
     grid-template-columns: 1fr auto auto; }
   .site-header__wrapper {
     grid-column: 1/4;
-    grid-row: 1; }
+    grid-row: 1;
+    overflow-y: auto; }
     .site-header__wrapper .is-color-scheme-switcher-button {
       display: none; }
   .scheme-switcher__wrapper {
