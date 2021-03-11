@@ -128,7 +128,7 @@
   });
   $(function () {
     var $body = $(document.body).not('.woocommerce-cart');
-    var $cartMenuItems = $('.site-header__menu .menu > .menu-item--cart');
+    var $cartMenuItems = $('.menu-item--cart');
     initializeCartMenuItems($cartMenuItems);
 
     if (typeof wp.customize !== "undefined" && typeof wp.customize.selectiveRefresh !== "undefined") {
@@ -140,7 +140,9 @@
     }
 
     function initializeCartMenuItems($cartMenuItems) {
+      console.log('initialize cart menu items');
       $cartMenuItems.each(function (i, obj) {
+        console.log(obj);
         var $cartMenuItem = $(obj);
         var $cartMenuItemLink = $cartMenuItem.children('a');
         var cartMenuItemText = $cartMenuItemLink.text();
