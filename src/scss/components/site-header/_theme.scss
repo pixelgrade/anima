@@ -2,7 +2,9 @@ $site-header-transition-speed: .3s !default;
 
 @media only screen and (min-width: 1000px) {
 
-    .site-header {
+    .site-header--main,
+    // Temporary fix for users that are not using Nova Blocks 1.9.0
+    .site-header:not(.site-header--main):not(.site-header--secondary) {
         top: 0;
         right: 0;
         left: 0;
@@ -16,6 +18,18 @@ $site-header-transition-speed: .3s !default;
 
         will-change: transform;
         pointer-events: none;
+    
+        .site-header__row {
+        
+            &--logo {
+                padding-top: var(--theme-spacing-medium);
+                padding-bottom: var(--theme-spacing-medium);
+            }
+            
+            &--secondary {
+                margin-top: var(--theme-spacing-default);
+            }
+        }
     }
 
     .site-header__wrapper {
@@ -29,8 +43,9 @@ $site-header-transition-speed: .3s !default;
         transition-property: min-height, color, background-color;
         pointer-events: auto;
 
-        .has-site-header-fixed .site-header--scrolled & {
-            min-height: calc( var(--theme-header-height) * var(--theme-header-scrolled-ratio, 0.75) )
+        .has-site-header-fixed .site-header--scrolled &,
+        .site-header--main[data-sticky="true"].site-header--sticky & {
+            min-height: calc( var(--theme-header-height) * var(--theme-header-scrolled-ratio, 0.75) );
         }
     }
 
@@ -43,6 +58,12 @@ $site-header-transition-speed: .3s !default;
     // and avoiding altering its height
     .site-header__wrapper {
        @include header-shadow;
+        
+        .site-header--sticky & {
+            &:after {
+                opacity: 0.1;
+            }
+        }
     }
 
     .has-site-header-transparent {
@@ -59,6 +80,8 @@ $site-header-transition-speed: .3s !default;
             }
         }
     }
+    
+    
 }
 
 .site-header__inner-container[class] {
@@ -69,17 +92,16 @@ $site-header-transition-speed: .3s !default;
 // Fixed site header styles
 @media only screen and (min-width: 1000px) {
 
-    .site-header:not(.site-header--ready) {
+    .site-header--main:not(.site-header--ready) {
         opacity: 0;
     }
 
-    .has-site-header-fixed .site-header:not(.site-header--ready),
-    body:not(.has-site-header-fixed) .site-header {
+    .has-site-header-fixed .site-header--main:not(.site-header--ready),
+    body:not(.has-site-header-fixed) .site-header--main,
+        // Temporary fix for users that are not using Nova Blocks 1.9.0
+    body:not(.has-site-header-fixed) .site-header:not(.site-header--main):not(.site-header--secondary),
+    .has-site-header-fixed .site-header:not(.site-header--main):not(.site-header--secondary) {
         position: absolute;
-    }
-
-    .has-site-header-fixed .site-header--fixed.site-header--ready {
-        position: fixed;
     }
 }
 
@@ -90,8 +112,9 @@ body.has-site-header-transparent  {
     @include above(lap) {
 
         &.has-no-spacing-top {
-            &.has-site-header-fixed .site-header:not(.site-header--scrolled) .site-header__wrapper,
-            &:not(.has-site-header-fixed) .site-header .site-header__wrapper {
+            //&.has-site-header-fixed .site-header:not(.site-header--scrolled) .site-header__wrapper,
+            //&:not(.has-site-header-fixed) .site-header .site-header__wrapper,
+            .site-header:not([class*="site-header--sticky"]) {
                 color: var(--sm-light-primary);
 
                 .c-logo__inverted {
@@ -114,5 +137,13 @@ body.has-site-header-transparent  {
                 opacity: 0.1;
             }
         }
+    }
+}
+
+.site-header__row {
+    --block-top-spacing: 0;
+    
+    &--secondary {
+    
     }
 }

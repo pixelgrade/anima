@@ -32,6 +32,7 @@ require_once trailingslashit( get_template_directory() ) . 'inc/integrations/jet
 require_once trailingslashit( get_template_directory() ) . 'inc/integrations/pixelgrade-care.php';
 
 /**
- * Admin Dashboard logic.
+ * Load WooCommerce integration for this theme
+ * This has to be loaded before inc/admin/admin.php
  */
-require_once trailingslashit( get_template_directory() ) . 'inc/admin/admin.php'; // phpcs:ignore
+require_once trailingslashit( get_template_directory() ) . 'inc/integrations/woocommerce.php';

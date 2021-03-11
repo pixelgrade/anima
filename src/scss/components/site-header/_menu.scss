@@ -12,7 +12,8 @@
     --theme-button-hover-border-color: var(--sm-light-primary);
 
     &--scrolled,
-    body:not(.has-no-spacing-top) & {
+    body:not(.has-no-spacing-top) &,
+    &--sticky {
        @include above(lap) {
            --theme-button-text-color: var(--current-light-primary);
            --theme-button-background-color: var(--current-dark-primary);
@@ -28,14 +29,16 @@
     .page_item_has_children {
 
         &[class] > a {
+            
+            display: block;
 
             &:after {
                 content: "";
                 position: static;
 
                 display: inline-block;
-                width: 0.75em;
-                height: 0.75em;
+                width: var(--dropdown-icon-size);
+                height: var(--dropdown-icon-size);
     
                 mask: url($arrow-down-svg-path) no-repeat 50% 50%;
                 mask-size: contain;
@@ -94,18 +97,7 @@
         }
     }
 
-    .menu-item {
-
-        position: relative;
-
-        &.is-external-link {
-            @include header-menu-item-is-external-link;
-        }
-
-        &.is-cta-button {
-            @include header-menu-item-is-cta-button;
-        }
-    }
+    @import 'menu-item';
 
     @media only screen and (min-width: 1000px) {
 
@@ -128,10 +120,21 @@
 
                     opacity: 0;
                 }
-
-                &:hover:after,
-                &:focus-within:after {
-                    opacity: .2;
+                
+                a {
+                    transition: color .15s $easeInOut;
+                }
+                
+                &:hover,
+                &:focus-within {
+                    
+                    &:after {
+                        opacity: .2;
+                    }
+                    
+                    > a {
+                        color: var(--current-color-primary);
+                    }
                 }
             }
         }
@@ -189,7 +192,10 @@
         .children .page_item_has_children {
 
             > a:after {
-                transform: rotate(-90deg);
+                position: absolute;
+                right: 1.25em;
+                top: 50%;
+                transform: translateY(-50%) rotate(-90deg);
             }
 
             .sub-menu,
@@ -214,17 +220,21 @@
         }
 
         .site-header__menu {
-
+            
             > ul.menu,
             > .menu > ul {
-
+    
                 > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) {
                     @include header-menu-item-with-hover-animation;
                 }
-
+    
                 > li[class*="current"]:not(.menu-item-home) {
                     @include specific(3) {
                         @include header-menu-item-with-active-state;
+            
+                        > a {
+                            color: var(--current-color-primary);
+                        }
                     }
                 }
             }
@@ -232,7 +242,10 @@
     
         .sub-menu .sub-menu[class] {
             .menu-item-has-children > a:after {
-                transform: rotate(-90deg);
+                position: absolute;
+                right: 1.25em;
+                top: 50%;
+                transform: translateY(-50%) rotate(-90deg);
             }
         }
     }

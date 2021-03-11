@@ -5,7 +5,7 @@ var gulp = require( 'gulp' ),
 	theme = 'rosa2';
 
 // -----------------------------------------------------------------------------
-// Copy plugin folder outside in a build folder
+// Copy plugin folder outside in a build folder.
 // -----------------------------------------------------------------------------
 function copyFolder() {
 	var dir = process.cwd();
@@ -31,7 +31,7 @@ copyFolder.description = 'Copy plugin production files to a build folder';
 gulp.task( 'build:copy-folder', copyFolder );
 
 // -----------------------------------------------------------------------------
-// Remove unneeded files and folders from the build folder
+// Remove unneeded files and folders from the build folder.
 // -----------------------------------------------------------------------------
 async function removeUnneededFiles() {
 	const files_to_remove = new Array();

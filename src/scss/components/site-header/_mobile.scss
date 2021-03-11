@@ -12,15 +12,18 @@
     color: var(--sm-light-primary);
     background: transparent;
 
-    &:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: var(--sm-dark-primary);
-        opacity: 0.95;
+    &,
+    &__content {
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: var(--sm-dark-primary);
+            opacity: 0.95;
+        }
     }
 
     .c-menu-toggle__checkbox ~ & {
@@ -42,10 +45,13 @@
         > a {
             display: inline-block;
             position: relative;
+            
+            width: 100%;
 
             &:after {
                 position: absolute;
                 top: 50%;
+                right: 0;
                 transform: translateY(-50%);
 
                 transition-duration: var(--theme-transition-duration-quick);
@@ -120,7 +126,7 @@
 
         position: absolute;
         top: 50%;
-        right: var(--theme-wrapper-sides-spacing);
+        right: calc(var(--theme-wrapper-sides-spacing) + .5em );
 
         transform: translateY(-50%);
 

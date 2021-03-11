@@ -68,6 +68,7 @@ if ( ! function_exists( 'rosa2_setup' ) ) {
 		register_nav_menus( array(
 			'primary'            => esc_html__( 'Primary Menu', '__theme_txtd' ),
 			'secondary'          => esc_html__( 'Secondary Menu', '__theme_txtd' ),
+			'tertiary'          => esc_html__( 'Tertiary Menu', '__theme_txtd' ),
 			'search-suggestions' => esc_html__( 'Search Suggestions', '__theme_txtd' )
 		) );
 
@@ -193,6 +194,8 @@ function rosa2_scripts() {
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
 	global $wp_version;
+	global $post;
+
 	$is_old_wp_version = version_compare( $wp_version, '5.5', '<' );
 	$is_gutenberg_plugin_active = defined( 'GUTENBERG_VERSION' );
 
@@ -204,7 +207,12 @@ function rosa2_scripts() {
 		}
 	}
 
-	wp_enqueue_style( 'rosa2-style', get_template_directory_uri() . '/style.css', array(
+    // Nova Blocks Header Block frontend.js fallback
+	if ( ! rosa2_is_using_block( 'header', true ) ) {
+		wp_enqueue_script( 'novablocks/header/frontend', get_template_directory_uri() . '/dist/nova-blocks/block-library/blocks/header/frontend' . $suffix . '.js', array(), null, true );
+    }
+
+		wp_enqueue_style( 'rosa2-style', get_template_directory_uri() . '/style.css', array(
         'rosa2-social-links',
         'rosa2-custom-properties',
 		'rosa2-theme',
@@ -223,7 +231,11 @@ function rosa2_scripts() {
 	wp_register_script( 'gsap', '//pxgcdn.com/js/gsap/2.1.3/TweenMax' . $suffix . '.js', array( 'wp-mediaelement' ), null, true );
 	wp_enqueue_script( 'rosa2-app', get_template_directory_uri() . '/dist/js/scripts' . $suffix . '.js', array( 'jquery', 'gsap', 'gsap-split-text', 'hoverIntent', 'imagesloaded' ), $theme->get( 'Version' ), true );
 
-	if ( is_singular() && comments_open() ) {
+
+	// Load Conversation CSS only when we need it:
+    // 1. Comments are open.
+    // 2. When there are comments on a post and the conversation has been closed.
+	if ( is_singular() && ( comments_open() || ! comments_open() && get_comments_number($post) > 0 ) ) {
 
 		wp_enqueue_style('rosa2-novablocks-conversations');
 
@@ -416,13 +428,21 @@ add_filter( 'wupdates_gather_ids', 'wupdates_add_id_JxLn7', 10, 1 );
 /**
  * Custom template tags for this theme.
  */
-require get_template_directory() . '/inc/template-tags.php';
+require_once trailingslashit( get_template_directory() ) . 'inc/template-tags.php';
 
 /**
  * Functions which enhance the theme by hooking into WordPress.
  */
-require get_template_directory() . '/inc/template-functions.php';
-require get_template_directory() . '/inc/extras.php';
-require get_template_directory() . '/inc/required-plugins.php';
+require_once trailingslashit( get_template_directory() ) . 'inc/template-functions.php';
+require_once trailingslashit( get_template_directory() ) . 'inc/extras.php';
+require_once trailingslashit( get_template_directory() ) . 'inc/required-plugins.php';
 
-require get_template_directory() . '/inc/integrations.php';
+/**
+ * Admin Dashboard logic.
+ */
+require_once trailingslashit( get_template_directory() ) . 'inc/admin/admin.php'; // phpcs:ignore
+
+/**
+ * Various integrations with plugins to keep things smooth and easy.
+ */
+require_once trailingslashit( get_template_directory() ) . '/inc/integrations.php';

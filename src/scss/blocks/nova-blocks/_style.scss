@@ -1,3 +1,7 @@
+.novablocks-u-content-padding {
+    padding-top: calc(var(--site-header-height) + 1.5 * var(--theme-spacing-medium));
+}
+
 .novablocks-block__content {
 
     @include above(tablet) {
@@ -28,10 +32,6 @@
     a:hover {
         color: currentColor;
     }
-}
-
-.novablocks-grid__column:first-child .novablocks-grid__area:first-child:last-child {
-    top: calc( var(--novablocks-grid-spacing) * var(--novablocks-grid-spacing-modifier, 1) + var(--site-header-height, 0) );
 }
 
 // Nova - Food Menu
