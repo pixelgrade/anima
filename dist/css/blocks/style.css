@@ -607,3 +607,15 @@
 
 .novablocks-sharing__copy-input[class][class] {
   --theme-input-box-shadow: none; }
+
+@media not screen and (min-width: 1000px) {
+  .novablocks-content > *:not(.align-full),
+  .novablocks-sidebar > *:not(.align-full),
+  .entry-content > .wp-block-group:not(.align-full) > *:not(.align-full) {
+    padding-left: var(--theme-wrapper-sides-spacing);
+    padding-right: var(--theme-wrapper-sides-spacing); } }
+
+@media not screen and (min-width: 1000px) {
+  .novablocks-layout .novablocks-layout {
+    padding-left: 0;
+    padding-right: 0; } }
