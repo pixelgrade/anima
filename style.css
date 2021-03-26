@@ -2248,9 +2248,6 @@ table {
 .entry-header {
   padding-left: var(--theme-wrapper-sides-spacing);
   padding-right: var(--theme-wrapper-sides-spacing);
-  padding-top: var(--theme-spacing-fluid-xl);
-  padding-bottom: var(--theme-spacing-fluid-xl);
-  text-align: center;
   --novablocks-element-spacing-multiplier: 0.5; }
   .entry-header > .alignfull {
     margin-left: calc( -1 * var(--theme-wrapper-sides-spacing));
@@ -2322,12 +2319,7 @@ table {
   --theme-comment-avatar-width: 56px; }
 
 .comments-area {
-  padding-left: var(--theme-wrapper-sides-spacing);
-  padding-right: var(--theme-wrapper-sides-spacing);
   clear: both; }
-  .comments-area > .alignfull {
-    margin-left: calc( -1 * var(--theme-wrapper-sides-spacing));
-    margin-right: calc( -1 * var(--theme-wrapper-sides-spacing)); }
   .comments-area > :not(:first-child) {
     --element-spacing: var(--theme-spacing-medium);
     margin-top: var(--element-spacing); }
@@ -2777,11 +2769,8 @@ span.page-numbers {
 .post-navigation {
   --current-arrow-padding: calc(.4em + 1.15em);
   --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-small);
-  padding-left: var(--theme-wrapper-sides-spacing);
-  padding-right: var(--theme-wrapper-sides-spacing);
   clear: both; }
   .post-navigation .nav-links {
-    max-width: var(--theme-content-width-normal);
     margin-left: auto;
     margin-right: auto; }
     @media only screen and (min-width: 768px) {
@@ -3600,3 +3589,6 @@ ul.menu,
     grid-column: 1/2;
     grid-row: 1;
     justify-self: flex-end; } }
+
+.novablocks-collection {
+  grid-column: var(--all-columns) !important; }
