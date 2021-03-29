@@ -25,7 +25,7 @@ get_header(); ?>
 			<?php
 			while ( have_posts() ) : the_post();
 
-				get_template_part( 'template-parts/content-single', rosa2_get_image_aspect_ratio_type(get_post_thumbnail_id( $post )) ); ?>
+				get_template_part( 'template-parts/content-single', rosa2_get_image_aspect_ratio_type( get_post_thumbnail_id( $post ), 'landscape' ) ); ?>
 
 				<?php echo do_blocks( $article_block_navigation ); ?>
 
