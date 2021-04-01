@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $page_content_block =
 	'<!-- wp:novablocks/layout {"layout":"no-sidebar"} -->' .
-	'<!-- wp:novablocks/layout-area {"className":"novablocks-content"} -->' .
+	'<!-- wp:novablocks/layout-area {"className":"novablocks-content entry-content"} -->' .
 	rosa2_get_content_markup().
 	'<!-- /wp:novablocks/layout-area -->' .
 	'<!-- /wp:novablocks/layout -->';

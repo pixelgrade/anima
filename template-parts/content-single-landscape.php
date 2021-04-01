@@ -23,7 +23,7 @@ $article_header_block =
 
 $article_content_block =
 	'<!-- wp:novablocks/layout {"layout":"sidebar-right"} -->' .
-	'<!-- wp:novablocks/layout-area {"className":"novablocks-content"} -->' .
+	'<!-- wp:novablocks/layout-area {"className":"novablocks-content entry-content alignwide"} -->' .
 	rosa2_get_thumbnail_markup().
 	rosa2_get_content_markup().
 	'<!-- /wp:novablocks/layout-area -->' .

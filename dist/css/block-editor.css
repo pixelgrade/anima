@@ -253,6 +253,13 @@
     .editor-styles-wrapper [class*="__inner-container"] > .alignfull {
       margin-left: calc( -1 * var(--theme-wrapper-sides-spacing));
       margin-right: calc( -1 * var(--theme-wrapper-sides-spacing)); }
+      .editor-styles-wrapper [class*="__inner-container"] > .alignfull.break-right {
+        margin-right: 0; }
+      .editor-styles-wrapper [class*="__inner-container"] > .alignfull.break-left {
+        margin-left: 0; }
+      .editor-styles-wrapper [class*="__inner-container"] > .alignfull.break-left.break-right {
+        margin-left: 0;
+        margin-right: 0; }
   .editor-styles-wrapper[class] {
     /* Iframes */
     /* Lists */

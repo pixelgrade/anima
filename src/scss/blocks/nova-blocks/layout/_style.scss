@@ -1,6 +1,19 @@
-.novablocks-layout .novablocks-layout {
-	@include below(lap) {
-		padding-left: 0;
-		padding-right: 0;
+.entry-content {
+	.novablocks-layout {
+		
+		.novablocks-sidebar--large * {
+			--font-size-modifier: 0.9;
+		}
+		
+		.novablocks-layout {
+			@include below(lap) {
+				padding-left: 0;
+				padding-right: 0;
+			}
+			
+			.novablocks-sidebar:not([class*='large']) * {
+				--font-size-modifier: 0.75;
+			}
+		}
 	}
 }

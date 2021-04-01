@@ -608,7 +608,13 @@
 .novablocks-sharing__copy-input[class][class] {
   --theme-input-box-shadow: none; }
 
+.entry-content .novablocks-layout .novablocks-sidebar--large * {
+  --font-size-modifier: 0.9; }
+
 @media not screen and (min-width: 1000px) {
-  .novablocks-layout .novablocks-layout {
+  .entry-content .novablocks-layout .novablocks-layout {
     padding-left: 0;
     padding-right: 0; } }
+
+.entry-content .novablocks-layout .novablocks-layout .novablocks-sidebar:not([class*='large']) * {
+  --font-size-modifier: 0.75; }

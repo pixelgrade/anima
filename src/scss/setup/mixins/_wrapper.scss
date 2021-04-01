@@ -5,6 +5,19 @@
     > .alignfull {
         margin-left: calc( -1 * var(--theme-wrapper-sides-spacing) );
         margin-right: calc( -1 * var(--theme-wrapper-sides-spacing) );
+        
+        &.break-right {
+            margin-right: 0;
+        }
+        
+        &.break-left {
+            margin-left: 0;
+        }
+        
+        &.break-left.break-right {
+            margin-left: 0;
+            margin-right: 0;
+        }
     }
 }
 

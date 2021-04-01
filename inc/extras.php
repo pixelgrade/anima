@@ -473,13 +473,11 @@ if ( ! function_exists('rosa2_get_content_markup' ) ) {
 	function rosa2_get_content_markup() {
 		ob_start(); ?>
 
-        <div class="entry-content alignwide novablocks-layout-grid">
 			<?php
 			do_action( 'rosa2_before_content' );
 			the_content();
 			do_action( 'rosa2_after_content' );
 			?>
-        </div>
 
 		<?php return ob_get_clean();
 	}
