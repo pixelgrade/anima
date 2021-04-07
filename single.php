@@ -26,8 +26,6 @@ get_header(); ?>
 			    while ( have_posts() ) {
 				    the_post();
 				    get_template_part( 'template-parts/content-single', rosa2_get_image_aspect_ratio_type( get_post_thumbnail_id( $post ), 'landscape' ) );
-				    get_template_part( 'template-parts/article-navigation' );
-				    get_template_part( 'template-parts/article-comments' );
                 }?>
 
 		</main><!-- #main -->

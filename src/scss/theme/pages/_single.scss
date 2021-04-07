@@ -190,7 +190,7 @@
 
 .article--is-landscape {
         
-    --overlap-size: 10em;
+    --overlap-size: 10rem;
 
     > .novablocks-layout {
     
@@ -239,5 +239,39 @@
     
     .article-header__wrapper {
         margin-bottom: 0;
+    }
+}
+
+.no-sidebar .entry-content {
+    --block-content-start: cs;
+}
+
+.single:not(.no-sidebar) {
+    .entry-content,
+    .article-navigation,
+    .article-comments {
+        --block-content-start: ws;
+    }
+}
+
+.header-dropcap {
+    
+    @include above(lap) {
+        position: absolute;
+        bottom: var(--overlap-size, 0);
+        left: 0;
+    
+        font-size: 20em;
+    
+        color: var(--current-light-primary);
+    
+        opacity: 1;
+        pointer-events: none;
+    
+        z-index: 1;
+    
+        &[class] {
+            line-height: 0.66;
+        }
     }
 }

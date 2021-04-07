@@ -20,13 +20,14 @@ $article_header_block =
 	'<div class="article-header__wrapper">'.
 	rosa2_get_meta_template_part().
 	'<h1 class="entry-title">' . get_the_title() . '</h1>'.
+	'<div class="header-dropcap">' . esc_html( substr( get_the_title(), 0, 1 ) ) . '</div>' .
 	'</div>'.
 	'<p class="post-excerpt">' . get_the_excerpt() .'</p>'.
 	'<!-- /wp:novablocks/layout-area -->' .
 	'<!-- /wp:novablocks/layout -->';
 
 $article_content_block =
-	'<!-- wp:novablocks/layout {"layout":"sidebar-right"} -->' .
+	'<!-- wp:novablocks/layout {"layout":"sidebar-right", "className":"alignwide"} -->' .
 	'<!-- wp:novablocks/layout-area {"className":"novablocks-content entry-content"} -->' .
 	rosa2_get_content_markup().
 	'<!-- /wp:novablocks/layout-area -->' .
@@ -34,13 +35,16 @@ $article_content_block =
 	rosa2_get_sidebar_markup() .
 	'<!-- /wp:novablocks/layout-area -->' .
 	'<!-- /wp:novablocks/layout -->';
-
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class('article--is-portrait'); ?>>
     <div class="entry-header">
 	    <?php echo do_blocks( $article_header_block ); ?>
     </div>
-	<?php echo do_blocks( $article_content_block ); ?>
+	<?php
+        echo do_blocks( $article_content_block );
+        get_template_part( 'template-parts/article-navigation' );
+        get_template_part( 'template-parts/article-comments' );
+	?>
 
 </article><!-- #post-<?php the_ID(); ?> -->
