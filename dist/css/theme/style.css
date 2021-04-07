@@ -87,6 +87,25 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
   body.archive:not(.woocommerce-page) .novablocks-media__inner-container, body.blog .novablocks-media__inner-container, body.search:not(.search-no-results) .novablocks-media__inner-container {
     text-align: center; }
 
+@media only screen and (min-width: 1000px) {
+  .blog .entry-content .wp-block-group .wp-block-group__inner-container,
+  .archive .entry-content .wp-block-group .wp-block-group__inner-container {
+    --display-mode: grid; } }
+
+.blog .entry-header,
+.archive .entry-header {
+  padding-top: var(--theme-spacing-fluid-xl);
+  padding-bottom: var(--theme-spacing-fluid-xl); }
+
+.blog .wp-block,
+.archive .wp-block {
+  width: 100%; }
+
+@media not screen and (min-width: 1000px) {
+  .blog .entry-content,
+  .archive .entry-content {
+    --display-mode: block; } }
+
 .single.single-post {
   background: var(--current-light-tertiary); }
 
@@ -159,6 +178,9 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
 
 .article-thumbnail {
   z-index: 10; }
+  @media not screen and (min-width: 1000px) {
+    .article-thumbnail {
+      order: 2; } }
 
 .single .site-main {
   overflow-x: hidden; }
@@ -196,6 +218,52 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
 
 .article-header__wrapper {
   padding-top: var(--theme-spacing-fluid-large); }
+  .no-sidebar .article-header__wrapper {
+    text-align: center; }
+    .no-sidebar .article-header__wrapper .entry-meta {
+      justify-content: center; }
+
+.no-sidebar {
+  --block-limit-left: cs;
+  --block-limit-right: ce; }
+
+.article--is-portrait .article-header__wrapper {
+  text-align: left; }
+  .article--is-portrait .article-header__wrapper .entry-meta {
+    justify-content: flex-start; }
+
+.article--is-landscape {
+  --overlap-size: 10em; }
+  .article--is-landscape > .novablocks-layout .article-header__wrapper {
+    padding-bottom: var(--overlap-size); }
+  .article--is-landscape > .novablocks-layout + .novablocks-layout {
+    position: relative;
+    z-index: 10;
+    margin-top: calc(-1 * var(--overlap-size)/1.5); }
+  .article--is-landscape .article-header__wrapper {
+    padding-left: var(--theme-wrapper-sides-spacing);
+    padding-right: var(--theme-wrapper-sides-spacing); }
+
+@media not screen and (min-width: 1000px) {
+  .article-thumbnail {
+    order: 2; }
+  .post-excerpt {
+    position: relative;
+    background-color: var(--current-light-tertiary);
+    z-index: 1; }
+    .post-excerpt:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -100vw;
+      bottom: 0;
+      left: -100vw;
+      display: block;
+      background-color: inherit;
+      pointer-events: none;
+      z-index: -1; }
+  .article-header__wrapper {
+    margin-bottom: 0; } }
 
 .error404 .content-area,
 .search-no-results .content-area {

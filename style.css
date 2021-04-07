@@ -2278,19 +2278,28 @@ table {
     display: table;
     clear: both; }
 
-.entry-content {
+.entry-content,
+[class*="__inner-container"] {
   padding-left: var(--theme-wrapper-sides-spacing);
   padding-right: var(--theme-wrapper-sides-spacing); }
-  .entry-content > .alignfull {
+  .entry-content > .alignfull,
+  [class*="__inner-container"] > .alignfull {
     margin-left: calc( -1 * var(--theme-wrapper-sides-spacing));
     margin-right: calc( -1 * var(--theme-wrapper-sides-spacing)); }
-    .entry-content > .alignfull.break-right {
+    .entry-content > .alignfull.break-right,
+    [class*="__inner-container"] > .alignfull.break-right {
       margin-right: 0; }
-    .entry-content > .alignfull.break-left {
+    .entry-content > .alignfull.break-left,
+    [class*="__inner-container"] > .alignfull.break-left {
       margin-left: 0; }
-    .entry-content > .alignfull.break-left.break-right {
+    .entry-content > .alignfull.break-left.break-right,
+    [class*="__inner-container"] > .alignfull.break-left.break-right {
       margin-left: 0;
       margin-right: 0; }
+
+[class*='align-pull'] [class*="__inner-container"] {
+  padding-left: 0;
+  padding-right: 0; }
 
 .entry-footer {
   padding-left: var(--theme-wrapper-sides-spacing);
@@ -2355,6 +2364,10 @@ table {
   .comments-area__content > :not(:first-child) {
     --element-spacing: var(--theme-spacing-medium);
     margin-top: var(--element-spacing); }
+
+.article-comments {
+  padding-left: var(--theme-wrapper-sides-spacing);
+  padding-right: var(--theme-wrapper-sides-spacing); }
 
 .c-comments-toggle__label {
   display: inline-block;
@@ -2756,6 +2769,13 @@ label.subscribe-label.subscribe-label {
     .pagination .nav-links > .current:first-child {
       margin-left: auto; }
 
+.article-navigation {
+  margin-top: var(--theme-spacing-medium);
+  padding-left: var(--theme-wrapper-sides-spacing);
+  padding-right: var(--theme-wrapper-sides-spacing); }
+  .article-navigation:not(last-child) {
+    margin-bottom: var(--theme-spacing-medium); }
+
 a.page-numbers,
 span.page-numbers {
   color: var(--current-dark-secondary); }
@@ -2980,11 +3000,14 @@ span.page-numbers {
   --novablocks-element-spacing-multiplier: 0; }
 
 .novablocks-media--blog[class][class][class] {
-  --block-top-spacing: 2;
+  --block-top-spacing: 0;
   --block-bottom-spacing: 2;
   --novablocks-element-spacing-multiplier: 0.5; }
-  .novablocks-media--blog[class][class][class]:first-child {
-    --block-top-spacing: 0; }
+  .novablocks-media--blog[class][class][class]:last-child {
+    --block-bottom-spacing: 0; }
+  @media not screen and (min-width: 1000px) {
+    .novablocks-media--blog[class][class][class] {
+      --block-bottom-spacing: 0; } }
 
 /* 2.6. Search Form */
 .search-form {

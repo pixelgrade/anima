@@ -358,7 +358,7 @@ function rosa2_custom_gutenberg_settings() {
 add_action( 'after_setup_theme', 'rosa2_custom_gutenberg_settings', 10 );
 
 function rosa2_should_enqueue_novablocks_fallbacks() {
-    if ( ! in_array( 'nova-blocks/nova-blocks.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+    if ( ! in_array( 'nova-blocks-beta/nova-blocks.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
         return true;
     }
 
@@ -451,7 +451,7 @@ if ( ! function_exists('rosa2_get_thumbnail_markup' ) ) {
 		ob_start();
 
 		if ( has_post_thumbnail() ) { ?>
-            <div class="entry-thumbnail">
+            <div class="entry-thumbnail alignwide">
                 <div class="entry-thumbnail__wrapper  alignwide  disabled-avoid-fout">
                     <div class="entry-thumbnail__container">
 						<?php the_post_thumbnail(); ?>
