@@ -273,18 +273,20 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
 .single:not(.no-sidebar) .article-comments {
   --block-content-start: ws; }
 
-@media only screen and (min-width: 1000px) {
-  .header-dropcap {
-    position: absolute;
-    bottom: var(--overlap-size, 0);
-    right: 0;
-    font-size: 20em;
-    color: var(--current-light-primary);
-    opacity: 1;
-    pointer-events: none;
-    z-index: 1; }
-    .header-dropcap[class] {
-      line-height: 0.66; } }
+.header-dropcap {
+  position: absolute;
+  bottom: var(--overlap-size, 0);
+  right: 0;
+  font-size: 20em;
+  color: var(--current-light-primary);
+  opacity: 1;
+  pointer-events: none;
+  z-index: 1; }
+  .header-dropcap[class] {
+    line-height: 0.66; }
+  @media not screen and (min-width: 1000px) {
+    .header-dropcap {
+      display: none; } }
 
 .error404 .content-area,
 .search-no-results .content-area {

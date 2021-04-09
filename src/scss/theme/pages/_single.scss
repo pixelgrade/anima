@@ -256,22 +256,24 @@
 
 .header-dropcap {
     
-    @include above(lap) {
-        position: absolute;
-        bottom: var(--overlap-size, 0);
-        left: 0;
+    position: absolute;
+    bottom: var(--overlap-size, 0);
+    left: 0;
+
+    font-size: 20em;
+
+    color: var(--current-light-primary);
+
+    opacity: 1;
+    pointer-events: none;
+
+    z-index: 1;
+
+    &[class] {
+        line-height: 0.66;
+    }
     
-        font-size: 20em;
-    
-        color: var(--current-light-primary);
-    
-        opacity: 1;
-        pointer-events: none;
-    
-        z-index: 1;
-    
-        &[class] {
-            line-height: 0.66;
-        }
+    @include below(lap) {
+        display: none;
     }
 }
