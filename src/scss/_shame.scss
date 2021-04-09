@@ -109,3 +109,24 @@ ul.menu,
 .wp-block-group__inner-container > * {
     width: 100%;
 }
+
+// This is the block used to
+// build page layout.
+.novablocks-sidecar {
+    
+    // This is the block used to build
+    // internal layout.
+    .novablocks-sidecar {
+        
+        .novablocks-collection {
+            
+            &.block-is-basic {
+                
+                > [class*="__inner-container"] {
+                    padding-left: 0;
+                    padding-right: 0;
+                }
+            }
+        }
+    }
+}
