@@ -12,11 +12,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $page_content_block =
-	'<!-- wp:novablocks/layout {"layout":"no-sidebar"} -->' .
-	'<!-- wp:novablocks/layout-area {"className":"novablocks-content entry-content"} -->' .
+	'<!-- wp:novablocks/sidecar {"layout":"no-sidebar"} -->' .
+	'<!-- wp:novablocks/sidecar-area {"className":"novablocks-content entry-content"} -->' .
 	rosa2_get_content_markup().
-	'<!-- /wp:novablocks/layout-area -->' .
-	'<!-- /wp:novablocks/layout -->';
+	'<!-- /wp:novablocks/sidecar-area -->' .
+	'<!-- /wp:novablocks/sidecar -->';
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
