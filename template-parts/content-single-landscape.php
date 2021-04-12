@@ -28,7 +28,7 @@ $article_content_block =
 	rosa2_get_thumbnail_markup().
 	rosa2_get_content_markup().
 	'<!-- /wp:novablocks/sidecar-area -->' .
-	'<!-- wp:novablocks/sidecar-area {"className":" novablocks-sidebar novablocks-sidebar--right"} -->' .
+	'<!-- wp:novablocks/sidecar-area {"className":"novablocks-sidebar"} -->' .
 	rosa2_get_sidebar_markup() .
 	'<!-- /wp:novablocks/sidecar-area -->' .
 	'<!-- /wp:novablocks/sidecar -->';

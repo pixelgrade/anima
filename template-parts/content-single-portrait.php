@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $article_header_block =
-	'<!-- wp:novablocks/sidecar {"layout":"sidebar-left", "className":"alignwide"} -->' .
+	'<!-- wp:novablocks/sidecar {"layout":"sidebar-left", "className":"alignwide ignore-breaks"} -->' .
 	'<!-- wp:novablocks/sidecar-area {"className":"novablocks-sidebar article-thumbnail half-block-left"} -->' .
 	rosa2_get_thumbnail_markup().
 	'<!-- /wp:novablocks/sidecar-area -->' .
@@ -31,7 +31,7 @@ $article_content_block =
 	'<!-- wp:novablocks/sidecar-area {"className":"novablocks-content entry-content"} -->' .
 	rosa2_get_content_markup().
 	'<!-- /wp:novablocks/sidecar-area -->' .
-	'<!-- wp:novablocks/sidecar-area {"className":" novablocks-sidebar novablocks-sidebar--right"} -->' .
+	'<!-- wp:novablocks/sidecar-area {"className":" novablocks-sidebar"} -->' .
 	rosa2_get_sidebar_markup() .
 	'<!-- /wp:novablocks/sidecar-area -->' .
 	'<!-- /wp:novablocks/sidecar -->';
