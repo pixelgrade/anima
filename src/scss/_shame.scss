@@ -132,7 +132,10 @@ ul.menu,
 }
 
 .has-post-thumbnail {
-    --overlap-header-value: 15em;
+    
+    &.article--is-landscape {
+        --overlap-header-value: 15em;
+    }
 }
 
 .article-header {
