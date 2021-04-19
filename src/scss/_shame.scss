@@ -130,3 +130,20 @@ ul.menu,
         }
     }
 }
+
+.has-post-thumbnail {
+    --overlap-header-value: 15em;
+}
+
+.article-header {
+    
+    margin-bottom: calc(var(--overlap-header-value, 0) * -1);
+    
+    &__wrapper {
+        padding-bottom: var(--overlap-header-value, 0);
+    }
+}
+
+.entry-thumbnail {
+    z-index: 2;
+}
