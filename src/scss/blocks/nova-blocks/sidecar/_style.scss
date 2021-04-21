@@ -22,3 +22,24 @@ body {
 		}
 	}
 }
+
+.novablocks-sidebar * {
+	font-size: var(--final-font-size);
+}
+
+.novablocks-sidebar {
+	
+	* {
+		--font-size-modifier: 0.75;
+	}
+}
+
+.novablocks-sidebar--large {
+	
+	> .novablocks-sidebar {
+		
+		* {
+			--font-size-modifier: 0.85;
+		}
+	}
+}
