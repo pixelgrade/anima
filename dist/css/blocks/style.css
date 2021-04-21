@@ -608,7 +608,20 @@
 .novablocks-sharing__copy-input[class][class] {
   --theme-input-box-shadow: none; }
 
+html:root {
+  --novablocks-wide-width: calc(var(--theme-content-width-wide));
+  --novablocks-content-width: var(--theme-content-width-normal); }
+
+.entry-content .novablocks-layout .novablocks-sidebar--large * {
+  --font-size-modifier: 0.9; }
+
 @media not screen and (min-width: 1000px) {
-  .novablocks-layout .novablocks-layout {
+  .entry-content .novablocks-layout .novablocks-layout {
     padding-left: 0;
     padding-right: 0; } }
+
+.entry-content .novablocks-layout .novablocks-layout .novablocks-sidebar:not([class*='large']) * {
+  --font-size-modifier: 0.75; }
+
+.novablocks-content .novablocks-sidebar * {
+  --font-size-modifier: 0.9; }

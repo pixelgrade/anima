@@ -742,6 +742,24 @@ ul.wp-block-categories__list[class] {
   padding-left: 0;
   padding-right: 0; }
 
+html:root {
+  --novablocks-wide-width: calc(var(--theme-content-width-wide));
+  --novablocks-content-width: var(--theme-content-width-normal); }
+
+.entry-content .novablocks-layout .novablocks-sidebar--large * {
+  --font-size-modifier: 0.9; }
+
+@media not screen and (min-width: 1000px) {
+  .entry-content .novablocks-layout .novablocks-layout {
+    padding-left: 0;
+    padding-right: 0; } }
+
+.entry-content .novablocks-layout .novablocks-layout .novablocks-sidebar:not([class*='large']) * {
+  --font-size-modifier: 0.75; }
+
+.novablocks-content .novablocks-sidebar * {
+  --font-size-modifier: 0.9; }
+
 [data-type="novablocks/media"] + [data-type="novablocks/media"],
 [data-type="novablocks/cards-collection"] + [data-type="novablocks/media"],
 [data-type="novablocks/posts-collection"] + [data-type="novablocks/media"],
