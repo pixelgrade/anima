@@ -102,7 +102,7 @@ export const toggleClasses = ( element, check, trueClasses = '', falseClasses = 
 
 export function getFirstChild( el ){
 	var firstChild = el.firstChild;
-	while ( firstChild != null && firstChild.nodeType == 3 ) { // skip TextNodes
+	while ( firstChild != null && firstChild.nodeType === 3 ) { // skip TextNodes
 		firstChild = firstChild.nextSibling;
 	}
 	return firstChild;
