@@ -8,9 +8,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Add colors section and options to the Customify config
 add_filter( 'customify_filter_fields', 'pixelgrade_add_colors_section_to_customify_config', 50, 1 );
 
-// Prepend theme color palette to the default color palettes list
-add_filter( 'customify_get_color_palettes', 'pixelgrade_add_default_color_palettes' );
-
 function pixelgrade_add_colors_section_to_customify_config( $config ) {
 
 	if ( empty( $config['sections'] ) ) {
@@ -24,36 +21,39 @@ function pixelgrade_add_colors_section_to_customify_config( $config ) {
 	$config['sections']['colors_section'] = Customify_Array::array_merge_recursive_distinct( $config['sections']['colors_section'], array(
 		'title'   => esc_html__( 'Colors', '__theme_txtd' ),
 		'options' => array(
+
 			'sm-description_colorize_elements_intro' => array(
 				'type' => 'html',
 				'html' => 'Apply color to specific elements from your site that you seek to get more attention.',
 			),
-			
-			'body_color' => sm_get_color_switch_dark_config( 'Body', 'html, [class*="sm-variation-"]', false ),
 
-			'colors_links_section_title' => array(
+			'main_content_section_title' => array(
 				'type' => 'html',
-				'html' => '<span class="separator sub-section label">' . esc_html__( 'Links', '__theme_txtd' ) . '</span>',
+				'html' => '<span class="sm-group__title">' . esc_html__( 'Main Content', '__theme_txtd' ) . '</span>',
 			),
-			'links_color' => sm_get_color_switch_dark_config( 'Link', '*', false, '--theme-links-color' ),
-            'links_decoration_color' => sm_get_color_select_dark_config( 'Link Decoration', '*', 'dark', '--theme-links-decoration-color' ),
-            'links_hover_color' => sm_get_color_switch_dark_config( 'Active Link', '*', false, '--theme-links-hover-color' ),
-            'links_hover_decoration_color' => sm_get_color_select_dark_config( 'Active Link Decoration', '*', 'accent', '--theme-links-hover-decoration-color' ),
 
-			'colors_article_section_title' => array(
+			'page_title' => sm_get_color_switch_dark_config( 'Page title', '.entry-title', false ),
+			'body_color' => sm_get_color_switch_dark_config( 'Body text', 'html, [class*="sm-variation-"]', false ),
+			'links_color' => sm_get_color_switch_dark_config( 'Body links', '*', true, '--theme-links-color' ),
+			'heading_links_color' => sm_get_color_switch_dark_config( 'Heading links', 'h1, h2, h3, h4, h5, h6', true, '--theme-links-color' ),
+
+			'sm-group-separator-1' => array( 'type' => 'html', 'html' => '' ),
+
+			'colors_header_section_title' => array(
 				'type' => 'html',
-				'html' => '<span class="separator sub-section label">' . esc_html__( 'Article', '__theme_txtd' ) . '</span>',
+				'html' => '<span class="sm-group__title">' . esc_html__( 'Header', '__theme_txtd' ) . '</span>',
 			),
-			'article_title' => sm_get_color_switch_dark_config( 'Article Title', '.entry-title', false ),
-			'meta_links_color' => sm_get_color_switch_dark_config( 'Link', '.entry-meta', false, '--theme-links-color' ),
-            'meta_links_decoration_color' => sm_get_color_select_dark_config( 'Link Decoration', '.entry-meta', 'background', '--theme-links-decoration-color' ),
-            'meta_links_hover_color' => sm_get_color_switch_dark_config( 'Active Link', '.entry-meta', false, '--theme-links-hover-color' ),
-            'meta_links_hover_decoration_color' => sm_get_color_select_dark_config( 'Active Link Decoration', '.entry-meta', 'accent', '--theme-links-hover-decoration-color' ),
+
+			'menu_item_color' => sm_get_color_switch_dark_config( 'Navigation links', '.novablocks-navigation', false ),
+			'menu_active_item_color' => sm_get_color_switch_dark_config( 'Navigaiton active link', '.novablocks-navigation > ul > li[class*="current"]', false ),
+
+			'sm-group-separator-2' => array( 'type' => 'html', 'html' => '' ),
 
 			'colors_headings_section_title' => array(
 				'type' => 'html',
-				'html' => '<span class="separator sub-section label">' . esc_html__( 'Headings', '__theme_txtd' ) . '</span>',
+				'html' => '<span class="sm-group__title">' . esc_html__( 'Headings', '__theme_txtd' ) . '</span>',
 			),
+
 			'heading_1_color' => sm_get_color_switch_darker_config( 'Heading 1', 'h1', false ),
 			'heading_2_color' => sm_get_color_switch_darker_config( 'Heading 2', 'h2', false ),
 			'heading_3_color' => sm_get_color_switch_darker_config( 'Heading 3', 'h3', false ),
@@ -61,52 +61,25 @@ function pixelgrade_add_colors_section_to_customify_config( $config ) {
 			'heading_5_color' => sm_get_color_switch_darker_config( 'Heading 5', 'h5', false ),
 			'heading_6_color' => sm_get_color_switch_darker_config( 'Heading 6', 'h6', false ),
 
+			'sm-group-separator-3' => array( 'type' => 'html', 'html' => '' ),
+
 			'colors_buttons_section_title' => array(
 				'type' => 'html',
-				'html' => '<span class="separator sub-section label">' . esc_html__( 'Buttons', '__theme_txtd' ) . '</span>',
+				'html' => '<span class="sm-group__title">' . esc_html__( 'Buttons', '__theme_txtd' ) . '</span>',
 			),
-			'text_button' => sm_get_color_switch_dark_config( 'Text Button Color', '.wp-block-button.is-style-text .wp-block-button__link', false, array( '--theme-button-text-color' ) ),
-			'solid_button' => sm_get_color_switch_dark_config( 'Solid Button Color', '*', false, '--sm-button-background-color' ),
 
-			'colors_header_section_title' => array(
-				'type' => 'html',
-				'html' => '<span class="separator sub-section label">' . esc_html__( 'Header', '__theme_txtd' ) . '</span>',
-			),
-			'menu_item_color' => sm_get_color_switch_dark_config( 'Menu Item', '.novablocks-navigation', false ),
-			'menu_active_item_color' => sm_get_color_switch_dark_config( 'Menu Active Item', '.novablocks-navigation > ul > li[class*="current"]', false ),
-			'submenu_item_color' => sm_get_color_switch_dark_config( 'Submenu Item', '.novablocks-navigation .sub-menu', false ),
-			'submenu_active_item_color' => sm_get_color_switch_dark_config( 'Submenu Active Item', '.novablocks-navigation .sub-menu > li[class*="current"]', false ),
+			'solid_button' => sm_get_color_switch_dark_config( 'Buttons', '*', false, '--sm-button-background-color' ),
+			'text_button' => sm_get_color_switch_dark_config( 'Text', '.wp-block-button.is-style-text .wp-block-button__link', false, array( '--theme-button-text-color' ) ),
 
-			'colors_post_navigation_section_title' => array(
-				'type' => 'html',
-				'html' => '<span class="separator sub-section label">' . esc_html__( 'Post Navigation', '__theme_txtd' ) . '</span>',
-			),
-			'post_navigation_label' => sm_get_color_switch_dark_config( 'Post Navigation Label', '.post-navigation__link-label', false ),
-			'post_navigation_title' => sm_get_color_switch_dark_config( 'Post Navigation Title', '.post-navigation__post-title', false ),
+			'sm-group-separator-4' => array( 'type' => 'html', 'html' => '' ),
 
 			'colors_novablocks_headline_section_title' => array(
 				'type' => 'html',
-				'html' => '<span class="separator sub-section label">' . esc_html__( 'Nova Blocks - Headline', '__theme_txtd' ) . '</span>',
-			),
-			'novablocks_headline_primary' => sm_get_color_switch_darker_config( 'Headline Primary', '.c-headline__primary', false ),
-			'novablocks_headline_secondary' => sm_get_color_switch_darker_config( 'Headline Secondary', '.c-headline__secondary', true ),
-
-			'colors_novablocks_food_menu_section_title' => array(
-				'type' => 'html',
-				'html' => '<span class="separator sub-section label">' . esc_html__( 'Nova Blocks - Food Menu', '__theme_txtd' ) . '</span>',
-			),
-			'novablocks_menu_section_title' => sm_get_color_switch_dark_config( 'Menu Section Title', '.nova-food-menu__header .section-title', false ),
-			'novablocks_menu_item_highlight' => sm_get_color_switch_dark_config( 'Menu Item Highlight', 'html:root', false, '--nova-food-menu-item-highlight-color' ),
-			'novablocks_menu_item_price' => sm_get_color_switch_dark_config( 'Menu Item Price', '.nova-food-menu-item__prices', false ),
-			'novablocks_menu_item_title' => sm_get_color_switch_dark_config( 'Menu Item Title', '.nova-food-menu-item__title', false ),
-			'novablocks_menu_item_description' => sm_get_color_switch_dark_config( 'Menu Item Description', '.nova-food-menu-item__description', false ),
-
-			'colors_novablocks_conversations_section_title' => array(
-				'type' => 'html',
-				'html' => '<span class="separator sub-section label">' . esc_html__( 'Nova Blocks - Conversations', '__theme_txtd' ) . '</span>',
+				'html' => '<span class="sm-group__title">' . esc_html__( 'Headline Block', '__theme_txtd' ) . '</span>',
 			),
 
-			'novablocks_conversations_title' => sm_get_color_switch_dark_config( 'Conversations Title', '.novablocks-conversations__header', false ),
+			'novablocks_headline_primary' => sm_get_color_switch_darker_config( 'Headline primary', '.c-headline__primary', false ),
+			'novablocks_headline_secondary' => sm_get_color_switch_darker_config( 'Headline secondary', '.c-headline__secondary', true ),
 
 			'sm-description_colorize_elements_outro' => array(
 				'type' => 'html',
@@ -116,29 +89,4 @@ function pixelgrade_add_colors_section_to_customify_config( $config ) {
 	) );
 
 	return $config;
-}
-
-function pixelgrade_add_default_color_palettes( $color_palettes ) {
-
-	$color_palettes = array_merge( array(
-		'default' => array(
-			'label'   => esc_html__( 'Theme Default', '__theme_txtd' ),
-			'preview' => array(
-				'background_image_url' => '//cloud.pixelgrade.com/wp-content/uploads/2018/07/rosa-palette.jpg',
-			),
-			'options' => array(
-				'sm_color_primary'   => THEME_COLOR_PRIMARY,
-				'sm_color_secondary' => THEME_COLOR_SECONDARY,
-				'sm_color_tertiary'  => THEME_COLOR_TERTIARY,
-				'sm_dark_primary'    => THEME_DARK_PRIMARY,
-				'sm_dark_secondary'  => THEME_DARK_SECONDARY,
-				'sm_dark_tertiary'   => THEME_DARK_TERTIARY,
-				'sm_light_primary'   => THEME_LIGHT_PRIMARY,
-				'sm_light_secondary' => THEME_LIGHT_SECONDARY,
-				'sm_light_tertiary'  => THEME_LIGHT_TERTIARY,
-			),
-		),
-	), $color_palettes );
-
-	return $color_palettes;
 }
