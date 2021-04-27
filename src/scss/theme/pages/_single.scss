@@ -253,3 +253,45 @@
         --block-content-start: ws;
     }
 }
+
+.post[class*='article--is'] {
+    
+    .entry-content[class] {
+        grid-column: var(--block-limit-left)/ce;
+    }
+    
+    .no-sidebar & {
+    
+        .entry-content[class] {
+            grid-column: wsge/wegs;
+        }
+    }
+}
+
+.article--is-landscape {
+    
+   
+    
+    .article-header {
+        
+        &[class] {
+            grid-column: var(--block-limit-left)/var(--block-limit-right);
+        }
+    }
+    
+    .article-header__wrapper {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.article--is-portrait {
+    
+    .no-sidebar & {
+        
+        .entry-header > * {
+            --block-limit-left: wsgs;
+            --block-limit-right: wege;
+        }
+    }
+}

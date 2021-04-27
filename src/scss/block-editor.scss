@@ -192,3 +192,11 @@ h1, h2, h3, h4, h5, h6,
     }
 }
 
+.block-editor-block-list__layout {
+    > *:not([data-type="novablocks/sidecar"]) {
+        max-width: calc(var(--novablocks-content-width-start-max-value) + var(--novablocks-content-width-end-max-value) + var(--wd) + var(--grid-gap) * 3) !important;
+        
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}

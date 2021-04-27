@@ -273,6 +273,23 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
 .single:not(.no-sidebar) .article-comments {
   --block-content-start: ws; }
 
+.post[class*='article--is'] .entry-content[class] {
+  grid-column: var(--block-limit-left)/ce; }
+
+.no-sidebar .post[class*='article--is'] .entry-content[class] {
+  grid-column: wsge/wegs; }
+
+.article--is-landscape .article-header[class] {
+  grid-column: var(--block-limit-left)/var(--block-limit-right); }
+
+.article--is-landscape .article-header__wrapper {
+  padding-right: 0;
+  padding-left: 0; }
+
+.no-sidebar .article--is-portrait .entry-header > * {
+  --block-limit-left: wsgs;
+  --block-limit-right: wege; }
+
 .error404 .content-area,
 .search-no-results .content-area {
   height: 100%;
