@@ -587,7 +587,7 @@ var toggleClasses = function toggleClasses(element, check) {
 function getFirstChild(el) {
   var firstChild = el.firstChild;
 
-  while (firstChild != null && firstChild.nodeType == 3) {
+  while (firstChild != null && firstChild.nodeType === 3) {
     // skip TextNodes
     firstChild = firstChild.nextSibling;
   }
@@ -2421,7 +2421,8 @@ function () {
       var $firstBlockFg = $firstBlock.find('.novablocks-foreground');
       var firstBlockFgPaddingTop = parseInt($firstBlockFg.css('paddingTop', '').css('paddingTop'), 0);
       $firstBlockFg.css('paddingTop', Math.max(firstBlockFgPaddingTop, headerHeight + promoBarHeight));
-      var $firstNovaBlock = $firstBlock.children('.novablocks-block');
+      var $supernova = $firstBlock.filter('.supernova');
+      var $firstNovaBlock = $supernova.length ? $supernova : $firstBlock.children('.novablocks-block');
       var firstBlockPaddingTop = parseInt($firstNovaBlock.css('paddingTop', '').css('paddingTop'), 0);
       $firstNovaBlock.css('paddingTop', firstBlockPaddingTop + headerHeight + promoBarHeight);
     }

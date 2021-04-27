@@ -130,7 +130,8 @@ export default class App {
 		const firstBlockFgPaddingTop = parseInt( $firstBlockFg.css( 'paddingTop', '' ).css( 'paddingTop' ), 0 );
 		$firstBlockFg.css( 'paddingTop', Math.max( firstBlockFgPaddingTop, headerHeight + promoBarHeight ) );
 
-		const $firstNovaBlock = $firstBlock.children( '.novablocks-block' );
+		const $supernova = $firstBlock.filter( '.supernova' );
+		const $firstNovaBlock = $supernova.length ? $supernova : $firstBlock.children( '.novablocks-block' );
 		const firstBlockPaddingTop = parseInt( $firstNovaBlock.css( 'paddingTop', '' ).css( 'paddingTop' ), 0 );
 		$firstNovaBlock.css( 'paddingTop', firstBlockPaddingTop + headerHeight + promoBarHeight );
 	}
