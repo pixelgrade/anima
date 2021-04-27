@@ -93,3 +93,22 @@ textarea {
 .is-style-darker {
     @include apply-variation(11);
 }
+
+
+.c-logo__default {
+    opacity: var(--logo-default-opacity, 1);
+}
+
+.c-logo__inverted {
+    opacity: var(--logo-inverted-opacity, 0);
+}
+
+.sm-dark {
+    --logo-default-opacity: 0;
+    --logo-inverted-opacity: 1;
+}
+
+.sm-light {
+    --logo-default-opacity: 1;
+    --logo-inverted-opacity: 0;
+}

@@ -575,8 +575,8 @@ var utils_removeClass = function removeClass(element, classes) {
     (_element$classList2 = element.classList).remove.apply(_element$classList2, toConsumableArray_default()(classesArray));
   }
 };
-var hasClass = function hasClass(element, classes) {
-  return el.classList.contains(className);
+var hasClass = function hasClass(element, className) {
+  return element.classList.contains(className);
 };
 var toggleClasses = function toggleClasses(element, check) {
   var trueClasses = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
@@ -594,6 +594,32 @@ function getFirstChild(el) {
 
   return firstChild;
 }
+var toggleLightClasses = function toggleLightClasses(element) {
+  var classes = Array.from(element.classList);
+  var paletteClassname = classes.find(function (classname) {
+    return classname.indexOf('sm-palette-') > -1 && classname.indexOf('sm-palette--') === -1;
+  });
+  var palette = paletteClassname ? paletteClassname.substring('sm-palette-'.length) : 1;
+  var variationPrefix = 'sm-variation-';
+  var variationClassname = classes.find(function (classname) {
+    return classname.indexOf(variationPrefix) > -1;
+  });
+  var variation = variationClassname ? variationClassname.substring(variationPrefix.length) : 1;
+  var isShifted = !!classes.find(function (classname) {
+    return classname.indexOf('sm-palette--shifted') > -1;
+  });
+  var currentPaletteConfig = sm.colorsConfig.find(function (thisPalette) {
+    return thisPalette.id + '' === palette + '';
+  });
+
+  if (currentPaletteConfig) {
+    var sourceIndex = currentPaletteConfig.sourceIndex,
+        lightColorsCount = currentPaletteConfig.lightColorsCount;
+    var offset = isShifted ? sourceIndex : 0;
+    var isLight = (variation - 1 + offset) % 12 + 1 <= lightColorsCount;
+    toggleClasses(element, isLight, 'sm-light', 'sm-dark');
+  }
+};
 // CONCATENATED MODULE: ./src/js/components/globalService.js
 
 
@@ -1484,18 +1510,28 @@ function () {
       var content = document.querySelector('.site-main .entry-content');
       var firstBlock = content ? getFirstChild(content) : null;
       var novablocksBlock = firstBlock ? firstBlock.querySelector('.novablocks-block') : null;
+
+      if (!firstBlock || !hasClass(firstBlock, 'alignfull')) {
+        return null;
+      }
+
       return novablocksBlock || firstBlock;
     }
   }, {
     key: "initializeColors",
     value: function initializeColors() {
       this.initialColorClasses = getColorSetClasses(this.initialColorsSource).join(' ');
-      this.transparentColorClasses = getColorSetClasses(this.transparentColorsSource).join(' ') + ' novablocks-header--transparent';
+      this.transparentColorClasses = this.initialColorClasses;
+
+      if (this.transparentColorsSource) {
+        this.transparentColorClasses = getColorSetClasses(this.transparentColorsSource).join(' ') + ' novablocks-header--transparent';
+      }
     }
   }, {
     key: "toggleColors",
     value: function toggleColors(isTransparent) {
       toggleClasses(this.element, isTransparent, this.transparentColorClasses, this.initialColorClasses);
+      toggleLightClasses(this.element);
     }
   }]);
 
@@ -1742,9 +1778,8 @@ function (_HeaderBase) {
 
     _this.initialize();
 
-    _this.toggleRowsColors(true);
+    _this.toggleRowsColors(true); //		addClass( this.element, 'novablocks-header--transparent' );
 
-    utils_addClass(_this.element, 'novablocks-header--transparent');
 
     if (_this.secondaryHeader) {
       utils_addClass(_this.secondaryHeader, 'novablocks-header--ready');
@@ -2288,6 +2323,7 @@ function (_BaseComponent) {
 
 
 
+
 var app_App =
 /*#__PURE__*/
 function () {
@@ -2296,6 +2332,7 @@ function () {
 
     this.initializeHero();
     this.initializeHeader();
+    this.initializeLogo();
     this.initializeNavbar();
     this.searchOverlay = new search_overlay();
     this.initializePromoBar();
@@ -2320,6 +2357,12 @@ function () {
           });
         });
       });
+    }
+  }, {
+    key: "initializeLogo",
+    value: function initializeLogo() {
+      var wrappers = document.querySelectorAll('[class*="sm-palette"]');
+      wrappers.forEach(toggleLightClasses);
     }
   }, {
     key: "initializeReservationForm",
@@ -2418,12 +2461,12 @@ function () {
       external_jQuery_default()('body:not(.has-no-spacing-top) .site-content').css('marginTop', "".concat(promoBarHeight + headerHeight, "px"));
       external_jQuery_default()('html').css('scrollPaddingTop', "".concat(headerHeight, "px"));
       var $firstBlock = external_jQuery_default()('.has-novablocks-header-transparent .entry-content > :first-child');
-      var $firstBlockFg = $firstBlock.find('.novablocks-foreground');
+      var $firstBlockFg = $firstBlock.find('.novablocks-doppler__foreground');
       var firstBlockFgPaddingTop = parseInt($firstBlockFg.css('paddingTop', '').css('paddingTop'), 0);
       $firstBlockFg.css('paddingTop', Math.max(firstBlockFgPaddingTop, headerHeight + promoBarHeight));
       var $supernova = $firstBlock.filter('.supernova');
       var $firstNovaBlock = $supernova.length ? $supernova : $firstBlock.children('.novablocks-block');
-      var firstBlockPaddingTop = parseInt($firstNovaBlock.css('paddingTop', '').css('paddingTop'), 0);
+      var firstBlockPaddingTop = parseInt($firstNovaBlock.css('paddingTop', '').css('paddingTop'), 0) || 0;
       $firstNovaBlock.css('paddingTop', firstBlockPaddingTop + headerHeight + promoBarHeight);
     }
   }]);

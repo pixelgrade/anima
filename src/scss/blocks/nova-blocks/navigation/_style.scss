@@ -15,12 +15,15 @@
     > ul.menu,
     > .menu > ul {
 
-        > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) {
-            @include navigation-item-with-hover-animation;
-        }
+        @include above(lap) {
 
-        > li[class*="current"]:not(.menu-item-home) {
-            @include navigation-item-with-active-state;
+            > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) {
+                @include navigation-item-with-hover-animation;
+            }
+
+            > li[class*="current"]:not(.menu-item-home) {
+                @include navigation-item-with-active-state;
+            }
         }
     }
 }

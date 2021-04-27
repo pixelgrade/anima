@@ -10,11 +10,14 @@ import Navbar from "./navbar";
 
 import SearchOverlay from './search-overlay';
 
+import { toggleLightClasses } from '../utils';
+
 export default class App {
 
 	constructor() {
 		this.initializeHero();
 		this.initializeHeader();
+		this.initializeLogo();
 		this.initializeNavbar();
 		this.searchOverlay = new SearchOverlay();
 		this.initializePromoBar();
@@ -37,6 +40,12 @@ export default class App {
 				} );
 			} );
 		} );
+	}
+
+	initializeLogo() {
+		const wrappers = document.querySelectorAll( '[class*="sm-palette"]' );
+
+		wrappers.forEach( toggleLightClasses );
 	}
 
 	initializeReservationForm() {
@@ -126,13 +135,13 @@ export default class App {
 		$( 'html' ).css( 'scrollPaddingTop', `${ headerHeight }px` );
 
 		const $firstBlock = $( '.has-novablocks-header-transparent .entry-content > :first-child' );
-		const $firstBlockFg = $firstBlock.find( '.novablocks-foreground' );
+		const $firstBlockFg = $firstBlock.find( '.novablocks-doppler__foreground' );
 		const firstBlockFgPaddingTop = parseInt( $firstBlockFg.css( 'paddingTop', '' ).css( 'paddingTop' ), 0 );
 		$firstBlockFg.css( 'paddingTop', Math.max( firstBlockFgPaddingTop, headerHeight + promoBarHeight ) );
 
 		const $supernova = $firstBlock.filter( '.supernova' );
 		const $firstNovaBlock = $supernova.length ? $supernova : $firstBlock.children( '.novablocks-block' );
-		const firstBlockPaddingTop = parseInt( $firstNovaBlock.css( 'paddingTop', '' ).css( 'paddingTop' ), 0 );
+		const firstBlockPaddingTop = parseInt( $firstNovaBlock.css( 'paddingTop', '' ).css( 'paddingTop' ), 0 ) || 0;
 		$firstNovaBlock.css( 'paddingTop', firstBlockPaddingTop + headerHeight + promoBarHeight );
 	}
 }

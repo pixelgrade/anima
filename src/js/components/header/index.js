@@ -24,7 +24,7 @@ class Header extends HeaderBase {
 		this.initialize();
 		this.toggleRowsColors( true );
 
-		addClass( this.element, 'novablocks-header--transparent' );
+//		addClass( this.element, 'novablocks-header--transparent' );
 
 		if ( this.secondaryHeader ) {
 			addClass( this.secondaryHeader, 'novablocks-header--ready' );

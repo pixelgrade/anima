@@ -1,6 +1,6 @@
 import globalService from '../globalService';
 
-import { addClass, getFirstChild, getColorSetClasses, toggleClasses } from '../../utils';
+import { addClass, hasClass, getFirstChild, getColorSetClasses, toggleClasses, toggleLightClasses } from '../../utils';
 
 class HeaderColors {
 
@@ -17,16 +17,25 @@ class HeaderColors {
 		const firstBlock = content ? getFirstChild( content ) : null;
 		const novablocksBlock = firstBlock ? firstBlock.querySelector( '.novablocks-block' ) : null;
 
+		if ( ! firstBlock || ! hasClass( firstBlock, 'alignfull' ) ) {
+			return null;
+		}
+
 		return novablocksBlock || firstBlock;
 	}
 
 	initializeColors() {
 		this.initialColorClasses = getColorSetClasses( this.initialColorsSource ).join( ' ' );
-		this.transparentColorClasses = getColorSetClasses( this.transparentColorsSource ).join( ' ' ) + ' novablocks-header--transparent';
+		this.transparentColorClasses = this.initialColorClasses;
+
+		if ( this.transparentColorsSource ) {
+			this.transparentColorClasses = getColorSetClasses( this.transparentColorsSource ).join( ' ' ) + ' novablocks-header--transparent';
+		}
 	}
 
 	toggleColors( isTransparent ) {
 		toggleClasses( this.element, isTransparent, this.transparentColorClasses, this.initialColorClasses );
+		toggleLightClasses( this.element );
 	}
 }
 

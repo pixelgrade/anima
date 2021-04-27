@@ -91,8 +91,8 @@ export const removeClass = ( element, classes ) => {
 	}
 }
 
-export const hasClass = ( element, classes ) => {
-	return el.classList.contains( className );
+export const hasClass = ( element, className ) => {
+	return element.classList.contains( className );
 }
 
 export const toggleClasses = ( element, check, trueClasses = '', falseClasses = '' ) => {
@@ -106,4 +106,28 @@ export function getFirstChild( el ){
 		firstChild = firstChild.nextSibling;
 	}
 	return firstChild;
+}
+
+export const toggleLightClasses = element => {
+	const classes = Array.from( element.classList );
+	const paletteClassname = classes.find( classname => {
+		return classname.indexOf( 'sm-palette-' ) > -1 && classname.indexOf( 'sm-palette--' ) === -1
+	} );
+	const palette = paletteClassname ? paletteClassname.substring( 'sm-palette-'.length ) : 1;
+	const variationPrefix = 'sm-variation-';
+	const variationClassname = classes.find( classname => classname.indexOf( variationPrefix ) > -1 );
+	const variation = variationClassname ? variationClassname.substring( variationPrefix.length ) : 1;
+	const isShifted = !! classes.find( classname => classname.indexOf( 'sm-palette--shifted' ) > -1 );
+
+	const currentPaletteConfig = sm.colorsConfig.find( thisPalette => {
+		return thisPalette.id + '' === palette + '';
+	} );
+
+	if ( currentPaletteConfig ) {
+		const { sourceIndex, lightColorsCount } = currentPaletteConfig;
+		const offset = isShifted ? sourceIndex : 0;
+		const isLight = ( ( variation - 1 ) + offset ) % 12 + 1 <= lightColorsCount;
+
+		toggleClasses( element, isLight, 'sm-light', 'sm-dark' );
+	}
 }
