@@ -2224,6 +2224,20 @@ body:not(.single) .site-header-sticky {
     text-decoration: none; }
 
 /* 2.2. Site Content */
+.site-main {
+  padding-left: var(--theme-wrapper-sides-spacing);
+  padding-right: var(--theme-wrapper-sides-spacing); }
+  .site-main > .alignfull {
+    margin-left: calc( -1 * var(--theme-wrapper-sides-spacing));
+    margin-right: calc( -1 * var(--theme-wrapper-sides-spacing)); }
+    .site-main > .alignfull.break-right {
+      margin-right: 0; }
+    .site-main > .alignfull.break-left {
+      margin-left: 0; }
+    .site-main > .alignfull.break-left.break-right {
+      margin-left: 0;
+      margin-right: 0; }
+
 /* 2.3. Site Footer */
 .site-footer--fallback {
   padding-top: var(--theme-spacing-medium);

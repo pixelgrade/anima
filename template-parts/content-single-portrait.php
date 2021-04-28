@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $article_header_block =
-	'<!-- wp:novablocks/sidecar {"layout":"sidebar-left", "className":"alignwide ignore-breaks ignore-sidebar strech-grid-items"} -->' .
+	'<!-- wp:novablocks/sidecar {"layout":"sidebar-left", "className":"alignwide strech-grid-items"} -->' .
 	'<!-- wp:novablocks/sidecar-area {"className":"article-thumbnail half-block-left"} -->' .
 	rosa2_get_thumbnail_markup().
 	'<!-- /wp:novablocks/sidecar-area -->' .
