@@ -1,0 +1,66 @@
+html:root {
+	--novablocks-wide-width: var(--theme-content-width-wide);
+	--novablocks-content-width: var(--theme-content-width-normal);
+	--novablocks-container-spacings: var(--theme-wrapper-sides-spacing);
+}
+
+.page:not(.home) {
+	
+	.entry-content[class] {
+		--block-content-start: wsge;
+		--block-content-end: wegs;
+	}
+}
+
+.article--is-portrait {
+	
+	.no-sidebar & {
+		
+		.entry-header > * {
+			--block-limit-left: wsgs;
+			--block-limit-right: wege;
+		}
+	}
+}
+
+.no-sidebar {
+	--block-limit-left: cs;
+	--block-limit-right: ce;
+}
+
+.no-sidebar .entry-content {
+	--block-content-start: cs;
+}
+
+.single:not(.no-sidebar) {
+	.entry-content,
+	.article-navigation,
+	.article-comments {
+		--block-content-start: ws;
+	}
+}
+
+
+.post[class*='article--is'] {
+	
+	.entry-content[class] {
+		grid-column: var(--block-limit-left)/ce;
+	}
+	
+	.no-sidebar & {
+		
+		.entry-content[class] {
+			grid-column: wsge/wegs;
+		}
+	}
+}
+
+.article--is-landscape {
+	
+	.article-header {
+		
+		&[class] {
+			grid-column: var(--block-limit-left)/var(--block-limit-right);
+		}
+	}
+}
