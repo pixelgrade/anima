@@ -33,11 +33,14 @@
         max-width: var(--theme-content-width-normal);
     }
 
-    > #{ $wide } {
-        max-width: var(--theme-content-width-wide);
-    }
+    @at-root {
 
-    > #{ $full } {
-        max-width: none;
+        #{ $wide } {
+            max-width: var(--theme-content-width-wide);
+        }
+
+        #{ $full } {
+            max-width: none;
+        }
     }
 }
