@@ -71,3 +71,13 @@ $assets-folder-path: '../../../assets';
     color: var(--current-color-primary);
   }
 }
+
+.woocommerce-page {
+  --block-content-start: ws;
+  --block-content-end: we;
+  
+  .entry-content [class*="__inner-container"] {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

@@ -275,11 +275,11 @@ function rosa2_add_end_wrapper_after_related() {
 }
 
 function rosa2_add_start_main_content() {
-	echo '<div class="wp-block-group__inner-container"><div class="wp-block alignwide">';
+	echo '<div class="entry-content"><div class="wp-block-group alignwide"><div class="wp-block-group__inner-container"><div class="wp-block">';
 }
 
 function rosa2_add_end_main_content() {
-	echo '</div><!-- .wp-block.alignwide --></div><!-- .wp-block-group__inner-container -->';
+	echo '</div><!-- .wp-block.alignwide --></div><!-- .wp-block-group__inner-container --></div></div>';
 }
 
 function rosa2_new_product_title_markup() {

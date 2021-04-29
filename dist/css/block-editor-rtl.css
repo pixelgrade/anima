@@ -253,6 +253,13 @@
     .editor-styles-wrapper [class*="__inner-container"] > .alignfull {
       margin-right: calc( -1 * var(--theme-wrapper-sides-spacing));
       margin-left: calc( -1 * var(--theme-wrapper-sides-spacing)); }
+      .editor-styles-wrapper [class*="__inner-container"] > .alignfull.break-right {
+        margin-left: 0; }
+      .editor-styles-wrapper [class*="__inner-container"] > .alignfull.break-left {
+        margin-right: 0; }
+      .editor-styles-wrapper [class*="__inner-container"] > .alignfull.break-left.break-right {
+        margin-right: 0;
+        margin-left: 0; }
   .editor-styles-wrapper[class] {
     /* Iframes */
     /* Lists */
@@ -578,3 +585,10 @@ h1, .editor-styles-wrapper[class] h2, .editor-styles-wrapper[class] h3, .editor-
 
 .wp-block[data-type="core/buttons"][data-align="right"] .block-editor-block-list__layout {
   justify-content: flex-end; }
+
+> .block-editor-block-list__layout:not([data-type="novablocks/sidecar"]),
+> .block-editor-block-list__layout:not(.alignfull),
+> .block-editor-block-list__layout:not(.alignwide) {
+  max-width: calc(var(--novablocks-content-width-start-max-value) + var(--novablocks-content-width-end-max-value) + var(--wd) + var(--grid-gap) * 3) !important;
+  margin-right: auto !important;
+  margin-left: auto !important; }

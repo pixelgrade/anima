@@ -1,28 +1,39 @@
-html:root {
-		--novablocks-wide-width: calc(var(--theme-content-width-wide));
-		--novablocks-content-width: var(--theme-content-width-normal);
+@import 'settings';
+
+.novablocks-sidebar * {
+	font-size: var(--final-font-size);
 }
 
-.entry-content {
-	.novablocks-layout {
+.novablocks-sidebar {
+	
+	* {
+		--font-size-modifier: 0.75;
+	}
+}
+
+.novablocks-sidebar--large {
+	
+	> .novablocks-sidebar {
 		
-		.novablocks-sidebar--large * {
-			--font-size-modifier: 0.9;
-		}
-		
-		.novablocks-layout {
-			@include below(lap) {
-				padding-left: 0;
-				padding-right: 0;
-			}
-			
-			.novablocks-sidebar:not([class*='large']) * {
-				--font-size-modifier: 0.75;
-			}
+		* {
+			--font-size-modifier: 0.85;
 		}
 	}
 }
 
-.novablocks-content .novablocks-sidebar * {
-	--font-size-modifier: 0.9;
+.novablocks-sidecar {
+	
+	.novablocks-sidecar {
+		
+		.novablocks-collection {
+			
+			&.block-is-basic {
+				
+				> [class*="__inner-container"] {
+					padding-left: 0;
+					padding-right: 0;
+				}
+			}
+		}
+	}
 }

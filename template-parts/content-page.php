@@ -10,16 +10,17 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+
+$page_content_block =
+	'<!-- wp:novablocks/sidecar {"layout":"no-sidebar", "className":"ignore-block"} -->' .
+	'<!-- wp:novablocks/sidecar-area {"className":"novablocks-content entry-content"} -->' .
+	rosa2_get_content_markup().
+	'<!-- /wp:novablocks/sidecar-area -->' .
+	'<!-- /wp:novablocks/sidecar -->';
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-    <div class="entry-content">
-		<?php
-            do_action( 'rosa2_before_content' );
-            the_content();
-            do_action( 'rosa2_after_content' );
-		?>
-    </div>
+  <?php echo do_blocks( $page_content_block );?>
 
 </article><!-- #post-<?php the_ID(); ?> -->

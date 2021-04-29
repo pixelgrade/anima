@@ -356,6 +356,10 @@
     --current-font-weight: var(--theme-body-font-weight);
     --current-font-style: var(--theme-body-font-style);
     --current-letter-spacing: var(--theme-body-letter-spacing); }
+  .wp-block-gallery.alignfull figcaption,
+  .wp-block-gallery > .alignfull figcaption {
+    padding-left: var(--theme-wrapper-sides-spacing);
+    padding-right: var(--theme-wrapper-sides-spacing); }
   .wp-block-gallery.is-cropped img {
     width: 100%;
     height: 100%;
@@ -365,6 +369,7 @@
 
 .blocks-gallery-grid {
   list-style: none;
+  width: 100%;
   display: flex;
   flex-wrap: wrap; }
   .blocks-gallery-grid[class] {

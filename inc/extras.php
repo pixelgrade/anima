@@ -358,7 +358,7 @@ function rosa2_custom_gutenberg_settings() {
 add_action( 'after_setup_theme', 'rosa2_custom_gutenberg_settings', 10 );
 
 function rosa2_should_enqueue_novablocks_fallbacks() {
-    if ( ! in_array( 'nova-blocks/nova-blocks.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+    if ( ! in_array( 'nova-blocks-beta/nova-blocks.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
         return true;
     }
 
@@ -424,3 +424,143 @@ if ( ! function_exists( 'rosa2_add_primary_menu_item_description' ) ) {
 }
 
 add_filter( 'walker_nav_menu_start_el', 'rosa2_add_primary_menu_item_description', 10, 4 );
+
+if ( ! function_exists('rosa2_get_meta_template_part' ) ) {
+
+	/**
+	 * Retrieve the template part for entry meta.
+	 */
+
+	function rosa2_get_meta_template_part() {
+
+		ob_start();
+
+		get_template_part( 'template-parts/entry-meta', get_post_type() );
+
+		return ob_get_clean();
+	}
+}
+
+if ( ! function_exists('rosa2_get_thumbnail_markup' ) ) {
+
+	/**
+	 * Retrieve the markup for post thumbnail.
+	 */
+
+	function rosa2_get_thumbnail_markup() {
+		ob_start();
+
+		if ( has_post_thumbnail() ) { ?>
+            <div class="entry-thumbnail alignwide">
+                <div class="entry-thumbnail__wrapper  alignwide  disabled-avoid-fout">
+                    <div class="entry-thumbnail__container">
+						<?php the_post_thumbnail(); ?>
+                    </div>
+                </div>
+            </div>
+		<?php }
+
+		return ob_get_clean();
+	}
+}
+if ( ! function_exists('rosa2_get_content_markup' ) ) {
+
+	/**
+	 * Retrieve the markup for post content.
+	 */
+
+
+	function rosa2_get_content_markup() {
+		ob_start(); ?>
+
+			<?php
+			do_action( 'rosa2_before_content' );
+			the_content();
+			do_action( 'rosa2_after_content' );
+			?>
+
+		<?php return ob_get_clean();
+	}
+}
+
+if ( ! function_exists('rosa2_get_sidebar_markup' ) ) {
+
+	/**
+	 * Retrieve the markup for sidebar.
+	 */
+
+	function rosa2_get_sidebar_markup() {
+		ob_start();
+
+		get_template_part( 'template-parts/single-sidebar' );
+
+		return ob_get_clean();
+	}
+}
+
+if ( ! function_exists('rosa2_get_post_navigation_markup' ) ) {
+
+	/**
+	 * Retrieve the markup for post navigation.
+	 */
+
+	function rosa2_get_post_navigation_markup() {
+		ob_start();
+
+		rosa2_the_post_navigation();
+
+		return ob_get_clean();
+	}
+}
+
+if ( ! function_exists( 'rosa2_get_image_aspect_ratio_type' ) ) {
+	/**
+	 * Retrieve the aspect ratio type of an image.
+	 *
+	 * @param int|WP_Post          $image The image attachment ID or the attachment object.
+	 * @param bool|string Optional . The default to return in case of failure.
+	 *
+	 * @return string|bool Returns the aspect ratio type string, or false|$default, if no image is available.
+	 */
+	function rosa2_get_image_aspect_ratio_type( $image, $default = false ) {
+		// We expect to receive an attachment ID or attachment post object
+		if ( is_numeric( $image ) ) {
+			// In case we've got a number, we will coerce it to an int
+			$image = (int) $image;
+		}
+
+		// Try and get the attachment post object
+		$image = get_post( $image );
+		if ( ! $image ) {
+			return $default;
+		}
+
+		// We only work with real images
+		if ( ! wp_attachment_is_image( $image ) ) {
+			return $default;
+		}
+
+		// $image_data[1] is width
+		// $image_data[2] is height
+		// we use the full image size to avoid the Photon messing around with the data - at least for now
+		$image_data = wp_get_attachment_image_src( $image->ID, 'full' );
+
+		if ( empty( $image_data ) ) {
+			return $default;
+		}
+
+		// We default to a landscape aspect ratio
+		$type = 'landscape';
+		if ( ! empty( $image_data[1] ) && ! empty( $image_data[2] ) ) {
+			$image_aspect_ratio = $image_data[1] / $image_data[2];
+
+			// now let's begin to see what kind of featured image we have
+			// first portrait images
+			if ( $image_aspect_ratio <= 1 ) {
+				$type = 'portrait';
+			}
+		}
+
+		return apply_filters( 'rosa2_image_aspect_ratio_type', $type, $image );
+	}
+}

@@ -11,24 +11,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+$article_block_navigation =
+	'<!-- wp:novablocks/sidecar {"layout":"sidebar-right"} -->' .
+	'<!-- wp:novablocks/sidecar-area {"className":"novablocks-content"} -->' .
+	rosa2_get_post_navigation_markup().
+	'<!-- /wp:novablocks/sidecar-area -->' .
+	'<!-- /wp:novablocks/sidecar -->';
+
 get_header(); ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main">
 			<?php
-			while ( have_posts() ) : the_post();
-
-				get_template_part( 'template-parts/content-single', get_post_type() );
-
-				rosa2_the_post_navigation();
-
-				// If comments are open or we have at least one comment, load up the comment template.
-				if ( comments_open() || get_comments_number() ) {
-					comments_template();
-				}
-
-			endwhile; // End of the loop.
-			?>
+			    while ( have_posts() ) {
+				    the_post();
+				    get_template_part( 'template-parts/content-single', rosa2_get_image_aspect_ratio_type( get_post_thumbnail_id( $post ), 'landscape' ) );
+                }?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->

@@ -609,19 +609,52 @@
   --theme-input-box-shadow: none; }
 
 html:root {
-  --novablocks-wide-width: calc(var(--theme-content-width-wide));
-  --novablocks-content-width: var(--theme-content-width-normal); }
+  --novablocks-wide-width: var(--theme-content-width-wide);
+  --novablocks-content-width: var(--theme-content-width-normal);
+  --novablocks-container-spacings: var(--theme-wrapper-sides-spacing); }
 
-.entry-content .novablocks-layout .novablocks-sidebar--large * {
-  --font-size-modifier: 0.9; }
+.page:not(.home) .entry-content[class] {
+  --block-content-start: wsge;
+  --block-content-end: wegs; }
 
-@media not screen and (min-width: 1000px) {
-  .entry-content .novablocks-layout .novablocks-layout {
-    padding-left: 0;
-    padding-right: 0; } }
+.no-sidebar .article--is-portrait .entry-header > * {
+  --block-limit-left: wsgs;
+  --block-limit-right: wege; }
 
-.entry-content .novablocks-layout .novablocks-layout .novablocks-sidebar:not([class*='large']) * {
+.no-sidebar {
+  --block-limit-left: cs;
+  --block-limit-right: ce; }
+
+.no-sidebar .entry-content {
+  --block-content-start: cs; }
+
+.single:not(.no-sidebar) .entry-content,
+.single:not(.no-sidebar) .article-navigation,
+.single:not(.no-sidebar) .article-comments {
+  --block-content-start: ws; }
+
+.post[class*='article--is'] .entry-content[class] {
+  grid-column: var(--block-limit-left)/ce; }
+
+.no-sidebar .post[class*='article--is'] .entry-content[class] {
+  grid-column: wsge/wegs; }
+
+.article--is-landscape .article-header[class] {
+  grid-column: var(--block-limit-left)/var(--block-limit-right); }
+
+@media only screen and (min-width: 1000px) {
+  [class*='align-pull'] * {
+    --font-size-modifier: 0.75; } }
+
+.novablocks-sidebar * {
+  font-size: var(--final-font-size); }
+
+.novablocks-sidebar * {
   --font-size-modifier: 0.75; }
 
-.novablocks-content .novablocks-sidebar * {
-  --font-size-modifier: 0.9; }
+.novablocks-sidebar--large > .novablocks-sidebar * {
+  --font-size-modifier: 0.85; }
+
+.novablocks-sidecar .novablocks-sidecar .novablocks-collection.block-is-basic > [class*="__inner-container"] {
+  padding-left: 0;
+  padding-right: 0; }
