@@ -3649,3 +3649,10 @@ ul.menu,
 
 .wp-block-group__inner-container > * {
   width: 100%; }
+
+@media not screen and (min-width: 1000px) {
+  .alignwide:not(.novablocks-sidecar), .alignfull:not(.novablocks-sidecar) {
+    --pull-left-value: var(--theme-wrapper-sides-spacing) !important;
+    --pull-right-value: var(--theme-wrapper-sides-spacing) !important; }
+  .site-main {
+    overflow-x: hidden; } }

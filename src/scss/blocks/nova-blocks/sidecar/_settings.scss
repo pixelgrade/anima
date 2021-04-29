@@ -65,6 +65,8 @@ html:root {
 	}
 }
 
-[class*='align-pull'] * {
-	--font-size-modifier: 0.75;
+@include above(lap) {
+	[class*='align-pull'] * {
+		--font-size-modifier: 0.75;
+	}
 }

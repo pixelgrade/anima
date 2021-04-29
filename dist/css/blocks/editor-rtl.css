@@ -822,8 +822,9 @@ html:root {
 .article--is-landscape .article-header[class] {
   grid-column: var(--block-limit-left)/var(--block-limit-right); }
 
-[class*='align-pull'] * {
-  --font-size-modifier: 0.75; }
+@media only screen and (min-width: 1000px) {
+  [class*='align-pull'] * {
+    --font-size-modifier: 0.75; } }
 
 .novablocks-sidebar * {
   font-size: var(--final-font-size); }
