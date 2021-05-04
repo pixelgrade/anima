@@ -6,20 +6,26 @@ $assets-folder-path: '../../assets';
 @import "components/dark-mode-button";
 
 /* Layout */
-.wp-block {
+//.wp-block {
+//
+//    &:not([data-align="wide"]):not([data-align="full"]) {
+//        max-width: var(--theme-content-width-normal);
+//    }
+//
+//    &[data-align="wide"] {
+//        max-width: var(--theme-content-width-wide);
+//    }
+//
+//    &[data-align="full"] {
+//        max-width: none;
+//    }
+//}
 
-    &:not([data-align="wide"]):not([data-align="full"]) {
-        max-width: var(--theme-content-width-normal);
-    }
 
-    &[data-align="wide"] {
-        max-width: var(--theme-content-width-wide);
-    }
-
-    &[data-align="full"] {
-        max-width: none;
-    }
+.wp-block:not([data-align="wide"]):not([data-align="full"]) {
+    max-width: 100%;
 }
+
 
 /* Typography */
 :root {

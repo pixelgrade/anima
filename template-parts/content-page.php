@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $page_content_block =
-	'<!-- wp:novablocks/sidecar {"layout":"no-sidebar", "className":"ignore-block"} -->' .
+	'<!-- wp:novablocks/sidecar {"layout":"no-sidebar", "sidebarWidth": "large", "className":"ignore-block"} -->' .
 	'<!-- wp:novablocks/sidecar-area {"className":"novablocks-content entry-content"} -->' .
 	rosa2_get_content_markup().
 	'<!-- /wp:novablocks/sidecar-area -->' .
