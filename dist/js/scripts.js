@@ -1418,10 +1418,11 @@ function () {
 var header_base_HeaderBase =
 /*#__PURE__*/
 function () {
-  function HeaderBase() {
+  function HeaderBase(options) {
     classCallCheck_default()(this, HeaderBase);
 
     this.offset = 0;
+    this.options = options || {};
   }
 
   createClass_default()(HeaderBase, [{
@@ -1436,6 +1437,10 @@ function () {
     key: "onResize",
     value: function onResize() {
       this.box = this.element.getBoundingClientRect();
+
+      if (typeof this.options.onResize === "function") {
+        this.options.onResize();
+      }
     }
   }, {
     key: "getHeight",
@@ -1768,7 +1773,7 @@ function (_HeaderBase) {
 
     classCallCheck_default()(this, Header);
 
-    _this = possibleConstructorReturn_default()(this, getPrototypeOf_default()(Header).call(this));
+    _this = possibleConstructorReturn_default()(this, getPrototypeOf_default()(Header).call(this, options));
     if (!element) return possibleConstructorReturn_default()(_this);
     _this.onUpdate = options.onUpdate;
     _this.element = element;
@@ -1890,6 +1895,8 @@ function (_HeaderBase) {
           _this2.box = Object.assign({}, _this2.box, {
             height: tween.target.height
           });
+
+          _this2.onResize();
         },
         onUpdateParams: ["{self}"],
         ease: transitionEasing
@@ -2330,6 +2337,7 @@ function () {
   function App() {
     classCallCheck_default()(this, App);
 
+    this.enableFirstBlockPaddingTop = external_jQuery_default()('body').hasClass('has-novablocks-header-transparent');
     this.initializeHero();
     this.initializeHeader();
     this.initializeLogo();
@@ -2415,7 +2423,7 @@ function () {
 
       if ($header.length) {
         this.header = new header($header.get(0), {
-          onUpdate: this.onHeaderUpdate.bind(this)
+          onResize: this.onHeaderUpdate.bind(this)
         });
       }
     }
@@ -2456,18 +2464,30 @@ function () {
     value: function onHeaderUpdate() {
       var _this$promoBar, _this$header;
 
+      if (!this.enableFirstBlockPaddingTop) {
+        return false;
+      }
+
       var promoBarHeight = ((_this$promoBar = this.promoBar) === null || _this$promoBar === void 0 ? void 0 : _this$promoBar.height) || 0;
       var headerHeight = ((_this$header = this.header) === null || _this$header === void 0 ? void 0 : _this$header.getHeight()) || 0;
       external_jQuery_default()('body:not(.has-no-spacing-top) .site-content').css('marginTop', "".concat(promoBarHeight + headerHeight, "px"));
       external_jQuery_default()('html').css('scrollPaddingTop', "".concat(headerHeight, "px"));
-      var $firstBlock = external_jQuery_default()('.has-novablocks-header-transparent .entry-content > :first-child');
+      var $firstBlock = external_jQuery_default()('.entry-content > :first-child');
+
+      if ($firstBlock.is('.supernova')) {
+        var paddingTop = getPaddingTop($firstBlock);
+        $firstNovaBlock.css('paddingTop', paddingTop + headerHeight + promoBarHeight);
+        return;
+      }
+
       var $firstBlockFg = $firstBlock.find('.novablocks-doppler__foreground');
-      var firstBlockFgPaddingTop = parseInt($firstBlockFg.css('paddingTop', '').css('paddingTop'), 0);
-      $firstBlockFg.css('paddingTop', Math.max(firstBlockFgPaddingTop, headerHeight + promoBarHeight));
-      var $supernova = $firstBlock.filter('.supernova');
-      var $firstNovaBlock = $supernova.length ? $supernova : $firstBlock.children('.novablocks-block');
-      var firstBlockPaddingTop = parseInt($firstNovaBlock.css('paddingTop', '').css('paddingTop'), 0) || 0;
-      $firstNovaBlock.css('paddingTop', firstBlockPaddingTop + headerHeight + promoBarHeight);
+
+      if ($firstBlockFg.length) {
+        var _paddingTop = getPaddingTop($firstBlockFg);
+
+        $firstBlockFg.css('paddingTop', Math.max(_paddingTop, headerHeight + promoBarHeight));
+        return;
+      }
     }
   }]);
 
@@ -2475,6 +2495,10 @@ function () {
 }();
 
 
+
+var getPaddingTop = function getPaddingTop($element) {
+  return parseInt($element.css('paddingTop', '').css('paddingTop'), 10) || 0;
+};
 // CONCATENATED MODULE: ./src/js/scripts.js
 
 

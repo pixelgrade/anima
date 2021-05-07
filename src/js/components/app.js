@@ -15,6 +15,9 @@ import { toggleLightClasses } from '../utils';
 export default class App {
 
 	constructor() {
+
+		this.enableFirstBlockPaddingTop = $( 'body' ).hasClass( 'has-novablocks-header-transparent' );
+
 		this.initializeHero();
 		this.initializeHeader();
 		this.initializeLogo();
@@ -91,7 +94,7 @@ export default class App {
 
 		if ( $header.length ) {
 			this.header = new Header( $header.get(0), {
-				onUpdate: this.onHeaderUpdate.bind( this )
+				onResize: this.onHeaderUpdate.bind( this )
 			} );
 		}
 	}
@@ -128,20 +131,35 @@ export default class App {
 	}
 
 	onHeaderUpdate() {
+
+		if ( ! this.enableFirstBlockPaddingTop ) {
+			return false;
+		}
+
 		const promoBarHeight = this.promoBar?.height || 0;
 		const headerHeight = this.header?.getHeight() || 0;
 
 		$( 'body:not(.has-no-spacing-top) .site-content' ).css( 'marginTop', `${ promoBarHeight + headerHeight }px` );
 		$( 'html' ).css( 'scrollPaddingTop', `${ headerHeight }px` );
 
-		const $firstBlock = $( '.has-novablocks-header-transparent .entry-content > :first-child' );
-		const $firstBlockFg = $firstBlock.find( '.novablocks-doppler__foreground' );
-		const firstBlockFgPaddingTop = parseInt( $firstBlockFg.css( 'paddingTop', '' ).css( 'paddingTop' ), 0 );
-		$firstBlockFg.css( 'paddingTop', Math.max( firstBlockFgPaddingTop, headerHeight + promoBarHeight ) );
+		const $firstBlock = $( '.entry-content > :first-child' );
 
-		const $supernova = $firstBlock.filter( '.supernova' );
-		const $firstNovaBlock = $supernova.length ? $supernova : $firstBlock.children( '.novablocks-block' );
-		const firstBlockPaddingTop = parseInt( $firstNovaBlock.css( 'paddingTop', '' ).css( 'paddingTop' ), 0 ) || 0;
-		$firstNovaBlock.css( 'paddingTop', firstBlockPaddingTop + headerHeight + promoBarHeight );
+		if ( $firstBlock.is( '.supernova' ) ) {
+			const paddingTop = getPaddingTop( $firstBlock );
+			$firstNovaBlock.css( 'paddingTop', paddingTop + headerHeight + promoBarHeight );
+			return;
+		}
+
+		const $firstBlockFg = $firstBlock.find( '.novablocks-doppler__foreground' );
+
+		if ( $firstBlockFg.length ) {
+			const paddingTop = getPaddingTop( $firstBlockFg );
+			$firstBlockFg.css( 'paddingTop', Math.max( paddingTop, headerHeight + promoBarHeight ) );
+			return;
+		}
 	}
+}
+
+const getPaddingTop = ( $element ) => {
+	return parseInt( $element.css( 'paddingTop', '' ).css( 'paddingTop' ), 10 ) || 0
 }

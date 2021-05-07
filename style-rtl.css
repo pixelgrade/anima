@@ -1316,9 +1316,9 @@ table {
     margin-left: auto; }
   .entry-header > :not(.alignwide):not(.alignfull) {
     max-width: var(--theme-content-width-normal); }
-  .entry-header > .alignwide {
+  .alignwide {
     max-width: var(--theme-content-width-wide); }
-  .entry-header > .alignfull {
+  .alignfull {
     max-width: none; }
 
 .entry-title {
@@ -1354,11 +1354,9 @@ table {
   .entry-content > :not(.alignwide):not(.alignfull),
   [class*="__inner-container"] > :not(.alignwide):not(.alignfull) {
     max-width: var(--theme-content-width-normal); }
-  .entry-content > .alignwide,
-  [class*="__inner-container"] > .alignwide {
+  .alignwide {
     max-width: var(--theme-content-width-wide); }
-  .entry-content > .alignfull,
-  [class*="__inner-container"] > .alignfull {
+  .alignfull {
     max-width: none; }
 
 .entry-footer {
@@ -1372,9 +1370,9 @@ table {
     margin-left: auto; }
   .entry-footer > :not(.alignwide):not(.alignfull) {
     max-width: var(--theme-content-width-normal); }
-  .entry-footer > .alignwide {
+  .alignwide {
     max-width: var(--theme-content-width-wide); }
-  .entry-footer > .alignfull {
+  .alignfull {
     max-width: none; }
   .entry-footer > :not(:first-child) {
     margin-top: var(--theme-spacing-medium); }
@@ -1419,9 +1417,9 @@ table {
     margin-left: auto; }
   .comments-area > :not(.alignwide):not(.alignfull) {
     max-width: var(--theme-content-width-normal); }
-  .comments-area > .alignwide {
+  .alignwide {
     max-width: var(--theme-content-width-wide); }
-  .comments-area > .alignfull {
+  .alignfull {
     max-width: none; }
   .comments-area > :not(:first-child) {
     margin-top: var(--theme-spacing-medium); }
@@ -2768,12 +2766,6 @@ textarea {
   --sm-current-accent-color: var(--sm-accent-color-11);
   --sm-current-fg1-color: var(--sm-fg1-color-11);
   --sm-current-fg2-color: var(--sm-fg2-color-11); }
-
-.c-logo__default {
-  opacity: var(--logo-default-opacity, 1); }
-
-.c-logo__inverted {
-  opacity: var(--logo-inverted-opacity, 0); }
 
 .sm-dark {
   --logo-default-opacity: 0;

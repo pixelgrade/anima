@@ -9,7 +9,7 @@ import { addClass, hasClass, setAndResetElementStyles, getColorSetClasses } from
 class Header extends HeaderBase {
 
 	constructor( element, options ) {
-		super();
+		super( options );
 
 		if ( ! element ) return;
 
@@ -114,6 +114,7 @@ class Header extends HeaderBase {
 			height: height,
 			onUpdate: ( tween ) => {
 				this.box = Object.assign( {}, this.box, { height: tween.target.height } );
+				this.onResize();
 			},
 			onUpdateParams: [ "{self}" ],
 			ease: transitionEasing

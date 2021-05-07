@@ -4,8 +4,9 @@ import globalService from '../globalService';
 
 class HeaderBase {
 
-	constructor() {
+	constructor( options ) {
 		this.offset = 0;
+		this.options = options || {};
 	}
 
 	initialize() {
@@ -19,6 +20,10 @@ class HeaderBase {
 
 	onResize() {
 		this.box = this.element.getBoundingClientRect();
+
+		if ( typeof this.options.onResize === "function" ) {
+			this.options.onResize();
+		}
 	}
 
 	getHeight() {
