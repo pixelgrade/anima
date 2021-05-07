@@ -1783,8 +1783,9 @@ function (_HeaderBase) {
 
     _this.initialize();
 
-    _this.toggleRowsColors(true); //		addClass( this.element, 'novablocks-header--transparent' );
+    _this.toggleRowsColors(true);
 
+    utils_addClass(_this.element, 'novablocks-header--transparent');
 
     if (_this.secondaryHeader) {
       utils_addClass(_this.secondaryHeader, 'novablocks-header--ready');
