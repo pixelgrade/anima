@@ -2476,7 +2476,7 @@ function () {
 
       if ($firstBlock.is('.supernova')) {
         var paddingTop = getPaddingTop($firstBlock);
-        $firstNovaBlock.css('paddingTop', paddingTop + headerHeight + promoBarHeight);
+        $firstBlock.css('paddingTop', paddingTop + headerHeight + promoBarHeight);
         return;
       }
 

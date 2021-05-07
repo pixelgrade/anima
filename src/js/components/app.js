@@ -146,7 +146,7 @@ export default class App {
 
 		if ( $firstBlock.is( '.supernova' ) ) {
 			const paddingTop = getPaddingTop( $firstBlock );
-			$firstNovaBlock.css( 'paddingTop', paddingTop + headerHeight + promoBarHeight );
+			$firstBlock.css( 'paddingTop', paddingTop + headerHeight + promoBarHeight );
 			return;
 		}
 
