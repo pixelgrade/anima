@@ -1,5 +1,13 @@
 @import 'settings';
 
+:root {
+	--theme-content-width-wide-new: calc(var(--theme-content-width-wide-addon-new) * var(--theme-body-final-font-size));
+}
+
+.no-sidebar {
+	--theme-offset-width: calc( var(--theme-offset-width-addon-new) * var(--theme-body-final-font-size));
+}
+
 .novablocks-sidebar * {
 	font-size: var(--final-font-size);
 }
