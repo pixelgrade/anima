@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $article_header_block =
 	'<!-- wp:novablocks/sidecar -->' .
-	'<!-- wp:novablocks/sidecar-area {"className":"novablocks-content article-header"} -->' .
+	'<!-- wp:novablocks/sidecar-area {"className":"novablocks-content article-header", "sidebarWidth":"medium"} -->' .
 	'<div class="article-header__wrapper">'.
 	rosa2_get_meta_template_part().
 	'<h1 class="entry-title">' . get_the_title() . '</h1>'.
@@ -22,7 +22,7 @@ $article_header_block =
 	'<!-- /wp:novablocks/sidecar -->';
 
 $article_content_block =
-	'<!-- wp:novablocks/sidecar {"layout":"sidebar-right"} -->' .
+	'<!-- wp:novablocks/sidecar {"layout":"sidebar-right", "sidebarWidth":"medium" } -->' .
 	'<!-- wp:novablocks/sidecar-area {"className":"novablocks-content entry-content"} -->' .
 	rosa2_get_thumbnail_markup().
 	rosa2_get_content_markup().

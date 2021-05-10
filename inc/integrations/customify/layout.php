@@ -75,11 +75,11 @@ function rosa2_add_layout_section_to_customify_config( $config ) {
 					'type'        => 'range',
 					'live'        => true,
 					'label'       => esc_html__( 'Offset Width', '__theme_txtd' ),
-					'default'     => 5,
+					'default'     => 230,
 					'input_attrs' => array(
-						'min'          => 0,
-						'max'          => 12,
-						'step'         => 1,
+						'min'          => 100,
+						'max'          => 300,
+						'step'         => 10,
 						'data-preview' => true,
 					),
 					'css'         => array(
