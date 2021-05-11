@@ -631,10 +631,9 @@ body:not(.has-sidebar) {
   --block-content-start: var(--block-limit-left);
   --block-content-end: var(--block-limit-right); }
 
-@media only screen and (min-width: 1000px) {
-  [class*='align-pull'] *,
-  [data-novablocks-alignment] * {
-    --font-size-modifier: 0.75; } }
+.novablocks-sidecar {
+  --sticky-element-top-spacing: calc( 5em + var(--admin-bar-height) )
+; }
 
 body {
   --body-font-size: var(--theme-body-font-size);
@@ -645,6 +644,9 @@ body {
 .novablocks-sidebar * {
   font-size: var(--final-font-size); }
 
+[class*='align'] *,
+[class*='pull'] *,
+[data-novablocks-alignment] *,
 .novablocks-sidebar * {
   --font-size-modifier: 0.75; }
 

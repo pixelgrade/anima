@@ -37,12 +37,6 @@ body:not(.has-sidebar) {
 	}
 }
 
-@include above(lap) {
-	[class*='align-pull'],
-	[data-novablocks-alignment]  {
-		
-		* {
-			--font-size-modifier: 0.75;
-		}
-	}
+.novablocks-sidecar {
+	--sticky-element-top-spacing: calc( 5em + var(--admin-bar-height) )
 }
