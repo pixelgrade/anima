@@ -11,9 +11,20 @@ body {
 	font-size: var(--final-font-size);
 }
 
-[class*='align'],
-[class*='pull'],
-[data-novablocks-alignment],
+
+.novablocks-content {
+	[class*='align'],
+	[data-align],
+	[class*='pull'],
+	[data-novablocks-alignment] {
+		
+		* {
+			--font-size-modifier: 0.75;
+		}
+		
+	}
+}
+
 .novablocks-sidebar {
 	
 	* {
