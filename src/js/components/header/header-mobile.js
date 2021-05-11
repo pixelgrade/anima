@@ -103,6 +103,7 @@ class HeaderMobile extends HeaderBase {
 	}
 
 	update() {
+		this.element.style.top = `${ this.top }px`;
 		this.menuToggle.element.style.height = `${ this.box.height }px`;
 		this.parentContainer.style.paddingTop = `${ this.box.height }px`;
 		this.buttonMenu.style.height = `${ this.box.height }px`;

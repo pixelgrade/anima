@@ -1460,7 +1460,7 @@ function () {
       var _globalService$getPro = globalService.getProps(),
           scrollY = _globalService$getPro.scrollY;
 
-      var shouldBeSticky = scrollY > this.offset;
+      var shouldBeSticky = scrollY > this.offset - this.top;
 
       if (this.shouldBeSticky === shouldBeSticky && !forceUpdate) {
         return;
@@ -1479,7 +1479,7 @@ function () {
     value: function applyStickyStyles(element) {
       if (this.shouldBeSticky) {
         element.style.position = 'fixed';
-        element.style.removeProperty('top');
+        element.style.top = "".concat(this.top, "px");
       } else {
         element.style.position = 'absolute';
         element.style.top = "".concat(this.offset, "px");
@@ -1710,6 +1710,7 @@ function (_HeaderBase) {
   }, {
     key: "update",
     value: function update() {
+      this.element.style.top = "".concat(this.top, "px");
       this.menuToggle.element.style.height = "".concat(this.box.height, "px");
       this.parentContainer.style.paddingTop = "".concat(this.box.height, "px");
       this.buttonMenu.style.height = "".concat(this.box.height, "px");
@@ -2049,12 +2050,14 @@ function () {
 var promo_bar_PromoBar =
 /*#__PURE__*/
 function () {
-  function PromoBar(elements, args) {
+  function PromoBar(element, args) {
     var _this = this;
 
     classCallCheck_default()(this, PromoBar);
 
-    var announcementElementsArray = Array.from(elements);
+    var announcementBars = element.querySelectorAll('.novablocks-announcement-bar');
+    var announcementElementsArray = Array.from(announcementBars);
+    this.element = element;
     this.bars = announcementElementsArray.map(function (element) {
       return new announcement_bar_AnnouncementBar(element, {
         parent: _this,
@@ -2064,6 +2067,7 @@ function () {
     });
     this.height = 0;
     this.onUpdate = args.onUpdate;
+    this.offset = args.offset || 0;
     this.update();
   }
 
@@ -2075,6 +2079,7 @@ function () {
         promoBarHeight += bar.height;
       });
       this.height = promoBarHeight;
+      this.element.style.top = "".concat(this.offset, "px");
 
       if (typeof this.onUpdate === "function") {
         this.onUpdate(this);
@@ -2331,13 +2336,16 @@ function (_BaseComponent) {
 
 
 
-
 var app_App =
 /*#__PURE__*/
 function () {
   function App() {
     classCallCheck_default()(this, App);
 
+    this.adminBar = document.getElementById('wpadminbar');
+    this.adminBarFixed = false;
+    this.adminBarHeight = 0;
+    this.updateAdminBarProps();
     this.enableFirstBlockPaddingTop = external_jQuery_default()('body').hasClass('has-novablocks-header-transparent');
     this.initializeHero();
     this.initializeHeader();
@@ -2348,9 +2356,18 @@ function () {
     this.initializeImages();
     this.initializeCommentsArea();
     this.initializeReservationForm();
+    window.addEventListener('resize', this.onResize.bind(this));
   }
 
   createClass_default()(App, [{
+    key: "onResize",
+    value: function onResize() {
+      this.updateAdminBarProps();
+      this.promoBar.offset = this.adminBarHeight;
+      this.promoBar.update();
+      this.header.mobileHeader.top = this.adminBarHeight;
+    }
+  }, {
     key: "initializeImages",
     value: function initializeImages() {
       var showLoadedImages = this.showLoadedImages.bind(this);
@@ -2387,6 +2404,17 @@ function () {
           });
         });
       });
+    }
+  }, {
+    key: "updateAdminBarProps",
+    value: function updateAdminBarProps() {
+      if (!this.adminBar) {
+        return;
+      }
+
+      this.adminBarHeight = this.adminBar.offsetHeight;
+      var style = window.getComputedStyle(this.adminBar);
+      this.adminBarFixed = style.getPropertyValue('position') === 'fixed';
     }
   }, {
     key: "showLoadedImages",
@@ -2436,8 +2464,9 @@ function () {
   }, {
     key: "initializePromoBar",
     value: function initializePromoBar() {
-      var announcementBars = document.querySelectorAll('.promo-bar .novablocks-announcement-bar');
-      this.promoBar = new promo_bar_PromoBar(announcementBars, {
+      var promoBar = document.querySelector('.promo-bar');
+      this.promoBar = new promo_bar_PromoBar(promoBar, {
+        offset: this.adminBarHeight,
         onUpdate: this.onPromoBarUpdate.bind(this)
       });
     }
@@ -2449,9 +2478,10 @@ function () {
       var promoBarHeight = !!promoBar ? promoBar.height : 0;
 
       if (!!header) {
-        header.offset = promoBarHeight;
+        header.offset = promoBarHeight + this.adminBarHeight;
         header.render(true);
-        header.mobileHeader.offset = promoBarHeight;
+        header.mobileHeader.offset = promoBarHeight + this.adminBarHeight;
+        header.mobileHeader.top = this.adminBarFixed ? this.adminBarHeight : 0;
         header.mobileHeader.render(true);
       }
 
@@ -2487,7 +2517,6 @@ function () {
         var _paddingTop = getPaddingTop($firstBlockFg);
 
         $firstBlockFg.css('paddingTop', Math.max(_paddingTop, headerHeight + promoBarHeight));
-        return;
       }
     }
   }]);

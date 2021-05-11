@@ -1,6 +1,5 @@
 import $ from 'jquery';
 
-import { debounce } from "../utils";
 import GlobalService from './globalService';
 import Hero from './hero';
 import CommentsArea from './commentsArea';
@@ -16,6 +15,11 @@ export default class App {
 
 	constructor() {
 
+		this.adminBar = document.getElementById( 'wpadminbar' );
+		this.adminBarFixed = false;
+		this.adminBarHeight = 0;
+		this.updateAdminBarProps();
+
 		this.enableFirstBlockPaddingTop = $( 'body' ).hasClass( 'has-novablocks-header-transparent' );
 
 		this.initializeHero();
@@ -27,6 +31,17 @@ export default class App {
 		this.initializeImages();
 		this.initializeCommentsArea();
 		this.initializeReservationForm();
+
+		window.addEventListener( 'resize', this.onResize.bind( this ) );
+	}
+
+	onResize() {
+		this.updateAdminBarProps();
+
+		this.promoBar.offset = this.adminBarHeight;
+		this.promoBar.update();
+
+		this.header.mobileHeader.top = this.adminBarHeight;
 	}
 
 	initializeImages() {
@@ -62,6 +77,17 @@ export default class App {
 				} )
 			} );
 		} );
+	}
+
+	updateAdminBarProps() {
+
+		if ( ! this.adminBar ) {
+			return;
+		}
+
+		this.adminBarHeight = this.adminBar.offsetHeight ;
+		const style = window.getComputedStyle( this.adminBar );
+		this.adminBarFixed = style.getPropertyValue( 'position' ) === 'fixed';
 	}
 
 	showLoadedImages( container = document.body ) {
@@ -104,9 +130,10 @@ export default class App {
 	}
 
 	initializePromoBar() {
-		const announcementBars = document.querySelectorAll( '.promo-bar .novablocks-announcement-bar' );
+		const promoBar = document.querySelector( '.promo-bar' );
 
-		this.promoBar = new PromoBar( announcementBars, {
+		this.promoBar = new PromoBar( promoBar, {
+			offset: this.adminBarHeight,
 			onUpdate: this.onPromoBarUpdate.bind( this )
 		});
 	}
@@ -117,10 +144,11 @@ export default class App {
 		const promoBarHeight = !! promoBar ? promoBar.height : 0;
 
 		if ( !! header ) {
-			header.offset = promoBarHeight;
+			header.offset = promoBarHeight + this.adminBarHeight;
 			header.render( true );
 
-			header.mobileHeader.offset = promoBarHeight;
+			header.mobileHeader.offset = promoBarHeight + this.adminBarHeight;
+			header.mobileHeader.top = this.adminBarFixed ? this.adminBarHeight : 0;
 			header.mobileHeader.render( true );
 		}
 
@@ -155,7 +183,6 @@ export default class App {
 		if ( $firstBlockFg.length ) {
 			const paddingTop = getPaddingTop( $firstBlockFg );
 			$firstBlockFg.css( 'paddingTop', Math.max( paddingTop, headerHeight + promoBarHeight ) );
-			return;
 		}
 	}
 }

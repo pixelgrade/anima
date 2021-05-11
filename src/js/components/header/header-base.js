@@ -36,7 +36,7 @@ class HeaderBase {
 
 	maybeUpdateStickyStyles( forceUpdate ) {
 		const { scrollY } = globalService.getProps();
-		const shouldBeSticky = scrollY > this.offset;
+		const shouldBeSticky = scrollY > this.offset - this.top;
 
 		if ( this.shouldBeSticky === shouldBeSticky && ! forceUpdate ) {
 			return;
@@ -53,7 +53,7 @@ class HeaderBase {
 	applyStickyStyles( element ) {
 		if ( this.shouldBeSticky ) {
 			element.style.position = 'fixed';
-			element.style.removeProperty( 'top' );
+			element.style.top = `${ this.top }px`;
 		} else {
 			element.style.position = 'absolute';
 			element.style.top = `${ this.offset }px`;
