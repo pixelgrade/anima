@@ -51,8 +51,8 @@ function rosa2_body_classes( $classes ) {
 		$classes[] = 'is-dark-mode';
 	}
 
-	if ( is_single() && ! rosa2_is_active_sidebar( 'sidebar-1' ) ) {
-		$classes[] = 'no-sidebar';
+	if ( is_single() && rosa2_is_active_sidebar( 'sidebar-1' ) ) {
+		$classes[] = 'has-sidebar';
 	}
 
 	return $classes;

@@ -169,7 +169,7 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
     left: 0;
     transform: none; }
 
-.post-password-form input[type="submit"] {
+.post-password-form input[type='submit'] {
   width: 100%;
   margin-top: var(--theme-spacing-small); }
 
@@ -213,12 +213,11 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
     .article-header__wrapper .entry-meta {
       justify-content: flex-start; }
 
+body:not(.has-sidebar) .article-header__wrapper .entry-meta {
+  justify-content: center; }
+
 .article-header__wrapper {
   padding-top: var(--theme-spacing-fluid-large); }
-  .no-sidebar .article-header__wrapper {
-    text-align: center; }
-    .no-sidebar .article-header__wrapper .entry-meta {
-      justify-content: center; }
 
 .article--is-portrait .article-header__wrapper {
   text-align: left; }

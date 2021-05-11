@@ -747,20 +747,18 @@ html:root {
   --novablocks-content-width: var(--theme-content-width-normal);
   --novablocks-container-spacings: var(--theme-wrapper-sides-spacing); }
 
-.no-sidebar .article--is-portrait .entry-header > * {
-  --block-limit-left: wsgs;
-  --block-limit-right: wege; }
-
-.no-sidebar {
+body:not(.has-sidebar) {
   --block-limit-left: cs;
   --block-limit-right: ce; }
+  body:not(.has-sidebar) .article--is-portrait .entry-header > * {
+    --block-limit-left: wsgs;
+    --block-limit-right: wege; }
+  body:not(.has-sidebar) .entry-content {
+    --block-content-start: cs; }
 
-.no-sidebar .entry-content {
-  --block-content-start: cs; }
-
-.single:not(.no-sidebar) .entry-content,
-.single:not(.no-sidebar) .article-navigation,
-.single:not(.no-sidebar) .article-comments {
+.single.has-sidebar .entry-content,
+.single.has-sidebar .article-navigation,
+.single.has-sidebar .article-comments {
   --block-content-start: ws; }
 
 .article--is-landscape .article-header {
@@ -842,20 +840,18 @@ html:root {
   --novablocks-content-width: var(--theme-content-width-normal);
   --novablocks-container-spacings: var(--theme-wrapper-sides-spacing); }
 
-.no-sidebar .article--is-portrait .entry-header > * {
-  --block-limit-left: wsgs;
-  --block-limit-right: wege; }
-
-.no-sidebar {
+body:not(.has-sidebar) {
   --block-limit-left: cs;
   --block-limit-right: ce; }
+  body:not(.has-sidebar) .article--is-portrait .entry-header > * {
+    --block-limit-left: wsgs;
+    --block-limit-right: wege; }
+  body:not(.has-sidebar) .entry-content {
+    --block-content-start: cs; }
 
-.no-sidebar .entry-content {
-  --block-content-start: cs; }
-
-.single:not(.no-sidebar) .entry-content,
-.single:not(.no-sidebar) .article-navigation,
-.single:not(.no-sidebar) .article-comments {
+.single.has-sidebar .entry-content,
+.single.has-sidebar .article-navigation,
+.single.has-sidebar .article-comments {
   --block-content-start: ws; }
 
 .article--is-landscape .article-header {

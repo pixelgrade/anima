@@ -85,7 +85,7 @@
 }
 
 .post-password-form {
-    input[type="submit"] {
+    input[type='submit'] {
         width: 100%;
         margin-top: var(--theme-spacing-small);
     }
@@ -150,20 +150,18 @@
     }
 }
 
-.article-header__wrapper {
-    padding-top: var(--theme-spacing-fluid-large);
+body:not(.has-sidebar) {
     
-    .no-sidebar & {
-        text-align: center;
-        
+    .article-header__wrapper {
+    
         .entry-meta {
             justify-content: center;
         }
     }
 }
 
-.single:not(.no-sidebar) {
-
+.article-header__wrapper {
+    padding-top: var(--theme-spacing-fluid-large);
 }
 
 .article--is-portrait {

@@ -4,27 +4,24 @@ html:root {
 	--novablocks-container-spacings: var(--theme-wrapper-sides-spacing);
 }
 
-.article--is-portrait {
+body:not(.has-sidebar) {
+	--block-limit-left: cs;
+	--block-limit-right: ce;
 	
-	.no-sidebar & {
+	.article--is-portrait {
 		
 		.entry-header > * {
 			--block-limit-left: wsgs;
 			--block-limit-right: wege;
 		}
 	}
+	
+	.entry-content {
+		--block-content-start: cs;
+	}
 }
 
-.no-sidebar {
-	--block-limit-left: cs;
-	--block-limit-right: ce;
-}
-
-.no-sidebar .entry-content {
-	--block-content-start: cs;
-}
-
-.single:not(.no-sidebar) {
+.single.has-sidebar {
 	.entry-content,
 	.article-navigation,
 	.article-comments {
