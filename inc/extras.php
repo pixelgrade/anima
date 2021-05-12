@@ -452,11 +452,7 @@ if ( ! function_exists('rosa2_get_thumbnail_markup' ) ) {
 
 		if ( has_post_thumbnail() ) { ?>
             <div class="entry-thumbnail alignwide">
-                <div class="entry-thumbnail__wrapper  alignwide  disabled-avoid-fout">
-                    <div class="entry-thumbnail__container">
-						<?php the_post_thumbnail(); ?>
-                    </div>
-                </div>
+                <?php the_post_thumbnail(); ?>
             </div>
 		<?php }
 

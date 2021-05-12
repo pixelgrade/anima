@@ -25,7 +25,10 @@ body:not(.has-sidebar) {
 	.entry-content,
 	.article-navigation,
 	.article-comments {
-		--block-content-start: ws;
+		
+		@include specific(3) {
+			--block-content-start: ws;
+		}
 	}
 }
 

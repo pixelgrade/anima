@@ -11,13 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-$article_block_navigation =
-	'<!-- wp:novablocks/sidecar {"layout":"sidebar-right"} -->' .
-	'<!-- wp:novablocks/sidecar-area {"className":"novablocks-content"} -->' .
-	rosa2_get_post_navigation_markup().
-	'<!-- /wp:novablocks/sidecar-area -->' .
-	'<!-- /wp:novablocks/sidecar -->';
-
 get_header(); ?>
 
 	<div id="primary" class="content-area">
@@ -25,7 +18,7 @@ get_header(); ?>
 			<?php
 			    while ( have_posts() ) {
 				    the_post();
-				    get_template_part( 'template-parts/content-single', rosa2_get_image_aspect_ratio_type( get_post_thumbnail_id( $post ), 'landscape' ) );
+				    get_template_part( 'template-parts/content-single' );
                 }?>
 
 		</main><!-- #main -->
