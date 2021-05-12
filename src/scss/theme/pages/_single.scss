@@ -115,7 +115,6 @@
         order: -1;
         
         @include above(lap) {
-            padding-bottom: var(--theme-spacing-medium);
             padding-right: calc(var(--theme-spacing-medium) * 0.5);
             
             + * {
@@ -177,10 +176,21 @@
             }
         }
     }
+    
+    
+    @include above(lap) {
+        .post-excerpt {
+            margin-top: var(--theme-spacing-small);
+        }
+    }
 }
 
 .entry-header {
     position: relative;
+    
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
     
     background-color: var(--current-light-tertiary);
     z-index: 1;
@@ -199,6 +209,10 @@
         background-color: inherit;
         pointer-events: none;
         z-index: -1;
+    }
+    
+    .entry-meta {
+        margin-top: auto;
     }
 }
 
