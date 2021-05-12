@@ -2812,6 +2812,7 @@ span.page-numbers {
 .post-navigation {
   --current-arrow-padding: calc(.4em + 1.15em);
   --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-small);
+  width: 100%;
   clear: both; }
   .post-navigation .nav-links {
     margin-left: auto;
@@ -3640,8 +3641,5 @@ ul.menu,
   width: 100%; }
 
 @media not screen and (min-width: 1000px) {
-  .alignwide:not(.novablocks-sidecar), .alignfull:not(.novablocks-sidecar) {
-    --pull-left-value: var(--theme-wrapper-sides-spacing) !important;
-    --pull-right-value: var(--theme-wrapper-sides-spacing) !important; }
   .site-main {
     overflow-x: hidden; } }
