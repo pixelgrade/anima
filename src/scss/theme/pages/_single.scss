@@ -55,7 +55,7 @@
     }
 
     .entry-header {
-        @include space-children-y( var(--theme-spacing) );
+        @include space-children-y( var(--theme-spacing-fluid-xsmall) );
     
         .entry-thumbnail {
             padding-top: var(--theme-spacing-fluid-large);
@@ -101,90 +101,6 @@
     }
 }
 
-.article-header--portrait {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    
-    .entry-thumbnail {
-        position: relative;
-        z-index: 10;
-        max-width: none;
-        margin-top: var(--theme-spacing-large);
-        flex-basis: 50%;
-        order: -1;
-        
-        @include above(lap) {
-            padding-right: calc(var(--theme-spacing-medium) * 0.5);
-            
-            + * {
-                padding-left: calc(var(--theme-spacing-medium) * 0.5);
-            }
-        }
-        
-        + * {
-            display: flex;
-            flex-basis: 50%;
-            flex-direction: column;
-        }
-    }
-    
-    .entry-meta {
-        justify-content: flex-start;
-    }
-    
-    @include below(lap) {
-        flex-direction: column;
-        
-        .entry-thumbnail {
-            order: 2;
-    
-            margin-top: calc( -1 * (var(--overlap-header-size) - var(--theme-spacing-large))) !important;
-            
-            + * {
-    
-                position: relative;
-    
-                background-color: var(--current-light-tertiary);
-                z-index: 1;
-    
-                padding-top: var(--theme-spacing-large);
-                padding-bottom: var(--overlap-header-size);
-                
-                &:before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    right: -100vw;
-                    bottom: 0;
-                    left: -100vw;
-                    display: block;
-                    background-color: inherit;
-                    pointer-events: none;
-                    z-index: -1;
-                }
-            }
-        }
-        
-        .entry-header {
-            
-            padding-top: 0;
-            padding-bottom: 1em;
-            
-            &:before {
-                content: none;
-            }
-        }
-    }
-    
-    
-    @include above(lap) {
-        .post-excerpt {
-            margin-top: var(--theme-spacing-small);
-        }
-    }
-}
-
 .entry-header {
     position: relative;
     
@@ -195,7 +111,6 @@
     background-color: var(--current-light-tertiary);
     z-index: 1;
     
-    padding-top: var(--theme-spacing-large);
     padding-bottom: var(--theme-spacing-large);
     
     &:before {
@@ -211,38 +126,47 @@
         z-index: -1;
     }
     
-    .entry-meta {
-        margin-top: auto;
+    + .entry-thumbnail {
+        --element-spacing: var(--theme-spacing-fluid-xsmall);
+        
+        position: relative;
+        margin-top: calc( -1 * var(--overlap-header-size) + 2 * var(--element-spacing)) !important;
+        z-index: 10;
+    }
+    
+    .cat-links {
+        --current-font-weight: 700;
+        
+        a {
+            color: var(--current-color-primary);
+            text-decoration: none;
+        }
+    }
+    
+    .entry-title {
+        --current-font-weight: 800;
+    }
+    
+    .cat-links {
+        --element-spacing: var(--theme-spacing-fluid-default);
+        margin-bottom: var(--element-spacing);
+    }
+    
+    .post-excerpt {
+        @include apply-font(lead);
     }
 }
 
 .article-header--landscape {
-    text-align: center;
-    
-    &[class] {
-        --block-content-end: we;
-    }
-    
-    .has-sidebar & {
-        text-align: left;
-    }
     
     .entry-header {
         padding-bottom: var(--overlap-header-size);
     }
     
     + .novablocks-sidecar {
-        margin-top: calc( -1 * (var(--overlap-header-size) - var(--theme-spacing-large))) !important;
+        margin-top: calc( -1 * var(--overlap-header-size) * 0.8) !important;
         
         z-index: 2;
-    }
-    
-    @include below(lap) {
-        text-align: left;
-        
-        .entry-meta {
-            justify-content: flex-start;
-        }
     }
 }
 
