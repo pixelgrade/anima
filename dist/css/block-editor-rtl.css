@@ -387,17 +387,23 @@
     .editor-styles-wrapper[class] p {
       font: inherit; }
   .editor-styles-wrapper a {
-    --theme-links-current-color: var(--theme-links-color);
-    --theme-links-current-decoration-color: var(--theme-links-decoration-color);
-    color: var(--theme-links-current-color);
+    color: var(--theme-links-color);
     text-decoration: underline;
-    text-decoration-color: var(--theme-links-current-decoration-color);
+    text-decoration-color: transparent;
     transition: var(--theme-links-transition); }
     .editor-styles-wrapper a:hover, .editor-styles-wrapper a:focus {
-      --theme-links-current-color: var(--theme-links-hover-color);
-      --theme-links-current-decoration-color: var(--theme-links-hover-decoration-color); }
+      color: var(--theme-links-color);
+      text-decoration-color: var(--theme-links-color); }
     .editor-styles-wrapper a[href^=tel] {
-      color: inherit; }
+      color: currentColor;
+      text-decoration-color: transparent; }
+    .entry-title .editor-styles-wrapper a:hover, .entry-title .editor-styles-wrapper a:focus {
+      text-decoration-color: transparent; }
+    .entry-meta .editor-styles-wrapper a {
+      color: currentColor;
+      text-decoration-color: transparent; }
+      .entry-meta .editor-styles-wrapper a:hover, .entry-meta .editor-styles-wrapper a:focus {
+        text-decoration-color: var(--theme-links-color); }
   .editor-styles-wrapper img,
   .editor-styles-wrapper video {
     max-width: 100%;

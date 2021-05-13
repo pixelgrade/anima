@@ -878,17 +878,23 @@ ol ol {
 
 /* Links */
 a {
-  --theme-links-current-color: var(--theme-links-color);
-  --theme-links-current-decoration-color: var(--theme-links-decoration-color);
-  color: var(--theme-links-current-color);
+  color: var(--theme-links-color);
   text-decoration: underline;
-  text-decoration-color: var(--theme-links-current-decoration-color);
+  text-decoration-color: transparent;
   transition: var(--theme-links-transition); }
   a:hover, a:focus {
-    --theme-links-current-color: var(--theme-links-hover-color);
-    --theme-links-current-decoration-color: var(--theme-links-hover-decoration-color); }
+    color: var(--theme-links-color);
+    text-decoration-color: var(--theme-links-color); }
   a[href^=tel] {
-    color: inherit; }
+    color: currentColor;
+    text-decoration-color: transparent; }
+  .entry-title a:hover, .entry-title a:focus {
+    text-decoration-color: transparent; }
+  .entry-meta a {
+    color: currentColor;
+    text-decoration-color: transparent; }
+    .entry-meta a:hover, .entry-meta a:focus {
+      text-decoration-color: var(--theme-links-color); }
 
 /* Preformatted */
 pre {
