@@ -56,7 +56,7 @@
 .c-meta-author {
 	display: flex;
 	
-	margin-left: calc( -1 * var(--element-spacing) );
+	margin-left: calc( -1 * var(--element-spacing) * 0.5 );
 	margin-top: calc( -1 * var(--element-spacing) );
 	
 	&__avatar {
@@ -91,7 +91,7 @@
 	}
 	
 	> * {
-		margin-left: var(--element-spacing);
+		margin-left: calc(var(--element-spacing) * 0.5);
 		margin-top: var(--element-spacing);
 	}
 }
@@ -101,6 +101,7 @@
 	align-items: center;
 	
 	&__link {
+		
 		@include specific(2) {
 			text-decoration-color: currentColor;
 			text-decoration: none;
@@ -120,7 +121,7 @@
 		
 		background-color: var(--current-light-tertiary);
 		
-		border: 1px solid var(--current-dark-secondary);
+		border: 2px solid var(--current-dark-secondary);
 	}
 	
 	&__count + &__label {
@@ -218,7 +219,7 @@
 	border-left: 0.45em solid transparent;
 	border-top: 0.35em solid var(--current-light-tertiary);
 	
-	filter: drop-shadow(1px 0px 0 var(--current-dark-secondary)) drop-shadow(0 1px 0 var(--current-dark-secondary));
+	filter: drop-shadow(2px 1px 0 var(--current-dark-secondary)) drop-shadow(0 2px 0 var(--current-dark-secondary));
 }
 
 .c-meta-author__body .author {

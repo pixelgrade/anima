@@ -33,7 +33,7 @@ $article_markup = '          <!-- wp:novablocks/sidecar { "className":"alignwide
 
 ?>
 
-<article id="post-<?php the_ID(); ?>">
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 	<?php  echo do_blocks( $article_markup ); ?>
 
