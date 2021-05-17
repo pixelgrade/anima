@@ -106,12 +106,14 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
   .archive .entry-content {
     --display-mode: block; } }
 
-.single {
+.single .has-post-thumbnail {
   --overlap-header-size: 10em; }
-  .single.single-post {
-    background: var(--current-light-tertiary); }
-  .single .site-content {
-    background: var(--current-light-primary); }
+
+.single.single-post {
+  background: var(--current-light-tertiary); }
+
+.single .site-content {
+  background: var(--current-light-primary); }
 
 .single .hentry > :not(:first-child),
 .page .hentry > :not(:first-child) {
@@ -213,10 +215,10 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
     --current-font-weight: 800;
     --current-line-height: 1.2; }
 
-.article-header--landscape .entry-header {
-  padding-bottom: var(--overlap-header-size); }
+.article-header .entry-header {
+  padding-bottom: var(--overlap-header-size, 1em); }
 
-.article-header--landscape + .novablocks-sidecar {
+.article-header + .novablocks-sidecar {
   margin-top: calc( -1 * var(--overlap-header-size) * 0.8) !important;
   z-index: 2; }
 
@@ -224,7 +226,7 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
   justify-content: flex-start; }
 
 .article-header a {
-  display: block; }
+  display: inline-block; }
 
 .article-header .cat-links,
 .article-header .entry-excerpt {
@@ -258,8 +260,12 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
     transform: scale3d(1, 1, 1);
     transform-origin: right; }
 
-.article-header .cat-links {
-  display: flex; }
+.article-header .novablocks-sharing:hover a:before,
+.article-header .novablocks-sharing:hover .novablocks-sharing__button-label:before,
+.article-header .c-meta-comments:hover a:before,
+.article-header .c-meta-comments:hover .novablocks-sharing__button-label:before {
+  transform: scale3d(1, 1, 1);
+  transform-origin: right; }
 
 body:not(.home):not(.has-no-spacing-top) .site-main {
   --page-top-spacing: 5em; }

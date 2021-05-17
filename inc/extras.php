@@ -425,40 +425,6 @@ if ( ! function_exists( 'rosa2_add_primary_menu_item_description' ) ) {
 
 add_filter( 'walker_nav_menu_start_el', 'rosa2_add_primary_menu_item_description', 10, 4 );
 
-if ( ! function_exists('rosa2_get_meta_template_part' ) ) {
-
-	/**
-	 * Retrieve the template part for entry meta.
-	 */
-
-	function rosa2_get_meta_template_part() {
-
-		ob_start();
-
-		get_template_part( 'template-parts/meta' );
-
-		return ob_get_clean();
-	}
-}
-
-if ( ! function_exists('rosa2_get_thumbnail_markup' ) ) {
-
-	/**
-	 * Retrieve the markup for post thumbnail.
-	 */
-
-	function rosa2_get_thumbnail_markup() {
-		ob_start();
-
-		if ( has_post_thumbnail() ) { ?>
-            <div class="entry-thumbnail alignwide">
-                <?php the_post_thumbnail(); ?>
-            </div>
-		<?php }
-
-		return ob_get_clean();
-	}
-}
 if ( ! function_exists('rosa2_get_content_markup' ) ) {
 
 	/**
@@ -509,15 +475,31 @@ if ( ! function_exists('rosa2_get_post_navigation_markup' ) ) {
 	}
 }
 
-if ( ! function_exists('rosa2_get_categories_markup' ) ) {
+if ( ! function_exists('rosa2_article_header' ) ) {
 
-    function rosa2_get_categories_markup() {
-        ob_start();
+	function rosa2_article_header() {
+	    ob_start();
+	    ?>
 
-	    rosa2_categories_posted_in();
+        <div class="article-header">
+            <div class="entry-header">
+				<?php rosa2_categories_posted_in() ?>
+                <h1 class="entry-title"><?php the_title() ?></h1>
+				<?php if (has_excerpt()) { ?>
+                    <div class="entry-excerpt"><?php the_excerpt() ?></div>
+				<?php } ?>
+				<?php get_template_part( 'template-parts/meta' ); ?>
+            </div>
+			<?php if ( has_post_thumbnail() ) { ?>
+                <div class="entry-thumbnail alignwide">
+					<?php the_post_thumbnail(); ?>
+                </div>
+			<?php } ?>
+        </div>
 
+	<?php
 	    return ob_get_clean();
-    }
+	}
 }
 
 /**

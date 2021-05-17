@@ -2,7 +2,9 @@
 
 .single {
     
-    --overlap-header-size: 10em;
+    .has-post-thumbnail {
+        --overlap-header-size: 10em;
+    }
 
     &.single-post {
         background: var(--current-light-tertiary);
@@ -153,10 +155,10 @@
     }
 }
 
-.article-header--landscape {
+.article-header {
     
     .entry-header {
-        padding-bottom: var(--overlap-header-size);
+        padding-bottom: var(--overlap-header-size, 1em);
     }
     
     + .novablocks-sidecar {
@@ -179,7 +181,7 @@
 .article-header{
     
     a {
-        display: block;
+        display: inline-block;
     }
     
     .cat-links,
@@ -219,8 +221,20 @@
         }
     }
     
-    .cat-links {
-        display: flex;
+    .novablocks-sharing,
+    .c-meta-comments {
+        
+        &:hover {
+    
+            a,
+            .novablocks-sharing__button-label {
+                
+                &:before {
+                    transform: scale3d(1, 1, 1);
+                    transform-origin: left;
+                }
+            }
+        }
     }
 }
 
