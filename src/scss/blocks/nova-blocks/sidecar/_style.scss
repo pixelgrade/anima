@@ -7,8 +7,15 @@ body {
 	--offset-addon: var(--theme-offset-width-addon-new);
 }
 
-.novablocks-sidebar * {
-	font-size: var(--final-font-size);
+.novablocks-sidebar {
+	
+	* {
+		font-size: var(--final-font-size);
+	}
+	
+	.widget-area {
+		@include space-children-y( var(--theme-spacing-fluid-small) );
+	}
 }
 
 
