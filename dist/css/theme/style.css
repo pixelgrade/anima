@@ -238,10 +238,10 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
   --current-letter-spacing: var(--theme-lead-letter-spacing);
   --current-text-transform: var(--theme-lead-text-transform); }
 
-.article-header a,
+.article-header a:not(.c-button__link),
 .article-header .novablocks-sharing__button-label {
   position: relative; }
-  .article-header a:before,
+  .article-header a:not(.c-button__link):before,
   .article-header .novablocks-sharing__button-label:before {
     content: '';
     position: absolute;
@@ -255,7 +255,7 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
     transition-property: transform;
     will-change: transform;
     -webkit-backface-visibility: hidden; }
-  .article-header a:hover:before,
+  .article-header a:not(.c-button__link):hover:before,
   .article-header .novablocks-sharing__button-label:hover:before {
     transform: scale3d(1, 1, 1);
     transform-origin: left; }
@@ -267,11 +267,22 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
   transform: scale3d(1, 1, 1);
   transform-origin: left; }
 
+.c-meta-comments {
+  position: relative; }
+
 body:not(.home):not(.has-no-spacing-top) .site-main {
   --page-top-spacing: 5em; }
   body:not(.home):not(.has-no-spacing-top) .site-main .post,
   body:not(.home):not(.has-no-spacing-top) .site-main .page {
     padding-top: var(--page-top-spacing); }
+
+.c-button__link {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block; }
 
 .error404 .content-area,
 .search-no-results .content-area {

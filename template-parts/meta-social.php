@@ -20,8 +20,9 @@ $comments_count = get_comments_number();
 				<div class="c-meta-comments">
                     <div class="c-meta-comments__count"><div class="c-meta-comments__count-text"><?php echo $comments_count ? $comments_count : '&nbsp;'; ?></div><div class="c-meta-comments__arrow"></div></div>
 					<div class="c-meta-comments__label">
-						<a class="c-meta-comments__link" href="#novablocks-comments"><?php echo esc_html__( 'Discuss', '__theme_txtd' ); ?></a>
+						<a class="c-meta-comments__link"><?php echo esc_html__( 'Discuss', '__theme_txtd' ); ?></a>
 					</div>
+                    <a class="c-button__link" href="#novablocks-comments"></a>
 				</div>
 			</div>
 		</div>
