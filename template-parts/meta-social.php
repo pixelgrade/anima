@@ -25,5 +25,5 @@ $comments_count = get_comments_number();
 				</div>
 			</div>
 		</div>
-	</div><!-- .meta__rows -->
+	</div><!-- .c-meta__rows -->
 </div><!-- .c-meta__social -->

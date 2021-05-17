@@ -52,10 +52,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 								printf( __( '%s min read', '__theme_txtd' ), $min_reading_time );
 							?>
                         </div>
-                    </div>
+                    </div> <!-- .c-meta__row--secondary -->
                 </div>
-            </div>
-        </div>
-    </div>
+            </div>  <!-- .c-meta-author__body -->
+        </div> <!-- .c-meta-author -->
+    </div> <!-- .c-meta__authorship -->
 	<?php get_template_part( 'template-parts/meta-social' ); ?>
-</div>
+</div> <!-- .c-meta -->
