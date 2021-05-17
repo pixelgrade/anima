@@ -13,10 +13,12 @@ body {
 
 
 .novablocks-content {
-	[class*='align'],
-	[data-align],
-	[class*='pull'],
-	[data-novablocks-alignment] {
+	
+	> .alignleft,
+	> .alignright,
+	> [data-align],
+	> [class*='pull'],
+	> [data-novablocks-alignment] {
 		
 		* {
 			--font-size-modifier: 0.75;
