@@ -497,8 +497,7 @@ if ( ! function_exists('rosa2_article_header' ) ) {
 			<?php } ?>
         </div>
 
-	<?php
-	    return ob_get_clean();
+	<?php return ob_get_clean();
 	}
 }
 

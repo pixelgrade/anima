@@ -14,64 +14,27 @@ function rosa2_add_layout_section_to_customify_config( $config ) {
 		'layout_section' => array(
 			'title'   => esc_html__( 'Layout', '__theme_txtd' ),
 			'options' => array(
-//				'content_width'      => array(
-//					'type'        => 'range',
-//					'live'        => true,
-//					'label'       => esc_html__( 'Content Width', '__theme_txtd' ),
-//					'default'     => 40,
-//					'input_attrs' => array(
-//						'min'          => 20,
-//						'max'          => 66,
-//						'step'         => 1,
-//						'data-preview' => true,
-//					),
-//					'css'         => array(
-//						array(
-//							'property' => '--theme-content-width-normal-initial',
-//							'selector' => ':root',
-//							'unit'     => '',
-//						),
-//					),
-//				),
-//				'content_wide_width_addon' => array(
-//					'type'        => 'range',
-//					'live'        => true,
-//					'label'       => esc_html__( 'Container Width', '__theme_txtd' ),
-//					'default'     => 32,
-//					'input_attrs' => array(
-//						'min'          => 20,
-//						'max'          => 50,
-//						'step'         => 1,
-//						'data-preview' => true,
-//					),
-//					'css'         => array(
-//						array(
-//							'property' => '--theme-content-width-wide-addon',
-//							'selector' => ':root',
-//							'unit'     => '',
-//						),
-//					),
-//				),
-				'content_wide_width_addon_new' => array(
+				'content_wide_width_addon' => array(
 					'type'        => 'range',
 					'live'        => true,
-					'label'       => esc_html__( 'Container Width New', '__theme_txtd' ),
-					'default'     => 32,
+					'label'       => esc_html__( 'Container Width', '__theme_txtd' ),
+					'default'     => 75,
 					'input_attrs' => array(
 						'min'          => 60,
-						'max'          => 92,
+						'max'          => 100,
 						'step'         => 1,
 						'data-preview' => true,
 					),
 					'css'         => array(
 						array(
-							'property' => '--theme-content-width-wide-addon-new',
+							'property' => '--theme-content-width-wide-addon',
 							'selector' => ':root',
 							'unit'     => '',
 						),
 					),
 				),
-				'wide_offset_width_addon_new' => array(
+
+				'wide_offset_width_addon' => array(
 					'type'        => 'range',
 					'live'        => true,
 					'label'       => esc_html__( 'Offset Width', '__theme_txtd' ),
@@ -84,7 +47,7 @@ function rosa2_add_layout_section_to_customify_config( $config ) {
 					),
 					'css'         => array(
 						array(
-							'property' => '--theme-offset-width-addon-new',
+							'property' => '--theme-offset-width-addon',
 							'selector' => ':root',
 							'unit'     => '',
 						),
