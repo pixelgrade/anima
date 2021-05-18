@@ -29,7 +29,10 @@ $assets-folder-path: '../../../assets';
 
 .woocommerce-pagination {
   @include nav-links;
-  margin-bottom: var(--theme-spacing-xl);
+  
+  &[class][class][class] {
+    margin-bottom: var(--theme-spacing-xl);
+  }
 }
 
 .wc-block-grid__products {
@@ -73,8 +76,13 @@ $assets-folder-path: '../../../assets';
 }
 
 .woocommerce-page {
-  --block-content-start: ws;
-  --block-content-end: we;
+  
+  .entry-content {
+    
+    @include specific(4) {
+      --block-content-start: cs;
+    }
+  }
   
   .entry-content [class*="__inner-container"] {
     padding-left: 0;
