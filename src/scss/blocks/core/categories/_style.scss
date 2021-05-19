@@ -6,3 +6,20 @@ $enable-categories-block-styles:        true !default;
         @include archives;
     }
 }
+
+/* Temporary styles for Category Widget,
+   until we make transition
+   to Full Site Editing */
+.widget_categories {
+    
+    ul {
+        list-style: none;
+        padding-left: 0;
+        
+        color: var(--current-color-primary);
+    }
+    
+    a {
+        text-decoration: none;
+    }
+}
