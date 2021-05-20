@@ -8,6 +8,18 @@ $enable-search-block-styles:            true !default;
 			display: flex;
 		}
 		
+		&:not(.wp-block-search__icon-button) {
+			
+			.wp-block-search__button {
+				
+				min-width: max-content !important;
+				
+				&:after {
+					content: none;
+				}
+			}
+		}
+		
 		&__button {
 			
 			position: relative;
