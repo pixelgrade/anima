@@ -1,0 +1,107 @@
+$enable-search-block-styles:            true !default;
+
+@if $enable-search-block-styles == true {
+
+	.wp-block-search {
+		
+		&__inside-wrapper {
+			display: flex;
+		}
+		
+		&__button {
+			
+			position: relative;
+			
+			@include specific(2) {
+				--theme-button-background-color: var(--current-color-primary);
+				--theme-button-border-color: var(--current-color-primary);
+				--theme-button-text-color: var(--current-light-primary);
+				--theme-button-hover-border-color: var(--current-color-primary);
+				--theme-button-hover-text-color: var(--current-color-primary);
+			}
+			
+			&:hover {
+				
+				&:after {
+					background-color: var(--theme-button-hover-text-color);
+				}
+			}
+			
+			&:after {
+				content: '';
+				position: absolute;
+				left: .8em;
+				top: 50%;
+				transform: translateY(-50%);
+				
+				display: block;
+				width: 1.2em;
+				height: 1.2em;
+				
+				border: 0;
+				padding: 0;
+				
+				mask: url($icon-search-path) no-repeat 50% 50%;
+				mask-size: cover;
+				-webkit-mask: url($icon-search-path) no-repeat 50% 50%;
+				-webkit-mask-size: cover;
+				
+				background-color: var(--theme-button-text-color);
+				transition: background-color .15s $ease;
+			}
+			
+			svg {
+				display: none;
+			}
+		}
+		
+		&__button-outside {
+			
+			.wp-block-search__button {
+				margin-left: 10px;
+			}
+		}
+		
+		&__no-button {
+			
+			.wp-block-search__inside-wrapper {
+				
+				position: relative;
+				
+				&:hover {
+					
+					&:before {
+						opacity: 0.75;
+					}
+				}
+				
+				&:before {
+					content: '';
+					position: absolute;
+					left: .8em;
+					top: 50%;
+					transform: translateY(-50%);
+					
+					display: block;
+					width: 1.2em;
+					height: 1.2em;
+					
+					border: 0;
+					padding: 0;
+					
+					mask: url($icon-search-path) no-repeat 50% 50%;
+					mask-size: cover;
+					-webkit-mask: url($icon-search-path) no-repeat 50% 50%;
+					-webkit-mask-size: cover;
+					
+					background-color: var(--current-color-primary);
+					transition: opacity 0.5 $ease;
+				}
+				
+				.wp-block-search__input {
+					padding-left: calc(var(--theme-input-padding) + 1.75em);
+				}
+			}
+		}
+	}
+}

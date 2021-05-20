@@ -22,4 +22,12 @@ $enable-categories-block-styles:        true !default;
     a {
         text-decoration: none;
     }
+    
+    ul ul {
+        counter-reset: submenu;
+        > li > a:before {
+            content: "-" counters(submenu, "- ", none);
+            counter-increment: submenu;
+        }
+    }
 }

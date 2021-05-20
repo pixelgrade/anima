@@ -35,6 +35,12 @@
 .widget_categories a {
   text-decoration: none; }
 
+.widget_categories ul ul {
+  counter-reset: submenu; }
+  .widget_categories ul ul > li > a:before {
+    content: "-" counters(submenu, "- ", none);
+    counter-increment: submenu; }
+
 /* Image Block */
 .wp-block-image img {
   display: block; }
@@ -94,6 +100,61 @@
   height: var(--theme-comment-avatar-width);
   margin-right: var(--theme-comment-avatar-spacing);
   object-fit: cover; }
+
+.wp-block-jetpack-subscriptions form {
+  display: flex;
+  align-items: stretch; }
+
+.wp-block-jetpack-subscriptions button[type="submit"] {
+  --theme-button-background-color: var(--current-color-primary) !important;
+  --theme-button-border-color: var(--current-color-primary) !important;
+  --theme-button-text-color: var(--current-light-primary) !important;
+  --theme-button-hover-border-color: var(--current-color-primary) !important;
+  --theme-button-hover-text-color: var(--current-color-primary) !important;
+  font-size: var(--final-font-size) !important;
+  padding: var(--theme-button-padding) !important;
+  border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color) !important;
+  margin-left: 0 !important;
+  height: 100%; }
+
+.wp-block-jetpack-subscriptions input[type="email"] {
+  font-size: var(--final-font-size) !important;
+  padding: var(--theme-input-padding) !important;
+  border: 0 !important;
+  height: 100%; }
+
+.wp-block-jetpack-subscriptions #subscribe-email {
+  flex: 1; }
+
+.wp-block-jetpack-subscriptions:not(.wp-block-jetpack-subscriptions__use-newline) button[type="submit"] {
+  position: relative;
+  font-size: 0 !important;
+  min-width: calc( 1.25 * var(--final-font-size) + 1.5 * var(--final-font-size)); }
+  .wp-block-jetpack-subscriptions:not(.wp-block-jetpack-subscriptions__use-newline) button[type="submit"]:hover:after {
+    background-color: var(--theme-button-hover-text-color); }
+  .wp-block-jetpack-subscriptions:not(.wp-block-jetpack-subscriptions__use-newline) button[type="submit"]:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+    width: calc(1.25 * var(--final-font-size));
+    height: calc(1 * var(--final-font-size));
+    border: 0;
+    padding: 0;
+    mask: url("../../../assets/images/icon-mail.svg") no-repeat 50% 50%;
+    mask-size: cover;
+    -webkit-mask: url("../../../assets/images/icon-mail.svg") no-repeat 50% 50%;
+    -webkit-mask-size: cover;
+    background-color: var(--theme-button-text-color);
+    transition: background-color 0.15s cubic-bezier(0.25, 0.1, 0.25, 1); }
+
+.wp-block-jetpack-subscriptions__use-newline form {
+  flex-direction: column; }
+
+.wp-block-jetpack-subscriptions__use-newline button {
+  width: 100%; }
 
 .novablocks-u-content-padding {
   padding-top: calc(var(--site-header-height) + 1.5 * var(--theme-spacing-medium)); }
@@ -669,6 +730,31 @@ body {
   --element-spacing: var(--theme-spacing-fluid-small);
   margin-top: var(--element-spacing); }
 
+.novablocks-sidebar .widget > :not(:first-child) {
+  --element-spacing: var(--theme-spacing-fluid-small);
+  margin-top: var(--element-spacing); }
+
+.novablocks-sidebar .children,
+.novablocks-sidebar .children > li + li {
+  --element-spacing: var(--theme-spacing-tiny);
+  margin-top: var(--element-spacing); }
+
+.novablocks-sidebar select {
+  --font-size: 16; }
+
+.novablocks-sidebar .has-background:not([class*="wp-block-button"]) {
+  padding: var(--theme-spacing-fluid-xsmall); }
+
+.novablocks-sidebar [class*="__inner-container"] {
+  padding: 0; }
+
+.novablocks-sidebar label {
+  flex-direction: column;
+  align-items: flex-start; }
+
+.novablocks-sidebar input[type="submit"] {
+  margin-top: var(--theme-spacing-default); }
+
 .novablocks-content > .alignleft *,
 .novablocks-content > .alignright *,
 .novablocks-content > [data-align] *,
@@ -678,6 +764,12 @@ body {
 
 .novablocks-sidebar * {
   --font-size-modifier: 0.75; }
+
+.novablocks-sidebar form,
+.novablocks-sidebar input,
+.novablocks-sidebar button,
+.novablocks-sidebar select {
+  --font-size-modifier: 1; }
 
 .novablocks-sidebar--large > .novablocks-sidebar * {
   --font-size-modifier: 0.85; }
