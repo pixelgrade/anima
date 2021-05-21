@@ -8,15 +8,22 @@ $enable-gallery-block-styles:           true !default;
 
         list-style: none;
         @include flex-grid;
+    
+        .blocks-gallery-grid {
+            @include flex-grid-count(2);
+        }
 
-        @for $i from 2 through 9 {
-
-            &.columns-#{$i} {
-
-                .blocks-gallery-grid {
-                    @include flex-grid-count($i);
-                }
-            }
+        @include above(tablet) {
+           
+           @for $i from 2 through 9 {
+        
+               &.columns-#{$i} {
+            
+                   .blocks-gallery-grid {
+                       @include flex-grid-count($i);
+                   }
+               }
+           }
         }
 
         img {

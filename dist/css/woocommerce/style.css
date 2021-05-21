@@ -1136,6 +1136,10 @@
   .c-product-main .woocommerce-product-rating[class][class] {
     margin-bottom: 0; }
 
+.woocommerce-product-attributes td,
+.woocommerce-product-attributes th {
+  white-space: normal; }
+
 .variations,
 .variations tbody,
 .variations tr,
@@ -1274,6 +1278,7 @@
     background: none; }
   .shop_attributes[class][class][class] td {
     font: inherit;
+    white-space: initial;
     border: 0; }
   .shop_attributes[class][class][class] th {
     width: 40%;
@@ -1951,11 +1956,11 @@
   .woocommerce-checkout #payment div.form-row {
     padding: 0; }
 
-.woocommerce-terms-and-conditions-wrapper[class][class] > * {
+.woocommerce-terms-and-conditions-wrapper[class][class][class] > * {
   position: relative;
   padding-top: 1.5em;
   padding-bottom: 1.5em; }
-  .woocommerce-terms-and-conditions-wrapper[class][class] > *:before {
+  .woocommerce-terms-and-conditions-wrapper[class][class][class] > *:before {
     content: '';
     position: absolute;
     top: 0;
@@ -1964,9 +1969,9 @@
     background-color: var(--current-dark-primary);
     opacity: .2; }
 
-.woocommerce-terms-and-conditions-wrapper[class][class] .validate-required {
+.woocommerce-terms-and-conditions-wrapper[class][class][class] .validate-required {
   margin-bottom: 0; }
-  .woocommerce-terms-and-conditions-wrapper[class][class] .validate-required .woocommerce-form__input {
+  .woocommerce-terms-and-conditions-wrapper[class][class][class] .validate-required .woocommerce-form__input {
     margin-top: 0;
     margin-right: .625em; }
 
@@ -2280,6 +2285,63 @@ ul.order_details[class] {
 
 .woocommerce-order-received .woocommerce-column__title {
   margin-bottom: var(--theme-spacing-small); }
+
+.wc-stripe-elements-field {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  padding: var(--theme-input-padding);
+  color: var(--theme-input-color);
+  border-radius: var(--theme-input-border-radius);
+  background-color: var(--theme-input-background-color);
+  box-shadow: var(--theme-input-box-shadow);
+  border: 0;
+  transition: all .2s ease-in-out;
+  --font-size: var(--theme-input-font-size);
+  font-size: var(--final-font-size);
+  --current-font-family: var(--theme-input-font-family);
+  --current-font-weight: var(--theme-input-font-weight);
+  --current-font-style: var(--theme-input-font-style);
+  --current-line-height: var(--theme-input-line-height);
+  --current-letter-spacing: var(--theme-input-letter-spacing);
+  --current-text-transform: var(--theme-input-text-transform);
+  font-family: inherit;
+  -webkit-font-smoothing: initial;
+  -webkit-appearance: none; }
+  .wc-stripe-elements-field:hover {
+    --theme-input-box-shadow: var(--theme-input-hover-box-shadow); }
+  .wc-stripe-elements-field:focus, .wc-stripe-elements-field:active {
+    --theme-input-border-color: var(--theme-input-focus-border-color);
+    --theme-input-box-shadow: var(--theme-input-focus-box-shadow);
+    outline: 0; }
+  .wc-stripe-elements-field[disabled] {
+    border-color: var(--theme-input-disabled-border-color);
+    background-color: var(--theme-input-disabled-background-color); }
+  [class*="invalid"] .wc-stripe-elements-field {
+    --theme-input-box-shadow: var(--theme-input-error-box-shadow);
+    --theme-input-color: var(--theme-input-error-color);
+    --theme-input-placeholder-color: var(--theme-input-error-color);
+    --theme-input-placeholder-opacity: 0; }
+    [class*="invalid"] .wc-stripe-elements-field:hover {
+      --theme-input-box-shadow: var(--theme-input-error-box-shadow); }
+    [class*="invalid"] .wc-stripe-elements-field:focus, [class*="invalid"] .wc-stripe-elements-field:active {
+      --theme-input-box-shadow: var(--theme-input-focus-error-box-shadow); }
+  .wc-stripe-elements-field.StripeElement--invalid {
+    --theme-input-box-shadow: var(--theme-input-error-box-shadow); }
+
+.stripe-source-errors {
+  display: flex; }
+  .stripe-source-errors,
+  .stripe-source-errors * {
+    width: 100%; }
+
+.woocommerce-checkout #payment ul.payment_methods li .stripe-card-brand {
+  right: var(--theme-input-padding); }
+
+#wc-stripe-cc-form iframe {
+  font-size: 23px; }
+  #wc-stripe-cc-form iframe html {
+    font-size: inherit; }
 
 .wc-pao-addon,
 [id="product-addons-total"] {

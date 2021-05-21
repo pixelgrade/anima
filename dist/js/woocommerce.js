@@ -128,7 +128,7 @@
   });
   $(function () {
     var $body = $(document.body).not('.woocommerce-cart');
-    var $cartMenuItems = $('.site-header__menu .menu > .menu-item--cart');
+    var $cartMenuItems = $('.menu-item--cart');
     initializeCartMenuItems($cartMenuItems);
 
     if (typeof wp.customize !== "undefined" && typeof wp.customize.selectiveRefresh !== "undefined") {

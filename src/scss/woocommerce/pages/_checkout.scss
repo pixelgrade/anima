@@ -290,7 +290,7 @@
 
 .woocommerce-terms-and-conditions-wrapper {
 
-  @include specific(2) {
+  @include specific(3) {
     > * {
       position: relative;
       padding-top: 1.5em;
@@ -709,3 +709,34 @@ ul.order_details[class] {
     margin-bottom: var(--theme-spacing-small);
   }
 }
+
+// Stripe Minimal Styling
+.wc-stripe-elements-field {
+  @include field;
+  
+  &.StripeElement--invalid {
+    --theme-input-box-shadow: var(--theme-input-error-box-shadow);
+  }
+}
+
+.stripe-source-errors {
+  display: flex;
+  
+  &,
+  * {
+    width: 100%;
+  }
+}
+
+.woocommerce-checkout #payment ul.payment_methods li .stripe-card-brand {
+  right: var(--theme-input-padding);
+}
+
+#wc-stripe-cc-form iframe {
+  font-size: 23px;
+  
+  html {
+    font-size: inherit;
+  }
+}
+

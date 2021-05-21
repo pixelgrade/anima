@@ -42,7 +42,7 @@
 	$(function(){
 
 		var $body = $( document.body ).not( '.woocommerce-cart' );
-		var $cartMenuItems = $( '.site-header__menu .menu > .menu-item--cart' );
+		var $cartMenuItems = $( '.menu-item--cart' );
 
 		initializeCartMenuItems( $cartMenuItems );
 
@@ -55,7 +55,9 @@
 		}
 
 		function initializeCartMenuItems( $cartMenuItems ) {
+
 			$cartMenuItems.each( function( i, obj ) {
+
 				var $cartMenuItem = $( obj );
 				var $cartMenuItemLink = $cartMenuItem.children( 'a' );
 				var cartMenuItemText = $cartMenuItemLink.text();

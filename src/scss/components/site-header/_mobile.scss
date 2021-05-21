@@ -11,19 +11,17 @@
 
     color: var(--sm-light-primary);
     background: transparent;
-
-    &,
-    &__content {
-        &:before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: var(--sm-dark-primary);
-            opacity: 0.95;
-        }
+    
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: var(--sm-dark-primary);
+        opacity: 0.95;
+        z-index: -1;
     }
 
     .c-menu-toggle__checkbox ~ & {

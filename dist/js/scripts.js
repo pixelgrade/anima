@@ -446,6 +446,7 @@ var above = function above(string) {
 };
 function setAndResetElementStyles($element) {
   var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  $element.css(props);
   Object.keys(props).forEach(function (key) {
     props[key] = '';
   });
@@ -1939,12 +1940,29 @@ function () {
     value: function bindEvents() {
       var _this = this;
 
-      external_jQuery_default()(document).on('click', COLOR_SCHEME_BUTTON, this.onClick.bind(this));
-      this.matchMedia.addEventListener('change', function () {
-        localStorage.removeItem(TEMP_STORAGE_ITEM);
+      external_jQuery_default()(document).on('click', COLOR_SCHEME_BUTTON, this.onClick.bind(this)); // Use try and catch to fix compatibility
+      // issues with Safari 13.
+      // Source: https://stackoverflow.com/a/60000747
 
-        _this.update();
-      });
+      try {
+        // Chrome & Firefox
+        this.matchMedia.addEventListener('change', function (e) {
+          localStorage.removeItem(TEMP_STORAGE_ITEM);
+
+          _this.update();
+        });
+      } catch (e1) {
+        try {
+          // Safari
+          this.matchMedia.addListener(function (e) {
+            localStorage.removeItem(TEMP_STORAGE_ITEM);
+
+            _this.update();
+          });
+        } catch (e2) {
+          console.error(e2);
+        }
+      }
     }
   }, {
     key: "bindCustomizer",
