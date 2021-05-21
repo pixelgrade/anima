@@ -55,9 +55,9 @@
 		}
 
 		function initializeCartMenuItems( $cartMenuItems ) {
-			console.log('initialize cart menu items');
+
 			$cartMenuItems.each( function( i, obj ) {
-				console.log(obj);
+
 				var $cartMenuItem = $( obj );
 				var $cartMenuItemLink = $cartMenuItem.children( 'a' );
 				var cartMenuItemText = $cartMenuItemLink.text();
