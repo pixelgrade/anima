@@ -27,12 +27,7 @@
                 margin-right: auto;
             }
         }
-
-        .wc-block-grid__product[class] {
-            flex: 1;
-            max-width: 100%;
-        }
-
+        
         @include above(lap) {
             @for $i from 2 to 9 {
                 &.has-#{$i}-columns .wc-block-grid__product {

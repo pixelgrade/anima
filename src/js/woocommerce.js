@@ -55,7 +55,9 @@
 		}
 
 		function initializeCartMenuItems( $cartMenuItems ) {
+
 			$cartMenuItems.each( function( i, obj ) {
+
 				var $cartMenuItem = $( obj );
 				var $cartMenuItemLink = $cartMenuItem.children( 'a' );
 				var cartMenuItemText = $cartMenuItemLink.text();

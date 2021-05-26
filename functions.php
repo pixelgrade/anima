@@ -45,12 +45,11 @@ if ( ! function_exists( 'rosa2_setup' ) ) {
 		add_theme_support( 'title-tag' );
 
 		/**
-		 * Enable support for Post Thumbnails on posts only.
+		 * Enable support for Post Thumbnails.
 		 *
 		 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
 		 */
-		remove_theme_support( 'post-thumbnails' );
-		add_theme_support( 'post-thumbnails', array( 'post', 'product' ) );
+		add_theme_support( 'post-thumbnails' );
 
 		/**
 		 * Switch default core markup for search form, comment form, and comments

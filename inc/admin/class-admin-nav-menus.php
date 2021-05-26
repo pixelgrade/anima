@@ -492,7 +492,7 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 		}
 
 		public function admin_scripts_styles( $hook_suffix ) {
-			if( 'nav-menus.php' === $hook_suffix ) {
+			if( 'nav-menus.php' === $hook_suffix || is_customize_preview() ) {
 				wp_enqueue_style( 'rosa2-admin-nav-menus-styles', get_template_directory_uri() . '/dist/css/admin/edit-nav-menus.css', array( 'nav-menus' ), '1.0.0' );
 			}
 		}
@@ -855,6 +855,13 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 		 * @param WP_Post  $item    Menu item data object.
 		 */
 		public function add_badge_custom_field( $item_id, $item ) {
+
+		    // We don't need badge for the
+            // menu items created by us.
+		    if ( $item->type === 'custom-pxg' ) {
+		        return;
+		    }
+
 			// The name of the custom menu meta.
 			$name = 'badge';
 
@@ -919,6 +926,7 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 		}
 
 		public function add_customize_badge_custom_field_template() {
+
 			// The name of the custom menu meta.
 			$name = 'badge';
 
