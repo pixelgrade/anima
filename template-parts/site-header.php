@@ -17,11 +17,11 @@ $site_header_is_sticky = pixelgrade_option( 'header_position', 'sticky' ) === 's
 $sticky_attribute = $site_header_is_sticky ? 'data-sticky=true' : '';
 ?>
 
-<header id="masthead" class="site-header site-header--main site-header--logo-center" <?php echo $sticky_attribute; ?>>
-    <div class="site-header__wrapper">
-        <div class="site-header__inner-container">
-            <div class="site-header__content alignfull">
-                <div class="wp-block-novablocks-header-row site-header__row site-header__row--primary">
+<header id="masthead" class="novablocks-header novablocks-header--main novablocks-header--logo-center" <?php echo $sticky_attribute; ?>>
+    <div class="novablocks-header__wrapper">
+        <div class="novablocks-header__inner-container">
+            <div class="novablocks-header__content alignfull">
+                <div class="wp-block-novablocks-header-row novablocks-header__row novablocks-header__row--primary">
                     <nav class="wp-block-novablocks-navigation novablocks-navigation novablocks-navigation--secondary">
                         <?php wp_nav_menu( array(
                             'container'      => false,

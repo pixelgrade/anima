@@ -41,7 +41,9 @@ export default class App {
 		this.promoBar.offset = this.adminBarHeight;
 		this.promoBar.update();
 
-		this.header.mobileHeader.top = this.adminBarHeight;
+		if ( this?.header?.mobileHeader ) {
+			this.header.mobileHeader.top = this.adminBarHeight;
+		}
 	}
 
 	initializeImages() {

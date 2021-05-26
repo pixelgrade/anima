@@ -2369,10 +2369,15 @@ function () {
   createClass_default()(App, [{
     key: "onResize",
     value: function onResize() {
+      var _this$header;
+
       this.updateAdminBarProps();
       this.promoBar.offset = this.adminBarHeight;
       this.promoBar.update();
-      this.header.mobileHeader.top = this.adminBarHeight;
+
+      if (this === null || this === void 0 ? void 0 : (_this$header = this.header) === null || _this$header === void 0 ? void 0 : _this$header.mobileHeader) {
+        this.header.mobileHeader.top = this.adminBarHeight;
+      }
     }
   }, {
     key: "initializeImages",
@@ -2500,14 +2505,14 @@ function () {
   }, {
     key: "onHeaderUpdate",
     value: function onHeaderUpdate() {
-      var _this$promoBar, _this$header;
+      var _this$promoBar, _this$header2;
 
       if (!this.enableFirstBlockPaddingTop) {
         return false;
       }
 
       var promoBarHeight = ((_this$promoBar = this.promoBar) === null || _this$promoBar === void 0 ? void 0 : _this$promoBar.height) || 0;
-      var headerHeight = ((_this$header = this.header) === null || _this$header === void 0 ? void 0 : _this$header.getHeight()) || 0;
+      var headerHeight = ((_this$header2 = this.header) === null || _this$header2 === void 0 ? void 0 : _this$header2.getHeight()) || 0;
       external_jQuery_default()('body:not(.has-no-spacing-top) .site-content').css('marginTop', "".concat(promoBarHeight + headerHeight, "px"));
       external_jQuery_default()('html').css('scrollPaddingTop', "".concat(headerHeight, "px"));
       var $firstBlock = external_jQuery_default()('.entry-content > :first-child');
