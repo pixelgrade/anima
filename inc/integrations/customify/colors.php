@@ -10,6 +10,10 @@ add_filter( 'customify_filter_fields', 'pixelgrade_add_colors_section_to_customi
 
 function pixelgrade_add_colors_section_to_customify_config( $config ) {
 
+	if ( ! function_exists( 'sm_get_color_switch_dark_config' ) ) {
+		return $config;
+	}
+
 	if ( empty( $config['sections'] ) ) {
 		$config['sections'] = array();
 	}

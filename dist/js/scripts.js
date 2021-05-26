@@ -595,6 +595,8 @@ function getFirstChild(el) {
   return firstChild;
 }
 var toggleLightClasses = function toggleLightClasses(element) {
+  var _window, _window$sm;
+
   var classes = Array.from(element.classList);
   var paletteClassname = classes.find(function (classname) {
     return classname.indexOf('sm-palette-') > -1 && classname.indexOf('sm-palette--') === -1;
@@ -608,6 +610,11 @@ var toggleLightClasses = function toggleLightClasses(element) {
   var isShifted = !!classes.find(function (classname) {
     return classname.indexOf('sm-palette--shifted') > -1;
   });
+
+  if (!Array.isArray((_window = window) === null || _window === void 0 ? void 0 : (_window$sm = _window.sm) === null || _window$sm === void 0 ? void 0 : _window$sm.colorsConfig)) {
+    return;
+  }
+
   var currentPaletteConfig = sm.colorsConfig.find(function (thisPalette) {
     return thisPalette.id + '' === palette + '';
   });
