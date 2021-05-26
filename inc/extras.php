@@ -478,6 +478,11 @@ if ( ! function_exists('rosa2_get_post_navigation_markup' ) ) {
 if ( ! function_exists('rosa2_article_header' ) ) {
 
 	function rosa2_article_header() {
+
+		if ( 'post' !== get_post_type() ) {
+		    return;
+        }
+
 	    ob_start();
 	    ?>
 
