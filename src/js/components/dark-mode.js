@@ -35,10 +35,28 @@ export default class DarkMode {
 	bindEvents() {
 		$( document ).on( 'click', COLOR_SCHEME_BUTTON, this.onClick.bind( this ) );
 
-		this.matchMedia.addEventListener( 'change', () => {
-			localStorage.removeItem( TEMP_STORAGE_ITEM );
-			this.update();
-		} );
+		// Use try and catch to fix compatibility
+		// issues with Safari 13.
+
+		// Source: https://stackoverflow.com/a/60000747
+
+		try {
+			// Chrome & Firefox
+			this.matchMedia.addEventListener('change', (e) => {
+				localStorage.removeItem( TEMP_STORAGE_ITEM );
+				this.update();
+			});
+		} catch (e1) {
+			try {
+				// Safari
+				this.matchMedia.addListener((e) => {
+					localStorage.removeItem( TEMP_STORAGE_ITEM );
+					this.update();
+				});
+			} catch (e2) {
+				console.error(e2);
+			}
+		}
 	}
 
 	bindCustomizer() {

@@ -397,15 +397,31 @@ if ( ! function_exists( 'woocommerce_display_categories' ) ) {
 				// also if the current_term doesn't have a term_id it means we are quering the shop and the "all categories" should be active
 				echo '<li><a href="' . esc_url( $all_link ) . '" ' . ( ( ! isset( $current_term->term_id ) ) ? ' class="active"' : ' class="inactive"' ) . '>' . esc_html__( 'All Products', '__theme_txtd' ) . '</a></li>';
 			}
+			// If we are on main shop page,
+            // display only main categories.
+			if ( is_shop() ) {
+				foreach ( $terms as $term ) {
+					if ( ! empty( $current_term->name ) && $current_term->name === $term->name ) {
+					    // Check If the menu item in list is the current term,
+                        // add .active class so we can add some style on it.
+						echo '<li><span class="active">' . esc_html( $term->name ) . '</span></li>';
+					} else {
+						$link = get_term_link( $term, 'product_cat' );
+						// Display main categories.
+						if ( ! is_wp_error( $link ) &&  empty( $term->parent ) ) {
+							echo '<li><a href="' . esc_url( $link ) . '">' . esc_html( $term->name ) . '</a></li>';
+						}
+					}
+				}
+			} else {
+			    // Make sure taxonomy is set and the term has parent.
+				if ( isset( $current_term->taxonomy ) ) {
 
-			// Display a link for each product category.
-			foreach ( $terms as $term ) {
-				if ( ! empty( $current_term->name ) && $current_term->name === $term->name ) {
-					echo '<li><span class="active">' . esc_html( $term->name ) . '</span></li>';
-				} else {
-					$link = get_term_link( $term, 'product_cat' );
-					if ( ! is_wp_error( $link ) ) {
-						echo '<li><a href="' . esc_url( $link ) . '">' . esc_html( $term->name ) . '</a></li>';
+					$subcategories = rosa2_woocommerce_get_subcategories($current_term);
+
+					foreach ( $subcategories as $subcategory ) {
+						$link = get_term_link( $subcategory, 'product_cat' );
+						echo '<li><a href="' . esc_url( $link ) . '">' . esc_html( $subcategory->name ) . '</a></li>';
 					}
 				}
 			}
@@ -579,4 +595,29 @@ function rosa2_add_cart_to_extras_menu_items( $items ) {
 	);
 
     return $items;
+}
+
+/**
+ * Helper function to get WooCommerce subcategories.
+ *
+ * @param Object $category
+ *
+ * @return array
+ */
+
+function rosa2_woocommerce_get_subcategories( $category ) {
+
+    // Get category ID;
+	$parent_category_ID = $category->term_id;
+
+	// Args used to to get categories.
+	$args = array(
+		'hierarchical' => 1,
+		'show_option_none' => '',
+		'hide_empty' => 1,
+		'parent' => $parent_category_ID,
+		'taxonomy' => 'product_cat'
+	);
+
+	return get_categories($args);
 }
