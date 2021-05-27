@@ -93,6 +93,19 @@ textarea {
     @include apply-variation(11);
 }
 
+.novablocks-announcement-bar {
+
+    &.is-style-alternative {
+        @include apply-palette(2);
+        @include apply-variation(6);
+    }
+
+    &.is-style-alert {
+        @include apply-palette(_error);
+        @include apply-variation(7);
+    }
+}
+
 .sm-dark {
     --logo-default-opacity: 0;
     --logo-inverted-opacity: 1;
