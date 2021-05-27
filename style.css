@@ -3167,13 +3167,11 @@ span.page-numbers {
   width: 100%;
   margin-top: 1.5em; }
   .search-form:focus .search-icon, .search-form:focus-within .search-icon {
-    opacity: 1; }
+    opacity: 0.75; }
   .search-form[class] > label {
     flex: 1;
     margin-bottom: 0;
     margin-top: 0; }
-  .search-form[class] .search-field {
-    height: 100%; }
   .search-form .search-submit {
     max-width: 200px;
     margin-left: .5em; }
@@ -3193,8 +3191,7 @@ span.page-numbers {
       mask-size: cover;
       -webkit-mask: url("./assets/images/icon-search.svg") no-repeat 50% 50%;
       -webkit-mask-size: cover;
-      background-color: var(--sm-light-primary);
-      opacity: .5;
+      background-color: var(--sm-color-primary);
       transition: opacity 0.15s cubic-bezier(0.25, 0.1, 0.25, 1); } }
   .search-form .search-submit {
     margin-left: 0;
@@ -3216,14 +3213,7 @@ span.page-numbers {
       color: var(--sm-dark-primary); }
   .search-form .search-field {
     border: 0;
-    padding: 0 .8em;
-    font-weight: bold;
-    background-color: transparent;
-    color: var(--sm-light-primary);
-    --font-size: 23; }
-    @media only screen and (min-width: 1000px) {
-      .search-form .search-field {
-        padding: 0 .8em 0 1.8em; } }
+    padding-left: 2em; }
   .error404 .search-form .search-submit,
   .search-no-results .search-form .search-submit {
     --theme-button-background-color: var(--sm-color-primary);
@@ -3235,9 +3225,6 @@ span.page-numbers {
   .error404 .search-form .search-field,
   .search-no-results .search-form .search-field {
     color: var(--current-dark-primary); }
-  .error404 .search-form .search-icon,
-  .search-no-results .search-form .search-icon {
-    background-color: var(--current-dark-primary); }
 
 /* 3. Blocks */
 /*

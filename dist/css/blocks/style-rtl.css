@@ -709,11 +709,8 @@ body:not(.has-sidebar) {
   --block-content-start: var(--block-limit-left);
   --block-content-end: var(--block-limit-right); }
 
-.site-header-sticky + .site-content .novablocks-sidecar {
-  --sticky-element-top-spacing: calc( 5em + var(--admin-bar-height) ); }
-
 .novablocks-sidecar {
-  --sticky-element-top-spacing: calc( 2.5em + var(--admin-bar-height) )
+  --sticky-element-top-spacing: calc( var(--site-header-height) + var(--admin-bar-height) )
 ; }
 
 .wp-block-group__inner-container {
