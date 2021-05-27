@@ -17,7 +17,8 @@ function rosa2_add_layout_section_to_customify_config( $config ) {
 				'content_wide_width_addon' => array(
 					'type'        => 'range',
 					'live'        => true,
-					'label'       => esc_html__( 'Container Width', '__theme_txtd' ),
+					'label'       => esc_html__( 'Site Container', '__theme_txtd' ),
+					'desc'        => esc_html__( 'Adjust the maximum amount of width where your site content extends.', '__theme_txtd' ),
 					'default'     => 75,
 					'input_attrs' => array(
 						'min'          => 60,
@@ -38,6 +39,7 @@ function rosa2_add_layout_section_to_customify_config( $config ) {
 					'type'        => 'range',
 					'live'        => true,
 					'label'       => esc_html__( 'Content Inset', '__theme_txtd' ),
+					'desc'        => esc_html__( 'Adjust how much the content is visually inset within the Site Container.', '__theme_txtd' ),
 					'default'     => 230,
 					'input_attrs' => array(
 						'min'          => 100,
@@ -56,7 +58,8 @@ function rosa2_add_layout_section_to_customify_config( $config ) {
 				'layout_spacing' => array(
 					'type'        => 'range',
 					'live'        => true,
-					'label'       => esc_html__( 'Spacing', '__theme_txtd' ),
+					'label'       => esc_html__( 'Spacing Level', '__theme_txtd' ),
+					'desc'        => esc_html__( 'Adjust the multiplication factor of the distance between elements.', '__theme_txtd' ),
 					'default'     => 1,
 					'input_attrs' => array(
 						'min'          => 0,
