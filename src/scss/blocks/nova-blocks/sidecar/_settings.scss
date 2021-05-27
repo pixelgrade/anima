@@ -1,20 +1,11 @@
 html:root {
 	--novablocks-wide-width: var(--theme-content-width-wide);
-	--novablocks-content-width: var(--theme-content-width-normal);
 	--novablocks-container-spacings: var(--theme-wrapper-sides-spacing);
 }
 
 body:not(.has-sidebar) {
 	--block-limit-left: cs;
 	--block-limit-right: ce;
-	
-	.article--is-portrait {
-		
-		.entry-header > * {
-			--block-limit-left: wsgs;
-			--block-limit-right: wege;
-		}
-	}
 	
 	.entry-content {
 		--block-content-start: cs;

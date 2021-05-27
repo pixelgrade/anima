@@ -425,40 +425,6 @@ if ( ! function_exists( 'rosa2_add_primary_menu_item_description' ) ) {
 
 add_filter( 'walker_nav_menu_start_el', 'rosa2_add_primary_menu_item_description', 10, 4 );
 
-if ( ! function_exists('rosa2_get_meta_template_part' ) ) {
-
-	/**
-	 * Retrieve the template part for entry meta.
-	 */
-
-	function rosa2_get_meta_template_part() {
-
-		ob_start();
-
-		get_template_part( 'template-parts/entry-meta', get_post_type() );
-
-		return ob_get_clean();
-	}
-}
-
-if ( ! function_exists('rosa2_get_thumbnail_markup' ) ) {
-
-	/**
-	 * Retrieve the markup for post thumbnail.
-	 */
-
-	function rosa2_get_thumbnail_markup() {
-		ob_start();
-
-		if ( has_post_thumbnail() ) { ?>
-            <div class="entry-thumbnail alignwide">
-                <?php the_post_thumbnail(); ?>
-            </div>
-		<?php }
-
-		return ob_get_clean();
-	}
-}
 if ( ! function_exists('rosa2_get_content_markup' ) ) {
 
 	/**
@@ -509,54 +475,105 @@ if ( ! function_exists('rosa2_get_post_navigation_markup' ) ) {
 	}
 }
 
-if ( ! function_exists( 'rosa2_get_image_aspect_ratio_type' ) ) {
-	/**
-	 * Retrieve the aspect ratio type of an image.
-	 *
-	 * @param int|WP_Post          $image The image attachment ID or the attachment object.
-	 * @param bool|string Optional . The default to return in case of failure.
-	 *
-	 * @return string|bool Returns the aspect ratio type string, or false|$default, if no image is available.
-	 */
-	function rosa2_get_image_aspect_ratio_type( $image, $default = false ) {
-		// We expect to receive an attachment ID or attachment post object
-		if ( is_numeric( $image ) ) {
-			// In case we've got a number, we will coerce it to an int
-			$image = (int) $image;
-		}
+if ( ! function_exists('rosa2_article_header' ) ) {
 
-		// Try and get the attachment post object
-		$image = get_post( $image );
-		if ( ! $image ) {
-			return $default;
-		}
+	function rosa2_article_header() {
 
-		// We only work with real images
-		if ( ! wp_attachment_is_image( $image ) ) {
-			return $default;
-		}
+		if ( 'post' !== get_post_type() ) {
+		    return;
+        }
 
-		// $image_data[1] is width
-		// $image_data[2] is height
-		// we use the full image size to avoid the Photon messing around with the data - at least for now
-		$image_data = wp_get_attachment_image_src( $image->ID, 'full' );
+	    ob_start();
+	    ?>
 
-		if ( empty( $image_data ) ) {
-			return $default;
-		}
+        <div class="article-header">
+            <div class="entry-header">
+				<?php rosa2_categories_posted_in() ?>
+                <h1 class="entry-title"><?php the_title() ?></h1>
+				<?php if (has_excerpt()) { ?>
+                    <div class="entry-excerpt"><?php the_excerpt() ?></div>
+				<?php } ?>
+				<?php get_template_part( 'template-parts/meta' ); ?>
+            </div>
+			<?php if ( has_post_thumbnail() ) { ?>
+                <div class="entry-thumbnail alignwide">
+					<?php the_post_thumbnail(); ?>
+                </div>
+			<?php } ?>
+        </div>
 
-		// We default to a landscape aspect ratio
-		$type = 'landscape';
-		if ( ! empty( $image_data[1] ) && ! empty( $image_data[2] ) ) {
-			$image_aspect_ratio = $image_data[1] / $image_data[2];
+	<?php return ob_get_clean();
+	}
+}
 
-			// now let's begin to see what kind of featured image we have
-			// first portrait images
-			if ( $image_aspect_ratio <= 1 ) {
-				$type = 'portrait';
+/**
+ * Return the reading time in minutes for a post content.
+ * @param WP_Post|int $post
+ * @param int $wpm The words per minute reading rate to take into account.
+ * @return int
+ */
+function rosa2_get_post_reading_time_in_minutes( $post, $wpm = 250 ) {
+	$post = get_post( $post );
+
+	if ( ! ( $post instanceof WP_Post ) ) {
+		return 0;
+	}
+
+	// We don't need the whole content filters. Just the bare minimum.
+	$content = do_blocks( $post->post_content );
+	$content = wptexturize( $content );
+	$content = wpautop( $content );
+	$content = shortcode_unautop( $content );
+	$content = do_shortcode( $content );
+
+	$content = str_replace( ']]>', ']]&gt;', $content );
+
+	// Allow others to have a say; like removing certain non-essential elements (avatars for example).
+	$content = apply_filters( 'rosa2_post_content_before_reading_time_calc', $content, $post );
+
+	return rosa2_get_reading_time_in_minutes( $content, $wpm );
+}
+
+/**
+ * Calculate the reading time in minutes for a piece of content.
+ * @param string $content HTML post content.
+ * @param int $wpm The words per minute reading rate to take into account.
+ * @return int
+ */
+function rosa2_get_reading_time_in_minutes( $content, $wpm = 250 ) {
+	// Calculate the time in seconds for the images in the content.
+	$images_time = 0;
+	if ( preg_match_all( '/<img\s[^>]+>/', $content, $matches ) ) {
+		$num_images = count( $matches[0] );
+
+		// The starting image weight (expressed in seconds of reading time).
+		// This weight is decreasing one second with each image encountered, with a minium of 3 seconds.
+		$img_weight = 12;
+		for ( $i = 0; $i < $num_images; $i++ ) {
+			$images_time += $img_weight;
+
+			if ( $img_weight > 3 ) {
+				$img_weight --;
 			}
 		}
-
-		return apply_filters( 'rosa2_image_aspect_ratio_type', $type, $image );
 	}
+
+	// Calculate the time in seconds for the videos in the content.
+	$videos_time = 0;
+	if ( preg_match_all( '/<iframe\s[^>]+>/', $content, $matches ) ) {
+		// We will give one minute for every video (even if the video might be longer).
+		$videos_time = count( $matches[0] ) * 60;
+	}
+
+	// Calculate the words reading time in seconds.
+	$word_count = str_word_count( wp_strip_all_tags( $content ) );
+	$words_time = ceil( $word_count / ( $wpm / 60 ) );
+
+	// Convert the reading time to minutes.
+	$minutes = (int) ceil( ( $words_time + $images_time + $videos_time ) / 60 );
+	if ( $minutes < 1 ) {
+		$minutes = 1;
+	}
+
+	return $minutes;
 }

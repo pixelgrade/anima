@@ -1,22 +1,29 @@
 @import 'settings';
 
 body {
-	--body-font-size: var(--theme-body-font-size);
-	--theme-content-width-wide-new: calc(var(--theme-content-width-wide-addon-new) * var(--final-font-size));
 	--sidebar-offset-multiplier: var(--theme-customify-fluid-unit);
-	--offset-addon: var(--theme-offset-width-addon-new);
+	--offset-addon: var(--theme-offset-width-addon);
 }
 
-.novablocks-sidebar * {
-	font-size: var(--final-font-size);
+.novablocks-sidebar {
+	
+	* {
+		font-size: var(--final-font-size);
+	}
+	
+	.widget-area {
+		@include space-children-y( var(--theme-spacing-fluid-small) );
+	}
 }
 
 
 .novablocks-content {
-	[class*='align'],
-	[data-align],
-	[class*='pull'],
-	[data-novablocks-alignment] {
+	
+	> .alignleft,
+	> .alignright,
+	> [data-align],
+	> [class*='pull'],
+	> [data-novablocks-alignment] {
 		
 		* {
 			--font-size-modifier: 0.75;

@@ -107,9 +107,6 @@
 .novablocks-announcement-bar a:hover {
   color: currentColor; }
 
-.nova-food-menu {
-  --theme-content-width-normal: var(--theme-content-width-wide); }
-
 .nova-food-menu__header .section-title {
   margin-bottom: var(--theme-spacing); }
 
@@ -593,7 +590,20 @@
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
   --current-font-style: var(--theme-body-font-style);
-  --current-letter-spacing: var(--theme-body-letter-spacing); }
+  --current-letter-spacing: var(--theme-body-letter-spacing);
+  visibility: hidden; }
+  .novablocks-sharing__overlay.is-visible {
+    visibility: visible; }
+  .novablocks-sharing__overlay .novablocks-sharing__wrap[class][class][class] {
+    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.26, 0.99); }
+  .novablocks-sharing__overlay[class]:not(.is-visible) {
+    display: block;
+    pointer-events: none; }
+    .novablocks-sharing__overlay[class]:not(.is-visible) .novablocks-sharing__wrap {
+      opacity: 0;
+      transform: translate3d(0, -0.8625em, 0); }
+  .novablocks-sharing__overlay .novablocks-sharing__copy-input {
+    transition: none; }
 
 .novablocks-sharing__link[class] {
   padding: calc( var(--block-spacing) / 2) calc( var(--block-spacing) * 3 / 4); }
@@ -610,15 +620,11 @@
 
 html:root {
   --novablocks-wide-width: var(--theme-content-width-wide);
-  --novablocks-content-width: var(--theme-content-width-normal);
   --novablocks-container-spacings: var(--theme-wrapper-sides-spacing); }
 
 body:not(.has-sidebar) {
   --block-limit-left: cs;
   --block-limit-right: ce; }
-  body:not(.has-sidebar) .article--is-portrait .entry-header > * {
-    --block-limit-left: wsgs;
-    --block-limit-right: wege; }
   body:not(.has-sidebar) .entry-content {
     --block-content-start: cs; }
 
@@ -642,18 +648,21 @@ body:not(.has-sidebar) {
   font-size: var(--final-font-size); }
 
 body {
-  --body-font-size: var(--theme-body-font-size);
-  --theme-content-width-wide-new: calc(var(--theme-content-width-wide-addon-new) * var(--final-font-size));
   --sidebar-offset-multiplier: var(--theme-customify-fluid-unit);
-  --offset-addon: var(--theme-offset-width-addon-new); }
+  --offset-addon: var(--theme-offset-width-addon); }
 
 .novablocks-sidebar * {
   font-size: var(--final-font-size); }
 
-.novablocks-content [class*='align'] *,
-.novablocks-content [data-align] *,
-.novablocks-content [class*='pull'] *,
-.novablocks-content [data-novablocks-alignment] * {
+.novablocks-sidebar .widget-area > :not(:first-child) {
+  --element-spacing: var(--theme-spacing-fluid-small);
+  margin-top: var(--element-spacing); }
+
+.novablocks-content > .alignleft *,
+.novablocks-content > .alignright *,
+.novablocks-content > [data-align] *,
+.novablocks-content > [class*='pull'] *,
+.novablocks-content > [data-novablocks-alignment] * {
   --font-size-modifier: 0.75; }
 
 .novablocks-sidebar * {
