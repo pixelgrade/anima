@@ -110,6 +110,30 @@ textarea {
     }
 }
 
+.novablocks-media {
+
+    &.has-secondary-accent-color .novablocks-block {
+        @include apply-palette(2);
+    }
+
+    &.has-tertiary-accent-color .novablocks-block {
+        @include apply-palette(2);
+    }
+
+
+    //&.block-is-highlighted {
+
+        &:not(.is-style-alternate) .novablocks-block {
+            @include apply-variation(12);
+
+        }
+
+        &.is-style-alternate .novablocks-block {
+            @include apply-variation(7);
+        }
+    //}
+}
+
 .sm-dark {
     --logo-default-opacity: 0;
     --logo-inverted-opacity: 1;
