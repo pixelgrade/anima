@@ -95,6 +95,10 @@ textarea {
 
 .novablocks-announcement-bar {
 
+    &.is-style-accent {
+        @include apply-variation(6);
+    }
+
     &.is-style-alternative {
         @include apply-palette(2);
         @include apply-variation(6);
