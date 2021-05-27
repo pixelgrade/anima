@@ -37,7 +37,7 @@ function rosa2_add_layout_section_to_customify_config( $config ) {
 				'wide_offset_width_addon' => array(
 					'type'        => 'range',
 					'live'        => true,
-					'label'       => esc_html__( 'Offset Width', '__theme_txtd' ),
+					'label'       => esc_html__( 'Content Inset', '__theme_txtd' ),
 					'default'     => 230,
 					'input_attrs' => array(
 						'min'          => 100,
