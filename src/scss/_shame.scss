@@ -85,6 +85,18 @@ textarea {
     line-height: 1;
 }
 
+.sm-dark {
+    --logo-default-opacity: 0;
+    --logo-inverted-opacity: 1;
+}
+
+.sm-light {
+    --logo-default-opacity: 1;
+    --logo-inverted-opacity: 0;
+}
+
+/* Fallback Styles for Color Signal */
+
 .is-style-dark {
     @include apply-variation(9);
 }
@@ -122,24 +134,17 @@ textarea {
 
 
     //&.block-is-highlighted {
-
-        &:not(.is-style-alternate) .novablocks-block {
-            @include apply-variation(12);
-
-        }
-
-        &.is-style-alternate .novablocks-block {
-            @include apply-variation(7);
-        }
+    //
+    //    &:not(.is-style-alternate) .novablocks-block {
+    //        @include apply-variation(12);
+    //
+    //    }
+    //
+    //    &.is-style-alternate .novablocks-block {
+    //        @include apply-variation(7);
+    //    }
+    //
     //}
 }
 
-.sm-dark {
-    --logo-default-opacity: 0;
-    --logo-inverted-opacity: 1;
-}
-
-.sm-light {
-    --logo-default-opacity: 1;
-    --logo-inverted-opacity: 0;
-}
+/* End Fallback Styles for Color Signal */

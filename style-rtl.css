@@ -2783,6 +2783,15 @@ textarea {
   --final-font-size: calc( var(--theme-header-logo-height) * 1.8 );
   line-height: 1; }
 
+.sm-dark {
+  --logo-default-opacity: 0;
+  --logo-inverted-opacity: 1; }
+
+.sm-light {
+  --logo-default-opacity: 1;
+  --logo-inverted-opacity: 0; }
+
+/* Fallback Styles for Color Signal */
 .is-style-dark {
   --sm-current-bg-color: var(--sm-bg-color-9);
   --sm-current-accent-color: var(--sm-accent-color-9);
@@ -3009,22 +3018,4 @@ textarea {
   --sm-fg1-color-12: var(--sm-color-palette-2-fg1-color-12);
   --sm-fg2-color-12: var(--sm-color-palette-2-fg2-color-12); }
 
-.novablocks-media:not(.is-style-alternate) .novablocks-block {
-  --sm-current-bg-color: var(--sm-bg-color-12);
-  --sm-current-accent-color: var(--sm-accent-color-12);
-  --sm-current-fg1-color: var(--sm-fg1-color-12);
-  --sm-current-fg2-color: var(--sm-fg2-color-12); }
-
-.novablocks-media.is-style-alternate .novablocks-block {
-  --sm-current-bg-color: var(--sm-bg-color-7);
-  --sm-current-accent-color: var(--sm-accent-color-7);
-  --sm-current-fg1-color: var(--sm-fg1-color-7);
-  --sm-current-fg2-color: var(--sm-fg2-color-7); }
-
-.sm-dark {
-  --logo-default-opacity: 0;
-  --logo-inverted-opacity: 1; }
-
-.sm-light {
-  --logo-default-opacity: 1;
-  --logo-inverted-opacity: 0; }
+/* End Fallback Styles for Color Signal */
