@@ -10,7 +10,7 @@ if ( empty( $rosa2_options ) || ! is_array( $rosa2_options ) ) {
 	return;
 }
 
-if ( ! empty( $rosa2_options['content_width'] ) || ! empty( $rosa2_options['content_wide_width_addon'] ) ) {
+if ( ! empty( $rosa2_options['content_width'] ) && ! empty( $rosa2_options['content_wide_width_addon'] ) ) {
 
 	// Content Width
 	$content_width_addon   = $rosa2_options['content_width'];
