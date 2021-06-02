@@ -42,7 +42,7 @@ function rosa2_register_required_plugins() {
 			'name'     => 'Nova Blocks',
 			'slug'     => 'nova-blocks',
 			'required' => true,
-			'version'  => '1.9.0',
+			'version'  => '1.11.0',
 		),
 	);
 
