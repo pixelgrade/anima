@@ -15,6 +15,7 @@ $page_markup =
 	'<!-- wp:novablocks/sidecar {"layout":"no-sidebar", "className":"ignore-block"} -->' .
 	'<!-- wp:novablocks/sidecar-area {"className":"novablocks-content entry-content"} -->' .
 	rosa2_get_content_markup().
+	'<!-- wp:novablocks/post-comments --><!-- /wp:novablocks/post-comments -->' .
 	'<!-- /wp:novablocks/sidecar-area -->' .
 	'<!-- /wp:novablocks/sidecar -->';
 ?>
