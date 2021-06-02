@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-$page_content_block =
+$page_markup =
 	'<!-- wp:novablocks/sidecar {"layout":"no-sidebar", "className":"ignore-block"} -->' .
 	'<!-- wp:novablocks/sidecar-area {"className":"novablocks-content entry-content"} -->' .
 	rosa2_get_content_markup().
@@ -21,6 +21,6 @@ $page_content_block =
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-  <?php echo do_blocks( $page_content_block );?>
+  <?php echo do_blocks( $page_markup );?>
 
 </article><!-- #post-<?php the_ID(); ?> -->
