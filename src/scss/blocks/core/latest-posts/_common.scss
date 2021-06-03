@@ -55,6 +55,17 @@ $enable-latest-posts-block-styles:      true !default;
             position: absolute;
             top: 0;
             left: 0;
+    
+            margin-right: 16px;
+            max-width: 90px;
+    
+            img {
+                width: 90px;
+                height: 90px;
+                object-fit: cover;
+        
+                border-radius: 50%;
+            }
         }
         
         li {
@@ -83,20 +94,6 @@ $enable-latest-posts-block-styles:      true !default;
                     text-decoration: underline;
                 }
             
-            }
-        }
-        
-        .wp-block-latest-posts__featured-image {
-            
-            margin-right: 16px;
-            max-width: 90px;
-            
-            img {
-                width: 90px;
-                height: 90px;
-                object-fit: cover;
-                
-                border-radius: 50%;
             }
         }
         

@@ -32,13 +32,6 @@ $enable-search-block-styles:            true !default;
 				--theme-button-hover-text-color: var(--current-color-primary);
 			}
 			
-			&:hover {
-				
-				&:after {
-					background-color: var(--theme-button-hover-text-color);
-				}
-			}
-			
 			&:after {
 				content: '';
 				position: absolute;
@@ -62,6 +55,10 @@ $enable-search-block-styles:            true !default;
 				transition: background-color .15s $ease;
 			}
 			
+			&:hover:after {
+				background-color: var(--theme-button-hover-text-color);
+			}
+			
 			svg {
 				display: none;
 			}
@@ -79,13 +76,6 @@ $enable-search-block-styles:            true !default;
 			.wp-block-search__inside-wrapper {
 				
 				position: relative;
-				
-				&:hover {
-					
-					&:before {
-						opacity: 0.75;
-					}
-				}
 				
 				&:before {
 					content: '';
@@ -108,6 +98,10 @@ $enable-search-block-styles:            true !default;
 					
 					background-color: var(--current-color-primary);
 					transition: opacity 0.5 $ease;
+				}
+				
+				&:hover:before {
+					opacity: 0.75;
 				}
 				
 				.wp-block-search__input {
