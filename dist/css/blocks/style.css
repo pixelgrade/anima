@@ -662,15 +662,13 @@
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
   --current-font-style: var(--theme-body-font-style);
-  --current-letter-spacing: var(--theme-body-letter-spacing);
-  visibility: hidden; }
-  .novablocks-sharing__overlay.is-visible {
-    visibility: visible; }
+  --current-letter-spacing: var(--theme-body-letter-spacing); }
   .novablocks-sharing__overlay .novablocks-sharing__wrap[class][class][class] {
     transition: all 0.4s cubic-bezier(0.25, 0.1, 0.26, 0.99); }
   .novablocks-sharing__overlay[class]:not(.is-visible) {
     display: block;
-    pointer-events: none; }
+    pointer-events: none;
+    visibility: hidden; }
     .novablocks-sharing__overlay[class]:not(.is-visible) .novablocks-sharing__wrap {
       opacity: 0;
       transform: translate3d(0, -0.8625em, 0); }
