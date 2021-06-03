@@ -16,6 +16,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once trailingslashit( get_template_directory() ) . 'inc/integrations/novablocks.php';
 
 /**
+ * Load Style Manager integration for this theme.
+ *
+ * Since the Style Manager and the Customify plugin should not be active at the same time,
+ * these two are mutually exclusive.
+ */
+require_once trailingslashit( get_template_directory() ) . 'inc/integrations/style-manager/style-manager.php';
+
+/**
  * Load Customify integration for this theme.
  */
 require_once trailingslashit( get_template_directory() ) . 'inc/integrations/customify/customify.php';

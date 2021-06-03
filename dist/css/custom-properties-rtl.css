@@ -28,8 +28,8 @@
   --current-light-tertiary: var(--theme-light-tertiary); }
 
 :root {
-  --theme-customify-fluid-unit: calc( var(--theme-spacing-fluid) / var(--theme-body-font-size) );
-  --theme-customify-fluid-font-size: calc( 1em / var(--theme-body-font-size) );
+  --theme-style-manager-fluid-unit: calc( var(--theme-spacing-fluid) / var(--theme-body-font-size) );
+  --theme-style-manager-fluid-font-size: calc( 1em / var(--theme-body-font-size) );
   --theme-font-size-breakpoint: 1440;
   --theme-font-size-minimum-value: 16;
   --theme-font-size-minimum-value-breakpoint: 320;
@@ -218,13 +218,13 @@
 /* Header Custom Properties */
 :root {
   --theme-header-logo-height-setting: 22;
-  --theme-header-logo-height: calc( var(--theme-header-logo-height-setting) * var(--theme-customify-fluid-font-size) );
+  --theme-header-logo-height: calc( var(--theme-header-logo-height-setting) * var(--theme-style-manager-fluid-font-size) );
   --theme-header-height-setting: 118;
-  --theme-header-height: calc( var(--theme-header-height-setting) * var(--theme-customify-fluid-unit) );
+  --theme-header-height: calc( var(--theme-header-height-setting) * var(--theme-style-manager-fluid-unit) );
   --theme-header-links-spacing-setting: 32;
-  --theme-header-links-spacing: calc( var(--theme-header-links-spacing-setting) * var(--theme-customify-fluid-font-size) );
+  --theme-header-links-spacing: calc( var(--theme-header-links-spacing-setting) * var(--theme-style-manager-fluid-font-size) );
   --theme-header-sides-spacing-setting: 48;
-  --theme-header-sides-spacing: calc( var(--theme-header-sides-spacing-setting) * var(--theme-customify-fluid-unit) ); }
+  --theme-header-sides-spacing: calc( var(--theme-header-sides-spacing-setting) * var(--theme-style-manager-fluid-unit) ); }
 
 /* Button Custom Properties */
 :root {
