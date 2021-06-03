@@ -475,26 +475,33 @@ if ( ! function_exists('rosa2_get_post_navigation_markup' ) ) {
 	}
 }
 
-if ( ! function_exists('rosa2_article_header' ) ) {
+if ( ! function_exists( 'rosa2_article_header' ) ) {
 
 	function rosa2_article_header() {
 
 		if ( 'post' !== get_post_type() ) {
-		    return;
-        }
+			return;
+		}
 
-	    ob_start();
-	    ?>
+		ob_start();
+		?>
 
         <div class="article-header">
+
             <div class="entry-header">
 				<?php rosa2_categories_posted_in() ?>
+
                 <h1 class="entry-title"><?php the_title() ?></h1>
-				<?php if (has_excerpt()) { ?>
-                    <div class="entry-excerpt"><?php the_excerpt() ?></div>
+
+				<?php if ( has_excerpt() ) { ?>
+                    <div class="entry-excerpt">
+						<?php the_excerpt() ?>
+                    </div>
 				<?php } ?>
+
 				<?php get_template_part( 'template-parts/meta' ); ?>
             </div>
+
 			<?php if ( has_post_thumbnail() ) { ?>
                 <div class="entry-thumbnail alignwide">
 					<?php the_post_thumbnail(); ?>
@@ -502,7 +509,7 @@ if ( ! function_exists('rosa2_article_header' ) ) {
 			<?php } ?>
         </div>
 
-	<?php return ob_get_clean();
+		<?php return ob_get_clean();
 	}
 }
 
