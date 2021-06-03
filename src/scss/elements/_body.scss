@@ -10,5 +10,8 @@ body {
     background-color: var(--current-light-primary);
     color: var(--current-dark-secondary);
     
+    // We need overflow on X to be hidden,
+    // because we are using a background on :before element
+    // for entry-header on articles.
     overflow-x: hidden;
 }
