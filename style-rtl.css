@@ -375,7 +375,7 @@ body {
   color: var(--theme-input-placeholder-color);
   opacity: var(--theme-input-placeholder-opacity); }
 
-input, input[type="text"], input[type="tel"], input[type="number"], input[type="date"], input[type="email"], input[type="password"], input[type="url"], input[type="search"] {
+input:not([type]), input[type="text"], input[type="tel"], input[type="number"], input[type="date"], input[type="email"], input[type="password"], input[type="url"], input[type="search"] {
   width: 100%;
   height: auto;
   max-width: 100%;
@@ -397,23 +397,23 @@ input, input[type="text"], input[type="tel"], input[type="number"], input[type="
   font-family: inherit;
   -webkit-font-smoothing: initial;
   -webkit-appearance: none; }
-  input:hover, input[type="text"]:hover, input[type="tel"]:hover, input[type="number"]:hover, input[type="date"]:hover, input[type="email"]:hover, input[type="password"]:hover, input[type="url"]:hover, input[type="search"]:hover {
+  input:not([type]):hover, input[type="text"]:hover, input[type="tel"]:hover, input[type="number"]:hover, input[type="date"]:hover, input[type="email"]:hover, input[type="password"]:hover, input[type="url"]:hover, input[type="search"]:hover {
     --theme-input-box-shadow: var(--theme-input-hover-box-shadow); }
-  input:focus, input:active, input[type="text"]:focus, input[type="text"]:active, input[type="tel"]:focus, input[type="tel"]:active, input[type="number"]:focus, input[type="number"]:active, input[type="date"]:focus, input[type="date"]:active, input[type="email"]:focus, input[type="email"]:active, input[type="password"]:focus, input[type="password"]:active, input[type="url"]:focus, input[type="url"]:active, input[type="search"]:focus, input[type="search"]:active {
+  input:not([type]):focus, input:not([type]):active, input[type="text"]:focus, input[type="text"]:active, input[type="tel"]:focus, input[type="tel"]:active, input[type="number"]:focus, input[type="number"]:active, input[type="date"]:focus, input[type="date"]:active, input[type="email"]:focus, input[type="email"]:active, input[type="password"]:focus, input[type="password"]:active, input[type="url"]:focus, input[type="url"]:active, input[type="search"]:focus, input[type="search"]:active {
     --theme-input-border-color: var(--theme-input-focus-border-color);
     --theme-input-box-shadow: var(--theme-input-focus-box-shadow);
     outline: 0; }
-  input[disabled], input[type="text"][disabled], input[type="tel"][disabled], input[type="number"][disabled], input[type="date"][disabled], input[type="email"][disabled], input[type="password"][disabled], input[type="url"][disabled], input[type="search"][disabled] {
+  input:not([type])[disabled], input[type="text"][disabled], input[type="tel"][disabled], input[type="number"][disabled], input[type="date"][disabled], input[type="email"][disabled], input[type="password"][disabled], input[type="url"][disabled], input[type="search"][disabled] {
     border-color: var(--theme-input-disabled-border-color);
     background-color: var(--theme-input-disabled-background-color); }
-  [class*="invalid"] input, [class*="invalid"] input[type="text"], [class*="invalid"] input[type="tel"], [class*="invalid"] input[type="number"], [class*="invalid"] input[type="date"], [class*="invalid"] input[type="email"], [class*="invalid"] input[type="password"], [class*="invalid"] input[type="url"], [class*="invalid"] input[type="search"] {
+  [class*="invalid"] input:not([type]), [class*="invalid"] input[type="text"], [class*="invalid"] input[type="tel"], [class*="invalid"] input[type="number"], [class*="invalid"] input[type="date"], [class*="invalid"] input[type="email"], [class*="invalid"] input[type="password"], [class*="invalid"] input[type="url"], [class*="invalid"] input[type="search"] {
     --theme-input-box-shadow: var(--theme-input-error-box-shadow);
     --theme-input-color: var(--theme-input-error-color);
     --theme-input-placeholder-color: var(--theme-input-error-color);
     --theme-input-placeholder-opacity: 0; }
-    [class*="invalid"] input:hover, [class*="invalid"] input[type="text"]:hover, [class*="invalid"] input[type="tel"]:hover, [class*="invalid"] input[type="number"]:hover, [class*="invalid"] input[type="date"]:hover, [class*="invalid"] input[type="email"]:hover, [class*="invalid"] input[type="password"]:hover, [class*="invalid"] input[type="url"]:hover, [class*="invalid"] input[type="search"]:hover {
+    [class*="invalid"] input:not([type]):hover, [class*="invalid"] input[type="text"]:hover, [class*="invalid"] input[type="tel"]:hover, [class*="invalid"] input[type="number"]:hover, [class*="invalid"] input[type="date"]:hover, [class*="invalid"] input[type="email"]:hover, [class*="invalid"] input[type="password"]:hover, [class*="invalid"] input[type="url"]:hover, [class*="invalid"] input[type="search"]:hover {
       --theme-input-box-shadow: var(--theme-input-error-box-shadow); }
-    [class*="invalid"] input:focus, [class*="invalid"] input:active, [class*="invalid"] input[type="text"]:focus, [class*="invalid"] input[type="text"]:active, [class*="invalid"] input[type="tel"]:focus, [class*="invalid"] input[type="tel"]:active, [class*="invalid"] input[type="number"]:focus, [class*="invalid"] input[type="number"]:active, [class*="invalid"] input[type="date"]:focus, [class*="invalid"] input[type="date"]:active, [class*="invalid"] input[type="email"]:focus, [class*="invalid"] input[type="email"]:active, [class*="invalid"] input[type="password"]:focus, [class*="invalid"] input[type="password"]:active, [class*="invalid"] input[type="url"]:focus, [class*="invalid"] input[type="url"]:active, [class*="invalid"] input[type="search"]:focus, [class*="invalid"] input[type="search"]:active {
+    [class*="invalid"] input:not([type]):focus, [class*="invalid"] input:not([type]):active, [class*="invalid"] input[type="text"]:focus, [class*="invalid"] input[type="text"]:active, [class*="invalid"] input[type="tel"]:focus, [class*="invalid"] input[type="tel"]:active, [class*="invalid"] input[type="number"]:focus, [class*="invalid"] input[type="number"]:active, [class*="invalid"] input[type="date"]:focus, [class*="invalid"] input[type="date"]:active, [class*="invalid"] input[type="email"]:focus, [class*="invalid"] input[type="email"]:active, [class*="invalid"] input[type="password"]:focus, [class*="invalid"] input[type="password"]:active, [class*="invalid"] input[type="url"]:focus, [class*="invalid"] input[type="url"]:active, [class*="invalid"] input[type="search"]:focus, [class*="invalid"] input[type="search"]:active {
       --theme-input-box-shadow: var(--theme-input-focus-error-box-shadow); }
 
 input[type="checkbox"] {
@@ -2379,6 +2379,37 @@ body:not(.single) .site-header-sticky {
     text-decoration: none; }
   .c-meta .novablocks-sharing[class][class] .wp-block-buttons {
     margin-top: 0; }
+  .c-meta .novablocks-sharing__button-label {
+    position: relative; }
+    .c-meta .novablocks-sharing__button-label:before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 3px;
+      background: currentColor;
+      transform: scale3d(0, 1, 1);
+      transform-origin: left;
+      transition: var(--theme-transition);
+      transition-property: transform;
+      will-change: transform;
+      -webkit-backface-visibility: hidden; }
+    .c-meta .novablocks-sharing__button-label:hover:before {
+      transform: scale3d(1, 1, 1);
+      transform-origin: right; }
+  .c-meta .novablocks-sharing:hover a:before,
+  .c-meta .novablocks-sharing:hover .novablocks-sharing__button-label:before,
+  .c-meta .c-meta-comments:hover a:before,
+  .c-meta .c-meta-comments:hover .novablocks-sharing__button-label:before {
+    transform: scale3d(1, 1, 1);
+    transform-origin: right; }
+  .c-meta .c-button__link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: block; }
 
 .c-meta-author {
   display: flex;
@@ -2409,6 +2440,7 @@ body:not(.single) .site-header-sticky {
     margin-top: var(--element-spacing); }
 
 .c-meta-comments {
+  position: relative;
   display: flex;
   align-items: center; }
   .c-meta-comments__link[class][class] {

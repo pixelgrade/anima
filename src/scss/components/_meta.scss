@@ -51,6 +51,64 @@
 			margin-top: 0;
 		}
 	}
+	
+	.novablocks-sharing__button-label {
+		
+		position: relative;
+		
+		&:before {
+			content: '';
+			
+			position: absolute;
+			bottom: 0;
+			
+			width: 100%;
+			height: 3px;
+			
+			background: currentColor;
+			
+			transform: scale3d(0, 1, 1);
+			transform-origin: right;
+			
+			transition: var(--theme-transition);
+			transition-property: transform;
+			
+			will-change: transform;
+			-webkit-backface-visibility: hidden;
+		}
+		
+		&:hover:before {
+			transform: scale3d(1, 1, 1);
+			transform-origin: left;
+		}
+	}
+	
+	.novablocks-sharing,
+	.c-meta-comments {
+		
+		&:hover {
+			
+			a,
+			.novablocks-sharing__button-label {
+				
+				&:before {
+					transform: scale3d(1, 1, 1);
+					transform-origin: left;
+				}
+			}
+		}
+	}
+	
+	.c-button__link {
+		position: absolute;
+		
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		
+		display: block;
+	}
 }
 
 .c-meta-author {
@@ -97,6 +155,8 @@
 }
 
 .c-meta-comments {
+	position: relative;
+	
 	display: flex;
 	align-items: center;
 	

@@ -7,6 +7,7 @@ body {
 .novablocks-sidebar {
 	
 	* {
+		--font-size-modifier: 0.75;
 		font-size: var(--final-font-size);
 	}
 	
@@ -51,6 +52,13 @@ body {
 	[class*='has-sm-dark'] {
 		--theme-input-overlay-shadow: inset 0px 0px 0px 0px rgba(var(--opacity-color), 0.70);
 	}
+	
+	form,
+	input,
+	button,
+	select {
+		--font-size-modifier: 1;
+	}
 }
 
 
@@ -71,16 +79,7 @@ body {
 
 .novablocks-sidebar {
 	
-	* {
-		--font-size-modifier: 0.75;
-	}
-	
-	form,
-	input,
-	button,
-	select {
-		--font-size-modifier: 1;
-	}
+
 }
 
 .novablocks-sidebar--large {

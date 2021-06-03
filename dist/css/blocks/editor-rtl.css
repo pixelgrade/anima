@@ -806,6 +806,7 @@ body {
   --offset-addon: var(--theme-offset-width-addon); }
 
 .novablocks-sidebar * {
+  --font-size-modifier: 0.75;
   font-size: var(--final-font-size); }
 
 .novablocks-sidebar .widget-area > :not(:first-child) {
@@ -840,21 +841,18 @@ body {
 .novablocks-sidebar [class*='has-sm-dark'] {
   --theme-input-overlay-shadow: inset 0px 0px 0px 0px rgba(var(--opacity-color), 0.70); }
 
+.novablocks-sidebar form,
+.novablocks-sidebar input,
+.novablocks-sidebar button,
+.novablocks-sidebar select {
+  --font-size-modifier: 1; }
+
 .novablocks-content > .alignleft *,
 .novablocks-content > .alignright *,
 .novablocks-content > [data-align] *,
 .novablocks-content > [class*='pull'] *,
 .novablocks-content > [data-novablocks-alignment] * {
   --font-size-modifier: 0.75; }
-
-.novablocks-sidebar * {
-  --font-size-modifier: 0.75; }
-
-.novablocks-sidebar form,
-.novablocks-sidebar input,
-.novablocks-sidebar button,
-.novablocks-sidebar select {
-  --font-size-modifier: 1; }
 
 .novablocks-sidebar--large > .novablocks-sidebar * {
   --font-size-modifier: 0.85; }
@@ -939,6 +937,7 @@ body {
   --offset-addon: var(--theme-offset-width-addon); }
 
 .novablocks-sidebar * {
+  --font-size-modifier: 0.75;
   font-size: var(--final-font-size); }
 
 .novablocks-sidebar .widget-area > :not(:first-child) {
@@ -973,21 +972,18 @@ body {
 .novablocks-sidebar [class*='has-sm-dark'] {
   --theme-input-overlay-shadow: inset 0px 0px 0px 0px rgba(var(--opacity-color), 0.70); }
 
+.novablocks-sidebar form,
+.novablocks-sidebar input,
+.novablocks-sidebar button,
+.novablocks-sidebar select {
+  --font-size-modifier: 1; }
+
 .novablocks-content > .alignleft *,
 .novablocks-content > .alignright *,
 .novablocks-content > [data-align] *,
 .novablocks-content > [class*='pull'] *,
 .novablocks-content > [data-novablocks-alignment] * {
   --font-size-modifier: 0.75; }
-
-.novablocks-sidebar * {
-  --font-size-modifier: 0.75; }
-
-.novablocks-sidebar form,
-.novablocks-sidebar input,
-.novablocks-sidebar button,
-.novablocks-sidebar select {
-  --font-size-modifier: 1; }
 
 .novablocks-sidebar--large > .novablocks-sidebar * {
   --font-size-modifier: 0.85; }
