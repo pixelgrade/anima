@@ -3,6 +3,7 @@ import mqService from '../mqService';
 import HeaderBase from './header-base';
 import HeaderColors from './header-colors';
 import HeaderMobile from './header-mobile';
+import HeaderRow from './header-row';
 
 import { addClass, hasClass, setAndResetElementStyles, getColorSetClasses } from '../../utils';
 
@@ -37,7 +38,7 @@ class Header extends HeaderBase {
 		HeaderBase.prototype.initialize.call( this );
 
 		this.rows.forEach( row => {
-			row.initializeColors();
+			row.colors.initializeColors();
 		} )
 
 		this.timeline = this.getIntroTimeline();
@@ -81,16 +82,22 @@ class Header extends HeaderBase {
 
 		if ( rows ) {
 			return Array.from( rows ).map( element => {
-				return new HeaderColors( element );
+				return new HeaderRow( element );
 			} )
 		}
 
 		return [];
 	}
 
+	toggleColors( isTransparent ) {
+		console.log( 'aici' );
+		HeaderColors.prototype.toggleColors.call( this, isTransparent );
+		this.toggleRowsColors( isTransparent );
+	}
+
 	toggleRowsColors( isTransparent ) {
 		this.rows.forEach( row => {
-			row.toggleColors( isTransparent );
+			row.colors.toggleColors( isTransparent );
 		} );
 	}
 

@@ -1757,7 +1757,36 @@ function (_HeaderBase) {
 }(header_base);
 
 /* harmony default export */ var header_mobile = (header_mobile_HeaderMobile);
+// CONCATENATED MODULE: ./src/js/components/header/header-row.js
+
+
+
+
+
+
+
+var header_row_HeaderRow =
+/*#__PURE__*/
+function (_HeaderBase) {
+  inherits_default()(HeaderRow, _HeaderBase);
+
+  function HeaderRow(element) {
+    var _this;
+
+    classCallCheck_default()(this, HeaderRow);
+
+    _this = possibleConstructorReturn_default()(this, getPrototypeOf_default()(HeaderRow).call(this));
+    _this.element = element;
+    _this.colors = new header_colors(_this.element);
+    return _this;
+  }
+
+  return HeaderRow;
+}(header_base);
+
+/* harmony default export */ var header_row = (header_row_HeaderRow);
 // CONCATENATED MODULE: ./src/js/components/header/index.js
+
 
 
 
@@ -1809,7 +1838,7 @@ function (_HeaderBase) {
     value: function initialize() {
       header_base.prototype.initialize.call(this);
       this.rows.forEach(function (row) {
-        row.initializeColors();
+        row.colors.initializeColors();
       });
       this.timeline = this.getIntroTimeline();
       this.timeline.play();
@@ -1858,17 +1887,24 @@ function (_HeaderBase) {
 
       if (rows) {
         return Array.from(rows).map(function (element) {
-          return new header_colors(element);
+          return new header_row(element);
         });
       }
 
       return [];
     }
   }, {
+    key: "toggleColors",
+    value: function toggleColors(isTransparent) {
+      console.log('aici');
+      header_colors.prototype.toggleColors.call(this, isTransparent);
+      this.toggleRowsColors(isTransparent);
+    }
+  }, {
     key: "toggleRowsColors",
     value: function toggleRowsColors(isTransparent) {
       this.rows.forEach(function (row) {
-        row.toggleColors(isTransparent);
+        row.colors.toggleColors(isTransparent);
       });
     }
   }, {
