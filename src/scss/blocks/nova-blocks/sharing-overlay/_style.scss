@@ -2,6 +2,10 @@
     @include variation(dark);
     @include apply-font(body);
     
+    &[class] {
+        z-index: 1001;
+    }
+    
     .novablocks-sharing__wrap {
         
         @include specific(3) {
