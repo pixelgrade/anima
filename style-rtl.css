@@ -2266,6 +2266,10 @@ body:not(.single) .site-header-sticky {
   padding-top: var(--wp-block-group-padding);
   padding-bottom: var(--wp-block-group-padding); }
 
+@media only screen and (min-width: 1000px) {
+  .site-footer .wp-block-group .wp-block-group__inner-container {
+    --display-mode: grid; } }
+
 /* Post Content */
 .entry-header {
   --novablocks-element-spacing-multiplier: 0.5; }
