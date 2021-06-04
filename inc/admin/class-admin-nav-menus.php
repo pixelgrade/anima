@@ -826,7 +826,6 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 					<input type="search" class="search-field" placeholder="' . esc_attr( sprintf( __( 'Search %s...', '__theme_txtd' ), esc_html( get_bloginfo( 'name' ) ) ) ) . '" value="' . get_search_query() . '" name="s" />
 					<span class="search-icon"></span>
 				</label>
-				<input type="submit" class="search-submit" value="' . esc_attr_x( 'Search', 'submit button', '__theme_txtd' ) . '" />
 			</form>';
 
 			return $form;

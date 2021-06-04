@@ -25,11 +25,6 @@ function rosa2_body_classes( $classes ) {
 		$classes[] = 'hfeed';
 	}
 
-	// Adds a class of no-sidebar when there is no sidebar present.
-	if ( ! is_active_sidebar( 'sidebar-1' ) ) {
-		$classes[] = 'no-sidebar';
-	}
-
 	$classes[] = 'has-site-header-transparent';
 
 	if ( pixelgrade_option( 'header_position', 'sticky' ) === 'sticky' ) {
@@ -54,6 +49,10 @@ function rosa2_body_classes( $classes ) {
 
 	if ( 'on' === pixelgrade_option( 'sm_dark_mode' ) ) {
 		$classes[] = 'is-dark-mode';
+	}
+
+	if ( is_single() && rosa2_is_active_sidebar( 'sidebar-1' ) ) {
+		$classes[] = 'has-sidebar';
 	}
 
 	return $classes;
