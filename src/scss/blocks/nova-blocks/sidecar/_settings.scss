@@ -1,0 +1,40 @@
+html:root {
+	--novablocks-wide-width: var(--theme-content-width-wide);
+	--novablocks-container-spacings: var(--theme-wrapper-sides-spacing);
+}
+
+body:not(.has-sidebar) {
+	--block-limit-left: cs;
+	--block-limit-right: ce;
+	
+	.entry-content {
+		--block-content-start: cs;
+	}
+}
+
+.single.has-sidebar {
+	.entry-content,
+	.article-navigation,
+	.article-comments {
+		
+		@include specific(3) {
+			--block-content-start: ws;
+		}
+	}
+}
+
+.article--is-landscape {
+	
+	.article-header {
+		--block-content-start: var(--block-limit-left);
+		--block-content-end: var(--block-limit-right);
+	}
+}
+
+.novablocks-sidecar {
+	--sticky-element-top-spacing: calc( var(--site-header-height) + var(--admin-bar-height) )
+}
+
+.wp-block-group__inner-container {
+	font-size: var(--final-font-size);
+}

@@ -46,6 +46,15 @@ $enable-gallery-block-styles:           true !default;
         .blocks-gallery-caption {
             @include apply-font(body);
         }
+    
+        &.alignfull,
+        > .alignfull {
+        
+            figcaption {
+                padding-left: var(--theme-wrapper-sides-spacing);
+                padding-right: var(--theme-wrapper-sides-spacing);
+            }
+        }
 
         &.is-cropped {
 
@@ -63,6 +72,7 @@ $enable-gallery-block-styles:           true !default;
 
     .blocks-gallery-grid {
         list-style: none;
+        width: 100%;
         @include flex-grid;
 
         &[class] {
