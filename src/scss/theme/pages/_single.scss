@@ -205,12 +205,12 @@
 }
 
 
-body:not(.home):not(.has-no-spacing-top) {
-    
+.single-post {
+
     .site-main {
-        
-        --page-top-spacing: 5em;
-        
+
+        --page-top-spacing: var(--theme-spacing-fluid-large);
+
         .post:not(.novablocks-media),
         .page {
             padding-top: var(--page-top-spacing);

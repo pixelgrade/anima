@@ -253,10 +253,10 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
   --current-letter-spacing: var(--theme-lead-letter-spacing);
   --current-text-transform: var(--theme-lead-text-transform); }
 
-body:not(.home):not(.has-no-spacing-top) .site-main {
-  --page-top-spacing: 5em; }
-  body:not(.home):not(.has-no-spacing-top) .site-main .post:not(.novablocks-media),
-  body:not(.home):not(.has-no-spacing-top) .site-main .page {
+.single-post .site-main {
+  --page-top-spacing: var(--theme-spacing-fluid-large); }
+  .single-post .site-main .post:not(.novablocks-media),
+  .single-post .site-main .page {
     padding-top: var(--page-top-spacing); }
 
 .error404 .content-area,
