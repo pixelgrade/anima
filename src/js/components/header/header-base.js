@@ -5,7 +5,8 @@ import globalService from '../globalService';
 class HeaderBase {
 
 	constructor( options ) {
-		this.offset = 0;
+		this.staticDistance = 0;
+		this.stickyDistance = 0;
 		this.options = options || {};
 	}
 
@@ -14,8 +15,6 @@ class HeaderBase {
 
 		globalService.registerRender( this.render.bind( this ) );
 		globalService.registerOnResize( this.onResize.bind( this ) );
-
-		this.render();
 	}
 
 	onResize() {
@@ -24,6 +23,8 @@ class HeaderBase {
 		if ( typeof this.options.onResize === "function" ) {
 			this.options.onResize();
 		}
+
+		this.render( true );
 	}
 
 	getHeight() {
@@ -36,7 +37,7 @@ class HeaderBase {
 
 	maybeUpdateStickyStyles( forceUpdate ) {
 		const { scrollY } = globalService.getProps();
-		const shouldBeSticky = scrollY > this.offset - this.top;
+		const shouldBeSticky = scrollY > this.staticDistance - this.stickyDistance;
 
 		if ( this.shouldBeSticky === shouldBeSticky && ! forceUpdate ) {
 			return;
@@ -53,10 +54,10 @@ class HeaderBase {
 	applyStickyStyles( element ) {
 		if ( this.shouldBeSticky ) {
 			element.style.position = 'fixed';
-			element.style.top = `${ this.top }px`;
+			element.style.top = `${ this.stickyDistance }px`;
 		} else {
 			element.style.position = 'absolute';
-			element.style.top = `${ this.offset }px`;
+			element.style.top = `${ this.staticDistance }px`;
 		}
 	}
 }

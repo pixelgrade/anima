@@ -34,7 +34,7 @@ class HeaderMobile extends HeaderBase {
 	}
 
 	render( forceUpdate ) {
-		HeaderBase.prototype.render.call( this );
+		HeaderBase.prototype.render.call( this, forceUpdate );
 	}
 
 	initializeMenuToggle() {
@@ -103,7 +103,7 @@ class HeaderMobile extends HeaderBase {
 	}
 
 	update() {
-		this.element.style.top = `${ this.top }px`;
+		this.element.style.top = `${ this.stickyDistance }px`;
 		this.menuToggle.element.style.height = `${ this.box.height }px`;
 		this.parentContainer.style.paddingTop = `${ this.box.height }px`;
 		this.buttonMenu.style.height = `${ this.box.height }px`;

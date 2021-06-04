@@ -18,8 +18,12 @@
     opacity: 0;
 }
 
-.novablocks-header.novablocks-header--transparent:not(.novablocks-header--sticky) {
+.novablocks-header.novablocks-header--transparent {
     --header-background-opacity: 0;
+
+    &.novablocks-header--sticky .novablocks-header-row {
+        --header-background-opacity: 1;
+    }
 }
 
 .novablocks-header--sticky:not(.novablocks-header--main) {

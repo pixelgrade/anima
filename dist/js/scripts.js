@@ -128,22 +128,6 @@ module.exports = _createClass;
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayWithoutHoles = __webpack_require__(9);
-
-var iterableToArray = __webpack_require__(10);
-
-var nonIterableSpread = __webpack_require__(11);
-
-function _toConsumableArray(arr) {
-  return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
-}
-
-module.exports = _toConsumableArray;
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
 var _typeof = __webpack_require__(12);
 
 var assertThisInitialized = __webpack_require__(7);
@@ -157,6 +141,22 @@ function _possibleConstructorReturn(self, call) {
 }
 
 module.exports = _possibleConstructorReturn;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithoutHoles = __webpack_require__(9);
+
+var iterableToArray = __webpack_require__(10);
+
+var nonIterableSpread = __webpack_require__(11);
+
+function _toConsumableArray(arr) {
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
+}
+
+module.exports = _toConsumableArray;
 
 /***/ }),
 /* 5 */
@@ -481,7 +481,7 @@ var createClass = __webpack_require__(2);
 var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/toConsumableArray.js
-var toConsumableArray = __webpack_require__(3);
+var toConsumableArray = __webpack_require__(4);
 var toConsumableArray_default = /*#__PURE__*/__webpack_require__.n(toConsumableArray);
 
 // CONCATENATED MODULE: ./src/js/utils.js
@@ -1361,7 +1361,7 @@ function () {
 
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__(4);
+var possibleConstructorReturn = __webpack_require__(3);
 var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
@@ -1428,7 +1428,8 @@ function () {
   function HeaderBase(options) {
     classCallCheck_default()(this, HeaderBase);
 
-    this.offset = 0;
+    this.staticDistance = 0;
+    this.stickyDistance = 0;
     this.options = options || {};
   }
 
@@ -1438,7 +1439,6 @@ function () {
       utils_addClass(this.element, 'novablocks-header--ready');
       globalService.registerRender(this.render.bind(this));
       globalService.registerOnResize(this.onResize.bind(this));
-      this.render();
     }
   }, {
     key: "onResize",
@@ -1448,6 +1448,8 @@ function () {
       if (typeof this.options.onResize === "function") {
         this.options.onResize();
       }
+
+      this.render(true);
     }
   }, {
     key: "getHeight",
@@ -1467,7 +1469,7 @@ function () {
       var _globalService$getPro = globalService.getProps(),
           scrollY = _globalService$getPro.scrollY;
 
-      var shouldBeSticky = scrollY > this.offset - this.top;
+      var shouldBeSticky = scrollY > this.staticDistance - this.stickyDistance;
 
       if (this.shouldBeSticky === shouldBeSticky && !forceUpdate) {
         return;
@@ -1486,10 +1488,10 @@ function () {
     value: function applyStickyStyles(element) {
       if (this.shouldBeSticky) {
         element.style.position = 'fixed';
-        element.style.top = "".concat(this.top, "px");
+        element.style.top = "".concat(this.stickyDistance, "px");
       } else {
         element.style.position = 'absolute';
-        element.style.top = "".concat(this.offset, "px");
+        element.style.top = "".concat(this.staticDistance, "px");
       }
     }
   }]);
@@ -1646,7 +1648,7 @@ function (_HeaderBase) {
   }, {
     key: "render",
     value: function render(forceUpdate) {
-      header_base.prototype.render.call(this);
+      header_base.prototype.render.call(this, forceUpdate);
     }
   }, {
     key: "initializeMenuToggle",
@@ -1717,7 +1719,7 @@ function (_HeaderBase) {
   }, {
     key: "update",
     value: function update() {
-      this.element.style.top = "".concat(this.top, "px");
+      this.element.style.top = "".concat(this.stickyDistance, "px");
       this.menuToggle.element.style.height = "".concat(this.box.height, "px");
       this.parentContainer.style.paddingTop = "".concat(this.box.height, "px");
       this.buttonMenu.style.height = "".concat(this.box.height, "px");
@@ -1837,9 +1839,6 @@ function (_HeaderBase) {
     key: "initialize",
     value: function initialize() {
       header_base.prototype.initialize.call(this);
-      this.rows.forEach(function (row) {
-        row.colors.initializeColors();
-      });
       this.timeline = this.getIntroTimeline();
       this.timeline.play();
     }
@@ -1894,13 +1893,6 @@ function (_HeaderBase) {
       return [];
     }
   }, {
-    key: "toggleColors",
-    value: function toggleColors(isTransparent) {
-      console.log('aici');
-      header_colors.prototype.toggleColors.call(this, isTransparent);
-      this.toggleRowsColors(isTransparent);
-    }
-  }, {
     key: "toggleRowsColors",
     value: function toggleRowsColors(isTransparent) {
       this.rows.forEach(function (row) {
@@ -1911,10 +1903,11 @@ function (_HeaderBase) {
     key: "updateStickyStyles",
     value: function updateStickyStyles() {
       header_base.prototype.updateStickyStyles.call(this);
-      this.element.style.marginTop = "".concat(this.offset, "px");
+      this.toggleRowsColors(!this.shouldBeSticky);
+      this.element.style.marginTop = "".concat(this.staticDistance, "px");
 
       if (this.secondaryHeader) {
-        this.secondaryHeader.style.top = "".concat(this.offset, "px");
+        this.secondaryHeader.style.top = "".concat(this.staticDistance, "px");
       }
     }
   }, {
@@ -2387,6 +2380,7 @@ function () {
 
     this.adminBar = document.getElementById('wpadminbar');
     this.adminBarFixed = false;
+    this.promoBarFixed = false;
     this.adminBarHeight = 0;
     this.updateAdminBarProps();
     this.enableFirstBlockPaddingTop = external_jQuery_default()('body').hasClass('has-novablocks-header-transparent');
@@ -2408,6 +2402,7 @@ function () {
       var _this$header;
 
       this.updateAdminBarProps();
+      this.updatePromoBarProps();
       this.promoBar.offset = this.adminBarHeight;
       this.promoBar.update();
 
@@ -2461,8 +2456,8 @@ function () {
       }
 
       this.adminBarHeight = this.adminBar.offsetHeight;
-      var style = window.getComputedStyle(this.adminBar);
-      this.adminBarFixed = style.getPropertyValue('position') === 'fixed';
+      var adminBarStyle = window.getComputedStyle(this.adminBar);
+      this.adminBarFixed = adminBarStyle.getPropertyValue('position') === 'fixed';
     }
   }, {
     key: "showLoadedImages",
@@ -2517,6 +2512,13 @@ function () {
         offset: this.adminBarHeight,
         onUpdate: this.onPromoBarUpdate.bind(this)
       });
+      this.updatePromoBarProps();
+    }
+  }, {
+    key: "updatePromoBarProps",
+    value: function updatePromoBarProps() {
+      var promoBarStyle = window.getComputedStyle(this.promoBar.element);
+      this.promoBarFixed = promoBarStyle.getPropertyValue('position') === 'fixed';
     }
   }, {
     key: "onPromoBarUpdate",
@@ -2524,12 +2526,17 @@ function () {
       var header = this.header;
       var HeroCollection = this.HeroCollection;
       var promoBarHeight = !!promoBar ? promoBar.height : 0;
+      var adminBarTop = this.adminBarFixed ? this.adminBarHeight : 0;
+      var promoBarTop = this.promoBarFixed ? promoBarHeight : 0;
+      var stickyDistance = adminBarTop + promoBarTop;
+      var staticDistance = this.adminBarHeight + promoBarHeight;
 
       if (!!header) {
-        header.offset = promoBarHeight + this.adminBarHeight;
+        header.stickyDistance = stickyDistance;
+        header.staticDistance = staticDistance;
         header.render(true);
-        header.mobileHeader.offset = promoBarHeight + this.adminBarHeight;
-        header.mobileHeader.top = this.adminBarFixed ? this.adminBarHeight : 0;
+        header.mobileHeader.stickyDistance = stickyDistance;
+        header.mobileHeader.staticDistance = staticDistance;
         header.mobileHeader.render(true);
       }
 

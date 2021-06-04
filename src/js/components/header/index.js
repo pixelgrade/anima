@@ -37,10 +37,6 @@ class Header extends HeaderBase {
 	initialize() {
 		HeaderBase.prototype.initialize.call( this );
 
-		this.rows.forEach( row => {
-			row.colors.initializeColors();
-		} )
-
 		this.timeline = this.getIntroTimeline();
 		this.timeline.play();
 	}
@@ -89,12 +85,6 @@ class Header extends HeaderBase {
 		return [];
 	}
 
-	toggleColors( isTransparent ) {
-		console.log( 'aici' );
-		HeaderColors.prototype.toggleColors.call( this, isTransparent );
-		this.toggleRowsColors( isTransparent );
-	}
-
 	toggleRowsColors( isTransparent ) {
 		this.rows.forEach( row => {
 			row.colors.toggleColors( isTransparent );
@@ -104,10 +94,11 @@ class Header extends HeaderBase {
 	updateStickyStyles() {
 		HeaderBase.prototype.updateStickyStyles.call( this );
 
-		this.element.style.marginTop = `${ this.offset }px`;
+		this.toggleRowsColors( ! this.shouldBeSticky );
+		this.element.style.marginTop = `${ this.staticDistance }px`;
 
 		if ( this.secondaryHeader ) {
-			this.secondaryHeader.style.top = `${ this.offset }px`;
+			this.secondaryHeader.style.top = `${ this.staticDistance }px`;
 		}
 	}
 

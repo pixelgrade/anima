@@ -17,6 +17,7 @@ export default class App {
 
 		this.adminBar = document.getElementById( 'wpadminbar' );
 		this.adminBarFixed = false;
+		this.promoBarFixed = false;
 		this.adminBarHeight = 0;
 		this.updateAdminBarProps();
 
@@ -37,6 +38,7 @@ export default class App {
 
 	onResize() {
 		this.updateAdminBarProps();
+		this.updatePromoBarProps();
 
 		this.promoBar.offset = this.adminBarHeight;
 		this.promoBar.update();
@@ -88,8 +90,8 @@ export default class App {
 		}
 
 		this.adminBarHeight = this.adminBar.offsetHeight ;
-		const style = window.getComputedStyle( this.adminBar );
-		this.adminBarFixed = style.getPropertyValue( 'position' ) === 'fixed';
+		const adminBarStyle = window.getComputedStyle( this.adminBar );
+		this.adminBarFixed = adminBarStyle.getPropertyValue( 'position' ) === 'fixed';
 	}
 
 	showLoadedImages( container = document.body ) {
@@ -138,6 +140,13 @@ export default class App {
 			offset: this.adminBarHeight,
 			onUpdate: this.onPromoBarUpdate.bind( this )
 		});
+
+		this.updatePromoBarProps();
+	}
+
+	updatePromoBarProps() {
+		const promoBarStyle = window.getComputedStyle( this.promoBar.element );
+		this.promoBarFixed = promoBarStyle.getPropertyValue( 'position' ) === 'fixed';
 	}
 
 	onPromoBarUpdate( promoBar ) {
@@ -145,12 +154,18 @@ export default class App {
 		const HeroCollection = this.HeroCollection;
 		const promoBarHeight = !! promoBar ? promoBar.height : 0;
 
+		const adminBarTop = this.adminBarFixed ? this.adminBarHeight : 0;
+		const promoBarTop = this.promoBarFixed ? promoBarHeight : 0;
+		const stickyDistance = adminBarTop + promoBarTop;
+		const staticDistance = this.adminBarHeight + promoBarHeight;
+
 		if ( !! header ) {
-			header.offset = promoBarHeight + this.adminBarHeight;
+			header.stickyDistance = stickyDistance;
+			header.staticDistance = staticDistance;
 			header.render( true );
 
-			header.mobileHeader.offset = promoBarHeight + this.adminBarHeight;
-			header.mobileHeader.top = this.adminBarFixed ? this.adminBarHeight : 0;
+			header.mobileHeader.stickyDistance = stickyDistance;
+			header.mobileHeader.staticDistance = staticDistance;
 			header.mobileHeader.render( true );
 		}
 
