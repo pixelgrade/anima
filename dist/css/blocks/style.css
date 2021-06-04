@@ -250,10 +250,9 @@
 .novablocks-header:not(.novablocks-header--ready) {
   opacity: 0; }
 
-.novablocks-header.novablocks-header--transparent {
+.novablocks-header.novablocks-header--transparent:before,
+.novablocks-header--mobile.novablocks-header--transparent:before {
   --header-background-opacity: 0; }
-  .novablocks-header.novablocks-header--transparent.novablocks-header--sticky .novablocks-header-row {
-    --header-background-opacity: 1; }
 
 @media only screen and (min-width: 1000px) {
   .novablocks-header--sticky:not(.novablocks-header--main) {

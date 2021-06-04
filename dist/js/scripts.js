@@ -1740,7 +1740,7 @@ function (_HeaderBase) {
         utils_addClass(this.menuToggle.element, this.headerClasses);
       } else {
         utils_removeClass(this.menuToggle.element, this.headerClasses);
-        this.menuToggleColors.toggleColors(this.shouldBeSticky);
+        this.menuToggleColors.toggleColors(!this.shouldBeSticky);
       }
     }
   }, {

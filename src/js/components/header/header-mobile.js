@@ -117,13 +117,12 @@ class HeaderMobile extends HeaderBase {
 	}
 
 	updateToggleClasses() {
-
 		if ( this.navigationIsOpen ) {
 			removeClass( this.menuToggle.element, `${ this.menuToggleColors.transparentColorClasses } ${ this.menuToggleColors.initialColorClasses }` );
 			addClass( this.menuToggle.element, this.headerClasses );
 		} else {
 			removeClass( this.menuToggle.element, this.headerClasses );
-			this.menuToggleColors.toggleColors( this.shouldBeSticky );
+			this.menuToggleColors.toggleColors( ! this.shouldBeSticky );
 		}
 
 	}
