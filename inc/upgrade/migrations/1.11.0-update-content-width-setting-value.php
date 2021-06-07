@@ -4,7 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! function_exists( 'PixCustomifyPlugin' ) ) {
+// We need Customify to be active, not a surrogate that offers fallbacks like Style Manager 1.0 does.
+if ( ! function_exists( 'PixCustomifyPlugin' ) || empty( PixCustomifyPlugin()->settings ) ) {
 	return;
 }
 
