@@ -385,3 +385,163 @@ if ( ! function_exists( 'rosa2_add_primary_menu_item_description' ) ) {
 }
 
 add_filter( 'walker_nav_menu_start_el', 'rosa2_add_primary_menu_item_description', 10, 4 );
+
+if ( ! function_exists('rosa2_get_content_markup' ) ) {
+
+	/**
+	 * Retrieve the markup for post content.
+	 */
+
+
+	function rosa2_get_content_markup() {
+		ob_start(); ?>
+
+			<?php
+			do_action( 'rosa2_before_content' );
+			the_content();
+			do_action( 'rosa2_after_content' );
+			?>
+
+		<?php return ob_get_clean();
+	}
+}
+
+if ( ! function_exists('rosa2_get_sidebar_markup' ) ) {
+
+	/**
+	 * Retrieve the markup for sidebar.
+	 */
+
+	function rosa2_get_sidebar_markup() {
+		ob_start();
+
+		get_template_part( 'template-parts/single-sidebar' );
+
+		return ob_get_clean();
+	}
+}
+
+if ( ! function_exists('rosa2_get_post_navigation_markup' ) ) {
+
+	/**
+	 * Retrieve the markup for post navigation.
+	 */
+
+	function rosa2_get_post_navigation_markup() {
+		ob_start();
+
+		rosa2_the_post_navigation();
+
+		return ob_get_clean();
+	}
+}
+
+if ( ! function_exists( 'rosa2_article_header' ) ) {
+
+	function rosa2_article_header() {
+
+		if ( 'post' !== get_post_type() ) {
+			return;
+		}
+
+		ob_start();
+		?>
+
+        <div class="article-header">
+
+            <div class="entry-header">
+				<?php rosa2_categories_posted_in() ?>
+
+                <h1 class="entry-title"><?php the_title() ?></h1>
+
+				<?php if ( has_excerpt() ) { ?>
+                    <div class="entry-excerpt">
+						<?php the_excerpt() ?>
+                    </div>
+				<?php } ?>
+
+				<?php get_template_part( 'template-parts/meta' ); ?>
+            </div>
+
+			<?php if ( has_post_thumbnail() ) { ?>
+                <div class="entry-thumbnail alignwide">
+					<?php the_post_thumbnail(); ?>
+                </div>
+			<?php } ?>
+        </div>
+
+		<?php return ob_get_clean();
+	}
+}
+
+/**
+ * Return the reading time in minutes for a post content.
+ * @param WP_Post|int $post
+ * @param int $wpm The words per minute reading rate to take into account.
+ * @return int
+ */
+function rosa2_get_post_reading_time_in_minutes( $post, $wpm = 250 ) {
+	$post = get_post( $post );
+
+	if ( ! ( $post instanceof WP_Post ) ) {
+		return 0;
+	}
+
+	// We don't need the whole content filters. Just the bare minimum.
+	$content = do_blocks( $post->post_content );
+	$content = wptexturize( $content );
+	$content = wpautop( $content );
+	$content = shortcode_unautop( $content );
+	$content = do_shortcode( $content );
+
+	$content = str_replace( ']]>', ']]&gt;', $content );
+
+	// Allow others to have a say; like removing certain non-essential elements (avatars for example).
+	$content = apply_filters( 'rosa2_post_content_before_reading_time_calc', $content, $post );
+
+	return rosa2_get_reading_time_in_minutes( $content, $wpm );
+}
+
+/**
+ * Calculate the reading time in minutes for a piece of content.
+ * @param string $content HTML post content.
+ * @param int $wpm The words per minute reading rate to take into account.
+ * @return int
+ */
+function rosa2_get_reading_time_in_minutes( $content, $wpm = 250 ) {
+	// Calculate the time in seconds for the images in the content.
+	$images_time = 0;
+	if ( preg_match_all( '/<img\s[^>]+>/', $content, $matches ) ) {
+		$num_images = count( $matches[0] );
+
+		// The starting image weight (expressed in seconds of reading time).
+		// This weight is decreasing one second with each image encountered, with a minium of 3 seconds.
+		$img_weight = 12;
+		for ( $i = 0; $i < $num_images; $i++ ) {
+			$images_time += $img_weight;
+
+			if ( $img_weight > 3 ) {
+				$img_weight --;
+			}
+		}
+	}
+
+	// Calculate the time in seconds for the videos in the content.
+	$videos_time = 0;
+	if ( preg_match_all( '/<iframe\s[^>]+>/', $content, $matches ) ) {
+		// We will give one minute for every video (even if the video might be longer).
+		$videos_time = count( $matches[0] ) * 60;
+	}
+
+	// Calculate the words reading time in seconds.
+	$word_count = str_word_count( wp_strip_all_tags( $content ) );
+	$words_time = ceil( $word_count / ( $wpm / 60 ) );
+
+	// Convert the reading time to minutes.
+	$minutes = (int) ceil( ( $words_time + $images_time + $videos_time ) / 60 );
+	if ( $minutes < 1 ) {
+		$minutes = 1;
+	}
+
+	return $minutes;
+}

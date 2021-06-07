@@ -5,6 +5,17 @@ $assets-folder-path: '../../assets';
 @import "components/search-button";
 @import "components/dark-mode-button";
 
+.editor-post-title .editor-post-title__input {
+    @include apply-font(heading-1);
+    --current-font-weight: 800;
+    --current-line-height: 1.2;
+}
+
+.wp-block:not([data-align="wide"]):not([data-align="full"]) {
+    max-width: 100%;
+}
+
+
 /* Typography */
 :root {
     --font-size: var(--theme-body-font-size);
@@ -17,7 +28,7 @@ $assets-folder-path: '../../assets';
     @import "elements/lists";
 
     [class*="__inner-container"] {
-        @include wrapper(true);
+        @include wrapper;
     }
 
     // increased specificity selector to overwrite default styles
@@ -36,6 +47,10 @@ $assets-folder-path: '../../assets';
 
         p {
             font: inherit;
+        }
+
+        textarea {
+            min-height: 100%;
         }
     }
 
@@ -142,3 +157,34 @@ $assets-folder-path: '../../assets';
     }
 }
 
+.block-editor-block-list__layout {
+    > &:not([data-type="novablocks/sidecar"]),
+    > &:not(.alignfull),
+    > &:not(.alignwide) {
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
+
+.wp-block-widget-area {
+    .block-editor-inner-blocks {
+        .block-editor-block-list__layout {
+
+            > :not(:first-child) {
+                --element-spacing: var(--theme-spacing-fluid-small);
+                margin-top: var(--element-spacing);
+            }
+        }
+    }
+
+    * {
+        --font-size-modifier: 0.75;
+    }
+
+    form,
+    input,
+    button,
+    select {
+        --font-size-modifier: 1;
+    }
+}

@@ -66,7 +66,7 @@ class Header extends HeaderBase {
 	getSecondaryHeader() {
 		const nextSibling = this.element.nextElementSibling;
 
-		if ( nextSibling.classList.contains( 'novablocks-header--secondary' ) ) {
+		if ( !! nextSibling && nextSibling.classList.contains( 'novablocks-header--secondary' ) ) {
 			return nextSibling;
 		}
 

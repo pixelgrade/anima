@@ -1,6 +1,5 @@
 // page numbers
 @mixin post-navigation__links {
-    max-width: var(--theme-content-width-normal);
     margin-left: auto;
     margin-right: auto;
 
@@ -19,9 +18,8 @@
 .post-navigation {
     --current-arrow-padding: calc(.4em + #{$theme-button-text-arrow-size});
     --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-small);
-
-    padding-left: var(--theme-wrapper-sides-spacing);
-    padding-right: var(--theme-wrapper-sides-spacing);
+    
+    width: 100%;
 
     clear: both;
 

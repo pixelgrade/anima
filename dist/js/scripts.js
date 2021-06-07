@@ -1873,7 +1873,7 @@ function (_HeaderBase) {
     value: function getSecondaryHeader() {
       var nextSibling = this.element.nextElementSibling;
 
-      if (nextSibling.classList.contains('novablocks-header--secondary')) {
+      if (!!nextSibling && nextSibling.classList.contains('novablocks-header--secondary')) {
         return nextSibling;
       }
 
@@ -1946,7 +1946,7 @@ function (_HeaderBase) {
   return Header;
 }(header_base);
 
-/* harmony default export */ var header = (header_Header);
+/* harmony default export */ var components_header = (header_Header);
 // EXTERNAL MODULE: ./node_modules/js-cookie/src/js.cookie.js
 var js_cookie = __webpack_require__(8);
 var js_cookie_default = /*#__PURE__*/__webpack_require__.n(js_cookie);
@@ -2491,10 +2491,10 @@ function () {
   }, {
     key: "initializeHeader",
     value: function initializeHeader() {
-      var $header = external_jQuery_default()('.novablocks-header');
+      var header = document.querySelector('.novablocks-header');
 
-      if ($header.length) {
-        this.header = new header($header.get(0), {
+      if (!!header) {
+        this.header = new components_header(header, {
           onResize: this.onHeaderUpdate.bind(this)
         });
       }

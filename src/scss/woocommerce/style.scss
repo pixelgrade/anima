@@ -19,7 +19,6 @@ $assets-folder-path: '../../../assets';
 @import "shame";
 
 .woocommerce {
-  --theme-content-width-normal: var(--theme-content-width-wide);
 
   td,
   th {
@@ -29,7 +28,10 @@ $assets-folder-path: '../../../assets';
 
 .woocommerce-pagination {
   @include nav-links;
-  margin-bottom: var(--theme-spacing-xl);
+  
+  &[class][class][class] {
+    margin-bottom: var(--theme-spacing-xl);
+  }
 }
 
 .wc-block-grid__products {
@@ -69,5 +71,22 @@ $assets-folder-path: '../../../assets';
 
   &:before {
     color: var(--sm-current-accent-color);
+  }
+}
+
+.woocommerce-page {
+  
+  .entry-content,
+  .novablocks-content {
+    
+    @include specific(4) {
+      --block-content-start: ws;
+      --block-content-end: we;
+    }
+  }
+  
+  .entry-content [class*="__inner-container"] {
+    padding-left: 0;
+    padding-right: 0;
   }
 }

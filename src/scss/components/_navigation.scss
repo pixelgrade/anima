@@ -14,9 +14,19 @@
 }
 
 .pagination {
-    --theme-content-width-normal: var(--theme-content-width-wide);
 
     .nav-links {
         @include nav-links;
+    }
+}
+
+.article-navigation {
+    margin-top: var(--theme-spacing-medium);
+    
+    padding-left: var(--theme-wrapper-sides-spacing);
+    padding-right: var(--theme-wrapper-sides-spacing);
+    
+    &:not(last-child) {
+        margin-bottom: var(--theme-spacing-medium);
     }
 }

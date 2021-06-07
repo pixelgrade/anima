@@ -10,38 +10,23 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+
+$article_markup =   '<!-- wp:novablocks/sidecar { "className":"alignwide", "sidebarWidth":"medium"} -->' .
+                    '<!-- wp:novablocks/sidecar-area {"className":"novablocks-content entry-content"} -->' .
+                    rosa2_article_header() .
+                    rosa2_get_content_markup() .
+                    rosa2_get_post_navigation_markup() .
+                    '<!-- wp:novablocks/post-comments --><!-- /wp:novablocks/post-comments -->' .
+                    '<!-- /wp:novablocks/sidecar-area -->' .
+                    '<!-- wp:novablocks/sidecar-area {"className":"novablocks-sidebar"} -->' .
+                    rosa2_get_sidebar_markup() .
+                    '<!-- /wp:novablocks/sidecar-area -->' .
+                    '<!-- /wp:novablocks/sidecar -->';
+
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-    <div>
-        <header class="entry-header">
-			<?php
-			get_template_part( 'template-parts/entry-meta', get_post_type() );
-			the_title( '<h1 class="entry-title has-text-align-center">', '</h1>' ); ?>
-            <div class="has-normal-font-size">
-				<?php rosa2_the_separator( 'decorative' ); ?>
-            </div>
-        </header>
-		<?php if ( has_post_thumbnail() ) { ?>
-            <div class="entry-thumbnail">
-                <div class="entry-content">
-                    <div class="entry-thumbnail__wrapper  alignwide  disabled-avoid-fout">
-                        <div class="entry-thumbnail__container">
-						    <?php the_post_thumbnail(); ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-		<?php } ?>
-    </div>
-
-    <div class="entry-content">
-		<?php
-            do_action( 'rosa2_before_content' );
-            the_content();
-            do_action( 'rosa2_after_content' );
-        ?>
-    </div>
+	<?php  echo do_blocks( $article_markup ); ?>
 
 </article><!-- #post-<?php the_ID(); ?> -->

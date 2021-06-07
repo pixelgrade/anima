@@ -148,3 +148,14 @@ textarea {
 }
 
 /* End Fallback Styles for Color Signal */
+
+.wp-block-group__inner-container > * {
+    width: 100%;
+}
+
+@include below(lap) {
+
+    .site-main {
+        overflow-x: hidden;
+    }
+}

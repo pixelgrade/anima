@@ -1,6 +1,33 @@
 .novablocks-sharing__overlay {
     @include variation(dark);
     @include apply-font(body);
+    
+    &[class] {
+        z-index: 1001;
+    }
+    
+    .novablocks-sharing__wrap {
+        
+        @include specific(3) {
+            transition: all .4s cubic-bezier(.25, .1, .26, .99);
+        }
+    }
+    
+    &[class]:not(.is-visible) {
+        display: block;
+        pointer-events: none;
+    
+        visibility: hidden;
+        
+        .novablocks-sharing__wrap {
+            opacity: 0;
+            transform: translate3d(0, -0.8625em, 0);
+        }
+    }
+    
+    .novablocks-sharing__copy-input {
+        transition: none;
+    }
 }
 
 .novablocks-sharing__link {

@@ -1,6 +1,14 @@
 html {
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
+    scroll-padding-top: var(--theme-header-height);
     --theme-body-final-font-size: var(--final-font-size);
     @include apply-font(body);
+}
+
+body {
+    // We need overflow on X to be hidden,
+    // because we are using a background on :before element
+    // for entry-header on articles.
+    overflow-x: hidden;
 }

@@ -120,10 +120,10 @@ export default class App {
 	}
 
 	initializeHeader() {
-		const $header = $( '.novablocks-header' );
+		const header = document.querySelector( '.novablocks-header' );
 
-		if ( $header.length ) {
-			this.header = new Header( $header.get(0), {
+		if ( !! header ) {
+			this.header = new Header( header, {
 				onResize: this.onHeaderUpdate.bind( this )
 			} );
 		}
