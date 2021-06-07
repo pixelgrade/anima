@@ -1,6 +1,6 @@
 <?php
 /**
- * Handle the Customify integration logic.
+ * Handle the Style Manager integration logic.
  */
 
 // If this file is called directly, abort.
@@ -11,33 +11,32 @@ if ( ! defined( 'ABSPATH' ) ) {
 // pixelgrade_option
 require_once __DIR__ . '/extras.php';
 
-// If the Style Manager plugin is active, don't load the Customify integration.
-if ( class_exists( 'PixCustomifyPlugin' ) && ! defined( '\Pixelgrade\StyleManager\VERSION' ) ) {
+if ( defined( '\Pixelgrade\StyleManager\VERSION' ) ) {
 
 	require_once __DIR__ . '/colors.php';
 	require_once __DIR__ . '/fonts.php';
 	require_once __DIR__ . '/connected-fields.php';
 	require_once __DIR__ . '/layout.php';
 
-	// Add new options to the Customify config
-	add_filter( 'customify_filter_fields', 'rosa2_add_customify_options', 11, 1 );
+	// Add new options to the Style Manager config
+	add_filter( 'style_manager/filter_fields', 'rosa2_add_style_manager_options', 11, 1 );
 
-	add_filter( 'customify_filter_fields', 'rosa2_add_header_section_to_customify_config', 20, 1 );
-	add_filter( 'customify_filter_fields', 'rosa2_add_separators_section_to_customify_config', 30, 1 );
-	add_filter( 'customify_filter_fields', 'rosa2_add_content_section_to_customify_config', 40, 1 );
+	add_filter( 'style_manager/filter_fields', 'rosa2_add_header_section_to_style_manager_config', 20, 1 );
+	add_filter( 'style_manager/filter_fields', 'rosa2_add_separators_section_to_style_manager_config', 30, 1 );
+	add_filter( 'style_manager/filter_fields', 'rosa2_rosa2_add_content_section_to_style_manager_config', 40, 1 );
 }
 
 
-function rosa2_add_customify_options( $config ) {
+function rosa2_add_style_manager_options( $config ) {
 	$config['opt-name'] = 'rosa2_options';
 
-	//start with a clean slate - no Customify default sections
+	//start with a clean slate - no Style Manager default sections
 	$config['sections'] = array();
 
 	return $config;
 }
 
-function rosa2_add_header_section_to_customify_config( $config ) {
+function rosa2_add_header_section_to_style_manager_config( $config ) {
 
 	$rosa2_header_section = array(
 		'header_section' => array(
@@ -166,7 +165,7 @@ function rosa2_add_header_section_to_customify_config( $config ) {
 	return $config;
 }
 
-function rosa2_add_content_section_to_customify_config( $config ) {
+function rosa2_rosa2_add_content_section_to_style_manager_config( $config ) {
 
 	$rosa2_content_section = array(
 		'content_section' => array(
@@ -218,7 +217,7 @@ function rosa2_add_content_section_to_customify_config( $config ) {
 	return $config;
 }
 
-function rosa2_add_separators_section_to_customify_config( $config ) {
+function rosa2_add_separators_section_to_style_manager_config( $config ) {
 
 	$separator_symbol_values = array(
 		'fleuron-1',
