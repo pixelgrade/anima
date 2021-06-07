@@ -101,60 +101,57 @@
     }
 }
 
-.entry-header {
-    position: relative;
-    
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    
-    background-color: var(--current-light-tertiary);
-    z-index: 1;
-    
-    padding-bottom: var(--theme-spacing-large);
-    
-    &:before {
-        content: '';
-            position: absolute;
-        top: 0;
-        right: -100vw;
-        bottom: 0;
-        left: -100vw;
-        display: block;
-        background-color: inherit;
-        pointer-events: none;
-        z-index: -1;
-        
-        margin-top: calc(-1 * var(--page-top-spacing));
-    }
-    
-    + .entry-thumbnail {
-        --element-spacing: var(--theme-spacing-fluid-xsmall);
-        
-        position: relative;
-        margin-top: calc( -1 * var(--overlap-header-size) + 2 * var(--element-spacing)) !important;
-        z-index: 10;
-    }
-    
-    .cat-links {
-        --current-font-weight: 700;
-        
-        a {
-            color: var(--current-color-primary);
-            text-decoration: none;
-        }
-    }
-    
-    .entry-title {
-        --current-font-weight: 800;
-        --current-line-height: 1.2;
-    }
-}
-
 .article-header {
     
     .entry-header {
+        position: relative;
+        
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        
+        background-color: var(--current-light-tertiary);
+        z-index: 1;
+        
         padding-bottom: var(--overlap-header-size, 1em);
+    
+    
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -100vw;
+            bottom: 0;
+            left: -100vw;
+            display: block;
+            background-color: inherit;
+            pointer-events: none;
+            z-index: -1;
+            
+            margin-top: calc(-1 * var(--page-top-spacing));
+        }
+        
+        + .entry-thumbnail {
+            --element-spacing: var(--theme-spacing-fluid-xsmall);
+            
+            position: relative;
+            margin-top: calc( -1 * var(--overlap-header-size) + 2 * var(--element-spacing)) !important;
+            z-index: 10;
+        }
+        
+        .cat-links {
+            --current-font-weight: 700;
+            
+            a {
+                color: var(--current-color-primary);
+                text-decoration: none;
+            }
+        }
+        
+        .entry-title {
+            --current-font-weight: 800;
+            --current-line-height: 1.2;
+        }
     }
     
     + .novablocks-sidecar {
