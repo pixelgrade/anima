@@ -1572,6 +1572,9 @@
     .woocommerce table.shop_table td.actions {
       padding-right: 0;
       padding-left: 0; } }
+  @media only screen and (min-width: 768px) {
+    .woocommerce table.shop_table td.actions button[name='update_cart'] {
+      margin-right: var(--theme-spacing-fluid-tiny); } }
 
 .woocommerce-cart table.cart {
   margin-bottom: var(--theme-spacing--huge); }
@@ -1692,6 +1695,8 @@
 
 .woocommerce-cart-form .quantity .quantity__wrapper {
   justify-content: flex-end; }
+  .woocommerce-cart-form .quantity .quantity__wrapper button {
+    cursor: pointer; }
 
 .woocommerce-cart .actions .coupon[class][class] {
   display: flex;

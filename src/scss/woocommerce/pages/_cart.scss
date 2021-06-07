@@ -44,6 +44,12 @@
       padding-left: 0;
       padding-right: 0;
     }
+    
+    @include above(tablet) {
+      button[name='update_cart'] {
+        margin-left: var(--theme-spacing-fluid-tiny);
+      }
+    }
   }
 }
 
@@ -251,6 +257,10 @@
 
   .quantity .quantity__wrapper {
     justify-content: flex-end;
+    
+    button {
+      cursor: pointer;
+    }
   }
 }
 
