@@ -81,7 +81,7 @@ h1, h2, h3, h4, h5, h6,
         margin-top: 0;
         margin-bottom: 0;
 
-        &:not(:first-child) {
+        &:not(:first-child):not(.wp-block-column) {
             @include element-spacing;
             margin-top: var(--element-spacing);
         }

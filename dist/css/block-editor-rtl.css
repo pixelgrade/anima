@@ -471,10 +471,10 @@ h1, .editor-styles-wrapper[class] h2, .editor-styles-wrapper[class] h3, .editor-
 .block-editor-block-list__block {
   margin-top: 0;
   margin-bottom: 0; }
-  .editor-styles-wrapper[class] p:not(:first-child), .editor-styles-wrapper[class]
-  h1:not(:first-child), .editor-styles-wrapper[class] h2:not(:first-child), .editor-styles-wrapper[class] h3:not(:first-child), .editor-styles-wrapper[class] h4:not(:first-child), .editor-styles-wrapper[class] h5:not(:first-child), .editor-styles-wrapper[class] h6:not(:first-child), .editor-styles-wrapper[class]
-  .wp-block:not(:first-child), .editor-styles-wrapper[class]
-  .block-editor-block-list__block:not(:first-child) {
+  .editor-styles-wrapper[class] p:not(:first-child):not(.wp-block-column), .editor-styles-wrapper[class]
+  h1:not(:first-child):not(.wp-block-column), .editor-styles-wrapper[class] h2:not(:first-child):not(.wp-block-column), .editor-styles-wrapper[class] h3:not(:first-child):not(.wp-block-column), .editor-styles-wrapper[class] h4:not(:first-child):not(.wp-block-column), .editor-styles-wrapper[class] h5:not(:first-child):not(.wp-block-column), .editor-styles-wrapper[class] h6:not(:first-child):not(.wp-block-column), .editor-styles-wrapper[class]
+  .wp-block:not(:first-child):not(.wp-block-column), .editor-styles-wrapper[class]
+  .block-editor-block-list__block:not(:first-child):not(.wp-block-column) {
     --element-spacing: calc( var(--block-top-spacing, 1) * var(--theme-spacing-fluid-small) * var(--novablocks-element-spacing-multiplier, 1) );
     margin-top: var(--element-spacing); }
 
