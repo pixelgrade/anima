@@ -8,222 +8,91 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Add colors section and options to the Style Manager config
 add_filter( 'style_manager/filter_fields', 'pixelgrade_add_colors_section_to_style_manager_config', 50, 1 );
 
-// Prepend theme color palette to the default color palettes list
-add_filter( 'style_manager/get_color_palettes', 'pixelgrade_add_default_color_palettes' );
-
 function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
+
+	if ( ! function_exists( 'sm_get_color_switch_dark_config' ) ||
+	     ! function_exists( 'sm_get_color_switch_darker_config' ) ) {
+		return $config;
+	}
 
 	if ( empty( $config['sections'] ) ) {
 		$config['sections'] = array();
 	}
 
-	if ( ! isset( $config['sections']['style_manager_section'] ) ) {
-		$config['sections']['style_manager_section'] = array();
-	}
-
-	// The section might be already defined, thus we merge, not replace the entire section config.
-	$config['sections']['style_manager_section'] = \Pixelgrade\StyleManager\Utils\ArrayHelpers::array_merge_recursive_distinct( $config['sections']['style_manager_section'], array(
-		'options' => array(
-			'sm_color_primary'   => array(
-				'default'          => THEME_COLOR_PRIMARY,
-				'connected_fields' => array(
-					'color_1'
-				),
-			),
-			'sm_color_secondary' => array(
-				'default'          => THEME_COLOR_SECONDARY,
-				'connected_fields' => array(
-					'color_2'
-				),
-			),
-			'sm_color_tertiary'  => array(
-				'default'          => THEME_COLOR_TERTIARY,
-				'connected_fields' => array(
-					'color_3'
-				),
-			),
-			'sm_dark_primary'    => array(
-				'default'          => THEME_DARK_PRIMARY,
-				'connected_fields' => array(
-					'color_dark_1'
-				),
-			),
-			'sm_dark_secondary'  => array(
-				'default'          => THEME_DARK_SECONDARY,
-				'connected_fields' => array(
-					'color_dark_2'
-				),
-			),
-			'sm_dark_tertiary'   => array(
-				'default'          => THEME_DARK_TERTIARY,
-				'connected_fields' => array(
-					'color_dark_3'
-				),
-			),
-			'sm_light_primary'   => array(
-				'default'          => THEME_LIGHT_PRIMARY,
-				'connected_fields' => array(
-					'color_light_1'
-				),
-			),
-			'sm_light_secondary' => array(
-				'default'          => THEME_LIGHT_SECONDARY,
-				'connected_fields' => array(
-					'color_light_2'
-				),
-			),
-			'sm_light_tertiary'  => array(
-				'default'          => THEME_LIGHT_TERTIARY,
-				'connected_fields' => array(
-					'color_light_3'
-				),
-			),
-
-		),
-	) );
-
 	if ( ! isset( $config['sections']['colors_section'] ) ) {
 		$config['sections']['colors_section'] = array();
 	}
 
+	// The section might be already defined, thus we merge, not replace the entire section config.
 	$config['sections']['colors_section'] = \Pixelgrade\StyleManager\Utils\ArrayHelpers::array_merge_recursive_distinct( $config['sections']['colors_section'], array(
 		'title'   => esc_html__( 'Colors', '__theme_txtd' ),
 		'options' => array(
-			'color_1'       => array(
-				'type'    => 'color',
-				'live'    => true,
-				'label'   => esc_html__( 'Theme Primary Color', '__theme_txtd' ),
-				'default' => THEME_COLOR_PRIMARY,
-				'css'     => array(
-					array(
-						'selector' => ':root',
-						'property' => '--theme-color-primary',
-					),
-				),
+			'sm-description_colorize_elements_intro' => array(
+				'type' => 'html',
+				'html' => 'Apply color to specific elements from your site that you seek to get more attention.',
 			),
-			'color_2'       => array(
-				'type'    => 'color',
-				'live'    => true,
-				'label'   => esc_html__( 'Theme Secondary Color', '__theme_txtd' ),
-				'default' => THEME_COLOR_SECONDARY,
-				'css'     => array(
-					array(
-						'selector' => ':root',
-						'property' => '--theme-color-secondary',
-					),
-				),
+
+			'main_content_section_title' => array(
+				'type' => 'html',
+				'html' => '<span class="sm-group__title">' . esc_html__( 'Main Content', '__theme_txtd' ) . '</span>',
 			),
-			'color_3'       => array(
-				'type'    => 'color',
-				'live'    => true,
-				'label'   => esc_html__( 'Theme Tertiary Color', '__theme_txtd' ),
-				'default' => THEME_COLOR_TERTIARY,
-				'css'     => array(
-					array(
-						'selector' => ':root',
-						'property' => '--theme-color-tertiary',
-					),
-				),
+
+			'page_title' => sm_get_color_switch_dark_config( 'Page title', '.entry-title', false ),
+			'body_color' => sm_get_color_switch_dark_config( 'Body text', 'html, [class*="sm-variation-"]', false ),
+			'links_color' => sm_get_color_switch_dark_config( 'Body links', '*', true, '--theme-links-color' ),
+			'heading_links_color' => sm_get_color_switch_dark_config( 'Heading links', 'h1, h2, h3, h4, h5, h6', true, '--theme-links-color' ),
+
+			'sm-group-separator-1' => array( 'type' => 'html', 'html' => '' ),
+
+			'colors_header_section_title' => array(
+				'type' => 'html',
+				'html' => '<span class="sm-group__title">' . esc_html__( 'Header', '__theme_txtd' ) . '</span>',
 			),
-			'color_dark_1'  => array(
-				'type'    => 'color',
-				'live'    => true,
-				'label'   => esc_html__( 'Theme Primary Dark Color', '__theme_txtd' ),
-				'default' => THEME_DARK_PRIMARY,
-				'css'     => array(
-					array(
-						'selector' => ':root',
-						'property' => '--theme-dark-primary',
-					),
-				),
+
+			'menu_item_color' => sm_get_color_switch_dark_config( 'Navigation links', '.novablocks-navigation', false ),
+			'menu_active_item_color' => sm_get_color_switch_dark_config( 'Navigaiton active link', '.novablocks-navigation > ul > li[class*="current"]', false ),
+
+			'sm-group-separator-2' => array( 'type' => 'html', 'html' => '' ),
+
+			'colors_headings_section_title' => array(
+				'type' => 'html',
+				'html' => '<span class="sm-group__title">' . esc_html__( 'Headings', '__theme_txtd' ) . '</span>',
 			),
-			'color_dark_2'  => array(
-				'type'    => 'color',
-				'live'    => true,
-				'label'   => esc_html__( 'Theme Secondary Dark Color', '__theme_txtd' ),
-				'default' => THEME_DARK_SECONDARY,
-				'css'     => array(
-					array(
-						'selector' => ':root',
-						'property' => '--theme-dark-secondary',
-					),
-				),
+
+			'heading_1_color' => sm_get_color_switch_darker_config( 'Heading 1', 'h1', false ),
+			'heading_2_color' => sm_get_color_switch_darker_config( 'Heading 2', 'h2', false ),
+			'heading_3_color' => sm_get_color_switch_darker_config( 'Heading 3', 'h3', false ),
+			'heading_4_color' => sm_get_color_switch_darker_config( 'Heading 4', 'h4', false ),
+			'heading_5_color' => sm_get_color_switch_darker_config( 'Heading 5', 'h5', false ),
+			'heading_6_color' => sm_get_color_switch_darker_config( 'Heading 6', 'h6', false ),
+
+			'sm-group-separator-3' => array( 'type' => 'html', 'html' => '' ),
+
+			'colors_buttons_section_title' => array(
+				'type' => 'html',
+				'html' => '<span class="sm-group__title">' . esc_html__( 'Buttons', '__theme_txtd' ) . '</span>',
 			),
-			'color_dark_3'  => array(
-				'type'    => 'color',
-				'live'    => true,
-				'label'   => esc_html__( 'Theme Tertiary Dark Color', '__theme_txtd' ),
-				'default' => THEME_DARK_TERTIARY,
-				'css'     => array(
-					array(
-						'selector' => ':root',
-						'property' => '--theme-dark-tertiary',
-					),
-				),
+
+			'solid_button' => sm_get_color_switch_dark_config( 'Buttons', '*', false, '--sm-button-background-color' ),
+			'text_button' => sm_get_color_switch_dark_config( 'Text', '.wp-block-button.is-style-text .wp-block-button__link', false, array( '--theme-button-text-color' ) ),
+
+			'sm-group-separator-4' => array( 'type' => 'html', 'html' => '' ),
+
+			'colors_novablocks_headline_section_title' => array(
+				'type' => 'html',
+				'html' => '<span class="sm-group__title">' . esc_html__( 'Headline Block', '__theme_txtd' ) . '</span>',
 			),
-			'color_light_1' => array(
-				'type'    => 'color',
-				'live'    => true,
-				'label'   => esc_html__( 'Theme Primary Light Color', '__theme_txtd' ),
-				'default' => THEME_LIGHT_PRIMARY,
-				'css'     => array(
-					array(
-						'selector' => ':root',
-						'property' => '--theme-light-primary',
-					),
-				),
+
+			'novablocks_headline_primary' => sm_get_color_switch_darker_config( 'Headline primary', '.c-headline__primary', false ),
+			'novablocks_headline_secondary' => sm_get_color_switch_darker_config( 'Headline secondary', '.c-headline__secondary', true ),
+
+			'sm-description_colorize_elements_outro' => array(
+				'type' => 'html',
+				'html' => 'Some elements are not available in this list, and you can change their coloration by using CSS code snippets.',
 			),
-			'color_light_2' => array(
-				'type'    => 'color',
-				'live'    => true,
-				'label'   => esc_html__( 'Theme Secondary Light Color', '__theme_txtd' ),
-				'default' => THEME_LIGHT_SECONDARY,
-				'css'     => array(
-					array(
-						'selector' => ':root',
-						'property' => '--theme-light-secondary',
-					),
-				),
-			),
-			'color_light_3' => array(
-				'type'    => 'color',
-				'live'    => true,
-				'label'   => esc_html__( 'Theme Tertiary Light Color', '__theme_txtd' ),
-				'default' => THEME_LIGHT_TERTIARY,
-				'css'     => array(
-					array(
-						'selector' => ':root',
-						'property' => '--theme-light-tertiary',
-					),
-				),
-			),
+
 		),
 	) );
 
 	return $config;
-}
-
-function pixelgrade_add_default_color_palettes( $color_palettes ) {
-
-	$color_palettes = array_merge( array(
-		'default' => array(
-			'label'   => esc_html__( 'Theme Default', '__theme_txtd' ),
-			'preview' => array(
-				'background_image_url' => '//cloud.pixelgrade.com/wp-content/uploads/2018/07/rosa-palette.jpg',
-			),
-			'options' => array(
-				'sm_color_primary'   => THEME_COLOR_PRIMARY,
-				'sm_color_secondary' => THEME_COLOR_SECONDARY,
-				'sm_color_tertiary'  => THEME_COLOR_TERTIARY,
-				'sm_dark_primary'    => THEME_DARK_PRIMARY,
-				'sm_dark_secondary'  => THEME_DARK_SECONDARY,
-				'sm_dark_tertiary'   => THEME_DARK_TERTIARY,
-				'sm_light_primary'   => THEME_LIGHT_PRIMARY,
-				'sm_light_secondary' => THEME_LIGHT_SECONDARY,
-				'sm_light_tertiary'  => THEME_LIGHT_TERTIARY,
-			),
-		),
-	), $color_palettes );
-
-	return $color_palettes;
 }
