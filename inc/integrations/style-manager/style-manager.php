@@ -16,7 +16,6 @@ if ( defined( '\Pixelgrade\StyleManager\VERSION' ) ) {
 	require_once __DIR__ . '/colors.php';
 	require_once __DIR__ . '/fonts.php';
 	require_once __DIR__ . '/connected-fields.php';
-	require_once __DIR__ . '/layout.php';
 
 	// Add new options to the Style Manager config
 	add_filter( 'style_manager/filter_fields', 'rosa2_add_style_manager_options', 11, 1 );
