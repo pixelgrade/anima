@@ -27,55 +27,55 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 			'sm_color_primary'   => array(
 				'default'          => THEME_COLOR_PRIMARY,
 				'connected_fields' => array(
-					'color_1'
+					'color_1',
 				),
 			),
 			'sm_color_secondary' => array(
 				'default'          => THEME_COLOR_SECONDARY,
 				'connected_fields' => array(
-					'color_2'
+					'color_2',
 				),
 			),
 			'sm_color_tertiary'  => array(
 				'default'          => THEME_COLOR_TERTIARY,
 				'connected_fields' => array(
-					'color_3'
+					'color_3',
 				),
 			),
 			'sm_dark_primary'    => array(
 				'default'          => THEME_DARK_PRIMARY,
 				'connected_fields' => array(
-					'color_dark_1'
+					'color_dark_1',
 				),
 			),
 			'sm_dark_secondary'  => array(
 				'default'          => THEME_DARK_SECONDARY,
 				'connected_fields' => array(
-					'color_dark_2'
+					'color_dark_2',
 				),
 			),
 			'sm_dark_tertiary'   => array(
 				'default'          => THEME_DARK_TERTIARY,
 				'connected_fields' => array(
-					'color_dark_3'
+					'color_dark_3',
 				),
 			),
 			'sm_light_primary'   => array(
 				'default'          => THEME_LIGHT_PRIMARY,
 				'connected_fields' => array(
-					'color_light_1'
+					'color_light_1',
 				),
 			),
 			'sm_light_secondary' => array(
 				'default'          => THEME_LIGHT_SECONDARY,
 				'connected_fields' => array(
-					'color_light_2'
+					'color_light_2',
 				),
 			),
 			'sm_light_tertiary'  => array(
 				'default'          => THEME_LIGHT_TERTIARY,
 				'connected_fields' => array(
-					'color_light_3'
+					'color_light_3',
 				),
 			),
 
@@ -207,21 +207,15 @@ function pixelgrade_add_default_color_palettes( $color_palettes ) {
 
 	$color_palettes = array_merge( array(
 		'default' => array(
-			'label'   => esc_html__( 'Theme Default', '__theme_txtd' ),
-			'preview' => array(
+			'id'           => 0,
+			'label'        => esc_html__( 'Theme Default', '__theme_txtd' ),
+			'description'  => esc_html__( 'Rosa2 is to colors what wisdom is to knowledge', '__theme_txtd' ),
+			'preview'      => array(
 				'background_image_url' => '//cloud.pixelgrade.com/wp-content/uploads/2018/07/rosa-palette.jpg',
 			),
-			'options' => array(
-				'sm_color_primary'   => THEME_COLOR_PRIMARY,
-				'sm_color_secondary' => THEME_COLOR_SECONDARY,
-				'sm_color_tertiary'  => THEME_COLOR_TERTIARY,
-				'sm_dark_primary'    => THEME_DARK_PRIMARY,
-				'sm_dark_secondary'  => THEME_DARK_SECONDARY,
-				'sm_dark_tertiary'   => THEME_DARK_TERTIARY,
-				'sm_light_primary'   => THEME_LIGHT_PRIMARY,
-				'sm_light_secondary' => THEME_LIGHT_SECONDARY,
-				'sm_light_tertiary'  => THEME_LIGHT_TERTIARY,
-			),
+			'color_groups' => array(),
+			'tags'         => array(),
+			'hashid'       => 'default',
 		),
 	), $color_palettes );
 
