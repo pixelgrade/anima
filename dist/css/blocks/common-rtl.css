@@ -183,7 +183,8 @@
   align-self: flex-end; }
 
 /* Cover Block */
-.wp-block-cover {
+.wp-block-cover,
+.wp-block-cover-image {
   position: relative;
   display: flex;
   align-items: center;
@@ -194,8 +195,69 @@
   color: #FFFFFF;
   background-color: #000000;
   background-size: cover; }
-  .wp-block-cover a {
+  .wp-block-cover a,
+  .wp-block-cover-image a {
     color: inherit; }
+  .wp-block-cover img.wp-block-cover__image-background,
+  .wp-block-cover video.wp-block-cover__video-background,
+  .wp-block-cover-image img.wp-block-cover__image-background,
+  .wp-block-cover-image video.wp-block-cover__video-background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    object-fit: cover;
+    outline: none;
+    border: none;
+    box-shadow: none;
+    z-index: 0; }
+  .wp-block-cover.is-position-top-left,
+  .wp-block-cover-image.is-position-top-left {
+    align-items: flex-start;
+    justify-content: flex-start; }
+  .wp-block-cover.is-position-top-center,
+  .wp-block-cover-image.is-position-top-center {
+    align-items: flex-start;
+    justify-content: center; }
+  .wp-block-cover.is-position-top-right,
+  .wp-block-cover-image.is-position-top-right {
+    align-items: flex-start;
+    justify-content: flex-end; }
+  .wp-block-cover.is-position-center-left,
+  .wp-block-cover-image.is-position-center-left {
+    align-items: center;
+    justify-content: flex-start; }
+  .wp-block-cover.is-position-center-center,
+  .wp-block-cover-image.is-position-center-center {
+    align-items: center;
+    justify-content: center; }
+  .wp-block-cover.is-position-center-right,
+  .wp-block-cover-image.is-position-center-right {
+    align-items: center;
+    justify-content: flex-end; }
+  .wp-block-cover.is-position-bottom-left,
+  .wp-block-cover-image.is-position-bottom-left {
+    align-items: flex-end;
+    justify-content: flex-start; }
+  .wp-block-cover.is-position-bottom-center,
+  .wp-block-cover-image.is-position-bottom-center {
+    align-items: flex-end;
+    justify-content: center; }
+  .wp-block-cover.is-position-bottom-right,
+  .wp-block-cover-image.is-position-bottom-right {
+    align-items: flex-end;
+    justify-content: flex-end; }
+  .wp-block-cover.has-custom-content-position.has-custom-content-position .wp-block-cover__inner-container,
+  .wp-block-cover-image.has-custom-content-position.has-custom-content-position .wp-block-cover__inner-container {
+    margin: 0;
+    width: auto; }
 
 .wp-block-cover-text {
   color: inherit; }
