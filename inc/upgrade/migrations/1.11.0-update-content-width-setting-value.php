@@ -11,8 +11,17 @@ if ( ! function_exists( 'PixCustomifyPlugin' ) || empty( PixCustomifyPlugin()->s
 
 $opt_name = PixCustomifyPlugin()->get_options_key();
 
-$content_option = intval( pixelgrade_option('content_width', 30) );
-$container_option = intval( pixelgrade_option('content_wide_width_addon', 35) );
+$container_option_old_default = 32;
+$container_option_new_default = 75;
+$content_option               = intval( pixelgrade_option( 'content_width', 40 ) );
+$container_option             = intval( pixelgrade_option( 'content_wide_width_addon', 32 ) );
+
+// If container_option value is equal with new default for container_option,
+// that mean user has not made any changes and we should use the old default.
+if ( $container_option === $container_option_new_default ) {
+	$container_option = $container_option_old_default;
+}
+
 $new_container_option_value = $content_option + $container_option;
 
 if ( $new_container_option_value > 100 ) {
@@ -38,12 +47,12 @@ if ( ! empty( $container_option_config['setting_type'] ) && 'option' === $contai
 	update_option( $setting_id, $new_container_option_value );
 } else {
 
-	if ( PixCustomifyPlugin()->settings->get_plugin_setting('values_store_mod') === 'option' ) {
-		$rosa2_options = get_option( $opt_name );
+	if ( PixCustomifyPlugin()->settings->get_plugin_setting( 'values_store_mod' ) === 'option' ) {
+		$rosa2_options                             = get_option( $opt_name );
 		$rosa2_options['content_wide_width_addon'] = $new_container_option_value;
 		update_option( $opt_name, $rosa2_options );
 	} else {
-		$rosa2_options = get_theme_mod( $opt_name );
+		$rosa2_options                             = get_theme_mod( $opt_name );
 		$rosa2_options['content_wide_width_addon'] = $new_container_option_value;
 		set_theme_mod( $opt_name, $rosa2_options );
 	}
