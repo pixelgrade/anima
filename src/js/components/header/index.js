@@ -19,6 +19,9 @@ class Header extends HeaderBase {
 		this.element = element;
 		this.rows = this.getHeaderRows();
 
+		this.isSticky = !! this.element.dataset.sticky;
+		this.hasStickyRow = !! this.element.querySelector( '[data-sticky]' );
+
 		this.mobileHeader = new HeaderMobile( this );
 		this.secondaryHeader = this.getSecondaryHeader();
 
@@ -64,13 +67,7 @@ class Header extends HeaderBase {
 	}
 
 	getSecondaryHeader() {
-		const nextSibling = this.element.nextElementSibling;
-
-		if ( !! nextSibling && nextSibling.classList.contains( 'novablocks-header--secondary' ) ) {
-			return nextSibling;
-		}
-
-		return null;
+		return document.querySelector( '.novablocks-header--secondary' );
 	}
 
 	getHeaderRows() {
@@ -92,9 +89,12 @@ class Header extends HeaderBase {
 	}
 
 	updateStickyStyles() {
-		HeaderBase.prototype.updateStickyStyles.call( this );
 
-		this.toggleRowsColors( ! this.shouldBeSticky );
+		if ( this.isSticky || ! this.hasStickyRow ) {
+			HeaderBase.prototype.updateStickyStyles.call( this );
+			this.toggleRowsColors( ! this.shouldBeSticky );
+		}
+
 		this.element.style.marginTop = `${ this.staticDistance }px`;
 
 		if ( this.secondaryHeader ) {

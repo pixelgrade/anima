@@ -1817,6 +1817,8 @@ function (_HeaderBase) {
     _this.onUpdate = options.onUpdate;
     _this.element = element;
     _this.rows = _this.getHeaderRows();
+    _this.isSticky = !!_this.element.dataset.sticky;
+    _this.hasStickyRow = !!_this.element.querySelector('[data-sticky]');
     _this.mobileHeader = new header_mobile(assertThisInitialized_default()(_this));
     _this.secondaryHeader = _this.getSecondaryHeader();
 
@@ -1871,13 +1873,7 @@ function (_HeaderBase) {
   }, {
     key: "getSecondaryHeader",
     value: function getSecondaryHeader() {
-      var nextSibling = this.element.nextElementSibling;
-
-      if (!!nextSibling && nextSibling.classList.contains('novablocks-header--secondary')) {
-        return nextSibling;
-      }
-
-      return null;
+      return document.querySelector('.novablocks-header--secondary');
     }
   }, {
     key: "getHeaderRows",
@@ -1902,8 +1898,11 @@ function (_HeaderBase) {
   }, {
     key: "updateStickyStyles",
     value: function updateStickyStyles() {
-      header_base.prototype.updateStickyStyles.call(this);
-      this.toggleRowsColors(!this.shouldBeSticky);
+      if (this.isSticky || !this.hasStickyRow) {
+        header_base.prototype.updateStickyStyles.call(this);
+        this.toggleRowsColors(!this.shouldBeSticky);
+      }
+
       this.element.style.marginTop = "".concat(this.staticDistance, "px");
 
       if (this.secondaryHeader) {
