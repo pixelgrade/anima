@@ -595,7 +595,7 @@ function getFirstChild(el) {
   return firstChild;
 }
 var toggleLightClasses = function toggleLightClasses(element) {
-  var _window, _window$sm;
+  var _window, _window$styleManager;
 
   var classes = Array.from(element.classList);
   var paletteClassname = classes.find(function (classname) {
@@ -611,11 +611,11 @@ var toggleLightClasses = function toggleLightClasses(element) {
     return classname.indexOf('sm-palette--shifted') > -1;
   });
 
-  if (!Array.isArray((_window = window) === null || _window === void 0 ? void 0 : (_window$sm = _window.sm) === null || _window$sm === void 0 ? void 0 : _window$sm.colorsConfig)) {
+  if (!Array.isArray((_window = window) === null || _window === void 0 ? void 0 : (_window$styleManager = _window.styleManager) === null || _window$styleManager === void 0 ? void 0 : _window$styleManager.colorsConfig)) {
     return;
   }
 
-  var currentPaletteConfig = sm.colorsConfig.find(function (thisPalette) {
+  var currentPaletteConfig = window.styleManager.colorsConfig.find(function (thisPalette) {
     return thisPalette.id + '' === palette + '';
   });
 

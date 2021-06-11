@@ -119,11 +119,11 @@ export const toggleLightClasses = element => {
 	const variation = variationClassname ? variationClassname.substring( variationPrefix.length ) : 1;
 	const isShifted = !! classes.find( classname => classname.indexOf( 'sm-palette--shifted' ) > -1 );
 
-	if ( ! Array.isArray( window?.sm?.colorsConfig ) ) {
+	if ( ! Array.isArray( window?.styleManager?.colorsConfig ) ) {
 		return;
 	}
 
-	const currentPaletteConfig = sm.colorsConfig.find( thisPalette => {
+	const currentPaletteConfig = window.styleManager.colorsConfig.find( thisPalette => {
 		return thisPalette.id + '' === palette + '';
 	} );
 
