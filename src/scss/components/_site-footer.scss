@@ -18,8 +18,20 @@
 }
 
 .site-footer {
+    
     .wp-block-group.is-style-default {
         padding-top: var(--wp-block-group-padding);
         padding-bottom: var(--wp-block-group-padding);
     }
+    
+    .wp-block-group .wp-block-group__inner-container {
+        @include above(lap) {
+            --display-mode: grid;
+        }
+    }
+}
+
+.site-footer {
+    
+
 }

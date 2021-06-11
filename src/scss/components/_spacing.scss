@@ -1,7 +1,9 @@
 .wp-block,
 .entry-content > *,
 .wp-block-column > *,
-[class*="__inner-container"] > * {
+[class*="__inner-container"] > *,
+.novablocks-content[class][class] > *,
+.novablocks-sidebar > * {
     @include element-spacing;
     margin-top: var(--element-spacing);
     margin-bottom: calc( var(--block-bottom-spacing, 1) * var(--theme-spacing-fluid-small) * var(--novablocks-element-spacing-multiplier, 1) );
@@ -18,12 +20,19 @@
     }
 }
 
-.novablocks-media--blog[class][class][class] {
-    --block-top-spacing: 2;
-    --block-bottom-spacing: 2;
-    --novablocks-element-spacing-multiplier: 0.5;
-
-    &:first-child {
-        --block-top-spacing: 0;
+.novablocks-media--blog {
+    
+    @include specific(3) {
+        --block-top-spacing: 2;
+        --block-bottom-spacing: 2;
+        --novablocks-element-spacing-multiplier: 0.5;
+        
+        &:first-child {
+            --block-top-spacing: 0;
+        }
+        
+        @include below(lap) {
+            --block-bottom-spacing: 0;
+        }
     }
 }

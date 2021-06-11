@@ -9,3 +9,30 @@ body {
         }
     }
 }
+
+.blog,
+.archive,
+.search {
+    .entry-content .wp-block-group .wp-block-group__inner-container {
+        
+        @include above(lap) {
+            --display-mode: grid;
+        }
+    }
+    
+    .entry-header {
+        padding-top: var(--theme-spacing-fluid-xl);
+        padding-bottom: var(--theme-spacing-fluid-xl);
+    }
+    
+    .wp-block {
+        width: 100%;
+    }
+    
+    .entry-content {
+        
+        @include below(lap) {
+            --display-mode: block;
+        }
+    }
+}

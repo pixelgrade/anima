@@ -54,6 +54,11 @@
   --theme-lead-line-height: 1.6;
   --theme-lead-letter-spacing: -0.02em;
   --theme-lead-text-transform: none;
+  --theme-caption-font-family: Reforma1969, sans-serif;
+  --theme-caption-font-size: 16;
+  --theme-caption-font-weight: normal;
+  --theme-caption-line-height: 1.6;
+  --theme-caption-letter-spacing: -0.03em;
   --theme-display-font-family: Reforma1969, sans-serif;
   --theme-display-font-size: 115;
   --theme-display-font-style: normal;
@@ -163,11 +168,8 @@
   font-feature-settings: var(--current-font-feature); }
 
 :root {
-  --theme-content-width-normal-initial: 40;
-  --theme-content-width-wide-addon: 32;
-  --theme-content-width-wide-initial: calc(var(--theme-content-width-normal-initial) + var(--theme-content-width-wide-addon));
-  --theme-content-width-normal: calc(var(--theme-content-width-normal-initial) * var(--theme-body-final-font-size));
-  --theme-content-width-wide: calc(var(--theme-content-width-wide-initial) * var(--theme-body-final-font-size));
+  --theme-content-width-wide-addon: 75;
+  --theme-content-width-wide: calc(var(--theme-content-width-wide-addon) * var(--theme-body-final-font-size));
   --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-small); }
 
 :root {
