@@ -54,13 +54,17 @@ $enable-columns-block-styles: true !default;
     /* Columns Blocks */
     .wp-block-columns[class] {
         @include wp-block-columns-spacing;
+        
+        .alignfull {
+            margin-left: 0;
+            margin-right: 0;
+        }
     }
 
     .wp-block-column {
         min-width: 0;
         word-break: break-word;
         overflow-wrap: break-word;
-
     }
 
     :root {

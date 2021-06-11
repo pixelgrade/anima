@@ -6,8 +6,20 @@ body {
 
 .novablocks-sidebar {
 	
+	&--small {
+		--sidebar-font-size-modifier: 0.75;
+	}
+	
+	&--medium {
+		--sidebar-font-size-modifier: 0.85;
+	}
+	
+	&--large {
+		--sidebar-font-size-modifier: 1;
+	}
+	
 	* {
-		--font-size-modifier: 0.75;
+		--font-size-modifier: var(--sidebar-font-size-modifier);
 		font-size: var(--final-font-size);
 	}
 	
@@ -17,6 +29,10 @@ body {
 	
 	.widget {
 		@include space-children-y( var(--theme-spacing-fluid-small) );
+	}
+	
+	.widget-title {
+		--font-size: var(--theme-heading-4-font-size);
 	}
 	
 	.children {
@@ -45,10 +61,6 @@ body {
 		align-items: flex-start;
 	}
 	
-	input[type="submit"] {
-		margin-top: var(--theme-spacing-default);
-	}
-	
 	[class*='has-sm-dark'] {
 		--theme-input-overlay-shadow: inset 0px 0px 0px 0px rgba(var(--opacity-color), 0.70);
 	}
@@ -74,21 +86,6 @@ body {
 			--font-size-modifier: 0.75;
 		}
 		
-	}
-}
-
-.novablocks-sidebar {
-	
-
-}
-
-.novablocks-sidebar--large {
-	
-	> .novablocks-sidebar {
-		
-		* {
-			--font-size-modifier: 0.85;
-		}
 	}
 }
 

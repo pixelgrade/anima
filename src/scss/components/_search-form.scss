@@ -5,6 +5,8 @@
   width: 100%;
 
   margin-top: 1.5em;
+  
+  --search-icon-width: 1.2em;
 
   &:focus,
   &:focus-within {
@@ -25,28 +27,28 @@
     max-width: 200px;
     margin-left: .5em;
   }
-
+  
   @include above(lap) {
     .search-icon {
       content: '';
       position: absolute;
-      left: .8em;
+      left: var(--theme-input-padding);
       top: 50%;
       transform: translateY(-50%);
-
+    
       display: block;
-      width: 1.2em;
-      height: 1.2em;
-
+      width: var(--search-icon-width);
+      height: var(--search-icon-width);
+    
       border: 0;
       padding: 0;
-
+    
       mask: url($icon-search-path) no-repeat 50% 50%;
       mask-size: cover;
       -webkit-mask: url($icon-search-path) no-repeat 50% 50%;
       -webkit-mask-size: cover;
-
-      background-color: var(--sm-color-primary);
+    
+      background-color: var(--current-light-primary);
       transition: opacity .15s $ease;
     }
   }
@@ -72,7 +74,15 @@
 
   .search-field {
     border: 0;
-    padding-left: 2em;
+    
+    height: 100%;
+    
+    background-color: transparent;
+    color: var(--current-light-primary);
+    
+    @include above(lap) {
+      padding-left: calc(var(--search-icon-width) + var(--theme-input-padding) + 0.6em);
+    }
   }
 
   .error404 &,
@@ -90,5 +100,34 @@
     .search-field {
       color: var(--current-dark-primary);
     }
+    
+    .search-icon {
+      background-color: var(--sm-color-primary);
+    }
+  }
+}
+
+.novablocks-sidebar {
+  
+  .search-submit {
+    
+    @include above(lap) {
+      display: none;
+    }
+
+    --theme-button-text-color: var(--current-light-primary);
+    --theme-button-background-color: var(--current-color-primary);
+    --theme-button-border-color: var(--current-color-primary);
+    --theme-button-hover-text-color: var(--current-color-primary);
+    --theme-button-hover-background-color: transparent;
+    --theme-button-hover-border-color: var(--current-color-primary);
+  }
+  
+  .search-field {
+    color: var(--current-dark-primary)
+  }
+  
+  .search-icon {
+    background-color: var(--sm-color-primary);
   }
 }
