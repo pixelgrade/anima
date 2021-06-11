@@ -75,22 +75,25 @@
     }
   }
 
-    background-color: transparent;
-    color: var(--sm-current-fg1-color);
+  .error404 &,
+  .search-no-results & {
 
-    --font-size: 23;
-    font-weight: bold;
+    .search-submit {
+      --theme-button-background-color: var(--sm-current-accent-color);
+      --theme-button-border-color: var(--sm-current-accent-color);
+      --theme-button-text-color: var(--sm-current-bg-color);
 
-    @include above(lap) {
-      padding: 0 .8em 0 1.8em;
+      --theme-button-hover-background-color: transparent;
+      --theme-button-hover-border-color: var(--sm-current-accent-color);
+      --theme-button-hover-text-color: var(--sm-current-accent-color);
     }
 
-    @include placeholder() {
-      color: var(--sm-current-fg1-color);
+    .search-field {
+      color: var(--current-dark-primary);
     }
 
     .search-icon {
-      background-color: var(--sm-color-primary);
+      background-color: var(--sm-current-accent-color);
     }
   }
 }
