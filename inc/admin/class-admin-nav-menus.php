@@ -819,12 +819,13 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 		 * @return string Modified form HTML.
 		 */
 		public function custom_search_form( $form ) {
-			$form = '<form role="search" method="get" class="search-form" action="' . esc_url( home_url( '/' ) ) . '">
+			$form = '<form role="search" method="get" class="search-form input-normal-height" action="' . esc_url( home_url( '/' ) ) . '">
 				<label>
 					<span class="screen-reader-text">' . _x( 'Search for:', 'label', '__theme_txtd' ) . '</span>
 					<input type="search" class="search-field" placeholder="' . esc_attr( sprintf( __( 'Search %s...', '__theme_txtd' ), esc_html( get_bloginfo( 'name' ) ) ) ) . '" value="' . get_search_query() . '" name="s" />
 					<span class="search-icon"></span>
 				</label>
+                <input type="submit" class="search-submit" value="' . esc_attr_x( 'Search', 'submit button', '__theme_txtd' ) . '" />
 			</form>';
 
 			return $form;
