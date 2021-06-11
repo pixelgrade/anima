@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-$article_markup =   '<!-- wp:novablocks/sidecar { "className":"alignwide", "sidebarWidth":"medium"} -->' .
+$article_markup =   '<!-- wp:novablocks/sidecar { "className":"alignwide", "sidebarWidth":"medium", "lastItemIsSticky":true} -->' .
                     '<!-- wp:novablocks/sidecar-area {"className":"novablocks-content entry-content"} -->' .
                     rosa2_article_header() .
                     rosa2_get_content_markup() .
