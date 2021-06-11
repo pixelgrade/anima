@@ -83,26 +83,6 @@ function rosa2_add_header_section_to_customify_config( $config ) {
 						),
 					),
 				),
-				'header_height'                   => array(
-					'type'        => 'range',
-					'label'       => esc_html__( 'Header Height', '__theme_txtd' ),
-					'desc'        => esc_html__( 'Adjust the header and navigation bar height.', '__theme_txtd' ),
-					'live'        => true,
-					'default'     => 118,
-					'input_attrs' => array(
-						'min'          => 40,
-						'max'          => 200,
-						'step'         => 10,
-						'data-preview' => true,
-					),
-					'css'         => array(
-						array(
-							'property' => '--theme-header-height-setting',
-							'selector' => ':root',
-							'unit'     => '',
-						),
-					),
-				),
 				'header_navigation_links_spacing' => array(
 					'type'        => 'range',
 					'label'       => esc_html__( 'Navigation Link Spacing', '__theme_txtd' ),

@@ -8,6 +8,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Add colors section and options to the Style Manager config
 add_filter( 'style_manager/filter_fields', 'pixelgrade_add_colors_section_to_style_manager_config', 50, 1 );
 
+// Prepend theme color palette to the default color palettes list
+add_filter( 'style_manager/get_color_palettes', 'pixelgrade_add_default_color_palettes' );
+
 function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 
 	if ( ! function_exists( 'sm_get_color_switch_dark_config' ) ||
@@ -95,4 +98,54 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 	) );
 
 	return $config;
+}
+
+function pixelgrade_add_default_color_palettes( $color_palettes ) {
+
+	$color_palettes = array_merge( array(
+		'default' => array(
+			'id'           => 0,
+			'label'        => esc_html__( 'Theme Default', '__theme_txtd' ),
+			'description'  => esc_html__( 'Rosa2 is to colors what wisdom is to knowledge', '__theme_txtd' ),
+			'preview'      => array(
+				'background_image_url' => '//cloud.pixelgrade.com/wp-content/uploads/2018/07/rosa-palette.jpg',
+			),
+			'color_groups' => [
+				[
+					"uid" => "color_group_1",
+					"sources" => [
+						[
+							"uid" => "color_11",
+							"label" => "Brand Primary",
+							"color" => "#ddaa61"
+						]
+					]
+				],
+				[
+					"uid" => "color_group_2",
+					"sources" => [
+						[
+							"uid" => "color_21",
+							"label" => "Secondary",
+							"color" => "#39497C"
+						]
+					]
+				],
+				[
+					"uid" => "color_group_3",
+					"sources" => [
+						[
+							"uid" => "color_31",
+							"label" => "Tertiary",
+							"color" => "#B12C4A"
+						]
+					]
+				]
+			],
+			'tags'         => array(),
+			'hashid'       => 'default',
+		),
+	), $color_palettes );
+
+	return $color_palettes;
 }
