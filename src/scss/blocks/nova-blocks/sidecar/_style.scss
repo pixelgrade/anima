@@ -31,8 +31,12 @@ body {
 		@include space-children-y( var(--theme-spacing-fluid-small) );
 	}
 	
-	.widget-title {
+	.widget-title[class][class] {
 		--font-size: var(--theme-heading-4-font-size);
+		
+		+ * {
+			--element-spacing: var(--theme-spacing-fluid-default);
+		}
 	}
 	
 	.children {
