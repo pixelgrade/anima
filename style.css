@@ -1026,6 +1026,60 @@ table {
     flex-shrink: 0;
     margin-top: 0; }
 
+.c-subscribe-form {
+  display: flex;
+  flex-direction: column; }
+  .c-subscribe-form > :not(:first-child) {
+    --element-spacing: var(--theme-spacing-fluid-default);
+    margin-top: var(--element-spacing); }
+  .c-subscribe-form button[type='submit'] {
+    background-color: var(--theme-button-background-color) !important;
+    --theme-button-background-color: var(--current-color-secondary) !important;
+    --theme-button-text-color: var(--current-light-primary) !important;
+    --theme-button-hover-text-color: var(--current-light-primary) !important; }
+  .c-subscribe-form a {
+    color: inherit;
+    text-decoration: underline; }
+  .c-subscribe-form__title {
+    --font-size: 27; }
+  .c-subscribe-form__description {
+    --font-size: 19; }
+  .c-subscribe-form__actions {
+    display: flex;
+    flex-direction: column; }
+    .c-subscribe-form__actions button[type='submit'] {
+      border: 0 !important;
+      margin-top: var(--theme-spacing-tiny); }
+  .c-subscribe-form.form-has-background {
+    background-color: var(--current-dark-primary);
+    color: var(--current-light-primary);
+    padding: 2em; }
+  .c-subscribe-form.button-is-inline button {
+    position: relative;
+    font-size: 0 !important;
+    min-width: calc(1.25 * var(--final-font-size) + 1.5 * var(--final-font-size)); }
+    .c-subscribe-form.button-is-inline button:after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: block;
+      width: calc(1.25 * var(--final-font-size));
+      height: calc(1 * var(--final-font-size));
+      border: 0;
+      padding: 0;
+      mask: url("./assets/images/icon-mail.svg") no-repeat 50% 50%;
+      mask-size: cover;
+      -webkit-mask: url("./assets/images/icon-mail.svg") no-repeat 50% 50%;
+      -webkit-mask-size: cover;
+      background-color: var(--theme-button-text-color);
+      transition: background-color 0.15s cubic-bezier(0.25, 0.1, 0.25, 1); }
+  .c-subscribe-form.button-is-inline .c-subscribe-form__actions {
+    flex-direction: row; }
+    .c-subscribe-form.button-is-inline .c-subscribe-form__actions button {
+      margin-top: 0; }
+
 /* 2.1. Site Header */
 :root {
   --icons-size-multiplier: 1.3;
