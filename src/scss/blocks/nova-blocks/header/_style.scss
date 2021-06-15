@@ -18,8 +18,13 @@
     opacity: 0;
 }
 
-.novablocks-header.novablocks-header--transparent:not(.novablocks-header--sticky),
-.novablocks-header--mobile.novablocks-header--transparent {
+.novablocks-header.novablocks-header--transparent:not(.novablocks-header--sticky) {
+    @include above(lap) {
+        --header-background-opacity: 0;
+    }
+}
+
+.novablocks-header--mobile.novablocks-header--transparent:before {
     --header-background-opacity: 0;
 }
 
