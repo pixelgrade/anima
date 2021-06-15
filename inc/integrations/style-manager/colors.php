@@ -77,7 +77,7 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 			),
 
 			'solid_button' => sm_get_color_switch_dark_config( 'Buttons', '*', false, 3, '--sm-button-background-color' ),
-			'text_button' => sm_get_color_switch_dark_config( 'Text', '.wp-block-button.is-style-text .wp-block-button__link', false, 3, array( '--theme-button-text-color' ) ),
+			'text_button' => sm_get_color_switch_dark_config( 'Text', '.wp-block-button.is-style-text .wp-block-button__link', true, 4, array( '--theme-button-text-color' ) ),
 
 			'sm-group-separator-4' => array( 'type' => 'html', 'html' => '' ),
 
