@@ -42,8 +42,8 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 
 			'page_title' => sm_get_color_switch_dark_config( 'Page title', '.entry-title', false, 1 ),
 			'body_color' => sm_get_color_switch_dark_config( 'Body text', 'html, [class*="sm-variation-"]', false, 0 ),
-			'links_color' => sm_get_color_switch_dark_config( 'Body links', '*', true, 1, '--theme-links-color' ),
-			'heading_links_color' => sm_get_color_switch_dark_config( 'Heading links', 'h1, h2, h3, h4, h5, h6', true, 2, '--theme-links-color' ),
+			'links_color' => sm_get_color_switch_dark_config( 'Body links', 'body', true, 1, '--theme-links-color' ),
+			'heading_links_color' => sm_get_color_switch_dark_config( 'Heading links', 'h1, h2, h3, h4, h5, h6', false, 2, '--theme-links-color' ),
 
 			'sm-group-separator-1' => array( 'type' => 'html', 'html' => '' ),
 
