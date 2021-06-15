@@ -6,6 +6,8 @@ body {
 
 .novablocks-sidebar {
 	
+	@include space-children-y( var(--theme-spacing-fluid-small) );
+	
 	&--small {
 		--sidebar-font-size-modifier: 0.75;
 	}
@@ -24,7 +26,7 @@ body {
 	}
 	
 	.widget-area {
-		@include space-children-y( var(--theme-spacing-fluid-small) );
+	
 	}
 	
 	.widget {

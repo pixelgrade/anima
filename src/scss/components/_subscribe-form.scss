@@ -1,0 +1,87 @@
+.c-subscribe-form {
+	
+	display: flex;
+	flex-direction: column;
+	
+	@include space-children-y(var(--theme-spacing-fluid-default));
+	
+	button[type='submit'] {
+		background-color: var(--theme-button-background-color) !important;
+		--theme-button-background-color: var(--current-color-secondary) !important;
+		--theme-button-text-color: var(--current-light-primary) !important;
+		--theme-button-hover-text-color: var(--current-light-primary) !important;
+	}
+	
+	a {
+		color: inherit;
+		text-decoration: underline;
+	}
+	
+	&__title {
+		--font-size: 27;
+	}
+	
+	&__description {
+		--font-size: 19;
+	}
+	
+	&__actions {
+		display: flex;
+		flex-direction: column;
+		
+		button[type='submit'] {
+			border: 0 !important;
+			margin-top: var(--theme-spacing-tiny);
+		}
+	}
+	
+	&.form-has-background {
+		background-color: var(--current-dark-primary);
+		color: var(--current-light-primary);
+		
+		padding: 2em;
+	}
+	
+	&.button-is-inline {
+		
+		button {
+			
+			position: relative;
+			
+			font-size: 0 !important;
+			min-width: calc(1.25 * var(--final-font-size) + 1.5 * var(--final-font-size));
+			
+			&:after {
+				content: '';
+				
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				
+				display: block;
+				width: calc(1.25 * var(--final-font-size));
+				height: calc(1 * var(--final-font-size));
+				
+				border: 0;
+				padding: 0;
+				
+				mask: url($icon-mail-path) no-repeat 50% 50%;
+				mask-size: cover;
+				-webkit-mask: url($icon-mail-path) no-repeat 50% 50%;
+				-webkit-mask-size: cover;
+				
+				background-color: var(--theme-button-text-color);
+				transition: background-color .15s $ease;
+			}
+		}
+	
+		.c-subscribe-form__actions {
+			flex-direction: row;
+			
+			button {
+				margin-top: 0;
+			}
+		}
+	}
+}

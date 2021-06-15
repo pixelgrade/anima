@@ -889,6 +889,9 @@ body:not(.has-sidebar) {
 body {
   --offset-addon: var(--sm-content-inset); }
 
+.novablocks-sidebar > :not(:first-child) {
+  margin-top: var(--theme-spacing-fluid-small); }
+
 .novablocks-sidebar--small {
   --sidebar-font-size-modifier: 0.75; }
 
@@ -901,9 +904,6 @@ body {
 .novablocks-sidebar * {
   --font-size-modifier: var(--sidebar-font-size-modifier);
   font-size: var(--final-font-size); }
-
-.novablocks-sidebar .widget-area > :not(:first-child) {
-  margin-top: var(--theme-spacing-fluid-small); }
 
 .novablocks-sidebar .widget > :not(:first-child) {
   margin-top: var(--theme-spacing-fluid-small); }
