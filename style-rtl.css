@@ -3307,3 +3307,18 @@ textarea {
 @media not screen and (min-width: 1000px) {
   .site-main {
     overflow-x: hidden; } }
+
+/* START body margin hack
+contain inline margin set to #content
+@todo find a better way o doing this
+*/
+body {
+  float: right;
+  width: 100%; }
+
+html:after {
+  content: " ";
+  display: table;
+  clear: both; }
+
+/* END body margin hack */

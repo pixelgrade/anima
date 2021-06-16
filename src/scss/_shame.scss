@@ -159,3 +159,17 @@ textarea {
         overflow-x: hidden;
     }
 }
+
+/* START body margin hack
+contain inline margin set to #content
+@todo find a better way o doing this
+*/
+body {
+    float: left;
+    width: 100%;
+}
+
+html {
+    @include clearfix;
+}
+/* END body margin hack */

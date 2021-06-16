@@ -42,8 +42,8 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 
 			'page_title' => sm_get_color_switch_dark_config( 'Page title', '.entry-title', false, 1 ),
 			'body_color' => sm_get_color_switch_dark_config( 'Body text', 'html, [class*="sm-variation-"]', false, 0 ),
-			'links_color' => sm_get_color_switch_dark_config( 'Body links', '*', true, 1, '--theme-links-color' ),
-			'heading_links_color' => sm_get_color_switch_dark_config( 'Heading links', 'h1, h2, h3, h4, h5, h6', true, 2, '--theme-links-color' ),
+			'links_color' => sm_get_color_switch_dark_config( 'Body links', 'a', true, 1, '--theme-links-color' ),
+			'heading_links_color' => sm_get_color_switch_dark_config( 'Heading links', 'h1 a, h2 a, h3 a, h4 a, h5 a, h6 a', false, 2, '--theme-links-color' ),
 
 			'sm-group-separator-1' => array( 'type' => 'html', 'html' => '' ),
 
@@ -77,7 +77,7 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 			),
 
 			'solid_button' => sm_get_color_switch_dark_config( 'Buttons', '*', false, 3, '--sm-button-background-color' ),
-			'text_button' => sm_get_color_switch_dark_config( 'Text', '.wp-block-button.is-style-text .wp-block-button__link', false, 3, array( '--theme-button-text-color' ) ),
+			'text_button' => sm_get_color_switch_dark_config( 'Text', '.wp-block-button.is-style-text .wp-block-button__link', true, 4, array( '--theme-button-text-color' ) ),
 
 			'sm-group-separator-4' => array( 'type' => 'html', 'html' => '' ),
 
