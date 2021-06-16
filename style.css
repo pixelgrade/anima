@@ -2007,7 +2007,7 @@ label.subscribe-label.subscribe-label {
 
 /* 2.5. Navigation */
 .navigation[class]:not(first-child) {
-  margin-top: var(--theme-spacing-xl); }
+  margin-top: var(--theme-spacing-fluid-small); }
 
 .navigation[class]:not(last-child) {
   margin-bottom: var(--theme-spacing-xl); }
@@ -2129,6 +2129,8 @@ span.page-numbers {
         flex-wrap: wrap; }
         .post-navigation .nav-links > * {
           flex: 1; } }
+  .post-navigation[class]:not(:last-child) {
+    margin-bottom: 0; }
   .post-navigation a {
     text-decoration: none; }
     .post-navigation a:after {
@@ -2151,10 +2153,12 @@ span.page-numbers {
       .post-navigation .post-navigation__link {
         padding: var(--theme-spacing-default) var(--theme-wrapper-sides-spacing); }
         .post-navigation .post-navigation__link--next {
-          background: var(--theme-color-primary);
-          color: var(--theme-light-primary); }
+          background: var(--sm-current-accent-color);
+          color: var(--sm-current-bg-color); }
           .post-navigation .post-navigation__link--next * {
             color: inherit; }
+        .post-navigation .post-navigation__link a {
+          color: inherit; }
       .post-navigation .post-navigation__link-label {
         --font-size: 12;
         --current-font-weight: bold; }
@@ -2182,6 +2186,7 @@ span.page-numbers {
 
 .post-navigation__link-label {
   position: relative;
+  color: var(--sm-current-accent-color);
   --font-size: var(--theme-button-font-size);
   font-size: var(--final-font-size);
   --current-font-family: var(--theme-button-font-family);
