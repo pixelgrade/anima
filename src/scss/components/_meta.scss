@@ -177,11 +177,11 @@
 		border-radius: 4px;
 		text-align: center;
 		
-		color: var(--current-light-primary);
+		color: currentColor;
 		
-		background-color: var(--current-light-tertiary);
+		background-color: var(--sm-current-bg-color);
 		
-		border: 1px solid var(--current-dark-secondary);
+		border: 1px solid currentColor;
 	}
 	
 	&__count + &__label {
@@ -278,9 +278,9 @@
 	right: 30%;
 	
 	border-left: 0.45em solid transparent;
-	border-top: 0.35em solid var(--current-light-tertiary);
+	border-top: 0.35em solid var(--sm-current-bg-color);
 	
-	filter: drop-shadow(1px 0px 0 var(--current-dark-secondary)) drop-shadow(0 1px 0 var(--current-dark-secondary));
+	filter: drop-shadow(1px 0px 0 currentColor) drop-shadow(0 1px 0 currentColor);
 }
 
 .c-meta-author__body .author {

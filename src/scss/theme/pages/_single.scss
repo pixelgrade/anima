@@ -20,8 +20,9 @@
         @include space-children-y( var(--theme-spacing-large) );
     }
 
-    .site-content {
+    .site-content[class] {
         padding-bottom: var(--theme-spacing-fluid-large);
+        padding-top: 0;
     }
 
     .entry-header > * {
@@ -29,6 +30,7 @@
     }
 
     .entry-header {
+        --element-spacing: var(--theme-spacing-fluid-xsmall);
         @include space-children-y( var(--theme-spacing-fluid-xsmall) );
 
         .entry-thumbnail {
@@ -105,7 +107,7 @@ body:not(.has-no-spacing-top) .site-content {
         background-color: var(--sm-current-bg-color);
         z-index: 1;
 
-        padding-bottom: var(--theme-spacing-large);
+        padding-bottom: var(--overlap-header-size, 1em);
 
 
         &:before {

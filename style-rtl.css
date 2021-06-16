@@ -1581,9 +1581,9 @@ table {
     min-width: 1.5em;
     border-radius: 4px;
     text-align: center;
-    color: var(--current-light-primary);
-    background-color: var(--current-light-tertiary);
-    border: 1px solid var(--current-dark-secondary); }
+    color: currentColor;
+    background-color: var(--sm-current-bg-color);
+    border: 1px solid currentColor; }
   .c-meta-comments__count + .c-meta-comments__label {
     margin-right: 0.5em; }
 
@@ -1643,8 +1643,8 @@ table {
   position: absolute;
   left: 30%;
   border-right: 0.45em solid transparent;
-  border-top: 0.35em solid var(--current-light-tertiary);
-  filter: drop-shadow(1px 0px 0 var(--current-dark-secondary)) drop-shadow(0 1px 0 var(--current-dark-secondary)); }
+  border-top: 0.35em solid var(--sm-current-bg-color);
+  filter: drop-shadow(1px 0px 0 currentColor) drop-shadow(0 1px 0 currentColor); }
 
 .c-meta-author__body .author {
   --current-font-weight: 700;
