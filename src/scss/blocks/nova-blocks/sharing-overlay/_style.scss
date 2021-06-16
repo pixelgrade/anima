@@ -2,6 +2,8 @@
     @include variation(dark);
     @include apply-font(body);
     
+    --novablocks-spacing: var(--theme-spacing-fluid-large);
+    
     &[class] {
         z-index: 1001;
     }
@@ -51,7 +53,7 @@
 }
 
 .novablocks-sharing__copy-input {
-
+    
     @include specific(2) {
         --theme-input-box-shadow: none;
     }
