@@ -168,6 +168,8 @@ function rosa2_register_scripts() {
 	// Nova Blocks Fallbacks
     wp_register_style('novablocks/media', get_template_directory_uri() . '/fallbacks/nova-blocks/blocks/media/style.css', array(), '1.8.1');
 
+	wp_register_style('rosa2-novablocks-conversations', get_template_directory_uri() . '/dist/css/blocks/nova-blocks/conversations.css', array(), '1.8.0');
+
 	wp_register_style( 'rosa2-blocks-common', get_template_directory_uri() . '/dist/css/blocks/common.css', array(), $theme->get( 'Version' ) );
 	wp_register_style( 'rosa2-blocks-editor', get_template_directory_uri() . '/dist/css/blocks/editor.css', array( 'rosa2-blocks-common' ), $theme->get( 'Version' ) );
 	wp_register_style( 'rosa2-blocks-style', get_template_directory_uri() . '/dist/css/blocks/style.css', array( 'rosa2-blocks-common'), $theme->get( 'Version' ) );
