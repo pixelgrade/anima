@@ -51,7 +51,10 @@
     }
 
     @include above( lap ) {
-        display: none;
+        
+        &[class] {
+            display: none;
+        }
     }
 }
 
