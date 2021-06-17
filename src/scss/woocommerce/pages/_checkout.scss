@@ -336,30 +336,6 @@
     display: inline-block;
     margin-bottom: 0;
   }
-
-  li + li {
-    position: relative;
-    padding-left: 1.4em;
-
-    &:before {
-      content: "";
-
-      position: absolute;
-      top: 50%;
-      left: .2em;
-
-      display: block;
-      width: .4em;
-      height: .4em;
-
-      border: .125em solid transparent;
-      border-top-color: currentColor;
-      border-right-color: currentColor;
-
-      transform: translate(.1em, .1em) translate(0,-50%) rotate(45deg);
-      opacity: .5;
-    }
-  }
 }
 
 .woocommerce-billing-fields > h3,
@@ -618,6 +594,8 @@ ul.order_details[class] {
   li {
     a {
       --current-font-weight: bold;
+      color: currentColor;
+      text-decoration-color: currentColor;
     }
     &:last-child {
       --current-font-weight: bold;

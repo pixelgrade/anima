@@ -1997,22 +1997,6 @@
   .woocommerce-checkout-breadcrumbs li {
     display: inline-block;
     margin-bottom: 0; }
-  .woocommerce-checkout-breadcrumbs li + li {
-    position: relative;
-    padding-left: 1.4em; }
-    .woocommerce-checkout-breadcrumbs li + li:before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: .2em;
-      display: block;
-      width: .4em;
-      height: .4em;
-      border: .125em solid transparent;
-      border-top-color: currentColor;
-      border-right-color: currentColor;
-      transform: translate(0.1em, 0.1em) translate(0, -50%) rotate(45deg);
-      opacity: .5; }
 
 .woocommerce-billing-fields > h3,
 .woocommerce-additional-fields > h3 {
@@ -2231,7 +2215,9 @@ ul.order_details[class] {
   --current-text-transform: var(--theme-heading-2-text-transform); }
 
 .woocommerce-checkout-breadcrumbs li a {
-  --current-font-weight: bold; }
+  --current-font-weight: bold;
+  color: currentColor;
+  text-decoration-color: currentColor; }
 
 .woocommerce-checkout-breadcrumbs li:last-child {
   --current-font-weight: bold;
