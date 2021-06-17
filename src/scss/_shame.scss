@@ -51,12 +51,11 @@ textarea {
 .woocommerce-error {
 
     &[class] {
-        color: var(--sm-color-11);
+        color: var(--sm-fg1-color-1);
 
         &:after {
-            border: 1px solid var(--sm-color-11);
-            background-color: var(--sm-color-4);
-            opacity: 1;
+            border: 1px solid var(--sm-bg-color-4);
+            background-color: var(--sm-bg-color-4);
         }
 
         .theme-woocommerce-notice__icon {
@@ -66,15 +65,15 @@ textarea {
 }
 
 .woocommerce-error {
-    @include apply-palette(error);
+    @include apply-palette(_error);
 }
 
 .woocommerce-message {
-    @include apply-palette(success);
+    @include apply-palette(_success);
 }
 
 .woocommerce-info {
-    @include apply-palette(info);
+    @include apply-palette(_info);
 }
 
 .site-title {
