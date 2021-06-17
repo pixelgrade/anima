@@ -28,7 +28,8 @@ export default class Hero {
 
 		let indicator = this.element.querySelectorAll( '.novablocks-hero__indicator' );
 		let nextSibling = this.element.nextElementSibling;
-		let next = nextSibling.querySelectorAll( '.novablocks-block' );
+
+		let next = nextSibling?.querySelectorAll( '.novablocks-block' );
 
 		next = !! next && next.length ? next[0] : nextSibling;
 

@@ -940,7 +940,7 @@ function () {
       });
       var indicator = this.element.querySelectorAll('.novablocks-hero__indicator');
       var nextSibling = this.element.nextElementSibling;
-      var next = nextSibling.querySelectorAll('.novablocks-block');
+      var next = nextSibling === null || nextSibling === void 0 ? void 0 : nextSibling.querySelectorAll('.novablocks-block');
       next = !!next && next.length ? next[0] : nextSibling;
 
       if (!!indicator && indicator.length) {
@@ -2507,6 +2507,11 @@ function () {
     key: "initializePromoBar",
     value: function initializePromoBar() {
       var promoBar = document.querySelector('.promo-bar');
+
+      if (promoBar === null) {
+        return;
+      }
+
       this.promoBar = new promo_bar_PromoBar(promoBar, {
         offset: this.adminBarHeight,
         onUpdate: this.onPromoBarUpdate.bind(this)
