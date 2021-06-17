@@ -149,6 +149,11 @@ export default class App {
 	}
 
 	updatePromoBarProps() {
+
+		if ( this.promoBar === null ) {
+			return;
+		}
+
 		const promoBarStyle = window.getComputedStyle( this.promoBar.element );
 		this.promoBarFixed = promoBarStyle.getPropertyValue( 'position' ) === 'fixed';
 	}

@@ -2521,6 +2521,10 @@ function () {
   }, {
     key: "updatePromoBarProps",
     value: function updatePromoBarProps() {
+      if (this.promoBar === null) {
+        return;
+      }
+
       var promoBarStyle = window.getComputedStyle(this.promoBar.element);
       this.promoBarFixed = promoBarStyle.getPropertyValue('position') === 'fixed';
     }
