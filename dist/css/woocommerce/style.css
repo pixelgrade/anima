@@ -1809,7 +1809,10 @@
       clear: both; }
     .woocommerce-checkout:not(.woocommerce-order-received) .woocommerce-checkout > * {
       position: relative;
-      z-index: 20; } }
+      z-index: 20; }
+    .woocommerce-checkout:not(.woocommerce-order-received) .woocommerce-checkout a {
+      color: currentColor;
+      text-decoration-color: currentColor; } }
 
 .woocommerce-checkout:not(.woocommerce-order-received) table.shop_table {
   border-right: 0;
