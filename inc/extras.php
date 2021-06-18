@@ -573,7 +573,7 @@ function get_site_content_class( $class = '' ) {
 
 	$classes[] = 'site-content';
 
-	if ( is_home() || is_post_type_archive('post') ) {
+	if ( is_home() || is_post_type_archive('post') || is_archive() ) {
 		$classes[] = 'sm-variation-2';
 	}
 

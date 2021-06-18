@@ -47,7 +47,7 @@ function rosa2_body_classes( $classes ) {
 		$classes[] = 'has-sidebar';
 	}
 
-	if ( is_home() || is_post_type_archive( 'post' ) || is_singular('post') ) {
+	if ( is_home() || is_post_type_archive( 'post' ) || is_singular('post') || is_archive() ) {
 		$classes[] = 'sm-variation-2';
 	}
 

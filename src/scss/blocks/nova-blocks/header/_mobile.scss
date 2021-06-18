@@ -95,3 +95,26 @@
         }
     }
 }
+
+.novablocks-header__buttons-menu {
+    
+    a {
+        color: inherit;
+    }
+    
+    .menu--buttons {
+        list-style: none;
+        
+        li {
+            position: relative;
+            
+            &[class][class] {
+                margin-top: 0;
+            }
+            
+            &:not(:first-child) {
+                margin-left: 1em;
+            }
+        }
+    }
+}
