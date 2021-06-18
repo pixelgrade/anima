@@ -10,7 +10,7 @@
   padding: 1em var(--theme-wrapper-sides-spacing);
 
   --theme-button-padding: .6em 1.7em;
-  --theme-input-search-focus-overlay-shadow: inset 0px 0px 0px 2px var(--sm-current-accent-color);
+  --theme-input-search-focus-overlay-shadow: inset 0px 0px 0px 2px currentColor;
   --theme-search-input-focus:
       var(--theme-input-search-focus-overlay-shadow),
       var(--theme-input-focus-colored-shadow),
@@ -30,7 +30,14 @@
 
     --theme-button-padding: .25em 1em;
   }
-
+  
+  input[type="submit"],
+  input[type="button"] {
+    --theme-button-background-color: var(--sm-fg2-color-2);
+    --theme-button-border-color: var(--sm-fg2-color-2);
+    --theme-button-hover-text-color: var(--sm-fg2-color-2);
+    --theme-button-hover-border-color: var(--sm-fg2-color-2);
+  }
 
   &__form {
     transition: opacity .1s $easeOut .025s;
@@ -128,16 +135,16 @@
 
         padding: var(--theme-button-padding);
 
-        border: 2px solid var(--current-button-border-color);
+        border: 2px solid currentColor;
 
         @include button-base;
         @include button-fill-reverse;
 
-        a {
+        --theme-button-background-color: var(--sm-fg2-color-1);
+    
+          a {
 
           padding: 0;
-
-          color: var(--current-button-border-color);
           text-decoration: none;
 
           transition: color .3s ease;

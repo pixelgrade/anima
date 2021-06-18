@@ -1071,7 +1071,7 @@ table {
   width: 100%;
   padding: 1em var(--theme-wrapper-sides-spacing);
   --theme-button-padding: .6em 1.7em;
-  --theme-input-search-focus-overlay-shadow: inset 0px 0px 0px 2px var(--sm-current-accent-color);
+  --theme-input-search-focus-overlay-shadow: inset 0px 0px 0px 2px currentColor;
   --theme-search-input-focus:
       var(--theme-input-search-focus-overlay-shadow),
       var(--theme-input-focus-colored-shadow),
@@ -1088,6 +1088,12 @@ table {
       transform: translateX(100vw);
       transition: transform .3s ease-out;
       --theme-button-padding: .25em 1em; } }
+  .c-search-overlay input[type="submit"],
+  .c-search-overlay input[type="button"] {
+    --theme-button-background-color: var(--sm-fg2-color-2);
+    --theme-button-border-color: var(--sm-fg2-color-2);
+    --theme-button-hover-text-color: var(--sm-fg2-color-2);
+    --theme-button-hover-border-color: var(--sm-fg2-color-2); }
   .c-search-overlay__form {
     transition: opacity 0.1s cubic-bezier(0, 0, 0.58, 1) 0.025s; }
   .c-search-overlay__suggestions {
@@ -1170,7 +1176,7 @@ table {
         margin-bottom: .5em;
         margin-top: 0;
         padding: var(--theme-button-padding);
-        border: 2px solid var(--current-button-border-color);
+        border: 2px solid currentColor;
         display: inline-block;
         text-decoration: none;
         --theme-button-text-color: var(--sm-current-bg-color);
@@ -1188,7 +1194,8 @@ table {
         will-change: transform;
         backface-visibility: hidden;
         overflow: hidden;
-        --current-button-text-color: var(--theme-button-hover-text-color); }
+        --current-button-text-color: var(--theme-button-hover-text-color);
+        --theme-button-background-color: var(--sm-fg2-color-1); }
         .c-search-overlay__suggestions .menu li:not([disabled]) {
           cursor: pointer; }
           .c-search-overlay__suggestions .menu li:not([disabled]):hover {
@@ -1218,7 +1225,6 @@ table {
             transform: scale3d(1, 1, 1); }
         .c-search-overlay__suggestions .menu li a {
           padding: 0;
-          color: var(--current-button-border-color);
           text-decoration: none;
           transition: color .3s ease; }
         .c-search-overlay__suggestions .menu li:hover a {
