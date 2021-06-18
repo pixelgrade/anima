@@ -1071,7 +1071,7 @@ table {
   width: 100%;
   padding: 1em var(--theme-wrapper-sides-spacing);
   --theme-button-padding: .6em 1.7em;
-  --theme-input-search-focus-overlay-shadow: inset 0px 0px 0px 2px rgba(var(--opacity-color), 1);
+  --theme-input-search-focus-overlay-shadow: inset 0px 0px 0px 2px var(--sm-current-accent-color);
   --theme-search-input-focus:
       var(--theme-input-search-focus-overlay-shadow),
       var(--theme-input-focus-colored-shadow),
@@ -1162,11 +1162,13 @@ table {
       display: flex;
       flex-wrap: wrap;
       margin-right: -.5em;
-      margin-top: 1em; }
+      margin-top: 1em;
+      padding-right: 0; }
       .c-search-overlay__suggestions .menu li {
         --current-line-height: 1.3;
         margin-right: .5em;
         margin-bottom: .5em;
+        margin-top: 0;
         padding: var(--theme-button-padding);
         border: 2px solid var(--current-button-border-color);
         display: inline-block;
@@ -1216,11 +1218,11 @@ table {
             transform: scale3d(1, 1, 1); }
         .c-search-overlay__suggestions .menu li a {
           padding: 0;
-          color: currentColor;
+          color: var(--current-button-border-color);
           text-decoration: none;
           transition: color .3s ease; }
         .c-search-overlay__suggestions .menu li:hover a {
-          color: var(--theme-button-hover-text-color); }
+          color: var(--sm-current-bg-color); }
   .c-search-overlay .search-form {
     margin-top: 0;
     overflow: hidden; }
