@@ -20,7 +20,7 @@
         @include space-children-y( var(--theme-spacing-large) );
     }
 
-    .site-content[class] {
+    .site-content {
         padding-bottom: var(--theme-spacing-fluid-large);
         padding-top: 0;
     }
@@ -206,5 +206,9 @@ body:not(.has-no-spacing-top) .site-content {
         .page {
             padding-top: var(--page-top-spacing);
         }
+    }
+    
+    .site-content[class] {
+        padding-top: 0;
     }
 }

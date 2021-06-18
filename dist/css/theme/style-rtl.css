@@ -121,8 +121,8 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
 .page .hentry > :not(:first-child) {
   margin-top: var(--theme-spacing-large); }
 
-.single .site-content[class],
-.page .site-content[class] {
+.single .site-content,
+.page .site-content {
   padding-bottom: var(--theme-spacing-fluid-large);
   padding-top: 0; }
 
@@ -257,6 +257,9 @@ body:not(.has-no-spacing-top) .site-content {
   .single-post .site-main .post:not(.novablocks-media),
   .single-post .site-main .page {
     padding-top: var(--page-top-spacing); }
+
+.single-post .site-content[class] {
+  padding-top: 0; }
 
 .error404 .content-area,
 .search-no-results .content-area {
