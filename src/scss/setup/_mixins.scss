@@ -1,4 +1,5 @@
-@import "mixins/media-queries";
+@import "mixins/apply-palette";
+@import "mixins/apply-variation";
 @import "mixins/archives";
 @import "mixins/avoid-fout";
 @import "mixins/breadcrumbs";
@@ -13,9 +14,10 @@
 @import "mixins/fluid";
 @import "mixins/font-feature";
 @import "mixins/font";
-@import "mixins/grid";
 @import "mixins/forms";
+@import "mixins/grid";
 @import "mixins/image-cover";
+@import "mixins/media-queries";
 @import "mixins/nav-links";
 @import "mixins/placeholder";
 @import "mixins/quote";
@@ -30,11 +32,5 @@
 @mixin remove-site-content-padding-bottom {
     .site-content {
         padding-bottom: 0 !important;
-    }
-}
-
-@mixin remove-page-spacing-top {
-    #page .site-content {
-        margin-top: 0 !important;
     }
 }

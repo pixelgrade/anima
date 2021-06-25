@@ -1,66 +1,7 @@
 .has-no-spacing-top {
-  @include remove-page-spacing-top;
-}
 
-.has-no-spacing-top {
-
-  @include below(lap) {
-    &[class*='first-block-is-media'] {
-
-      &.first-block-is-media--moderate {
-        .site-header--mobile,
-        .c-menu-toggle {
-          --novablocks-block-content-text-color: var(--current-dark-primary);
-        }
-        
-      }
-
-      &.first-block-is-media--highlighted  {
-        
-        .site-header--mobile,
-        .c-menu-toggle {
-          --novablocks-block-content-text-color: var(--sm-light-primary);
-  
-        }
-        
-        &.site-header-mobile--scrolled {
-          .site-header--mobile,
-          .c-menu-toggle {
-            --novablocks-block-content-text-color: var(--current-dark-primary);
-          }
-        }
-      }
-
-      .c-menu-toggle,
-      .site-header--mobile {
-        color: var(--novablocks-block-content-text-color);
-      }
-    }
-  }
-
-  @include above(lap) {
-
-    &.has-site-header-transparent[class] {
-
-      &[class*='first-block-is-media'] {
-
-        &.first-block-is-media--moderate .site-header {
-          --novablocks-block-content-text-color: var(--current-dark-primary);
-        }
-
-        &.first-block-is-media--highlighted .site-header {
-          // We want to keep to color to be always light
-          --novablocks-block-content-text-color: var(--sm-light-primary);
-        }
-
-        .site-header:not(.site-header--scrolled) .site-header__wrapper {
-          color: var(--novablocks-block-content-text-color);
-        }
-      }
-    }
-  }
-  
   .novablocks-hero:first-child {
+
     &:after {
       content: '';
       position: absolute;
@@ -68,51 +9,18 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: linear-gradient( rgba(0,0, 0, 0.2), rgba(0, 0, 0, 0.03) calc(2 * var(--theme-header-height)), rgba(0, 0, 0, 0) 100%);
+      background-image: linear-gradient( rgba(0,0, 0, 0.2) var(--theme-promobar-height, 0), rgba(0, 0, 0, 0.03) calc(2 * var(--theme-header-height)), rgba(0, 0, 0, 0) 100%);
     }
   }
 }
 
-.has-no-spacing-top {
+.has-novablocks-header-transparent {
   
-  &.first-block-is-media {
+  .entry-content {
     
-    .entry-content {
-      
-      .novablocks-media:first-child {
-        --block-top-spacing: 0;
-        --emphasis-top-spacing: 0;
-        
-        > .novablocks-block {
-          
-          // This should always be equal with desktop
-          padding-top: calc( var(--site-header-height) +  var(--theme-spacing-fluid-large));
-        }
-      }
-    }
-  }
-}
-
-html:not(.is-dark) {
-  .has-no-spacing-top {
-    // Handle logo variation
-    // based on first Media Card,
-    // only when we are on Light Mode.
-    
-    &.has-site-header-transparent {
-      &.has-site-header-fixed.first-block-is-media--moderate {
-        
-        .site-header:not(.site-header--scrolled) .site-header__wrapper,
-        .site-header--mobile {
-          .c-logo__default {
-            opacity: 1;
-          }
-          
-          .c-logo__inverted {
-            opacity: 0;
-          }
-        }
-      }
+    > :first-child {
+      --block-top-spacing: 0;
+      //--emphasis-top-spacing: 0;
     }
   }
 }

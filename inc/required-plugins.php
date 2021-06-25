@@ -32,17 +32,17 @@ function rosa2_register_required_plugins() {
 			'version'            => '1.7.15',
 		),
 		array(
-			'name'        => 'Customify',
-			'slug'        => 'customify',
-			'is_callable' => 'PixCustomifyPlugin',
+			'name'        => 'Style Manager',
+			'slug'        => 'style-manager',
+			'is_callable' => '\Pixelgrade\StyleManager\plugin',
 			'required'    => true,
-			'version'     => '2.10.3',
+			'version'     => '2.0.0',
 		),
 		array(
 			'name'     => 'Nova Blocks',
 			'slug'     => 'nova-blocks',
 			'required' => true,
-			'version'  => '1.11.0',
+			'version'  => '1.11.1',
 		),
 	);
 

@@ -13,11 +13,11 @@
     .editor-styles-wrapper [data-align=#{$alignment}] [data-block] {
 
         &:not(:first-child) {
-            margin-top: var(--element-spacing);
+            margin-top: var(--theme-content-spacing);
         }
 
         &:not(:last-child) {
-            margin-bottom: var(--element-spacing);
+            margin-bottom: var(--theme-content-spacing);
         }
     }
 }
@@ -31,7 +31,7 @@
     }
 
     [class*="wp-block"] > .align#{$alignment} {
-        margin-bottom: var(--element-spacing);
+        margin-bottom: var(--theme-content-spacing);
     }
 
     [class*="wp-block"].align#{$alignment},
@@ -47,6 +47,11 @@
             font: inherit;
         }
     }
+}
+
+[data-align] > [data-align] {
+    max-width: none;
+    margin: 0;
 }
 
 [class*="wp-block"] {

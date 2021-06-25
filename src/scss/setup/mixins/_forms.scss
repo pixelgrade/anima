@@ -73,7 +73,7 @@
 
   padding-right: 3.125em;
 
-  background-image: linear-gradient(45deg, transparent 50%, var(--current-dark-primary) 50%), linear-gradient(135deg, var(--current-dark-primary) 50%, transparent 50%);
+  background-image: linear-gradient(45deg, transparent 50%, var(--sm-current-fg2-color) 50%), linear-gradient(135deg, var(--sm-current-fg2-color) 50%, transparent 50%);
   background-position: calc(100% - var(--theme-input-padding) - var(--select-icon-size)) center, calc(100% - var(--theme-input-padding)) center;
   background-size: var(--select-icon-size) var(--select-icon-size), var(--select-icon-size) var(--select-icon-size);
   background-repeat: no-repeat;
@@ -115,7 +115,7 @@
   height: var(--theme-checkbox-height) !important;
   margin-right: var(--theme-input-horizontal-spacing);
 
-  background-color: var(--current-light-primary);
+  background-color: var(--sm-current-bg-color);
   cursor: pointer;
 
   -webkit-appearance: none;
@@ -123,10 +123,10 @@
 
 @mixin checkbox {
   @include checkbox-base;
-  border-color: var(--current-color-primary);
+  border-color: var(--sm-current-accent-color);
   transition: all .2s ease-in-out;
 
-  color: var(--current-light-primary);
+  color: var(--sm-current-bg-color);
 
   &:after {
     content: "";
@@ -134,7 +134,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: var(--current-color-primary);
+    background-color: var(--sm-current-accent-color);
     background-image: url($checkbox-svg-path);
     background-size: 70% 70%;
     background-position: center center;
@@ -156,7 +156,7 @@
 
   &:checked {
 
-    box-shadow: 0 0 0 1px var(--current-color-primary);
+    box-shadow: 0 0 0 1px var(--sm-current-accent-color);
 
     &:after {
       opacity: 1;
@@ -184,8 +184,8 @@
   }
 
   &:checked {
-    border: .375em solid var(--current-color-primary);
-    box-shadow: 0 0 0 1px var(--current-color-primary);
+    border: .375em solid var(--sm-current-accent-color);
+    box-shadow: 0 0 0 1px var(--sm-current-accent-color);
     outline: 0;
   }
 }

@@ -24,22 +24,8 @@ img:not([srcset]):not(.is-loaded) {
     }
 }
 
-.entry-title,
-.entry-meta {
-
-    a {
-        color: var(--current-dark-primary);
-        text-decoration-color: transparent;
-    }
-}
-
-.entry-meta a:hover {
-    text-decoration-color: var(--current-color-primary);
-}
-
 // We need this to overwrite normalize font: inherit
-// @todo: Mode to a more appropriate file
-
+// @todo: Move to a more appropriate file
 button,
 input,
 optgroup,
@@ -50,68 +36,125 @@ textarea {
     font-weight: var(--current-font-weight);
 }
 
-// remove lists styles from menus and submenus
-ul.menu,
-.menu > ul,
-.sub-menu,
-.children {
-    padding-left: 0;
-    list-style: none;
-
-    > * {
-        margin-top: 0;
-    }
-}
-
 .has-no-padding-bottom {
     @include remove-site-content-padding-bottom;
 }
 
+.social-menu-item,
+.menu-item--dark-mode,
+.menu-item--search {
+    --theme-header-links-spacing-multiplier: 0.5;
+}
 
-@media not screen and (min-width: 1000px) {
-    .c-menu-toggle__checkbox ~ .site-header {
-        display: grid !important;
-        grid-template-columns: 1fr auto auto;
-    }
+.woocommerce-message,
+.woocommerce-info,
+.woocommerce-error {
 
-    .site-header__wrapper {
-        grid-column: 1/4;
-        grid-row: 1;
-        
-        overflow-y: auto;
-        
-        .is-color-scheme-switcher-button {
-            display: none;
+    &[class] {
+        color: var(--sm-color-11);
+
+        &:after {
+            border: 1px solid var(--sm-color-11);
+            background-color: var(--sm-color-4);
+            opacity: 1;
+        }
+
+        .theme-woocommerce-notice__icon {
+            background-color: var(--sm-color-9);
+            opacity: 1;
         }
     }
+}
 
-    .scheme-switcher__wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        grid-column: 2/3;
-        grid-row: 1;
+.woocommerce-error {
+    @include apply-palette(error);
+}
 
-        order: 2;
+.woocommerce-message {
+    @include apply-palette(success);
+}
 
-        height: 83px;
-        margin-left: 1em;
-        padding-right: var(--theme-wrapper-sides-spacing);
+.woocommerce-info {
+    @include apply-palette(info);
+}
+
+.site-title {
+    @include apply-font(heading-4);
+
+    --final-font-size: calc( var(--theme-header-logo-height) * 1.8 );
+    line-height: 1;
+}
+
+.sm-dark {
+    --logo-default-opacity: 0;
+    --logo-inverted-opacity: 1;
+}
+
+.sm-light {
+    --logo-default-opacity: 1;
+    --logo-inverted-opacity: 0;
+}
+
+/* Fallback Styles for Color Signal */
+
+.is-style-dark {
+    @include apply-variation(9);
+}
+
+.is-style-darker {
+    @include apply-variation(11);
+}
+
+.novablocks-announcement-bar {
+
+    &.is-style-accent {
+        @include apply-variation(6);
     }
 
-    .search-button__wrapper {
-        grid-column: 1/2;
-        grid-row: 1;
-        justify-self: flex-end;
+    &.is-style-alternative {
+        @include apply-palette(2);
+        @include apply-variation(6);
+    }
+
+    &.is-style-alert {
+        @include apply-palette(_error);
+        @include apply-variation(7);
     }
 }
+
+.novablocks-media {
+
+    &.has-secondary-accent-color .novablocks-block {
+        @include apply-palette(2);
+    }
+
+    &.has-tertiary-accent-color .novablocks-block {
+        @include apply-palette(2);
+    }
+
+
+    //&.block-is-highlighted {
+    //
+    //    &:not(.is-style-alternate) .novablocks-block {
+    //        @include apply-variation(12);
+    //
+    //    }
+    //
+    //    &.is-style-alternate .novablocks-block {
+    //        @include apply-variation(7);
+    //    }
+    //
+    //}
+}
+
+/* End Fallback Styles for Color Signal */
 
 .wp-block-group__inner-container > * {
     width: 100%;
 }
 
 @include below(lap) {
-    
+
     .site-main {
         overflow-x: hidden;
     }

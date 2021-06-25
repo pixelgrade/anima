@@ -1,0 +1,16 @@
+@mixin apply-palette( $id, $isShifted: false ) {
+
+    @for $i from 1 through 12 {
+
+        $suffix: $i;
+
+        @if ( $isShifted ) {
+            $suffix: #{ $i }-shifted;
+        }
+
+        --sm-bg-color-#{ $i }: var(--sm-color-palette-#{ $id }-bg-color-#{ $suffix });
+        --sm-accent-color-#{ $i }: var(--sm-color-palette-#{ $id }-accent-color-#{ $suffix });
+        --sm-fg1-color-#{ $i }: var(--sm-color-palette-#{ $id }-fg1-color-#{ $suffix });
+        --sm-fg2-color-#{ $i }: var(--sm-color-palette-#{ $id }-fg2-color-#{ $suffix });
+    }
+}

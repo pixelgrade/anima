@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 16);
+/******/ 	return __webpack_require__(__webpack_require__.s = 21);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -353,12 +353,116 @@ module.exports = _nonIterableSpread;
 /* 8 */,
 /* 9 */,
 /* 10 */,
-/* 11 */,
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _typeof = __webpack_require__(19);
+
+var assertThisInitialized = __webpack_require__(18);
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return assertThisInitialized(self);
+}
+
+module.exports = _possibleConstructorReturn;
+
+/***/ }),
 /* 12 */,
 /* 13 */,
 /* 14 */,
 /* 15 */,
 /* 16 */
+/***/ (function(module, exports) {
+
+function _getPrototypeOf(o) {
+  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+module.exports = _getPrototypeOf;
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var setPrototypeOf = __webpack_require__(20);
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) setPrototypeOf(subClass, superClass);
+}
+
+module.exports = _inherits;
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports) {
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+module.exports = _assertThisInitialized;
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports) {
+
+function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
+
+function _typeof(obj) {
+  if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return _typeof2(obj);
+    };
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+    };
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports) {
+
+function _setPrototypeOf(o, p) {
+  module.exports = _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+module.exports = _setPrototypeOf;
+
+/***/ }),
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -376,26 +480,13 @@ var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
 var createClass = __webpack_require__(2);
 var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/toConsumableArray.js
+var toConsumableArray = __webpack_require__(3);
+var toConsumableArray_default = /*#__PURE__*/__webpack_require__.n(toConsumableArray);
+
 // CONCATENATED MODULE: ./src/js/utils.js
- // checks if box1 and box2 overlap
 
-function overlapping(box1, box2) {
-  var overlappingX = box1.left + box1.width >= box2.left && box2.left + box2.width >= box1.left;
-  var overlappingY = box1.top + box1.height >= box2.top && box2.top + box2.height >= box1.top;
-  return overlappingX && overlappingY;
-} // chechks if box1 is completely inside box2
 
-function inside(box1, box2) {
-  var insideX = box1.left >= box2.left && box1.left + box1.width <= box2.left + box2.width;
-  var insideY = box1.top >= box2.top && box1.top + box1.height <= box2.top + box2.height;
-  return insideX && insideY;
-} // chechks if box1 is completely inside box2
-
-function insideHalf(box1, box2) {
-  var insideX = box1.left + box1.width / 2 >= box2.left && box2.left + box2.width >= box1.left + box1.width / 2;
-  var insideY = box1.top + box1.height / 2 >= box2.top && box2.top + box2.height >= box1.top + box1.height / 2;
-  return insideX && insideY;
-}
 var debounce = function debounce(func, wait) {
   var timeout = null;
   return function () {
@@ -432,20 +523,9 @@ var hasTouchScreen = function hasTouchScreen() {
 
   return hasTouchScreen;
 };
-var mq = function mq(direction, string) {
-  var $temp = jQuery('<div class="u-mq-' + direction + '-' + string + '">').appendTo('body'),
-      response = $temp.is(':visible');
-  $temp.remove();
-  return response;
-};
-var below = function below(string) {
-  return mq('below', string);
-};
-var above = function above(string) {
-  return mq('above', string);
-};
-function setAndResetElementStyles($element) {
+function setAndResetElementStyles(element) {
   var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var $element = external_jQuery_default()(element);
   $element.css(props);
   Object.keys(props).forEach(function (key) {
     props[key] = '';
@@ -461,10 +541,92 @@ function setAndResetElementStyles($element) {
     }, 0);
   }
 }
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/toConsumableArray.js
-var toConsumableArray = __webpack_require__(3);
-var toConsumableArray_default = /*#__PURE__*/__webpack_require__.n(toConsumableArray);
+var getColorSetClasses = function getColorSetClasses(element) {
+  var classAttr = element === null || element === void 0 ? void 0 : element.getAttribute('class');
 
+  if (!classAttr) {
+    return [];
+  }
+
+  var classes = classAttr.split(/\s+/);
+  return classes.filter(function (classname) {
+    return classname.search('sm-palette-') !== -1 || classname.search('sm-variation-') !== -1 || classname === 'sm-palette--shifted';
+  });
+};
+var utils_addClass = function addClass(element, classes) {
+  var classesArray = classes.split(/\s+/).filter(function (x) {
+    return x.trim().length;
+  });
+
+  if (classesArray.length) {
+    var _element$classList;
+
+    (_element$classList = element.classList).add.apply(_element$classList, toConsumableArray_default()(classesArray));
+  }
+};
+var utils_removeClass = function removeClass(element, classes) {
+  var classesArray = classes.split(/\s+/).filter(function (x) {
+    return x.trim().length;
+  });
+
+  if (classesArray.length) {
+    var _element$classList2;
+
+    (_element$classList2 = element.classList).remove.apply(_element$classList2, toConsumableArray_default()(classesArray));
+  }
+};
+var hasClass = function hasClass(element, className) {
+  return element.classList.contains(className);
+};
+var toggleClasses = function toggleClasses(element, check) {
+  var trueClasses = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  var falseClasses = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+  utils_removeClass(element, !!check ? falseClasses : trueClasses);
+  utils_addClass(element, !!check ? trueClasses : falseClasses);
+};
+function getFirstChild(el) {
+  var firstChild = el.firstChild;
+
+  while (firstChild != null && firstChild.nodeType === 3) {
+    // skip TextNodes
+    firstChild = firstChild.nextSibling;
+  }
+
+  return firstChild;
+}
+var toggleLightClasses = function toggleLightClasses(element) {
+  var _window, _window$styleManager;
+
+  var classes = Array.from(element.classList);
+  var paletteClassname = classes.find(function (classname) {
+    return classname.indexOf('sm-palette-') > -1 && classname.indexOf('sm-palette--') === -1;
+  });
+  var palette = paletteClassname ? paletteClassname.substring('sm-palette-'.length) : 1;
+  var variationPrefix = 'sm-variation-';
+  var variationClassname = classes.find(function (classname) {
+    return classname.indexOf(variationPrefix) > -1;
+  });
+  var variation = variationClassname ? variationClassname.substring(variationPrefix.length) : 1;
+  var isShifted = !!classes.find(function (classname) {
+    return classname.indexOf('sm-palette--shifted') > -1;
+  });
+
+  if (!Array.isArray((_window = window) === null || _window === void 0 ? void 0 : (_window$styleManager = _window.styleManager) === null || _window$styleManager === void 0 ? void 0 : _window$styleManager.colorsConfig)) {
+    return;
+  }
+
+  var currentPaletteConfig = window.styleManager.colorsConfig.find(function (thisPalette) {
+    return thisPalette.id + '' === palette + '';
+  });
+
+  if (currentPaletteConfig) {
+    var sourceIndex = currentPaletteConfig.sourceIndex,
+        lightColorsCount = currentPaletteConfig.lightColorsCount;
+    var offset = isShifted ? sourceIndex : 0;
+    var isLight = (variation - 1 + offset) % 12 + 1 <= lightColorsCount;
+    toggleClasses(element, isLight, 'sm-light', 'sm-dark');
+  }
+};
 // CONCATENATED MODULE: ./src/js/components/globalService.js
 
 
@@ -575,7 +737,7 @@ function () {
           wp.customize.selectiveRefresh.bind('partial-content-rendered', this._updateProps.bind(this));
         }
 
-        wp.customize.bind('change', this._updateProps.bind(this));
+        wp.customize.bind('change', debounce(this._updateProps.bind(this), 100));
       }
     }
   }, {
@@ -739,6 +901,7 @@ function () {
 
 
 
+
 var hero_Hero =
 /*#__PURE__*/
 function () {
@@ -775,6 +938,18 @@ function () {
       globalService.registerRender(function () {
         _this2.updateOnScroll();
       });
+      var indicator = this.element.querySelectorAll('.novablocks-hero__indicator');
+      var nextSibling = this.element.nextElementSibling;
+      var next = nextSibling.querySelectorAll('.novablocks-block');
+      next = !!next && next.length ? next[0] : nextSibling;
+
+      if (!!indicator && indicator.length) {
+        var colorClasses = getColorSetClasses(next);
+        colorClasses.forEach(function (className) {
+          indicator[0].classList.add(className);
+        });
+      }
+
       var mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
       mediaQuery.addListener(function () {
         _this2.reduceMotion = mediaQuery.matches;
@@ -1185,86 +1360,567 @@ function () {
 }();
 
 
-// CONCATENATED MODULE: ./src/js/components/header.js
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
+var possibleConstructorReturn = __webpack_require__(11);
+var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
+var getPrototypeOf = __webpack_require__(16);
+var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/assertThisInitialized.js
+var assertThisInitialized = __webpack_require__(18);
+var assertThisInitialized_default = /*#__PURE__*/__webpack_require__.n(assertThisInitialized);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
+var inherits = __webpack_require__(17);
+var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
+
+// CONCATENATED MODULE: ./src/js/components/mqService.js
+
+
+
+
+var mqService_mqService =
+/*#__PURE__*/
+function () {
+  function mqService() {
+    classCallCheck_default()(this, mqService);
+
+    this.breakpoints = {
+      mobile: '480px',
+      tablet: '768px',
+      lap: '1000px',
+      desktop: '1440px'
+    };
+    this.above = {};
+    this.below = {};
+    globalService.registerOnResize(this.onResize.bind(this));
+    this.onResize();
+  }
+
+  createClass_default()(mqService, [{
+    key: "onResize",
+    value: function onResize() {
+      var _this = this;
+
+      Object.keys(this.breakpoints).forEach(function (key) {
+        var breakpoint = _this.breakpoints[key];
+        _this.above[key] = !!window.matchMedia("not screen and (min-width: ".concat(breakpoint, ")")).matches;
+        _this.below[key] = !!window.matchMedia("not screen and (min-width: ".concat(breakpoint, ")")).matches;
+      });
+    }
+  }]);
+
+  return mqService;
+}();
+
+/* harmony default export */ var components_mqService = (new mqService_mqService());
+// CONCATENATED MODULE: ./src/js/components/header/header-base.js
 
 
 
 
 
-var defaults = {
-  offsetTargetElement: null
-};
-var NAVIGATION_OPEN_CLASS = 'navigation-is-open';
+var header_base_HeaderBase =
+/*#__PURE__*/
+function () {
+  function HeaderBase(options) {
+    classCallCheck_default()(this, HeaderBase);
+
+    this.staticDistance = 0;
+    this.stickyDistance = 0;
+    this.options = options || {};
+  }
+
+  createClass_default()(HeaderBase, [{
+    key: "initialize",
+    value: function initialize() {
+      utils_addClass(this.element, 'novablocks-header--ready');
+      globalService.registerRender(this.render.bind(this));
+      globalService.registerOnResize(this.onResize.bind(this));
+    }
+  }, {
+    key: "onResize",
+    value: function onResize() {
+      this.box = this.element.getBoundingClientRect();
+
+      if (typeof this.options.onResize === "function") {
+        this.options.onResize();
+      }
+
+      this.render(true);
+    }
+  }, {
+    key: "getHeight",
+    value: function getHeight() {
+      var _this$box;
+
+      return this === null || this === void 0 ? void 0 : (_this$box = this.box) === null || _this$box === void 0 ? void 0 : _this$box.height;
+    }
+  }, {
+    key: "render",
+    value: function render(forceUpdate) {
+      this.maybeUpdateStickyStyles(forceUpdate);
+    }
+  }, {
+    key: "maybeUpdateStickyStyles",
+    value: function maybeUpdateStickyStyles(forceUpdate) {
+      var _globalService$getPro = globalService.getProps(),
+          scrollY = _globalService$getPro.scrollY;
+
+      var shouldBeSticky = scrollY > this.staticDistance - this.stickyDistance;
+
+      if (this.shouldBeSticky === shouldBeSticky && !forceUpdate) {
+        return;
+      }
+
+      this.shouldBeSticky = shouldBeSticky;
+      this.updateStickyStyles();
+    }
+  }, {
+    key: "updateStickyStyles",
+    value: function updateStickyStyles() {
+      this.applyStickyStyles(this.element);
+    }
+  }, {
+    key: "applyStickyStyles",
+    value: function applyStickyStyles(element) {
+      if (this.shouldBeSticky) {
+        element.style.position = 'fixed';
+        element.style.top = "".concat(this.stickyDistance, "px");
+      } else {
+        element.style.position = 'absolute';
+        element.style.top = "".concat(this.staticDistance, "px");
+      }
+    }
+  }]);
+
+  return HeaderBase;
+}();
+
+/* harmony default export */ var header_base = (header_base_HeaderBase);
+// CONCATENATED MODULE: ./src/js/components/header/header-colors.js
+
+
+
+
+
+var header_colors_HeaderColors =
+/*#__PURE__*/
+function () {
+  function HeaderColors(element, initialColorsSource, transparentColorsSource) {
+    classCallCheck_default()(this, HeaderColors);
+
+    this.element = element;
+    this.initialColorsSource = initialColorsSource ? initialColorsSource : element;
+    this.transparentColorsSource = transparentColorsSource ? transparentColorsSource : this.getFirstBlockElement();
+    this.initializeColors();
+  }
+
+  createClass_default()(HeaderColors, [{
+    key: "getFirstBlockElement",
+    value: function getFirstBlockElement() {
+      var content = document.querySelector('.site-main .entry-content');
+      var firstBlock = content ? getFirstChild(content) : null;
+      var novablocksBlock = firstBlock ? firstBlock.querySelector('.novablocks-block') : null;
+
+      if (!firstBlock || !hasClass(firstBlock, 'alignfull')) {
+        return null;
+      }
+
+      return novablocksBlock || firstBlock;
+    }
+  }, {
+    key: "initializeColors",
+    value: function initializeColors() {
+      this.initialColorClasses = getColorSetClasses(this.initialColorsSource).join(' ');
+      this.transparentColorClasses = this.initialColorClasses;
+
+      if (this.transparentColorsSource) {
+        this.transparentColorClasses = getColorSetClasses(this.transparentColorsSource).join(' ') + ' novablocks-header--transparent';
+      }
+    }
+  }, {
+    key: "toggleColors",
+    value: function toggleColors(isTransparent) {
+      toggleClasses(this.element, isTransparent, this.transparentColorClasses, this.initialColorClasses);
+      toggleLightClasses(this.element);
+    }
+  }]);
+
+  return HeaderColors;
+}();
+
+/* harmony default export */ var header_colors = (header_colors_HeaderColors);
+// CONCATENATED MODULE: ./src/js/components/header/menu-toggle.js
+
+
+
+var menu_toggle_MenuToggle =
+/*#__PURE__*/
+function () {
+  function MenuToggle(input, options) {
+    classCallCheck_default()(this, MenuToggle);
+
+    var id = input.getAttribute('id');
+    var toggleLabels = document.querySelectorAll("[for=\"".concat(id, "\"]"));
+    var defaults = {
+      onChange: this.onChange
+    };
+    this.options = Object.assign({}, defaults, options);
+    this.input = input;
+    this.element = toggleLabels.length ? toggleLabels[0] : null;
+    this.bindEvents();
+  }
+
+  createClass_default()(MenuToggle, [{
+    key: "bindEvents",
+    value: function bindEvents() {
+      var _this = this;
+
+      this.input.addEventListener('change', function (event) {
+        _this.options.onChange.call(_this, event, _this);
+      });
+    }
+  }, {
+    key: "onChange",
+    value: function onChange(isChecked, menuToggle) {}
+  }, {
+    key: "getHeight",
+    value: function getHeight() {
+      var _this$element;
+
+      return (this === null || this === void 0 ? void 0 : (_this$element = this.element) === null || _this$element === void 0 ? void 0 : _this$element.offsetHeight) || 0;
+    }
+  }]);
+
+  return MenuToggle;
+}();
+
+/* harmony default export */ var menu_toggle = (menu_toggle_MenuToggle);
+// CONCATENATED MODULE: ./src/js/components/header/header-mobile.js
+
+
+
+
+
+
+
+
+
+
+
+var header_mobile_HeaderMobile =
+/*#__PURE__*/
+function (_HeaderBase) {
+  inherits_default()(HeaderMobile, _HeaderBase);
+
+  function HeaderMobile(parent) {
+    var _this;
+
+    classCallCheck_default()(this, HeaderMobile);
+
+    _this = possibleConstructorReturn_default()(this, getPrototypeOf_default()(HeaderMobile).call(this));
+    _this.parent = parent;
+    _this.parentContainer = parent.element.querySelector('.novablocks-header__inner-container');
+
+    _this.initialize();
+
+    _this.onResize();
+
+    return _this;
+  }
+
+  createClass_default()(HeaderMobile, [{
+    key: "initialize",
+    value: function initialize() {
+      this.initializeMenuToggle();
+      this.createMobileHeader();
+      var logoRow = this.parent.rows.find(function (row) {
+        return row.element.querySelector('.site-logo');
+      });
+      this.headerClasses = getColorSetClasses(this.parent.element).join(' ');
+      this.colors = new header_colors(this.element, logoRow === null || logoRow === void 0 ? void 0 : logoRow.element);
+      this.menuToggleColors = new header_colors(this.menuToggle.element, logoRow === null || logoRow === void 0 ? void 0 : logoRow.element);
+      header_base.prototype.initialize.call(this);
+    }
+  }, {
+    key: "render",
+    value: function render(forceUpdate) {
+      header_base.prototype.render.call(this, forceUpdate);
+    }
+  }, {
+    key: "initializeMenuToggle",
+    value: function initializeMenuToggle() {
+      var menuToggleCheckbox = document.getElementById('nova-menu-toggle');
+      this.navigationIsOpen = menuToggleCheckbox.checked;
+      this.menuToggle = new menu_toggle(menuToggleCheckbox, {
+        onChange: this.onToggleChange.bind(this)
+      });
+    }
+  }, {
+    key: "createMobileHeader",
+    value: function createMobileHeader() {
+      this.element = document.createElement('div');
+      this.element.setAttribute('class', 'novablocks-header--mobile novablocks-header-background novablocks-header-shadow');
+      this.copyElementFromParent('.c-branding');
+      this.copyElementFromParent('.menu-item--cart');
+      this.menuToggle.element.insertAdjacentElement('afterend', this.element);
+      this.createButtonMenu();
+    }
+  }, {
+    key: "createButtonMenu",
+    value: function createButtonMenu() {
+      var _this2 = this;
+
+      var buttonCount = 0;
+      this.buttonMenu = document.createElement('ul');
+      utils_addClass(this.buttonMenu, 'menu menu--buttons');
+      var buttonSelectors = ['.menu-item--search', '.menu-item--dark-mode'];
+      buttonSelectors.forEach(function (selector) {
+        var button = _this2.parent.element.querySelector(selector);
+
+        if (button) {
+          var buttonClone = button.cloneNode(true);
+
+          _this2.buttonMenu.appendChild(buttonClone);
+
+          buttonCount = buttonCount + 1;
+        }
+      });
+
+      if (buttonCount) {
+        // create a fake navigation block to inherit styles
+        // @todo hopefully find a better solution for styling
+        var navigationBlock = document.createElement('div');
+        var wrapper = document.createElement('div');
+        utils_addClass(navigationBlock, 'wp-block-novablocks-navigation');
+        utils_addClass(wrapper, 'novablocks-header__buttons-menu wp-block-group__inner-container');
+        wrapper.appendChild(navigationBlock);
+        navigationBlock.appendChild(this.buttonMenu);
+        this.parent.element.appendChild(wrapper);
+      }
+    }
+  }, {
+    key: "updateStickyStyles",
+    value: function updateStickyStyles() {
+      header_base.prototype.updateStickyStyles.call(this);
+      this.applyStickyStyles(this.menuToggle.element);
+      this.colors.toggleColors(!this.shouldBeSticky);
+      this.updateToggleClasses();
+    }
+  }, {
+    key: "onResize",
+    value: function onResize() {
+      header_base.prototype.onResize.call(this);
+      this.update();
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      this.element.style.top = "".concat(this.stickyDistance, "px");
+      this.menuToggle.element.style.height = "".concat(this.box.height, "px");
+      this.parentContainer.style.paddingTop = "".concat(this.box.height, "px");
+      this.buttonMenu.style.height = "".concat(this.box.height, "px");
+    }
+  }, {
+    key: "onToggleChange",
+    value: function onToggleChange(event, menuToggle) {
+      var checked = event.target.checked;
+      document.body.style.overflow = checked ? 'hidden' : '';
+      this.navigationIsOpen = !!checked;
+      this.updateToggleClasses();
+    }
+  }, {
+    key: "updateToggleClasses",
+    value: function updateToggleClasses() {
+      if (this.navigationIsOpen) {
+        utils_removeClass(this.menuToggle.element, "".concat(this.menuToggleColors.transparentColorClasses, " ").concat(this.menuToggleColors.initialColorClasses));
+        utils_addClass(this.menuToggle.element, this.headerClasses);
+      } else {
+        utils_removeClass(this.menuToggle.element, this.headerClasses);
+        this.menuToggleColors.toggleColors(!this.shouldBeSticky);
+      }
+    }
+  }, {
+    key: "copyElementFromParent",
+    value: function copyElementFromParent(selector) {
+      var element = this.parent.element.querySelector(selector);
+      var elementClone = element === null || element === void 0 ? void 0 : element.cloneNode(true);
+
+      if (elementClone) {
+        this.element.appendChild(elementClone);
+      }
+    }
+  }]);
+
+  return HeaderMobile;
+}(header_base);
+
+/* harmony default export */ var header_mobile = (header_mobile_HeaderMobile);
+// CONCATENATED MODULE: ./src/js/components/header/header-row.js
+
+
+
+
+
+
+
+var header_row_HeaderRow =
+/*#__PURE__*/
+function (_HeaderBase) {
+  inherits_default()(HeaderRow, _HeaderBase);
+
+  function HeaderRow(element) {
+    var _this;
+
+    classCallCheck_default()(this, HeaderRow);
+
+    _this = possibleConstructorReturn_default()(this, getPrototypeOf_default()(HeaderRow).call(this));
+    _this.element = element;
+    _this.colors = new header_colors(_this.element);
+    return _this;
+  }
+
+  return HeaderRow;
+}(header_base);
+
+/* harmony default export */ var header_row = (header_row_HeaderRow);
+// CONCATENATED MODULE: ./src/js/components/header/index.js
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 var header_Header =
 /*#__PURE__*/
-function () {
-  function Header(element, args) {
+function (_HeaderBase) {
+  inherits_default()(Header, _HeaderBase);
+
+  function Header(element, options) {
+    var _this;
+
     classCallCheck_default()(this, Header);
 
-    if (!element) return;
-    this.element = element;
-    this.options = Object.assign({}, defaults, args);
-    this.$header = external_jQuery_default()(this.element);
-    this.$toggle = external_jQuery_default()('.c-menu-toggle');
-    this.$toggleWrap = external_jQuery_default()('.c-menu-toggle__wrap');
-    this.$searchCancelButton = external_jQuery_default()('.c-search-overlay__cancel');
-    this.$colorSchemeSwitcher = external_jQuery_default()('.is-color-scheme-switcher-button');
-    this.$searchOverlay = external_jQuery_default()('.c-search-overlay');
-    this.scrolled = false;
-    this.inversed = false;
-    this.abovePromoBar = false;
-    this.wasSticky = external_jQuery_default()('body').is('.has-site-header-fixed');
-    this.siteHeaderSticky = external_jQuery_default()('.site-header-sticky');
-    this.offset = 0;
-    this.scrollOffset = 0;
-    this.mobileHeaderHeight = 0;
-    this.promoBarHeight = 0;
-    this.$page = external_jQuery_default()('#page .site-content');
-    this.$promoBar = external_jQuery_default()('.novablocks-announcement-bar');
-    this.createMobileHeader();
-    this.onResize();
-    this.render();
-    globalService.registerOnResize(this.onResize.bind(this));
-    this.initialize();
+    _this = possibleConstructorReturn_default()(this, getPrototypeOf_default()(Header).call(this, options));
+    if (!element) return possibleConstructorReturn_default()(_this);
+    _this.onUpdate = options.onUpdate;
+    _this.element = element;
+    _this.rows = _this.getHeaderRows();
+    _this.isSticky = !!_this.element.dataset.sticky;
+    _this.hasStickyRow = !!_this.element.querySelector('[data-sticky]');
+    _this.mobileHeader = new header_mobile(assertThisInitialized_default()(_this));
+    _this.secondaryHeader = _this.getSecondaryHeader();
+
+    _this.initialize();
+
+    _this.toggleRowsColors(true);
+
+    utils_addClass(_this.element, 'novablocks-header--transparent');
+
+    if (_this.secondaryHeader) {
+      utils_addClass(_this.secondaryHeader, 'novablocks-header--ready');
+    }
+
+    _this.onResize();
+
+    return _this;
   }
 
   createClass_default()(Header, [{
     key: "initialize",
     value: function initialize() {
+      header_base.prototype.initialize.call(this);
       this.timeline = this.getIntroTimeline();
-      external_jQuery_default()('.site-header__wrapper').css('transition', 'none');
-
-      if (this.$promoBar.length) {
-        this.promoBarHeight = this.$promoBar.outerHeight();
-      }
-
-      this.$header.addClass('site-header--fixed site-header--ready');
-      this.$mobileHeader.addClass('site-header--fixed site-header--ready');
-      this.initToggleClick();
       this.timeline.play();
     }
   }, {
-    key: "update",
-    value: function update() {
-      this.updatePageOffset();
-      this.updateHeaderOffset();
-      this.updateStickyHeaderOffset();
-      this.updateMobileHeaderOffset();
-      this.updateHeaderButtonsHeight();
-      this.updateSearchOverlayOffset();
+    key: "render",
+    value: function render(forceUpdate) {
+      header_base.prototype.render.call(this, forceUpdate);
+
+      if (typeof this.onUpdate === "function") {
+        this.onUpdate();
+      }
+    }
+  }, {
+    key: "getHeight",
+    value: function getHeight() {
+      if (!!components_mqService.below.lap) {
+        return this.mobileHeader.getHeight();
+      }
+
+      return header_base.prototype.getHeight.call(this);
+    }
+  }, {
+    key: "onResize",
+    value: function onResize() {
+      header_base.prototype.onResize.call(this);
+      setAndResetElementStyles(this.element, {
+        transition: 'none'
+      });
+    }
+  }, {
+    key: "getSecondaryHeader",
+    value: function getSecondaryHeader() {
+      return document.querySelector('.novablocks-header--secondary');
+    }
+  }, {
+    key: "getHeaderRows",
+    value: function getHeaderRows() {
+      var rows = this.element.querySelectorAll('.novablocks-header-row');
+
+      if (rows) {
+        return Array.from(rows).map(function (element) {
+          return new header_row(element);
+        });
+      }
+
+      return [];
+    }
+  }, {
+    key: "toggleRowsColors",
+    value: function toggleRowsColors(isTransparent) {
+      this.rows.forEach(function (row) {
+        row.colors.toggleColors(isTransparent);
+      });
+    }
+  }, {
+    key: "updateStickyStyles",
+    value: function updateStickyStyles() {
+      if (this.isSticky || !this.hasStickyRow) {
+        header_base.prototype.updateStickyStyles.call(this);
+        this.toggleRowsColors(!this.shouldBeSticky);
+      }
+
+      this.element.style.marginTop = "".concat(this.staticDistance, "px");
+
+      if (this.secondaryHeader) {
+        this.secondaryHeader.style.top = "".concat(this.staticDistance, "px");
+      }
     }
   }, {
     key: "getIntroTimeline",
     value: function getIntroTimeline() {
-      var element = this.element;
+      var _this2 = this;
+
       var timeline = new TimelineMax({
         paused: true
       });
-      var height = external_jQuery_default()(element).outerHeight();
+      var height = this.element.offsetHeight;
       var transitionEasing = Power4.easeInOut;
       var transitionDuration = 0.5;
-      timeline.to(element, transitionDuration, {
+      timeline.to(this.element, transitionDuration, {
         opacity: 1,
         ease: transitionEasing
       }, 0);
@@ -1272,292 +1928,22 @@ function () {
         height: 0
       }, transitionDuration, {
         height: height,
-        onUpdate: this.onHeightUpdate.bind(this),
-        onUpdateParams: ["{self}"],
-        onComplete: function onComplete() {
-          external_jQuery_default()('.site-header__wrapper').css('transition', '');
+        onUpdate: function onUpdate(tween) {
+          _this2.box = Object.assign({}, _this2.box, {
+            height: tween.target.height
+          });
+
+          _this2.onResize();
         },
+        onUpdateParams: ["{self}"],
         ease: transitionEasing
       }, 0);
       return timeline;
     }
-  }, {
-    key: "onHeightUpdate",
-    value: function onHeightUpdate(tween) {
-      this.getProps();
-      this.box = Object.assign(this.box, {
-        height: tween.target.height
-      });
-      this.setVisibleHeaderHeight();
-      this.update();
-    }
-  }, {
-    key: "getMobileHeaderHeight",
-    value: function getMobileHeaderHeight() {
-      var mobileHeaderHeight = this.$mobileHeader.css('height', '').outerHeight();
-      var toggleHeight = this.$toggleWrap.css('height', '').outerHeight();
-      return Math.max(mobileHeaderHeight, toggleHeight);
-    }
-  }, {
-    key: "isMobileHeaderVisibile",
-    value: function isMobileHeaderVisibile() {
-      return this.$mobileHeader.is(':visible');
-    }
-  }, {
-    key: "setVisibleHeaderHeight",
-    value: function setVisibleHeaderHeight() {
-      this.visibleHeaderHeight = this.isMobileHeaderVisibile() ? this.mobileHeaderHeight : this.box.height;
-    }
-  }, {
-    key: "getProps",
-    value: function getProps() {
-      this.box = this.element.getBoundingClientRect();
-      this.scrollOffset = this.getScrollOffset();
-      this.mobileHeaderHeight = this.getMobileHeaderHeight();
-    }
-  }, {
-    key: "onResize",
-    value: function onResize() {
-      var $header = external_jQuery_default()(this.element);
-      setAndResetElementStyles($header, {
-        transition: 'none'
-      });
-      setAndResetElementStyles(this.$searchOverlay, {
-        transition: 'none'
-      });
-      $header.removeClass('site-header--scrolled');
-      this.getProps();
-      this.setVisibleHeaderHeight();
-      this.shouldMakeHeaderStatic();
-      this.initHeaderButtons();
-
-      if (!this.hasMobileNav()) {
-        external_jQuery_default()('body').removeClass(NAVIGATION_OPEN_CLASS);
-      }
-
-      this.update();
-    }
-  }, {
-    key: "shouldMakeHeaderStatic",
-    value: function shouldMakeHeaderStatic() {
-      var $body = external_jQuery_default()('body');
-
-      var _GlobalService$getPro = globalService.getProps(),
-          windowHeight = _GlobalService$getPro.windowHeight;
-
-      if (this.wasSticky) {
-        $body.toggleClass('has-site-header-fixed', this.visibleHeaderHeight < windowHeight * 0.2);
-      }
-    }
-  }, {
-    key: "updateHeaderOffset",
-    value: function updateHeaderOffset() {
-      var _this = this;
-
-      requestAnimationFrame(function () {
-        var _this$element;
-
-        if (!(_this === null || _this === void 0 ? void 0 : (_this$element = _this.element) === null || _this$element === void 0 ? void 0 : _this$element.style)) {
-          return;
-        }
-
-        _this.element.style.marginTop = _this.offset + 'px';
-      });
-    }
-  }, {
-    key: "updateStickyHeaderOffset",
-    value: function updateStickyHeaderOffset() {
-      var _this2 = this;
-
-      requestAnimationFrame(function () {
-        if (!_this2.siteHeaderSticky.length) {
-          return;
-        }
-
-        _this2.siteHeaderSticky.css({
-          marginTop: _this2.offset + 'px'
-        });
-      });
-    }
-  }, {
-    key: "updateMobileHeaderOffset",
-    value: function updateMobileHeaderOffset() {
-      if (!this.$mobileHeader) return;
-      this.$mobileHeader.css({
-        height: this.mobileHeaderHeight
-      });
-      TweenMax.to(this.$mobileHeader, .2, {
-        y: this.offset
-      });
-      external_jQuery_default()('.site-header__inner-container').css({
-        transform: "translateY(".concat(this.mobileHeaderHeight, "px)")
-      });
-      this.$toggleWrap.css({
-        height: this.mobileHeaderHeight
-      });
-      TweenMax.to(this.$toggleWrap, .2, {
-        y: this.offset
-      });
-    }
-  }, {
-    key: "getScrollOffset",
-    value: function getScrollOffset() {
-      var _GlobalService$getPro2 = globalService.getProps(),
-          adminBarHeight = _GlobalService$getPro2.adminBarHeight,
-          scrollY = _GlobalService$getPro2.scrollY;
-
-      var offsetTargetElement = this.options.offsetTargetElement;
-
-      if (offsetTargetElement) {
-        var offsetTargetBox = offsetTargetElement.getBoundingClientRect();
-        var targetBottom = offsetTargetBox.top + scrollY + offsetTargetBox.height;
-        var headerOffset = adminBarHeight + this.offset + this.box.height / 2;
-        return targetBottom - headerOffset;
-      }
-
-      return 0;
-    }
-  }, {
-    key: "updatePageOffset",
-    value: function updatePageOffset() {
-      TweenMax.set(this.$page, {
-        css: {
-          marginTop: this.visibleHeaderHeight + this.offset
-        }
-      });
-    }
-  }, {
-    key: "updateMobileNavigationOffset",
-    value: function updateMobileNavigationOffset() {
-      if (!this.hasMobileNav()) {
-        return;
-      }
-
-      var _GlobalService$getPro3 = globalService.getProps(),
-          scrollY = _GlobalService$getPro3.scrollY;
-
-      this.element.style.marginTop = Math.max(this.promoBarHeight - scrollY, 0) + 'px';
-    }
-  }, {
-    key: "updateMobileHeaderState",
-    value: function updateMobileHeaderState() {
-      if (!this.hasMobileNav()) {
-        return;
-      }
-
-      var _GlobalService$getPro4 = globalService.getProps(),
-          scrollY = _GlobalService$getPro4.scrollY;
-
-      var abovePromoBar = scrollY > this.promoBarHeight;
-
-      if (abovePromoBar !== this.abovePromoBar) {
-        external_jQuery_default()(body).toggleClass('site-header-mobile--scrolled', abovePromoBar);
-        this.abovePromoBar = abovePromoBar;
-      }
-    }
-  }, {
-    key: "updateDesktopHeaderState",
-    value: function updateDesktopHeaderState(inversed) {
-      if (inversed !== this.inversed) {
-        this.$header.toggleClass('site-header--normal', !inversed);
-        this.inversed = inversed;
-      }
-    }
-  }, {
-    key: "createMobileHeader",
-    value: function createMobileHeader() {
-      if (this.createdMobileHeader) return;
-      var $mobileHeader = external_jQuery_default()('.site-header--mobile');
-
-      if ($mobileHeader.length) {
-        this.$mobileHeader = $mobileHeader;
-        this.createdMobileHeader = true;
-        return;
-      }
-
-      this.$mobileHeader = external_jQuery_default()('<div class="site-header--mobile">');
-      external_jQuery_default()('.c-branding').first().clone().appendTo(this.$mobileHeader);
-      this.$header.find('.menu-item--cart').first().clone().appendTo(this.$mobileHeader);
-      this.$mobileHeader.insertAfter(this.$toggle);
-      this.createdMobileHeader = true;
-    }
-  }, {
-    key: "initHeaderButtons",
-    value: function initHeaderButtons() {
-      if (this.hasMobileNav()) {
-        this.initHeaderSearchButton();
-        this.initHeaderLightsButton();
-      }
-    }
-  }, {
-    key: "initHeaderSearchButton",
-    value: function initHeaderSearchButton() {
-      if (this.movedSearchButton) {
-        return;
-      }
-
-      this.$searchButtonWrapper = external_jQuery_default()('<div class="search-button__wrapper">');
-      external_jQuery_default()('.is-search-button').first().clone().appendTo(this.$searchButtonWrapper);
-      this.$searchButtonWrapper.insertAfter('.site-header__wrapper');
-      this.movedSearchButton = true;
-    }
-  }, {
-    key: "initHeaderLightsButton",
-    value: function initHeaderLightsButton() {
-      if (this.movedColorSchemeSwitcherButton) {
-        return;
-      }
-
-      this.$colorSchemeSwitcherWrapper = external_jQuery_default()('<div class="scheme-switcher__wrapper">');
-      external_jQuery_default()('.is-color-scheme-switcher-button').first().clone().appendTo(this.$colorSchemeSwitcherWrapper);
-      this.$colorSchemeSwitcherWrapper.insertAfter('.site-header__wrapper');
-      this.movedColorSchemeSwitcherButton = true;
-    }
-  }, {
-    key: "updateHeaderButtonsHeight",
-    value: function updateHeaderButtonsHeight() {
-      var $buttons = this.$searchCancelButton.add(this.$colorSchemeSwitcher).add('.search-button__wrapper').add('.scheme-switcher__wrapper');
-      $buttons.css('height', '');
-
-      if (!this.hasMobileNav()) {
-        return;
-      }
-
-      $buttons.css('height', this.mobileHeaderHeight);
-    }
-  }, {
-    key: "updateSearchOverlayOffset",
-    value: function updateSearchOverlayOffset() {
-      if (this.hasMobileNav() && this.$searchOverlay.length) {
-        this.$searchOverlay[0].paddingTop = Math.max(this.promoBarHeight - scrollY, 0) + 'px';
-      }
-    }
-  }, {
-    key: "initToggleClick",
-    value: function initToggleClick() {
-      var $body = external_jQuery_default()('body');
-      this.$toggle.on('click', function () {
-        $body.toggleClass(NAVIGATION_OPEN_CLASS);
-      });
-    }
-  }, {
-    key: "hasMobileNav",
-    value: function hasMobileNav() {
-      return below('lap');
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      if (!this.element) return;
-      window.document.body.style.setProperty('--site-header-height', this.visibleHeaderHeight + this.promoBarHeight + 'px');
-      this.updateMobileNavigationOffset();
-      this.updateMobileHeaderState();
-      this.updateDesktopHeaderState(false);
-    }
   }]);
 
   return Header;
-}();
+}(header_base);
 
 /* harmony default export */ var components_header = (header_Header);
 // EXTERNAL MODULE: ./node_modules/js-cookie/src/js.cookie.js
@@ -1699,12 +2085,14 @@ function () {
 var promo_bar_PromoBar =
 /*#__PURE__*/
 function () {
-  function PromoBar(elements, args) {
+  function PromoBar(element, args) {
     var _this = this;
 
     classCallCheck_default()(this, PromoBar);
 
-    var announcementElementsArray = Array.from(elements);
+    var announcementBars = element.querySelectorAll('.novablocks-announcement-bar');
+    var announcementElementsArray = Array.from(announcementBars);
+    this.element = element;
     this.bars = announcementElementsArray.map(function (element) {
       return new announcement_bar_AnnouncementBar(element, {
         parent: _this,
@@ -1714,6 +2102,7 @@ function () {
     });
     this.height = 0;
     this.onUpdate = args.onUpdate;
+    this.offset = args.offset || 0;
     this.update();
   }
 
@@ -1725,6 +2114,7 @@ function () {
         promoBarHeight += bar.height;
       });
       this.height = promoBarHeight;
+      this.element.style.top = "".concat(this.offset, "px");
 
       if (typeof this.onUpdate === "function") {
         this.onUpdate(this);
@@ -1746,8 +2136,6 @@ var MENU_ITEM_WITH_CHILDREN = '.menu-item-has-children, .page_item_has_children'
 var SUBMENU = '.sub-menu, .children';
 var SUBMENU_LEFT_CLASS = 'has-submenu-left';
 var HOVER_CLASS = 'hover';
-var SEARCH_OVERLAY_OPEN_CLASS = 'has-search-overlay';
-var ESC_KEY_CODE = 27;
 
 var navbar_Navbar =
 /*#__PURE__*/
@@ -1767,9 +2155,6 @@ function () {
       this.onResize();
       this.initialized = true;
       globalService.registerOnResize(this.onResize.bind(this));
-      external_jQuery_default()(document).on('click', '.is-search-button a', this.openSearchOverlay);
-      external_jQuery_default()(document).on('click', '.c-search-overlay__cancel', this.closeSearchOverlay);
-      external_jQuery_default()(document).on('keydown', this.closeSearchOverlayOnEsc);
     }
   }, {
     key: "onResize",
@@ -1842,27 +2227,6 @@ function () {
       $siblings.find('.active').removeClass('active');
     }
   }, {
-    key: "openSearchOverlay",
-    value: function openSearchOverlay(e) {
-      e.preventDefault();
-      external_jQuery_default()('body').toggleClass(SEARCH_OVERLAY_OPEN_CLASS);
-      external_jQuery_default()('.c-search-overlay__form .search-field').focus();
-    }
-  }, {
-    key: "closeSearchOverlayOnEsc",
-    value: function closeSearchOverlayOnEsc(e) {
-      if (e.keyCode === ESC_KEY_CODE) {
-        external_jQuery_default()('body').removeClass(SEARCH_OVERLAY_OPEN_CLASS);
-        external_jQuery_default()('.c-search-overlay__form .search-field').blur();
-      }
-    }
-  }, {
-    key: "closeSearchOverlay",
-    value: function closeSearchOverlay(e) {
-      e.preventDefault();
-      external_jQuery_default()('body').removeClass(SEARCH_OVERLAY_OPEN_CLASS);
-    }
-  }, {
     key: "bindClick",
     value: function bindClick() {
       this.$menuItemsWithChildrenLinks.on('click', this.onClickMobile);
@@ -1898,135 +2262,102 @@ function () {
 }();
 
 
-// CONCATENATED MODULE: ./src/js/components/dark-mode.js
+// CONCATENATED MODULE: ./src/js/components/base-component.js
 
 
 
-var _wp;
 
-
-var COLOR_SCHEME_BUTTON = '.is-color-scheme-switcher-button';
-var STORAGE_ITEM = 'color-scheme-dark';
-var TEMP_STORAGE_ITEM = 'color-scheme-dark-temp';
-var dark_mode_$html = external_jQuery_default()('html');
-var api = (_wp = wp) === null || _wp === void 0 ? void 0 : _wp.customize;
-var ignoreStorage = !!api;
-
-var dark_mode_DarkMode =
+var base_component_BaseComponent =
 /*#__PURE__*/
 function () {
-  function DarkMode(element) {
-    classCallCheck_default()(this, DarkMode);
+  function BaseComponent() {
+    classCallCheck_default()(this, BaseComponent);
 
-    this.$element = external_jQuery_default()(element);
-    this.$colorSchemeButtons = external_jQuery_default()(COLOR_SCHEME_BUTTON);
-    this.$colorSchemeButtonsLink = this.$colorSchemeButtons.children('a');
-    this.matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
-    this.darkModeSetting = dark_mode_$html.data('dark-mode-advanced');
-    this.theme = null;
-    this.initialize();
+    globalService.registerOnResize(this.onResize.bind(this));
   }
 
-  createClass_default()(DarkMode, [{
+  createClass_default()(BaseComponent, [{
+    key: "onResize",
+    value: function onResize() {}
+  }]);
+
+  return BaseComponent;
+}();
+
+/* harmony default export */ var base_component = (base_component_BaseComponent);
+// CONCATENATED MODULE: ./src/js/components/search-overlay.js
+
+
+
+
+
+
+
+
+var SEARCH_OVERLAY_OPEN_CLASS = 'has-search-overlay';
+var ESC_KEY_CODE = 27;
+
+var search_overlay_SearchOverlay =
+/*#__PURE__*/
+function (_BaseComponent) {
+  inherits_default()(SearchOverlay, _BaseComponent);
+
+  function SearchOverlay() {
+    var _this;
+
+    classCallCheck_default()(this, SearchOverlay);
+
+    _this = possibleConstructorReturn_default()(this, getPrototypeOf_default()(SearchOverlay).call(this));
+    _this.$searchOverlay = external_jQuery_default()('.c-search-overlay');
+
+    _this.initialize();
+
+    _this.onResize();
+
+    return _this;
+  }
+
+  createClass_default()(SearchOverlay, [{
     key: "initialize",
     value: function initialize() {
-      localStorage.removeItem(TEMP_STORAGE_ITEM);
-      this.bindEvents();
-      this.bindCustomizer();
-      this.update();
+      external_jQuery_default()(document).on('click', '.menu-item--search a', this.openSearchOverlay);
+      external_jQuery_default()(document).on('click', '.c-search-overlay__cancel', this.closeSearchOverlay);
+      external_jQuery_default()(document).on('keydown', this.closeSearchOverlayOnEsc);
     }
   }, {
-    key: "bindEvents",
-    value: function bindEvents() {
-      var _this = this;
-
-      external_jQuery_default()(document).on('click', COLOR_SCHEME_BUTTON, this.onClick.bind(this)); // Use try and catch to fix compatibility
-      // issues with Safari 13.
-      // Source: https://stackoverflow.com/a/60000747
-
-      try {
-        // Chrome & Firefox
-        this.matchMedia.addEventListener('change', function (e) {
-          localStorage.removeItem(TEMP_STORAGE_ITEM);
-
-          _this.update();
-        });
-      } catch (e1) {
-        try {
-          // Safari
-          this.matchMedia.addListener(function (e) {
-            localStorage.removeItem(TEMP_STORAGE_ITEM);
-
-            _this.update();
-          });
-        } catch (e2) {
-          console.error(e2);
-        }
-      }
-    }
-  }, {
-    key: "bindCustomizer",
-    value: function bindCustomizer() {
-      var _this2 = this;
-
-      if (!api) {
-        return;
-      }
-
-      api('sm_dark_mode_advanced').bind(function (newValue, oldValue) {
-        localStorage.removeItem(TEMP_STORAGE_ITEM);
-        _this2.darkModeSetting = newValue;
-
-        _this2.update();
+    key: "onResize",
+    value: function onResize() {
+      setAndResetElementStyles(this.$searchOverlay, {
+        transition: 'none'
       });
     }
   }, {
-    key: "onClick",
-    value: function onClick(e) {
+    key: "openSearchOverlay",
+    value: function openSearchOverlay(e) {
       e.preventDefault();
-      var isDark = this.isCompiledDark();
-      localStorage.setItem(this.getStorageItemKey(), !!isDark ? 'light' : 'dark');
-      this.update();
+      external_jQuery_default()('body').toggleClass(SEARCH_OVERLAY_OPEN_CLASS);
+      external_jQuery_default()('.c-search-overlay__form .search-field').focus();
     }
   }, {
-    key: "getStorageItemKey",
-    value: function getStorageItemKey() {
-      return !ignoreStorage ? STORAGE_ITEM : TEMP_STORAGE_ITEM;
-    }
-  }, {
-    key: "isSystemDark",
-    value: function isSystemDark() {
-      var isDark = this.darkModeSetting === 'on';
-
-      if (this.darkModeSetting === 'auto' && this.matchMedia.matches) {
-        isDark = true;
+    key: "closeSearchOverlayOnEsc",
+    value: function closeSearchOverlayOnEsc(e) {
+      if (e.keyCode === ESC_KEY_CODE) {
+        external_jQuery_default()('body').removeClass(SEARCH_OVERLAY_OPEN_CLASS);
+        external_jQuery_default()('.c-search-overlay__form .search-field').blur();
       }
-
-      return isDark;
     }
   }, {
-    key: "isCompiledDark",
-    value: function isCompiledDark() {
-      var isDark = this.isSystemDark();
-      var colorSchemeStorageValue = localStorage.getItem(this.getStorageItemKey());
-
-      if (colorSchemeStorageValue !== null) {
-        isDark = colorSchemeStorageValue === 'dark';
-      }
-
-      return isDark;
-    }
-  }, {
-    key: "update",
-    value: function update() {
-      dark_mode_$html.toggleClass('is-dark', this.isCompiledDark());
+    key: "closeSearchOverlay",
+    value: function closeSearchOverlay(e) {
+      e.preventDefault();
+      external_jQuery_default()('body').removeClass(SEARCH_OVERLAY_OPEN_CLASS);
     }
   }]);
 
-  return DarkMode;
-}();
+  return SearchOverlay;
+}(base_component);
 
-
+/* harmony default export */ var search_overlay = (search_overlay_SearchOverlay);
 // CONCATENATED MODULE: ./src/js/components/app.js
 
 
@@ -2046,43 +2377,36 @@ function () {
   function App() {
     classCallCheck_default()(this, App);
 
+    this.adminBar = document.getElementById('wpadminbar');
+    this.adminBarFixed = false;
+    this.promoBarFixed = false;
+    this.adminBarHeight = 0;
+    this.updateAdminBarProps();
+    this.enableFirstBlockPaddingTop = external_jQuery_default()('body').hasClass('has-novablocks-header-transparent');
     this.initializeHero();
     this.initializeHeader();
+    this.initializeLogo();
     this.initializeNavbar();
+    this.searchOverlay = new search_overlay();
     this.initializePromoBar();
-    this.initializeDarkMode();
     this.initializeImages();
     this.initializeCommentsArea();
     this.initializeReservationForm();
-    globalService.registerRender(this.render.bind(this));
+    window.addEventListener('resize', this.onResize.bind(this));
   }
 
   createClass_default()(App, [{
-    key: "render",
-    value: function render() {
-      var _GlobalService$getPro = globalService.getProps(),
-          scrollY = _GlobalService$getPro.scrollY,
-          adminBarHeight = _GlobalService$getPro.adminBarHeight;
+    key: "onResize",
+    value: function onResize() {
+      var _this$header;
 
-      var promoBar = this.promoBar;
-      var header = this.header;
-      var HeroCollection = this.HeroCollection;
-      var overlap = HeroCollection.some(function (hero) {
-        return insideHalf({
-          left: header.box.left,
-          top: header.box.top + scrollY,
-          width: header.box.width,
-          height: header.box.height
-        }, {
-          left: hero.box.left,
-          top: hero.box.top + promoBar.height,
-          width: hero.box.width,
-          height: hero.box.height
-        });
-      });
+      this.updateAdminBarProps();
+      this.updatePromoBarProps();
+      this.promoBar.offset = this.adminBarHeight;
+      this.promoBar.update();
 
-      if (!!header) {
-        header.render(overlap);
+      if (this === null || this === void 0 ? void 0 : (_this$header = this.header) === null || _this$header === void 0 ? void 0 : _this$header.mobileHeader) {
+        this.header.mobileHeader.top = this.adminBarHeight;
       }
     }
   }, {
@@ -2103,6 +2427,12 @@ function () {
       });
     }
   }, {
+    key: "initializeLogo",
+    value: function initializeLogo() {
+      var wrappers = document.querySelectorAll('[class*="sm-palette"]');
+      wrappers.forEach(toggleLightClasses);
+    }
+  }, {
     key: "initializeReservationForm",
     value: function initializeReservationForm() {
       globalService.registerObserverCallback(function (mutationList) {
@@ -2116,6 +2446,17 @@ function () {
           });
         });
       });
+    }
+  }, {
+    key: "updateAdminBarProps",
+    value: function updateAdminBarProps() {
+      if (!this.adminBar) {
+        return;
+      }
+
+      this.adminBarHeight = this.adminBar.offsetHeight;
+      var adminBarStyle = window.getComputedStyle(this.adminBar);
+      this.adminBarFixed = adminBarStyle.getPropertyValue('position') === 'fixed';
     }
   }, {
     key: "showLoadedImages",
@@ -2149,10 +2490,12 @@ function () {
   }, {
     key: "initializeHeader",
     value: function initializeHeader() {
-      var $header = external_jQuery_default()('.site-header');
+      var header = document.querySelector('.novablocks-header');
 
-      if ($header.length) {
-        this.header = new components_header($header.get(0));
+      if (!!header) {
+        this.header = new components_header(header, {
+          onResize: this.onHeaderUpdate.bind(this)
+        });
       }
     }
   }, {
@@ -2163,15 +2506,18 @@ function () {
   }, {
     key: "initializePromoBar",
     value: function initializePromoBar() {
-      var announcementBars = document.querySelectorAll('.promo-bar .novablocks-announcement-bar');
-      this.promoBar = new promo_bar_PromoBar(announcementBars, {
+      var promoBar = document.querySelector('.promo-bar');
+      this.promoBar = new promo_bar_PromoBar(promoBar, {
+        offset: this.adminBarHeight,
         onUpdate: this.onPromoBarUpdate.bind(this)
       });
+      this.updatePromoBarProps();
     }
   }, {
-    key: "initializeDarkMode",
-    value: function initializeDarkMode() {
-      this.DarkMode = new dark_mode_DarkMode();
+    key: "updatePromoBarProps",
+    value: function updatePromoBarProps() {
+      var promoBarStyle = window.getComputedStyle(this.promoBar.element);
+      this.promoBarFixed = promoBarStyle.getPropertyValue('position') === 'fixed';
     }
   }, {
     key: "onPromoBarUpdate",
@@ -2179,10 +2525,18 @@ function () {
       var header = this.header;
       var HeroCollection = this.HeroCollection;
       var promoBarHeight = !!promoBar ? promoBar.height : 0;
+      var adminBarTop = this.adminBarFixed ? this.adminBarHeight : 0;
+      var promoBarTop = this.promoBarFixed ? promoBarHeight : 0;
+      var stickyDistance = adminBarTop + promoBarTop;
+      var staticDistance = this.adminBarHeight + promoBarHeight;
 
       if (!!header) {
-        header.offset = promoBarHeight;
-        header.update();
+        header.stickyDistance = stickyDistance;
+        header.staticDistance = staticDistance;
+        header.render(true);
+        header.mobileHeader.stickyDistance = stickyDistance;
+        header.mobileHeader.staticDistance = staticDistance;
+        header.mobileHeader.render(true);
       }
 
       HeroCollection.forEach(function (hero) {
@@ -2190,12 +2544,45 @@ function () {
         hero.updateOnScroll();
       });
     }
+  }, {
+    key: "onHeaderUpdate",
+    value: function onHeaderUpdate() {
+      var _this$promoBar, _this$header2;
+
+      if (!this.enableFirstBlockPaddingTop) {
+        return false;
+      }
+
+      var promoBarHeight = ((_this$promoBar = this.promoBar) === null || _this$promoBar === void 0 ? void 0 : _this$promoBar.height) || 0;
+      var headerHeight = ((_this$header2 = this.header) === null || _this$header2 === void 0 ? void 0 : _this$header2.getHeight()) || 0;
+      external_jQuery_default()('body:not(.has-no-spacing-top) .site-content').css('marginTop', "".concat(promoBarHeight + headerHeight, "px"));
+      external_jQuery_default()('html').css('scrollPaddingTop', "".concat(headerHeight, "px"));
+      var $firstBlock = external_jQuery_default()('.entry-content > :first-child');
+
+      if ($firstBlock.is('.supernova')) {
+        var paddingTop = getPaddingTop($firstBlock);
+        $firstBlock.css('paddingTop', paddingTop + headerHeight + promoBarHeight);
+        return;
+      }
+
+      var $firstBlockFg = $firstBlock.find('.novablocks-doppler__foreground');
+
+      if ($firstBlockFg.length) {
+        var _paddingTop = getPaddingTop($firstBlockFg);
+
+        $firstBlockFg.css('paddingTop', Math.max(_paddingTop, headerHeight + promoBarHeight));
+      }
+    }
   }]);
 
   return App;
 }();
 
 
+
+var getPaddingTop = function getPaddingTop($element) {
+  return parseInt($element.css('paddingTop', '').css('paddingTop'), 10) || 0;
+};
 // CONCATENATED MODULE: ./src/js/scripts.js
 
 

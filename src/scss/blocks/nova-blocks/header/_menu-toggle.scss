@@ -1,0 +1,29 @@
+.c-menu-toggle,
+.c-menu-toggle__slice {
+    transition: var(--theme-transition);
+}
+
+.c-menu-toggle__slice {
+    transition-property: transform;
+}
+
+.c-menu-toggle {
+    margin: 0 !important;
+    background: none !important;
+    transition-property: color;
+
+    .c-menu-toggle__checkbox:checked ~ & {
+
+        .c-menu-toggle__slice--top {
+            transform: rotate(45deg);
+        }
+
+        .c-menu-toggle__slice--middle {
+            opacity: 0;
+        }
+
+        .c-menu-toggle__slice--bottom {
+            transform: rotate(-45deg);
+        }
+    }
+}

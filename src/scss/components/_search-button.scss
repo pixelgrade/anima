@@ -1,6 +1,7 @@
-.is-search-button {
+.menu-item--search {
 	
 	&:not(.no-icon) {
+
 		a {
 			--search-icon-width: calc( var(--icons-size-multiplier) * var(--final-font-size) );
 			
@@ -59,34 +60,9 @@
 		}
 	}
 	
-	.site-header__menu & {
+	.novablocks-navigation & {
 		@include below(lap) {
 			display: none;
-		}
-	}
-}
-
-.search-button__wrapper {
-	position: absolute;
-	top: 0;
-	
-	display: flex;
-	align-items: center;
-	
-	@include apply-font(body);
-	--font-size: 21;
-	
-	@include above(lap) {
-		display: none;
-	}
-	
-	li {
-		list-style: none;
-		
-		a {
-			color: currentColor;
-			text-decoration: none;
-			font-weight: 500;
 		}
 	}
 }

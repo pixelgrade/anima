@@ -15,6 +15,7 @@
   --theme-heading-5-font-weight: 700;
 
   .item-title {
+    color: inherit;
     @include apply-font(heading-4);
     padding-right: var(--theme-spacing-tiny);
   }
@@ -43,7 +44,7 @@
 }
 
 .item-title {
-  background-color: var(--current-light-primary);
+  background-color: var(--sm-current-bg-color);
 }
 
 .wp-block-novablocks-menu-food-item.is-style-rounded {

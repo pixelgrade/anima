@@ -11,7 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 // pixelgrade_option
 require_once __DIR__ . '/extras.php';
 
-if ( class_exists( 'PixCustomifyPlugin' ) ) {
+// If the Style Manager plugin is active, don't load the Customify integration.
+if ( class_exists( 'PixCustomifyPlugin' ) && ! defined( '\Pixelgrade\StyleManager\VERSION' ) ) {
 
 	require_once __DIR__ . '/colors.php';
 	require_once __DIR__ . '/fonts.php';
@@ -79,26 +80,6 @@ function rosa2_add_header_section_to_customify_config( $config ) {
 							'property' => '--theme-mobile-header-logo-height',
 							'selector' => ':root',
 							'unit'     => 'px',
-						),
-					),
-				),
-				'header_height'                   => array(
-					'type'        => 'range',
-					'label'       => esc_html__( 'Header Height', '__theme_txtd' ),
-					'desc'        => esc_html__( 'Adjust the header and navigation bar height.', '__theme_txtd' ),
-					'live'        => true,
-					'default'     => 118,
-					'input_attrs' => array(
-						'min'          => 40,
-						'max'          => 200,
-						'step'         => 10,
-						'data-preview' => true,
-					),
-					'css'         => array(
-						array(
-							'property' => '--theme-header-height-setting',
-							'selector' => ':root',
-							'unit'     => '',
 						),
 					),
 				),

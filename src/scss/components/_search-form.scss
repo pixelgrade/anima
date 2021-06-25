@@ -5,17 +5,19 @@
   width: 100%;
 
   margin-top: 1.5em;
-  
+
   --search-icon-width: 1.2em;
 
   &:focus,
   &:focus-within {
+
     .search-icon {
       opacity: 0.75;
     }
   }
 
   &[class] {
+
     > label {
       flex: 1;
       margin-bottom: 0;
@@ -27,59 +29,47 @@
     max-width: 200px;
     margin-left: .5em;
   }
-  
+
   @include above(lap) {
+
     .search-icon {
       content: '';
       position: absolute;
       left: var(--theme-input-padding);
       top: 50%;
       transform: translateY(-50%);
-    
+
       display: block;
       width: var(--search-icon-width);
       height: var(--search-icon-width);
-    
+
       border: 0;
       padding: 0;
-    
+
       mask: url($icon-search-path) no-repeat 50% 50%;
       mask-size: cover;
       -webkit-mask: url($icon-search-path) no-repeat 50% 50%;
       -webkit-mask-size: cover;
-    
-      background-color: var(--current-light-primary);
+
+      background-color: var(--sm-current-fg1-color);
       transition: opacity .15s $ease;
     }
   }
 
   .search-submit {
+    max-width: 100%;
     margin-left: 0;
-    --theme-button-background-color: var(--sm-light-primary);
-    --theme-button-border-color: var(--sm-light-primary);
-    --theme-button-text-color: var(--current-color-primary);
-
-    --theme-button-hover-background-color: var(--current-color-primary);
-    --theme-button-hover-border-color: var(--sm-light-primary);
-    --theme-button-hover-text-color: var(--sm-light-primary);
 
     --font-size: 23;
-
-    max-width: 100%;
-
-    @include placeholder() {
-      color: var(--sm-dark-primary);
-    }
   }
 
   .search-field {
     border: 0;
-    
     height: 100%;
-    
+
     background-color: transparent;
-    color: var(--current-light-primary);
-    
+    color: var(--sm-current-bg-color);
+
     @include above(lap) {
       padding-left: calc(var(--search-icon-width) + var(--theme-input-padding) + 0.6em);
     }
@@ -87,47 +77,48 @@
 
   .error404 &,
   .search-no-results & {
+
     .search-submit {
-      --theme-button-background-color: var(--sm-color-primary);
-      --theme-button-border-color: var(--sm-color-primary);
-      --theme-button-text-color: var(--sm-light-primary);
+      --theme-button-background-color: var(--sm-current-accent-color);
+      --theme-button-border-color: var(--sm-current-accent-color);
+      --theme-button-text-color: var(--sm-current-bg-color);
 
       --theme-button-hover-background-color: transparent;
-      --theme-button-hover-border-color: var(--sm-color-primary);
-      --theme-button-hover-text-color: var(--sm-color-primary);
+      --theme-button-hover-border-color: var(--sm-current-accent-color);
+      --theme-button-hover-text-color: var(--sm-current-accent-color);
     }
 
     .search-field {
       color: var(--current-dark-primary);
     }
-    
+
     .search-icon {
-      background-color: var(--sm-color-primary);
+      background-color: var(--sm-current-accent-color);
     }
   }
 }
 
 .novablocks-sidebar {
-  
+
   .search-submit {
-    
+
     @include above(lap) {
       display: none;
     }
 
-    --theme-button-text-color: var(--current-light-primary);
-    --theme-button-background-color: var(--current-color-primary);
-    --theme-button-border-color: var(--current-color-primary);
-    --theme-button-hover-text-color: var(--current-color-primary);
+    --theme-button-text-color: var(--sm-current-bg-color);
+    --theme-button-background-color: var(--sm-current-accent-color);
+    --theme-button-border-color: var(--sm-current-accent-color);
+    --theme-button-hover-text-color: var(--sm-current-accent-color);
     --theme-button-hover-background-color: transparent;
-    --theme-button-hover-border-color: var(--current-color-primary);
+    --theme-button-hover-border-color: var(--sm-current-accent-color);
   }
-  
+
   .search-field {
-    color: var(--current-dark-primary)
+    color: var(--sm-current-fg1-color)
   }
-  
+
   .search-icon {
-    background-color: var(--sm-color-primary);
+    background-color: var(--sm-current-accent-color);
   }
 }

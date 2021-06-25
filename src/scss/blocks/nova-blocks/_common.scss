@@ -1,4 +1,6 @@
+@import "header-row/common";
 @import "hero/common";
+@import "navigation/common";
 @import "slideshow/common";
 
 @at-root {
@@ -7,23 +9,13 @@
     // than the one in the Nova Blocks plugin
     html:root {
 
-        --novablocks-color-1: var(--theme-color-primary);
-        --novablocks-color-2: var(--theme-color-secondary);
-        --novablocks-color-3: var(--theme-color-tertiary);
+        --nova-food-menu-item-highlight-color: var(--sm-current-fg2-color);
 
-        --novablocks-dark-1: var(--theme-dark-primary);
-        --novablocks-dark-2: var(--theme-dark-secondary);
-        --novablocks-dark-3: var(--theme-dark-tertiary);
-
-        --novablocks-light-1: var(--theme-light-primary);
-        --novablocks-light-2: var(--theme-light-secondary);
-        --novablocks-light-3: var(--theme-light-tertiary);
-
-        --nova-food-menu-item-highlight-color: var(--current-dark-primary);
-
-        --novablocks-spacing: var(--theme-spacing-fluid-large);
-        --novablocks-media-spacing: var(--novablocks-spacing);
+        --novablocks-spacing: var(--theme-content-spacing);
+        --novablocks-media-spacing: var(--theme-spacing-fluid-large);
         --novablocks-sides-spacings: var(--theme-wrapper-sides-spacing);
+
+        --novablocks-navigation-item-spacing: var(--theme-header-links-spacing);
 
         --novablocks-block-content-box-shadow:
             0 32px 128px rgba(0, 0, 0, 0.1),
@@ -32,7 +24,10 @@
     }
 
     * {
-        @include variation( default, novablocks-current, current );
+        --novablocks-bg-color: var(--sm-current-bg-color);
+        --novablocks-accent-color: var(--sm-current-accent-color);
+        --novablocks-fg1-color: var(--sm-current-fg1-color);
+        --novablocks-fg2-color: var(--sm-current-fg2-color);
     }
 
     .novablocks-hero__inner-container,
@@ -70,29 +65,5 @@
 
     .novablocks-advanced-gallery__grid-item-description {
         font-size: 70%;
-    }
-
-    .novablocks-block {
-
-        .c-headline__secondary {
-            color: var(--novablocks-block-accent-color);
-        }
-
-        .wp-block-button.is-style-text .wp-block-button__link {
-            --theme-button-text-color: var(--novablocks-block-accent-color);
-            --theme-button-hover-text-color: var(--novablocks-block-accent-color);
-        }
-    }
-
-    .novablocks-block__content {
-
-        .c-headline__secondary {
-            color: var(--novablocks-block-content-accent-color);
-        }
-
-        .wp-block-button.is-style-text .wp-block-button__link {
-            --theme-button-text-color: var(--novablocks-block-content-accent-color);
-            --theme-button-hover-text-color: var(--novablocks-block-content-accent-color);
-        }
     }
 }

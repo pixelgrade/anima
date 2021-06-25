@@ -1,4 +1,5 @@
 import GlobalService from "./globalService";
+import { getColorSetClasses } from '../utils';
 
 export default class Hero {
 
@@ -25,7 +26,23 @@ export default class Hero {
 			this.updateOnScroll();
 		});
 
-		const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+		let indicator = this.element.querySelectorAll( '.novablocks-hero__indicator' );
+		let nextSibling = this.element.nextElementSibling;
+		let next = nextSibling.querySelectorAll( '.novablocks-block' );
+
+		next = !! next && next.length ? next[0] : nextSibling;
+
+		if ( !! indicator && indicator.length ) {
+
+			let colorClasses = getColorSetClasses( next );
+
+			colorClasses.forEach( className => {
+				indicator[0].classList.add( className );
+			} );
+
+		}
+
+		const mediaQuery = window.matchMedia( '(prefers-reduced-motion: reduce)' );
 
 		mediaQuery.addListener( () => {
 			this.reduceMotion = mediaQuery.matches;
@@ -56,6 +73,7 @@ export default class Hero {
 		const { scrollY } = GlobalService.getProps();
 
 		this.box = this.element.getBoundingClientRect();
+
 		this.view = {
 			left: this.box.left,
 			top: this.box.top + scrollY,

@@ -1,0 +1,93 @@
+.novablocks-header--mobile {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 900;
+
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: var(--theme-spacing-fluid-medium) var(--theme-wrapper-sides-spacing);
+
+    --shadow-color: rgba(0, 0, 0, 0.25);
+    --shadow-y-offset: 4px;
+    --shadow-blur: 4px;
+
+    .menu-item--cart {
+        display: flex;
+
+        position: absolute;
+        top: 50%;
+        right: calc( var(--theme-wrapper-sides-spacing) + .5em );
+
+        transform: translateY(-50%);
+
+        > a {
+            color: currentColor;
+            transition: color .3s ease-out;
+        }
+    }
+}
+
+@include above(lap) {
+
+    .novablocks-header__inner-container {
+        padding-top: 0 !important;
+    }
+
+    .novablocks-header--mobile {
+        display: none;
+    }
+}
+
+@include below(lap) {
+
+    .novablocks-header--main:before {
+        opacity: 0.95;
+    }
+
+    .novablocks-header--main .site-branding {
+        display: none !important;
+    }
+
+    .menu-item--cart,
+    .menu-item--dark-mode,
+    .menu-item--search {
+
+        .novablocks-header--main .menu:not(.menu--buttons) & {
+            display: none !important;
+        }
+
+    }
+
+    .novablocks-navigation {
+
+        .sub-menu {
+            margin-left: calc(var(--theme-wrapper-sides-spacing) * -1);
+            margin-right: calc(var(--theme-wrapper-sides-spacing) * -1);
+
+            > li {
+                padding-left: var(--theme-wrapper-sides-spacing);
+                padding-right: var(--theme-wrapper-sides-spacing);
+            }
+        }
+    }
+
+    .novablocks-header__inner-container,
+    .novablocks-header__buttons-menu {
+
+        .c-menu-toggle__checkbox:checked ~ .novablocks-header & {
+            opacity: 1;
+            transition: opacity .1s $easeOut .25s;
+        }
+
+        .c-menu-toggle__checkbox:not(:checked) ~ .novablocks-header & {
+            opacity: 0;
+            transition: opacity .075s $easeOut 0s;
+        }
+    }
+}

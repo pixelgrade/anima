@@ -101,15 +101,12 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _blocks_button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
 /* harmony import */ var _blocks_button__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_blocks_button__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _blocks_group__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
-/* harmony import */ var _blocks_group__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_blocks_group__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _blocks_menu_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(12);
-/* harmony import */ var _blocks_menu_item__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_blocks_menu_item__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _blocks_paragraph__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(13);
-/* harmony import */ var _blocks_paragraph__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_blocks_paragraph__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _blocks_separator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(14);
-/* harmony import */ var _blocks_separator__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_blocks_separator__WEBPACK_IMPORTED_MODULE_4__);
-
+/* harmony import */ var _blocks_menu_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(12);
+/* harmony import */ var _blocks_menu_item__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_blocks_menu_item__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _blocks_paragraph__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(13);
+/* harmony import */ var _blocks_paragraph__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_blocks_paragraph__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _blocks_separator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(14);
+/* harmony import */ var _blocks_separator__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_blocks_separator__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
@@ -139,25 +136,7 @@ wp.domReady(function () {
 });
 
 /***/ }),
-/* 11 */
-/***/ (function(module, exports) {
-
-wp.domReady(function () {
-  wp.blocks.registerBlockStyle('core/group', {
-    name: 'dark',
-    label: 'Dark'
-  });
-  wp.blocks.registerBlockStyle('core/group', {
-    name: 'darker',
-    label: 'Darker'
-  });
-  wp.blocks.registerBlockStyle('core/group', {
-    name: 'accent',
-    label: 'Accent'
-  });
-});
-
-/***/ }),
+/* 11 */,
 /* 12 */
 /***/ (function(module, exports) {
 

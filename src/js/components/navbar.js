@@ -6,8 +6,6 @@ const MENU_ITEM_WITH_CHILDREN = '.menu-item-has-children, .page_item_has_childre
 const SUBMENU = '.sub-menu, .children';
 const SUBMENU_LEFT_CLASS = 'has-submenu-left';
 const HOVER_CLASS = 'hover';
-const SEARCH_OVERLAY_OPEN_CLASS = 'has-search-overlay';
-const ESC_KEY_CODE = 27;
 
 export default class Navbar {
 
@@ -23,10 +21,6 @@ export default class Navbar {
 		this.onResize();
 		this.initialized = true;
 		GlobalService.registerOnResize( this.onResize.bind( this ) );
-
-		$( document ).on( 'click', '.is-search-button a', this.openSearchOverlay );
-		$( document ).on( 'click', '.c-search-overlay__cancel', this.closeSearchOverlay );
-		$( document ).on( 'keydown', this.closeSearchOverlayOnEsc );
 	}
 
 	onResize() {
@@ -94,24 +88,6 @@ export default class Navbar {
 		$link.addClass( 'active' ).parent().addClass( HOVER_CLASS );
 		$siblings.removeClass( HOVER_CLASS );
 		$siblings.find( '.active' ).removeClass( 'active' );
-	}
-
-	openSearchOverlay( e ) {
-		e.preventDefault();
-		$('body').toggleClass(SEARCH_OVERLAY_OPEN_CLASS);
-		$('.c-search-overlay__form .search-field').focus();
-	}
-
-	closeSearchOverlayOnEsc( e ) {
-		if ( e.keyCode === ESC_KEY_CODE ) {
-			$('body').removeClass(SEARCH_OVERLAY_OPEN_CLASS);
-			$('.c-search-overlay__form .search-field').blur();
-		}
-	}
-
-	closeSearchOverlay( e ) {
-		e.preventDefault();
-		$('body').removeClass(SEARCH_OVERLAY_OPEN_CLASS);
 	}
 
 	bindClick() {

@@ -12,7 +12,7 @@
 
 
     a {
-        color: var(--current-dark-primary);
+        color: var(--sm-current-fg2-color);
         padding-bottom: .5em;
         padding-top: .5em;
 
@@ -21,12 +21,12 @@
         border-bottom: .1em solid transparent;
 
         &.active {
-            color: var(--current-color-primary);
+            color: var(--sm-current-accent-color);
             border-bottom: .1em solid currentColor;
         }
 
         &:hover {
-            color: var(--current-color-primary);
+            color: var(--sm-current-accent-color);
             border-bottom: .1em solid currentColor;
         }
     }
@@ -88,7 +88,7 @@
     }
 
     select {
-        color: var(--current-dark-secondary);
+        color: var(--sm-current-fg1-color);
 
         @include select;
 
@@ -106,7 +106,7 @@
         box-shadow: none;
 
         @include below(tablet) {
-            border: 1px solid var(--current-light-secondary);
+            border: 1px solid var(--sm-current-bg-color);
             padding: var(--theme-spacing);
         }
     }

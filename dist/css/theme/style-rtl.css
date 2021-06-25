@@ -1,12 +1,11 @@
 figure > :not(:first-child) {
-  --element-spacing: var(--theme-spacing-tiny);
-  margin-top: var(--element-spacing); }
+  margin-top: var(--theme-spacing-tiny); }
 
 pre,
 code {
   border: 1px solid;
   border-radius: 0.2em;
-  background: var(--current-light-secondary); }
+  background: var(--sm-current-bg-color); }
 
 pre {
   padding: 1em; }
@@ -54,9 +53,8 @@ html:not(.wf-active) {
     opacity: 0; }
 
 .novablocks-media__image {
-  background-color: var(--sm-light-tertiary); }
-  .block-is-moderate .novablocks-media__image {
-    background-color: var(--sm-light-primary); }
+  background-color: var(--sm-current-bg-color);
+  border: 2px solid var(--sm-current-color-3); }
 
 .entry-content > :not(.wp-block-group):not(.novablocks-media):not(.disabled-avoid-fout),
 [class*="__inner-container"]:not(.novablocks-hero__inner-container) > :not(.wp-block-group):not(.novablocks-media):not(.disabled-avoid-fout) {
@@ -83,7 +81,7 @@ body:not(.has-loaded) .c-comments-toggle__checkbox + .c-comments-toggle__label ~
 
 /* Pages */
 body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-results) {
-  background-color: var(--current-light-tertiary); }
+  background-color: var(--sm-current-bg-color); }
   body.archive:not(.woocommerce-page) .novablocks-media__inner-container, body.blog .novablocks-media__inner-container, body.search:not(.search-no-results) .novablocks-media__inner-container {
     text-align: center; }
 
@@ -114,15 +112,14 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
   --overlap-header-size: 10em; }
 
 .single.single-post {
-  background: var(--current-light-tertiary); }
+  background: var(--sm-current-bg-color); }
 
 .single .site-content {
-  background: var(--current-light-primary); }
+  background-color: var(--sm-current-bg-color); }
 
 .single .hentry > :not(:first-child),
 .page .hentry > :not(:first-child) {
-  --element-spacing: var(--theme-spacing-large);
-  margin-top: var(--element-spacing); }
+  margin-top: var(--theme-spacing-large); }
 
 .single .site-content,
 .page .site-content {
@@ -138,8 +135,7 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
 
 .single .entry-header > :not(:first-child),
 .page .entry-header > :not(:first-child) {
-  --element-spacing: var(--theme-spacing-fluid-xsmall);
-  margin-top: var(--element-spacing); }
+  margin-top: var(--theme-spacing-fluid-xsmall); }
 
 .single .entry-header .entry-thumbnail,
 .page .entry-header .entry-thumbnail {
@@ -157,14 +153,13 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
   background-color: var(--current-light-secondary);
   width: 100%; }
 
-.page:not(.has-no-spacing-top):not(.first-block-is-media) .site-content,
-.single-product:not(.has-no-spacing-top):not(.first-block-is-media) .site-content {
-  padding-top: var(--theme-spacing-fluid-large); }
+body:not(.has-no-spacing-top) .site-content {
+  padding-top: var(--theme-spacing-fluid-large, 0); }
 
 @media only screen and (min-width: 1000px) {
-  .single .site-header:not(.site-header--scrolled) {
+  .single .novablocks-header:not(.novablocks-header--scrolled) {
     background-color: transparent; }
-    .single .site-header:not(.site-header--scrolled):after {
+    .single .novablocks-header:not(.novablocks-header--scrolled):after {
       opacity: 0; } }
 
 .post-password-form input[type='submit'] {
@@ -190,9 +185,9 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background-color: var(--current-light-tertiary);
+  background-color: var(--sm-current-bg-color);
   z-index: 1;
-  padding-bottom: var(--overlap-header-size, 1em); }
+  padding-bottom: var(--theme-spacing-large); }
   .article-header .entry-header:before {
     content: '';
     position: absolute;
@@ -213,7 +208,7 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
   .article-header .entry-header .cat-links {
     --current-font-weight: 700; }
     .article-header .entry-header .cat-links a {
-      color: var(--current-color-primary);
+      color: var(--sm-current-accent-color);
       text-decoration: none; }
   .article-header .entry-header .entry-title {
     --current-font-weight: 800;
@@ -277,4 +272,4 @@ body.archive:not(.woocommerce-page), body.blog, body.search:not(.search-no-resul
 .comment__header a {
   text-decoration-color: transparent; }
   .comment__header a:hover {
-    text-decoration-color: var(--current-color-primary); }
+    text-decoration-color: var(--sm-current-accent-color); }

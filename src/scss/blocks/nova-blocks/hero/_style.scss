@@ -1,6 +1,7 @@
 .novablocks-hero {
 
     .novablocks-u-content-padding {
+
         @include below(tablet) {
             padding-top: var(--theme-spacing-xxl);
             padding-bottom: var(--theme-spacing-xxl);
@@ -15,6 +16,7 @@
 .novablocks-hero__inner-container {
 
     > .c-headline {
+
         .c-headline__primary,
         .c-headline__secondary {
             opacity: 0;
@@ -22,6 +24,7 @@
     }
 
     > .c-headline + .c-headline {
+
         .c-headline__primary,
         .c-headline__secondary {
             opacity: 1;
@@ -33,7 +36,7 @@
     }
 
     .c-separator__symbol {
-        color: var(--current-color-primary);
+        color: var(--sm-current-accent-color);
     }
 
     > .wp-block-separator:not(:first-child),
@@ -50,16 +53,13 @@
     width: 160px;
     height: 50px;
     top: 100%;
-    color: var(--current-light-primary);
+    color: var(--sm-current-bg-color);
+    background: none;
 
     z-index: 1;
 
     &:after {
-        color: var(--current-dark-primary);
-    }
-
-    .has-moderate-media-card-after-hero & {
-        color: var(--current-light-tertiary);
+        color: var(--sm-current-fg2-color);
     }
 }
 

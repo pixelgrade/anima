@@ -77,8 +77,7 @@
 .wp-block-latest-comments {
   list-style: none; }
   .wp-block-latest-comments > :not(:first-child) {
-    --element-spacing: var(--theme-spacing-medium);
-    margin-top: var(--element-spacing); }
+    margin-top: var(--theme-spacing-medium); }
 
 .wp-block-latest-comments__comment {
   display: flex;
@@ -425,9 +424,6 @@ ol {
 .wp-block-jetpack-subscriptions__use-newline button {
   width: 100%; }
 
-.novablocks-u-content-padding {
-  padding-top: calc(var(--site-header-height) + var(--novablocks-content-padding)); }
-
 @media only screen and (min-width: 768px) {
   .novablocks-block__content {
     --novablocks-block-content-padding: var(--novablocks-spacing); } }
@@ -436,17 +432,8 @@ ol {
 .block-is-highlighted + .block-is-highlighted[class] {
   padding-top: 0; }
 
-.novablocks-announcement-bar[class*="is-style"] {
-  --novablocks-announcement-color: var(--theme-light-primary); }
-
-.novablocks-announcement-bar:not([class*="is-style-"]), .novablocks-announcement-bar.is-style-accent {
-  --novablocks-announcement-background-color: var(--theme-color-primary); }
-
-.novablocks-announcement-bar.is-style-alternative {
-  --novablocks-announcement-background-color: var(--theme-color-secondary); }
-
-.novablocks-announcement-bar a:hover {
-  color: currentColor; }
+.novablocks-grid__column:first-child .novablocks-grid__area:first-child:last-child {
+  top: calc( var(--novablocks-grid-spacing) * var(--novablocks-grid-spacing-modifier, 1) + var(--novablocks-header-height, 0)); }
 
 .nova-food-menu {
   --block-content-start: ws;
@@ -461,6 +448,7 @@ ol {
 .nova-food-menu-item__title {
   --theme-heading-5-font-weight: 700; }
   .nova-food-menu-item__title .item-title {
+    color: inherit;
     --font-size: var(--theme-heading-4-font-size);
     font-size: var(--final-font-size);
     --current-font-family: var(--theme-heading-4-font-family);
@@ -493,7 +481,7 @@ ol {
     border-width: .15em; }
 
 .item-title {
-  background-color: var(--current-light-primary); }
+  background-color: var(--sm-current-bg-color); }
 
 .wp-block-novablocks-menu-food-item.is-style-rounded {
   --item-border-radius: 0.4em; }
@@ -520,11 +508,134 @@ ol {
   .novablocks-map__marker-name[class][class][class] {
     font-size: 16px; }
 
-@media only screen and (min-width: 1000px) {
-  .site-header ul.menu,
-  .site-header .menu > ul {
+.novablocks-header--mobile {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--theme-spacing-fluid-medium) var(--theme-wrapper-sides-spacing);
+  --shadow-color: rgba(0, 0, 0, 0.25);
+  --shadow-y-offset: 4px;
+  --shadow-blur: 4px; }
+  .novablocks-header--mobile .menu-item--cart {
     display: flex;
-    flex-wrap: wrap; } }
+    position: absolute;
+    top: 50%;
+    left: calc( var(--theme-wrapper-sides-spacing) + .5em);
+    transform: translateY(-50%); }
+    .novablocks-header--mobile .menu-item--cart > a {
+      color: currentColor;
+      transition: color .3s ease-out; }
+
+@media only screen and (min-width: 1000px) {
+  .novablocks-header__inner-container {
+    padding-top: 0 !important; }
+  .novablocks-header--mobile {
+    display: none; } }
+
+@media not screen and (min-width: 1000px) {
+  .novablocks-header--main:before {
+    opacity: 0.95; }
+  .novablocks-header--main .site-branding {
+    display: none !important; }
+  .novablocks-header--main .menu:not(.menu--buttons) .menu-item--cart, .novablocks-header--main .menu:not(.menu--buttons)
+  .menu-item--dark-mode, .novablocks-header--main .menu:not(.menu--buttons)
+  .menu-item--search {
+    display: none !important; }
+  .novablocks-navigation .sub-menu {
+    margin-right: calc(var(--theme-wrapper-sides-spacing) * -1);
+    margin-left: calc(var(--theme-wrapper-sides-spacing) * -1); }
+    .novablocks-navigation .sub-menu > li {
+      padding-right: var(--theme-wrapper-sides-spacing);
+      padding-left: var(--theme-wrapper-sides-spacing); }
+  .c-menu-toggle__checkbox:checked ~ .novablocks-header .novablocks-header__inner-container, .c-menu-toggle__checkbox:checked ~ .novablocks-header
+  .novablocks-header__buttons-menu {
+    opacity: 1;
+    transition: opacity 0.1s cubic-bezier(0, 0, 0.58, 1) 0.25s; }
+  .c-menu-toggle__checkbox:not(:checked) ~ .novablocks-header .novablocks-header__inner-container, .c-menu-toggle__checkbox:not(:checked) ~ .novablocks-header
+  .novablocks-header__buttons-menu {
+    opacity: 0;
+    transition: opacity 0.075s cubic-bezier(0, 0, 0.58, 1) 0s; } }
+
+.c-menu-toggle,
+.c-menu-toggle__slice {
+  transition: var(--theme-transition); }
+
+.c-menu-toggle__slice {
+  transition-property: transform; }
+
+.c-menu-toggle {
+  margin: 0 !important;
+  background: none !important;
+  transition-property: color; }
+  .c-menu-toggle__checkbox:checked ~ .c-menu-toggle .c-menu-toggle__slice--top {
+    transform: rotate(-45deg); }
+  .c-menu-toggle__checkbox:checked ~ .c-menu-toggle .c-menu-toggle__slice--middle {
+    opacity: 0; }
+  .c-menu-toggle__checkbox:checked ~ .c-menu-toggle .c-menu-toggle__slice--bottom {
+    transform: rotate(45deg); }
+
+@media only screen and (min-width: 1000px) {
+  .novablocks-header--main:not(.novablocks-header--sticky) {
+    position: absolute !important;
+    top: 0 !important; } }
+
+@media not screen and (min-width: 1000px) {
+  .novablocks-header--main:not(.novablocks-header--sticky) {
+    margin-top: 0 !important; } }
+
+.novablocks-header:not(.novablocks-header--ready) {
+  opacity: 0; }
+
+@media only screen and (min-width: 1000px) {
+  .novablocks-header.novablocks-header--transparent:not(.novablocks-header--sticky) {
+    --header-background-opacity: 0; } }
+
+.novablocks-header--mobile.novablocks-header--transparent:before {
+  --header-background-opacity: 0; }
+
+@media only screen and (min-width: 1000px) {
+  .novablocks-header--sticky:not(.novablocks-header--main) {
+    margin-top: 0 !important; } }
+
+.novablocks-header--sticky.novablocks-header--main {
+  position: fixed !important;
+  top: 0 !important; }
+
+.novablocks-header__buttons-menu {
+  position: absolute;
+  top: 0;
+  left: 0; }
+  .novablocks-header__buttons-menu .menu {
+    display: flex;
+    align-items: center; }
+  @media only screen and (min-width: 1000px) {
+    .novablocks-header__buttons-menu {
+      display: none; } }
+
+.menu-item-label {
+  background-color: var(--sm-current-accent-color);
+  background-image: linear-gradient(to left, transparent, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1));
+  color: var(--sm-current-bg-color);
+  font-size: 0.5em;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: 1em;
+  padding: .25em .9em;
+  vertical-align: middle;
+  margin-right: 0.5em; }
+
+@media not screen and (min-width: 1000px) {
+  .novablocks-header-row {
+    --sm-current-bg-color: inherit;
+    --sm-current-accent-color: inherit;
+    --sm-current-fg1-color: inherit;
+    --sm-current-fg2-color: inherit; } }
 
 @media not screen and (min-width: 768px) {
   .novablocks-hero .novablocks-u-content-padding {
@@ -546,7 +657,7 @@ ol {
   opacity: 0; }
 
 .novablocks-hero__inner-container .c-separator__symbol {
-  color: var(--current-color-primary); }
+  color: var(--sm-current-accent-color); }
 
 .novablocks-hero__inner-container > .wp-block-separator:not(:first-child),
 .novablocks-hero__inner-container > .wp-block-separator[class] + * {
@@ -559,12 +670,11 @@ ol {
   width: 160px;
   height: 50px;
   top: 100%;
-  color: var(--current-light-primary);
+  color: var(--sm-current-bg-color);
+  background: none;
   z-index: 1; }
   .novablocks-hero__indicator:not(.novablocks-hero__indicator--middle):after {
-    color: var(--current-dark-primary); }
-  .has-moderate-media-card-after-hero .novablocks-hero__indicator:not(.novablocks-hero__indicator--middle) {
-    color: var(--current-light-tertiary); }
+    color: var(--sm-current-fg2-color); }
 
 @media not screen and (min-width: 1000px) {
   .c-bully {
@@ -575,7 +685,7 @@ ol {
   align-items: center;
   justify-content: center; }
   .novablocks-media.novablocks-media--no-thumbnail .novablocks-media__image path {
-    fill: var(--current-color-primary); }
+    fill: var(--sm-current-accent-color); }
 
 .novablocks-media > .wp-block-group__inner-container {
   padding-top: 1px; }
@@ -635,7 +745,7 @@ ol {
     object-fit: contain; }
 
 .novablocks-media--blog[class] {
-  --novablocks-block-background-color: var(--current-light-tertiary); }
+  --novablocks-block-background-color: var(--sm-current-bg-color); }
   .novablocks-media--blog[class] .novablocks-media__content {
     flex-basis: calc(50% - var(--novablocks-media-spacing)); }
   .novablocks-media--blog[class] .novablocks-media__aside {
@@ -646,72 +756,160 @@ ol {
     height: 100%;
     min-height: 400px; }
 
-.wp-block-novablocks-navigation {
-  --font-size: var(--theme-navigation-font-size);
-  font-size: var(--final-font-size);
-  --current-font-family: var(--theme-navigation-font-family);
-  --current-font-weight: var(--theme-navigation-font-weight);
-  --current-font-style: var(--theme-navigation-font-style);
-  --current-line-height: var(--theme-navigation-line-height);
-  --current-letter-spacing: var(--theme-navigation-letter-spacing);
-  --current-text-transform: var(--theme-navigation-text-transform); }
-  @media not screen and (min-width: 1000px) {
-    .wp-block-novablocks-navigation {
-      --final-font-size: 18px; } }
+.novablocks-navigation {
+  --theme-button-y-padding: .25em;
+  --theme-button-x-padding: 1em;
+  --theme-button-text-color: var(--sm-current-bg-color);
+  --theme-button-background-color: var(--sm-current-fg1-color);
+  --theme-button-border-color: var(--sm-current-fg1-color);
+  --theme-button-hover-text-color: var(--sm-current-fg1-color);
+  --theme-button-hover-background-color: transparent;
+  --theme-button-hover-border-color: var(--sm-current-fg1-color); }
+  @media only screen and (min-width: 1000px) {
+    .novablocks-navigation > ul.menu > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only),
+    .novablocks-navigation > .menu > ul > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) {
+      position: relative; }
+      .novablocks-navigation > ul.menu > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) > a:before,
+      .novablocks-navigation > .menu > ul > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) > a:before {
+        content: '';
+        position: absolute;
+        bottom: var(--novablocks-navigation-item-bottom-margin);
+        width: 100%;
+        height: 3px;
+        background: currentColor;
+        transform: scale3d(0, 1, 1);
+        transform-origin: left;
+        transition: var(--novablocks-transition);
+        transition-property: transform;
+        will-change: transform;
+        -webkit-backface-visibility: hidden; }
+      .novablocks-navigation > ul.menu > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) > a:hover:before,
+      .novablocks-navigation > .menu > ul > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) > a:hover:before {
+        transform: scale3d(1, 1, 1);
+        transform-origin: right; }
+      .novablocks-navigation > ul.menu > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only).menu-item-has-children > a:before,
+      .novablocks-navigation > .menu > ul > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only).menu-item-has-children > a:before {
+        width: calc(100% - 1.25em);
+        left: 1.25em; }
+    .novablocks-navigation > ul.menu > li[class*="current"]:not(.menu-item-home) > a:before,
+    .novablocks-navigation > .menu > ul > li[class*="current"]:not(.menu-item-home) > a:before {
+      transform: scale3d(1, 1, 1);
+      transform-origin: right; }
+    .novablocks-navigation > ul.menu > li[class*="current"]:not(.menu-item-home) > a:hover:before,
+    .novablocks-navigation > .menu > ul > li[class*="current"]:not(.menu-item-home) > a:hover:before {
+      transform: scale3d(0, 1, 1);
+      transform-origin: left; } }
 
-.wp-block-novablocks-navigation ul.menu a,
-.wp-block-novablocks-navigation .menu > ul a {
-  padding: .75em 0; }
+.novablocks-navigation ul.menu > .is-external-link,
+.novablocks-navigation .menu > ul > .is-external-link {
+  position: relative; }
+  .novablocks-navigation ul.menu > .is-external-link > a:after,
+  .novablocks-navigation .menu > ul > .is-external-link > a:after {
+    content: "";
+    position: absolute;
+    left: auto;
+    width: 0;
+    height: 0;
+    margin-right: 5px;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    border-bottom: 5px solid currentColor;
+    transform: rotate(-45deg);
+    opacity: .5; }
+
+.novablocks-navigation ul.menu > .is-cta-button,
+.novablocks-navigation .menu > ul > .is-cta-button {
+  display: flex;
+  align-items: center; }
+  .novablocks-navigation ul.menu > .is-cta-button > a,
+  .novablocks-navigation .menu > ul > .is-cta-button > a {
+    padding: var(--theme-button-padding);
+    border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
+    border-radius: var(--theme-button-border-radius);
+    background-color: var(--current-button-background-color);
+    color: var(--current-button-text-color);
+    --font-size: var(--theme-button-font-size);
+    font-size: var(--final-font-size);
+    --current-font-family: var(--theme-button-font-family);
+    --current-font-weight: var(--theme-button-font-weight);
+    --current-font-style: var(--theme-button-font-style);
+    --current-line-height: var(--theme-button-line-height);
+    --current-letter-spacing: var(--theme-button-letter-spacing);
+    --current-text-transform: var(--theme-button-text-transform);
+    background-color: transparent;
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+    overflow: hidden;
+    transition: var(--theme-button-transition);
+    --current-button-background-color: var(--theme-button-background-color);
+    --current-button-border-color: var(--theme-button-border-color);
+    --current-button-text-color: var(--theme-button-text-color);
+    --current-button-transition: var(--theme-button-transition);
+    margin-bottom: 0; }
+    .novablocks-navigation ul.menu > .is-cta-button > a:before,
+    .novablocks-navigation .menu > ul > .is-cta-button > a:before {
+      content: '';
+      position: absolute;
+      top: calc( -1 * var(--theme-button-border-width));
+      left: calc( -1 * var(--theme-button-border-width));
+      bottom: calc( -1 * var(--theme-button-border-width));
+      right: calc( -1 * var(--theme-button-border-width));
+      z-index: -1;
+      will-change: transform;
+      -webkit-backface-visibility: hidden;
+      transition: var(--current-button-transition);
+      transition-property: transform; }
+    .novablocks-navigation ul.menu > .is-cta-button > a:before,
+    .novablocks-navigation .menu > ul > .is-cta-button > a:before {
+      transform: scale3d(1, 1, 1);
+      transform-origin: left;
+      background-color: var(--theme-button-background-color); }
+    .novablocks-navigation ul.menu > .is-cta-button > a:not([disabled]):hover:before,
+    .novablocks-navigation .menu > ul > .is-cta-button > a:not([disabled]):hover:before {
+      transform: scale3d(0, 1, 1); }
+    @media not screen and (min-width: 1000px) {
+      .novablocks-navigation ul.menu > .is-cta-button > a,
+      .novablocks-navigation .menu > ul > .is-cta-button > a {
+        width: 100%;
+        margin: .75em 0;
+        text-align: center; } }
+    .novablocks-navigation ul.menu > .is-cta-button > a:hover,
+    .novablocks-navigation .menu > ul > .is-cta-button > a:hover {
+      --current-button-background-color: var(--theme-button-hover-background-color);
+      --current-button-border-color: var(--theme-button-hover-border-color);
+      --current-button-text-color: var(--theme-button-hover-text-color);
+      --current-button-transition: var(--theme-button-hover-transition); }
 
 @media only screen and (min-width: 1000px) {
-  .wp-block-novablocks-navigation {
-    --header-links-bottom-spacing: .5em; }
-    .wp-block-novablocks-navigation ul.menu,
-    .wp-block-novablocks-navigation .menu > ul {
-      margin-right: calc( var(--theme-header-links-spacing) * -1); }
-      .wp-block-novablocks-navigation ul.menu a,
-      .wp-block-novablocks-navigation .menu > ul a {
-        display: block;
-        padding: 0.75em 0;
-        color: inherit;
-        text-decoration: none; }
-      .wp-block-novablocks-navigation ul.menu > li,
-      .wp-block-novablocks-navigation .menu > ul > li {
-        margin-right: var(--theme-header-links-spacing); }
-        .wp-block-novablocks-navigation ul.menu > li.social-menu-item, .wp-block-novablocks-navigation ul.menu > li.is-color-scheme-switcher-button, .wp-block-novablocks-navigation ul.menu > li.is-search-button,
-        .wp-block-novablocks-navigation .menu > ul > li.social-menu-item,
-        .wp-block-novablocks-navigation .menu > ul > li.is-color-scheme-switcher-button,
-        .wp-block-novablocks-navigation .menu > ul > li.is-search-button {
-          margin-right: calc( var(--theme-header-links-spacing) / var(--icons-horizontal-spacing-reducer)); }
-      .wp-block-novablocks-navigation ul.menu .customize-partial-edit-shortcut + > li:not(:first-child),
-      .wp-block-novablocks-navigation .menu > ul .customize-partial-edit-shortcut + > li:not(:first-child) {
-        margin-right: 0; }
-      .wp-block-novablocks-navigation ul.menu > li > a,
-      .wp-block-novablocks-navigation .menu > ul > li > a {
-        padding-bottom: 0.25em;
-        margin-bottom: var(--header-links-bottom-spacing); }
-        .wp-block-novablocks-navigation ul.menu > li > a:after,
-        .wp-block-novablocks-navigation .menu > ul > li > a:after {
-          position: absolute;
-          left: 0; }
-      .wp-block-novablocks-navigation ul.menu li:hover > a,
-      .wp-block-novablocks-navigation .menu > ul li:hover > a {
-        border-color: currentColor; }
-        .wp-block-novablocks-navigation ul.menu li:hover > a:after,
-        .wp-block-novablocks-navigation .menu > ul li:hover > a:after {
-          opacity: 1; }
-    .wp-block-novablocks-navigation .sub-menu li a,
-    .wp-block-novablocks-navigation .children li a {
+  .novablocks-navigation {
+    --font-size: 18;
+    --novablocks-navigation-item-bottom-margin: .5em; }
+    .novablocks-navigation ul.menu a,
+    .novablocks-navigation .menu > ul a {
+      display: block;
+      color: inherit;
+      text-decoration: none; }
+    .novablocks-navigation ul.menu .customize-partial-edit-shortcut + > li:not(:first-child),
+    .novablocks-navigation .menu > ul .customize-partial-edit-shortcut + > li:not(:first-child) {
+      margin-right: 0; }
+    .novablocks-navigation ul.menu > li > a,
+    .novablocks-navigation .menu > ul > li > a {
+      padding-bottom: calc( var(--novablocks-navigation-item-padding-y) - var(--novablocks-navigation-item-bottom-margin));
+      margin-bottom: var(--novablocks-navigation-item-bottom-margin); }
+    .novablocks-navigation ul.menu li:hover > a,
+    .novablocks-navigation .menu > ul li:hover > a {
+      border-color: currentColor; }
+      .novablocks-navigation ul.menu li:hover > a:after,
+      .novablocks-navigation .menu > ul li:hover > a:after {
+        opacity: 1; }
+    .novablocks-navigation .sub-menu li a,
+    .novablocks-navigation .children li a {
       border: 0;
       padding-right: 1.25em;
       padding-left: 1.25em; } }
 
-.ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button {
-  --theme-button-hover-background-color: var(--current-light-primary);
-  --theme-button-hover-text-color: var(--current-dark-primary);
-  --theme-button-background-color: var(--current-dark-primary);
-  --theme-button-border-color: var(--current-dark-primary);
-  --theme-button-text-color: var(--current-light-primary);
+.ot-dtp-picker[class] .ot-dtp-picker-form .ot-dtp-picker-button {
   padding: var(--theme-button-padding);
   border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
   border-radius: var(--theme-button-border-radius);
@@ -722,7 +920,7 @@ ol {
   overflow: hidden;
   transition: var(--current-button-transition);
   color: var(--current-button-text-color); }
-  .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button:before {
+  .ot-dtp-picker[class] .ot-dtp-picker-form .ot-dtp-picker-button:before {
     content: '';
     position: absolute;
     top: calc( -1 * var(--theme-button-border-width));
@@ -734,52 +932,28 @@ ol {
     -webkit-backface-visibility: hidden;
     transition: var(--current-button-transition);
     transition-property: transform; }
-  .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button:before {
+  .ot-dtp-picker[class] .ot-dtp-picker-form .ot-dtp-picker-button:before {
     transform: scale3d(1, 1, 1);
     transform-origin: left;
     background-color: var(--theme-button-background-color); }
-  .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button:not([disabled]):hover:before {
+  .ot-dtp-picker[class] .ot-dtp-picker-form .ot-dtp-picker-button:not([disabled]):hover:before {
     transform: scale3d(0, 1, 1); }
-  .ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button:hover {
-    color: var(--current-button-hover-text-color); }
+
+.ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button {
+  --theme-button-hover-background-color: var(--sm-current-bg-color);
+  --theme-button-hover-border-color: var(--sm-current-bg-color);
+  --theme-button-hover-text-color: var(--sm-current-fg2-color);
+  --theme-button-background-color: var(--sm-current-fg2-color);
+  --theme-button-border-color: var(--sm-current-fg2-color);
+  --theme-button-text-color: var(--sm-current-bg-color); }
 
 .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button {
-  --theme-button-hover-background-color: var(--current-dark-primary);
-  --theme-button-hover-text-color: var(--current-light-primary);
-  --theme-button-background-color: var(--current-light-primary);
-  --theme-button-border-color: var(--current-light-primary);
-  --theme-button-hover-border-color: var(--current-light-primary);
-  --theme-button-text-color: var(--current-dark-primary);
-  padding: var(--theme-button-padding);
-  border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
-  border-radius: var(--theme-button-border-radius);
-  background-color: transparent;
-  transform: translateZ(0);
-  will-change: transform;
-  backface-visibility: hidden;
-  overflow: hidden;
-  transition: var(--current-button-transition);
-  color: var(--current-button-text-color); }
-  .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button:before {
-    content: '';
-    position: absolute;
-    top: calc( -1 * var(--theme-button-border-width));
-    left: calc( -1 * var(--theme-button-border-width));
-    bottom: calc( -1 * var(--theme-button-border-width));
-    right: calc( -1 * var(--theme-button-border-width));
-    z-index: -1;
-    will-change: transform;
-    -webkit-backface-visibility: hidden;
-    transition: var(--current-button-transition);
-    transition-property: transform; }
-  .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button:before {
-    transform: scale3d(1, 1, 1);
-    transform-origin: left;
-    background-color: var(--theme-button-background-color); }
-  .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button:not([disabled]):hover:before {
-    transform: scale3d(0, 1, 1); }
-  .ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button:hover {
-    color: var(--current-button-hover-text-color); }
+  --theme-button-background-color: var(--sm-current-bg-color);
+  --theme-button-border-color: var(--sm-current-fg2-color);
+  --theme-button-text-color: var(--sm-current-fg2-color);
+  --theme-button-hover-background-color: var(--sm-current-fg2-color);
+  --theme-button-hover-border-color: var(--sm-current-fg2-color);
+  --theme-button-hover-text-color: var(--sm-current-bg-color); }
 
 .ot-dtp-picker input[type="submit"][class][class] {
   --font-size: var(--theme-button-font-size);
@@ -797,12 +971,10 @@ ol {
   transition: var(--theme-transition);
   transition-property: opacity; }
   .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] {
-    border-color: var(--current-dark-secondary); }
+    border-color: var(--sm-current-fg1-color); }
     .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link {
-      color: var(--current-dark-secondary); }
-      .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link:before {
-        color: currentColor; }
-      .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link:after {
+      color: var(--sm-current-fg1-color); }
+      .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link:before, .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-selector[class][class] .ot-dtp-picker-selector-link:after {
         color: currentColor; }
   .novablocks-opentable.novablocks-opentable__wide[class] .ot-dtp-picker-form:after {
     clear: both;
@@ -873,7 +1045,7 @@ ol {
   mask-size: cover;
   -webkit-mask: url("../../../assets/images/icon-arrow.svg") no-repeat 50% 50%;
   -webkit-mask-size: cover;
-  background-color: var(--current-light-primary); }
+  background-color: var(--sm-current-bg-color); }
 
 .novablocks-slideshow__arrow--prev:before {
   transform: translate(50%, -50%); }
@@ -889,7 +1061,7 @@ ol {
   margin-top: 0;
   border: 0;
   border-radius: 50%;
-  background-color: var(--current-light-primary);
+  background-color: var(--sm-current-bg-color);
   opacity: 0;
   transition: opacity 0.15s ease-in;
   transform: none; }
@@ -904,20 +1076,16 @@ ol {
   --current-letter-spacing: var(--theme-body-letter-spacing); }
   .block-is-highlighted:not(.content-is-highlighted) .novablocks-card .wp-block-button:not(.is-style-text) .wp-block-button__link,
   .content-is-highlighted:not(.block-is-highlighted) .novablocks-card .wp-block-button:not(.is-style-text) .wp-block-button__link {
-    --theme-button-text-color: var(--current-dark-primary);
-    --theme-button-background-color: var(--current-light-primary);
-    --theme-button-border-color: var(--current-light-primary);
-    --theme-button-hover-text-color: var(--current-light-primary);
+    --theme-button-text-color: var(--sm-button-background-color);
+    --theme-button-background-color: var(--sm-current-bg-color);
+    --theme-button-border-color: var(--sm-current-bg-color);
+    --theme-button-hover-text-color: var(--sm-current-bg-color);
     --theme-button-hover-background-color: transparent;
-    --theme-button-hover-border-color: var(--current-light-primary); }
+    --theme-button-hover-border-color: var(--sm-current-bg-color); }
   .block-is-highlighted:not(.content-is-highlighted) .novablocks-card a:not(.wp-block-button__link),
   .content-is-highlighted:not(.block-is-highlighted) .novablocks-card a:not(.wp-block-button__link) {
     color: inherit;
     text-decoration-color: inherit; }
-
-.novablocks-card__inner-container[class] {
-  padding-right: 0;
-  padding-left: 0; }
 
 .novablocks-sharing__overlay {
   --current-color-primary: var(--sm-color-primary);
@@ -954,7 +1122,8 @@ ol {
   padding: calc( var(--block-spacing) / 2) calc( var(--block-spacing) * 3 / 4); }
 
 .novablocks-sharing__group--copy-link .novablocks-sharing__link {
-  background-color: var(--sm-color-primary); }
+  background-color: var(--sm-current-accent-color);
+  color: var(--sm-current-bg-color); }
 
 .novablocks-sharing__copy-input[class],
 .novablocks-sharing__list[class] {
@@ -990,11 +1159,10 @@ body:not(.has-sidebar) {
   font-size: var(--final-font-size); }
 
 body {
-  --offset-addon: var(--theme-offset-width-addon); }
+  --offset-addon: var(--sm-content-inset); }
 
 .novablocks-sidebar > :not(:first-child) {
-  --element-spacing: var(--theme-spacing-fluid-small);
-  margin-top: var(--element-spacing); }
+  margin-top: var(--theme-spacing-fluid-small); }
 
 .novablocks-sidebar--small {
   --sidebar-font-size-modifier: 0.75; }
@@ -1010,8 +1178,7 @@ body {
   font-size: var(--final-font-size); }
 
 .novablocks-sidebar .widget > :not(:first-child) {
-  --element-spacing: var(--theme-spacing-fluid-small);
-  margin-top: var(--element-spacing); }
+  margin-top: var(--theme-spacing-fluid-small); }
 
 .novablocks-sidebar .widget-title[class][class] {
   --font-size: var(--theme-heading-4-font-size); }
