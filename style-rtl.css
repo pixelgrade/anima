@@ -863,12 +863,19 @@ figure {
 /* Lists */
 ul,
 ol {
-  list-style-position: outside;
-  padding-right: var(--theme-spacing); }
+  list-style-position: outside; }
   ul > :not(:first-child),
   ol > :not(:first-child) {
-    --element-spacing: var(--theme-spacing-tiny);
+    --element-spacing: var(--theme-spacing-fluid-default);
     margin-top: var(--element-spacing); }
+
+ul {
+  --list-padding: var(--theme-spacing-fluid-xsmall);
+  padding-right: var(--list-padding); }
+
+ol {
+  --list-padding: calc(var(--theme-spacing-fluid-small) * 1.2);
+  padding-right: var(--list-padding); }
 
 /* Nested unordered lists */
 ul {

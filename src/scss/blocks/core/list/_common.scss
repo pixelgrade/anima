@@ -1,0 +1,259 @@
+ul,
+ol {
+	--separator-weight: 0.11em;
+	--icon-width: .3em;
+	--icon-height: .3em;
+}
+
+.is-style-divider,
+[data-novablocks-connection-style="is-style-divider"] {
+	
+	li {
+		--element-spacing: var(--theme-spacing-fluid-default);
+		
+		&:not(:last-child) {
+			border-bottom: var(--separator-weight) solid var(--current-light-secondary);
+			padding-bottom: var(--element-spacing);
+		}
+	}
+	
+}
+
+// This will be applied only on uls
+// with bullet style.
+.is-style-timeline,
+[data-novablocks-connection-style="is-style-timeline"] {
+	
+	position: relative;
+	
+	// We want to overwrite
+	// default list styling, by using :before.
+	
+	list-style-type: none;
+	
+	&:not(.list-checkmark-style),
+	&:not([data-novablocks-list-style="list-checkmark-style"]) {
+		
+		li:not(:last-child) {
+			
+			// Add a left border on every list element,
+			// except the last child.
+			&:after {
+				content: '';
+				position: absolute;
+				width: var(--separator-weight);
+				height: calc(100% + var(--element-spacing));
+				left: calc(-1 * var(--list-padding) + var(--separator-weight) + var(--separator-weight) * 0.5);
+				top: 0.55em;
+				background-color: var(--current-light-secondary);
+			}
+		}
+	}
+}
+
+ul {
+	
+	list-style: none;
+	
+	li {
+		
+		position: relative;
+		
+		&:before {
+			content: '';
+			position: absolute;
+			top: calc(var(--separator-weight) + var(--icon-height));
+			left: calc(-1 * var( --list-padding) + var(--separator-weight) );
+			
+			background-color: var(--current-light-primary);
+			
+			width: var(--icon-width);
+			height: var(--icon-height);
+			
+			border-radius: 50%;
+			box-shadow: 0 0 0 var(--separator-weight) currentColor, 0 0 0 0.31em var(--current-light-primary);
+			
+			z-index: 10;
+		}
+	}
+	
+	&.list-no-marker,
+	&[data-novablocks-list-style="list-no-marker"]{
+		
+		padding-left: 0;
+		list-style: none;
+		
+		li {
+			
+			&:before {
+				content: none;
+			}
+		}
+		
+		&.is-style-timeline[class],
+		&[data-novablocks-connection-style="is-style-timeline"][class]{
+			
+			padding-left: var(--list-padding);
+			box-shadow: inset var(--separator-weight) 0 0 var(--current-light-secondary);
+			
+			li {
+				
+				&:after {
+					content: none;
+				}
+			}
+		}
+	}
+	
+	&.list-checkmark-style,
+	&[data-novablocks-list-style="list-checkmark-style"] {
+		
+		&.is-style-timeline[class],
+		&[data-novablocks-connection-style="is-style-timeline"][class] {
+			
+			--border-width: 0.11em;
+			
+			&:before {
+				
+				content: '';
+				position: absolute;
+				left: calc(var(--icon-background-width) * 0.5);
+				width: var(--separator-weight);
+				height: 100%;
+				background-color: var(--current-light-secondary);
+			}
+			
+			li {
+				
+				&:last-child {
+					margin-left: calc(var(--list-padding) * -0.5);
+					padding-left: calc(var(--list-padding) * 0.5 );
+					box-shadow: calc(var(--separator-weight) * -5) 0 0px 0 var(--current-light-primary);
+					
+					&:before {
+						left: calc(var(--list-padding) * -0.5 + var(--pull-value));
+					}
+					//
+					&:after {
+						left: calc(-1 * var(--list-padding) * 0.5);
+					}
+				}
+			}
+		}
+	}
+	
+	&.list-checkmark-style[class][class],
+	&[data-novablocks-list-style="list-checkmark-style"][class][class] {
+		
+		--list-padding: calc(var(--theme-spacing-fluid-small) * 1.2);
+		--icon-background-width: calc(var(--list-padding) - 0.45em);
+		--icon-background-height:  calc(var(--list-padding) - 0.45em);
+		
+		li {
+			
+			&:before {
+				content: "";
+				display: block;
+				position: absolute;
+				--pull-value: calc(var(--list-padding) * 0.22);
+				top: var(--pull-value);
+				left: calc(var(--list-padding) * -1 + var(--pull-value));
+				width: calc(var( --list-padding) * 0.35);
+				height: calc(var( --list-padding) * 0.35);
+				
+				mask: url($checkbox-svg-path) no-repeat 50% 50%;
+				mask-size: contain;
+				mask-position: center;
+				-webkit-mask: url($checkbox-svg-path) no-repeat 50% 50%;
+				-webkit-mask-size: contain;
+				-webkit-mask-position: center;
+				
+				background-color: var(--current-light-primary);
+			}
+			
+			&:after {
+				content: '';
+				position: absolute;
+				left: calc(-1 * var(--list-padding));
+				top: 0;
+				width: var(--icon-background-width);
+				height: var(--icon-background-height);
+				background-color: var(--current-color-primary);
+				border-radius: 50%;
+				box-shadow: 0 0 0 4px var(--current-light-primary);
+			}
+		}
+	}
+	
+}
+
+ol {
+	
+	position: relative;
+	
+	list-style-type: none;
+	counter-reset: li;
+	
+	font-variant-numeric: slashed-zero;
+	
+	li {
+		
+		position: relative;
+		
+		&:before {
+			position: absolute;
+			left: calc( -1 * var( --list-padding) );
+			
+			width: var( --list-padding);
+			
+			counter-increment: li;
+			content: counter(li, decimal-leading-zero);
+			
+			text-align: center;
+			
+			background-color: var(--current-light-primary);
+			
+			z-index: 10;
+		}
+		
+		&:not(:last-child) {
+			
+			&:before {
+				left: calc( -1 * var( --list-padding) );
+			}
+		}
+	}
+	
+	&.is-style-timeline,
+	&[data-novablocks-connection-style="is-style-timeline"] {
+		
+		&:before {
+			content: '';
+			position: absolute;
+			left: calc( var(--list-padding) * 0.5 );
+			width: var(--separator-weight);
+			height: 100%;
+			background-color: var(--current-light-secondary);
+		}
+		
+		> li {
+			
+			&:after {
+				left: calc( -1 * var( --list-padding) * 0.5 );
+				content: none !important;
+			}
+			
+			&:last-child {
+				margin-left: calc(var(--list-padding) * -0.5 + var(--separator-weight));
+				padding-left: calc(var(--list-padding) * 0.5);
+				box-shadow: calc(var(--separator-weight) * -1.5) 0 0px 0 var(--current-light-primary);
+				
+				&:before {
+					left: calc( var( --list-padding) * -0.5 - var(--separator-weight)) !important;
+				}
+			}
+			
+		}
+	}
+	
+}

@@ -350,12 +350,17 @@
       margin: 0; }
     .editor-styles-wrapper[class] ul,
     .editor-styles-wrapper[class] ol {
-      list-style-position: outside;
-      padding-left: var(--theme-spacing); }
+      list-style-position: outside; }
       .editor-styles-wrapper[class] ul > :not(:first-child),
       .editor-styles-wrapper[class] ol > :not(:first-child) {
-        --element-spacing: var(--theme-spacing-tiny);
+        --element-spacing: var(--theme-spacing-fluid-default);
         margin-top: var(--element-spacing); }
+    .editor-styles-wrapper[class] ul {
+      --list-padding: var(--theme-spacing-fluid-xsmall);
+      padding-left: var(--list-padding); }
+    .editor-styles-wrapper[class] ol {
+      --list-padding: calc(var(--theme-spacing-fluid-small) * 1.2);
+      padding-left: var(--list-padding); }
     .editor-styles-wrapper[class] ul {
       list-style-type: disc; }
     .editor-styles-wrapper[class] ul ul {

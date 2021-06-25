@@ -97,6 +97,143 @@ ul.wp-block-categories__list[class] {
 .wp-block-social-links .block-editor-block-list__block {
   margin: 0; }
 
+.block-editor-block-list__layout[class][class] ul,
+.block-editor-block-list__layout[class][class] ol {
+  --separator-weight: 0.11em;
+  --icon-width: .3em;
+  --icon-height: .3em; }
+
+.block-editor-block-list__layout[class][class] .is-style-divider li,
+.block-editor-block-list__layout[class][class] [data-novablocks-connection-style="is-style-divider"] li {
+  --element-spacing: var(--theme-spacing-fluid-default); }
+  .block-editor-block-list__layout[class][class] .is-style-divider li:not(:last-child),
+  .block-editor-block-list__layout[class][class] [data-novablocks-connection-style="is-style-divider"] li:not(:last-child) {
+    border-bottom: var(--separator-weight) solid var(--current-light-secondary);
+    padding-bottom: var(--element-spacing); }
+
+.block-editor-block-list__layout[class][class] .is-style-timeline,
+.block-editor-block-list__layout[class][class] [data-novablocks-connection-style="is-style-timeline"] {
+  position: relative;
+  list-style-type: none; }
+  .block-editor-block-list__layout[class][class] .is-style-timeline:not(.list-checkmark-style) li:not(:last-child):after, .block-editor-block-list__layout[class][class] .is-style-timeline:not([data-novablocks-list-style="list-checkmark-style"]) li:not(:last-child):after,
+  .block-editor-block-list__layout[class][class] [data-novablocks-connection-style="is-style-timeline"]:not(.list-checkmark-style) li:not(:last-child):after,
+  .block-editor-block-list__layout[class][class] [data-novablocks-connection-style="is-style-timeline"]:not([data-novablocks-list-style="list-checkmark-style"]) li:not(:last-child):after {
+    content: '';
+    position: absolute;
+    width: var(--separator-weight);
+    height: calc(100% + var(--element-spacing));
+    right: calc(-1 * var(--list-padding) + var(--separator-weight) + var(--separator-weight) * 0.5);
+    top: 0.55em;
+    background-color: var(--current-light-secondary); }
+
+.block-editor-block-list__layout[class][class] ul {
+  list-style: none; }
+  .block-editor-block-list__layout[class][class] ul li {
+    position: relative; }
+    .block-editor-block-list__layout[class][class] ul li:before {
+      content: '';
+      position: absolute;
+      top: calc(var(--separator-weight) + var(--icon-height));
+      right: calc(-1 * var( --list-padding) + var(--separator-weight));
+      background-color: var(--current-light-primary);
+      width: var(--icon-width);
+      height: var(--icon-height);
+      border-radius: 50%;
+      box-shadow: 0 0 0 var(--separator-weight) currentColor, 0 0 0 0.31em var(--current-light-primary);
+      z-index: 10; }
+  .block-editor-block-list__layout[class][class] ul.list-no-marker, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-no-marker"] {
+    padding-right: 0;
+    list-style: none; }
+    .block-editor-block-list__layout[class][class] ul.list-no-marker li:before, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-no-marker"] li:before {
+      content: none; }
+    .block-editor-block-list__layout[class][class] ul.list-no-marker.is-style-timeline[class], .block-editor-block-list__layout[class][class] ul.list-no-marker[data-novablocks-connection-style="is-style-timeline"][class], .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-no-marker"].is-style-timeline[class], .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-no-marker"][data-novablocks-connection-style="is-style-timeline"][class] {
+      padding-right: var(--list-padding);
+      box-shadow: inset var(--separator-weight) 0 0 var(--current-light-secondary); }
+      .block-editor-block-list__layout[class][class] ul.list-no-marker.is-style-timeline[class] li:after, .block-editor-block-list__layout[class][class] ul.list-no-marker[data-novablocks-connection-style="is-style-timeline"][class] li:after, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-no-marker"].is-style-timeline[class] li:after, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-no-marker"][data-novablocks-connection-style="is-style-timeline"][class] li:after {
+        content: none; }
+  .block-editor-block-list__layout[class][class] ul.list-checkmark-style.is-style-timeline[class], .block-editor-block-list__layout[class][class] ul.list-checkmark-style[data-novablocks-connection-style="is-style-timeline"][class], .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"].is-style-timeline[class], .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"][data-novablocks-connection-style="is-style-timeline"][class] {
+    --border-width: 0.11em; }
+    .block-editor-block-list__layout[class][class] ul.list-checkmark-style.is-style-timeline[class]:before, .block-editor-block-list__layout[class][class] ul.list-checkmark-style[data-novablocks-connection-style="is-style-timeline"][class]:before, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"].is-style-timeline[class]:before, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"][data-novablocks-connection-style="is-style-timeline"][class]:before {
+      content: '';
+      position: absolute;
+      right: calc(var(--icon-background-width) * 0.5);
+      width: var(--separator-weight);
+      height: 100%;
+      background-color: var(--current-light-secondary); }
+    .block-editor-block-list__layout[class][class] ul.list-checkmark-style.is-style-timeline[class] li:last-child, .block-editor-block-list__layout[class][class] ul.list-checkmark-style[data-novablocks-connection-style="is-style-timeline"][class] li:last-child, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"].is-style-timeline[class] li:last-child, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"][data-novablocks-connection-style="is-style-timeline"][class] li:last-child {
+      margin-right: calc(var(--list-padding) * -0.5);
+      padding-right: calc(var(--list-padding) * 0.5);
+      box-shadow: calc(-1*(var(--separator-weight) * -5)) 0 0px 0 var(--current-light-primary); }
+      .block-editor-block-list__layout[class][class] ul.list-checkmark-style.is-style-timeline[class] li:last-child:before, .block-editor-block-list__layout[class][class] ul.list-checkmark-style[data-novablocks-connection-style="is-style-timeline"][class] li:last-child:before, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"].is-style-timeline[class] li:last-child:before, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"][data-novablocks-connection-style="is-style-timeline"][class] li:last-child:before {
+        right: calc(var(--list-padding) * -0.5 + var(--pull-value)); }
+      .block-editor-block-list__layout[class][class] ul.list-checkmark-style.is-style-timeline[class] li:last-child:after, .block-editor-block-list__layout[class][class] ul.list-checkmark-style[data-novablocks-connection-style="is-style-timeline"][class] li:last-child:after, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"].is-style-timeline[class] li:last-child:after, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"][data-novablocks-connection-style="is-style-timeline"][class] li:last-child:after {
+        right: calc(-1 * var(--list-padding) * 0.5); }
+  .block-editor-block-list__layout[class][class] ul.list-checkmark-style[class][class], .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"][class][class] {
+    --list-padding: calc(var(--theme-spacing-fluid-small) * 1.2);
+    --icon-background-width: calc(var(--list-padding) - 0.45em);
+    --icon-background-height:  calc(var(--list-padding) - 0.45em); }
+    .block-editor-block-list__layout[class][class] ul.list-checkmark-style[class][class] li:before, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"][class][class] li:before {
+      content: "";
+      display: block;
+      position: absolute;
+      --pull-value: calc(var(--list-padding) * 0.22);
+      top: var(--pull-value);
+      right: calc(var(--list-padding) * -1 + var(--pull-value));
+      width: calc(var( --list-padding) * 0.35);
+      height: calc(var( --list-padding) * 0.35);
+      mask: url("../../../assets/images/checkbox.svg") no-repeat 50% 50%;
+      mask-size: contain;
+      mask-position: center;
+      -webkit-mask: url("../../../assets/images/checkbox.svg") no-repeat 50% 50%;
+      -webkit-mask-size: contain;
+      -webkit-mask-position: center;
+      background-color: var(--current-light-primary); }
+    .block-editor-block-list__layout[class][class] ul.list-checkmark-style[class][class] li:after, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"][class][class] li:after {
+      content: '';
+      position: absolute;
+      right: calc(-1 * var(--list-padding));
+      top: 0;
+      width: var(--icon-background-width);
+      height: var(--icon-background-height);
+      background-color: var(--current-color-primary);
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px var(--current-light-primary); }
+
+.block-editor-block-list__layout[class][class] ol {
+  position: relative;
+  list-style-type: none;
+  counter-reset: li;
+  font-variant-numeric: slashed-zero; }
+  .block-editor-block-list__layout[class][class] ol li {
+    position: relative; }
+    .block-editor-block-list__layout[class][class] ol li:before {
+      position: absolute;
+      right: calc( -1 * var( --list-padding));
+      width: var(--list-padding);
+      counter-increment: li;
+      content: counter(li, decimal-leading-zero);
+      text-align: center;
+      background-color: var(--current-light-primary);
+      z-index: 10; }
+    .block-editor-block-list__layout[class][class] ol li:not(:last-child):before {
+      right: calc( -1 * var( --list-padding)); }
+  .block-editor-block-list__layout[class][class] ol.is-style-timeline:before, .block-editor-block-list__layout[class][class] ol[data-novablocks-connection-style="is-style-timeline"]:before {
+    content: '';
+    position: absolute;
+    right: calc( var(--list-padding) * 0.5);
+    width: var(--separator-weight);
+    height: 100%;
+    background-color: var(--current-light-secondary); }
+  .block-editor-block-list__layout[class][class] ol.is-style-timeline > li:after, .block-editor-block-list__layout[class][class] ol[data-novablocks-connection-style="is-style-timeline"] > li:after {
+    right: calc( -1 * var( --list-padding) * 0.5);
+    content: none !important; }
+  .block-editor-block-list__layout[class][class] ol.is-style-timeline > li:last-child, .block-editor-block-list__layout[class][class] ol[data-novablocks-connection-style="is-style-timeline"] > li:last-child {
+    margin-right: calc(var(--list-padding) * -0.5 + var(--separator-weight));
+    padding-right: calc(var(--list-padding) * 0.5);
+    box-shadow: calc(-1*(var(--separator-weight) * -1.5)) 0 0px 0 var(--current-light-primary); }
+    .block-editor-block-list__layout[class][class] ol.is-style-timeline > li:last-child:before, .block-editor-block-list__layout[class][class] ol[data-novablocks-connection-style="is-style-timeline"] > li:last-child:before {
+      right: calc( var( --list-padding) * -0.5 - var(--separator-weight)) !important; }
+
 .nova-food-menu {
   --block-content-start: ws;
   --block-content-end:we; }

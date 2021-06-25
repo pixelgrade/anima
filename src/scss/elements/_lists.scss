@@ -2,8 +2,19 @@
 ul,
 ol {
     list-style-position: outside;
-    padding-left: var(--theme-spacing);
-    @include space-children-y( var(--theme-spacing-tiny) );
+    @include space-children-y( var(--theme-spacing-fluid-default) );
+}
+
+ul {
+    --list-padding: var(--theme-spacing-fluid-xsmall);
+    
+    padding-left: var(--list-padding);
+}
+
+ol {
+    --list-padding: calc(var(--theme-spacing-fluid-small) * 1.2);
+    
+    padding-left: var(--list-padding);
 }
 
 /* Nested unordered lists */
