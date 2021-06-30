@@ -25,6 +25,8 @@ $assets-folder-path: '../../assets';
 .editor-styles-wrapper {
     -webkit-font-smoothing: antialiased;
 
+    // forms.scss may be needed for properly styling the input inside the novablocks sharing overlay
+    @import "elements/forms";
     @import "elements/lists";
 
     [class*="__inner-container"] {
