@@ -273,7 +273,7 @@
   .novablocks-header--main {
     margin-top: 0 !important; }
   .novablocks-header--main:before {
-    opacity: 0.95; }
+    --header-background-opacity: 0.95; }
   .novablocks-header--main .site-branding {
     display: none !important; }
   .novablocks-header--main .menu:not(.menu--buttons) .menu-item--cart, .novablocks-header--main .menu:not(.menu--buttons)
@@ -354,6 +354,8 @@
 .novablocks-header--sticky.novablocks-header--main {
   position: fixed !important;
   top: 0 !important; }
+  .novablocks-header--sticky.novablocks-header--main:before {
+    --header-background-opacity: 0; }
 
 .novablocks-header__buttons-menu {
   position: absolute;

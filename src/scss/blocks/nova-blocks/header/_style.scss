@@ -18,7 +18,9 @@
     opacity: 0;
 }
 
+// hide all header and header-row backgrounds when header is transparent
 .novablocks-header.novablocks-header--transparent:not(.novablocks-header--sticky) {
+
     @include above(lap) {
         --header-background-opacity: 0;
     }
@@ -49,6 +51,10 @@
 .novablocks-header--sticky.novablocks-header--main {
     position: fixed !important;
     top: 0 !important;
+
+    &:before {
+        --header-background-opacity: 0;
+    }
 }
 
 .novablocks-header__buttons-menu {
