@@ -136,6 +136,13 @@ textarea {
     
 }
 
+.novablocks-opentable {
+
+    &:not([class*="sm-palette-"]):not([class*="sm-variation-"]) {
+        @include apply-variation(10);
+    }
+}
+
 /* End Fallback Styles for Color Signal */
 
 .wp-block-group__inner-container > * {
