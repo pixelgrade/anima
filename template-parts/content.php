@@ -35,12 +35,12 @@ $classes[] = ( $wp_query->current_post % 2 ) ? 'has-image-on-the-right' : 'has-i
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( $classes ); ?>>
-    <div class="<?php echo esc_attr( join( ' ', $blockClasses ) ); ?>">
+    <div class="<?php echo esc_attr( join( ' ', $blockClasses ) ); ?>" style="--card-content-padding: 100">
         <div class="wp-block-group__inner-container">
             <div class="wp-block alignwide">
                 <div class="novablocks-media__layout">
                     <div class="novablocks-media__content">
-                        <div class="novablocks-media__inner-container novablocks-block__content">
+                        <div class="novablocks-media__inner-container novablocks-block__content sm-palette-1 sm-variation-1">
                             <?php
                             get_template_part( 'template-parts/entry-meta', get_post_type() );
                             the_title( '<h2 class="entry-title has-text-align-center"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
@@ -51,7 +51,7 @@ $classes[] = ( $wp_query->current_post % 2 ) ? 'has-image-on-the-right' : 'has-i
                         </div>
                     </div>
                     <div class="novablocks-media__aside">
-                        <div class="novablocks-media__image">
+                        <div class="novablocks-media__image sm-palette-1 sm-variation-1">
                             <?php
                             if( has_post_thumbnail() ) {
                                 rosa2_post_thumbnail();

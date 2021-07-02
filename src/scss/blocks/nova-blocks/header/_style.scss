@@ -24,9 +24,20 @@
     }
 }
 
-.novablocks-header--mobile.novablocks-header--transparent:before {
-    --header-background-opacity: 0;
+.novablocks-header--mobile {
+    
+    &.novablocks-header--transparent {
+        
+        &:before {
+            --header-background-opacity: 0;
+        }
+    }
+    
+    &:not(.novablocks-header--transparent) {
+        --header-background-opacity: 0.95;
+    }
 }
+
 
 .novablocks-header--sticky:not(.novablocks-header--main) {
 
@@ -51,7 +62,10 @@
     }
 
     @include above( lap ) {
-        display: none;
+        
+        &[class] {
+            display: none;
+        }
     }
 }
 

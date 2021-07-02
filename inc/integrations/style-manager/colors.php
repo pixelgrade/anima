@@ -42,8 +42,8 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 
 			'page_title' => sm_get_color_switch_dark_config( 'Page title', '.entry-title', false, 1 ),
 			'body_color' => sm_get_color_switch_dark_config( 'Body text', 'html, [class*="sm-variation-"]', false, 0 ),
-			'links_color' => sm_get_color_switch_dark_config( 'Body links', '*', true, 1, '--theme-links-color' ),
-			'heading_links_color' => sm_get_color_switch_dark_config( 'Heading links', 'h1, h2, h3, h4, h5, h6', true, 2, '--theme-links-color' ),
+			'links_color' => sm_get_color_switch_dark_config( 'Body links', 'a', true, 1, '--theme-links-color' ),
+			'heading_links_color' => sm_get_color_switch_dark_config( 'Heading links', 'h1 a, h2 a, h3 a, h4 a, h5 a, h6 a', false, 2, '--theme-links-color' ),
 
 			'sm-group-separator-1' => array( 'type' => 'html', 'html' => '' ),
 
@@ -52,7 +52,7 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 				'html' => '<span class="sm-group__title">' . esc_html__( 'Header', '__theme_txtd' ) . '</span>',
 			),
 
-			'menu_item_color' => sm_get_color_switch_dark_config( 'Navigation links', '.novablocks-navigation', false, 3 ),
+			'menu_item_color' => sm_get_color_switch_dark_config( 'Navigation links', '.novablocks-navigation', false, 1 ),
 			'menu_active_item_color' => sm_get_color_switch_dark_config( 'Navigaiton active link', '.novablocks-navigation > ul > li[class*="current"]', false, 3 ),
 
 			'sm-group-separator-2' => array( 'type' => 'html', 'html' => '' ),
@@ -62,10 +62,10 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 				'html' => '<span class="sm-group__title">' . esc_html__( 'Headings', '__theme_txtd' ) . '</span>',
 			),
 
-			'heading_1_color' => sm_get_color_switch_darker_config( 'Heading 1', 'h1', false, 3 ),
-			'heading_2_color' => sm_get_color_switch_darker_config( 'Heading 2', 'h2', false, 3 ),
-			'heading_3_color' => sm_get_color_switch_darker_config( 'Heading 3', 'h3', false, 3 ),
-			'heading_4_color' => sm_get_color_switch_darker_config( 'Heading 4', 'h4', false, 3 ),
+			'heading_1_color' => sm_get_color_switch_darker_config( 'Heading 1', 'h1', false, 1 ),
+			'heading_2_color' => sm_get_color_switch_darker_config( 'Heading 2', 'h2', false, 1 ),
+			'heading_3_color' => sm_get_color_switch_darker_config( 'Heading 3', 'h3', false, 2 ),
+			'heading_4_color' => sm_get_color_switch_darker_config( 'Heading 4', 'h4', false, 2 ),
 			'heading_5_color' => sm_get_color_switch_darker_config( 'Heading 5', 'h5', false, 3 ),
 			'heading_6_color' => sm_get_color_switch_darker_config( 'Heading 6', 'h6', false, 3 ),
 
@@ -77,7 +77,7 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 			),
 
 			'solid_button' => sm_get_color_switch_dark_config( 'Buttons', '*', false, 3, '--sm-button-background-color' ),
-			'text_button' => sm_get_color_switch_dark_config( 'Text', '.wp-block-button.is-style-text .wp-block-button__link', false, 3, array( '--theme-button-text-color' ) ),
+			'text_button' => sm_get_color_switch_dark_config( 'Text', '.wp-block-button.is-style-text .wp-block-button__link', true, 4, array( '--theme-button-text-color' ) ),
 
 			'sm-group-separator-4' => array( 'type' => 'html', 'html' => '' ),
 
@@ -86,8 +86,8 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 				'html' => '<span class="sm-group__title">' . esc_html__( 'Headline Block', '__theme_txtd' ) . '</span>',
 			),
 
-			'novablocks_headline_primary' => sm_get_color_switch_darker_config( 'Headline primary', '.c-headline__primary', false, 3 ),
-			'novablocks_headline_secondary' => sm_get_color_switch_darker_config( 'Headline secondary', '.c-headline__secondary', true, 1 ),
+			'novablocks_headline_primary' => sm_get_color_switch_darker_config( 'Headline primary', '.c-headline__primary', false, 2 ),
+			'novablocks_headline_secondary' => sm_get_color_switch_darker_config( 'Headline secondary', '.c-headline__secondary', true, 3 ),
 
 			'sm-description_colorize_elements_outro' => array(
 				'type' => 'html',

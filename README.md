@@ -5,7 +5,7 @@
 
 ![rosa2_github](https://user-images.githubusercontent.com/46342490/73248468-b172c500-41bb-11ea-843e-bcc9e401e71b.jpg)
 
-[![](https://img.shields.io/github/issues-closed/pixelgrade/nova-theme.svg?color=6cc644&label=Issues)](https://github.com/pixelgrade/nova-theme/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aclosed+) [![](https://img.shields.io/github/issues/pixelgrade/nova-theme.svg?color=4078c0&label=%20)](https://github.com/pixelgrade/nova-theme/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen)
+[![](https://img.shields.io/github/issues-closed/pixelgrade/rosa2.svg?color=6cc644&label=Issues)](https://github.com/pixelgrade/rosa2/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aclosed+) [![](https://img.shields.io/github/issues/pixelgrade/rosa2.svg?color=4078c0&label=%20)](https://github.com/pixelgrade/rosa2/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen)
 
 ## Contributing
 The essence of **open source** is that by freely sharing the code, you have the freedom to use it for any purpose, study how it works and adapt it to your needs, improve the program and **share your improvements** with the community so that we all benefit. 🙏

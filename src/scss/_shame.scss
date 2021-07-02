@@ -51,31 +51,29 @@ textarea {
 .woocommerce-error {
 
     &[class] {
-        color: var(--sm-color-11);
+        color: var(--sm-fg1-color-1);
 
         &:after {
-            border: 1px solid var(--sm-color-11);
-            background-color: var(--sm-color-4);
-            opacity: 1;
+            border: 1px solid var(--sm-bg-color-4);
+            background-color: var(--sm-bg-color-4);
         }
 
         .theme-woocommerce-notice__icon {
-            background-color: var(--sm-color-9);
             opacity: 1;
         }
     }
 }
 
 .woocommerce-error {
-    @include apply-palette(error);
+    @include apply-palette(_error);
 }
 
 .woocommerce-message {
-    @include apply-palette(success);
+    @include apply-palette(_success);
 }
 
 .woocommerce-info {
-    @include apply-palette(info);
+    @include apply-palette(_info);
 }
 
 .site-title {
@@ -105,6 +103,10 @@ textarea {
     @include apply-variation(11);
 }
 
+.is-style-accent {
+    @include apply-variation(6);
+}
+
 .novablocks-announcement-bar {
 
     &.is-style-accent {
@@ -131,20 +133,7 @@ textarea {
     &.has-tertiary-accent-color .novablocks-block {
         @include apply-palette(2);
     }
-
-
-    //&.block-is-highlighted {
-    //
-    //    &:not(.is-style-alternate) .novablocks-block {
-    //        @include apply-variation(12);
-    //
-    //    }
-    //
-    //    &.is-style-alternate .novablocks-block {
-    //        @include apply-variation(7);
-    //    }
-    //
-    //}
+    
 }
 
 /* End Fallback Styles for Color Signal */
@@ -159,3 +148,17 @@ textarea {
         overflow-x: hidden;
     }
 }
+
+/* START body margin hack
+contain inline margin set to #content
+@todo find a better way o doing this
+*/
+body {
+    float: left;
+    width: 100%;
+}
+
+html {
+    @include clearfix;
+}
+/* END body margin hack */

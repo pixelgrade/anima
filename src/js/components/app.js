@@ -136,6 +136,10 @@ export default class App {
 	initializePromoBar() {
 		const promoBar = document.querySelector( '.promo-bar' );
 
+		if ( promoBar === null ) {
+			return;
+		}
+
 		this.promoBar = new PromoBar( promoBar, {
 			offset: this.adminBarHeight,
 			onUpdate: this.onPromoBarUpdate.bind( this )
@@ -145,6 +149,11 @@ export default class App {
 	}
 
 	updatePromoBarProps() {
+
+		if ( this.promoBar === null ) {
+			return;
+		}
+
 		const promoBarStyle = window.getComputedStyle( this.promoBar.element );
 		this.promoBarFixed = promoBarStyle.getPropertyValue( 'position' ) === 'fixed';
 	}

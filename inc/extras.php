@@ -447,7 +447,7 @@ if ( ! function_exists( 'rosa2_article_header' ) ) {
 		ob_start();
 		?>
 
-        <div class="article-header">
+        <div class="article-header sm-variation-2">
 
             <div class="entry-header">
 				<?php rosa2_categories_posted_in() ?>
@@ -544,4 +544,45 @@ function rosa2_get_reading_time_in_minutes( $content, $wpm = 250 ) {
 	}
 
 	return $minutes;
+}
+
+/**
+ * Displays the class names for the site_content element.
+ *
+ * @since 1.12.0
+ *
+ * @param string|string[] $class Space-separated string or array of class names to add to the class list.
+ */
+function site_content_class( $class = '' ) {
+	// Separates class names with a single space, collates class names for site-content.
+	echo 'class="' . esc_attr( implode( ' ', get_site_content_class( $class ) ) ) . '"';
+}
+
+/**
+ * Retrieves an array of the class names for the site_content element.
+ *
+ * @since 1.12.0
+ *
+ *
+ * @param string|string[] $class Space-separated string or array of class names to add to the class list.
+ * @return string[] Array of class names.
+ */
+function get_site_content_class( $class = '' ) {
+
+	$classes = array();
+
+	$classes[] = 'site-content';
+
+	if ( is_home() || is_post_type_archive('post') || is_archive() ) {
+		$classes[] = 'sm-variation-2';
+	}
+
+	if ( is_singular('post') ) {
+		$classes[] = 'sm-variation-1';
+    }
+
+	$classes = array_map( 'esc_attr', $classes );
+	$classes = apply_filters( 'site_content_class', $classes, $class );
+
+	return array_unique( $classes );
 }

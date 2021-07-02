@@ -44,5 +44,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 		get_template_part( 'template-parts/site-header' );
 	} ?>
 
-    <div id="content" class="site-content">
+    <div id="content" <?php site_content_class() ?>>
 

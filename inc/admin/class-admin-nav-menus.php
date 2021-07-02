@@ -69,7 +69,7 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 							'url'         => '#color-scheme-switcher',
 							'attr_title'       => esc_html__( 'Switch between dark and light color mode', '__theme_txtd' ),
 							// These are classes that will be merged with the user defined classes.
-							'classes'     => array( 'menu-item--dark-mode' ),
+							'classes'     => array( 'menu-item--dark-mode js-sm-dark-mode-toggle' ),
 							'custom_fields' => array(
 								'visual_style' => array(
 									'type'        => 'select',

@@ -37,6 +37,12 @@
     .nav-links {
         @include post-navigation__links;
     }
+    
+    &[class] {
+        &:not(:last-child) {
+            margin-bottom: 0;
+        }
+    }
 
     a {
         text-decoration: none;
@@ -60,14 +66,19 @@
 
         .post-navigation__link {
             padding: var(--theme-spacing-default) var(--theme-wrapper-sides-spacing);
+            
 
             &--next {
-                background: var(--theme-color-primary);
-                color: var(--theme-light-primary);
+                background: var(--sm-current-accent-color);
+                color: var(--sm-current-bg-color);
 
                 * {
                     color: inherit;
                 }
+            }
+            
+            a {
+                color: inherit;
             }
         }
 
@@ -100,6 +111,7 @@
 
 .post-navigation__link-label {
     position: relative;
+    color: var(--sm-current-accent-color);
     @include apply-font(button);
     transition: var(--theme-transition);
     transition-property: transform;
