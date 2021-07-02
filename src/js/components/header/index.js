@@ -89,11 +89,8 @@ class Header extends HeaderBase {
 	}
 
 	updateStickyStyles() {
-
-		if ( this.isSticky || ! this.hasStickyRow ) {
-			HeaderBase.prototype.updateStickyStyles.call( this );
-			this.toggleRowsColors( ! this.shouldBeSticky );
-		}
+		HeaderBase.prototype.updateStickyStyles.call( this );
+		this.toggleRowsColors( ! this.shouldBeSticky );
 
 		this.element.style.marginTop = `${ this.staticDistance }px`;
 
