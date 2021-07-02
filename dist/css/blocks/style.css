@@ -263,13 +263,13 @@
       color: currentColor;
       transition: color .3s ease-out; }
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1024px) {
   .novablocks-header__inner-container {
     padding-top: 0 !important; }
   .novablocks-header--mobile {
     display: none; } }
 
-@media not screen and (min-width: 1000px) {
+@media not screen and (min-width: 1024px) {
   .novablocks-header--main {
     margin-top: 0 !important; }
   .novablocks-header--main:before {
@@ -325,19 +325,19 @@
   .c-menu-toggle__checkbox:checked ~ .c-menu-toggle .c-menu-toggle__slice--bottom {
     transform: rotate(-45deg); }
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1024px) {
   .novablocks-header--main:not(.novablocks-header--sticky) {
     position: absolute !important;
     top: 0 !important; } }
 
-@media not screen and (min-width: 1000px) {
+@media not screen and (min-width: 1024px) {
   .novablocks-header--main:not(.novablocks-header--sticky) {
     margin-top: 0 !important; } }
 
 .novablocks-header:not(.novablocks-header--ready) {
   opacity: 0; }
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1024px) {
   .novablocks-header.novablocks-header--transparent:not(.novablocks-header--sticky) {
     --header-background-opacity: 0; } }
 
@@ -347,7 +347,7 @@
 .novablocks-header--mobile:not(.novablocks-header--transparent) {
   --header-background-opacity: 0.95; }
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1024px) {
   .novablocks-header--sticky:not(.novablocks-header--main) {
     margin-top: 0 !important; } }
 
@@ -362,7 +362,7 @@
   .novablocks-header__buttons-menu .menu {
     display: flex;
     align-items: center; }
-  @media only screen and (min-width: 1000px) {
+  @media only screen and (min-width: 1024px) {
     .novablocks-header__buttons-menu[class] {
       display: none; } }
 
@@ -378,7 +378,7 @@
   vertical-align: middle;
   margin-left: 0.5em; }
 
-@media not screen and (min-width: 1000px) {
+@media not screen and (min-width: 1024px) {
   .novablocks-header-row {
     --sm-current-bg-color: inherit;
     --sm-current-accent-color: inherit;
@@ -424,7 +424,7 @@
   .novablocks-hero__indicator:not(.novablocks-hero__indicator--middle):after {
     color: var(--sm-current-fg2-color); }
 
-@media not screen and (min-width: 1000px) {
+@media not screen and (min-width: 1024px) {
   .c-bully {
     display: none; } }
 
@@ -437,6 +437,10 @@
 
 .novablocks-media > .wp-block-group__inner-container {
   padding-top: 1px; }
+
+@media not screen and (min-width: 768px) {
+  .novablocks-media__inner-container[class][class][class] {
+    padding: 0; } }
 
 .novablocks-media__inner-container .wp-block-separator {
   width: 100%; }
@@ -513,7 +517,7 @@
   --theme-button-hover-text-color: var(--sm-current-fg1-color);
   --theme-button-hover-background-color: transparent;
   --theme-button-hover-border-color: var(--sm-current-fg1-color); }
-  @media only screen and (min-width: 1000px) {
+  @media only screen and (min-width: 1024px) {
     .novablocks-navigation > ul.menu > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only),
     .novablocks-navigation > .menu > ul > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) {
       position: relative; }
@@ -616,7 +620,7 @@
     .novablocks-navigation ul.menu > .is-cta-button > a:not([disabled]):hover:before,
     .novablocks-navigation .menu > ul > .is-cta-button > a:not([disabled]):hover:before {
       transform: scale3d(0, 1, 1); }
-    @media not screen and (min-width: 1000px) {
+    @media not screen and (min-width: 1024px) {
       .novablocks-navigation ul.menu > .is-cta-button > a,
       .novablocks-navigation .menu > ul > .is-cta-button > a {
         width: 100%;
@@ -629,7 +633,7 @@
       --current-button-text-color: var(--theme-button-hover-text-color);
       --current-button-transition: var(--theme-button-hover-transition); }
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1024px) {
   .novablocks-navigation {
     --font-size: 18;
     --novablocks-navigation-item-bottom-margin: .5em; }

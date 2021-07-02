@@ -64,18 +64,6 @@ textarea {
     }
 }
 
-.woocommerce-error {
-    @include apply-palette(_error);
-}
-
-.woocommerce-message {
-    @include apply-palette(_success);
-}
-
-.woocommerce-info {
-    @include apply-palette(_info);
-}
-
 .site-title {
     @include apply-font(heading-4);
 
@@ -91,6 +79,30 @@ textarea {
 .sm-light {
     --logo-default-opacity: 1;
     --logo-inverted-opacity: 0;
+}
+
+/* Additional media query styles for Color Signal */
+
+@include below(tablet) {
+    @for $i from 1 through 12 {
+        .sm-variation-#{ $i }\@below-tablet[class] {
+            @include apply-variation( $i );
+        }
+    }
+}
+
+/* Color signal defaul styles for WooCommerce notifications */
+
+.woocommerce-error {
+    @include apply-palette(_error);
+}
+
+.woocommerce-message {
+    @include apply-palette(_success);
+}
+
+.woocommerce-info {
+    @include apply-palette(_info);
 }
 
 /* Fallback Styles for Color Signal */

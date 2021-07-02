@@ -52,7 +52,7 @@ function rosa2_woocommerce_scripts() {
 	wp_deregister_style('wc-block-style' );
 
 	// Enqueue Sidecar Style on  WooCommerce pages.
-	if ( is_woocommerce() && ! wp_style_is( 'novablocks/sidecar-style', 'enqueued' ) ) {
+	if ( is_home() || is_archive() || is_woocommerce() && ! wp_style_is( 'novablocks/sidecar-style', 'enqueued' ) ) {
 		wp_enqueue_style( 'novablocks/sidecar-style' );
 	}
 }

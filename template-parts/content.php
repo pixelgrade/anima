@@ -16,14 +16,11 @@ global $wp_query;
 $classes = array(
 	'novablocks-media',
 	'novablocks-media--blog',
-	'wp-block-group',
 	'alignfull',
 );
 
 $blockClasses = array(
 	'novablocks-block',
-	'content-is-moderate',
-	'block-is-moderate',
 );
 
 if ( ! has_post_thumbnail() ) {
