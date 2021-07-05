@@ -75,46 +75,6 @@ ol {
 	
 }
 
-// This will be applied only on uls
-// with bullet style.
-.is-style-timeline,
-[data-novablocks-connection-style="is-style-timeline"] {
-	
-	position: relative;
-	
-	// We want to overwrite
-	// default list styling, by using :before.
-	
-	list-style-type: none;
-	
-	&:not(.list-checkmark-style),
-	&:not([data-novablocks-list-style="list-checkmark-style"]) {
-		
-		li:not(:last-child) {
-			
-			// Add a left border on every list element,
-			// except the last child.
-			&:after {
-				content: '';
-				position: absolute;
-				width: var(--divider-weight);
-				height: calc( 100% + var(--theme-spacing-fluid-default) );
-				left: calc(-1 * var(--list-padding) + var(--icon-width) * 0.5 - var(--divider-weight) * 0.5);
-				top: 0.55em;
-				background-color: var(--sm-bg-color-2);
-			}
-			
-			ul,
-			ol {
-				
-				li:after {
-					content: none;
-				}
-			}
-		}
-	}
-}
-
 ul {
 	
 	list-style: none;
@@ -162,9 +122,9 @@ ul {
 			
 			li {
 				
-				&:after {
-					content: none;
-				}
+				//&:after {
+				//	content: none;
+				//}
 			}
 		}
 	}
@@ -237,6 +197,47 @@ ul {
 		}
 	}
 	
+	&[data-novablocks-list-style="list-bullet-style"],
+	&.list-bullet-style {
+		
+		&.is-style-timeline,
+		&[data-novablocks-connection-style="is-style-timeline"] {
+			
+			position: relative;
+			
+			// We want to overwrite
+			// default list styling, by using :before.
+			
+			list-style-type: none;
+			
+			&:not(.list-checkmark-style),
+			&:not([data-novablocks-list-style="list-checkmark-style"]) {
+				
+				li:not(:last-child) {
+					
+					// Add a left border on every list element,
+					// except the last child.
+					&:after {
+						content: '';
+						position: absolute;
+						width: var(--divider-weight);
+						height: calc( 100% + var(--theme-spacing-fluid-default) );
+						left: calc(-1 * var(--list-padding) + var(--icon-width) * 0.5 - var(--divider-weight) * 0.5);
+						top: 0.55em;
+						background-color: var(--sm-bg-color-2);
+					}
+					
+					ul,
+					ol {
+						
+						li:after {
+							content: none;
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 ol {
@@ -298,7 +299,7 @@ ol {
 			position: absolute;
 			left: calc( var(--bullet-width) * 0.5 - 0.1em );
 			width: var(--divider-weight);
-			height: calc(100% + var(--theme-spacing-fluid-default));
+			height: 100%;
 			background-color: var(--sm-bg-color-2);
 		}
 		
@@ -306,16 +307,15 @@ ol {
 			
 			&:after {
 				left: calc(-1 * var( --list-padding) * 0.5);
-				content: none !important;
 			}
 			
 			&:last-child {
-				margin-left: calc(var(--list-padding) * -0.5 + var(--divider-weight));
+				margin-left: calc(var(--list-padding) * -0.5 );
 				padding-left: calc(var(--list-padding) * 0.5);
 				box-shadow: calc(var(--divider-weight) * -1.5) 0 0px 0 var(--current-light-primary);
 				
 				&:before {
-					left: calc( var( --list-padding) * -0.5 - var(--divider-weight)) !important;
+					left: calc( -0.5 * var(--list-padding));
 				}
 			}
 			
@@ -331,7 +331,8 @@ ol {
 // :before and :after elements are applied on lists.
 
 .list-checkmark-style.is-style-divider,
-ul.is-style-divider:not(.list-no-marker) {
+ul.is-style-divider:not(.list-no-marker),
+ol.is-style-divider {
 	
 	padding-left: 0;
 	
@@ -351,21 +352,26 @@ ul.is-style-divider:not(.list-no-marker) {
 	}
 }
 
-ol.is-style-timeline {
+ol {
 	
-	> li {
+	&.is-style-timeline,
+	&[data-novablocks-connection-style="is-style-timeline"]{
 		
-		&:last-child {
+		> li {
 			
-			&:after {
-				content: '' !important;
-				position: absolute;
-				width: var(--separator-weight);
-				height: calc( 100% + var(--theme-spacing-fluid-default));
-				left: calc(-1 * var(--separator-weight) * 1.5);
-				top: 0.55em;
-				background-color: var(--sm-current-bg-color);
+			&:last-child {
+				
+				&:after {
+					content: '';
+					position: absolute;
+					width: calc(var(--separator-weight) * 2);
+					height: 100%;
+					left: -1px;
+					top: 0.55em;
+					background-color: var(--sm-current-bg-color);
+				}
 			}
 		}
 	}
 }
+
