@@ -100,24 +100,6 @@
   margin-left: var(--theme-comment-avatar-spacing);
   object-fit: cover; }
 
-.is-style-divider li {
-  --element-spacing: var(--theme-spacing-fluid-default); }
-  .is-style-divider li:not(:last-child) {
-    border-bottom: var(--separator-weight) solid var(--current-light-secondary);
-    padding-bottom: var(--element-spacing); }
-
-.is-style-timeline {
-  position: relative;
-  list-style-type: none; }
-  .is-style-timeline:not(.list-checkmark-style) > li:not(:last-child):after {
-    content: '';
-    position: absolute;
-    width: var(--separator-weight);
-    height: calc(100% + var(--element-spacing));
-    right: calc(-1 * var(--list-padding) + var(--separator-weight) + var(--separator-weight) * 0.5);
-    top: 0.55em;
-    background-color: var(--current-light-secondary); }
-
 .entry-content ul,
 .entry-content ol {
   --separator-weight: 0.222em;
@@ -128,6 +110,7 @@
   --bullet-height: var(--bullet-width);
   --bullet-bg-color: var(--sm-current-bg-color);
   --bullet-color: var(--sm-current-fg1-color);
+  --bullet-border-width: 0.222em;
   background-color: transparent;
   color: inherit; }
   .entry-content ul.sm-color-signal-1,
@@ -141,6 +124,16 @@
   .entry-content ol.sm-color-signal-3 {
     --bullet-color: var(--sm-current-bg-color);
     --bullet-bg-color: var(--sm-current-accent-color); }
+
+.entry-content .is-style-divider li {
+  --element-spacing: var(--theme-spacing-fluid-default); }
+  .entry-content .is-style-divider li:not(:last-child) {
+    border-bottom: var(--separator-weight) solid var(--current-light-secondary);
+    padding-bottom: var(--element-spacing); }
+
+.entry-content .is-style-timeline {
+  position: relative;
+  list-style-type: none; }
 
 .entry-content .is-style-divider li,
 .entry-content [data-novablocks-connection-style="is-style-divider"] li {
@@ -164,12 +157,12 @@
       position: absolute;
       content: '';
       top: calc((var(--final-font-size) * var(--current-line-height) - var(--icon-height)) * 0.5);
-      right: calc(-1 * var( --list-padding));
+      right: calc(-1 * var( --list-padding) + var(--bullet-border-width));
       background-color: var(--bullet-color);
       width: var(--icon-width);
       height: var(--icon-height);
       border-radius: 50%;
-      box-shadow: 0 0 0 0.22em var(--bullet-bg-color), 0 0 0 0.4em var(--page-background-color, var(--sm-current-bg-color));
+      box-shadow: 0 0 0 var(--bullet-border-width) var(--bullet-bg-color), 0 0 0 0.4em var(--page-background-color, var(--sm-current-bg-color));
       z-index: 10; }
   .entry-content ul.list-no-marker, .entry-content ul[data-novablocks-list-style="list-no-marker"] {
     padding-right: 0;
@@ -225,24 +218,6 @@
   .entry-content ul[data-novablocks-list-style="list-bullet-style"].is-style-timeline, .entry-content ul[data-novablocks-list-style="list-bullet-style"][data-novablocks-connection-style="is-style-timeline"], .entry-content ul.list-bullet-style.is-style-timeline, .entry-content ul.list-bullet-style[data-novablocks-connection-style="is-style-timeline"] {
     position: relative;
     list-style-type: none; }
-    .entry-content ul[data-novablocks-list-style="list-bullet-style"].is-style-timeline:not(.list-checkmark-style) li:not(:last-child):after, .entry-content ul[data-novablocks-list-style="list-bullet-style"].is-style-timeline:not([data-novablocks-list-style="list-checkmark-style"]) li:not(:last-child):after, .entry-content ul[data-novablocks-list-style="list-bullet-style"][data-novablocks-connection-style="is-style-timeline"]:not(.list-checkmark-style) li:not(:last-child):after, .entry-content ul[data-novablocks-list-style="list-bullet-style"][data-novablocks-connection-style="is-style-timeline"]:not([data-novablocks-list-style="list-checkmark-style"]) li:not(:last-child):after, .entry-content ul.list-bullet-style.is-style-timeline:not(.list-checkmark-style) li:not(:last-child):after, .entry-content ul.list-bullet-style.is-style-timeline:not([data-novablocks-list-style="list-checkmark-style"]) li:not(:last-child):after, .entry-content ul.list-bullet-style[data-novablocks-connection-style="is-style-timeline"]:not(.list-checkmark-style) li:not(:last-child):after, .entry-content ul.list-bullet-style[data-novablocks-connection-style="is-style-timeline"]:not([data-novablocks-list-style="list-checkmark-style"]) li:not(:last-child):after {
-      content: '';
-      position: absolute;
-      width: var(--divider-weight);
-      height: calc( 100% + var(--theme-spacing-fluid-default));
-      right: calc(-1 * var(--list-padding) + var(--icon-width) * 0.5 - var(--divider-weight) * 0.5);
-      top: 0.55em;
-      background-color: var(--sm-bg-color-2); }
-    .entry-content ul[data-novablocks-list-style="list-bullet-style"].is-style-timeline:not(.list-checkmark-style) li:not(:last-child) ul li:after,
-    .entry-content ul[data-novablocks-list-style="list-bullet-style"].is-style-timeline:not(.list-checkmark-style) li:not(:last-child) ol li:after, .entry-content ul[data-novablocks-list-style="list-bullet-style"].is-style-timeline:not([data-novablocks-list-style="list-checkmark-style"]) li:not(:last-child) ul li:after,
-    .entry-content ul[data-novablocks-list-style="list-bullet-style"].is-style-timeline:not([data-novablocks-list-style="list-checkmark-style"]) li:not(:last-child) ol li:after, .entry-content ul[data-novablocks-list-style="list-bullet-style"][data-novablocks-connection-style="is-style-timeline"]:not(.list-checkmark-style) li:not(:last-child) ul li:after,
-    .entry-content ul[data-novablocks-list-style="list-bullet-style"][data-novablocks-connection-style="is-style-timeline"]:not(.list-checkmark-style) li:not(:last-child) ol li:after, .entry-content ul[data-novablocks-list-style="list-bullet-style"][data-novablocks-connection-style="is-style-timeline"]:not([data-novablocks-list-style="list-checkmark-style"]) li:not(:last-child) ul li:after,
-    .entry-content ul[data-novablocks-list-style="list-bullet-style"][data-novablocks-connection-style="is-style-timeline"]:not([data-novablocks-list-style="list-checkmark-style"]) li:not(:last-child) ol li:after, .entry-content ul.list-bullet-style.is-style-timeline:not(.list-checkmark-style) li:not(:last-child) ul li:after,
-    .entry-content ul.list-bullet-style.is-style-timeline:not(.list-checkmark-style) li:not(:last-child) ol li:after, .entry-content ul.list-bullet-style.is-style-timeline:not([data-novablocks-list-style="list-checkmark-style"]) li:not(:last-child) ul li:after,
-    .entry-content ul.list-bullet-style.is-style-timeline:not([data-novablocks-list-style="list-checkmark-style"]) li:not(:last-child) ol li:after, .entry-content ul.list-bullet-style[data-novablocks-connection-style="is-style-timeline"]:not(.list-checkmark-style) li:not(:last-child) ul li:after,
-    .entry-content ul.list-bullet-style[data-novablocks-connection-style="is-style-timeline"]:not(.list-checkmark-style) li:not(:last-child) ol li:after, .entry-content ul.list-bullet-style[data-novablocks-connection-style="is-style-timeline"]:not([data-novablocks-list-style="list-checkmark-style"]) li:not(:last-child) ul li:after,
-    .entry-content ul.list-bullet-style[data-novablocks-connection-style="is-style-timeline"]:not([data-novablocks-list-style="list-checkmark-style"]) li:not(:last-child) ol li:after {
-      content: none; }
 
 .entry-content ol {
   position: relative;
@@ -271,20 +246,20 @@
       z-index: 10; }
     .entry-content ol li:not(:last-child):before {
       right: calc( -1 * var(--list-padding)); }
-  .entry-content ol.is-style-timeline:before, .entry-content ol[data-novablocks-connection-style="is-style-timeline"]:before {
+  .entry-content ol.is-style-timeline[class]:before, .entry-content ol[data-novablocks-connection-style="is-style-timeline"][class]:before {
     content: '';
     position: absolute;
-    right: calc( var(--bullet-width) * 0.5 - 0.1em);
+    right: calc( var(--bullet-width) * 0.5);
     width: var(--divider-weight);
     height: 100%;
     background-color: var(--sm-bg-color-2); }
-  .entry-content ol.is-style-timeline > li:after, .entry-content ol[data-novablocks-connection-style="is-style-timeline"] > li:after {
+  .entry-content ol.is-style-timeline[class] > li:after, .entry-content ol[data-novablocks-connection-style="is-style-timeline"][class] > li:after {
     right: calc(-1 * var( --list-padding) * 0.5); }
-  .entry-content ol.is-style-timeline > li:last-child, .entry-content ol[data-novablocks-connection-style="is-style-timeline"] > li:last-child {
+  .entry-content ol.is-style-timeline[class] > li:last-child, .entry-content ol[data-novablocks-connection-style="is-style-timeline"][class] > li:last-child {
     margin-right: calc(var(--list-padding) * -0.5);
     padding-right: calc(var(--list-padding) * 0.5);
     box-shadow: calc(-1*(var(--divider-weight) * -1.5)) 0 0px 0 var(--current-light-primary); }
-    .entry-content ol.is-style-timeline > li:last-child:before, .entry-content ol[data-novablocks-connection-style="is-style-timeline"] > li:last-child:before {
+    .entry-content ol.is-style-timeline[class] > li:last-child:before, .entry-content ol[data-novablocks-connection-style="is-style-timeline"][class] > li:last-child:before {
       right: calc( -0.5 * var(--list-padding)); }
 
 .entry-content .list-checkmark-style.is-style-divider,
@@ -304,12 +279,34 @@
     .entry-content ol.is-style-divider[class][class][class] li:after {
       right: 0; }
 
-.entry-content ol.is-style-timeline > li:last-child:after, .entry-content ol[data-novablocks-connection-style="is-style-timeline"] > li:last-child:after {
+.entry-content ol.is-style-timeline[class][class] > li:last-child:after, .entry-content ol[data-novablocks-connection-style="is-style-timeline"][class][class] > li:last-child:after {
   content: '';
   position: absolute;
   width: calc(var(--separator-weight) * 2);
   height: 100%;
-  right: -1px;
+  right: calc(-1 * var(--separator-weight));
+  transform: translateX(50%);
+  top: 0.55em;
+  background-color: var(--sm-current-bg-color); }
+
+.entry-content .is-style-timeline:not(.list-no-marker):before,
+.entry-content [data-novablocks-connection-style="is-style-timeline"]:not([data-novablocks-list-style="list-no-marker"]):before {
+  content: '';
+  position: absolute;
+  top: calc(var(--icon-height) * 0.5);
+  right: calc(var(--icon-width) * 0.5 + var(--bullet-border-width));
+  transform: translateX(50%);
+  width: var(--separator-weight);
+  height: 100%;
+  background-color: var(--sm-bg-color-2); }
+
+.entry-content .is-style-timeline:not(.list-no-marker) li:last-child:after,
+.entry-content [data-novablocks-connection-style="is-style-timeline"]:not([data-novablocks-list-style="list-no-marker"]) li:last-child:after {
+  content: '';
+  position: absolute;
+  width: calc(var(--separator-weight) * 2);
+  height: 100%;
+  right: calc(-1 * (var(--list-padding) - var(--icon-width) * 0.5));
   top: 0.55em;
   background-color: var(--sm-current-bg-color); }
 
