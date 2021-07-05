@@ -1,15 +1,23 @@
 .c-subscribe-form {
-	
 	display: flex;
 	flex-direction: column;
-	
+
+	@include apply-palette(2);
 	@include space-children-y(var(--theme-spacing-fluid-default));
 	
 	button[type='submit'] {
-		background-color: var(--theme-button-background-color) !important;
-		--theme-button-background-color: var(--current-color-secondary) !important;
-		--theme-button-text-color: var(--current-light-primary) !important;
-		--theme-button-hover-text-color: var(--current-light-primary) !important;
+		@include apply-variation(6);
+
+		background-color: var(--current-button-background-color) !important;
+		color: var(--current-button-text-color) !important;
+
+		--theme-button-text-color: var(--sm-current-fg1-color) !important;
+		--theme-button-background-color: var(--sm-current-bg-color) !important;
+		--theme-button-border-color: var(--sm-current-bg-color) !important;
+
+		--theme-button-hover-text-color: var(--sm-current-fg1-color) !important;
+		--theme-button-hover-background-color: var(--sm-current-bg-color) !important;
+		--theme-button-hover-border-color: var(--sm-current-bg-color) !important;
 	}
 	
 	a {
@@ -30,16 +38,15 @@
 		flex-direction: column;
 		
 		button[type='submit'] {
-			border: 0 !important;
 			margin-top: var(--theme-spacing-tiny);
 		}
 	}
 	
 	&.form-has-background {
-		background-color: var(--current-dark-primary);
-		color: var(--current-light-primary);
-		
+		@include apply-variation(12);
 		padding: 2em;
+		background-color: var(--sm-current-bg-color);
+		color: var(--sm-current-fg1-color);
 	}
 	
 	&.button-is-inline {

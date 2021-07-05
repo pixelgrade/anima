@@ -1011,14 +1011,70 @@ table {
 
 .c-subscribe-form {
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  --sm-bg-color-1: var(--sm-color-palette-2-bg-color-1);
+  --sm-accent-color-1: var(--sm-color-palette-2-accent-color-1);
+  --sm-fg1-color-1: var(--sm-color-palette-2-fg1-color-1);
+  --sm-fg2-color-1: var(--sm-color-palette-2-fg2-color-1);
+  --sm-bg-color-2: var(--sm-color-palette-2-bg-color-2);
+  --sm-accent-color-2: var(--sm-color-palette-2-accent-color-2);
+  --sm-fg1-color-2: var(--sm-color-palette-2-fg1-color-2);
+  --sm-fg2-color-2: var(--sm-color-palette-2-fg2-color-2);
+  --sm-bg-color-3: var(--sm-color-palette-2-bg-color-3);
+  --sm-accent-color-3: var(--sm-color-palette-2-accent-color-3);
+  --sm-fg1-color-3: var(--sm-color-palette-2-fg1-color-3);
+  --sm-fg2-color-3: var(--sm-color-palette-2-fg2-color-3);
+  --sm-bg-color-4: var(--sm-color-palette-2-bg-color-4);
+  --sm-accent-color-4: var(--sm-color-palette-2-accent-color-4);
+  --sm-fg1-color-4: var(--sm-color-palette-2-fg1-color-4);
+  --sm-fg2-color-4: var(--sm-color-palette-2-fg2-color-4);
+  --sm-bg-color-5: var(--sm-color-palette-2-bg-color-5);
+  --sm-accent-color-5: var(--sm-color-palette-2-accent-color-5);
+  --sm-fg1-color-5: var(--sm-color-palette-2-fg1-color-5);
+  --sm-fg2-color-5: var(--sm-color-palette-2-fg2-color-5);
+  --sm-bg-color-6: var(--sm-color-palette-2-bg-color-6);
+  --sm-accent-color-6: var(--sm-color-palette-2-accent-color-6);
+  --sm-fg1-color-6: var(--sm-color-palette-2-fg1-color-6);
+  --sm-fg2-color-6: var(--sm-color-palette-2-fg2-color-6);
+  --sm-bg-color-7: var(--sm-color-palette-2-bg-color-7);
+  --sm-accent-color-7: var(--sm-color-palette-2-accent-color-7);
+  --sm-fg1-color-7: var(--sm-color-palette-2-fg1-color-7);
+  --sm-fg2-color-7: var(--sm-color-palette-2-fg2-color-7);
+  --sm-bg-color-8: var(--sm-color-palette-2-bg-color-8);
+  --sm-accent-color-8: var(--sm-color-palette-2-accent-color-8);
+  --sm-fg1-color-8: var(--sm-color-palette-2-fg1-color-8);
+  --sm-fg2-color-8: var(--sm-color-palette-2-fg2-color-8);
+  --sm-bg-color-9: var(--sm-color-palette-2-bg-color-9);
+  --sm-accent-color-9: var(--sm-color-palette-2-accent-color-9);
+  --sm-fg1-color-9: var(--sm-color-palette-2-fg1-color-9);
+  --sm-fg2-color-9: var(--sm-color-palette-2-fg2-color-9);
+  --sm-bg-color-10: var(--sm-color-palette-2-bg-color-10);
+  --sm-accent-color-10: var(--sm-color-palette-2-accent-color-10);
+  --sm-fg1-color-10: var(--sm-color-palette-2-fg1-color-10);
+  --sm-fg2-color-10: var(--sm-color-palette-2-fg2-color-10);
+  --sm-bg-color-11: var(--sm-color-palette-2-bg-color-11);
+  --sm-accent-color-11: var(--sm-color-palette-2-accent-color-11);
+  --sm-fg1-color-11: var(--sm-color-palette-2-fg1-color-11);
+  --sm-fg2-color-11: var(--sm-color-palette-2-fg2-color-11);
+  --sm-bg-color-12: var(--sm-color-palette-2-bg-color-12);
+  --sm-accent-color-12: var(--sm-color-palette-2-accent-color-12);
+  --sm-fg1-color-12: var(--sm-color-palette-2-fg1-color-12);
+  --sm-fg2-color-12: var(--sm-color-palette-2-fg2-color-12); }
   .c-subscribe-form > :not(:first-child) {
     margin-top: var(--theme-spacing-fluid-default); }
   .c-subscribe-form button[type='submit'] {
-    background-color: var(--theme-button-background-color) !important;
-    --theme-button-background-color: var(--current-color-secondary) !important;
-    --theme-button-text-color: var(--current-light-primary) !important;
-    --theme-button-hover-text-color: var(--current-light-primary) !important; }
+    --sm-current-bg-color: var(--sm-bg-color-6);
+    --sm-current-accent-color: var(--sm-accent-color-6);
+    --sm-current-fg1-color: var(--sm-fg1-color-6);
+    --sm-current-fg2-color: var(--sm-fg2-color-6);
+    background-color: var(--current-button-background-color) !important;
+    color: var(--current-button-text-color) !important;
+    --theme-button-text-color: var(--sm-current-fg1-color) !important;
+    --theme-button-background-color: var(--sm-current-bg-color) !important;
+    --theme-button-border-color: var(--sm-current-bg-color) !important;
+    --theme-button-hover-text-color: var(--sm-current-fg1-color) !important;
+    --theme-button-hover-background-color: var(--sm-current-bg-color) !important;
+    --theme-button-hover-border-color: var(--sm-current-bg-color) !important; }
   .c-subscribe-form a {
     color: inherit;
     text-decoration: underline; }
@@ -1030,12 +1086,15 @@ table {
     display: flex;
     flex-direction: column; }
     .c-subscribe-form__actions button[type='submit'] {
-      border: 0 !important;
       margin-top: var(--theme-spacing-tiny); }
   .c-subscribe-form.form-has-background {
-    background-color: var(--current-dark-primary);
-    color: var(--current-light-primary);
-    padding: 2em; }
+    --sm-current-bg-color: var(--sm-bg-color-12);
+    --sm-current-accent-color: var(--sm-accent-color-12);
+    --sm-current-fg1-color: var(--sm-fg1-color-12);
+    --sm-current-fg2-color: var(--sm-fg2-color-12);
+    padding: 2em;
+    background-color: var(--sm-current-bg-color);
+    color: var(--sm-current-fg1-color); }
   .c-subscribe-form.button-is-inline button {
     position: relative;
     font-size: 0 !important;
