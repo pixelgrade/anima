@@ -189,18 +189,18 @@ ul.wp-block-categories__list[class] {
   .block-editor-block-list__layout[class][class] ul.list-checkmark-style[class][class],
   .block-editor-block-list__layout[class][class] ul.list-checkmark-style[class][class] ul, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"][class][class],
   .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"][class][class] ul {
-    --list-padding: calc(var(--theme-spacing-fluid-small) * 1.2);
-    --icon-background-width: calc(var(--list-padding) - 0.45em);
-    --icon-background-height:  calc(var(--list-padding) - 0.45em); }
+    --list-padding: calc(var(--theme-spacing-fluid-small) * 1);
+    --icon-background-width: calc(var(--list-padding) - 0.4em);
+    --icon-background-height:  calc(var(--list-padding) - 0.4em); }
   .block-editor-block-list__layout[class][class] ul.list-checkmark-style[class][class] li:before, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"][class][class] li:before {
     content: "";
     display: block;
     position: absolute;
-    --pull-value: calc(var(--list-padding) * 0.22);
+    --pull-value: calc(var(--list-padding) * 0.205);
     top: var(--pull-value);
     left: calc(var(--list-padding) * -1 + var(--pull-value));
-    width: calc(var( --list-padding) * 0.35);
-    height: calc(var( --list-padding) * 0.35);
+    width: calc(var( --list-padding) * 0.40);
+    height: calc(var( --list-padding) * 0.40);
     mask: url("../../../assets/images/checkbox.svg") no-repeat 50% 50%;
     mask-size: contain;
     mask-position: center;

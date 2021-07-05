@@ -194,9 +194,9 @@ ul {
 		
 		&,
 		ul {
-			--list-padding: calc(var(--theme-spacing-fluid-small) * 1.2);
-			--icon-background-width: calc(var(--list-padding) - 0.45em);
-			--icon-background-height:  calc(var(--list-padding) - 0.45em);
+			--list-padding: calc(var(--theme-spacing-fluid-small) * 1);
+			--icon-background-width: calc(var(--list-padding) - 0.4em);
+			--icon-background-height:  calc(var(--list-padding) - 0.4em);
 		}
 		
 		li {
@@ -205,11 +205,12 @@ ul {
 				content: "";
 				display: block;
 				position: absolute;
-				--pull-value: calc(var(--list-padding) * 0.22);
+
+				--pull-value: calc(var(--list-padding) * 0.205);
 				top: var(--pull-value);
 				left: calc(var(--list-padding) * -1 + var(--pull-value));
-				width: calc(var( --list-padding) * 0.35);
-				height: calc(var( --list-padding) * 0.35);
+				width: calc(var( --list-padding) * 0.40);
+				height: calc(var( --list-padding) * 0.40);
 				
 				mask: url($checkbox-svg-path) no-repeat 50% 50%;
 				mask-size: contain;
