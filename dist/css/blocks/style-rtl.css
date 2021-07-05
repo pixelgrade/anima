@@ -100,12 +100,6 @@
   margin-left: var(--theme-comment-avatar-spacing);
   object-fit: cover; }
 
-ul,
-ol {
-  --separator-weight: 0.11em;
-  --icon-width: .3em;
-  --icon-height: .3em; }
-
 .is-style-divider li {
   --element-spacing: var(--theme-spacing-fluid-default); }
   .is-style-divider li:not(:last-child) {
@@ -124,127 +118,28 @@ ol {
     top: 0.55em;
     background-color: var(--current-light-secondary); }
 
-.entry-content ul {
-  list-style: none; }
-  .entry-content ul li {
-    position: relative; }
-    .entry-content ul li:before {
-      content: '';
-      position: absolute;
-      top: calc(var(--separator-weight) + var(--icon-height));
-      right: calc(-1 * var( --list-padding) + var(--separator-weight));
-      background-color: var(--current-light-primary);
-      width: var(--icon-width);
-      height: var(--icon-height);
-      border-radius: 50%;
-      box-shadow: 0 0 0 var(--separator-weight) currentColor, 0 0 0 0.31em var(--current-light-primary);
-      z-index: 10; }
-  .entry-content ul.list-no-marker {
-    padding-right: 0;
-    list-style: none; }
-    .entry-content ul.list-no-marker li:before {
-      content: none; }
-    .entry-content ul.list-no-marker.is-style-timeline {
-      padding-right: var(--list-padding);
-      box-shadow: inset var(--separator-weight) 0 0 var(--current-light-secondary); }
-      .entry-content ul.list-no-marker.is-style-timeline li:after {
-        content: none; }
-  .entry-content ul.list-checkmark-style.is-style-timeline {
-    --border-width: 0.11em; }
-    .entry-content ul.list-checkmark-style.is-style-timeline:before {
-      content: '';
-      position: absolute;
-      right: calc(var(--icon-background-width) * 0.5);
-      width: var(--separator-weight);
-      height: 100%;
-      background-color: var(--current-light-secondary); }
-    .entry-content ul.list-checkmark-style.is-style-timeline li:last-child {
-      margin-right: calc(var(--list-padding) * -0.5);
-      padding-right: calc(var(--list-padding) * 0.5);
-      box-shadow: calc(-1*(var(--separator-weight) * -5)) 0 0px 0 var(--current-light-primary); }
-      .entry-content ul.list-checkmark-style.is-style-timeline li:last-child:before {
-        right: calc(var(--list-padding) * -0.5 + var(--pull-value)); }
-      .entry-content ul.list-checkmark-style.is-style-timeline li:last-child:after {
-        right: calc(-1 * var(--list-padding) * 0.5); }
-  .entry-content ul.list-checkmark-style {
-    --list-padding: calc(var(--theme-spacing-fluid-small) * 1.2);
-    --icon-background-width: calc(var(--list-padding) - 0.45em);
-    --icon-background-height:  calc(var(--list-padding) - 0.45em); }
-    .entry-content ul.list-checkmark-style li:before {
-      content: '';
-      display: block;
-      position: absolute;
-      --pull-value: calc(var(--list-padding) * 0.22);
-      top: var(--pull-value);
-      right: calc(var(--list-padding) * -1 + var(--pull-value));
-      width: calc(var( --list-padding) * 0.35);
-      height: calc(var( --list-padding) * 0.35);
-      mask: url("../../../assets/images/checkbox.svg") no-repeat 50% 50%;
-      mask-size: contain;
-      mask-position: center;
-      -webkit-mask: url("../../../assets/images/checkbox.svg") no-repeat 50% 50%;
-      -webkit-mask-size: contain;
-      -webkit-mask-position: center;
-      background-color: var(--current-light-primary); }
-    .entry-content ul.list-checkmark-style li:after {
-      content: '';
-      position: absolute;
-      right: calc(-1 * var(--list-padding));
-      top: 0;
-      width: var(--icon-background-width);
-      height: var(--icon-background-height);
-      background-color: var(--current-color-primary);
-      border-radius: 50%;
-      box-shadow: 0 0 0 4px var(--current-light-primary); }
-
-.entry-content ol {
-  position: relative;
-  list-style-type: none;
-  counter-reset: li;
-  font-variant-numeric: slashed-zero; }
-  .entry-content ol li {
-    position: relative; }
-    .entry-content ol li:before {
-      position: absolute;
-      right: calc( -1 * var( --list-padding));
-      width: var(--list-padding);
-      counter-increment: li;
-      content: counter(li, decimal-leading-zero);
-      text-align: center;
-      background-color: var(--current-light-primary);
-      z-index: 10; }
-    .entry-content ol li:not(:last-child):before {
-      right: calc( -1 * var( --list-padding)); }
-  .entry-content ol.is-style-timeline:before {
-    content: '';
-    position: absolute;
-    right: calc( var(--list-padding) * 0.5);
-    width: var(--separator-weight);
-    height: 100%;
-    background-color: var(--current-light-secondary); }
-  .entry-content ol.is-style-timeline > li:after {
-    right: calc( -1 * var( --list-padding) * 0.5);
-    content: none !important; }
-  .entry-content ol.is-style-timeline > li:last-child {
-    margin-right: calc(var(--list-padding) * -0.5 + var(--separator-weight));
-    padding-right: calc(var(--list-padding) * 0.5);
-    box-shadow: calc(-1*(var(--separator-weight) * -1.5)) 0 0px 0 var(--current-light-primary); }
-    .entry-content ol.is-style-timeline > li:last-child:before {
-      right: calc( var( --list-padding) * -0.5 - var(--separator-weight)) !important; }
-
 .entry-content ul,
 .entry-content ol {
-  --separator-weight: 0.11em;
-  --icon-width: .3em;
-  --icon-height: .3em; }
+  --separator-weight: 0.388em;
+  --divider-weight: 0.222em;
+  --icon-width: 0.333em;
+  --icon-height: 0.333em;
+  background-color: transparent;
+  color: inherit; }
 
 .entry-content .is-style-divider li,
 .entry-content [data-novablocks-connection-style="is-style-divider"] li {
   --element-spacing: var(--theme-spacing-fluid-default); }
   .entry-content .is-style-divider li:not(:last-child),
   .entry-content [data-novablocks-connection-style="is-style-divider"] li:not(:last-child) {
-    border-bottom: var(--separator-weight) solid var(--current-light-secondary);
+    border-bottom: var(--divider-weight) solid var(--sm-bg-color-2);
     padding-bottom: var(--element-spacing); }
+  .entry-content .is-style-divider li ul li,
+  .entry-content .is-style-divider li ol li,
+  .entry-content [data-novablocks-connection-style="is-style-divider"] li ul li,
+  .entry-content [data-novablocks-connection-style="is-style-divider"] li ol li {
+    border-bottom: 0;
+    padding-bottom: 0; }
 
 .entry-content .is-style-timeline,
 .entry-content [data-novablocks-connection-style="is-style-timeline"] {
@@ -255,26 +150,35 @@ ol {
   .entry-content [data-novablocks-connection-style="is-style-timeline"]:not([data-novablocks-list-style="list-checkmark-style"]) li:not(:last-child):after {
     content: '';
     position: absolute;
-    width: var(--separator-weight);
-    height: calc(100% + var(--element-spacing));
-    right: calc(-1 * var(--list-padding) + var(--separator-weight) + var(--separator-weight) * 0.5);
+    width: var(--divider-weight);
+    height: calc( 100% + var(--theme-spacing-fluid-default));
+    right: calc(-1 * var(--list-padding) + var(--icon-width) * 0.5 - var(--divider-weight) * 0.5);
     top: 0.55em;
-    background-color: var(--current-light-secondary); }
+    background-color: var(--sm-bg-color-2);
+    z-index: -1; }
+  .entry-content .is-style-timeline:not(.list-checkmark-style) li:not(:last-child) ul li:after,
+  .entry-content .is-style-timeline:not(.list-checkmark-style) li:not(:last-child) ol li:after, .entry-content .is-style-timeline:not([data-novablocks-list-style="list-checkmark-style"]) li:not(:last-child) ul li:after,
+  .entry-content .is-style-timeline:not([data-novablocks-list-style="list-checkmark-style"]) li:not(:last-child) ol li:after,
+  .entry-content [data-novablocks-connection-style="is-style-timeline"]:not(.list-checkmark-style) li:not(:last-child) ul li:after,
+  .entry-content [data-novablocks-connection-style="is-style-timeline"]:not(.list-checkmark-style) li:not(:last-child) ol li:after,
+  .entry-content [data-novablocks-connection-style="is-style-timeline"]:not([data-novablocks-list-style="list-checkmark-style"]) li:not(:last-child) ul li:after,
+  .entry-content [data-novablocks-connection-style="is-style-timeline"]:not([data-novablocks-list-style="list-checkmark-style"]) li:not(:last-child) ol li:after {
+    content: none; }
 
 .entry-content ul {
   list-style: none; }
   .entry-content ul li {
     position: relative; }
     .entry-content ul li:before {
-      content: '';
       position: absolute;
-      top: calc(var(--separator-weight) + var(--icon-height));
-      right: calc(-1 * var( --list-padding) + var(--separator-weight));
-      background-color: var(--current-light-primary);
+      content: '';
+      top: calc((var(--final-font-size) * var(--current-line-height) - var(--icon-height)) * 0.5);
+      right: calc(-1 * var( --list-padding));
+      background-color: var(--sm-current-fg1-color);
       width: var(--icon-width);
       height: var(--icon-height);
       border-radius: 50%;
-      box-shadow: 0 0 0 var(--separator-weight) currentColor, 0 0 0 0.31em var(--current-light-primary);
+      box-shadow: 0 0 0 var(--separator-weight) var(--sm-current-bg-color), 0 0 0 0.4em var(--page-background-color);
       z-index: 10; }
   .entry-content ul.list-no-marker, .entry-content ul[data-novablocks-list-style="list-no-marker"] {
     padding-right: 0;
@@ -283,7 +187,7 @@ ol {
       content: none; }
     .entry-content ul.list-no-marker.is-style-timeline[class], .entry-content ul.list-no-marker[data-novablocks-connection-style="is-style-timeline"][class], .entry-content ul[data-novablocks-list-style="list-no-marker"].is-style-timeline[class], .entry-content ul[data-novablocks-list-style="list-no-marker"][data-novablocks-connection-style="is-style-timeline"][class] {
       padding-right: var(--list-padding);
-      box-shadow: inset var(--separator-weight) 0 0 var(--current-light-secondary); }
+      box-shadow: inset var(--divider-weight) 0 0 var(--sm-bg-color-2); }
       .entry-content ul.list-no-marker.is-style-timeline[class] li:after, .entry-content ul.list-no-marker[data-novablocks-connection-style="is-style-timeline"][class] li:after, .entry-content ul[data-novablocks-list-style="list-no-marker"].is-style-timeline[class] li:after, .entry-content ul[data-novablocks-list-style="list-no-marker"][data-novablocks-connection-style="is-style-timeline"][class] li:after {
         content: none; }
   .entry-content ul.list-checkmark-style.is-style-timeline[class], .entry-content ul.list-checkmark-style[data-novablocks-connection-style="is-style-timeline"][class], .entry-content ul[data-novablocks-list-style="list-checkmark-style"].is-style-timeline[class], .entry-content ul[data-novablocks-list-style="list-checkmark-style"][data-novablocks-connection-style="is-style-timeline"][class] {
@@ -294,7 +198,7 @@ ol {
       right: calc(var(--icon-background-width) * 0.5);
       width: var(--separator-weight);
       height: 100%;
-      background-color: var(--current-light-secondary); }
+      background-color: var(--sm-bg-color-2); }
     .entry-content ul.list-checkmark-style.is-style-timeline[class] li:last-child, .entry-content ul.list-checkmark-style[data-novablocks-connection-style="is-style-timeline"][class] li:last-child, .entry-content ul[data-novablocks-list-style="list-checkmark-style"].is-style-timeline[class] li:last-child, .entry-content ul[data-novablocks-list-style="list-checkmark-style"][data-novablocks-connection-style="is-style-timeline"][class] li:last-child {
       margin-right: calc(var(--list-padding) * -0.5);
       padding-right: calc(var(--list-padding) * 0.5);
@@ -303,36 +207,38 @@ ol {
         right: calc(var(--list-padding) * -0.5 + var(--pull-value)); }
       .entry-content ul.list-checkmark-style.is-style-timeline[class] li:last-child:after, .entry-content ul.list-checkmark-style[data-novablocks-connection-style="is-style-timeline"][class] li:last-child:after, .entry-content ul[data-novablocks-list-style="list-checkmark-style"].is-style-timeline[class] li:last-child:after, .entry-content ul[data-novablocks-list-style="list-checkmark-style"][data-novablocks-connection-style="is-style-timeline"][class] li:last-child:after {
         right: calc(-1 * var(--list-padding) * 0.5); }
-  .entry-content ul.list-checkmark-style[class][class], .entry-content ul[data-novablocks-list-style="list-checkmark-style"][class][class] {
+  .entry-content ul.list-checkmark-style[class][class],
+  .entry-content ul.list-checkmark-style[class][class] ul, .entry-content ul[data-novablocks-list-style="list-checkmark-style"][class][class],
+  .entry-content ul[data-novablocks-list-style="list-checkmark-style"][class][class] ul {
     --list-padding: calc(var(--theme-spacing-fluid-small) * 1.2);
     --icon-background-width: calc(var(--list-padding) - 0.45em);
     --icon-background-height:  calc(var(--list-padding) - 0.45em); }
-    .entry-content ul.list-checkmark-style[class][class] li:before, .entry-content ul[data-novablocks-list-style="list-checkmark-style"][class][class] li:before {
-      content: "";
-      display: block;
-      position: absolute;
-      --pull-value: calc(var(--list-padding) * 0.22);
-      top: var(--pull-value);
-      right: calc(var(--list-padding) * -1 + var(--pull-value));
-      width: calc(var( --list-padding) * 0.35);
-      height: calc(var( --list-padding) * 0.35);
-      mask: url("../../../assets/images/checkbox.svg") no-repeat 50% 50%;
-      mask-size: contain;
-      mask-position: center;
-      -webkit-mask: url("../../../assets/images/checkbox.svg") no-repeat 50% 50%;
-      -webkit-mask-size: contain;
-      -webkit-mask-position: center;
-      background-color: var(--current-light-primary); }
-    .entry-content ul.list-checkmark-style[class][class] li:after, .entry-content ul[data-novablocks-list-style="list-checkmark-style"][class][class] li:after {
-      content: '';
-      position: absolute;
-      right: calc(-1 * var(--list-padding));
-      top: 0;
-      width: var(--icon-background-width);
-      height: var(--icon-background-height);
-      background-color: var(--current-color-primary);
-      border-radius: 50%;
-      box-shadow: 0 0 0 4px var(--current-light-primary); }
+  .entry-content ul.list-checkmark-style[class][class] li:before, .entry-content ul[data-novablocks-list-style="list-checkmark-style"][class][class] li:before {
+    content: "";
+    display: block;
+    position: absolute;
+    --pull-value: calc(var(--list-padding) * 0.22);
+    top: var(--pull-value);
+    right: calc(var(--list-padding) * -1 + var(--pull-value));
+    width: calc(var( --list-padding) * 0.35);
+    height: calc(var( --list-padding) * 0.35);
+    mask: url("../../../assets/images/checkbox.svg") no-repeat 50% 50%;
+    mask-size: contain;
+    mask-position: center;
+    -webkit-mask: url("../../../assets/images/checkbox.svg") no-repeat 50% 50%;
+    -webkit-mask-size: contain;
+    -webkit-mask-position: center;
+    background-color: var(--sm-current-bg-color); }
+  .entry-content ul.list-checkmark-style[class][class] li:after, .entry-content ul[data-novablocks-list-style="list-checkmark-style"][class][class] li:after {
+    content: '';
+    position: absolute;
+    right: calc(-1 * var(--list-padding));
+    top: calc((var(--final-font-size) * var(--current-line-height) - var(--icon-background-height)) * 0.5);
+    width: var(--icon-background-width);
+    height: var(--icon-background-height);
+    background-color: var(--sm-current-accent-color);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px var(--current-light-primary); }
 
 .entry-content ol {
   position: relative;
@@ -348,7 +254,8 @@ ol {
       counter-increment: li;
       content: counter(li, decimal-leading-zero);
       text-align: center;
-      background-color: var(--current-light-primary);
+      color: var(--sm-current-accent-color);
+      background-color: var(--sm-current-bg-color);
       z-index: 10; }
     .entry-content ol li:not(:last-child):before {
       right: calc( -1 * var( --list-padding)); }
@@ -356,18 +263,40 @@ ol {
     content: '';
     position: absolute;
     right: calc( var(--list-padding) * 0.5);
-    width: var(--separator-weight);
-    height: 100%;
-    background-color: var(--current-light-secondary); }
+    width: var(--divider-weight);
+    height: calc(100% + var(--theme-spacing-fluid-default));
+    background-color: var(--sm-bg-color-2); }
   .entry-content ol.is-style-timeline > li:after, .entry-content ol[data-novablocks-connection-style="is-style-timeline"] > li:after {
     right: calc( -1 * var( --list-padding) * 0.5);
     content: none !important; }
   .entry-content ol.is-style-timeline > li:last-child, .entry-content ol[data-novablocks-connection-style="is-style-timeline"] > li:last-child {
-    margin-right: calc(var(--list-padding) * -0.5 + var(--separator-weight));
+    margin-right: calc(var(--list-padding) * -0.5 + var(--divider-weight));
     padding-right: calc(var(--list-padding) * 0.5);
-    box-shadow: calc(-1*(var(--separator-weight) * -1.5)) 0 0px 0 var(--current-light-primary); }
+    box-shadow: calc(-1*(var(--divider-weight) * -1.5)) 0 0px 0 var(--current-light-primary); }
     .entry-content ol.is-style-timeline > li:last-child:before, .entry-content ol[data-novablocks-connection-style="is-style-timeline"] > li:last-child:before {
-      right: calc( var( --list-padding) * -0.5 - var(--separator-weight)) !important; }
+      right: calc( var( --list-padding) * -0.5 - var(--divider-weight)) !important; }
+
+.entry-content .list-checkmark-style.is-style-divider,
+.entry-content ul.is-style-divider:not(.list-no-marker) {
+  padding-right: 0; }
+  .entry-content .list-checkmark-style.is-style-divider[class][class][class] li,
+  .entry-content ul.is-style-divider:not(.list-no-marker)[class][class][class] li {
+    padding-right: var(--list-padding); }
+    .entry-content .list-checkmark-style.is-style-divider[class][class][class] li:before,
+    .entry-content ul.is-style-divider:not(.list-no-marker)[class][class][class] li:before {
+      right: var(--pull-value, 0); }
+    .entry-content .list-checkmark-style.is-style-divider[class][class][class] li:after,
+    .entry-content ul.is-style-divider:not(.list-no-marker)[class][class][class] li:after {
+      right: 0; }
+
+.entry-content ol.is-style-timeline li:last-child:after {
+  content: '' !important;
+  position: absolute;
+  width: var(--separator-weight);
+  height: calc( 100% + var(--theme-spacing-fluid-default));
+  right: calc(-1 * var(--separator-weight));
+  top: 0.55em;
+  background-color: var(--sm-current-bg-color); }
 
 .wp-block-jetpack-subscriptions form {
   display: flex;

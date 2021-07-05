@@ -1,10 +1,38 @@
+// List default settings
+// --separator-weight: border weight used for Divider or Timeline.
+// Usually used on border or box-shadow, depending on the situation.
+// This will also help us to position correctly the
+// :before element on <li> (usually bullet, or checkmark).
+// --icon-width and --icon-height: width and height of the checkmarks.
+// This will also help us to position correctly
+// checkmark background, or timeline border.
 ul,
 ol {
-	--separator-weight: 0.11em;
-	--icon-width: .3em;
-	--icon-height: .3em;
+	--separator-weight: 0.388em;
+	--divider-weight: 0.222em;
+	--icon-width: 0.333em;
+	--icon-height: 0.333em;
+	
+	background-color: transparent;
+	color: inherit;
 }
 
+// Users can select between two options
+// for list: ordered and unordered.
+// For ordered list, his intention is clear,
+// he wants an ordered list, with numbers.
+// For this selection, user can control
+// List Items Connection: None, Divider or Timeline.
+// For unordered lists, his intention is not really clear,
+// We know that he wants a list, but we are not sure
+// that he wants bullets, icon, or maybe nothing,
+// just a simple list.
+// Fot this selection, user can control
+// Marker Settings: None, Bullet or Checkmark.
+// List Items Connection: None, Divider or Timeline.
+//
+// To avoid any leaks, Marker Settings related classes
+// are used only for <ul>.
 .is-style-divider,
 [data-novablocks-connection-style="is-style-divider"] {
 	
@@ -12,8 +40,17 @@ ol {
 		--element-spacing: var(--theme-spacing-fluid-default);
 		
 		&:not(:last-child) {
-			border-bottom: var(--separator-weight) solid var(--current-light-secondary);
+			border-bottom: var(--divider-weight) solid var(--sm-bg-color-2);
 			padding-bottom: var(--element-spacing);
+		}
+		
+		ul,
+		ol {
+			
+			li {
+				border-bottom: 0;
+				padding-bottom: 0;
+			}
 		}
 	}
 	
@@ -41,11 +78,21 @@ ol {
 			&:after {
 				content: '';
 				position: absolute;
-				width: var(--separator-weight);
-				height: calc(100% + var(--element-spacing));
-				left: calc(-1 * var(--list-padding) + var(--separator-weight) + var(--separator-weight) * 0.5);
+				width: var(--divider-weight);
+				height: calc( 100% + var(--theme-spacing-fluid-default) );
+				left: calc(-1 * var(--list-padding) + var(--icon-width) * 0.5 - var(--divider-weight) * 0.5);
 				top: 0.55em;
-				background-color: var(--current-light-secondary);
+				background-color: var(--sm-bg-color-2);
+				
+				z-index: -1;
+			}
+			
+			ul,
+			ol {
+				
+				li:after {
+					content: none;
+				}
 			}
 		}
 	}
@@ -60,19 +107,19 @@ ul {
 		position: relative;
 		
 		&:before {
-			content: '';
+			
 			position: absolute;
-			top: calc(var(--separator-weight) + var(--icon-height));
-			left: calc(-1 * var( --list-padding) + var(--separator-weight) );
 			
-			background-color: var(--current-light-primary);
+			content: '';
+			top: calc((var(--final-font-size) * var(--current-line-height) - var(--icon-height)) * 0.5);
 			
-			width: var(--icon-width);
-			height: var(--icon-height);
+			left: calc(-1 * var( --list-padding));
 			
+			background-color: var( --sm-current-fg1-color);
+			width: var( --icon-width);
+			height: var( --icon-height);
 			border-radius: 50%;
-			box-shadow: 0 0 0 var(--separator-weight) currentColor, 0 0 0 0.31em var(--current-light-primary);
-			
+			box-shadow: 0 0 0 var( --separator-weight) var(--sm-current-bg-color), 0 0 0 0.4em var(--page-background-color);
 			z-index: 10;
 		}
 	}
@@ -94,7 +141,7 @@ ul {
 		&[data-novablocks-connection-style="is-style-timeline"][class]{
 			
 			padding-left: var(--list-padding);
-			box-shadow: inset var(--separator-weight) 0 0 var(--current-light-secondary);
+			box-shadow: inset var(--divider-weight) 0 0 var(--sm-bg-color-2);
 			
 			li {
 				
@@ -120,7 +167,7 @@ ul {
 				left: calc(var(--icon-background-width) * 0.5);
 				width: var(--separator-weight);
 				height: 100%;
-				background-color: var(--current-light-secondary);
+				background-color: var(--sm-bg-color-2);
 			}
 			
 			li {
@@ -145,9 +192,12 @@ ul {
 	&.list-checkmark-style[class][class],
 	&[data-novablocks-list-style="list-checkmark-style"][class][class] {
 		
-		--list-padding: calc(var(--theme-spacing-fluid-small) * 1.2);
-		--icon-background-width: calc(var(--list-padding) - 0.45em);
-		--icon-background-height:  calc(var(--list-padding) - 0.45em);
+		&,
+		ul {
+			--list-padding: calc(var(--theme-spacing-fluid-small) * 1.2);
+			--icon-background-width: calc(var(--list-padding) - 0.45em);
+			--icon-background-height:  calc(var(--list-padding) - 0.45em);
+		}
 		
 		li {
 			
@@ -168,17 +218,17 @@ ul {
 				-webkit-mask-size: contain;
 				-webkit-mask-position: center;
 				
-				background-color: var(--current-light-primary);
+				background-color: var(--sm-current-bg-color);
 			}
 			
 			&:after {
 				content: '';
 				position: absolute;
 				left: calc(-1 * var(--list-padding));
-				top: 0;
+				top: calc((var(--final-font-size) * var(--current-line-height) - var(--icon-background-height)) * 0.5);
 				width: var(--icon-background-width);
 				height: var(--icon-background-height);
-				background-color: var(--current-color-primary);
+				background-color: var(--sm-current-accent-color);
 				border-radius: 50%;
 				box-shadow: 0 0 0 4px var(--current-light-primary);
 			}
@@ -211,7 +261,8 @@ ol {
 			
 			text-align: center;
 			
-			background-color: var(--current-light-primary);
+			color: var(--sm-current-accent-color);
+			background-color: var(--sm-current-bg-color);
 			
 			z-index: 10;
 		}
@@ -231,9 +282,9 @@ ol {
 			content: '';
 			position: absolute;
 			left: calc( var(--list-padding) * 0.5 );
-			width: var(--separator-weight);
-			height: 100%;
-			background-color: var(--current-light-secondary);
+			width: var(--divider-weight);
+			height: calc(100% + var(--theme-spacing-fluid-default));
+			background-color: var(--sm-bg-color-2);
 		}
 		
 		> li {
@@ -244,16 +295,62 @@ ol {
 			}
 			
 			&:last-child {
-				margin-left: calc(var(--list-padding) * -0.5 + var(--separator-weight));
+				margin-left: calc(var(--list-padding) * -0.5 + var(--divider-weight));
 				padding-left: calc(var(--list-padding) * 0.5);
-				box-shadow: calc(var(--separator-weight) * -1.5) 0 0px 0 var(--current-light-primary);
+				box-shadow: calc(var(--divider-weight) * -1.5) 0 0px 0 var(--current-light-primary);
 				
 				&:before {
-					left: calc( var( --list-padding) * -0.5 - var(--separator-weight)) !important;
+					left: calc( var( --list-padding) * -0.5 - var(--divider-weight)) !important;
 				}
 			}
 			
 		}
 	}
 	
+}
+
+// Divider is created using a border
+// and because of that is limited by text width.
+// We want divider width to be given by list width, so we are
+// to make some adjustments for cases where
+// :before and :after elements are applied on lists.
+
+.list-checkmark-style.is-style-divider,
+ul.is-style-divider:not(.list-no-marker) {
+	
+	padding-left: 0;
+	
+	&[class][class][class] {
+		
+		li {
+			padding-left: var(--list-padding);
+			
+			&:before {
+				left: var(--pull-value, 0);
+			}
+			
+			&:after {
+				left: 0;
+			}
+		}
+	}
+}
+
+ol.is-style-timeline {
+	
+	li {
+		
+		&:last-child {
+			
+			&:after {
+				content: '' !important;
+				position: absolute;
+				width: var(--separator-weight);
+				height: calc( 100% + var(--theme-spacing-fluid-default));
+				left: calc(-1 * var(--separator-weight));
+				top: 0.55em;
+				background-color: var(--sm-current-bg-color);
+			}
+		}
+	}
 }

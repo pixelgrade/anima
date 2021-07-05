@@ -3,6 +3,12 @@ ul,
 ol {
     list-style-position: outside;
     @include space-children-y( var(--theme-spacing-fluid-default) );
+    
+    ul,
+    ol {
+        margin-top: var(--theme-spacing-fluid-tiny);
+        @include space-children-y( var(--theme-spacing-fluid-tiny) );
+    }
 }
 
 ul {

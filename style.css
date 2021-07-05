@@ -866,6 +866,16 @@ ol {
   ul > :not(:first-child),
   ol > :not(:first-child) {
     margin-top: var(--theme-spacing-fluid-default); }
+  ul ul,
+  ul ol,
+  ol ul,
+  ol ol {
+    margin-top: var(--theme-spacing-fluid-tiny); }
+    ul ul > :not(:first-child),
+    ul ol > :not(:first-child),
+    ol ul > :not(:first-child),
+    ol ol > :not(:first-child) {
+      margin-top: var(--theme-spacing-fluid-tiny); }
 
 ul {
   --list-padding: var(--theme-spacing-fluid-xsmall);
@@ -3346,3 +3356,5 @@ html:after {
   clear: both; }
 
 /* END body margin hack */
+body {
+  --page-background-color: var(--sm-bg-color-1); }

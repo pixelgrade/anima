@@ -632,6 +632,16 @@
     .editor-styles-wrapper ul > :not(:first-child),
     .editor-styles-wrapper ol > :not(:first-child) {
       margin-top: var(--theme-spacing-fluid-default); }
+    .editor-styles-wrapper ul ul,
+    .editor-styles-wrapper ul ol,
+    .editor-styles-wrapper ol ul,
+    .editor-styles-wrapper ol ol {
+      margin-top: var(--theme-spacing-fluid-tiny); }
+      .editor-styles-wrapper ul ul > :not(:first-child),
+      .editor-styles-wrapper ul ol > :not(:first-child),
+      .editor-styles-wrapper ol ul > :not(:first-child),
+      .editor-styles-wrapper ol ol > :not(:first-child) {
+        margin-top: var(--theme-spacing-fluid-tiny); }
   .editor-styles-wrapper ul {
     --list-padding: var(--theme-spacing-fluid-xsmall);
     padding-right: var(--list-padding); }
