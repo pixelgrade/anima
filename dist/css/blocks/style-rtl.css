@@ -120,12 +120,27 @@
 
 .entry-content ul,
 .entry-content ol {
-  --separator-weight: 0.388em;
+  --separator-weight: 0.222em;
   --divider-weight: 0.222em;
   --icon-width: 0.333em;
   --icon-height: 0.333em;
+  --bullet-width: calc(var(--final-font-size) * var(--current-line-height));
+  --bullet-height: var(--bullet-width);
+  --bullet-bg-color: var(--sm-current-bg-color);
+  --bullet-color: var(--sm-current-fg1-color);
   background-color: transparent;
   color: inherit; }
+  .entry-content ul.sm-color-signal-1,
+  .entry-content ol.sm-color-signal-1 {
+    --bullet-color: var(--sm-current-accent-color); }
+  .entry-content ul.sm-color-signal-2,
+  .entry-content ol.sm-color-signal-2 {
+    --bullet-color: var(--sm-current-bg-color);
+    --bullet-bg-color: var(--sm-current-fg1-color); }
+  .entry-content ul.sm-color-signal-3,
+  .entry-content ol.sm-color-signal-3 {
+    --bullet-color: var(--sm-current-bg-color);
+    --bullet-bg-color: var(--sm-current-accent-color); }
 
 .entry-content .is-style-divider li,
 .entry-content [data-novablocks-connection-style="is-style-divider"] li {
@@ -154,8 +169,7 @@
     height: calc( 100% + var(--theme-spacing-fluid-default));
     right: calc(-1 * var(--list-padding) + var(--icon-width) * 0.5 - var(--divider-weight) * 0.5);
     top: 0.55em;
-    background-color: var(--sm-bg-color-2);
-    z-index: -1; }
+    background-color: var(--sm-bg-color-2); }
   .entry-content .is-style-timeline:not(.list-checkmark-style) li:not(:last-child) ul li:after,
   .entry-content .is-style-timeline:not(.list-checkmark-style) li:not(:last-child) ol li:after, .entry-content .is-style-timeline:not([data-novablocks-list-style="list-checkmark-style"]) li:not(:last-child) ul li:after,
   .entry-content .is-style-timeline:not([data-novablocks-list-style="list-checkmark-style"]) li:not(:last-child) ol li:after,
@@ -174,11 +188,11 @@
       content: '';
       top: calc((var(--final-font-size) * var(--current-line-height) - var(--icon-height)) * 0.5);
       right: calc(-1 * var( --list-padding));
-      background-color: var(--sm-current-fg1-color);
+      background-color: var(--bullet-color);
       width: var(--icon-width);
       height: var(--icon-height);
       border-radius: 50%;
-      box-shadow: 0 0 0 var(--separator-weight) var(--sm-current-bg-color), 0 0 0 0.4em var(--page-background-color);
+      box-shadow: 0 0 0 0.22em var(--bullet-bg-color), 0 0 0 0.4em var(--page-background-color, var(--sm-current-bg-color));
       z-index: 10; }
   .entry-content ul.list-no-marker, .entry-content ul[data-novablocks-list-style="list-no-marker"] {
     padding-right: 0;
@@ -195,48 +209,42 @@
     .entry-content ul.list-checkmark-style.is-style-timeline[class]:before, .entry-content ul.list-checkmark-style[data-novablocks-connection-style="is-style-timeline"][class]:before, .entry-content ul[data-novablocks-list-style="list-checkmark-style"].is-style-timeline[class]:before, .entry-content ul[data-novablocks-list-style="list-checkmark-style"][data-novablocks-connection-style="is-style-timeline"][class]:before {
       content: '';
       position: absolute;
-      right: calc(var(--icon-background-width) * 0.5);
+      right: calc(var(--bullet-width) * 0.5);
+      transform: translateX(50%);
       width: var(--separator-weight);
       height: 100%;
       background-color: var(--sm-bg-color-2); }
-    .entry-content ul.list-checkmark-style.is-style-timeline[class] li:last-child, .entry-content ul.list-checkmark-style[data-novablocks-connection-style="is-style-timeline"][class] li:last-child, .entry-content ul[data-novablocks-list-style="list-checkmark-style"].is-style-timeline[class] li:last-child, .entry-content ul[data-novablocks-list-style="list-checkmark-style"][data-novablocks-connection-style="is-style-timeline"][class] li:last-child {
-      margin-right: calc(var(--list-padding) * -0.5);
-      padding-right: calc(var(--list-padding) * 0.5);
-      box-shadow: calc(-1*(var(--separator-weight) * -5)) 0 0px 0 var(--current-light-primary); }
-      .entry-content ul.list-checkmark-style.is-style-timeline[class] li:last-child:before, .entry-content ul.list-checkmark-style[data-novablocks-connection-style="is-style-timeline"][class] li:last-child:before, .entry-content ul[data-novablocks-list-style="list-checkmark-style"].is-style-timeline[class] li:last-child:before, .entry-content ul[data-novablocks-list-style="list-checkmark-style"][data-novablocks-connection-style="is-style-timeline"][class] li:last-child:before {
-        right: calc(var(--list-padding) * -0.5 + var(--pull-value)); }
-      .entry-content ul.list-checkmark-style.is-style-timeline[class] li:last-child:after, .entry-content ul.list-checkmark-style[data-novablocks-connection-style="is-style-timeline"][class] li:last-child:after, .entry-content ul[data-novablocks-list-style="list-checkmark-style"].is-style-timeline[class] li:last-child:after, .entry-content ul[data-novablocks-list-style="list-checkmark-style"][data-novablocks-connection-style="is-style-timeline"][class] li:last-child:after {
-        right: calc(-1 * var(--list-padding) * 0.5); }
   .entry-content ul.list-checkmark-style[class][class],
   .entry-content ul.list-checkmark-style[class][class] ul, .entry-content ul[data-novablocks-list-style="list-checkmark-style"][class][class],
   .entry-content ul[data-novablocks-list-style="list-checkmark-style"][class][class] ul {
     --list-padding: calc(var(--theme-spacing-fluid-small) * 1.2);
-    --icon-background-width: calc(var(--list-padding) - 0.45em);
-    --icon-background-height:  calc(var(--list-padding) - 0.45em); }
+    --icons-background-width: calc(var(--list-padding) - 0.45em);
+    --icons-background-height:  calc(var(--list-padding) - 0.45em); }
   .entry-content ul.list-checkmark-style[class][class] li:before, .entry-content ul[data-novablocks-list-style="list-checkmark-style"][class][class] li:before {
     content: "";
     display: block;
     position: absolute;
-    --pull-value: calc(var(--list-padding) * 0.22);
-    top: var(--pull-value);
-    right: calc(var(--list-padding) * -1 + var(--pull-value));
-    width: calc(var( --list-padding) * 0.35);
-    height: calc(var( --list-padding) * 0.35);
+    --pull-value: calc(var(--bullet-width) * 0.25);
+    top: calc(var(--bullet-height) * 0.5);
+    right: calc(-1 * var( --list-padding) + var(--bullet-width) * 0.5);
+    transform: translate(50%, -50%);
+    width: calc(var( --bullet-width) * 0.5);
+    height: calc(var( --bullet-height) * 0.5);
     mask: url("../../../assets/images/checkbox.svg") no-repeat 50% 50%;
     mask-size: contain;
     mask-position: center;
     -webkit-mask: url("../../../assets/images/checkbox.svg") no-repeat 50% 50%;
     -webkit-mask-size: contain;
     -webkit-mask-position: center;
-    background-color: var(--sm-current-bg-color); }
+    background-color: var(--bullet-color); }
   .entry-content ul.list-checkmark-style[class][class] li:after, .entry-content ul[data-novablocks-list-style="list-checkmark-style"][class][class] li:after {
     content: '';
     position: absolute;
     right: calc(-1 * var(--list-padding));
-    top: calc((var(--final-font-size) * var(--current-line-height) - var(--icon-background-height)) * 0.5);
-    width: var(--icon-background-width);
-    height: var(--icon-background-height);
-    background-color: var(--sm-current-accent-color);
+    top: calc((var(--final-font-size) * var(--current-line-height) - var(--bullet-height)) * 0.5);
+    width: var(--bullet-width);
+    height: var(--bullet-height);
+    background-color: var(--bullet-bg-color);
     border-radius: 50%;
     box-shadow: 0 0 0 4px var(--current-light-primary); }
 
@@ -244,30 +252,38 @@
   position: relative;
   list-style-type: none;
   counter-reset: li;
-  font-variant-numeric: slashed-zero; }
+  font-variant-numeric: slashed-zero;
+  --list-stype: decimal-leading-zero;
+  --bullet-width: calc(var(--final-font-size) * var(--current-line-height));
+  --bullet-height: var(--bullet-width);
+  --bullet-spacing: 0.4em; }
+  .entry-content ol.sm-color-signal-2, .entry-content ol.sm-color-signal-3 {
+    --list-stype: decimal; }
   .entry-content ol li {
     position: relative; }
     .entry-content ol li:before {
       position: absolute;
       right: calc( -1 * var( --list-padding));
-      width: var(--list-padding);
+      width: var(--bullet-width);
+      height: var(--bullet-height);
       counter-increment: li;
-      content: counter(li, decimal-leading-zero);
+      content: counter(li, var(--list-stype));
       text-align: center;
-      color: var(--sm-current-accent-color);
-      background-color: var(--sm-current-bg-color);
+      color: var(--bullet-color);
+      background-color: var(--bullet-bg-color);
+      border-radius: 50%;
       z-index: 10; }
     .entry-content ol li:not(:last-child):before {
-      right: calc( -1 * var( --list-padding)); }
+      right: calc( -1 * var(--list-padding)); }
   .entry-content ol.is-style-timeline:before, .entry-content ol[data-novablocks-connection-style="is-style-timeline"]:before {
     content: '';
     position: absolute;
-    right: calc( var(--list-padding) * 0.5);
+    right: calc( var(--bullet-width) * 0.5 - 0.1em);
     width: var(--divider-weight);
     height: calc(100% + var(--theme-spacing-fluid-default));
     background-color: var(--sm-bg-color-2); }
   .entry-content ol.is-style-timeline > li:after, .entry-content ol[data-novablocks-connection-style="is-style-timeline"] > li:after {
-    right: calc( -1 * var( --list-padding) * 0.5);
+    right: calc(-1 * var( --list-padding) * 0.5);
     content: none !important; }
   .entry-content ol.is-style-timeline > li:last-child, .entry-content ol[data-novablocks-connection-style="is-style-timeline"] > li:last-child {
     margin-right: calc(var(--list-padding) * -0.5 + var(--divider-weight));
@@ -289,12 +305,12 @@
     .entry-content ul.is-style-divider:not(.list-no-marker)[class][class][class] li:after {
       right: 0; }
 
-.entry-content ol.is-style-timeline li:last-child:after {
+.entry-content ol.is-style-timeline > li:last-child:after {
   content: '' !important;
   position: absolute;
   width: var(--separator-weight);
   height: calc( 100% + var(--theme-spacing-fluid-default));
-  right: calc(-1 * var(--separator-weight));
+  right: calc(-1 * var(--separator-weight) * 1.5);
   top: 0.55em;
   background-color: var(--sm-current-bg-color); }
 

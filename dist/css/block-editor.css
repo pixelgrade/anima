@@ -225,26 +225,26 @@
   --font-size: var(--theme-body-font-size);
   --theme-body-final-font-size: var(--final-font-size); }
 
-.editor-styles-wrapper {
+.editor-styles-wrapper[class] {
   -webkit-font-smoothing: antialiased;
   /* Lists */
   /* Nested unordered lists */
   /* Nested ordered lists */
   /* Links */
   /* Media */ }
-  .editor-styles-wrapper::-webkit-input-placeholder {
+  .editor-styles-wrapper[class]::-webkit-input-placeholder {
     color: var(--theme-input-placeholder-color);
     opacity: var(--theme-input-placeholder-opacity); }
-  .editor-styles-wrapper:-moz-placeholder {
+  .editor-styles-wrapper[class]:-moz-placeholder {
     color: var(--theme-input-placeholder-color);
     opacity: var(--theme-input-placeholder-opacity); }
-  .editor-styles-wrapper::-moz-placeholder {
+  .editor-styles-wrapper[class]::-moz-placeholder {
     color: var(--theme-input-placeholder-color);
     opacity: var(--theme-input-placeholder-opacity); }
-  .editor-styles-wrapper:-ms-input-placeholder {
+  .editor-styles-wrapper[class]:-ms-input-placeholder {
     color: var(--theme-input-placeholder-color);
     opacity: var(--theme-input-placeholder-opacity); }
-  .editor-styles-wrapper input:not([type]), .editor-styles-wrapper input[type="text"], .editor-styles-wrapper input[type="tel"], .editor-styles-wrapper input[type="number"], .editor-styles-wrapper input[type="date"], .editor-styles-wrapper input[type="email"], .editor-styles-wrapper input[type="password"], .editor-styles-wrapper input[type="url"], .editor-styles-wrapper input[type="search"] {
+  .editor-styles-wrapper[class] input:not([type]), .editor-styles-wrapper[class] input[type="text"], .editor-styles-wrapper[class] input[type="tel"], .editor-styles-wrapper[class] input[type="number"], .editor-styles-wrapper[class] input[type="date"], .editor-styles-wrapper[class] input[type="email"], .editor-styles-wrapper[class] input[type="password"], .editor-styles-wrapper[class] input[type="url"], .editor-styles-wrapper[class] input[type="search"] {
     width: 100%;
     height: auto;
     max-width: 100%;
@@ -266,25 +266,25 @@
     font-family: inherit;
     -webkit-font-smoothing: initial;
     -webkit-appearance: none; }
-    .editor-styles-wrapper input:not([type]):hover, .editor-styles-wrapper input[type="text"]:hover, .editor-styles-wrapper input[type="tel"]:hover, .editor-styles-wrapper input[type="number"]:hover, .editor-styles-wrapper input[type="date"]:hover, .editor-styles-wrapper input[type="email"]:hover, .editor-styles-wrapper input[type="password"]:hover, .editor-styles-wrapper input[type="url"]:hover, .editor-styles-wrapper input[type="search"]:hover {
+    .editor-styles-wrapper[class] input:not([type]):hover, .editor-styles-wrapper[class] input[type="text"]:hover, .editor-styles-wrapper[class] input[type="tel"]:hover, .editor-styles-wrapper[class] input[type="number"]:hover, .editor-styles-wrapper[class] input[type="date"]:hover, .editor-styles-wrapper[class] input[type="email"]:hover, .editor-styles-wrapper[class] input[type="password"]:hover, .editor-styles-wrapper[class] input[type="url"]:hover, .editor-styles-wrapper[class] input[type="search"]:hover {
       --theme-input-box-shadow: var(--theme-input-hover-box-shadow); }
-    .editor-styles-wrapper input:not([type]):focus, .editor-styles-wrapper input:not([type]):active, .editor-styles-wrapper input[type="text"]:focus, .editor-styles-wrapper input[type="text"]:active, .editor-styles-wrapper input[type="tel"]:focus, .editor-styles-wrapper input[type="tel"]:active, .editor-styles-wrapper input[type="number"]:focus, .editor-styles-wrapper input[type="number"]:active, .editor-styles-wrapper input[type="date"]:focus, .editor-styles-wrapper input[type="date"]:active, .editor-styles-wrapper input[type="email"]:focus, .editor-styles-wrapper input[type="email"]:active, .editor-styles-wrapper input[type="password"]:focus, .editor-styles-wrapper input[type="password"]:active, .editor-styles-wrapper input[type="url"]:focus, .editor-styles-wrapper input[type="url"]:active, .editor-styles-wrapper input[type="search"]:focus, .editor-styles-wrapper input[type="search"]:active {
+    .editor-styles-wrapper[class] input:not([type]):focus, .editor-styles-wrapper[class] input:not([type]):active, .editor-styles-wrapper[class] input[type="text"]:focus, .editor-styles-wrapper[class] input[type="text"]:active, .editor-styles-wrapper[class] input[type="tel"]:focus, .editor-styles-wrapper[class] input[type="tel"]:active, .editor-styles-wrapper[class] input[type="number"]:focus, .editor-styles-wrapper[class] input[type="number"]:active, .editor-styles-wrapper[class] input[type="date"]:focus, .editor-styles-wrapper[class] input[type="date"]:active, .editor-styles-wrapper[class] input[type="email"]:focus, .editor-styles-wrapper[class] input[type="email"]:active, .editor-styles-wrapper[class] input[type="password"]:focus, .editor-styles-wrapper[class] input[type="password"]:active, .editor-styles-wrapper[class] input[type="url"]:focus, .editor-styles-wrapper[class] input[type="url"]:active, .editor-styles-wrapper[class] input[type="search"]:focus, .editor-styles-wrapper[class] input[type="search"]:active {
       --theme-input-border-color: var(--theme-input-focus-border-color);
       --theme-input-box-shadow: var(--theme-input-focus-box-shadow);
       outline: 0; }
-    .editor-styles-wrapper input:not([type])[disabled], .editor-styles-wrapper input[type="text"][disabled], .editor-styles-wrapper input[type="tel"][disabled], .editor-styles-wrapper input[type="number"][disabled], .editor-styles-wrapper input[type="date"][disabled], .editor-styles-wrapper input[type="email"][disabled], .editor-styles-wrapper input[type="password"][disabled], .editor-styles-wrapper input[type="url"][disabled], .editor-styles-wrapper input[type="search"][disabled] {
+    .editor-styles-wrapper[class] input:not([type])[disabled], .editor-styles-wrapper[class] input[type="text"][disabled], .editor-styles-wrapper[class] input[type="tel"][disabled], .editor-styles-wrapper[class] input[type="number"][disabled], .editor-styles-wrapper[class] input[type="date"][disabled], .editor-styles-wrapper[class] input[type="email"][disabled], .editor-styles-wrapper[class] input[type="password"][disabled], .editor-styles-wrapper[class] input[type="url"][disabled], .editor-styles-wrapper[class] input[type="search"][disabled] {
       border-color: var(--theme-input-disabled-border-color);
       background-color: var(--theme-input-disabled-background-color); }
-    [class*="invalid"] .editor-styles-wrapper input:not([type]), [class*="invalid"] .editor-styles-wrapper input[type="text"], [class*="invalid"] .editor-styles-wrapper input[type="tel"], [class*="invalid"] .editor-styles-wrapper input[type="number"], [class*="invalid"] .editor-styles-wrapper input[type="date"], [class*="invalid"] .editor-styles-wrapper input[type="email"], [class*="invalid"] .editor-styles-wrapper input[type="password"], [class*="invalid"] .editor-styles-wrapper input[type="url"], [class*="invalid"] .editor-styles-wrapper input[type="search"] {
+    [class*="invalid"] .editor-styles-wrapper[class] input:not([type]), [class*="invalid"] .editor-styles-wrapper[class] input[type="text"], [class*="invalid"] .editor-styles-wrapper[class] input[type="tel"], [class*="invalid"] .editor-styles-wrapper[class] input[type="number"], [class*="invalid"] .editor-styles-wrapper[class] input[type="date"], [class*="invalid"] .editor-styles-wrapper[class] input[type="email"], [class*="invalid"] .editor-styles-wrapper[class] input[type="password"], [class*="invalid"] .editor-styles-wrapper[class] input[type="url"], [class*="invalid"] .editor-styles-wrapper[class] input[type="search"] {
       --theme-input-box-shadow: var(--theme-input-error-box-shadow);
       --theme-input-color: var(--theme-input-error-color);
       --theme-input-placeholder-color: var(--theme-input-error-color);
       --theme-input-placeholder-opacity: 0; }
-      [class*="invalid"] .editor-styles-wrapper input:not([type]):hover, [class*="invalid"] .editor-styles-wrapper input[type="text"]:hover, [class*="invalid"] .editor-styles-wrapper input[type="tel"]:hover, [class*="invalid"] .editor-styles-wrapper input[type="number"]:hover, [class*="invalid"] .editor-styles-wrapper input[type="date"]:hover, [class*="invalid"] .editor-styles-wrapper input[type="email"]:hover, [class*="invalid"] .editor-styles-wrapper input[type="password"]:hover, [class*="invalid"] .editor-styles-wrapper input[type="url"]:hover, [class*="invalid"] .editor-styles-wrapper input[type="search"]:hover {
+      [class*="invalid"] .editor-styles-wrapper[class] input:not([type]):hover, [class*="invalid"] .editor-styles-wrapper[class] input[type="text"]:hover, [class*="invalid"] .editor-styles-wrapper[class] input[type="tel"]:hover, [class*="invalid"] .editor-styles-wrapper[class] input[type="number"]:hover, [class*="invalid"] .editor-styles-wrapper[class] input[type="date"]:hover, [class*="invalid"] .editor-styles-wrapper[class] input[type="email"]:hover, [class*="invalid"] .editor-styles-wrapper[class] input[type="password"]:hover, [class*="invalid"] .editor-styles-wrapper[class] input[type="url"]:hover, [class*="invalid"] .editor-styles-wrapper[class] input[type="search"]:hover {
         --theme-input-box-shadow: var(--theme-input-error-box-shadow); }
-      [class*="invalid"] .editor-styles-wrapper input:not([type]):focus, [class*="invalid"] .editor-styles-wrapper input:not([type]):active, [class*="invalid"] .editor-styles-wrapper input[type="text"]:focus, [class*="invalid"] .editor-styles-wrapper input[type="text"]:active, [class*="invalid"] .editor-styles-wrapper input[type="tel"]:focus, [class*="invalid"] .editor-styles-wrapper input[type="tel"]:active, [class*="invalid"] .editor-styles-wrapper input[type="number"]:focus, [class*="invalid"] .editor-styles-wrapper input[type="number"]:active, [class*="invalid"] .editor-styles-wrapper input[type="date"]:focus, [class*="invalid"] .editor-styles-wrapper input[type="date"]:active, [class*="invalid"] .editor-styles-wrapper input[type="email"]:focus, [class*="invalid"] .editor-styles-wrapper input[type="email"]:active, [class*="invalid"] .editor-styles-wrapper input[type="password"]:focus, [class*="invalid"] .editor-styles-wrapper input[type="password"]:active, [class*="invalid"] .editor-styles-wrapper input[type="url"]:focus, [class*="invalid"] .editor-styles-wrapper input[type="url"]:active, [class*="invalid"] .editor-styles-wrapper input[type="search"]:focus, [class*="invalid"] .editor-styles-wrapper input[type="search"]:active {
+      [class*="invalid"] .editor-styles-wrapper[class] input:not([type]):focus, [class*="invalid"] .editor-styles-wrapper[class] input:not([type]):active, [class*="invalid"] .editor-styles-wrapper[class] input[type="text"]:focus, [class*="invalid"] .editor-styles-wrapper[class] input[type="text"]:active, [class*="invalid"] .editor-styles-wrapper[class] input[type="tel"]:focus, [class*="invalid"] .editor-styles-wrapper[class] input[type="tel"]:active, [class*="invalid"] .editor-styles-wrapper[class] input[type="number"]:focus, [class*="invalid"] .editor-styles-wrapper[class] input[type="number"]:active, [class*="invalid"] .editor-styles-wrapper[class] input[type="date"]:focus, [class*="invalid"] .editor-styles-wrapper[class] input[type="date"]:active, [class*="invalid"] .editor-styles-wrapper[class] input[type="email"]:focus, [class*="invalid"] .editor-styles-wrapper[class] input[type="email"]:active, [class*="invalid"] .editor-styles-wrapper[class] input[type="password"]:focus, [class*="invalid"] .editor-styles-wrapper[class] input[type="password"]:active, [class*="invalid"] .editor-styles-wrapper[class] input[type="url"]:focus, [class*="invalid"] .editor-styles-wrapper[class] input[type="url"]:active, [class*="invalid"] .editor-styles-wrapper[class] input[type="search"]:focus, [class*="invalid"] .editor-styles-wrapper[class] input[type="search"]:active {
         --theme-input-box-shadow: var(--theme-input-focus-error-box-shadow); }
-  .editor-styles-wrapper input[type="checkbox"] {
+  .editor-styles-wrapper[class] input[type="checkbox"] {
     position: relative;
     left: 0;
     float: left;
@@ -300,7 +300,7 @@
     border-color: var(--sm-current-accent-color);
     transition: all .2s ease-in-out;
     color: var(--sm-current-bg-color); }
-    .editor-styles-wrapper input[type="checkbox"]:after {
+    .editor-styles-wrapper[class] input[type="checkbox"]:after {
       content: "";
       display: block;
       position: absolute;
@@ -313,17 +313,17 @@
       background-repeat: no-repeat;
       opacity: 0;
       transition: opacity .1s ease-in-out; }
-    .editor-styles-wrapper input[type="checkbox"]:hover {
+    .editor-styles-wrapper[class] input[type="checkbox"]:hover {
       --theme-input-box-shadow: var(--theme-input-hover-box-shadow); }
-    .editor-styles-wrapper input[type="checkbox"]:focus, .editor-styles-wrapper input[type="checkbox"]:active {
+    .editor-styles-wrapper[class] input[type="checkbox"]:focus, .editor-styles-wrapper[class] input[type="checkbox"]:active {
       --theme-input-border-color: var(--theme-input-focus-border-color);
       --theme-input-box-shadow: var(--theme-input-focus-box-shadow);
       outline: 0; }
-    .editor-styles-wrapper input[type="checkbox"]:checked {
+    .editor-styles-wrapper[class] input[type="checkbox"]:checked {
       box-shadow: 0 0 0 1px var(--sm-current-accent-color); }
-      .editor-styles-wrapper input[type="checkbox"]:checked:after {
+      .editor-styles-wrapper[class] input[type="checkbox"]:checked:after {
         opacity: 1; }
-  .editor-styles-wrapper input[type="radio"] {
+  .editor-styles-wrapper[class] input[type="radio"] {
     position: relative;
     left: 0;
     float: left;
@@ -340,18 +340,18 @@
     transition: all .2s ease-in-out;
     -webkit-font-smoothing: initial;
     -webkit-appearance: none; }
-    .editor-styles-wrapper input[type="radio"]:hover {
+    .editor-styles-wrapper[class] input[type="radio"]:hover {
       --theme-input-box-shadow: var(--theme-input-hover-box-shadow); }
-    .editor-styles-wrapper input[type="radio"]:focus, .editor-styles-wrapper input[type="radio"]:active {
+    .editor-styles-wrapper[class] input[type="radio"]:focus, .editor-styles-wrapper[class] input[type="radio"]:active {
       --theme-input-border-color: var(--theme-input-focus-border-color);
       --theme-input-box-shadow: var(--theme-input-focus-box-shadow);
       outline: 0; }
-    .editor-styles-wrapper input[type="radio"]:checked {
+    .editor-styles-wrapper[class] input[type="radio"]:checked {
       border: 0.375em solid var(--sm-current-accent-color);
       box-shadow: 0 0 0 1px var(--sm-current-accent-color);
       outline: 0; }
-  .editor-styles-wrapper input[type="submit"],
-  .editor-styles-wrapper input[type="button"] {
+  .editor-styles-wrapper[class] input[type="submit"],
+  .editor-styles-wrapper[class] input[type="button"] {
     display: inline-block;
     text-decoration: none;
     --theme-button-text-color: var(--sm-current-bg-color);
@@ -387,17 +387,17 @@
     background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
     background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
     background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
-    .editor-styles-wrapper input[type="submit"]:not([disabled]),
-    .editor-styles-wrapper input[type="button"]:not([disabled]) {
+    .editor-styles-wrapper[class] input[type="submit"]:not([disabled]),
+    .editor-styles-wrapper[class] input[type="button"]:not([disabled]) {
       cursor: pointer; }
-      .editor-styles-wrapper input[type="submit"]:not([disabled]):hover,
-      .editor-styles-wrapper input[type="button"]:not([disabled]):hover {
+      .editor-styles-wrapper[class] input[type="submit"]:not([disabled]):hover,
+      .editor-styles-wrapper[class] input[type="button"]:not([disabled]):hover {
         --current-button-background-color: var(--theme-button-hover-background-color);
         --current-button-border-color: var(--theme-button-hover-border-color);
         --current-button-text-color: var(--theme-button-hover-text-color);
         --current-button-transition: var(--theme-button-hover-transition); }
-    .editor-styles-wrapper input[type="submit"]:before,
-    .editor-styles-wrapper input[type="button"]:before {
+    .editor-styles-wrapper[class] input[type="submit"]:before,
+    .editor-styles-wrapper[class] input[type="button"]:before {
       content: '';
       position: absolute;
       top: calc( -1 * var(--theme-button-border-width));
@@ -409,19 +409,19 @@
       -webkit-backface-visibility: hidden;
       transition: var(--current-button-transition);
       transition-property: transform; }
-    .editor-styles-wrapper input[type="submit"]:not([disabled]):hover,
-    .editor-styles-wrapper input[type="button"]:not([disabled]):hover {
+    .editor-styles-wrapper[class] input[type="submit"]:not([disabled]):hover,
+    .editor-styles-wrapper[class] input[type="button"]:not([disabled]):hover {
       background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
-    .editor-styles-wrapper input[type="submit"]:before,
-    .editor-styles-wrapper input[type="button"]:before {
+    .editor-styles-wrapper[class] input[type="submit"]:before,
+    .editor-styles-wrapper[class] input[type="button"]:before {
       transform: scale3d(1, 1, 1);
       transform-origin: right;
       background-color: var(--theme-button-background-color); }
-    .editor-styles-wrapper input[type="submit"]:not([disabled]):hover:before,
-    .editor-styles-wrapper input[type="button"]:not([disabled]):hover:before {
+    .editor-styles-wrapper[class] input[type="submit"]:not([disabled]):hover:before,
+    .editor-styles-wrapper[class] input[type="button"]:not([disabled]):hover:before {
       transform: scale3d(0, 1, 1); }
-  .editor-styles-wrapper button[type="submit"],
-  .editor-styles-wrapper button[type="reset"] {
+  .editor-styles-wrapper[class] button[type="submit"],
+  .editor-styles-wrapper[class] button[type="reset"] {
     display: inline-block;
     text-decoration: none;
     --theme-button-text-color: var(--sm-current-bg-color);
@@ -453,17 +453,17 @@
     will-change: transform;
     backface-visibility: hidden;
     overflow: hidden; }
-    .editor-styles-wrapper button[type="submit"]:not([disabled]),
-    .editor-styles-wrapper button[type="reset"]:not([disabled]) {
+    .editor-styles-wrapper[class] button[type="submit"]:not([disabled]),
+    .editor-styles-wrapper[class] button[type="reset"]:not([disabled]) {
       cursor: pointer; }
-      .editor-styles-wrapper button[type="submit"]:not([disabled]):hover,
-      .editor-styles-wrapper button[type="reset"]:not([disabled]):hover {
+      .editor-styles-wrapper[class] button[type="submit"]:not([disabled]):hover,
+      .editor-styles-wrapper[class] button[type="reset"]:not([disabled]):hover {
         --current-button-background-color: var(--theme-button-hover-background-color);
         --current-button-border-color: var(--theme-button-hover-border-color);
         --current-button-text-color: var(--theme-button-hover-text-color);
         --current-button-transition: var(--theme-button-hover-transition); }
-    .editor-styles-wrapper button[type="submit"]:before,
-    .editor-styles-wrapper button[type="reset"]:before {
+    .editor-styles-wrapper[class] button[type="submit"]:before,
+    .editor-styles-wrapper[class] button[type="reset"]:before {
       content: '';
       position: absolute;
       top: calc( -1 * var(--theme-button-border-width));
@@ -475,17 +475,17 @@
       -webkit-backface-visibility: hidden;
       transition: var(--current-button-transition);
       transition-property: transform; }
-    .editor-styles-wrapper button[type="submit"]:before,
-    .editor-styles-wrapper button[type="reset"]:before {
+    .editor-styles-wrapper[class] button[type="submit"]:before,
+    .editor-styles-wrapper[class] button[type="reset"]:before {
       transform: scale3d(1, 1, 1);
       transform-origin: right;
       background-color: var(--theme-button-background-color); }
-    .editor-styles-wrapper button[type="submit"]:not([disabled]):hover:before,
-    .editor-styles-wrapper button[type="reset"]:not([disabled]):hover:before {
+    .editor-styles-wrapper[class] button[type="submit"]:not([disabled]):hover:before,
+    .editor-styles-wrapper[class] button[type="reset"]:not([disabled]):hover:before {
       transform: scale3d(0, 1, 1); }
-  .editor-styles-wrapper input[type="file"] {
+  .editor-styles-wrapper[class] input[type="file"] {
     width: 100%; }
-  .editor-styles-wrapper input[type="file"]::-webkit-file-upload-button {
+  .editor-styles-wrapper[class] input[type="file"]::-webkit-file-upload-button {
     display: block;
     margin-bottom: 0 !important;
     padding: .75em 1.75em;
@@ -499,11 +499,11 @@
     background-color: var(--theme-input-background-color);
     vertical-align: middle;
     cursor: pointer; }
-    .editor-styles-wrapper input[type="file"]::-webkit-file-upload-button:hover, .editor-styles-wrapper input[type="file"]::-webkit-file-upload-button:focus, .editor-styles-wrapper input[type="file"]::-webkit-file-upload-button:active {
+    .editor-styles-wrapper[class] input[type="file"]::-webkit-file-upload-button:hover, .editor-styles-wrapper[class] input[type="file"]::-webkit-file-upload-button:focus, .editor-styles-wrapper[class] input[type="file"]::-webkit-file-upload-button:active {
       outline: 0;
       box-shadow: none;
       background-color: var(--theme-input-background-color); }
-  .editor-styles-wrapper textarea {
+  .editor-styles-wrapper[class] textarea {
     width: 100%;
     height: auto;
     max-width: 100%;
@@ -527,25 +527,25 @@
     -webkit-appearance: none;
     min-height: 7.5em;
     resize: vertical; }
-    .editor-styles-wrapper textarea:hover {
+    .editor-styles-wrapper[class] textarea:hover {
       --theme-input-box-shadow: var(--theme-input-hover-box-shadow); }
-    .editor-styles-wrapper textarea:focus, .editor-styles-wrapper textarea:active {
+    .editor-styles-wrapper[class] textarea:focus, .editor-styles-wrapper[class] textarea:active {
       --theme-input-border-color: var(--theme-input-focus-border-color);
       --theme-input-box-shadow: var(--theme-input-focus-box-shadow);
       outline: 0; }
-    .editor-styles-wrapper textarea[disabled] {
+    .editor-styles-wrapper[class] textarea[disabled] {
       border-color: var(--theme-input-disabled-border-color);
       background-color: var(--theme-input-disabled-background-color); }
-    [class*="invalid"] .editor-styles-wrapper textarea {
+    [class*="invalid"] .editor-styles-wrapper[class] textarea {
       --theme-input-box-shadow: var(--theme-input-error-box-shadow);
       --theme-input-color: var(--theme-input-error-color);
       --theme-input-placeholder-color: var(--theme-input-error-color);
       --theme-input-placeholder-opacity: 0; }
-      [class*="invalid"] .editor-styles-wrapper textarea:hover {
+      [class*="invalid"] .editor-styles-wrapper[class] textarea:hover {
         --theme-input-box-shadow: var(--theme-input-error-box-shadow); }
-      [class*="invalid"] .editor-styles-wrapper textarea:focus, [class*="invalid"] .editor-styles-wrapper textarea:active {
+      [class*="invalid"] .editor-styles-wrapper[class] textarea:focus, [class*="invalid"] .editor-styles-wrapper[class] textarea:active {
         --theme-input-box-shadow: var(--theme-input-focus-error-box-shadow); }
-  .editor-styles-wrapper select {
+  .editor-styles-wrapper[class] select {
     width: 100%;
     height: auto;
     max-width: 100%;
@@ -574,38 +574,38 @@
     background-size: var(--select-icon-size) var(--select-icon-size), var(--select-icon-size) var(--select-icon-size);
     background-repeat: no-repeat;
     -webkit-appearance: none; }
-    .editor-styles-wrapper select:hover {
+    .editor-styles-wrapper[class] select:hover {
       --theme-input-box-shadow: var(--theme-input-hover-box-shadow); }
-    .editor-styles-wrapper select:focus, .editor-styles-wrapper select:active {
+    .editor-styles-wrapper[class] select:focus, .editor-styles-wrapper[class] select:active {
       --theme-input-border-color: var(--theme-input-focus-border-color);
       --theme-input-box-shadow: var(--theme-input-focus-box-shadow);
       outline: 0; }
-    .editor-styles-wrapper select[disabled] {
+    .editor-styles-wrapper[class] select[disabled] {
       border-color: var(--theme-input-disabled-border-color);
       background-color: var(--theme-input-disabled-background-color); }
-    [class*="invalid"] .editor-styles-wrapper select {
+    [class*="invalid"] .editor-styles-wrapper[class] select {
       --theme-input-box-shadow: var(--theme-input-error-box-shadow);
       --theme-input-color: var(--theme-input-error-color);
       --theme-input-placeholder-color: var(--theme-input-error-color);
       --theme-input-placeholder-opacity: 0; }
-      [class*="invalid"] .editor-styles-wrapper select:hover {
+      [class*="invalid"] .editor-styles-wrapper[class] select:hover {
         --theme-input-box-shadow: var(--theme-input-error-box-shadow); }
-      [class*="invalid"] .editor-styles-wrapper select:focus, [class*="invalid"] .editor-styles-wrapper select:active {
+      [class*="invalid"] .editor-styles-wrapper[class] select:focus, [class*="invalid"] .editor-styles-wrapper[class] select:active {
         --theme-input-box-shadow: var(--theme-input-focus-error-box-shadow); }
     @media only screen and (min-width: 768px) {
-      .editor-styles-wrapper select {
+      .editor-styles-wrapper[class] select {
         --select-icon-size: 8px; } }
-    .editor-styles-wrapper select[multiple] {
+    .editor-styles-wrapper[class] select[multiple] {
       background: none;
       padding-right: .8125em; }
-  .editor-styles-wrapper fieldset {
+  .editor-styles-wrapper[class] fieldset {
     border: 0; }
-    .editor-styles-wrapper fieldset legend {
+    .editor-styles-wrapper[class] fieldset legend {
       color: var(--theme-input-legend-color);
       padding: 0 !important; }
-    .editor-styles-wrapper fieldset > div {
+    .editor-styles-wrapper[class] fieldset > div {
       margin-top: var(--theme-input-vertical-spacing); }
-  .editor-styles-wrapper label {
+  .editor-styles-wrapper[class] label {
     color: var(--theme-input-label-color);
     display: flex;
     align-items: center;
@@ -620,58 +620,58 @@
     --current-font-weight: bold;
     margin: 0;
     cursor: pointer; }
-    .editor-styles-wrapper label:not(:first-child) {
+    .editor-styles-wrapper[class] label:not(:first-child) {
       margin-top: var(--theme-input-vertical-spacing); }
-    .editor-styles-wrapper label:not(:last-child) {
+    .editor-styles-wrapper[class] label:not(:last-child) {
       margin-bottom: var(--theme-input-vertical-spacing); }
-  .editor-styles-wrapper .input-normal-height {
+  .editor-styles-wrapper[class] .input-normal-height {
     --theme-input-padding: .833em; }
-  .editor-styles-wrapper ul,
-  .editor-styles-wrapper ol {
+  .editor-styles-wrapper[class] ul,
+  .editor-styles-wrapper[class] ol {
     list-style-position: outside; }
-    .editor-styles-wrapper ul > :not(:first-child),
-    .editor-styles-wrapper ol > :not(:first-child) {
+    .editor-styles-wrapper[class] ul > :not(:first-child),
+    .editor-styles-wrapper[class] ol > :not(:first-child) {
       margin-top: var(--theme-spacing-fluid-default); }
-    .editor-styles-wrapper ul ul,
-    .editor-styles-wrapper ul ol,
-    .editor-styles-wrapper ol ul,
-    .editor-styles-wrapper ol ol {
+    .editor-styles-wrapper[class] ul ul,
+    .editor-styles-wrapper[class] ul ol,
+    .editor-styles-wrapper[class] ol ul,
+    .editor-styles-wrapper[class] ol ol {
       margin-top: var(--theme-spacing-fluid-tiny); }
-      .editor-styles-wrapper ul ul > :not(:first-child),
-      .editor-styles-wrapper ul ol > :not(:first-child),
-      .editor-styles-wrapper ol ul > :not(:first-child),
-      .editor-styles-wrapper ol ol > :not(:first-child) {
+      .editor-styles-wrapper[class] ul ul > :not(:first-child),
+      .editor-styles-wrapper[class] ul ol > :not(:first-child),
+      .editor-styles-wrapper[class] ol ul > :not(:first-child),
+      .editor-styles-wrapper[class] ol ol > :not(:first-child) {
         margin-top: var(--theme-spacing-fluid-tiny); }
-  .editor-styles-wrapper ul {
+  .editor-styles-wrapper[class] ul {
     --list-padding: var(--theme-spacing-fluid-xsmall);
     padding-left: var(--list-padding); }
-  .editor-styles-wrapper ol {
+  .editor-styles-wrapper[class] ol {
     --list-padding: calc(var(--theme-spacing-fluid-small) * 1.2);
     padding-left: var(--list-padding); }
-  .editor-styles-wrapper ul {
+  .editor-styles-wrapper[class] ul {
     list-style-type: disc; }
-  .editor-styles-wrapper ul ul {
+  .editor-styles-wrapper[class] ul ul {
     list-style-type: circle; }
-  .editor-styles-wrapper ul ul ul {
+  .editor-styles-wrapper[class] ul ul ul {
     list-style-type: square; }
-  .editor-styles-wrapper ol {
+  .editor-styles-wrapper[class] ol {
     list-style-type: decimal; }
-  .editor-styles-wrapper ol ol {
+  .editor-styles-wrapper[class] ol ol {
     list-style-type: lower-alpha; }
-  .editor-styles-wrapper [class*="__inner-container"] {
+  .editor-styles-wrapper[class] [class*="__inner-container"] {
     padding-left: var(--theme-wrapper-sides-spacing);
     padding-right: var(--theme-wrapper-sides-spacing); }
-    .editor-styles-wrapper [class*="__inner-container"] > .alignfull {
+    .editor-styles-wrapper[class] [class*="__inner-container"] > .alignfull {
       margin-left: calc( -1 * var(--theme-wrapper-sides-spacing));
       margin-right: calc( -1 * var(--theme-wrapper-sides-spacing)); }
-      .editor-styles-wrapper [class*="__inner-container"] > .alignfull.stop-right {
+      .editor-styles-wrapper[class] [class*="__inner-container"] > .alignfull.stop-right {
         margin-right: 0; }
-      .editor-styles-wrapper [class*="__inner-container"] > .alignfull.stop-left {
+      .editor-styles-wrapper[class] [class*="__inner-container"] > .alignfull.stop-left {
         margin-left: 0; }
-      .editor-styles-wrapper [class*="__inner-container"] > .alignfull.stop-left.stop-right {
+      .editor-styles-wrapper[class] [class*="__inner-container"] > .alignfull.stop-left.stop-right {
         margin-left: 0;
         margin-right: 0; }
-  .editor-styles-wrapper[class] {
+  .editor-styles-wrapper[class][class] {
     /* Iframes */
     /* Preformatted */
     /* Tables */
@@ -683,11 +683,11 @@
     --current-letter-spacing: var(--theme-content-letter-spacing);
     background-color: var(--sm-current-bg-color);
     color: var(--sm-current-fg1-color); }
-    .editor-styles-wrapper[class] h1, .editor-styles-wrapper[class] h2, .editor-styles-wrapper[class] h3, .editor-styles-wrapper[class] h4, .editor-styles-wrapper[class] h5, .editor-styles-wrapper[class] h6 {
+    .editor-styles-wrapper[class][class] h1, .editor-styles-wrapper[class][class] h2, .editor-styles-wrapper[class][class] h3, .editor-styles-wrapper[class][class] h4, .editor-styles-wrapper[class][class] h5, .editor-styles-wrapper[class][class] h6 {
       margin-top: 0;
       margin-bottom: 0;
       font-weight: var(--current-font-weight); }
-    .editor-styles-wrapper[class] h1, .editor-styles-wrapper[class] .h1 {
+    .editor-styles-wrapper[class][class] h1, .editor-styles-wrapper[class][class] .h1 {
       --font-size: var(--theme-heading-1-font-size);
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-heading-1-font-family);
@@ -697,7 +697,7 @@
       --current-letter-spacing: var(--theme-heading-1-letter-spacing);
       --current-text-transform: var(--theme-heading-1-text-transform);
       --current-font-feature: "liga", "dlig", "onum"; }
-    .editor-styles-wrapper[class] h2, .editor-styles-wrapper[class] .h2 {
+    .editor-styles-wrapper[class][class] h2, .editor-styles-wrapper[class][class] .h2 {
       --font-size: var(--theme-heading-2-font-size);
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-heading-2-font-family);
@@ -707,7 +707,7 @@
       --current-letter-spacing: var(--theme-heading-2-letter-spacing);
       --current-text-transform: var(--theme-heading-2-text-transform);
       --current-font-feature: "liga", "dlig", "onum"; }
-    .editor-styles-wrapper[class] h3, .editor-styles-wrapper[class] .h3 {
+    .editor-styles-wrapper[class][class] h3, .editor-styles-wrapper[class][class] .h3 {
       --font-size: var(--theme-heading-3-font-size);
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-heading-3-font-family);
@@ -716,7 +716,7 @@
       --current-line-height: var(--theme-heading-3-line-height);
       --current-letter-spacing: var(--theme-heading-3-letter-spacing);
       --current-text-transform: var(--theme-heading-3-text-transform); }
-    .editor-styles-wrapper[class] h4, .editor-styles-wrapper[class] .h4 {
+    .editor-styles-wrapper[class][class] h4, .editor-styles-wrapper[class][class] .h4 {
       --font-size: var(--theme-heading-4-font-size);
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-heading-4-font-family);
@@ -725,7 +725,7 @@
       --current-line-height: var(--theme-heading-4-line-height);
       --current-letter-spacing: var(--theme-heading-4-letter-spacing);
       --current-text-transform: var(--theme-heading-4-text-transform); }
-    .editor-styles-wrapper[class] h5, .editor-styles-wrapper[class] .h5 {
+    .editor-styles-wrapper[class][class] h5, .editor-styles-wrapper[class][class] .h5 {
       --font-size: var(--theme-heading-5-font-size);
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-heading-5-font-family);
@@ -734,7 +734,7 @@
       --current-line-height: var(--theme-heading-5-line-height);
       --current-letter-spacing: var(--theme-heading-5-letter-spacing);
       --current-text-transform: var(--theme-heading-5-text-transform); }
-    .editor-styles-wrapper[class] h6, .editor-styles-wrapper[class] .h6 {
+    .editor-styles-wrapper[class][class] h6, .editor-styles-wrapper[class][class] .h6 {
       --font-size: var(--theme-heading-6-font-size);
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-heading-6-font-family);
@@ -743,55 +743,55 @@
       --current-line-height: var(--theme-heading-6-line-height);
       --current-letter-spacing: var(--theme-heading-6-letter-spacing);
       --current-text-transform: var(--theme-heading-6-text-transform); }
-    .editor-styles-wrapper[class] em,
-    .editor-styles-wrapper[class] i,
-    .editor-styles-wrapper[class] q,
-    .editor-styles-wrapper[class] dfn {
+    .editor-styles-wrapper[class][class] em,
+    .editor-styles-wrapper[class][class] i,
+    .editor-styles-wrapper[class][class] q,
+    .editor-styles-wrapper[class][class] dfn {
       font-style: italic; }
-    .editor-styles-wrapper[class] iframe {
+    .editor-styles-wrapper[class][class] iframe {
       width: 100%;
       max-width: 100%;
       margin: 0; }
-    .editor-styles-wrapper[class] pre {
+    .editor-styles-wrapper[class][class] pre {
       white-space: pre;
       white-space: pre-wrap;
       word-break: break-all;
       word-wrap: break-word; }
-    .editor-styles-wrapper[class] table {
+    .editor-styles-wrapper[class][class] table {
       width: 100%;
       float: none;
       border-collapse: collapse;
       margin-bottom: 2em; }
-      .editor-styles-wrapper[class] table th {
+      .editor-styles-wrapper[class][class] table th {
         text-align: left; }
-      .editor-styles-wrapper[class] table th,
-      .editor-styles-wrapper[class] table td {
+      .editor-styles-wrapper[class][class] table th,
+      .editor-styles-wrapper[class][class] table td {
         vertical-align: middle; }
-      .editor-styles-wrapper[class] table tr,
-      .editor-styles-wrapper[class] table thead,
-      .editor-styles-wrapper[class] table tbody,
-      .editor-styles-wrapper[class] table tfoot {
+      .editor-styles-wrapper[class][class] table tr,
+      .editor-styles-wrapper[class][class] table thead,
+      .editor-styles-wrapper[class][class] table tbody,
+      .editor-styles-wrapper[class][class] table tfoot {
         border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
-      .editor-styles-wrapper[class] table th,
-      .editor-styles-wrapper[class] table td {
+      .editor-styles-wrapper[class][class] table th,
+      .editor-styles-wrapper[class][class] table td {
         padding: .5em;
         max-width: 100%;
         white-space: nowrap;
         border: 0; }
-      .editor-styles-wrapper[class] table caption {
+      .editor-styles-wrapper[class][class] table caption {
         padding: 5em 0; }
-      .editor-styles-wrapper[class] table th:first-child,
-      .editor-styles-wrapper[class] table td:first-child {
+      .editor-styles-wrapper[class][class] table th:first-child,
+      .editor-styles-wrapper[class][class] table td:first-child {
         padding-left: 0; }
-      .editor-styles-wrapper[class] table th:last-child,
-      .editor-styles-wrapper[class] table td:last-child {
+      .editor-styles-wrapper[class][class] table th:last-child,
+      .editor-styles-wrapper[class][class] table td:last-child {
         padding-right: 0; }
-      .editor-styles-wrapper[class] table.has-fixed-layout {
+      .editor-styles-wrapper[class][class] table.has-fixed-layout {
         table-layout: fixed; }
-        .editor-styles-wrapper[class] table.has-fixed-layout th,
-        .editor-styles-wrapper[class] table.has-fixed-layout td {
+        .editor-styles-wrapper[class][class] table.has-fixed-layout th,
+        .editor-styles-wrapper[class][class] table.has-fixed-layout td {
           white-space: normal; }
-    .editor-styles-wrapper[class] .is-style-lead {
+    .editor-styles-wrapper[class][class] .is-style-lead {
       --font-size: var(--theme-lead-font-size);
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-lead-font-family);
@@ -799,7 +799,7 @@
       --current-line-height: var(--theme-lead-line-height);
       --current-letter-spacing: var(--theme-lead-letter-spacing);
       --current-text-transform: var(--theme-lead-text-transform); }
-    .editor-styles-wrapper[class] .is-style-meta {
+    .editor-styles-wrapper[class][class] .is-style-meta {
       --font-size: var(--theme-meta-font-size);
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-meta-font-family);
@@ -808,49 +808,49 @@
       --current-line-height: var(--theme-meta-line-height);
       --current-letter-spacing: var(--theme-meta-letter-spacing);
       --current-text-transform: var(--theme-meta-text-transform); }
-    .editor-styles-wrapper[class] .is-style-caption {
+    .editor-styles-wrapper[class][class] .is-style-caption {
       --font-size: var(--theme-caption-font-size);
       font-size: var(--final-font-size);
       --current-font-family: var(--theme-caption-font-family);
       --current-font-weight: var(--theme-caption-font-weight);
       --current-line-height: var(--theme-caption-line-height);
       --current-letter-spacing: var(--theme-caption-letter-spacing); }
-    .editor-styles-wrapper[class] p {
+    .editor-styles-wrapper[class][class] p {
       font: inherit; }
-    .editor-styles-wrapper[class] textarea {
+    .editor-styles-wrapper[class][class] textarea {
       min-height: 100%; }
-  .editor-styles-wrapper a {
+  .editor-styles-wrapper[class] a {
     color: var(--theme-links-color);
     text-decoration: underline;
     text-decoration-color: transparent;
     transition: var(--theme-links-transition); }
-    .editor-styles-wrapper a:hover, .editor-styles-wrapper a:focus {
+    .editor-styles-wrapper[class] a:hover, .editor-styles-wrapper[class] a:focus {
       color: var(--theme-links-color);
       text-decoration-color: var(--theme-links-color); }
-    .editor-styles-wrapper a[href^=tel] {
+    .editor-styles-wrapper[class] a[href^=tel] {
       color: currentColor;
       text-decoration-color: transparent; }
-    .entry-title .editor-styles-wrapper a:hover, .entry-title .editor-styles-wrapper a:focus {
+    .entry-title .editor-styles-wrapper[class] a:hover, .entry-title .editor-styles-wrapper[class] a:focus {
       text-decoration-color: transparent; }
-    .entry-meta .editor-styles-wrapper a {
+    .entry-meta .editor-styles-wrapper[class] a {
       color: currentColor;
       text-decoration-color: transparent; }
-      .entry-meta .editor-styles-wrapper a:hover, .entry-meta .editor-styles-wrapper a:focus {
+      .entry-meta .editor-styles-wrapper[class] a:hover, .entry-meta .editor-styles-wrapper[class] a:focus {
         text-decoration-color: var(--theme-links-color); }
-  .editor-styles-wrapper img,
-  .editor-styles-wrapper video {
+  .editor-styles-wrapper[class] img,
+  .editor-styles-wrapper[class] video {
     max-width: 100%;
     height: auto; }
-  .editor-styles-wrapper img {
+  .editor-styles-wrapper[class] img {
     transition: var(--theme-transition);
     transition-property: opacity; }
-  .editor-styles-wrapper figure {
+  .editor-styles-wrapper[class] figure {
     margin: 0; }
-  .editor-styles-wrapper blockquote {
+  .editor-styles-wrapper[class] blockquote {
     margin: 0; }
-  .editor-styles-wrapper [class*="wp-block"] {
+  .editor-styles-wrapper[class] [class*="wp-block"] {
     clear: none; }
-  .editor-styles-wrapper .wp-block-buttons .block-list-appender {
+  .editor-styles-wrapper[class] .wp-block-buttons .block-list-appender {
     margin-bottom: 0; }
 
 /* Post Title Block */

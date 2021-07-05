@@ -8,13 +8,32 @@
 // checkmark background, or timeline border.
 ul,
 ol {
-	--separator-weight: 0.388em;
+	--separator-weight: 0.222em;
 	--divider-weight: 0.222em;
 	--icon-width: 0.333em;
 	--icon-height: 0.333em;
 	
+	--bullet-width: calc(var(--final-font-size) * var(--current-line-height));
+	--bullet-height: var(--bullet-width);
+	--bullet-bg-color: var(--sm-current-bg-color);
+	--bullet-color: var(--sm-current-fg1-color);
+	
 	background-color: transparent;
 	color: inherit;
+	
+	&.sm-color-signal-1 {
+		--bullet-color: var(--sm-current-accent-color);
+	}
+	
+	&.sm-color-signal-2 {
+		--bullet-color: var(--sm-current-bg-color);
+		--bullet-bg-color: var(--sm-current-fg1-color);
+	}
+	
+	&.sm-color-signal-3 {
+		--bullet-color: var(--sm-current-bg-color);
+		--bullet-bg-color: var(--sm-current-accent-color);
+	}
 }
 
 // Users can select between two options
@@ -83,8 +102,6 @@ ol {
 				left: calc(-1 * var(--list-padding) + var(--icon-width) * 0.5 - var(--divider-weight) * 0.5);
 				top: 0.55em;
 				background-color: var(--sm-bg-color-2);
-				
-				z-index: -1;
 			}
 			
 			ul,
@@ -115,11 +132,11 @@ ul {
 			
 			left: calc(-1 * var( --list-padding));
 			
-			background-color: var( --sm-current-fg1-color);
+			background-color: var(--bullet-color);
 			width: var( --icon-width);
 			height: var( --icon-height);
 			border-radius: 50%;
-			box-shadow: 0 0 0 var( --separator-weight) var(--sm-current-bg-color), 0 0 0 0.4em var(--page-background-color);
+			box-shadow: 0 0 0 0.22em var(--bullet-bg-color), 0 0 0 0.4em var(--page-background-color, var(--sm-current-bg-color));
 			z-index: 10;
 		}
 	}
@@ -164,27 +181,11 @@ ul {
 				
 				content: '';
 				position: absolute;
-				left: calc(var(--icon-background-width) * 0.5);
+				left: calc(var(--bullet-width) * 0.5);
+				transform: translateX(-50%);
 				width: var(--separator-weight);
 				height: 100%;
 				background-color: var(--sm-bg-color-2);
-			}
-			
-			li {
-				
-				&:last-child {
-					margin-left: calc(var(--list-padding) * -0.5);
-					padding-left: calc(var(--list-padding) * 0.5 );
-					box-shadow: calc(var(--separator-weight) * -5) 0 0px 0 var(--current-light-primary);
-					
-					&:before {
-						left: calc(var(--list-padding) * -0.5 + var(--pull-value));
-					}
-					//
-					&:after {
-						left: calc(-1 * var(--list-padding) * 0.5);
-					}
-				}
 			}
 		}
 	}
@@ -195,8 +196,8 @@ ul {
 		&,
 		ul {
 			--list-padding: calc(var(--theme-spacing-fluid-small) * 1.2);
-			--icon-background-width: calc(var(--list-padding) - 0.45em);
-			--icon-background-height:  calc(var(--list-padding) - 0.45em);
+			--icons-background-width: calc(var(--list-padding) - 0.45em);
+			--icons-background-height:  calc(var(--list-padding) - 0.45em);
 		}
 		
 		li {
@@ -205,11 +206,12 @@ ul {
 				content: "";
 				display: block;
 				position: absolute;
-				--pull-value: calc(var(--list-padding) * 0.22);
-				top: var(--pull-value);
-				left: calc(var(--list-padding) * -1 + var(--pull-value));
-				width: calc(var( --list-padding) * 0.35);
-				height: calc(var( --list-padding) * 0.35);
+				--pull-value: calc(var(--bullet-width) * 0.25);
+				top: calc(var(--bullet-height) * 0.5);
+				left: calc(-1 * var( --list-padding) + var(--bullet-width) * 0.5);
+				transform: translate(-50%, -50%);
+				width: calc(var( --bullet-width) * 0.5);
+				height: calc(var( --bullet-height) * 0.5);
 				
 				mask: url($checkbox-svg-path) no-repeat 50% 50%;
 				mask-size: contain;
@@ -218,17 +220,17 @@ ul {
 				-webkit-mask-size: contain;
 				-webkit-mask-position: center;
 				
-				background-color: var(--sm-current-bg-color);
+				background-color: var(--bullet-color);
 			}
 			
 			&:after {
 				content: '';
 				position: absolute;
 				left: calc(-1 * var(--list-padding));
-				top: calc((var(--final-font-size) * var(--current-line-height) - var(--icon-background-height)) * 0.5);
-				width: var(--icon-background-width);
-				height: var(--icon-background-height);
-				background-color: var(--sm-current-accent-color);
+				top: calc((var(--final-font-size) * var(--current-line-height) - var(--bullet-height)) * 0.5);
+				width: var(--bullet-width);
+				height: var(--bullet-height);
+				background-color: var(--bullet-bg-color);
 				border-radius: 50%;
 				box-shadow: 0 0 0 4px var(--current-light-primary);
 			}
@@ -246,6 +248,16 @@ ol {
 	
 	font-variant-numeric: slashed-zero;
 	
+	--list-stype: decimal-leading-zero;
+	--bullet-width: calc(var(--final-font-size) * var(--current-line-height));
+	--bullet-height: var(--bullet-width);
+	--bullet-spacing: 0.4em;
+	
+	&.sm-color-signal-2,
+	&.sm-color-signal-3 {
+		--list-stype: decimal;
+	}
+	
 	li {
 		
 		position: relative;
@@ -254,15 +266,18 @@ ol {
 			position: absolute;
 			left: calc( -1 * var( --list-padding) );
 			
-			width: var( --list-padding);
+			width: var(--bullet-width);
+			height: var(--bullet-height);
 			
 			counter-increment: li;
-			content: counter(li, decimal-leading-zero);
+			content: counter(li, var(--list-stype));
 			
 			text-align: center;
 			
-			color: var(--sm-current-accent-color);
-			background-color: var(--sm-current-bg-color);
+			color: var(--bullet-color);
+			background-color: var(--bullet-bg-color);
+			
+			border-radius: 50%;
 			
 			z-index: 10;
 		}
@@ -270,7 +285,7 @@ ol {
 		&:not(:last-child) {
 			
 			&:before {
-				left: calc( -1 * var( --list-padding) );
+				left: calc( -1 * var(--list-padding) );
 			}
 		}
 	}
@@ -281,7 +296,7 @@ ol {
 		&:before {
 			content: '';
 			position: absolute;
-			left: calc( var(--list-padding) * 0.5 );
+			left: calc( var(--bullet-width) * 0.5 - 0.1em );
 			width: var(--divider-weight);
 			height: calc(100% + var(--theme-spacing-fluid-default));
 			background-color: var(--sm-bg-color-2);
@@ -290,7 +305,7 @@ ol {
 		> li {
 			
 			&:after {
-				left: calc( -1 * var( --list-padding) * 0.5 );
+				left: calc(-1 * var( --list-padding) * 0.5);
 				content: none !important;
 			}
 			
@@ -338,7 +353,7 @@ ul.is-style-divider:not(.list-no-marker) {
 
 ol.is-style-timeline {
 	
-	li {
+	> li {
 		
 		&:last-child {
 			
@@ -347,7 +362,7 @@ ol.is-style-timeline {
 				position: absolute;
 				width: var(--separator-weight);
 				height: calc( 100% + var(--theme-spacing-fluid-default));
-				left: calc(-1 * var(--separator-weight));
+				left: calc(-1 * var(--separator-weight) * 1.5);
 				top: 0.55em;
 				background-color: var(--sm-current-bg-color);
 			}
