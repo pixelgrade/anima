@@ -56,7 +56,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 	--divider-weight: 1px; // it was 0.222em
 	
 	--icon-width: 0.333em;
-	--icon-height: 0.333em;
+	--icon-height: var(--icon-width);
 	
 	--connection-color: var(--sm-bg-color-3);
 	
@@ -64,6 +64,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 	--bullet-height: var(--bullet-width);
 	--bullet-bg-color: var(--sm-current-bg-color);
 	--bullet-color: var(--sm-current-fg1-color);
+	--bullet-border-outline: 0.2em;
 	
 	--bullet-spacing: 0.4em;
 	--bullet-area-width: var(--bullet-width);
@@ -100,6 +101,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 	&.sm-color-signal-2 {
 		--bullet-color: var(--sm-current-bg-color);
 		--bullet-bg-color: var(--sm-current-fg1-color);
+		--bullet-border-outline: 0.4em;
 	}
 	
 	// SIGNAL HIGH
@@ -109,6 +111,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 	&.sm-color-signal-3 {
 		--bullet-color: var(--sm-current-bg-color);
 		--bullet-bg-color: var(--sm-current-accent-color);
+		--bullet-border-outline: 0.4em;
 	}
 }
 
@@ -162,7 +165,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 					width: var(--bullet-width);
 					height: var(--bullet-height);
 					border-radius: 50%;
-					box-shadow: 0 0 0 var(--bullet-border-width) var(--bullet-bg-color), 0 0 0 0.4em var(--page-background-color, var(--sm-current-bg-color));
+					box-shadow: 0 0 0 var(--bullet-border-width) var(--bullet-bg-color), 0 0 0 var(--bullet-border-outline) var(--page-background-color, var(--sm-current-bg-color));
 					z-index: 10;
 				}
 			}
@@ -388,7 +391,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 					content: '';
 					position: absolute;
 					left: calc( var(--bullet-width) * 0.5 );
-					width: var(--divider-weight);
+					width: var(--timeline-weight);
 					height: 100%;
 					background-color: var(--connection-color);
 				}
@@ -418,7 +421,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 							position: absolute;
 							width: calc(var(--timeline-weight) * 2);
 							height: 100%;
-							left: calc(-1 * var(--timeline-weight));
+							left: calc(-2 * var(--timeline-weight));
 							transform: translateX(-50%);
 							top: calc(var(--bullet-height) * 0.5);
 							background-color: var(--sm-current-bg-color);

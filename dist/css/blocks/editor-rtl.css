@@ -104,12 +104,13 @@ ul.wp-block-categories__list[class] {
   --timeline-weight: 2px;
   --divider-weight: 1px;
   --icon-width: 0.333em;
-  --icon-height: 0.333em;
+  --icon-height: var(--icon-width);
   --connection-color: var(--sm-bg-color-3);
   --bullet-width: calc(var(--final-font-size) * var(--current-line-height));
   --bullet-height: var(--bullet-width);
   --bullet-bg-color: var(--sm-current-bg-color);
   --bullet-color: var(--sm-current-fg1-color);
+  --bullet-border-outline: 0.2em;
   --bullet-spacing: 0.4em;
   --bullet-area-width: var(--bullet-width);
   --list-spacing: calc(var(--bullet-width) + var(--bullet-addons, 0px) + var(--bullet-spacing));
@@ -125,10 +126,12 @@ ul.wp-block-categories__list[class] {
     --bullet-color: var(--sm-current-accent-color); }
   [data-nb="list"].sm-color-signal-2 {
     --bullet-color: var(--sm-current-bg-color);
-    --bullet-bg-color: var(--sm-current-fg1-color); }
+    --bullet-bg-color: var(--sm-current-fg1-color);
+    --bullet-border-outline: 0.4em; }
   [data-nb="list"].sm-color-signal-3 {
     --bullet-color: var(--sm-current-bg-color);
-    --bullet-bg-color: var(--sm-current-accent-color); }
+    --bullet-bg-color: var(--sm-current-accent-color);
+    --bullet-border-outline: 0.4em; }
 
 ul[data-nb="list"] {
   --bullet-border-width: 0.222em; }
@@ -143,7 +146,7 @@ ul[data-nb="list"] {
       width: var(--bullet-width);
       height: var(--bullet-height);
       border-radius: 50%;
-      box-shadow: 0 0 0 var(--bullet-border-width) var(--bullet-bg-color), 0 0 0 0.4em var(--page-background-color, var(--sm-current-bg-color));
+      box-shadow: 0 0 0 var(--bullet-border-width) var(--bullet-bg-color), 0 0 0 var(--bullet-border-outline) var(--page-background-color, var(--sm-current-bg-color));
       z-index: 10; }
   ul[data-nb="list"]:not([data-list-style="list-checkmark-style"]) {
     --bullet-width: 0.333em;
@@ -243,7 +246,7 @@ ol[data-nb="list"] {
     content: '';
     position: absolute;
     right: calc( var(--bullet-width) * 0.5);
-    width: var(--divider-weight);
+    width: var(--timeline-weight);
     height: 100%;
     background-color: var(--connection-color); }
   ol[data-nb="list"][data-connection-style="is-style-timeline"][class] > li:last-child {
@@ -257,7 +260,7 @@ ol[data-nb="list"] {
       position: absolute;
       width: calc(var(--timeline-weight) * 2);
       height: 100%;
-      right: calc(-1 * var(--timeline-weight));
+      right: calc(-2 * var(--timeline-weight));
       transform: translateX(50%);
       top: calc(var(--bullet-height) * 0.5);
       background-color: var(--sm-current-bg-color); }
