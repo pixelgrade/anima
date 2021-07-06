@@ -42,19 +42,29 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 }
 
 // List default settings
-// --separator-weight: border weight used for Divider or Timeline.
+// --timeline-weight: border weight used for Timeline connector.
+// --divider-weight: border weight used for Divider horizontal separator.
 // Usually used on border or box-shadow, depending on the situation.
 // This will also help us to position correctly the
 // :before element on <li> (usually bullet, or checkmark).
 // --icon-width and --icon-height: width and height of the checkmarks.
 // This will also help us to position correctly
 // checkmark background, or timeline border.
+<<<<<<< HEAD
 
 #{$list-selector} {
 	--separator-weight: 0.222em;
 	--divider-weight: 0.222em;
+=======
+ul,
+ol {
+	--timeline-weight: 2px; // it was 0.222em 
+	--divider-weight: 1px; // it was 0.222em
+>>>>>>> ea71d8de (Small color and size adjustments #266)
 	--icon-width: 0.333em;
 	--icon-height: 0.333em;
+
+	--connection-color: var(--sm-bg-color-3);
 	
 	--bullet-width: calc(var(--final-font-size) * var(--current-line-height));
 	--bullet-height: var(--bullet-width);
@@ -64,6 +74,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 	--bullet-spacing: 0.4em;
 	--bullet-area-width: var(--bullet-width);
 	--list-spacing: calc(var(--bullet-width) + var(--bullet-addons, 0px) + var(--bullet-spacing));
+
 	
 	background-color: transparent;
 	color: inherit;
@@ -139,7 +150,21 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 		
 		ul#{&} {
 			
+<<<<<<< HEAD
 			--bullet-border-width: 0.222em;
+=======
+			padding-left: var(--list-spacing);
+			box-shadow: inset var(--timeline-weight) 0 0 var(--connection-color);
+		}
+	}
+	
+	// LIST STYLE - CHECKMARK
+	&#{$is-list-checkmark-selector} {
+		
+		&.sm-color-signal-0,
+		&:not([class*='sm-color-signal']) {
+			--bullet-addons: calc(var(--bullet-width) * -0.5);
+>>>>>>> ea71d8de (Small color and size adjustments #266)
 			
 			li {
 				
@@ -163,12 +188,24 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 				}
 			}
 			
+<<<<<<< HEAD
 			// When we are not using checkmarks,
 			// bullet width and it's addons should be changed.
 			&:not(#{$is-list-checkmark-selector}) {
 				--bullet-width: 0.333em;
 				--bullet-height: var(--bullet-width);
 				--bullet-addons: calc(var(--bullet-border-width) * 2);
+=======
+			&:before {
+				
+				content: '';
+				position: absolute;
+				left: calc(var(--bullet-width) * 0.25);
+				transform: translateX(-50%);
+				width: var(--timeline-weight);
+				height: 100%;
+				background-color: var(--connection-color);
+>>>>>>> ea71d8de (Small color and size adjustments #266)
 			}
 			
 			// LIST STYLE - NONE
@@ -332,6 +369,27 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 			&.sm-color-signal-3 {
 				--list-stype: decimal;
 			}
+<<<<<<< HEAD
+=======
+		}
+	}
+	
+	&#{$is-style-timeline-selector}[class] {
+		
+		// TIMELINE
+		// We are creating this line using
+		// :before pseudo-element on ol.
+		&:before {
+			content: '';
+			position: absolute;
+			left: calc( var(--bullet-width) * 0.5 );
+			width: var(--divider-weight);
+			height: 100%;
+			background-color: var(--connection-color);
+		}
+		
+		> li {
+>>>>>>> ea71d8de (Small color and size adjustments #266)
 			
 			li {
 				
@@ -383,10 +441,19 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 				&:before {
 					content: '';
 					position: absolute;
+<<<<<<< HEAD
 					left: calc( var(--bullet-width) * 0.5 );
 					width: var(--divider-weight);
 					height: 100%;
 					background-color: var(--sm-bg-color-2);
+=======
+					width: calc(var(--timeline-weight) * 2);
+					height: 100%;
+					left: calc(-1 * var(--timeline-weight));
+					transform: translateX(-50%);
+					top: calc(var(--bullet-height) * 0.5);
+					background-color: var(--sm-current-bg-color);
+>>>>>>> ea71d8de (Small color and size adjustments #266)
 				}
 				
 				> li {
@@ -458,8 +525,25 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 		
 	}
 	
+<<<<<<< HEAD
 	// CONNECTION STYLE - DIVIDER
 	&#{$is-style-divider-selector} {
+=======
+}
+
+// CONNECTION STYLE - DIVIDER
+#{$is-style-divider-selector} {
+	
+	// Nothing to fancy for the divider,
+	// just a border bottom.
+	li {
+		--element-spacing: var(--theme-spacing-fluid-default);
+		
+		&:not(:last-child) {
+			border-bottom: var(--divider-weight) solid var(--connection-color);
+			padding-bottom: var(--element-spacing);
+		}
+>>>>>>> ea71d8de (Small color and size adjustments #266)
 		
 		// Nothing to fancy for the divider,
 		// just a border bottom.
@@ -492,6 +576,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 		
 	}
 	
+<<<<<<< HEAD
 	// CONNECTION STYLE - TIMELINE
 	&#{$is-style-timeline-selector} {
 		
@@ -502,6 +587,29 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 		
 		list-style-type: none;
 		
+=======
+	// We want our divider width to be given
+	// by list width, not by list item text,
+	// and because of that we are moving padding from list,
+	// to list item.
+	&#{$is-list-checkmark-selector},
+	&:not(#{$is-list-no-marker-selector}) {
+		@include list-padding-on-item;
+	}
+	
+}
+
+// CONNECTION STYLE - TIMELINE
+#{$is-style-timeline-selector} {
+	
+	position: relative;
+	
+	// We want to overwrite the
+	// default list styling, by using :before.
+	
+	list-style-type: none;
+	
+>>>>>>> ea71d8de (Small color and size adjustments #266)
 		li {
 			
 			&:last-child {
@@ -509,9 +617,9 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 				&:after {
 					content: '';
 					position: absolute;
-					width: calc(var(--separator-weight) * 2);
+					width: calc(var(--timeline-weight) * 2);
 					height: 100%;
-					left: calc(-1 * (var(--list-spacing) - var(--icon-width) * 0.5));
+					left: calc(-1 * (var(--list-spacing) - var(--icon-width) * 1)); // Why it was multiplied by 0.5?
 					top: 0.55em;
 					background-color: var(--sm-current-bg-color);
 				}
@@ -524,9 +632,9 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 			top: calc(var(--icon-height) * 0.5);
 			left: calc(var(--icon-width) * 0.5 + var(--bullet-border-width));
 			transform: translateX(-50%);
-			width: var(--separator-weight);
+			width: var(--timeline-weight);
 			height: 100%;
-			background-color: var(--sm-bg-color-2);
+			background-color: var(--connection-color);
 		}
 	}
 	
