@@ -107,9 +107,13 @@ ul.wp-block-categories__list[class] {
   --bullet-height: var(--bullet-width);
   --bullet-bg-color: var(--sm-current-bg-color);
   --bullet-color: var(--sm-current-fg1-color);
-  --bullet-border-width: 0.222em;
+  --bullet-spacing: 0.4em;
+  --bullet-area-width: var(--bullet-width);
+  --list-spacing: calc(var(--bullet-width) + var(--bullet-addons, 0px) + var(--bullet-spacing));
   background-color: transparent;
-  color: inherit; }
+  color: inherit;
+  list-style: none;
+  padding-left: var(--list-spacing); }
   .block-editor-block-list__layout[class][class] ul.sm-color-signal-1,
   .block-editor-block-list__layout[class][class] ol.sm-color-signal-1 {
     --bullet-color: var(--sm-current-accent-color); }
@@ -122,76 +126,66 @@ ul.wp-block-categories__list[class] {
     --bullet-color: var(--sm-current-bg-color);
     --bullet-bg-color: var(--sm-current-accent-color); }
 
-.block-editor-block-list__layout[class][class] .is-style-divider li {
-  --element-spacing: var(--theme-spacing-fluid-default); }
-  .block-editor-block-list__layout[class][class] .is-style-divider li:not(:last-child) {
-    border-bottom: var(--separator-weight) solid var(--current-light-secondary);
-    padding-bottom: var(--element-spacing); }
-
-.block-editor-block-list__layout[class][class] .is-style-timeline {
-  position: relative;
-  list-style-type: none; }
-
-.block-editor-block-list__layout[class][class] .is-style-divider li,
-.block-editor-block-list__layout[class][class] [data-novablocks-connection-style="is-style-divider"] li {
-  --element-spacing: var(--theme-spacing-fluid-default); }
-  .block-editor-block-list__layout[class][class] .is-style-divider li:not(:last-child),
-  .block-editor-block-list__layout[class][class] [data-novablocks-connection-style="is-style-divider"] li:not(:last-child) {
-    border-bottom: var(--divider-weight) solid var(--sm-bg-color-2);
-    padding-bottom: var(--element-spacing); }
-  .block-editor-block-list__layout[class][class] .is-style-divider li ul li,
-  .block-editor-block-list__layout[class][class] .is-style-divider li ol li,
-  .block-editor-block-list__layout[class][class] [data-novablocks-connection-style="is-style-divider"] li ul li,
-  .block-editor-block-list__layout[class][class] [data-novablocks-connection-style="is-style-divider"] li ol li {
-    border-bottom: 0;
-    padding-bottom: 0; }
-
 .block-editor-block-list__layout[class][class] ul {
-  list-style: none; }
+  --bullet-border-width: 0.222em; }
   .block-editor-block-list__layout[class][class] ul li {
     position: relative; }
     .block-editor-block-list__layout[class][class] ul li:before {
       position: absolute;
       content: '';
-      top: calc((var(--final-font-size) * var(--current-line-height) - var(--icon-height)) * 0.5);
-      left: calc(-1 * var( --list-padding) + var(--bullet-border-width));
+      top: calc((var(--final-font-size) * var(--current-line-height) - var(--bullet-height)) * 0.5);
+      left: calc(-1 * var(--list-spacing) + var(--bullet-border-width));
       background-color: var(--bullet-color);
-      width: var(--icon-width);
-      height: var(--icon-height);
+      width: var(--bullet-width);
+      height: var(--bullet-height);
       border-radius: 50%;
       box-shadow: 0 0 0 var(--bullet-border-width) var(--bullet-bg-color), 0 0 0 0.4em var(--page-background-color, var(--sm-current-bg-color));
       z-index: 10; }
-  .block-editor-block-list__layout[class][class] ul.list-no-marker, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-no-marker"] {
+  .block-editor-block-list__layout[class][class] ul:not([data-list-style="list-checkmark-style"]) {
+    --bullet-width: 0.333em;
+    --bullet-height: var(--bullet-width);
+    --bullet-addons: calc(var(--bullet-border-width) * 2); }
+  .block-editor-block-list__layout[class][class] ul[data-list-style="list-no-marker"] {
+    --bullet-width: var(--divider-weight);
+    --bullet-addons: 0px;
     padding-left: 0;
     list-style: none; }
-    .block-editor-block-list__layout[class][class] ul.list-no-marker li:before, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-no-marker"] li:before {
+    .block-editor-block-list__layout[class][class] ul[data-list-style="list-no-marker"] li:before {
       content: none; }
-    .block-editor-block-list__layout[class][class] ul.list-no-marker.is-style-timeline[class], .block-editor-block-list__layout[class][class] ul.list-no-marker[data-novablocks-connection-style="is-style-timeline"][class], .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-no-marker"].is-style-timeline[class], .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-no-marker"][data-novablocks-connection-style="is-style-timeline"][class] {
-      padding-left: var(--list-padding);
+    .block-editor-block-list__layout[class][class] ul[data-list-style="list-no-marker"][data-connection-style="is-style-timeline"] {
+      padding-left: var(--list-spacing);
       box-shadow: inset var(--divider-weight) 0 0 var(--sm-bg-color-2); }
-  .block-editor-block-list__layout[class][class] ul.list-checkmark-style.is-style-timeline[class], .block-editor-block-list__layout[class][class] ul.list-checkmark-style[data-novablocks-connection-style="is-style-timeline"][class], .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"].is-style-timeline[class], .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"][data-novablocks-connection-style="is-style-timeline"][class] {
+  .block-editor-block-list__layout[class][class] ul[data-list-style="list-checkmark-style"].sm-color-signal-0, .block-editor-block-list__layout[class][class] ul[data-list-style="list-checkmark-style"]:not([class*='sm-color-signal']) {
+    --bullet-addons: calc(var(--bullet-width) * -0.5); }
+    .block-editor-block-list__layout[class][class] ul[data-list-style="list-checkmark-style"].sm-color-signal-0 li:after, .block-editor-block-list__layout[class][class] ul[data-list-style="list-checkmark-style"]:not([class*='sm-color-signal']) li:after {
+      width: calc(var(--bullet-width) * 0.5) !important;
+      height: calc(var(--bullet-height) * 0.5) !important; }
+  .block-editor-block-list__layout[class][class] ul[data-list-style="list-checkmark-style"][data-connection-style="is-style-timeline"] {
     --border-width: 0.11em; }
-    .block-editor-block-list__layout[class][class] ul.list-checkmark-style.is-style-timeline[class]:before, .block-editor-block-list__layout[class][class] ul.list-checkmark-style[data-novablocks-connection-style="is-style-timeline"][class]:before, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"].is-style-timeline[class]:before, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"][data-novablocks-connection-style="is-style-timeline"][class]:before {
+    .block-editor-block-list__layout[class][class] ul[data-list-style="list-checkmark-style"][data-connection-style="is-style-timeline"]:before {
       content: '';
       position: absolute;
-      left: calc(var(--bullet-width) * 0.5);
+      left: calc(var(--bullet-width) * 0.25);
       transform: translateX(-50%);
       width: var(--separator-weight);
       height: 100%;
       background-color: var(--sm-bg-color-2); }
-  .block-editor-block-list__layout[class][class] ul.list-checkmark-style[class][class],
-  .block-editor-block-list__layout[class][class] ul.list-checkmark-style[class][class] ul, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"][class][class],
-  .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"][class][class] ul {
-    --list-padding: calc(var(--theme-spacing-fluid-small) * 1.2);
-    --icons-background-width: calc(var(--list-padding) - 0.45em);
-    --icons-background-height:  calc(var(--list-padding) - 0.45em); }
-  .block-editor-block-list__layout[class][class] ul.list-checkmark-style[class][class] li:before, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"][class][class] li:before {
+  .block-editor-block-list__layout[class][class] ul[data-list-style="list-checkmark-style"][data-connection-style="is-style-divider"] li:before, .block-editor-block-list__layout[class][class] ul[data-list-style="list-checkmark-style"][data-connection-style="is-style-divider"]:not([data-list-style="list-no-marker"]) li:before {
+    transform: translate(-50%, -50%); }
+  .block-editor-block-list__layout[class][class] ul[data-list-style="list-checkmark-style"],
+  .block-editor-block-list__layout[class][class] ul[data-list-style="list-checkmark-style"] ul {
+    --icons-background-width: calc(var(--list-spacing) - 0.45em);
+    --icons-background-height:  calc(var(--list-spacing) - 0.45em); }
+  .block-editor-block-list__layout[class][class] ul[data-list-style="list-checkmark-style"].sm-color-signal-0 li:before, .block-editor-block-list__layout[class][class] ul[data-list-style="list-checkmark-style"]:not([class*='sm-color-signal']) li:before {
+    left: calc(-1 * var( --list-spacing));
+    transform: translateY(-50%); }
+  .block-editor-block-list__layout[class][class] ul[data-list-style="list-checkmark-style"] li:before {
     content: "";
     display: block;
     position: absolute;
-    --pull-value: calc(var(--bullet-width) * 0.25);
+    --pull-value: calc(var(--bullet-width) * 0.5);
     top: calc(var(--bullet-height) * 0.5);
-    left: calc(-1 * var( --list-padding) + var(--bullet-width) * 0.5);
+    left: calc(-1 * var( --list-spacing) + var(--bullet-width) * 0.5);
     transform: translate(-50%, -50%);
     width: calc(var( --bullet-width) * 0.5);
     height: calc(var( --bullet-height) * 0.5);
@@ -202,25 +196,23 @@ ul.wp-block-categories__list[class] {
     -webkit-mask-size: contain;
     -webkit-mask-position: center;
     background-color: var(--bullet-color); }
-  .block-editor-block-list__layout[class][class] ul.list-checkmark-style[class][class] li:after, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-checkmark-style"][class][class] li:after {
+  .block-editor-block-list__layout[class][class] ul[data-list-style="list-checkmark-style"] li:after {
     content: '';
     position: absolute;
-    left: calc(-1 * var(--list-padding));
+    left: calc(-1 * var(--list-spacing));
     top: calc((var(--final-font-size) * var(--current-line-height) - var(--bullet-height)) * 0.5);
     width: var(--bullet-width);
     height: var(--bullet-height);
     background-color: var(--bullet-bg-color);
     border-radius: 50%;
     box-shadow: 0 0 0 4px var(--current-light-primary); }
-  .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-bullet-style"].is-style-timeline, .block-editor-block-list__layout[class][class] ul[data-novablocks-list-style="list-bullet-style"][data-novablocks-connection-style="is-style-timeline"], .block-editor-block-list__layout[class][class] ul.list-bullet-style.is-style-timeline, .block-editor-block-list__layout[class][class] ul.list-bullet-style[data-novablocks-connection-style="is-style-timeline"] {
+  .block-editor-block-list__layout[class][class] ul[data-list-style="list-bullet-style"][data-connection-style="is-style-timeline"] {
     position: relative;
     list-style-type: none; }
 
 .block-editor-block-list__layout[class][class] ol {
   position: relative;
-  list-style-type: none;
   counter-reset: li;
-  font-variant-numeric: slashed-zero;
   --list-stype: decimal-leading-zero;
   --bullet-width: calc(var(--final-font-size) * var(--current-line-height));
   --bullet-height: var(--bullet-width);
@@ -231,7 +223,7 @@ ul.wp-block-categories__list[class] {
     position: relative; }
     .block-editor-block-list__layout[class][class] ol li:before {
       position: absolute;
-      left: calc( -1 * var( --list-padding));
+      left: calc( -1 * var( --list-spacing));
       width: var(--bullet-width);
       height: var(--bullet-height);
       counter-increment: li;
@@ -242,70 +234,88 @@ ul.wp-block-categories__list[class] {
       border-radius: 50%;
       z-index: 10; }
     .block-editor-block-list__layout[class][class] ol li:not(:last-child):before {
-      left: calc( -1 * var(--list-padding)); }
-  .block-editor-block-list__layout[class][class] ol.is-style-timeline[class]:before, .block-editor-block-list__layout[class][class] ol[data-novablocks-connection-style="is-style-timeline"][class]:before {
+      left: calc( -1 * var(--list-spacing)); }
+  .block-editor-block-list__layout[class][class] ol[data-connection-style="is-style-timeline"][class]:before {
     content: '';
     position: absolute;
     left: calc( var(--bullet-width) * 0.5);
     width: var(--divider-weight);
     height: 100%;
     background-color: var(--sm-bg-color-2); }
-  .block-editor-block-list__layout[class][class] ol.is-style-timeline[class] > li:after, .block-editor-block-list__layout[class][class] ol[data-novablocks-connection-style="is-style-timeline"][class] > li:after {
-    left: calc(-1 * var( --list-padding) * 0.5); }
-  .block-editor-block-list__layout[class][class] ol.is-style-timeline[class] > li:last-child, .block-editor-block-list__layout[class][class] ol[data-novablocks-connection-style="is-style-timeline"][class] > li:last-child {
-    margin-left: calc(var(--list-padding) * -0.5);
-    padding-left: calc(var(--list-padding) * 0.5);
+  .block-editor-block-list__layout[class][class] ol[data-connection-style="is-style-timeline"][class] > li:last-child {
+    margin-left: calc(var(--list-spacing) * -0.5);
+    padding-left: calc(var(--list-spacing) * 0.5);
     box-shadow: calc(var(--divider-weight) * -1.5) 0 0px 0 var(--current-light-primary); }
-    .block-editor-block-list__layout[class][class] ol.is-style-timeline[class] > li:last-child:before, .block-editor-block-list__layout[class][class] ol[data-novablocks-connection-style="is-style-timeline"][class] > li:last-child:before {
-      left: calc( -0.5 * var(--list-padding)); }
+    .block-editor-block-list__layout[class][class] ol[data-connection-style="is-style-timeline"][class] > li:last-child:before {
+      left: calc( -0.5 * var(--list-spacing)); }
+    .block-editor-block-list__layout[class][class] ol[data-connection-style="is-style-timeline"][class] > li:last-child:after {
+      content: '';
+      position: absolute;
+      width: calc(var(--separator-weight) * 2);
+      height: 100%;
+      left: calc(-1 * var(--separator-weight));
+      transform: translateX(-50%);
+      top: calc(var(--bullet-height) * 0.5);
+      background-color: var(--sm-current-bg-color); }
+  .block-editor-block-list__layout[class][class] ol[data-connection-style="is-style-divider"] {
+    padding-left: 0; }
+    .block-editor-block-list__layout[class][class] ol[data-connection-style="is-style-divider"] li {
+      padding-left: var(--list-spacing); }
+      .block-editor-block-list__layout[class][class] ol[data-connection-style="is-style-divider"] li:before {
+        left: var(--pull-value, var(--bullet-border-width, 0px)); }
+      .block-editor-block-list__layout[class][class] ol[data-connection-style="is-style-divider"] li:after {
+        left: 0; }
 
-.block-editor-block-list__layout[class][class] .list-checkmark-style.is-style-divider,
-.block-editor-block-list__layout[class][class] ul.is-style-divider:not(.list-no-marker),
-.block-editor-block-list__layout[class][class] ol.is-style-divider {
+.block-editor-block-list__layout[class][class] [data-list-style="list-checkmark-style"] ul {
+  --bullet-width: calc(var(--final-font-size) * var(--current-line-height));
+  --bullet-addons: calc(var(--bullet-width) * -0.5); }
+
+.block-editor-block-list__layout[class][class] [data-list-style="list-checkmark-style"][data-connection-style="is-style-divider"].sm-color-signal-0[class] li:before {
+  left: 0;
+  transform: translateY(-50%); }
+
+.block-editor-block-list__layout[class][class] [data-connection-style="is-style-divider"] li {
+  --element-spacing: var(--theme-spacing-fluid-default); }
+  .block-editor-block-list__layout[class][class] [data-connection-style="is-style-divider"] li:not(:last-child) {
+    border-bottom: var(--divider-weight) solid var(--sm-bg-color-2);
+    padding-bottom: var(--element-spacing); }
+  .block-editor-block-list__layout[class][class] [data-connection-style="is-style-divider"] li ul li,
+  .block-editor-block-list__layout[class][class] [data-connection-style="is-style-divider"] li ol li {
+    border-bottom: 0;
+    padding-bottom: 0; }
+
+.block-editor-block-list__layout[class][class] [data-connection-style="is-style-divider"][data-list-style="list-checkmark-style"], .block-editor-block-list__layout[class][class] [data-connection-style="is-style-divider"]:not([data-list-style="list-no-marker"]) {
   padding-left: 0; }
-  .block-editor-block-list__layout[class][class] .list-checkmark-style.is-style-divider[class][class][class] li,
-  .block-editor-block-list__layout[class][class] ul.is-style-divider:not(.list-no-marker)[class][class][class] li,
-  .block-editor-block-list__layout[class][class] ol.is-style-divider[class][class][class] li {
-    padding-left: var(--list-padding); }
-    .block-editor-block-list__layout[class][class] .list-checkmark-style.is-style-divider[class][class][class] li:before,
-    .block-editor-block-list__layout[class][class] ul.is-style-divider:not(.list-no-marker)[class][class][class] li:before,
-    .block-editor-block-list__layout[class][class] ol.is-style-divider[class][class][class] li:before {
-      left: var(--pull-value, 0); }
-    .block-editor-block-list__layout[class][class] .list-checkmark-style.is-style-divider[class][class][class] li:after,
-    .block-editor-block-list__layout[class][class] ul.is-style-divider:not(.list-no-marker)[class][class][class] li:after,
-    .block-editor-block-list__layout[class][class] ol.is-style-divider[class][class][class] li:after {
+  .block-editor-block-list__layout[class][class] [data-connection-style="is-style-divider"][data-list-style="list-checkmark-style"] li, .block-editor-block-list__layout[class][class] [data-connection-style="is-style-divider"]:not([data-list-style="list-no-marker"]) li {
+    padding-left: var(--list-spacing); }
+    .block-editor-block-list__layout[class][class] [data-connection-style="is-style-divider"][data-list-style="list-checkmark-style"] li:before, .block-editor-block-list__layout[class][class] [data-connection-style="is-style-divider"]:not([data-list-style="list-no-marker"]) li:before {
+      left: var(--pull-value, var(--bullet-border-width, 0px)); }
+    .block-editor-block-list__layout[class][class] [data-connection-style="is-style-divider"][data-list-style="list-checkmark-style"] li:after, .block-editor-block-list__layout[class][class] [data-connection-style="is-style-divider"]:not([data-list-style="list-no-marker"]) li:after {
       left: 0; }
 
-.block-editor-block-list__layout[class][class] ol.is-style-timeline[class][class] > li:last-child:after, .block-editor-block-list__layout[class][class] ol[data-novablocks-connection-style="is-style-timeline"][class][class] > li:last-child:after {
-  content: '';
-  position: absolute;
-  width: calc(var(--separator-weight) * 2);
-  height: 100%;
-  left: calc(-1 * var(--separator-weight));
-  transform: translateX(-50%);
-  top: 0.55em;
-  background-color: var(--sm-current-bg-color); }
+.block-editor-block-list__layout[class][class] [data-connection-style="is-style-timeline"] {
+  position: relative;
+  list-style-type: none; }
+  .block-editor-block-list__layout[class][class] [data-connection-style="is-style-timeline"] li:last-child:after {
+    content: '';
+    position: absolute;
+    width: calc(var(--separator-weight) * 2);
+    height: 100%;
+    left: calc(-1 * (var(--list-spacing) - var(--icon-width) * 0.5));
+    top: 0.55em;
+    background-color: var(--sm-current-bg-color); }
+  .block-editor-block-list__layout[class][class] [data-connection-style="is-style-timeline"]:before {
+    content: '';
+    position: absolute;
+    top: calc(var(--icon-height) * 0.5);
+    left: calc(var(--icon-width) * 0.5 + var(--bullet-border-width));
+    transform: translateX(-50%);
+    width: var(--separator-weight);
+    height: 100%;
+    background-color: var(--sm-bg-color-2); }
 
-.block-editor-block-list__layout[class][class] .is-style-timeline:not(.list-no-marker):before,
-.block-editor-block-list__layout[class][class] [data-novablocks-connection-style="is-style-timeline"]:not([data-novablocks-list-style="list-no-marker"]):before {
-  content: '';
-  position: absolute;
-  top: calc(var(--icon-height) * 0.5);
-  left: calc(var(--icon-width) * 0.5 + var(--bullet-border-width));
-  transform: translateX(-50%);
-  width: var(--separator-weight);
-  height: 100%;
-  background-color: var(--sm-bg-color-2); }
-
-.block-editor-block-list__layout[class][class] .is-style-timeline:not(.list-no-marker) li:last-child:after,
-.block-editor-block-list__layout[class][class] [data-novablocks-connection-style="is-style-timeline"]:not([data-novablocks-list-style="list-no-marker"]) li:last-child:after {
-  content: '';
-  position: absolute;
-  width: calc(var(--separator-weight) * 2);
-  height: 100%;
-  left: calc(-1 * (var(--list-padding) - var(--icon-width) * 0.5));
-  top: 0.55em;
-  background-color: var(--sm-current-bg-color); }
+.block-editor-block-list__layout[class][class] [data-list-style="list-no-marker"]:before {
+  content: none; }
 
 .nova-food-menu {
   --block-content-start: ws;
