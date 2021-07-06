@@ -1,13 +1,12 @@
 /* Links */
 a {
-    color: var(--theme-links-color);
+    color: var(--sm-current-fg1-color);
     text-decoration: underline;
-    text-decoration-color: transparent;
+    text-decoration-color: currentColor;
     transition: var(--theme-links-transition);
 
     &:hover,
     &:focus {
-        color: var(--theme-links-color);
         text-decoration-color: var(--theme-links-color);
     }
 
@@ -15,22 +14,29 @@ a {
         color: currentColor;
         text-decoration-color: transparent;
     }
+}
 
-    .entry-title & {
+/* Entry meta links */
+.entry-meta a {
+    text-decoration-color: transparent;
 
-        &:hover,
-        &:focus {
-            text-decoration-color: transparent;
-        }
+    &:hover,
+    &:focus {
+        text-decoration-color: var(--theme-links-color);
     }
+}
 
-    .entry-meta & {
-        color: currentColor;
+
+/* Headings links */
+h1, h2, h3, h4, h5, h6 {
+
+    a {
+        color: var(--theme-links-color);
         text-decoration-color: transparent;
 
         &:hover,
         &:focus {
-            text-decoration-color: var(--theme-links-color);
+            text-decoration-color: transparent;
         }
     }
 }

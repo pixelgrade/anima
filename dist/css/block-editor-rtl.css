@@ -231,6 +231,8 @@
   /* Nested unordered lists */
   /* Nested ordered lists */
   /* Links */
+  /* Entry meta links */
+  /* Headings links */
   /* Media */ }
   .editor-styles-wrapper::-webkit-input-placeholder {
     color: var(--theme-input-placeholder-color);
@@ -805,23 +807,24 @@
     .editor-styles-wrapper[class] textarea {
       min-height: 100%; }
   .editor-styles-wrapper a {
-    color: var(--theme-links-color);
+    color: var(--sm-current-fg1-color);
     text-decoration: underline;
-    text-decoration-color: transparent;
+    text-decoration-color: currentColor;
     transition: var(--theme-links-transition); }
     .editor-styles-wrapper a:hover, .editor-styles-wrapper a:focus {
-      color: var(--theme-links-color);
       text-decoration-color: var(--theme-links-color); }
     .editor-styles-wrapper a[href^=tel] {
       color: currentColor;
       text-decoration-color: transparent; }
-    .entry-title .editor-styles-wrapper a:hover, .entry-title .editor-styles-wrapper a:focus {
+  .editor-styles-wrapper .entry-meta a {
+    text-decoration-color: transparent; }
+    .editor-styles-wrapper .entry-meta a:hover, .editor-styles-wrapper .entry-meta a:focus {
+      text-decoration-color: var(--theme-links-color); }
+  .editor-styles-wrapper h1 a, .editor-styles-wrapper h2 a, .editor-styles-wrapper h3 a, .editor-styles-wrapper h4 a, .editor-styles-wrapper h5 a, .editor-styles-wrapper h6 a {
+    color: var(--theme-links-color);
+    text-decoration-color: transparent; }
+    .editor-styles-wrapper h1 a:hover, .editor-styles-wrapper h1 a:focus, .editor-styles-wrapper h2 a:hover, .editor-styles-wrapper h2 a:focus, .editor-styles-wrapper h3 a:hover, .editor-styles-wrapper h3 a:focus, .editor-styles-wrapper h4 a:hover, .editor-styles-wrapper h4 a:focus, .editor-styles-wrapper h5 a:hover, .editor-styles-wrapper h5 a:focus, .editor-styles-wrapper h6 a:hover, .editor-styles-wrapper h6 a:focus {
       text-decoration-color: transparent; }
-    .entry-meta .editor-styles-wrapper a {
-      color: currentColor;
-      text-decoration-color: transparent; }
-      .entry-meta .editor-styles-wrapper a:hover, .entry-meta .editor-styles-wrapper a:focus {
-        text-decoration-color: var(--theme-links-color); }
   .editor-styles-wrapper img,
   .editor-styles-wrapper video {
     max-width: 100%;

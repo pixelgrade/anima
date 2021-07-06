@@ -887,23 +887,28 @@ ol ol {
 
 /* Links */
 a {
-  color: var(--theme-links-color);
+  color: var(--sm-current-fg1-color);
   text-decoration: underline;
-  text-decoration-color: transparent;
+  text-decoration-color: currentColor;
   transition: var(--theme-links-transition); }
   a:hover, a:focus {
-    color: var(--theme-links-color);
     text-decoration-color: var(--theme-links-color); }
   a[href^=tel] {
     color: currentColor;
     text-decoration-color: transparent; }
-  .entry-title a:hover, .entry-title a:focus {
+
+/* Entry meta links */
+.entry-meta a {
+  text-decoration-color: transparent; }
+  .entry-meta a:hover, .entry-meta a:focus {
+    text-decoration-color: var(--theme-links-color); }
+
+/* Headings links */
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+  color: var(--theme-links-color);
+  text-decoration-color: transparent; }
+  h1 a:hover, h1 a:focus, h2 a:hover, h2 a:focus, h3 a:hover, h3 a:focus, h4 a:hover, h4 a:focus, h5 a:hover, h5 a:focus, h6 a:hover, h6 a:focus {
     text-decoration-color: transparent; }
-  .entry-meta a {
-    color: currentColor;
-    text-decoration-color: transparent; }
-    .entry-meta a:hover, .entry-meta a:focus {
-      text-decoration-color: var(--theme-links-color); }
 
 /* Preformatted */
 pre {
