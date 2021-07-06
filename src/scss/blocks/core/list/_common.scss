@@ -42,7 +42,8 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 }
 
 // List default settings
-// --separator-weight: border weight used for Divider or Timeline.
+// --timeline-weight: border weight used for Timeline connector.
+// --divider-weight: border weight used for Divider horizontal separator.
 // Usually used on border or box-shadow, depending on the situation.
 // This will also help us to position correctly the
 // :before element on <li> (usually bullet, or checkmark).
@@ -51,10 +52,13 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 // checkmark background, or timeline border.
 
 #{$list-selector} {
-	--separator-weight: 0.222em;
-	--divider-weight: 0.222em;
+	--timeline-weight: 2px; // it was 0.222em
+	--divider-weight: 1px; // it was 0.222em
+	
 	--icon-width: 0.333em;
 	--icon-height: 0.333em;
+	
+	--connection-color: var(--sm-bg-color-3);
 	
 	--bullet-width: calc(var(--final-font-size) * var(--current-line-height));
 	--bullet-height: var(--bullet-width);
@@ -190,7 +194,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 				&#{$is-style-timeline-selector} {
 					
 					padding-left: var(--list-spacing);
-					box-shadow: inset var(--divider-weight) 0 0 var(--sm-bg-color-2);
+					box-shadow: inset var(--timeline-weight) 0 0 var(--connection-color);
 				}
 			}
 			
@@ -221,9 +225,9 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 						position: absolute;
 						left: calc(var(--bullet-width) * 0.25);
 						transform: translateX(-50%);
-						width: var(--separator-weight);
+						width: var(--timeline-weight);
 						height: 100%;
-						background-color: var(--sm-bg-color-2);
+						background-color: var(--connection-color);
 					}
 				}
 				
@@ -386,7 +390,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 					left: calc( var(--bullet-width) * 0.5 );
 					width: var(--divider-weight);
 					height: 100%;
-					background-color: var(--sm-bg-color-2);
+					background-color: var(--connection-color);
 				}
 				
 				> li {
@@ -412,9 +416,9 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 						&:after {
 							content: '';
 							position: absolute;
-							width: calc(var(--separator-weight) * 2);
+							width: calc(var(--timeline-weight) * 2);
 							height: 100%;
-							left: calc(-1 * var(--separator-weight));
+							left: calc(-1 * var(--timeline-weight));
 							transform: translateX(-50%);
 							top: calc(var(--bullet-height) * 0.5);
 							background-color: var(--sm-current-bg-color);
@@ -467,7 +471,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 			--element-spacing: var(--theme-spacing-fluid-default);
 			
 			&:not(:last-child) {
-				border-bottom: var(--divider-weight) solid var(--sm-bg-color-2);
+				border-bottom: var(--divider-weight) solid var(--connection-color);
 				padding-bottom: var(--element-spacing);
 			}
 			
@@ -509,9 +513,9 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 				&:after {
 					content: '';
 					position: absolute;
-					width: calc(var(--separator-weight) * 2);
+					width: calc(var(--timeline-weight) * 2);
 					height: 100%;
-					left: calc(-1 * (var(--list-spacing) - var(--icon-width) * 0.5));
+					left: calc(-1 * (var(--list-spacing) - var(--icon-width)));
 					top: 0.55em;
 					background-color: var(--sm-current-bg-color);
 				}
@@ -524,9 +528,9 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 			top: calc(var(--icon-height) * 0.5);
 			left: calc(var(--icon-width) * 0.5 + var(--bullet-border-width));
 			transform: translateX(-50%);
-			width: var(--separator-weight);
+			width: var(--timeline-weight);
 			height: 100%;
-			background-color: var(--sm-bg-color-2);
+			background-color: var(--connection-color);
 		}
 	}
 	
