@@ -1898,11 +1898,8 @@ function (_HeaderBase) {
   }, {
     key: "updateStickyStyles",
     value: function updateStickyStyles() {
-      if (this.isSticky || !this.hasStickyRow) {
-        header_base.prototype.updateStickyStyles.call(this);
-        this.toggleRowsColors(!this.shouldBeSticky);
-      }
-
+      header_base.prototype.updateStickyStyles.call(this);
+      this.toggleRowsColors(!this.shouldBeSticky);
       this.element.style.marginTop = "".concat(this.staticDistance, "px");
 
       if (this.secondaryHeader) {

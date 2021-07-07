@@ -111,7 +111,7 @@ foreach ( $color_control_ids as $index => $control_id ) {
 		'textColors'       => $textColor_objects,
 		'source'           => array( $value ),
 		'lightColorsCount' => 5,
-		'sourceIndex'      => 5,
+		'sourceIndex'      => 6,
 		'label'            => 'Color ' . $alphabet[ $index + 1 ],
 		'id'               => $index + 1
 	);

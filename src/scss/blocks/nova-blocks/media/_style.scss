@@ -21,6 +21,12 @@
 
 .novablocks-media__inner-container {
 
+    @include below(tablet) {
+        @include specific(3) {
+            padding: 0;
+        }
+    }
+
     .wp-block-separator {
         width: 100%;
     }

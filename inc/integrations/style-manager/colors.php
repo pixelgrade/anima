@@ -40,7 +40,7 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 				'html' => '<span class="sm-group__title">' . esc_html__( 'Main Content', '__theme_txtd' ) . '</span>',
 			),
 
-			'page_title' => sm_get_color_switch_dark_config( 'Page title', '.entry-title', false, 1 ),
+			'page_title' => sm_get_color_switch_dark_config( 'Page title', '.page-title', false, 2 ),
 			'body_color' => sm_get_color_switch_dark_config( 'Body text', 'html, [class*="sm-variation-"]', false, 0 ),
 			'links_color' => sm_get_color_switch_dark_config( 'Body links', 'a', true, 1, '--theme-links-color' ),
 			'heading_links_color' => sm_get_color_switch_dark_config( 'Heading links', 'h1 a, h2 a, h3 a, h4 a, h5 a, h6 a', false, 2, '--theme-links-color' ),
@@ -53,7 +53,7 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 			),
 
 			'menu_item_color' => sm_get_color_switch_dark_config( 'Navigation links', '.novablocks-navigation', false, 1 ),
-			'menu_active_item_color' => sm_get_color_switch_dark_config( 'Navigaiton active link', '.novablocks-navigation > ul > li[class*="current"]', false, 3 ),
+			'menu_active_item_color' => sm_get_color_switch_dark_config( 'Navigaiton active link', '.novablocks-navigation > ul > li[class*="current"]', true, 3 ),
 
 			'sm-group-separator-2' => array( 'type' => 'html', 'html' => '' ),
 

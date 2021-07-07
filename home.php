@@ -34,34 +34,29 @@ $page_id = get_option( 'page_for_posts' ); ?>
 
 			if ( have_posts() ) {
 				if ( $has_title || $has_categories ) { ?>
-					<header class="entry-header">
-						<div class="has-text-align-center">
-							<?php
+					<header class="entry-header has-text-align-center">
+                        <?php
 
-							if ( $has_title ) {
-								echo '<h1 class="page-title">' . get_the_title( $page_id ) . '</h1>';
-							}
+                        if ( $has_title ) {
+                            echo '<h1 class="page-title">' . get_the_title( $page_id ) . '</h1>';
+                        }
 
-							if ( $has_categories ) {
-								echo '<ul class="entry-meta">';
-								foreach ( $categories as $category ) {
-									$category_url = get_category_link( $category->term_id );
-									echo '<li><a href="' . esc_url( $category_url ) . '">' . esc_html( $category->name ) . '</a></li>';
-								}
-								echo '</ul>';
-							}
-							?>
-						</div>
+                        if ( $has_categories ) {
+                            echo '<ul class="entry-meta">';
+                            foreach ( $categories as $category ) {
+                                $category_url = get_category_link( $category->term_id );
+                                echo '<li><a href="' . esc_url( $category_url ) . '">' . esc_html( $category->name ) . '</a></li>';
+                            }
+                            echo '</ul>';
+                        }
+                        ?>
 					</header><!-- .page-header -->
-				<?php } ?>
+				<?php }
 
-				<div class="entry-content">
-					<?php
-					get_template_part( 'template-parts/loop' );
-					rosa2_the_posts_pagination(); ?>
-				</div>
+                get_template_part( 'template-parts/loop' );
+                rosa2_the_posts_pagination();
 
-			<?php } else {
+			} else {
 				get_template_part( 'template-parts/content', 'none' );
 			} ?>
 
