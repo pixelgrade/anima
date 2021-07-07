@@ -298,7 +298,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 						height: var(--bullet-height);
 						background-color: var(--bullet-bg-color);
 						border-radius: 50%;
-						box-shadow: 0 0 0 4px var(--current-light-primary);
+						box-shadow: 0 0 0 4px var(--sm-current-bg-color);
 					}
 				}
 			}
@@ -408,7 +408,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 					&:last-child {
 						margin-left: calc(var(--list-spacing) * -0.5 );
 						padding-left: calc(var(--list-spacing) * 0.5);
-						box-shadow: calc(var(--divider-weight) * -1.5) 0 0px 0 var(--current-light-primary);
+						box-shadow: calc(var(--divider-weight) * -1.5) 0 0px 0 var(--sm-current-bg-color);
 						
 						&:before {
 							left: calc( -0.5 * var(--list-spacing));

@@ -542,7 +542,7 @@
     .wp-block-latest-posts[class][class] li a {
       display: block; }
       .wp-block-latest-posts[class][class] li a:hover {
-        color: var(--current-color-primary);
+        color: var(--sm-current-accent-color);
         text-decoration: underline; }
   .wp-block-latest-posts[class][class].style--alt > li:not(:last-child) {
     padding-bottom: 1em;
@@ -642,11 +642,11 @@
 .wp-block-search__button {
   position: relative; }
   .wp-block-search__button[class][class] {
-    --theme-button-background-color: var(--current-color-primary);
-    --theme-button-border-color: var(--current-color-primary);
-    --theme-button-text-color: var(--current-light-primary);
-    --theme-button-hover-border-color: var(--current-color-primary);
-    --theme-button-hover-text-color: var(--current-color-primary); }
+    --theme-button-background-color: var(--sm-current-accent-color);
+    --theme-button-border-color: var(--sm-current-accent-color);
+    --theme-button-text-color: var(--sm-current-bg-color);
+    --theme-button-hover-border-color: var(--sm-current-accent-color);
+    --theme-button-hover-text-color: var(--sm-current-accent-color); }
   .wp-block-search__button:after {
     content: '';
     position: absolute;
@@ -689,7 +689,7 @@
     mask-size: cover;
     -webkit-mask: url("../../../assets/images/icon-search.svg") no-repeat 50% 50%;
     -webkit-mask-size: cover;
-    background-color: var(--current-color-primary);
+    background-color: var(--sm-current-accent-color);
     transition: opacity 0.5 cubic-bezier(0.25, 0.1, 0.25, 1); }
   .wp-block-search__no-button .wp-block-search__inside-wrapper:hover:before {
     opacity: 0.75; }
