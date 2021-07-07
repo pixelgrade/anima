@@ -2,8 +2,6 @@
    #LISTS
    ========================================================================== */
 
-
-
 // DO NOT UPDATE THE FOLLOWING CLASSES
 // We are using those classes to target elements,
 // based on css location: frontend or editor.
@@ -50,7 +48,6 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 // --icon-width and --icon-height: width and height of the checkmarks.
 // This will also help us to position correctly
 // checkmark background, or timeline border.
-
 #{$list-selector} {
 	--timeline-weight: 2px; // it was 0.222em
 	--divider-weight: 1px; // it was 0.222em
@@ -137,36 +134,32 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 	// of the & syntax without implying that the rules are child selectors of .semantic.
 	// See: https://sass-lang.com/documentation/at-rules/at-root
 	@at-root {
+
 		// UL
 		// We are resetting default styles,
 		// and are using custom custom styling.
 		// New bullets are created using :before and :after
 		// pseudo-elements on list items.
-		
-		
 		ul#{&} {
-			
 			--bullet-border-width: 0.222em;
 			
 			li {
-				
 				position: relative;
 				
 				&:before {
-					
-					position: absolute;
-					
 					content: '';
+
+					position: absolute;
 					top: calc((var(--final-font-size) * var(--current-line-height) - var(--bullet-height)) * 0.5);
-					
 					left: calc(-1 * var(--list-spacing) + var(--bullet-border-width));
-					
-					background-color: var(--bullet-color);
+					z-index: 10;
+
 					width: var(--bullet-width);
 					height: var(--bullet-height);
+
+					background-color: var(--bullet-color);
 					border-radius: 50%;
 					box-shadow: 0 0 0 var(--bullet-border-width) var(--bullet-bg-color), 0 0 0 var(--bullet-border-outline) var(--page-background-color, var(--sm-current-bg-color));
-					z-index: 10;
 				}
 			}
 			
@@ -180,7 +173,6 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 			
 			// LIST STYLE - NONE
 			&#{$is-list-no-marker-selector} {
-				
 				--bullet-width: var(--divider-weight);
 				--bullet-addons: 0px;
 				
@@ -195,7 +187,6 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 				}
 				
 				&#{$is-style-timeline-selector} {
-					
 					padding-left: var(--list-spacing);
 					box-shadow: inset var(--timeline-weight) 0 0 var(--connection-color);
 				}
@@ -219,18 +210,27 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 				}
 				
 				&#{$is-style-timeline-selector} {
-					
 					--border-width: 0.11em;
 					
 					&:before {
-						
 						content: '';
+
 						position: absolute;
 						left: calc(var(--bullet-width) * 0.25);
-						transform: translateX(-50%);
+
 						width: var(--timeline-weight);
-						height: 100%;
+						//height: 100%;
+
+						transform: translateX(-50%);
 						background-color: var(--connection-color);
+					}
+
+					&.sm-color-signal-2,
+					&.sm-color-signal-3 {
+
+						&:before {
+							left: calc(var(--bullet-width) * 0.5);
+						}
 					}
 				}
 				
@@ -238,8 +238,8 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 					
 					&,
 					&:not(#{$is-list-no-marker-selector}) {
+
 						li {
-							
 							&:before {
 								transform: translate(-50%, -50%);
 							}
@@ -293,7 +293,8 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 						content: '';
 						position: absolute;
 						left: calc(-1 * var(--list-spacing));
-						top: calc((var(--final-font-size) * var(--current-line-height) - var(--bullet-height)) * 0.5);
+						top: calc(var(--bullet-height) * 0.5);
+						transform: translateY(-50%);
 						width: var(--bullet-width);
 						height: var(--bullet-height);
 						background-color: var(--bullet-bg-color);
@@ -307,12 +308,10 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 			&#{$is-list-bullet-selector} {
 				
 				&#{$is-style-timeline-selector} {
-					
 					position: relative;
 					
 					// We want to overwrite
 					// default list styling, by using :before.
-					
 					list-style-type: none;
 				}
 			}
@@ -397,7 +396,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 				}
 				
 				> li {
-					
+
 					// The line used for TIMELINE has
 					// the same height as the whole list,
 					// but we want it to finish after the latest marker.
@@ -409,11 +408,11 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 						margin-left: calc(var(--list-spacing) * -0.5 );
 						padding-left: calc(var(--list-spacing) * 0.5);
 						box-shadow: calc(var(--divider-weight) * -1.5) 0 0px 0 var(--current-light-primary);
-						
+
 						&:before {
 							left: calc( -0.5 * var(--list-spacing));
 						}
-						
+
 						// This pseudo element will be used
 						// to hide the 'extra' timeline border.
 						&:after {
@@ -427,7 +426,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 							background-color: var(--sm-current-bg-color);
 						}
 					}
-					
+
 				}
 			}
 			
@@ -506,22 +505,22 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 		
 		// We want to overwrite
 		// default list styling, by using :before.
-		
 		list-style-type: none;
-		
-		li {
-			
-			&:last-child {
+
+		&#{$is-list-checkmark-selector} li:last-child {
+			box-shadow: var(--sm-current-bg-color) calc(-1 * var(--list-spacing)) 0 0 0;
+		}
+
+		&:not(#{$is-list-checkmark-selector}) li:last-child {
 				
-				&:after {
-					content: '';
-					position: absolute;
-					width: calc(var(--timeline-weight) * 2);
-					height: 100%;
-					left: calc(-1 * (var(--list-spacing) - var(--icon-width)));
-					top: 0.55em;
-					background-color: var(--sm-current-bg-color);
-				}
+			&:after {
+				content: '';
+				position: absolute;
+				width: calc(var(--timeline-weight) * 2);
+				height: 100%;
+				left: calc(-1 * (var(--list-spacing) - var(--icon-width)));
+				top: 0.55em;
+				background-color: var(--sm-current-bg-color);
 			}
 		}
 		
@@ -529,10 +528,10 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 			content: '';
 			position: absolute;
 			top: calc(var(--icon-height) * 0.5);
+			bottom: calc(var(--icon-height) * 0.5);
 			left: calc(var(--icon-width) * 0.5 + var(--bullet-border-width));
 			transform: translateX(-50%);
 			width: var(--timeline-weight);
-			height: 100%;
 			background-color: var(--connection-color);
 		}
 	}
@@ -544,5 +543,4 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 			content: none;
 		}
 	}
-	
 }

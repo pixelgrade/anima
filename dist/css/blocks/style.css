@@ -141,16 +141,16 @@ ul.nb-list {
   ul.nb-list li {
     position: relative; }
     ul.nb-list li:before {
-      position: absolute;
       content: '';
+      position: absolute;
       top: calc((var(--final-font-size) * var(--current-line-height) - var(--bullet-height)) * 0.5);
       left: calc(-1 * var(--list-spacing) + var(--bullet-border-width));
-      background-color: var(--bullet-color);
+      z-index: 10;
       width: var(--bullet-width);
       height: var(--bullet-height);
+      background-color: var(--bullet-color);
       border-radius: 50%;
-      box-shadow: 0 0 0 var(--bullet-border-width) var(--bullet-bg-color), 0 0 0 var(--bullet-border-outline) var(--page-background-color, var(--sm-current-bg-color));
-      z-index: 10; }
+      box-shadow: 0 0 0 var(--bullet-border-width) var(--bullet-bg-color), 0 0 0 var(--bullet-border-outline) var(--page-background-color, var(--sm-current-bg-color)); }
   ul.nb-list:not(.list-checkmark-style) {
     --bullet-width: 0.333em;
     --bullet-height: var(--bullet-width);
@@ -176,10 +176,11 @@ ul.nb-list {
       content: '';
       position: absolute;
       left: calc(var(--bullet-width) * 0.25);
-      transform: translateX(-50%);
       width: var(--timeline-weight);
-      height: 100%;
+      transform: translateX(-50%);
       background-color: var(--connection-color); }
+    ul.nb-list.list-checkmark-style.is-style-timeline.sm-color-signal-2:before, ul.nb-list.list-checkmark-style.is-style-timeline.sm-color-signal-3:before {
+      left: calc(var(--bullet-width) * 0.5); }
   ul.nb-list.list-checkmark-style.is-style-divider li:before, ul.nb-list.list-checkmark-style.is-style-divider:not(.list-no-marker) li:before {
     transform: translate(-50%, -50%); }
   ul.nb-list.list-checkmark-style,
@@ -210,7 +211,8 @@ ul.nb-list {
     content: '';
     position: absolute;
     left: calc(-1 * var(--list-spacing));
-    top: calc((var(--final-font-size) * var(--current-line-height) - var(--bullet-height)) * 0.5);
+    top: calc(var(--bullet-height) * 0.5);
+    transform: translateY(-50%);
     width: var(--bullet-width);
     height: var(--bullet-height);
     background-color: var(--bullet-bg-color);
@@ -306,7 +308,9 @@ ol.nb-list {
 .nb-list.is-style-timeline {
   position: relative;
   list-style-type: none; }
-  .nb-list.is-style-timeline li:last-child:after {
+  .nb-list.is-style-timeline.list-checkmark-style li:last-child {
+    box-shadow: var(--sm-current-bg-color) calc(-1 * var(--list-spacing)) 0 0 0; }
+  .nb-list.is-style-timeline:not(.list-checkmark-style) li:last-child:after {
     content: '';
     position: absolute;
     width: calc(var(--timeline-weight) * 2);
@@ -318,10 +322,10 @@ ol.nb-list {
     content: '';
     position: absolute;
     top: calc(var(--icon-height) * 0.5);
+    bottom: calc(var(--icon-height) * 0.5);
     left: calc(var(--icon-width) * 0.5 + var(--bullet-border-width));
     transform: translateX(-50%);
     width: var(--timeline-weight);
-    height: 100%;
     background-color: var(--connection-color); }
 
 .nb-list.list-no-marker:before {
