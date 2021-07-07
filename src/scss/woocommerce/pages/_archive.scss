@@ -38,16 +38,11 @@
 }
 
 .woocommerce {
-    .woocommerce-ordering {
-        margin-bottom: var(--theme-spacing-medium);
-    }
 
+    .woocommerce-ordering,
     .woocommerce-result-count {
-        margin: 0;
-
-        @include below(tablet) {
-            margin-bottom: var(--theme-spacing);
-        }
+        margin-top: calc( var(--novablocks-block-top-spacing) * var(--novablocks-spacing) * var(--novablocks-element-spacing-multiplier, 1));
+        margin-bottom: 0;
     }
 
     .site {
@@ -68,8 +63,7 @@
 }
 
 .woocommerce-products-header {
-    padding-top: var(--theme-spacing-medium);
-    padding-bottom: var(--theme-spacing-medium);
+    margin-bottom: var(--theme-spacing-medium);
 }
 
 .woocommerce-products-header__title:empty {

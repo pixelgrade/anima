@@ -184,5 +184,20 @@ html {
 /* END body margin hack */
 
 body {
+    // @todo why?
     --page-background-color: var(--sm-bg-color-1);
+}
+
+/* Site Content */
+.site-content {
+    padding-top: var(--theme-spacing-fluid-large);
+    padding-bottom: var(--theme-spacing-fluid-large);
+
+    body.has-no-spacing-top & {
+        padding-top: 0;
+    }
+
+    body.has-no-spacing-bottom & {
+        padding-bottom: 0;
+    }
 }

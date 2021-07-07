@@ -34,7 +34,7 @@ $page_id = get_option( 'page_for_posts' ); ?>
 
 			if ( have_posts() ) {
 				if ( $has_title || $has_categories ) { ?>
-					<header class="entry-header has-text-align-center">
+					<header class="entry-header has-text-align-center entry-content">
                         <?php
 
                         if ( $has_title ) {

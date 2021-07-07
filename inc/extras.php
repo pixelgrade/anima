@@ -447,9 +447,9 @@ if ( ! function_exists( 'rosa2_article_header' ) ) {
 		ob_start();
 		?>
 
-        <div class="article-header sm-variation-2">
+        <div class="article-header">
 
-            <div class="entry-header">
+            <div class="entry-header sm-variation-2">
 				<?php rosa2_categories_posted_in() ?>
 
                 <h1 class="entry-title"><?php the_title() ?></h1>

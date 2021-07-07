@@ -1,9 +1,5 @@
 .single {
 
-    .has-post-thumbnail {
-        --overlap-header-size: 10em;
-    }
-
     &.single-post {
         background: var(--sm-current-bg-color);
     }
@@ -18,11 +14,6 @@
 
     .hentry {
         @include space-children-y( var(--theme-spacing-large) );
-    }
-
-    .site-content {
-        padding-bottom: var(--theme-spacing-fluid-large);
-        padding-top: 0;
     }
 
     .entry-header > * {
@@ -50,10 +41,6 @@
 
         width: 100%;
     }
-}
-
-body:not(.has-no-spacing-top) .site-content {
-    padding-top: var(--theme-spacing-fluid-large, 0);
 }
 
 @include above(lap) {
@@ -98,39 +85,44 @@ body:not(.has-no-spacing-top) .site-content {
 .article-header {
 
     .entry-header {
-        position: relative;
+        transform: translateZ(0);
 
         display: flex;
         flex-direction: column;
         flex-grow: 1;
 
-        background-color: var(--sm-current-bg-color);
-        z-index: 1;
-
-        padding-bottom: var(--overlap-header-size, 1em);
-
+        background: none;
 
         &:before {
             content: '';
+
             position: absolute;
-            top: 0;
+            top: calc(-1 * var(--theme-spacing-fluid-large));
             right: -100vw;
             bottom: 0;
             left: -100vw;
-            display: block;
-            background-color: inherit;
-            pointer-events: none;
             z-index: -1;
 
-            margin-top: calc(-1 * var(--page-top-spacing));
+            display: block;
+
+            background-color: var(--sm-current-bg-color);
+            pointer-events: none;
+        }
+
+        padding-bottom: calc( 0.5 * var(--theme-spacing-fluid-large) );
+
+        body.single .site-main .has-post-thumbnail & {
+
+            &:before {
+                bottom: calc(-2 * var(--theme-spacing-fluid-large));
+            }
         }
 
         + .entry-thumbnail {
-            --element-spacing: var(--theme-spacing-fluid-xsmall);
-
             position: relative;
-            margin-top: calc( -1 * var(--overlap-header-size) + 2 * var(--element-spacing)) !important;
             z-index: 10;
+
+            margin-top: calc( 0.5 * var(--theme-spacing-fluid-small) );
         }
 
         .cat-links {
@@ -146,12 +138,6 @@ body:not(.has-no-spacing-top) .site-content {
             --current-font-weight: 800;
             --current-line-height: 1.2;
         }
-    }
-    
-    + .novablocks-sidecar {
-        margin-top: calc( -1 * var(--overlap-header-size) * 0.8) !important;
-
-        z-index: 2;
     }
 
     a {
@@ -192,23 +178,5 @@ body:not(.has-no-spacing-top) .site-content {
     .cat-links,
     .entry-excerpt {
         @include apply-font(lead);
-    }
-}
-
-
-.single-post {
-
-    .site-main {
-
-        --page-top-spacing: var(--theme-spacing-fluid-large);
-
-        .post:not(.novablocks-media),
-        .page {
-            padding-top: var(--page-top-spacing);
-        }
-    }
-    
-    .site-content[class] {
-        padding-top: 0;
     }
 }

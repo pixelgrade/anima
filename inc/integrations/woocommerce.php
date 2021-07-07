@@ -280,11 +280,11 @@ function rosa2_add_end_wrapper_after_related() {
 }
 
 function rosa2_add_start_main_content() {
-	echo '<div class="entry-content"><div class="novablocks-sidecar"><div class="novablocks-content">';
+	echo '<div class="novablocks-sidecar"><div class="novablocks-content entry-content">';
 }
 
 function rosa2_add_end_main_content() {
-	echo '</div><!-- .novablocks-content --></div><!-- .novablocks-sidecar --></div><!-- .entry-content -->';
+	echo '</div><!-- .novablocks-content.entry-conten --></div><!-- .novablocks-sidecar -->';
 }
 
 function rosa2_new_product_title_markup() {

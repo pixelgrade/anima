@@ -213,6 +213,14 @@
 
 :root {
   --theme-input-padding: .35em;
+  --theme-checkbox-width: 1.38rem;
+  --theme-checkbox-height: 1.38rem;
+  --opacity-color: 255, 255, 255; }
+  @media only screen and (min-width: 768px) {
+    :root {
+      --theme-input-padding: .833em; } }
+
+* {
   --theme-input-color: var(--sm-current-fg1-color);
   --theme-input-error-color: var(--theme-error-color);
   --theme-input-background-color: var(--sm-current-bg-color);
@@ -244,13 +252,7 @@
   var(--theme-input-error-focus-shadow);
   --theme-input-placeholder-color: var(--sm-current-fg1-color);
   --theme-input-placeholder-opacity: .5;
-  --theme-checkbox-width: 1.38rem;
-  --theme-checkbox-height: 1.38rem;
   --theme-input-label-color: var(--sm-current-fg1-color);
   --theme-input-legend-color: var(--sm-current-fg1-color);
   --theme-input-vertical-spacing: var(--theme-spacing-tiny);
-  --theme-input-horizontal-spacing: var(--theme-spacing-tiny);
-  --opacity-color: 255, 255, 255; }
-  @media only screen and (min-width: 768px) {
-    :root {
-      --theme-input-padding: .833em; } }
+  --theme-input-horizontal-spacing: var(--theme-spacing-tiny); }

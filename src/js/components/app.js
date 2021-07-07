@@ -182,6 +182,8 @@ export default class App {
 			hero.offset = promoBarHeight;
 			hero.updateOnScroll();
 		} );
+
+		this.onHeaderUpdate();
 	}
 
 	onHeaderUpdate() {

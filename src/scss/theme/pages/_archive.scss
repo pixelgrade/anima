@@ -1,6 +1,7 @@
 body {
-    &.archive:not(.woocommerce-page),
+
     &.blog,
+    &.archive:not(.woocommerce-page),
     &.search:not(.search-no-results) {
         background-color: var(--sm-current-bg-color);
 
@@ -13,16 +14,12 @@ body {
 .blog,
 .archive,
 .search {
+
     .entry-content .wp-block-group .wp-block-group__inner-container {
         
         @include above(lap) {
             --display-mode: grid;
         }
-    }
-    
-    .entry-header {
-        padding-top: var(--theme-spacing-fluid-xl);
-        padding-bottom: var(--theme-spacing-fluid-xl);
     }
     
     .wp-block {

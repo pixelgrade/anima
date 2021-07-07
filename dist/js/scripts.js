@@ -2549,6 +2549,7 @@ function () {
         hero.offset = promoBarHeight;
         hero.updateOnScroll();
       });
+      this.onHeaderUpdate();
     }
   }, {
     key: "onHeaderUpdate",

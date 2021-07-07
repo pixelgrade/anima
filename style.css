@@ -3494,3 +3494,12 @@ html:after {
 /* END body margin hack */
 body {
   --page-background-color: var(--sm-bg-color-1); }
+
+/* Site Content */
+.site-content {
+  padding-top: var(--theme-spacing-fluid-large);
+  padding-bottom: var(--theme-spacing-fluid-large); }
+  body.has-no-spacing-top .site-content {
+    padding-top: 0; }
+  body.has-no-spacing-bottom .site-content {
+    padding-bottom: 0; }
