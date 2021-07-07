@@ -30,7 +30,7 @@
 .widget_categories ul {
   list-style: none;
   padding-left: 0;
-  color: var(--current-color-primary); }
+  color: var(--sm-current-accent-color); }
 
 .widget_categories a {
   text-decoration: none; }
@@ -217,7 +217,7 @@ ul.nb-list {
     height: var(--bullet-height);
     background-color: var(--bullet-bg-color);
     border-radius: 50%;
-    box-shadow: 0 0 0 4px var(--current-light-primary); }
+    box-shadow: 0 0 0 4px var(--sm-current-bg-color); }
   ul.nb-list.list-bullet-style.is-style-timeline {
     position: relative;
     list-style-type: none; }
@@ -257,7 +257,7 @@ ol.nb-list {
   ol.nb-list.is-style-timeline[class] > li:last-child {
     margin-left: calc(var(--list-spacing) * -0.5);
     padding-left: calc(var(--list-spacing) * 0.5);
-    box-shadow: calc(var(--divider-weight) * -1.5) 0 0px 0 var(--current-light-primary); }
+    box-shadow: calc(var(--divider-weight) * -1.5) 0 0 0 var(--sm-current-bg-color); }
     ol.nb-list.is-style-timeline[class] > li:last-child:before {
       left: calc( -0.5 * var(--list-spacing)); }
     ol.nb-list.is-style-timeline[class] > li:last-child:after {
@@ -336,11 +336,11 @@ ol.nb-list {
   align-items: stretch; }
 
 .wp-block-jetpack-subscriptions button[type="submit"] {
-  --theme-button-background-color: var(--current-color-primary) !important;
-  --theme-button-border-color: var(--current-color-primary) !important;
-  --theme-button-text-color: var(--current-light-primary) !important;
-  --theme-button-hover-border-color: var(--current-color-primary) !important;
-  --theme-button-hover-text-color: var(--current-color-primary) !important;
+  --theme-button-background-color: var(--sm-current-accent-color) !important;
+  --theme-button-border-color: var(--sm-current-accent-color) !important;
+  --theme-button-text-color: var(--sm-current-bg-color) !important;
+  --theme-button-hover-border-color: var(--sm-current-accent-color) !important;
+  --theme-button-hover-text-color: var(--sm-current-accent-color) !important;
   font-size: var(--final-font-size) !important;
   padding: var(--theme-button-padding) !important;
   border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color) !important;
