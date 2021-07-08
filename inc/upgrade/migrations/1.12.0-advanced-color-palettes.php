@@ -43,7 +43,6 @@ $lighter = get_option( 'sm_light_primary_final' );
 $light = get_option( 'sm_light_tertiary_final' );
 $text_color = get_option( 'sm_dark_secondary_final' );
 $dark = get_option( 'sm_dark_primary_final' );
-$darker = get_option( 'sm_dark_tertiary_final' );
 
 foreach ( $color_control_ids as $index => $control_id ) {
 
@@ -64,8 +63,8 @@ foreach ( $color_control_ids as $index => $control_id ) {
 		$value,
 		$dark,
 		$dark,
-		$darker,
-		$darker,
+		$dark,
+		$dark,
 	);
 
 	$color_objects = array();
