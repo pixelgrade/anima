@@ -35,20 +35,18 @@ if ( $diversity === 'medium' ) {
 	array_splice( $color_control_ids, 2 );
 }
 
-
 // build values for sm_advanced_palette_source and sm_advanced_palette_output
 $source = array();
 $output = array();
 
-$lighter = pixelgrade_option( 'sm_light_primary_final' );
-$light = pixelgrade_option( 'sm_light_tertiary_final' );
-$text_color = pixelgrade_option( 'sm_dark_secondary_final' );
-$dark = pixelgrade_option( 'sm_dark_primary_final' );
-$darker = pixelgrade_option( 'sm_dark_tertiary_final' );
+$lighter = get_option( 'sm_light_primary_final' );
+$light = get_option( 'sm_light_tertiary_final' );
+$text_color = get_option( 'sm_dark_secondary_final' );
+$dark = get_option( 'sm_dark_primary_final' );
 
 foreach ( $color_control_ids as $index => $control_id ) {
 
-	$value = pixelgrade_option( $control_id . '_final' );
+	$value = get_option( $control_id . '_final' );
 
 	if ( empty( $value ) ) {
 		continue;
@@ -65,8 +63,8 @@ foreach ( $color_control_ids as $index => $control_id ) {
 		$value,
 		$dark,
 		$dark,
-		$darker,
-		$darker,
+		$dark,
+		$dark,
 	);
 
 	$color_objects = array();
