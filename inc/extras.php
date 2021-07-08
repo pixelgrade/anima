@@ -586,3 +586,9 @@ function get_site_content_class( $class = '' ) {
 
 	return array_unique( $classes );
 }
+
+if ( ! class_exists( 'PixCustomifyPlugin' ) && ! class_exists( 'Pixelgrade\StyleManager\Plugin' ) && ! function_exists( 'pixelgrade_option' ) ) {
+    function pixelgrade_option( $settings_id, $default = null, $force_given_default = false ) {
+        return get_option( $settings_id, $default );
+    }
+}
