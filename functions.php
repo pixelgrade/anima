@@ -5,16 +5,6 @@
  * @package Rosa2
  */
 
-define( 'THEME_COLOR_PRIMARY',    '#DDAB5D' );    // gold
-define( 'THEME_COLOR_SECONDARY',  '#39497C' );    // blue
-define( 'THEME_COLOR_TERTIARY',   '#B12C4A' );    // red
-define( 'THEME_DARK_PRIMARY',     '#212B49' );    // dark blue
-define( 'THEME_DARK_SECONDARY',   '#34394B' );    // dark light blue
-define( 'THEME_DARK_TERTIARY',    '#141928' );    // darker blue
-define( 'THEME_LIGHT_PRIMARY',    '#FFFFFF' );    // white
-define( 'THEME_LIGHT_SECONDARY',  '#CCCCCC' );    // gray
-define( 'THEME_LIGHT_TERTIARY',   '#EEEFF2' );    // light gray
-
 if ( ! function_exists( 'rosa2_setup' ) ) {
 
 	/**
