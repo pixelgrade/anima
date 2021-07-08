@@ -24,7 +24,7 @@ export default class Navbar {
 	}
 
 	onResize() {
-		const mq = window.matchMedia( "only screen and (min-width: 1000px)" );
+		const mq = window.matchMedia( "only screen and (min-width: 1024px)" );
 
 		// we are on desktop
 		if ( mq.matches ) {

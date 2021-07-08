@@ -1390,7 +1390,7 @@ function () {
     this.breakpoints = {
       mobile: '480px',
       tablet: '768px',
-      lap: '1000px',
+      lap: '1024px',
       desktop: '1440px'
     };
     this.above = {};
@@ -2156,7 +2156,7 @@ function () {
   }, {
     key: "onResize",
     value: function onResize() {
-      var mq = window.matchMedia("only screen and (min-width: 1000px)"); // we are on desktop
+      var mq = window.matchMedia("only screen and (min-width: 1024px)"); // we are on desktop
 
       if (mq.matches) {
         this.addSubMenusLeftClass();

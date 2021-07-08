@@ -21,6 +21,9 @@ $classes = array(
 
 $blockClasses = array(
 	'novablocks-block',
+    'sm-palette-1',
+    'sm-variation-1',
+    'sm-variation-1@below-tablet'
 );
 
 if ( ! has_post_thumbnail() ) {
