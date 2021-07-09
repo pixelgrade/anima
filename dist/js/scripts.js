@@ -2128,6 +2128,7 @@ function () {
 
 
 
+
 var MENU_ITEM = '.menu-item, .page_item';
 var MENU_ITEM_WITH_CHILDREN = '.menu-item-has-children, .page_item_has_children';
 var SUBMENU = '.sub-menu, .children';
@@ -2156,9 +2157,8 @@ function () {
   }, {
     key: "onResize",
     value: function onResize() {
-      var mq = window.matchMedia("only screen and (min-width: 1024px)"); // we are on desktop
-
-      if (mq.matches) {
+      // we are on desktop
+      if (!components_mqService.below.lap) {
         this.addSubMenusLeftClass();
 
         if (this.initialized && !this.desktop) {

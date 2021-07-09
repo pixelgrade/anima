@@ -1,4 +1,5 @@
 import GlobalService from './globalService';
+import mqService from './mqService';
 import $ from "jquery";
 
 const MENU_ITEM = '.menu-item, .page_item';
@@ -24,10 +25,9 @@ export default class Navbar {
 	}
 
 	onResize() {
-		const mq = window.matchMedia( "only screen and (min-width: 1024px)" );
 
 		// we are on desktop
-		if ( mq.matches ) {
+		if ( ! mqService.below.lap ) {
 			this.addSubMenusLeftClass();
 
 			if ( this.initialized && ! this.desktop ) {
