@@ -27,7 +27,12 @@ function rosa2_body_classes( $classes ) {
 
 	$classes[] = 'has-novablocks-header-transparent';
 
-	if ( rosa2_first_block_is( array( 'novablocks/hero', 'novablocks/media', 'novablocks/supernova' ) ) ) {
+	if ( rosa2_first_block_is( array(
+		'novablocks/hero',
+		'novablocks/media',
+		'novablocks/supernova',
+		'novablocks/slideshow'
+		) ) ) {
 		$classes[] = 'has-no-spacing-top';
 	}
 

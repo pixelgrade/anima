@@ -40,8 +40,12 @@ export default class App {
 		this.updateAdminBarProps();
 		this.updatePromoBarProps();
 
-		this.promoBar.offset = this.adminBarHeight;
-		this.promoBar.update();
+		if ( !! this.promoBar ) {
+			this.promoBar.offset = this.adminBarHeight;
+			this.promoBar.update();
+		} else {
+			this.onPromoBarUpdate();
+		}
 
 		if ( this?.header?.mobileHeader ) {
 			this.header.mobileHeader.top = this.adminBarHeight;
@@ -136,7 +140,8 @@ export default class App {
 	initializePromoBar() {
 		const promoBar = document.querySelector( '.promo-bar' );
 
-		if ( promoBar === null ) {
+		if ( ! promoBar ) {
+			this.onPromoBarUpdate();
 			return;
 		}
 
@@ -150,7 +155,7 @@ export default class App {
 
 	updatePromoBarProps() {
 
-		if ( this.promoBar === null ) {
+		if ( ! this.promoBar ) {
 			return;
 		}
 
@@ -158,10 +163,10 @@ export default class App {
 		this.promoBarFixed = promoBarStyle.getPropertyValue( 'position' ) === 'fixed';
 	}
 
-	onPromoBarUpdate( promoBar ) {
+	onPromoBarUpdate() {
 		const header = this.header;
 		const HeroCollection = this.HeroCollection;
-		const promoBarHeight = !! promoBar ? promoBar.height : 0;
+		const promoBarHeight = !! this.promoBar ? this.promoBar.height : 0;
 
 		const adminBarTop = this.adminBarFixed ? this.adminBarHeight : 0;
 		const promoBarTop = this.promoBarFixed ? promoBarHeight : 0;
