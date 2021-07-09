@@ -112,30 +112,30 @@ function pixelgrade_add_default_color_palettes( $color_palettes ) {
 			),
 			'color_groups' => [
 				[
-					"uid" => "color_group_1",
+					"_uid" => "color_group_1",
 					"sources" => [
 						[
-							"uid" => "color_11",
+							"_uid" => "color_11",
 							"label" => "Brand Primary",
 							"color" => "#ddaa61"
 						]
 					]
 				],
 				[
-					"uid" => "color_group_2",
+					"_uid" => "color_group_2",
 					"sources" => [
 						[
-							"uid" => "color_21",
+							"_uid" => "color_21",
 							"label" => "Secondary",
 							"color" => "#39497C"
 						]
 					]
 				],
 				[
-					"uid" => "color_group_3",
+					"_uid" => "color_group_3",
 					"sources" => [
 						[
-							"uid" => "color_31",
+							"_uid" => "color_31",
 							"label" => "Tertiary",
 							"color" => "#B12C4A"
 						]
