@@ -19,8 +19,7 @@ class Header extends HeaderBase {
 		this.element = element;
 		this.rows = this.getHeaderRows();
 
-		this.isSticky = !! this.element.dataset.sticky;
-		this.hasStickyRow = !! this.element.querySelector( '[data-sticky]' );
+		this.shouldToggleColors = !! this.element.dataset.sticky;
 
 		this.mobileHeader = new HeaderMobile( this );
 		this.secondaryHeader = this.getSecondaryHeader();
@@ -90,7 +89,10 @@ class Header extends HeaderBase {
 
 	updateStickyStyles() {
 		HeaderBase.prototype.updateStickyStyles.call( this );
-		this.toggleRowsColors( ! this.shouldBeSticky );
+
+		if ( this.shouldToggleColors ) {
+			this.toggleRowsColors( ! this.shouldBeSticky );
+		}
 
 		this.element.style.marginTop = `${ this.staticDistance }px`;
 
