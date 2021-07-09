@@ -7,7 +7,7 @@ class mqService {
 		this.breakpoints = {
 			mobile: '480px',
 			tablet: '768px',
-			lap: '1000px',
+			lap: '1024px',
 			desktop: '1440px',
 		}
 
