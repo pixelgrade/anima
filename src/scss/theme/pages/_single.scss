@@ -6,6 +6,15 @@
 
     .site-content {
         background-color: var(--sm-current-bg-color);
+        
+        @include below(lap) {
+            
+            padding-top: 0;
+    
+            .entry-header {
+                padding-top: var(--theme-spacing-fluid-large);
+            }
+        }
     }
 }
 

@@ -224,12 +224,12 @@
 }
 
 @mixin button-inverted {
-  --theme-button-text-color: var(--sm-button-background-color);
-  --theme-button-background-color: var(--sm-current-bg-color);
-  --theme-button-border-color: var(--sm-current-bg-color);
-  --theme-button-hover-text-color: var(--sm-current-bg-color);
+  --theme-button-text-color: var(--sm-current-bg-color);
+  --theme-button-background-color: var(--sm-current-fg1-color);
+  --theme-button-border-color: var(--sm-current-fg1-color);
+  --theme-button-hover-text-color: var(--sm-current-fg1-color);
   --theme-button-hover-background-color: transparent;
-  --theme-button-hover-border-color: var(--sm-current-bg-color);
+  --theme-button-hover-border-color: var(--sm-current-fg1-color);
 }
 
 @mixin button {

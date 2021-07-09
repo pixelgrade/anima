@@ -16,6 +16,10 @@
     --shadow-color: rgba(0, 0, 0, 0.25);
     --shadow-y-offset: 4px;
     --shadow-blur: 4px;
+    
+    &:not([style*='fixed'])[class] {
+        --header-background-opacity: 0;
+    }
 
     .menu-item--cart {
         display: flex;
