@@ -107,6 +107,11 @@ body.blog, body.archive:not(.woocommerce-page), body.search:not(.search-no-resul
 
 .single .site-content {
   background-color: var(--sm-current-bg-color); }
+  @media not screen and (min-width: 1024px) {
+    .single .site-content {
+      padding-top: 0; }
+      .single .site-content .entry-header {
+        padding-top: var(--theme-spacing-fluid-large); } }
 
 .single .hentry > :not(:first-child),
 .page .hentry > :not(:first-child) {
