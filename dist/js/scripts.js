@@ -2399,8 +2399,13 @@ function () {
 
       this.updateAdminBarProps();
       this.updatePromoBarProps();
-      this.promoBar.offset = this.adminBarHeight;
-      this.promoBar.update();
+
+      if (!!this.promoBar) {
+        this.promoBar.offset = this.adminBarHeight;
+        this.promoBar.update();
+      } else {
+        this.onPromoBarUpdate();
+      }
 
       if (this === null || this === void 0 ? void 0 : (_this$header = this.header) === null || _this$header === void 0 ? void 0 : _this$header.mobileHeader) {
         this.header.mobileHeader.top = this.adminBarHeight;
@@ -2505,7 +2510,8 @@ function () {
     value: function initializePromoBar() {
       var promoBar = document.querySelector('.promo-bar');
 
-      if (promoBar === null) {
+      if (!promoBar) {
+        this.onPromoBarUpdate();
         return;
       }
 
@@ -2518,7 +2524,7 @@ function () {
   }, {
     key: "updatePromoBarProps",
     value: function updatePromoBarProps() {
-      if (this.promoBar === null) {
+      if (!this.promoBar) {
         return;
       }
 
@@ -2527,10 +2533,10 @@ function () {
     }
   }, {
     key: "onPromoBarUpdate",
-    value: function onPromoBarUpdate(promoBar) {
+    value: function onPromoBarUpdate() {
       var header = this.header;
       var HeroCollection = this.HeroCollection;
-      var promoBarHeight = !!promoBar ? promoBar.height : 0;
+      var promoBarHeight = !!this.promoBar ? this.promoBar.height : 0;
       var adminBarTop = this.adminBarFixed ? this.adminBarHeight : 0;
       var promoBarTop = this.promoBarFixed ? promoBarHeight : 0;
       var stickyDistance = adminBarTop + promoBarTop;
