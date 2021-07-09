@@ -731,6 +731,9 @@ ol.nb-list {
 
 .novablocks-media--blog[class] {
   --novablocks-block-background-color: var(--sm-current-bg-color); }
+  @media not screen and (min-width: 768px) {
+    .novablocks-media--blog[class] {
+      margin-top: var(--theme-spacing-fluid-medium); } }
   .novablocks-media--blog[class] .novablocks-media__content {
     flex-basis: calc(50% - var(--novablocks-media-spacing)); }
   .novablocks-media--blog[class] .novablocks-media__aside {

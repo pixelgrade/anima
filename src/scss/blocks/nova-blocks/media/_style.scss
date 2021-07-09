@@ -65,6 +65,11 @@
 
 .novablocks-media--blog[class] {
     --novablocks-block-background-color: var(--sm-current-bg-color);
+    
+    
+    @include below(tablet) {
+        margin-top: var(--theme-spacing-fluid-medium);
+    }
 
     .novablocks-media__content {
         flex-basis: calc(50% - var(--novablocks-media-spacing));
