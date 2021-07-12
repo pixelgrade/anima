@@ -4,28 +4,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// We need Customify to be active, not a surrogate that offers fallbacks like Style Manager 1.0 does.
+if ( ! function_exists( 'PixCustomifyPlugin' ) || empty( PixCustomifyPlugin()->settings ) ) {
+	return;
+}
+
 $alphabet = range( 'A', 'Z' );
 
 $color_control_ids = array(
-	'sm_color_primary',
-	'sm_color_secondary',
-	'sm_color_tertiary',
+	'color_1',
+	'color_2',
+	'color_3',
 );
 
-// consider shuffle setting
-$shuffle = get_option( 'sm_shuffle_colors' );
-
-if ( $shuffle === 'mixed' ) {
-	array_push( $color_control_ids, array_shift( $color_control_ids ) );
-}
-
-if ( $shuffle === 'remix' ) {
-	array_push( $color_control_ids, array_shift( $color_control_ids ) );
-	array_push( $color_control_ids, array_shift( $color_control_ids ) );
-}
-
 // consider color diversity
-$diversity = get_option( 'sm_color_diversity' );
+$diversity = pixelgrade_option( 'sm_color_diversity' );
 
 if ( $diversity === 'low' ) {
 	array_splice( $color_control_ids, 1 );
@@ -39,14 +32,14 @@ if ( $diversity === 'medium' ) {
 $source = array();
 $output = array();
 
-$lighter = get_option( 'sm_light_primary_final' );
-$light = get_option( 'sm_light_tertiary_final' );
-$text_color = get_option( 'sm_dark_secondary_final' );
-$dark = get_option( 'sm_dark_primary_final' );
+$lighter = pixelgrade_option( 'color_light_1' );
+$light = pixelgrade_option( 'color_light_3' );
+$text_color = pixelgrade_option( 'color_dark_2' );
+$dark = pixelgrade_option( 'color_dark_1' );
 
 foreach ( $color_control_ids as $index => $control_id ) {
 
-	$value = get_option( $control_id . '_final' );
+	$value = pixelgrade_option( $control_id );
 
 	if ( empty( $value ) ) {
 		continue;
