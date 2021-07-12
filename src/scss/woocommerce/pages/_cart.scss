@@ -95,7 +95,7 @@
 
   .coupon {
     display: flex;
-    align-items: center;
+    align-items: stretch;
   }
 }
 
@@ -264,6 +264,14 @@
     
     button {
       cursor: pointer;
+    }
+  }
+  
+  .actions {
+    
+    button[type="submit"] {
+      --font-size: var(--theme-input-font-size) !important;
+      line-height: 1.15 !important;
     }
   }
 }

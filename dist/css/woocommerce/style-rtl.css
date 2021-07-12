@@ -1594,7 +1594,7 @@
       width: 100%; }
   .woocommerce-cart table.cart .coupon {
     display: flex;
-    align-items: center; }
+    align-items: stretch; }
 
 .woocommerce-checkout-review-order[class][class][class] .shop_table tr {
   display: flex;
@@ -1695,6 +1695,10 @@
   justify-content: flex-end; }
   .woocommerce-cart-form .quantity .quantity__wrapper button {
     cursor: pointer; }
+
+.woocommerce-cart-form .actions button[type="submit"] {
+  --font-size: var(--theme-input-font-size) !important;
+  line-height: 1.15 !important; }
 
 .woocommerce-cart .actions .coupon[class][class] {
   display: flex;
