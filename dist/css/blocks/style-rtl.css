@@ -224,7 +224,7 @@ ul.nb-list {
 
 ol.nb-list {
   position: relative;
-  counter-reset: li;
+  counter-reset: li var(--nb-list-start-at, 0);
   --list-stype: decimal-leading-zero;
   --bullet-width: calc(var(--final-font-size) * var(--current-line-height));
   --bullet-height: var(--bullet-width);
