@@ -595,7 +595,7 @@ function getFirstChild(el) {
   return firstChild;
 }
 var toggleLightClasses = function toggleLightClasses(element) {
-  var _window, _window$styleManager;
+  var _window, _window$style_manager, _window2, _window2$styleManager;
 
   var classes = Array.from(element.classList);
   var paletteClassname = classes.find(function (classname) {
@@ -610,8 +610,10 @@ var toggleLightClasses = function toggleLightClasses(element) {
   var isShifted = !!classes.find(function (classname) {
     return classname.indexOf('sm-palette--shifted') > -1;
   });
+  var sm_site_color_variation = (_window = window) === null || _window === void 0 ? void 0 : (_window$style_manager = _window.style_manager_values) === null || _window$style_manager === void 0 ? void 0 : _window$style_manager.sm_site_color_variation;
+  var siteColorVariation = sm_site_color_variation ? parseInt(sm_site_color_variation, 10) : 1;
 
-  if (!Array.isArray((_window = window) === null || _window === void 0 ? void 0 : (_window$styleManager = _window.styleManager) === null || _window$styleManager === void 0 ? void 0 : _window$styleManager.colorsConfig)) {
+  if (!Array.isArray((_window2 = window) === null || _window2 === void 0 ? void 0 : (_window2$styleManager = _window2.styleManager) === null || _window2$styleManager === void 0 ? void 0 : _window2$styleManager.colorsConfig)) {
     return;
   }
 
@@ -623,7 +625,7 @@ var toggleLightClasses = function toggleLightClasses(element) {
     var sourceIndex = currentPaletteConfig.sourceIndex,
         lightColorsCount = currentPaletteConfig.lightColorsCount;
     var offset = isShifted ? sourceIndex : 0;
-    var isLight = (variation - 1 + offset) % 12 + 1 <= lightColorsCount;
+    var isLight = (variation - 1 + offset + siteColorVariation) % 12 + 1 <= lightColorsCount;
     toggleClasses(element, isLight, 'sm-light', 'sm-dark');
   }
 };
@@ -1538,8 +1540,12 @@ function () {
       this.transparentColorClasses = this.initialColorClasses;
 
       if (this.transparentColorsSource) {
-        this.transparentColorClasses = getColorSetClasses(this.transparentColorsSource).join(' ') + ' novablocks-header--transparent';
+        this.transparentColorClasses = getColorSetClasses(this.transparentColorsSource).join(' ');
+      } else {
+        this.transparentColorClasses = 'sm-palette-1 sm-variation-1';
       }
+
+      this.transparentColorClasses = "".concat(this.transparentColorClasses, " novablocks-header--transparent");
     }
   }, {
     key: "toggleColors",
@@ -1824,8 +1830,6 @@ function (_HeaderBase) {
     _this.initialize();
 
     _this.toggleRowsColors(true);
-
-    utils_addClass(_this.element, 'novablocks-header--transparent');
 
     if (_this.secondaryHeader) {
       utils_addClass(_this.secondaryHeader, 'novablocks-header--ready');

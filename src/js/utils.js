@@ -119,6 +119,9 @@ export const toggleLightClasses = element => {
 	const variation = variationClassname ? variationClassname.substring( variationPrefix.length ) : 1;
 	const isShifted = !! classes.find( classname => classname.indexOf( 'sm-palette--shifted' ) > -1 );
 
+	const sm_site_color_variation = window?.style_manager_values?.sm_site_color_variation;
+	const siteColorVariation = sm_site_color_variation ? parseInt( sm_site_color_variation, 10 ) : 1;
+
 	if ( ! Array.isArray( window?.styleManager?.colorsConfig ) ) {
 		return;
 	}
@@ -130,7 +133,7 @@ export const toggleLightClasses = element => {
 	if ( currentPaletteConfig ) {
 		const { sourceIndex, lightColorsCount } = currentPaletteConfig;
 		const offset = isShifted ? sourceIndex : 0;
-		const isLight = ( ( variation - 1 ) + offset ) % 12 + 1 <= lightColorsCount;
+		const isLight = ( ( variation - 1 ) + offset + siteColorVariation ) % 12 + 1 <= lightColorsCount;
 
 		toggleClasses( element, isLight, 'sm-light', 'sm-dark' );
 	}
