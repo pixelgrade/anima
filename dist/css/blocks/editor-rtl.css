@@ -226,8 +226,20 @@ ol[data-nb="list"] {
   --bullet-width: calc(var(--final-font-size) * var(--current-line-height));
   --bullet-height: var(--bullet-width);
   --bullet-spacing: 0.4em; }
+  ol[data-nb="list"][reversed] {
+    counter-reset: li var(--reversed-start-at-value, var(--nb-list-items-count)); }
+    ol[data-nb="list"][reversed][start] {
+      --reversed-start-at-value: calc( var(--nb-list-start-at) + 2); }
+    ol[data-nb="list"][reversed] > li:before {
+      counter-increment: li -1; }
   ol[data-nb="list"].sm-color-signal-2, ol[data-nb="list"].sm-color-signal-3 {
     --list-stype: decimal; }
+  ol[data-nb="list"] > li:before {
+    counter-increment: li; }
+  ol[data-nb="list"] > li ol {
+    counter-reset: li 0; }
+    ol[data-nb="list"] > li ol > li:before {
+      counter-increment: li; }
   ol[data-nb="list"] li {
     position: relative; }
     ol[data-nb="list"] li:before {
@@ -235,7 +247,6 @@ ol[data-nb="list"] {
       right: calc( -1 * var( --list-spacing));
       width: var(--bullet-width);
       height: var(--bullet-height);
-      counter-increment: li;
       content: counter(li, var(--list-stype));
       text-align: center;
       color: var(--bullet-color);

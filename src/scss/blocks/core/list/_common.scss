@@ -331,11 +331,66 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 			--bullet-height: var(--bullet-width);
 			--bullet-spacing: 0.4em;
 			
+			// Reversed List
+			&[reversed] {
+				
+				// We need to reset counter,
+				// so it will start from it's maximum value.
+				// Maximum value(--nb-list-items-count) is equal
+				// with how many items are in the list + 1.
+				// We are adding +1, because on first list item,
+				// the counter will get +1 or -1.
+				counter-reset: li var(--reversed-start-at-value, var(--nb-list-items-count));
+				
+				&[start] {
+					--reversed-start-at-value: calc( var(--nb-list-start-at) + 2);
+				}
+				
+				// We are decrementing counter only for list items
+				// that are direct child of ol. By doing that,
+				// we are sure that nested lists will always reset
+				// to default value.
+				> li {
+					
+					&:before {
+						counter-increment: li -1;
+					}
+				}
+			}
+			
 			// For this SIGNALS, we don't need
 			// counter to be preceded by 0.
 			&.sm-color-signal-2,
 			&.sm-color-signal-3 {
 				--list-stype: decimal;
+			}
+			
+			// We are incrementing counter only for list items
+			// that are direct child of ol. By doing that,
+			// we are sure that nested lists will always reset
+			// to default value.
+			> li {
+				
+				&:before {
+					counter-increment: li;
+				}
+				
+				
+				// By doing that, we are sure that
+				// nested lists counter will always use
+				// it's initial value.
+				
+				ol {
+					
+					counter-reset: li 0;
+				
+					> li {
+						
+						&:before {
+							counter-increment: li;
+						}
+					}
+				}
 			}
 			
 			li {
@@ -356,7 +411,6 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 					width: var(--bullet-width);
 					height: var(--bullet-height);
 					
-					counter-increment: li;
 					content: counter(li, var(--list-stype));
 					
 					text-align: center;
