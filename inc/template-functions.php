@@ -30,8 +30,10 @@ function rosa2_body_classes( $classes ) {
 	if ( rosa2_first_block_is( array(
 		'novablocks/hero',
 		'novablocks/media',
+		'novablocks/slideshow',
+		'novablocks/cards-collection',
+		'novablocks/posts-collection',
 		'novablocks/supernova',
-		'novablocks/slideshow'
 		) ) ) {
 		$classes[] = 'has-no-spacing-top';
 	}

@@ -2581,7 +2581,13 @@ function () {
         return;
       }
 
-      var $firstBlockFg = $firstBlock.find('.novablocks-doppler__foreground');
+      var $firstBlockFg;
+
+      if ($firstBlock.is('.novablocks-block')) {
+        $firstBlockFg = $firstBlock;
+      } else {
+        $firstBlockFg = $firstBlock.find('.novablocks-doppler__foreground, .novablocks-block');
+      }
 
       if ($firstBlockFg.length) {
         var _paddingTop = getPaddingTop($firstBlockFg);
