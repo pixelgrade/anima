@@ -76,6 +76,7 @@ class Rosa2_Upgrade {
 	 */
 	public function register_hooks() {
 		add_action( 'admin_init', array( $this, 'upgrade' ), 5 );
+		add_action( 'pixelgrade/did_auto_install_or_update', array( $this, 'upgrade' ), 10 );
 	}
 
 	/**
