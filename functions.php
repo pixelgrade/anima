@@ -242,7 +242,13 @@ function rosa2_scripts() {
 
 	wp_register_script( 'gsap-split-text', '//pxgcdn.com/js/gsap/2.1.3/plugins/SplitText' . $suffix . '.js', array(), null, true );
 	wp_register_script( 'gsap', '//pxgcdn.com/js/gsap/2.1.3/TweenMax' . $suffix . '.js', array( 'wp-mediaelement' ), null, true );
-	wp_enqueue_script( 'rosa2-app', get_template_directory_uri() . '/dist/js/scripts' . $suffix . '.js', array( 'jquery', 'gsap', 'gsap-split-text', 'hoverIntent', 'imagesloaded' ), $theme->get( 'Version' ), true );
+	wp_register_script( 'rosa2-app', get_template_directory_uri() . '/dist/js/scripts' . $suffix . '.js', array( 'jquery', 'gsap', 'gsap-split-text', 'hoverIntent', 'imagesloaded' ), $theme->get( 'Version' ), true );
+
+	wp_localize_script( 'rosa2-app', 'style_manager_values', array(
+        'sm_site_color_variation' => pixelgrade_option( 'sm_site_color_variation', 1 )
+    ) );
+
+	wp_enqueue_script( 'rosa2-app' );
 
 
 	// Load Conversation CSS only when we need it:

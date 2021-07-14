@@ -48,7 +48,7 @@ if ( ! function_exists( 'rosa2_novablocks_setup' ) ) {
 			'sharing-overlay',
 			'slideshow',
 			'sidecar',
-			'sidecar-area'
+			'sidecar-area',
 		);
 
 		$rosa2_novablocks_config = apply_filters( 'rosa2_novablocks_config', $rosa2_novablocks_config );
