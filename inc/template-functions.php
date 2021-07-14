@@ -33,6 +33,7 @@ function rosa2_body_classes( $classes ) {
 		'novablocks/slideshow',
 		'novablocks/cards-collection',
 		'novablocks/posts-collection',
+		'novablocks/supernova',
 		) ) ) {
 		$classes[] = 'has-no-spacing-top';
 	}

@@ -49,6 +49,8 @@ if ( ! function_exists( 'rosa2_novablocks_setup' ) ) {
 			'slideshow',
 			'sidecar',
 			'sidecar-area',
+			'supernova',
+			'supernova-item',
 		);
 
 		$rosa2_novablocks_config = apply_filters( 'rosa2_novablocks_config', $rosa2_novablocks_config );
