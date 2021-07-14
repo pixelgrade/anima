@@ -157,6 +157,9 @@ function rosa2_register_scripts() {
 
 	// Nova Blocks Fallbacks
     wp_register_style('novablocks/media', get_template_directory_uri() . '/fallbacks/nova-blocks/blocks/media/style.css', array(), '1.8.1');
+	wp_register_style('novablocks/header', get_template_directory_uri() . '/fallbacks/nova-blocks/blocks/header/style.css', array(), '1.12.1');
+	wp_register_style('novablocks/header-row', get_template_directory_uri() . '/fallbacks/nova-blocks/blocks/header-row/style.css', array(), '1.12.1');
+	wp_register_style('novablocks/navigation', get_template_directory_uri() . '/fallbacks/nova-blocks/blocks/navigation/style.css', array(), '1.12.1');
 
 	wp_register_style('rosa2-novablocks-conversations', get_template_directory_uri() . '/dist/css/blocks/nova-blocks/conversations.css', array(), '1.8.0');
 
@@ -220,9 +223,12 @@ function rosa2_scripts() {
 		}
 	}
 
-    // Nova Blocks Header Block frontend.js fallback
+    // Nova Blocks Header Block fallbacks
 	if ( ! rosa2_is_using_block( 'header', true ) ) {
-		wp_enqueue_script( 'novablocks/header/frontend', get_template_directory_uri() . '/dist/nova-blocks/block-library/blocks/header/frontend' . $suffix . '.js', array(), null, true );
+		wp_enqueue_script( 'novablocks/header/frontend', get_template_directory_uri() . '/fallbacks/nova-blocks/blocks/header/frontend' . $suffix . '.js', array(), null, true );
+		wp_enqueue_style('novablocks/header');
+		wp_enqueue_style('novablocks/header-row');
+		wp_enqueue_style('novablocks/navigation');
     }
 
 		wp_enqueue_style( 'rosa2-style', get_template_directory_uri() . '/style.css', array(
