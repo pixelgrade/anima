@@ -624,8 +624,8 @@ var toggleLightClasses = function toggleLightClasses(element) {
   if (currentPaletteConfig) {
     var sourceIndex = currentPaletteConfig.sourceIndex,
         lightColorsCount = currentPaletteConfig.lightColorsCount;
-    var offset = isShifted ? sourceIndex : 0;
-    var isLight = (variation - 1 + offset + siteColorVariation) % 12 + 1 <= lightColorsCount;
+    var offset = isShifted ? sourceIndex : siteColorVariation - 1;
+    var isLight = (variation - 1 + offset + 12) % 12 + 1 <= lightColorsCount;
     toggleClasses(element, isLight, 'sm-light', 'sm-dark');
   }
 };
@@ -1545,7 +1545,7 @@ function () {
         this.transparentColorClasses = 'sm-palette-1 sm-variation-1';
       }
 
-      this.transparentColorClasses = "".concat(this.transparentColorClasses, " novablocks-header--transparent");
+      this.transparentColorClasses = "".concat(this.transparentColorClasses);
     }
   }, {
     key: "toggleColors",
@@ -1830,6 +1830,8 @@ function (_HeaderBase) {
     _this.initialize();
 
     _this.toggleRowsColors(true);
+
+    utils_addClass(_this.element, 'novablocks-header--transparent');
 
     if (_this.secondaryHeader) {
       utils_addClass(_this.secondaryHeader, 'novablocks-header--ready');

@@ -34,7 +34,7 @@ class HeaderColors {
 			this.transparentColorClasses = 'sm-palette-1 sm-variation-1';
 		}
 
-		this.transparentColorClasses = `${ this.transparentColorClasses } novablocks-header--transparent`;
+		this.transparentColorClasses = `${ this.transparentColorClasses }`;
 	}
 
 	toggleColors( isTransparent ) {
