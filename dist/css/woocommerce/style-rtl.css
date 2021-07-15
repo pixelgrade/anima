@@ -126,19 +126,6 @@
   --current-button-text-color: var(--theme-button-hover-text-color);
   --current-button-text-color: var(--theme-button-hover-text-color);
   background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
-  #html #body #page input.button:not(.alt):before,
-  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):before {
-    content: '';
-    position: absolute;
-    top: calc( -1 * var(--theme-button-border-width));
-    left: calc( -1 * var(--theme-button-border-width));
-    bottom: calc( -1 * var(--theme-button-border-width));
-    right: calc( -1 * var(--theme-button-border-width));
-    z-index: -1;
-    will-change: transform;
-    -webkit-backface-visibility: hidden;
-    transition: var(--current-button-transition);
-    transition-property: transform; }
   #html #body #page input.button:not(.alt):not([disabled]):hover,
   #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):hover {
     background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
@@ -168,19 +155,6 @@
   background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
   background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
   background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
-  #html #body #page input.button.alt:before,
-  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:before {
-    content: '';
-    position: absolute;
-    top: calc( -1 * var(--theme-button-border-width));
-    left: calc( -1 * var(--theme-button-border-width));
-    bottom: calc( -1 * var(--theme-button-border-width));
-    right: calc( -1 * var(--theme-button-border-width));
-    z-index: -1;
-    will-change: transform;
-    -webkit-backface-visibility: hidden;
-    transition: var(--current-button-transition);
-    transition-property: transform; }
   #html #body #page input.button.alt:not([disabled]):hover,
   #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:not([disabled]):hover {
     background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
