@@ -57,7 +57,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 	
 	--connection-color: var(--sm-bg-color-3);
 	
-	--bullet-width: calc(var(--final-font-size) * var(--current-line-height));
+	--bullet-width: calc(var(--current-font-size) * var(--current-line-height));
 	--bullet-height: var(--bullet-width);
 	--bullet-bg-color: var(--sm-current-bg-color);
 	--bullet-color: var(--sm-current-fg1-color);
@@ -150,7 +150,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 					content: '';
 
 					position: absolute;
-					top: calc((var(--final-font-size) * var(--current-line-height) - var(--bullet-height)) * 0.5);
+					top: calc((var(--current-font-size) * var(--current-line-height) - var(--bullet-height)) * 0.5);
 					left: calc(-1 * var(--list-spacing) + var(--bullet-border-width));
 					z-index: 10;
 
@@ -327,7 +327,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 			counter-reset: li var(--nb-list-start-at, 0);
 			
 			--list-stype: decimal-leading-zero;
-			--bullet-width: calc(var(--final-font-size) * var(--current-line-height));
+			--bullet-width: calc(var(--current-font-size) * var(--current-line-height));
 			--bullet-height: var(--bullet-width);
 			--bullet-spacing: 0.4em;
 			
@@ -496,7 +496,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 		// Adjust checkmark size for uls
 		// inside list with checkmark style.
 		ul {
-			--bullet-width: calc(var(--final-font-size) * var(--current-line-height));
+			--bullet-width: calc(var(--current-font-size) * var(--current-line-height));
 			--bullet-addons: calc(var(--bullet-width) * -0.5);
 		}
 		

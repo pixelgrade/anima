@@ -5,7 +5,7 @@
 
     @if ( map_get( $config, font-size ) ) {
         --font-size: var(--theme-#{$name}-font-size);
-        font-size: var(--final-font-size);
+        font-size: var(--current-font-size);
     }
 
     @each $prop, $value in $config {

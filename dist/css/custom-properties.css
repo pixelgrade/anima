@@ -128,7 +128,7 @@
   --a: calc( ( var(--y1) - var(--y0-new) ) / ( var(--x1) - var(--x0) ) );
   --b: calc( var(--y0-new) - var(--a) * var(--x0) );
   --y2: calc( var(--a) * 100vw + var(--b) * 1px );
-  --final-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
   line-height: var(--current-line-height);
@@ -192,9 +192,9 @@
 /* Header Custom Properties */
 :root {
   --theme-header-logo-height-setting: 22;
-  --theme-header-logo-height: calc( var(--theme-header-logo-height-setting) * var(--theme-style-manager-fluid-font-size) );
+  --theme-header-logo-height: calc( var(--theme-header-logo-height-setting) * 1px );
   --theme-header-links-spacing-setting: 32;
-  --theme-header-links-spacing: calc( var(--theme-header-links-spacing-setting) * var(--theme-style-manager-fluid-font-size) );
+  --theme-header-links-spacing: calc( var(--theme-header-links-spacing-setting) * var(--theme-style-manager-fluid-unit) );
   --theme-header-sides-spacing-setting: 48;
   --theme-header-sides-spacing: calc( var(--theme-header-sides-spacing-setting) * var(--theme-style-manager-fluid-unit) ); }
 

@@ -47,7 +47,7 @@
 
 .wp-block-image figcaption {
   --font-size: var(--theme-body-font-size);
-  font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
@@ -109,7 +109,7 @@
   --icon-width: 0.333em;
   --icon-height: var(--icon-width);
   --connection-color: var(--sm-bg-color-3);
-  --bullet-width: calc(var(--final-font-size) * var(--current-line-height));
+  --bullet-width: calc(var(--current-font-size) * var(--current-line-height));
   --bullet-height: var(--bullet-width);
   --bullet-bg-color: var(--sm-current-bg-color);
   --bullet-color: var(--sm-current-fg1-color);
@@ -143,7 +143,7 @@ ul.nb-list {
     ul.nb-list li:before {
       content: '';
       position: absolute;
-      top: calc((var(--final-font-size) * var(--current-line-height) - var(--bullet-height)) * 0.5);
+      top: calc((var(--current-font-size) * var(--current-line-height) - var(--bullet-height)) * 0.5);
       left: calc(-1 * var(--list-spacing) + var(--bullet-border-width));
       z-index: 10;
       width: var(--bullet-width);
@@ -226,7 +226,7 @@ ol.nb-list {
   position: relative;
   counter-reset: li var(--nb-list-start-at, 0);
   --list-stype: decimal-leading-zero;
-  --bullet-width: calc(var(--final-font-size) * var(--current-line-height));
+  --bullet-width: calc(var(--current-font-size) * var(--current-line-height));
   --bullet-height: var(--bullet-width);
   --bullet-spacing: 0.4em; }
   ol.nb-list[reversed] {
@@ -290,7 +290,7 @@ ol.nb-list {
         left: 0; }
 
 .nb-list.list-checkmark-style ul {
-  --bullet-width: calc(var(--final-font-size) * var(--current-line-height));
+  --bullet-width: calc(var(--current-font-size) * var(--current-line-height));
   --bullet-addons: calc(var(--bullet-width) * -0.5); }
 
 .nb-list.list-checkmark-style.is-style-divider.sm-color-signal-0[class] li:before, .nb-list.list-checkmark-style.is-style-divider.sm-color-signal-1[class] li:before {
@@ -352,14 +352,14 @@ ol.nb-list {
   --theme-button-text-color: var(--sm-current-bg-color) !important;
   --theme-button-hover-border-color: var(--sm-current-accent-color) !important;
   --theme-button-hover-text-color: var(--sm-current-accent-color) !important;
-  font-size: var(--final-font-size) !important;
+  font-size: var(--current-font-size) !important;
   padding: var(--theme-button-padding) !important;
   border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color) !important;
   margin-left: 0 !important;
   height: 100%; }
 
 .wp-block-jetpack-subscriptions input[type="email"] {
-  font-size: var(--final-font-size) !important;
+  font-size: var(--current-font-size) !important;
   padding: var(--theme-input-padding) !important;
   border: 0 !important;
   height: 100%; }
@@ -370,7 +370,7 @@ ol.nb-list {
 .wp-block-jetpack-subscriptions:not(.wp-block-jetpack-subscriptions__use-newline) button[type="submit"] {
   position: relative;
   font-size: 0 !important;
-  min-width: calc( 1.25 * var(--final-font-size) + 1.5 * var(--final-font-size)); }
+  min-width: calc( 1.25 * var(--current-font-size) + 1.5 * var(--current-font-size)); }
   .wp-block-jetpack-subscriptions:not(.wp-block-jetpack-subscriptions__use-newline) button[type="submit"]:hover:after {
     background-color: var(--theme-button-hover-text-color); }
   .wp-block-jetpack-subscriptions:not(.wp-block-jetpack-subscriptions__use-newline) button[type="submit"]:after {
@@ -380,8 +380,8 @@ ol.nb-list {
     top: 50%;
     transform: translate(-50%, -50%);
     display: block;
-    width: calc(1.25 * var(--final-font-size));
-    height: calc(1 * var(--final-font-size));
+    width: calc(1.25 * var(--current-font-size));
+    height: calc(1 * var(--current-font-size));
     border: 0;
     padding: 0;
     mask: url("../../../assets/images/icon-mail.svg") no-repeat 50% 50%;
@@ -423,7 +423,7 @@ ol.nb-list {
   .nova-food-menu-item__title .item-title {
     color: inherit;
     --font-size: var(--theme-heading-4-font-size);
-    font-size: var(--final-font-size);
+    font-size: var(--current-font-size);
     --current-font-family: var(--theme-heading-4-font-family);
     --current-font-weight: var(--theme-heading-4-font-weight);
     --current-font-style: var(--theme-heading-4-font-style);
@@ -440,7 +440,7 @@ ol.nb-list {
 
 .nova-food-menu__header .section-title {
   --font-size: var(--theme-heading-2-font-size);
-  font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-2-font-family);
   --current-font-style: var(--theme-heading-2-font-style);
   --current-font-weight: var(--theme-heading-2-font-weight);
@@ -694,7 +694,7 @@ ol.nb-list {
 .novablocks-media__content {
   max-width: 100%;
   --font-size: var(--theme-body-font-size);
-  font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
@@ -742,20 +742,18 @@ ol.nb-list {
   .novablocks-media__image svg {
     object-fit: contain; }
 
-.novablocks-media--blog[class] {
-  --novablocks-block-background-color: var(--sm-current-bg-color); }
-  @media not screen and (min-width: 768px) {
-    .novablocks-media--blog[class] {
-      margin-top: var(--theme-spacing-fluid-medium); } }
-  .novablocks-media--blog[class] .novablocks-media__content {
-    flex-basis: calc(50% - var(--novablocks-media-spacing)); }
-  .novablocks-media--blog[class] .novablocks-media__aside {
-    flex-basis: calc(50% + var(--novablocks-media-spacing) - 0.5px); }
-  .novablocks-media--blog[class] .novablocks-media__layout {
-    align-items: stretch; }
-  .novablocks-media--blog[class] .novablocks-media__image {
-    height: 100%;
-    min-height: 400px; }
+.novablocks-media--blog[class] .novablocks-media__content {
+  flex-basis: calc(50% - var(--novablocks-media-spacing)); }
+
+.novablocks-media--blog[class] .novablocks-media__aside {
+  flex-basis: calc(50% + var(--novablocks-media-spacing) - 0.5px); }
+
+.novablocks-media--blog[class] .novablocks-media__layout {
+  align-items: stretch; }
+
+.novablocks-media--blog[class] .novablocks-media__image {
+  height: 100%;
+  min-height: 400px; }
 
 .novablocks-navigation {
   --theme-button-y-padding: .25em;
@@ -830,7 +828,7 @@ ol.nb-list {
     background-color: var(--current-button-background-color);
     color: var(--current-button-text-color);
     --font-size: var(--theme-button-font-size);
-    font-size: var(--final-font-size);
+    font-size: var(--current-font-size);
     --current-font-family: var(--theme-button-font-family);
     --current-font-weight: var(--theme-button-font-weight);
     --current-font-style: var(--theme-button-font-style);
@@ -958,7 +956,7 @@ ol.nb-list {
 
 .ot-dtp-picker input[type="submit"][class][class] {
   --font-size: var(--theme-button-font-size);
-  font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
   --current-font-style: var(--theme-button-font-style);
@@ -999,7 +997,7 @@ ol.nb-list {
 
 .ot-dtp-picker-form {
   --font-size: var(--theme-input-font-size);
-  font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-input-font-family);
   --current-font-weight: var(--theme-input-font-weight);
   --current-font-style: var(--theme-input-font-style);
@@ -1067,7 +1065,7 @@ ol.nb-list {
 
 .novablocks-card {
   --font-size: var(--theme-body-font-size);
-  font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
@@ -1097,7 +1095,7 @@ ol.nb-list {
   --current-light-secondary: var(--sm-dark-secondary);
   --current-light-tertiary: var(--sm-dark-tertiary);
   --font-size: var(--theme-body-font-size);
-  font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
@@ -1156,7 +1154,7 @@ body:not(.has-sidebar) {
 ; }
 
 .wp-block-group__inner-container {
-  font-size: var(--final-font-size); }
+  font-size: var(--current-font-size); }
 
 body {
   --offset-addon: var(--sm-content-inset); }
@@ -1175,7 +1173,7 @@ body {
 
 .novablocks-sidebar * {
   --font-size-modifier: var(--sidebar-font-size-modifier);
-  font-size: var(--final-font-size); }
+  font-size: var(--current-font-size); }
 
 .novablocks-sidebar .widget > :not(:first-child) {
   margin-top: var(--theme-spacing-fluid-small); }

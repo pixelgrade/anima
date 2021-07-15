@@ -481,16 +481,16 @@
 [class][class] .has-smaller-font-size {
   --font-size: inherit;
   --font-size-modifier: 0.8;
-  font-size: var(--final-font-size); }
+  font-size: var(--current-font-size); }
 
 [class][class] .has-larger-font-size {
   --font-size: inherit;
   --font-size-modifier: 1.25;
-  font-size: var(--final-font-size); }
+  font-size: var(--current-font-size); }
 
 [class][class] h1.has-larger-font-size {
   --font-size: var(--theme-display-font-size);
-  font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-display-font-family);
   --current-font-style: var(--theme-display-font-style);
   --current-line-height: var(--theme-display-line-height);
@@ -501,7 +501,7 @@
 
 [class][class] h2.has-larger-font-size {
   --font-size: var(--theme-heading-1-font-size);
-  font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-1-font-family);
   --current-font-style: var(--theme-heading-1-font-style);
   --current-line-height: var(--theme-heading-1-line-height);
@@ -513,7 +513,7 @@
 [class][class] h1.has-smaller-font-size,
 [class][class] h3.has-larger-font-size {
   --font-size: var(--theme-heading-2-font-size);
-  font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-2-font-family);
   --current-font-style: var(--theme-heading-2-font-style);
   --current-font-weight: var(--theme-heading-2-font-weight);
@@ -525,7 +525,7 @@
 [class][class] h2.has-smaller-font-size,
 [class][class] h4.has-larger-font-size {
   --font-size: var(--theme-heading-3-font-size);
-  font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-3-font-family);
   --current-font-style: var(--theme-heading-3-font-style);
   --current-font-weight: var(--theme-heading-3-font-weight);
@@ -537,7 +537,7 @@
 [class][class] h3.has-smaller-font-size,
 [class][class] h5.has-larger-font-size {
   --font-size: var(--theme-heading-4-font-size);
-  font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-font-style: var(--theme-heading-4-font-style);
