@@ -30,26 +30,4 @@ get_header();
     </div><!-- #primary -->
 
 <?php
-
-function rosa2_get_archive_content() {
-    ob_start();
-
-    if ( have_posts() ) { ?>
-
-        <header class="entry-header has-text-align-center entry-content">
-            <?php
-            the_archive_title( '<h1 class="page-title">', '</h1>' );
-            the_archive_description( '<div class="archive-description">', '</div>' );
-            ?>
-        </header><!-- .page-header -->
-        <?php
-        get_template_part( 'template-parts/loop' );
-        rosa2_the_posts_pagination();
-    } else {
-        get_template_part( 'template-parts/content', 'none' );
-    }
-
-    return ob_get_clean();
-}
-
 get_footer();
