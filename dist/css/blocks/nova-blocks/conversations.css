@@ -28,22 +28,23 @@
     font-size: inherit; }
   .novablocks-conversations .comment-footer-highlights[class],
   .novablocks-conversations .commenter-background-label {
-    --font-size: 13;
+    --font-size-modifier: 0.72;
     --current-font-weight: regular;
     font-size: var(--current-font-size); }
   .novablocks-conversations .comment-dropdown-toggle {
-    --font-size: 15;
+    --font-size-modifier: 0.83;
     --current-font-weight: regular;
     font-size: var(--current-font-size); }
   .novablocks-conversations .comment-footer-meta[class] {
-    --font-size: 16;
+    --font-size-modifier: 0.88;
     font-size: var(--current-font-size); }
   .novablocks-conversations .comment-form label {
-    --font-size: 14; }
+    --font-size-modifier: 0.77; }
     .novablocks-conversations .comment-form label + .field-description:not(:empty) {
       margin-top: calc(-1 * var(--theme-input-vertical-spacing)); }
   .novablocks-conversations .comment-form .field-description[class] {
-    font-size: calc(var(--current-font-size) * 0.8); }
+    --font-size-modifier: 0.83;
+    font-size: var(--current-font-size); }
   .novablocks-conversations .comment-highlighted {
     --component-accent-color: var(--theme-dark-primary);
     --comment-author-color: var(--theme-dark-primary); }
@@ -78,7 +79,7 @@
         padding-left: var(--theme-wrapper-sides-spacing);
         padding-right: var(--theme-wrapper-sides-spacing); } }
   .novablocks-conversations .comment-author-name {
-    --font-size: 16;
+    --font-size-modifier: 0.88;
     font-size: var(--current-font-size); }
   .novablocks-conversations .comment-dropdown-menu {
     background-color: var(--sm-current-bg-color);
@@ -159,7 +160,7 @@
   padding-right: .25em; }
 
 .novablocks-conversations__comments-count {
-  --font-size: 16;
+  --font-size-modifier:0.88;
   color: var(--field-description-color);
   font-size: var(--current-font-size);
   opacity: .5; }
@@ -174,12 +175,11 @@
     margin-right: calc(-1*var(--theme-wrapper-sides-spacing)); } }
 
 .novablocks-conversation__starter-subtitle {
-  --font-size: 19.5;
+  --font-size-modifier: 1.08;
   --component-accent-color: var(--sm-bg-color-12);
   font-size: var(--current-font-size); }
 
 .novablocks-conversation__starter-message[class] {
-  --font-size: 18;
   color: var(--sm-bg-color-12);
   font-size: var(--current-font-size); }
 
