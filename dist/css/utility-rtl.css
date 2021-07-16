@@ -490,6 +490,7 @@
 
 [class][class] h1.has-larger-font-size {
   --font-size: var(--theme-display-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
   font-size: var(--current-font-size);
   --current-font-family: var(--theme-display-font-family);
   --current-font-style: var(--theme-display-font-style);
@@ -501,6 +502,7 @@
 
 [class][class] h2.has-larger-font-size {
   --font-size: var(--theme-heading-1-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
   font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-1-font-family);
   --current-font-style: var(--theme-heading-1-font-style);
@@ -513,6 +515,7 @@
 [class][class] h1.has-smaller-font-size,
 [class][class] h3.has-larger-font-size {
   --font-size: var(--theme-heading-2-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
   font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-2-font-family);
   --current-font-style: var(--theme-heading-2-font-style);
@@ -525,6 +528,7 @@
 [class][class] h2.has-smaller-font-size,
 [class][class] h4.has-larger-font-size {
   --font-size: var(--theme-heading-3-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
   font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-3-font-family);
   --current-font-style: var(--theme-heading-3-font-style);
@@ -537,6 +541,7 @@
 [class][class] h3.has-smaller-font-size,
 [class][class] h5.has-larger-font-size {
   --font-size: var(--theme-heading-4-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
   font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-weight: var(--theme-heading-4-font-weight);

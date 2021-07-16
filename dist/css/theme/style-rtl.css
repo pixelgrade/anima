@@ -228,6 +228,7 @@ body.blog, body.archive:not(.woocommerce-page), body.search:not(.search-no-resul
 .article-header .cat-links,
 .article-header .entry-excerpt {
   --font-size: var(--theme-lead-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
   font-size: var(--current-font-size);
   --current-font-family: var(--theme-lead-font-family);
   --current-font-style: var(--theme-lead-font-style);

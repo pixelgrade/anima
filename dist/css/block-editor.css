@@ -207,6 +207,7 @@
 
 .editor-post-title .editor-post-title__input {
   --font-size: var(--theme-heading-1-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
   font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-1-font-family);
   --current-font-style: var(--theme-heading-1-font-style);
@@ -258,6 +259,7 @@
     border: 0;
     transition: all .2s ease-in-out;
     --font-size: var(--theme-input-font-size);
+    --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
     font-size: var(--current-font-size);
     --current-font-family: var(--theme-input-font-family);
     --current-font-weight: var(--theme-input-font-weight);
@@ -373,6 +375,7 @@
     color: var(--current-button-text-color);
     transition: var(--current-button-transition);
     --font-size: var(--theme-button-font-size);
+    --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
     font-size: var(--current-font-size);
     --current-font-family: var(--theme-button-font-family);
     --current-font-weight: var(--theme-button-font-weight);
@@ -443,6 +446,7 @@
     color: var(--current-button-text-color);
     transition: var(--current-button-transition);
     --font-size: var(--theme-button-font-size);
+    --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
     font-size: var(--current-font-size);
     --current-font-family: var(--theme-button-font-family);
     --current-font-weight: var(--theme-button-font-weight);
@@ -517,6 +521,7 @@
     border: 0;
     transition: all .2s ease-in-out;
     --font-size: var(--theme-input-font-size);
+    --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
     font-size: var(--current-font-size);
     --current-font-family: var(--theme-input-font-family);
     --current-font-weight: var(--theme-input-font-weight);
@@ -559,6 +564,7 @@
     border: 0;
     transition: all .2s ease-in-out;
     --font-size: var(--theme-input-font-size);
+    --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
     font-size: var(--current-font-size);
     --current-font-family: var(--theme-input-font-family);
     --current-font-weight: var(--theme-input-font-weight);
@@ -612,6 +618,7 @@
     display: flex;
     align-items: center;
     --font-size: var(--theme-input-font-size);
+    --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
     font-size: var(--current-font-size);
     --current-font-family: var(--theme-input-font-family);
     --current-font-weight: var(--theme-input-font-weight);
@@ -679,6 +686,7 @@
     /* Preformatted */
     /* Tables */
     --font-size: var(--theme-body-font-size);
+    --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
     font-size: var(--current-font-size);
     --current-font-family: var(--theme-body-font-family);
     --current-line-height: var(--theme-body-line-height);
@@ -693,6 +701,7 @@
       font-weight: var(--current-font-weight); }
     .editor-styles-wrapper[class] h1, .editor-styles-wrapper[class] .h1 {
       --font-size: var(--theme-heading-1-font-size);
+      --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
       font-size: var(--current-font-size);
       --current-font-family: var(--theme-heading-1-font-family);
       --current-font-style: var(--theme-heading-1-font-style);
@@ -703,6 +712,7 @@
       --current-font-feature: "liga", "dlig", "onum"; }
     .editor-styles-wrapper[class] h2, .editor-styles-wrapper[class] .h2 {
       --font-size: var(--theme-heading-2-font-size);
+      --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
       font-size: var(--current-font-size);
       --current-font-family: var(--theme-heading-2-font-family);
       --current-font-style: var(--theme-heading-2-font-style);
@@ -713,6 +723,7 @@
       --current-font-feature: "liga", "dlig", "onum"; }
     .editor-styles-wrapper[class] h3, .editor-styles-wrapper[class] .h3 {
       --font-size: var(--theme-heading-3-font-size);
+      --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
       font-size: var(--current-font-size);
       --current-font-family: var(--theme-heading-3-font-family);
       --current-font-style: var(--theme-heading-3-font-style);
@@ -722,6 +733,7 @@
       --current-text-transform: var(--theme-heading-3-text-transform); }
     .editor-styles-wrapper[class] h4, .editor-styles-wrapper[class] .h4 {
       --font-size: var(--theme-heading-4-font-size);
+      --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
       font-size: var(--current-font-size);
       --current-font-family: var(--theme-heading-4-font-family);
       --current-font-weight: var(--theme-heading-4-font-weight);
@@ -731,6 +743,7 @@
       --current-text-transform: var(--theme-heading-4-text-transform); }
     .editor-styles-wrapper[class] h5, .editor-styles-wrapper[class] .h5 {
       --font-size: var(--theme-heading-5-font-size);
+      --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
       font-size: var(--current-font-size);
       --current-font-family: var(--theme-heading-5-font-family);
       --current-font-weight: var(--theme-heading-5-font-weight);
@@ -740,6 +753,7 @@
       --current-text-transform: var(--theme-heading-5-text-transform); }
     .editor-styles-wrapper[class] h6, .editor-styles-wrapper[class] .h6 {
       --font-size: var(--theme-heading-6-font-size);
+      --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
       font-size: var(--current-font-size);
       --current-font-family: var(--theme-heading-6-font-family);
       --current-font-weight: var(--theme-heading-6-font-weight);
@@ -797,6 +811,7 @@
           white-space: normal; }
     .editor-styles-wrapper[class] .is-style-lead {
       --font-size: var(--theme-lead-font-size);
+      --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
       font-size: var(--current-font-size);
       --current-font-family: var(--theme-lead-font-family);
       --current-font-style: var(--theme-lead-font-style);
@@ -805,6 +820,7 @@
       --current-text-transform: var(--theme-lead-text-transform); }
     .editor-styles-wrapper[class] .is-style-meta {
       --font-size: var(--theme-meta-font-size);
+      --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
       font-size: var(--current-font-size);
       --current-font-family: var(--theme-meta-font-family);
       --current-font-weight: var(--theme-meta-font-weight);
@@ -814,6 +830,7 @@
       --current-text-transform: var(--theme-meta-text-transform); }
     .editor-styles-wrapper[class] .is-style-caption {
       --font-size: var(--theme-caption-font-size);
+      --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
       font-size: var(--current-font-size);
       --current-font-family: var(--theme-caption-font-family);
       --current-font-weight: var(--theme-caption-font-weight);

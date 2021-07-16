@@ -39,6 +39,7 @@ ul.wp-block-categories__list[class] {
   .editor-block-list__block.wp-block-image figcaption,
   .block-editor-block-list__block.wp-block-image figcaption {
     --font-size: var(--theme-body-font-size);
+    --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
     font-size: var(--current-font-size);
     --current-font-family: var(--theme-body-font-family);
     --current-line-height: var(--theme-body-line-height);
@@ -77,6 +78,7 @@ ul.wp-block-categories__list[class] {
   color: var(--current-button-text-color);
   transition: var(--current-button-transition);
   --font-size: var(--theme-button-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
   font-size: var(--current-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
@@ -354,6 +356,7 @@ ol[data-nb="list"] {
   .nova-food-menu-item__title .item-title {
     color: inherit;
     --font-size: var(--theme-heading-4-font-size);
+    --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
     font-size: var(--current-font-size);
     --current-font-family: var(--theme-heading-4-font-family);
     --current-font-weight: var(--theme-heading-4-font-weight);
@@ -371,6 +374,7 @@ ol[data-nb="list"] {
 
 .nova-food-menu__header .section-title {
   --font-size: var(--theme-heading-2-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
   font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-2-font-family);
   --current-font-style: var(--theme-heading-2-font-style);
@@ -449,6 +453,7 @@ ol[data-nb="list"] {
 .novablocks-media__content {
   max-width: 100%;
   --font-size: var(--theme-body-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
   font-size: var(--current-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
@@ -563,6 +568,7 @@ ol[data-nb="list"] {
 
 .ot-dtp-picker input[type="submit"][class][class] {
   --font-size: var(--theme-button-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
   font-size: var(--current-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
@@ -604,6 +610,7 @@ ol[data-nb="list"] {
 
 .ot-dtp-picker-form {
   --font-size: var(--theme-input-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
   font-size: var(--current-font-size);
   --current-font-family: var(--theme-input-font-family);
   --current-font-weight: var(--theme-input-font-weight);
@@ -672,6 +679,7 @@ ol[data-nb="list"] {
 
 .novablocks-card {
   --font-size: var(--theme-body-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
   font-size: var(--current-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);

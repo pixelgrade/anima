@@ -55,9 +55,9 @@ function rosa2_add_header_section_to_style_manager_config( $config ) {
 					),
 					'css'         => array(
 						array(
-							'property' => '--theme-header-logo-height-setting',
+							'property' => '--theme-header-logo-height',
 							'selector' => ':root',
-							'unit'     => '',
+							'unit'     => 'px',
 						),
 					),
 				),

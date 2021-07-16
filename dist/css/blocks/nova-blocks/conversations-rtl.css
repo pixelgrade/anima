@@ -199,6 +199,7 @@
   border: 0;
   transition: all .2s ease-in-out;
   --font-size: var(--theme-input-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
   font-size: var(--current-font-size);
   --current-font-family: var(--theme-input-font-family);
   --current-font-weight: var(--theme-input-font-weight);
@@ -245,6 +246,7 @@ trix-editor[id][id][id]:before {
 
 trix-editor h1 {
   --font-size: var(--theme-heading-4-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
   font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-weight: var(--theme-heading-4-font-weight);
@@ -266,6 +268,7 @@ trix-toolbar {
   border: 0;
   transition: all .2s ease-in-out;
   --font-size: var(--theme-input-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
   font-size: var(--current-font-size);
   --current-font-family: var(--theme-input-font-family);
   --current-font-weight: var(--theme-input-font-weight);

@@ -252,6 +252,7 @@
   margin-bottom: 0;
   color: var(--sm-current-fg2-color);
   --font-size: var(--theme-heading-4-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
   font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-weight: var(--theme-heading-4-font-weight);
@@ -396,6 +397,7 @@
     border: 0;
     transition: all .2s ease-in-out;
     --font-size: var(--theme-input-font-size);
+    --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
     font-size: var(--current-font-size);
     --current-font-family: var(--theme-input-font-family);
     --current-font-weight: var(--theme-input-font-weight);
@@ -467,6 +469,7 @@
   color: var(--current-button-text-color);
   transition: var(--current-button-transition);
   --font-size: var(--theme-button-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
   font-size: var(--current-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
@@ -709,6 +712,7 @@
   border: 0;
   transition: all .2s ease-in-out;
   --font-size: var(--theme-input-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
   font-size: var(--current-font-size);
   --current-font-family: var(--theme-input-font-family);
   --current-font-weight: var(--theme-input-font-weight);
