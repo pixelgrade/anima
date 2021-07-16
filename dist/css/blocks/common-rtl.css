@@ -47,8 +47,7 @@
   border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
   border-radius: var(--theme-button-border-radius);
   --font-size: var(--theme-button-font-size);
-  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
-  font-size: var(--current-font-size);
+  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
   --current-font-style: var(--theme-button-font-style);
@@ -414,8 +413,7 @@
     height: 100%; }
   .wp-block-gallery figcaption:not(.blocks-gallery-caption) {
     --font-size: var(--theme-body-font-size);
-    --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
-    font-size: var(--current-font-size);
+    --current-font-size: var(--final-font-size);
     --current-font-family: var(--theme-body-font-family);
     --current-line-height: var(--theme-body-line-height);
     --current-font-weight: var(--theme-body-font-weight);
@@ -431,8 +429,7 @@
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3) 70%, transparent); }
   .wp-block-gallery .blocks-gallery-caption {
     --font-size: var(--theme-body-font-size);
-    --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
-    font-size: var(--current-font-size);
+    --current-font-size: var(--final-font-size);
     --current-font-family: var(--theme-body-font-family);
     --current-line-height: var(--theme-body-line-height);
     --current-font-weight: var(--theme-body-font-weight);
@@ -1037,8 +1034,7 @@
 
 .wp-block-novablocks-navigation {
   --font-size: var(--theme-navigation-font-size);
-  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
-  font-size: var(--current-font-size);
+  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-navigation-font-family);
   --current-font-weight: var(--theme-navigation-font-weight);
   --current-font-style: var(--theme-navigation-font-style);
@@ -1088,8 +1084,7 @@ html:root {
 .wp-block-quote,
 .wp-block-pullquote {
   --font-size: var(--theme-heading-3-font-size);
-  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
-  font-size: var(--current-font-size);
+  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-heading-3-font-family);
   --current-font-style: var(--theme-heading-3-font-style);
   --current-font-weight: var(--theme-heading-3-font-weight);
@@ -1111,8 +1106,7 @@ html:root {
 .wp-block-pullquote__citation {
   margin-top: var(--theme-spacing);
   --font-size: var(--theme-body-font-size);
-  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
-  font-size: var(--current-font-size);
+  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);

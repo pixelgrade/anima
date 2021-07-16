@@ -2,8 +2,9 @@ $assets-folder-path: '../../assets';
 
 @import "setup";
 @import "social-links";
-@import "components/search-button";
+
 @import "components/dark-mode-button";
+@import "components/search-button";
 
 .editor-post-title .editor-post-title__input {
     @include apply-font(heading-1);
@@ -19,11 +20,13 @@ $assets-folder-path: '../../assets';
 /* Typography */
 :root {
     --font-size: var(--theme-body-font-size);
-    --theme-body-final-font-size: var(--current-font-size);
+    --theme-body-final-font-size: var(--final-font-size);
 }
 
 .editor-styles-wrapper {
     -webkit-font-smoothing: antialiased;
+
+    @import "components/site-branding";
 
     // forms.scss may be needed for properly styling the input inside the novablocks sharing overlay
     @import "elements/forms";
