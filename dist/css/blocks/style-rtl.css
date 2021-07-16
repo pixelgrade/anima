@@ -880,9 +880,12 @@ ol.nb-list {
       --current-button-text-color: var(--theme-button-hover-text-color);
       --current-button-transition: var(--theme-button-hover-transition); }
 
+@media not screen and (min-width: 1024px) {
+  .novablocks-navigation {
+    --font-size: 18; } }
+
 @media only screen and (min-width: 1024px) {
   .novablocks-navigation {
-    --font-size: 18;
     --novablocks-navigation-item-bottom-margin: .5em; }
     .novablocks-navigation ul.menu a,
     .novablocks-navigation .menu > ul a {
