@@ -19,7 +19,7 @@ $assets-folder-path: '../../assets';
 /* Typography */
 :root {
     --font-size: var(--theme-body-font-size);
-    --theme-body-final-font-size: var(--final-font-size);
+    --theme-body-final-font-size: var(--current-font-size);
 }
 
 .editor-styles-wrapper {
@@ -42,7 +42,7 @@ $assets-folder-path: '../../assets';
         @import "elements/tables";
         @import "elements/styles";
 
-        @include apply-font(content);
+        @include apply-font(body);
 
         background-color: var(--sm-current-bg-color);
         color: var(--sm-current-fg1-color);

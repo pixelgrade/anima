@@ -47,8 +47,11 @@
 
 .novablocks-navigation {
 
-    @include above(lap) {
+    @include below(lap) {
         --font-size: 18;
+    }
+
+    @include above(lap) {
         --novablocks-navigation-item-bottom-margin: .5em;
 
         ul.menu,

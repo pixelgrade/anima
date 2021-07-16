@@ -147,30 +147,12 @@ function rosa2_add_fonts_section_to_style_manager_config( $config ) {
 					'type' => 'html',
 					'html' => '<span class="separator sub-section label">' . esc_html__( 'Body Fonts', '__theme_txtd' ) . '</span>',
 				),
-				'body_font'       => array(
-					'type'              => 'font',
-					'label'             => esc_html__( 'Body', '__theme_txtd' ),
-					'desc'              => esc_html__( '', '__theme_txtd' ),
-					'selector'          => ':root',
-					'properties_prefix' => '--theme-body-',
-					'default'           => array(
-						'font-family'     => 'Reforma1969',
-						'font-size'       => 16,
-						'line-height'     => 1.7,
-						'font-weight'     => 500,
-						'text-transform'  => 'none',
-						'text-decoration' => 'none',
-						'letter-spacing'  => - 0.03,
-					),
-					// We want all the font variants for this field since it is a rich content one.
-					'fields'            => wp_parse_args( [ 'font-weight' => [ 'loadAllVariants' => true ] ], $fields_config ),
-				),
 				'content_font'    => array(
 					'type'              => 'font',
 					'label'             => esc_html__( 'Content', '__theme_txtd' ),
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
-					'properties_prefix' => '--theme-content-',
+					'properties_prefix' => '--theme-body-',
 					'default'           => array(
 						'font-family'     => 'Reforma1969',
 						'font-size'       => 18,

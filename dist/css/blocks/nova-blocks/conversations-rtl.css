@@ -10,12 +10,12 @@
   --comment-links-color: var(--component-accent-color);
   --comment-highlighted-color: #FFF2CE;
   --comment-font-size: calc(var(--theme-body-final-font-size) * 1.05);
-  --label-font-size: var(--final-font-size);
+  --label-font-size: var(--current-font-size);
   --label-bg-color: var(--sm-current-fg2-color);
   --label-highlighted-bg-color: var(--component-accent-color);
   --label-border-radius: 999em;
-  --comment-footer-font-size: var(--final-font-size);
-  --field-description-font-size: var(--final-font-size);
+  --comment-footer-font-size: var(--current-font-size);
+  --field-description-font-size: var(--current-font-size);
   --novablocks-spacing: var(--theme-spacing-fluid-medium);
   --element-spacing: var(--theme-spacing-small) !important;
   width: 100%; }
@@ -28,23 +28,23 @@
     font-size: inherit; }
   .novablocks-conversations .comment-footer-highlights[class],
   .novablocks-conversations .commenter-background-label {
-    --font-size: 13;
+    --font-size-modifier: 0.72;
     --current-font-weight: regular;
-    font-size: var(--final-font-size); }
+    font-size: var(--current-font-size); }
   .novablocks-conversations .comment-dropdown-toggle {
-    --font-size: 15;
+    --font-size-modifier: 0.83;
     --current-font-weight: regular;
-    font-size: var(--final-font-size); }
+    font-size: var(--current-font-size); }
   .novablocks-conversations .comment-footer-meta[class] {
-    --font-size: 16;
-    font-size: var(--final-font-size); }
+    --font-size-modifier: 0.88;
+    font-size: var(--current-font-size); }
   .novablocks-conversations .comment-form label {
-    --font-size: 14; }
+    --font-size-modifier: 0.77; }
     .novablocks-conversations .comment-form label + .field-description:not(:empty) {
       margin-top: calc(-1 * var(--theme-input-vertical-spacing)); }
   .novablocks-conversations .comment-form .field-description[class] {
-    --font-size: 15;
-    font-size: var(--final-font-size); }
+    --font-size-modifier: 0.83;
+    font-size: var(--current-font-size); }
   .novablocks-conversations .comment-highlighted {
     --component-accent-color: var(--theme-dark-primary);
     --comment-author-color: var(--theme-dark-primary); }
@@ -79,8 +79,8 @@
         padding-right: var(--theme-wrapper-sides-spacing);
         padding-left: var(--theme-wrapper-sides-spacing); } }
   .novablocks-conversations .comment-author-name {
-    --font-size: 16;
-    font-size: var(--final-font-size); }
+    --font-size-modifier: 0.88;
+    font-size: var(--current-font-size); }
   .novablocks-conversations .comment-dropdown-menu {
     background-color: var(--sm-current-bg-color);
     color: var(--sm-current-fg2-color); }
@@ -88,7 +88,7 @@
       border-color: transparent transparent var(--sm-current-bg-color); }
     @media only screen and (min-width: 768px) {
       .novablocks-conversations .comment-dropdown-menu {
-        top: calc(var(--current-line-height) * var(--final-font-size)); } }
+        top: calc(var(--current-line-height) * var(--current-font-size)); } }
   .novablocks-conversations .commenter-background-label[class] {
     position: relative;
     background: none;
@@ -160,9 +160,9 @@
   padding-left: .25em; }
 
 .novablocks-conversations__comments-count {
-  --font-size: 16;
+  --font-size-modifier:0.88;
   color: var(--field-description-color);
-  font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   opacity: .5; }
 
 .novablocks-conversations__notification-text[class] span {
@@ -175,14 +175,13 @@
     margin-left: calc(-1*var(--theme-wrapper-sides-spacing)); } }
 
 .novablocks-conversation__starter-subtitle {
-  --font-size: 19.5;
+  --font-size-modifier: 1.08;
   --component-accent-color: var(--sm-bg-color-12);
-  font-size: var(--final-font-size); }
+  font-size: var(--current-font-size); }
 
 .novablocks-conversation__starter-message[class] {
-  --font-size: 18;
   color: var(--sm-bg-color-12);
-  font-size: var(--final-font-size); }
+  font-size: var(--current-font-size); }
 
 .comments-area .entry-content {
   padding-right: 0;
@@ -200,7 +199,8 @@
   border: 0;
   transition: all .2s ease-in-out;
   --font-size: var(--theme-input-font-size);
-  font-size: var(--final-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-input-font-family);
   --current-font-weight: var(--theme-input-font-weight);
   --current-font-style: var(--theme-input-font-style);
@@ -246,7 +246,8 @@ trix-editor[id][id][id]:before {
 
 trix-editor h1 {
   --font-size: var(--theme-heading-4-font-size);
-  font-size: var(--final-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-font-style: var(--theme-heading-4-font-style);
@@ -267,7 +268,8 @@ trix-toolbar {
   border: 0;
   transition: all .2s ease-in-out;
   --font-size: var(--theme-input-font-size);
-  font-size: var(--final-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-input-font-family);
   --current-font-weight: var(--theme-input-font-weight);
   --current-font-style: var(--theme-input-font-style);

@@ -22,7 +22,7 @@
     transition: var(--theme-transition);
     transition-property: opacity; }
     .social-menu-item > a:before {
-      font-size: calc( var(--icons-size-multiplier) * var(--final-font-size));
+      font-size: calc( var(--icons-size-multiplier) * var(--current-font-size));
       vertical-align: middle;
       font-family: 'rosa2_icons';
       speak: none;
@@ -118,7 +118,7 @@
         margin-bottom: var(--theme-spacing-micro); } }
 
 .menu-item--search:not(.no-icon) a {
-  --search-icon-width: calc( var(--icons-size-multiplier) * var(--final-font-size) );
+  --search-icon-width: calc( var(--icons-size-multiplier) * var(--current-font-size) );
   padding-left: calc(var(--search-icon-width) + 6px) !important;
   overflow: visible; }
   .menu-item--search:not(.no-icon) a:after {
@@ -163,7 +163,7 @@
   display: flex;
   align-items: center; }
   .menu-item--dark-mode:not(.no-icon) {
-    --switcher-icon-width: calc( var(--icons-size-multiplier) * var(--final-font-size) ); }
+    --switcher-icon-width: calc( var(--icons-size-multiplier) * var(--current-font-size) ); }
     .menu-item--dark-mode:not(.no-icon) a {
       padding-left: calc(var(--switcher-icon-width) + 6px) !important; }
       .menu-item--dark-mode:not(.no-icon) a:after {
@@ -207,7 +207,8 @@
 
 .editor-post-title .editor-post-title__input {
   --font-size: var(--theme-heading-1-font-size);
-  font-size: var(--final-font-size);
+  --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-1-font-family);
   --current-font-style: var(--theme-heading-1-font-style);
   --current-line-height: var(--theme-heading-1-line-height);
@@ -223,7 +224,7 @@
 /* Typography */
 :root {
   --font-size: var(--theme-body-font-size);
-  --theme-body-final-font-size: var(--final-font-size); }
+  --theme-body-final-font-size: var(--current-font-size); }
 
 .editor-styles-wrapper {
   -webkit-font-smoothing: antialiased;
@@ -258,7 +259,8 @@
     border: 0;
     transition: all .2s ease-in-out;
     --font-size: var(--theme-input-font-size);
-    font-size: var(--final-font-size);
+    --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+    font-size: var(--current-font-size);
     --current-font-family: var(--theme-input-font-family);
     --current-font-weight: var(--theme-input-font-weight);
     --current-font-style: var(--theme-input-font-style);
@@ -373,7 +375,8 @@
     color: var(--current-button-text-color);
     transition: var(--current-button-transition);
     --font-size: var(--theme-button-font-size);
-    font-size: var(--final-font-size);
+    --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+    font-size: var(--current-font-size);
     --current-font-family: var(--theme-button-font-family);
     --current-font-weight: var(--theme-button-font-weight);
     --current-font-style: var(--theme-button-font-style);
@@ -430,7 +433,8 @@
     color: var(--current-button-text-color);
     transition: var(--current-button-transition);
     --font-size: var(--theme-button-font-size);
-    font-size: var(--final-font-size);
+    --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+    font-size: var(--current-font-size);
     --current-font-family: var(--theme-button-font-family);
     --current-font-weight: var(--theme-button-font-weight);
     --current-font-style: var(--theme-button-font-style);
@@ -504,7 +508,8 @@
     border: 0;
     transition: all .2s ease-in-out;
     --font-size: var(--theme-input-font-size);
-    font-size: var(--final-font-size);
+    --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+    font-size: var(--current-font-size);
     --current-font-family: var(--theme-input-font-family);
     --current-font-weight: var(--theme-input-font-weight);
     --current-font-style: var(--theme-input-font-style);
@@ -546,7 +551,8 @@
     border: 0;
     transition: all .2s ease-in-out;
     --font-size: var(--theme-input-font-size);
-    font-size: var(--final-font-size);
+    --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+    font-size: var(--current-font-size);
     --current-font-family: var(--theme-input-font-family);
     --current-font-weight: var(--theme-input-font-weight);
     --current-font-style: var(--theme-input-font-style);
@@ -599,7 +605,8 @@
     display: flex;
     align-items: center;
     --font-size: var(--theme-input-font-size);
-    font-size: var(--final-font-size);
+    --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+    font-size: var(--current-font-size);
     --current-font-family: var(--theme-input-font-family);
     --current-font-weight: var(--theme-input-font-weight);
     --current-font-style: var(--theme-input-font-style);
@@ -665,12 +672,14 @@
     /* Iframes */
     /* Preformatted */
     /* Tables */
-    --font-size: var(--theme-content-font-size);
-    font-size: var(--final-font-size);
-    --current-font-family: var(--theme-content-font-family);
-    --current-line-height: var(--theme-content-line-height);
-    --current-font-style: var(--theme-content-font-style);
-    --current-letter-spacing: var(--theme-content-letter-spacing);
+    --font-size: var(--theme-body-font-size);
+    --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+    font-size: var(--current-font-size);
+    --current-font-family: var(--theme-body-font-family);
+    --current-line-height: var(--theme-body-line-height);
+    --current-font-weight: var(--theme-body-font-weight);
+    --current-font-style: var(--theme-body-font-style);
+    --current-letter-spacing: var(--theme-body-letter-spacing);
     background-color: var(--sm-current-bg-color);
     color: var(--sm-current-fg1-color); }
     .editor-styles-wrapper[class] h1, .editor-styles-wrapper[class] h2, .editor-styles-wrapper[class] h3, .editor-styles-wrapper[class] h4, .editor-styles-wrapper[class] h5, .editor-styles-wrapper[class] h6 {
@@ -679,7 +688,8 @@
       font-weight: var(--current-font-weight); }
     .editor-styles-wrapper[class] h1, .editor-styles-wrapper[class] .h1 {
       --font-size: var(--theme-heading-1-font-size);
-      font-size: var(--final-font-size);
+      --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+      font-size: var(--current-font-size);
       --current-font-family: var(--theme-heading-1-font-family);
       --current-font-style: var(--theme-heading-1-font-style);
       --current-line-height: var(--theme-heading-1-line-height);
@@ -689,7 +699,8 @@
       --current-font-feature: "liga", "dlig", "onum"; }
     .editor-styles-wrapper[class] h2, .editor-styles-wrapper[class] .h2 {
       --font-size: var(--theme-heading-2-font-size);
-      font-size: var(--final-font-size);
+      --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+      font-size: var(--current-font-size);
       --current-font-family: var(--theme-heading-2-font-family);
       --current-font-style: var(--theme-heading-2-font-style);
       --current-font-weight: var(--theme-heading-2-font-weight);
@@ -699,7 +710,8 @@
       --current-font-feature: "liga", "dlig", "onum"; }
     .editor-styles-wrapper[class] h3, .editor-styles-wrapper[class] .h3 {
       --font-size: var(--theme-heading-3-font-size);
-      font-size: var(--final-font-size);
+      --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+      font-size: var(--current-font-size);
       --current-font-family: var(--theme-heading-3-font-family);
       --current-font-style: var(--theme-heading-3-font-style);
       --current-font-weight: var(--theme-heading-3-font-weight);
@@ -708,7 +720,8 @@
       --current-text-transform: var(--theme-heading-3-text-transform); }
     .editor-styles-wrapper[class] h4, .editor-styles-wrapper[class] .h4 {
       --font-size: var(--theme-heading-4-font-size);
-      font-size: var(--final-font-size);
+      --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+      font-size: var(--current-font-size);
       --current-font-family: var(--theme-heading-4-font-family);
       --current-font-weight: var(--theme-heading-4-font-weight);
       --current-font-style: var(--theme-heading-4-font-style);
@@ -717,7 +730,8 @@
       --current-text-transform: var(--theme-heading-4-text-transform); }
     .editor-styles-wrapper[class] h5, .editor-styles-wrapper[class] .h5 {
       --font-size: var(--theme-heading-5-font-size);
-      font-size: var(--final-font-size);
+      --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+      font-size: var(--current-font-size);
       --current-font-family: var(--theme-heading-5-font-family);
       --current-font-weight: var(--theme-heading-5-font-weight);
       --current-font-style: var(--theme-heading-5-font-style);
@@ -726,7 +740,8 @@
       --current-text-transform: var(--theme-heading-5-text-transform); }
     .editor-styles-wrapper[class] h6, .editor-styles-wrapper[class] .h6 {
       --font-size: var(--theme-heading-6-font-size);
-      font-size: var(--final-font-size);
+      --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+      font-size: var(--current-font-size);
       --current-font-family: var(--theme-heading-6-font-family);
       --current-font-weight: var(--theme-heading-6-font-weight);
       --current-font-style: var(--theme-heading-6-font-style);
@@ -783,7 +798,8 @@
           white-space: normal; }
     .editor-styles-wrapper[class] .is-style-lead {
       --font-size: var(--theme-lead-font-size);
-      font-size: var(--final-font-size);
+      --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+      font-size: var(--current-font-size);
       --current-font-family: var(--theme-lead-font-family);
       --current-font-style: var(--theme-lead-font-style);
       --current-line-height: var(--theme-lead-line-height);
@@ -791,7 +807,8 @@
       --current-text-transform: var(--theme-lead-text-transform); }
     .editor-styles-wrapper[class] .is-style-meta {
       --font-size: var(--theme-meta-font-size);
-      font-size: var(--final-font-size);
+      --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+      font-size: var(--current-font-size);
       --current-font-family: var(--theme-meta-font-family);
       --current-font-weight: var(--theme-meta-font-weight);
       --current-font-style: var(--theme-meta-font-style);
@@ -800,7 +817,8 @@
       --current-text-transform: var(--theme-meta-text-transform); }
     .editor-styles-wrapper[class] .is-style-caption {
       --font-size: var(--theme-caption-font-size);
-      font-size: var(--final-font-size);
+      --current-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+      font-size: var(--current-font-size);
       --current-font-family: var(--theme-caption-font-family);
       --current-font-weight: var(--theme-caption-font-weight);
       --current-line-height: var(--theme-caption-line-height);
