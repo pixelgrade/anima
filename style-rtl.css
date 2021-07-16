@@ -1454,14 +1454,11 @@ table {
     text-decoration: none; }
 
 /* 2.1. Site Branding */
-:root {
-  --current-header-logo-height: var(--theme-mobile-header-logo-height); }
-  @media only screen and (min-width: 768px) {
-    :root {
-      --current-header-logo-height: var(--theme-header-logo-height); } }
-
 .site-logo img {
-  height: var(--current-header-logo-height); }
+  height: var(--theme-header-logo-height); }
+  @media not screen and (min-width: 768px) {
+    .site-logo img {
+      height: var(--theme-mobile-header-logo-height); } }
 
 .site-title {
   --font-size: var(--theme-heading-4-font-size);
@@ -1473,8 +1470,11 @@ table {
   --current-line-height: var(--theme-heading-4-line-height);
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
   --current-text-transform: var(--theme-heading-4-text-transform);
-  --current-font-size: calc( var(--current-header-logo-height) * 1.8 );
+  --font-size: calc(var(--theme-header-logo-height-setting) * 1.8);
   --current-line-height: 1; }
+  @media not screen and (min-width: 768px) {
+    .site-title {
+      --current-font-size: calc(var(--theme-mobile-header-logo-height) * 1.8); } }
 
 /* 2.2. Site Content */
 .site-main {
