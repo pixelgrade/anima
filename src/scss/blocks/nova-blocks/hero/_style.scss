@@ -45,8 +45,16 @@
     }
 }
 
-.novablocks-hero__indicator--middle svg {
-    opacity: 0;
+.novablocks-hero__indicator--middle {
+    
+    &[class] {
+        background-color: transparent;
+        color: inherit;
+    }
+    
+    svg {
+        opacity: 0;
+    }
 }
 
 .novablocks-hero__indicator:not(.novablocks-hero__indicator--middle) {
