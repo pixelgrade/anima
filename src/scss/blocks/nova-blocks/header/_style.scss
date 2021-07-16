@@ -52,8 +52,10 @@
     position: fixed !important;
     top: 0 !important;
 
-    &:before {
-        --header-background-opacity: 0;
+    @include above(lap) {
+        &:before {
+            --header-background-opacity: 0;
+        }
     }
 }
 

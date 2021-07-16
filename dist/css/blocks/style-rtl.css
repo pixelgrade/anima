@@ -601,8 +601,9 @@ ol.nb-list {
 .novablocks-header--sticky.novablocks-header--main {
   position: fixed !important;
   top: 0 !important; }
-  .novablocks-header--sticky.novablocks-header--main:before {
-    --header-background-opacity: 0; }
+  @media only screen and (min-width: 1024px) {
+    .novablocks-header--sticky.novablocks-header--main:before {
+      --header-background-opacity: 0; } }
 
 .novablocks-header__buttons-menu {
   position: absolute;
