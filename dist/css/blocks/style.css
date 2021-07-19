@@ -951,7 +951,10 @@ ol.nb-list {
   background-color: transparent;
   background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
   background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
-  background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
+  background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-family: var(--current-font-family); }
   .ot-dtp-picker-form .ot-dtp-picker-button[class][class][class][class][class]:not([disabled]) {
     cursor: pointer; }
     .ot-dtp-picker-form .ot-dtp-picker-button[class][class][class][class][class]:not([disabled]):hover {
