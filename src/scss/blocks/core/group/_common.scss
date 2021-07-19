@@ -1,13 +1,12 @@
 .wp-block-group {
     --wp-block-group-padding: var(--current-element-padding, var(--theme-spacing-fluid-large));
+    
+    --wp-block-group-padding-top: calc(var(--novablocks-emphasis-top-spacing) * var(--novablocks-spacing));
+    --wp-block-group-padding-bottom: calc(var(--novablocks-emphasis-bottom-spacing) * var(--novablocks-spacing));
 
     &,
     &[class*="is-style"]:not(.is-style-default) {
-        padding-top: var(--wp-block-group-padding);
-        padding-bottom: var(--wp-block-group-padding);
-
-        & + & {
-            --element-spacing: 0;
-        }
+        padding-top: var(--wp-block-group-padding-top);
+        padding-bottom: var(--wp-block-group-padding-bottom);
     }
 }
