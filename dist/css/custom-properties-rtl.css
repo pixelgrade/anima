@@ -37,6 +37,7 @@
   --theme-super-display-font-weight: 700;
   --theme-super-display-letter-spacing: -0.03em;
   --theme-super-display-text-transform: none;
+  --theme-super-display-color: var(--sm-current-fg2-color);
   --theme-display-font-family: Reforma1969, sans-serif;
   --theme-display-font-size: 115;
   --theme-display-font-style: normal;
@@ -44,6 +45,7 @@
   --theme-display-font-weight: 700;
   --theme-display-letter-spacing: -0.03em;
   --theme-display-text-transform: none;
+  --theme-display-color: var(--sm-current-fg2-color);
   --theme-heading-1-font-family: Reforma1969, sans-serif;
   --theme-heading-1-font-size: 66;
   --theme-heading-1-font-style: normal;
@@ -51,6 +53,7 @@
   --theme-heading-1-font-weight: 700;
   --theme-heading-1-letter-spacing: -0.03em;
   --theme-heading-1-text-transform: none;
+  --theme-heading-1-color: var(--sm-current-fg2-color);
   --theme-heading-2-font-family: Reforma1969, sans-serif;
   --theme-heading-2-font-size: 40;
   --theme-heading-2-font-style: normal;
@@ -58,6 +61,7 @@
   --theme-heading-2-line-height: 1.2;
   --theme-heading-2-letter-spacing: -0.02em;
   --theme-heading-2-text-transform: none;
+  --theme-heading-2-color: var(--sm-current-fg2-color);
   --theme-heading-3-font-family: Reforma1969, sans-serif;
   --theme-heading-3-font-size: 32;
   --theme-heading-3-font-style: normal;
@@ -65,6 +69,7 @@
   --theme-heading-3-line-height: 1.2;
   --theme-heading-3-letter-spacing: -0.02em;
   --theme-heading-3-text-transform: none;
+  --theme-heading-3-color: var(--sm-current-fg2-color);
   --theme-heading-4-font-family: Reforma1969, sans-serif;
   --theme-heading-4-font-size: 24;
   --theme-heading-4-font-weight: 700;
@@ -72,6 +77,7 @@
   --theme-heading-4-line-height: 1.2;
   --theme-heading-4-letter-spacing: -0.02em;
   --theme-heading-4-text-transform: none;
+  --theme-heading-4-color: var(--sm-current-fg2-color);
   --theme-heading-5-font-family: Reforma2018, sans-serif;
   --theme-heading-5-font-size: 17;
   --theme-heading-5-font-weight: 700;
@@ -79,6 +85,7 @@
   --theme-heading-5-line-height: 1.5;
   --theme-heading-5-letter-spacing: 0.017em;
   --theme-heading-5-text-transform: none;
+  --theme-heading-5-color: var(--sm-current-fg2-color);
   --theme-heading-6-font-family: Reforma2018, sans-serif;
   --theme-heading-6-font-size: 17;
   --theme-heading-6-font-weight: 500;
@@ -86,6 +93,7 @@
   --theme-heading-6-line-height: 1.5;
   --theme-heading-6-letter-spacing: 0.017em;
   --theme-heading-6-text-transform: none;
+  --theme-heading-6-color: var(--sm-current-fg2-color);
   --theme-navigation-font-family: Reforma2018, sans-serif;
   --theme-navigation-font-size: 17;
   --theme-navigation-font-weight: 500;
@@ -143,7 +151,8 @@
   font-style: var(--current-font-style);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform);
-  font-feature-settings: var(--current-font-feature); }
+  font-feature-settings: var(--current-font-feature);
+  color: var(--current-color); }
 
 :root {
   --theme-content-width-wide-addon: var(--sm-site-container-width, 75);
