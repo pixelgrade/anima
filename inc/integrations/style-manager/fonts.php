@@ -187,6 +187,23 @@ function rosa2_add_fonts_section_to_style_manager_config( $config ) {
 					'type' => 'html',
 					'html' => '<span class="separator sub-section label">' . esc_html__( 'Heading Fonts', '__theme_txtd' ) . '</span>',
 				),
+				'super_display_font'    => array(
+					'type'              => 'font',
+					'label'             => esc_html__( 'Super Display', '__theme_txtd' ),
+					'desc'              => esc_html__( '', '__theme_txtd' ),
+					'selector'          => ':root',
+					'properties_prefix' => '--theme-super-display-',
+					'default'           => array(
+						'font-family'     => 'Reforma1969',
+						'font-size'       => 180,
+						'line-height'     => 1.03,
+						'font-weight'     => 700,
+						'text-transform'  => 'none',
+						'text-decoration' => 'none',
+						'letter-spacing'  => - 0.03,
+					),
+					'fields'            => $fields_config_large,
+				),
 				'display_font'    => array(
 					'type'              => 'font',
 					'label'             => esc_html__( 'Display', '__theme_txtd' ),
