@@ -31,7 +31,6 @@ For ease of development, it is best to use `nvm` (https://github.com/nvm-sh/nvm)
 
 We use the following oh-my-zsh plugins: `plugins=(composer git nvm npm)` configured in `~/.zshrc`. For automatic node version switching, place this line in `~/.zshrc` just below the plugins line: `NVM_AUTOLOAD=1`. Now whenever you enter a directory through the shell, if it finds a `.nvmrc` file, it will switch to the specified node version.
 
-
 ## License
 Rosa 2 theme source code is released under the [GNU GPL v2 license or later](https://www.gnu.org/licenses/gpl-2.0.html).
 
