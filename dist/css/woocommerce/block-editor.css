@@ -259,7 +259,10 @@
   --current-line-height: var(--theme-heading-4-line-height);
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
   --current-text-transform: var(--theme-heading-4-text-transform);
-  --current-color: var(--theme-heading-4-color); }
+  --current-color: var(--theme-heading-4-color);
+  font-weight: var(--current-font-weight);
+  font-size: var(--final-font-size);
+  line-height: var(--current-line-height); }
 
 [class][class][class] .wc-block-grid__product-link {
   --current-aspect-ratio: 1;
@@ -911,3 +914,10 @@
 [class][class][class] .wp-block-button.wc-block-grid__product-add-to-cart {
   opacity: 1;
   transform: translateY(0); }
+
+[class][class][class] .wp-block-button__link {
+  --theme-button-background-color: var(--sm-current-accent-color);
+  --theme-button-border-color: var(--sm-current-accent-color);
+  --theme-button-hover-text-color: var(--sm-current-accent-color);
+  --theme-button-hover-border-color: var(--sm-current-accent-color);
+  width: 100%; }
