@@ -21,8 +21,14 @@
                 @include navigation-item-with-hover-animation;
             }
 
+            // We are using 2 more [class] just so this selector,
+            // will have a specificity equal with the following selector:
+            // li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only)
             > li[class*="current"]:not(.menu-item-home) {
-                @include navigation-item-with-active-state;
+                
+                @include specific(2) {
+                    @include navigation-item-with-active-state;
+                }
             }
         }
     }
