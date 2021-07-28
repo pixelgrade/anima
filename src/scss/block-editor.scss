@@ -6,6 +6,11 @@ $assets-folder-path: '../../assets';
 @import "components/dark-mode-button";
 @import "components/search-button";
 
+.block-editor-button-block-appender {
+    box-shadow: inset 0 0 0 1px currentColor;
+    color: inherit;
+}
+
 .editor-post-title .editor-post-title__input {
     @include apply-font(heading-1);
     --current-font-weight: 800;
