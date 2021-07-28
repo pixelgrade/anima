@@ -461,6 +461,9 @@
   .wp-block-group, .wp-block-group[class*="is-style"]:not(.is-style-default) {
     padding-top: var(--wp-block-group-padding-top);
     padding-bottom: var(--wp-block-group-padding-bottom); }
+  .wp-block-group:not([class*='sm-variation']) [class*="__inner-container"] {
+    padding-left: 0;
+    padding-right: 0; }
 
 .wp-block-group {
   --wp-block-group-padding: var(--current-element-padding, var(--theme-spacing-fluid-large));
@@ -469,6 +472,9 @@
   .wp-block-group, .wp-block-group[class*="is-style"]:not(.is-style-default) {
     padding-top: var(--wp-block-group-padding-top);
     padding-bottom: var(--wp-block-group-padding-bottom); }
+  .wp-block-group:not([class*='sm-variation']) [class*="__inner-container"] {
+    padding-left: 0;
+    padding-right: 0; }
 
 /* Latest Posts Block */
 .wp-block-latest-posts[class] {
