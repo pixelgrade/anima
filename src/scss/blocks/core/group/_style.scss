@@ -1,0 +1,12 @@
+.wp-block-group {
+	
+	// We don't need padding-left and padding-right,
+	// when this block does not have background.
+	&:not([class*='sm-variation']):not([class*='alignfull']) {
+		
+		[class*="__inner-container"] {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+}

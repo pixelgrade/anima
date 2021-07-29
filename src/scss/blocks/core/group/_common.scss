@@ -9,14 +9,4 @@
         padding-top: var(--wp-block-group-padding-top);
         padding-bottom: var(--wp-block-group-padding-bottom);
     }
-    
-    // We don't need padding-left and padding-right,
-    // when this block does not have background.
-    &:not([class*='sm-variation']) {
-    
-        [class*="__inner-container"] {
-            padding-left: 0;
-            padding-right: 0;
-        }
-    }
 }
