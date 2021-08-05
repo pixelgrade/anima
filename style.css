@@ -1605,10 +1605,6 @@ table {
   .c-meta > * {
     margin-top: var(--element-spacing);
     margin-left: var(--element-spacing); }
-  .c-meta__row--secondary {
-    opacity: 0.7; }
-  .c-meta__social .c-meta__row-item {
-    --current-font-weight: 700; }
   .c-meta__social .c-meta__row-item:after {
     content: none; }
   .c-meta a:not(.button) {
@@ -1697,9 +1693,6 @@ table {
   .c-meta-comments__count + .c-meta-comments__label {
     margin-left: 0.5em; }
 
-.c-meta__rows {
-  --current-font-weight: 400; }
-
 .c-meta__authorship {
   flex-grow: 1; }
   .c-meta__authorship .c-meta__row-item:not(:last-child):after {
@@ -1733,9 +1726,6 @@ table {
   .c-meta__social .c-meta__row > * {
     margin-left: var(--element-spacing);
     margin-top: var(--element-spacing); }
-  .c-meta__social .wp-block-button__link[class][class],
-  .c-meta__social .c-meta-comments {
-    --current-font-weight: 400; }
 
 .c-meta__row {
   display: flex;
@@ -1757,7 +1747,7 @@ table {
   filter: drop-shadow(1px 0px 0 currentColor) drop-shadow(0 1px 0 currentColor); }
 
 .c-meta-author__body .author {
-  --current-font-weight: 700;
+  --current-font-weight: bold;
   color: var(--sm-current-accent-color); }
 
 /* 2.4. Comments */

@@ -28,14 +28,6 @@
 		margin-left: var(--element-spacing);
 	}
 	
-	&__row--secondary {
-		opacity: 0.7;
-	}
-	
-	&__social &__row-item {
-		--current-font-weight: 700;
-	}
-	
 	&__social &__row-item:after {
 		content: none;
 	}
@@ -192,10 +184,6 @@
 	}
 }
 
-.c-meta__rows {
-	--current-font-weight: 400;
-}
-
 .c-meta__authorship {
 	flex-grow: 1;
 	
@@ -254,10 +242,6 @@
 		margin-top: var(--element-spacing);
 	}
 	
-	.wp-block-button__link[class][class],
-	.c-meta-comments {
-		--current-font-weight: 400;
-	}
 }
 
 .c-meta__row {
@@ -287,6 +271,6 @@
 }
 
 .c-meta-author__body .author {
-	--current-font-weight: 700;
+	--current-font-weight: bold;
 	color: var(--sm-current-accent-color);
 }
