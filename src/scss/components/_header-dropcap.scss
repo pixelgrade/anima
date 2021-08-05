@@ -1,0 +1,15 @@
+.header-dropcap {
+	position: absolute;
+	top: 0;
+	font-size: 15em;
+	line-height: 0.7;
+	font-weight: bold;
+	color: var(--sm-current-accent-color);
+	opacity: 0.1;
+	pointer-events: none;
+	margin-top: 0 !important;
+	
+	@include below(lap) {
+		margin-top: var(--theme-spacing-fluid-large) !important;
+	}
+}

@@ -452,6 +452,7 @@ if ( ! function_exists( 'rosa2_article_header' ) ) {
             <div class="entry-header sm-variation-2">
 				<?php rosa2_categories_posted_in() ?>
 
+                <div class="header-dropcap"><?php echo esc_html( substr( get_the_title(), 0, 1 ) ); ?></div>
                 <h1 class="entry-title"><?php the_title() ?></h1>
 
 				<?php if ( has_excerpt() ) { ?>

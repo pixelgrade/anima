@@ -27,7 +27,9 @@ Table of Contents
 2.3.  Site Footer
 2.4.  Comments
 2.5.  Navigation
-2.5.  Search Form
+2.6.  Search Form
+2.7.  Logo
+2.8.  Header Dropcap
 3.    Blocks
 4.    Pages
 5.    Theming
@@ -2488,6 +2490,21 @@ span.page-numbers {
   transform: translate(50%, -50%); }
   .c-logo__inverted img {
     width: 100%; }
+
+/* 2.8. Header Dropcap */
+.header-dropcap {
+  position: absolute;
+  top: 0;
+  font-size: 15em;
+  line-height: 0.7;
+  font-weight: bold;
+  color: var(--sm-current-accent-color);
+  opacity: 0.1;
+  pointer-events: none;
+  margin-top: 0 !important; }
+  @media not screen and (min-width: 1024px) {
+    .header-dropcap {
+      margin-top: var(--theme-spacing-fluid-large) !important; } }
 
 /* 3. Blocks */
 /*
