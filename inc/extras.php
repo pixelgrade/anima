@@ -440,6 +440,12 @@ if ( ! function_exists( 'rosa2_article_header' ) ) {
 
 	function rosa2_article_header() {
 
+		$article_header_classes = array( 'article-header' );
+
+		if ( ! rosa2_is_active_sidebar( 'sidebar-1' )) {
+			$article_header_classes[] = 'wp-block-group__inner-container';
+        }
+
 		if ( 'post' !== get_post_type() ) {
 			return;
 		}
@@ -447,7 +453,7 @@ if ( ! function_exists( 'rosa2_article_header' ) ) {
 		ob_start();
 		?>
 
-        <div class="article-header">
+        <div class="<?php echo esc_attr( join( ' ', $article_header_classes ) ); ?>">
 
             <div class="entry-header sm-variation-2">
 				<?php rosa2_categories_posted_in() ?>

@@ -1157,15 +1157,13 @@ body:not(.has-sidebar) {
   --block-limit-right: ce; }
   body:not(.has-sidebar) .entry-content {
     --block-content-start: cs; }
+  body:not(.has-sidebar) .article-header {
+    grid-column: var(--all-columns); }
 
 .single.has-sidebar .entry-content[class][class][class],
 .single.has-sidebar .article-navigation[class][class][class],
 .single.has-sidebar .article-comments[class][class][class] {
   --block-content-start: ws; }
-
-.article--is-landscape .article-header {
-  --block-content-start: var(--block-limit-left);
-  --block-content-end: var(--block-limit-right); }
 
 .novablocks-sidecar {
   --sticky-element-top-spacing: calc( var(--site-header-height) + var(--admin-bar-height) )
