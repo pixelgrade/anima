@@ -1,0 +1,33 @@
+@include above(desktop) {
+	
+	.u-collection-title-sideways {
+		
+		//@todo: Better name for variables used in calculating position
+		--sides-spacing-is-active: 1;
+		
+		.novablocks-collection__title {
+			
+			--block-excess: calc(var(--full) * var(--block-excess-exist, 1)) - calc(var(--theme-wrapper-sides-spacing) * var(--sides-spacing-is-active));
+			
+			position: absolute;
+			bottom: calc(100% - var(--novablocks-spacing) * 2);
+			right: calc(100% - var(--block-excess));
+			width: auto !important;
+			margin-right: calc(var(--novablocks-spacing) * 0.33);
+			font-size: 1rem;
+			transform-origin: 100% 100%;
+			transform: rotate(
+					-90deg
+			);
+			white-space: nowrap;
+		}
+		
+		.novablocks-sidebar {
+			--block-excess-exist: 0;
+		}
+		
+		.novablocks-content > .novablocks-sidecar {
+			--sides-spacing-is-active: 0;
+		}
+	}
+}

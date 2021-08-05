@@ -57,6 +57,10 @@ function rosa2_body_classes( $classes ) {
 		$classes[] = 'sm-variation-2';
 	}
 
+	if ( pixelgrade_option( 'collection_title_position' ) === 'sideways' ) {
+		$classes[] = 'u-collection-title-sideways';
+	}
+
 	return $classes;
 }
 add_filter( 'body_class', 'rosa2_body_classes' );

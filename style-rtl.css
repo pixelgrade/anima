@@ -3462,7 +3462,7 @@ html.is-dark .sm-light {
   --sm-fg1-color-12: var(--sm-color-palette-2-fg1-color-12, var(--sm-color-palette-1-fg1-color-12));
   --sm-fg2-color-12: var(--sm-color-palette-2-fg2-color-12, var(--sm-color-palette-1-fg2-color-12)); }
 
-.novablocks-opentable:not([class*="sm-palette-"]):not([class*="sm-variation-"]) {
+.novablocks-opentable:not([class*='sm-palette-']):not([class*='sm-variation-']) {
   --sm-current-bg-color: var(--sm-bg-color-10);
   --sm-current-accent-color: var(--sm-accent-color-10);
   --sm-current-fg1-color: var(--sm-fg1-color-10);
@@ -3505,3 +3505,6 @@ body {
 /* Hero bullets size fix */
 .c-bully {
   --current-font-size: 12px; }
+
+.novablocks-collection {
+  position: relative; }

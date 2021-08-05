@@ -22,7 +22,8 @@ if ( defined( '\Pixelgrade\StyleManager\VERSION' ) ) {
 
 	add_filter( 'style_manager/filter_fields', 'rosa2_add_header_section_to_style_manager_config', 20, 1 );
 	add_filter( 'style_manager/filter_fields', 'rosa2_add_separators_section_to_style_manager_config', 30, 1 );
-	add_filter( 'style_manager/filter_fields', 'rosa2_rosa2_add_content_section_to_style_manager_config', 40, 1 );
+	add_filter( 'style_manager/filter_fields', 'rosa2_add_content_section_to_style_manager_config', 40, 1 );
+	add_filter( 'style_manager/filter_fields', 'rosa2_add_misc_section_to_style_manager_config', 50, 1 );
 }
 
 
@@ -144,7 +145,7 @@ function rosa2_add_header_section_to_style_manager_config( $config ) {
 	return $config;
 }
 
-function rosa2_rosa2_add_content_section_to_style_manager_config( $config ) {
+function rosa2_add_content_section_to_style_manager_config( $config ) {
 
 	$rosa2_content_section = array(
 		'content_section' => array(
@@ -240,3 +241,34 @@ function rosa2_add_separators_section_to_style_manager_config( $config ) {
 
 	return $config;
 }
+
+function rosa2_add_misc_section_to_style_manager_config( $config ) {
+
+	$rosa2_misc_section = array(
+		'misc_section' => array(
+			'title'   => esc_html__( 'Misc', '__theme_txtd' ),
+			'options' => array(
+				'collection_title_position' => array(
+					'type'     => 'radio',
+					'label'    => esc_html__( 'Collections Titles Position', '__theme_txtd' ),
+					'desc'     => esc_html__( 'Choose if you want to display the titles above the collection or rotate them 90-degrees and align along the left of widgets content rather than at the top.', '__theme_txtd' ),
+					'default'  => 'above',
+					'choices'  => array(
+						'above'    => esc_html__( 'Above', '__theme_txtd' ),
+						'sideways' => esc_html__( 'Sideways', '__theme_txtd' ),
+					),
+				),
+			),
+		),
+	);
+
+	if ( empty( $config['sections'] ) ) {
+		$config['sections'] = array();
+	}
+
+	$config['sections'] = $config['sections'] + $rosa2_misc_section;
+
+	return $config;
+}
+
+
