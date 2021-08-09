@@ -41,6 +41,10 @@
     content: "-" counters(submenu, "- ", none);
     counter-increment: submenu; }
 
+.wp-block-group:not([class*='sm-variation']):not([class*='alignfull']) > [class*="__inner-container"] {
+  padding-left: 0;
+  padding-right: 0; }
+
 /* Image Block */
 .wp-block-image img {
   display: block; }
