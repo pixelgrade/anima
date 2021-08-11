@@ -174,6 +174,7 @@
 
 .woocommerce-product-details__short-description {
   margin-bottom: var(--theme-spacing);
+  --current-font-size: 0.96em;
 
   > :not(:first-child) {
     margin-top: var(--theme-spacing-small);
@@ -336,10 +337,12 @@
 
   .product_title {
     @include apply-font(heading-3);
+    margin-bottom: var(--theme-spacing-tiny);
   }
 
   .price {
     margin-bottom: var(--theme-spacing-small);
+    @include apply-font(heading-4);
   }
 
   span.onsale {
@@ -518,14 +521,19 @@
 }
 
 .product_meta {
-  font-size: .875em;
+  --current-font-size: 0.92em;
 
   > span {
     display: block;
 
     a {
+      font-size: inherit;
       text-decoration: none;
       opacity: .5;
+
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 }
@@ -656,7 +664,13 @@
 
 .woocommerce-breadcrumb {
   @include specific(1) {
+    margin-bottom: var(--theme-spacing-tiny);
+
+    --current-font-size: 0.96em;
+    font-size: var(--current-font-size);
+    
     color: var(--sm-current-fg2-color);
+
     a {
       color: var(--sm-current-fg2-color);
       text-decoration-color: transparent;

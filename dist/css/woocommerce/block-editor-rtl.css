@@ -238,14 +238,16 @@
   background-color: var(--sm-current-accent-color);
   background-image: linear-gradient(to left, transparent, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1));
   color: var(--sm-current-bg-color);
-  font-size: 0.5em;
-  text-transform: uppercase;
-  font-weight: bold;
   border-radius: 1em;
   padding: .25em .9em;
-  font: inherit;
-  text-transform: inherit;
-  text-align: center; }
+  --font-size: var(--theme-meta-font-size);
+  --current-font-size: var(--final-font-size);
+  --current-font-family: var(--theme-meta-font-family);
+  --current-font-weight: var(--theme-meta-font-weight);
+  --current-font-style: var(--theme-meta-font-style);
+  --current-line-height: var(--theme-meta-line-height);
+  --current-letter-spacing: var(--theme-meta-letter-spacing);
+  --current-text-transform: var(--theme-meta-text-transform); }
 
 [class][class][class] .wc-block-grid__product-title {
   margin-top: var(--theme-spacing-tiny);
@@ -315,7 +317,15 @@
   margin-bottom: var(--theme-spacing-tiny); }
 
 [class][class][class] .wc-block-grid__product-price {
-  color: var(--theme-dark-primary); }
+  color: var(--theme-dark-primary);
+  --font-size: var(--theme-meta-font-size);
+  --current-font-size: var(--final-font-size);
+  --current-font-family: var(--theme-meta-font-family);
+  --current-font-weight: var(--theme-meta-font-weight);
+  --current-font-style: var(--theme-meta-font-style);
+  --current-line-height: var(--theme-meta-line-height);
+  --current-letter-spacing: var(--theme-meta-letter-spacing);
+  --current-text-transform: var(--theme-meta-text-transform); }
   [class][class][class] .wc-block-grid__product-price del {
     opacity: .5; }
   [class][class][class] .wc-block-grid__product-price ins {
