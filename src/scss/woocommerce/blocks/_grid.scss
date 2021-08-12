@@ -95,16 +95,18 @@
 
         margin: 0;
         @include badge;
+        @include apply-font(meta);
 
-        font: inherit;
-        text-transform: inherit;
-        text-align: center;
+        // font: inherit;
+        // text-transform: inherit;
+        // text-align: center;
     }
 
     .wc-block-grid__product-title {
         margin-top: var(--theme-spacing-tiny);
         margin-bottom: 0;
         color: var(--sm-current-fg2-color);
+        
         @include apply-font(heading-4);
 
         font-weight: var(--current-font-weight);
@@ -160,6 +162,8 @@
 
     .wc-block-grid__product-price {
         color: var(--theme-dark-primary);
+
+        @include apply-font(meta);
 
         del {
             opacity: .5;
