@@ -12,3 +12,9 @@
         }
     }
 }
+
+@mixin apply-font-size( $size ) {
+    --font-size: $size;
+    --current-font-size: var(--final-font-size);
+    font-size: var(--current-font-size);
+}

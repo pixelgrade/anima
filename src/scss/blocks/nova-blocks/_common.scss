@@ -30,8 +30,7 @@
     .novablocks-advanced-gallery__grid-item {
 
         &[class] .credits[class] {
-            --font-size: 12;
-            font-size: var(--current-font-size);
+            @include apply-font-size(12);
             opacity: 0.7;
         }
     }
