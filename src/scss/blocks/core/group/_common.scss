@@ -10,3 +10,16 @@
         padding-bottom: var(--wp-block-group-padding-bottom);
     }
 }
+
+.wp-block-group {
+
+    // We don't need padding-left and padding-right,
+    // when this block does not have background.
+    &:not([class*='sm-color-signal-0']):not([class*='alignfull']) {
+
+        > [class*="__inner-container"] {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+}
