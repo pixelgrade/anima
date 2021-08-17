@@ -556,6 +556,18 @@ if ( ! function_exists( 'rosa2_get_home_content_markup' ) ) {
 	}
 }
 
+if ( ! function_exists( 'rosa2_get_author_box_markup' ) ) {
+
+    function rosa2_get_author_box_markup() {
+
+	    ob_start();
+
+	    echo rosa2_get_the_author_info_box();
+
+	    return ob_get_clean();
+    }
+}
+
 /**
  * Return the reading time in minutes for a post content.
  * @param WP_Post|int $post

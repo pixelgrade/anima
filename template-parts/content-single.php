@@ -15,6 +15,7 @@ $article_markup =   '<!-- wp:novablocks/sidecar { "className":"alignwide", "side
                     '<!-- wp:novablocks/sidecar-area {"className":"novablocks-content entry-content"} -->' .
                     rosa2_article_header() .
                     rosa2_get_content_markup() .
+                    rosa2_get_author_box_markup() .
                     rosa2_get_post_navigation_markup() .
                     '<!-- wp:novablocks/post-comments --><!-- /wp:novablocks/post-comments -->' .
                     '<!-- /wp:novablocks/sidecar-area -->' .

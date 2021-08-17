@@ -31,6 +31,7 @@ Table of Contents
 2.7.  Logo
 2.8.  Header Dropcap
 2.9.  Reading Bar
+2.10. Author Box
 3.    Blocks
 4.    Pages
 5.    Theming
@@ -2498,7 +2499,7 @@ span.page-numbers {
     .header-dropcap {
       margin-top: var(--theme-spacing-fluid-large) !important; } }
 
-/* 2.8. Reading Bar */
+/* 2.9. Reading Bar */
 .c-reading-bar__wrapper-title {
   --font-size: var(--theme-navigation-font-size);
   --current-font-size: var(--final-font-size);
@@ -2520,6 +2521,61 @@ span.page-numbers {
   --current-text-transform: var(--theme-navigation-text-transform);
   --current-font-style: italic;
   --current-font-weight: 400; }
+
+/* 2.10. Author Box */
+.c-author {
+  display: flex;
+  align-items: flex-start;
+  --novablocks-block-top-spacing: 2;
+  --novablocks-block-bottom-spacing: 2; }
+  @media not screen and (min-width: 768px) {
+    .c-author.has-description {
+      flex-wrap: wrap; }
+      .c-author.has-description .c-author__avatar + .c-author__details {
+        padding-left: 0; } }
+  .c-author:not(.has-description) {
+    align-items: center; }
+
+.c-author__description {
+  margin-top: 0.95em;
+  margin-bottom: 0.95em; }
+
+.c-author__name {
+  display: block; }
+
+.c-author__avatar {
+  flex-shrink: 0;
+  max-width: 22%; }
+  @media only screen and (min-width: 768px) {
+    .c-author__avatar {
+      margin-bottom: 0; } }
+  @media not screen and (min-width: 768px) {
+    .c-author__avatar {
+      flex-basis: 100%; } }
+  .c-author__avatar img {
+    display: block; }
+  .c-author__avatar + .c-author__details {
+    padding-left: var(--novablocks-spacing); }
+
+.c-author__label {
+  display: block; }
+
+.c-author__links > :not(:last-child):after,
+.c-author__link-website:not(:last-child):after {
+  padding-left: .75em;
+  padding-right: .6em; }
+
+.c-author__links {
+  margin-top: 0;
+  margin-right: 0; }
+  .c-author__links a {
+    text-transform: uppercase;
+    text-decoration: none;
+    --current-font-weight: bold; }
+  .c-author__links a:hover {
+    text-decoration: none; }
+  .c-author__links * + * {
+    margin-left: 0.75em; }
 
 /* 3. Blocks */
 /*
