@@ -30,6 +30,7 @@ Table of Contents
 2.6.  Search Form
 2.7.  Logo
 2.8.  Header Dropcap
+2.9.  Reading Bar
 3.    Blocks
 4.    Pages
 5.    Theming
@@ -2496,6 +2497,29 @@ span.page-numbers {
   @media not screen and (min-width: 1024px) {
     .header-dropcap {
       margin-top: var(--theme-spacing-fluid-large) !important; } }
+
+/* 2.8. Reading Bar */
+.c-reading-bar__wrapper-title {
+  --font-size: var(--theme-navigation-font-size);
+  --current-font-size: var(--final-font-size);
+  --current-font-family: var(--theme-navigation-font-family);
+  --current-font-weight: var(--theme-navigation-font-weight);
+  --current-font-style: var(--theme-navigation-font-style);
+  --current-line-height: var(--theme-navigation-line-height);
+  --current-letter-spacing: var(--theme-navigation-letter-spacing);
+  --current-text-transform: var(--theme-navigation-text-transform); }
+
+.post-title__label {
+  --font-size: var(--theme-navigation-font-size);
+  --current-font-size: var(--final-font-size);
+  --current-font-family: var(--theme-navigation-font-family);
+  --current-font-weight: var(--theme-navigation-font-weight);
+  --current-font-style: var(--theme-navigation-font-style);
+  --current-line-height: var(--theme-navigation-line-height);
+  --current-letter-spacing: var(--theme-navigation-letter-spacing);
+  --current-text-transform: var(--theme-navigation-text-transform);
+  --current-font-style: italic;
+  --current-font-weight: 400; }
 
 /* 3. Blocks */
 /*
