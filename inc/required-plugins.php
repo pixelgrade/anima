@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-require_once trailingslashit( get_template_directory() ) . 'inc/required-plugins/class-tgm-plugin-activation.php';
+require_once trailingslashit( get_template_directory() ) . 'inc/required-plugins/class-pxg-plugin-activation.php';
 
 function rosa2_register_required_plugins() {
 
