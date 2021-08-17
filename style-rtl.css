@@ -834,6 +834,13 @@ q,
 dfn {
   font-style: italic; }
 
+em {
+  --current-font-style: italic; }
+
+strong,
+b {
+  --current-font-weight: bold; }
+
 /* Iframes */
 iframe {
   width: 100%;
@@ -972,7 +979,9 @@ table {
   --current-font-style: var(--theme-lead-font-style);
   --current-line-height: var(--theme-lead-line-height);
   --current-letter-spacing: var(--theme-lead-letter-spacing);
-  --current-text-transform: var(--theme-lead-text-transform); }
+  --current-text-transform: var(--theme-lead-text-transform);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height); }
 
 .is-style-meta {
   --font-size: var(--theme-meta-font-size);

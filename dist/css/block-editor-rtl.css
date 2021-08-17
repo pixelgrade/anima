@@ -774,6 +774,11 @@
     .editor-styles-wrapper[class] q,
     .editor-styles-wrapper[class] dfn {
       font-style: italic; }
+    .editor-styles-wrapper[class] em {
+      --current-font-style: italic; }
+    .editor-styles-wrapper[class] strong,
+    .editor-styles-wrapper[class] b {
+      --current-font-weight: bold; }
     .editor-styles-wrapper[class] iframe {
       width: 100%;
       max-width: 100%;
@@ -824,7 +829,9 @@
       --current-font-style: var(--theme-lead-font-style);
       --current-line-height: var(--theme-lead-line-height);
       --current-letter-spacing: var(--theme-lead-letter-spacing);
-      --current-text-transform: var(--theme-lead-text-transform); }
+      --current-text-transform: var(--theme-lead-text-transform);
+      font-size: var(--current-font-size);
+      line-height: var(--current-line-height); }
     .editor-styles-wrapper[class] .is-style-meta {
       --font-size: var(--theme-meta-font-size);
       --current-font-size: var(--final-font-size);
