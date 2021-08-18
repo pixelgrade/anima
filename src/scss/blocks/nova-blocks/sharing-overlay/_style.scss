@@ -3,6 +3,7 @@
     @include apply-font(body);
     
     --novablocks-spacing: var(--theme-spacing-fluid-large);
+    --novablocks-sharing-overlay-spacing: 1em;
     
     &[class] {
         z-index: 1200;
@@ -56,5 +57,7 @@
     
     @include specific(2) {
         --theme-input-box-shadow: none;
+        background: var(--sm-current-fg1-color);
+        color: var(--sm-current-bg-color);
     }
 }

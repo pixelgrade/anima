@@ -1119,7 +1119,8 @@ ol.nb-list {
   --current-font-weight: var(--theme-body-font-weight);
   --current-font-style: var(--theme-body-font-style);
   --current-letter-spacing: var(--theme-body-letter-spacing);
-  --novablocks-spacing: var(--theme-spacing-fluid-large); }
+  --novablocks-spacing: var(--theme-spacing-fluid-large);
+  --novablocks-sharing-overlay-spacing: 1em; }
   .novablocks-sharing__overlay[class] {
     z-index: 1200; }
   .novablocks-sharing__overlay .novablocks-sharing__wrap[class][class][class] {
@@ -1146,7 +1147,9 @@ ol.nb-list {
   border-radius: 0.25em; }
 
 .novablocks-sharing__copy-input[class][class] {
-  --theme-input-box-shadow: none; }
+  --theme-input-box-shadow: none;
+  background: var(--sm-current-fg1-color);
+  color: var(--sm-current-bg-color); }
 
 html:root {
   --novablocks-wide-width: var(--theme-content-width-wide);

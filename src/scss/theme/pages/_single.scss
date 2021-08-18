@@ -189,9 +189,12 @@
         }
     }
 
-    .cat-links,
     .entry-excerpt {
         @include apply-font(lead);
+    }
+    
+    .cat-links {
+        @include apply-font(meta);
     }
     
     + * {
