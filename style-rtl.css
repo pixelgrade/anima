@@ -1161,11 +1161,11 @@ table {
   --theme-input-hover-box-shadow: var(--theme-search-input-focus); }
   @media only screen and (min-width: 1024px) {
     .c-search-overlay {
-      transform: translateY(-100vh);
+      transform: translateY(-100%);
       transition: transform 0.45s cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.1s; } }
   @media not screen and (min-width: 1024px) {
     .c-search-overlay {
-      transform: translateX(100vw);
+      transform: translateX(100%);
       transition: transform .3s ease-out;
       --theme-button-padding: .25em 1em; } }
   .c-search-overlay input[type="submit"],
