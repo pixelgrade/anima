@@ -460,14 +460,16 @@
   .u-mq-above-ultra {
     display: none; } }
 
-.has-no-spacing-top .novablocks-hero:first-child:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.2) var(--theme-promobar-height, 0), rgba(0, 0, 0, 0.03) calc(2 * var(--theme-header-height)), rgba(0, 0, 0, 0) 100%); }
+.has-no-spacing-top {
+  --fake-header-height: calc( 2 * var(--novablocks-spacing) + Max(var(--theme-header-logo-height), calc(var(--theme-navigation-font-size) * var(--theme-navigation-line-height) * 1px))); }
+  .has-no-spacing-top .novablocks-hero:first-child:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2) var(--theme-promobar-height, 0px), rgba(0, 0, 0, 0.03) calc(2 * var(--fake-header-height, 0px)), rgba(0, 0, 0, 0) 100%); }
 
 .has-novablocks-header-transparent .entry-content > :first-child {
   --novablocks-block-top-spacing: 0 !important; }
