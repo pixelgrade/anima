@@ -53,6 +53,10 @@
     }
 }
 
+.novablocks-sharing__group-title {
+    @include apply-font(body);
+}
+
 .novablocks-sharing__copy-input {
     
     @include specific(2) {
@@ -60,4 +64,8 @@
         background: var(--sm-current-fg1-color);
         color: var(--sm-current-bg-color);
     }
+}
+
+.novablocks-sharing__link-label {
+    @include apply-font(button);
 }
