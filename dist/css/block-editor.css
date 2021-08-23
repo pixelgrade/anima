@@ -953,3 +953,7 @@
 .wp-block-widget-area button,
 .wp-block-widget-area select {
   --font-size-modifier: 1; }
+
+.wp-block[data-align="full"] > div:not([class])[style*='spacing'][style*='emphasis'] > .wp-block-group > [class*="__inner-container"] {
+  padding-left: var(--theme-wrapper-sides-spacing);
+  padding-right: var(--theme-wrapper-sides-spacing); }
