@@ -1,21 +1,44 @@
+.has-smallest-font-size,
+.has-smaller-font-size,
+.has-normal-font-size,
+.has-larger-font-size,
+.has-largest-font-size {
+    font-size: var(--current-font-size);
+}
+
+.has-smallest-font-size {
+    --font-size-modifier: 0.6;
+}
+
 .has-smaller-font-size {
-    --font-size: inherit;
     --font-size-modifier: 0.8;
-    font-size: var(--final-font-size);
+}
+
+.has-normal-font-size {
+    --font-size-modifier: 1;
 }
 
 .has-larger-font-size {
-    --font-size: inherit;
     --font-size-modifier: 1.25;
-    font-size: var(--final-font-size);
 }
 
-h1.has-larger-font-size {
+.has-largest-font-size {
+    --font-size-modifier: 1.5;
+}
+
+h1.has-largest-font-size {
+    @include apply-font(super-display);
+    --font-size-modifier: 1;
+}
+
+h1.has-larger-font-size,
+h2.has-largest-font-size {
     @include apply-font(display);
     --font-size-modifier: 1;
 }
 
-h2.has-larger-font-size {
+h2.has-larger-font-size,
+h3.has-largest-font-size {
     @include apply-font(heading-1);
     --font-size-modifier: 1;
 }
@@ -26,14 +49,34 @@ h3.has-larger-font-size {
     --font-size-modifier: 1;
 }
 
+h1.has-smallest-font-size,
 h2.has-smaller-font-size,
-h4.has-larger-font-size {
+h4.has-larger-font-size,
+h5.has-largest-font-size {
     @include apply-font(heading-3);
     --font-size-modifier: 1;
 }
 
+h2.has-smallest-font-size,
 h3.has-smaller-font-size,
-h5.has-larger-font-size {
+h5.has-larger-font-size,
+h6.has-largest-font-size {
     @include apply-font(heading-4);
+    --font-size-modifier: 1;
+}
+
+h3.has-smallest-font-size,
+h4.has-smaller-font-size,
+h6.has-larger-font-size {
+    @include apply-font(heading-5);
+    --font-size-modifier: 1;
+}
+
+h4.has-smallest-font-size,
+h5.has-smaller-font-size,
+h5.has-smallest-font-size,
+h6.has-smaller-font-size,
+h6.has-smallest-font-size {
+    @include apply-font(heading-6);
     --font-size-modifier: 1;
 }

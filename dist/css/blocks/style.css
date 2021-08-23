@@ -47,7 +47,7 @@
 
 .wp-block-image figcaption {
   --font-size: var(--theme-body-font-size);
-  font-size: var(--final-font-size);
+  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
@@ -109,7 +109,7 @@
   --icon-width: 0.333em;
   --icon-height: var(--icon-width);
   --connection-color: var(--sm-bg-color-3);
-  --bullet-width: calc(var(--final-font-size) * var(--current-line-height));
+  --bullet-width: calc(var(--current-font-size) * var(--current-line-height));
   --bullet-height: var(--bullet-width);
   --bullet-bg-color: var(--sm-current-bg-color);
   --bullet-color: var(--sm-current-fg1-color);
@@ -143,7 +143,7 @@ ul.nb-list {
     ul.nb-list li:before {
       content: '';
       position: absolute;
-      top: calc((var(--final-font-size) * var(--current-line-height) - var(--bullet-height)) * 0.5);
+      top: calc((var(--current-font-size) * var(--current-line-height) - var(--bullet-height)) * 0.5);
       left: calc(-1 * var(--list-spacing) + var(--bullet-border-width));
       z-index: 10;
       width: var(--bullet-width);
@@ -226,7 +226,7 @@ ol.nb-list {
   position: relative;
   counter-reset: li var(--nb-list-start-at, 0);
   --list-stype: decimal-leading-zero;
-  --bullet-width: calc(var(--final-font-size) * var(--current-line-height));
+  --bullet-width: calc(var(--current-font-size) * var(--current-line-height));
   --bullet-height: var(--bullet-width);
   --bullet-spacing: 0.4em; }
   ol.nb-list[reversed] {
@@ -290,7 +290,7 @@ ol.nb-list {
         left: 0; }
 
 .nb-list.list-checkmark-style ul {
-  --bullet-width: calc(var(--final-font-size) * var(--current-line-height));
+  --bullet-width: calc(var(--current-font-size) * var(--current-line-height));
   --bullet-addons: calc(var(--bullet-width) * -0.5); }
 
 .nb-list.list-checkmark-style.is-style-divider.sm-color-signal-0[class] li:before, .nb-list.list-checkmark-style.is-style-divider.sm-color-signal-1[class] li:before {
@@ -352,14 +352,14 @@ ol.nb-list {
   --theme-button-text-color: var(--sm-current-bg-color) !important;
   --theme-button-hover-border-color: var(--sm-current-accent-color) !important;
   --theme-button-hover-text-color: var(--sm-current-accent-color) !important;
-  font-size: var(--final-font-size) !important;
+  font-size: var(--current-font-size) !important;
   padding: var(--theme-button-padding) !important;
   border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color) !important;
   margin-left: 0 !important;
   height: 100%; }
 
 .wp-block-jetpack-subscriptions input[type="email"] {
-  font-size: var(--final-font-size) !important;
+  font-size: var(--current-font-size) !important;
   padding: var(--theme-input-padding) !important;
   border: 0 !important;
   height: 100%; }
@@ -370,7 +370,7 @@ ol.nb-list {
 .wp-block-jetpack-subscriptions:not(.wp-block-jetpack-subscriptions__use-newline) button[type="submit"] {
   position: relative;
   font-size: 0 !important;
-  min-width: calc( 1.25 * var(--final-font-size) + 1.5 * var(--final-font-size)); }
+  min-width: calc( 1.25 * var(--current-font-size) + 1.5 * var(--current-font-size)); }
   .wp-block-jetpack-subscriptions:not(.wp-block-jetpack-subscriptions__use-newline) button[type="submit"]:hover:after {
     background-color: var(--theme-button-hover-text-color); }
   .wp-block-jetpack-subscriptions:not(.wp-block-jetpack-subscriptions__use-newline) button[type="submit"]:after {
@@ -380,8 +380,8 @@ ol.nb-list {
     top: 50%;
     transform: translate(-50%, -50%);
     display: block;
-    width: calc(1.25 * var(--final-font-size));
-    height: calc(1 * var(--final-font-size));
+    width: calc(1.25 * var(--current-font-size));
+    height: calc(1 * var(--current-font-size));
     border: 0;
     padding: 0;
     mask: url("../../../assets/images/icon-mail.svg") no-repeat 50% 50%;
@@ -423,13 +423,14 @@ ol.nb-list {
   .nova-food-menu-item__title .item-title {
     color: inherit;
     --font-size: var(--theme-heading-4-font-size);
-    font-size: var(--final-font-size);
+    --current-font-size: var(--final-font-size);
     --current-font-family: var(--theme-heading-4-font-family);
     --current-font-weight: var(--theme-heading-4-font-weight);
     --current-font-style: var(--theme-heading-4-font-style);
     --current-line-height: var(--theme-heading-4-line-height);
     --current-letter-spacing: var(--theme-heading-4-letter-spacing);
     --current-text-transform: var(--theme-heading-4-text-transform);
+    --current-color: var(--theme-heading-4-color);
     padding-right: var(--theme-spacing-tiny); }
   .nova-food-menu-item__title:before {
     bottom: 0.5em; }
@@ -440,20 +441,21 @@ ol.nb-list {
 
 .nova-food-menu__header .section-title {
   --font-size: var(--theme-heading-2-font-size);
-  font-size: var(--final-font-size);
+  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-heading-2-font-family);
   --current-font-style: var(--theme-heading-2-font-style);
   --current-font-weight: var(--theme-heading-2-font-weight);
   --current-line-height: var(--theme-heading-2-line-height);
   --current-letter-spacing: var(--theme-heading-2-letter-spacing);
-  --current-text-transform: var(--theme-heading-2-text-transform); }
+  --current-text-transform: var(--theme-heading-2-text-transform);
+  --current-color: var(--theme-heading-2-color); }
 
 .nova-food-menu-item__title {
   font-size: var(--theme-heading-4-font-size); }
   .nova-food-menu-item__title:before {
     border-width: .15em; }
 
-.item-title {
+.nova-food-menu-item .item-title {
   background-color: var(--sm-current-bg-color); }
 
 .wp-block-novablocks-menu-food-item.is-style-rounded {
@@ -579,7 +581,8 @@ ol.nb-list {
     margin-top: 0 !important; } }
 
 .novablocks-header:not(.novablocks-header--ready) {
-  opacity: 0; }
+  opacity: 0;
+  --header-background-opacity: 0; }
 
 @media only screen and (min-width: 1024px) {
   .novablocks-header.novablocks-header--transparent:not(.novablocks-header--sticky) {
@@ -598,8 +601,9 @@ ol.nb-list {
 .novablocks-header--sticky.novablocks-header--main {
   position: fixed !important;
   top: 0 !important; }
-  .novablocks-header--sticky.novablocks-header--main:before {
-    --header-background-opacity: 0; }
+  @media only screen and (min-width: 1024px) {
+    .novablocks-header--sticky.novablocks-header--main:before {
+      --header-background-opacity: 0; } }
 
 .novablocks-header__buttons-menu {
   position: absolute;
@@ -616,11 +620,11 @@ ol.nb-list {
   background-color: var(--sm-current-accent-color);
   background-image: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1));
   color: var(--sm-current-bg-color);
+  border-radius: 1em;
+  padding: .25em .9em;
   font-size: 0.5em;
   text-transform: uppercase;
   font-weight: bold;
-  border-radius: 1em;
-  padding: .25em .9em;
   vertical-align: middle;
   margin-left: 0.5em; }
 
@@ -630,11 +634,6 @@ ol.nb-list {
     --sm-current-accent-color: inherit;
     --sm-current-fg1-color: inherit;
     --sm-current-fg2-color: inherit; } }
-
-@media not screen and (min-width: 768px) {
-  .novablocks-hero .novablocks-u-content-padding {
-    padding-top: var(--theme-spacing-xxl);
-    padding-bottom: var(--theme-spacing-xxl); } }
 
 .novablocks-hero [class*="novablocks-u-content"] {
   z-index: 10; }
@@ -656,6 +655,10 @@ ol.nb-list {
 .novablocks-hero__inner-container > .wp-block-separator:not(:first-child),
 .novablocks-hero__inner-container > .wp-block-separator[class] + * {
   --novablocks-element-spacing-multiplier: 1; }
+
+.novablocks-hero__indicator--middle[class] {
+  background-color: transparent;
+  color: inherit; }
 
 .novablocks-hero__indicator--middle svg {
   opacity: 0; }
@@ -694,7 +697,7 @@ ol.nb-list {
 .novablocks-media__content {
   max-width: 100%;
   --font-size: var(--theme-body-font-size);
-  font-size: var(--final-font-size);
+  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
@@ -742,20 +745,18 @@ ol.nb-list {
   .novablocks-media__image svg {
     object-fit: contain; }
 
-.novablocks-media--blog[class] {
-  --novablocks-block-background-color: var(--sm-current-bg-color); }
-  @media not screen and (min-width: 768px) {
-    .novablocks-media--blog[class] {
-      margin-top: var(--theme-spacing-fluid-medium); } }
-  .novablocks-media--blog[class] .novablocks-media__content {
-    flex-basis: calc(50% - var(--novablocks-media-spacing)); }
-  .novablocks-media--blog[class] .novablocks-media__aside {
-    flex-basis: calc(50% + var(--novablocks-media-spacing) - 0.5px); }
-  .novablocks-media--blog[class] .novablocks-media__layout {
-    align-items: stretch; }
-  .novablocks-media--blog[class] .novablocks-media__image {
-    height: 100%;
-    min-height: 400px; }
+.novablocks-media--blog[class] .novablocks-media__content {
+  flex-basis: calc(50% - var(--novablocks-media-spacing)); }
+
+.novablocks-media--blog[class] .novablocks-media__aside {
+  flex-basis: calc(50% + var(--novablocks-media-spacing) - 0.5px); }
+
+.novablocks-media--blog[class] .novablocks-media__layout {
+  align-items: stretch; }
+
+.novablocks-media--blog[class] .novablocks-media__image {
+  height: 100%;
+  min-height: 400px; }
 
 .novablocks-navigation {
   --theme-button-y-padding: .25em;
@@ -792,12 +793,12 @@ ol.nb-list {
       .novablocks-navigation > .menu > ul > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only).menu-item-has-children > a:before {
         width: calc(100% - 1.25em);
         right: 1.25em; }
-    .novablocks-navigation > ul.menu > li[class*="current"]:not(.menu-item-home) > a:before,
-    .novablocks-navigation > .menu > ul > li[class*="current"]:not(.menu-item-home) > a:before {
+    .novablocks-navigation > ul.menu > li[class*="current"]:not(.menu-item-home)[class][class] > a:before,
+    .novablocks-navigation > .menu > ul > li[class*="current"]:not(.menu-item-home)[class][class] > a:before {
       transform: scale3d(1, 1, 1);
       transform-origin: left; }
-    .novablocks-navigation > ul.menu > li[class*="current"]:not(.menu-item-home) > a:hover:before,
-    .novablocks-navigation > .menu > ul > li[class*="current"]:not(.menu-item-home) > a:hover:before {
+    .novablocks-navigation > ul.menu > li[class*="current"]:not(.menu-item-home)[class][class] > a:hover:before,
+    .novablocks-navigation > .menu > ul > li[class*="current"]:not(.menu-item-home)[class][class] > a:hover:before {
       transform: scale3d(0, 1, 1);
       transform-origin: right; } }
 
@@ -830,7 +831,7 @@ ol.nb-list {
     background-color: var(--current-button-background-color);
     color: var(--current-button-text-color);
     --font-size: var(--theme-button-font-size);
-    font-size: var(--final-font-size);
+    --current-font-size: var(--final-font-size);
     --current-font-family: var(--theme-button-font-family);
     --current-font-weight: var(--theme-button-font-weight);
     --current-font-style: var(--theme-button-font-style);
@@ -882,9 +883,12 @@ ol.nb-list {
       --current-button-text-color: var(--theme-button-hover-text-color);
       --current-button-transition: var(--theme-button-hover-transition); }
 
+@media not screen and (min-width: 1024px) {
+  .novablocks-navigation {
+    --font-size: 18; } }
+
 @media only screen and (min-width: 1024px) {
   .novablocks-navigation {
-    --font-size: 18;
     --novablocks-navigation-item-bottom-margin: .5em; }
     .novablocks-navigation ul.menu a,
     .novablocks-navigation .menu > ul a {
@@ -910,55 +914,64 @@ ol.nb-list {
       padding-left: 1.25em;
       padding-right: 1.25em; } }
 
-.ot-dtp-picker[class] .ot-dtp-picker-form .ot-dtp-picker-button {
+.ot-dtp-picker-form .ot-dtp-picker-button[class][class][class][class][class] {
+  display: inline-block;
+  text-decoration: none;
+  --theme-button-text-color: var(--sm-current-bg-color);
+  --theme-button-background-color: var(--sm-button-background-color);
+  --theme-button-border-color: var(--sm-button-background-color);
+  --theme-button-hover-text-color: var(--sm-button-background-color);
+  --theme-button-hover-background-color: transparent;
+  --theme-button-hover-border-color: var(--sm-button-background-color);
+  --current-button-background-color: var(--theme-button-background-color);
+  --current-button-border-color: var(--theme-button-border-color);
+  --current-button-text-color: var(--theme-button-text-color);
+  --current-button-transition: var(--theme-button-transition);
   padding: var(--theme-button-padding);
   border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
   border-radius: var(--theme-button-border-radius);
+  background-color: var(--current-button-background-color);
+  color: var(--current-button-text-color);
+  transition: var(--current-button-transition);
+  --font-size: var(--theme-button-font-size);
+  --current-font-size: var(--final-font-size);
+  --current-font-family: var(--theme-button-font-family);
+  --current-font-weight: var(--theme-button-font-weight);
+  --current-font-style: var(--theme-button-font-style);
+  --current-line-height: var(--theme-button-line-height);
+  --current-letter-spacing: var(--theme-button-letter-spacing);
+  --current-text-transform: var(--theme-button-text-transform);
   background-color: transparent;
   transform: translateZ(0);
   will-change: transform;
   backface-visibility: hidden;
   overflow: hidden;
-  transition: var(--current-button-transition);
-  color: var(--current-button-text-color); }
-  .ot-dtp-picker[class] .ot-dtp-picker-form .ot-dtp-picker-button:before {
-    content: '';
-    position: absolute;
-    top: calc( -1 * var(--theme-button-border-width));
-    right: calc( -1 * var(--theme-button-border-width));
-    bottom: calc( -1 * var(--theme-button-border-width));
-    left: calc( -1 * var(--theme-button-border-width));
-    z-index: -1;
-    will-change: transform;
-    -webkit-backface-visibility: hidden;
-    transition: var(--current-button-transition);
-    transition-property: transform; }
-  .ot-dtp-picker[class] .ot-dtp-picker-form .ot-dtp-picker-button:before {
+  background-color: transparent;
+  background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
+  background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
+  background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-family: var(--current-font-family); }
+  .ot-dtp-picker-form .ot-dtp-picker-button[class][class][class][class][class]:not([disabled]) {
+    cursor: pointer; }
+    .ot-dtp-picker-form .ot-dtp-picker-button[class][class][class][class][class]:not([disabled]):hover {
+      --current-button-background-color: var(--theme-button-hover-background-color);
+      --current-button-border-color: var(--theme-button-hover-border-color);
+      --current-button-text-color: var(--theme-button-hover-text-color);
+      --current-button-transition: var(--theme-button-hover-transition); }
+  .ot-dtp-picker-form .ot-dtp-picker-button[class][class][class][class][class]:not([disabled]):hover {
+    background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
+  .ot-dtp-picker-form .ot-dtp-picker-button[class][class][class][class][class]:before {
     transform: scale3d(1, 1, 1);
     transform-origin: right;
     background-color: var(--theme-button-background-color); }
-  .ot-dtp-picker[class] .ot-dtp-picker-form .ot-dtp-picker-button:not([disabled]):hover:before {
+  .ot-dtp-picker-form .ot-dtp-picker-button[class][class][class][class][class]:not([disabled]):hover:before {
     transform: scale3d(0, 1, 1); }
-
-.ot-dtp-picker.wide .ot-dtp-picker-form .ot-dtp-picker-button {
-  --theme-button-hover-background-color: var(--sm-current-bg-color);
-  --theme-button-hover-border-color: var(--sm-current-bg-color);
-  --theme-button-hover-text-color: var(--sm-current-fg2-color);
-  --theme-button-background-color: var(--sm-current-fg2-color);
-  --theme-button-border-color: var(--sm-current-fg2-color);
-  --theme-button-text-color: var(--sm-current-bg-color); }
-
-.ot-dtp-picker.standard .ot-dtp-picker-form .ot-dtp-picker-button {
-  --theme-button-background-color: var(--sm-current-bg-color);
-  --theme-button-border-color: var(--sm-current-fg2-color);
-  --theme-button-text-color: var(--sm-current-fg2-color);
-  --theme-button-hover-background-color: var(--sm-current-fg2-color);
-  --theme-button-hover-border-color: var(--sm-current-fg2-color);
-  --theme-button-hover-text-color: var(--sm-current-bg-color); }
 
 .ot-dtp-picker input[type="submit"][class][class] {
   --font-size: var(--theme-button-font-size);
-  font-size: var(--final-font-size);
+  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
   --current-font-style: var(--theme-button-font-style);
@@ -999,7 +1012,7 @@ ol.nb-list {
 
 .ot-dtp-picker-form {
   --font-size: var(--theme-input-font-size);
-  font-size: var(--final-font-size);
+  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-input-font-family);
   --current-font-weight: var(--theme-input-font-weight);
   --current-font-style: var(--theme-input-font-style);
@@ -1067,7 +1080,7 @@ ol.nb-list {
 
 .novablocks-card {
   --font-size: var(--theme-body-font-size);
-  font-size: var(--final-font-size);
+  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
@@ -1097,7 +1110,7 @@ ol.nb-list {
   --current-light-secondary: var(--sm-dark-secondary);
   --current-light-tertiary: var(--sm-dark-tertiary);
   --font-size: var(--theme-body-font-size);
-  font-size: var(--final-font-size);
+  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
@@ -1156,7 +1169,7 @@ body:not(.has-sidebar) {
 ; }
 
 .wp-block-group__inner-container {
-  font-size: var(--final-font-size); }
+  font-size: var(--current-font-size); }
 
 body {
   --offset-addon: var(--sm-content-inset); }
@@ -1175,7 +1188,7 @@ body {
 
 .novablocks-sidebar * {
   --font-size-modifier: var(--sidebar-font-size-modifier);
-  font-size: var(--final-font-size); }
+  font-size: var(--current-font-size); }
 
 .novablocks-sidebar .widget > :not(:first-child) {
   margin-top: var(--theme-spacing-fluid-small); }
@@ -1196,9 +1209,6 @@ body {
 .novablocks-sidebar .has-background:not([class*="wp-block-button"]) {
   padding: var(--theme-spacing-fluid-xsmall); }
 
-.novablocks-sidebar [class*="__inner-container"] {
-  padding: 0; }
-
 .novablocks-sidebar label {
   flex-direction: column;
   align-items: flex-start; }
@@ -1214,7 +1224,6 @@ body {
 
 .novablocks-content > .alignleft *,
 .novablocks-content > .alignright *,
-.novablocks-content > [data-align] *,
 .novablocks-content > [class*='pull'] *,
 .novablocks-content > [data-novablocks-alignment] * {
   --font-size-modifier: 0.75; }

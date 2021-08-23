@@ -13,52 +13,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 
-$page_id = get_option( 'page_for_posts' ); ?>
+?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main">
 
-			<?php
-
-			$page_for_posts = get_option( 'page_for_posts' );
-
-			$categories = get_categories();
-			if ( ! empty( $categories ) ) {
-				$categories = array_filter( $categories, function ( $category ) {
-					return $category->term_id !== 1;
-				} );
-			}
-
-			$has_title      = ! empty( $page_for_posts );
-			$has_categories = ! empty( $categories ) && ! is_wp_error( $categories );
-
-			if ( have_posts() ) {
-				if ( $has_title || $has_categories ) { ?>
-					<header class="entry-header has-text-align-center entry-content">
-                        <?php
-
-                        if ( $has_title ) {
-                            echo '<h1 class="page-title">' . get_the_title( $page_id ) . '</h1>';
-                        }
-
-                        if ( $has_categories ) {
-                            echo '<ul class="entry-meta">';
-                            foreach ( $categories as $category ) {
-                                $category_url = get_category_link( $category->term_id );
-                                echo '<li><a href="' . esc_url( $category_url ) . '">' . esc_html( $category->name ) . '</a></li>';
-                            }
-                            echo '</ul>';
-                        }
-                        ?>
-					</header><!-- .page-header -->
-				<?php }
-
-                get_template_part( 'template-parts/loop' );
-                rosa2_the_posts_pagination();
-
-			} else {
-				get_template_part( 'template-parts/content', 'none' );
-			} ?>
+			<?php echo do_blocks(
+				'<!-- wp:novablocks/sidecar { "className":"alignwide", "sidebarWidth":"medium", "lastItemIsSticky":true} -->' .
+				'<!-- wp:novablocks/sidecar-area {"className":"novablocks-content entry-content"} -->' .
+				rosa2_get_home_content_markup() .
+				'<!-- /wp:novablocks/sidecar-area -->' .
+				'<!-- /wp:novablocks/sidecar -->'
+			); ?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->

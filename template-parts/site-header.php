@@ -11,38 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-get_template_part( 'template-parts/menu-toggle' );
-
-$site_header_is_sticky = pixelgrade_option( 'header_position', 'sticky' ) === 'sticky';
-$sticky_attribute = $site_header_is_sticky ? 'data-sticky=true' : '';
+$block ='<!-- wp:novablocks/header {"layout":"logo-center"} -->
+        <!-- wp:novablocks/navigation {"slug":"secondary","className":"novablocks-navigation novablocks-navigation\u002d\u002dsecondary"} /-->
+        <!-- wp:novablocks/logo /-->
+        <!-- wp:novablocks/navigation {"slug":"primary","className":"novablocks-navigation novablocks-navigation\u002d\u002dprimary"} /-->
+        <!-- /wp:novablocks/header -->'
 ?>
 
-<header id="masthead" class="novablocks-header novablocks-header--main novablocks-header--logo-center" <?php echo $sticky_attribute; ?>>
-    <div class="novablocks-header__wrapper">
-        <div class="novablocks-header__inner-container">
-            <div class="novablocks-header__content alignfull">
-                <div class="wp-block-novablocks-header-row novablocks-header__row novablocks-header__row--primary">
-                    <nav class="wp-block-novablocks-navigation novablocks-navigation novablocks-navigation--secondary">
-                        <?php wp_nav_menu( array(
-                            'container'      => false,
-                            'theme_location' => 'secondary',
-                            'menu_id'        => 'secondary-menu',
-                            'fallback_cb'    => false,
-                        ) ); ?>
-                    </nav><!-- #site-navigation -->
-
-                    <?php get_template_part( 'template-parts/site-branding' ); ?>
-
-                    <nav class="wp-block-novablocks-navigation novablocks-navigation novablocks-navigation--primary">
-                        <?php wp_nav_menu( array(
-                            'container'      => false,
-                            'theme_location' => 'primary',
-                            'menu_id'        => 'primary-menu',
-                            'fallback_cb'    => false,
-                        ) ); ?>
-                    </nav><!-- #site-navigation -->
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+<?php echo do_blocks($block); ?>

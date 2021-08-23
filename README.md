@@ -1,4 +1,4 @@
-# Rosa 2 Theme
+# Anima – Pixelgrade Universal Theme Name
 ###
 
 [View Demo](https://demos.pixelgrade.com/rosa2)
@@ -21,9 +21,17 @@ It's great if you're willing to use your skills, knowledge, and experience to he
 ### Contributors
 A manually curated list that include all the valuable people that have contributed to this project with code, user testing, feedback, or mockups. Thank you!
 
-[![](https://github.com/georgeolaru.png?size=64)](https://github.com/georgeolaru) [![](https://github.com/vladolaru.png?size=64)](https://github.com/vladolaru) [![](https://github.com/razwan.png?size=64)](https://github.com/razwan)
+[![](https://github.com/georgeolaru.png?size=64)](https://github.com/georgeolaru) [![](https://github.com/vladolaru.png?size=64)](https://github.com/vladolaru) [![](https://github.com/razwan.png?size=64)](https://github.com/razwan) [![](https://github.com/madalingorbanescu.png?size=64)](https://github.com/madalingorbanescu) [![](https://github.com/oanafilip.png?size=64)](https://github.com/oanafilip)  [![](https://github.com/alinclamba.png?size=64)](https://github.com/alinclamba)  [![](https://github.com/Alexandru-Teodorescu.png?size=64)](https://github.com/Alexandru-Teodorescu)  [![](https://github.com/andreiungurianu.png?size=64)](https://github.com/andreiungurianu)
+
+## Local Environment Setup Pointers
+
+You need to be careful since we **require** certain **node versions (v14) and PHP versions (v7.4).**
+
+For ease of development, it is best to use `nvm` (https://github.com/nvm-sh/nvm) for node version management and automatic node version switching on shell navigation. For the `zsh` shell the easiest way is to use [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) with the `nvm` [plugin](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/nvm) activated.
+
+We use the following oh-my-zsh plugins: `plugins=(composer git nvm npm)` configured in `~/.zshrc`. For automatic node version switching, place this line in `~/.zshrc` just below the plugins line: `NVM_AUTOLOAD=1`. Now whenever you enter a directory through the shell, if it finds a `.nvmrc` file, it will switch to the specified node version.
 
 ## License
-Rosa 2 theme source code is released under the [GNU GPL v2 license or later](https://www.gnu.org/licenses/gpl-2.0.html).
+Anima theme source code is released under the [GNU GPL v2 license or later](https://www.gnu.org/licenses/gpl-2.0.html).
 
 2019-2021 © Pixelgrade.

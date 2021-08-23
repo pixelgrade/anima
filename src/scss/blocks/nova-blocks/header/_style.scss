@@ -16,6 +16,7 @@
 
 .novablocks-header:not(.novablocks-header--ready) {
     opacity: 0;
+    --header-background-opacity: 0;
 }
 
 // hide all header and header-row backgrounds when header is transparent
@@ -52,8 +53,10 @@
     position: fixed !important;
     top: 0 !important;
 
-    &:before {
-        --header-background-opacity: 0;
+    @include above(lap) {
+        &:before {
+            --header-background-opacity: 0;
+        }
     }
 }
 
@@ -77,6 +80,10 @@
 
 .menu-item-label {
     @include badge;
+    font-size: 0.5em;
+    text-transform: uppercase;
+    font-weight: bold;
+    
     vertical-align: middle;
     margin-left: 0.5em;
 }

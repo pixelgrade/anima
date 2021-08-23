@@ -62,12 +62,14 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 				'html' => '<span class="sm-group__title">' . esc_html__( 'Headings', '__theme_txtd' ) . '</span>',
 			),
 
-			'heading_1_color' => sm_get_color_switch_darker_config( 'Heading 1', 'h1', false, 1 ),
-			'heading_2_color' => sm_get_color_switch_darker_config( 'Heading 2', 'h2', false, 1 ),
-			'heading_3_color' => sm_get_color_switch_darker_config( 'Heading 3', 'h3', false, 2 ),
-			'heading_4_color' => sm_get_color_switch_darker_config( 'Heading 4', 'h4', false, 2 ),
-			'heading_5_color' => sm_get_color_switch_darker_config( 'Heading 5', 'h5', false, 3 ),
-			'heading_6_color' => sm_get_color_switch_darker_config( 'Heading 6', 'h6', false, 3 ),
+			'super_display_color' => sm_get_color_switch_darker_config( 'Super Display', '*', false, 1, [ '--theme-super-display-color' ] ),
+			'display_color'       => sm_get_color_switch_darker_config( 'Display', '*', false, 1, [ '--theme-display-color' ] ),
+			'heading_1_color'     => sm_get_color_switch_darker_config( 'Heading 1', '*', false, 1, [ '--theme-heading-1-color' ] ),
+			'heading_2_color'     => sm_get_color_switch_darker_config( 'Heading 2', '*', false, 1, [ '--theme-heading-2-color' ] ),
+			'heading_3_color'     => sm_get_color_switch_darker_config( 'Heading 3', '*', false, 2, [ '--theme-heading-3-color' ] ),
+			'heading_4_color'     => sm_get_color_switch_darker_config( 'Heading 4', '*', false, 2, [ '--theme-heading-4-color' ] ),
+			'heading_5_color'     => sm_get_color_switch_darker_config( 'Heading 5', '*', false, 3, [ '--theme-heading-5-color' ] ),
+			'heading_6_color'     => sm_get_color_switch_darker_config( 'Heading 6', '*', false, 3, [ '--theme-heading-6-color' ] ),
 
 			'sm-group-separator-3' => array( 'type' => 'html', 'html' => '' ),
 

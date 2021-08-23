@@ -52,19 +52,22 @@
   backface-visibility: hidden;
   overflow: hidden;
 
-  &:before {
-    content: '';
-    position: absolute;
-    top: calc( -1 * var(--theme-button-border-width) );
-    right: calc( -1 * var(--theme-button-border-width) );
-    bottom: calc( -1 * var(--theme-button-border-width) );
-    left: calc( -1 * var(--theme-button-border-width) );
-    z-index: -1;
+  @if $pseudo == true {
 
-    will-change: transform;
-    -webkit-backface-visibility: hidden;
-    transition: var(--current-button-transition);
-    transition-property: transform;
+    &:before {
+      content: '';
+      position: absolute;
+      top: calc( -1 * var(--theme-button-border-width) );
+      right: calc( -1 * var(--theme-button-border-width) );
+      bottom: calc( -1 * var(--theme-button-border-width) );
+      left: calc( -1 * var(--theme-button-border-width) );
+      z-index: -1;
+
+      will-change: transform;
+      -webkit-backface-visibility: hidden;
+      transition: var(--current-button-transition);
+      transition-property: transform;
+    }
   }
 
   @if $pseudo == false {

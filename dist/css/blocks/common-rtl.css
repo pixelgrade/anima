@@ -47,7 +47,7 @@
   border: var(--theme-button-border-width) var(--theme-button-border-style) var(--current-button-border-color);
   border-radius: var(--theme-button-border-radius);
   --font-size: var(--theme-button-font-size);
-  font-size: var(--final-font-size);
+  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
   --current-font-style: var(--theme-button-font-style);
@@ -413,7 +413,7 @@
     height: 100%; }
   .wp-block-gallery figcaption:not(.blocks-gallery-caption) {
     --font-size: var(--theme-body-font-size);
-    font-size: var(--final-font-size);
+    --current-font-size: var(--final-font-size);
     --current-font-family: var(--theme-body-font-family);
     --current-line-height: var(--theme-body-line-height);
     --current-font-weight: var(--theme-body-font-weight);
@@ -429,7 +429,7 @@
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3) 70%, transparent); }
   .wp-block-gallery .blocks-gallery-caption {
     --font-size: var(--theme-body-font-size);
-    font-size: var(--final-font-size);
+    --current-font-size: var(--final-font-size);
     --current-font-family: var(--theme-body-font-family);
     --current-line-height: var(--theme-body-line-height);
     --current-font-weight: var(--theme-body-font-weight);
@@ -454,21 +454,13 @@
   .blocks-gallery-grid[class] {
     padding-right: 0; }
 
-.wp-block-group {
-  --wp-block-group-padding: var(--current-element-padding, var(--theme-spacing-fluid-large)); }
-  .wp-block-group, .wp-block-group[class*="is-style"]:not(.is-style-default) {
-    padding-top: var(--wp-block-group-padding);
-    padding-bottom: var(--wp-block-group-padding); }
-    .wp-block-group + .wp-block-group, .wp-block-group[class*="is-style"]:not(.is-style-default) + .wp-block-group, .wp-block-group + .wp-block-group[class*="is-style"]:not(.is-style-default), .wp-block-group[class*="is-style"]:not(.is-style-default) + .wp-block-group[class*="is-style"]:not(.is-style-default) {
-      --element-spacing: 0; }
+.wp-block-group[class*='sm-color-signal-0']:not([class*='alignfull']) > [class*="__inner-container"] {
+  padding-right: 0;
+  padding-left: 0; }
 
-.wp-block-group {
-  --wp-block-group-padding: var(--current-element-padding, var(--theme-spacing-fluid-large)); }
-  .wp-block-group, .wp-block-group[class*="is-style"]:not(.is-style-default) {
-    padding-top: var(--wp-block-group-padding);
-    padding-bottom: var(--wp-block-group-padding); }
-    .wp-block-group + .wp-block-group, .wp-block-group[class*="is-style"]:not(.is-style-default) + .wp-block-group, .wp-block-group + .wp-block-group[class*="is-style"]:not(.is-style-default), .wp-block-group[class*="is-style"]:not(.is-style-default) + .wp-block-group[class*="is-style"]:not(.is-style-default) {
-      --element-spacing: 0; }
+.wp-block-group[class*='sm-color-signal-0']:not([class*='alignfull']) > [class*="__inner-container"] {
+  padding-right: 0;
+  padding-left: 0; }
 
 /* Latest Posts Block */
 .wp-block-latest-posts[class] {
@@ -1034,7 +1026,7 @@
 
 .wp-block-novablocks-navigation {
   --font-size: var(--theme-navigation-font-size);
-  font-size: var(--final-font-size);
+  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-navigation-font-family);
   --current-font-weight: var(--theme-navigation-font-weight);
   --current-font-style: var(--theme-navigation-font-style);
@@ -1059,16 +1051,13 @@ html:root {
             0 16px 64px rgba(0, 0, 0, 0.1),
             0 8px 16px rgba(0, 0, 0, 0.1); }
 
-.novablocks-hero__inner-container,
-.novablocks-slideshow__inner-container {
-  --theme-wrapper-sides-spacing: 0; }
-
 .novablocks-u-content-width {
   --theme-content-width-normal: 100%; }
 
 .novablocks-advanced-gallery__grid-item[class] .credits[class] {
-  --font-size: 12;
-  font-size: var(--final-font-size);
+  --font-size: $size;
+  --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   opacity: 0.7; }
 
 .novablocks-advanced-gallery__grid-item-info a {
@@ -1084,13 +1073,14 @@ html:root {
 .wp-block-quote,
 .wp-block-pullquote {
   --font-size: var(--theme-heading-3-font-size);
-  font-size: var(--final-font-size);
+  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-heading-3-font-family);
   --current-font-style: var(--theme-heading-3-font-style);
   --current-font-weight: var(--theme-heading-3-font-weight);
   --current-line-height: var(--theme-heading-3-line-height);
   --current-letter-spacing: var(--theme-heading-3-letter-spacing);
-  --current-text-transform: var(--theme-heading-3-text-transform); }
+  --current-text-transform: var(--theme-heading-3-text-transform);
+  --current-color: var(--theme-heading-3-color); }
 
 .wp-block-pullquote:before {
   content: "";
@@ -1104,9 +1094,10 @@ html:root {
 .wp-block-quote__citation,
 .wp-block-pullquote cite,
 .wp-block-pullquote__citation {
+  display: block;
   margin-top: var(--theme-spacing);
   --font-size: var(--theme-body-font-size);
-  font-size: var(--final-font-size);
+  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);

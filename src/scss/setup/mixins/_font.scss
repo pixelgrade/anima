@@ -1,11 +1,9 @@
-
-
 @mixin apply-font( $name ) {
     $config: map-get( $theme-fonts, $name );
 
     @if ( map_get( $config, font-size ) ) {
         --font-size: var(--theme-#{$name}-font-size);
-        font-size: var(--final-font-size);
+        --current-font-size: var(--final-font-size);
     }
 
     @each $prop, $value in $config {
@@ -13,4 +11,10 @@
             --current-#{ $prop }: var(--theme-#{ $name }-#{ $prop });
         }
     }
+}
+
+@mixin apply-font-size( $size ) {
+    --font-size: $size;
+    --current-font-size: var(--final-font-size);
+    font-size: var(--current-font-size);
 }

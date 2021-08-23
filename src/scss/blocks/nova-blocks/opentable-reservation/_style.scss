@@ -1,29 +1,11 @@
 .ot-dtp-picker-form .ot-dtp-picker-button {
 
-    .ot-dtp-picker[class] & {
-      @include button-box;
-      @include button-fill;
-      @include button-transition;
-
-      color: var(--current-button-text-color);
-    }
-
-    .ot-dtp-picker.wide & {
-        --theme-button-hover-background-color: var(--sm-current-bg-color);
-        --theme-button-hover-border-color: var(--sm-current-bg-color);
-        --theme-button-hover-text-color: var(--sm-current-fg2-color);
-        --theme-button-background-color: var(--sm-current-fg2-color);
-        --theme-button-border-color: var(--sm-current-fg2-color);
-        --theme-button-text-color: var(--sm-current-bg-color);
-    }
-
-    .ot-dtp-picker.standard & {
-        --theme-button-background-color: var(--sm-current-bg-color);
-        --theme-button-border-color: var(--sm-current-fg2-color);
-        --theme-button-text-color: var(--sm-current-fg2-color);
-        --theme-button-hover-background-color: var(--sm-current-fg2-color);
-        --theme-button-hover-border-color: var(--sm-current-fg2-color);
-        --theme-button-hover-text-color: var(--sm-current-bg-color);
+    @include specific(5) {
+      @include button;
+      @include button-fill(false);
+      font-size: var(--current-font-size);
+      line-height: var(--current-line-height);
+      font-family: var(--current-font-family);
     }
 }
 

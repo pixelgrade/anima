@@ -1,0 +1,20 @@
+.site-logo {
+
+    img {
+        height: var(--theme-header-logo-height);
+
+        @include below(tablet) {
+            height: var(--theme-mobile-header-logo-height);
+        }
+    }
+}
+
+.site-title {
+    @include apply-font(heading-4);
+    --font-size: calc(var(--theme-header-logo-height-setting) * 1.8);
+    --current-line-height: 1;
+
+    @include below(tablet) {
+        --current-font-size: calc(var(--theme-mobile-header-logo-height) * 1.8);
+    }
+}

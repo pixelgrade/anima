@@ -1,13 +1,5 @@
 .novablocks-hero {
 
-    .novablocks-u-content-padding {
-
-        @include below(tablet) {
-            padding-top: var(--theme-spacing-xxl);
-            padding-bottom: var(--theme-spacing-xxl);
-        }
-    }
-
     [class*="novablocks-u-content"] {
         z-index: 10;
     }
@@ -45,8 +37,16 @@
     }
 }
 
-.novablocks-hero__indicator--middle svg {
-    opacity: 0;
+.novablocks-hero__indicator--middle {
+    
+    &[class] {
+        background-color: transparent;
+        color: inherit;
+    }
+    
+    svg {
+        opacity: 0;
+    }
 }
 
 .novablocks-hero__indicator:not(.novablocks-hero__indicator--middle) {

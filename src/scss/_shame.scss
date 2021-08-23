@@ -64,13 +64,6 @@ textarea {
     }
 }
 
-.site-title {
-    @include apply-font(heading-4);
-
-    --final-font-size: calc( var(--theme-header-logo-height) * 1.8 );
-    line-height: 1;
-}
-
 .sm-dark,
 html.is-dark .sm-light {
     --logo-default-opacity: 0;
@@ -80,6 +73,15 @@ html.is-dark .sm-light {
 .sm-light {
     --logo-default-opacity: 1;
     --logo-inverted-opacity: 0;
+}
+
+.sm-color-signal-0 {
+    background: none;
+
+    --sm-current-bg-color: inherit;
+    --sm-current-fg1-color: inherit;
+    --sm-current-fg2-color: inherit;
+    --sm-current-accent-color: inherit;
 }
 
 /* Additional media query styles for Color Signal */
@@ -158,7 +160,7 @@ html.is-dark .sm-light {
 
 /* End Fallback Styles for Color Signal */
 
-.wp-block-group__inner-container > * {
+.wp-block-group__inner-container > *:not([class*='alignfull']) {
     width: 100%;
 }
 
@@ -200,4 +202,9 @@ body {
     body.has-no-spacing-bottom & {
         padding-bottom: 0;
     }
+}
+
+/* Hero bullets size fix */
+.c-bully {
+    --current-font-size: 12px;
 }
