@@ -21,7 +21,7 @@ It's great if you're willing to use your skills, knowledge, and experience to he
 ### Contributors
 A manually curated list that include all the valuable people that have contributed to this project with code, user testing, feedback, or mockups. Thank you!
 
-[![](https://github.com/georgeolaru.png?size=64)](https://github.com/georgeolaru) [![](https://github.com/vladolaru.png?size=64)](https://github.com/vladolaru) [![](https://github.com/razwan.png?size=64)](https://github.com/razwan) [![](https://github.com/madalingorbanescu.png?size=64)](https://github.com/madalingorbanescu) [![](https://github.com/oanafilip.png?size=64)](https://github.com/oanafilip)  [![](https://github.com/alinclamba.png?size=64)](https://github.com/alinclamba)  [![](https://github.com/Alexandru-Teodorescu.png?size=64)](https://github.com/Alexandru-Teodorescu)  [![](https://github.com/andreiungurianu.png?size=64)](https://github.com/andreiungurianu)(https://github.com/alinclamba)
+[![](https://github.com/georgeolaru.png?size=64)](https://github.com/georgeolaru) [![](https://github.com/vladolaru.png?size=64)](https://github.com/vladolaru) [![](https://github.com/razwan.png?size=64)](https://github.com/razwan) [![](https://github.com/madalingorbanescu.png?size=64)](https://github.com/madalingorbanescu) [![](https://github.com/oanafilip.png?size=64)](https://github.com/oanafilip)  [![](https://github.com/alinclamba.png?size=64)](https://github.com/alinclamba)  [![](https://github.com/Alexandru-Teodorescu.png?size=64)](https://github.com/Alexandru-Teodorescu)  [![](https://github.com/andreiungurianu.png?size=64)](https://github.com/andreiungurianu)
 
 ## License
 Anima theme source code is released under the [GNU GPL v2 license or later](https://www.gnu.org/licenses/gpl-2.0.html).
