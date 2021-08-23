@@ -16,12 +16,12 @@ define( 'THEME_LIGHT_SECONDARY',  '#CCCCCC' );    // gray
 define( 'THEME_LIGHT_TERTIARY',   '#EEEFF2' );    // light gray
 
 // Add colors section and options to the Customify config
-add_filter( 'customify_filter_fields', 'rosa2_add_colors_section_to_customify_config', 50, 1 );
+add_filter( 'customify_filter_fields', 'anima_add_colors_section_to_customify_config', 50, 1 );
 
 // Prepend theme color palette to the default color palettes list
-add_filter( 'customify_get_color_palettes', 'rosa2_add_default_color_palettes' );
+add_filter( 'customify_get_color_palettes', 'anima_add_default_color_palettes' );
 
-function rosa2_add_colors_section_to_customify_config( $config ) {
+function anima_add_colors_section_to_customify_config( $config ) {
 
 	if ( empty( $config['sections'] ) ) {
 		$config['sections'] = array();
@@ -221,7 +221,7 @@ function rosa2_add_colors_section_to_customify_config( $config ) {
 	return $config;
 }
 
-function rosa2_add_default_color_palettes( $color_palettes ) {
+function anima_add_default_color_palettes( $color_palettes ) {
 
 	$color_palettes = array_merge( array(
 		'default' => array(

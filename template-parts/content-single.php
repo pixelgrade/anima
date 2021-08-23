@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Rosa2
+ * @package Anima
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,13 +13,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $article_markup =   '<!-- wp:novablocks/sidecar { "className":"alignwide", "sidebarWidth":"medium", "lastItemIsSticky":true} -->' .
                     '<!-- wp:novablocks/sidecar-area {"className":"novablocks-content entry-content"} -->' .
-                    rosa2_article_header() .
-                    rosa2_get_content_markup() .
-                    rosa2_get_post_navigation_markup() .
+                    anima_article_header() .
+                    anima_get_content_markup() .
+                    anima_get_post_navigation_markup() .
                     '<!-- wp:novablocks/post-comments --><!-- /wp:novablocks/post-comments -->' .
                     '<!-- /wp:novablocks/sidecar-area -->' .
                     '<!-- wp:novablocks/sidecar-area {"className":"novablocks-sidebar"} -->' .
-                    rosa2_get_sidebar_markup() .
+                    anima_get_sidebar_markup() .
                     '<!-- /wp:novablocks/sidecar-area -->' .
                     '<!-- /wp:novablocks/sidecar -->';
 

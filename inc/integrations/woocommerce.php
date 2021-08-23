@@ -4,6 +4,8 @@
  *
  * Everything here gets run at the `after_setup_theme` hook, priority 10.
  * So only use hooks that come after that. The rest will not run.
+ *
+ * @package Anima
  */
 
 // If this file is called directly, abort.
@@ -11,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-function rosa2_woocommerce_setup() {
+function anima_woocommerce_setup() {
 
 	if ( function_exists( 'WC' ) && pixelgrade_user_has_access( 'woocommerce' ) ) {
 
@@ -21,30 +23,30 @@ function rosa2_woocommerce_setup() {
 		add_theme_support( 'wc-product-gallery-slider' );
 
 		// Load the integration logic.
-		add_action( 'wp_enqueue_scripts', 'rosa2_woocommerce_scripts', 10 );
-		add_action( 'enqueue_block_editor_assets', 'rosa2_enqueue_woocommerce_block_editor_assets', 10 );
+		add_action( 'wp_enqueue_scripts', 'anima_woocommerce_scripts', 10 );
+		add_action( 'enqueue_block_editor_assets', 'anima_enqueue_woocommerce_block_editor_assets', 10 );
 
         // We do this late so we can give all others room to play.
-		add_action( 'wp_loaded', 'rosa2_woocommerce_setup_hooks' );
+		add_action( 'wp_loaded', 'anima_woocommerce_setup_hooks' );
 
-        // Add Cart Menu Item to Rosa2 extras box
-		add_filter( 'rosa2_menu_items_boxes_config', 'rosa2_add_cart_to_extras_menu_items', 10, 1 );
+        // Add Cart Menu Item to Anima extras box
+		add_filter( 'anima_menu_items_boxes_config', 'anima_add_cart_to_extras_menu_items', 10, 1 );
 
-		add_action( 'wp_enqueue_scripts', 'rosa2_product_catalog_image_aspect_ratio' );
+		add_action( 'wp_enqueue_scripts', 'anima_product_catalog_image_aspect_ratio' );
 
 	}
 }
-add_action( 'after_setup_theme', 'rosa2_woocommerce_setup', 10 );
+add_action( 'after_setup_theme', 'anima_woocommerce_setup', 10 );
 
-function rosa2_woocommerce_scripts() {
+function anima_woocommerce_scripts() {
 	$theme  = wp_get_theme( get_template() );
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-	wp_enqueue_style( 'rosa2-woocommerce', get_template_directory_uri() . '/dist/css/woocommerce/style.css', array( 'rosa2-style' ), $theme->get( 'Version' ) );
-	wp_style_add_data( 'rosa2-woocommerce', 'rtl', 'replace' );
+	wp_enqueue_style( 'anima-woocommerce', get_template_directory_uri() . '/dist/css/woocommerce/style.css', array( 'anima-style' ), $theme->get( 'Version' ) );
+	wp_style_add_data( 'anima-woocommerce', 'rtl', 'replace' );
 
-	wp_enqueue_script( 'rosa2-woocommerce', get_template_directory_uri() . '/dist/js/woocommerce' . $suffix . '.js', array( 'jquery' ), $theme->get( 'Version' ), true );
-	wp_localize_script( 'rosa2-woocommerce', 'pixelgradeWooCommerceStrings', array(
+	wp_enqueue_script( 'anima-woocommerce', get_template_directory_uri() . '/dist/js/woocommerce' . $suffix . '.js', array( 'jquery' ), $theme->get( 'Version' ), true );
+	wp_localize_script( 'anima-woocommerce', 'pixelgradeWooCommerceStrings', array(
 		'adding_to_cart' => esc_html__( 'Adding...', '__theme_txtd' ),
 		'added_to_cart' => esc_html__( 'Added!', '__theme_txtd' ),
 	) );
@@ -57,13 +59,13 @@ function rosa2_woocommerce_scripts() {
 	}
 }
 
-function rosa2_enqueue_woocommerce_block_editor_assets() {
+function anima_enqueue_woocommerce_block_editor_assets() {
 	$theme  = wp_get_theme( get_template() );
 
-	wp_enqueue_style( 'rosa2-woocommerce-block-styles', get_template_directory_uri() . '/dist/css/woocommerce/block-editor.css', array(), $theme->get( 'Version' ) );
+	wp_enqueue_style( 'anima-woocommerce-block-styles', get_template_directory_uri() . '/dist/css/woocommerce/block-editor.css', array(), $theme->get( 'Version' ) );
 }
 
-function rosa2_woocommerce_setup_hooks() {
+function anima_woocommerce_setup_hooks() {
 
     // Remove Sidebar
 	remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
@@ -76,37 +78,37 @@ function rosa2_woocommerce_setup_hooks() {
     // 3. Add hidden coupon form outside checkout form
 	remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 ); /* 1 */
 	add_action( 'woocommerce_checkout_billing', 'woocommerce_checkout_coupon_form', 10 ); /* 2 */
-	add_action( 'woocommerce_before_checkout_form', 'rosa2_woocommerce_coupon_form', 10 ); /* 3 */
+	add_action( 'woocommerce_before_checkout_form', 'anima_woocommerce_coupon_form', 10 ); /* 3 */
 
     // Add wrapper for summary on single product
-	add_action( 'woocommerce_before_single_product_summary', 'rosa2_add_start_wrapper_before_single_product_summary', 1 );
-	add_action( 'woocommerce_after_single_product_summary', 'rosa2_add_end_wrapper_after_single_product_summary', 1 );
+	add_action( 'woocommerce_before_single_product_summary', 'anima_add_start_wrapper_before_single_product_summary', 1 );
+	add_action( 'woocommerce_after_single_product_summary', 'anima_add_end_wrapper_after_single_product_summary', 1 );
 
 	// Add wrapper for tabs on single product
-	add_action( 'woocommerce_after_single_product_summary', 'rosa2_add_start_wrapper_before_tabs', 9 );
-	add_action( 'woocommerce_after_single_product_summary', 'rosa2_add_end_wrapper_after_tabs', 11 );
+	add_action( 'woocommerce_after_single_product_summary', 'anima_add_start_wrapper_before_tabs', 9 );
+	add_action( 'woocommerce_after_single_product_summary', 'anima_add_end_wrapper_after_tabs', 11 );
 
 	// Add wrapper for upsells
-	add_action( 'woocommerce_after_single_product_summary', 'rosa2_add_start_wrapper_before_upsells', 14 );
-	add_action( 'woocommerce_after_single_product_summary', 'rosa2_add_end_wrapper_after_upsells', 16 );
+	add_action( 'woocommerce_after_single_product_summary', 'anima_add_start_wrapper_before_upsells', 14 );
+	add_action( 'woocommerce_after_single_product_summary', 'anima_add_end_wrapper_after_upsells', 16 );
 
     // Add wrapper for related products
-	add_action( 'woocommerce_after_single_product_summary', 'rosa2_add_start_wrapper_before_related', 19 );
-	add_action( 'woocommerce_after_single_product_summary', 'rosa2_add_end_wrapper_after_related', 21 );
+	add_action( 'woocommerce_after_single_product_summary', 'anima_add_start_wrapper_before_related', 19 );
+	add_action( 'woocommerce_after_single_product_summary', 'anima_add_end_wrapper_after_related', 21 );
 
     // Change class for the product link to match editor block markup
 	remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10 );
 	remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
-	add_action( 'woocommerce_before_shop_loop_item', 'rosa2_loop_product_link_open', 10 );
-	add_action( 'woocommerce_after_shop_loop_item', 'rosa2_loop_product_link_close', 5 );
+	add_action( 'woocommerce_before_shop_loop_item', 'anima_loop_product_link_open', 10 );
+	add_action( 'woocommerce_after_shop_loop_item', 'anima_loop_product_link_close', 5 );
 
 	// Add wrapper for product thumbnail in loops to match editor block markup
-	add_action( 'woocommerce_before_shop_loop_item_title', 'rosa2_loop_product_thumbnail_wrapper_open', 9 );
-	add_action( 'woocommerce_before_shop_loop_item_title', 'rosa2_loop_product_thumbnail_wrapper_close', 11 );
+	add_action( 'woocommerce_before_shop_loop_item_title', 'anima_loop_product_thumbnail_wrapper_open', 9 );
+	add_action( 'woocommerce_before_shop_loop_item_title', 'anima_loop_product_thumbnail_wrapper_close', 11 );
 
     // Change loop product title
 	remove_action('woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10);
-	add_action('woocommerce_shop_loop_item_title', 'rosa2_new_product_title_markup', 10);
+	add_action('woocommerce_shop_loop_item_title', 'anima_new_product_title_markup', 10);
 
 	// Move sale flash outside the product link to match editor block markup
 	remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10 );
@@ -114,20 +116,20 @@ function rosa2_woocommerce_setup_hooks() {
 
 	// Add wrapper for product price in loops and move it after sale flash
 	remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
-	add_action( 'woocommerce_after_shop_loop_item', 'rosa2_price_wrapper_start', 5 );
+	add_action( 'woocommerce_after_shop_loop_item', 'anima_price_wrapper_start', 5 );
 	add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_price', 5 );
-	add_action( 'woocommerce_after_shop_loop_item', 'rosa2_price_wrapper_end', 5 );
+	add_action( 'woocommerce_after_shop_loop_item', 'anima_price_wrapper_end', 5 );
 
 	// Replace Add To Cart button inside loops with ajax add to cart
 	remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
-	add_action('woocommerce_after_shop_loop_item', 'rosa2_append_add_to_cart_button', 5);
+	add_action('woocommerce_after_shop_loop_item', 'anima_append_add_to_cart_button', 5);
 
     // Add wrapper for single product (container)
-	add_action( 'woocommerce_before_main_content', 'rosa2_add_start_main_content', 21 );
-	add_action( 'woocommerce_after_main_content', 'rosa2_add_end_main_content', 21 );
+	add_action( 'woocommerce_before_main_content', 'anima_add_start_main_content', 21 );
+	add_action( 'woocommerce_after_main_content', 'anima_add_end_main_content', 21 );
 
     // Add ajax button to products
-	add_action( 'woocommerce_after_add_to_cart_quantity', 'rosa2_output_ajax_add_to_cart_button' );
+	add_action( 'woocommerce_after_add_to_cart_quantity', 'anima_output_ajax_add_to_cart_button' );
 
     // Add breadcrumbs on single product, right before title
 	add_action( 'woocommerce_single_product_summary', 'woocommerce_breadcrumb', 1 );
@@ -136,58 +138,58 @@ function rosa2_woocommerce_setup_hooks() {
 	add_action( 'woocommerce_archive_description', 'woocommerce_display_categories', 1 );
 
     // Add Site title and Breadcrumbs to Checkout Page
-	add_action( 'woocommerce_checkout_billing', 'rosa2_output_checkout_site_identity', 1 );
-	add_action( 'woocommerce_checkout_billing', 'rosa2_output_checkout_breadcrumbs', 2 );
+	add_action( 'woocommerce_checkout_billing', 'anima_output_checkout_site_identity', 1 );
+	add_action( 'woocommerce_checkout_billing', 'anima_output_checkout_breadcrumbs', 2 );
 
-//	add_action( 'woocommerce_before_thankyou', 'rosa2_output_checkout_site_identity', 1 );
-//	add_action( 'woocommerce_before_thankyou', 'rosa2_output_checkout_breadcrumbs', 2 );
+//	add_action( 'woocommerce_before_thankyou', 'anima_output_checkout_site_identity', 1 );
+//	add_action( 'woocommerce_before_thankyou', 'anima_output_checkout_breadcrumbs', 2 );
 
     // Output fly-out cart markup
-	add_action( 'rosa_before_header', 'rosa2_output_mini_cart', 1 );
+	add_action( 'anima_before_header', 'anima_output_mini_cart', 1 );
 
     // Hide tabs content titles
 	add_filter( 'woocommerce_product_description_heading', '__return_false', 30 );
 	add_filter( 'woocommerce_product_additional_information_heading', '__return_false', 30 );
 
     // Limit related posts number
-	add_filter( 'woocommerce_output_related_products_args', 'rosa2_limit_related_posts_count', 20 );
+	add_filter( 'woocommerce_output_related_products_args', 'anima_limit_related_posts_count', 20 );
 
     // Limit upselling products number
-	add_filter( 'woocommerce_upsell_display_args', 'rosa2_limit_related_posts_count', 20 );
+	add_filter( 'woocommerce_upsell_display_args', 'anima_limit_related_posts_count', 20 );
 
     // Change args for WooCommerce pagination
-	add_filter( 'woocommerce_pagination_args', 'rosa2_woocommerce_pagination_args', 40, 1 );
+	add_filter( 'woocommerce_pagination_args', 'anima_woocommerce_pagination_args', 40, 1 );
 
-	add_filter( 'product_cat_class', 'rosa2_product_category_classes', 10, 1);
+	add_filter( 'product_cat_class', 'anima_product_category_classes', 10, 1);
 
     // Change loop start
-	add_filter( 'woocommerce_product_loop_start', 'rosa2_woocommerce_loop_start', 9, 1 );
+	add_filter( 'woocommerce_product_loop_start', 'anima_woocommerce_loop_start', 9, 1 );
 
     // Change loop end
-	add_filter( 'woocommerce_product_loop_end', 'rosa2_woocommerce_loop_end', 10, 1 );
+	add_filter( 'woocommerce_product_loop_end', 'anima_woocommerce_loop_end', 10, 1 );
 
     // Change sale flash
-	add_filter( 'woocommerce_sale_flash', 'rosa2_woocommerce_sale_flash', 10, 1 );
+	add_filter( 'woocommerce_sale_flash', 'anima_woocommerce_sale_flash', 10, 1 );
 
 	// Remove Sale Flash on Single Product
 	remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_sale_flash', 10 );
 
 	// Change several of the breadcrumb defaults
-	add_filter( 'woocommerce_breadcrumb_defaults', 'rosa2_woocommerce_breadcrumbs' );
+	add_filter( 'woocommerce_breadcrumb_defaults', 'anima_woocommerce_breadcrumbs' );
 
     // Replace the shop link URL
-	add_filter( 'woocommerce_breadcrumb_home_url', 'rosa2_woocommerce_custom_breadrumb_home_url' );
+	add_filter( 'woocommerce_breadcrumb_home_url', 'anima_woocommerce_custom_breadrumb_home_url' );
 
 	// Add minus to quantity input
-    add_action('woocommerce_before_quantity_input_field', 'rosa2_woocommerce_quantity_label', 10);
-    add_action('woocommerce_before_quantity_input_field', 'rosa2_woocommerce_quantity_input_before', 20);
-	add_action('woocommerce_after_quantity_input_field', 'rosa2_woocommerce_quantity_input_after');
+    add_action('woocommerce_before_quantity_input_field', 'anima_woocommerce_quantity_label', 10);
+    add_action('woocommerce_before_quantity_input_field', 'anima_woocommerce_quantity_input_before', 20);
+	add_action('woocommerce_after_quantity_input_field', 'anima_woocommerce_quantity_input_after');
 
     // Add label before stock
-	add_filter( 'woocommerce_get_availability', 'rosa2_add_label_to_availability_display' );
+	add_filter( 'woocommerce_get_availability', 'anima_add_label_to_availability_display' );
 }
 
-function rosa2_woocommerce_product_class( $classes, $product ) {
+function anima_woocommerce_product_class( $classes, $product ) {
     $classes[] = 'wc-block-grid__product';
 
 	return $classes;
@@ -200,9 +202,9 @@ function rosa2_woocommerce_product_class( $classes, $product ) {
  *
  * @return string
  */
-function rosa2_woocommerce_loop_start( $markup ) {
+function anima_woocommerce_loop_start( $markup ) {
     // We only want to filter product classes when we are in a loop (not when rendering single products).
-	add_filter( 'woocommerce_post_class', 'rosa2_woocommerce_product_class', 10, 2 );
+	add_filter( 'woocommerce_post_class', 'anima_woocommerce_product_class', 10, 2 );
 
 	$markup = '<div class="wc-block-grid has-' . esc_attr( wc_get_loop_prop( 'columns' ) ) . '-columns"><ul class="wc-block-grid__products">';
 
@@ -216,9 +218,9 @@ function rosa2_woocommerce_loop_start( $markup ) {
  *
  * @return string
  */
-function rosa2_woocommerce_loop_end( $markup ) {
+function anima_woocommerce_loop_end( $markup ) {
 	// Remove filter added in loop start.
-	remove_filter( 'woocommerce_post_class', 'rosa2_woocommerce_product_class', 10 );
+	remove_filter( 'woocommerce_post_class', 'anima_woocommerce_product_class', 10 );
 
 	$markup = '</ul><!-- .wc-block-grid__products --></div><!-- .wc-block-grid -->';
 
@@ -232,22 +234,22 @@ function rosa2_woocommerce_loop_end( $markup ) {
  *
  * @return string
  */
-function rosa2_woocommerce_sale_flash( $markup ) {
+function anima_woocommerce_sale_flash( $markup ) {
 	$markup = '<span class="wc-block-grid__product-onsale">' . esc_html__( 'Sale!', '__theme_txtd' ) . '</span>';
 
 	return $markup;
 }
 
-function rosa2_add_start_wrapper_before_single_product_summary() {
+function anima_add_start_wrapper_before_single_product_summary() {
 	echo '<div class="c-product-main">';
 }
 
-function rosa2_add_end_wrapper_after_single_product_summary() {
+function anima_add_end_wrapper_after_single_product_summary() {
 	echo '</div><!-- .c-product-main -->';
 }
 
 
-function rosa2_add_start_wrapper_before_tabs() {
+function anima_add_start_wrapper_before_tabs() {
 	$product_tabs = apply_filters( 'woocommerce_product_tabs', array() );
 
 	if ( ! empty( $product_tabs ) ) {
@@ -255,7 +257,7 @@ function rosa2_add_start_wrapper_before_tabs() {
     }
 }
 
-function rosa2_add_end_wrapper_after_tabs() {
+function anima_add_end_wrapper_after_tabs() {
 	$product_tabs = apply_filters( 'woocommerce_product_tabs', array() );
 
 	if ( ! empty( $product_tabs ) ) {
@@ -263,43 +265,43 @@ function rosa2_add_end_wrapper_after_tabs() {
 	}
 }
 
-function rosa2_add_start_wrapper_before_upsells() {
+function anima_add_start_wrapper_before_upsells() {
 	echo '<div class="c-woo-section  c-woo-upsells">';
 }
 
-function rosa2_add_end_wrapper_after_upsells() {
+function anima_add_end_wrapper_after_upsells() {
 	echo '</div><!-- .c-woo-section.c-woo-upsells -->';
 }
 
-function rosa2_add_start_wrapper_before_related() {
+function anima_add_start_wrapper_before_related() {
 	echo '<div class="c-woo-section  c-woo-related">';
 }
 
-function rosa2_add_end_wrapper_after_related() {
+function anima_add_end_wrapper_after_related() {
 	echo '</div><!-- .c-woo-section.c-woo-related -->';
 }
 
-function rosa2_add_start_main_content() {
+function anima_add_start_main_content() {
 	echo '<div class="novablocks-sidecar"><div class="novablocks-content entry-content">';
 }
 
-function rosa2_add_end_main_content() {
+function anima_add_end_main_content() {
 	echo '</div><!-- .novablocks-content.entry-conten --></div><!-- .novablocks-sidecar -->';
 }
 
-function rosa2_new_product_title_markup() {
+function anima_new_product_title_markup() {
 	echo '<h2 class="wc-block-grid__product-title">' . get_the_title() . '</h2>';
 }
 
-function rosa2_price_wrapper_start() {
+function anima_price_wrapper_start() {
 	echo '<div class="wc-block-grid__product-price price">';
 }
 
-function rosa2_price_wrapper_end() {
+function anima_price_wrapper_end() {
 	echo '</div><!-- .wc-block-grid__product-price.price -->';
 }
 
-function rosa2_append_add_to_cart_button()  {
+function anima_append_add_to_cart_button()  {
 
 	if ( 'product' !== get_post_type() ) {
 		return;
@@ -322,13 +324,13 @@ function rosa2_append_add_to_cart_button()  {
 
 <?php }
 
-function rosa2_output_checkout_site_identity() { ?>
+function anima_output_checkout_site_identity() { ?>
 
     <h1 class="woocommerce-checkout-title"><a href="<?php echo esc_url( get_home_url() ); ?>" rel="home"><span><?php echo esc_html( get_bloginfo( 'name' ) ) ?></span></a></h1>
 
 <?php }
 
-function rosa2_output_checkout_breadcrumbs() { ?>
+function anima_output_checkout_breadcrumbs() { ?>
 
     <ul class="woocommerce-checkout-breadcrumbs">
         <li>
@@ -339,14 +341,14 @@ function rosa2_output_checkout_breadcrumbs() { ?>
 
 <?php }
 
-function rosa2_limit_related_posts_count( $args ) {
+function anima_limit_related_posts_count( $args ) {
 	$args['posts_per_page'] = 3;
 	$args['columns']        = 3;
 
 	return $args;
 }
 
-function rosa2_output_ajax_add_to_cart_button() {
+function anima_output_ajax_add_to_cart_button() {
 	if ( 'product' !== get_post_type() ) {
 		return;
 	}
@@ -359,7 +361,7 @@ function rosa2_output_ajax_add_to_cart_button() {
 	}
 }
 
-function rosa2_output_mini_cart() {
+function anima_output_mini_cart() {
 	if ( ! is_cart() ) { ?>
 
         <div class="c-mini-cart">
@@ -417,7 +419,7 @@ if ( ! function_exists( 'woocommerce_display_categories' ) ) {
 			    // Make sure taxonomy is set and the term has parent.
 				if ( isset( $current_term->taxonomy ) ) {
 
-					$subcategories = rosa2_woocommerce_get_subcategories($current_term);
+					$subcategories = anima_woocommerce_get_subcategories($current_term);
 
 					foreach ( $subcategories as $subcategory ) {
 						$link = get_term_link( $subcategory, 'product_cat' );
@@ -430,8 +432,8 @@ if ( ! function_exists( 'woocommerce_display_categories' ) ) {
 	}
 }
 
-if ( ! function_exists( ' rosa2_woocommerce_pagination_args' ) ) {
-	function rosa2_woocommerce_pagination_args() {
+if ( ! function_exists( ' anima_woocommerce_pagination_args' ) ) {
+	function anima_woocommerce_pagination_args() {
 
 		$args =  array(
 			'end_size'           => 1,
@@ -446,22 +448,22 @@ if ( ! function_exists( ' rosa2_woocommerce_pagination_args' ) ) {
 }
 
 
-if ( ! function_exists( 'rosa2_woocommerce_coupon_form' ) ) {
-	function rosa2_woocommerce_coupon_form() {
+if ( ! function_exists( 'anima_woocommerce_coupon_form' ) ) {
+	function anima_woocommerce_coupon_form() {
 		echo '<form class="checkout_coupon woocommerce-form-coupon" id="form-coupon" method="post" style="display:none">
                 <input form="woocommerce-form-coupon" type="text" name="coupon_code" class="js-coupon-value-destination input-text" placeholder="' . esc_attr__( 'Coupon code', '__theme_txtd' ) . '" id="coupon_code" value="">
               </form>';
 	}
 }
 
-function rosa2_product_category_classes($class) {
+function anima_product_category_classes($class) {
 
 	$class[] = 'wc-block-grid__product';
 
     return $class;
 }
 
-function rosa2_product_catalog_image_aspect_ratio() {
+function anima_product_catalog_image_aspect_ratio() {
 	$aspect_ratio = 1;
 
     if ( function_exists( 'wc_get_image_size' ) ) {
@@ -476,10 +478,10 @@ function rosa2_product_catalog_image_aspect_ratio() {
         --current-aspect-ratio: ' . $aspect_ratio . ';' .
     '}';
 
-	wp_add_inline_style( 'rosa2-woocommerce', $css );
+	wp_add_inline_style( 'anima-woocommerce', $css );
 }
 
-function rosa2_loop_product_link_open() {
+function anima_loop_product_link_open() {
 	global $product;
 
 	$link = apply_filters( 'woocommerce_loop_product_link', get_the_permalink(), $product );
@@ -487,19 +489,19 @@ function rosa2_loop_product_link_open() {
 	echo '<a href="' . esc_url( $link ) . '" class="wc-block-grid__product-link">';
 }
 
-function rosa2_loop_product_link_close() {
+function anima_loop_product_link_close() {
 	echo '</a><!-- .wc-block-grid__product-link -->';
 }
 
-function rosa2_loop_product_thumbnail_wrapper_open() {
+function anima_loop_product_thumbnail_wrapper_open() {
     echo '<div class="wc-block-grid__product-image">';
 }
 
-function rosa2_loop_product_thumbnail_wrapper_close() {
+function anima_loop_product_thumbnail_wrapper_close() {
     echo '</div><!-- .wc-block-grid__product-image -->';
 }
 
-function rosa2_woocommerce_breadcrumbs() {
+function anima_woocommerce_breadcrumbs() {
 	return array(
 		'delimiter'   => ' &#47; ',
 		'wrap_before' => '<nav class="woocommerce-breadcrumb" itemprop="breadcrumb">',
@@ -510,15 +512,15 @@ function rosa2_woocommerce_breadcrumbs() {
 	);
 }
 
-function rosa2_woocommerce_quantity_input_before() {
+function anima_woocommerce_quantity_input_before() {
     echo '<button class="qty_button minus button--is-disabled"></button>';
 }
 
-function rosa2_woocommerce_quantity_input_after() {
+function anima_woocommerce_quantity_input_after() {
 	echo '<button class="qty_button plus"></button></div>';
 }
 
-function rosa2_woocommerce_quantity_label() {
+function anima_woocommerce_quantity_label() {
 
 	$label = '<label for="quantity">' . esc_html__( 'Quantity', '__theme_txtd' ) . '</label><div class="quantity__wrapper">';
 
@@ -530,7 +532,7 @@ function rosa2_woocommerce_quantity_label() {
  *
  * @return array
  */
-function rosa2_add_label_to_availability_display( $availability ) {
+function anima_add_label_to_availability_display( $availability ) {
     global $product;
 
 	if( is_product() && $product-> get_manage_stock() ){
@@ -544,7 +546,7 @@ function rosa2_add_label_to_availability_display( $availability ) {
 /**
  * @return false|string|WP_Error
  */
-function rosa2_woocommerce_custom_breadrumb_home_url() {
+function anima_woocommerce_custom_breadrumb_home_url() {
 	return get_permalink( wc_get_page_id( 'shop' ) );
 }
 
@@ -553,7 +555,7 @@ function rosa2_woocommerce_custom_breadrumb_home_url() {
  *
  * @return array
  */
-function rosa2_add_cart_to_extras_menu_items( $items ) {
+function anima_add_cart_to_extras_menu_items( $items ) {
 	if ( empty( $items ) ) {
 		$items = array();
 	}
@@ -605,7 +607,7 @@ function rosa2_add_cart_to_extras_menu_items( $items ) {
  * @return array
  */
 
-function rosa2_woocommerce_get_subcategories( $category ) {
+function anima_woocommerce_get_subcategories( $category ) {
 
     // Get category ID;
 	$parent_category_ID = $category->term_id;

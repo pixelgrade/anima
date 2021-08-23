@@ -5,9 +5,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-add_filter( 'customify_filter_fields', 'rosa2_add_customify_connected_fields', 12, 1 );
+add_filter( 'customify_filter_fields', 'anima_add_customify_connected_fields', 12, 1 );
 
-function rosa2_add_customify_connected_fields( $options ) {
+function anima_add_customify_connected_fields( $options ) {
 
 	// If the theme hasn't declared support for style manager, bail.
 	if ( ! current_theme_supports( 'customizer_style_manager' ) ) {

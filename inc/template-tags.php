@@ -4,15 +4,15 @@
  *
  * Eventually, some of the functionality here could be replaced by core features.
  *
- * @package Rosa2
+ * @package Anima
  */
 
-if ( ! function_exists( 'rosa2_posted_on' ) ) {
+if ( ! function_exists( 'anima_posted_on' ) ) {
 
 	/**
 	 * Prints HTML with meta information for the current post-date/time.
 	 */
-	function rosa2_posted_on() {
+	function anima_posted_on() {
 		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time>';
 
 		$time_string = sprintf( $time_string,
@@ -29,12 +29,12 @@ if ( ! function_exists( 'rosa2_posted_on' ) ) {
 	}
 }
 
-if ( ! function_exists( 'rosa2_posted_by' ) ) {
+if ( ! function_exists( 'anima_posted_by' ) ) {
 
 	/**
 	 * Prints HTML with meta information for the current author.
 	 */
-	function rosa2_posted_by() {
+	function anima_posted_by() {
 	    $author_url = esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) );
 	    $author_name = esc_html( get_the_author() );
 
@@ -46,15 +46,15 @@ if ( ! function_exists( 'rosa2_posted_by' ) ) {
 	}
 }
 
-if ( ! function_exists( 'rosa2_posted_in' ) ) {
-    function rosa2_posted_in() {
-        rosa2_categories_posted_in();
-        rosa2_tags_posted_in();
+if ( ! function_exists( 'anima_posted_in' ) ) {
+    function anima_posted_in() {
+        anima_categories_posted_in();
+        anima_tags_posted_in();
     }
 }
 
-if ( ! function_exists( 'rosa2_categories_posted_in' ) ) {
-	function rosa2_categories_posted_in() {
+if ( ! function_exists( 'anima_categories_posted_in' ) ) {
+	function anima_categories_posted_in() {
 		// Hide category and tag text for pages.
 		if ( 'post' === get_post_type() ) {
 			/* translators: used between list items, there is a space after the comma */
@@ -67,8 +67,8 @@ if ( ! function_exists( 'rosa2_categories_posted_in' ) ) {
 	}
 }
 
-if ( ! function_exists( 'rosa2_tags_posted_in' ) ) {
-	function rosa2_tags_posted_in() {
+if ( ! function_exists( 'anima_tags_posted_in' ) ) {
+	function anima_tags_posted_in() {
 		// Hide category and tag text for pages.
 		if ( 'post' === get_post_type() ) {
 			/* translators: used between list items, there is a space after the comma */
@@ -81,8 +81,8 @@ if ( ! function_exists( 'rosa2_tags_posted_in' ) ) {
 	}
 }
 
-if ( ! function_exists( 'rosa2_comments_link' ) ) {
-	function rosa2_comments_link() {
+if ( ! function_exists( 'anima_comments_link' ) ) {
+	function anima_comments_link() {
 		if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
 			echo '<div class="comments-link">';
 			comments_popup_link(
@@ -104,11 +104,11 @@ if ( ! function_exists( 'rosa2_comments_link' ) ) {
 	}
 }
 
-if ( ! function_exists( 'rosa2_edit_post_link' ) ) {
+if ( ! function_exists( 'anima_edit_post_link' ) ) {
 	/**
 	 * Prints HTML with meta information for the categories, tags and comments.
 	 */
-	function rosa2_edit_post_link() {
+	function anima_edit_post_link() {
 
 		edit_post_link(
 			sprintf(
@@ -129,14 +129,14 @@ if ( ! function_exists( 'rosa2_edit_post_link' ) ) {
 	}
 }
 
-if ( ! function_exists( 'rosa2_post_thumbnail' ) ) {
+if ( ! function_exists( 'anima_post_thumbnail' ) ) {
 	/**
 	 * Displays an optional post thumbnail.
 	 *
 	 * Wraps the post thumbnail in an anchor element on index views, or a div
 	 * element when on single views.
 	 */
-	function rosa2_post_thumbnail() {
+	function anima_post_thumbnail() {
 		if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
 			return;
 		}
@@ -163,14 +163,14 @@ if ( ! function_exists( 'rosa2_post_thumbnail' ) ) {
 	}
 }
 
-if ( ! function_exists( 'rosa2_the_separator' ) ) {
-    function rosa2_the_separator( $style = 'default' ) {
-        echo '<div class="wp-block-separator has-text-align-center is-style-' . esc_attr( $style ) . '">' . rosa2_get_separator_markup() . '</div>';
+if ( ! function_exists( 'anima_the_separator' ) ) {
+    function anima_the_separator( $style = 'default' ) {
+        echo '<div class="wp-block-separator has-text-align-center is-style-' . esc_attr( $style ) . '">' . anima_get_separator_markup() . '</div>';
     }
 }
 
-if ( ! function_exists( 'rosa2_get_separator_markup' ) ) {
-    function rosa2_get_separator_markup() {
+if ( ! function_exists( 'anima_get_separator_markup' ) ) {
+    function anima_get_separator_markup() {
         ob_start();
         ?>
 
@@ -178,17 +178,17 @@ if ( ! function_exists( 'rosa2_get_separator_markup' ) ) {
             <div class="c-separator__arrow c-separator__arrow--left"></div>
             <div class="c-separator__line c-separator__line--left"></div>
             <div class="c-separator__symbol">
-                <span><?php echo rosa2_get_separator_symbol(); ?></span>
+                <span><?php echo anima_get_separator_symbol(); ?></span>
             </div>
             <div class="c-separator__line c-separator__line--right"></div>
             <div class="c-separator__arrow c-separator__arrow--right"></div>
         </div>
-		<?php return apply_filters( 'rosa_separator_markup', ob_get_clean() );
+		<?php return apply_filters( 'anima_separator_markup', ob_get_clean() );
 	}
 }
 
-if ( ! function_exists( 'rosa2_get_separator_symbol' ) ) {
-	function rosa2_get_separator_symbol() {
+if ( ! function_exists( 'anima_get_separator_symbol' ) ) {
+	function anima_get_separator_symbol() {
 		$symbol = pixelgrade_option( 'separator_symbol', 'fleuron-1' );
         ob_start();
         get_template_part( 'template-parts/separators/' . $symbol . '-svg' );
@@ -196,7 +196,7 @@ if ( ! function_exists( 'rosa2_get_separator_symbol' ) ) {
 	}
 }
 
-if ( ! function_exists( ' rosa2_has_custom_logo_transparent' ) ) {
+if ( ! function_exists( ' anima_has_custom_logo_transparent' ) ) {
 	/**
 	 * Determines whether the site has a custom transparent logo.
 	 *
@@ -204,7 +204,7 @@ if ( ! function_exists( ' rosa2_has_custom_logo_transparent' ) ) {
 	 *
 	 * @return bool Whether the site has a custom logo or not.
 	 */
-	function rosa2_has_custom_logo_transparent( $blog_id = 0 ) {
+	function anima_has_custom_logo_transparent( $blog_id = 0 ) {
 		$switched_blog = false;
 
 		if ( is_multisite() && ! empty( $blog_id ) && get_current_blog_id() !== absint( $blog_id ) ) {
@@ -212,7 +212,7 @@ if ( ! function_exists( ' rosa2_has_custom_logo_transparent' ) ) {
 			$switched_blog = true;
 		}
 
-		$custom_logo_id = get_theme_mod( 'rosa_transparent_logo' );
+		$custom_logo_id = get_theme_mod( 'anima_transparent_logo' );
 
 		if ( $switched_blog ) {
 			restore_current_blog();
@@ -222,7 +222,7 @@ if ( ! function_exists( ' rosa2_has_custom_logo_transparent' ) ) {
 	}
 }
 
-if ( ! function_exists( ' rosa2_get_custom_logo_transparent' ) ) {
+if ( ! function_exists( ' anima_get_custom_logo_transparent' ) ) {
 	/**
 	 * Returns a custom logo, linked to home.
 	 *
@@ -230,7 +230,7 @@ if ( ! function_exists( ' rosa2_get_custom_logo_transparent' ) ) {
 	 *
 	 * @return string Custom logo transparent markup.
 	 */
-	function rosa2_get_custom_logo_transparent( $blog_id = 0 ) {
+	function anima_get_custom_logo_transparent( $blog_id = 0 ) {
 		$html          = '';
 		$switched_blog = false;
 
@@ -239,7 +239,7 @@ if ( ! function_exists( ' rosa2_get_custom_logo_transparent' ) ) {
 			$switched_blog = true;
 		}
 
-		$custom_logo_id = get_theme_mod( 'rosa_transparent_logo' );
+		$custom_logo_id = get_theme_mod( 'anima_transparent_logo' );
 
 		// We have a logo. Logo is go.
 		if ( $custom_logo_id ) {
@@ -271,27 +271,27 @@ if ( ! function_exists( ' rosa2_get_custom_logo_transparent' ) ) {
 		 * @param string $html    Custom logo HTML output.
 		 * @param int    $blog_id ID of the blog to get the custom logo for.
 		 */
-		return apply_filters( 'rosa2_get_custom_logo_transparent', $html, $blog_id );
+		return apply_filters( 'anima_get_custom_logo_transparent', $html, $blog_id );
 	}
 }
 
-if ( ! function_exists( ' rosa2_the_custom_logo_transparent' ) ) {
+if ( ! function_exists( ' anima_the_custom_logo_transparent' ) ) {
 	/**
 	 * Displays a custom logo transparent, linked to home.
 	 *
 	 * @param int $blog_id Optional. ID of the blog in question. Default is the ID of the current blog.
 	 */
-	function rosa2_the_custom_logo_transparent( $blog_id = 0 ) {
-		echo rosa2_get_custom_logo_transparent( $blog_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	function anima_the_custom_logo_transparent( $blog_id = 0 ) {
+		echo anima_get_custom_logo_transparent( $blog_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 }
 
-if ( ! function_exists( 'rosa2_footer_the_copyright' ) ) {
+if ( ! function_exists( 'anima_footer_the_copyright' ) ) {
 	/**
 	 * Display the footer copyright.
 	 */
-	function rosa2_footer_the_copyright() {
-		$copyright_text = rosa2_footer_get_copyright_content();
+	function anima_footer_the_copyright() {
+		$copyright_text = anima_footer_get_copyright_content();
 		$output         = '';
 		if ( ! empty( $copyright_text ) ) {
 			$output       .= '<div class="site-info">' . "\n";
@@ -302,29 +302,29 @@ if ( ! function_exists( 'rosa2_footer_the_copyright' ) ) {
 			}
 			$output .= '</div>';
 		}
-		echo apply_filters( 'rosa2_footer_the_copyright', $output );
+		echo apply_filters( 'anima_footer_the_copyright', $output );
 	}
 }
 
-if ( ! function_exists( 'rosa2_footer_get_copyright_content' ) ) {
+if ( ! function_exists( 'anima_footer_get_copyright_content' ) ) {
 	/**
 	 * Get the footer copyright content (HTML or simple text).
 	 * It already has do_shortcode applied.
 	 *
 	 * @return bool|string
 	 */
-	function rosa2_footer_get_copyright_content() {
-		$copyright_text = apply_filters( 'rosa2_footer_copyright_text', esc_html__( '&copy; %year% %site-title%.', '__theme_txtd' ) );
+	function anima_footer_get_copyright_content() {
+		$copyright_text = apply_filters( 'anima_footer_copyright_text', esc_html__( '&copy; %year% %site-title%.', '__theme_txtd' ) );
 		if ( ! empty( $copyright_text ) ) {
 			// We need to parse some tags
-			return rosa2_parse_content_tags( $copyright_text );
+			return anima_parse_content_tags( $copyright_text );
 		}
 
 		return '';
 	}
 }
 
-if ( ! function_exists( 'rosa2_shape_comment' ) ) {
+if ( ! function_exists( 'anima_shape_comment' ) ) {
 	/**
 	 * Template for comments and pingbacks.
 	 *
@@ -334,7 +334,7 @@ if ( ! function_exists( 'rosa2_shape_comment' ) ) {
 	 * @param array $args
 	 * @param int $depth
 	 */
-	function rosa2_shape_comment( $comment, $args, $depth ) {
+	function anima_shape_comment( $comment, $args, $depth ) {
 		$GLOBALS['comment'] = $comment; // phpcs:ignore
 		switch ( $comment->comment_type ) {
 			case 'pingback':
@@ -407,38 +407,38 @@ if ( ! function_exists( 'rosa2_shape_comment' ) ) {
 	}
 }
 
-if ( ! function_exists( 'rosa2_comments_toggle_checked_attribute' ) ) {
+if ( ! function_exists( 'anima_comments_toggle_checked_attribute' ) ) {
 	/**
 	 * Print the comment show/hide control's checked HTML attribute.
 	 *
 	 * We only accept two outcomes: either output 'checked="checked"' or nothing.
 	 */
-	function rosa2_comments_toggle_checked_attribute() {
-		echo rosa2_get_comments_toggle_checked_attribute();
+	function anima_comments_toggle_checked_attribute() {
+		echo anima_get_comments_toggle_checked_attribute();
 	}
 }
 
-if ( ! function_exists( 'rosa2_get_comments_toggle_checked_attribute' ) ) {
+if ( ! function_exists( 'anima_get_comments_toggle_checked_attribute' ) ) {
 	/**
 	 * Return the comment show/hide control's checked HTML attribute.
 	 *
 	 * @return string
 	 */
-	function rosa2_get_comments_toggle_checked_attribute() {
+	function anima_get_comments_toggle_checked_attribute() {
 		$attribute = 'checked';
 
 		return apply_filters( 'pixelgrade_get_comments_toggle_checked_attribute', $attribute );
 	}
 }
 
-if ( ! function_exists( 'rosa2_the_read_more_button' ) ) {
-	function rosa2_the_read_more_button() {
-		echo rosa2_get_read_more_button();
+if ( ! function_exists( 'anima_the_read_more_button' ) ) {
+	function anima_the_read_more_button() {
+		echo anima_get_read_more_button();
 	}
 }
 
-if ( ! function_exists( 'rosa2_get_read_more_button' ) ) {
-	function rosa2_get_read_more_button() {
+if ( ! function_exists( 'anima_get_read_more_button' ) ) {
+	function anima_get_read_more_button() {
 
 		return
 			'<div class="wp-block-button aligncenter is-style-text">' .
@@ -447,26 +447,26 @@ if ( ! function_exists( 'rosa2_get_read_more_button' ) ) {
 	}
 }
 
-if ( ! function_exists( 'rosa2_the_posts_pagination' ) ) {
+if ( ! function_exists( 'anima_the_posts_pagination' ) ) {
 	/**
 	 * Displays a paginated navigation to next/previous set of posts, when applicable.
 	 *
 	 * @param array $args Optional. See paginate_links() for available arguments.
 	 *                    Default empty array.
 	 */
-	function rosa2_the_posts_pagination( $args = array() ) { ?>
+	function anima_the_posts_pagination( $args = array() ) { ?>
 
         <!-- Use Group Inner Container, -->
         <!-- so we can have access to Sidecar Grid.-->
         <div class="wp-block-group__inner-container">
-            <?php echo rosa2_get_the_posts_pagination( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+            <?php echo anima_get_the_posts_pagination( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
         </div>
 
     <?php
 	}
 }
 
-if ( ! function_exists( 'rosa2_get_the_posts_pagination' ) ) {
+if ( ! function_exists( 'anima_get_the_posts_pagination' ) ) {
 	/**
 	 * Retrieves a paginated navigation to next/previous set of posts, when applicable.
 	 *
@@ -474,7 +474,7 @@ if ( ! function_exists( 'rosa2_get_the_posts_pagination' ) ) {
 	 *
 	 * @return string Markup for pagination links.
 	 */
-	function rosa2_get_the_posts_pagination( $args = array() ) {
+	function anima_get_the_posts_pagination( $args = array() ) {
 		// Put our own defaults in place
 		$args = wp_parse_args(
 			$args, array(
@@ -498,11 +498,11 @@ if ( ! function_exists( 'rosa2_get_the_posts_pagination' ) ) {
  *                    Default empty array.
  * @return void
  */
-function rosa2_the_post_navigation( $args = array() ) {
-	echo rosa2_get_the_post_navigation( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+function anima_the_post_navigation( $args = array() ) {
+	echo anima_get_the_post_navigation( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
-if ( ! function_exists( 'rosa2_get_the_post_navigation' ) ) {
+if ( ! function_exists( 'anima_get_the_post_navigation' ) ) {
 	/**
 	 * Retrieves the navigation to next/previous post, when applicable.
 	 *
@@ -518,7 +518,7 @@ if ( ! function_exists( 'rosa2_get_the_post_navigation' ) ) {
 	 * }
 	 * @return string Markup for post links.
 	 */
-	function rosa2_get_the_post_navigation( $args = array() ) {
+	function anima_get_the_post_navigation( $args = array() ) {
 		$args = wp_parse_args(
 			$args, array(
 				'prev_text'          => '%title',
@@ -553,11 +553,11 @@ if ( ! function_exists( 'rosa2_get_the_post_navigation' ) ) {
 			$navigation = _navigation_markup( $previous . $next, 'post-navigation', $args['screen_reader_text'] );
 		}
 
-		return apply_filters( 'rosa2_get_the_post_navigation', $navigation, $args );
+		return apply_filters( 'anima_get_the_post_navigation', $navigation, $args );
 	}
 }
 
-if ( ! function_exists( 'rosa2_is_active_sidebar' ) ) {
+if ( ! function_exists( 'anima_is_active_sidebar' ) ) {
 	/**
 	 * Determines whether a sidebar is in use.
 	 *
@@ -570,7 +570,7 @@ if ( ! function_exists( 'rosa2_is_active_sidebar' ) ) {
 	 *
 	 * @return bool true if the sidebar is in use, false otherwise.
 	 */
-	function rosa2_is_active_sidebar( $index ) {
+	function anima_is_active_sidebar( $index ) {
 		global $wp_registered_sidebars;
 
 		$index             = ( is_int( $index ) ) ? "sidebar-$index" : sanitize_title( $index );

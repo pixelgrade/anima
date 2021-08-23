@@ -1,6 +1,8 @@
 <?php
 /**
  * Handle the Nova Blocks integration logic.
+ *
+ * @package Anima
  */
 
 // If this file is called directly, abort.
@@ -8,17 +10,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-add_action( 'after_setup_theme', 'rosa2_novablocks_setup', 10 );
+add_action( 'after_setup_theme', 'anima_novablocks_setup', 10 );
 
-add_filter( 'novablocks_block_editor_settings', 'rosa2_alter_novablocks_hero_settings' );
-add_filter( 'novablocks_block_editor_settings', 'rosa2_alter_novablocks_media_settings' );
-add_filter( 'novablocks_block_editor_settings', 'rosa2_alter_novablocks_separator_settings' );
+add_filter( 'novablocks_block_editor_settings', 'anima_alter_novablocks_hero_settings' );
+add_filter( 'novablocks_block_editor_settings', 'anima_alter_novablocks_media_settings' );
+add_filter( 'novablocks_block_editor_settings', 'anima_alter_novablocks_separator_settings' );
 
-add_filter( 'novablocks_block_editor_settings', 'rosa2_alter_novablocks_map_settings' );
+add_filter( 'novablocks_block_editor_settings', 'anima_alter_novablocks_map_settings' );
 
-if ( ! function_exists( 'rosa2_novablocks_setup' ) ) {
-	function rosa2_novablocks_setup() {
-		$rosa2_novablocks_config = array(
+if ( ! function_exists( 'anima_novablocks_setup' ) ) {
+	function anima_novablocks_setup() {
+		$anima_novablocks_config = array(
 			'doppler' => array(
 				'novablocks/hero',
 			),
@@ -51,14 +53,14 @@ if ( ! function_exists( 'rosa2_novablocks_setup' ) ) {
 			'sidecar-area',
 		);
 
-		$rosa2_novablocks_config = apply_filters( 'rosa2_novablocks_config', $rosa2_novablocks_config );
+		$anima_novablocks_config = apply_filters( 'anima_novablocks_config', $anima_novablocks_config );
 
-		add_theme_support( 'novablocks', $rosa2_novablocks_config );
+		add_theme_support( 'novablocks', $anima_novablocks_config );
 	}
 }
 
-if ( ! function_exists( 'rosa2_alter_novablocks_hero_settings' ) ) {
-	function rosa2_alter_novablocks_hero_settings( $settings ) {
+if ( ! function_exists( 'anima_alter_novablocks_hero_settings' ) ) {
+	function anima_alter_novablocks_hero_settings( $settings ) {
 		$settings['hero']['template'] = array(
 			array(
 				'core/separator',
@@ -92,8 +94,8 @@ if ( ! function_exists( 'rosa2_alter_novablocks_hero_settings' ) ) {
 	}
 }
 
-if ( ! function_exists( 'rosa2_alter_novablocks_media_settings' ) ) {
-	function rosa2_alter_novablocks_media_settings( $settings ) {
+if ( ! function_exists( 'anima_alter_novablocks_media_settings' ) ) {
+	function anima_alter_novablocks_media_settings( $settings ) {
 		$settings['media']['template'] = array(
 			array(
 				'novablocks/headline',
@@ -143,21 +145,21 @@ if ( ! function_exists( 'rosa2_alter_novablocks_media_settings' ) ) {
 	}
 }
 
-if ( ! function_exists( 'rosa2_alter_novablocks_separator_settings' ) ) {
-	function rosa2_alter_novablocks_separator_settings( $settings ) {
+if ( ! function_exists( 'anima_alter_novablocks_separator_settings' ) ) {
+	function anima_alter_novablocks_separator_settings( $settings ) {
 		if ( empty( $settings['separator'] ) ) {
 			$settings['separator'] = array();
 		}
 
-		$settings['separator']['markup'] = rosa2_get_separator_markup();
+		$settings['separator']['markup'] = anima_get_separator_markup();
 
 		return $settings;
 	}
 }
 
 
-if ( ! function_exists( 'rosa2_alter_novablocks_map_settings' ) ) {
-	function rosa2_alter_novablocks_map_settings( $settings ) {
+if ( ! function_exists( 'anima_alter_novablocks_map_settings' ) ) {
+	function anima_alter_novablocks_map_settings( $settings ) {
 		if ( empty( $settings['map'] ) ) {
 			$settings['map'] = array();
 		}

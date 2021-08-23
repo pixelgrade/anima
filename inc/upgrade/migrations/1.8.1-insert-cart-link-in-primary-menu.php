@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// We will only add the menu item to the primary location menu since that is where Rosa2 previously outputted the cart menu item.
+// We will only add the menu item to the primary location menu since that is where Anima previously outputted the cart menu item.
 if ( has_nav_menu( 'primary' ) && function_exists( 'WC' ) && pixelgrade_user_has_access( 'woocommerce' ) ) {
 	$locations = get_nav_menu_locations();
 	$menu = wp_get_nav_menu_object( $locations[ 'primary' ] );
@@ -37,6 +37,6 @@ if ( has_nav_menu( 'primary' ) && function_exists( 'WC' ) && pixelgrade_user_has
 		'menu-item-object-id'  => 'cart',
 	] );
 
-	// Set the visual style to icon, the same as it was previously in Rosa 2.
+	// Set the visual style to icon, the same as it was previously in Anima.
 	update_post_meta( $menu_item_db_id, '_menu_item_visual_style', 'icon' );
 }

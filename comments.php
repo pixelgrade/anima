@@ -1,6 +1,10 @@
 <?php
 /**
  * The template for displaying comments.
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ *
+ * @package Anima
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

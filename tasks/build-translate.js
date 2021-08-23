@@ -7,8 +7,8 @@ const notify = require('gulp-notify');
 const watchPhp = './**/*.php';
 const textDomain = '__theme_txtd';
 const translationDestination = './languages';
-const theme = 'rosa2';
-const translationFile = 'rosa2.pot'
+const theme = 'anima';
+const translationFile = 'anima.pot'
 
 // -----------------------------------------------------------------------------
 // Generate POT file from the build folder.

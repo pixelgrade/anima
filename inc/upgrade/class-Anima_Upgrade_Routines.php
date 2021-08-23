@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class Rosa2_Upgrade_Routines
+ * Class Anima_Upgrade_Routines
  *
  * This class takes care of loading migration files from the specified migrations directory.
  *
@@ -10,7 +10,7 @@
  *
  * @ignore
  */
-class Rosa2_Upgrade_Routines {
+class Anima_Upgrade_Routines {
 
     /**
      * @var string

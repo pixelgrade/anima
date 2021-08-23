@@ -4,7 +4,7 @@
  *
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
- * @package Rosa2
+ * @package Anima
  */
 
 $comments_count = get_comments_number();

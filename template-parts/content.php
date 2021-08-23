@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Rosa2
+ * @package Anima
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -44,9 +44,9 @@ $classes[] = ( $wp_query->current_post % 2 ) ? 'has-image-on-the-right' : 'has-i
                             <?php
                             get_template_part( 'template-parts/entry-meta', get_post_type() );
                             the_title( '<h2 class="entry-title has-text-align-center"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-                            rosa2_the_separator( 'decorative' );
+                            anima_the_separator( 'decorative' );
                             echo '<p class="has-text-align-center">' . get_the_excerpt() . '</p>';
-                            rosa2_the_read_more_button();
+                            anima_the_read_more_button();
                             ?>
                         </div>
                     </div>
@@ -54,7 +54,7 @@ $classes[] = ( $wp_query->current_post % 2 ) ? 'has-image-on-the-right' : 'has-i
                         <div class="novablocks-media__image sm-palette-1 sm-variation-1">
                             <?php
                             if( has_post_thumbnail() ) {
-                                rosa2_post_thumbnail();
+                                anima_post_thumbnail();
                             } else { ?>
                                 <svg viewBox="-100 -100 344 344" width="144" height="144" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M84 36L61.5 66l17.1 22.8L69 96C58.86 82.5 42 60 42 60L6 108h132L84 36z" fill="#212B49"/></svg>
                             <?php } ?>
