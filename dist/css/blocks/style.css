@@ -430,6 +430,7 @@ ol.nb-list {
     --current-line-height: var(--theme-heading-4-line-height);
     --current-letter-spacing: var(--theme-heading-4-letter-spacing);
     --current-text-transform: var(--theme-heading-4-text-transform);
+    --current-color: var(--theme-heading-4-color);
     padding-right: var(--theme-spacing-tiny); }
   .nova-food-menu-item__title:before {
     bottom: 0.5em; }
@@ -446,14 +447,15 @@ ol.nb-list {
   --current-font-weight: var(--theme-heading-2-font-weight);
   --current-line-height: var(--theme-heading-2-line-height);
   --current-letter-spacing: var(--theme-heading-2-letter-spacing);
-  --current-text-transform: var(--theme-heading-2-text-transform); }
+  --current-text-transform: var(--theme-heading-2-text-transform);
+  --current-color: var(--theme-heading-2-color); }
 
 .nova-food-menu-item__title {
   font-size: var(--theme-heading-4-font-size); }
   .nova-food-menu-item__title:before {
     border-width: .15em; }
 
-.item-title {
+.nova-food-menu-item .item-title {
   background-color: var(--sm-current-bg-color); }
 
 .wp-block-novablocks-menu-food-item.is-style-rounded {
@@ -579,7 +581,8 @@ ol.nb-list {
     margin-top: 0 !important; } }
 
 .novablocks-header:not(.novablocks-header--ready) {
-  opacity: 0; }
+  opacity: 0;
+  --header-background-opacity: 0; }
 
 @media only screen and (min-width: 1024px) {
   .novablocks-header.novablocks-header--transparent:not(.novablocks-header--sticky) {
@@ -617,11 +620,11 @@ ol.nb-list {
   background-color: var(--sm-current-accent-color);
   background-image: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1));
   color: var(--sm-current-bg-color);
+  border-radius: 1em;
+  padding: .25em .9em;
   font-size: 0.5em;
   text-transform: uppercase;
   font-weight: bold;
-  border-radius: 1em;
-  padding: .25em .9em;
   vertical-align: middle;
   margin-left: 0.5em; }
 
@@ -631,11 +634,6 @@ ol.nb-list {
     --sm-current-accent-color: inherit;
     --sm-current-fg1-color: inherit;
     --sm-current-fg2-color: inherit; } }
-
-@media not screen and (min-width: 768px) {
-  .novablocks-hero .novablocks-u-content-padding {
-    padding-top: var(--theme-spacing-xxl);
-    padding-bottom: var(--theme-spacing-xxl); } }
 
 .novablocks-hero [class*="novablocks-u-content"] {
   z-index: 10; }
@@ -795,12 +793,12 @@ ol.nb-list {
       .novablocks-navigation > .menu > ul > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only).menu-item-has-children > a:before {
         width: calc(100% - 1.25em);
         right: 1.25em; }
-    .novablocks-navigation > ul.menu > li[class*="current"]:not(.menu-item-home) > a:before,
-    .novablocks-navigation > .menu > ul > li[class*="current"]:not(.menu-item-home) > a:before {
+    .novablocks-navigation > ul.menu > li[class*="current"]:not(.menu-item-home)[class][class] > a:before,
+    .novablocks-navigation > .menu > ul > li[class*="current"]:not(.menu-item-home)[class][class] > a:before {
       transform: scale3d(1, 1, 1);
       transform-origin: left; }
-    .novablocks-navigation > ul.menu > li[class*="current"]:not(.menu-item-home) > a:hover:before,
-    .novablocks-navigation > .menu > ul > li[class*="current"]:not(.menu-item-home) > a:hover:before {
+    .novablocks-navigation > ul.menu > li[class*="current"]:not(.menu-item-home)[class][class] > a:hover:before,
+    .novablocks-navigation > .menu > ul > li[class*="current"]:not(.menu-item-home)[class][class] > a:hover:before {
       transform: scale3d(0, 1, 1);
       transform-origin: right; } }
 
@@ -1211,9 +1209,6 @@ body {
 .novablocks-sidebar .has-background:not([class*="wp-block-button"]) {
   padding: var(--theme-spacing-fluid-xsmall); }
 
-.novablocks-sidebar [class*="__inner-container"] {
-  padding: 0; }
-
 .novablocks-sidebar label {
   flex-direction: column;
   align-items: flex-start; }
@@ -1229,7 +1224,6 @@ body {
 
 .novablocks-content > .alignleft *,
 .novablocks-content > .alignright *,
-.novablocks-content > [data-align] *,
 .novablocks-content > [class*='pull'] *,
 .novablocks-content > [data-novablocks-alignment] * {
   --font-size-modifier: 0.75; }

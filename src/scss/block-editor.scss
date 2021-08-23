@@ -6,6 +6,11 @@ $assets-folder-path: '../../assets';
 @import "components/dark-mode-button";
 @import "components/search-button";
 
+.block-editor-button-block-appender {
+    box-shadow: inset 0 0 0 1px currentColor;
+    color: inherit;
+}
+
 .editor-post-title .editor-post-title__input {
     @include apply-font(heading-1);
     --current-font-weight: 800;
@@ -191,5 +196,23 @@ $assets-folder-path: '../../assets';
     button,
     select {
         --font-size-modifier: 1;
+    }
+}
+
+// Currently, when a group block is using wide or full alignment,
+// this block use an extra wrapper with .wp-block class and [data-align].
+// This is a dumb selector, to make sure that we can handle space and sizing,
+// even with an extra wrapper.
+.wp-block[data-align="full"] {
+    
+    > div:not([class])[style*='spacing'][style*='emphasis'] {
+        
+        > .wp-block-group {
+            
+            > [class*="__inner-container"] {
+                padding-left: var(--theme-wrapper-sides-spacing);
+                padding-right: var(--theme-wrapper-sides-spacing);
+            }
+        }
     }
 }

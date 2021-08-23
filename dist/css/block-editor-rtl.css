@@ -208,6 +208,10 @@
   .novablocks-navigation .menu-item--search {
     display: none; } }
 
+.block-editor-button-block-appender {
+  box-shadow: inset 0 0 0 1px currentColor;
+  color: inherit; }
+
 .editor-post-title .editor-post-title__input {
   --font-size: var(--theme-heading-1-font-size);
   --current-font-size: var(--final-font-size);
@@ -217,6 +221,7 @@
   --current-font-weight: var(--theme-heading-1-font-weight);
   --current-letter-spacing: var(--theme-heading-1-letter-spacing);
   --current-text-transform: var(--theme-heading-1-text-transform);
+  --current-color: var(--theme-heading-1-color);
   --current-font-weight: 800;
   --current-line-height: 1.2; }
 
@@ -251,6 +256,7 @@
     --current-line-height: var(--theme-heading-4-line-height);
     --current-letter-spacing: var(--theme-heading-4-letter-spacing);
     --current-text-transform: var(--theme-heading-4-text-transform);
+    --current-color: var(--theme-heading-4-color);
     --font-size: calc(var(--theme-header-logo-height-setting) * 1.8);
     --current-line-height: 1; }
     @media not screen and (min-width: 768px) {
@@ -699,7 +705,8 @@
     .editor-styles-wrapper[class] h1, .editor-styles-wrapper[class] h2, .editor-styles-wrapper[class] h3, .editor-styles-wrapper[class] h4, .editor-styles-wrapper[class] h5, .editor-styles-wrapper[class] h6 {
       margin-top: 0;
       margin-bottom: 0;
-      font-weight: var(--current-font-weight); }
+      font-weight: var(--current-font-weight);
+      color: var(--current-color); }
     .editor-styles-wrapper[class] h1, .editor-styles-wrapper[class] .h1 {
       --font-size: var(--theme-heading-1-font-size);
       --current-font-size: var(--final-font-size);
@@ -709,6 +716,7 @@
       --current-font-weight: var(--theme-heading-1-font-weight);
       --current-letter-spacing: var(--theme-heading-1-letter-spacing);
       --current-text-transform: var(--theme-heading-1-text-transform);
+      --current-color: var(--theme-heading-1-color);
       --current-font-feature: "liga", "dlig", "onum"; }
     .editor-styles-wrapper[class] h2, .editor-styles-wrapper[class] .h2 {
       --font-size: var(--theme-heading-2-font-size);
@@ -719,6 +727,7 @@
       --current-line-height: var(--theme-heading-2-line-height);
       --current-letter-spacing: var(--theme-heading-2-letter-spacing);
       --current-text-transform: var(--theme-heading-2-text-transform);
+      --current-color: var(--theme-heading-2-color);
       --current-font-feature: "liga", "dlig", "onum"; }
     .editor-styles-wrapper[class] h3, .editor-styles-wrapper[class] .h3 {
       --font-size: var(--theme-heading-3-font-size);
@@ -728,7 +737,8 @@
       --current-font-weight: var(--theme-heading-3-font-weight);
       --current-line-height: var(--theme-heading-3-line-height);
       --current-letter-spacing: var(--theme-heading-3-letter-spacing);
-      --current-text-transform: var(--theme-heading-3-text-transform); }
+      --current-text-transform: var(--theme-heading-3-text-transform);
+      --current-color: var(--theme-heading-3-color); }
     .editor-styles-wrapper[class] h4, .editor-styles-wrapper[class] .h4 {
       --font-size: var(--theme-heading-4-font-size);
       --current-font-size: var(--final-font-size);
@@ -737,7 +747,8 @@
       --current-font-style: var(--theme-heading-4-font-style);
       --current-line-height: var(--theme-heading-4-line-height);
       --current-letter-spacing: var(--theme-heading-4-letter-spacing);
-      --current-text-transform: var(--theme-heading-4-text-transform); }
+      --current-text-transform: var(--theme-heading-4-text-transform);
+      --current-color: var(--theme-heading-4-color); }
     .editor-styles-wrapper[class] h5, .editor-styles-wrapper[class] .h5 {
       --font-size: var(--theme-heading-5-font-size);
       --current-font-size: var(--final-font-size);
@@ -746,7 +757,8 @@
       --current-font-style: var(--theme-heading-5-font-style);
       --current-line-height: var(--theme-heading-5-line-height);
       --current-letter-spacing: var(--theme-heading-5-letter-spacing);
-      --current-text-transform: var(--theme-heading-5-text-transform); }
+      --current-text-transform: var(--theme-heading-5-text-transform);
+      --current-color: var(--theme-heading-5-color); }
     .editor-styles-wrapper[class] h6, .editor-styles-wrapper[class] .h6 {
       --font-size: var(--theme-heading-6-font-size);
       --current-font-size: var(--final-font-size);
@@ -755,12 +767,18 @@
       --current-font-style: var(--theme-heading-6-font-style);
       --current-line-height: var(--theme-heading-6-line-height);
       --current-letter-spacing: var(--theme-heading-6-letter-spacing);
-      --current-text-transform: var(--theme-heading-6-text-transform); }
+      --current-text-transform: var(--theme-heading-6-text-transform);
+      --current-color: var(--theme-heading-6-color); }
     .editor-styles-wrapper[class] em,
     .editor-styles-wrapper[class] i,
     .editor-styles-wrapper[class] q,
     .editor-styles-wrapper[class] dfn {
       font-style: italic; }
+    .editor-styles-wrapper[class] em {
+      --current-font-style: italic; }
+    .editor-styles-wrapper[class] strong,
+    .editor-styles-wrapper[class] b {
+      --current-font-weight: bold; }
     .editor-styles-wrapper[class] iframe {
       width: 100%;
       max-width: 100%;
@@ -811,7 +829,9 @@
       --current-font-style: var(--theme-lead-font-style);
       --current-line-height: var(--theme-lead-line-height);
       --current-letter-spacing: var(--theme-lead-letter-spacing);
-      --current-text-transform: var(--theme-lead-text-transform); }
+      --current-text-transform: var(--theme-lead-text-transform);
+      font-size: var(--current-font-size);
+      line-height: var(--current-line-height); }
     .editor-styles-wrapper[class] .is-style-meta {
       --font-size: var(--theme-meta-font-size);
       --current-font-size: var(--final-font-size);
@@ -933,3 +953,7 @@
 .wp-block-widget-area button,
 .wp-block-widget-area select {
   --font-size-modifier: 1; }
+
+.wp-block[data-align="full"] > div:not([class])[style*='spacing'][style*='emphasis'] > .wp-block-group > [class*="__inner-container"] {
+  padding-right: var(--theme-wrapper-sides-spacing);
+  padding-left: var(--theme-wrapper-sides-spacing); }

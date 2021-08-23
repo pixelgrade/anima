@@ -1,4 +1,9 @@
 .has-no-spacing-top {
+  
+  // It's fake because it is not exact, is approximately.
+  // Since we are using it only for a gradient,
+  // approximately is good enough.
+  --fake-header-height: calc( 2 * var(--novablocks-spacing) + Max(var(--theme-header-logo-height), calc(var(--theme-navigation-font-size) * var(--theme-navigation-line-height) * 1px)));
 
   .novablocks-hero:first-child {
 
@@ -9,7 +14,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: linear-gradient( rgba(0,0, 0, 0.2) var(--theme-promobar-height, 0), rgba(0, 0, 0, 0.03) calc(2 * var(--theme-header-height)), rgba(0, 0, 0, 0) 100%);
+      background-image: linear-gradient( rgba(0,0, 0, 0.2) var(--theme-promobar-height, 0px), rgba(0, 0, 0, 0.03) calc(2 * var(--fake-header-height, 0px)), rgba(0, 0, 0, 0) 100%);
     }
   }
 }
@@ -19,8 +24,7 @@
   .entry-content {
     
     > :first-child {
-      --block-top-spacing: 0;
-      //--emphasis-top-spacing: 0;
+      --novablocks-block-top-spacing: 0 !important;
     }
   }
 }

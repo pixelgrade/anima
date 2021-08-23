@@ -1,13 +1,12 @@
 .wp-block-group {
-    --wp-block-group-padding: var(--current-element-padding, var(--theme-spacing-fluid-large));
-
-    &,
-    &[class*="is-style"]:not(.is-style-default) {
-        padding-top: var(--wp-block-group-padding);
-        padding-bottom: var(--wp-block-group-padding);
-
-        & + & {
-            --element-spacing: 0;
-        }
-    }
+	
+	// We don't need padding-left and padding-right,
+	// when this block does not have background.
+	&[class*='sm-color-signal-0']:not([class*='alignfull']) {
+		
+		> [class*="__inner-container"] {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
 }
