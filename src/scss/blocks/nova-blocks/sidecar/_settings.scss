@@ -8,7 +8,10 @@ body:not(.has-sidebar) {
 	--block-limit-right: ce;
 	
 	.entry-content {
-		--block-content-start: cs;
+		
+		> *:not([class*='align']) {
+			--block-content-start: cs;
+		}
 	}
 }
 

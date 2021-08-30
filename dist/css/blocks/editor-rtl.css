@@ -709,7 +709,7 @@ html:root {
 body:not(.has-sidebar) {
   --block-limit-left: cs;
   --block-limit-right: ce; }
-  body:not(.has-sidebar) .entry-content {
+  body:not(.has-sidebar) .entry-content > *:not([class*='align']) {
     --block-content-start: cs; }
 
 .single.has-sidebar .entry-content[class][class][class],
@@ -842,7 +842,7 @@ html:root {
 body:not(.has-sidebar) {
   --block-limit-left: cs;
   --block-limit-right: ce; }
-  body:not(.has-sidebar) .entry-content {
+  body:not(.has-sidebar) .entry-content > *:not([class*='align']) {
     --block-content-start: cs; }
 
 .single.has-sidebar .entry-content[class][class][class],
