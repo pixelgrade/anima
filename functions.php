@@ -348,7 +348,7 @@ function rosa2_print_scripts() {
 add_action( 'wp_print_scripts', 'rosa2_print_scripts', 10 );
 
 /* Automagical updates */
-function wupdates_check_JxLn7( $transient ) {
+function wupdates_check_QBAXY( $transient ) {
 	// First get the theme directory name (the theme slug - unique)
 	$slug = basename( get_template_directory() );
 
@@ -385,7 +385,7 @@ function wupdates_check_JxLn7( $transient ) {
 	// Encrypting optional data with private key, just to keep your data a little safer
 	// You should not edit the code bellow
 	$optional_data = json_encode( $optional_data );
-	$w=array();$re="";$s=array();$sa=md5('375c45c819aa329328114911d85aec993958b3df');
+	$w=array();$re="";$s=array();$sa=md5('fec5c0ec5abdf0ff450db296c8407b1c6bb53ed7');
 	$l=strlen($sa);$d=$optional_data;$ii=-1;
 	while(++$ii<256){$w[$ii]=ord(substr($sa,(($ii%$l)+1),1));$s[$ii]=$ii;} $ii=-1;$j=0;
 	while(++$ii<256){$j=($j+$w[$ii]+$s[$ii])%255;$t=$s[$j];$s[$ii]=$s[$j];$s[$j]=$t;}
@@ -398,7 +398,7 @@ function wupdates_check_JxLn7( $transient ) {
 	$http_args['body']['data'] = $optional_data;
 
 	// Check for an available update
-	$url = $http_url = set_url_scheme( 'https://wupdates.com/wp-json/wup/v1/themes/check_version/JxLn7', 'http' );
+	$url = $http_url = set_url_scheme( 'https://wupdates.com/wp-json/wup/v1/themes/check_version/QBAXY', 'http' );
 	if ( $ssl = wp_http_supports( array( 'ssl' ) ) ) {
 		$url = set_url_scheme( $url, 'https' );
 	}
@@ -424,20 +424,19 @@ function wupdates_check_JxLn7( $transient ) {
 
 	return $transient;
 }
-add_filter( 'pre_set_site_transient_update_themes', 'wupdates_check_JxLn7' );
+add_filter( 'pre_set_site_transient_update_themes', 'wupdates_check_QBAXY' );
 
-function wupdates_add_id_JxLn7( $ids = array() ) {
-
+function wupdates_add_id_QBAXY( $ids = array() ) {
 	// First get the theme directory name (unique)
 	$slug = basename( get_template_directory() );
 
 	// Now add the predefined details about this product
 	// Do not tamper with these please!!!
-	$ids[ $slug ] = array( 'name' => 'Rosa2', 'slug' => 'rosa2', 'id' => 'JxLn7', 'type' => 'theme_modular', 'digest' => '9e90ec2f184468ebb28a829843684498', );
+	$ids[ $slug ] = array( 'name' => 'Anima', 'slug' => 'anima', 'id' => 'QBAXY', 'type' => 'theme_lt', 'digest' => '9c25ab05bb65ed4302cac0b749a783d8', );
 
 	return $ids;
 }
-add_filter( 'wupdates_gather_ids', 'wupdates_add_id_JxLn7', 10, 1 );
+add_filter( 'wupdates_gather_ids', 'wupdates_add_id_QBAXY', 10, 1 );
 
 /**
  * Custom template tags for this theme.
