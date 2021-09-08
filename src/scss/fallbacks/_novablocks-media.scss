@@ -25,13 +25,13 @@
 }
 
 .novablocks-media__layout {
-    margin-top: calc( -1 * var(--novablocks-media-gutter) );
-    margin-left: calc( -1 * var(--novablocks-media-gutter) );
+    margin-top: calc( -1 * var(--nb-media-gutter) );
+    margin-left: calc( -1 * var(--nb-media-gutter) );
     pointer-events: none;
 
     > * {
-        padding-left: var(--novablocks-media-gutter);
-        margin-top: var(--novablocks-media-gutter);
+        padding-left: var(--nb-media-gutter);
+        margin-top: var(--nb-media-gutter);
         pointer-events: auto;
     }
 
@@ -41,11 +41,11 @@
         align-items: stretch;
 
         .novablocks-media__aside {
-            flex: 1 1 calc( 100% - var(--novablocks-media-content-width, 50%) );
+            flex: 1 1 calc( 100% - var(--nb-media-content-width, 50%) );
         }
 
         .novablocks-media__content {
-            flex: 1 1 var(--novablocks-media-content-width, 50%);
+            flex: 1 1 var(--nb-media-content-width, 50%);
         }
     }
 }

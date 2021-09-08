@@ -399,14 +399,14 @@ ol.nb-list {
 
 @media only screen and (min-width: 768px) {
   .novablocks-block__content {
-    --novablocks-block-content-padding: var(--novablocks-spacing); } }
+    --nb-block-content-padding: var(--nb-spacing); } }
 
 .block-is-moderate + .block-is-moderate:not(.novablocks-media--blog),
 .block-is-highlighted + .block-is-highlighted[class] {
   padding-top: 0; }
 
 .novablocks-grid__column:first-child .novablocks-grid__area:first-child:last-child {
-  top: calc( var(--novablocks-grid-spacing) * var(--novablocks-grid-spacing-modifier, 1) + var(--novablocks-header-height, 0)); }
+  top: calc( var(--nb-grid-spacing) * var(--nb-grid-spacing-modifier, 1) + var(--nb-header-height, 0)); }
 
 .nova-food-menu {
   --block-content-start: ws;
@@ -654,7 +654,7 @@ ol.nb-list {
 
 .novablocks-hero__inner-container > .wp-block-separator:not(:first-child),
 .novablocks-hero__inner-container > .wp-block-separator[class] + * {
-  --novablocks-element-spacing-multiplier: 1; }
+  --nb-element-spacing-multiplier: 1; }
 
 .novablocks-hero__indicator--middle[class] {
   background-color: transparent;
@@ -746,10 +746,10 @@ ol.nb-list {
     object-fit: contain; }
 
 .novablocks-media--blog[class] .novablocks-media__content {
-  flex-basis: calc(50% - var(--novablocks-media-spacing)); }
+  flex-basis: calc(50% - var(--nb-media-spacing)); }
 
 .novablocks-media--blog[class] .novablocks-media__aside {
-  flex-basis: calc(50% + var(--novablocks-media-spacing) - 0.5px); }
+  flex-basis: calc(50% + var(--nb-media-spacing) - 0.5px); }
 
 .novablocks-media--blog[class] .novablocks-media__layout {
   align-items: stretch; }
@@ -775,13 +775,13 @@ ol.nb-list {
       .novablocks-navigation > .menu > ul > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) > a:before {
         content: '';
         position: absolute;
-        bottom: var(--novablocks-navigation-item-bottom-margin);
+        bottom: var(--nb-navigation-item-bottom-margin);
         width: 100%;
         height: 3px;
         background: currentColor;
         transform: scale3d(0, 1, 1);
         transform-origin: right;
-        transition: var(--novablocks-transition);
+        transition: var(--nb-transition);
         transition-property: transform;
         will-change: transform;
         -webkit-backface-visibility: hidden; }
@@ -889,7 +889,7 @@ ol.nb-list {
 
 @media only screen and (min-width: 1024px) {
   .novablocks-navigation {
-    --novablocks-navigation-item-bottom-margin: .5em; }
+    --nb-navigation-item-bottom-margin: .5em; }
     .novablocks-navigation ul.menu a,
     .novablocks-navigation .menu > ul a {
       display: block;
@@ -900,8 +900,8 @@ ol.nb-list {
       margin-left: 0; }
     .novablocks-navigation ul.menu > li > a,
     .novablocks-navigation .menu > ul > li > a {
-      padding-bottom: calc( var(--novablocks-navigation-item-padding-y) - var(--novablocks-navigation-item-bottom-margin));
-      margin-bottom: var(--novablocks-navigation-item-bottom-margin); }
+      padding-bottom: calc( var(--nb-navigation-item-padding-y) - var(--nb-navigation-item-bottom-margin));
+      margin-bottom: var(--nb-navigation-item-bottom-margin); }
     .novablocks-navigation ul.menu li:hover > a,
     .novablocks-navigation .menu > ul li:hover > a {
       border-color: currentColor; }
@@ -1116,7 +1116,7 @@ ol.nb-list {
   --current-font-weight: var(--theme-body-font-weight);
   --current-font-style: var(--theme-body-font-style);
   --current-letter-spacing: var(--theme-body-letter-spacing);
-  --novablocks-spacing: var(--theme-spacing-fluid-large); }
+  --nb-spacing: var(--theme-spacing-fluid-large); }
   .novablocks-sharing__overlay[class] {
     z-index: 1200; }
   .novablocks-sharing__overlay .novablocks-sharing__wrap[class][class][class] {
@@ -1146,8 +1146,8 @@ ol.nb-list {
   --theme-input-box-shadow: none; }
 
 html:root {
-  --novablocks-wide-width: var(--theme-content-width-wide);
-  --novablocks-container-spacings: var(--theme-wrapper-sides-spacing); }
+  --nb-wide-width: var(--theme-content-width-wide);
+  --nb-container-spacings: var(--theme-wrapper-sides-spacing); }
 
 body:not(.has-sidebar) {
   --block-limit-left: cs;

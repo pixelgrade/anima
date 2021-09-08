@@ -3,7 +3,7 @@
   // It's fake because it is not exact, is approximately.
   // Since we are using it only for a gradient,
   // approximately is good enough.
-  --fake-header-height: calc( 2 * var(--novablocks-spacing) + Max(var(--theme-header-logo-height), calc(var(--theme-navigation-font-size) * var(--theme-navigation-line-height) * 1px)));
+  --fake-header-height: calc( 2 * var(--nb-spacing) + Max(var(--theme-header-logo-height), calc(var(--theme-navigation-font-size) * var(--theme-navigation-line-height) * 1px)));
 
   .novablocks-hero:first-child {
 
@@ -24,7 +24,7 @@
   .entry-content {
     
     > :first-child {
-      --novablocks-block-top-spacing: 0 !important;
+      --nb-block-top-spacing: 0 !important;
     }
   }
 }
