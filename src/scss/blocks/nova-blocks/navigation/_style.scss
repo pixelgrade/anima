@@ -58,7 +58,7 @@
     }
 
     @include above(lap) {
-        --novablocks-navigation-item-bottom-margin: .5em;
+        --nb-navigation-item-bottom-margin: .5em;
 
         ul.menu,
         .menu > ul {
@@ -74,8 +74,8 @@
             }
 
             > li > a {
-                padding-bottom: calc( var(--novablocks-navigation-item-padding-y) - var(--novablocks-navigation-item-bottom-margin) );
-                margin-bottom: var(--novablocks-navigation-item-bottom-margin);
+                padding-bottom: calc( var(--nb-navigation-item-padding-y) - var(--nb-navigation-item-bottom-margin) );
+                margin-bottom: var(--nb-navigation-item-bottom-margin);
             }
 
             li:hover {

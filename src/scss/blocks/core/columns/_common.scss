@@ -5,13 +5,13 @@ $enable-columns-block-styles: true !default;
     // spacing for first level of rows
     &:not(:first-child),
     & + :not(:first-child) {
-        --novablocks-element-spacing-multiplier: 2;
+        --nb-element-spacing-multiplier: 2;
     }
 
     // spacing for deeper levels of rows
     & &:not(:first-child),
     & & + :not(:first-child) {
-        --novablocks-element-spacing-multiplier: 1;
+        --nb-element-spacing-multiplier: 1;
     }
 }
 

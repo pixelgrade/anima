@@ -111,11 +111,11 @@
 /* Columns Blocks */
 .wp-block-columns[class]:not(:first-child),
 .wp-block-columns[class] + :not(:first-child) {
-  --novablocks-element-spacing-multiplier: 2; }
+  --nb-element-spacing-multiplier: 2; }
 
 .wp-block-columns[class] .wp-block-columns[class]:not(:first-child),
 .wp-block-columns[class] .wp-block-columns[class] + :not(:first-child) {
-  --novablocks-element-spacing-multiplier: 1; }
+  --nb-element-spacing-multiplier: 1; }
 
 .wp-block-columns[class] .alignfull {
   margin-left: 0;
@@ -1013,9 +1013,6 @@
   margin-left: auto;
   margin-right: auto; }
 
-.novablocks-hero[class] a {
-  --theme-links-color: var(--novablocks-hero-text-color); }
-
 .novablocks-hero .wp-block-button:not(.is-style-text) .wp-block-button__link {
   --theme-button-text-color: var(--sm-current-bg-color);
   --theme-button-background-color: var(--sm-current-fg1-color);
@@ -1036,9 +1033,6 @@
   .wp-block-novablocks-navigation ul.menu a,
   .wp-block-novablocks-navigation .menu > ul a {
     padding: 0.75em 0; }
-
-.novablocks-slideshow[class] a {
-  --theme-links-color: var(--novablocks-slideshow-text-color); }
 
 .supernova-collection__layout--carousel .slick-dots {
   /*
@@ -1093,11 +1087,11 @@
 
 html:root {
   --nova-food-menu-item-highlight-color: var(--sm-current-fg2-color);
-  --novablocks-spacing: var(--theme-content-spacing);
-  --novablocks-media-spacing: var(--theme-spacing-fluid-large);
-  --novablocks-sides-spacings: var(--theme-wrapper-sides-spacing);
-  --novablocks-navigation-item-spacing: var(--theme-header-links-spacing);
-  --novablocks-block-content-box-shadow:
+  --nb-spacing: var(--theme-content-spacing);
+  --nb-media-spacing: var(--theme-spacing-fluid-large);
+  --nb-sides-spacings: var(--theme-wrapper-sides-spacing);
+  --nb-navigation-item-spacing: var(--theme-header-links-spacing);
+  --nb-block-content-box-shadow:
             0 32px 128px rgba(0, 0, 0, 0.1),
             0 16px 64px rgba(0, 0, 0, 0.1),
             0 8px 16px rgba(0, 0, 0, 0.1); }

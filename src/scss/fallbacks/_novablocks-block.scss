@@ -1,15 +1,15 @@
 .novablocks-block[class] {
-    padding-top: calc( var(--emphasis-top-spacing, 1) * var(--novablocks-spacing) * var(--novablocks-element-spacing-multiplier, 1) );
-    padding-bottom: calc( var(--emphasis-bottom-spacing, 1) * var(--novablocks-spacing) * var(--novablocks-element-spacing-multiplier, 1) );
+    padding-top: calc( var(--emphasis-top-spacing, 1) * var(--nb-spacing) * var(--nb-element-spacing-multiplier, 1) );
+    padding-bottom: calc( var(--emphasis-bottom-spacing, 1) * var(--nb-spacing) * var(--nb-element-spacing-multiplier, 1) );
 
-    color: var(--novablocks-block-text-color);
-    background-color: var(--novablocks-block-background-color);
+    color: var(--nb-block-text-color);
+    background-color: var(--nb-block-background-color);
 }
 
 .novablocks-block__content {
     position: relative;
 
-    color: var(--novablocks-block-content-text-color);
+    color: var(--nb-block-content-text-color);
     transform: translateZ(0);
 
     @include above(tablet) {
@@ -24,8 +24,8 @@
             z-index: -1;
 
             display: block;
-            background-color: var(--novablocks-block-content-background-color);
-            opacity: var(--novablocks-block-content-background-opacity);
+            background-color: var(--nb-block-content-background-color);
+            opacity: var(--nb-block-content-background-opacity);
             pointer-events: none;
         }
     }
