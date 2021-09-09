@@ -1,0 +1,76 @@
+.supernova-collection__layout--carousel {
+
+	.slick-dots {
+		/*
+		 * Slick dots is an ul
+		 * and all child in an ul, except first one,
+		 * has a margin-top applied.
+		 */
+		
+		&[class] {
+			
+			> li {
+				margin-top: 0;
+			}
+		}
+	}
+	
+	.slick-arrow {
+		width: 50px;
+		height: 50px;
+		
+		background-color: transparent;
+		transform: translateY(-50%);
+		
+		&:hover:after {
+			opacity: .1;
+		}
+	}
+	
+	.slick-prev:before,
+	.slick-next:before {
+		content: "";
+		
+		display: block;
+		width: 32px;
+		height: 32px;
+		
+		margin: 0;
+		border: 0;
+		padding: 0;
+		
+		mask: url($icon-arrow-svg-path) no-repeat 50% 50%;
+		mask-size: cover;
+		-webkit-mask: url($icon-arrow-svg-path) no-repeat 50% 50%;
+		-webkit-mask-size: cover;
+		
+		background-color: var(--sm-current-fg1-color);
+	}
+	
+	.slick-prev:before {
+		transform: translate(-50%, -50%);
+	}
+	
+	.slick-next:before {
+		transform: translate(-50%, -50%) rotate(180deg);
+	}
+	
+	.slick-arrow:after {
+		content: "";
+		
+		display: block;
+		width: 50px;
+		height: 50px;
+		
+		margin-top: 0;
+		border: 0;
+		border-radius: 50%;
+		
+		background-color: var(--sm-current-bg-color);
+		opacity: 0;
+		
+		transition: opacity 0.15s ease-in;
+		transform: none;
+	}
+	
+}
