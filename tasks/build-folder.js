@@ -34,19 +34,20 @@ gulp.task( 'build:copy-folder', copyFolder );
 // Remove unneeded files and folders from the build folder.
 // -----------------------------------------------------------------------------
 async function removeUnneededFiles() {
-	const files_to_remove = new Array();
+	const files_to_remove = [];
 	const contents = fs.readFileSync( '.zipignore', 'utf8' );
 
 	// Files that should not be present in build
 	contents.split(/[\r\n]/).forEach(function(path) {
 		path = path.trim();
 
-		if ( path ) {
-			files_to_remove.push('../build/' + theme + '/' + path);
+		// We will skip line starting with # since those are comments (as per the .gitignore standard).
+		if ( path && !path.startsWith('#') ) {
+			files_to_remove.push( '../build/' + theme + '/' + path );
 		}
 	});
 
-	return del( files_to_remove, {force: true} );
+	return del.sync( files_to_remove, {force: true} );
 }
 removeUnneededFiles.description = 'Remove unneeded files and folders from the build folder';
 gulp.task( 'build:remove-unneeded-files', removeUnneededFiles );

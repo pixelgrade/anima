@@ -8,9 +8,9 @@
             $suffix: #{ $i }-shifted;
         }
 
-        --sm-bg-color-#{ $i }: var(--sm-color-palette-#{ $id }-bg-color-#{ $suffix });
-        --sm-accent-color-#{ $i }: var(--sm-color-palette-#{ $id }-accent-color-#{ $suffix });
-        --sm-fg1-color-#{ $i }: var(--sm-color-palette-#{ $id }-fg1-color-#{ $suffix });
-        --sm-fg2-color-#{ $i }: var(--sm-color-palette-#{ $id }-fg2-color-#{ $suffix });
+        --sm-bg-color-#{ $i }: var(--sm-color-palette-#{ $id }-bg-color-#{ $suffix }, var(--sm-color-palette-1-bg-color-#{ $suffix }));
+        --sm-accent-color-#{ $i }: var(--sm-color-palette-#{ $id }-accent-color-#{ $suffix }, var(--sm-color-palette-1-accent-color-#{ $suffix }));
+        --sm-fg1-color-#{ $i }: var(--sm-color-palette-#{ $id }-fg1-color-#{ $suffix }, var(--sm-color-palette-1-fg1-color-#{ $suffix }));
+        --sm-fg2-color-#{ $i }: var(--sm-color-palette-#{ $id }-fg2-color-#{ $suffix }, var(--sm-color-palette-1-fg2-color-#{ $suffix }));
     }
 }

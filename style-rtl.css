@@ -4,13 +4,13 @@ Theme URI: https://demos.pixelgrade.com/anima
 Author: Pixelgrade
 Author URI: https://pixelgrade.com
 Description: Anima is an enchanting and easy-to-use parallax Restaurant WordPress theme that allows you to tell your story in a dynamic, narrative and enjoyable way, making it perfect for restaurants, bakeries, bars or coffee shops.
-Version: 1.12.4
+Version: 1.13.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: __theme_txtd
 Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, fluid-layout, responsive-layout, parallax, translation-ready, restaurant
 Requires at least: 5.2.0
-Tested up to: 5.7.2
+Tested up to: 5.8
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
@@ -345,7 +345,7 @@ html {
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
   scroll-padding-top: var(--theme-header-height);
-  --theme-body-final-font-size: var(--current-font-size);
+  --theme-body-final-font-size: var(--final-font-size);
   --font-size: var(--theme-body-font-size);
   --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-body-font-family);
@@ -757,7 +757,8 @@ label {
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0;
-  font-weight: var(--current-font-weight); }
+  font-weight: var(--current-font-weight);
+  color: var(--current-color); }
 
 h1, .h1 {
   --font-size: var(--theme-heading-1-font-size);
@@ -768,6 +769,7 @@ h1, .h1 {
   --current-font-weight: var(--theme-heading-1-font-weight);
   --current-letter-spacing: var(--theme-heading-1-letter-spacing);
   --current-text-transform: var(--theme-heading-1-text-transform);
+  --current-color: var(--theme-heading-1-color);
   --current-font-feature: "liga", "dlig", "onum"; }
 
 h2, .h2 {
@@ -779,6 +781,7 @@ h2, .h2 {
   --current-line-height: var(--theme-heading-2-line-height);
   --current-letter-spacing: var(--theme-heading-2-letter-spacing);
   --current-text-transform: var(--theme-heading-2-text-transform);
+  --current-color: var(--theme-heading-2-color);
   --current-font-feature: "liga", "dlig", "onum"; }
 
 h3, .h3 {
@@ -789,7 +792,8 @@ h3, .h3 {
   --current-font-weight: var(--theme-heading-3-font-weight);
   --current-line-height: var(--theme-heading-3-line-height);
   --current-letter-spacing: var(--theme-heading-3-letter-spacing);
-  --current-text-transform: var(--theme-heading-3-text-transform); }
+  --current-text-transform: var(--theme-heading-3-text-transform);
+  --current-color: var(--theme-heading-3-color); }
 
 h4, .h4 {
   --font-size: var(--theme-heading-4-font-size);
@@ -799,7 +803,8 @@ h4, .h4 {
   --current-font-style: var(--theme-heading-4-font-style);
   --current-line-height: var(--theme-heading-4-line-height);
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
-  --current-text-transform: var(--theme-heading-4-text-transform); }
+  --current-text-transform: var(--theme-heading-4-text-transform);
+  --current-color: var(--theme-heading-4-color); }
 
 h5, .h5 {
   --font-size: var(--theme-heading-5-font-size);
@@ -809,7 +814,8 @@ h5, .h5 {
   --current-font-style: var(--theme-heading-5-font-style);
   --current-line-height: var(--theme-heading-5-line-height);
   --current-letter-spacing: var(--theme-heading-5-letter-spacing);
-  --current-text-transform: var(--theme-heading-5-text-transform); }
+  --current-text-transform: var(--theme-heading-5-text-transform);
+  --current-color: var(--theme-heading-5-color); }
 
 h6, .h6 {
   --font-size: var(--theme-heading-6-font-size);
@@ -819,13 +825,21 @@ h6, .h6 {
   --current-font-style: var(--theme-heading-6-font-style);
   --current-line-height: var(--theme-heading-6-line-height);
   --current-letter-spacing: var(--theme-heading-6-letter-spacing);
-  --current-text-transform: var(--theme-heading-6-text-transform); }
+  --current-text-transform: var(--theme-heading-6-text-transform);
+  --current-color: var(--theme-heading-6-color); }
 
 em,
 i,
 q,
 dfn {
   font-style: italic; }
+
+em {
+  --current-font-style: italic; }
+
+strong,
+b {
+  --current-font-weight: bold; }
 
 /* Iframes */
 iframe {
@@ -965,7 +979,9 @@ table {
   --current-font-style: var(--theme-lead-font-style);
   --current-line-height: var(--theme-lead-line-height);
   --current-letter-spacing: var(--theme-lead-letter-spacing);
-  --current-text-transform: var(--theme-lead-text-transform); }
+  --current-text-transform: var(--theme-lead-text-transform);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height); }
 
 .is-style-meta {
   --font-size: var(--theme-meta-font-size);
@@ -1022,54 +1038,54 @@ table {
 .c-subscribe-form {
   display: flex;
   flex-direction: column;
-  --sm-bg-color-1: var(--sm-color-palette-2-bg-color-1);
-  --sm-accent-color-1: var(--sm-color-palette-2-accent-color-1);
-  --sm-fg1-color-1: var(--sm-color-palette-2-fg1-color-1);
-  --sm-fg2-color-1: var(--sm-color-palette-2-fg2-color-1);
-  --sm-bg-color-2: var(--sm-color-palette-2-bg-color-2);
-  --sm-accent-color-2: var(--sm-color-palette-2-accent-color-2);
-  --sm-fg1-color-2: var(--sm-color-palette-2-fg1-color-2);
-  --sm-fg2-color-2: var(--sm-color-palette-2-fg2-color-2);
-  --sm-bg-color-3: var(--sm-color-palette-2-bg-color-3);
-  --sm-accent-color-3: var(--sm-color-palette-2-accent-color-3);
-  --sm-fg1-color-3: var(--sm-color-palette-2-fg1-color-3);
-  --sm-fg2-color-3: var(--sm-color-palette-2-fg2-color-3);
-  --sm-bg-color-4: var(--sm-color-palette-2-bg-color-4);
-  --sm-accent-color-4: var(--sm-color-palette-2-accent-color-4);
-  --sm-fg1-color-4: var(--sm-color-palette-2-fg1-color-4);
-  --sm-fg2-color-4: var(--sm-color-palette-2-fg2-color-4);
-  --sm-bg-color-5: var(--sm-color-palette-2-bg-color-5);
-  --sm-accent-color-5: var(--sm-color-palette-2-accent-color-5);
-  --sm-fg1-color-5: var(--sm-color-palette-2-fg1-color-5);
-  --sm-fg2-color-5: var(--sm-color-palette-2-fg2-color-5);
-  --sm-bg-color-6: var(--sm-color-palette-2-bg-color-6);
-  --sm-accent-color-6: var(--sm-color-palette-2-accent-color-6);
-  --sm-fg1-color-6: var(--sm-color-palette-2-fg1-color-6);
-  --sm-fg2-color-6: var(--sm-color-palette-2-fg2-color-6);
-  --sm-bg-color-7: var(--sm-color-palette-2-bg-color-7);
-  --sm-accent-color-7: var(--sm-color-palette-2-accent-color-7);
-  --sm-fg1-color-7: var(--sm-color-palette-2-fg1-color-7);
-  --sm-fg2-color-7: var(--sm-color-palette-2-fg2-color-7);
-  --sm-bg-color-8: var(--sm-color-palette-2-bg-color-8);
-  --sm-accent-color-8: var(--sm-color-palette-2-accent-color-8);
-  --sm-fg1-color-8: var(--sm-color-palette-2-fg1-color-8);
-  --sm-fg2-color-8: var(--sm-color-palette-2-fg2-color-8);
-  --sm-bg-color-9: var(--sm-color-palette-2-bg-color-9);
-  --sm-accent-color-9: var(--sm-color-palette-2-accent-color-9);
-  --sm-fg1-color-9: var(--sm-color-palette-2-fg1-color-9);
-  --sm-fg2-color-9: var(--sm-color-palette-2-fg2-color-9);
-  --sm-bg-color-10: var(--sm-color-palette-2-bg-color-10);
-  --sm-accent-color-10: var(--sm-color-palette-2-accent-color-10);
-  --sm-fg1-color-10: var(--sm-color-palette-2-fg1-color-10);
-  --sm-fg2-color-10: var(--sm-color-palette-2-fg2-color-10);
-  --sm-bg-color-11: var(--sm-color-palette-2-bg-color-11);
-  --sm-accent-color-11: var(--sm-color-palette-2-accent-color-11);
-  --sm-fg1-color-11: var(--sm-color-palette-2-fg1-color-11);
-  --sm-fg2-color-11: var(--sm-color-palette-2-fg2-color-11);
-  --sm-bg-color-12: var(--sm-color-palette-2-bg-color-12);
-  --sm-accent-color-12: var(--sm-color-palette-2-accent-color-12);
-  --sm-fg1-color-12: var(--sm-color-palette-2-fg1-color-12);
-  --sm-fg2-color-12: var(--sm-color-palette-2-fg2-color-12); }
+  --sm-bg-color-1: var(--sm-color-palette-2-bg-color-1, var(--sm-color-palette-1-bg-color-1));
+  --sm-accent-color-1: var(--sm-color-palette-2-accent-color-1, var(--sm-color-palette-1-accent-color-1));
+  --sm-fg1-color-1: var(--sm-color-palette-2-fg1-color-1, var(--sm-color-palette-1-fg1-color-1));
+  --sm-fg2-color-1: var(--sm-color-palette-2-fg2-color-1, var(--sm-color-palette-1-fg2-color-1));
+  --sm-bg-color-2: var(--sm-color-palette-2-bg-color-2, var(--sm-color-palette-1-bg-color-2));
+  --sm-accent-color-2: var(--sm-color-palette-2-accent-color-2, var(--sm-color-palette-1-accent-color-2));
+  --sm-fg1-color-2: var(--sm-color-palette-2-fg1-color-2, var(--sm-color-palette-1-fg1-color-2));
+  --sm-fg2-color-2: var(--sm-color-palette-2-fg2-color-2, var(--sm-color-palette-1-fg2-color-2));
+  --sm-bg-color-3: var(--sm-color-palette-2-bg-color-3, var(--sm-color-palette-1-bg-color-3));
+  --sm-accent-color-3: var(--sm-color-palette-2-accent-color-3, var(--sm-color-palette-1-accent-color-3));
+  --sm-fg1-color-3: var(--sm-color-palette-2-fg1-color-3, var(--sm-color-palette-1-fg1-color-3));
+  --sm-fg2-color-3: var(--sm-color-palette-2-fg2-color-3, var(--sm-color-palette-1-fg2-color-3));
+  --sm-bg-color-4: var(--sm-color-palette-2-bg-color-4, var(--sm-color-palette-1-bg-color-4));
+  --sm-accent-color-4: var(--sm-color-palette-2-accent-color-4, var(--sm-color-palette-1-accent-color-4));
+  --sm-fg1-color-4: var(--sm-color-palette-2-fg1-color-4, var(--sm-color-palette-1-fg1-color-4));
+  --sm-fg2-color-4: var(--sm-color-palette-2-fg2-color-4, var(--sm-color-palette-1-fg2-color-4));
+  --sm-bg-color-5: var(--sm-color-palette-2-bg-color-5, var(--sm-color-palette-1-bg-color-5));
+  --sm-accent-color-5: var(--sm-color-palette-2-accent-color-5, var(--sm-color-palette-1-accent-color-5));
+  --sm-fg1-color-5: var(--sm-color-palette-2-fg1-color-5, var(--sm-color-palette-1-fg1-color-5));
+  --sm-fg2-color-5: var(--sm-color-palette-2-fg2-color-5, var(--sm-color-palette-1-fg2-color-5));
+  --sm-bg-color-6: var(--sm-color-palette-2-bg-color-6, var(--sm-color-palette-1-bg-color-6));
+  --sm-accent-color-6: var(--sm-color-palette-2-accent-color-6, var(--sm-color-palette-1-accent-color-6));
+  --sm-fg1-color-6: var(--sm-color-palette-2-fg1-color-6, var(--sm-color-palette-1-fg1-color-6));
+  --sm-fg2-color-6: var(--sm-color-palette-2-fg2-color-6, var(--sm-color-palette-1-fg2-color-6));
+  --sm-bg-color-7: var(--sm-color-palette-2-bg-color-7, var(--sm-color-palette-1-bg-color-7));
+  --sm-accent-color-7: var(--sm-color-palette-2-accent-color-7, var(--sm-color-palette-1-accent-color-7));
+  --sm-fg1-color-7: var(--sm-color-palette-2-fg1-color-7, var(--sm-color-palette-1-fg1-color-7));
+  --sm-fg2-color-7: var(--sm-color-palette-2-fg2-color-7, var(--sm-color-palette-1-fg2-color-7));
+  --sm-bg-color-8: var(--sm-color-palette-2-bg-color-8, var(--sm-color-palette-1-bg-color-8));
+  --sm-accent-color-8: var(--sm-color-palette-2-accent-color-8, var(--sm-color-palette-1-accent-color-8));
+  --sm-fg1-color-8: var(--sm-color-palette-2-fg1-color-8, var(--sm-color-palette-1-fg1-color-8));
+  --sm-fg2-color-8: var(--sm-color-palette-2-fg2-color-8, var(--sm-color-palette-1-fg2-color-8));
+  --sm-bg-color-9: var(--sm-color-palette-2-bg-color-9, var(--sm-color-palette-1-bg-color-9));
+  --sm-accent-color-9: var(--sm-color-palette-2-accent-color-9, var(--sm-color-palette-1-accent-color-9));
+  --sm-fg1-color-9: var(--sm-color-palette-2-fg1-color-9, var(--sm-color-palette-1-fg1-color-9));
+  --sm-fg2-color-9: var(--sm-color-palette-2-fg2-color-9, var(--sm-color-palette-1-fg2-color-9));
+  --sm-bg-color-10: var(--sm-color-palette-2-bg-color-10, var(--sm-color-palette-1-bg-color-10));
+  --sm-accent-color-10: var(--sm-color-palette-2-accent-color-10, var(--sm-color-palette-1-accent-color-10));
+  --sm-fg1-color-10: var(--sm-color-palette-2-fg1-color-10, var(--sm-color-palette-1-fg1-color-10));
+  --sm-fg2-color-10: var(--sm-color-palette-2-fg2-color-10, var(--sm-color-palette-1-fg2-color-10));
+  --sm-bg-color-11: var(--sm-color-palette-2-bg-color-11, var(--sm-color-palette-1-bg-color-11));
+  --sm-accent-color-11: var(--sm-color-palette-2-accent-color-11, var(--sm-color-palette-1-accent-color-11));
+  --sm-fg1-color-11: var(--sm-color-palette-2-fg1-color-11, var(--sm-color-palette-1-fg1-color-11));
+  --sm-fg2-color-11: var(--sm-color-palette-2-fg2-color-11, var(--sm-color-palette-1-fg2-color-11));
+  --sm-bg-color-12: var(--sm-color-palette-2-bg-color-12, var(--sm-color-palette-1-bg-color-12));
+  --sm-accent-color-12: var(--sm-color-palette-2-accent-color-12, var(--sm-color-palette-1-accent-color-12));
+  --sm-fg1-color-12: var(--sm-color-palette-2-fg1-color-12, var(--sm-color-palette-1-fg1-color-12));
+  --sm-fg2-color-12: var(--sm-color-palette-2-fg2-color-12, var(--sm-color-palette-1-fg2-color-12)); }
   .c-subscribe-form > :not(:first-child) {
     margin-top: var(--theme-spacing-fluid-default); }
   .c-subscribe-form button[type='submit'] {
@@ -1454,6 +1470,7 @@ table {
   --current-line-height: var(--theme-heading-4-line-height);
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
   --current-text-transform: var(--theme-heading-4-text-transform);
+  --current-color: var(--theme-heading-4-color);
   --font-size: calc(var(--theme-header-logo-height-setting) * 1.8);
   --current-line-height: 1; }
   @media not screen and (min-width: 768px) {
@@ -1495,6 +1512,10 @@ table {
 @media only screen and (min-width: 1024px) {
   .site-footer .wp-block-group .wp-block-group__inner-container {
     --display-mode: grid; } }
+
+.site-footer__inner-container > .wp-block-group {
+  --novablocks-emphasis-top-spacing: 1;
+  --novablocks-emphasis-bottom-spacing: 1; }
 
 /* Post Content */
 .entry-header {
@@ -2044,6 +2065,7 @@ label.subscribe-label.subscribe-label {
   --current-line-height: var(--theme-heading-6-line-height);
   --current-letter-spacing: var(--theme-heading-6-letter-spacing);
   --current-text-transform: var(--theme-heading-6-text-transform);
+  --current-color: var(--theme-heading-6-color);
   opacity: .6; }
 
 .comment__metadata {
@@ -2268,7 +2290,8 @@ span.page-numbers {
   --current-font-style: var(--theme-heading-4-font-style);
   --current-line-height: var(--theme-heading-4-line-height);
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
-  --current-text-transform: var(--theme-heading-4-text-transform); }
+  --current-text-transform: var(--theme-heading-4-text-transform);
+  --current-color: var(--theme-heading-4-color); }
 
 .post-navigation__post-title,
 .post-navigation__link-label {
@@ -2999,6 +3022,13 @@ html.is-dark .sm-light {
   --logo-default-opacity: 1;
   --logo-inverted-opacity: 0; }
 
+.sm-color-signal-0 {
+  background: none;
+  --sm-current-bg-color: inherit;
+  --sm-current-fg1-color: inherit;
+  --sm-current-fg2-color: inherit;
+  --sm-current-accent-color: inherit; }
+
 /* Additional media query styles for Color Signal */
 @media not screen and (min-width: 768px) {
   .sm-variation-1\@below-tablet[class] {
@@ -3064,154 +3094,154 @@ html.is-dark .sm-light {
 
 /* Color signal defaul styles for WooCommerce notifications */
 .woocommerce-error {
-  --sm-bg-color-1: var(--sm-color-palette-_error-bg-color-1);
-  --sm-accent-color-1: var(--sm-color-palette-_error-accent-color-1);
-  --sm-fg1-color-1: var(--sm-color-palette-_error-fg1-color-1);
-  --sm-fg2-color-1: var(--sm-color-palette-_error-fg2-color-1);
-  --sm-bg-color-2: var(--sm-color-palette-_error-bg-color-2);
-  --sm-accent-color-2: var(--sm-color-palette-_error-accent-color-2);
-  --sm-fg1-color-2: var(--sm-color-palette-_error-fg1-color-2);
-  --sm-fg2-color-2: var(--sm-color-palette-_error-fg2-color-2);
-  --sm-bg-color-3: var(--sm-color-palette-_error-bg-color-3);
-  --sm-accent-color-3: var(--sm-color-palette-_error-accent-color-3);
-  --sm-fg1-color-3: var(--sm-color-palette-_error-fg1-color-3);
-  --sm-fg2-color-3: var(--sm-color-palette-_error-fg2-color-3);
-  --sm-bg-color-4: var(--sm-color-palette-_error-bg-color-4);
-  --sm-accent-color-4: var(--sm-color-palette-_error-accent-color-4);
-  --sm-fg1-color-4: var(--sm-color-palette-_error-fg1-color-4);
-  --sm-fg2-color-4: var(--sm-color-palette-_error-fg2-color-4);
-  --sm-bg-color-5: var(--sm-color-palette-_error-bg-color-5);
-  --sm-accent-color-5: var(--sm-color-palette-_error-accent-color-5);
-  --sm-fg1-color-5: var(--sm-color-palette-_error-fg1-color-5);
-  --sm-fg2-color-5: var(--sm-color-palette-_error-fg2-color-5);
-  --sm-bg-color-6: var(--sm-color-palette-_error-bg-color-6);
-  --sm-accent-color-6: var(--sm-color-palette-_error-accent-color-6);
-  --sm-fg1-color-6: var(--sm-color-palette-_error-fg1-color-6);
-  --sm-fg2-color-6: var(--sm-color-palette-_error-fg2-color-6);
-  --sm-bg-color-7: var(--sm-color-palette-_error-bg-color-7);
-  --sm-accent-color-7: var(--sm-color-palette-_error-accent-color-7);
-  --sm-fg1-color-7: var(--sm-color-palette-_error-fg1-color-7);
-  --sm-fg2-color-7: var(--sm-color-palette-_error-fg2-color-7);
-  --sm-bg-color-8: var(--sm-color-palette-_error-bg-color-8);
-  --sm-accent-color-8: var(--sm-color-palette-_error-accent-color-8);
-  --sm-fg1-color-8: var(--sm-color-palette-_error-fg1-color-8);
-  --sm-fg2-color-8: var(--sm-color-palette-_error-fg2-color-8);
-  --sm-bg-color-9: var(--sm-color-palette-_error-bg-color-9);
-  --sm-accent-color-9: var(--sm-color-palette-_error-accent-color-9);
-  --sm-fg1-color-9: var(--sm-color-palette-_error-fg1-color-9);
-  --sm-fg2-color-9: var(--sm-color-palette-_error-fg2-color-9);
-  --sm-bg-color-10: var(--sm-color-palette-_error-bg-color-10);
-  --sm-accent-color-10: var(--sm-color-palette-_error-accent-color-10);
-  --sm-fg1-color-10: var(--sm-color-palette-_error-fg1-color-10);
-  --sm-fg2-color-10: var(--sm-color-palette-_error-fg2-color-10);
-  --sm-bg-color-11: var(--sm-color-palette-_error-bg-color-11);
-  --sm-accent-color-11: var(--sm-color-palette-_error-accent-color-11);
-  --sm-fg1-color-11: var(--sm-color-palette-_error-fg1-color-11);
-  --sm-fg2-color-11: var(--sm-color-palette-_error-fg2-color-11);
-  --sm-bg-color-12: var(--sm-color-palette-_error-bg-color-12);
-  --sm-accent-color-12: var(--sm-color-palette-_error-accent-color-12);
-  --sm-fg1-color-12: var(--sm-color-palette-_error-fg1-color-12);
-  --sm-fg2-color-12: var(--sm-color-palette-_error-fg2-color-12); }
+  --sm-bg-color-1: var(--sm-color-palette-_error-bg-color-1, var(--sm-color-palette-1-bg-color-1));
+  --sm-accent-color-1: var(--sm-color-palette-_error-accent-color-1, var(--sm-color-palette-1-accent-color-1));
+  --sm-fg1-color-1: var(--sm-color-palette-_error-fg1-color-1, var(--sm-color-palette-1-fg1-color-1));
+  --sm-fg2-color-1: var(--sm-color-palette-_error-fg2-color-1, var(--sm-color-palette-1-fg2-color-1));
+  --sm-bg-color-2: var(--sm-color-palette-_error-bg-color-2, var(--sm-color-palette-1-bg-color-2));
+  --sm-accent-color-2: var(--sm-color-palette-_error-accent-color-2, var(--sm-color-palette-1-accent-color-2));
+  --sm-fg1-color-2: var(--sm-color-palette-_error-fg1-color-2, var(--sm-color-palette-1-fg1-color-2));
+  --sm-fg2-color-2: var(--sm-color-palette-_error-fg2-color-2, var(--sm-color-palette-1-fg2-color-2));
+  --sm-bg-color-3: var(--sm-color-palette-_error-bg-color-3, var(--sm-color-palette-1-bg-color-3));
+  --sm-accent-color-3: var(--sm-color-palette-_error-accent-color-3, var(--sm-color-palette-1-accent-color-3));
+  --sm-fg1-color-3: var(--sm-color-palette-_error-fg1-color-3, var(--sm-color-palette-1-fg1-color-3));
+  --sm-fg2-color-3: var(--sm-color-palette-_error-fg2-color-3, var(--sm-color-palette-1-fg2-color-3));
+  --sm-bg-color-4: var(--sm-color-palette-_error-bg-color-4, var(--sm-color-palette-1-bg-color-4));
+  --sm-accent-color-4: var(--sm-color-palette-_error-accent-color-4, var(--sm-color-palette-1-accent-color-4));
+  --sm-fg1-color-4: var(--sm-color-palette-_error-fg1-color-4, var(--sm-color-palette-1-fg1-color-4));
+  --sm-fg2-color-4: var(--sm-color-palette-_error-fg2-color-4, var(--sm-color-palette-1-fg2-color-4));
+  --sm-bg-color-5: var(--sm-color-palette-_error-bg-color-5, var(--sm-color-palette-1-bg-color-5));
+  --sm-accent-color-5: var(--sm-color-palette-_error-accent-color-5, var(--sm-color-palette-1-accent-color-5));
+  --sm-fg1-color-5: var(--sm-color-palette-_error-fg1-color-5, var(--sm-color-palette-1-fg1-color-5));
+  --sm-fg2-color-5: var(--sm-color-palette-_error-fg2-color-5, var(--sm-color-palette-1-fg2-color-5));
+  --sm-bg-color-6: var(--sm-color-palette-_error-bg-color-6, var(--sm-color-palette-1-bg-color-6));
+  --sm-accent-color-6: var(--sm-color-palette-_error-accent-color-6, var(--sm-color-palette-1-accent-color-6));
+  --sm-fg1-color-6: var(--sm-color-palette-_error-fg1-color-6, var(--sm-color-palette-1-fg1-color-6));
+  --sm-fg2-color-6: var(--sm-color-palette-_error-fg2-color-6, var(--sm-color-palette-1-fg2-color-6));
+  --sm-bg-color-7: var(--sm-color-palette-_error-bg-color-7, var(--sm-color-palette-1-bg-color-7));
+  --sm-accent-color-7: var(--sm-color-palette-_error-accent-color-7, var(--sm-color-palette-1-accent-color-7));
+  --sm-fg1-color-7: var(--sm-color-palette-_error-fg1-color-7, var(--sm-color-palette-1-fg1-color-7));
+  --sm-fg2-color-7: var(--sm-color-palette-_error-fg2-color-7, var(--sm-color-palette-1-fg2-color-7));
+  --sm-bg-color-8: var(--sm-color-palette-_error-bg-color-8, var(--sm-color-palette-1-bg-color-8));
+  --sm-accent-color-8: var(--sm-color-palette-_error-accent-color-8, var(--sm-color-palette-1-accent-color-8));
+  --sm-fg1-color-8: var(--sm-color-palette-_error-fg1-color-8, var(--sm-color-palette-1-fg1-color-8));
+  --sm-fg2-color-8: var(--sm-color-palette-_error-fg2-color-8, var(--sm-color-palette-1-fg2-color-8));
+  --sm-bg-color-9: var(--sm-color-palette-_error-bg-color-9, var(--sm-color-palette-1-bg-color-9));
+  --sm-accent-color-9: var(--sm-color-palette-_error-accent-color-9, var(--sm-color-palette-1-accent-color-9));
+  --sm-fg1-color-9: var(--sm-color-palette-_error-fg1-color-9, var(--sm-color-palette-1-fg1-color-9));
+  --sm-fg2-color-9: var(--sm-color-palette-_error-fg2-color-9, var(--sm-color-palette-1-fg2-color-9));
+  --sm-bg-color-10: var(--sm-color-palette-_error-bg-color-10, var(--sm-color-palette-1-bg-color-10));
+  --sm-accent-color-10: var(--sm-color-palette-_error-accent-color-10, var(--sm-color-palette-1-accent-color-10));
+  --sm-fg1-color-10: var(--sm-color-palette-_error-fg1-color-10, var(--sm-color-palette-1-fg1-color-10));
+  --sm-fg2-color-10: var(--sm-color-palette-_error-fg2-color-10, var(--sm-color-palette-1-fg2-color-10));
+  --sm-bg-color-11: var(--sm-color-palette-_error-bg-color-11, var(--sm-color-palette-1-bg-color-11));
+  --sm-accent-color-11: var(--sm-color-palette-_error-accent-color-11, var(--sm-color-palette-1-accent-color-11));
+  --sm-fg1-color-11: var(--sm-color-palette-_error-fg1-color-11, var(--sm-color-palette-1-fg1-color-11));
+  --sm-fg2-color-11: var(--sm-color-palette-_error-fg2-color-11, var(--sm-color-palette-1-fg2-color-11));
+  --sm-bg-color-12: var(--sm-color-palette-_error-bg-color-12, var(--sm-color-palette-1-bg-color-12));
+  --sm-accent-color-12: var(--sm-color-palette-_error-accent-color-12, var(--sm-color-palette-1-accent-color-12));
+  --sm-fg1-color-12: var(--sm-color-palette-_error-fg1-color-12, var(--sm-color-palette-1-fg1-color-12));
+  --sm-fg2-color-12: var(--sm-color-palette-_error-fg2-color-12, var(--sm-color-palette-1-fg2-color-12)); }
 
 .woocommerce-message {
-  --sm-bg-color-1: var(--sm-color-palette-_success-bg-color-1);
-  --sm-accent-color-1: var(--sm-color-palette-_success-accent-color-1);
-  --sm-fg1-color-1: var(--sm-color-palette-_success-fg1-color-1);
-  --sm-fg2-color-1: var(--sm-color-palette-_success-fg2-color-1);
-  --sm-bg-color-2: var(--sm-color-palette-_success-bg-color-2);
-  --sm-accent-color-2: var(--sm-color-palette-_success-accent-color-2);
-  --sm-fg1-color-2: var(--sm-color-palette-_success-fg1-color-2);
-  --sm-fg2-color-2: var(--sm-color-palette-_success-fg2-color-2);
-  --sm-bg-color-3: var(--sm-color-palette-_success-bg-color-3);
-  --sm-accent-color-3: var(--sm-color-palette-_success-accent-color-3);
-  --sm-fg1-color-3: var(--sm-color-palette-_success-fg1-color-3);
-  --sm-fg2-color-3: var(--sm-color-palette-_success-fg2-color-3);
-  --sm-bg-color-4: var(--sm-color-palette-_success-bg-color-4);
-  --sm-accent-color-4: var(--sm-color-palette-_success-accent-color-4);
-  --sm-fg1-color-4: var(--sm-color-palette-_success-fg1-color-4);
-  --sm-fg2-color-4: var(--sm-color-palette-_success-fg2-color-4);
-  --sm-bg-color-5: var(--sm-color-palette-_success-bg-color-5);
-  --sm-accent-color-5: var(--sm-color-palette-_success-accent-color-5);
-  --sm-fg1-color-5: var(--sm-color-palette-_success-fg1-color-5);
-  --sm-fg2-color-5: var(--sm-color-palette-_success-fg2-color-5);
-  --sm-bg-color-6: var(--sm-color-palette-_success-bg-color-6);
-  --sm-accent-color-6: var(--sm-color-palette-_success-accent-color-6);
-  --sm-fg1-color-6: var(--sm-color-palette-_success-fg1-color-6);
-  --sm-fg2-color-6: var(--sm-color-palette-_success-fg2-color-6);
-  --sm-bg-color-7: var(--sm-color-palette-_success-bg-color-7);
-  --sm-accent-color-7: var(--sm-color-palette-_success-accent-color-7);
-  --sm-fg1-color-7: var(--sm-color-palette-_success-fg1-color-7);
-  --sm-fg2-color-7: var(--sm-color-palette-_success-fg2-color-7);
-  --sm-bg-color-8: var(--sm-color-palette-_success-bg-color-8);
-  --sm-accent-color-8: var(--sm-color-palette-_success-accent-color-8);
-  --sm-fg1-color-8: var(--sm-color-palette-_success-fg1-color-8);
-  --sm-fg2-color-8: var(--sm-color-palette-_success-fg2-color-8);
-  --sm-bg-color-9: var(--sm-color-palette-_success-bg-color-9);
-  --sm-accent-color-9: var(--sm-color-palette-_success-accent-color-9);
-  --sm-fg1-color-9: var(--sm-color-palette-_success-fg1-color-9);
-  --sm-fg2-color-9: var(--sm-color-palette-_success-fg2-color-9);
-  --sm-bg-color-10: var(--sm-color-palette-_success-bg-color-10);
-  --sm-accent-color-10: var(--sm-color-palette-_success-accent-color-10);
-  --sm-fg1-color-10: var(--sm-color-palette-_success-fg1-color-10);
-  --sm-fg2-color-10: var(--sm-color-palette-_success-fg2-color-10);
-  --sm-bg-color-11: var(--sm-color-palette-_success-bg-color-11);
-  --sm-accent-color-11: var(--sm-color-palette-_success-accent-color-11);
-  --sm-fg1-color-11: var(--sm-color-palette-_success-fg1-color-11);
-  --sm-fg2-color-11: var(--sm-color-palette-_success-fg2-color-11);
-  --sm-bg-color-12: var(--sm-color-palette-_success-bg-color-12);
-  --sm-accent-color-12: var(--sm-color-palette-_success-accent-color-12);
-  --sm-fg1-color-12: var(--sm-color-palette-_success-fg1-color-12);
-  --sm-fg2-color-12: var(--sm-color-palette-_success-fg2-color-12); }
+  --sm-bg-color-1: var(--sm-color-palette-_success-bg-color-1, var(--sm-color-palette-1-bg-color-1));
+  --sm-accent-color-1: var(--sm-color-palette-_success-accent-color-1, var(--sm-color-palette-1-accent-color-1));
+  --sm-fg1-color-1: var(--sm-color-palette-_success-fg1-color-1, var(--sm-color-palette-1-fg1-color-1));
+  --sm-fg2-color-1: var(--sm-color-palette-_success-fg2-color-1, var(--sm-color-palette-1-fg2-color-1));
+  --sm-bg-color-2: var(--sm-color-palette-_success-bg-color-2, var(--sm-color-palette-1-bg-color-2));
+  --sm-accent-color-2: var(--sm-color-palette-_success-accent-color-2, var(--sm-color-palette-1-accent-color-2));
+  --sm-fg1-color-2: var(--sm-color-palette-_success-fg1-color-2, var(--sm-color-palette-1-fg1-color-2));
+  --sm-fg2-color-2: var(--sm-color-palette-_success-fg2-color-2, var(--sm-color-palette-1-fg2-color-2));
+  --sm-bg-color-3: var(--sm-color-palette-_success-bg-color-3, var(--sm-color-palette-1-bg-color-3));
+  --sm-accent-color-3: var(--sm-color-palette-_success-accent-color-3, var(--sm-color-palette-1-accent-color-3));
+  --sm-fg1-color-3: var(--sm-color-palette-_success-fg1-color-3, var(--sm-color-palette-1-fg1-color-3));
+  --sm-fg2-color-3: var(--sm-color-palette-_success-fg2-color-3, var(--sm-color-palette-1-fg2-color-3));
+  --sm-bg-color-4: var(--sm-color-palette-_success-bg-color-4, var(--sm-color-palette-1-bg-color-4));
+  --sm-accent-color-4: var(--sm-color-palette-_success-accent-color-4, var(--sm-color-palette-1-accent-color-4));
+  --sm-fg1-color-4: var(--sm-color-palette-_success-fg1-color-4, var(--sm-color-palette-1-fg1-color-4));
+  --sm-fg2-color-4: var(--sm-color-palette-_success-fg2-color-4, var(--sm-color-palette-1-fg2-color-4));
+  --sm-bg-color-5: var(--sm-color-palette-_success-bg-color-5, var(--sm-color-palette-1-bg-color-5));
+  --sm-accent-color-5: var(--sm-color-palette-_success-accent-color-5, var(--sm-color-palette-1-accent-color-5));
+  --sm-fg1-color-5: var(--sm-color-palette-_success-fg1-color-5, var(--sm-color-palette-1-fg1-color-5));
+  --sm-fg2-color-5: var(--sm-color-palette-_success-fg2-color-5, var(--sm-color-palette-1-fg2-color-5));
+  --sm-bg-color-6: var(--sm-color-palette-_success-bg-color-6, var(--sm-color-palette-1-bg-color-6));
+  --sm-accent-color-6: var(--sm-color-palette-_success-accent-color-6, var(--sm-color-palette-1-accent-color-6));
+  --sm-fg1-color-6: var(--sm-color-palette-_success-fg1-color-6, var(--sm-color-palette-1-fg1-color-6));
+  --sm-fg2-color-6: var(--sm-color-palette-_success-fg2-color-6, var(--sm-color-palette-1-fg2-color-6));
+  --sm-bg-color-7: var(--sm-color-palette-_success-bg-color-7, var(--sm-color-palette-1-bg-color-7));
+  --sm-accent-color-7: var(--sm-color-palette-_success-accent-color-7, var(--sm-color-palette-1-accent-color-7));
+  --sm-fg1-color-7: var(--sm-color-palette-_success-fg1-color-7, var(--sm-color-palette-1-fg1-color-7));
+  --sm-fg2-color-7: var(--sm-color-palette-_success-fg2-color-7, var(--sm-color-palette-1-fg2-color-7));
+  --sm-bg-color-8: var(--sm-color-palette-_success-bg-color-8, var(--sm-color-palette-1-bg-color-8));
+  --sm-accent-color-8: var(--sm-color-palette-_success-accent-color-8, var(--sm-color-palette-1-accent-color-8));
+  --sm-fg1-color-8: var(--sm-color-palette-_success-fg1-color-8, var(--sm-color-palette-1-fg1-color-8));
+  --sm-fg2-color-8: var(--sm-color-palette-_success-fg2-color-8, var(--sm-color-palette-1-fg2-color-8));
+  --sm-bg-color-9: var(--sm-color-palette-_success-bg-color-9, var(--sm-color-palette-1-bg-color-9));
+  --sm-accent-color-9: var(--sm-color-palette-_success-accent-color-9, var(--sm-color-palette-1-accent-color-9));
+  --sm-fg1-color-9: var(--sm-color-palette-_success-fg1-color-9, var(--sm-color-palette-1-fg1-color-9));
+  --sm-fg2-color-9: var(--sm-color-palette-_success-fg2-color-9, var(--sm-color-palette-1-fg2-color-9));
+  --sm-bg-color-10: var(--sm-color-palette-_success-bg-color-10, var(--sm-color-palette-1-bg-color-10));
+  --sm-accent-color-10: var(--sm-color-palette-_success-accent-color-10, var(--sm-color-palette-1-accent-color-10));
+  --sm-fg1-color-10: var(--sm-color-palette-_success-fg1-color-10, var(--sm-color-palette-1-fg1-color-10));
+  --sm-fg2-color-10: var(--sm-color-palette-_success-fg2-color-10, var(--sm-color-palette-1-fg2-color-10));
+  --sm-bg-color-11: var(--sm-color-palette-_success-bg-color-11, var(--sm-color-palette-1-bg-color-11));
+  --sm-accent-color-11: var(--sm-color-palette-_success-accent-color-11, var(--sm-color-palette-1-accent-color-11));
+  --sm-fg1-color-11: var(--sm-color-palette-_success-fg1-color-11, var(--sm-color-palette-1-fg1-color-11));
+  --sm-fg2-color-11: var(--sm-color-palette-_success-fg2-color-11, var(--sm-color-palette-1-fg2-color-11));
+  --sm-bg-color-12: var(--sm-color-palette-_success-bg-color-12, var(--sm-color-palette-1-bg-color-12));
+  --sm-accent-color-12: var(--sm-color-palette-_success-accent-color-12, var(--sm-color-palette-1-accent-color-12));
+  --sm-fg1-color-12: var(--sm-color-palette-_success-fg1-color-12, var(--sm-color-palette-1-fg1-color-12));
+  --sm-fg2-color-12: var(--sm-color-palette-_success-fg2-color-12, var(--sm-color-palette-1-fg2-color-12)); }
 
 .woocommerce-info {
-  --sm-bg-color-1: var(--sm-color-palette-_info-bg-color-1);
-  --sm-accent-color-1: var(--sm-color-palette-_info-accent-color-1);
-  --sm-fg1-color-1: var(--sm-color-palette-_info-fg1-color-1);
-  --sm-fg2-color-1: var(--sm-color-palette-_info-fg2-color-1);
-  --sm-bg-color-2: var(--sm-color-palette-_info-bg-color-2);
-  --sm-accent-color-2: var(--sm-color-palette-_info-accent-color-2);
-  --sm-fg1-color-2: var(--sm-color-palette-_info-fg1-color-2);
-  --sm-fg2-color-2: var(--sm-color-palette-_info-fg2-color-2);
-  --sm-bg-color-3: var(--sm-color-palette-_info-bg-color-3);
-  --sm-accent-color-3: var(--sm-color-palette-_info-accent-color-3);
-  --sm-fg1-color-3: var(--sm-color-palette-_info-fg1-color-3);
-  --sm-fg2-color-3: var(--sm-color-palette-_info-fg2-color-3);
-  --sm-bg-color-4: var(--sm-color-palette-_info-bg-color-4);
-  --sm-accent-color-4: var(--sm-color-palette-_info-accent-color-4);
-  --sm-fg1-color-4: var(--sm-color-palette-_info-fg1-color-4);
-  --sm-fg2-color-4: var(--sm-color-palette-_info-fg2-color-4);
-  --sm-bg-color-5: var(--sm-color-palette-_info-bg-color-5);
-  --sm-accent-color-5: var(--sm-color-palette-_info-accent-color-5);
-  --sm-fg1-color-5: var(--sm-color-palette-_info-fg1-color-5);
-  --sm-fg2-color-5: var(--sm-color-palette-_info-fg2-color-5);
-  --sm-bg-color-6: var(--sm-color-palette-_info-bg-color-6);
-  --sm-accent-color-6: var(--sm-color-palette-_info-accent-color-6);
-  --sm-fg1-color-6: var(--sm-color-palette-_info-fg1-color-6);
-  --sm-fg2-color-6: var(--sm-color-palette-_info-fg2-color-6);
-  --sm-bg-color-7: var(--sm-color-palette-_info-bg-color-7);
-  --sm-accent-color-7: var(--sm-color-palette-_info-accent-color-7);
-  --sm-fg1-color-7: var(--sm-color-palette-_info-fg1-color-7);
-  --sm-fg2-color-7: var(--sm-color-palette-_info-fg2-color-7);
-  --sm-bg-color-8: var(--sm-color-palette-_info-bg-color-8);
-  --sm-accent-color-8: var(--sm-color-palette-_info-accent-color-8);
-  --sm-fg1-color-8: var(--sm-color-palette-_info-fg1-color-8);
-  --sm-fg2-color-8: var(--sm-color-palette-_info-fg2-color-8);
-  --sm-bg-color-9: var(--sm-color-palette-_info-bg-color-9);
-  --sm-accent-color-9: var(--sm-color-palette-_info-accent-color-9);
-  --sm-fg1-color-9: var(--sm-color-palette-_info-fg1-color-9);
-  --sm-fg2-color-9: var(--sm-color-palette-_info-fg2-color-9);
-  --sm-bg-color-10: var(--sm-color-palette-_info-bg-color-10);
-  --sm-accent-color-10: var(--sm-color-palette-_info-accent-color-10);
-  --sm-fg1-color-10: var(--sm-color-palette-_info-fg1-color-10);
-  --sm-fg2-color-10: var(--sm-color-palette-_info-fg2-color-10);
-  --sm-bg-color-11: var(--sm-color-palette-_info-bg-color-11);
-  --sm-accent-color-11: var(--sm-color-palette-_info-accent-color-11);
-  --sm-fg1-color-11: var(--sm-color-palette-_info-fg1-color-11);
-  --sm-fg2-color-11: var(--sm-color-palette-_info-fg2-color-11);
-  --sm-bg-color-12: var(--sm-color-palette-_info-bg-color-12);
-  --sm-accent-color-12: var(--sm-color-palette-_info-accent-color-12);
-  --sm-fg1-color-12: var(--sm-color-palette-_info-fg1-color-12);
-  --sm-fg2-color-12: var(--sm-color-palette-_info-fg2-color-12); }
+  --sm-bg-color-1: var(--sm-color-palette-_info-bg-color-1, var(--sm-color-palette-1-bg-color-1));
+  --sm-accent-color-1: var(--sm-color-palette-_info-accent-color-1, var(--sm-color-palette-1-accent-color-1));
+  --sm-fg1-color-1: var(--sm-color-palette-_info-fg1-color-1, var(--sm-color-palette-1-fg1-color-1));
+  --sm-fg2-color-1: var(--sm-color-palette-_info-fg2-color-1, var(--sm-color-palette-1-fg2-color-1));
+  --sm-bg-color-2: var(--sm-color-palette-_info-bg-color-2, var(--sm-color-palette-1-bg-color-2));
+  --sm-accent-color-2: var(--sm-color-palette-_info-accent-color-2, var(--sm-color-palette-1-accent-color-2));
+  --sm-fg1-color-2: var(--sm-color-palette-_info-fg1-color-2, var(--sm-color-palette-1-fg1-color-2));
+  --sm-fg2-color-2: var(--sm-color-palette-_info-fg2-color-2, var(--sm-color-palette-1-fg2-color-2));
+  --sm-bg-color-3: var(--sm-color-palette-_info-bg-color-3, var(--sm-color-palette-1-bg-color-3));
+  --sm-accent-color-3: var(--sm-color-palette-_info-accent-color-3, var(--sm-color-palette-1-accent-color-3));
+  --sm-fg1-color-3: var(--sm-color-palette-_info-fg1-color-3, var(--sm-color-palette-1-fg1-color-3));
+  --sm-fg2-color-3: var(--sm-color-palette-_info-fg2-color-3, var(--sm-color-palette-1-fg2-color-3));
+  --sm-bg-color-4: var(--sm-color-palette-_info-bg-color-4, var(--sm-color-palette-1-bg-color-4));
+  --sm-accent-color-4: var(--sm-color-palette-_info-accent-color-4, var(--sm-color-palette-1-accent-color-4));
+  --sm-fg1-color-4: var(--sm-color-palette-_info-fg1-color-4, var(--sm-color-palette-1-fg1-color-4));
+  --sm-fg2-color-4: var(--sm-color-palette-_info-fg2-color-4, var(--sm-color-palette-1-fg2-color-4));
+  --sm-bg-color-5: var(--sm-color-palette-_info-bg-color-5, var(--sm-color-palette-1-bg-color-5));
+  --sm-accent-color-5: var(--sm-color-palette-_info-accent-color-5, var(--sm-color-palette-1-accent-color-5));
+  --sm-fg1-color-5: var(--sm-color-palette-_info-fg1-color-5, var(--sm-color-palette-1-fg1-color-5));
+  --sm-fg2-color-5: var(--sm-color-palette-_info-fg2-color-5, var(--sm-color-palette-1-fg2-color-5));
+  --sm-bg-color-6: var(--sm-color-palette-_info-bg-color-6, var(--sm-color-palette-1-bg-color-6));
+  --sm-accent-color-6: var(--sm-color-palette-_info-accent-color-6, var(--sm-color-palette-1-accent-color-6));
+  --sm-fg1-color-6: var(--sm-color-palette-_info-fg1-color-6, var(--sm-color-palette-1-fg1-color-6));
+  --sm-fg2-color-6: var(--sm-color-palette-_info-fg2-color-6, var(--sm-color-palette-1-fg2-color-6));
+  --sm-bg-color-7: var(--sm-color-palette-_info-bg-color-7, var(--sm-color-palette-1-bg-color-7));
+  --sm-accent-color-7: var(--sm-color-palette-_info-accent-color-7, var(--sm-color-palette-1-accent-color-7));
+  --sm-fg1-color-7: var(--sm-color-palette-_info-fg1-color-7, var(--sm-color-palette-1-fg1-color-7));
+  --sm-fg2-color-7: var(--sm-color-palette-_info-fg2-color-7, var(--sm-color-palette-1-fg2-color-7));
+  --sm-bg-color-8: var(--sm-color-palette-_info-bg-color-8, var(--sm-color-palette-1-bg-color-8));
+  --sm-accent-color-8: var(--sm-color-palette-_info-accent-color-8, var(--sm-color-palette-1-accent-color-8));
+  --sm-fg1-color-8: var(--sm-color-palette-_info-fg1-color-8, var(--sm-color-palette-1-fg1-color-8));
+  --sm-fg2-color-8: var(--sm-color-palette-_info-fg2-color-8, var(--sm-color-palette-1-fg2-color-8));
+  --sm-bg-color-9: var(--sm-color-palette-_info-bg-color-9, var(--sm-color-palette-1-bg-color-9));
+  --sm-accent-color-9: var(--sm-color-palette-_info-accent-color-9, var(--sm-color-palette-1-accent-color-9));
+  --sm-fg1-color-9: var(--sm-color-palette-_info-fg1-color-9, var(--sm-color-palette-1-fg1-color-9));
+  --sm-fg2-color-9: var(--sm-color-palette-_info-fg2-color-9, var(--sm-color-palette-1-fg2-color-9));
+  --sm-bg-color-10: var(--sm-color-palette-_info-bg-color-10, var(--sm-color-palette-1-bg-color-10));
+  --sm-accent-color-10: var(--sm-color-palette-_info-accent-color-10, var(--sm-color-palette-1-accent-color-10));
+  --sm-fg1-color-10: var(--sm-color-palette-_info-fg1-color-10, var(--sm-color-palette-1-fg1-color-10));
+  --sm-fg2-color-10: var(--sm-color-palette-_info-fg2-color-10, var(--sm-color-palette-1-fg2-color-10));
+  --sm-bg-color-11: var(--sm-color-palette-_info-bg-color-11, var(--sm-color-palette-1-bg-color-11));
+  --sm-accent-color-11: var(--sm-color-palette-_info-accent-color-11, var(--sm-color-palette-1-accent-color-11));
+  --sm-fg1-color-11: var(--sm-color-palette-_info-fg1-color-11, var(--sm-color-palette-1-fg1-color-11));
+  --sm-fg2-color-11: var(--sm-color-palette-_info-fg2-color-11, var(--sm-color-palette-1-fg2-color-11));
+  --sm-bg-color-12: var(--sm-color-palette-_info-bg-color-12, var(--sm-color-palette-1-bg-color-12));
+  --sm-accent-color-12: var(--sm-color-palette-_info-accent-color-12, var(--sm-color-palette-1-accent-color-12));
+  --sm-fg1-color-12: var(--sm-color-palette-_info-fg1-color-12, var(--sm-color-palette-1-fg1-color-12));
+  --sm-fg2-color-12: var(--sm-color-palette-_info-fg2-color-12, var(--sm-color-palette-1-fg2-color-12)); }
 
 /* Fallback Styles for Color Signal */
 .is-style-dark {
@@ -3239,212 +3269,212 @@ html.is-dark .sm-light {
   --sm-current-fg2-color: var(--sm-fg2-color-6); }
 
 .novablocks-announcement-bar.is-style-alternative {
-  --sm-bg-color-1: var(--sm-color-palette-2-bg-color-1);
-  --sm-accent-color-1: var(--sm-color-palette-2-accent-color-1);
-  --sm-fg1-color-1: var(--sm-color-palette-2-fg1-color-1);
-  --sm-fg2-color-1: var(--sm-color-palette-2-fg2-color-1);
-  --sm-bg-color-2: var(--sm-color-palette-2-bg-color-2);
-  --sm-accent-color-2: var(--sm-color-palette-2-accent-color-2);
-  --sm-fg1-color-2: var(--sm-color-palette-2-fg1-color-2);
-  --sm-fg2-color-2: var(--sm-color-palette-2-fg2-color-2);
-  --sm-bg-color-3: var(--sm-color-palette-2-bg-color-3);
-  --sm-accent-color-3: var(--sm-color-palette-2-accent-color-3);
-  --sm-fg1-color-3: var(--sm-color-palette-2-fg1-color-3);
-  --sm-fg2-color-3: var(--sm-color-palette-2-fg2-color-3);
-  --sm-bg-color-4: var(--sm-color-palette-2-bg-color-4);
-  --sm-accent-color-4: var(--sm-color-palette-2-accent-color-4);
-  --sm-fg1-color-4: var(--sm-color-palette-2-fg1-color-4);
-  --sm-fg2-color-4: var(--sm-color-palette-2-fg2-color-4);
-  --sm-bg-color-5: var(--sm-color-palette-2-bg-color-5);
-  --sm-accent-color-5: var(--sm-color-palette-2-accent-color-5);
-  --sm-fg1-color-5: var(--sm-color-palette-2-fg1-color-5);
-  --sm-fg2-color-5: var(--sm-color-palette-2-fg2-color-5);
-  --sm-bg-color-6: var(--sm-color-palette-2-bg-color-6);
-  --sm-accent-color-6: var(--sm-color-palette-2-accent-color-6);
-  --sm-fg1-color-6: var(--sm-color-palette-2-fg1-color-6);
-  --sm-fg2-color-6: var(--sm-color-palette-2-fg2-color-6);
-  --sm-bg-color-7: var(--sm-color-palette-2-bg-color-7);
-  --sm-accent-color-7: var(--sm-color-palette-2-accent-color-7);
-  --sm-fg1-color-7: var(--sm-color-palette-2-fg1-color-7);
-  --sm-fg2-color-7: var(--sm-color-palette-2-fg2-color-7);
-  --sm-bg-color-8: var(--sm-color-palette-2-bg-color-8);
-  --sm-accent-color-8: var(--sm-color-palette-2-accent-color-8);
-  --sm-fg1-color-8: var(--sm-color-palette-2-fg1-color-8);
-  --sm-fg2-color-8: var(--sm-color-palette-2-fg2-color-8);
-  --sm-bg-color-9: var(--sm-color-palette-2-bg-color-9);
-  --sm-accent-color-9: var(--sm-color-palette-2-accent-color-9);
-  --sm-fg1-color-9: var(--sm-color-palette-2-fg1-color-9);
-  --sm-fg2-color-9: var(--sm-color-palette-2-fg2-color-9);
-  --sm-bg-color-10: var(--sm-color-palette-2-bg-color-10);
-  --sm-accent-color-10: var(--sm-color-palette-2-accent-color-10);
-  --sm-fg1-color-10: var(--sm-color-palette-2-fg1-color-10);
-  --sm-fg2-color-10: var(--sm-color-palette-2-fg2-color-10);
-  --sm-bg-color-11: var(--sm-color-palette-2-bg-color-11);
-  --sm-accent-color-11: var(--sm-color-palette-2-accent-color-11);
-  --sm-fg1-color-11: var(--sm-color-palette-2-fg1-color-11);
-  --sm-fg2-color-11: var(--sm-color-palette-2-fg2-color-11);
-  --sm-bg-color-12: var(--sm-color-palette-2-bg-color-12);
-  --sm-accent-color-12: var(--sm-color-palette-2-accent-color-12);
-  --sm-fg1-color-12: var(--sm-color-palette-2-fg1-color-12);
-  --sm-fg2-color-12: var(--sm-color-palette-2-fg2-color-12);
+  --sm-bg-color-1: var(--sm-color-palette-2-bg-color-1, var(--sm-color-palette-1-bg-color-1));
+  --sm-accent-color-1: var(--sm-color-palette-2-accent-color-1, var(--sm-color-palette-1-accent-color-1));
+  --sm-fg1-color-1: var(--sm-color-palette-2-fg1-color-1, var(--sm-color-palette-1-fg1-color-1));
+  --sm-fg2-color-1: var(--sm-color-palette-2-fg2-color-1, var(--sm-color-palette-1-fg2-color-1));
+  --sm-bg-color-2: var(--sm-color-palette-2-bg-color-2, var(--sm-color-palette-1-bg-color-2));
+  --sm-accent-color-2: var(--sm-color-palette-2-accent-color-2, var(--sm-color-palette-1-accent-color-2));
+  --sm-fg1-color-2: var(--sm-color-palette-2-fg1-color-2, var(--sm-color-palette-1-fg1-color-2));
+  --sm-fg2-color-2: var(--sm-color-palette-2-fg2-color-2, var(--sm-color-palette-1-fg2-color-2));
+  --sm-bg-color-3: var(--sm-color-palette-2-bg-color-3, var(--sm-color-palette-1-bg-color-3));
+  --sm-accent-color-3: var(--sm-color-palette-2-accent-color-3, var(--sm-color-palette-1-accent-color-3));
+  --sm-fg1-color-3: var(--sm-color-palette-2-fg1-color-3, var(--sm-color-palette-1-fg1-color-3));
+  --sm-fg2-color-3: var(--sm-color-palette-2-fg2-color-3, var(--sm-color-palette-1-fg2-color-3));
+  --sm-bg-color-4: var(--sm-color-palette-2-bg-color-4, var(--sm-color-palette-1-bg-color-4));
+  --sm-accent-color-4: var(--sm-color-palette-2-accent-color-4, var(--sm-color-palette-1-accent-color-4));
+  --sm-fg1-color-4: var(--sm-color-palette-2-fg1-color-4, var(--sm-color-palette-1-fg1-color-4));
+  --sm-fg2-color-4: var(--sm-color-palette-2-fg2-color-4, var(--sm-color-palette-1-fg2-color-4));
+  --sm-bg-color-5: var(--sm-color-palette-2-bg-color-5, var(--sm-color-palette-1-bg-color-5));
+  --sm-accent-color-5: var(--sm-color-palette-2-accent-color-5, var(--sm-color-palette-1-accent-color-5));
+  --sm-fg1-color-5: var(--sm-color-palette-2-fg1-color-5, var(--sm-color-palette-1-fg1-color-5));
+  --sm-fg2-color-5: var(--sm-color-palette-2-fg2-color-5, var(--sm-color-palette-1-fg2-color-5));
+  --sm-bg-color-6: var(--sm-color-palette-2-bg-color-6, var(--sm-color-palette-1-bg-color-6));
+  --sm-accent-color-6: var(--sm-color-palette-2-accent-color-6, var(--sm-color-palette-1-accent-color-6));
+  --sm-fg1-color-6: var(--sm-color-palette-2-fg1-color-6, var(--sm-color-palette-1-fg1-color-6));
+  --sm-fg2-color-6: var(--sm-color-palette-2-fg2-color-6, var(--sm-color-palette-1-fg2-color-6));
+  --sm-bg-color-7: var(--sm-color-palette-2-bg-color-7, var(--sm-color-palette-1-bg-color-7));
+  --sm-accent-color-7: var(--sm-color-palette-2-accent-color-7, var(--sm-color-palette-1-accent-color-7));
+  --sm-fg1-color-7: var(--sm-color-palette-2-fg1-color-7, var(--sm-color-palette-1-fg1-color-7));
+  --sm-fg2-color-7: var(--sm-color-palette-2-fg2-color-7, var(--sm-color-palette-1-fg2-color-7));
+  --sm-bg-color-8: var(--sm-color-palette-2-bg-color-8, var(--sm-color-palette-1-bg-color-8));
+  --sm-accent-color-8: var(--sm-color-palette-2-accent-color-8, var(--sm-color-palette-1-accent-color-8));
+  --sm-fg1-color-8: var(--sm-color-palette-2-fg1-color-8, var(--sm-color-palette-1-fg1-color-8));
+  --sm-fg2-color-8: var(--sm-color-palette-2-fg2-color-8, var(--sm-color-palette-1-fg2-color-8));
+  --sm-bg-color-9: var(--sm-color-palette-2-bg-color-9, var(--sm-color-palette-1-bg-color-9));
+  --sm-accent-color-9: var(--sm-color-palette-2-accent-color-9, var(--sm-color-palette-1-accent-color-9));
+  --sm-fg1-color-9: var(--sm-color-palette-2-fg1-color-9, var(--sm-color-palette-1-fg1-color-9));
+  --sm-fg2-color-9: var(--sm-color-palette-2-fg2-color-9, var(--sm-color-palette-1-fg2-color-9));
+  --sm-bg-color-10: var(--sm-color-palette-2-bg-color-10, var(--sm-color-palette-1-bg-color-10));
+  --sm-accent-color-10: var(--sm-color-palette-2-accent-color-10, var(--sm-color-palette-1-accent-color-10));
+  --sm-fg1-color-10: var(--sm-color-palette-2-fg1-color-10, var(--sm-color-palette-1-fg1-color-10));
+  --sm-fg2-color-10: var(--sm-color-palette-2-fg2-color-10, var(--sm-color-palette-1-fg2-color-10));
+  --sm-bg-color-11: var(--sm-color-palette-2-bg-color-11, var(--sm-color-palette-1-bg-color-11));
+  --sm-accent-color-11: var(--sm-color-palette-2-accent-color-11, var(--sm-color-palette-1-accent-color-11));
+  --sm-fg1-color-11: var(--sm-color-palette-2-fg1-color-11, var(--sm-color-palette-1-fg1-color-11));
+  --sm-fg2-color-11: var(--sm-color-palette-2-fg2-color-11, var(--sm-color-palette-1-fg2-color-11));
+  --sm-bg-color-12: var(--sm-color-palette-2-bg-color-12, var(--sm-color-palette-1-bg-color-12));
+  --sm-accent-color-12: var(--sm-color-palette-2-accent-color-12, var(--sm-color-palette-1-accent-color-12));
+  --sm-fg1-color-12: var(--sm-color-palette-2-fg1-color-12, var(--sm-color-palette-1-fg1-color-12));
+  --sm-fg2-color-12: var(--sm-color-palette-2-fg2-color-12, var(--sm-color-palette-1-fg2-color-12));
   --sm-current-bg-color: var(--sm-bg-color-6);
   --sm-current-accent-color: var(--sm-accent-color-6);
   --sm-current-fg1-color: var(--sm-fg1-color-6);
   --sm-current-fg2-color: var(--sm-fg2-color-6); }
 
 .novablocks-announcement-bar.is-style-alert {
-  --sm-bg-color-1: var(--sm-color-palette-_error-bg-color-1);
-  --sm-accent-color-1: var(--sm-color-palette-_error-accent-color-1);
-  --sm-fg1-color-1: var(--sm-color-palette-_error-fg1-color-1);
-  --sm-fg2-color-1: var(--sm-color-palette-_error-fg2-color-1);
-  --sm-bg-color-2: var(--sm-color-palette-_error-bg-color-2);
-  --sm-accent-color-2: var(--sm-color-palette-_error-accent-color-2);
-  --sm-fg1-color-2: var(--sm-color-palette-_error-fg1-color-2);
-  --sm-fg2-color-2: var(--sm-color-palette-_error-fg2-color-2);
-  --sm-bg-color-3: var(--sm-color-palette-_error-bg-color-3);
-  --sm-accent-color-3: var(--sm-color-palette-_error-accent-color-3);
-  --sm-fg1-color-3: var(--sm-color-palette-_error-fg1-color-3);
-  --sm-fg2-color-3: var(--sm-color-palette-_error-fg2-color-3);
-  --sm-bg-color-4: var(--sm-color-palette-_error-bg-color-4);
-  --sm-accent-color-4: var(--sm-color-palette-_error-accent-color-4);
-  --sm-fg1-color-4: var(--sm-color-palette-_error-fg1-color-4);
-  --sm-fg2-color-4: var(--sm-color-palette-_error-fg2-color-4);
-  --sm-bg-color-5: var(--sm-color-palette-_error-bg-color-5);
-  --sm-accent-color-5: var(--sm-color-palette-_error-accent-color-5);
-  --sm-fg1-color-5: var(--sm-color-palette-_error-fg1-color-5);
-  --sm-fg2-color-5: var(--sm-color-palette-_error-fg2-color-5);
-  --sm-bg-color-6: var(--sm-color-palette-_error-bg-color-6);
-  --sm-accent-color-6: var(--sm-color-palette-_error-accent-color-6);
-  --sm-fg1-color-6: var(--sm-color-palette-_error-fg1-color-6);
-  --sm-fg2-color-6: var(--sm-color-palette-_error-fg2-color-6);
-  --sm-bg-color-7: var(--sm-color-palette-_error-bg-color-7);
-  --sm-accent-color-7: var(--sm-color-palette-_error-accent-color-7);
-  --sm-fg1-color-7: var(--sm-color-palette-_error-fg1-color-7);
-  --sm-fg2-color-7: var(--sm-color-palette-_error-fg2-color-7);
-  --sm-bg-color-8: var(--sm-color-palette-_error-bg-color-8);
-  --sm-accent-color-8: var(--sm-color-palette-_error-accent-color-8);
-  --sm-fg1-color-8: var(--sm-color-palette-_error-fg1-color-8);
-  --sm-fg2-color-8: var(--sm-color-palette-_error-fg2-color-8);
-  --sm-bg-color-9: var(--sm-color-palette-_error-bg-color-9);
-  --sm-accent-color-9: var(--sm-color-palette-_error-accent-color-9);
-  --sm-fg1-color-9: var(--sm-color-palette-_error-fg1-color-9);
-  --sm-fg2-color-9: var(--sm-color-palette-_error-fg2-color-9);
-  --sm-bg-color-10: var(--sm-color-palette-_error-bg-color-10);
-  --sm-accent-color-10: var(--sm-color-palette-_error-accent-color-10);
-  --sm-fg1-color-10: var(--sm-color-palette-_error-fg1-color-10);
-  --sm-fg2-color-10: var(--sm-color-palette-_error-fg2-color-10);
-  --sm-bg-color-11: var(--sm-color-palette-_error-bg-color-11);
-  --sm-accent-color-11: var(--sm-color-palette-_error-accent-color-11);
-  --sm-fg1-color-11: var(--sm-color-palette-_error-fg1-color-11);
-  --sm-fg2-color-11: var(--sm-color-palette-_error-fg2-color-11);
-  --sm-bg-color-12: var(--sm-color-palette-_error-bg-color-12);
-  --sm-accent-color-12: var(--sm-color-palette-_error-accent-color-12);
-  --sm-fg1-color-12: var(--sm-color-palette-_error-fg1-color-12);
-  --sm-fg2-color-12: var(--sm-color-palette-_error-fg2-color-12);
+  --sm-bg-color-1: var(--sm-color-palette-_error-bg-color-1, var(--sm-color-palette-1-bg-color-1));
+  --sm-accent-color-1: var(--sm-color-palette-_error-accent-color-1, var(--sm-color-palette-1-accent-color-1));
+  --sm-fg1-color-1: var(--sm-color-palette-_error-fg1-color-1, var(--sm-color-palette-1-fg1-color-1));
+  --sm-fg2-color-1: var(--sm-color-palette-_error-fg2-color-1, var(--sm-color-palette-1-fg2-color-1));
+  --sm-bg-color-2: var(--sm-color-palette-_error-bg-color-2, var(--sm-color-palette-1-bg-color-2));
+  --sm-accent-color-2: var(--sm-color-palette-_error-accent-color-2, var(--sm-color-palette-1-accent-color-2));
+  --sm-fg1-color-2: var(--sm-color-palette-_error-fg1-color-2, var(--sm-color-palette-1-fg1-color-2));
+  --sm-fg2-color-2: var(--sm-color-palette-_error-fg2-color-2, var(--sm-color-palette-1-fg2-color-2));
+  --sm-bg-color-3: var(--sm-color-palette-_error-bg-color-3, var(--sm-color-palette-1-bg-color-3));
+  --sm-accent-color-3: var(--sm-color-palette-_error-accent-color-3, var(--sm-color-palette-1-accent-color-3));
+  --sm-fg1-color-3: var(--sm-color-palette-_error-fg1-color-3, var(--sm-color-palette-1-fg1-color-3));
+  --sm-fg2-color-3: var(--sm-color-palette-_error-fg2-color-3, var(--sm-color-palette-1-fg2-color-3));
+  --sm-bg-color-4: var(--sm-color-palette-_error-bg-color-4, var(--sm-color-palette-1-bg-color-4));
+  --sm-accent-color-4: var(--sm-color-palette-_error-accent-color-4, var(--sm-color-palette-1-accent-color-4));
+  --sm-fg1-color-4: var(--sm-color-palette-_error-fg1-color-4, var(--sm-color-palette-1-fg1-color-4));
+  --sm-fg2-color-4: var(--sm-color-palette-_error-fg2-color-4, var(--sm-color-palette-1-fg2-color-4));
+  --sm-bg-color-5: var(--sm-color-palette-_error-bg-color-5, var(--sm-color-palette-1-bg-color-5));
+  --sm-accent-color-5: var(--sm-color-palette-_error-accent-color-5, var(--sm-color-palette-1-accent-color-5));
+  --sm-fg1-color-5: var(--sm-color-palette-_error-fg1-color-5, var(--sm-color-palette-1-fg1-color-5));
+  --sm-fg2-color-5: var(--sm-color-palette-_error-fg2-color-5, var(--sm-color-palette-1-fg2-color-5));
+  --sm-bg-color-6: var(--sm-color-palette-_error-bg-color-6, var(--sm-color-palette-1-bg-color-6));
+  --sm-accent-color-6: var(--sm-color-palette-_error-accent-color-6, var(--sm-color-palette-1-accent-color-6));
+  --sm-fg1-color-6: var(--sm-color-palette-_error-fg1-color-6, var(--sm-color-palette-1-fg1-color-6));
+  --sm-fg2-color-6: var(--sm-color-palette-_error-fg2-color-6, var(--sm-color-palette-1-fg2-color-6));
+  --sm-bg-color-7: var(--sm-color-palette-_error-bg-color-7, var(--sm-color-palette-1-bg-color-7));
+  --sm-accent-color-7: var(--sm-color-palette-_error-accent-color-7, var(--sm-color-palette-1-accent-color-7));
+  --sm-fg1-color-7: var(--sm-color-palette-_error-fg1-color-7, var(--sm-color-palette-1-fg1-color-7));
+  --sm-fg2-color-7: var(--sm-color-palette-_error-fg2-color-7, var(--sm-color-palette-1-fg2-color-7));
+  --sm-bg-color-8: var(--sm-color-palette-_error-bg-color-8, var(--sm-color-palette-1-bg-color-8));
+  --sm-accent-color-8: var(--sm-color-palette-_error-accent-color-8, var(--sm-color-palette-1-accent-color-8));
+  --sm-fg1-color-8: var(--sm-color-palette-_error-fg1-color-8, var(--sm-color-palette-1-fg1-color-8));
+  --sm-fg2-color-8: var(--sm-color-palette-_error-fg2-color-8, var(--sm-color-palette-1-fg2-color-8));
+  --sm-bg-color-9: var(--sm-color-palette-_error-bg-color-9, var(--sm-color-palette-1-bg-color-9));
+  --sm-accent-color-9: var(--sm-color-palette-_error-accent-color-9, var(--sm-color-palette-1-accent-color-9));
+  --sm-fg1-color-9: var(--sm-color-palette-_error-fg1-color-9, var(--sm-color-palette-1-fg1-color-9));
+  --sm-fg2-color-9: var(--sm-color-palette-_error-fg2-color-9, var(--sm-color-palette-1-fg2-color-9));
+  --sm-bg-color-10: var(--sm-color-palette-_error-bg-color-10, var(--sm-color-palette-1-bg-color-10));
+  --sm-accent-color-10: var(--sm-color-palette-_error-accent-color-10, var(--sm-color-palette-1-accent-color-10));
+  --sm-fg1-color-10: var(--sm-color-palette-_error-fg1-color-10, var(--sm-color-palette-1-fg1-color-10));
+  --sm-fg2-color-10: var(--sm-color-palette-_error-fg2-color-10, var(--sm-color-palette-1-fg2-color-10));
+  --sm-bg-color-11: var(--sm-color-palette-_error-bg-color-11, var(--sm-color-palette-1-bg-color-11));
+  --sm-accent-color-11: var(--sm-color-palette-_error-accent-color-11, var(--sm-color-palette-1-accent-color-11));
+  --sm-fg1-color-11: var(--sm-color-palette-_error-fg1-color-11, var(--sm-color-palette-1-fg1-color-11));
+  --sm-fg2-color-11: var(--sm-color-palette-_error-fg2-color-11, var(--sm-color-palette-1-fg2-color-11));
+  --sm-bg-color-12: var(--sm-color-palette-_error-bg-color-12, var(--sm-color-palette-1-bg-color-12));
+  --sm-accent-color-12: var(--sm-color-palette-_error-accent-color-12, var(--sm-color-palette-1-accent-color-12));
+  --sm-fg1-color-12: var(--sm-color-palette-_error-fg1-color-12, var(--sm-color-palette-1-fg1-color-12));
+  --sm-fg2-color-12: var(--sm-color-palette-_error-fg2-color-12, var(--sm-color-palette-1-fg2-color-12));
   --sm-current-bg-color: var(--sm-bg-color-7);
   --sm-current-accent-color: var(--sm-accent-color-7);
   --sm-current-fg1-color: var(--sm-fg1-color-7);
   --sm-current-fg2-color: var(--sm-fg2-color-7); }
 
 .novablocks-media.has-secondary-accent-color .novablocks-block {
-  --sm-bg-color-1: var(--sm-color-palette-2-bg-color-1);
-  --sm-accent-color-1: var(--sm-color-palette-2-accent-color-1);
-  --sm-fg1-color-1: var(--sm-color-palette-2-fg1-color-1);
-  --sm-fg2-color-1: var(--sm-color-palette-2-fg2-color-1);
-  --sm-bg-color-2: var(--sm-color-palette-2-bg-color-2);
-  --sm-accent-color-2: var(--sm-color-palette-2-accent-color-2);
-  --sm-fg1-color-2: var(--sm-color-palette-2-fg1-color-2);
-  --sm-fg2-color-2: var(--sm-color-palette-2-fg2-color-2);
-  --sm-bg-color-3: var(--sm-color-palette-2-bg-color-3);
-  --sm-accent-color-3: var(--sm-color-palette-2-accent-color-3);
-  --sm-fg1-color-3: var(--sm-color-palette-2-fg1-color-3);
-  --sm-fg2-color-3: var(--sm-color-palette-2-fg2-color-3);
-  --sm-bg-color-4: var(--sm-color-palette-2-bg-color-4);
-  --sm-accent-color-4: var(--sm-color-palette-2-accent-color-4);
-  --sm-fg1-color-4: var(--sm-color-palette-2-fg1-color-4);
-  --sm-fg2-color-4: var(--sm-color-palette-2-fg2-color-4);
-  --sm-bg-color-5: var(--sm-color-palette-2-bg-color-5);
-  --sm-accent-color-5: var(--sm-color-palette-2-accent-color-5);
-  --sm-fg1-color-5: var(--sm-color-palette-2-fg1-color-5);
-  --sm-fg2-color-5: var(--sm-color-palette-2-fg2-color-5);
-  --sm-bg-color-6: var(--sm-color-palette-2-bg-color-6);
-  --sm-accent-color-6: var(--sm-color-palette-2-accent-color-6);
-  --sm-fg1-color-6: var(--sm-color-palette-2-fg1-color-6);
-  --sm-fg2-color-6: var(--sm-color-palette-2-fg2-color-6);
-  --sm-bg-color-7: var(--sm-color-palette-2-bg-color-7);
-  --sm-accent-color-7: var(--sm-color-palette-2-accent-color-7);
-  --sm-fg1-color-7: var(--sm-color-palette-2-fg1-color-7);
-  --sm-fg2-color-7: var(--sm-color-palette-2-fg2-color-7);
-  --sm-bg-color-8: var(--sm-color-palette-2-bg-color-8);
-  --sm-accent-color-8: var(--sm-color-palette-2-accent-color-8);
-  --sm-fg1-color-8: var(--sm-color-palette-2-fg1-color-8);
-  --sm-fg2-color-8: var(--sm-color-palette-2-fg2-color-8);
-  --sm-bg-color-9: var(--sm-color-palette-2-bg-color-9);
-  --sm-accent-color-9: var(--sm-color-palette-2-accent-color-9);
-  --sm-fg1-color-9: var(--sm-color-palette-2-fg1-color-9);
-  --sm-fg2-color-9: var(--sm-color-palette-2-fg2-color-9);
-  --sm-bg-color-10: var(--sm-color-palette-2-bg-color-10);
-  --sm-accent-color-10: var(--sm-color-palette-2-accent-color-10);
-  --sm-fg1-color-10: var(--sm-color-palette-2-fg1-color-10);
-  --sm-fg2-color-10: var(--sm-color-palette-2-fg2-color-10);
-  --sm-bg-color-11: var(--sm-color-palette-2-bg-color-11);
-  --sm-accent-color-11: var(--sm-color-palette-2-accent-color-11);
-  --sm-fg1-color-11: var(--sm-color-palette-2-fg1-color-11);
-  --sm-fg2-color-11: var(--sm-color-palette-2-fg2-color-11);
-  --sm-bg-color-12: var(--sm-color-palette-2-bg-color-12);
-  --sm-accent-color-12: var(--sm-color-palette-2-accent-color-12);
-  --sm-fg1-color-12: var(--sm-color-palette-2-fg1-color-12);
-  --sm-fg2-color-12: var(--sm-color-palette-2-fg2-color-12); }
+  --sm-bg-color-1: var(--sm-color-palette-2-bg-color-1, var(--sm-color-palette-1-bg-color-1));
+  --sm-accent-color-1: var(--sm-color-palette-2-accent-color-1, var(--sm-color-palette-1-accent-color-1));
+  --sm-fg1-color-1: var(--sm-color-palette-2-fg1-color-1, var(--sm-color-palette-1-fg1-color-1));
+  --sm-fg2-color-1: var(--sm-color-palette-2-fg2-color-1, var(--sm-color-palette-1-fg2-color-1));
+  --sm-bg-color-2: var(--sm-color-palette-2-bg-color-2, var(--sm-color-palette-1-bg-color-2));
+  --sm-accent-color-2: var(--sm-color-palette-2-accent-color-2, var(--sm-color-palette-1-accent-color-2));
+  --sm-fg1-color-2: var(--sm-color-palette-2-fg1-color-2, var(--sm-color-palette-1-fg1-color-2));
+  --sm-fg2-color-2: var(--sm-color-palette-2-fg2-color-2, var(--sm-color-palette-1-fg2-color-2));
+  --sm-bg-color-3: var(--sm-color-palette-2-bg-color-3, var(--sm-color-palette-1-bg-color-3));
+  --sm-accent-color-3: var(--sm-color-palette-2-accent-color-3, var(--sm-color-palette-1-accent-color-3));
+  --sm-fg1-color-3: var(--sm-color-palette-2-fg1-color-3, var(--sm-color-palette-1-fg1-color-3));
+  --sm-fg2-color-3: var(--sm-color-palette-2-fg2-color-3, var(--sm-color-palette-1-fg2-color-3));
+  --sm-bg-color-4: var(--sm-color-palette-2-bg-color-4, var(--sm-color-palette-1-bg-color-4));
+  --sm-accent-color-4: var(--sm-color-palette-2-accent-color-4, var(--sm-color-palette-1-accent-color-4));
+  --sm-fg1-color-4: var(--sm-color-palette-2-fg1-color-4, var(--sm-color-palette-1-fg1-color-4));
+  --sm-fg2-color-4: var(--sm-color-palette-2-fg2-color-4, var(--sm-color-palette-1-fg2-color-4));
+  --sm-bg-color-5: var(--sm-color-palette-2-bg-color-5, var(--sm-color-palette-1-bg-color-5));
+  --sm-accent-color-5: var(--sm-color-palette-2-accent-color-5, var(--sm-color-palette-1-accent-color-5));
+  --sm-fg1-color-5: var(--sm-color-palette-2-fg1-color-5, var(--sm-color-palette-1-fg1-color-5));
+  --sm-fg2-color-5: var(--sm-color-palette-2-fg2-color-5, var(--sm-color-palette-1-fg2-color-5));
+  --sm-bg-color-6: var(--sm-color-palette-2-bg-color-6, var(--sm-color-palette-1-bg-color-6));
+  --sm-accent-color-6: var(--sm-color-palette-2-accent-color-6, var(--sm-color-palette-1-accent-color-6));
+  --sm-fg1-color-6: var(--sm-color-palette-2-fg1-color-6, var(--sm-color-palette-1-fg1-color-6));
+  --sm-fg2-color-6: var(--sm-color-palette-2-fg2-color-6, var(--sm-color-palette-1-fg2-color-6));
+  --sm-bg-color-7: var(--sm-color-palette-2-bg-color-7, var(--sm-color-palette-1-bg-color-7));
+  --sm-accent-color-7: var(--sm-color-palette-2-accent-color-7, var(--sm-color-palette-1-accent-color-7));
+  --sm-fg1-color-7: var(--sm-color-palette-2-fg1-color-7, var(--sm-color-palette-1-fg1-color-7));
+  --sm-fg2-color-7: var(--sm-color-palette-2-fg2-color-7, var(--sm-color-palette-1-fg2-color-7));
+  --sm-bg-color-8: var(--sm-color-palette-2-bg-color-8, var(--sm-color-palette-1-bg-color-8));
+  --sm-accent-color-8: var(--sm-color-palette-2-accent-color-8, var(--sm-color-palette-1-accent-color-8));
+  --sm-fg1-color-8: var(--sm-color-palette-2-fg1-color-8, var(--sm-color-palette-1-fg1-color-8));
+  --sm-fg2-color-8: var(--sm-color-palette-2-fg2-color-8, var(--sm-color-palette-1-fg2-color-8));
+  --sm-bg-color-9: var(--sm-color-palette-2-bg-color-9, var(--sm-color-palette-1-bg-color-9));
+  --sm-accent-color-9: var(--sm-color-palette-2-accent-color-9, var(--sm-color-palette-1-accent-color-9));
+  --sm-fg1-color-9: var(--sm-color-palette-2-fg1-color-9, var(--sm-color-palette-1-fg1-color-9));
+  --sm-fg2-color-9: var(--sm-color-palette-2-fg2-color-9, var(--sm-color-palette-1-fg2-color-9));
+  --sm-bg-color-10: var(--sm-color-palette-2-bg-color-10, var(--sm-color-palette-1-bg-color-10));
+  --sm-accent-color-10: var(--sm-color-palette-2-accent-color-10, var(--sm-color-palette-1-accent-color-10));
+  --sm-fg1-color-10: var(--sm-color-palette-2-fg1-color-10, var(--sm-color-palette-1-fg1-color-10));
+  --sm-fg2-color-10: var(--sm-color-palette-2-fg2-color-10, var(--sm-color-palette-1-fg2-color-10));
+  --sm-bg-color-11: var(--sm-color-palette-2-bg-color-11, var(--sm-color-palette-1-bg-color-11));
+  --sm-accent-color-11: var(--sm-color-palette-2-accent-color-11, var(--sm-color-palette-1-accent-color-11));
+  --sm-fg1-color-11: var(--sm-color-palette-2-fg1-color-11, var(--sm-color-palette-1-fg1-color-11));
+  --sm-fg2-color-11: var(--sm-color-palette-2-fg2-color-11, var(--sm-color-palette-1-fg2-color-11));
+  --sm-bg-color-12: var(--sm-color-palette-2-bg-color-12, var(--sm-color-palette-1-bg-color-12));
+  --sm-accent-color-12: var(--sm-color-palette-2-accent-color-12, var(--sm-color-palette-1-accent-color-12));
+  --sm-fg1-color-12: var(--sm-color-palette-2-fg1-color-12, var(--sm-color-palette-1-fg1-color-12));
+  --sm-fg2-color-12: var(--sm-color-palette-2-fg2-color-12, var(--sm-color-palette-1-fg2-color-12)); }
 
 .novablocks-media.has-tertiary-accent-color .novablocks-block {
-  --sm-bg-color-1: var(--sm-color-palette-2-bg-color-1);
-  --sm-accent-color-1: var(--sm-color-palette-2-accent-color-1);
-  --sm-fg1-color-1: var(--sm-color-palette-2-fg1-color-1);
-  --sm-fg2-color-1: var(--sm-color-palette-2-fg2-color-1);
-  --sm-bg-color-2: var(--sm-color-palette-2-bg-color-2);
-  --sm-accent-color-2: var(--sm-color-palette-2-accent-color-2);
-  --sm-fg1-color-2: var(--sm-color-palette-2-fg1-color-2);
-  --sm-fg2-color-2: var(--sm-color-palette-2-fg2-color-2);
-  --sm-bg-color-3: var(--sm-color-palette-2-bg-color-3);
-  --sm-accent-color-3: var(--sm-color-palette-2-accent-color-3);
-  --sm-fg1-color-3: var(--sm-color-palette-2-fg1-color-3);
-  --sm-fg2-color-3: var(--sm-color-palette-2-fg2-color-3);
-  --sm-bg-color-4: var(--sm-color-palette-2-bg-color-4);
-  --sm-accent-color-4: var(--sm-color-palette-2-accent-color-4);
-  --sm-fg1-color-4: var(--sm-color-palette-2-fg1-color-4);
-  --sm-fg2-color-4: var(--sm-color-palette-2-fg2-color-4);
-  --sm-bg-color-5: var(--sm-color-palette-2-bg-color-5);
-  --sm-accent-color-5: var(--sm-color-palette-2-accent-color-5);
-  --sm-fg1-color-5: var(--sm-color-palette-2-fg1-color-5);
-  --sm-fg2-color-5: var(--sm-color-palette-2-fg2-color-5);
-  --sm-bg-color-6: var(--sm-color-palette-2-bg-color-6);
-  --sm-accent-color-6: var(--sm-color-palette-2-accent-color-6);
-  --sm-fg1-color-6: var(--sm-color-palette-2-fg1-color-6);
-  --sm-fg2-color-6: var(--sm-color-palette-2-fg2-color-6);
-  --sm-bg-color-7: var(--sm-color-palette-2-bg-color-7);
-  --sm-accent-color-7: var(--sm-color-palette-2-accent-color-7);
-  --sm-fg1-color-7: var(--sm-color-palette-2-fg1-color-7);
-  --sm-fg2-color-7: var(--sm-color-palette-2-fg2-color-7);
-  --sm-bg-color-8: var(--sm-color-palette-2-bg-color-8);
-  --sm-accent-color-8: var(--sm-color-palette-2-accent-color-8);
-  --sm-fg1-color-8: var(--sm-color-palette-2-fg1-color-8);
-  --sm-fg2-color-8: var(--sm-color-palette-2-fg2-color-8);
-  --sm-bg-color-9: var(--sm-color-palette-2-bg-color-9);
-  --sm-accent-color-9: var(--sm-color-palette-2-accent-color-9);
-  --sm-fg1-color-9: var(--sm-color-palette-2-fg1-color-9);
-  --sm-fg2-color-9: var(--sm-color-palette-2-fg2-color-9);
-  --sm-bg-color-10: var(--sm-color-palette-2-bg-color-10);
-  --sm-accent-color-10: var(--sm-color-palette-2-accent-color-10);
-  --sm-fg1-color-10: var(--sm-color-palette-2-fg1-color-10);
-  --sm-fg2-color-10: var(--sm-color-palette-2-fg2-color-10);
-  --sm-bg-color-11: var(--sm-color-palette-2-bg-color-11);
-  --sm-accent-color-11: var(--sm-color-palette-2-accent-color-11);
-  --sm-fg1-color-11: var(--sm-color-palette-2-fg1-color-11);
-  --sm-fg2-color-11: var(--sm-color-palette-2-fg2-color-11);
-  --sm-bg-color-12: var(--sm-color-palette-2-bg-color-12);
-  --sm-accent-color-12: var(--sm-color-palette-2-accent-color-12);
-  --sm-fg1-color-12: var(--sm-color-palette-2-fg1-color-12);
-  --sm-fg2-color-12: var(--sm-color-palette-2-fg2-color-12); }
+  --sm-bg-color-1: var(--sm-color-palette-2-bg-color-1, var(--sm-color-palette-1-bg-color-1));
+  --sm-accent-color-1: var(--sm-color-palette-2-accent-color-1, var(--sm-color-palette-1-accent-color-1));
+  --sm-fg1-color-1: var(--sm-color-palette-2-fg1-color-1, var(--sm-color-palette-1-fg1-color-1));
+  --sm-fg2-color-1: var(--sm-color-palette-2-fg2-color-1, var(--sm-color-palette-1-fg2-color-1));
+  --sm-bg-color-2: var(--sm-color-palette-2-bg-color-2, var(--sm-color-palette-1-bg-color-2));
+  --sm-accent-color-2: var(--sm-color-palette-2-accent-color-2, var(--sm-color-palette-1-accent-color-2));
+  --sm-fg1-color-2: var(--sm-color-palette-2-fg1-color-2, var(--sm-color-palette-1-fg1-color-2));
+  --sm-fg2-color-2: var(--sm-color-palette-2-fg2-color-2, var(--sm-color-palette-1-fg2-color-2));
+  --sm-bg-color-3: var(--sm-color-palette-2-bg-color-3, var(--sm-color-palette-1-bg-color-3));
+  --sm-accent-color-3: var(--sm-color-palette-2-accent-color-3, var(--sm-color-palette-1-accent-color-3));
+  --sm-fg1-color-3: var(--sm-color-palette-2-fg1-color-3, var(--sm-color-palette-1-fg1-color-3));
+  --sm-fg2-color-3: var(--sm-color-palette-2-fg2-color-3, var(--sm-color-palette-1-fg2-color-3));
+  --sm-bg-color-4: var(--sm-color-palette-2-bg-color-4, var(--sm-color-palette-1-bg-color-4));
+  --sm-accent-color-4: var(--sm-color-palette-2-accent-color-4, var(--sm-color-palette-1-accent-color-4));
+  --sm-fg1-color-4: var(--sm-color-palette-2-fg1-color-4, var(--sm-color-palette-1-fg1-color-4));
+  --sm-fg2-color-4: var(--sm-color-palette-2-fg2-color-4, var(--sm-color-palette-1-fg2-color-4));
+  --sm-bg-color-5: var(--sm-color-palette-2-bg-color-5, var(--sm-color-palette-1-bg-color-5));
+  --sm-accent-color-5: var(--sm-color-palette-2-accent-color-5, var(--sm-color-palette-1-accent-color-5));
+  --sm-fg1-color-5: var(--sm-color-palette-2-fg1-color-5, var(--sm-color-palette-1-fg1-color-5));
+  --sm-fg2-color-5: var(--sm-color-palette-2-fg2-color-5, var(--sm-color-palette-1-fg2-color-5));
+  --sm-bg-color-6: var(--sm-color-palette-2-bg-color-6, var(--sm-color-palette-1-bg-color-6));
+  --sm-accent-color-6: var(--sm-color-palette-2-accent-color-6, var(--sm-color-palette-1-accent-color-6));
+  --sm-fg1-color-6: var(--sm-color-palette-2-fg1-color-6, var(--sm-color-palette-1-fg1-color-6));
+  --sm-fg2-color-6: var(--sm-color-palette-2-fg2-color-6, var(--sm-color-palette-1-fg2-color-6));
+  --sm-bg-color-7: var(--sm-color-palette-2-bg-color-7, var(--sm-color-palette-1-bg-color-7));
+  --sm-accent-color-7: var(--sm-color-palette-2-accent-color-7, var(--sm-color-palette-1-accent-color-7));
+  --sm-fg1-color-7: var(--sm-color-palette-2-fg1-color-7, var(--sm-color-palette-1-fg1-color-7));
+  --sm-fg2-color-7: var(--sm-color-palette-2-fg2-color-7, var(--sm-color-palette-1-fg2-color-7));
+  --sm-bg-color-8: var(--sm-color-palette-2-bg-color-8, var(--sm-color-palette-1-bg-color-8));
+  --sm-accent-color-8: var(--sm-color-palette-2-accent-color-8, var(--sm-color-palette-1-accent-color-8));
+  --sm-fg1-color-8: var(--sm-color-palette-2-fg1-color-8, var(--sm-color-palette-1-fg1-color-8));
+  --sm-fg2-color-8: var(--sm-color-palette-2-fg2-color-8, var(--sm-color-palette-1-fg2-color-8));
+  --sm-bg-color-9: var(--sm-color-palette-2-bg-color-9, var(--sm-color-palette-1-bg-color-9));
+  --sm-accent-color-9: var(--sm-color-palette-2-accent-color-9, var(--sm-color-palette-1-accent-color-9));
+  --sm-fg1-color-9: var(--sm-color-palette-2-fg1-color-9, var(--sm-color-palette-1-fg1-color-9));
+  --sm-fg2-color-9: var(--sm-color-palette-2-fg2-color-9, var(--sm-color-palette-1-fg2-color-9));
+  --sm-bg-color-10: var(--sm-color-palette-2-bg-color-10, var(--sm-color-palette-1-bg-color-10));
+  --sm-accent-color-10: var(--sm-color-palette-2-accent-color-10, var(--sm-color-palette-1-accent-color-10));
+  --sm-fg1-color-10: var(--sm-color-palette-2-fg1-color-10, var(--sm-color-palette-1-fg1-color-10));
+  --sm-fg2-color-10: var(--sm-color-palette-2-fg2-color-10, var(--sm-color-palette-1-fg2-color-10));
+  --sm-bg-color-11: var(--sm-color-palette-2-bg-color-11, var(--sm-color-palette-1-bg-color-11));
+  --sm-accent-color-11: var(--sm-color-palette-2-accent-color-11, var(--sm-color-palette-1-accent-color-11));
+  --sm-fg1-color-11: var(--sm-color-palette-2-fg1-color-11, var(--sm-color-palette-1-fg1-color-11));
+  --sm-fg2-color-11: var(--sm-color-palette-2-fg2-color-11, var(--sm-color-palette-1-fg2-color-11));
+  --sm-bg-color-12: var(--sm-color-palette-2-bg-color-12, var(--sm-color-palette-1-bg-color-12));
+  --sm-accent-color-12: var(--sm-color-palette-2-accent-color-12, var(--sm-color-palette-1-accent-color-12));
+  --sm-fg1-color-12: var(--sm-color-palette-2-fg1-color-12, var(--sm-color-palette-1-fg1-color-12));
+  --sm-fg2-color-12: var(--sm-color-palette-2-fg2-color-12, var(--sm-color-palette-1-fg2-color-12)); }
 
 .novablocks-opentable:not([class*="sm-palette-"]):not([class*="sm-variation-"]) {
   --sm-current-bg-color: var(--sm-bg-color-10);
@@ -3453,7 +3483,7 @@ html.is-dark .sm-light {
   --sm-current-fg2-color: var(--sm-fg2-color-10); }
 
 /* End Fallback Styles for Color Signal */
-.wp-block-group__inner-container > * {
+.wp-block-group__inner-container > *:not([class*='alignfull']) {
   width: 100%; }
 
 @media not screen and (min-width: 1024px) {

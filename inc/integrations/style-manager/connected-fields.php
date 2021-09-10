@@ -29,6 +29,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 				'sm_font_primary'    => array(
 					'default' => 'Reforma1969',
 					'connected_fields' => array(
+						'super_display_font',
 						'display_font',
 						'heading_1_font',
 						'heading_2_font',

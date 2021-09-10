@@ -93,6 +93,13 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 		'unit' => '',
 	);
 
+	$font_size_config_extra_large = array(
+		'min'  => 60,
+		'max'  => 240,
+		'step' => 1,
+		'unit' => '',
+	);
+
 	$line_height_config = array(
 		'min' => 0.8,
 		'max' => 2,
@@ -130,6 +137,16 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 
 	$fields_config_large = array(
 		'font-size'      => $font_size_config_large,
+		'font-weight'    => true,
+		'font-style'    => true,
+		'line-height'    => $line_height_config,
+		'letter-spacing' => $letter_spacing_config,
+		'text-align'     => false,
+		'text-transform' => 'none'
+	);
+
+	$fields_config_extra_large = array(
+		'font-size'      => $font_size_config_extra_large,
 		'font-weight'    => true,
 		'font-style'    => true,
 		'line-height'    => $line_height_config,
@@ -186,6 +203,23 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 				'main_content_title_heading_fonts_section' => array(
 					'type' => 'html',
 					'html' => '<span class="separator sub-section label">' . esc_html__( 'Heading Fonts', '__theme_txtd' ) . '</span>',
+				),
+				'super_display_font'    => array(
+					'type'              => 'font',
+					'label'             => esc_html__( 'Super Display', '__theme_txtd' ),
+					'desc'              => esc_html__( '', '__theme_txtd' ),
+					'selector'          => ':root',
+					'properties_prefix' => '--theme-super-display-',
+					'default'           => array(
+						'font-family'     => 'Reforma1969',
+						'font-size'       => 165,
+						'line-height'     => 1.0,
+						'font-weight'     => 700,
+						'text-transform'  => 'none',
+						'text-decoration' => 'none',
+						'letter-spacing'  => - 0.03,
+					),
+					'fields'            => $fields_config_extra_large,
 				),
 				'display_font'    => array(
 					'type'              => 'font',

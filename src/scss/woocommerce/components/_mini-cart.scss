@@ -47,6 +47,8 @@
         display: flex;
         flex-wrap: wrap;
         position: relative;
+        
+        @include apply-font(meta);
 
         @include specific(2) {
             border-top: 0;
@@ -201,6 +203,12 @@
             .quantity {
                 display: block;
             }
+
+            &:hover {
+                a.remove[class] {
+                    opacity: 1;
+                }
+            }
         }
 
         // put the image on its own row and remove woocommerce styles
@@ -210,6 +218,8 @@
             text-decoration: none;
 
             color: inherit;
+
+            @include apply-font(heading-4);
         }
 
         // move the remove button to bottom right next to quantity
@@ -221,8 +231,12 @@
 
             // restyle remove button
             background: none;
+            opacity: 0;
 
-            @include close(.625em, .125em, false);
+            --theme-transition-duration: var(--theme-transition-duration-quick);
+            transition: var(--theme-transition);
+
+            @include close(.4em, .08em, false);
 
             // woocommerce thinks this should be important
             color: inherit !important;
@@ -242,6 +256,7 @@
     .mini_cart_item {
         .quantity {
             margin-top: var(--theme-spacing-tiny);
+            @include apply-font(meta);
         }
 
         dl,
