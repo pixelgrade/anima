@@ -28,11 +28,11 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 
 	// The section might be already defined, thus we merge, not replace the entire section config.
 	$config['sections']['colors_section'] = \Pixelgrade\StyleManager\Utils\ArrayHelpers::array_merge_recursive_distinct( $config['sections']['colors_section'], array(
-		'title'   => esc_html__( 'Colors', '__theme_txtd' ),
+		'title'   => esc_html__( 'Elements coloration', '__theme_txtd' ),
 		'options' => array(
 			'sm-description_colorize_elements_intro' => array(
 				'type' => 'html',
-				'html' => 'Apply color to specific elements from your site that you seek to get more attention.',
+				'html' => 'Apply color to <a href="https://pixelgrade.com/docs/rosa2/design-and-style/color-system/#change-elements-color-one-by-one" target="blank">specific elements</a> from your site that you seek to get more attention.',
 			),
 
 			'main_content_section_title' => array(
