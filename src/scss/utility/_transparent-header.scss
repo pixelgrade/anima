@@ -25,6 +25,10 @@
     
     > :first-child {
       --nb-block-top-spacing: 0 !important;
+      // We are applying inline padding-top with JS,
+      // so we better force padding-top: 0 for first block,
+      // when header is transparent.
+      padding-top: 0 !important;
     }
   }
 }
