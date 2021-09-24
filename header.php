@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     <?php if ( function_exists( 'block_areas' ) ) { ?>
         <?php if ( rosa2_block_area_has_blocks( 'promo-bar' ) ) { ?>
-            <div class="promo-bar js-promo-bar">
+            <div class="promo-bar js-promo-bar sm-variation-1">
                 <?php block_areas()->render( 'promo-bar' ); ?>
             </div>
         <?php } ?>
