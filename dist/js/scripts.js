@@ -2583,7 +2583,6 @@ function () {
 
       if ($firstBlock.is('.supernova')) {
         var attributes = $firstBlock.data();
-        console.log('aici', attributes);
         var $targets = $firstBlock;
 
         if (attributes.imagePadding === 0 && attributes.cardLayout === 'stacked') {

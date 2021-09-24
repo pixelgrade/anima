@@ -207,8 +207,6 @@ export default class App {
 
 		if ( $firstBlock.is( '.supernova' ) ) {
 			const attributes = $firstBlock.data();
-
-			console.log( 'aici', attributes );
 			let $targets = $firstBlock;
 
 			if ( attributes.imagePadding === 0 && attributes.cardLayout === 'stacked' ) {
