@@ -2582,8 +2582,23 @@ function () {
       var $firstBlock = external_jQuery_default()('.entry-content > :first-child');
 
       if ($firstBlock.is('.supernova')) {
-        var paddingTop = getPaddingTop($firstBlock);
-        $firstBlock.css('paddingTop', paddingTop + headerHeight + promoBarHeight);
+        var attributes = $firstBlock.data();
+        console.log('aici', attributes);
+        var $targets = $firstBlock;
+
+        if (attributes.imagePadding === 0 && attributes.cardLayout === 'stacked') {
+          $targets = $firstBlock.find('.supernova-item__inner-container');
+
+          if (attributes.layoutStyle !== 'carousel') {
+            $targets = $targets.first();
+          }
+        }
+
+        $targets.each(function (i, target) {
+          var $target = external_jQuery_default()(target);
+          var paddingTop = getPaddingTop($target);
+          $target.css('paddingTop', paddingTop + headerHeight + promoBarHeight);
+        });
         return;
       }
 
@@ -2596,9 +2611,8 @@ function () {
       }
 
       if ($firstBlockFg.length) {
-        var _paddingTop = getPaddingTop($firstBlockFg);
-
-        $firstBlockFg.css('paddingTop', Math.max(_paddingTop, headerHeight + promoBarHeight));
+        var paddingTop = getPaddingTop($firstBlockFg);
+        $firstBlockFg.css('paddingTop', Math.max(paddingTop, headerHeight + promoBarHeight));
       }
     }
   }]);

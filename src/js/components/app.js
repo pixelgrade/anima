@@ -206,8 +206,25 @@ export default class App {
 		const $firstBlock = $( '.entry-content > :first-child' );
 
 		if ( $firstBlock.is( '.supernova' ) ) {
-			const paddingTop = getPaddingTop( $firstBlock );
-			$firstBlock.css( 'paddingTop', paddingTop + headerHeight + promoBarHeight );
+			const attributes = $firstBlock.data();
+
+			console.log( 'aici', attributes );
+			let $targets = $firstBlock;
+
+			if ( attributes.imagePadding === 0 && attributes.cardLayout === 'stacked' ) {
+				$targets = $firstBlock.find( '.supernova-item__inner-container' );
+
+				if ( attributes.layoutStyle !== 'carousel' ) {
+					$targets = $targets.first();
+				}
+			}
+
+			$targets.each( ( i, target ) => {
+				const $target = $( target );
+				const paddingTop = getPaddingTop( $target );
+				$target.css( 'paddingTop', paddingTop + headerHeight + promoBarHeight );
+			} );
+
 			return;
 		}
 
