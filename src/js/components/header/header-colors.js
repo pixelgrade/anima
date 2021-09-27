@@ -15,11 +15,24 @@ class HeaderColors {
 	getFirstBlockElement() {
 		const content = document.querySelector( '.site-main .entry-content' );
 		const firstBlock = content ? getFirstChild( content ) : null;
-		const novablocksBlock = firstBlock ? firstBlock.querySelector( '.novablocks-block' ) : null;
 
-		if ( ! firstBlock || ! hasClass( firstBlock, 'alignfull' ) ) {
+		if ( ! firstBlock ) {
 			return null;
 		}
+
+		const attributes = firstBlock.dataset;
+
+		if ( ! hasClass( firstBlock, 'alignfull' ) ) {
+			return null;
+		}
+
+		if ( hasClass( firstBlock, 'supernova' ) &&
+		     parseInt( attributes.imagePadding, 10 ) === 0 &&
+		     attributes.cardLayout === 'stacked' ) {
+			return firstBlock.querySelector( '.supernova-item__content' );
+		}
+
+		const novablocksBlock = firstBlock.querySelector( '.novablocks-block' );
 
 		return novablocksBlock || firstBlock;
 	}

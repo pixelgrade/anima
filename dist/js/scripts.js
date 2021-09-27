@@ -1525,12 +1525,22 @@ function () {
     value: function getFirstBlockElement() {
       var content = document.querySelector('.site-main .entry-content');
       var firstBlock = content ? getFirstChild(content) : null;
-      var novablocksBlock = firstBlock ? firstBlock.querySelector('.novablocks-block') : null;
 
-      if (!firstBlock || !hasClass(firstBlock, 'alignfull')) {
+      if (!firstBlock) {
         return null;
       }
 
+      var attributes = firstBlock.dataset;
+
+      if (!hasClass(firstBlock, 'alignfull')) {
+        return null;
+      }
+
+      if (hasClass(firstBlock, 'supernova') && parseInt(attributes.imagePadding, 10) === 0 && attributes.cardLayout === 'stacked') {
+        return firstBlock.querySelector('.supernova-item__content');
+      }
+
+      var novablocksBlock = firstBlock.querySelector('.novablocks-block');
       return novablocksBlock || firstBlock;
     }
   }, {
