@@ -108,7 +108,7 @@ function pixelgrade_add_default_color_palettes( $color_palettes ) {
 		'default' => array(
 			'id'           => 0,
 			'label'        => esc_html__( 'Theme Default', '__theme_txtd' ),
-			'description'  => esc_html__( 'Rosa2 is to colors what wisdom is to knowledge', '__theme_txtd' ),
+			'description'  => esc_html__( 'Anima is to colors what wisdom is to knowledge', '__theme_txtd' ),
 			'preview'      => array(
 				'background_image_url' => '//cloud.pixelgrade.com/wp-content/uploads/2018/07/rosa-palette.jpg',
 			),

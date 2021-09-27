@@ -298,7 +298,7 @@ if ( ! function_exists( 'anima_footer_the_copyright' ) ) {
 			$output       .= $copyright_text . "\n";
 			$hide_credits = pixelgrade_option( 'footer_hide_credits', false );
 			if ( empty( $hide_credits ) ) {
-				$output .= '<span class="c-footer__credits">' . sprintf( esc_html__( 'Theme: %1$s by %2$s.', '__theme_txtd' ), esc_html( pixelgrade_get_original_theme_name() ), '<a href="https://pixelgrade.com/?utm_source=rosa2-clients&utm_medium=footer&utm_campaign=rosa2" title="' . esc_html__( 'The Pixelgrade Website', '__theme_txtd' ) . '" rel="nofollow">Pixelgrade</a>' ) . '</span>' . "\n";
+				$output .= '<span class="c-footer__credits">' . sprintf( esc_html__( 'Theme: %1$s by %2$s.', '__theme_txtd' ), esc_html( pixelgrade_get_original_theme_name() ), '<a href="https://pixelgrade.com/?utm_source=anima-clients&utm_medium=footer&utm_campaign=anima" title="' . esc_html__( 'The Pixelgrade Website', '__theme_txtd' ) . '" rel="nofollow">Pixelgrade</a>' ) . '</span>' . "\n";
 			}
 			$output .= '</div>';
 		}

@@ -9,8 +9,8 @@
  *
  * @since 1.13.0
  *
- * @package Rosa2
- * @author     Pixelgrade <help@pixelgrade.com>
+ * @package Anima
+ * @author  Pixelgrade <help@pixelgrade.com>
  */
 
 // Make sure the base TGMPA logic is loaded.
@@ -27,8 +27,8 @@ if ( ! class_exists( 'PXG_Plugin_Activation' ) ) {
 	 *
 	 * @since 1.13.0
 	 *
-	 * @package Rosa2
-	 * @author     Pixelgrade <help@pixelgrade.com>
+	 * @package Anima
+	 * @author  Pixelgrade <help@pixelgrade.com>
 	 */
 	class PXG_Plugin_Activation extends TGM_Plugin_Activation {
 		/**
