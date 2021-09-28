@@ -14,7 +14,7 @@ $comments_count = get_comments_number();
 	<div class="c-meta__rows">
 		<div class="c-meta__row">
 			<div class="c-meta__row-item">
-				<?php echo do_blocks( '<!-- wp:novablocks/sharing-overlay {"buttonLabel":"' . esc_html__( 'Share', '__theme_txtd' ) . '"} --><!-- /wp:novablocks/sharing-overlay -->' ); ?>
+				<?php echo do_blocks( '<!-- wp:novablocks/sharing-overlay { "buttonLabel":"' . esc_html__( 'Share', '__theme_txtd' ) . '", "paletteVariation": 1, "useSourceColorAsReference": true } --><!-- /wp:novablocks/sharing-overlay -->' ); ?>
 			</div>
 			<div class="c-meta__row-item">
 				<div class="c-meta-comments">
