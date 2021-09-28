@@ -71,7 +71,9 @@ export const getColorSetClasses = ( element ) => {
 	const classes = classAttr.split( /\s+/ );
 
 	return classes.filter( classname => {
-		return classname.search( 'sm-palette-' ) !== -1 || classname.search( 'sm-variation-' ) !== -1 || classname === 'sm-palette--shifted';
+		return classname.search( 'sm-palette-' ) !== -1 ||
+		       classname.search( 'sm-variation-' ) !== -1 ||
+		       classname.search( 'sm-color-signal-' ) !== -1;
 	} );
 }
 

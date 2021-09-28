@@ -125,15 +125,18 @@ html.is-dark .sm-light {
 .novablocks-announcement-bar {
 
     &.is-style-accent {
+        background-color: var(--sm-current-bg-color);
         @include apply-variation(6);
     }
 
     &.is-style-alternative {
+        background-color: var(--sm-current-bg-color);
         @include apply-palette(2);
         @include apply-variation(6);
     }
 
     &.is-style-alert {
+        background-color: var(--sm-current-bg-color);
         @include apply-palette(_error);
         @include apply-variation(7);
     }
