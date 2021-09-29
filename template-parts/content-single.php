@@ -26,7 +26,8 @@ $article_markup =   '<!-- wp:novablocks/sidecar { "className":"alignwide", "side
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
-	<?php  echo do_blocks( $article_markup ); ?>
+    <div class="u-container-sides-spacing">
+	    <?php  echo do_blocks( $article_markup ); ?>
+    </div>
 
 </article><!-- #post-<?php the_ID(); ?> -->
