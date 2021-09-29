@@ -550,7 +550,7 @@ var getColorSetClasses = function getColorSetClasses(element) {
 
   var classes = classAttr.split(/\s+/);
   return classes.filter(function (classname) {
-    return classname.search('sm-palette-') !== -1 || classname.search('sm-variation-') !== -1 || classname === 'sm-palette--shifted';
+    return classname.search('sm-palette-') !== -1 || classname.search('sm-variation-') !== -1 || classname.search('sm-color-signal-') !== -1;
   });
 };
 var utils_addClass = function addClass(element, classes) {
