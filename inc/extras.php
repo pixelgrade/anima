@@ -549,6 +549,32 @@ if ( ! function_exists( 'rosa2_get_home_content_markup' ) ) {
 	}
 }
 
+if ( ! function_exists('rosa2_get_search_content_markup') ) {
+
+    function rosa2_get_search_content_markup() {
+	    ob_start();
+
+	    if ( have_posts() ) { ?>
+
+            <header class="entry-header">
+                <div class="entry-content has-text-align-center">
+                    <h1 class="page-title has-text-align-center">
+					    <?php printf( esc_html__( 'Search results for: %s', '__theme_txtd' ), get_search_query() ); ?>
+                    </h1>
+                </div>
+            </header><!-- .page-header -->
+
+		    <?php
+		    get_template_part( 'template-parts/loop' );
+		    rosa2_the_posts_pagination();
+	    } else {
+		    get_template_part( 'template-parts/content', 'none' );
+	    }
+
+	    return ob_get_clean();
+    }
+}
+
 /**
  * Return the reading time in minutes for a post content.
  * @param WP_Post|int $post
