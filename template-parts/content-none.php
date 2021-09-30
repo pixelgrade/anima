@@ -13,7 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <section class="no-results not-found">
-    <div class="u-container-sides-spacing">
         <header class="page-header">
             <h1 class="page-title"><?php esc_html_e( 'Nothing Found', '__theme_txtd' ); ?></h1>
         </header><!-- .page-header -->
@@ -48,5 +47,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 
             } ?>
         </div><!-- .page-content -->
-    </div>
 </section><!-- .no-results -->

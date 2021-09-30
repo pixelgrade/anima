@@ -21,8 +21,5 @@ $page_markup =
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-    <div class="u-container-sides-spacing">
-        <?php echo do_blocks( $page_markup );?>
-    </div>
-
+    <?php echo do_blocks( $page_markup );?>
 </article><!-- #post-<?php the_ID(); ?> -->
