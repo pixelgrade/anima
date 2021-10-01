@@ -2613,7 +2613,7 @@ function () {
 
       var $firstBlockFg;
 
-      if ($firstBlock.is('.novablocks-block')) {
+      if ($firstBlock.is('.novablocks-block, .novablocks-media')) {
         $firstBlockFg = $firstBlock;
       } else {
         $firstBlockFg = $firstBlock.find('.novablocks-doppler__foreground, .novablocks-block');
