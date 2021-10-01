@@ -27,7 +27,11 @@ Table of Contents
 2.3.  Site Footer
 2.4.  Comments
 2.5.  Navigation
-2.5.  Search Form
+2.6.  Search Form
+2.7.  Logo
+2.8.  Header Dropcap
+2.9.  Reading Bar
+2.10. Author Box
 3.    Blocks
 4.    Pages
 5.    Theming
@@ -1166,11 +1170,11 @@ table {
   --theme-input-hover-box-shadow: var(--theme-search-input-focus); }
   @media only screen and (min-width: 1024px) {
     .c-search-overlay {
-      transform: translateY(-100vh);
+      transform: translateY(-100%);
       transition: transform 0.45s cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.1s; } }
   @media not screen and (min-width: 1024px) {
     .c-search-overlay {
-      transform: translateX(-100vw);
+      transform: translateX(-100%);
       transition: transform .3s ease-out;
       --theme-button-padding: .25em 1em; } }
   .c-search-overlay input[type="submit"],
@@ -1517,6 +1521,13 @@ table {
   --nb-emphasis-top-spacing: 1;
   --nb-emphasis-bottom-spacing: 1; }
 
+.site-footer__inner-container > .wp-block-group {
+  --novablocks-emphasis-top-spacing: 3;
+  --novablocks-emphasis-bottom-spacing: 3; }
+  .site-footer__inner-container > .wp-block-group + .wp-block-group {
+    --novablocks-emphasis-top-spacing: 1;
+    --novablocks-emphasis-bottom-spacing: 1; }
+
 /* Post Content */
 .entry-header {
   --nb-element-spacing-multiplier: 0.5; }
@@ -1610,10 +1621,6 @@ table {
   .c-meta > * {
     margin-top: var(--element-spacing);
     margin-left: var(--element-spacing); }
-  .c-meta__row--secondary {
-    opacity: 0.7; }
-  .c-meta__social .c-meta__row-item {
-    --current-font-weight: 700; }
   .c-meta__social .c-meta__row-item:after {
     content: none; }
   .c-meta a:not(.button) {
@@ -1702,9 +1709,6 @@ table {
   .c-meta-comments__count + .c-meta-comments__label {
     margin-left: 0.5em; }
 
-.c-meta__rows {
-  --current-font-weight: 400; }
-
 .c-meta__authorship {
   flex-grow: 1; }
   .c-meta__authorship .c-meta__row-item:not(:last-child):after {
@@ -1738,9 +1742,6 @@ table {
   .c-meta__social .c-meta__row > * {
     margin-left: var(--element-spacing);
     margin-top: var(--element-spacing); }
-  .c-meta__social .wp-block-button__link[class][class],
-  .c-meta__social .c-meta-comments {
-    --current-font-weight: 400; }
 
 .c-meta__row {
   display: flex;
@@ -1762,7 +1763,7 @@ table {
   filter: drop-shadow(1px 0px 0 currentColor) drop-shadow(0 1px 0 currentColor); }
 
 .c-meta-author__body .author {
-  --current-font-weight: 700;
+  --current-font-weight: bold;
   color: var(--sm-current-accent-color); }
 
 /* 2.4. Comments */
@@ -2495,6 +2496,99 @@ span.page-numbers {
   transform: translate(-50%, -50%); }
   .c-logo__inverted img {
     width: 100%; }
+
+/* 2.8. Header Dropcap */
+.header-dropcap {
+  position: absolute;
+  top: 0;
+  font-size: 15em;
+  line-height: 0.7;
+  font-weight: bold;
+  color: var(--sm-current-accent-color);
+  opacity: 0.1;
+  pointer-events: none;
+  margin-top: 0 !important; }
+  @media not screen and (min-width: 1024px) {
+    .header-dropcap {
+      margin-top: var(--theme-spacing-fluid-large) !important; } }
+
+/* 2.9. Reading Bar */
+.c-reading-bar__wrapper-title {
+  --font-size: var(--theme-navigation-font-size);
+  --current-font-size: var(--final-font-size);
+  --current-font-family: var(--theme-navigation-font-family);
+  --current-font-weight: var(--theme-navigation-font-weight);
+  --current-font-style: var(--theme-navigation-font-style);
+  --current-line-height: var(--theme-navigation-line-height);
+  --current-letter-spacing: var(--theme-navigation-letter-spacing);
+  --current-text-transform: var(--theme-navigation-text-transform); }
+
+.post-title__label {
+  --font-size: var(--theme-navigation-font-size);
+  --current-font-size: var(--final-font-size);
+  --current-font-family: var(--theme-navigation-font-family);
+  --current-font-weight: var(--theme-navigation-font-weight);
+  --current-font-style: var(--theme-navigation-font-style);
+  --current-line-height: var(--theme-navigation-line-height);
+  --current-letter-spacing: var(--theme-navigation-letter-spacing);
+  --current-text-transform: var(--theme-navigation-text-transform);
+  --current-font-style: italic;
+  --current-font-weight: 400; }
+
+/* 2.10. Author Box */
+.c-author {
+  display: flex;
+  align-items: flex-start;
+  --novablocks-block-top-spacing: 2;
+  --novablocks-block-bottom-spacing: 2; }
+  @media not screen and (min-width: 768px) {
+    .c-author.has-description {
+      flex-wrap: wrap; }
+      .c-author.has-description .c-author__avatar + .c-author__details {
+        padding-left: 0; } }
+  .c-author:not(.has-description) {
+    align-items: center; }
+
+.c-author__description {
+  margin-top: 0.95em;
+  margin-bottom: 0.95em; }
+
+.c-author__name {
+  display: block; }
+
+.c-author__avatar {
+  flex-shrink: 0;
+  max-width: 22%; }
+  @media only screen and (min-width: 768px) {
+    .c-author__avatar {
+      margin-bottom: 0; } }
+  @media not screen and (min-width: 768px) {
+    .c-author__avatar {
+      flex-basis: 100%; } }
+  .c-author__avatar img {
+    display: block; }
+  .c-author__avatar + .c-author__details {
+    padding-left: var(--novablocks-spacing); }
+
+.c-author__label {
+  display: block; }
+
+.c-author__links > :not(:last-child):after,
+.c-author__link-website:not(:last-child):after {
+  padding-left: .75em;
+  padding-right: .6em; }
+
+.c-author__links {
+  margin-top: 0;
+  margin-right: 0; }
+  .c-author__links a {
+    text-transform: uppercase;
+    text-decoration: none;
+    --current-font-weight: bold; }
+  .c-author__links a:hover {
+    text-decoration: none; }
+  .c-author__links * + * {
+    margin-left: 0.75em; }
 
 /* 3. Blocks */
 /*
@@ -3479,7 +3573,7 @@ html.is-dark .sm-light {
   --sm-fg1-color-12: var(--sm-color-palette-2-fg1-color-12, var(--sm-color-palette-1-fg1-color-12));
   --sm-fg2-color-12: var(--sm-color-palette-2-fg2-color-12, var(--sm-color-palette-1-fg2-color-12)); }
 
-.novablocks-opentable:not([class*="sm-palette-"]):not([class*="sm-variation-"]) {
+.novablocks-opentable:not([class*='sm-palette-']):not([class*='sm-variation-']) {
   --sm-current-bg-color: var(--sm-bg-color-10);
   --sm-current-accent-color: var(--sm-accent-color-10);
   --sm-current-fg1-color: var(--sm-fg1-color-10);
@@ -3518,3 +3612,6 @@ body {
 /* Hero bullets size fix */
 .c-bully {
   --current-font-size: 12px; }
+
+.novablocks-collection {
+  position: relative; }

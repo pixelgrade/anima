@@ -440,6 +440,12 @@ if ( ! function_exists( 'rosa2_article_header' ) ) {
 
 	function rosa2_article_header() {
 
+		$article_header_classes = array( 'article-header' );
+
+		if ( ! rosa2_is_active_sidebar( 'sidebar-1' )) {
+			$article_header_classes[] = 'wp-block-group__inner-container';
+        }
+
 		if ( 'post' !== get_post_type() ) {
 			return;
 		}
@@ -447,11 +453,12 @@ if ( ! function_exists( 'rosa2_article_header' ) ) {
 		ob_start();
 		?>
 
-        <div class="article-header">
+        <div class="<?php echo esc_attr( join( ' ', $article_header_classes ) ); ?>">
 
             <div class="entry-header sm-variation-2">
 				<?php rosa2_categories_posted_in() ?>
 
+                <div class="header-dropcap"><?php echo esc_html( substr( get_the_title(), 0, 1 ) ); ?></div>
                 <h1 class="entry-title"><?php the_title() ?></h1>
 
 				<?php if ( has_excerpt() ) { ?>
@@ -547,6 +554,18 @@ if ( ! function_exists( 'rosa2_get_home_content_markup' ) ) {
 
 		return ob_get_clean();
 	}
+}
+
+if ( ! function_exists( 'rosa2_get_author_box_markup' ) ) {
+
+    function rosa2_get_author_box_markup() {
+
+	    ob_start();
+
+	    echo rosa2_get_the_author_info_box();
+
+	    return ob_get_clean();
+    }
 }
 
 if ( ! function_exists('rosa2_get_search_content_markup') ) {

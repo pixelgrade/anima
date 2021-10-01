@@ -31,6 +31,14 @@ For ease of development, it is best to use `nvm` (https://github.com/nvm-sh/nvm)
 
 We use the following oh-my-zsh plugins: `plugins=(composer git nvm npm)` configured in `~/.zshrc`. For automatic node version switching, place this line in `~/.zshrc` just below the plugins line: `NVM_AUTOLOAD=1`. Now whenever you enter a directory through the shell, if it finds a `.nvmrc` file, it will switch to the specified node version.
 
+## Local Environment Setup Pointers
+
+You need to be careful since we **require** certain **node versions (v14) and PHP versions (v7.4).**
+
+For ease of development, it is best to use `nvm` (https://github.com/nvm-sh/nvm) for node version management and automatic node version switching on shell navigation. For the `zsh` shell the easiest way is to use [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) with the `nvm` [plugin](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/nvm) activated.
+
+We use the following oh-my-zsh plugins: `plugins=(composer git nvm npm)` configured in `~/.zshrc`. For automatic node version switching, place this line in `~/.zshrc` just below the plugins line: `NVM_AUTOLOAD=1`. Now whenever you enter a directory through the shell, if it finds a `.nvmrc` file, it will switch to the specified node version.
+
 ## License
 Anima theme source code is released under the [GNU GPL v2 license or later](https://www.gnu.org/licenses/gpl-2.0.html).
 

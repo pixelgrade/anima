@@ -3,6 +3,7 @@
     @include apply-font(body);
     
     --nb-spacing: var(--theme-spacing-fluid-large);
+    --novablocks-sharing-overlay-spacing: 1em;
     
     &[class] {
         z-index: 1200;
@@ -52,13 +53,23 @@
     }
 }
 
+.novablocks-sharing__group-title {
+    @include apply-font(body);
+}
+
 .novablocks-sharing__copy-input {
     
     @include specific(2) {
         --theme-input-box-shadow: none;
+        background: var(--sm-current-fg1-color);
+        color: var(--sm-current-bg-color);
     }
 }
 
 .novablocks-sharing[class] {
     background: none;
+}
+
+.novablocks-sharing__link-label {
+    @include apply-font(button);
 }

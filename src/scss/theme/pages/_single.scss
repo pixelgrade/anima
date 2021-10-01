@@ -92,6 +92,11 @@
 }
 
 .article-header {
+    
+    &[class*='inner-container'] {
+        padding-left: 0;
+        padding-right: 0;
+    }
 
     .entry-header {
         transform: translateZ(0);
@@ -189,8 +194,16 @@
         }
     }
 
-    .cat-links,
     .entry-excerpt {
         @include apply-font(lead);
+    }
+    
+    .cat-links {
+        @include apply-font(meta);
+    }
+    
+    + * {
+        position: relative;
+        z-index: 1;
     }
 }

@@ -22,7 +22,7 @@ if ( defined( '\Pixelgrade\StyleManager\VERSION' ) ) {
 
 	add_filter( 'style_manager/filter_fields', 'rosa2_add_header_section_to_style_manager_config', 20, 1 );
 	add_filter( 'style_manager/filter_fields', 'rosa2_add_separators_section_to_style_manager_config', 30, 1 );
-	add_filter( 'style_manager/filter_fields', 'rosa2_rosa2_add_content_section_to_style_manager_config', 40, 1 );
+	add_filter( 'style_manager/filter_fields', 'rosa2_add_content_section_to_style_manager_config', 40, 1 );
 }
 
 
@@ -144,7 +144,7 @@ function rosa2_add_header_section_to_style_manager_config( $config ) {
 	return $config;
 }
 
-function rosa2_rosa2_add_content_section_to_style_manager_config( $config ) {
+function rosa2_add_content_section_to_style_manager_config( $config ) {
 
 	$rosa2_content_section = array(
 		'content_section' => array(
@@ -240,3 +240,5 @@ function rosa2_add_separators_section_to_style_manager_config( $config ) {
 
 	return $config;
 }
+
+

@@ -13,6 +13,10 @@ body:not(.has-sidebar) {
 			--block-content-start: cs;
 		}
 	}
+	
+	.article-header {
+		grid-column: var(--all-columns);
+	}
 }
 
 .single.has-sidebar {
@@ -26,16 +30,8 @@ body:not(.has-sidebar) {
 	}
 }
 
-.article--is-landscape {
-	
-	.article-header {
-		--block-content-start: var(--block-limit-left);
-		--block-content-end: var(--block-limit-right);
-	}
-}
-
 .novablocks-sidecar {
-	--sticky-element-top-spacing: calc( var(--site-header-height) + var(--admin-bar-height) )
+	--sticky-element-top-spacing: calc( var(--site-header-height, 0px) + var(--admin-bar-height, 0px) )
 }
 
 .wp-block-group__inner-container {

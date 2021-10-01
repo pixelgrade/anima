@@ -36,3 +36,16 @@
         --nb-emphasis-bottom-spacing: 1;
     }
 }
+
+.site-footer__inner-container {
+    
+    > .wp-block-group {
+        --novablocks-emphasis-top-spacing: 3;
+        --novablocks-emphasis-bottom-spacing: 3;
+        
+        + .wp-block-group {
+            --novablocks-emphasis-top-spacing: 1;
+            --novablocks-emphasis-bottom-spacing: 1;
+        }
+    }
+}

@@ -30,6 +30,10 @@ ul.wp-block-categories__list[class] {
 .wp-block-cover .block-editor-block-list__block {
   color: inherit; }
 
+.wp-block-group:not([class*='sm-variation']):not([data-align*='full']) > [class*="__inner-container"] {
+  padding-right: 0;
+  padding-left: 0; }
+
 .editor-block-list__block,
 .block-editor-block-list__block {
   clear: both; }
@@ -711,18 +715,16 @@ body:not(.has-sidebar) {
   --block-limit-right: ce; }
   body:not(.has-sidebar) .entry-content > *:not([class*='align']) {
     --block-content-start: cs; }
+  body:not(.has-sidebar) .article-header {
+    grid-column: var(--all-columns); }
 
 .single.has-sidebar .entry-content[class][class][class],
 .single.has-sidebar .article-navigation[class][class][class],
 .single.has-sidebar .article-comments[class][class][class] {
   --block-content-start: ws; }
 
-.article--is-landscape .article-header {
-  --block-content-start: var(--block-limit-left);
-  --block-content-end: var(--block-limit-right); }
-
 .novablocks-sidecar {
-  --sticky-element-top-spacing: calc( var(--site-header-height) + var(--admin-bar-height) )
+  --sticky-element-top-spacing: calc( var(--site-header-height, 0px) + var(--admin-bar-height, 0px) )
 ; }
 
 .wp-block-group__inner-container {
@@ -844,18 +846,16 @@ body:not(.has-sidebar) {
   --block-limit-right: ce; }
   body:not(.has-sidebar) .entry-content > *:not([class*='align']) {
     --block-content-start: cs; }
+  body:not(.has-sidebar) .article-header {
+    grid-column: var(--all-columns); }
 
 .single.has-sidebar .entry-content[class][class][class],
 .single.has-sidebar .article-navigation[class][class][class],
 .single.has-sidebar .article-comments[class][class][class] {
   --block-content-start: ws; }
 
-.article--is-landscape .article-header {
-  --block-content-start: var(--block-limit-left);
-  --block-content-end: var(--block-limit-right); }
-
 .novablocks-sidecar {
-  --sticky-element-top-spacing: calc( var(--site-header-height) + var(--admin-bar-height) )
+  --sticky-element-top-spacing: calc( var(--site-header-height, 0px) + var(--admin-bar-height, 0px) )
 ; }
 
 .wp-block-group__inner-container {

@@ -156,7 +156,7 @@ html.is-dark .sm-light {
 
 .novablocks-opentable {
 
-    &:not([class*="sm-palette-"]):not([class*="sm-variation-"]) {
+    &:not([class*='sm-palette-']):not([class*='sm-variation-']) {
         @include apply-variation(10);
     }
 }
@@ -203,4 +203,8 @@ body {
 /* Hero bullets size fix */
 .c-bully {
     --current-font-size: 12px;
+}
+
+.novablocks-collection {
+    position: relative;
 }
