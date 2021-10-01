@@ -29,7 +29,7 @@ class HeaderColors {
 		if ( hasClass( firstBlock, 'supernova' ) &&
 		     parseInt( attributes.imagePadding, 10 ) === 0 &&
 		     attributes.cardLayout === 'stacked' ) {
-			return firstBlock.querySelector( '.supernova-item__content' );
+			return firstBlock.querySelector( '.supernova-item__inner-container' );
 		}
 
 		const novablocksBlock = firstBlock.querySelector( '.novablocks-block' );

@@ -189,6 +189,10 @@ body.blog, body.archive:not(.woocommerce-page), body.search:not(.search-no-resul
     display: block;
     background-color: var(--sm-current-bg-color);
     pointer-events: none; }
+    @media not screen and (min-width: 1024px) {
+      .article-header .entry-header:before {
+        left: calc(-1 * var(--theme-wrapper-sides-spacing));
+        right: calc(-1 * var(--theme-wrapper-sides-spacing)); } }
   body.single .site-main .has-post-thumbnail .article-header .entry-header:before {
     bottom: calc(-2 * var(--theme-spacing-fluid-large)); }
   .article-header .entry-header + .entry-thumbnail {

@@ -1537,7 +1537,7 @@ function () {
       }
 
       if (hasClass(firstBlock, 'supernova') && parseInt(attributes.imagePadding, 10) === 0 && attributes.cardLayout === 'stacked') {
-        return firstBlock.querySelector('.supernova-item__content');
+        return firstBlock.querySelector('.supernova-item__inner-container');
       }
 
       var novablocksBlock = firstBlock.querySelector('.novablocks-block');
@@ -2613,7 +2613,7 @@ function () {
 
       var $firstBlockFg;
 
-      if ($firstBlock.is('.novablocks-block')) {
+      if ($firstBlock.is('.novablocks-block, .novablocks-media')) {
         $firstBlockFg = $firstBlock;
       } else {
         $firstBlockFg = $firstBlock.find('.novablocks-doppler__foreground, .novablocks-block');

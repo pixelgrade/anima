@@ -1478,17 +1478,17 @@ table {
       --current-font-size: calc(var(--theme-mobile-header-logo-height) * 1.8); } }
 
 /* 2.2. Site Content */
-.site-main {
+.u-container-sides-spacing {
   padding-right: var(--theme-wrapper-sides-spacing);
   padding-left: var(--theme-wrapper-sides-spacing); }
-  .site-main > .alignfull {
+  .u-container-sides-spacing > .alignfull {
     margin-right: calc( -1 * var(--theme-wrapper-sides-spacing));
     margin-left: calc( -1 * var(--theme-wrapper-sides-spacing)); }
-    .site-main > .alignfull.stop-right {
+    .u-container-sides-spacing > .alignfull.stop-right {
       margin-left: 0; }
-    .site-main > .alignfull.stop-left {
+    .u-container-sides-spacing > .alignfull.stop-left {
       margin-right: 0; }
-    .site-main > .alignfull.stop-left.stop-right {
+    .u-container-sides-spacing > .alignfull.stop-left.stop-right {
       margin-right: 0;
       margin-left: 0; }
 
@@ -3488,10 +3488,6 @@ html.is-dark .sm-light {
 /* End Fallback Styles for Color Signal */
 .wp-block-group__inner-container > *:not([class*='alignfull']) {
   width: 100%; }
-
-@media not screen and (min-width: 1024px) {
-  .site-main {
-    overflow-x: hidden; } }
 
 /* START body margin hack
 contain inline margin set to #content

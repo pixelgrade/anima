@@ -116,6 +116,11 @@
 
             background-color: var(--sm-current-bg-color);
             pointer-events: none;
+            
+            @include below(lap) {
+                left: calc(-1 * var(--theme-wrapper-sides-spacing));
+                right: calc(-1 * var(--theme-wrapper-sides-spacing));
+            }
         }
 
         padding-bottom: calc( 0.5 * var(--theme-spacing-fluid-large) );

@@ -21,7 +21,5 @@ $page_markup =
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
-  <?php echo do_blocks( $page_markup );?>
-
+    <?php echo do_blocks( $page_markup );?>
 </article><!-- #post-<?php the_ID(); ?> -->

@@ -45,4 +45,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 	} ?>
 
     <div id="content" <?php site_content_class() ?>>
+        <div class="u-container-sides-spacing">
 

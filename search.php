@@ -16,24 +16,13 @@ get_header(); ?>
     <div id="primary" class="content-area">
         <main id="main" class="site-main">
 
-			<?php if ( have_posts() ) { ?>
-
-                <header class="entry-header">
-                    <div class="entry-content has-text-align-center">
-                        <h1 class="page-title has-text-align-center">
-							<?php printf( esc_html__( 'Search results for: %s', '__theme_txtd' ), get_search_query() ); ?>
-                        </h1>
-                    </div>
-                </header><!-- .page-header -->
-
-                <div class="entry-content">
-					<?php
-					get_template_part( 'template-parts/loop' );
-					rosa2_the_posts_pagination(); ?>
-                </div>
-			<?php } else {
-				get_template_part( 'template-parts/content', 'none' );
-			} ?>
+	        <?php echo do_blocks(
+		        '<!-- wp:novablocks/sidecar { "className":"alignwide", "sidebarWidth":"medium", "lastItemIsSticky":false} -->' .
+		        '<!-- wp:novablocks/sidecar-area {"className":"novablocks-content entry-content"} -->' .
+		        rosa2_get_search_content_markup() .
+		        '<!-- /wp:novablocks/sidecar-area -->' .
+		        '<!-- /wp:novablocks/sidecar -->'
+	        ); ?>
 
         </main><!-- #main -->
     </div><!-- #primary -->
