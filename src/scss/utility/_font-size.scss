@@ -3,8 +3,22 @@
 .has-normal-font-size,
 .has-larger-font-size,
 .has-largest-font-size {
-    font-size: var(--current-font-size);
+    font-size: var(--current-font-size); // we could've used !important here
 }
+
+// At the time of writing WP outputs inline CSS in the form of
+// .has-normal-font-size {
+//    font-size: var(--wp--preset--font-size--normal) !important;
+// }
+
+// So we needed to do something about it and this looks like the better way
+// or at least a way in which we avoid overriding font-size value using !important again
+@each $slug in smallest, smaller, normal, larger, largest {
+    .has-#{ $slug }-font-size {
+        --wp--preset--font-size--#{ $slug }: var(--current-font-size);
+    }
+}
+
 
 .has-smallest-font-size {
     --font-size-modifier: 0.6;
