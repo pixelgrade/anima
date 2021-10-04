@@ -31,7 +31,7 @@ $block ='<!-- wp:novablocks/supernova {
     "specificPosts":[' . get_the_ID() . ' ],
     "layoutStyle":"classic",
     "thumbnailAspectRatio":40,
-    "contentPadding":50,
+    "contentPadding":100,
     "layoutGutter":100,
     "paletteVariation":2,
     "contentAreaWidth":45
