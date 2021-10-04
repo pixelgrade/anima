@@ -201,10 +201,13 @@ function rosa2_woocommerce_product_class( $classes, $product ) {
  * @return string
  */
 function rosa2_woocommerce_loop_start( $markup ) {
-    // We only want to filter product classes when we are in a loop (not when rendering single products).
+    /*
+     *  We only want to filter product classes
+     *  when we are in a loop (not when rendering single products).
+     */
 	add_filter( 'woocommerce_post_class', 'rosa2_woocommerce_product_class', 10, 2 );
 
-	$markup = '<div class="wc-block-grid has-' . esc_attr( wc_get_loop_prop( 'columns' ) ) . '-columns"><ul class="wc-block-grid__products">';
+	$markup = '<div class="wc-block-grid alignwide has-' . esc_attr( wc_get_loop_prop( 'columns' ) ) . '-columns"><ul class="wc-block-grid__products">';
 
 	return $markup;
 }
@@ -217,7 +220,9 @@ function rosa2_woocommerce_loop_start( $markup ) {
  * @return string
  */
 function rosa2_woocommerce_loop_end( $markup ) {
-	// Remove filter added in loop start.
+	/*
+	 * Remove filter added in loop start.
+	 */
 	remove_filter( 'woocommerce_post_class', 'rosa2_woocommerce_product_class', 10 );
 
 	$markup = '</ul><!-- .wc-block-grid__products --></div><!-- .wc-block-grid -->';

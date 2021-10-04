@@ -1,10 +1,5 @@
 .woocommerce-checkout:not(.woocommerce-order-received) {
 
-  // contain order review background
-  .site-main {
-    overflow: hidden;
-  }
-
   .site-content {
     margin-top: 0 !important;
     padding-bottom: 0;
@@ -48,9 +43,9 @@
 
         content: "";
         position: absolute;
-        top: -9999vh;
+        top: calc(-1 * var(--theme-spacing-large));
         right: -100vw;
-        bottom: -9999vh;
+        bottom: 0;
         left: 55%;
         pointer-events: none;
 
@@ -237,6 +232,11 @@
       margin-bottom: 0;
       margin-top: .2em;
     }
+  }
+  
+  .novablocks-content > .woocommerce {
+    --block-content-start: ws !important;
+    --block-content-end: we !important;
   }
 }
 
