@@ -21,7 +21,11 @@ global $wp_query;
  */
 $card_layout_direction = $wp_query->current_post % 2 ? 'horizontal-reverse' : 'horizontal';
 
-$block ='<!-- wp:novablocks/supernova {
+/*
+ * Default Blog Layout Block Attributes
+ */
+
+$default_block_attributes = '{
     "cardLayout": "'. $card_layout_direction . '" ,
     "showCollectionTitle":false,
     "showCollectionSubtitle":false,
@@ -35,7 +39,9 @@ $block ='<!-- wp:novablocks/supernova {
     "layoutGutter":100,
     "paletteVariation":2,
     "contentAreaWidth":45
-} -->';
+}';
+
+$block ='<!-- wp:novablocks/supernova ' . $default_block_attributes . ' -->';
 ?>
 
 <?php echo do_blocks($block); ?>
