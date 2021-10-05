@@ -1363,6 +1363,15 @@ table {
           margin-left: 3px; }
         .c-search-overlay .c-search-overlay__cancel:after {
           content: 'Back'; } }
+  .c-search-overlay__description {
+    margin-top: var(--theme-spacing-tiny);
+    opacity: .75; }
+    .c-search-overlay__description,
+    .c-search-overlay__description * {
+      font-size: 0.7rem; }
+    @media not screen and (min-width: 1024px) {
+      .c-search-overlay__description .hide-on-mobile {
+        display: none; } }
 
 .has-search-overlay {
   overflow: hidden; }

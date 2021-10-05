@@ -791,6 +791,11 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 						<span class="c-search-overlay__cancel"></span>
 					</div>
 
+                    <div class="c-search-overlay__description">
+	                    <?php esc_html_e( 'Begin typing your search above and press return to search.', '__theme_txtd' ); ?>
+                        <span class="hide-on-mobile"><?php esc_html_e( 'Press Esc to cancel.', '__theme_txtd' ); ?></span>
+                    </div>
+
 					<?php if ( has_nav_menu( 'search-suggestions' ) ) {
 
 						$menu_name = wp_get_nav_menu_name('search-suggestions' ); ?>

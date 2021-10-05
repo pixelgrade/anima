@@ -220,6 +220,22 @@
       }
     }
   }
+  
+  &__description {
+    margin-top: var(--theme-spacing-tiny);
+    opacity: .75;
+    
+    &,
+    * {
+      font-size: 0.7rem;
+    }
+    
+    @include below(lap) {
+      .hide-on-mobile {
+        display: none;
+      }
+    }
+  }
 }
 
 .has-search-overlay {
