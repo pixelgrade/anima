@@ -712,3 +712,38 @@ if ( ! class_exists( 'PixCustomifyPlugin' ) && ! class_exists( 'Pixelgrade\Style
         return get_option( $settings_id, $default );
     }
 }
+
+function get_blog_layout_attributes( $name, $number_of_posts, $posts_ids ) {
+
+	switch ( $name ) {
+		case 'rosa2': return '{
+                        "showCollectionTitle":false,
+                        "showCollectionSubtitle":false,
+                        "showMeta":true,
+                        "layoutStyle":"classic",
+                        "loadingMode":"manual",
+                        "postsToShow":' . $number_of_posts . ' ,
+                        "specificPosts":[' . implode( ",", $posts_ids ) . ' ],
+                        "paletteVariation":2,
+                        "contentPaletteVariation":2,
+                        "cardLayout": "horizontal" ,
+                        "thumbnailAspectRatio":40,
+                        "contentPadding":100,
+                        "layoutGutter":100,
+                    }';
+		case 'felt': return '{
+                        "showCollectionTitle":false,
+                        "showCollectionSubtitle":false,
+                        "showMeta":true,
+                        "layoutStyle":"classic",
+                        "loadingMode":"manual",
+                        "postsToShow":' . $number_of_posts . ' ,
+                        "specificPosts":[' . implode( ",", $posts_ids ) . ' ],
+                        "paletteVariation":2,
+                        "contentPaletteVariation":2,
+                        "contentPosition":"center left",
+                        "layoutGutter":40,
+                        "columns":3
+                    }';
+	}
+}
