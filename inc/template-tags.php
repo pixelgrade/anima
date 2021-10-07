@@ -454,15 +454,8 @@ if ( ! function_exists( 'rosa2_the_posts_pagination' ) ) {
 	 * @param array $args Optional. See paginate_links() for available arguments.
 	 *                    Default empty array.
 	 */
-	function rosa2_the_posts_pagination( $args = array() ) { ?>
-
-        <!-- Use Group Inner Container, -->
-        <!-- so we can have access to Sidecar Grid.-->
-        <div class="wp-block-group__inner-container">
-            <?php echo rosa2_get_the_posts_pagination( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-        </div>
-
-    <?php
+	function rosa2_the_posts_pagination( $args = array() ) {
+        echo rosa2_get_the_posts_pagination( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 }
 
