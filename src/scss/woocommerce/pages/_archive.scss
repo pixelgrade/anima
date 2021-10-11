@@ -41,10 +41,17 @@
 
     .woocommerce-ordering,
     .woocommerce-result-count {
-        margin-top: calc( var(--nb-block-top-spacing) * var(--nb-spacing) * var(--nb-element-spacing-multiplier, 1));
         margin-bottom: 0;
     }
-
+    
+    .woocommerce-ordering {
+        margin-top: calc( var(--nb-block-top-spacing) * var(--nb-spacing) * var(--nb-element-spacing-multiplier, 1));
+    }
+    
+    .woocommerce-result-count {
+        margin-top: auto;
+    }
+    
     .site {
         overflow: hidden;
     }
