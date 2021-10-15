@@ -36,7 +36,7 @@ $default_block_attributes = '{
     "layoutStyle":"classic",
     "thumbnailAspectRatio":40,
     "contentPadding":100,
-    "layoutGutter":100,
+    "layoutGutter":50,
     "paletteVariation":2,
     "contentAreaWidth":45
 }';
