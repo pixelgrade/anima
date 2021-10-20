@@ -742,8 +742,13 @@
 
 .woocommerce .woocommerce-ordering,
 .woocommerce .woocommerce-result-count {
-  margin-top: calc( var(--nb-block-top-spacing) * var(--nb-spacing) * var(--nb-element-spacing-multiplier, 1));
   margin-bottom: 0; }
+
+.woocommerce .woocommerce-ordering {
+  margin-top: calc( var(--nb-block-top-spacing) * var(--nb-spacing) * var(--nb-element-spacing-multiplier, 1)); }
+
+.woocommerce .woocommerce-result-count {
+  margin-top: auto; }
 
 .woocommerce .site {
   overflow: hidden; }
@@ -905,6 +910,7 @@
   order: 2;
   margin-left: auto; }
 
+.single-product .novablocks-content > .woocommerce-notices-wrapper,
 .single-product .novablocks-content > .product {
   --block-content-start: ws !important;
   --block-content-end: we !important; }

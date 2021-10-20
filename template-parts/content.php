@@ -35,8 +35,8 @@ $default_block_attributes = '{
     "specificPosts":[' . get_the_ID() . ' ],
     "layoutStyle":"classic",
     "thumbnailAspectRatio":40,
-    "contentPadding":100,
-    "layoutGutter":100,
+    "contentPadding":50,
+    "layoutGutter":50,
     "paletteVariation":2,
     "contentAreaWidth":45
 }';

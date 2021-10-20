@@ -36,7 +36,7 @@ msgstr ""
 msgid "Skip to content"
 msgstr ""
 
-#: search.php:24
+#: inc/extras.php:581
 msgid "Search results for: %s"
 msgstr ""
 
@@ -213,29 +213,29 @@ msgstr ""
 msgid "Read more <span class=\"screen-reader-text\">about \"%s\"</span>"
 msgstr ""
 
-#: inc/template-tags.php:484, inc/integrations/woocommerce.php:440
+#: inc/template-tags.php:477, inc/integrations/woocommerce.php:445
 msgctxt "previous set of posts"
 msgid "Previous"
 msgstr ""
 
-#: inc/template-tags.php:485, inc/integrations/woocommerce.php:441
+#: inc/template-tags.php:478, inc/integrations/woocommerce.php:446
 msgctxt "next set of posts"
 msgid "Next"
 msgstr ""
 
-#: inc/template-tags.php:486
+#: inc/template-tags.php:479
 msgid "Posts navigation"
 msgstr ""
 
-#: inc/template-tags.php:529
+#: inc/template-tags.php:522
 msgid "Post navigation"
 msgstr ""
 
-#: inc/template-tags.php:536
+#: inc/template-tags.php:529
 msgid "Previous article"
 msgstr ""
 
-#: inc/template-tags.php:544
+#: inc/template-tags.php:537
 msgid "Next article"
 msgstr ""
 
@@ -328,7 +328,7 @@ msgstr ""
 msgid "Extras"
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:35, inc/admin/class-admin-nav-menus.php:64, inc/admin/class-admin-nav-menus.php:94, inc/integrations/woocommerce.php:569
+#: inc/admin/class-admin-nav-menus.php:35, inc/admin/class-admin-nav-menus.php:64, inc/admin/class-admin-nav-menus.php:94, inc/integrations/woocommerce.php:574
 msgid "Custom"
 msgstr ""
 
@@ -340,23 +340,23 @@ msgstr ""
 msgid "Search for something you seek"
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:47, inc/admin/class-admin-nav-menus.php:76, inc/admin/class-admin-nav-menus.php:104, inc/integrations/woocommerce.php:581
+#: inc/admin/class-admin-nav-menus.php:47, inc/admin/class-admin-nav-menus.php:76, inc/admin/class-admin-nav-menus.php:104, inc/integrations/woocommerce.php:586
 msgid "Visual Style"
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:48, inc/admin/class-admin-nav-menus.php:77, inc/admin/class-admin-nav-menus.php:105, inc/integrations/woocommerce.php:582
+#: inc/admin/class-admin-nav-menus.php:48, inc/admin/class-admin-nav-menus.php:77, inc/admin/class-admin-nav-menus.php:105, inc/integrations/woocommerce.php:587
 msgid "Choose a visual style suitable to your goals and audience."
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:51, inc/admin/class-admin-nav-menus.php:80, inc/admin/class-admin-nav-menus.php:108, inc/integrations/woocommerce.php:585
+#: inc/admin/class-admin-nav-menus.php:51, inc/admin/class-admin-nav-menus.php:80, inc/admin/class-admin-nav-menus.php:108, inc/integrations/woocommerce.php:590
 msgid "Label"
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:52, inc/admin/class-admin-nav-menus.php:81, inc/admin/class-admin-nav-menus.php:109, inc/integrations/woocommerce.php:586
+#: inc/admin/class-admin-nav-menus.php:52, inc/admin/class-admin-nav-menus.php:81, inc/admin/class-admin-nav-menus.php:109, inc/integrations/woocommerce.php:591
 msgid "Icon"
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:53, inc/admin/class-admin-nav-menus.php:82, inc/admin/class-admin-nav-menus.php:110, inc/integrations/woocommerce.php:587
+#: inc/admin/class-admin-nav-menus.php:53, inc/admin/class-admin-nav-menus.php:82, inc/admin/class-admin-nav-menus.php:110, inc/integrations/woocommerce.php:592
 msgid "Label with icon"
 msgstr ""
 
@@ -372,11 +372,11 @@ msgstr ""
 msgid "Switch between dark and light color mode"
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:95, inc/admin/class-admin-nav-menus.php:96, inc/integrations/woocommerce.php:335, inc/integrations/woocommerce.php:571, inc/upgrade/migrations/1.8.1-insert-cart-link-in-primary-menu.php:31
+#: inc/admin/class-admin-nav-menus.php:95, inc/admin/class-admin-nav-menus.php:96, inc/integrations/woocommerce.php:340, inc/integrations/woocommerce.php:576, inc/upgrade/migrations/1.8.1-insert-cart-link-in-primary-menu.php:31
 msgid "Cart"
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:98, inc/integrations/woocommerce.php:575, inc/upgrade/migrations/1.8.1-insert-cart-link-in-primary-menu.php:33
+#: inc/admin/class-admin-nav-menus.php:98, inc/integrations/woocommerce.php:580, inc/upgrade/migrations/1.8.1-insert-cart-link-in-primary-menu.php:33
 msgid "Toggle visibility of cart panel"
 msgstr ""
 
@@ -384,57 +384,65 @@ msgstr ""
 msgid "Add to Menu"
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:824
+#: inc/admin/class-admin-nav-menus.php:795
+msgid "Begin typing your search above and press return to search."
+msgstr ""
+
+#: inc/admin/class-admin-nav-menus.php:796
+msgid "Press Esc to cancel."
+msgstr ""
+
+#: inc/admin/class-admin-nav-menus.php:829
 msgctxt "label"
 msgid "Search for:"
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:825
+#: inc/admin/class-admin-nav-menus.php:830
 msgid "Search %s..."
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:828
+#: inc/admin/class-admin-nav-menus.php:833
 msgctxt "submit button"
 msgid "Search"
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:873, inc/admin/class-admin-nav-menus.php:942
+#: inc/admin/class-admin-nav-menus.php:878, inc/admin/class-admin-nav-menus.php:947
 msgid "Badge"
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:874, inc/admin/class-admin-nav-menus.php:943
+#: inc/admin/class-admin-nav-menus.php:879, inc/admin/class-admin-nav-menus.php:948
 msgid "e.g. New, Popular, Free, Sales"
 msgstr ""
 
-#: inc/admin/class-admin-nav-menus.php:875, inc/admin/class-admin-nav-menus.php:944
+#: inc/admin/class-admin-nav-menus.php:880, inc/admin/class-admin-nav-menus.php:949
 msgid "A badge is <strong>a short text indicator</strong> used to inform visitors that something's special about this menu item."
 msgstr ""
 
-#: inc/integrations/novablocks.php:76
+#: inc/integrations/novablocks.php:78
 msgid "This is a catchy"
 msgstr ""
 
-#: inc/integrations/novablocks.php:77
+#: inc/integrations/novablocks.php:79
 msgid "Headline"
 msgstr ""
 
-#: inc/integrations/novablocks.php:87
+#: inc/integrations/novablocks.php:89
 msgid "A brilliant subtitle to explain its catchiness"
 msgstr ""
 
-#: inc/integrations/novablocks.php:107
+#: inc/integrations/novablocks.php:109
 msgid "Discover"
 msgstr ""
 
-#: inc/integrations/novablocks.php:108
+#: inc/integrations/novablocks.php:110
 msgid "Our Story"
 msgstr ""
 
-#: inc/integrations/novablocks.php:125
+#: inc/integrations/novablocks.php:127
 msgid "We have always defined ourselves by the ability to overcome the impossible. And we count these moments. These moments when we dare to aim higher, to break barriers, to make the unknown known."
 msgstr ""
 
-#: inc/integrations/novablocks.php:138
+#: inc/integrations/novablocks.php:140
 msgid "Learn More"
 msgstr ""
 
@@ -490,40 +498,40 @@ msgstr ""
 msgid "Added!"
 msgstr ""
 
-#: inc/integrations/woocommerce.php:236
+#: inc/integrations/woocommerce.php:241
 msgid "Sale!"
 msgstr ""
 
-#: inc/integrations/woocommerce.php:337
+#: inc/integrations/woocommerce.php:342
 msgid "Checkout"
 msgstr ""
 
-#: inc/integrations/woocommerce.php:369
+#: inc/integrations/woocommerce.php:374
 msgid "Your cart"
 msgstr ""
 
-#: inc/integrations/woocommerce.php:398
+#: inc/integrations/woocommerce.php:403
 msgid "All Products"
 msgstr ""
 
-#: inc/integrations/woocommerce.php:452, woocommerce/checkout/form-coupon.php:32
+#: inc/integrations/woocommerce.php:457, woocommerce/checkout/form-coupon.php:32
 msgid "Coupon code"
 msgstr ""
 
-#: inc/integrations/woocommerce.php:509
+#: inc/integrations/woocommerce.php:514
 msgctxt "breadcrumb"
 msgid "Shop"
 msgstr ""
 
-#: inc/integrations/woocommerce.php:523
+#: inc/integrations/woocommerce.php:528
 msgid "Quantity"
 msgstr ""
 
-#: inc/integrations/woocommerce.php:537
+#: inc/integrations/woocommerce.php:542
 msgid "Stock"
 msgstr ""
 
-#: inc/integrations/woocommerce.php:573
+#: inc/integrations/woocommerce.php:578
 msgid "WooCommerce Cart"
 msgstr ""
 
@@ -983,7 +991,7 @@ msgstr ""
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
-#: inc/integrations/customify/colors.php:54, inc/integrations/style-manager/colors.php:31
+#: inc/integrations/customify/colors.php:54
 msgid "Colors"
 msgstr ""
 
@@ -1023,7 +1031,7 @@ msgstr ""
 msgid "Theme Tertiary Light Color"
 msgstr ""
 
-#: inc/integrations/customify/colors.php:228, inc/integrations/style-manager/colors.php:110
+#: inc/integrations/customify/colors.php:228, inc/integrations/style-manager/colors.php:117
 msgid "Theme Default"
 msgstr ""
 
@@ -1231,6 +1239,10 @@ msgstr ""
 msgid "Adjust the multiplication factor of the distance between elements."
 msgstr ""
 
+#: inc/integrations/style-manager/colors.php:31
+msgid "Elements coloration"
+msgstr ""
+
 #: inc/integrations/style-manager/colors.php:40
 msgid "Main Content"
 msgstr ""
@@ -1243,7 +1255,11 @@ msgstr ""
 msgid "Headline Block"
 msgstr ""
 
-#: inc/integrations/style-manager/colors.php:111
+#: inc/integrations/style-manager/colors.php:96
+msgid "Card Block"
+msgstr ""
+
+#: inc/integrations/style-manager/colors.php:118
 msgid "Rosa2 is to colors what wisdom is to knowledge"
 msgstr ""
 
