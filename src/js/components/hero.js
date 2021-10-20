@@ -26,23 +26,6 @@ export default class Hero {
 			this.updateOnScroll();
 		});
 
-		let indicator = this.element.querySelectorAll( '.novablocks-hero__indicator' );
-		let nextSibling = this.element.nextElementSibling;
-
-		let next = nextSibling?.querySelectorAll( '.novablocks-block' );
-
-		next = !! next && next.length ? next[0] : nextSibling;
-
-		if ( !! indicator && indicator.length ) {
-
-			let colorClasses = getColorSetClasses( next );
-
-			colorClasses.forEach( className => {
-				indicator[0].classList.add( className );
-			} );
-
-		}
-
 		const mediaQuery = window.matchMedia( '(prefers-reduced-motion: reduce)' );
 
 		mediaQuery.addListener( () => {
