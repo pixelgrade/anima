@@ -3,8 +3,32 @@ $enable-pullquote-block-styles:         true !default;
 @if $enable-pullquote-block-styles == true {
     /* Pullquote Block */
     .wp-block-pullquote {
+
+        blockquote {
+            @include space-children-y( var(--theme-spacing) );
+        }
+
+        &.alignleft,
+        &.alignright {
+            blockquote {
+                @include apply-font(body);
+            }
+        }
+
+        &.alignwide {
+            @include apply-font(heading-2);
+        }
+
+        &.alingfull {
+            @include apply-font(heading-1);
+        }
     }
 
+    .wp-block-pullquote cite,
     .wp-block-pullquote__citation {
+        display: block;
+        @include apply-font(heading-6);
     }
+
+    
 }
