@@ -458,7 +458,7 @@ if ( ! function_exists( 'rosa2_the_posts_pagination' ) ) {
 
         <!-- Use Group Inner Container, -->
         <!-- so we can have access to Sidecar Grid.-->
-        <div class="wp-block-group__inner-container">
+        <div class="wp-block alignwide">
             <?php echo rosa2_get_the_posts_pagination( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
         </div>
 

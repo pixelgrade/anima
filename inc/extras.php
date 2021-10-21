@@ -489,15 +489,16 @@ if ( ! function_exists( 'rosa2_get_archive_content' ) ) {
 
 		if ( have_posts() ) { ?>
 
-            <header class="entry-header has-text-align-center entry-content">
-				<?php
-				the_archive_title( '<h1 class="page-title">', '</h1>' );
-				the_archive_description( '<div class="archive-description">', '</div>' );
-				?>
+            <header class="entry-header wp-block-group has-text-align-center">
+                <div class="wp-block-group__inner-container">
+                    <?php
+                    the_archive_title( '<h1 class="page-title">', '</h1>' );
+                    the_archive_description( '<div class="archive-description">', '</div>' );
+                    ?>
+                </div>
             </header><!-- .page-header -->
 			<?php
 			get_template_part( 'template-parts/loop' );
-			rosa2_the_posts_pagination();
 		} else {
 			get_template_part( 'template-parts/content', 'none' );
 		}
@@ -526,27 +527,28 @@ if ( ! function_exists( 'rosa2_get_home_content_markup' ) ) {
 
 		if ( have_posts() ) {
 			if ( $has_title || $has_categories ) { ?>
-                <header class="entry-header has-text-align-center entry-content">
-					<?php
+                <header class="entry-header wp-block-group has-text-align-center">
+                    <div class="wp-block-group__inner-container">
+                        <?php
 
-					if ( $has_title ) {
-						echo '<h1 class="page-title">' . get_the_title( $page_for_posts ) . '</h1>';
-					}
+                        if ( $has_title ) {
+                            echo '<h1 class="page-title">' . get_the_title( $page_for_posts ) . '</h1>';
+                        }
 
-					if ( $has_categories ) {
-						echo '<ul class="entry-meta">';
-						foreach ( $categories as $category ) {
-							$category_url = get_category_link( $category->term_id );
-							echo '<li><a href="' . esc_url( $category_url ) . '">' . esc_html( $category->name ) . '</a></li>';
-						}
-						echo '</ul>';
-					}
-					?>
+                        if ( $has_categories ) {
+                            echo '<ul class="entry-meta">';
+                            foreach ( $categories as $category ) {
+                                $category_url = get_category_link( $category->term_id );
+                                echo '<li><a href="' . esc_url( $category_url ) . '">' . esc_html( $category->name ) . '</a></li>';
+                            }
+                            echo '</ul>';
+                        }
+                        ?>
+                    </div>
                 </header><!-- .page-header -->
 			<?php }
 
 			get_template_part( 'template-parts/loop' );
-			rosa2_the_posts_pagination();
 
 		} else {
 			get_template_part( 'template-parts/content', 'none' );
@@ -713,37 +715,52 @@ if ( ! class_exists( 'PixCustomifyPlugin' ) && ! class_exists( 'Pixelgrade\Style
     }
 }
 
-function get_blog_layout_attributes( $name, $number_of_posts, $posts_ids ) {
+function anima_get_archive_blocks( $name, $number_of_posts, $posts_ids ) {
 
 	switch ( $name ) {
-		case 'rosa2': return '{
-                        "showCollectionTitle":false,
-                        "showCollectionSubtitle":false,
-                        "showMeta":true,
-                        "layoutStyle":"classic",
-                        "loadingMode":"manual",
-                        "postsToShow":' . $number_of_posts . ' ,
-                        "specificPosts":[' . implode( ",", $posts_ids ) . ' ],
-                        "paletteVariation":2,
-                        "contentPaletteVariation":2,
-                        "cardLayout": "horizontal" ,
-                        "thumbnailAspectRatio":40,
-                        "contentPadding":100,
-                        "layoutGutter":100,
-                    }';
-		case 'felt': return '{
-                        "showCollectionTitle":false,
-                        "showCollectionSubtitle":false,
-                        "showMeta":true,
-                        "layoutStyle":"classic",
-                        "loadingMode":"manual",
-                        "postsToShow":' . $number_of_posts . ' ,
-                        "specificPosts":[' . implode( ",", $posts_ids ) . ' ],
-                        "paletteVariation":2,
-                        "contentPaletteVariation":2,
-                        "contentPosition":"center left",
-                        "layoutGutter":40,
-                        "columns":3
-                    }';
+		case 'felt':
+            return '
+            <!-- wp:novablocks/sidecar { "className":"alignwide", "sidebarWidth":"medium", "lastItemIsSticky":true } -->
+                <!-- wp:novablocks/sidecar-area {"className":"novablocks-content entry-content"} -->
+                    <!-- wp:novablocks/supernova {
+                        "showCollectionTitle": false,
+                        "showCollectionSubtitle": false,
+                        "showMeta": true,
+                        "layoutStyle": "classic",
+                        "loadingMode": "manual",
+                        "postsToShow": ' . $number_of_posts . ' ,
+                        "specificPosts": [' . implode( ",", $posts_ids ) . ' ],
+                        "paletteVariation": 2,
+                        "contentPaletteVariation": 2,
+                        "contentPosition": "center left",
+                        "layoutGutter": 10,
+                        "gridGap": 50,
+                        "columns": 3
+                    } /-->' .
+                   '<div class="wp-block alignwide">' .
+                    rosa2_get_the_posts_pagination() .
+                   '</div>' .
+                '<!-- /wp:novablocks/sidecar-area -->' .
+                '<!-- wp:novablocks/sidecar-area {"className":"novablocks-sidebar"} -->' .
+                    rosa2_get_sidebar_markup() .
+                '<!-- /wp:novablocks/sidecar-area -->' .
+            '<!-- /wp:novablocks/sidecar -->';
+		default:
+            return '
+            <!-- wp:novablocks/supernova {
+                "showCollectionTitle": false,
+                "showCollectionSubtitle": false,
+                "showMeta": true,
+                "layoutStyle": "classic",
+                "loadingMode": "manual",
+                "postsToShow": ' . $number_of_posts . ' ,
+                "specificPosts": [' . implode( ",", $posts_ids ) . ' ],
+                "paletteVariation": 2,
+                "contentPaletteVariation": 2,
+                "cardLayout":  "horizontal" ,
+                "thumbnailAspectRatio": 40,
+                "contentPadding": 100,
+                "layoutGutter": 100,
+            } /-->';
 	}
 }

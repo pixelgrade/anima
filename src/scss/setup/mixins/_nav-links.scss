@@ -3,13 +3,10 @@
 
     display: flex;
     justify-content: center;
-
-    font-feature-settings: "lnum";
-
-
     margin-left: calc(var(--theme-spacing-tiny) * -1);
 
     @include apply-font(button);
+    font-feature-settings: "lnum";
 
     a {
         text-decoration: none;
@@ -43,6 +40,7 @@
 
     > .next {
         padding-right: var(--current-arrow-padding);
+        margin-right: 0;
     }
 
     > .prev,

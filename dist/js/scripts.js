@@ -2587,41 +2587,46 @@ function () {
 
       var promoBarHeight = ((_this$promoBar = this.promoBar) === null || _this$promoBar === void 0 ? void 0 : _this$promoBar.height) || 0;
       var headerHeight = ((_this$header2 = this.header) === null || _this$header2 === void 0 ? void 0 : _this$header2.getHeight()) || 0;
-      external_jQuery_default()('body:not(.has-no-spacing-top) .site-content').css('marginTop', "".concat(promoBarHeight + headerHeight, "px"));
+      var $body = external_jQuery_default()('body');
       external_jQuery_default()('html').css('scrollPaddingTop', "".concat(headerHeight, "px"));
-      var $firstBlock = external_jQuery_default()('.entry-content > :first-child');
 
-      if ($firstBlock.is('.supernova')) {
-        var attributes = $firstBlock.data();
-        var $targets = $firstBlock;
+      if (!$body.is('.has-no-spacing-top')) {
+        $body.find('.site-content').css('marginTop', "".concat(promoBarHeight + headerHeight, "px"));
+      } else {
+        var $firstBlock = external_jQuery_default()('.site-main .entry-content > :first-child').first();
 
-        if (attributes.imagePadding === 0 && attributes.cardLayout === 'stacked') {
-          $targets = $firstBlock.find('.supernova-item__inner-container');
+        if ($firstBlock.is('.supernova')) {
+          var attributes = $firstBlock.data();
+          var $targets = $firstBlock;
 
-          if (attributes.layoutStyle !== 'carousel') {
-            $targets = $targets.first();
+          if (attributes.imagePadding === 0 && attributes.cardLayout === 'stacked') {
+            $targets = $firstBlock.find('.supernova-item__inner-container');
+
+            if (attributes.layoutStyle !== 'carousel') {
+              $targets = $targets.first();
+            }
           }
+
+          $targets.each(function (i, target) {
+            var $target = external_jQuery_default()(target);
+            var paddingTop = getPaddingTop($target);
+            $target.css('paddingTop', paddingTop + headerHeight + promoBarHeight);
+          });
+          return;
         }
 
-        $targets.each(function (i, target) {
-          var $target = external_jQuery_default()(target);
-          var paddingTop = getPaddingTop($target);
-          $target.css('paddingTop', paddingTop + headerHeight + promoBarHeight);
-        });
-        return;
-      }
+        var $firstBlockFg;
 
-      var $firstBlockFg;
+        if ($firstBlock.is('.novablocks-block, .novablocks-media')) {
+          $firstBlockFg = $firstBlock;
+        } else {
+          $firstBlockFg = $firstBlock.find('.novablocks-doppler__foreground, .novablocks-block');
+        }
 
-      if ($firstBlock.is('.novablocks-block, .novablocks-media')) {
-        $firstBlockFg = $firstBlock;
-      } else {
-        $firstBlockFg = $firstBlock.find('.novablocks-doppler__foreground, .novablocks-block');
-      }
-
-      if ($firstBlockFg.length) {
-        var paddingTop = getPaddingTop($firstBlockFg);
-        $firstBlockFg.css('paddingTop', Math.max(paddingTop, headerHeight + promoBarHeight));
+        if ($firstBlockFg.length) {
+          var paddingTop = getPaddingTop($firstBlockFg);
+          $firstBlockFg.css('paddingTop', Math.max(paddingTop, headerHeight + promoBarHeight));
+        }
       }
     }
   }]);

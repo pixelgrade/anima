@@ -80,28 +80,6 @@ body:not(.has-loaded) .c-comments-toggle__checkbox + .c-comments-toggle__label ~
     opacity: 0; }
 
 /* Pages */
-body.blog, body.archive:not(.woocommerce-page), body.search:not(.search-no-results) {
-  background-color: var(--sm-current-bg-color); }
-  body.blog .novablocks-media__inner-container, body.archive:not(.woocommerce-page) .novablocks-media__inner-container, body.search:not(.search-no-results) .novablocks-media__inner-container {
-    text-align: center; }
-
-@media only screen and (min-width: 1024px) {
-  .blog .entry-content .wp-block-group .wp-block-group__inner-container,
-  .archive .entry-content .wp-block-group .wp-block-group__inner-container,
-  .search .entry-content .wp-block-group .wp-block-group__inner-container {
-    --display-mode: grid; } }
-
-.blog .wp-block,
-.archive .wp-block,
-.search .wp-block {
-  width: 100%; }
-
-@media not screen and (min-width: 1024px) {
-  .blog .entry-content,
-  .archive .entry-content,
-  .search .entry-content {
-    --display-mode: block; } }
-
 .single.single-post {
   background: var(--sm-current-bg-color); }
 

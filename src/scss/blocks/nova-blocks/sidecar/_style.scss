@@ -25,20 +25,12 @@ body {
 		font-size: var(--current-font-size);
 	}
 	
-	.widget-area {
-	
-	}
-	
 	.widget {
-		@include space-children-y( var(--theme-spacing-fluid-small) );
+		@include space-children-y( var(--theme-spacing-fluid-default) );
 	}
 	
 	.widget-title[class][class] {
 		--font-size: var(--theme-heading-4-font-size);
-		
-		+ * {
-			--element-spacing: var(--theme-spacing-fluid-default);
-		}
 	}
 	
 	.children {
@@ -98,19 +90,3 @@ body {
 	}
 }
 
-.novablocks-sidecar {
-	
-	.novablocks-sidecar {
-		
-		.novablocks-collection {
-			
-			&.block-is-basic {
-				
-				> [class*="__inner-container"] {
-					padding-left: 0;
-					padding-right: 0;
-				}
-			}
-		}
-	}
-}

@@ -199,44 +199,48 @@ export default class App {
 
 		const promoBarHeight = this.promoBar?.height || 0;
 		const headerHeight = this.header?.getHeight() || 0;
+		const $body = $( 'body' );
 
-		$( 'body:not(.has-no-spacing-top) .site-content' ).css( 'marginTop', `${ promoBarHeight + headerHeight }px` );
 		$( 'html' ).css( 'scrollPaddingTop', `${ headerHeight }px` );
 
-		const $firstBlock = $( '.entry-content > :first-child' );
+		if ( ! $body.is( '.has-no-spacing-top' ) ) {
+			$body.find( '.site-content' ).css( 'marginTop', `${ promoBarHeight + headerHeight }px` );
+		} else {
+			const $firstBlock = $( '.site-main .entry-content > :first-child' ).first();
 
-		if ( $firstBlock.is( '.supernova' ) ) {
-			const attributes = $firstBlock.data();
-			let $targets = $firstBlock;
+			if ( $firstBlock.is( '.supernova' ) ) {
+				const attributes = $firstBlock.data();
+				let $targets = $firstBlock;
 
-			if ( attributes.imagePadding === 0 && attributes.cardLayout === 'stacked' ) {
-				$targets = $firstBlock.find( '.supernova-item__inner-container' );
+				if ( attributes.imagePadding === 0 && attributes.cardLayout === 'stacked' ) {
+					$targets = $firstBlock.find( '.supernova-item__inner-container' );
 
-				if ( attributes.layoutStyle !== 'carousel' ) {
-					$targets = $targets.first();
+					if ( attributes.layoutStyle !== 'carousel' ) {
+						$targets = $targets.first();
+					}
 				}
+
+				$targets.each( ( i, target ) => {
+					const $target = $( target );
+					const paddingTop = getPaddingTop( $target );
+					$target.css( 'paddingTop', paddingTop + headerHeight + promoBarHeight );
+				} );
+
+				return;
 			}
 
-			$targets.each( ( i, target ) => {
-				const $target = $( target );
-				const paddingTop = getPaddingTop( $target );
-				$target.css( 'paddingTop', paddingTop + headerHeight + promoBarHeight );
-			} );
+			let $firstBlockFg;
 
-			return;
-		}
+			if ( $firstBlock.is( '.novablocks-block, .novablocks-media' ) ) {
+				$firstBlockFg = $firstBlock;
+			} else {
+				$firstBlockFg = $firstBlock.find( '.novablocks-doppler__foreground, .novablocks-block' );
+			}
 
-		let $firstBlockFg;
-
-		if ( $firstBlock.is( '.novablocks-block, .novablocks-media' ) ) {
-			$firstBlockFg = $firstBlock;
-		} else {
-			$firstBlockFg = $firstBlock.find( '.novablocks-doppler__foreground, .novablocks-block' );
-		}
-
-		if ( $firstBlockFg.length ) {
-			const paddingTop = getPaddingTop( $firstBlockFg );
-			$firstBlockFg.css( 'paddingTop', Math.max( paddingTop, headerHeight + promoBarHeight ) );
+			if ( $firstBlockFg.length ) {
+				const paddingTop = getPaddingTop( $firstBlockFg );
+				$firstBlockFg.css( 'paddingTop', Math.max( paddingTop, headerHeight + promoBarHeight ) );
+			}
 		}
 	}
 }
