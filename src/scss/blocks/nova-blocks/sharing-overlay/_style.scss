@@ -5,10 +5,6 @@
     --nb-spacing: var(--theme-spacing-fluid-large);
     --novablocks-sharing-overlay-spacing: 1em;
     
-    &[class] {
-        z-index: 1200;
-    }
-    
     .novablocks-sharing__wrap {
         
         @include specific(3) {
@@ -38,11 +34,6 @@
     @include specific(1) {
         padding: calc( var(--theme-input-padding) / 2) calc( var(--theme-input-padding) * 3 / 4);
     }
-
-    .novablocks-sharing__group--copy-link & {
-        background-color: var(--sm-current-accent-color);
-        color: var(--sm-current-bg-color);
-    }
 }
 
 .novablocks-sharing__copy-input,
@@ -55,15 +46,6 @@
 
 .novablocks-sharing__group-title {
     @include apply-font(body);
-}
-
-.novablocks-sharing__copy-input {
-    
-    @include specific(2) {
-        --theme-input-box-shadow: none;
-        background: var(--sm-current-fg1-color);
-        color: var(--sm-current-bg-color);
-    }
 }
 
 .novablocks-sharing[class] {
