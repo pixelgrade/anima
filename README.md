@@ -1,4 +1,4 @@
-# Anima – Pixelgrade Universal Theme Name
+# Anima – Pixelgrade Universal Theme
 ###
 
 [View Demo](https://demos.pixelgrade.com/rosa2)

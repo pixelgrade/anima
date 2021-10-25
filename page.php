@@ -9,7 +9,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Rosa2
+ * @package Anima
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

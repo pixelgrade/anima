@@ -48,12 +48,12 @@ if ( ! empty( $container_option_config['setting_type'] ) && 'option' === $contai
 } else {
 
 	if ( PixCustomifyPlugin()->settings->get_plugin_setting( 'values_store_mod' ) === 'option' ) {
-		$rosa2_options                             = get_option( $opt_name );
-		$rosa2_options['content_wide_width_addon'] = $new_container_option_value;
-		update_option( $opt_name, $rosa2_options );
+		$anima_options                             = get_option( $opt_name );
+		$anima_options['content_wide_width_addon'] = $new_container_option_value;
+		update_option( $opt_name, $anima_options );
 	} else {
-		$rosa2_options                             = get_theme_mod( $opt_name );
-		$rosa2_options['content_wide_width_addon'] = $new_container_option_value;
-		set_theme_mod( $opt_name, $rosa2_options );
+		$anima_options                             = get_theme_mod( $opt_name );
+		$anima_options['content_wide_width_addon'] = $new_container_option_value;
+		set_theme_mod( $opt_name, $anima_options );
 	}
 }

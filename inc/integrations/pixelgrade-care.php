@@ -2,7 +2,7 @@
 /**
  * Pixelgrade Care Compatibility File.
  *
- * @package Rosa2
+ * @package Anima
  */
 
 // If this file is called directly, abort.
@@ -13,19 +13,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Handle the specific Pixelgrade Care integration.
  */
-function rosa2_setup_pixelgrade_care() {
+function anima_setup_pixelgrade_care() {
 	/*
 	 * Declare support for Pixelgrade Care
 	 */
 	add_theme_support( 'pixelgrade_care', array(
-			'support_url'   => 'https://pixelgrade.com/docs/rosa2/',
-			'changelog_url' => 'https://wupdates.com/rosa2-changelog',
+			'support_url'   => 'https://pixelgrade.com/docs/anima/',
+			'changelog_url' => 'https://wupdates.com/anima-changelog',
 		)
 	);
 }
-add_action( 'after_setup_theme', 'rosa2_setup_pixelgrade_care', 10 );
+add_action( 'after_setup_theme', 'anima_setup_pixelgrade_care', 10 );
 
-function rosa2_hide_pixelgrade_care_menu_item() {
+function anima_hide_pixelgrade_care_menu_item() {
     ?>
     <style>
         [href="pixelgrade_care-install"],
@@ -35,46 +35,46 @@ function rosa2_hide_pixelgrade_care_menu_item() {
     </style>
     <?php
 }
-add_action( 'admin_footer', 'rosa2_hide_pixelgrade_care_menu_item', 10 );
+add_action( 'admin_footer', 'anima_hide_pixelgrade_care_menu_item', 10 );
 
 /**
  * After the first theme activation we need to ensure that Pixelgrade Care is installed
- * So we add a transient which will be handled by the `rosa2_admin_redirect_to_pixcare_install_once` action
+ * So we add a transient which will be handled by the `anima_admin_redirect_to_pixcare_install_once` action
  */
-function rosa2_force_redirect_to_pixcare_install_once() {
+function anima_force_redirect_to_pixcare_install_once() {
 	if ( class_exists( 'PixelgradeCare' ) || file_exists( WP_PLUGIN_DIR . '/pixelgrade-care/pixelgrade-care.php' ) ) {
 		return;
 	}
 
 	$plugin_version = get_option( 'pixelgrade_care_version' );
 	if ( empty( $plugin_version ) ) {
-		set_transient( '_rosa2_activation_redirect', 1 );
+		set_transient( '_anima_activation_redirect', 1 );
 	}
 }
-add_action( 'after_switch_theme', 'rosa2_force_redirect_to_pixcare_install_once' );
+add_action( 'after_switch_theme', 'anima_force_redirect_to_pixcare_install_once' );
 
 /**
  *  * Redirect the admin to the pixcare install page once only if the plugin is missing
  */
-function rosa2_admin_redirect_to_pixcare_install_once() {
-	if ( ! get_transient( '_rosa2_activation_redirect' ) ) {
+function anima_admin_redirect_to_pixcare_install_once() {
+	if ( ! get_transient( '_anima_activation_redirect' ) ) {
 		return;
 	}
-	delete_transient( '_rosa2_activation_redirect' );
+	delete_transient( '_anima_activation_redirect' );
 
 	$url = admin_url( 'themes.php?page=pixelgrade_care-install' );
 
 	wp_safe_redirect( $url );
 	exit;
 }
-add_action( 'admin_init', 'rosa2_admin_redirect_to_pixcare_install_once' );
+add_action( 'admin_init', 'anima_admin_redirect_to_pixcare_install_once' );
 
-function rosa2_add_pixcare_install_page() {
+function anima_add_pixcare_install_page() {
 	add_theme_page(  '', '', 'manage_options', 'pixelgrade_care-install', null );
 }
-add_action( 'admin_menu', 'rosa2_add_pixcare_install_page' );
+add_action( 'admin_menu', 'anima_add_pixcare_install_page' );
 
-function rosa2_pixcare_install_page() {
+function anima_pixcare_install_page() {
 	if ( empty( $_GET['page'] ) || 'pixelgrade_care-install' !== $_GET['page'] ) {
 		return;
 	}
@@ -282,13 +282,13 @@ function rosa2_pixcare_install_page() {
 	<?php
 	exit;
 }
-add_action( 'admin_init', 'rosa2_pixcare_install_page' );
+add_action( 'admin_init', 'anima_pixcare_install_page' );
 
-function rosa2_force_pixcare_sce_overwrite_existing_post( $should_overwrite, $existing_post_id, $post ) {
+function anima_force_pixcare_sce_overwrite_existing_post( $should_overwrite, $existing_post_id, $post ) {
 	if ( ! empty( $post['post_type'] ) && 'block_area' === $post['post_type'] ) {
 		$should_overwrite = true;
 	}
 
 	return $should_overwrite;
 }
-add_filter( 'pixcare_sce_should_overwrite_existing_post', 'rosa2_force_pixcare_sce_overwrite_existing_post', 10, 3 );
+add_filter( 'pixcare_sce_should_overwrite_existing_post', 'anima_force_pixcare_sce_overwrite_existing_post', 10, 3 );

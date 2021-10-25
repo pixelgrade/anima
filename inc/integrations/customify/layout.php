@@ -6,9 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Add colors section and options to the Customify config
-add_filter( 'customify_filter_fields', 'rosa2_add_layout_section_to_customify_config', 60, 1 );
+add_filter( 'customify_filter_fields', 'anima_add_layout_section_to_customify_config', 60, 1 );
 
-function rosa2_add_layout_section_to_customify_config( $config ) {
+function anima_add_layout_section_to_customify_config( $config ) {
 
 	$layout_section = array(
 		'layout_section' => array(

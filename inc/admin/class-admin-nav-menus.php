@@ -1,8 +1,8 @@
 <?php
 /**
- * Rosa 2 Nav Menus logic.
+ * Anima Nav Menus logic.
  *
- * @package Rosa2
+ * @package Anima
  */
 
 // If this file is called directly, abort.
@@ -10,12 +10,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
+if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 
 	/**
-	 * Rosa2_Admin_Nav_Menus Class.
+	 * Anima_Admin_Nav_Menus Class.
 	 */
-	class Rosa2_Admin_Nav_Menus {
+	class Anima_Admin_Nav_Menus {
 
 		public $menu_items_boxes_config = array();
 
@@ -115,7 +115,7 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 			}
 
             // Allow others to have a say in this.
-			$this->menu_items_boxes_config = apply_filters( 'rosa2_menu_items_boxes_config', $this->menu_items_boxes_config );
+			$this->menu_items_boxes_config = apply_filters( 'anima_menu_items_boxes_config', $this->menu_items_boxes_config );
 
 			/* ===============
 			 * Backend effects
@@ -162,7 +162,7 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 			/* ===============
 			 * Frontend effects
 			 */
-			add_action( 'rosa2_after_footer', array( $this, 'output_search_overlay' ), 10 );
+			add_action( 'anima_after_footer', array( $this, 'output_search_overlay' ), 10 );
 			add_filter( 'get_search_form', array( $this, 'custom_search_form' ), 10, 1 );
 
 			// Handle Menu Item Badge Frontend Output
@@ -418,10 +418,10 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 
 			?>
 
-			<div id="rosa2-user-menu-links" class="taxonomydiv">
-				<div id="tabs-panel-rosa2-links-all" class="tabs-panel tabs-panel-view-all tabs-panel-active">
+			<div id="anima-user-menu-links" class="taxonomydiv">
+				<div id="tabs-panel-anima-links-all" class="tabs-panel tabs-panel-view-all tabs-panel-active">
 
-					<ul id="rosa2-user-menu-linkschecklist" class="list:rosa2-user-menu-links categorychecklist form-no-clear">
+					<ul id="anima-user-menu-linkschecklist" class="list:anima-user-menu-links categorychecklist form-no-clear">
 						<?php echo walk_nav_menu_tree( array_map( 'wp_setup_nav_menu_item', $menu_items_obj ), 0, (object) array( 'walker' => $walker ) ); ?>
 					</ul>
 
@@ -430,7 +430,7 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 				<span class="add-to-menu">
 					<input type="submit" <?php disabled( $nav_menu_selected_id, 0 ); ?> class="button-secondary submit-add-to-menu right"
 					       value="<?php esc_attr_e( 'Add to Menu', '__theme_txtd' ); ?>"
-					       name="add-rosa2-user-menu-links-menu-item" id="submit-rosa2-user-menu-links"/>
+					       name="add-anima-user-menu-links-menu-item" id="submit-anima-user-menu-links"/>
 				</span>
 				</p>
 			</div>
@@ -493,14 +493,14 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 
 		public function admin_scripts_styles( $hook_suffix ) {
 			if( 'nav-menus.php' === $hook_suffix || is_customize_preview() ) {
-				wp_enqueue_style( 'rosa2-admin-nav-menus-styles', get_template_directory_uri() . '/dist/css/admin/edit-nav-menus.css', array( 'nav-menus' ), '1.0.0' );
+				wp_enqueue_style( 'anima-admin-nav-menus-styles', get_template_directory_uri() . '/dist/css/admin/edit-nav-menus.css', array( 'nav-menus' ), '1.0.0' );
 			}
 		}
 
 		public function customize_scripts_styles() {
 			$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 			// Enqueue script which extends nav menu item controls.
-			wp_enqueue_script( 'rosa2-customize-nav-menu-scripts', get_template_directory_uri() . '/dist/js/admin/customizer-nav-menus' . $suffix . '.js', array( 'customize-nav-menus' ), '1.0.0', true );
+			wp_enqueue_script( 'anima-customize-nav-menu-scripts', get_template_directory_uri() . '/dist/js/admin/customizer-nav-menus' . $suffix . '.js', array( 'customize-nav-menus' ), '1.0.0', true );
 		}
 
 		/**
@@ -981,4 +981,4 @@ if ( ! class_exists( 'Rosa2_Admin_Nav_Menus', false ) ) :
 
 endif;
 
-return new Rosa2_Admin_Nav_Menus();
+return new Anima_Admin_Nav_Menus();

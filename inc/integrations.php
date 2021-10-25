@@ -2,7 +2,7 @@
 /**
  * Require files that deal with various plugins integrations.
  *
- * @package Rosa2
+ * @package Anima
  */
 
 // If this file is called directly, abort.

@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Rosa2
+ * @package Anima
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,7 +21,7 @@ get_header();
             <?php echo do_blocks(
 	            '<!-- wp:novablocks/sidecar { "className":"alignwide", "sidebarWidth":"medium", "lastItemIsSticky":true} -->' .
 	            '<!-- wp:novablocks/sidecar-area {"className":"novablocks-content entry-content"} -->' .
-	            rosa2_get_archive_content() .
+	            anima_get_archive_content() .
 	            '<!-- /wp:novablocks/sidecar-area -->' .
 	            '<!-- /wp:novablocks/sidecar -->'
             ); ?>

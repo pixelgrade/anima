@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Rosa2
+ * @package Anima
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,13 +15,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     <?php
     /**
-     * rosa2_before_footer hook.
+     * anima_before_footer hook.
      *
      * @hooked nothing() - 10 (outputs nothing)
      */
-    do_action( 'rosa2_before_footer' ); ?>
+    do_action( 'anima_before_footer' ); ?>
 
-	<?php if ( function_exists( 'block_areas' ) && rosa2_block_area_has_blocks( 'footer' ) ) { ?>
+	<?php if ( function_exists( 'block_areas' ) && anima_block_area_has_blocks( 'footer' ) ) { ?>
         <footer id="colophon" class="site-footer">
             <div class="site-footer__inner-container">
 		        <?php block_areas()->render( 'footer' ); ?>
@@ -33,11 +33,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     <?php
     /**
-     * rosa2_after_footer hook.
+     * anima_after_footer hook.
      *
-     * @hooked rosa2_output_search_overlay() - 10 (outputs search overlay markup)
+     * @hooked anima_output_search_overlay() - 10 (outputs search overlay markup)
      */
-    do_action( 'rosa2_after_footer' ); ?>
+    do_action( 'anima_after_footer' ); ?>
 
 </div><!-- #page -->
 

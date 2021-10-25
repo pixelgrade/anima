@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Rosa2
+ * @package Anima
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -26,7 +26,7 @@ $card_layout_direction = $wp_query->current_post % 2 ? 'horizontal-reverse' : 'h
  */
 
 $default_block_attributes = '{
-    "cardLayout": "'. $card_layout_direction . '" ,
+    "cardLayout": "' . $card_layout_direction . '" ,
     "showCollectionTitle":false,
     "showCollectionSubtitle":false,
     "showMeta":true,
@@ -41,7 +41,6 @@ $default_block_attributes = '{
     "contentAreaWidth":45
 }';
 
-$block ='<!-- wp:novablocks/supernova ' . $default_block_attributes . ' -->';
-?>
+$block = '<!-- wp:novablocks/supernova ' . $default_block_attributes . ' -->';
 
-<?php echo do_blocks($block); ?>
+echo do_blocks( $block ); ?>

@@ -4,19 +4,19 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Rosa2
+ * @package Anima
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-$rosa2_has_transparent_logo = rosa2_has_custom_logo_transparent();
+$anima_has_transparent_logo = anima_has_custom_logo_transparent();
 ?>
 
 <div class="c-branding site-branding">
 
-	<?php if ( has_custom_logo() || $rosa2_has_transparent_logo ) { ?>
+	<?php if ( has_custom_logo() || $anima_has_transparent_logo ) { ?>
 
         <div class="c-logo site-logo">
 			<?php if ( has_custom_logo() ) { ?>
@@ -31,8 +31,8 @@ $rosa2_has_transparent_logo = rosa2_has_custom_logo_transparent();
                          * If transparent logo is not loaded,
                          * use the custom logo.
                          */
-                        if ( $rosa2_has_transparent_logo ) {
-	                        rosa2_the_custom_logo_transparent();
+                        if ( $anima_has_transparent_logo ) {
+	                        anima_the_custom_logo_transparent();
                         } else {
 	                        the_custom_logo();
                         }

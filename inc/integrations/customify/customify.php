@@ -20,16 +20,16 @@ if ( class_exists( 'PixCustomifyPlugin' ) && ! defined( '\Pixelgrade\StyleManage
 	require_once __DIR__ . '/layout.php';
 
 	// Add new options to the Customify config
-	add_filter( 'customify_filter_fields', 'rosa2_add_customify_options', 11, 1 );
+	add_filter( 'customify_filter_fields', 'anima_add_customify_options', 11, 1 );
 
-	add_filter( 'customify_filter_fields', 'rosa2_add_header_section_to_customify_config', 20, 1 );
-	add_filter( 'customify_filter_fields', 'rosa2_add_separators_section_to_customify_config', 30, 1 );
-	add_filter( 'customify_filter_fields', 'rosa2_add_content_section_to_customify_config', 40, 1 );
+	add_filter( 'customify_filter_fields', 'anima_add_header_section_to_customify_config', 20, 1 );
+	add_filter( 'customify_filter_fields', 'anima_add_separators_section_to_customify_config', 30, 1 );
+	add_filter( 'customify_filter_fields', 'anima_add_content_section_to_customify_config', 40, 1 );
 }
 
 
-function rosa2_add_customify_options( $config ) {
-	$config['opt-name'] = 'rosa2_options';
+function anima_add_customify_options( $config ) {
+	$config['opt-name'] = 'anima_options';
 
 	//start with a clean slate - no Customify default sections
 	$config['sections'] = array();
@@ -37,9 +37,9 @@ function rosa2_add_customify_options( $config ) {
 	return $config;
 }
 
-function rosa2_add_header_section_to_customify_config( $config ) {
+function anima_add_header_section_to_customify_config( $config ) {
 
-	$rosa2_header_section = array(
+	$anima_header_section = array(
 		'header_section' => array(
 			'title'   => esc_html__( 'Header', '__theme_txtd' ),
 			'options' => array(
@@ -141,14 +141,14 @@ function rosa2_add_header_section_to_customify_config( $config ) {
 		$config['sections'] = array();
 	}
 
-	$config['sections'] = $config['sections'] + $rosa2_header_section;
+	$config['sections'] = $config['sections'] + $anima_header_section;
 
 	return $config;
 }
 
-function rosa2_add_content_section_to_customify_config( $config ) {
+function anima_add_content_section_to_customify_config( $config ) {
 
-	$rosa2_content_section = array(
+	$anima_content_section = array(
 		'content_section' => array(
 			'title'   => esc_html__( 'Content', '__theme_txtd' ),
 			'options' => array(
@@ -193,12 +193,12 @@ function rosa2_add_content_section_to_customify_config( $config ) {
 		$config['sections'] = array();
 	}
 
-	$config['sections'] = $config['sections'] + $rosa2_content_section;
+	$config['sections'] = $config['sections'] + $anima_content_section;
 
 	return $config;
 }
 
-function rosa2_add_separators_section_to_customify_config( $config ) {
+function anima_add_separators_section_to_customify_config( $config ) {
 
 	$separator_symbol_values = array(
 		'fleuron-1',
@@ -220,7 +220,7 @@ function rosa2_add_separators_section_to_customify_config( $config ) {
 		return $config;
 	}
 
-	$rosa2_separators_section = array(
+	$anima_separators_section = array(
 		'separators_section' => array(
 			'title'   => esc_html__( 'Separators', '__theme_txtd' ),
 			'options' => array(
@@ -238,7 +238,7 @@ function rosa2_add_separators_section_to_customify_config( $config ) {
 		$config['sections'] = array();
 	}
 
-	$config['sections'] = $config['sections'] + $rosa2_separators_section;
+	$config['sections'] = $config['sections'] + $anima_separators_section;
 
 	return $config;
 }

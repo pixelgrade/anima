@@ -2,7 +2,7 @@
 /**
  * Displays the Single widget area.
  *
- * @since Rosa 2 1.10.0
+ * @since Anima 1.10.0
  */
 
 if ( is_active_sidebar( 'sidebar-1' ) ) : ?>
