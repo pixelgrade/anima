@@ -61,6 +61,38 @@ ul.wp-block-categories__list[class] {
     margin-right: auto;
     margin-left: auto; }
 
+.wp-block[data-align="left"] .wp-block-pullquote blockquote,
+.wp-block[data-align="right"] .wp-block-pullquote blockquote {
+  --font-size: var(--theme-body-font-size);
+  --current-font-size: var(--final-font-size);
+  --current-font-family: var(--theme-body-font-family);
+  --current-line-height: var(--theme-body-line-height);
+  --current-font-weight: var(--theme-body-font-weight);
+  --current-font-style: var(--theme-body-font-style);
+  --current-letter-spacing: var(--theme-body-letter-spacing); }
+
+.wp-block[data-align="wide"] .wp-block-pullquote {
+  --font-size: var(--theme-heading-2-font-size);
+  --current-font-size: var(--final-font-size);
+  --current-font-family: var(--theme-heading-2-font-family);
+  --current-font-style: var(--theme-heading-2-font-style);
+  --current-font-weight: var(--theme-heading-2-font-weight);
+  --current-line-height: var(--theme-heading-2-line-height);
+  --current-letter-spacing: var(--theme-heading-2-letter-spacing);
+  --current-text-transform: var(--theme-heading-2-text-transform);
+  --current-color: var(--theme-heading-2-color); }
+
+.wp-block[data-align="full"] .wp-block-pullquote {
+  --font-size: var(--theme-heading-1-font-size);
+  --current-font-size: var(--final-font-size);
+  --current-font-family: var(--theme-heading-1-font-family);
+  --current-font-style: var(--theme-heading-1-font-style);
+  --current-line-height: var(--theme-heading-1-line-height);
+  --current-font-weight: var(--theme-heading-1-font-weight);
+  --current-letter-spacing: var(--theme-heading-1-letter-spacing);
+  --current-text-transform: var(--theme-heading-1-text-transform);
+  --current-color: var(--theme-heading-1-color); }
+
 .wp-block-search__button {
   display: inline-block;
   text-decoration: none;
@@ -785,7 +817,7 @@ body {
 .novablocks-content > .alignright *,
 .novablocks-content > [class*='pull'] *,
 .novablocks-content > [data-novablocks-alignment] * {
-  --font-size-modifier: 0.75; }
+  --font-size-modifier: 0.85; }
 
 .novablocks-sidecar .novablocks-sidecar .novablocks-collection.block-is-basic > [class*="__inner-container"] {
   padding-right: 0;
@@ -873,7 +905,7 @@ body {
 .novablocks-content > .alignright *,
 .novablocks-content > [class*='pull'] *,
 .novablocks-content > [data-novablocks-alignment] * {
-  --font-size-modifier: 0.75; }
+  --font-size-modifier: 0.85; }
 
 .novablocks-sidecar .novablocks-sidecar .novablocks-collection.block-is-basic > [class*="__inner-container"] {
   padding-right: 0;

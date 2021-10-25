@@ -3,6 +3,21 @@ $enable-blockquote-block-styles:        true !default;
 @if $enable-blockquote-block-styles == true {
     /* Blockquote Block */
     .wp-block-quote {
-        @include space-children-y( var(--theme-spacing-medium) );
+        @include space-children-y( var(--theme-spacing) );
+        padding-left: var(--theme-spacing-medium);
+        padding-right: var(--theme-spacing-medium);
+
+        border-left: 3px solid var(--sm-current-accent-color); 
+        
+        &.is-style-large {
+            border-left: none;
+            @include apply-font(heading-3);
+        }
+    }
+
+    .wp-block-quote cite,
+    .wp-block-quote__citation {
+        display: block;
+        @include apply-font(heading-6);
     }
 }

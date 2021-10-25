@@ -1,0 +1,18 @@
+// TODO: Find a method to conditionally add those styles in _common.scss
+.wp-block-pullquote {
+	.wp-block[data-align="left"] &,
+	.wp-block[data-align="right"] & {
+		blockquote {
+            @include apply-font(body);
+        }
+	}
+
+	.wp-block[data-align="wide"] & {
+		@include apply-font(heading-2);
+	}
+
+	.wp-block[data-align="full"] & {
+		@include apply-font(heading-1);
+	}
+
+}
