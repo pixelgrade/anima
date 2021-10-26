@@ -888,21 +888,26 @@
   .editor-styles-wrapper .wp-block-buttons .block-list-appender {
     margin-bottom: 0; }
 
-/* Post Title Block */
-.post-type-page .editor-post-title__block {
+.editor-styles-wrapper[class] .editor-post-title__block .editor-post-title__input,
+.editor-styles-wrapper[class] .edit-post-visual-editor__post-title-wrapper .editor-post-title__input {
+  margin-top: 1em;
+  color: var(--sm-current-fg2-color); }
+  .editor-styles-wrapper[class] .editor-post-title__block .editor-post-title__input [data-rich-text-placeholder],
+  .editor-styles-wrapper[class] .edit-post-visual-editor__post-title-wrapper .editor-post-title__input [data-rich-text-placeholder] {
+    font-size: revert; }
+
+.post-type-page .editor-styles-wrapper[class] .editor-post-title__block,
+.post-type-page .editor-styles-wrapper[class] .edit-post-visual-editor__post-title-wrapper {
   max-width: none; }
-  .post-type-page .editor-post-title__block .editor-post-title__input {
+  .post-type-page .editor-styles-wrapper[class] .editor-post-title__block .editor-post-title__input,
+  .post-type-page .editor-styles-wrapper[class] .edit-post-visual-editor__post-title-wrapper .editor-post-title__input {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     font-size: initial;
     font-weight: normal;
     line-height: 1.4; }
-  .post-type-page .editor-post-title__block:not(.is-selected) .editor-post-title__input {
+  .post-type-page .editor-styles-wrapper[class] .editor-post-title__block:not(.is-selected) .editor-post-title__input,
+  .post-type-page .editor-styles-wrapper[class] .edit-post-visual-editor__post-title-wrapper:not(.is-selected) .editor-post-title__input {
     border-bottom: 1px dashed rgba(123, 134, 162, 0.3); }
-
-.editor-post-title__block .editor-post-title__input {
-  color: var(--sm-current-fg2-color); }
-  .editor-post-title__block .editor-post-title__input:focus {
-    color: var(--sm-current-fg2-color); }
 
 /* Hide Text Settings Panel */
 .blocks-font-size {
