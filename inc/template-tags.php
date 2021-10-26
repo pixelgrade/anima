@@ -575,14 +575,14 @@ if ( ! function_exists( 'anima_is_active_sidebar' ) ) {
 	}
 }
 
-if ( ! function_exists( 'rosa2_get_the_author_info_box' ) ) {
+if ( ! function_exists( 'anima_get_the_author_info_box' ) ) {
 
 	/**
 	 * Get the HTML of the author info box
 	 *
 	 * @return string
 	 */
-	function rosa2_get_the_author_info_box() {
+	function anima_get_the_author_info_box() {
 		// Get the current post for easy use
 		$post = get_post();
 
@@ -638,7 +638,7 @@ if ( ! function_exists( 'rosa2_get_the_author_info_box' ) ) {
 
 		$author_details .= '<footer class="c-author__footer">';
 
-		$author_details .= rosa2_get_author_bio_links( $post->ID );
+		$author_details .= anima_get_author_bio_links( $post->ID );
 
 		$author_details .= '</footer>';
 		$author_details .= '</div><!-- .c-author__details -->';
@@ -648,7 +648,7 @@ if ( ! function_exists( 'rosa2_get_the_author_info_box' ) ) {
 	} // function
 }
 
-if ( ! function_exists( 'rosa2_get_author_bio_links' ) ) {
+if ( ! function_exists( 'anima_get_author_bio_links' ) ) {
 	/**
 	 * Return the markup for the author bio links.
 	 * These are the links/websites added by one to it's Gravatar profile
@@ -656,7 +656,7 @@ if ( ! function_exists( 'rosa2_get_author_bio_links' ) ) {
 	 * @param int|WP_Post $post_id Optional. Post ID or post object.
 	 * @return string The HTML markup of the author bio links list.
 	 */
-	function rosa2_get_author_bio_links( $post_id = null ) {
+	function anima_get_author_bio_links( $post_id = null ) {
 		$post   = get_post( $post_id );
 		$markup = '';
 		if ( empty( $post ) ) {

@@ -442,7 +442,7 @@ if ( ! function_exists( 'anima_article_header' ) ) {
 
 		$article_header_classes = array( 'article-header' );
 
-		if ( ! rosa2_is_active_sidebar( 'sidebar-1' )) {
+		if ( ! anima_is_active_sidebar( 'sidebar-1' )) {
 			$article_header_classes[] = 'wp-block-group__inner-container';
         }
 
@@ -562,7 +562,7 @@ if ( ! function_exists( 'anima_get_author_box_markup' ) ) {
 
 	    ob_start();
 
-	    echo rosa2_get_the_author_info_box();
+	    echo anima_get_the_author_info_box();
 
 	    return ob_get_clean();
     }
@@ -585,7 +585,7 @@ if ( ! function_exists('anima_get_search_content_markup') ) {
 
 		    <?php
 		    get_template_part( 'template-parts/loop' );
-		    rosa2_the_posts_pagination();
+		    anima_the_posts_pagination();
 	    } else {
 		    get_template_part( 'template-parts/content', 'none' );
 	    }
