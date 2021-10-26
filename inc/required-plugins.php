@@ -1,8 +1,8 @@
 <?php
 /**
- * Rosa2 required or recommended plugins
+ * Anima required or recommended plugins
  *
- * @package Rosa2
+ * @package Anima
  */
 
 // If this file is called directly, abort.
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require_once trailingslashit( get_template_directory() ) . 'inc/required-plugins/class-pxg-plugin-activation.php';
 
-function rosa2_register_required_plugins() {
+function anima_register_required_plugins() {
 
 	$protocol = 'http:';
 	if ( is_ssl() ) {
@@ -60,9 +60,9 @@ function rosa2_register_required_plugins() {
 			// %1$s = plugin name
 			'oops'                            => esc_html__( 'Something went wrong with the plugin API.', '__theme_txtd' ),
 			/* translators: %1$s = plugin name */
-			'notice_can_install_required'     => _n_noop( 'Rosa 2 requires the following plugin: %1$s.', 'Rosa 2 requires the following plugins: %1$s.', '__theme_txtd' ),
+			'notice_can_install_required'     => _n_noop( 'Anima requires the following plugin: %1$s.', 'Anima requires the following plugins: %1$s.', '__theme_txtd' ),
 			/* translators: %1$s = plugin name */
-			'notice_can_install_recommended'  => _n_noop( 'Rosa 2 recommends the following plugin: %1$s.', 'Rosa 2 recommends the following plugins: %1$s.', '__theme_txtd' ),
+			'notice_can_install_recommended'  => _n_noop( 'Anima recommends the following plugin: %1$s.', 'Anima recommends the following plugins: %1$s.', '__theme_txtd' ),
 			// %1$s = plugin name(s)
 			'notice_cannot_install'           => _n_noop( 'Sorry, but you do not have the correct permissions to install the %s plugin. Contact the administrator of this site for help on getting the plugin installed.', 'Sorry, but you do not have the correct permissions to install the %s plugins. Contact the administrator of this site for help on getting the plugins installed.', '__theme_txtd' ),
 			// %1$s = plugin name(s)
@@ -73,8 +73,8 @@ function rosa2_register_required_plugins() {
 			'notice_cannot_activate'          => _n_noop( 'Sorry, but you do not have the correct permissions to activate the %s plugin. Contact the administrator of this site for help on getting the plugin activated.', 'Sorry, but you do not have the correct permissions to activate the %s plugins. Contact the administrator of this site for help on getting the plugins activated.', '__theme_txtd' ),
 			// %1$s = plugin name(s)
 			'notice_ask_to_update'            => _n_noop(
-				'⚠️ The following plugin needs to be updated to its latest version to ensure maximum compatibility with Rosa 2: %1$s.',
-				'⚠️ The following plugins need to be updated to their latest version to ensure maximum compatibility with Rosa 2: %1$s.', '
+				'⚠️ The following plugin needs to be updated to its latest version to ensure maximum compatibility with Anima: %1$s.',
+				'⚠️ The following plugins need to be updated to their latest version to ensure maximum compatibility with Anima: %1$s.', '
 				__theme_txtd' ),
 			// %1$s = plugin name(s)
 			'notice_cannot_update'            => _n_noop( 'Sorry, but you do not have the correct permissions to update the %s plugin. Contact the administrator of this site for help on getting the plugin updated.', 'Sorry, but you do not have the correct permissions to update the %s plugins. Contact the administrator of this site for help on getting the plugins updated.', '__theme_txtd' ),
@@ -90,9 +90,9 @@ function rosa2_register_required_plugins() {
 
 	tgmpa( $plugins, $config );
 }
-add_action( 'tgmpa_register', 'rosa2_register_required_plugins', 995 );
+add_action( 'tgmpa_register', 'anima_register_required_plugins', 995 );
 
-function rosa2_prevent_tgmpa_notices( $notices, $total_required_action_count ) {
+function anima_prevent_tgmpa_notices( $notices, $total_required_action_count ) {
 	// We want to do this only when Pixelgrade Care is not active.
 	if ( function_exists( 'PixelgradeCare') ) {
 		return $notices;
@@ -105,4 +105,4 @@ function rosa2_prevent_tgmpa_notices( $notices, $total_required_action_count ) {
 
 	return $notices;
 }
-add_filter( 'tgmpa_admin_notices', 'rosa2_prevent_tgmpa_notices', 10, 2 );
+add_filter( 'tgmpa_admin_notices', 'anima_prevent_tgmpa_notices', 10, 2 );

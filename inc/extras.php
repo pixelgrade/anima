@@ -4,7 +4,7 @@
  *
  * Eventually, some of the functionality here could be replaced by core features.
  *
- * @package Rosa 2
+ * @package Anima
  */
 
 if ( ! function_exists( 'wp_body_open' ) ) {
@@ -18,7 +18,7 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 	}
 }
 
-function rosa2_first_block_is_hero() {
+function anima_first_block_is_hero() {
 	global $post;
 
     if ( is_page() && ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
@@ -32,7 +32,7 @@ function rosa2_first_block_is_hero() {
 	return false;
 }
 
-function rosa2_first_block_is( $blockTypes ) {
+function anima_first_block_is( $blockTypes ) {
 	global $post;
 
 	if ( ! is_array( $blockTypes ) ) {
@@ -50,7 +50,7 @@ function rosa2_first_block_is( $blockTypes ) {
 	return false;
 }
 
-function rosa2_remove_site_padding_bottom() {
+function anima_remove_site_padding_bottom() {
 	global $post;
 
 	if ( ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
@@ -73,12 +73,12 @@ function rosa2_remove_site_padding_bottom() {
 	return false;
 }
 
-function rosa2_has_moderate_media_card_after_hero() {
+function anima_has_moderate_media_card_after_hero() {
 	global $post;
 
 	if ( ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
 		$blocks = parse_blocks( $post->post_content );
-		$blocks = array_filter( $blocks, 'rosa2_exclude_null_blocks' );
+		$blocks = array_filter( $blocks, 'anima_exclude_null_blocks' );
 		$blocks = array_values( $blocks );
 
 		if ( count( $blocks ) > 1 ) {
@@ -93,14 +93,14 @@ function rosa2_has_moderate_media_card_after_hero() {
 	return false;
 }
 
-function rosa2_exclude_null_blocks( $block ) {
+function anima_exclude_null_blocks( $block ) {
     return ! empty( $block['blockName'] );
 }
 
-if ( ! function_exists( 'rosa2_alter_logo_markup' ) ) {
-	function rosa2_alter_logo_markup() {
+if ( ! function_exists( 'anima_alter_logo_markup' ) ) {
+	function anima_alter_logo_markup() {
 
-		if ( has_custom_logo() || rosa2_has_custom_logo_transparent() ) { ?>
+		if ( has_custom_logo() || anima_has_custom_logo_transparent() ) { ?>
 
 			<div class="c-logo site-logo">
 				<?php if ( has_custom_logo() ) { ?>
@@ -110,14 +110,14 @@ if ( ! function_exists( 'rosa2_alter_logo_markup' ) ) {
 				<?php } ?>
 
                 <div class="c-logo__inverted">
-					<?php  rosa2_has_custom_logo_transparent() ? rosa2_the_custom_logo_transparent() : the_custom_logo(); ?>
+					<?php  anima_has_custom_logo_transparent() ? anima_the_custom_logo_transparent() : the_custom_logo(); ?>
                 </div>
 			</div>
 
 		<?php }
 	}
 }
-add_filter( 'novablocks_logo_markup', 'rosa2_alter_logo_markup' );
+add_filter( 'novablocks_logo_markup', 'anima_alter_logo_markup' );
 
 /**
  * Fix skip link focus in IE11.
@@ -127,7 +127,7 @@ add_filter( 'novablocks_logo_markup', 'rosa2_alter_logo_markup' );
  *
  * @link https://git.io/vWdr2
  */
-function rosa2_skip_link_focus_fix() {
+function anima_skip_link_focus_fix() {
 	// The following is minified via `terser --compress --mangle -- js/skip-link-focus-fix.js`.
 	?>
 <script>
@@ -136,9 +136,9 @@ function rosa2_skip_link_focus_fix() {
 	<?php
 }
 // We will put this script inline since it is so small.
-add_action( 'wp_print_footer_scripts', 'rosa2_skip_link_focus_fix' );
+add_action( 'wp_print_footer_scripts', 'anima_skip_link_focus_fix' );
 
-if ( ! function_exists( 'rosa2_custom_excerpt_length' ) ) {
+if ( ! function_exists( 'anima_custom_excerpt_length' ) ) {
 	/**
 	 * Filter the except length to 25 words.
 	 *
@@ -146,11 +146,11 @@ if ( ! function_exists( 'rosa2_custom_excerpt_length' ) ) {
 	 *
 	 * @return int (Maybe) modified excerpt length.
 	 */
-	function rosa2_custom_excerpt_length( $length ) {
+	function anima_custom_excerpt_length( $length ) {
 		return 25;
 	}
 }
-add_filter( 'excerpt_length', 'rosa2_custom_excerpt_length', 50 );
+add_filter( 'excerpt_length', 'anima_custom_excerpt_length', 50 );
 
 if ( ! function_exists( 'pixelgrade_user_has_access' ) ) {
 	/**
@@ -201,7 +201,7 @@ if ( ! function_exists( 'pixelgrade_get_original_theme_name' ) ) {
 	}
 }
 
-if ( ! function_exists( 'rosa2_parse_content_tags' ) ) {
+if ( ! function_exists( 'anima_parse_content_tags' ) ) {
 	/**
 	 * Replace any content tags present in the content.
 	 *
@@ -209,7 +209,7 @@ if ( ! function_exists( 'rosa2_parse_content_tags' ) ) {
 	 *
 	 * @return string
 	 */
-	function rosa2_parse_content_tags( $content ) {
+	function anima_parse_content_tags( $content ) {
 		$original_content = $content;
 
 		// Allow others to alter the content before we do our work
@@ -270,9 +270,9 @@ if ( ! function_exists( 'rosa2_parse_content_tags' ) ) {
 	}
 }
 
-if ( ! function_exists( 'rosa2_render_sharing_block' ) ) {
+if ( ! function_exists( 'anima_render_sharing_block' ) ) {
 
-    function rosa2_render_sharing_block() {
+    function anima_render_sharing_block() {
 
 	    if ( ! pixelgrade_option( 'display_sharing_button_on_single', false ) ) {
 	        return;
@@ -283,19 +283,19 @@ if ( ! function_exists( 'rosa2_render_sharing_block' ) ) {
         }
     }
 }
-add_action( 'rosa2_after_content', 'rosa2_render_sharing_block' );
+add_action( 'anima_after_content', 'anima_render_sharing_block' );
 
-if ( ! function_exists( 'rosa2_dark_mode_support' ) ) {
-    function rosa2_dark_mode_support() {
+if ( ! function_exists( 'anima_dark_mode_support' ) ) {
+    function anima_dark_mode_support() {
 	    if ( 'on' === pixelgrade_option( 'sm_dark_mode', 'off' ) ) {
             add_theme_support( 'editor-styles' );
             add_theme_support( 'dark-editor-style' );
 	    }
     }
 }
-add_action( 'after_setup_theme', 'rosa2_dark_mode_support', 10 );
+add_action( 'after_setup_theme', 'anima_dark_mode_support', 10 );
 
-function rosa2_block_area_has_blocks( $slug ) {
+function anima_block_area_has_blocks( $slug ) {
 	$posts = get_posts( array(
 		'name'        => $slug,
 		'post_type'   => 'block_area',
@@ -311,14 +311,14 @@ function rosa2_block_area_has_blocks( $slug ) {
 	return false;
 }
 
-function rosa2_custom_gutenberg_settings() {
+function anima_custom_gutenberg_settings() {
 	add_theme_support( 'editor-gradient-presets', array() );
 	add_theme_support( 'disable-custom-gradients' );
 }
 
-add_action( 'after_setup_theme', 'rosa2_custom_gutenberg_settings', 10 );
+add_action( 'after_setup_theme', 'anima_custom_gutenberg_settings', 10 );
 
-function rosa2_should_enqueue_novablocks_fallbacks() {
+function anima_should_enqueue_novablocks_fallbacks() {
     if ( ! in_array( 'nova-blocks/nova-blocks.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
         return true;
     }
@@ -330,14 +330,14 @@ function rosa2_should_enqueue_novablocks_fallbacks() {
 	return false;
 }
 
-function rosa2_is_using_block( $slug, $isblockarea ) {
+function anima_is_using_block( $slug, $isblockarea ) {
 
 	if ( has_block( 'novablocks/' . $slug ) ) {
 		return true;
 	}
 
 	if ( $isblockarea ) {
-		if ( rosa2_block_area_has_blocks( $slug ) ) {
+		if ( anima_block_area_has_blocks( $slug ) ) {
 			return true;
 		}
 	}
@@ -345,23 +345,23 @@ function rosa2_is_using_block( $slug, $isblockarea ) {
 	return false;
 }
 
-function rosa2_init_upgrades_logic() {
+function anima_init_upgrades_logic() {
 	// We don't want to do upgrade logic in the frontend or on ajax calls.
 	if ( ! is_admin() || ( function_exists( 'wp_doing_ajax' ) ? wp_doing_ajax() : defined( 'DOING_AJAX' ) ) ) {
 		return;
 	}
 
-	require_once( trailingslashit( get_template_directory() ) . 'inc/upgrade/class-Rosa2_Upgrade.php' );
+	require_once( trailingslashit( get_template_directory() ) . 'inc/upgrade/class-Anima_Upgrade.php' );
 
 	$current_theme = wp_get_theme( get_template() );
 
 	// Make sure the upgrade class is initialized.
 	// The slug will be hard-coded to avoid loss of data due to modifications by the user.
-	Rosa2_Upgrade::instance( 'rosa2', $current_theme->get('Version' ), $current_theme->get('Name') );
+	Anima_Upgrade::instance( 'anima', $current_theme->get('Version' ), $current_theme->get('Name') );
 }
-add_action( 'after_setup_theme', 'rosa2_init_upgrades_logic', 10 );
+add_action( 'after_setup_theme', 'anima_init_upgrades_logic', 10 );
 
-if ( ! function_exists( 'rosa2_add_primary_menu_item_description' ) ) {
+if ( ! function_exists( 'anima_add_primary_menu_item_description' ) ) {
 
 	/**
 	 * Add menu item description
@@ -373,7 +373,7 @@ if ( ! function_exists( 'rosa2_add_primary_menu_item_description' ) ) {
      * @return string Nav menu item start element.
 	 */
 
-	function rosa2_add_primary_menu_item_description( $item_output, $item, $depth, $args ) {
+	function anima_add_primary_menu_item_description( $item_output, $item, $depth, $args ) {
 
 		if ( ( 'primary' == $args->theme_location || 'secondary' == $args->theme_location ) && $depth && $item->description ) {
 			$item_output = str_replace( '</a>', '<span class="menu-description">' . $item->description . '</span></a>', $item_output );
@@ -384,35 +384,35 @@ if ( ! function_exists( 'rosa2_add_primary_menu_item_description' ) ) {
 	}
 }
 
-add_filter( 'walker_nav_menu_start_el', 'rosa2_add_primary_menu_item_description', 10, 4 );
+add_filter( 'walker_nav_menu_start_el', 'anima_add_primary_menu_item_description', 10, 4 );
 
-if ( ! function_exists('rosa2_get_content_markup' ) ) {
+if ( ! function_exists('anima_get_content_markup' ) ) {
 
 	/**
 	 * Retrieve the markup for post content.
 	 */
 
 
-	function rosa2_get_content_markup() {
+	function anima_get_content_markup() {
 		ob_start(); ?>
 
 			<?php
-			do_action( 'rosa2_before_content' );
+			do_action( 'anima_before_content' );
 			the_content();
-			do_action( 'rosa2_after_content' );
+			do_action( 'anima_after_content' );
 			?>
 
 		<?php return ob_get_clean();
 	}
 }
 
-if ( ! function_exists('rosa2_get_sidebar_markup' ) ) {
+if ( ! function_exists('anima_get_sidebar_markup' ) ) {
 
 	/**
 	 * Retrieve the markup for sidebar.
 	 */
 
-	function rosa2_get_sidebar_markup() {
+	function anima_get_sidebar_markup() {
 		ob_start();
 
 		get_template_part( 'template-parts/single-sidebar' );
@@ -421,28 +421,28 @@ if ( ! function_exists('rosa2_get_sidebar_markup' ) ) {
 	}
 }
 
-if ( ! function_exists('rosa2_get_post_navigation_markup' ) ) {
+if ( ! function_exists('anima_get_post_navigation_markup' ) ) {
 
 	/**
 	 * Retrieve the markup for post navigation.
 	 */
 
-	function rosa2_get_post_navigation_markup() {
+	function anima_get_post_navigation_markup() {
 		ob_start();
 
-		rosa2_the_post_navigation();
+		anima_the_post_navigation();
 
 		return ob_get_clean();
 	}
 }
 
-if ( ! function_exists( 'rosa2_article_header' ) ) {
+if ( ! function_exists( 'anima_article_header' ) ) {
 
-	function rosa2_article_header() {
+	function anima_article_header() {
 
 		$article_header_classes = array( 'article-header' );
 
-		if ( ! rosa2_is_active_sidebar( 'sidebar-1' )) {
+		if ( ! anima_is_active_sidebar( 'sidebar-1' )) {
 			$article_header_classes[] = 'wp-block-group__inner-container';
         }
 
@@ -456,7 +456,7 @@ if ( ! function_exists( 'rosa2_article_header' ) ) {
         <div class="<?php echo esc_attr( join( ' ', $article_header_classes ) ); ?>">
 
             <div class="entry-header sm-variation-2">
-				<?php rosa2_categories_posted_in() ?>
+				<?php anima_categories_posted_in() ?>
 
                 <div class="header-dropcap"><?php echo esc_html( substr( get_the_title(), 0, 1 ) ); ?></div>
                 <h1 class="entry-title"><?php the_title() ?></h1>
@@ -481,9 +481,9 @@ if ( ! function_exists( 'rosa2_article_header' ) ) {
 	}
 }
 
-if ( ! function_exists( 'rosa2_get_archive_content' ) ) {
+if ( ! function_exists( 'anima_get_archive_content' ) ) {
 
-	function rosa2_get_archive_content() {
+	function anima_get_archive_content() {
 
 		ob_start();
 
@@ -507,9 +507,9 @@ if ( ! function_exists( 'rosa2_get_archive_content' ) ) {
 	}
 }
 
-if ( ! function_exists( 'rosa2_get_home_content_markup' ) ) {
+if ( ! function_exists( 'anima_get_home_content_markup' ) ) {
 
-	function rosa2_get_home_content_markup() {
+	function anima_get_home_content_markup() {
 
 		ob_start();
 
@@ -558,21 +558,21 @@ if ( ! function_exists( 'rosa2_get_home_content_markup' ) ) {
 	}
 }
 
-if ( ! function_exists( 'rosa2_get_author_box_markup' ) ) {
+if ( ! function_exists( 'anima_get_author_box_markup' ) ) {
 
-    function rosa2_get_author_box_markup() {
+    function anima_get_author_box_markup() {
 
 	    ob_start();
 
-	    echo rosa2_get_the_author_info_box();
+	    echo anima_get_the_author_info_box();
 
 	    return ob_get_clean();
     }
 }
 
-if ( ! function_exists('rosa2_get_search_content_markup') ) {
+if ( ! function_exists('anima_get_search_content_markup') ) {
 
-    function rosa2_get_search_content_markup() {
+    function anima_get_search_content_markup() {
 	    ob_start();
 
 	    if ( have_posts() ) { ?>
@@ -587,7 +587,7 @@ if ( ! function_exists('rosa2_get_search_content_markup') ) {
 
 		    <?php
 		    get_template_part( 'template-parts/loop' );
-		    rosa2_the_posts_pagination();
+		    anima_the_posts_pagination();
 	    } else {
 		    get_template_part( 'template-parts/content', 'none' );
 	    }
@@ -602,7 +602,7 @@ if ( ! function_exists('rosa2_get_search_content_markup') ) {
  * @param int $wpm The words per minute reading rate to take into account.
  * @return int
  */
-function rosa2_get_post_reading_time_in_minutes( $post, $wpm = 250 ) {
+function anima_get_post_reading_time_in_minutes( $post, $wpm = 250 ) {
 	$post = get_post( $post );
 
 	if ( ! ( $post instanceof WP_Post ) ) {
@@ -619,9 +619,9 @@ function rosa2_get_post_reading_time_in_minutes( $post, $wpm = 250 ) {
 	$content = str_replace( ']]>', ']]&gt;', $content );
 
 	// Allow others to have a say; like removing certain non-essential elements (avatars for example).
-	$content = apply_filters( 'rosa2_post_content_before_reading_time_calc', $content, $post );
+	$content = apply_filters( 'anima_post_content_before_reading_time_calc', $content, $post );
 
-	return rosa2_get_reading_time_in_minutes( $content, $wpm );
+	return anima_get_reading_time_in_minutes( $content, $wpm );
 }
 
 /**
@@ -630,7 +630,7 @@ function rosa2_get_post_reading_time_in_minutes( $post, $wpm = 250 ) {
  * @param int $wpm The words per minute reading rate to take into account.
  * @return int
  */
-function rosa2_get_reading_time_in_minutes( $content, $wpm = 250 ) {
+function anima_get_reading_time_in_minutes( $content, $wpm = 250 ) {
 	// Calculate the time in seconds for the images in the content.
 	$images_time = 0;
 	if ( preg_match_all( '/<img\s[^>]+>/', $content, $matches ) ) {

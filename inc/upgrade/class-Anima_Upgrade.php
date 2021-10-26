@@ -1,8 +1,8 @@
 <?php
 /**
- * Document for class Rosa2_Upgrade.
+ * Document for class Anima_Upgrade.
  *
- * @package Rosa2
+ * @package Anima
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,11 +15,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @see         https://pixelgrade.com
  * @author      Pixelgrade
  */
-class Rosa2_Upgrade {
+class Anima_Upgrade {
 
 	/**
 	 * Holds the only instance of this class.
-	 * @var     null|Rosa2_Upgrade
+	 * @var     null|Anima_Upgrade
 	 * @access  protected
 	 */
 	protected static $_instance = null;
@@ -85,7 +85,7 @@ class Rosa2_Upgrade {
 	public function upgrade() {
 
 		// Make sure the upgrade routines class is available.
-		require_once( trailingslashit( get_template_directory() ) . 'inc/upgrade/class-Rosa2_Upgrade_Routines.php' );
+		require_once( trailingslashit( get_template_directory() ) . 'inc/upgrade/class-Anima_Upgrade_Routines.php' );
 
 		$upgradeOk    = true;
 		$savedVersion = $this->get_version_saved();
@@ -107,7 +107,7 @@ class Rosa2_Upgrade {
 			$new_versions[] = $newVersion;
 
 			define( 'PXG_THEME_DOING_UPGRADE', true );
-			$upgrade_routines = new Rosa2_Upgrade_Routines( $savedVersion, $newVersion, trailingslashit( get_template_directory() ) . 'inc/upgrade/migrations');
+			$upgrade_routines = new Anima_Upgrade_Routines( $savedVersion, $newVersion, trailingslashit( get_template_directory() ) . 'inc/upgrade/migrations');
 			$upgrade_routines->run();
 		}
 
@@ -174,9 +174,9 @@ class Rosa2_Upgrade {
 	}
 
 	/**
-	 * Main Rosa2_Upgrade Instance
+	 * Main Anima_Upgrade Instance
 	 *
-	 * Ensures only one instance of Rosa2_Upgrade is loaded or can be loaded.
+	 * Ensures only one instance of Anima_Upgrade is loaded or can be loaded.
 	 *
 	 * @static
 	 *
@@ -184,7 +184,7 @@ class Rosa2_Upgrade {
 	 * @param string $version
 	 * @param string $name Optional.
 	 *
-	 * @return Rosa2_Upgrade Main Rosa2_Upgrade instance
+	 * @return Anima_Upgrade Main Anima_Upgrade instance
 	 */
 	public static function instance( $slug, $version, $name = '' ) {
 

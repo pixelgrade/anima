@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Rosa2
+ * @package Anima
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -19,7 +19,7 @@ get_header(); ?>
             <div class="entry-content">
 				<?php if ( have_posts() ) {
 				get_template_part( 'template-parts/loop' );
-				rosa2_the_posts_pagination(); ?>
+				anima_the_posts_pagination(); ?>
             </div>
 
                 <?php } else {

@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Rosa2
+ * @package Anima
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	$author_email     = $author->user_email;
 	$avatar_url       = get_avatar_url( $author_email, array( 'size' => 100, 'default' => 'identicon' ) );
 	$avatar           = get_avatar( $author_email, '80', 'identicon' );
-	$min_reading_time = rosa2_get_post_reading_time_in_minutes( $post, 280 );
+	$min_reading_time = anima_get_post_reading_time_in_minutes( $post, 280 );
 
 	$byline = sprintf(
 		__( '%s', '__theme_txtd' ),

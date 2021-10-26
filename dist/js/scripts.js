@@ -940,18 +940,6 @@ function () {
       globalService.registerRender(function () {
         _this2.updateOnScroll();
       });
-      var indicator = this.element.querySelectorAll('.novablocks-hero__indicator');
-      var nextSibling = this.element.nextElementSibling;
-      var next = nextSibling === null || nextSibling === void 0 ? void 0 : nextSibling.querySelectorAll('.novablocks-block');
-      next = !!next && next.length ? next[0] : nextSibling;
-
-      if (!!indicator && indicator.length) {
-        var colorClasses = getColorSetClasses(next);
-        colorClasses.forEach(function (className) {
-          indicator[0].classList.add(className);
-        });
-      }
-
       var mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
       mediaQuery.addListener(function () {
         _this2.reduceMotion = mediaQuery.matches;

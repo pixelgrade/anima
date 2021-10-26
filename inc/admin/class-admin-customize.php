@@ -1,8 +1,8 @@
 <?php
 /**
- * Rosa 2 Theme Customizer logic.
+ * Anima Theme Customizer logic.
  *
- * @package Rosa2
+ * @package Anima
  */
 
 // If this file is called directly, abort.
@@ -10,12 +10,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Rosa2_Admin_Customize', false ) ) :
+if ( ! class_exists( 'Anima_Admin_Customize', false ) ) :
 
 	/**
-	 * Rosa2_Admin_Customize Class.
+	 * Anima_Admin_Customize Class.
 	 */
-	class Rosa2_Admin_Customize {
+	class Anima_Admin_Customize {
 
 		/**
 		 * Initialize customize actions.
@@ -46,7 +46,7 @@ if ( ! class_exists( 'Rosa2_Admin_Customize', false ) ) :
 			}
 
 			// add a setting for the site logo
-			$wp_customize->add_setting('rosa_transparent_logo', array(
+			$wp_customize->add_setting('anima_transparent_logo', array(
 				'theme_supports' => array( 'custom-logo' ),
 				'transport'      => 'postMessage',
 				'sanitize_callback' => array( $this, 'sanitize_transparent_logo' ),
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Rosa2_Admin_Customize', false ) ) :
 			// Add a control to upload the logo
 			// But first get the custom logo options
 			$custom_logo_args = get_theme_support( 'custom-logo' );
-			$wp_customize->add_control( new WP_Customize_Cropped_Image_Control( $wp_customize, 'rosa_transparent_logo',
+			$wp_customize->add_control( new WP_Customize_Cropped_Image_Control( $wp_customize, 'anima_transparent_logo',
 				array(
 					'label' => esc_html__( 'Logo while on Transparent Header', '__theme_txtd' ),
 					'button_labels' => array(
@@ -75,8 +75,8 @@ if ( ! class_exists( 'Rosa2_Admin_Customize', false ) ) :
 					'flex_width'    => $custom_logo_args[0]['flex-width'],
 				) ) );
 
-			$wp_customize->selective_refresh->add_partial( 'rosa_transparent_logo', array(
-				'settings'            => array( 'rosa_transparent_logo' ),
+			$wp_customize->selective_refresh->add_partial( 'anima_transparent_logo', array(
+				'settings'            => array( 'anima_transparent_logo' ),
 				'selector'            => '.custom-logo-link--transparent',
 				'render_callback'     => array( $this, 'customizer_partial_transparent_logo' ),
 				'container_inclusive' => true,
@@ -98,7 +98,7 @@ if ( ! class_exists( 'Rosa2_Admin_Customize', false ) ) :
 		/**
 		 * Render the site title for the selective refresh partial.
 		 *
-		 * @see Rosa2_Admin_Customize::customize_register()
+		 * @see Anima_Admin_Customize::customize_register()
 		 *
 		 * @return void
 		 */
@@ -109,7 +109,7 @@ if ( ! class_exists( 'Rosa2_Admin_Customize', false ) ) :
 		/**
 		 * Render the site tagline for the selective refresh partial.
 		 *
-		 * @see Rosa2_Admin_Customize::customize_register()
+		 * @see Anima_Admin_Customize::customize_register()
 		 *
 		 * @return void
 		 */
@@ -131,10 +131,10 @@ if ( ! class_exists( 'Rosa2_Admin_Customize', false ) ) :
 		 * @return string Custom logo transparent.
 		 */
 		public function customizer_partial_transparent_logo() {
-			return rosa2_get_custom_logo_transparent();
+			return anima_get_custom_logo_transparent();
 		}
 	}
 
 endif;
 
-return new Rosa2_Admin_Customize();
+return new Anima_Admin_Customize();

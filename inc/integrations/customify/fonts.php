@@ -6,12 +6,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Add theme fonts to the font field options list
-add_filter( 'customify_theme_fonts', 'rosa2_add_customify_theme_fonts' );
+add_filter( 'customify_theme_fonts', 'anima_add_customify_theme_fonts' );
 
 // Add fonts section and options to the Customify config
-add_filter( 'customify_filter_fields', 'rosa2_add_fonts_section_to_customify_config', 60, 1 );
+add_filter( 'customify_filter_fields', 'anima_add_fonts_section_to_customify_config', 60, 1 );
 
-function rosa2_add_customify_theme_fonts( $fonts ) {
+function anima_add_customify_theme_fonts( $fonts ) {
 
 	$fonts['Reforma1969'] = array(
 		'family'   => 'Reforma1969',
@@ -70,7 +70,7 @@ function rosa2_add_customify_theme_fonts( $fonts ) {
 	return $fonts;
 }
 
-function rosa2_add_fonts_section_to_customify_config( $config ) {
+function anima_add_fonts_section_to_customify_config( $config ) {
 
 	$font_size_config = array(
 		'min'  => 12,
@@ -139,7 +139,7 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 	);
 
 
-	$rosa2_fonts_section = array(
+	$anima_fonts_section = array(
 		'fonts_section' => array(
 			'title'   => esc_html__( 'Fonts', '__theme_txtd' ),
 			'options' => array(
@@ -440,7 +440,7 @@ function rosa2_add_fonts_section_to_customify_config( $config ) {
 		$config['sections'] = array();
 	}
 
-	$config['sections'] = $config['sections'] + $rosa2_fonts_section;
+	$config['sections'] = $config['sections'] + $anima_fonts_section;
 
 	return $config;
 }

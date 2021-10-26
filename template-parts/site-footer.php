@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Rosa2
+ * @package Anima
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <footer id="colophon" class="site-footer  site-footer--fallback  sm-variation-10">
 	<div class="site-footer__inner-container">
 		<?php
-		rosa2_footer_the_copyright();
+		anima_footer_the_copyright();
 
 		if ( has_nav_menu( 'footer' ) ) { ?>
 			<nav class="footer-navigation" aria-label="<?php esc_attr_e( 'Footer Menu', '__theme_txtd' ); ?>">

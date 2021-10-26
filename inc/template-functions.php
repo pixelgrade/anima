@@ -2,7 +2,7 @@
 /**
  * Functions which enhance the theme by hooking into WordPress.
  *
- * @package Rosa2
+ * @package Anima
  */
 
 // If this file is called directly, abort.
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param array $classes Classes for the body element.
  * @return array
  */
-function rosa2_body_classes( $classes ) {
+function anima_body_classes( $classes ) {
 
 	$classes[] = 'is-loading';
 
@@ -27,7 +27,7 @@ function rosa2_body_classes( $classes ) {
 
 	$classes[] = 'has-novablocks-header-transparent';
 
-	if ( rosa2_first_block_is( array(
+	if ( anima_first_block_is( array(
 		'novablocks/hero',
 		'novablocks/media',
 		'novablocks/slideshow',
@@ -38,11 +38,11 @@ function rosa2_body_classes( $classes ) {
 		$classes[] = 'has-no-spacing-top';
 	}
 
-	if ( rosa2_remove_site_padding_bottom() ) {
+	if ( anima_remove_site_padding_bottom() ) {
 		$classes[] = 'has-no-padding-bottom';
 	}
 
-	if ( rosa2_has_moderate_media_card_after_hero() ) {
+	if ( anima_has_moderate_media_card_after_hero() ) {
 		$classes[] = 'has-moderate-media-card-after-hero';
 	}
 
@@ -50,7 +50,7 @@ function rosa2_body_classes( $classes ) {
 		$classes[] = 'is-dark-mode';
 	}
 
-	if ( is_single() && rosa2_is_active_sidebar( 'sidebar-1' ) ) {
+	if ( is_single() && anima_is_active_sidebar( 'sidebar-1' ) ) {
 		$classes[] = 'has-sidebar';
 	}
 
@@ -68,14 +68,14 @@ function rosa2_body_classes( $classes ) {
 
 	return $classes;
 }
-add_filter( 'body_class', 'rosa2_body_classes' );
+add_filter( 'body_class', 'anima_body_classes' );
 
 /**
  * Add a pingback url auto-discovery header for single posts, pages, or attachments.
  */
-function rosa2_pingback_header() {
+function anima_pingback_header() {
 	if ( is_singular() && pings_open() ) {
 		printf( '<link rel="pingback" href="%s">', esc_url( get_bloginfo( 'pingback_url' ) ) );
 	}
 }
-add_action( 'wp_head', 'rosa2_pingback_header' );
+add_action( 'wp_head', 'anima_pingback_header' );

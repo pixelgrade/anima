@@ -38,9 +38,13 @@
     }
   }
   
-  .novablocks-content > .product {
-    --block-content-start: ws !important;
-    --block-content-end: we !important;
+  .novablocks-content {
+  
+    > .woocommerce-notices-wrapper,
+    > .product {
+      --block-content-start: ws !important;
+      --block-content-end: we !important;
+    }
   }
 }
 

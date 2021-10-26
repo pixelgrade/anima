@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Rosa2
+ * @package Anima
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -16,19 +16,19 @@ if ( 'post' === get_post_type() ) { ?>
 		<?php
 
 		if ( pixelgrade_option( 'display_categories_on_archive', true ) ) {
-            rosa2_categories_posted_in();
+            anima_categories_posted_in();
 		}
 
         if ( pixelgrade_option( 'display_tags_on_archive', false ) ) {
-            rosa2_tags_posted_in();
+            anima_tags_posted_in();
 		}
 
     	if ( pixelgrade_option( 'display_date_on_archive', true ) ) {
-		    rosa2_posted_on();
+		    anima_posted_on();
     	}
 
     	if ( pixelgrade_option( 'display_author_on_archive', false ) ) {
-		    rosa2_posted_by();
+		    anima_posted_by();
 	    }
         ?>
 	</div><!-- .entry-meta -->
