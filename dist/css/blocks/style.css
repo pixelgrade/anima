@@ -115,8 +115,8 @@
   --connection-color: var(--sm-bg-color-3);
   --bullet-width: calc(var(--current-font-size) * var(--current-line-height));
   --bullet-height: var(--bullet-width);
-  --bullet-bg-color: var(--sm-current-bg-color);
-  --bullet-color: var(--sm-current-fg1-color);
+  --bullet-bg-color: var(--sm-bg-color-1);
+  --bullet-color: var(--sm-fg1-color-1);
   --bullet-border-outline: 0.2em;
   --bullet-spacing: 0.4em;
   --bullet-area-width: var(--bullet-width);
@@ -130,14 +130,14 @@
   .nb-list * {
     list-style: none; }
   .nb-list.sm-color-signal-1 {
-    --bullet-color: var(--sm-current-accent-color); }
+    --bullet-color: var(--sm-accent-color-1); }
   .nb-list.sm-color-signal-2 {
-    --bullet-color: var(--sm-current-bg-color);
-    --bullet-bg-color: var(--sm-current-fg1-color);
+    --bullet-color: var(--sm-bg-color-1);
+    --bullet-bg-color: var(--sm-fg1-color-1);
     --bullet-border-outline: 0.4em; }
   .nb-list.sm-color-signal-3 {
-    --bullet-color: var(--sm-current-bg-color);
-    --bullet-bg-color: var(--sm-current-accent-color);
+    --bullet-color: var(--sm-bg-color-1);
+    --bullet-bg-color: var(--sm-accent-color-1);
     --bullet-border-outline: 0.4em; }
 
 ul.nb-list {
@@ -154,7 +154,7 @@ ul.nb-list {
       height: var(--bullet-height);
       background-color: var(--bullet-color);
       border-radius: 50%;
-      box-shadow: 0 0 0 var(--bullet-border-width) var(--bullet-bg-color), 0 0 0 var(--bullet-border-outline) var(--page-background-color, var(--sm-current-bg-color)); }
+      box-shadow: 0 0 0 var(--bullet-border-width) var(--bullet-bg-color), 0 0 0 var(--bullet-border-outline) var(--page-background-color, var(--sm-bg-color-1)); }
   ul.nb-list:not(.list-checkmark-style) {
     --bullet-width: 0.333em;
     --bullet-height: var(--bullet-width);
@@ -221,7 +221,7 @@ ul.nb-list {
     height: var(--bullet-height);
     background-color: var(--bullet-bg-color);
     border-radius: 50%;
-    box-shadow: 0 0 0 4px var(--sm-current-bg-color); }
+    box-shadow: 0 0 0 4px var(--sm-bg-color-1); }
   ul.nb-list.list-bullet-style.is-style-timeline {
     position: relative;
     list-style-type: none; }
@@ -272,7 +272,7 @@ ol.nb-list {
   ol.nb-list.is-style-timeline[class] > li:last-child {
     margin-left: calc(var(--list-spacing) * -0.5);
     padding-left: calc(var(--list-spacing) * 0.5);
-    box-shadow: calc(var(--divider-weight) * -1.5) 0 0 0 var(--sm-current-bg-color); }
+    box-shadow: calc(var(--divider-weight) * -1.5) 0 0 0 var(--sm-bg-color-1); }
     ol.nb-list.is-style-timeline[class] > li:last-child:before {
       left: calc( -0.5 * var(--list-spacing)); }
     ol.nb-list.is-style-timeline[class] > li:last-child:after {
@@ -283,7 +283,7 @@ ol.nb-list {
       left: calc( -0.5 * var(--list-padding) + var(--bullet-width) * 0.5);
       transform: translateX(-50%);
       top: calc(var(--bullet-height) * 0.5);
-      background-color: var(--sm-current-bg-color); }
+      background-color: var(--sm-bg-color-1); }
   ol.nb-list.is-style-divider {
     padding-left: 0; }
     ol.nb-list.is-style-divider li {
@@ -324,7 +324,7 @@ ol.nb-list {
   position: relative;
   list-style-type: none; }
   .nb-list.is-style-timeline.list-checkmark-style li:last-child {
-    box-shadow: var(--sm-current-bg-color) calc(-1 * var(--list-spacing)) 0 0 0; }
+    box-shadow: var(--sm-bg-color-1) calc(-1 * var(--list-spacing)) 0 0 0; }
   .nb-list.is-style-timeline:not(.list-checkmark-style) li:last-child:after {
     content: '';
     position: absolute;
@@ -332,7 +332,7 @@ ol.nb-list {
     height: 100%;
     left: calc(-1 * (var(--list-spacing) - var(--icon-width)));
     top: 0.55em;
-    background-color: var(--sm-current-bg-color); }
+    background-color: var(--sm-bg-color-1); }
   .nb-list.is-style-timeline:before {
     content: '';
     position: absolute;
