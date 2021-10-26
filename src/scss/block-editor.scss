@@ -87,28 +87,15 @@ $assets-folder-path: '../../assets';
 .editor-styles-wrapper[class] {
 
      // Post Title: General   
-     // Before
-     // <div class="edit-post-visual-editor__post-title-wrapper">
-     //  <textarea class="editor-post-title__input">...</textarea>
-     // </div>
-     // After Gutenberg 11.7.1
-     // <div class="edit-post-visual-editor__post-title-wrapper">
-     //  <h1 class="editor-post-title__input">...</h1>
-     // </div>
     .editor-post-title__block,
     .edit-post-visual-editor__post-title-wrapper {
         .editor-post-title__input {
             margin-top: 1em;
-
             color: var(--sm-current-fg2-color);
 
             [data-rich-text-placeholder] {
                 font-size: revert;
             }
-
-            // &:focus {
-            //     color: var(--sm-current-fg2-color);
-            // }
         }
     }
 
