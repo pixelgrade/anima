@@ -20,6 +20,8 @@ if ( $values_store_mode === 'option' ) {
 	$anima_options = get_theme_mod( $options_name );
 }
 
+$anima_options = json_decode( json_encode( $anima_options ), true );
+
 $body_font_size = 16;
 $content_font_size = 18;
 
