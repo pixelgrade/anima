@@ -41,10 +41,6 @@
     content: "-" counters(submenu, "- ", none);
     counter-increment: submenu; }
 
-.wp-block-group:not([class*='sm-variation']):not([class*='alignfull']) > [class*="__inner-container"] {
-  padding-left: 0;
-  padding-right: 0; }
-
 /* Image Block */
 .wp-block-image img {
   display: block; }
@@ -1190,20 +1186,17 @@ body:not(.has-sidebar) {
 body {
   --offset-addon: var(--sm-content-inset); }
 
-.novablocks-sidebar > :not(:first-child) {
-  margin-top: var(--theme-spacing-fluid-small); }
+.novablocks-sidebar--small * {
+  --font-size-modifier: 0.75; }
 
-.novablocks-sidebar--small {
-  --sidebar-font-size-modifier: 0.75; }
+.novablocks-sidebar--medium * {
+  --font-size-modifier: 0.85; }
 
-.novablocks-sidebar--medium {
-  --sidebar-font-size-modifier: 0.85; }
-
-.novablocks-sidebar--large {
-  --sidebar-font-size-modifier: 1; }
+.novablocks-sidebar--large * {
+  --font-size-modifier: 1; }
 
 .novablocks-sidebar * {
-  --font-size-modifier: var(--sidebar-font-size-modifier);
+  --current-font-size: var(--final-font-size);
   font-size: var(--current-font-size); }
 
 .novablocks-sidebar .widget > :not(:first-child) {

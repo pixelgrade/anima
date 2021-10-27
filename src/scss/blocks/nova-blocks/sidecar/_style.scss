@@ -5,23 +5,21 @@ body {
 }
 
 .novablocks-sidebar {
-	
-	@include space-children-y( var(--theme-spacing-fluid-small) );
-	
-	&--small {
-		--sidebar-font-size-modifier: 0.75;
+
+	&--small * {
+		--font-size-modifier: 0.75;
 	}
 	
-	&--medium {
-		--sidebar-font-size-modifier: 0.85;
+	&--medium * {
+		--font-size-modifier: 0.85;
 	}
 	
-	&--large {
-		--sidebar-font-size-modifier: 1;
+	&--large * {
+		--font-size-modifier: 1;
 	}
 	
 	* {
-		--font-size-modifier: var(--sidebar-font-size-modifier);
+		--current-font-size: var(--final-font-size);
 		font-size: var(--current-font-size);
 	}
 	
