@@ -1186,14 +1186,13 @@ body:not(.has-sidebar) {
 body {
   --offset-addon: var(--sm-content-inset); }
 
-.novablocks-sidebar--small * {
-  --font-size-modifier: 0.75; }
-
-.novablocks-sidebar--medium * {
-  --font-size-modifier: 0.85; }
-
-.novablocks-sidebar--large * {
-  --font-size-modifier: 1; }
+@media only screen and (min-width: 1024px) {
+  .novablocks-sidebar--small * {
+    --font-size-modifier: 0.75; }
+  .novablocks-sidebar--medium * {
+    --font-size-modifier: 0.85; }
+  .novablocks-sidebar--large * {
+    --font-size-modifier: 1; } }
 
 .novablocks-sidebar * {
   --current-font-size: var(--final-font-size);

@@ -6,16 +6,19 @@ body {
 
 .novablocks-sidebar {
 
-	&--small * {
-		--font-size-modifier: 0.75;
-	}
-	
-	&--medium * {
-		--font-size-modifier: 0.85;
-	}
-	
-	&--large * {
-		--font-size-modifier: 1;
+	@include above(lap) {
+
+		&--small * {
+			--font-size-modifier: 0.75;
+		}
+
+		&--medium * {
+			--font-size-modifier: 0.85;
+		}
+
+		&--large * {
+			--font-size-modifier: 1;
+		}
 	}
 	
 	* {
