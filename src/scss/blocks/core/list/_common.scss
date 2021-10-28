@@ -59,8 +59,8 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 	
 	--bullet-width: calc(var(--current-font-size) * var(--current-line-height));
 	--bullet-height: var(--bullet-width);
-	--bullet-bg-color: var(--sm-current-bg-color);
-	--bullet-color: var(--sm-current-fg1-color);
+	--bullet-bg-color: var(--sm-bg-color-1);
+	--bullet-color: var(--sm-fg1-color-1);
 	--bullet-border-outline: 0.2em;
 	
 	--bullet-spacing: 0.4em;
@@ -88,7 +88,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 	// Bullet, checkmark or number will
 	// use accent color.
 	&.sm-color-signal-1 {
-		--bullet-color: var(--sm-current-accent-color);
+		--bullet-color: var(--sm-accent-color-1);
 	}
 	
 	// SIGNAL MEDIUM
@@ -96,8 +96,8 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 	// use current background color,
 	// while it's background will use text color.
 	&.sm-color-signal-2 {
-		--bullet-color: var(--sm-current-bg-color);
-		--bullet-bg-color: var(--sm-current-fg1-color);
+		--bullet-color: var(--sm-bg-color-1);
+		--bullet-bg-color: var(--sm-fg1-color-1);
 		--bullet-border-outline: 0.4em;
 	}
 	
@@ -106,8 +106,8 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 	// use current background color,
 	// while it's background will use accent color.
 	&.sm-color-signal-3 {
-		--bullet-color: var(--sm-current-bg-color);
-		--bullet-bg-color: var(--sm-current-accent-color);
+		--bullet-color: var(--sm-bg-color-1);
+		--bullet-bg-color: var(--sm-accent-color-1);
 		--bullet-border-outline: 0.4em;
 	}
 }
@@ -159,7 +159,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 
 					background-color: var(--bullet-color);
 					border-radius: 50%;
-					box-shadow: 0 0 0 var(--bullet-border-width) var(--bullet-bg-color), 0 0 0 var(--bullet-border-outline) var(--page-background-color, var(--sm-current-bg-color));
+					box-shadow: 0 0 0 var(--bullet-border-width) var(--bullet-bg-color), 0 0 0 var(--bullet-border-outline) var(--page-background-color, var(--sm-bg-color-1));
 				}
 			}
 			
@@ -298,7 +298,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 						height: var(--bullet-height);
 						background-color: var(--bullet-bg-color);
 						border-radius: 50%;
-						box-shadow: 0 0 0 4px var(--sm-current-bg-color);
+						box-shadow: 0 0 0 4px var(--sm-bg-color-1);
 					}
 				}
 			}
@@ -358,7 +358,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 				}
 			}
 			
-			// For this SIGNALS, we don't need
+			// For these SIGNALS, we don't need
 			// counter to be preceded by 0.
 			&.sm-color-signal-2,
 			&.sm-color-signal-3 {
@@ -460,7 +460,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 					&:last-child {
 						margin-left: calc(var(--list-spacing) * -0.5 );
 						padding-left: calc(var(--list-spacing) * 0.5);
-						box-shadow: calc(var(--divider-weight) * -1.5) 0 0 0 var(--sm-current-bg-color);
+						box-shadow: calc(var(--divider-weight) * -1.5) 0 0 0 var(--sm-bg-color-1);
 						
 						&:before {
 							left: calc( -0.5 * var(--list-spacing));
@@ -476,7 +476,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 							left: calc( -0.5 * var(--list-padding) + var(--bullet-width) * 0.5 );
 							transform: translateX(-50%);
 							top: calc(var(--bullet-height) * 0.5);
-							background-color: var(--sm-current-bg-color);
+							background-color: var(--sm-bg-color-1);
 						}
 					}
 
@@ -561,7 +561,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 		list-style-type: none;
 
 		&#{$is-list-checkmark-selector} li:last-child {
-			box-shadow: var(--sm-current-bg-color) calc(-1 * var(--list-spacing)) 0 0 0;
+			box-shadow: var(--sm-bg-color-1) calc(-1 * var(--list-spacing)) 0 0 0;
 		}
 
 		&:not(#{$is-list-checkmark-selector}) li:last-child {
@@ -573,7 +573,7 @@ $is-list-checkmark-selector: '.list-checkmark-style' !default;
 				height: 100%;
 				left: calc(-1 * (var(--list-spacing) - var(--icon-width)));
 				top: 0.55em;
-				background-color: var(--sm-current-bg-color);
+				background-color: var(--sm-bg-color-1);
 			}
 		}
 		

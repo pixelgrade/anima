@@ -11,12 +11,6 @@ $assets-folder-path: '../../assets';
     color: inherit;
 }
 
-.editor-post-title .editor-post-title__input {
-    @include apply-font(heading-1);
-    --current-font-weight: 800;
-    --current-line-height: 1.2;
-}
-
 /* Typography */
 :root {
     --font-size: var(--theme-body-font-size);
@@ -79,9 +73,17 @@ $assets-folder-path: '../../assets';
     }
 }
 
+
+// Editor Post Title
+.editor-post-title .editor-post-title__input {
+    @include apply-font(heading-1);
+    --current-font-weight: 800;
+    --current-line-height: 1.2;
+}
+
 .editor-styles-wrapper[class] {
 
-     // Post Title: General   
+     // General
     .editor-post-title__block,
     .edit-post-visual-editor__post-title-wrapper {
         .editor-post-title__input {
@@ -94,7 +96,7 @@ $assets-folder-path: '../../assets';
         }
     }
 
-    // Post Title: Pages
+    // Pages
     .post-type-page & {
         .editor-post-title__block,
         .edit-post-visual-editor__post-title-wrapper {
