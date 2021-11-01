@@ -452,20 +452,23 @@
 
 @media only screen and (min-width: 1440px) {
   .u-collection-title-sideways .novablocks-collection__title {
-    --current-font-weight: 400;
     position: absolute;
     bottom: 100%;
-    right: 100%;
+    right: calc(100% + var(--theme-spacing-smallest));
     width: auto !important;
-    margin-right: calc(var(--novablocks-spacing) * 0.33);
-    font-size: 1rem;
+    margin: 0 !important;
+    white-space: nowrap;
     transform-origin: 100% 100%;
     transform: rotate(-90deg);
-    white-space: nowrap; }
-  .u-collection-title-sideways .nb-collection__layout[class][class] {
-    --nb-block-top-spacing: 0; }
-  .u-collection-title-sideways .novablocks-sidebar .novablocks-collection__title {
-    right: calc(100% + var(--nb-wrapper-sides-spacing)); } }
+    --font-size: var(--theme-heading-5-font-size);
+    --current-font-size: var(--final-font-size);
+    --current-font-family: var(--theme-heading-5-font-family);
+    --current-font-weight: var(--theme-heading-5-font-weight);
+    --current-font-style: var(--theme-heading-5-font-style);
+    --current-line-height: var(--theme-heading-5-line-height);
+    --current-letter-spacing: var(--theme-heading-5-letter-spacing);
+    --current-text-transform: var(--theme-heading-5-text-transform);
+    --current-color: var(--theme-heading-5-color); } }
 
 .admin-bar {
   --admin-bar-height: 32px; }

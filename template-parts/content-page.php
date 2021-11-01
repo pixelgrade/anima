@@ -12,8 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $page_markup =
-	'<!-- wp:novablocks/sidecar {"layout":"no-sidebar", "className":"ignore-block"} -->' .
-	'<!-- wp:novablocks/sidecar-area {"className":"novablocks-content entry-content"} -->' .
+	'<!-- wp:novablocks/sidecar {"sidebarPosition":"none"} -->' .
+	'<!-- wp:novablocks/sidecar-area -->' .
 	anima_get_content_markup().
 	'<!-- wp:novablocks/post-comments --><!-- /wp:novablocks/post-comments -->' .
 	'<!-- /wp:novablocks/sidecar-area -->' .

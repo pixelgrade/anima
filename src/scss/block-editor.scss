@@ -26,10 +26,6 @@ $assets-folder-path: '../../assets';
     @import "elements/forms";
     @import "elements/lists";
 
-    [class*="__inner-container"] {
-        @include wrapper;
-    }
-
     // increased specificity selector to overwrite default styles
     &[class] {
         @import "elements/headings";
@@ -173,15 +169,6 @@ $assets-folder-path: '../../assets';
         .block-editor-block-list__layout {
             justify-content: flex-end;
         }
-    }
-}
-
-.block-editor-block-list__layout {
-    > &:not([data-type="novablocks/sidecar"]),
-    > &:not(.alignfull),
-    > &:not(.alignwide) {
-        margin-left: auto !important;
-        margin-right: auto !important;
     }
 }
 

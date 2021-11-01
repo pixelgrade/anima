@@ -19,8 +19,8 @@ get_header();
 		<main id="main" class="site-main">
 
 			<?php echo do_blocks(
-				'<!-- wp:novablocks/sidecar { "className":"alignwide", "sidebarWidth":"medium", "lastItemIsSticky":true} -->' .
-				'<!-- wp:novablocks/sidecar-area {"className":"novablocks-content entry-content"} -->' .
+				'<!-- wp:novablocks/sidecar -->' .
+				'<!-- wp:novablocks/sidecar-area -->' .
 				anima_get_home_content_markup() .
 				'<!-- /wp:novablocks/sidecar-area -->' .
 				'<!-- /wp:novablocks/sidecar -->'

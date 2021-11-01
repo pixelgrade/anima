@@ -3,30 +3,19 @@
 	.u-collection-title-sideways {
 		
 		.novablocks-collection__title {
-			
-			--current-font-weight: 400;
-			
 			position: absolute;
 			bottom: 100%;
-			right: 100%;
+			right: calc(100% + var(--theme-spacing-smallest));
 			
 			width: auto !important;
-			margin-right: calc(var(--novablocks-spacing) * 0.33);
-			font-size: 1rem;
+			margin: 0 !important;
+
+			white-space: nowrap;
+
 			transform-origin: 100% 100%;
 			transform: rotate(-90deg);
-			white-space: nowrap;
-		}
-		
-		.nb-collection__layout[class][class] {
-			--nb-block-top-spacing: 0;
-		}
-		
-		.novablocks-sidebar {
-			
-			.novablocks-collection__title {
-				right: calc(100% + var(--nb-wrapper-sides-spacing));
-			}
+
+			@include apply-font(heading-5);
 		}
 	}
 }
