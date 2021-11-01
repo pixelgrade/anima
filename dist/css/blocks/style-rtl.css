@@ -342,6 +342,42 @@ ol.nb-list {
 .nb-list.list-no-marker:before {
   content: none; }
 
+/* ==========================================================================
+   #NAVIGATION
+   ========================================================================== */
+nav.wp-block-navigation ul.wp-block-navigation__container {
+  padding-right: 0;
+  list-style: none; }
+  nav.wp-block-navigation ul.wp-block-navigation__container > :not(:first-child) {
+    margin-top: var(--theme-spacing-fluid-tiny); }
+
+nav.wp-block-navigation a:not(:hover) {
+  text-decoration-color: var(--sm-current-bg-color); }
+
+nav.wp-block-navigation:not(.is-vertical) ul.wp-block-navigation__container {
+  display: flex; }
+  nav.wp-block-navigation:not(.is-vertical) ul.wp-block-navigation__container > :not(:first-child) {
+    margin-right: calc( var(--nb-navigation-item-spacing) * var(--nb-navigation-item-spacing-multiplier, 1)); }
+  nav.wp-block-navigation:not(.is-vertical) ul.wp-block-navigation__container > :not(:first-child) {
+    margin-top: 0; }
+  nav.wp-block-navigation:not(.is-vertical) ul.wp-block-navigation__container li.wp-block-navigation-item {
+    display: inline-block;
+    clear: none; }
+  nav.wp-block-navigation:not(.is-vertical) ul.wp-block-navigation__container .block-list-appender {
+    margin-left: 0; }
+
+nav.wp-block-navigation:not(.is-vertical).items-justified-left ul.wp-block-navigation__container {
+  justify-content: flex-start; }
+
+nav.wp-block-navigation:not(.is-vertical).items-justified-center ul.wp-block-navigation__container {
+  justify-content: center; }
+
+nav.wp-block-navigation:not(.is-vertical).items-justified-right ul.wp-block-navigation__container {
+  justify-content: flex-end; }
+
+nav.wp-block-navigation:not(.is-vertical).items-justified-space-between ul.wp-block-navigation__container {
+  justify-content: space-between; }
+
 .wp-block-jetpack-subscriptions form {
   display: flex;
   align-items: stretch; }

@@ -1,0 +1,87 @@
+/* ==========================================================================
+   #NAVIGATION
+   ========================================================================== */
+
+// Style the Navigation block as a List block
+// without any marker and tightened space
+
+// FRONTEND block HTML structure
+// nav.wp-block-navigation
+// 	ul.wp-block-navigation__container
+// 		li.wp-block-navigation-item
+// 			a.wp-block-navigation-item__content
+// 				span.wp-block-navigation-item__label
+
+// EDITOR block HTML structure
+// nav.wp-block-navigation
+// 	div.wp-block-navigation__container
+// 		div.wp-block-navigation-item
+// 			a.wp-block-navigation-item__content
+
+$nav-block: 'nav.wp-block-navigation' !default;
+$nav-ul-container: 'ul.wp-block-navigation__container' !default;
+$nav-list-item: 'li.wp-block-navigation-item' !default;
+
+#{$nav-block} {
+	#{$nav-ul-container} {
+		padding-left: 0;
+		list-style: none;
+		@include space-children-y( var(--theme-spacing-fluid-tiny) );
+
+		#{$nav-list-item} {
+
+		}
+	}
+
+	a {
+		&:not(:hover) {
+			// Hide any link decoration by-default
+			text-decoration-color: var(--sm-current-bg-color);
+		}
+	}
+
+	// Variations of the Navigation block
+	// Vertical - links shown in a column
+	&.is-vertical {
+
+	}
+
+
+	// Horizontal – links shown in a row
+	&:not(.is-vertical) {
+		#{$nav-ul-container} {
+			display:flex; 		
+			@include space-children-x( calc( var(--nb-navigation-item-spacing) * var(--nb-navigation-item-spacing-multiplier, 1)) );
+			@include space-children-y( 0 );
+			
+			#{$nav-list-item} {
+				display: inline-block;
+				clear: none;
+			}
+
+			// @todo: find why the block appender 
+			// broke the items justification
+			// and margin seem to fix it
+			.block-list-appender {
+				margin-right: 0;
+			}
+		}
+
+		// Items justification
+		&.items-justified-left #{$nav-ul-container} {
+		    justify-content: flex-start
+		}
+
+		&.items-justified-center #{$nav-ul-container} {
+		    justify-content: center
+		}
+
+		&.items-justified-right #{$nav-ul-container} {
+		    justify-content: flex-end
+		}
+
+		&.items-justified-space-between #{$nav-ul-container} {
+		    justify-content: space-between
+		}
+	}
+}			
