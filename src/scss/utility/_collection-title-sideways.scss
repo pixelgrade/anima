@@ -2,7 +2,7 @@
 	
 	.u-collection-title-sideways {
 		
-		.novablocks-collection__title {
+		.nb-collection__title {
 			position: absolute;
 			bottom: 100%;
 			right: calc(100% + var(--theme-spacing-smallest));
@@ -16,6 +16,10 @@
 			transform: rotate(-90deg);
 
 			@include apply-font(heading-5);
+		}
+
+		.nb-collection__header:not(.nb-collection__header--has-description) + .nb-collection__body {
+			--nb-block-top-spacing: 0;
 		}
 	}
 }

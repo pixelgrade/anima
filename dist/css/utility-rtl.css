@@ -451,7 +451,7 @@
   --nb-block-top-spacing: 0 !important; }
 
 @media only screen and (min-width: 1440px) {
-  .u-collection-title-sideways .novablocks-collection__title {
+  .u-collection-title-sideways .nb-collection__title {
     position: absolute;
     bottom: 100%;
     left: calc(100% + var(--theme-spacing-smallest));
@@ -468,7 +468,9 @@
     --current-line-height: var(--theme-heading-5-line-height);
     --current-letter-spacing: var(--theme-heading-5-letter-spacing);
     --current-text-transform: var(--theme-heading-5-text-transform);
-    --current-color: var(--theme-heading-5-color); } }
+    --current-color: var(--theme-heading-5-color); }
+  .u-collection-title-sideways .nb-collection__header:not(.nb-collection__header--has-description) + .nb-collection__body {
+    --nb-block-top-spacing: 0; } }
 
 .admin-bar {
   --admin-bar-height: 32px; }
