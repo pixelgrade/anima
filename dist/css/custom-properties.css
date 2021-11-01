@@ -161,10 +161,17 @@
   --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-normal); }
 
 :root {
-  --theme-links-transition-property: text-decoration-color;
+  --theme-links-transition-property1: text-decoration-color;
+  --theme-links-transition-property2: color;
   --theme-links-transition-duration: .25s;
-  --theme-links-transition-easing: cubic-bezier(0.42, 0, 0.58, 1);
-  --theme-links-transition: var(--theme-links-transition-property) var(--theme-links-transition-duration) var(--theme-links-transition-easing); }
+  --theme-links-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --theme-links-transition: 
+        var(--theme-links-transition-property1) 
+        var(--theme-links-transition-duration) 
+        var(--theme-links-transition-easing),
+        var(--theme-links-transition-property2) 
+        var(--theme-links-transition-duration) 
+        var(--theme-links-transition-easing); }
 
 :root {
   --theme-spacing-ratio: var(--sm-spacing-level, 1);
