@@ -8,7 +8,7 @@
 }
 
 .nova-food-menu__section:not(:first-child) {
-  margin-top: var(--theme-spacing-small);
+  margin-top: var(--theme-spacing-normal);
 }
 
 .nova-food-menu-item__title {
@@ -17,7 +17,7 @@
   .item-title {
     color: inherit;
     @include apply-font(heading-4);
-    padding-right: var(--theme-spacing-tiny);
+    padding-right: var(--theme-spacing-smallest);
   }
 
   &:before {
@@ -26,7 +26,7 @@
 }
 
 .nova-food-menu-item__prices {
-  padding-left: var(--theme-spacing-tiny);
+  padding-left: var(--theme-spacing-smallest);
 
   font-feature-settings: 'tnum' on, 'lnum' on;
 }
@@ -53,7 +53,7 @@
 }
 
 .nova-food-menu-item--highlighted {
-  --item-padding: var( --theme-spacing-tiny );
+  --item-padding: var( --theme-spacing-smallest );
 
   @include above(tablet) {
     --item-padding: var( --theme-spacing );

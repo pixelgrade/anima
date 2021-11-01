@@ -70,7 +70,7 @@
 }
 
 .woocommerce-products-header {
-    margin-bottom: var(--theme-spacing-medium);
+    margin-bottom: var(--theme-spacing-large);
     
     --block-content-start: ws !important;
     --block-content-end: we !important;
@@ -94,7 +94,7 @@
 
 .woocommerce-products-header__title {
     text-align: center;
-    margin-bottom: var(--theme-spacing-small);
+    margin-bottom: var(--theme-spacing-normal);
 }
 
 .woocommerce-ordering {
@@ -108,7 +108,7 @@
 
         @include select;
 
-        padding: var(--theme-spacing-tiny) 0;
+        padding: var(--theme-spacing-smallest) 0;
         background-position: calc(100% - var(--select-icon-size)) center, 100% center;
 
         border: 0;
@@ -160,7 +160,7 @@
 .woocommerce-loop-category__title {
     @include apply-font(heading-4);
     color: var(--sm-current-fg1-color);
-    margin-top: var(--theme-spacing-tiny);
+    margin-top: var(--theme-spacing-smallest);
 }
 
 .woocommerce-result-count {

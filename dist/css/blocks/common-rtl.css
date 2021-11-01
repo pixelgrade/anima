@@ -127,7 +127,7 @@
   overflow-wrap: break-word; }
 
 :root {
-  --wp-block-columns-spacing: calc(var(--theme-spacing-fluid-medium) + var(--theme-spacing-fluid-tiny)); }
+  --wp-block-columns-spacing: calc(var(--theme-spacing-fluid-large) + var(--theme-spacing-fluid-smallest)); }
 
 .wp-block-columns {
   display: flex; }
@@ -660,8 +660,8 @@
 
 /* Blockquote Block */
 .wp-block-quote {
-  padding-right: var(--theme-spacing-medium);
-  padding-left: var(--theme-spacing-medium);
+  padding-right: var(--theme-spacing-large);
+  padding-left: var(--theme-spacing-large);
   border-right: 3px solid var(--sm-current-accent-color); }
   .wp-block-quote > :not(:first-child) {
     margin-top: var(--theme-spacing); }
@@ -1273,7 +1273,7 @@ ol[data-nb="list"] {
   transform: translateY(-50%); }
 
 [data-nb="list"][data-connection-style="is-style-divider"] li {
-  --element-spacing: var(--theme-spacing-fluid-default); }
+  --element-spacing: var(--theme-spacing-fluid-smaller); }
   [data-nb="list"][data-connection-style="is-style-divider"] li:not(:last-child) {
     border-bottom: var(--divider-weight) solid var(--connection-color);
     padding-bottom: var(--element-spacing); }
@@ -1324,7 +1324,7 @@ nav.wp-block-navigation div.wp-block-navigation__container {
   padding-right: 0;
   list-style: none; }
   nav.wp-block-navigation div.wp-block-navigation__container > :not(:first-child) {
-    margin-top: var(--theme-spacing-fluid-tiny); }
+    margin-top: var(--theme-spacing-fluid-smallest); }
 
 nav.wp-block-navigation a:not(:hover) {
   text-decoration-color: var(--sm-current-bg-color); }
@@ -1433,7 +1433,7 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between div.wp-b
 html:root {
   --nova-food-menu-item-highlight-color: var(--sm-current-fg2-color);
   --nb-spacing: var(--theme-content-spacing);
-  --nb-media-spacing: var(--theme-spacing-fluid-large);
+  --nb-media-spacing: var(--theme-spacing-fluid-larger);
   --nb-sides-spacings: var(--theme-wrapper-sides-spacing);
   --nb-content-width-wide: var(--theme-content-width-wide);
   --nb-navigation-item-spacing: var(--theme-header-links-spacing);

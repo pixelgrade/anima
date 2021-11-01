@@ -157,8 +157,8 @@
 :root {
   --theme-content-width-wide-addon: var(--sm-site-container-width, 75);
   --theme-content-width-wide: calc(var(--theme-content-width-wide-addon) * var(--theme-body-final-font-size));
-  --theme-content-spacing: var(--theme-spacing-fluid-small);
-  --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-small); }
+  --theme-content-spacing: var(--theme-spacing-fluid-normal);
+  --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-normal); }
 
 :root {
   --theme-links-transition-property: text-decoration-color;
@@ -169,32 +169,28 @@
 :root {
   --theme-spacing-ratio: var(--sm-spacing-level, 1);
   --spacing-x0: var(--theme-font-size-minimum-value-breakpoint);
-  --spacing-y0: 10;
+  --spacing-y0: 20;
   --spacing-x1: var(--theme-font-size-breakpoint);
-  --spacing-y1: calc(16 * var(--theme-spacing-ratio));
-  --spacing-y0-new: calc( var(--spacing-y1) - ( var(--spacing-y1) - var(--spacing-y0) ) );
-  --spacing-a: calc( ( var(--spacing-y1) - var(--spacing-y0-new) ) / ( var(--spacing-x1) - var(--spacing-x0) ) );
-  --spacing-b: calc( var(--spacing-y0-new) - var(--spacing-a) * var(--spacing-x0) );
-  --theme-spacing: calc( var(--spacing-y1) * 1px );
-  --theme-spacing-fluid: calc( var(--spacing-a) * 100vw + var(--spacing-b) * 1px );
-  --theme-spacing-micro:          calc( var( --theme-spacing ) * 0.25 );
-  --theme-spacing-fluid-micro:    calc( var( --theme-spacing-fluid ) * 0.25 );
-  --theme-spacing-tiny:          calc( var( --theme-spacing ) * 0.5 );
-  --theme-spacing-fluid-tiny:    calc( var( --theme-spacing-fluid ) * 0.5 );
-  --theme-spacing-default:          calc( var( --theme-spacing ) * 1 );
-  --theme-spacing-fluid-default:    calc( var( --theme-spacing-fluid ) * 1 );
-  --theme-spacing-xsmall:          calc( var( --theme-spacing ) * 1.5 );
-  --theme-spacing-fluid-xsmall:    calc( var( --theme-spacing-fluid ) * 1.5 );
-  --theme-spacing-small:          calc( var( --theme-spacing ) * 2 );
-  --theme-spacing-fluid-small:    calc( var( --theme-spacing-fluid ) * 2 );
-  --theme-spacing-medium:          calc( var( --theme-spacing ) * 3 );
-  --theme-spacing-fluid-medium:    calc( var( --theme-spacing-fluid ) * 3 );
-  --theme-spacing-large:          calc( var( --theme-spacing ) * 4 );
-  --theme-spacing-fluid-large:    calc( var( --theme-spacing-fluid ) * 4 );
-  --theme-spacing-xl:          calc( var( --theme-spacing ) * 5 );
-  --theme-spacing-fluid-xl:    calc( var( --theme-spacing-fluid ) * 5 );
-  --theme-spacing-xxl:          calc( var( --theme-spacing ) * 8 );
-  --theme-spacing-fluid-xxl:    calc( var( --theme-spacing-fluid ) * 8 ); }
+  --spacing-y1: calc(32 * var(--theme-spacing-ratio));
+  --spacing-y0-new: calc(var(--spacing-y1) - (var(--spacing-y1) - var(--spacing-y0)));
+  --spacing-a: calc((var(--spacing-y1) - var(--spacing-y0-new)) / (var(--spacing-x1) - var(--spacing-x0)));
+  --spacing-b: calc(var(--spacing-y0-new) - var(--spacing-a) * var(--spacing-x0));
+  --theme-spacing: calc(var(--spacing-y1) * 1px);
+  --theme-spacing-fluid: calc(var(--spacing-a) * 100vw + var(--spacing-b) * 1px);
+  --theme-spacing-smallest: calc(var(--theme-spacing) * 0.25);
+  --theme-spacing-fluid-smallest: calc(var(--theme-spacing-fluid) * 0.25);
+  --theme-spacing-smaller: calc(var(--theme-spacing) * 0.5);
+  --theme-spacing-fluid-smaller: calc(var(--theme-spacing-fluid) * 0.5);
+  --theme-spacing-small: calc(var(--theme-spacing) * 0.75);
+  --theme-spacing-fluid-small: calc(var(--theme-spacing-fluid) * 0.75);
+  --theme-spacing-normal: calc(var(--theme-spacing) * 1);
+  --theme-spacing-fluid-normal: calc(var(--theme-spacing-fluid) * 1);
+  --theme-spacing-large: calc(var(--theme-spacing) * 1.5);
+  --theme-spacing-fluid-large: calc(var(--theme-spacing-fluid) * 1.5);
+  --theme-spacing-larger: calc(var(--theme-spacing) * 2);
+  --theme-spacing-fluid-larger: calc(var(--theme-spacing-fluid) * 2);
+  --theme-spacing-largest: calc(var(--theme-spacing) * 4);
+  --theme-spacing-fluid-largest: calc(var(--theme-spacing-fluid) * 4); }
 
 :root {
   --theme-transition-duration-slow: 1s;
@@ -272,5 +268,5 @@
   --theme-input-placeholder-opacity: .5;
   --theme-input-label-color: var(--sm-current-fg1-color);
   --theme-input-legend-color: var(--sm-current-fg1-color);
-  --theme-input-vertical-spacing: var(--theme-spacing-tiny);
-  --theme-input-horizontal-spacing: var(--theme-spacing-tiny); }
+  --theme-input-vertical-spacing: var(--theme-spacing-smallest);
+  --theme-input-horizontal-spacing: var(--theme-spacing-smallest); }

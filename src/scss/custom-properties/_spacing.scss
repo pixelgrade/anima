@@ -1,4 +1,3 @@
-
 // ATTENTION!
 // This file shouldn't be modified. Proceed with caution!
 
@@ -16,20 +15,20 @@
     --spacing-y1: calc(#{$theme-spacing-unit-value} * var(--theme-spacing-ratio));
 
     // solving a first degree equation: y = ax + b
-    --spacing-y0-new: calc( var(--spacing-y1) - ( var(--spacing-y1) - var(--spacing-y0) ) );
+    --spacing-y0-new: calc(var(--spacing-y1) - (var(--spacing-y1) - var(--spacing-y0)));
 
     // calculate the slope and the remainder for the equation
-    --spacing-a: calc( ( var(--spacing-y1) - var(--spacing-y0-new) ) / ( var(--spacing-x1) - var(--spacing-x0) ) );
-    --spacing-b: calc( var(--spacing-y0-new) - var(--spacing-a) * var(--spacing-x0) );
+    --spacing-a: calc((var(--spacing-y1) - var(--spacing-y0-new)) / (var(--spacing-x1) - var(--spacing-x0)));
+    --spacing-b: calc(var(--spacing-y0-new) - var(--spacing-a) * var(--spacing-x0));
 
 
     // x2 - viewport width at a given time
     // y2 - font size value we need to find out
-    --theme-spacing: calc( var(--spacing-y1) * 1px );
-    --theme-spacing-fluid: calc( var(--spacing-a) * 100vw + var(--spacing-b) * 1px );
+    --theme-spacing: calc(var(--spacing-y1) * 1px);
+    --theme-spacing-fluid: calc(var(--spacing-a) * 100vw + var(--spacing-b) * 1px);
 
     @each $name, $value in $theme-spacing-modifiers {
-        --theme-spacing-#{$name}:          calc( var( --theme-spacing ) * #{$value} );
-        --theme-spacing-fluid-#{$name}:    calc( var( --theme-spacing-fluid ) * #{$value} );
+        --theme-spacing-#{$name}: calc(var(--theme-spacing) * #{$value});
+        --theme-spacing-fluid-#{$name}: calc(var(--theme-spacing-fluid) * #{$value});
     }
 }

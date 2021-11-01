@@ -1,8 +1,8 @@
 @include specific(3) {
 
     .wc-block-grid {
-        --column-gap: var(--theme-spacing-small);
-        --row-gap: var(--theme-spacing-small);
+        --column-gap: var(--theme-spacing-normal);
+        --row-gap: var(--theme-spacing-normal);
         clear: both;
 
         @include below(tablet) {
@@ -89,8 +89,8 @@
 
     .wc-block-grid__product-onsale {
         position: absolute;
-        top: var(--theme-spacing-tiny);
-        left: var(--theme-spacing-tiny);
+        top: var(--theme-spacing-smallest);
+        left: var(--theme-spacing-smallest);
         z-index: 10;
 
         margin: 0;
@@ -103,7 +103,7 @@
     }
 
     .wc-block-grid__product-title {
-        margin-top: var(--theme-spacing-tiny);
+        margin-top: var(--theme-spacing-smallest);
         margin-bottom: 0;
         color: var(--sm-current-fg2-color);
         
@@ -157,7 +157,7 @@
     }
 
     .wc-block-grid__product > :not(:last-child) {
-        margin-bottom: var(--theme-spacing-tiny);
+        margin-bottom: var(--theme-spacing-smallest);
     }
 
     .wc-block-grid__product-price {

@@ -1,10 +1,10 @@
 .comments-area {
-    @include space-children-y( var(--theme-spacing-medium) );
+    @include space-children-y( var(--theme-spacing-large) );
 
     clear: both;
 
     &:not(:first-child) {
-        margin-top: var(--theme-spacing-fluid-medium);
+        margin-top: var(--theme-spacing-fluid-large);
     }
 }
 
@@ -19,7 +19,7 @@
 .comments-area__content {
     padding-top: var(--theme-content-spacing);
 
-    @include space-children-y( var(--theme-spacing-medium) );
+    @include space-children-y( var(--theme-spacing-large) );
 }
 
 .article-comments {

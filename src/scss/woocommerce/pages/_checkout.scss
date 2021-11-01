@@ -43,7 +43,7 @@
 
         content: "";
         position: absolute;
-        top: calc(-1 * var(--theme-spacing-large));
+        top: calc(-1 * var(--theme-spacing-larger));
         right: -100vw;
         bottom: 0;
         left: 55%;
@@ -136,7 +136,7 @@
     }
 
     label {
-      margin-bottom: var(--theme-spacing-tiny);
+      margin-bottom: var(--theme-spacing-smallest);
     }
 
     textarea {
@@ -145,8 +145,8 @@
   }
 
   & form {
-    margin-top: var(--theme-spacing-large);
-    padding-bottom: var(--theme-spacing-large);
+    margin-top: var(--theme-spacing-larger);
+    padding-bottom: var(--theme-spacing-larger);
   }
 
   .woocommerce-form-coupon-toggle,
@@ -325,7 +325,7 @@
 }
 
 .woocommerce-checkout-title[class] {
-  margin-bottom: var(--theme-spacing-tiny);
+  margin-bottom: var(--theme-spacing-smallest);
 
   a {
     color: inherit;
@@ -336,7 +336,7 @@
   list-style: none;
   padding-left: 0;
 
-  margin-bottom: var(--theme-spacing-small);
+  margin-bottom: var(--theme-spacing-normal);
 
   li {
     display: inline-block;
@@ -367,7 +367,7 @@
 }
 
 [id="customer_details"] {
-  margin-bottom: var(--theme-spacing-small);
+  margin-bottom: var(--theme-spacing-normal);
 
   @include above(tablet) {
     margin-bottom: 0;
@@ -393,13 +393,13 @@ ul.order_details[class] {
   display: flex;
   flex-wrap: wrap;
   padding-left: 0;
-  margin-left: calc(var(--theme-spacing-medium) * -1);
-  margin-bottom: var(--theme-spacing-medium);
+  margin-left: calc(var(--theme-spacing-large) * -1);
+  margin-bottom: var(--theme-spacing-large);
 
   > li {
-    margin-top: var(--theme-spacing-medium);
-    padding-left: var(--theme-spacing-medium);
-    padding-right: var(--theme-spacing-medium);
+    margin-top: var(--theme-spacing-large);
+    padding-left: var(--theme-spacing-large);
+    padding-right: var(--theme-spacing-large);
     margin-right: 0;
 
     @include below(tablet) {
@@ -428,14 +428,14 @@ ul.order_details[class] {
 .cart_totals  {
   h2 {
     @include apply-font(heading-3);
-    margin-bottom: var(--theme-spacing-small);
+    margin-bottom: var(--theme-spacing-normal);
   }
 }
 
 .cross-sells {
   h2 {
     @include apply-font(heading-4);
-    margin-bottom: var(--theme-spacing-small);
+    margin-bottom: var(--theme-spacing-normal);
   }
 }
 
@@ -566,7 +566,7 @@ ul.order_details[class] {
       background-color: transparent !important;
 
       @include below(tablet) {
-        padding: var(--theme-spacing-default);
+        padding: var(--theme-spacing-smaller);
       }
     }
   }
@@ -662,7 +662,7 @@ ul.order_details[class] {
   }
 
   .woocommerce-checkout * + & {
-    margin-top: var(--theme-spacing-large);
+    margin-top: var(--theme-spacing-larger);
   }
 }
 
@@ -682,15 +682,15 @@ ul.order_details[class] {
 .woocommerce-order-received {
 
   .woocommerce-customer-details .woocommerce-columns {
-    margin-top: calc( var(--theme-spacing-small) * -1 );
+    margin-top: calc( var(--theme-spacing-normal) * -1 );
 
     > * {
-      margin-top: var(--theme-spacing-small);
+      margin-top: var(--theme-spacing-normal);
     }
   }
 
   .woocommerce-column__title {
-    margin-bottom: var(--theme-spacing-small);
+    margin-bottom: var(--theme-spacing-normal);
   }
 }
 

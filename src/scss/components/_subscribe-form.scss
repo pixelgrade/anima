@@ -3,7 +3,7 @@
 	flex-direction: column;
 
 	@include apply-palette(2);
-	@include space-children-y(var(--theme-spacing-fluid-default));
+	@include space-children-y(var(--theme-spacing-fluid-smaller));
 	
 	button[type='submit'] {
 		@include apply-variation(6);
@@ -38,7 +38,7 @@
 		flex-direction: column;
 		
 		button[type='submit'] {
-			margin-top: var(--theme-spacing-tiny);
+			margin-top: var(--theme-spacing-smallest);
 		}
 	}
 	

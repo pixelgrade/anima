@@ -16,8 +16,8 @@
     }
 
     .children {
-        margin-left: var(--theme-spacing-medium);
-        margin-top: var(--theme-spacing-medium);
+        margin-left: var(--theme-spacing-large);
+        margin-top: var(--theme-spacing-large);
 
         .children {
             margin-left: 0;
@@ -42,7 +42,7 @@
 }
 
 .comment__body {
-    @include space-children-y( var(--theme-spacing-small) );
+    @include space-children-y( var(--theme-spacing-normal) );
     flex-grow: 1;
 }
 
@@ -71,7 +71,7 @@
 }
 
 .comment__content {
-    @include space-children-y( var(--theme-spacing-small) );
+    @include space-children-y( var(--theme-spacing-normal) );
 }
 
 .comment__reply {

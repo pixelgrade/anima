@@ -3,23 +3,23 @@ ul,
 ol {
     list-style-position: outside;
     margin-left: 0;
-    @include space-children-y( var(--theme-spacing-fluid-default) );
+    @include space-children-y( var(--theme-spacing-fluid-smaller) );
     
     ul,
     ol {
-        margin-top: var(--theme-spacing-fluid-tiny);
-        @include space-children-y( var(--theme-spacing-fluid-tiny) );
+        margin-top: var(--theme-spacing-fluid-smallest);
+        @include space-children-y( var(--theme-spacing-fluid-smallest) );
     }
 }
 
 ul {
-    --list-padding: var(--theme-spacing-fluid-xsmall);
+    --list-padding: var(--theme-spacing-fluid-small);
     
     padding-left: var(--list-padding);
 }
 
 ol {
-    --list-padding: calc(var(--theme-spacing-fluid-small) * 1.2);
+    --list-padding: calc(var(--theme-spacing-fluid-normal) * 1.2);
     
     padding-left: var(--list-padding);
 }

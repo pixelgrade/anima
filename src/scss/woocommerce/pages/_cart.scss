@@ -6,7 +6,7 @@
     }
 
     .entry-header {
-      padding-bottom: var(--theme-spacing-small);
+      padding-bottom: var(--theme-spacing-normal);
     }
   }
 
@@ -29,10 +29,10 @@
   border: 0;
 
   th, td {
-    padding: var(--theme-spacing-default) 0;
+    padding: var(--theme-spacing-smaller) 0;
 
     @include above(tablet) {
-      padding: var(--theme-spacing-xsmall);
+      padding: var(--theme-spacing-small);
 
       &:first-child {
         padding-left: 0;
@@ -52,7 +52,7 @@
     
     @include above(tablet) {
       button[name='update_cart'] {
-        margin-left: var(--theme-spacing-fluid-tiny);
+        margin-left: var(--theme-spacing-fluid-smallest);
       }
     }
   }
@@ -242,10 +242,10 @@
 }
 
 .woocommerce-cart-form + .cart-collaterals {
-  margin-top: var(--theme-spacing-xl);
+  margin-top: var(--theme-spacing-larger);
 
   @include above(tablet) {
-    margin-top: var(--theme-spacing-xxl);
+    margin-top: var(--theme-spacing-largest);
   }
 }
 
@@ -382,7 +382,7 @@
   @include below(tablet) {
     .cart_item {
 
-      margin-bottom: var(--theme-spacing-default);
+      margin-bottom: var(--theme-spacing-smaller);
     }
 
     .product-remove {

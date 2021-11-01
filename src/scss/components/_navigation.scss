@@ -1,15 +1,15 @@
 .navigation[class] {
 
     &:not(first-child) {
-        margin-top: var(--theme-spacing-fluid-small);
+        margin-top: var(--theme-spacing-fluid-normal);
     }
 
     &:not(last-child) {
-        margin-bottom: var(--theme-spacing-xl);
+        margin-bottom: var(--theme-spacing-larger);
     }
 
     .novablocks-media--blog + & {
-        margin-top: var(--theme-spacing-small);
+        margin-top: var(--theme-spacing-normal);
     }
 }
 
@@ -21,12 +21,12 @@
 }
 
 .article-navigation {
-    margin-top: var(--theme-spacing-medium);
+    margin-top: var(--theme-spacing-large);
     
     padding-left: var(--theme-wrapper-sides-spacing);
     padding-right: var(--theme-wrapper-sides-spacing);
     
     &:not(last-child) {
-        margin-bottom: var(--theme-spacing-medium);
+        margin-bottom: var(--theme-spacing-large);
     }
 }

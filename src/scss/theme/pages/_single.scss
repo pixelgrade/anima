@@ -12,7 +12,7 @@
             padding-top: 0;
     
             .entry-header {
-                padding-top: var(--theme-spacing-fluid-large);
+                padding-top: var(--theme-spacing-fluid-larger);
             }
         }
     }
@@ -22,7 +22,7 @@
 .page {
 
     .hentry {
-        @include space-children-y( var(--theme-spacing-large) );
+        @include space-children-y( var(--theme-spacing-larger) );
     }
 
     .entry-header > * {
@@ -30,11 +30,11 @@
     }
 
     .entry-header {
-        --element-spacing: var(--theme-spacing-fluid-xsmall);
-        @include space-children-y( var(--theme-spacing-fluid-xsmall) );
+        --element-spacing: var(--theme-spacing-fluid-small);
+        @include space-children-y( var(--theme-spacing-fluid-small) );
 
         .entry-thumbnail {
-            padding-top: var(--theme-spacing-fluid-large);
+            padding-top: var(--theme-spacing-fluid-larger);
         }
     }
 
@@ -69,7 +69,7 @@
 .post-password-form {
     input[type='submit'] {
         width: 100%;
-        margin-top: var(--theme-spacing-small);
+        margin-top: var(--theme-spacing-normal);
     }
 }
 
@@ -111,7 +111,7 @@
             content: '';
 
             position: absolute;
-            top: calc(-1 * var(--theme-spacing-fluid-large));
+            top: calc(-1 * var(--theme-spacing-fluid-larger));
             right: -100vw;
             bottom: 0;
             left: -100vw;
@@ -128,12 +128,12 @@
             }
         }
 
-        padding-bottom: calc( 0.5 * var(--theme-spacing-fluid-large) );
+        padding-bottom: calc( 0.5 * var(--theme-spacing-fluid-larger) );
 
         body.single .site-main .has-post-thumbnail & {
 
             &:before {
-                bottom: calc(-2 * var(--theme-spacing-fluid-large));
+                bottom: calc(-2 * var(--theme-spacing-fluid-larger));
             }
         }
 
@@ -141,7 +141,7 @@
             position: relative;
             z-index: 10;
 
-            margin-top: calc( 0.5 * var(--theme-spacing-fluid-small) );
+            margin-top: calc( 0.5 * var(--theme-spacing-fluid-normal) );
         }
 
         .cat-links {

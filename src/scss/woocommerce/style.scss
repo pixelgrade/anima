@@ -30,7 +30,7 @@ $assets-folder-path: '../../../assets';
   @include nav-links;
   
   &[class][class][class] {
-    margin-bottom: var(--theme-spacing-xl);
+    margin-bottom: var(--theme-spacing-larger);
   }
 }
 
@@ -39,7 +39,7 @@ $assets-folder-path: '../../../assets';
 }
 
 .woocommerce-Reviews {
-  @include space-children-y(var(--theme-spacing-small));
+  @include space-children-y(var(--theme-spacing-normal));
 
   > [id="comments"] {
     @include space-children-y(var(--theme-spacing));
