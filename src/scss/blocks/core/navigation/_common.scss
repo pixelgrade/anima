@@ -35,8 +35,9 @@ $nav-list-item: 'li.wp-block-navigation-item' !default;
 
 	a {
 		&:not(:hover) {
-			// Hide any link decoration by-default
-			text-decoration-color: var(--sm-current-bg-color);
+			// Hide default link decoration for 
+			// links inside Navigation block
+			text-decoration-color: transparent;
 		}
 	}
 

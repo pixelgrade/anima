@@ -1,6 +1,13 @@
 :root {
-    --theme-links-transition-property: text-decoration-color;
+    --theme-links-transition-property1: text-decoration-color;
+    --theme-links-transition-property2: color;
     --theme-links-transition-duration: .25s;
-    --theme-links-transition-easing: #{ $easeInOut };
-    --theme-links-transition: var(--theme-links-transition-property) var(--theme-links-transition-duration) var(--theme-links-transition-easing);
+    --theme-links-transition-easing: #{ $ease };
+    --theme-links-transition: 
+        var(--theme-links-transition-property1) 
+        var(--theme-links-transition-duration) 
+        var(--theme-links-transition-easing),
+        var(--theme-links-transition-property2) 
+        var(--theme-links-transition-duration) 
+        var(--theme-links-transition-easing);
 }
