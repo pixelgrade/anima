@@ -490,21 +490,19 @@ h1.c-headline.has-larger-font-size .c-headline__secondary {
   border-right-color: currentColor;
   border-left: 0; }
 
-.wp-block-separator.is-style-simple {
-  width: 100%; }
-  .wp-block-separator.is-style-simple .c-separator:after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: var(--separator-line-thickness);
-    background: currentColor; }
-  .wp-block-separator.is-style-simple .c-separator__arrow,
-  .wp-block-separator.is-style-simple .c-separator__symbol,
-  .wp-block-separator.is-style-simple .c-separator__line {
-    display: none; }
+.wp-block-separator.is-style-simple .c-separator:after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: var(--separator-line-thickness);
+  background: currentColor; }
+
+.wp-block-separator.is-style-simple .c-separator__arrow,
+.wp-block-separator.is-style-simple .c-separator__symbol,
+.wp-block-separator.is-style-simple .c-separator__line {
+  display: none; }
 
 .wp-block-separator.is-style-decorative .c-separator__arrow,
-.wp-block-separator.is-style-decorative .c-separator__line,
-.wp-block-separator:not([class*="is-style"]) .c-separator__arrow,
+.wp-block-separator.is-style-decorative .c-separator__line, .wp-block-separator:not([class*="is-style"]) .c-separator__arrow,
 .wp-block-separator:not([class*="is-style"]) .c-separator__line {
   display: none; }

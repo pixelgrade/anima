@@ -56,25 +56,27 @@
     border-left: 0;
 }
 
-.wp-block-separator.is-style-simple {
-    width: 100%;
+.wp-block-separator {
 
-    .c-separator {
-        @include separator-line;
+    &.is-style-simple {
+
+        .c-separator {
+            @include separator-line;
+        }
+
+        .c-separator__arrow,
+        .c-separator__symbol,
+        .c-separator__line {
+            display: none;
+        }
     }
 
-    .c-separator__arrow,
-    .c-separator__symbol,
-    .c-separator__line {
-        display: none;
-    }
-}
+    &.is-style-decorative,
+    &:not([class*="is-style"]) {
 
-.wp-block-separator.is-style-decorative,
-.wp-block-separator:not([class*="is-style"]){
-
-    .c-separator__arrow,
-    .c-separator__line {
-        display: none;
+        .c-separator__arrow,
+        .c-separator__line {
+            display: none;
+        }
     }
 }
