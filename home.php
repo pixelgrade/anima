@@ -20,7 +20,7 @@ get_header();
 
 			<?php echo do_blocks(
 				'<!-- wp:novablocks/sidecar -->' .
-				'<!-- wp:novablocks/sidecar-area -->' .
+				'<!-- wp:novablocks/sidecar-area { "className": "entry-content" } -->' .
 				anima_get_home_content_markup() .
 				'<!-- /wp:novablocks/sidecar-area -->' .
 				'<!-- /wp:novablocks/sidecar -->'

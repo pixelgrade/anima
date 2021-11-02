@@ -1,11 +1,11 @@
+import { addClass, hasClass, setAndResetElementStyles, getColorSetClasses } from '../../utils';
+
 import GlobalService from "../globalService";
 import mqService from '../mqService';
 import HeaderBase from './header-base';
 import HeaderColors from './header-colors';
 import HeaderMobile from './header-mobile';
 import HeaderRow from './header-row';
-
-import { addClass, hasClass, setAndResetElementStyles, getColorSetClasses } from '../../utils';
 
 class Header extends HeaderBase {
 

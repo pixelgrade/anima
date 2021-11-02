@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-$article_markup =   '<!-- wp:novablocks/sidecar { "sidebarPosition":"right", "sidebarWidth":"medium", "lastItemIsSticky":true} -->' .
+$article_markup =   '<!-- wp:novablocks/sidecar { "sidebarPosition":"right", "sidebarWidth":"medium", "lastItemIsSticky":true } -->' .
                     '<!-- wp:novablocks/sidecar-area -->' .
                     anima_article_header() .
                     anima_get_content_markup() .
