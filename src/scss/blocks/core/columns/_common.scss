@@ -1,20 +1,5 @@
 $enable-columns-block-styles: true !default;
 
-@mixin wp-block-columns-spacing {
-
-    // spacing for first level of rows
-    &:not(:first-child),
-    & + :not(:first-child) {
-        --nb-element-spacing-multiplier: 2;
-    }
-
-    // spacing for deeper levels of rows
-    & &:not(:first-child),
-    & & + :not(:first-child) {
-        --nb-element-spacing-multiplier: 1;
-    }
-}
-
 @mixin wp-block-columns-stack-2 {
     flex-wrap: wrap;
 
@@ -54,7 +39,6 @@ $enable-columns-block-styles: true !default;
 
     /* Columns Blocks */
     .wp-block-columns[class] {
-        @include wp-block-columns-spacing;
         
         .alignfull {
             margin-left: 0;
