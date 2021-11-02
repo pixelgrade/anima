@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_filter( 'style_manager/filter_fields', 'pixelgrade_add_colors_section_to_style_manager_config', 50, 1 );
 
 // Prepend theme color palette to the default color palettes list
-add_filter( 'style_manager/get_color_palettes', 'pixelgrade_add_default_color_palettes' );
+// add_filter( 'style_manager/get_color_palettes', 'pixelgrade_add_default_color_palettes' );
 
 function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 
@@ -40,7 +40,7 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 				'html' => '<span class="sm-group__title">' . esc_html__( 'Main Content', '__theme_txtd' ) . '</span>',
 			),
 
-			'page_title' => sm_get_color_switch_dark_config( 'Page title', '.page-title', false, 2 ),
+			'page_title' => sm_get_color_switch_dark_config( 'Page title', '.page-title, .entry-title', false, 2 ),
 			'body_color' => sm_get_color_switch_dark_config( 'Body text', 'html, [class*="sm-variation-"]', false, 0 ),
 			'links_color' => sm_get_color_switch_dark_config( 'Body links', 'a', true, 1, '--theme-links-color' ),
 			'heading_links_color' => sm_get_color_switch_dark_config( 'Heading links', 'h1 a, h2 a, h3 a, h4 a, h5 a, h6 a', false, 2, '--theme-links-color' ),
@@ -53,7 +53,7 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 			),
 
 			'menu_item_color' => sm_get_color_switch_dark_config( 'Navigation links', '.novablocks-navigation', false, 1 ),
-			'menu_active_item_color' => sm_get_color_switch_dark_config( 'Navigaiton active link', '.novablocks-navigation > ul > li[class*="current"]', true, 3 ),
+			'menu_active_item_color' => sm_get_color_switch_dark_config( 'Navigation active link', '.novablocks-navigation > ul > li[class*="current"]', true, 3 ),
 
 			'sm-group-separator-2' => array( 'type' => 'html', 'html' => '' ),
 
@@ -97,6 +97,12 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 			),
 
 			'novablocks_card_meta_first' => sm_get_color_switch_darker_config( 'Meta', '.nb-grid__item-meta', false, 2 ),
+
+			'colors_post_meta_section_title' => array(
+				'type' => 'html',
+				'html' => '<span class="sm-group__title">' . esc_html__( 'Post Meta', '__theme_txtd' ) . '</span>',
+			),
+			'colors_post_meta_author' => sm_get_color_switch_dark_config( 'Author', '.c-meta-author__body .author a', true, 1 ),
 
 			'sm-description_colorize_elements_outro' => array(
 				'type' => 'html',
