@@ -59,7 +59,7 @@ function anima_body_classes( $classes ) {
 	     is_singular('post') ||
 	     is_archive() ||
 	     is_search() ) {
-			$classes[] = 'sm-variation-2';
+			$classes[] = 'sm-variation-3';
 	}
 
 	if ( pixelgrade_option( 'sm_collection_title_position' ) === 'sideways' ) {
