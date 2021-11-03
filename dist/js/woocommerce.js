@@ -145,7 +145,7 @@
         var $cartMenuItemLink = $cartMenuItem.children('a');
         var cartMenuItemText = $cartMenuItemLink.text();
         var $cartMenuItemCount = $('<span class="menu-item__icon">0</span>');
-        $cartMenuItemLink.html("<span class=\"menu-item__label\">".concat(cartMenuItemText, " </span>"));
+        $cartMenuItemLink.html("<span class=\"menu-item__label\">".concat(cartMenuItemText, "</span>"));
         $cartMenuItemCount.appendTo($cartMenuItemLink);
         var fragmentKey = 'div.widget_shopping_cart_content';
         var $fragment = $(fragmentKey);

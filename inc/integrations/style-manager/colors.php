@@ -52,7 +52,7 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 				'html' => '<span class="sm-group__title">' . esc_html__( 'Header', '__theme_txtd' ) . '</span>',
 			),
 
-			'menu_item_color' => sm_get_color_switch_dark_config( 'Navigation links', '.novablocks-navigation', false, 1 ),
+			'menu_item_color' => sm_get_color_switch_dark_config( 'Navigation links', '.novablocks-navigation', false, 1, [ 'color', '--theme-navigation-links-color' ] ),
 			'menu_active_item_color' => sm_get_color_switch_dark_config( 'Navigation active link', '.novablocks-navigation > ul > li[class*="current"]', true, 3 ),
 
 			'sm-group-separator-2' => array( 'type' => 'html', 'html' => '' ),
