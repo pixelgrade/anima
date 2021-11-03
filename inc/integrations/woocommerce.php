@@ -282,11 +282,11 @@ function anima_add_end_wrapper_after_related() {
 }
 
 function anima_add_start_main_content() {
-	echo '<div class="novablocks-sidecar"><div class="novablocks-content entry-content">';
+	echo '<div class="nb-sidecar"><div class="nb-sidecar-area nb-sidecar-area--content">';
 }
 
 function anima_add_end_main_content() {
-	echo '</div><!-- .novablocks-content.entry-conten --></div><!-- .novablocks-sidecar -->';
+	echo '</div><!-- .nb-sidecar-area--content --></div><!-- .novablocks-sidecar -->';
 }
 
 function anima_new_product_title_markup() {

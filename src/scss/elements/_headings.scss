@@ -1,5 +1,17 @@
-h1, h2, h3, h4, h5, h6 {
+// this set of properties mostly overwrites the editor's destructive way of resetting
+// mostly by applying revert on all CSS properties
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
   font-weight: var(--current-font-weight);
+  font-style: var(--current-font-style);
+  letter-spacing: var(--current-letter-spacing);
   color: var(--current-color);
 }
 

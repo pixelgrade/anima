@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $article_markup =   '<!-- wp:novablocks/sidecar { "sidebarPosition":"right", "sidebarWidth":"medium", "lastItemIsSticky":true } -->' .
-                    '<!-- wp:novablocks/sidecar-area -->' .
+                    '<!-- wp:novablocks/sidecar-area { "areaName":"content" } -->' .
                     anima_article_header() .
                     anima_get_content_markup() .
                     anima_get_author_box_markup() .

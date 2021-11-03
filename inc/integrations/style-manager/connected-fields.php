@@ -35,7 +35,6 @@ function anima_add_style_manager_connected_fields( $options ) {
 						'heading_2_font',
 						'heading_3_font',
 						'heading_4_font',
-						'quote_font',
 					),
 				),
 				'sm_font_secondary'  => array(
@@ -54,7 +53,6 @@ function anima_add_style_manager_connected_fields( $options ) {
 						'body_font',
 						'content_font',
 						'lead_font',
-						'cite_font',
 						'input_font'
 					),
 				),

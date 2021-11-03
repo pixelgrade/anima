@@ -12,8 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $article_block_navigation =
-	'<!-- wp:novablocks/sidecar {"layout":"sidebar-right"} -->' .
-	'<!-- wp:novablocks/sidecar-area {"className":"novablocks-content"} -->' .
+	'<!-- wp:novablocks/sidecar { "sidebarPosition":"none" } -->' .
+	'<!-- wp:novablocks/sidecar-area { "areaName":"content" } -->' .
 	anima_get_post_navigation_markup().
 	'<!-- /wp:novablocks/sidecar-area -->' .
 	'<!-- /wp:novablocks/sidecar -->';

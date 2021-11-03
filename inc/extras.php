@@ -721,7 +721,7 @@ function anima_get_archive_blocks( $name, $number_of_posts, $posts_ids ) {
 		case 'felt':
             return '
             <!-- wp:novablocks/sidecar { "className":"alignwide", "sidebarWidth":"medium", "lastItemIsSticky":true } -->
-                <!-- wp:novablocks/sidecar-area {"className":"novablocks-content entry-content"} -->
+                <!-- wp:novablocks/sidecar-area {"areaName":"content"} -->
                     <!-- wp:novablocks/supernova {
                         "showCollectionTitle": false,
                         "showCollectionSubtitle": false,

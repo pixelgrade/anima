@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $page_markup =
 	'<!-- wp:novablocks/sidecar { "sidebarPosition":"none" } -->' .
-	'<!-- wp:novablocks/sidecar-area { "className":"entry-content" } -->' .
+	'<!-- wp:novablocks/sidecar-area { "areaName":"content" } -->' .
 	anima_get_content_markup().
 	'<!-- wp:novablocks/post-comments --><!-- /wp:novablocks/post-comments -->' .
 	'<!-- /wp:novablocks/sidecar-area -->' .

@@ -753,10 +753,6 @@
 .woocommerce .site {
   overflow: hidden; }
 
-.woocommerce img,
-.woocommerce-page img {
-  width: 100%; }
-
 .woocommerce-categories[class] {
   line-height: 1; }
 
@@ -886,9 +882,8 @@
   --block-content-start: gce;
   align-self: flex-end;
   justify-self: flex-end;
+  width: auto;
   margin-top: 0; }
-  .woocommerce-ordering select {
-    width: auto; }
 
 .woocommerce-product-gallery[class][class][class] {
   margin-bottom: 0; }
@@ -2737,6 +2732,7 @@ ul.order_details[class] {
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
   --current-text-transform: var(--theme-heading-4-text-transform);
   --current-color: var(--theme-heading-4-color);
+  font-family: var(--current-font-family);
   font-weight: var(--current-font-weight);
   font-size: var(--final-font-size);
   line-height: var(--current-line-height); }

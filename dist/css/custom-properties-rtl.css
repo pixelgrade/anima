@@ -127,6 +127,7 @@
   --theme-accent-font-style: normal;
   --theme-accent-letter-spacing: normal;
   --theme-accent-text-transform: none;
+  --font-size-modifier: 1;
   --current-font-feature: none; }
   @media only screen and (min-width: 1440px) {
     :root {
@@ -137,7 +138,6 @@
   --x0: var(--theme-font-size-minimum-value-breakpoint);
   --y0: var(--theme-font-size-minimum-value);
   --x1: var(--theme-font-size-breakpoint);
-  --font-size-modifier: 1;
   --y1: var(--font-size);
   --y0-new: calc( var(--y1) - ( var(--y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) );
   --a: calc( ( var(--y1) - var(--y0-new) ) / ( var(--x1) - var(--x0) ) );
