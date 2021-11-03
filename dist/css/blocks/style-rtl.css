@@ -662,7 +662,7 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between ul.wp-bl
   text-transform: uppercase;
   font-weight: bold;
   vertical-align: middle;
-  margin-right: 0.5em; }
+  margin-right: var(--navigation-item-sub-elements-spacing); }
 
 @media not screen and (min-width: 1024px) {
   .novablocks-header-row {
@@ -793,6 +793,9 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between ul.wp-bl
 .novablocks-media--blog[class] .novablocks-media__image {
   height: 100%;
   min-height: 400px; }
+
+:root {
+  --navigation-item-sub-elements-spacing: 7px; }
 
 .novablocks-navigation {
   --theme-button-y-padding: .25em;

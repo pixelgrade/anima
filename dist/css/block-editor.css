@@ -123,7 +123,7 @@
   .menu-item--dark-mode:not(.no-icon) {
     --switcher-icon-width: calc( var(--icons-size-multiplier) * var(--current-font-size) ); }
     .menu-item--dark-mode:not(.no-icon) a {
-      padding-left: calc(var(--switcher-icon-width) + 6px) !important; }
+      padding-left: calc(var(--switcher-icon-width) + var(--navigation-item-sub-elements-spacing)) !important; }
       .menu-item--dark-mode:not(.no-icon) a:after {
         content: '';
         position: absolute;
@@ -136,7 +136,7 @@
         mask-size: contain;
         -webkit-mask: url("../../assets/images/icon-dark-mode.svg") no-repeat 50% 50%;
         -webkit-mask-size: contain;
-        transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1); }
+        transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1); }
       .menu-item--dark-mode:not(.no-icon) a:before {
         width: calc(100% - var(--switcher-icon-width)) !important; }
     .menu-item--dark-mode:not(.no-icon):not(.icon-only) a:after {
@@ -162,13 +162,15 @@
   .menu-item--dark-mode a {
     color: currentColor;
     text-decoration: none; }
+    .menu-item--dark-mode a:hover:after {
+      background-color: var(--sm-current-accent-color); }
 
 .menu-item--search a {
   text-decoration: none; }
 
 .menu-item--search:not(.no-icon) a {
   --search-icon-width: calc( var(--icons-size-multiplier) * var(--current-font-size) );
-  padding-left: calc(var(--search-icon-width) + 6px) !important;
+  padding-left: calc(var(--search-icon-width) + var(--navigation-item-sub-elements-spacing)) !important;
   overflow: visible; }
   .menu-item--search:not(.no-icon) a:after {
     content: '';
@@ -186,7 +188,8 @@
     -webkit-mask: url("../../assets/images/icon-search.svg") no-repeat 50% 50%;
     -webkit-mask-size: contain;
     background-color: currentColor;
-    overflow: visible; }
+    overflow: visible;
+    transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1); }
   .menu-item--search:not(.no-icon) a:before {
     width: calc(100% - var(--search-icon-width) - 8px) !important; }
 
@@ -207,6 +210,9 @@
 @media not screen and (min-width: 1024px) {
   .novablocks-navigation .menu-item--search {
     display: none; } }
+
+.menu-item--search a:hover:after {
+  background-color: var(--sm-current-accent-color); }
 
 .block-editor-button-block-appender {
   box-shadow: inset 0 0 0 1px currentColor;
