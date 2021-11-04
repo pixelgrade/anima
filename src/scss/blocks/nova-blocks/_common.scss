@@ -29,15 +29,24 @@
         --theme-content-width-normal: 100%;
     }
 
+
+    // Image captions and descriptions
     .novablocks-media-composition__grid-item {
 
-        &[class] .credits[class] {
-            @include apply-font-size(12);
-            opacity: 0.7;
-        }
     }
 
-    // ToDO:
+    .novablocks-media-composition__grid-item-caption,
+    .novablocks-media-composition__grid-item-description {
+        @include caption;
+
+        > * { font-size: inherit; }
+    }
+
+    .novablocks-media-composition__grid-item-description {
+        --font-size-modifier: 0.7;
+    }
+
+    // @todo:
     // Find a better way to overwrite the 
     // default "links" rule from the Editor: 
     // ".editor-styles-wrapper a {...}"
@@ -45,14 +54,11 @@
         a {
             color: inherit !important;
             text-decoration: inherit !important;
+            opacity: 0.7;
+
+            &:hover {
+                opacity: 1;
+            }
         }
-    }
-
-    .novablocks-media-composition__grid-item-caption {
-        font-size: 80%;
-    }
-
-    .novablocks-media-composition__grid-item-description {
-        font-size: 70%;
     }
 }

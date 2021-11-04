@@ -1,9 +1,10 @@
 $enable-gallery-block-styles:           true !default;
+$gallery-selector: '.wp-block-gallery' !default;
 
 @if $enable-gallery-block-styles == true {
     /* Gallery Block */
 
-    .wp-block-gallery {
+    #{$gallery-selector} {
         --block-grid-spacing: 20px;
 
         list-style: none;
@@ -11,6 +12,14 @@ $enable-gallery-block-styles:           true !default;
     
         .blocks-gallery-grid {
             @include flex-grid-count(2);
+
+            list-style: none;
+            width: 100%;
+            @include flex-grid;
+
+            &[class] {
+                padding-left: 0;
+            }
         }
 
         @include above(tablet) {
@@ -39,12 +48,8 @@ $enable-gallery-block-styles:           true !default;
             height: 100%;
         }
 
-        figcaption:not(.blocks-gallery-caption) {
+        figcaption {
             @include caption;
-        }
-
-        .blocks-gallery-caption {
-            @include apply-font(body);
         }
     
         &.alignfull,
@@ -71,12 +76,6 @@ $enable-gallery-block-styles:           true !default;
     }
 
     .blocks-gallery-grid {
-        list-style: none;
-        width: 100%;
-        @include flex-grid;
 
-        &[class] {
-            padding-left: 0;
-        }
     }
 }
