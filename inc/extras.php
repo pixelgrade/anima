@@ -738,11 +738,11 @@ function anima_get_archive_blocks( $name, $number_of_posts, $posts_ids ) {
                         "columns": 3
                     } /-->' .
                    '<div class="wp-block alignwide">' .
-                    rosa2_get_the_posts_pagination() .
+                    anima_get_the_posts_pagination() .
                    '</div>' .
                 '<!-- /wp:novablocks/sidecar-area -->' .
                 '<!-- wp:novablocks/sidecar-area {"className":"novablocks-sidebar"} -->' .
-                    rosa2_get_sidebar_markup() .
+                    anima_get_sidebar_markup() .
                 '<!-- /wp:novablocks/sidecar-area -->' .
             '<!-- /wp:novablocks/sidecar -->';
 		default:
