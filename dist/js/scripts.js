@@ -1504,15 +1504,37 @@ function () {
 
     this.element = element;
     this.initialColorsSource = initialColorsSource ? initialColorsSource : element;
-    this.transparentColorsSource = transparentColorsSource ? transparentColorsSource : this.getFirstBlockElement();
+    this.transparentColorsSource = transparentColorsSource ? transparentColorsSource : this.getFirstUsefulBlock();
     this.initializeColors();
   }
 
   createClass_default()(HeaderColors, [{
-    key: "getFirstBlockElement",
-    value: function getFirstBlockElement() {
-      var content = document.querySelector('.site-main .entry-content');
-      var firstBlock = content ? getFirstChild(content) : null;
+    key: "getFirstBlock",
+    value: function getFirstBlock() {
+      var content = document.querySelector('.site-main .hentry');
+
+      if (!content) {
+        return null;
+      }
+
+      var firstBlock = getFirstChild(content);
+
+      if (hasClass(firstBlock, 'nb-sidecar')) {
+        var wrapper = firstBlock.querySelector('.nb-sidecar-area--content');
+
+        if (!wrapper) {
+          return firstBlock;
+        }
+
+        return getFirstChild(wrapper);
+      }
+
+      return null;
+    }
+  }, {
+    key: "getFirstUsefulBlock",
+    value: function getFirstUsefulBlock() {
+      var firstBlock = this.getFirstBlock();
 
       if (!firstBlock) {
         return null;

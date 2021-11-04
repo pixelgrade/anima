@@ -7,18 +7,41 @@ class HeaderColors {
 	constructor( element, initialColorsSource, transparentColorsSource ) {
 		this.element = element;
 		this.initialColorsSource = initialColorsSource ? initialColorsSource : element;
-		this.transparentColorsSource = transparentColorsSource ? transparentColorsSource : this.getFirstBlockElement();
+		this.transparentColorsSource = transparentColorsSource ? transparentColorsSource : this.getFirstUsefulBlock();
 
 		this.initializeColors();
 	}
 
-	getFirstBlockElement() {
-		const content = document.querySelector( '.site-main .entry-content' );
-		const firstBlock = content ? getFirstChild( content ) : null;
+	getFirstBlock() {
+		const content = document.querySelector( '.site-main .hentry' );
+
+		if ( ! content ) {
+			return null;
+		}
+
+		const firstBlock = getFirstChild( content );
+
+		if ( hasClass( firstBlock, 'nb-sidecar' ) ) {
+			const wrapper = firstBlock.querySelector( '.nb-sidecar-area--content' );
+
+			if ( ! wrapper ) {
+				return firstBlock;
+			}
+
+			return getFirstChild( wrapper );
+		}
+
+		return null;
+	}
+
+	getFirstUsefulBlock() {
+		const firstBlock = this.getFirstBlock();
 
 		if ( ! firstBlock ) {
 			return null;
 		}
+
+
 
 		const attributes = firstBlock.dataset;
 
