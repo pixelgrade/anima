@@ -2603,7 +2603,8 @@ function () {
       if (!$body.is('.has-no-spacing-top')) {
         $body.find('.site-content').css('marginTop', "".concat(promoBarHeight + headerHeight, "px"));
       } else {
-        var $firstBlock = external_jQuery_default()('.site-main .entry-content > :first-child').first();
+        var $content = external_jQuery_default()('.site-main .hentry');
+        var $firstBlock = app_getFirstBlock($content);
 
         if ($firstBlock.is('.supernova')) {
           var attributes = $firstBlock.data();
@@ -2617,26 +2618,18 @@ function () {
             }
           }
 
-          $targets.each(function (i, target) {
-            var $target = external_jQuery_default()(target);
-            var paddingTop = getPaddingTop($target);
-            $target.css('paddingTop', paddingTop + headerHeight + promoBarHeight);
-          });
+          app_applyPaddingTopToTargets($targets, headerHeight + promoBarHeight);
           return;
         }
 
-        var $firstBlockFg;
+        if ($firstBlock.is('.novablocks-hero, .novablocks-slideshow')) {
+          var _$targets = $firstBlock.find('.novablocks-doppler__foreground');
 
-        if ($firstBlock.is('.novablocks-block, .novablocks-media')) {
-          $firstBlockFg = $firstBlock;
-        } else {
-          $firstBlockFg = $firstBlock.find('.novablocks-doppler__foreground, .novablocks-block');
+          app_applyPaddingTopToTargets(_$targets, headerHeight + promoBarHeight);
+          return;
         }
 
-        if ($firstBlockFg.length) {
-          var paddingTop = getPaddingTop($firstBlockFg);
-          $firstBlockFg.css('paddingTop', Math.max(paddingTop, headerHeight + promoBarHeight));
-        }
+        app_applyPaddingTopToTargets($firstBlock, headerHeight + promoBarHeight);
       }
     }
   }]);
@@ -2645,6 +2638,26 @@ function () {
 }();
 
 
+
+var app_getFirstBlock = function getFirstBlock($element) {
+  var $firstBlock = $element.children().first();
+
+  if ($firstBlock.is('.nb-sidecar')) {
+    if ($firstBlock.find('.nb-sidecar-area--content').children().length) {
+      return getFirstBlock($firstBlock.find('.nb-sidecar-area--content'));
+    }
+  }
+
+  return $firstBlock;
+};
+
+var app_applyPaddingTopToTargets = function applyPaddingTopToTargets($targets, extraPaddingTop) {
+  $targets.each(function (i, target) {
+    var $target = external_jQuery_default()(target);
+    var paddingTop = getPaddingTop($target);
+    $target.css('paddingTop', paddingTop + extraPaddingTop);
+  });
+};
 
 var getPaddingTop = function getPaddingTop($element) {
   return parseInt($element.css('paddingTop', '').css('paddingTop'), 10) || 0;

@@ -206,7 +206,8 @@ export default class App {
 		if ( ! $body.is( '.has-no-spacing-top' ) ) {
 			$body.find( '.site-content' ).css( 'marginTop', `${ promoBarHeight + headerHeight }px` );
 		} else {
-			const $firstBlock = $( '.site-main .entry-content > :first-child' ).first();
+			const $content = $( '.site-main .hentry' );
+			const $firstBlock = getFirstBlock( $content );
 
 			if ( $firstBlock.is( '.supernova' ) ) {
 				const attributes = $firstBlock.data();
@@ -220,29 +221,39 @@ export default class App {
 					}
 				}
 
-				$targets.each( ( i, target ) => {
-					const $target = $( target );
-					const paddingTop = getPaddingTop( $target );
-					$target.css( 'paddingTop', paddingTop + headerHeight + promoBarHeight );
-				} );
-
+				applyPaddingTopToTargets( $targets, headerHeight + promoBarHeight );
 				return;
 			}
 
-			let $firstBlockFg;
-
-			if ( $firstBlock.is( '.novablocks-block, .novablocks-media' ) ) {
-				$firstBlockFg = $firstBlock;
-			} else {
-				$firstBlockFg = $firstBlock.find( '.novablocks-doppler__foreground, .novablocks-block' );
+			if ( $firstBlock.is( '.novablocks-hero, .novablocks-slideshow' ) ) {
+				const $targets = $firstBlock.find( '.novablocks-doppler__foreground' );
+				applyPaddingTopToTargets( $targets, headerHeight + promoBarHeight );
+				return;
 			}
 
-			if ( $firstBlockFg.length ) {
-				const paddingTop = getPaddingTop( $firstBlockFg );
-				$firstBlockFg.css( 'paddingTop', Math.max( paddingTop, headerHeight + promoBarHeight ) );
-			}
+			applyPaddingTopToTargets( $firstBlock, headerHeight + promoBarHeight );
 		}
 	}
+}
+
+const getFirstBlock = ( $element ) => {
+	const $firstBlock = $element.children().first();
+
+	if ( $firstBlock.is( '.nb-sidecar' ) ) {
+		if ( $firstBlock.find( '.nb-sidecar-area--content' ).children().length ) {
+			return getFirstBlock( $firstBlock.find( '.nb-sidecar-area--content' ) );
+		}
+	}
+
+	return $firstBlock
+}
+
+const applyPaddingTopToTargets = ( $targets, extraPaddingTop ) => {
+	$targets.each( ( i, target ) => {
+		const $target = $( target );
+		const paddingTop = getPaddingTop( $target );
+		$target.css( 'paddingTop', paddingTop + extraPaddingTop );
+	} );
 }
 
 const getPaddingTop = ( $element ) => {
