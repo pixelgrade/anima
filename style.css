@@ -946,6 +946,54 @@ pre {
   word-break: break-all;
   word-wrap: break-word; }
 
+/* Drop Cap */
+.has-drop-cap:first-letter {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  font-style: var(--current-font-style);
+  letter-spacing: var(--current-letter-spacing);
+  color: var(--current-color); }
+
+.has-drop-cap:first-letter {
+  float: left;
+  margin-top: -0.075em;
+  margin-bottom: -0.2em;
+  margin-right: 0.075em;
+  --font-size: var(--theme-heading-1-font-size);
+  --current-font-size: var(--final-font-size);
+  --current-font-family: var(--theme-heading-1-font-family);
+  --current-font-style: var(--theme-heading-1-font-style);
+  --current-line-height: var(--theme-heading-1-line-height);
+  --current-font-weight: var(--theme-heading-1-font-weight);
+  --current-letter-spacing: var(--theme-heading-1-letter-spacing);
+  --current-text-transform: var(--theme-heading-1-text-transform);
+  --current-color: var(--theme-heading-1-color);
+  --current-line-height: 1em;
+  --current-font-size: 5.3em; }
+
+.has-drop-cap:first-letter {
+  --drop-cap-color: var(--sm-current-fg1-color);
+  margin-left: -0.05em;
+  margin-right: 0.15em;
+  --current-font-size: 5em;
+  color: var(--sm-current-bg-color);
+  text-shadow: 6px 6px var(--drop-cap-color), 5.75px 5.75px var(--drop-cap-color), 5.5px 5.5px var(--drop-cap-color), 5.25px 5.25px var(--drop-cap-color), 5px 5px var(--drop-cap-color), 4.75px 4.75px var(--drop-cap-color), 4.5px 4.5px var(--drop-cap-color), 4.25px 4.25px var(--drop-cap-color), 4px 4px var(--drop-cap-color), 3.75px 3.75px var(--drop-cap-color), 3.5px 3.5px var(--drop-cap-color), 3.25px 3.25px var(--drop-cap-color), 3px 3px var(--drop-cap-color), 2.75px 2.75px var(--drop-cap-color), 2.5px 2.5px var(--drop-cap-color), 2.25px 2.25px var(--drop-cap-color), 2px 2px var(--drop-cap-color), 1.75px 1.75px var(--drop-cap-color), 1.5px 1.5px var(--drop-cap-color), 1.25px 1.25px var(--drop-cap-color), 1px 1px var(--drop-cap-color), 0.75px 0.75px var(--drop-cap-color), 0.5px 0.5px var(--drop-cap-color), 0.25px 0.25px var(--drop-cap-color), -0.25px -0.25px var(--drop-cap-color), -0.5px -0.5px var(--drop-cap-color), -0.75px -0.75px var(--drop-cap-color), -1px -1px var(--drop-cap-color), -1px 1px var(--drop-cap-color), 1px -1px var(--drop-cap-color), 1px 1px var(--drop-cap-color); }
+
+[data-drop-cap-style-="style1"] .has-drop-cap:first-letter {
+  margin-right: 0.15em;
+  color: var(--sm-current-fg1-color);
+  text-shadow: 2px 2px 0px var(--sm-current-bg-color), 4px 4px 0px var(--drop-cap-color); }
+
+[data-drop-cap-style-="style2"] .has-drop-cap:first-letter {
+  --drop-cap-color: var(--sm-current-fg1-color);
+  margin-left: -0.05em;
+  margin-right: 0.15em;
+  --current-font-size: 5em;
+  color: var(--sm-current-bg-color);
+  text-shadow: 6px 6px var(--drop-cap-color), 5.75px 5.75px var(--drop-cap-color), 5.5px 5.5px var(--drop-cap-color), 5.25px 5.25px var(--drop-cap-color), 5px 5px var(--drop-cap-color), 4.75px 4.75px var(--drop-cap-color), 4.5px 4.5px var(--drop-cap-color), 4.25px 4.25px var(--drop-cap-color), 4px 4px var(--drop-cap-color), 3.75px 3.75px var(--drop-cap-color), 3.5px 3.5px var(--drop-cap-color), 3.25px 3.25px var(--drop-cap-color), 3px 3px var(--drop-cap-color), 2.75px 2.75px var(--drop-cap-color), 2.5px 2.5px var(--drop-cap-color), 2.25px 2.25px var(--drop-cap-color), 2px 2px var(--drop-cap-color), 1.75px 1.75px var(--drop-cap-color), 1.5px 1.5px var(--drop-cap-color), 1.25px 1.25px var(--drop-cap-color), 1px 1px var(--drop-cap-color), 0.75px 0.75px var(--drop-cap-color), 0.5px 0.5px var(--drop-cap-color), 0.25px 0.25px var(--drop-cap-color), -0.25px -0.25px var(--drop-cap-color), -0.5px -0.5px var(--drop-cap-color), -0.75px -0.75px var(--drop-cap-color), -1px -1px var(--drop-cap-color), -1px 1px var(--drop-cap-color), 1px -1px var(--drop-cap-color), 1px 1px var(--drop-cap-color); }
+
 /* Tables */
 table {
   width: 100%;

@@ -1,0 +1,134 @@
+/* Drop Cap */
+
+.has-drop-cap:first-letter {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  font-style: var(--current-font-style);
+  letter-spacing: var(--current-letter-spacing);
+  color: var(--current-color);
+}
+
+
+// ------ #MIXINS
+@mixin drop-cap-base {
+	&:first-letter {
+		float: left;
+	 	
+	 	margin-top: -0.075em;
+	 	margin-bottom: -0.2em;
+	 	margin-right: 0.075em;
+
+		@include apply-font(heading-1);
+	    --current-line-height: 1em;
+	    --current-font-size: 5.3em; // 3 lines
+	}
+}
+
+@mixin drop-cap-style-0 {
+	&:first-letter {
+		margin-top: 0em;
+		margin-right: 0.1em;
+
+		--current-font-size: 3.1em; // 2 lines
+	}
+}
+
+@mixin drop-cap-style-1 {
+	&:first-letter {
+		margin-right: 0.15em;
+
+		color: var(--sm-current-fg1-color);
+		text-shadow: 2px 2px 0px var(--sm-current-bg-color), 4px 4px 0px var(--drop-cap-color); 
+	}
+}
+
+@mixin drop-cap-style-2 {
+	&:first-letter {
+		--drop-cap-color: var(--sm-current-fg1-color);
+
+	    margin-left: -0.05em;
+	    margin-right: 0.15em;
+	    
+	    --current-font-size: 5em;
+	    
+	    color: var(--sm-current-bg-color);
+        text-shadow: 
+			6px 6px        var(--drop-cap-color), 
+			5.75px 5.75px  var(--drop-cap-color), 
+			5.5px 5.5px    var(--drop-cap-color), 
+			5.25px 5.25px  var(--drop-cap-color),
+			5px 5px        var(--drop-cap-color), 
+			4.75px 4.75px  var(--drop-cap-color), 
+			4.5px 4.5px    var(--drop-cap-color), 
+			4.25px 4.25px  var(--drop-cap-color),
+			4px 4px        var(--drop-cap-color),
+			3.75px 3.75px  var(--drop-cap-color),
+			3.5px 3.5px    var(--drop-cap-color),
+			3.25px 3.25px  var(--drop-cap-color),
+			3px 3px        var(--drop-cap-color),
+			2.75px 2.75px  var(--drop-cap-color),
+			2.5px 2.5px    var(--drop-cap-color),
+			2.25px 2.25px  var(--drop-cap-color),
+			2px 2px        var(--drop-cap-color),
+			1.75px 1.75px  var(--drop-cap-color),
+			1.5px 1.5px    var(--drop-cap-color),
+			1.25px 1.25px  var(--drop-cap-color),
+			1px 1px        var(--drop-cap-color),
+			0.75px 0.75px  var(--drop-cap-color),
+			0.5px 0.5px    var(--drop-cap-color),
+			0.25px 0.25px  var(--drop-cap-color),
+			-0.25px -0.25px  var(--drop-cap-color),
+			-0.5px -0.5px    var(--drop-cap-color),
+			-0.75px -0.75px  var(--drop-cap-color),
+			-1px -1px  		var(--drop-cap-color),
+			-1px 1px  		var(--drop-cap-color),
+			1px -1px  		var(--drop-cap-color),
+			1px 1px  		var(--drop-cap-color);
+	}
+}
+
+
+
+// ------ #DROP CAP STYLES
+
+// Drop Cap: Style0 (Default)
+.has-drop-cap {
+	@include drop-cap-base;
+	@include drop-cap-style-2;
+}
+
+// @todo: for options below, add a global 
+// control option to change those styles
+
+// Drop Cap: Style1 (Patch)
+[data-drop-cap-style-="style1"] {
+	.has-drop-cap {
+		@include drop-cap-style-1;
+	}
+}
+
+// Drop Cap: Style2
+[data-drop-cap-style-="style2"] {
+	.has-drop-cap {
+		@include drop-cap-style-2;
+	}
+}
+
+
+
+
+// ------ #HANDLING MODE (manual / auto)
+
+[data-drop-cap-handle="manual"] {
+	// default mode using the .has-drop-cap class
+}
+
+[data-drop-cap-handle="auto"] {
+	.single-post article .nb-sidecar-area--content >p:first-child {
+		&:first-letter {
+			// apply current Drop cap styles
+		}
+	}
+}
