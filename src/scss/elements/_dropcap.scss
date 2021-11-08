@@ -46,7 +46,7 @@
 
 @mixin drop-cap-style-2 {
 	&:first-letter {
-		--drop-cap-color: var(--sm-current-fg1-color);
+		 --drop-cap-color: var(--sm-current-fg1-color);
 
 	    margin-left: -0.05em;
 	    margin-right: 0.15em;
@@ -86,6 +86,26 @@
 			-1px 1px  		var(--drop-cap-color),
 			1px -1px  		var(--drop-cap-color),
 			1px 1px  		var(--drop-cap-color);
+	}
+}
+
+// Letter with border on top 
+@mixin drop-cap-style-3 {
+	&:first-letter {
+		--drop-cap-line-weight: 0.1em;
+		--drop-cap-line-distance: -0.1em;
+
+		margin-top: 0.22em;
+		margin-right: 0.4em;
+		margin-bottom: 0em;
+
+		--current-font-size: 9.32em; // 4 lines
+		color: var(--sm-current-fg1-color);
+
+
+		box-shadow: 
+			0 var(--drop-cap-line-distance) 0 -4px var(--sm-current-bg-color), 
+			0 calc(var(--drop-cap-line-distance) - var(--drop-cap-line-weight)) 0 -4px var(--sm-current-fg1-color);
 	}
 }
 
