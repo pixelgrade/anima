@@ -32,10 +32,15 @@ input[type="button"] {
     @include button-fill(false);
 }
 
-button[type="submit"],
-button[type="reset"] {
+button[type="submit"] {
     @include button;
     @include button-fill;
+}
+
+input[type="reset"],
+button[type="reset"] {
+    @include button-reset;
+    @include button-text;
 }
 
 input[type="file"] {
@@ -101,4 +106,29 @@ label {
 
 .input-normal-height {
     --theme-input-padding: .833em;
+}
+
+// Plugin: Ninja Forms
+.nf-form-cont .list-radio-wrap,
+.nf-form-cont .list-checkbox-wrap,
+.nf-form-cont .list-image-wrap {
+    .nf-field-element {
+        li {
+            input {
+                width: var(--theme-checkbox-width) !important;
+                margin-top: var(--theme-input-vertical-spacing);
+                margin-right: var(--theme-input-horizontal-spacing);    
+            }
+        }
+    }
+}
+
+.nf-form-cont .list-checkbox-wrap {
+    .nf-field-element {
+        li {
+            input {
+                margin-top: 0;
+            }
+        }
+    }   
 }
