@@ -317,8 +317,8 @@
     background-color: var(--sm-current-bg-color);
     cursor: pointer;
     -webkit-appearance: none;
+    transition: all .3s ease;
     border-color: var(--sm-current-accent-color);
-    transition: all .2s ease-in-out;
     color: var(--sm-current-bg-color); }
     .editor-styles-wrapper input[type="checkbox"]:after {
       content: "";
@@ -332,7 +332,7 @@
       background-position: center center;
       background-repeat: no-repeat;
       opacity: 0;
-      transition: opacity .1s ease-in-out; }
+      transition: opacity .3s ease; }
     .editor-styles-wrapper input[type="checkbox"]:hover {
       --theme-input-box-shadow: var(--theme-input-hover-box-shadow); }
     .editor-styles-wrapper input[type="checkbox"]:focus, .editor-styles-wrapper input[type="checkbox"]:active {
@@ -356,8 +356,9 @@
     background-color: var(--sm-current-bg-color);
     cursor: pointer;
     -webkit-appearance: none;
+    transition: all .3s ease;
     border-radius: 50%;
-    transition: all .2s ease-in-out;
+    border: 0 solid var(--sm-current-accent-color);
     -webkit-font-smoothing: initial;
     -webkit-appearance: none; }
     .editor-styles-wrapper input[type="radio"]:hover {
@@ -367,7 +368,7 @@
       --theme-input-box-shadow: var(--theme-input-focus-box-shadow);
       outline: 0; }
     .editor-styles-wrapper input[type="radio"]:checked {
-      border: 0.375em solid var(--sm-current-accent-color);
+      border-width: .375em;
       box-shadow: 0 0 0 1px var(--sm-current-accent-color);
       outline: 0; }
   .editor-styles-wrapper input[type="submit"],
@@ -427,8 +428,7 @@
     .editor-styles-wrapper input[type="submit"]:not([disabled]):hover:before,
     .editor-styles-wrapper input[type="button"]:not([disabled]):hover:before {
       transform: scale3d(0, 1, 1); }
-  .editor-styles-wrapper button[type="submit"],
-  .editor-styles-wrapper button[type="reset"] {
+  .editor-styles-wrapper button[type="submit"] {
     display: inline-block;
     text-decoration: none;
     --theme-button-text-color: var(--sm-current-bg-color);
@@ -460,17 +460,14 @@
     will-change: transform;
     backface-visibility: hidden;
     overflow: hidden; }
-    .editor-styles-wrapper button[type="submit"]:not([disabled]),
-    .editor-styles-wrapper button[type="reset"]:not([disabled]) {
+    .editor-styles-wrapper button[type="submit"]:not([disabled]) {
       cursor: pointer; }
-      .editor-styles-wrapper button[type="submit"]:not([disabled]):hover,
-      .editor-styles-wrapper button[type="reset"]:not([disabled]):hover {
+      .editor-styles-wrapper button[type="submit"]:not([disabled]):hover {
         --current-button-background-color: var(--theme-button-hover-background-color);
         --current-button-border-color: var(--theme-button-hover-border-color);
         --current-button-text-color: var(--theme-button-hover-text-color);
         --current-button-transition: var(--theme-button-hover-transition); }
-    .editor-styles-wrapper button[type="submit"]:before,
-    .editor-styles-wrapper button[type="reset"]:before {
+    .editor-styles-wrapper button[type="submit"]:before {
       content: '';
       position: absolute;
       top: calc( -1 * var(--theme-button-border-width));
@@ -482,14 +479,72 @@
       -webkit-backface-visibility: hidden;
       transition: var(--current-button-transition);
       transition-property: transform; }
-    .editor-styles-wrapper button[type="submit"]:before,
-    .editor-styles-wrapper button[type="reset"]:before {
+    .editor-styles-wrapper button[type="submit"]:before {
       transform: scale3d(1, 1, 1);
       transform-origin: right;
       background-color: var(--theme-button-background-color); }
-    .editor-styles-wrapper button[type="submit"]:not([disabled]):hover:before,
-    .editor-styles-wrapper button[type="reset"]:not([disabled]):hover:before {
+    .editor-styles-wrapper button[type="submit"]:not([disabled]):hover:before {
       transform: scale3d(0, 1, 1); }
+  .editor-styles-wrapper input[type="reset"],
+  .editor-styles-wrapper button[type="reset"] {
+    padding: 0;
+    border-width: 0;
+    cursor: pointer;
+    position: relative;
+    padding-right: 1.15em;
+    padding-bottom: .3em;
+    margin-right: calc( -1 * 1.15em);
+    background: none !important;
+    text-decoration: none; }
+    .editor-styles-wrapper input[type="reset"]:before,
+    .editor-styles-wrapper button[type="reset"]:before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 1.15em;
+      width: calc(100% - 1.15em);
+      height: .1em;
+      transform: scale3d(1, 1, 1);
+      will-change: transform;
+      -webkit-backface-visibility: hidden;
+      transform-origin: left;
+      background: currentColor;
+      transition: var(--theme-button-transition);
+      transition-property: transform; }
+    .editor-styles-wrapper input[type="reset"]:after,
+    .editor-styles-wrapper button[type="reset"]:after {
+      content: '';
+      opacity: 0;
+      transform: translate(0, -50%) scale(-1, 1); }
+      @supports (mask-clip: initial) or (-webkit-mask-clip: initial) {
+        .editor-styles-wrapper input[type="reset"]:after,
+        .editor-styles-wrapper button[type="reset"]:after {
+          position: absolute;
+          top: 50%;
+          right: 0;
+          display: inline-block;
+          width: 1.15em;
+          height: 1.15em;
+          mask: url("../../assets/images/icon-arrow.svg") no-repeat 50% 50%;
+          mask-size: cover;
+          -webkit-mask: url("../../assets/images/icon-arrow.svg") no-repeat 50% 50%;
+          -webkit-mask-size: cover;
+          background-color: currentColor;
+          vertical-align: text-bottom;
+          transform: translate(0, -50%) scale(-1, 1);
+          transition: var(--theme-button-transition);
+          transition-property: opacity, transform; } }
+    .editor-styles-wrapper input[type="reset"]:not([disabled]):hover,
+    .editor-styles-wrapper button[type="reset"]:not([disabled]):hover {
+      color: var(--theme-button-text-color); }
+      .editor-styles-wrapper input[type="reset"]:not([disabled]):hover:before,
+      .editor-styles-wrapper button[type="reset"]:not([disabled]):hover:before {
+        transform: scale3d(0, 1, 1);
+        transform-origin: right; }
+      .editor-styles-wrapper input[type="reset"]:not([disabled]):hover:after,
+      .editor-styles-wrapper button[type="reset"]:not([disabled]):hover:after {
+        opacity: 1;
+        transform: translate(0.4em, -50%) scale(-1, 1); }
   .editor-styles-wrapper input[type="file"] {
     width: 100%; }
   .editor-styles-wrapper input[type="file"]::-webkit-file-upload-button {
@@ -633,6 +688,14 @@
       margin-bottom: var(--theme-input-vertical-spacing); }
   .editor-styles-wrapper .input-normal-height {
     --theme-input-padding: .833em; }
+  .editor-styles-wrapper .nf-form-cont .list-radio-wrap .nf-field-element li input,
+  .editor-styles-wrapper .nf-form-cont .list-checkbox-wrap .nf-field-element li input,
+  .editor-styles-wrapper .nf-form-cont .list-image-wrap .nf-field-element li input {
+    width: var(--theme-checkbox-width) !important;
+    margin-top: var(--theme-input-vertical-spacing);
+    margin-right: var(--theme-input-horizontal-spacing); }
+  .editor-styles-wrapper .nf-form-cont .list-checkbox-wrap .nf-field-element li input {
+    margin-top: 0; }
   .editor-styles-wrapper ul,
   .editor-styles-wrapper ol {
     list-style-position: outside;
