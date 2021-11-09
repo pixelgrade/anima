@@ -225,6 +225,28 @@
 
 .editor-styles-wrapper {
   -webkit-font-smoothing: antialiased;
+  /*------------------------------------*\
+  #PLUGIN - Ninja Forms
+\*------------------------------------*/
+  /**
+ * The Ninja Forms plugin successfully uses our Design System styling once the user disables the
+ * plugin default styling.
+ * 
+ * It is required to set the 'Opinionated Style' option to 'None' from plugin Settings → Advanced 
+ * Settings page to disable the plugin styles and use our Design System styling and tokens. 
+ * @todo: it would be a great experience if we could find a way to disable it automatically.
+ * 
+ * Any observed issues should be overwritten and fixed using the same CSS rules structure
+ * from the SASS source map files found in Chrome DevTools
+ */
+  /**
+ * We rely on the plugin default inline validation for fields and
+ * we could hide the required fields notices as they could divert
+ * the user's attention before any interaction with the form. 
+ */
+  /**
+ * Set error color to use the Design System tokens
+ */
   /* Lists */
   /* Nested unordered lists */
   /* Nested ordered lists */
@@ -696,6 +718,74 @@
     margin-right: var(--theme-input-horizontal-spacing); }
   .editor-styles-wrapper .nf-form-cont .list-checkbox-wrap .nf-field-element li input {
     margin-top: 0; }
+  .editor-styles-wrapper .nf-form-fields-required,
+  .editor-styles-wrapper .ninja-forms-req-symbol {
+    display: none; }
+  .editor-styles-wrapper .nf-form-cont .nf-error-msg,
+  .editor-styles-wrapper .nf-form-cont .ninja-forms-req-symbol {
+    --sm-bg-color-1: var(--sm-color-palette-_error-bg-color-1, var(--sm-color-palette-1-bg-color-1));
+    --sm-accent-color-1: var(--sm-color-palette-_error-accent-color-1, var(--sm-color-palette-1-accent-color-1));
+    --sm-fg1-color-1: var(--sm-color-palette-_error-fg1-color-1, var(--sm-color-palette-1-fg1-color-1));
+    --sm-fg2-color-1: var(--sm-color-palette-_error-fg2-color-1, var(--sm-color-palette-1-fg2-color-1));
+    --sm-bg-color-2: var(--sm-color-palette-_error-bg-color-2, var(--sm-color-palette-1-bg-color-2));
+    --sm-accent-color-2: var(--sm-color-palette-_error-accent-color-2, var(--sm-color-palette-1-accent-color-2));
+    --sm-fg1-color-2: var(--sm-color-palette-_error-fg1-color-2, var(--sm-color-palette-1-fg1-color-2));
+    --sm-fg2-color-2: var(--sm-color-palette-_error-fg2-color-2, var(--sm-color-palette-1-fg2-color-2));
+    --sm-bg-color-3: var(--sm-color-palette-_error-bg-color-3, var(--sm-color-palette-1-bg-color-3));
+    --sm-accent-color-3: var(--sm-color-palette-_error-accent-color-3, var(--sm-color-palette-1-accent-color-3));
+    --sm-fg1-color-3: var(--sm-color-palette-_error-fg1-color-3, var(--sm-color-palette-1-fg1-color-3));
+    --sm-fg2-color-3: var(--sm-color-palette-_error-fg2-color-3, var(--sm-color-palette-1-fg2-color-3));
+    --sm-bg-color-4: var(--sm-color-palette-_error-bg-color-4, var(--sm-color-palette-1-bg-color-4));
+    --sm-accent-color-4: var(--sm-color-palette-_error-accent-color-4, var(--sm-color-palette-1-accent-color-4));
+    --sm-fg1-color-4: var(--sm-color-palette-_error-fg1-color-4, var(--sm-color-palette-1-fg1-color-4));
+    --sm-fg2-color-4: var(--sm-color-palette-_error-fg2-color-4, var(--sm-color-palette-1-fg2-color-4));
+    --sm-bg-color-5: var(--sm-color-palette-_error-bg-color-5, var(--sm-color-palette-1-bg-color-5));
+    --sm-accent-color-5: var(--sm-color-palette-_error-accent-color-5, var(--sm-color-palette-1-accent-color-5));
+    --sm-fg1-color-5: var(--sm-color-palette-_error-fg1-color-5, var(--sm-color-palette-1-fg1-color-5));
+    --sm-fg2-color-5: var(--sm-color-palette-_error-fg2-color-5, var(--sm-color-palette-1-fg2-color-5));
+    --sm-bg-color-6: var(--sm-color-palette-_error-bg-color-6, var(--sm-color-palette-1-bg-color-6));
+    --sm-accent-color-6: var(--sm-color-palette-_error-accent-color-6, var(--sm-color-palette-1-accent-color-6));
+    --sm-fg1-color-6: var(--sm-color-palette-_error-fg1-color-6, var(--sm-color-palette-1-fg1-color-6));
+    --sm-fg2-color-6: var(--sm-color-palette-_error-fg2-color-6, var(--sm-color-palette-1-fg2-color-6));
+    --sm-bg-color-7: var(--sm-color-palette-_error-bg-color-7, var(--sm-color-palette-1-bg-color-7));
+    --sm-accent-color-7: var(--sm-color-palette-_error-accent-color-7, var(--sm-color-palette-1-accent-color-7));
+    --sm-fg1-color-7: var(--sm-color-palette-_error-fg1-color-7, var(--sm-color-palette-1-fg1-color-7));
+    --sm-fg2-color-7: var(--sm-color-palette-_error-fg2-color-7, var(--sm-color-palette-1-fg2-color-7));
+    --sm-bg-color-8: var(--sm-color-palette-_error-bg-color-8, var(--sm-color-palette-1-bg-color-8));
+    --sm-accent-color-8: var(--sm-color-palette-_error-accent-color-8, var(--sm-color-palette-1-accent-color-8));
+    --sm-fg1-color-8: var(--sm-color-palette-_error-fg1-color-8, var(--sm-color-palette-1-fg1-color-8));
+    --sm-fg2-color-8: var(--sm-color-palette-_error-fg2-color-8, var(--sm-color-palette-1-fg2-color-8));
+    --sm-bg-color-9: var(--sm-color-palette-_error-bg-color-9, var(--sm-color-palette-1-bg-color-9));
+    --sm-accent-color-9: var(--sm-color-palette-_error-accent-color-9, var(--sm-color-palette-1-accent-color-9));
+    --sm-fg1-color-9: var(--sm-color-palette-_error-fg1-color-9, var(--sm-color-palette-1-fg1-color-9));
+    --sm-fg2-color-9: var(--sm-color-palette-_error-fg2-color-9, var(--sm-color-palette-1-fg2-color-9));
+    --sm-bg-color-10: var(--sm-color-palette-_error-bg-color-10, var(--sm-color-palette-1-bg-color-10));
+    --sm-accent-color-10: var(--sm-color-palette-_error-accent-color-10, var(--sm-color-palette-1-accent-color-10));
+    --sm-fg1-color-10: var(--sm-color-palette-_error-fg1-color-10, var(--sm-color-palette-1-fg1-color-10));
+    --sm-fg2-color-10: var(--sm-color-palette-_error-fg2-color-10, var(--sm-color-palette-1-fg2-color-10));
+    --sm-bg-color-11: var(--sm-color-palette-_error-bg-color-11, var(--sm-color-palette-1-bg-color-11));
+    --sm-accent-color-11: var(--sm-color-palette-_error-accent-color-11, var(--sm-color-palette-1-accent-color-11));
+    --sm-fg1-color-11: var(--sm-color-palette-_error-fg1-color-11, var(--sm-color-palette-1-fg1-color-11));
+    --sm-fg2-color-11: var(--sm-color-palette-_error-fg2-color-11, var(--sm-color-palette-1-fg2-color-11));
+    --sm-bg-color-12: var(--sm-color-palette-_error-bg-color-12, var(--sm-color-palette-1-bg-color-12));
+    --sm-accent-color-12: var(--sm-color-palette-_error-accent-color-12, var(--sm-color-palette-1-accent-color-12));
+    --sm-fg1-color-12: var(--sm-color-palette-_error-fg1-color-12, var(--sm-color-palette-1-fg1-color-12));
+    --sm-fg2-color-12: var(--sm-color-palette-_error-fg2-color-12, var(--sm-color-palette-1-fg2-color-12));
+    color: var(--sm-accent-color-1);
+    font-size: 0.8rem; }
+  .editor-styles-wrapper .nf-error-wrap {
+    margin-top: var(--theme-spacing-smallest); }
+  .editor-styles-wrapper .nf-field-description {
+    margin-bottom: var(--theme-spacing-smallest); }
+    .label-above .editor-styles-wrapper .nf-field-description {
+      margin-top: calc(var(--theme-spacing-smallest) * -1); }
+    .editor-styles-wrapper .nf-field-description * {
+      color: var(--sm-current-fg1-color) !important;
+      font-size: 0.8rem !important; }
+  .editor-styles-wrapper .nf-input-limit:empty {
+    display: none; }
+  .editor-styles-wrapper .field-wrap textarea {
+    display: block; }
   .editor-styles-wrapper ul,
   .editor-styles-wrapper ol {
     list-style-position: outside;

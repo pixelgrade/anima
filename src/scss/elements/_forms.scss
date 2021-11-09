@@ -108,16 +108,38 @@ label {
     --theme-input-padding: .833em;
 }
 
-// Plugin: Ninja Forms
-.nf-form-cont .list-radio-wrap,
-.nf-form-cont .list-checkbox-wrap,
-.nf-form-cont .list-image-wrap {
-    .nf-field-element {
-        li {
-            input {
-                width: var(--theme-checkbox-width) !important;
-                margin-top: var(--theme-input-vertical-spacing);
-                margin-right: var(--theme-input-horizontal-spacing);    
+
+
+
+
+/*------------------------------------*\
+  #PLUGIN - Ninja Forms
+\*------------------------------------*/
+
+/**
+ * The Ninja Forms plugin successfully uses our Design System styling once the user disables the
+ * plugin default styling.
+ * 
+ * It is required to set the 'Opinionated Style' option to 'None' from plugin Settings → Advanced 
+ * Settings page to disable the plugin styles and use our Design System styling and tokens. 
+ * @todo: it would be a great experience if we could find a way to disable it automatically.
+ * 
+ * Any observed issues should be overwritten and fixed using the same CSS rules structure
+ * from the SASS source map files found in Chrome DevTools
+ */
+
+.nf-form-cont {
+    .list-radio-wrap,
+    .list-checkbox-wrap,
+    .list-image-wrap {
+        .nf-field-element {
+            li {
+                input {
+                    // The default "width: auto !important" shrink and hide the fields
+                    width: var(--theme-checkbox-width) !important;
+                    margin-top: var(--theme-input-vertical-spacing);
+                    margin-right: var(--theme-input-horizontal-spacing);    
+                }
             }
         }
     }
@@ -131,4 +153,55 @@ label {
             }
         }
     }   
+}
+
+/**
+ * We rely on the plugin default inline validation for fields and
+ * we could hide the required fields notices as they could divert
+ * the user's attention before any interaction with the form. 
+ */
+.nf-form-fields-required,
+.ninja-forms-req-symbol {
+    display: none;
+}
+
+/**
+ * Set error color to use the Design System tokens
+ */
+.nf-form-cont {
+    .nf-error-msg, 
+    .ninja-forms-req-symbol {
+        @include apply-palette(_error);
+        color: var(--sm-accent-color-1);
+        font-size: 0.8rem;
+    }
+}
+
+.nf-error-wrap {
+    margin-top: var(--theme-spacing-smallest);
+}
+
+.nf-field-description {
+    margin-bottom: var(--theme-spacing-smallest);
+
+    .label-above & {
+        margin-top: calc(var(--theme-spacing-smallest) * -1);
+    }
+
+    * {
+        color: var(--sm-current-fg1-color) !important;
+        font-size: 0.8rem !important;
+    }
+}
+
+
+
+.nf-input-limit:empty {
+    display: none;
+}
+
+.field-wrap { 
+    textarea {
+        display: block;
+    }
 }
