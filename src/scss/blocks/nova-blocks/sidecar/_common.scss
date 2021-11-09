@@ -33,10 +33,6 @@ body {
         }
     }
 
-    .widget {
-        @include space-children-y( var(--theme-spacing-fluid-smaller) );
-    }
-
     .widget-title[class][class] {
         --font-size: var(--theme-heading-4-font-size);
     }
@@ -72,27 +68,5 @@ body {
     button,
     select {
         --font-size-modifier: 1;
-    }
-}
-
-
-// Decrease font sizing when the content is pulled
-// outside the main container, in a smaller area.
-// ---
-// ToDO:
-// Note that [data-align] is used on the Media Card and Hero blocks with
-// the "full" value and the font size should be affected in those cases.
-// There might be other cases where this rule is needed.
-.novablocks-content {
-
-    // > [data-align],
-    > .alignleft,
-    > .alignright,
-    > [class*='pull'],
-    > [data-novablocks-alignment] {
-
-        * {
-            --font-size-modifier: 0.85;
-        }
     }
 }

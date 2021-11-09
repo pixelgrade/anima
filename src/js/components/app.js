@@ -128,7 +128,9 @@ export default class App {
 
 		if ( !! header ) {
 			this.header = new Header( header, {
-				onResize: this.onHeaderUpdate.bind( this )
+				onResize: () => {
+					requestAnimationFrame( this.onHeaderUpdate.bind( this ) )
+				}
 			} );
 		}
 	}
@@ -173,6 +175,8 @@ export default class App {
 		const stickyDistance = adminBarTop + promoBarTop;
 		const staticDistance = this.adminBarHeight + promoBarHeight;
 
+		document.documentElement.style.setProperty( '--theme-sticky-distance', `${ stickyDistance }px` );
+
 		if ( !! header ) {
 			header.stickyDistance = stickyDistance;
 			header.staticDistance = staticDistance;
@@ -201,7 +205,7 @@ export default class App {
 		const headerHeight = this.header?.getHeight() || 0;
 		const $body = $( 'body' );
 
-		$( 'html' ).css( 'scrollPaddingTop', `${ headerHeight }px` );
+		document.documentElement.style.setProperty( '--theme-header-height', `${ headerHeight }px` );
 
 		if ( ! $body.is( '.has-no-spacing-top' ) ) {
 			$body.find( '.site-content' ).css( 'marginTop', `${ promoBarHeight + headerHeight }px` );
