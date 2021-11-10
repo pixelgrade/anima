@@ -289,9 +289,6 @@
   /**
  * Set error color to use the Design System tokens
  */
-  /* Lists */
-  /* Nested unordered lists */
-  /* Nested ordered lists */
   /* Links */
   /* Entry meta links */
   /* Headings links */
@@ -787,39 +784,6 @@
     display: none; }
   .editor-styles-wrapper .field-wrap textarea {
     display: block; }
-  .editor-styles-wrapper ul,
-  .editor-styles-wrapper ol {
-    list-style-position: outside;
-    margin-left: 0; }
-    .editor-styles-wrapper ul > :not(:first-child),
-    .editor-styles-wrapper ol > :not(:first-child) {
-      margin-top: var(--theme-spacing-fluid-smaller); }
-    .editor-styles-wrapper ul ul,
-    .editor-styles-wrapper ul ol,
-    .editor-styles-wrapper ol ul,
-    .editor-styles-wrapper ol ol {
-      margin-top: var(--theme-spacing-fluid-smallest); }
-      .editor-styles-wrapper ul ul > :not(:first-child),
-      .editor-styles-wrapper ul ol > :not(:first-child),
-      .editor-styles-wrapper ol ul > :not(:first-child),
-      .editor-styles-wrapper ol ol > :not(:first-child) {
-        margin-top: var(--theme-spacing-fluid-smallest); }
-  .editor-styles-wrapper ul {
-    --list-padding: var(--theme-spacing-fluid-small);
-    padding-left: var(--list-padding); }
-  .editor-styles-wrapper ol {
-    --list-padding: calc(var(--theme-spacing-fluid-normal) * 1.2);
-    padding-left: var(--list-padding); }
-  .editor-styles-wrapper ul {
-    list-style-type: disc; }
-  .editor-styles-wrapper ul ul {
-    list-style-type: circle; }
-  .editor-styles-wrapper ul ul ul {
-    list-style-type: square; }
-  .editor-styles-wrapper ol {
-    list-style-type: decimal; }
-  .editor-styles-wrapper ol ol {
-    list-style-type: lower-alpha; }
   .editor-styles-wrapper[class] {
     /* Iframes */
     /* Preformatted */

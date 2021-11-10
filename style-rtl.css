@@ -998,50 +998,6 @@ img {
   transition: var(--theme-transition);
   transition-property: opacity; }
 
-/* Lists */
-ul,
-ol {
-  list-style-position: outside;
-  margin-right: 0; }
-  ul > :not(:first-child),
-  ol > :not(:first-child) {
-    margin-top: var(--theme-spacing-fluid-smaller); }
-  ul ul,
-  ul ol,
-  ol ul,
-  ol ol {
-    margin-top: var(--theme-spacing-fluid-smallest); }
-    ul ul > :not(:first-child),
-    ul ol > :not(:first-child),
-    ol ul > :not(:first-child),
-    ol ol > :not(:first-child) {
-      margin-top: var(--theme-spacing-fluid-smallest); }
-
-ul {
-  --list-padding: var(--theme-spacing-fluid-small);
-  padding-right: var(--list-padding); }
-
-ol {
-  --list-padding: calc(var(--theme-spacing-fluid-normal) * 1.2);
-  padding-right: var(--list-padding); }
-
-/* Nested unordered lists */
-ul {
-  list-style-type: disc; }
-
-ul ul {
-  list-style-type: circle; }
-
-ul ul ul {
-  list-style-type: square; }
-
-/* Nested ordered lists */
-ol {
-  list-style-type: decimal; }
-
-ol ol {
-  list-style-type: lower-alpha; }
-
 /* Links */
 a {
   color: var(--sm-current-fg1-color);
@@ -3765,9 +3721,6 @@ html:after {
   clear: both; }
 
 /* END body margin hack */
-body {
-  --page-background-color: var(--sm-bg-color-1); }
-
 /* Site Content */
 .site-content {
   padding-top: var(--theme-spacing-fluid-larger);
