@@ -1,3 +1,9 @@
+/**
+ * Use this mixin on containers or elements, when you need 
+ * to overwrite the universal selector (*) specificity
+ *
+ * Examples: input fields, image captions
+ */
 figure > :not(:first-child) {
   margin-top: var(--theme-spacing-smallest); }
 
@@ -219,7 +225,13 @@ body:not(.has-loaded) .c-comments-toggle__checkbox + .c-comments-toggle__label ~
   --current-font-style: var(--theme-lead-font-style);
   --current-line-height: var(--theme-lead-line-height);
   --current-letter-spacing: var(--theme-lead-letter-spacing);
-  --current-text-transform: var(--theme-lead-text-transform); }
+  --current-text-transform: var(--theme-lead-text-transform);
+  /**
+     * Overwrite elements whose properties are declared by a 3rd 
+     * party by setting all the font properties again.
+     * 
+     * Examples: sales badges inherit font rules from WooCommerce plugin
+     */ }
 
 .article-header .cat-links {
   --font-size: var(--theme-meta-font-size);
@@ -230,7 +242,13 @@ body:not(.has-loaded) .c-comments-toggle__checkbox + .c-comments-toggle__label ~
   --current-font-style: var(--theme-meta-font-style);
   --current-line-height: var(--theme-meta-line-height);
   --current-letter-spacing: var(--theme-meta-letter-spacing);
-  --current-text-transform: var(--theme-meta-text-transform); }
+  --current-text-transform: var(--theme-meta-text-transform);
+  /**
+     * Overwrite elements whose properties are declared by a 3rd 
+     * party by setting all the font properties again.
+     * 
+     * Examples: sales badges inherit font rules from WooCommerce plugin
+     */ }
 
 .article-header + * {
   position: relative;

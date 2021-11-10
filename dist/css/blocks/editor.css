@@ -1,3 +1,9 @@
+/**
+ * Use this mixin on containers or elements, when you need 
+ * to overwrite the universal selector (*) specificity
+ *
+ * Examples: input fields, image captions
+ */
 ul.wp-block-archives-list[class] {
   list-style: none;
   padding-left: 0; }
@@ -46,6 +52,12 @@ ul.wp-block-categories__list[class] {
     --current-font-weight: var(--theme-body-font-weight);
     --current-font-style: var(--theme-body-font-style);
     --current-letter-spacing: var(--theme-body-letter-spacing);
+    /**
+     * Overwrite elements whose properties are declared by a 3rd 
+     * party by setting all the font properties again.
+     * 
+     * Examples: sales badges inherit font rules from WooCommerce plugin
+     */
     --font-size-modifier: 0.8; }
     .editor-block-list__block.wp-block-image figcaption .credits,
     .block-editor-block-list__block.wp-block-image figcaption .credits {
@@ -108,7 +120,13 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between div.wp-b
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
   --current-font-style: var(--theme-body-font-style);
-  --current-letter-spacing: var(--theme-body-letter-spacing); }
+  --current-letter-spacing: var(--theme-body-letter-spacing);
+  /**
+     * Overwrite elements whose properties are declared by a 3rd 
+     * party by setting all the font properties again.
+     * 
+     * Examples: sales badges inherit font rules from WooCommerce plugin
+     */ }
 
 .wp-block[data-align="wide"] .wp-block-pullquote {
   --font-size: var(--theme-heading-2-font-size);
@@ -120,7 +138,13 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between div.wp-b
   --current-line-height: var(--theme-heading-2-line-height);
   --current-letter-spacing: var(--theme-heading-2-letter-spacing);
   --current-text-transform: var(--theme-heading-2-text-transform);
-  --current-color: var(--theme-heading-2-color); }
+  --current-color: var(--theme-heading-2-color);
+  /**
+     * Overwrite elements whose properties are declared by a 3rd 
+     * party by setting all the font properties again.
+     * 
+     * Examples: sales badges inherit font rules from WooCommerce plugin
+     */ }
 
 .wp-block[data-align="full"] .wp-block-pullquote {
   --font-size: var(--theme-heading-1-font-size);
@@ -132,7 +156,13 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between div.wp-b
   --current-font-weight: var(--theme-heading-1-font-weight);
   --current-letter-spacing: var(--theme-heading-1-letter-spacing);
   --current-text-transform: var(--theme-heading-1-text-transform);
-  --current-color: var(--theme-heading-1-color); }
+  --current-color: var(--theme-heading-1-color);
+  /**
+     * Overwrite elements whose properties are declared by a 3rd 
+     * party by setting all the font properties again.
+     * 
+     * Examples: sales badges inherit font rules from WooCommerce plugin
+     */ }
 
 .wp-block-search__button {
   display: inline-block;
@@ -162,6 +192,12 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between div.wp-b
   --current-line-height: var(--theme-button-line-height);
   --current-letter-spacing: var(--theme-button-letter-spacing);
   --current-text-transform: var(--theme-button-text-transform);
+  /**
+     * Overwrite elements whose properties are declared by a 3rd 
+     * party by setting all the font properties again.
+     * 
+     * Examples: sales badges inherit font rules from WooCommerce plugin
+     */
   font-size: var(--theme-button-font-size) !important;
   padding: var(--theme-button-padding) !important; }
   .wp-block-search__button:not([disabled]) {
@@ -199,6 +235,12 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between div.wp-b
     --current-letter-spacing: var(--theme-heading-4-letter-spacing);
     --current-text-transform: var(--theme-heading-4-text-transform);
     --current-color: var(--theme-heading-4-color);
+    /**
+     * Overwrite elements whose properties are declared by a 3rd 
+     * party by setting all the font properties again.
+     * 
+     * Examples: sales badges inherit font rules from WooCommerce plugin
+     */
     padding-right: var(--theme-spacing-smallest); }
   .nova-food-menu-item__title:before {
     bottom: 0.5em; }
@@ -217,7 +259,13 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between div.wp-b
   --current-line-height: var(--theme-heading-2-line-height);
   --current-letter-spacing: var(--theme-heading-2-letter-spacing);
   --current-text-transform: var(--theme-heading-2-text-transform);
-  --current-color: var(--theme-heading-2-color); }
+  --current-color: var(--theme-heading-2-color);
+  /**
+     * Overwrite elements whose properties are declared by a 3rd 
+     * party by setting all the font properties again.
+     * 
+     * Examples: sales badges inherit font rules from WooCommerce plugin
+     */ }
 
 .nova-food-menu-item__title {
   font-size: var(--theme-heading-4-font-size); }
@@ -295,7 +343,13 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between div.wp-b
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
   --current-font-style: var(--theme-body-font-style);
-  --current-letter-spacing: var(--theme-body-letter-spacing); }
+  --current-letter-spacing: var(--theme-body-letter-spacing);
+  /**
+     * Overwrite elements whose properties are declared by a 3rd 
+     * party by setting all the font properties again.
+     * 
+     * Examples: sales badges inherit font rules from WooCommerce plugin
+     */ }
   .novablocks-media__content[class] {
     min-width: 0; }
 
@@ -384,6 +438,12 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between div.wp-b
   --current-line-height: var(--theme-button-line-height);
   --current-letter-spacing: var(--theme-button-letter-spacing);
   --current-text-transform: var(--theme-button-text-transform);
+  /**
+     * Overwrite elements whose properties are declared by a 3rd 
+     * party by setting all the font properties again.
+     * 
+     * Examples: sales badges inherit font rules from WooCommerce plugin
+     */
   background-color: transparent;
   transform: translateZ(0);
   will-change: transform;
@@ -422,6 +482,12 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between div.wp-b
   --current-line-height: var(--theme-button-line-height);
   --current-letter-spacing: var(--theme-button-letter-spacing);
   --current-text-transform: var(--theme-button-text-transform);
+  /**
+     * Overwrite elements whose properties are declared by a 3rd 
+     * party by setting all the font properties again.
+     * 
+     * Examples: sales badges inherit font rules from WooCommerce plugin
+     */
   text-transform: none; }
 
 .novablocks-opentable {
@@ -463,7 +529,13 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between div.wp-b
   --current-font-style: var(--theme-input-font-style);
   --current-line-height: var(--theme-input-line-height);
   --current-letter-spacing: var(--theme-input-letter-spacing);
-  --current-text-transform: var(--theme-input-text-transform); }
+  --current-text-transform: var(--theme-input-text-transform);
+  /**
+     * Overwrite elements whose properties are declared by a 3rd 
+     * party by setting all the font properties again.
+     * 
+     * Examples: sales badges inherit font rules from WooCommerce plugin
+     */ }
 
 .ot-dtp-picker .ot-dtp-picker-selector[class] {
   height: auto; }
@@ -531,7 +603,13 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between div.wp-b
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
   --current-font-style: var(--theme-body-font-style);
-  --current-letter-spacing: var(--theme-body-letter-spacing); }
+  --current-letter-spacing: var(--theme-body-letter-spacing);
+  /**
+     * Overwrite elements whose properties are declared by a 3rd 
+     * party by setting all the font properties again.
+     * 
+     * Examples: sales badges inherit font rules from WooCommerce plugin
+     */ }
   .block-is-highlighted:not(.content-is-highlighted) .novablocks-card .wp-block-button:not(.is-style-text) .wp-block-button__link,
   .content-is-highlighted:not(.block-is-highlighted) .novablocks-card .wp-block-button:not(.is-style-text) .wp-block-button__link {
     --theme-button-text-color: var(--sm-current-bg-color);

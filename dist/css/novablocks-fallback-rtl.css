@@ -1,3 +1,9 @@
+/**
+ * Use this mixin on containers or elements, when you need 
+ * to overwrite the universal selector (*) specificity
+ *
+ * Examples: input fields, image captions
+ */
 .novablocks-block[class] {
   padding-top: calc( var(--emphasis-top-spacing, 1) * var(--nb-spacing) * var(--nb-element-spacing-multiplier, 1));
   padding-bottom: calc( var(--emphasis-bottom-spacing, 1) * var(--nb-spacing) * var(--nb-element-spacing-multiplier, 1));
