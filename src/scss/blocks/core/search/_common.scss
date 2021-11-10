@@ -1,27 +1,37 @@
 $enable-search-block-styles:            true !default;
 
+/*------------------------------------*\
+  #BLOCK - Search
+\*------------------------------------*/
+
 @if $enable-search-block-styles == true {
 
 	.wp-block-search {
 		
+		/**
+		 * Display on the same row the search input field and submit button
+		 */
 		&__inside-wrapper {
 			display: flex;
 		}
 		
-		&:not(.wp-block-search__icon-button) {
-			
-			.wp-block-search__button {
-				
-				min-width: max-content !important;
-				
-				&:after {
-					content: none;
-				}
-			}
+		/**
+		 * 1) The search input field inherits most of the standard field styles.
+		 * 2) On mobile devices, the search input should follow the button
+		 * 	  height and not the other way around, so the clickable area  
+		 * 	  remains accessible. 
+		 * 3) Reset the default padding value (for mobile devices) to be the same 
+		 * 	  as on the desktop.
+		 */
+		
+		input[type="search"] {
+			--theme-input-padding: var(--theme-input-padding-above-tablet);
 		}
 		
-		&__button {
-			
+		/**
+		 * Search button
+		 */
+		&__button {		
 			position: relative;
 			
 			@include specific(2) {
@@ -62,19 +72,64 @@ $enable-search-block-styles:            true !default;
 			svg {
 				display: none;
 			}
-		}
-		
+		}		
+
+
+
+		/**
+		 * BUTTON POSITION: Outside search field
+		 */
 		&__button-outside {
-			
 			.wp-block-search__button {
 				margin-left: 10px;
 			}
 		}
-		
-		&__no-button {
-			
+
+		/**
+		 * BUTTON POSITION: Inside search field
+		 * Decrease the button padding and place it inside the input field.
+		 */
+		&__button-inside {
+			position: relative;
+
 			.wp-block-search__inside-wrapper {
+				display: block;
+			}
+
+			.wp-block-search__button {
+				position: absolute;
+				right: calc((var(--theme-button-y-modifier)));
+				top: calc((var(--theme-button-y-modifier)));
+
+				--theme-button-y-modifier: 0.2em;
+
+				// @todo: find why the --theme-button-y-modifier variable isn't loaded from _button.scss
+   				--theme-button-padding: calc(var(--theme-button-y-padding) - var(--theme-button-border-width) - var(--theme-button-y-modifier)) var(--theme-button-x-padding);
+			}
+		}
+
+
+
+
+		/**
+		 * BUTTON STYLE: Button without icon
+		 */
+		&:not(.wp-block-search__icon-button) {
+			.wp-block-search__button {	
+				min-width: max-content;
 				
+				&:after {
+					content: none;
+				}
+			}
+		}
+
+		/**
+		 * BUTTON STYLE: No button
+		 * When there is no button, display the search icon as a hint.
+		 */
+		&__no-button {
+			.wp-block-search__inside-wrapper {	
 				position: relative;
 				
 				&:before {

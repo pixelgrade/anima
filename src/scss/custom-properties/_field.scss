@@ -1,12 +1,14 @@
 :root {
-  --theme-input-padding: .35em;
+  --theme-input-padding: .55em;
+  --theme-input-border-width: var(--theme-button-border-width);
+  --theme-input-padding-above-tablet: var(--theme-button-y-padding);
 
   --theme-checkbox-width: 1.38rem;
   --theme-checkbox-height: 1.38rem;
   --opacity-color: 255, 255, 255;
 
   @include above(tablet) {
-    --theme-input-padding: .833em;
+    --theme-input-padding: var(--theme-input-padding-above-tablet);
   }
 }
 

@@ -224,21 +224,24 @@
   --theme-button-border-style: solid;
   --theme-button-border-radius: 0;
   --theme-button-x-padding: 1.5em;
-  --theme-button-y-padding: .75em;
-  --theme-button-padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
+  --theme-button-y-padding: .833em;
+  --theme-button-y-modifier: 0px;
+  --theme-button-padding: calc(var(--theme-button-y-padding) - var(--theme-button-border-width) - var(--theme-button-y-modifier)) var(--theme-button-x-padding);
   --theme-button-transition-duration: var(--theme-transition-duration);
   --theme-button-transition-easing: var(--theme-transition-easing);
   --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
   --theme-button-hover-transition: var(--theme-button-transition); }
 
 :root {
-  --theme-input-padding: .35em;
+  --theme-input-padding: .55em;
+  --theme-input-border-width: var(--theme-button-border-width);
+  --theme-input-padding-above-tablet: var(--theme-button-y-padding);
   --theme-checkbox-width: 1.38rem;
   --theme-checkbox-height: 1.38rem;
   --opacity-color: 255, 255, 255; }
   @media only screen and (min-width: 768px) {
     :root {
-      --theme-input-padding: .833em; } }
+      --theme-input-padding: var(--theme-input-padding-above-tablet); } }
 
 * {
   --theme-input-color: var(--sm-current-fg1-color);
