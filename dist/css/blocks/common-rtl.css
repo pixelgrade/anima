@@ -48,6 +48,7 @@
   border-radius: var(--theme-button-border-radius);
   --font-size: var(--theme-button-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
   --current-font-style: var(--theme-button-font-style);
@@ -413,6 +414,7 @@
   .wp-block-gallery figcaption {
     --font-size: var(--theme-body-font-size);
     --current-font-size: var(--final-font-size);
+    font-size: var(--current-font-size);
     --current-font-family: var(--theme-body-font-family);
     --current-line-height: var(--theme-body-line-height);
     --current-font-weight: var(--theme-body-font-weight);
@@ -596,6 +598,7 @@
 .wp-block-pullquote.alignleft blockquote, .wp-block-pullquote.alignright blockquote {
   --font-size: var(--theme-body-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
@@ -605,6 +608,7 @@
 .wp-block-pullquote.alignwide {
   --font-size: var(--theme-heading-2-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-2-font-family);
   --current-font-style: var(--theme-heading-2-font-style);
   --current-font-weight: var(--theme-heading-2-font-weight);
@@ -616,6 +620,7 @@
 .wp-block-pullquote.alingfull {
   --font-size: var(--theme-heading-1-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-1-font-family);
   --current-font-style: var(--theme-heading-1-font-style);
   --current-line-height: var(--theme-heading-1-line-height);
@@ -629,6 +634,7 @@
   display: block;
   --font-size: var(--theme-heading-6-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-6-font-family);
   --current-font-weight: var(--theme-heading-6-font-weight);
   --current-font-style: var(--theme-heading-6-font-style);
@@ -648,6 +654,7 @@
     border-right: none;
     --font-size: var(--theme-heading-3-font-size);
     --current-font-size: var(--final-font-size);
+    font-size: var(--current-font-size);
     --current-font-family: var(--theme-heading-3-font-family);
     --current-font-style: var(--theme-heading-3-font-style);
     --current-font-weight: var(--theme-heading-3-font-weight);
@@ -661,6 +668,7 @@
   display: block;
   --font-size: var(--theme-heading-6-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-6-font-family);
   --current-font-weight: var(--theme-heading-6-font-weight);
   --current-font-style: var(--theme-heading-6-font-style);
@@ -742,8 +750,8 @@
       display: block; }
     .wp-block-search__button-inside .wp-block-search__button {
       position: absolute;
-      left: calc((var(--theme-button-y-modifier)));
-      top: calc((var(--theme-button-y-modifier)));
+      left: var(--theme-button-y-modifier);
+      top: var(--theme-button-y-modifier);
       --theme-button-y-modifier: 0.2em;
       --theme-button-padding: calc(var(--theme-button-y-padding) - var(--theme-button-border-width) - var(--theme-button-y-modifier)) var(--theme-button-x-padding); }
   .wp-block-search:not(.wp-block-search__icon-button) .wp-block-search__button {
@@ -1388,6 +1396,7 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between div.wp-b
 .wp-block-novablocks-navigation {
   --font-size: var(--theme-navigation-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-navigation-font-family);
   --current-font-weight: var(--theme-navigation-font-weight);
   --current-font-style: var(--theme-navigation-font-style);
@@ -1469,6 +1478,7 @@ html:root {
 .novablocks-media-composition__grid-item-description {
   --font-size: var(--theme-body-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);

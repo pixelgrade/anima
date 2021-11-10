@@ -338,6 +338,7 @@ html {
   --theme-body-final-font-size: var(--final-font-size);
   --font-size: var(--theme-body-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
@@ -376,6 +377,7 @@ input:not([type]), input[type="text"], input[type="tel"], input[type="number"], 
   transition: all .2s ease-in-out;
   --font-size: var(--theme-input-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-input-font-family);
   --current-font-weight: var(--theme-input-font-weight);
   --current-font-style: var(--theme-input-font-style);
@@ -495,6 +497,7 @@ input[type="button"] {
   transition: var(--current-button-transition);
   --font-size: var(--theme-button-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
   --current-font-style: var(--theme-button-font-style);
@@ -552,6 +555,7 @@ button[type="submit"] {
   transition: var(--current-button-transition);
   --font-size: var(--theme-button-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
   --current-font-style: var(--theme-button-font-style);
@@ -685,6 +689,7 @@ textarea {
   transition: all .2s ease-in-out;
   --font-size: var(--theme-input-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-input-font-family);
   --current-font-weight: var(--theme-input-font-weight);
   --current-font-style: var(--theme-input-font-style);
@@ -728,6 +733,7 @@ select {
   transition: all .2s ease-in-out;
   --font-size: var(--theme-input-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-input-font-family);
   --current-font-weight: var(--theme-input-font-weight);
   --current-font-style: var(--theme-input-font-style);
@@ -783,6 +789,7 @@ label {
   align-items: center;
   --font-size: var(--theme-input-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-input-font-family);
   --current-font-weight: var(--theme-input-font-weight);
   --current-font-style: var(--theme-input-font-style);
@@ -923,6 +930,7 @@ h6, .h6 {
 h1, .h1 {
   --font-size: var(--theme-heading-1-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-1-font-family);
   --current-font-style: var(--theme-heading-1-font-style);
   --current-line-height: var(--theme-heading-1-line-height);
@@ -935,6 +943,7 @@ h1, .h1 {
 h2, .h2 {
   --font-size: var(--theme-heading-2-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-2-font-family);
   --current-font-style: var(--theme-heading-2-font-style);
   --current-font-weight: var(--theme-heading-2-font-weight);
@@ -947,6 +956,7 @@ h2, .h2 {
 h3, .h3 {
   --font-size: var(--theme-heading-3-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-3-font-family);
   --current-font-style: var(--theme-heading-3-font-style);
   --current-font-weight: var(--theme-heading-3-font-weight);
@@ -958,6 +968,7 @@ h3, .h3 {
 h4, .h4 {
   --font-size: var(--theme-heading-4-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-font-style: var(--theme-heading-4-font-style);
@@ -969,6 +980,7 @@ h4, .h4 {
 h5, .h5 {
   --font-size: var(--theme-heading-5-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-5-font-family);
   --current-font-weight: var(--theme-heading-5-font-weight);
   --current-font-style: var(--theme-heading-5-font-style);
@@ -980,6 +992,7 @@ h5, .h5 {
 h6, .h6 {
   --font-size: var(--theme-heading-6-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-6-font-family);
   --current-font-weight: var(--theme-heading-6-font-weight);
   --current-font-style: var(--theme-heading-6-font-style);
@@ -1111,6 +1124,7 @@ pre {
   margin-left: 0.075em;
   --font-size: var(--theme-heading-1-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-1-font-family);
   --current-font-style: var(--theme-heading-1-font-style);
   --current-line-height: var(--theme-heading-1-line-height);
@@ -1181,6 +1195,7 @@ table {
 .is-style-lead {
   --font-size: var(--theme-lead-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-lead-font-family);
   --current-font-style: var(--theme-lead-font-style);
   --current-line-height: var(--theme-lead-line-height);
@@ -1192,6 +1207,7 @@ table {
 .is-style-meta {
   --font-size: var(--theme-meta-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-meta-font-family);
   --current-font-weight: var(--theme-meta-font-weight);
   --current-font-style: var(--theme-meta-font-style);
@@ -1202,6 +1218,7 @@ table {
 .is-style-caption {
   --font-size: var(--theme-caption-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-caption-font-family);
   --current-font-weight: var(--theme-caption-font-weight);
   --current-line-height: var(--theme-caption-line-height);
@@ -1444,6 +1461,7 @@ table {
     transition: opacity 0.1s cubic-bezier(0.42, 0, 0.58, 1) 0s;
     --font-size: var(--theme-body-font-size);
     --current-font-size: var(--final-font-size);
+    font-size: var(--current-font-size);
     --current-font-family: var(--theme-body-font-family);
     --current-line-height: var(--theme-body-line-height);
     --current-font-weight: var(--theme-body-font-weight);
@@ -1529,6 +1547,7 @@ table {
     padding: var(--theme-button-padding);
     --font-size: var(--theme-button-font-size);
     --current-font-size: var(--final-font-size);
+    font-size: var(--current-font-size);
     --current-font-family: var(--theme-button-font-family);
     --current-font-weight: var(--theme-button-font-weight);
     --current-font-style: var(--theme-button-font-style);
@@ -1684,6 +1703,7 @@ table {
 .site-title {
   --font-size: var(--theme-heading-4-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-font-style: var(--theme-heading-4-font-style);
@@ -1760,6 +1780,7 @@ table {
   list-style: none;
   --font-size: var(--theme-meta-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-meta-font-family);
   --current-font-weight: var(--theme-meta-font-weight);
   --current-font-style: var(--theme-meta-font-style);
@@ -1787,6 +1808,7 @@ table {
   .c-meta, .c-meta .novablocks-sharing__button-label {
     --font-size: var(--theme-input-font-size);
     --current-font-size: var(--final-font-size);
+    font-size: var(--current-font-size);
     --current-font-family: var(--theme-input-font-family);
     --current-font-weight: var(--theme-input-font-weight);
     --current-font-style: var(--theme-input-font-style);
@@ -1999,6 +2021,7 @@ table {
   transition: var(--current-button-transition);
   --font-size: var(--theme-button-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
   --current-font-style: var(--theme-button-font-style);
@@ -2120,6 +2143,7 @@ table {
     align-items: center;
     --font-size: var(--theme-input-font-size);
     --current-font-size: var(--final-font-size);
+    font-size: var(--current-font-size);
     --current-font-family: var(--theme-input-font-family);
     --current-font-weight: var(--theme-input-font-weight);
     --current-font-style: var(--theme-input-font-style);
@@ -2243,6 +2267,7 @@ label.subscribe-label.subscribe-label {
 .logged-in-as a {
   --font-size: var(--theme-heading-6-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-6-font-family);
   --current-font-weight: var(--theme-heading-6-font-weight);
   --current-font-style: var(--theme-heading-6-font-style);
@@ -2322,6 +2347,7 @@ label.subscribe-label.subscribe-label {
   margin-right: calc(var(--theme-spacing-smallest) * -1);
   --font-size: var(--theme-button-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
   --current-font-style: var(--theme-button-font-style);
@@ -2470,6 +2496,7 @@ span.page-numbers {
 .post-navigation__post-title {
   --font-size: var(--theme-heading-4-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-font-style: var(--theme-heading-4-font-style);
@@ -2491,6 +2518,7 @@ span.page-numbers {
   color: var(--sm-current-accent-color);
   --font-size: var(--theme-button-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
   --current-font-style: var(--theme-button-font-style);
@@ -2701,6 +2729,7 @@ span.page-numbers {
 .c-reading-bar__wrapper-title {
   --font-size: var(--theme-navigation-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-navigation-font-family);
   --current-font-weight: var(--theme-navigation-font-weight);
   --current-font-style: var(--theme-navigation-font-style);
@@ -2711,6 +2740,7 @@ span.page-numbers {
 .post-title__label {
   --font-size: var(--theme-navigation-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-navigation-font-family);
   --current-font-weight: var(--theme-navigation-font-weight);
   --current-font-style: var(--theme-navigation-font-style);
@@ -2798,6 +2828,7 @@ span.page-numbers {
     transition: all .2s ease-in-out;
     --font-size: var(--theme-input-font-size);
     --current-font-size: var(--final-font-size);
+    font-size: var(--current-font-size);
     --current-font-family: var(--theme-input-font-family);
     --current-font-weight: var(--theme-input-font-weight);
     --current-font-style: var(--theme-input-font-style);
@@ -2959,6 +2990,7 @@ span.page-numbers {
     transition: all .2s ease-in-out;
     --font-size: var(--theme-input-font-size);
     --current-font-size: var(--final-font-size);
+    font-size: var(--current-font-size);
     --current-font-family: var(--theme-input-font-family);
     --current-font-weight: var(--theme-input-font-weight);
     --current-font-style: var(--theme-input-font-style);
@@ -3015,6 +3047,7 @@ span.page-numbers {
     transition: all .2s ease-in-out;
     --font-size: var(--theme-input-font-size);
     --current-font-size: var(--final-font-size);
+    font-size: var(--current-font-size);
     --current-font-family: var(--theme-input-font-family);
     --current-font-weight: var(--theme-input-font-weight);
     --current-font-style: var(--theme-input-font-style);
@@ -3131,6 +3164,7 @@ span.page-numbers {
     align-items: center;
     --font-size: var(--theme-input-font-size);
     --current-font-size: var(--final-font-size);
+    font-size: var(--current-font-size);
     --current-font-family: var(--theme-input-font-family);
     --current-font-weight: var(--theme-input-font-weight);
     --current-font-style: var(--theme-input-font-style);
@@ -3171,6 +3205,7 @@ span.page-numbers {
     transition: var(--current-button-transition);
     --font-size: var(--theme-button-font-size);
     --current-font-size: var(--final-font-size);
+    font-size: var(--current-font-size);
     --current-font-family: var(--theme-button-font-family);
     --current-font-weight: var(--theme-button-font-weight);
     --current-font-style: var(--theme-button-font-style);
@@ -3251,6 +3286,7 @@ iframe.instagram-media {
 .is-style-lead {
   --font-size: var(--theme-lead-font-size);
   --current-font-size: var(--final-font-size);
+  font-size: var(--current-font-size);
   --current-font-family: var(--theme-lead-font-family);
   --current-font-style: var(--theme-lead-font-style);
   --current-line-height: var(--theme-lead-line-height);
