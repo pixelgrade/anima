@@ -682,25 +682,29 @@
 \*------------------------------------*/
 .wp-block-search {
   /**
-		 * Display on the same row the search input field and submit button
+		 * WRAPPER
+		 * Use CSS grid to display the search input field and submit button on the same row
 		 */
   /**
+		 * INPUT
+		 * 
 		 * 1) The search input field inherits most of the standard field styles.
 		 * 2) On mobile devices, the search input should follow the button
 		 * 	  height and not the other way around, so the clickable area  
-		 * 	  remains accessible. 
+		 * 	  remains larger for both input and button.
 		 * 3) Reset the default padding value (for mobile devices) to be the same 
 		 * 	  as on the desktop.
+		 * 	  
 		 */
   /**
-		 * Search button
+		 * BUTTON
 		 */
   /**
 		 * BUTTON POSITION: Outside search field
 		 */
   /**
 		 * BUTTON POSITION: Inside search field
-		 * Decrease the button padding and place it inside the input field.
+		 * Place the button inside the input field and add some spacing around it
 		 */
   /**
 		 * BUTTON STYLE: Button without icon
@@ -710,7 +714,14 @@
 		 * When there is no button, display the search icon as a hint.
 		 */ }
   .wp-block-search__inside-wrapper {
-    display: flex; }
+    display: grid;
+    grid-template-columns: 1fr auto; }
+    .wp-block-search__inside-wrapper .wp-block-search__input {
+      grid-row: 1 / span 1;
+      grid-column: 1 / span 1; }
+    .wp-block-search__inside-wrapper .wp-block-search__button {
+      grid-row: 1 / span 1;
+      grid-column: 2 / span 1; }
   .wp-block-search input[type="search"] {
     --theme-input-padding: var(--theme-input-padding-above-tablet); }
   .wp-block-search__button {
@@ -742,18 +753,14 @@
       background-color: var(--theme-button-hover-text-color); }
     .wp-block-search__button svg {
       display: none; }
-  .wp-block-search__button-outside .wp-block-search__button {
-    margin-left: 10px; }
+  .wp-block-search__button-outside .wp-block-search__inside-wrapper {
+    column-gap: 10px; }
   .wp-block-search__button-inside {
     position: relative; }
-    .wp-block-search__button-inside .wp-block-search__inside-wrapper {
-      display: block; }
+    .wp-block-search__button-inside .wp-block-search__input {
+      grid-column: 1 / span 2; }
     .wp-block-search__button-inside .wp-block-search__button {
-      position: absolute;
-      right: var(--theme-button-y-modifier);
-      top: var(--theme-button-y-modifier);
-      --theme-button-y-modifier: 0.2em;
-      --theme-button-padding: calc(var(--theme-button-y-padding) - var(--theme-button-border-width) - var(--theme-button-y-modifier)) var(--theme-button-x-padding); }
+      margin: 4px; }
   .wp-block-search:not(.wp-block-search__icon-button) .wp-block-search__button {
     min-width: max-content; }
     .wp-block-search:not(.wp-block-search__icon-button) .wp-block-search__button:after {
