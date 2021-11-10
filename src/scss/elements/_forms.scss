@@ -171,15 +171,25 @@ label {
 .nf-form-cont {
     .nf-error-msg, 
     .ninja-forms-req-symbol {
-        @include apply-palette(_error);
-        color: var(--sm-accent-color-1);
+        color: var(--theme-input-error-color);
         font-size: 0.8rem;
+    }
+
+    .nf-error {
+        .ninja-forms-field {
+            --theme-input-box-shadow: var(--theme-input-error-box-shadow);
+            --theme-input-color: var(--theme-input-error-color);
+
+            border-width: 0;
+        }
     }
 }
 
 .nf-error-wrap {
     margin-top: var(--theme-spacing-smallest);
 }
+
+
 
 .nf-field-description {
     margin-bottom: var(--theme-spacing-smallest);
