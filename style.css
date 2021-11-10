@@ -331,6 +331,21 @@ template {
   margin: 0; }
 
 /**
+ * Overwrite elements whose properties are declared by a 3rd
+ * party by setting all the font properties again.
+ *
+ * Examples: sales badges inherit font rules from WooCommerce plugin
+ */
+.is-style-lead {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  font-style: var(--current-font-style);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform); }
+
+/**
  * Use this mixin on containers or elements, when you need 
  * to overwrite the universal selector (*) specificity
  *
@@ -344,18 +359,11 @@ html {
   --theme-body-final-font-size: var(--final-font-size);
   --font-size: var(--theme-body-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
   --current-font-style: var(--theme-body-font-style);
-  --current-letter-spacing: var(--theme-body-letter-spacing);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-letter-spacing: var(--theme-body-letter-spacing); }
 
 body {
   overflow-x: hidden; }
@@ -390,19 +398,12 @@ input:not([type]), input[type="text"], input[type="tel"], input[type="number"], 
   transition: all .2s ease-in-out;
   --font-size: var(--theme-input-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-input-font-family);
   --current-font-weight: var(--theme-input-font-weight);
   --current-font-style: var(--theme-input-font-style);
   --current-line-height: var(--theme-input-line-height);
   --current-letter-spacing: var(--theme-input-letter-spacing);
   --current-text-transform: var(--theme-input-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   font-family: inherit;
   -webkit-font-smoothing: initial;
   -webkit-appearance: none; }
@@ -516,19 +517,12 @@ input[type="button"] {
   transition: var(--current-button-transition);
   --font-size: var(--theme-button-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
   --current-font-style: var(--theme-button-font-style);
   --current-line-height: var(--theme-button-line-height);
   --current-letter-spacing: var(--theme-button-letter-spacing);
   --current-text-transform: var(--theme-button-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   background-color: transparent;
   transform: translateZ(0);
   will-change: transform;
@@ -580,19 +574,12 @@ button[type="submit"] {
   transition: var(--current-button-transition);
   --font-size: var(--theme-button-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
   --current-font-style: var(--theme-button-font-style);
   --current-line-height: var(--theme-button-line-height);
   --current-letter-spacing: var(--theme-button-letter-spacing);
   --current-text-transform: var(--theme-button-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   background-color: transparent;
   transform: translateZ(0);
   will-change: transform;
@@ -721,19 +708,12 @@ textarea {
   transition: all .2s ease-in-out;
   --font-size: var(--theme-input-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-input-font-family);
   --current-font-weight: var(--theme-input-font-weight);
   --current-font-style: var(--theme-input-font-style);
   --current-line-height: var(--theme-input-line-height);
   --current-letter-spacing: var(--theme-input-letter-spacing);
   --current-text-transform: var(--theme-input-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   font-family: inherit;
   -webkit-font-smoothing: initial;
   -webkit-appearance: none;
@@ -772,19 +752,12 @@ select {
   transition: all .2s ease-in-out;
   --font-size: var(--theme-input-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-input-font-family);
   --current-font-weight: var(--theme-input-font-weight);
   --current-font-style: var(--theme-input-font-style);
   --current-line-height: var(--theme-input-line-height);
   --current-letter-spacing: var(--theme-input-letter-spacing);
   --current-text-transform: var(--theme-input-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   font-family: inherit;
   -webkit-font-smoothing: initial;
   -webkit-appearance: none;
@@ -834,19 +807,12 @@ label {
   align-items: center;
   --font-size: var(--theme-input-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-input-font-family);
   --current-font-weight: var(--theme-input-font-weight);
   --current-font-style: var(--theme-input-font-style);
   --current-line-height: var(--theme-input-line-height);
   --current-letter-spacing: var(--theme-input-letter-spacing);
   --current-text-transform: var(--theme-input-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   --current-font-weight: bold;
   margin: 0;
   cursor: pointer; }
@@ -938,7 +904,6 @@ h6, .h6 {
 h1, .h1 {
   --font-size: var(--theme-heading-1-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-1-font-family);
   --current-font-style: var(--theme-heading-1-font-style);
   --current-line-height: var(--theme-heading-1-line-height);
@@ -946,18 +911,11 @@ h1, .h1 {
   --current-letter-spacing: var(--theme-heading-1-letter-spacing);
   --current-text-transform: var(--theme-heading-1-text-transform);
   --current-color: var(--theme-heading-1-color);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   --current-font-feature: "liga", "dlig", "onum"; }
 
 h2, .h2 {
   --font-size: var(--theme-heading-2-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-2-font-family);
   --current-font-style: var(--theme-heading-2-font-style);
   --current-font-weight: var(--theme-heading-2-font-weight);
@@ -965,85 +923,51 @@ h2, .h2 {
   --current-letter-spacing: var(--theme-heading-2-letter-spacing);
   --current-text-transform: var(--theme-heading-2-text-transform);
   --current-color: var(--theme-heading-2-color);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   --current-font-feature: "liga", "dlig", "onum"; }
 
 h3, .h3 {
   --font-size: var(--theme-heading-3-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-3-font-family);
   --current-font-style: var(--theme-heading-3-font-style);
   --current-font-weight: var(--theme-heading-3-font-weight);
   --current-line-height: var(--theme-heading-3-line-height);
   --current-letter-spacing: var(--theme-heading-3-letter-spacing);
   --current-text-transform: var(--theme-heading-3-text-transform);
-  --current-color: var(--theme-heading-3-color);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-color: var(--theme-heading-3-color); }
 
 h4, .h4 {
   --font-size: var(--theme-heading-4-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-font-style: var(--theme-heading-4-font-style);
   --current-line-height: var(--theme-heading-4-line-height);
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
   --current-text-transform: var(--theme-heading-4-text-transform);
-  --current-color: var(--theme-heading-4-color);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-color: var(--theme-heading-4-color); }
 
 h5, .h5 {
   --font-size: var(--theme-heading-5-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-5-font-family);
   --current-font-weight: var(--theme-heading-5-font-weight);
   --current-font-style: var(--theme-heading-5-font-style);
   --current-line-height: var(--theme-heading-5-line-height);
   --current-letter-spacing: var(--theme-heading-5-letter-spacing);
   --current-text-transform: var(--theme-heading-5-text-transform);
-  --current-color: var(--theme-heading-5-color);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-color: var(--theme-heading-5-color); }
 
 h6, .h6 {
   --font-size: var(--theme-heading-6-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-6-font-family);
   --current-font-weight: var(--theme-heading-6-font-weight);
   --current-font-style: var(--theme-heading-6-font-style);
   --current-line-height: var(--theme-heading-6-line-height);
   --current-letter-spacing: var(--theme-heading-6-letter-spacing);
   --current-text-transform: var(--theme-heading-6-text-transform);
-  --current-color: var(--theme-heading-6-color);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-color: var(--theme-heading-6-color); }
 
 em,
 i,
@@ -1168,7 +1092,6 @@ pre {
   margin-right: 0.075em;
   --font-size: var(--theme-heading-1-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-1-font-family);
   --current-font-style: var(--theme-heading-1-font-style);
   --current-line-height: var(--theme-heading-1-line-height);
@@ -1176,12 +1099,6 @@ pre {
   --current-letter-spacing: var(--theme-heading-1-letter-spacing);
   --current-text-transform: var(--theme-heading-1-text-transform);
   --current-color: var(--theme-heading-1-color);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   --current-line-height: 1em;
   --current-font-size: 5.3em; }
 
@@ -1245,52 +1162,29 @@ table {
 .is-style-lead {
   --font-size: var(--theme-lead-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-lead-font-family);
   --current-font-style: var(--theme-lead-font-style);
   --current-line-height: var(--theme-lead-line-height);
   --current-letter-spacing: var(--theme-lead-letter-spacing);
-  --current-text-transform: var(--theme-lead-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height); }
+  --current-text-transform: var(--theme-lead-text-transform); }
 
 .is-style-meta {
   --font-size: var(--theme-meta-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-meta-font-family);
   --current-font-weight: var(--theme-meta-font-weight);
   --current-font-style: var(--theme-meta-font-style);
   --current-line-height: var(--theme-meta-line-height);
   --current-letter-spacing: var(--theme-meta-letter-spacing);
-  --current-text-transform: var(--theme-meta-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-text-transform: var(--theme-meta-text-transform); }
 
 .is-style-caption {
   --font-size: var(--theme-caption-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-caption-font-family);
   --current-font-weight: var(--theme-caption-font-weight);
   --current-line-height: var(--theme-caption-line-height);
-  --current-letter-spacing: var(--theme-caption-letter-spacing);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-letter-spacing: var(--theme-caption-letter-spacing); }
 
 /* 2. Components */
 .promo-bar {
@@ -1529,18 +1423,11 @@ table {
     transition: opacity 0.1s cubic-bezier(0.42, 0, 0.58, 1) 0s;
     --font-size: var(--theme-body-font-size);
     --current-font-size: var(--final-font-size);
-    font-size: var(--current-font-size);
     --current-font-family: var(--theme-body-font-family);
     --current-line-height: var(--theme-body-line-height);
     --current-font-weight: var(--theme-body-font-weight);
     --current-font-style: var(--theme-body-font-style);
     --current-letter-spacing: var(--theme-body-letter-spacing);
-    /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
     --font-size: 21;
     --current-font-weight: bold; }
     @media only screen and (min-width: 1024px) {
@@ -1621,19 +1508,12 @@ table {
     padding: var(--theme-button-padding);
     --font-size: var(--theme-button-font-size);
     --current-font-size: var(--final-font-size);
-    font-size: var(--current-font-size);
     --current-font-family: var(--theme-button-font-family);
     --current-font-weight: var(--theme-button-font-weight);
     --current-font-style: var(--theme-button-font-style);
     --current-line-height: var(--theme-button-line-height);
     --current-letter-spacing: var(--theme-button-letter-spacing);
     --current-text-transform: var(--theme-button-text-transform);
-    /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
     --font-size: 21; }
     .c-search-overlay .c-search-overlay__cancel:hover {
       color: currentColor !important;
@@ -1783,7 +1663,6 @@ table {
 .site-title {
   --font-size: var(--theme-heading-4-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-font-style: var(--theme-heading-4-font-style);
@@ -1791,12 +1670,6 @@ table {
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
   --current-text-transform: var(--theme-heading-4-text-transform);
   --current-color: var(--theme-heading-4-color);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   --font-size: calc(var(--theme-header-logo-height-setting) * 1.8);
   --current-line-height: 1; }
   @media not screen and (min-width: 768px) {
@@ -1866,19 +1739,12 @@ table {
   list-style: none;
   --font-size: var(--theme-meta-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-meta-font-family);
   --current-font-weight: var(--theme-meta-font-weight);
   --current-font-style: var(--theme-meta-font-style);
   --current-line-height: var(--theme-meta-line-height);
   --current-letter-spacing: var(--theme-meta-letter-spacing);
-  --current-text-transform: var(--theme-meta-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-text-transform: var(--theme-meta-text-transform); }
   .entry-meta > :not(:last-child):after {
     content: "\b7";
     padding: 0 var(--theme-spacing-smallest); }
@@ -1900,19 +1766,12 @@ table {
   .c-meta, .c-meta .novablocks-sharing__button-label {
     --font-size: var(--theme-input-font-size);
     --current-font-size: var(--final-font-size);
-    font-size: var(--current-font-size);
     --current-font-family: var(--theme-input-font-family);
     --current-font-weight: var(--theme-input-font-weight);
     --current-font-style: var(--theme-input-font-style);
     --current-line-height: var(--theme-input-line-height);
     --current-letter-spacing: var(--theme-input-letter-spacing);
-    --current-text-transform: var(--theme-input-text-transform);
-    /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+    --current-text-transform: var(--theme-input-text-transform); }
   .c-meta a:hover {
     text-decoration: underline; }
   .c-meta > * {
@@ -2119,19 +1978,12 @@ table {
   transition: var(--current-button-transition);
   --font-size: var(--theme-button-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
   --current-font-style: var(--theme-button-font-style);
   --current-line-height: var(--theme-button-line-height);
   --current-letter-spacing: var(--theme-button-letter-spacing);
   --current-text-transform: var(--theme-button-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   background-color: transparent;
   transform: translateZ(0);
   will-change: transform;
@@ -2247,19 +2099,12 @@ table {
     align-items: center;
     --font-size: var(--theme-input-font-size);
     --current-font-size: var(--final-font-size);
-    font-size: var(--current-font-size);
     --current-font-family: var(--theme-input-font-family);
     --current-font-weight: var(--theme-input-font-weight);
     --current-font-style: var(--theme-input-font-style);
     --current-line-height: var(--theme-input-line-height);
     --current-letter-spacing: var(--theme-input-letter-spacing);
     --current-text-transform: var(--theme-input-text-transform);
-    /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
     --current-font-weight: bold;
     margin: 0;
     cursor: pointer;
@@ -2377,7 +2222,6 @@ label.subscribe-label.subscribe-label {
 .logged-in-as a {
   --font-size: var(--theme-heading-6-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-6-font-family);
   --current-font-weight: var(--theme-heading-6-font-weight);
   --current-font-style: var(--theme-heading-6-font-style);
@@ -2385,12 +2229,6 @@ label.subscribe-label.subscribe-label {
   --current-letter-spacing: var(--theme-heading-6-letter-spacing);
   --current-text-transform: var(--theme-heading-6-text-transform);
   --current-color: var(--theme-heading-6-color);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   opacity: .6; }
 
 .comment__metadata {
@@ -2463,19 +2301,12 @@ label.subscribe-label.subscribe-label {
   margin-left: calc(var(--theme-spacing-smallest) * -1);
   --font-size: var(--theme-button-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
   --current-font-style: var(--theme-button-font-style);
   --current-line-height: var(--theme-button-line-height);
   --current-letter-spacing: var(--theme-button-letter-spacing);
   --current-text-transform: var(--theme-button-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   font-feature-settings: "lnum"; }
   .pagination .nav-links a {
     text-decoration: none; }
@@ -2618,20 +2449,13 @@ span.page-numbers {
 .post-navigation__post-title {
   --font-size: var(--theme-heading-4-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-font-style: var(--theme-heading-4-font-style);
   --current-line-height: var(--theme-heading-4-line-height);
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
   --current-text-transform: var(--theme-heading-4-text-transform);
-  --current-color: var(--theme-heading-4-color);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-color: var(--theme-heading-4-color); }
 
 .post-navigation__post-title,
 .post-navigation__link-label {
@@ -2646,19 +2470,12 @@ span.page-numbers {
   color: var(--sm-current-accent-color);
   --font-size: var(--theme-button-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
   --current-font-style: var(--theme-button-font-style);
   --current-line-height: var(--theme-button-line-height);
   --current-letter-spacing: var(--theme-button-letter-spacing);
   --current-text-transform: var(--theme-button-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   transition: var(--theme-transition);
   transition-property: transform; }
 
@@ -2863,36 +2680,22 @@ span.page-numbers {
 .c-reading-bar__wrapper-title {
   --font-size: var(--theme-navigation-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-navigation-font-family);
   --current-font-weight: var(--theme-navigation-font-weight);
   --current-font-style: var(--theme-navigation-font-style);
   --current-line-height: var(--theme-navigation-line-height);
   --current-letter-spacing: var(--theme-navigation-letter-spacing);
-  --current-text-transform: var(--theme-navigation-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-text-transform: var(--theme-navigation-text-transform); }
 
 .post-title__label {
   --font-size: var(--theme-navigation-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-navigation-font-family);
   --current-font-weight: var(--theme-navigation-font-weight);
   --current-font-style: var(--theme-navigation-font-style);
   --current-line-height: var(--theme-navigation-line-height);
   --current-letter-spacing: var(--theme-navigation-letter-spacing);
   --current-text-transform: var(--theme-navigation-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   --current-font-style: italic;
   --current-font-weight: 400; }
 
@@ -2975,19 +2778,12 @@ span.page-numbers {
     transition: all .2s ease-in-out;
     --font-size: var(--theme-input-font-size);
     --current-font-size: var(--final-font-size);
-    font-size: var(--current-font-size);
     --current-font-family: var(--theme-input-font-family);
     --current-font-weight: var(--theme-input-font-weight);
     --current-font-style: var(--theme-input-font-style);
     --current-line-height: var(--theme-input-line-height);
     --current-letter-spacing: var(--theme-input-letter-spacing);
     --current-text-transform: var(--theme-input-text-transform);
-    /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
     font-family: inherit;
     -webkit-font-smoothing: initial;
     -webkit-appearance: none;
@@ -3144,19 +2940,12 @@ span.page-numbers {
     transition: all .2s ease-in-out;
     --font-size: var(--theme-input-font-size);
     --current-font-size: var(--final-font-size);
-    font-size: var(--current-font-size);
     --current-font-family: var(--theme-input-font-family);
     --current-font-weight: var(--theme-input-font-weight);
     --current-font-style: var(--theme-input-font-style);
     --current-line-height: var(--theme-input-line-height);
     --current-letter-spacing: var(--theme-input-letter-spacing);
     --current-text-transform: var(--theme-input-text-transform);
-    /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
     font-family: inherit;
     -webkit-font-smoothing: initial;
     -webkit-appearance: none; }
@@ -3208,19 +2997,12 @@ span.page-numbers {
     transition: all .2s ease-in-out;
     --font-size: var(--theme-input-font-size);
     --current-font-size: var(--final-font-size);
-    font-size: var(--current-font-size);
     --current-font-family: var(--theme-input-font-family);
     --current-font-weight: var(--theme-input-font-weight);
     --current-font-style: var(--theme-input-font-style);
     --current-line-height: var(--theme-input-line-height);
     --current-letter-spacing: var(--theme-input-letter-spacing);
     --current-text-transform: var(--theme-input-text-transform);
-    /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
     font-family: inherit;
     -webkit-font-smoothing: initial;
     -webkit-appearance: none;
@@ -3331,19 +3113,12 @@ span.page-numbers {
     align-items: center;
     --font-size: var(--theme-input-font-size);
     --current-font-size: var(--final-font-size);
-    font-size: var(--current-font-size);
     --current-font-family: var(--theme-input-font-family);
     --current-font-weight: var(--theme-input-font-weight);
     --current-font-style: var(--theme-input-font-style);
     --current-line-height: var(--theme-input-line-height);
     --current-letter-spacing: var(--theme-input-letter-spacing);
     --current-text-transform: var(--theme-input-text-transform);
-    /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
     --current-font-weight: bold;
     margin: 0;
     cursor: pointer; }
@@ -3378,19 +3153,12 @@ span.page-numbers {
     transition: var(--current-button-transition);
     --font-size: var(--theme-button-font-size);
     --current-font-size: var(--final-font-size);
-    font-size: var(--current-font-size);
     --current-font-family: var(--theme-button-font-family);
     --current-font-weight: var(--theme-button-font-weight);
     --current-font-style: var(--theme-button-font-style);
     --current-line-height: var(--theme-button-line-height);
     --current-letter-spacing: var(--theme-button-letter-spacing);
     --current-text-transform: var(--theme-button-text-transform);
-    /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
     background-color: transparent;
     transform: translateZ(0);
     will-change: transform;
@@ -3465,18 +3233,11 @@ iframe.instagram-media {
 .is-style-lead {
   --font-size: var(--theme-lead-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-lead-font-family);
   --current-font-style: var(--theme-lead-font-style);
   --current-line-height: var(--theme-lead-line-height);
   --current-letter-spacing: var(--theme-lead-letter-spacing);
-  --current-text-transform: var(--theme-lead-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-text-transform: var(--theme-lead-text-transform); }
 
 img:not([srcset]):not(.is-loaded) {
   opacity: 0; }

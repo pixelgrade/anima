@@ -1,4 +1,10 @@
 /**
+ * Overwrite elements whose properties are declared by a 3rd
+ * party by setting all the font properties again.
+ *
+ * Examples: sales badges inherit font rules from WooCommerce plugin
+ */
+/**
  * Use this mixin on containers or elements, when you need 
  * to overwrite the universal selector (*) specificity
  *
@@ -220,35 +226,21 @@ body:not(.has-loaded) .c-comments-toggle__checkbox + .c-comments-toggle__label ~
 .article-header .entry-excerpt {
   --font-size: var(--theme-lead-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-lead-font-family);
   --current-font-style: var(--theme-lead-font-style);
   --current-line-height: var(--theme-lead-line-height);
   --current-letter-spacing: var(--theme-lead-letter-spacing);
-  --current-text-transform: var(--theme-lead-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-text-transform: var(--theme-lead-text-transform); }
 
 .article-header .cat-links {
   --font-size: var(--theme-meta-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-meta-font-family);
   --current-font-weight: var(--theme-meta-font-weight);
   --current-font-style: var(--theme-meta-font-style);
   --current-line-height: var(--theme-meta-line-height);
   --current-letter-spacing: var(--theme-meta-letter-spacing);
-  --current-text-transform: var(--theme-meta-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-text-transform: var(--theme-meta-text-transform); }
 
 .article-header + * {
   position: relative;

@@ -1,4 +1,10 @@
 /**
+ * Overwrite elements whose properties are declared by a 3rd
+ * party by setting all the font properties again.
+ *
+ * Examples: sales badges inherit font rules from WooCommerce plugin
+ */
+/**
  * Use this mixin on containers or elements, when you need 
  * to overwrite the universal selector (*) specificity
  *
@@ -54,19 +60,12 @@
   border-radius: var(--theme-button-border-radius);
   --font-size: var(--theme-button-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
   --current-font-style: var(--theme-button-font-style);
   --current-line-height: var(--theme-button-line-height);
   --current-letter-spacing: var(--theme-button-letter-spacing);
   --current-text-transform: var(--theme-button-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   color: var(--current-button-text-color); }
   .wp-block-button__link:not([disabled]) {
     cursor: pointer; }
@@ -426,18 +425,11 @@
   .wp-block-gallery figcaption {
     --font-size: var(--theme-body-font-size);
     --current-font-size: var(--final-font-size);
-    font-size: var(--current-font-size);
     --current-font-family: var(--theme-body-font-family);
     --current-line-height: var(--theme-body-line-height);
     --current-font-weight: var(--theme-body-font-weight);
     --current-font-style: var(--theme-body-font-style);
     --current-letter-spacing: var(--theme-body-letter-spacing);
-    /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
     --font-size-modifier: 0.8; }
     .wp-block-gallery figcaption .credits {
       margin: 0;
@@ -616,74 +608,46 @@
 .wp-block-pullquote.alignleft blockquote, .wp-block-pullquote.alignright blockquote {
   --font-size: var(--theme-body-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
   --current-font-style: var(--theme-body-font-style);
-  --current-letter-spacing: var(--theme-body-letter-spacing);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-letter-spacing: var(--theme-body-letter-spacing); }
 
 .wp-block-pullquote.alignwide {
   --font-size: var(--theme-heading-2-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-2-font-family);
   --current-font-style: var(--theme-heading-2-font-style);
   --current-font-weight: var(--theme-heading-2-font-weight);
   --current-line-height: var(--theme-heading-2-line-height);
   --current-letter-spacing: var(--theme-heading-2-letter-spacing);
   --current-text-transform: var(--theme-heading-2-text-transform);
-  --current-color: var(--theme-heading-2-color);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-color: var(--theme-heading-2-color); }
 
 .wp-block-pullquote.alingfull {
   --font-size: var(--theme-heading-1-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-1-font-family);
   --current-font-style: var(--theme-heading-1-font-style);
   --current-line-height: var(--theme-heading-1-line-height);
   --current-font-weight: var(--theme-heading-1-font-weight);
   --current-letter-spacing: var(--theme-heading-1-letter-spacing);
   --current-text-transform: var(--theme-heading-1-text-transform);
-  --current-color: var(--theme-heading-1-color);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-color: var(--theme-heading-1-color); }
 
 .wp-block-pullquote cite,
 .wp-block-pullquote__citation {
   display: block;
   --font-size: var(--theme-heading-6-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-6-font-family);
   --current-font-weight: var(--theme-heading-6-font-weight);
   --current-font-style: var(--theme-heading-6-font-style);
   --current-line-height: var(--theme-heading-6-line-height);
   --current-letter-spacing: var(--theme-heading-6-letter-spacing);
   --current-text-transform: var(--theme-heading-6-text-transform);
-  --current-color: var(--theme-heading-6-color);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-color: var(--theme-heading-6-color); }
 
 /* Blockquote Block */
 .wp-block-quote {
@@ -696,40 +660,26 @@
     border-left: none;
     --font-size: var(--theme-heading-3-font-size);
     --current-font-size: var(--final-font-size);
-    font-size: var(--current-font-size);
     --current-font-family: var(--theme-heading-3-font-family);
     --current-font-style: var(--theme-heading-3-font-style);
     --current-font-weight: var(--theme-heading-3-font-weight);
     --current-line-height: var(--theme-heading-3-line-height);
     --current-letter-spacing: var(--theme-heading-3-letter-spacing);
     --current-text-transform: var(--theme-heading-3-text-transform);
-    --current-color: var(--theme-heading-3-color);
-    /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+    --current-color: var(--theme-heading-3-color); }
 
 .wp-block-quote cite,
 .wp-block-quote__citation {
   display: block;
   --font-size: var(--theme-heading-6-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-6-font-family);
   --current-font-weight: var(--theme-heading-6-font-weight);
   --current-font-style: var(--theme-heading-6-font-style);
   --current-line-height: var(--theme-heading-6-line-height);
   --current-letter-spacing: var(--theme-heading-6-letter-spacing);
   --current-text-transform: var(--theme-heading-6-text-transform);
-  --current-color: var(--theme-heading-6-color);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-color: var(--theme-heading-6-color); }
 
 /*------------------------------------*\
   #BLOCK - Search
@@ -1215,19 +1165,12 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between div.wp-b
 .wp-block-novablocks-navigation {
   --font-size: var(--theme-navigation-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-navigation-font-family);
   --current-font-weight: var(--theme-navigation-font-weight);
   --current-font-style: var(--theme-navigation-font-style);
   --current-line-height: var(--theme-navigation-line-height);
   --current-letter-spacing: var(--theme-navigation-letter-spacing);
-  --current-text-transform: var(--theme-navigation-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-text-transform: var(--theme-navigation-text-transform); }
   .wp-block-novablocks-navigation ul.menu a,
   .wp-block-novablocks-navigation .menu > ul a {
     padding: 0.75em 0; }
@@ -1303,18 +1246,11 @@ html:root {
 .novablocks-media-composition__grid-item-description {
   --font-size: var(--theme-body-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
   --current-font-style: var(--theme-body-font-style);
   --current-letter-spacing: var(--theme-body-letter-spacing);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   --font-size-modifier: 0.8; }
   .novablocks-media-composition__grid-item-caption .credits,
   .novablocks-media-composition__grid-item-description .credits {

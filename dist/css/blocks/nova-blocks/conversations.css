@@ -1,4 +1,10 @@
 /**
+ * Overwrite elements whose properties are declared by a 3rd
+ * party by setting all the font properties again.
+ *
+ * Examples: sales badges inherit font rules from WooCommerce plugin
+ */
+/**
  * Use this mixin on containers or elements, when you need 
  * to overwrite the universal selector (*) specificity
  *
@@ -207,19 +213,12 @@
   transition: all .2s ease-in-out;
   --font-size: var(--theme-input-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-input-font-family);
   --current-font-weight: var(--theme-input-font-weight);
   --current-font-style: var(--theme-input-font-style);
   --current-line-height: var(--theme-input-line-height);
   --current-letter-spacing: var(--theme-input-letter-spacing);
   --current-text-transform: var(--theme-input-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   font-family: inherit;
   -webkit-font-smoothing: initial;
   -webkit-appearance: none; }
@@ -260,20 +259,13 @@ trix-editor[id][id][id]:before {
 trix-editor h1 {
   --font-size: var(--theme-heading-4-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-weight: var(--theme-heading-4-font-weight);
   --current-font-style: var(--theme-heading-4-font-style);
   --current-line-height: var(--theme-heading-4-line-height);
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
   --current-text-transform: var(--theme-heading-4-text-transform);
-  --current-color: var(--theme-heading-4-color);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-color: var(--theme-heading-4-color); }
 
 trix-editor,
 trix-toolbar {
@@ -290,19 +282,12 @@ trix-toolbar {
   transition: all .2s ease-in-out;
   --font-size: var(--theme-input-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-input-font-family);
   --current-font-weight: var(--theme-input-font-weight);
   --current-font-style: var(--theme-input-font-style);
   --current-line-height: var(--theme-input-line-height);
   --current-letter-spacing: var(--theme-input-letter-spacing);
   --current-text-transform: var(--theme-input-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   font-family: inherit;
   -webkit-font-smoothing: initial;
   -webkit-appearance: none;

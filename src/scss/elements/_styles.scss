@@ -1,7 +1,6 @@
 .is-style-lead {
     @include apply-font(lead);
-    font-size: var(--current-font-size);
-    line-height: var(--current-line-height);
+    @include apply-font-properties;
 }
 
 .is-style-meta {

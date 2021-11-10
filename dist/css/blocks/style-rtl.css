@@ -1,4 +1,10 @@
 /**
+ * Overwrite elements whose properties are declared by a 3rd
+ * party by setting all the font properties again.
+ *
+ * Examples: sales badges inherit font rules from WooCommerce plugin
+ */
+/**
  * Use this mixin on containers or elements, when you need 
  * to overwrite the universal selector (*) specificity
  *
@@ -54,18 +60,11 @@
 .wp-block-image figcaption {
   --font-size: var(--theme-body-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
   --current-font-style: var(--theme-body-font-style);
   --current-letter-spacing: var(--theme-body-letter-spacing);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   --font-size-modifier: 0.8; }
   .wp-block-image figcaption .credits {
     margin: 0;
@@ -235,7 +234,6 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between ul.wp-bl
     color: inherit;
     --font-size: var(--theme-heading-4-font-size);
     --current-font-size: var(--final-font-size);
-    font-size: var(--current-font-size);
     --current-font-family: var(--theme-heading-4-font-family);
     --current-font-weight: var(--theme-heading-4-font-weight);
     --current-font-style: var(--theme-heading-4-font-style);
@@ -243,12 +241,6 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between ul.wp-bl
     --current-letter-spacing: var(--theme-heading-4-letter-spacing);
     --current-text-transform: var(--theme-heading-4-text-transform);
     --current-color: var(--theme-heading-4-color);
-    /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
     padding-left: var(--theme-spacing-smallest); }
   .nova-food-menu-item__title:before {
     bottom: 0.5em; }
@@ -260,20 +252,13 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between ul.wp-bl
 .nova-food-menu__header .section-title {
   --font-size: var(--theme-heading-2-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-heading-2-font-family);
   --current-font-style: var(--theme-heading-2-font-style);
   --current-font-weight: var(--theme-heading-2-font-weight);
   --current-line-height: var(--theme-heading-2-line-height);
   --current-letter-spacing: var(--theme-heading-2-letter-spacing);
   --current-text-transform: var(--theme-heading-2-text-transform);
-  --current-color: var(--theme-heading-2-color);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-color: var(--theme-heading-2-color); }
 
 .nova-food-menu-item__title {
   font-size: var(--theme-heading-4-font-size); }
@@ -520,18 +505,11 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between ul.wp-bl
   max-width: 100%;
   --font-size: var(--theme-body-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
   --current-font-style: var(--theme-body-font-style);
-  --current-letter-spacing: var(--theme-body-letter-spacing);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-letter-spacing: var(--theme-body-letter-spacing); }
   .novablocks-media__content[class] {
     min-width: 0; }
 
@@ -665,19 +643,12 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between ul.wp-bl
     color: var(--current-button-text-color);
     --font-size: var(--theme-button-font-size);
     --current-font-size: var(--final-font-size);
-    font-size: var(--current-font-size);
     --current-font-family: var(--theme-button-font-family);
     --current-font-weight: var(--theme-button-font-weight);
     --current-font-style: var(--theme-button-font-style);
     --current-line-height: var(--theme-button-line-height);
     --current-letter-spacing: var(--theme-button-letter-spacing);
     --current-text-transform: var(--theme-button-text-transform);
-    /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
     background-color: transparent;
     transform: translateZ(0);
     will-change: transform;
@@ -775,19 +746,12 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between ul.wp-bl
   transition: var(--current-button-transition);
   --font-size: var(--theme-button-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
   --current-font-style: var(--theme-button-font-style);
   --current-line-height: var(--theme-button-line-height);
   --current-letter-spacing: var(--theme-button-letter-spacing);
   --current-text-transform: var(--theme-button-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   background-color: transparent;
   transform: translateZ(0);
   will-change: transform;
@@ -819,19 +783,12 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between ul.wp-bl
 .ot-dtp-picker input[type="submit"][class][class] {
   --font-size: var(--theme-button-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
   --current-font-style: var(--theme-button-font-style);
   --current-line-height: var(--theme-button-line-height);
   --current-letter-spacing: var(--theme-button-letter-spacing);
   --current-text-transform: var(--theme-button-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   text-transform: none; }
 
 .novablocks-opentable {
@@ -867,19 +824,12 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between ul.wp-bl
 .ot-dtp-picker-form {
   --font-size: var(--theme-input-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-input-font-family);
   --current-font-weight: var(--theme-input-font-weight);
   --current-font-style: var(--theme-input-font-style);
   --current-line-height: var(--theme-input-line-height);
   --current-letter-spacing: var(--theme-input-letter-spacing);
-  --current-text-transform: var(--theme-input-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-text-transform: var(--theme-input-text-transform); }
 
 .ot-dtp-picker .ot-dtp-picker-selector[class] {
   height: auto; }
@@ -942,18 +892,11 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between ul.wp-bl
 .novablocks-card {
   --font-size: var(--theme-body-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
   --current-font-style: var(--theme-body-font-style);
-  --current-letter-spacing: var(--theme-body-letter-spacing);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-letter-spacing: var(--theme-body-letter-spacing); }
   .block-is-highlighted:not(.content-is-highlighted) .novablocks-card .wp-block-button:not(.is-style-text) .wp-block-button__link,
   .content-is-highlighted:not(.block-is-highlighted) .novablocks-card .wp-block-button:not(.is-style-text) .wp-block-button__link {
     --theme-button-text-color: var(--sm-current-bg-color);
@@ -970,19 +913,12 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between ul.wp-bl
 .novablocks-sharing__overlay {
   --font-size: var(--theme-input-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-input-font-family);
   --current-font-weight: var(--theme-input-font-weight);
   --current-font-style: var(--theme-input-font-style);
   --current-line-height: var(--theme-input-line-height);
   --current-letter-spacing: var(--theme-input-letter-spacing);
   --current-text-transform: var(--theme-input-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   --nb-spacing: var(--theme-spacing-fluid-larger);
   --novablocks-sharing-overlay-spacing: 1em; }
   .novablocks-sharing__overlay .novablocks-sharing__wrap[class][class][class] {
@@ -1007,19 +943,12 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between ul.wp-bl
 .novablocks-sharing__group-title {
   --font-size: var(--theme-input-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-input-font-family);
   --current-font-weight: var(--theme-input-font-weight);
   --current-font-style: var(--theme-input-font-style);
   --current-line-height: var(--theme-input-line-height);
   --current-letter-spacing: var(--theme-input-letter-spacing);
   --current-text-transform: var(--theme-input-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
   font-weight: bold; }
 
 .novablocks-sharing[class] {
@@ -1028,19 +957,12 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between ul.wp-bl
 .novablocks-sharing__link-label {
   --font-size: var(--theme-button-font-size);
   --current-font-size: var(--final-font-size);
-  font-size: var(--current-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
   --current-font-style: var(--theme-button-font-style);
   --current-line-height: var(--theme-button-line-height);
   --current-letter-spacing: var(--theme-button-letter-spacing);
-  --current-text-transform: var(--theme-button-text-transform);
-  /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */ }
+  --current-text-transform: var(--theme-button-text-transform); }
 
 html:root {
   --nb-wide-width: var(--theme-content-width-wide);

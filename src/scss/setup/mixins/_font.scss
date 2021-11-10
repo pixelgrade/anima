@@ -1,10 +1,9 @@
-@mixin apply-font( $name, $properties: false ) {
+@mixin apply-font( $name ) {
     $config: map-get( $theme-fonts, $name );
 
     @if ( map_get( $config, font-size ) ) {
         --font-size: var(--theme-#{$name}-font-size);
         --current-font-size: var(--final-font-size);
-        font-size: var(--current-font-size);
     }
 
     @each $prop, $value in $config {
@@ -12,22 +11,28 @@
             --current-#{ $prop }: var(--theme-#{ $name }-#{ $prop });
         }
     }
+}
 
-    /**
-     * Overwrite elements whose properties are declared by a 3rd 
-     * party by setting all the font properties again.
-     * 
-     * Examples: sales badges inherit font rules from WooCommerce plugin
-     */
-    @if $properties == true {
-        font-family: var(--current-font-family);
-        font-size: var(--current-font-size);
-        line-height: var(--current-line-height);
-        font-weight: var(--current-font-weight);
-        font-style: var(--current-font-style);
-        letter-spacing: var(--current-letter-spacing);
-        text-transform: var(--current-text-transform);
-    }
+
+
+/**
+ * Overwrite elements whose properties are declared by a 3rd
+ * party by setting all the font properties again.
+ *
+ * Examples: sales badges inherit font rules from WooCommerce plugin
+ */
+%apply-font-properties {
+    font-family: var(--current-font-family);
+    font-size: var(--current-font-size);
+    line-height: var(--current-line-height);
+    font-weight: var(--current-font-weight);
+    font-style: var(--current-font-style);
+    letter-spacing: var(--current-letter-spacing);
+    text-transform: var(--current-text-transform);
+}
+
+@mixin apply-font-properties {
+    @extend %apply-font-properties;
 }
 
 
