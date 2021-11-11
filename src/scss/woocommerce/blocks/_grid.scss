@@ -96,7 +96,7 @@
         margin: 0;
         @include badge();
         @include apply-font(meta);
-        @include apply-font-properties;
+        @extend %apply-font-properties;
 
         --font-size-modifier: 0.9
     }

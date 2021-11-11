@@ -25,7 +25,7 @@
  *
  * Examples: sales badges inherit font rules from WooCommerce plugin
  */
-%apply-font-properties {
+@mixin apply-font-properties {
     font-family: var(--current-font-family);
     font-size: var(--current-font-size);
     line-height: var(--current-line-height);
@@ -35,8 +35,8 @@
     text-transform: var(--current-text-transform);
 }
 
-@mixin apply-font-properties {
-    @extend %apply-font-properties;
+%apply-font-properties {
+    @include apply-font-properties;
 }
 
 
