@@ -54,11 +54,7 @@ function anima_body_classes( $classes ) {
 		$classes[] = 'has-sidebar';
 	}
 
-	if ( is_home() ||
-	     is_post_type_archive( 'post' ) ||
-	     is_singular('post') ||
-	     is_archive() ||
-	     is_search() ) {
+	if ( anima_page_has_custom_palette_variation() ) {
 			$classes[] = 'sm-variation-3';
 	}
 
@@ -69,6 +65,14 @@ function anima_body_classes( $classes ) {
 	return $classes;
 }
 add_filter( 'body_class', 'anima_body_classes' );
+
+function anima_page_has_custom_palette_variation() {
+	return is_home() ||
+	       is_post_type_archive( 'post' ) ||
+	       is_singular('post') ||
+	       is_archive() ||
+	       is_search();
+}
 
 /**
  * Add a pingback url auto-discovery header for single posts, pages, or attachments.

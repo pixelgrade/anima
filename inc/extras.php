@@ -675,9 +675,9 @@ function anima_get_reading_time_in_minutes( $content, $wpm = 250 ) {
  *
  * @param string|string[] $class Space-separated string or array of class names to add to the class list.
  */
-function site_content_class( $class = '' ) {
+function anima_page_class( $class = '' ) {
 	// Separates class names with a single space, collates class names for site-content.
-	echo 'class="' . esc_attr( implode( ' ', get_site_content_class( $class ) ) ) . '"';
+	echo 'class="' . esc_attr( implode( ' ', anima_get_page_class( $class ) ) ) . '"';
 }
 
 /**
@@ -689,22 +689,18 @@ function site_content_class( $class = '' ) {
  * @param string|string[] $class Space-separated string or array of class names to add to the class list.
  * @return string[] Array of class names.
  */
-function get_site_content_class( $class = '' ) {
+function anima_get_page_class( $class = '' ) {
 
 	$classes = array();
 
-	$classes[] = 'site-content';
+	$classes[] = 'site';
 
-	if ( is_home() || is_post_type_archive('post') || is_archive() ) {
+	if ( anima_page_has_custom_palette_variation() ) {
 		$classes[] = 'sm-variation-2';
 	}
 
-	if ( is_singular('post') ) {
-		$classes[] = 'sm-variation-1';
-    }
-
 	$classes = array_map( 'esc_attr', $classes );
-	$classes = apply_filters( 'site_content_class', $classes, $class );
+	$classes = apply_filters( 'anima_page_class', $classes, $class );
 
 	return array_unique( $classes );
 }
@@ -720,7 +716,7 @@ function anima_get_archive_blocks( $name, $number_of_posts, $posts_ids ) {
 	switch ( $name ) {
 		case 'felt':
             return '
-            <!-- wp:novablocks/sidecar { "className":"alignwide", "sidebarWidth":"medium", "lastItemIsSticky":true } -->
+            <!-- wp:novablocks/sidecar { "sidebarWidth":"medium", "lastItemIsSticky":true } -->
                 <!-- wp:novablocks/sidecar-area {"areaName":"content"} -->
                     <!-- wp:novablocks/supernova {
                         "showCollectionTitle": false,
@@ -741,7 +737,7 @@ function anima_get_archive_blocks( $name, $number_of_posts, $posts_ids ) {
                     anima_get_the_posts_pagination() .
                    '</div>' .
                 '<!-- /wp:novablocks/sidecar-area -->' .
-                '<!-- wp:novablocks/sidecar-area {"className":"novablocks-sidebar"} -->' .
+                '<!-- wp:novablocks/sidecar-area {"areaName":"sidebar"} -->' .
                     anima_get_sidebar_markup() .
                 '<!-- /wp:novablocks/sidecar-area -->' .
             '<!-- /wp:novablocks/sidecar -->';
