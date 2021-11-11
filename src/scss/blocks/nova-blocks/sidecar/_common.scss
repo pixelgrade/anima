@@ -1,16 +1,3 @@
-html:root {
-    --nb-wide-width: var(--theme-content-width-wide);
-    --nb-container-spacings: var(--theme-wrapper-sides-spacing);
-}
-
-body {
-    --offset-addon: var(--sm-content-inset);
-}
-
-.nb-sidecar {
-    --sticky-element-top-spacing: calc( var(--site-header-height, 0px) + var(--admin-bar-height, 0px) )
-}
-
 .novablocks-sidebar {
 
     @include above(lap) {
