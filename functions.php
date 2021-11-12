@@ -432,7 +432,7 @@ function wupdates_add_id_QBAXY( $ids = array() ) {
 
 	// Now add the predefined details about this product
 	// Do not tamper with these please!!!
-	$ids[ $slug ] = array( 'name' => 'Anima', 'slug' => 'anima', 'id' => 'QBAXY', 'type' => 'theme_lt', 'digest' => '9c25ab05bb65ed4302cac0b749a783d8', );
+	$ids[ $slug ] = array( 'name' => 'Anima', 'slug' => 'anima', 'id' => 'QBAXY', 'type' => 'theme_lt_wporg', 'digest' => '100be1dade32eb97a6849c29b2d03e65', );
 
 	return $ids;
 }

@@ -57,9 +57,13 @@ add_action( 'after_switch_theme', 'anima_force_redirect_to_pixcare_install_once'
  *  * Redirect the admin to the pixcare install page once only if the plugin is missing
  */
 function anima_admin_redirect_to_pixcare_install_once() {
-	if ( ! get_transient( '_anima_activation_redirect' ) ) {
+	if ( class_exists( 'PixelgradeCare' )
+	     || file_exists( WP_PLUGIN_DIR . '/pixelgrade-care/pixelgrade-care.php' )
+		 || ! get_transient( '_anima_activation_redirect' ) ) {
 		return;
 	}
+
+	// Delete the transient so we don't do it again.
 	delete_transient( '_anima_activation_redirect' );
 
 	$url = admin_url( 'themes.php?page=pixelgrade_care-install' );
