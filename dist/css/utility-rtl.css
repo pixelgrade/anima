@@ -1,3 +1,19 @@
+/**
+ * Use this mixin to change the inherited font declaration 
+ * of an element or container.
+ */
+/**
+ * Overwrite elements whose properties are declared by a 3rd
+ * party by setting all the font properties again.
+ *
+ * Examples: sales badges inherit font rules from WooCommerce plugin
+ */
+/**
+ * Use this mixin on containers or elements, when you need 
+ * to overwrite the universal selector (*) specificity
+ *
+ * Examples: input fields, image captions
+ */
 /* Alignment Helper Classes */
 .has-text-align-left {
   text-align: right; }
@@ -18,13 +34,11 @@
 
 [class*="wp-block"].alignleft .editor-block-list__block-edit,
 [class*="wp-block"] > .alignleft .editor-block-list__block-edit,
-.editor-block-list__block[data-align=left] .editor-block-list__block-edit,
 .block-editor-block-list__block[data-align=left] .editor-block-list__block-edit {
   max-width: 40%; }
 
 [class*="wp-block"].alignleft[data-align] .block-editor-rich-text p,
 [class*="wp-block"] > .alignleft[data-align] .block-editor-rich-text p,
-.editor-block-list__block[data-align=left][data-align] .block-editor-rich-text p,
 .block-editor-block-list__block[data-align=left][data-align] .block-editor-rich-text p {
   font: inherit; }
 
@@ -38,13 +52,11 @@
 
 [class*="wp-block"].alignright .editor-block-list__block-edit,
 [class*="wp-block"] > .alignright .editor-block-list__block-edit,
-.editor-block-list__block[data-align=right] .editor-block-list__block-edit,
 .block-editor-block-list__block[data-align=right] .editor-block-list__block-edit {
   max-width: 40%; }
 
 [class*="wp-block"].alignright[data-align] .block-editor-rich-text p,
 [class*="wp-block"] > .alignright[data-align] .block-editor-rich-text p,
-.editor-block-list__block[data-align=right][data-align] .block-editor-rich-text p,
 .block-editor-block-list__block[data-align=right][data-align] .block-editor-rich-text p {
   font: inherit; }
 
@@ -57,7 +69,6 @@
 
 [class*="wp-block"].aligncenter,
 [class*="wp-block"] > .aligncenter,
-.editor-block-list__block[data-align=center] .editor-block-list__block-edit,
 .block-editor-block-list__block[data-align=center] .editor-block-list__block-edit {
   display: block;
   margin-right: auto;

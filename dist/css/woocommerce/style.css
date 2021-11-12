@@ -1,3 +1,28 @@
+/**
+ * Use this mixin to change the inherited font declaration 
+ * of an element or container.
+ */
+/**
+ * Overwrite elements whose properties are declared by a 3rd
+ * party by setting all the font properties again.
+ *
+ * Examples: sales badges inherit font rules from WooCommerce plugin
+ */
+[class][class][class] .wc-block-grid__product-onsale {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  font-style: var(--current-font-style);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform); }
+
+/**
+ * Use this mixin on containers or elements, when you need 
+ * to overwrite the universal selector (*) specificity
+ *
+ * Examples: input fields, image captions
+ */
 #html #body #page .button:not(.trix-button),
 #html #body #page button:not([class]),
 #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit) {
@@ -183,6 +208,7 @@
   height: auto;
   max-width: 100%;
   padding: var(--theme-input-padding);
+  margin: 0;
   color: var(--theme-input-color);
   border-radius: var(--theme-input-border-radius);
   background-color: var(--theme-input-background-color);
@@ -209,8 +235,8 @@
     --theme-input-box-shadow: var(--theme-input-focus-box-shadow);
     outline: 0; }
   #html #body #page textarea[disabled] {
-    border-color: var(--theme-input-disabled-border-color);
-    background-color: var(--theme-input-disabled-background-color); }
+    opacity: 0.7;
+    cursor: not-allowed; }
   [class*="invalid"] #html #body #page textarea {
     --theme-input-box-shadow: var(--theme-input-error-box-shadow);
     --theme-input-color: var(--theme-input-error-color);
@@ -787,6 +813,7 @@
   height: auto;
   max-width: 100%;
   padding: var(--theme-input-padding);
+  margin: 0;
   color: var(--theme-input-color);
   border-radius: var(--theme-input-border-radius);
   background-color: var(--theme-input-background-color);
@@ -826,8 +853,8 @@
     --theme-input-box-shadow: var(--theme-input-focus-box-shadow);
     outline: 0; }
   .woocommerce-ordering select[disabled] {
-    border-color: var(--theme-input-disabled-border-color);
-    background-color: var(--theme-input-disabled-background-color); }
+    opacity: 0.7;
+    cursor: not-allowed; }
   [class*="invalid"] .woocommerce-ordering select {
     --theme-input-box-shadow: var(--theme-input-error-box-shadow);
     --theme-input-color: var(--theme-input-error-color);
@@ -1796,6 +1823,7 @@
   width: 1.75em;
   text-align: center;
   font-feature-settings: "lnum";
+  transform: translateZ(0);
   transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1); }
   .menu-item--cart .menu-item__icon:after {
     content: "";
@@ -2358,6 +2386,7 @@ ul.order_details[class] {
   height: auto;
   max-width: 100%;
   padding: var(--theme-input-padding);
+  margin: 0;
   color: var(--theme-input-color);
   border-radius: var(--theme-input-border-radius);
   background-color: var(--theme-input-background-color);
@@ -2382,8 +2411,8 @@ ul.order_details[class] {
     --theme-input-box-shadow: var(--theme-input-focus-box-shadow);
     outline: 0; }
   .wc-stripe-elements-field[disabled] {
-    border-color: var(--theme-input-disabled-border-color);
-    background-color: var(--theme-input-disabled-background-color); }
+    opacity: 0.7;
+    cursor: not-allowed; }
   [class*="invalid"] .wc-stripe-elements-field {
     --theme-input-box-shadow: var(--theme-input-error-box-shadow);
     --theme-input-color: var(--theme-input-error-color);
@@ -2516,6 +2545,7 @@ ul.order_details[class] {
   .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class] {
     padding: 0;
     border-width: 0;
+    cursor: pointer;
     position: relative;
     padding-right: 1.15em;
     padding-bottom: .3em;
@@ -2713,11 +2743,10 @@ ul.order_details[class] {
   left: var(--theme-spacing-smallest);
   z-index: 10;
   margin: 0;
-  background-color: var(--sm-current-accent-color);
-  background-image: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1));
-  color: var(--sm-current-bg-color);
-  border-radius: 1em;
-  padding: .25em .9em;
+  border: none;
+  padding: .21em .6em 0.23em;
+  background-color: var(--sm-current-bg-color);
+  border-radius: 0;
   --font-size: var(--theme-meta-font-size);
   --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-meta-font-family);
@@ -2725,7 +2754,9 @@ ul.order_details[class] {
   --current-font-style: var(--theme-meta-font-style);
   --current-line-height: var(--theme-meta-line-height);
   --current-letter-spacing: var(--theme-meta-letter-spacing);
-  --current-text-transform: var(--theme-meta-text-transform); }
+  --current-text-transform: var(--theme-meta-text-transform);
+  --font-size-modifier: 0.9
+    ; }
 
 [class][class][class] .wc-block-grid__product-title {
   margin-top: var(--theme-spacing-smallest);
@@ -2882,6 +2913,7 @@ ul.order_details[class] {
     height: auto;
     max-width: 100%;
     padding: var(--theme-input-padding);
+    margin: 0;
     color: var(--theme-input-color);
     border-radius: var(--theme-input-border-radius);
     background-color: var(--theme-input-background-color);
@@ -2913,8 +2945,8 @@ ul.order_details[class] {
       --theme-input-box-shadow: var(--theme-input-focus-box-shadow);
       outline: 0; }
     .wc-block-product-categories.is-dropdown select[disabled] {
-      border-color: var(--theme-input-disabled-border-color);
-      background-color: var(--theme-input-disabled-background-color); }
+      opacity: 0.7;
+      cursor: not-allowed; }
     [class*="invalid"] .wc-block-product-categories.is-dropdown select {
       --theme-input-box-shadow: var(--theme-input-error-box-shadow);
       --theme-input-color: var(--theme-input-error-color);
@@ -3049,6 +3081,7 @@ ul.order_details[class] {
   .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class] {
     padding: 0;
     border-width: 0;
+    cursor: pointer;
     position: relative;
     padding-right: 1.15em;
     padding-bottom: .3em;
@@ -3195,6 +3228,7 @@ ul.order_details[class] {
   height: auto;
   max-width: 100%;
   padding: var(--theme-input-padding);
+  margin: 0;
   color: var(--theme-input-color);
   border-radius: var(--theme-input-border-radius);
   background-color: var(--theme-input-background-color);
@@ -3227,8 +3261,8 @@ ul.order_details[class] {
     --theme-input-box-shadow: var(--theme-input-focus-box-shadow);
     outline: 0; }
   .wc-block-order-select__select[class][class][disabled] {
-    border-color: var(--theme-input-disabled-border-color);
-    background-color: var(--theme-input-disabled-background-color); }
+    opacity: 0.7;
+    cursor: not-allowed; }
   [class*="invalid"] .wc-block-order-select__select[class][class] {
     --theme-input-box-shadow: var(--theme-input-error-box-shadow);
     --theme-input-color: var(--theme-input-error-color);

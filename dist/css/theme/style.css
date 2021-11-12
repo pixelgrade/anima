@@ -1,3 +1,19 @@
+/**
+ * Use this mixin to change the inherited font declaration 
+ * of an element or container.
+ */
+/**
+ * Overwrite elements whose properties are declared by a 3rd
+ * party by setting all the font properties again.
+ *
+ * Examples: sales badges inherit font rules from WooCommerce plugin
+ */
+/**
+ * Use this mixin on containers or elements, when you need 
+ * to overwrite the universal selector (*) specificity
+ *
+ * Examples: input fields, image captions
+ */
 figure > :not(:first-child) {
   margin-top: var(--theme-spacing-smallest); }
 
@@ -233,16 +249,6 @@ body:not(.has-loaded) .c-comments-toggle__checkbox + .c-comments-toggle__label ~
 .article-header + * {
   position: relative;
   z-index: 1; }
-
-.error404 .content-area,
-.search-no-results .content-area {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: var(--theme-spacing-fluid-larger);
-  padding-bottom: var(--theme-spacing-fluid-larger);
-  text-align: center; }
 
 .avatar {
   display: block;

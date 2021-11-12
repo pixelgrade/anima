@@ -24,7 +24,6 @@ $assets-folder-path: '../../assets';
 
     // forms.scss may be needed for properly styling the input inside the novablocks sharing overlay
     @import "elements/forms";
-    @import "elements/lists";
 
     // increased specificity selector to overwrite default styles
     &[class] {
@@ -32,6 +31,7 @@ $assets-folder-path: '../../assets';
         @import "elements/base";
         @import "elements/iframe";
         @import "elements/pre";
+        @import "elements/dropcap";
         @import "elements/tables";
         @import "elements/styles";
 
@@ -192,23 +192,5 @@ $assets-folder-path: '../../assets';
     button,
     select {
         --font-size-modifier: 1;
-    }
-}
-
-// Currently, when a group block is using wide or full alignment,
-// this block use an extra wrapper with .wp-block class and [data-align].
-// This is a dumb selector, to make sure that we can handle space and sizing,
-// even with an extra wrapper.
-.wp-block[data-align="full"] {
-    
-    > div:not([class])[style*='spacing'][style*='emphasis'] {
-        
-        > .wp-block-group {
-            
-            > [class*="__inner-container"] {
-                padding-left: var(--theme-wrapper-sides-spacing);
-                padding-right: var(--theme-wrapper-sides-spacing);
-            }
-        }
     }
 }

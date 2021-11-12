@@ -23,8 +23,6 @@ class HeaderBase {
 		if ( typeof this.options.onResize === "function" ) {
 			this.options.onResize();
 		}
-
-		this.render( true );
 	}
 
 	getHeight() {

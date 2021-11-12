@@ -1,3 +1,19 @@
+/**
+ * Use this mixin to change the inherited font declaration 
+ * of an element or container.
+ */
+/**
+ * Overwrite elements whose properties are declared by a 3rd
+ * party by setting all the font properties again.
+ *
+ * Examples: sales badges inherit font rules from WooCommerce plugin
+ */
+/**
+ * Use this mixin on containers or elements, when you need 
+ * to overwrite the universal selector (*) specificity
+ *
+ * Examples: input fields, image captions
+ */
 .novablocks-conversations {
   --avatar-column-size: 2.8rem;
   --comments-grid-gap: 1.4rem;
@@ -192,6 +208,7 @@
   height: auto;
   max-width: 100%;
   padding: var(--theme-input-padding);
+  margin: 0;
   color: var(--theme-input-color);
   border-radius: var(--theme-input-border-radius);
   background-color: var(--theme-input-background-color);
@@ -216,8 +233,8 @@
     --theme-input-box-shadow: var(--theme-input-focus-box-shadow);
     outline: 0; }
   .fake-input-button[disabled] {
-    border-color: var(--theme-input-disabled-border-color);
-    background-color: var(--theme-input-disabled-background-color); }
+    opacity: 0.7;
+    cursor: not-allowed; }
   [class*="invalid"] .fake-input-button {
     --theme-input-box-shadow: var(--theme-input-error-box-shadow);
     --theme-input-color: var(--theme-input-error-color);
@@ -260,6 +277,7 @@ trix-toolbar {
   height: auto;
   max-width: 100%;
   padding: var(--theme-input-padding);
+  margin: 0;
   color: var(--theme-input-color);
   border-radius: var(--theme-input-border-radius);
   background-color: var(--theme-input-background-color);
@@ -289,8 +307,8 @@ trix-toolbar {
     outline: 0; }
   trix-editor[disabled],
   trix-toolbar[disabled] {
-    border-color: var(--theme-input-disabled-border-color);
-    background-color: var(--theme-input-disabled-background-color); }
+    opacity: 0.7;
+    cursor: not-allowed; }
   [class*="invalid"] trix-editor, [class*="invalid"]
   trix-toolbar {
     --theme-input-box-shadow: var(--theme-input-error-box-shadow);

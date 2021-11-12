@@ -3,6 +3,7 @@
   height: auto;
   max-width: 100%;
   padding: var(--theme-input-padding);
+  margin: 0;
 
   color: var(--theme-input-color);
   border-radius: var(--theme-input-border-radius);
@@ -30,8 +31,8 @@
   }
 
   &[disabled] {
-    border-color: var(--theme-input-disabled-border-color);
-    background-color: var(--theme-input-disabled-background-color);
+    opacity: 0.7;
+    cursor: not-allowed;
   }
 
   [class*="invalid"] & {
@@ -119,12 +120,12 @@
   cursor: pointer;
 
   -webkit-appearance: none;
+  transition: all .3s ease;
 }
 
 @mixin checkbox {
   @include checkbox-base;
   border-color: var(--sm-current-accent-color);
-  transition: all .2s ease-in-out;
 
   color: var(--sm-current-bg-color);
 
@@ -140,7 +141,7 @@
     background-position: center center;
     background-repeat: no-repeat;
     opacity: 0;
-    transition: opacity .1s ease-in-out;
+    transition: opacity .3s ease;
   }
 
   &:hover {
@@ -167,7 +168,7 @@
 @mixin radio {
   @include checkbox-base;
   border-radius: 50%;
-  transition: all .2s ease-in-out;
+  border: 0 solid var(--sm-current-accent-color);
 
   -webkit-font-smoothing: initial;
   -webkit-appearance: none;
@@ -184,7 +185,7 @@
   }
 
   &:checked {
-    border: .375em solid var(--sm-current-accent-color);
+    border-width: .375em;
     box-shadow: 0 0 0 1px var(--sm-current-accent-color);
     outline: 0;
   }

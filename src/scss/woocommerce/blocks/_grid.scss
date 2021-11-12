@@ -94,12 +94,11 @@
         z-index: 10;
 
         margin: 0;
-        @include badge;
+        @include badge();
         @include apply-font(meta);
+        @extend %apply-font-properties;
 
-        // font: inherit;
-        // text-transform: inherit;
-        // text-align: center;
+        --font-size-modifier: 0.9
     }
 
     .wc-block-grid__product-title {

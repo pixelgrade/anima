@@ -1,27 +1,54 @@
 $enable-search-block-styles:            true !default;
 
+/*------------------------------------*\
+  #BLOCK - Search
+\*------------------------------------*/
+
 @if $enable-search-block-styles == true {
 
 	.wp-block-search {
 		
+		/**
+		 * WRAPPER
+		 * Use CSS grid to display the search input field and submit button on the same row
+		 */
 		&__inside-wrapper {
-			display: flex;
-		}
-		
-		&:not(.wp-block-search__icon-button) {
-			
+			display: grid;
+			grid-template-columns: 1fr auto;
+
+			.wp-block-search__input {
+				grid-row: 1 / span 1;
+				grid-column: 1 / span 1;
+			}
+
 			.wp-block-search__button {
-				
-				min-width: max-content !important;
-				
-				&:after {
-					content: none;
-				}
+				grid-row: 1 / span 1;	
+				grid-column: 2 / span 1;
+
+				// margin: 4px;
 			}
 		}
 		
-		&__button {
-			
+		/**
+		 * INPUT
+		 * 
+		 * 1) The search input field inherits most of the standard field styles.
+		 * 2) On mobile devices, the search input should follow the button
+		 * 	  height and not the other way around, so the clickable area  
+		 * 	  remains larger for both input and button.
+		 * 3) Reset the default padding value (for mobile devices) to be the same 
+		 * 	  as on the desktop.
+		 * 	  
+		 */
+		
+		input[type="search"] {
+			--theme-input-padding: var(--theme-input-padding-above-tablet);
+		}
+		
+		/**
+		 * BUTTON
+		 */
+		&__button {		
 			position: relative;
 			
 			@include specific(2) {
@@ -62,19 +89,56 @@ $enable-search-block-styles:            true !default;
 			svg {
 				display: none;
 			}
-		}
-		
+		}		
+
+
+
+		/**
+		 * BUTTON POSITION: Outside search field
+		 */
 		&__button-outside {
-			
-			.wp-block-search__button {
-				margin-left: 10px;
+			.wp-block-search__inside-wrapper {
+				column-gap: 10px;
 			}
 		}
-		
-		&__no-button {
-			
-			.wp-block-search__inside-wrapper {
+
+		/**
+		 * BUTTON POSITION: Inside search field
+		 * Place the button inside the input field and add some spacing around it
+		 */
+		&__button-inside {
+			position: relative;
+
+			.wp-block-search__input {
+				grid-column: 1 / span 2;
+			}
+
+			.wp-block-search__button {	
+				margin: 4px;
+			}
+		}
+
+
+
+		/**
+		 * BUTTON STYLE: Button without icon
+		 */
+		&:not(.wp-block-search__icon-button) {
+			.wp-block-search__button {	
+				min-width: max-content;
 				
+				&:after {
+					content: none;
+				}
+			}
+		}
+
+		/**
+		 * BUTTON STYLE: No button
+		 * When there is no button, display the search icon as a hint.
+		 */
+		&__no-button {
+			.wp-block-search__inside-wrapper {	
 				position: relative;
 				
 				&:before {

@@ -78,11 +78,24 @@
     }
 }
 
+/**
+ * Badges for Menu Items
+ *
+ * Impose a few custom font rules outside of the Design System tokens.
+ * Uppercase and letter-spacing helps small font sizes (10-11px) to be legible.
+ * 
+ * @todo: uppercase it's not working well with serif typefaces and we need to 
+ * find a way to pass some exceptions based on font family
+ */
 .menu-item-label {
-    @include badge;
-    font-size: 0.5em;
+    @include badge(highlighted);
+    --current-font-size: var(--final-font-size);
+    --font-size-modifier: 0.6;
+
+    // Custom font rules
     text-transform: uppercase;
     font-weight: bold;
+    letter-spacing: 0.03em;
     
     vertical-align: middle;
     margin-left: var(--navigation-item-sub-elements-spacing);

@@ -11,20 +11,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-get_header(); ?>
+get_header();
+
+?>
 
     <div id="primary" class="content-area">
         <main id="main" class="site-main">
 
-            <div class="entry-content">
-				<?php if ( have_posts() ) {
-				get_template_part( 'template-parts/loop' );
-				anima_the_posts_pagination(); ?>
-            </div>
-
-                <?php } else {
-                    get_template_part( 'template-parts/content', 'none' );
-                } ?>
+			<?php echo do_blocks(
+				'<!-- wp:novablocks/sidecar -->' .
+				'<!-- wp:novablocks/sidecar-area -->' .
+				anima_get_archive_content() .
+				'<!-- /wp:novablocks/sidecar-area -->' .
+				'<!-- /wp:novablocks/sidecar -->'
+			); ?>
 
         </main><!-- #main -->
     </div><!-- #primary -->

@@ -15,9 +15,15 @@
         --nb-spacing: var(--theme-content-spacing);
         --nb-media-spacing: var(--theme-spacing-fluid-larger);
         --nb-sides-spacings: var(--theme-wrapper-sides-spacing);
-        --nb-content-width-wide: var(--theme-content-width-wide);
+
+        // --sm-site-container-width [60-100]
+        --nb-container-width: calc(var(--sm-site-container-width) * 1rem);
+
+        // --sm-content-inset [100-300]
+        --nb-sidecar-sidebar-small-width: calc(var(--sm-content-inset) * 1px);
 
         --nb-navigation-item-spacing: var(--theme-header-links-spacing);
+        --nb-sidecar-sticky-top: calc( var(--theme-header-height, 0) + var(--theme-sticky-distance, 0) + var(--nb-spacing) * var(--nb-spacing-current-multiplier, 1));
 
         --nb-block-content-box-shadow:
             0 32px 128px rgba(0, 0, 0, 0.1),

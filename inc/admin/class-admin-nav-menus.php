@@ -824,13 +824,15 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 		 * @return string Modified form HTML.
 		 */
 		public function custom_search_form( $form ) {
-			$form = '<form role="search" method="get" class="search-form input-normal-height" action="' . esc_url( home_url( '/' ) ) . '">
-				<label>
+			$form = '<form role="search" method="get" class="wp-block-search__button-outside wp-block-search__text-button wp-block-search wp-block-search search-form" action="' . esc_url( home_url( '/' ) ) . '">
+				<label class="wp-block-search__label">
 					<span class="screen-reader-text">' . _x( 'Search for:', 'label', '__theme_txtd' ) . '</span>
-					<input type="search" class="search-field" placeholder="' . esc_attr( sprintf( __( 'Search %s...', '__theme_txtd' ), esc_html( get_bloginfo( 'name' ) ) ) ) . '" value="' . get_search_query() . '" name="s" />
 					<span class="search-icon"></span>
 				</label>
-                <input type="submit" class="search-submit" value="' . esc_attr_x( 'Search', 'submit button', '__theme_txtd' ) . '" />
+				<div class="wp-block-search__inside-wrapper">
+					<input type="search" class="wp-block-search__input search-field" placeholder="' . esc_attr( sprintf( __( 'Search %s...', '__theme_txtd' ), esc_html( get_bloginfo( 'name' ) ) ) ) . '" value="' . get_search_query() . '" name="s" />
+                	<input type="submit" class="wp-block-search__button   search-submit" value="' . esc_attr_x( 'Search', 'submit button', '__theme_txtd' ) . '" />
+				</div>
 			</form>';
 
 			return $form;

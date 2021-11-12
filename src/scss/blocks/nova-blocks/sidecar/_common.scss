@@ -1,16 +1,3 @@
-html:root {
-    --nb-wide-width: var(--theme-content-width-wide);
-    --nb-container-spacings: var(--theme-wrapper-sides-spacing);
-}
-
-body {
-    --offset-addon: var(--sm-content-inset);
-}
-
-.nb-sidecar {
-    --sticky-element-top-spacing: calc( var(--site-header-height, 0px) + var(--admin-bar-height, 0px) )
-}
-
 .novablocks-sidebar {
 
     @include above(lap) {
@@ -31,10 +18,6 @@ body {
             --current-font-size: var(--final-font-size);
             font-size: var(--current-font-size);
         }
-    }
-
-    .widget {
-        @include space-children-y( var(--theme-spacing-fluid-smaller) );
     }
 
     .widget-title[class][class] {
@@ -72,27 +55,5 @@ body {
     button,
     select {
         --font-size-modifier: 1;
-    }
-}
-
-
-// Decrease font sizing when the content is pulled
-// outside the main container, in a smaller area.
-// ---
-// ToDO:
-// Note that [data-align] is used on the Media Card and Hero blocks with
-// the "full" value and the font size should be affected in those cases.
-// There might be other cases where this rule is needed.
-.novablocks-content {
-
-    // > [data-align],
-    > .alignleft,
-    > .alignright,
-    > [class*='pull'],
-    > [data-novablocks-alignment] {
-
-        * {
-            --font-size-modifier: 0.85;
-        }
     }
 }

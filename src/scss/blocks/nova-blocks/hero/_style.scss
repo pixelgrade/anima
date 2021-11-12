@@ -37,32 +37,6 @@
     }
 }
 
-.novablocks-hero__indicator--middle {
-    
-    &[class] {
-        background-color: transparent;
-        color: inherit;
-    }
-    
-    svg {
-        opacity: 0;
-    }
-}
-
-.novablocks-hero__indicator:not(.novablocks-hero__indicator--middle) {
-    width: 160px;
-    height: 50px;
-    top: 100%;
-    color: var(--sm-current-bg-color);
-    background: none;
-
-    z-index: 1;
-
-    &:after {
-        color: var(--sm-current-fg2-color);
-    }
-}
-
 @include below(lap) {
     .c-bully {
         display: none;

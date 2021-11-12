@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <body <?php body_class(); ?> id="body">
 <?php wp_body_open(); ?>
 
-<div id="page" class="site">
+<div id="page" <?php anima_page_class() ?>>
     <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', '__theme_txtd' ); ?></a>
 
 	<?php do_action( 'anima_before_header', 'main' ); ?>
@@ -44,4 +44,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 		get_template_part( 'template-parts/site-header' );
 	} ?>
 
-    <div id="content" <?php site_content_class() ?>>
+    <div id="content" class="site-content">

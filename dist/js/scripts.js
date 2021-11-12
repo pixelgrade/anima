@@ -1438,8 +1438,6 @@ function () {
       if (typeof this.options.onResize === "function") {
         this.options.onResize();
       }
-
-      this.render(true);
     }
   }, {
     key: "getHeight",
@@ -2521,11 +2519,15 @@ function () {
   }, {
     key: "initializeHeader",
     value: function initializeHeader() {
+      var _this = this;
+
       var header = document.querySelector('.novablocks-header');
 
       if (!!header) {
         this.header = new components_header(header, {
-          onResize: this.onHeaderUpdate.bind(this)
+          onResize: function onResize() {
+            requestAnimationFrame(_this.onHeaderUpdate.bind(_this));
+          }
         });
       }
     }
@@ -2570,6 +2572,7 @@ function () {
       var promoBarTop = this.promoBarFixed ? promoBarHeight : 0;
       var stickyDistance = adminBarTop + promoBarTop;
       var staticDistance = this.adminBarHeight + promoBarHeight;
+      document.documentElement.style.setProperty('--theme-sticky-distance', "".concat(stickyDistance, "px"));
 
       if (!!header) {
         header.stickyDistance = stickyDistance;
@@ -2598,7 +2601,7 @@ function () {
       var promoBarHeight = ((_this$promoBar = this.promoBar) === null || _this$promoBar === void 0 ? void 0 : _this$promoBar.height) || 0;
       var headerHeight = ((_this$header2 = this.header) === null || _this$header2 === void 0 ? void 0 : _this$header2.getHeight()) || 0;
       var $body = external_jQuery_default()('body');
-      external_jQuery_default()('html').css('scrollPaddingTop', "".concat(headerHeight, "px"));
+      document.documentElement.style.setProperty('--theme-header-height', "".concat(headerHeight, "px"));
 
       if (!$body.is('.has-no-spacing-top')) {
         $body.find('.site-content').css('marginTop', "".concat(promoBarHeight + headerHeight, "px"));
