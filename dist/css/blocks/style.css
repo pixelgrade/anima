@@ -445,7 +445,7 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between ul.wp-bl
   background-color: var(--sm-current-accent-color);
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0.6), rgba(0, 0, 0, 0.3));
   background-blend-mode: hue;
-  color: var(--sm-current-bg-color);
+  color: #FFFFFF;
   border-radius: 1em;
   border: none;
   --current-font-size: var(--final-font-size);
@@ -934,8 +934,10 @@ nav.wp-block-navigation:not(.is-vertical).items-justified-space-between ul.wp-bl
     .novablocks-sharing__overlay[class]:not(.is-visible) .novablocks-sharing__wrap {
       opacity: 0;
       transform: translate3d(0, -0.8625em, 0); }
-  .novablocks-sharing__overlay .novablocks-sharing__copy-input {
-    transition: none; }
+  .novablocks-sharing__overlay .novablocks-sharing__copy-input.sm-light {
+    --opacity-color: 255, 255, 255; }
+    html.is-dark .novablocks-sharing__overlay .novablocks-sharing__copy-input.sm-light {
+      --opacity-color: 0, 0, 0; }
 
 .novablocks-sharing__link[class] {
   padding: calc( var(--theme-input-padding) / 2) calc( var(--theme-input-padding) * 3 / 4); }

@@ -64,16 +64,39 @@ textarea {
     }
 }
 
+
+
+
+
+/*------------------------------------*\
+  #STYLE MANAGER STATES: DARK / LIGHT
+\*------------------------------------*/
+
+/**
+ * Light and Dark classes indicates the container brightness in a binary system. 
+ * Could be used to switch between black and white colors or elements visibility:
+ * 1) .sm-light: the container has a lower color grade (eg. variation 1-5)
+ * 2) .sm-dark: the container has a higher color grade (eg. variation 6-11)
+ * 3) html.is-dark: the dark mode is active (eg. using the navigation toggle)
+ */
+
 .sm-dark,
 html.is-dark .sm-light {
     --logo-default-opacity: 0;
     --logo-inverted-opacity: 1;
+    --opacity-color: 255, 255, 255;
 }
 
 .sm-light {
     --logo-default-opacity: 1;
     --logo-inverted-opacity: 0;
+    --opacity-color: 0, 0, 0;
 }
+
+
+
+
+
 
 .sm-color-signal-0 {
     background: none;
