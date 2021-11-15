@@ -25,7 +25,14 @@
     }
     
     .novablocks-sharing__copy-input {
-        transition: none;
+        // transition: none;
+        &.sm-light {
+            --opacity-color: 255, 255, 255;
+
+            html.is-dark & {
+                --opacity-color: 0, 0, 0;
+            }
+        }
     }
 }
 
