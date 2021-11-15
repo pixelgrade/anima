@@ -13,7 +13,11 @@
 		background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0.6), rgba(0, 0, 0, 0.3));
 		background-blend-mode: hue;
 		
-		color: var(--sm-current-bg-color);
+		// Limit the badge text color to white to make it pop more
+		// 
+		// @todo: when Palette Basis Offset is 4-5 + 10-11 the badge text is not visible
+		// @initial solution: color: var(--sm-current-bg-color);
+		color: #FFFFFF;
 		
 		border-radius: 1em;
 		border: none;
