@@ -5,7 +5,14 @@
 .novablocks-header--main:not(.novablocks-header--sticky) {
 
     @include above(lap) {
-        position: absolute !important;
+        // @todo: 
+        // In case the Header is a single sticky row, there is a slight 
+        // jerkiness when start scrolling and the "position" is changed
+        // from "absolute" to "fixed".
+        // 
+        // The "position: fixed" seem solve this issue, but it's not working 
+        // when there are multiple rows inside the Header.
+        position: absolute !important; 
         top: 0 !important;
     }
 
