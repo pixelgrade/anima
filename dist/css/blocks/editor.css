@@ -81,38 +81,29 @@ ul.wp-block-categories__list[class] {
 /* ==========================================================================
    #NAVIGATION
    ========================================================================== */
+nav.wp-block-navigation {
+  --layout-direction: column;
+  --layout-justification-setting: space-between;
+  --layout-wrap: nowrap;
+  --layout-justify: space-between;
+  --layout-align: flex-start; }
+
 nav.wp-block-navigation div.wp-block-navigation__container {
+  flex-basis: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: var(--layout-direction);
+  justify-content: var(--layout-justification-setting);
+  flex-wrap: var(--layout-wrap);
+  align-items: var(--layout-align);
+  gap: 0.5em;
   padding-left: 0;
   list-style: none; }
   nav.wp-block-navigation div.wp-block-navigation__container > :not(:first-child) {
-    margin-top: var(--theme-spacing-fluid-smallest); }
+    margin-top: 0; }
 
 nav.wp-block-navigation a:not(:hover) {
   text-decoration-color: transparent; }
-
-nav.wp-block-navigation:not(.is-vertical) div.wp-block-navigation__container {
-  display: flex; }
-  nav.wp-block-navigation:not(.is-vertical) div.wp-block-navigation__container > :not(:first-child) {
-    margin-left: calc( var(--nb-navigation-item-spacing) * var(--nb-navigation-item-spacing-multiplier, 1)); }
-  nav.wp-block-navigation:not(.is-vertical) div.wp-block-navigation__container > :not(:first-child) {
-    margin-top: 0; }
-  nav.wp-block-navigation:not(.is-vertical) div.wp-block-navigation__container div.wp-block-navigation-item {
-    display: inline-block;
-    clear: none; }
-  nav.wp-block-navigation:not(.is-vertical) div.wp-block-navigation__container .block-list-appender {
-    margin-right: 0; }
-
-nav.wp-block-navigation:not(.is-vertical).items-justified-left div.wp-block-navigation__container {
-  justify-content: flex-start; }
-
-nav.wp-block-navigation:not(.is-vertical).items-justified-center div.wp-block-navigation__container {
-  justify-content: center; }
-
-nav.wp-block-navigation:not(.is-vertical).items-justified-right div.wp-block-navigation__container {
-  justify-content: flex-end; }
-
-nav.wp-block-navigation:not(.is-vertical).items-justified-space-between div.wp-block-navigation__container {
-  justify-content: space-between; }
 
 .wp-block[data-align="left"] .wp-block-pullquote blockquote,
 .wp-block[data-align="right"] .wp-block-pullquote blockquote {

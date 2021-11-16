@@ -8,9 +8,10 @@
 // FRONTEND block HTML structure
 // nav.wp-block-navigation
 // 	ul.wp-block-navigation__container
-// 		li.wp-block-navigation-item
+// 		li.wp-block-navigation-item + .wp-block-navigation-submenu
 // 			a.wp-block-navigation-item__content
 // 				span.wp-block-navigation-item__label
+// 		form.wp-block-search
 
 // EDITOR block HTML structure
 // nav.wp-block-navigation
@@ -19,14 +20,38 @@
 // 			a.wp-block-navigation-item__content
 
 $nav-block: 'nav.wp-block-navigation' !default;
-$nav-ul-container: 'ul.wp-block-navigation__container' !default;
-$nav-list-item: 'li.wp-block-navigation-item' !default;
+$nav-ul-container: 'ul' !default;
+$nav-list-item: 'li' !default;
+
+
+
+// Available variables (usually) changed within the Editor.
+// Use the below settings as defaults.
+#{$nav-block} {
+	--layout-direction: column;
+	--layout-justification-setting: space-between;
+	--layout-wrap: nowrap;
+	--layout-justify: space-between;
+	--layout-align: flex-start;
+}
 
 #{$nav-block} {
 	#{$nav-ul-container} {
+		flex-basis: 100%;
+		width: 100%;
+
+		display: flex;
+		flex-direction: var(--layout-direction);
+		justify-content: var(--layout-justification-setting);
+		flex-wrap: var(--layout-wrap);
+		align-items: var(--layout-align);
+
+		gap: 0.5em;
+
 		padding-left: 0;
+		@include space-children-y( 0 );
+
 		list-style: none;
-		@include space-children-y( var(--theme-spacing-fluid-smallest) );
 
 		#{$nav-list-item} {
 
@@ -38,51 +63,6 @@ $nav-list-item: 'li.wp-block-navigation-item' !default;
 			// Hide default link decoration for 
 			// links inside Navigation block
 			text-decoration-color: transparent;
-		}
-	}
-
-	// Variations of the Navigation block
-	// Vertical - links shown in a column
-	&.is-vertical {
-
-	}
-
-
-	// Horizontal – links shown in a row
-	&:not(.is-vertical) {
-		#{$nav-ul-container} {
-			display:flex; 		
-			@include space-children-x( calc( var(--nb-navigation-item-spacing) * var(--nb-navigation-item-spacing-multiplier, 1)) );
-			@include space-children-y( 0 );
-			
-			#{$nav-list-item} {
-				display: inline-block;
-				clear: none;
-			}
-
-			// @todo: find why the block appender 
-			// broke the items justification
-			// and margin seem to fix it
-			.block-list-appender {
-				margin-right: 0;
-			}
-		}
-
-		// Items justification
-		&.items-justified-left #{$nav-ul-container} {
-		    justify-content: flex-start
-		}
-
-		&.items-justified-center #{$nav-ul-container} {
-		    justify-content: center
-		}
-
-		&.items-justified-right #{$nav-ul-container} {
-		    justify-content: flex-end
-		}
-
-		&.items-justified-space-between #{$nav-ul-container} {
-		    justify-content: space-between
 		}
 	}
 }			
