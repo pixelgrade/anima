@@ -251,7 +251,8 @@
   --theme-input-padding-above-tablet: var(--theme-button-y-padding);
   --theme-checkbox-width: 1.38rem;
   --theme-checkbox-height: 1.38rem;
-  --opacity-color: 255, 255, 255; }
+  --opacity-color: 255, 255, 255;
+  --theme-input-focus-color: var(--sm-current-accent-color); }
   @media only screen and (min-width: 768px) {
     :root {
       --theme-input-padding: var(--theme-input-padding-above-tablet); } }
@@ -265,20 +266,22 @@
   --theme-input-overlay-shadow: inset 0px 0px 0px calc(var(--theme-input-border-width) * 2) rgba(var(--opacity-color), 0.70);
   --theme-input-colored-shadow: inset 0px 0px 0px var(--theme-input-border-width) var(--sm-current-fg2-color);
   --theme-input-box-shadow:   
-    var(--theme-input-overlay-shadow),
-    var(--theme-input-colored-shadow);
+      var(--theme-input-overlay-shadow),
+      var(--theme-input-colored-shadow);
   --theme-input-border-color:  var(--sm-current-bg-color);
   --theme-input-error-border-color: var(--theme-input-error-color);
   --theme-input-focus-overlay-shadow: inset 0px 0px 0px calc(var(--theme-input-border-width) + 1px) rgba(var(--opacity-color), 0.40);
-  --theme-input-focus-colored-shadow:  inset 0px 0px 0px calc(var(--theme-input-border-width) + 1px) var(--sm-current-accent-color);
-  --theme-input-focus-shadow: 0 0 9px -3px var(--sm-current-accent-color);
-  --theme-input-focus-box-shadow: var(--theme-input-focus-overlay-shadow),
-  var(--theme-input-focus-colored-shadow),
-  var(--theme-input-focus-shadow);
+  --theme-input-focus-colored-shadow:  inset 0px 0px 0px calc(var(--theme-input-border-width) + 1px) var(--theme-input-focus-color);
+  --theme-input-focus-shadow: 0 0 9px -3px var(--theme-input-focus-color);
+  --theme-input-focus-box-shadow: 
+      var(--theme-input-focus-overlay-shadow),
+      var(--theme-input-focus-colored-shadow),
+      var(--theme-input-focus-shadow);
   --theme-input-hover-overlay-shadow: inset 0px 0px 0px var(--theme-input-border-width) rgba(var(--opacity-color), 0.30);
   --theme-input-hover-colored-shadow: inset 0px 0px 0px var(--theme-input-border-width) var(--sm-current-fg2-color);
-  --theme-input-hover-box-shadow: var(--theme-input-hover-overlay-shadow),
-  var(--theme-input-hover-colored-shadow);
+  --theme-input-hover-box-shadow: 
+      var(--theme-input-hover-overlay-shadow),
+      var(--theme-input-hover-colored-shadow);
   --theme-input-error-focus-overlay-shadow: inset 0px 0px 0px calc(var(--theme-input-border-width) + 1px) rgba(var(--opacity-color), 0.40);
   --theme-input-error-focus-colored-shadow:  inset 0px 0px 0px calc(var(--theme-input-border-width) + 1px) var(--theme-input-error-color);
   --theme-input-error-focus-shadow: 0 0 9px -3px var(--theme-input-error-color);

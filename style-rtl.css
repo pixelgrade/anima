@@ -1316,14 +1316,7 @@ table {
   z-index: 9999;
   width: 100%;
   padding: 1em var(--theme-wrapper-sides-spacing);
-  --theme-input-search-focus-overlay-shadow: inset 0px 0px 0px 2px currentColor;
-  --theme-search-input-focus:
-      var(--theme-input-search-focus-overlay-shadow),
-      var(--theme-input-focus-colored-shadow),
-      var(--theme-input-focus-shadow);
-  --theme-input-box-shadow: var(--theme-search-input-focus);
-  --theme-input-focus-box-shadow: var(--theme-search-input-focus);
-  --theme-input-hover-box-shadow: var(--theme-search-input-focus); }
+  --theme-input-focus-color: var(--sm-current-fg1-color); }
   @media only screen and (min-width: 1024px) {
     .c-search-overlay {
       transform: translateY(-100%);
@@ -1333,12 +1326,12 @@ table {
       transform: translateX(100%);
       transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
       --theme-button-padding: .25em 1em; } }
-  .c-search-overlay input[type="submit"],
-  .c-search-overlay input[type="button"] {
-    --theme-button-background-color: var(--sm-fg2-color-2);
-    --theme-button-border-color: var(--sm-fg2-color-2);
-    --theme-button-hover-text-color: var(--sm-fg2-color-2);
-    --theme-button-hover-border-color: var(--sm-fg2-color-2); }
+  .c-search-overlay .wp-block-search__button[class][class] {
+    --theme-button-background-color: var(--sm-current-fg1-color);
+    --theme-button-border-color: var(--sm-current-fg1-color);
+    --theme-button-text-color: var(--sm-current-bg-color);
+    --theme-button-hover-border-color: var(--sm-current-fg1-color);
+    --theme-button-hover-text-color: var(--sm-current-fg1-color); }
   .c-search-overlay__form {
     transition: opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) 0.025s; }
   .c-search-overlay__suggestions {
@@ -1445,7 +1438,7 @@ table {
         backface-visibility: hidden;
         overflow: hidden;
         --current-button-text-color: var(--theme-button-hover-text-color);
-        --theme-button-background-color: var(--sm-fg2-color-1); }
+        --theme-button-background-color: var(--sm-current-fg1-color); }
         .c-search-overlay__suggestions .menu li:not([disabled]) {
           cursor: pointer; }
           .c-search-overlay__suggestions .menu li:not([disabled]):hover {
