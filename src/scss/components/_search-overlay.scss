@@ -10,14 +10,18 @@
   padding: 1em var(--theme-wrapper-sides-spacing);
 
   // --theme-button-padding: .6em 1.7em;
-  --theme-input-search-focus-overlay-shadow: inset 0px 0px 0px 2px currentColor;
-  --theme-search-input-focus:
-      var(--theme-input-search-focus-overlay-shadow),
-      var(--theme-input-focus-colored-shadow),
-      var(--theme-input-focus-shadow);
-  --theme-input-box-shadow: var(--theme-search-input-focus);
-  --theme-input-focus-box-shadow: var(--theme-search-input-focus);
-  --theme-input-hover-box-shadow: var(--theme-search-input-focus);
+  
+
+
+  // --theme-input-search-focus-overlay-shadow: inset 0px 0px 0px 2px currentColor;
+  // --theme-search-input-focus:
+  //     var(--theme-input-search-focus-overlay-shadow),
+  //     var(--theme-input-focus-colored-shadow),
+  //     var(--theme-input-focus-shadow);
+  // --theme-input-box-shadow: var(--theme-search-input-focus);
+  // --theme-input-focus-box-shadow: var(--theme-search-input-focus);
+  // --theme-input-hover-box-shadow: var(--theme-search-input-focus);
+
 
   @include above(lap) {
     transform: translateY(-100%);
@@ -30,13 +34,29 @@
 
     --theme-button-padding: .25em 1em;
   }
+
+  // Change the input and button color from "accent" to "foreground1"
+  --theme-input-focus-color: var(--sm-current-fg1-color);
+
+  .wp-block-search {
+    &__button {
+      @include specific(2) {
+        --theme-button-background-color: var(--sm-current-fg1-color);
+        --theme-button-border-color: var(--sm-current-fg1-color);
+        --theme-button-text-color: var(--sm-current-bg-color);
+        --theme-button-hover-border-color: var(--sm-current-fg1-color);
+        --theme-button-hover-text-color: var(--sm-current-fg1-color); 
+      }
+    }
+  }
   
+
   input[type="submit"],
   input[type="button"] {
-    --theme-button-background-color: var(--sm-fg2-color-2);
-    --theme-button-border-color: var(--sm-fg2-color-2);
-    --theme-button-hover-text-color: var(--sm-fg2-color-2);
-    --theme-button-hover-border-color: var(--sm-fg2-color-2);
+    // --theme-button-background-color: var(--sm-fg2-color-2);
+    // --theme-button-border-color: var(--sm-fg2-color-2);
+    // --theme-button-hover-text-color: var(--sm-fg2-color-2);
+    // --theme-button-hover-border-color: var(--sm-fg2-color-2);
   }
 
   &__form {
@@ -150,7 +170,7 @@
         @include button-base;
         @include button-fill-reverse;
 
-        --theme-button-background-color: var(--sm-fg2-color-1);
+        --theme-button-background-color: var(--sm-current-fg1-color);
     
           a {
 
