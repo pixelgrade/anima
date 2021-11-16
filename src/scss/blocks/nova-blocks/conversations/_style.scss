@@ -401,3 +401,19 @@ trix-toolbar {
     }
   }
 }
+
+
+
+/**
+ * Remove the border-radius between Toolbar and Editor to always make
+ * them look connected, independent of the Design System border-radius
+ */
+
+trix-toolbar#comment_trix_toolbar {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+trix-editor#commentTrixEditor {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
