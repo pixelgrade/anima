@@ -1173,12 +1173,26 @@ table {
   .novablocks-announcement-bar__close {
     display: none; } }
 
+:root {
+  --form-inline-gap: 10px; }
+
+/*------------------------------------*\
+  #HELPER CLASS - .form-inline
+\*------------------------------------*/
+/**
+ * Apply the .form-inline class to a wrapper to align all its direct 
+ * children in a single horizontal row.
+ *
+ * <form class="form-inline">  
+ *      <input> 
+ *      ...
+ *      <input type="submit">  
+ * </form>
+ */
 .form-inline {
-  display: flex; }
-  .form-inline input[type="submit"],
-  .form-inline input[type="button"],
-  .form-inline button[type="submit"],
-  .form-inline button[type="reset"] {
+  display: flex;
+  gap: var(--form-inline-gap); }
+  .form-inline > *:last-child {
     flex-shrink: 0;
     margin-top: 0; }
 
