@@ -173,6 +173,10 @@ wp.domReady(function () {
     name: 'elaborate',
     label: 'Elaborate'
   });
+  wp.blocks.registerBlockStyle('core/separator', {
+    name: 'blank',
+    label: 'Blank'
+  });
 });
 
 /***/ })

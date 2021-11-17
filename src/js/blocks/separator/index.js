@@ -19,4 +19,9 @@ wp.domReady( () => {
 		label: 'Elaborate',
 	} );
 
+	wp.blocks.registerBlockStyle( 'core/separator', {
+		name: 'blank',
+		label: 'Blank',
+	} );
+
 } );
