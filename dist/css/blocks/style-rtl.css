@@ -288,6 +288,9 @@ nav.wp-block-navigation a:not(:hover) {
   .novablocks-map__marker-name[class][class][class] {
     font-size: 16px; }
 
+/*------------------------------------*\
+  #MOBILE HEADER
+\*------------------------------------*/
 .novablocks-header--mobile {
   position: fixed;
   top: 0;
@@ -295,10 +298,11 @@ nav.wp-block-navigation a:not(:hover) {
   right: 0;
   z-index: 2001;
   width: 100%;
+  min-height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--theme-spacing-fluid-normal) var(--theme-wrapper-sides-spacing);
+  padding: var(--theme-spacing-fluid-smaller) var(--theme-wrapper-sides-spacing);
   --shadow-color: rgba(0, 0, 0, 0.25);
   --shadow-y-offset: 4px;
   --shadow-blur: 4px; }
@@ -308,11 +312,13 @@ nav.wp-block-navigation a:not(:hover) {
     display: flex;
     position: absolute;
     top: 50%;
-    left: calc( var(--theme-wrapper-sides-spacing) + .5em);
+    left: calc( var(--theme-wrapper-sides-spacing) + 0em);
     transform: translateY(-50%); }
     .novablocks-header--mobile .menu-item--cart > a {
       color: currentColor;
-      transition: color .3s ease-out; }
+      transition: color .3s ease; }
+    .novablocks-header--mobile .menu-item--cart .menu-item__label {
+      display: none; }
 
 @media only screen and (min-width: 1024px) {
   .novablocks-header__inner-container {
@@ -320,11 +326,19 @@ nav.wp-block-navigation a:not(:hover) {
   .novablocks-header--mobile {
     display: none; } }
 
+/**
+ * Adjust the desktop Header for Mobile
+ */
 @media not screen and (min-width: 1024px) {
   .novablocks-header--main {
     margin-top: 0 !important; }
+    .novablocks-header--main[class][class] {
+      --sm-current-bg-color: var(--sm-bg-color-6);
+      --sm-current-accent-color: var(--sm-accent-color-6);
+      --sm-current-fg1-color: var(--sm-fg1-color-6);
+      --sm-current-fg2-color: var(--sm-fg2-color-6); }
   .novablocks-header--main:before {
-    --header-background-opacity: 0.95; }
+    --header-background-opacity: 0.97; }
   .novablocks-header--main .site-branding {
     display: none !important; }
   .novablocks-header--main .menu:not(.menu--buttons) .menu-item--cart, .novablocks-header--main .menu:not(.menu--buttons)
@@ -337,14 +351,16 @@ nav.wp-block-navigation a:not(:hover) {
     .novablocks-navigation .sub-menu > li {
       padding-right: var(--theme-wrapper-sides-spacing);
       padding-left: var(--theme-wrapper-sides-spacing); }
+  .novablocks-navigation[class][class] > ul > li[class*="current"] {
+    color: var(--sm-current-fg1-color); }
   .c-menu-toggle__checkbox:checked ~ .novablocks-header .novablocks-header__inner-container, .c-menu-toggle__checkbox:checked ~ .novablocks-header
   .novablocks-header__buttons-menu {
     opacity: 1;
-    transition: opacity 0.1s cubic-bezier(0, 0, 0.58, 1) 0.25s; }
+    transition: opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s; }
   .c-menu-toggle__checkbox:not(:checked) ~ .novablocks-header .novablocks-header__inner-container, .c-menu-toggle__checkbox:not(:checked) ~ .novablocks-header
   .novablocks-header__buttons-menu {
     opacity: 0;
-    transition: opacity 0.075s cubic-bezier(0, 0, 0.58, 1) 0s; } }
+    transition: opacity 0.2s cubic-bezier(0.25, 0.1, 0.25, 1) 0s; } }
 
 .novablocks-header__buttons-menu a {
   color: inherit; }
@@ -369,12 +385,17 @@ nav.wp-block-navigation a:not(:hover) {
   margin: 0 !important;
   background: none !important;
   transition-property: color; }
-  .c-menu-toggle__checkbox:checked ~ .c-menu-toggle .c-menu-toggle__slice--top {
-    transform: rotate(-45deg); }
-  .c-menu-toggle__checkbox:checked ~ .c-menu-toggle .c-menu-toggle__slice--middle {
-    opacity: 0; }
-  .c-menu-toggle__checkbox:checked ~ .c-menu-toggle .c-menu-toggle__slice--bottom {
-    transform: rotate(45deg); }
+  .c-menu-toggle__checkbox:checked ~ .c-menu-toggle {
+    --sm-current-bg-color: var(--sm-bg-color-6);
+    --sm-current-accent-color: var(--sm-accent-color-6);
+    --sm-current-fg1-color: var(--sm-fg1-color-6);
+    --sm-current-fg2-color: var(--sm-fg2-color-6); }
+    .c-menu-toggle__checkbox:checked ~ .c-menu-toggle .c-menu-toggle__slice--top {
+      transform: rotate(-45deg); }
+    .c-menu-toggle__checkbox:checked ~ .c-menu-toggle .c-menu-toggle__slice--middle {
+      opacity: 0; }
+    .c-menu-toggle__checkbox:checked ~ .c-menu-toggle .c-menu-toggle__slice--bottom {
+      transform: rotate(45deg); }
 
 @media only screen and (min-width: 1024px) {
   .novablocks-header--main:not(.novablocks-header--sticky) {
@@ -561,7 +582,8 @@ nav.wp-block-navigation a:not(:hover) {
   min-height: 400px; }
 
 :root {
-  --navigation-item-sub-elements-spacing: 7px; }
+  --navigation-item-sub-elements-spacing: 7px;
+  --theme-navigation-links-color: var(--sm-current-fg1-color); }
 
 .novablocks-navigation {
   --theme-button-y-padding: .25em;
@@ -571,8 +593,7 @@ nav.wp-block-navigation a:not(:hover) {
   --theme-button-border-color: var(--sm-current-fg1-color);
   --theme-button-hover-text-color: var(--sm-current-fg1-color);
   --theme-button-hover-background-color: transparent;
-  --theme-button-hover-border-color: var(--sm-current-fg1-color);
-  --theme-navigation-links-color: var(--sm-current-fg1-color); }
+  --theme-button-hover-border-color: var(--sm-current-fg1-color); }
   @media only screen and (min-width: 1024px) {
     .novablocks-navigation > ul.menu > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only),
     .novablocks-navigation > .menu > ul > li:not(.social-menu-item):not([class*="weglot"]):not(.is-cta-button):not(.icon-only) {
@@ -691,7 +712,7 @@ nav.wp-block-navigation a:not(:hover) {
 
 @media not screen and (min-width: 1024px) {
   .novablocks-navigation {
-    --font-size: 18; } }
+    --font-size: 22; } }
 
 @media only screen and (min-width: 1024px) {
   .novablocks-navigation {
