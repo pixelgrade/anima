@@ -1,3 +1,7 @@
+/*------------------------------------*\
+  #MOBILE HEADER
+\*------------------------------------*/
+
 .novablocks-header--mobile {
     position: fixed;
     top: 0;
@@ -6,12 +10,13 @@
     z-index: 2001;
 
     width: 100%;
+    min-height: 60px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    padding: var(--theme-spacing-fluid-normal) var(--theme-wrapper-sides-spacing);
+    padding: var(--theme-spacing-fluid-smaller) var(--theme-wrapper-sides-spacing);
 
     --shadow-color: rgba(0, 0, 0, 0.25);
     --shadow-y-offset: 4px;
@@ -26,13 +31,18 @@
 
         position: absolute;
         top: 50%;
-        right: calc( var(--theme-wrapper-sides-spacing) + .5em );
+        right: calc( var(--theme-wrapper-sides-spacing) + 0em );
 
         transform: translateY(-50%);
 
         > a {
             color: currentColor;
-            transition: color .3s ease-out;
+            transition: color .3s ease;
+        }
+
+        // Hide menu cart label (if visible)
+        .menu-item__label {
+            display: none;
         }
     }
 }
@@ -48,14 +58,23 @@
     }
 }
 
+
+
+/**
+ * Adjust the desktop Header for Mobile
+ */
 @include below(lap) {
     
     .novablocks-header--main {
         margin-top: 0 !important;
+
+        @include specific(2) {
+            @include apply-variation(6);
+        }
     }
 
     .novablocks-header--main:before {
-        --header-background-opacity: 0.95;
+        --header-background-opacity: 0.97;
     }
 
     .novablocks-header--main .site-branding {
@@ -83,6 +102,12 @@
                 padding-right: var(--theme-wrapper-sides-spacing);
             }
         }
+
+        @include specific(2) {
+            > ul > li[class*="current"] {
+                color: var(--sm-current-fg1-color);
+            }
+        }
     }
 
     .novablocks-header__inner-container,
@@ -90,12 +115,12 @@
 
         .c-menu-toggle__checkbox:checked ~ .novablocks-header & {
             opacity: 1;
-            transition: opacity .1s $easeOut .25s;
+            transition: opacity .3s $ease .3s; // .novablocks-header has a 0.4s entry transition
         }
 
         .c-menu-toggle__checkbox:not(:checked) ~ .novablocks-header & {
             opacity: 0;
-            transition: opacity .075s $easeOut 0s;
+            transition: opacity .2s $ease 0s; 
         }
     }
 }

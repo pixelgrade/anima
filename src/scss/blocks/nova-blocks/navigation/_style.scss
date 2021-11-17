@@ -4,6 +4,8 @@
 // Search icon and label, Submenu item and dropdown arrow, Cart label and icon
 :root {
     --navigation-item-sub-elements-spacing: 7px;
+
+    --theme-navigation-links-color: var(--sm-current-fg1-color);    
 }
 
 .novablocks-navigation {
@@ -17,8 +19,6 @@
     --theme-button-hover-text-color: var(--sm-current-fg1-color);
     --theme-button-hover-background-color: transparent;
     --theme-button-hover-border-color: var(--sm-current-fg1-color);
-
-    --theme-navigation-links-color: var(--sm-current-fg1-color);
 
 
     > ul.menu,
@@ -63,7 +63,7 @@
 .novablocks-navigation {
 
     @include below(lap) {
-        --font-size: 18;
+        --font-size: 22;
     }
 
     @include above(lap) {

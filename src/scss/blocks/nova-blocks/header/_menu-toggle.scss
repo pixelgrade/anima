@@ -14,6 +14,8 @@
 
     .c-menu-toggle__checkbox:checked ~ & {
 
+        @include apply-variation(6);
+
         .c-menu-toggle__slice--top {
             transform: rotate(45deg);
         }

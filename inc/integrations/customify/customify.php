@@ -68,10 +68,10 @@ function anima_add_header_section_to_customify_config( $config ) {
 					'label'       => esc_html__( 'Mobile Logo Height', '__theme_txtd' ),
 					'desc'        => esc_html__( 'Adjust the height of your logo on small screens.', '__theme_txtd' ),
 					'live'        => true,
-					'default'     => 20,
+					'default'     => 24,
 					'input_attrs' => array(
-						'min'          => 10,
-						'max'          => 150,
+						'min'          => 14,
+						'max'          => 80,
 						'step'         => 1,
 						'data-preview' => true,
 					),

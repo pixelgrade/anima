@@ -11,10 +11,10 @@
 
 .site-title {
     @include apply-font(heading-4);
-    --font-size: calc(var(--theme-header-logo-height-setting) * 1.8);
+    --font-size: calc(var(--theme-header-logo-height-setting));
     --current-line-height: 1;
 
     @include below(tablet) {
-        --current-font-size: calc(var(--theme-mobile-header-logo-height) * 1.8);
+        --current-font-size: calc(var(--theme-mobile-header-logo-height));
     }
 }
