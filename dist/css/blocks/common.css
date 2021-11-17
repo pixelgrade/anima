@@ -1170,32 +1170,7 @@ nav.wp-block-navigation a:not(:hover) {
   .wp-block-novablocks-navigation .menu > ul a {
     padding: 0.75em 0; }
 
-.nb-collection__layout--carousel .slick-dots {
-  /*
-		 * Slick dots is an ul
-		 * and all child in an ul, except first one,
-		 * has a margin-top applied.
-		 */ }
-  .nb-collection__layout--carousel .slick-dots[class] > li {
-    margin-top: 0; }
-
-.nb-collection__layout--carousel .slick-arrow {
-  width: 50px;
-  height: 50px;
-  background-color: transparent;
-  transform: translateY(-50%); }
-  .nb-collection__layout--carousel .slick-arrow:hover:after {
-    opacity: .1; }
-
-.nb-collection__layout--carousel .slick-prev:before,
-.nb-collection__layout--carousel .slick-next:before {
-  content: "";
-  display: block;
-  width: 32px;
-  height: 32px;
-  margin: 0;
-  border: 0;
-  padding: 0;
+.nb-collection__layout--carousel .slick-arrow:before {
   mask: url("../../../assets/images/icon-arrow.svg") no-repeat 50% 50%;
   mask-size: cover;
   -webkit-mask: url("../../../assets/images/icon-arrow.svg") no-repeat 50% 50%;
@@ -1211,8 +1186,8 @@ nav.wp-block-navigation a:not(:hover) {
 .nb-collection__layout--carousel .slick-arrow:after {
   content: "";
   display: block;
-  width: 50px;
-  height: 50px;
+  width: 100%;
+  height: 100%;
   margin-top: 0;
   border: 0;
   border-radius: 50%;

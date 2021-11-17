@@ -30,6 +30,7 @@
         }
     }
 
+    --font-size-base: 1;
     --font-size-modifier: 1;
     --current-font-feature: none;
 }
@@ -54,7 +55,7 @@
     // x2 - viewport width at a given time
     // y2 - font size value we need to find out
     --y2: calc( var(--a) * 100vw + var(--b) * 1px );
-    --final-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+    --final-font-size: calc( var(--font-size-modifier) * var(--font-size-base) * ( var(--y2) + var(--theme-addon) ) );
 
     font-family: var(--current-font-family);
     font-size: var(--current-font-size);

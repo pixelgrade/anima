@@ -1,24 +1,23 @@
-.novablocks-sidebar {
+
+.nb-sidecar-area--sidebar {
 
     @include above(lap) {
 
-        &--small * {
-            --font-size-modifier: 0.75;
+        .nb-sidecar--sidebar-small & {
+            --font-size-base: 0.75;
         }
 
-        &--medium * {
-            --font-size-modifier: 0.85;
+        .nb-sidecar--sidebar-medium & {
+            --font-size-base: 0.85;
         }
 
-        &--large * {
-            --font-size-modifier: 1;
-        }
-
-        * {
-            --current-font-size: var(--final-font-size);
-            font-size: var(--current-font-size);
+        .nb-sidecar--sidebar-large & {
+            --font-size-base: 1;
         }
     }
+}
+
+.nb-sidecar-area {
 
     .widget-title[class][class] {
         --font-size: var(--theme-heading-4-font-size);

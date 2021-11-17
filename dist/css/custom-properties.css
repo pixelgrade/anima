@@ -143,6 +143,7 @@
   --theme-accent-font-style: normal;
   --theme-accent-letter-spacing: normal;
   --theme-accent-text-transform: none;
+  --font-size-base: 1;
   --font-size-modifier: 1;
   --current-font-feature: none; }
   @media only screen and (min-width: 1440px) {
@@ -159,7 +160,7 @@
   --a: calc( ( var(--y1) - var(--y0-new) ) / ( var(--x1) - var(--x0) ) );
   --b: calc( var(--y0-new) - var(--a) * var(--x0) );
   --y2: calc( var(--a) * 100vw + var(--b) * 1px );
-  --final-font-size: calc( var(--font-size-modifier) * ( var(--y2) + var(--theme-addon) ) );
+  --final-font-size: calc( var(--font-size-modifier) * var(--font-size-base) * ( var(--y2) + var(--theme-addon) ) );
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
   line-height: var(--current-line-height);
