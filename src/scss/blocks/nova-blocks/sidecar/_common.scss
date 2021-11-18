@@ -1,4 +1,5 @@
 
+// Single Sidecar
 .nb-sidecar-area--sidebar {
 
     @include above(lap) {
@@ -17,6 +18,29 @@
     }
 }
 
+// Sidecar in Sidecar
+.nb-sidecar-area {
+    .nb-sidecar-area {
+        .nb-sidecar-area--sidebar {
+            @include above(lap) {
+
+                .nb-sidecar--sidebar-small & {
+                    --font-size-base: .75;
+                }
+
+                .nb-sidecar--sidebar-medium & {
+                    --font-size-base: .85;
+                }
+
+                .nb-sidecar--sidebar-large & {
+                    --font-size-base: 1;
+                }
+            }
+        }
+    }
+}
+
+// Sidecar 
 .nb-sidecar-area {
 
     .widget-title[class][class] {
@@ -56,3 +80,5 @@
         --font-size-modifier: 1;
     }
 }
+
+
