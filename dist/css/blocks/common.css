@@ -640,7 +640,7 @@
   --current-text-transform: var(--theme-heading-1-text-transform);
   --current-color: var(--theme-heading-1-color); }
 
-.wp-block-pullquote cite,
+.wp-block-pullquote blockquote cite:not(:first-child),
 .wp-block-pullquote__citation {
   display: block;
   --font-size: var(--theme-heading-6-font-size);
@@ -651,7 +651,8 @@
   --current-line-height: var(--theme-heading-6-line-height);
   --current-letter-spacing: var(--theme-heading-6-letter-spacing);
   --current-text-transform: var(--theme-heading-6-text-transform);
-  --current-color: var(--theme-heading-6-color); }
+  --current-color: var(--theme-heading-6-color);
+  margin-top: var(--theme-spacing-smaller); }
 
 /* Blockquote Block */
 .wp-block-quote {
@@ -672,7 +673,7 @@
     --current-text-transform: var(--theme-heading-3-text-transform);
     --current-color: var(--theme-heading-3-color); }
 
-.wp-block-quote cite,
+.wp-block-quote > cite:not(:first-child),
 .wp-block-quote__citation {
   display: block;
   --font-size: var(--theme-heading-6-font-size);
@@ -683,7 +684,8 @@
   --current-line-height: var(--theme-heading-6-line-height);
   --current-letter-spacing: var(--theme-heading-6-letter-spacing);
   --current-text-transform: var(--theme-heading-6-text-transform);
-  --current-color: var(--theme-heading-6-color); }
+  --current-color: var(--theme-heading-6-color);
+  margin-top: var(--theme-spacing-smaller); }
 
 /*------------------------------------*\
   #BLOCK - Search

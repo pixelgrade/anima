@@ -24,10 +24,11 @@ $enable-pullquote-block-styles:         true !default;
         }
     }
 
-    .wp-block-pullquote cite,
+    .wp-block-pullquote blockquote cite:not(:first-child),
     .wp-block-pullquote__citation {
         display: block;
         @include apply-font(heading-6);
+        margin-top: var(--theme-spacing-smaller);
     }
 
     

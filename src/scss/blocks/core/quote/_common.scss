@@ -15,9 +15,10 @@ $enable-blockquote-block-styles:        true !default;
         }
     }
 
-    .wp-block-quote cite,
+    .wp-block-quote > cite:not(:first-child),
     .wp-block-quote__citation {
         display: block;
         @include apply-font(heading-6);
+        margin-top: var(--theme-spacing-smaller);
     }
 }
