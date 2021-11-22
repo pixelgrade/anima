@@ -3,12 +3,14 @@ var gulp = require( 'gulp' ),
 	sassUnicode = require('gulp-sass-unicode'),
 	rtlcss = require( 'gulp-rtlcss' ),
 	rename = require( 'gulp-rename' ),
-	replace = require( 'gulp-replace' );
+	replace = require( 'gulp-replace' )
+	cached = require( 'gulp-cached' );
 
 sass.compiler = require( 'node-sass' );
 
 function stylesBase( src, dest, cb ) {
 	return gulp.src( src )
+	           .pipe( cached( 'styles-base' ) )
 	           .pipe( sass().on( 'error', sass.logError ) )
 	           .pipe( sassUnicode() )
 	           .pipe( replace( /^@charset "UTF-8";\n/gm, '' ) )
@@ -31,6 +33,7 @@ function compileNotRootStyles( cb ) {
 
 function stylesRTL( cb ) {
 	return gulp.src( [ 'style.css', './dist/css/**/*.css', '!./dist/css/**/*-rtl.css' ], { base: './' } )
+	           .pipe( cached( 'styles-rtl' ) )
 	           .pipe( rtlcss() )
 	           .pipe( rename( function( path ) { path.basename += "-rtl"; } ) )
 	           .pipe( gulp.dest( '.' ) );

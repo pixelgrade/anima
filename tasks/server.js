@@ -14,10 +14,11 @@ gulp.task( 'server', function() {
 
 	// Init the Browsersync server
 	browserSync.init( {
+		cwd: '../../',
 		files: [
-			'../../plugins/nova-blocks/build/**/*',
-			'./dist/**/*',
-			'./style.css',
+			'plugins/nova-blocks/build/**/*',
+			'themes/anima/dist/**/*',
+			'themes/anima/style.css',
 		],
 		open: false,
 		proxy: gulpconfig.server.domain,
