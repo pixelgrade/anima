@@ -10,7 +10,6 @@ sass.compiler = require( 'node-sass' );
 
 function stylesBase( src, dest, cb ) {
 	return gulp.src( src )
-	           .pipe( cached( 'styles-base' ) )
 	           .pipe( sass().on( 'error', sass.logError ) )
 	           .pipe( sassUnicode() )
 	           .pipe( replace( /^@charset "UTF-8";\n/gm, '' ) )
