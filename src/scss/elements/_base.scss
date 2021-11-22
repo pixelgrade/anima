@@ -13,3 +13,25 @@ strong,
 b {
   --current-font-weight: bold;
 }
+
+u {
+
+}
+
+// Inline text highlighting
+strong em,
+em strong {
+  @include apply-font(heading-4);
+  --font-size: revert; 
+
+  font-style: normal;
+  color: var(--sm-current-accent-color);
+} 
+
+// Highlight control
+mark {
+
+  &.has-inline-color {
+
+  }
+}

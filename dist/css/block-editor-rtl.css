@@ -893,6 +893,20 @@
     .editor-styles-wrapper[class] strong,
     .editor-styles-wrapper[class] b {
       --current-font-weight: bold; }
+    .editor-styles-wrapper[class] strong em,
+    .editor-styles-wrapper[class] em strong {
+      --font-size: var(--theme-heading-4-font-size);
+      --current-font-size: var(--final-font-size);
+      --current-font-family: var(--theme-heading-4-font-family);
+      --current-font-weight: var(--theme-heading-4-font-weight);
+      --current-font-style: var(--theme-heading-4-font-style);
+      --current-line-height: var(--theme-heading-4-line-height);
+      --current-letter-spacing: var(--theme-heading-4-letter-spacing);
+      --current-text-transform: var(--theme-heading-4-text-transform);
+      --current-color: var(--theme-heading-4-color);
+      --font-size: revert;
+      font-style: normal;
+      color: var(--sm-current-accent-color); }
     .editor-styles-wrapper[class] iframe {
       width: 100%;
       max-width: 100%;
