@@ -3,9 +3,7 @@
     @include specific(5) {
       @include button;
       @include button-fill(false);
-      font-size: var(--current-font-size);
-      line-height: var(--current-line-height);
-      font-family: var(--current-font-family);
+      @include apply-font-properties;
     }
 }
 

@@ -55,7 +55,6 @@ ul.wp-block-categories__list[class] {
   .editor-block-list__block.wp-block-image figcaption,
   .block-editor-block-list__block.wp-block-image figcaption {
     --font-size: var(--theme-body-font-size);
-    --current-font-size: var(--final-font-size);
     --current-font-family: var(--theme-body-font-family);
     --current-line-height: var(--theme-body-line-height);
     --current-font-weight: var(--theme-body-font-weight);
@@ -108,7 +107,6 @@ nav.wp-block-navigation a:not(:hover) {
 .wp-block[data-align="left"] .wp-block-pullquote blockquote,
 .wp-block[data-align="right"] .wp-block-pullquote blockquote {
   --font-size: var(--theme-body-font-size);
-  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
@@ -117,7 +115,6 @@ nav.wp-block-navigation a:not(:hover) {
 
 .wp-block[data-align="wide"] .wp-block-pullquote {
   --font-size: var(--theme-heading-2-font-size);
-  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-heading-2-font-family);
   --current-font-style: var(--theme-heading-2-font-style);
   --current-font-weight: var(--theme-heading-2-font-weight);
@@ -128,7 +125,6 @@ nav.wp-block-navigation a:not(:hover) {
 
 .wp-block[data-align="full"] .wp-block-pullquote {
   --font-size: var(--theme-heading-1-font-size);
-  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-heading-1-font-family);
   --current-font-style: var(--theme-heading-1-font-style);
   --current-line-height: var(--theme-heading-1-line-height);
@@ -157,7 +153,6 @@ nav.wp-block-navigation a:not(:hover) {
   color: var(--current-button-text-color);
   transition: var(--current-button-transition);
   --font-size: var(--theme-button-font-size);
-  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
   --current-font-style: var(--theme-button-font-style);
@@ -192,7 +187,6 @@ nav.wp-block-navigation a:not(:hover) {
   .nova-food-menu-item__title .item-title {
     color: inherit;
     --font-size: var(--theme-heading-4-font-size);
-    --current-font-size: var(--final-font-size);
     --current-font-family: var(--theme-heading-4-font-family);
     --current-font-weight: var(--theme-heading-4-font-weight);
     --current-font-style: var(--theme-heading-4-font-style);
@@ -210,7 +204,6 @@ nav.wp-block-navigation a:not(:hover) {
 
 .nova-food-menu__header .section-title {
   --font-size: var(--theme-heading-2-font-size);
-  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-heading-2-font-family);
   --current-font-style: var(--theme-heading-2-font-style);
   --current-font-weight: var(--theme-heading-2-font-weight);
@@ -289,7 +282,6 @@ nav.wp-block-navigation a:not(:hover) {
 .novablocks-media__content {
   max-width: 100%;
   --font-size: var(--theme-body-font-size);
-  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);
@@ -375,7 +367,6 @@ nav.wp-block-navigation a:not(:hover) {
   color: var(--current-button-text-color);
   transition: var(--current-button-transition);
   --font-size: var(--theme-button-font-size);
-  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
   --current-font-style: var(--theme-button-font-style);
@@ -391,9 +382,13 @@ nav.wp-block-navigation a:not(:hover) {
   background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
   background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
   background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%);
+  font-family: var(--current-font-family);
   font-size: var(--current-font-size);
   line-height: var(--current-line-height);
-  font-family: var(--current-font-family); }
+  font-weight: var(--current-font-weight);
+  font-style: var(--current-font-style);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform); }
   .ot-dtp-picker-form .ot-dtp-picker-button[class][class][class][class][class]:not([disabled]) {
     cursor: pointer; }
     .ot-dtp-picker-form .ot-dtp-picker-button[class][class][class][class][class]:not([disabled]):hover {
@@ -412,7 +407,6 @@ nav.wp-block-navigation a:not(:hover) {
 
 .ot-dtp-picker input[type="submit"][class][class] {
   --font-size: var(--theme-button-font-size);
-  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-button-font-family);
   --current-font-weight: var(--theme-button-font-weight);
   --current-font-style: var(--theme-button-font-style);
@@ -453,7 +447,6 @@ nav.wp-block-navigation a:not(:hover) {
 
 .ot-dtp-picker-form {
   --font-size: var(--theme-input-font-size);
-  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-input-font-family);
   --current-font-weight: var(--theme-input-font-weight);
   --current-font-style: var(--theme-input-font-style);
@@ -521,7 +514,6 @@ nav.wp-block-navigation a:not(:hover) {
 
 .novablocks-card {
   --font-size: var(--theme-body-font-size);
-  --current-font-size: var(--final-font-size);
   --current-font-family: var(--theme-body-font-family);
   --current-line-height: var(--theme-body-line-height);
   --current-font-weight: var(--theme-body-font-weight);

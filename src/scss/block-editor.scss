@@ -14,11 +14,15 @@ $assets-folder-path: '../../assets';
 /* Typography */
 :root {
     --font-size: var(--theme-body-font-size);
-    --theme-body-final-font-size: var(--final-font-size);
+    --theme-body-final-font-size: var(--current-font-size);
 }
 
 .editor-styles-wrapper {
     -webkit-font-smoothing: antialiased;
+
+    * {
+        @include apply-font-properties;
+    }
 
     @import "components/site-branding";
 

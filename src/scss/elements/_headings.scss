@@ -6,12 +6,7 @@ h3, .h3,
 h4, .h4,
 h5, .h5,
 h6, .h6 {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  font-style: var(--current-font-style);
-  letter-spacing: var(--current-letter-spacing);
+  @include apply-font-properties;
   color: var(--current-color);
 }
 

@@ -7,7 +7,6 @@
 
     @if ( map_get( $config, font-size ) ) {
         --font-size: var(--theme-#{$name}-font-size);
-        --current-font-size: var(--final-font-size);
     }
 
     @each $prop, $value in $config {
@@ -49,6 +48,5 @@
  */
 @mixin apply-font-size( $size ) {
     --font-size: $size;
-    --current-font-size: var(--final-font-size);
     font-size: var(--current-font-size);
 }
