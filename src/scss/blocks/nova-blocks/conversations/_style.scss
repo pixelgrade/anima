@@ -29,6 +29,12 @@
   --element-spacing: var(--theme-spacing-normal) !important;
   
   width: 100%;
+
+  * {
+    // Make all elements work with the --font-size-modifier
+    // @todo: why it isn't applied globally to all elements?
+    --current-font-size: var(--final-font-size);
+  }
   
   &[class][class] {
     
@@ -58,9 +64,8 @@
   }
   
   .comment-dropdown-toggle {
-    --font-size-modifier: 0.83;
+    --font-size-modifier: 0.90;
     --current-font-weight: regular;
-    
     font-size: var(--current-font-size);
   }
   
@@ -220,6 +225,8 @@
     
     margin-top: 0;
     margin-bottom: 0;
+
+    
   }
   
   .comments-pagination {

@@ -64,10 +64,12 @@
         padding: var(--theme-spacing-fluid-small);
     }
 
-    label {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+    // This is too general and enter in conflict with Label from 
+    // other area like .comment-dropdown-toggle from Nova Blocks conversations
+    // label {
+    //     flex-direction: column;
+    //     align-items: flex-start;
+    // }
 
     [class*='has-sm-dark'] {
         --theme-input-overlay-shadow: inset 0px 0px 0px 0px rgba(var(--opacity-color), 0.70);
