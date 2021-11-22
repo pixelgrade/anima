@@ -14,20 +14,36 @@ if ( fs.existsSync( './tasks/gulpconfig.json' ) ) {
 var config = Object.assign( {}, defaults, gulpconfig.server );
 
 function reload( done ) {
-	browserSync.reload();
+	browserSync.reload("*.css");
 	done();
 };
 
 gulp.task( 'server', function() {
 	console.log( gulpconfig, config );
-	// Serve files from the root of this project
+	
+
+	// Provide a callback to capture ALL events to CSS
+	// files - then filter for 'change' and reload all
+	// css files on the page.
+	// https://browsersync.io/docs/api#api-watch
+	browserSync.watch(['*.css', '../../plugins/nova-blocks/,*.css'], function (event, file) {
+	    if (event === 'change') {
+	        browserSync.reload('*.css');
+	    }
+	});
+
+	browserSync.watch('dist/**/*.js').on('change', browserSync.reload);
+
+	// Init the Browsersync server
 	browserSync.init( {
+		watch: true,
 		proxy: gulpconfig.server.domain,
 		open: 'external',
+		injectChanges: true,
 	} );
 
 	// add browserSync.reload to the tasks array to make
 	// all browsers reload after tasks are complete.
-	gulp.watch( [ 'dist/**/*.js', '*.css' ], reload );
+	// gulp.watch( [ 'dist/**/*.js', '*.css' ], reload );
 
 } );
