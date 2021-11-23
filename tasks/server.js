@@ -16,7 +16,7 @@ gulp.task( 'server', function() {
 	browserSync.init( {
 		cwd: '../../',
 		files: [
-			'plugins/nova-blocks/build/**/*',
+			'plugins/nova-blocks/build/**/*.css',
 			'themes/anima/dist/**/*',
 			'themes/anima/style.css',
 		],
