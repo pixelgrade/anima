@@ -1,7 +1,4 @@
-.wp-block-button__link {
-    @include button-transition;
-}
-
+/* Button Block */
 .wp-block-button {
 
     display: flex;
@@ -40,6 +37,15 @@
 }
 
 .wp-block-button__link {
+    // Always center the text inside the button, including when using Custom Width 
+    // settings and the link container is larger than the text itself.
+    text-align: center; 
+
+    @include button-transition;
+    @include button-base;
+    @include button-box;
+    @include apply-font(button);
+    @include button-color;
 
     @include specific(3) {
 

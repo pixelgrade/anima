@@ -2,107 +2,31 @@ $enable-button-block-styles:            true !default;
 
 @if $enable-button-block-styles == true {
 
-    /* Button Block */
-    .wp-block-button {
+    /* Buttons Block */
+    .wp-block-buttons[class][class] {
+        gap: calc( var(--theme-content-spacing) / 2 );
 
-        &.is-style-squared {
-            --theme-button-border-radius: 0;
-        }
-
-        &.is-style-outline {
-            --theme-button-background-color: transparent;
-            --theme-button-text-color: currentColor;
-            --theme-button-border-color: currentColor;
-
-            --theme-button-hover-background-color: transparent;
-            --theme-button-hover-text-color: currentColor;
-            --theme-button-hover-border-color: currentColor;
-        }
-
-        @each $alignment in left, center, right {
-            &.align#{$alignment} {
-                text-align: #{$alignment};
-            }
-        }
-    }
-
-    .wp-block-button__link {
-        @include button-base;
-        @include button-box;
-        @include apply-font(button);
-        @include button-color;
-    }
-
-    .wp-block-buttons[class][class][class] {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        
-        &[class*="align"] {
-            margin-left: 0;
-            margin-right: 0;
-        }
-
-        .wp-block,
+        // Width Settings
+        // @todo: find out when this is implemented in the core and remove it from here
         .wp-block-button {
-            margin-top: 0 !important;
-
-            &:not(:last-child),
-            &:not(:first-child):not(:last-child) {
-                margin-right: var(--theme-content-spacing);
+            &.has-custom-width > * {
+                width: 100%;
             }
-        }
-
-        .block-editor-block-list__layout {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-
-            > * {
-                margin-left: 0;
-                margin-right: 0;
+            &.wp-block-button__width-100 {
+                width: 100%;
             }
-        }
 
-        &.aligncenter {
-            justify-content: center;
-
-            .wp-block,
-            .wp-block-button {
-                margin-left: calc( var(--theme-content-spacing) / 2 );
-                margin-right: calc( var(--theme-content-spacing) / 2 );
+            &.wp-block-button__width-75 {
+                width: 75%;
             }
-        }
 
-        &.alignright {
-            justify-content: flex-end;
-
-            .wp-block,
-            .wp-block-button {
-                margin-left: var(--theme-content-spacing);
-                margin-right: 0;
+            &.wp-block-button__width-50 {
+                width: 50%;
             }
-        }
-    
-        &.is-content-justification-left {
-            justify-content: flex-start;
-        }
-    
-        &.is-content-justification-center {
-            justify-content: center;
-        }
-    
-        &.is-content-justification-right {
-            justify-content: flex-end;
-        }
 
-        .wp-block-button__link[class] {
-            display: block;
-        }
-        
-        > .wp-block {
-            margin-left: 0;
-            margin-right: 0;
+            &.wp-block-button__width-25 {
+                width: 25%;
+            }
         }
     }
 }
