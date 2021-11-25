@@ -89,7 +89,7 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 			),
 
 			'novablocks_headline_primary' => sm_get_color_switch_darker_config( 'Headline primary', '.c-headline__primary', false, 2 ),
-			'novablocks_headline_secondary' => sm_get_color_switch_darker_config( 'Headline secondary', '.c-headline__secondary', true, 3 ),
+			'novablocks_headline_secondary' => sm_get_color_switch_darker_config( 'Headline secondary', '.c-headline__secondary, :is(h1, h2, h3, h4, h5, h6) em', true, 3 ),
 
 			'colors_novablocks_card_section_title' => array(
 				'type' => 'html',

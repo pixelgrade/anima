@@ -1,4 +1,4 @@
-// always display primary and secondary headlines on separate lines
+// ------ #HEADLINE BLOCK
 
 :root {
     // Headline Lines Spacing
@@ -14,6 +14,7 @@
     display: inline-flex !important;
 }
 
+// always display primary and secondary headlines on separate lines
 .c-headline__primary,
 .c-headline__secondary {
     display: block;
@@ -32,20 +33,20 @@
     z-index: 10;
 }
 
-.c-headline__secondary {
-    @include apply-font(accent);
-}
 
-.c-headline__secondary {
-    font-size: 1.3636em;
+
+// ------ #SECONDARY HEADLINE
+// Styling for Headline block and italics inside headings
+.c-headline__secondary,
+:is(h1, h2, h3, h4, h5, h6) em {
+    @include apply-font(accent);
+    --font-size-modifier: 1.3636;
+    font-style: normal;
     line-height: 0.9;
     white-space: nowrap;
-}
 
-h1.c-headline.has-larger-font-size {
-
-    .c-headline__secondary {
-        font-size: .87em;
+    h1.c-headline.has-larger-font-size & {
+        --font-size-modifier: .87em;
         line-height: 1.1;
     }
 }

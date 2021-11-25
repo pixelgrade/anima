@@ -890,6 +890,17 @@
     .editor-styles-wrapper[class] strong,
     .editor-styles-wrapper[class] b {
       --current-font-weight: bold; }
+    .editor-styles-wrapper[class] mark.has-inline-color {
+      padding: 0.04em 0.5em;
+      margin: 0 -0.5em;
+      background: linear-gradient(90deg, rgba(249, 229, 73, 0.25), rgba(249, 229, 75, 0.75) 29.55%, rgba(249, 230, 77, 0.1) 103.16%);
+      border-bottom-left-radius: 0.5em;
+      border-top-right-radius: 0.5em;
+      -webkit-box-decoration-break: clone;
+      color: inherit !important;
+      background-color: inherit !important; }
+    .is-dark .editor-styles-wrapper[class] mark.has-inline-color {
+      background: linear-gradient(90deg, rgba(75, 88, 249, 0.25), rgba(75, 88, 249, 0.75) 29.55%, rgba(75, 88, 249, 0.1) 103.16%); }
     .editor-styles-wrapper[class] strong em,
     .editor-styles-wrapper[class] em strong {
       --font-size: var(--theme-heading-4-font-size);
