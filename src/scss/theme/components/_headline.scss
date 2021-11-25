@@ -44,9 +44,14 @@
     font-style: normal;
     line-height: 0.9;
     white-space: nowrap;
+    vertical-align: middle;
 
     h1.c-headline.has-larger-font-size & {
         --font-size-modifier: .87em;
         line-height: 1.1;
     }
+}
+
+:is(h1, h2, h3, h4, h5, h6) em  {
+    line-height: 0;
 }
