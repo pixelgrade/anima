@@ -14,11 +14,41 @@ b {
   --current-font-weight: bold;
 }
 
-u {
 
+
+// ------ #HIGHLIGHT CONTROL
+// Ignore the custom text and background color options and
+// hard-code a gradient for consistency
+// 
+// @todo: find a way to replace the yellow with a token 
+//        from the Design System.
+mark {
+  &.has-inline-color {
+    padding: 0.04em 0.5em;
+    margin: 0 -0.5em;
+
+    background: linear-gradient(90deg ,rgba(249,229,73,.25),rgba(249,229,75,.75) 29.55%,rgba(249,230,77,.1) 103.16%);
+    border-bottom-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+    -webkit-box-decoration-break: clone;  
+
+    // Ignore inline styles
+    color: inherit !important;
+    background-color: inherit !important;
+  }
+
+  // Dark mode 
+  // Change color hue to blue
+  .is-dark &.has-inline-color {
+    background: linear-gradient(90deg ,rgba(75,88,249,.25),rgba(75,88,249,.75) 29.55%,rgba(75,88,249,.1) 103.16%);
+  }
 }
 
-// Inline text highlighting
+
+
+// ------ #ACCENTUATE CONTROL
+// Inline text highlighting using both methods of 
+// emphasis: bold and italic altogether.
 strong em,
 em strong {
   @include apply-font(heading-4);
@@ -27,11 +57,3 @@ em strong {
   font-style: normal;
   color: var(--sm-current-accent-color);
 } 
-
-// Highlight control
-mark {
-
-  &.has-inline-color {
-
-  }
-}
