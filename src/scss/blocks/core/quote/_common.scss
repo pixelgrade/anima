@@ -4,8 +4,9 @@ $enable-blockquote-block-styles:        true !default;
     /* Blockquote Block */
     .wp-block-quote {
         @include space-children-y( var(--theme-spacing) );
-        padding-left: var(--theme-spacing-normal);
-        padding-right: var(--theme-spacing-normal);
+        padding-left: var(--theme-spacing-fluid-normal);
+
+        @include above(tablet) { padding-right: var(--theme-spacing-fluid-normal); }
 
         border-left: 3px solid var(--sm-current-accent-color); 
         
@@ -19,6 +20,6 @@ $enable-blockquote-block-styles:        true !default;
     .wp-block-quote__citation {
         display: block;
         @include apply-font(heading-6);
-        margin-top: var(--theme-spacing-smaller);
+        margin-top: var(--theme-spacing-fluid-smaller);
     }
 }
