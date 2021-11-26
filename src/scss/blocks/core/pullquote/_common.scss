@@ -12,6 +12,10 @@ $enable-pullquote-block-styles:         true !default;
         &.alignright {
             blockquote {
                 @include apply-font(body);
+
+                // Due to a smaller container width, 
+                // make the text size smaller
+                --font-size-modifier: 0.85;
             }
         }
 
