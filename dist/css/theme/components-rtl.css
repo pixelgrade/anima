@@ -457,11 +457,15 @@
   --font-size-modifier: 1.3636;
   font-style: normal;
   line-height: 0.9;
-  white-space: nowrap; }
+  white-space: nowrap;
+  vertical-align: middle; }
   h1.c-headline.has-larger-font-size .c-headline__secondary, h1.c-headline.has-larger-font-size
   :is(h1, h2, h3, h4, h5, h6) em {
     --font-size-modifier: .87em;
     line-height: 1.1; }
+
+:is(h1, h2, h3, h4, h5, h6) em {
+  line-height: 0; }
 
 .c-separator {
   --separator-line-thickness: 2px;

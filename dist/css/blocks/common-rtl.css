@@ -348,7 +348,12 @@
     --current-font-weight: var(--theme-body-font-weight);
     --current-font-style: var(--theme-body-font-style);
     --current-letter-spacing: var(--theme-body-letter-spacing);
-    --font-size-modifier: 0.8; }
+    --font-size-modifier: 0.8;
+    width: 100%;
+    /**
+   * CAPTIONS STYLE: Border Corner 
+   * @todo: A future idea for some decorative elements on image captions
+   */ }
     .wp-block-gallery figcaption .credits {
       margin: 0;
       opacity: 0.7; }
@@ -566,11 +571,13 @@
 
 /* Blockquote Block */
 .wp-block-quote {
-  padding-right: var(--theme-spacing-normal);
-  padding-left: var(--theme-spacing-normal);
+  padding-right: var(--theme-spacing-fluid-normal);
   border-right: 3px solid var(--sm-current-accent-color); }
   .wp-block-quote > :not(:first-child) {
     margin-top: var(--theme-spacing); }
+  @media only screen and (min-width: 768px) {
+    .wp-block-quote {
+      padding-left: var(--theme-spacing-fluid-normal); } }
   .wp-block-quote.is-style-large {
     border-right: none;
     --font-size: var(--theme-heading-3-font-size);
@@ -593,7 +600,7 @@
   --current-letter-spacing: var(--theme-heading-6-letter-spacing);
   --current-text-transform: var(--theme-heading-6-text-transform);
   --current-color: var(--theme-heading-6-color);
-  margin-top: var(--theme-spacing-smaller); }
+  margin-top: var(--theme-spacing-fluid-smaller); }
 
 /*------------------------------------*\
   #BLOCK - Search
@@ -1130,7 +1137,12 @@ html:root {
   --current-font-weight: var(--theme-body-font-weight);
   --current-font-style: var(--theme-body-font-style);
   --current-letter-spacing: var(--theme-body-letter-spacing);
-  --font-size-modifier: 0.8; }
+  --font-size-modifier: 0.8;
+  width: 100%;
+  /**
+   * CAPTIONS STYLE: Border Corner 
+   * @todo: A future idea for some decorative elements on image captions
+   */ }
   .novablocks-media-composition__grid-item-caption .credits,
   .novablocks-media-composition__grid-item-description .credits {
     margin: 0;
