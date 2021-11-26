@@ -39,7 +39,7 @@ mark {
 
   // Dark mode 
   // Change color hue to blue
-  .is-dark &.has-inline-color {
+  :is(.is-dark, .sm-color-signal-3) &.has-inline-color {
     background: linear-gradient(90deg ,rgba(75,88,249,.25),rgba(75,88,249,.75) 29.55%,rgba(75,88,249,.1) 103.16%);
   }
 }
