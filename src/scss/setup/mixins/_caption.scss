@@ -1,9 +1,42 @@
 @mixin caption {
   @include apply-font(body);
   --font-size-modifier: 0.8;
+  width: 100%; // Push the text block to align left when there is little content
 
   .credits {
       margin: 0;
       opacity: 0.7;
   }
+
+
+
+  /**
+   * CAPTIONS STYLE: Border Corner 
+   * @todo: A future idea for some decorative elements on image captions
+   */
+  // --caption-border-width: 2em;
+  // --caption-border-height: 1em;
+  // --caption-border-thickness: 1px;
+
+  // @include above(tablet) {
+  //   position: relative;
+  //   padding-left: calc(var(--caption-border-width) * 1.5);
+  //   padding-top: calc(var(--caption-border-height) / 2 * 1.25);
+
+
+  //   &:before {
+  //     content: "";
+  //     position: absolute;
+  //     left: 0;
+  //     top: calc(var(--caption-border-height) / 2);
+  //     height: var(--caption-border-height);
+  //     width: var(--caption-border-width);
+
+  //     opacity: 1;
+  //     border-color: var(--sm-current-accent-color);
+  //     border-style: none none solid solid;
+  //     border-width: 0 0 var(--caption-border-thickness) var(--caption-border-thickness);
+  //   }
+  // }
+  
 }
