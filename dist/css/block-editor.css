@@ -890,17 +890,30 @@
     .editor-styles-wrapper[class] strong,
     .editor-styles-wrapper[class] b {
       --current-font-weight: bold; }
-    .editor-styles-wrapper[class] mark.has-inline-color {
-      padding: 0.04em 0.5em;
-      margin: 0 -0.5em;
-      background: linear-gradient(90deg, rgba(249, 229, 73, 0.25), rgba(249, 229, 75, 0.75) 29.55%, rgba(249, 230, 77, 0.1) 103.16%);
-      border-bottom-left-radius: 0.5em;
-      border-top-right-radius: 0.5em;
-      -webkit-box-decoration-break: clone;
-      color: inherit !important;
-      background-color: inherit !important; }
-    :is(.is-dark, .sm-color-signal-3) .editor-styles-wrapper[class] mark.has-inline-color {
-      background: linear-gradient(90deg, rgba(75, 88, 249, 0.25), rgba(75, 88, 249, 0.75) 29.55%, rgba(75, 88, 249, 0.1) 103.16%); }
+    .editor-styles-wrapper[class] mark {
+      --highlight-text-color-start: var(--sm-current-accent-color);
+      --highlight-text-color-end: var(--sm-color-palette-2-color-5); }
+      .editor-styles-wrapper[class] mark.has-inline-color {
+        color: var(--sm-current-accent-color);
+        background-color: var(--sm-current-accent-color) !important;
+        background-image: linear-gradient(90deg, var(--highlight-text-color-start), var(--highlight-text-color-end));
+        filter: brightness(100%) saturate(150%) contrast(1);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: rgba(0, 0, 0, 0); }
+      .editor-styles-wrapper[class] mark[class="has-inline-color"] {
+        padding: 0.04em 0.5em;
+        margin: 0 -0.5em;
+        background: linear-gradient(90deg, rgba(249, 229, 73, 0.25), rgba(249, 229, 75, 0.75) 29.55%, rgba(249, 230, 77, 0.1) 103.16%);
+        border-bottom-left-radius: 0.5em;
+        border-top-right-radius: 0.5em;
+        -webkit-box-decoration-break: clone;
+        filter: unset;
+        -webkit-text-fill-color: inherit;
+        color: inherit !important;
+        background-color: inherit !important; }
+      :is(.is-dark, .sm-color-signal-3) .editor-styles-wrapper[class] mark[class="has-inline-color"] {
+        background: linear-gradient(90deg, rgba(75, 88, 249, 0.25), rgba(75, 88, 249, 0.75) 29.55%, rgba(75, 88, 249, 0.1) 103.16%); }
     .editor-styles-wrapper[class] strong em,
     .editor-styles-wrapper[class] em strong {
       --font-size: var(--theme-heading-4-font-size);
