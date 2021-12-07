@@ -6,7 +6,7 @@
 // without any marker and tightened space
 
 // FRONTEND block HTML structure
-// nav.wp-block-navigation
+// nav.wp-block-navigation / .wp-container-61af2253abda0 (generated CSS)
 // 	ul.wp-block-navigation__container
 // 		li.wp-block-navigation-item + .wp-block-navigation-submenu
 // 			a.wp-block-navigation-item__content
@@ -25,15 +25,16 @@ $nav-list-item: 'li' !default;
 
 
 
-// Available variables (usually) changed within the Editor.
-// Use the below settings as defaults.
-#{$nav-block} {
-	--layout-direction: column;
-	--layout-justification-setting: space-between;
-	--layout-wrap: nowrap;
-	--layout-justify: space-between;
-	--layout-align: flex-start;
-}
+// Available variables generated within the Editor using custom classes
+//
+// Use the below settings only as reference:
+// .wp-container-61af2253abda0.wp-block-navigation {
+// 	--layout-direction: column;
+// 	--layout-justification-setting: space-between;
+// 	--layout-wrap: nowrap;
+// 	--layout-justify: space-between;
+// 	--layout-align: flex-start;
+// }
 
 #{$nav-block} {
 	#{$nav-ul-container} {
@@ -41,10 +42,10 @@ $nav-list-item: 'li' !default;
 		width: 100%;
 
 		display: flex;
-		flex-direction: var(--layout-direction);
-		justify-content: var(--layout-justification-setting);
-		flex-wrap: var(--layout-wrap);
-		align-items: var(--layout-align);
+		flex-direction: var(--layout-direction, column);
+		justify-content: var(--layout-justification-setting, space-between);
+		flex-wrap: var(--layout-wrap, nowrap);
+		align-items: var(--layout-align, flex-start);
 
 		gap: 0.5em;
 
