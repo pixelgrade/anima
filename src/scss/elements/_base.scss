@@ -20,12 +20,11 @@ b {
 // Ignore the custom text and background color options and
 // hard-code a gradient for consistency
 // 
-// @todo: find a way to replace the yellow and --sm-color-palette-2-color-5 
+// @todo: find a way to replace the yellow
 //        with tokens from the Design System.
 mark {
   --highlight-text-color-start: var(--sm-current-accent-color);
-  // @todo: set the end of the gradient using a token like --sm-current-alt-accent-color variable
-  --highlight-text-color-end: var(--sm-color-palette-2-color-5); 
+  --highlight-text-color-end: var(--sm-current-accent2-color);
 
   // 1. TEXT highlighting
   &.has-inline-color {
