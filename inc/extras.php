@@ -455,10 +455,10 @@ if ( ! function_exists( 'anima_article_header' ) ) {
 
         <div class="<?php echo esc_attr( join( ' ', $article_header_classes ) ); ?>">
 
-            <div class="entry-header sm-palette-1 sm-variation-3">
+            <div class="entry-header sm-palette-1 sm-variation-2">
 				<?php anima_categories_posted_in() ?>
 
-                <div class="header-dropcap h1 sm-variation-2"><?php echo esc_html( substr( get_the_title(), 0, 1 ) ); ?></div>
+                <div class="header-dropcap h1 sm-variation-1"><?php echo esc_html( substr( get_the_title(), 0, 1 ) ); ?></div>
                 <h1 class="entry-title"><?php the_title() ?></h1>
 
 				<?php if ( has_excerpt() ) { ?>
@@ -696,7 +696,7 @@ function anima_get_page_class( $class = '' ) {
 	$classes[] = 'site';
 
 	if ( anima_page_has_custom_palette_variation() ) {
-		$classes[] = 'sm-variation-2';
+		$classes[] = 'sm-variation-1';
 	}
 
 	$classes = array_map( 'esc_attr', $classes );
