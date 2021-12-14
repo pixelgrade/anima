@@ -74,10 +74,11 @@ $assets-folder-path: '../../../assets';
   }
 }
 
+// Set the page content alignment to Wide
 .woocommerce-page {
   
-  .entry-content,
-  .novablocks-content {
+  .entry-content, // <- check if this class is still used
+  .wc-block-grid.alignwide {
     
     @include specific(4) {
       --block-content-start: ws;
