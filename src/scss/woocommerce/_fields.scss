@@ -1,5 +1,5 @@
 
-// needs to be very specific to overwrite any woocommerce default styling
+// CSS rules needs to be very specific to overwrite any WooCommerce default styling
 // @todo find a more reliable selector
 #html #body #page {
 
@@ -21,13 +21,18 @@
 
     a.button,
     button.button {
+        @include apply-font-properties;
 
-        &:not(.alt):not(.checkout) {
+        &:not(:is(.alt, .checkout)) {
             @include button-fill-reverse;
         }
 
-        &.alt, &.checkout {
+        &:is(.alt, .checkout) {
             @include button-fill;
+        }
+
+        &.checkout-button {
+            @include button-huge;
         }
     }
 
@@ -40,6 +45,12 @@
 
         &.alt {
             @include button-fill(false);
+        }
+    }
+
+     @include above(tablet) {
+        button[name='update_cart'] {
+            float:right;
         }
     }
 
@@ -59,7 +70,7 @@
 
     .actions {
         .button {
-            padding: var(--theme-input-padding);
+            // padding: var(--theme-input-padding);
         }
     }
 
@@ -99,8 +110,10 @@
     
 }
 
-// Some elements doesn't neet to be targeted overly specific
+// Some elements doesn't need to be targeted overly specific
+// ---
 // Quantity controls appears on the following pages: single product, cart
+
 .quantity {
     .qty_button {
         border-radius: 50%;

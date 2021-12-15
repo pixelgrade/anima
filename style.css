@@ -1500,6 +1500,8 @@ table {
           --current-button-text-color: var(--theme-button-text-color); }
           .c-search-overlay__suggestions .menu li:not([disabled]):is(:hover, :focus):before {
             transform: scale3d(1, 1, 1); }
+        .c-search-overlay__suggestions .menu li:disabled {
+          opacity: 0.25; }
         .c-search-overlay__suggestions .menu li a {
           padding: 0;
           text-decoration: none;
@@ -3225,19 +3227,10 @@ textarea {
 .menu-item--search {
   --theme-header-links-spacing-multiplier: 0.5; }
 
-.woocommerce-message[class],
-.woocommerce-info[class],
-.woocommerce-error[class] {
-  color: var(--sm-fg1-color-1); }
-  .woocommerce-message[class]:after,
-  .woocommerce-info[class]:after,
-  .woocommerce-error[class]:after {
-    border: 1px solid var(--sm-bg-color-4);
-    background-color: var(--sm-bg-color-4); }
-  .woocommerce-message[class] .theme-woocommerce-notice__icon,
-  .woocommerce-info[class] .theme-woocommerce-notice__icon,
-  .woocommerce-error[class] .theme-woocommerce-notice__icon {
-    opacity: 1; }
+.woocommerce-message[class] .theme-woocommerce-notice__icon,
+.woocommerce-info[class] .theme-woocommerce-notice__icon,
+.woocommerce-error[class] .theme-woocommerce-notice__icon {
+  opacity: 1; }
 
 /*------------------------------------*\
   #STYLE MANAGER STATES: DARK / LIGHT

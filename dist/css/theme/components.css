@@ -121,6 +121,8 @@
       --current-button-text-color: var(--theme-button-text-color); }
       .wp-block-button.is-style-secondary .wp-block-button__link[class]:not([disabled]):is(:hover, :focus):before {
         transform: scale3d(1, 1, 1); }
+    .wp-block-button.is-style-secondary .wp-block-button__link[class]:disabled {
+      opacity: 0.25; }
   .wp-block-button.is-style-text .wp-block-button__link {
     padding: 0;
     border-width: 0;
