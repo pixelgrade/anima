@@ -183,7 +183,7 @@
 
 .woocommerce-product-details__short-description {
   margin-bottom: var(--theme-spacing);
-  --current-font-size: 0.96em;
+  --font-size-modifier: 0.94;
 
   > :not(:first-child) {
     margin-top: var(--theme-spacing-normal);
@@ -273,6 +273,7 @@
 // unstyle price
 .woocommerce[class] .product .price {
   color: var(--sm-current-fg2-color);
+  font-size: inherit;
 
   ins {
     font-weight: inherit;
@@ -351,8 +352,14 @@
 
   .price {
     margin-bottom: var(--theme-spacing-normal);
-    @include apply-font(heading-4);
+
+    // For the price use a larger version of the Body font
+    --font-size-modifier: 1.25;
+
+    .woocommerce-Price-amount {
+    }
   }
+
 
   span.onsale {
     position: absolute;
@@ -530,7 +537,7 @@
 }
 
 .product_meta {
-  --current-font-size: 0.92em;
+  --font-size-modifier: 0.85;
 
   > span {
     display: block;
@@ -675,8 +682,8 @@
   @include specific(1) {
     margin-bottom: var(--theme-spacing-smallest);
 
-    --current-font-size: 0.96em;
-    font-size: var(--current-font-size);
+    --font-size-modifier: 0.85;
+
     
     color: var(--sm-current-fg2-color);
 
@@ -896,9 +903,11 @@
     box-shadow: var(--theme-input-box-shadow);
     border-radius: 50%;
 
+    // transition: all 0.3s;
+
     &.button--is-disabled {
-      pointer-events: none;
       opacity: .5;
+      cursor: not-allowed;
     }
     
     &:before {
@@ -913,6 +922,29 @@
       opacity: .3;
 
       z-index: 10;
+
+      transition: all 0.2s ease;
+    }
+
+    &:after {
+      z-index: 11;
+
+      transition: all 0.2s ease;
+    }
+
+    &:not(.button--is-disabled):hover {
+      // background: var(--sm-current-accent-color);
+
+      &:before {
+        opacity: 1;
+        border-color: var(--sm-current-accent-color);
+        border-width: 1em;
+      }
+
+      &:after {
+        cursor: pointer;
+        background-color: var(--sm-current-bg-color);
+      }
     }
   }
 }

@@ -82,15 +82,6 @@
         width: 100%;
     }
 
-    .qty_button {
-        padding: 0;
-        background-color: transparent;
-        border: 0;
-        box-shadow: none;
-
-        color: var(--sm-current-fg2-color);
-    }
-
     .woocommerce-notices-wrapper {
 
         .button {
@@ -105,6 +96,12 @@
         }
     }
 
+    
+}
+
+// Some elements doesn't neet to be targeted overly specific
+// Quantity controls appears on the following pages: single product, cart
+.quantity {
     .qty_button {
         border-radius: 50%;
         color: var(--theme-input-color);
@@ -137,5 +134,14 @@
                -webkit-mask:url($icon-plus-path) no-repeat 50% 50%;
            }
         }
+    }
+
+    .qty_button {
+        // padding: 0;
+        // background-color: transparent;
+        // border: 0;
+        // box-shadow: none;
+
+        // color: var(--sm-current-fg2-color);
     }
 }
