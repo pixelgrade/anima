@@ -56,9 +56,9 @@
       transform: scale3d(0, 1, 1);
       transform-origin: left;
       background-color: var(--theme-button-background-color); }
-    .wc-block-featured-category .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):hover {
+    .wc-block-featured-category .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus) {
       --current-button-text-color: var(--theme-button-text-color); }
-      .wc-block-featured-category .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):hover:before {
+      .wc-block-featured-category .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus):before {
         transform: scale3d(1, 1, 1); }
   .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class] {
     padding: 0;
@@ -106,12 +106,12 @@
           transform: translate(0, -50%) scale(-1, 1);
           transition: var(--theme-button-transition);
           transition-property: opacity, transform; } }
-    .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):hover {
+    .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus) {
       color: var(--theme-button-text-color); }
-      .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):hover:before {
+      .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus):before {
         transform: scale3d(0, 1, 1);
         transform-origin: right; }
-      .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):hover:after {
+      .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus):after {
         opacity: 1;
         transform: translate(0.4em, -50%) scale(-1, 1); }
     .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:before {
@@ -521,14 +521,14 @@
   overflow: hidden; }
   .wc-block-product-categories__button:not([disabled]) {
     cursor: pointer; }
-    .wc-block-product-categories__button:not([disabled]):hover {
+    .wc-block-product-categories__button:not([disabled]):is(:hover, :focus) {
       --current-button-background-color: var(--theme-button-hover-background-color);
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
       --current-button-transition: var(--theme-button-hover-transition); }
   .wc-block-product-categories__button:not([disabled]) {
     cursor: pointer; }
-    .wc-block-product-categories__button:not([disabled]):hover {
+    .wc-block-product-categories__button:not([disabled]):is(:hover, :focus) {
       --current-button-background-color: var(--theme-button-hover-background-color);
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
@@ -549,7 +549,7 @@
     transform: scale3d(1, 1, 1);
     transform-origin: right;
     background-color: var(--theme-button-background-color); }
-  .wc-block-product-categories__button:not([disabled]):hover:before {
+  .wc-block-product-categories__button:not([disabled]):is(:hover, :focus):before {
     transform: scale3d(0, 1, 1); }
   .wc-block-product-categories__button path {
     fill: var(--theme-button-text-color); }
@@ -589,9 +589,9 @@
       transform: scale3d(0, 1, 1);
       transform-origin: left;
       background-color: var(--theme-button-background-color); }
-    .wc-block-featured-product .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):hover {
+    .wc-block-featured-product .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus) {
       --current-button-text-color: var(--theme-button-text-color); }
-      .wc-block-featured-product .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):hover:before {
+      .wc-block-featured-product .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus):before {
         transform: scale3d(1, 1, 1); }
   .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class] {
     padding: 0;
@@ -639,12 +639,12 @@
           transform: translate(0, -50%) scale(-1, 1);
           transition: var(--theme-button-transition);
           transition-property: opacity, transform; } }
-    .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):hover {
+    .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus) {
       color: var(--theme-button-text-color); }
-      .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):hover:before {
+      .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus):before {
         transform: scale3d(0, 1, 1);
         transform-origin: right; }
-      .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):hover:after {
+      .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus):after {
         opacity: 1;
         transform: translate(0.4em, -50%) scale(-1, 1); }
     .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:before {

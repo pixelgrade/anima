@@ -488,22 +488,22 @@
     .editor-styles-wrapper input[type="submit"]:not([disabled]),
     .editor-styles-wrapper input[type="button"]:not([disabled]) {
       cursor: pointer; }
-      .editor-styles-wrapper input[type="submit"]:not([disabled]):hover,
-      .editor-styles-wrapper input[type="button"]:not([disabled]):hover {
+      .editor-styles-wrapper input[type="submit"]:not([disabled]):is(:hover, :focus),
+      .editor-styles-wrapper input[type="button"]:not([disabled]):is(:hover, :focus) {
         --current-button-background-color: var(--theme-button-hover-background-color);
         --current-button-border-color: var(--theme-button-hover-border-color);
         --current-button-text-color: var(--theme-button-hover-text-color);
         --current-button-transition: var(--theme-button-hover-transition); }
-    .editor-styles-wrapper input[type="submit"]:not([disabled]):hover,
-    .editor-styles-wrapper input[type="button"]:not([disabled]):hover {
+    .editor-styles-wrapper input[type="submit"]:not([disabled]):is(:hover, :focus),
+    .editor-styles-wrapper input[type="button"]:not([disabled]):is(:hover, :focus) {
       background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
     .editor-styles-wrapper input[type="submit"]:before,
     .editor-styles-wrapper input[type="button"]:before {
       transform: scale3d(1, 1, 1);
       transform-origin: right;
       background-color: var(--theme-button-background-color); }
-    .editor-styles-wrapper input[type="submit"]:not([disabled]):hover:before,
-    .editor-styles-wrapper input[type="button"]:not([disabled]):hover:before {
+    .editor-styles-wrapper input[type="submit"]:not([disabled]):is(:hover, :focus):before,
+    .editor-styles-wrapper input[type="button"]:not([disabled]):is(:hover, :focus):before {
       transform: scale3d(0, 1, 1); }
   .editor-styles-wrapper button[type="submit"] {
     display: inline-block;
@@ -538,7 +538,7 @@
     overflow: hidden; }
     .editor-styles-wrapper button[type="submit"]:not([disabled]) {
       cursor: pointer; }
-      .editor-styles-wrapper button[type="submit"]:not([disabled]):hover {
+      .editor-styles-wrapper button[type="submit"]:not([disabled]):is(:hover, :focus) {
         --current-button-background-color: var(--theme-button-hover-background-color);
         --current-button-border-color: var(--theme-button-hover-border-color);
         --current-button-text-color: var(--theme-button-hover-text-color);
@@ -559,7 +559,7 @@
       transform: scale3d(1, 1, 1);
       transform-origin: right;
       background-color: var(--theme-button-background-color); }
-    .editor-styles-wrapper button[type="submit"]:not([disabled]):hover:before {
+    .editor-styles-wrapper button[type="submit"]:not([disabled]):is(:hover, :focus):before {
       transform: scale3d(0, 1, 1); }
   .editor-styles-wrapper input[type="reset"],
   .editor-styles-wrapper button[type="reset"] {
@@ -610,15 +610,15 @@
           transform: translate(0, -50%) scale(-1, 1);
           transition: var(--theme-button-transition);
           transition-property: opacity, transform; } }
-    .editor-styles-wrapper input[type="reset"]:not([disabled]):hover,
-    .editor-styles-wrapper button[type="reset"]:not([disabled]):hover {
+    .editor-styles-wrapper input[type="reset"]:not([disabled]):is(:hover, :focus),
+    .editor-styles-wrapper button[type="reset"]:not([disabled]):is(:hover, :focus) {
       color: var(--theme-button-text-color); }
-      .editor-styles-wrapper input[type="reset"]:not([disabled]):hover:before,
-      .editor-styles-wrapper button[type="reset"]:not([disabled]):hover:before {
+      .editor-styles-wrapper input[type="reset"]:not([disabled]):is(:hover, :focus):before,
+      .editor-styles-wrapper button[type="reset"]:not([disabled]):is(:hover, :focus):before {
         transform: scale3d(0, 1, 1);
         transform-origin: right; }
-      .editor-styles-wrapper input[type="reset"]:not([disabled]):hover:after,
-      .editor-styles-wrapper button[type="reset"]:not([disabled]):hover:after {
+      .editor-styles-wrapper input[type="reset"]:not([disabled]):is(:hover, :focus):after,
+      .editor-styles-wrapper button[type="reset"]:not([disabled]):is(:hover, :focus):after {
         opacity: 1;
         transform: translate(0.4em, -50%) scale(-1, 1); }
   .editor-styles-wrapper input[type="file"] {

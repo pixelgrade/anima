@@ -55,9 +55,9 @@
   #html #body #page button:not([class]):not([disabled]),
   #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not([disabled]) {
     cursor: pointer; }
-    #html #body #page .button:not(.trix-button):not([disabled]):hover,
-    #html #body #page button:not([class]):not([disabled]):hover,
-    #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not([disabled]):hover {
+    #html #body #page .button:not(.trix-button):not([disabled]):is(:hover, :focus),
+    #html #body #page button:not([class]):not([disabled]):is(:hover, :focus),
+    #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not([disabled]):is(:hover, :focus) {
       --current-button-background-color: var(--theme-button-hover-background-color);
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
@@ -97,11 +97,11 @@
     transform: scale3d(0, 1, 1);
     transform-origin: right;
     background-color: var(--theme-button-background-color); }
-  #html #body #page a.button:not(.alt):not(.checkout):not([disabled]):hover,
-  #html #body #page button.button:not(.alt):not(.checkout):not([disabled]):hover {
+  #html #body #page a.button:not(.alt):not(.checkout):not([disabled]):is(:hover, :focus),
+  #html #body #page button.button:not(.alt):not(.checkout):not([disabled]):is(:hover, :focus) {
     --current-button-text-color: var(--theme-button-text-color); }
-    #html #body #page a.button:not(.alt):not(.checkout):not([disabled]):hover:before,
-    #html #body #page button.button:not(.alt):not(.checkout):not([disabled]):hover:before {
+    #html #body #page a.button:not(.alt):not(.checkout):not([disabled]):is(:hover, :focus):before,
+    #html #body #page button.button:not(.alt):not(.checkout):not([disabled]):is(:hover, :focus):before {
       transform: scale3d(1, 1, 1); }
 
 #html #body #page a.button.alt, #html #body #page a.button.checkout,
@@ -132,9 +132,9 @@
     transform: scale3d(1, 1, 1);
     transform-origin: left;
     background-color: var(--theme-button-background-color); }
-  #html #body #page a.button.alt:not([disabled]):hover:before, #html #body #page a.button.checkout:not([disabled]):hover:before,
-  #html #body #page button.button.alt:not([disabled]):hover:before,
-  #html #body #page button.button.checkout:not([disabled]):hover:before {
+  #html #body #page a.button.alt:not([disabled]):is(:hover, :focus):before, #html #body #page a.button.checkout:not([disabled]):is(:hover, :focus):before,
+  #html #body #page button.button.alt:not([disabled]):is(:hover, :focus):before,
+  #html #body #page button.button.checkout:not([disabled]):is(:hover, :focus):before {
     transform: scale3d(0, 1, 1); }
 
 #html #body #page input.button:not(.alt),
@@ -150,22 +150,22 @@
   --current-button-text-color: var(--theme-button-hover-text-color);
   --current-button-text-color: var(--theme-button-hover-text-color);
   background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
-  #html #body #page input.button:not(.alt):not([disabled]):hover,
-  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):hover {
+  #html #body #page input.button:not(.alt):not([disabled]):is(:hover, :focus),
+  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):is(:hover, :focus) {
     background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
   #html #body #page input.button:not(.alt):before,
   #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):before {
     transform: scale3d(0, 1, 1);
     transform-origin: right;
     background-color: var(--theme-button-background-color); }
-  #html #body #page input.button:not(.alt):not([disabled]):hover,
-  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):hover {
+  #html #body #page input.button:not(.alt):not([disabled]):is(:hover, :focus),
+  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):is(:hover, :focus) {
     --current-button-text-color: var(--theme-button-text-color); }
-    #html #body #page input.button:not(.alt):not([disabled]):hover:before,
-    #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):hover:before {
+    #html #body #page input.button:not(.alt):not([disabled]):is(:hover, :focus):before,
+    #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):is(:hover, :focus):before {
       transform: scale3d(1, 1, 1); }
-  #html #body #page input.button:not(.alt):not([disabled]):hover,
-  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):hover {
+  #html #body #page input.button:not(.alt):not([disabled]):is(:hover, :focus),
+  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):is(:hover, :focus) {
     --current-button-text-color: var(--theme-button-text-color); }
 
 #html #body #page input.button.alt,
@@ -179,16 +179,16 @@
   background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
   background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
   background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
-  #html #body #page input.button.alt:not([disabled]):hover,
-  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:not([disabled]):hover {
+  #html #body #page input.button.alt:not([disabled]):is(:hover, :focus),
+  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:not([disabled]):is(:hover, :focus) {
     background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
   #html #body #page input.button.alt:before,
   #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:before {
     transform: scale3d(1, 1, 1);
     transform-origin: left;
     background-color: var(--theme-button-background-color); }
-  #html #body #page input.button.alt:not([disabled]):hover:before,
-  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:not([disabled]):hover:before {
+  #html #body #page input.button.alt:not([disabled]):is(:hover, :focus):before,
+  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:not([disabled]):is(:hover, :focus):before {
     transform: scale3d(0, 1, 1); }
 
 #html #body #page .checkout-button,
@@ -288,7 +288,7 @@
     transform: scale3d(1, 1, 1);
     transform-origin: left;
     background-color: var(--theme-button-background-color); }
-  #html #body #page .woocommerce-notices-wrapper .button[class][class][class][class][class]:not([disabled]):hover:before {
+  #html #body #page .woocommerce-notices-wrapper .button[class][class][class][class][class]:not([disabled]):is(:hover, :focus):before {
     transform: scale3d(0, 1, 1); }
   #html #body #page .woocommerce-notices-wrapper .button[class][class][class][class][class]:hover {
     --current-button-text-color: var(--theme-button-hover-text-color); }
@@ -617,9 +617,9 @@
       transform: scale3d(0, 1, 1);
       transform-origin: right;
       background-color: var(--theme-button-background-color); }
-    .woocommerce-notices-wrapper .button:not([disabled]):hover {
+    .woocommerce-notices-wrapper .button:not([disabled]):is(:hover, :focus) {
       --current-button-text-color: var(--theme-button-text-color); }
-      .woocommerce-notices-wrapper .button:not([disabled]):hover:before {
+      .woocommerce-notices-wrapper .button:not([disabled]):is(:hover, :focus):before {
         transform: scale3d(1, 1, 1); }
   .woocommerce-notices-wrapper:not(:empty) {
     margin-top: var(--theme-spacing-large); }
@@ -1381,7 +1381,7 @@
   text-align: center; }
   .add_to_cart_button:not([disabled]) {
     cursor: pointer; }
-    .add_to_cart_button:not([disabled]):hover {
+    .add_to_cart_button:not([disabled]):is(:hover, :focus) {
       --current-button-background-color: var(--theme-button-hover-background-color);
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
@@ -1402,7 +1402,7 @@
     transform: scale3d(1, 1, 1);
     transform-origin: left;
     background-color: var(--theme-button-background-color); }
-  .add_to_cart_button:not([disabled]):hover:before {
+  .add_to_cart_button:not([disabled]):is(:hover, :focus):before {
     transform: scale3d(0, 1, 1); }
 
 .woocommerce-breadcrumb[class] {
@@ -2515,9 +2515,9 @@ ul.order_details[class] {
       transform: scale3d(0, 1, 1);
       transform-origin: right;
       background-color: var(--theme-button-background-color); }
-    .wc-block-featured-category .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):hover {
+    .wc-block-featured-category .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus) {
       --current-button-text-color: var(--theme-button-text-color); }
-      .wc-block-featured-category .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):hover:before {
+      .wc-block-featured-category .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus):before {
         transform: scale3d(1, 1, 1); }
   .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class] {
     padding: 0;
@@ -2565,12 +2565,12 @@ ul.order_details[class] {
           transform: translate(0, -50%) scale(-1, 1);
           transition: var(--theme-button-transition);
           transition-property: opacity, transform; } }
-    .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):hover {
+    .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus) {
       color: var(--theme-button-text-color); }
-      .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):hover:before {
+      .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus):before {
         transform: scale3d(0, 1, 1);
         transform-origin: left; }
-      .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):hover:after {
+      .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus):after {
         opacity: 1;
         transform: translate(-0.4em, -50%) scale(-1, 1); }
     .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:before {
@@ -2980,14 +2980,14 @@ ul.order_details[class] {
   overflow: hidden; }
   .wc-block-product-categories__button:not([disabled]) {
     cursor: pointer; }
-    .wc-block-product-categories__button:not([disabled]):hover {
+    .wc-block-product-categories__button:not([disabled]):is(:hover, :focus) {
       --current-button-background-color: var(--theme-button-hover-background-color);
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
       --current-button-transition: var(--theme-button-hover-transition); }
   .wc-block-product-categories__button:not([disabled]) {
     cursor: pointer; }
-    .wc-block-product-categories__button:not([disabled]):hover {
+    .wc-block-product-categories__button:not([disabled]):is(:hover, :focus) {
       --current-button-background-color: var(--theme-button-hover-background-color);
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
@@ -3008,7 +3008,7 @@ ul.order_details[class] {
     transform: scale3d(1, 1, 1);
     transform-origin: left;
     background-color: var(--theme-button-background-color); }
-  .wc-block-product-categories__button:not([disabled]):hover:before {
+  .wc-block-product-categories__button:not([disabled]):is(:hover, :focus):before {
     transform: scale3d(0, 1, 1); }
   .wc-block-product-categories__button path {
     fill: var(--theme-button-text-color); }
@@ -3048,9 +3048,9 @@ ul.order_details[class] {
       transform: scale3d(0, 1, 1);
       transform-origin: right;
       background-color: var(--theme-button-background-color); }
-    .wc-block-featured-product .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):hover {
+    .wc-block-featured-product .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus) {
       --current-button-text-color: var(--theme-button-text-color); }
-      .wc-block-featured-product .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):hover:before {
+      .wc-block-featured-product .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus):before {
         transform: scale3d(1, 1, 1); }
   .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class] {
     padding: 0;
@@ -3098,12 +3098,12 @@ ul.order_details[class] {
           transform: translate(0, -50%) scale(-1, 1);
           transition: var(--theme-button-transition);
           transition-property: opacity, transform; } }
-    .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):hover {
+    .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus) {
       color: var(--theme-button-text-color); }
-      .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):hover:before {
+      .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus):before {
         transform: scale3d(0, 1, 1);
         transform-origin: left; }
-      .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):hover:after {
+      .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus):after {
         opacity: 1;
         transform: translate(-0.4em, -50%) scale(-1, 1); }
     .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:before {

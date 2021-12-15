@@ -41,7 +41,7 @@
     --current-text-transform: var(--theme-button-text-transform); }
     .wp-block-button:not(.is-style-text) .wp-block-button__link:not([disabled]) {
       cursor: pointer; }
-      .wp-block-button:not(.is-style-text) .wp-block-button__link:not([disabled]):hover {
+      .wp-block-button:not(.is-style-text) .wp-block-button__link:not([disabled]):is(:hover, :focus) {
         --current-button-background-color: var(--theme-button-hover-background-color);
         --current-button-border-color: var(--theme-button-hover-border-color);
         --current-button-text-color: var(--theme-button-hover-text-color);
@@ -68,7 +68,7 @@
       transform: scale3d(1, 1, 1);
       transform-origin: right;
       background-color: var(--theme-button-background-color); }
-    .wp-block-button:not([class*="is-style"]) .wp-block-button__link:not(.has-background):not([disabled]):hover:before {
+    .wp-block-button:not([class*="is-style"]) .wp-block-button__link:not(.has-background):not([disabled]):is(:hover, :focus):before {
       transform: scale3d(0, 1, 1); }
   .wp-block-button.is-style-primary .wp-block-button__link[class] {
     background-color: transparent;
@@ -92,7 +92,7 @@
       transform: scale3d(1, 1, 1);
       transform-origin: right;
       background-color: var(--theme-button-background-color); }
-    .wp-block-button.is-style-primary .wp-block-button__link[class]:not([disabled]):hover:before {
+    .wp-block-button.is-style-primary .wp-block-button__link[class]:not([disabled]):is(:hover, :focus):before {
       transform: scale3d(0, 1, 1); }
   .wp-block-button.is-style-secondary .wp-block-button__link[class] {
     background-color: transparent;
@@ -117,9 +117,9 @@
       transform: scale3d(0, 1, 1);
       transform-origin: left;
       background-color: var(--theme-button-background-color); }
-    .wp-block-button.is-style-secondary .wp-block-button__link[class]:not([disabled]):hover {
+    .wp-block-button.is-style-secondary .wp-block-button__link[class]:not([disabled]):is(:hover, :focus) {
       --current-button-text-color: var(--theme-button-text-color); }
-      .wp-block-button.is-style-secondary .wp-block-button__link[class]:not([disabled]):hover:before {
+      .wp-block-button.is-style-secondary .wp-block-button__link[class]:not([disabled]):is(:hover, :focus):before {
         transform: scale3d(1, 1, 1); }
   .wp-block-button.is-style-text .wp-block-button__link {
     padding: 0;
@@ -168,12 +168,12 @@
           transform: translate(0, -50%) scale(-1, 1);
           transition: var(--theme-button-transition);
           transition-property: opacity, transform; } }
-    .wp-block-button.is-style-text .wp-block-button__link:not([disabled]):hover {
+    .wp-block-button.is-style-text .wp-block-button__link:not([disabled]):is(:hover, :focus) {
       color: var(--theme-button-text-color); }
-      .wp-block-button.is-style-text .wp-block-button__link:not([disabled]):hover:before {
+      .wp-block-button.is-style-text .wp-block-button__link:not([disabled]):is(:hover, :focus):before {
         transform: scale3d(0, 1, 1);
         transform-origin: right; }
-      .wp-block-button.is-style-text .wp-block-button__link:not([disabled]):hover:after {
+      .wp-block-button.is-style-text .wp-block-button__link:not([disabled]):is(:hover, :focus):after {
         opacity: 1;
         transform: translate(0.4em, -50%) scale(-1, 1); }
 
@@ -205,7 +205,7 @@
   color: var(--current-button-text-color); }
   .wp-block-button__link:not([disabled]) {
     cursor: pointer; }
-    .wp-block-button__link:not([disabled]):hover {
+    .wp-block-button__link:not([disabled]):is(:hover, :focus) {
       --current-button-background-color: var(--theme-button-hover-background-color);
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);

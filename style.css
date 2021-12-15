@@ -547,22 +547,22 @@ input[type="button"] {
   input[type="submit"]:not([disabled]),
   input[type="button"]:not([disabled]) {
     cursor: pointer; }
-    input[type="submit"]:not([disabled]):hover,
-    input[type="button"]:not([disabled]):hover {
+    input[type="submit"]:not([disabled]):is(:hover, :focus),
+    input[type="button"]:not([disabled]):is(:hover, :focus) {
       --current-button-background-color: var(--theme-button-hover-background-color);
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
       --current-button-transition: var(--theme-button-hover-transition); }
-  input[type="submit"]:not([disabled]):hover,
-  input[type="button"]:not([disabled]):hover {
+  input[type="submit"]:not([disabled]):is(:hover, :focus),
+  input[type="button"]:not([disabled]):is(:hover, :focus) {
     background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
   input[type="submit"]:before,
   input[type="button"]:before {
     transform: scale3d(1, 1, 1);
     transform-origin: right;
     background-color: var(--theme-button-background-color); }
-  input[type="submit"]:not([disabled]):hover:before,
-  input[type="button"]:not([disabled]):hover:before {
+  input[type="submit"]:not([disabled]):is(:hover, :focus):before,
+  input[type="button"]:not([disabled]):is(:hover, :focus):before {
     transform: scale3d(0, 1, 1); }
 
 button[type="submit"] {
@@ -598,7 +598,7 @@ button[type="submit"] {
   overflow: hidden; }
   button[type="submit"]:not([disabled]) {
     cursor: pointer; }
-    button[type="submit"]:not([disabled]):hover {
+    button[type="submit"]:not([disabled]):is(:hover, :focus) {
       --current-button-background-color: var(--theme-button-hover-background-color);
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
@@ -619,7 +619,7 @@ button[type="submit"] {
     transform: scale3d(1, 1, 1);
     transform-origin: right;
     background-color: var(--theme-button-background-color); }
-  button[type="submit"]:not([disabled]):hover:before {
+  button[type="submit"]:not([disabled]):is(:hover, :focus):before {
     transform: scale3d(0, 1, 1); }
 
 input[type="reset"],
@@ -671,15 +671,15 @@ button[type="reset"] {
         transform: translate(0, -50%) scale(-1, 1);
         transition: var(--theme-button-transition);
         transition-property: opacity, transform; } }
-  input[type="reset"]:not([disabled]):hover,
-  button[type="reset"]:not([disabled]):hover {
+  input[type="reset"]:not([disabled]):is(:hover, :focus),
+  button[type="reset"]:not([disabled]):is(:hover, :focus) {
     color: var(--theme-button-text-color); }
-    input[type="reset"]:not([disabled]):hover:before,
-    button[type="reset"]:not([disabled]):hover:before {
+    input[type="reset"]:not([disabled]):is(:hover, :focus):before,
+    button[type="reset"]:not([disabled]):is(:hover, :focus):before {
       transform: scale3d(0, 1, 1);
       transform-origin: right; }
-    input[type="reset"]:not([disabled]):hover:after,
-    button[type="reset"]:not([disabled]):hover:after {
+    input[type="reset"]:not([disabled]):is(:hover, :focus):after,
+    button[type="reset"]:not([disabled]):is(:hover, :focus):after {
       opacity: 1;
       transform: translate(0.4em, -50%) scale(-1, 1); }
 
@@ -1475,7 +1475,7 @@ table {
         --theme-button-background-color: var(--sm-current-fg1-color); }
         .c-search-overlay__suggestions .menu li:not([disabled]) {
           cursor: pointer; }
-          .c-search-overlay__suggestions .menu li:not([disabled]):hover {
+          .c-search-overlay__suggestions .menu li:not([disabled]):is(:hover, :focus) {
             --current-button-background-color: var(--theme-button-hover-background-color);
             --current-button-border-color: var(--theme-button-hover-border-color);
             --current-button-text-color: var(--theme-button-hover-text-color);
@@ -1496,9 +1496,9 @@ table {
           transform: scale3d(0, 1, 1);
           transform-origin: left;
           background-color: var(--theme-button-background-color); }
-        .c-search-overlay__suggestions .menu li:not([disabled]):hover {
+        .c-search-overlay__suggestions .menu li:not([disabled]):is(:hover, :focus) {
           --current-button-text-color: var(--theme-button-text-color); }
-          .c-search-overlay__suggestions .menu li:not([disabled]):hover:before {
+          .c-search-overlay__suggestions .menu li:not([disabled]):is(:hover, :focus):before {
             transform: scale3d(1, 1, 1); }
         .c-search-overlay__suggestions .menu li a {
           padding: 0;
@@ -1964,7 +1964,7 @@ table {
   text-align: center; }
   .c-comments-toggle__label:not([disabled]) {
     cursor: pointer; }
-    .c-comments-toggle__label:not([disabled]):hover {
+    .c-comments-toggle__label:not([disabled]):is(:hover, :focus) {
       --current-button-background-color: var(--theme-button-hover-background-color);
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
@@ -1985,7 +1985,7 @@ table {
     transform: scale3d(1, 1, 1);
     transform-origin: right;
     background-color: var(--theme-button-background-color); }
-  .c-comments-toggle__label:not([disabled]):hover:before {
+  .c-comments-toggle__label:not([disabled]):is(:hover, :focus):before {
     transform: scale3d(0, 1, 1); }
   .c-comments-toggle__label[class] {
     margin-bottom: 0; }
@@ -3127,7 +3127,7 @@ span.page-numbers {
     overflow: hidden; }
     .wpforms-container[class][class][class] .wpforms-submit[class][class][class]:not([disabled]) {
       cursor: pointer; }
-      .wpforms-container[class][class][class] .wpforms-submit[class][class][class]:not([disabled]):hover {
+      .wpforms-container[class][class][class] .wpforms-submit[class][class][class]:not([disabled]):is(:hover, :focus) {
         --current-button-background-color: var(--theme-button-hover-background-color);
         --current-button-border-color: var(--theme-button-hover-border-color);
         --current-button-text-color: var(--theme-button-hover-text-color);
@@ -3148,7 +3148,7 @@ span.page-numbers {
       transform: scale3d(1, 1, 1);
       transform-origin: right;
       background-color: var(--theme-button-background-color); }
-    .wpforms-container[class][class][class] .wpforms-submit[class][class][class]:not([disabled]):hover:before {
+    .wpforms-container[class][class][class] .wpforms-submit[class][class][class]:not([disabled]):is(:hover, :focus):before {
       transform: scale3d(0, 1, 1); }
   .wpforms-container[class][class][class] .wpforms-field-radio li,
   .wpforms-container[class][class][class] .wpforms-field-checkbox li {
