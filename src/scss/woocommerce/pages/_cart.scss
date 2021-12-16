@@ -19,7 +19,7 @@
     text-align: left !important;
   }
   
-  .novablocks-content > .woocommerce {
+  .nb-sidecar-area > .woocommerce {
     --block-content-start: ws !important;
     --block-content-end: we !important;
   }
@@ -61,7 +61,7 @@
 .woocommerce-cart table.cart {
   margin-bottom: var(--theme-spacing--huge);
   
-  --current-font-family: var(--theme-heading-4-font-family);
+  // --current-font-family: var(--theme-heading-4-font-family);
 
   td.product-name {
 
@@ -101,8 +101,8 @@
   }
 
   .coupon {
-    display: flex;
-    align-items: stretch;
+    // display: flex;
+    // align-items: stretch;
   }
 }
 
@@ -274,24 +274,31 @@
     }
   }
   
+  // Actions row: Coupon code + Apply Coupon + Update Cart
   .actions {
     
     button[type="submit"] {
-      --font-size: var(--theme-input-font-size) !important;
-      line-height: 1.15 !important;
+      // --font-size: var(--theme-input-font-size) !important;
+      // line-height: 1.15 !important;
     }
   }
 }
 
 .woocommerce-cart .actions .coupon {
 
+  &:before, &:after {
+    content: none !important;
+  }
+
   @include specific(2) {
     display: flex;
-    margin-left: -.625em;
+    align-items: stretch; 
+    gap: .625em;
+    // margin-left: -.625em;
 
     > .input-text,
     > .button {
-      margin-left: .625em;
+      // margin-left: .625em;
     }
 
     > .input-text {
@@ -387,12 +394,15 @@
   }
 }
 
-#add_payment_method,
-.woocommerce-cart,
-.woocommerce-checkout {
+:is(#add_payment_method, .woocommerce-cart, .woocommerce-checkout) {
 
   table.cart td.actions .coupon .input-text {
-    padding: var(--theme-input-padding);
+    @include field;
+
+    // Remove padding so the `Coupon` input field stretch to the height of the `Apply` button
+    padding-top: 0;
+    padding-bottom: 0;
+
   }
 }
 

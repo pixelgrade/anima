@@ -18,7 +18,7 @@
   &:not([disabled]) {
     cursor: pointer;
 
-    &:hover {
+    &:is(:hover,:focus) {
       --current-button-background-color: var(--theme-button-hover-background-color);
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
@@ -75,7 +75,7 @@
     background-size: calc( 200% + 4 * var(--theme-button-border-width) ) calc( 100% + 4 * var(--theme-button-border-width) );
     background-position: calc( 100% + var(--theme-button-border-width) ) calc( -1 * var(--theme-button-border-width) );
 
-    &:not([disabled]):hover {
+    &:not([disabled]):is(:hover,:focus) {
       background-position: calc( -1 * var(--theme-button-border-width) ) calc( -1 * var(--theme-button-border-width) );
     }
   }
@@ -90,7 +90,7 @@
     background-color: var(--theme-button-background-color);
   }
 
-  &:not([disabled]):hover:before {
+  &:not([disabled]):is(:hover,:focus):before {
     transform: scale3d(0,1,1);
   }
 
@@ -109,18 +109,22 @@
     background-color: var(--theme-button-background-color);
   }
 
-  &:not([disabled]):hover {
+  &:not([disabled]):is(:hover,:focus) {
     --current-button-text-color: var(--theme-button-text-color);
     &:before {
       transform: scale3d(1,1,1);
     }
   }
 
+  &:disabled {
+    opacity: 0.25;
+  }
+
   @if $pseudo == false {
     --current-button-text-color: var(--theme-button-hover-text-color);
     background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%);
 
-    &:not([disabled]):hover {
+    &:not([disabled]):is(:hover,:focus) {
       --current-button-text-color: var(--theme-button-text-color);
     }
   }
@@ -193,7 +197,7 @@
     transform: translate(0, -50%) scale(-1,1);
   }
 
-  &:not([disabled]):hover {
+  &:not([disabled]):is(:hover,:focus) {
 
     color: var(--theme-button-text-color);
 

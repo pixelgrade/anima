@@ -104,10 +104,11 @@
     .wc-block-grid__product-title {
         margin-top: var(--theme-spacing-smallest);
         margin-bottom: 0;
-        color: var(--sm-current-fg2-color);
         
         @include apply-font(heading-4);
         @include apply-font-properties;
+
+        transition: var(--theme-links-transition);
     }
 
     .wc-block-grid__product-link {
@@ -174,6 +175,7 @@
         width: 100%;
     }
 
+    
     .wc-block-grid__product-rating {
 
         .star-rating {

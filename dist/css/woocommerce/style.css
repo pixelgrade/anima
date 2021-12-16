@@ -55,9 +55,9 @@
   #html #body #page button:not([class]):not([disabled]),
   #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not([disabled]) {
     cursor: pointer; }
-    #html #body #page .button:not(.trix-button):not([disabled]):hover,
-    #html #body #page button:not([class]):not([disabled]):hover,
-    #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not([disabled]):hover {
+    #html #body #page .button:not(.trix-button):not([disabled]):is(:hover, :focus),
+    #html #body #page button:not([class]):not([disabled]):is(:hover, :focus),
+    #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not([disabled]):is(:hover, :focus) {
       --current-button-background-color: var(--theme-button-hover-background-color);
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
@@ -71,71 +71,83 @@
 #html #body #page .ajax_add_to_cart ~ .button {
   display: none; }
 
-#html #body #page a.button:not(.alt):not(.checkout),
-#html #body #page button.button:not(.alt):not(.checkout) {
-  background-color: transparent;
-  transform: translateZ(0);
-  will-change: transform;
-  backface-visibility: hidden;
-  overflow: hidden;
-  --current-button-text-color: var(--theme-button-hover-text-color); }
-  #html #body #page a.button:not(.alt):not(.checkout):before,
-  #html #body #page button.button:not(.alt):not(.checkout):before {
-    content: '';
-    position: absolute;
-    top: calc( -1 * var(--theme-button-border-width));
-    right: calc( -1 * var(--theme-button-border-width));
-    bottom: calc( -1 * var(--theme-button-border-width));
-    left: calc( -1 * var(--theme-button-border-width));
-    z-index: -1;
+#html #body #page a.button,
+#html #body #page button.button {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  font-style: var(--current-font-style);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform); }
+  #html #body #page a.button:not(:is(.alt, .checkout)),
+  #html #body #page button.button:not(:is(.alt, .checkout)) {
+    background-color: transparent;
+    transform: translateZ(0);
     will-change: transform;
-    -webkit-backface-visibility: hidden;
-    transition: var(--current-button-transition);
-    transition-property: transform; }
-  #html #body #page a.button:not(.alt):not(.checkout):before,
-  #html #body #page button.button:not(.alt):not(.checkout):before {
-    transform: scale3d(0, 1, 1);
-    transform-origin: left;
-    background-color: var(--theme-button-background-color); }
-  #html #body #page a.button:not(.alt):not(.checkout):not([disabled]):hover,
-  #html #body #page button.button:not(.alt):not(.checkout):not([disabled]):hover {
-    --current-button-text-color: var(--theme-button-text-color); }
-    #html #body #page a.button:not(.alt):not(.checkout):not([disabled]):hover:before,
-    #html #body #page button.button:not(.alt):not(.checkout):not([disabled]):hover:before {
-      transform: scale3d(1, 1, 1); }
-
-#html #body #page a.button.alt, #html #body #page a.button.checkout,
-#html #body #page button.button.alt,
-#html #body #page button.button.checkout {
-  background-color: transparent;
-  transform: translateZ(0);
-  will-change: transform;
-  backface-visibility: hidden;
-  overflow: hidden; }
-  #html #body #page a.button.alt:before, #html #body #page a.button.checkout:before,
-  #html #body #page button.button.alt:before,
-  #html #body #page button.button.checkout:before {
-    content: '';
-    position: absolute;
-    top: calc( -1 * var(--theme-button-border-width));
-    right: calc( -1 * var(--theme-button-border-width));
-    bottom: calc( -1 * var(--theme-button-border-width));
-    left: calc( -1 * var(--theme-button-border-width));
-    z-index: -1;
+    backface-visibility: hidden;
+    overflow: hidden;
+    --current-button-text-color: var(--theme-button-hover-text-color); }
+    #html #body #page a.button:not(:is(.alt, .checkout)):before,
+    #html #body #page button.button:not(:is(.alt, .checkout)):before {
+      content: '';
+      position: absolute;
+      top: calc( -1 * var(--theme-button-border-width));
+      right: calc( -1 * var(--theme-button-border-width));
+      bottom: calc( -1 * var(--theme-button-border-width));
+      left: calc( -1 * var(--theme-button-border-width));
+      z-index: -1;
+      will-change: transform;
+      -webkit-backface-visibility: hidden;
+      transition: var(--current-button-transition);
+      transition-property: transform; }
+    #html #body #page a.button:not(:is(.alt, .checkout)):before,
+    #html #body #page button.button:not(:is(.alt, .checkout)):before {
+      transform: scale3d(0, 1, 1);
+      transform-origin: left;
+      background-color: var(--theme-button-background-color); }
+    #html #body #page a.button:not(:is(.alt, .checkout)):not([disabled]):is(:hover, :focus),
+    #html #body #page button.button:not(:is(.alt, .checkout)):not([disabled]):is(:hover, :focus) {
+      --current-button-text-color: var(--theme-button-text-color); }
+      #html #body #page a.button:not(:is(.alt, .checkout)):not([disabled]):is(:hover, :focus):before,
+      #html #body #page button.button:not(:is(.alt, .checkout)):not([disabled]):is(:hover, :focus):before {
+        transform: scale3d(1, 1, 1); }
+    #html #body #page a.button:not(:is(.alt, .checkout)):disabled,
+    #html #body #page button.button:not(:is(.alt, .checkout)):disabled {
+      opacity: 0.25; }
+  #html #body #page a.button:is(.alt, .checkout),
+  #html #body #page button.button:is(.alt, .checkout) {
+    background-color: transparent;
+    transform: translateZ(0);
     will-change: transform;
-    -webkit-backface-visibility: hidden;
-    transition: var(--current-button-transition);
-    transition-property: transform; }
-  #html #body #page a.button.alt:before, #html #body #page a.button.checkout:before,
-  #html #body #page button.button.alt:before,
-  #html #body #page button.button.checkout:before {
-    transform: scale3d(1, 1, 1);
-    transform-origin: right;
-    background-color: var(--theme-button-background-color); }
-  #html #body #page a.button.alt:not([disabled]):hover:before, #html #body #page a.button.checkout:not([disabled]):hover:before,
-  #html #body #page button.button.alt:not([disabled]):hover:before,
-  #html #body #page button.button.checkout:not([disabled]):hover:before {
-    transform: scale3d(0, 1, 1); }
+    backface-visibility: hidden;
+    overflow: hidden; }
+    #html #body #page a.button:is(.alt, .checkout):before,
+    #html #body #page button.button:is(.alt, .checkout):before {
+      content: '';
+      position: absolute;
+      top: calc( -1 * var(--theme-button-border-width));
+      right: calc( -1 * var(--theme-button-border-width));
+      bottom: calc( -1 * var(--theme-button-border-width));
+      left: calc( -1 * var(--theme-button-border-width));
+      z-index: -1;
+      will-change: transform;
+      -webkit-backface-visibility: hidden;
+      transition: var(--current-button-transition);
+      transition-property: transform; }
+    #html #body #page a.button:is(.alt, .checkout):before,
+    #html #body #page button.button:is(.alt, .checkout):before {
+      transform: scale3d(1, 1, 1);
+      transform-origin: right;
+      background-color: var(--theme-button-background-color); }
+    #html #body #page a.button:is(.alt, .checkout):not([disabled]):is(:hover, :focus):before,
+    #html #body #page button.button:is(.alt, .checkout):not([disabled]):is(:hover, :focus):before {
+      transform: scale3d(0, 1, 1); }
+  #html #body #page a.button.checkout-button,
+  #html #body #page button.button.checkout-button {
+    --theme-button-x-padding: 2.5em;
+    --theme-button-y-padding: 1em;
+    padding: var(--theme-button-y-padding) var(--theme-button-x-padding); }
 
 #html #body #page input.button:not(.alt),
 #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt) {
@@ -150,22 +162,25 @@
   --current-button-text-color: var(--theme-button-hover-text-color);
   --current-button-text-color: var(--theme-button-hover-text-color);
   background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
-  #html #body #page input.button:not(.alt):not([disabled]):hover,
-  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):hover {
+  #html #body #page input.button:not(.alt):not([disabled]):is(:hover, :focus),
+  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):is(:hover, :focus) {
     background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
   #html #body #page input.button:not(.alt):before,
   #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):before {
     transform: scale3d(0, 1, 1);
     transform-origin: left;
     background-color: var(--theme-button-background-color); }
-  #html #body #page input.button:not(.alt):not([disabled]):hover,
-  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):hover {
+  #html #body #page input.button:not(.alt):not([disabled]):is(:hover, :focus),
+  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):is(:hover, :focus) {
     --current-button-text-color: var(--theme-button-text-color); }
-    #html #body #page input.button:not(.alt):not([disabled]):hover:before,
-    #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):hover:before {
+    #html #body #page input.button:not(.alt):not([disabled]):is(:hover, :focus):before,
+    #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):is(:hover, :focus):before {
       transform: scale3d(1, 1, 1); }
-  #html #body #page input.button:not(.alt):not([disabled]):hover,
-  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):hover {
+  #html #body #page input.button:not(.alt):disabled,
+  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):disabled {
+    opacity: 0.25; }
+  #html #body #page input.button:not(.alt):not([disabled]):is(:hover, :focus),
+  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):is(:hover, :focus) {
     --current-button-text-color: var(--theme-button-text-color); }
 
 #html #body #page input.button.alt,
@@ -179,17 +194,21 @@
   background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
   background-position: calc( 100% + var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width));
   background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
-  #html #body #page input.button.alt:not([disabled]):hover,
-  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:not([disabled]):hover {
+  #html #body #page input.button.alt:not([disabled]):is(:hover, :focus),
+  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:not([disabled]):is(:hover, :focus) {
     background-position: calc( -1 * var(--theme-button-border-width)) calc( -1 * var(--theme-button-border-width)); }
   #html #body #page input.button.alt:before,
   #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:before {
     transform: scale3d(1, 1, 1);
     transform-origin: right;
     background-color: var(--theme-button-background-color); }
-  #html #body #page input.button.alt:not([disabled]):hover:before,
-  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:not([disabled]):hover:before {
+  #html #body #page input.button.alt:not([disabled]):is(:hover, :focus):before,
+  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:not([disabled]):is(:hover, :focus):before {
     transform: scale3d(0, 1, 1); }
+
+@media only screen and (min-width: 768px) {
+  #html #body #page button[name='update_cart'] {
+    float: right; } }
 
 #html #body #page .checkout-button,
 #html #body #page [id="place_order"] {
@@ -245,9 +264,6 @@
     [class*="invalid"] #html #body #page textarea:focus, [class*="invalid"] #html #body #page textarea:active {
       --theme-input-box-shadow: var(--theme-input-focus-error-box-shadow); }
 
-#html #body #page .actions .button {
-  padding: var(--theme-input-padding); }
-
 #html #body #page #place_order {
   --theme-button-background-color: var(--sm-current-accent-color);
   --theme-button-border-color: var(--sm-current-accent-color);
@@ -264,13 +280,6 @@
   --theme-button-hover-text-color: var(--sm-current-accent-color);
   --theme-button-hover-border-color: var(--sm-current-accent-color);
   width: 100%; }
-
-#html #body #page .qty_button {
-  padding: 0;
-  background-color: transparent;
-  border: 0;
-  box-shadow: none;
-  color: var(--sm-current-fg2-color); }
 
 #html #body #page .woocommerce-notices-wrapper .button[class][class][class][class][class] {
   background-color: transparent;
@@ -295,15 +304,15 @@
     transform: scale3d(1, 1, 1);
     transform-origin: right;
     background-color: var(--theme-button-background-color); }
-  #html #body #page .woocommerce-notices-wrapper .button[class][class][class][class][class]:not([disabled]):hover:before {
+  #html #body #page .woocommerce-notices-wrapper .button[class][class][class][class][class]:not([disabled]):is(:hover, :focus):before {
     transform: scale3d(0, 1, 1); }
   #html #body #page .woocommerce-notices-wrapper .button[class][class][class][class][class]:hover {
     --current-button-text-color: var(--theme-button-hover-text-color); }
 
-#html #body #page .qty_button {
+.quantity .qty_button {
   border-radius: 50%;
   color: var(--theme-input-color); }
-  #html #body #page .qty_button:after {
+  .quantity .qty_button:after {
     content: '';
     position: absolute;
     top: 0;
@@ -311,11 +320,11 @@
     width: 100%;
     height: 100%;
     background-color: currentColor; }
-  #html #body #page .qty_button.minus:after {
+  .quantity .qty_button.minus:after {
     mask-size: contain;
     mask: url("../../../assets/images/minus.svg") no-repeat 50% 50%;
     -webkit-mask: url("../../../assets/images/minus.svg") no-repeat 50% 50%; }
-  #html #body #page .qty_button.plus:after {
+  .quantity .qty_button.plus:after {
     mask-size: contain;
     mask: url("../../../assets/images/plus.svg") no-repeat 50% 50%;
     -webkit-mask: url("../../../assets/images/plus.svg") no-repeat 50% 50%; }
@@ -624,10 +633,12 @@
       transform: scale3d(0, 1, 1);
       transform-origin: left;
       background-color: var(--theme-button-background-color); }
-    .woocommerce-notices-wrapper .button:not([disabled]):hover {
+    .woocommerce-notices-wrapper .button:not([disabled]):is(:hover, :focus) {
       --current-button-text-color: var(--theme-button-text-color); }
-      .woocommerce-notices-wrapper .button:not([disabled]):hover:before {
+      .woocommerce-notices-wrapper .button:not([disabled]):is(:hover, :focus):before {
         transform: scale3d(1, 1, 1); }
+    .woocommerce-notices-wrapper .button:disabled {
+      opacity: 0.25; }
   .woocommerce-notices-wrapper:not(:empty) {
     margin-top: var(--theme-spacing-large); }
   .woocommerce-notices-wrapper:empty {
@@ -713,10 +724,7 @@
   grid-template-areas: 'icon text button';
   grid-gap: 0.5em;
   width: 100%;
-  padding: 1em; }
-  .theme-woocommerce-notice,
-  .theme-woocommerce-notice * {
-    line-height: 1; }
+  padding: 0.8em 1em; }
 
 .theme-woocommerce-notice__icon {
   grid-area: icon;
@@ -724,7 +732,7 @@
   width: var(--theme-notification-icon-width);
   height: var(--theme-notification-icon-height);
   background-color: currentColor;
-  align-self: start; }
+  align-self: center; }
   @media not screen and (min-width: 1024px) {
     .theme-woocommerce-notice__icon {
       display: none; } }
@@ -925,8 +933,8 @@
   order: 2;
   margin-left: auto; }
 
-.single-product .novablocks-content > .woocommerce-notices-wrapper,
-.single-product .novablocks-content > .product {
+.single-product .nb-sidecar-area > .woocommerce-notices-wrapper,
+.single-product .nb-sidecar-area > .product {
   --block-content-start: ws !important;
   --block-content-end: we !important; }
 
@@ -1007,7 +1015,7 @@
 
 .woocommerce-product-details__short-description {
   margin-bottom: var(--theme-spacing);
-  --current-font-size: 0.96em; }
+  --font-size-modifier: 0.94; }
   .woocommerce-product-details__short-description > :not(:first-child) {
     margin-top: var(--theme-spacing-normal); }
 
@@ -1065,7 +1073,8 @@
   text-align: center; }
 
 .woocommerce[class] .product .price {
-  color: var(--sm-current-fg2-color); }
+  color: var(--sm-current-fg2-color);
+  font-size: inherit; }
   .woocommerce[class] .product .price ins {
     font-weight: inherit;
     text-decoration: none; }
@@ -1123,14 +1132,7 @@
     margin-bottom: var(--theme-spacing-smallest); }
   .c-product-main .price {
     margin-bottom: var(--theme-spacing-normal);
-    --font-size: var(--theme-heading-4-font-size);
-    --current-font-family: var(--theme-heading-4-font-family);
-    --current-font-weight: var(--theme-heading-4-font-weight);
-    --current-font-style: var(--theme-heading-4-font-style);
-    --current-line-height: var(--theme-heading-4-line-height);
-    --current-letter-spacing: var(--theme-heading-4-letter-spacing);
-    --current-text-transform: var(--theme-heading-4-text-transform);
-    --current-color: var(--theme-heading-4-color); }
+    --font-size-modifier: 1.25; }
   .c-product-main span.onsale {
     position: absolute;
     min-width: auto;
@@ -1281,7 +1283,7 @@
   flex-grow: 1; }
 
 .product_meta {
-  --current-font-size: 0.92em; }
+  --font-size-modifier: 0.85; }
   .product_meta > span {
     display: block; }
     .product_meta > span a {
@@ -1394,7 +1396,7 @@
   text-align: center; }
   .add_to_cart_button:not([disabled]) {
     cursor: pointer; }
-    .add_to_cart_button:not([disabled]):hover {
+    .add_to_cart_button:not([disabled]):is(:hover, :focus) {
       --current-button-background-color: var(--theme-button-hover-background-color);
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
@@ -1415,13 +1417,12 @@
     transform: scale3d(1, 1, 1);
     transform-origin: right;
     background-color: var(--theme-button-background-color); }
-  .add_to_cart_button:not([disabled]):hover:before {
+  .add_to_cart_button:not([disabled]):is(:hover, :focus):before {
     transform: scale3d(0, 1, 1); }
 
 .woocommerce-breadcrumb[class] {
   margin-bottom: var(--theme-spacing-smallest);
-  --current-font-size: 0.96em;
-  font-size: var(--current-font-size);
+  --font-size-modifier: 0.85;
   color: var(--sm-current-fg2-color); }
   .woocommerce-breadcrumb[class] a {
     color: var(--sm-current-fg2-color);
@@ -1581,8 +1582,8 @@
     box-shadow: var(--theme-input-box-shadow);
     border-radius: 50%; }
     .quantity .qty_button.button--is-disabled {
-      pointer-events: none;
-      opacity: .5; }
+      opacity: .5;
+      cursor: not-allowed; }
     .quantity .qty_button:before {
       content: '';
       position: absolute;
@@ -1593,7 +1594,21 @@
       border: 1px solid var(--sm-current-fg2-color);
       border-radius: 50%;
       opacity: .3;
-      z-index: 10; }
+      z-index: 10;
+      transition: all 0.2s ease; }
+    .quantity .qty_button:after {
+      z-index: 11;
+      transition: all 0.2s ease; }
+    .quantity .qty_button:not(.button--is-disabled):hover:before {
+      opacity: 1;
+      border-color: var(--sm-current-accent-color);
+      border-width: 1em; }
+    .quantity .qty_button:not(.button--is-disabled):hover:after {
+      cursor: pointer;
+      background-color: var(--sm-current-bg-color); }
+
+.pswp {
+  z-index: 15000; }
 
 .woocommerce-cart[class][class] .entry-title {
   max-width: none; }
@@ -1608,7 +1623,7 @@
 .woocommerce-cart .woocommerce-page table.shop_table_responsive tr td {
   text-align: left !important; }
 
-.woocommerce-cart .novablocks-content > .woocommerce {
+.woocommerce-cart .nb-sidecar-area > .woocommerce {
   --block-content-start: ws !important;
   --block-content-end: we !important; }
 
@@ -1632,8 +1647,7 @@
       margin-left: var(--theme-spacing-fluid-smallest); } }
 
 .woocommerce-cart table.cart {
-  margin-bottom: var(--theme-spacing--huge);
-  --current-font-family: var(--theme-heading-4-font-family); }
+  margin-bottom: var(--theme-spacing--huge); }
   .woocommerce-cart table.cart td.product-name a {
     border-bottom: 0;
     text-decoration: none; }
@@ -1653,9 +1667,6 @@
     .woocommerce-cart table.cart .product-thumbnail img {
       display: block;
       width: 100%; }
-  .woocommerce-cart table.cart .coupon {
-    display: flex;
-    align-items: stretch; }
 
 .woocommerce-checkout-review-order[class][class][class] .shop_table tr {
   display: flex;
@@ -1757,16 +1768,13 @@
   .woocommerce-cart-form .quantity .quantity__wrapper button {
     cursor: pointer; }
 
-.woocommerce-cart-form .actions button[type="submit"] {
-  --font-size: var(--theme-input-font-size) !important;
-  line-height: 1.15 !important; }
+.woocommerce-cart .actions .coupon:before, .woocommerce-cart .actions .coupon:after {
+  content: none !important; }
 
 .woocommerce-cart .actions .coupon[class][class] {
   display: flex;
-  margin-left: -.625em; }
-  .woocommerce-cart .actions .coupon[class][class] > .input-text,
-  .woocommerce-cart .actions .coupon[class][class] > .button {
-    margin-left: .625em; }
+  align-items: stretch;
+  gap: .625em; }
   .woocommerce-cart .actions .coupon[class][class] > .input-text {
     flex-grow: 1;
     margin-right: auto; }
@@ -1827,10 +1835,48 @@
     z-index: -1;
     transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1); }
 
-#add_payment_method table.cart td.actions .coupon .input-text,
-.woocommerce-cart table.cart td.actions .coupon .input-text,
-.woocommerce-checkout table.cart td.actions .coupon .input-text {
-  padding: var(--theme-input-padding); }
+:is(#add_payment_method, .woocommerce-cart, .woocommerce-checkout) table.cart td.actions .coupon .input-text {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  padding: var(--theme-input-padding);
+  margin: 0;
+  color: var(--theme-input-color);
+  border-radius: var(--theme-input-border-radius);
+  background-color: var(--theme-input-background-color);
+  box-shadow: var(--theme-input-box-shadow);
+  border: 0;
+  transition: all .2s ease-in-out;
+  --font-size: var(--theme-input-font-size);
+  --current-font-family: var(--theme-input-font-family);
+  --current-font-weight: var(--theme-input-font-weight);
+  --current-font-style: var(--theme-input-font-style);
+  --current-line-height: var(--theme-input-line-height);
+  --current-letter-spacing: var(--theme-input-letter-spacing);
+  --current-text-transform: var(--theme-input-text-transform);
+  font-family: inherit;
+  -webkit-font-smoothing: initial;
+  -webkit-appearance: none;
+  padding-top: 0;
+  padding-bottom: 0; }
+  :is(#add_payment_method, .woocommerce-cart, .woocommerce-checkout) table.cart td.actions .coupon .input-text:hover {
+    --theme-input-box-shadow: var(--theme-input-hover-box-shadow); }
+  :is(#add_payment_method, .woocommerce-cart, .woocommerce-checkout) table.cart td.actions .coupon .input-text:focus, :is(#add_payment_method, .woocommerce-cart, .woocommerce-checkout) table.cart td.actions .coupon .input-text:active {
+    --theme-input-border-color: var(--theme-input-focus-border-color);
+    --theme-input-box-shadow: var(--theme-input-focus-box-shadow);
+    outline: 0; }
+  :is(#add_payment_method, .woocommerce-cart, .woocommerce-checkout) table.cart td.actions .coupon .input-text[disabled] {
+    opacity: 0.7;
+    cursor: not-allowed; }
+  [class*="invalid"] :is(#add_payment_method, .woocommerce-cart, .woocommerce-checkout) table.cart td.actions .coupon .input-text {
+    --theme-input-box-shadow: var(--theme-input-error-box-shadow);
+    --theme-input-color: var(--theme-input-error-color);
+    --theme-input-placeholder-color: var(--theme-input-error-color);
+    --theme-input-placeholder-opacity: 0; }
+    [class*="invalid"] :is(#add_payment_method, .woocommerce-cart, .woocommerce-checkout) table.cart td.actions .coupon .input-text:hover {
+      --theme-input-box-shadow: var(--theme-input-error-box-shadow); }
+    [class*="invalid"] :is(#add_payment_method, .woocommerce-cart, .woocommerce-checkout) table.cart td.actions .coupon .input-text:focus, [class*="invalid"] :is(#add_payment_method, .woocommerce-cart, .woocommerce-checkout) table.cart td.actions .coupon .input-text:active {
+      --theme-input-box-shadow: var(--theme-input-focus-error-box-shadow); }
 
 @media not screen and (min-width: 768px) {
   .woocommerce-cart-form__contents .cart_item {
@@ -1882,7 +1928,7 @@
     .woocommerce-checkout:not(.woocommerce-order-received) .woocommerce-checkout > * {
       position: relative;
       z-index: 20; }
-    .woocommerce-checkout:not(.woocommerce-order-received) .woocommerce-checkout a {
+    .woocommerce-checkout:not(.woocommerce-order-received) .woocommerce-checkout a:not(:is(:hover, :focus)) {
       color: currentColor;
       text-decoration-color: currentColor; } }
 
@@ -1891,7 +1937,8 @@
   border-bottom: 0;
   border-left: 0;
   border-radius: 0;
-  margin: 0; }
+  margin: 0;
+  border-top: 1px solid #d3ced2; }
   .woocommerce-checkout:not(.woocommerce-order-received) table.shop_table tbody,
   .woocommerce-checkout:not(.woocommerce-order-received) table.shop_table tfoot,
   .woocommerce-checkout:not(.woocommerce-order-received) table.shop_table thead {
@@ -1902,11 +1949,7 @@
     padding-right: 0;
     text-align: right; }
   .woocommerce-checkout:not(.woocommerce-order-received) table.shop_table tbody .product-name {
-    --current-font-size: 1.33em;
-    --current-font-family: var(--theme-heading-4-font-family);
     --current-font-weight: bold; }
-    .woocommerce-checkout:not(.woocommerce-order-received) table.shop_table tbody .product-name .product-quantity {
-      font-size: .8em; }
 
 .woocommerce-checkout:not(.woocommerce-order-received) #shipping_method[id] li {
   margin-bottom: 0; }
@@ -1991,7 +2034,7 @@
   margin-bottom: 0;
   margin-top: .2em; }
 
-.woocommerce-checkout:not(.woocommerce-order-received) .novablocks-content > .woocommerce {
+.woocommerce-checkout:not(.woocommerce-order-received) .nb-sidecar-area > .woocommerce {
   --block-content-start: ws !important;
   --block-content-end: we !important; }
 
@@ -2005,6 +2048,23 @@
   .woocommerce-checkout #payment ul.payment_methods {
     padding: 0;
     border: 0; }
+    #add_payment_method #payment ul.payment_methods li,
+    .woocommerce-cart #payment ul.payment_methods li,
+    .woocommerce-checkout #payment ul.payment_methods li {
+      --font-size: var(--theme-body-font-size);
+      --current-font-family: var(--theme-body-font-family);
+      --current-line-height: var(--theme-body-line-height);
+      --current-font-weight: var(--theme-body-font-weight);
+      --current-font-style: var(--theme-body-font-style);
+      --current-letter-spacing: var(--theme-body-letter-spacing);
+      font-family: var(--current-font-family);
+      font-size: var(--current-font-size);
+      line-height: var(--current-line-height);
+      font-weight: var(--current-font-weight);
+      font-style: var(--current-font-style);
+      letter-spacing: var(--current-letter-spacing);
+      text-transform: var(--current-text-transform);
+      border-top: 1px solid #d3ced2; }
   #add_payment_method #payment .wc_payment_method,
   .woocommerce-cart #payment .wc_payment_method,
   .woocommerce-checkout #payment .wc_payment_method {
@@ -2013,8 +2073,8 @@
     flex-wrap: wrap;
     align-items: center;
     font: inherit;
-    padding-top: 1.5em;
-    padding-bottom: 1.5em; }
+    padding-top: 1em;
+    padding-bottom: 1em; }
     #add_payment_method #payment .wc_payment_method label,
     .woocommerce-cart #payment .wc_payment_method label,
     .woocommerce-checkout #payment .wc_payment_method label {
@@ -2028,7 +2088,7 @@
   .woocommerce-cart #payment div.payment_box,
   .woocommerce-checkout #payment div.payment_box {
     flex-basis: 100%;
-    margin-left: 2.375em;
+    margin-left: 2.575em;
     margin-bottom: 0;
     padding: 0;
     opacity: 0.8;
@@ -2068,7 +2128,10 @@
 .woocommerce-checkout-title[class] {
   margin-bottom: var(--theme-spacing-smallest); }
   .woocommerce-checkout-title[class] a {
-    color: inherit; }
+    color: inherit;
+    text-decoration: none; }
+    .woocommerce-checkout-title[class] a:is(:hover, :focus) {
+      color: var(--sm-current-accent-color); }
 
 .woocommerce-checkout-breadcrumbs {
   list-style: none;
@@ -2077,9 +2140,34 @@
   .woocommerce-checkout-breadcrumbs li {
     display: inline-block;
     margin-bottom: 0; }
+    .woocommerce-checkout-breadcrumbs li a {
+      --current-font-weight: bold; }
+      .woocommerce-checkout-breadcrumbs li a:not(is(:hover, :focus)) {
+        color: currentColor;
+        text-decoration-color: currentColor; }
+    .woocommerce-checkout-breadcrumbs li:last-child {
+      --current-font-weight: bold;
+      color: var(--sm-current-fg2-color);
+      opacity: .6; }
+    .woocommerce-checkout-breadcrumbs li + li {
+      padding-left: 10px; }
+      .woocommerce-checkout-breadcrumbs li + li:before {
+        content: "";
+        position: static;
+        display: inline-block;
+        width: 0.5em;
+        height: 0.5em;
+        margin-right: 20px;
+        border-right: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        border-top: 0;
+        border-left: 0;
+        transform: translateY(-10%) rotate(-45deg);
+        transition: var(--theme-transition);
+        transition-property: opacity;
+        opacity: .5; }
 
-.woocommerce-billing-fields > h3,
-.woocommerce-additional-fields > h3 {
+:is(.woocommerce-billing-fields, .woocommerce-additional-fields) > h3 {
   --font-size: var(--theme-heading-4-font-size);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-weight: var(--theme-heading-4-font-weight);
@@ -2088,7 +2176,10 @@
   --current-letter-spacing: var(--theme-heading-4-letter-spacing);
   --current-text-transform: var(--theme-heading-4-text-transform);
   --current-color: var(--theme-heading-4-color);
-  margin-bottom: var(--theme-spacing); }
+  margin-bottom: var(--theme-spacing-smaller); }
+
+.woocommerce-account-fields {
+  margin-top: var(--theme-spacing-small); }
 
 [id="order_review_heading"] {
   margin-bottom: var(--theme-spacing); }
@@ -2106,9 +2197,6 @@
   @media only screen and (min-width: 768px) {
     [id="customer_details"] {
       margin-bottom: 0; } }
-
-[id="order_comments_field"][class][class][class] {
-  margin-top: var(--theme-spacing); }
 
 .woocommerce-shipping-fields {
   margin-top: var(--theme-spacing); }
@@ -2143,14 +2231,7 @@ ul.order_details[class] {
   width: 100%; }
 
 .order-total .amount {
-  --font-size: var(--theme-heading-4-font-size);
-  --current-font-family: var(--theme-heading-4-font-family);
-  --current-font-weight: var(--theme-heading-4-font-weight);
-  --current-font-style: var(--theme-heading-4-font-style);
-  --current-line-height: var(--theme-heading-4-line-height);
-  --current-letter-spacing: var(--theme-heading-4-letter-spacing);
-  --current-text-transform: var(--theme-heading-4-text-transform);
-  --current-color: var(--theme-heading-4-color); }
+  --font-size-modifier: 1.33; }
 
 .cart_totals h2 {
   --font-size: var(--theme-heading-3-font-size);
@@ -2197,36 +2278,21 @@ ul.order_details[class] {
   .woocommerce-form-login[class][class] {
     position: relative;
     z-index: 20;
+    margin: 0;
+    border: 0;
     float: left;
     width: 55%;
     padding-left: 5.25%;
-    padding-right: 8.75%;
-    margin: 0;
-    border: 0; } }
+    padding-right: 8.75%; } }
+
+.woocommerce-form-login-toggle[class][class] {
+  margin-top: var(--theme-spacing-larger); }
 
 .woocommerce-checkout-review-order-table td {
   white-space: initial; }
 
 .wc_payment_methods .wc_payment_method:only-child .payment_box {
   margin-left: 0 !important; }
-
-.woocommerce-checkout-breadcrumbs[class] li + li {
-  padding-left: 10px; }
-  .woocommerce-checkout-breadcrumbs[class] li + li:before {
-    content: "";
-    position: static;
-    display: inline-block;
-    width: 0.5em;
-    height: 0.5em;
-    margin-right: 20px;
-    border-right: 0.1em solid currentColor;
-    border-bottom: 0.1em solid currentColor;
-    border-top: 0;
-    border-left: 0;
-    transform: translateY(-10%) rotate(-45deg);
-    transition: var(--theme-transition);
-    transition-property: opacity;
-    opacity: .5; }
 
 #shipping_method[class][class][class][class] li label {
   display: flex;
@@ -2255,7 +2321,7 @@ ul.order_details[class] {
 
 .wc_payment_methods p {
   color: var(--sm-current-fg2-color);
-  opacity: .6; }
+  --font-size-modifier: 0.9; }
 
 .wc_payment_methods .woocommerce-info:before {
   content: none; }
@@ -2293,26 +2359,6 @@ ul.order_details[class] {
   --current-letter-spacing: var(--theme-heading-2-letter-spacing);
   --current-text-transform: var(--theme-heading-2-text-transform);
   --current-color: var(--theme-heading-2-color); }
-
-.woocommerce-checkout-breadcrumbs li a {
-  --current-font-weight: bold;
-  color: currentColor;
-  text-decoration-color: currentColor; }
-
-.woocommerce-checkout-breadcrumbs li:last-child {
-  --current-font-weight: bold;
-  color: var(--sm-current-fg2-color);
-  opacity: .6; }
-
-#order_review_heading {
-  --font-size: var(--theme-heading-4-font-size);
-  --current-font-family: var(--theme-heading-4-font-family);
-  --current-font-weight: var(--theme-heading-4-font-weight);
-  --current-font-style: var(--theme-heading-4-font-style);
-  --current-line-height: var(--theme-heading-4-line-height);
-  --current-letter-spacing: var(--theme-heading-4-letter-spacing);
-  --current-text-transform: var(--theme-heading-4-text-transform);
-  --current-color: var(--theme-heading-4-color); }
 
 .cart-subtotal .woocommerce-Price-amount {
   --current-font-weight: bold; }
@@ -2518,10 +2564,12 @@ ul.order_details[class] {
       transform: scale3d(0, 1, 1);
       transform-origin: left;
       background-color: var(--theme-button-background-color); }
-    .wc-block-featured-category .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):hover {
+    .wc-block-featured-category .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus) {
       --current-button-text-color: var(--theme-button-text-color); }
-      .wc-block-featured-category .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):hover:before {
+      .wc-block-featured-category .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus):before {
         transform: scale3d(1, 1, 1); }
+    .wc-block-featured-category .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:disabled {
+      opacity: 0.25; }
   .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class] {
     padding: 0;
     border-width: 0;
@@ -2568,12 +2616,12 @@ ul.order_details[class] {
           transform: translate(0, -50%) scale(-1, 1);
           transition: var(--theme-button-transition);
           transition-property: opacity, transform; } }
-    .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):hover {
+    .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus) {
       color: var(--theme-button-text-color); }
-      .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):hover:before {
+      .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus):before {
         transform: scale3d(0, 1, 1);
         transform-origin: right; }
-      .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):hover:after {
+      .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus):after {
         opacity: 1;
         transform: translate(0.4em, -50%) scale(-1, 1); }
     .wc-block-featured-category .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:before {
@@ -2740,7 +2788,6 @@ ul.order_details[class] {
 [class][class][class] .wc-block-grid__product-title {
   margin-top: var(--theme-spacing-smallest);
   margin-bottom: 0;
-  color: var(--sm-current-fg2-color);
   --font-size: var(--theme-heading-4-font-size);
   --current-font-family: var(--theme-heading-4-font-family);
   --current-font-weight: var(--theme-heading-4-font-weight);
@@ -2755,7 +2802,8 @@ ul.order_details[class] {
   font-weight: var(--current-font-weight);
   font-style: var(--current-font-style);
   letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform); }
+  text-transform: var(--current-text-transform);
+  transition: var(--theme-links-transition); }
 
 [class][class][class] .wc-block-grid__product-link {
   --current-aspect-ratio: 1;
@@ -2984,14 +3032,14 @@ ul.order_details[class] {
   overflow: hidden; }
   .wc-block-product-categories__button:not([disabled]) {
     cursor: pointer; }
-    .wc-block-product-categories__button:not([disabled]):hover {
+    .wc-block-product-categories__button:not([disabled]):is(:hover, :focus) {
       --current-button-background-color: var(--theme-button-hover-background-color);
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
       --current-button-transition: var(--theme-button-hover-transition); }
   .wc-block-product-categories__button:not([disabled]) {
     cursor: pointer; }
-    .wc-block-product-categories__button:not([disabled]):hover {
+    .wc-block-product-categories__button:not([disabled]):is(:hover, :focus) {
       --current-button-background-color: var(--theme-button-hover-background-color);
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
@@ -3012,7 +3060,7 @@ ul.order_details[class] {
     transform: scale3d(1, 1, 1);
     transform-origin: right;
     background-color: var(--theme-button-background-color); }
-  .wc-block-product-categories__button:not([disabled]):hover:before {
+  .wc-block-product-categories__button:not([disabled]):is(:hover, :focus):before {
     transform: scale3d(0, 1, 1); }
   .wc-block-product-categories__button path {
     fill: var(--theme-button-text-color); }
@@ -3052,10 +3100,12 @@ ul.order_details[class] {
       transform: scale3d(0, 1, 1);
       transform-origin: left;
       background-color: var(--theme-button-background-color); }
-    .wc-block-featured-product .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):hover {
+    .wc-block-featured-product .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus) {
       --current-button-text-color: var(--theme-button-text-color); }
-      .wc-block-featured-product .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):hover:before {
+      .wc-block-featured-product .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus):before {
         transform: scale3d(1, 1, 1); }
+    .wc-block-featured-product .wp-block-button.is-style-secondary .wp-block-button__link[class][class][class]:disabled {
+      opacity: 0.25; }
   .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class] {
     padding: 0;
     border-width: 0;
@@ -3102,12 +3152,12 @@ ul.order_details[class] {
           transform: translate(0, -50%) scale(-1, 1);
           transition: var(--theme-button-transition);
           transition-property: opacity, transform; } }
-    .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):hover {
+    .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus) {
       color: var(--theme-button-text-color); }
-      .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):hover:before {
+      .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus):before {
         transform: scale3d(0, 1, 1);
         transform-origin: right; }
-      .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):hover:after {
+      .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:not([disabled]):is(:hover, :focus):after {
         opacity: 1;
         transform: translate(0.4em, -50%) scale(-1, 1); }
     .wc-block-featured-product .wp-block-button.is-style-text .wp-block-button__link[class][class][class]:before {
@@ -3500,13 +3550,18 @@ ul.order_details[class] {
 .woocommerce form .form-row label {
   line-height: inherit; }
 
-.woocommerce .star-rating span {
-  font: inherit; }
-  .woocommerce .star-rating span:before {
-    color: var(--sm-current-accent-color); }
+.woocommerce .star-rating {
+  float: none; }
+  .woocommerce .star-rating span {
+    font: inherit; }
+    .woocommerce .star-rating span:before {
+      color: var(--sm-current-accent-color); }
+
+.woocommerce .wc-block-grid__product-title + .star-rating {
+  margin-top: var(--theme-spacing-smallest); }
 
 .woocommerce-page .entry-content[class][class][class][class],
-.woocommerce-page .novablocks-content[class][class][class][class] {
+.woocommerce-page .wc-block-grid.alignwide[class][class][class][class] {
   --block-content-start: ws;
   --block-content-end: we; }
 
@@ -3514,7 +3569,7 @@ ul.order_details[class] {
   padding-left: 0;
   padding-right: 0; }
 
-.woocommerce-Price-amount {
+.wc-block-grid .woocommerce-Price-amount {
   --font-size: var(--theme-meta-font-size);
   --current-font-family: var(--theme-meta-font-family);
   --current-font-weight: var(--theme-meta-font-weight);

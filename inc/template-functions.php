@@ -55,7 +55,7 @@ function anima_body_classes( $classes ) {
 	}
 
 	if ( anima_page_has_custom_palette_variation() ) {
-			$classes[] = 'sm-variation-3';
+			$classes[] = 'sm-variation-2';
 	}
 
 	if ( pixelgrade_option( 'sm_collection_title_position' ) === 'sideways' ) {

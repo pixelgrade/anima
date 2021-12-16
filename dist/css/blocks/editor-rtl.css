@@ -162,7 +162,7 @@ nav.wp-block-navigation a:not(:hover) {
   padding: var(--theme-button-padding) !important; }
   .wp-block-search__button:not([disabled]) {
     cursor: pointer; }
-    .wp-block-search__button:not([disabled]):hover {
+    .wp-block-search__button:not([disabled]):is(:hover, :focus) {
       --current-button-background-color: var(--theme-button-hover-background-color);
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
@@ -390,18 +390,18 @@ nav.wp-block-navigation a:not(:hover) {
   text-transform: var(--current-text-transform); }
   .ot-dtp-picker-form .ot-dtp-picker-button[class][class][class][class][class]:not([disabled]) {
     cursor: pointer; }
-    .ot-dtp-picker-form .ot-dtp-picker-button[class][class][class][class][class]:not([disabled]):hover {
+    .ot-dtp-picker-form .ot-dtp-picker-button[class][class][class][class][class]:not([disabled]):is(:hover, :focus) {
       --current-button-background-color: var(--theme-button-hover-background-color);
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
       --current-button-transition: var(--theme-button-hover-transition); }
-  .ot-dtp-picker-form .ot-dtp-picker-button[class][class][class][class][class]:not([disabled]):hover {
+  .ot-dtp-picker-form .ot-dtp-picker-button[class][class][class][class][class]:not([disabled]):is(:hover, :focus) {
     background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
   .ot-dtp-picker-form .ot-dtp-picker-button[class][class][class][class][class]:before {
     transform: scale3d(1, 1, 1);
     transform-origin: left;
     background-color: var(--theme-button-background-color); }
-  .ot-dtp-picker-form .ot-dtp-picker-button[class][class][class][class][class]:not([disabled]):hover:before {
+  .ot-dtp-picker-form .ot-dtp-picker-button[class][class][class][class][class]:not([disabled]):is(:hover, :focus):before {
     transform: scale3d(0, 1, 1); }
 
 .ot-dtp-picker input[type="submit"][class][class] {

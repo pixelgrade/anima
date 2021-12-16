@@ -66,18 +66,31 @@ $assets-folder-path: '../../../assets';
   line-height: inherit;
 }
 
-.woocommerce .star-rating span {
-  font: inherit;
+.woocommerce {
+  .star-rating {
+    float: none;
 
-  &:before {
-    color: var(--sm-current-accent-color);
+    span {  
+      font: inherit;
+
+      &:before {
+        color: var(--sm-current-accent-color);
+      }
+    }
   }
+
+    .wc-block-grid__product-title + .star-rating {
+      margin-top: var(--theme-spacing-smallest);
+    }
 }
 
+
+
+// Set the page content alignment to Wide
 .woocommerce-page {
   
-  .entry-content,
-  .novablocks-content {
+  .entry-content, // <- @todo: check if this class is still used
+  .wc-block-grid.alignwide {
     
     @include specific(4) {
       --block-content-start: ws;
@@ -91,6 +104,12 @@ $assets-folder-path: '../../../assets';
   }
 }
 
-.woocommerce-Price-amount {
-  @include apply-font(meta);
+
+
+// WooCommerce Block Grid
+// Examples: archive, related products (?)
+.wc-block-grid {
+  .woocommerce-Price-amount {
+    @include apply-font(meta); // apply-font(input) might work too
+  }
 }

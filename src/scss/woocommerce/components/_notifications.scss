@@ -133,11 +133,11 @@
 
   width: 100%;
 
-  padding: 1em;
+  padding: 0.8em 1em; // height: 54px
 
   &,
   * {
-    line-height: 1;
+    // line-height: 1;
   }
 }
 
@@ -151,7 +151,7 @@
 
   background-color: currentColor;
 
-  align-self: start;
+  align-self: center;
 
   @include below(lap) {
     display: none;
