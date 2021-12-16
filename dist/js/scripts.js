@@ -1545,7 +1545,7 @@ function () {
       }
 
       if (hasClass(firstBlock, 'supernova') && parseInt(attributes.imagePadding, 10) === 0 && attributes.cardLayout === 'stacked') {
-        return firstBlock.querySelector('.supernova-item__inner-container');
+        return firstBlock.querySelector('.supernova-item');
       }
 
       var novablocksBlock = firstBlock.querySelector('.novablocks-block');
@@ -2611,9 +2611,10 @@ function () {
 
         if ($firstBlock.is('.supernova')) {
           var attributes = $firstBlock.data();
+          var $header = $firstBlock.find('.nb-collection__header');
           var $targets = $firstBlock;
 
-          if (attributes.imagePadding === 0 && attributes.cardLayout === 'stacked') {
+          if (!$header.length && attributes.imagePadding === 0 && attributes.cardLayout === 'stacked') {
             $targets = $firstBlock.find('.supernova-item__inner-container');
 
             if (attributes.layoutStyle !== 'carousel') {

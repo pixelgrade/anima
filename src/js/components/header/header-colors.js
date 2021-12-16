@@ -41,8 +41,6 @@ class HeaderColors {
 			return null;
 		}
 
-
-
 		const attributes = firstBlock.dataset;
 
 		if ( ! hasClass( firstBlock, 'alignfull' ) ) {
@@ -52,7 +50,7 @@ class HeaderColors {
 		if ( hasClass( firstBlock, 'supernova' ) &&
 		     parseInt( attributes.imagePadding, 10 ) === 0 &&
 		     attributes.cardLayout === 'stacked' ) {
-			return firstBlock.querySelector( '.supernova-item__inner-container' );
+			return firstBlock.querySelector( '.supernova-item' );
 		}
 
 		const novablocksBlock = firstBlock.querySelector( '.novablocks-block' );

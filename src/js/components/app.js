@@ -215,9 +215,11 @@ export default class App {
 
 			if ( $firstBlock.is( '.supernova' ) ) {
 				const attributes = $firstBlock.data();
+				const $header = $firstBlock.find( '.nb-collection__header' );
+
 				let $targets = $firstBlock;
 
-				if ( attributes.imagePadding === 0 && attributes.cardLayout === 'stacked' ) {
+				if ( ! $header.length && attributes.imagePadding === 0 && attributes.cardLayout === 'stacked' ) {
 					$targets = $firstBlock.find( '.supernova-item__inner-container' );
 
 					if ( attributes.layoutStyle !== 'carousel' ) {
