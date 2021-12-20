@@ -1,7 +1,65 @@
 /* Preformatted */
+pre,
+code {
+    font-family: Menlo ,Consolas ,Monaco ,"Andale Mono" ,"Ubuntu Mono", monospace;
+}
+
+// Code blocks
 pre {
+    padding: 1em !important;
+    @include apply-color-opacity(accent, 0.08);
+
     white-space: pre;
     white-space: pre-wrap;
     word-break: break-all;
     word-wrap: break-word;
+
+    &:after {
+        border-radius: 0.4em;
+    }
+
+    code {
+        color: inherit;
+
+        &:after { display: none }
+    }
+}
+
+// Inline code
+code {
+    padding: 0.2em 0.25em;
+    margin: -0.2em 0;
+
+    font-size: 87.5%;
+    word-break: break-word;
+
+    @include apply-color-opacity(accent, 0.13);
+
+}
+
+// Keyboard Input
+kbd {
+    display: inline-block;
+    padding: 0.15em 0.25em;
+    margin: -0.15em 0;
+
+    font-size: 87.5%;
+    font-weight: bold;
+    line-height: 1;
+
+    color: var(--sm-current-bg-color);
+    background: var(--sm-current-fg2-color);
+    border-radius: 0.2em;
+
+    kbd {
+        padding: 0;
+        margin: 0;
+        font-size: 100%;
+    }
+
+    // Editor
+    &[data-rich-text-format-boundary] {
+        background-color: var(--sm-current-fg2-color);
+    }
+
 }

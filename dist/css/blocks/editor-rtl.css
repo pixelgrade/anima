@@ -132,6 +132,25 @@ nav.wp-block-navigation a:not(:hover) {
   --current-text-transform: var(--theme-heading-1-text-transform);
   --current-color: var(--theme-heading-1-color); }
 
+/* Editor: Blank Separator style */
+.wp-block-separator.is-style-blank {
+  min-height: 0.2em; }
+  .wp-block-separator.is-style-blank:before {
+    content: "";
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    top: calc(var(--nb-block-top-spacing) * var(--nb-current-spacing) * -1);
+    bottom: calc(var(--nb-block-bottom-spacing) * var(--nb-current-spacing) * -1);
+    opacity: 0;
+    transition: opacity 0.2s ease 0.3s;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAEdJREFUKFNj/M/w/z8jAyMjAxpAFwcrQBfEphluEiHFKFbiU0zQbTCnYyjE5maQGFbPYFOM4RlkdyKz8XoG2WScwYMc/iCTAaoeOQhvXNAbAAAAAElFTkSuQmCC); }
+  .wp-block-separator.is-style-blank:is(:hover, :focus, .is-selected):before {
+    opacity: 1;
+    cursor: pointer; }
+
 .wp-block-search__button {
   display: inline-block;
   text-decoration: none;
