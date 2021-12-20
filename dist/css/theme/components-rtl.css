@@ -527,3 +527,6 @@
 
 .wp-block-separator.is-style-blank .c-separator {
   display: none; }
+
+.wp-block-separator.is-style-blank + *:is(:not(.something)) {
+  --nb-block-top-spacing: 0 !important; }
