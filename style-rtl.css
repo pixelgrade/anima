@@ -1067,11 +1067,67 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
     text-decoration-color: transparent; }
 
 /* Preformatted */
+pre,
+code {
+  font-family: Menlo ,Consolas ,Monaco ,"Andale Mono" ,"Ubuntu Mono", monospace; }
+
 pre {
+  padding: 1em !important;
+  position: relative;
   white-space: pre;
   white-space: pre-wrap;
   word-break: break-all;
   word-wrap: break-word; }
+  pre:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: var(--sm-current-accent-color);
+    opacity: 0.08;
+    z-index: -1; }
+  pre:after {
+    border-radius: 0.4em; }
+  pre code {
+    color: inherit; }
+    pre code:after {
+      display: none; }
+
+code {
+  padding: 0.2em 0.25em;
+  margin: -0.2em 0;
+  font-size: 87.5%;
+  word-break: break-word;
+  position: relative; }
+  code:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: var(--sm-current-accent-color);
+    opacity: 0.13;
+    z-index: -1; }
+
+kbd {
+  display: inline-block;
+  padding: 0.15em 0.25em;
+  margin: -0.15em 0;
+  font-size: 87.5%;
+  font-weight: bold;
+  line-height: 1;
+  color: var(--sm-current-bg-color);
+  background: var(--sm-current-fg2-color);
+  border-radius: 0.2em; }
+  kbd kbd {
+    padding: 0;
+    margin: 0;
+    font-size: 100%; }
+  kbd[data-rich-text-format-boundary] {
+    background-color: var(--sm-current-fg2-color); }
 
 /*------------------------------------*\
   #COMPONENT - Drop Cap

@@ -931,11 +931,64 @@
       width: 100%;
       max-width: 100%;
       margin: 0; }
+    .editor-styles-wrapper[class] pre,
+    .editor-styles-wrapper[class] code {
+      font-family: Menlo ,Consolas ,Monaco ,"Andale Mono" ,"Ubuntu Mono", monospace; }
     .editor-styles-wrapper[class] pre {
+      padding: 1em !important;
+      position: relative;
       white-space: pre;
       white-space: pre-wrap;
       word-break: break-all;
       word-wrap: break-word; }
+      .editor-styles-wrapper[class] pre:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: var(--sm-current-accent-color);
+        opacity: 0.08;
+        z-index: -1; }
+      .editor-styles-wrapper[class] pre:after {
+        border-radius: 0.4em; }
+      .editor-styles-wrapper[class] pre code {
+        color: inherit; }
+        .editor-styles-wrapper[class] pre code:after {
+          display: none; }
+    .editor-styles-wrapper[class] code {
+      padding: 0.2em 0.25em;
+      margin: -0.2em 0;
+      font-size: 87.5%;
+      word-break: break-word;
+      position: relative; }
+      .editor-styles-wrapper[class] code:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: var(--sm-current-accent-color);
+        opacity: 0.13;
+        z-index: -1; }
+    .editor-styles-wrapper[class] kbd {
+      display: inline-block;
+      padding: 0.15em 0.25em;
+      margin: -0.15em 0;
+      font-size: 87.5%;
+      font-weight: bold;
+      line-height: 1;
+      color: var(--sm-current-bg-color);
+      background: var(--sm-current-fg2-color);
+      border-radius: 0.2em; }
+      .editor-styles-wrapper[class] kbd kbd {
+        padding: 0;
+        margin: 0;
+        font-size: 100%; }
+      .editor-styles-wrapper[class] kbd[data-rich-text-format-boundary] {
+        background-color: var(--sm-current-fg2-color); }
     .editor-styles-wrapper[class] .has-drop-cap:first-letter {
       font-family: var(--current-font-family);
       font-size: var(--current-font-size);
