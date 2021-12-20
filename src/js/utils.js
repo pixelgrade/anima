@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import chroma from 'chroma-js';
 
 export const debounce = (func, wait) => {
 	let timeout = null;
@@ -129,13 +130,15 @@ export const toggleLightClasses = element => {
 	}
 
 	const currentPaletteConfig = window.styleManager.colorsConfig.find( thisPalette => {
-		return thisPalette.id + '' === palette + '';
+		return `${ thisPalette.id }` === `${ palette }`;
 	} );
 
 	if ( currentPaletteConfig ) {
-		const { sourceIndex, lightColorsCount } = currentPaletteConfig;
+		const { sourceIndex } = currentPaletteConfig;
 		const offset = isShifted ? sourceIndex : siteColorVariation - 1;
-		const isLight = ( ( variation - 1 ) + offset + 12 ) % 12 + 1 <= lightColorsCount;
+		const variationIndex = parseInt( variation, 10 ) - 1;
+		const hex = currentPaletteConfig.variations ? currentPaletteConfig.variations[ variationIndex ].bg : currentPaletteConfig.colors[ variationIndex ];
+		const isLight = chroma.contrast( '#FFFFFF', hex ) < chroma.contrast( '#000000', hex );
 
 		toggleClasses( element, isLight, 'sm-light', 'sm-dark' );
 	}
