@@ -1,0 +1,17 @@
+@mixin apply-color-opacity($color, $opacity) {
+    position: relative;
+
+    &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        background: var(--sm-current-#{ $color }-color);
+        opacity: $opacity;
+
+        z-index: -1;
+    }
+}
