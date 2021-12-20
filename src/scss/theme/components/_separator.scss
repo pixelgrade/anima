@@ -81,9 +81,19 @@
     }
 
     &.is-style-blank {
-
         .c-separator {
             display: none;
         }
+
+        // The separator has no other purpose than spacing nearby elements, 
+        // placed before and after it. Those blocks should merge together 
+        // when the separator has the spacing set to zero.
+        // 
+        // Remove the top spacing of the element next to a Blank separator
+        // and use the separator option for spacing
+        & + *:is(:not(.something)) {
+            --nb-block-top-spacing: 0 !important;
+        }
+
     }
 }
