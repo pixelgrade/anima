@@ -23,9 +23,9 @@
  *
  * Examples: input fields, image captions
  */
-#html #body #page .button:not(.trix-button),
-#html #body #page button:not([class]),
-#html #body #page input[type="submit"]:not(.ot-button):not(.search-submit) {
+#html #body.woocommerce-page #page .button:not(.trix-button),
+#html #body.woocommerce-page #page button:not([class]),
+#html #body.woocommerce-page #page input[type="submit"]:not(.ot-button):not(.search-submit) {
   display: inline-block;
   text-decoration: none;
   --theme-button-text-color: var(--sm-current-bg-color);
@@ -51,28 +51,28 @@
   --current-line-height: var(--theme-button-line-height);
   --current-letter-spacing: var(--theme-button-letter-spacing);
   --current-text-transform: var(--theme-button-text-transform); }
-  #html #body #page .button:not(.trix-button):not([disabled]),
-  #html #body #page button:not([class]):not([disabled]),
-  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not([disabled]) {
+  #html #body.woocommerce-page #page .button:not(.trix-button):not([disabled]),
+  #html #body.woocommerce-page #page button:not([class]):not([disabled]),
+  #html #body.woocommerce-page #page input[type="submit"]:not(.ot-button):not(.search-submit):not([disabled]) {
     cursor: pointer; }
-    #html #body #page .button:not(.trix-button):not([disabled]):is(:hover, :focus),
-    #html #body #page button:not([class]):not([disabled]):is(:hover, :focus),
-    #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not([disabled]):is(:hover, :focus) {
+    #html #body.woocommerce-page #page .button:not(.trix-button):not([disabled]):is(:hover, :focus),
+    #html #body.woocommerce-page #page button:not([class]):not([disabled]):is(:hover, :focus),
+    #html #body.woocommerce-page #page input[type="submit"]:not(.ot-button):not(.search-submit):not([disabled]):is(:hover, :focus) {
       --current-button-background-color: var(--theme-button-hover-background-color);
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
       --current-button-transition: var(--theme-button-hover-transition); }
 
-#html #body #page .customize-partial-edit-shortcut-button {
+#html #body.woocommerce-page #page .customize-partial-edit-shortcut-button {
   padding: 3px;
   border: 0;
   border-radius: 50%; }
 
-#html #body #page .ajax_add_to_cart ~ .button {
+#html #body.woocommerce-page #page .ajax_add_to_cart ~ .button {
   display: none; }
 
-#html #body #page a.button,
-#html #body #page button.button {
+#html #body.woocommerce-page #page a.button,
+#html #body.woocommerce-page #page button.button {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
   line-height: var(--current-line-height);
@@ -80,16 +80,16 @@
   font-style: var(--current-font-style);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform); }
-  #html #body #page a.button:not(:is(.alt, .checkout)),
-  #html #body #page button.button:not(:is(.alt, .checkout)) {
+  #html #body.woocommerce-page #page a.button:not(:is(.alt, .checkout)),
+  #html #body.woocommerce-page #page button.button:not(:is(.alt, .checkout)) {
     background-color: transparent;
     transform: translateZ(0);
     will-change: transform;
     backface-visibility: hidden;
     overflow: hidden;
     --current-button-text-color: var(--theme-button-hover-text-color); }
-    #html #body #page a.button:not(:is(.alt, .checkout)):before,
-    #html #body #page button.button:not(:is(.alt, .checkout)):before {
+    #html #body.woocommerce-page #page a.button:not(:is(.alt, .checkout)):before,
+    #html #body.woocommerce-page #page button.button:not(:is(.alt, .checkout)):before {
       content: '';
       position: absolute;
       top: calc( -1 * var(--theme-button-border-width));
@@ -101,29 +101,29 @@
       -webkit-backface-visibility: hidden;
       transition: var(--current-button-transition);
       transition-property: transform; }
-    #html #body #page a.button:not(:is(.alt, .checkout)):before,
-    #html #body #page button.button:not(:is(.alt, .checkout)):before {
+    #html #body.woocommerce-page #page a.button:not(:is(.alt, .checkout)):before,
+    #html #body.woocommerce-page #page button.button:not(:is(.alt, .checkout)):before {
       transform: scale3d(0, 1, 1);
       transform-origin: right;
       background-color: var(--theme-button-background-color); }
-    #html #body #page a.button:not(:is(.alt, .checkout)):not([disabled]):is(:hover, :focus),
-    #html #body #page button.button:not(:is(.alt, .checkout)):not([disabled]):is(:hover, :focus) {
+    #html #body.woocommerce-page #page a.button:not(:is(.alt, .checkout)):not([disabled]):is(:hover, :focus),
+    #html #body.woocommerce-page #page button.button:not(:is(.alt, .checkout)):not([disabled]):is(:hover, :focus) {
       --current-button-text-color: var(--theme-button-text-color); }
-      #html #body #page a.button:not(:is(.alt, .checkout)):not([disabled]):is(:hover, :focus):before,
-      #html #body #page button.button:not(:is(.alt, .checkout)):not([disabled]):is(:hover, :focus):before {
+      #html #body.woocommerce-page #page a.button:not(:is(.alt, .checkout)):not([disabled]):is(:hover, :focus):before,
+      #html #body.woocommerce-page #page button.button:not(:is(.alt, .checkout)):not([disabled]):is(:hover, :focus):before {
         transform: scale3d(1, 1, 1); }
-    #html #body #page a.button:not(:is(.alt, .checkout)):disabled,
-    #html #body #page button.button:not(:is(.alt, .checkout)):disabled {
+    #html #body.woocommerce-page #page a.button:not(:is(.alt, .checkout)):disabled,
+    #html #body.woocommerce-page #page button.button:not(:is(.alt, .checkout)):disabled {
       opacity: 0.25; }
-  #html #body #page a.button:is(.alt, .checkout),
-  #html #body #page button.button:is(.alt, .checkout) {
+  #html #body.woocommerce-page #page a.button:is(.alt, .checkout),
+  #html #body.woocommerce-page #page button.button:is(.alt, .checkout) {
     background-color: transparent;
     transform: translateZ(0);
     will-change: transform;
     backface-visibility: hidden;
     overflow: hidden; }
-    #html #body #page a.button:is(.alt, .checkout):before,
-    #html #body #page button.button:is(.alt, .checkout):before {
+    #html #body.woocommerce-page #page a.button:is(.alt, .checkout):before,
+    #html #body.woocommerce-page #page button.button:is(.alt, .checkout):before {
       content: '';
       position: absolute;
       top: calc( -1 * var(--theme-button-border-width));
@@ -135,22 +135,22 @@
       -webkit-backface-visibility: hidden;
       transition: var(--current-button-transition);
       transition-property: transform; }
-    #html #body #page a.button:is(.alt, .checkout):before,
-    #html #body #page button.button:is(.alt, .checkout):before {
+    #html #body.woocommerce-page #page a.button:is(.alt, .checkout):before,
+    #html #body.woocommerce-page #page button.button:is(.alt, .checkout):before {
       transform: scale3d(1, 1, 1);
       transform-origin: left;
       background-color: var(--theme-button-background-color); }
-    #html #body #page a.button:is(.alt, .checkout):not([disabled]):is(:hover, :focus):before,
-    #html #body #page button.button:is(.alt, .checkout):not([disabled]):is(:hover, :focus):before {
+    #html #body.woocommerce-page #page a.button:is(.alt, .checkout):not([disabled]):is(:hover, :focus):before,
+    #html #body.woocommerce-page #page button.button:is(.alt, .checkout):not([disabled]):is(:hover, :focus):before {
       transform: scale3d(0, 1, 1); }
-  #html #body #page a.button.checkout-button,
-  #html #body #page button.button.checkout-button {
+  #html #body.woocommerce-page #page a.button.checkout-button,
+  #html #body.woocommerce-page #page button.button.checkout-button {
     --theme-button-x-padding: 2.5em;
     --theme-button-y-padding: 1em;
     padding: var(--theme-button-y-padding) var(--theme-button-x-padding); }
 
-#html #body #page input.button:not(.alt),
-#html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt) {
+#html #body.woocommerce-page #page input.button:not(.alt),
+#html #body.woocommerce-page #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt) {
   background-color: transparent;
   transform: translateZ(0);
   will-change: transform;
@@ -162,29 +162,29 @@
   --current-button-text-color: var(--theme-button-hover-text-color);
   --current-button-text-color: var(--theme-button-hover-text-color);
   background-image: linear-gradient(to right, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
-  #html #body #page input.button:not(.alt):not([disabled]):is(:hover, :focus),
-  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):is(:hover, :focus) {
+  #html #body.woocommerce-page #page input.button:not(.alt):not([disabled]):is(:hover, :focus),
+  #html #body.woocommerce-page #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):is(:hover, :focus) {
     background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
-  #html #body #page input.button:not(.alt):before,
-  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):before {
+  #html #body.woocommerce-page #page input.button:not(.alt):before,
+  #html #body.woocommerce-page #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):before {
     transform: scale3d(0, 1, 1);
     transform-origin: right;
     background-color: var(--theme-button-background-color); }
-  #html #body #page input.button:not(.alt):not([disabled]):is(:hover, :focus),
-  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):is(:hover, :focus) {
+  #html #body.woocommerce-page #page input.button:not(.alt):not([disabled]):is(:hover, :focus),
+  #html #body.woocommerce-page #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):is(:hover, :focus) {
     --current-button-text-color: var(--theme-button-text-color); }
-    #html #body #page input.button:not(.alt):not([disabled]):is(:hover, :focus):before,
-    #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):is(:hover, :focus):before {
+    #html #body.woocommerce-page #page input.button:not(.alt):not([disabled]):is(:hover, :focus):before,
+    #html #body.woocommerce-page #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):is(:hover, :focus):before {
       transform: scale3d(1, 1, 1); }
-  #html #body #page input.button:not(.alt):disabled,
-  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):disabled {
+  #html #body.woocommerce-page #page input.button:not(.alt):disabled,
+  #html #body.woocommerce-page #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):disabled {
     opacity: 0.25; }
-  #html #body #page input.button:not(.alt):not([disabled]):is(:hover, :focus),
-  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):is(:hover, :focus) {
+  #html #body.woocommerce-page #page input.button:not(.alt):not([disabled]):is(:hover, :focus),
+  #html #body.woocommerce-page #page input[type="submit"]:not(.ot-button):not(.search-submit):not(.alt):not([disabled]):is(:hover, :focus) {
     --current-button-text-color: var(--theme-button-text-color); }
 
-#html #body #page input.button.alt,
-#html #body #page input[type="submit"]:not(.ot-button):not(.search-submit).alt {
+#html #body.woocommerce-page #page input.button.alt,
+#html #body.woocommerce-page #page input[type="submit"]:not(.ot-button):not(.search-submit).alt {
   background-color: transparent;
   transform: translateZ(0);
   will-change: transform;
@@ -194,24 +194,24 @@
   background-size: calc( 200% + 4 * var(--theme-button-border-width)) calc( 100% + 4 * var(--theme-button-border-width));
   background-position: calc(100% - ( 100% + var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width));
   background-image: linear-gradient(to left, var(--theme-button-hover-background-color) 50%, var(--theme-button-background-color) 50%); }
-  #html #body #page input.button.alt:not([disabled]):is(:hover, :focus),
-  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:not([disabled]):is(:hover, :focus) {
+  #html #body.woocommerce-page #page input.button.alt:not([disabled]):is(:hover, :focus),
+  #html #body.woocommerce-page #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:not([disabled]):is(:hover, :focus) {
     background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
-  #html #body #page input.button.alt:before,
-  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:before {
+  #html #body.woocommerce-page #page input.button.alt:before,
+  #html #body.woocommerce-page #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:before {
     transform: scale3d(1, 1, 1);
     transform-origin: left;
     background-color: var(--theme-button-background-color); }
-  #html #body #page input.button.alt:not([disabled]):is(:hover, :focus):before,
-  #html #body #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:not([disabled]):is(:hover, :focus):before {
+  #html #body.woocommerce-page #page input.button.alt:not([disabled]):is(:hover, :focus):before,
+  #html #body.woocommerce-page #page input[type="submit"]:not(.ot-button):not(.search-submit).alt:not([disabled]):is(:hover, :focus):before {
     transform: scale3d(0, 1, 1); }
 
 @media only screen and (min-width: 768px) {
-  #html #body #page button[name='update_cart'] {
+  #html #body.woocommerce-page #page button[name='update_cart'] {
     float: left; } }
 
-#html #body #page .checkout-button,
-#html #body #page [id="place_order"] {
+#html #body.woocommerce-page #page .checkout-button,
+#html #body.woocommerce-page #page [id="place_order"] {
   --theme-button-x-padding: 2.5em;
   --theme-button-y-padding: 1em;
   padding: var(--theme-button-y-padding) var(--theme-button-x-padding);
@@ -221,7 +221,7 @@
   --theme-button-hover-text-color: var(--sm-current-accent-color);
   --theme-button-hover-border-color: var(--sm-current-accent-color); }
 
-#html #body #page textarea {
+#html #body.woocommerce-page #page textarea {
   width: 100%;
   height: auto;
   max-width: 100%;
@@ -245,26 +245,26 @@
   -webkit-appearance: none;
   min-height: 7.5em;
   resize: vertical; }
-  #html #body #page textarea:hover {
+  #html #body.woocommerce-page #page textarea:hover {
     --theme-input-box-shadow: var(--theme-input-hover-box-shadow); }
-  #html #body #page textarea:focus, #html #body #page textarea:active {
+  #html #body.woocommerce-page #page textarea:focus, #html #body.woocommerce-page #page textarea:active {
     --theme-input-border-color: var(--theme-input-focus-border-color);
     --theme-input-box-shadow: var(--theme-input-focus-box-shadow);
     outline: 0; }
-  #html #body #page textarea[disabled] {
+  #html #body.woocommerce-page #page textarea[disabled] {
     opacity: 0.7;
     cursor: not-allowed; }
-  [class*="invalid"] #html #body #page textarea {
+  [class*="invalid"] #html #body.woocommerce-page #page textarea {
     --theme-input-box-shadow: var(--theme-input-error-box-shadow);
     --theme-input-color: var(--theme-input-error-color);
     --theme-input-placeholder-color: var(--theme-input-error-color);
     --theme-input-placeholder-opacity: 0; }
-    [class*="invalid"] #html #body #page textarea:hover {
+    [class*="invalid"] #html #body.woocommerce-page #page textarea:hover {
       --theme-input-box-shadow: var(--theme-input-error-box-shadow); }
-    [class*="invalid"] #html #body #page textarea:focus, [class*="invalid"] #html #body #page textarea:active {
+    [class*="invalid"] #html #body.woocommerce-page #page textarea:focus, [class*="invalid"] #html #body.woocommerce-page #page textarea:active {
       --theme-input-box-shadow: var(--theme-input-focus-error-box-shadow); }
 
-#html #body #page #place_order {
+#html #body.woocommerce-page #page #place_order {
   --theme-button-background-color: var(--sm-current-accent-color);
   --theme-button-border-color: var(--sm-current-accent-color);
   --theme-button-hover-text-color: var(--sm-current-accent-color);
@@ -273,22 +273,22 @@
   --theme-button-y-padding: 1em;
   padding: var(--theme-button-y-padding) var(--theme-button-x-padding); }
 
-#html #body #page .add_to_cart_button,
-#html #body #page .single_add_to_cart_button {
+#html #body.woocommerce-page #page .add_to_cart_button,
+#html #body.woocommerce-page #page .single_add_to_cart_button {
   --theme-button-background-color: var(--sm-current-accent-color);
   --theme-button-border-color: var(--sm-current-accent-color);
   --theme-button-hover-text-color: var(--sm-current-accent-color);
   --theme-button-hover-border-color: var(--sm-current-accent-color);
   width: 100%; }
 
-#html #body #page .woocommerce-notices-wrapper .button[class][class][class][class][class] {
+#html #body.woocommerce-page #page .woocommerce-notices-wrapper .button[class][class][class][class][class] {
   background-color: transparent;
   transform: translateZ(0);
   will-change: transform;
   backface-visibility: hidden;
   overflow: hidden;
   --current-button-text-color: var(--theme-button-text-color); }
-  #html #body #page .woocommerce-notices-wrapper .button[class][class][class][class][class]:before {
+  #html #body.woocommerce-page #page .woocommerce-notices-wrapper .button[class][class][class][class][class]:before {
     content: '';
     position: absolute;
     top: calc( -1 * var(--theme-button-border-width));
@@ -300,13 +300,13 @@
     -webkit-backface-visibility: hidden;
     transition: var(--current-button-transition);
     transition-property: transform; }
-  #html #body #page .woocommerce-notices-wrapper .button[class][class][class][class][class]:before {
+  #html #body.woocommerce-page #page .woocommerce-notices-wrapper .button[class][class][class][class][class]:before {
     transform: scale3d(1, 1, 1);
     transform-origin: left;
     background-color: var(--theme-button-background-color); }
-  #html #body #page .woocommerce-notices-wrapper .button[class][class][class][class][class]:not([disabled]):is(:hover, :focus):before {
+  #html #body.woocommerce-page #page .woocommerce-notices-wrapper .button[class][class][class][class][class]:not([disabled]):is(:hover, :focus):before {
     transform: scale3d(0, 1, 1); }
-  #html #body #page .woocommerce-notices-wrapper .button[class][class][class][class][class]:hover {
+  #html #body.woocommerce-page #page .woocommerce-notices-wrapper .button[class][class][class][class][class]:hover {
     --current-button-text-color: var(--theme-button-hover-text-color); }
 
 .quantity .qty_button {

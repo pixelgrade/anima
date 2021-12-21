@@ -630,7 +630,7 @@ var utils_toggleLightClasses = function toggleLightClasses(element) {
     var sourceIndex = currentPaletteConfig.sourceIndex;
     var offset = isShifted ? sourceIndex : siteColorVariation - 1;
     var variationIndex = parseInt(variation, 10) - 1;
-    var hex = currentPaletteConfig.variations ? currentPaletteConfig.variations[variationIndex].bg : currentPaletteConfig.colors[variationIndex];
+    var hex = currentPaletteConfig.variations ? currentPaletteConfig.variations[variationIndex].bg : currentPaletteConfig.colors[variationIndex].value;
     var isLight = chroma_default.a.contrast('#FFFFFF', hex) < chroma_default.a.contrast('#000000', hex);
     toggleClasses(element, isLight, 'sm-light', 'sm-dark');
   }

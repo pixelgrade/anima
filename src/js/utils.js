@@ -137,7 +137,7 @@ export const toggleLightClasses = element => {
 		const { sourceIndex } = currentPaletteConfig;
 		const offset = isShifted ? sourceIndex : siteColorVariation - 1;
 		const variationIndex = parseInt( variation, 10 ) - 1;
-		const hex = currentPaletteConfig.variations ? currentPaletteConfig.variations[ variationIndex ].bg : currentPaletteConfig.colors[ variationIndex ];
+		const hex = currentPaletteConfig.variations ? currentPaletteConfig.variations[ variationIndex ].bg : currentPaletteConfig.colors[ variationIndex ].value;
 		const isLight = chroma.contrast( '#FFFFFF', hex ) < chroma.contrast( '#000000', hex );
 
 		toggleClasses( element, isLight, 'sm-light', 'sm-dark' );
