@@ -125,6 +125,15 @@ export default class App {
 
 	initializeHeader() {
 		const header = document.querySelector( '.novablocks-header' );
+		const stickyHeader = document.querySelector( '.novablocks-header--secondary' );
+
+		if ( stickyHeader ) {
+			const resizeObserver = new ResizeObserver( entries => {
+				document.documentElement.style.setProperty( '--theme-sticky-header-height', `${ stickyHeader.offsetHeight }px` );
+			} );
+
+			resizeObserver.observe( stickyHeader );
+		}
 
 		if ( !! header ) {
 			this.header = new Header( header, {

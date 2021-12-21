@@ -2528,6 +2528,14 @@ function () {
       var _this = this;
 
       var header = document.querySelector('.novablocks-header');
+      var stickyHeader = document.querySelector('.novablocks-header--secondary');
+
+      if (stickyHeader) {
+        var resizeObserver = new ResizeObserver(function (entries) {
+          document.documentElement.style.setProperty('--theme-sticky-header-height', "".concat(stickyHeader.offsetHeight, "px"));
+        });
+        resizeObserver.observe(stickyHeader);
+      }
 
       if (!!header) {
         this.header = new components_header(header, {
