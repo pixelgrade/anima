@@ -1,7 +1,7 @@
 html {
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
-    scroll-padding-top: var(--theme-sticky-header-height);
+    scroll-padding-top: var(--theme-sticky-header-height, 0px);
     --theme-body-final-font-size: var(--current-font-size);
     @include apply-font(body);
 }

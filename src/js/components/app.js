@@ -125,7 +125,7 @@ export default class App {
 
 	initializeHeader() {
 		const header = document.querySelector( '.novablocks-header' );
-		const stickyHeader = document.querySelector( '.novablocks-header--secondary' );
+		const stickyHeader = document.querySelector( '.novablocks-header--sticky' );
 
 		if ( stickyHeader ) {
 			const resizeObserver = new ResizeObserver( entries => {
