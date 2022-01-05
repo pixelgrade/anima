@@ -35,9 +35,22 @@ h1, h2, h3, h4, h5, h6 {
         color: var(--theme-links-color);
         text-decoration-color: transparent;
 
+        // Imported from TEXT highlighting effect via _base.scss
+        --highlight-text-color-start: var(--sm-current-accent-color);
+        --highlight-text-color-end: var(--sm-current-accent2-color);
+
         &:hover,
         &:focus {
             text-decoration-color: transparent;
+
+            color: var(--sm-current-accent-color);
+            background-color: var(--sm-current-accent-color) !important;
+            background-image: linear-gradient(90deg, var( --highlight-text-color-start), var( --highlight-text-color-end));
+
+            filter: brightness(100%) saturate(150%) contrast(1);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: rgba(0,0,0,0);
         }
     }
 }
