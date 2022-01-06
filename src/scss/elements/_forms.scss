@@ -155,6 +155,12 @@ label {
     }   
 }
 
+.label-hidden {
+    .nf-field-label {
+        order: 999; // move the hidden fields at the end of the list to remove the top spacing created by it
+    }
+}
+
 /**
  * We rely on the plugin default inline validation for fields and
  * we could hide the required fields notices as they could divert
@@ -213,5 +219,12 @@ label {
 .field-wrap { 
     textarea {
         display: block;
+    }
+}
+
+.nf-row {
+    // Set the last elements align with the bottom of the container
+    &:last-child .nf-field-container {
+        margin-bottom: 0;
     }
 }
