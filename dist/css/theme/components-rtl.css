@@ -65,6 +65,9 @@
         --current-button-border-color: var(--theme-button-hover-border-color);
         --current-button-text-color: var(--theme-button-hover-text-color);
         --current-button-transition: var(--theme-button-hover-transition); }
+    .wp-block-button:not(.is-style-text) .wp-block-button__link:disabled {
+      cursor: not-allowed;
+      opacity: 0.5; }
   .wp-block-button:not([class*="is-style"]) .wp-block-button__link:not(.has-background) {
     background-color: transparent;
     transform: translateZ(0);
@@ -231,6 +234,9 @@
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
       --current-button-transition: var(--theme-button-hover-transition); }
+  .wp-block-button__link:disabled {
+    cursor: not-allowed;
+    opacity: 0.5; }
   .wp-block-button__link[class][class][class].has-sm_color_primary-background-color {
     background-color: transparent !important;
     --theme-button-background-color: var(--sm-color-primary);

@@ -230,6 +230,7 @@
   --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
   --theme-button-hover-transition: var(--theme-button-transition); }
 
+/* Input Custom Properties */
 :root {
   --theme-input-padding: .55em;
   --theme-input-border-width: var(--theme-button-border-width);
@@ -237,22 +238,32 @@
   --theme-checkbox-width: 1.38rem;
   --theme-checkbox-height: 1.38rem;
   --opacity-color: 255, 255, 255;
+<<<<<<< HEAD
   --theme-input-focus-color: var(--sm-current-accent-color);
+=======
+  --opacity-level: 0.7;
+  --theme-input-focus-color: var(--sm-current-accent-color); }
+  @media only screen and (min-width: 768px) {
+    :root {
+      --theme-input-padding: var(--theme-input-padding-above-tablet); } }
+
+* {
+>>>>>>> febf0454 (Compile)
   --theme-input-border-radius: var(--theme-button-border-radius);
   --theme-input-border-width: 1px;
   --theme-input-color: var(--sm-current-fg1-color);
   --theme-input-error-color: var(--theme-error-color);
   --theme-input-background-color: var(--sm-current-bg-color);
-  --theme-input-overlay-shadow: inset 0px 0px 0px calc(var(--theme-input-border-width) * 2) rgba(var(--opacity-color), 0.70);
-  --theme-input-colored-shadow: inset 0px 0px 0px var(--theme-input-border-width) var(--sm-current-fg2-color);
+  --theme-input-overlay-shadow: inset 0px 0px 0px calc(var(--theme-input-border-width) * 2) rgba(var(--opacity-color), var(--opacity-level));
+  --theme-input-colored-shadow: inset 0px 0px 0px var(--theme-input-border-width)           var(--sm-current-fg2-color);
   --theme-input-box-shadow:   
       var(--theme-input-overlay-shadow),
       var(--theme-input-colored-shadow);
   --theme-input-border-color:  var(--sm-current-bg-color);
   --theme-input-error-border-color: var(--theme-input-error-color);
-  --theme-input-focus-overlay-shadow: inset 0px 0px 0px calc(var(--theme-input-border-width) + 1px) rgba(var(--opacity-color), 0.40);
-  --theme-input-focus-colored-shadow:  inset 0px 0px 0px calc(var(--theme-input-border-width) + 1px) var(--theme-input-focus-color);
-  --theme-input-focus-shadow: 0 0 9px -3px var(--theme-input-focus-color);
+  --theme-input-focus-overlay-shadow:   inset 0px 0px 0px calc(var(--theme-input-border-width) + 1px) rgba(var(--opacity-color), 0.40);
+  --theme-input-focus-colored-shadow:   inset 0px 0px 0px calc(var(--theme-input-border-width) + 1px) var(--theme-input-focus-color);
+  --theme-input-focus-shadow:                 0 0 9px -3px                                            var(--theme-input-focus-color);
   --theme-input-focus-box-shadow: 
       var(--theme-input-focus-overlay-shadow),
       var(--theme-input-focus-colored-shadow),
@@ -270,7 +281,7 @@
   var(--theme-input-error-focus-colored-shadow),
   var(--theme-input-error-focus-shadow);
   --theme-input-placeholder-color: var(--sm-current-fg1-color);
-  --theme-input-placeholder-opacity: .5;
+  --theme-input-placeholder-opacity: 0.50;
   --theme-input-label-color: var(--sm-current-fg1-color);
   --theme-input-legend-color: var(--sm-current-fg1-color);
   --theme-input-vertical-spacing: var(--theme-spacing-smallest);
