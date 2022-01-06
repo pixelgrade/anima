@@ -8,53 +8,6 @@
  *
  * Examples: sales badges inherit font rules from WooCommerce plugin
  */
-.u-collection-title-sideways .nb-collection__title, [class][class] h1.has-largest-font-size, [class][class] h1.has-larger-font-size,
-[class][class] h2.has-largest-font-size, [class][class] h2.has-larger-font-size,
-[class][class] h3.has-largest-font-size, [class][class] h1.has-smaller-font-size,
-[class][class] h3.has-larger-font-size, [class][class] h1.has-smallest-font-size,
-[class][class] h2.has-smaller-font-size,
-[class][class] h4.has-larger-font-size,
-[class][class] h5.has-largest-font-size, [class][class] h2.has-smallest-font-size,
-[class][class] h3.has-smaller-font-size,
-[class][class] h5.has-larger-font-size,
-[class][class] h6.has-largest-font-size, [class][class] h3.has-smallest-font-size,
-[class][class] h4.has-smaller-font-size,
-[class][class] h6.has-larger-font-size, [class][class] h4.has-smallest-font-size,
-[class][class] h5.has-smaller-font-size,
-[class][class] h5.has-smallest-font-size,
-[class][class] h6.has-smaller-font-size,
-[class][class] h6.has-smallest-font-size {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  font-style: var(--current-font-style);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform); }
-
-.u-collection-title-sideways .nb-collection__title, [class][class] h1.has-largest-font-size, [class][class] h1.has-larger-font-size,
-[class][class] h2.has-largest-font-size, [class][class] h2.has-larger-font-size,
-[class][class] h3.has-largest-font-size, [class][class] h1.has-smaller-font-size,
-[class][class] h3.has-larger-font-size, [class][class] h1.has-smallest-font-size,
-[class][class] h2.has-smaller-font-size,
-[class][class] h4.has-larger-font-size,
-[class][class] h5.has-largest-font-size, [class][class] h2.has-smallest-font-size,
-[class][class] h3.has-smaller-font-size,
-[class][class] h5.has-larger-font-size,
-[class][class] h6.has-largest-font-size, [class][class] h3.has-smallest-font-size,
-[class][class] h4.has-smaller-font-size,
-[class][class] h6.has-larger-font-size, [class][class] h4.has-smallest-font-size,
-[class][class] h5.has-smaller-font-size,
-[class][class] h5.has-smallest-font-size,
-[class][class] h6.has-smaller-font-size,
-[class][class] h6.has-smallest-font-size {
-  --y1: var(--font-size);
-  --y0-new: calc( var(--y1) - ( var(--y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) );
-  --a: calc( ( var(--y1) - var(--y0-new) ) / ( var(--x1) - var(--x0) ) );
-  --b: calc( var(--y0-new) - var(--a) * var(--x0) );
-  --y2: calc( var(--a) * 100vw + var(--b) * 1px );
-  --current-font-size: calc( var(--font-size-modifier) * var(--font-size-base) * ( var(--y2) + var(--theme-addon) ) ); }
-
 /**
  * Use this mixin on containers or elements, when you need 
  * to overwrite the universal selector (*) specificity

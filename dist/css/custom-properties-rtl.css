@@ -145,14 +145,22 @@
   --theme-accent-text-transform: none;
   --font-size-base: 1;
   --font-size-modifier: 1;
-  --current-font-feature: none;
-  --x0: var(--theme-font-size-minimum-value-breakpoint);
-  --y0: var(--theme-font-size-minimum-value);
-  --x1: var(--theme-font-size-breakpoint); }
+  --current-font-feature: none; }
   @media only screen and (min-width: 1440px) {
     :root {
       --theme-font-size-slope-adjust: 0.4;
       --theme-addon-multiplier: 1; } }
+
+* {
+  --x0: var(--theme-font-size-minimum-value-breakpoint);
+  --y0: var(--theme-font-size-minimum-value);
+  --x1: var(--theme-font-size-breakpoint);
+  --y1: var(--font-size);
+  --y0-new: calc( var(--y1) - ( var(--y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) );
+  --a: calc( ( var(--y1) - var(--y0-new) ) / ( var(--x1) - var(--x0) ) );
+  --b: calc( var(--y0-new) - var(--a) * var(--x0) );
+  --y2: calc( var(--a) * 100vw + var(--b) * 1px );
+  --current-font-size: calc( var(--font-size-modifier) * var(--font-size-base) * ( var(--y2) + var(--theme-addon) ) ); }
 
 :root {
   --theme-content-spacing: var(--theme-spacing-fluid-normal);
@@ -239,7 +247,12 @@
   --theme-checkbox-height: 1.38rem;
   --opacity-color: 255, 255, 255;
   --opacity-level: 0.7;
-  --theme-input-focus-color: var(--sm-current-accent-color);
+  --theme-input-focus-color: var(--sm-current-accent-color); }
+  @media only screen and (min-width: 768px) {
+    :root {
+      --theme-input-padding: var(--theme-input-padding-above-tablet); } }
+
+* {
   --theme-input-border-radius: var(--theme-button-border-radius);
   --theme-input-border-width: 1px;
   --theme-input-error-color: var(--theme-error-color);
@@ -275,6 +288,3 @@
   --theme-input-legend-color: var(--sm-current-fg1-color);
   --theme-input-vertical-spacing: var(--theme-spacing-smallest);
   --theme-input-horizontal-spacing: var(--theme-spacing-smallest); }
-  @media only screen and (min-width: 768px) {
-    :root {
-      --theme-input-padding: var(--theme-input-padding-above-tablet); } }

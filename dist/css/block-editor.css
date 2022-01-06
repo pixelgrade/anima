@@ -8,9 +8,7 @@
  *
  * Examples: sales badges inherit font rules from WooCommerce plugin
  */
-.editor-styles-wrapper .site-title, .editor-styles-wrapper input:not([type]), .editor-styles-wrapper input[type="text"], .editor-styles-wrapper input[type="tel"], .editor-styles-wrapper input[type="number"], .editor-styles-wrapper input[type="date"], .editor-styles-wrapper input[type="email"], .editor-styles-wrapper input[type="password"], .editor-styles-wrapper input[type="url"], .editor-styles-wrapper input[type="search"], .editor-styles-wrapper input[type="submit"],
-.editor-styles-wrapper input[type="button"], .editor-styles-wrapper button[type="submit"], .editor-styles-wrapper textarea, .editor-styles-wrapper select, .editor-styles-wrapper label, .editor-styles-wrapper[class] h1, .editor-styles-wrapper[class] .h1, .editor-styles-wrapper[class] h2, .editor-styles-wrapper[class] .h2, .editor-styles-wrapper[class] h3, .editor-styles-wrapper[class] .h3, .editor-styles-wrapper[class] h4, .editor-styles-wrapper[class] .h4, .editor-styles-wrapper[class] h5, .editor-styles-wrapper[class] .h5, .editor-styles-wrapper[class] h6, .editor-styles-wrapper[class] .h6, .editor-styles-wrapper[class] strong em,
-.editor-styles-wrapper[class] em strong, .editor-styles-wrapper[class] .has-drop-cap:first-letter, .editor-styles-wrapper[class] .is-style-lead, .editor-styles-wrapper[class] .is-style-meta, .editor-styles-wrapper[class] .is-style-caption, .editor-styles-wrapper[class], .editor-post-title .editor-post-title__input {
+.editor-styles-wrapper[class] .is-style-lead {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
   line-height: var(--current-line-height);
@@ -18,16 +16,6 @@
   font-style: var(--current-font-style);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform); }
-
-.editor-styles-wrapper .site-title, .editor-styles-wrapper input:not([type]), .editor-styles-wrapper input[type="text"], .editor-styles-wrapper input[type="tel"], .editor-styles-wrapper input[type="number"], .editor-styles-wrapper input[type="date"], .editor-styles-wrapper input[type="email"], .editor-styles-wrapper input[type="password"], .editor-styles-wrapper input[type="url"], .editor-styles-wrapper input[type="search"], .editor-styles-wrapper input[type="submit"],
-.editor-styles-wrapper input[type="button"], .editor-styles-wrapper button[type="submit"], .editor-styles-wrapper textarea, .editor-styles-wrapper select, .editor-styles-wrapper label, .editor-styles-wrapper[class] h1, .editor-styles-wrapper[class] .h1, .editor-styles-wrapper[class] h2, .editor-styles-wrapper[class] .h2, .editor-styles-wrapper[class] h3, .editor-styles-wrapper[class] .h3, .editor-styles-wrapper[class] h4, .editor-styles-wrapper[class] .h4, .editor-styles-wrapper[class] h5, .editor-styles-wrapper[class] .h5, .editor-styles-wrapper[class] h6, .editor-styles-wrapper[class] .h6, .editor-styles-wrapper[class] strong em,
-.editor-styles-wrapper[class] em strong, .editor-styles-wrapper[class] .has-drop-cap:first-letter, .editor-styles-wrapper[class] .is-style-lead, .editor-styles-wrapper[class] .is-style-meta, .editor-styles-wrapper[class] .is-style-caption, .editor-styles-wrapper[class], .editor-post-title .editor-post-title__input {
-  --y1: var(--font-size);
-  --y0-new: calc( var(--y1) - ( var(--y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) );
-  --a: calc( ( var(--y1) - var(--y0-new) ) / ( var(--x1) - var(--x0) ) );
-  --b: calc( var(--y0-new) - var(--a) * var(--x0) );
-  --y2: calc( var(--a) * 100vw + var(--b) * 1px );
-  --current-font-size: calc( var(--font-size-modifier) * var(--font-size-base) * ( var(--y2) + var(--theme-addon) ) ); }
 
 /**
  * Use this mixin on containers or elements, when you need 
@@ -45,9 +33,7 @@
  *
  * Examples: sales badges inherit font rules from WooCommerce plugin
  */
-.editor-styles-wrapper .site-title, .editor-styles-wrapper input:not([type]), .editor-styles-wrapper input[type="text"], .editor-styles-wrapper input[type="tel"], .editor-styles-wrapper input[type="number"], .editor-styles-wrapper input[type="date"], .editor-styles-wrapper input[type="email"], .editor-styles-wrapper input[type="password"], .editor-styles-wrapper input[type="url"], .editor-styles-wrapper input[type="search"], .editor-styles-wrapper input[type="submit"],
-.editor-styles-wrapper input[type="button"], .editor-styles-wrapper button[type="submit"], .editor-styles-wrapper textarea, .editor-styles-wrapper select, .editor-styles-wrapper label, .editor-styles-wrapper[class] h1, .editor-styles-wrapper[class] .h1, .editor-styles-wrapper[class] h2, .editor-styles-wrapper[class] .h2, .editor-styles-wrapper[class] h3, .editor-styles-wrapper[class] .h3, .editor-styles-wrapper[class] h4, .editor-styles-wrapper[class] .h4, .editor-styles-wrapper[class] h5, .editor-styles-wrapper[class] .h5, .editor-styles-wrapper[class] h6, .editor-styles-wrapper[class] .h6, .editor-styles-wrapper[class] strong em,
-.editor-styles-wrapper[class] em strong, .editor-styles-wrapper[class] .has-drop-cap:first-letter, .editor-styles-wrapper[class] .is-style-lead, .editor-styles-wrapper[class] .is-style-meta, .editor-styles-wrapper[class] .is-style-caption, .editor-styles-wrapper[class], .editor-post-title .editor-post-title__input {
+.editor-styles-wrapper[class] .is-style-lead {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
   line-height: var(--current-line-height);
@@ -55,16 +41,6 @@
   font-style: var(--current-font-style);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform); }
-
-.editor-styles-wrapper .site-title, .editor-styles-wrapper input:not([type]), .editor-styles-wrapper input[type="text"], .editor-styles-wrapper input[type="tel"], .editor-styles-wrapper input[type="number"], .editor-styles-wrapper input[type="date"], .editor-styles-wrapper input[type="email"], .editor-styles-wrapper input[type="password"], .editor-styles-wrapper input[type="url"], .editor-styles-wrapper input[type="search"], .editor-styles-wrapper input[type="submit"],
-.editor-styles-wrapper input[type="button"], .editor-styles-wrapper button[type="submit"], .editor-styles-wrapper textarea, .editor-styles-wrapper select, .editor-styles-wrapper label, .editor-styles-wrapper[class] h1, .editor-styles-wrapper[class] .h1, .editor-styles-wrapper[class] h2, .editor-styles-wrapper[class] .h2, .editor-styles-wrapper[class] h3, .editor-styles-wrapper[class] .h3, .editor-styles-wrapper[class] h4, .editor-styles-wrapper[class] .h4, .editor-styles-wrapper[class] h5, .editor-styles-wrapper[class] .h5, .editor-styles-wrapper[class] h6, .editor-styles-wrapper[class] .h6, .editor-styles-wrapper[class] strong em,
-.editor-styles-wrapper[class] em strong, .editor-styles-wrapper[class] .has-drop-cap:first-letter, .editor-styles-wrapper[class] .is-style-lead, .editor-styles-wrapper[class] .is-style-meta, .editor-styles-wrapper[class] .is-style-caption, .editor-styles-wrapper[class], .editor-post-title .editor-post-title__input {
-  --y1: var(--font-size);
-  --y0-new: calc( var(--y1) - ( var(--y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) );
-  --a: calc( ( var(--y1) - var(--y0-new) ) / ( var(--x1) - var(--x0) ) );
-  --b: calc( var(--y0-new) - var(--a) * var(--x0) );
-  --y2: calc( var(--a) * 100vw + var(--b) * 1px );
-  --current-font-size: calc( var(--font-size-modifier) * var(--font-size-base) * ( var(--y2) + var(--theme-addon) ) ); }
 
 /**
  * Use this mixin on containers or elements, when you need 

@@ -325,6 +325,11 @@ template {
 *, :before, :after {
   box-sizing: border-box; }
 
+* {
+  border: 0;
+  padding: 0;
+  margin: 0; }
+
 /**
  * Use this mixin to change the inherited font declaration 
  * of an element or container.
@@ -335,17 +340,7 @@ template {
  *
  * Examples: sales badges inherit font rules from WooCommerce plugin
  */
-html, input:not([type]), input[type="text"], input[type="tel"], input[type="number"], input[type="date"], input[type="email"], input[type="password"], input[type="url"], input[type="search"], input[type="submit"],
-input[type="button"], button[type="submit"], textarea, select, label, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, strong em,
-em strong, .has-drop-cap:first-letter, .is-style-lead, .is-style-meta, .is-style-caption, .c-search-overlay__suggestions, .c-search-overlay .c-search-overlay__cancel, .site-title, .entry-meta, .c-meta, .c-meta .novablocks-sharing__button-label, .c-comments-toggle__label, .comment-form label, .comment__metadata a,
-.comment-reply-title a,
-.edit-link a,
-.reply a,
-.logged-in-as a, .pagination .nav-links, .post-navigation__post-title, .post-navigation__link-label, .c-reading-bar__wrapper-title, .post-title__label, .select2-container .select2-selection--single .select2-selection__rendered, .wpforms-container[class][class][class] .wpforms-form input,
-.wpforms-container[class][class][class] .wpforms-form select,
-.wpforms-container[class][class][class] .wpforms-form textarea, .wpforms-container[class][class][class] .wpforms-field-label,
-.wpforms-container[class][class][class] .wpforms-field-sublabel,
-.wpforms-container[class][class][class] .wpforms-field-label-inline, .wpforms-container[class][class][class] .wpforms-submit[class] {
+.is-style-lead {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
   line-height: var(--current-line-height);
@@ -354,30 +349,21 @@ em strong, .has-drop-cap:first-letter, .is-style-lead, .is-style-meta, .is-style
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform); }
 
-html, input:not([type]), input[type="text"], input[type="tel"], input[type="number"], input[type="date"], input[type="email"], input[type="password"], input[type="url"], input[type="search"], input[type="submit"],
-input[type="button"], button[type="submit"], textarea, select, label, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, strong em,
-em strong, .has-drop-cap:first-letter, .is-style-lead, .is-style-meta, .is-style-caption, .c-search-overlay__suggestions, .c-search-overlay .c-search-overlay__cancel, .site-title, .entry-meta, .c-meta, .c-meta .novablocks-sharing__button-label, .c-comments-toggle__label, .comment-form label, .comment__metadata a,
-.comment-reply-title a,
-.edit-link a,
-.reply a,
-.logged-in-as a, .pagination .nav-links, .post-navigation__post-title, .post-navigation__link-label, .c-reading-bar__wrapper-title, .post-title__label, .select2-container .select2-selection--single .select2-selection__rendered, .wpforms-container[class][class][class] .wpforms-form input,
-.wpforms-container[class][class][class] .wpforms-form select,
-.wpforms-container[class][class][class] .wpforms-form textarea, .wpforms-container[class][class][class] .wpforms-field-label,
-.wpforms-container[class][class][class] .wpforms-field-sublabel,
-.wpforms-container[class][class][class] .wpforms-field-label-inline, .wpforms-container[class][class][class] .wpforms-submit[class] {
-  --y1: var(--font-size);
-  --y0-new: calc( var(--y1) - ( var(--y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) );
-  --a: calc( ( var(--y1) - var(--y0-new) ) / ( var(--x1) - var(--x0) ) );
-  --b: calc( var(--y0-new) - var(--a) * var(--x0) );
-  --y2: calc( var(--a) * 100vw + var(--b) * 1px );
-  --current-font-size: calc( var(--font-size-modifier) * var(--font-size-base) * ( var(--y2) + var(--theme-addon) ) ); }
-
 /**
  * Use this mixin on containers or elements, when you need 
  * to overwrite the universal selector (*) specificity
  *
  * Examples: input fields, image captions
  */
+* {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  font-style: var(--current-font-style);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform); }
+
 /* 0.2. Elements */
 html {
   -webkit-font-smoothing: antialiased;

@@ -8,29 +8,6 @@
  *
  * Examples: sales badges inherit font rules from WooCommerce plugin
  */
-.wp-block-gallery figcaption, .wp-block-pullquote.alignleft blockquote, .wp-block-pullquote.alignright blockquote, .wp-block-pullquote.alignwide, .wp-block-pullquote.alingfull, .wp-block-pullquote blockquote cite:not(:first-child),
-.wp-block-pullquote__citation, .wp-block-quote.is-style-large, .wp-block-quote > cite:not(:first-child),
-.wp-block-quote__citation, .wp-block-novablocks-navigation, .novablocks-media-composition__grid-item-caption,
-.novablocks-media-composition__grid-item-description {
-  font-family: var(--current-font-family);
-  font-size: var(--current-font-size);
-  line-height: var(--current-line-height);
-  font-weight: var(--current-font-weight);
-  font-style: var(--current-font-style);
-  letter-spacing: var(--current-letter-spacing);
-  text-transform: var(--current-text-transform); }
-
-.wp-block-gallery figcaption, .wp-block-pullquote.alignleft blockquote, .wp-block-pullquote.alignright blockquote, .wp-block-pullquote.alignwide, .wp-block-pullquote.alingfull, .wp-block-pullquote blockquote cite:not(:first-child),
-.wp-block-pullquote__citation, .wp-block-quote.is-style-large, .wp-block-quote > cite:not(:first-child),
-.wp-block-quote__citation, .wp-block-novablocks-navigation, .novablocks-media-composition__grid-item-caption,
-.novablocks-media-composition__grid-item-description {
-  --y1: var(--font-size);
-  --y0-new: calc( var(--y1) - ( var(--y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) );
-  --a: calc( ( var(--y1) - var(--y0-new) ) / ( var(--x1) - var(--x0) ) );
-  --b: calc( var(--y0-new) - var(--a) * var(--x0) );
-  --y2: calc( var(--a) * 100vw + var(--b) * 1px );
-  --current-font-size: calc( var(--font-size-modifier) * var(--font-size-base) * ( var(--y2) + var(--theme-addon) ) ); }
-
 /**
  * Use this mixin on containers or elements, when you need 
  * to overwrite the universal selector (*) specificity
