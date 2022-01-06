@@ -567,6 +567,10 @@ input[type="button"] {
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
       --current-button-transition: var(--theme-button-hover-transition); }
+  input[type="submit"]:disabled,
+  input[type="button"]:disabled {
+    cursor: not-allowed;
+    opacity: 0.5; }
   input[type="submit"]:not([disabled]):is(:hover, :focus),
   input[type="button"]:not([disabled]):is(:hover, :focus) {
     background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
@@ -617,6 +621,9 @@ button[type="submit"] {
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
       --current-button-transition: var(--theme-button-hover-transition); }
+  button[type="submit"]:disabled {
+    cursor: not-allowed;
+    opacity: 0.5; }
   button[type="submit"]:before {
     content: '';
     position: absolute;
@@ -870,6 +877,19 @@ label {
 .nf-form-cont .list-checkbox-wrap .nf-field-element li input {
   margin-top: 0; }
 
+.label-right .checkbox-wrap .nf-field-label {
+  padding-right: 0; }
+
+.label-right .checkbox-wrap .nf-field-element[class] {
+  width: auto;
+  margin-left: var(--theme-input-horizontal-spacing); }
+
+.label-hidden .nf-field-label {
+  order: 999; }
+
+.nf-field-label:empty {
+  display: none; }
+
 /**
  * We rely on the plugin default inline validation for fields and
  * we could hide the required fields notices as they could divert
@@ -908,6 +928,9 @@ label {
 
 .field-wrap textarea {
   display: block; }
+
+.nf-row:last-child .nf-field-container {
+  margin-bottom: 0; }
 
 h1, .h1,
 h2, .h2,
@@ -1562,6 +1585,9 @@ table {
             --current-button-border-color: var(--theme-button-hover-border-color);
             --current-button-text-color: var(--theme-button-hover-text-color);
             --current-button-transition: var(--theme-button-hover-transition); }
+        .c-search-overlay__suggestions .menu li:disabled {
+          cursor: not-allowed;
+          opacity: 0.5; }
         .c-search-overlay__suggestions .menu li:before {
           content: '';
           position: absolute;
@@ -2053,6 +2079,9 @@ table {
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
       --current-button-transition: var(--theme-button-hover-transition); }
+  .c-comments-toggle__label:disabled {
+    cursor: not-allowed;
+    opacity: 0.5; }
   .c-comments-toggle__label:before {
     content: '';
     position: absolute;
@@ -3216,6 +3245,9 @@ span.page-numbers {
         --current-button-border-color: var(--theme-button-hover-border-color);
         --current-button-text-color: var(--theme-button-hover-text-color);
         --current-button-transition: var(--theme-button-hover-transition); }
+    .wpforms-container[class][class][class] .wpforms-submit[class][class][class]:disabled {
+      cursor: not-allowed;
+      opacity: 0.5; }
     .wpforms-container[class][class][class] .wpforms-submit[class][class][class]:before {
       content: '';
       position: absolute;
@@ -3320,20 +3352,20 @@ textarea {
 /**
  * Light and Dark classes indicates the container brightness in a binary system. 
  * Could be used to switch between black and white colors or elements visibility:
- * 1) .sm-light: the container has a lower color grade (eg. variation 1-5)
- * 2) .sm-dark: the container has a higher color grade (eg. variation 6-11)
+ * 1) .sm-light: the container has a lower color grade (eg. variation 1-5) usually with dark text over a light background
+ * 2) .sm-dark: the container has a higher color grade (eg. variation 6-11) usually with light text over a dark background
  * 3) html.is-dark: the dark mode is active (eg. using the navigation toggle)
  */
 .sm-dark,
 html.is-dark .sm-light {
   --logo-default-opacity: 0;
   --logo-inverted-opacity: 1;
-  --opacity-color: 255, 255, 255; }
+  --opacity-color: 0, 0, 0;
+  --opacity-level: 1; }
 
 .sm-light {
   --logo-default-opacity: 1;
-  --logo-inverted-opacity: 0;
-  --opacity-color: 0, 0, 0; }
+  --logo-inverted-opacity: 0; }
 
 .sm-color-signal-0 {
   background: none;

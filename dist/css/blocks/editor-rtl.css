@@ -207,6 +207,9 @@ nav.wp-block-navigation a:not(:hover) {
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
       --current-button-transition: var(--theme-button-hover-transition); }
+  .wp-block-search__button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5; }
 
 .wp-block-social-links .block-editor-block-list__block {
   margin: 0; }
@@ -435,6 +438,9 @@ nav.wp-block-navigation a:not(:hover) {
       --current-button-border-color: var(--theme-button-hover-border-color);
       --current-button-text-color: var(--theme-button-hover-text-color);
       --current-button-transition: var(--theme-button-hover-transition); }
+  .ot-dtp-picker-form .ot-dtp-picker-button[class][class][class][class][class]:disabled {
+    cursor: not-allowed;
+    opacity: 0.5; }
   .ot-dtp-picker-form .ot-dtp-picker-button[class][class][class][class][class]:not([disabled]):is(:hover, :focus) {
     background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
   .ot-dtp-picker-form .ot-dtp-picker-button[class][class][class][class][class]:before {

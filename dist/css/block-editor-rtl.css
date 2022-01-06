@@ -518,6 +518,10 @@
         --current-button-border-color: var(--theme-button-hover-border-color);
         --current-button-text-color: var(--theme-button-hover-text-color);
         --current-button-transition: var(--theme-button-hover-transition); }
+    .editor-styles-wrapper input[type="submit"]:disabled,
+    .editor-styles-wrapper input[type="button"]:disabled {
+      cursor: not-allowed;
+      opacity: 0.5; }
     .editor-styles-wrapper input[type="submit"]:not([disabled]):is(:hover, :focus),
     .editor-styles-wrapper input[type="button"]:not([disabled]):is(:hover, :focus) {
       background-position: calc(100% - ( -1 * var(--theme-button-border-width))) calc( -1 * var(--theme-button-border-width)); }
@@ -567,6 +571,9 @@
         --current-button-border-color: var(--theme-button-hover-border-color);
         --current-button-text-color: var(--theme-button-hover-text-color);
         --current-button-transition: var(--theme-button-hover-transition); }
+    .editor-styles-wrapper button[type="submit"]:disabled {
+      cursor: not-allowed;
+      opacity: 0.5; }
     .editor-styles-wrapper button[type="submit"]:before {
       content: '';
       position: absolute;
@@ -795,6 +802,15 @@
     margin-left: var(--theme-input-horizontal-spacing); }
   .editor-styles-wrapper .nf-form-cont .list-checkbox-wrap .nf-field-element li input {
     margin-top: 0; }
+  .editor-styles-wrapper .label-right .checkbox-wrap .nf-field-label {
+    padding-right: 0; }
+  .editor-styles-wrapper .label-right .checkbox-wrap .nf-field-element[class] {
+    width: auto;
+    margin-left: var(--theme-input-horizontal-spacing); }
+  .label-hidden .editor-styles-wrapper .nf-field-label {
+    order: 999; }
+  .editor-styles-wrapper .nf-field-label:empty {
+    display: none; }
   .editor-styles-wrapper .nf-form-fields-required,
   .editor-styles-wrapper .ninja-forms-req-symbol {
     display: none; }
@@ -819,6 +835,8 @@
     display: none; }
   .editor-styles-wrapper .field-wrap textarea {
     display: block; }
+  .editor-styles-wrapper .nf-row:last-child .nf-field-container {
+    margin-bottom: 0; }
   .editor-styles-wrapper[class] {
     /* Iframes */
     /* Preformatted */
@@ -1200,11 +1218,6 @@
     margin-top: 16px; }
 
 /* Hide Useless Heading Values */
-/* Center block appender */
-.block-list-appender {
-  margin-right: auto;
-  margin-left: auto; }
-
 .is-dark-theme .c-logo__default {
   display: none; }
 

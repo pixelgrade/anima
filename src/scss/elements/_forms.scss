@@ -19,7 +19,6 @@ input {
 
 input[type="checkbox"] {
     @include checkbox;
-
 }
 
 input[type="radio"] {
@@ -155,6 +154,30 @@ label {
     }   
 }
 
+// st-label-positions.scss
+.label-right {
+    .checkbox-wrap {
+        .nf-field-label {
+            padding-left: 0;
+        }
+
+        .nf-field-element[class] {
+            width: auto;
+            margin-right: var(--theme-input-horizontal-spacing);
+        }
+    }
+}   
+
+.nf-field-label {
+    .label-hidden & {
+        order: 999; // move the hidden fields at the end of the list to remove the top spacing created by it
+    }
+
+    &:empty {
+        display: none;
+    }
+}
+
 /**
  * We rely on the plugin default inline validation for fields and
  * we could hide the required fields notices as they could divert
@@ -213,5 +236,12 @@ label {
 .field-wrap { 
     textarea {
         display: block;
+    }
+}
+
+.nf-row {
+    // Set the last elements align with the bottom of the container
+    &:last-child .nf-field-container {
+        margin-bottom: 0;
     }
 }
