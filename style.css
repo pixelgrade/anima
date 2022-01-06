@@ -1074,11 +1074,23 @@ a {
     text-decoration-color: var(--theme-links-color); }
 
 /* Headings links */
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+:is(h1, h2, h3, h4, h5, h6) a {
   color: var(--theme-links-color);
   text-decoration-color: transparent; }
-  h1 a:hover, h1 a:focus, h2 a:hover, h2 a:focus, h3 a:hover, h3 a:focus, h4 a:hover, h4 a:focus, h5 a:hover, h5 a:focus, h6 a:hover, h6 a:focus {
+  :is(h1, h2, h3, h4, h5, h6) a:is(:hover, :focus) {
     text-decoration-color: transparent; }
+
+:is(h1, h2, h3):not(.nb-card__title) a {
+  --highlight-text-color-start: var(--sm-current-accent-color);
+  --highlight-text-color-end: var(--sm-current-accent2-color); }
+  :is(h1, h2, h3):not(.nb-card__title) a:is(:hover, :focus) {
+    color: var(--sm-current-accent-color);
+    background-color: var(--sm-current-accent-color) !important;
+    background-image: linear-gradient(90deg, var(--highlight-text-color-start), var(--highlight-text-color-end));
+    filter: brightness(100%) saturate(150%) contrast(1);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: rgba(0, 0, 0, 0); }
 
 /* Preformatted */
 pre,

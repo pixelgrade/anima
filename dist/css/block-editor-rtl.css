@@ -1129,11 +1129,22 @@
     text-decoration-color: transparent; }
     .editor-styles-wrapper .entry-meta a:hover, .editor-styles-wrapper .entry-meta a:focus {
       text-decoration-color: var(--theme-links-color); }
-  .editor-styles-wrapper h1 a, .editor-styles-wrapper h2 a, .editor-styles-wrapper h3 a, .editor-styles-wrapper h4 a, .editor-styles-wrapper h5 a, .editor-styles-wrapper h6 a {
+  .editor-styles-wrapper :is(h1, h2, h3, h4, h5, h6) a {
     color: var(--theme-links-color);
     text-decoration-color: transparent; }
-    .editor-styles-wrapper h1 a:hover, .editor-styles-wrapper h1 a:focus, .editor-styles-wrapper h2 a:hover, .editor-styles-wrapper h2 a:focus, .editor-styles-wrapper h3 a:hover, .editor-styles-wrapper h3 a:focus, .editor-styles-wrapper h4 a:hover, .editor-styles-wrapper h4 a:focus, .editor-styles-wrapper h5 a:hover, .editor-styles-wrapper h5 a:focus, .editor-styles-wrapper h6 a:hover, .editor-styles-wrapper h6 a:focus {
+    .editor-styles-wrapper :is(h1, h2, h3, h4, h5, h6) a:is(:hover, :focus) {
       text-decoration-color: transparent; }
+  .editor-styles-wrapper :is(h1, h2, h3):not(.nb-card__title) a {
+    --highlight-text-color-start: var(--sm-current-accent-color);
+    --highlight-text-color-end: var(--sm-current-accent2-color); }
+    .editor-styles-wrapper :is(h1, h2, h3):not(.nb-card__title) a:is(:hover, :focus) {
+      color: var(--sm-current-accent-color);
+      background-color: var(--sm-current-accent-color) !important;
+      background-image: linear-gradient(-90deg, var(--highlight-text-color-start), var(--highlight-text-color-end));
+      filter: brightness(100%) saturate(150%) contrast(1);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: rgba(0, 0, 0, 0); }
   .editor-styles-wrapper img,
   .editor-styles-wrapper video {
     max-width: 100%;
