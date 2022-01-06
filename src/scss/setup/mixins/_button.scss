@@ -25,6 +25,11 @@
       --current-button-transition: var(--theme-button-hover-transition);
     }
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 }
 
 @mixin button-box {
