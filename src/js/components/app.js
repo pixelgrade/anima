@@ -16,7 +16,7 @@ export default class App {
 	constructor() {
 
 		this.onStickyHeaderResize = debounce( stickyHeaderHeight => {
-				document.documentElement.style.setProperty( '--theme-sticky-header-height', `${ stickyHeaderHeight }px` );
+			document.documentElement.style.setProperty( '--theme-sticky-header-height', `${ stickyHeaderHeight }px` );
 		}, 100 );
 
 		this.adminBar = document.getElementById( 'wpadminbar' );

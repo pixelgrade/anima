@@ -395,19 +395,19 @@ body {
   overflow-x: hidden; }
 
 ::-webkit-input-placeholder {
-  color: var(--theme-input-placeholder-color);
+  color: inherit;
   opacity: var(--theme-input-placeholder-opacity); }
 
 :-moz-placeholder {
-  color: var(--theme-input-placeholder-color);
+  color: inherit;
   opacity: var(--theme-input-placeholder-opacity); }
 
 ::-moz-placeholder {
-  color: var(--theme-input-placeholder-color);
+  color: inherit;
   opacity: var(--theme-input-placeholder-opacity); }
 
 :-ms-input-placeholder {
-  color: var(--theme-input-placeholder-color);
+  color: inherit;
   opacity: var(--theme-input-placeholder-opacity); }
 
 input:not([type]), input[type="text"], input[type="tel"], input[type="number"], input[type="date"], input[type="email"], input[type="password"], input[type="url"], input[type="search"] {
@@ -416,9 +416,9 @@ input:not([type]), input[type="text"], input[type="tel"], input[type="number"], 
   max-width: 100%;
   padding: var(--theme-input-padding);
   margin: 0;
-  color: var(--theme-input-color);
+  color: var(--sm-current-fg1-color);
   border-radius: var(--theme-input-border-radius);
-  background-color: var(--theme-input-background-color);
+  background-color: var(--sm-current-bg-color);
   box-shadow: var(--theme-input-box-shadow);
   border: 0;
   transition: all .2s ease-in-out;
@@ -710,8 +710,8 @@ input[type="file"]::-webkit-file-upload-button {
   overflow: visible;
   font-weight: 600;
   text-align: center;
-  color: var(--theme-input-color);
-  background-color: var(--theme-input-background-color);
+  color: var(--sm-current-fg1-color);
+  background-color: var(--sm-current-bg-color);
   vertical-align: middle;
   cursor: pointer; }
   input[type="file"]::-webkit-file-upload-button:hover, input[type="file"]::-webkit-file-upload-button:focus, input[type="file"]::-webkit-file-upload-button:active {
@@ -725,9 +725,9 @@ textarea {
   max-width: 100%;
   padding: var(--theme-input-padding);
   margin: 0;
-  color: var(--theme-input-color);
+  color: var(--sm-current-fg1-color);
   border-radius: var(--theme-input-border-radius);
-  background-color: var(--theme-input-background-color);
+  background-color: var(--sm-current-bg-color);
   box-shadow: var(--theme-input-box-shadow);
   border: 0;
   transition: all .2s ease-in-out;
@@ -768,9 +768,9 @@ select {
   max-width: 100%;
   padding: var(--theme-input-padding);
   margin: 0;
-  color: var(--theme-input-color);
+  color: var(--sm-current-fg1-color);
   border-radius: var(--theme-input-border-radius);
-  background-color: var(--theme-input-background-color);
+  background-color: var(--sm-current-bg-color);
   box-shadow: var(--theme-input-box-shadow);
   border: 0;
   transition: all .2s ease-in-out;
@@ -2818,9 +2818,9 @@ span.page-numbers {
     max-width: 100%;
     padding: var(--theme-input-padding);
     margin: 0;
-    color: var(--theme-input-color);
+    color: var(--sm-current-fg1-color);
     border-radius: var(--theme-input-border-radius);
-    background-color: var(--theme-input-background-color);
+    background-color: var(--sm-current-bg-color);
     box-shadow: var(--theme-input-box-shadow);
     border: 0;
     transition: all .2s ease-in-out;
@@ -2979,9 +2979,9 @@ span.page-numbers {
     max-width: 100%;
     padding: var(--theme-input-padding);
     margin: 0;
-    color: var(--theme-input-color);
+    color: var(--sm-current-fg1-color);
     border-radius: var(--theme-input-border-radius);
-    background-color: var(--theme-input-background-color);
+    background-color: var(--sm-current-bg-color);
     box-shadow: var(--theme-input-box-shadow);
     border: 0;
     transition: all .2s ease-in-out;
@@ -3035,9 +3035,9 @@ span.page-numbers {
     max-width: 100%;
     padding: var(--theme-input-padding);
     margin: 0;
-    color: var(--theme-input-color);
+    color: var(--sm-current-fg1-color);
     border-radius: var(--theme-input-border-radius);
-    background-color: var(--theme-input-background-color);
+    background-color: var(--sm-current-bg-color);
     box-shadow: var(--theme-input-box-shadow);
     border: 0;
     transition: all .2s ease-in-out;
