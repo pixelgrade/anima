@@ -8,7 +8,15 @@
  *
  * Examples: sales badges inherit font rules from WooCommerce plugin
  */
-[class][class][class] .wc-block-grid__product-onsale {
+#html #body.woocommerce-page #page .button:not(.trix-button),
+#html #body.woocommerce-page #page button:not([class]),
+#html #body.woocommerce-page #page input[type="submit"]:not(.ot-button):not(.search-submit), #html #body.woocommerce-page #page textarea, .c-mini-cart .woocommerce-mini-cart__total, .c-mini-cart[class] .cart_list a:not(.remove),
+.c-mini-cart[class] .product_list_widget a:not(.remove), .c-mini-cart[class] .mini_cart_item .quantity, .woocommerce-ordering select, .woocommerce-loop-product__title,
+.woocommerce-loop-category__title, .c-product-main .product_title, .c-product-main .stock span, .add_to_cart_button, .related.products > h2,
+.upsells > h2,
+.wc-tabs .h3, :is(#add_payment_method, .woocommerce-cart, .woocommerce-checkout) table.cart td.actions .coupon .input-text, #add_payment_method #payment ul.payment_methods li,
+.woocommerce-cart #payment ul.payment_methods li,
+.woocommerce-checkout #payment ul.payment_methods li, :is(.woocommerce-billing-fields, .woocommerce-additional-fields) > h3, .cart_totals h2, .cross-sells h2, #ship-to-different-address, .woocommerce-checkout-title, .wc-stripe-elements-field, [class][class][class] .wc-block-grid__product-onsale, [class][class][class] .wc-block-grid__product-title, [class][class][class] .wc-block-grid__product-price, .wc-block-product-categories.is-dropdown select, .wc-block-product-categories__button, .wc-block-order-select__select[class], .woocommerce-pagination, .wc-block-grid .woocommerce-Price-amount {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
   line-height: var(--current-line-height);
@@ -16,6 +24,22 @@
   font-style: var(--current-font-style);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform); }
+
+#html #body.woocommerce-page #page .button:not(.trix-button),
+#html #body.woocommerce-page #page button:not([class]),
+#html #body.woocommerce-page #page input[type="submit"]:not(.ot-button):not(.search-submit), #html #body.woocommerce-page #page textarea, .c-mini-cart .woocommerce-mini-cart__total, .c-mini-cart[class] .cart_list a:not(.remove),
+.c-mini-cart[class] .product_list_widget a:not(.remove), .c-mini-cart[class] .mini_cart_item .quantity, .woocommerce-ordering select, .woocommerce-loop-product__title,
+.woocommerce-loop-category__title, .c-product-main .product_title, .c-product-main .stock span, .add_to_cart_button, .related.products > h2,
+.upsells > h2,
+.wc-tabs .h3, :is(#add_payment_method, .woocommerce-cart, .woocommerce-checkout) table.cart td.actions .coupon .input-text, #add_payment_method #payment ul.payment_methods li,
+.woocommerce-cart #payment ul.payment_methods li,
+.woocommerce-checkout #payment ul.payment_methods li, :is(.woocommerce-billing-fields, .woocommerce-additional-fields) > h3, .cart_totals h2, .cross-sells h2, #ship-to-different-address, .woocommerce-checkout-title, .wc-stripe-elements-field, [class][class][class] .wc-block-grid__product-onsale, [class][class][class] .wc-block-grid__product-title, [class][class][class] .wc-block-grid__product-price, .wc-block-product-categories.is-dropdown select, .wc-block-product-categories__button, .wc-block-order-select__select[class], .woocommerce-pagination, .wc-block-grid .woocommerce-Price-amount {
+  --y1: var(--font-size);
+  --y0-new: calc( var(--y1) - ( var(--y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) );
+  --a: calc( ( var(--y1) - var(--y0-new) ) / ( var(--x1) - var(--x0) ) );
+  --b: calc( var(--y0-new) - var(--a) * var(--x0) );
+  --y2: calc( var(--a) * 100vw + var(--b) * 1px );
+  --current-font-size: calc( var(--font-size-modifier) * var(--font-size-base) * ( var(--y2) + var(--theme-addon) ) ); }
 
 /**
  * Use this mixin on containers or elements, when you need 

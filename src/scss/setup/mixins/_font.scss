@@ -2,21 +2,20 @@
  * Use this mixin to change the inherited font declaration 
  * of an element or container.
  */
-@mixin apply-font( $name ) {
-    $config: map-get( $theme-fonts, $name );
+@mixin calculate-fluid-font-size {
+    // solving a first degree equation: y = ax + b
+    --y1: var(--font-size);
+    --y0-new: calc( var(--y1) - ( var(--y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) );
 
-    @if ( map_get( $config, font-size ) ) {
-        --font-size: var(--theme-#{$name}-font-size);
-    }
+    // calculate the slope and the remainder for the equation
+    --a: calc( ( var(--y1) - var(--y0-new) ) / ( var(--x1) - var(--x0) ) );
+    --b: calc( var(--y0-new) - var(--a) * var(--x0) );
 
-    @each $prop, $value in $config {
-        @if $prop != font-size {
-            --current-#{ $prop }: var(--theme-#{ $name }-#{ $prop });
-        }
-    }
+    // x2 - viewport width at a given time
+    // y2 - font size value we need to find out
+    --y2: calc( var(--a) * 100vw + var(--b) * 1px );
+    --current-font-size: calc( var(--font-size-modifier) * var(--font-size-base) * ( var(--y2) + var(--theme-addon) ) );
 }
-
-
 
 /**
  * Overwrite elements whose properties are declared by a 3rd
@@ -38,7 +37,26 @@
     @include apply-font-properties;
 }
 
+%fluid-font {
+    @extend %apply-font-properties;
+    @include calculate-fluid-font-size;
+}
 
+@mixin apply-font( $name ) {
+    @extend %fluid-font;
+
+    $config: map-get( $theme-fonts, $name );
+
+    @if ( map_get( $config, font-size ) ) {
+        --font-size: var(--theme-#{$name}-font-size);
+    }
+
+    @each $prop, $value in $config {
+        @if $prop != font-size {
+            --current-#{ $prop }: var(--theme-#{ $name }-#{ $prop });
+        }
+    }
+}
 
 /**
  * Use this mixin on containers or elements, when you need 

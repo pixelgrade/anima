@@ -8,6 +8,7 @@ class GlobalService {
 		this.newProps = {};
 		this.renderCallbacks = [];
 		this.resizeCallbacks = [];
+		this.debouncedResizeCallbacks = [];
 		this.observeCallbacks = [];
 		this.scrollCallbacks = [];
 		this.currentMutationList = [];
@@ -22,8 +23,12 @@ class GlobalService {
 		const updateProps = this._updateProps.bind( this );
 		const renderLoop = this._renderLoop.bind( this );
 
+		this._debouncedResizeCallback = debounce( this._resizeCallbackToBeDebounced.bind( this ), 100 );
+
+		// now
 		updateProps();
 
+		// on document ready
 		$( updateProps );
 
 		this._bindOnResize();
@@ -126,6 +131,13 @@ class GlobalService {
 		} );
 	}
 
+	_resizeCallbackToBeDebounced() {
+		const passedArguments = arguments;
+		$.each( this.debouncedResizeCallbacks, function( i, fn ) {
+			fn( ...passedArguments );
+		} );
+	}
+
 	_scrollCallback() {
 		const passedArguments = arguments;
 		$.each( this.scrollCallbacks, function( i, fn ) {
@@ -155,7 +167,10 @@ class GlobalService {
 			windowHeight: this.useOrientation && window.screen && window.screen.availHeight || window.innerHeight,
 		} );
 
-		this._shouldUpdate( this._resizeCallback.bind( this ) );
+		this._shouldUpdate( () => {
+			this._resizeCallback();
+			this._debouncedResizeCallback();
+		} );
 	}
 
 	_shouldUpdate( callback, force = false ) {
@@ -191,6 +206,12 @@ class GlobalService {
 	registerOnResize( fn ) {
 		if ( typeof fn === "function" && this.resizeCallbacks.indexOf( fn ) < 0 ) {
 			this.resizeCallbacks.push( fn );
+		}
+	}
+
+	registerOnDeouncedResize( fn ) {
+		if ( typeof fn === "function" && this.resizeCallbacks.indexOf( fn ) < 0 ) {
+			this.debouncedResizeCallbacks.push( fn );
 		}
 	}
 

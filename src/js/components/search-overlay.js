@@ -13,7 +13,7 @@ class SearchOverlay extends BaseComponent {
 		this.$searchOverlay = $( '.c-search-overlay' );
 
 		this.initialize();
-		this.onResize();
+		this.onDebouncedResize();
 	}
 
 	initialize() {
@@ -22,7 +22,7 @@ class SearchOverlay extends BaseComponent {
 		$( document ).on( 'keydown', this.closeSearchOverlayOnEsc );
 	}
 
-	onResize() {
+	onDebouncedResize() {
 		setAndResetElementStyles( this.$searchOverlay, { transition: 'none' } );
 	}
 

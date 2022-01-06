@@ -128,6 +128,22 @@ module.exports = _createClass;
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var arrayWithoutHoles = __webpack_require__(10);
+
+var iterableToArray = __webpack_require__(11);
+
+var nonIterableSpread = __webpack_require__(12);
+
+function _toConsumableArray(arr) {
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
+}
+
+module.exports = _toConsumableArray;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var _typeof = __webpack_require__(13);
 
 var assertThisInitialized = __webpack_require__(7);
@@ -141,22 +157,6 @@ function _possibleConstructorReturn(self, call) {
 }
 
 module.exports = _possibleConstructorReturn;
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayWithoutHoles = __webpack_require__(10);
-
-var iterableToArray = __webpack_require__(11);
-
-var nonIterableSpread = __webpack_require__(12);
-
-function _toConsumableArray(arr) {
-  return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
-}
-
-module.exports = _toConsumableArray;
 
 /***/ }),
 /* 5 */
@@ -3711,7 +3711,7 @@ var createClass = __webpack_require__(2);
 var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/toConsumableArray.js
-var toConsumableArray = __webpack_require__(4);
+var toConsumableArray = __webpack_require__(3);
 var toConsumableArray_default = /*#__PURE__*/__webpack_require__.n(toConsumableArray);
 
 // EXTERNAL MODULE: ./node_modules/chroma-js/chroma.js
@@ -3882,6 +3882,7 @@ function () {
     this.newProps = {};
     this.renderCallbacks = [];
     this.resizeCallbacks = [];
+    this.debouncedResizeCallbacks = [];
     this.observeCallbacks = [];
     this.scrollCallbacks = [];
     this.currentMutationList = [];
@@ -3900,7 +3901,10 @@ function () {
 
       var renderLoop = this._renderLoop.bind(this);
 
-      updateProps();
+      this._debouncedResizeCallback = debounce(this._resizeCallbackToBeDebounced.bind(this), 100); // now
+
+      updateProps(); // on document ready
+
       external_jQuery_default()(updateProps);
 
       this._bindOnResize();
@@ -4023,6 +4027,14 @@ function () {
       });
     }
   }, {
+    key: "_resizeCallbackToBeDebounced",
+    value: function _resizeCallbackToBeDebounced() {
+      var passedArguments = arguments;
+      external_jQuery_default.a.each(this.debouncedResizeCallbacks, function (i, fn) {
+        fn.apply(void 0, toConsumableArray_default()(passedArguments));
+      });
+    }
+  }, {
     key: "_scrollCallback",
     value: function _scrollCallback() {
       var passedArguments = arguments;
@@ -4044,6 +4056,8 @@ function () {
   }, {
     key: "_updateSize",
     value: function _updateSize() {
+      var _this = this;
+
       var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       var body = document.body;
       var html = document.documentElement;
@@ -4056,7 +4070,11 @@ function () {
         windowHeight: this.useOrientation && window.screen && window.screen.availHeight || window.innerHeight
       });
 
-      this._shouldUpdate(this._resizeCallback.bind(this));
+      this._shouldUpdate(function () {
+        _this._resizeCallback();
+
+        _this._debouncedResizeCallback();
+      });
     }
   }, {
     key: "_shouldUpdate",
@@ -4076,10 +4094,10 @@ function () {
   }, {
     key: "_hasNewProps",
     value: function _hasNewProps() {
-      var _this = this;
+      var _this2 = this;
 
       return Object.keys(this.newProps).some(function (key) {
-        return _this.newProps[key] !== _this.props[key];
+        return _this2.newProps[key] !== _this2.props[key];
       });
     }
   }, {
@@ -4099,6 +4117,13 @@ function () {
     value: function registerOnResize(fn) {
       if (typeof fn === "function" && this.resizeCallbacks.indexOf(fn) < 0) {
         this.resizeCallbacks.push(fn);
+      }
+    }
+  }, {
+    key: "registerOnDeouncedResize",
+    value: function registerOnDeouncedResize(fn) {
+      if (typeof fn === "function" && this.resizeCallbacks.indexOf(fn) < 0) {
+        this.debouncedResizeCallbacks.push(fn);
       }
     }
   }, {
@@ -4587,7 +4612,7 @@ function () {
 
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__(3);
+var possibleConstructorReturn = __webpack_require__(4);
 var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
@@ -4621,7 +4646,7 @@ function () {
     };
     this.above = {};
     this.below = {};
-    globalService.registerOnResize(this.onResize.bind(this));
+    globalService.registerOnDeouncedResize(this.onResize.bind(this));
     this.onResize();
   }
 
@@ -4664,7 +4689,7 @@ function () {
     value: function initialize() {
       utils_addClass(this.element, 'novablocks-header--ready');
       globalService.registerRender(this.render.bind(this));
-      globalService.registerOnResize(this.onResize.bind(this));
+      globalService.registerOnDeouncedResize(this.onResize.bind(this));
     }
   }, {
     key: "onResize",
@@ -5240,7 +5265,7 @@ function () {
     }
 
     this.onResize();
-    globalService.registerOnResize(this.onResize.bind(this));
+    globalService.registerOnDeouncedResize(this.onResize.bind(this));
     this.timeline.play();
     this.bindEvents();
   }
@@ -5415,7 +5440,7 @@ function () {
     value: function initialize() {
       this.onResize();
       this.initialized = true;
-      globalService.registerOnResize(this.onResize.bind(this));
+      globalService.registerOnDeouncedResize(this.onResize.bind(this));
     }
   }, {
     key: "onResize",
@@ -5534,11 +5559,15 @@ function () {
     classCallCheck_default()(this, BaseComponent);
 
     globalService.registerOnResize(this.onResize.bind(this));
+    globalService.registerOnDeouncedResize(this.onDebouncedResize.bind(this));
   }
 
   createClass_default()(BaseComponent, [{
     key: "onResize",
     value: function onResize() {}
+  }, {
+    key: "onDebouncedResize",
+    value: function onDebouncedResize() {}
   }]);
 
   return BaseComponent;
@@ -5572,7 +5601,7 @@ function (_BaseComponent) {
 
     _this.initialize();
 
-    _this.onResize();
+    _this.onDebouncedResize();
 
     return _this;
   }
@@ -5585,8 +5614,8 @@ function (_BaseComponent) {
       external_jQuery_default()(document).on('keydown', this.closeSearchOverlayOnEsc);
     }
   }, {
-    key: "onResize",
-    value: function onResize() {
+    key: "onDebouncedResize",
+    value: function onDebouncedResize() {
       setAndResetElementStyles(this.$searchOverlay, {
         transition: 'none'
       });
@@ -5637,6 +5666,13 @@ function () {
   function App() {
     classCallCheck_default()(this, App);
 
+    this.onStickyHeaderResize = function (stickyHeaderHeight) {
+      debounce(function () {
+        console.log(stickyHeaderHeight);
+        document.documentElement.style.setProperty('--theme-sticky-header-height', "".concat(stickyHeaderHeight, "px"));
+      }, 100);
+    };
+
     this.adminBar = document.getElementById('wpadminbar');
     this.adminBarFixed = false;
     this.promoBarFixed = false;
@@ -5652,7 +5688,7 @@ function () {
     this.initializeImages();
     this.initializeCommentsArea();
     this.initializeReservationForm();
-    window.addEventListener('resize', this.onResize.bind(this));
+    globalService.registerOnDeouncedResize(this.onResize.bind(this));
   }
 
   createClass_default()(App, [{
@@ -5762,7 +5798,7 @@ function () {
 
       if (stickyHeader) {
         var resizeObserver = new ResizeObserver(function (entries) {
-          document.documentElement.style.setProperty('--theme-sticky-header-height', "".concat(stickyHeader.offsetHeight, "px"));
+          _this.onStickyHeaderResize(stickyHeader.offsetHeight);
         });
         resizeObserver.observe(stickyHeader);
       }

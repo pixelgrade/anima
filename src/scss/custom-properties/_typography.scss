@@ -33,9 +33,7 @@
     --font-size-base: 1;
     --font-size-modifier: 1;
     --current-font-feature: none;
-}
 
-* {
     // x0 - viewport width at which font sizes should reach minimum value
     // y0 - minimum font size
     // x1 - viewport width at which we know the value for the font size
@@ -43,17 +41,4 @@
     --x0: var(--theme-font-size-minimum-value-breakpoint);
     --y0: var(--theme-font-size-minimum-value);
     --x1: var(--theme-font-size-breakpoint);
-
-    // solving a first degree equation: y = ax + b
-    --y1: var(--font-size);
-    --y0-new: calc( var(--y1) - ( var(--y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) );
-
-    // calculate the slope and the remainder for the equation
-    --a: calc( ( var(--y1) - var(--y0-new) ) / ( var(--x1) - var(--x0) ) );
-    --b: calc( var(--y0-new) - var(--a) * var(--x0) );
-
-    // x2 - viewport width at a given time
-    // y2 - font size value we need to find out
-    --y2: calc( var(--a) * 100vw + var(--b) * 1px );
-    --current-font-size: calc( var(--font-size-modifier) * var(--font-size-base) * ( var(--y2) + var(--theme-addon) ) );
 }

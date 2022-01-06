@@ -8,6 +8,25 @@
  *
  * Examples: sales badges inherit font rules from WooCommerce plugin
  */
+.wp-block-image figcaption, .nova-food-menu-item__title .item-title, .nova-food-menu__header .section-title, .novablocks-media__content, .novablocks-navigation ul.menu > .is-cta-button > a,
+.novablocks-navigation .menu > ul > .is-cta-button > a, .ot-dtp-picker-form .ot-dtp-picker-button[class], .ot-dtp-picker input[type="submit"][class], .ot-dtp-picker-form, .novablocks-card, .novablocks-sharing__overlay, .novablocks-sharing__group-title, .novablocks-sharing__link-label {
+  font-family: var(--current-font-family);
+  font-size: var(--current-font-size);
+  line-height: var(--current-line-height);
+  font-weight: var(--current-font-weight);
+  font-style: var(--current-font-style);
+  letter-spacing: var(--current-letter-spacing);
+  text-transform: var(--current-text-transform); }
+
+.wp-block-image figcaption, .nova-food-menu-item__title .item-title, .nova-food-menu__header .section-title, .novablocks-media__content, .novablocks-navigation ul.menu > .is-cta-button > a,
+.novablocks-navigation .menu > ul > .is-cta-button > a, .ot-dtp-picker-form .ot-dtp-picker-button[class], .ot-dtp-picker input[type="submit"][class], .ot-dtp-picker-form, .novablocks-card, .novablocks-sharing__overlay, .novablocks-sharing__group-title, .novablocks-sharing__link-label {
+  --y1: var(--font-size);
+  --y0-new: calc( var(--y1) - ( var(--y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) );
+  --a: calc( ( var(--y1) - var(--y0-new) ) / ( var(--x1) - var(--x0) ) );
+  --b: calc( var(--y0-new) - var(--a) * var(--x0) );
+  --y2: calc( var(--a) * 100vw + var(--b) * 1px );
+  --current-font-size: calc( var(--font-size-modifier) * var(--font-size-base) * ( var(--y2) + var(--theme-addon) ) ); }
+
 /**
  * Use this mixin on containers or elements, when you need 
  * to overwrite the universal selector (*) specificity

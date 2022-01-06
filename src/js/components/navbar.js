@@ -21,7 +21,7 @@ export default class Navbar {
 	initialize() {
 		this.onResize();
 		this.initialized = true;
-		GlobalService.registerOnResize( this.onResize.bind( this ) );
+		GlobalService.registerOnDeouncedResize( this.onResize.bind( this ) );
 	}
 
 	onResize() {

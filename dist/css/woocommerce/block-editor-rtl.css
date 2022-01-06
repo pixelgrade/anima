@@ -8,7 +8,7 @@
  *
  * Examples: sales badges inherit font rules from WooCommerce plugin
  */
-[class][class][class] .wc-block-grid__product-onsale {
+[class][class][class] .wc-block-grid__product-onsale, [class][class][class] .wc-block-grid__product-title, [class][class][class] .wc-block-grid__product-price, .wc-block-product-categories.is-dropdown select, .wc-block-product-categories__button, .wc-block-order-select__select[class] {
   font-family: var(--current-font-family);
   font-size: var(--current-font-size);
   line-height: var(--current-line-height);
@@ -16,6 +16,14 @@
   font-style: var(--current-font-style);
   letter-spacing: var(--current-letter-spacing);
   text-transform: var(--current-text-transform); }
+
+[class][class][class] .wc-block-grid__product-onsale, [class][class][class] .wc-block-grid__product-title, [class][class][class] .wc-block-grid__product-price, .wc-block-product-categories.is-dropdown select, .wc-block-product-categories__button, .wc-block-order-select__select[class] {
+  --y1: var(--font-size);
+  --y0-new: calc( var(--y1) - ( var(--y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) );
+  --a: calc( ( var(--y1) - var(--y0-new) ) / ( var(--x1) - var(--x0) ) );
+  --b: calc( var(--y0-new) - var(--a) * var(--x0) );
+  --y2: calc( var(--a) * 100vw + var(--b) * 1px );
+  --current-font-size: calc( var(--font-size-modifier) * var(--font-size-base) * ( var(--y2) + var(--theme-addon) ) ); }
 
 /**
  * Use this mixin on containers or elements, when you need 

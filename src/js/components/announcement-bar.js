@@ -23,7 +23,7 @@ export default class AnnouncementBar {
 		}
 
 		this.onResize();
-		GlobalService.registerOnResize( this.onResize.bind( this ) );
+		GlobalService.registerOnDeouncedResize( this.onResize.bind( this ) );
 
 		this.timeline.play();
 

@@ -14,7 +14,7 @@ class HeaderBase {
 		addClass( this.element, 'novablocks-header--ready' );
 
 		globalService.registerRender( this.render.bind( this ) );
-		globalService.registerOnResize( this.onResize.bind( this ) );
+		globalService.registerOnDeouncedResize( this.onResize.bind( this ) );
 	}
 
 	onResize() {

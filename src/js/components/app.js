@@ -1,5 +1,7 @@
 import $ from 'jquery';
 
+import { debounce, toggleLightClasses } from '../utils';
+
 import GlobalService from './globalService';
 import Hero from './hero';
 import CommentsArea from './commentsArea';
@@ -9,11 +11,16 @@ import Navbar from "./navbar";
 
 import SearchOverlay from './search-overlay';
 
-import { toggleLightClasses } from '../utils';
-
 export default class App {
 
 	constructor() {
+
+		this.onStickyHeaderResize = ( stickyHeaderHeight ) => {
+			debounce( () => {
+				console.log( stickyHeaderHeight );
+				document.documentElement.style.setProperty( '--theme-sticky-header-height', `${ stickyHeaderHeight }px` );
+			}, 100 );
+		}
 
 		this.adminBar = document.getElementById( 'wpadminbar' );
 		this.adminBarFixed = false;
@@ -33,7 +40,7 @@ export default class App {
 		this.initializeCommentsArea();
 		this.initializeReservationForm();
 
-		window.addEventListener( 'resize', this.onResize.bind( this ) );
+		GlobalService.registerOnDeouncedResize( this.onResize.bind( this ) );
 	}
 
 	onResize() {
@@ -129,7 +136,7 @@ export default class App {
 
 		if ( stickyHeader ) {
 			const resizeObserver = new ResizeObserver( entries => {
-				document.documentElement.style.setProperty( '--theme-sticky-header-height', `${ stickyHeader.offsetHeight }px` );
+				this.onStickyHeaderResize( stickyHeader.offsetHeight );
 			} );
 
 			resizeObserver.observe( stickyHeader );

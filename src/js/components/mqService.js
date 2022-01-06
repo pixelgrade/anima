@@ -14,7 +14,7 @@ class mqService {
 		this.above = {};
 		this.below = {};
 
-		globalService.registerOnResize( this.onResize.bind( this ) );
+		globalService.registerOnDeouncedResize( this.onResize.bind( this ) );
 
 		this.onResize();
 	}
