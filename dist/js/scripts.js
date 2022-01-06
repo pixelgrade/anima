@@ -5666,13 +5666,9 @@ function () {
   function App() {
     classCallCheck_default()(this, App);
 
-    this.onStickyHeaderResize = function (stickyHeaderHeight) {
-      debounce(function () {
-        console.log(stickyHeaderHeight);
-        document.documentElement.style.setProperty('--theme-sticky-header-height', "".concat(stickyHeaderHeight, "px"));
-      }, 100);
-    };
-
+    this.onStickyHeaderResize = debounce(function (stickyHeaderHeight) {
+      document.documentElement.style.setProperty('--theme-sticky-header-height', "".concat(stickyHeaderHeight, "px"));
+    }, 100);
     this.adminBar = document.getElementById('wpadminbar');
     this.adminBarFixed = false;
     this.promoBarFixed = false;
