@@ -1,45 +1,43 @@
 
+.nb-sidecar--sidebar-small {
+    --sidebar-fs-base: 0.75;
+}
+
+.nb-sidecar--sidebar-medium {
+    --sidebar-fs-base: 0.85;
+}
+
+.nb-sidecar--sidebar-large {
+    --sidebar-fs-base: 1;
+}
+
+.nb-sidecar {
+    --sidebar-left-fs-base: var(--sidebar-fs-base);
+    --sidebar-right-fs-base: var(--sidebar-fs-base);
+}
+
 // Single Sidecar
 .nb-sidecar-area--sidebar {
 
+    @include above(lap) {
+        --font-size-base: var(--sidebar-fs-base);
+    }
+}
+
+.wp-block-group {
 
     @include above(lap) {
 
-        .nb-sidecar--sidebar-small > & {
-            --font-size-base: 0.75;
+        &.alignleft.break-align-left {
+            --font-size-base: var(--sidebar-left-fs-base);
         }
 
-        .nb-sidecar--sidebar-medium > & {
-            --font-size-base: 0.85;
-        }
-
-        .nb-sidecar--sidebar-large > & {
-            --font-size-base: 1;
+        &.alignright.break-align-right {
+            --font-size-base: var(--sidebar-right-fs-base);
         }
     }
 }
 
-// Sidecar in Sidecar
-//.nb-sidecar-area {
-//    .nb-sidecar-area {
-//        .nb-sidecar-area--sidebar {
-//            @include above(lap) {
-//
-//                .nb-sidecar--sidebar-small & {
-//                    --font-size-base: .75;
-//                }
-//
-//                .nb-sidecar--sidebar-medium & {
-//                    --font-size-base: .85;
-//                }
-//
-//                .nb-sidecar--sidebar-large & {
-//                    --font-size-base: 1;
-//                }
-//            }
-//        }
-//    }
-//}
 
 // Sidecar 
 .nb-sidecar-area {

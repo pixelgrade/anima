@@ -974,13 +974,28 @@ nav.wp-block-navigation a:not(:hover) {
   --current-letter-spacing: var(--theme-button-letter-spacing);
   --current-text-transform: var(--theme-button-text-transform); }
 
+.nb-sidecar--sidebar-small {
+  --sidebar-fs-base: 0.75; }
+
+.nb-sidecar--sidebar-medium {
+  --sidebar-fs-base: 0.85; }
+
+.nb-sidecar--sidebar-large {
+  --sidebar-fs-base: 1; }
+
+.nb-sidecar {
+  --sidebar-left-fs-base: var(--sidebar-fs-base);
+  --sidebar-right-fs-base: var(--sidebar-fs-base); }
+
 @media only screen and (min-width: 1024px) {
-  .nb-sidecar--sidebar-small > .nb-sidecar-area--sidebar {
-    --font-size-base: 0.75; }
-  .nb-sidecar--sidebar-medium > .nb-sidecar-area--sidebar {
-    --font-size-base: 0.85; }
-  .nb-sidecar--sidebar-large > .nb-sidecar-area--sidebar {
-    --font-size-base: 1; } }
+  .nb-sidecar-area--sidebar {
+    --font-size-base: var(--sidebar-fs-base); } }
+
+@media only screen and (min-width: 1024px) {
+  .wp-block-group.alignleft.break-align-left {
+    --font-size-base: var(--sidebar-left-fs-base); }
+  .wp-block-group.alignright.break-align-right {
+    --font-size-base: var(--sidebar-right-fs-base); } }
 
 .nb-sidecar-area .widget-title[class][class] {
   --font-size: var(--theme-heading-4-font-size); }
