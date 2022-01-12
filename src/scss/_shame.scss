@@ -288,10 +288,17 @@ body.block-patterns {
         // Resize the block for better overview
         transform-origin: 50% 0%;
         transform: scale(0.8);
-    
+        transition: all .4s ease;
+
         // Reset block spacing
         --nb-emphasis-top-spacing: 1 !important;
         --nb-emphasis-bottom-spacing: 1 !important;
+
+        &:hover {
+            transform: scale(1);
+            // border-width: 0;
+            border-radius: 0px;
+        }
     }
 
 }
