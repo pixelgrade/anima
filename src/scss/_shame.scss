@@ -83,8 +83,8 @@ html.is-dark .sm-light {
     --logo-default-opacity: 0;
     --logo-inverted-opacity: 1;
     // --opacity-color: 224, 103, 73;
-    --opacity-color: 0, 0, 0;
-    --opacity-level: 1;
+    // --opacity-color: 0, 0, 0;
+    --opacity-level: 0.3;
 }
 
 .sm-light {
@@ -233,4 +233,65 @@ html {
 mark {
     background: none;
     color: inherit;
+}
+
+
+
+
+/*------------------------------------*\
+  #BLOCK PATTERNS SHOWCASE
+\*------------------------------------*/
+
+// Page with custom `.block-patterns` CSS class
+body.block-patterns {
+    background: #F5F5F5;
+    background: var(--sm-bg-color-2);
+}
+
+// Use a Group block with `.showcase-block-title` CSS class
+// to mark the title and description for the following Block Pattern
+.showcase-block-title {
+    position: relative;
+
+    * {
+        font-weight: 400 !important;
+        font-family: system-font-sans-serif-clear, "SF Pro Display", "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitsream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif !important; 
+    }
+
+    @include above(tablet) {
+        .wp-block-group__inner-container > * {
+            margin-left: 7.5%;
+        }
+
+        &:before {
+            content: " ";
+            position: absolute;
+            top: 20px;
+            left: 0px;
+            width: 30px;
+            height: 0px;
+            border-top: 2px solid var(--sm-current-fg1-color);
+            border-left: 2px solid var(--sm-current-fg1-color);
+        }
+    }
+}
+
+
+// The next block after the title is considered a Block Pattern
+.showcase-block-title + div {
+
+    @include above(tablet) {
+        border: 1.25px solid #E5E6E8;
+        border-radius: 8px;
+        overflow: hidden;
+        
+        // Resize the block for better overview
+        transform-origin: 50% 0%;
+        transform: scale(0.8);
+    
+        // Reset block spacing
+        --nb-emphasis-top-spacing: 1 !important;
+        --nb-emphasis-bottom-spacing: 1 !important;
+    }
+
 }
