@@ -62,6 +62,165 @@ function anima_add_style_manager_connected_fields( $options ) {
 						'accent_font',
 					),
 				),
+				'sm_fonts_connected_fields_preset' => array(
+					'default' => 'preset-2',
+					'choices' => array(
+						'preset-1'      => array(
+							'label'   => __( 'Preset 1', '__theme_txtd' ),
+							'options' => array(),
+							'config'  => array(
+								'sm_font_primary'   => array(
+									'super_display_font',
+									'display_font',
+									'heading_1_font',
+									'heading_2_font',
+									'heading_3_font',
+									'heading_4_font',
+									'heading_5_font',
+									'heading_6_font',
+									'quote_font',
+								),
+								'sm_font_secondary' => array(
+									'buttons_font',
+									'meta_font',
+									'lead_font',
+								),
+								'sm_font_body'      => array(
+									'navigation_font',
+									'body_font',
+									'content_font',
+									'cite_font',
+									'input_font',
+								),
+								'sm_font_accent'    => array(
+									'accent_font'
+								),
+							),
+						),
+						'preset-2'      => array(
+							'label'   => __( 'Preset 2 (Default)', '__theme_txtd' ),
+							'options' => array(),
+							'config'  => array(
+								'sm_font_primary'   => array(
+									'super_display_font',
+									'display_font',
+									'heading_1_font',
+									'heading_2_font',
+									'heading_3_font',
+									'heading_4_font',
+									'quote_font',
+								),
+								'sm_font_secondary' => array(
+									'heading_5_font',
+									'heading_6_font',
+									'navigation_font',
+									'buttons_font',
+									'meta_font',
+								),
+								'sm_font_body'      => array(
+									'body_font',
+									'content_font',
+									'lead_font',
+									'cite_font',
+									'input_font',
+								),
+								'sm_font_accent'    => array(
+									'accent_font'
+								),
+							),
+						),
+						'preset-3'      => array(
+							'label'   => __( 'Preset 3', '__theme_txtd' ),
+							'options' => array(),
+							'config'  => array(
+								'sm_font_primary'   => array(
+									'super_display_font',
+									'display_font',
+									'heading_1_font',
+									'heading_2_font',
+								),
+								'sm_font_secondary' => array(
+									'heading_3_font',
+									'heading_4_font',
+									'heading_5_font',
+									'heading_6_font',
+									'quote_font',
+								),
+								'sm_font_body'      => array(
+									'buttons_font',
+									'meta_font',
+									'navigation_font',
+									'body_font',
+									'content_font',
+									'lead_font',
+									'cite_font',
+									'input_font',
+								),
+								'sm_font_accent'    => array(
+									'accent_font'
+								),
+							),
+						),
+						'preset-body'   => array(
+							'label'   => __( 'Misc: All Body', '__theme_txtd' ),
+							'options' => array(),
+							'config'  => array(
+								'sm_font_primary'   => array(),
+								'sm_font_secondary' => array(),
+								'sm_font_body'      => array(
+									'super_display_font',
+									'display_font',
+									'heading_1_font',
+									'heading_2_font',
+									'heading_3_font',
+									'heading_4_font',
+									'heading_5_font',
+									'heading_6_font',
+									'quote_font',
+									'buttons_font',
+									'meta_font',
+									'navigation_font',
+									'body_font',
+									'content_font',
+									'lead_font',
+									'cite_font',
+									'input_font',
+									'accent_font'
+								),
+								'sm_font_accent'    => array(),
+							),
+						),
+						'preset-accent' => array(
+							'label'   => __( 'Misc: All Accent', '__theme_txtd' ),
+							'options' => array(),
+							'config'  => array(
+								'sm_font_primary'   => array(),
+								'sm_font_secondary' => array(),
+								'sm_font_body'      => array(),
+								'sm_font_accent'    => array(
+									'super_display_font',
+									'display_font',
+									'heading_1_font',
+									'heading_2_font',
+									'heading_3_font',
+									'heading_4_font',
+									'heading_5_font',
+									'heading_6_font',
+									'quote_font',
+									'buttons_font',
+									'meta_font',
+									'navigation_font',
+									'body_font',
+									'content_font',
+									'lead_font',
+									'cite_font',
+									'input_font',
+									'accent_font'
+								),
+							),
+						)
+					),
+				),
 			),
 		)
 	);
