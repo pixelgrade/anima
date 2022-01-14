@@ -3346,8 +3346,7 @@ textarea {
 html.is-dark .sm-light {
   --logo-default-opacity: 0;
   --logo-inverted-opacity: 1;
-  --opacity-color: 0, 0, 0;
-  --opacity-level: 1; }
+  --opacity-level: 0.3; }
 
 .sm-light {
   --logo-default-opacity: 1;
@@ -3853,3 +3852,42 @@ html:after {
 mark {
   background: none;
   color: inherit; }
+
+/*------------------------------------*\
+  #BLOCK PATTERNS SHOWCASE
+\*------------------------------------*/
+body.block-patterns {
+  background: #F5F5F5;
+  background: var(--sm-bg-color-2); }
+
+.showcase-block-title {
+  position: relative; }
+  .showcase-block-title * {
+    font-weight: 400 !important;
+    font-family: system-font-sans-serif-clear, "SF Pro Display", "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitsream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif !important; }
+  @media only screen and (min-width: 768px) {
+    .showcase-block-title .wp-block-group__inner-container > * {
+      margin-left: 7.5%; }
+    .showcase-block-title:before {
+      content: " ";
+      position: absolute;
+      top: 20px;
+      left: 0px;
+      width: 30px;
+      height: 0px;
+      border-top: 2px solid var(--sm-current-fg1-color);
+      border-left: 2px solid var(--sm-current-fg1-color); } }
+
+@media only screen and (min-width: 768px) {
+  .showcase-block-title + div {
+    border: 1.25px solid #E5E6E8;
+    border-radius: 8px;
+    overflow: hidden;
+    transform-origin: 50% 0%;
+    transform: scale(0.8);
+    transition: all .4s ease;
+    --nb-emphasis-top-spacing: 1 !important;
+    --nb-emphasis-bottom-spacing: 1 !important; }
+    .showcase-block-title + div:hover {
+      transform: scale(1);
+      border-radius: 0px; } }
