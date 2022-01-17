@@ -318,18 +318,6 @@ function anima_custom_gutenberg_settings() {
 
 add_action( 'after_setup_theme', 'anima_custom_gutenberg_settings', 10 );
 
-function anima_should_enqueue_novablocks_fallbacks() {
-    if ( ! in_array( 'nova-blocks/nova-blocks.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-        return true;
-    }
-
-    if ( ( is_home() || is_search() || is_archive() ) && ! wp_style_is( 'novablocks/media-style', 'enqueued' ) ) {
-        return true;
-    }
-
-	return false;
-}
-
 function anima_is_using_block( $slug, $isblockarea ) {
 
 	if ( has_block( 'novablocks/' . $slug ) ) {

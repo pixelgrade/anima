@@ -153,17 +153,12 @@ function anima_register_scripts() {
 	wp_register_style( 'anima-theme', get_template_directory_uri() . '/dist/css/theme/style.css', array(), $theme->get( 'Version' ) );
 	wp_register_style( 'anima-theme-components', get_template_directory_uri() . '/dist/css/theme/components.css', array(), $theme->get( 'Version' ) );
 	wp_register_style( 'anima-utility', get_template_directory_uri() . '/dist/css/utility.css', array(), $theme->get( 'Version' ) );
-	wp_register_style( 'anima-gutenberg-legacy-frontend', get_template_directory_uri() . '/dist/css/gutenberg-legacy-frontend.css', array(), $theme->get( 'Version' ) );
-
-	// Nova Blocks Fallbacks
-    wp_register_style('novablocks/media', get_template_directory_uri() . '/fallbacks/nova-blocks/blocks/media/style.css', array(), '1.8.1');
 
 	wp_register_style('anima-novablocks-conversations', get_template_directory_uri() . '/dist/css/blocks/nova-blocks/conversations.css', array(), '1.8.0');
 
 	wp_register_style( 'anima-blocks-common', get_template_directory_uri() . '/dist/css/blocks/common.css', array(), $theme->get( 'Version' ) );
 	wp_register_style( 'anima-blocks-editor', get_template_directory_uri() . '/dist/css/blocks/editor.css', array( 'anima-blocks-common' ), $theme->get( 'Version' ) );
 	wp_register_style( 'anima-blocks-style', get_template_directory_uri() . '/dist/css/blocks/style.css', array( 'anima-blocks-common'), $theme->get( 'Version' ) );
-	wp_register_style( 'anima-gutenberg-legacy-editor', get_template_directory_uri() . '/dist/css/gutenberg-legacy-editor.css', array(), $theme->get( 'Version' ) );
 
 	wp_style_add_data( 'anima-theme', 'rtl', 'replace' );
 	wp_style_add_data( 'anima-theme-components', 'rtl', 'replace' );
@@ -173,10 +168,6 @@ add_action( 'wp_enqueue_scripts', 'anima_register_scripts', 5 );
 function anima_enqueue_theme_block_editor_assets() {
 	$theme  = wp_get_theme( get_template() );
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-
-	global $wp_version;
-	$is_old_wp_version = version_compare( $wp_version, '5.5', '<' );
-	$is_gutenberg_plugin_active = defined( 'GUTENBERG_VERSION' );
 
 	// @todo ????
 	anima_register_scripts();
@@ -195,10 +186,6 @@ function anima_enqueue_theme_block_editor_assets() {
 		$theme->get( 'Version' ),
 		true
 	);
-
-	if ( $is_old_wp_version && ! $is_gutenberg_plugin_active ) {
-		wp_enqueue_style( 'anima-gutenberg-legacy-editor' );
-    }
 }
 add_action( 'enqueue_block_editor_assets', 'anima_enqueue_theme_block_editor_assets', 10 );
 
@@ -206,11 +193,7 @@ function anima_scripts() {
 	$theme  = wp_get_theme( get_template() );
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-	global $wp_version;
 	global $post;
-
-	$is_old_wp_version = version_compare( $wp_version, '5.5', '<' );
-	$is_gutenberg_plugin_active = defined( 'GUTENBERG_VERSION' );
 
 	$used_blocks = array( 'media' );
 
@@ -230,10 +213,6 @@ function anima_scripts() {
     ), $theme->get( 'Version' ) );
 
 	wp_style_add_data( 'anima-style', 'rtl', 'replace' );
-
-    if ( anima_should_enqueue_novablocks_fallbacks() ) {
-        wp_enqueue_style( 'anima-novablocks-fallback-style', get_template_directory_uri() . '/dist/css/novablocks-fallback.css', array(), $theme->get( 'Version' ) );
-    }
 
 	wp_register_script( 'gsap-split-text', '//pxgcdn.com/js/gsap/2.1.3/plugins/SplitText' . $suffix . '.js', array(), null, true );
 	wp_register_script( 'gsap', '//pxgcdn.com/js/gsap/2.1.3/TweenMax' . $suffix . '.js', array( 'wp-mediaelement' ), null, true );
@@ -257,10 +236,6 @@ function anima_scripts() {
 		    wp_enqueue_script( 'comment-reply' );
 
 	    }
-	}
-
-	if ( $is_old_wp_version && ! $is_gutenberg_plugin_active ) {
-		wp_enqueue_style( 'anima-gutenberg-legacy-frontend' );
 	}
 }
 
