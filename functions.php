@@ -148,17 +148,17 @@ add_action( 'enqueue_block_assets', 'anima_deregister_gutenberg_styles', 10 );
 function anima_register_scripts() {
 	$theme  = wp_get_theme( get_template() );
 
-	wp_register_style( 'anima-custom-properties', get_template_directory_uri() . '/dist/css/custom-properties.css', array(), $theme->get( 'Version' ) );
-	wp_register_style( 'anima-social-links', get_template_directory_uri() . '/dist/css/social-links.css', array(), $theme->get( 'Version' ) );
-	wp_register_style( 'anima-theme', get_template_directory_uri() . '/dist/css/theme/style.css', array(), $theme->get( 'Version' ) );
-	wp_register_style( 'anima-theme-components', get_template_directory_uri() . '/dist/css/theme/components.css', array(), $theme->get( 'Version' ) );
-	wp_register_style( 'anima-utility', get_template_directory_uri() . '/dist/css/utility.css', array(), $theme->get( 'Version' ) );
+	wp_register_style( 'anima-custom-properties', trailingslashit( get_template_directory_uri() ) . 'dist/css/custom-properties.css', array(), $theme->get( 'Version' ) );
+	wp_register_style( 'anima-social-links', trailingslashit( get_template_directory_uri() ) . 'dist/css/social-links.css', array(), $theme->get( 'Version' ) );
+	wp_register_style( 'anima-theme', trailingslashit( get_template_directory_uri() ) . 'dist/css/theme/style.css', array(), $theme->get( 'Version' ) );
+	wp_register_style( 'anima-theme-components', trailingslashit( get_template_directory_uri() ) . 'dist/css/theme/components.css', array(), $theme->get( 'Version' ) );
+	wp_register_style( 'anima-utility', trailingslashit( get_template_directory_uri() ) . 'dist/css/utility.css', array(), $theme->get( 'Version' ) );
 
-	wp_register_style('anima-novablocks-conversations', get_template_directory_uri() . '/dist/css/blocks/nova-blocks/conversations.css', array(), '1.8.0');
+	wp_register_style('anima-novablocks-conversations', trailingslashit( get_template_directory_uri() ) . 'dist/css/blocks/nova-blocks/conversations.css', array(), '1.8.0');
 
-	wp_register_style( 'anima-blocks-common', get_template_directory_uri() . '/dist/css/blocks/common.css', array(), $theme->get( 'Version' ) );
-	wp_register_style( 'anima-blocks-editor', get_template_directory_uri() . '/dist/css/blocks/editor.css', array( 'anima-blocks-common' ), $theme->get( 'Version' ) );
-	wp_register_style( 'anima-blocks-style', get_template_directory_uri() . '/dist/css/blocks/style.css', array( 'anima-blocks-common'), $theme->get( 'Version' ) );
+	wp_register_style( 'anima-blocks-common', trailingslashit( get_template_directory_uri() ) . 'dist/css/blocks/common.css', array(), $theme->get( 'Version' ) );
+	wp_register_style( 'anima-blocks-editor', trailingslashit( get_template_directory_uri() ) . 'dist/css/blocks/editor.css', array( 'anima-blocks-common' ), $theme->get( 'Version' ) );
+	wp_register_style( 'anima-blocks-style', trailingslashit( get_template_directory_uri() ) . 'dist/css/blocks/style.css', array( 'anima-blocks-common'), $theme->get( 'Version' ) );
 
 	wp_style_add_data( 'anima-theme', 'rtl', 'replace' );
 	wp_style_add_data( 'anima-theme-components', 'rtl', 'replace' );
@@ -169,10 +169,7 @@ function anima_enqueue_theme_block_editor_assets() {
 	$theme  = wp_get_theme( get_template() );
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-	// @todo ????
-	anima_register_scripts();
-
-	wp_enqueue_style( 'anima-block-editor-styles', get_template_directory_uri() . '/dist/css/block-editor.css', array(
+	wp_enqueue_style( 'anima-block-editor-styles', trailingslashit( get_template_directory_uri() ) . 'dist/css/block-editor.css', array(
         'anima-custom-properties',
         'anima-theme-components',
         'anima-blocks-editor',
@@ -181,7 +178,7 @@ function anima_enqueue_theme_block_editor_assets() {
 
 	wp_enqueue_script(
 		'anima-editor-js',
-		get_template_directory_uri() . '/dist/js/editor' . $suffix . '.js',
+		trailingslashit( get_template_directory_uri() ) . 'dist/js/editor' . $suffix . '.js',
 		array( 'wp-hooks' ),
 		$theme->get( 'Version' ),
 		true
