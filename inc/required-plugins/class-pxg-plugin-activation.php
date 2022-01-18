@@ -75,7 +75,7 @@ if ( ! class_exists( 'PXG_Plugin_Activation' ) ) {
 			}
 
 			// Load class strings.
-			$this->strings = array(
+			$this->strings = [
 				'page_title'                      => esc_html__( 'Install Required Plugins', '__plugin_txtd' ),
 				'menu_title'                      => esc_html__( 'Install Plugins', '__plugin_txtd' ),
 				/* translators: %s: plugin name. */
@@ -146,7 +146,7 @@ if ( ! class_exists( 'PXG_Plugin_Activation' ) ) {
 				'dismiss'                         => esc_html__( 'Dismiss this notice', '__plugin_txtd' ),
 				'notice_cannot_install_activate'  => esc_html__( 'There are one or more required or recommended plugins to install, update or activate.', '__plugin_txtd' ),
 				'contact_admin'                   => esc_html__( 'Please contact the administrator of this site for help.', '__plugin_txtd' ),
-			);
+			];
 
 			do_action( 'tgmpa_register' );
 
@@ -162,43 +162,43 @@ if ( ! class_exists( 'PXG_Plugin_Activation' ) ) {
 				// Sort the plugins.
 				array_multisort( $this->sort_order, SORT_ASC, $this->plugins );
 
-				add_action( 'admin_menu', array( $this, 'admin_menu' ) );
-				add_action( 'admin_head', array( $this, 'dismiss' ) );
+				add_action( 'admin_menu', [ $this, 'admin_menu' ] );
+				add_action( 'admin_head', [ $this, 'dismiss' ] );
 
 				// Prevent the normal links from showing underneath a single install/update page.
-				add_filter( 'install_plugin_complete_actions', array( $this, 'actions' ) );
-				add_filter( 'update_plugin_complete_actions', array( $this, 'actions' ) );
+				add_filter( 'install_plugin_complete_actions', [ $this, 'actions' ] );
+				add_filter( 'update_plugin_complete_actions', [ $this, 'actions' ] );
 
 				if ( $this->has_notices ) {
-					add_action( 'admin_notices', array( $this, 'notices' ) );
-					add_action( 'admin_init', array( $this, 'admin_init' ), 1 );
-					add_action( 'admin_enqueue_scripts', array( $this, 'thickbox' ) );
+					add_action( 'admin_notices', [ $this, 'notices' ] );
+					add_action( 'admin_init', [ $this, 'admin_init' ], 1 );
+					add_action( 'admin_enqueue_scripts', [ $this, 'thickbox' ] );
 				}
 			}
 
 			// If needed, filter plugin action links.
-			add_action( 'load-plugins.php', array( $this, 'add_plugin_action_link_filters' ), 1 );
+			add_action( 'load-plugins.php', [ $this, 'add_plugin_action_link_filters' ], 1 );
 
 			// Make sure things get reset on switch theme.
-			add_action( 'switch_theme', array( $this, 'flush_plugins_cache' ) );
+			add_action( 'switch_theme', [ $this, 'flush_plugins_cache' ] );
 
 			if ( $this->has_notices ) {
-				add_action( 'switch_theme', array( $this, 'update_dismiss' ) );
+				add_action( 'switch_theme', [ $this, 'update_dismiss' ] );
 			}
 
 			// Setup the force activation hook.
 			if ( true === $this->has_forced_activation ) {
-				add_action( 'admin_init', array( $this, 'force_activation' ) );
+				add_action( 'admin_init', [ $this, 'force_activation' ] );
 			}
 
 			// Setup the force deactivation hook.
 			if ( true === $this->has_forced_deactivation ) {
-				add_action( 'switch_theme', array( $this, 'force_deactivation' ) );
+				add_action( 'switch_theme', [ $this, 'force_deactivation' ] );
 			}
 
 			// Add CSS for the TGMPA admin page.
 			if ( method_exists( $this, 'admin_css' ) ) {
-				add_action( 'admin_head', array( $this, 'admin_css' ) );
+				add_action( 'admin_head', [ $this, 'admin_css' ] );
 			}
 		}
 
@@ -245,7 +245,7 @@ if ( ! class_exists( 'PXG_Plugin_Activation' ) ) {
 			}
 
 			// Store for the plugin slugs by message type.
-			$message = array();
+			$message = [];
 
 			// Initialize counters used to determine plurality of action link texts.
 			$install_link_count          = 0;
@@ -327,14 +327,14 @@ if ( ! class_exists( 'PXG_Plugin_Activation' ) ) {
 					$rendered .= $this->create_user_action_links_for_notice( 0, 0, 0, $line_template );
 				} else {
 
-					// If dismissable is false and a message is set, output it now.
+					// If dismissible is false and a message is set, output it now.
 					if ( ! $this->dismissable && ! empty( $this->dismiss_msg ) ) {
 						$rendered .= sprintf( $line_template, wp_kses_post( $this->dismiss_msg ) );
 					}
 
 					// Render the individual message lines for the notice.
 					foreach ( $message as $type => $plugin_group ) {
-						$linked_plugins = array();
+						$linked_plugins = [];
 
 						// Get the external info link for a plugin if one is available.
 						foreach ( $plugin_group as $plugin_slug ) {
@@ -343,7 +343,7 @@ if ( ! class_exists( 'PXG_Plugin_Activation' ) ) {
 						unset( $plugin_slug );
 
 						$count          = count( $plugin_group );
-						$linked_plugins = array_map( array( 'TGMPA_Utils', 'wrap_in_em' ), $linked_plugins );
+						$linked_plugins = array_map( [ 'TGMPA_Utils', 'wrap_in_em' ], $linked_plugins );
 						$last_plugin    = array_pop( $linked_plugins ); // Pop off last name to prep for readability.
 						$imploded       = empty( $linked_plugins ) ? $last_plugin : ( implode( ', ', $linked_plugins ) . ' ' . esc_html_x( 'and', 'plugin A *and* plugin B', '__plugin_txtd' ) . ' ' . $last_plugin );
 
@@ -370,6 +370,8 @@ if ( ! class_exists( 'PXG_Plugin_Activation' ) ) {
 			if ( 'options-general' !== $GLOBALS['current_screen']->parent_base ) {
 				$this->display_settings_errors();
 			}
+
+			return;
 		}
 
 		/**
@@ -399,7 +401,7 @@ if ( ! class_exists( 'PXG_Plugin_Activation' ) ) {
 		 * @param string $slug Plugin slug (typically folder name) as provided by the developer.
 		 * @return string Either file path for plugin if installed, or just the plugin slug.
 		 */
-		protected function _get_plugin_basename_from_slug( $slug ) {
+		protected function _get_plugin_basename_from_slug( $slug ): string {
 
 			$plugin_basename = false;
 			$plugins         = $this->get_plugins();
@@ -438,7 +440,6 @@ if ( ! class_exists( 'PXG_Plugin_Activation' ) ) {
 
 				if ( true === $overwrite ) {
 					$plugin_basename = $new_plugin_basename;
-					continue;
 				}
 			}
 
@@ -475,9 +476,9 @@ if ( ! class_exists( 'PXG_Plugin_Activation' ) ) {
 			// If we already have a TGMPA instance that is not a PXG_Plugin_Activation instance,
 			// we need to clean first and then get a proper instance.
 			if ( ! empty( $GLOBALS['tgmpa'] ) && ! ( $GLOBALS['tgmpa'] instanceof PXG_Plugin_Activation ) ) {
-				remove_action( 'init', array( $GLOBALS['tgmpa'], 'load_textdomain' ), 5 );
-				remove_filter( 'load_textdomain_mofile', array( $GLOBALS['tgmpa'], 'overload_textdomain_mofile' ) );
-				remove_action( 'init', array( $GLOBALS['tgmpa'], 'init' ) );
+				remove_action( 'init', [ $GLOBALS['tgmpa'], 'load_textdomain' ], 5 );
+				remove_filter( 'load_textdomain_mofile', [ $GLOBALS['tgmpa'], 'overload_textdomain_mofile' ] );
+				remove_action( 'init', [ $GLOBALS['tgmpa'], 'init' ] );
 			}
 
 			$GLOBALS['tgmpa'] = PXG_Plugin_Activation::get_instance();

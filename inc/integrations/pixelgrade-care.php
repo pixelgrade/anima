@@ -17,10 +17,10 @@ function anima_setup_pixelgrade_care() {
 	/*
 	 * Declare support for Pixelgrade Care
 	 */
-	add_theme_support( 'pixelgrade_care', array(
+	add_theme_support( 'pixelgrade_care', [
 			'support_url'   => 'https://pixelgrade.com/docs/anima/',
 			'changelog_url' => 'https://wupdates.com/anima-changelog',
-		)
+		]
 	);
 }
 add_action( 'after_setup_theme', 'anima_setup_pixelgrade_care', 10 );
@@ -85,10 +85,10 @@ function anima_pixcare_install_page() {
 
 	$install_url = wp_nonce_url(
 		add_query_arg(
-			array(
+			[
 				'plugin'        => urlencode( 'pixelgrade-care' ),
 				'tgmpa-install' => 'install-plugin',
-			),
+			],
 			admin_url( 'themes.php?page=install-required-plugins' )
 		),
 		'tgmpa-install',
@@ -99,10 +99,10 @@ function anima_pixcare_install_page() {
 
 	$activate_url = wp_nonce_url(
 		add_query_arg(
-			array(
+			[
 				'plugin'        => urlencode( 'pixelgrade-care' ),
 				'tgmpa-activate' => 'activate-plugin',
-			),
+			],
 			admin_url( 'themes.php?page=install-required-plugins' )
 		),
 		'tgmpa-activate',

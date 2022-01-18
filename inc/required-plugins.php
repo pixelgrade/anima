@@ -19,8 +19,8 @@ function anima_register_required_plugins() {
 		$protocol = 'https:';
 	}
 
-	$plugins = array(
-		array(
+	$plugins = [
+		[
 			'name'               => 'Pixelgrade Care',
 			'slug'               => 'pixelgrade-care',
 			'is_callable'        => 'PixelgradeCare',
@@ -30,30 +30,30 @@ function anima_register_required_plugins() {
 			'source'             => $protocol . '//wupdates.com/api_wupl_version/JxbVe/2v5t1czd3vw4kmb5xqmyxj1kkwmnt9q0463lhj393r5yxtshdyg05jssgd4jglnfx7A2vdxtfdcf78r9r1sm217k4ht3r2g7pkdng5f6tgwyrk23wryA0pjxvs7gwhhb',
 			'external_url'       => $protocol . '//github.com/pixelgrade/pixelgrade_care',
 			'version'            => '1.9.3',
-		),
-		array(
+		],
+		[
 			'name'        => 'Style Manager',
 			'slug'        => 'style-manager',
 			'is_callable' => '\Pixelgrade\StyleManager\plugin',
 			'required'    => true,
 			'version'     => '2.0.6',
-		),
-		array(
+		],
+		[
 			'name'     => 'Nova Blocks',
 			'slug'     => 'nova-blocks',
 			'required' => true,
 			'version'  => '1.12.8',
-		),
-	);
+		],
+	];
 
-	$config = array(
+	$config = [
 		'domain'       => '__theme_txtd', // Text domain - likely want to be the same as your theme.
 		'default_path' => '', // Default absolute path to pre-packaged plugins
 		'menu'         => 'install-required-plugins', // Menu slug
 		'has_notices'  => true, // Show admin notices or not
 		'is_automatic' => false, // Automatically activate plugins after installation or not
 		'message'      => '', // Message to output right before the plugins table
-		'strings' => array(
+		'strings' => [
 			'page_title'                      => esc_html__( 'Install Required Plugins', '__theme_txtd' ),
 			'menu_title'                      => esc_html__( 'Install Plugins', '__theme_txtd' ),
 			'installing'                      => esc_html__( 'Installing Plugin: %s', '__theme_txtd' ),
@@ -85,8 +85,8 @@ function anima_register_required_plugins() {
 			'plugin_activated'                => esc_html__( 'Plugin activated successfully.', '__theme_txtd' ),
 			'complete'                        => esc_html__( 'All plugins installed and activated successfully. %s', '__theme_txtd' )
 			// %1$s = dashboard link
-		),
-	);
+		],
+	];
 
 	tgmpa( $plugins, $config );
 }
@@ -100,7 +100,7 @@ function anima_prevent_tgmpa_notices( $notices, $total_required_action_count ) {
 
 	// If the user has dismissed the notification, oblige.
 	if ( get_user_meta( get_current_user_id(), 'tgmpa_dismissed_notice_' . TGM_Plugin_Activation::get_instance()->id, true ) ) { // WPCS: CSRF ok.
-		return array();
+		return [];
 	}
 
 	return $notices;

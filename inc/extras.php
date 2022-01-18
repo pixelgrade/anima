@@ -18,7 +18,7 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 	}
 }
 
-function anima_first_block_is_hero() {
+function anima_first_block_is_hero(): bool {
 	global $post;
 
     if ( is_page() && ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
@@ -32,11 +32,11 @@ function anima_first_block_is_hero() {
 	return false;
 }
 
-function anima_first_block_is( $blockTypes ) {
+function anima_first_block_is( $blockTypes ): bool {
 	global $post;
 
 	if ( ! is_array( $blockTypes ) ) {
-	    $blockTypes = array( $blockTypes );
+	    $blockTypes = [ $blockTypes ];
     }
 
 	if ( is_page() && ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
@@ -50,7 +50,7 @@ function anima_first_block_is( $blockTypes ) {
 	return false;
 }
 
-function anima_remove_site_padding_bottom() {
+function anima_remove_site_padding_bottom(): bool {
 	global $post;
 
 	if ( ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
@@ -73,7 +73,7 @@ function anima_remove_site_padding_bottom() {
 	return false;
 }
 
-function anima_has_moderate_media_card_after_hero() {
+function anima_has_moderate_media_card_after_hero(): bool {
 	global $post;
 
 	if ( ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
@@ -93,7 +93,7 @@ function anima_has_moderate_media_card_after_hero() {
 	return false;
 }
 
-function anima_exclude_null_blocks( $block ) {
+function anima_exclude_null_blocks( array $block ): bool {
     return ! empty( $block['blockName'] );
 }
 
@@ -146,7 +146,7 @@ if ( ! function_exists( 'anima_custom_excerpt_length' ) ) {
 	 *
 	 * @return int (Maybe) modified excerpt length.
 	 */
-	function anima_custom_excerpt_length( $length ) {
+	function anima_custom_excerpt_length( int $length ): int {
 		return 25;
 	}
 }
@@ -160,14 +160,12 @@ if ( ! function_exists( 'pixelgrade_user_has_access' ) ) {
 	 *
 	 * @return bool
 	 */
-	function pixelgrade_user_has_access( $feature ) {
+	function pixelgrade_user_has_access( string $feature ): bool {
 		switch ( $feature ) {
 			case 'pro-features':
 				return apply_filters( 'pixelgrade_enable_pro_features', false );
-				break;
 			case 'woocommerce':
 				return apply_filters( 'pixelgrade_enable_woocommerce', false );
-				break;
 			default:
 				break;
 		}
@@ -182,9 +180,9 @@ if ( ! function_exists( 'pixelgrade_get_original_theme_name' ) ) {
 	 *
 	 * @return string
 	 */
-	function pixelgrade_get_original_theme_name() {
+	function pixelgrade_get_original_theme_name(): string {
 		// Get the id of the current theme
-		$wupdates_ids = apply_filters( 'wupdates_gather_ids', array() );
+		$wupdates_ids = apply_filters( 'wupdates_gather_ids', [] );
 		$slug         = basename( get_template_directory() );
 		if ( ! empty( $wupdates_ids[ $slug ]['name'] ) ) {
 			return $wupdates_ids[ $slug ]['name'];
@@ -193,11 +191,11 @@ if ( ! function_exists( 'pixelgrade_get_original_theme_name' ) ) {
 		// If we couldn't get the WUpdates name, we will fallback to the theme header name entry.
 		$theme_header_name = wp_get_theme( get_template() )->get( 'Name' );
 		if ( ! empty( $theme_header_name ) ) {
-			return ucwords( str_replace( array( '-', '_' ), ' ', $theme_header_name ) );
+			return ucwords( str_replace( [ '-', '_' ], ' ', $theme_header_name ) );
 		}
 
 		// The ultimate fallback is the template directory, uppercased.
-		return ucwords( str_replace( array( '-', '_' ), ' ', $slug ) );
+		return ucwords( str_replace( [ '-', '_' ], ' ', $slug ) );
 	}
 }
 
@@ -209,7 +207,7 @@ if ( ! function_exists( 'anima_parse_content_tags' ) ) {
 	 *
 	 * @return string
 	 */
-	function anima_parse_content_tags( $content ) {
+	function anima_parse_content_tags( string $content ): string {
 		$original_content = $content;
 
 		// Allow others to alter the content before we do our work
@@ -230,38 +228,38 @@ if ( ! function_exists( 'anima_parse_content_tags' ) ) {
 		if ( false !== strpos( $content, '%first_name%' ) ||
 		     false !== strpos( $content, '%last_name%' ) ||
 		     false !== strpos( $content, '%display_name%' ) ) {
-			$user_id = false;
+			$userId = false;
 			// We need to get the current ID in more global manner
 			$current_object_id = get_queried_object_id();
 			$current_post      = get_post( $current_object_id );
 			if ( ! empty( $current_post->post_author ) ) {
-				$user_id = $current_post->post_author;
+				$userId = $current_post->post_author;
 			} else {
 				global $authordata;
-				$user_id = isset( $authordata->ID ) ? $authordata->ID : false;
+				$userId = $authordata->ID ?? false;
 			}
 
 			// If we still haven't got a user ID, we will just use the first user on the site
-			if ( empty( $user_id ) ) {
-				$blogusers = get_users(
-					array(
+			if ( empty( $userId ) ) {
+				$blogUsers = get_users(
+					[
 						'role'   => 'administrator',
 						'number' => 1,
-					)
+					]
 				);
-				if ( ! empty( $blogusers ) ) {
-					$blogusers = reset( $blogusers );
-					$user_id   = $blogusers->ID;
+				if ( ! empty( $blogUsers ) ) {
+					$blogUsers = reset( $blogUsers );
+					$userId   = $blogUsers->ID;
 				}
 			}
 
-			if ( ! empty( $user_id ) ) {
+			if ( ! empty( $userId ) ) {
 				// %first_name%
-				$content = str_replace( '%first_name%', get_the_author_meta( 'first_name', $user_id ), $content );
+				$content = str_replace( '%first_name%', get_the_author_meta( 'first_name', $userId ), $content );
 				// %last_name%
-				$content = str_replace( '%last_name%', get_the_author_meta( 'last_name', $user_id ), $content );
+				$content = str_replace( '%last_name%', get_the_author_meta( 'last_name', $userId ), $content );
 				// %display_name%
-				$content = str_replace( '%display_name%', get_the_author_meta( 'display_name', $user_id ), $content );
+				$content = str_replace( '%display_name%', get_the_author_meta( 'display_name', $userId ), $content );
 			}
 		}
 
@@ -295,14 +293,14 @@ if ( ! function_exists( 'anima_dark_mode_support' ) ) {
 }
 add_action( 'after_setup_theme', 'anima_dark_mode_support', 10 );
 
-function anima_block_area_has_blocks( $slug ) {
-	$posts = get_posts( array(
+function anima_block_area_has_blocks( string $slug ): bool {
+	$posts = get_posts( [
 		'name'        => $slug,
 		'post_type'   => 'block_area',
 		'post_status' => 'publish',
 		'numberposts' => 1,
 		'fields' => 'ids',
-	) );
+	] );
 
 	if ( ! empty( $posts ) && has_blocks( reset( $posts ) ) ) {
 	    return true;
@@ -312,22 +310,20 @@ function anima_block_area_has_blocks( $slug ) {
 }
 
 function anima_custom_gutenberg_settings() {
-	add_theme_support( 'editor-gradient-presets', array() );
+	add_theme_support( 'editor-gradient-presets', [] );
 	add_theme_support( 'disable-custom-gradients' );
 }
 
 add_action( 'after_setup_theme', 'anima_custom_gutenberg_settings', 10 );
 
-function anima_is_using_block( $slug, $isblockarea ) {
+function anima_is_using_block( string $slug, bool $isBlockArea ): bool {
 
 	if ( has_block( 'novablocks/' . $slug ) ) {
 		return true;
 	}
 
-	if ( $isblockarea ) {
-		if ( anima_block_area_has_blocks( $slug ) ) {
-			return true;
-		}
+	if ( $isBlockArea && anima_block_area_has_blocks( $slug ) ) {
+		return true;
 	}
 
 	return false;
@@ -358,10 +354,11 @@ if ( ! function_exists( 'anima_add_primary_menu_item_description' ) ) {
 	 * @param WP_Post  $item        Menu item data object.
 	 * @param int      $depth       Depth of menu item. Used for padding.
 	 * @param stdClass $args        An object of wp_nav_menu() arguments.
+     *
      * @return string Nav menu item start element.
 	 */
 
-	function anima_add_primary_menu_item_description( $item_output, $item, $depth, $args ) {
+	function anima_add_primary_menu_item_description( string $item_output, WP_Post $item, int $depth, stdClass $args ): string {
 
 		if ( ( 'primary' == $args->theme_location || 'secondary' == $args->theme_location ) && $depth && $item->description ) {
 			$item_output = str_replace( '</a>', '<span class="menu-description">' . $item->description . '</span></a>', $item_output );
@@ -371,7 +368,6 @@ if ( ! function_exists( 'anima_add_primary_menu_item_description' ) ) {
 
 	}
 }
-
 add_filter( 'walker_nav_menu_start_el', 'anima_add_primary_menu_item_description', 10, 4 );
 
 if ( ! function_exists('anima_get_content_markup' ) ) {
@@ -382,15 +378,13 @@ if ( ! function_exists('anima_get_content_markup' ) ) {
 
 
 	function anima_get_content_markup() {
-		ob_start(); ?>
+		ob_start();
 
-			<?php
-			do_action( 'anima_before_content' );
-			the_content();
-			do_action( 'anima_after_content' );
-			?>
+		do_action( 'anima_before_content' );
+		the_content();
+		do_action( 'anima_after_content' );
 
-		<?php return ob_get_clean();
+		return ob_get_clean();
 	}
 }
 
@@ -428,18 +422,17 @@ if ( ! function_exists( 'anima_article_header' ) ) {
 
 	function anima_article_header() {
 
-		$article_header_classes = array( 'article-header' );
+		$article_header_classes = [ 'article-header' ];
 
 		if ( ! anima_is_active_sidebar( 'sidebar-1' )) {
 			$article_header_classes[] = 'wp-block-group__inner-container';
         }
 
 		if ( 'post' !== get_post_type() ) {
-			return;
+			return '';
 		}
 
-		ob_start();
-		?>
+		ob_start(); ?>
 
         <div class="<?php echo esc_attr( join( ' ', $article_header_classes ) ); ?>">
 
@@ -586,11 +579,13 @@ if ( ! function_exists('anima_get_search_content_markup') ) {
 
 /**
  * Return the reading time in minutes for a post content.
+ *
  * @param WP_Post|int $post
- * @param int $wpm The words per minute reading rate to take into account.
+ * @param int         $wpm The words per minute reading rate to take into account.
+ *
  * @return int
  */
-function anima_get_post_reading_time_in_minutes( $post, $wpm = 250 ) {
+function anima_get_post_reading_time_in_minutes( $post, int $wpm = 250 ): int {
 	$post = get_post( $post );
 
 	if ( ! ( $post instanceof WP_Post ) ) {
@@ -614,11 +609,13 @@ function anima_get_post_reading_time_in_minutes( $post, $wpm = 250 ) {
 
 /**
  * Calculate the reading time in minutes for a piece of content.
+ *
  * @param string $content HTML post content.
- * @param int $wpm The words per minute reading rate to take into account.
+ * @param int    $wpm     The words per minute reading rate to take into account.
+ *
  * @return int
  */
-function anima_get_reading_time_in_minutes( $content, $wpm = 250 ) {
+function anima_get_reading_time_in_minutes( string $content, int $wpm = 250 ): int {
 	// Calculate the time in seconds for the images in the content.
 	$images_time = 0;
 	if ( preg_match_all( '/<img\s[^>]+>/', $content, $matches ) ) {
@@ -677,9 +674,9 @@ function anima_page_class( $class = '' ) {
  * @param string|string[] $class Space-separated string or array of class names to add to the class list.
  * @return string[] Array of class names.
  */
-function anima_get_page_class( $class = '' ) {
+function anima_get_page_class( $class = '' ): array {
 
-	$classes = array();
+	$classes = [];
 
 	$classes[] = 'site';
 
@@ -699,7 +696,7 @@ if ( ! class_exists( 'PixCustomifyPlugin' ) && ! class_exists( 'Pixelgrade\Style
     }
 }
 
-function anima_get_archive_blocks( $name, $number_of_posts, $posts_ids ) {
+function anima_get_archive_blocks( $name, $number_of_posts, $posts_ids ): string {
 
 	switch ( $name ) {
 		case 'felt':
@@ -713,7 +710,7 @@ function anima_get_archive_blocks( $name, $number_of_posts, $posts_ids ) {
                         "layoutStyle": "classic",
                         "loadingMode": "manual",
                         "postsToShow": ' . $number_of_posts . ' ,
-                        "specificPosts": [' . implode( ",", $posts_ids ) . ' ],
+                        "specificPosts": [' . implode( ',', $posts_ids ) . ' ],
                         "paletteVariation": 2,
                         "contentPaletteVariation": 2,
                         "contentPosition": "center left",
@@ -738,7 +735,7 @@ function anima_get_archive_blocks( $name, $number_of_posts, $posts_ids ) {
                 "layoutStyle": "classic",
                 "loadingMode": "manual",
                 "postsToShow": ' . $number_of_posts . ' ,
-                "specificPosts": [' . implode( ",", $posts_ids ) . ' ],
+                "specificPosts": [' . implode( ',', $posts_ids ) . ' ],
                 "paletteVariation": 2,
                 "contentPaletteVariation": 2,
                 "cardLayout":  "horizontal" ,

@@ -20,11 +20,11 @@ if ( is_active_sidebar( 'sidebar-1' ) ) {
 		anima_get_sidebar_markup() .
 		'<!-- /wp:novablocks/sidecar-area -->';
 
-    $sidecar_attributes = array(
-        "sidebarPosition" => "right",
-	    "sidebarWidth" => "medium",
-        "lastItemIsSticky" => true
-    );
+    $sidecar_attributes = [
+	    'sidebarPosition'  => 'right',
+	    'sidebarWidth'     => 'medium',
+	    'lastItemIsSticky' => true
+    ];
 
     $sidecar_attributes_string = json_encode( $sidecar_attributes );
 }

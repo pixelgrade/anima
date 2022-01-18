@@ -56,12 +56,14 @@ class Anima_Upgrade {
 	/**
 	 * Constructor function.
 	 * @access  public
-	 * @param string $slug The theme slug, used for prefixing
+	 *
+	 * @param string $slug    The theme slug, used for prefixing
 	 * @param string $version The current theme version, after the upgrade.
-	 * @param string $name Optional. The theme name.
+	 * @param string $name    Optional. The theme name.
+	 *
 	 * @return  void
 	 */
-	public function __construct( $slug, $version, $name = '' ) {
+	public function __construct( string $slug, string $version, string $name = '' ) {
 
 		$this->theme_slug = $slug;
 		$this->theme_version = $version;
@@ -75,8 +77,8 @@ class Anima_Upgrade {
 	 * Register our actions and filters
 	 */
 	public function register_hooks() {
-		add_action( 'admin_init', array( $this, 'upgrade' ), 5 );
-		add_action( 'pixelgrade/did_auto_install_or_update', array( $this, 'upgrade' ), 10 );
+		add_action( 'admin_init', [ $this, 'upgrade' ], 5 );
+		add_action( 'pixelgrade/did_auto_install_or_update', [ $this, 'upgrade' ], 10 );
 	}
 
 	/**
@@ -87,10 +89,9 @@ class Anima_Upgrade {
 		// Make sure the upgrade routines class is available.
 		require_once( trailingslashit( get_template_directory() ) . 'inc/upgrade/class-Anima_Upgrade_Routines.php' );
 
-		$upgradeOk    = true;
 		$savedVersion = $this->get_version_saved();
 		$newVersion   = $this->theme_version;
-		$new_versions = array();
+		$new_versions = [];
 
 		// If the two versions are equal, there is not much to do.
 		if ( $savedVersion === $newVersion ) {
@@ -112,9 +113,9 @@ class Anima_Upgrade {
 		}
 
 		// Post-upgrade, display notices and save the new version in the options.
-		if ( $upgradeOk && ! empty( $new_versions ) ) {
+		if ( ! empty( $new_versions ) ) {
 			$this->new_versions = $new_versions;
-			add_action( 'admin_notices', array( $this, 'notice_new_version' ) );
+			add_action( 'admin_notices', [ $this, 'notice_new_version' ] );
 			$this->save_version_number();
 		}
 
@@ -123,12 +124,12 @@ class Anima_Upgrade {
 	/**
 	 * Compares version numbers and determines if the result is less than zero.
 	 *
-	 * @param  string $version1 A version string such as '1', '1.1', '1.1.1', '2.0', etc.
-	 * @param  string $version2 A version string such as '1', '1.1', '1.1.1', '2.0', etc.
+	 * @param string $version1 A version string such as '1', '1.1', '1.1.1', '2.0', etc.
+	 * @param string $version2 A version string such as '1', '1.1', '1.1.1', '2.0', etc.
 	 *
 	 * @return bool true if version_compare of $versions1 and $version2 shows $version1 as earlier.
 	 */
-	public function is_version_less_than( $version1, $version2 ) {
+	public function is_version_less_than( string $version1, string $version2 ): bool {
 		return ( version_compare( $version1, $version2 ) < 0 );
 	}
 
@@ -186,13 +187,13 @@ class Anima_Upgrade {
 	 *
 	 * @return Anima_Upgrade Main Anima_Upgrade instance
 	 */
-	public static function instance( $slug, $version, $name = '' ) {
+	public static function instance( string $slug, string $version, string $name = '' ): ?Anima_Upgrade {
 
 		if ( is_null( self::$_instance ) ) {
 			self::$_instance = new self( $slug, $version, $name );
 		}
 		return self::$_instance;
-	} // End instance ()
+	}
 
 	/**
 	 * Cloning is forbidden.

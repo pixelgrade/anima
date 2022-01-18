@@ -28,11 +28,11 @@ class Anima_Upgrade_Routines {
     protected $migrations_dir = '';
 
     /**
-     * @param string $from Version string to upgrade from.
-     * @param string $to Version string to upgrade to.
+     * @param string $from           Version string to upgrade from.
+     * @param string $to             Version string to upgrade to.
      * @param string $migrations_dir Absolute path to migrations directory holding the migration files.
      */
-    public function __construct( $from, $to, $migrations_dir ) {
+    public function __construct( string $from, string $to, string $migrations_dir ) {
         $this->version_from = $from;
         $this->version_to = $to;
         $this->migrations_dir = $migrations_dir;
@@ -45,7 +45,7 @@ class Anima_Upgrade_Routines {
         $migrations = $this->find_migrations();
 
         // Run in sub-function for the scope to be in this class.
-        array_map( array( $this, 'run_migration' ), $migrations );
+        array_map( [ $this, 'run_migration' ], $migrations );
     }
 
     /**
@@ -53,9 +53,9 @@ class Anima_Upgrade_Routines {
      *
      * @return array
      */
-    public function find_migrations() {
+    public function find_migrations(): array {
         $files = glob(rtrim( $this->migrations_dir, '/' ) . '/*.php');
-        $migrations =  array();
+        $migrations =  [];
 
         // Return empty array when glob returns non-array value.
         if ( ! is_array( $files ) ) {
@@ -84,7 +84,7 @@ class Anima_Upgrade_Routines {
      *
      * @param string $file The absolute path to the migration file.
      */
-    protected function run_migration( $file ) {
+    protected function run_migration( string $file ) {
         include $file;
     }
 }

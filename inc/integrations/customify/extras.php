@@ -76,7 +76,7 @@ if ( ! function_exists( 'pixelgrade_option' ) ) {
 		$option_value = null;
 
 		// Fire the all-gathering-filter that Customify uses so we can get as much data about this option as possible.
-		$config = apply_filters( 'customify_filter_fields', array() );
+		$config = apply_filters( 'customify_filter_fields', [] );
 
 		if ( ! isset( $config['opt-name'] ) ) {
 			return $default;
@@ -122,10 +122,10 @@ if ( ! function_exists( 'pixelgrade_get_option_customizer_config' ) ) {
 	 *
 	 * @return array|false The option config or false on failure.
 	 */
-	function pixelgrade_get_option_customizer_config( $option_id, $config = array() ) {
+	function pixelgrade_get_option_customizer_config( $option_id, $config = [] ) {
 		if ( empty( $config ) ) {
 			// Fire the all-gathering-filter that Customify uses so we can get as much data about this option as possible.
-			$config = apply_filters( 'customify_filter_fields', array() );
+			$config = apply_filters( 'customify_filter_fields', [] );
 		}
 
 		if ( empty( $config ) ) {

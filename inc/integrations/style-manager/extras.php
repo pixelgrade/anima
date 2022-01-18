@@ -23,7 +23,7 @@ if ( ! function_exists( 'pixelgrade_option' ) ) {
 	 *
 	 * @return mixed
 	 */
-	function pixelgrade_option( $option_id, $default = null, $force_given_default = false ) {
+	function pixelgrade_option( string $option_id, $default = null, bool $force_given_default = false ) {
 		if ( function_exists( '\Pixelgrade\StyleManager\get_option_details_all()' ) ) {
 			// Style Manager is present so we should get the value via it
 			// We need to account for the case where a option has an 'active_callback' defined in it's config
@@ -122,7 +122,7 @@ if ( ! function_exists( 'pixelgrade_get_option_customizer_config' ) ) {
 	 *
 	 * @return array|false The option config or false on failure.
 	 */
-	function pixelgrade_get_option_customizer_config( $option_id, $config = [] ) {
+	function pixelgrade_get_option_customizer_config( string $option_id, array $config = [] ) {
 		if ( empty( $config ) ) {
 			// Fire the all-gathering-filter that Style Manager uses so we can get as much data about this option as possible.
 			$config = apply_filters( 'style_manager/filter_fields', [] );

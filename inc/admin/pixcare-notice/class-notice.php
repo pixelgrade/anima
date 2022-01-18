@@ -21,16 +21,16 @@ class PixelgradeCare_Install_Notice {
 	public function addHooks() {
 
 		if ( $this->shouldShow() ) {
-			add_action( 'admin_notices', array( $this, 'outputMarkup' ) );
-			add_action( 'admin_enqueue_scripts', array( $this, 'outputCSS' ) );
-			add_action( 'admin_enqueue_scripts', array( $this, 'outputJS' ) );
+			add_action( 'admin_notices', [ $this, 'outputMarkup' ] );
+			add_action( 'admin_enqueue_scripts', [ $this, 'outputCSS' ] );
+			add_action( 'admin_enqueue_scripts', [ $this, 'outputJS' ] );
 		}
 
-		add_action( 'wp_ajax_pixcare_install_dismiss_admin_notice', array( $this, 'dismiss_notice' ) );
-		add_action( 'switch_theme', array( $this, 'cleanup' ) );
+		add_action( 'wp_ajax_pixcare_install_dismiss_admin_notice', [ $this, 'dismiss_notice' ] );
+		add_action( 'switch_theme', [ $this, 'cleanup' ] );
 	}
 
-	public function shouldShow() {
+	public function shouldShow(): bool {
 		global $pagenow;
 
 		// If Pixelgrade Care is already installed and activated, nothing to do.
@@ -49,7 +49,7 @@ class PixelgradeCare_Install_Notice {
 		}
 
 		$dismissed = get_theme_mod( 'pixcare_install_notice_dismissed', false );
-		// Earlier than a 7 days, we will not show again.
+		// Earlier than 7 days, we will not show again.
 		if ( ! empty( $dismissed ) && ( time() - absint( $dismissed ) < DAY_IN_SECONDS * 7 ) ) {
 			return false;
 		}
@@ -153,15 +153,15 @@ class PixelgradeCare_Install_Notice {
 	}
 
 	public function outputJS() {
-		wp_register_script( 'pixcare_notice_js', $this->get_parent_theme_file_uri( $this->get_theme_relative_path( __DIR__ ) . 'notice.js' ), array( 'jquery') );
+		wp_register_script( 'pixcare_notice_js', $this->get_parent_theme_file_uri( $this->get_theme_relative_path( __DIR__ ) . 'notice.js' ), [ 'jquery' ] );
 		wp_enqueue_script( 'pixcare_notice_js' );
 
 		$install_url = wp_nonce_url(
 			add_query_arg(
-				array(
+				[
 					'plugin'        => urlencode( 'pixelgrade-care' ),
 					'tgmpa-install' => 'install-plugin',
-				),
+				],
 				admin_url( 'themes.php?page=install-required-plugins' )
 			),
 			'tgmpa-install',
@@ -172,10 +172,10 @@ class PixelgradeCare_Install_Notice {
 
 		$activate_url = wp_nonce_url(
 			add_query_arg(
-				array(
+				[
 					'plugin'        => urlencode( 'pixelgrade-care' ),
 					'tgmpa-activate' => 'activate-plugin',
-				),
+				],
 				admin_url( 'themes.php?page=install-required-plugins' )
 			),
 			'tgmpa-activate',
@@ -192,7 +192,7 @@ class PixelgradeCare_Install_Notice {
 			$plugin_status = 'installed';
 		}
 
-		wp_localize_script( 'pixcare_notice_js', 'pixcareNotice', array(
+		wp_localize_script( 'pixcare_notice_js', 'pixcareNotice', [
 			'ajaxurl' => esc_url( admin_url( 'admin-ajax.php' ) ),
 			'installUrl' => esc_url_raw( $install_url ),
 			'activateUrl' => esc_url_raw( $activate_url ),
@@ -200,7 +200,7 @@ class PixelgradeCare_Install_Notice {
 			// Since we are displaying a notice with the details, we want to skip the welcome screen of the wizard.
 			'pixcareSetupUrl' => esc_url( admin_url( 'admin.php?page=pixelgrade_care-setup-wizard&skip-welcome=true' ) ),
 			'status' => $plugin_status,
-			'i18n' => array(
+			'i18n' => [
 				'btnInstall' => esc_html__( 'Install the Pixelgrade Care&reg; plugin', '__theme_txtd' ),
 				'btnInstalling' => esc_html__( 'Installing Pixelgrade Care&reg;...', '__theme_txtd' ),
 				'btnActivate' => esc_html__( 'Activate the Pixelgrade Care&reg; plugin', '__theme_txtd' ),
@@ -214,8 +214,8 @@ class PixelgradeCare_Install_Notice {
 				'redirectingToSetup' => esc_html__( 'Opening the Pixelgrade Care&reg; setup in a couple of seconds.', '__theme_txtd' ),
 				'folderAlreadyExists' => esc_html__( 'Plugin destination folder already exists.', '__theme_txtd' ),
 				'error' => esc_html__( 'We are truly sorry 😢 Something went wrong and we couldn\'t make sense of it and continue with the plugin setup.', '__theme_txtd' ),
-			),
-		) );
+			],
+		] );
 	}
 
 	/**
@@ -251,7 +251,7 @@ class PixelgradeCare_Install_Notice {
 	 *
 	 * @return string A path relative to the current theme directory, without ./ in front.
 	 */
-	protected function get_theme_relative_path( $path ) {
+	protected function get_theme_relative_path( string $path ): string {
 		if ( empty( $path ) ) {
 			return '';
 		}
@@ -269,9 +269,10 @@ class PixelgradeCare_Install_Notice {
 	 * It will use the new function in WP 4.7, but will fallback to the old way of doing things otherwise.
 	 *
 	 * @param string $file Optional. File to return the URL for in the template directory.
+	 *
 	 * @return string The URL of the file.
 	 */
-	protected function get_parent_theme_file_uri( $file = '' ) {
+	protected function get_parent_theme_file_uri( string $file = '' ): string {
 		if ( function_exists( 'get_parent_theme_file_uri' ) ) {
 			return get_parent_theme_file_uri( $file );
 		} else {
@@ -295,7 +296,7 @@ class PixelgradeCare_Install_Notice {
 		}
 	}
 
-	public static function init() {
+	public static function init(): ?PixelgradeCare_Install_Notice {
 		return self::instance();
 	}
 
@@ -308,24 +309,24 @@ class PixelgradeCare_Install_Notice {
 	 *
 	 * @return PixelgradeCare_Install_Notice Main PixelgradeCare_Install_Notice instance
 	 */
-	public static function instance() {
+	public static function instance(): ?PixelgradeCare_Install_Notice {
 		if ( is_null( self::$_instance ) ) {
 			self::$_instance = new self();
 		}
 		return self::$_instance;
-	} // End instance().
+	}
 
 	/**
 	 * Cloning is forbidden.
 	 */
 	public function __clone() {
 		_doing_it_wrong( __FUNCTION__, esc_html( __( 'Cheatin&#8217; huh?', '__theme_txtd' ) ), null );
-	} // End __clone().
+	}
 
 	/**
 	 * Unserializing instances of this class is forbidden.
 	 */
 	public function __wakeup() {
 		_doing_it_wrong( __FUNCTION__, esc_html( __( 'Cheatin&#8217; huh?', '__theme_txtd' ) ), null );
-	} // End __wakeup().
+	}
 }

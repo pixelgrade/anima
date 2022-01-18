@@ -17,7 +17,7 @@ add_filter( 'novablocks_block_editor_settings', 'anima_alter_novablocks_map_sett
 
 if ( ! function_exists( 'anima_novablocks_setup' ) ) {
 	function anima_novablocks_setup() {
-		$anima_novablocks_config = array(
+		$anima_novablocks_config = [
 			'advanced-gallery' => [
 				'name' => 'advanced-gallery',
 				'supports' => [ 'blobs' ],
@@ -90,7 +90,7 @@ if ( ! function_exists( 'anima_novablocks_setup' ) ) {
 			'supernova-item' => [
 				'name' => 'supernova-item',
 			],
-		);
+		];
 
 		$anima_novablocks_config = apply_filters( 'anima_novablocks_config', $anima_novablocks_config );
 
@@ -102,7 +102,7 @@ if ( ! function_exists( 'anima_novablocks_setup' ) ) {
 if ( ! function_exists( 'anima_alter_novablocks_separator_settings' ) ) {
 	function anima_alter_novablocks_separator_settings( $settings ) {
 		if ( empty( $settings['separator'] ) ) {
-			$settings['separator'] = array();
+			$settings['separator'] = [];
 		}
 
 		$settings['separator']['markup'] = anima_get_separator_markup();
@@ -115,7 +115,7 @@ if ( ! function_exists( 'anima_alter_novablocks_separator_settings' ) ) {
 if ( ! function_exists( 'anima_alter_novablocks_map_settings' ) ) {
 	function anima_alter_novablocks_map_settings( $settings ) {
 		if ( empty( $settings['map'] ) ) {
-			$settings['map'] = array();
+			$settings['map'] = [];
 		}
 
 		$settings['map']['accentColor'] = pixelgrade_option( 'sm_color_primary', '#DDAB5D' );

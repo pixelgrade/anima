@@ -15,61 +15,61 @@ function anima_add_style_manager_connected_fields( $options ) {
 	}
 
 	if ( ! isset( $options['sections']['style_manager_section'] ) ) {
-		$options['sections']['style_manager_section'] = array();
+		$options['sections']['style_manager_section'] = [];
 	}
 
 	// The section might be already defined, thus we merge, not replace the entire section config.
 	$options['sections']['style_manager_section'] = array_replace_recursive( $options['sections']['style_manager_section'],
-		array(
-			'options' => array(
+		[
+			'options' => [
 				// Font Palettes Assignment.
-				'sm_font_palette'    => array(
+				'sm_font_palette'    => [
 					'default' => 'exquisite',
-				),
-				'sm_font_primary'    => array(
+				],
+				'sm_font_primary'    => [
 					'default' => 'Reforma1969',
-					'connected_fields' => array(
+					'connected_fields' => [
 						'super_display_font',
 						'display_font',
 						'heading_1_font',
 						'heading_2_font',
 						'heading_3_font',
 						'heading_4_font',
-					),
-				),
-				'sm_font_secondary'  => array(
+					],
+				],
+				'sm_font_secondary'  => [
 					'default' => 'Reforma2018',
-					'connected_fields' => array(
+					'connected_fields' => [
 						'heading_5_font',
 						'heading_6_font',
 						'navigation_font',
 						'buttons_font',
 						'meta_font',
-					),
-				),
-				'sm_font_body'       => array(
+					],
+				],
+				'sm_font_body'       => [
 					'default' => 'Reforma1969',
-					'connected_fields' => array(
+					'connected_fields' => [
 						'body_font',
 						'content_font',
 						'lead_font',
 						'input_font'
-					),
-				),
-				'sm_font_accent'     => array(
+					],
+				],
+				'sm_font_accent'     => [
 					'default' => 'Billy Ohio',
-					'connected_fields' => array(
+					'connected_fields' => [
 						'accent_font',
-					),
-				),
-				'sm_fonts_connected_fields_preset' => array(
+					],
+				],
+				'sm_fonts_connected_fields_preset' => [
 					'default' => 'preset-2',
-					'choices' => array(
-						'preset-1'      => array(
+					'choices' => [
+						'preset-1'      => [
 							'label'   => __( 'Preset 1', '__theme_txtd' ),
-							'options' => array(),
-							'config'  => array(
-								'sm_font_primary'   => array(
+							'options' => [],
+							'config'  => [
+								'sm_font_primary'   => [
 									'super_display_font',
 									'display_font',
 									'heading_1_font',
@@ -79,29 +79,29 @@ function anima_add_style_manager_connected_fields( $options ) {
 									'heading_5_font',
 									'heading_6_font',
 									'quote_font',
-								),
-								'sm_font_secondary' => array(
+								],
+								'sm_font_secondary' => [
 									'buttons_font',
 									'meta_font',
 									'lead_font',
-								),
-								'sm_font_body'      => array(
+								],
+								'sm_font_body'      => [
 									'navigation_font',
 									'body_font',
 									'content_font',
 									'cite_font',
 									'input_font',
-								),
-								'sm_font_accent'    => array(
+								],
+								'sm_font_accent'    => [
 									'accent_font'
-								),
-							),
-						),
-						'preset-2'      => array(
+								],
+							],
+						],
+						'preset-2'      => [
 							'label'   => __( 'Preset 2 (Default)', '__theme_txtd' ),
-							'options' => array(),
-							'config'  => array(
-								'sm_font_primary'   => array(
+							'options' => [],
+							'config'  => [
+								'sm_font_primary'   => [
 									'super_display_font',
 									'display_font',
 									'heading_1_font',
@@ -109,44 +109,44 @@ function anima_add_style_manager_connected_fields( $options ) {
 									'heading_3_font',
 									'heading_4_font',
 									'quote_font',
-								),
-								'sm_font_secondary' => array(
+								],
+								'sm_font_secondary' => [
 									'heading_5_font',
 									'heading_6_font',
 									'navigation_font',
 									'buttons_font',
 									'meta_font',
-								),
-								'sm_font_body'      => array(
+								],
+								'sm_font_body'      => [
 									'body_font',
 									'content_font',
 									'lead_font',
 									'cite_font',
 									'input_font',
-								),
-								'sm_font_accent'    => array(
+								],
+								'sm_font_accent'    => [
 									'accent_font'
-								),
-							),
-						),
-						'preset-3'      => array(
+								],
+							],
+						],
+						'preset-3'      => [
 							'label'   => __( 'Preset 3', '__theme_txtd' ),
-							'options' => array(),
-							'config'  => array(
-								'sm_font_primary'   => array(
+							'options' => [],
+							'config'  => [
+								'sm_font_primary'   => [
 									'super_display_font',
 									'display_font',
 									'heading_1_font',
 									'heading_2_font',
-								),
-								'sm_font_secondary' => array(
+								],
+								'sm_font_secondary' => [
 									'heading_3_font',
 									'heading_4_font',
 									'heading_5_font',
 									'heading_6_font',
 									'quote_font',
-								),
-								'sm_font_body'      => array(
+								],
+								'sm_font_body'      => [
 									'buttons_font',
 									'meta_font',
 									'navigation_font',
@@ -155,19 +155,19 @@ function anima_add_style_manager_connected_fields( $options ) {
 									'lead_font',
 									'cite_font',
 									'input_font',
-								),
-								'sm_font_accent'    => array(
+								],
+								'sm_font_accent'    => [
 									'accent_font'
-								),
-							),
-						),
-						'preset-body'   => array(
+								],
+							],
+						],
+						'preset-body'   => [
 							'label'   => __( 'Misc: All Body', '__theme_txtd' ),
-							'options' => array(),
-							'config'  => array(
-								'sm_font_primary'   => array(),
-								'sm_font_secondary' => array(),
-								'sm_font_body'      => array(
+							'options' => [],
+							'config'  => [
+								'sm_font_primary'   => [],
+								'sm_font_secondary' => [],
+								'sm_font_body'      => [
 									'super_display_font',
 									'display_font',
 									'heading_1_font',
@@ -186,18 +186,18 @@ function anima_add_style_manager_connected_fields( $options ) {
 									'cite_font',
 									'input_font',
 									'accent_font'
-								),
-								'sm_font_accent'    => array(),
-							),
-						),
-						'preset-accent' => array(
+								],
+								'sm_font_accent'    => [],
+							],
+						],
+						'preset-accent' => [
 							'label'   => __( 'Misc: All Accent', '__theme_txtd' ),
-							'options' => array(),
-							'config'  => array(
-								'sm_font_primary'   => array(),
-								'sm_font_secondary' => array(),
-								'sm_font_body'      => array(),
-								'sm_font_accent'    => array(
+							'options' => [],
+							'config'  => [
+								'sm_font_primary'   => [],
+								'sm_font_secondary' => [],
+								'sm_font_body'      => [],
+								'sm_font_accent'    => [
 									'super_display_font',
 									'display_font',
 									'heading_1_font',
@@ -216,13 +216,13 @@ function anima_add_style_manager_connected_fields( $options ) {
 									'cite_font',
 									'input_font',
 									'accent_font'
-								),
-							),
-						)
-					),
-				),
-			),
-		)
+								],
+							],
+						]
+					],
+				],
+			],
+		]
 	);
 
 	return $options;

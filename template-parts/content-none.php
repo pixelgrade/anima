@@ -20,11 +20,11 @@ if ( is_home() && current_user_can( 'publish_posts' ) ) {
 		'<p>' . wp_kses(
 		/* translators: 1: link to WP admin new post page. */
 			__( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', '__theme_txtd' ),
-			array(
-				'a' => array(
-					'href' => array(),
-				),
-			)
+			[
+				'a' => [
+					'href' => [],
+				],
+			]
 		) . '</p>',
 		esc_url( admin_url( 'post-new.php' ) )
 	);

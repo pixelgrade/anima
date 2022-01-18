@@ -17,20 +17,20 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 	 */
 	class Anima_Admin_Nav_Menus {
 
-		public $menu_items_boxes_config = array();
+		public $menu_items_boxes_config = [];
 
 		/**
 		 * Initialize nav menus alteration logic.
 		 */
 		public function __construct() {
-			$this->menu_items_boxes_config = array(
-				'pxg-extras' => array(
+			$this->menu_items_boxes_config = [
+				'pxg-extras' => [
 					'title'      => esc_html__( 'Extras', '__theme_txtd' ),
-					'callback'   => array( $this, 'add_extras_items' ),
+					'callback'   => [ $this, 'add_extras_items' ],
 					'context'    => 'side',
 					'priority'   => 'low',
-					'menu_items' => array(
-						'search' => array(
+					'menu_items' => [
+						'search' => [
 							'type'          => 'custom-pxg',
 							'type_label'    => esc_html__( 'Custom', '__theme_txtd' ),
 							// This is used for the default Navigation Label value once the menu item is added in a menu.
@@ -40,26 +40,26 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 							'url'           => '#search',
 							'attr_title'         => esc_html__( 'Search for something you seek', '__theme_txtd' ),
 							// These are classes that will be merged with the user defined classes.
-							'classes'       => array( 'menu-item--search' ),
-							'custom_fields' => array(
-								'visual_style' => array(
+							'classes'       => [ 'menu-item--search' ],
+							'custom_fields' => [
+								'visual_style' => [
 									'type'        => 'select',
 									'label'       => esc_html__( 'Visual Style', '__theme_txtd' ),
 									'description' => esc_html__( 'Choose a visual style suitable to your goals and audience.', '__theme_txtd' ),
 									'default'     => 'label_icon',
-									'options'     => array(
+									'options'     => [
 										'label'      => esc_html__( 'Label', '__theme_txtd' ),
 										'icon'       => esc_html__( 'Icon', '__theme_txtd' ),
 										'label_icon' => esc_html__( 'Label with icon', '__theme_txtd' ),
-									),
-								),
-							),
+									],
+								],
+							],
 							// Specify the menu item fields we should force-hide via inline CSS for this menu item.
 							// This means that despite the Screen Options, these fields will not be shown.
 							// Use the value used by core in classes like "field-xfn" -> the 'xfn' value to use.
-							'hidden_fields' => array( 'link-target', 'xfn', 'description', ),
-						),
-						'color-scheme-switcher' => array(
+							'hidden_fields' => [ 'link-target', 'xfn', 'description', ],
+						],
+						'color-scheme-switcher' => [
 							'type'        => 'custom-pxg',
 							'type_label'  => esc_html__( 'Custom', '__theme_txtd' ),
 							// This is used for the default Navigation Label value once the menu item is added in a menu.
@@ -69,27 +69,27 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 							'url'         => '#color-scheme-switcher',
 							'attr_title'       => esc_html__( 'Switch between dark and light color mode', '__theme_txtd' ),
 							// These are classes that will be merged with the user defined classes.
-							'classes'     => array( 'menu-item--dark-mode js-sm-dark-mode-toggle' ),
-							'custom_fields' => array(
-								'visual_style' => array(
+							'classes'     => [ 'menu-item--dark-mode js-sm-dark-mode-toggle' ],
+							'custom_fields' => [
+								'visual_style' => [
 									'type'        => 'select',
 									'label'       => esc_html__( 'Visual Style', '__theme_txtd' ),
 									'description' => esc_html__( 'Choose a visual style suitable to your goals and audience.', '__theme_txtd' ),
 									'default'     => 'icon',
-									'options'     => array(
+									'options'     => [
 										'label'      => esc_html__( 'Label', '__theme_txtd' ),
 										'icon'       => esc_html__( 'Icon', '__theme_txtd' ),
 										'label_icon' => esc_html__( 'Label with icon', '__theme_txtd' ),
-									),
-								),
-							),
-						),
-					),
-				),
-			);
+									],
+								],
+							],
+						],
+					],
+				],
+			];
 
 			if ( function_exists( 'WC' ) && pixelgrade_user_has_access( 'woocommerce' ) ) {
-				$this->menu_items_boxes_config['pxg-extras']['menu_items']['cart'] = array(
+				$this->menu_items_boxes_config['pxg-extras']['menu_items']['cart'] = [
 					'type'        => 'custom-pxg',
 					'type_label'  => esc_html__( 'Custom', '__theme_txtd' ),
 					'title'       => esc_html__( 'Cart', '__theme_txtd' ),
@@ -97,21 +97,21 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 					'url'         => esc_url( get_permalink( wc_get_page_id( 'cart' ) ) ),
 					'attr_title'  => esc_html__( 'Toggle visibility of cart panel', '__theme_txtd' ),
 					// These are classes that will be merged with the user defined classes.
-					'classes'     => array( 'menu-item--cart' ),
-					'custom_fields' => array(
-						'visual_style' => array(
+					'classes'     => [ 'menu-item--cart' ],
+					'custom_fields' => [
+						'visual_style' => [
 							'type'        => 'select',
 							'label'       => esc_html__( 'Visual Style', '__theme_txtd' ),
 							'description' => esc_html__( 'Choose a visual style suitable to your goals and audience.', '__theme_txtd' ),
 							'default'     => 'icon',
-							'options'     => array(
+							'options'     => [
 								'label'      => esc_html__( 'Label', '__theme_txtd' ),
 								'icon'       => esc_html__( 'Icon', '__theme_txtd' ),
 								'label_icon' => esc_html__( 'Label with icon', '__theme_txtd' ),
-							),
-						),
-					),
-				);
+							],
+						],
+					],
+				];
 			}
 
             // Allow others to have a say in this.
@@ -120,53 +120,53 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 			/* ===============
 			 * Backend effects
 			 */
-			add_action( 'admin_init', array( $this, 'add_custom_menu_items_boxes' ) );
+			add_action( 'admin_init', [ $this, 'add_custom_menu_items_boxes' ] );
 			// Handle custom fields
-			add_action( 'wp_nav_menu_item_custom_fields', array( $this, 'add_custom_fields' ), 5, 2 );
+			add_action( 'wp_nav_menu_item_custom_fields', [ $this, 'add_custom_fields' ], 5, 2 );
 			// Handle hiding some menu item fields via inline CSS.
-			add_action( 'wp_nav_menu_item_custom_fields', array( $this, 'inline_css_to_hide_menu_item_fields' ), 5, 2 );
-			add_action( 'wp_update_nav_menu_item', array( $this, 'save_custom_fields' ), 10, 3 );
+			add_action( 'wp_nav_menu_item_custom_fields', [ $this, 'inline_css_to_hide_menu_item_fields' ], 5, 2 );
+			add_action( 'wp_update_nav_menu_item', [ $this, 'save_custom_fields' ], 10, 3 );
 			// Make sure that out menu boxes appear by default (the core hides them by default).
-			add_filter( "update_user_metadata", array( $this, 'unhide_our_menu_boxes_for_initial_metaboxes' ), 10, 5 );
+			add_filter( 'update_user_metadata', [ $this, 'unhide_our_menu_boxes_for_initial_metaboxes' ], 10, 5 );
 
-			add_filter( 'wp_setup_nav_menu_item', array( $this, 'setup_nav_menu_item' ), 10, 1 );
-			add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts_styles' ), 10, 1 );
-			add_action( 'customize_controls_enqueue_scripts', array( $this, 'customize_scripts_styles' ), 10, 1 );
+			add_filter( 'wp_setup_nav_menu_item', [ $this, 'setup_nav_menu_item' ], 10, 1 );
+			add_action( 'admin_enqueue_scripts', [ $this, 'admin_scripts_styles' ], 10, 1 );
+			add_action( 'customize_controls_enqueue_scripts', [ $this, 'customize_scripts_styles' ], 10, 1 );
 
 			// Include custom items to customizer nav menu settings.
-			add_filter( 'customize_nav_menu_available_item_types', array( $this, 'register_customize_nav_menu_item_types' ) );
-			add_filter( 'customize_nav_menu_available_items', array( $this, 'register_customize_nav_menu_items' ), 10, 4 );
+			add_filter( 'customize_nav_menu_available_item_types', [ $this, 'register_customize_nav_menu_item_types' ] );
+			add_filter( 'customize_nav_menu_available_items', [ $this, 'register_customize_nav_menu_items' ], 10, 4 );
 			// Handle the menu items custom fields Customizer logic.
-			add_action( 'wp_nav_menu_item_custom_fields_customize_template', array( $this, 'add_customize_custom_fields_templates' ), 5 );
+			add_action( 'wp_nav_menu_item_custom_fields_customize_template', [ $this, 'add_customize_custom_fields_templates' ], 5 );
 			// Handle saving the custom fields in the Customizer.
-			add_action( 'customize_save_after', array( $this, 'customizer_save_custom_fields' ), 10, 1 );
+			add_action( 'customize_save_after', [ $this, 'customizer_save_custom_fields' ], 10, 1 );
 			// Set up previewing the custom fields in the Customizer.
-			add_action( 'customize_register', array( $this, 'customizer_preview_custom_fields' ), 1000 );
+			add_action( 'customize_register', [ $this, 'customizer_preview_custom_fields' ], 1000 );
 
 			/*
 			 * HANDLE CUSTOM FIELDS FOR ALL MENU ITEMS, NOT JUST OUR CUSTOM BOXES.
 			 */
 			// Add Badge Custom Field in Menus Section
-			add_action( 'wp_nav_menu_item_custom_fields', array($this, 'add_badge_custom_field'), 5, 2 );
+			add_action( 'wp_nav_menu_item_custom_fields', [ $this, 'add_badge_custom_field' ], 5, 2 );
 			// Save Badge Custom Field Meta Data
-			add_action( 'wp_update_nav_menu_item', array($this, 'save_badge_menu_item_meta'), 10, 2 );
+			add_action( 'wp_update_nav_menu_item', [ $this, 'save_badge_menu_item_meta' ], 10, 2 );
 
-			add_filter( 'wp_setup_nav_menu_item', array( $this, 'setup_nav_menu_item_badge' ), 10, 1 );
+			add_filter( 'wp_setup_nav_menu_item', [ $this, 'setup_nav_menu_item_badge' ], 10, 1 );
 
 			// Add Badge Custom Field in Customizer
-			add_action( 'wp_nav_menu_item_custom_fields_customize_template', array(
+			add_action( 'wp_nav_menu_item_custom_fields_customize_template', [
 				$this,
 				'add_customize_badge_custom_field_template',
-			), 5 );
+			], 5 );
 
 			/* ===============
 			 * Frontend effects
 			 */
-			add_action( 'anima_after_footer', array( $this, 'output_search_overlay' ), 10 );
-			add_filter( 'get_search_form', array( $this, 'custom_search_form' ), 10, 1 );
+			add_action( 'anima_after_footer', [ $this, 'output_search_overlay' ], 10 );
+			add_filter( 'get_search_form', [ $this, 'custom_search_form' ], 10, 1 );
 
 			// Handle Menu Item Badge Frontend Output
-			add_filter( 'nav_menu_item_title', array($this, 'output_badge_menu_item'), 10, 2 );
+			add_filter( 'nav_menu_item_title', [ $this, 'output_badge_menu_item' ], 10, 2 );
 		}
 
 		public function add_custom_menu_items_boxes() {
@@ -181,15 +181,15 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 		}
 
 		/**
-		 * @param int      $item_id Menu item ID.
-		 * @param WP_Post  $item    Menu item data object.
+		 * @param int     $item_id Menu item ID.
+		 * @param WP_Post $item    Menu item data object.
 		 */
-		public function add_custom_fields( $item_id, $item ) {
+		public function add_custom_fields( int $item_id, WP_Post $item ) {
 			if ( 'custom-pxg' !== $item->type ) {
 				return;
 			}
 
-			$item_config = array();
+			$item_config = [];
 
 			$details = explode( '__', (string) $item->object );
 			if ( count( $details ) === 2 && isset( $this->menu_items_boxes_config[ $details[0] ]['menu_items'][ $details[1] ] ) ) {
@@ -203,14 +203,14 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 
 			// Take each custom field config and output the HTML.
 			foreach ( $item_config['custom_fields'] as $name => $config ) {
-				if ( ! in_array( $config['type'], array( 'select', 'textarea', ) ) ) {
+				if ( ! in_array( $config['type'], [ 'select', 'textarea', ] ) ) {
 					continue;
 				}
 
 				// Gather up the HTML details of the custom field.
 				$field_id = 'edit-menu-item-' . $name . '-' . $item_id;
 				$field_name = 'menu-item-' . $name . '[' . $item_id . ']';
-				$field_classes = array( 'widefat', 'edit-menu-item-' . $name, );
+				$field_classes = [ 'widefat', 'edit-menu-item-' . $name, ];
 				if ( ! empty( $config['classes'] ) && is_array( $config['classes'] ) ) {
 					$field_classes = array_unique( array_merge( $field_classes, $config['classes'] ) );
 				}
@@ -259,15 +259,15 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 		}
 
 		/**
-		 * @param int      $item_id Menu item ID.
-		 * @param WP_Post  $item    Menu item data object.
+		 * @param int     $item_id Menu item ID.
+		 * @param WP_Post $item    Menu item data object.
 		 */
-		public function inline_css_to_hide_menu_item_fields( $item_id, $item ) {
+		public function inline_css_to_hide_menu_item_fields( int $item_id, WP_Post $item ) {
 			if ( 'custom-pxg' !== $item->type ) {
 				return;
 			}
 
-			$item_config = array();
+			$item_config = [];
 
 			$details = explode( '__', (string) $item->object );
 			if ( count( $details ) === 2 && isset( $this->menu_items_boxes_config[ $details[0] ]['menu_items'][ $details[1] ] ) ) {
@@ -280,7 +280,7 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 			}
 
 			if ( is_string( $item_config['hidden_fields'] ) ) {
-				$item_config['hidden_fields'] = array( $item_config['hidden_fields'] );
+				$item_config['hidden_fields'] = [ $item_config['hidden_fields'] ];
 			}
 
 			// Add the '.field-' prefix to all provided field keys.
@@ -305,7 +305,7 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 		 * @param int   $menu_item_db_id ID of the updated menu item.
 		 * @param array $args            An array of arguments used to update a menu item.
 		 */
-		public function save_custom_fields( $menu_id, $menu_item_db_id, $args ) {
+		public function save_custom_fields( int $menu_id, int $menu_item_db_id, array $args ) {
 			if ( 'custom-pxg' !== $args['menu-item-type'] ) {
 				return;
 			}
@@ -320,7 +320,7 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 
 				// Take the value and sanitize/normalize it according to the custom field config.
 				foreach ( $item_config['custom_fields'] as $name => $config ) {
-					if ( ! in_array( $config['type'], array( 'select', 'textarea', ) ) ) {
+					if ( ! in_array( $config['type'], [ 'select', 'textarea', ] ) ) {
 						continue;
 					}
 
@@ -334,11 +334,7 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 					switch ( $config['type'] ) {
 						case 'select':
 							if ( empty( $config['options'] ) || ! in_array( $new_value, array_keys( $config['options'] ) ) ) {
-								if ( isset( $config['default'] ) ) {
-									$new_value = $config['default'];
-								} else {
-									$new_value = '';
-								}
+								$new_value = $config['default'] ?? '';
 							}
 							break;
 						case 'textarea':
@@ -348,7 +344,7 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 							break;
 					}
 
-					// Finally update the menu item post meta.
+					// Finally, update the menu item post meta.
 					update_post_meta( $menu_item_db_id, "_menu_item_$name", $new_value );
 				}
 			}
@@ -393,7 +389,7 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 		public function add_extras_items( $object ) {
 			global $nav_menu_selected_id;
 
-			$menu_items_obj = array();
+			$menu_items_obj = [];
 
 			foreach ( $this->menu_items_boxes_config['pxg-extras']['menu_items'] as $id => $item ) {
 				$menu_items_obj[ $id ]                   = new stdClass;
@@ -410,11 +406,11 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 				$menu_items_obj[ $id ]->attr_title       = '';
 				$menu_items_obj[ $id ]->label            = $item['label'];
 				$menu_items_obj[ $id ]->attr_title       = $item['attr_title'];
-				$menu_items_obj[ $id ]->classes          = array();
+				$menu_items_obj[ $id ]->classes          = [];
 				$menu_items_obj[ $id ]->xfn              = '';
 			}
 
-			$walker = new Walker_Nav_Menu_Checklist( array() );
+			$walker = new Walker_Nav_Menu_Checklist( [] );
 
 			?>
 
@@ -422,7 +418,7 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 				<div id="tabs-panel-anima-links-all" class="tabs-panel tabs-panel-view-all tabs-panel-active">
 
 					<ul id="anima-user-menu-linkschecklist" class="list:anima-user-menu-links categorychecklist form-no-clear">
-						<?php echo walk_nav_menu_tree( array_map( 'wp_setup_nav_menu_item', $menu_items_obj ), 0, (object) array( 'walker' => $walker ) ); ?>
+						<?php echo walk_nav_menu_tree( array_map( 'wp_setup_nav_menu_item', $menu_items_obj ), 0, (object) [ 'walker' => $walker ] ); ?>
 					</ul>
 
 				</div>
@@ -450,7 +446,7 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 					// Add any configured custom field value to the object.
 					if ( ! empty( $item_config['custom_fields'] ) ) {
 						foreach ( $item_config['custom_fields'] as $name => $config ) {
-							if ( ! in_array( $config['type'], array( 'select', 'textarea', ) ) ) {
+							if ( ! in_array( $config['type'], [ 'select', 'textarea', ] ) ) {
 								continue;
 							}
 
@@ -493,30 +489,31 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 
 		public function admin_scripts_styles( $hook_suffix ) {
 			if( 'nav-menus.php' === $hook_suffix || is_customize_preview() ) {
-				wp_enqueue_style( 'anima-admin-nav-menus-styles', get_template_directory_uri() . '/dist/css/admin/edit-nav-menus.css', array( 'nav-menus' ), '1.0.0' );
+				wp_enqueue_style( 'anima-admin-nav-menus-styles', get_template_directory_uri() . '/dist/css/admin/edit-nav-menus.css', [ 'nav-menus' ], '1.0.0' );
 			}
 		}
 
 		public function customize_scripts_styles() {
 			$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 			// Enqueue script which extends nav menu item controls.
-			wp_enqueue_script( 'anima-customize-nav-menu-scripts', get_template_directory_uri() . '/dist/js/admin/customizer-nav-menus' . $suffix . '.js', array( 'customize-nav-menus' ), '1.0.0', true );
+			wp_enqueue_script( 'anima-customize-nav-menu-scripts', get_template_directory_uri() . '/dist/js/admin/customizer-nav-menus' . $suffix . '.js', [ 'customize-nav-menus' ], '1.0.0', true );
 		}
 
 		/**
 		 * Register customize new nav menu item types.
 		 *
-		 * @param  array $item_types Menu item types.
+		 * @param array $item_types Menu item types.
+		 *
 		 * @return array
 		 */
-		public function register_customize_nav_menu_item_types( $item_types ) {
+		public function register_customize_nav_menu_item_types( array $item_types ): array {
 			foreach ( $this->menu_items_boxes_config as $box_id => $box_config ) {
-				$item_types[] = array(
+				$item_types[] = [
 					'title'      => $box_config['title'],
 					'type_label' => $box_config['title'],
 					'type'       => 'custom-pxg',
 					'object'     => $box_id,
-				);
+				];
 			}
 
 			return $item_types;
@@ -525,13 +522,16 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 		/**
 		 * Add our extra menu items to customize nav menu items.
 		 *
-		 * @param  array   $items  List of nav menu items.
-		 * @param  string  $type   Nav menu type.
-		 * @param  string  $object Nav menu object.
-		 * @param  integer $page   Page number.
+		 * @see WP_Customize_Nav_Menus::load_available_items_query()
+		 *
+		 * @param array  $items  The array of menu items.
+		 * @param string $type   The object type.
+		 * @param string $object The object name.
+		 * @param int    $page   The current page number.
+		 *
 		 * @return array
 		 */
-		public function register_customize_nav_menu_items( $items = array(), $type = '', $object = '', $page = 0 ) {
+		public function register_customize_nav_menu_items( array $items = [], string $type = '', string $object = '', int $page = 0 ) {
 			if ( 'pxg-extras' !== $object ) {
 				return $items;
 			}
@@ -542,7 +542,7 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 			}
 
 			foreach ( $this->menu_items_boxes_config['pxg-extras']['menu_items'] as $id => $item ) {
-				$items[] = array(
+				$items[] = [
 					'id'         => $id,
 					'title'      => $item['title'],
 					'type'       => $item['type'],
@@ -550,7 +550,7 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 					'object'     => 'pxg-extras__' . $id,
 					'classes'    => '',
 					'attr_title' => $item['attr_title'],
-				);
+				];
 			}
 
 			return $items;
@@ -570,14 +570,14 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 
 				// Take each custom field config and output the HTML.
 				foreach ( $box_config['custom_fields'] as $name => $config ) {
-					if ( ! in_array( $config['type'], array( 'select', 'textarea', ) ) ) {
+					if ( ! in_array( $config['type'], [ 'select', 'textarea', ] ) ) {
 						continue;
 					}
 
 					// Gather up the HTML details of the custom field.
 					$field_id = 'edit-menu-item-' . $name . '-{{ data.menu_item_id }}';
 					$field_name = 'menu-item-' . $name;
-					$field_classes = array( 'widefat', 'edit-menu-item-' . $name, );
+					$field_classes = [ 'widefat', 'edit-menu-item-' . $name, ];
 					if ( ! empty( $config['classes'] ) && is_array( $config['classes'] ) ) {
 						$field_classes = array_unique( array_merge( $field_classes, $config['classes'] ) );
 					}
@@ -626,7 +626,7 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 		/**
 		 * @param WP_Customize_Manager $wp_customize
 		 */
-		public function customizer_save_custom_fields( $wp_customize ) {
+		public function customizer_save_custom_fields( WP_Customize_Manager $wp_customize ) {
 			foreach ( $wp_customize->settings() as $setting ) {
 				if ( $setting instanceof WP_Customize_Nav_Menu_Item_Setting && $setting->check_capabilities() ) {
 					$this->save_nav_menu_setting_postmeta( $setting );
@@ -637,7 +637,7 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 		/**
 		 * @param WP_Customize_Manager $wp_customize
 		 */
-		public function customizer_preview_custom_fields( $wp_customize ) {
+		public function customizer_preview_custom_fields( WP_Customize_Manager $wp_customize ) {
 			if ( $wp_customize->settings_previewed() ) {
 				foreach ( $wp_customize->settings() as $setting ) {
 					if ( $setting instanceof WP_Customize_Nav_Menu_Item_Setting ) {
@@ -680,11 +680,11 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 				return null;
 			}
 
-			$allowed_visual_style_values = array(
+			$allowed_visual_style_values = [
 				'label',
 				'icon',
 				'label_icon',
-			);
+			];
 
 			$unsanitized_post_value = $setting->manager->unsanitized_post_values()[ $setting->id ];
 			if ( isset( $unsanitized_post_value['visual_style'] ) ) {
@@ -703,9 +703,9 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 		 *
 		 * @param WP_Customize_Nav_Menu_Item_Setting $setting Setting.
 		 *
-		 * @return array|string|null Badge value or null if no posted value present.
+		 * @return string|null Badge value or null if no posted value present.
 		 */
-		protected function get_sanitized_badge_post_data( $setting ) {
+		protected function get_sanitized_badge_post_data( WP_Customize_Nav_Menu_Item_Setting $setting ): ?string {
 			if ( ! $setting->post_value() ) {
 				return null;
 			}
@@ -727,7 +727,7 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 		 *
 		 * @param WP_Customize_Nav_Menu_Item_Setting $setting Setting.
 		 */
-		public function preview_nav_menu_setting_postmeta( $setting ) {
+		public function preview_nav_menu_setting_postmeta( WP_Customize_Nav_Menu_Item_Setting $setting ) {
 			$visual_style = $this->get_sanitized_visual_style_post_data( $setting );
 			$badge = $this->get_sanitized_badge_post_data( $setting );
 			if ( null === $visual_style && null === $badge ) {
@@ -802,12 +802,12 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 
 						<div class="c-search-overlay__suggestions">
 							<p><?php echo wp_kses( $menu_name, wp_kses_allowed_html() ); ?></p>
-							<?php wp_nav_menu( array(
+							<?php wp_nav_menu( [
 								'container'      => false,
 								'theme_location' => 'search-suggestions',
 								'menu_id'        => 'search-suggestions-menu',
 								'fallback_cb'    => false
-							) ); ?>
+							] ); ?>
 						</div><!-- .c-search-overlay__suggestions -->
 
 					<?php } ?>
@@ -821,10 +821,11 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 		 * Custom search form.
 		 *
 		 * @param string $form Form HTML.
+		 *
 		 * @return string Modified form HTML.
 		 */
-		public function custom_search_form( $form ) {
-			$form = '<form role="search" method="get" class="wp-block-search__button-outside wp-block-search__text-button wp-block-search wp-block-search search-form" action="' . esc_url( home_url( '/' ) ) . '">
+		public function custom_search_form( string $form ): string {
+			return '<form role="search" method="get" class="wp-block-search__button-outside wp-block-search__text-button wp-block-search wp-block-search search-form" action="' . esc_url( home_url( '/' ) ) . '">
 				<label class="wp-block-search__label">
 					<span class="screen-reader-text">' . _x( 'Search for:', 'label', '__theme_txtd' ) . '</span>
 					<span class="search-icon"></span>
@@ -834,11 +835,9 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
                 	<input type="submit" class="wp-block-search__button   search-submit" value="' . esc_attr_x( 'Search', 'submit button', '__theme_txtd' ) . '" />
 				</div>
 			</form>';
-
-			return $form;
 		}
 
-		public function is_nav_menus_page( $new_edit = null ) {
+		public function is_nav_menus_page( $new_edit = null ): bool {
 			global $pagenow;
 
 			// Make sure we are on the backend.
@@ -858,10 +857,10 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 		 *
 		 * This will allow us to play nicely with any other plugin that is adding the same hook
 		 *
-		 * @param  int $item_id
-		 * @param WP_Post  $item    Menu item data object.
+		 * @param int     $item_id
+		 * @param WP_Post $item Menu item data object.
 		 */
-		public function add_badge_custom_field( $item_id, $item ) {
+		public function add_badge_custom_field( int $item_id, WP_Post $item ) {
 
 		    // We don't need badge for the
             // menu items created by us.
@@ -875,7 +874,7 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 			// Gather up the HTML details of the custom field.
 			$field_id = 'edit-menu-item-' . $name . '-' . $item_id;
 			$field_name = 'menu-item-' . $name . '[' . $item_id . ']';
-			$field_classes = array( 'widefat', 'edit-menu-item-' . $name, );
+			$field_classes = [ 'widefat', 'edit-menu-item-' . $name, ];
 			$field_classes = implode( ' ', $field_classes );
 			$field_label = __( 'Badge', '__theme_txtd' );
 			$field_placeholder = __( 'e.g. New, Popular, Free, Sales', '__theme_txtd' );
@@ -905,7 +904,7 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 		 * @param int $menu_id
 		 * @param int $menu_item_db_id
 		 */
-		public function save_badge_menu_item_meta( $menu_id, $menu_item_db_id ) {
+		public function save_badge_menu_item_meta( int $menu_id, int $menu_item_db_id ) {
 			// The name of the custom menu meta.
 			$name = 'badge';
 
@@ -914,7 +913,7 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 				$new_value = sanitize_text_field( wp_kses( $_POST["menu-item-$name"][ $menu_item_db_id ], wp_kses_allowed_html() ) );
 			}
 
-			// Finally update the menu item post meta.
+			// Finally, update the menu item post meta.
 			update_post_meta( $menu_item_db_id, "_menu_item_$name", $new_value );
 		}
 
@@ -940,7 +939,7 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 			// Gather up the HTML details of the custom field.
 			$field_id = 'edit-menu-item-' . $name . '-{{ data.menu_item_id }}';
 			$field_name = 'menu-item-' . $name;
-			$field_classes = array( 'widefat', 'edit-menu-item-' . $name, );
+			$field_classes = [ 'widefat', 'edit-menu-item-' . $name, ];
 			if ( ! empty( $config['classes'] ) && is_array( $config['classes'] ) ) {
 				$field_classes = array_unique( array_merge( $field_classes, $config['classes'] ) );
 			}
@@ -965,12 +964,13 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 		/**
 		 * Appends the menu item badge to the menu item title (frontend).
 		 *
-		 * @param string   $title The menu item's title.
-		 * @param WP_Post  $item  The current menu item.
+		 * @param string  $title The menu item's title.
+		 * @param WP_Post $item  The current menu item.
+		 *
 		 * @return string
 		 */
-		public function output_badge_menu_item( $title, $item ) {
-			if ( is_object( $item ) && ! empty( $item->badge ) ) {
+		public function output_badge_menu_item( string $title, WP_Post $item ): string {
+			if ( ! empty( $item->badge ) ) {
 				if ( empty( $title ) ) {
 					$title = '';
 				}

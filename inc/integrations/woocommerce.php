@@ -42,14 +42,14 @@ function anima_woocommerce_scripts() {
 	$theme  = wp_get_theme( get_template() );
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-	wp_enqueue_style( 'anima-woocommerce', get_template_directory_uri() . '/dist/css/woocommerce/style.css', array( 'anima-style' ), $theme->get( 'Version' ) );
+	wp_enqueue_style( 'anima-woocommerce', get_template_directory_uri() . '/dist/css/woocommerce/style.css', [ 'anima-style' ], $theme->get( 'Version' ) );
 	wp_style_add_data( 'anima-woocommerce', 'rtl', 'replace' );
 
-	wp_enqueue_script( 'anima-woocommerce', get_template_directory_uri() . '/dist/js/woocommerce' . $suffix . '.js', array( 'jquery' ), $theme->get( 'Version' ), true );
-	wp_localize_script( 'anima-woocommerce', 'pixelgradeWooCommerceStrings', array(
+	wp_enqueue_script( 'anima-woocommerce', get_template_directory_uri() . '/dist/js/woocommerce' . $suffix . '.js', [ 'jquery' ], $theme->get( 'Version' ), true );
+	wp_localize_script( 'anima-woocommerce', 'pixelgradeWooCommerceStrings', [
 		'adding_to_cart' => esc_html__( 'Adding...', '__theme_txtd' ),
 		'added_to_cart' => esc_html__( 'Added!', '__theme_txtd' ),
-	) );
+	] );
 
 	wp_deregister_style('wc-block-style' );
 
@@ -62,7 +62,7 @@ function anima_woocommerce_scripts() {
 function anima_enqueue_woocommerce_block_editor_assets() {
 	$theme  = wp_get_theme( get_template() );
 
-	wp_enqueue_style( 'anima-woocommerce-block-styles', get_template_directory_uri() . '/dist/css/woocommerce/block-editor.css', array(), $theme->get( 'Version' ) );
+	wp_enqueue_style( 'anima-woocommerce-block-styles', get_template_directory_uri() . '/dist/css/woocommerce/block-editor.css', [], $theme->get( 'Version' ) );
 }
 
 function anima_woocommerce_setup_hooks() {
@@ -202,13 +202,11 @@ function anima_woocommerce_product_class( $classes, $product ) {
  *
  * @return string
  */
-function anima_woocommerce_loop_start( $markup ) {
+function anima_woocommerce_loop_start( string $markup ): string {
     // We only want to filter product classes when we are in a loop (not when rendering single products).
 	add_filter( 'woocommerce_post_class', 'anima_woocommerce_product_class', 10, 2 );
 
-	$markup = '<div class="wc-block-grid alignwide has-' . esc_attr( wc_get_loop_prop( 'columns' ) ) . '-columns"><ul class="wc-block-grid__products">';
-
-	return $markup;
+	return '<div class="wc-block-grid alignwide has-' . esc_attr( wc_get_loop_prop( 'columns' ) ) . '-columns"><ul class="wc-block-grid__products">';
 }
 
 /**
@@ -218,13 +216,11 @@ function anima_woocommerce_loop_start( $markup ) {
  *
  * @return string
  */
-function anima_woocommerce_loop_end( $markup ) {
+function anima_woocommerce_loop_end( string $markup ): string {
 	// Remove filter added in loop start.
 	remove_filter( 'woocommerce_post_class', 'anima_woocommerce_product_class', 10 );
 
-	$markup = '</ul><!-- .wc-block-grid__products --></div><!-- .wc-block-grid -->';
-
-	return $markup;
+	return '</ul><!-- .wc-block-grid__products --></div><!-- .wc-block-grid -->';
 }
 
 /**
@@ -234,10 +230,8 @@ function anima_woocommerce_loop_end( $markup ) {
  *
  * @return string
  */
-function anima_woocommerce_sale_flash( $markup ) {
-	$markup = '<span class="wc-block-grid__product-onsale">' . esc_html__( 'Sale!', '__theme_txtd' ) . '</span>';
-
-	return $markup;
+function anima_woocommerce_sale_flash( string $markup ): string {
+	return '<span class="wc-block-grid__product-onsale">' . esc_html__( 'Sale!', '__theme_txtd' ) . '</span>';
 }
 
 function anima_add_start_wrapper_before_single_product_summary() {
@@ -250,7 +244,7 @@ function anima_add_end_wrapper_after_single_product_summary() {
 
 
 function anima_add_start_wrapper_before_tabs() {
-	$product_tabs = apply_filters( 'woocommerce_product_tabs', array() );
+	$product_tabs = apply_filters( 'woocommerce_product_tabs', [] );
 
 	if ( ! empty( $product_tabs ) ) {
 		echo '<div class="c-woo-section  c-woo-tabs">';
@@ -258,7 +252,7 @@ function anima_add_start_wrapper_before_tabs() {
 }
 
 function anima_add_end_wrapper_after_tabs() {
-	$product_tabs = apply_filters( 'woocommerce_product_tabs', array() );
+	$product_tabs = apply_filters( 'woocommerce_product_tabs', [] );
 
 	if ( ! empty( $product_tabs ) ) {
 		echo '</div><!-- .c-woo-section.c-woo-tabs -->';
@@ -319,7 +313,7 @@ function anima_append_add_to_cart_button()  {
 	} ?>
 
     <div class="wp-block-button wc-block-grid__product-add-to-cart">
-		<?php woocommerce_template_loop_add_to_cart( array( 'class' => $class ) ); ?>
+		<?php woocommerce_template_loop_add_to_cart( [ 'class' => $class ] ); ?>
     </div>
 
 <?php }
@@ -355,9 +349,9 @@ function anima_output_ajax_add_to_cart_button() {
 
 	$product = wc_get_product();
 	if ( ! empty( $product ) && $product->is_type( 'simple' ) && 'yes' === get_option( 'woocommerce_enable_ajax_add_to_cart' ) ) {
-		woocommerce_template_loop_add_to_cart( array(
+		woocommerce_template_loop_add_to_cart( [
 			'class' => 'add_to_cart_button  ajax_add_to_cart'
-		) );
+		] );
 	}
 }
 
@@ -386,9 +380,9 @@ if ( ! function_exists( 'woocommerce_display_categories' ) ) {
 		$current_term = get_queried_object();
 
 		// Get all product categories.
-		$terms = get_terms( array(
+		$terms = get_terms( [
 			'taxonomy' => 'product_cat',
-		) );
+		] );
 		if ( ! empty( $terms ) ) {
 			// Create a link which should link to the shop.
 			$all_link = get_post_type_archive_link( 'product' );
@@ -433,17 +427,15 @@ if ( ! function_exists( 'woocommerce_display_categories' ) ) {
 }
 
 if ( ! function_exists( ' anima_woocommerce_pagination_args' ) ) {
-	function anima_woocommerce_pagination_args() {
+	function anima_woocommerce_pagination_args(): array {
 
-		$args =  array(
+		return [
 			'end_size'           => 1,
 			'mid_size'           => 2,
 			'type'               => 'plain',
 			'prev_text' => esc_html_x( 'Previous', 'previous set of posts', '__theme_txtd' ),
 			'next_text' => esc_html_x( 'Next', 'next set of posts', '__theme_txtd' ),
-		);
-
-		return $args;
+		];
 	}
 }
 
@@ -473,10 +465,9 @@ function anima_product_catalog_image_aspect_ratio() {
 	    }
     }
 
-	$css = '' .
-    '.wc-block-grid__product-link {
-        --current-aspect-ratio: ' . $aspect_ratio . ';' .
-    '}';
+	$css = '.wc-block-grid__product-link {
+	    --current-aspect-ratio: ' . $aspect_ratio . ';' .
+	       '}';
 
 	wp_add_inline_style( 'anima-woocommerce', $css );
 }
@@ -502,14 +493,14 @@ function anima_loop_product_thumbnail_wrapper_close() {
 }
 
 function anima_woocommerce_breadcrumbs() {
-	return array(
+	return [
 		'delimiter'   => ' &#47; ',
 		'wrap_before' => '<nav class="woocommerce-breadcrumb" itemprop="breadcrumb">',
 		'wrap_after'  => '</nav>',
 		'before'      => '<span>',
 		'after'       => '</span>',
 		'home'        => esc_html_x( 'Shop', 'breadcrumb', '__theme_txtd' ),
-	);
+	];
 }
 
 function anima_woocommerce_quantity_input_before() {
@@ -532,7 +523,7 @@ function anima_woocommerce_quantity_label() {
  *
  * @return array
  */
-function anima_add_label_to_availability_display( $availability ) {
+function anima_add_label_to_availability_display( array $availability ): array {
     global $product;
 
 	if( is_product() && $product-> get_manage_stock() ){
@@ -551,22 +542,22 @@ function anima_woocommerce_custom_breadrumb_home_url() {
 }
 
 /**
- * @param array $items
+ * @param array|mixed $items
  *
  * @return array
  */
-function anima_add_cart_to_extras_menu_items( $items ) {
+function anima_add_cart_to_extras_menu_items( $items ): array {
 	if ( empty( $items ) ) {
-		$items = array();
+		$items = [];
 	}
     if ( empty( $items['pxg-extras'] ) ) {
-        $items['pxg-extras'] = array();
+        $items['pxg-extras'] = [];
     }
     if ( empty( $items['pxg-extras']['menu_items'] ) ) {
-        $items['pxg-extras']['menu_items'] = array();
+        $items['pxg-extras']['menu_items'] = [];
     }
 
-	$items['pxg-extras']['menu_items']['cart'] = array(
+	$items['pxg-extras']['menu_items']['cart'] = [
 		'type'        => 'custom-pxg',
 		'type_label'  => esc_html__( 'Custom', '__theme_txtd' ),
 		// This is used for the default Navigation Label value once the menu item is added in a menu.
@@ -576,25 +567,25 @@ function anima_add_cart_to_extras_menu_items( $items ) {
 		'url'         => esc_url( get_permalink( wc_get_page_id( 'cart' ) ) ),
 		'attr_title'  => esc_html__( 'Toggle visibility of cart panel', '__theme_txtd' ),
 		// These are classes that will be merged with the user defined classes.
-		'classes'     => array( 'menu-item--cart' ),
-		'custom_fields' => array(
-			'visual_style' => array(
+		'classes'     => [ 'menu-item--cart' ],
+		'custom_fields' => [
+			'visual_style' => [
 				'type'        => 'select',
 				'label'       => esc_html__( 'Visual Style', '__theme_txtd' ),
 				'description' => esc_html__( 'Choose a visual style suitable to your goals and audience.', '__theme_txtd' ),
 				'default'     => 'icon',
-				'options'     => array(
+				'options'     => [
 					'label'      => esc_html__( 'Label', '__theme_txtd' ),
 					'icon'       => esc_html__( 'Icon', '__theme_txtd' ),
 					'label_icon' => esc_html__( 'Label with icon', '__theme_txtd' ),
-				),
-			),
-		),
+				],
+			],
+		],
 		// Specify the menu item fields we should force-hide via inline CSS for this menu item.
 		// This means that despite the Screen Options, these fields will not be shown.
 		// Use the value used by core in classes like "field-xfn" -> the 'xfn' value to use.
-		'hidden_fields' => array( 'link-target', 'xfn', 'description', ),
-	);
+		'hidden_fields' => [ 'link-target', 'xfn', 'description', ],
+	];
 
     return $items;
 }
@@ -607,19 +598,19 @@ function anima_add_cart_to_extras_menu_items( $items ) {
  * @return array
  */
 
-function anima_woocommerce_get_subcategories( $category ) {
+function anima_woocommerce_get_subcategories( $category ): array {
 
     // Get category ID;
 	$parent_category_ID = $category->term_id;
 
-	// Args used to to get categories.
-	$args = array(
+	// Args used to get categories.
+	$args = [
 		'hierarchical' => 1,
 		'show_option_none' => '',
 		'hide_empty' => 1,
 		'parent' => $parent_category_ID,
 		'taxonomy' => 'product_cat'
-	);
+	];
 
 	return get_categories($args);
 }

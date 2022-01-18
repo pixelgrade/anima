@@ -14,9 +14,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Adds custom classes to the array of body classes.
  *
  * @param array $classes Classes for the body element.
+ *
  * @return array
  */
-function anima_body_classes( $classes ) {
+function anima_body_classes( array $classes ): array {
 
 	$classes[] = 'is-loading';
 
@@ -27,14 +28,14 @@ function anima_body_classes( $classes ) {
 
 	$classes[] = 'has-novablocks-header-transparent';
 
-	if ( anima_first_block_is( array(
+	if ( anima_first_block_is( [
 		'novablocks/hero',
 		'novablocks/media',
 		'novablocks/slideshow',
 		'novablocks/cards-collection',
 		'novablocks/posts-collection',
 		'novablocks/supernova',
-		) ) ) {
+	] ) ) {
 		$classes[] = 'has-no-spacing-top';
 	}
 
@@ -66,7 +67,7 @@ function anima_body_classes( $classes ) {
 }
 add_filter( 'body_class', 'anima_body_classes' );
 
-function anima_page_has_custom_palette_variation() {
+function anima_page_has_custom_palette_variation(): bool {
 	return is_home() ||
 	       is_post_type_archive( 'post' ) ||
 	       is_singular('post') ||

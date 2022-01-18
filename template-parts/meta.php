@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	$author_id        = get_the_author_meta( 'ID' );
 	$author           = get_userdata( $author_id );
 	$author_email     = $author->user_email;
-	$avatar_url       = get_avatar_url( $author_email, array( 'size' => 100, 'default' => 'identicon' ) );
+	$avatar_url       = get_avatar_url( $author_email, [ 'size' => 100, 'default' => 'identicon' ] );
 	$avatar           = get_avatar( $author_email, '80', 'identicon' );
 	$min_reading_time = anima_get_post_reading_time_in_minutes( $post, 280 );
 

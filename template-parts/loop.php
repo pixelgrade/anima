@@ -23,7 +23,7 @@ $posts_to_show = $wp_query->posts;
  */
 $number_of_posts_to_show = count( $posts_to_show );
 
-$posts_to_show_ids = array();
+$posts_to_show_ids = [];
 
 foreach ( $posts_to_show as $post ) {
 	$posts_to_show_ids[] = $post->ID;

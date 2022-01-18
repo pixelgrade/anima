@@ -15,56 +15,56 @@ function anima_add_customify_connected_fields( $options ) {
 	}
 
 	if ( ! isset( $options['sections']['style_manager_section'] ) ) {
-		$options['sections']['style_manager_section'] = array();
+		$options['sections']['style_manager_section'] = [];
 	}
 
 	// The section might be already defined, thus we merge, not replace the entire section config.
 	$options['sections']['style_manager_section'] = array_replace_recursive( $options['sections']['style_manager_section'],
-		array(
-			'options' => array(
+		[
+			'options' => [
 				// Font Palettes Assignment.
-				'sm_font_palette'    => array(
+				'sm_font_palette'    => [
 					'default' => 'exquisite',
-				),
-				'sm_font_primary'    => array(
+				],
+				'sm_font_primary'    => [
 					'default' => 'Reforma1969',
-					'connected_fields' => array(
+					'connected_fields' => [
 						'display_font',
 						'heading_1_font',
 						'heading_2_font',
 						'heading_3_font',
 						'heading_4_font',
 						'quote_font',
-					),
-				),
-				'sm_font_secondary'  => array(
+					],
+				],
+				'sm_font_secondary'  => [
 					'default' => 'Reforma2018',
-					'connected_fields' => array(
+					'connected_fields' => [
 						'heading_5_font',
 						'heading_6_font',
 						'navigation_font',
 						'buttons_font',
 						'meta_font',
-					),
-				),
-				'sm_font_body'       => array(
+					],
+				],
+				'sm_font_body'       => [
 					'default' => 'Reforma1969',
-					'connected_fields' => array(
+					'connected_fields' => [
 						'body_font',
 						'content_font',
 						'lead_font',
 						'cite_font',
 						'input_font'
-					),
-				),
-				'sm_font_accent'     => array(
+					],
+				],
+				'sm_font_accent'     => [
 					'default' => 'Billy Ohio',
-					'connected_fields' => array(
+					'connected_fields' => [
 						'accent_font',
-					),
-				),
-			),
-		)
+					],
+				],
+			],
+		]
 	);
 
 	return $options;

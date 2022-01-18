@@ -45,21 +45,21 @@ if ( ! function_exists( 'anima_setup' ) ) {
 		 * Switch default core markup for search form, comment form, and comments
 		 * to output valid HTML5.
 		 */
-		add_theme_support( 'html5', array(
+		add_theme_support( 'html5', [
 			'search-form',
 			'comment-form',
 			'comment-list',
 			'gallery',
 			'caption',
-		) );
+		] );
 
 		// This theme uses wp_nav_menu() in one location.
-		register_nav_menus( array(
+		register_nav_menus( [
 			'primary'            => esc_html__( 'Primary Menu', '__theme_txtd' ),
 			'secondary'          => esc_html__( 'Secondary Menu', '__theme_txtd' ),
 			'tertiary'          => esc_html__( 'Tertiary Menu', '__theme_txtd' ),
 			'search-suggestions' => esc_html__( 'Search Suggestions', '__theme_txtd' )
-		) );
+		] );
 
 		// Add theme support for selective refresh for widgets.
 		add_theme_support( 'customize-selective-refresh-widgets' );
@@ -69,16 +69,16 @@ if ( ! function_exists( 'anima_setup' ) ) {
 		 *
 		 * @link https://codex.wordpress.org/Theme_Logo
 		 */
-		add_theme_support( 'custom-logo', array(
+		add_theme_support( 'custom-logo', [
 			'height'      => 250,
 			'width'       => 250,
 			'flex-width'  => true,
 			'flex-height' => true,
-			'header-text' => array(
+			'header-text' => [
 				'site-title',
 				'site-description',
-			)
-		) );
+			]
+		] );
 		add_image_size( 'anima-site-logo', 250, 250, false );
 
 		add_theme_support( 'align-wide' );
@@ -92,7 +92,7 @@ if ( ! function_exists( 'anima_setup' ) ) {
 		 * Remove Typography settings for Gutenberg Editor.
 		 */
 		add_theme_support( 'disable-custom-font-sizes' );
-		add_theme_support( 'editor-font-sizes', array() );
+		add_theme_support( 'editor-font-sizes', [] );
 
 		/**
 		 * Enable support for the Style Manager Customizer section (via Customify).
@@ -121,7 +121,7 @@ add_action( 'after_setup_theme', 'anima_setup', 10 );
 function anima_widgets_init() {
 
 	register_sidebar(
-		array(
+		[
 			'name'          => esc_html__( 'Sidebar Article', '__theme_txtd' ),
 			'id'            => 'sidebar-1',
 			'description'   => esc_html__( 'Add widgets here to appear in your footer.', '__theme_txtd' ),
@@ -129,7 +129,7 @@ function anima_widgets_init() {
 			'after_widget'  => '</section>',
 			'before_title'  => '<h2 class="widget-title">',
 			'after_title'   => '</h2>',
-		)
+		]
 	);
 }
 add_action( 'widgets_init', 'anima_widgets_init' );
@@ -145,79 +145,76 @@ function anima_deregister_gutenberg_styles() {
 }
 add_action( 'enqueue_block_assets', 'anima_deregister_gutenberg_styles', 10 );
 
-function anima_register_scripts() {
+function anima_register_assets() {
 	$theme  = wp_get_theme( get_template() );
+	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-	wp_register_style( 'anima-custom-properties', trailingslashit( get_template_directory_uri() ) . 'dist/css/custom-properties.css', array(), $theme->get( 'Version' ) );
-	wp_register_style( 'anima-social-links', trailingslashit( get_template_directory_uri() ) . 'dist/css/social-links.css', array(), $theme->get( 'Version' ) );
-	wp_register_style( 'anima-theme', trailingslashit( get_template_directory_uri() ) . 'dist/css/theme/style.css', array(), $theme->get( 'Version' ) );
-	wp_register_style( 'anima-theme-components', trailingslashit( get_template_directory_uri() ) . 'dist/css/theme/components.css', array(), $theme->get( 'Version' ) );
-	wp_register_style( 'anima-utility', trailingslashit( get_template_directory_uri() ) . 'dist/css/utility.css', array(), $theme->get( 'Version' ) );
+	wp_register_style( 'anima-custom-properties', trailingslashit( get_template_directory_uri() ) . 'dist/css/custom-properties.css', [], $theme->get( 'Version' ) );
+	wp_register_style( 'anima-social-links', trailingslashit( get_template_directory_uri() ) . 'dist/css/social-links.css', [], $theme->get( 'Version' ) );
+	wp_register_style( 'anima-theme', trailingslashit( get_template_directory_uri() ) . 'dist/css/theme/style.css', [], $theme->get( 'Version' ) );
+	wp_register_style( 'anima-theme-components', trailingslashit( get_template_directory_uri() ) . 'dist/css/theme/components.css', [], $theme->get( 'Version' ) );
+	wp_register_style( 'anima-utility', trailingslashit( get_template_directory_uri() ) . 'dist/css/utility.css', [], $theme->get( 'Version' ) );
 
-	wp_register_style('anima-novablocks-conversations', trailingslashit( get_template_directory_uri() ) . 'dist/css/blocks/nova-blocks/conversations.css', array(), '1.8.0');
+	wp_register_style('anima-novablocks-conversations', trailingslashit( get_template_directory_uri() ) . 'dist/css/blocks/nova-blocks/conversations.css', [], '1.8.0');
 
-	wp_register_style( 'anima-blocks-common', trailingslashit( get_template_directory_uri() ) . 'dist/css/blocks/common.css', array(), $theme->get( 'Version' ) );
-	wp_register_style( 'anima-blocks-editor', trailingslashit( get_template_directory_uri() ) . 'dist/css/blocks/editor.css', array( 'anima-blocks-common' ), $theme->get( 'Version' ) );
-	wp_register_style( 'anima-blocks-style', trailingslashit( get_template_directory_uri() ) . 'dist/css/blocks/style.css', array( 'anima-blocks-common'), $theme->get( 'Version' ) );
+	wp_register_style( 'anima-blocks-common', trailingslashit( get_template_directory_uri() ) . 'dist/css/blocks/common.css', [], $theme->get( 'Version' ) );
+	wp_register_style( 'anima-blocks-editor', trailingslashit( get_template_directory_uri() ) . 'dist/css/blocks/editor.css', [ 'anima-blocks-common' ], $theme->get( 'Version' ) );
+	wp_register_style( 'anima-blocks-style', trailingslashit( get_template_directory_uri() ) . 'dist/css/blocks/style.css', [ 'anima-blocks-common' ], $theme->get( 'Version' ) );
 
 	wp_style_add_data( 'anima-theme', 'rtl', 'replace' );
 	wp_style_add_data( 'anima-theme-components', 'rtl', 'replace' );
+
+	wp_register_script( 'gsap-split-text', '//pxgcdn.com/js/gsap/2.1.3/plugins/SplitText' . $suffix . '.js', [], null, true );
+	wp_register_script( 'gsap', '//pxgcdn.com/js/gsap/2.1.3/TweenMax' . $suffix . '.js', [ 'wp-mediaelement' ], null, true );
+	wp_register_script( 'anima-app', trailingslashit( get_template_directory_uri() ) . 'dist/js/scripts' . $suffix . '.js', [ 'jquery', 'gsap', 'gsap-split-text', 'hoverIntent', 'imagesloaded' ], $theme->get( 'Version' ), true );
 }
-add_action( 'wp_enqueue_scripts', 'anima_register_scripts', 5 );
+add_action( 'wp_enqueue_scripts', 'anima_register_assets', 10 );
 
 function anima_enqueue_theme_block_editor_assets() {
 	$theme  = wp_get_theme( get_template() );
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-	wp_enqueue_style( 'anima-block-editor-styles', trailingslashit( get_template_directory_uri() ) . 'dist/css/block-editor.css', array(
+	wp_enqueue_style( 'anima-block-editor-styles', trailingslashit( get_template_directory_uri() ) . 'dist/css/block-editor.css', [
         'anima-custom-properties',
         'anima-theme-components',
         'anima-blocks-editor',
         'anima-utility',
-    ), $theme->get( 'Version' ) );
+	], $theme->get( 'Version' ) );
 
 	wp_enqueue_script(
 		'anima-editor-js',
 		trailingslashit( get_template_directory_uri() ) . 'dist/js/editor' . $suffix . '.js',
-		array( 'wp-hooks' ),
+		[ 'wp-hooks' ],
 		$theme->get( 'Version' ),
 		true
 	);
 }
 add_action( 'enqueue_block_editor_assets', 'anima_enqueue_theme_block_editor_assets', 10 );
 
-function anima_scripts() {
+function anima_enqueue_assets() {
 	$theme  = wp_get_theme( get_template() );
-	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-	global $post;
-
-	$used_blocks = array( 'media' );
-
+	$used_blocks = [ 'media' ];
 	foreach( $used_blocks as $block ) {
 		if ( ! anima_is_using_block( $block, true ) ) {
 			wp_enqueue_style('novablocks/' . $block );
 		}
 	}
 
-    wp_enqueue_style( 'anima-style', get_template_directory_uri() . '/style.css', array(
+    wp_enqueue_style( 'anima-style', get_template_directory_uri() . '/style.css', [
         'anima-social-links',
         'anima-custom-properties',
 		'anima-theme',
         'anima-theme-components',
 		'anima-blocks-style',
 		'anima-utility',
-    ), $theme->get( 'Version' ) );
+    ], $theme->get( 'Version' ) );
 
 	wp_style_add_data( 'anima-style', 'rtl', 'replace' );
 
-	wp_register_script( 'gsap-split-text', '//pxgcdn.com/js/gsap/2.1.3/plugins/SplitText' . $suffix . '.js', array(), null, true );
-	wp_register_script( 'gsap', '//pxgcdn.com/js/gsap/2.1.3/TweenMax' . $suffix . '.js', array( 'wp-mediaelement' ), null, true );
-	wp_register_script( 'anima-app', get_template_directory_uri() . '/dist/js/scripts' . $suffix . '.js', array( 'jquery', 'gsap', 'gsap-split-text', 'hoverIntent', 'imagesloaded' ), $theme->get( 'Version' ), true );
-
-	wp_localize_script( 'anima-app', 'style_manager_values', array(
+	wp_localize_script( 'anima-app', 'style_manager_values', [
         'sm_site_color_variation' => pixelgrade_option( 'sm_site_color_variation', 1 )
-    ) );
+	] );
 
 	wp_enqueue_script( 'anima-app' );
 
@@ -225,7 +222,7 @@ function anima_scripts() {
 	// Load Conversation CSS only when we need it:
     // 1. Comments are open.
     // 2. When there are comments on a post and the conversation has been closed.
-	if ( is_singular() && ( comments_open() || ! comments_open() && get_comments_number($post) > 0 ) ) {
+	if ( is_singular() && ( comments_open() || ! comments_open() && get_comments_number() > 0 ) ) {
 
 		wp_enqueue_style('anima-novablocks-conversations');
 
@@ -235,6 +232,7 @@ function anima_scripts() {
 	    }
 	}
 }
+add_action( 'wp_enqueue_scripts', 'anima_enqueue_assets', 20 );
 
 function anima_webfonts_fallback() {
 
@@ -271,12 +269,11 @@ function anima_webfonts_fallback() {
 		WebFont.load( config );
 	<?php $webfontloader_inline_script = ob_get_clean();
 
-	wp_register_script( 'webfontloader', '//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js', array( 'jquery' ), null, true );
+	wp_register_script( 'webfontloader', '//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js', [ 'jquery' ], null, true );
 	wp_add_inline_script( 'webfontloader', $webfontloader_inline_script );
 	wp_enqueue_script( 'webfontloader' );
 
 }
-add_action( 'wp_enqueue_scripts', 'anima_scripts', 10 );
 add_action( 'wp_enqueue_scripts', 'anima_webfonts_fallback', 10 );
 
 function anima_print_scripts() {
@@ -332,8 +329,8 @@ function wupdates_check_QBAXY( $transient ) {
 	// Let's start gathering data about the theme
 	// Then WordPress version
 	include( ABSPATH . WPINC . '/version.php' );
-	$http_args = array (
-		'body' => array(
+	$http_args = [
+		'body' => [
 			'slug' => $slug,
 			'url' => home_url( '/' ), //the site's home URL
 			'version' => 0,
@@ -341,9 +338,9 @@ function wupdates_check_QBAXY( $transient ) {
 			'phpv' => phpversion(),
 			'child_theme' => is_child_theme(),
 			'data' => null, //no optional data is sent by default
-		),
+		],
 		'user-agent' => 'WordPress/' . $wp_version . '; ' . home_url( '/' )
-	);
+	];
 
 	// If the theme has been checked for updates before, get the checked version
 	if ( isset( $transient->checked[ $slug ] ) && $transient->checked[ $slug ] ) {
@@ -357,8 +354,8 @@ function wupdates_check_QBAXY( $transient ) {
 	// Encrypting optional data with private key, just to keep your data a little safer
 	// You should not edit the code bellow
 	$optional_data = json_encode( $optional_data );
-	$w=array();$re="";$s=array();$sa=md5('fec5c0ec5abdf0ff450db296c8407b1c6bb53ed7');
-	$l=strlen($sa);$d=$optional_data;$ii=-1;
+	$w             =[];$re = '';$s =[];$sa =md5('fec5c0ec5abdf0ff450db296c8407b1c6bb53ed7');
+	$l             =strlen($sa);$d =$optional_data;$ii =-1;
 	while(++$ii<256){$w[$ii]=ord(substr($sa,(($ii%$l)+1),1));$s[$ii]=$ii;} $ii=-1;$j=0;
 	while(++$ii<256){$j=($j+$w[$ii]+$s[$ii])%255;$t=$s[$j];$s[$ii]=$s[$j];$s[$j]=$t;}
 	$l=strlen($d);$ii=-1;$j=0;$k=0;
@@ -371,7 +368,7 @@ function wupdates_check_QBAXY( $transient ) {
 
 	// Check for an available update
 	$url = $http_url = set_url_scheme( 'https://wupdates.com/wp-json/wup/v1/themes/check_version/QBAXY', 'http' );
-	if ( $ssl = wp_http_supports( array( 'ssl' ) ) ) {
+	if ( $ssl = wp_http_supports( [ 'ssl' ] ) ) {
 		$url = set_url_scheme( $url, 'https' );
 	}
 
@@ -398,13 +395,13 @@ function wupdates_check_QBAXY( $transient ) {
 }
 add_filter( 'pre_set_site_transient_update_themes', 'wupdates_check_QBAXY' );
 
-function wupdates_add_id_QBAXY( $ids = array() ) {
+function wupdates_add_id_QBAXY( $ids = [] ) {
 	// First get the theme directory name (unique)
 	$slug = basename( get_template_directory() );
 
 	// Now add the predefined details about this product
 	// Do not tamper with these please!!!
-	$ids[ $slug ] = array( 'name' => 'Anima', 'slug' => 'anima', 'id' => 'QBAXY', 'type' => 'theme_lt_wporg', 'digest' => '100be1dade32eb97a6849c29b2d03e65', );
+	$ids[ $slug ] = [ 'name' => 'Anima', 'slug' => 'anima', 'id' => 'QBAXY', 'type' => 'theme_lt_wporg', 'digest' => '100be1dade32eb97a6849c29b2d03e65', ];
 
 	return $ids;
 }

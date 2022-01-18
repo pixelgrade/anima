@@ -90,11 +90,11 @@ if ( ! function_exists( 'anima_comments_link' ) ) {
 					wp_kses(
 					/* translators: %s: post title */
 						__( 'Leave a Comment<span class="screen-reader-text"> on %s</span>', '__theme_txtd' ),
-						array(
-							'span' => array(
-								'class' => array(),
-							),
-						)
+						[
+							'span' => [
+								'class' => [],
+							],
+						]
 					),
 					get_the_title()
 				)
@@ -115,11 +115,11 @@ if ( ! function_exists( 'anima_edit_post_link' ) ) {
 				wp_kses(
 				/* translators: %s: Name of current post. Only visible to screen readers */
 					__( 'Edit <span class="screen-reader-text">%s</span>', '__theme_txtd' ),
-					array(
-						'span' => array(
-							'class' => array(),
-						),
-					)
+					[
+						'span' => [
+							'class' => [],
+						],
+					]
 				),
 				get_the_title()
 			),
@@ -151,11 +151,11 @@ if ( ! function_exists( 'anima_post_thumbnail' ) ) {
 
             <a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
 				<?php
-				the_post_thumbnail( 'post-thumbnail', array(
-					'alt' => the_title_attribute( array(
+				the_post_thumbnail( 'post-thumbnail', [
+					'alt' => the_title_attribute( [
 						'echo' => false,
-					) ),
-				) ); ?>
+					] ),
+				] ); ?>
             </a>
 
 			<?php
@@ -204,7 +204,7 @@ if ( ! function_exists( ' anima_has_custom_logo_transparent' ) ) {
 	 *
 	 * @return bool Whether the site has a custom logo or not.
 	 */
-	function anima_has_custom_logo_transparent( $blog_id = 0 ) {
+	function anima_has_custom_logo_transparent( int $blog_id = 0 ): bool {
 		$switched_blog = false;
 
 		if ( is_multisite() && ! empty( $blog_id ) && get_current_blog_id() !== absint( $blog_id ) ) {
@@ -230,7 +230,7 @@ if ( ! function_exists( ' anima_get_custom_logo_transparent' ) ) {
 	 *
 	 * @return string Custom logo transparent markup.
 	 */
-	function anima_get_custom_logo_transparent( $blog_id = 0 ) {
+	function anima_get_custom_logo_transparent( int $blog_id = 0 ): string {
 		$html          = '';
 		$switched_blog = false;
 
@@ -247,10 +247,10 @@ if ( ! function_exists( ' anima_get_custom_logo_transparent' ) ) {
 				'<a href="%1$s" class="custom-logo-link  custom-logo-link--inversed" rel="home" itemprop="url">%2$s</a>',
 				esc_url( home_url( '/' ) ),
 				wp_get_attachment_image(
-					$custom_logo_id, 'large', false, array(
+					$custom_logo_id, 'large', false, [
 						'class'    => 'custom-logo--transparent',
 						'itemprop' => 'logo',
-					)
+					]
 				)
 			);
 		} // If no logo is set but we're in the Customizer, leave a placeholder (needed for the live preview).
@@ -281,7 +281,7 @@ if ( ! function_exists( ' anima_the_custom_logo_transparent' ) ) {
 	 *
 	 * @param int $blog_id Optional. ID of the blog in question. Default is the ID of the current blog.
 	 */
-	function anima_the_custom_logo_transparent( $blog_id = 0 ) {
+	function anima_the_custom_logo_transparent( int $blog_id = 0 ) {
 		echo anima_get_custom_logo_transparent( $blog_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 }
@@ -311,9 +311,9 @@ if ( ! function_exists( 'anima_footer_get_copyright_content' ) ) {
 	 * Get the footer copyright content (HTML or simple text).
 	 * It already has do_shortcode applied.
 	 *
-	 * @return bool|string
+	 * @return string
 	 */
-	function anima_footer_get_copyright_content() {
+	function anima_footer_get_copyright_content(): string {
 		$copyright_text = apply_filters( 'anima_footer_copyright_text', esc_html__( '&copy; %year% %site-title%.', '__theme_txtd' ) );
 		if ( ! empty( $copyright_text ) ) {
 			// We need to parse some tags
@@ -331,10 +331,10 @@ if ( ! function_exists( 'anima_shape_comment' ) ) {
 	 * Used as a callback by wp_list_comments() for displaying the comments.
 	 *
 	 * @param WP_Comment $comment
-	 * @param array $args
-	 * @param int $depth
+	 * @param array      $args
+	 * @param int        $depth
 	 */
-	function anima_shape_comment( $comment, $args, $depth ) {
+	function anima_shape_comment( WP_Comment $comment, array $args, int $depth ) {
 		$GLOBALS['comment'] = $comment; // phpcs:ignore
 		switch ( $comment->comment_type ) {
 			case 'pingback':
@@ -388,13 +388,13 @@ if ( ! function_exists( 'anima_shape_comment' ) ) {
 						<?php
 						comment_reply_link(
 							array_merge(
-								$args, array(
+								$args, [
 									'add_below' => 'div-comment',
 									'depth'     => $depth,
 									'max_depth' => $args['max_depth'],
 									'before'    => '<div class="comment__reply">',
 									'after'     => '</div>',
-								)
+								]
 							),
 							$comment
 						);
@@ -454,7 +454,7 @@ if ( ! function_exists( 'anima_the_posts_pagination' ) ) {
 	 * @param array $args Optional. See paginate_links() for available arguments.
 	 *                    Default empty array.
 	 */
-	function anima_the_posts_pagination( $args = array() ) { ?>
+	function anima_the_posts_pagination( array $args = [] ) { ?>
 
         <!-- Use Group Inner Container, -->
         <!-- so we can have access to Sidecar Grid.-->
@@ -474,17 +474,17 @@ if ( ! function_exists( 'anima_get_the_posts_pagination' ) ) {
 	 *
 	 * @return string Markup for pagination links.
 	 */
-	function anima_get_the_posts_pagination( $args = array() ) {
+	function anima_get_the_posts_pagination( array $args = [] ) {
 		// Put our own defaults in place
 		$args = wp_parse_args(
-			$args, array(
+			$args, [
 				'end_size'           => 1,
 				'mid_size'           => 2,
 				'type'               => 'plain',
 				'prev_text'          => esc_html_x( 'Previous', 'previous set of posts', '__theme_txtd' ),
 				'next_text'          => esc_html_x( 'Next', 'next set of posts', '__theme_txtd' ),
 				'screen_reader_text' => esc_html__( 'Posts navigation', '__theme_txtd' ),
-			)
+			]
 		);
 
 		return get_the_posts_pagination( $args );
@@ -496,9 +496,10 @@ if ( ! function_exists( 'anima_get_the_posts_pagination' ) ) {
  *
  * @param array $args Optional. See get_the_post_navigation() for available arguments.
  *                    Default empty array.
+ *
  * @return void
  */
-function anima_the_post_navigation( $args = array() ) {
+function anima_the_post_navigation( array $args = [] ) {
 	echo anima_get_the_post_navigation( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
@@ -506,28 +507,28 @@ if ( ! function_exists( 'anima_get_the_post_navigation' ) ) {
 	/**
 	 * Retrieves the navigation to next/previous post, when applicable.
 	 *
-	 * @param array $args {
+	 * @param array       $args               {
 	 *     Optional. Default post navigation arguments. Default empty array.
 	 *
-	 * @type string $prev_text Anchor text to display in the previous post link. Default '%title'.
-	 * @type string $next_text Anchor text to display in the next post link. Default '%title'.
-	 * @type bool $in_same_term Whether link should be in a same taxonomy term. Default false.
-	 * @type array|string $excluded_terms Array or comma-separated list of excluded term IDs. Default empty.
-	 * @type string $taxonomy Taxonomy, if `$in_same_term` is true. Default 'category'.
-	 * @type string $screen_reader_text Screen reader text for nav element. Default 'Post navigation'.
+	 * @type string       $prev_text          Anchor text to display in the previous post link. Default '%title'.
+	 * @type string       $next_text          Anchor text to display in the next post link. Default '%title'.
+	 * @type bool         $in_same_term       Whether link should be in a same taxonomy term. Default false.
+	 * @type array|string $excluded_terms     Array or comma-separated list of excluded term IDs. Default empty.
+	 * @type string       $taxonomy           Taxonomy, if `$in_same_term` is true. Default 'category'.
+	 * @type string       $screen_reader_text Screen reader text for nav element. Default 'Post navigation'.
 	 * }
 	 * @return string Markup for post links.
 	 */
-	function anima_get_the_post_navigation( $args = array() ) {
+	function anima_get_the_post_navigation( array $args = [] ): string {
 		$args = wp_parse_args(
-			$args, array(
+			$args, [
 				'prev_text'          => '%title',
 				'next_text'          => '%title',
 				'in_same_term'       => false,
 				'excluded_terms'     => '',
 				'taxonomy'           => 'category',
 				'screen_reader_text' => esc_html__( 'Post navigation', '__theme_txtd' ),
-			)
+			]
 		);
 
 		$navigation = '';
@@ -570,7 +571,7 @@ if ( ! function_exists( 'anima_is_active_sidebar' ) ) {
 	 *
 	 * @return bool true if the sidebar is in use, false otherwise.
 	 */
-	function anima_is_active_sidebar( $index ) {
+	function anima_is_active_sidebar( $index ): bool {
 		global $wp_registered_sidebars;
 
 		$index             = ( is_int( $index ) ) ? "sidebar-$index" : sanitize_title( $index );
@@ -589,7 +590,7 @@ if ( ! function_exists( 'anima_get_the_author_info_box' ) ) {
 	 *
 	 * @return string
 	 */
-	function anima_get_the_author_info_box() {
+	function anima_get_the_author_info_box(): string {
 		// Get the current post for easy use
 		$post = get_post();
 
@@ -614,17 +615,12 @@ if ( ! function_exists( 'anima_get_the_author_info_box' ) ) {
 
 		// Get author's display name
 		$display_name = get_the_author_meta( 'display_name', $post->post_author );
-
 		// If display name is not available then use nickname as display name
 		if ( empty( $display_name ) ) {
 			$display_name = get_the_author_meta( 'nickname', $post->post_author );
 		}
 
-		if ( ! empty( $user_description ) ) {
-			$author_details .= '<div class="c-author has-description" itemscope itemtype="http://schema.org/Person">';
-		} else {
-			$author_details .= '<div class="c-author" itemscope itemtype="http://schema.org/Person">';
-		}
+		$author_details .= '<div class="c-author has-description" itemscope itemtype="http://schema.org/Person">';
 
 		// The author avatar
 		$author_avatar = get_avatar( get_the_author_meta( 'user_email' ), 100 );
@@ -639,9 +635,7 @@ if ( ! function_exists( 'anima_get_the_author_info_box' ) ) {
 		}
 
 		// The author bio
-		if ( ! empty( $user_description ) ) {
-			$author_details .= '<p class="c-author__description" itemprop="description">' . nl2br( $user_description ) . '</p>';
-		}
+		$author_details .= '<p class="c-author__description" itemprop="description">' . nl2br( $user_description ) . '</p>';
 
 		$author_details .= '<footer class="c-author__footer">';
 
@@ -652,7 +646,7 @@ if ( ! function_exists( 'anima_get_the_author_info_box' ) ) {
 		$author_details .= '</div><!-- .c-author -->';
 
 		return $author_details;
-	} // function
+	}
 }
 
 if ( ! function_exists( 'anima_get_author_bio_links' ) ) {
@@ -663,17 +657,17 @@ if ( ! function_exists( 'anima_get_author_bio_links' ) ) {
 	 * @param int|WP_Post $post_id Optional. Post ID or post object.
 	 * @return string The HTML markup of the author bio links list.
 	 */
-	function anima_get_author_bio_links( $post_id = null ) {
+	function anima_get_author_bio_links( $post_id = null ): string {
 		$post   = get_post( $post_id );
 		$markup = '';
 		if ( empty( $post ) ) {
 			return $markup;
 		}
 
-		// Get author's website URL
+		// Get author's website URL.
 		$user_website = get_the_author_meta( 'url', $post->post_author );
 
-		// Get link to the author archive page
+		// Get link to the author archive page.
 		$user_posts = get_author_posts_url( get_the_author_meta( 'ID', $post->post_author ) );
 
 		$str     = wp_remote_fopen( 'https://www.gravatar.com/' . md5( strtolower( trim( get_the_author_meta( 'user_email' ) ) ) ) . '.php' );
@@ -698,5 +692,5 @@ if ( ! function_exists( 'anima_get_author_bio_links' ) ) {
 		$markup .= "</span>\n";
 
 		return $markup;
-	} // function
+	}
 }
