@@ -168,7 +168,7 @@ function anima_register_assets() {
 	wp_register_script( 'gsap', '//pxgcdn.com/js/gsap/2.1.3/TweenMax' . $suffix . '.js', [ 'wp-mediaelement' ], null, true );
 	wp_register_script( 'anima-app', trailingslashit( get_template_directory_uri() ) . 'dist/js/scripts' . $suffix . '.js', [ 'jquery', 'gsap', 'gsap-split-text', 'hoverIntent', 'imagesloaded' ], $theme->get( 'Version' ), true );
 }
-add_action( 'wp_enqueue_scripts', 'anima_register_assets', 10 );
+add_action( 'init', 'anima_register_assets', 10 );
 
 function anima_enqueue_theme_block_editor_assets() {
 	$theme  = wp_get_theme( get_template() );
