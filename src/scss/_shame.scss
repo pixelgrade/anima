@@ -66,6 +66,7 @@ textarea {
 
 
 
+
 /*------------------------------------*\
   #STYLE MANAGER STATES: DARK / LIGHT
 \*------------------------------------*/
@@ -238,11 +239,14 @@ mark {
 
 
 
+
+
 /*------------------------------------*\
-  #BLOCK PATTERNS SHOWCASE
+  #BLOCK PATTERNS SHOWCASE PAGES
 \*------------------------------------*/
 
-// Page with custom `.block-patterns` CSS class
+// For Block Patterns pages add the 
+// `.block-patterns` CSS class to the body tag. 
 body.block-patterns {
     background: #F5F5F5;
     background: var(--sm-bg-color-2);
@@ -278,27 +282,38 @@ body.block-patterns {
 
 
 // The next block after the title is considered a Block Pattern
-.showcase-block-title + div {
+.showcase-block-title {
 
-    @include above(tablet) {
-        border: 1.25px solid #E5E6E8;
-        border-radius: 8px;
-        overflow: hidden;
-        
-        // Resize the block for better overview
-        transform-origin: 50% 0%;
-        transform: scale(0.8);
-        transition: all .4s ease;
+    & + div {
+        @include above(tablet) {
+            box-shadow: 0 0 0 1px #E5E6E8;
+            border-radius: 8px;
+            overflow: hidden;
+            
+            // Resize the block to have a better overview
+            transform-origin: 50% 0%;
+            transform: scale(0.8);
+            transition: all .4s ease;
 
-        // Reset block spacing
-        --nb-emphasis-top-spacing: 1 !important;
-        --nb-emphasis-bottom-spacing: 1 !important;
+            // Reset block spacing
+            --nb-emphasis-top-spacing: 1 !important;
+            --nb-emphasis-bottom-spacing: 1 !important;
 
-        &:hover {
-            transform: scale(1);
-            // border-width: 0;
-            border-radius: 0px;
+            &:hover {
+                transform: scale(1);
+                border-radius: 0px;
+            }
         }
     }
 
+    // Multipled blocks grouped inside a Sidecar block
+    & + div.nb-sidecar {
+        @include above(tablet) {
+            --nb-emphasis-top-spacing: 0 !important;
+            --nb-emphasis-bottom-spacing: 0 !important;
+
+            // Add a background for Sidecar 
+            background: var(--sm-current-bg-color, var(--nb-bg-color));
+        }
+    }
 }

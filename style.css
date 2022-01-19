@@ -4523,7 +4523,7 @@ mark {
 }
 
 /*------------------------------------*\
-  #BLOCK PATTERNS SHOWCASE
+  #BLOCK PATTERNS SHOWCASE PAGES
 \*------------------------------------*/
 body.block-patterns {
   background: #F5F5F5;
@@ -4555,7 +4555,7 @@ body.block-patterns {
 
 @media only screen and (min-width: 768px) {
   .showcase-block-title + div {
-    border: 1.25px solid #E5E6E8;
+    box-shadow: 0 0 0 1px #E5E6E8;
     border-radius: 8px;
     overflow: hidden;
     transform-origin: 50% 0%;
@@ -4567,5 +4567,12 @@ body.block-patterns {
   .showcase-block-title + div:hover {
     transform: scale(1);
     border-radius: 0px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .showcase-block-title + div.nb-sidecar {
+    --nb-emphasis-top-spacing: 0 !important;
+    --nb-emphasis-bottom-spacing: 0 !important;
+    background: var(--sm-current-bg-color, var(--nb-bg-color));
   }
 }
