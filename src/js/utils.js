@@ -1,5 +1,6 @@
 import $ from 'jquery';
-import chroma from 'chroma-js';
+import { colord, extend as colordExtend } from "colord";
+import colordA11yPlugin from "colord/plugins/a11y";
 
 export const debounce = (func, wait) => {
 	let timeout = null;
@@ -134,11 +135,11 @@ export const toggleLightClasses = element => {
 	} );
 
 	if ( currentPaletteConfig ) {
-		const { sourceIndex } = currentPaletteConfig;
-		const offset = isShifted ? sourceIndex : siteColorVariation - 1;
+		colordExtend([colordA11yPlugin]);
+
 		const variationIndex = parseInt( variation, 10 ) - 1;
 		const hex = currentPaletteConfig.variations ? currentPaletteConfig.variations[ variationIndex ].bg : currentPaletteConfig.colors[ variationIndex ].value;
-		const isLight = chroma.contrast( '#FFFFFF', hex ) < chroma.contrast( '#000000', hex );
+		const isLight = colord('#FFFFFF').contrast(hex) < colord('#000000').contrast(hex);
 
 		toggleClasses( element, isLight, 'sm-light', 'sm-dark' );
 	}
