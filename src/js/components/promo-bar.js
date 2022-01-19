@@ -11,7 +11,7 @@ export default class PromoBar {
     this.bars = announcementElementsArray.map( element => new AnnouncementBar( element, {
       parent: this,
       transitionDuration: 0.5,
-      transitionEasing: Power4.easeInOut,
+      transitionEasing: 'power4.inOut',
     } ) );
 
     this.height = 0;

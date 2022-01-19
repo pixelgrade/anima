@@ -1,9 +1,8 @@
-import { addClass, hasClass, setAndResetElementStyles, getColorSetClasses } from '../../utils';
+import { addClass, setAndResetElementStyles } from '../../utils';
 
 import GlobalService from '../globalService';
 import mqService from '../mqService';
 import HeaderBase from './header-base';
-import HeaderColors from './header-colors';
 import HeaderMobile from './header-mobile';
 import HeaderRow from './header-row';
 
@@ -102,12 +101,13 @@ class Header extends HeaderBase {
   }
 
   getIntroTimeline () {
-    const timeline = new TimelineMax( { paused: true } );
+    const timeline = gsap.timeline( { paused: true } );
     const height = this.element.offsetHeight;
-    const transitionEasing = Power4.easeInOut;
+    const transitionEasing = 'power4.inOut';
     const transitionDuration = 0.5;
-    timeline.to( this.element, transitionDuration, { opacity: 1, ease: transitionEasing }, 0 );
-    timeline.to( { height: 0 }, transitionDuration, {
+    timeline.to( this.element, { duration: transitionDuration, opacity: 1, ease: transitionEasing }, 0 );
+    timeline.to( { height: 0 }, {
+      duration: transitionDuration,
       height: height,
       onUpdate: ( tween ) => {
         this.box = Object.assign( {}, this.box, { height: tween.target.height } );

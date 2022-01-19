@@ -5,7 +5,7 @@ export default class Hero {
   constructor ( element ) {
     this.element = element;
     this.progress = 0;
-    this.timeline = new TimelineMax( { paused: true, onComplete: () => { this.paused = true; } } );
+    this.timeline = gsap.timeline( { paused: true, onComplete: () => { this.paused = true; } } );
     this.pieces = this.getMarkupPieces();
     this.paused = false;
     this.offset = 0;
@@ -162,60 +162,63 @@ export default class Hero {
           const offsetPercent = 2 * offset / windowWidth;
           const move = 400 * letters.length * offsetPercent;
 
-          timeline.from( letter, 0.72, {
+          timeline.from( letter, {
+            duration: 0.72,
             x: move,
-            ease: Expo.easeOut
+            ease: 'power.out'
           }, 0 );
         } );
       } );
 
-      timeline.fromTo( title, 0.89, {
+      timeline.fromTo( title, {
         opacity: 0
       }, {
         opacity: 1,
-        ease: Expo.easeOut
+        duration: 0.89,
+        ease: 'power.out'
       }, 0 );
 
       // aici era title dar facea un glitch ciudat
-      timeline.fromTo( headline, 1, {
+      timeline.fromTo( headline, {
         'y': 30
       }, {
         'y': 0,
-        ease: Expo.easeOut
+        duration: 1,
+        ease: 'power.out'
       }, 0 );
 
     }
 
     if ( subtitle.length ) {
-      timeline.fromTo( subtitle, 0.65, { opacity: 0 }, { opacity: 1, ease: Quint.easeOut }, '-=0.65' );
-      timeline.fromTo( subtitle, 0.9, { y: 30 }, { y: 0, ease: Quint.easeOut }, '-=0.65' );
+      timeline.fromTo( subtitle, { opacity: 0 }, { opacity: 1, duration: 0.65, ease: 'power4.out' }, '-=0.65' );
+      timeline.fromTo( subtitle, { y: 30 }, { y: 0, duration: 0.9, ease: 'power4.out' }, '-=0.65' );
     }
 
     if ( separator.length ) {
 
       if ( sepFlower.length ) {
-        timeline.fromTo( sepFlower, 0.15, { opacity: 0 }, { opacity: 1, ease: Quint.easeOut }, '-=0.6' );
-        timeline.fromTo( sepFlower, 0.55, { rotation: -270 }, { rotation: 0, ease: Back.easeOut }, '-=0.5' );
+        timeline.fromTo( sepFlower, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: 'power4.out' }, '-=0.6' );
+        timeline.fromTo( sepFlower, { rotation: -270 }, { rotation: 0, duration: 0.55, ease: 'back.out' }, '-=0.5' );
       }
 
       if ( sepLine.length ) {
-        timeline.fromTo( sepLine, 0.6, { width: 0 }, { width: '42%', opacity: 1, ease: Quint.easeOut }, '-=0.55' );
-        timeline.fromTo( separator, 0.6, { width: 0 }, { width: '100%', opacity: 1, ease: Quint.easeOut }, '-=0.6' );
+        timeline.fromTo( sepLine, { width: 0 }, { width: '42%', opacity: 1, duration: 0.6, ease: 'power4.out' }, '-=0.55' );
+        timeline.fromTo( separator, { width: 0 }, { width: '100%', opacity: 1, duration: 0.6, ease: 'power4.out' }, '-=0.6' );
       }
 
       if ( sepArrow.length ) {
-        timeline.fromTo( sepArrow, 0.2, { opacity: 0 }, { opacity: 1, ease: Quint.easeOut }, '-=0.27' );
+        timeline.fromTo( sepArrow, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: 'power4.out' }, '-=0.27' );
       }
     }
 
     if ( othersAfter.length ) {
-      timeline.fromTo( othersAfter, 0.5, { opacity: 0 }, { opacity: 1, ease: Quint.easeOut }, '-=0.28' );
-      timeline.fromTo( othersAfter, 0.75, { y: -20 }, { y: 0 }, '-=0.5' );
+      timeline.fromTo( othersAfter, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power4.out' }, '-=0.28' );
+      timeline.fromTo( othersAfter, { y: -20 }, { y: 0, duration: 0.75 }, '-=0.5' );
     }
 
     if ( othersBefore.length ) {
-      timeline.fromTo( othersBefore, 0.5, { opacity: 0 }, { opacity: 1, ease: Quint.easeOut }, '-=0.75' );
-      timeline.fromTo( othersBefore, 0.75, { y: 20 }, { y: 0 }, '-=0.75' );
+      timeline.fromTo( othersBefore, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power4.out' }, '-=0.75' );
+      timeline.fromTo( othersBefore, { y: 20 }, { y: 0, duration: 0.75 }, '-=0.75' );
     }
 
     this.timeline = timeline;
@@ -225,37 +228,41 @@ export default class Hero {
     const { title, subtitle, othersBefore, othersAfter, separator, sepLine, sepFlower, sepArrow } = this.pieces;
     const timeline = this.timeline;
 
-    timeline.fromTo( title, 1.08, {
+    timeline.fromTo( title, {
       y: 0
     }, {
       opacity: 0,
       y: -60,
-      ease: Quad.easeIn
+      duration: 1.08,
+      ease: 'power1.in'
     }, 'middle' );
 
-    timeline.to( subtitle, 1.08, {
+    timeline.to( subtitle, {
       opacity: 0,
       y: -90,
-      ease: Quad.easeIn
+      duration: 1.08,
+      ease: 'power1.in'
     }, 'middle' );
 
-    timeline.to( othersBefore, 1.08, {
+    timeline.to( othersBefore, {
       y: 60,
       opacity: 0,
-      ease: Quad.easeIn
+      duration: 1.08,
+      ease: 'power1.in'
     }, 'middle' );
 
-    timeline.to( othersAfter, 1.08, {
+    timeline.to( othersAfter, {
       y: 60,
       opacity: 0,
-      ease: Quad.easeIn
+      duration: 1.08,
+      ease: 'power1.in'
     }, 'middle' );
 
-    timeline.to( sepLine, 0.86, { width: '0%', opacity: 0, ease: Quad.easeIn }, '-=0.94' );
-    timeline.to( separator, 0.86, { width: '0%', opacity: 0, ease: Quad.easeIn }, '-=0.86' );
-    timeline.to( sepFlower, 1, { rotation: 180 }, '-=1.08' );
-    timeline.to( sepFlower, 0.11, { opacity: 0 }, '-=0.03' );
-    timeline.to( sepArrow, 0.14, { opacity: 0 }, '-=1.08' );
+    timeline.to( sepLine, { width: '0%', opacity: 0, duration: 0.86, ease: 'power1.in' }, '-=0.94' );
+    timeline.to( separator, { width: '0%', opacity: 0, duration: 0.86, ease: 'power1.in' }, '-=0.86' );
+    timeline.to( sepFlower, { rotation: 180, duration: 1 }, '-=1.08' );
+    timeline.to( sepFlower, { opacity: 0, duration: 0.11 }, '-=0.03' );
+    timeline.to( sepArrow, { opacity: 0, duration: 0.14 }, '-=1.08' );
 
     this.timeline = timeline;
   }

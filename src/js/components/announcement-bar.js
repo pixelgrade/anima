@@ -8,7 +8,7 @@ export default class AnnouncementBar {
     this.element = element;
     this.parent = args.parent || null;
     this.transitionDuration = args.transitionDuration || 0.5;
-    this.transitionEasing = args.transitionEasing || Power4.easeOut;
+    this.transitionEasing = args.transitionEasing || 'power4.out';
     this.pieces = this.getPieces();
     this.id = $( element ).data( 'id' );
     this.cookieName = 'novablocks-announcement-' + this.id + '-disabled';
@@ -76,10 +76,11 @@ export default class AnnouncementBar {
       }
     } = this;
 
-    const timeline = new TimelineMax( { paused: true } );
+    const timeline = gsap.timeline( { paused: true } );
     const height = wrapper.outerHeight();
-    timeline.fromTo( element, transitionDuration, { height: 0 }, { height: height, ease: transitionEasing }, 0 );
-    timeline.to( { height: 0 }, transitionDuration, {
+    timeline.fromTo( element, { height: 0 }, { duration: transitionDuration, height: height, ease: transitionEasing }, 0 );
+    timeline.to( { height: 0 }, {
+      duration: transitionDuration,
       height: height,
       onUpdate: this.onHeightUpdate.bind( this ),
       onUpdateParams: [ '{self}' ],

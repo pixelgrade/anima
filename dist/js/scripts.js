@@ -66,14 +66,14 @@ const debounce = (func, wait) => {
 const hasTouchScreen = function () {
   var hasTouchScreen = false;
 
-  if ("maxTouchPoints" in navigator) {
+  if ('maxTouchPoints' in navigator) {
     hasTouchScreen = navigator.maxTouchPoints > 0;
-  } else if ("msMaxTouchPoints" in navigator) {
+  } else if ('msMaxTouchPoints' in navigator) {
     hasTouchScreen = navigator.msMaxTouchPoints > 0;
   } else {
-    var mQ = window.matchMedia && matchMedia("(pointer:coarse)");
+    var mQ = window.matchMedia && matchMedia('(pointer:coarse)');
 
-    if (mQ && mQ.media === "(pointer:coarse)") {
+    if (mQ && mQ.media === '(pointer:coarse)') {
       hasTouchScreen = !!mQ.matches;
     } else if ('orientation' in window) {
       hasTouchScreen = true;
@@ -272,8 +272,8 @@ class GlobalService {
   }
 
   _bindCustomizer() {
-    if (typeof wp !== "undefined" && typeof wp.customize !== "undefined") {
-      if (typeof wp.customize.selectiveRefresh !== "undefined") {
+    if (typeof wp !== 'undefined' && typeof wp.customize !== 'undefined') {
+      if (typeof wp.customize.selectiveRefresh !== 'undefined') {
         wp.customize.selectiveRefresh.bind('partial-content-rendered', this._updateProps.bind(this));
       }
 
@@ -372,7 +372,7 @@ class GlobalService {
       this.newProps = {};
       this.frameRendered = false;
 
-      if (typeof callback === "function") {
+      if (typeof callback === 'function') {
         callback();
       }
     }
@@ -396,31 +396,31 @@ class GlobalService {
   }
 
   registerOnResize(fn) {
-    if (typeof fn === "function" && this.resizeCallbacks.indexOf(fn) < 0) {
+    if (typeof fn === 'function' && this.resizeCallbacks.indexOf(fn) < 0) {
       this.resizeCallbacks.push(fn);
     }
   }
 
   registerOnDeouncedResize(fn) {
-    if (typeof fn === "function" && this.resizeCallbacks.indexOf(fn) < 0) {
+    if (typeof fn === 'function' && this.resizeCallbacks.indexOf(fn) < 0) {
       this.debouncedResizeCallbacks.push(fn);
     }
   }
 
   registerOnScroll(fn) {
-    if (typeof fn === "function" && this.scrollCallbacks.indexOf(fn) < 0) {
+    if (typeof fn === 'function' && this.scrollCallbacks.indexOf(fn) < 0) {
       this.scrollCallbacks.push(fn);
     }
   }
 
   registerObserverCallback(fn) {
-    if (typeof fn === "function" && this.observeCallbacks.indexOf(fn) < 0) {
+    if (typeof fn === 'function' && this.observeCallbacks.indexOf(fn) < 0) {
       this.observeCallbacks.push(fn);
     }
   }
 
   registerRender(fn) {
-    if (typeof fn === "function" && this.renderCallbacks.indexOf(fn) < 0) {
+    if (typeof fn === 'function' && this.renderCallbacks.indexOf(fn) < 0) {
       this.renderCallbacks.push(fn);
     }
   }
@@ -438,7 +438,7 @@ class Hero {
   constructor(element) {
     this.element = element;
     this.progress = 0;
-    this.timeline = new TimelineMax({
+    this.timeline = gsap.timeline({
       paused: true,
       onComplete: () => {
         this.paused = true;
@@ -598,110 +598,124 @@ class Hero {
           const offset = box.x - windowWidth / 2;
           const offsetPercent = 2 * offset / windowWidth;
           const move = 400 * letters.length * offsetPercent;
-          timeline.from(letter, 0.72, {
+          timeline.from(letter, {
+            duration: 0.72,
             x: move,
-            ease: Expo.easeOut
+            ease: 'power.out'
           }, 0);
         });
       });
-      timeline.fromTo(title, 0.89, {
+      timeline.fromTo(title, {
         opacity: 0
       }, {
         opacity: 1,
-        ease: Expo.easeOut
+        duration: 0.89,
+        ease: 'power.out'
       }, 0); // aici era title dar facea un glitch ciudat
 
-      timeline.fromTo(headline, 1, {
+      timeline.fromTo(headline, {
         'y': 30
       }, {
         'y': 0,
-        ease: Expo.easeOut
+        duration: 1,
+        ease: 'power.out'
       }, 0);
     }
 
     if (subtitle.length) {
-      timeline.fromTo(subtitle, 0.65, {
+      timeline.fromTo(subtitle, {
         opacity: 0
       }, {
         opacity: 1,
-        ease: Quint.easeOut
+        duration: 0.65,
+        ease: 'power4.out'
       }, '-=0.65');
-      timeline.fromTo(subtitle, 0.9, {
+      timeline.fromTo(subtitle, {
         y: 30
       }, {
         y: 0,
-        ease: Quint.easeOut
+        duration: 0.9,
+        ease: 'power4.out'
       }, '-=0.65');
     }
 
     if (separator.length) {
       if (sepFlower.length) {
-        timeline.fromTo(sepFlower, 0.15, {
+        timeline.fromTo(sepFlower, {
           opacity: 0
         }, {
           opacity: 1,
-          ease: Quint.easeOut
+          duration: 0.15,
+          ease: 'power4.out'
         }, '-=0.6');
-        timeline.fromTo(sepFlower, 0.55, {
+        timeline.fromTo(sepFlower, {
           rotation: -270
         }, {
           rotation: 0,
-          ease: Back.easeOut
+          duration: 0.55,
+          ease: 'back.out'
         }, '-=0.5');
       }
 
       if (sepLine.length) {
-        timeline.fromTo(sepLine, 0.6, {
+        timeline.fromTo(sepLine, {
           width: 0
         }, {
           width: '42%',
           opacity: 1,
-          ease: Quint.easeOut
+          duration: 0.6,
+          ease: 'power4.out'
         }, '-=0.55');
-        timeline.fromTo(separator, 0.6, {
+        timeline.fromTo(separator, {
           width: 0
         }, {
           width: '100%',
           opacity: 1,
-          ease: Quint.easeOut
+          duration: 0.6,
+          ease: 'power4.out'
         }, '-=0.6');
       }
 
       if (sepArrow.length) {
-        timeline.fromTo(sepArrow, 0.2, {
+        timeline.fromTo(sepArrow, {
           opacity: 0
         }, {
           opacity: 1,
-          ease: Quint.easeOut
+          duration: 0.2,
+          ease: 'power4.out'
         }, '-=0.27');
       }
     }
 
     if (othersAfter.length) {
-      timeline.fromTo(othersAfter, 0.5, {
+      timeline.fromTo(othersAfter, {
         opacity: 0
       }, {
         opacity: 1,
-        ease: Quint.easeOut
+        duration: 0.5,
+        ease: 'power4.out'
       }, '-=0.28');
-      timeline.fromTo(othersAfter, 0.75, {
+      timeline.fromTo(othersAfter, {
         y: -20
       }, {
-        y: 0
+        y: 0,
+        duration: 0.75
       }, '-=0.5');
     }
 
     if (othersBefore.length) {
-      timeline.fromTo(othersBefore, 0.5, {
+      timeline.fromTo(othersBefore, {
         opacity: 0
       }, {
         opacity: 1,
-        ease: Quint.easeOut
+        duration: 0.5,
+        ease: 'power4.out'
       }, '-=0.75');
-      timeline.fromTo(othersBefore, 0.75, {
+      timeline.fromTo(othersBefore, {
         y: 20
       }, {
-        y: 0
+        y: 0,
+        duration: 0.75
       }, '-=0.75');
     }
 
@@ -720,52 +734,61 @@ class Hero {
       sepArrow
     } = this.pieces;
     const timeline = this.timeline;
-    timeline.fromTo(title, 1.08, {
+    timeline.fromTo(title, {
       y: 0
     }, {
       opacity: 0,
       y: -60,
-      ease: Quad.easeIn
+      duration: 1.08,
+      ease: 'power1.in'
     }, 'middle');
-    timeline.to(subtitle, 1.08, {
+    timeline.to(subtitle, {
       opacity: 0,
       y: -90,
-      ease: Quad.easeIn
+      duration: 1.08,
+      ease: 'power1.in'
     }, 'middle');
-    timeline.to(othersBefore, 1.08, {
+    timeline.to(othersBefore, {
       y: 60,
       opacity: 0,
-      ease: Quad.easeIn
+      duration: 1.08,
+      ease: 'power1.in'
     }, 'middle');
-    timeline.to(othersAfter, 1.08, {
+    timeline.to(othersAfter, {
       y: 60,
       opacity: 0,
-      ease: Quad.easeIn
+      duration: 1.08,
+      ease: 'power1.in'
     }, 'middle');
-    timeline.to(sepLine, 0.86, {
+    timeline.to(sepLine, {
       width: '0%',
       opacity: 0,
-      ease: Quad.easeIn
+      duration: 0.86,
+      ease: 'power1.in'
     }, '-=0.94');
-    timeline.to(separator, 0.86, {
+    timeline.to(separator, {
       width: '0%',
       opacity: 0,
-      ease: Quad.easeIn
+      duration: 0.86,
+      ease: 'power1.in'
     }, '-=0.86');
-    timeline.to(sepFlower, 1, {
-      rotation: 180
+    timeline.to(sepFlower, {
+      rotation: 180,
+      duration: 1
     }, '-=1.08');
-    timeline.to(sepFlower, 0.11, {
-      opacity: 0
+    timeline.to(sepFlower, {
+      opacity: 0,
+      duration: 0.11
     }, '-=0.03');
-    timeline.to(sepArrow, 0.14, {
-      opacity: 0
+    timeline.to(sepArrow, {
+      opacity: 0,
+      duration: 0.14
     }, '-=1.08');
     this.timeline = timeline;
   }
 
   revertTitle() {
-    if (typeof this.splitTitle !== "undefined") {
+    if (typeof this.splitTitle !== 'undefined') {
       this.splitTitle.revert();
     }
   }
@@ -788,7 +811,7 @@ class Hero {
         this.timeline.eventCallback('onUpdate', null);
         this.paused = true;
       }
-    }, ["{self}"]);
+    }, ['{self}']);
   }
 
 }
@@ -819,7 +842,8 @@ class CommentsArea {
     if (instant) {
       $contentWrap.css('height', newHeight);
     } else {
-      TweenMax.to($contentWrap, .4, {
+      gsap.to($contentWrap, {
+        duration: 0.4,
         height: newHeight,
         onComplete: function () {
           if (isChecked) {
@@ -886,7 +910,7 @@ class HeaderBase {
   onResize() {
     this.box = this.element.getBoundingClientRect();
 
-    if (typeof this.options.onResize === "function") {
+    if (typeof this.options.onResize === 'function') {
       this.options.onResize();
     }
   }
@@ -1184,7 +1208,6 @@ class HeaderRow extends header_base {
 
 
 
-
 class Header extends header_base {
   constructor(element, options) {
     super(options);
@@ -1215,7 +1238,7 @@ class Header extends header_base {
   render(forceUpdate) {
     header_base.prototype.render.call(this, forceUpdate);
 
-    if (typeof this.onUpdate === "function") {
+    if (typeof this.onUpdate === 'function') {
       this.onUpdate();
     }
   }
@@ -1272,19 +1295,21 @@ class Header extends header_base {
   }
 
   getIntroTimeline() {
-    const timeline = new TimelineMax({
+    const timeline = gsap.timeline({
       paused: true
     });
     const height = this.element.offsetHeight;
-    const transitionEasing = Power4.easeInOut;
+    const transitionEasing = 'power4.inOut';
     const transitionDuration = 0.5;
-    timeline.to(this.element, transitionDuration, {
+    timeline.to(this.element, {
+      duration: transitionDuration,
       opacity: 1,
       ease: transitionEasing
     }, 0);
     timeline.to({
       height: 0
-    }, transitionDuration, {
+    }, {
+      duration: transitionDuration,
       height: height,
       onUpdate: tween => {
         this.box = Object.assign({}, this.box, {
@@ -1292,7 +1317,7 @@ class Header extends header_base {
         });
         this.onResize();
       },
-      onUpdateParams: ["{self}"],
+      onUpdateParams: ['{self}'],
       ease: transitionEasing
     }, 0);
     return timeline;
@@ -1446,7 +1471,7 @@ class AnnouncementBar {
     this.element = element;
     this.parent = args.parent || null;
     this.transitionDuration = args.transitionDuration || 0.5;
-    this.transitionEasing = args.transitionEasing || Power4.easeOut;
+    this.transitionEasing = args.transitionEasing || 'power4.out';
     this.pieces = this.getPieces();
     this.id = external_jQuery_default()(element).data('id');
     this.cookieName = 'novablocks-announcement-' + this.id + '-disabled';
@@ -1470,7 +1495,7 @@ class AnnouncementBar {
     let wasActive = false;
     let wasReversed = false;
 
-    if (typeof this.timeline !== "undefined") {
+    if (typeof this.timeline !== 'undefined') {
       progress = this.timeline.progress();
       wasActive = this.timeline.isActive();
       wasReversed = this.timeline.reversed();
@@ -1509,22 +1534,24 @@ class AnnouncementBar {
         close
       }
     } = this;
-    const timeline = new TimelineMax({
+    const timeline = gsap.timeline({
       paused: true
     });
     const height = wrapper.outerHeight();
-    timeline.fromTo(element, transitionDuration, {
+    timeline.fromTo(element, {
       height: 0
     }, {
+      duration: transitionDuration,
       height: height,
       ease: transitionEasing
     }, 0);
     timeline.to({
       height: 0
-    }, transitionDuration, {
+    }, {
+      duration: transitionDuration,
       height: height,
       onUpdate: this.onHeightUpdate.bind(this),
-      onUpdateParams: ["{self}"],
+      onUpdateParams: ['{self}'],
       ease: transitionEasing
     }, 0);
     return timeline;
@@ -1535,7 +1562,7 @@ class AnnouncementBar {
   }
 
   onClose() {
-    if (typeof this.timeline !== "undefined") {
+    if (typeof this.timeline !== 'undefined') {
       this.timeline.reverse();
     }
   }
@@ -1559,7 +1586,7 @@ class PromoBar {
     this.bars = announcementElementsArray.map(element => new AnnouncementBar(element, {
       parent: this,
       transitionDuration: 0.5,
-      transitionEasing: Power4.easeInOut
+      transitionEasing: 'power4.inOut'
     }));
     this.height = 0;
     this.onUpdate = args.onUpdate;
@@ -1575,7 +1602,7 @@ class PromoBar {
     this.height = promoBarHeight;
     this.element.style.top = `${this.offset}px`;
 
-    if ("function" === typeof this.onUpdate) {
+    if ('function' === typeof this.onUpdate) {
       this.onUpdate(this);
     }
   }

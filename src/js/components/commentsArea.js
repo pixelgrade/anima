@@ -28,7 +28,8 @@ export default class CommentsArea {
     if ( instant ) {
       $contentWrap.css( 'height', newHeight );
     } else {
-      TweenMax.to( $contentWrap, .4, {
+      gsap.to( $contentWrap, {
+        duration: 0.4,
         height: newHeight,
         onComplete: function () {
           if ( isChecked ) {
