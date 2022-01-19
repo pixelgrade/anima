@@ -4554,7 +4554,7 @@ body.block-patterns {
 }
 
 @media only screen and (min-width: 768px) {
-  .showcase-block-title + div {
+  .showcase-block-title:not([class*=block-editor]) + div {
     box-shadow: 0 0 0 1px #E5E6E8;
     border-radius: 8px;
     overflow: hidden;
@@ -4564,15 +4564,13 @@ body.block-patterns {
     --nb-emphasis-top-spacing: 1 !important;
     --nb-emphasis-bottom-spacing: 1 !important;
   }
-  .showcase-block-title + div:hover {
+  .showcase-block-title:not([class*=block-editor]) + div:hover {
     transform: scale(1);
     border-radius: 0px;
   }
 }
 @media only screen and (min-width: 768px) {
-  .showcase-block-title + div.nb-sidecar {
-    --nb-emphasis-top-spacing: 0 !important;
-    --nb-emphasis-bottom-spacing: 0 !important;
+  .showcase-block-title:not([class*=block-editor]) + div.nb-sidecar {
     background: var(--sm-current-bg-color, var(--nb-bg-color));
   }
 }
