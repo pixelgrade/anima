@@ -1,9 +1,9 @@
-var gulp = require( 'gulp' );
+const gulp = require('gulp')
 
-var HubRegistry = require('gulp-hub');
+const HubRegistry = require('gulp-hub')
 
 /* load some files into the registry */
-var hub = new HubRegistry( ['tasks/*.js'] );
+const hub = new HubRegistry(['tasks/*.js'])
 
 /* tell gulp to use the tasks just loaded */
 gulp.registry( hub );

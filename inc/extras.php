@@ -21,7 +21,7 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 function anima_first_block_is_hero(): bool {
 	global $post;
 
-    if ( is_page() && ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
+	if ( is_page() && ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
 		$blocks = parse_blocks( $post->post_content );
 
 		if ( $blocks[0]['blockName'] === 'novablocks/hero' || $blocks[0]['blockName'] === 'novablocks/slideshow' ) {
@@ -36,8 +36,8 @@ function anima_first_block_is( $blockTypes ): bool {
 	global $post;
 
 	if ( ! is_array( $blockTypes ) ) {
-	    $blockTypes = [ $blockTypes ];
-    }
+		$blockTypes = [ $blockTypes ];
+	}
 
 	if ( is_page() && ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
 		$blocks = parse_blocks( $post->post_content );
@@ -54,19 +54,19 @@ function anima_remove_site_padding_bottom(): bool {
 	global $post;
 
 	if ( ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
-		$blocks = parse_blocks( $post->post_content );
-		$count = count( $blocks );
-		$lastBlock = $blocks[ $count - 1 ];
-		$blockName = $lastBlock['blockName'];
+		$blocks     = parse_blocks( $post->post_content );
+		$count      = count( $blocks );
+		$lastBlock  = $blocks[ $count - 1 ];
+		$blockName  = $lastBlock['blockName'];
 		$attributes = $lastBlock['attrs'];
 
 		if ( $blockName === 'novablocks/hero' ||
 		     $blockName === 'novablocks/slideshow' ) {
-		    return true;
-        }
+			return true;
+		}
 
 		if ( $blockName === 'novablocks/google-map' && $attributes['align'] === 'full' ) {
-		    return true;
+			return true;
 		}
 	}
 
@@ -82,11 +82,11 @@ function anima_has_moderate_media_card_after_hero(): bool {
 		$blocks = array_values( $blocks );
 
 		if ( count( $blocks ) > 1 ) {
-		    $firstBlockIsHero = $blocks[0]['blockName'] === 'novablocks/hero';
-		    $secondBlockIsMedia = $blocks[1]['blockName'] === 'novablocks/media';
-		    if ( $firstBlockIsHero && $secondBlockIsMedia ) {
-		    	return isset( $blocks[1]['attrs']['blockStyle'] ) && $blocks[1]['attrs']['blockStyle'] === 'moderate';
-		    }
+			$firstBlockIsHero   = $blocks[0]['blockName'] === 'novablocks/hero';
+			$secondBlockIsMedia = $blocks[1]['blockName'] === 'novablocks/media';
+			if ( $firstBlockIsHero && $secondBlockIsMedia ) {
+				return isset( $blocks[1]['attrs']['blockStyle'] ) && $blocks[1]['attrs']['blockStyle'] === 'moderate';
+			}
 		}
 	}
 
@@ -94,7 +94,7 @@ function anima_has_moderate_media_card_after_hero(): bool {
 }
 
 function anima_exclude_null_blocks( array $block ): bool {
-    return ! empty( $block['blockName'] );
+	return ! empty( $block['blockName'] );
 }
 
 if ( ! function_exists( 'anima_alter_logo_markup' ) ) {
@@ -109,9 +109,9 @@ if ( ! function_exists( 'anima_alter_logo_markup' ) ) {
 					</div>
 				<?php } ?>
 
-                <div class="c-logo__inverted">
-					<?php  anima_has_custom_logo_transparent() ? anima_the_custom_logo_transparent() : the_custom_logo(); ?>
-                </div>
+				<div class="c-logo__inverted">
+					<?php anima_has_custom_logo_transparent() ? anima_the_custom_logo_transparent() : the_custom_logo(); ?>
+				</div>
 			</div>
 
 		<?php }
@@ -130,11 +130,15 @@ add_filter( 'novablocks_logo_markup', 'anima_alter_logo_markup' );
 function anima_skip_link_focus_fix() {
 	// The following is minified via `terser --compress --mangle -- js/skip-link-focus-fix.js`.
 	?>
-<script>
-  /(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
-</script>
+	<script>
+      /(trident|msie)/i.test(navigator.userAgent) && document.getElementById && window.addEventListener && window.addEventListener('hashchange', function () {
+        var t, e = location.hash.substring(1);
+        /^[A-z0-9_-]+$/.test(e) && (t = document.getElementById(e)) && (/^(?:a|select|input|button|textarea)$/i.test(t.tagName) || (t.tabIndex = -1), t.focus())
+      }, !1)
+	</script>
 	<?php
 }
+
 // We will put this script inline since it is so small.
 add_action( 'wp_print_footer_scripts', 'anima_skip_link_focus_fix' );
 
@@ -249,7 +253,7 @@ if ( ! function_exists( 'anima_parse_content_tags' ) ) {
 				);
 				if ( ! empty( $blogUsers ) ) {
 					$blogUsers = reset( $blogUsers );
-					$userId   = $blogUsers->ID;
+					$userId    = $blogUsers->ID;
 				}
 			}
 
@@ -270,26 +274,26 @@ if ( ! function_exists( 'anima_parse_content_tags' ) ) {
 
 if ( ! function_exists( 'anima_render_sharing_block' ) ) {
 
-    function anima_render_sharing_block() {
+	function anima_render_sharing_block() {
 
-	    if ( ! pixelgrade_option( 'display_sharing_button_on_single', false ) ) {
-	        return;
-        }
+		if ( ! pixelgrade_option( 'display_sharing_button_on_single', false ) ) {
+			return;
+		}
 
-        if ( is_singular( 'post' ) ) {
-            echo do_blocks( '<!-- wp:novablocks/sharing-overlay /-->' );
-        }
-    }
+		if ( is_singular( 'post' ) ) {
+			echo do_blocks( '<!-- wp:novablocks/sharing-overlay /-->' );
+		}
+	}
 }
 add_action( 'anima_after_content', 'anima_render_sharing_block' );
 
 if ( ! function_exists( 'anima_dark_mode_support' ) ) {
-    function anima_dark_mode_support() {
-	    if ( 'on' === pixelgrade_option( 'sm_dark_mode', 'off' ) ) {
-            add_theme_support( 'editor-styles' );
-            add_theme_support( 'dark-editor-style' );
-	    }
-    }
+	function anima_dark_mode_support() {
+		if ( 'on' === pixelgrade_option( 'sm_dark_mode', 'off' ) ) {
+			add_theme_support( 'editor-styles' );
+			add_theme_support( 'dark-editor-style' );
+		}
+	}
 }
 add_action( 'after_setup_theme', 'anima_dark_mode_support', 10 );
 
@@ -299,12 +303,12 @@ function anima_block_area_has_blocks( string $slug ): bool {
 		'post_type'   => 'block_area',
 		'post_status' => 'publish',
 		'numberposts' => 1,
-		'fields' => 'ids',
+		'fields'      => 'ids',
 	] );
 
 	if ( ! empty( $posts ) && has_blocks( reset( $posts ) ) ) {
-	    return true;
-    }
+		return true;
+	}
 
 	return false;
 }
@@ -341,21 +345,22 @@ function anima_init_upgrades_logic() {
 
 	// Make sure the upgrade class is initialized.
 	// The slug will be hard-coded to avoid loss of data due to modifications by the user.
-	Anima_Upgrade::instance( 'anima', $current_theme->get('Version' ), $current_theme->get('Name') );
+	Anima_Upgrade::instance( 'anima', $current_theme->get( 'Version' ), $current_theme->get( 'Name' ) );
 }
+
 add_action( 'after_setup_theme', 'anima_init_upgrades_logic', 10 );
 
 if ( ! function_exists( 'anima_add_primary_menu_item_description' ) ) {
 
 	/**
 	 * Add menu item description
-     *
-     * @param string   $item_output The menu item's starting HTML output.
+	 *
+	 * @param string   $item_output The menu item's starting HTML output.
 	 * @param WP_Post  $item        Menu item data object.
 	 * @param int      $depth       Depth of menu item. Used for padding.
 	 * @param stdClass $args        An object of wp_nav_menu() arguments.
-     *
-     * @return string Nav menu item start element.
+	 *
+	 * @return string Nav menu item start element.
 	 */
 
 	function anima_add_primary_menu_item_description( string $item_output, WP_Post $item, int $depth, stdClass $args ): string {
@@ -370,7 +375,7 @@ if ( ! function_exists( 'anima_add_primary_menu_item_description' ) ) {
 }
 add_filter( 'walker_nav_menu_start_el', 'anima_add_primary_menu_item_description', 10, 4 );
 
-if ( ! function_exists('anima_get_content_markup' ) ) {
+if ( ! function_exists( 'anima_get_content_markup' ) ) {
 
 	/**
 	 * Retrieve the markup for post content.
@@ -388,7 +393,7 @@ if ( ! function_exists('anima_get_content_markup' ) ) {
 	}
 }
 
-if ( ! function_exists('anima_get_sidebar_markup' ) ) {
+if ( ! function_exists( 'anima_get_sidebar_markup' ) ) {
 
 	/**
 	 * Retrieve the markup for sidebar.
@@ -403,7 +408,7 @@ if ( ! function_exists('anima_get_sidebar_markup' ) ) {
 	}
 }
 
-if ( ! function_exists('anima_get_post_navigation_markup' ) ) {
+if ( ! function_exists( 'anima_get_post_navigation_markup' ) ) {
 
 	/**
 	 * Retrieve the markup for post navigation.
@@ -424,9 +429,9 @@ if ( ! function_exists( 'anima_article_header' ) ) {
 
 		$article_header_classes = [ 'article-header' ];
 
-		if ( ! anima_is_active_sidebar( 'sidebar-1' )) {
+		if ( ! anima_is_active_sidebar( 'sidebar-1' ) ) {
 			$article_header_classes[] = 'wp-block-group__inner-container';
-        }
+		}
 
 		if ( 'post' !== get_post_type() ) {
 			return '';
@@ -434,29 +439,29 @@ if ( ! function_exists( 'anima_article_header' ) ) {
 
 		ob_start(); ?>
 
-        <div class="<?php echo esc_attr( join( ' ', $article_header_classes ) ); ?>">
+		<div class="<?php echo esc_attr( join( ' ', $article_header_classes ) ); ?>">
 
-            <div class="entry-header sm-palette-1 sm-variation-2">
+			<div class="entry-header sm-palette-1 sm-variation-2">
 				<?php anima_categories_posted_in() ?>
 
-                <div class="header-dropcap h1 sm-variation-1"><?php echo esc_html( substr( get_the_title(), 0, 1 ) ); ?></div>
-                <h1 class="entry-title"><?php the_title() ?></h1>
+				<div class="header-dropcap h1 sm-variation-1"><?php echo esc_html( substr( get_the_title(), 0, 1 ) ); ?></div>
+				<h1 class="entry-title"><?php the_title() ?></h1>
 
 				<?php if ( has_excerpt() ) { ?>
-                    <div class="entry-excerpt">
+					<div class="entry-excerpt">
 						<?php the_excerpt() ?>
-                    </div>
+					</div>
 				<?php } ?>
 
 				<?php get_template_part( 'template-parts/meta' ); ?>
-            </div>
+			</div>
 
 			<?php if ( has_post_thumbnail() ) { ?>
-                <div class="entry-thumbnail alignwide">
+				<div class="entry-thumbnail alignwide">
 					<?php the_post_thumbnail(); ?>
-                </div>
+				</div>
 			<?php } ?>
-        </div>
+		</div>
 
 		<?php return ob_get_clean();
 	}
@@ -470,14 +475,14 @@ if ( ! function_exists( 'anima_get_archive_content' ) ) {
 
 		if ( have_posts() ) { ?>
 
-            <header class="entry-header wp-block-group has-text-align-center">
-                <div class="wp-block-group__inner-container">
-                    <?php
-                    the_archive_title( '<h1 class="page-title">', '</h1>' );
-                    the_archive_description( '<div class="archive-description">', '</div>' );
-                    ?>
-                </div>
-            </header><!-- .page-header -->
+			<header class="entry-header wp-block-group has-text-align-center">
+				<div class="wp-block-group__inner-container">
+					<?php
+					the_archive_title( '<h1 class="page-title">', '</h1>' );
+					the_archive_description( '<div class="archive-description">', '</div>' );
+					?>
+				</div>
+			</header><!-- .page-header -->
 			<?php
 			get_template_part( 'template-parts/loop' );
 		} else {
@@ -495,7 +500,7 @@ if ( ! function_exists( 'anima_get_home_content_markup' ) ) {
 		ob_start();
 
 		$page_for_posts = get_option( 'page_for_posts' );
-		$categories = get_categories();
+		$categories     = get_categories();
 
 		if ( ! empty( $categories ) ) {
 			$categories = array_filter( $categories, function ( $category ) {
@@ -508,25 +513,25 @@ if ( ! function_exists( 'anima_get_home_content_markup' ) ) {
 
 		if ( have_posts() ) {
 			if ( $has_title || $has_categories ) { ?>
-                <header class="entry-header wp-block-group has-text-align-center">
-                    <div class="wp-block-group__inner-container">
-                        <?php
+				<header class="entry-header wp-block-group has-text-align-center">
+					<div class="wp-block-group__inner-container">
+						<?php
 
-                        if ( $has_title ) {
-                            echo '<h1 class="page-title">' . get_the_title( $page_for_posts ) . '</h1>';
-                        }
+						if ( $has_title ) {
+							echo '<h1 class="page-title">' . get_the_title( $page_for_posts ) . '</h1>';
+						}
 
-                        if ( $has_categories ) {
-                            echo '<ul class="entry-meta">';
-                            foreach ( $categories as $category ) {
-                                $category_url = get_category_link( $category->term_id );
-                                echo '<li><a href="' . esc_url( $category_url ) . '">' . esc_html( $category->name ) . '</a></li>';
-                            }
-                            echo '</ul>';
-                        }
-                        ?>
-                    </div>
-                </header><!-- .page-header -->
+						if ( $has_categories ) {
+							echo '<ul class="entry-meta">';
+							foreach ( $categories as $category ) {
+								$category_url = get_category_link( $category->term_id );
+								echo '<li><a href="' . esc_url( $category_url ) . '">' . esc_html( $category->name ) . '</a></li>';
+							}
+							echo '</ul>';
+						}
+						?>
+					</div>
+				</header><!-- .page-header -->
 			<?php }
 
 			get_template_part( 'template-parts/loop' );
@@ -541,40 +546,40 @@ if ( ! function_exists( 'anima_get_home_content_markup' ) ) {
 
 if ( ! function_exists( 'anima_get_author_box_markup' ) ) {
 
-    function anima_get_author_box_markup() {
+	function anima_get_author_box_markup() {
 
-	    ob_start();
+		ob_start();
 
-	    echo anima_get_the_author_info_box();
+		echo anima_get_the_author_info_box();
 
-	    return ob_get_clean();
-    }
+		return ob_get_clean();
+	}
 }
 
-if ( ! function_exists('anima_get_search_content_markup') ) {
+if ( ! function_exists( 'anima_get_search_content_markup' ) ) {
 
-    function anima_get_search_content_markup() {
-	    ob_start();
+	function anima_get_search_content_markup() {
+		ob_start();
 
-	    if ( have_posts() ) { ?>
+		if ( have_posts() ) { ?>
 
-            <header class="entry-header">
-                <div class="entry-content has-text-align-center">
-                    <h1 class="page-title has-text-align-center">
-					    <?php printf( esc_html__( 'Search results for: %s', '__theme_txtd' ), get_search_query() ); ?>
-                    </h1>
-                </div>
-            </header><!-- .page-header -->
+			<header class="entry-header">
+				<div class="entry-content has-text-align-center">
+					<h1 class="page-title has-text-align-center">
+						<?php printf( esc_html__( 'Search results for: %s', '__theme_txtd' ), get_search_query() ); ?>
+					</h1>
+				</div>
+			</header><!-- .page-header -->
 
-		    <?php
-		    get_template_part( 'template-parts/loop' );
-		    anima_the_posts_pagination();
-	    } else {
-		    get_template_part( 'template-parts/content', 'none' );
-	    }
+			<?php
+			get_template_part( 'template-parts/loop' );
+			anima_the_posts_pagination();
+		} else {
+			get_template_part( 'template-parts/content', 'none' );
+		}
 
-	    return ob_get_clean();
-    }
+		return ob_get_clean();
+	}
 }
 
 /**
@@ -624,7 +629,7 @@ function anima_get_reading_time_in_minutes( string $content, int $wpm = 250 ): i
 		// The starting image weight (expressed in seconds of reading time).
 		// This weight is decreasing one second with each image encountered, with a minium of 3 seconds.
 		$img_weight = 12;
-		for ( $i = 0; $i < $num_images; $i++ ) {
+		for ( $i = 0; $i < $num_images; $i ++ ) {
 			$images_time += $img_weight;
 
 			if ( $img_weight > 3 ) {
@@ -672,6 +677,7 @@ function anima_page_class( $class = '' ) {
  *
  *
  * @param string|string[] $class Space-separated string or array of class names to add to the class list.
+ *
  * @return string[] Array of class names.
  */
 function anima_get_page_class( $class = '' ): array {
@@ -691,16 +697,16 @@ function anima_get_page_class( $class = '' ): array {
 }
 
 if ( ! class_exists( 'PixCustomifyPlugin' ) && ! class_exists( 'Pixelgrade\StyleManager\Plugin' ) && ! function_exists( 'pixelgrade_option' ) ) {
-    function pixelgrade_option( $settings_id, $default = null, $force_given_default = false ) {
-        return get_option( $settings_id, $default );
-    }
+	function pixelgrade_option( $settings_id, $default = null, $force_given_default = false ) {
+		return get_option( $settings_id, $default );
+	}
 }
 
 function anima_get_archive_blocks( $name, $number_of_posts, $posts_ids ): string {
 
 	switch ( $name ) {
 		case 'felt':
-            return '
+			return '
             <!-- wp:novablocks/sidecar { "sidebarWidth":"medium", "lastItemIsSticky":true } -->
                 <!-- wp:novablocks/sidecar-area {"areaName":"content"} -->
                     <!-- wp:novablocks/supernova {
@@ -718,16 +724,16 @@ function anima_get_archive_blocks( $name, $number_of_posts, $posts_ids ): string
                         "gridGap": 50,
                         "columns": 3
                     } /-->' .
-                   '<div class="wp-block alignwide">' .
-                    anima_get_the_posts_pagination() .
-                   '</div>' .
-                '<!-- /wp:novablocks/sidecar-area -->' .
-                '<!-- wp:novablocks/sidecar-area {"areaName":"sidebar"} -->' .
-                    anima_get_sidebar_markup() .
-                '<!-- /wp:novablocks/sidecar-area -->' .
-            '<!-- /wp:novablocks/sidecar -->';
+			       '<div class="wp-block alignwide">' .
+			       anima_get_the_posts_pagination() .
+			       '</div>' .
+			       '<!-- /wp:novablocks/sidecar-area -->' .
+			       '<!-- wp:novablocks/sidecar-area {"areaName":"sidebar"} -->' .
+			       anima_get_sidebar_markup() .
+			       '<!-- /wp:novablocks/sidecar-area -->' .
+			       '<!-- /wp:novablocks/sidecar -->';
 		default:
-            return '
+			return '
             <!-- wp:novablocks/supernova {
                 "showCollectionTitle": false,
                 "showCollectionSubtitle": false,
@@ -744,4 +750,57 @@ function anima_get_archive_blocks( $name, $number_of_posts, $posts_ids ): string
                 "layoutGutter": 100,
             } /-->';
 	}
+}
+
+/**
+ * Filters a given script tag, possibly adding an `integrity` attribute.
+ *
+ * @see https://developer.wordpress.org/reference/hooks/script_loader_tag/
+ *
+ * @param string $tag    The `<script>` tag for the enqueued script.
+ * @param string $handle The script's registered handle.
+ * @param string $src    The script's source URL.
+ *
+ * @return string The original HTML tag or its augmented version.
+ */
+function anima_script_sri_attributes( string $tag, string $handle, string $src ): string {
+	// Only do the thing if it makes sense to do so.
+	// (It doesn't make sense for non-ssl pages or local resources on live sites,
+	// but it always makes sense to do so in debug mode.)
+	if ( ! WP_DEBUG && ( ! is_ssl() || anima_is_local_resource( $src ) ) ) {
+		return $tag;
+	}
+
+	if ( $integrity_hash = wp_scripts()->get_data( $handle, 'integrity' ) ) {
+		// Prevent adding attribute when already added.
+		if ( ! preg_match( '#\sintegrity(=|>|\s)#', $tag ) ) {
+			$tag = preg_replace( ':(?=></script>):', ' integrity="' . $integrity_hash . '"' , $tag, 1 );
+		}
+	}
+
+	if ( $crossorigin = wp_scripts()->get_data( $handle, 'crossorigin' ) ) {
+		// Prevent adding attribute when already added.
+		if ( ! preg_match( '#\scrossorigin(=|>|\s)#', $tag ) ) {
+			$tag = preg_replace( ':(?=></script>):', ' crossorigin="' . $crossorigin . '"' , $tag, 1 );
+		}
+	}
+
+	return $tag;
+}
+add_filter( 'script_loader_tag', 'anima_script_sri_attributes', 9999, 3 );
+
+/**
+ * Checks a URL to determine whether or not the resource is "remote"
+ * (served by a third-party) or whether the resource is local (and
+ * is being served by the same webserver as this plugin is run on.)
+ *
+ * @param string $uri The URI of the resource to inspect.
+ *
+ * @return bool True if the resource is local, false if the resource is remote.
+ */
+function anima_is_local_resource( string $uri ): bool {
+	$resource_src_host = parse_url( $uri, PHP_URL_HOST );
+	$site_host = parse_url( get_site_url(), PHP_URL_HOST );
+
+	return 0 === strpos( $resource_src_host, $site_host );
 }

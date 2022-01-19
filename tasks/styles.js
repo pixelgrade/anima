@@ -1,12 +1,15 @@
 const gulp = require('gulp'),
   sass = require('gulp-sass')(require('sass')),
+  sourcemaps = require('gulp-sourcemaps'),
   rtlcss = require('gulp-rtlcss'),
   rename = require('gulp-rename'),
   cached = require('gulp-cached')
 
 function stylesBase (src, dest, cb) {
   return gulp.src(src)
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sourcemaps.init())
+    .pipe(sass.sync({outputStyle: 'compressed'}).on('error', sass.logError))
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(dest))
 }
 

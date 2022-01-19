@@ -164,8 +164,16 @@ function anima_register_assets() {
 	wp_style_add_data( 'anima-theme', 'rtl', 'replace' );
 	wp_style_add_data( 'anima-theme-components', 'rtl', 'replace' );
 
-	wp_register_script( 'gsap-split-text', '//pxgcdn.com/js/gsap/2.1.3/plugins/SplitText' . $suffix . '.js', [], null, true );
-	wp_register_script( 'gsap', '//pxgcdn.com/js/gsap/2.1.3/TweenMax' . $suffix . '.js', [ 'wp-mediaelement' ], null, true );
+	wp_register_script( 'gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js', [], null, true );
+	// Add the SRI (Subresource Integrity) hash data.
+	wp_script_add_data( 'gsap', 'integrity', 'sha384-lI86CGWNchoT9leGBpVR41iGrRTRbHRDsPI4Zo/atPOIodjl8YyDaVefcpgkCg4u');
+	wp_script_add_data( 'gsap', 'crossorigin', 'anonymous');
+
+	wp_register_script( 'gsap-split-text', '//pxgcdn.com/js/gsap/3.9.1/SplitText.min.js', ['gsap'], null, true );
+	// Add the SRI (Subresource Integrity) hash data.
+	wp_script_add_data( 'gsap-split-text', 'integrity', 'sha384-KoviLFAFGG+n+c3BxM58Gr/poK7WAtzed6kU8Kzr2fvjp3Q8gttOWY+XvpTjShW3');
+	wp_script_add_data( 'gsap-split-text', 'crossorigin', 'anonymous');
+
 	wp_register_script( 'anima-app', trailingslashit( get_template_directory_uri() ) . 'dist/js/scripts' . $suffix . '.js', [ 'jquery', 'gsap', 'gsap-split-text', 'hoverIntent', 'imagesloaded' ], $theme->get( 'Version' ), true );
 }
 add_action( 'init', 'anima_register_assets', 10 );
