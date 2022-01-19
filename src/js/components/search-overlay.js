@@ -7,42 +7,42 @@ const ESC_KEY_CODE = 27;
 
 class SearchOverlay extends BaseComponent {
 
-	constructor() {
-		super();
+  constructor () {
+    super();
 
-		this.$searchOverlay = $( '.c-search-overlay' );
+    this.$searchOverlay = $( '.c-search-overlay' );
 
-		this.initialize();
-		this.onDebouncedResize();
-	}
+    this.initialize();
+    this.onDebouncedResize();
+  }
 
-	initialize() {
-		$( document ).on( 'click', '.menu-item--search a', this.openSearchOverlay );
-		$( document ).on( 'click', '.c-search-overlay__cancel', this.closeSearchOverlay );
-		$( document ).on( 'keydown', this.closeSearchOverlayOnEsc );
-	}
+  initialize () {
+    $( document ).on( 'click', '.menu-item--search a', this.openSearchOverlay );
+    $( document ).on( 'click', '.c-search-overlay__cancel', this.closeSearchOverlay );
+    $( document ).on( 'keydown', this.closeSearchOverlayOnEsc );
+  }
 
-	onDebouncedResize() {
-		setAndResetElementStyles( this.$searchOverlay, { transition: 'none' } );
-	}
+  onDebouncedResize () {
+    setAndResetElementStyles( this.$searchOverlay, { transition: 'none' } );
+  }
 
-	openSearchOverlay( e ) {
-		e.preventDefault();
-		$( 'body' ).toggleClass( SEARCH_OVERLAY_OPEN_CLASS );
-		$( '.c-search-overlay__form .search-field' ).focus();
-	}
+  openSearchOverlay ( e ) {
+    e.preventDefault();
+    $( 'body' ).toggleClass( SEARCH_OVERLAY_OPEN_CLASS );
+    $( '.c-search-overlay__form .search-field' ).focus();
+  }
 
-	closeSearchOverlayOnEsc( e ) {
-		if ( e.keyCode === ESC_KEY_CODE ) {
-			$( 'body' ).removeClass( SEARCH_OVERLAY_OPEN_CLASS );
-			$( '.c-search-overlay__form .search-field' ).blur();
-		}
-	}
+  closeSearchOverlayOnEsc ( e ) {
+    if ( e.keyCode === ESC_KEY_CODE ) {
+      $( 'body' ).removeClass( SEARCH_OVERLAY_OPEN_CLASS );
+      $( '.c-search-overlay__form .search-field' ).blur();
+    }
+  }
 
-	closeSearchOverlay( e ) {
-		e.preventDefault();
-		$( 'body' ).removeClass( SEARCH_OVERLAY_OPEN_CLASS );
-	}
+  closeSearchOverlay ( e ) {
+    e.preventDefault();
+    $( 'body' ).removeClass( SEARCH_OVERLAY_OPEN_CLASS );
+  }
 }
 
 export default SearchOverlay;

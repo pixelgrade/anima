@@ -1,109 +1,109 @@
-import GlobalService from "./globalService";
+import GlobalService from './globalService';
 import Cookies from 'js-cookie';
 import $ from 'jquery';
 
 export default class AnnouncementBar {
 
-	constructor( element, args ) {
-		this.element = element;
-		this.parent = args.parent || null;
-		this.transitionDuration = args.transitionDuration || 0.5;
-		this.transitionEasing = args.transitionEasing || Power4.easeOut;
-		this.pieces = this.getPieces();
-		this.id = $( element ).data( 'id' );
-		this.cookieName = 'novablocks-announcement-' + this.id + '-disabled';
-		this.height = 0;
+  constructor ( element, args ) {
+    this.element = element;
+    this.parent = args.parent || null;
+    this.transitionDuration = args.transitionDuration || 0.5;
+    this.transitionEasing = args.transitionEasing || Power4.easeOut;
+    this.pieces = this.getPieces();
+    this.id = $( element ).data( 'id' );
+    this.cookieName = 'novablocks-announcement-' + this.id + '-disabled';
+    this.height = 0;
 
-		const disabled = Cookies.get( this.cookieName );
-		const loggedIn = $( 'body' ).hasClass( 'logged-in' );
+    const disabled = Cookies.get( this.cookieName );
+    const loggedIn = $( 'body' ).hasClass( 'logged-in' );
 
-		if ( disabled && ! loggedIn ) {
-			$( element ).remove();
-			return;
-		}
+    if ( disabled && !loggedIn ) {
+      $( element ).remove();
+      return;
+    }
 
-		this.onResize();
-		GlobalService.registerOnDeouncedResize( this.onResize.bind( this ) );
+    this.onResize();
+    GlobalService.registerOnDeouncedResize( this.onResize.bind( this ) );
 
-		this.timeline.play();
+    this.timeline.play();
 
-		this.bindEvents();
-	}
+    this.bindEvents();
+  }
 
-	onResize() {
-		let progress = 0;
-		let wasActive = false;
-		let wasReversed = false;
+  onResize () {
+    let progress = 0;
+    let wasActive = false;
+    let wasReversed = false;
 
-		if ( typeof this.timeline !== "undefined" ) {
-			progress = this.timeline.progress();
-			wasActive = this.timeline.isActive();
-			wasReversed = this.timeline.reversed();
-			this.timeline.clear();
-			this.timeline.kill();
-			this.pieces.wrapper.css( 'height', '' );
-		}
+    if ( typeof this.timeline !== 'undefined' ) {
+      progress = this.timeline.progress();
+      wasActive = this.timeline.isActive();
+      wasReversed = this.timeline.reversed();
+      this.timeline.clear();
+      this.timeline.kill();
+      this.pieces.wrapper.css( 'height', '' );
+    }
 
-		this.timeline = this.getTimeline();
-		this.timeline.progress( progress );
-		this.timeline.reversed( wasReversed );
+    this.timeline = this.getTimeline();
+    this.timeline.progress( progress );
+    this.timeline.reversed( wasReversed );
 
-		if ( wasActive ) {
-			this.timeline.resume();
-		}
-	}
+    if ( wasActive ) {
+      this.timeline.resume();
+    }
+  }
 
-	getPieces() {
-		const $element = $( this.element );
+  getPieces () {
+    const $element = $( this.element );
 
-		return {
-			element: $element,
-			wrapper: $element.find( '.novablocks-announcement-bar__wrapper' ),
-			content: $element.find( '.novablocks-announcement-bar__content' ),
-			close: $element.find( '.novablocks-announcement-bar__close' ),
-		}
-	}
+    return {
+      element: $element,
+      wrapper: $element.find( '.novablocks-announcement-bar__wrapper' ),
+      content: $element.find( '.novablocks-announcement-bar__content' ),
+      close: $element.find( '.novablocks-announcement-bar__close' ),
+    };
+  }
 
-	getTimeline() {
-		const {
-			transitionDuration,
-			transitionEasing,
-			pieces: {
-				element,
-				wrapper,
-				content,
-				close,
-			}
-		} = this;
+  getTimeline () {
+    const {
+      transitionDuration,
+      transitionEasing,
+      pieces: {
+        element,
+        wrapper,
+        content,
+        close,
+      }
+    } = this;
 
-		const timeline = new TimelineMax( { paused: true } );
-		const height = wrapper.outerHeight();
-		timeline.fromTo( element, transitionDuration, { height: 0 }, { height: height, ease: transitionEasing }, 0 );
-		timeline.to( { height: 0 }, transitionDuration, {
-			height: height,
-			onUpdate: this.onHeightUpdate.bind( this ),
-			onUpdateParams: ["{self}"],
-			ease: transitionEasing
-		}, 0 );
+    const timeline = new TimelineMax( { paused: true } );
+    const height = wrapper.outerHeight();
+    timeline.fromTo( element, transitionDuration, { height: 0 }, { height: height, ease: transitionEasing }, 0 );
+    timeline.to( { height: 0 }, transitionDuration, {
+      height: height,
+      onUpdate: this.onHeightUpdate.bind( this ),
+      onUpdateParams: [ '{self}' ],
+      ease: transitionEasing
+    }, 0 );
 
-		return timeline;
-	}
+    return timeline;
+  }
 
-	bindEvents() {
-		this.pieces.close.on( 'click', this.onClose.bind( this ) );
-	}
+  bindEvents () {
+    this.pieces.close.on( 'click', this.onClose.bind( this ) );
+  }
 
-	onClose() {
-		if ( typeof this.timeline !== "undefined" ) {
-			this.timeline.reverse();
-		}
-	}
+  onClose () {
+    if ( typeof this.timeline !== 'undefined' ) {
+      this.timeline.reverse();
+    }
+  }
 
-	onHeightUpdate( tween ) {
-		this.height = tween.target.height;
+  onHeightUpdate ( tween ) {
+    this.height = tween.target.height;
 
-		if ( this.parent ) {
-			this.parent.update();
-		}
-	}
+    if ( this.parent ) {
+      this.parent.update();
+    }
+  }
 }

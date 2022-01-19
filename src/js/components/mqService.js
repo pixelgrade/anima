@@ -2,32 +2,32 @@ import globalService from './globalService';
 
 class mqService {
 
-	constructor() {
+  constructor () {
 
-		this.breakpoints = {
-			mobile: '480px',
-			tablet: '768px',
-			lap: '1024px',
-			desktop: '1440px',
-		}
+    this.breakpoints = {
+      mobile: '480px',
+      tablet: '768px',
+      lap: '1024px',
+      desktop: '1440px',
+    };
 
-		this.above = {};
-		this.below = {};
+    this.above = {};
+    this.below = {};
 
-		globalService.registerOnDeouncedResize( this.onResize.bind( this ) );
+    globalService.registerOnDeouncedResize( this.onResize.bind( this ) );
 
-		this.onResize();
-	}
+    this.onResize();
+  }
 
-	onResize() {
+  onResize () {
 
-		Object.keys( this.breakpoints ).forEach( key => {
-			const breakpoint = this.breakpoints[ key ];
+    Object.keys( this.breakpoints ).forEach( key => {
+      const breakpoint = this.breakpoints[key];
 
-			this.above[ key ] = !! window.matchMedia( `not screen and (min-width: ${ breakpoint })` ).matches;
-			this.below[ key ] = !! window.matchMedia( `not screen and (min-width: ${ breakpoint })` ).matches;
-		} );
-	}
+      this.above[key] = !!window.matchMedia( `not screen and (min-width: ${breakpoint})` ).matches;
+      this.below[key] = !!window.matchMedia( `not screen and (min-width: ${breakpoint})` ).matches;
+    } );
+  }
 }
 
 export default new mqService();

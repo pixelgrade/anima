@@ -1,6 +1,6 @@
 import { addClass, hasClass, setAndResetElementStyles, getColorSetClasses } from '../../utils';
 
-import GlobalService from "../globalService";
+import GlobalService from '../globalService';
 import mqService from '../mqService';
 import HeaderBase from './header-base';
 import HeaderColors from './header-colors';
@@ -9,116 +9,116 @@ import HeaderRow from './header-row';
 
 class Header extends HeaderBase {
 
-	constructor( element, options ) {
-		super( options );
+  constructor ( element, options ) {
+    super( options );
 
-		if ( ! element ) return;
+    if ( !element ) return;
 
-		this.onUpdate = options.onUpdate;
+    this.onUpdate = options.onUpdate;
 
-		this.element = element;
-		this.rows = this.getHeaderRows();
+    this.element = element;
+    this.rows = this.getHeaderRows();
 
-		this.shouldToggleColors = !! this.element.dataset.sticky;
+    this.shouldToggleColors = !!this.element.dataset.sticky;
 
-		this.mobileHeader = new HeaderMobile( this );
-		this.secondaryHeader = this.getSecondaryHeader();
+    this.mobileHeader = new HeaderMobile( this );
+    this.secondaryHeader = this.getSecondaryHeader();
 
-		this.initialize();
-		this.toggleRowsColors( true );
+    this.initialize();
+    this.toggleRowsColors( true );
 
-		addClass( this.element, 'novablocks-header--transparent' );
+    addClass( this.element, 'novablocks-header--transparent' );
 
-		if ( this.secondaryHeader ) {
-			addClass( this.secondaryHeader, 'novablocks-header--ready' );
-		}
+    if ( this.secondaryHeader ) {
+      addClass( this.secondaryHeader, 'novablocks-header--ready' );
+    }
 
-		this.onResize();
-	}
+    this.onResize();
+  }
 
-	initialize() {
-		HeaderBase.prototype.initialize.call( this );
+  initialize () {
+    HeaderBase.prototype.initialize.call( this );
 
-		this.timeline = this.getIntroTimeline();
-		this.timeline.play();
-	}
+    this.timeline = this.getIntroTimeline();
+    this.timeline.play();
+  }
 
-	render( forceUpdate ) {
-		HeaderBase.prototype.render.call( this, forceUpdate );
+  render ( forceUpdate ) {
+    HeaderBase.prototype.render.call( this, forceUpdate );
 
-		if ( typeof this.onUpdate === "function" ) {
-			this.onUpdate();
-		}
-	}
+    if ( typeof this.onUpdate === 'function' ) {
+      this.onUpdate();
+    }
+  }
 
-	getHeight() {
+  getHeight () {
 
-		if ( !! mqService.below.lap ) {
-			return this.mobileHeader.getHeight();
-		}
+    if ( !!mqService.below.lap ) {
+      return this.mobileHeader.getHeight();
+    }
 
-		return HeaderBase.prototype.getHeight.call( this );
-	}
+    return HeaderBase.prototype.getHeight.call( this );
+  }
 
-	onResize() {
-		HeaderBase.prototype.onResize.call( this );
-		setAndResetElementStyles( this.element, { transition: 'none' } );
-	}
+  onResize () {
+    HeaderBase.prototype.onResize.call( this );
+    setAndResetElementStyles( this.element, { transition: 'none' } );
+  }
 
-	getSecondaryHeader() {
-		return document.querySelector( '.novablocks-header--secondary' );
-	}
+  getSecondaryHeader () {
+    return document.querySelector( '.novablocks-header--secondary' );
+  }
 
-	getHeaderRows() {
-		const rows = this.element.querySelectorAll( '.novablocks-header-row' );
+  getHeaderRows () {
+    const rows = this.element.querySelectorAll( '.novablocks-header-row' );
 
-		if ( rows ) {
-			return Array.from( rows ).map( element => {
-				return new HeaderRow( element );
-			} )
-		}
+    if ( rows ) {
+      return Array.from( rows ).map( element => {
+        return new HeaderRow( element );
+      } );
+    }
 
-		return [];
-	}
+    return [];
+  }
 
-	toggleRowsColors( isTransparent ) {
-		this.rows.forEach( row => {
-			row.colors.toggleColors( isTransparent );
-		} );
-	}
+  toggleRowsColors ( isTransparent ) {
+    this.rows.forEach( row => {
+      row.colors.toggleColors( isTransparent );
+    } );
+  }
 
-	updateStickyStyles() {
-		HeaderBase.prototype.updateStickyStyles.call( this );
+  updateStickyStyles () {
+    HeaderBase.prototype.updateStickyStyles.call( this );
 
-		if ( this.shouldToggleColors ) {
-			this.toggleRowsColors( ! this.shouldBeSticky );
-		}
+    if ( this.shouldToggleColors ) {
+      this.toggleRowsColors( !this.shouldBeSticky );
+    }
 
-		this.element.style.marginTop = `${ this.staticDistance }px`;
+    this.element.style.marginTop = `${this.staticDistance}px`;
 
-		if ( this.secondaryHeader ) {
-			this.secondaryHeader.style.top = `${ this.staticDistance }px`;
-		}
-	}
+    if ( this.secondaryHeader ) {
+      this.secondaryHeader.style.top = `${this.staticDistance}px`;
+    }
+  }
 
-	getIntroTimeline() {
-		const timeline = new TimelineMax( { paused: true } );
-		const height = this.element.offsetHeight;
-		const transitionEasing = Power4.easeInOut;
-		const transitionDuration = 0.5;
-		timeline.to( this.element, transitionDuration, { opacity: 1, ease: transitionEasing }, 0 );
-		timeline.to( { height: 0 }, transitionDuration, {
-			height: height,
-			onUpdate: ( tween ) => {
-				this.box = Object.assign( {}, this.box, { height: tween.target.height } );
-				this.onResize();
-			},
-			onUpdateParams: [ "{self}" ],
-			ease: transitionEasing
-		}, 0 );
+  getIntroTimeline () {
+    const timeline = new TimelineMax( { paused: true } );
+    const height = this.element.offsetHeight;
+    const transitionEasing = Power4.easeInOut;
+    const transitionDuration = 0.5;
+    timeline.to( this.element, transitionDuration, { opacity: 1, ease: transitionEasing }, 0 );
+    timeline.to( { height: 0 }, transitionDuration, {
+      height: height,
+      onUpdate: ( tween ) => {
+        this.box = Object.assign( {}, this.box, { height: tween.target.height } );
+        this.onResize();
+      },
+      onUpdateParams: [ '{self}' ],
+      ease: transitionEasing
+    }, 0 );
 
-		return timeline;
-	}
+    return timeline;
+  }
 }
 
 export default Header;

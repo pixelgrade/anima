@@ -3,13 +3,13 @@ import HeaderColors from './header-colors';
 
 class HeaderRow extends HeaderBase {
 
-	constructor( element ) {
-		super();
+  constructor ( element ) {
+    super();
 
-		this.element = element;
+    this.element = element;
 
-		this.colors = new HeaderColors( this.element );
-	}
+    this.colors = new HeaderColors( this.element );
+  }
 
 }
 
