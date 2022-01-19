@@ -1,5 +1,4 @@
 const path = require( 'path' );
-const webpack = require( 'webpack' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const TerserPlugin = require('terser-webpack-plugin');
 
@@ -15,7 +14,7 @@ const extractConfig = {
     },
     {
       loader: 'sass-loader',
-      query: {
+      options: {
         outputStyle:
           'production' === process.env.NODE_ENV ? 'compressed' : 'nested',
       },
@@ -57,6 +56,9 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
+          options: {
+            presets: ["@wordpress/babel-preset-default"]
+          }
         },
       },
       {

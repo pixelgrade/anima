@@ -1,6 +1,8 @@
 // TYPOGRAPHY
 
 // font families
+@use "sass:math";
+
 $theme-sm-font-body: Reforma1969, sans-serif;
 $theme-sm-font-primary: Reforma1969, sans-serif;
 $theme-sm-font-secondary: Reforma2018, sans-serif;
@@ -13,9 +15,9 @@ $theme-body-font-size: 16px;
 // these variables can be set in px
 $theme-minimum-font-size: 16px;
 $theme-font-size-breakpoint: 1440px;
-$theme-font-size-breakpoint-em: 1rem * $theme-font-size-breakpoint / $theme-body-font-size;
+$theme-font-size-breakpoint-em: math.div(1rem * $theme-font-size-breakpoint, $theme-body-font-size);
 $theme-font-size-minimum-value-breakpoint: 320px;
-$theme-font-size-minimum-value-breakpoint-em: 1rem * $theme-font-size-minimum-value-breakpoint / $theme-body-font-size;
+$theme-font-size-minimum-value-breakpoint-em: math.div(1rem * $theme-font-size-minimum-value-breakpoint, $theme-body-font-size);
 
 // use the --theme-font-size-slope-adjust variable to alter the slope of the resulted function
 // in such a way that when this variable equals 0, the slope of the function results to also 0

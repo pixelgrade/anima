@@ -1,7 +1,7 @@
-var gulp = require( 'gulp' ),
-	cp = require( 'child_process' ),
-	plugins = require( 'gulp-load-plugins')(),
-	theme = 'anima';
+const gulp = require('gulp'),
+	cp = require('child_process'),
+	plugins = require('gulp-load-plugins')(),
+	theme = 'anima'
 
 function maybeFixBuildDirPermissions(done) {
 	cp.execSync('find ./../build -type d -exec chmod 755 {} \\;');

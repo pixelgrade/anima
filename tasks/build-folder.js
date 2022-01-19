@@ -1,14 +1,14 @@
-var gulp = require( 'gulp' ),
-	plugins = require( 'gulp-load-plugins')(),
-	fs = require( 'fs' ),
-	del = require( 'del' ),
-	theme = 'anima';
+const gulp = require('gulp'),
+	plugins = require('gulp-load-plugins')(),
+	fs = require('fs'),
+	del = require('del'),
+	theme = 'anima'
 
 // -----------------------------------------------------------------------------
 // Copy plugin folder outside in a build folder.
 // -----------------------------------------------------------------------------
 function copyFolder() {
-	var dir = process.cwd();
+	const dir = process.cwd()
 	return gulp.src( './*' )
 	           .pipe( plugins.exec( 'rm -Rf ./../build; mkdir -p ./../build/' + theme + ';', {
 		           silent: true,

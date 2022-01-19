@@ -30,7 +30,7 @@ export default class PromoBar {
 		this.height = promoBarHeight;
 		this.element.style.top = `${ this.offset }px`;
 
-		if ( typeof this.onUpdate === "function" ) {
+		if ( "function" === typeof this.onUpdate ) {
 			this.onUpdate( this );
 		}
 	}

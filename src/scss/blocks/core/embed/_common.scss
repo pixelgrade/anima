@@ -1,3 +1,5 @@
+@use "sass:math";
+
 $enable-embed-block-styles:             true !default;
 
 @if $enable-embed-block-styles == true {
@@ -22,13 +24,13 @@ $enable-embed-block-styles:             true !default;
 
         &.wp-embed-aspect-4-3 {
             .wp-block-embed__wrapper {
-                padding-top: percentage(3/4);
+                padding-top: percentage(3*0.25);
             }
         }
 
         &.wp-embed-aspect-16-9 {
             .wp-block-embed__wrapper {
-                padding-top: percentage(9/16);
+                padding-top: percentage(math.div(9, 16));
             }
         }
     }

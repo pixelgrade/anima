@@ -1,5 +1,4 @@
 import GlobalService from "./globalService";
-import { getColorSetClasses } from '../utils';
 
 export default class Hero {
 

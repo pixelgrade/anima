@@ -1,5 +1,5 @@
 @mixin checkout-column-left-layout {
-  float: left;  
+  float: left;
   width: 55%;
   padding-left: 5.25%;
   padding-right: 8.75%;
@@ -66,7 +66,7 @@
         position: relative;
         z-index: 20;
       }
-      
+
       a:not(:is(:hover, :focus)) {
         color: currentColor;
         text-decoration-color: currentColor;
@@ -164,7 +164,7 @@
     flex-wrap: wrap;
     align-items: stretch;
     margin-left: calc(var(--theme-spacing) * -1);
-    
+
     .input-text {
       height: 100%;
     }
@@ -233,7 +233,7 @@
       margin-top: .2em;
     }
   }
-  
+
   .nb-sidecar-area > .woocommerce {
     --block-content-start: ws !important;
     --block-content-end: we !important;
@@ -359,7 +359,7 @@
     a {
       --current-font-weight: bold;
 
-      &:not(is(:hover, :focus)) {
+      &:not(:is(:hover, :focus)) {
         color: currentColor;
         text-decoration-color: currentColor;
       }
@@ -435,7 +435,7 @@
 
 [id="order_comments_field"] {
   @include specific(3) {
-    
+
   }
 }
 
@@ -523,7 +523,7 @@ ul.order_details[class] {
       border: 0;
       @include checkout-column-left-layout();
     }
-  } 
+  }
 }
 
 .woocommerce-form-login-toggle {
@@ -719,7 +719,7 @@ ul.order_details[class] {
 // Stripe Minimal Styling
 .wc-stripe-elements-field {
   @include field;
-  
+
   &.StripeElement--invalid {
     --theme-input-box-shadow: var(--theme-input-error-box-shadow);
   }
@@ -727,7 +727,7 @@ ul.order_details[class] {
 
 .stripe-source-errors {
   display: flex;
-  
+
   &,
   * {
     width: 100%;
@@ -740,7 +740,7 @@ ul.order_details[class] {
 
 #wc-stripe-cc-form iframe {
   font-size: 23px;
-  
+
   html {
     font-size: inherit;
   }

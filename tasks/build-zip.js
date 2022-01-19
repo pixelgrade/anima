@@ -1,21 +1,20 @@
-var gulp = require( 'gulp' ),
-	fs = require( 'fs' ),
-	plugins = require( 'gulp-load-plugins')(),
-	theme = 'anima';
+const gulp = require('gulp'),
+	fs = require('fs'),
+	plugins = require('gulp-load-plugins')(),
+	theme = 'anima'
 
 // -----------------------------------------------------------------------------
 // Create the theme installer archive and delete the build folder
 // -----------------------------------------------------------------------------
 function makeZip() {
-	var versionString = '';
 	// get theme version from the stylesheet
-	var contents = fs.readFileSync("./style.css", "utf8");
+	const contents = fs.readFileSync('./style.css', 'utf8')
 
 	// split it by lines
-	var lines = contents.split(/[\r\n]/);
+	const lines = contents.split(/[\r\n]/)
 
 	function checkIfVersionLine(value, index, ar) {
-		var myRegEx = /^[\s\*]*[Vv]ersion:/;
+		const myRegEx = /^[\s\*]*[Vv]ersion:/
 		if (myRegEx.test(value)) {
 			return true;
 		}
@@ -23,9 +22,9 @@ function makeZip() {
 	}
 
 	// apply the filter
-	var versionLine = lines.filter(checkIfVersionLine);
+	const versionLine = lines.filter(checkIfVersionLine)
 
-	versionString = versionLine[0].replace(/^[\s\*]*[Vv]ersion:/, '').trim();
+	let versionString = versionLine[0].replace(/^[\s\*]*[Vv]ersion:/, '').trim();
 	versionString = '-' + versionString.replace(/\./g, '-');
 
 	return gulp.src('./')

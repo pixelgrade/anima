@@ -1,7 +1,4 @@
-var gulp = require( 'gulp' ),
-	map = require( 'map-stream' ),
-	del = require( 'del' ),
-	plugins = require( 'gulp-load-plugins')();
+var gulp = require( 'gulp' );
 
 var HubRegistry = require('gulp-hub');
 

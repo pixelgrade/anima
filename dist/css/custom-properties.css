@@ -145,11 +145,14 @@
   --theme-accent-text-transform: none;
   --font-size-base: 1;
   --font-size-modifier: 1;
-  --current-font-feature: none; }
-  @media only screen and (min-width: 1440px) {
-    :root {
-      --theme-font-size-slope-adjust: 0.4;
-      --theme-addon-multiplier: 1; } }
+  --current-font-feature: none;
+}
+@media only screen and (min-width: 1440px) {
+  :root {
+    --theme-font-size-slope-adjust: 0.4;
+    --theme-addon-multiplier: 1;
+  }
+}
 
 * {
   --x0: var(--theme-font-size-minimum-value-breakpoint);
@@ -160,24 +163,27 @@
   --a: calc( ( var(--y1) - var(--y0-new) ) / ( var(--x1) - var(--x0) ) );
   --b: calc( var(--y0-new) - var(--a) * var(--x0) );
   --y2: calc( var(--a) * 100vw + var(--b) * 1px );
-  --current-font-size: calc( var(--font-size-modifier) * var(--font-size-base) * ( var(--y2) + var(--theme-addon) ) ); }
+  --current-font-size: calc( var(--font-size-modifier) * var(--font-size-base) * ( var(--y2) + var(--theme-addon) ) );
+}
 
 :root {
   --theme-content-spacing: var(--theme-spacing-fluid-normal);
-  --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-normal); }
+  --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-normal);
+}
 
 :root {
   --theme-links-transition-property1: text-decoration-color;
   --theme-links-transition-property2: color;
   --theme-links-transition-duration: .25s;
   --theme-links-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
-  --theme-links-transition: 
-        var(--theme-links-transition-property1) 
-        var(--theme-links-transition-duration) 
-        var(--theme-links-transition-easing),
-        var(--theme-links-transition-property2) 
-        var(--theme-links-transition-duration) 
-        var(--theme-links-transition-easing); }
+  --theme-links-transition:
+      var(--theme-links-transition-property1)
+      var(--theme-links-transition-duration)
+      var(--theme-links-transition-easing),
+      var(--theme-links-transition-property2)
+      var(--theme-links-transition-duration)
+      var(--theme-links-transition-easing);
+}
 
 :root {
   --theme-spacing-ratio: var(--sm-spacing-level, 1);
@@ -203,7 +209,8 @@
   --theme-spacing-larger: calc(var(--theme-spacing) * 2);
   --theme-spacing-fluid-larger: calc(var(--theme-spacing-fluid) * 2);
   --theme-spacing-largest: calc(var(--theme-spacing) * 4);
-  --theme-spacing-fluid-largest: calc(var(--theme-spacing-fluid) * 4); }
+  --theme-spacing-fluid-largest: calc(var(--theme-spacing-fluid) * 4);
+}
 
 :root {
   --theme-transition-duration-slow: 1s;
@@ -212,7 +219,8 @@
   --theme-transition-duration-quick: .15s;
   --theme-transition-duration: var(--theme-transition-duration-normal);
   --theme-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
-  --theme-transition: all var(--theme-transition-duration) var(--theme-transition-easing); }
+  --theme-transition: all var(--theme-transition-duration) var(--theme-transition-easing);
+}
 
 /* Header Custom Properties */
 :root {
@@ -223,7 +231,8 @@
   --theme-header-links-spacing-setting: 32;
   --theme-header-links-spacing: calc( var(--theme-header-links-spacing-setting) * var(--theme-style-manager-fluid-unit) );
   --theme-header-sides-spacing-setting: 48;
-  --theme-header-sides-spacing: calc( var(--theme-header-sides-spacing-setting) * var(--theme-style-manager-fluid-unit) ); }
+  --theme-header-sides-spacing: calc( var(--theme-header-sides-spacing-setting) * var(--theme-style-manager-fluid-unit) );
+}
 
 /* Button Custom Properties */
 :root {
@@ -236,7 +245,8 @@
   --theme-button-transition-duration: var(--theme-transition-duration);
   --theme-button-transition-easing: var(--theme-transition-easing);
   --theme-button-transition: all var(--theme-button-transition-duration) var(--theme-button-transition-easing);
-  --theme-button-hover-transition: var(--theme-button-transition); }
+  --theme-button-hover-transition: var(--theme-button-transition);
+}
 
 /* Input Custom Properties */
 :root {
@@ -247,36 +257,39 @@
   --theme-checkbox-height: 1.38rem;
   --opacity-color: 255, 255, 255;
   --opacity-level: 0.7;
-  --theme-input-focus-color: var(--sm-current-accent-color); }
-  @media only screen and (min-width: 768px) {
-    :root {
-      --theme-input-padding: var(--theme-input-padding-above-tablet); } }
+  --theme-input-focus-color: var(--sm-current-accent-color);
+}
+@media only screen and (min-width: 768px) {
+  :root {
+    --theme-input-padding: var(--theme-input-padding-above-tablet);
+  }
+}
 
 * {
   --theme-input-border-radius: var(--theme-button-border-radius);
   --theme-input-border-width: 1px;
   --theme-input-error-color: var(--theme-error-color);
   --theme-input-overlay-shadow: inset 0px 0px 0px calc(var(--theme-input-border-width) * 2) rgba(var(--opacity-color), var(--opacity-level));
-  --theme-input-colored-shadow: inset 0px 0px 0px var(--theme-input-border-width)           var(--sm-current-fg2-color);
-  --theme-input-box-shadow:   
+  --theme-input-colored-shadow: inset 0px 0px 0px var(--theme-input-border-width) var(--sm-current-fg2-color);
+  --theme-input-box-shadow:
       var(--theme-input-overlay-shadow),
       var(--theme-input-colored-shadow);
-  --theme-input-border-color:  var(--sm-current-bg-color);
+  --theme-input-border-color: var(--sm-current-bg-color);
   --theme-input-error-border-color: var(--theme-input-error-color);
-  --theme-input-focus-overlay-shadow:   inset 0px 0px 0px calc(var(--theme-input-border-width) + 1px) rgba(var(--opacity-color), 0.40);
-  --theme-input-focus-colored-shadow:   inset 0px 0px 0px calc(var(--theme-input-border-width) + 1px) var(--theme-input-focus-color);
-  --theme-input-focus-shadow:                 0 0 9px -3px                                            var(--theme-input-focus-color);
-  --theme-input-focus-box-shadow: 
+  --theme-input-focus-overlay-shadow: inset 0px 0px 0px calc(var(--theme-input-border-width) + 1px) rgba(var(--opacity-color), 0.40);
+  --theme-input-focus-colored-shadow: inset 0px 0px 0px calc(var(--theme-input-border-width) + 1px) var(--theme-input-focus-color);
+  --theme-input-focus-shadow: 0 0 9px -3px var(--theme-input-focus-color);
+  --theme-input-focus-box-shadow:
       var(--theme-input-focus-overlay-shadow),
       var(--theme-input-focus-colored-shadow),
       var(--theme-input-focus-shadow);
   --theme-input-hover-overlay-shadow: inset 0px 0px 0px var(--theme-input-border-width) rgba(var(--opacity-color), 0.30);
   --theme-input-hover-colored-shadow: inset 0px 0px 0px var(--theme-input-border-width) var(--sm-current-fg2-color);
-  --theme-input-hover-box-shadow: 
+  --theme-input-hover-box-shadow:
       var(--theme-input-hover-overlay-shadow),
       var(--theme-input-hover-colored-shadow);
   --theme-input-error-focus-overlay-shadow: inset 0px 0px 0px calc(var(--theme-input-border-width) + 1px) rgba(var(--opacity-color), 0.40);
-  --theme-input-error-focus-colored-shadow:  inset 0px 0px 0px calc(var(--theme-input-border-width) + 1px) var(--theme-input-error-color);
+  --theme-input-error-focus-colored-shadow: inset 0px 0px 0px calc(var(--theme-input-border-width) + 1px) var(--theme-input-error-color);
   --theme-input-error-focus-shadow: 0 0 9px -3px var(--theme-input-error-color);
   --theme-input-error-box-shadow: inset 0px 0px 0px var(--theme-input-border-width) var(--theme-input-error-color);
   --theme-input-focus-error-box-shadow: var(--theme-input-error-focus-overlay-shadow),
@@ -287,7 +300,9 @@
   --theme-input-label-color: var(--sm-current-fg1-color);
   --theme-input-legend-color: var(--sm-current-fg1-color);
   --theme-input-vertical-spacing: var(--theme-spacing-smallest);
-  --theme-input-horizontal-spacing: var(--theme-spacing-smallest); }
+  --theme-input-horizontal-spacing: var(--theme-spacing-smallest);
+}
 
 .wp-block {
-  --force: editor ; }
+  --force: editor ;
+}
