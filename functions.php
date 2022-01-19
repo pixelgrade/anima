@@ -169,7 +169,7 @@ function anima_register_assets() {
 	wp_script_add_data( 'gsap', 'integrity', 'sha384-lI86CGWNchoT9leGBpVR41iGrRTRbHRDsPI4Zo/atPOIodjl8YyDaVefcpgkCg4u');
 	wp_script_add_data( 'gsap', 'crossorigin', 'anonymous');
 
-	wp_register_script( 'gsap-split-text', '//pxgcdn.com/js/gsap/3.9.1/SplitText.min.js', ['gsap'], null, true );
+	wp_register_script( 'gsap-split-text', '//pxgcdn.com/js/gsap/3.9.1/SplitText.min.js', [], null, true );
 	// Add the SRI (Subresource Integrity) hash data.
 	wp_script_add_data( 'gsap-split-text', 'integrity', 'sha384-KoviLFAFGG+n+c3BxM58Gr/poK7WAtzed6kU8Kzr2fvjp3Q8gttOWY+XvpTjShW3');
 	wp_script_add_data( 'gsap-split-text', 'crossorigin', 'anonymous');
