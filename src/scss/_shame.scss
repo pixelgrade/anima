@@ -286,7 +286,7 @@ body.block-patterns {
 
     & + div {
         @include above(tablet) {
-            border: 1.25px solid #E5E6E8;
+            box-shadow: 0 0 0 1px #E5E6E8;
             border-radius: 8px;
             overflow: hidden;
             
@@ -301,7 +301,6 @@ body.block-patterns {
 
             &:hover {
                 transform: scale(1);
-                // border-width: 0;
                 border-radius: 0px;
             }
         }
