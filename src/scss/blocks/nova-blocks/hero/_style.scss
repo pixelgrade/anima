@@ -37,8 +37,14 @@
     }
 }
 
-@include below(lap) {
-    .c-bully {
+
+
+// Hero bullets
+.c-bully {
+    // Connect bullets to the theme font-size system
+    --font-size-base: 12px; 
+
+    @include below(lap) {
         display: none;
     }
 }
