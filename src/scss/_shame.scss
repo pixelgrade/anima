@@ -1,6 +1,6 @@
 // Keep this as tidy as possible
 
-/* Embeds */
+// Embeds
 .fb_iframe_widget > span {
     display: block;
     max-width: 100%;
@@ -12,10 +12,9 @@ iframe.instagram-media {
     margin-right: 0 !important;
 }
 
-.is-style-lead {
-    @include apply-font(lead);
-}
 
+
+// Image loading effect
 img:not([srcset]):not(.is-loaded) {
     opacity: 0;
 
@@ -24,7 +23,9 @@ img:not([srcset]):not(.is-loaded) {
     }
 }
 
-// We need this to overwrite normalize font: inherit
+
+
+// We need to apply font properties to overwrite the default `font: inherit`
 // @todo: Move to a more appropriate file
 button,
 input,
@@ -34,16 +35,25 @@ textarea {
     @include apply-font-properties;
 }
 
+
+
+// ?
 .has-no-padding-bottom {
     @include remove-site-content-padding-bottom;
 }
 
+
+
+// ?
 .social-menu-item,
 .menu-item--dark-mode,
 .menu-item--search {
     --theme-header-links-spacing-multiplier: 0.5;
 }
 
+
+
+// ?
 .woocommerce-message,
 .woocommerce-info,
 .woocommerce-error {
@@ -99,7 +109,11 @@ html.is-dark .sm-light {
 
 
 
+/*------------------------------------*\
+  #COLOR SIGNAL
+\*------------------------------------*/
 
+// Color Signal Exceptions
 .sm-color-signal-0 {
     background: none;
 
@@ -109,8 +123,7 @@ html.is-dark .sm-light {
     --sm-current-accent-color: inherit;
 }
 
-/* Additional media query styles for Color Signal */
-
+// Additional media query styles for Color Signal
 @include below(tablet) {
     @for $i from 1 through 12 {
         .sm-variation-#{ $i }\@below-tablet[class] {
@@ -119,8 +132,7 @@ html.is-dark .sm-light {
     }
 }
 
-/* Color signal defaul styles for WooCommerce notifications */
-
+// Color signal defaul styles for WooCommerce notifications
 // @todo change notification classnames and add sm-palette-_error and sm-variation-1
 .woocommerce-error {
     @include apply-palette(_error);
@@ -134,8 +146,7 @@ html.is-dark .sm-light {
     @include apply-palette(_info);
 }
 
-/* Fallback Styles for Color Signal */
-
+// Fallback Styles for Color Signal
 .is-style-dark {
     @include apply-variation(9);
 }
@@ -187,16 +198,20 @@ html.is-dark .sm-light {
     }
 }
 
-/* End Fallback Styles for Color Signal */
+// End Fallback Styles for Color Signal
 
+
+
+// ?
 .wp-block-group__inner-container > *:not([class*='alignfull']) {
     width: 100%;
 }
 
-/* START body margin hack
-contain inline margin set to #content
-@todo find a better way o doing this
-*/
+
+
+// START body margin hack
+// contain inline margin set to #content
+// @todo find a better way o doing this
 body {
     float: left;
     width: 100%;
@@ -205,10 +220,11 @@ body {
 html {
     @include clearfix;
 }
-/* END body margin hack */
+// END body margin hack
 
 
-/* Site Content */
+
+// Site Content
 .site-content {
     padding-top: var(--theme-spacing-fluid-larger);
     padding-bottom: var(--theme-spacing-fluid-larger);
@@ -222,96 +238,16 @@ html {
     }
 }
 
-/* Hero bullets size fix */
-.c-bully {
-    --current-font-size: 12px; // @todo: not working anymore; hero bullets are large
-}
 
+
+// ?
 .novablocks-collection {
     position: relative;
 }
 
+
+// ?
 mark {
     background: none;
     color: inherit;
-}
-
-
-
-
-
-
-/*------------------------------------*\
-  #BLOCK PATTERNS SHOWCASE PAGES
-\*------------------------------------*/
-
-// For Block Patterns pages add the 
-// `.block-patterns` CSS class to the body tag. 
-body.block-patterns {
-    background: #F5F5F5;
-    background: var(--sm-bg-color-2);
-}
-
-// Use a Group block with `.showcase-block-title` CSS class
-// to mark the title and description for the following Block Pattern
-.showcase-block-title {
-    position: relative;
-
-    * {
-        font-weight: 400 !important;
-        font-family: system-font-sans-serif-clear, "SF Pro Display", "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitsream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif !important; 
-    }
-
-    @include above(tablet) {
-        .wp-block-group__inner-container > * {
-            margin-left: 7.5%;
-        }
-
-        &:before {
-            content: " ";
-            position: absolute;
-            top: 20px;
-            left: 0px;
-            width: 30px;
-            height: 0px;
-            border-top: 2px solid var(--sm-current-fg1-color);
-            border-left: 2px solid var(--sm-current-fg1-color);
-        }
-    }
-}
-
-
-// The next block after the title is considered a Block Pattern
-.showcase-block-title:not([class*="block-editor"]) {
-
-    & + div {
-        @include above(tablet) {
-            box-shadow: 0 0 0 1px #E5E6E8;
-            border-radius: 8px;
-            overflow: hidden;
-            
-            // Resize the block to have a better overview
-            transform-origin: 50% 0%;
-            transform: scale(0.8);
-            transition: all .4s ease;
-
-            // Reset block spacing
-            --nb-emphasis-top-spacing: 1 !important;
-            --nb-emphasis-bottom-spacing: 1 !important;
-
-            &:hover {
-                transform: scale(1);
-                border-radius: 0px;
-            }
-        }
-    }
-
-    // Multipled blocks grouped inside a Sidecar block
-    & + div.nb-sidecar {
-        @include above(tablet) {
-
-            // Add a background for Sidecar 
-            background: var(--sm-current-bg-color, var(--nb-bg-color));
-        }
-    }
 }
