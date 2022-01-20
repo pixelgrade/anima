@@ -12,7 +12,7 @@ class HeaderColors {
     this.initializeColors();
   }
 
-  getFirstBlock () {
+  getFirstBlock() {
     const content = document.querySelector( '.site-main .hentry' );
 
     if ( !content ) {
@@ -34,7 +34,7 @@ class HeaderColors {
     return null;
   }
 
-  getFirstUsefulBlock () {
+  getFirstUsefulBlock() {
     const firstBlock = this.getFirstBlock();
 
     if ( !firstBlock ) {
@@ -48,14 +48,13 @@ class HeaderColors {
     }
 
     if ( hasClass( firstBlock, 'supernova' ) &&
-      parseInt( attributes.imagePadding, 10 ) === 0 &&
-      attributes.cardLayout === 'stacked' ) {
+         parseInt( attributes.imagePadding, 10 ) === 0 &&
+         attributes.cardLayout === 'stacked' &&
+         !firstBlock.querySelector( '.nb-collection__header' ) ) {
       return firstBlock.querySelector( '.supernova-item' );
     }
 
-    const novablocksBlock = firstBlock.querySelector( '.novablocks-block' );
-
-    return novablocksBlock || firstBlock;
+    return firstBlock;
   }
 
   initializeColors () {

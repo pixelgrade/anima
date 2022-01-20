@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-import { debounce, toggleLightClasses } from '../utils';
+import { debounce, toggleLightClasses, getFirstBlock } from '../utils';
 
 import GlobalService from './globalService';
 import Hero from './hero';
@@ -208,7 +208,7 @@ export default class App {
     this.onHeaderUpdate();
   }
 
-  onHeaderUpdate () {
+  onHeaderUpdate() {
 
     if ( !this.enableFirstBlockPaddingTop ) {
       return false;
@@ -223,8 +223,9 @@ export default class App {
     if ( !$body.is( '.has-no-spacing-top' ) ) {
       $body.find( '.site-content' ).css( 'marginTop', `${promoBarHeight + headerHeight}px` );
     } else {
-      const $content = $( '.site-main .hentry' );
-      const $firstBlock = getFirstBlock( $content );
+      const content = document.querySelector( '.site-main .hentry' );
+      const firstBlock = getFirstBlock( content );
+      const $firstBlock = $( firstBlock );
 
       if ( $firstBlock.is( '.supernova' ) ) {
         const attributes = $firstBlock.data();
@@ -254,18 +255,6 @@ export default class App {
     }
   }
 }
-
-const getFirstBlock = ( $element ) => {
-  const $firstBlock = $element.children().first();
-
-  if ( $firstBlock.is( '.nb-sidecar' ) ) {
-    if ( $firstBlock.find( '.nb-sidecar-area--content' ).children().length ) {
-      return getFirstBlock( $firstBlock.find( '.nb-sidecar-area--content' ) );
-    }
-  }
-
-  return $firstBlock;
-};
 
 const applyPaddingTopToTargets = ( $targets, extraPaddingTop ) => {
   $targets.each( ( i, target ) => {
