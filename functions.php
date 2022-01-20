@@ -164,13 +164,18 @@ function anima_register_assets() {
 	wp_style_add_data( 'anima-theme', 'rtl', 'replace' );
 	wp_style_add_data( 'anima-theme-components', 'rtl', 'replace' );
 
+	// Use the public CDN for better performance
+	// (high likelihood the file is already cached in the browser from other sites).
 	wp_register_script( 'gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js', [], null, true );
 	// Add the SRI (Subresource Integrity) hash data.
+	// Generated with https://www.srihash.org/
 	wp_script_add_data( 'gsap', 'integrity', 'sha384-lI86CGWNchoT9leGBpVR41iGrRTRbHRDsPI4Zo/atPOIodjl8YyDaVefcpgkCg4u');
 	wp_script_add_data( 'gsap', 'crossorigin', 'anonymous');
 
+	// Use our private CDN since GSAP premium plugins can't be distributed in the bundle.
 	wp_register_script( 'gsap-split-text', '//pxgcdn.com/js/gsap/3.9.1/SplitText.min.js', [], null, true );
 	// Add the SRI (Subresource Integrity) hash data.
+	// Generated with https://www.srihash.org/
 	wp_script_add_data( 'gsap-split-text', 'integrity', 'sha384-KoviLFAFGG+n+c3BxM58Gr/poK7WAtzed6kU8Kzr2fvjp3Q8gttOWY+XvpTjShW3');
 	wp_script_add_data( 'gsap-split-text', 'crossorigin', 'anonymous');
 
@@ -244,7 +249,7 @@ add_action( 'wp_enqueue_scripts', 'anima_enqueue_assets', 20 );
 
 function anima_webfonts_fallback() {
 
-	if ( class_exists( 'PixCustomifyPlugin' ) ) {
+	if ( class_exists( 'PixCustomifyPlugin' ) || function_exists( '\Pixelgrade\StyleManager\plugin') ) {
 		return;
 	}
 

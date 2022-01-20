@@ -11,8 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 // pixelgrade_option
 require_once __DIR__ . '/extras.php';
 
-// If the Style Manager plugin is active, don't load the Customify integration.
-if ( class_exists( 'PixCustomifyPlugin' ) && ! defined( '\Pixelgrade\StyleManager\VERSION' ) ) {
+// Load the Customify integration only if Style Manager is not active.
+if ( class_exists( 'PixCustomifyPlugin' ) && ! function_exists( '\Pixelgrade\StyleManager\plugin' ) ) {
 
 	require_once __DIR__ . '/colors.php';
 	require_once __DIR__ . '/fonts.php';

@@ -696,7 +696,7 @@ function anima_get_page_class( $class = '' ): array {
 	return array_unique( $classes );
 }
 
-if ( ! class_exists( 'PixCustomifyPlugin' ) && ! class_exists( 'Pixelgrade\StyleManager\Plugin' ) && ! function_exists( 'pixelgrade_option' ) ) {
+if ( ! class_exists( 'PixCustomifyPlugin' ) && ! function_exists( 'Pixelgrade\StyleManager\plugin' ) && ! function_exists( 'pixelgrade_option' ) ) {
 	function pixelgrade_option( $settings_id, $default = null, $force_given_default = false ) {
 		return get_option( $settings_id, $default );
 	}
