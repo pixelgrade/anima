@@ -41,8 +41,8 @@ export default class Hero {
     this.pauseTimelineOnScroll();
 
     if ( this.reduceMotion ) {
-      const middleTime = this.timeline.getLabelTime( 'middle' );
-      const endTime = this.timeline.getLabelTime( 'end' );
+      const middleTime = this.labels.middle;
+      const endTime = this.labels.end;
       const minTlProgress = middleTime / endTime;
 
       this.paused = true;
@@ -81,8 +81,8 @@ export default class Hero {
     this.progress = (scrollY - this.start) / (this.end - this.start);
 
     if ( this.reduceMotion ) {
-      const middleTime = this.timeline.getLabelTime( 'middle' );
-      const endTime = this.timeline.getLabelTime( 'end' );
+      const middleTime = this.timeline.labels.middle;
+      const endTime = this.timeline.labels.end;
       const minTlProgress = middleTime / endTime;
 
       this.progress = minTlProgress;
@@ -98,8 +98,8 @@ export default class Hero {
     }
 
     const currentProgress = this.timeline.progress();
-    const middleTime = this.timeline.getLabelTime( 'middle' );
-    const endTime = this.timeline.getLabelTime( 'end' );
+    const middleTime = this.timeline.labels.middle;
+    const endTime = this.timeline.labels.end;
     const minTlProgress = middleTime / endTime;
 
     let newTlProgress = (this.progress - 0.5) * 2 * (1 - minTlProgress) + minTlProgress;
@@ -274,11 +274,11 @@ export default class Hero {
   }
 
   pauseTimelineOnScroll () {
-    const middleTime = this.timeline.getLabelTime( 'middle' );
-    const endTime = this.timeline.getLabelTime( 'end' );
+    const middleTime = this.timeline.labels.middle;
+    const endTime = this.timeline.labels.end;
 
     this.timeline.eventCallback( 'onUpdate', ( tl ) => {
-      const time = tl.time();
+      const time = this.timeline.time();
 
       // calculate the current timeline progress relative to middle and end labels
       // in such a way that timelineProgress is 0.5 for middle and 1 for end
@@ -288,7 +288,7 @@ export default class Hero {
       const pastScroll = (tlProgress * 0.5 + 0.5) >= this.progress;
 
       if ( pastMiddle && pastScroll ) {
-        tl.pause();
+        this.timeline.pause();
         this.revertTitle();
         this.timeline.eventCallback( 'onUpdate', null );
         this.paused = true;

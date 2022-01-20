@@ -473,8 +473,8 @@ class Hero {
     this.pauseTimelineOnScroll();
 
     if (this.reduceMotion) {
-      const middleTime = this.timeline.getLabelTime('middle');
-      const endTime = this.timeline.getLabelTime('end');
+      const middleTime = this.labels.middle;
+      const endTime = this.labels.end;
       const minTlProgress = middleTime / endTime;
       this.paused = true;
       this.timeline.progress(minTlProgress);
@@ -513,8 +513,8 @@ class Hero {
     this.progress = (scrollY - this.start) / (this.end - this.start);
 
     if (this.reduceMotion) {
-      const middleTime = this.timeline.getLabelTime('middle');
-      const endTime = this.timeline.getLabelTime('end');
+      const middleTime = this.timeline.labels.middle;
+      const endTime = this.timeline.labels.end;
       const minTlProgress = middleTime / endTime;
       this.progress = minTlProgress;
     }
@@ -528,8 +528,8 @@ class Hero {
     }
 
     const currentProgress = this.timeline.progress();
-    const middleTime = this.timeline.getLabelTime('middle');
-    const endTime = this.timeline.getLabelTime('end');
+    const middleTime = this.timeline.labels.middle;
+    const endTime = this.timeline.labels.end;
     const minTlProgress = middleTime / endTime;
     let newTlProgress = (this.progress - 0.5) * 2 * (1 - minTlProgress) + minTlProgress;
     newTlProgress = Math.min(Math.max(minTlProgress, newTlProgress), 1);
@@ -794,10 +794,10 @@ class Hero {
   }
 
   pauseTimelineOnScroll() {
-    const middleTime = this.timeline.getLabelTime('middle');
-    const endTime = this.timeline.getLabelTime('end');
+    const middleTime = this.timeline.labels.middle;
+    const endTime = this.timeline.labels.end;
     this.timeline.eventCallback('onUpdate', tl => {
-      const time = tl.time(); // calculate the current timeline progress relative to middle and end labels
+      const time = this.timeline.time(); // calculate the current timeline progress relative to middle and end labels
       // in such a way that timelineProgress is 0.5 for middle and 1 for end
       // because we don't want the animation to be stopped before the middle label
 
@@ -806,7 +806,7 @@ class Hero {
       const pastScroll = tlProgress * 0.5 + 0.5 >= this.progress;
 
       if (pastMiddle && pastScroll) {
-        tl.pause();
+        this.timeline.pause();
         this.revertTitle();
         this.timeline.eventCallback('onUpdate', null);
         this.paused = true;
@@ -1295,6 +1295,7 @@ class Header extends header_base {
   }
 
   getIntroTimeline() {
+    const that = this;
     const timeline = gsap.timeline({
       paused: true
     });
@@ -1311,11 +1312,15 @@ class Header extends header_base {
     }, {
       duration: transitionDuration,
       height: height,
-      onUpdate: tween => {
-        this.box = Object.assign({}, this.box, {
-          height: tween.target.height
-        });
-        this.onResize();
+      onUpdate: function () {
+        const targets = this.targets();
+
+        if (Array.isArray(targets) && targets.length) {
+          that.box = Object.assign({}, that.box, {
+            height: targets[0].height
+          });
+          that.onResize();
+        }
       },
       onUpdateParams: ['{self}'],
       ease: transitionEasing

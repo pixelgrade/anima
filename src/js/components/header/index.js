@@ -100,18 +100,23 @@ class Header extends HeaderBase {
     }
   }
 
-  getIntroTimeline () {
+  getIntroTimeline() {
+    const that = this;
     const timeline = gsap.timeline( { paused: true } );
     const height = this.element.offsetHeight;
     const transitionEasing = 'power4.inOut';
     const transitionDuration = 0.5;
+
     timeline.to( this.element, { duration: transitionDuration, opacity: 1, ease: transitionEasing }, 0 );
     timeline.to( { height: 0 }, {
       duration: transitionDuration,
       height: height,
-      onUpdate: ( tween ) => {
-        this.box = Object.assign( {}, this.box, { height: tween.target.height } );
-        this.onResize();
+      onUpdate: function() {
+        const targets = this.targets();
+        if ( Array.isArray( targets ) && targets.length ) {
+          that.box = Object.assign( {}, that.box, { height: targets[0].height } );
+          that.onResize();
+        }
       },
       onUpdateParams: [ '{self}' ],
       ease: transitionEasing
