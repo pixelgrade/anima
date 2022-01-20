@@ -144,3 +144,22 @@ export const toggleLightClasses = element => {
     toggleClasses( element, isLight, 'sm-light', 'sm-dark' );
   }
 };
+
+export const getFirstBlock = ( element ) => {
+
+  if ( ! element || ! element.children.length ) {
+    return element;
+  }
+
+  const firstBlock = element.children[0];
+
+  if ( hasClass( firstBlock, '.nb-sidecar' ) ) {
+    const content = firstBlock.querySelector( '.nb-sidecar-area--content' )
+
+    if ( content && content.children.length ) {
+      return getFirstBlock( content );
+    }
+  }
+
+  return firstBlock;
+};

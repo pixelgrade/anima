@@ -177,6 +177,23 @@ const toggleLightClasses = element => {
     toggleClasses(element, isLight, 'sm-light', 'sm-dark');
   }
 };
+const getFirstBlock = element => {
+  if (!element || !element.children.length) {
+    return element;
+  }
+
+  const firstBlock = element.children[0];
+
+  if (hasClass(firstBlock, '.nb-sidecar')) {
+    const content = firstBlock.querySelector('.nb-sidecar-area--content');
+
+    if (content && content.children.length) {
+      return getFirstBlock(content);
+    }
+  }
+
+  return firstBlock;
+};
 ;// CONCATENATED MODULE: ./src/js/components/globalService.js
 
 
@@ -1001,12 +1018,11 @@ class HeaderColors {
       return null;
     }
 
-    if (hasClass(firstBlock, 'supernova') && parseInt(attributes.imagePadding, 10) === 0 && attributes.cardLayout === 'stacked') {
+    if (hasClass(firstBlock, 'supernova') && parseInt(attributes.imagePadding, 10) === 0 && attributes.cardLayout === 'stacked' && !firstBlock.querySelector('.nb-collection__header')) {
       return firstBlock.querySelector('.supernova-item');
     }
 
-    const novablocksBlock = firstBlock.querySelector('.novablocks-block');
-    return novablocksBlock || firstBlock;
+    return firstBlock;
   }
 
   initializeColors() {
@@ -1997,8 +2013,9 @@ class App {
     if (!$body.is('.has-no-spacing-top')) {
       $body.find('.site-content').css('marginTop', `${promoBarHeight + headerHeight}px`);
     } else {
-      const $content = external_jQuery_default()('.site-main .hentry');
-      const $firstBlock = getFirstBlock($content);
+      const content = document.querySelector('.site-main .hentry');
+      const firstBlock = getFirstBlock(content);
+      const $firstBlock = external_jQuery_default()(firstBlock);
 
       if ($firstBlock.is('.supernova')) {
         const attributes = $firstBlock.data();
@@ -2028,18 +2045,6 @@ class App {
   }
 
 }
-
-const getFirstBlock = $element => {
-  const $firstBlock = $element.children().first();
-
-  if ($firstBlock.is('.nb-sidecar')) {
-    if ($firstBlock.find('.nb-sidecar-area--content').children().length) {
-      return getFirstBlock($firstBlock.find('.nb-sidecar-area--content'));
-    }
-  }
-
-  return $firstBlock;
-};
 
 const applyPaddingTopToTargets = ($targets, extraPaddingTop) => {
   $targets.each((i, target) => {
