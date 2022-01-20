@@ -38,20 +38,30 @@
 // ------ #SECONDARY HEADLINE
 // Styling for Headline block and italics inside headings
 .c-headline__secondary,
-:is(h1, h2, h3, h4, h5, h6) em {
-    @include apply-font(accent);
-    --font-size-modifier: 1.3636;
-    font-style: normal;
-    line-height: 0.9;
-    white-space: nowrap;
-    vertical-align: middle;
+:is(h1, h2, h3, h4, h5, h6) em,
+:is(h1, h2, h3, h4, h5, h6) :is(strong, em) :is(em, strong) 
+    { 
+        @include apply-font(accent);
+        --font-size-modifier: 1.3636;
+        font-style: normal;
+        line-height: 0.9;
+        white-space: nowrap;
+        vertical-align: middle;
 
-    h1.c-headline.has-larger-font-size & {
-        --font-size-modifier: .87em;
-        line-height: 1.1;
+        h1.c-headline.has-larger-font-size & {
+            --font-size-modifier: .87em;
+            line-height: 1.1;
+        }
     }
-}
 
-:is(h1, h2, h3, h4, h5, h6) em  {
-    line-height: 0;
+:is(h1, h2, h3, h4, h5, h6)  {
+    em {
+        line-height: 0;
+    }
+
+    // Target the double emphasis (em and strong)
+    :is(strong, em) :is(em, strong) {
+        --font-size-modifier: 1;
+        vertical-align: revert;
+    }
 }
