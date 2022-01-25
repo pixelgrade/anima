@@ -1043,7 +1043,6 @@ class HeaderColors {
   }
 
   toggleColors(isTransparent) {
-    console.log(this.transparentColorClasses, this.initialColorClasses);
     toggleClasses(this.element, isTransparent ? this.transparentColorClasses : this.initialColorClasses);
     toggleLightClasses(this.element);
   }
