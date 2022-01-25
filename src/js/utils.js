@@ -74,8 +74,7 @@ export const getColorSetClasses = ( element ) => {
 
   return classes.filter( classname => {
     return classname.search( 'sm-palette-' ) !== -1 ||
-      classname.search( 'sm-variation-' ) !== -1 ||
-      classname.search( 'sm-color-signal-' ) !== -1;
+           classname.search( 'sm-variation-' ) !== -1;
   } );
 };
 
@@ -99,9 +98,21 @@ export const hasClass = ( element, className ) => {
   return element.classList.contains( className );
 };
 
-export const toggleClasses = ( element, check, trueClasses = '', falseClasses = '' ) => {
-  removeClass( element, !!check ? falseClasses : trueClasses );
-  addClass( element, !!check ? trueClasses : falseClasses );
+export const toggleClasses = ( element, classesToAdd = '' ) => {
+
+  const prefixes = [
+    'sm-palette-',
+    'sm-variation-',
+    'sm-color-signal-'
+  ];
+
+  const classesToRemove = Array.from( element.classList ).filter( classname => {
+    return prefixes.some( prefix => classname.indexOf( prefix ) > -1 );
+  } );
+
+  element.classList.remove( ...classesToRemove );
+
+  addClass( element, classesToAdd );
 };
 
 export function getFirstChild ( el ) {
@@ -131,7 +142,7 @@ export const toggleLightClasses = element => {
   }
 
   const currentPaletteConfig = window.styleManager.colorsConfig.find( thisPalette => {
-    return `${thisPalette.id}` === `${palette}`;
+    return `${ thisPalette.id }` === `${ palette }`;
   } );
 
   if ( currentPaletteConfig ) {
@@ -141,7 +152,8 @@ export const toggleLightClasses = element => {
     const hex = currentPaletteConfig.variations ? currentPaletteConfig.variations[variationIndex].bg : currentPaletteConfig.colors[variationIndex].value;
     const isLight = colord( '#FFFFFF' ).contrast( hex ) < colord( '#000000' ).contrast( hex );
 
-    toggleClasses( element, isLight, 'sm-light', 'sm-dark' );
+    removeClass( element, isLight ? 'sm-dark' : 'sm-light' );
+    addClass( element, isLight ? 'sm-light' : 'sm-dark' );
   }
 };
 

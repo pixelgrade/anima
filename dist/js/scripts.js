@@ -112,7 +112,7 @@ const getColorSetClasses = element => {
 
   const classes = classAttr.split(/\s+/);
   return classes.filter(classname => {
-    return classname.search('sm-palette-') !== -1 || classname.search('sm-variation-') !== -1 || classname.search('sm-color-signal-') !== -1;
+    return classname.search('sm-palette-') !== -1 || classname.search('sm-variation-') !== -1;
   });
 };
 const addClass = (element, classes) => {
@@ -132,11 +132,14 @@ const removeClass = (element, classes) => {
 const hasClass = (element, className) => {
   return element.classList.contains(className);
 };
-const toggleClasses = function (element, check) {
-  let trueClasses = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-  let falseClasses = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
-  removeClass(element, !!check ? falseClasses : trueClasses);
-  addClass(element, !!check ? trueClasses : falseClasses);
+const toggleClasses = function (element) {
+  let classesToAdd = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  const prefixes = ['sm-palette-', 'sm-variation-', 'sm-color-signal-'];
+  const classesToRemove = Array.from(element.classList).filter(classname => {
+    return prefixes.some(prefix => classname.indexOf(prefix) > -1);
+  });
+  element.classList.remove(...classesToRemove);
+  addClass(element, classesToAdd);
 };
 function getFirstChild(el) {
   var firstChild = el.firstChild;
@@ -174,7 +177,8 @@ const toggleLightClasses = element => {
     const variationIndex = parseInt(variation, 10) - 1;
     const hex = currentPaletteConfig.variations ? currentPaletteConfig.variations[variationIndex].bg : currentPaletteConfig.colors[variationIndex].value;
     const isLight = w('#FFFFFF').contrast(hex) < w('#000000').contrast(hex);
-    toggleClasses(element, isLight, 'sm-light', 'sm-dark');
+    removeClass(element, isLight ? 'sm-dark' : 'sm-light');
+    addClass(element, isLight ? 'sm-light' : 'sm-dark');
   }
 };
 const getFirstBlock = element => {
@@ -1039,7 +1043,8 @@ class HeaderColors {
   }
 
   toggleColors(isTransparent) {
-    toggleClasses(this.element, isTransparent, this.transparentColorClasses, this.initialColorClasses);
+    console.log(this.transparentColorClasses, this.initialColorClasses);
+    toggleClasses(this.element, isTransparent ? this.transparentColorClasses : this.initialColorClasses);
     toggleLightClasses(this.element);
   }
 

@@ -4,7 +4,7 @@ import { addClass, hasClass, getFirstChild, getColorSetClasses, toggleClasses, t
 
 class HeaderColors {
 
-  constructor ( element, initialColorsSource, transparentColorsSource ) {
+  constructor( element, initialColorsSource, transparentColorsSource ) {
     this.element = element;
     this.initialColorsSource = initialColorsSource ? initialColorsSource : element;
     this.transparentColorsSource = transparentColorsSource ? transparentColorsSource : this.getFirstUsefulBlock();
@@ -57,7 +57,7 @@ class HeaderColors {
     return firstBlock;
   }
 
-  initializeColors () {
+  initializeColors() {
     this.initialColorClasses = getColorSetClasses( this.initialColorsSource ).join( ' ' );
     this.transparentColorClasses = this.initialColorClasses;
 
@@ -67,11 +67,12 @@ class HeaderColors {
       this.transparentColorClasses = 'sm-palette-1 sm-variation-1';
     }
 
-    this.transparentColorClasses = `${this.transparentColorClasses}`;
+    this.transparentColorClasses = `${ this.transparentColorClasses }`;
   }
 
-  toggleColors ( isTransparent ) {
-    toggleClasses( this.element, isTransparent, this.transparentColorClasses, this.initialColorClasses );
+  toggleColors( isTransparent ) {
+    console.log( this.transparentColorClasses, this.initialColorClasses );
+    toggleClasses( this.element, isTransparent ? this.transparentColorClasses : this.initialColorClasses );
     toggleLightClasses( this.element );
   }
 }
