@@ -153,7 +153,7 @@ export const getFirstBlock = ( element ) => {
 
   const firstBlock = element.children[0];
 
-  if ( hasClass( firstBlock, '.nb-sidecar' ) ) {
+  if ( hasClass( firstBlock, 'nb-sidecar' ) ) {
     const content = firstBlock.querySelector( '.nb-sidecar-area--content' )
 
     if ( content && content.children.length ) {
