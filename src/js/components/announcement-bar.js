@@ -76,13 +76,26 @@ export default class AnnouncementBar {
       }
     } = this;
 
+    const that = this;
     const timeline = gsap.timeline( { paused: true } );
     const height = wrapper.outerHeight();
+
     timeline.fromTo( element, { height: 0 }, { duration: transitionDuration, height: height, ease: transitionEasing }, 0 );
+
     timeline.to( { height: 0 }, {
       duration: transitionDuration,
       height: height,
-      onUpdate: this.onHeightUpdate.bind( this ),
+      onUpdate: function() {
+        const targets = this.targets();
+
+        if ( Array.isArray( targets ) && targets.length ) {
+          that.height = targets[0].height;
+
+          if ( that.parent ) {
+            that.parent.update();
+          }
+        }
+      },
       onUpdateParams: [ '{self}' ],
       ease: transitionEasing
     }, 0 );
@@ -97,14 +110,6 @@ export default class AnnouncementBar {
   onClose () {
     if ( typeof this.timeline !== 'undefined' ) {
       this.timeline.reverse();
-    }
-  }
-
-  onHeightUpdate ( tween ) {
-    this.height = tween.target.height;
-
-    if ( this.parent ) {
-      this.parent.update();
     }
   }
 }
