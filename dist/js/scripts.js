@@ -1559,6 +1559,7 @@ class AnnouncementBar {
         close
       }
     } = this;
+    const that = this;
     const timeline = gsap.timeline({
       paused: true
     });
@@ -1575,7 +1576,17 @@ class AnnouncementBar {
     }, {
       duration: transitionDuration,
       height: height,
-      onUpdate: this.onHeightUpdate.bind(this),
+      onUpdate: function () {
+        const targets = this.targets();
+
+        if (Array.isArray(targets) && targets.length) {
+          that.height = targets[0].height;
+
+          if (that.parent) {
+            that.parent.update();
+          }
+        }
+      },
       onUpdateParams: ['{self}'],
       ease: transitionEasing
     }, 0);
@@ -1589,14 +1600,6 @@ class AnnouncementBar {
   onClose() {
     if (typeof this.timeline !== 'undefined') {
       this.timeline.reverse();
-    }
-  }
-
-  onHeightUpdate(tween) {
-    this.height = tween.target.height;
-
-    if (this.parent) {
-      this.parent.update();
     }
   }
 
