@@ -89,12 +89,6 @@ if ( ! function_exists( 'anima_setup' ) ) {
 		add_theme_support( 'responsive-embeds' );
 
 		/**
-		 * Remove Typography settings for Gutenberg Editor.
-		 */
-		add_theme_support( 'disable-custom-font-sizes' );
-		add_theme_support( 'editor-font-sizes', [] );
-
-		/**
 		 * Enable support for the Style Manager Customizer section (via Customify).
 		 */
 		add_theme_support( 'customizer_style_manager' );
@@ -105,6 +99,13 @@ if ( ! function_exists( 'anima_setup' ) ) {
 		 * Remove Theme support for Core Block Patterns.
 		 */
 		remove_theme_support( 'core-block-patterns' );
+
+		/**
+		 * Use 'wp_template' posts instead of theme template files.
+		 *
+		 * This support is automatically added by wp_enable_block_templates() but we add it also to be more upfront.
+		 */
+		add_theme_support( 'block-templates' );
 	}
 }
 add_action( 'after_setup_theme', 'anima_setup', 10 );
@@ -247,6 +248,11 @@ function anima_enqueue_assets() {
 }
 add_action( 'wp_enqueue_scripts', 'anima_enqueue_assets', 20 );
 
+/**
+ * Provide fallback webfonts for when the Style Manager plugin is not active.
+ *
+ * @return void
+ */
 function anima_webfonts_fallback() {
 
 	if ( class_exists( 'PixCustomifyPlugin' ) || function_exists( '\Pixelgrade\StyleManager\plugin') ) {
