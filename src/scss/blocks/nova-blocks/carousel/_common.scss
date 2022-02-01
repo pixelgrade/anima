@@ -22,4 +22,16 @@
 	.slick-arrow:after {
 		background-color: var(--sm-current-bg-color);
 	}
+
+	// Pagination
+	.slick-dots {
+		li {
+			&.slick-active {
+				color: var(--sm-current-accent-color);
+			}
+		}
+		button {
+			@include apply-font(heading-5);
+		}
+	}
 }
