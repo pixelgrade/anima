@@ -1,6 +1,8 @@
-.nb-collection__layout--carousel {
+.nb-collection__layout--carousel[class] {
 
+	// Arrow Icon
 	.slick-arrow:before {
+		content: '';
 		mask: url($icon-arrow-svg-path) no-repeat 50% 50%;
 		mask-size: cover;
 		-webkit-mask: url($icon-arrow-svg-path) no-repeat 50% 50%;
@@ -16,21 +18,8 @@
 		transform: translate(-50%, -50%) rotate(180deg);
 	}
 
+	// Arrow Background
 	.slick-arrow:after {
-		content: "";
-
-		display: block;
-		width: 100%;
-		height: 100%;
-
-		margin-top: 0;
-		border: 0;
-		border-radius: 50%;
-
 		background-color: var(--sm-current-bg-color);
-		opacity: 0;
-
-		transition: opacity 0.15s ease-in;
-		transform: none;
 	}
 }
