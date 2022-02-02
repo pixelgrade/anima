@@ -5,10 +5,6 @@ $enable-image-block-styles:             true !default;
     /* Image Block */
     .wp-block-image {
 
-        img {
-            display: block;
-        }
-
         figcaption {
             @include caption;
         }
@@ -41,12 +37,6 @@ $enable-image-block-styles:             true !default;
             figcaption {
                 padding-left: var(--theme-wrapper-sides-spacing);
                 padding-right: var(--theme-wrapper-sides-spacing);
-            }
-        }
-
-        &.is-style-rounded {
-            img {
-                border-radius: 50%;
             }
         }
     }
