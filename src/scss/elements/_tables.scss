@@ -4,8 +4,6 @@ table {
   float: none;
   border-collapse: collapse;
 
-  margin-bottom: 2em;
-
   th {
     text-align: left;
   }
@@ -15,23 +13,26 @@ table {
     vertical-align: middle;
   }
 
-  tr,
-  thead,
-  tbody,
-  tfoot {
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+  :is(tr, thead, tbody):not(:last-child) {
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+  }
+
+  :is(thead, .specificity.x2) {
+    border-bottom-width: 2px;
+    border-bottom-color: var(--sm-current-fg1-color);
+
+    tr th {
+      font-weight: bold;
+    }
   }
 
   th,
   td {
-    padding: .5em;
+    padding: var(--theme-spacing-fluid-smaller);
+    padding: 0.5em;
     max-width:100%;
     white-space:nowrap;
     border: 0;
-  }
-
-  caption {
-    padding: 5em 0;
   }
 
   th,
