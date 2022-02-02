@@ -11,7 +11,7 @@
 
 .c-separator {
     --separator-line-thickness: 3px;
-    --separator-arrow-width: 5px;
+    --separator-arrow-width: calc(var(--separator-line-thickness) * 2);
 
     display: flex;
     justify-content: center;
@@ -48,11 +48,13 @@
 .c-separator__arrow--left {
     border-left-color: currentColor;
     border-right: 0;
+    margin-right: -2px;
 }
 
 .c-separator__arrow--right {
     border-right-color: currentColor;
     border-left: 0;
+    margin-left: -2px;
 }
 
 
@@ -89,9 +91,9 @@
             display: none;
         }
 
-        // The separator has no other purpose than spacing nearby elements, 
-        // placed before and after it. Those blocks should merge together 
-        // when the separator has the spacing set to zero.
+        // The BLANK separator has no other purpose than spacing nearby elements 
+        // whether they are placed before and after it. 
+        // Those blocks should merge together when the separator has the spacing set to zero.
         // 
         // Remove the top spacing of the element next to a Blank separator
         // and use the separator option for spacing
