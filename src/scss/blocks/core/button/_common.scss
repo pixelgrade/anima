@@ -2,31 +2,7 @@ $enable-button-block-styles:            true !default;
 
 @if $enable-button-block-styles == true {
 
-    /* Buttons Block */
     .wp-block-buttons[class][class] {
         gap: calc( var(--theme-content-spacing) / 2 );
-
-        // Width Settings
-        // @todo: find out when this is implemented in the core and remove it from here
-        .wp-block-button {
-            &.has-custom-width > * {
-                width: 100%;
-            }
-            &.wp-block-button__width-100 {
-                width: 100%;
-            }
-
-            &.wp-block-button__width-75 {
-                width: 75%;
-            }
-
-            &.wp-block-button__width-50 {
-                width: 50%;
-            }
-
-            &.wp-block-button__width-25 {
-                width: 25%;
-            }
-        }
     }
 }
