@@ -13,6 +13,8 @@
     --separator-line-thickness: 3px;
     --separator-arrow-width: calc(var(--separator-line-thickness) * 2);
 
+    color: red;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,6 +65,7 @@
 
 /* Separator Block */
 .wp-block-separator {
+    opacity: 1; // Overwrite the 0.4 default from core
 
     &.is-style-simple {
 
