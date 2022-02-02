@@ -135,17 +135,6 @@ function anima_widgets_init() {
 }
 add_action( 'widgets_init', 'anima_widgets_init' );
 
-function anima_deregister_gutenberg_styles() {
-	// Overwrite Core block styles with empty styles.
-	wp_deregister_style( 'wp-block-library' );
-	wp_register_style( 'wp-block-library',  '' );
-
-	// Overwrite Core theme styles with empty styles.
-	wp_deregister_style( 'wp-block-library-theme' );
-	wp_register_style( 'wp-block-library-theme', '' );
-}
-add_action( 'enqueue_block_assets', 'anima_deregister_gutenberg_styles', 10 );
-
 function anima_register_assets() {
 	$theme  = wp_get_theme( get_template() );
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
@@ -437,6 +426,16 @@ require_once trailingslashit( get_template_directory() ) . 'inc/template-tags.ph
 require_once trailingslashit( get_template_directory() ) . 'inc/template-functions.php';
 require_once trailingslashit( get_template_directory() ) . 'inc/extras.php';
 require_once trailingslashit( get_template_directory() ) . 'inc/required-plugins.php';
+
+/**
+ * Block editor related logic.
+ */
+require_once trailingslashit( get_template_directory() ) . 'inc/block-editor.php';
+
+/**
+ * Full site editing logic.
+ */
+require_once trailingslashit( get_template_directory() ) . 'inc/fse.php';
 
 /**
  * Admin Dashboard logic.
