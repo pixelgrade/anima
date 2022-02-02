@@ -1,37 +1,5 @@
-@use "sass:math";
-
-$enable-embed-block-styles:             true !default;
-
-@if $enable-embed-block-styles == true {
-    /* Embed Blocks */
-    .wp-block-embed {
-
-        &.wp-has-aspect-ratio {
-
-            .wp-block-embed__wrapper {
-                position: relative;
-
-                &:before {
-                    content: "";
-                    display: block;
-                }
-
-                iframe {
-                    @include cover;
-                }
-            }
-        }
-
-        &.wp-embed-aspect-4-3 {
-            .wp-block-embed__wrapper {
-                padding-top: percentage(3*0.25);
-            }
-        }
-
-        &.wp-embed-aspect-16-9 {
-            .wp-block-embed__wrapper {
-                padding-top: percentage(math.div(9, 16));
-            }
-        }
+.wp-block-embed {
+    figcaption {
+        @include caption;
     }
 }
