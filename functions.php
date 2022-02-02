@@ -134,17 +134,6 @@ function anima_widgets_init() {
 }
 add_action( 'widgets_init', 'anima_widgets_init' );
 
-function anima_deregister_gutenberg_styles() {
-	// Overwrite Core block styles with empty styles.
-	wp_deregister_style( 'wp-block-library' );
-	wp_register_style( 'wp-block-library',  '' );
-
-	// Overwrite Core theme styles with empty styles.
-	wp_deregister_style( 'wp-block-library-theme' );
-	wp_register_style( 'wp-block-library-theme', '' );
-}
-add_action( 'enqueue_block_assets', 'anima_deregister_gutenberg_styles', 10 );
-
 function anima_register_assets() {
 	$theme  = wp_get_theme( get_template() );
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
