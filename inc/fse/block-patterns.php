@@ -11,18 +11,16 @@
  * @return void
  */
 function anima_register_block_patterns() {
-	$block_pattern_categories = array(
-		'featured' => array( 'label' => __( 'Featured', '__theme_txtd' ) ),
-		'footer'   => array( 'label' => __( 'Footers', '__theme_txtd' ) ),
-		'header'   => array( 'label' => __( 'Headers', '__theme_txtd' ) ),
-		'query'    => array( 'label' => __( 'Query', '__theme_txtd' ) ),
-		'pages'    => array( 'label' => __( 'Pages', '__theme_txtd' ) ),
-	);
+	$block_pattern_categories = [
+		'featured' => [ 'label' => __( 'Featured', '__theme_txtd' ) ],
+		'footer'   => [ 'label' => __( 'Footers', '__theme_txtd' ) ],
+		'header'   => [ 'label' => __( 'Headers', '__theme_txtd' ) ],
+		'query'    => [ 'label' => __( 'Query', '__theme_txtd' ) ],
+		'pages'    => [ 'label' => __( 'Pages', '__theme_txtd' ) ],
+	];
 
 	/**
 	 * Filters the theme block pattern categories.
-	 *
-	 * @since Twenty Twenty-Two 1.0
 	 *
 	 * @param array[] $block_pattern_categories {
 	 *     An associative array of block pattern categories, keyed by category name.
@@ -42,79 +40,65 @@ function anima_register_block_patterns() {
 		}
 	}
 
-	$block_patterns = array(
-		'footer-dark',
-		'footer-navigation-copyright',
-		'general-subscribe',
-		'general-featured-posts',
-		'general-layered-images-with-duotone',
-		'general-wide-image-intro-buttons',
-		'general-large-list-names',
-		'general-video-header-details',
-		'general-list-events',
-		'general-two-images-text',
-		'general-image-with-caption',
-		'general-video-trailer',
-		'general-pricing-table',
-		'general-divider-light',
-		'general-divider-dark',
-		'header-default',
-		'header-large-dark',
-		'header-small-dark',
-		'header-image-background',
-		'header-image-background-overlay',
-		'header-with-tagline',
-		'header-text-only-green-background',
-		'header-text-only-salmon-background',
-		'header-title-and-button',
-		'header-text-only-with-tagline-black-background',
-		'header-logo-navigation-gray-background',
-		'header-logo-navigation-social-black-background',
-		'header-title-navigation-social',
-		'header-logo-navigation-offset-tagline',
-		'header-stacked',
-		'header-centered-logo',
-		'header-centered-logo-black-background',
-		'header-centered-title-navigation-social',
-		'header-title-and-button',
-		'hidden-404',
-		'page-about-media-left',
-		'page-about-simple-dark',
-		'page-about-media-right',
-		'page-about-solid-color',
-		'page-about-links',
-		'page-about-links-dark',
-		'page-about-large-image-and-buttons',
-		'page-layout-image-and-text',
-		'page-layout-image-text-and-video',
-		'page-layout-two-columns',
-		'page-sidebar-poster',
-		'page-sidebar-grid-posts',
-		'page-sidebar-blog-posts',
-		'page-sidebar-blog-posts-right',
-		'query-default',
-		'query-simple-blog',
-		'query-grid',
-		'query-text-grid',
-		'query-image-grid',
-		'query-large-titles',
-		'query-irregular-grid',
-	);
+	// Find all available block patterns files.
+	$block_patterns = _anima_get_block_patterns_files( get_theme_file_path( '/inc/fse/patterns' ) );
 
 	/**
 	 * Filters the theme block patterns.
 	 *
-	 * @param array $block_patterns List of block patterns by name.
+	 * @param array $block_patterns {
+	 *     List of block patterns keyed by their name/slug.
+	 *
+	 *     @type array[] $properties {
+	 *         An array of block pattern properties.
+	 *
+	 *         @type string $slug The block pattern name (as extracted from its PHP filename.)
+	 *         @type string $path The block pattern file absolute path.
+	 *     }
+	 * }
 	 */
 	$block_patterns = apply_filters( 'anima_block_patterns', $block_patterns );
 
 	foreach ( $block_patterns as $block_pattern ) {
-		$pattern_file = get_theme_file_path( '/inc/patterns/' . $block_pattern . '.php' );
+		if ( empty( $block_pattern['slug'] ) || empty( $block_pattern['path'] ) || ! file_exists( $block_pattern['path'] ) ) {
+			continue;
+		}
 
 		register_block_pattern(
-			'anima/' . $block_pattern,
-			require $pattern_file
+			'anima/' . $block_pattern['slug'],
+			require $block_pattern['path']
 		);
 	}
 }
 add_action( 'init', 'anima_register_block_patterns', 9 );
+
+/**
+ * Finds all block patterns in a certain directory.
+ *
+ * @access private
+ *
+ * @param string $base_directory The directory to search into.
+ *
+ * @return array A list of file details to all block pattern files.
+ */
+function _anima_get_block_patterns_files( string $base_directory ): array {
+	$file_list = [];
+	if ( file_exists( $base_directory ) ) {
+		$nested_files      = new \RecursiveIteratorIterator( new \RecursiveDirectoryIterator( $base_directory ) );
+		$nested_pattern_files = new \RegexIterator( $nested_files, '/^.+\.php$/i', \RecursiveRegexIterator::GET_MATCH );
+		foreach ( $nested_pattern_files as $path => $file ) {
+			$pattern_slug = substr(
+				$path,
+				// Starting position of slug.
+				strpos( $path, $base_directory . DIRECTORY_SEPARATOR ) + 1 + strlen( $base_directory ),
+				// Subtract ending '.php'.
+				-4
+			);
+			$file_list[ $pattern_slug ] = [
+				'slug' => $pattern_slug,
+				'path' => $path,
+			];
+		}
+	}
+	return $file_list;
+}

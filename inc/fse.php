@@ -10,6 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+require_once 'fse/block-patterns.php';
+
 /**
  * Get our custom template canvas file path, depending on the type of template being queried.
  *
