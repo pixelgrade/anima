@@ -42,7 +42,7 @@ var __webpack_exports__ = {};
     var $cartMenuItems = $('.novablocks-navigation .menu > .menu-item--cart');
     initializeCartMenuItems($cartMenuItems);
 
-    if (typeof wp.customize !== 'undefined' && typeof wp.customize.selectiveRefresh !== 'undefined') {
+    if (!!window.wp?.customize?.selectiveRefresh) {
       wp.customize.selectiveRefresh.bind('partial-content-rendered', function (placement) {
         const $container = $(placement.container).filter('.novablocks-navigation .menu');
         const $items = $container.children('.menu-item--cart');
