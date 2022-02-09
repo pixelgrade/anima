@@ -7,7 +7,7 @@ import { addClass, removeClass, getColorSetClasses } from '../../utils';
 
 class HeaderMobile extends HeaderBase {
 
-  constructor ( parent ) {
+  constructor( parent ) {
     super();
 
     this.parent = parent;
@@ -17,7 +17,7 @@ class HeaderMobile extends HeaderBase {
     this.onResize();
   }
 
-  initialize () {
+  initialize() {
     this.initializeMenuToggle();
     this.createMobileHeader();
 
@@ -33,11 +33,11 @@ class HeaderMobile extends HeaderBase {
     HeaderBase.prototype.initialize.call( this );
   }
 
-  render ( forceUpdate ) {
+  render( forceUpdate ) {
     HeaderBase.prototype.render.call( this, forceUpdate );
   }
 
-  initializeMenuToggle () {
+  initializeMenuToggle() {
     const menuToggleCheckbox = document.getElementById( 'nova-menu-toggle' );
 
     this.navigationIsOpen = menuToggleCheckbox.checked;
@@ -46,7 +46,7 @@ class HeaderMobile extends HeaderBase {
     } );
   }
 
-  createMobileHeader () {
+  createMobileHeader() {
     this.element = document.createElement( 'div' );
     this.element.setAttribute( 'class', 'novablocks-header--mobile novablocks-header-background novablocks-header-shadow' );
     this.copyElementFromParent( '.c-branding' );
@@ -55,7 +55,7 @@ class HeaderMobile extends HeaderBase {
     this.createButtonMenu();
   }
 
-  createButtonMenu () {
+  createButtonMenu() {
     let buttonCount = 0;
 
     this.buttonMenu = document.createElement( 'ul' );
@@ -90,35 +90,35 @@ class HeaderMobile extends HeaderBase {
     }
   }
 
-  updateStickyStyles () {
+  updateStickyStyles() {
     HeaderBase.prototype.updateStickyStyles.call( this );
     this.applyStickyStyles( this.menuToggle.element );
     this.colors.toggleColors( !this.shouldBeSticky );
     this.updateToggleClasses();
   }
 
-  onResize () {
+  onResize() {
     HeaderBase.prototype.onResize.call( this );
     this.update();
   }
 
-  update () {
-    this.element.style.top = `${this.stickyDistance}px`;
-    this.menuToggle.element.style.height = `${this.box.height}px`;
-    this.parentContainer.style.paddingTop = `${this.box.height}px`;
-    this.buttonMenu.style.height = `${this.box.height}px`;
+  update() {
+    this.element.style.top = `${ this.stickyDistance }px`;
+    this.menuToggle.element.style.height = `${ this.box.height }px`;
+    this.parentContainer.style.paddingTop = `${ this.box.height }px`;
+    this.buttonMenu.style.height = `${ this.box.height }px`;
   }
 
-  onToggleChange ( event, menuToggle ) {
+  onToggleChange( event, menuToggle ) {
     const { checked } = event.target;
     document.body.style.overflow = checked ? 'hidden' : '';
     this.navigationIsOpen = !!checked;
     this.updateToggleClasses();
   }
 
-  updateToggleClasses () {
+  updateToggleClasses() {
     if ( this.navigationIsOpen ) {
-      removeClass( this.menuToggle.element, `${this.menuToggleColors.transparentColorClasses} ${this.menuToggleColors.initialColorClasses}` );
+      removeClass( this.menuToggle.element, `${ this.menuToggleColors.transparentColorClasses } ${ this.menuToggleColors.initialColorClasses }` );
       addClass( this.menuToggle.element, this.headerClasses );
     } else {
       removeClass( this.menuToggle.element, this.headerClasses );
@@ -127,7 +127,7 @@ class HeaderMobile extends HeaderBase {
 
   }
 
-  copyElementFromParent ( selector ) {
+  copyElementFromParent( selector ) {
     const element = this.parent.element.querySelector( selector );
     const elementClone = element?.cloneNode( true );
 
