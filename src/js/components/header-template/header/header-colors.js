@@ -1,6 +1,6 @@
-import globalService from '../globalService';
+import globalService from '../../globalService';
 
-import { addClass, hasClass, getFirstChild, getColorSetClasses, toggleClasses, toggleLightClasses } from '../../utils';
+import { addClass, hasClass, getFirstChild, getColorSetClasses, toggleClasses, toggleLightClasses } from '../../../utils';
 
 class HeaderColors {
 

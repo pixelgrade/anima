@@ -1,24 +1,26 @@
-import { addClass, setAndResetElementStyles } from '../../utils';
+import { addClass, setAndResetElementStyles } from '../../../utils';
 
-import GlobalService from '../globalService';
-import mqService from '../mqService';
+import GlobalService from '../../globalService';
+import mqService from '../../mqService';
 import HeaderBase from './header-base';
 import HeaderMobile from './header-mobile';
 import HeaderRow from './header-row';
 
 class Header extends HeaderBase {
 
-  constructor ( element, options ) {
+  constructor( element, options ) {
     super( options );
 
-    if ( !element ) return;
+    if ( ! element ) {
+      return;
+    }
 
     this.onUpdate = options.onUpdate;
 
     this.element = element;
     this.rows = this.getHeaderRows();
 
-    this.shouldToggleColors = !!this.element.dataset.sticky;
+    this.shouldToggleColors = !! this.element.dataset.sticky;
 
     this.mobileHeader = new HeaderMobile( this );
     this.secondaryHeader = this.getSecondaryHeader();
@@ -35,14 +37,14 @@ class Header extends HeaderBase {
     this.onResize();
   }
 
-  initialize () {
+  initialize() {
     HeaderBase.prototype.initialize.call( this );
 
     this.timeline = this.getIntroTimeline();
     this.timeline.play();
   }
 
-  render ( forceUpdate ) {
+  render( forceUpdate ) {
     HeaderBase.prototype.render.call( this, forceUpdate );
 
     if ( typeof this.onUpdate === 'function' ) {
@@ -50,7 +52,7 @@ class Header extends HeaderBase {
     }
   }
 
-  getHeight () {
+  getHeight() {
 
     if ( !!mqService.below.lap ) {
       return this.mobileHeader.getHeight();
@@ -59,16 +61,16 @@ class Header extends HeaderBase {
     return HeaderBase.prototype.getHeight.call( this );
   }
 
-  onResize () {
+  onResize() {
     HeaderBase.prototype.onResize.call( this );
     setAndResetElementStyles( this.element, { transition: 'none' } );
   }
 
-  getSecondaryHeader () {
+  getSecondaryHeader() {
     return document.querySelector( '.novablocks-header--secondary' );
   }
 
-  getHeaderRows () {
+  getHeaderRows() {
     const rows = this.element.querySelectorAll( '.novablocks-header-row' );
 
     if ( rows ) {
@@ -80,23 +82,23 @@ class Header extends HeaderBase {
     return [];
   }
 
-  toggleRowsColors ( isTransparent ) {
+  toggleRowsColors( isTransparent ) {
     this.rows.forEach( row => {
       row.colors.toggleColors( isTransparent );
     } );
   }
 
-  updateStickyStyles () {
+  updateStickyStyles() {
     HeaderBase.prototype.updateStickyStyles.call( this );
 
     if ( this.shouldToggleColors ) {
       this.toggleRowsColors( !this.shouldBeSticky );
     }
 
-    this.element.style.marginTop = `${this.staticDistance}px`;
+//    this.element.style.marginTop = `${this.staticDistance}px`;
 
     if ( this.secondaryHeader ) {
-      this.secondaryHeader.style.top = `${this.staticDistance}px`;
+      this.secondaryHeader.style.top = `${ this.staticDistance }px`;
     }
   }
 
@@ -114,7 +116,7 @@ class Header extends HeaderBase {
       onUpdate: function() {
         const targets = this.targets();
         if ( Array.isArray( targets ) && targets.length ) {
-          that.box = Object.assign( {}, that.box, { height: targets[0].height } );
+          that.box = Object.assign( {}, that.box, { height: targets[ 0 ].height } );
           that.onResize();
         }
       },

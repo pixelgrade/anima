@@ -1,6 +1,7 @@
-import GlobalService from './globalService';
 import Cookies from 'js-cookie';
 import $ from 'jquery';
+
+import GlobalService from '../../globalService';
 
 export default class AnnouncementBar {
 

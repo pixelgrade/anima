@@ -1,8 +1,8 @@
-import AnnouncementBar from './announcement-bar';
+import AnnouncementBar from '../announcement-bar';
 
 export default class PromoBar {
 
-  constructor ( element, args ) {
+  constructor( element, args ) {
     const announcementBars = element.querySelectorAll( '.novablocks-announcement-bar' );
     const announcementElementsArray = Array.from( announcementBars );
 
@@ -20,7 +20,7 @@ export default class PromoBar {
     this.update();
   }
 
-  update () {
+  update() {
     let promoBarHeight = 0;
 
     this.bars.forEach( bar => {
@@ -28,7 +28,7 @@ export default class PromoBar {
     } );
 
     this.height = promoBarHeight;
-    this.element.style.top = `${this.offset}px`;
+    this.element.style.top = `${ this.offset }px`;
 
     if ( 'function' === typeof this.onUpdate ) {
       this.onUpdate( this );
