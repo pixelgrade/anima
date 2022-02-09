@@ -1,5 +1,5 @@
 @mixin nav-links {
-    --current-arrow-padding: calc(.4em + #{$theme-button-text-arrow-size});
+    --current-arrow-padding: calc(0.4em + 0.75em + #{$theme-button-text-arrow-size});
 
     display: flex;
     justify-content: center;
@@ -20,11 +20,12 @@
     > .next {
         position: relative;
         transition: var(--theme-transition);
-        transition-property: transform;
+        transition-property: all;
 
         &:after {
             content: '';
             @include button-text-arrow;
+            right: 0.75em !important;
         }
     }
 
@@ -33,7 +34,7 @@
 
         &:after {
             right: auto;
-            left: 0;
+            left: 0.75em;
             transform: translate(0, -50%);
         }
     }
