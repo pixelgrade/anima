@@ -911,731 +911,6 @@ class mqService {
 }
 
 /* harmony default export */ const components_mqService = (new mqService());
-;// CONCATENATED MODULE: ./src/js/components/header/header-base.js
-
-
-
-class HeaderBase {
-  constructor(options) {
-    this.staticDistance = 0;
-    this.stickyDistance = 0;
-    this.options = options || {};
-  }
-
-  initialize() {
-    addClass(this.element, 'novablocks-header--ready');
-    globalService.registerRender(this.render.bind(this));
-    globalService.registerOnDeouncedResize(this.onResize.bind(this));
-  }
-
-  onResize() {
-    this.box = this.element.getBoundingClientRect();
-
-    if (typeof this.options.onResize === 'function') {
-      this.options.onResize();
-    }
-  }
-
-  getHeight() {
-    return this?.box?.height;
-  }
-
-  render(forceUpdate) {
-    this.maybeUpdateStickyStyles(forceUpdate);
-  }
-
-  maybeUpdateStickyStyles(forceUpdate) {
-    const {
-      scrollY
-    } = globalService.getProps();
-    const shouldBeSticky = scrollY > this.staticDistance - this.stickyDistance;
-
-    if (this.shouldBeSticky === shouldBeSticky && !forceUpdate) {
-      return;
-    }
-
-    this.shouldBeSticky = shouldBeSticky;
-    this.updateStickyStyles();
-  }
-
-  updateStickyStyles() {
-    this.applyStickyStyles(this.element);
-  }
-
-  applyStickyStyles(element) {
-    if (this.shouldBeSticky) {
-      element.style.position = 'fixed';
-      element.style.top = `${this.stickyDistance}px`;
-    } else {
-      element.style.position = 'absolute';
-      element.style.top = `${this.staticDistance}px`;
-    }
-  }
-
-}
-
-/* harmony default export */ const header_base = (HeaderBase);
-;// CONCATENATED MODULE: ./src/js/components/header/header-colors.js
-
-
-
-class HeaderColors {
-  constructor(element, initialColorsSource, transparentColorsSource) {
-    this.element = element;
-    this.initialColorsSource = initialColorsSource ? initialColorsSource : element;
-    this.transparentColorsSource = transparentColorsSource ? transparentColorsSource : this.getFirstUsefulBlock();
-    this.initializeColors();
-  }
-
-  getFirstBlock() {
-    const content = document.querySelector('.site-main .hentry');
-
-    if (!content) {
-      return null;
-    }
-
-    const firstBlock = getFirstChild(content);
-
-    if (hasClass(firstBlock, 'nb-sidecar')) {
-      const wrapper = firstBlock.querySelector('.nb-sidecar-area--content');
-
-      if (!wrapper) {
-        return firstBlock;
-      }
-
-      return getFirstChild(wrapper);
-    }
-
-    return null;
-  }
-
-  getFirstUsefulBlock() {
-    const firstBlock = this.getFirstBlock();
-
-    if (!firstBlock) {
-      return null;
-    }
-
-    const attributes = firstBlock.dataset;
-
-    if (!hasClass(firstBlock, 'alignfull')) {
-      return null;
-    }
-
-    if (hasClass(firstBlock, 'supernova') && parseInt(attributes.imagePadding, 10) === 0 && attributes.cardLayout === 'stacked' && !firstBlock.querySelector('.nb-collection__header')) {
-      return firstBlock.querySelector('.supernova-item');
-    }
-
-    return firstBlock;
-  }
-
-  initializeColors() {
-    this.initialColorClasses = getColorSetClasses(this.initialColorsSource).join(' ');
-    this.transparentColorClasses = this.initialColorClasses;
-
-    if (this.transparentColorsSource) {
-      this.transparentColorClasses = getColorSetClasses(this.transparentColorsSource).join(' ');
-    } else {
-      this.transparentColorClasses = 'sm-palette-1 sm-variation-1';
-    }
-
-    this.transparentColorClasses = `${this.transparentColorClasses}`;
-  }
-
-  toggleColors(isTransparent) {
-    toggleClasses(this.element, isTransparent ? this.transparentColorClasses : this.initialColorClasses);
-    toggleLightClasses(this.element);
-  }
-
-}
-
-/* harmony default export */ const header_colors = (HeaderColors);
-;// CONCATENATED MODULE: ./src/js/components/header/menu-toggle.js
-class MenuToggle {
-  constructor(input, options) {
-    const id = input.getAttribute('id');
-    const toggleLabels = document.querySelectorAll(`[for="${id}"]`);
-    const defaults = {
-      onChange: this.onChange
-    };
-    this.options = Object.assign({}, defaults, options);
-    this.input = input;
-    this.element = toggleLabels.length ? toggleLabels[0] : null;
-    this.bindEvents();
-  }
-
-  bindEvents() {
-    this.input.addEventListener('change', event => {
-      this.options.onChange.call(this, event, this);
-    });
-  }
-
-  onChange(isChecked, menuToggle) {}
-
-  getHeight() {
-    return this?.element?.offsetHeight || 0;
-  }
-
-}
-
-/* harmony default export */ const menu_toggle = (MenuToggle);
-;// CONCATENATED MODULE: ./src/js/components/header/header-mobile.js
-
-
-
-
-
-
-class HeaderMobile extends header_base {
-  constructor(parent) {
-    super();
-    this.parent = parent;
-    this.parentContainer = parent.element.querySelector('.novablocks-header__inner-container');
-    this.initialize();
-    this.onResize();
-  }
-
-  initialize() {
-    this.initializeMenuToggle();
-    this.createMobileHeader();
-    const logoRow = this.parent.rows.find(row => {
-      return row.element.querySelector('.site-logo');
-    });
-    this.headerClasses = getColorSetClasses(this.parent.element).join(' ');
-    this.colors = new header_colors(this.element, logoRow?.element);
-    this.menuToggleColors = new header_colors(this.menuToggle.element, logoRow?.element);
-    header_base.prototype.initialize.call(this);
-  }
-
-  render(forceUpdate) {
-    header_base.prototype.render.call(this, forceUpdate);
-  }
-
-  initializeMenuToggle() {
-    const menuToggleCheckbox = document.getElementById('nova-menu-toggle');
-    this.navigationIsOpen = menuToggleCheckbox.checked;
-    this.menuToggle = new menu_toggle(menuToggleCheckbox, {
-      onChange: this.onToggleChange.bind(this)
-    });
-  }
-
-  createMobileHeader() {
-    this.element = document.createElement('div');
-    this.element.setAttribute('class', 'novablocks-header--mobile novablocks-header-background novablocks-header-shadow');
-    this.copyElementFromParent('.c-branding');
-    this.copyElementFromParent('.menu-item--cart');
-    this.menuToggle.element.insertAdjacentElement('afterend', this.element);
-    this.createButtonMenu();
-  }
-
-  createButtonMenu() {
-    let buttonCount = 0;
-    this.buttonMenu = document.createElement('ul');
-    addClass(this.buttonMenu, 'menu menu--buttons');
-    const buttonSelectors = ['.menu-item--search', '.menu-item--dark-mode'];
-    buttonSelectors.forEach(selector => {
-      const button = this.parent.element.querySelector(selector);
-
-      if (button) {
-        const buttonClone = button.cloneNode(true);
-        this.buttonMenu.appendChild(buttonClone);
-        buttonCount = buttonCount + 1;
-      }
-    });
-
-    if (buttonCount) {
-      // create a fake navigation block to inherit styles
-      // @todo hopefully find a better solution for styling
-      const navigationBlock = document.createElement('div');
-      const wrapper = document.createElement('div');
-      addClass(navigationBlock, 'wp-block-novablocks-navigation');
-      addClass(wrapper, 'novablocks-header__buttons-menu wp-block-group__inner-container');
-      wrapper.appendChild(navigationBlock);
-      navigationBlock.appendChild(this.buttonMenu);
-      this.parent.element.appendChild(wrapper);
-    }
-  }
-
-  updateStickyStyles() {
-    header_base.prototype.updateStickyStyles.call(this);
-    this.applyStickyStyles(this.menuToggle.element);
-    this.colors.toggleColors(!this.shouldBeSticky);
-    this.updateToggleClasses();
-  }
-
-  onResize() {
-    header_base.prototype.onResize.call(this);
-    this.update();
-  }
-
-  update() {
-    this.element.style.top = `${this.stickyDistance}px`;
-    this.menuToggle.element.style.height = `${this.box.height}px`;
-    this.parentContainer.style.paddingTop = `${this.box.height}px`;
-    this.buttonMenu.style.height = `${this.box.height}px`;
-  }
-
-  onToggleChange(event, menuToggle) {
-    const {
-      checked
-    } = event.target;
-    document.body.style.overflow = checked ? 'hidden' : '';
-    this.navigationIsOpen = !!checked;
-    this.updateToggleClasses();
-  }
-
-  updateToggleClasses() {
-    if (this.navigationIsOpen) {
-      removeClass(this.menuToggle.element, `${this.menuToggleColors.transparentColorClasses} ${this.menuToggleColors.initialColorClasses}`);
-      addClass(this.menuToggle.element, this.headerClasses);
-    } else {
-      removeClass(this.menuToggle.element, this.headerClasses);
-      this.menuToggleColors.toggleColors(!this.shouldBeSticky);
-    }
-  }
-
-  copyElementFromParent(selector) {
-    const element = this.parent.element.querySelector(selector);
-    const elementClone = element?.cloneNode(true);
-
-    if (elementClone) {
-      this.element.appendChild(elementClone);
-    }
-  }
-
-}
-
-/* harmony default export */ const header_mobile = (HeaderMobile);
-;// CONCATENATED MODULE: ./src/js/components/header/header-row.js
-
-
-
-class HeaderRow extends header_base {
-  constructor(element) {
-    super();
-    this.element = element;
-    this.colors = new header_colors(this.element);
-  }
-
-}
-
-/* harmony default export */ const header_row = (HeaderRow);
-;// CONCATENATED MODULE: ./src/js/components/header/index.js
-
-
-
-
-
-
-
-class Header extends header_base {
-  constructor(element, options) {
-    super(options);
-    if (!element) return;
-    this.onUpdate = options.onUpdate;
-    this.element = element;
-    this.rows = this.getHeaderRows();
-    this.shouldToggleColors = !!this.element.dataset.sticky;
-    this.mobileHeader = new header_mobile(this);
-    this.secondaryHeader = this.getSecondaryHeader();
-    this.initialize();
-    this.toggleRowsColors(true);
-    addClass(this.element, 'novablocks-header--transparent');
-
-    if (this.secondaryHeader) {
-      addClass(this.secondaryHeader, 'novablocks-header--ready');
-    }
-
-    this.onResize();
-  }
-
-  initialize() {
-    header_base.prototype.initialize.call(this);
-    this.timeline = this.getIntroTimeline();
-    this.timeline.play();
-  }
-
-  render(forceUpdate) {
-    header_base.prototype.render.call(this, forceUpdate);
-
-    if (typeof this.onUpdate === 'function') {
-      this.onUpdate();
-    }
-  }
-
-  getHeight() {
-    if (!!components_mqService.below.lap) {
-      return this.mobileHeader.getHeight();
-    }
-
-    return header_base.prototype.getHeight.call(this);
-  }
-
-  onResize() {
-    header_base.prototype.onResize.call(this);
-    setAndResetElementStyles(this.element, {
-      transition: 'none'
-    });
-  }
-
-  getSecondaryHeader() {
-    return document.querySelector('.novablocks-header--secondary');
-  }
-
-  getHeaderRows() {
-    const rows = this.element.querySelectorAll('.novablocks-header-row');
-
-    if (rows) {
-      return Array.from(rows).map(element => {
-        return new header_row(element);
-      });
-    }
-
-    return [];
-  }
-
-  toggleRowsColors(isTransparent) {
-    this.rows.forEach(row => {
-      row.colors.toggleColors(isTransparent);
-    });
-  }
-
-  updateStickyStyles() {
-    header_base.prototype.updateStickyStyles.call(this);
-
-    if (this.shouldToggleColors) {
-      this.toggleRowsColors(!this.shouldBeSticky);
-    }
-
-    this.element.style.marginTop = `${this.staticDistance}px`;
-
-    if (this.secondaryHeader) {
-      this.secondaryHeader.style.top = `${this.staticDistance}px`;
-    }
-  }
-
-  getIntroTimeline() {
-    const that = this;
-    const timeline = gsap.timeline({
-      paused: true
-    });
-    const height = this.element.offsetHeight;
-    const transitionEasing = 'power4.inOut';
-    const transitionDuration = 0.5;
-    timeline.to(this.element, {
-      duration: transitionDuration,
-      opacity: 1,
-      ease: transitionEasing
-    }, 0);
-    timeline.to({
-      height: 0
-    }, {
-      duration: transitionDuration,
-      height: height,
-      onUpdate: function () {
-        const targets = this.targets();
-
-        if (Array.isArray(targets) && targets.length) {
-          that.box = Object.assign({}, that.box, {
-            height: targets[0].height
-          });
-          that.onResize();
-        }
-      },
-      onUpdateParams: ['{self}'],
-      ease: transitionEasing
-    }, 0);
-    return timeline;
-  }
-
-}
-
-/* harmony default export */ const components_header = (Header);
-;// CONCATENATED MODULE: ./node_modules/js-cookie/dist/js.cookie.mjs
-/*! js-cookie v3.0.1 | MIT */
-/* eslint-disable no-var */
-function js_cookie_assign (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
-    for (var key in source) {
-      target[key] = source[key];
-    }
-  }
-  return target
-}
-/* eslint-enable no-var */
-
-/* eslint-disable no-var */
-var defaultConverter = {
-  read: function (value) {
-    if (value[0] === '"') {
-      value = value.slice(1, -1);
-    }
-    return value.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent)
-  },
-  write: function (value) {
-    return encodeURIComponent(value).replace(
-      /%(2[346BF]|3[AC-F]|40|5[BDE]|60|7[BCD])/g,
-      decodeURIComponent
-    )
-  }
-};
-/* eslint-enable no-var */
-
-/* eslint-disable no-var */
-
-function init (converter, defaultAttributes) {
-  function set (key, value, attributes) {
-    if (typeof document === 'undefined') {
-      return
-    }
-
-    attributes = js_cookie_assign({}, defaultAttributes, attributes);
-
-    if (typeof attributes.expires === 'number') {
-      attributes.expires = new Date(Date.now() + attributes.expires * 864e5);
-    }
-    if (attributes.expires) {
-      attributes.expires = attributes.expires.toUTCString();
-    }
-
-    key = encodeURIComponent(key)
-      .replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent)
-      .replace(/[()]/g, escape);
-
-    var stringifiedAttributes = '';
-    for (var attributeName in attributes) {
-      if (!attributes[attributeName]) {
-        continue
-      }
-
-      stringifiedAttributes += '; ' + attributeName;
-
-      if (attributes[attributeName] === true) {
-        continue
-      }
-
-      // Considers RFC 6265 section 5.2:
-      // ...
-      // 3.  If the remaining unparsed-attributes contains a %x3B (";")
-      //     character:
-      // Consume the characters of the unparsed-attributes up to,
-      // not including, the first %x3B (";") character.
-      // ...
-      stringifiedAttributes += '=' + attributes[attributeName].split(';')[0];
-    }
-
-    return (document.cookie =
-      key + '=' + converter.write(value, key) + stringifiedAttributes)
-  }
-
-  function get (key) {
-    if (typeof document === 'undefined' || (arguments.length && !key)) {
-      return
-    }
-
-    // To prevent the for loop in the first place assign an empty array
-    // in case there are no cookies at all.
-    var cookies = document.cookie ? document.cookie.split('; ') : [];
-    var jar = {};
-    for (var i = 0; i < cookies.length; i++) {
-      var parts = cookies[i].split('=');
-      var value = parts.slice(1).join('=');
-
-      try {
-        var foundKey = decodeURIComponent(parts[0]);
-        jar[foundKey] = converter.read(value, foundKey);
-
-        if (key === foundKey) {
-          break
-        }
-      } catch (e) {}
-    }
-
-    return key ? jar[key] : jar
-  }
-
-  return Object.create(
-    {
-      set: set,
-      get: get,
-      remove: function (key, attributes) {
-        set(
-          key,
-          '',
-          js_cookie_assign({}, attributes, {
-            expires: -1
-          })
-        );
-      },
-      withAttributes: function (attributes) {
-        return init(this.converter, js_cookie_assign({}, this.attributes, attributes))
-      },
-      withConverter: function (converter) {
-        return init(js_cookie_assign({}, this.converter, converter), this.attributes)
-      }
-    },
-    {
-      attributes: { value: Object.freeze(defaultAttributes) },
-      converter: { value: Object.freeze(converter) }
-    }
-  )
-}
-
-var api = init(defaultConverter, { path: '/' });
-/* eslint-enable no-var */
-
-/* harmony default export */ const js_cookie = (api);
-
-;// CONCATENATED MODULE: ./src/js/components/announcement-bar.js
-
-
-
-class AnnouncementBar {
-  constructor(element, args) {
-    this.element = element;
-    this.parent = args.parent || null;
-    this.transitionDuration = args.transitionDuration || 0.5;
-    this.transitionEasing = args.transitionEasing || 'power4.out';
-    this.pieces = this.getPieces();
-    this.id = external_jQuery_default()(element).data('id');
-    this.cookieName = 'novablocks-announcement-' + this.id + '-disabled';
-    this.height = 0;
-    const disabled = js_cookie.get(this.cookieName);
-    const loggedIn = external_jQuery_default()('body').hasClass('logged-in');
-
-    if (disabled && !loggedIn) {
-      external_jQuery_default()(element).remove();
-      return;
-    }
-
-    this.onResize();
-    globalService.registerOnDeouncedResize(this.onResize.bind(this));
-    this.timeline.play();
-    this.bindEvents();
-  }
-
-  onResize() {
-    let progress = 0;
-    let wasActive = false;
-    let wasReversed = false;
-
-    if (typeof this.timeline !== 'undefined') {
-      progress = this.timeline.progress();
-      wasActive = this.timeline.isActive();
-      wasReversed = this.timeline.reversed();
-      this.timeline.clear();
-      this.timeline.kill();
-      this.pieces.wrapper.css('height', '');
-    }
-
-    this.timeline = this.getTimeline();
-    this.timeline.progress(progress);
-    this.timeline.reversed(wasReversed);
-
-    if (wasActive) {
-      this.timeline.resume();
-    }
-  }
-
-  getPieces() {
-    const $element = external_jQuery_default()(this.element);
-    return {
-      element: $element,
-      wrapper: $element.find('.novablocks-announcement-bar__wrapper'),
-      content: $element.find('.novablocks-announcement-bar__content'),
-      close: $element.find('.novablocks-announcement-bar__close')
-    };
-  }
-
-  getTimeline() {
-    const {
-      transitionDuration,
-      transitionEasing,
-      pieces: {
-        element,
-        wrapper,
-        content,
-        close
-      }
-    } = this;
-    const that = this;
-    const timeline = gsap.timeline({
-      paused: true
-    });
-    const height = wrapper.outerHeight();
-    timeline.fromTo(element, {
-      height: 0
-    }, {
-      duration: transitionDuration,
-      height: height,
-      ease: transitionEasing
-    }, 0);
-    timeline.to({
-      height: 0
-    }, {
-      duration: transitionDuration,
-      height: height,
-      onUpdate: function () {
-        const targets = this.targets();
-
-        if (Array.isArray(targets) && targets.length) {
-          that.height = targets[0].height;
-
-          if (that.parent) {
-            that.parent.update();
-          }
-        }
-      },
-      onUpdateParams: ['{self}'],
-      ease: transitionEasing
-    }, 0);
-    return timeline;
-  }
-
-  bindEvents() {
-    this.pieces.close.on('click', this.onClose.bind(this));
-  }
-
-  onClose() {
-    if (typeof this.timeline !== 'undefined') {
-      this.timeline.reverse();
-    }
-  }
-
-}
-;// CONCATENATED MODULE: ./src/js/components/promo-bar.js
-
-class PromoBar {
-  constructor(element, args) {
-    const announcementBars = element.querySelectorAll('.novablocks-announcement-bar');
-    const announcementElementsArray = Array.from(announcementBars);
-    this.element = element;
-    this.bars = announcementElementsArray.map(element => new AnnouncementBar(element, {
-      parent: this,
-      transitionDuration: 0.5,
-      transitionEasing: 'power4.inOut'
-    }));
-    this.height = 0;
-    this.onUpdate = args.onUpdate;
-    this.offset = args.offset || 0;
-    this.update();
-  }
-
-  update() {
-    let promoBarHeight = 0;
-    this.bars.forEach(bar => {
-      promoBarHeight += bar.height;
-    });
-    this.height = promoBarHeight;
-    this.element.style.top = `${this.offset}px`;
-
-    if ('function' === typeof this.onUpdate) {
-      this.onUpdate(this);
-    }
-  }
-
-}
 ;// CONCATENATED MODULE: ./src/js/components/navbar.js
 
 
@@ -1815,7 +1090,315 @@ class SearchOverlay extends base_component {
 }
 
 /* harmony default export */ const search_overlay = (SearchOverlay);
-;// CONCATENATED MODULE: ./src/js/components/app.js
+;// CONCATENATED MODULE: ./src/js/components/header-template/header/header-base.js
+
+
+
+class HeaderBase {
+  constructor(options) {
+    this.staticDistance = 0;
+    this.stickyDistance = 0;
+    this.options = options || {};
+  }
+
+  initialize() {
+    addClass(this.element, 'novablocks-header--ready');
+    globalService.registerRender(this.render.bind(this));
+    globalService.registerOnDeouncedResize(this.onResize.bind(this));
+  }
+
+  onResize() {
+    this.box = this.element.getBoundingClientRect();
+
+    if (typeof this.options.onResize === 'function') {
+      this.options.onResize();
+    }
+  }
+
+  getHeight() {
+    return this?.box?.height;
+  }
+
+  render(forceUpdate) {
+    this.maybeUpdateStickyStyles(forceUpdate);
+  }
+
+  maybeUpdateStickyStyles(forceUpdate) {
+    const {
+      scrollY
+    } = globalService.getProps();
+    const shouldBeSticky = scrollY > this.staticDistance - this.stickyDistance;
+
+    if (this.shouldBeSticky === shouldBeSticky && !forceUpdate) {
+      return;
+    }
+
+    this.shouldBeSticky = shouldBeSticky;
+    this.updateStickyStyles();
+  }
+
+  updateStickyStyles() {
+    this.applyStickyStyles(this.element);
+  }
+
+  applyStickyStyles(element) {
+    if (this.shouldBeSticky) {
+      element.style.position = 'fixed';
+      element.style.top = `${this.stickyDistance}px`;
+    } else {
+      element.style.position = '';
+      element.style.top = '';
+    }
+  }
+
+}
+
+/* harmony default export */ const header_base = (HeaderBase);
+;// CONCATENATED MODULE: ./src/js/components/header-template/header/header-colors.js
+
+
+
+class HeaderColors {
+  constructor(element, initialColorsSource, transparentColorsSource) {
+    this.element = element;
+    this.initialColorsSource = initialColorsSource ? initialColorsSource : element;
+    this.transparentColorsSource = transparentColorsSource ? transparentColorsSource : this.getFirstUsefulBlock();
+    this.initializeColors();
+  }
+
+  getFirstBlock() {
+    const content = document.querySelector('.site-main .hentry');
+
+    if (!content) {
+      return null;
+    }
+
+    const firstBlock = getFirstChild(content);
+
+    if (hasClass(firstBlock, 'nb-sidecar')) {
+      const wrapper = firstBlock.querySelector('.nb-sidecar-area--content');
+
+      if (!wrapper) {
+        return firstBlock;
+      }
+
+      return getFirstChild(wrapper);
+    }
+
+    return null;
+  }
+
+  getFirstUsefulBlock() {
+    const firstBlock = this.getFirstBlock();
+
+    if (!firstBlock) {
+      return null;
+    }
+
+    const attributes = firstBlock.dataset;
+
+    if (!hasClass(firstBlock, 'alignfull')) {
+      return null;
+    }
+
+    if (hasClass(firstBlock, 'supernova') && parseInt(attributes.imagePadding, 10) === 0 && attributes.cardLayout === 'stacked' && !firstBlock.querySelector('.nb-collection__header')) {
+      return firstBlock.querySelector('.supernova-item');
+    }
+
+    return firstBlock;
+  }
+
+  initializeColors() {
+    this.initialColorClasses = getColorSetClasses(this.initialColorsSource).join(' ');
+    this.transparentColorClasses = this.initialColorClasses;
+
+    if (this.transparentColorsSource) {
+      this.transparentColorClasses = getColorSetClasses(this.transparentColorsSource).join(' ');
+    } else {
+      this.transparentColorClasses = 'sm-palette-1 sm-variation-1';
+    }
+
+    this.transparentColorClasses = `${this.transparentColorClasses}`;
+  }
+
+  toggleColors(isTransparent) {
+    toggleClasses(this.element, isTransparent ? this.transparentColorClasses : this.initialColorClasses);
+    toggleLightClasses(this.element);
+  }
+
+}
+
+/* harmony default export */ const header_colors = (HeaderColors);
+;// CONCATENATED MODULE: ./src/js/components/header-template/header/menu-toggle.js
+class MenuToggle {
+  constructor(input, options) {
+    const id = input.getAttribute('id');
+    const toggleLabels = document.querySelectorAll(`[for="${id}"]`);
+    const defaults = {
+      onChange: this.onChange
+    };
+    this.options = Object.assign({}, defaults, options);
+    this.input = input;
+    this.element = toggleLabels.length ? toggleLabels[0] : null;
+    this.bindEvents();
+  }
+
+  bindEvents() {
+    this.input.addEventListener('change', event => {
+      this.options.onChange.call(this, event, this);
+    });
+  }
+
+  onChange(isChecked, menuToggle) {}
+
+  getHeight() {
+    return this?.element?.offsetHeight || 0;
+  }
+
+}
+
+/* harmony default export */ const menu_toggle = (MenuToggle);
+;// CONCATENATED MODULE: ./src/js/components/header-template/header/header-mobile.js
+
+
+
+
+
+class HeaderMobile extends header_base {
+  constructor(parent) {
+    super();
+    this.parent = parent;
+    this.parentContainer = parent.element.querySelector('.novablocks-header__inner-container');
+    this.initialize();
+    this.onResize();
+  }
+
+  initialize() {
+    this.initializeMenuToggle();
+    this.createMobileHeader();
+    const logoRow = this.parent.rows.find(row => {
+      return row.element.querySelector('.site-logo');
+    });
+    this.headerClasses = getColorSetClasses(this.parent.element).join(' ');
+    this.colors = new header_colors(this.element, logoRow?.element);
+    this.menuToggleColors = new header_colors(this.menuToggle.element, logoRow?.element);
+    header_base.prototype.initialize.call(this);
+  }
+
+  render(forceUpdate) {
+    header_base.prototype.render.call(this, forceUpdate);
+  }
+
+  initializeMenuToggle() {
+    const menuToggleCheckbox = document.getElementById('nova-menu-toggle');
+    this.navigationIsOpen = menuToggleCheckbox.checked;
+    this.menuToggle = new menu_toggle(menuToggleCheckbox, {
+      onChange: this.onToggleChange.bind(this)
+    });
+  }
+
+  createMobileHeader() {
+    this.element = document.createElement('div');
+    this.element.setAttribute('class', 'novablocks-header--mobile novablocks-header-background novablocks-header-shadow');
+    this.copyElementFromParent('.c-branding');
+    this.copyElementFromParent('.menu-item--cart');
+    this.menuToggle.element.insertAdjacentElement('afterend', this.element);
+    this.createButtonMenu();
+  }
+
+  createButtonMenu() {
+    let buttonCount = 0;
+    this.buttonMenu = document.createElement('ul');
+    addClass(this.buttonMenu, 'menu menu--buttons');
+    const buttonSelectors = ['.menu-item--search', '.menu-item--dark-mode'];
+    buttonSelectors.forEach(selector => {
+      const button = this.parent.element.querySelector(selector);
+
+      if (button) {
+        const buttonClone = button.cloneNode(true);
+        this.buttonMenu.appendChild(buttonClone);
+        buttonCount = buttonCount + 1;
+      }
+    });
+
+    if (buttonCount) {
+      // create a fake navigation block to inherit styles
+      // @todo hopefully find a better solution for styling
+      const navigationBlock = document.createElement('div');
+      const wrapper = document.createElement('div');
+      addClass(navigationBlock, 'wp-block-novablocks-navigation');
+      addClass(wrapper, 'novablocks-header__buttons-menu wp-block-group__inner-container');
+      wrapper.appendChild(navigationBlock);
+      navigationBlock.appendChild(this.buttonMenu);
+      this.parent.element.appendChild(wrapper);
+    }
+  }
+
+  updateStickyStyles() {
+    header_base.prototype.updateStickyStyles.call(this);
+    this.applyStickyStyles(this.menuToggle.element);
+    this.colors.toggleColors(!this.shouldBeSticky);
+    this.updateToggleClasses();
+  }
+
+  onResize() {
+    header_base.prototype.onResize.call(this);
+    this.update();
+  }
+
+  update() {
+    this.element.style.top = `${this.stickyDistance}px`;
+    this.menuToggle.element.style.height = `${this.box.height}px`;
+    this.parentContainer.style.paddingTop = `${this.box.height}px`;
+    this.buttonMenu.style.height = `${this.box.height}px`;
+  }
+
+  onToggleChange(event, menuToggle) {
+    const {
+      checked
+    } = event.target;
+    document.body.style.overflow = checked ? 'hidden' : '';
+    this.navigationIsOpen = !!checked;
+    this.updateToggleClasses();
+  }
+
+  updateToggleClasses() {
+    if (this.navigationIsOpen) {
+      removeClass(this.menuToggle.element, `${this.menuToggleColors.transparentColorClasses} ${this.menuToggleColors.initialColorClasses}`);
+      addClass(this.menuToggle.element, this.headerClasses);
+    } else {
+      removeClass(this.menuToggle.element, this.headerClasses);
+      this.menuToggleColors.toggleColors(!this.shouldBeSticky);
+    }
+  }
+
+  copyElementFromParent(selector) {
+    const element = this.parent.element.querySelector(selector);
+    const elementClone = element?.cloneNode(true);
+
+    if (elementClone) {
+      this.element.appendChild(elementClone);
+    }
+  }
+
+}
+
+/* harmony default export */ const header_mobile = (HeaderMobile);
+;// CONCATENATED MODULE: ./src/js/components/header-template/header/header-row.js
+
+
+
+class HeaderRow extends header_base {
+  constructor(element) {
+    super();
+    this.element = element;
+    this.colors = new header_colors(this.element);
+  }
+
+}
+
+/* harmony default export */ const header_row = (HeaderRow);
+;// CONCATENATED MODULE: ./src/js/components/header-template/header/index.js
 
 
 
@@ -1823,28 +1406,449 @@ class SearchOverlay extends base_component {
 
 
 
+class Header extends header_base {
+  constructor(element, options) {
+    super(options);
+
+    if (!element) {
+      return;
+    }
+
+    this.onUpdate = options.onUpdate;
+    this.element = element;
+    this.rows = this.getHeaderRows();
+    this.shouldToggleColors = !!this.element.dataset.sticky;
+    this.mobileHeader = new header_mobile(this);
+    this.secondaryHeader = this.getSecondaryHeader();
+    this.initialize();
+    this.toggleRowsColors(true);
+    addClass(this.element, 'novablocks-header--transparent');
+
+    if (this.secondaryHeader) {
+      addClass(this.secondaryHeader, 'novablocks-header--ready');
+    }
+
+    this.onResize();
+  }
+
+  initialize() {
+    header_base.prototype.initialize.call(this);
+    this.timeline = this.getIntroTimeline();
+    this.timeline.play();
+  }
+
+  render(forceUpdate) {
+    header_base.prototype.render.call(this, forceUpdate);
+
+    if (typeof this.onUpdate === 'function') {
+      this.onUpdate();
+    }
+  }
+
+  getHeight() {
+    if (!!components_mqService.below.lap) {
+      return this.mobileHeader.getHeight();
+    }
+
+    return header_base.prototype.getHeight.call(this);
+  }
+
+  onResize() {
+    header_base.prototype.onResize.call(this);
+    setAndResetElementStyles(this.element, {
+      transition: 'none'
+    });
+  }
+
+  getSecondaryHeader() {
+    return document.querySelector('.novablocks-header--secondary');
+  }
+
+  getHeaderRows() {
+    const rows = this.element.querySelectorAll('.novablocks-header-row');
+
+    if (rows) {
+      return Array.from(rows).map(element => {
+        return new header_row(element);
+      });
+    }
+
+    return [];
+  }
+
+  toggleRowsColors(isTransparent) {
+    this.rows.forEach(row => {
+      row.colors.toggleColors(isTransparent);
+    });
+  }
+
+  updateStickyStyles() {
+    header_base.prototype.updateStickyStyles.call(this);
+
+    if (this.shouldToggleColors) {
+      this.toggleRowsColors(!this.shouldBeSticky);
+    } //    this.element.style.marginTop = `${this.staticDistance}px`;
 
 
-class App {
+    if (this.secondaryHeader) {
+      this.secondaryHeader.style.top = `${this.staticDistance}px`;
+    }
+  }
+
+  getIntroTimeline() {
+    const that = this;
+    const timeline = gsap.timeline({
+      paused: true
+    });
+    const height = this.element.offsetHeight;
+    const transitionEasing = 'power4.inOut';
+    const transitionDuration = 0.5;
+    timeline.to(this.element, {
+      duration: transitionDuration,
+      opacity: 1,
+      ease: transitionEasing
+    }, 0);
+    timeline.to({
+      height: 0
+    }, {
+      duration: transitionDuration,
+      height: height,
+      onUpdate: function () {
+        const targets = this.targets();
+
+        if (Array.isArray(targets) && targets.length) {
+          that.box = Object.assign({}, that.box, {
+            height: targets[0].height
+          });
+          that.onResize();
+        }
+      },
+      onUpdateParams: ['{self}'],
+      ease: transitionEasing
+    }, 0);
+    return timeline;
+  }
+
+}
+
+/* harmony default export */ const header_template_header = (Header);
+;// CONCATENATED MODULE: ./node_modules/js-cookie/dist/js.cookie.mjs
+/*! js-cookie v3.0.1 | MIT */
+/* eslint-disable no-var */
+function js_cookie_assign (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+    for (var key in source) {
+      target[key] = source[key];
+    }
+  }
+  return target
+}
+/* eslint-enable no-var */
+
+/* eslint-disable no-var */
+var defaultConverter = {
+  read: function (value) {
+    if (value[0] === '"') {
+      value = value.slice(1, -1);
+    }
+    return value.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent)
+  },
+  write: function (value) {
+    return encodeURIComponent(value).replace(
+      /%(2[346BF]|3[AC-F]|40|5[BDE]|60|7[BCD])/g,
+      decodeURIComponent
+    )
+  }
+};
+/* eslint-enable no-var */
+
+/* eslint-disable no-var */
+
+function init (converter, defaultAttributes) {
+  function set (key, value, attributes) {
+    if (typeof document === 'undefined') {
+      return
+    }
+
+    attributes = js_cookie_assign({}, defaultAttributes, attributes);
+
+    if (typeof attributes.expires === 'number') {
+      attributes.expires = new Date(Date.now() + attributes.expires * 864e5);
+    }
+    if (attributes.expires) {
+      attributes.expires = attributes.expires.toUTCString();
+    }
+
+    key = encodeURIComponent(key)
+      .replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent)
+      .replace(/[()]/g, escape);
+
+    var stringifiedAttributes = '';
+    for (var attributeName in attributes) {
+      if (!attributes[attributeName]) {
+        continue
+      }
+
+      stringifiedAttributes += '; ' + attributeName;
+
+      if (attributes[attributeName] === true) {
+        continue
+      }
+
+      // Considers RFC 6265 section 5.2:
+      // ...
+      // 3.  If the remaining unparsed-attributes contains a %x3B (";")
+      //     character:
+      // Consume the characters of the unparsed-attributes up to,
+      // not including, the first %x3B (";") character.
+      // ...
+      stringifiedAttributes += '=' + attributes[attributeName].split(';')[0];
+    }
+
+    return (document.cookie =
+      key + '=' + converter.write(value, key) + stringifiedAttributes)
+  }
+
+  function get (key) {
+    if (typeof document === 'undefined' || (arguments.length && !key)) {
+      return
+    }
+
+    // To prevent the for loop in the first place assign an empty array
+    // in case there are no cookies at all.
+    var cookies = document.cookie ? document.cookie.split('; ') : [];
+    var jar = {};
+    for (var i = 0; i < cookies.length; i++) {
+      var parts = cookies[i].split('=');
+      var value = parts.slice(1).join('=');
+
+      try {
+        var foundKey = decodeURIComponent(parts[0]);
+        jar[foundKey] = converter.read(value, foundKey);
+
+        if (key === foundKey) {
+          break
+        }
+      } catch (e) {}
+    }
+
+    return key ? jar[key] : jar
+  }
+
+  return Object.create(
+    {
+      set: set,
+      get: get,
+      remove: function (key, attributes) {
+        set(
+          key,
+          '',
+          js_cookie_assign({}, attributes, {
+            expires: -1
+          })
+        );
+      },
+      withAttributes: function (attributes) {
+        return init(this.converter, js_cookie_assign({}, this.attributes, attributes))
+      },
+      withConverter: function (converter) {
+        return init(js_cookie_assign({}, this.converter, converter), this.attributes)
+      }
+    },
+    {
+      attributes: { value: Object.freeze(defaultAttributes) },
+      converter: { value: Object.freeze(converter) }
+    }
+  )
+}
+
+var api = init(defaultConverter, { path: '/' });
+/* eslint-enable no-var */
+
+/* harmony default export */ const js_cookie = (api);
+
+;// CONCATENATED MODULE: ./src/js/components/header-template/announcement-bar/index.js
+
+
+
+class AnnouncementBar {
+  constructor(element, args) {
+    this.element = element;
+    this.parent = args.parent || null;
+    this.transitionDuration = args.transitionDuration || 0.5;
+    this.transitionEasing = args.transitionEasing || 'power4.out';
+    this.pieces = this.getPieces();
+    this.id = external_jQuery_default()(element).data('id');
+    this.cookieName = 'novablocks-announcement-' + this.id + '-disabled';
+    this.height = 0;
+    const disabled = js_cookie.get(this.cookieName);
+    const loggedIn = external_jQuery_default()('body').hasClass('logged-in');
+
+    if (disabled && !loggedIn) {
+      external_jQuery_default()(element).remove();
+      return;
+    }
+
+    this.onResize();
+    globalService.registerOnDeouncedResize(this.onResize.bind(this));
+    this.timeline.play();
+    this.bindEvents();
+  }
+
+  onResize() {
+    let progress = 0;
+    let wasActive = false;
+    let wasReversed = false;
+
+    if (typeof this.timeline !== 'undefined') {
+      progress = this.timeline.progress();
+      wasActive = this.timeline.isActive();
+      wasReversed = this.timeline.reversed();
+      this.timeline.clear();
+      this.timeline.kill();
+      this.pieces.wrapper.css('height', '');
+    }
+
+    this.timeline = this.getTimeline();
+    this.timeline.progress(progress);
+    this.timeline.reversed(wasReversed);
+
+    if (wasActive) {
+      this.timeline.resume();
+    }
+  }
+
+  getPieces() {
+    const $element = external_jQuery_default()(this.element);
+    return {
+      element: $element,
+      wrapper: $element.find('.novablocks-announcement-bar__wrapper'),
+      content: $element.find('.novablocks-announcement-bar__content'),
+      close: $element.find('.novablocks-announcement-bar__close')
+    };
+  }
+
+  getTimeline() {
+    const {
+      transitionDuration,
+      transitionEasing,
+      pieces: {
+        element,
+        wrapper,
+        content,
+        close
+      }
+    } = this;
+    const that = this;
+    const timeline = gsap.timeline({
+      paused: true
+    });
+    const height = wrapper.outerHeight();
+    timeline.fromTo(element, {
+      height: 0
+    }, {
+      duration: transitionDuration,
+      height: height,
+      ease: transitionEasing
+    }, 0);
+    timeline.to({
+      height: 0
+    }, {
+      duration: transitionDuration,
+      height: height,
+      onUpdate: function () {
+        const targets = this.targets();
+
+        if (Array.isArray(targets) && targets.length) {
+          that.height = targets[0].height;
+
+          if (that.parent) {
+            that.parent.update();
+          }
+        }
+      },
+      onUpdateParams: ['{self}'],
+      ease: transitionEasing
+    }, 0);
+    return timeline;
+  }
+
+  bindEvents() {
+    this.pieces.close.on('click', this.onClose.bind(this));
+  }
+
+  onClose() {
+    if (typeof this.timeline !== 'undefined') {
+      this.timeline.reverse();
+    }
+  }
+
+}
+;// CONCATENATED MODULE: ./src/js/components/header-template/promo-bar/index.js
+
+class PromoBar {
+  constructor(element, args) {
+    const announcementBars = element.querySelectorAll('.novablocks-announcement-bar');
+    const announcementElementsArray = Array.from(announcementBars);
+    this.element = element;
+    this.bars = announcementElementsArray.map(element => new AnnouncementBar(element, {
+      parent: this,
+      transitionDuration: 0.5,
+      transitionEasing: 'power4.inOut'
+    }));
+    this.height = 0;
+    this.onUpdate = args.onUpdate;
+    this.offset = args.offset || 0;
+    this.update();
+  }
+
+  update() {
+    let promoBarHeight = 0;
+    this.bars.forEach(bar => {
+      promoBarHeight += bar.height;
+    });
+    this.height = promoBarHeight;
+    this.element.style.top = `${this.offset}px`;
+
+    if ('function' === typeof this.onUpdate) {
+      this.onUpdate(this);
+    }
+  }
+
+}
+;// CONCATENATED MODULE: ./src/js/components/header-template/index.js
+
+
+
+
+
+
+const applyPaddingTopToTargets = ($targets, extraPaddingTop) => {
+  $targets.each((i, target) => {
+    const $target = external_jQuery_default()(target);
+    const paddingTop = getPaddingTop($target);
+    $target.css('paddingTop', paddingTop + extraPaddingTop);
+  });
+};
+
+const getPaddingTop = $element => {
+  return parseInt($element.css('paddingTop', '').css('paddingTop'), 10) || 0;
+};
+
+class HeaderTemplate {
   constructor() {
-    this.onStickyHeaderResize = debounce(stickyHeaderHeight => {
-      document.documentElement.style.setProperty('--theme-sticky-header-height', `${stickyHeaderHeight}px`);
-    }, 100);
     this.adminBar = document.getElementById('wpadminbar');
+    this.enableFirstBlockPaddingTop = external_jQuery_default()('body').hasClass('has-novablocks-header-transparent');
     this.adminBarFixed = false;
     this.promoBarFixed = false;
     this.adminBarHeight = 0;
     this.updateAdminBarProps();
-    this.enableFirstBlockPaddingTop = external_jQuery_default()('body').hasClass('has-novablocks-header-transparent');
-    this.initializeHero();
+    this.onStickyHeaderResize = debounce(stickyHeaderHeight => {
+      document.documentElement.style.setProperty('--theme-sticky-header-height', `${stickyHeaderHeight}px`);
+    }, 100);
     this.initializeHeader();
-    this.initializeLogo();
-    this.initializeNavbar();
-    this.searchOverlay = new search_overlay();
     this.initializePromoBar();
-    this.initializeImages();
-    this.initializeCommentsArea();
-    this.initializeReservationForm();
     globalService.registerOnDeouncedResize(this.onResize.bind(this));
   }
 
@@ -1864,75 +1868,6 @@ class App {
     }
   }
 
-  initializeImages() {
-    const showLoadedImages = this.showLoadedImages.bind(this);
-    showLoadedImages();
-    globalService.registerObserverCallback(function (mutationList) {
-      external_jQuery_default().each(mutationList, (i, mutationRecord) => {
-        external_jQuery_default().each(mutationRecord.addedNodes, (j, node) => {
-          const nodeName = node.nodeName && node.nodeName.toLowerCase();
-
-          if ('img' === nodeName || node.childNodes.length) {
-            showLoadedImages(node);
-          }
-        });
-      });
-    });
-  }
-
-  initializeLogo() {
-    const wrappers = document.querySelectorAll('[class*="sm-palette"]');
-    wrappers.forEach(toggleLightClasses);
-  }
-
-  initializeReservationForm() {
-    globalService.registerObserverCallback(function (mutationList) {
-      external_jQuery_default().each(mutationList, (i, mutationRecord) => {
-        external_jQuery_default().each(mutationRecord.addedNodes, (j, node) => {
-          const $node = external_jQuery_default()(node);
-
-          if ($node.is('#ot-reservation-widget')) {
-            $node.closest('.novablocks-opentable').addClass('is-loaded');
-          }
-        });
-      });
-    });
-  }
-
-  updateAdminBarProps() {
-    if (!this.adminBar) {
-      return;
-    }
-
-    this.adminBarHeight = this.adminBar.offsetHeight;
-    const adminBarStyle = window.getComputedStyle(this.adminBar);
-    this.adminBarFixed = adminBarStyle.getPropertyValue('position') === 'fixed';
-  }
-
-  showLoadedImages() {
-    let container = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document.body;
-    const $images = external_jQuery_default()(container).find('img').not('[srcset], .is-loaded, .is-broken');
-    $images.imagesLoaded().progress((instance, image) => {
-      const className = image.isLoaded ? 'is-loaded' : 'is-broken';
-      external_jQuery_default()(image.img).addClass(className);
-    });
-  }
-
-  initializeHero() {
-    const heroElements = document.getElementsByClassName('novablocks-hero');
-    const heroElementsArray = Array.from(heroElements);
-    this.HeroCollection = heroElementsArray.map(element => new Hero(element));
-    this.firstHero = heroElementsArray[0];
-  }
-
-  initializeCommentsArea() {
-    const $commentsArea = external_jQuery_default()('.comments-area');
-
-    if ($commentsArea.length) {
-      this.commentsArea = new CommentsArea($commentsArea.get(0));
-    }
-  }
-
   initializeHeader() {
     const header = document.querySelector('.novablocks-header');
     const stickyHeader = document.querySelector('.novablocks-header--sticky');
@@ -1945,66 +1880,12 @@ class App {
     }
 
     if (!!header) {
-      this.header = new components_header(header, {
+      this.header = new header_template_header(header, {
         onResize: () => {
           requestAnimationFrame(this.onHeaderUpdate.bind(this));
         }
       });
     }
-  }
-
-  initializeNavbar() {
-    this.navbar = new Navbar();
-  }
-
-  initializePromoBar() {
-    const promoBar = document.querySelector('.promo-bar');
-
-    if (!promoBar) {
-      this.onPromoBarUpdate();
-      return;
-    }
-
-    this.promoBar = new PromoBar(promoBar, {
-      offset: this.adminBarHeight,
-      onUpdate: this.onPromoBarUpdate.bind(this)
-    });
-    this.updatePromoBarProps();
-  }
-
-  updatePromoBarProps() {
-    if (!this.promoBar) {
-      return;
-    }
-
-    const promoBarStyle = window.getComputedStyle(this.promoBar.element);
-    this.promoBarFixed = promoBarStyle.getPropertyValue('position') === 'fixed';
-  }
-
-  onPromoBarUpdate() {
-    const header = this.header;
-    const HeroCollection = this.HeroCollection;
-    const promoBarHeight = !!this.promoBar ? this.promoBar.height : 0;
-    const adminBarTop = this.adminBarFixed ? this.adminBarHeight : 0;
-    const promoBarTop = this.promoBarFixed ? promoBarHeight : 0;
-    const stickyDistance = adminBarTop + promoBarTop;
-    const staticDistance = this.adminBarHeight + promoBarHeight;
-    document.documentElement.style.setProperty('--theme-sticky-distance', `${stickyDistance}px`);
-
-    if (!!header) {
-      header.stickyDistance = stickyDistance;
-      header.staticDistance = staticDistance;
-      header.render(true);
-      header.mobileHeader.stickyDistance = stickyDistance;
-      header.mobileHeader.staticDistance = staticDistance;
-      header.mobileHeader.render(true);
-    }
-
-    HeroCollection.forEach(hero => {
-      hero.offset = promoBarHeight;
-      hero.updateOnScroll();
-    });
-    this.onHeaderUpdate();
   }
 
   onHeaderUpdate() {
@@ -2051,19 +1932,148 @@ class App {
     }
   }
 
+  initializePromoBar() {
+    const promoBar = document.querySelector('.promo-bar');
+
+    if (!promoBar) {
+      this.onPromoBarUpdate();
+      return;
+    }
+
+    this.promoBar = new PromoBar(promoBar, {
+      offset: this.adminBarHeight,
+      onUpdate: this.onPromoBarUpdate.bind(this)
+    });
+    this.updatePromoBarProps();
+  }
+
+  updatePromoBarProps() {
+    if (!this.promoBar) {
+      return;
+    }
+
+    const promoBarStyle = window.getComputedStyle(this.promoBar.element);
+    this.promoBarFixed = promoBarStyle.getPropertyValue('position') === 'fixed';
+  }
+
+  onPromoBarUpdate() {
+    const header = this.header;
+    const HeroCollection = this.HeroCollection;
+    const promoBarHeight = !!this.promoBar ? this.promoBar.height : 0;
+    const adminBarTop = this.adminBarFixed ? this.adminBarHeight : 0;
+    const promoBarTop = this.promoBarFixed ? promoBarHeight : 0;
+    const stickyDistance = adminBarTop + promoBarTop;
+    const staticDistance = this.adminBarHeight + promoBarHeight;
+    document.documentElement.style.setProperty('--theme-sticky-distance', `${stickyDistance}px`);
+
+    if (!!header) {
+      header.stickyDistance = stickyDistance;
+      header.staticDistance = staticDistance;
+      header.render(true);
+      header.mobileHeader.stickyDistance = stickyDistance;
+      header.mobileHeader.staticDistance = staticDistance;
+      header.mobileHeader.render(true);
+    } //    HeroCollection.forEach( hero => {
+    //      hero.offset = promoBarHeight;
+    //      hero.updateOnScroll();
+    //    } );
+
+
+    this.onHeaderUpdate();
+  }
+
+  updateAdminBarProps() {
+    if (!this.adminBar) {
+      return;
+    }
+
+    this.adminBarHeight = this.adminBar.offsetHeight;
+    const adminBarStyle = window.getComputedStyle(this.adminBar);
+    this.adminBarFixed = adminBarStyle.getPropertyValue('position') === 'fixed';
+  }
+
 }
+;// CONCATENATED MODULE: ./src/js/components/app.js
 
-const applyPaddingTopToTargets = ($targets, extraPaddingTop) => {
-  $targets.each((i, target) => {
-    const $target = external_jQuery_default()(target);
-    const paddingTop = getPaddingTop($target);
-    $target.css('paddingTop', paddingTop + extraPaddingTop);
-  });
-};
 
-const getPaddingTop = $element => {
-  return parseInt($element.css('paddingTop', '').css('paddingTop'), 10) || 0;
-};
+
+
+
+
+
+
+class App {
+  constructor() {
+    new HeaderTemplate();
+    this.initializeHero();
+    this.toggleSMLightDarkClasses();
+    this.navbar = new Navbar();
+    this.searchOverlay = new search_overlay();
+    this.initializeImages();
+    this.initializeCommentsArea();
+    this.initializeReservationForm();
+  }
+
+  initializeImages() {
+    const showLoadedImages = this.showLoadedImages.bind(this);
+    showLoadedImages();
+    globalService.registerObserverCallback(function (mutationList) {
+      external_jQuery_default().each(mutationList, (i, mutationRecord) => {
+        external_jQuery_default().each(mutationRecord.addedNodes, (j, node) => {
+          const nodeName = node.nodeName && node.nodeName.toLowerCase();
+
+          if ('img' === nodeName || node.childNodes.length) {
+            showLoadedImages(node);
+          }
+        });
+      });
+    });
+  }
+
+  toggleSMLightDarkClasses() {
+    const wrappers = document.querySelectorAll('[class*="sm-palette"]');
+    wrappers.forEach(toggleLightClasses);
+  }
+
+  initializeReservationForm() {
+    globalService.registerObserverCallback(function (mutationList) {
+      external_jQuery_default().each(mutationList, (i, mutationRecord) => {
+        external_jQuery_default().each(mutationRecord.addedNodes, (j, node) => {
+          const $node = external_jQuery_default()(node);
+
+          if ($node.is('#ot-reservation-widget')) {
+            $node.closest('.novablocks-opentable').addClass('is-loaded');
+          }
+        });
+      });
+    });
+  }
+
+  showLoadedImages() {
+    let container = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document.body;
+    const $images = external_jQuery_default()(container).find('img').not('[srcset], .is-loaded, .is-broken');
+    $images.imagesLoaded().progress((instance, image) => {
+      const className = image.isLoaded ? 'is-loaded' : 'is-broken';
+      external_jQuery_default()(image.img).addClass(className);
+    });
+  }
+
+  initializeHero() {
+    const heroElements = document.getElementsByClassName('novablocks-hero');
+    const heroElementsArray = Array.from(heroElements);
+    this.HeroCollection = heroElementsArray.map(element => new Hero(element));
+    this.firstHero = heroElementsArray[0];
+  }
+
+  initializeCommentsArea() {
+    const $commentsArea = external_jQuery_default()('.comments-area');
+
+    if ($commentsArea.length) {
+      this.commentsArea = new CommentsArea($commentsArea.get(0));
+    }
+  }
+
+}
 ;// CONCATENATED MODULE: ./src/js/scripts.js
 
 

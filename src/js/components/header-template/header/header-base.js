@@ -1,23 +1,23 @@
-import { addClass } from '../../utils';
+import { addClass } from '../../../utils';
 
-import globalService from '../globalService';
+import globalService from '../../globalService';
 
 class HeaderBase {
 
-  constructor ( options ) {
+  constructor( options ) {
     this.staticDistance = 0;
     this.stickyDistance = 0;
     this.options = options || {};
   }
 
-  initialize () {
+  initialize() {
     addClass( this.element, 'novablocks-header--ready' );
 
     globalService.registerRender( this.render.bind( this ) );
     globalService.registerOnDeouncedResize( this.onResize.bind( this ) );
   }
 
-  onResize () {
+  onResize() {
     this.box = this.element.getBoundingClientRect();
 
     if ( typeof this.options.onResize === 'function' ) {
@@ -25,15 +25,15 @@ class HeaderBase {
     }
   }
 
-  getHeight () {
+  getHeight() {
     return this?.box?.height;
   }
 
-  render ( forceUpdate ) {
+  render( forceUpdate ) {
     this.maybeUpdateStickyStyles( forceUpdate );
   }
 
-  maybeUpdateStickyStyles ( forceUpdate ) {
+  maybeUpdateStickyStyles( forceUpdate ) {
     const { scrollY } = globalService.getProps();
     const shouldBeSticky = scrollY > this.staticDistance - this.stickyDistance;
 
@@ -45,17 +45,17 @@ class HeaderBase {
     this.updateStickyStyles();
   }
 
-  updateStickyStyles () {
+  updateStickyStyles() {
     this.applyStickyStyles( this.element );
   }
 
-  applyStickyStyles ( element ) {
+  applyStickyStyles( element ) {
     if ( this.shouldBeSticky ) {
       element.style.position = 'fixed';
-      element.style.top = `${this.stickyDistance}px`;
+      element.style.top = `${ this.stickyDistance }px`;
     } else {
-      element.style.position = 'absolute';
-      element.style.top = `${this.staticDistance}px`;
+      element.style.position = '';
+      element.style.top = '';
     }
   }
 }

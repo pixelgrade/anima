@@ -1,9 +1,8 @@
-import globalService from '../globalService';
 import HeaderBase from './header-base';
 import HeaderColors from './header-colors';
 import MenuToggle from './menu-toggle';
 
-import { addClass, removeClass, getColorSetClasses } from '../../utils';
+import { addClass, removeClass, getColorSetClasses } from '../../../utils';
 
 class HeaderMobile extends HeaderBase {
 
