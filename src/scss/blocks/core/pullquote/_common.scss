@@ -2,10 +2,25 @@ $enable-pullquote-block-styles:         true !default;
 
 @if $enable-pullquote-block-styles == true {
     /* Pullquote Block */
-    .wp-block-pullquote {
+    .wp-block-pullquote[class
+    ] {
+        padding: 0; // reset
+        margin-bottom: 0; // reset
+
+        border-top: none; // reset
+        border-bottom: none; // reset
+
+        text-align: inherit; // reset
 
         blockquote {
+            margin: 0; // reset
+
             @include space-children-y( var(--theme-spacing) );
+
+            p {
+                font-size: inherit;
+                line-height: inherit;
+            }
         }
 
         &.alignleft,
@@ -17,22 +32,30 @@ $enable-pullquote-block-styles:         true !default;
                 // make the text size smaller
                 --font-size-modifier: 0.85;
             }
+
+            p {
+                font-size: inherit;
+            }
         }
 
         &.alignwide {
             @include apply-font(heading-2);
+            @extend %apply-font-properties;
         }
 
-        &.alingfull {
+        &.alignfull {
             @include apply-font(heading-1);
+            @extend %apply-font-properties;
         }
     }
 
     .wp-block-pullquote blockquote cite:not(:first-child),
     .wp-block-pullquote__citation {
         display: block;
-        @include apply-font(heading-6);
         margin-top: var(--theme-spacing-smaller);
+
+        @include apply-font(heading-6);
+        @extend %apply-font-properties;
     }
 
     

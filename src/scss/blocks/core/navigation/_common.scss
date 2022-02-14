@@ -2,68 +2,30 @@
    #NAVIGATION
    ========================================================================== */
 
-// Style the Navigation block as a List block
-// without any marker and tightened space
+// Style the Navigation block as the main Header navigation
+// 
+// @todo: merge the Navigation block styles with the Nova Blocks styling from 
+// 		 /src/scss/blocks/nova-blocks/navigation/_style.scss
 
-// FRONTEND block HTML structure
-// nav.wp-block-navigation / .wp-container-61af2253abda0 (generated CSS)
-// 	ul.wp-block-navigation__container
-// 		li.wp-block-navigation-item + .wp-block-navigation-submenu
-// 			a.wp-block-navigation-item__content
-// 				span.wp-block-navigation-item__label
-// 		form.wp-block-search
-
-// EDITOR block HTML structure
-// nav.wp-block-navigation
-// 	div.wp-block-navigation__container
-// 		div.wp-block-navigation-item
-// 			a.wp-block-navigation-item__content
-
-$nav-block: 'nav.wp-block-navigation' !default;
-$nav-ul-container: 'ul' !default;
+$nav-block: '.wp-block-navigation' !default;
+$nav-ul-container: 'ul.wp-block-navigation__container' !default;
 $nav-list-item: 'li' !default;
 
 
-
-// Available variables generated within the Editor using custom classes
-//
-// Use the below settings only as reference:
-// .wp-container-61af2253abda0.wp-block-navigation {
-// 	--layout-direction: column;
-// 	--layout-justification-setting: space-between;
-// 	--layout-wrap: nowrap;
-// 	--layout-justify: space-between;
-// 	--layout-align: flex-start;
-// }
-
 #{$nav-block} {
+	@include apply-font(navigation);
+
 	#{$nav-ul-container} {
-		flex-basis: 100%;
-		width: 100%;
+		gap: var(--nb-navigation-item-spacing); // Use the Customizer "Navigation Link Spacing" option
+	}
 
-		display: flex;
-		flex-direction: var(--layout-direction, column);
-		justify-content: var(--layout-justification-setting, space-between);
-		flex-wrap: var(--layout-wrap, nowrap);
-		align-items: var(--layout-align, flex-start);
-
-		gap: 0.5em;
-
-		padding-left: 0;
-		@include space-children-y( 0 );
-
-		list-style: none;
-
-		#{$nav-list-item} {
-
+	&.is-vertical {
+		#{$nav-ul-container} {
+			gap: 0.5em;
 		}
 	}
 
-	a {
-		&:not(:hover) {
-			// Hide default link decoration for 
-			// links inside Navigation block
-			text-decoration-color: transparent;
-		}
+	a:hover {
+		color: var(--sm-current-accent-color);	
 	}
 }			

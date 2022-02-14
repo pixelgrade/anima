@@ -9,17 +9,36 @@ $enable-blockquote-block-styles:        true !default;
         @include above(tablet) { padding-right: var(--theme-spacing-fluid-normal); }
 
         border-left: 3px solid var(--sm-current-accent-color); 
+
+        text-align: inherit; // reset
+
+        blockquote {
+            margin: 0; // reset
+        }
+
+        &.is-style-plain {
+            border-left: none;
+            padding-left: 0;
+            padding-right: 0;
+        }
         
         &.is-style-large {
             border-left: none;
-            @include apply-font(heading-3);
+
+            &, p {
+                @include apply-font(heading-3);
+                @extend %apply-font-properties;
+            }
         }
     }
 
     .wp-block-quote > cite:not(:first-child),
     .wp-block-quote__citation {
         display: block;
-        @include apply-font(heading-6);
         margin-top: var(--theme-spacing-fluid-smaller);
+
+        @include apply-font(heading-6);
+        @extend %apply-font-properties;
+        text-align: inherit; // reset
     }
 }

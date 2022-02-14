@@ -1,0 +1,107 @@
+/* ==========================================================================
+   #PAGINATION
+   ========================================================================== */
+
+// Style the Navigation block consistent across: Pagination block, Posts Archive, WooCommerce Archive
+// Borrow as much styles from the Buttons Text block
+// 
+// USE CASES + MARKUP STRUCTURE
+// 
+// 1) QUERY BLOCK
+// .wp-block-query-pagination 
+// 	a.wp-block-query-pagination-previous
+// 	div.wp-block-query-pagination-numbers
+// 		> a.page-numbers
+// 		> span.page-numbers.current
+// 		> span.page-numbers.dots
+// 	a.wp-block-query-pagination-next	
+// 
+// 2) POSTS ARCHIVE
+// .wp-block 
+// 	nav.navigation.pagination
+// 		.nav-links
+// 			> a.page-numbers + .prev / .next / .current
+// 
+// 3) WOOCOMMERCE CATALOG
+// nav.woocommerce-pagination 
+// 	> a.page-numbers.prev
+
+
+
+.wp-block-query-pagination {
+	// Borrow only a part of the nav-links() mixin
+	@include apply-font(button);
+	font-feature-settings: "lnum";
+
+	a {
+	  text-decoration: none;
+	}
+}
+
+.wp-block-query-pagination-numbers {
+	display: flex;
+	gap: 0.5em;
+
+	.wp-block-query-pagination-previous-arrow {
+		margin-right: 0.5em;
+	}
+}
+
+:is(.page-numbers, .wp-block-query-pagination-previous, .wp-block-query-pagination-next) {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+
+	@include button-box();
+	height: 2.75em;
+	min-width: 2.75em;
+	padding-left: 0.75em;
+	padding-right: 0.75em;
+
+	transition: all 0.2s ease;
+
+	// Previous / Next Links
+	@at-root a:is(.prev, .next, .wp-block-query-pagination-previous, .wp-block-query-pagination-next) {
+		color: var(--sm-current-accent-color);
+	}
+
+	// Hover Effect
+	@at-root a:is(.page-numbers, .wp-block-query-pagination-previous, .wp-block-query-pagination-next):hover {
+		color: var(--sm-current-bg-color);
+	   background: var(--sm-current-accent-color);
+	}
+
+	// Current Page Styling
+	@at-root .page-numbers.current {
+	   background-color: var(--sm-current-fg1-color);
+	   color: var(--sm-current-bg-color);
+	}
+} 
+
+
+
+// Arrow Settings
+// Replace the arrow "←" inline character with the SVG icon used on the Button → Text style
+.is-arrow-arrow {
+	// Hide the inline character
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	width: #{$theme-button-text-arrow-size};
+
+	// Add SVG icon
+	&:after {
+		content: "";
+		@include button-text-arrow();
+	}
+
+	// Mirror the icon for 'Previous' links
+	&.wp-block-query-pagination-previous-arrow {
+		&:after {
+			right: auto;
+			left: 0;
+			transform: translate(0, -50%);
+		}
+	}
+}
+

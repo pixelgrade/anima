@@ -1,8 +1,23 @@
 $enable-table-block-styles:             true !default;
 
 @if $enable-table-block-styles == true {
-    /* Table Block */
     .wp-block-table {
-        overflow-x: auto;
+
+        // "Stripes" style variation.
+        &.is-style-stripes {
+            border-bottom: none;
+
+            tbody tr:nth-child(odd) {
+                background-color: rgba(0,0,0,0.04);
+            }
+        }
+
+        tfoot {
+            border-top: 2px solid var(--sm-current-fg1-color);
+        }
+
+        figcaption {
+            @include caption;
+        }
     }
 }

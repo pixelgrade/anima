@@ -1,15 +1,17 @@
 $enable-categories-block-styles:        true !default;
 
 @if $enable-categories-block-styles == true {
-    /* Categories Block */
     .wp-block-categories {
         @include archives;
     }
 }
 
-/* Temporary styles for Category Widget,
-   until we make transition
-   to Full Site Editing */
+
+
+/* 
+ * Temporary styles for Category Widget,
+ * until we make transition to Full Site Editing 
+ */
 .widget_categories {
     
     ul {

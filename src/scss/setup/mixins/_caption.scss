@@ -2,10 +2,15 @@
   @include apply-font(body);
   --font-size-modifier: 0.8;
   width: 100%; // Push the text block to align left when there is little content
+  text-align: left;
 
   .credits {
       margin: 0;
       opacity: 0.7;
+  }
+
+  &:last-child {
+    margin-bottom: 0; // Overwrite the core style
   }
 
 

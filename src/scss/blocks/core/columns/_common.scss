@@ -1,112 +1,70 @@
+// Status: 
+// - [ ] Editor: Check the alignments in Editor and why break-align classes are not present
+// - [ ] Add Spacing component to Columns block
+
 $enable-columns-block-styles: true !default;
-
-@mixin wp-block-columns-stack-2 {
-    flex-wrap: wrap;
-
-    > * {
-        flex-basis: calc(50% - var(--wp-block-columns-spacing) / 2) !important;
-        margin-bottom: var(--wp-block-columns-spacing);
-    }
-
-    > :nth-child(2n+1) {
-        margin-left: 0;
-    }
-
-    > :last-child,
-    > :nth-child(2n+1):nth-last-child(2) {
-        margin-bottom: 0;
-    }
-}
-
-@mixin wp-block-columns-stack-1 {
-    flex-wrap: wrap;
-
-    > * {
-        flex-basis: 100% !important;
-    }
-
-    // need at least the same specificity as the 2-stack mixin
-    > :nth-child(n) {
-        margin-left: 0;
-
-        &:not(:last-child) {
-            margin-bottom: var(--wp-block-columns-spacing);
-        }
-    }
-}
 
 @if $enable-columns-block-styles == true {
 
-    /* Columns Blocks */
     .wp-block-columns[class] {
-        
-        .alignfull {
-            margin-left: 0;
-            margin-right: 0;
-        }
+        gap: var(--theme-spacing-fluid-small);
     }
 
-    .wp-block-column {
-        min-width: 0;
-        word-break: break-word;
-        overflow-wrap: break-word;
-    }
-
-    :root {
-        --wp-block-columns-spacing: calc(var(--theme-spacing-fluid-large) + var(--theme-spacing-fluid-smallest));
-    }
-
-    .wp-block-columns {
-        display: flex;
-
-        > *:not(.block-list-appender) {
-            flex: 0 1 100%;
-        }
-
-        > :not(:first-child) {
-            margin-left: var(--wp-block-columns-spacing);
-        }
-
-        @include below(lap) {
-            @include wp-block-columns-stack-2;
-
-            & & {
-                @include wp-block-columns-stack-1;
-            }
-        }
-
-        @include below(tablet) {
-            @include wp-block-columns-stack-1;
-        }
-    }
-
-    .wp-block-columns {
-
-        &.are-vertically-aligned-top {
-            align-items: flex-start
-        }
-
-        &.are-vertically-aligned-center {
-            align-items: center
-        }
-
-        &.are-vertically-aligned-bottom {
-            align-items: flex-end
-        }
-    }
-
-    .wp-block-column {
-
-        &.is-vertically-aligned-top {
-            align-self: flex-start
-        }
-
-        &.is-vertically-aligned-center {
-            align-self: center
-        }
-
-        &.is-vertically-aligned-bottom {
-            align-self: flex-end
-        }
-    }
 }
+
+
+
+
+
+// Mixins tested and not seen any effect
+
+// @mixin wp-block-columns-stack-2 {
+//     flex-wrap: wrap;
+
+//     > * {
+//         flex-basis: calc(50% - var(--wp-block-columns-spacing) / 2) !important;
+//         margin-bottom: var(--wp-block-columns-spacing);
+//     }
+
+//     > :nth-child(2n+1) {
+//         margin-left: 0;
+//     }
+
+//     > :last-child,
+//     > :nth-child(2n+1):nth-last-child(2) {
+//         margin-bottom: 0;
+//     }
+// }
+
+// @mixin wp-block-columns-stack-1 {
+//     flex-wrap: wrap;
+
+//     > * {
+//         flex-basis: 100% !important;
+//     }
+
+//     // need at least the same specificity as the 2-stack mixin
+//     > :nth-child(n) {
+//         margin-left: 0;
+
+//         &:not(:last-child) {
+//             margin-bottom: var(--wp-block-columns-spacing);
+//         }
+//     }
+// }
+
+// @if $enable-columns-block-styles == true {
+//     .wp-block-columns {
+//         @include below(lap) {
+//             @include wp-block-columns-stack-2;
+
+//             & & {
+//                 @include wp-block-columns-stack-1;
+//             }
+//         }
+
+//         @include below(tablet) {
+//             @include wp-block-columns-stack-1;
+//         }
+//     }
+// }
