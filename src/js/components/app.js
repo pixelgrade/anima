@@ -12,7 +12,7 @@ import HeaderTemplate from './header-template';
 export default class App {
 
   constructor () {
-    new HeaderTemplate();
+//    new HeaderTemplate();
 
     this.initializeHero();
     this.toggleSMLightDarkClasses();

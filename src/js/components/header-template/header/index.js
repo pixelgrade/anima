@@ -18,6 +18,11 @@ class Header extends HeaderBase {
     this.onUpdate = options.onUpdate;
 
     this.element = element;
+    this.placeholder = document.createElement( 'div' );
+    this.placeholder.style.display = 'none';
+    addClass( this.placeholder, 'site-header-placeholder' );
+    this.element.insertAdjacentElement( 'beforebegin', this.placeholder );
+
     this.rows = this.getHeaderRows();
 
     this.shouldToggleColors = !! this.element.dataset.sticky;
@@ -42,6 +47,17 @@ class Header extends HeaderBase {
 
     this.timeline = this.getIntroTimeline();
     this.timeline.play();
+  }
+
+  applyStickyStyles( element ) {
+    HeaderBase.prototype.applyStickyStyles.call( this, element );
+
+    if ( this.shouldBeSticky ) {
+      this.placeholder.style.height = `${ this.getHeight() }px`;
+      this.placeholder.style.display = '';
+    } else {
+      this.placeholder.style.display = 'none';
+    }
   }
 
   render( forceUpdate ) {
@@ -95,7 +111,7 @@ class Header extends HeaderBase {
       this.toggleRowsColors( !this.shouldBeSticky );
     }
 
-//    this.element.style.marginTop = `${this.staticDistance}px`;
+    this.element.style.marginTop = `${this.staticDistance}px`;
 
     if ( this.secondaryHeader ) {
       this.secondaryHeader.style.top = `${ this.staticDistance }px`;

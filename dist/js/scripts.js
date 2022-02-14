@@ -40,7 +40,7 @@ var __webpack_exports__ = {};
 const external_jQuery_namespaceObject = jQuery;
 var external_jQuery_default = /*#__PURE__*/__webpack_require__.n(external_jQuery_namespaceObject);
 ;// CONCATENATED MODULE: ./node_modules/colord/index.mjs
-var r={grad:.9,turn:360,rad:360/(2*Math.PI)},t=function(r){return"string"==typeof r?r.length>0:"number"==typeof r},n=function(r,t,n){return void 0===t&&(t=0),void 0===n&&(n=Math.pow(10,t)),Math.round(n*r)/n+0},e=function(r,t,n){return void 0===t&&(t=0),void 0===n&&(n=1),r>n?n:r>t?r:t},u=function(r){return(r=isFinite(r)?r%360:0)>0?r:r+360},a=function(r){return{r:e(r.r,0,255),g:e(r.g,0,255),b:e(r.b,0,255),a:e(r.a)}},o=function(r){return{r:n(r.r),g:n(r.g),b:n(r.b),a:n(r.a,3)}},i=/^#([0-9a-f]{3,8})$/i,s=function(r){var t=r.toString(16);return t.length<2?"0"+t:t},h=function(r){var t=r.r,n=r.g,e=r.b,u=r.a,a=Math.max(t,n,e),o=a-Math.min(t,n,e),i=o?a===t?(n-e)/o:a===n?2+(e-t)/o:4+(t-n)/o:0;return{h:60*(i<0?i+6:i),s:a?o/a*100:0,v:a/255*100,a:u}},b=function(r){var t=r.h,n=r.s,e=r.v,u=r.a;t=t/360*6,n/=100,e/=100;var a=Math.floor(t),o=e*(1-n),i=e*(1-(t-a)*n),s=e*(1-(1-t+a)*n),h=a%6;return{r:255*[e,i,o,o,s,e][h],g:255*[s,e,e,i,o,o][h],b:255*[o,o,s,e,e,i][h],a:u}},g=function(r){return{h:u(r.h),s:e(r.s,0,100),l:e(r.l,0,100),a:e(r.a)}},d=function(r){return{h:n(r.h),s:n(r.s),l:n(r.l),a:n(r.a,3)}},f=function(r){return b((n=(t=r).s,{h:t.h,s:(n*=((e=t.l)<50?e:100-e)/100)>0?2*n/(e+n)*100:0,v:e+n,a:t.a}));var t,n,e},c=function(r){return{h:(t=h(r)).h,s:(u=(200-(n=t.s))*(e=t.v)/100)>0&&u<200?n*e/100/(u<=100?u:200-u)*100:0,l:u/2,a:t.a};var t,n,e,u},l=/^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s*,\s*([+-]?\d*\.?\d+)%\s*,\s*([+-]?\d*\.?\d+)%\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i,p=/^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s+([+-]?\d*\.?\d+)%\s+([+-]?\d*\.?\d+)%\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i,v=/^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i,m=/^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i,y={string:[[function(r){var t=i.exec(r);return t?(r=t[1]).length<=4?{r:parseInt(r[0]+r[0],16),g:parseInt(r[1]+r[1],16),b:parseInt(r[2]+r[2],16),a:4===r.length?n(parseInt(r[3]+r[3],16)/255,2):1}:6===r.length||8===r.length?{r:parseInt(r.substr(0,2),16),g:parseInt(r.substr(2,2),16),b:parseInt(r.substr(4,2),16),a:8===r.length?n(parseInt(r.substr(6,2),16)/255,2):1}:null:null},"hex"],[function(r){var t=v.exec(r)||m.exec(r);return t?t[2]!==t[4]||t[4]!==t[6]?null:a({r:Number(t[1])/(t[2]?100/255:1),g:Number(t[3])/(t[4]?100/255:1),b:Number(t[5])/(t[6]?100/255:1),a:void 0===t[7]?1:Number(t[7])/(t[8]?100:1)}):null},"rgb"],[function(t){var n=l.exec(t)||p.exec(t);if(!n)return null;var e,u,a=g({h:(e=n[1],u=n[2],void 0===u&&(u="deg"),Number(e)*(r[u]||1)),s:Number(n[3]),l:Number(n[4]),a:void 0===n[5]?1:Number(n[5])/(n[6]?100:1)});return f(a)},"hsl"]],object:[[function(r){var n=r.r,e=r.g,u=r.b,o=r.a,i=void 0===o?1:o;return t(n)&&t(e)&&t(u)?a({r:Number(n),g:Number(e),b:Number(u),a:Number(i)}):null},"rgb"],[function(r){var n=r.h,e=r.s,u=r.l,a=r.a,o=void 0===a?1:a;if(!t(n)||!t(e)||!t(u))return null;var i=g({h:Number(n),s:Number(e),l:Number(u),a:Number(o)});return f(i)},"hsl"],[function(r){var n=r.h,a=r.s,o=r.v,i=r.a,s=void 0===i?1:i;if(!t(n)||!t(a)||!t(o))return null;var h=function(r){return{h:u(r.h),s:e(r.s,0,100),v:e(r.v,0,100),a:e(r.a)}}({h:Number(n),s:Number(a),v:Number(o),a:Number(s)});return b(h)},"hsv"]]},N=function(r,t){for(var n=0;n<t.length;n++){var e=t[n][0](r);if(e)return[e,t[n][1]]}return[null,void 0]},x=function(r){return"string"==typeof r?N(r.trim(),y.string):"object"==typeof r&&null!==r?N(r,y.object):[null,void 0]},I=function(r){return x(r)[1]},M=function(r,t){var n=c(r);return{h:n.h,s:e(n.s+100*t,0,100),l:n.l,a:n.a}},H=function(r){return(299*r.r+587*r.g+114*r.b)/1e3/255},$=function(r,t){var n=c(r);return{h:n.h,s:n.s,l:e(n.l+100*t,0,100),a:n.a}},j=function(){function r(r){this.parsed=x(r)[0],this.rgba=this.parsed||{r:0,g:0,b:0,a:1}}return r.prototype.isValid=function(){return null!==this.parsed},r.prototype.brightness=function(){return n(H(this.rgba),2)},r.prototype.isDark=function(){return H(this.rgba)<.5},r.prototype.isLight=function(){return H(this.rgba)>=.5},r.prototype.toHex=function(){return r=o(this.rgba),t=r.r,e=r.g,u=r.b,i=(a=r.a)<1?s(n(255*a)):"","#"+s(t)+s(e)+s(u)+i;var r,t,e,u,a,i},r.prototype.toRgb=function(){return o(this.rgba)},r.prototype.toRgbString=function(){return r=o(this.rgba),t=r.r,n=r.g,e=r.b,(u=r.a)<1?"rgba("+t+", "+n+", "+e+", "+u+")":"rgb("+t+", "+n+", "+e+")";var r,t,n,e,u},r.prototype.toHsl=function(){return d(c(this.rgba))},r.prototype.toHslString=function(){return r=d(c(this.rgba)),t=r.h,n=r.s,e=r.l,(u=r.a)<1?"hsla("+t+", "+n+"%, "+e+"%, "+u+")":"hsl("+t+", "+n+"%, "+e+"%)";var r,t,n,e,u},r.prototype.toHsv=function(){return r=h(this.rgba),{h:n(r.h),s:n(r.s),v:n(r.v),a:n(r.a,3)};var r},r.prototype.invert=function(){return w({r:255-(r=this.rgba).r,g:255-r.g,b:255-r.b,a:r.a});var r},r.prototype.saturate=function(r){return void 0===r&&(r=.1),w(M(this.rgba,r))},r.prototype.desaturate=function(r){return void 0===r&&(r=.1),w(M(this.rgba,-r))},r.prototype.grayscale=function(){return w(M(this.rgba,-1))},r.prototype.lighten=function(r){return void 0===r&&(r=.1),w($(this.rgba,r))},r.prototype.darken=function(r){return void 0===r&&(r=.1),w($(this.rgba,-r))},r.prototype.rotate=function(r){return void 0===r&&(r=15),this.hue(this.hue()+r)},r.prototype.alpha=function(r){return"number"==typeof r?w({r:(t=this.rgba).r,g:t.g,b:t.b,a:r}):n(this.rgba.a,3);var t},r.prototype.hue=function(r){var t=c(this.rgba);return"number"==typeof r?w({h:r,s:t.s,l:t.l,a:t.a}):n(t.h)},r.prototype.isEqual=function(r){return this.toHex()===w(r).toHex()},r}(),w=function(r){return r instanceof j?r:new j(r)},S=[],k=function(r){r.forEach(function(r){S.indexOf(r)<0&&(r(j,y),S.push(r))})},E=function(){return new j({r:255*Math.random(),g:255*Math.random(),b:255*Math.random()})};
+var r={grad:.9,turn:360,rad:360/(2*Math.PI)},t=function(r){return"string"==typeof r?r.length>0:"number"==typeof r},n=function(r,t,n){return void 0===t&&(t=0),void 0===n&&(n=Math.pow(10,t)),Math.round(n*r)/n+0},e=function(r,t,n){return void 0===t&&(t=0),void 0===n&&(n=1),r>n?n:r>t?r:t},u=function(r){return(r=isFinite(r)?r%360:0)>0?r:r+360},a=function(r){return{r:e(r.r,0,255),g:e(r.g,0,255),b:e(r.b,0,255),a:e(r.a)}},o=function(r){return{r:n(r.r),g:n(r.g),b:n(r.b),a:n(r.a,3)}},i=/^#([0-9a-f]{3,8})$/i,s=function(r){var t=r.toString(16);return t.length<2?"0"+t:t},h=function(r){var t=r.r,n=r.g,e=r.b,u=r.a,a=Math.max(t,n,e),o=a-Math.min(t,n,e),i=o?a===t?(n-e)/o:a===n?2+(e-t)/o:4+(t-n)/o:0;return{h:60*(i<0?i+6:i),s:a?o/a*100:0,v:a/255*100,a:u}},b=function(r){var t=r.h,n=r.s,e=r.v,u=r.a;t=t/360*6,n/=100,e/=100;var a=Math.floor(t),o=e*(1-n),i=e*(1-(t-a)*n),s=e*(1-(1-t+a)*n),h=a%6;return{r:255*[e,i,o,o,s,e][h],g:255*[s,e,e,i,o,o][h],b:255*[o,o,s,e,e,i][h],a:u}},g=function(r){return{h:u(r.h),s:e(r.s,0,100),l:e(r.l,0,100),a:e(r.a)}},d=function(r){return{h:n(r.h),s:n(r.s),l:n(r.l),a:n(r.a,3)}},f=function(r){return b((n=(t=r).s,{h:t.h,s:(n*=((e=t.l)<50?e:100-e)/100)>0?2*n/(e+n)*100:0,v:e+n,a:t.a}));var t,n,e},c=function(r){return{h:(t=h(r)).h,s:(u=(200-(n=t.s))*(e=t.v)/100)>0&&u<200?n*e/100/(u<=100?u:200-u)*100:0,l:u/2,a:t.a};var t,n,e,u},l=/^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s*,\s*([+-]?\d*\.?\d+)%\s*,\s*([+-]?\d*\.?\d+)%\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i,p=/^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s+([+-]?\d*\.?\d+)%\s+([+-]?\d*\.?\d+)%\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i,v=/^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i,m=/^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i,y={string:[[function(r){var t=i.exec(r);return t?(r=t[1]).length<=4?{r:parseInt(r[0]+r[0],16),g:parseInt(r[1]+r[1],16),b:parseInt(r[2]+r[2],16),a:4===r.length?n(parseInt(r[3]+r[3],16)/255,2):1}:6===r.length||8===r.length?{r:parseInt(r.substr(0,2),16),g:parseInt(r.substr(2,2),16),b:parseInt(r.substr(4,2),16),a:8===r.length?n(parseInt(r.substr(6,2),16)/255,2):1}:null:null},"hex"],[function(r){var t=v.exec(r)||m.exec(r);return t?t[2]!==t[4]||t[4]!==t[6]?null:a({r:Number(t[1])/(t[2]?100/255:1),g:Number(t[3])/(t[4]?100/255:1),b:Number(t[5])/(t[6]?100/255:1),a:void 0===t[7]?1:Number(t[7])/(t[8]?100:1)}):null},"rgb"],[function(t){var n=l.exec(t)||p.exec(t);if(!n)return null;var e,u,a=g({h:(e=n[1],u=n[2],void 0===u&&(u="deg"),Number(e)*(r[u]||1)),s:Number(n[3]),l:Number(n[4]),a:void 0===n[5]?1:Number(n[5])/(n[6]?100:1)});return f(a)},"hsl"]],object:[[function(r){var n=r.r,e=r.g,u=r.b,o=r.a,i=void 0===o?1:o;return t(n)&&t(e)&&t(u)?a({r:Number(n),g:Number(e),b:Number(u),a:Number(i)}):null},"rgb"],[function(r){var n=r.h,e=r.s,u=r.l,a=r.a,o=void 0===a?1:a;if(!t(n)||!t(e)||!t(u))return null;var i=g({h:Number(n),s:Number(e),l:Number(u),a:Number(o)});return f(i)},"hsl"],[function(r){var n=r.h,a=r.s,o=r.v,i=r.a,s=void 0===i?1:i;if(!t(n)||!t(a)||!t(o))return null;var h=function(r){return{h:u(r.h),s:e(r.s,0,100),v:e(r.v,0,100),a:e(r.a)}}({h:Number(n),s:Number(a),v:Number(o),a:Number(s)});return b(h)},"hsv"]]},N=function(r,t){for(var n=0;n<t.length;n++){var e=t[n][0](r);if(e)return[e,t[n][1]]}return[null,void 0]},x=function(r){return"string"==typeof r?N(r.trim(),y.string):"object"==typeof r&&null!==r?N(r,y.object):[null,void 0]},I=function(r){return x(r)[1]},M=function(r,t){var n=c(r);return{h:n.h,s:e(n.s+100*t,0,100),l:n.l,a:n.a}},H=function(r){return(299*r.r+587*r.g+114*r.b)/1e3/255},colord_$=function(r,t){var n=c(r);return{h:n.h,s:n.s,l:e(n.l+100*t,0,100),a:n.a}},j=function(){function r(r){this.parsed=x(r)[0],this.rgba=this.parsed||{r:0,g:0,b:0,a:1}}return r.prototype.isValid=function(){return null!==this.parsed},r.prototype.brightness=function(){return n(H(this.rgba),2)},r.prototype.isDark=function(){return H(this.rgba)<.5},r.prototype.isLight=function(){return H(this.rgba)>=.5},r.prototype.toHex=function(){return r=o(this.rgba),t=r.r,e=r.g,u=r.b,i=(a=r.a)<1?s(n(255*a)):"","#"+s(t)+s(e)+s(u)+i;var r,t,e,u,a,i},r.prototype.toRgb=function(){return o(this.rgba)},r.prototype.toRgbString=function(){return r=o(this.rgba),t=r.r,n=r.g,e=r.b,(u=r.a)<1?"rgba("+t+", "+n+", "+e+", "+u+")":"rgb("+t+", "+n+", "+e+")";var r,t,n,e,u},r.prototype.toHsl=function(){return d(c(this.rgba))},r.prototype.toHslString=function(){return r=d(c(this.rgba)),t=r.h,n=r.s,e=r.l,(u=r.a)<1?"hsla("+t+", "+n+"%, "+e+"%, "+u+")":"hsl("+t+", "+n+"%, "+e+"%)";var r,t,n,e,u},r.prototype.toHsv=function(){return r=h(this.rgba),{h:n(r.h),s:n(r.s),v:n(r.v),a:n(r.a,3)};var r},r.prototype.invert=function(){return w({r:255-(r=this.rgba).r,g:255-r.g,b:255-r.b,a:r.a});var r},r.prototype.saturate=function(r){return void 0===r&&(r=.1),w(M(this.rgba,r))},r.prototype.desaturate=function(r){return void 0===r&&(r=.1),w(M(this.rgba,-r))},r.prototype.grayscale=function(){return w(M(this.rgba,-1))},r.prototype.lighten=function(r){return void 0===r&&(r=.1),w(colord_$(this.rgba,r))},r.prototype.darken=function(r){return void 0===r&&(r=.1),w(colord_$(this.rgba,-r))},r.prototype.rotate=function(r){return void 0===r&&(r=15),this.hue(this.hue()+r)},r.prototype.alpha=function(r){return"number"==typeof r?w({r:(t=this.rgba).r,g:t.g,b:t.b,a:r}):n(this.rgba.a,3);var t},r.prototype.hue=function(r){var t=c(this.rgba);return"number"==typeof r?w({h:r,s:t.s,l:t.l,a:t.a}):n(t.h)},r.prototype.isEqual=function(r){return this.toHex()===w(r).toHex()},r}(),w=function(r){return r instanceof j?r:new j(r)},S=[],k=function(r){r.forEach(function(r){S.indexOf(r)<0&&(r(j,y),S.push(r))})},E=function(){return new j({r:255*Math.random(),g:255*Math.random(),b:255*Math.random()})};
 
 ;// CONCATENATED MODULE: ./node_modules/colord/plugins/a11y.mjs
 var a11y_o=function(o){var t=o/255;return t<.04045?t/12.92:Math.pow((t+.055)/1.055,2.4)},a11y_t=function(t){return.2126*a11y_o(t.r)+.7152*a11y_o(t.g)+.0722*a11y_o(t.b)};/* harmony default export */ function a11y(o){o.prototype.luminance=function(){return o=a11y_t(this.rgba),void 0===(r=2)&&(r=0),void 0===n&&(n=Math.pow(10,r)),Math.round(n*o)/n+0;var o,r,n},o.prototype.contrast=function(r){void 0===r&&(r="#FFF");var n,a,i,e,v,u,d,c=r instanceof o?r:new o(r);return e=this.rgba,v=c.toRgb(),u=a11y_t(e),d=a11y_t(v),n=u>d?(u+.05)/(d+.05):(d+.05)/(u+.05),void 0===(a=2)&&(a=0),void 0===i&&(i=Math.pow(10,a)),Math.floor(i*n)/i+0},o.prototype.isReadable=function(o,t){return void 0===o&&(o="#FFF"),void 0===t&&(t={}),this.contrast(o)>=(e=void 0===(i=(r=t).size)?"normal":i,"AAA"===(a=void 0===(n=r.level)?"AA":n)&&"normal"===e?7:"AA"===a&&"large"===e?3:4.5);var r,n,a,i,e}}
@@ -49,7 +49,7 @@ var a11y_o=function(o){var t=o/255;return t<.04045?t/12.92:Math.pow((t+.055)/1.0
 
 
 
-const debounce = (func, wait) => {
+const utils_debounce = (func, wait) => {
   let timeout = null;
   return function () {
     const context = this;
@@ -85,7 +85,7 @@ const hasTouchScreen = function () {
 
   return hasTouchScreen;
 };
-function setAndResetElementStyles(element) {
+function utils_setAndResetElementStyles(element) {
   let props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   const $element = external_jQuery_default()(element);
   $element.css(props);
@@ -103,7 +103,7 @@ function setAndResetElementStyles(element) {
     }, 0);
   }
 }
-const getColorSetClasses = element => {
+const utils_getColorSetClasses = element => {
   const classAttr = element?.getAttribute('class');
 
   if (!classAttr) {
@@ -115,33 +115,33 @@ const getColorSetClasses = element => {
     return classname.search('sm-palette-') !== -1 || classname.search('sm-variation-') !== -1;
   });
 };
-const addClass = (element, classes) => {
+const utils_addClass = (element, classes) => {
   const classesArray = classes.split(/\s+/).filter(x => x.trim().length);
 
   if (classesArray.length) {
     element.classList.add(...classesArray);
   }
 };
-const removeClass = (element, classes) => {
+const utils_removeClass = (element, classes) => {
   const classesArray = classes.split(/\s+/).filter(x => x.trim().length);
 
   if (classesArray.length) {
     element.classList.remove(...classesArray);
   }
 };
-const hasClass = (element, className) => {
+const utils_hasClass = (element, className) => {
   return element.classList.contains(className);
 };
-const toggleClasses = function (element) {
+const utils_toggleClasses = function (element) {
   let classesToAdd = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
   const prefixes = ['sm-palette-', 'sm-variation-', 'sm-color-signal-'];
   const classesToRemove = Array.from(element.classList).filter(classname => {
     return prefixes.some(prefix => classname.indexOf(prefix) > -1);
   });
   element.classList.remove(...classesToRemove);
-  addClass(element, classesToAdd);
+  utils_addClass(element, classesToAdd);
 };
-function getFirstChild(el) {
+function utils_getFirstChild(el) {
   var firstChild = el.firstChild;
 
   while (firstChild != null && firstChild.nodeType === 3) {
@@ -151,7 +151,7 @@ function getFirstChild(el) {
 
   return firstChild;
 }
-const toggleLightClasses = element => {
+const utils_toggleLightClasses = element => {
   const classes = Array.from(element.classList);
   const paletteClassname = classes.find(classname => {
     return classname.indexOf('sm-palette-') > -1 && classname.indexOf('sm-palette--') === -1;
@@ -177,22 +177,22 @@ const toggleLightClasses = element => {
     const variationIndex = parseInt(variation, 10) - 1;
     const hex = currentPaletteConfig.variations ? currentPaletteConfig.variations[variationIndex].bg : currentPaletteConfig.colors[variationIndex].value;
     const isLight = w('#FFFFFF').contrast(hex) < w('#000000').contrast(hex);
-    removeClass(element, isLight ? 'sm-dark' : 'sm-light');
-    addClass(element, isLight ? 'sm-light' : 'sm-dark');
+    utils_removeClass(element, isLight ? 'sm-dark' : 'sm-light');
+    utils_addClass(element, isLight ? 'sm-light' : 'sm-dark');
   }
 };
-const getFirstBlock = element => {
+const utils_getFirstBlock = element => {
   if (!element || !element.children.length) {
     return element;
   }
 
   const firstBlock = element.children[0];
 
-  if (hasClass(firstBlock, 'nb-sidecar')) {
+  if (utils_hasClass(firstBlock, 'nb-sidecar')) {
     const content = firstBlock.querySelector('.nb-sidecar-area--content');
 
     if (content && content.children.length) {
-      return getFirstBlock(content);
+      return utils_getFirstBlock(content);
     }
   }
 
@@ -202,7 +202,7 @@ const getFirstBlock = element => {
 
 
 
-class GlobalService {
+class globalService_GlobalService {
   constructor() {
     this.props = {};
     this.newProps = {};
@@ -225,7 +225,7 @@ class GlobalService {
 
     const renderLoop = this._renderLoop.bind(this);
 
-    this._debouncedResizeCallback = debounce(this._resizeCallbackToBeDebounced.bind(this), 100); // now
+    this._debouncedResizeCallback = utils_debounce(this._resizeCallbackToBeDebounced.bind(this), 100); // now
 
     updateProps(); // on document ready
 
@@ -276,7 +276,7 @@ class GlobalService {
       self.currentMutationList = [];
     };
 
-    const debouncedObserveCallback = debounce(observeAndUpdateProps, 300);
+    const debouncedObserveCallback = utils_debounce(observeAndUpdateProps, 300);
 
     if (!window.MutationObserver) {
       return;
@@ -298,7 +298,7 @@ class GlobalService {
         wp.customize.selectiveRefresh.bind('partial-content-rendered', this._updateProps.bind(this));
       }
 
-      wp.customize.bind('change', debounce(this._updateProps.bind(this), 100));
+      wp.customize.bind('change', utils_debounce(this._updateProps.bind(this), 100));
     }
   }
 
@@ -452,7 +452,7 @@ class GlobalService {
 
 }
 
-/* harmony default export */ const globalService = (new GlobalService());
+/* harmony default export */ const components_globalService = (new globalService_GlobalService());
 ;// CONCATENATED MODULE: ./src/js/components/hero.js
 
 class Hero {
@@ -475,10 +475,10 @@ class Hero {
   }
 
   init() {
-    globalService.registerOnScroll(() => {
+    components_globalService.registerOnScroll(() => {
       this.update();
     });
-    globalService.registerRender(() => {
+    components_globalService.registerRender(() => {
       this.updateOnScroll();
     });
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -507,7 +507,7 @@ class Hero {
   update() {
     const {
       scrollY
-    } = globalService.getProps();
+    } = components_globalService.getProps();
     this.box = this.element.getBoundingClientRect();
     this.view = {
       left: this.box.left,
@@ -522,7 +522,7 @@ class Hero {
       scrollY,
       scrollHeight,
       windowHeight
-    } = globalService.getProps(); // used to calculate animation progress
+    } = components_globalService.getProps(); // used to calculate animation progress
 
     const length = windowHeight * 0.5;
     const middleMin = 0;
@@ -590,7 +590,7 @@ class Hero {
     const timeline = this.timeline;
     const {
       windowWidth
-    } = globalService.getProps();
+    } = components_globalService.getProps();
     const {
       headline,
       title,
@@ -886,7 +886,7 @@ class CommentsArea {
 ;// CONCATENATED MODULE: ./src/js/components/mqService.js
 
 
-class mqService {
+class mqService_mqService {
   constructor() {
     this.breakpoints = {
       mobile: '480px',
@@ -896,7 +896,7 @@ class mqService {
     };
     this.above = {};
     this.below = {};
-    globalService.registerOnDeouncedResize(this.onResize.bind(this));
+    components_globalService.registerOnDeouncedResize(this.onResize.bind(this));
     this.onResize();
   }
 
@@ -910,7 +910,7 @@ class mqService {
 
 }
 
-/* harmony default export */ const components_mqService = (new mqService());
+/* harmony default export */ const components_mqService = (new mqService_mqService());
 ;// CONCATENATED MODULE: ./src/js/components/navbar.js
 
 
@@ -931,7 +931,7 @@ class Navbar {
   initialize() {
     this.onResize();
     this.initialized = true;
-    globalService.registerOnDeouncedResize(this.onResize.bind(this));
+    components_globalService.registerOnDeouncedResize(this.onResize.bind(this));
   }
 
   onResize() {
@@ -967,7 +967,7 @@ class Navbar {
   addSubMenusLeftClass() {
     const {
       windowWidth
-    } = globalService.getProps();
+    } = components_globalService.getProps();
     this.$menuItemsWithChildren.each(function (index, obj) {
       const $obj = external_jQuery_default()(obj);
       const $subMenu = $obj.children(SUBMENU),
@@ -1031,8 +1031,8 @@ class Navbar {
 
 class BaseComponent {
   constructor() {
-    globalService.registerOnResize(this.onResize.bind(this));
-    globalService.registerOnDeouncedResize(this.onDebouncedResize.bind(this));
+    components_globalService.registerOnResize(this.onResize.bind(this));
+    components_globalService.registerOnDeouncedResize(this.onDebouncedResize.bind(this));
   }
 
   onResize() {}
@@ -1064,7 +1064,7 @@ class SearchOverlay extends base_component {
   }
 
   onDebouncedResize() {
-    setAndResetElementStyles(this.$searchOverlay, {
+    utils_setAndResetElementStyles(this.$searchOverlay, {
       transition: 'none'
     });
   }
@@ -1094,7 +1094,7 @@ class SearchOverlay extends base_component {
 
 
 
-class HeaderBase {
+class header_base_HeaderBase {
   constructor(options) {
     this.staticDistance = 0;
     this.stickyDistance = 0;
@@ -1153,12 +1153,12 @@ class HeaderBase {
 
 }
 
-/* harmony default export */ const header_base = (HeaderBase);
+/* harmony default export */ const header_base = ((/* unused pure expression or super */ null && (header_base_HeaderBase)));
 ;// CONCATENATED MODULE: ./src/js/components/header-template/header/header-colors.js
 
 
 
-class HeaderColors {
+class header_colors_HeaderColors {
   constructor(element, initialColorsSource, transparentColorsSource) {
     this.element = element;
     this.initialColorsSource = initialColorsSource ? initialColorsSource : element;
@@ -1228,43 +1228,14 @@ class HeaderColors {
 
 }
 
-/* harmony default export */ const header_colors = (HeaderColors);
-;// CONCATENATED MODULE: ./src/js/components/header-template/header/menu-toggle.js
-class MenuToggle {
-  constructor(input, options) {
-    const id = input.getAttribute('id');
-    const toggleLabels = document.querySelectorAll(`[for="${id}"]`);
-    const defaults = {
-      onChange: this.onChange
-    };
-    this.options = Object.assign({}, defaults, options);
-    this.input = input;
-    this.element = toggleLabels.length ? toggleLabels[0] : null;
-    this.bindEvents();
-  }
-
-  bindEvents() {
-    this.input.addEventListener('change', event => {
-      this.options.onChange.call(this, event, this);
-    });
-  }
-
-  onChange(isChecked, menuToggle) {}
-
-  getHeight() {
-    return this?.element?.offsetHeight || 0;
-  }
-
-}
-
-/* harmony default export */ const menu_toggle = (MenuToggle);
+/* harmony default export */ const header_colors = ((/* unused pure expression or super */ null && (header_colors_HeaderColors)));
 ;// CONCATENATED MODULE: ./src/js/components/header-template/header/header-mobile.js
 
 
 
 
 
-class HeaderMobile extends header_base {
+class header_mobile_HeaderMobile extends (/* unused pure expression or super */ null && (HeaderBase)) {
   constructor(parent) {
     super();
     this.parent = parent;
@@ -1280,19 +1251,19 @@ class HeaderMobile extends header_base {
       return row.element.querySelector('.site-logo');
     });
     this.headerClasses = getColorSetClasses(this.parent.element).join(' ');
-    this.colors = new header_colors(this.element, logoRow?.element);
-    this.menuToggleColors = new header_colors(this.menuToggle.element, logoRow?.element);
-    header_base.prototype.initialize.call(this);
+    this.colors = new HeaderColors(this.element, logoRow?.element);
+    this.menuToggleColors = new HeaderColors(this.menuToggle.element, logoRow?.element);
+    HeaderBase.prototype.initialize.call(this);
   }
 
   render(forceUpdate) {
-    header_base.prototype.render.call(this, forceUpdate);
+    HeaderBase.prototype.render.call(this, forceUpdate);
   }
 
   initializeMenuToggle() {
     const menuToggleCheckbox = document.getElementById('nova-menu-toggle');
     this.navigationIsOpen = menuToggleCheckbox.checked;
-    this.menuToggle = new menu_toggle(menuToggleCheckbox, {
+    this.menuToggle = new MenuToggle(menuToggleCheckbox, {
       onChange: this.onToggleChange.bind(this)
     });
   }
@@ -1335,14 +1306,14 @@ class HeaderMobile extends header_base {
   }
 
   updateStickyStyles() {
-    header_base.prototype.updateStickyStyles.call(this);
+    HeaderBase.prototype.updateStickyStyles.call(this);
     this.applyStickyStyles(this.menuToggle.element);
     this.colors.toggleColors(!this.shouldBeSticky);
     this.updateToggleClasses();
   }
 
   onResize() {
-    header_base.prototype.onResize.call(this);
+    HeaderBase.prototype.onResize.call(this);
     this.update();
   }
 
@@ -1383,21 +1354,21 @@ class HeaderMobile extends header_base {
 
 }
 
-/* harmony default export */ const header_mobile = (HeaderMobile);
+/* harmony default export */ const header_mobile = ((/* unused pure expression or super */ null && (header_mobile_HeaderMobile)));
 ;// CONCATENATED MODULE: ./src/js/components/header-template/header/header-row.js
 
 
 
-class HeaderRow extends header_base {
+class header_row_HeaderRow extends (/* unused pure expression or super */ null && (HeaderBase)) {
   constructor(element) {
     super();
     this.element = element;
-    this.colors = new header_colors(this.element);
+    this.colors = new HeaderColors(this.element);
   }
 
 }
 
-/* harmony default export */ const header_row = (HeaderRow);
+/* harmony default export */ const header_row = ((/* unused pure expression or super */ null && (header_row_HeaderRow)));
 ;// CONCATENATED MODULE: ./src/js/components/header-template/header/index.js
 
 
@@ -1406,7 +1377,7 @@ class HeaderRow extends header_base {
 
 
 
-class Header extends header_base {
+class header_Header extends (/* unused pure expression or super */ null && (HeaderBase)) {
   constructor(element, options) {
     super(options);
 
@@ -1416,9 +1387,13 @@ class Header extends header_base {
 
     this.onUpdate = options.onUpdate;
     this.element = element;
+    this.placeholder = document.createElement('div');
+    this.placeholder.style.display = 'none';
+    addClass(this.placeholder, 'site-header-placeholder');
+    this.element.insertAdjacentElement('beforebegin', this.placeholder);
     this.rows = this.getHeaderRows();
     this.shouldToggleColors = !!this.element.dataset.sticky;
-    this.mobileHeader = new header_mobile(this);
+    this.mobileHeader = new HeaderMobile(this);
     this.secondaryHeader = this.getSecondaryHeader();
     this.initialize();
     this.toggleRowsColors(true);
@@ -1432,13 +1407,24 @@ class Header extends header_base {
   }
 
   initialize() {
-    header_base.prototype.initialize.call(this);
+    HeaderBase.prototype.initialize.call(this);
     this.timeline = this.getIntroTimeline();
     this.timeline.play();
   }
 
+  applyStickyStyles(element) {
+    HeaderBase.prototype.applyStickyStyles.call(this, element);
+
+    if (this.shouldBeSticky) {
+      this.placeholder.style.height = `${this.getHeight()}px`;
+      this.placeholder.style.display = '';
+    } else {
+      this.placeholder.style.display = 'none';
+    }
+  }
+
   render(forceUpdate) {
-    header_base.prototype.render.call(this, forceUpdate);
+    HeaderBase.prototype.render.call(this, forceUpdate);
 
     if (typeof this.onUpdate === 'function') {
       this.onUpdate();
@@ -1446,15 +1432,15 @@ class Header extends header_base {
   }
 
   getHeight() {
-    if (!!components_mqService.below.lap) {
+    if (!!mqService.below.lap) {
       return this.mobileHeader.getHeight();
     }
 
-    return header_base.prototype.getHeight.call(this);
+    return HeaderBase.prototype.getHeight.call(this);
   }
 
   onResize() {
-    header_base.prototype.onResize.call(this);
+    HeaderBase.prototype.onResize.call(this);
     setAndResetElementStyles(this.element, {
       transition: 'none'
     });
@@ -1469,7 +1455,7 @@ class Header extends header_base {
 
     if (rows) {
       return Array.from(rows).map(element => {
-        return new header_row(element);
+        return new HeaderRow(element);
       });
     }
 
@@ -1483,12 +1469,13 @@ class Header extends header_base {
   }
 
   updateStickyStyles() {
-    header_base.prototype.updateStickyStyles.call(this);
+    HeaderBase.prototype.updateStickyStyles.call(this);
 
     if (this.shouldToggleColors) {
       this.toggleRowsColors(!this.shouldBeSticky);
-    } //    this.element.style.marginTop = `${this.staticDistance}px`;
+    }
 
+    this.element.style.marginTop = `${this.staticDistance}px`;
 
     if (this.secondaryHeader) {
       this.secondaryHeader.style.top = `${this.staticDistance}px`;
@@ -1531,7 +1518,7 @@ class Header extends header_base {
 
 }
 
-/* harmony default export */ const header_template_header = (Header);
+/* harmony default export */ const header = ((/* unused pure expression or super */ null && (header_Header)));
 ;// CONCATENATED MODULE: ./node_modules/js-cookie/dist/js.cookie.mjs
 /*! js-cookie v3.0.1 | MIT */
 /* eslint-disable no-var */
@@ -1666,32 +1653,32 @@ function init (converter, defaultAttributes) {
 var api = init(defaultConverter, { path: '/' });
 /* eslint-enable no-var */
 
-/* harmony default export */ const js_cookie = (api);
+/* harmony default export */ const js_cookie = ((/* unused pure expression or super */ null && (api)));
 
 ;// CONCATENATED MODULE: ./src/js/components/header-template/announcement-bar/index.js
 
 
 
-class AnnouncementBar {
+class announcement_bar_AnnouncementBar {
   constructor(element, args) {
     this.element = element;
     this.parent = args.parent || null;
     this.transitionDuration = args.transitionDuration || 0.5;
     this.transitionEasing = args.transitionEasing || 'power4.out';
     this.pieces = this.getPieces();
-    this.id = external_jQuery_default()(element).data('id');
+    this.id = $(element).data('id');
     this.cookieName = 'novablocks-announcement-' + this.id + '-disabled';
     this.height = 0;
-    const disabled = js_cookie.get(this.cookieName);
-    const loggedIn = external_jQuery_default()('body').hasClass('logged-in');
+    const disabled = Cookies.get(this.cookieName);
+    const loggedIn = $('body').hasClass('logged-in');
 
     if (disabled && !loggedIn) {
-      external_jQuery_default()(element).remove();
+      $(element).remove();
       return;
     }
 
     this.onResize();
-    globalService.registerOnDeouncedResize(this.onResize.bind(this));
+    GlobalService.registerOnDeouncedResize(this.onResize.bind(this));
     this.timeline.play();
     this.bindEvents();
   }
@@ -1720,7 +1707,7 @@ class AnnouncementBar {
   }
 
   getPieces() {
-    const $element = external_jQuery_default()(this.element);
+    const $element = $(this.element);
     return {
       element: $element,
       wrapper: $element.find('.novablocks-announcement-bar__wrapper'),
@@ -1787,7 +1774,7 @@ class AnnouncementBar {
 }
 ;// CONCATENATED MODULE: ./src/js/components/header-template/promo-bar/index.js
 
-class PromoBar {
+class promo_bar_PromoBar {
   constructor(element, args) {
     const announcementBars = element.querySelectorAll('.novablocks-announcement-bar');
     const announcementElementsArray = Array.from(announcementBars);
@@ -1826,7 +1813,7 @@ class PromoBar {
 
 const applyPaddingTopToTargets = ($targets, extraPaddingTop) => {
   $targets.each((i, target) => {
-    const $target = external_jQuery_default()(target);
+    const $target = $(target);
     const paddingTop = getPaddingTop($target);
     $target.css('paddingTop', paddingTop + extraPaddingTop);
   });
@@ -1839,7 +1826,7 @@ const getPaddingTop = $element => {
 class HeaderTemplate {
   constructor() {
     this.adminBar = document.getElementById('wpadminbar');
-    this.enableFirstBlockPaddingTop = external_jQuery_default()('body').hasClass('has-novablocks-header-transparent');
+    this.enableFirstBlockPaddingTop = $('body').hasClass('has-novablocks-header-transparent');
     this.adminBarFixed = false;
     this.promoBarFixed = false;
     this.adminBarHeight = 0;
@@ -1849,7 +1836,7 @@ class HeaderTemplate {
     }, 100);
     this.initializeHeader();
     this.initializePromoBar();
-    globalService.registerOnDeouncedResize(this.onResize.bind(this));
+    GlobalService.registerOnDeouncedResize(this.onResize.bind(this));
   }
 
   onResize() {
@@ -1880,7 +1867,7 @@ class HeaderTemplate {
     }
 
     if (!!header) {
-      this.header = new header_template_header(header, {
+      this.header = new Header(header, {
         onResize: () => {
           requestAnimationFrame(this.onHeaderUpdate.bind(this));
         }
@@ -1895,7 +1882,7 @@ class HeaderTemplate {
 
     const promoBarHeight = this.promoBar?.height || 0;
     const headerHeight = this.header?.getHeight() || 0;
-    const $body = external_jQuery_default()('body');
+    const $body = $('body');
     document.documentElement.style.setProperty('--theme-header-height', `${headerHeight}px`);
 
     if (!$body.is('.has-no-spacing-top')) {
@@ -1903,7 +1890,7 @@ class HeaderTemplate {
     } else {
       const content = document.querySelector('.site-main .hentry');
       const firstBlock = getFirstBlock(content);
-      const $firstBlock = external_jQuery_default()(firstBlock);
+      const $firstBlock = $(firstBlock);
 
       if ($firstBlock.is('.supernova')) {
         const attributes = $firstBlock.data();
@@ -2004,7 +1991,7 @@ class HeaderTemplate {
 
 class App {
   constructor() {
-    new HeaderTemplate();
+    //    new HeaderTemplate();
     this.initializeHero();
     this.toggleSMLightDarkClasses();
     this.navbar = new Navbar();
@@ -2017,7 +2004,7 @@ class App {
   initializeImages() {
     const showLoadedImages = this.showLoadedImages.bind(this);
     showLoadedImages();
-    globalService.registerObserverCallback(function (mutationList) {
+    components_globalService.registerObserverCallback(function (mutationList) {
       external_jQuery_default().each(mutationList, (i, mutationRecord) => {
         external_jQuery_default().each(mutationRecord.addedNodes, (j, node) => {
           const nodeName = node.nodeName && node.nodeName.toLowerCase();
@@ -2032,11 +2019,11 @@ class App {
 
   toggleSMLightDarkClasses() {
     const wrappers = document.querySelectorAll('[class*="sm-palette"]');
-    wrappers.forEach(toggleLightClasses);
+    wrappers.forEach(utils_toggleLightClasses);
   }
 
   initializeReservationForm() {
-    globalService.registerObserverCallback(function (mutationList) {
+    components_globalService.registerObserverCallback(function (mutationList) {
       external_jQuery_default().each(mutationList, (i, mutationRecord) => {
         external_jQuery_default().each(mutationRecord.addedNodes, (j, node) => {
           const $node = external_jQuery_default()(node);
