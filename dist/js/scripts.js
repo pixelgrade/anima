@@ -1412,17 +1412,6 @@ class header_Header extends (/* unused pure expression or super */ null && (Head
     this.timeline.play();
   }
 
-  applyStickyStyles(element) {
-    HeaderBase.prototype.applyStickyStyles.call(this, element);
-
-    if (this.shouldBeSticky) {
-      this.placeholder.style.height = `${this.getHeight()}px`;
-      this.placeholder.style.display = '';
-    } else {
-      this.placeholder.style.display = 'none';
-    }
-  }
-
   render(forceUpdate) {
     HeaderBase.prototype.render.call(this, forceUpdate);
 
@@ -1473,9 +1462,8 @@ class header_Header extends (/* unused pure expression or super */ null && (Head
 
     if (this.shouldToggleColors) {
       this.toggleRowsColors(!this.shouldBeSticky);
-    }
+    } //    this.element.style.marginTop = `${this.staticDistance}px`;
 
-    this.element.style.marginTop = `${this.staticDistance}px`;
 
     if (this.secondaryHeader) {
       this.secondaryHeader.style.top = `${this.staticDistance}px`;
@@ -1991,7 +1979,6 @@ class HeaderTemplate {
 
 class App {
   constructor() {
-    //    new HeaderTemplate();
     this.initializeHero();
     this.toggleSMLightDarkClasses();
     this.navbar = new Navbar();
