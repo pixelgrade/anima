@@ -18,9 +18,17 @@
 
 // Single Sidecar
 .nb-sidecar-area--sidebar {
-
     @include above(lap) {
         --font-size-base: var(--sidebar-fs-base);
+    }
+}
+
+.nb-sidecar-area--content {
+    @include above(lap) {
+        // Increase the font-size within Content area
+        :is(p, ul, ol) { 
+            --font-size-base: 1.12;
+        }
     }
 }
 
