@@ -35,6 +35,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 						'heading_2_font',
 						'heading_3_font',
 						'heading_4_font',
+						'quote_font', // !!! Add font-control option
 					],
 				],
 				'sm_font_secondary'  => [
@@ -51,8 +52,8 @@ function anima_add_style_manager_connected_fields( $options ) {
 					'default' => 'Reforma1969',
 					'connected_fields' => [
 						'body_font',
-						'content_font',
 						'lead_font',
+						'cite_font', // !!! Add font-control option
 						'input_font'
 					],
 				],
@@ -88,7 +89,6 @@ function anima_add_style_manager_connected_fields( $options ) {
 								'sm_font_body'      => [
 									'navigation_font',
 									'body_font',
-									'content_font',
 									'cite_font',
 									'input_font',
 								],
@@ -119,7 +119,6 @@ function anima_add_style_manager_connected_fields( $options ) {
 								],
 								'sm_font_body'      => [
 									'body_font',
-									'content_font',
 									'lead_font',
 									'cite_font',
 									'input_font',
@@ -151,7 +150,6 @@ function anima_add_style_manager_connected_fields( $options ) {
 									'meta_font',
 									'navigation_font',
 									'body_font',
-									'content_font',
 									'lead_font',
 									'cite_font',
 									'input_font',
@@ -181,7 +179,6 @@ function anima_add_style_manager_connected_fields( $options ) {
 									'meta_font',
 									'navigation_font',
 									'body_font',
-									'content_font',
 									'lead_font',
 									'cite_font',
 									'input_font',
@@ -211,7 +208,6 @@ function anima_add_style_manager_connected_fields( $options ) {
 									'meta_font',
 									'navigation_font',
 									'body_font',
-									'content_font',
 									'lead_font',
 									'cite_font',
 									'input_font',

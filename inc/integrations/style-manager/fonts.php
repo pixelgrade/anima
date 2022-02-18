@@ -164,9 +164,9 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'type' => 'html',
 					'html' => '<span class="separator sub-section label">' . esc_html__( 'Body Fonts', '__theme_txtd' ) . '</span>',
 				],
-				'content_font'    => [
+				'body_font'    => [
 					'type'              => 'font',
-					'label'             => esc_html__( 'Content', '__theme_txtd' ),
+					'label'             => esc_html__( 'Body', '__theme_txtd' ),
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-body-',
