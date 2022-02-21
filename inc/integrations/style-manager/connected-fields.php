@@ -24,10 +24,10 @@ function anima_add_style_manager_connected_fields( $options ) {
 			'options' => [
 				// Font Palettes Assignment.
 				'sm_font_palette'    => [
-					'default' => 'exquisite',
+					'default' => 'system',
 				],
 				'sm_font_primary'    => [
-					'default' => 'Reforma1969',
+					'default' => 'System Sans-Serif Clear',
 					'connected_fields' => [
 						'super_display_font',
 						'display_font',
@@ -39,7 +39,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 					],
 				],
 				'sm_font_secondary'  => [
-					'default' => 'Reforma2018',
+					'default' => 'System Sans-Serif Clear',
 					'connected_fields' => [
 						'heading_5_font',
 						'heading_6_font',
@@ -49,7 +49,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 					],
 				],
 				'sm_font_body'       => [
-					'default' => 'Reforma1969',
+					'default' => 'System Sans-Serif Clear',
 					'connected_fields' => [
 						'body_font',
 						'lead_font',
@@ -58,7 +58,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 					],
 				],
 				'sm_font_accent'     => [
-					'default' => 'Billy Ohio',
+					'default' => 'System Handwriting',
 					'connected_fields' => [
 						'accent_font',
 					],
@@ -67,7 +67,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 					'default' => 'preset-2',
 					'choices' => [
 						'preset-1'      => [
-							'label'   => __( 'Preset 1', '__theme_txtd' ),
+							'label'   => __( 'Preset 1 (Towards Primary)', '__theme_txtd' ),
 							'options' => [],
 							'config'  => [
 								'sm_font_primary'   => [
@@ -129,7 +129,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 							],
 						],
 						'preset-3'      => [
-							'label'   => __( 'Preset 3', '__theme_txtd' ),
+							'label'   => __( 'Preset 3 (Towards Secondary/Body)', '__theme_txtd' ),
 							'options' => [],
 							'config'  => [
 								'sm_font_primary'   => [
