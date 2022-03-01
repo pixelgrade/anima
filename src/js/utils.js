@@ -123,40 +123,6 @@ export function getFirstChild ( el ) {
   return firstChild;
 }
 
-export const toggleLightClasses = element => {
-  const classes = Array.from( element.classList );
-  const paletteClassname = classes.find( classname => {
-    return classname.indexOf( 'sm-palette-' ) > -1 && classname.indexOf( 'sm-palette--' ) === -1;
-  } );
-  const palette = paletteClassname ? paletteClassname.substring( 'sm-palette-'.length ) : 1;
-  const variationPrefix = 'sm-variation-';
-  const variationClassname = classes.find( classname => classname.indexOf( variationPrefix ) > -1 );
-  const variation = variationClassname ? variationClassname.substring( variationPrefix.length ) : 1;
-  const isShifted = !!classes.find( classname => classname.indexOf( 'sm-palette--shifted' ) > -1 );
-
-  const sm_site_color_variation = window?.style_manager_values?.sm_site_color_variation;
-  const siteColorVariation = sm_site_color_variation ? parseInt( sm_site_color_variation, 10 ) : 1;
-
-  if ( !Array.isArray( window?.styleManager?.colorsConfig ) ) {
-    return;
-  }
-
-  const currentPaletteConfig = window.styleManager.colorsConfig.find( thisPalette => {
-    return `${ thisPalette.id }` === `${ palette }`;
-  } );
-
-  if ( currentPaletteConfig ) {
-    colordExtend( [ colordA11yPlugin ] );
-
-    const variationIndex = parseInt( variation, 10 ) - 1;
-    const hex = currentPaletteConfig.variations ? currentPaletteConfig.variations[variationIndex].bg : currentPaletteConfig.colors[variationIndex].value;
-    const isLight = colord( '#FFFFFF' ).contrast( hex ) < colord( '#000000' ).contrast( hex );
-
-    removeClass( element, isLight ? 'sm-dark' : 'sm-light' );
-    addClass( element, isLight ? 'sm-light' : 'sm-dark' );
-  }
-};
-
 export const getFirstBlock = ( element ) => {
 
   if ( ! element || ! element.children.length ) {
