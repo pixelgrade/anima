@@ -5,70 +5,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// Add theme fonts to the font field options list
-add_filter( 'style_manager/theme_fonts', 'anima_add_style_manager_theme_fonts' );
-
 // Add fonts section and options to the Style Manager config
 add_filter( 'style_manager/filter_fields', 'anima_add_fonts_section_to_style_manager_config', 60, 1 );
-
-function anima_add_style_manager_theme_fonts( $fonts ) {
-
-	$fonts['Reforma1969'] = [
-		'family'   => 'Reforma1969',
-		'src'      => '//pxgcdn.com/fonts/reforma1969/stylesheet.css',
-		'variants' => [ '300', '300italic', '500', '500italic', '700', '700italic' ],
-	];
-
-	$fonts['Reforma2018'] = [
-		'family'   => 'Reforma2018',
-		'src'      => '//pxgcdn.com/fonts/reforma2018/stylesheet.css',
-		'variants' => [ '300', '300italic', '500', '500italic', '700', '700italic' ],
-	];
-
-	$fonts['League Spartan'] = [
-		'family'   => 'League Spartan',
-		'src'      => '//pxgcdn.com/fonts/league-spartan/stylesheet.css',
-		'variants' => []
-	];
-
-	$fonts['HK Grotesk'] = [
-		'family'   => 'HK Grotesk',
-		'src'      => '//pxgcdn.com/fonts/hk-grotesk/stylesheet.css',
-		'variants' => []
-	];
-
-	$fonts['YoungSerif'] = [
-		'family'   => 'YoungSerif',
-		'src'      => '//pxgcdn.com/fonts/young-serif/stylesheet.css',
-		'variants' => []
-	];
-
-	$fonts['Billy Ohio'] = [
-		'family'   => 'Billy Ohio',
-		'src'      => '//pxgcdn.com/fonts/billy-ohio/stylesheet.css',
-		'variants' => []
-	];
-
-	$fonts['Mellony Dry Brush'] = [
-		'family'   => 'Mellony Dry Brush',
-		'src'      => '//pxgcdn.com/fonts/mellony-dry-brush/stylesheet.css',
-		'variants' => []
-	];
-
-	$fonts['Jandys Dua'] = [
-		'family'   => 'Jandys Dua',
-		'src'      => '//pxgcdn.com/fonts/jandys-dua/stylesheet.css',
-		'variants' => []
-	];
-
-	$fonts['Nermola Script'] = [
-		'family'   => 'Nermola Script',
-		'src'      => '//pxgcdn.com/fonts/nermola-script/stylesheet.css',
-		'variants' => []
-	];
-
-	return $fonts;
-}
 
 function anima_add_fonts_section_to_style_manager_config( $config ) {
 
@@ -164,14 +102,14 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'type' => 'html',
 					'html' => '<span class="separator sub-section label">' . esc_html__( 'Body Fonts', '__theme_txtd' ) . '</span>',
 				],
-				'content_font'    => [
+				'body_font'    => [
 					'type'              => 'font',
-					'label'             => esc_html__( 'Content', '__theme_txtd' ),
+					'label'             => esc_html__( 'Body', '__theme_txtd' ),
 					'desc'              => esc_html__( '', '__theme_txtd' ),
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-body-',
 					'default'           => [
-						'font-family'     => 'Reforma1969',
+						'font-family'     => 'System Sans-Serif Clear',
 						'font-size'       => 18,
 						'line-height'     => 1.6,
 						'font-weight'     => '500',
@@ -189,7 +127,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-lead-',
 					'default'           => [
-						'font-family'     => 'Reforma1969',
+						'font-family'     => 'System Sans-Serif Clear',
 						'font-size'       => 24,
 						'line-height'     => 1.6,
 						'font-weight'     => 500,
@@ -211,7 +149,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-super-display-',
 					'default'           => [
-						'font-family'     => 'Reforma1969',
+						'font-family'     => 'System Sans-Serif Clear',
 						'font-size'       => 165,
 						'line-height'     => 1.0,
 						'font-weight'     => 700,
@@ -228,7 +166,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-display-',
 					'default'           => [
-						'font-family'     => 'Reforma1969',
+						'font-family'     => 'System Sans-Serif Clear',
 						'font-size'       => 115,
 						'line-height'     => 1.03,
 						'font-weight'     => 700,
@@ -245,7 +183,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-heading-1-',
 					'default'           => [
-						'font-family'     => 'Reforma1969',
+						'font-family'     => 'System Sans-Serif Clear',
 						'font-size'       => 66,
 						'line-height'     => 1.1,
 						'font-weight'     => 700,
@@ -262,7 +200,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-heading-2-',
 					'default'           => [
-						'font-family'     => 'Reforma1969',
+						'font-family'     => 'System Sans-Serif Clear',
 						'font-size'       => 40,
 						'line-height'     => 1.2,
 						'font-weight'     => 700,
@@ -279,7 +217,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-heading-3-',
 					'default'           => [
-						'font-family'     => 'Reforma1969',
+						'font-family'     => 'System Sans-Serif Clear',
 						'font-size'       => 32,
 						'line-height'     => 1.2,
 						'font-weight'     => 700,
@@ -296,7 +234,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-heading-4-',
 					'default'           => [
-						'font-family'     => 'Reforma1969',
+						'font-family'     => 'System Sans-Serif Clear',
 						'font-size'       => 24,
 						'line-height'     => 1.2,
 						'font-weight'     => 700,
@@ -313,8 +251,8 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-heading-5-',
 					'default'           => [
-						'font-family'     => 'Reforma2018',
-						'font-size'       => 17,
+						'font-family'     => 'System Sans-Serif Clear',
+						'font-size'       => 18,
 						'line-height'     => 1.5,
 						'font-weight'     => 700,
 						'text-transform'  => 'none',
@@ -330,8 +268,8 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-heading-6-',
 					'default'           => [
-						'font-family'     => 'Reforma2018',
-						'font-size'       => 17,
+						'font-family'     => 'System Sans-Serif Clear',
+						'font-size'       => 16,
 						'line-height'     => 1.5,
 						'font-weight'     => 500,
 						'text-transform'  => 'none',
@@ -347,14 +285,9 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-accent-',
 					'default'           => [
-						'font-family' => 'Billy Ohio',
+						'font-family' => 'System Handwriting',
 					],
-					'recommended'       => [
-						'Billy Ohio',
-						'Mellony Dry Brush',
-						'Jandys Dua',
-						'Nermola Script',
-					],
+					'recommended'       => [],
 				],
 				'headline_lines_spacings'   =>  [
 					'type'        => 'range',
@@ -387,7 +320,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-navigation-',
 					'default'           => [
-						'font-family'     => 'Reforma2018',
+						'font-family'     => 'System Sans-Serif Clear',
 						'font-size'       => 17,
 						'line-height'     => 1.5,
 						'font-weight'     => 500,
@@ -404,7 +337,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-button-',
 					'default'           => [
-						'font-family'     => 'Reforma2018',
+						'font-family'     => 'System Sans-Serif Clear',
 						'font-size'       => 17,
 						'line-height'     => 1.2,
 						'font-weight'     => 500,
@@ -421,7 +354,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-input-',
 					'default'           => [
-						'font-family'     => 'Reforma2018',
+						'font-family'     => 'System Sans-Serif Clear',
 						'font-size'       => 17,
 						'line-height'     => 1.2,
 						'font-weight'     => 500,
@@ -438,8 +371,8 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-meta-',
 					'default'           => [
-						'font-family'     => 'Reforma2018',
-						'font-size'       => 17,
+						'font-family'     => 'System Sans-Serif Clear',
+						'font-size'       => 16,
 						'line-height'     => 1.5,
 						'font-weight'     => 500,
 						'text-transform'  => 'none',
