@@ -12,7 +12,7 @@
  */
 function anima_register_block_patterns() {
 	$block_pattern_categories = [
-		'featured' => [ 'label' => __( 'Featured', '__theme_txtd' ) ],
+		'features' => [ 'label' => __( 'Features', '__theme_txtd' ) ],
 		'footer'   => [ 'label' => __( 'Footers', '__theme_txtd' ) ],
 		'header'   => [ 'label' => __( 'Headers', '__theme_txtd' ) ],
 		'query'    => [ 'label' => __( 'Query', '__theme_txtd' ) ],
