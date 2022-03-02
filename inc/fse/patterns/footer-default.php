@@ -21,5 +21,5 @@ return array(
 		</div>
 <!-- /wp:separator -->
 
-<!-- wp:html -->' . anima_footer_get_copyright() . '<!-- /wp:html -->',
+' . anima_footer_get_copyright(),
 );
