@@ -17,6 +17,8 @@ body.block-patterns {
     * {
         font-weight: 400 !important;
         font-family: system-font-sans-serif-clear, "SF Pro Display", "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitsream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif !important; 
+        text-transform: none !important;
+        letter-spacing: 0 !important;
     }
 
     @include above(tablet) {
@@ -51,6 +53,7 @@ body.block-patterns {
             transform-origin: 50% 0%;
             transform: scale(0.8);
             transition: all .4s ease;
+            transition-property: all !important;
 
             // Reset block spacing
             --nb-emphasis-top-spacing: 1 !important;
