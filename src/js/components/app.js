@@ -7,7 +7,6 @@ import Hero from './hero';
 import CommentsArea from './commentsArea';
 import Navbar from './navbar';
 import SearchOverlay from './search-overlay';
-import HeaderTemplate from './header-template';
 
 export default class App {
 
