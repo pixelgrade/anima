@@ -115,7 +115,7 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 			}
 
             // Allow others to have a say in this.
-			$this->menu_items_boxes_config = apply_filters( 'anima_menu_items_boxes_config', $this->menu_items_boxes_config );
+			$this->menu_items_boxes_config = apply_filters( 'anima/menu_items_boxes_config', $this->menu_items_boxes_config );
 
 			/* ===============
 			 * Backend effects
@@ -162,7 +162,7 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 			/* ===============
 			 * Frontend effects
 			 */
-			add_action( 'anima_after_footer', [ $this, 'output_search_overlay' ], 10 );
+			add_action( 'anima/footer:after', [ $this, 'output_search_overlay' ], 10 );
 			add_filter( 'get_search_form', [ $this, 'custom_search_form' ], 10, 1 );
 
 			// Handle Menu Item Badge Frontend Output
