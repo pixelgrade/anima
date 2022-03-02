@@ -17,6 +17,7 @@ gulp.task( 'server', function() {
 		cwd: '../../',
 		files: [
 			'plugins/nova-blocks/build/**/*.css',
+			'plugins/style-manager/dist/**/*.css',
 			'themes/anima/dist/**/*',
 			'themes/anima/style.css',
 		],

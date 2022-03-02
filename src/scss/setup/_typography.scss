@@ -3,10 +3,12 @@
 // font families
 @use "sass:math";
 
-$theme-sm-font-body: Reforma1969, sans-serif;
-$theme-sm-font-primary: Reforma1969, sans-serif;
-$theme-sm-font-secondary: Reforma2018, sans-serif;
-$theme-sm-font-accent: Billy Ohio, sans-serif;
+
+
+$theme-sm-font-body: system-font-sans-serif-legible, "SF Pro Text", Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
+$theme-sm-font-primary: system-font-sans-serif-legible, "SF Pro Text", Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
+$theme-sm-font-secondary: system-font-sans-serif-legible, "SF Pro Text", Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
+$theme-sm-font-accent: system-font-sans-serif-legible, "SF Pro Text", Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 // font sizing
 $theme-body-font-size: 16px;
@@ -33,15 +35,16 @@ $theme-font-size-addon-multiplier-desktop: 1;
 $theme-fonts: (
     body: (
         font-family: $theme-sm-font-body,
-        font-size: 16,
-        line-height: 1.7,
+        font-size: 18,
+        line-height: 1.6,
         font-weight: 400,
         font-style: normal,
         letter-spacing: -0.03em,
     ),
+    // Content should be larger than body (eg. 1.12x )
     content: (
         font-family: $theme-sm-font-body,
-        font-size: 18,
+        font-size: 20,
         line-height: 1.6,
         font-style: normal,
         letter-spacing: -0.03em,

@@ -44,8 +44,9 @@
     @include button-transition;
     @include button-base;
     @include button-box;
-    @include apply-font(button);
     @include button-color;
+    @include apply-font(button);
+    @extend %apply-font-properties; // Overwrite the inline font-size of 1.125em
 
     @include specific(3) {
 
