@@ -21,7 +21,6 @@ export default class App {
     this.initializeReservationForm();
   }
 
-
   initializeImages() {
     const showLoadedImages = this.showLoadedImages.bind( this );
     showLoadedImages();
