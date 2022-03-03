@@ -58,12 +58,12 @@ add_filter( 'taxonomy_template', 'anima_get_custom_template_canvas_path', 10, 3 
 /**
  * Open the main page wrapper.
  */
-add_action( 'anima_before_template_html', function() { ?>
+add_action( 'anima/template_html:before', function() { ?>
 
 <div id="page" <?php anima_page_class() ?>>
 
 	<?php
-	do_action( 'anima_before_header', 'main' );
+	do_action( 'anima/header:before', 'main' );
 }, 10 );
 
 /**
@@ -71,13 +71,13 @@ add_action( 'anima_before_template_html', function() { ?>
  *
  * Use a ridiculously small priority to be sure we get there first.
  */
-add_action( 'anima_after_template_html', function() {
+add_action( 'anima/template_html:after', function() {
     /**
-     * anima_after_footer hook.
+     * anima/footer:after hook.
      *
      * @hooked anima_output_search_overlay() - 10 (outputs search overlay markup)
      */
-    do_action( 'anima_after_footer' ); ?>
+    do_action( 'anima/footer:after' ); ?>
 
 </div><!-- #page -->
 <?php

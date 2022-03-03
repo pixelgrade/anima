@@ -183,7 +183,7 @@ if ( ! function_exists( 'anima_get_separator_markup' ) ) {
 			<div class="c-separator__line c-separator__line--right"></div>
 			<div class="c-separator__arrow c-separator__arrow--right"></div>
 		</div>
-		<?php return apply_filters( 'anima_separator_markup', ob_get_clean() );
+		<?php return apply_filters( 'anima/separator_markup', ob_get_clean() );
 	}
 }
 
@@ -272,7 +272,7 @@ if ( ! function_exists( ' anima_get_custom_logo_transparent' ) ) {
 		 * @param string $html    Custom logo HTML output.
 		 * @param int    $blog_id ID of the blog to get the custom logo for.
 		 */
-		return apply_filters( 'anima_get_custom_logo_transparent', $html, $blog_id );
+		return apply_filters( 'anima/get_custom_logo_transparent', $html, $blog_id );
 	}
 }
 
@@ -308,7 +308,7 @@ if ( ! function_exists( 'anima_footer_get_copyright' ) ) {
 			$output .= '</div><!-- /wp:group -->';
 		}
 
-		return apply_filters( 'anima_footer_get_copyright', $output );
+		return apply_filters( 'anima/footer_get_copyright', $output );
 	}
 }
 
@@ -320,7 +320,7 @@ if ( ! function_exists( 'anima_footer_get_copyright_content' ) ) {
 	 * @return string
 	 */
 	function anima_footer_get_copyright_content(): string {
-		$copyright_text = apply_filters( 'anima_footer_copyright_text', esc_html__( '&copy; %year% %site-title%.', '__theme_txtd' ) );
+		$copyright_text = apply_filters( 'anima/footer_copyright_text', esc_html__( '&copy; %year% %site-title%.', '__theme_txtd' ) );
 		if ( ! empty( $copyright_text ) ) {
 			// We need to parse some tags
 			return anima_parse_content_tags( $copyright_text );
@@ -560,7 +560,7 @@ if ( ! function_exists( 'anima_get_the_post_navigation' ) ) {
 			$navigation = _navigation_markup( $previous . $next, 'post-navigation', $args['screen_reader_text'] );
 		}
 
-		return apply_filters( 'anima_get_the_post_navigation', $navigation, $args );
+		return apply_filters( 'anima/get_the_post_navigation', $navigation, $args );
 	}
 }
 
@@ -712,9 +712,9 @@ if ( ! function_exists( 'anima_get_content_markup' ) ) {
 	function anima_get_content_markup() {
 		ob_start();
 
-		do_action( 'anima_before_content' );
+		do_action( 'anima/content:before' );
 		the_content();
-		do_action( 'anima_after_content' );
+		do_action( 'anima/content:after' );
 
 		return ob_get_clean();
 	}
@@ -935,7 +935,7 @@ function anima_get_post_reading_time_in_minutes( $post, int $wpm = 250 ): int {
 	$content = str_replace( ']]>', ']]&gt;', $content );
 
 	// Allow others to have a say; like removing certain non-essential elements (avatars for example).
-	$content = apply_filters( 'anima_post_content_before_reading_time_calc', $content, $post );
+	$content = apply_filters( 'anima/post_content_before_reading_time_calc', $content, $post );
 
 	return anima_get_reading_time_in_minutes( $content, $wpm );
 }
@@ -1019,7 +1019,7 @@ function anima_get_page_class( $class = '' ): array {
 	}
 
 	$classes = array_map( 'esc_attr', $classes );
-	$classes = apply_filters( 'anima_page_class', $classes, $class );
+	$classes = apply_filters( 'anima/page_class', $classes, $class );
 
 	return array_unique( $classes );
 }
