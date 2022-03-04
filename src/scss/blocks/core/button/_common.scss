@@ -1,8 +1,9 @@
-$enable-button-block-styles:            true !default;
+$enable-button-block-styles: true !default;
 
 @if $enable-button-block-styles == true {
 
-    .wp-block-buttons[class][class] {
-        gap: calc( var(--theme-content-spacing) / 2 );
-    }
+  .wp-block-buttons[class][class] {
+    display: flex;
+    gap: calc(var(--theme-content-spacing) / 2);
+  }
 }
