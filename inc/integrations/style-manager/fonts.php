@@ -110,7 +110,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'properties_prefix' => '--theme-body-',
 					'default'           => [
 						'font-family'     => 'System Sans-Serif Clear',
-						'font-size'       => 18,
+						'font-size'       => 16,
 						'line-height'     => 1.6,
 						'font-weight'     => '500',
 						'text-transform'  => 'none',
@@ -128,7 +128,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'properties_prefix' => '--theme-lead-',
 					'default'           => [
 						'font-family'     => 'System Sans-Serif Clear',
-						'font-size'       => 24,
+						'font-size'       => 21,
 						'line-height'     => 1.6,
 						'font-weight'     => 500,
 						'text-transform'  => 'none',
