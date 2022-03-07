@@ -6,6 +6,10 @@ $assets-folder-path: '../../../assets';
     clear: both;
 }
 
+.novablocks-header-row {
+  --nb-wrapper-sides-spacings: calc( var(--nb-spacing) * var(--theme-header-sides-spacing-setting, 50) * 2 / 100 );
+}
+
 @import "core/archives/common";
 @import "core/video/common";
 @import "core/button/common";

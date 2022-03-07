@@ -101,25 +101,15 @@ function anima_add_header_section_to_style_manager_config( $config ) {
 						],
 					],
 				],
-				'header_position'                 => [
-					'type'    => 'select',
-					'label'   => esc_html__( 'Header Position on Scroll', '__theme_txtd' ),
-					'desc'    => esc_html__( 'Note: to prevent your content from being annoyingly hidden behind the Header on smaller screens, the Sticky option will remain active only if the Header height is larger than 20% of the browser window height.', '__theme_txtd' ),
-					'default' => 'sticky',
-					'choices' => [
-						'static' => esc_html__( 'Static', '__theme_txtd' ),
-						'sticky' => esc_html__( 'Sticky (fixed)', '__theme_txtd' ),
-					],
-				],
 				'header_sides_spacing'            => [
 					'type'        => 'range',
 					'label'       => esc_html__( 'Header Sides Spacing', '__theme_txtd' ),
 					'desc'        => esc_html__( 'Adjust the space separating the header and the sides of the browser.', '__theme_txtd' ),
 					'live'        => true,
-					'default'     => 48, // this should be set by the theme (previously 40)
+					'default'     => 50, // this should be set by the theme (previously 40)
 					'input_attrs' => [
 						'min'          => 0,
-						'max'          => 140,
+						'max'          => 100,
 						'step'         => 1,
 						'data-preview' => true,
 					],

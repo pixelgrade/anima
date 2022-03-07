@@ -65,6 +65,10 @@ if ( ! function_exists( 'anima_novablocks_setup' ) ) {
 				'supports' => [ 'blobs' ],
 				'enabled' => true,
 			],
+			'meta-box' => [
+				'name' => 'meta-box',
+				'enabled' => true,
+			],
 			'menu-food' => [
 				'name' => 'menu-food',
 				'enabled' => true,
