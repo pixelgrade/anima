@@ -12,13 +12,13 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 
 	$font_size_config = [
 		'min'  => 12,
-		'max'  => 24,
+		'max'  => 32,
 		'step' => 1,
 		'unit' => '',
 	];
 
 	$font_size_config_medium = [
-		'min'  => 16,
+		'min'  => 12,
 		'max'  => 36,
 		'step' => 1,
 		'unit' => '',
@@ -26,7 +26,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 
 	$font_size_config_large = [
 		'min'  => 16,
-		'max'  => 120,
+		'max'  => 200,
 		'step' => 1,
 		'unit' => '',
 	];
