@@ -12,7 +12,7 @@
  * Get the template HTML.
  * This needs to run before <head> so that blocks can add scripts and styles in wp_head().
  */
-$template_html = apply_filters( 'anima_get_block_template_html', get_the_block_template_html() );
+$template_html = apply_filters( 'anima/get_block_template_html', get_the_block_template_html() );
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -24,11 +24,11 @@ $template_html = apply_filters( 'anima_get_block_template_html', get_the_block_t
 <?php wp_body_open(); ?>
 
 <?php
-do_action( 'anima_before_template_html', 'main' );
+do_action( 'anima/template_html:before', 'main' );
 
 echo $template_html; // phpcs:ignore WordPress.Security.EscapeOutput
 
-do_action( 'anima_after_template_html', 'main' );
+do_action( 'anima/template_html:after', 'main' );
 ?>
 
 <?php wp_footer(); ?>

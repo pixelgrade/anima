@@ -1,19 +1,17 @@
 import $ from 'jquery';
 
-import { debounce, toggleLightClasses, getFirstBlock } from '../utils';
+import { debounce, getFirstBlock } from '../utils';
 
 import GlobalService from './globalService';
 import Hero from './hero';
 import CommentsArea from './commentsArea';
 import Navbar from './navbar';
 import SearchOverlay from './search-overlay';
-import HeaderTemplate from './header-template';
 
 export default class App {
 
   constructor () {
     this.initializeHero();
-    this.toggleSMLightDarkClasses();
 
     this.navbar = new Navbar();
     this.searchOverlay = new SearchOverlay();
@@ -22,7 +20,6 @@ export default class App {
     this.initializeCommentsArea();
     this.initializeReservationForm();
   }
-
 
   initializeImages() {
     const showLoadedImages = this.showLoadedImages.bind( this );
@@ -38,12 +35,6 @@ export default class App {
         } );
       } );
     } );
-  }
-
-  toggleSMLightDarkClasses() {
-    const wrappers = document.querySelectorAll( '[class*="sm-palette"]' );
-
-    wrappers.forEach( toggleLightClasses );
   }
 
   initializeReservationForm () {
