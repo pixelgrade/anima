@@ -70,7 +70,7 @@ function anima_register_block_patterns() {
 		);
 	}
 }
-add_action( 'init', 'anima_register_block_patterns', 9 );
+add_action( 'init', 'anima_register_block_patterns', 12 );
 
 /**
  * Finds all block patterns in a certain directory.
