@@ -35,8 +35,8 @@ if ( ! function_exists( 'anima_posted_by' ) ) {
 	 * Prints HTML with meta information for the current author.
 	 */
 	function anima_posted_by() {
-	    $author_url = esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) );
-	    $author_name = esc_html( get_the_author() );
+		$author_url  = esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) );
+		$author_name = esc_html( get_the_author() );
 
 		echo '<span class="byline">' .
 		     '<div class="screen-reader-text">' . esc_html_x( 'by', 'post author', '__theme_txtd' ) . '</div>' .
@@ -47,10 +47,10 @@ if ( ! function_exists( 'anima_posted_by' ) ) {
 }
 
 if ( ! function_exists( 'anima_posted_in' ) ) {
-    function anima_posted_in() {
-        anima_categories_posted_in();
-        anima_tags_posted_in();
-    }
+	function anima_posted_in() {
+		anima_categories_posted_in();
+		anima_tags_posted_in();
+	}
 }
 
 if ( ! function_exists( 'anima_categories_posted_in' ) ) {
@@ -143,20 +143,20 @@ if ( ! function_exists( 'anima_post_thumbnail' ) ) {
 
 		if ( is_singular() ) { ?>
 
-            <div class="post-thumbnail">
+			<div class="post-thumbnail">
 				<?php the_post_thumbnail(); ?>
-            </div><!-- .post-thumbnail -->
+			</div><!-- .post-thumbnail -->
 
 		<?php } else { ?>
 
-            <a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
+			<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
 				<?php
 				the_post_thumbnail( 'post-thumbnail', [
 					'alt' => the_title_attribute( [
 						'echo' => false,
 					] ),
 				] ); ?>
-            </a>
+			</a>
 
 			<?php
 		}
@@ -164,35 +164,36 @@ if ( ! function_exists( 'anima_post_thumbnail' ) ) {
 }
 
 if ( ! function_exists( 'anima_the_separator' ) ) {
-    function anima_the_separator( $style = 'default' ) {
-        echo '<div class="wp-block-separator has-text-align-center is-style-' . esc_attr( $style ) . '">' . anima_get_separator_markup() . '</div>';
-    }
+	function anima_the_separator( $style = 'default' ) {
+		echo '<div class="wp-block-separator has-text-align-center is-style-' . esc_attr( $style ) . '">' . anima_get_separator_markup() . '</div>';
+	}
 }
 
 if ( ! function_exists( 'anima_get_separator_markup' ) ) {
-    function anima_get_separator_markup() {
-        ob_start();
-        ?>
+	function anima_get_separator_markup() {
+		ob_start();
+		?>
 
-        <div class="c-separator">
-            <div class="c-separator__arrow c-separator__arrow--left"></div>
-            <div class="c-separator__line c-separator__line--left"></div>
-            <div class="c-separator__symbol">
-                <span><?php echo anima_get_separator_symbol(); ?></span>
-            </div>
-            <div class="c-separator__line c-separator__line--right"></div>
-            <div class="c-separator__arrow c-separator__arrow--right"></div>
-        </div>
-		<?php return apply_filters( 'anima_separator_markup', ob_get_clean() );
+		<div class="c-separator">
+			<div class="c-separator__arrow c-separator__arrow--left"></div>
+			<div class="c-separator__line c-separator__line--left"></div>
+			<div class="c-separator__symbol">
+				<span><?php echo anima_get_separator_symbol(); ?></span>
+			</div>
+			<div class="c-separator__line c-separator__line--right"></div>
+			<div class="c-separator__arrow c-separator__arrow--right"></div>
+		</div>
+		<?php return apply_filters( 'anima/separator_markup', ob_get_clean() );
 	}
 }
 
 if ( ! function_exists( 'anima_get_separator_symbol' ) ) {
 	function anima_get_separator_symbol() {
 		$symbol = pixelgrade_option( 'separator_symbol', 'fleuron-1' );
-        ob_start();
-        get_template_part( 'template-parts/separators/' . $symbol . '-svg' );
-        return ob_get_clean();
+		ob_start();
+		get_template_part( 'template-parts/separators/' . $symbol . '-svg' );
+
+		return ob_get_clean();
 	}
 }
 
@@ -271,7 +272,7 @@ if ( ! function_exists( ' anima_get_custom_logo_transparent' ) ) {
 		 * @param string $html    Custom logo HTML output.
 		 * @param int    $blog_id ID of the blog to get the custom logo for.
 		 */
-		return apply_filters( 'anima_get_custom_logo_transparent', $html, $blog_id );
+		return apply_filters( 'anima/get_custom_logo_transparent', $html, $blog_id );
 	}
 }
 
@@ -294,15 +295,20 @@ if ( ! function_exists( 'anima_footer_get_copyright' ) ) {
 		$copyright_text = anima_footer_get_copyright_content();
 		$output         = '';
 		if ( ! empty( $copyright_text ) ) {
-			$output       .= '<div class="site-info">' . "\n";
+			$output       .= '<!-- wp:group {"className":"site-info"} -->
+<div class="wp-block-group break-align-left break-align-right sm-palette-1 sm-variation-1 sm-color-signal-0 site-info" style="--nb-emphasis-top-spacing:0;--nb-emphasis-bottom-spacing:0;--nb-block-top-spacing:1;--nb-block-bottom-spacing:0;--nb-block-zindex:0;--nb-card-content-area-width:50%;--nb-card-media-container-height:50px;--nb-card-content-padding-multiplier:0;--nb-card-media-padding-top:100%;--nb-card-media-object-fit:cover;--nb-card-media-padding-multiplier:0;--nb-card-layout-gap-modifier:0;--nb-minimum-container-height:0vh;--nb-spacing-modifier:1;--nb-emphasis-area:100px" data-palette="1" data-palette-variation="1" data-color-signal="0">' . "\n";
+			$output       .= '<!-- wp:paragraph {"align":"right"} -->
+<p class="has-text-align-right has-normal-font-size alignright">';
 			$output       .= $copyright_text . "\n";
 			$hide_credits = pixelgrade_option( 'footer_hide_credits', false );
 			if ( empty( $hide_credits ) ) {
 				$output .= '<span class="c-footer__credits">' . sprintf( esc_html__( 'Theme: %1$s by %2$s.', '__theme_txtd' ), esc_html( pixelgrade_get_original_theme_name() ), '<a href="https://pixelgrade.com/?utm_source=anima-clients&utm_medium=footer&utm_campaign=anima" title="' . esc_html__( 'The Pixelgrade Website', '__theme_txtd' ) . '" rel="nofollow">Pixelgrade</a>' ) . '</span>' . "\n";
 			}
-			$output .= '</div>';
+			$output .= '</p><!-- /wp:paragraph -->';
+			$output .= '</div><!-- /wp:group -->';
 		}
-		return apply_filters( 'anima_footer_get_copyright', $output );
+
+		return apply_filters( 'anima/footer_get_copyright', $output );
 	}
 }
 
@@ -314,7 +320,7 @@ if ( ! function_exists( 'anima_footer_get_copyright_content' ) ) {
 	 * @return string
 	 */
 	function anima_footer_get_copyright_content(): string {
-		$copyright_text = apply_filters( 'anima_footer_copyright_text', esc_html__( '&copy; %year% %site-title%.', '__theme_txtd' ) );
+		$copyright_text = apply_filters( 'anima/footer_copyright_text', esc_html__( '&copy; %year% %site-title%.', '__theme_txtd' ) );
 		if ( ! empty( $copyright_text ) ) {
 			// We need to parse some tags
 			return anima_parse_content_tags( $copyright_text );
@@ -346,7 +352,7 @@ if ( ! function_exists( 'anima_shape_comment' ) ) {
 				break;
 			default: ?>
 
-			<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
+				<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
 				<article id="div-comment-<?php comment_ID(); ?>" class="comment__wrapper">
 					<?php if ( 0 != $args['avatar_size'] ) : ?>
 						<div class="comment__avatar"><?php echo get_avatar( $comment, $args['avatar_size'] ); ?></div>
@@ -456,13 +462,13 @@ if ( ! function_exists( 'anima_the_posts_pagination' ) ) {
 	 */
 	function anima_the_posts_pagination( array $args = [] ) { ?>
 
-        <!-- Use Group Inner Container, -->
-        <!-- so we can have access to Sidecar Grid.-->
-        <div class="wp-block alignwide">
-            <?php echo anima_get_the_posts_pagination( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-        </div>
+		<!-- Use Group Inner Container, -->
+		<!-- so we can have access to Sidecar Grid.-->
+		<div class="wp-block alignwide">
+			<?php echo anima_get_the_posts_pagination( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		</div>
 
-    <?php
+		<?php
 	}
 }
 
@@ -508,7 +514,7 @@ if ( ! function_exists( 'anima_get_the_post_navigation' ) ) {
 	 * Retrieves the navigation to next/previous post, when applicable.
 	 *
 	 * @param array       $args               {
-	 *     Optional. Default post navigation arguments. Default empty array.
+	 *                                        Optional. Default post navigation arguments. Default empty array.
 	 *
 	 * @type string       $prev_text          Anchor text to display in the previous post link. Default '%title'.
 	 * @type string       $next_text          Anchor text to display in the next post link. Default '%title'.
@@ -554,7 +560,7 @@ if ( ! function_exists( 'anima_get_the_post_navigation' ) ) {
 			$navigation = _navigation_markup( $previous . $next, 'post-navigation', $args['screen_reader_text'] );
 		}
 
-		return apply_filters( 'anima_get_the_post_navigation', $navigation, $args );
+		return apply_filters( 'anima/get_the_post_navigation', $navigation, $args );
 	}
 }
 
@@ -655,6 +661,7 @@ if ( ! function_exists( 'anima_get_author_bio_links' ) ) {
 	 * These are the links/websites added by one to it's Gravatar profile
 	 *
 	 * @param int|WP_Post $post_id Optional. Post ID or post object.
+	 *
 	 * @return string The HTML markup of the author bio links list.
 	 */
 	function anima_get_author_bio_links( $post_id = null ): string {
@@ -705,9 +712,9 @@ if ( ! function_exists( 'anima_get_content_markup' ) ) {
 	function anima_get_content_markup() {
 		ob_start();
 
-		do_action( 'anima_before_content' );
+		do_action( 'anima/content:before' );
 		the_content();
-		do_action( 'anima_after_content' );
+		do_action( 'anima/content:after' );
 
 		return ob_get_clean();
 	}
@@ -764,7 +771,8 @@ if ( ! function_exists( 'anima_article_header' ) ) {
 			<div class="entry-header sm-palette-1 sm-variation-2">
 				<?php anima_categories_posted_in() ?>
 
-				<div class="header-dropcap h1 sm-variation-1"><?php echo esc_html( substr( get_the_title(), 0, 1 ) ); ?></div>
+				<div
+					class="header-dropcap h1 sm-variation-1"><?php echo esc_html( substr( get_the_title(), 0, 1 ) ); ?></div>
 				<h1 class="entry-title"><?php the_title() ?></h1>
 
 				<?php if ( has_excerpt() ) { ?>
@@ -927,7 +935,7 @@ function anima_get_post_reading_time_in_minutes( $post, int $wpm = 250 ): int {
 	$content = str_replace( ']]>', ']]&gt;', $content );
 
 	// Allow others to have a say; like removing certain non-essential elements (avatars for example).
-	$content = apply_filters( 'anima_post_content_before_reading_time_calc', $content, $post );
+	$content = apply_filters( 'anima/post_content_before_reading_time_calc', $content, $post );
 
 	return anima_get_reading_time_in_minutes( $content, $wpm );
 }
@@ -1011,7 +1019,7 @@ function anima_get_page_class( $class = '' ): array {
 	}
 
 	$classes = array_map( 'esc_attr', $classes );
-	$classes = apply_filters( 'anima_page_class', $classes, $class );
+	$classes = apply_filters( 'anima/page_class', $classes, $class );
 
 	return array_unique( $classes );
 }

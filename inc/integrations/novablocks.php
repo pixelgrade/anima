@@ -119,7 +119,7 @@ if ( ! function_exists( 'anima_novablocks_setup' ) ) {
 			],
 		];
 
-		$anima_novablocks_config = apply_filters( 'anima_novablocks_config', $anima_novablocks_config );
+		$anima_novablocks_config = apply_filters( 'anima/novablocks_config', $anima_novablocks_config );
 
 		add_theme_support( 'novablocks', $anima_novablocks_config );
 	}

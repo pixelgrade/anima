@@ -6,21 +6,7 @@
   z-index: 9999; // bigger than c-bully
 
   width: 100%;
-  
   padding: 1em var(--theme-wrapper-sides-spacing);
-
-  // --theme-button-padding: .6em 1.7em;
-  
-
-
-  // --theme-input-search-focus-overlay-shadow: inset 0px 0px 0px 2px currentColor;
-  // --theme-search-input-focus:
-  //     var(--theme-input-search-focus-overlay-shadow),
-  //     var(--theme-input-focus-colored-shadow),
-  //     var(--theme-input-focus-shadow);
-  // --theme-input-box-shadow: var(--theme-search-input-focus);
-  // --theme-input-focus-box-shadow: var(--theme-search-input-focus);
-  // --theme-input-hover-box-shadow: var(--theme-search-input-focus);
 
 
   @include above(lap) {
@@ -68,6 +54,13 @@
   }
 
   @include wp-offset();
+
+  .admin-bar & {
+
+    @media screen and (max-width: 600px) {
+      top: 0;
+    }
+  }
 
   .has-search-overlay & {
 

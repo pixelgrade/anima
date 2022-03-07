@@ -30,7 +30,7 @@ function anima_woocommerce_setup() {
 		add_action( 'wp_loaded', 'anima_woocommerce_setup_hooks' );
 
         // Add Cart Menu Item to Anima extras box
-		add_filter( 'anima_menu_items_boxes_config', 'anima_add_cart_to_extras_menu_items', 10, 1 );
+		add_filter( 'anima/menu_items_boxes_config', 'anima_add_cart_to_extras_menu_items', 10, 1 );
 
 		add_action( 'wp_enqueue_scripts', 'anima_product_catalog_image_aspect_ratio' );
 
@@ -145,7 +145,7 @@ function anima_woocommerce_setup_hooks() {
 //	add_action( 'woocommerce_before_thankyou', 'anima_output_checkout_breadcrumbs', 2 );
 
     // Output fly-out cart markup
-	add_action( 'anima_before_header', 'anima_output_mini_cart', 1 );
+	add_action( 'anima/header:before', 'anima_output_mini_cart', 1 );
 
     // Hide tabs content titles
 	add_filter( 'woocommerce_product_description_heading', '__return_false', 30 );

@@ -12,7 +12,7 @@
  */
 function anima_register_block_patterns() {
 	$block_pattern_categories = [
-		'featured' => [ 'label' => __( 'Featured', '__theme_txtd' ) ],
+		'features' => [ 'label' => __( 'Features', '__theme_txtd' ) ],
 		'footer'   => [ 'label' => __( 'Footers', '__theme_txtd' ) ],
 		'header'   => [ 'label' => __( 'Headers', '__theme_txtd' ) ],
 		'query'    => [ 'label' => __( 'Query', '__theme_txtd' ) ],
@@ -32,7 +32,7 @@ function anima_register_block_patterns() {
 	 *     }
 	 * }
 	 */
-	$block_pattern_categories = apply_filters( 'anima_block_pattern_categories', $block_pattern_categories );
+	$block_pattern_categories = apply_filters( 'anima/block_patterns_categories', $block_pattern_categories );
 
 	foreach ( $block_pattern_categories as $name => $properties ) {
 		if ( ! WP_Block_Pattern_Categories_Registry::get_instance()->is_registered( $name ) ) {
@@ -57,7 +57,7 @@ function anima_register_block_patterns() {
 	 *     }
 	 * }
 	 */
-	$block_patterns = apply_filters( 'anima_block_patterns', $block_patterns );
+	$block_patterns = apply_filters( 'anima/block_patterns', $block_patterns );
 
 	foreach ( $block_patterns as $block_pattern ) {
 		if ( empty( $block_pattern['slug'] ) || empty( $block_pattern['path'] ) || ! file_exists( $block_pattern['path'] ) ) {
@@ -70,7 +70,7 @@ function anima_register_block_patterns() {
 		);
 	}
 }
-add_action( 'init', 'anima_register_block_patterns', 9 );
+add_action( 'init', 'anima_register_block_patterns', 12 );
 
 /**
  * Finds all block patterns in a certain directory.
