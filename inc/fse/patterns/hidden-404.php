@@ -5,7 +5,7 @@
  * It does not appear in the inserter.
  */
 return array(
-	'title'    => __( '404 content', '__theme_txtd' ),
+	'title'    => __( '404 content (theme)', '__theme_txtd' ),
 	'inserter' => false,
 	'content'  => '<!-- wp:heading {"style":{"typography":{"fontSize":"clamp(4rem, 40vw, 20rem)","fontWeight":"200","lineHeight":"1"}},"className":"has-text-align-center"} -->
 					<h2 class="has-text-align-center" style="font-size:clamp(4rem, 40vw, 20rem);font-weight:200;line-height:1">' . esc_html( _x( '404', 'Error code for a webpage that is not found.', '__theme_txtd' ) ) . '</h2>

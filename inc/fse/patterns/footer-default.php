@@ -3,7 +3,7 @@
  * Default footer
  */
 return array(
-	'title'      => __( 'Default footer', '__theme_txtd' ),
+	'title'      => __( 'Default footer (theme)', '__theme_txtd' ),
 	'categories' => array( 'footer' ),
 	'blockTypes' => array( 'core/template-part/footer' ),
 	'content'    => '<!-- wp:separator {"className":"is-style-blank","blockTopSpacing":0} -->

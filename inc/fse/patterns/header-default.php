@@ -3,7 +3,7 @@
  * Default header block pattern
  */
 return array(
-	'title'      => __( 'Default header', '__theme_txtd' ),
+	'title'      => __( 'Default Header (theme)', '__theme_txtd' ),
 	'categories' => array( 'header' ),
 	'blockTypes' => array( 'core/template-part/header' ),
 	'content'    => '<!-- wp:novablocks/header {"layout":"logo-center"} -->
