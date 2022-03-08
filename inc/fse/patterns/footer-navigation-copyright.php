@@ -5,7 +5,7 @@
 return array(
 	'title'      => __( 'Footer with navigation and copyright', '__theme_txtd' ),
 	'categories' => array( 'footer' ),
-	'blockTypes' => array( 'anima/template-part/footer' ),
+	'blockTypes' => array( 'core/template-part/footer' ),
 	'content'    => '<!-- wp:separator {"className":"is-style-blank"} -->
 					<div class="wp-block-separator alignnone is-style-blank" style="--nb-emphasis-top-spacing:0;--nb-emphasis-bottom-spacing:0;--nb-block-top-spacing:1;--nb-block-bottom-spacing:0;--nb-block-zindex:0;--nb-card-content-area-width:50%;--nb-card-content-padding-multiplier:0;--nb-card-media-padding-top:100%;--nb-card-media-object-fit:cover;--nb-card-media-padding-multiplier:0;--nb-card-layout-gap-modifier:0;--nb-minimum-container-height:0vh;--nb-spacing-modifier:1">
 							<div class="c-separator">
