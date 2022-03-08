@@ -12,11 +12,8 @@
  */
 function anima_register_block_patterns() {
 	$block_pattern_categories = [
-		'features' => [ 'label' => __( 'Features', '__theme_txtd' ) ],
-		'footer'   => [ 'label' => __( 'Footers', '__theme_txtd' ) ],
-		'header'   => [ 'label' => __( 'Headers', '__theme_txtd' ) ],
-		'query'    => [ 'label' => __( 'Query', '__theme_txtd' ) ],
-		'pages'    => [ 'label' => __( 'Pages', '__theme_txtd' ) ],
+		'header'   => [ 'label' => __( 'Layout: Header', '__theme_txtd' ) ],
+		'footer'   => [ 'label' => __( 'Layout: Footer', '__theme_txtd' ) ],
 	];
 
 	/**
