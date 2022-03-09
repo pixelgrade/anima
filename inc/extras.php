@@ -117,7 +117,7 @@ if ( ! function_exists( 'anima_alter_logo_markup' ) ) {
 		<?php }
 	}
 }
-add_filter( 'novablocks_logo_markup', 'anima_alter_logo_markup' );
+add_filter( 'novablocks/logo_markup', 'anima_alter_logo_markup' );
 
 /**
  * Fix skip link focus in IE11.

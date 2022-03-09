@@ -1,27 +1,50 @@
 .c-logo {
-    position: relative;
+  position: relative;
 }
 
 .c-logo__default,
 .c-logo__inverted {
-    transition: var(--theme-transition);
-    transition-property: opacity;
+  transition: var(--theme-transition);
+  transition-property: opacity;
 }
 
-.c-logo__default {
-    opacity: var(--logo-default-opacity, 1);
+.c-logo__default:not(:only-child) {
+  opacity: var(--theme-logo-default-opacity, 1);
 }
 
-.c-logo__inverted {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+.c-logo__inverted:not(:only-child) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
 
+  width: 100%;
+  transform: translate(-50%, -50%);
+
+  opacity: var(--theme-logo-inverted-opacity, 0);
+
+  img {
     width: 100%;
-    opacity: var(--logo-inverted-opacity, 0);
-    transform: translate(-50%, -50%);
+  }
+}
 
-    img {
-        width: 100%;
-    }
+.c-logo__default:only-child {
+  filter: var(--theme-logo-default-filter, none);
+}
+
+.c-logo__inverted:only-child {
+  filter: var(--theme-logo-inverted-filter, none);
+}
+
+:root,
+html:not(.is-dark) .sm-light {
+  --theme-logo-default-opacity: 1;
+  --theme-logo-inverted-opacity: 0;
+  --theme-logo-inverted-filter: grayscale(1) brightness(0);
+}
+
+.sm-dark,
+html.is-dark {
+  --theme-logo-default-opacity: 0;
+  --theme-logo-inverted-opacity: 1;
+  --theme-logo-default-filter: grayscale(1) brightness(10);
 }
