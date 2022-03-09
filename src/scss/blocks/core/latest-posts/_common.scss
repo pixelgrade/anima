@@ -1,20 +1,29 @@
 $enable-latest-posts-block-styles:      true !default;
+$latest-posts--title-selector: '.wp-block-latest-posts__post-title' !default;
 
 @if $enable-latest-posts-block-styles == true {
     .wp-block-latest-posts[class] {
         * {
             @include apply-font(body);
-            --font-size-modifier: 0.9;  
+            // --font-size-modifier: 0.9;  
         }
 
         a {
             text-decoration: none;
         }
+        
+        &.wp-block-latest-posts__list {
+            list-style:none;
+            padding-left: 0;
+
+            @include space-children-y( var(--theme-spacing-small) );
+        }
+
+        #{$latest-posts--title-selector} {
+            @include apply-font(heading-4);
+        }
     }
 
-    .wp-block-latest-posts__list {
-        @include space-children-y( var(--theme-spacing-small) );
-    }
     
     .wp-block-latest-posts[class][class] {
         
@@ -32,11 +41,12 @@ $enable-latest-posts-block-styles:      true !default;
             }
         }
     }
+
     
     .wp-block-latest-posts__post-author[class],
     .wp-block-latest-posts__post-date[class] {
         @extend %apply-font-properties;
-        --font-size-modifier: 0.8;
+        --font-size-modifier: 0.85;
         opacity: 0.6;
     }
     
