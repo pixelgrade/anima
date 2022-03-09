@@ -15,11 +15,9 @@ $enable-pullquote-block-styles:         true !default;
         blockquote {
             margin: 0; // reset
 
-            @include space-children-y( var(--theme-spacing) );
-
             p {
-                font-size: inherit;
-                line-height: inherit;
+                font-size: var(--current-font-size);
+                line-height: var(--current-line-height);
             }
         }
 

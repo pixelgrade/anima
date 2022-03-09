@@ -1,12 +1,16 @@
 $enable-blockquote-block-styles:        true !default;
 
+@mixin blockquote-default-padding {
+    padding-left: var(--theme-spacing-fluid-normal);
+    @include above(tablet) { padding-right: var(--theme-spacing-fluid-normal); }
+}
+
 @if $enable-blockquote-block-styles == true {
     /* Blockquote Block */
     .wp-block-quote {
         @include space-children-y( var(--theme-spacing) );
-        padding-left: var(--theme-spacing-fluid-normal);
-
-        @include above(tablet) { padding-right: var(--theme-spacing-fluid-normal); }
+        
+        @include blockquote-default-padding;
 
         border-left: 3px solid var(--sm-current-accent-color); 
 
@@ -22,11 +26,21 @@ $enable-blockquote-block-styles:        true !default;
             padding-right: 0;
         }
         
-        &.is-style-large {
+        &.is-style-large:not(.is-style-plain) {
             border-left: none;
+            margin-bottom: 0;
+            
+            @include blockquote-default-padding;
 
             &, p {
                 @include apply-font(heading-3);
+                
+                // Make sure to overwrite inline styles
+                @extend %apply-font-properties;
+            }
+
+            cite, footer {
+                text-align: inherit; // reset
                 @extend %apply-font-properties;
             }
         }
