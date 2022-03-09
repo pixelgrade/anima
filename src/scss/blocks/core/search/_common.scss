@@ -25,7 +25,7 @@ $enable-search-block-styles:            true !default;
 				grid-row: 1 / span 1;	
 				grid-column: 2 / span 1;
 
-				// margin: 4px;
+				margin-left: 0;
 			}
 		}
 		
@@ -120,8 +120,11 @@ $enable-search-block-styles:            true !default;
 				}
 
 				.wp-block-search__button {	
-					margin: 4px 4px 5px 5px;
+					margin: 4px;
+					
 					padding: var(--theme-button-padding);
+					padding-top: 0;
+					padding-bottom: 0;
 				}
 			}
 
