@@ -106,19 +106,26 @@ $enable-search-block-styles:            true !default;
 		 * BUTTON POSITION: Inside search field
 		 * Place the button inside the input field and add some spacing around it
 		 */
-		&__button-inside {
+		&__button-inside[class] {
 			position: relative;
 
-			.wp-block-search__input {
-				grid-column: 1 / span 2;
+			.wp-block-search__inside-wrapper {
+				border: none;
+				padding: 0;
+
+				.wp-block-search__input {
+					grid-column: 1 / span 2;
+					padding: var(--theme-input-padding);
+					border-radius: var(--theme-input-border-radius);
+				}
+
+				.wp-block-search__button {	
+					margin: 4px 4px 5px 5px;
+					padding: var(--theme-button-padding);
+				}
 			}
 
-			.wp-block-search__button {	
-				margin: 4px;
-			}
 		}
-
-
 
 		/**
 		 * BUTTON STYLE: Button without icon
