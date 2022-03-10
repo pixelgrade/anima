@@ -313,6 +313,23 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'type' => 'html',
 					'html' => '<span class="separator sub-section label">' . esc_html__( 'Other Fonts', '__theme_txtd' ) . '</span>',
 				],
+				'site_title_font' => [
+					'type'              => 'font',
+					'label'             => esc_html__( 'Site Title', '__theme_txtd' ),
+					'desc'              => esc_html__( '', '__theme_txtd' ),
+					'selector'          => ':root',
+					'properties_prefix' => '--theme-site-title-',
+					'default'           => [
+						'font-family'     => 'System Sans-Serif Clear',
+						'font-size'       => 32,
+						'line-height'     => 1.2,
+						'font-weight'     => 700,
+						'text-transform'  => 'none',
+						'text-decoration' => 'none',
+						'letter-spacing'  => - 0.02,
+					],
+					'fields'            => $fields_config_large,
+				],
 				'navigation_font' => [
 					'type'              => 'font',
 					'label'             => esc_html__( 'Navigation', '__theme_txtd' ),

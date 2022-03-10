@@ -35,6 +35,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 						'heading_2_font',
 						'heading_3_font',
 						'heading_4_font',
+						'site_title_font',
 						'quote_font', // !!! Add font-control option
 					],
 				],
@@ -79,6 +80,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 									'heading_4_font',
 									'heading_5_font',
 									'heading_6_font',
+									'site_title_font',
 									'quote_font',
 								],
 								'sm_font_secondary' => [
@@ -108,6 +110,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 									'heading_2_font',
 									'heading_3_font',
 									'heading_4_font',
+									'site_title_font',
 									'quote_font',
 								],
 								'sm_font_secondary' => [
@@ -138,6 +141,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 									'heading_1_font',
 									'heading_2_font',
 									'heading_3_font',
+									'site_title_font',
 								],
 								'sm_font_secondary' => [
 									'heading_4_font',
@@ -168,6 +172,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 									'display_font',
 									'heading_1_font',
 									'heading_2_font',
+									'site_title_font',
 								],
 								'sm_font_secondary' => [
 									'heading_3_font',
@@ -205,6 +210,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 									'heading_4_font',
 									'heading_5_font',
 									'heading_6_font',
+									'site_title_font',
 									'quote_font',
 									'buttons_font',
 									'meta_font',
@@ -234,6 +240,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 									'heading_4_font',
 									'heading_5_font',
 									'heading_6_font',
+									'site_title_font',
 									'quote_font',
 									'buttons_font',
 									'meta_font',
