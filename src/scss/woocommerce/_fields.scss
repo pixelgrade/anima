@@ -1,12 +1,23 @@
 // CSS rules needs to be very specific to overwrite any WooCommerce default styling
 // @todo find a more reliable and specific selector
+
+
 html body.woocommerce-page {
 
     .button:not(.trix-button),
     button:not([class]),
-    input[type="submit"]:not(.ot-button):not(.search-submit) {
+    input[type="submit"]:not(.ot-button):not(.search-submit),
+    button.button:disabled[disabled] {
         @include button;
     }
+
+        // Overwrite the text color of the default WooCommerce button :hover state
+        #respond input#submit.alt:hover, 
+        a.button.alt:hover, 
+        button.button.alt:hover, 
+        input.button.alt:hover {
+            color: var(--theme-button-hover-text-color);
+        }
 
     .customize-partial-edit-shortcut-button {
         padding: 3px;
@@ -22,11 +33,11 @@ html body.woocommerce-page {
     button.button {
         @include apply-font-properties;
 
-        &:not(:is(.alt, .checkout)) {
+        &:not(:is(.alt, .checkout, .specificity.increase)) {
             @include button-fill-reverse;
         }
 
-        &:is(.alt, .checkout) {
+        &:is(.alt, .checkout, .specificity.increase) {
             @include button-fill;
         }
 
