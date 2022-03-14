@@ -92,7 +92,7 @@
   img {
     margin-left: auto;
     margin-right: auto;
-    max-height: 30em;
+    max-height: 80vh;
   }
 }
 
@@ -177,13 +177,16 @@
   .variations {
     @include specific(2) {
       margin-bottom: 0;
+
+      select {
+        --font-size-modifier: 0.94;
+      }
     }
   }
 }
 
 .woocommerce-product-details__short-description {
   margin-bottom: var(--theme-spacing);
-  --font-size-modifier: 0.94;
 
   > :not(:first-child) {
     margin-top: var(--theme-spacing-normal);
@@ -300,6 +303,7 @@
 
     @include above(lap) {
       display: flex;
+      gap: var(--theme-spacing-larger);
 
       > .woocommerce-product-gallery {
         float: none;
@@ -310,9 +314,9 @@
       > .entry-summary {
         float: none;
         width: auto;
-        flex: 0 0 calc(35% - var(--theme-spacing-larger));
-        margin-left: var(--theme-spacing-larger);
-        margin-right: var(--theme-spacing-larger);
+        flex: 0 0 calc(40% - var(--theme-spacing-larger));
+        margin-left: 0;
+        margin-right: 0;
       }
 
       .woocommerce-product-gallery + .entry-summary {
@@ -354,7 +358,7 @@
     margin-bottom: var(--theme-spacing-normal);
 
     // For the price use a larger version of the Body font
-    --font-size-modifier: 1.25;
+    --font-size-modifier: 1.4;
 
     .woocommerce-Price-amount {
     }
@@ -683,7 +687,7 @@
   @include specific(1) {
     margin-bottom: var(--theme-spacing-smallest);
 
-    --font-size-modifier: 0.85;
+    --font-size-modifier: 0.95;
 
     
     color: var(--sm-current-fg2-color);
@@ -876,6 +880,7 @@
     box-shadow: none;
 
     width: 2em;
+    padding: 0;
 
     font-feature-settings: "lnum";
   }
