@@ -399,6 +399,9 @@
   table.cart td.actions .coupon .input-text {
     @include field;
 
+    // Reset the field default 'width: 100%' so the `Apply coupon` button shares the width with the `Coupon` field  
+    width: auto;
+
     // Remove padding so the `Coupon` input field stretch to the height of the `Apply` button
     padding-top: 0;
     padding-bottom: 0;

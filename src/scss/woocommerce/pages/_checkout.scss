@@ -171,12 +171,16 @@
 
     > p:not([class]) {
       flex-basis: 100%;
-      margin-bottom: var(--theme-spacing);
+      margin-bottom: var(--theme-spacing-smaller);
     }
 
     > p {
       width: auto;
       padding-left: var(--theme-spacing);
+
+      &.form-row-last {
+        padding-left: var(--theme-spacing-smaller);
+      }
     }
 
     button {
