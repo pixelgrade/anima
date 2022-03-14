@@ -1,20 +1,20 @@
 .site-logo {
 
     img {
-        height: var(--theme-header-logo-height);
+        height: var(--nb-header-logo-height);
 
         @include below(tablet) {
-            height: var(--theme-mobile-header-logo-height);
+            height: var(--nb-mobile-header-logo-height);
         }
     }
 }
 
 .site-title {
     @include apply-font(site-title);
-    --font-size: calc(var(--theme-header-logo-height-setting));
+    --font-size: calc(var(--nb-header-logo-height-setting));
     --current-line-height: 1;
 
     @include below(tablet) {
-        --font-size: calc(var(--theme-mobile-header-logo-height-setting));
+        --font-size: calc(var(--nb-mobile-header-logo-height-setting));
     }
 }

@@ -1,31 +1,19 @@
-/* ==========================================================================
-   #NAVIGATION
-   ========================================================================== */
+.wp-block-navigation {
+  @include apply-font(navigation);
 
-// Style the Navigation block as the main Header navigation
-// 
-// @todo: merge the Navigation block styles with the Nova Blocks styling from 
-// 		 /src/scss/blocks/nova-blocks/navigation/_style.scss
+  // setting moved to novablocks/header block so spacing cannot be changed anymore
+  //ul.wp-block-navigation__container {
+  //  // Use the Customizer "Navigation Link Spacing" option
+  //  gap: var(--nb-navigation-item-spacing);
+  //}
+  //
+  //&.is-vertical {
+  //  ul.wp-block-navigation__container {
+  //    gap: 0.5em;
+  //  }
+  //}
 
-$nav-block: '.wp-block-navigation' !default;
-$nav-ul-container: 'ul.wp-block-navigation__container' !default;
-$nav-list-item: 'li' !default;
-
-
-#{$nav-block} {
-	@include apply-font(navigation);
-
-	#{$nav-ul-container} {
-		gap: var(--nb-navigation-item-spacing); // Use the Customizer "Navigation Link Spacing" option
-	}
-
-	&.is-vertical {
-		#{$nav-ul-container} {
-			gap: 0.5em;
-		}
-	}
-
-	a:hover {
-		color: var(--sm-current-accent-color);	
-	}
-}			
+  a:hover {
+    color: var(--sm-current-accent-color);
+  }
+}

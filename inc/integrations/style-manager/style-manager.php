@@ -20,7 +20,6 @@ if ( defined( '\Pixelgrade\StyleManager\VERSION' ) ) {
 	// Add new options to the Style Manager config
 	add_filter( 'style_manager/filter_fields', 'anima_add_style_manager_options', 11, 1 );
 
-	add_filter( 'style_manager/filter_fields', 'anima_add_header_section_to_style_manager_config', 20, 1 );
 	add_filter( 'style_manager/filter_fields', 'anima_add_separators_section_to_style_manager_config', 30, 1 );
 	add_filter( 'style_manager/filter_fields', 'anima_add_content_section_to_style_manager_config', 40, 1 );
 }
@@ -31,105 +30,6 @@ function anima_add_style_manager_options( $config ) {
 
 	//start with a clean slate - no Style Manager default sections
 	$config['sections'] = [];
-
-	return $config;
-}
-
-function anima_add_header_section_to_style_manager_config( $config ) {
-
-	$anima_header_section = [
-		'header_section' => [
-			'title'   => esc_html__( 'Header', '__theme_txtd' ),
-			'options' => [
-				'header_logo_height'              => [
-					'type'        => 'range',
-					'label'       => esc_html__( 'Logo Height', '__theme_txtd' ),
-					'desc'        => esc_html__( 'Adjust the height of your logo.', '__theme_txtd' ),
-					'live'        => true,
-					'default'     => 22,
-					'input_attrs' => [
-						'min'          => 20,
-						'max'          => 200,
-						'step'         => 1,
-						'data-preview' => true,
-					],
-					'css'         => [
-						[
-							'property' => '--theme-header-logo-height-setting',
-							'selector' => ':root',
-							'unit'     => '',
-						],
-					],
-				],
-				'mobile_header_logo_height'       => [
-					'type'        => 'range',
-					'label'       => esc_html__( 'Mobile Logo Height', '__theme_txtd' ),
-					'desc'        => esc_html__( 'Adjust the height of your logo on small screens.', '__theme_txtd' ),
-					'live'        => true,
-					'default'     => 24,
-					'input_attrs' => [
-						'min'          => 14,
-						'max'          => 80,
-						'step'         => 1,
-						'data-preview' => true,
-					],
-					'css'         => [
-						[
-							'property' => '--theme-mobile-header-logo-height-setting',
-							'selector' => ':root',
-							'unit'     => '',
-						],
-					],
-				],
-				'header_navigation_links_spacing' => [
-					'type'        => 'range',
-					'label'       => esc_html__( 'Navigation Link Spacing', '__theme_txtd' ),
-					'desc'        => esc_html__( 'Adjust the spacing between individual items in your navigation.', '__theme_txtd' ),
-					'live'        => true,
-					'default'     => 32,
-					'input_attrs' => [
-						'min'          => 12,
-						'max'          => 75,
-						'step'         => 1,
-						'data-preview' => true,
-					],
-					'css'         => [
-						[
-							'property' => '--theme-header-links-spacing-setting',
-							'selector' => ':root',
-							'unit'     => '',
-						],
-					],
-				],
-				'header_sides_spacing'            => [
-					'type'        => 'range',
-					'label'       => esc_html__( 'Header Sides Spacing', '__theme_txtd' ),
-					'desc'        => esc_html__( 'Adjust the space separating the header and the sides of the browser.', '__theme_txtd' ),
-					'live'        => true,
-					'default'     => 50, // this should be set by the theme (previously 40)
-					'input_attrs' => [
-						'min'          => 0,
-						'max'          => 100,
-						'step'         => 1,
-						'data-preview' => true,
-					],
-					'css'         => [
-						[
-							'property' => '--theme-header-sides-spacing-setting',
-							'selector' => ':root',
-							'unit'     => '',
-						],
-					],
-				],
-			],
-		],
-	];
-
-	if ( empty( $config['sections'] ) ) {
-		$config['sections'] = [];
-	}
-
-	$config['sections'] = $config['sections'] + $anima_header_section;
 
 	return $config;
 }
