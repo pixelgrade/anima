@@ -372,7 +372,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'properties_prefix' => '--theme-input-',
 					'default'           => [
 						'font-family'     => 'System Sans-Serif Clear',
-						'font-size'       => 17,
+						'font-size'       => 16.5,
 						'line-height'     => 1.2,
 						'font-weight'     => 500,
 						'text-transform'  => 'none',
