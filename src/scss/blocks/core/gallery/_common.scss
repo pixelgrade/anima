@@ -6,6 +6,7 @@ $enable-gallery-block-styles: true !default;
 @if $enable-gallery-block-styles == true {
 
   :is(.wp-block-gallery, .blocks-gallery-grid) {
+    width: 100%;
 
     :is(.blocks-gallery-image, .blocks-gallery-item) {
 
@@ -14,24 +15,13 @@ $enable-gallery-block-styles: true !default;
       }
 
       figcaption {
+        @include caption;
+
         position: static;
         padding: calc(0.125 * var(--nb-spacing)) 0 0 0;
         background: none;
         color: var(--sm-current-fg1-color);
         text-align: inherit;
-      }
-    }
-
-    &.has-nested-images figcaption, figcaption {
-      @include caption;
-    }
-
-    &.alignfull,
-    > .alignfull {
-
-      figcaption {
-        padding-left: var(--theme-wrapper-sides-spacing);
-        padding-right: var(--theme-wrapper-sides-spacing);
       }
     }
   }
