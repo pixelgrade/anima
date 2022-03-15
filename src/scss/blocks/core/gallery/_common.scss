@@ -1,23 +1,38 @@
 // Status: 
 // - [ ] Editor: Check the alignments in Editor and why break-align classes are not present
 
-$enable-gallery-block-styles:           true !default;
-$gallery-selector: '.wp-block-gallery' !default;
+$enable-gallery-block-styles: true !default;
 
 @if $enable-gallery-block-styles == true {
-    
-    #{$gallery-selector} {
-        &.has-nested-images figcaption, figcaption {
-            @include caption;
-        }
-    
-        &.alignfull,
-        > .alignfull {
-        
-            figcaption {
-                padding-left: var(--theme-wrapper-sides-spacing);
-                padding-right: var(--theme-wrapper-sides-spacing);
-            }
-        }
+
+  :is(.wp-block-gallery, .blocks-gallery-grid) {
+
+    :is(.blocks-gallery-image, .blocks-gallery-item) {
+
+      figure {
+        flex-direction: column;
+      }
+
+      figcaption {
+        position: static;
+        padding: calc(0.125 * var(--nb-spacing)) 0 0 0;
+        background: none;
+        color: var(--sm-current-fg1-color);
+        text-align: inherit;
+      }
     }
+
+    &.has-nested-images figcaption, figcaption {
+      @include caption;
+    }
+
+    &.alignfull,
+    > .alignfull {
+
+      figcaption {
+        padding-left: var(--theme-wrapper-sides-spacing);
+        padding-right: var(--theme-wrapper-sides-spacing);
+      }
+    }
+  }
 }
