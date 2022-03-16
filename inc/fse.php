@@ -60,7 +60,7 @@ add_filter( 'taxonomy_template', 'anima_get_custom_template_canvas_path', 10, 3 
  */
 add_action( 'anima/template_html:before', function() { ?>
 
-<div id="page" <?php anima_page_class() ?>>
+<div id="page">
 
 	<?php
 	do_action( 'anima/header:before', 'main' );
