@@ -986,44 +986,6 @@ function anima_get_reading_time_in_minutes( string $content, int $wpm = 250 ): i
 	return $minutes;
 }
 
-/**
- * Displays the class names for the site_content element.
- *
- * @since 1.12.0
- *
- * @param string|string[] $class Space-separated string or array of class names to add to the class list.
- */
-function anima_page_class( $class = '' ) {
-	// Separates class names with a single space, collates class names for site-content.
-	echo 'class="' . esc_attr( implode( ' ', anima_get_page_class( $class ) ) ) . '"';
-}
-
-/**
- * Retrieves an array of the class names for the site_content element.
- *
- * @since 1.12.0
- *
- *
- * @param string|string[] $class Space-separated string or array of class names to add to the class list.
- *
- * @return string[] Array of class names.
- */
-function anima_get_page_class( $class = '' ): array {
-
-	$classes = [];
-
-	$classes[] = 'site';
-
-	if ( anima_page_has_custom_palette_variation() ) {
-		$classes[] = 'sm-variation-1';
-	}
-
-	$classes = array_map( 'esc_attr', $classes );
-	$classes = apply_filters( 'anima/page_class', $classes, $class );
-
-	return array_unique( $classes );
-}
-
 if ( ! class_exists( 'PixCustomifyPlugin' ) && ! function_exists( 'Pixelgrade\StyleManager\plugin' ) && ! function_exists( 'pixelgrade_option' ) ) {
 	function pixelgrade_option( $settings_id, $default = null, $force_given_default = false ) {
 		return get_option( $settings_id, $default );
