@@ -1,54 +1,32 @@
 
-.nb-sidecar--sidebar-small {
-    --sidebar-fs-base: 0.82; // Old: 0.75
-}
-
-.nb-sidecar--sidebar-medium {
-    --sidebar-fs-base: 0.93; // Old: 0.85
-}
-
-.nb-sidecar--sidebar-large {
-    --sidebar-fs-base: 1;
-}
-
 .nb-sidecar {
-    --sidebar-left-fs-base: var(--sidebar-fs-base);
-    --sidebar-right-fs-base: var(--sidebar-fs-base);
+    --sidebar-left-fs-base: var(--nb-sidecar-sidebar-font-size-base);
+    --sidebar-right-fs-base: var(--nb-sidecar-sidebar-font-size-base);
 }
 
 // Single Sidecar
-.nb-sidecar-area--sidebar {
-    @include above(lap) {
-        --font-size-base: var(--sidebar-fs-base);
-    }
-}
-
-// Increase the font-size on 
-// - Posts, Pages within Content area 
-// - Card Content within Supernova
 @include above(lap) {
-    :is(.single, .page) .nb-sidecar-area--content .entry-content > :is(p:not(.is-style-lead), ul, ol),
-    .supernova-item__inner-container                               :is(p:not(.is-style-lead), ul, ol) {
-        --font-size-base: 1.12;
+
+  .nb-sidecar-area--content {
+    --font-size-base: var(--nb-sidecar-content-font-size-base)
+  }
+
+  .nb-sidecar-area--sidebar {
+    --font-size-base: var(--nb-sidecar-sidebar-font-size-base);
+  }
+
+  .wp-block-group {
+
+    &.alignleft.break-align-left * {
+      --font-size-base: var(--sidebar-left-fs-base);
     }
+
+    &.alignright.break-align-right * {
+      --font-size-base: var(--sidebar-right-fs-base);
+    }
+  }
 }
 
-
-
-
-.wp-block-group {
-
-    @include above(lap) {
-
-        &.alignleft.break-align-left * {
-            --font-size-base: var(--sidebar-left-fs-base);
-        }
-
-        &.alignright.break-align-right * {
-            --font-size-base: var(--sidebar-right-fs-base);
-        }
-    }
-}
 
 
 // Sidecar 
