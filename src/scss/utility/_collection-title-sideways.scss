@@ -1,11 +1,11 @@
 @include above(desktop) {
 	
-	.u-collection-title-sideways {
+	.u-collection-title-sideways[class][class] {
 		
 		.nb-collection__title {
 			position: absolute;
 			bottom: 100%;
-			right: calc(100% + var(--theme-spacing-smallest));
+			right: calc(100% + var(--theme-spacing-smaller));
 			
 			width: auto !important;
 			margin: 0 !important;
@@ -15,7 +15,8 @@
 			transform-origin: 100% 100%;
 			transform: rotate(-90deg);
 
-			@include apply-font(heading-5);
+			@include apply-font(navigation);
+			// @include apply-font-properties();
 		}
 
 		.nb-collection__header:not(.nb-collection__header--has-description) + .nb-collection__body {
