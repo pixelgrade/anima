@@ -35,11 +35,10 @@ html:not(.wf-active) {
     border: 2px solid var(--sm-current-color-3);
 }
 
-.entry-content,
-[class*="__inner-container"]:not(.novablocks-hero__inner-container) {
-    > :not(.wp-block-group):not(.novablocks-media):not(.disabled-avoid-fout) {
-        @include avoid-fout-opacity;
-    }
+:where(.wp-block-group, .wp-block-group__inner-container) {
+  > :where(:not(:is(.wp-block-group, .wp-block-group__inner-container)) {
+    @include avoid-fout-opacity;
+  }
 }
 
 // avoid adding transitions to elements that will be added in js
