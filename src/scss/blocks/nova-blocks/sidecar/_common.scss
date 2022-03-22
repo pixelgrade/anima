@@ -8,6 +8,11 @@
 @include above(lap) {
 
   .nb-sidecar-area--content {
+    // Target only certain elements font-sizes
+    // .entry-content > :is(p:not(.is-style-lead), ul, ol) {
+    
+    // }
+    
     --font-size-base: var(--nb-sidecar-content-font-size-base)
   }
 
@@ -26,6 +31,9 @@
     }
   }
 }
+
+  // :is(.single, .page) .nb-sidecar-area--content .entry-content > :is(p:not(.is-style-lead), ul, ol),
+  //   .supernova-item__inner-container                               :is(p:not(.is-style-lead), ul, ol)
 
 
 
