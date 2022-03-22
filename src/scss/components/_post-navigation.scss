@@ -1,172 +1,35 @@
-// page numbers
-@mixin post-navigation__links {
-    margin-left: auto;
-    margin-right: auto;
-
-    @include above(tablet) {
-        display: flex;
-        flex-wrap: wrap;
-
-        > * {
-            flex: 1;
-        }
-    }
-}
-
 .blog {
 
-    // Span Post Navigation
-    // between WS and WE
-    .navigation {
-        --block-content-start: ws !important;
-        --block-content-end: we !important;
-    }
-}
-
-
-// SINGLE NAVIGATION
-.post-navigation {
-    --current-arrow-padding: calc(0.4em + #{$theme-button-text-arrow-size});
-    --theme-wrapper-sides-spacing: var(--theme-spacing-fluid-normal);
-    --element-spacing: var(--theme-spacing-normal) !important;
-
-    width: 100%;
-
-    clear: both;
-
-    .nav-links {
-        @include post-navigation__links;
-    }
-    
-    &[class] {
-        &:not(:last-child) {
-            margin-bottom: 0;
-        }
-    }
-
-    a {
-        text-decoration: none;
-
-        &:after {
-            content: "";
-            @include cover;
-        }
-    }
-
-    @include below(lap) {
-        margin-left: calc(-1 * var(--theme-wrapper-sides-spacing));
-        margin-right: calc(-1 * var(--theme-wrapper-sides-spacing));
-
-        width: auto;
-
-        .nav-links {
-            display: flex;
-            flex-direction: column-reverse;
-        }
-
-        .post-navigation__link {
-            padding: var(--theme-spacing-smaller) var(--theme-wrapper-sides-spacing);
-            
-
-            &--next {
-                background: var(--sm-current-accent-color);
-                color: var(--sm-current-bg-color);
-
-                * {
-                    color: inherit;
-                }
-            }
-            
-            a {
-                color: inherit;
-            }
-        }
-
-        .post-navigation__link-label {
-            --font-size: 12;
-            --current-font-weight: bold;
-        }
-
-        .post-navigation__post-title {
-            --font-size: 17;
-            --current-font-weight: 600;
-        }
-    }
+  // Span Post Navigation
+  // between WS and WE
+  .navigation {
+    --block-content-start: ws !important;
+    --block-content-end: we !important;
+  }
 }
 
 .post-navigation__post-title {
-    @include apply-font(heading-4);
-}
-
-.post-navigation__post-title,
-.post-navigation__link-label {
-    display: block;
-
-    word-break: break-word;
-}
-
-.post-navigation__link {
-    position: relative;
+  @include apply-font(heading-4);
 }
 
 .post-navigation__link-label {
-    position: relative;
-    color: var(--sm-current-accent-color);
-    @include apply-font(button);
-    transition: var(--theme-transition);
-    transition-property: transform;
+  @include apply-font(button);
 }
 
 @include above(lap) {
 
-    .post-navigation__link-label {
+  .post-navigation__link-label {
 
-        &:after {
-            content: '';
-            @include button-text-arrow;
-            transform: translate(0, -50%) scale(-1, 1);
-            transition: var(--theme-transition);
-            transition-property: opacity;
+    &:after {
+      content: '';
+      @include button-text-arrow;
+      transform: translate(0, -50%) scale(-1, 1);
+      transition: var(--theme-transition);
+      transition-property: opacity;
 
-            .post-navigation__link:hover & {
-                opacity: 0;
-            }
-        }
+      .post-navigation__link:hover & {
+        opacity: 0;
+      }
     }
-
-    .post-navigation__post-title {
-        a {
-            color: inherit;
-        }
-    }
-
-    .post-navigation__link--previous {
-        text-align: left;
-    }
-
-    .post-navigation__link-label--previous {
-        padding-left: var(--current-arrow-padding);
-
-        &:after {
-            right: auto;
-            left: 0;
-            transform: translate(0, -50%);
-        }
-
-        .post-navigation__link:hover & {
-            transform: translateX(calc(-1 * var(--current-arrow-padding)));
-        }
-    }
-
-    .post-navigation__link--next {
-        text-align: right;
-    }
-
-    .post-navigation__link-label--next {
-        padding-right: var(--current-arrow-padding);
-
-        .post-navigation__link:hover & {
-            transform: translateX(var(--current-arrow-padding));
-        }
-    }
+  }
 }

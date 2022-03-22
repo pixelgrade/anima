@@ -27,6 +27,10 @@ if ( ! function_exists( 'anima_novablocks_setup' ) ) {
 				'name' => 'announcement-bar',
 				'enabled' => true,
 			],
+			'author-box' => [
+				'name' => 'author-box',
+				'enabled' => true,
+			],
 			'cards-collection' => [
 				'name' => 'cards-collection',
 				'enabled' => true,
@@ -87,6 +91,10 @@ if ( ! function_exists( 'anima_novablocks_setup' ) ) {
 			],
 			'post-comments' => [
 				'name' => 'post-comments',
+				'enabled' => true,
+			],
+			'post-navigation' => [
+				'name' => 'post-navigation',
 				'enabled' => true,
 			],
 			'posts-collection' => [
