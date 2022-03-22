@@ -96,7 +96,8 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 				'html' => '<span class="sm-group__title">' . esc_html__( 'Card Block', '__theme_txtd' ) . '</span>',
 			],
 
-			'novablocks_card_meta_first' => sm_get_color_switch_darker_config( 'Meta', '.nb-grid__item-meta', false, 2 ),
+			'novablocks_card_meta_first' => sm_get_color_switch_darker_config( 'Meta', '.nb-card__meta--primary', false, 2 ),
+			'novablocks_card_title' => sm_get_color_switch_darker_config( 'Title', '.nb-card__title a', false, 2 ),
 
 			'colors_post_meta_section_title' => [
 				'type' => 'html',
