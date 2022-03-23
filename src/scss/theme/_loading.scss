@@ -36,7 +36,7 @@ html:not(.wf-active) {
 }
 
 :where(.wp-block-group, .wp-block-group__inner-container) {
-  > :where(:not(:is(.wp-block-group, .wp-block-group__inner-container)) {
+  > :where(:not(:is(.wp-block-group, .wp-block-group__inner-container))) {
     @include avoid-fout-opacity;
   }
 }

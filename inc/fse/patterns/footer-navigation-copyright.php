@@ -20,5 +20,5 @@ return array(
 					</div>
 					<!-- /wp:separator -->' .
 	                anima_footer_get_copyright() .'
-	                <!-- wp:novablocks/navigation {"slug":"footer","className":"novablocks-navigation novablocks-navigation\u002d\u002dfooter"} /-->',
+	                <!-- wp:novablocks/navigation {"slug":"footer","className":"nb-navigation nb-navigation\u002d\u002dfooter"} /-->',
 );

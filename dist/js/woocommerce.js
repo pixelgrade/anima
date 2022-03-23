@@ -39,12 +39,12 @@ var __webpack_exports__ = {};
   });
   $(function () {
     var $body = $(document.body).not('.woocommerce-cart');
-    var $cartMenuItems = $('.novablocks-navigation .menu > .menu-item--cart');
+    var $cartMenuItems = $('.nb-navigation .menu > .menu-item--cart');
     initializeCartMenuItems($cartMenuItems);
 
     if (!!window.wp?.customize?.selectiveRefresh) {
       wp.customize.selectiveRefresh.bind('partial-content-rendered', function (placement) {
-        const $container = $(placement.container).filter('.novablocks-navigation .menu');
+        const $container = $(placement.container).filter('.nb-navigation .menu');
         const $items = $container.children('.menu-item--cart');
         initializeCartMenuItems($items);
       });
