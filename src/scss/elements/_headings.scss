@@ -1,38 +1,40 @@
 // this set of properties mostly overwrites the editor's destructive way of resetting
 // mostly by applying revert on all CSS properties
-h1, .h1,
-h2, .h2,
-h3, .h3,
-h4, .h4,
-h5, .h5,
-h6, .h6 {
+:is(
+  h1, .h1,
+  h2, .h2,
+  h3, .h3,
+  h4, .h4,
+  h5, .h5,
+  h6, .h6
+) {
   @include apply-font-properties;
   color: var(--current-color);
 }
 
-h1, .h1 {
+:is(h1, .h1) {
   @include apply-font(heading-1);
   @include font-feature();
 }
 
-h2, .h2 {
+:is(h2, .h2) {
   @include apply-font(heading-2);
   @include font-feature();
 }
 
-h3, .h3 {
+:is(h3, .h3) {
   @include apply-font(heading-3);
 }
 
-h4, .h4 {
+:is(h4, .h4) {
   @include apply-font(heading-4);
 }
 
-h5, .h5 {
+:is(h5, .h5) {
   @include apply-font(heading-5);
 }
 
-h6, .h6 {
+:is(h6, .h6) {
   @include apply-font(heading-6);
 }
 
