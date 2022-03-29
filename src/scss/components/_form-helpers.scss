@@ -1,0 +1,56 @@
+:root {
+    --form-gap: 10px;
+}
+
+@mixin form-flex {
+    display: flex;
+    gap: var(--form-gap);
+
+    > *:last-child {
+        flex-shrink: 0;
+        margin-top: 0;
+    }
+}
+
+
+
+/*------------------------------------*\
+  #HELPER CLASS - .form-inline
+\*------------------------------------*/
+
+/**
+ * Apply the .form-inline class to a form wrapper to align all its direct 
+ * children in a single horizontal row.
+ *
+ * <form class="form-inline">  
+ *      <input> 
+ *      ...
+ *      <input type="submit">  
+ * </form>
+ */
+
+.form-inline {
+    @include form-flex;
+}
+
+
+
+/*------------------------------------*\
+  #HELPER CLASS - .form-column
+\*------------------------------------*/
+
+/**
+ * Apply the .form-column class to a form wrapper to align all its direct 
+ * children in a single vertical row with spacing.
+ *
+ * <form class="form-row">  
+ *      <input> 
+ *      ...
+ *      <input type="submit">  
+ * </form>
+ */
+
+.form-column {
+    @include form-flex;
+    flex-direction: column;
+}
