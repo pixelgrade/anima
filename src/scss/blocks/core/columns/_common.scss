@@ -1,13 +1,31 @@
 // Status: 
-// - [ ] Editor: Check the alignments in Editor and why break-align classes are not present
+// - [x] Editor: Check the alignments in Editor and why break-align classes are not present
 // - [ ] Add Spacing component to Columns block
 
 $enable-columns-block-styles: true !default;
 
 @if $enable-columns-block-styles == true {
 
+    :root {
+        --wp--style--block-gap: var(--theme-spacing-fluid-normal);
+    }
+
     .wp-block-columns[class] {
-        gap: var(--theme-spacing-fluid-small);
+        gap: var(--wp--style--block-gap);
+
+        // Generate classes to adjust the the Columns block-gap 
+        // in a smilar manner to font-size control
+        @each $slug in smallest, smaller, small, large, larger, largest {
+            &.has-#{ $slug }-block-gap {
+                --wp--style--block-gap: var(--theme-spacing-fluid-#{ $slug })
+            }
+        }
+
+        // Set the default Columns block-gap
+        &:not([class*="-block-gap"]) {
+            --wp--style--block-gap: var(--theme-spacing-fluid-normal);
+        }
+
     }
 
 }
