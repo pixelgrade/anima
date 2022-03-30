@@ -1,3 +1,7 @@
+:root {
+  --search-overlay-font-size: 23;
+}
+
 .c-search-overlay {
   position: fixed;
   top: 0;
@@ -34,15 +38,6 @@
         --theme-button-hover-text-color: var(--sm-current-fg1-color); 
       }
     }
-  }
-  
-
-  input[type="submit"],
-  input[type="button"] {
-    // --theme-button-background-color: var(--sm-fg2-color-2);
-    // --theme-button-border-color: var(--sm-fg2-color-2);
-    // --theme-button-hover-text-color: var(--sm-fg2-color-2);
-    // --theme-button-hover-border-color: var(--sm-fg2-color-2);
   }
 
   &__form {
@@ -135,9 +130,9 @@
       max-width: 75%;
     }
 
-    @include apply-font(body);
-    --font-size: 23;
-    --current-font-weight: bold;
+    @include apply-font(heading-3);
+    // --font-size: var(--search-overlay-font-size);
+    // --current-font-weight: bold;
 
     .menu {
       display: flex;
@@ -160,7 +155,9 @@
         border: var(--theme-button-border-width) var(--theme-button-border-style) currentColor;
         border-radius: var(--theme-button-border-radius);
 
-        @include button-props;
+        @include apply-font(button);
+        --font-size: var(--search-overlay-font-size);
+
         @include button-base;
         @include button-fill-reverse;
 
@@ -194,7 +191,7 @@
     padding: var(--theme-button-padding);
 
     @include apply-font(button);
-    --font-size: 23;
+    --font-size: var(--search-overlay-font-size);
 
     &:hover {
       color: currentColor !important;
@@ -247,11 +244,8 @@
   &__description {
     margin-top: var(--theme-spacing-smaller);
     opacity: 0;
-    
-    &,
-    * {
-      // font-size: 0.7rem;
-    }
+
+    display: none;
     
     @include below(lap) {
       .hide-on-mobile {
@@ -261,6 +255,90 @@
   }
 }
 
+
+
+// Search Form
+.search-form {
+  position: relative;
+
+  width: 100%;
+
+  --search-icon-width: 1.6em;
+
+  &:focus,
+  &:focus-within {
+
+    .search-icon {
+      opacity: 0.75;
+    }
+  }
+
+  &[class] {
+
+    > label {
+      flex: 1;
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+  }
+
+  @include above(lap) {
+
+    .search-icon {
+      content: '';
+      position: absolute;
+      left: calc(var(--theme-input-padding) + 0.6em);
+      top: 50%;
+      transform: translateY(-50%);
+
+      display: block;
+      width: var(--search-icon-width);
+      height: var(--search-icon-width);
+
+      border: 0;
+      padding: 0;
+
+      mask: url($icon-search-path) no-repeat 50% 50%;
+      mask-size: cover;
+      -webkit-mask: url($icon-search-path) no-repeat 50% 50%;
+      -webkit-mask-size: cover;
+
+      background-color: var(--sm-current-fg1-color);
+      transition: opacity .15s $ease;
+    }
+  }
+
+  .search-submit {
+    max-width: 100%;
+    margin-left: 0;
+
+    @include apply-font-properties;
+    --font-size: var(--search-overlay-font-size);
+  }
+
+  .search-field {
+    @include apply-font-properties;
+    --font-size: var(--search-overlay-font-size);
+
+    &::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+      height: 24px;
+      width: 24px;
+      margin-left: .4em;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");
+      cursor: pointer;
+    }
+
+    @include above(lap) {
+      padding-left: calc(var(--search-icon-width) + var(--theme-input-padding) + 0.6em);
+    }
+  }
+}
+
+
+
+
+// Others
 .has-search-overlay {
   overflow: hidden;
 }
