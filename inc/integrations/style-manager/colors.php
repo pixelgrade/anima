@@ -78,6 +78,8 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 				'html' => '<span class="sm-group__title">' . esc_html__( 'Buttons', '__theme_txtd' ) . '</span>',
 			],
 
+			'solid_button' => sm_get_color_switch_dark_config( 'Buttons', '*', false, 3, '--sm-button-background-color' ),
+
 			'sm-group-separator-4' => [ 'type' => 'html', 'html' => '' ],
 
 			'colors_novablocks_headline_section_title' => [
