@@ -1,13 +1,21 @@
 // ------ #BUTTONS BLOCK
 .wp-block-button {
-
     display: flex;
+    background: none;
 
-    &:not(.is-style-text) .wp-block-button__link {
-        @include button-base;
-        @include button-background;
-        @include button-color;
-        @include apply-font(button);
+    @include button-props;
+
+    &:not(.is-style-text) {
+
+      &:where([class*="sm-variation"]) {
+        --theme-button-text-color: var(--sm-current-fg1-color);
+        --theme-button-background-color: var(--sm-current-bg-color);
+        --theme-button-border-color: var(--sm-current-bg-color);
+
+        --theme-button-hover-text-color: var(--sm-current-bg-color);
+        --theme-button-hover-background-color: transparent;
+        --theme-button-hover-border-color: var(--sm-current-bg-color);
+      }
     }
 
     &:not([class*="is-style"]) .wp-block-button__link {
@@ -30,13 +38,18 @@
             @include button-reset;
             @include button-text;
 
-            --theme-button-text-color: var(--sm-current-accent-color);
-            --theme-button-hover-text-color: var(--sm-current-accent-color);
+            --theme-button-text-color: var(--nb-accent-color);
+            --theme-button-hover-text-color: var(--nb-accent-color);
+        }
+
+        &:where([class*="sm-variation"]) .wp-block-button__link {
+          --theme-button-text-color: var(--nb-bg-color);
+          --theme-button-hover-text-color: var(--nb-bg-color);
         }
     }
 }
 
-.wp-block-button__link {
+:is(.wp-block-button__link, .specificity.x2) {
     // Always center the text inside the button, including when using Custom Width 
     // settings and the link container is larger than the text itself.
     text-align: center; 
