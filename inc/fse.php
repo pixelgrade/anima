@@ -36,27 +36,35 @@ function anima_get_custom_template_canvas_path( string $template, string $type, 
 
 	return $template;
 }
-add_filter( '404_template', 'anima_get_custom_template_canvas_path', 10, 3 );
-add_filter( 'archive_template', 'anima_get_custom_template_canvas_path', 10, 3 );
-add_filter( 'attachment_template', 'anima_get_custom_template_canvas_path', 10, 3 );
-add_filter( 'author_template', 'anima_get_custom_template_canvas_path', 10, 3 );
-add_filter( 'category_template', 'anima_get_custom_template_canvas_path', 10, 3 );
-add_filter( 'date_template', 'anima_get_custom_template_canvas_path', 10, 3 );
-add_filter( 'embed_template', 'anima_get_custom_template_canvas_path', 10, 3 );
-add_filter( 'frontpage_template', 'anima_get_custom_template_canvas_path', 10, 3 );
-add_filter( 'home_template', 'anima_get_custom_template_canvas_path', 10, 3 );
-add_filter( 'index_template', 'anima_get_custom_template_canvas_path', 10, 3 );
-add_filter( 'page_template', 'anima_get_custom_template_canvas_path', 10, 3 );
-add_filter( 'paged_template', 'anima_get_custom_template_canvas_path', 10, 3 );
-add_filter( 'privacypolicy_template', 'anima_get_custom_template_canvas_path', 10, 3 );
-add_filter( 'search_template', 'anima_get_custom_template_canvas_path', 10, 3 );
-add_filter( 'single_template', 'anima_get_custom_template_canvas_path', 10, 3 );
-add_filter( 'singular_template', 'anima_get_custom_template_canvas_path', 10, 3 );
-add_filter( 'tag_template', 'anima_get_custom_template_canvas_path', 10, 3 );
-add_filter( 'taxonomy_template', 'anima_get_custom_template_canvas_path', 10, 3 );
+
+/**
+ * Adds necessary filters to use our custom template canvas instead of core one.
+ *
+ * Inspired by @see _add_template_loader_filters()
+ *
+ * @access private
+ */
+function _anima_add_template_loader_filters() {
+	$template_types = array_keys( get_default_block_template_types() );
+	foreach ( $template_types as $template_type ) {
+		/**
+		 * Use a higher priority than 20, since the core uses that, and we want to come latter then that.
+		 * @see _add_template_loader_filters()
+		 */
+		add_filter(
+			str_replace( '-', '', $template_type ) . '_template',
+			'anima_get_custom_template_canvas_path',
+			99, 3
+		);
+	}
+}
+add_action( 'wp_loaded', '_anima_add_template_loader_filters' );
 
 /**
  * Open the main page wrapper.
+ *
+ * Use a ridiculously big priority to be sure we get there last,
+ * thus being fired closest to the beginning of template_html.
  */
 add_action( 'anima/template_html:before', function() { ?>
 
@@ -64,12 +72,13 @@ add_action( 'anima/template_html:before', function() { ?>
 
 	<?php
 	do_action( 'anima/header:before', 'main' );
-}, 10 );
+}, 999999 );
 
 /**
  * Close the main page wrapper.
  *
- * Use a ridiculously small priority to be sure we get there first.
+ * Use a ridiculously small priority to be sure we get there first,
+ * thus being fired closest to the end of template_html.
  */
 add_action( 'anima/template_html:after', function() {
     /**
@@ -81,4 +90,4 @@ add_action( 'anima/template_html:after', function() {
 
 </div><!-- #page -->
 <?php
-}, 10 );
+}, -1 );
