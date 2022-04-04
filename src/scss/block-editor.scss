@@ -86,11 +86,11 @@ $assets-folder-path: '../../assets';
     // Give it a minimal style it so it doesn't draw attention from the main content. 
     
     .block-editor-page:not(:is(.post-type-post)) & {
+
         .edit-post-visual-editor__post-title-wrapper {
             max-width: none;
             margin-top: 0;
             background: white;
-
 
             :is(.editor-post-title__input, [data-rich-text-placeholder]) {
                 margin: 0;
@@ -123,13 +123,21 @@ $assets-folder-path: '../../assets';
         }
     }
 
+    // Root blocks container
+    .is-root-container {
+        // Add some top spacing to the first block
+        > .wp-block:first-child:not(:is(.nb-supernova, .wp-block-query)) {
+            padding-top: var(--theme-content-spacing);
+        }
+    }
+
 
     // POSTS POST TYPE
     // Title is shown both within Editor and the Frontend.
     // Seek to match the styles and provide a consistent experience.
     .block-editor-page:is(.post-type-post) & {
         padding: var(--theme-content-spacing) 0;
-        
+
         .edit-post-visual-editor__post-title-wrapper {
              margin-top: 0;
 
