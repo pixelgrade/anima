@@ -10,7 +10,7 @@ if ( is_active_sidebar( 'sidebar-1' ) ) {
 $sidebar_content = ob_get_clean();
 
 return array(
-	'title'      => __( 'Sidebar Articles (theme)', '__theme_txtd' ),
+	'title'      => __( 'Articles Sidebar (theme)', '__theme_txtd' ),
 	'categories' => array( 'sidebar' ),
 	'blockTypes' => array( 'core/template-part/sidebar' ),
 	'content'    => $sidebar_content,
