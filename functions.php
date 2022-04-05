@@ -123,9 +123,9 @@ function anima_widgets_init() {
 
 	register_sidebar(
 		[
-			'name'          => esc_html__( 'Sidebar Article', '__theme_txtd' ),
+			'name'          => esc_html__( 'Article Sidebar', '__theme_txtd' ),
 			'id'            => 'sidebar-1',
-			'description'   => esc_html__( 'Add widgets here to appear in your footer.', '__theme_txtd' ),
+			'description'   => esc_html__( 'Add widgets here to appear next to your articles.', '__theme_txtd' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
 			'before_title'  => '<h2 class="widget-title">',
