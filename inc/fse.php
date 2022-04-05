@@ -13,6 +13,61 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once 'fse/block-patterns.php';
 
 /**
+ * Filters the array of queried block templates array after they've been fetched.
+ *
+ * This way we add titles and/or descriptions about the templates we're providing that are not covered by core
+ * ( through @see get_default_block_template_types() ).
+ *
+ * @param WP_Block_Template[] $query_result Array of found block templates.
+ * @param array  $query {
+ *     Optional. Arguments to retrieve templates.
+ *
+ *     @type array  $slug__in List of slugs to include.
+ *     @type int    $wp_id Post ID of customized template.
+ * }
+ * @param string $template_type wp_template or wp_template_part.
+ *
+ * @return WP_Block_Template[]
+ */
+function anima_add_block_templates_details( $query_result, $query, $template_type ) {
+	if ( 'wp_template' === $template_type ) {
+		foreach ( $query_result as $template ) {
+			// Leave it alone if it is not from Anima or it already has a description.
+			if ( 'anima' !== $template->theme || ! empty( $template->description ) ) {
+				continue;
+			}
+
+			switch ( $template->slug ) {
+				case 'archive-product':
+					$template->title = esc_html__( 'Products Archive', '__theme_txtd' );
+					$template->description = esc_html__( 'Displays the entire products list.', '__theme_txtd' );
+					break;
+				case 'taxonomy-product_cat':
+					$template->title = esc_html__( 'Product Categories Archive', '__theme_txtd' );
+					$template->description = esc_html__( 'Displays the products from a certain product category.', '__theme_txtd' );
+					break;
+				case 'taxonomy-product_tag':
+					$template->title = esc_html__( 'Product Tags Archive', '__theme_txtd' );
+					$template->description = esc_html__( 'Displays the products with a certain product tag attached.', '__theme_txtd' );
+					break;
+				case 'single-product':
+					$template->title = esc_html__( 'Single Product', '__theme_txtd' );
+					$template->description = esc_html__( 'Displays a single product.', '__theme_txtd' );
+					break;
+				case 'single-split-header':
+					$template->description = esc_html__( 'Displays a single post with a different layout for the header.', '__theme_txtd' );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	return $query_result;
+}
+add_filter( 'get_block_templates', 'anima_add_block_templates_details', 10, 3 );
+
+/**
  * Get our custom template canvas file path, depending on the type of template being queried.
  *
  * Since with FSE we have little room in terms of hooks, we need to make do to bring back some of our hooks.
