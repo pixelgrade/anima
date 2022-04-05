@@ -2,11 +2,10 @@
   #COMPONENT - Drop Cap
 \*------------------------------------*/
 
-.has-drop-cap:first-letter {
+.has-drop-cap:not(:focus):first-letter {
 	@include apply-font-properties;
 	color: var(--current-color);
 }
-
 
 // ------ #MIXINS
 @mixin drop-cap-base {
@@ -111,7 +110,7 @@
 // ------ #DROP CAP STYLES
 
 // Drop Cap: Style0 (Default)
-.has-drop-cap {
+.has-drop-cap:not(:focus){
 	@include drop-cap-base;
 	@include drop-cap-style-2;
 }
