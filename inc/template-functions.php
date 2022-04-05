@@ -55,11 +55,13 @@ function anima_body_classes( array $classes ): array {
 		$classes[] = 'has-sidebar';
 	}
 
-	if ( pixelgrade_option( 'sm_collection_title_position' ) === 'sideways' ) {
+	$collection_title_position = get_option( 'sm_collection_title_position', 'above' );
+
+	if ( $collection_title_position === 'sideways' ) {
 		$classes[] = 'u-collection-title-sideways';
 	}
 
-	$collection_hover_effect = pixelgrade_option( 'sm_collection_hover_effect', 'none' );
+	$collection_hover_effect = get_option( 'sm_collection_hover_effect', 'none' );
 
 	if ( ! empty( $collection_hover_effect ) ) {
 		$classes[] = 'u-collection-hover-' . $collection_hover_effect;
