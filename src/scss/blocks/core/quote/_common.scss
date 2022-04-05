@@ -1,8 +1,8 @@
 $enable-blockquote-block-styles:        true !default;
 
 @mixin blockquote-default-padding {
-    padding-left: var(--theme-spacing-fluid-normal);
-    @include above(tablet) { padding-right: var(--theme-spacing-fluid-normal); }
+    padding-left: var(--theme-spacing-fluid-small);
+    @include above(tablet) { padding-right: var(--theme-spacing-fluid-small); }
 }
 
 @if $enable-blockquote-block-styles == true {
@@ -26,6 +26,7 @@ $enable-blockquote-block-styles:        true !default;
             padding-right: 0;
         }
         
+        // Large / Grande Style
         &.is-style-large:not(.is-style-plain) {
             border-left: none;
             margin-bottom: 0;
