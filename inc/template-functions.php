@@ -59,6 +59,12 @@ function anima_body_classes( array $classes ): array {
 		$classes[] = 'u-collection-title-sideways';
 	}
 
+	$collection_hover_effect = pixelgrade_option( 'sm_collection_hover_effect', 'none' );
+
+	if ( ! empty( $collection_hover_effect ) ) {
+		$classes[] = 'u-collection-hover-' . $collection_hover_effect;
+	}
+
 	return $classes;
 }
 add_filter( 'body_class', 'anima_body_classes' );
