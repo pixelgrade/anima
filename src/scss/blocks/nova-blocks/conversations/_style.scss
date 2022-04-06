@@ -7,8 +7,8 @@
 @import "../../../setup/mixins/forms";
 
 .novablocks-conversations {
-  --avatar-column-size: 2.8rem;
-  --comments-grid-gap: 1.3rem;
+  --avatar-column-size: 45px;
+  --comments-grid-gap: 10px;
   --component-accent-color: var(--sm-current-accent-color);
   --nb-conversations-width: 48em;
   --field-description-color: var(--sm-current-fg2-color);
@@ -23,6 +23,11 @@
   --nb-spacing: var(--theme-spacing-fluid-large);
   
   --element-spacing: var(--theme-spacing-normal) !important;
+
+  @include above(tablet) {
+    --avatar-column-size: 2.8rem;
+    --comments-grid-gap: 1.3rem;
+  }
   
   width: 100%;
   
@@ -44,22 +49,34 @@
   
   .comment-footer-highlights[class],
   .commenter-background-label {
-    --font-size-modifier: 0.75;
+    @include apply-font(input);
+    --font-size: 12;
     --current-font-weight: regular;
+  }
+
+  .comment-footer-highlights[class] {
+    --font-size: 13;
+    --current-font-weight: bold;
   }
   
   .comment-dropdown-toggle {
     --font-size-modifier: 0.90;
     --current-font-weight: regular;
   }
+
+  .comment-content {
+    --font-size-modifier: 0.9;
+  }
   
   .comment-footer-meta[class] {
-    --font-size-modifier: 0.80;
+    @include apply-font(input);
+    --font-size: 13;
+    // --font-size-modifier: 0.80;
   }
 
   .comment-form {
     label {
-      --font-size-modifier: 0.72;
+      --font-size-modifier: 1;
       
       + .field-description:not(:empty) {
         margin-top: calc(-1 * var(--theme-input-vertical-spacing));
@@ -67,7 +84,7 @@
     }
   
     .field-description[class] {
-      --font-size-modifier: 0.83;
+      --font-size-modifier: 0.88;
     }
   }
 
@@ -85,6 +102,8 @@
 
   .comment-dropdown-menu[class] {
     min-width: 220px;
+
+    @include apply-font(input);
   }
 
   .form-submit {
@@ -136,7 +155,9 @@
   }
 
   .comment-author-name {
-    --font-size-modifier: 1;
+    @include apply-font(input);
+    --font-size: 19.5;
+    --font-size-modifier: 0.89;
   }
 
   .comment-dropdown-menu {
@@ -288,7 +309,7 @@
 }
 
 .novablocks-conversations__comments-count {
-  --font-size-modifier:0.6;
+  --font-size-modifier:0.65;
   color: var(--field-description-color);
 
   opacity: .5
@@ -299,6 +320,9 @@
   color: var(--sm-current-bg-color);
 }
 
+
+
+// Conversation Starter
 .novablocks-conversation__starter {
   @include below(lap) {
     margin-left: calc(-1*var(--theme-wrapper-sides-spacing));
@@ -307,14 +331,20 @@
 }
 
 .novablocks-conversation__starter-subtitle {
+  @include apply-font(lead);
+  --font-size-modifier: 0.95;
   --component-accent-color: var(--sm-current-accent-color);
 }
 
 .novablocks-conversation__starter-message[class] {
-  color: var(--sm-current-fg1-color);
-  --font-size-modifier: 1.15;
   margin-top: calc(var(--theme-spacing-smallest) / 2);
+
+  @include apply-font(lead);
+  // --font-size-modifier: 1.15;
+  color: var(--sm-current-fg1-color);
 }
+
+
 
 .comments-area {
   .entry-content {
