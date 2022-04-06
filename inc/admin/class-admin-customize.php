@@ -22,6 +22,8 @@ if ( ! class_exists( 'Anima_Admin_Customize', false ) ) :
 		 */
 		public function __construct() {
 			add_action( 'customize_register', [ $this, 'customize_register' ] );
+			// Scripts and styles enqueued in the Customizer.
+			add_action( 'customize_controls_enqueue_scripts', [ $this, 'enqueue_assets' ], 15 );
 		}
 
 		/**
@@ -81,6 +83,18 @@ if ( ! class_exists( 'Anima_Admin_Customize', false ) ) :
 				'render_callback'     => [ $this, 'customizer_partial_transparent_logo' ],
 				'container_inclusive' => true,
 			] );
+		}
+
+		/**
+		 * Enqueue Customizer scripts and styles.
+		 *
+		 * @since 2.0.0
+		 */
+		public function enqueue_assets() {
+			$theme  = wp_get_theme( get_template() );
+
+			wp_enqueue_style( 'anima-customizer', get_template_directory_uri() . '/dist/css/admin/customizer.css', [], $theme->get( 'Version' ) );
+			wp_style_add_data( 'anima-customizer', 'rtl', 'replace' );
 		}
 
 		/* ============================
