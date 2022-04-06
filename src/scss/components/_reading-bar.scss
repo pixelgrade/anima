@@ -1,5 +1,6 @@
 .c-reading-bar {
 	
+	// Current page title
 	&__wrapper-title {
 		@include apply-font(navigation);
 	}
@@ -8,7 +9,8 @@
 .post-title__label {
 	@include apply-font(navigation);
     --current-font-style: normal;
-    // --current-font-weight: bold;
     
-    display: none; // Hide "Reading" label
+    // Hide the "Reading" label while scorlling, 
+    // but keep the "Next article"
+    display: none; 
 }
