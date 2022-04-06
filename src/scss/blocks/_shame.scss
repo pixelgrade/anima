@@ -4,7 +4,15 @@
     text-decoration: none;
     color: inherit;
   }
+
+  // Categories/Tags inside a Group/Row block
+  // Overwrite general Group block rules
+  :is(.wp-block-group, .specificity.x2.x3.x4) > & {
+    margin: 0;
+  }
 }
+
+
 
 // Post Title block
 
