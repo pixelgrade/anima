@@ -135,8 +135,9 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 						'text-decoration' => 'none',
 						'letter-spacing'  => - 0.02,
 					],
+					'fields'            => $fields_config_medium,
 					// We want all the font variants for this field since it is a rich content one.
-					'fields'            => wp_parse_args( [ 'font-weight' => [ 'loadAllVariants' => true ] ], $fields_config_medium ),
+					// 'fields'            => wp_parse_args( [ 'font-weight' => [ 'loadAllVariants' => true ] ], $fields_config_medium ),
 				],
 				'main_content_title_heading_fonts_section' => [
 					'type' => 'html',
