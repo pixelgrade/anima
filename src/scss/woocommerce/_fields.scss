@@ -1,23 +1,94 @@
 // CSS rules needs to be very specific to overwrite any WooCommerce default styling
 // @todo find a more reliable and specific selector
 
+:is(body, #very.specific) {
 
-html body.woocommerce-page {
-
-    .button:not(.trix-button),
+  :is(
     button:not([class]),
     input[type="submit"]:not(.ot-button):not(.search-submit),
-    button.button:disabled[disabled] {
-        @include button;
+    .button:not(.trix-button),
+    button.button:disabled[disabled]
+  ) {
+    @include button;
+  }
+
+  // Overwrite the text color of the default WooCommerce button :hover state
+  #respond input#submit.alt:hover,
+  :is(a, button, input).button.alt:hover {
+    color: var(--theme-button-hover-text-color);
+  }
+
+  :is(a, button).button {
+    @include apply-font-properties;
+
+    &:not(:is(.alt, .checkout, .specificity.increase)) {
+      @include button-fill-reverse;
     }
 
-        // Overwrite the text color of the default WooCommerce button :hover state
-        #respond input#submit.alt:hover, 
-        a.button.alt:hover, 
-        button.button.alt:hover, 
-        input.button.alt:hover {
-            color: var(--theme-button-hover-text-color);
+    &:is(.alt, .checkout, .specificity.increase) {
+      @include button-fill;
+    }
+
+    &.checkout-button {
+      @include button-huge;
+    }
+  }
+
+  input.button,
+  input[type="submit"]:not(.ot-button):not(.search-submit) {
+
+    &:not(.alt) {
+      @include button-fill-reverse(false);
+    }
+
+    &.alt {
+      @include button-fill(false);
+    }
+  }
+
+  is(.checkout-button, #place_order) {
+    @include button-huge;
+    --theme-button-text-color: var(--theme-light-primary);
+    --theme-button-background-color: var(--sm-current-accent-color);
+    --theme-button-border-color: var(--sm-current-accent-color);
+    --theme-button-hover-text-color: var(--sm-current-accent-color);
+    --theme-button-hover-border-color: var(--sm-current-accent-color);
+  }
+
+  #place_order {
+    --theme-button-background-color: var(--sm-current-accent-color);
+    --theme-button-border-color: var(--sm-current-accent-color);
+    --theme-button-hover-text-color: var(--sm-current-accent-color);
+    --theme-button-hover-border-color: var(--sm-current-accent-color);
+
+    @include button-huge;
+  }
+
+  :is(.add_to_cart_button, .single_add_to_cart_button) {
+    --theme-button-background-color: var(--sm-current-accent-color);
+    --theme-button-border-color: var(--sm-current-accent-color);
+    --theme-button-hover-text-color: var(--sm-current-accent-color);
+    --theme-button-hover-border-color: var(--sm-current-accent-color);
+
+    width: 100%;
+  }
+
+  .woocommerce-notices-wrapper {
+
+    .button {
+      @include specific(5) {
+        @include button-fill;
+        --current-button-text-color: var(--theme-button-text-color);
+
+        &:hover {
+          --current-button-text-color: var(--theme-button-hover-text-color);
         }
+      }
+    }
+  }
+}
+
+html body.woocommerce-page {
 
     .customize-partial-edit-shortcut-button {
         padding: 3px;
@@ -29,95 +100,15 @@ html body.woocommerce-page {
         display: none;
     }
 
-    a.button,
-    button.button {
-        @include apply-font-properties;
-
-        &:not(:is(.alt, .checkout, .specificity.increase)) {
-            @include button-fill-reverse;
-        }
-
-        &:is(.alt, .checkout, .specificity.increase) {
-            @include button-fill;
-        }
-
-        &.checkout-button {
-            @include button-huge;
-        }
-    }
-
-    input.button,
-    input[type="submit"]:not(.ot-button):not(.search-submit) {
-
-        &:not(.alt) {
-            @include button-fill-reverse(false);
-        }
-
-        &.alt {
-            @include button-fill(false);
-        }
-    }
-
      @include above(tablet) {
         button[name='update_cart'] {
-            float:right;
+            float: right;
         }
-    }
-
-    .checkout-button,
-    [id="place_order"] {
-        @include button-huge;
-        --theme-button-text-color: var(--theme-light-primary);
-        --theme-button-background-color: var(--sm-current-accent-color);
-        --theme-button-border-color: var(--sm-current-accent-color);
-        --theme-button-hover-text-color: var(--sm-current-accent-color);
-        --theme-button-hover-border-color: var(--sm-current-accent-color);
     }
 
     textarea {
         @include textarea;
     }
-
-    .actions {
-        .button {
-            // padding: var(--theme-input-padding);
-        }
-    }
-
-    #place_order {
-        --theme-button-background-color: var(--sm-current-accent-color);
-        --theme-button-border-color: var(--sm-current-accent-color);
-        --theme-button-hover-text-color: var(--sm-current-accent-color);
-        --theme-button-hover-border-color: var(--sm-current-accent-color);
-
-        @include button-huge;
-    }
-
-    .add_to_cart_button,
-    .single_add_to_cart_button {
-        --theme-button-background-color: var(--sm-current-accent-color);
-        --theme-button-border-color: var(--sm-current-accent-color);
-        --theme-button-hover-text-color: var(--sm-current-accent-color);
-        --theme-button-hover-border-color: var(--sm-current-accent-color);
-
-        width: 100%;
-    }
-
-    .woocommerce-notices-wrapper {
-
-        .button {
-            @include specific(5) {
-                @include button-fill;
-                --current-button-text-color: var(--theme-button-text-color);
-
-                &:hover {
-                    --current-button-text-color: var(--theme-button-hover-text-color);
-                }
-            }
-        }
-    }
-
-    
 }
 
 // Some elements doesn't need to be targeted overly specific
@@ -157,14 +148,5 @@ html body.woocommerce-page {
                -webkit-mask:url($icon-plus-path) no-repeat 50% 50%;
            }
         }
-    }
-
-    .qty_button {
-        // padding: 0;
-        // background-color: transparent;
-        // border: 0;
-        // box-shadow: none;
-
-        // color: var(--sm-current-fg2-color);
     }
 }
