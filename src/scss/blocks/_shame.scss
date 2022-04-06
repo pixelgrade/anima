@@ -1,15 +1,56 @@
-// Post Categories block
+// Post Terms block
 .wp-block-post-terms {
   a {
     text-decoration: none;
     color: inherit;
   }
 
-  // Categories/Tags inside a Group/Row block
-  // Overwrite general Group block rules
-  :is(.wp-block-group, .specificity.x2.x3.x4) > & {
-    margin: 0;
+  // Post Categories block
+  &.taxonomy-category {
+
+    // Terms Style: Tag
+    &.is-style-tag {
+      display: flex;
+      gap: 0.5em;
+
+      a {
+        display: inline-flex;
+        max-width: 100%;
+        align-items: center;
+        min-height: 1.75rem;
+        padding: 0 var(--theme-spacing-smaller);
+        background-color: var(--sm-current-fg1-color);
+        border-radius: var(--theme-button-border-radius);
+        color: var(--sm-current-bg-color);
+        --font-size-modifier: 0.95;
+
+        &:hover {
+          background-color: var(--sm-current-accent-color);
+        }
+      }
+
+      .wp-block-post-terms__separator {
+        display: none;
+      }
+    }
   }
+
+  // Post Tags block
+  &.taxonomy-post_tag {
+    // --font-size-modifier: 0.9;
+
+    a {
+      font-style: italic;
+      text-decoration: underline;
+    }
+  }
+
+
+  // // Categories/Tags inside a Group/Row block
+  // // Overwrite general Group block rules
+  // :is(.wp-block-group, .specificity.x2.x3.x4) > & {
+  //   margin: 0;
+  // }
 }
 
 
