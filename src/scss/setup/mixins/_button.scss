@@ -220,6 +220,14 @@
   }
 }
 
+@mixin button-text-link {
+  @include button-text();
+
+  &:after {
+    display: none;
+  }
+}
+
 @mixin button-small {
   --theme-button-x-padding: 1em;
   --theme-button-y-padding: .25em;
