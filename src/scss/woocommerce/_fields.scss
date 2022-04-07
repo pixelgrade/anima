@@ -26,11 +26,11 @@
     @include apply-font-properties;
 
     &:not(:is(.alt, .checkout, .specificity.increase)) {
-      @include button-fill-reverse;
+      @include button-fill;
     }
 
     &:is(.alt, .checkout, .specificity.increase) {
-      @include button-fill;
+      @include button-fill-reverse;
     }
 
     &.checkout-button {
@@ -42,11 +42,11 @@
   input[type="submit"]:not(.ot-button):not(.search-submit) {
 
     &:not(.alt) {
-      @include button-fill-reverse(false);
+      @include button-fill(false);
     }
 
     &.alt {
-      @include button-fill(false);
+      @include button-fill-reverse(false);
     }
   }
 
