@@ -12,6 +12,10 @@
     @include button;
   }
 
+  :is(.ajax_add_to_cart ~ .single_add_to_cart_button, #specific) {
+    display: none;
+  }
+
   // Overwrite the text color of the default WooCommerce button :hover state
   #respond input#submit.alt:hover,
   :is(a, button, input).button.alt:hover {
@@ -38,11 +42,11 @@
   input[type="submit"]:not(.ot-button):not(.search-submit) {
 
     &:not(.alt) {
-      @include button-fill-reverse(false);
+      @include button-fill(false);
     }
 
     &.alt {
-      @include button-fill(false);
+      @include button-fill-reverse(false);
     }
   }
 
@@ -94,10 +98,6 @@ html body.woocommerce-page {
         padding: 3px;
         border: 0;
         border-radius: 50%;
-    }
-
-    .ajax_add_to_cart ~ .button {
-        display: none;
     }
 
      @include above(tablet) {

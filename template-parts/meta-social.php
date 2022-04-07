@@ -22,7 +22,7 @@ $comments_count = get_comments_number();
 					<div class="c-meta-comments__label">
 						<a class="c-meta-comments__link"><?php echo esc_html__( 'Discuss', '__theme_txtd' ); ?></a>
 					</div>
-                    <a class="c-button__link" href="#novablocks-comments"></a>
+                    <a class="c-button__link" href="#comments"></a>
 				</div>
 			</div>
 		</div>
