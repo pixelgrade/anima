@@ -26,11 +26,11 @@
     @include apply-font-properties;
 
     &:not(:is(.alt, .checkout, .specificity.increase)) {
-      @include button-fill;
+      @include button-fill-reverse;
     }
 
     &:is(.alt, .checkout, .specificity.increase) {
-      @include button-fill-reverse;
+      @include button-fill;
     }
 
     &.checkout-button {
