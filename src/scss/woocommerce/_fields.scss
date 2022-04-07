@@ -46,7 +46,7 @@
     }
   }
 
-  is(.checkout-button, #place_order) {
+  :is(.checkout-button, #place_order) {
     @include button-huge;
     --theme-button-text-color: var(--theme-light-primary);
     --theme-button-background-color: var(--sm-current-accent-color);
