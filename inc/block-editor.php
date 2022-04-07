@@ -66,5 +66,19 @@ add_filter( 'block_editor_settings_all',
 			$editor_settings['__experimentalFeatures']['typography']['fontSizes'] = [ 'theme' => [] ];
 		}
 
+		$style_handles = array(
+			'pixelgrade_style_manager-sm-colors-custom-properties',
+			'anima-block-editor-styles',
+			'novablocks-core-style',
+			'novablocks-core-editor_style',
+		);
+
+		ob_start();
+		$done = wp_styles()->done;
+		wp_styles()->do_items( $style_handles );
+		wp_styles()->done = $done;
+		$styles = ob_get_clean();
+
+		$editor_settings['__unstableResolvedAssets']['styles'] .= $styles;
 		return $editor_settings;
 	}, 10, 2 );
