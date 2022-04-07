@@ -17,12 +17,12 @@
         display: inline-flex;
         max-width: 100%;
         align-items: center;
-        min-height: 1.75rem;
+        min-height: 1.6rem;
         padding: 0 var(--theme-spacing-smaller);
         background-color: var(--sm-current-fg1-color);
         border-radius: var(--theme-button-border-radius);
         color: var(--sm-current-bg-color);
-        --font-size-modifier: 0.95;
+        --font-size-modifier: 0.85;
 
         &:hover {
           background-color: var(--sm-current-accent-color);
@@ -37,20 +37,38 @@
 
   // Post Tags block
   &.taxonomy-post_tag {
-    // --font-size-modifier: 0.9;
+    --font-size-modifier: 0.95;
 
     a {
       font-style: italic;
       text-decoration: underline;
     }
   }
+}
 
+// Post Author Box
+.nb-author-box {
+  &.has-description {
 
-  // // Categories/Tags inside a Group/Row block
-  // // Overwrite general Group block rules
-  // :is(.wp-block-group, .specificity.x2.x3.x4) > & {
-  //   margin: 0;
-  // }
+  }
+
+  .nb-author-box__name {
+
+  }
+
+  .nb-author-box__description {
+
+  }
+
+  .nb-author-box__footer {
+    a {
+      @include button-text-link();
+    }
+
+    .nb-author-box__links {
+
+    }
+  }
 }
 
 
