@@ -68,7 +68,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 					'default' => 'preset-2',
 					'choices' => [
 						'preset-1'      => [
-							'label'   => __( 'Preset 1 (Towards Primary)', '__theme_txtd' ),
+							'label'   => esc_html__( 'Preset 1 (Towards Primary)', '__theme_txtd' ),
 							'options' => [],
 							'config'  => [
 								'sm_font_primary'   => [
@@ -100,7 +100,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 							],
 						],
 						'preset-1-5-0'      => [
-							'label'   => __( 'Preset 1.5', '__theme_txtd' ),
+							'label'   => esc_html__( 'Preset 1.5', '__theme_txtd' ),
 							'options' => [],
 							'config'  => [
 								'sm_font_primary'   => [
@@ -132,7 +132,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 							],
 						],
 						'preset-2'      => [
-							'label'   => __( 'Preset 2 (Default)', '__theme_txtd' ),
+							'label'   => esc_html__( 'Preset 2 (Default)', '__theme_txtd' ),
 							'options' => [],
 							'config'  => [
 								'sm_font_primary'   => [
@@ -164,7 +164,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 							],
 						],
 						'preset-2-5'      => [
-							'label'   => __( 'Preset 2.5', '__theme_txtd' ),
+							'label'   => esc_html__( 'Preset 2.5', '__theme_txtd' ),
 							'options' => [],
 							'config'  => [
 								'sm_font_primary'   => [
@@ -196,7 +196,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 							],
 						],
 						'preset-3'      => [
-							'label'   => __( 'Preset 3 (Towards Secondary/Body)', '__theme_txtd' ),
+							'label'   => esc_html__( 'Preset 3 (Towards Secondary/Body)', '__theme_txtd' ),
 							'options' => [],
 							'config'  => [
 								'sm_font_primary'   => [
@@ -228,7 +228,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 							],
 						],
 						'preset-body'   => [
-							'label'   => __( 'Misc: All Body', '__theme_txtd' ),
+							'label'   => esc_html__( 'Misc: All Body', '__theme_txtd' ),
 							'options' => [],
 							'config'  => [
 								'sm_font_primary'   => [],
@@ -257,7 +257,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 							],
 						],
 						'preset-accent' => [
-							'label'   => __( 'Misc: All Accent', '__theme_txtd' ),
+							'label'   => esc_html__( 'Misc: All Accent', '__theme_txtd' ),
 							'options' => [],
 							'config'  => [
 								'sm_font_primary'   => [],
