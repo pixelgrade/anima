@@ -146,6 +146,33 @@ if ( ! function_exists( 'anima_alter_novablocks_separator_settings' ) ) {
 	}
 }
 
+if ( ! function_exists( 'anima_get_separator_markup' ) ) {
+	function anima_get_separator_markup() {
+		ob_start();
+		?>
+
+		<div class="c-separator">
+			<div class="c-separator__arrow c-separator__arrow--left"></div>
+			<div class="c-separator__line c-separator__line--left"></div>
+			<div class="c-separator__symbol">
+				<span><?php echo anima_get_separator_symbol(); ?></span>
+			</div>
+			<div class="c-separator__line c-separator__line--right"></div>
+			<div class="c-separator__arrow c-separator__arrow--right"></div>
+		</div>
+		<?php return apply_filters( 'anima/separator_markup', ob_get_clean() );
+	}
+}
+
+if ( ! function_exists( 'anima_get_separator_symbol' ) ) {
+	function anima_get_separator_symbol() {
+		$symbol = pixelgrade_option( 'separator_symbol', 'fleuron-1' );
+		ob_start();
+		get_template_part( 'assets/separators/' . $symbol . '-svg' );
+
+		return ob_get_clean();
+	}
+}
 
 if ( ! function_exists( 'anima_alter_novablocks_map_settings' ) ) {
 	function anima_alter_novablocks_map_settings( $settings ) {

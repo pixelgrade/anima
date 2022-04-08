@@ -119,6 +119,32 @@ if ( ! function_exists( 'anima_alter_logo_markup' ) ) {
 }
 add_filter( 'novablocks/logo_markup', 'anima_alter_logo_markup' );
 
+if ( ! function_exists( ' anima_has_custom_logo_transparent' ) ) {
+	/**
+	 * Determines whether the site has a custom transparent logo.
+	 *
+	 * @param int $blog_id Optional. ID of the blog in question. Default is the ID of the current blog.
+	 *
+	 * @return bool Whether the site has a custom logo or not.
+	 */
+	function anima_has_custom_logo_transparent( int $blog_id = 0 ): bool {
+		$switched_blog = false;
+
+		if ( is_multisite() && ! empty( $blog_id ) && get_current_blog_id() !== absint( $blog_id ) ) {
+			switch_to_blog( $blog_id );
+			$switched_blog = true;
+		}
+
+		$custom_logo_id = get_theme_mod( 'anima_transparent_logo' );
+
+		if ( $switched_blog ) {
+			restore_current_blog();
+		}
+
+		return (bool) $custom_logo_id;
+	}
+}
+
 /**
  * Fix skip link focus in IE11.
  *
@@ -271,21 +297,6 @@ if ( ! function_exists( 'anima_parse_content_tags' ) ) {
 		return apply_filters( 'pixelgrade_after_parse_content_tags', $content, $original_content );
 	}
 }
-
-if ( ! function_exists( 'anima_render_sharing_block' ) ) {
-
-	function anima_render_sharing_block() {
-
-		if ( ! pixelgrade_option( 'display_sharing_button_on_single', false ) ) {
-			return;
-		}
-
-		if ( is_singular( 'post' ) ) {
-			echo do_blocks( '<!-- wp:novablocks/sharing-overlay /-->' );
-		}
-	}
-}
-add_action( 'anima_after_content', 'anima_render_sharing_block' );
 
 if ( ! function_exists( 'anima_dark_mode_support' ) ) {
 	function anima_dark_mode_support() {

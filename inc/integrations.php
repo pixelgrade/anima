@@ -16,17 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once trailingslashit( get_template_directory() ) . 'inc/integrations/novablocks.php';
 
 /**
- * Load Customify integration for this theme.
- */
-if ( class_exists( 'PixCustomifyPlugin' ) ) {
-	require_once trailingslashit( get_template_directory() ) . 'inc/integrations/customify/customify.php';
-}
-
-/**
  * Load Style Manager integration for this theme.
- *
- * Since the Style Manager and the Customify plugin should not be active at the same time,
- * these two are mutually exclusive.
  */
 if ( class_exists( 'Pixelgrade\StyleManager\Plugin' ) ) {
 	require_once trailingslashit( get_template_directory() ) . 'inc/integrations/style-manager/style-manager.php';

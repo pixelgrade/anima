@@ -1,33 +1,4 @@
 <?php
-/**
- * The main template file
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
- * @package Anima
- */
-
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
-
-get_header();
-
-?>
-
-    <div id="primary" class="content-area">
-        <main id="main" class="site-main">
-
-			<?php echo do_blocks(
-				'<!-- wp:novablocks/sidecar -->' .
-				'<!-- wp:novablocks/sidecar-area -->' .
-				anima_get_archive_content() .
-				'<!-- /wp:novablocks/sidecar-area -->' .
-				'<!-- /wp:novablocks/sidecar -->'
-			); ?>
-
-        </main><!-- #main -->
-    </div><!-- #primary -->
-
-<?php
-get_footer();
+// There is nothing output here because block themes do not use php templates.
+// There is a core ticket discussing removing this requirement for block themes:
+// https://core.trac.wordpress.org/ticket/54272.

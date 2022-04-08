@@ -21,7 +21,6 @@ if ( defined( '\Pixelgrade\StyleManager\VERSION' ) ) {
 	add_filter( 'style_manager/filter_fields', 'anima_add_style_manager_options', 11, 1 );
 
 	add_filter( 'style_manager/filter_fields', 'anima_add_separators_section_to_style_manager_config', 30, 1 );
-	add_filter( 'style_manager/filter_fields', 'anima_add_content_section_to_style_manager_config', 40, 1 );
 }
 
 
@@ -47,7 +46,7 @@ function anima_add_separators_section_to_style_manager_config( $config ) {
 	$separator_symbol_choices = [];
 	foreach ( $separator_symbol_values as $symbol ) {
 		ob_start();
-		get_template_part( 'template-parts/separators/' . $symbol . '-svg' );
+		get_template_part( 'assets/separators/' . $symbol . '-svg' );
 		$separator_symbol_choices[ $symbol ] = ob_get_clean();
 	}
 
