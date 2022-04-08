@@ -34,58 +34,6 @@ function anima_add_style_manager_options( $config ) {
 	return $config;
 }
 
-function anima_add_content_section_to_style_manager_config( $config ) {
-
-	$anima_content_section = [
-		'content_section' => [
-			'title'   => esc_html__( 'Content', '__theme_txtd' ),
-			'options' => [
-				'this_divider_8874320137'      => [
-					'type' => 'html',
-					'html' => '<span class="separator label large">' . esc_html__( 'Archive', '__theme_txtd' ) . '</span>'
-				],
-				'display_categories_on_archive'    => [
-					'type'    => 'checkbox',
-					'label'   => esc_html__( 'Display Categories', '__theme_txtd' ),
-					'default' => true,
-				],
-				'display_tags_on_archive'          => [
-					'type'    => 'checkbox',
-					'label'   => esc_html__( 'Display Tags', '__theme_txtd' ),
-					'default' => false,
-				],
-				'display_date_on_archive'          => [
-					'type'    => 'checkbox',
-					'label'   => esc_html__( 'Display Date', '__theme_txtd' ),
-					'default' => true,
-				],
-				'display_author_on_archive'        => [
-					'type'    => 'checkbox',
-					'label'   => esc_html__( 'Display Author', '__theme_txtd' ),
-					'default' => false,
-				],
-				'this_divider_8874320138'      => [
-					'type' => 'html',
-					'html' => '<span class="separator label large">' . esc_html__( 'Article', '__theme_txtd' ) . '</span>'
-				],
-				'display_sharing_button_on_single' => [
-					'type'    => 'checkbox',
-					'label'   => esc_html__( 'Display Sharing Buttons', '__theme_txtd' ),
-					'default' => false,
-				]
-			],
-		],
-	];
-
-	if ( empty( $config['sections'] ) ) {
-		$config['sections'] = [];
-	}
-
-	$config['sections'] = $config['sections'] + $anima_content_section;
-
-	return $config;
-}
-
 function anima_add_separators_section_to_style_manager_config( $config ) {
 
 	$separator_symbol_values = [
@@ -103,7 +51,7 @@ function anima_add_separators_section_to_style_manager_config( $config ) {
 		$separator_symbol_choices[ $symbol ] = ob_get_clean();
 	}
 
-	// Bail if we have not choices.
+	// Bail if we have no choices.
 	if ( empty( $separator_symbol_choices ) ) {
 		return $config;
 	}
