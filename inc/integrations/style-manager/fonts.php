@@ -329,7 +329,15 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 						'text-decoration' => 'none',
 						'letter-spacing'  => - 0.02,
 					],
-					'fields'            => $fields_config_large,
+					'fields'            => [
+						'font-size'      => false,
+						'font-weight'    => true,
+						'font-style'     => true,
+						'line-height'    => false,
+						'letter-spacing' => $letter_spacing_config,
+						'text-align'     => false,
+						'text-transform' => 'none'
+					],
 				],
 				'navigation_font' => [
 					'type'              => 'font',
