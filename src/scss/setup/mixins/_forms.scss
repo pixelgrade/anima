@@ -67,14 +67,15 @@
   @include field;
   --select-icon-size: 6px;
 
-  @include above(tablet) {
-    --select-icon-size: 8px;
-  }
+  // @include above(tablet) {
+  //   --select-icon-size: 8px;
+  // }
 
+  padding-left: 1.125em;
   padding-right: 3.125em;
 
   background-image: linear-gradient(45deg, transparent 50%, var(--sm-current-fg2-color) 50%), linear-gradient(135deg, var(--sm-current-fg2-color) 50%, transparent 50%);
-  background-position: calc(100% - var(--theme-input-padding) - var(--select-icon-size)) center, calc(100% - var(--theme-input-padding)) center;
+  background-position: calc(98% - var(--theme-input-padding) - var(--select-icon-size)) center, calc(98% - var(--theme-input-padding)) center;
   background-size: var(--select-icon-size) var(--select-icon-size), var(--select-icon-size) var(--select-icon-size);
   background-repeat: no-repeat;
 

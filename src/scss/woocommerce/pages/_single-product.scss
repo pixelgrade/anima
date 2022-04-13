@@ -314,9 +314,9 @@
       > .entry-summary {
         float: none;
         width: auto;
-        flex: 0 0 calc(40% - var(--theme-spacing-larger));
+        flex: 0 0 calc(35% - var(--theme-spacing-larger));
         margin-left: 0;
-        margin-right: 0;
+        margin-right: var(--theme-spacing-larger);
       }
 
       .woocommerce-product-gallery + .entry-summary {
@@ -351,16 +351,24 @@
 
   .product_title {
     @include apply-font(heading-3);
+    --font-size: 32; // force an optimum font-size for Product Title
+    
     margin-bottom: var(--theme-spacing-smallest);
+
+    // The price below the title
+    // use a larger version of the Button font
+    + .price {
+        --font-size-modifier: 1.2;
+    }
   }
 
   .price {
     margin-bottom: var(--theme-spacing-normal);
 
-    // For the price use a larger version of the Body font
-    --font-size-modifier: 1.4;
+    @include apply-font(button);
 
     .woocommerce-Price-amount {
+      
     }
   }
 

@@ -1,5 +1,20 @@
+// Text-based Logo
 :is(.site-title, .specificity.x2) {
     @include apply-font(site-title);
-    --font-size: var(--nb-current-logo-height-setting);
+    --font-size: var(--nb-header-logo-height-setting);
     --current-line-height: 1;
+
+    @include below(lap) {
+        --font-size: calc(var(--nb-mobile-header-logo-height-setting) * 1.4); // multiply to match the mobile font setting on mobile
+    }
+
+    a {
+        text-decoration: none;
+        
+        @include above(lap) {
+            position: relative;
+            top: -0.13em;
+        }
+    }
+
 }
