@@ -46,11 +46,13 @@
     
     .woocommerce-ordering {
         width: auto;
-        margin-top: calc( var(--nb-block-top-spacing) * var(--nb-spacing) * var(--nb-element-spacing-multiplier, 1));
+        --nb-block-top-spacing: 0;
     }
     
     .woocommerce-result-count {
         margin-top: auto;
+
+        padding: calc(0.833em - 0.15em) 0; // in-sync with select ordering input from the right
     }
     
     .site {
@@ -97,6 +99,10 @@
     }
 
     select {
+       --theme-input-padding: calc(0.833em - 0.15em); // 0.833em is the default
+    }
+
+    not-select {
         color: var(--sm-current-fg1-color);
 
         @include select;
@@ -158,6 +164,7 @@
 
 .woocommerce-result-count {
     --block-content-end: gcs;
+    @include apply-font(input);
 }
 
 .woocommerce-ordering {

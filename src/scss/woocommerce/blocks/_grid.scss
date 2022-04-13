@@ -2,6 +2,25 @@
 
 @include specific(3) {
 
+    // Page Title and Categories
+    .woocommerce-products-header {
+
+        .woocommerce-categories {
+
+        }
+
+        // Main Shop page
+        .woocommerce-shop & {
+            // Hide the products header
+            display: none;
+        }
+
+        // Category page
+        .tax-product_cat & {
+
+        }
+    }
+
     .wc-block-grid {
         --column-gap: var(--theme-spacing-normal);
         --row-gap: var(--theme-spacing-normal);
@@ -27,6 +46,18 @@
             .wc-block-grid__product {
                 margin-left: auto;
                 margin-right: auto;
+            }
+        }
+
+        &.has-3-columns {
+            .wc-block-grid__product-title {
+                --font-size-modifier: 0.92;
+            }
+        }
+
+        &.has-4-columns {
+            .wc-block-grid__product-title {
+                --font-size-modifier: 0.85;
             }
         }
         
@@ -72,7 +103,7 @@
         position: relative;
 
         width: auto;
-        margin: 0 0 var(--row-gap) 0;
+        margin: 0; // No need for margin-bottom: var(--row-gap) as the "Add to cart" button creates enough space
         padding: 0 var(--column-gap) 0 0;
         border: 0;
 
@@ -107,7 +138,9 @@
         margin-top: var(--theme-spacing-smallest);
         margin-bottom: 0;
         
-        @include apply-font(heading-4);
+        @include apply-font(heading-3);
+        --font-size-modifier: 1;
+
         @include apply-font-properties;
 
         transition: var(--theme-links-transition);
@@ -162,7 +195,7 @@
     .wc-block-grid__product-price {
         color: var(--theme-dark-primary);
 
-        @include apply-font(meta);
+        @include apply-font(input);
 
         del {
             opacity: .5;
