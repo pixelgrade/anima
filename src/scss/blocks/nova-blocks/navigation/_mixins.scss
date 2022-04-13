@@ -7,9 +7,10 @@
             content: '';
 
             position: absolute;
+            left: 0;
+            right: 0;
             bottom: var(--nb-navigation-item-bottom-margin); // Margin bottom applied on header links
 
-            width: 100%;
             height: var(--theme-navigation-links-border-weight);
 
             background: currentColor;
@@ -31,8 +32,8 @@
     }
 
     &.menu-item-has-children > a:before {
-        width: calc(100% - 1.25em);
-        right: 1.25em;
+        right: calc(var(--navigation-item-sub-elements-spacing) + var(--dropdown-icon-size));
+        left: 0;
     }
 }
 
