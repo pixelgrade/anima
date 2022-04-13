@@ -7,11 +7,13 @@
 return array(
 	'title'    => __( '404 content (theme)', '__theme_txtd' ),
 	'inserter' => false,
-	'content'  => '<!-- wp:heading {"style":{"typography":{"fontSize":"clamp(4rem, 40vw, 20rem)","fontWeight":"200","lineHeight":"1"}},"className":"has-text-align-center"} -->
-					<h2 class="has-text-align-center" style="font-size:clamp(4rem, 40vw, 20rem);font-weight:200;line-height:1">' . esc_html( _x( '404', 'Error code for a webpage that is not found.', '__theme_txtd' ) ) . '</h2>
-					<!-- /wp:heading -->
-					<!-- wp:paragraph {"align":"center"} -->
-					<p class="has-text-align-center">' . esc_html__( 'This page could not be found. Maybe try a search?', '__theme_txtd' ) . '</p>
-					<!-- /wp:paragraph -->
-					<!-- wp:search {"label":"Search","showLabel":false,"width":50,"widthUnit":"%","buttonText":"Search","buttonUseIcon":true,"align":"center"} /-->',
+	'content'  => '<!-- wp:heading {"textAlign":"center","level":1,"align":"wide","className":"has-larger-font-size","fontSize":"larger"} -->
+<h1 class="alignwide has-text-align-center has-larger-font-size" id="looks-like-you-ve-stumbled-into-nowhere">' . esc_html__( 'Looks like you\'ve stumbled into nowhere.', '__theme_txtd' ) . '</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center"} -->
+<p class="has-text-align-center has-normal-font-size">' . esc_html__( 'It seems we can\'t find what you’re looking for. Perhaps searching can help.', '__theme_txtd' ) . '</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:search {"label":"' . esc_html__( 'Search', '__theme_txtd' ) . '","showLabel":false,"buttonText":"' . esc_html__( 'Search', '__theme_txtd' ) . '"} /-->',
 );
