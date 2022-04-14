@@ -52,28 +52,9 @@
 
   :is(.checkout-button, #place_order) {
     @include button-huge;
-    --theme-button-text-color: var(--theme-light-primary);
-    --theme-button-background-color: var(--sm-current-accent-color);
-    --theme-button-border-color: var(--sm-current-accent-color);
-    --theme-button-hover-text-color: var(--sm-current-accent-color);
-    --theme-button-hover-border-color: var(--sm-current-accent-color);
-  }
-
-  #place_order {
-    --theme-button-background-color: var(--sm-current-accent-color);
-    --theme-button-border-color: var(--sm-current-accent-color);
-    --theme-button-hover-text-color: var(--sm-current-accent-color);
-    --theme-button-hover-border-color: var(--sm-current-accent-color);
-
-    @include button-huge;
   }
 
   :is(.add_to_cart_button, .single_add_to_cart_button) {
-    --theme-button-background-color: var(--sm-current-accent-color);
-    --theme-button-border-color: var(--sm-current-accent-color);
-    --theme-button-hover-text-color: var(--sm-current-accent-color);
-    --theme-button-hover-border-color: var(--sm-current-accent-color);
-
     width: 100%;
   }
 
