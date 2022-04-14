@@ -8,6 +8,13 @@
 		border-radius: 0;
 	}
 
+	@if $style == accent {
+		background-color: var(--sm-current-accent-color);
+		color: #FFFFFF;
+
+		border-radius: 0;
+	}
+
 	@if $style == highlighted {
 		background-color: var(--sm-current-accent-color);
 		background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0.6), rgba(0, 0, 0, 0.3));

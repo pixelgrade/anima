@@ -127,11 +127,11 @@
         z-index: 10;
 
         margin: 0;
-        @include badge();
+        @include badge(accent);
         @include apply-font(meta);
         @extend %apply-font-properties;
 
-        --font-size-modifier: 0.9
+        // --font-size-modifier: 0.9
     }
 
     .wc-block-grid__product-title {
