@@ -45,8 +45,11 @@
     }
     
     .woocommerce-ordering {
-        width: auto;
         --nb-block-top-spacing: 0;
+
+        @include above(tablet) {
+            width: auto;
+        }
     }
     
     .woocommerce-result-count {
@@ -71,28 +74,29 @@
     --block-content-end: we !important;
 }
 
+
+
+// [Results count] + [Ordering select]
+.woocommerce-result-count,
+.woocommerce-ordering {
+    --block-content-start: ws;
+    --block-content-end: we;
+}
+
 .woocommerce-result-count {
-    --block-content-start: ws !important;
-    --block-content-end: gcs !important;
-    
-    margin-top: auto;
+    @include apply-font(input);
+
+    @include above(tablet) {
+        --block-content-end: gcs;
+    }  
 }
 
 .woocommerce-ordering {
-    --block-content-start: gce !important;
-    --block-content-end: we !important;
-}
+    justify-self: flex-end;
 
-.woocommerce-products-header__title:empty {
-    display: none;
-}
-
-.woocommerce-products-header__title {
-    text-align: center;
-    margin-bottom: var(--theme-spacing-normal);
-}
-
-.woocommerce-ordering {
+    @include above(tablet) {
+        --block-content-start: gce;
+    }
 
     @include below(tablet) {
         width: 100%;
@@ -101,30 +105,17 @@
     select {
        --theme-input-padding: calc(0.833em - 0.15em); // 0.833em is the default
     }
+}
 
-    not-select {
-        color: var(--sm-current-fg1-color);
 
-        @include select;
 
-        padding: var(--theme-spacing-smallest) 0;
-        background-position: calc(100% - var(--select-icon-size)) center, 100% center;
+.woocommerce-products-header__title:empty {
+    display: none;
+}
 
-        border: 0;
-        border-bottom: .1875em solid currentColor;
-        border-radius: 0;
-
-        line-height: 1.3;
-
-        width: 100%;
-
-        box-shadow: none;
-
-        @include below(tablet) {
-            border: 1px solid var(--sm-current-bg-color);
-            padding: var(--theme-spacing);
-        }
-    }
+.woocommerce-products-header__title {
+    text-align: center;
+    margin-bottom: var(--theme-spacing-normal);
 }
 
 .product-category {
@@ -163,15 +154,8 @@
 }
 
 .woocommerce-result-count {
-    --block-content-end: gcs;
-    @include apply-font(input);
+    // --block-content-end: gcs;
+    // @include apply-font(input);
 }
 
-.woocommerce-ordering {
-    --block-content-start: gce;
-    
-    align-self: flex-end;
-    justify-self: flex-end;
-    width: auto;
-    margin-top: 0;
-}
+
