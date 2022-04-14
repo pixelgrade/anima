@@ -110,7 +110,7 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 
 			'sm-description_colorize_elements_outro' => [
 				'type' => 'html',
-				'html' => esc_html__( 'Some elements are not available in this list, but you can change their coloration by using CSS code snippets.', '__theme_txtd' ),
+				'html' => esc_html__( 'For elements that are not available in this list, you need to use CSS code snippets to change their coloration.', '__theme_txtd' ),
 			],
 
 		],
