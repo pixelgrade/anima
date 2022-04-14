@@ -26,8 +26,6 @@ function anima_body_classes( array $classes ): array {
 		$classes[] = 'hfeed';
 	}
 
-	$classes[] = 'has-novablocks-header-transparent';
-
 	if ( anima_first_block_is( [
 		'novablocks/hero',
 		'novablocks/media',
