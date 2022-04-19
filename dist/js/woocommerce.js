@@ -75,29 +75,25 @@ var __webpack_exports__ = {};
     function onAddedToCart(event, fragments, cart_hash, $button) {
       var key = 'div.widget_shopping_cart_content';
       var sku = $button.data('product_sku');
+      $body.one('wc_fragments_loaded', function () {
+        var $fragment = $(key);
+        var $productList = $fragment.find('.product_list_widget');
+        var $product = $productList.find('[data-product_sku="' + sku + '"]').closest('.mini_cart_item');
 
-      if (key in fragments) {
-        $body.one('wc_fragments_loaded', function () {
-          var $fragment = $(key);
-          var $productList = $fragment.find('.product_list_widget');
-          var $product = $productList.find('[data-product_sku="' + sku + '"]').closest('.mini_cart_item');
-
-          if ($product.length) {
-            // scroll the newly added product into view
-            if (document.documentElement.scrollIntoView) {
-              $product.get(0).scrollIntoView();
-            } // prepare the fade-in animation for the updated product in the cart
+        if ($product.length) {
+          // scroll the newly added product into view
+          if (document.documentElement.scrollIntoView) {
+            $product.get(0).scrollIntoView();
+          } // prepare the fade-in animation for the updated product in the cart
 
 
-            $product.addClass('mini_cart_item--hidden'); // trigger the animation to show the updated product shortly after the cart slides into view
+          $product.addClass('mini_cart_item--hidden'); // trigger the animation to show the updated product shortly after the cart slides into view
 
-            setTimeout(function () {
-              $product.removeClass('mini_cart_item--hidden');
-            }, 100);
-          }
-        });
-      }
-
+          setTimeout(function () {
+            $product.removeClass('mini_cart_item--hidden');
+          }, 100);
+        }
+      });
       $button.text(pixelgradeWooCommerceStrings.added_to_cart);
       $('.c-mini-cart').addClass('c-mini-cart--visible');
     } // update cart items count in cart menu item
@@ -107,7 +103,7 @@ var __webpack_exports__ = {};
       var key = 'div.widget_shopping_cart_content';
       var count = 0;
 
-      if (key in fragments) {
+      if (fragments && key in fragments) {
         // loop through every item in cart and sum up the quantity
         $(fragments[key]).find('.mini_cart_item').each(function (i, obj) {
           var $quantity = $(obj).find('.quantity'); // remove the price html tag to be able to parse number of items for that product
