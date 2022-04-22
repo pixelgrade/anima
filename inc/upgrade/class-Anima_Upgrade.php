@@ -90,6 +90,11 @@ class Anima_Upgrade {
 		require_once( trailingslashit( get_template_directory() ) . 'inc/upgrade/class-Anima_Upgrade_Routines.php' );
 
 		$savedVersion = $this->get_version_saved();
+		// If not version was previously saved, save it and don't do anything else.
+		if ( false === $savedVersion ) {
+			$this->save_version_number();
+			return;
+		}
 		$newVersion   = $this->theme_version;
 		$new_versions = [];
 
@@ -152,11 +157,11 @@ class Anima_Upgrade {
 	 *
 	 * @access  public
 	 *
-	 * @return null
+	 * @return string|false The saved version string or false if none was saved thus far.
 	 */
 	public function get_version_saved() {
 
-		return get_option( $this->theme_slug . '_theme_version', '0.0.1' );
+		return get_option( $this->theme_slug . '_theme_version', false );
 	}
 
 	/**
