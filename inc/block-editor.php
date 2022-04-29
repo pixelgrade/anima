@@ -66,12 +66,12 @@ add_filter( 'block_editor_settings_all',
 			$editor_settings['__experimentalFeatures']['typography']['fontSizes'] = [ 'theme' => [] ];
 		}
 
-		$style_handles = array(
+		$style_handles = [
 			'pixelgrade_style_manager-sm-colors-custom-properties',
 			'anima-block-editor-styles',
 			'novablocks-core-style',
 			'novablocks-core-editor_style',
-		);
+		];
 
 		ob_start();
 		$done = wp_styles()->done;

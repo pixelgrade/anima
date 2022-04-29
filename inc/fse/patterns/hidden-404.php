@@ -4,7 +4,7 @@
  *
  * It does not appear in the inserter.
  */
-return array(
+return [
 	'title'    => __( '404 content (theme)', '__theme_txtd' ),
 	'inserter' => false,
 	'content'  => '<!-- wp:heading {"textAlign":"center","level":1,"align":"wide","className":"has-larger-font-size","fontSize":"larger"} -->
@@ -16,4 +16,4 @@ return array(
 <!-- /wp:paragraph -->
 
 <!-- wp:search {"label":"' . esc_html__( 'Search', '__theme_txtd' ) . '","showLabel":false,"buttonText":"' . esc_html__( 'Search', '__theme_txtd' ) . '"} /-->',
-);
+];

@@ -4,7 +4,7 @@
  *
  * It does not appear in the inserter.
  */
-return array(
+return [
 	'title'    => __( 'Search content (theme)', '__theme_txtd' ),
 	'inserter' => false,
 	'content'  => '<!-- wp:group {"align":"wide","blockTopSpacing":0} -->
@@ -14,4 +14,4 @@ return array(
 
 <!-- wp:search {"label":"' . esc_html__( 'Search', '__theme_txtd' ) . '","showLabel":false,"width":null,"widthUnit":"%","buttonText":"' . esc_html__( 'Search', '__theme_txtd' ) . '"} /--></div>
 <!-- /wp:group -->',
-);
+];
