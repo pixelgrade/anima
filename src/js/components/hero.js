@@ -113,7 +113,7 @@ export default class Hero {
   }
 
   getMarkupPieces () {
-    const container = jQuery( this.element ).find( '.novablocks-hero__inner-container' );
+    const container = jQuery( this.element ).find( '.novablocks-hero__inner-container, .nb-supernova-item__inner-container' );
     const headline = container.children().filter( '.c-headline' ).first();
     const title = headline.find( '.c-headline__primary' );
     const subtitle = headline.find( '.c-headline__secondary' );

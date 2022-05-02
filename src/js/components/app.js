@@ -10,7 +10,7 @@ import SearchOverlay from './search-overlay';
 
 export default class App {
 
-  constructor () {
+  constructor() {
     this.initializeHero();
 
     this.navbar = new Navbar();
@@ -37,8 +37,8 @@ export default class App {
     } );
   }
 
-  initializeReservationForm () {
-    GlobalService.registerObserverCallback( function ( mutationList ) {
+  initializeReservationForm() {
+    GlobalService.registerObserverCallback( function( mutationList ) {
       $.each( mutationList, ( i, mutationRecord ) => {
         $.each( mutationRecord.addedNodes, ( j, node ) => {
           const $node = $( node );
@@ -50,7 +50,7 @@ export default class App {
     } );
   }
 
-  showLoadedImages ( container = document.body ) {
+  showLoadedImages( container = document.body ) {
     const $images = $( container ).find( 'img' ).not( '[srcset], .is-loaded, .is-broken' );
 
     $images.imagesLoaded().progress( ( instance, image ) => {
@@ -59,15 +59,18 @@ export default class App {
     } );
   }
 
-  initializeHero () {
-    const heroElements = document.getElementsByClassName( 'novablocks-hero' );
+  initializeHero() {
+    const newHeroesSelector = '.nb-supernova--card-layout-stacked.nb-supernova--1-columns.alignfull';
+    const oldHeroesSelector = '.novablocks-hero';
+    const heroesSelector = `${ newHeroesSelector }, ${ oldHeroesSelector }`;
+    const heroElements = document.querySelectorAll( heroesSelector );
     const heroElementsArray = Array.from( heroElements );
 
     this.HeroCollection = heroElementsArray.map( element => new Hero( element ) );
-    this.firstHero = heroElementsArray[0];
+    this.firstHero = heroElementsArray[ 0 ];
   }
 
-  initializeCommentsArea () {
+  initializeCommentsArea() {
     const $commentsArea = $( '.comments-area' );
 
     if ( $commentsArea.length ) {
