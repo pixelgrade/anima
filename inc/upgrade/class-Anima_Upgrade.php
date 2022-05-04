@@ -90,7 +90,7 @@ class Anima_Upgrade {
 		require_once( trailingslashit( get_template_directory() ) . 'inc/upgrade/class-Anima_Upgrade_Routines.php' );
 
 		$savedVersion = $this->get_version_saved();
-		// If not version was previously saved, save it and don't do anything else.
+		// If no version was previously saved, save it and don't do anything else.
 		if ( false === $savedVersion ) {
 			$this->save_version_number();
 			return;

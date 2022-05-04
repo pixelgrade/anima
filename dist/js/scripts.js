@@ -527,7 +527,7 @@ class Hero {
   }
 
   getMarkupPieces() {
-    const container = jQuery(this.element).find('.novablocks-hero__inner-container');
+    const container = jQuery(this.element).find('.novablocks-hero__inner-container, .nb-supernova-item__inner-container');
     const headline = container.children().filter('.c-headline').first();
     const title = headline.find('.c-headline__primary');
     const subtitle = headline.find('.c-headline__secondary');
@@ -1112,7 +1112,10 @@ class App {
   }
 
   initializeHero() {
-    const heroElements = document.getElementsByClassName('novablocks-hero');
+    const newHeroesSelector = '.nb-supernova--card-layout-stacked.nb-supernova--1-columns.alignfull';
+    const oldHeroesSelector = '.novablocks-hero';
+    const heroesSelector = `${newHeroesSelector}, ${oldHeroesSelector}`;
+    const heroElements = document.querySelectorAll(heroesSelector);
     const heroElementsArray = Array.from(heroElements);
     this.HeroCollection = heroElementsArray.map(element => new Hero(element));
     this.firstHero = heroElementsArray[0];
