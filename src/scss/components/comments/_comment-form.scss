@@ -20,7 +20,6 @@
     label {
         @include label;
         display: block;
-        --font-size-modifier: 0.9;
     }
 
     input[type="checkbox"] {
@@ -33,18 +32,18 @@
 }
 
 .comment-notes {
-    font-size: 85%;
+    --font-size-modifier: 0.85;
 }
 
 .comment-form-author,
 .comment-form-email {
-    flex: 0 0 47%;
+    flex: 0 0 48%;
 }
 
 @include above(lap) {
     .comment-form-subscriptions,
     .comment-form .form-submit {
-        flex: 0 0 47%;
+        // flex: 0 0 47%;
     }
 
     .comment-form .form-submit {
