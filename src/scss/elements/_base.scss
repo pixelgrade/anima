@@ -79,3 +79,63 @@ em strong {
   font-style: normal;
   color: var(--sm-current-accent-color);
 } 
+
+
+// ------ #DECORATIVE HEADINGS
+// Alternative stylings for headings
+// 1. Underline (Osteria)
+// 2. Blocky (Bucket)
+
+.is-style-fancy {
+  
+  // 1. Underline
+  $underline-offset: 0.4em;
+
+  .u-decorative-titles-underline & {
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-color: currentColor;
+    text-decoration-thickness: 0.1em;
+    text-decoration-thickness: 2px;
+    
+    text-underline-offset: $underline-offset;
+    border-bottom: $underline-offset solid transparent;
+  }
+
+
+  // 1. Blocky
+  // Similar to Bucket theme.
+  $blocky-padding: 0.25em;
+
+  .u-decorative-titles-blocky & {
+    background: var(--sm-current-accent-color);
+    color: var(--sm-current-bg-color);
+
+    display: flex;
+    flex-direction: row;
+    
+    padding-top:    $blocky-padding * 1;
+    padding-bottom: $blocky-padding * 1;
+
+    padding-left:   $blocky-padding * 3;
+    padding-right:  $blocky-padding * 3;
+
+    &:after {
+      content: " ";
+      position: relative;
+      border-radius: 0;
+
+      background: var(--sm-current-fg1-color);
+      height: auto;
+      flex-grow: 1;
+
+      margin-top:     $blocky-padding * -1;
+      margin-bottom:  $blocky-padding * -1;
+
+      margin-right:   $blocky-padding * -3;
+      margin-left:    $blocky-padding *  3;
+    }
+  }
+}
+
+
