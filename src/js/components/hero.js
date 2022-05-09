@@ -122,7 +122,7 @@ export default class Hero {
     const sepLine = separator.find( '.c-separator__line' );
     const sepArrow = separator.find( '.c-separator__arrow' );
     const othersBefore = headline.prevAll();
-    const othersAfter = headline.length ? headline.nextAll().not( separator ) : container.children();
+    const othersAfter = headline.length ? headline.nextAll().not( separator ).not( '.nb-scroll-indicator' ) : container.children();
 
     return { headline, title, subtitle, separator, sepFlower, sepLine, sepArrow, othersBefore, othersAfter };
   }
