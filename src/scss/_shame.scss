@@ -15,7 +15,10 @@ iframe.instagram-media {
 
 
 // Image loading effect
-img:not([srcset]):not(.is-loaded) {
+img
+:not([srcset])
+:not(.is-loaded)
+:not(.pswp__img) {
     opacity: 0;
 
     .gm-style & {

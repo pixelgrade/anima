@@ -46,17 +46,31 @@ $assets-folder-path: '../../../assets';
   }
 }
 
-.woocommerce #review_form #respond [id="commentform"] {
-  @include space-children-y(var(--theme-spacing));
+.woocommerce  {
+  #review_form {
+    #respond {
 
-  > p {
-    margin-bottom: 0;
-  }
+      [id="commentform"] {
+        @include space-children-y(var(--theme-spacing));
 
-  > .form-submit {
-    margin-left: auto;
-  }
+        > p {
+          margin-bottom: 0;
+        }
+
+        > .form-submit {
+          margin-left: auto;
+
+          .submit {
+              @include button;
+              @include button-fill(false);
+          }
+        }
+      }
+    }
+  }  
 }
+
+
 
 .comment-form-rating .stars > span {
   display: flex;
@@ -67,6 +81,22 @@ $assets-folder-path: '../../../assets';
 }
 
 .woocommerce {
+  p.stars {
+
+    > span {
+      gap: 0.25em; 
+    }
+
+    a {
+      width: 1.5em;
+      height: 1.5em;
+    }
+
+    a:before {
+      font-size: 1.5em;
+    }
+  }
+
   .star-rating {
     float: none;
 
