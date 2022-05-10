@@ -46,13 +46,18 @@
             @include button-reset;
             @include button-text;
 
-            --theme-button-text-color: var(--nb-accent-color);
-            --theme-button-hover-text-color: var(--nb-accent-color);
+            --theme-button-text-color: var(--sm-current-accent-color);
+            --theme-button-hover-text-color: var(--sm-current-accent-color);
         }
 
         &:where([class*="sm-variation"]) .wp-block-button__link {
-          --theme-button-text-color: var(--nb-bg-color);
-          --theme-button-hover-text-color: var(--nb-bg-color);
+            --theme-button-text-color: var(--sm-current-bg-color);
+            --theme-button-hover-text-color: var(--sm-current-bg-color);
+
+            html.is-dark & {
+                --theme-button-text-color: var(--sm-current-accent-color);
+                --theme-button-hover-text-color: var(--sm-current-accent-color);
+            }
         }
     }
 }
