@@ -57,6 +57,50 @@ function anima_add_block_templates_details( $query_result, $query, $template_typ
 				case 'single-split-header':
 					$template->description = esc_html__( 'Displays a single post with a different layout for the header.', '__theme_txtd' );
 					break;
+				
+				// Single
+				case 'single-testimonial':
+					$template->description = esc_html__( 'Displays a single testimonial.', '__theme_txtd' );
+					break;
+				case 'single-portfolio':
+					$template->description = esc_html__( 'Displays a single project.', '__theme_txtd' );
+					break;
+				case 'single-gallery':
+					$template->description = esc_html__( 'Displays a single gallery.', '__theme_txtd' );
+					break;
+				
+				// Archive
+				case 'archive-testimonial':
+					$template->description = esc_html__( 'Displays the entire testimonials list.', '__theme_txtd' );
+					break;
+				case 'archive-portfolio':
+					$template->description = esc_html__( 'Displays the entire projects list.', '__theme_txtd' );
+					break;
+				case 'archive-gallery':
+					$template->description = esc_html__( 'Displays the entire galleries list.', '__theme_txtd' );
+					break;
+				
+				// Tag
+				case 'taxonomy-testimonial_tag':
+					$template->description = esc_html__( 'Displays the testimonials with a certain tag attached.', '__theme_txtd' );
+					break;
+				case 'taxonomy-portfolio_tag':
+					$template->description = esc_html__( 'Displays the projects with a certain tag attached.', '__theme_txtd' );
+					break;
+				case 'taxonomy-gallery_tag':
+					$template->description = esc_html__( 'Displays the galleries with a certain tag attached.', '__theme_txtd' );
+					break;
+				
+				// Type
+				case 'taxonomy-testimonial_type':
+					$template->description = esc_html__( 'Displays the testimonials with a certain type attached.', '__theme_txtd' );
+					break;
+				case 'taxonomy-portfolio_type':
+					$template->description = esc_html__( 'Displays the projects with a certain type attached.', '__theme_txtd' );
+					break;
+				case 'taxonomy-gallery_type':
+					$template->description = esc_html__( 'Displays the galleries with a certain type attached.', '__theme_txtd' );
+					break;
 				default:
 					break;
 			}
