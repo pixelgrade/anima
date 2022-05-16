@@ -42,7 +42,7 @@
 	$(function(){
 
 		var $body = $( document.body ).not( '.woocommerce-cart' );
-		var $cartMenuItems = $( '.novablocks-navigation .menu > .menu-item--cart' );
+		var $cartMenuItems = $( '.novablocks-navigation .menu > .menu-item--cart, .novablocks-header--mobile > .menu-item--cart' );
 
 		initializeCartMenuItems( $cartMenuItems );
 
@@ -55,9 +55,7 @@
 		}
 
 		function initializeCartMenuItems( $cartMenuItems ) {
-
-			$cartMenuItems.each( function( i, obj ) {
-
+			$cartMenuItems.not( '.is-ready' ).each( function( i, obj ) {
 				var $cartMenuItem = $( obj );
 				var $cartMenuItemLink = $cartMenuItem.children( 'a' );
 				var cartMenuItemText = $cartMenuItemLink.text();
@@ -75,9 +73,11 @@
 					var itemCount = getCartMenuItemCount( fragments );
 					updateCardMenuItems( $cartMenuItems, itemCount );
 				}
-			} );
 
-			$cartMenuItems.on( 'click', openMiniCart );
+				$cartMenuItem.on( 'click', openMiniCart );
+
+				$cartMenuItem.addClass( 'is-ready' );
+			} );
 		}
 
 		// show mini cart when a product is added to cart

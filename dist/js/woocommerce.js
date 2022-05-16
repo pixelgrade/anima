@@ -128,7 +128,7 @@
   });
   $(function () {
     var $body = $(document.body).not('.woocommerce-cart');
-    var $cartMenuItems = $('.novablocks-navigation .menu > .menu-item--cart');
+    var $cartMenuItems = $('.novablocks-navigation .menu > .menu-item--cart, .novablocks-header--mobile > .menu-item--cart');
     initializeCartMenuItems($cartMenuItems);
 
     if (typeof wp.customize !== "undefined" && typeof wp.customize.selectiveRefresh !== "undefined") {
@@ -140,7 +140,7 @@
     }
 
     function initializeCartMenuItems($cartMenuItems) {
-      $cartMenuItems.each(function (i, obj) {
+      $cartMenuItems.not('.is-ready').each(function (i, obj) {
         var $cartMenuItem = $(obj);
         var $cartMenuItemLink = $cartMenuItem.children('a');
         var cartMenuItemText = $cartMenuItemLink.text();
@@ -156,8 +156,10 @@
           var itemCount = getCartMenuItemCount(fragments);
           updateCardMenuItems($cartMenuItems, itemCount);
         }
+
+        $cartMenuItem.on('click', openMiniCart);
+        $cartMenuItem.addClass('is-ready');
       });
-      $cartMenuItems.on('click', openMiniCart);
     } // show mini cart when a product is added to cart
 
 
