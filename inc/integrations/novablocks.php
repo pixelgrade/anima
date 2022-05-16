@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_action( 'after_setup_theme', 'anima_novablocks_setup', 10 );
 
 add_filter( 'novablocks_block_editor_settings', 'anima_alter_novablocks_separator_settings' );
-add_filter( 'novablocks_block_editor_settings', 'anima_alter_novablocks_map_settings' );
+add_filter( 'novablocks_block_editor_settings', 'anima_alter_novablocks_map_settings', 20 );
 
 if ( ! function_exists( 'anima_novablocks_setup' ) ) {
 	function anima_novablocks_setup() {
@@ -176,11 +176,23 @@ if ( ! function_exists( 'anima_get_separator_symbol' ) ) {
 
 if ( ! function_exists( 'anima_alter_novablocks_map_settings' ) ) {
 	function anima_alter_novablocks_map_settings( $settings ) {
+
 		if ( empty( $settings['map'] ) ) {
 			$settings['map'] = [];
 		}
 
-		$settings['map']['accentColor'] = pixelgrade_option( 'sm_color_primary', '#DDAB5D' );
+		$accent_color = pixelgrade_option( 'sm_color_primary', '#DDAB5D' );
+		$advanced_palettes_setting = pixelgrade_option( 'sm_advanced_palette_output' );
+
+		if ( ! empty( $advanced_palettes_setting ) ) {
+			$palettes = json_decode( $advanced_palettes_setting, true );
+
+			if ( isset( $palettes[0]['source'][0] ) ) {
+				$accent_color = $palettes[0]['source'][0];
+			}
+		}
+
+		$settings['map']['accentColor'] = $accent_color;
 
 		return $settings;
 	}
