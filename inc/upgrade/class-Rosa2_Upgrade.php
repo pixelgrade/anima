@@ -89,6 +89,11 @@ class Rosa2_Upgrade {
 
 		$upgradeOk    = true;
 		$savedVersion = $this->get_version_saved();
+		// If no version was previously saved, save it and don't do anything else.
+		if ( false === $savedVersion ) {
+			$this->save_version_number();
+			return;
+		}
 		$newVersion   = $this->theme_version;
 		$new_versions = array();
 
@@ -155,7 +160,7 @@ class Rosa2_Upgrade {
 	 */
 	public function get_version_saved() {
 
-		return get_option( $this->theme_slug . '_theme_version', '0.0.1' );
+		return get_option( $this->theme_slug . '_theme_version', false );
 	}
 
 	/**
