@@ -1,0 +1,186 @@
+// WP Recipe Maker plugin integration
+
+.wprm-recipe-container {
+	.wprm-recipe-name {
+	    margin-bottom: 35px;
+	    border-bottom: 2px solid currentColor;
+	    padding-bottom: 35px;
+	}
+
+	// Meta (total time, course, servings)
+	.wprm-recipe-meta-container {
+		margin-top: 0;
+		margin-bottom: var(--theme-spacing-small);
+		padding: var(--theme-spacing-smaller) 0;
+
+		&, .wprm-recipe-block-container {
+			border-color: rgb(0 0 0 / 15%) !important;
+		}
+
+		.wprm-recipe-details-label {
+			@include apply-font(heading-6);
+			@include apply-font-properties;
+			--font-size-base: 1;
+		}
+
+		.wprm-recipe-details-unit {
+			font-size: 1em;
+		}
+
+	}
+	
+	.wprm-recipe-details-container {
+
+	}
+
+	//  Servings (adjust)
+	.wprm-recipe-servings-container {
+
+	}
+
+	// Media toggle
+	.wprm-toggle-container {
+
+	}
+
+	// Custom Styles
+	.wprm-block-text-faded {
+		opacity: 0.6;
+	}
+}
+
+
+.recipe-content {
+	display: grid;
+	gap: 2em;
+
+	grid-template-columns: [first] 1fr [second] 2fr [end];
+	grid-template-rows: auto;
+
+	grid-template-areas:
+		"sidebar-header sidebar-header"
+		"content content"
+		"sidebar-footer sidebar-footer"
+		"footer footer";
+
+	@include above(tablet) {
+		grid-template-areas:
+			"sidebar-header content"
+			"sidebar-header2 content"
+			"sidebar-footer content"
+			"footer footer";
+	}
+
+	.recipe-ingredients {
+		grid-area: sidebar-header;	
+
+		.wprm-recipe-header {
+			margin-bottom: var(--theme-spacing-smaller);
+		}
+
+		.wprm-recipe-ingredients {
+			--font-size-modifier: 0.9;
+
+			li {
+				margin-bottom: 0.25em;
+
+				.wprm-recipe-ingredient-amount {
+					font-weight: bold;
+				}
+			}
+		}
+	}
+
+	.recipe-equipment {
+		grid-area: sidebar-header2;
+	}
+
+	.recipe-instructions {
+		grid-area: content;
+
+		.wprm-recipe-header {
+			margin-bottom: var(--theme-spacing-smaller);
+		}
+
+		.wprm-recipe {
+			li {
+
+			}
+
+		}
+
+		.wprm-recipe-instruction {
+			&:last-child > div {
+				margin-bottom: 0 !important;
+			}
+
+			&:before {
+				background: var(--sm-current-accent-color) !important;
+				color: var(--sm-current-bg-color) !important;
+			}
+		}
+
+		.wprm-recipe-instruction-text,
+		.wprm-recipe-instruction-media {
+			padding-left: 18px;
+		}
+	}
+
+	.recipe-notes {
+		grid-area: footer;
+
+    	padding-top: 35px;
+
+    	border-top: 2px solid currentColor;
+	}
+
+	.recipe-print {
+		grid-area: sidebar-footer;
+		align-self: end;
+
+		a {
+			@include button;
+			@include button-fill;
+			@include apply-font-properties;
+			--font-size-base: 1;
+
+			color: var(--current-button-text-color) !important;
+
+			.wprm-recipe-icon {
+				margin-right: 0.25em;
+
+				path {
+					fill: var(--current-button-text-color) !important;
+					transition: all 0.3s;
+				}
+			}
+		}
+	}
+}
+
+// Adjustable Servings controls
+.wprm-recipe-adjustable-servings-container {
+	margin: var(--theme-spacing-smaller) 0;
+
+	border-radius: var(--theme-button-border-radius) !important;
+	border-color: var(--sm-current-fg1-color) !important;
+	color: var(--sm-current-fg1-color) !important;
+	background: var(--sm-current-bg-color) !important;
+
+	.wprm-toggle {
+		border-left-color: var(--sm-current-fg1-color) !important; 
+		transition: all 0.3s;
+
+		&:not(.wprm-toggle-active):hover {
+			cursor: pointer;
+		}
+	}
+	.wprm-toggle:not(.wprm-toggle-active):hover,
+	.wprm-toggle-active {
+		background-color: var(--sm-current-fg1-color) !important;
+    	color: var(--sm-current-bg-color) !important;
+	}
+}
+
+
+
