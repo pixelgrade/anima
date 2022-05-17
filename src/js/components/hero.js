@@ -112,7 +112,7 @@ export default class Hero {
     this.timeline.progress( newTlProgress );
   }
 
-  getMarkupPieces () {
+  getMarkupPieces() {
     const container = jQuery( this.element ).find( '.novablocks-hero__inner-container, .nb-supernova-item__inner-container' );
     const headline = container.children().filter( '.c-headline' ).first();
     const title = headline.find( '.c-headline__primary' );
@@ -228,41 +228,63 @@ export default class Hero {
     const { title, subtitle, othersBefore, othersAfter, separator, sepLine, sepFlower, sepArrow } = this.pieces;
     const timeline = this.timeline;
 
-    timeline.fromTo( title, {
-      y: 0
-    }, {
-      opacity: 0,
-      y: -60,
-      duration: 1.08,
-      ease: 'power1.in'
-    }, 'middle' );
+    if ( title.length ) {
+      timeline.fromTo( title, {
+        y: 0
+      }, {
+        opacity: 0,
+        y: -60,
+        duration: 1.08,
+        ease: 'power1.in'
+      }, 'middle' );
+    }
 
-    timeline.to( subtitle, {
-      opacity: 0,
-      y: -90,
-      duration: 1.08,
-      ease: 'power1.in'
-    }, 'middle' );
+    if ( subtitle.length ) {
+      timeline.to( subtitle, {
+        opacity: 0,
+        y: -90,
+        duration: 1.08,
+        ease: 'power1.in'
+      }, 'middle' );
+    }
 
-    timeline.to( othersBefore, {
-      y: 60,
-      opacity: 0,
-      duration: 1.08,
-      ease: 'power1.in'
-    }, 'middle' );
+    if ( othersBefore.length ) {
+      timeline.to( othersBefore, {
+        y: 60,
+        opacity: 0,
+        duration: 1.08,
+        ease: 'power1.in'
+      }, 'middle' );
+    }
 
-    timeline.to( othersAfter, {
-      y: 60,
-      opacity: 0,
-      duration: 1.08,
-      ease: 'power1.in'
-    }, 'middle' );
+    if ( othersAfter.length ) {
+      timeline.to( othersAfter, {
+        y: 60,
+        opacity: 0,
+        duration: 1.08,
+        ease: 'power1.in'
+      }, 'middle' );
+    }
 
-    timeline.to( sepLine, { width: '0%', opacity: 0, duration: 0.86, ease: 'power1.in' }, '-=0.94' );
-    timeline.to( separator, { width: '0%', opacity: 0, duration: 0.86, ease: 'power1.in' }, '-=0.86' );
-    timeline.to( sepFlower, { rotation: 180, duration: 1 }, '-=1.08' );
-    timeline.to( sepFlower, { opacity: 0, duration: 0.11 }, '-=0.03' );
-    timeline.to( sepArrow, { opacity: 0, duration: 0.14 }, '-=1.08' );
+    if ( sepLine.length ) {
+      timeline.to( sepLine, { width: '0%', opacity: 0, duration: 0.86, ease: 'power1.in' }, '-=0.94' );
+    }
+
+    if ( separator.length ) {
+      timeline.to( separator, { width: '0%', opacity: 0, duration: 0.86, ease: 'power1.in' }, '-=0.86' );
+    }
+
+    if ( sepFlower.length ) {
+      timeline.to( sepFlower, { rotation: 180, duration: 1 }, '-=1.08' );
+    }
+
+    if ( sepFlower.length ) {
+      timeline.to( sepFlower, { opacity: 0, duration: 0.11 }, '-=0.03' );
+    }
+
+    if ( sepArrow.length ) {
+      timeline.to( sepArrow, { opacity: 0, duration: 0.14 }, '-=1.08' );
+    }
 
     this.timeline = timeline;
   }
