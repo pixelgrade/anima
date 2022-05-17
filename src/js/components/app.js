@@ -60,7 +60,7 @@ export default class App {
   }
 
   initializeHero() {
-    const newHeroesSelector = '.nb-supernova--card-layout-stacked.nb-supernova--1-columns.alignfull';
+    const newHeroesSelector = '.nb-supernova--card-layout-stacked.nb-supernova--1-columns.nb-supernova--align-full';
     const oldHeroesSelector = '.novablocks-hero';
     const heroesSelector = `${ newHeroesSelector }, ${ oldHeroesSelector }`;
     const heroElements = document.querySelectorAll( heroesSelector );
