@@ -8,6 +8,13 @@
   // Post Categories block
   &.taxonomy-category {
 
+    // Display only first 3 categories
+    // ---
+    // Remove this rule when an option is implemented into the block
+    & > *:nth-child(n+6) {
+      display: none;
+    }
+
     // Terms Style: Tag
     &.is-style-tag {
       display: flex;
