@@ -11,7 +11,7 @@
 }
 
 .nb-grid__column:first-child .nb-grid__area:first-child:last-child {
-    top: calc( var(--nb-grid-spacing) * var(--nb-grid-spacing-modifier, 1) + var(--nb-header-height, 0) );
+    top: calc( var(--nb-grid-spacing) + var(--theme-sticky-header-height, 0px) + var(--theme-sticky-distance, 0px) );
 }
 
 // Nova - Food Menu
