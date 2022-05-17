@@ -89,7 +89,7 @@ if ( ! function_exists( 'anima_setup' ) ) {
 		add_theme_support( 'responsive-embeds' );
 
 		/**
-		 * Enable support for the Style Manager Customizer section (via Customify).
+		 * Enable support for the Style Manager Customizer section.
 		 */
 		add_theme_support( 'customizer_style_manager' );
 		add_theme_support( 'style_manager_font_palettes' );
