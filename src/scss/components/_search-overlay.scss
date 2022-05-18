@@ -1,5 +1,5 @@
 :root {
-  --search-overlay-font-size: 23;
+  --search-overlay-font-size-modifier: 1.25;
 }
 
 .c-search-overlay {
@@ -89,7 +89,8 @@
   &__content {
     position: relative;
     padding-top: 4.8em;
-    max-width: 62.5em;
+    // max-width: 62.5em;
+    max-width: 120ch;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -127,7 +128,8 @@
 
     @include above(lap) {
       margin-top: 5.5em;
-      max-width: 75%;
+      // max-width: 75%;
+      max-width: 45ch;
     }
 
     @include apply-font(heading-3);
@@ -156,7 +158,7 @@
         border-radius: var(--theme-button-border-radius);
 
         @include apply-font(button);
-        --font-size: var(--search-overlay-font-size);
+        --font-size-modifier: var(--search-overlay-font-size-modifier);
 
         @include button-base;
         @include button-fill-reverse;
@@ -191,7 +193,7 @@
     padding: var(--theme-button-padding);
 
     @include apply-font(button);
-    --font-size: var(--search-overlay-font-size);
+    --font-size-modifier: var(--search-overlay-font-size-modifier);
 
     &:hover {
       color: currentColor !important;
@@ -313,12 +315,12 @@
     margin-left: 0;
 
     @include apply-font-properties;
-    --font-size: var(--search-overlay-font-size);
+    --font-size-modifier: var(--search-overlay-font-size-modifier);
   }
 
   .search-field {
     @include apply-font-properties;
-    --font-size: var(--search-overlay-font-size);
+    --font-size-modifier: var(--search-overlay-font-size-modifier);
 
     &::-webkit-search-cancel-button {
       -webkit-appearance: none;
