@@ -1,19 +1,35 @@
 .wp-block-navigation {
   @include apply-font(navigation);
 
-  // setting moved to novablocks/header block so spacing cannot be changed anymore
-  //ul.wp-block-navigation__container {
-  //  // Use the Customizer "Navigation Link Spacing" option
-  //  gap: var(--nb-navigation-item-spacing);
-  //}
-  //
-  //&.is-vertical {
-  //  ul.wp-block-navigation__container {
-  //    gap: 0.5em;
-  //  }
-  //}
-
   a:hover {
     color: var(--sm-current-accent-color);
   }
+
+  // Helper Classes Collection
+  &.is-style-secondary {
+    @include apply-font(body);
+
+    --current-text-transform: none;
+
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // Generate classes to adjust the the Columns block-gap 
+  // in a smilar manner to font-size control
+  @each $slug in smallest, smaller, small, large, larger, largest {
+      &.has-#{ $slug }-block-gap {
+          --wp--style--block-gap: calc(var(--theme-spacing-fluid-#{ $slug }) / 2);
+      }
+  }
+
+  // Set the default gap for Navigation container
+  --wp--style--block-gap: calc(var(--theme-spacing-fluid-small) / 2);
+
+  // Map the Navigation gap with the --wp--style--block-gap variable (the same used on the Columns block)
+  .wp-block-navigation__container {
+    gap: var(--wp--style--block-gap);
+  }
+
 }
