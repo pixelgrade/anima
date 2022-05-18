@@ -13,6 +13,7 @@ $enable-columns-block-styles: true !default;
     .wp-block-columns[class] {
         gap: var(--wp--style--block-gap);
 
+        // Helper Classes Collection
         // Generate classes to adjust the the Columns block-gap 
         // in a smilar manner to font-size control
         @each $slug in smallest, smaller, small, large, larger, largest {
