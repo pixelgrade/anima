@@ -1,4 +1,7 @@
-// Helper Classes Collection
+
+/*------------------------------------*\
+  #HELPER CLASS - .has-[value]-font-size
+\*------------------------------------*/
 .has-smallest-font-size,
 .has-smaller-font-size,
 .has-normal-font-size,
@@ -14,6 +17,7 @@
 
 // So we needed to do something about it and this looks like the better way
 // or at least a way in which we avoid overriding font-size value using !important again
+
 @each $slug in smallest, smaller, normal, larger, largest {
     .has-#{ $slug }-font-size {
         --wp--preset--font-size--#{ $slug }: var(--current-font-size);

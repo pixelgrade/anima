@@ -5,7 +5,11 @@
     color: var(--sm-current-accent-color);
   }
 
-  // Helper Classes Collection
+
+
+  /*------------------------------------*\
+    #HELPER CLASS - .is-style-secondary
+  \*------------------------------------*/
   &.is-style-secondary {
     @include apply-font(body);
 
@@ -16,6 +20,11 @@
     }
   }
 
+
+
+  /*------------------------------------*\
+    #HELPER CLASS - .has-[value]-block-gap
+  \*------------------------------------*/
   // Generate classes to adjust the the Columns block-gap 
   // in a smilar manner to font-size control
   @each $slug in smallest, smaller, small, large, larger, largest {
