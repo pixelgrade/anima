@@ -38,13 +38,11 @@ var __webpack_exports__ = {};
     enableMinusButton();
   });
   $(function () {
-    var _window$wp, _window$wp$customize;
-
     var $body = $(document.body).not('.woocommerce-cart');
     var $cartMenuItems = $('.nb-navigation .menu > .menu-item--cart');
     initializeCartMenuItems($cartMenuItems);
 
-    if (!!((_window$wp = window.wp) !== null && _window$wp !== void 0 && (_window$wp$customize = _window$wp.customize) !== null && _window$wp$customize !== void 0 && _window$wp$customize.selectiveRefresh)) {
+    if (!!window.wp?.customize?.selectiveRefresh) {
       wp.customize.selectiveRefresh.bind('partial-content-rendered', function (placement) {
         const $container = $(placement.container).filter('.nb-navigation .menu');
         const $items = $container.children('.menu-item--cart');
