@@ -245,3 +245,20 @@ mark {
     background: none;
     color: inherit;
 }
+
+/*------------------------------------*\
+  #PHOTOSWIPE 
+
+  Styles for PhotoSwipe (pswp) plugin
+\*------------------------------------*/
+.pswp {
+  z-index: 15000
+}
+
+:is(a[href$=jpg], a[href$=jpeg], a[href$=png], a[href$=gif]):hover {
+    cursor: zoom-in;
+    
+    img {
+        opacity: 0.7;
+    }
+}
