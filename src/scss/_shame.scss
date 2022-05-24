@@ -264,26 +264,26 @@ mark {
 }
 
 /* FacetWP styling for Mies */
-.facetwp-type-radio {
+:is(.facetwp-type-radio, #specific) {
   display: flex;
   flex-wrap: wrap;
-}
 
-.facetwp-radio {
-  background: none !important;
-  padding: 0;
+  .facetwp-radio {
+    background: none !important;
+    padding: 0;
 
-  @include apply-font(meta);
-}
+    @include apply-font(heading-5);
+  }
 
-.facetwp-display-value {
-  padding: 0;
-}
+  .facetwp-display-value {
+    padding: 0;
+  }
 
-.facetwp-counter {
-  display: none;
-}
+  .facetwp-counter {
+    display: none;
+  }
 
-.facetwp-radio:is(:not(.checked), :not(:hover)) {
-  opacity: 0.5;
+  .facetwp-radio:is(:not(.checked), :not(:hover)) {
+    opacity: 0.5;
+  }
 }
