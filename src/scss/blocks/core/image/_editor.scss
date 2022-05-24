@@ -1,23 +1,4 @@
-// Status: 
-// - [ ] Check the alignments in Editor and why break-align classes are not present
-    
 .editor-block-list__block,
 .block-editor-block-list__block {
-    clear: both;
-
-    &.wp-block-image {
-        figcaption {
-            @include caption;
-        }
-    }
-
-    &[data-align="full"] .wp-block-image figcaption {
-        padding-left: var(--theme-wrapper-sides-spacing);
-        padding-right: var(--theme-wrapper-sides-spacing);
-    }
-
-    &[data-align="center"] .wp-block-image img {
-        margin-left: auto;
-        margin-right: auto;
-    }
+    // clear: both;
 }

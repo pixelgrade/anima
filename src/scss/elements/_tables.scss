@@ -56,3 +56,25 @@ table {
     }
   }
 }
+
+
+.wp-block-table {
+  
+  &.alignfull {
+    th,
+    td {
+      &:first-child {
+        @include full-width-text-side-spacing-left;
+      }
+
+      &:last-child {
+        @include full-width-text-side-spacing-right;
+      }
+    }
+
+    figcaption {
+      @include full-width-text-side-spacing-left;
+      @include full-width-text-side-spacing-right;
+    }
+  }
+}
