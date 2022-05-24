@@ -262,3 +262,28 @@ mark {
         opacity: 0.7;
     }
 }
+
+/* FacetWP styling for Mies */
+.facetwp-type-radio {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.facetwp-radio {
+  background: none !important;
+  padding: 0;
+
+  @include apply-font(meta);
+}
+
+.facetwp-display-value {
+  padding: 0;
+}
+
+.facetwp-counter {
+  display: none;
+}
+
+.facetwp-radio:is(:not(.checked), :not(:hover)) {
+  opacity: 0.5;
+}
