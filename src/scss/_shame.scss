@@ -267,10 +267,12 @@ mark {
 :is(.facetwp-type-radio, #specific) {
   display: flex;
   flex-wrap: wrap;
+  gap: 1em;
 
   .facetwp-radio {
     background: none !important;
     padding: 0;
+    margin: 0;
 
     @include apply-font(heading-5);
   }
@@ -283,7 +285,7 @@ mark {
     display: none;
   }
 
-  .facetwp-radio:is(:not(.checked), :not(:hover)) {
+  .facetwp-radio:not(.checked):not(:hover) {
     opacity: 0.5;
   }
 }
