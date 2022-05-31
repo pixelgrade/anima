@@ -43,4 +43,4 @@ We use the following oh-my-zsh plugins: `plugins=(composer git nvm npm)` configu
 
 Anima theme source code is released under the [GNU GPL v2 license or later](https://www.gnu.org/licenses/gpl-2.0.html).
 
-2019-2022 © Pixelgrade.
+2021-2022 © Pixelgrade.
