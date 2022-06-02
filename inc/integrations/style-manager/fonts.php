@@ -42,7 +42,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 		'min' => 0.8,
 		'max' => 2,
 		'step' => 0.05,
-		'unit' => 'em',
+		'unit' => '',
 	];
 
 	$letter_spacing_config = [
