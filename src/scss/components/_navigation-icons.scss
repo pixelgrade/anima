@@ -12,8 +12,8 @@
 
   &:not(.no-icon) {
 
-    a {
-      padding-left: calc(var(--menu-item-icon-width) + var(--theme-spacing-smallest)) !important;
+    :is(&, #specific) a {
+      padding-left: calc(var(--menu-item-icon-width) + var(--theme-spacing-smallest));
 
       &:after {
         content: '';
@@ -38,8 +38,8 @@
         transform: translateY(-50%);
       }
 
-      &:before {
-        width: calc(100% - var(--menu-item-icon-width)) !important;
+      :is(&, #specific):before {
+        left: calc(var(--menu-item-icon-width) + var(--theme-spacing-smallest))
       }
     }
   }
