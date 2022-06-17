@@ -11,6 +11,16 @@ html:not(.wf-active) {
     pointer-events: none;
 }
 
+.nb-supernova-item__media-wrapper {
+  transition: var(--theme-transition);
+  transition-property: opacity;
+  transition-delay: .3s;
+
+  body:not(.has-loaded) & {
+    opacity: 0;
+  }
+}
+
 // WooCommerce archives cards
 .wc-block-grid__product-onsale {
     @include avoid-fout-color;

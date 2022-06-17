@@ -276,7 +276,7 @@ function anima_add_end_wrapper_after_related() {
 }
 
 function anima_add_start_main_content() {
-	echo '<div class="nb-sidecar nb-sidecar--sidebar-right nb-sidecar--sidebar-medium nb-content-layout-grid">' .
+	echo '<div class="nb-sidecar nb-sidecar--sidebar-none nb-content-layout-grid">' .
 	'<div class="nb-sidecar-area nb-sidecar-area--content nb-content-layout-grid">';
 }
 
