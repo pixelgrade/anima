@@ -98,7 +98,7 @@ function setAndResetElementStyles(element) {
   }
 }
 const getColorSetClasses = element => {
-  const classAttr = element === null || element === void 0 ? void 0 : element.getAttribute('class');
+  const classAttr = element?.getAttribute('class');
 
   if (!classAttr) {
     return [];

@@ -34,7 +34,7 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 				'type' => 'html',
 				'html' => sprintf(
 					/* translators: %s: Open and close for the anchor to the documentation.  */
-					esc_html__( 'Colorize (apply color to) %scertain elements%s from your site you wish to highlight even more. It\'s best not to overdo it.', '__theme_txtd' ),
+					esc_html__( 'Apply color to %scertain elements%s from your site you wish to get more attention.', '__theme_txtd' ),
 				'<a href="https://pixelgrade.com/docs/design-and-style/color-system/#change-elements-color-one-by-one" target="_blank">',
 				'</a>' ),
 			],
@@ -110,7 +110,11 @@ function pixelgrade_add_colors_section_to_style_manager_config( $config ) {
 
 			'sm-description_colorize_elements_outro' => [
 				'type' => 'html',
-				'html' => esc_html__( 'For elements that are not available in this list, you need to use CSS code snippets to change their coloration.', '__theme_txtd' ),
+				'html' => sprintf(
+					/* translators: %s: Open and close for the anchor to the documentation.  */
+					esc_html__( 'For elements that are not available in this list,  you can %schange their coloration%s by using CSS code snippets.', '__theme_txtd' ),
+				'<a href="https://pixelgrade.com/docs/advanced-customizations/using-custom-css-editor/" target="_blank">',
+				'</a>' ),
 			],
 
 		],
