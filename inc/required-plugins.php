@@ -27,22 +27,22 @@ function anima_register_required_plugins() {
 			'force_activation'   => false,
 			'force_deactivation' => false,
 			'required'           => true,
-			'source'             => $protocol . '//wupdates.com/api_wupl_version/JxbVe/2v5t1czd3vw4kmb5xqmyxj1kkwmnt9q0463lhj393r5yxtshdyg05jssgd4jglnfx7A2vdxtfdcf78r9r1sm217k4ht3r2g7pkdng5f6tgwyrk23wryA0pjxvs7gwhhb',
+			'source'             => $protocol . '//wupdates.com/api_wupl_version/JxbVe/bv7n4mlA2pys6070w0nlz41q0vlx4z5rgzAAyl6n4zn29y5tnAvvmvrpgz7h3s5rp15A4zjrjbff26jq4fmf4rkpgfv2mq5fgvzw9qsg3zjgm9tx3zrc95t3hf2t45smjv5h2l5qgfgd4qkf3q72s6643fAw7sdjgz3t5p3/',
 			'external_url'       => $protocol . '//github.com/pixelgrade/pixelgrade_care',
-			'version'            => '1.13.0',
+			'version'            => '1.17.2',
 		],
 		[
 			'name'        => 'Style Manager',
 			'slug'        => 'style-manager',
 			'is_callable' => '\Pixelgrade\StyleManager\plugin',
 			'required'    => true,
-			'version'     => '2.0.6',
+			'version'     => '2.2.7',
 		],
 		[
 			'name'     => 'Nova Blocks',
 			'slug'     => 'nova-blocks',
 			'required' => true,
-			'version'  => '1.12.8',
+			'version'  => '2.1.2',
 		],
 	];
 
