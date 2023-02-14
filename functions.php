@@ -106,6 +106,11 @@ if ( ! function_exists( 'anima_setup' ) ) {
 		 * This support is automatically added by wp_enable_block_templates() but we add it also to be more upfront.
 		 */
 		add_theme_support( 'block-templates' );
+
+		/**
+		 * Declare WooCommerce support
+		 */
+		add_theme_support( 'woocommerce' );
 	}
 }
 add_action( 'after_setup_theme', 'anima_setup', 10 );
