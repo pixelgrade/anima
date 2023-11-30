@@ -26,7 +26,7 @@ add_action( 'after_setup_theme', function () {
 	// Remove render_block filters which adding unnecessary stuff
 	remove_filter( 'render_block', 'wp_render_duotone_support' );
 	remove_filter( 'render_block', 'wp_restore_group_inner_container' );
-	remove_filter( 'render_block', 'wp_render_layout_support_flag' );
+	// remove_filter( 'render_block', 'wp_render_layout_support_flag' );
 } );
 
 /**
