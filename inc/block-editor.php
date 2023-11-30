@@ -16,10 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @see https://github.com/WordPress/gutenberg/issues/38299#issuecomment-1025520487
  */
 add_action( 'after_setup_theme', function () {
-
-	// Remove SVG and global styles
-	remove_action( 'wp_enqueue_scripts', 'wp_enqueue_global_styles' );
-
 	// Remove wp_footer actions which adds global inline styles
 	remove_action( 'wp_footer', 'wp_enqueue_global_styles', 1 );
 
