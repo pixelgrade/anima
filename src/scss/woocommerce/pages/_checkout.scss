@@ -144,11 +144,6 @@
     }
   }
 
-  & form {
-    margin-top: var(--theme-spacing-larger);
-    padding-bottom: var(--theme-spacing-larger);
-  }
-
   .woocommerce-form-coupon-toggle,
   .woocommerce-form-coupon {
     position: relative;
@@ -210,15 +205,16 @@
     }
   }
 
-  .nb-header,
-  .entry-header,
-  .site-footer,
-  .entry-thumbnail,
-  .nb-header--mobile,
-  .c-menu-toggle,
-  .promo-bar {
-    display: none;
-  }
+  // Remove potentially distracting elements on the Checkout page
+  // .nb-header,
+  // .entry-header,
+  // .site-footer,
+  // .entry-thumbnail,
+  // .nb-header--mobile,
+  // .c-menu-toggle,
+  // .promo-bar {
+  //   display: none;
+  // }
 
   #page {
     padding-top: 0 !important;
@@ -235,6 +231,11 @@
     input[type="checkbox"] {
       margin-bottom: 0;
       margin-top: .2em;
+      position: relative; // Fix the active checkbox background width
+
+      + .wc-block-components-checkbox__mark { 
+        display: none; // Hide the SVG checkbox mark as we use a background icon
+      }
     }
   }
 
@@ -479,6 +480,23 @@ ul.order_details[class] {
 #form-coupon {
   display: none !important;
 }
+
+// Add a Coupon  section
+.wp-block-woocommerce-checkout-order-summary-coupon-form-block.wc-block-components-totals-wrapper {}
+
+  .wc-block-components-totals-coupon  {
+    a.wc-block-components-totals-coupon-link {
+
+    }
+
+    .wc-block-components-totals-coupon__content {
+
+    }
+
+    form {
+
+    }
+  }
 
 .checkout-button {
   width: 100%;

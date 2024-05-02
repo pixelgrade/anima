@@ -7,7 +7,8 @@
     button:not([class]),
     input[type="submit"]:not(.ot-button):not(.search-submit),
     .button:not(.trix-button),
-    button.button:disabled[disabled]
+    button.button:disabled[disabled],
+    .components-button:not(.has-icon)
   ) {
     @include button;
   }
@@ -22,18 +23,19 @@
     color: var(--theme-button-hover-text-color);
   }
 
-  :is(a, button).button {
+  :is(a, button).button,
+  :is(a, button).components-button {
     @include apply-font-properties;
-
-    &:not(:is(.alt, .checkout, .specificity.increase)) {
+    
+    &:not(:is(.alt, .checkout, .specificity.increase, .wc-block-components-button)) {
       @include button-fill-reverse;
     }
 
-    &:is(.alt, .checkout, .specificity.increase) {
+    &:is(.alt, .checkout, .specificity.increase, .wc-block-components-button) {
       @include button-fill;
     }
 
-    &.checkout-button {
+    &:is(.checkout-button, .wc-block-components-button) {
       @include button-huge;
     }
   }
