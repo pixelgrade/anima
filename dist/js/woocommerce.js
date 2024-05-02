@@ -38,11 +38,20 @@ var __webpack_exports__ = {};
     enableMinusButton();
   });
   $(function () {
-    var $body = $(document.body).not('.woocommerce-cart');
-    var $cartMenuItems = $('.nb-navigation .menu > .menu-item--cart');
-    initializeCartMenuItems($cartMenuItems);
+    var _window$wp, _window$wp$customize;
 
-    if (!!window.wp?.customize?.selectiveRefresh) {
+    var $body = $(document.body);
+    var $cartMenuItems = $('.nb-navigation .menu > .menu-item--cart'); // Initialize the Mini Cart Quantity
+
+    // Initializate the Cart Menu items quantity 
+    // Check if the body does not have either of the two classes
+    if (!$body.hasClass('woocommerce-checkout') && !$body.hasClass('woocommerce-cart')) {
+      setTimeout(function () {
+        initializeCartMenuItems($cartMenuItems);
+      }, 400);
+    }
+
+    if (!!((_window$wp = window.wp) !== null && _window$wp !== void 0 && (_window$wp$customize = _window$wp.customize) !== null && _window$wp$customize !== void 0 && _window$wp$customize.selectiveRefresh)) {
       wp.customize.selectiveRefresh.bind('partial-content-rendered', function (placement) {
         const $container = $(placement.container).filter('.nb-navigation .menu');
         const $items = $container.children('.menu-item--cart');
@@ -54,7 +63,7 @@ var __webpack_exports__ = {};
       $cartMenuItems.each(function (i, obj) {
         var $cartMenuItem = $(obj);
         var $cartMenuItemLink = $cartMenuItem.children('a');
-        var cartMenuItemText = $cartMenuItemLink.text();
+        var cartMenuItemText = $cartMenuItemLink.text().replace(/[0-9]/g, '').trim();
         var $cartMenuItemCount = $('<span class="menu-item__icon">0</span>');
         $cartMenuItemLink.html(`<span class="menu-item__label">${cartMenuItemText}</span>`);
         $cartMenuItemCount.appendTo($cartMenuItemLink);
@@ -65,7 +74,7 @@ var __webpack_exports__ = {};
           var fragments = {};
           fragments[fragmentKey] = $fragment.html();
           var itemCount = getCartMenuItemCount(fragments);
-          updateCardMenuItems($cartMenuItems, itemCount);
+          updateCartMenuItems($cartMenuItems, itemCount);
         }
       });
       $cartMenuItems.on('click', openMiniCart);
@@ -135,13 +144,13 @@ var __webpack_exports__ = {};
         var $card = $(obj);
         setTimeout(function () {
           $card.removeClass('hover');
-        }, 100);
+        }, 300);
       });
     }
 
     $('.c-mini-cart__overlay, .c-mini-cart__close').on('click', closeMiniCart);
 
-    function updateCardMenuItems($cartMenuItems, count) {
+    function updateCartMenuItems($cartMenuItems, count) {
       $cartMenuItems.each(function (i, obj) {
         var $cartMenuItem = $(obj);
         var $cartMenuItemCount = $cartMenuItem.find('.menu-item__icon');
@@ -152,7 +161,7 @@ var __webpack_exports__ = {};
     $body.on('added_to_cart', onAddedToCart);
     $body.on('added_to_cart removed_from_cart', function (event, fragments, cart_hash, $button) {
       var itemCount = getCartMenuItemCount(fragments);
-      updateCardMenuItems($cartMenuItems, itemCount);
+      updateCartMenuItems($cartMenuItems, itemCount);
     }); // in order to avoid template overwrites add the class used to style buttons programatically
 
     $body.on('wc_cart_button_updated', function (event, $button) {
