@@ -44,7 +44,10 @@
     var $body = $( document.body ).not( '.woocommerce-cart' );
     var $cartMenuItems = $( '.nb-navigation .menu > .menu-item--cart' );
 
-    initializeCartMenuItems( $cartMenuItems );
+    // Initialize the Mini Cart Quantity
+    setTimeout(function() {
+      initializeCartMenuItems( $cartMenuItems );
+    }, 400);
 
     if ( !! window.wp?.customize?.selectiveRefresh ) {
       wp.customize.selectiveRefresh.bind( 'partial-content-rendered', function ( placement ) {
@@ -60,8 +63,9 @@
 
         var $cartMenuItem = $( obj );
         var $cartMenuItemLink = $cartMenuItem.children( 'a' );
-        var cartMenuItemText = $cartMenuItemLink.text();
+        var cartMenuItemText = $cartMenuItemLink.text().replace(/[0-9]/g, '').trim();
         var $cartMenuItemCount = $( '<span class="menu-item__icon">0</span>' );
+
 
         $cartMenuItemLink.html( `<span class="menu-item__label">${cartMenuItemText}</span>` );
         $cartMenuItemCount.appendTo( $cartMenuItemLink );
@@ -70,10 +74,11 @@
         var $fragment = $( fragmentKey );
 
         if ( $fragment.length ) {
+          
           var fragments = {};
           fragments[fragmentKey] = $fragment.html();
           var itemCount = getCartMenuItemCount( fragments );
-          updateCardMenuItems( $cartMenuItems, itemCount );
+          updateCartMenuItems( $cartMenuItems, itemCount );
         }
       } );
 
@@ -114,18 +119,21 @@
 
     // update cart items count in cart menu item
     function getCartMenuItemCount ( fragments ) {
-
       var key = 'div.widget_shopping_cart_content';
       var count = 0;
 
       if ( fragments && key in fragments ) {
         // loop through every item in cart and sum up the quantity
+       
+        
         $( fragments[key] ).find( '.mini_cart_item' ).each( function ( i, obj ) {
+          
           var $quantity = $( obj ).find( '.quantity' );
 
           // remove the price html tag to be able to parse number of items for that product
           $quantity.children().remove();
           count += parseInt( $quantity.text(), 10 );
+
         } );
       }
 
@@ -155,13 +163,13 @@
 
         setTimeout( function () {
           $card.removeClass( 'hover' );
-        }, 100 );
+        }, 300 );
       } );
     }
 
     $( '.c-mini-cart__overlay, .c-mini-cart__close' ).on( 'click', closeMiniCart );
 
-    function updateCardMenuItems ( $cartMenuItems, count ) {
+    function updateCartMenuItems ( $cartMenuItems, count ) {
       $cartMenuItems.each( function ( i, obj ) {
         var $cartMenuItem = $( obj );
         var $cartMenuItemCount = $cartMenuItem.find( '.menu-item__icon' );
@@ -173,7 +181,7 @@
     $body.on( 'added_to_cart', onAddedToCart );
     $body.on( 'added_to_cart removed_from_cart', function ( event, fragments, cart_hash, $button ) {
       var itemCount = getCartMenuItemCount( fragments );
-      updateCardMenuItems( $cartMenuItems, itemCount );
+      updateCartMenuItems( $cartMenuItems, itemCount );
     } );
 
     // in order to avoid template overwrites add the class used to style buttons programatically

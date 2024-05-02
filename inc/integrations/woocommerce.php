@@ -357,7 +357,7 @@ function anima_output_ajax_add_to_cart_button() {
 }
 
 function anima_output_mini_cart() {
-	if ( ! is_cart() ) { ?>
+	if ( ! is_cart() && ! is_checkout() ) { ?>
 
         <div class="c-mini-cart">
             <div class="c-mini-cart__overlay"></div>
