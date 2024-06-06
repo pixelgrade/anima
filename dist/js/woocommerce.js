@@ -40,16 +40,12 @@ var __webpack_exports__ = {};
   $(function () {
     var _window$wp, _window$wp$customize;
 
-    var $body = $(document.body);
+    var $body = $(document.body).not('.woocommerce-cart');
     var $cartMenuItems = $('.nb-navigation .menu > .menu-item--cart'); // Initialize the Mini Cart Quantity
 
-    // Initializate the Cart Menu items quantity 
-    // Check if the body does not have either of the two classes
-    if (!$body.hasClass('woocommerce-checkout') && !$body.hasClass('woocommerce-cart')) {
-      setTimeout(function () {
-        initializeCartMenuItems($cartMenuItems);
-      }, 400);
-    }
+    setTimeout(function () {
+      initializeCartMenuItems($cartMenuItems);
+    }, 400);
 
     if (!!((_window$wp = window.wp) !== null && _window$wp !== void 0 && (_window$wp$customize = _window$wp.customize) !== null && _window$wp$customize !== void 0 && _window$wp$customize.selectiveRefresh)) {
       wp.customize.selectiveRefresh.bind('partial-content-rendered', function (placement) {
