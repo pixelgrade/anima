@@ -969,8 +969,9 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 		 *
 		 * @return string
 		 */
-		public function output_badge_menu_item( string $title, WP_Post $item ): string {
-			if ( ! empty( $item->badge ) ) {
+		public function output_badge_menu_item( string $title, object $item ): string {
+			// Only append badge if object has a 'badge' property and it's not empty.
+			if ( isset( $item->badge ) && ! empty( $item->badge ) ) {
 				if ( empty( $title ) ) {
 					$title = '';
 				}
