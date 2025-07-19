@@ -119,7 +119,7 @@ if ( ! function_exists( 'anima_alter_logo_markup' ) ) {
 }
 add_filter( 'novablocks/logo_markup', 'anima_alter_logo_markup' );
 
-if ( ! function_exists( ' anima_has_custom_logo_transparent' ) ) {
+if ( ! function_exists( 'anima_has_custom_logo_transparent' ) ) {
 	/**
 	 * Determines whether the site has a custom transparent logo.
 	 *
