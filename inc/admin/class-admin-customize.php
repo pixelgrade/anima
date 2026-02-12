@@ -102,7 +102,7 @@ if ( ! class_exists( 'Anima_Admin_Customize', false ) ) :
 		 * ============================ */
 
 		public function sanitize_transparent_logo( $input ) {
-			return $input;
+			return absint( $input );
 		}
 
 		/* ============================
