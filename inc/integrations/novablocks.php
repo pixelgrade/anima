@@ -167,6 +167,10 @@ if ( ! function_exists( 'anima_get_separator_markup' ) ) {
 if ( ! function_exists( 'anima_get_separator_symbol' ) ) {
 	function anima_get_separator_symbol() {
 		$symbol = pixelgrade_option( 'separator_symbol', 'fleuron-1' );
+		$allowed_symbols = [ 'fleuron-1', 'fleuron-2', 'fleuron-3', 'fleuron-4', 'fleuron-5' ];
+		if ( ! in_array( $symbol, $allowed_symbols, true ) ) {
+			$symbol = 'fleuron-1';
+		}
 		ob_start();
 		get_template_part( 'assets/separators/' . $symbol . '-svg' );
 
