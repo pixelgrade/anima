@@ -285,7 +285,7 @@ function anima_add_end_main_content() {
 }
 
 function anima_new_product_title_markup() {
-	echo '<h2 class="wc-block-grid__product-title">' . get_the_title() . '</h2>';
+	echo '<h2 class="wc-block-grid__product-title">' . esc_html( get_the_title() ) . '</h2>';
 }
 
 function anima_price_wrapper_start() {
