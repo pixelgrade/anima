@@ -223,11 +223,11 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 					$field_value = $config['default'];
 				} ?>
 
-				<p class="field-<?php echo $name ?> description description-wide">
-					<label for="<?php echo $field_id ?>">
+				<p class="field-<?php echo esc_attr( $name ) ?> description description-wide">
+					<label for="<?php echo esc_attr( $field_id ) ?>">
 
 					<?php if ( ! empty( $config['label'] ) ) { ?>
-						<?php echo $config['label']; ?><br />
+						<?php echo esc_html( $config['label'] ); ?><br />
 					<?php } ?>
 
 				<?php switch ( $config['type'] ) {
@@ -289,7 +289,7 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 			$css_selectors = array_map( function( $str ) use ( $item_id ) { return '#menu-item-settings-' . $item_id . ' > ' . $str; }, $css_selectors );
 			// Finally output the CSS rule. ?>
 			<style>
-				<?php echo implode( ', ', $css_selectors ); ?> {
+				<?php echo esc_html( implode( ', ', $css_selectors ) ); ?> {
 					display:none;
 					visibility: hidden;
 				}
@@ -583,11 +583,11 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 					}
 					$field_classes = implode( ' ', $field_classes ); ?>
 
-					<p class="field-<?php echo $name ?> description description-thin">
-						<label for="<?php echo $field_id ?>">
+					<p class="field-<?php echo esc_attr( $name ) ?> description description-thin">
+						<label for="<?php echo esc_attr( $field_id ) ?>">
 
 							<?php if ( ! empty( $config['label'] ) ) { ?>
-								<?php echo $config['label']; ?><br />
+								<?php echo esc_html( $config['label'] ); ?><br />
 							<?php } ?>
 
 							<?php switch ( $config['type'] ) {
@@ -831,7 +831,7 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 					<span class="search-icon"></span>
 				</label>
 				<div class="wp-block-search__inside-wrapper">
-					<input type="search" class="wp-block-search__input search-field" placeholder="' . esc_attr( sprintf( __( 'Search %s...', '__theme_txtd' ), esc_html( get_bloginfo( 'name' ) ) ) ) . '" value="' . get_search_query() . '" name="s" />
+					<input type="search" class="wp-block-search__input search-field" placeholder="' . esc_attr( sprintf( __( 'Search %s...', '__theme_txtd' ), esc_html( get_bloginfo( 'name' ) ) ) ) . '" value="' . esc_attr( get_search_query() ) . '" name="s" />
                 	<input type="submit" class="wp-block-search__button   search-submit" value="' . esc_attr_x( 'Search', 'submit button', '__theme_txtd' ) . '" />
 				</div>
 			</form>';
