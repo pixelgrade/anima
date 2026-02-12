@@ -202,13 +202,27 @@ When a block editor feature "doesn't work on the frontend," the first place to l
 
 ## Security Fixes (Milestone 2.0.12)
 
-The following XSS vulnerabilities were identified and fixed:
+### High — Stored XSS (fixed)
 
-- **#349** — Menu item badge output escaped with `esc_html()` (`inc/admin/class-admin-nav-menus.php:977`)
-- **#350** — Menu item description output sanitized with `wp_kses_post()` (`inc/extras.php:380`)
-- **#351** — WooCommerce product title output escaped with `esc_html()` (`inc/integrations/woocommerce.php:288`)
+- **#349** — Menu item badge: `esc_html()` (`inc/admin/class-admin-nav-menus.php:977`)
+- **#350** — Menu item description: `wp_kses_post()` (`inc/extras.php:380`)
+- **#351** — WooCommerce product title: `esc_html()` (`inc/integrations/woocommerce.php:288`)
 
-All three were stored XSS vectors where data from the database was rendered without output escaping on the frontend. Input sanitization existed on save, but defense-in-depth requires escaping on output as well.
+### Medium — Input/output sanitization (fixed)
+
+- **#352** — Search query: `esc_attr()` on `get_search_query()` (`inc/admin/class-admin-nav-menus.php:834`)
+- **#353** — Body class options: `sanitize_html_class()` (`inc/template-functions.php:69,77`)
+- **#354** — Transparent logo sanitize callback: `absint()` (`inc/admin/class-admin-customize.php:104`)
+- **#355** — Separator symbol: allowlist validation before `get_template_part()` (`inc/integrations/novablocks.php:171`)
+- **#356** — Upgrade notice: `esc_html()` on theme name and version (`inc/upgrade/class-Anima_Upgrade.php:148`)
+- **#361** — `save_custom_fields` nonce: relies on WP core nonce (no code change, documented)
+
+### Low — Defense-in-depth (fixed)
+
+- **#357** — Admin field labels/IDs: `esc_attr()` and `esc_html()` (`inc/admin/class-admin-nav-menus.php:226-230,586-590`)
+- **#358** — Pixelgrade Care installer: `esc_html()` on title, `esc_js()` on status (`inc/integrations/pixelgrade-care.php:139,188`)
+- **#359** — CSS selector output: `esc_html()` (`inc/admin/class-admin-nav-menus.php:292`)
+- **#360** — Removed unused `debug()` method with `var_dump()` (`inc/upgrade/class-Anima_Upgrade.php:176`)
 
 ## Coding Conventions
 
