@@ -156,6 +156,25 @@ Four registered menus: `primary`, `secondary`, `tertiary`, `search-suggestions`.
 
 Template overrides in `woocommerce/`, dedicated styles in `src/scss/woocommerce/`, and scripts in `src/js/woocommerce.js`.
 
+## Workflow: Fixes and Improvements
+
+For every fix or improvement:
+
+1. **Create a GitHub issue** describing the problem and proposed fix
+2. **Assign to the latest open milestone** (or create a new one if none exists)
+3. **Commit referencing the issue** — use `(#NNN)` in the commit message
+4. **Close the issue** after the fix is pushed — `gh issue close NNN -r completed`
+
+```bash
+# Example workflow
+gh issue create --title "Fix XSS in widget output" --milestone "2.0.13" --label "[Type] Bug"
+# ... apply fix ...
+git add inc/widgets.php
+git commit -m "Fix XSS in widget output (#NNN)"
+git push origin main
+gh issue close NNN -r completed
+```
+
 ## Version Bump Checklist
 
 When changing the version, update:
