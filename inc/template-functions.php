@@ -66,7 +66,7 @@ function anima_body_classes( array $classes ): array {
 	$collection_hover_effect = get_option( 'sm_collection_hover_effect', 'none' );
 
 	if ( ! empty( $collection_hover_effect ) ) {
-		$classes[] = 'u-collection-hover-' . $collection_hover_effect;
+		$classes[] = 'u-collection-hover-' . sanitize_html_class( $collection_hover_effect );
 	}
 
 
@@ -74,7 +74,7 @@ function anima_body_classes( array $classes ): array {
 	$decorative_titles_style = get_option( 'sm_decorative_titles_style', 'underline' );
 
 	if ( ! empty( $decorative_titles_style ) ) {
-		$classes[] = 'u-decorative-titles-' . $decorative_titles_style;
+		$classes[] = 'u-decorative-titles-' . sanitize_html_class( $decorative_titles_style );
 	}
 
 
