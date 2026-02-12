@@ -974,7 +974,7 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 				if ( empty( $title ) ) {
 					$title = '';
 				}
-				$title .= '<span class="menu-item-label">' . $item->badge . '</span>';
+				$title .= '<span class="menu-item-label">' . esc_html( $item->badge ) . '</span>';
 			}
 
 			return $title;
