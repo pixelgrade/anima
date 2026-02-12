@@ -320,6 +320,49 @@ function anima_print_scripts() {
 			    document.body.classList.add( "is-loading" );
             }
 		} );
+
+		// Fix Safari bfcache: page stays invisible on back/swipe-back navigation.
+		// Safari's Back-Forward Cache restores the DOM state (with "is-loading" class
+		// applied by the beforeunload handler) but does not re-fire DOMContentLoaded,
+		// so the page remains at opacity: 0. The pageshow event with persisted=true
+		// fires only on bfcache restore — not on initial load — so the reveal
+		// animation is preserved for first visits.
+		window.addEventListener( "pageshow", function( event ) {
+			if ( event.persisted ) {
+				// Restore body visibility (undo the beforeunload fade-out).
+				document.body.classList.remove( "is-loading" );
+				document.body.classList.add( "has-loaded" );
+
+				// Clear GSAP inline styles on hero elements so they become visible.
+				// On back-navigation users already saw the page, so we show content
+				// instantly rather than replaying the intro animation.
+				var heroes = document.querySelectorAll(
+					'.nb-supernova--card-layout-stacked.nb-supernova--1-columns.nb-supernova--align-full,' +
+					'.novablocks-hero'
+				);
+
+				heroes.forEach( function( hero ) {
+					var containers = hero.querySelectorAll(
+						'.novablocks-hero__inner-container,' +
+						'.nb-supernova-item__inner-container'
+					);
+
+					containers.forEach( function( container ) {
+						var els = container.querySelectorAll( '*' );
+						els.forEach( function( el ) {
+							el.style.removeProperty( 'opacity' );
+							el.style.removeProperty( 'transform' );
+						} );
+					} );
+
+					// Also clear on the media wrapper which has its own CSS opacity rule.
+					var mediaWrappers = hero.querySelectorAll( '.nb-supernova-item__media-wrapper' );
+					mediaWrappers.forEach( function( el ) {
+						el.style.removeProperty( 'opacity' );
+					} );
+				} );
+			}
+		} );
 	</script>
 
 	<?php echo ob_get_clean();
