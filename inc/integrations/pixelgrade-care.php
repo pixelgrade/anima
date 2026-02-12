@@ -136,7 +136,7 @@ function anima_pixcare_install_page() {
 	<head>
 		<meta name="viewport" content="width=device-width"/>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-		<title><?php echo $admin_title; ?></title>
+		<title><?php echo esc_html( $admin_title ); ?></title>
 		<script type="text/javascript">
             var ajaxurl = '<?php echo esc_url( admin_url( 'admin-ajax.php', 'relative' ) ); ?>',
                 pagenow = 'plugins';
@@ -185,7 +185,7 @@ function anima_pixcare_install_page() {
         // On document ready.
         $(function () {
           var temp_url = wp.ajax.settings.url,
-            pluginStatus = "<?php echo $plugin_status; ?>",
+            pluginStatus = "<?php echo esc_js( $plugin_status ); ?>",
             $plugin = $('.plugin'),
             $status = $plugin.find('.box__text')
 
