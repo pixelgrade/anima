@@ -145,7 +145,7 @@ class Anima_Upgrade {
 
 		foreach ( $this->new_versions as $new_version ) {
 			echo '<div class="notice notice-success is-dismissible"><p>' .
-			     sprintf( __( 'Your <strong>%s</strong> theme has been updated to <strong>version %s.</strong> Enjoy!', '__theme_txtd' ), $this->theme_name, $new_version ) .
+			     sprintf( __( 'Your <strong>%s</strong> theme has been updated to <strong>version %s.</strong> Enjoy!', '__theme_txtd' ), esc_html( $this->theme_name ), esc_html( $new_version ) ) .
 			     '</p></div>';
 		}
 	}
@@ -171,12 +171,6 @@ class Anima_Upgrade {
 	 */
 	public function save_version_number() {
 		update_option( $this->theme_slug . '_theme_version', $this->theme_version, false );
-	}
-
-	public function debug( $what ) {
-		echo '<pre style="margin-left: 160px">';
-		var_dump( $what );
-		echo '</pre>';
 	}
 
 	/**
