@@ -333,9 +333,10 @@ function anima_print_scripts() {
 				document.body.classList.remove( "is-loading" );
 				document.body.classList.add( "has-loaded" );
 
-				// Clear GSAP inline styles on hero elements so they become visible.
-				// On back-navigation users already saw the page, so we show content
-				// instantly rather than replaying the intro animation.
+				// Force hero elements visible. CSS sets opacity: 0 on hero content
+				// by default — GSAP overrides this with inline opacity: 1 during
+				// the intro animation. We must SET opacity to 1 (not remove it),
+				// otherwise elements fall back to the CSS opacity: 0.
 				var heroes = document.querySelectorAll(
 					'.nb-supernova--card-layout-stacked.nb-supernova--1-columns.nb-supernova--align-full,' +
 					'.novablocks-hero'
@@ -350,17 +351,20 @@ function anima_print_scripts() {
 					containers.forEach( function( container ) {
 						var els = container.querySelectorAll( '*' );
 						els.forEach( function( el ) {
-							el.style.removeProperty( 'opacity' );
+							el.style.opacity = '1';
 							el.style.removeProperty( 'transform' );
 						} );
 					} );
 
-					// Also clear on the media wrapper which has its own CSS opacity rule.
 					var mediaWrappers = hero.querySelectorAll( '.nb-supernova-item__media-wrapper' );
 					mediaWrappers.forEach( function( el ) {
-						el.style.removeProperty( 'opacity' );
+						el.style.opacity = '1';
 					} );
 				} );
+
+				// Trigger scroll recalculation so GSAP hero animations
+				// sync to the current scroll position.
+				window.dispatchEvent( new Event( "scroll" ) );
 			}
 		} );
 	</script>
