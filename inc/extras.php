@@ -377,7 +377,7 @@ if ( ! function_exists( 'anima_add_primary_menu_item_description' ) ) {
 	function anima_add_primary_menu_item_description( string $item_output, WP_Post $item, int $depth, stdClass $args ): string {
 
 		if ( ( 'primary' == $args->theme_location || 'secondary' == $args->theme_location ) && $depth && $item->description ) {
-			$item_output = str_replace( '</a>', '<span class="menu-description">' . $item->description . '</span></a>', $item_output );
+			$item_output = str_replace( '</a>', '<span class="menu-description">' . wp_kses_post( $item->description ) . '</span></a>', $item_output );
 		}
 
 		return $item_output;
