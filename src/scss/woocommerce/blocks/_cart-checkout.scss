@@ -1,0 +1,113 @@
+// =========================================================================
+// Block-based Cart & Checkout
+// WooCommerce 8.3+ uses blocks by default. The theme deregisters
+// wc-block-style, but WooCommerce's cart.css/checkout.css still provide
+// flex layout. We only add overflow containment and button styles.
+// =========================================================================
+
+// -----------
+// Block Cart
+// -----------
+
+// The cart items table can exceed its 65%-width container when product
+// descriptions are long (table-layout:auto). Prevent bleed into sidebar.
+.wc-block-cart .wc-block-components-main {
+    overflow: hidden;
+}
+
+// "Proceed to Checkout" button in block cart
+.wc-block-cart__submit-button {
+    @include button;
+    @include button-fill;
+    @include button-huge;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+}
+
+// ---------------
+// Block Checkout
+// ---------------
+
+// Reset the classic checkout form spacing (from _checkout.scss:148
+// `.woocommerce-checkout:not(.woocommerce-order-received) form`)
+// which also matches block checkout <form> elements (main form AND coupon form).
+// Must match specificity (0,2,1).
+.woocommerce-checkout form.wc-block-checkout__form,
+.woocommerce-checkout form.wc-block-components-totals-coupon__form {
+    margin-top: 0;
+    padding-bottom: 0;
+}
+
+// Increase gap between "Return to Cart" and "Place Order".
+// Must match WooCommerce's `.wc-block-checkout__actions .wc-block-checkout__actions_row`.
+.wc-block-checkout__actions .wc-block-checkout__actions_row {
+    gap: 20%;
+}
+
+// "Place Order" button — flex:1 instead of width:100% so it shares space
+// with the "Return to Cart" link in the .wc-block-checkout__actions_row flex row.
+.wc-block-components-checkout-place-order-button {
+    @include button;
+    @include button-fill;
+    flex: 1;
+    text-align: center;
+}
+
+// "Return to Cart" link styling — button-text gives an underline hover
+// plus a right-arrow ::after. The arrow conflicts with the left-arrow SVG
+// already present in the link, so hide it and reclaim the padding.
+.wc-block-components-checkout-return-to-cart-button {
+    @include button-text;
+    color: currentColor;
+    padding-right: 0;
+    margin-right: 0;
+
+    &::after {
+        content: none;
+    }
+
+    &::before {
+        right: 0;
+        width: 100%;
+    }
+}
+
+// Remove extra padding around the coupon code form in the order summary.
+// Also reset the theme's label:not(:first-child) margin-top from _forms.scss
+// which pushes the floating "Enter code" label down.
+.wc-block-components-totals-coupon {
+    padding: 0;
+
+    label {
+        margin-top: 0;
+    }
+}
+
+// -------------------------
+// Block Checkout — Checkbox
+// -------------------------
+// The theme's input[type="checkbox"]::after creates an absolute-positioned
+// accent-colored overlay. WooCommerce block checkboxes use appearance:none +
+// position:static + an SVG mark, so the theme's ::after escapes to the
+// label (position:relative) and fills the entire row with orange.
+// Disable the theme overlay and let WooCommerce's own styles handle it.
+.wc-block-components-checkbox {
+
+    .wc-block-components-checkbox__input[type="checkbox"] {
+        position: relative;
+
+        &::after {
+            content: none;
+        }
+
+        &:checked {
+            background-color: var(--sm-current-accent-color);
+        }
+    }
+
+    .wc-block-components-checkbox__mark {
+        fill: #fff;
+    }
+}
