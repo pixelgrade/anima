@@ -59,11 +59,12 @@ export function init() {
     },
 
     transitions: [ pageTransition ],
-  } );
 
-  // Error fallback: if AJAX navigation fails, do a full page reload.
-  barba.hooks.on( 'page:error', ( { url } ) => {
-    window.location.href = url;
+    // Error fallback: if AJAX navigation fails, do a full page reload.
+    requestError: ( trigger, action, url ) => {
+      window.location.href = url;
+      return false;
+    },
   } );
 
   // After each transition, ensure the body is visible.

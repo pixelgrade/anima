@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import App from '../app';
 
 /**
  * Sync body classes from the new page's HTML response.
@@ -9,7 +10,18 @@ export function syncBodyClasses( html ) {
   const nobodyClass = $( data ).filter( 'notbody' ).attr( 'class' );
 
   if ( nobodyClass ) {
-    $( 'body' ).attr( 'class', nobodyClass );
+    // Preserve classes that our JS manages and that aren't in server HTML.
+    const $body = $( 'body' );
+    const preserveClasses = [ 'has-page-transitions', 'is-loaded', 'has-loaded', 'admin-bar' ];
+    const preserved = preserveClasses.filter( cls => $body.hasClass( cls ) );
+
+    $body.attr( 'class', nobodyClass );
+
+    // Re-add preserved classes.
+    preserved.forEach( cls => $body.addClass( cls ) );
+
+    // Remove server-side initial loading state — not applicable after AJAX navigation.
+    $body.removeClass( 'is-loading' );
   }
 }
 
@@ -58,16 +70,15 @@ export function syncAdminBar( containerEl ) {
 /**
  * Re-initialize Anima's JS components on the new page DOM.
  * Follows Pile's "re-scan and re-bind" pattern.
+ *
+ * Creates a fresh App instance which initializes Hero, CommentsArea, images, etc.
+ * Hero.js handles its own intro timeline and scroll-driven animations —
+ * the page transitions system must NOT animate hero elements directly.
  */
 export function reinitComponents() {
-  // Trigger imagesLoaded for any new images.
-  const $images = $( '[data-barba="container"]' ).find( 'img' ).not( '[srcset], .is-loaded, .is-broken' );
-  if ( $images.length && $.fn.imagesLoaded ) {
-    $images.imagesLoaded().progress( ( instance, image ) => {
-      const className = image.isLoaded ? 'is-loaded' : 'is-broken';
-      $( image.img ).addClass( className );
-    } );
-  }
+  // Create fresh App instance — this reinits Hero, CommentsArea, images, etc.
+  // Fonts are already loaded (wf-active class persists), so Hero init runs immediately.
+  new App();
 
   // Re-trigger WooCommerce cart fragments if available.
   if ( typeof wc_cart_fragments_params !== 'undefined' ) {

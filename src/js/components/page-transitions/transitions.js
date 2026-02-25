@@ -62,33 +62,27 @@ function createBorderOutTimeline() {
 /**
  * Create the "border collapsing outward" timeline for page enter.
  * Ported from Pile's FadeTransition.fadeIn().
+ *
+ * IMPORTANT: Only animates the border overlay itself.
+ * Hero content animations are handled by Hero.js after reinitComponents().
  */
 function createBorderInTimeline() {
   const $border = $( '.js-page-transition-border' );
 
-  const timeline = gsap.timeline( { paused: true } );
+  const timeline = gsap.timeline( {
+    paused: true,
+    onComplete: () => {
+      // Clear all GSAP inline styles from the border element so it returns
+      // to its CSS-defined state (border: 0 solid transparent).
+      gsap.set( $border[ 0 ], { clearProps: 'all' } );
+    },
+  } );
 
   timeline.to( $border[ 0 ], {
     borderWidth: 0,
     duration: 0.6,
     ease: 'quart.inOut',
   } );
-
-  // Hero content fades in.
-  timeline.fromTo(
-    '.novablocks-hero .nb-supernova-item__inner-container, .nb-supernova--card-layout-stacked.nb-supernova--1-columns.nb-supernova--align-full .nb-supernova-item__inner-container',
-    { opacity: 0, y: 50 },
-    { opacity: 1, y: 0, duration: 0.4, ease: 'quad.out' },
-    '-=0.4'
-  );
-
-  // Hero background scales down.
-  timeline.fromTo(
-    '.novablocks-hero .nb-supernova-item__media-wrapper, .nb-supernova--card-layout-stacked.nb-supernova--1-columns.nb-supernova--align-full .nb-supernova-item__media-wrapper',
-    { scale: 1.2 },
-    { scale: 1, duration: 0.4, ease: 'quad.out' },
-    '-=0.4'
-  );
 
   return timeline;
 }
@@ -132,12 +126,13 @@ export const pageTransition = {
     syncAdminBar( next.container );
 
     // Re-initialize components on new DOM.
+    // This creates fresh Hero instances which run their own intro timelines.
     reinitComponents();
 
     // Track pageview.
     trackPageview();
 
-    // Play the enter animation.
+    // Play the border-only enter animation.
     const timeline = createBorderInTimeline();
     timeline.play();
 

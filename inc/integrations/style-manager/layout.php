@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Add colors section and options to the Customify config
-add_filter( 'customify_filter_fields', 'anima_add_layout_section_to_customify_config', 60, 1 );
+add_filter( 'style_manager/filter_fields', 'anima_add_layout_section_to_customify_config', 60, 1 );
 
 function anima_add_layout_section_to_customify_config( $config ) {
 

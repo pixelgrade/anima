@@ -4,7 +4,9 @@ import $ from 'jquery';
  * Initial page load animation — the "opening curtain".
  * Ported from Pile's loadingAnimation.js.
  *
- * Uses the global `gsap` object (loaded from CDN by WordPress).
+ * IMPORTANT: This only animates the border overlay and logo.
+ * Hero content animations are handled by Hero.js (intro timeline + scroll scrub).
+ * We must NOT touch hero elements here to avoid GSAP conflicts.
  */
 export function playLoadingAnimation() {
   const $border = $( '.js-page-transition-border' );
@@ -44,18 +46,4 @@ export function playLoadingAnimation() {
     delay: 0.5,
     ease: 'quart.inOut',
   } );
-
-  // Hero content fades in.
-  gsap.fromTo(
-    '.novablocks-hero .nb-supernova-item__inner-container, .nb-supernova--card-layout-stacked.nb-supernova--1-columns.nb-supernova--align-full .nb-supernova-item__inner-container',
-    { opacity: 0, y: 50 },
-    { opacity: 1, y: 0, duration: 0.4, ease: 'quad.out', delay: 0.7 }
-  );
-
-  // Hero background scales down.
-  gsap.fromTo(
-    '.novablocks-hero .nb-supernova-item__media-wrapper, .nb-supernova--card-layout-stacked.nb-supernova--1-columns.nb-supernova--align-full .nb-supernova-item__media-wrapper',
-    { scale: 1.2 },
-    { scale: 1, duration: 0.4, ease: 'quad.out', delay: 0.7 }
-  );
 }
