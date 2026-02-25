@@ -1,4 +1,6 @@
 import $ from 'jquery';
+import { init } from './components/page-transitions';
 
-// Page transitions — loaded only when the feature is enabled.
-console.log( 'Page transitions: loaded' );
+$( function() {
+  init();
+} );
