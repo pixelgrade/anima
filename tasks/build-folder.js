@@ -47,7 +47,7 @@ async function removeUnneededFiles() {
 		}
 	});
 
-	return del.sync( files_to_remove, {force: true} );
+	return del( files_to_remove, {force: true} );
 }
 removeUnneededFiles.description = 'Remove unneeded files and folders from the build folder';
 gulp.task( 'build:remove-unneeded-files', removeUnneededFiles );

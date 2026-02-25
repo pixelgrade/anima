@@ -8,7 +8,7 @@ GitHub: `git@github.com:pixelgrade/anima.git`
 
 ## Critical Warnings
 
-- **Node 16+ required** (`.nvmrc` = 16, `package.json` engines `>=16.13.0`). Enforced by `node-tasks/lock_node_version.js` on `npm install`.
+- **Node 22+ required** (`.nvmrc` = 22, `package.json` engines `>=22.0.0`). Enforced by `node-tasks/lock_node_version.js` on `npm install`.
 - **`npm run build` creates the ZIP** — it runs webpack, gulp styles, AND `gulp zip` in sequence. The build deletes `../build/` before creating it, so a failed build mid-way can leave the theme without a build folder.
 - **CLAUDE.md is excluded from the ZIP** via `.zipignore` — keep it that way.
 - **`style.css` is compiled output** — never edit it directly. Source is in `src/scss/`.
@@ -17,7 +17,7 @@ GitHub: `git@github.com:pixelgrade/anima.git`
 ## Prerequisites
 
 ```bash
-export NVM_DIR="/Users/georgeolaru/.nvm" && source "/Users/georgeolaru/.nvm/nvm.sh" && nvm use 16
+export NVM_DIR="/Users/georgeolaru/.nvm" && source "/Users/georgeolaru/.nvm/nvm.sh" && nvm use 22
 ```
 
 ## Build & Release
@@ -25,7 +25,7 @@ export NVM_DIR="/Users/georgeolaru/.nvm" && source "/Users/georgeolaru/.nvm/nvm.
 ### Full build + ZIP (single command):
 
 ```bash
-export NVM_DIR="/Users/georgeolaru/.nvm" && source "/Users/georgeolaru/.nvm/nvm.sh" && nvm use 16
+export NVM_DIR="/Users/georgeolaru/.nvm" && source "/Users/georgeolaru/.nvm/nvm.sh" && nvm use 22
 cd "/Users/georgeolaru/Local Sites/style-manager/app/public/wp-content/themes/anima"
 npm run build
 ```
@@ -40,7 +40,7 @@ npm run build
    - `build:fix` — fixes permissions (755/644), line endings (UNIX), replaces `__theme_txtd` with `anima`
    - `build:zip` — creates `../Anima-X-Y-Z.zip`, deletes build folder
 
-Output: `../Anima-2-0-12.zip` (one directory up from the theme).
+Output: `../Anima-X-Y-Z.zip` (one directory up from the theme).
 
 ### Development mode:
 
@@ -64,10 +64,10 @@ npm run scripts  # webpack production only
 ls -la ../Anima-*.zip
 
 # Must NOT contain CLAUDE.md, src/, node_modules/, or dev config
-unzip -l ../Anima-2-0-12.zip | grep -E "CLAUDE.md|/src/|node_modules|webpack"
+unzip -l ../Anima-X-Y-Z.zip | grep -E "CLAUDE.md|/src/|node_modules|webpack"
 
 # Check version
-unzip -p ../Anima-2-0-12.zip anima/style.css | head -15
+unzip -p ../Anima-X-Y-Z.zip anima/style.css | head -15
 ```
 
 ## Project Structure
@@ -158,45 +158,99 @@ Template overrides in `woocommerce/`, dedicated styles in `src/scss/woocommerce/
 
 ## Workflow: Fixes and Improvements
 
-For every fix or improvement:
+Every fix or improvement **must** follow this workflow:
 
-1. **Create a GitHub issue** describing the problem and proposed fix
-2. **Assign to the latest open milestone** (or create a new one if none exists)
-3. **Commit referencing the issue** — use `(#NNN)` in the commit message
-4. **Close the issue** after the fix is pushed — `gh issue close NNN -r completed`
+1. **Create a GitHub issue** describing the problem and root cause
+2. **Assign it to the latest open milestone** (or create a new one if none exists)
+3. **Commit with `Fixes #N`** in the message to auto-close the issue on push
+4. **Push to main** — the issue closes automatically
+
+This applies to both this repo (`pixelgrade/anima`) and the plugin repo (`pixelgrade/style-manager`).
 
 ```bash
 # Example workflow
-gh issue create --title "Fix XSS in widget output" --milestone "2.0.13" --label "[Type] Bug"
+gh issue create --title "Fix XSS in widget output" --milestone "2.0.13"
 # ... apply fix ...
 git add inc/widgets.php
-git commit -m "Fix XSS in widget output (#NNN)"
+git commit -m "Escape widget output to prevent stored XSS
+
+Fixes #123"
 git push origin main
-gh issue close NNN -r completed
+# Issue #123 closes automatically
 ```
 
-## Version Bump Checklist
+## Release Process
 
-When changing the version, update:
-- [ ] `style.css` header → `Version: X.Y.Z` (in the compiled output — rebuild after changing source)
-- [ ] Source SCSS that generates `style.css` if version is embedded there
-
-The build system reads the version from the `style.css` header to name the ZIP file.
-
-## Release on GitHub
+### 1. Create a milestone (if needed)
 
 ```bash
-git add <files>
-git commit -m "message"
+gh api repos/:owner/:repo/milestones -f title="X.Y.Z" -f state="open"
+```
+
+Assign all relevant issues to it. If issues were on a previous milestone, move them:
+```bash
+gh api repos/:owner/:repo/issues/NNN -X PATCH -f milestone=<milestone_number>
+```
+
+### 2. Bump the version
+
+Edit `src/scss/style.scss` — change the `Version:` line in the theme header comment:
+```
+Version: X.Y.Z
+```
+
+This is the **only** place to change the version. The build reads it from the compiled `style.css` header to name the ZIP file.
+
+### 3. Build the ZIP
+
+```bash
+export NVM_DIR="/Users/georgeolaru/.nvm" && source "/Users/georgeolaru/.nvm/nvm.sh" && nvm use 22
+cd "/Users/georgeolaru/Local Sites/style-manager/app/public/wp-content/themes/anima"
+npm run build
+```
+
+Output: `../Anima-X-Y-Z.zip` (one directory up from the theme).
+
+Verify:
+```bash
+ls -la ../Anima-X-Y-Z.zip
+unzip -p ../Anima-X-Y-Z.zip anima/style.css | head -8   # confirm version
+unzip -l ../Anima-X-Y-Z.zip | grep -E "CLAUDE.md|/src/|node_modules"  # must be empty
+```
+
+### 4. Commit, tag, and push
+
+```bash
+git add src/scss/style.scss style.css style-rtl.css dist/ languages/anima.pot
+git commit -m "Bump version to X.Y.Z"
 git push origin main
 
-# Tag and release
 git tag -f X.Y.Z
 git push origin X.Y.Z --force
-
-# Create release with ZIP
-gh release create X.Y.Z ../Anima-X-Y-Z.zip --title "X.Y.Z - Title" --notes "Release notes"
 ```
+
+### 5. Create the GitHub release
+
+Write a changelog in the wupdates style (https://wupdates.com/anima-changelog):
+- One bullet per user-visible change
+- Order by user impact (most visible first)
+- Link each item to its GitHub issue(s)
+- Group related low-level fixes (e.g., security) into single bullets
+
+```bash
+gh release create X.Y.Z ../Anima-X-Y-Z.zip --title "X.Y.Z" --notes "$(cat <<'EOF'
+* User-visible change description. ([#N](https://github.com/pixelgrade/anima/issues/N))
+* Another change. ([#M](https://github.com/pixelgrade/anima/issues/M), [#K](https://github.com/pixelgrade/anima/issues/K))
+EOF
+)"
+```
+
+### 6. Verify
+
+- Release appears at https://github.com/pixelgrade/anima/releases
+- ZIP is attached and downloadable
+- Issues auto-closed via `Fixes #N` in earlier commits
+- Milestone issues all closed → close the milestone if done
 
 ## Legacy Decisions to Review
 
@@ -219,7 +273,7 @@ This theme was originally built around WordPress 5.8–5.9 (2021–2022). Severa
 
 When a block editor feature "doesn't work on the frontend," the first place to look is `inc/block-editor.php` — it's likely being explicitly disabled. Before re-enabling a filter, test that the theme's CSS doesn't conflict with the generated WordPress styles.
 
-## Security Fixes (Milestone 2.0.12)
+## Security Fixes (Milestone 2.0.13)
 
 ### High — Stored XSS (fixed)
 

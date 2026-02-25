@@ -34,12 +34,11 @@
 /******/ 	})();
 /******/ 	
 /************************************************************************/
-var __webpack_exports__ = {};
 
-;// CONCATENATED MODULE: external "jQuery"
+;// external "jQuery"
 const external_jQuery_namespaceObject = jQuery;
 var external_jQuery_default = /*#__PURE__*/__webpack_require__.n(external_jQuery_namespaceObject);
-;// CONCATENATED MODULE: ./src/js/utils.js
+;// ./src/js/utils.js
 
 
 
@@ -48,25 +47,21 @@ const debounce = (func, wait) => {
   return function () {
     const context = this;
     const args = arguments;
-
     const later = () => {
       func.apply(context, args);
     };
-
     clearTimeout(timeout);
     timeout = setTimeout(later, wait);
   };
 };
 const hasTouchScreen = function () {
   var hasTouchScreen = false;
-
   if ('maxTouchPoints' in navigator) {
     hasTouchScreen = navigator.maxTouchPoints > 0;
   } else if ('msMaxTouchPoints' in navigator) {
     hasTouchScreen = navigator.msMaxTouchPoints > 0;
   } else {
     var mQ = window.matchMedia && matchMedia('(pointer:coarse)');
-
     if (mQ && mQ.media === '(pointer:coarse)') {
       hasTouchScreen = !!mQ.matches;
     } else if ('orientation' in window) {
@@ -76,17 +71,14 @@ const hasTouchScreen = function () {
       hasTouchScreen = /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) || /\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA);
     }
   }
-
   return hasTouchScreen;
 };
-function setAndResetElementStyles(element) {
-  let props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+function setAndResetElementStyles(element, props = {}) {
   const $element = external_jQuery_default()(element);
   $element.css(props);
   Object.keys(props).forEach(key => {
     props[key] = '';
   });
-
   if (window.requestIdleCallback) {
     window.requestIdleCallback(() => {
       $element.css(props);
@@ -98,12 +90,10 @@ function setAndResetElementStyles(element) {
   }
 }
 const getColorSetClasses = element => {
-  const classAttr = element === null || element === void 0 ? void 0 : element.getAttribute('class');
-
+  const classAttr = element?.getAttribute('class');
   if (!classAttr) {
     return [];
   }
-
   const classes = classAttr.split(/\s+/);
   return classes.filter(classname => {
     return classname.search('sm-palette-') !== -1 || classname.search('sm-variation-') !== -1;
@@ -111,14 +101,12 @@ const getColorSetClasses = element => {
 };
 const addClass = (element, classes) => {
   const classesArray = classes.split(/\s+/).filter(x => x.trim().length);
-
   if (classesArray.length) {
     element.classList.add(...classesArray);
   }
 };
 const removeClass = (element, classes) => {
   const classesArray = classes.split(/\s+/).filter(x => x.trim().length);
-
   if (classesArray.length) {
     element.classList.remove(...classesArray);
   }
@@ -126,8 +114,7 @@ const removeClass = (element, classes) => {
 const hasClass = (element, className) => {
   return element.classList.contains(className);
 };
-const toggleClasses = function (element) {
-  let classesToAdd = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+const toggleClasses = (element, classesToAdd = '') => {
   const prefixes = ['sm-palette-', 'sm-variation-', 'sm-color-signal-'];
   const classesToRemove = Array.from(element.classList).filter(classname => {
     return prefixes.some(prefix => classname.indexOf(prefix) > -1);
@@ -137,33 +124,26 @@ const toggleClasses = function (element) {
 };
 function getFirstChild(el) {
   var firstChild = el.firstChild;
-
   while (firstChild != null && firstChild.nodeType === 3) {
     // skip TextNodes
     firstChild = firstChild.nextSibling;
   }
-
   return firstChild;
 }
 const getFirstBlock = element => {
   if (!element || !element.children.length) {
     return element;
   }
-
   const firstBlock = element.children[0];
-
   if (hasClass(firstBlock, 'nb-sidecar')) {
     const content = firstBlock.querySelector('.nb-sidecar-area--content');
-
     if (content && content.children.length) {
       return getFirstBlock(content);
     }
   }
-
   return firstBlock;
 };
-;// CONCATENATED MODULE: ./src/js/components/globalService.js
-
+;// ./src/js/components/globalService.js
 
 
 class GlobalService {
@@ -178,41 +158,29 @@ class GlobalService {
     this.currentMutationList = [];
     this.frameRendered = true;
     this.useOrientation = hasTouchScreen() && 'orientation' in window;
-
     this._init();
   }
-
   _init() {
     const $window = external_jQuery_default()(window);
-
     const updateProps = this._updateProps.bind(this);
-
     const renderLoop = this._renderLoop.bind(this);
+    this._debouncedResizeCallback = debounce(this._resizeCallbackToBeDebounced.bind(this), 100);
 
-    this._debouncedResizeCallback = debounce(this._resizeCallbackToBeDebounced.bind(this), 100); // now
+    // now
+    updateProps();
 
-    updateProps(); // on document ready
-
+    // on document ready
     external_jQuery_default()(updateProps);
-
     this._bindOnResize();
-
     this._bindOnScroll();
-
     this._bindOnLoad();
-
     this._bindObserver();
-
     this._bindCustomizer();
-
     requestAnimationFrame(renderLoop);
   }
-
   _bindOnResize() {
     const $window = external_jQuery_default()(window);
-
     const updateProps = this._updateProps.bind(this);
-
     if (this.useOrientation) {
       $window.on('orientationchange', () => {
         $window.one('resize', updateProps);
@@ -221,31 +189,23 @@ class GlobalService {
       $window.on('resize', updateProps);
     }
   }
-
   _bindOnScroll() {
     external_jQuery_default()(window).on('scroll', this._updateScroll.bind(this));
   }
-
   _bindOnLoad() {
     external_jQuery_default()(window).on('load', this._updateProps.bind(this));
   }
-
   _bindObserver() {
     const self = this;
-
     const observeCallback = this._observeCallback.bind(this);
-
     const observeAndUpdateProps = () => {
       observeCallback();
       self.currentMutationList = [];
     };
-
     const debouncedObserveCallback = debounce(observeAndUpdateProps, 300);
-
     if (!window.MutationObserver) {
       return;
     }
-
     const observer = new MutationObserver(function (mutationList) {
       self.currentMutationList = self.currentMutationList.concat(mutationList);
       debouncedObserveCallback();
@@ -255,82 +215,63 @@ class GlobalService {
       subtree: true
     });
   }
-
   _bindCustomizer() {
     if (typeof wp !== 'undefined' && typeof wp.customize !== 'undefined') {
       if (typeof wp.customize.selectiveRefresh !== 'undefined') {
         wp.customize.selectiveRefresh.bind('partial-content-rendered', this._updateProps.bind(this));
       }
-
       wp.customize.bind('change', debounce(this._updateProps.bind(this), 100));
     }
   }
-
-  _updateProps() {
-    let force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
+  _updateProps(force = false) {
     this._updateSize(force);
-
     this._updateScroll(force);
   }
-
   _observeCallback() {
     const mutationList = this.currentMutationList;
     external_jQuery_default().each(this.observeCallbacks, function (i, fn) {
       fn(mutationList);
     });
   }
-
   _renderLoop() {
     if (!this.frameRendered) {
       this._renderCallback();
-
       this.frameRendered = true;
     }
-
     window.requestAnimationFrame(this._renderLoop.bind(this));
   }
-
   _renderCallback() {
     const passedArguments = arguments;
     external_jQuery_default().each(this.renderCallbacks, function (i, fn) {
       fn(...passedArguments);
     });
   }
-
   _resizeCallback() {
     const passedArguments = arguments;
     external_jQuery_default().each(this.resizeCallbacks, function (i, fn) {
       fn(...passedArguments);
     });
   }
-
   _resizeCallbackToBeDebounced() {
     const passedArguments = arguments;
     external_jQuery_default().each(this.debouncedResizeCallbacks, function (i, fn) {
       fn(...passedArguments);
     });
   }
-
   _scrollCallback() {
     const passedArguments = arguments;
     external_jQuery_default().each(this.scrollCallbacks, function (i, fn) {
       fn(...passedArguments);
     });
   }
-
-  _updateScroll() {
-    let force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  _updateScroll(force = false) {
     this.newProps = Object.assign({}, this.newProps, {
       scrollY: window.pageYOffset,
       scrollX: window.pageXOffset
     });
-
     this._shouldUpdate(this._scrollCallback.bind(this));
   }
-
-  _updateSize() {
-    let force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  _updateSize(force = false) {
     const body = document.body;
     const html = document.documentElement;
     const bodyScrollHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight);
@@ -341,83 +282,65 @@ class GlobalService {
       windowWidth: this.useOrientation && window.screen && window.screen.availWidth || window.innerWidth,
       windowHeight: this.useOrientation && window.screen && window.screen.availHeight || window.innerHeight
     });
-
     this._shouldUpdate(() => {
       this._resizeCallback();
-
       this._debouncedResizeCallback();
     });
   }
-
-  _shouldUpdate(callback) {
-    let force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
+  _shouldUpdate(callback, force = false) {
     if (this._hasNewProps() || force) {
       this.props = Object.assign({}, this.props, this.newProps);
       this.newProps = {};
       this.frameRendered = false;
-
       if (typeof callback === 'function') {
         callback();
       }
     }
   }
-
   _hasNewProps() {
     return Object.keys(this.newProps).some(key => {
       return this.newProps[key] !== this.props[key];
     });
   }
-
   getAdminBarHeight() {
     const adminBar = document.getElementById('wpadminbar');
-
     if (adminBar) {
       const box = adminBar.getBoundingClientRect();
       return box.height;
     }
-
     return 0;
   }
-
   registerOnResize(fn) {
     if (typeof fn === 'function' && this.resizeCallbacks.indexOf(fn) < 0) {
       this.resizeCallbacks.push(fn);
     }
   }
-
   registerOnDeouncedResize(fn) {
     if (typeof fn === 'function' && this.resizeCallbacks.indexOf(fn) < 0) {
       this.debouncedResizeCallbacks.push(fn);
     }
   }
-
   registerOnScroll(fn) {
     if (typeof fn === 'function' && this.scrollCallbacks.indexOf(fn) < 0) {
       this.scrollCallbacks.push(fn);
     }
   }
-
   registerObserverCallback(fn) {
     if (typeof fn === 'function' && this.observeCallbacks.indexOf(fn) < 0) {
       this.observeCallbacks.push(fn);
     }
   }
-
   registerRender(fn) {
     if (typeof fn === 'function' && this.renderCallbacks.indexOf(fn) < 0) {
       this.renderCallbacks.push(fn);
     }
   }
-
   getProps() {
     return this.props;
   }
-
 }
-
 /* harmony default export */ const globalService = (new GlobalService());
-;// CONCATENATED MODULE: ./src/js/components/hero.js
+;// ./src/js/components/hero.js
 
 class Hero {
   constructor(element) {
@@ -437,7 +360,6 @@ class Hero {
     this.updateOnScroll();
     this.init();
   }
-
   init() {
     globalService.registerOnScroll(() => {
       this.update();
@@ -456,7 +378,6 @@ class Hero {
     this.addOutroToTimeline();
     this.timeline.addLabel('end');
     this.pauseTimelineOnScroll();
-
     if (this.reduceMotion) {
       const middleTime = this.labels.middle;
       const endTime = this.labels.end;
@@ -467,7 +388,6 @@ class Hero {
       this.timeline.play();
     }
   }
-
   update() {
     const {
       scrollY
@@ -480,14 +400,14 @@ class Hero {
       height: this.box.height
     };
   }
-
   updateOnScroll() {
     const {
       scrollY,
       scrollHeight,
       windowHeight
-    } = globalService.getProps(); // used to calculate animation progress
+    } = globalService.getProps();
 
+    // used to calculate animation progress
     const length = windowHeight * 0.5;
     const middleMin = 0;
     const middleMax = scrollHeight - windowHeight - length * 0.5;
@@ -496,36 +416,29 @@ class Hero {
     this.start = middleMid - length * 0.5;
     this.end = this.start + length;
     this.progress = (scrollY - this.start) / (this.end - this.start);
-
     if (this.reduceMotion) {
       const middleTime = this.timeline.labels.middle;
       const endTime = this.timeline.labels.end;
       const minTlProgress = middleTime / endTime;
       this.progress = minTlProgress;
     }
-
     this.updateTimelineOnScroll();
   }
-
   updateTimelineOnScroll() {
     if (!this.paused) {
       return;
     }
-
     const currentProgress = this.timeline.progress();
     const middleTime = this.timeline.labels.middle;
     const endTime = this.timeline.labels.end;
     const minTlProgress = middleTime / endTime;
     let newTlProgress = (this.progress - 0.5) * 2 * (1 - minTlProgress) + minTlProgress;
     newTlProgress = Math.min(Math.max(minTlProgress, newTlProgress), 1);
-
     if (currentProgress === newTlProgress) {
       return;
     }
-
     this.timeline.progress(newTlProgress);
   }
-
   getMarkupPieces() {
     const container = jQuery(this.element).find('.novablocks-hero__inner-container, .nb-supernova-item__inner-container');
     const headline = container.children().filter('.c-headline').first();
@@ -549,7 +462,6 @@ class Hero {
       othersAfter
     };
   }
-
   addIntroToTimeline() {
     const timeline = this.timeline;
     const {
@@ -566,7 +478,6 @@ class Hero {
       othersBefore,
       othersAfter
     } = this.pieces;
-
     if (title.length && title.text().trim().length) {
       this.splitTitle = new SplitText(title, {
         wordsClass: 'c-headline__word'
@@ -596,8 +507,9 @@ class Hero {
         opacity: 1,
         duration: 0.89,
         ease: 'power.out'
-      }, 0); // aici era title dar facea un glitch ciudat
+      }, 0);
 
+      // aici era title dar facea un glitch ciudat
       timeline.fromTo(headline, {
         'y': 30
       }, {
@@ -606,7 +518,6 @@ class Hero {
         ease: 'power.out'
       }, 0);
     }
-
     if (subtitle.length) {
       timeline.fromTo(subtitle, {
         opacity: 0
@@ -623,7 +534,6 @@ class Hero {
         ease: 'power4.out'
       }, '-=0.65');
     }
-
     if (separator.length) {
       if (sepFlower.length) {
         timeline.fromTo(sepFlower, {
@@ -641,7 +551,6 @@ class Hero {
           ease: 'back.out'
         }, '-=0.5');
       }
-
       if (sepLine.length) {
         timeline.fromTo(sepLine, {
           width: 0
@@ -660,7 +569,6 @@ class Hero {
           ease: 'power4.out'
         }, '-=0.6');
       }
-
       if (sepArrow.length) {
         timeline.fromTo(sepArrow, {
           opacity: 0
@@ -671,7 +579,6 @@ class Hero {
         }, '-=0.27');
       }
     }
-
     if (othersAfter.length) {
       timeline.fromTo(othersAfter, {
         opacity: 0
@@ -687,7 +594,6 @@ class Hero {
         duration: 0.75
       }, '-=0.5');
     }
-
     if (othersBefore.length) {
       timeline.fromTo(othersBefore, {
         opacity: 0
@@ -703,10 +609,8 @@ class Hero {
         duration: 0.75
       }, '-=0.75');
     }
-
     this.timeline = timeline;
   }
-
   addOutroToTimeline() {
     const {
       title,
@@ -719,7 +623,6 @@ class Hero {
       sepArrow
     } = this.pieces;
     const timeline = this.timeline;
-
     if (title.length) {
       timeline.fromTo(title, {
         y: 0
@@ -730,7 +633,6 @@ class Hero {
         ease: 'power1.in'
       }, 'middle');
     }
-
     if (subtitle.length) {
       timeline.to(subtitle, {
         opacity: 0,
@@ -739,7 +641,6 @@ class Hero {
         ease: 'power1.in'
       }, 'middle');
     }
-
     if (othersBefore.length) {
       timeline.to(othersBefore, {
         y: 60,
@@ -748,7 +649,6 @@ class Hero {
         ease: 'power1.in'
       }, 'middle');
     }
-
     if (othersAfter.length) {
       timeline.to(othersAfter, {
         y: 60,
@@ -757,7 +657,6 @@ class Hero {
         ease: 'power1.in'
       }, 'middle');
     }
-
     if (sepLine.length) {
       timeline.to(sepLine, {
         width: '0%',
@@ -766,7 +665,6 @@ class Hero {
         ease: 'power1.in'
       }, '-=0.94');
     }
-
     if (separator.length) {
       timeline.to(separator, {
         width: '0%',
@@ -775,49 +673,43 @@ class Hero {
         ease: 'power1.in'
       }, '-=0.86');
     }
-
     if (sepFlower.length) {
       timeline.to(sepFlower, {
         rotation: 180,
         duration: 1
       }, '-=1.08');
     }
-
     if (sepFlower.length) {
       timeline.to(sepFlower, {
         opacity: 0,
         duration: 0.11
       }, '-=0.03');
     }
-
     if (sepArrow.length) {
       timeline.to(sepArrow, {
         opacity: 0,
         duration: 0.14
       }, '-=1.08');
     }
-
     this.timeline = timeline;
   }
-
   revertTitle() {
     if (typeof this.splitTitle !== 'undefined') {
       this.splitTitle.revert();
     }
   }
-
   pauseTimelineOnScroll() {
     const middleTime = this.timeline.labels.middle;
     const endTime = this.timeline.labels.end;
     this.timeline.eventCallback('onUpdate', tl => {
-      const time = this.timeline.time(); // calculate the current timeline progress relative to middle and end labels
+      const time = this.timeline.time();
+
+      // calculate the current timeline progress relative to middle and end labels
       // in such a way that timelineProgress is 0.5 for middle and 1 for end
       // because we don't want the animation to be stopped before the middle label
-
       const tlProgress = (time - middleTime) / (endTime - middleTime);
       const pastMiddle = time > middleTime;
       const pastScroll = tlProgress * 0.5 + 0.5 >= this.progress;
-
       if (pastMiddle && pastScroll) {
         this.timeline.pause();
         this.revertTitle();
@@ -826,32 +718,28 @@ class Hero {
       }
     }, ['{self}']);
   }
-
 }
-;// CONCATENATED MODULE: ./src/js/components/commentsArea.js
+;// ./src/js/components/commentsArea.js
 
 class CommentsArea {
   constructor(element) {
     this.$element = external_jQuery_default()(element);
     this.$checkbox = this.$element.find('.c-comments-toggle__checkbox');
     this.$content = this.$element.find('.comments-area__content');
-    this.$contentWrap = this.$element.find('.comments-area__wrap'); // overwrite CSS that hides the comments area content
+    this.$contentWrap = this.$element.find('.comments-area__wrap');
 
+    // overwrite CSS that hides the comments area content
     this.$contentWrap.css('display', 'block');
     this.$checkbox.on('change', this.onChange.bind(this));
     this.checkWindowLocationComments();
   }
-
   onChange() {
     this.toggle(false);
   }
-
-  toggle() {
-    let instant = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  toggle(instant = false) {
     const $contentWrap = this.$contentWrap;
     const isChecked = this.$checkbox.prop('checked');
     const newHeight = isChecked ? this.$content.outerHeight() : 0;
-
     if (instant) {
       $contentWrap.css('height', newHeight);
     } else {
@@ -866,17 +754,14 @@ class CommentsArea {
       });
     }
   }
-
   checkWindowLocationComments() {
     if (window.location.href.indexOf('#comment') === -1) {
       this.$checkbox.prop('checked', false);
       this.toggle(true);
     }
   }
-
 }
-;// CONCATENATED MODULE: ./src/js/components/mqService.js
-
+;// ./src/js/components/mqService.js
 
 class mqService {
   constructor() {
@@ -891,7 +776,6 @@ class mqService {
     globalService.registerOnDeouncedResize(this.onResize.bind(this));
     this.onResize();
   }
-
   onResize() {
     Object.keys(this.breakpoints).forEach(key => {
       const breakpoint = this.breakpoints[key];
@@ -899,11 +783,9 @@ class mqService {
       this.below[key] = !!window.matchMedia(`not screen and (min-width: ${breakpoint})`).matches;
     });
   }
-
 }
-
 /* harmony default export */ const components_mqService = (new mqService());
-;// CONCATENATED MODULE: ./src/js/components/navbar.js
+;// ./src/js/components/navbar.js
 
 
 
@@ -919,43 +801,33 @@ class Navbar {
     this.$menuItemsWithChildrenLinks = this.$menuItemsWithChildren.children('a');
     this.initialize();
   }
-
   initialize() {
     this.onResize();
     this.initialized = true;
     globalService.registerOnDeouncedResize(this.onResize.bind(this));
   }
-
   onResize() {
     // we are on desktop
     if (!components_mqService.below.lap) {
       this.addSubMenusLeftClass();
-
       if (this.initialized && !this.desktop) {
         this.unbindClick();
       }
-
       if (!this.initialized || !this.desktop) {
         this.bindHoverIntent();
       }
-
       this.desktop = true;
       return;
     }
-
     this.removeSubMenusLeftClass();
-
     if (this.initialized && this.desktop) {
       this.unbindHoverIntent();
     }
-
     if (!this.initialized || this.desktop) {
       this.bindClick();
     }
-
     this.desktop = false;
   }
-
   addSubMenusLeftClass() {
     const {
       windowWidth
@@ -963,42 +835,34 @@ class Navbar {
     this.$menuItemsWithChildren.each(function (index, obj) {
       const $obj = external_jQuery_default()(obj);
       const $subMenu = $obj.children(SUBMENU),
-            subMenuWidth = $subMenu.outerWidth(),
-            subMenuOffSet = $subMenu.offset(),
-            availableSpace = windowWidth - subMenuOffSet.left;
-
+        subMenuWidth = $subMenu.outerWidth(),
+        subMenuOffSet = $subMenu.offset(),
+        availableSpace = windowWidth - subMenuOffSet.left;
       if (availableSpace < subMenuWidth) {
         $obj.addClass(SUBMENU_LEFT_CLASS);
       }
     });
   }
-
   removeSubMenusLeftClass() {
     this.$menuItemsWithChildren.removeClass(SUBMENU_LEFT_CLASS);
   }
-
   onClickMobile(event) {
     const $link = external_jQuery_default()(this);
     const $siblings = $link.parent().siblings().not($link);
-
     if ($link.is('.active')) {
       return;
     }
-
     event.preventDefault();
     $link.addClass('active').parent().addClass(HOVER_CLASS);
     $siblings.removeClass(HOVER_CLASS);
     $siblings.find('.active').removeClass('active');
   }
-
   bindClick() {
     this.$menuItemsWithChildrenLinks.on('click', this.onClickMobile);
   }
-
   unbindClick() {
     this.$menuItemsWithChildrenLinks.off('click', this.onClickMobile);
   }
-
   bindHoverIntent() {
     this.$menuItems.hoverIntent({
       out: function () {
@@ -1010,37 +874,29 @@ class Navbar {
       timeout: 200
     });
   }
-
   unbindHoverIntent() {
     this.$menuItems.off('mousemove.hoverIntent mouseenter.hoverIntent mouseleave.hoverIntent');
     delete this.$menuItems.hoverIntent_t;
     delete this.$menuItems.hoverIntent_s;
   }
-
 }
-;// CONCATENATED MODULE: ./src/js/components/base-component.js
-
+;// ./src/js/components/base-component.js
 
 class BaseComponent {
   constructor() {
     globalService.registerOnResize(this.onResize.bind(this));
     globalService.registerOnDeouncedResize(this.onDebouncedResize.bind(this));
   }
-
   onResize() {}
-
   onDebouncedResize() {}
-
 }
-
 /* harmony default export */ const base_component = (BaseComponent);
-;// CONCATENATED MODULE: ./src/js/components/search-overlay.js
+;// ./src/js/components/search-overlay.js
 
 
 
 const SEARCH_OVERLAY_OPEN_CLASS = 'has-search-overlay';
 const ESC_KEY_CODE = 27;
-
 class SearchOverlay extends base_component {
   constructor() {
     super();
@@ -1048,41 +904,34 @@ class SearchOverlay extends base_component {
     this.initialize();
     this.onDebouncedResize();
   }
-
   initialize() {
     external_jQuery_default()(document).on('click', '.menu-item--search a', this.openSearchOverlay);
     external_jQuery_default()(document).on('click', '.c-search-overlay__cancel', this.closeSearchOverlay);
     external_jQuery_default()(document).on('keydown', this.closeSearchOverlayOnEsc);
   }
-
   onDebouncedResize() {
     setAndResetElementStyles(this.$searchOverlay, {
       transition: 'none'
     });
   }
-
   openSearchOverlay(e) {
     e.preventDefault();
     external_jQuery_default()('body').toggleClass(SEARCH_OVERLAY_OPEN_CLASS);
     external_jQuery_default()('.c-search-overlay__form .search-field').focus();
   }
-
   closeSearchOverlayOnEsc(e) {
     if (e.keyCode === ESC_KEY_CODE) {
       external_jQuery_default()('body').removeClass(SEARCH_OVERLAY_OPEN_CLASS);
       external_jQuery_default()('.c-search-overlay__form .search-field').blur();
     }
   }
-
   closeSearchOverlay(e) {
     e.preventDefault();
     external_jQuery_default()('body').removeClass(SEARCH_OVERLAY_OPEN_CLASS);
   }
-
 }
-
 /* harmony default export */ const search_overlay = (SearchOverlay);
-;// CONCATENATED MODULE: ./src/js/components/app.js
+;// ./src/js/components/app.js
 
 
 
@@ -1099,7 +948,6 @@ class App {
     this.initializeCommentsArea();
     this.initializeReservationForm();
   }
-
   initializeImages() {
     const showLoadedImages = this.showLoadedImages.bind(this);
     showLoadedImages();
@@ -1107,7 +955,6 @@ class App {
       external_jQuery_default().each(mutationList, (i, mutationRecord) => {
         external_jQuery_default().each(mutationRecord.addedNodes, (j, node) => {
           const nodeName = node.nodeName && node.nodeName.toLowerCase();
-
           if ('img' === nodeName || node.childNodes.length) {
             showLoadedImages(node);
           }
@@ -1115,13 +962,11 @@ class App {
       });
     });
   }
-
   initializeReservationForm() {
     globalService.registerObserverCallback(function (mutationList) {
       external_jQuery_default().each(mutationList, (i, mutationRecord) => {
         external_jQuery_default().each(mutationRecord.addedNodes, (j, node) => {
           const $node = external_jQuery_default()(node);
-
           if ($node.is('#ot-reservation-widget')) {
             $node.closest('.novablocks-opentable').addClass('is-loaded');
           }
@@ -1129,16 +974,13 @@ class App {
       });
     });
   }
-
-  showLoadedImages() {
-    let container = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document.body;
+  showLoadedImages(container = document.body) {
     const $images = external_jQuery_default()(container).find('img').not('[srcset], .is-loaded, .is-broken');
     $images.imagesLoaded().progress((instance, image) => {
       const className = image.isLoaded ? 'is-loaded' : 'is-broken';
       external_jQuery_default()(image.img).addClass(className);
     });
   }
-
   initializeHero() {
     const newHeroesSelector = '.nb-supernova--card-layout-stacked.nb-supernova--1-columns.nb-supernova--align-full';
     const oldHeroesSelector = '.novablocks-hero';
@@ -1148,28 +990,22 @@ class App {
     this.HeroCollection = heroElementsArray.map(element => new Hero(element));
     this.firstHero = heroElementsArray[0];
   }
-
   initializeCommentsArea() {
     const $commentsArea = external_jQuery_default()('.comments-area');
-
     if ($commentsArea.length) {
       this.commentsArea = new CommentsArea($commentsArea.get(0));
     }
   }
-
 }
-;// CONCATENATED MODULE: ./src/js/scripts.js
-
+;// ./src/js/scripts.js
 
 
 function initialize() {
   new App();
 }
-
 external_jQuery_default()(function () {
   const $window = external_jQuery_default()(window);
   const $html = external_jQuery_default()('html');
-
   if ($html.is('.wf-active')) {
     initialize();
   } else {
