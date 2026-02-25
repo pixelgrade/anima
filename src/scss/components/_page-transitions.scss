@@ -1,0 +1,128 @@
+// ==========================================================================
+// Page Transitions — Border overlay and loading animation
+// Ported from Pile theme.
+// ==========================================================================
+
+// Border overlay — fixed fullscreen, GSAP animates borderWidth
+.c-page-transition-border {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100000;
+  pointer-events: none;
+  border: 0 solid transparent;
+  display: none;
+
+  .has-page-transitions & {
+    display: block;
+  }
+}
+
+// Logo container — centered in the border overlay
+.border-logo-bgscale {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.border-logo-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate3d(-50%, -50%, 0) scaleY(0);
+  background: rgba(0, 0, 0, 0.2);
+  padding: 30px 60px;
+  overflow: hidden;
+  animation: anima-raiseMeUp 0.4s 0.4s cubic-bezier(0.770, 0.000, 0.175, 1.000) forwards;
+
+  .logo {
+    opacity: 0;
+  }
+
+  .has-page-transitions.is-loaded & {
+    transform: translate3d(-50%, -50%, 0) scaleY(0);
+    transition: transform 0.3s 0.15s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+  }
+}
+
+.border-logo-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  transform: translate3d(-100%, 0, 0);
+  background: white;
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    transform: translateZ(0);
+    animation: anima-fillMe 10s 0.8s ease-out forwards;
+
+    .has-page-transitions.is-loaded & {
+      transition: transform 0.3s 0.15s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+    }
+  }
+}
+
+.border-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+
+  .logo {
+    display: block;
+    opacity: 0;
+    animation: anima-fadeMeIn 0.3s 0.5s ease-in-out forwards;
+
+    .has-page-transitions.is-loaded & {
+      opacity: 0;
+      transition: transform 0.3s 0.15s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+    }
+  }
+
+  img {
+    width: auto;
+  }
+}
+
+.border-logo-bgscale,
+.border-logo {
+  .custom-logo {
+    max-height: none;
+  }
+}
+
+// Keyframe animations
+@keyframes anima-raiseMeUp {
+  0% { transform: translate3d(-50%, -50%, 0) scaleY(0); }
+  100% { transform: translate3d(-50%, -50%, 0) scaleY(1); }
+}
+
+@keyframes anima-fadeMeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes anima-fillMe {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(90%, 0, 0); }
+}
+
+// Page visibility during transitions
+.has-page-transitions {
+  &:not(.is-loaded) [data-barba="container"] {
+    visibility: hidden;
+  }
+}

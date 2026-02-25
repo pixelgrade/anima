@@ -177,6 +177,7 @@ function anima_register_assets() {
 	wp_script_add_data( 'gsap-split-text', 'crossorigin', 'anonymous');
 
 	wp_register_script( 'anima-app', trailingslashit( get_template_directory_uri() ) . 'dist/js/scripts' . $suffix . '.js', [ 'jquery', 'gsap', 'gsap-split-text', 'hoverIntent', 'imagesloaded' ], $theme->get( 'Version' ), true );
+	wp_register_script( 'anima-page-transitions', trailingslashit( get_template_directory_uri() ) . 'dist/js/page-transitions' . $suffix . '.js', [ 'jquery', 'gsap', 'anima-app' ], $theme->get( 'Version' ), true );
 }
 add_action( 'init', 'anima_register_assets', 10 );
 

@@ -75,6 +75,12 @@ function anima_add_layout_section_to_customify_config( $config ) {
 						],
 					],
 				],
+				'enable_page_transitions' => [
+					'type'    => 'checkbox',
+					'label'   => esc_html__( 'Page Transitions', '__theme_txtd' ),
+					'desc'    => esc_html__( 'Enable smooth animated transitions between pages.', '__theme_txtd' ),
+					'default' => false,
+				],
 			],
 		],
 	];
