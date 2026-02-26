@@ -29,6 +29,10 @@ export function init() {
     : [];
 
   barba.init( {
+    // Disable hover/touch prefetching — it causes unwanted navigation behavior
+    // on Nova Blocks collection cards where large areas are wrapped in links.
+    prefetchIgnore: true,
+
     // Barba v2 uses a prevent function instead of overriding preventCheck.
     prevent: ( { el, href } ) => {
       // Skip links with target="_blank".

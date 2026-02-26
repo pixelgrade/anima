@@ -1114,6 +1114,11 @@ function reinitComponents() {
   // Fonts are already loaded (wf-active class persists), so Hero init runs immediately.
   new App();
 
+  // Re-initialize Nova Blocks frontend scripts.
+  // In FSE themes the header/footer are inside the Barba container and get swapped,
+  // so Nova Blocks' block JS (header sticky, color signal, etc.) must re-run.
+  reinitNovaBlocksScripts();
+
   // Re-trigger WooCommerce cart fragments if available.
   if (typeof wc_cart_fragments_params !== 'undefined') {
     external_jQuery_default()(document.body).trigger('wc_fragment_refresh');
@@ -1124,6 +1129,29 @@ function reinitComponents() {
 
   // Dispatch a resize event to recalculate any layout-dependent JS.
   window.dispatchEvent(new Event('resize'));
+}
+
+/**
+ * Re-execute Nova Blocks frontend scripts after AJAX page swap.
+ *
+ * Nova Blocks registers per-block `frontend.js` scripts that initialize
+ * DOM-dependent behavior (header sticky, color signals, scroll effects, etc.).
+ * These run once on DOMContentLoaded. After Barba swaps the container,
+ * the new DOM has no JS behavior — we must re-execute the scripts.
+ *
+ * We dynamically load fresh <script> tags so each script re-queries the DOM
+ * and creates new instances for the new elements.
+ */
+function reinitNovaBlocksScripts() {
+  const scripts = document.querySelectorAll('script[id*="novablocks"][id$="-js"][src*="frontend"]');
+  scripts.forEach(script => {
+    const newScript = document.createElement('script');
+    // Append a cache-bust param so the browser treats it as a new request
+    // (avoids de-duplication of identical src URLs).
+    newScript.src = script.src + (script.src.includes('?') ? '&' : '?') + '_barba=' + Date.now();
+    newScript.async = false;
+    document.body.appendChild(newScript);
+  });
 }
 
 /**
@@ -1374,6 +1402,9 @@ function init() {
   // Merge server-side excluded URLs with client-side patterns.
   const serverExcluded = typeof animaPageTransitions !== 'undefined' && animaPageTransitions.excludedUrls ? animaPageTransitions.excludedUrls : [];
   barba_umd_default().init({
+    // Disable hover/touch prefetching — it causes unwanted navigation behavior
+    // on Nova Blocks collection cards where large areas are wrapped in links.
+    prefetchIgnore: true,
     // Barba v2 uses a prevent function instead of overriding preventCheck.
     prevent: ({
       el,
