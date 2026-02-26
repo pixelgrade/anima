@@ -1,6 +1,11 @@
 import $ from 'jquery';
 import App from '../app';
 
+// Tracks script IDs that syncPageAssets() loaded for the first time.
+// reinitNovaBlocksScripts() skips these to avoid double-initialization
+// (which causes duplicate elements and toggled handlers canceling each other).
+let freshlyLoadedScriptIds = new Set();
+
 /**
  * Sync body classes from the new page's HTML response.
  * Uses the same NOTBODY trick as Pile to parse <body> attributes from raw HTML.
@@ -23,6 +28,172 @@ export function syncBodyClasses( html ) {
     // Remove server-side initial loading state — not applicable after AJAX navigation.
     $body.removeClass( 'is-loading' );
   }
+}
+
+/**
+ * Sync page assets (styles and scripts) from the new page's full HTML.
+ *
+ * WordPress injects per-page inline CSS and JS based on which blocks/plugins
+ * are present. After AJAX swap only the Barba container changes — the rest of
+ * the document keeps stale assets. This function:
+ *
+ * 1. Syncs inline <style> blocks (add new, update changed, remove stale)
+ * 2. Syncs <link> stylesheets (add new ones needed by the new page)
+ * 3. Syncs <script> tags — loads new external scripts and executes new inline
+ *    data scripts (e.g., FacetWP's `window.FWP_JSON`) so plugins reinitialize
+ */
+export function syncPageAssets( html ) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString( html, 'text/html' );
+
+  syncStyles( doc );
+  syncScripts( doc );
+}
+
+/**
+ * Sync inline <style> blocks and <link> stylesheets.
+ */
+function syncStyles( doc ) {
+  const newHead = doc.head;
+
+  // --- Sync inline <style> blocks (identified by id) ---
+  const newStyles = newHead.querySelectorAll( 'style[id]' );
+  const newStyleIds = new Set();
+
+  newStyles.forEach( ( newStyle ) => {
+    newStyleIds.add( newStyle.id );
+    const existing = document.getElementById( newStyle.id );
+
+    if ( existing && existing.tagName === 'STYLE' ) {
+      if ( existing.textContent !== newStyle.textContent ) {
+        existing.textContent = newStyle.textContent;
+      }
+    } else {
+      document.head.appendChild( newStyle.cloneNode( true ) );
+    }
+  } );
+
+  // Remove old block-specific inline styles the new page doesn't need.
+  document.querySelectorAll( 'head style[id]' ).forEach( ( style ) => {
+    if ( ! newStyleIds.has( style.id ) && isBlockInlineStyle( style.id ) ) {
+      style.remove();
+    }
+  } );
+
+  // --- Sync <link> stylesheets ---
+  const newLinks = newHead.querySelectorAll( 'link[rel="stylesheet"][id]' );
+  const newLinkIds = new Set();
+
+  newLinks.forEach( ( newLink ) => {
+    newLinkIds.add( newLink.id );
+    if ( ! document.getElementById( newLink.id ) ) {
+      document.head.appendChild( newLink.cloneNode( true ) );
+    }
+  } );
+
+  // Remove old block-specific stylesheets the new page doesn't need.
+  document.querySelectorAll( 'head link[rel="stylesheet"][id]' ).forEach( ( link ) => {
+    if ( ! newLinkIds.has( link.id ) && isBlockStylesheet( link.id ) ) {
+      link.remove();
+    }
+  } );
+}
+
+/**
+ * Sync scripts from the new page's full HTML.
+ *
+ * External scripts: loads any that exist in the new page but not the current page.
+ * Inline scripts: executes data/config scripts from the new page's <body>.
+ */
+function syncScripts( doc ) {
+  // Reset the freshly-loaded tracking set for this navigation.
+  freshlyLoadedScriptIds = new Set();
+
+  // Build a set of script src URLs already on the current page.
+  const currentSrcs = new Set();
+  document.querySelectorAll( 'script[src]' ).forEach( ( s ) => {
+    // Normalize: strip cache-bust params we added.
+    currentSrcs.add( stripCacheBust( s.src ) );
+  } );
+
+  // --- Sync external scripts ---
+  // Find all external scripts in the new page that aren't on the current page.
+  const newScripts = doc.querySelectorAll( 'script[src]' );
+  newScripts.forEach( ( script ) => {
+    const normalizedSrc = stripCacheBust( script.src );
+    if ( ! currentSrcs.has( normalizedSrc ) ) {
+      const newScript = document.createElement( 'script' );
+      newScript.src = script.src;
+      newScript.async = false;
+      if ( script.id ) {
+        newScript.id = script.id;
+        // Track this as freshly loaded so reinitNovaBlocksScripts() skips it.
+        freshlyLoadedScriptIds.add( script.id );
+      }
+      document.body.appendChild( newScript );
+    }
+  } );
+
+  // --- Sync inline data scripts from <body> ---
+  // WordPress plugins inject inline scripts in the body (via wp_footer) that
+  // set global data objects. These are outside the Barba container.
+  const newBodyScripts = doc.body.querySelectorAll( 'script:not([src])' );
+  newBodyScripts.forEach( ( script ) => {
+    const text = script.textContent;
+    if ( ! text.trim() ) {
+      return;
+    }
+
+    // Only execute scripts that set global data/config.
+    // Skip analytics, tracking, and JSON-LD schema scripts.
+    if ( isDataScript( text ) ) {
+      const newScript = document.createElement( 'script' );
+      newScript.textContent = text;
+      document.body.appendChild( newScript );
+    }
+  } );
+}
+
+/**
+ * Strip cache-bust params we add for reinit.
+ */
+function stripCacheBust( url ) {
+  return url.replace( /[?&]_barba=\d+/, '' );
+}
+
+/**
+ * Check if an inline script sets global data (safe and needed to re-execute).
+ */
+function isDataScript( text ) {
+  // Scripts that assign to window (e.g., window.FWP_JSON = {...})
+  if ( /window\.\w+\s*=/.test( text ) ) {
+    return true;
+  }
+
+  // WordPress wp_localize_script output (e.g., var fwpConfig = {...})
+  if ( /^var\s+\w+\s*=/.test( text.trim() ) ) {
+    return true;
+  }
+
+  return false;
+}
+
+/**
+ * Check if a <style> id is a per-page block inline style (safe to add/remove).
+ */
+function isBlockInlineStyle( id ) {
+  return id.includes( 'inline-css' ) && (
+    id.startsWith( 'wp-block-' ) ||
+    id.startsWith( 'novablocks' ) ||
+    id === 'core-block-supports-inline-css'
+  );
+}
+
+/**
+ * Check if a <link> id is a per-page block stylesheet (safe to add/remove).
+ */
+function isBlockStylesheet( id ) {
+  return id.startsWith( 'wp-block-' ) && id.endsWith( '-css' );
 }
 
 /**
@@ -112,6 +283,14 @@ function reinitNovaBlocksScripts() {
   const scripts = document.querySelectorAll( 'script[id*="novablocks"][id$="-js"][src*="frontend"]' );
 
   scripts.forEach( ( script ) => {
+    // Skip scripts that syncPageAssets() just loaded for the first time —
+    // they will run their own domReady() callbacks. Re-executing them would
+    // cause double-initialization (duplicate share icons, toggled handlers
+    // that cancel each other out, etc.).
+    if ( freshlyLoadedScriptIds.has( script.id ) ) {
+      return;
+    }
+
     const newScript = document.createElement( 'script' );
     // Append a cache-bust param so the browser treats it as a new request
     // (avoids de-duplication of identical src URLs).

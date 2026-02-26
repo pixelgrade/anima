@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import {
   syncBodyClasses,
+  syncPageAssets,
   syncDocumentTitle,
   syncAdminBar,
   reinitComponents,
@@ -119,6 +120,7 @@ export const pageTransition = {
 
     // Sync WordPress state from new page HTML.
     const html = next.html;
+    syncPageAssets( html );
     syncBodyClasses( html );
     syncDocumentTitle( html );
 
