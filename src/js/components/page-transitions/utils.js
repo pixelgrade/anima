@@ -207,38 +207,6 @@ export function syncDocumentTitle( html ) {
 }
 
 /**
- * Update admin bar Edit/Customize links after AJAX page swap.
- * Reads post data from the inline JSON block in the new page's HTML.
- */
-export function syncAdminBar( containerEl ) {
-  if ( ! $( 'body' ).hasClass( 'admin-bar' ) ) {
-    return;
-  }
-
-  // Read post data from the inline JSON block in the new page.
-  const $pageData = $( containerEl ).parent().find( '#anima-page-data' );
-  if ( ! $pageData.length ) {
-    return;
-  }
-
-  try {
-    const data = JSON.parse( $pageData.text() );
-
-    if ( data.editLink ) {
-      $( '#wp-admin-bar-edit a' ).attr( 'href', data.editLink );
-    }
-
-    const $customizeLink = $( '#wp-admin-bar-customize a' );
-    if ( $customizeLink.length ) {
-      const baseUrl = $customizeLink.attr( 'href' ).replace( /url=.*$/, '' );
-      $customizeLink.attr( 'href', baseUrl + 'url=' + encodeURIComponent( window.location.href ) );
-    }
-  } catch ( e ) {
-    // Silently fail — admin bar links just won't update.
-  }
-}
-
-/**
  * Re-initialize Anima's JS components on the new page DOM.
  * Follows Pile's "re-scan and re-bind" pattern.
  *

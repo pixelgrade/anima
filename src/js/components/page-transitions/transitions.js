@@ -3,11 +3,11 @@ import {
   syncBodyClasses,
   syncPageAssets,
   syncDocumentTitle,
-  syncAdminBar,
   reinitComponents,
   cleanupBeforeTransition,
   trackPageview,
 } from './utils';
+import { syncAdminBar } from './admin-bar';
 
 /**
  * Wraps a GSAP timeline in a Promise.
