@@ -124,8 +124,8 @@ export const pageTransition = {
     syncBodyClasses( html );
     syncDocumentTitle( html );
 
-    // Sync admin bar using the container element (reads inline JSON).
-    syncAdminBar( next.container );
+    // Sync admin bar from raw HTML (full #wpadminbar replacement).
+    syncAdminBar( html );
 
     // Re-initialize components on new DOM.
     // This creates fresh Hero instances which run their own intro timelines.
