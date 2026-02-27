@@ -37,6 +37,8 @@ module.exports = {
     './dist/js/page-transitions.min' : './src/js/page-transitions.js',
     './dist/js/admin/customizer-nav-menus' : './src/js/admin/customizer-nav-menus.js',
     './dist/js/admin/customizer-nav-menus.min' : './src/js/admin/customizer-nav-menus.js',
+    './dist/js/admin/project-color' : './src/js/admin/project-color.js',
+    './dist/js/admin/project-color.min' : './src/js/admin/project-color.js',
   },
   optimization: {
     minimize: true,

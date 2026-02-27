@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import barba from '@barba/core';
-import { pageTransition } from './transitions';
+import { pageTransition, cardExpandTransition } from './transitions';
 import { playLoadingAnimation } from './loading-animation';
 
 // Ignored URL patterns — file extensions, admin, anchors.
@@ -62,7 +62,8 @@ export function init() {
       return false;
     },
 
-    transitions: [ pageTransition ],
+    // Card-expand first (has `custom` matcher), generic fallback second.
+    transitions: [ cardExpandTransition, pageTransition ],
 
     // Error fallback: if AJAX navigation fails, do a full page reload.
     requestError: ( trigger, action, url ) => {

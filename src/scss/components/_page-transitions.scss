@@ -126,3 +126,38 @@
     visibility: hidden;
   }
 }
+
+// ==========================================================================
+// Card hover border — colored border on grid cards
+// Uses the project color with accent color fallback.
+// ==========================================================================
+.has-page-transitions .nb-supernova-item {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border: 0 solid var(--anima-project-color, var(--sm-current-accent-color));
+    pointer-events: none;
+    z-index: 100;
+    transition: border-width 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  &:hover::after {
+    border-width: 10px;
+  }
+}
+
+// Disable hover border on touch devices (no hover capability)
+@media (hover: none) {
+  .has-page-transitions .nb-supernova-item::after {
+    display: none;
+  }
+}
+
+// Hide hover border during card-expand transition
+.is-transitioning .nb-supernova-item::after {
+  border-width: 0 !important;
+  transition: none;
+}
