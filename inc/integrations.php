@@ -34,6 +34,11 @@ require_once trailingslashit( get_template_directory() ) . 'inc/integrations/jet
 require_once trailingslashit( get_template_directory() ) . 'inc/integrations/pixelgrade-care.php';
 
 /**
+ * Load Page Transitions integration for this theme.
+ */
+require_once trailingslashit( get_template_directory() ) . 'inc/integrations/page-transitions.php';
+
+/**
  * Load WooCommerce integration for this theme
  * This has to be loaded before inc/admin/admin.php
  */
