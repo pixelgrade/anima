@@ -140,31 +140,6 @@ function anima_page_transitions_overlay_markup() {
 add_action( 'wp_footer', 'anima_page_transitions_overlay_markup', 5 );
 
 /**
- * Output post data as inline JSON for AJAX page sync.
- * This is read by the JS after each AJAX page swap.
- */
-function anima_page_transitions_post_data() {
-	if ( ! anima_page_transitions_enabled() ) {
-		return;
-	}
-
-	$post_id   = get_queried_object_id();
-	$edit_link = '';
-
-	if ( $post_id && current_user_can( 'edit_post', $post_id ) ) {
-		$edit_link = get_edit_post_link( $post_id, 'raw' );
-	}
-
-	echo '<script type="application/json" id="anima-page-data">';
-	echo wp_json_encode( [
-		'postId'   => $post_id,
-		'editLink' => $edit_link,
-	] );
-	echo '</script>';
-}
-add_action( 'wp_footer', 'anima_page_transitions_post_data', 1 );
-
-/**
  * Add body class when page transitions are enabled.
  */
 function anima_page_transitions_body_class( $classes ) {
