@@ -256,6 +256,22 @@ export function reinitComponents() {
   // so Nova Blocks' block JS (header sticky, color signal, etc.) must re-run.
   reinitNovaBlocksScripts();
 
+  // Trigger the bully bullet pop animation after all scripts have been queued.
+  // The bully plugin normally does this on window.load, which won't fire again.
+  // Bullets default to opacity: 0 and only become visible via the --pop class.
+  // Use setTimeout to yield so dynamically-inserted scripts execute first,
+  // then rAF to ensure the DOM has been painted.
+  setTimeout( () => {
+    requestAnimationFrame( () => {
+      $( '.c-bully .c-bully__bullet' ).not( '.c-bully__bullet--active' ).each( function( i ) {
+        const $bullet = $( this );
+        setTimeout( () => {
+          $bullet.addClass( 'c-bully__bullet--pop' );
+        }, i * 400 );
+      } );
+    } );
+  }, 0 );
+
   // Re-trigger WooCommerce cart fragments if available.
   if ( typeof wc_cart_fragments_params !== 'undefined' ) {
     $( document.body ).trigger( 'wc_fragment_refresh' );
@@ -264,8 +280,11 @@ export function reinitComponents() {
   // Fire a custom event that other scripts can hook into.
   $( document ).trigger( 'anima:page-transition-complete' );
 
-  // Dispatch a resize event to recalculate any layout-dependent JS.
+  // Dispatch resize + scroll events for layout-dependent JS.
+  // Resize: recalculates layout (Hero, GlobalService).
+  // Scroll: triggers bully's rAF loop to process the new elements.
   window.dispatchEvent( new Event( 'resize' ) );
+  window.dispatchEvent( new Event( 'scroll' ) );
 }
 
 /**
@@ -280,6 +299,11 @@ export function reinitComponents() {
  * and creates new instances for the new elements.
  */
 function reinitNovaBlocksScripts() {
+  // Re-execute the bully vendor script first so it creates a fresh IIFE
+  // with an empty elements array and a new .c-bully DOM element.
+  // The old instance's rAF loop will harmlessly reference the removed DOM.
+  reinitBullyScript();
+
   const scripts = document.querySelectorAll( 'script[id*="novablocks"][id$="-js"][src*="frontend"]' );
 
   scripts.forEach( ( script ) => {
@@ -301,6 +325,33 @@ function reinitNovaBlocksScripts() {
 }
 
 /**
+ * Re-execute the jquery.bully.js vendor script to create a fresh instance.
+ *
+ * The bully plugin uses a closure-scoped elements array and rAF loop that
+ * persist across page transitions. Since there's no destroy API, we remove
+ * the old .c-bully DOM element (done in cleanupBeforeTransition) and
+ * re-execute the script so the IIFE runs again with a clean slate.
+ *
+ * After the new bully instance is ready and position-indicators has run
+ * (via the core frontend script), we trigger the bullet pop animation
+ * that normally only fires on window.load.
+ *
+ * The old rAF loop continues but operates on the removed DOM — harmless.
+ * The new IIFE creates a fresh .c-bully, empty elements array, and new loop.
+ */
+function reinitBullyScript() {
+  const bullyScript = document.querySelector( 'script[id*="novablocks-bully"][src]' );
+  if ( ! bullyScript ) {
+    return;
+  }
+
+  const newScript = document.createElement( 'script' );
+  newScript.src = bullyScript.src + ( bullyScript.src.includes( '?' ) ? '&' : '?' ) + '_barba=' + Date.now();
+  newScript.async = false;
+  document.body.appendChild( newScript );
+}
+
+/**
  * Cleanup heavy resources before page transition.
  */
 export function cleanupBeforeTransition() {
@@ -313,6 +364,12 @@ export function cleanupBeforeTransition() {
     this.load();
     $( this ).remove();
   } );
+
+  // Remove the bully navigation dots. The jquery.bully.js IIFE keeps
+  // closure-scoped state (elements array, rAF loop) that can't be reset
+  // externally. Removing the DOM element and re-executing the vendor
+  // script in reinitNovaBlocksScripts() creates a fresh instance.
+  $( '.c-bully' ).remove();
 }
 
 /**
