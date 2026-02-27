@@ -1235,35 +1235,6 @@ function syncDocumentTitle(html) {
 }
 
 /**
- * Update admin bar Edit/Customize links after AJAX page swap.
- * Reads post data from the inline JSON block in the new page's HTML.
- */
-function syncAdminBar(containerEl) {
-  if (!external_jQuery_default()('body').hasClass('admin-bar')) {
-    return;
-  }
-
-  // Read post data from the inline JSON block in the new page.
-  const $pageData = external_jQuery_default()(containerEl).parent().find('#anima-page-data');
-  if (!$pageData.length) {
-    return;
-  }
-  try {
-    const data = JSON.parse($pageData.text());
-    if (data.editLink) {
-      external_jQuery_default()('#wp-admin-bar-edit a').attr('href', data.editLink);
-    }
-    const $customizeLink = external_jQuery_default()('#wp-admin-bar-customize a');
-    if ($customizeLink.length) {
-      const baseUrl = $customizeLink.attr('href').replace(/url=.*$/, '');
-      $customizeLink.attr('href', baseUrl + 'url=' + encodeURIComponent(window.location.href));
-    }
-  } catch (e) {
-    // Silently fail — admin bar links just won't update.
-  }
-}
-
-/**
  * Re-initialize Anima's JS components on the new page DOM.
  * Follows Pile's "re-scan and re-bind" pattern.
  *
@@ -1423,7 +1394,67 @@ function trackPageview() {
     _gaq.push(['_trackPageview']);
   }
 }
+;// ./src/js/components/page-transitions/admin-bar.js
+/**
+ * Sync the WordPress admin bar from the new page's raw HTML.
+ *
+ * Replaces the inner content of #wpadminbar with the version from the AJAX
+ * response. After replacement, re-initializes WordPress's admin bar JS so
+ * dropdown menus and other interactive features continue to work.
+ *
+ * @param {string} html - Full HTML response from Barba's AJAX fetch.
+ */
+function syncAdminBar(html) {
+  const currentAdminBar = document.getElementById('wpadminbar');
+  if (!currentAdminBar) {
+    return;
+  }
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+  const newAdminBar = doc.getElementById('wpadminbar');
+  if (!newAdminBar) {
+    return;
+  }
+
+  // Replace inner HTML to update all admin bar items.
+  currentAdminBar.innerHTML = newAdminBar.innerHTML;
+
+  // Copy over any changed attributes (classes, aria attributes, etc.).
+  Array.from(newAdminBar.attributes).forEach(attr => {
+    currentAdminBar.setAttribute(attr.name, attr.value);
+  });
+
+  // Re-initialize WordPress admin bar JS.
+  // The admin bar script uses event delegation on document for most interactions,
+  // but some hover/click handlers are bound directly to elements.
+  // Re-executing the script re-binds those handlers to the new DOM nodes.
+  reinitAdminBarScripts();
+}
+
+/**
+ * Re-initialize WordPress admin bar interactive behavior.
+ *
+ * WordPress's admin-bar.js is enqueued as `admin-bar` and binds hover/click
+ * handlers to admin bar elements. After innerHTML replacement, those handlers
+ * are lost. We re-execute the script to re-bind them.
+ */
+function reinitAdminBarScripts() {
+  const adminBarScript = document.getElementById('admin-bar-js');
+  if (!adminBarScript || !adminBarScript.src) {
+    return;
+  }
+  const newScript = document.createElement('script');
+  newScript.src = adminBarScript.src + (adminBarScript.src.includes('?') ? '&' : '?') + '_barba=' + Date.now();
+  newScript.async = false;
+  document.body.appendChild(newScript);
+
+  // Clean up after execution.
+  newScript.onload = () => {
+    newScript.remove();
+  };
+}
 ;// ./src/js/components/page-transitions/transitions.js
+
 
 
 
@@ -1540,8 +1571,8 @@ const pageTransition = {
     syncBodyClasses(html);
     syncDocumentTitle(html);
 
-    // Sync admin bar using the container element (reads inline JSON).
-    syncAdminBar(next.container);
+    // Sync admin bar from raw HTML (full #wpadminbar replacement).
+    syncAdminBar(html);
 
     // Re-initialize components on new DOM.
     // This creates fresh Hero instances which run their own intro timelines.
