@@ -3,6 +3,7 @@ import {
   syncBodyClasses,
   syncPageAssets,
   syncDocumentTitle,
+  syncHeaderColorSignal,
   reinitComponents,
   cleanupBeforeTransition,
   trackPageview,
@@ -127,17 +128,29 @@ export const pageTransition = {
     // Sync admin bar from raw HTML (full #wpadminbar replacement).
     syncAdminBar( html );
 
-    // Re-initialize components on new DOM.
-    // This creates fresh Hero instances which run their own intro timelines.
-    reinitComponents();
+    // Save the header's correct color signal classes from the server HTML.
+    // The Nova Blocks header script will re-execute and fail to detect colors
+    // in FSE templates (it queries `.site-main .hentry` which doesn't exist).
+    // We restore the correct classes after the script finishes.
+    syncHeaderColorSignal( html );
 
-    // Track pageview.
-    trackPageview();
+    // Defer component reinitialization until after the browser has reflowed the
+    // new DOM. Nova Blocks color signal scripts read computed styles (padding,
+    // background-color) and Hero.js calls getBoundingClientRect() — both return
+    // stale values if called before the browser recalculates layout.
+    // Double-rAF ensures styles are applied and one paint cycle has completed.
+    return new Promise( ( resolve ) => {
+      requestAnimationFrame( () => {
+        requestAnimationFrame( () => {
+          reinitComponents();
+          trackPageview();
 
-    // Play the border-only enter animation.
-    const timeline = createBorderInTimeline();
-    timeline.play();
+          const timeline = createBorderInTimeline();
+          timeline.play();
 
-    return timelinePromise( timeline );
+          timelinePromise( timeline ).then( resolve );
+        } );
+      } );
+    } );
   },
 };

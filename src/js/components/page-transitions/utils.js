@@ -207,6 +207,100 @@ export function syncDocumentTitle( html ) {
 }
 
 /**
+ * Restore the header's color signal classes from the server-rendered HTML.
+ *
+ * In FSE templates, the Nova Blocks header color detection queries
+ * `.site-main .hentry` to find the first block's palette — but FSE themes
+ * don't have those elements (the structure is .wp-site-blocks > .nb-sidecar
+ * > .entry-content). So after the header script re-executes during AJAX
+ * navigation, it fails to detect colors and strips the correct classes.
+ *
+ * This function extracts the server-rendered header classes from the raw HTML
+ * (which WordPress computed correctly) and re-applies them after the header
+ * script has run.
+ */
+export function syncHeaderColorSignal( html ) {
+  // Extract the nb-header element's class attribute from the raw HTML.
+  const match = html.match( /<div[^>]+class="([^"]*nb-header nb-header--main[^"]*)"/ );
+  if ( ! match || ! match[ 1 ] ) {
+    return;
+  }
+
+  const serverClasses = match[ 1 ];
+
+  // Extract color-related classes from the server-rendered HTML.
+  const colorClassPattern = /\b(sm-palette-\S+|sm-variation-\S+|sm-color-signal-\S+|sm-light|sm-dark)\b/g;
+  const serverColorClasses = serverClasses.match( colorClassPattern );
+  if ( ! serverColorClasses ) {
+    return;
+  }
+
+  // Store for later application (after Nova Blocks scripts have re-executed).
+  syncHeaderColorSignal._pendingClasses = serverColorClasses;
+  syncHeaderColorSignal._serverHtml = html;
+}
+
+/**
+ * Apply the stored header color classes to DOM elements.
+ *
+ * This is called in TWO places:
+ * 1. BEFORE Nova Blocks scripts re-execute — so when the Header constructor
+ *    runs initializeColors(), it reads the correct classes from the DOM and
+ *    freezes them. This is the primary fix for FSE themes where the header
+ *    script's `.site-main .hentry` query fails.
+ * 2. AFTER Nova Blocks scripts finish — as a safety net in case the scripts
+ *    overwrote our classes during initialization.
+ */
+function applyPendingHeaderColorSignal() {
+  const classes = syncHeaderColorSignal._pendingClasses;
+  if ( ! classes ) {
+    return;
+  }
+
+  const header = document.querySelector( '.nb-header--main' );
+  if ( ! header ) {
+    return;
+  }
+
+  // Remove any existing color classes that may be wrong.
+  const existing = header.className.match( /\b(sm-palette-\S+|sm-variation-\S+|sm-color-signal-\S+|sm-light|sm-dark)\b/g );
+  if ( existing ) {
+    existing.forEach( cls => header.classList.remove( cls ) );
+  }
+
+  // Apply the correct classes from the server HTML.
+  classes.forEach( cls => header.classList.add( cls ) );
+
+  // Also fix the header row if present.
+  const headerRow = header.querySelector( '.nb-header-row--primary' );
+  if ( headerRow ) {
+    const rowMatch = syncHeaderColorSignal._serverHtml &&
+      syncHeaderColorSignal._serverHtml.match( /<div[^>]+class="([^"]*nb-header-row--primary[^"]*)"/ );
+    if ( rowMatch ) {
+      const rowColorClasses = rowMatch[ 1 ].match( /\b(sm-palette-\S+|sm-variation-\S+|sm-color-signal-\S+|sm-light|sm-dark)\b/g );
+      if ( rowColorClasses ) {
+        const existingRow = headerRow.className.match( /\b(sm-palette-\S+|sm-variation-\S+|sm-color-signal-\S+|sm-light|sm-dark)\b/g );
+        if ( existingRow ) {
+          existingRow.forEach( cls => headerRow.classList.remove( cls ) );
+        }
+        rowColorClasses.forEach( cls => headerRow.classList.add( cls ) );
+      }
+    }
+  }
+
+  // Don't clear _pendingClasses here — we need them for the post-script safety net.
+}
+
+/**
+ * Clear the pending header color signal data.
+ * Called after the post-script safety net has run.
+ */
+function clearPendingHeaderColorSignal() {
+  syncHeaderColorSignal._pendingClasses = null;
+  syncHeaderColorSignal._serverHtml = null;
+}
+
+/**
  * Re-initialize Anima's JS components on the new page DOM.
  * Follows Pile's "re-scan and re-bind" pattern.
  *
@@ -224,22 +318,6 @@ export function reinitComponents() {
   // so Nova Blocks' block JS (header sticky, color signal, etc.) must re-run.
   reinitNovaBlocksScripts();
 
-  // Trigger the bully bullet pop animation after all scripts have been queued.
-  // The bully plugin normally does this on window.load, which won't fire again.
-  // Bullets default to opacity: 0 and only become visible via the --pop class.
-  // Use setTimeout to yield so dynamically-inserted scripts execute first,
-  // then rAF to ensure the DOM has been painted.
-  setTimeout( () => {
-    requestAnimationFrame( () => {
-      $( '.c-bully .c-bully__bullet' ).not( '.c-bully__bullet--active' ).each( function( i ) {
-        const $bullet = $( this );
-        setTimeout( () => {
-          $bullet.addClass( 'c-bully__bullet--pop' );
-        }, i * 400 );
-      } );
-    } );
-  }, 0 );
-
   // Re-trigger WooCommerce cart fragments if available.
   if ( typeof wc_cart_fragments_params !== 'undefined' ) {
     $( document.body ).trigger( 'wc_fragment_refresh' );
@@ -250,7 +328,7 @@ export function reinitComponents() {
 
   // Dispatch resize + scroll events for layout-dependent JS.
   // Resize: recalculates layout (Hero, GlobalService).
-  // Scroll: triggers bully's rAF loop to process the new elements.
+  // Scroll: triggers Hero.update() and bully's rAF loop to process new elements.
   window.dispatchEvent( new Event( 'resize' ) );
   window.dispatchEvent( new Event( 'scroll' ) );
 }
@@ -265,6 +343,10 @@ export function reinitComponents() {
  *
  * We dynamically load fresh <script> tags so each script re-queries the DOM
  * and creates new instances for the new elements.
+ *
+ * After ALL scripts have loaded and executed, dispatches resize + scroll
+ * events so scripts like the Doppler parallax effect recalculate their
+ * initial positions with correct DOM measurements.
  */
 function reinitNovaBlocksScripts() {
   // Re-execute the bully vendor script first so it creates a fresh IIFE
@@ -272,7 +354,44 @@ function reinitNovaBlocksScripts() {
   // The old instance's rAF loop will harmlessly reference the removed DOM.
   reinitBullyScript();
 
+  // Apply correct header color classes BEFORE the header script re-executes.
+  // The Header constructor calls initializeColors() which freezes whatever
+  // sm-* classes are on the header element at construction time. In FSE
+  // themes, the script's own color detection fails (queries `.site-main
+  // .hentry` which doesn't exist), so it would freeze empty/wrong classes.
+  // By setting the correct classes now, initializeColors() freezes the right
+  // ones, and toggleClasses() on sticky threshold will use the correct set.
+  applyPendingHeaderColorSignal();
+
   const scripts = document.querySelectorAll( 'script[id*="novablocks"][id$="-js"][src*="frontend"]' );
+  let pending = 0;
+
+  const onAllLoaded = () => {
+    // Nova Blocks scripts have now executed their domReady() callbacks
+    // and measured the DOM. Force a recalculation so scripts like the
+    // Doppler parallax effect get correct initial positions.
+    // Use rAF to ensure measurements happen after the browser has
+    // applied any style changes from the newly-loaded scripts.
+    requestAnimationFrame( () => {
+      // Safety net: re-apply header color classes in case the header script
+      // overwrote them during its initialization sequence.
+      applyPendingHeaderColorSignal();
+      clearPendingHeaderColorSignal();
+
+      // Trigger the bully bullet pop animation. The bully plugin normally
+      // does this on window.load, which won't fire again after AJAX nav.
+      // Bullets default to opacity: 0 and only become visible via --pop.
+      $( '.c-bully .c-bully__bullet' ).not( '.c-bully__bullet--active' ).each( function( i ) {
+        const $bullet = $( this );
+        setTimeout( () => {
+          $bullet.addClass( 'c-bully__bullet--pop' );
+        }, i * 400 );
+      } );
+
+      window.dispatchEvent( new Event( 'resize' ) );
+      window.dispatchEvent( new Event( 'scroll' ) );
+    } );
+  };
 
   scripts.forEach( ( script ) => {
     // Skip scripts that syncPageAssets() just loaded for the first time —
@@ -283,11 +402,18 @@ function reinitNovaBlocksScripts() {
       return;
     }
 
+    pending++;
     const newScript = document.createElement( 'script' );
     // Append a cache-bust param so the browser treats it as a new request
     // (avoids de-duplication of identical src URLs).
     newScript.src = script.src + ( script.src.includes( '?' ) ? '&' : '?' ) + '_barba=' + Date.now();
     newScript.async = false;
+    newScript.onload = () => {
+      pending--;
+      if ( pending === 0 ) {
+        onAllLoaded();
+      }
+    };
     document.body.appendChild( newScript );
   } );
 }
