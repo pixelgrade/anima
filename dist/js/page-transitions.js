@@ -1,262 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 
-;// ./src/js/components/page-transitions/transitions.js
-/**
- * GSAP Animation Timelines for Page Transitions
- *
- * Ported from Pile theme's AjaxLoading.js — border expand/collapse
- * with centered logo reveal.
- */
-
-const DURATION = 0.6;
-const EASING = 'power4.inOut';
-
-/**
- * Get the border overlay element.
- */
-function getBorderEl() {
-  return document.querySelector('.js-page-transition-border');
-}
-
-/**
- * Calculate border width needed to fully cover the viewport.
- */
-function getFullCoverBorderWidth() {
-  return Math.max(window.innerWidth, window.innerHeight) / 2 + 10;
-}
-
-/**
- * Safety: force-clear the overlay if animation gets stuck.
- */
-function safetyTimeout(border, resolve, delay = 3000) {
-  return setTimeout(() => {
-    console.warn('[page-transitions] Animation timed out, force-clearing overlay.');
-    border.style.borderWidth = '0px';
-    border.style.opacity = '0';
-    border.style.pointerEvents = 'none';
-    document.body.classList.remove('is-loading');
-    document.body.classList.add('has-loaded', 'is-loaded');
-    resolve();
-  }, delay);
-}
-
-/**
- * Page Leave animation — border expands inward, logo appears.
- */
-function pageLeave() {
-  return new Promise(resolve => {
-    const border = getBorderEl();
-    if (!border) {
-      console.log('[page-transitions] pageLeave: no border element found');
-      resolve();
-      return;
-    }
-    const gsap = window.gsap;
-    if (!gsap) {
-      console.log('[page-transitions] pageLeave: GSAP not available');
-      resolve();
-      return;
-    }
-    border.style.pointerEvents = 'auto';
-    const coverWidth = getFullCoverBorderWidth();
-    console.log('[page-transitions] pageLeave: starting, coverWidth=' + coverWidth);
-    const timeout = safetyTimeout(border, resolve);
-    const tl = gsap.timeline({
-      onComplete: () => {
-        clearTimeout(timeout);
-        console.log('[page-transitions] pageLeave: complete');
-        resolve();
-      }
-    });
-    tl.fromTo(border, {
-      borderWidth: 0,
-      opacity: 1
-    }, {
-      borderWidth: coverWidth,
-      duration: DURATION,
-      ease: EASING
-    });
-    const mainContent = document.querySelector('.wp-site-blocks') || document.querySelector('main') || document.querySelector('.entry-content');
-    if (mainContent) {
-      tl.to(mainContent, {
-        opacity: 0,
-        duration: 0.3,
-        ease: 'power2.out'
-      }, 0);
-    }
-    const openMenu = document.querySelector('.c-navbar.is-open');
-    if (openMenu) {
-      openMenu.classList.remove('is-open');
-      document.body.classList.remove('nav-is-open');
-    }
-  });
-}
-
-/**
- * Page Enter animation — border collapses outward, content fades in.
- */
-function pageEnter() {
-  return new Promise(resolve => {
-    const border = getBorderEl();
-    if (!border) {
-      console.log('[page-transitions] pageEnter: no border element found');
-      resolve();
-      return;
-    }
-    const gsap = window.gsap;
-    if (!gsap) {
-      console.log('[page-transitions] pageEnter: GSAP not available');
-      resolve();
-      return;
-    }
-    console.log('[page-transitions] pageEnter: starting');
-    const timeout = safetyTimeout(border, resolve);
-    const tl = gsap.timeline({
-      onComplete: () => {
-        clearTimeout(timeout);
-        border.style.pointerEvents = 'none';
-        gsap.set(border, {
-          borderWidth: 0,
-          opacity: 0
-        });
-        console.log('[page-transitions] pageEnter: complete');
-        resolve();
-      }
-    });
-    tl.to(border, {
-      borderWidth: 0,
-      duration: DURATION,
-      ease: EASING
-    });
-    const heroElements = document.querySelectorAll('.novablocks-hero__inner-container > *, ' + '.nb-supernova-item__inner-container > *');
-    if (heroElements.length) {
-      tl.fromTo(heroElements, {
-        opacity: 0,
-        y: 30
-      }, {
-        opacity: 1,
-        y: 0,
-        duration: 0.4,
-        stagger: 0.08,
-        ease: 'power2.out'
-      }, '-=0.4');
-    }
-    const heroMedia = document.querySelectorAll('.nb-supernova-item__media-wrapper');
-    if (heroMedia.length) {
-      tl.fromTo(heroMedia, {
-        scale: 1.05,
-        opacity: 0
-      }, {
-        scale: 1,
-        opacity: 1,
-        duration: 0.4,
-        ease: 'power2.out'
-      }, '-=0.4');
-    }
-  });
-}
-
-/**
- * Initial page load animation — the "opening curtain" from Pile.
- */
-function initialLoadAnimation() {
-  return new Promise(resolve => {
-    const border = getBorderEl();
-    if (!border) {
-      console.log('[page-transitions] initialLoad: no border element found');
-      resolve();
-      return;
-    }
-    const gsap = window.gsap;
-    if (!gsap) {
-      console.log('[page-transitions] initialLoad: GSAP not available, hiding border');
-      border.style.display = 'none';
-      resolve();
-      return;
-    }
-    const logoFill = border.querySelector('.border-logo-fill');
-    const logoBgScale = border.querySelector('.border-logo-bgscale');
-    const coverWidth = getFullCoverBorderWidth();
-    console.log('[page-transitions] initialLoad: starting, coverWidth=' + coverWidth);
-    console.log('[page-transitions] initialLoad: gsap version=' + gsap.version);
-    console.log('[page-transitions] initialLoad: logoFill=' + !!logoFill + ', logoBgScale=' + !!logoBgScale);
-
-    // Start with border fully covering the viewport.
-    gsap.set(border, {
-      borderWidth: coverWidth,
-      opacity: 1
-    });
-    const timeout = safetyTimeout(border, resolve, 4000);
-    const tl = gsap.timeline({
-      onComplete: () => {
-        clearTimeout(timeout);
-        border.style.pointerEvents = 'none';
-        border.style.borderWidth = '0px';
-        border.style.opacity = '0';
-        document.body.classList.remove('is-loading');
-        document.body.classList.add('has-loaded', 'is-loaded');
-        console.log('[page-transitions] initialLoad: complete');
-        resolve();
-      }
-    });
-
-    // 1. Logo fills in from left.
-    if (logoFill) {
-      tl.fromTo(logoFill, {
-        x: '-100%'
-      }, {
-        x: '0%',
-        duration: 0.3,
-        ease: 'power2.inOut'
-      }, 0.2);
-    }
-
-    // 2. Background scales away.
-    if (logoBgScale) {
-      tl.to(logoBgScale, {
-        scale: 1.2,
-        opacity: 0,
-        duration: 0.3,
-        ease: 'power2.inOut'
-      }, 0.5);
-    }
-
-    // 3. Border collapses.
-    tl.to(border, {
-      borderWidth: 0,
-      duration: DURATION,
-      ease: EASING
-    }, 0.5);
-
-    // 4. Hero content fades in.
-    const heroElements = document.querySelectorAll('.novablocks-hero__inner-container > *, ' + '.nb-supernova-item__inner-container > *');
-    if (heroElements.length) {
-      tl.fromTo(heroElements, {
-        opacity: 0,
-        y: 30
-      }, {
-        opacity: 1,
-        y: 0,
-        duration: 0.4,
-        stagger: 0.08,
-        ease: 'power2.out'
-      }, 0.7);
-    }
-    const heroMedia = document.querySelectorAll('.nb-supernova-item__media-wrapper');
-    if (heroMedia.length) {
-      tl.fromTo(heroMedia, {
-        scale: 1.2,
-        opacity: 0
-      }, {
-        scale: 1,
-        opacity: 1,
-        duration: 0.4,
-        ease: 'power2.out'
-      }, 0.7);
-    }
-  });
-}
 ;// ./src/js/components/page-transitions/utils.js
 /**
  * Utility functions for page transitions.
@@ -307,7 +51,15 @@ function syncAdminBar(newDocument) {
  * Re-initialize Anima theme components after DOM swap.
  */
 function reinitComponents() {
-  // Trigger hero re-initialization.
+  // Tell scripts.js to re-create App (Navbar, Hero, SearchOverlay, etc.).
+  document.dispatchEvent(new CustomEvent('anima:page-transition'));
+
+  // Re-execute Nova Blocks frontend scripts that use ready() —
+  // since readyState is already 'complete', ready() fires immediately
+  // when the script re-runs, re-creating Header, Supernova, etc.
+  rerunNovaBlocksScripts();
+
+  // Trigger resize/scroll for any remaining listeners.
   window.dispatchEvent(new Event('resize'));
   window.dispatchEvent(new Event('scroll'));
 
@@ -320,6 +72,28 @@ function reinitComponents() {
   if (typeof jQuery !== 'undefined' && jQuery.fn.wc_cart_fragments) {
     jQuery(document.body).trigger('wc_fragment_refresh');
   }
+}
+
+/**
+ * Re-execute Nova Blocks frontend scripts after DOM swap.
+ *
+ * Nova Blocks scripts use ready() which fires immediately when
+ * readyState is already 'complete'. By creating fresh <script> tags
+ * with the same src, the browser re-executes the initialization code.
+ */
+function rerunNovaBlocksScripts() {
+  // Key Nova Blocks scripts that need re-init after DOM swap.
+  const scriptPatterns = ['nova-blocks/build/color-signal/frontend', 'block-library/blocks/header/frontend', 'block-library/blocks/supernova/frontend'];
+  const existingScripts = document.querySelectorAll('script[src]');
+  existingScripts.forEach(script => {
+    const src = script.src;
+    const shouldRerun = scriptPatterns.some(pattern => src.includes(pattern));
+    if (shouldRerun) {
+      const newScript = document.createElement('script');
+      newScript.src = src;
+      script.parentNode.insertBefore(newScript, script.nextSibling);
+    }
+  });
 }
 
 /**
@@ -434,19 +208,16 @@ function syncHeadAssets(newDocument) {
 }
 ;// ./src/js/components/page-transitions/index.js
 /**
- * Page Transitions — View Transitions API + Navigation API + GSAP
+ * Page Transitions — View Transitions API + Navigation API
  *
- * Uses the Navigation API to intercept same-origin link clicks,
- * then document.startViewTransition() to orchestrate the transition
- * with GSAP-powered border expand/collapse animations.
+ * Proof of concept: uses the browser's native View Transitions API
+ * cross-fade for page-to-page transitions. No GSAP, no overlays.
  *
  * Graceful degradation:
- * - No Navigation API → falls back to click event interception
- * - No View Transitions API → falls back to direct GSAP animations
- * - No GSAP → instant page swap (still AJAX, no animation)
- * - No JS → normal page loads (links work as usual)
+ * - No Navigation API -> falls back to click event interception
+ * - No View Transitions API -> instant swap (no animation)
+ * - No JS -> normal page loads (links work as usual)
  */
-
 
 
 let isTransitioning = false;
@@ -476,9 +247,18 @@ function performSwap(newDocument) {
     currentContainer.innerHTML = newContainer.innerHTML;
   }
   syncBodyClasses(newDocument);
+
+  // The new document arrives with is-loading from PHP body_class.
+  // Since we're doing an AJAX swap (not a fresh load), mark it as loaded immediately.
+  document.body.classList.remove('is-loading');
+  document.body.classList.add('has-loaded', 'is-loaded');
   syncDocumentTitle(newDocument);
   syncAdminBar(newDocument);
-  syncHeadAssets(newDocument);
+  try {
+    syncHeadAssets(newDocument);
+  } catch (e) {
+    // Don't let head asset sync errors block the transition.
+  }
 
   // Scroll to top.
   window.scrollTo(0, 0);
@@ -493,54 +273,39 @@ async function handleTransition(url, signal) {
   }
   isTransitioning = true;
   try {
-    // Start fetching the new page immediately.
-    const fetchPromise = fetch(url, {
+    // Fetch the new page.
+    const response = await fetch(url, {
       signal,
       credentials: 'same-origin',
       headers: {
         'X-Requested-With': 'XMLHttpRequest'
       }
     });
-
-    // Run page leave animation (border expands inward).
-    await pageLeave();
-
-    // Wait for fetch to complete.
-    const response = await fetchPromise;
     if (!response.ok) {
-      // Fallback: navigate normally on fetch error.
       window.location.href = url;
       return;
     }
     const html = await response.text();
     const newDocument = parseHTML(html);
 
-    // Use View Transitions API if available for the DOM swap.
+    // Use View Transitions API if available — browser handles the cross-fade.
     if (document.startViewTransition) {
       const transition = document.startViewTransition(() => {
         performSwap(newDocument);
       });
-
-      // Wait for the DOM update to be ready.
-      await transition.updateCallbackDone;
+      await transition.finished;
     } else {
       // No View Transitions API — swap directly.
       performSwap(newDocument);
     }
 
-    // Run page enter animation (border collapses outward).
-    await pageEnter();
-
     // Post-transition tasks.
     reinitComponents();
     trackPageview(url);
   } catch (error) {
-    // AbortError means the user navigated away — don't fallback.
     if (error.name === 'AbortError') {
       return;
     }
-
-    // Any other error: fallback to normal navigation.
     console.error('Page transition failed:', error);
     window.location.href = url;
   } finally {
@@ -550,41 +315,23 @@ async function handleTransition(url, signal) {
 
 /**
  * Initialize using the Navigation API (preferred).
- * This gives us proper history management, abort signals, and
- * handles both link clicks and back/forward navigation.
  */
 function initWithNavigationAPI() {
   if (typeof navigation === 'undefined') {
     return false;
   }
   navigation.addEventListener('navigate', event => {
-    // Skip non-interceptable navigations.
     if (!event.canIntercept || event.hashChange || event.downloadRequest || event.formData) {
       return;
     }
     const url = new URL(event.destination.url);
-
-    // Only handle same-origin navigations.
     if (url.origin !== location.origin) {
       return;
     }
-
-    // Check exclusions.
     if (shouldExcludeUrl(event.destination.url, config)) {
       return;
     }
-
-    // Skip if the link had target="_blank".
-    if (event.navigationType === 'push' || event.navigationType === 'replace') {
-      event.intercept({
-        async handler() {
-          await handleTransition(event.destination.url, event.signal);
-        }
-      });
-    }
-
-    // For traverse (back/forward), also animate.
-    if (event.navigationType === 'traverse') {
+    if (event.navigationType === 'push' || event.navigationType === 'replace' || event.navigationType === 'traverse') {
       event.intercept({
         async handler() {
           await handleTransition(event.destination.url, event.signal);
@@ -597,42 +344,29 @@ function initWithNavigationAPI() {
 
 /**
  * Fallback: intercept clicks on <a> elements.
- * Used when the Navigation API is not available (Firefox).
+ * Used when the Navigation API is not available (Firefox, Safari).
  */
 function initWithClickInterception() {
   document.addEventListener('click', event => {
-    // Find the closest <a> element.
     const link = event.target.closest('a[href]');
     if (!link) {
       return;
     }
-
-    // Skip modified clicks (new tab, etc).
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
       return;
     }
-
-    // Skip target="_blank".
     if (link.target === '_blank') {
       return;
     }
     const url = link.href;
-
-    // Check exclusions.
     if (shouldExcludeUrl(url, config)) {
       return;
     }
     event.preventDefault();
-
-    // Create an AbortController for this navigation.
     const controller = new AbortController();
-
-    // Push history state.
     window.history.pushState({}, '', url);
     handleTransition(url, controller.signal);
   });
-
-  // Handle back/forward navigation.
   window.addEventListener('popstate', () => {
     const controller = new AbortController();
     handleTransition(window.location.href, controller.signal);
@@ -645,6 +379,9 @@ function initWithClickInterception() {
 function initPrefetch() {
   const prefetched = new Set();
   document.addEventListener('pointerenter', event => {
+    if (!event.target || !event.target.closest) {
+      return;
+    }
     const link = event.target.closest('a[href]');
     if (!link || link.target === '_blank') {
       return;
@@ -654,8 +391,6 @@ function initPrefetch() {
       return;
     }
     prefetched.add(url);
-
-    // Use <link rel="prefetch"> for browser-native prefetching.
     const prefetchLink = document.createElement('link');
     prefetchLink.rel = 'prefetch';
     prefetchLink.href = url;
@@ -687,15 +422,6 @@ function init(userConfig = {}) {
 
   // Set up link prefetching.
   initPrefetch();
-
-  // Play initial load animation.
-  if (document.readyState === 'complete') {
-    initialLoadAnimation();
-  } else {
-    window.addEventListener('load', () => {
-      initialLoadAnimation();
-    });
-  }
 }
 ;// ./src/js/page-transitions.js
 /**

@@ -1,84 +1,30 @@
 /**
- * Page Transitions — Border overlay and loading animation.
+ * Page Transitions — View Transitions API proof of concept.
  *
- * Ported from Pile theme's _loading.scss.
- * Only rendered when the feature is enabled (`.has-page-transitions` body class).
+ * Uses the browser's native cross-fade animation.
+ * Only active when `.has-page-transitions` body class is present.
  */
 
-.c-page-transition-border {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 100000;
-  pointer-events: none;
-  border: 0 solid transparent;
-  box-sizing: border-box;
-
-  // Logo containers — centered within the border overlay.
-  .border-logo-bgscale {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 120px;
-    height: 120px;
-    overflow: hidden;
-  }
-
-  .border-logo-background {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .border-logo-fill {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--sm-current-accent-color, currentColor);
-    transform: translateX(-100%);
-  }
-
-  .border-logo,
-  .border-logo-background .logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    img {
-      max-width: 80px;
-      max-height: 80px;
-      width: auto;
-      height: auto;
-    }
-  }
-
-  .border-logo {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+// Customize the View Transitions API default cross-fade timing.
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out;
 }
 
-// Suppress the default View Transitions API cross-fade.
-// We handle all animations with GSAP.
-::view-transition-group(*),
-::view-transition-old(*),
-::view-transition-new(*) {
-  animation: none !important;
+// When page transitions are active, disable the old opacity pseudo-transition.
+// The VT API handles the visual transition instead.
+.has-page-transitions {
+  &.is-loading {
+    opacity: 1 !important;
+    transition: none !important;
+  }
 }
 
 // Respect reduced motion preferences.
 @media (prefers-reduced-motion: reduce) {
-  .c-page-transition-border {
-    display: none !important;
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.01s;
   }
 }

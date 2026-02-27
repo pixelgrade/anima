@@ -2,8 +2,8 @@
 /**
  * Page Transitions Integration
  *
- * Provides smooth AJAX-like page transitions using the View Transitions API,
- * Navigation API, and GSAP animations. Controlled by a Style Manager toggle.
+ * Provides smooth page transitions using the View Transitions API
+ * and Navigation API. Controlled by a Style Manager toggle.
  *
  * When disabled: zero footprint — no JS, CSS, or markup output.
  *
@@ -46,11 +46,11 @@ function anima_page_transitions_enqueue() {
 	$theme  = wp_get_theme( get_template() );
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-	// Register the page transitions script.
+	// Register the page transitions script (no GSAP dependency for now).
 	wp_register_script(
 		'anima-page-transitions',
 		trailingslashit( get_template_directory_uri() ) . 'dist/js/page-transitions' . $suffix . '.js',
-		array( 'gsap' ),
+		array(),
 		$theme->get( 'Version' ),
 		true
 	);
@@ -81,33 +81,6 @@ function anima_page_transitions_enqueue() {
 	wp_enqueue_script( 'anima-page-transitions' );
 }
 add_action( 'wp_enqueue_scripts', 'anima_page_transitions_enqueue', 30 );
-
-/**
- * Output the transition overlay markup in the footer.
- * Only when the feature is enabled.
- */
-function anima_page_transitions_overlay() {
-	if ( ! anima_page_transitions_enabled() ) {
-		return;
-	}
-	?>
-	<div class="c-page-transition-border js-page-transition-border"
-	     style="border-color: var(--sm-current-accent-color); background: var(--sm-current-accent-color);">
-		<div class="border-logo-bgscale">
-			<div class="border-logo-background">
-				<div class="border-logo-fill"></div>
-				<?php if ( has_custom_logo() ) : ?>
-					<div class="logo"><?php the_custom_logo(); ?></div>
-				<?php endif; ?>
-			</div>
-		</div>
-		<?php if ( has_custom_logo() ) : ?>
-			<div class="border-logo"><?php the_custom_logo(); ?></div>
-		<?php endif; ?>
-	</div>
-	<?php
-}
-add_action( 'wp_footer', 'anima_page_transitions_overlay', 100 );
 
 /**
  * Add body class when page transitions are enabled.

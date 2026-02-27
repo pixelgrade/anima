@@ -1011,6 +1011,9 @@ external_jQuery_default()(function () {
   } else {
     $window.on('wf-active', initialize);
   }
+
+  // Re-initialize components after page transition DOM swap.
+  document.addEventListener('anima:page-transition', initialize);
 });
 /******/ })()
 ;

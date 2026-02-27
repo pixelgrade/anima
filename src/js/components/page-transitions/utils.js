@@ -59,7 +59,15 @@ export function syncAdminBar( newDocument ) {
  * Re-initialize Anima theme components after DOM swap.
  */
 export function reinitComponents() {
-  // Trigger hero re-initialization.
+  // Tell scripts.js to re-create App (Navbar, Hero, SearchOverlay, etc.).
+  document.dispatchEvent( new CustomEvent( 'anima:page-transition' ) );
+
+  // Re-execute Nova Blocks frontend scripts that use ready() —
+  // since readyState is already 'complete', ready() fires immediately
+  // when the script re-runs, re-creating Header, Supernova, etc.
+  rerunNovaBlocksScripts();
+
+  // Trigger resize/scroll for any remaining listeners.
   window.dispatchEvent( new Event( 'resize' ) );
   window.dispatchEvent( new Event( 'scroll' ) );
 
@@ -72,6 +80,35 @@ export function reinitComponents() {
   if ( typeof jQuery !== 'undefined' && jQuery.fn.wc_cart_fragments ) {
     jQuery( document.body ).trigger( 'wc_fragment_refresh' );
   }
+}
+
+/**
+ * Re-execute Nova Blocks frontend scripts after DOM swap.
+ *
+ * Nova Blocks scripts use ready() which fires immediately when
+ * readyState is already 'complete'. By creating fresh <script> tags
+ * with the same src, the browser re-executes the initialization code.
+ */
+function rerunNovaBlocksScripts() {
+  // Key Nova Blocks scripts that need re-init after DOM swap.
+  const scriptPatterns = [
+    'nova-blocks/build/color-signal/frontend',
+    'block-library/blocks/header/frontend',
+    'block-library/blocks/supernova/frontend',
+  ];
+
+  const existingScripts = document.querySelectorAll( 'script[src]' );
+
+  existingScripts.forEach( ( script ) => {
+    const src = script.src;
+    const shouldRerun = scriptPatterns.some( ( pattern ) => src.includes( pattern ) );
+
+    if ( shouldRerun ) {
+      const newScript = document.createElement( 'script' );
+      newScript.src = src;
+      script.parentNode.insertBefore( newScript, script.nextSibling );
+    }
+  } );
 }
 
 /**

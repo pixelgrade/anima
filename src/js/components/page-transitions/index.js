@@ -1,18 +1,15 @@
 /**
- * Page Transitions — View Transitions API + Navigation API + GSAP
+ * Page Transitions — View Transitions API + Navigation API
  *
- * Uses the Navigation API to intercept same-origin link clicks,
- * then document.startViewTransition() to orchestrate the transition
- * with GSAP-powered border expand/collapse animations.
+ * Proof of concept: uses the browser's native View Transitions API
+ * cross-fade for page-to-page transitions. No GSAP, no overlays.
  *
  * Graceful degradation:
- * - No Navigation API → falls back to click event interception
- * - No View Transitions API → falls back to direct GSAP animations
- * - No GSAP → instant page swap (still AJAX, no animation)
- * - No JS → normal page loads (links work as usual)
+ * - No Navigation API -> falls back to click event interception
+ * - No View Transitions API -> instant swap (no animation)
+ * - No JS -> normal page loads (links work as usual)
  */
 
-import { pageLeave, pageEnter, initialLoadAnimation } from './transitions';
 import {
   syncBodyClasses,
   syncDocumentTitle,
@@ -56,9 +53,20 @@ function performSwap( newDocument ) {
   }
 
   syncBodyClasses( newDocument );
+
+  // The new document arrives with is-loading from PHP body_class.
+  // Since we're doing an AJAX swap (not a fresh load), mark it as loaded immediately.
+  document.body.classList.remove( 'is-loading' );
+  document.body.classList.add( 'has-loaded', 'is-loaded' );
+
   syncDocumentTitle( newDocument );
   syncAdminBar( newDocument );
-  syncHeadAssets( newDocument );
+
+  try {
+    syncHeadAssets( newDocument );
+  } catch ( e ) {
+    // Don't let head asset sync errors block the transition.
+  }
 
   // Scroll to top.
   window.scrollTo( 0, 0 );
@@ -74,8 +82,8 @@ async function handleTransition( url, signal ) {
   isTransitioning = true;
 
   try {
-    // Start fetching the new page immediately.
-    const fetchPromise = fetch( url, {
+    // Fetch the new page.
+    const response = await fetch( url, {
       signal,
       credentials: 'same-origin',
       headers: {
@@ -83,13 +91,7 @@ async function handleTransition( url, signal ) {
       },
     } );
 
-    // Run page leave animation (border expands inward).
-    await pageLeave();
-
-    // Wait for fetch to complete.
-    const response = await fetchPromise;
     if ( ! response.ok ) {
-      // Fallback: navigate normally on fetch error.
       window.location.href = url;
       return;
     }
@@ -97,32 +99,26 @@ async function handleTransition( url, signal ) {
     const html = await response.text();
     const newDocument = parseHTML( html );
 
-    // Use View Transitions API if available for the DOM swap.
+    // Use View Transitions API if available — browser handles the cross-fade.
     if ( document.startViewTransition ) {
       const transition = document.startViewTransition( () => {
         performSwap( newDocument );
       } );
 
-      // Wait for the DOM update to be ready.
-      await transition.updateCallbackDone;
+      await transition.finished;
     } else {
       // No View Transitions API — swap directly.
       performSwap( newDocument );
     }
 
-    // Run page enter animation (border collapses outward).
-    await pageEnter();
-
     // Post-transition tasks.
     reinitComponents();
     trackPageview( url );
   } catch ( error ) {
-    // AbortError means the user navigated away — don't fallback.
     if ( error.name === 'AbortError' ) {
       return;
     }
 
-    // Any other error: fallback to normal navigation.
     console.error( 'Page transition failed:', error );
     window.location.href = url;
   } finally {
@@ -132,8 +128,6 @@ async function handleTransition( url, signal ) {
 
 /**
  * Initialize using the Navigation API (preferred).
- * This gives us proper history management, abort signals, and
- * handles both link clicks and back/forward navigation.
  */
 function initWithNavigationAPI() {
   if ( typeof navigation === 'undefined' ) {
@@ -141,34 +135,21 @@ function initWithNavigationAPI() {
   }
 
   navigation.addEventListener( 'navigate', ( event ) => {
-    // Skip non-interceptable navigations.
     if ( ! event.canIntercept || event.hashChange || event.downloadRequest || event.formData ) {
       return;
     }
 
     const url = new URL( event.destination.url );
 
-    // Only handle same-origin navigations.
     if ( url.origin !== location.origin ) {
       return;
     }
 
-    // Check exclusions.
     if ( shouldExcludeUrl( event.destination.url, config ) ) {
       return;
     }
 
-    // Skip if the link had target="_blank".
-    if ( event.navigationType === 'push' || event.navigationType === 'replace' ) {
-      event.intercept( {
-        async handler() {
-          await handleTransition( event.destination.url, event.signal );
-        },
-      } );
-    }
-
-    // For traverse (back/forward), also animate.
-    if ( event.navigationType === 'traverse' ) {
+    if ( event.navigationType === 'push' || event.navigationType === 'replace' || event.navigationType === 'traverse' ) {
       event.intercept( {
         async handler() {
           await handleTransition( event.destination.url, event.signal );
@@ -182,45 +163,37 @@ function initWithNavigationAPI() {
 
 /**
  * Fallback: intercept clicks on <a> elements.
- * Used when the Navigation API is not available (Firefox).
+ * Used when the Navigation API is not available (Firefox, Safari).
  */
 function initWithClickInterception() {
   document.addEventListener( 'click', ( event ) => {
-    // Find the closest <a> element.
     const link = event.target.closest( 'a[href]' );
     if ( ! link ) {
       return;
     }
 
-    // Skip modified clicks (new tab, etc).
     if ( event.metaKey || event.ctrlKey || event.shiftKey || event.altKey ) {
       return;
     }
 
-    // Skip target="_blank".
     if ( link.target === '_blank' ) {
       return;
     }
 
     const url = link.href;
 
-    // Check exclusions.
     if ( shouldExcludeUrl( url, config ) ) {
       return;
     }
 
     event.preventDefault();
 
-    // Create an AbortController for this navigation.
     const controller = new AbortController();
-
-    // Push history state.
     window.history.pushState( {}, '', url );
 
     handleTransition( url, controller.signal );
   } );
 
-  // Handle back/forward navigation.
   window.addEventListener( 'popstate', () => {
     const controller = new AbortController();
     handleTransition( window.location.href, controller.signal );
@@ -234,6 +207,9 @@ function initPrefetch() {
   const prefetched = new Set();
 
   document.addEventListener( 'pointerenter', ( event ) => {
+    if ( ! event.target || ! event.target.closest ) {
+      return;
+    }
     const link = event.target.closest( 'a[href]' );
     if ( ! link || link.target === '_blank' ) {
       return;
@@ -246,7 +222,6 @@ function initPrefetch() {
 
     prefetched.add( url );
 
-    // Use <link rel="prefetch"> for browser-native prefetching.
     const prefetchLink = document.createElement( 'link' );
     prefetchLink.rel = 'prefetch';
     prefetchLink.href = url;
@@ -276,13 +251,4 @@ export function init( userConfig = {} ) {
 
   // Set up link prefetching.
   initPrefetch();
-
-  // Play initial load animation.
-  if ( document.readyState === 'complete' ) {
-    initialLoadAnimation();
-  } else {
-    window.addEventListener( 'load', () => {
-      initialLoadAnimation();
-    } );
-  }
 }
