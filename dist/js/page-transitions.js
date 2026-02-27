@@ -1235,94 +1235,277 @@ function syncDocumentTitle(html) {
 }
 
 /**
- * Restore the header's color signal classes from the server-rendered HTML.
+ * Header color signal guard.
  *
- * In FSE templates, the Nova Blocks header color detection queries
+ * Problem: In FSE templates, the Nova Blocks header color detection queries
  * `.site-main .hentry` to find the first block's palette — but FSE themes
- * don't have those elements (the structure is .wp-site-blocks > .nb-sidecar
- * > .entry-content). So after the header script re-executes during AJAX
- * navigation, it fails to detect colors and strips the correct classes.
+ * don't have those elements. HeaderColors.initializeColors() reads from
+ * `colorsElement` (the adjacent content block), NOT the header itself, so
+ * pre-applying classes on the header doesn't affect what gets frozen.
+ * Then on every sticky threshold crossing, toggleClasses() overwrites the
+ * header's classes with the frozen wrong set.
  *
- * This function extracts the server-rendered header classes from the raw HTML
- * (which WordPress computed correctly) and re-applies them after the header
- * script has run.
+ * Solution: extract the correct color classes from the server-rendered HTML
+ * (which WordPress computed correctly via PHP), apply them immediately,
+ * and use a MutationObserver to guard them against ALL future overwrites.
+ * The observer is set up right after the DOM swap — before any scripts
+ * re-execute — so it catches the header script's initialization AND
+ * subsequent toggleClasses() calls on scroll. Observer callbacks fire
+ * before the browser paints, so there's no visual flicker.
  */
-function syncHeaderColorSignal(html) {
-  // Extract the nb-header element's class attribute from the raw HTML.
-  const match = html.match(/<div[^>]+class="([^"]*nb-header nb-header--main[^"]*)"/);
-  if (!match || !match[1]) {
-    return;
-  }
-  const serverClasses = match[1];
+let headerColorObserver = null;
 
-  // Extract color-related classes from the server-rendered HTML.
-  const colorClassPattern = /\b(sm-palette-\S+|sm-variation-\S+|sm-color-signal-\S+|sm-light|sm-dark)\b/g;
-  const serverColorClasses = serverClasses.match(colorClassPattern);
-  if (!serverColorClasses) {
-    return;
-  }
-
-  // Store for later application (after Nova Blocks scripts have re-executed).
-  syncHeaderColorSignal._pendingClasses = serverColorClasses;
-  syncHeaderColorSignal._serverHtml = html;
-}
+// Regex pattern for color-related classes on the header.
+const COLOR_CLASS_PATTERN = /\b(sm-palette-\S+|sm-variation-\S+|sm-color-signal-\S+|sm-light|sm-dark)\b/g;
 
 /**
- * Apply the stored header color classes to DOM elements.
+ * Detect and apply the correct header color signal after AJAX page swap.
  *
- * This is called in TWO places:
- * 1. BEFORE Nova Blocks scripts re-execute — so when the Header constructor
- *    runs initializeColors(), it reads the correct classes from the DOM and
- *    freezes them. This is the primary fix for FSE themes where the header
- *    script's `.site-main .hentry` query fails.
- * 2. AFTER Nova Blocks scripts finish — as a safety net in case the scripts
- *    overwrote our classes during initialization.
+ * Replicates the EXACT detection logic from Nova Blocks' Header constructor:
+ *   getAdjacentElement() → findProperElement() → findColorsElement()
+ *   → getColorSetClasses() → toggleClasses()
+ *
+ * This is the same code path that runs on a fresh page load. We run it on
+ * the live DOM (after Barba has inserted the new container) to get the same
+ * result. A MutationObserver then guards the classes in transparent mode
+ * while allowing the normal sticky toggle on scroll.
+ *
+ * @param {string}      html      Full HTML of the new page (unused, kept for API compat).
+ * @param {HTMLElement}  container The new Barba container element (scopes DOM queries).
  */
-function applyPendingHeaderColorSignal() {
-  const classes = syncHeaderColorSignal._pendingClasses;
-  if (!classes) {
-    return;
-  }
-  const header = document.querySelector('.nb-header--main');
+function syncHeaderColorSignal(html, container) {
+  // Disconnect any observer from the previous page.
+  disconnectHeaderColorObserver();
+
+  // Find the header in the live DOM (scoped to new Barba container).
+  const header = container ? container.querySelector('.nb-header--main') : document.querySelector('.nb-header--main');
   if (!header) {
     return;
   }
 
-  // Remove any existing color classes that may be wrong.
-  const existing = header.className.match(/\b(sm-palette-\S+|sm-variation-\S+|sm-color-signal-\S+|sm-light|sm-dark)\b/g);
-  if (existing) {
-    existing.forEach(cls => header.classList.remove(cls));
+  // --- Replicate Nova Blocks Header detection on the live DOM ---
+
+  // Step 1: Find the adjacent element (next sibling, skipping scripts/styles).
+  const adjacent = getAdjacentElement(header);
+  if (!adjacent) {
+    return;
   }
 
-  // Apply the correct classes from the server HTML.
-  classes.forEach(cls => header.classList.add(cls));
+  // Step 2: Walk into containers to find the "proper" color source element.
+  const properElement = findProperElement(adjacent);
+  if (!properElement) {
+    return;
+  }
 
-  // Also fix the header row if present.
+  // Step 3: Handle nested sidecar/supernova to find the actual colors element.
+  const colorsElement = findColorsElement(properElement);
+  if (!colorsElement) {
+    return;
+  }
+
+  // Step 4: Read color signal classes from the detected element.
+  const transparentClasses = utils_getColorSetClasses(colorsElement).filter(cls => cls !== 'sm-color-signal-0');
+  if (!transparentClasses.length) {
+    return;
+  }
+
+  // Step 5: Apply to the header (and row).
+  replaceColorClasses(header, transparentClasses);
   const headerRow = header.querySelector('.nb-header-row--primary');
   if (headerRow) {
-    const rowMatch = syncHeaderColorSignal._serverHtml && syncHeaderColorSignal._serverHtml.match(/<div[^>]+class="([^"]*nb-header-row--primary[^"]*)"/);
-    if (rowMatch) {
-      const rowColorClasses = rowMatch[1].match(/\b(sm-palette-\S+|sm-variation-\S+|sm-color-signal-\S+|sm-light|sm-dark)\b/g);
-      if (rowColorClasses) {
-        const existingRow = headerRow.className.match(/\b(sm-palette-\S+|sm-variation-\S+|sm-color-signal-\S+|sm-light|sm-dark)\b/g);
-        if (existingRow) {
-          existingRow.forEach(cls => headerRow.classList.remove(cls));
-        }
-        rowColorClasses.forEach(cls => headerRow.classList.add(cls));
+    replaceColorClasses(headerRow, transparentClasses);
+  }
+
+  // Step 6: Guard with sticky-aware observer.
+  setupHeaderColorObserver(header, transparentClasses);
+}
+
+// ---------------------------------------------------------------------------
+// Nova Blocks Header detection logic (replicated from source).
+// See: nova-blocks/packages/block-library/src/blocks/header/frontend/components/
+// ---------------------------------------------------------------------------
+
+/**
+ * Get the element adjacent to the header (its next meaningful sibling).
+ * Skips script, style, and menu toggle elements.
+ * Climbs up to parent if no sibling exists.
+ *
+ * Replica of: Header.getAdjacentElement()
+ */
+function getAdjacentElement(element) {
+  const skip = '.c-menu-toggle, .c-menu-toggle__checkbox, script, style';
+  const next = element.nextElementSibling;
+  if (!next) {
+    if (element.parentElement) {
+      return getAdjacentElement(element.parentElement);
+    }
+    return null;
+  }
+  if (next.matches(skip)) {
+    return getAdjacentElement(next);
+  }
+  return next;
+}
+
+/**
+ * Walk down the DOM from the adjacent element to find the block that
+ * determines the header's transparent-state colors.
+ *
+ * Traverses into known container blocks (main, wp-block-group, sidecar,
+ * wp-block-post-content) when they don't carry their own color signal.
+ *
+ * Replica of: Header.findProperElement()
+ */
+function findProperElement(element, previous) {
+  if (!element) {
+    return previous || null;
+  }
+  const variation = element.dataset.paletteVariation ? parseInt(element.dataset.paletteVariation, 10) : 1;
+  const isShifted = !!element.dataset.useSourceColorAsReference;
+  const hasSignal = variation !== 1 || isShifted;
+
+  // Container blocks without their own color signal — recurse into first child.
+  if (element.matches('main, .wp-block-group.alignfull, .wp-block-query, .wp-block-post-content')) {
+    if (!hasSignal) {
+      return findProperElement(element.firstElementChild, element);
+    }
+  }
+
+  // Sidecar layout — recurse into content area's first child.
+  if (element.classList.contains('nb-sidecar')) {
+    if (element.children.length === 1 && element.firstElementChild.classList.contains('nb-sidecar-area--content')) {
+      const child = element.firstElementChild.firstElementChild;
+      if (child) {
+        return findProperElement(child, element);
       }
     }
   }
 
-  // Don't clear _pendingClasses here — we need them for the post-script safety net.
+  // Non-fullwidth block with color signal — return the parent container instead.
+  if (!element.matches('.alignfull') && hasSignal && previous) {
+    return previous;
+  }
+
+  // Element with palette class — use it.
+  if (element.matches('[class*="sm-palette-"]')) {
+    return element;
+  }
+
+  // Fall back to closest ancestor with palette.
+  return element.closest('[class*="sm-palette-"]') || null;
 }
 
 /**
- * Clear the pending header color signal data.
- * Called after the post-script safety net has run.
+ * Handle nested sidecar and supernova blocks to find the actual element
+ * whose color classes should be copied to the header.
+ *
+ * Replica of: Header.findColorsElement()
  */
-function clearPendingHeaderColorSignal() {
-  syncHeaderColorSignal._pendingClasses = null;
-  syncHeaderColorSignal._serverHtml = null;
+function findColorsElement(element) {
+  if (!element) {
+    return null;
+  }
+
+  // Nested sidecar — recurse into content area.
+  if (element.classList.contains('nb-sidecar')) {
+    const content = Array.from(element.children).find(child => child.classList.contains('nb-sidecar-area--content'));
+    if (content && content.firstElementChild && content.firstElementChild.classList.contains('nb-sidecar')) {
+      return findColorsElement(content.firstElementChild);
+    }
+  }
+
+  // Supernova with 0 padding — use the first item.
+  if (element.classList.contains('nb-supernova')) {
+    const paddingTop = parseInt(window.getComputedStyle(element).paddingTop, 10);
+    if (paddingTop === 0) {
+      return element.querySelector('.nb-supernova-item') || element;
+    }
+  }
+  return element;
+}
+
+/**
+ * Extract all color signal classes from an element's class attribute.
+ *
+ * Replica of: getColorSetClasses() from header/utils.js
+ */
+function utils_getColorSetClasses(element) {
+  const classAttr = element.getAttribute('class');
+  if (!classAttr) {
+    return [];
+  }
+  return classAttr.split(/\s+/).filter(cls => {
+    return cls.includes('sm-color-signal-') || cls.includes('sm-palette-') || cls.includes('sm-variation-') || cls.includes('sm-dark') || cls.includes('sm-light');
+  });
+}
+
+/**
+ * Replace color classes on an element with the correct set.
+ */
+function replaceColorClasses(element, correctClasses) {
+  const existing = element.className.match(COLOR_CLASS_PATTERN);
+  if (existing) {
+    existing.forEach(cls => element.classList.remove(cls));
+  }
+  correctClasses.forEach(cls => element.classList.add(cls));
+}
+
+/**
+ * Set up a MutationObserver that guards the header's transparent-state
+ * color classes.
+ *
+ * The observer is "sticky-aware":
+ * - When the header has `is-sticky` class (scrolled past hero), the observer
+ *   does nothing — Nova Blocks manages the sticky-state colors correctly
+ *   (the header uses its own palette, which doesn't need detection).
+ * - When the header is in transparent mode (overlapping hero, no `is-sticky`),
+ *   the observer guards the correct color classes from the adjacent block.
+ *
+ * MutationObserver callbacks are batched — both `is-sticky` and color class
+ * changes are visible by the time the callback runs, so there's no race.
+ */
+function setupHeaderColorObserver(header, transparentClasses) {
+  let applying = false;
+  headerColorObserver = new MutationObserver(() => {
+    if (applying) {
+      return;
+    }
+
+    // Don't interfere when the header is in sticky mode.
+    // Nova Blocks manages sticky colors correctly (uses header's own palette).
+    if (header.classList.contains('is-sticky')) {
+      return;
+    }
+
+    // In transparent mode: check if the correct (adjacent block) classes
+    // are still present. If Nova Blocks overwrote them (failed detection
+    // in FSE), re-apply.
+    const hasAll = transparentClasses.every(cls => header.classList.contains(cls));
+    if (!hasAll) {
+      applying = true;
+      replaceColorClasses(header, transparentClasses);
+      const headerRow = header.querySelector('.nb-header-row--primary');
+      if (headerRow) {
+        replaceColorClasses(headerRow, transparentClasses);
+      }
+      applying = false;
+    }
+  });
+  headerColorObserver.observe(header, {
+    attributes: true,
+    attributeFilter: ['class']
+  });
+}
+
+/**
+ * Disconnect the header color observer.
+ * Called at the start of each new navigation and during cleanup.
+ */
+function disconnectHeaderColorObserver() {
+  if (headerColorObserver) {
+    headerColorObserver.disconnect();
+    headerColorObserver = null;
+  }
 }
 
 /**
@@ -1342,6 +1525,19 @@ function reinitComponents() {
   // In FSE themes the header/footer are inside the Barba container and get swapped,
   // so Nova Blocks' block JS (header sticky, color signal, etc.) must re-run.
   reinitNovaBlocksScripts();
+
+  // Reinitialize FacetWP if it was previously loaded.
+  // FacetWP renders facets client-side — after AJAX page swap, the new DOM
+  // has empty .facetwp-facet containers that need FWP to re-parse and render.
+  // Only call refresh() if FacetWP already completed its first init (FWP.loaded).
+  // On first navigation TO a page with facets, FacetWP's own script handles init.
+  if (typeof FWP !== 'undefined' && FWP.loaded && typeof FWP.refresh === 'function') {
+    if (typeof FWP_HTTP !== 'undefined') {
+      FWP_HTTP.uri = window.location.pathname;
+      FWP_HTTP.get = {};
+    }
+    FWP.refresh();
+  }
 
   // Re-trigger WooCommerce cart fragments if available.
   if (typeof wc_cart_fragments_params !== 'undefined') {
@@ -1378,15 +1574,6 @@ function reinitNovaBlocksScripts() {
   // with an empty elements array and a new .c-bully DOM element.
   // The old instance's rAF loop will harmlessly reference the removed DOM.
   reinitBullyScript();
-
-  // Apply correct header color classes BEFORE the header script re-executes.
-  // The Header constructor calls initializeColors() which freezes whatever
-  // sm-* classes are on the header element at construction time. In FSE
-  // themes, the script's own color detection fails (queries `.site-main
-  // .hentry` which doesn't exist), so it would freeze empty/wrong classes.
-  // By setting the correct classes now, initializeColors() freezes the right
-  // ones, and toggleClasses() on sticky threshold will use the correct set.
-  applyPendingHeaderColorSignal();
   const scripts = document.querySelectorAll('script[id*="novablocks"][id$="-js"][src*="frontend"]');
   let pending = 0;
   const onAllLoaded = () => {
@@ -1396,11 +1583,6 @@ function reinitNovaBlocksScripts() {
     // Use rAF to ensure measurements happen after the browser has
     // applied any style changes from the newly-loaded scripts.
     requestAnimationFrame(() => {
-      // Safety net: re-apply header color classes in case the header script
-      // overwrote them during its initialization sequence.
-      applyPendingHeaderColorSignal();
-      clearPendingHeaderColorSignal();
-
       // Trigger the bully bullet pop animation. The bully plugin normally
       // does this on window.load, which won't fire again after AJAX nav.
       // Bullets default to opacity: 0 and only become visible via --pop.
@@ -1436,6 +1618,13 @@ function reinitNovaBlocksScripts() {
     };
     document.body.appendChild(newScript);
   });
+
+  // If no scripts needed re-execution (all were freshly loaded by
+  // syncPageAssets, or no Nova Blocks frontend scripts exist), fire
+  // onAllLoaded immediately so resize/scroll events still dispatch.
+  if (pending === 0) {
+    onAllLoaded();
+  }
 }
 
 /**
@@ -1468,6 +1657,8 @@ function reinitBullyScript() {
  * Cleanup heavy resources before page transition.
  */
 function cleanupBeforeTransition() {
+  // Disconnect the header color observer from the current page.
+  disconnectHeaderColorObserver();
   const $container = external_jQuery_default()('[data-barba="container"]');
 
   // Pause and remove video elements.
@@ -1698,8 +1889,8 @@ const pageTransition = {
     // Save the header's correct color signal classes from the server HTML.
     // The Nova Blocks header script will re-execute and fail to detect colors
     // in FSE templates (it queries `.site-main .hentry` which doesn't exist).
-    // We restore the correct classes after the script finishes.
-    syncHeaderColorSignal(html);
+    // Pass the new container to scope DOM queries and avoid finding the old header.
+    syncHeaderColorSignal(html, next.container);
 
     // Defer component reinitialization until after the browser has reflowed the
     // new DOM. Nova Blocks color signal scripts read computed styles (padding,

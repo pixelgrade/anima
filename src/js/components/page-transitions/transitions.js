@@ -131,8 +131,8 @@ export const pageTransition = {
     // Save the header's correct color signal classes from the server HTML.
     // The Nova Blocks header script will re-execute and fail to detect colors
     // in FSE templates (it queries `.site-main .hentry` which doesn't exist).
-    // We restore the correct classes after the script finishes.
-    syncHeaderColorSignal( html );
+    // Pass the new container to scope DOM queries and avoid finding the old header.
+    syncHeaderColorSignal( html, next.container );
 
     // Defer component reinitialization until after the browser has reflowed the
     // new DOM. Nova Blocks color signal scripts read computed styles (padding,
