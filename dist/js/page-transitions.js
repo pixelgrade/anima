@@ -1940,8 +1940,9 @@ const pageTransition = {
  */
 const cardExpandTransition = {
   name: 'card-expand',
-  // Only match clicks from within a Nova Blocks collection card (not hero blocks).
-  // The .nb-collection ancestor ensures we're in a multi-card grid, not a standalone block.
+  // Only match clicks from within a post archive grid card.
+  // The .wp-block-query ancestor ensures we're in a WordPress query loop,
+  // excluding standalone supernova blocks (hero, media card, etc.).
   custom: ({
     trigger
   }) => {
@@ -1949,7 +1950,7 @@ const cardExpandTransition = {
       return false;
     }
     const card = trigger.closest('.nb-supernova-item');
-    return card !== null && card.closest('.nb-collection') !== null;
+    return card !== null && card.closest('.wp-block-query') !== null;
   },
   leave({
     current,

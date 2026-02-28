@@ -129,12 +129,11 @@
 
 // ==========================================================================
 // Card hover border — colored border on grid card MEDIA only.
-// Scoped to multi-card collections (contentType: auto) inside queries.
-// Excludes standalone hero blocks (single-column supernova, not in a query).
+// Scoped to cards inside a WordPress query loop (.wp-block-query).
+// This excludes standalone supernova blocks (hero, media card, etc.)
+// which also have .nb-collection but are NOT post archive grids.
 // ==========================================================================
-.has-page-transitions .nb-collection .nb-supernova-item .nb-supernova-item__media-wrapper {
-  position: relative;
-
+.has-page-transitions .wp-block-query .nb-supernova-item .nb-supernova-item__media-wrapper {
   &::after {
     content: '';
     position: absolute;
@@ -146,13 +145,13 @@
   }
 }
 
-.has-page-transitions .nb-collection .nb-supernova-item:hover .nb-supernova-item__media-wrapper::after {
+.has-page-transitions .wp-block-query .nb-supernova-item:hover .nb-supernova-item__media-wrapper::after {
   border-width: 10px;
 }
 
 // Disable hover border on touch devices (no hover capability)
 @media (hover: none) {
-  .has-page-transitions .nb-collection .nb-supernova-item .nb-supernova-item__media-wrapper::after {
+  .has-page-transitions .wp-block-query .nb-supernova-item .nb-supernova-item__media-wrapper::after {
     display: none;
   }
 }
