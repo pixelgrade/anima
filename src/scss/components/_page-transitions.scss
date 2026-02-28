@@ -128,36 +128,37 @@
 }
 
 // ==========================================================================
-// Card hover border — colored border on grid cards
-// Uses the project color with accent color fallback.
+// Card hover border — colored border on grid card MEDIA only.
+// Scoped to multi-card collections (contentType: auto) inside queries.
+// Excludes standalone hero blocks (single-column supernova, not in a query).
 // ==========================================================================
-.has-page-transitions .nb-supernova-item {
+.has-page-transitions .nb-collection .nb-supernova-item .nb-supernova-item__media-wrapper {
   position: relative;
 
   &::after {
     content: '';
     position: absolute;
-    inset: -1px;
+    inset: 0;
     border: 0 solid var(--anima-project-color, var(--sm-current-accent-color));
     pointer-events: none;
     z-index: 100;
     transition: border-width 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
+}
 
-  &:hover::after {
-    border-width: 10px;
-  }
+.has-page-transitions .nb-collection .nb-supernova-item:hover .nb-supernova-item__media-wrapper::after {
+  border-width: 10px;
 }
 
 // Disable hover border on touch devices (no hover capability)
 @media (hover: none) {
-  .has-page-transitions .nb-supernova-item::after {
+  .has-page-transitions .nb-collection .nb-supernova-item .nb-supernova-item__media-wrapper::after {
     display: none;
   }
 }
 
 // Hide hover border during card-expand transition
-.is-transitioning .nb-supernova-item::after {
+.is-transitioning .nb-supernova-item .nb-supernova-item__media-wrapper::after {
   border-width: 0 !important;
   transition: none;
 }

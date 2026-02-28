@@ -71,9 +71,11 @@ function anima_ajax_get_project_color() {
 		wp_send_json_error( 'No attachment ID' );
 	}
 
-	$path = get_attached_file( $attachment_id );
-	if ( ! $path || ! file_exists( $path ) ) {
-		wp_send_json_error( 'File not found' );
+	// Tonesque uses esc_url_raw() internally and GD functions that accept URLs.
+	// Pass the attachment URL (not file path) so esc_url_raw doesn't strip it.
+	$url = wp_get_attachment_url( $attachment_id );
+	if ( ! $url ) {
+		wp_send_json_error( 'Attachment URL not found' );
 	}
 
 	require_once get_template_directory() . '/inc/classes/class-tonesque.php';
@@ -82,11 +84,11 @@ function anima_ajax_get_project_color() {
 		wp_send_json_error( 'Tonesque class not found' );
 	}
 
-	$tonesque = new Tonesque( $path );
+	$tonesque = new Tonesque( $url );
 	$color    = $tonesque->color();
 
 	if ( empty( $color ) ) {
-		wp_send_json_error( 'Could not extract color' );
+		wp_send_json_error( 'Could not extract color from image' );
 	}
 
 	wp_send_json_success( '#' . $color );

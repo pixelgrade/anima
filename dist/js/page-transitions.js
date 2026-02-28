@@ -1940,19 +1940,25 @@ const pageTransition = {
  */
 const cardExpandTransition = {
   name: 'card-expand',
-  // Only match clicks from within a Nova Blocks collection card.
+  // Only match clicks from within a Nova Blocks collection card (not hero blocks).
+  // The .nb-collection ancestor ensures we're in a multi-card grid, not a standalone block.
   custom: ({
     trigger
   }) => {
-    return trigger && trigger !== 'barba' && typeof trigger.closest === 'function' && trigger.closest('.nb-supernova-item') !== null;
+    if (!trigger || trigger === 'barba' || typeof trigger.closest !== 'function') {
+      return false;
+    }
+    const card = trigger.closest('.nb-supernova-item');
+    return card !== null && card.closest('.nb-collection') !== null;
   },
   leave({
     current,
     trigger
   }) {
     const card = trigger.closest('.nb-supernova-item');
-    const layoutItem = card.closest('.nb-collection__layout-item') || card;
-    const rect = layoutItem.getBoundingClientRect();
+    // Use the media wrapper for positioning (border is around the image, not full card).
+    const mediaWrapper = card.querySelector('.nb-supernova-item__media-wrapper') || card;
+    const rect = mediaWrapper.getBoundingClientRect();
 
     // Read project color (custom property with accent fallback).
     const styles = getComputedStyle(card);
