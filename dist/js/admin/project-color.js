@@ -20,12 +20,23 @@
   var useSelect = wp.data.useSelect;
   var useDispatch = wp.data.useDispatch;
   var __ = wp.i18n.__;
+
+  // Post type label map for the panel title.
+  var postTypeLabels = {
+    portfolio: __('Project Color', '__theme_txtd'),
+    post: __('Post Color', '__theme_txtd'),
+    page: __('Page Color', '__theme_txtd')
+  };
+  var defaultLabel = __('Transition Color', '__theme_txtd');
   function ProjectColorPanel() {
     var postMeta = useSelect(function (select) {
       return select('core/editor').getEditedPostAttribute('meta') || {};
     }, []);
     var featuredImageId = useSelect(function (select) {
       return select('core/editor').getEditedPostAttribute('featured_media');
+    }, []);
+    var postType = useSelect(function (select) {
+      return select('core/editor').getCurrentPostType();
     }, []);
     var editPost = useDispatch('core/editor').editPost;
     var color = postMeta._project_color || '';
@@ -90,9 +101,23 @@
         setIsSuggesting(false);
       });
     }
+
+    // Dynamic label based on post type.
+    var label = postTypeLabels[postType] || defaultLabel;
+
+    // Build title with inline ColorIndicator when a color is set.
+    var panelTitle = color ? el('span', {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px'
+      }
+    }, label, el(ColorIndicator, {
+      colorValue: color
+    })) : label;
     return el(PluginDocumentSettingPanel, {
       name: 'anima-project-color',
-      title: __('Project Color', '__theme_txtd'),
+      title: panelTitle,
       className: 'anima-project-color-panel'
     }, el('p', {
       className: 'description',
