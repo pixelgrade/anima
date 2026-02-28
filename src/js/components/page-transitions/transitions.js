@@ -181,15 +181,19 @@ export const pageTransition = {
 export const cardExpandTransition = {
   name: 'card-expand',
 
-  // Only match clicks from within a post archive grid card.
-  // The .wp-block-query ancestor ensures we're in a WordPress query loop,
-  // excluding standalone supernova blocks (hero, media card, etc.).
+  // Only match clicks from within a multi-column post archive grid card.
+  // - .wp-block-query: excludes standalone supernova blocks (hero, media card)
+  // - :not(.nb-supernova--1-columns): excludes full-width sliders/carousels
   custom: ( { trigger } ) => {
     if ( ! trigger || trigger === 'barba' || typeof trigger.closest !== 'function' ) {
       return false;
     }
     const card = trigger.closest( '.nb-supernova-item' );
-    return card !== null && card.closest( '.wp-block-query' ) !== null;
+    if ( ! card || ! card.closest( '.wp-block-query' ) ) {
+      return false;
+    }
+    const supernova = card.closest( '.nb-supernova' );
+    return supernova !== null && ! supernova.classList.contains( 'nb-supernova--1-columns' );
   },
 
   leave( { current, trigger } ) {

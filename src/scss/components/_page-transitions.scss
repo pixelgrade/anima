@@ -129,11 +129,15 @@
 
 // ==========================================================================
 // Card hover border — colored border on grid card MEDIA only.
-// Scoped to cards inside a WordPress query loop (.wp-block-query).
-// This excludes standalone supernova blocks (hero, media card, etc.)
-// which also have .nb-collection but are NOT post archive grids.
+//
+// Scoped to multi-column grids inside WordPress query loops:
+// - .wp-block-query excludes standalone supernova blocks (hero, media card)
+// - :not(.nb-supernova--1-columns) excludes full-width sliders/carousels
+//   (single-column layouts where hover border doesn't make sense)
 // ==========================================================================
-.has-page-transitions .wp-block-query .nb-supernova-item .nb-supernova-item__media-wrapper {
+$card-hover-scope: '.has-page-transitions .wp-block-query .nb-supernova:not(.nb-supernova--1-columns)';
+
+#{$card-hover-scope} .nb-supernova-item .nb-supernova-item__media-wrapper {
   &::after {
     content: '';
     position: absolute;
@@ -145,13 +149,13 @@
   }
 }
 
-.has-page-transitions .wp-block-query .nb-supernova-item:hover .nb-supernova-item__media-wrapper::after {
+#{$card-hover-scope} .nb-supernova-item:hover .nb-supernova-item__media-wrapper::after {
   border-width: 10px;
 }
 
 // Disable hover border on touch devices (no hover capability)
 @media (hover: none) {
-  .has-page-transitions .wp-block-query .nb-supernova-item .nb-supernova-item__media-wrapper::after {
+  #{$card-hover-scope} .nb-supernova-item .nb-supernova-item__media-wrapper::after {
     display: none;
   }
 }

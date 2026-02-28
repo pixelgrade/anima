@@ -91,6 +91,17 @@ function anima_ajax_get_project_color() {
 		wp_send_json_error( 'Could not extract color from image' );
 	}
 
+	// Boost saturation — Tonesque averages sample points which produces
+	// desaturated/muddy colors. Increase saturation by 25% for a more
+	// vibrant result that works better as a transition overlay color.
+	if ( class_exists( 'Color' ) ) {
+		$color_obj = new Color( $color, 'hex' );
+		$saturated = $color_obj->saturate( 25 );
+		if ( $saturated ) {
+			$color = $saturated->toHex();
+		}
+	}
+
 	wp_send_json_success( '#' . $color );
 }
 add_action( 'wp_ajax_anima_get_project_color', 'anima_ajax_get_project_color' );
