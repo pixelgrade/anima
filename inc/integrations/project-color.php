@@ -19,11 +19,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Register the _project_color post meta for all public post types.
+ * Register the _project_color and _project_color_auto post meta for all public post types.
  */
 function anima_project_color_register_meta() {
 	register_post_meta( '', '_project_color', [
 		'show_in_rest'  => true,
+		'single'        => true,
+		'type'          => 'string',
+		'default'       => '',
+		'auth_callback' => function () {
+			return current_user_can( 'edit_posts' );
+		},
+	] );
+
+	// Auto-generated color from featured image (read-only in REST, written by PHP).
+	register_post_meta( '', '_project_color_auto', [
+		'show_in_rest'  => [
+			'schema' => [
+				'type' => 'string',
+			],
+		],
 		'single'        => true,
 		'type'          => 'string',
 		'default'       => '',
@@ -57,6 +72,48 @@ function anima_project_color_editor_assets() {
 add_action( 'enqueue_block_editor_assets', 'anima_project_color_editor_assets' );
 
 /**
+ * Extract the dominant color from an attachment image using Tonesque.
+ *
+ * Loads the Tonesque class, extracts the dominant color, and boosts
+ * saturation for a more vibrant result suitable for transition overlays.
+ *
+ * @param int $attachment_id Attachment ID.
+ * @return string Hex color (e.g. '#3a2b1c') or empty string on failure.
+ */
+function anima_extract_color_from_attachment( $attachment_id ) {
+	$url = wp_get_attachment_url( $attachment_id );
+	if ( ! $url ) {
+		return '';
+	}
+
+	require_once get_template_directory() . '/inc/classes/class-tonesque.php';
+
+	if ( ! class_exists( 'Tonesque' ) ) {
+		return '';
+	}
+
+	$tonesque = new Tonesque( $url );
+	$color    = $tonesque->color();
+
+	if ( empty( $color ) ) {
+		return '';
+	}
+
+	// Boost saturation — Tonesque averages sample points which produces
+	// desaturated/muddy colors. Increase saturation by 25% for a more
+	// vibrant result that works better as a transition overlay color.
+	if ( class_exists( 'Color' ) ) {
+		$color_obj = new Color( $color, 'hex' );
+		$saturated = $color_obj->saturate( 25 );
+		if ( $saturated ) {
+			$color = $saturated->toHex();
+		}
+	}
+
+	return '#' . $color;
+}
+
+/**
  * AJAX handler: extract dominant color from an attachment image using Tonesque.
  */
 function anima_ajax_get_project_color() {
@@ -71,43 +128,26 @@ function anima_ajax_get_project_color() {
 		wp_send_json_error( 'No attachment ID' );
 	}
 
-	// Tonesque uses esc_url_raw() internally and GD functions that accept URLs.
-	// Pass the attachment URL (not file path) so esc_url_raw doesn't strip it.
-	$url = wp_get_attachment_url( $attachment_id );
-	if ( ! $url ) {
-		wp_send_json_error( 'Attachment URL not found' );
-	}
-
-	require_once get_template_directory() . '/inc/classes/class-tonesque.php';
-
-	if ( ! class_exists( 'Tonesque' ) ) {
-		wp_send_json_error( 'Tonesque class not found' );
-	}
-
-	$tonesque = new Tonesque( $url );
-	$color    = $tonesque->color();
+	$color = anima_extract_color_from_attachment( $attachment_id );
 
 	if ( empty( $color ) ) {
 		wp_send_json_error( 'Could not extract color from image' );
 	}
 
-	// Boost saturation — Tonesque averages sample points which produces
-	// desaturated/muddy colors. Increase saturation by 25% for a more
-	// vibrant result that works better as a transition overlay color.
-	if ( class_exists( 'Color' ) ) {
-		$color_obj = new Color( $color, 'hex' );
-		$saturated = $color_obj->saturate( 25 );
-		if ( $saturated ) {
-			$color = $saturated->toHex();
-		}
+	// If a post_id was passed, save as auto-generated color.
+	$post_id = isset( $_POST['post_id'] ) ? absint( $_POST['post_id'] ) : 0;
+	if ( $post_id ) {
+		update_post_meta( $post_id, '_project_color_auto', $color );
 	}
 
-	wp_send_json_success( '#' . $color );
+	wp_send_json_success( $color );
 }
 add_action( 'wp_ajax_anima_get_project_color', 'anima_ajax_get_project_color' );
 
 /**
  * Get the project color for a post.
+ *
+ * Priority: manual color > cached auto color > lazy-generate from featured image.
  *
  * @param int|null $post_id Post ID. Defaults to current post.
  * @return string Hex color string (e.g. '#3a2b1c') or empty string.
@@ -117,14 +157,49 @@ function anima_get_project_color( $post_id = null ) {
 		$post_id = get_the_ID();
 	}
 
+	// 1. Manual color always wins.
 	$color = get_post_meta( $post_id, '_project_color', true );
-
 	if ( ! empty( $color ) && '#' !== $color ) {
 		return $color;
 	}
 
+	// 2. Check cached auto-generated color.
+	$auto_color = get_post_meta( $post_id, '_project_color_auto', true );
+	if ( ! empty( $auto_color ) && '#' !== $auto_color ) {
+		return $auto_color;
+	}
+
+	// 3. Generate from featured image (lazy).
+	$thumbnail_id = get_post_thumbnail_id( $post_id );
+	if ( ! $thumbnail_id ) {
+		return '';
+	}
+
+	$auto_color = anima_extract_color_from_attachment( $thumbnail_id );
+	if ( ! empty( $auto_color ) ) {
+		update_post_meta( $post_id, '_project_color_auto', $auto_color );
+		return $auto_color;
+	}
+
 	return '';
 }
+
+/**
+ * Invalidate the auto-generated color when the featured image changes.
+ *
+ * @param int    $meta_id    Meta ID.
+ * @param int    $post_id    Post ID.
+ * @param string $meta_key   Meta key.
+ * @param mixed  $meta_value Meta value.
+ */
+function anima_invalidate_auto_color_on_thumbnail_change( $meta_id, $post_id, $meta_key, $meta_value ) {
+	if ( '_thumbnail_id' === $meta_key ) {
+		delete_post_meta( $post_id, '_project_color_auto' );
+	}
+}
+add_action( 'updated_post_meta', 'anima_invalidate_auto_color_on_thumbnail_change', 10, 4 );
+add_action( 'added_post_meta', 'anima_invalidate_auto_color_on_thumbnail_change', 10, 4 );
+add_action( 'deleted_post_meta', 'anima_invalidate_auto_color_on_thumbnail_change', 10, 4 );
 
 /**
  * Inject --anima-project-color CSS custom property on Nova Blocks collection cards.

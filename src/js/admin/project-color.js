@@ -10,6 +10,8 @@
 ( function() {
   var el = wp.element.createElement;
   var useState = wp.element.useState;
+  var useEffect = wp.element.useEffect;
+  var useRef = wp.element.useRef;
   var registerPlugin = wp.plugins.registerPlugin;
   var PluginDocumentSettingPanel = wp.editPost.PluginDocumentSettingPanel;
   var ColorIndicator = wp.components.ColorIndicator;
@@ -28,6 +30,41 @@
   };
   var defaultLabel = __( 'Transition Color', '__theme_txtd' );
 
+  /**
+   * Fetch color from featured image via AJAX.
+   *
+   * @param {number} attachmentId Featured image attachment ID.
+   * @param {number} postId       Current post ID.
+   * @return {Promise<string>}    Hex color or empty string.
+   */
+  function fetchColorFromImage( attachmentId, postId ) {
+    var formData = new FormData();
+    formData.append( 'action', 'anima_get_project_color' );
+    formData.append( 'nonce', animaProjectColor.nonce );
+    formData.append( 'attachment_id', attachmentId );
+    if ( postId ) {
+      formData.append( 'post_id', postId );
+    }
+
+    return fetch( animaProjectColor.ajaxUrl, {
+      method: 'POST',
+      credentials: 'same-origin',
+      body: formData,
+    } )
+      .then( function( response ) {
+        return response.json();
+      } )
+      .then( function( result ) {
+        if ( result.success && result.data ) {
+          return result.data;
+        }
+        return '';
+      } )
+      .catch( function() {
+        return '';
+      } );
+  }
+
   function ProjectColorPanel() {
     var postMeta = useSelect( function( select ) {
       return select( 'core/editor' ).getEditedPostAttribute( 'meta' ) || {};
@@ -37,19 +74,26 @@
       return select( 'core/editor' ).getEditedPostAttribute( 'featured_media' );
     }, [] );
 
+    var postId = useSelect( function( select ) {
+      return select( 'core/editor' ).getCurrentPostId();
+    }, [] );
+
     var postType = useSelect( function( select ) {
       return select( 'core/editor' ).getCurrentPostType();
     }, [] );
 
     var editPost = useDispatch( 'core/editor' ).editPost;
 
-    var color = postMeta._project_color || '';
+    var manualColor = postMeta._project_color || '';
+    var autoColor = postMeta._project_color_auto || '';
+    var isAuto = ! manualColor && !! autoColor;
+    var color = manualColor || autoColor;
 
     var _useState = useState( false );
     var isSuggesting = _useState[ 0 ];
     var setIsSuggesting = _useState[ 1 ];
 
-    var _useShowPicker = useState( !! color );
+    var _useShowPicker = useState( !! manualColor );
     var showPicker = _useShowPicker[ 0 ];
     var setShowPicker = _useShowPicker[ 1 ];
 
@@ -57,14 +101,25 @@
     var notice = _useNotice[ 0 ];
     var setNotice = _useNotice[ 1 ];
 
-    function setColor( newColor ) {
+    // Track the previous featured image ID to detect changes.
+    var prevFeaturedImageRef = useRef( featuredImageId );
+
+    function setManualColor( newColor ) {
       editPost( {
         meta: { _project_color: newColor },
       } );
     }
 
+    function setAutoColor( newColor ) {
+      editPost( {
+        meta: { _project_color_auto: newColor },
+      } );
+    }
+
     function clearColor() {
-      setColor( '' );
+      editPost( {
+        meta: { _project_color: '', _project_color_auto: '' },
+      } );
       setShowPicker( false );
       setNotice( null );
     }
@@ -77,35 +132,59 @@
       setIsSuggesting( true );
       setNotice( null );
 
-      var formData = new FormData();
-      formData.append( 'action', 'anima_get_project_color' );
-      formData.append( 'nonce', animaProjectColor.nonce );
-      formData.append( 'attachment_id', featuredImageId );
+      fetchColorFromImage( featuredImageId, postId ).then( function( result ) {
+        if ( result ) {
+          setManualColor( result );
+          setShowPicker( true );
+          setNotice( { type: 'success', message: __( 'Color extracted: ', '__theme_txtd' ) + result } );
+        } else {
+          setNotice( { type: 'error', message: __( 'Could not extract color from image.', '__theme_txtd' ) } );
+        }
+        setIsSuggesting( false );
+      } );
+    }
 
-      fetch( animaProjectColor.ajaxUrl, {
-        method: 'POST',
-        credentials: 'same-origin',
-        body: formData,
-      } )
-        .then( function( response ) {
-          return response.json();
-        } )
-        .then( function( result ) {
-          if ( result.success && result.data ) {
-            setColor( result.data );
-            setShowPicker( true );
-            setNotice( { type: 'success', message: __( 'Color extracted: ', '__theme_txtd' ) + result.data } );
-          } else {
-            var errorMsg = result.data || __( 'Could not extract color from image.', '__theme_txtd' );
-            setNotice( { type: 'error', message: errorMsg } );
+    // Auto-suggest on mount: if no manual color and a featured image exists,
+    // fetch and save as auto color (not manual).
+    useEffect( function() {
+      if ( ! manualColor && ! autoColor && featuredImageId ) {
+        setIsSuggesting( true );
+        fetchColorFromImage( featuredImageId, postId ).then( function( result ) {
+          if ( result ) {
+            setAutoColor( result );
           }
           setIsSuggesting( false );
-        } )
-        .catch( function() {
-          setNotice( { type: 'error', message: __( 'Request failed. Please try again.', '__theme_txtd' ) } );
-          setIsSuggesting( false );
         } );
-    }
+      }
+    }, [] ); // eslint-disable-line react-hooks/exhaustive-deps -- run once on mount.
+
+    // Re-suggest when featured image changes (after initial mount).
+    useEffect( function() {
+      if ( prevFeaturedImageRef.current === featuredImageId ) {
+        return;
+      }
+      prevFeaturedImageRef.current = featuredImageId;
+
+      if ( ! featuredImageId ) {
+        // Featured image removed — clear auto color.
+        setAutoColor( '' );
+        return;
+      }
+
+      // Only auto-suggest if no manual color is set.
+      if ( manualColor ) {
+        return;
+      }
+
+      setIsSuggesting( true );
+      setAutoColor( '' ); // Clear stale auto color while fetching.
+      fetchColorFromImage( featuredImageId, postId ).then( function( result ) {
+        if ( result ) {
+          setAutoColor( result );
+        }
+        setIsSuggesting( false );
+      } );
+    }, [ featuredImageId ] ); // eslint-disable-line react-hooks/exhaustive-deps
 
     // Dynamic label based on post type.
     var label = postTypeLabels[ postType ] || defaultLabel;
@@ -154,6 +233,14 @@
             { style: { display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' } },
             el( ColorIndicator, { colorValue: color } ),
             el( 'code', { style: { fontSize: '12px' } }, color ),
+            // "(auto)" label when using auto-generated color
+            isAuto
+              ? el(
+                  'span',
+                  { style: { fontSize: '11px', color: '#757575', fontStyle: 'italic' } },
+                  __( '(auto)', '__theme_txtd' )
+                )
+              : null,
             el(
               Button,
               {
@@ -180,12 +267,12 @@
             __( 'Choose Color', '__theme_txtd' )
           )
         : null,
-      // Color picker
+      // Color picker — manual pick always writes to _project_color
       showPicker
         ? el( ColorPicker, {
             color: color || '#333333',
             onChangeComplete: function( value ) {
-              setColor( value.hex );
+              setManualColor( value.hex );
             },
             disableAlpha: true,
           } )
