@@ -1,0 +1,43 @@
+// Pile Parallax — visual depth effect for collection grids.
+// Items with .js-3d get extra horizontal padding to create visual separation
+// in the checkerboard pattern, mimicking the Pile theme's 3D grid look.
+//
+// The transform is applied to .nb-collection__layout-item (the grid cell)
+// because .nb-supernova-item inside it is clipped by overflow: hidden.
+
+.nb-supernova--pile-parallax {
+
+  // Allow items to overflow the grid so parallax movement is visible.
+  .nb-collection__layout {
+    overflow: visible;
+  }
+
+  .nb-collection__layout-item {
+    will-change: transform;
+    overflow: visible;
+    // CSS Grid sizes columns from the item's min content width when
+    // overflow is visible (min-width:auto). NB normally has overflow:hidden
+    // on items which implicitly resolves min-width to 0. Since we need
+    // overflow:visible for parallax, set min-width:0 explicitly so the
+    // grid columns shrink to fit the container.
+    min-width: 0;
+  }
+}
+
+// ==========================================================================
+// 3D Grid — frontend: JS applies .js-3d class per the target/rule settings
+// ==========================================================================
+.nb-supernova--pile-3d {
+
+  // Scale down 3D items to create a "pushed back" visual depth effect.
+  // Uses transform instead of width reduction so the grid cell stays full
+  // size — no layout shift, no overflow. Combined with the 2× parallax
+  // travel speed on 3D items, this creates a convincing depth illusion.
+  .nb-collection__layout-item.js-3d > .nb-supernova-item {
+    transform: scale(0.88);
+  }
+}
+
+// Editor 3D Grid rules are in utility/_items-aspect-ratio.scss
+// (inside body.editor-styles-wrapper) because utility.css is loaded
+// in the editor iframe, but style.css (which contains this file) is not.
