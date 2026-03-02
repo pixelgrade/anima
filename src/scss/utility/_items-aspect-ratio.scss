@@ -1,0 +1,196 @@
+// Items Aspect Ratio utilities for Nova Blocks collection grids.
+//
+// Two features:
+// 1. Forced aspect ratios (Square, Landscape, Portrait) for stacked cards
+//    via CSS aspect-ratio property on the card item.
+// 2. "Original" aspect ratio — image dictates card height (like Pile theme)
+//    and content overlays it.
+//
+// Works on both frontend and editor with scoped rules where they differ.
+
+// ==========================================================================
+// SHARED (frontend + editor) — forced aspect ratios
+// ==========================================================================
+// Scoped to 2+ columns so full-width hero blocks (1-column) are unaffected.
+// Excluded from "Original" mode where the image dictates card height instead.
+.nb-supernova:not(.nb-supernova--1-columns):not(.nb-supernova--aspect-ratio-original) {
+  .nb-supernova-item--layout-stacked {
+    aspect-ratio: var(--nb-card-media-aspect-ratio, auto);
+  }
+}
+
+// ==========================================================================
+// EDITOR — fix broken aspect-ratio on media wrapper for ALL modes
+// ==========================================================================
+// NB's editor-styles.scss sets:
+//   aspect-ratio: calc(100 / var(--nb-min-height-fallback) * 16/9 * ...)
+// When --nb-min-height-fallback is 0 this becomes infinity, blowing the
+// media wrapper to millions of pixels wide and hiding images offscreen.
+//
+// Fix: reset the media wrapper aspect-ratio to auto for multi-column grids.
+// The card item's own aspect-ratio (from the rule above) controls the size,
+// and the media wrapper just stretches to fill via grid-area + align-self.
+body.editor-styles-wrapper {
+
+  // Fix for forced aspect ratios (Square, Landscape, Portrait).
+  // NB's editor formula on the media wrapper produces a degenerate aspect-ratio when
+  // Minimum Container Height is "None" (fallback=0), hiding images and text.
+  // Reset it to auto so the card item's own aspect-ratio controls sizing and the
+  // media wrapper simply stretches to fill the card via grid-area + align-self.
+  .nb-supernova:not(.nb-supernova--1-columns):not(.nb-supernova--aspect-ratio-original) {
+    .nb-supernova-item--layout-stacked .nb-supernova-item__media-wrapper {
+      aspect-ratio: auto !important;
+    }
+
+    // Ensure image fills the card properly.
+    .nb-supernova-item--layout-stacked .nb-supernova-item__media[class] {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  // 3D Grid — CSS-only checkerboard pattern for editor preview.
+  // On the frontend, JS applies .js-3d per the target/rule settings.
+  // In the editor we approximate the default "item/odd" checkerboard with nth-child.
+  .nb-supernova--pile-3d .nb-collection__layout-item:nth-child(even) > .nb-supernova-item {
+    transform: scale(0.88);
+  }
+
+  // Fix for Original aspect ratio.
+  // NB's editor uses a deeply nested media chain (media-wrapper → media-aspect-ratio
+  // → blob-mix → blob-mix__mask → blob-mix__media → img). Several containers are
+  // absolute-positioned or overflow:hidden, preventing the image's natural height
+  // from dictating the card height. Override the entire chain so the image flows.
+  .nb-supernova--aspect-ratio-original {
+    .nb-supernova-item--layout-stacked .nb-supernova-item__media-wrapper {
+      aspect-ratio: auto !important;
+    }
+
+    // Undo absolute positioning in the blob-mix chain so image height flows up.
+    .nb-supernova-item__media-aspect-ratio[class] {
+      min-height: auto;
+      height: auto;
+    }
+
+    .blob-mix[class] {
+      position: relative;
+      height: auto;
+    }
+
+    .blob-mix__mask[class] {
+      overflow: visible;
+      height: auto;
+    }
+
+    .blob-mix__media[class] {
+      position: relative;
+      height: auto;
+    }
+
+    // Let image display at natural proportions within the grid cell.
+    .nb-supernova-item__media[class] {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    // Stagger cards vertically like the frontend.
+    .nb-collection__layout {
+      align-items: center;
+    }
+  }
+}
+
+// ==========================================================================
+// FRONTEND ONLY — Original aspect ratio
+// ==========================================================================
+// Reverses the NB stacked layout: instead of media covering the card
+// (position:absolute) while content dictates height, we make the media
+// flow naturally (position:static) so the image dictates card height,
+// and the content overlays it — like Pile theme.
+//
+// These rules MUST NOT apply in the block editor because NB's editor uses
+// a CSS Grid layout for stacked cards which handles overlapping via grid-area.
+body:not(.editor-styles-wrapper) .nb-supernova--aspect-ratio-original {
+
+  // 0. Center cards vertically — staggered layout like Pile theme.
+  .nb-collection__layout {
+    align-items: center;
+  }
+
+  // 1. Kill the padding-top pseudo-element that forces the ratio.
+  .nb-supernova-item__media-aspect-ratio::before {
+    content: none;
+  }
+
+  // 2. Let the aspect-ratio container grow with its content.
+  .nb-supernova-item__media-aspect-ratio[class] {
+    min-height: auto;
+    height: auto;
+  }
+
+  // 3. Make media wrapper flow naturally instead of covering the card.
+  .nb-supernova-item .nb-supernova-item__media-wrapper[class][class] {
+    position: static;
+    height: auto;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+  }
+
+  // 4. Undo absolute positioning in the doppler/blob-mix chain.
+  .novablocks-doppler__wrapper[class][class] {
+    position: static;
+    height: auto;
+  }
+
+  .blob-mix__mask[class][class] {
+    overflow: visible;
+    height: auto;
+  }
+
+  .blob-mix__media[class][class] {
+    position: relative;
+    height: auto;
+  }
+
+  // 5. Images at natural dimensions.
+  .nb-supernova-item__media[class][class] {
+    position: static;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  // 6. Content overlay — full card height, spread vertically.
+  .nb-supernova-item--layout-stacked {
+    position: relative;
+
+    .nb-supernova-item__content[class] {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+    }
+
+    // Spread content elements vertically across the full card height.
+    // High specificity to override both NB's valign-center utility AND the
+    // collection-hover-pile justify-content:center rule.
+    .nb-supernova-item__inner-container[class][class][class] {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  // 7. Remove the stacked card's min-height.
+  .nb-supernova-item.nb-supernova-item--layout-stacked[class] {
+    min-height: 0;
+  }
+}
