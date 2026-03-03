@@ -266,8 +266,8 @@ class GlobalService {
   }
   _updateScroll(force = false) {
     this.newProps = Object.assign({}, this.newProps, {
-      scrollY: window.pageYOffset,
-      scrollX: window.pageXOffset
+      scrollY: window.scrollY,
+      scrollX: window.scrollX
     });
     this._shouldUpdate(this._scrollCallback.bind(this));
   }
@@ -368,7 +368,7 @@ class Hero {
       this.updateOnScroll();
     });
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    mediaQuery.addListener(() => {
+    mediaQuery.addEventListener('change', () => {
       this.reduceMotion = mediaQuery.matches;
       this.updateOnScroll();
     });
