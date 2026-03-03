@@ -116,7 +116,8 @@ add_filter( 'get_block_templates', 'anima_add_block_templates_details', 10, 3 );
  *
  * Since with FSE we have little room in terms of hooks, we need to make do to bring back some of our hooks.
  *
- * The file wp-includes/template-canvas.php is the default entry point for rendering block-templates (wp_templates).
+ * The core template-canvas file is the default entry point for rendering block templates.
+ * Its full path changed over time in Gutenberg/plugin contexts, so we detect it by suffix.
  *
  * @see get_query_template(), locate_block_template()
  *
@@ -127,11 +128,22 @@ add_filter( 'get_block_templates', 'anima_add_block_templates_details', 10, 3 );
  * @return string
  */
 function anima_get_custom_template_canvas_path( string $template, string $type, array $templates ): string {
+	$template_path = wp_normalize_path( $template );
+	$template_canvas_suffix = '/template-canvas.php';
+	$template_canvas_suffix_length = strlen( $template_canvas_suffix );
+
+	$is_core_template_canvas = $template_path === wp_normalize_path( ABSPATH . WPINC . $template_canvas_suffix );
+	$is_gutenberg_template_canvas = false;
+
+	if ( function_exists( 'gutenberg_dir_path' ) ) {
+		$gutenberg_dir = wp_normalize_path( untrailingslashit( gutenberg_dir_path() ) ) . '/';
+		$is_gutenberg_template_canvas = strpos( $template_path, $gutenberg_dir ) === 0
+			&& substr( $template_path, -$template_canvas_suffix_length ) === $template_canvas_suffix;
+	}
+
 	// If the template location logic determined to use the template canvas (core or Gutenberg plugin), we have work to do.
 	// Otherwise, do not touch the selected template.
-	if ( $template === ABSPATH . WPINC . '/template-canvas.php'
-		|| ( function_exists( 'gutenberg_dir_path' ) && $template === gutenberg_dir_path() . 'lib/compat/wordpress-5.9/template-canvas.php' )
-	) {
+	if ( $is_core_template_canvas || $is_gutenberg_template_canvas ) {
 		return get_theme_file_path( 'inc/fse/template-canvas.php' );
 	}
 

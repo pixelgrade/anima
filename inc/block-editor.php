@@ -11,17 +11,39 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Remove block editor global styles (from theme.json) since Style Manager handles all styling.
+ * Remove core global style callbacks since Style Manager handles all styling.
+ *
+ * Core moved these callbacks across hooks in recent WP releases, so we remove
+ * all known combinations to keep behavior consistent on WP 6.x and 7.x.
  *
  * @see https://github.com/WordPress/gutenberg/issues/38299#issuecomment-1025520487
  */
 add_action( 'after_setup_theme', function () {
+	$global_styles_callbacks = [
+		'wp_enqueue_global_styles',
+		'wp_enqueue_global_styles_css_custom_properties',
+	];
 
-	// Remove SVG and global styles
-	remove_action( 'wp_enqueue_scripts', 'wp_enqueue_global_styles' );
+	$global_styles_hooks = [
+		'wp_enqueue_scripts',
+		'enqueue_block_assets',
+		'admin_enqueue_scripts',
+		'wp_footer',
+	];
 
-	// Remove wp_footer actions which adds global inline styles
-	remove_action( 'wp_footer', 'wp_enqueue_global_styles', 1 );
+	$priorities = [ 1, 10 ];
+
+	foreach ( $global_styles_callbacks as $callback ) {
+		if ( ! function_exists( $callback ) ) {
+			continue;
+		}
+
+		foreach ( $global_styles_hooks as $hook ) {
+			foreach ( $priorities as $priority ) {
+				remove_action( $hook, $callback, $priority );
+			}
+		}
+	}
 } );
 
 /**
@@ -48,6 +70,9 @@ add_filter( 'block_editor_settings_all',
 
 			$editor_settings['styles'] = array_values( $editor_settings['styles'] );
 		}
+
+		// Keep font management in Style Manager to avoid duplicate UI with Font Library.
+		$editor_settings['fontLibraryEnabled'] = false;
 
 		return $editor_settings;
 	}, 10, 2 );
