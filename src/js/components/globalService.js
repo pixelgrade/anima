@@ -147,8 +147,8 @@ class GlobalService {
 
   _updateScroll ( force = false ) {
     this.newProps = Object.assign( {}, this.newProps, {
-      scrollY: window.pageYOffset,
-      scrollX: window.pageXOffset,
+      scrollY: window.scrollY,
+      scrollX: window.scrollX,
     } );
 
     this._shouldUpdate( this._scrollCallback.bind( this ) );
