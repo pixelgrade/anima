@@ -1956,6 +1956,11 @@ function cleanupBeforeTransition() {
   disconnectHeaderColorObserver();
   const $container = external_jQuery_default()('[data-barba="container"]');
 
+  // Remove reading bar nodes from the outgoing container before scripts re-run.
+  // Nova Blocks queries `.js-reading-*` globally; leaving old nodes in the DOM
+  // during AJAX swap can leak a stale progress bar into the next page header.
+  $container.find('.js-reading-bar, .js-reading-progress').remove();
+
   // Pause and remove video elements.
   $container.find('video').each(function () {
     this.pause();
