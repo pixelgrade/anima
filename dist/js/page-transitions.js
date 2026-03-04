@@ -1290,6 +1290,7 @@ class App {
 // reinitNovaBlocksScripts() skips these to avoid double-initialization
 // (which causes duplicate elements and toggled handlers canceling each other).
 let freshlyLoadedScriptIds = new Set();
+const INLINE_SYNC_KEY_ATTR = 'data-anima-inline-sync-key';
 
 /**
  * Sync body classes from the new page's HTML response.
@@ -1422,14 +1423,30 @@ function syncScripts(doc) {
     if (!text.trim()) {
       return;
     }
-
-    // Only execute scripts that set global data/config.
-    // Skip analytics, tracking, and JSON-LD schema scripts.
-    if (isDataScript(text)) {
-      const newScript = document.createElement('script');
-      newScript.textContent = text;
-      document.body.appendChild(newScript);
+    const scriptKey = getInlineDataScriptKey(script, text);
+    if (!scriptKey) {
+      return;
     }
+    removePreviouslySyncedInlineScripts(scriptKey);
+
+    // If WordPress provided a stable ID for this inline script, replace
+    // the previous node so we don't accumulate duplicate IDs in the DOM.
+    if (script.id) {
+      const existing = document.getElementById(script.id);
+      if (existing && existing.tagName === 'SCRIPT' && !existing.src) {
+        existing.remove();
+      }
+    }
+    const newScript = document.createElement('script');
+    if (script.id) {
+      newScript.id = script.id;
+    }
+    if (script.type) {
+      newScript.type = script.type;
+    }
+    newScript.setAttribute(INLINE_SYNC_KEY_ATTR, scriptKey);
+    newScript.textContent = text;
+    document.body.appendChild(newScript);
   });
 }
 
@@ -1441,19 +1458,36 @@ function stripCacheBust(url) {
 }
 
 /**
- * Check if an inline script sets global data (safe and needed to re-execute).
+ * Return a stable key for inline scripts that are safe to re-execute.
+ *
+ * We only sync script-localized data blocks and explicit FacetWP payloads.
+ * This avoids re-executing generic inline JS (or module scripts), which can
+ * throw syntax/runtime errors when replayed during AJAX navigation.
  */
-function isDataScript(text) {
-  // Scripts that assign to window (e.g., window.FWP_JSON = {...})
-  if (/window\.\w+\s*=/.test(text)) {
-    return true;
+function getInlineDataScriptKey(script, text) {
+  const type = (script.type || 'text/javascript').toLowerCase();
+  const isClassicJs = !type || type === 'text/javascript' || type === 'application/javascript' || type === 'application/ecmascript';
+  if (!isClassicJs) {
+    return null;
   }
 
-  // WordPress wp_localize_script output (e.g., var fwpConfig = {...})
-  if (/^var\s+\w+\s*=/.test(text.trim())) {
-    return true;
+  // WordPress localized data scripts usually use handle-based IDs.
+  if (script.id && script.id.endsWith('-js-extra')) {
+    return `id:${script.id}`;
   }
-  return false;
+
+  // FacetWP payload is emitted inline without a stable ID in some setups.
+  if (/window\.FWP_JSON\s*=/.test(text)) {
+    return 'facetwp-json';
+  }
+  return null;
+}
+function removePreviouslySyncedInlineScripts(scriptKey) {
+  document.querySelectorAll(`script[${INLINE_SYNC_KEY_ATTR}]`).forEach(el => {
+    if (el.getAttribute(INLINE_SYNC_KEY_ATTR) === scriptKey) {
+      el.remove();
+    }
+  });
 }
 
 /**
