@@ -305,3 +305,8 @@ When a block editor feature "doesn't work on the frontend," the first place to l
 - **Text domain**: Always use `__theme_txtd` in source (replaced at build time).
 - **CSS custom properties**: `--sm-*` from Style Manager, `--nb-*` from Nova Blocks.
 - **Editor config**: `.editorconfig` defines indentation rules per file type.
+
+## Browser Automation Note
+
+- For browser video recordings, use Playwriter native tab-capture only (`recording.start` / `recording.stop`).
+- Do not use screenshot-sequence or other fallback methods to synthesize videos.
