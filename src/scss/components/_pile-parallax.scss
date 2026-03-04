@@ -29,12 +29,15 @@
 // ==========================================================================
 .nb-supernova--pile-3d {
 
-  // Scale down 3D items to create a "pushed back" visual depth effect.
-  // Uses transform instead of width reduction so the grid cell stays full
-  // size — no layout shift, no overflow. Combined with the 2× parallax
-  // travel speed on 3D items, this creates a convincing depth illusion.
-  .nb-collection__layout-item.js-3d > .nb-supernova-item {
-    transform: scale(0.88);
+  // Use horizontal inset spacing (Pile-style) instead of scaling the card.
+  // Scaling shrinks typography and UI chrome visually; inset spacing preserves
+  // font sizes while still making 3D-tagged items feel recessed.
+  --anima-pile-3d-inline-inset: clamp(10px, 1.25vw, 24px);
+
+  .nb-collection__layout-item.js-3d {
+    box-sizing: border-box;
+    padding-left: var(--anima-pile-3d-inline-inset);
+    padding-right: var(--anima-pile-3d-inline-inset);
   }
 }
 

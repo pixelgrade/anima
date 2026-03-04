@@ -53,8 +53,15 @@ body.editor-styles-wrapper {
   // 3D Grid — CSS-only checkerboard pattern for editor preview.
   // On the frontend, JS applies .js-3d per the target/rule settings.
   // In the editor we approximate the default "item/odd" checkerboard with nth-child.
-  .nb-supernova--pile-3d .nb-collection__layout-item:nth-child(even) > .nb-supernova-item {
-    transform: scale(0.88);
+  // Keep text size consistent by using inset spacing, not card scaling.
+  .nb-supernova--pile-3d {
+    --anima-pile-3d-inline-inset: clamp(10px, 1.25vw, 24px);
+
+    .nb-collection__layout-item:nth-child(even) {
+      box-sizing: border-box;
+      padding-left: var(--anima-pile-3d-inline-inset);
+      padding-right: var(--anima-pile-3d-inline-inset);
+    }
   }
 
   // Fix for Original aspect ratio.
