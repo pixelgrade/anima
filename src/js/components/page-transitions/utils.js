@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import App from '../app';
+import * as PileParallax from '../pile-parallax';
 
 // Tracks script IDs that syncPageAssets() loaded for the first time.
 // reinitNovaBlocksScripts() skips these to avoid double-initialization
@@ -519,7 +520,13 @@ export function reinitComponents() {
   // Re-initialize Nova Blocks frontend scripts.
   // In FSE themes the header/footer are inside the Barba container and get swapped,
   // so Nova Blocks' block JS (header sticky, color signal, etc.) must re-run.
-  reinitNovaBlocksScripts();
+  reinitNovaBlocksScripts( () => {
+    // Nova Blocks scripts can mutate/rebuild collection card DOM after AJAX swap.
+    // Refresh pile parallax bindings after those scripts finish so we target
+    // the final nodes and not stale pre-mutation references.
+    PileParallax.initialize();
+    window.dispatchEvent( new Event( 'scroll' ) );
+  } );
 
   // Reinitialize FacetWP if it was previously loaded.
   // FacetWP renders facets client-side — after AJAX page swap, the new DOM
@@ -541,12 +548,20 @@ export function reinitComponents() {
 
   // Fire a custom event that other scripts can hook into.
   $( document ).trigger( 'anima:page-transition-complete' );
+  // Native event mirror for non-jQuery listeners.
+  window.dispatchEvent( new CustomEvent( 'anima:page-transition-complete' ) );
 
   // Dispatch resize + scroll events for layout-dependent JS.
   // Resize: recalculates layout (Hero, GlobalService).
   // Scroll: triggers Hero.update() and bully's rAF loop to process new elements.
   window.dispatchEvent( new Event( 'resize' ) );
   window.dispatchEvent( new Event( 'scroll' ) );
+  // Delayed fallback pass: some third-party scripts mutate the new container
+  // asynchronously right after transition. Trigger one more recalculation.
+  setTimeout( () => {
+    window.dispatchEvent( new Event( 'resize' ) );
+    window.dispatchEvent( new Event( 'scroll' ) );
+  }, 250 );
 }
 
 /**
@@ -564,7 +579,7 @@ export function reinitComponents() {
  * events so scripts like the Doppler parallax effect recalculate their
  * initial positions with correct DOM measurements.
  */
-function reinitNovaBlocksScripts() {
+function reinitNovaBlocksScripts( onComplete = () => {} ) {
   // Re-execute the bully vendor script first so it creates a fresh IIFE
   // with an empty elements array and a new .c-bully DOM element.
   // The old instance's rAF loop will harmlessly reference the removed DOM.
@@ -592,6 +607,7 @@ function reinitNovaBlocksScripts() {
 
       window.dispatchEvent( new Event( 'resize' ) );
       window.dispatchEvent( new Event( 'scroll' ) );
+      onComplete();
     } );
   };
 

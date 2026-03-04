@@ -10,6 +10,11 @@
 
 **Key discovery:** Anima already registers GSAP from CDN (`functions.php:166-170`) and has hook points in `template-canvas.php` (`anima/template_html:before` / `anima/template_html:after`) for injecting the Barba wrapper without editing template files.
 
+## Tuning Notes
+
+- `2026-03-03`: Initial cap-based tuning (`0.16 -> 0.12 -> 0.06` viewport travel cap) reduced gaps but made parallax too subtle.
+- Final approach: remove hard cap and attenuate only the positive/downward phase with `positiveOffsetFactor = 0.35` in `src/js/components/pile-parallax/index.js`. This keeps upward movement strong while reducing oversized blank space above the first grid row.
+
 ---
 
 ### Task 1: Add npm dependency and webpack entry point
