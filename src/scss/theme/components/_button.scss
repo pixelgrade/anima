@@ -46,8 +46,19 @@
             @include button-reset;
             @include button-text;
 
+            // Core Buttons CSS applies width: 100% on button links inside .wp-block-buttons.
+            // Text-style buttons should size to content and avoid flex shrinking unless
+            // user explicitly sets a custom width.
+            width: auto;
+            flex-shrink: 0;
+
             --theme-button-text-color: var(--sm-current-accent-color);
             --theme-button-hover-text-color: var(--sm-current-accent-color);
+        }
+
+        &.has-custom-width .wp-block-button__link {
+            width: 100%;
+            flex-shrink: 1;
         }
 
         &:where([class*="sm-variation"]) .wp-block-button__link {
@@ -107,4 +118,3 @@
 .button--huge {
     @include button-huge;
 }
-
