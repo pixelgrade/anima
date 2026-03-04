@@ -99,6 +99,57 @@ function syncStyles( doc ) {
       link.remove();
     }
   } );
+
+  // Keep CSS cascade order aligned with the server-rendered <head>.
+  // Appending newly-added inline styles at the end can flip layout rules.
+  reorderHeadStyleAndLinkNodes( newHead );
+}
+
+/**
+ * Reorder managed <style>/<link rel="stylesheet"> nodes to match server order.
+ *
+ * During AJAX transitions, WordPress may introduce page-specific inline styles
+ * (for example `wp-block-post-content-inline-css`). If those are appended after
+ * persistent theme/plugin styles, the CSS cascade can change unexpectedly.
+ */
+function reorderHeadStyleAndLinkNodes( newHead ) {
+  const desiredIds = Array.from(
+    newHead.querySelectorAll( 'style[id], link[rel="stylesheet"][id]' )
+  )
+    .map( ( node ) => node.id )
+    .filter( Boolean );
+
+  if ( ! desiredIds.length ) {
+    return;
+  }
+
+  const desiredNodes = desiredIds
+    .map( ( id ) => document.getElementById( id ) )
+    .filter( ( node ) => {
+      if ( ! node || ! node.parentNode || node.parentNode !== document.head ) {
+        return false;
+      }
+
+      if ( node.tagName === 'STYLE' ) {
+        return true;
+      }
+
+      return node.tagName === 'LINK' && node.rel === 'stylesheet';
+    } );
+
+  if ( ! desiredNodes.length ) {
+    return;
+  }
+
+  // Insert the reordered block where the first managed node currently sits.
+  const marker = document.createComment( 'anima-css-order-marker' );
+  document.head.insertBefore( marker, desiredNodes[ 0 ] );
+
+  const fragment = document.createDocumentFragment();
+  desiredNodes.forEach( ( node ) => fragment.appendChild( node ) );
+
+  document.head.insertBefore( fragment, marker );
+  marker.remove();
 }
 
 /**
