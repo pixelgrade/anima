@@ -1338,6 +1338,7 @@ function syncPageAssets(html) {
  */
 function syncStyles(doc) {
   const newHead = doc.head;
+  const styleOrder = getServerStyleOrder(newHead);
 
   // --- Sync inline <style> blocks (identified by id) ---
   const newStyles = newHead.querySelectorAll('style[id]');
@@ -1350,7 +1351,7 @@ function syncStyles(doc) {
         existing.textContent = newStyle.textContent;
       }
     } else {
-      document.head.appendChild(newStyle.cloneNode(true));
+      insertStyleNodeInServerOrder(newStyle.cloneNode(true), styleOrder);
     }
   });
 
@@ -1367,7 +1368,7 @@ function syncStyles(doc) {
   newLinks.forEach(newLink => {
     newLinkIds.add(newLink.id);
     if (!document.getElementById(newLink.id)) {
-      document.head.appendChild(newLink.cloneNode(true));
+      insertStyleNodeInServerOrder(newLink.cloneNode(true), styleOrder);
     }
   });
 
@@ -1377,44 +1378,53 @@ function syncStyles(doc) {
       link.remove();
     }
   });
-
-  // Keep CSS cascade order aligned with the server-rendered <head>.
-  // Appending newly-added inline styles at the end can flip layout rules.
-  reorderHeadStyleAndLinkNodes(newHead);
 }
 
 /**
- * Reorder managed <style>/<link rel="stylesheet"> nodes to match server order.
- *
- * During AJAX transitions, WordPress may introduce page-specific inline styles
- * (for example `wp-block-post-content-inline-css`). If those are appended after
- * persistent theme/plugin styles, the CSS cascade can change unexpectedly.
+ * Build a CSS order map from the new server-rendered <head>.
  */
-function reorderHeadStyleAndLinkNodes(newHead) {
-  const desiredIds = Array.from(newHead.querySelectorAll('style[id], link[rel="stylesheet"][id]')).map(node => node.id).filter(Boolean);
-  if (!desiredIds.length) {
+function getServerStyleOrder(newHead) {
+  const ids = Array.from(newHead.querySelectorAll('style[id], link[rel="stylesheet"][id]')).map(node => node.id).filter(Boolean);
+  return new Map(ids.map((id, index) => [id, index]));
+}
+
+/**
+ * Insert a new <style>/<link> node in the same relative order as server HTML.
+ *
+ * This avoids full head reordering (which can trigger visible flicker) while
+ * still keeping cascade-sensitive inline styles in a stable position.
+ */
+function insertStyleNodeInServerOrder(node, styleOrder) {
+  const nodeOrder = styleOrder.get(node.id);
+  if (typeof nodeOrder === 'undefined') {
+    document.head.appendChild(node);
     return;
   }
-  const desiredNodes = desiredIds.map(id => document.getElementById(id)).filter(node => {
-    if (!node || !node.parentNode || node.parentNode !== document.head) {
+  const managedNodes = Array.from(document.head.querySelectorAll('style[id], link[rel="stylesheet"][id]')).filter(existing => {
+    if (!existing.id) {
       return false;
     }
-    if (node.tagName === 'STYLE') {
+    if (existing.tagName === 'STYLE') {
       return true;
     }
-    return node.tagName === 'LINK' && node.rel === 'stylesheet';
+    return existing.tagName === 'LINK' && existing.rel === 'stylesheet';
   });
-  if (!desiredNodes.length) {
+  const anchor = managedNodes.find(existing => {
+    const existingOrder = styleOrder.get(existing.id);
+    return typeof existingOrder !== 'undefined' && existingOrder > nodeOrder;
+  });
+  if (anchor) {
+    document.head.insertBefore(node, anchor);
     return;
   }
-
-  // Insert the reordered block where the first managed node currently sits.
-  const marker = document.createComment('anima-css-order-marker');
-  document.head.insertBefore(marker, desiredNodes[0]);
-  const fragment = document.createDocumentFragment();
-  desiredNodes.forEach(node => fragment.appendChild(node));
-  document.head.insertBefore(fragment, marker);
-  marker.remove();
+  const orderedManaged = managedNodes.filter(existing => {
+    return typeof styleOrder.get(existing.id) !== 'undefined';
+  });
+  if (orderedManaged.length) {
+    orderedManaged[orderedManaged.length - 1].insertAdjacentElement('afterend', node);
+    return;
+  }
+  document.head.appendChild(node);
 }
 
 /**
