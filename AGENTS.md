@@ -156,6 +156,12 @@ Four registered menus: `primary`, `secondary`, `tertiary`, `search-suggestions`.
 
 Template overrides in `woocommerce/`, dedicated styles in `src/scss/woocommerce/`, and scripts in `src/js/woocommerce.js`.
 
+## LT Full-Stack Smoke Test & Onboarding
+
+Full CLI setup + browser onboarding for LT theme sites (Rosa LT, Felt LT, Julia LT, Mies LT) is documented in the **`lt-test-site` skill** (`~/.claude/skills/lt-test-site/SKILL.md`, also at `~/.codex/skills/lt-test-site/SKILL.md`).
+
+Usage: "Spin up a test site for Mies" — the skill automates Studio site creation, GitHub release ZIP install, and Playwriter-driven onboarding (impersonate, OAuth, license selection, starter content import).
+
 ## Workflow: Fixes and Improvements
 
 Every fix or improvement **must** follow this workflow:
