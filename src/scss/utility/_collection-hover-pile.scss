@@ -1,0 +1,171 @@
+// Collection Hover Effect: Pile
+//
+// Inspired by the Pile theme's portfolio hover animation.
+// Only applies to Cards Collection blocks with Element Stacking = "Stacked"
+// (class .nb-supernova--card-layout-stacked on the collection wrapper).
+//
+// Uses NB's Overlay Filter system: on hover the image opacity decreases,
+// letting the Color Signal background show through (controlled by the
+// Overlay Filter Strength slider in the block settings).
+//
+// By default only media is visible; on hover the content fades in:
+// - Title: opacity fade + slight upward slide (center)
+// - First .nb-card__meta: slides down from top edge
+// - Second .nb-card__meta: slides up from bottom edge
+//
+// The entire card is clickable (media link covers full area).
+// Non-stacked collections keep the default border hover effect.
+//
+// Applied via body class: .u-collection-hover-pile
+
+$pile-scope: '.u-collection-hover-pile .nb-supernova--card-layout-stacked:not(.nb-supernova--1-columns)';
+$pile-duration: 0.35s;
+$pile-easing: cubic-bezier(0.165, 0.84, 0.44, 1);
+
+@media (hover: hover) {
+
+  // --- FULL-CARD CLICKABLE ---
+  // Content overlay passes through clicks to the media <a> underneath.
+  // Only interactive elements (links inside title) capture their own clicks.
+  #{$pile-scope} .nb-supernova-item .nb-supernova-item__content {
+    pointer-events: none;
+  }
+
+  #{$pile-scope} .nb-supernova-item .nb-supernova-item__content a {
+    pointer-events: auto;
+  }
+
+  // --- CONTENT OVERLAY: cover the full card so inner-container can flex ---
+  // On stacked cards the media covers the card (position:absolute) while
+  // content sits in normal flow. We need content to also cover the card
+  // so the inner flex container can distribute meta/title top-to-bottom.
+  #{$pile-scope} .nb-supernova-item--layout-stacked .nb-supernova-item__content[class] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
+  }
+
+  // --- INNER CONTAINER LAYOUT ---
+  // Remove padding so meta can reach the card edges.
+  // Use flex column to distribute: first-meta top, title center, last-meta bottom.
+  #{$pile-scope} .nb-supernova-item__inner-container[class][class] {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0 !important;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  // --- HOVER OVERLAY via Overlay Filter ---
+  // NB's Overlay Filter sets img opacity via:
+  //   opacity: calc(1 - var(--nb-overlay-filter-strength, 0))
+  // The user controls --nb-overlay-filter-strength with the Overlay Filter
+  // Strength slider. We want images at full opacity at rest and dimmed on
+  // hover — so we override the img opacity directly:
+  //   • At rest: opacity 1 (ignore the variable)
+  //   • On hover: apply the user's configured strength (fall back to 0.55)
+  // This way the slider controls the hover dim intensity, not the resting state.
+  #{$pile-scope} .nb-supernova-item .nb-supernova-item__media-wrapper {
+    img, video {
+      opacity: 1 !important;
+      transition: opacity $pile-duration $pile-easing;
+    }
+  }
+
+  #{$pile-scope} .nb-supernova-item:hover .nb-supernova-item__media-wrapper {
+    img, video {
+      opacity: calc(1 - var(--nb-overlay-filter-strength, 0.55)) !important;
+    }
+  }
+
+  // --- HIDE ALL CONTENT BY DEFAULT ---
+  #{$pile-scope} .nb-supernova-item .nb-supernova-item__inner-container > * {
+    opacity: 0;
+    transition: opacity $pile-duration $pile-easing,
+                transform $pile-duration $pile-easing;
+  }
+
+  // --- TITLE: fade in + slight upward slide ---
+  #{$pile-scope} .nb-supernova-item .nb-card__title {
+    color: #fff;
+    transform: translateY(8px);
+    transition-delay: 0.04s;
+  }
+
+  #{$pile-scope} .nb-supernova-item:hover .nb-card__title {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  // --- FIRST META: flush to top edge, slides down ---
+  #{$pile-scope} .nb-supernova-item .nb-card__meta:first-child {
+    order: -1;
+    color: rgba(255, 255, 255, 0.85);
+    transform: translateY(-12px);
+    margin-bottom: auto;
+    padding: 0.75em 1em;
+    width: 100%;
+    transition-delay: 0s;
+  }
+
+  #{$pile-scope} .nb-supernova-item:hover .nb-card__meta:first-child {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  // --- LAST META: flush to bottom edge, slides up ---
+  #{$pile-scope} .nb-supernova-item .nb-card__meta:last-child {
+    color: rgba(255, 255, 255, 0.85);
+    transform: translateY(12px);
+    margin-top: auto;
+    padding: 0.75em 1em;
+    width: 100%;
+    transition-delay: 0.08s;
+  }
+
+  #{$pile-scope} .nb-supernova-item:hover .nb-card__meta:last-child {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  // --- WHITE TEXT ON HOVER FOR ALL CONTENT ---
+  #{$pile-scope} .nb-supernova-item:hover .nb-supernova-item__inner-container > * {
+    color: #fff;
+  }
+}
+
+// ==========================================================================
+// EDITOR — content layout for pile hover preview
+// ==========================================================================
+// In the editor, NB forces stacked cards to `display: grid !important` with
+// `position: static !important` on children. The frontend's absolute-positioning
+// approach doesn't work. Instead, use flex on the content wrapper so the
+// inner-container can fill the full card height and distribute elements.
+// In the editor iframe the `.u-collection-hover-pile` body class is absent,
+// so we scope to the block classes directly.
+body.editor-styles-wrapper {
+  .nb-supernova--card-layout-stacked:not(.nb-supernova--1-columns) .nb-supernova-item--layout-stacked {
+
+    // Content wrapper: make it a flex column so inner-container can grow.
+    // align-self:stretch from NB's editor grid already gives it full height.
+    .nb-supernova-item__content[class] {
+      display: flex;
+      flex-direction: column;
+    }
+
+    // Inner container: fill the content wrapper, distribute elements vertically.
+    .nb-supernova-item__inner-container[class][class] {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 !important;
+    }
+  }
+}

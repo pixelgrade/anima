@@ -38,3 +38,13 @@ require_once trailingslashit( get_template_directory() ) . 'inc/integrations/pix
  * This has to be loaded before inc/admin/admin.php
  */
 require_once trailingslashit( get_template_directory() ) . 'inc/integrations/woocommerce.php';
+
+/**
+ * Load Page Transitions integration for this theme.
+ */
+require_once trailingslashit( get_template_directory() ) . 'inc/integrations/page-transitions.php';
+
+/**
+ * Load Project Color integration (per-post color for page transitions).
+ */
+require_once trailingslashit( get_template_directory() ) . 'inc/integrations/project-color.php';

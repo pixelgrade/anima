@@ -33,8 +33,12 @@ module.exports = {
     './dist/js/woocommerce.min' : './src/js/woocommerce.js',
     './dist/js/editor' : './src/js/editor.js',
     './dist/js/editor.min' : './src/js/editor.js',
+    './dist/js/page-transitions' : './src/js/page-transitions.js',
+    './dist/js/page-transitions.min' : './src/js/page-transitions.js',
     './dist/js/admin/customizer-nav-menus' : './src/js/admin/customizer-nav-menus.js',
     './dist/js/admin/customizer-nav-menus.min' : './src/js/admin/customizer-nav-menus.js',
+    './dist/js/admin/project-color' : './src/js/admin/project-color.js',
+    './dist/js/admin/project-color.min' : './src/js/admin/project-color.js',
   },
   optimization: {
     minimize: true,
@@ -48,7 +52,8 @@ module.exports = {
   },
   externals: {
     react: 'React',
-    jquery: 'jQuery'
+    jquery: 'jQuery',
+    gsap: 'gsap',
   },
   watch: 'production' !== process.env.NODE_ENV,
   module: {

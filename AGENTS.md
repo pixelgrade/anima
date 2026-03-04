@@ -10,7 +10,7 @@ GitHub: `git@github.com:pixelgrade/anima.git`
 
 - **Node 22+ required** (`.nvmrc` = 22, `package.json` engines `>=22.0.0`). Enforced by `node-tasks/lock_node_version.js` on `npm install`.
 - **`npm run build` creates the ZIP** — it runs webpack, gulp styles, AND `gulp zip` in sequence. The build deletes `../build/` before creating it, so a failed build mid-way can leave the theme without a build folder.
-- **CLAUDE.md is excluded from the ZIP** via `.zipignore` — keep it that way.
+- **AGENTS.md and CLAUDE.md are excluded from the ZIP** via `.zipignore` — keep it that way.
 - **`style.css` is compiled output** — never edit it directly. Source is in `src/scss/`.
 - **Text domain `__theme_txtd`** is a placeholder replaced with `anima` during the build process. Use `__theme_txtd` in source PHP/JS/CSS files.
 
@@ -63,8 +63,8 @@ npm run scripts  # webpack production only
 # Check size (should be reasonable, not tiny)
 ls -la ../Anima-*.zip
 
-# Must NOT contain CLAUDE.md, src/, node_modules/, or dev config
-unzip -l ../Anima-X-Y-Z.zip | grep -E "CLAUDE.md|/src/|node_modules|webpack"
+# Must NOT contain AGENTS.md, CLAUDE.md, src/, node_modules/, or dev config
+unzip -l ../Anima-X-Y-Z.zip | grep -E "AGENTS.md|CLAUDE.md|/src/|node_modules|webpack"
 
 # Check version
 unzip -p ../Anima-X-Y-Z.zip anima/style.css | head -15
@@ -215,7 +215,7 @@ Verify:
 ```bash
 ls -la ../Anima-X-Y-Z.zip
 unzip -p ../Anima-X-Y-Z.zip anima/style.css | head -8   # confirm version
-unzip -l ../Anima-X-Y-Z.zip | grep -E "CLAUDE.md|/src/|node_modules"  # must be empty
+unzip -l ../Anima-X-Y-Z.zip | grep -E "AGENTS.md|CLAUDE.md|/src/|node_modules"  # must be empty
 ```
 
 ### 4. Commit, tag, and push

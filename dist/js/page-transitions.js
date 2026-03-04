@@ -1,0 +1,2435 @@
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ 714
+(module) {
+
+!function(t,n){ true?module.exports=n():0}(this,function(){function t(t,n){for(var r=0;r<n.length;r++){var i=n[r];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(t,"symbol"==typeof(e=function(t,n){if("object"!=typeof t||null===t)return t;var r=t[Symbol.toPrimitive];if(void 0!==r){var i=r.call(t,"string");if("object"!=typeof i)return i;throw new TypeError("@@toPrimitive must return a primitive value.")}return String(t)}(i.key))?e:String(e),i)}var e}function n(n,r,i){return r&&t(n.prototype,r),i&&t(n,i),Object.defineProperty(n,"prototype",{writable:!1}),n}function r(){return r=Object.assign?Object.assign.bind():function(t){for(var n=1;n<arguments.length;n++){var r=arguments[n];for(var i in r)Object.prototype.hasOwnProperty.call(r,i)&&(t[i]=r[i])}return t},r.apply(this,arguments)}function i(t,n){t.prototype=Object.create(n.prototype),t.prototype.constructor=t,o(t,n)}function e(t){return e=Object.setPrototypeOf?Object.getPrototypeOf.bind():function(t){return t.__proto__||Object.getPrototypeOf(t)},e(t)}function o(t,n){return o=Object.setPrototypeOf?Object.setPrototypeOf.bind():function(t,n){return t.__proto__=n,t},o(t,n)}function u(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Boolean.prototype.valueOf.call(Reflect.construct(Boolean,[],function(){})),!0}catch(t){return!1}}function s(t,n,r){return s=u()?Reflect.construct.bind():function(t,n,r){var i=[null];i.push.apply(i,n);var e=new(Function.bind.apply(t,i));return r&&o(e,r.prototype),e},s.apply(null,arguments)}function f(t){var n="function"==typeof Map?new Map:void 0;return f=function(t){if(null===t||-1===Function.toString.call(t).indexOf("[native code]"))return t;if("function"!=typeof t)throw new TypeError("Super expression must either be null or a function");if(void 0!==n){if(n.has(t))return n.get(t);n.set(t,r)}function r(){return s(t,arguments,e(this).constructor)}return r.prototype=Object.create(t.prototype,{constructor:{value:r,enumerable:!1,writable:!0,configurable:!0}}),o(r,t)},f(t)}function c(t){if(void 0===t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return t}var a,h=function(){this.before=void 0,this.beforeLeave=void 0,this.leave=void 0,this.afterLeave=void 0,this.beforeEnter=void 0,this.enter=void 0,this.afterEnter=void 0,this.after=void 0};!function(t){t[t.off=0]="off",t[t.error=1]="error",t[t.warning=2]="warning",t[t.info=3]="info",t[t.debug=4]="debug"}(a||(a={}));var v=a.off,d=/*#__PURE__*/function(){function t(t){this.t=void 0,this.t=t}t.getLevel=function(){return v},t.setLevel=function(t){return v=a[t]};var n=t.prototype;return n.error=function(){this.i(console.error,a.error,[].slice.call(arguments))},n.warn=function(){this.i(console.warn,a.warning,[].slice.call(arguments))},n.info=function(){this.i(console.info,a.info,[].slice.call(arguments))},n.debug=function(){this.i(console.log,a.debug,[].slice.call(arguments))},n.i=function(n,r,i){r<=t.getLevel()&&n.apply(console,["["+this.t+"] "].concat(i))},t}();function l(t){return t.replace(/([.+*?=^!:${}()[\]|/\\])/g,"\\$1")}function p(t){return t&&t.sensitive?"":"i"}var m={container:"container",history:"history",namespace:"namespace",prefix:"data-barba",prevent:"prevent",wrapper:"wrapper"},w=/*#__PURE__*/function(){function t(){this.o=m,this.u=void 0,this.h={after:null,before:null,parent:null}}var n=t.prototype;return n.toString=function(t){return t.outerHTML},n.toDocument=function(t){return this.u||(this.u=new DOMParser),this.u.parseFromString(t,"text/html")},n.toElement=function(t){var n=document.createElement("div");return n.innerHTML=t,n},n.getHtml=function(t){return void 0===t&&(t=document),this.toString(t.documentElement)},n.getWrapper=function(t){return void 0===t&&(t=document),t.querySelector("["+this.o.prefix+'="'+this.o.wrapper+'"]')},n.getContainer=function(t){return void 0===t&&(t=document),t.querySelector("["+this.o.prefix+'="'+this.o.container+'"]')},n.removeContainer=function(t){document.body.contains(t)&&(this.v(t),t.parentNode.removeChild(t))},n.addContainer=function(t,n){var r=this.getContainer()||this.h.before;r?this.l(t,r):this.h.after?this.h.after.parentNode.insertBefore(t,this.h.after):this.h.parent?this.h.parent.appendChild(t):n.appendChild(t)},n.getSibling=function(){return this.h},n.getNamespace=function(t){void 0===t&&(t=document);var n=t.querySelector("["+this.o.prefix+"-"+this.o.namespace+"]");return n?n.getAttribute(this.o.prefix+"-"+this.o.namespace):null},n.getHref=function(t){if(t.tagName&&"a"===t.tagName.toLowerCase()){if("string"==typeof t.href)return t.href;var n=t.getAttribute("href")||t.getAttribute("xlink:href");if(n)return this.resolveUrl(n.baseVal||n)}return null},n.resolveUrl=function(){var t=[].slice.call(arguments).length;if(0===t)throw new Error("resolveUrl requires at least one argument; got none.");var n=document.createElement("base");if(n.href=arguments[0],1===t)return n.href;var r=document.getElementsByTagName("head")[0];r.insertBefore(n,r.firstChild);for(var i,e=document.createElement("a"),o=1;o<t;o++)e.href=arguments[o],n.href=i=e.href;return r.removeChild(n),i},n.l=function(t,n){n.parentNode.insertBefore(t,n.nextSibling)},n.v=function(t){return this.h={after:t.nextElementSibling,before:t.previousElementSibling,parent:t.parentElement},this.h},t}(),b=new w,y=/*#__PURE__*/function(){function t(){this.p=void 0,this.m=[],this.P=-1}var i=t.prototype;return i.init=function(t,n){this.p="barba";var r={data:{},ns:n,scroll:{x:window.scrollX,y:window.scrollY},url:t};this.P=0,this.m.push(r);var i={from:this.p,index:this.P,states:[].concat(this.m)};window.history&&window.history.replaceState(i,"",t)},i.change=function(t,n,r){if(r&&r.state){var i=r.state,e=i.index;n=this.g(this.P-e),this.replace(i.states),this.P=e}else this.add(t,n);return n},i.add=function(t,n,r,i){var e=null!=r?r:this.R(n),o={data:null!=i?i:{},ns:"tmp",scroll:{x:window.scrollX,y:window.scrollY},url:t};switch(e){case"push":this.P=this.size,this.m.push(o);break;case"replace":this.set(this.P,o)}var u={from:this.p,index:this.P,states:[].concat(this.m)};switch(e){case"push":window.history&&window.history.pushState(u,"",t);break;case"replace":window.history&&window.history.replaceState(u,"",t)}},i.store=function(t,n){var i=n||this.P,e=this.get(i);e.data=r({},e.data,t),this.set(i,e);var o={from:this.p,index:this.P,states:[].concat(this.m)};window.history.replaceState(o,"")},i.update=function(t,n){var i=n||this.P,e=r({},this.get(i),t);this.set(i,e)},i.remove=function(t){t?this.m.splice(t,1):this.m.pop(),this.P--},i.clear=function(){this.m=[],this.P=-1},i.replace=function(t){this.m=t},i.get=function(t){return this.m[t]},i.set=function(t,n){return this.m[t]=n},i.R=function(t){var n="push",r=t,i=m.prefix+"-"+m.history;return r.hasAttribute&&r.hasAttribute(i)&&(n=r.getAttribute(i)),n},i.g=function(t){return Math.abs(t)>1?t>0?"forward":"back":0===t?"popstate":t>0?"back":"forward"},n(t,[{key:"current",get:function(){return this.m[this.P]}},{key:"previous",get:function(){return this.P<1?null:this.m[this.P-1]}},{key:"size",get:function(){return this.m.length}}]),t}(),P=new y,g=function(t,n){try{var r=function(){if(!n.next.html)return Promise.resolve(t).then(function(t){var r=n.next;if(t){var i=b.toElement(t.html);r.namespace=b.getNamespace(i),r.container=b.getContainer(i),r.url=t.url,r.html=t.html,P.update({ns:r.namespace});var e=b.toDocument(t.html);document.title=e.title}})}();return Promise.resolve(r&&r.then?r.then(function(){}):void 0)}catch(t){return Promise.reject(t)}},E=function t(n,r,i){return n instanceof RegExp?function(t,n){if(!n)return t;for(var r=/\((?:\?<(.*?)>)?(?!\?)/g,i=0,e=r.exec(t.source);e;)n.push({name:e[1]||i++,prefix:"",suffix:"",modifier:"",pattern:""}),e=r.exec(t.source);return t}(n,r):Array.isArray(n)?function(n,r,i){var e=n.map(function(n){return t(n,r,i).source});return new RegExp("(?:".concat(e.join("|"),")"),p(i))}(n,r,i):function(t,n,r){return function(t,n,r){void 0===r&&(r={});for(var i=r.strict,e=void 0!==i&&i,o=r.start,u=void 0===o||o,s=r.end,f=void 0===s||s,c=r.encode,a=void 0===c?function(t){return t}:c,h=r.delimiter,v=void 0===h?"/#?":h,d=r.endsWith,m="[".concat(l(void 0===d?"":d),"]|$"),w="[".concat(l(v),"]"),b=u?"^":"",y=0,P=t;y<P.length;y++){var g=P[y];if("string"==typeof g)b+=l(a(g));else{var E=l(a(g.prefix)),x=l(a(g.suffix));if(g.pattern)if(n&&n.push(g),E||x)if("+"===g.modifier||"*"===g.modifier){var R="*"===g.modifier?"?":"";b+="(?:".concat(E,"((?:").concat(g.pattern,")(?:").concat(x).concat(E,"(?:").concat(g.pattern,"))*)").concat(x,")").concat(R)}else b+="(?:".concat(E,"(").concat(g.pattern,")").concat(x,")").concat(g.modifier);else b+="+"===g.modifier||"*"===g.modifier?"((?:".concat(g.pattern,")").concat(g.modifier,")"):"(".concat(g.pattern,")").concat(g.modifier);else b+="(?:".concat(E).concat(x,")").concat(g.modifier)}}if(f)e||(b+="".concat(w,"?")),b+=r.endsWith?"(?=".concat(m,")"):"$";else{var k=t[t.length-1],O="string"==typeof k?w.indexOf(k[k.length-1])>-1:void 0===k;e||(b+="(?:".concat(w,"(?=").concat(m,"))?")),O||(b+="(?=".concat(w,"|").concat(m,")"))}return new RegExp(b,p(r))}(function(t,n){void 0===n&&(n={});for(var r=function(t){for(var n=[],r=0;r<t.length;){var i=t[r];if("*"!==i&&"+"!==i&&"?"!==i)if("\\"!==i)if("{"!==i)if("}"!==i)if(":"!==i)if("("!==i)n.push({type:"CHAR",index:r,value:t[r++]});else{var e=1,o="";if("?"===t[s=r+1])throw new TypeError('Pattern cannot start with "?" at '.concat(s));for(;s<t.length;)if("\\"!==t[s]){if(")"===t[s]){if(0==--e){s++;break}}else if("("===t[s]&&(e++,"?"!==t[s+1]))throw new TypeError("Capturing groups are not allowed at ".concat(s));o+=t[s++]}else o+=t[s++]+t[s++];if(e)throw new TypeError("Unbalanced pattern at ".concat(r));if(!o)throw new TypeError("Missing pattern at ".concat(r));n.push({type:"PATTERN",index:r,value:o}),r=s}else{for(var u="",s=r+1;s<t.length;){var f=t.charCodeAt(s);if(!(f>=48&&f<=57||f>=65&&f<=90||f>=97&&f<=122||95===f))break;u+=t[s++]}if(!u)throw new TypeError("Missing parameter name at ".concat(r));n.push({type:"NAME",index:r,value:u}),r=s}else n.push({type:"CLOSE",index:r,value:t[r++]});else n.push({type:"OPEN",index:r,value:t[r++]});else n.push({type:"ESCAPED_CHAR",index:r++,value:t[r++]});else n.push({type:"MODIFIER",index:r,value:t[r++]})}return n.push({type:"END",index:r,value:""}),n}(t),i=n.prefixes,e=void 0===i?"./":i,o="[^".concat(l(n.delimiter||"/#?"),"]+?"),u=[],s=0,f=0,c="",a=function(t){if(f<r.length&&r[f].type===t)return r[f++].value},h=function(t){var n=a(t);if(void 0!==n)return n;var i=r[f],e=i.index;throw new TypeError("Unexpected ".concat(i.type," at ").concat(e,", expected ").concat(t))},v=function(){for(var t,n="";t=a("CHAR")||a("ESCAPED_CHAR");)n+=t;return n};f<r.length;){var d=a("CHAR"),p=a("NAME"),m=a("PATTERN");if(p||m)-1===e.indexOf(b=d||"")&&(c+=b,b=""),c&&(u.push(c),c=""),u.push({name:p||s++,prefix:b,suffix:"",pattern:m||o,modifier:a("MODIFIER")||""});else{var w=d||a("ESCAPED_CHAR");if(w)c+=w;else if(c&&(u.push(c),c=""),a("OPEN")){var b=v(),y=a("NAME")||"",P=a("PATTERN")||"",g=v();h("CLOSE"),u.push({name:y||(P?s++:""),pattern:y&&!P?o:P,prefix:b,suffix:g,modifier:a("MODIFIER")||""})}else h("END")}}return u}(t,r),n,r)}(n,r,i)},x={__proto__:null,update:g,nextTick:function(){return new Promise(function(t){window.requestAnimationFrame(t)})},pathToRegexp:E},R=function(){return window.location.origin},k=function(t){return void 0===t&&(t=window.location.href),O(t).port},O=function(t){var n,r=t.match(/:\d+/);if(null===r)/^http/.test(t)&&(n=80),/^https/.test(t)&&(n=443);else{var i=r[0].substring(1);n=parseInt(i,10)}var e,o=t.replace(R(),""),u={},s=o.indexOf("#");s>=0&&(e=o.slice(s+1),o=o.slice(0,s));var f=o.indexOf("?");return f>=0&&(u=T(o.slice(f+1)),o=o.slice(0,f)),{hash:e,path:o,port:n,query:u}},T=function(t){return t.split("&").reduce(function(t,n){var r=n.split("=");return t[r[0]]=r[1],t},{})},A=function(t){return void 0===t&&(t=window.location.href),t.replace(/(\/#.*|\/|#.*)$/,"")},j={__proto__:null,getHref:function(){return window.location.href},getAbsoluteHref:function(t,n){return void 0===n&&(n=document.baseURI),new URL(t,n).href},getOrigin:R,getPort:k,getPath:function(t){return void 0===t&&(t=window.location.href),O(t).path},getQuery:function(t,n){return void 0===n&&(n=!1),n?JSON.stringify(O(t).query):O(t).query},getHash:function(t){return O(t).hash},parse:O,parseQuery:T,clean:A};function M(t,n,i,e,o){return void 0===n&&(n=2e3),new Promise(function(u,s){var f=new XMLHttpRequest;f.onreadystatechange=function(){if(f.readyState===XMLHttpRequest.DONE)if(200===f.status){var n=""!==f.responseURL&&f.responseURL!==t?f.responseURL:t;u({html:f.responseText,url:r({href:n},O(n))}),e.update(t,{status:"fulfilled",target:n})}else if(f.status){var o={status:f.status,statusText:f.statusText};i(t,o),s(o),e.update(t,{status:"rejected"})}},f.ontimeout=function(){var r=new Error("Timeout error ["+n+"]");i(t,r),s(r),e.update(t,{status:"rejected"})},f.onerror=function(){var n=new Error("Fetch error");i(t,n),s(n),e.update(t,{status:"rejected"})},f.open("GET",t),f.timeout=n,f.setRequestHeader("Accept","text/html,application/xhtml+xml,application/xml"),f.setRequestHeader("x-barba","yes"),o.all().forEach(function(t,n){f.setRequestHeader(n,t)}),f.send()})}function N(t){return!!t&&("object"==typeof t||"function"==typeof t)&&"function"==typeof t.then}function S(t,n){return void 0===n&&(n={}),function(){var r=arguments,i=!1,e=new Promise(function(e,o){n.async=function(){return i=!0,function(t,n){t?o(t):e(n)}};var u=t.apply(n,[].slice.call(r));i||(N(u)?u.then(e,o):e(u))});return e}}var C=/*#__PURE__*/function(t){function n(){var n;return(n=t.call(this)||this).logger=new d("@barba/core"),n.all=["ready","page","reset","currentAdded","currentRemoved","nextAdded","nextRemoved","beforeOnce","once","afterOnce","before","beforeLeave","leave","afterLeave","beforeEnter","enter","afterEnter","after"],n.registered=new Map,n.init(),n}i(n,t);var r=n.prototype;return r.init=function(){var t=this;this.registered.clear(),this.all.forEach(function(n){t[n]||(t[n]=function(r,i){t.registered.has(n)||t.registered.set(n,new Set),t.registered.get(n).add({ctx:i||{},fn:r})})})},r.do=function(t){var n=arguments,r=this;if(this.registered.has(t)){var i=Promise.resolve();return this.registered.get(t).forEach(function(t){i=i.then(function(){return S(t.fn,t.ctx).apply(void 0,[].slice.call(n,1))})}),i.catch(function(n){r.logger.debug("Hook error ["+t+"]"),r.logger.error(n)})}return Promise.resolve()},r.clear=function(){var t=this;this.all.forEach(function(n){delete t[n]}),this.init()},r.help=function(){this.logger.info("Available hooks: "+this.all.join(","));var t=[];this.registered.forEach(function(n,r){return t.push(r)}),this.logger.info("Registered hooks: "+t.join(","))},n}(h),L=new C,H=/*#__PURE__*/function(){function t(t){if(this.k=void 0,this.O=[],"boolean"==typeof t)this.k=t;else{var n=Array.isArray(t)?t:[t];this.O=n.map(function(t){return E(t)})}}return t.prototype.checkHref=function(t){if("boolean"==typeof this.k)return this.k;var n=O(t).path;return this.O.some(function(t){return null!==t.exec(n)})},t}(),_=/*#__PURE__*/function(t){function n(n){var r;return(r=t.call(this,n)||this).T=new Map,r}i(n,t);var e=n.prototype;return e.set=function(t,n,r,i,e){return this.T.set(t,{action:r,request:n,status:i,target:null!=e?e:t}),{action:r,request:n,status:i,target:e}},e.get=function(t){return this.T.get(t)},e.getRequest=function(t){return this.T.get(t).request},e.getAction=function(t){return this.T.get(t).action},e.getStatus=function(t){return this.T.get(t).status},e.getTarget=function(t){return this.T.get(t).target},e.has=function(t){return!this.checkHref(t)&&this.T.has(t)},e.delete=function(t){return this.T.delete(t)},e.update=function(t,n){var i=r({},this.T.get(t),n);return this.T.set(t,i),i},n}(H),D=/*#__PURE__*/function(){function t(){this.A=new Map}var n=t.prototype;return n.set=function(t,n){return this.A.set(t,n),{name:n}},n.get=function(t){return this.A.get(t)},n.all=function(){return this.A},n.has=function(t){return this.A.has(t)},n.delete=function(t){return this.A.delete(t)},n.clear=function(){return this.A.clear()},t}(),B=function(){return!window.history.pushState},q=function(t){return!t.el||!t.href},F=function(t){var n=t.event;return n.which>1||n.metaKey||n.ctrlKey||n.shiftKey||n.altKey},I=function(t){var n=t.el;return n.hasAttribute("target")&&"_blank"===n.target},U=function(t){var n=t.el;return void 0!==n.protocol&&window.location.protocol!==n.protocol||void 0!==n.hostname&&window.location.hostname!==n.hostname},$=function(t){var n=t.el;return void 0!==n.port&&k()!==k(n.href)},Q=function(t){var n=t.el;return n.getAttribute&&"string"==typeof n.getAttribute("download")},X=function(t){return t.el.hasAttribute(m.prefix+"-"+m.prevent)},z=function(t){return Boolean(t.el.closest("["+m.prefix+"-"+m.prevent+'="all"]'))},G=function(t){var n=t.href;return A(n)===A()&&k(n)===k()},J=/*#__PURE__*/function(t){function n(n){var r;return(r=t.call(this,n)||this).suite=[],r.tests=new Map,r.init(),r}i(n,t);var r=n.prototype;return r.init=function(){this.add("pushState",B),this.add("exists",q),this.add("newTab",F),this.add("blank",I),this.add("corsDomain",U),this.add("corsPort",$),this.add("download",Q),this.add("preventSelf",X),this.add("preventAll",z),this.add("sameUrl",G,!1)},r.add=function(t,n,r){void 0===r&&(r=!0),this.tests.set(t,n),r&&this.suite.push(t)},r.run=function(t,n,r,i){return this.tests.get(t)({el:n,event:r,href:i})},r.checkLink=function(t,n,r){var i=this;return this.suite.some(function(e){return i.run(e,t,n,r)})},n}(H),W=/*#__PURE__*/function(t){function n(r,i){var e;return void 0===i&&(i="Barba error"),(e=t.call.apply(t,[this].concat([].slice.call(arguments,2)))||this).error=void 0,e.label=void 0,e.error=r,e.label=i,Error.captureStackTrace&&Error.captureStackTrace(c(e),n),e.name="BarbaError",e}return i(n,t),n}(/*#__PURE__*/f(Error)),K=/*#__PURE__*/function(){function t(t){void 0===t&&(t=[]),this.logger=new d("@barba/core"),this.all=[],this.page=[],this.once=[],this.j=[{name:"namespace",type:"strings"},{name:"custom",type:"function"}],t&&(this.all=this.all.concat(t)),this.update()}var n=t.prototype;return n.add=function(t,n){"rule"===t?this.j.splice(n.position||0,0,n.value):this.all.push(n),this.update()},n.resolve=function(t,n){var r=this;void 0===n&&(n={});var i=n.once?this.once:this.page;i=i.filter(n.self?function(t){return t.name&&"self"===t.name}:function(t){return!t.name||"self"!==t.name});var e=new Map,o=i.find(function(i){var o=!0,u={};return n.self&&"self"===i.name?(e.set(i,u),!0):(r.j.reverse().forEach(function(n){o&&(o=r.M(i,n,t,u),i.from&&i.to&&(o=r.M(i,n,t,u,"from")&&r.M(i,n,t,u,"to")),i.from&&!i.to&&(o=r.M(i,n,t,u,"from")),!i.from&&i.to&&(o=r.M(i,n,t,u,"to")))}),e.set(i,u),o)}),u=e.get(o),s=[];if(s.push(n.once?"once":"page"),n.self&&s.push("self"),u){var f,c=[o];Object.keys(u).length>0&&c.push(u),(f=this.logger).info.apply(f,["Transition found ["+s.join(",")+"]"].concat(c))}else this.logger.info("No transition found ["+s.join(",")+"]");return o},n.update=function(){var t=this;this.all=this.all.map(function(n){return t.N(n)}).sort(function(t,n){return t.priority-n.priority}).reverse().map(function(t){return delete t.priority,t}),this.page=this.all.filter(function(t){return void 0!==t.leave||void 0!==t.enter}),this.once=this.all.filter(function(t){return void 0!==t.once})},n.M=function(t,n,r,i,e){var o=!0,u=!1,s=t,f=n.name,c=f,a=f,h=f,v=e?s[e]:s,d="to"===e?r.next:r.current;if(e?v&&v[f]:v[f]){switch(n.type){case"strings":default:var l=Array.isArray(v[c])?v[c]:[v[c]];d[c]&&-1!==l.indexOf(d[c])&&(u=!0),-1===l.indexOf(d[c])&&(o=!1);break;case"object":var p=Array.isArray(v[a])?v[a]:[v[a]];d[a]?(d[a].name&&-1!==p.indexOf(d[a].name)&&(u=!0),-1===p.indexOf(d[a].name)&&(o=!1)):o=!1;break;case"function":v[h](r)?u=!0:o=!1}u&&(e?(i[e]=i[e]||{},i[e][f]=s[e][f]):i[f]=s[f])}return o},n.S=function(t,n,r){var i=0;return(t[n]||t.from&&t.from[n]||t.to&&t.to[n])&&(i+=Math.pow(10,r),t.from&&t.from[n]&&(i+=1),t.to&&t.to[n]&&(i+=2)),i},n.N=function(t){var n=this;t.priority=0;var r=0;return this.j.forEach(function(i,e){r+=n.S(t,i.name,e+1)}),t.priority=r,t},t}();function V(t,n){try{var r=t()}catch(t){return n(t)}return r&&r.then?r.then(void 0,n):r}var Y=/*#__PURE__*/function(){function t(t){void 0===t&&(t=[]),this.logger=new d("@barba/core"),this.store=void 0,this.C=!1,this.store=new K(t)}var r=t.prototype;return r.get=function(t,n){return this.store.resolve(t,n)},r.doOnce=function(t){var n=t.data,r=t.transition;try{var i=function(){e.C=!1},e=this,o=r||{};e.C=!0;var u=V(function(){return Promise.resolve(e.L("beforeOnce",n,o)).then(function(){return Promise.resolve(e.once(n,o)).then(function(){return Promise.resolve(e.L("afterOnce",n,o)).then(function(){})})})},function(t){e.C=!1,e.logger.debug("Transition error [before/after/once]"),e.logger.error(t)});return Promise.resolve(u&&u.then?u.then(i):i())}catch(t){return Promise.reject(t)}},r.doPage=function(t){var n=t.data,r=t.transition,i=t.page,e=t.wrapper;try{var o=function(t){u.C=!1},u=this,s=r||{},f=!0===s.sync||!1;u.C=!0;var c=V(function(){function t(){return Promise.resolve(u.L("before",n,s)).then(function(){function t(t){return Promise.resolve(u.remove(n)).then(function(){return Promise.resolve(u.L("after",n,s)).then(function(){})})}var r=function(){if(f)return V(function(){return Promise.resolve(u.add(n,e)).then(function(){return Promise.resolve(u.L("beforeLeave",n,s)).then(function(){return Promise.resolve(u.L("beforeEnter",n,s)).then(function(){return Promise.resolve(Promise.all([u.leave(n,s),u.enter(n,s)])).then(function(){return Promise.resolve(u.L("afterLeave",n,s)).then(function(){return Promise.resolve(u.L("afterEnter",n,s)).then(function(){})})})})})})},function(t){if(u.H(t))throw new W(t,"Transition error [sync]")});var t=function(t){return V(function(){var t=function(){if(!1!==r)return Promise.resolve(u.add(n,e)).then(function(){return Promise.resolve(u.L("beforeEnter",n,s)).then(function(){return Promise.resolve(u.enter(n,s,r)).then(function(){return Promise.resolve(u.L("afterEnter",n,s)).then(function(){})})})})}();if(t&&t.then)return t.then(function(){})},function(t){if(u.H(t))throw new W(t,"Transition error [before/after/enter]")})},r=!1,o=V(function(){return Promise.resolve(u.L("beforeLeave",n,s)).then(function(){return Promise.resolve(Promise.all([u.leave(n,s),g(i,n)]).then(function(t){return t[0]})).then(function(t){return r=t,Promise.resolve(u.L("afterLeave",n,s)).then(function(){})})})},function(t){if(u.H(t))throw new W(t,"Transition error [before/after/leave]")});return o&&o.then?o.then(t):t()}();return r&&r.then?r.then(t):t()})}var r=function(){if(f)return Promise.resolve(g(i,n)).then(function(){})}();return r&&r.then?r.then(t):t()},function(t){if(u.C=!1,t.name&&"BarbaError"===t.name)throw u.logger.debug(t.label),u.logger.error(t.error),t;throw u.logger.debug("Transition error [page]"),u.logger.error(t),t});return Promise.resolve(c&&c.then?c.then(o):o())}catch(t){return Promise.reject(t)}},r.once=function(t,n){try{return Promise.resolve(L.do("once",t,n)).then(function(){return n.once?S(n.once,n)(t):Promise.resolve()})}catch(t){return Promise.reject(t)}},r.leave=function(t,n){try{return Promise.resolve(L.do("leave",t,n)).then(function(){return n.leave?S(n.leave,n)(t):Promise.resolve()})}catch(t){return Promise.reject(t)}},r.enter=function(t,n,r){try{return Promise.resolve(L.do("enter",t,n)).then(function(){return n.enter?S(n.enter,n)(t,r):Promise.resolve()})}catch(t){return Promise.reject(t)}},r.add=function(t,n){try{return b.addContainer(t.next.container,n),L.do("nextAdded",t),Promise.resolve()}catch(t){return Promise.reject(t)}},r.remove=function(t){try{return b.removeContainer(t.current.container),L.do("currentRemoved",t),Promise.resolve()}catch(t){return Promise.reject(t)}},r.H=function(t){return t.message?!/Timeout error|Fetch error/.test(t.message):!t.status},r.L=function(t,n,r){try{return Promise.resolve(L.do(t,n,r)).then(function(){return r[t]?S(r[t],r)(n):Promise.resolve()})}catch(t){return Promise.reject(t)}},n(t,[{key:"isRunning",get:function(){return this.C},set:function(t){this.C=t}},{key:"hasOnce",get:function(){return this.store.once.length>0}},{key:"hasSelf",get:function(){return this.store.all.some(function(t){return"self"===t.name})}},{key:"shouldWait",get:function(){return this.store.all.some(function(t){return t.to&&!t.to.route||t.sync})}}]),t}(),Z=/*#__PURE__*/function(){function t(t){var n=this;this.names=["beforeLeave","afterLeave","beforeEnter","afterEnter"],this.byNamespace=new Map,0!==t.length&&(t.forEach(function(t){n.byNamespace.set(t.namespace,t)}),this.names.forEach(function(t){L[t](n._(t))}))}return t.prototype._=function(t){var n=this;return function(r){var i=t.match(/enter/i)?r.next:r.current,e=n.byNamespace.get(i.namespace);return e&&e[t]?S(e[t],e)(r):Promise.resolve()}},t}();Element.prototype.matches||(Element.prototype.matches=Element.prototype.msMatchesSelector||Element.prototype.webkitMatchesSelector),Element.prototype.closest||(Element.prototype.closest=function(t){var n=this;do{if(n.matches(t))return n;n=n.parentElement||n.parentNode}while(null!==n&&1===n.nodeType);return null});var tt={container:null,html:"",namespace:"",url:{hash:"",href:"",path:"",port:null,query:{}}},nt=/*#__PURE__*/function(){function t(){this.version="2.10.3",this.schemaPage=tt,this.Logger=d,this.logger=new d("@barba/core"),this.plugins=[],this.timeout=void 0,this.cacheIgnore=void 0,this.cacheFirstPage=void 0,this.prefetchIgnore=void 0,this.preventRunning=void 0,this.hooks=L,this.cache=void 0,this.headers=void 0,this.prevent=void 0,this.transitions=void 0,this.views=void 0,this.dom=b,this.helpers=x,this.history=P,this.request=M,this.url=j,this.D=void 0,this.B=void 0,this.q=void 0,this.F=void 0}var i=t.prototype;return i.use=function(t,n){var r=this.plugins;r.indexOf(t)>-1?this.logger.warn("Plugin ["+t.name+"] already installed."):"function"==typeof t.install?(t.install(this,n),r.push(t)):this.logger.warn("Plugin ["+t.name+'] has no "install" method.')},i.init=function(t){var n=void 0===t?{}:t,i=n.transitions,e=void 0===i?[]:i,o=n.views,u=void 0===o?[]:o,s=n.schema,f=void 0===s?m:s,c=n.requestError,a=n.timeout,h=void 0===a?2e3:a,v=n.cacheIgnore,l=void 0!==v&&v,p=n.cacheFirstPage,w=void 0!==p&&p,b=n.prefetchIgnore,y=void 0!==b&&b,P=n.preventRunning,g=void 0!==P&&P,E=n.prevent,x=void 0===E?null:E,R=n.debug,k=n.logLevel;if(d.setLevel(!0===(void 0!==R&&R)?"debug":void 0===k?"off":k),this.logger.info(this.version),Object.keys(f).forEach(function(t){m[t]&&(m[t]=f[t])}),this.B=c,this.timeout=h,this.cacheIgnore=l,this.cacheFirstPage=w,this.prefetchIgnore=y,this.preventRunning=g,this.q=this.dom.getWrapper(),!this.q)throw new Error("[@barba/core] No Barba wrapper found");this.I();var O=this.data.current;if(!O.container)throw new Error("[@barba/core] No Barba container found");if(this.cache=new _(l),this.headers=new D,this.prevent=new J(y),this.transitions=new Y(e),this.views=new Z(u),null!==x){if("function"!=typeof x)throw new Error("[@barba/core] Prevent should be a function");this.prevent.add("preventCustom",x)}this.history.init(O.url.href,O.namespace),w&&this.cache.set(O.url.href,Promise.resolve({html:O.html,url:O.url}),"init","fulfilled"),this.U=this.U.bind(this),this.$=this.$.bind(this),this.X=this.X.bind(this),this.G(),this.plugins.forEach(function(t){return t.init()});var T=this.data;T.trigger="barba",T.next=T.current,T.current=r({},this.schemaPage),this.hooks.do("ready",T),this.once(T),this.I()},i.destroy=function(){this.I(),this.J(),this.history.clear(),this.hooks.clear(),this.plugins=[]},i.force=function(t){window.location.assign(t)},i.go=function(t,n,r){var i;if(void 0===n&&(n="barba"),this.F=null,this.transitions.isRunning)this.force(t);else if(!(i="popstate"===n?this.history.current&&this.url.getPath(this.history.current.url)===this.url.getPath(t)&&this.url.getQuery(this.history.current.url,!0)===this.url.getQuery(t,!0):this.prevent.run("sameUrl",null,null,t))||this.transitions.hasSelf)return n=this.history.change(this.cache.has(t)?this.cache.get(t).target:t,n,r),r&&(r.stopPropagation(),r.preventDefault()),this.page(t,n,null!=r?r:void 0,i)},i.once=function(t){try{var n=this;return Promise.resolve(n.hooks.do("beforeEnter",t)).then(function(){function r(){return Promise.resolve(n.hooks.do("afterEnter",t)).then(function(){})}var i=function(){if(n.transitions.hasOnce){var r=n.transitions.get(t,{once:!0});return Promise.resolve(n.transitions.doOnce({transition:r,data:t})).then(function(){})}}();return i&&i.then?i.then(r):r()})}catch(t){return Promise.reject(t)}},i.page=function(t,n,i,e){try{var o,u=function(){var t=s.data;return Promise.resolve(s.hooks.do("page",t)).then(function(){var n=function(n,r){try{var i=(u=s.transitions.get(t,{once:!1,self:e}),Promise.resolve(s.transitions.doPage({data:t,page:o,transition:u,wrapper:s.q})).then(function(){s.I()}))}catch(t){return r()}var u;return i&&i.then?i.then(void 0,r):i}(0,function(){0===d.getLevel()&&s.force(t.next.url.href)});if(n&&n.then)return n.then(function(){})})},s=this;if(s.data.next.url=r({href:t},s.url.parse(t)),s.data.trigger=n,s.data.event=i,s.cache.has(t))o=s.cache.update(t,{action:"click"}).request;else{var f=s.request(t,s.timeout,s.onRequestError.bind(s,n),s.cache,s.headers);f.then(function(r){r.url.href!==t&&s.history.add(r.url.href,n,"replace")}),o=s.cache.set(t,f,"click","pending").request}var c=function(){if(s.transitions.shouldWait)return Promise.resolve(g(o,s.data)).then(function(){})}();return Promise.resolve(c&&c.then?c.then(u):u())}catch(t){return Promise.reject(t)}},i.onRequestError=function(t){this.transitions.isRunning=!1;var n=[].slice.call(arguments,1),r=n[0],i=n[1],e=this.cache.getAction(r);return this.cache.delete(r),this.B&&!1===this.B(t,e,r,i)||"click"===e&&this.force(r),!1},i.prefetch=function(t){var n=this;t=this.url.getAbsoluteHref(t),this.cache.has(t)||this.cache.set(t,this.request(t,this.timeout,this.onRequestError.bind(this,"barba"),this.cache,this.headers).catch(function(t){n.logger.error(t)}),"prefetch","pending")},i.G=function(){!0!==this.prefetchIgnore&&(document.addEventListener("mouseover",this.U),document.addEventListener("touchstart",this.U)),document.addEventListener("click",this.$),window.addEventListener("popstate",this.X)},i.J=function(){!0!==this.prefetchIgnore&&(document.removeEventListener("mouseover",this.U),document.removeEventListener("touchstart",this.U)),document.removeEventListener("click",this.$),window.removeEventListener("popstate",this.X)},i.U=function(t){var n=this,r=this.W(t);if(r){var i=this.url.getAbsoluteHref(this.dom.getHref(r));this.prevent.checkHref(i)||this.cache.has(i)||this.cache.set(i,this.request(i,this.timeout,this.onRequestError.bind(this,r),this.cache,this.headers).catch(function(t){n.logger.error(t)}),"enter","pending")}},i.$=function(t){var n=this.W(t);if(n){if(this.transitions.isRunning&&this.preventRunning)return t.preventDefault(),void t.stopPropagation();this.F=t,this.go(this.dom.getHref(n),n,t)}},i.X=function(t){this.go(this.url.getHref(),"popstate",t)},i.W=function(t){for(var n=t.target;n&&!this.dom.getHref(n);)n=n.parentNode;if(n&&!this.prevent.checkLink(n,t,this.dom.getHref(n)))return n},i.I=function(){var t=this.url.getHref(),n={container:this.dom.getContainer(),html:this.dom.getHtml(),namespace:this.dom.getNamespace(),url:r({href:t},this.url.parse(t))};this.D={current:n,event:void 0,next:r({},this.schemaPage),trigger:void 0},this.hooks.do("reset",this.data)},n(t,[{key:"data",get:function(){return this.D}},{key:"wrapper",get:function(){return this.q}}]),t}();return new nt});
+//# sourceMappingURL=barba.umd.js.map
+
+
+/***/ }
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
+(() => {
+"use strict";
+
+;// external "jQuery"
+const external_jQuery_namespaceObject = jQuery;
+var external_jQuery_default = /*#__PURE__*/__webpack_require__.n(external_jQuery_namespaceObject);
+// EXTERNAL MODULE: ./node_modules/@barba/core/dist/barba.umd.js
+var barba_umd = __webpack_require__(714);
+var barba_umd_default = /*#__PURE__*/__webpack_require__.n(barba_umd);
+;// ./src/js/utils.js
+
+
+
+const debounce = (func, wait) => {
+  let timeout = null;
+  return function () {
+    const context = this;
+    const args = arguments;
+    const later = () => {
+      func.apply(context, args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
+const hasTouchScreen = function () {
+  var hasTouchScreen = false;
+  if ('maxTouchPoints' in navigator) {
+    hasTouchScreen = navigator.maxTouchPoints > 0;
+  } else if ('msMaxTouchPoints' in navigator) {
+    hasTouchScreen = navigator.msMaxTouchPoints > 0;
+  } else {
+    var mQ = window.matchMedia && matchMedia('(pointer:coarse)');
+    if (mQ && mQ.media === '(pointer:coarse)') {
+      hasTouchScreen = !!mQ.matches;
+    } else if ('orientation' in window) {
+      hasTouchScreen = true;
+    } else {
+      var UA = navigator.userAgent;
+      hasTouchScreen = /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) || /\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA);
+    }
+  }
+  return hasTouchScreen;
+};
+function setAndResetElementStyles(element, props = {}) {
+  const $element = external_jQuery_default()(element);
+  $element.css(props);
+  Object.keys(props).forEach(key => {
+    props[key] = '';
+  });
+  if (window.requestIdleCallback) {
+    window.requestIdleCallback(() => {
+      $element.css(props);
+    });
+  } else {
+    setTimeout(() => {
+      $element.css(props);
+    }, 0);
+  }
+}
+const getColorSetClasses = element => {
+  const classAttr = element?.getAttribute('class');
+  if (!classAttr) {
+    return [];
+  }
+  const classes = classAttr.split(/\s+/);
+  return classes.filter(classname => {
+    return classname.search('sm-palette-') !== -1 || classname.search('sm-variation-') !== -1;
+  });
+};
+const addClass = (element, classes) => {
+  const classesArray = classes.split(/\s+/).filter(x => x.trim().length);
+  if (classesArray.length) {
+    element.classList.add(...classesArray);
+  }
+};
+const removeClass = (element, classes) => {
+  const classesArray = classes.split(/\s+/).filter(x => x.trim().length);
+  if (classesArray.length) {
+    element.classList.remove(...classesArray);
+  }
+};
+const hasClass = (element, className) => {
+  return element.classList.contains(className);
+};
+const toggleClasses = (element, classesToAdd = '') => {
+  const prefixes = ['sm-palette-', 'sm-variation-', 'sm-color-signal-'];
+  const classesToRemove = Array.from(element.classList).filter(classname => {
+    return prefixes.some(prefix => classname.indexOf(prefix) > -1);
+  });
+  element.classList.remove(...classesToRemove);
+  addClass(element, classesToAdd);
+};
+function getFirstChild(el) {
+  var firstChild = el.firstChild;
+  while (firstChild != null && firstChild.nodeType === 3) {
+    // skip TextNodes
+    firstChild = firstChild.nextSibling;
+  }
+  return firstChild;
+}
+const getFirstBlock = element => {
+  if (!element || !element.children.length) {
+    return element;
+  }
+  const firstBlock = element.children[0];
+  if (hasClass(firstBlock, 'nb-sidecar')) {
+    const content = firstBlock.querySelector('.nb-sidecar-area--content');
+    if (content && content.children.length) {
+      return getFirstBlock(content);
+    }
+  }
+  return firstBlock;
+};
+;// ./src/js/components/globalService.js
+
+
+class GlobalService {
+  constructor() {
+    this.props = {};
+    this.newProps = {};
+    this.renderCallbacks = [];
+    this.resizeCallbacks = [];
+    this.debouncedResizeCallbacks = [];
+    this.observeCallbacks = [];
+    this.scrollCallbacks = [];
+    this.currentMutationList = [];
+    this.frameRendered = true;
+    this.useOrientation = hasTouchScreen() && 'orientation' in window;
+    this._init();
+  }
+  _init() {
+    const $window = external_jQuery_default()(window);
+    const updateProps = this._updateProps.bind(this);
+    const renderLoop = this._renderLoop.bind(this);
+    this._debouncedResizeCallback = debounce(this._resizeCallbackToBeDebounced.bind(this), 100);
+
+    // now
+    updateProps();
+
+    // on document ready
+    external_jQuery_default()(updateProps);
+    this._bindOnResize();
+    this._bindOnScroll();
+    this._bindOnLoad();
+    this._bindObserver();
+    this._bindCustomizer();
+    requestAnimationFrame(renderLoop);
+  }
+  _bindOnResize() {
+    const $window = external_jQuery_default()(window);
+    const updateProps = this._updateProps.bind(this);
+    if (this.useOrientation) {
+      $window.on('orientationchange', () => {
+        $window.one('resize', updateProps);
+      });
+    } else {
+      $window.on('resize', updateProps);
+    }
+  }
+  _bindOnScroll() {
+    external_jQuery_default()(window).on('scroll', this._updateScroll.bind(this));
+  }
+  _bindOnLoad() {
+    external_jQuery_default()(window).on('load', this._updateProps.bind(this));
+  }
+  _bindObserver() {
+    const self = this;
+    const observeCallback = this._observeCallback.bind(this);
+    const observeAndUpdateProps = () => {
+      observeCallback();
+      self.currentMutationList = [];
+    };
+    const debouncedObserveCallback = debounce(observeAndUpdateProps, 300);
+    if (!window.MutationObserver) {
+      return;
+    }
+    const observer = new MutationObserver(function (mutationList) {
+      self.currentMutationList = self.currentMutationList.concat(mutationList);
+      debouncedObserveCallback();
+    });
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  }
+  _bindCustomizer() {
+    if (typeof wp !== 'undefined' && typeof wp.customize !== 'undefined') {
+      if (typeof wp.customize.selectiveRefresh !== 'undefined') {
+        wp.customize.selectiveRefresh.bind('partial-content-rendered', this._updateProps.bind(this));
+      }
+      wp.customize.bind('change', debounce(this._updateProps.bind(this), 100));
+    }
+  }
+  _updateProps(force = false) {
+    this._updateSize(force);
+    this._updateScroll(force);
+  }
+  _observeCallback() {
+    const mutationList = this.currentMutationList;
+    external_jQuery_default().each(this.observeCallbacks, function (i, fn) {
+      fn(mutationList);
+    });
+  }
+  _renderLoop() {
+    if (!this.frameRendered) {
+      this._renderCallback();
+      this.frameRendered = true;
+    }
+    window.requestAnimationFrame(this._renderLoop.bind(this));
+  }
+  _renderCallback() {
+    const passedArguments = arguments;
+    external_jQuery_default().each(this.renderCallbacks, function (i, fn) {
+      fn(...passedArguments);
+    });
+  }
+  _resizeCallback() {
+    const passedArguments = arguments;
+    external_jQuery_default().each(this.resizeCallbacks, function (i, fn) {
+      fn(...passedArguments);
+    });
+  }
+  _resizeCallbackToBeDebounced() {
+    const passedArguments = arguments;
+    external_jQuery_default().each(this.debouncedResizeCallbacks, function (i, fn) {
+      fn(...passedArguments);
+    });
+  }
+  _scrollCallback() {
+    const passedArguments = arguments;
+    external_jQuery_default().each(this.scrollCallbacks, function (i, fn) {
+      fn(...passedArguments);
+    });
+  }
+  _updateScroll(force = false) {
+    this.newProps = Object.assign({}, this.newProps, {
+      scrollY: window.scrollY,
+      scrollX: window.scrollX
+    });
+    this._shouldUpdate(this._scrollCallback.bind(this));
+  }
+  _updateSize(force = false) {
+    const body = document.body;
+    const html = document.documentElement;
+    const bodyScrollHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight);
+    const htmlScrollHeight = Math.max(html.scrollHeight, html.offsetHeight);
+    this.newProps = Object.assign({}, this.newProps, {
+      scrollHeight: Math.max(bodyScrollHeight, htmlScrollHeight),
+      adminBarHeight: this.getAdminBarHeight(),
+      windowWidth: this.useOrientation && window.screen && window.screen.availWidth || window.innerWidth,
+      windowHeight: this.useOrientation && window.screen && window.screen.availHeight || window.innerHeight
+    });
+    this._shouldUpdate(() => {
+      this._resizeCallback();
+      this._debouncedResizeCallback();
+    });
+  }
+  _shouldUpdate(callback, force = false) {
+    if (this._hasNewProps() || force) {
+      this.props = Object.assign({}, this.props, this.newProps);
+      this.newProps = {};
+      this.frameRendered = false;
+      if (typeof callback === 'function') {
+        callback();
+      }
+    }
+  }
+  _hasNewProps() {
+    return Object.keys(this.newProps).some(key => {
+      return this.newProps[key] !== this.props[key];
+    });
+  }
+  getAdminBarHeight() {
+    const adminBar = document.getElementById('wpadminbar');
+    if (adminBar) {
+      const box = adminBar.getBoundingClientRect();
+      return box.height;
+    }
+    return 0;
+  }
+  registerOnResize(fn) {
+    if (typeof fn === 'function' && this.resizeCallbacks.indexOf(fn) < 0) {
+      this.resizeCallbacks.push(fn);
+    }
+  }
+  registerOnDeouncedResize(fn) {
+    if (typeof fn === 'function' && this.resizeCallbacks.indexOf(fn) < 0) {
+      this.debouncedResizeCallbacks.push(fn);
+    }
+  }
+  registerOnScroll(fn) {
+    if (typeof fn === 'function' && this.scrollCallbacks.indexOf(fn) < 0) {
+      this.scrollCallbacks.push(fn);
+    }
+  }
+  registerObserverCallback(fn) {
+    if (typeof fn === 'function' && this.observeCallbacks.indexOf(fn) < 0) {
+      this.observeCallbacks.push(fn);
+    }
+  }
+  registerRender(fn) {
+    if (typeof fn === 'function' && this.renderCallbacks.indexOf(fn) < 0) {
+      this.renderCallbacks.push(fn);
+    }
+  }
+  getProps() {
+    return this.props;
+  }
+}
+/* harmony default export */ const globalService = (new GlobalService());
+;// ./src/js/components/hero.js
+
+class Hero {
+  constructor(element) {
+    this.element = element;
+    this.progress = 0;
+    this.timeline = gsap.timeline({
+      paused: true,
+      onComplete: () => {
+        this.paused = true;
+      }
+    });
+    this.pieces = this.getMarkupPieces();
+    this.paused = false;
+    this.offset = 0;
+    this.reduceMotion = false;
+    this.update();
+    this.updateOnScroll();
+    this.init();
+  }
+  init() {
+    globalService.registerOnScroll(() => {
+      this.update();
+    });
+    globalService.registerRender(() => {
+      this.updateOnScroll();
+    });
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    mediaQuery.addEventListener('change', () => {
+      this.reduceMotion = mediaQuery.matches;
+      this.updateOnScroll();
+    });
+    this.reduceMotion = mediaQuery.matches;
+    this.addIntroToTimeline();
+    this.timeline.addLabel('middle');
+    this.addOutroToTimeline();
+    this.timeline.addLabel('end');
+    this.pauseTimelineOnScroll();
+    if (this.reduceMotion) {
+      const middleTime = this.labels.middle;
+      const endTime = this.labels.end;
+      const minTlProgress = middleTime / endTime;
+      this.paused = true;
+      this.timeline.progress(minTlProgress);
+    } else {
+      this.timeline.play();
+    }
+  }
+  update() {
+    const {
+      scrollY
+    } = globalService.getProps();
+    this.box = this.element.getBoundingClientRect();
+    this.view = {
+      left: this.box.left,
+      top: this.box.top + scrollY,
+      width: this.box.width,
+      height: this.box.height
+    };
+  }
+  updateOnScroll() {
+    const {
+      scrollY,
+      scrollHeight,
+      windowHeight
+    } = globalService.getProps();
+
+    // used to calculate animation progress
+    const length = windowHeight * 0.5;
+    const middleMin = 0;
+    const middleMax = scrollHeight - windowHeight - length * 0.5;
+    const middle = this.view.top + (this.box.height - windowHeight) * 0.5;
+    const middleMid = Math.max(middleMin, Math.min(middle, middleMax));
+    this.start = middleMid - length * 0.5;
+    this.end = this.start + length;
+    this.progress = (scrollY - this.start) / (this.end - this.start);
+    if (this.reduceMotion) {
+      const middleTime = this.timeline.labels.middle;
+      const endTime = this.timeline.labels.end;
+      const minTlProgress = middleTime / endTime;
+      this.progress = minTlProgress;
+    }
+    this.updateTimelineOnScroll();
+  }
+  updateTimelineOnScroll() {
+    if (!this.paused) {
+      return;
+    }
+    const currentProgress = this.timeline.progress();
+    const middleTime = this.timeline.labels.middle;
+    const endTime = this.timeline.labels.end;
+    const minTlProgress = middleTime / endTime;
+    let newTlProgress = (this.progress - 0.5) * 2 * (1 - minTlProgress) + minTlProgress;
+    newTlProgress = Math.min(Math.max(minTlProgress, newTlProgress), 1);
+    if (currentProgress === newTlProgress) {
+      return;
+    }
+    this.timeline.progress(newTlProgress);
+  }
+  getMarkupPieces() {
+    const container = jQuery(this.element).find('.novablocks-hero__inner-container, .nb-supernova-item__inner-container');
+    const headline = container.children().filter('.c-headline').first();
+    const title = headline.find('.c-headline__primary');
+    const subtitle = headline.find('.c-headline__secondary');
+    const separator = headline.next('.wp-block-separator');
+    const sepFlower = separator.find('.c-separator__symbol');
+    const sepLine = separator.find('.c-separator__line');
+    const sepArrow = separator.find('.c-separator__arrow');
+    const othersBefore = headline.prevAll();
+    const othersAfter = headline.length ? headline.nextAll().not(separator).not('.nb-scroll-indicator') : container.children().not('.nb-scroll-indicator');
+    return {
+      headline,
+      title,
+      subtitle,
+      separator,
+      sepFlower,
+      sepLine,
+      sepArrow,
+      othersBefore,
+      othersAfter
+    };
+  }
+  addIntroToTimeline() {
+    const timeline = this.timeline;
+    const {
+      windowWidth
+    } = globalService.getProps();
+    const {
+      headline,
+      title,
+      subtitle,
+      separator,
+      sepFlower,
+      sepLine,
+      sepArrow,
+      othersBefore,
+      othersAfter
+    } = this.pieces;
+    if (title.length && title.text().trim().length) {
+      this.splitTitle = new SplitText(title, {
+        wordsClass: 'c-headline__word'
+      });
+      this.splitTitle.lines.forEach(line => {
+        const words = Array.from(line.children);
+        const letters = [];
+        words.forEach(word => {
+          letters.push(...word.children);
+        });
+        letters.forEach(letter => {
+          const box = letter.getBoundingClientRect();
+          const width = letter.offsetWidth;
+          const offset = box.x - windowWidth / 2;
+          const offsetPercent = 2 * offset / windowWidth;
+          const move = 400 * letters.length * offsetPercent;
+          timeline.from(letter, {
+            duration: 0.72,
+            x: move,
+            ease: 'power.out'
+          }, 0);
+        });
+      });
+      timeline.fromTo(title, {
+        opacity: 0
+      }, {
+        opacity: 1,
+        duration: 0.89,
+        ease: 'power.out'
+      }, 0);
+
+      // aici era title dar facea un glitch ciudat
+      timeline.fromTo(headline, {
+        'y': 30
+      }, {
+        'y': 0,
+        duration: 1,
+        ease: 'power.out'
+      }, 0);
+    }
+    if (subtitle.length) {
+      timeline.fromTo(subtitle, {
+        opacity: 0
+      }, {
+        opacity: 1,
+        duration: 0.65,
+        ease: 'power4.out'
+      }, '-=0.65');
+      timeline.fromTo(subtitle, {
+        y: 30
+      }, {
+        y: 0,
+        duration: 0.9,
+        ease: 'power4.out'
+      }, '-=0.65');
+    }
+    if (separator.length) {
+      if (sepFlower.length) {
+        timeline.fromTo(sepFlower, {
+          opacity: 0
+        }, {
+          opacity: 1,
+          duration: 0.15,
+          ease: 'power4.out'
+        }, '-=0.6');
+        timeline.fromTo(sepFlower, {
+          rotation: -270
+        }, {
+          rotation: 0,
+          duration: 0.55,
+          ease: 'back.out'
+        }, '-=0.5');
+      }
+      if (sepLine.length) {
+        timeline.fromTo(sepLine, {
+          width: 0
+        }, {
+          width: '42%',
+          opacity: 1,
+          duration: 0.6,
+          ease: 'power4.out'
+        }, '-=0.55');
+        timeline.fromTo(separator, {
+          width: 0
+        }, {
+          width: '100%',
+          opacity: 1,
+          duration: 0.6,
+          ease: 'power4.out'
+        }, '-=0.6');
+      }
+      if (sepArrow.length) {
+        timeline.fromTo(sepArrow, {
+          opacity: 0
+        }, {
+          opacity: 1,
+          duration: 0.2,
+          ease: 'power4.out'
+        }, '-=0.27');
+      }
+    }
+    if (othersAfter.length) {
+      timeline.fromTo(othersAfter, {
+        opacity: 0
+      }, {
+        opacity: 1,
+        duration: 0.5,
+        ease: 'power4.out'
+      }, '-=0.28');
+      timeline.fromTo(othersAfter, {
+        y: -20
+      }, {
+        y: 0,
+        duration: 0.75
+      }, '-=0.5');
+    }
+    if (othersBefore.length) {
+      timeline.fromTo(othersBefore, {
+        opacity: 0
+      }, {
+        opacity: 1,
+        duration: 0.5,
+        ease: 'power4.out'
+      }, '-=0.75');
+      timeline.fromTo(othersBefore, {
+        y: 20
+      }, {
+        y: 0,
+        duration: 0.75
+      }, '-=0.75');
+    }
+    this.timeline = timeline;
+  }
+  addOutroToTimeline() {
+    const {
+      title,
+      subtitle,
+      othersBefore,
+      othersAfter,
+      separator,
+      sepLine,
+      sepFlower,
+      sepArrow
+    } = this.pieces;
+    const timeline = this.timeline;
+    if (title.length) {
+      timeline.fromTo(title, {
+        y: 0
+      }, {
+        opacity: 0,
+        y: -60,
+        duration: 1.08,
+        ease: 'power1.in'
+      }, 'middle');
+    }
+    if (subtitle.length) {
+      timeline.to(subtitle, {
+        opacity: 0,
+        y: -90,
+        duration: 1.08,
+        ease: 'power1.in'
+      }, 'middle');
+    }
+    if (othersBefore.length) {
+      timeline.to(othersBefore, {
+        y: 60,
+        opacity: 0,
+        duration: 1.08,
+        ease: 'power1.in'
+      }, 'middle');
+    }
+    if (othersAfter.length) {
+      timeline.to(othersAfter, {
+        y: 60,
+        opacity: 0,
+        duration: 1.08,
+        ease: 'power1.in'
+      }, 'middle');
+    }
+    if (sepLine.length) {
+      timeline.to(sepLine, {
+        width: '0%',
+        opacity: 0,
+        duration: 0.86,
+        ease: 'power1.in'
+      }, '-=0.94');
+    }
+    if (separator.length) {
+      timeline.to(separator, {
+        width: '0%',
+        opacity: 0,
+        duration: 0.86,
+        ease: 'power1.in'
+      }, '-=0.86');
+    }
+    if (sepFlower.length) {
+      timeline.to(sepFlower, {
+        rotation: 180,
+        duration: 1
+      }, '-=1.08');
+    }
+    if (sepFlower.length) {
+      timeline.to(sepFlower, {
+        opacity: 0,
+        duration: 0.11
+      }, '-=0.03');
+    }
+    if (sepArrow.length) {
+      timeline.to(sepArrow, {
+        opacity: 0,
+        duration: 0.14
+      }, '-=1.08');
+    }
+    this.timeline = timeline;
+  }
+  revertTitle() {
+    if (typeof this.splitTitle !== 'undefined') {
+      this.splitTitle.revert();
+    }
+  }
+  pauseTimelineOnScroll() {
+    const middleTime = this.timeline.labels.middle;
+    const endTime = this.timeline.labels.end;
+    this.timeline.eventCallback('onUpdate', tl => {
+      const time = this.timeline.time();
+
+      // calculate the current timeline progress relative to middle and end labels
+      // in such a way that timelineProgress is 0.5 for middle and 1 for end
+      // because we don't want the animation to be stopped before the middle label
+      const tlProgress = (time - middleTime) / (endTime - middleTime);
+      const pastMiddle = time > middleTime;
+      const pastScroll = tlProgress * 0.5 + 0.5 >= this.progress;
+      if (pastMiddle && pastScroll) {
+        this.timeline.pause();
+        this.revertTitle();
+        this.timeline.eventCallback('onUpdate', null);
+        this.paused = true;
+      }
+    }, ['{self}']);
+  }
+}
+;// ./src/js/components/commentsArea.js
+
+class CommentsArea {
+  constructor(element) {
+    this.$element = external_jQuery_default()(element);
+    this.$checkbox = this.$element.find('.c-comments-toggle__checkbox');
+    this.$content = this.$element.find('.comments-area__content');
+    this.$contentWrap = this.$element.find('.comments-area__wrap');
+
+    // overwrite CSS that hides the comments area content
+    this.$contentWrap.css('display', 'block');
+    this.$checkbox.on('change', this.onChange.bind(this));
+    this.checkWindowLocationComments();
+  }
+  onChange() {
+    this.toggle(false);
+  }
+  toggle(instant = false) {
+    const $contentWrap = this.$contentWrap;
+    const isChecked = this.$checkbox.prop('checked');
+    const newHeight = isChecked ? this.$content.outerHeight() : 0;
+    if (instant) {
+      $contentWrap.css('height', newHeight);
+    } else {
+      gsap.to($contentWrap, {
+        duration: 0.4,
+        height: newHeight,
+        onComplete: function () {
+          if (isChecked) {
+            $contentWrap.css('height', '');
+          }
+        }
+      });
+    }
+  }
+  checkWindowLocationComments() {
+    if (window.location.href.indexOf('#comment') === -1) {
+      this.$checkbox.prop('checked', false);
+      this.toggle(true);
+    }
+  }
+}
+;// ./src/js/components/mqService.js
+
+class mqService {
+  constructor() {
+    this.breakpoints = {
+      mobile: '480px',
+      tablet: '768px',
+      lap: '1024px',
+      desktop: '1440px'
+    };
+    this.above = {};
+    this.below = {};
+    globalService.registerOnDeouncedResize(this.onResize.bind(this));
+    this.onResize();
+  }
+  onResize() {
+    Object.keys(this.breakpoints).forEach(key => {
+      const breakpoint = this.breakpoints[key];
+      this.above[key] = !!window.matchMedia(`not screen and (min-width: ${breakpoint})`).matches;
+      this.below[key] = !!window.matchMedia(`not screen and (min-width: ${breakpoint})`).matches;
+    });
+  }
+}
+/* harmony default export */ const components_mqService = (new mqService());
+;// ./src/js/components/navbar.js
+
+
+
+const MENU_ITEM = '.menu-item, .page_item';
+const MENU_ITEM_WITH_CHILDREN = '.menu-item-has-children, .page_item_has_children';
+const SUBMENU = '.sub-menu, .children';
+const SUBMENU_LEFT_CLASS = 'has-submenu-left';
+const HOVER_CLASS = 'hover';
+class Navbar {
+  constructor() {
+    this.$menuItems = external_jQuery_default()(MENU_ITEM);
+    this.$menuItemsWithChildren = this.$menuItems.filter(MENU_ITEM_WITH_CHILDREN).removeClass(HOVER_CLASS);
+    this.$menuItemsWithChildrenLinks = this.$menuItemsWithChildren.children('a');
+    this.initialize();
+  }
+  initialize() {
+    this.onResize();
+    this.initialized = true;
+    globalService.registerOnDeouncedResize(this.onResize.bind(this));
+  }
+  onResize() {
+    // we are on desktop
+    if (!components_mqService.below.lap) {
+      this.addSubMenusLeftClass();
+      if (this.initialized && !this.desktop) {
+        this.unbindClick();
+      }
+      if (!this.initialized || !this.desktop) {
+        this.bindHoverIntent();
+      }
+      this.desktop = true;
+      return;
+    }
+    this.removeSubMenusLeftClass();
+    if (this.initialized && this.desktop) {
+      this.unbindHoverIntent();
+    }
+    if (!this.initialized || this.desktop) {
+      this.bindClick();
+    }
+    this.desktop = false;
+  }
+  addSubMenusLeftClass() {
+    const {
+      windowWidth
+    } = globalService.getProps();
+    this.$menuItemsWithChildren.each(function (index, obj) {
+      const $obj = external_jQuery_default()(obj);
+      const $subMenu = $obj.children(SUBMENU),
+        subMenuWidth = $subMenu.outerWidth(),
+        subMenuOffSet = $subMenu.offset(),
+        availableSpace = windowWidth - subMenuOffSet.left;
+      if (availableSpace < subMenuWidth) {
+        $obj.addClass(SUBMENU_LEFT_CLASS);
+      }
+    });
+  }
+  removeSubMenusLeftClass() {
+    this.$menuItemsWithChildren.removeClass(SUBMENU_LEFT_CLASS);
+  }
+  onClickMobile(event) {
+    const $link = external_jQuery_default()(this);
+    const $siblings = $link.parent().siblings().not($link);
+    if ($link.is('.active')) {
+      return;
+    }
+    event.preventDefault();
+    $link.addClass('active').parent().addClass(HOVER_CLASS);
+    $siblings.removeClass(HOVER_CLASS);
+    $siblings.find('.active').removeClass('active');
+  }
+  bindClick() {
+    this.$menuItemsWithChildrenLinks.on('click', this.onClickMobile);
+  }
+  unbindClick() {
+    this.$menuItemsWithChildrenLinks.off('click', this.onClickMobile);
+  }
+  bindHoverIntent() {
+    this.$menuItems.hoverIntent({
+      out: function () {
+        external_jQuery_default()(this).removeClass(HOVER_CLASS);
+      },
+      over: function () {
+        external_jQuery_default()(this).addClass(HOVER_CLASS);
+      },
+      timeout: 200
+    });
+  }
+  unbindHoverIntent() {
+    this.$menuItems.off('mousemove.hoverIntent mouseenter.hoverIntent mouseleave.hoverIntent');
+    delete this.$menuItems.hoverIntent_t;
+    delete this.$menuItems.hoverIntent_s;
+  }
+}
+;// ./src/js/components/base-component.js
+
+class BaseComponent {
+  constructor() {
+    globalService.registerOnResize(this.onResize.bind(this));
+    globalService.registerOnDeouncedResize(this.onDebouncedResize.bind(this));
+  }
+  onResize() {}
+  onDebouncedResize() {}
+}
+/* harmony default export */ const base_component = (BaseComponent);
+;// ./src/js/components/search-overlay.js
+
+
+
+const SEARCH_OVERLAY_OPEN_CLASS = 'has-search-overlay';
+const ESC_KEY_CODE = 27;
+class SearchOverlay extends base_component {
+  constructor() {
+    super();
+    this.$searchOverlay = external_jQuery_default()('.c-search-overlay');
+    this.initialize();
+    this.onDebouncedResize();
+  }
+  initialize() {
+    external_jQuery_default()(document).on('click', '.menu-item--search a', this.openSearchOverlay);
+    external_jQuery_default()(document).on('click', '.c-search-overlay__cancel', this.closeSearchOverlay);
+    external_jQuery_default()(document).on('keydown', this.closeSearchOverlayOnEsc);
+  }
+  onDebouncedResize() {
+    setAndResetElementStyles(this.$searchOverlay, {
+      transition: 'none'
+    });
+  }
+  openSearchOverlay(e) {
+    e.preventDefault();
+    external_jQuery_default()('body').toggleClass(SEARCH_OVERLAY_OPEN_CLASS);
+    external_jQuery_default()('.c-search-overlay__form .search-field').focus();
+  }
+  closeSearchOverlayOnEsc(e) {
+    if (e.keyCode === ESC_KEY_CODE) {
+      external_jQuery_default()('body').removeClass(SEARCH_OVERLAY_OPEN_CLASS);
+      external_jQuery_default()('.c-search-overlay__form .search-field').blur();
+    }
+  }
+  closeSearchOverlay(e) {
+    e.preventDefault();
+    external_jQuery_default()('body').removeClass(SEARCH_OVERLAY_OPEN_CLASS);
+  }
+}
+/* harmony default export */ const search_overlay = (SearchOverlay);
+;// ./src/js/components/pile-parallax/index.js
+/**
+ * Pile Parallax — differential parallax scrolling for Nova Blocks collection grids.
+ *
+ * Ported from Pile theme's ArchiveParallax.js.
+ * Uses vanilla JS + requestAnimationFrame — no GSAP dependency.
+ *
+ * Two independent features:
+ *  1. 3D Grid: applies `js-3d` class to alternating items (checkerboard or column
+ *     pattern). Items with `js-3d` get extra horizontal padding via CSS, creating
+ *     visual depth. When combined with parallax, they also travel 2× further.
+ *  2. Parallax Scrolling: on scroll (RAF), maps scroll progress to translateY
+ *     from +travel (pushed down) to -travel (pushed up).
+ */
+
+const PARALLAX_SELECTOR = '.nb-supernova--pile-parallax';
+const GRID_3D_SELECTOR = '.nb-supernova--pile-3d';
+const ITEM_SELECTOR = '.nb-collection__layout-item';
+let blocks = [];
+let ticking = false;
+let positiveOffsetFactor = 1;
+let isBound = false;
+let onResizeHandler = null;
+let onPageTransitionCompleteHandler = null;
+function getDocumentHeight() {
+  const body = document.body;
+  const html = document.documentElement;
+  return Math.max(body ? body.scrollHeight : 0, html ? html.scrollHeight : 0);
+}
+
+/**
+ * Add only the missing top/bottom space needed for parallax near viewport edges.
+ * Mirrors Pile's ArchiveParallax.addMissingPadding() behavior.
+ */
+function addMissingPadding(layout, items, parallaxAmount, windowHeight) {
+  if (!layout) {
+    return;
+  }
+  let maxMissingTop = 0;
+  let maxMissingBottom = 0;
+
+  // Remove previously applied inline padding before recomputing.
+  layout.style.paddingTop = '';
+  layout.style.paddingBottom = '';
+  const contentTop = 0;
+  const contentBottom = getDocumentHeight();
+  items.forEach(item => {
+    item.style.transform = '';
+    const rect = item.getBoundingClientRect();
+    const itemTop = rect.top + window.scrollY;
+    const itemHeight = item.offsetHeight;
+    const toTop = itemTop + itemHeight / 2 - contentTop;
+    const toBottom = contentBottom - itemTop - itemHeight / 2;
+    const missingTop = toTop < windowHeight / 2 ? windowHeight / 2 - toTop : 0;
+    const missingBottom = toBottom < windowHeight / 2 ? windowHeight / 2 - toBottom : 0;
+    const paddingLimit = itemHeight * parallaxAmount / 2;
+    maxMissingTop = Math.max(Math.min(missingTop, paddingLimit), maxMissingTop);
+    maxMissingBottom = Math.max(Math.min(missingBottom, paddingLimit), maxMissingBottom);
+  });
+  if (!maxMissingTop && !maxMissingBottom) {
+    return;
+  }
+  const computedStyles = window.getComputedStyle(layout);
+  const basePaddingTop = parseFloat(computedStyles.paddingTop) || 0;
+  const basePaddingBottom = parseFloat(computedStyles.paddingBottom) || 0;
+  layout.style.paddingTop = `${(basePaddingTop + maxMissingTop).toFixed(2)}px`;
+  layout.style.paddingBottom = `${(basePaddingBottom + maxMissingBottom).toFixed(2)}px`;
+}
+
+/**
+ * Apply 3D grid classes to items in a collection.
+ * Purely visual: adds `js-3d` class for CSS padding + doubles parallax travel.
+ */
+function apply3dClasses(el) {
+  const target3d = el.dataset.pile3dTarget || 'item';
+  const rule3d = el.dataset.pile3dTargetRule || 'odd';
+  const columns = parseInt(el.dataset.columns, 10) || 3;
+  const items = el.querySelectorAll(ITEM_SELECTOR);
+  items.forEach((item, index) => {
+    const odd = rule3d === 'odd' ? 0 : 1;
+    let has3d;
+    if (target3d === 'column') {
+      has3d = !!((Math.floor(index / columns) + odd + index) % 2);
+    } else {
+      has3d = !!((Math.floor(index / columns) + odd + index % columns) % 2);
+    }
+    item.classList.toggle('js-3d', has3d);
+  });
+}
+
+/**
+ * Initialize parallax for all matching blocks on the page.
+ */
+function initialize() {
+  blocks = [];
+
+  // 1. Apply 3D classes to all 3D grid blocks (independent of parallax).
+  const grid3dElements = document.querySelectorAll(GRID_3D_SELECTOR);
+  grid3dElements.forEach(apply3dClasses);
+
+  // 2. Set up parallax scrolling for blocks that have it enabled.
+  const parallaxElements = document.querySelectorAll(PARALLAX_SELECTOR);
+  const windowHeight = window.innerHeight;
+  // Reduce only the positive (downward) phase to avoid oversized blank bands at
+  // the top of dense grids, while keeping the negative (upward) phase fully
+  // visible so the parallax effect remains obvious during scroll.
+  positiveOffsetFactor = 0.35;
+  parallaxElements.forEach(el => {
+    const amount = parseFloat(el.dataset.pileParallaxAmount) || 0;
+    const parallaxAmount = amount / 100;
+    const layout = el.querySelector('.nb-collection__layout');
+    if (amount <= 0) {
+      if (layout) {
+        layout.style.paddingTop = '';
+        layout.style.paddingBottom = '';
+      }
+      return;
+    }
+    const is3d = el.classList.contains('nb-supernova--pile-3d');
+    const items = el.querySelectorAll(ITEM_SELECTOR);
+    if (!items.length) {
+      if (layout) {
+        layout.style.paddingTop = '';
+        layout.style.paddingBottom = '';
+      }
+      return;
+    }
+
+    // Match Pile: compute extra padding before measuring per-item scroll windows.
+    addMissingPadding(layout, items, parallaxAmount, windowHeight);
+    const itemsData = [];
+    items.forEach(item => {
+      // Reset transform before measuring positions.
+      item.style.transform = '';
+      const has3d = item.classList.contains('js-3d');
+      const height = item.offsetHeight;
+      const initialTop = height * parallaxAmount / 2;
+      const travel = is3d && has3d ? initialTop * 2 : initialTop;
+
+      // Cache the item's absolute top position for scroll-window calculation.
+      const rect = item.getBoundingClientRect();
+      const itemTop = rect.top + window.scrollY;
+
+      // Scroll window: item enters viewport at bottom → leaves at top.
+      const scrollStart = itemTop - windowHeight;
+      const scrollEnd = itemTop + height;
+      itemsData.push({
+        el: item,
+        travel,
+        scrollStart,
+        scrollEnd
+      });
+    });
+    blocks.push({
+      el,
+      items: itemsData
+    });
+  });
+  if (blocks.length) {
+    update();
+  }
+}
+
+/**
+ * Update transforms based on current scroll position.
+ */
+function update() {
+  const scrollY = window.scrollY;
+  blocks.forEach(block => {
+    block.items.forEach(({
+      el,
+      travel,
+      scrollStart,
+      scrollEnd
+    }) => {
+      const scrollRange = scrollEnd - scrollStart;
+      if (scrollRange <= 0) {
+        return;
+      }
+      let progress = (scrollY - scrollStart) / scrollRange;
+      progress = Math.max(0, Math.min(1, progress));
+      const rawOffset = travel - progress * travel * 2;
+      const y = rawOffset > 0 ? rawOffset * positiveOffsetFactor : rawOffset;
+      el.style.transform = `translateY(${y.toFixed(1)}px)`;
+    });
+  });
+}
+
+/**
+ * Scroll handler with requestAnimationFrame throttle.
+ */
+function onScroll() {
+  if (!ticking) {
+    ticking = true;
+    requestAnimationFrame(() => {
+      update();
+      ticking = false;
+    });
+  }
+}
+
+/**
+ * Start listening for scroll events.
+ */
+function bind() {
+  if (isBound) {
+    return;
+  }
+  onResizeHandler = () => {
+    initialize();
+  };
+  onPageTransitionCompleteHandler = () => {
+    initialize();
+    onScroll();
+  };
+  window.addEventListener('scroll', onScroll, {
+    passive: true
+  });
+  window.addEventListener('resize', onResizeHandler);
+  window.addEventListener('anima:page-transition-complete', onPageTransitionCompleteHandler);
+  isBound = true;
+}
+
+/**
+ * Clean up — useful for page transitions.
+ */
+function destroy() {
+  window.removeEventListener('scroll', onScroll);
+  if (onResizeHandler) {
+    window.removeEventListener('resize', onResizeHandler);
+  }
+  if (onPageTransitionCompleteHandler) {
+    window.removeEventListener('anima:page-transition-complete', onPageTransitionCompleteHandler);
+  }
+  onResizeHandler = null;
+  onPageTransitionCompleteHandler = null;
+  isBound = false;
+  blocks = [];
+}
+;// ./src/js/components/app.js
+
+
+
+
+
+
+
+
+class App {
+  constructor() {
+    this.initializeHero();
+    this.navbar = new Navbar();
+    this.searchOverlay = new search_overlay();
+    this.initializeImages();
+    this.initializeCommentsArea();
+    this.initializeReservationForm();
+    this.initializePileParallax();
+  }
+  initializeImages() {
+    const showLoadedImages = this.showLoadedImages.bind(this);
+    showLoadedImages();
+    globalService.registerObserverCallback(function (mutationList) {
+      external_jQuery_default().each(mutationList, (i, mutationRecord) => {
+        external_jQuery_default().each(mutationRecord.addedNodes, (j, node) => {
+          const nodeName = node.nodeName && node.nodeName.toLowerCase();
+          if ('img' === nodeName || node.childNodes.length) {
+            showLoadedImages(node);
+          }
+        });
+      });
+    });
+  }
+  initializeReservationForm() {
+    globalService.registerObserverCallback(function (mutationList) {
+      external_jQuery_default().each(mutationList, (i, mutationRecord) => {
+        external_jQuery_default().each(mutationRecord.addedNodes, (j, node) => {
+          const $node = external_jQuery_default()(node);
+          if ($node.is('#ot-reservation-widget')) {
+            $node.closest('.novablocks-opentable').addClass('is-loaded');
+          }
+        });
+      });
+    });
+  }
+  showLoadedImages(container = document.body) {
+    const $images = external_jQuery_default()(container).find('img').not('[srcset], .is-loaded, .is-broken');
+    $images.imagesLoaded().progress((instance, image) => {
+      const className = image.isLoaded ? 'is-loaded' : 'is-broken';
+      external_jQuery_default()(image.img).addClass(className);
+    });
+  }
+  initializeHero() {
+    const newHeroesSelector = '.nb-supernova--card-layout-stacked.nb-supernova--1-columns.nb-supernova--align-full';
+    const oldHeroesSelector = '.novablocks-hero';
+    const heroesSelector = `${newHeroesSelector}, ${oldHeroesSelector}`;
+    const heroElements = document.querySelectorAll(heroesSelector);
+    const heroElementsArray = Array.from(heroElements);
+    this.HeroCollection = heroElementsArray.map(element => new Hero(element));
+    this.firstHero = heroElementsArray[0];
+  }
+  initializePileParallax() {
+    initialize();
+    bind();
+  }
+  initializeCommentsArea() {
+    const $commentsArea = external_jQuery_default()('.comments-area');
+    if ($commentsArea.length) {
+      this.commentsArea = new CommentsArea($commentsArea.get(0));
+    }
+  }
+}
+;// ./src/js/components/page-transitions/utils.js
+
+
+
+
+// Tracks script IDs that syncPageAssets() loaded for the first time.
+// reinitNovaBlocksScripts() skips these to avoid double-initialization
+// (which causes duplicate elements and toggled handlers canceling each other).
+let freshlyLoadedScriptIds = new Set();
+
+/**
+ * Sync body classes from the new page's HTML response.
+ * Uses the same NOTBODY trick as Pile to parse <body> attributes from raw HTML.
+ */
+function syncBodyClasses(html) {
+  const data = html.replace(/(<\/?)body( .+?)?>/gi, '$1NOTBODY$2>');
+  const nobodyClass = external_jQuery_default()(data).filter('notbody').attr('class');
+  if (nobodyClass) {
+    // Preserve classes that our JS manages and that aren't in server HTML.
+    const $body = external_jQuery_default()('body');
+    const preserveClasses = ['has-page-transitions', 'is-loaded', 'has-loaded', 'admin-bar'];
+    const preserved = preserveClasses.filter(cls => $body.hasClass(cls));
+    $body.attr('class', nobodyClass);
+
+    // Re-add preserved classes.
+    preserved.forEach(cls => $body.addClass(cls));
+
+    // Remove server-side initial loading state — not applicable after AJAX navigation.
+    $body.removeClass('is-loading');
+  }
+}
+
+/**
+ * Sync page assets (styles and scripts) from the new page's full HTML.
+ *
+ * WordPress injects per-page inline CSS and JS based on which blocks/plugins
+ * are present. After AJAX swap only the Barba container changes — the rest of
+ * the document keeps stale assets. This function:
+ *
+ * 1. Syncs inline <style> blocks (add new, update changed, remove stale)
+ * 2. Syncs <link> stylesheets (add new ones needed by the new page)
+ * 3. Syncs <script> tags — loads new external scripts and executes new inline
+ *    data scripts (e.g., FacetWP's `window.FWP_JSON`) so plugins reinitialize
+ */
+function syncPageAssets(html) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+  syncStyles(doc);
+  syncScripts(doc);
+}
+
+/**
+ * Sync inline <style> blocks and <link> stylesheets.
+ */
+function syncStyles(doc) {
+  const newHead = doc.head;
+
+  // --- Sync inline <style> blocks (identified by id) ---
+  const newStyles = newHead.querySelectorAll('style[id]');
+  const newStyleIds = new Set();
+  newStyles.forEach(newStyle => {
+    newStyleIds.add(newStyle.id);
+    const existing = document.getElementById(newStyle.id);
+    if (existing && existing.tagName === 'STYLE') {
+      if (existing.textContent !== newStyle.textContent) {
+        existing.textContent = newStyle.textContent;
+      }
+    } else {
+      document.head.appendChild(newStyle.cloneNode(true));
+    }
+  });
+
+  // Remove old block-specific inline styles the new page doesn't need.
+  document.querySelectorAll('head style[id]').forEach(style => {
+    if (!newStyleIds.has(style.id) && isBlockInlineStyle(style.id)) {
+      style.remove();
+    }
+  });
+
+  // --- Sync <link> stylesheets ---
+  const newLinks = newHead.querySelectorAll('link[rel="stylesheet"][id]');
+  const newLinkIds = new Set();
+  newLinks.forEach(newLink => {
+    newLinkIds.add(newLink.id);
+    if (!document.getElementById(newLink.id)) {
+      document.head.appendChild(newLink.cloneNode(true));
+    }
+  });
+
+  // Remove old block-specific stylesheets the new page doesn't need.
+  document.querySelectorAll('head link[rel="stylesheet"][id]').forEach(link => {
+    if (!newLinkIds.has(link.id) && isBlockStylesheet(link.id)) {
+      link.remove();
+    }
+  });
+}
+
+/**
+ * Sync scripts from the new page's full HTML.
+ *
+ * External scripts: loads any that exist in the new page but not the current page.
+ * Inline scripts: executes data/config scripts from the new page's <body>.
+ */
+function syncScripts(doc) {
+  // Reset the freshly-loaded tracking set for this navigation.
+  freshlyLoadedScriptIds = new Set();
+
+  // Build a set of script src URLs already on the current page.
+  const currentSrcs = new Set();
+  document.querySelectorAll('script[src]').forEach(s => {
+    // Normalize: strip cache-bust params we added.
+    currentSrcs.add(stripCacheBust(s.src));
+  });
+
+  // --- Sync external scripts ---
+  // Find all external scripts in the new page that aren't on the current page.
+  const newScripts = doc.querySelectorAll('script[src]');
+  newScripts.forEach(script => {
+    const normalizedSrc = stripCacheBust(script.src);
+    if (!currentSrcs.has(normalizedSrc)) {
+      const newScript = document.createElement('script');
+      newScript.src = script.src;
+      newScript.async = false;
+      if (script.id) {
+        newScript.id = script.id;
+        // Track this as freshly loaded so reinitNovaBlocksScripts() skips it.
+        freshlyLoadedScriptIds.add(script.id);
+      }
+      document.body.appendChild(newScript);
+    }
+  });
+
+  // --- Sync inline data scripts from <body> ---
+  // WordPress plugins inject inline scripts in the body (via wp_footer) that
+  // set global data objects. These are outside the Barba container.
+  const newBodyScripts = doc.body.querySelectorAll('script:not([src])');
+  newBodyScripts.forEach(script => {
+    const text = script.textContent;
+    if (!text.trim()) {
+      return;
+    }
+
+    // Only execute scripts that set global data/config.
+    // Skip analytics, tracking, and JSON-LD schema scripts.
+    if (isDataScript(text)) {
+      const newScript = document.createElement('script');
+      newScript.textContent = text;
+      document.body.appendChild(newScript);
+    }
+  });
+}
+
+/**
+ * Strip cache-bust params we add for reinit.
+ */
+function stripCacheBust(url) {
+  return url.replace(/[?&]_barba=\d+/, '');
+}
+
+/**
+ * Check if an inline script sets global data (safe and needed to re-execute).
+ */
+function isDataScript(text) {
+  // Scripts that assign to window (e.g., window.FWP_JSON = {...})
+  if (/window\.\w+\s*=/.test(text)) {
+    return true;
+  }
+
+  // WordPress wp_localize_script output (e.g., var fwpConfig = {...})
+  if (/^var\s+\w+\s*=/.test(text.trim())) {
+    return true;
+  }
+  return false;
+}
+
+/**
+ * Check if a <style> id is a per-page block inline style (safe to add/remove).
+ */
+function isBlockInlineStyle(id) {
+  return id.includes('inline-css') && (id.startsWith('wp-block-') || id.startsWith('novablocks') || id === 'core-block-supports-inline-css');
+}
+
+/**
+ * Check if a <link> id is a per-page block stylesheet (safe to add/remove).
+ */
+function isBlockStylesheet(id) {
+  return id.startsWith('wp-block-') && id.endsWith('-css');
+}
+
+/**
+ * Update document title from new page HTML.
+ */
+function syncDocumentTitle(html) {
+  const match = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+  if (match && match[1]) {
+    document.title = match[1].trim();
+  }
+}
+
+/**
+ * Header color signal guard.
+ *
+ * Problem: In FSE templates, the Nova Blocks header color detection queries
+ * `.site-main .hentry` to find the first block's palette — but FSE themes
+ * don't have those elements. HeaderColors.initializeColors() reads from
+ * `colorsElement` (the adjacent content block), NOT the header itself, so
+ * pre-applying classes on the header doesn't affect what gets frozen.
+ * Then on every sticky threshold crossing, toggleClasses() overwrites the
+ * header's classes with the frozen wrong set.
+ *
+ * Solution: extract the correct color classes from the server-rendered HTML
+ * (which WordPress computed correctly via PHP), apply them immediately,
+ * and use a MutationObserver to guard them against ALL future overwrites.
+ * The observer is set up right after the DOM swap — before any scripts
+ * re-execute — so it catches the header script's initialization AND
+ * subsequent toggleClasses() calls on scroll. Observer callbacks fire
+ * before the browser paints, so there's no visual flicker.
+ */
+let headerColorObserver = null;
+
+// Regex pattern for color-related classes on the header.
+const COLOR_CLASS_PATTERN = /\b(sm-palette-\S+|sm-variation-\S+|sm-color-signal-\S+|sm-light|sm-dark)\b/g;
+
+/**
+ * Detect and apply the correct header color signal after AJAX page swap.
+ *
+ * Replicates the EXACT detection logic from Nova Blocks' Header constructor:
+ *   getAdjacentElement() → findProperElement() → findColorsElement()
+ *   → getColorSetClasses() → toggleClasses()
+ *
+ * This is the same code path that runs on a fresh page load. We run it on
+ * the live DOM (after Barba has inserted the new container) to get the same
+ * result. A MutationObserver then guards the classes in transparent mode
+ * while allowing the normal sticky toggle on scroll.
+ *
+ * @param {string}      html      Full HTML of the new page (unused, kept for API compat).
+ * @param {HTMLElement}  container The new Barba container element (scopes DOM queries).
+ */
+function syncHeaderColorSignal(html, container) {
+  // Disconnect any observer from the previous page.
+  disconnectHeaderColorObserver();
+
+  // Find the header in the live DOM (scoped to new Barba container).
+  const header = container ? container.querySelector('.nb-header--main') : document.querySelector('.nb-header--main');
+  if (!header) {
+    return;
+  }
+
+  // --- Replicate Nova Blocks Header detection on the live DOM ---
+
+  // Step 1: Find the adjacent element (next sibling, skipping scripts/styles).
+  const adjacent = getAdjacentElement(header);
+  if (!adjacent) {
+    return;
+  }
+
+  // Step 2: Walk into containers to find the "proper" color source element.
+  const properElement = findProperElement(adjacent);
+  if (!properElement) {
+    return;
+  }
+
+  // Step 3: Handle nested sidecar/supernova to find the actual colors element.
+  const colorsElement = findColorsElement(properElement);
+  if (!colorsElement) {
+    return;
+  }
+
+  // Step 4: Read color signal classes from the detected element.
+  const transparentClasses = utils_getColorSetClasses(colorsElement).filter(cls => cls !== 'sm-color-signal-0');
+  if (!transparentClasses.length) {
+    return;
+  }
+
+  // Step 5: Apply to the header (and row).
+  replaceColorClasses(header, transparentClasses);
+  const headerRow = header.querySelector('.nb-header-row--primary');
+  if (headerRow) {
+    replaceColorClasses(headerRow, transparentClasses);
+  }
+
+  // Step 6: Guard with sticky-aware observer.
+  setupHeaderColorObserver(header, transparentClasses);
+}
+
+// ---------------------------------------------------------------------------
+// Nova Blocks Header detection logic (replicated from source).
+// See: nova-blocks/packages/block-library/src/blocks/header/frontend/components/
+// ---------------------------------------------------------------------------
+
+/**
+ * Get the element adjacent to the header (its next meaningful sibling).
+ * Skips script, style, and menu toggle elements.
+ * Climbs up to parent if no sibling exists.
+ *
+ * Replica of: Header.getAdjacentElement()
+ */
+function getAdjacentElement(element) {
+  const skip = '.c-menu-toggle, .c-menu-toggle__checkbox, script, style';
+  const next = element.nextElementSibling;
+  if (!next) {
+    if (element.parentElement) {
+      return getAdjacentElement(element.parentElement);
+    }
+    return null;
+  }
+  if (next.matches(skip)) {
+    return getAdjacentElement(next);
+  }
+  return next;
+}
+
+/**
+ * Walk down the DOM from the adjacent element to find the block that
+ * determines the header's transparent-state colors.
+ *
+ * Traverses into known container blocks (main, wp-block-group, sidecar,
+ * wp-block-post-content) when they don't carry their own color signal.
+ *
+ * Replica of: Header.findProperElement()
+ */
+function findProperElement(element, previous) {
+  if (!element) {
+    return previous || null;
+  }
+  const variation = element.dataset.paletteVariation ? parseInt(element.dataset.paletteVariation, 10) : 1;
+  const isShifted = !!element.dataset.useSourceColorAsReference;
+  const hasSignal = variation !== 1 || isShifted;
+
+  // Container blocks without their own color signal — recurse into first child.
+  if (element.matches('main, .wp-block-group.alignfull, .wp-block-query, .wp-block-post-content')) {
+    if (!hasSignal) {
+      return findProperElement(element.firstElementChild, element);
+    }
+  }
+
+  // Sidecar layout — recurse into content area's first child.
+  if (element.classList.contains('nb-sidecar')) {
+    if (element.children.length === 1 && element.firstElementChild.classList.contains('nb-sidecar-area--content')) {
+      const child = element.firstElementChild.firstElementChild;
+      if (child) {
+        return findProperElement(child, element);
+      }
+    }
+  }
+
+  // Non-fullwidth block with color signal — return the parent container instead.
+  if (!element.matches('.alignfull') && hasSignal && previous) {
+    return previous;
+  }
+
+  // Element with palette class — use it.
+  if (element.matches('[class*="sm-palette-"]')) {
+    return element;
+  }
+
+  // Fall back to closest ancestor with palette.
+  return element.closest('[class*="sm-palette-"]') || null;
+}
+
+/**
+ * Handle nested sidecar and supernova blocks to find the actual element
+ * whose color classes should be copied to the header.
+ *
+ * Replica of: Header.findColorsElement()
+ */
+function findColorsElement(element) {
+  if (!element) {
+    return null;
+  }
+
+  // Nested sidecar — recurse into content area.
+  if (element.classList.contains('nb-sidecar')) {
+    const content = Array.from(element.children).find(child => child.classList.contains('nb-sidecar-area--content'));
+    if (content && content.firstElementChild && content.firstElementChild.classList.contains('nb-sidecar')) {
+      return findColorsElement(content.firstElementChild);
+    }
+  }
+
+  // Supernova with 0 padding — use the first item.
+  if (element.classList.contains('nb-supernova')) {
+    const paddingTop = parseInt(window.getComputedStyle(element).paddingTop, 10);
+    if (paddingTop === 0) {
+      return element.querySelector('.nb-supernova-item') || element;
+    }
+  }
+  return element;
+}
+
+/**
+ * Extract all color signal classes from an element's class attribute.
+ *
+ * Replica of: getColorSetClasses() from header/utils.js
+ */
+function utils_getColorSetClasses(element) {
+  const classAttr = element.getAttribute('class');
+  if (!classAttr) {
+    return [];
+  }
+  return classAttr.split(/\s+/).filter(cls => {
+    return cls.includes('sm-color-signal-') || cls.includes('sm-palette-') || cls.includes('sm-variation-') || cls.includes('sm-dark') || cls.includes('sm-light');
+  });
+}
+
+/**
+ * Replace color classes on an element with the correct set.
+ */
+function replaceColorClasses(element, correctClasses) {
+  const existing = element.className.match(COLOR_CLASS_PATTERN);
+  if (existing) {
+    existing.forEach(cls => element.classList.remove(cls));
+  }
+  correctClasses.forEach(cls => element.classList.add(cls));
+}
+
+/**
+ * Set up a MutationObserver that guards the header's transparent-state
+ * color classes.
+ *
+ * The observer is "sticky-aware":
+ * - When the header has `is-sticky` class (scrolled past hero), the observer
+ *   does nothing — Nova Blocks manages the sticky-state colors correctly
+ *   (the header uses its own palette, which doesn't need detection).
+ * - When the header is in transparent mode (overlapping hero, no `is-sticky`),
+ *   the observer guards the correct color classes from the adjacent block.
+ *
+ * MutationObserver callbacks are batched — both `is-sticky` and color class
+ * changes are visible by the time the callback runs, so there's no race.
+ */
+function setupHeaderColorObserver(header, transparentClasses) {
+  let applying = false;
+  headerColorObserver = new MutationObserver(() => {
+    if (applying) {
+      return;
+    }
+
+    // Don't interfere when the header is in sticky mode.
+    // Nova Blocks manages sticky colors correctly (uses header's own palette).
+    if (header.classList.contains('is-sticky')) {
+      return;
+    }
+
+    // In transparent mode: check if the correct (adjacent block) classes
+    // are still present. If Nova Blocks overwrote them (failed detection
+    // in FSE), re-apply.
+    const hasAll = transparentClasses.every(cls => header.classList.contains(cls));
+    if (!hasAll) {
+      applying = true;
+      replaceColorClasses(header, transparentClasses);
+      const headerRow = header.querySelector('.nb-header-row--primary');
+      if (headerRow) {
+        replaceColorClasses(headerRow, transparentClasses);
+      }
+      applying = false;
+    }
+  });
+  headerColorObserver.observe(header, {
+    attributes: true,
+    attributeFilter: ['class']
+  });
+}
+
+/**
+ * Disconnect the header color observer.
+ * Called at the start of each new navigation and during cleanup.
+ */
+function disconnectHeaderColorObserver() {
+  if (headerColorObserver) {
+    headerColorObserver.disconnect();
+    headerColorObserver = null;
+  }
+}
+
+/**
+ * Re-initialize Anima's JS components on the new page DOM.
+ * Follows Pile's "re-scan and re-bind" pattern.
+ *
+ * Creates a fresh App instance which initializes Hero, CommentsArea, images, etc.
+ * Hero.js handles its own intro timeline and scroll-driven animations —
+ * the page transitions system must NOT animate hero elements directly.
+ */
+function reinitComponents() {
+  // Create fresh App instance — this reinits Hero, CommentsArea, images, etc.
+  // Fonts are already loaded (wf-active class persists), so Hero init runs immediately.
+  new App();
+
+  // Re-initialize Nova Blocks frontend scripts.
+  // In FSE themes the header/footer are inside the Barba container and get swapped,
+  // so Nova Blocks' block JS (header sticky, color signal, etc.) must re-run.
+  reinitNovaBlocksScripts(() => {
+    // Nova Blocks scripts can mutate/rebuild collection card DOM after AJAX swap.
+    // Refresh pile parallax bindings after those scripts finish so we target
+    // the final nodes and not stale pre-mutation references.
+    initialize();
+    window.dispatchEvent(new Event('scroll'));
+  });
+
+  // Reinitialize FacetWP if it was previously loaded.
+  // FacetWP renders facets client-side — after AJAX page swap, the new DOM
+  // has empty .facetwp-facet containers that need FWP to re-parse and render.
+  // Only call refresh() if FacetWP already completed its first init (FWP.loaded).
+  // On first navigation TO a page with facets, FacetWP's own script handles init.
+  if (typeof FWP !== 'undefined' && FWP.loaded && typeof FWP.refresh === 'function') {
+    if (typeof FWP_HTTP !== 'undefined') {
+      FWP_HTTP.uri = window.location.pathname;
+      FWP_HTTP.get = {};
+    }
+    FWP.refresh();
+  }
+
+  // Re-trigger WooCommerce cart fragments if available.
+  if (typeof wc_cart_fragments_params !== 'undefined') {
+    external_jQuery_default()(document.body).trigger('wc_fragment_refresh');
+  }
+
+  // Fire a custom event that other scripts can hook into.
+  external_jQuery_default()(document).trigger('anima:page-transition-complete');
+  // Native event mirror for non-jQuery listeners.
+  window.dispatchEvent(new CustomEvent('anima:page-transition-complete'));
+
+  // Dispatch resize + scroll events for layout-dependent JS.
+  // Resize: recalculates layout (Hero, GlobalService).
+  // Scroll: triggers Hero.update() and bully's rAF loop to process new elements.
+  window.dispatchEvent(new Event('resize'));
+  window.dispatchEvent(new Event('scroll'));
+  // Delayed fallback pass: some third-party scripts mutate the new container
+  // asynchronously right after transition. Trigger one more recalculation.
+  setTimeout(() => {
+    window.dispatchEvent(new Event('resize'));
+    window.dispatchEvent(new Event('scroll'));
+  }, 250);
+}
+
+/**
+ * Re-execute Nova Blocks frontend scripts after AJAX page swap.
+ *
+ * Nova Blocks registers per-block `frontend.js` scripts that initialize
+ * DOM-dependent behavior (header sticky, color signals, scroll effects, etc.).
+ * These run once on DOMContentLoaded. After Barba swaps the container,
+ * the new DOM has no JS behavior — we must re-execute the scripts.
+ *
+ * We dynamically load fresh <script> tags so each script re-queries the DOM
+ * and creates new instances for the new elements.
+ *
+ * After ALL scripts have loaded and executed, dispatches resize + scroll
+ * events so scripts like the Doppler parallax effect recalculate their
+ * initial positions with correct DOM measurements.
+ */
+function reinitNovaBlocksScripts(onComplete = () => {}) {
+  // Re-execute the bully vendor script first so it creates a fresh IIFE
+  // with an empty elements array and a new .c-bully DOM element.
+  // The old instance's rAF loop will harmlessly reference the removed DOM.
+  reinitBullyScript();
+  const scripts = document.querySelectorAll('script[id*="novablocks"][id$="-js"][src*="frontend"]');
+  let pending = 0;
+  const onAllLoaded = () => {
+    // Nova Blocks scripts have now executed their domReady() callbacks
+    // and measured the DOM. Force a recalculation so scripts like the
+    // Doppler parallax effect get correct initial positions.
+    // Use rAF to ensure measurements happen after the browser has
+    // applied any style changes from the newly-loaded scripts.
+    requestAnimationFrame(() => {
+      // Trigger the bully bullet pop animation. The bully plugin normally
+      // does this on window.load, which won't fire again after AJAX nav.
+      // Bullets default to opacity: 0 and only become visible via --pop.
+      external_jQuery_default()('.c-bully .c-bully__bullet').not('.c-bully__bullet--active').each(function (i) {
+        const $bullet = external_jQuery_default()(this);
+        setTimeout(() => {
+          $bullet.addClass('c-bully__bullet--pop');
+        }, i * 400);
+      });
+      window.dispatchEvent(new Event('resize'));
+      window.dispatchEvent(new Event('scroll'));
+      onComplete();
+    });
+  };
+  scripts.forEach(script => {
+    // Skip scripts that syncPageAssets() just loaded for the first time —
+    // they will run their own domReady() callbacks. Re-executing them would
+    // cause double-initialization (duplicate share icons, toggled handlers
+    // that cancel each other out, etc.).
+    if (freshlyLoadedScriptIds.has(script.id)) {
+      return;
+    }
+    pending++;
+    const newScript = document.createElement('script');
+    // Append a cache-bust param so the browser treats it as a new request
+    // (avoids de-duplication of identical src URLs).
+    newScript.src = script.src + (script.src.includes('?') ? '&' : '?') + '_barba=' + Date.now();
+    newScript.async = false;
+    newScript.onload = () => {
+      pending--;
+      if (pending === 0) {
+        onAllLoaded();
+      }
+    };
+    document.body.appendChild(newScript);
+  });
+
+  // If no scripts needed re-execution (all were freshly loaded by
+  // syncPageAssets, or no Nova Blocks frontend scripts exist), fire
+  // onAllLoaded immediately so resize/scroll events still dispatch.
+  if (pending === 0) {
+    onAllLoaded();
+  }
+}
+
+/**
+ * Re-execute the jquery.bully.js vendor script to create a fresh instance.
+ *
+ * The bully plugin uses a closure-scoped elements array and rAF loop that
+ * persist across page transitions. Since there's no destroy API, we remove
+ * the old .c-bully DOM element (done in cleanupBeforeTransition) and
+ * re-execute the script so the IIFE runs again with a clean slate.
+ *
+ * After the new bully instance is ready and position-indicators has run
+ * (via the core frontend script), we trigger the bullet pop animation
+ * that normally only fires on window.load.
+ *
+ * The old rAF loop continues but operates on the removed DOM — harmless.
+ * The new IIFE creates a fresh .c-bully, empty elements array, and new loop.
+ */
+function reinitBullyScript() {
+  const bullyScript = document.querySelector('script[id*="novablocks-bully"][src]');
+  if (!bullyScript) {
+    return;
+  }
+  const newScript = document.createElement('script');
+  newScript.src = bullyScript.src + (bullyScript.src.includes('?') ? '&' : '?') + '_barba=' + Date.now();
+  newScript.async = false;
+  document.body.appendChild(newScript);
+}
+
+/**
+ * Cleanup heavy resources before page transition.
+ */
+function cleanupBeforeTransition() {
+  // Disconnect the header color observer from the current page.
+  disconnectHeaderColorObserver();
+  const $container = external_jQuery_default()('[data-barba="container"]');
+
+  // Pause and remove video elements.
+  $container.find('video').each(function () {
+    this.pause();
+    this.src = '';
+    this.load();
+    external_jQuery_default()(this).remove();
+  });
+
+  // Remove the bully navigation dots. The jquery.bully.js IIFE keeps
+  // closure-scoped state (elements array, rAF loop) that can't be reset
+  // externally. Removing the DOM element and re-executing the vendor
+  // script in reinitNovaBlocksScripts() creates a fresh instance.
+  external_jQuery_default()('.c-bully').remove();
+}
+
+/**
+ * Push a pageview event for analytics.
+ */
+function trackPageview() {
+  // Google Analytics 4 (gtag).
+  if (typeof gtag === 'function') {
+    gtag('event', 'page_view', {
+      page_location: window.location.href,
+      page_title: document.title
+    });
+    return;
+  }
+
+  // Google Tag Manager dataLayer.
+  if (typeof dataLayer !== 'undefined' && Array.isArray(dataLayer)) {
+    dataLayer.push({
+      event: 'pageview',
+      page: {
+        path: window.location.pathname,
+        title: document.title
+      }
+    });
+    return;
+  }
+
+  // Legacy Universal Analytics.
+  if (typeof _gaq !== 'undefined') {
+    _gaq.push(['_trackPageview']);
+  }
+}
+;// ./src/js/components/page-transitions/admin-bar.js
+/**
+ * Sync the WordPress admin bar from the new page's raw HTML.
+ *
+ * Replaces the inner content of #wpadminbar with the version from the AJAX
+ * response. After replacement, re-initializes WordPress's admin bar JS so
+ * dropdown menus and other interactive features continue to work.
+ *
+ * @param {string} html - Full HTML response from Barba's AJAX fetch.
+ */
+function syncAdminBar(html) {
+  const currentAdminBar = document.getElementById('wpadminbar');
+  if (!currentAdminBar) {
+    return;
+  }
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+  const newAdminBar = doc.getElementById('wpadminbar');
+  if (!newAdminBar) {
+    return;
+  }
+
+  // Replace inner HTML to update all admin bar items.
+  currentAdminBar.innerHTML = newAdminBar.innerHTML;
+
+  // Copy over any changed attributes (classes, aria attributes, etc.).
+  Array.from(newAdminBar.attributes).forEach(attr => {
+    currentAdminBar.setAttribute(attr.name, attr.value);
+  });
+
+  // Re-initialize WordPress admin bar JS.
+  // The admin bar script uses event delegation on document for most interactions,
+  // but some hover/click handlers are bound directly to elements.
+  // Re-executing the script re-binds those handlers to the new DOM nodes.
+  reinitAdminBarScripts();
+}
+
+/**
+ * Re-initialize WordPress admin bar interactive behavior.
+ *
+ * WordPress's admin-bar.js is enqueued as `admin-bar` and binds hover/click
+ * handlers to admin bar elements. After innerHTML replacement, those handlers
+ * are lost. We re-execute the script to re-bind them.
+ */
+function reinitAdminBarScripts() {
+  const adminBarScript = document.getElementById('admin-bar-js');
+  if (!adminBarScript || !adminBarScript.src) {
+    return;
+  }
+  const newScript = document.createElement('script');
+  newScript.src = adminBarScript.src + (adminBarScript.src.includes('?') ? '&' : '?') + '_barba=' + Date.now();
+  newScript.async = false;
+  document.body.appendChild(newScript);
+
+  // Clean up after execution.
+  newScript.onload = () => {
+    newScript.remove();
+  };
+}
+;// ./src/js/components/page-transitions/transitions.js
+
+
+
+
+/**
+ * Wraps a GSAP timeline in a Promise.
+ * Resolves when the timeline completes.
+ */
+function timelinePromise(timeline) {
+  return new Promise(resolve => {
+    timeline.eventCallback('onComplete', () => {
+      resolve(true);
+    });
+  });
+}
+
+/**
+ * Create the "border expanding inward" timeline for page leave.
+ * Ported from Pile's borderOutTimeline().
+ */
+function createBorderOutTimeline() {
+  const $border = external_jQuery_default()('.js-page-transition-border');
+  const windowWidth = window.innerWidth;
+  const windowHeight = window.innerHeight;
+  const borderX = windowWidth / 2;
+  const borderY = windowHeight / 2;
+  const timeline = gsap.timeline({
+    paused: true
+  });
+  $border.css({
+    top: 0,
+    left: 0,
+    width: windowWidth,
+    height: windowHeight,
+    borderWidth: '0 0',
+    borderColor: 'var(--sm-current-accent-color)',
+    display: 'block'
+  });
+  timeline.fromTo($border[0], {
+    x: 0,
+    y: 0,
+    scale: 1
+  }, {
+    borderTopWidth: borderY,
+    borderBottomWidth: borderY,
+    borderLeftWidth: borderX,
+    borderRightWidth: borderX,
+    duration: 0.6,
+    ease: 'quart.inOut'
+  });
+  return timeline;
+}
+
+/**
+ * Create the "border collapsing outward" timeline for page enter.
+ * Ported from Pile's FadeTransition.fadeIn().
+ *
+ * IMPORTANT: Only animates the border overlay itself.
+ * Hero content animations are handled by Hero.js after reinitComponents().
+ */
+function createBorderInTimeline() {
+  const $border = external_jQuery_default()('.js-page-transition-border');
+  const timeline = gsap.timeline({
+    paused: true,
+    onComplete: () => {
+      // Clear all GSAP inline styles from the border element so it returns
+      // to its CSS-defined state (border: 0 solid transparent).
+      gsap.set($border[0], {
+        clearProps: 'all'
+      });
+    }
+  });
+  timeline.to($border[0], {
+    borderWidth: 0,
+    duration: 0.6,
+    ease: 'quart.inOut'
+  });
+  return timeline;
+}
+
+/**
+ * Shared enter logic for both transitions.
+ *
+ * Syncs WordPress state (assets, body classes, title, admin bar, header color),
+ * reinitializes components, and plays the border collapse animation.
+ */
+function performEnter({
+  next
+}) {
+  // Scroll to top.
+  window.scrollTo(0, 0);
+
+  // Reset border background.
+  external_jQuery_default()('.js-page-transition-border').css('backgroundColor', 'transparent');
+
+  // Sync WordPress state from new page HTML.
+  const html = next.html;
+  syncPageAssets(html);
+  syncBodyClasses(html);
+  syncDocumentTitle(html);
+
+  // Sync admin bar from raw HTML (full #wpadminbar replacement).
+  syncAdminBar(html);
+
+  // Save the header's correct color signal classes from the server HTML.
+  // The Nova Blocks header script will re-execute and fail to detect colors
+  // in FSE templates (it queries `.site-main .hentry` which doesn't exist).
+  // Pass the new container to scope DOM queries and avoid finding the old header.
+  syncHeaderColorSignal(html, next.container);
+
+  // Defer component reinitialization until after the browser has reflowed the
+  // new DOM. Nova Blocks color signal scripts read computed styles (padding,
+  // background-color) and Hero.js calls getBoundingClientRect() — both return
+  // stale values if called before the browser recalculates layout.
+  // Double-rAF ensures styles are applied and one paint cycle has completed.
+  return new Promise(resolve => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        reinitComponents();
+        trackPageview();
+        const timeline = createBorderInTimeline();
+        timeline.play();
+        timelinePromise(timeline).then(resolve);
+      });
+    });
+  });
+}
+
+/**
+ * The generic Barba.js v2 transition definition.
+ * Ported from Pile's FadeTransition (Barba v1).
+ * Used for all non-card links (header nav, footer, back button, etc.).
+ */
+const pageTransition = {
+  name: 'page-transition',
+  leave({
+    current
+  }) {
+    const timeline = createBorderOutTimeline();
+    timeline.play();
+
+    // Close mobile nav if open.
+    external_jQuery_default()('body').removeClass('nav-is-open');
+    return timelinePromise(timeline).then(() => {
+      // Cleanup heavy resources from the old page.
+      cleanupBeforeTransition();
+
+      // Hide old container.
+      external_jQuery_default()(current.container).hide();
+    });
+  },
+  enter({
+    next
+  }) {
+    return performEnter({
+      next
+    });
+  }
+};
+
+/**
+ * Card-expand transition.
+ *
+ * When clicking a Nova Blocks collection card (project/post in a grid),
+ * the border overlay is positioned exactly over the clicked card, fills it
+ * solid in the project's color, then scales to cover the full viewport.
+ *
+ * Ported from Pile's projectBorderOutTimeline().
+ *
+ * Uses Barba v2's `custom` function to match only clicks from grid cards.
+ * The `trigger` parameter is the clicked <a> element (or 'barba' for popstate).
+ */
+const cardExpandTransition = {
+  name: 'card-expand',
+  // Only match clicks from within a multi-column post archive grid card.
+  // - .wp-block-query: excludes standalone supernova blocks (hero, media card)
+  // - :not(.nb-supernova--1-columns): excludes full-width sliders/carousels
+  custom: ({
+    trigger
+  }) => {
+    if (!trigger || trigger === 'barba' || typeof trigger.closest !== 'function') {
+      return false;
+    }
+    const card = trigger.closest('.nb-supernova-item');
+    if (!card || !card.closest('.wp-block-query')) {
+      return false;
+    }
+    const supernova = card.closest('.nb-supernova');
+    return supernova !== null && !supernova.classList.contains('nb-supernova--1-columns');
+  },
+  leave({
+    current,
+    trigger
+  }) {
+    const card = trigger.closest('.nb-supernova-item');
+    // Use the media wrapper for positioning (border is around the image, not full card).
+    const mediaWrapper = card.querySelector('.nb-supernova-item__media-wrapper') || card;
+    const rect = mediaWrapper.getBoundingClientRect();
+
+    // Read project color (custom property with accent fallback).
+    const styles = getComputedStyle(card);
+    const projectColor = styles.getPropertyValue('--anima-project-color').trim();
+    const accentColor = styles.getPropertyValue('--sm-current-accent-color').trim();
+    const color = projectColor || accentColor || '#333';
+    const $border = external_jQuery_default()('.js-page-transition-border');
+    const borderX = Math.ceil(rect.width / 2);
+    const borderY = Math.ceil(rect.height / 2);
+    const scaleX = window.innerWidth / rect.width;
+    const scaleY = window.innerHeight / rect.height;
+    const moveX = window.innerWidth / 2 - (rect.left + rect.width / 2);
+    const moveY = window.innerHeight / 2 - (rect.top + rect.height / 2);
+
+    // Position the overlay exactly over the clicked card.
+    $border.css({
+      display: 'block',
+      position: 'fixed',
+      top: rect.top - 1,
+      left: rect.left - 1,
+      right: 'auto',
+      bottom: 'auto',
+      width: rect.width + 2,
+      height: rect.height + 2,
+      borderWidth: 0,
+      borderColor: color,
+      backgroundColor: 'transparent',
+      transform: 'none'
+    });
+    external_jQuery_default()('body').addClass('is-transitioning');
+    const timeline = gsap.timeline({
+      paused: true
+    });
+
+    // Step A (0.4s): Border grows inward until it fills the card solid.
+    timeline.to($border[0], {
+      borderTopWidth: borderY,
+      borderBottomWidth: borderY,
+      borderLeftWidth: borderX,
+      borderRightWidth: borderX,
+      duration: 0.4,
+      ease: 'quart.inOut',
+      onComplete: () => {
+        // Once border fills the card, set backgroundColor to match.
+        // This creates a seamless solid fill for the scale step.
+        $border.css('backgroundColor', color);
+      }
+    });
+
+    // Step B (0.5s): Scale + translate from card position to cover full viewport.
+    timeline.to($border[0], {
+      x: moveX,
+      y: moveY,
+      scaleX,
+      scaleY,
+      duration: 0.5,
+      ease: 'power3.inOut'
+    });
+    timeline.play();
+
+    // Close mobile nav if open.
+    external_jQuery_default()('body').removeClass('nav-is-open');
+    return timelinePromise(timeline).then(() => {
+      cleanupBeforeTransition();
+      external_jQuery_default()(current.container).hide();
+      external_jQuery_default()('body').removeClass('is-transitioning');
+    });
+  },
+  enter({
+    next
+  }) {
+    return performEnter({
+      next
+    });
+  }
+};
+;// ./src/js/components/page-transitions/loading-animation.js
+
+
+/**
+ * Initial page load animation — the "opening curtain".
+ * Ported from Pile's loadingAnimation.js.
+ *
+ * IMPORTANT: This only animates the border overlay and logo.
+ * Hero content animations are handled by Hero.js (intro timeline + scroll scrub).
+ * We must NOT touch hero elements here to avoid GSAP conflicts.
+ */
+function playLoadingAnimation() {
+  const $border = external_jQuery_default()('.js-page-transition-border');
+  if (!$border.length) {
+    return;
+  }
+  const windowWidth = window.innerWidth;
+  const windowHeight = window.innerHeight;
+
+  // Logo fill slides in from left.
+  gsap.to('.border-logo-fill', {
+    x: 0,
+    duration: 0.3,
+    ease: 'circ.in',
+    onComplete: function () {
+      external_jQuery_default()('.border-logo').css('opacity', 0);
+    }
+  });
+
+  // Logo background scales down.
+  gsap.to('.border-logo-bgscale', {
+    scaleY: 0,
+    duration: 0.3,
+    delay: 0.3,
+    ease: 'quad.inOut'
+  });
+
+  // Border collapses from full-screen to zero.
+  gsap.fromTo($border[0], {
+    borderWidth: windowHeight / 2 + 'px ' + windowWidth / 2 + 'px'
+  }, {
+    background: 'none',
+    borderWidth: 0,
+    duration: 0.6,
+    delay: 0.5,
+    ease: 'quart.inOut'
+  });
+}
+;// ./src/js/components/page-transitions/index.js
+
+
+
+
+
+// Ignored URL patterns — file extensions, admin, anchors.
+const IGNORED_PATTERNS = ['.pdf', '.doc', '.eps', '.png', '.jpg', '.jpeg', '.zip', 'wp-admin', 'wp-login', 'wp-', 'feed', '#', '&add-to-cart=', '?add-to-cart=', '?remove_item'];
+
+/**
+ * Initialize page transitions.
+ */
+function init() {
+  const $body = external_jQuery_default()('body');
+
+  // Don't init in Customizer preview.
+  if ($body.hasClass('is--customizer-preview')) {
+    return;
+  }
+
+  // Merge server-side excluded URLs with client-side patterns.
+  const serverExcluded = typeof animaPageTransitions !== 'undefined' && animaPageTransitions.excludedUrls ? animaPageTransitions.excludedUrls : [];
+  barba_umd_default().init({
+    // Disable hover/touch prefetching — it causes unwanted navigation behavior
+    // on Nova Blocks collection cards where large areas are wrapped in links.
+    prefetchIgnore: true,
+    // Barba v2 uses a prevent function instead of overriding preventCheck.
+    prevent: ({
+      el,
+      href
+    }) => {
+      // Skip links with target="_blank".
+      if (el.target && el.target === '_blank') {
+        return true;
+      }
+
+      // Skip links with data-no-transition attribute.
+      if (el.hasAttribute('data-no-transition')) {
+        return true;
+      }
+
+      // Check against ignored patterns.
+      for (const pattern of IGNORED_PATTERNS) {
+        if (href.indexOf(pattern) > -1) {
+          return true;
+        }
+      }
+
+      // Check against server-side excluded URLs.
+      for (const url of serverExcluded) {
+        if (href.indexOf(url) > -1) {
+          return true;
+        }
+      }
+      return false;
+    },
+    // Card-expand first (has `custom` matcher), generic fallback second.
+    transitions: [cardExpandTransition, pageTransition],
+    // Error fallback: if AJAX navigation fails, do a full page reload.
+    requestError: (trigger, action, url) => {
+      window.location.href = url;
+      return false;
+    }
+  });
+
+  // After each transition, ensure the body is visible.
+  barba_umd_default().hooks.after(() => {
+    $body.addClass('is-loaded');
+  });
+
+  // Mark as loaded and play initial page load animation.
+  $body.addClass('is-loaded');
+  playLoadingAnimation();
+}
+;// ./src/js/page-transitions.js
+
+
+external_jQuery_default()(function () {
+  init();
+});
+})();
+
+/******/ })()
+;

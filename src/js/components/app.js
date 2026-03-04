@@ -7,6 +7,7 @@ import Hero from './hero';
 import CommentsArea from './commentsArea';
 import Navbar from './navbar';
 import SearchOverlay from './search-overlay';
+import * as PileParallax from './pile-parallax';
 
 export default class App {
 
@@ -19,6 +20,7 @@ export default class App {
     this.initializeImages();
     this.initializeCommentsArea();
     this.initializeReservationForm();
+    this.initializePileParallax();
   }
 
   initializeImages() {
@@ -68,6 +70,11 @@ export default class App {
 
     this.HeroCollection = heroElementsArray.map( element => new Hero( element ) );
     this.firstHero = heroElementsArray[ 0 ];
+  }
+
+  initializePileParallax() {
+    PileParallax.initialize();
+    PileParallax.bind();
   }
 
   initializeCommentsArea() {

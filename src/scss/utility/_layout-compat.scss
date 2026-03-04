@@ -1,0 +1,16 @@
+// WP 7 may apply `.is-layout-flex.is-vertical { align-items: stretch; }`
+// after per-container layout classes, which can break explicit alignment choices.
+.wp-block-group.is-layout-flex.is-vertical {
+
+  &.is-content-justification-left {
+    align-items: flex-start;
+  }
+
+  &.is-content-justification-center {
+    align-items: center;
+  }
+
+  &.is-content-justification-right {
+    align-items: flex-end;
+  }
+}
