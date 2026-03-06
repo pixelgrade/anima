@@ -2,6 +2,14 @@
 
 > GitHub Issue: [#363](https://github.com/pixelgrade/anima/issues/363)
 
+**Status:** Implemented
+
+## Current Status Snapshot
+
+- The feature shipped and was later refined by follow-up fixes
+- This file remains the design reference for the current implementation
+- Remaining work, when needed, should be tracked as bug fixes or targeted follow-up plans rather than as a new feature design task
+
 ## Goal
 
 Add an optional page transitions system to Anima, porting the cinematic border-expand animation from the Pile theme. When enabled, internal navigation uses AJAX page loading with a smooth 4-sided border overlay (with centered site logo) instead of full page reloads.

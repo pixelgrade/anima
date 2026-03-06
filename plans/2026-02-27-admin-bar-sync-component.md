@@ -1,6 +1,13 @@
 # Admin Bar Sync Component — Implementation Plan
 
-> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
+**Status:** Implemented
+
+## Current Status Snapshot
+
+- The admin bar sync component landed in `c2a2d204`
+- Follow-up integration and cleanup landed in `28ee9b1b`, `bb1dd818`, and related page-transition fixes
+- `#anima-page-data` was removed as planned
+- This document is now historical implementation context for the current behavior
 
 **Goal:** Replace the current partial admin bar sync (edit link + customize URL only) with a full admin bar replacement that handles items appearing/disappearing between pages during AJAX navigation.
 

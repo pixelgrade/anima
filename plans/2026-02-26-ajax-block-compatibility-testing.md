@@ -1,5 +1,14 @@
 # AJAX Block Compatibility Testing Plan
 
+**Status:** Reference checklist for ongoing QA
+
+## Current Status Snapshot
+
+- This file is a manual/regression testing guide, not a code implementation plan
+- Several AJAX transition bugs were fixed after this plan was written
+- The checklist is still useful when validating page transitions, Nova Blocks behavior, or future AJAX regressions
+- Treat the wp-cli setup and test pages as disposable testing scaffolding
+
 **Goal:** Systematically test every Nova Blocks and WordPress Core block that uses frontend JavaScript through AJAX page transitions, comparing behavior against fresh page loads to identify rendering, functionality, and scripting issues.
 
 **Method:** Create dedicated test pages per block (via wp-cli), then navigate to each via AJAX and via full refresh. Compare screenshots and check console for errors. Blocks with frontend JS get the most scrutiny since their scripts may not reinitialize after Barba container swap.

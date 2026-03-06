@@ -1,15 +1,22 @@
 # WordPress 7.0 Compatibility Plan
 
 **Date:** 2026-03-02
-**Status:** Plan — not yet implemented
+**Status:** Partially completed and needs follow-up QA
 **Repos affected:** Anima, Nova Blocks, Style Manager, Pixelgrade Care
+
+## Current Status Snapshot
+
+- Anima: implemented and released in `2.0.14`; remaining work is QA and validation
+- Nova Blocks: implemented; issue closed
+- Style Manager: implemented; issue closed
+- Pixelgrade Care: still open
 
 ## GitHub Issues
 
-- Anima: [#365](https://github.com/pixelgrade/anima/issues/365)
-- Nova Blocks: [#481](https://github.com/pixelgrade/nova-blocks/issues/481)
-- Style Manager: [#48](https://github.com/pixelgrade/style-manager/issues/48)
-- Pixelgrade Care: [#430](https://github.com/pixelgrade/pixelgrade-care/issues/430)
+- Anima: [#365](https://github.com/pixelgrade/anima/issues/365) — closed
+- Nova Blocks: [#481](https://github.com/pixelgrade/nova-blocks/issues/481) — closed
+- Style Manager: [#48](https://github.com/pixelgrade/style-manager/issues/48) — closed
+- Pixelgrade Care: [#430](https://github.com/pixelgrade/pixelgrade-care/issues/430) — open
 
 ---
 
@@ -100,6 +107,10 @@ Or use the `wp_register_font_collection` / `wp_unregister_font_collection` APIs.
 
 ## Phase 2: Anima (est. scope: ~5 files)
 
+### Phase 2 Status
+
+Most Anima implementation work has already landed. The items below are now a historical record plus the remaining QA checklist.
+
 ### 2.1 Replace `__experimentalFeatures` mutations
 **File:** `inc/block-editor.php:54-66`
 **Approach:** Move all feature suppression into `theme.json`. The theme already uses `theme.json` to disable most settings — ensure it covers everything currently done via `__experimentalFeatures` mutations:
@@ -107,18 +118,22 @@ Or use the `wp_register_font_collection` / `wp_unregister_font_collection` APIs.
 - `color.customGradient: false`
 - `typography.customFontSize: false`
 - etc.
+**Current state:** Done. `theme.json` now carries the relevant settings and `inc/block-editor.php` no longer mutates `__experimentalFeatures`.
 
 ### 2.2 Replace `__unstableResolvedAssets` injection
 **File:** `inc/block-editor.php:81`
 **Approach:** Same pattern as SM — use `enqueue_block_editor_assets` + inline style.
+**Current state:** Done. `inc/block-editor.php` now uses `enqueue_block_editor_assets` and stable style handles.
 
 ### 2.3 Audit `wp_enqueue_global_styles` removal
 **File:** `inc/block-editor.php:21-24`
 **Approach:** Test with WP 7.0 beta whether removing global styles is still necessary. If SM now handles all CSS injection via the stable `enqueue_block_editor_assets` action, global styles may coexist without conflict. If removal is still needed, find the WP 7.0-compatible way to do it.
+**Current state:** Partially done. The removal logic was updated to cover current WP 6.x/7.x callback and hook combinations, but this still needs QA against a live WP 7 install to confirm there are no editor/frontend regressions.
 
 ### 2.4 Clean up dead filter removals
 **File:** `inc/block-editor.php:27-28`
 **Change:** Remove the `remove_filter` calls for `wp_render_duotone_support` and `wp_restore_group_inner_container` — they're already no-ops.
+**Current state:** Done.
 
 ### 2.5 Fix deprecated JS APIs
 **Files:** `src/js/components/hero.js:30`, `src/js/components/globalService.js:150-151`
@@ -126,12 +141,15 @@ Or use the `wp_register_font_collection` / `wp_unregister_font_collection` APIs.
 - `mediaQuery.addListener(fn)` → `mediaQuery.addEventListener('change', fn)`
 - `window.pageYOffset` → `window.scrollY`
 - `window.pageXOffset` → `window.scrollX`
+**Current state:** Done.
 
 ### 2.6 Test Font Library interaction
 Test that `theme.json` properly suppresses Font Library UI when Style Manager is active. May need `"typography": { "fontLibrary": false }` if supported in WP 7.0.
+**Current state:** Partially done. `theme.json` now sets `"fontLibrary": false` and editor settings also disable the UI, but this still needs QA in WP 7 with Style Manager active.
 
 ### 2.7 Test page transitions vs View Transitions
 Test Barba.js page transitions on frontend against WP 7.0's admin View Transitions. Should be no conflict (different contexts) but verify.
+**Current state:** Not a known code blocker in Anima, but still worth validating during QA.
 
 ---
 
@@ -207,6 +225,10 @@ return <div ref={ref}>...</div>;
 
 ## Phase 4: Pixelgrade Care (est. scope: ~5 files)
 
+### Phase 4 Status
+
+This is the main remaining open repo from the original cross-repo plan. Issue `pixelgrade/pixelgrade-care#430` is still open.
+
 ### 4.1 Update or remove bundled Classic Editor
 Evaluate if Classic Editor is still needed. If yes, update to latest version. If no, remove from `vendor/` and rely on users installing it separately.
 
@@ -254,6 +276,19 @@ Change `Tested up to: 6.7.2` → `Tested up to: 7.0`
 - [ ] Font selection UI shows only Style Manager fonts (no duplicate Font Library)
 - [ ] Pixelgrade Care setup wizard completes
 - [ ] Pixelgrade Care dashboard renders correctly
+
+## What Is Actually Left
+
+### Anima
+
+- Validate `wp_enqueue_global_styles` removal behavior on a real WordPress 7 site
+- Verify Font Library stays suppressed when Style Manager is active
+- Verify frontend Barba transitions do not conflict with WordPress 7 view-transition behavior
+
+### Cross-repo
+
+- Finish the Pixelgrade Care compatibility work tracked in `pixelgrade/pixelgrade-care#430`
+- Run the full end-to-end QA pass across the Anima + Style Manager + Nova Blocks + Pixelgrade Care stack
 
 ### Lesson: Always verify WP exports before migrating
 Not all `__experimental*` APIs have been promoted to stable exports, even in WP 7.0 beta 2:

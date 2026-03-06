@@ -1,6 +1,13 @@
 # Page Transitions Implementation Plan
 
-> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
+**Status:** Implemented
+
+## Current Status Snapshot
+
+- Core implementation landed on the page-transitions branch and was merged via `8565c51b`
+- Admin bar sync follow-up work also landed
+- Subsequent fixes addressed body class sync, hero conflicts, script replay, CSS order, flicker, and AJAX lifecycle regressions
+- This document is now a historical implementation log, not an active task list
 
 **Goal:** Add optional AJAX page transitions to Anima, porting Pile's cinematic border-expand animation using Barba.js v2 and GSAP.
 

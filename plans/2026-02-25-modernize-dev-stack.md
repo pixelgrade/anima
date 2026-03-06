@@ -1,6 +1,13 @@
 # Modernize Development Stack Implementation Plan
 
-> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
+**Status:** Implemented
+
+## Current Status Snapshot
+
+- The dev stack was modernized in commit `3d77a34f`
+- Node requirement is now 22+
+- `package.json` now requires `>=22.0.0`
+- This document is now primarily a historical implementation record
 
 **Goal:** Upgrade Anima's development toolchain from Node 16 to Node 22 LTS, update all build dependencies to current versions, and fix deprecations — while keeping the build output identical.
 
