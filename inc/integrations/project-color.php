@@ -50,9 +50,52 @@ function anima_project_color_register_meta() {
 add_action( 'init', 'anima_project_color_register_meta' );
 
 /**
+ * Determine whether the current block editor screen supports the Project Color panel.
+ *
+ * The panel is designed for post document editors. The Site Editor uses the same
+ * enqueue hook for template entities such as wp_template_part, where the panel has
+ * no purpose and can crash when editor APIs differ during boot.
+ *
+ * @return bool
+ */
+function anima_project_color_supports_current_editor_screen() {
+	if ( ! function_exists( 'get_current_screen' ) ) {
+		return false;
+	}
+
+	$screen = get_current_screen();
+
+	if ( ! $screen ) {
+		return false;
+	}
+
+	if ( method_exists( $screen, 'is_block_editor' ) && ! $screen->is_block_editor() ) {
+		return false;
+	}
+
+	if ( in_array( $screen->id, [ 'site-editor', 'site-editor-v2' ], true ) ) {
+		return false;
+	}
+
+	if ( empty( $screen->post_type ) ) {
+		return false;
+	}
+
+	if ( in_array( $screen->post_type, [ 'wp_template', 'wp_template_part', 'wp_navigation' ], true ) ) {
+		return false;
+	}
+
+	return true;
+}
+
+/**
  * Enqueue the block editor sidebar panel script.
  */
 function anima_project_color_editor_assets() {
+	if ( ! anima_project_color_supports_current_editor_screen() ) {
+		return;
+	}
+
 	$theme   = wp_get_theme( get_template() );
 	$suffix  = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 

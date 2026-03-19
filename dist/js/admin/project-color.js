@@ -9,12 +9,17 @@
  */
 
 (function () {
+  var unsupportedPostTypes = {
+    wp_template: true,
+    wp_template_part: true,
+    wp_navigation: true
+  };
   var el = wp.element.createElement;
   var useState = wp.element.useState;
   var useEffect = wp.element.useEffect;
   var useRef = wp.element.useRef;
-  var registerPlugin = wp.plugins.registerPlugin;
-  var PluginDocumentSettingPanel = wp.editPost.PluginDocumentSettingPanel;
+  var registerPlugin = wp.plugins && wp.plugins.registerPlugin;
+  var PluginDocumentSettingPanel = wp.editPost && wp.editPost.PluginDocumentSettingPanel;
   var ColorIndicator = wp.components.ColorIndicator;
   var ColorPicker = wp.components.ColorPicker;
   var Button = wp.components.Button;
@@ -75,6 +80,9 @@
       return select('core/editor').getCurrentPostType();
     }, []);
     var editPost = useDispatch('core/editor').editPost;
+    if (!PluginDocumentSettingPanel || !postType || unsupportedPostTypes[postType] || typeof editPost !== 'function') {
+      return null;
+    }
     var manualColor = postMeta._project_color || '';
     var autoColor = postMeta._project_color_auto || '';
     var isAuto = !manualColor && !!autoColor;
@@ -279,6 +287,9 @@
         marginTop: '4px'
       }
     }, __('Set a featured image first to use auto-suggestion.', '__theme_txtd')) : null);
+  }
+  if (!registerPlugin) {
+    return;
   }
   registerPlugin('anima-project-color', {
     render: ProjectColorPanel,
