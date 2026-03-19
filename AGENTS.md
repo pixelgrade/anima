@@ -6,6 +6,37 @@ Anima is a WordPress block theme (FSE) by Pixelgrade. It serves as the universal
 
 GitHub: `git@github.com:pixelgrade/anima.git`
 
+## Private Local Files
+
+- Keep machine-specific notes in `AGENTS.local.md` or `.claude/napkin.md`.
+- Keep local env values in `.env.local`.
+- Do not commit those private overlays; commit only the `*.example` files.
+- Use `bin/bootstrap-private` to hydrate the private overlays after cloning the public repo.
+
+Clone/bootstrap flow for a fresh machine:
+```bash
+# 1. Clone the public repo
+git clone git@github.com:pixelgrade/anima.git
+cd anima
+
+# 2. Point the repo at your private companion repo
+git config --local anima.privateRepo git@github.com:<you>/anima-private.git
+
+# 3. Hydrate the private local overlays
+bin/bootstrap-private
+```
+
+What gets pulled from the private repo when present:
+- `AGENTS.local.md`
+- `.claude/napkin.md`
+- `.env.local`
+
+If you prefer to keep an explicit local checkout of the private repo, use:
+```bash
+git clone git@github.com:<you>/anima-private.git /path/to/anima-private
+bin/bootstrap-private --source-dir /path/to/anima-private
+```
+
 ## Critical Warnings
 
 - **Node 22+ required** (`.nvmrc` = 22, `package.json` engines `>=22.0.0`). Enforced by `node-tasks/lock_node_version.js` on `npm install`.

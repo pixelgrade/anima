@@ -39,6 +39,59 @@ For ease of development, it is best to use `nvm` (https://github.com/nvm-sh/nvm)
 
 We use the following oh-my-zsh plugins: `plugins=(composer git nvm npm)` configured in `~/.zshrc`. For automatic node version switching, place this line in `~/.zshrc` just below the plugins line: `NVM_AUTOLOAD=1`. Now whenever you enter a directory through the shell, if it finds a `.nvmrc` file, it will switch to the specified node version.
 
+## Private Local Overlays
+
+This repo supports a split between tracked public templates and ignored local private files.
+
+Tracked files:
+
+- `AGENTS.md`
+- `AGENTS.local.example.md`
+- `.claude/napkin.example.md`
+- `.env.example`
+- `bin/bootstrap-private`
+
+Ignored files:
+
+- `AGENTS.local.md`
+- `.claude/napkin.md`
+- `.env.local`
+- `.private/`
+
+Recommended workflow:
+
+1. Put your real private files in a separate private repo, for example `anima-private`.
+2. Store any of these files there when needed:
+   - `AGENTS.local.md`
+   - `.claude/napkin.md`
+   - `.env.local`
+3. After cloning `anima`, configure the private repo once:
+
+```bash
+git config --local anima.privateRepo git@github.com:<you>/anima-private.git
+```
+
+4. Hydrate the local private files:
+
+```bash
+bin/bootstrap-private
+```
+
+Useful variants:
+
+```bash
+# replace existing local private files from the private source
+bin/bootstrap-private --force
+
+# symlink the files instead of copying them
+bin/bootstrap-private --link
+
+# use an existing local checkout of your private repo
+bin/bootstrap-private --source-dir /path/to/anima-private
+```
+
+The bootstrap script syncs `AGENTS.local.md`, `.claude/napkin.md`, and `.env.local` when those files exist in the private source.
+
 ## License
 
 Anima theme source code is released under the [GNU GPL v2 license or later](https://www.gnu.org/licenses/gpl-2.0.html).
