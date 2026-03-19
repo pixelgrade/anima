@@ -70,6 +70,32 @@ function anima_register_block_patterns() {
 add_action( 'init', 'anima_register_block_patterns', 12 );
 
 /**
+ * Register Pixelgrade Care patterns before plugin-provided header presets like WooCommerce.
+ *
+ * The Site Editor Design panel preserves registration order, and our header
+ * presets are provided by Pixelgrade Care rather than the local theme files.
+ * Moving their registration earlier keeps the Anima presets at the top of the
+ * list without removing third-party patterns entirely.
+ *
+ * @return void
+ */
+function anima_prioritize_pixelgrade_care_block_patterns() {
+	if ( ! function_exists( 'PixelgradeCare' ) ) {
+		return;
+	}
+
+	$pixelgrade_care = PixelgradeCare();
+
+	if ( empty( $pixelgrade_care->plugin_block_patterns ) ) {
+		return;
+	}
+
+	remove_action( 'init', [ $pixelgrade_care->plugin_block_patterns, 'register_block_patterns' ], 30 );
+	add_action( 'init', [ $pixelgrade_care->plugin_block_patterns, 'register_block_patterns' ], 9 );
+}
+add_action( 'after_setup_theme', 'anima_prioritize_pixelgrade_care_block_patterns', 20 );
+
+/**
  * Finds all block patterns in a certain directory.
  *
  * @access private
