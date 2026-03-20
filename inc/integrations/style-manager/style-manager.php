@@ -15,7 +15,7 @@ if ( defined( '\Pixelgrade\StyleManager\VERSION' ) ) {
 
 	require_once __DIR__ . '/colors.php';
 	require_once __DIR__ . '/fonts.php';
-	require_once __DIR__ . '/layout.php';
+	require_once __DIR__ . '/motion.php';
 	require_once __DIR__ . '/connected-fields.php';
 
 	// Add new options to the Style Manager config
@@ -78,5 +78,4 @@ function anima_add_separators_section_to_style_manager_config( $config ) {
 
 	return $config;
 }
-
 

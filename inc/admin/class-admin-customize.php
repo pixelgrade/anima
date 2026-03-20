@@ -23,7 +23,7 @@ if ( ! class_exists( 'Anima_Admin_Customize', false ) ) :
 		public function __construct() {
 			add_action( 'customize_register', [ $this, 'customize_register' ] );
 			// Scripts and styles enqueued in the Customizer.
-			add_action( 'customize_controls_enqueue_scripts', [ $this, 'enqueue_assets' ], 15 );
+			add_action( 'customize_controls_enqueue_scripts', [ $this, 'enqueue_assets' ], 20 );
 		}
 
 		/**

@@ -24,6 +24,11 @@ function anima_page_transitions_enabled() {
 		return false;
 	}
 
+	$motion_toggle = get_option( 'sm_page_transitions_enable', null );
+	if ( null !== $motion_toggle ) {
+		return (bool) $motion_toggle;
+	}
+
 	return (bool) pixelgrade_option( 'enable_page_transitions', false );
 }
 
