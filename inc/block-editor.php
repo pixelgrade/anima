@@ -95,3 +95,82 @@ add_action( 'enqueue_block_editor_assets', function () {
 		wp_enqueue_style( $handle );
 	}
 } );
+
+/**
+ * Determine whether the current admin screen is the Site Editor.
+ *
+ * @return bool
+ */
+function anima_is_site_editor_screen() {
+	if ( ! function_exists( 'get_current_screen' ) ) {
+		return false;
+	}
+
+	$screen = get_current_screen();
+
+	return (bool) $screen && in_array( $screen->id, [ 'site-editor', 'site-editor-v2' ], true );
+}
+
+/**
+ * Get a Customizer link focused on a specific panel or section.
+ *
+ * @param string $focus_type   Whether to focus a panel or section.
+ * @param string $focus_target The panel or section ID.
+ * @return string
+ */
+function anima_get_style_manager_customizer_url( $focus_type = 'panel', $focus_target = 'style_manager_panel' ) {
+	return add_query_arg(
+		[
+			'autofocus[' . $focus_type . ']' => $focus_target,
+		],
+		wp_customize_url()
+	);
+}
+
+/**
+ * Redirect Site Editor global styles users back to the Customizer-managed flow.
+ *
+ * LT themes use Style Manager as the single source of truth for the design
+ * system, so the Site Editor Styles route should act as a handoff instead of a
+ * second styling UI.
+ */
+function anima_enqueue_site_editor_style_manager_assets() {
+	if ( ! anima_is_site_editor_screen() ) {
+		return;
+	}
+
+	$theme  = wp_get_theme( get_template() );
+	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+
+	wp_enqueue_script(
+		'anima-site-editor-style-manager',
+		trailingslashit( get_template_directory_uri() ) . 'dist/js/admin/site-editor-style-manager' . $suffix . '.js',
+		[ 'wp-dom-ready' ],
+		$theme->get( 'Version' ),
+		true
+	);
+
+	wp_localize_script( 'anima-site-editor-style-manager', 'animaSiteEditorStyleManager', [
+		'customizerUrl'      => anima_get_style_manager_customizer_url(),
+		'eyebrow'            => esc_html__( 'Pixelgrade LT', '__theme_txtd' ),
+		'title'              => esc_html__( 'Use the Customizer for your design system', '__theme_txtd' ),
+		'description'        => esc_html__( 'We know that each website needs to have an unique voice in tune with your charisma. That\'s why we created a smart options system to easily make handy color changes, spacing adjustments and balancing fonts, each step bringing you closer to a striking result.', '__theme_txtd' ),
+		'buttonLabel'        => esc_html__( 'Open the Customizer', '__theme_txtd' ),
+		'resourcesEyebrow'   => esc_html__( 'Learn more', '__theme_txtd' ),
+		'resources'          => [
+			[
+				'title'       => esc_html__( 'The Color System', '__theme_txtd' ),
+				'description' => esc_html__( 'Set the overall mood of your site with a palette that feels calm, bold, playful, or anywhere in between.', '__theme_txtd' ),
+				'buttonLabel' => esc_html__( 'Set Up Colors', '__theme_txtd' ),
+				'url'         => anima_get_style_manager_customizer_url( 'section', 'sm_color_palettes_section' ),
+			],
+			[
+				'title'       => esc_html__( 'Managing Typography', '__theme_txtd' ),
+				'description' => esc_html__( 'Choose a small set of fonts that work well together so headings, interface text, and longer reads stay balanced.', '__theme_txtd' ),
+				'buttonLabel' => esc_html__( 'Change Fonts', '__theme_txtd' ),
+				'url'         => anima_get_style_manager_customizer_url( 'section', 'sm_font_palettes_section' ),
+			],
+		],
+	] );
+}
+add_action( 'enqueue_block_editor_assets', 'anima_enqueue_site_editor_style_manager_assets', 20 );

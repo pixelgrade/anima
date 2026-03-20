@@ -39,6 +39,8 @@ module.exports = {
     './dist/js/admin/customizer-nav-menus.min' : './src/js/admin/customizer-nav-menus.js',
     './dist/js/admin/project-color' : './src/js/admin/project-color.js',
     './dist/js/admin/project-color.min' : './src/js/admin/project-color.js',
+    './dist/js/admin/site-editor-style-manager' : './src/js/admin/site-editor-style-manager.js',
+    './dist/js/admin/site-editor-style-manager.min' : './src/js/admin/site-editor-style-manager.js',
   },
   optimization: {
     minimize: true,
