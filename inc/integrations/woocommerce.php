@@ -444,7 +444,7 @@ if ( ! function_exists( ' anima_woocommerce_pagination_args' ) ) {
 if ( ! function_exists( 'anima_woocommerce_coupon_form' ) ) {
 	function anima_woocommerce_coupon_form() {
 		echo '<form class="checkout_coupon woocommerce-form-coupon" id="form-coupon" method="post" style="display:none">
-                <input form="woocommerce-form-coupon" type="text" name="coupon_code" class="js-coupon-value-destination input-text" placeholder="' . esc_attr__( 'Coupon code', '__theme_txtd' ) . '" id="coupon_code" value="">
+                <input type="text" name="coupon_code" class="js-coupon-value-destination input-text" placeholder="' . esc_attr__( 'Coupon code', '__theme_txtd' ) . '" value="">
               </form>';
 	}
 }

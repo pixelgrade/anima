@@ -10,25 +10,38 @@
  * happen. When this occurs the version of the template file will be bumped and
  * the readme will list any important changes.
  *
- * @see https://docs.woocommerce.com/document/template-structure/
- * @package WooCommerce/Templates
- * @version 3.4.4
+ * @see https://woocommerce.com/document/template-structure/
+ * @package WooCommerce\Templates
+ * @version 9.8.0
  */
+
 defined( 'ABSPATH' ) || exit;
+
 if ( ! wc_coupons_enabled() ) { // @codingStandardsIgnoreLine.
 	return;
 }
-?>
 
+?>
 <div class="woocommerce-form-coupon-toggle">
-	<?php wc_print_notice( apply_filters( 'woocommerce_checkout_coupon_message', esc_html__( 'Have a coupon?', '__theme_txtd' ) . ' <a href="#" class="showcoupon">' . esc_html__( 'Click here to enter your code', '__theme_txtd' ) . '</a>' ), 'notice' ); ?>
+	<?php
+		/**
+		 * Filter checkout coupon message.
+		 *
+		 * @param string $message Coupon message.
+		 * @return string
+		 *
+		 * @since 1.0.0
+		 */
+		wc_print_notice( apply_filters( 'woocommerce_checkout_coupon_message', esc_html__( 'Have a coupon?', '__theme_txtd' ) . ' <a href="#" role="button" aria-label="' . esc_attr__( 'Enter your coupon code', '__theme_txtd' ) . '" aria-controls="woocommerce-checkout-form-coupon" aria-expanded="false" class="showcoupon">' . esc_html__( 'Click here to enter your code', '__theme_txtd' ) . '</a>' ), 'notice' );
+	?>
 </div>
 
-<div class="checkout_coupon woocommerce-form-coupon" method="post" style="display:none">
+<div class="checkout_coupon woocommerce-form-coupon" style="display:none" id="woocommerce-checkout-form-coupon">
 
 	<p><?php esc_html_e( 'If you have a coupon code, please apply it below.', '__theme_txtd' ); ?></p>
 
 	<p class="form-row form-row-first">
+		<label for="coupon_code" class="screen-reader-text"><?php esc_html_e( 'Coupon:', '__theme_txtd' ); ?></label>
 		<input type="text" name="coupon_code" class="js-coupon-value-source input-text" placeholder="<?php esc_attr_e( 'Coupon code', '__theme_txtd' ); ?>" id="coupon_code" value="" form="form-coupon" />
 	</p>
 
