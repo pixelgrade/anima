@@ -179,6 +179,14 @@ The theme's visual design (colors, fonts, spacing) is controlled by the **Style 
 
 Defined in `inc/integrations/novablocks.php`. Provides custom separator markup, hero block support, and color signal classes.
 
+### Pile Cards Hover Border
+
+- The stacked Cards Collection `Pile` hover frame belongs to the hover effect, not to page transitions.
+- Render the frame on `.nb-supernova-item__media-wrapper::after` inside `src/scss/utility/_collection-hover-pile.scss`. Page transitions should only suppress the effect during transitions in `src/scss/components/_page-transitions.scss`.
+- Keep the frame visually inside the card with `box-shadow: inset ...`, then add the hover border size to the inner-container padding on hover so the title/meta clear the frame instead of overlapping it.
+- For editor parity, remove the core `.nb-supernova-item__content::before` / `::after` flex spacers inside the Pile scope; otherwise the editor shows extra top/bottom inset even when `Content Area Padding` is `0`.
+- Respect Supernova's native `Content Area Padding`. A value of `0` must still let the top and bottom meta sit flush against the card edges.
+
 ### Navigation Menus
 
 Four registered menus: `primary`, `secondary`, `tertiary`, `search-suggestions`.
