@@ -96,6 +96,41 @@ function anima_prioritize_pixelgrade_care_block_patterns() {
 add_action( 'after_setup_theme', 'anima_prioritize_pixelgrade_care_block_patterns', 20 );
 
 /**
+ * Keep WooCommerce patterns confined to the WooCommerce category tab.
+ *
+ * WooCommerce registers many general-purpose categories like Intro, Services,
+ * About, and Reviews alongside its own `woo-commerce` category. For LT sites
+ * we want those patterns available only under the WooCommerce tab so they do
+ * not crowd the broader site-building categories.
+ *
+ * @return void
+ */
+function anima_restrict_woocommerce_patterns_to_woocommerce_category() {
+	$registry = WP_Block_Patterns_Registry::get_instance();
+
+	foreach ( $registry->get_all_registered() as $pattern ) {
+		$name = $pattern['name'] ?? '';
+
+		if ( 0 !== strpos( $name, 'woocommerce-blocks/' ) ) {
+			continue;
+		}
+
+		$categories = array_values( array_filter( (array) ( $pattern['categories'] ?? [] ) ) );
+
+		if ( [ 'woo-commerce' ] === $categories || ! in_array( 'woo-commerce', $categories, true ) ) {
+			continue;
+		}
+
+		$pattern['categories'] = [ 'woo-commerce' ];
+		unset( $pattern['name'] );
+
+		unregister_block_pattern( $name );
+		register_block_pattern( $name, $pattern );
+	}
+}
+add_action( 'init', 'anima_restrict_woocommerce_patterns_to_woocommerce_category', 999 );
+
+/**
  * Finds all block patterns in a certain directory.
  *
  * @access private
