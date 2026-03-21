@@ -1,3 +1,5 @@
+$assets-folder-path: '../../assets';
+
 @import "setup";
 
 $fontsPath: '../../assets/fonts/custom-fontawesome';
@@ -16,7 +18,6 @@ $fontsPath: '../../assets/fonts/custom-fontawesome';
 
 $social-links-urls: (
     "facebook": "\f09a",
-    "twitter": "\f099",
     "instagram": "\f16d",
     "youtube": "\f167",
     "pinterest": "\f0d2",
@@ -55,6 +56,11 @@ $social-links-urls: (
     "feed": "\f09e",
 );
 
+$social-links-x-urls: (
+    "twitter.com",
+    "x.com",
+);
+
 $social-links-selector: '';
 @each $url, $content in $social-links-urls {
     @if ($social-links-selector == '') {
@@ -62,6 +68,10 @@ $social-links-selector: '';
     } @else {
         $social-links-selector: $social-links-selector + ', [href*="#{$url}"]';
     }
+}
+
+@each $url in $social-links-x-urls {
+    $social-links-selector: $social-links-selector + ', [href*="#{$url}"]';
 }
 
 :root {
@@ -106,6 +116,23 @@ $social-links-selector: '';
         @each $url, $content in $social-links-urls {
             &[href*="#{$url}"]:before {
                 content: $content;
+            }
+        }
+
+        @each $url in $social-links-x-urls {
+            &[href*="#{$url}"]:before {
+                content: '';
+                display: inline-block;
+                width: calc( var(--icons-size-multiplier) * var(--current-font-size) );
+                height: calc( var(--icons-size-multiplier) * var(--current-font-size) );
+                vertical-align: middle;
+                background-color: currentColor;
+                mask: no-repeat 50% 50%;
+                mask-image: url(#{ $icon-x-path });
+                mask-size: contain;
+                -webkit-mask: no-repeat 50% 50%;
+                -webkit-mask-image: url(#{ $icon-x-path });
+                -webkit-mask-size: contain;
             }
         }
     }
