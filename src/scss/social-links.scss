@@ -60,6 +60,7 @@ $social-links-x-urls: (
     "twitter.com",
     "x.com",
 );
+$social-links-x-size-multiplier: 0.86;
 
 $social-links-selector: '';
 @each $url, $content in $social-links-urls {
@@ -123,8 +124,8 @@ $social-links-selector: '';
             &[href*="#{$url}"]:before {
                 content: '';
                 display: inline-block;
-                width: calc( var(--icons-size-multiplier) * var(--current-font-size) );
-                height: calc( var(--icons-size-multiplier) * var(--current-font-size) );
+                width: calc( var(--icons-size-multiplier) * #{$social-links-x-size-multiplier} * var(--current-font-size) );
+                height: calc( var(--icons-size-multiplier) * #{$social-links-x-size-multiplier} * var(--current-font-size) );
                 vertical-align: middle;
                 background-color: currentColor;
                 mask: no-repeat 50% 50%;

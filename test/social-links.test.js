@@ -21,6 +21,8 @@ test('social links styles recognize X URLs without regressing existing brands', 
   assert.match(css, /\.social-menu-item > a\[href\*="twitter\.com"\]:before/);
   assert.match(css, /\.social-menu-item > a\[href\*="x\.com"\]:before/);
   assert.match(css, /mask-image:\s*url\([^)]*icon-x\.svg\)/);
+  assert.match(css, /width:\s*calc\(var\(--icons-size-multiplier\)\s*\*\s*0\.86\s*\*\s*var\(--current-font-size\)\)/);
+  assert.match(css, /height:\s*calc\(var\(--icons-size-multiplier\)\s*\*\s*0\.86\s*\*\s*var\(--current-font-size\)\)/);
 
   assert.match(css, /\.social-menu-item > a\[href\*=facebook\]:before/);
   assert.match(css, /\.social-menu-item > a\[href\*=instagram\]:before/);
