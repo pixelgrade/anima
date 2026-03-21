@@ -168,6 +168,13 @@ The theme's visual design (colors, fonts, spacing) is controlled by the **Style 
 - CSS custom properties prefixed with `--sm-` (e.g., `--sm-current-accent-color`)
 - `theme.json` restricts custom colors/fonts to enforce Style Manager control
 
+### Block Layout Widths
+
+- In WordPress 7+, `add_theme_support( 'align-wide' )` is not enough on a block theme. To restore the editor's `Wide` and `Full` controls inside post content, define `theme.json.settings.layout.contentSize` and `wideSize`.
+- In Anima, those widths should come from `var(--nb-content-width)` and `var(--nb-container-width)`, not hardcoded values. They stay aligned with the Style Manager-generated site container and inset settings.
+- Templates that render `post-content` should use `<!-- wp:post-content {"layout":{"inherit":true}} /-->`. Without inherited constrained layout, WordPress 7 may hide `Wide`/`Full` even if the theme-level widths exist.
+- Old Tosca alignment fixtures may still show `unexpected or invalid content` in the editor because their serialized block markup predates current core/Nova output. That is separate from whether `Wide`/`Full` support is working.
+
 ### Full Site Editing (FSE)
 
 - Block templates in `templates/` (index, single, page, archive, search, 404, etc.)
@@ -311,7 +318,7 @@ This theme was originally built around WordPress 5.8–5.9 (2021–2022). Severa
 - **`wp_render_duotone_support` removed** (`inc/block-editor.php`). Disables duotone image filters set in the editor. Any duotone settings users apply to images will not render on the frontend.
 - **`wp_restore_group_inner_container` removed** (`inc/block-editor.php`). Disables the inner container wrapper for Group blocks, which may affect layout in certain configurations.
 - **`theme.json` disables most settings** — custom colors, gradients, font sizes, spacing, borders are all set to `false`. This forces users through Style Manager but prevents use of native block editor design controls. As WordPress block capabilities grow, these restrictions may feel increasingly limiting.
-- **`"layout": {}` in `theme.json`** is empty. This means no `contentSize` or `wideSize` is defined, so WordPress doesn't generate default layout constraint styles. The theme handles layout widths entirely through its own CSS.
+- **`theme.json` layout widths are now required for block alignment UI**. Anima sets `contentSize` to `var(--nb-content-width)` and `wideSize` to `var(--nb-container-width)` so WordPress 7 exposes `Wide`/`Full` again. If those controls disappear, check both `theme.json.settings.layout` and whether the relevant `wp:post-content` block inherits layout.
 - **`"spacing": { "blockGap": null }`** disables block gap support. WordPress uses this for vertical spacing between blocks. The theme uses its own spacing system (Nova Blocks `--nb-*` variables) instead.
 
 ### General guidance
