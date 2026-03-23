@@ -134,6 +134,30 @@
   #customize-control-sm_page_transitions_intro_control + #customize-control-sm_page_transitions_enable_control {
     border-top-width: 0;
   }
+
+  #customize-control-sm_page_transition_style_control,
+  #customize-control-sm_logo_loading_style_control,
+  #customize-control-sm_transition_symbol_control {
+    transition:
+      opacity 0.18s ease-out,
+      filter 0.18s ease-out;
+  }
+
+  .anima-control-is-disabled {
+    opacity: 0.52;
+    filter: saturate(0.7);
+  }
+
+  .anima-control-is-disabled .customize-control-title,
+  .anima-control-is-disabled .customize-control-description,
+  .anima-control-is-disabled label,
+  .anima-control-is-disabled code,
+  .anima-control-is-disabled input,
+  .anima-control-is-disabled select,
+  .anima-control-is-disabled textarea,
+  .anima-control-is-disabled button {
+    cursor: not-allowed;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -92,9 +92,18 @@ if ( ! class_exists( 'Anima_Admin_Customize', false ) ) :
 		 */
 		public function enqueue_assets() {
 			$theme  = wp_get_theme( get_template() );
+			$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
 			wp_enqueue_style( 'anima-customizer', get_template_directory_uri() . '/dist/css/admin/customizer.css', [], $theme->get( 'Version' ) );
 			wp_style_add_data( 'anima-customizer', 'rtl', 'replace' );
+
+			wp_enqueue_script(
+				'anima-customizer-motion-controls',
+				get_template_directory_uri() . '/dist/js/admin/customizer-motion-controls' . $suffix . '.js',
+				[ 'customize-controls' ],
+				$theme->get( 'Version' ),
+				true
+			);
 		}
 
 		/* ============================
