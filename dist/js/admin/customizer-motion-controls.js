@@ -1,6 +1,38 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ 526
+(module) {
+
+function getMotionControl(customizeApi, controlId) {
+  if (!customizeApi || typeof customizeApi.control !== 'function') {
+    return null;
+  }
+  return customizeApi.control(`${controlId}_control`) || customizeApi.control(controlId) || null;
+}
+module.exports = {
+  getMotionControl
+};
+
+/***/ },
+
+/***/ 290
+(module) {
+
+function attachMotionControlsSync(customizeApi, syncDependentControls) {
+  customizeApi('sm_page_transitions_enable', setting => {
+    syncDependentControls(setting.get());
+    setting.bind(value => {
+      syncDependentControls(value);
+    });
+  });
+}
+module.exports = {
+  attachMotionControlsSync
+};
+
+/***/ },
+
 /***/ 143
 (module) {
 
@@ -49,6 +81,12 @@ const {
   MOTION_DEPENDENT_CONTROL_IDS,
   getMotionDependentControlsState
 } = __webpack_require__(143);
+const {
+  attachMotionControlsSync
+} = __webpack_require__(290);
+const {
+  getMotionControl
+} = __webpack_require__(526);
 (function () {
   if (typeof wp === 'undefined' || typeof wp.customize === 'undefined') {
     return;
@@ -61,7 +99,7 @@ const {
     return control.container.get(0);
   }
   function setControlDisabledState(controlId, isDisabled) {
-    const control = wp.customize.control(controlId);
+    const control = getMotionControl(wp.customize, controlId);
     const controlElement = getControlElement(control);
     if (!controlElement) {
       return;
@@ -78,14 +116,7 @@ const {
       setControlDisabledState(controlId, controlState[controlId]);
     });
   }
-  wp.customize.bind('ready', () => {
-    wp.customize('sm_page_transitions_enable', setting => {
-      syncDependentControls(setting.get());
-      setting.bind(value => {
-        syncDependentControls(value);
-      });
-    });
-  });
+  attachMotionControlsSync(wp.customize, syncDependentControls);
 })();
 /******/ })()
 ;

@@ -2,6 +2,12 @@ const {
   MOTION_DEPENDENT_CONTROL_IDS,
   getMotionDependentControlsState,
 } = require('./customizer-motion-controls-state.js');
+const {
+  attachMotionControlsSync,
+} = require('./customizer-motion-controls-init.js');
+const {
+  getMotionControl,
+} = require('./customizer-motion-controls-dom.js');
 
 (function () {
   if (typeof wp === 'undefined' || typeof wp.customize === 'undefined') {
@@ -19,7 +25,7 @@ const {
   }
 
   function setControlDisabledState(controlId, isDisabled) {
-    const control = wp.customize.control(controlId);
+    const control = getMotionControl(wp.customize, controlId);
     const controlElement = getControlElement(control);
 
     if (!controlElement) {
@@ -42,13 +48,5 @@ const {
     });
   }
 
-  wp.customize.bind('ready', () => {
-    wp.customize('sm_page_transitions_enable', (setting) => {
-      syncDependentControls(setting.get());
-
-      setting.bind((value) => {
-        syncDependentControls(value);
-      });
-    });
-  });
+  attachMotionControlsSync(wp.customize, syncDependentControls);
 })();
