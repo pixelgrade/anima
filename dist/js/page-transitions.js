@@ -2388,42 +2388,509 @@ const cardExpandTransition = {
     });
   }
 };
-;// ./src/js/components/page-transitions/loading-animation.js
+;// ./src/js/components/page-transitions/slide-wipe-loader.js
 
 
 /**
- * Initial page load animation — the "opening curtain".
+ * Slide Wipe Loader — ported from Fargo theme's loader.js.
+ *
+ * Uses Snap.svg for SVG pattern fills and GSAP 3 for slide animations.
+ * The loader slides in from the left while its inner mask slides from the right,
+ * creating a parallax wipe effect. A large SVG letter displays centered with
+ * cycling image pattern fills.
+ */
+
+const LOADER_DURATION = 1; // seconds
+const PATTERN_INTERVAL = 300; // ms between image pattern swaps
+const MIN_DISPLAY_TIME = 900; // ms — minimum time the loader stays visible on initial load
+const MAX_DISPLAY_TIME = 5000; // ms — safety cap so the loader never gets stuck
+
+let $loader = null;
+let $loaderMask = null;
+let $svg = null;
+let snap = null;
+let patterns = [];
+let isVisible = false;
+let locked = false;
+let svgWidth = 0;
+let svgHeight = 0;
+let animationFrameId = null;
+
+/**
+ * Initialize the Slide Wipe loader.
+ * Must be called after DOM ready and after Snap is available globally.
+ */
+function init() {
+  $loader = external_jQuery_default()('.js-slide-wipe-loader');
+  $loaderMask = $loader.find('.c-loader__mask');
+  $svg = $loader.find('svg');
+  if (!$loader.length || !$svg.length) {
+    return;
+  }
+
+  // Snap.svg is loaded globally via CDN.
+  if (typeof Snap === 'undefined') {
+    return;
+  }
+  snap = new Snap($svg[0]);
+
+  // The loader is visually covering the page from initial render (CSS).
+  // Mark as visible so pattern cycling starts immediately.
+  isVisible = true;
+
+  // Remove any existing fill attributes so patterns apply cleanly.
+  $svg.find('[fill]').removeAttr('fill');
+  fitText();
+  getSize();
+
+  // Generate Snap.svg image patterns from random post images.
+  const imageSrcs = typeof animaPageTransitions !== 'undefined' && animaPageTransitions.loaderRandomImages ? animaPageTransitions.loaderRandomImages : [];
+  if (imageSrcs.length) {
+    patterns = generatePatterns(imageSrcs);
+  }
+
+  // Start the pattern cycling animation loop.
+  startPatternAnimation();
+}
+
+/**
+ * Initialize only the Slide Wipe overlay (no cycling images).
+ * Used when the overlay is Slide Wipe but loading content is Progress Bar.
+ */
+function initOverlayOnly() {
+  $loader = external_jQuery_default()('.js-slide-wipe-loader');
+  $loaderMask = $loader.find('.c-loader__mask');
+  if (!$loader.length) {
+    return;
+  }
+  isVisible = true;
+}
+
+/**
+ * Initialize cycling images content inside any container.
+ * Used when logo_loading_style is 'cycling_images' but the overlay
+ * is not necessarily the Slide Wipe loader (e.g., Border Iris overlay).
+ *
+ * @param {jQuery} $container - The container element that holds the SVG.
+ */
+function initCyclingImagesContent($container) {
+  if (!$container || !$container.length) {
+    return;
+  }
+  const $svgEl = $container.find('svg');
+  if (!$svgEl.length) {
+    return;
+  }
+  if (typeof Snap === 'undefined') {
+    return;
+  }
+  snap = new Snap($svgEl[0]);
+  $svg = $svgEl;
+  isVisible = true;
+  $svgEl.find('[fill]').removeAttr('fill');
+  fitText();
+  getSize();
+  const imageSrcs = typeof animaPageTransitions !== 'undefined' && animaPageTransitions.loaderRandomImages ? animaPageTransitions.loaderRandomImages : [];
+  if (imageSrcs.length) {
+    patterns = generatePatterns(imageSrcs);
+  }
+  startPatternAnimation();
+}
+
+/**
+ * Stop cycling images and mark as not visible.
+ */
+function stopCyclingImages() {
+  isVisible = false;
+}
+
+/**
+ * Fit the SVG viewBox to the text bounding box.
+ * Ported from Fargo's Loader.fitText().
+ */
+function fitText() {
+  const textEl = document.getElementById('letter');
+  if (!textEl) {
+    return;
+  }
+  const box = textEl.getBBox();
+  $svg.attr({
+    width: box.width,
+    height: box.height,
+    viewBox: '0 0 ' + box.width + ' ' + box.height
+  });
+}
+
+/**
+ * Cache the SVG dimensions.
+ */
+function getSize() {
+  svgWidth = $svg.width();
+  svgHeight = $svg.height();
+}
+
+/**
+ * Generate Snap.svg image patterns from an array of image URLs.
+ * Each pattern is scaled to cover the SVG text area.
+ * Ported from Fargo's Loader.generatePatterns().
+ *
+ * @param {string[]} paths - Array of image URLs.
+ * @return {Object[]} Array of Snap pattern elements.
+ */
+function generatePatterns(paths) {
+  const result = [];
+  paths.forEach(path => {
+    const box = getPatternSize(150, 150);
+    const img = snap.image(path, (svgWidth - box.width) / 2, (svgHeight - box.height) / 2, box.width, box.height);
+    const pattern = img.toPattern();
+    pattern.attr({
+      width: box.width,
+      height: box.height,
+      viewBox: '0 0 ' + box.width + ' ' + box.height
+    });
+    result.push(pattern);
+  });
+  return result;
+}
+
+/**
+ * Calculate pattern size that covers the SVG text area.
+ * Ported from Fargo's Loader.getPatternSize().
+ */
+function getPatternSize(width, height) {
+  width = width || 150;
+  height = height || 150;
+  const scale = Math.max(svgWidth / width, svgHeight / height);
+  return {
+    width: width * scale,
+    height: height * scale
+  };
+}
+
+/**
+ * Start the pattern cycling animation.
+ * Cycles through image patterns at PATTERN_INTERVAL ms.
+ * Ported from Fargo's Loader.animate().
+ */
+function startPatternAnimation() {
+  let index = 0;
+  let then = Date.now();
+  function animate() {
+    if (isVisible && patterns.length) {
+      const now = Date.now();
+      const elapsed = now - then;
+      if (elapsed > PATTERN_INTERVAL) {
+        then = now - elapsed % PATTERN_INTERVAL;
+        index = (index + 1) % patterns.length;
+        if (isVisible && snap) {
+          snap.attr('fill', patterns[index]);
+        }
+      }
+    }
+    animationFrameId = requestAnimationFrame(animate);
+  }
+  animate();
+}
+
+/**
+ * Wait for the page to fully load, then hide the loader.
+ * Used on initial page visit so the user sees the cycling image patterns
+ * while resources load underneath.
+ *
+ * - Waits for `window.load` (all images, fonts, etc.)
+ * - Enforces MIN_DISPLAY_TIME so even on fast connections the patterns show
+ * - Caps at MAX_DISPLAY_TIME so the loader never gets stuck
+ *
+ * @return {Promise} Resolves when the hide animation completes.
+ */
+function waitForLoadAndHide() {
+  const initTime = Date.now();
+  const windowLoaded = new Promise(resolve => {
+    if (document.readyState === 'complete') {
+      resolve();
+    } else {
+      window.addEventListener('load', resolve, {
+        once: true
+      });
+    }
+  });
+  const minTimer = new Promise(resolve => {
+    setTimeout(resolve, MIN_DISPLAY_TIME);
+  });
+  const maxTimer = new Promise(resolve => {
+    setTimeout(resolve, MAX_DISPLAY_TIME);
+  });
+
+  // Hide when: (window loaded AND minimum time elapsed) OR max time reached.
+  return Promise.race([Promise.all([windowLoaded, minTimer]), maxTimer]).then(() => {
+    return hide();
+  });
+}
+
+/**
+ * Wait for the page to fully load, then call a callback.
+ * Like waitForLoadAndHide() but lets the caller control the dismiss animation.
+ * Used for Border Iris + Cycling Images combo where the border collapse
+ * is different from the slide wipe dismiss.
+ *
+ * @param {Function} callback - Called when ready to dismiss.
+ * @param {number} [customMinTime] - Override minimum display time in ms.
+ * @return {Promise}
+ */
+function waitForLoadThen(callback, customMinTime) {
+  const minTime = typeof customMinTime === 'number' ? customMinTime : MIN_DISPLAY_TIME;
+  const windowLoaded = new Promise(resolve => {
+    if (document.readyState === 'complete') {
+      resolve();
+    } else {
+      window.addEventListener('load', resolve, {
+        once: true
+      });
+    }
+  });
+  const minTimer = new Promise(resolve => {
+    setTimeout(resolve, minTime);
+  });
+  const maxTimer = new Promise(resolve => {
+    setTimeout(resolve, MAX_DISPLAY_TIME);
+  });
+  return Promise.race([Promise.all([windowLoaded, minTimer]), maxTimer]).then(() => {
+    if (callback) {
+      callback();
+    }
+  });
+}
+
+/**
+ * Show the loader — slides in from left.
+ * .c-loader slides from x:-100% to x:0%.
+ * .c-loader__mask slides from x:100% to x:0% simultaneously.
+ * Easing: quint.inOut (1 second).
+ *
+ * @return {Promise} Resolves when the slide-in animation completes.
+ */
+function show() {
+  if (locked || !$loader || !$loader.length) {
+    return Promise.resolve();
+  }
+  isVisible = true;
+  return new Promise(resolve => {
+    gsap.fromTo($loader[0], {
+      x: '-100%'
+    }, {
+      x: '0%',
+      duration: LOADER_DURATION,
+      ease: 'quint.inOut',
+      onComplete: resolve
+    });
+    gsap.fromTo($loaderMask[0], {
+      x: '100%'
+    }, {
+      x: '0%',
+      duration: LOADER_DURATION,
+      ease: 'quint.inOut'
+    });
+  });
+}
+
+/**
+ * Hide the loader — slides out to right.
+ * .c-loader slides from x:0% to x:100%.
+ * .c-loader__mask slides from x:0% to x:-100% simultaneously.
+ * Easing: quint.inOut (1 second).
+ *
+ * @return {Promise} Resolves when the slide-out animation completes.
+ */
+function hide() {
+  if (locked) {
+    window.location.reload(true);
+    return Promise.resolve();
+  }
+  if (!$loader || !$loader.length) {
+    return Promise.resolve();
+  }
+  return new Promise(resolve => {
+    const timeline = gsap.timeline({
+      paused: true,
+      onComplete: () => {
+        isVisible = false;
+        resolve();
+      }
+    });
+    timeline.to($loader[0], {
+      x: '100%',
+      duration: LOADER_DURATION,
+      ease: 'quint.inOut'
+    });
+    timeline.to($loaderMask[0], {
+      x: '-100%',
+      duration: LOADER_DURATION,
+      ease: 'quint.inOut'
+    }, 0); // start at same time
+
+    timeline.play();
+  });
+}
+
+/**
+ * Lock the loader — forces a full page reload on next hide().
+ * Used when scripts detect an unrecoverable state.
+ */
+function lock() {
+  locked = true;
+}
+
+/**
+ * Check if the loader is currently visible.
+ */
+function getIsVisible() {
+  return isVisible;
+}
+;// ./src/js/components/page-transitions/slide-wipe-transitions.js
+
+
+
+
+
+/**
+ * Shared enter logic for Slide Wipe transitions.
+ * Syncs WordPress state, reinitializes components, then hides the loader.
+ */
+function performSlideWipeEnter({
+  next
+}) {
+  window.scrollTo(0, 0);
+  const html = next.html;
+  syncPageAssets(html);
+  syncBodyClasses(html);
+  syncDocumentTitle(html);
+  syncAdminBar(html);
+  syncHeaderColorSignal(html, next.container);
+  return new Promise(resolve => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        reinitComponents();
+        trackPageview();
+        hide().then(resolve);
+      });
+    });
+  });
+}
+
+/**
+ * Generic page transition using Slide Wipe.
+ */
+const slideWipePageTransition = {
+  name: 'slide-wipe-page-transition',
+  leave({
+    current
+  }) {
+    external_jQuery_default()('body').removeClass('nav-is-open');
+    return show().then(() => {
+      cleanupBeforeTransition();
+      external_jQuery_default()(current.container).hide();
+    });
+  },
+  enter({
+    next
+  }) {
+    return performSlideWipeEnter({
+      next
+    });
+  }
+};
+
+/**
+ * Card-expand transition using Slide Wipe.
+ * Same card-click detection as Border Iris, but uses slide wipe instead of border overlay.
+ */
+const slideWipeCardExpandTransition = {
+  name: 'slide-wipe-card-expand',
+  custom: ({
+    trigger
+  }) => {
+    if (!trigger || trigger === 'barba' || typeof trigger.closest !== 'function') {
+      return false;
+    }
+    const card = trigger.closest('.nb-supernova-item');
+    if (!card || !card.closest('.wp-block-query')) {
+      return false;
+    }
+    const supernova = card.closest('.nb-supernova');
+    return supernova !== null && !supernova.classList.contains('nb-supernova--1-columns');
+  },
+  leave({
+    current
+  }) {
+    external_jQuery_default()('body').removeClass('nav-is-open');
+    return show().then(() => {
+      cleanupBeforeTransition();
+      external_jQuery_default()(current.container).hide();
+    });
+  },
+  enter({
+    next
+  }) {
+    return performSlideWipeEnter({
+      next
+    });
+  }
+};
+;// ./src/js/components/page-transitions/loading-animation.js
+/* unused harmony import specifier */ var $;
+
+
+/**
+ * Progress Bar loading content animations — the "opening curtain".
  * Ported from Pile's loadingAnimation.js.
  *
- * IMPORTANT: This only animates the border overlay and logo.
- * Hero content animations are handled by Hero.js (intro timeline + scroll scrub).
- * We must NOT touch hero elements here to avoid GSAP conflicts.
+ * Animates the logo fill bar and logo visibility inside any overlay.
+ * The overlay dismiss (border collapse or slide out) is handled separately.
  */
-function playLoadingAnimation() {
-  const $border = external_jQuery_default()('.js-page-transition-border');
+
+/**
+ * Play the progress bar completion animation.
+ * Call this when window.load fires to snap the fill bar to 100% and hide the logo.
+ *
+ * @return {Promise} Resolves when the content animation is done (~0.6s).
+ */
+function playProgressBarComplete() {
+  return new Promise(resolve => {
+    // Logo fill slides in from left.
+    gsap.to('.border-logo-fill', {
+      x: 0,
+      duration: 0.3,
+      ease: 'circ.in',
+      onComplete: function () {
+        external_jQuery_default()('.border-logo').css('opacity', 0);
+      }
+    });
+
+    // Logo background scales down.
+    gsap.to('.border-logo-bgscale', {
+      scaleY: 0,
+      duration: 0.3,
+      delay: 0.3,
+      ease: 'quad.inOut',
+      onComplete: resolve
+    });
+  });
+}
+
+/**
+ * Play the full Border Iris loading animation (content + border collapse).
+ * Used when page transition style is Border Iris + logo loading is Progress Bar.
+ */
+function playBorderIrisLoadingAnimation() {
+  const $border = $('.js-page-transition-border');
   if (!$border.length) {
     return;
   }
   const windowWidth = window.innerWidth;
   const windowHeight = window.innerHeight;
 
-  // Logo fill slides in from left.
-  gsap.to('.border-logo-fill', {
-    x: 0,
-    duration: 0.3,
-    ease: 'circ.in',
-    onComplete: function () {
-      external_jQuery_default()('.border-logo').css('opacity', 0);
-    }
-  });
-
-  // Logo background scales down.
-  gsap.to('.border-logo-bgscale', {
-    scaleY: 0,
-    duration: 0.3,
-    delay: 0.3,
-    ease: 'quad.inOut'
-  });
+  // Animate the progress bar content.
+  playProgressBarComplete();
 
   // Border collapses from full-screen to zero.
   gsap.fromTo($border[0], {
@@ -2442,49 +2909,67 @@ function playLoadingAnimation() {
 
 
 
+
+
 // Ignored URL patterns — file extensions, admin, anchors.
 const IGNORED_PATTERNS = ['.pdf', '.doc', '.eps', '.png', '.jpg', '.jpeg', '.zip', 'wp-admin', 'wp-login', 'wp-', 'feed', '#', '&add-to-cart=', '?add-to-cart=', '?remove_item'];
 
 /**
  * Initialize page transitions.
+ *
+ * Two independent settings control behavior:
+ * - pageTransitionStyle: 'border_iris' | 'slide_wipe' — how pages swap
+ * - logoLoadingStyle: 'progress_bar' | 'cycling_images' — what shows on first visit
  */
-function init() {
+function page_transitions_init() {
   const $body = external_jQuery_default()('body');
 
   // Don't init in Customizer preview.
   if ($body.hasClass('is--customizer-preview')) {
     return;
   }
+  const config = typeof animaPageTransitions !== 'undefined' ? animaPageTransitions : {};
+  const pageTransitionStyle = config.pageTransitionStyle || 'border_iris';
+  const logoLoadingStyle = config.logoLoadingStyle || 'progress_bar';
+  const isSlideWipe = pageTransitionStyle === 'slide_wipe';
+  const isCyclingImages = logoLoadingStyle === 'cycling_images';
+
+  // Initialize overlay and loading content based on the 2x2 matrix.
+  if (isSlideWipe && isCyclingImages) {
+    // Slide Wipe + Cycling Images — original Fargo combo.
+    init();
+  } else if (isSlideWipe && !isCyclingImages) {
+    // Slide Wipe overlay + Progress Bar content.
+    initOverlayOnly();
+  } else if (!isSlideWipe && isCyclingImages) {
+    // Border Iris overlay + Cycling Images content.
+    const $border = external_jQuery_default()('.js-page-transition-border');
+    initCyclingImagesContent($border);
+  }
+  // Border Iris + Progress Bar needs no special init — CSS keyframes handle it.
 
   // Merge server-side excluded URLs with client-side patterns.
-  const serverExcluded = typeof animaPageTransitions !== 'undefined' && animaPageTransitions.excludedUrls ? animaPageTransitions.excludedUrls : [];
+  const serverExcluded = config.excludedUrls || [];
+
+  // Select the correct page-to-page transition objects.
+  const transitions = isSlideWipe ? [slideWipeCardExpandTransition, slideWipePageTransition] : [cardExpandTransition, pageTransition];
   barba_umd_default().init({
-    // Disable hover/touch prefetching — it causes unwanted navigation behavior
-    // on Nova Blocks collection cards where large areas are wrapped in links.
     prefetchIgnore: true,
-    // Barba v2 uses a prevent function instead of overriding preventCheck.
     prevent: ({
       el,
       href
     }) => {
-      // Skip links with target="_blank".
       if (el.target && el.target === '_blank') {
         return true;
       }
-
-      // Skip links with data-no-transition attribute.
       if (el.hasAttribute('data-no-transition')) {
         return true;
       }
-
-      // Check against ignored patterns.
       for (const pattern of IGNORED_PATTERNS) {
         if (href.indexOf(pattern) > -1) {
           return true;
         }
       }
-
-      // Check against server-side excluded URLs.
       for (const url of serverExcluded) {
         if (href.indexOf(url) > -1) {
           return true;
@@ -2492,29 +2977,91 @@ function init() {
       }
       return false;
     },
-    // Card-expand first (has `custom` matcher), generic fallback second.
-    transitions: [cardExpandTransition, pageTransition],
-    // Error fallback: if AJAX navigation fails, do a full page reload.
+    transitions,
     requestError: (trigger, action, url) => {
       window.location.href = url;
       return false;
     }
   });
-
-  // After each transition, ensure the body is visible.
   barba_umd_default().hooks.after(() => {
     $body.addClass('is-loaded');
   });
 
-  // Mark as loaded and play initial page load animation.
-  $body.addClass('is-loaded');
-  playLoadingAnimation();
+  // Minimum display times for each loading style.
+  // Progress Bar: 2.5s — CSS intro takes 0.8s, then fill bar needs ~1.7s to show visible progress.
+  // Cycling Images: uses the default MIN_DISPLAY_TIME (0.9s) from slide-wipe-loader.js.
+  const PROGRESS_BAR_MIN_TIME = 2500;
+
+  // For Cycling Images and Slide Wipe, mark as loaded immediately — the overlay covers the page.
+  // For Progress Bar on Border Iris, defer is-loaded until the dismiss fires,
+  // because the CSS rule `.is-loaded .border-logo .logo { opacity: 0 }` would
+  // kill the logo prematurely while the fill bar is still progressing.
+  const deferIsLoaded = !isSlideWipe && !isCyclingImages;
+  if (!deferIsLoaded) {
+    $body.addClass('is-loaded');
+  }
+
+  // Dispatch initial load animation based on the 2x2 matrix.
+  if (isSlideWipe && isCyclingImages) {
+    // Slide Wipe + Cycling Images: wait for load, then slide out.
+    waitForLoadAndHide();
+  } else if (isSlideWipe && !isCyclingImages) {
+    // Slide Wipe + Progress Bar: wait for load, complete progress bar, then slide out.
+    waitForLoadThen(() => {
+      playProgressBarComplete().then(() => {
+        hide();
+      });
+    }, PROGRESS_BAR_MIN_TIME);
+  } else if (!isSlideWipe && isCyclingImages) {
+    // Border Iris + Cycling Images: wait for load, then collapse border.
+    waitForLoadThen(() => {
+      stopCyclingImages();
+      const $border = external_jQuery_default()('.js-page-transition-border');
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+
+      // Hide the cycling images content.
+      $border.find('.c-loader__logo').css('opacity', 0);
+
+      // Collapse the border overlay.
+      gsap.fromTo($border[0], {
+        borderWidth: windowHeight / 2 + 'px ' + windowWidth / 2 + 'px'
+      }, {
+        background: 'none',
+        borderWidth: 0,
+        duration: 0.6,
+        ease: 'quart.inOut'
+      });
+    });
+  } else {
+    // Border Iris + Progress Bar: wait for load, then play the opening curtain.
+    // Defer is-loaded until after the progress bar content animation completes,
+    // because the CSS `.is-loaded .border-logo .logo { opacity: 0 }` would
+    // instantly hide the logo before the fill bar finishes.
+    waitForLoadThen(() => {
+      playProgressBarComplete().then(() => {
+        $body.addClass('is-loaded');
+        // Now collapse the border.
+        const $border = external_jQuery_default()('.js-page-transition-border');
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        gsap.fromTo($border[0], {
+          borderWidth: windowHeight / 2 + 'px ' + windowWidth / 2 + 'px'
+        }, {
+          background: 'none',
+          borderWidth: 0,
+          duration: 0.6,
+          ease: 'quart.inOut'
+        });
+      });
+    }, PROGRESS_BAR_MIN_TIME);
+  }
 }
 ;// ./src/js/page-transitions.js
 
 
 external_jQuery_default()(function () {
-  init();
+  page_transitions_init();
 });
 })();
 

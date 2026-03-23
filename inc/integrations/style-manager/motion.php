@@ -50,6 +50,37 @@ function anima_add_motion_section_to_style_manager_config( $config ) {
 					'label'        => esc_html__( 'Enable Page Transitions', '__theme_txtd' ),
 					'default'      => false,
 				],
+				'sm_page_transition_style' => [
+					'type'         => 'sm_radio',
+					'setting_type' => 'option',
+					'setting_id'   => 'sm_page_transition_style',
+					'label'        => esc_html__( 'Page Transition Style', '__theme_txtd' ),
+					'default'      => 'border_iris',
+					'choices'      => [
+						'border_iris' => esc_html__( 'Border Iris', '__theme_txtd' ),
+						'slide_wipe'  => esc_html__( 'Slide Wipe', '__theme_txtd' ),
+					],
+				],
+				'sm_logo_loading_style' => [
+					'type'         => 'sm_radio',
+					'setting_type' => 'option',
+					'setting_id'   => 'sm_logo_loading_style',
+					'label'        => esc_html__( 'Logo Loading Style', '__theme_txtd' ),
+					'default'      => 'progress_bar',
+					'choices'      => [
+						'progress_bar'    => esc_html__( 'Progress Bar', '__theme_txtd' ),
+						'cycling_images'  => esc_html__( 'Cycling Images', '__theme_txtd' ),
+					],
+				],
+				'sm_transition_symbol' => [
+					'type'            => 'text',
+					'setting_type'    => 'option',
+					'setting_id'      => 'sm_transition_symbol',
+					'label'           => esc_html__( 'Transition Symbol', '__theme_txtd' ),
+					'desc'            => esc_html__( 'Defaults to the first letter of the site title. Accepts plain text or inline SVG.', '__theme_txtd' ),
+					'default'         => '',
+					'active_callback' => 'anima_is_cycling_images_loading_style',
+				],
 			],
 		]
 	);
@@ -59,7 +90,7 @@ function anima_add_motion_section_to_style_manager_config( $config ) {
 
 function anima_reorganize_motion_customizer_controls( $sm_panel_config, $sm_section_config ) {
 
-	if ( empty( $sm_section_config['options']['sm_motion_intro'] ) || empty( $sm_section_config['options']['sm_separator_motion_1'] ) || empty( $sm_section_config['options']['sm_page_transitions_intro'] ) || empty( $sm_section_config['options']['sm_page_transitions_enable'] ) ) {
+	if ( empty( $sm_section_config['options']['sm_motion_intro'] ) || empty( $sm_section_config['options']['sm_separator_motion_1'] ) || empty( $sm_section_config['options']['sm_page_transitions_intro'] ) || empty( $sm_section_config['options']['sm_page_transitions_enable'] ) || empty( $sm_section_config['options']['sm_page_transition_style'] ) || empty( $sm_section_config['options']['sm_logo_loading_style'] ) || empty( $sm_section_config['options']['sm_transition_symbol'] ) ) {
 		return $sm_panel_config;
 	}
 
@@ -73,6 +104,9 @@ function anima_reorganize_motion_customizer_controls( $sm_panel_config, $sm_sect
 			'sm_separator_motion_1' => $sm_section_config['options']['sm_separator_motion_1'],
 			'sm_page_transitions_intro' => $sm_section_config['options']['sm_page_transitions_intro'],
 			'sm_page_transitions_enable' => $sm_section_config['options']['sm_page_transitions_enable'],
+			'sm_page_transition_style' => $sm_section_config['options']['sm_page_transition_style'],
+			'sm_logo_loading_style' => $sm_section_config['options']['sm_logo_loading_style'],
+			'sm_transition_symbol' => $sm_section_config['options']['sm_transition_symbol'],
 		],
 	];
 
@@ -92,6 +126,9 @@ function anima_maybe_invalidate_style_manager_motion_cache() {
 	$motion_separator = $motion_section['options']['sm_separator_motion_1'] ?? [];
 	$page_transitions_intro = $motion_section['options']['sm_page_transitions_intro'] ?? [];
 	$page_transitions_option = $motion_section['options']['sm_page_transitions_enable'] ?? [];
+	$page_transition_style = $motion_section['options']['sm_page_transition_style'] ?? [];
+	$logo_loading_style = $motion_section['options']['sm_logo_loading_style'] ?? [];
+	$transition_symbol = $motion_section['options']['sm_transition_symbol'] ?? [];
 
 	$has_motion_section = isset( $style_manager_sections['sm_motion_section'] );
 	$has_layout_section = isset( $theme_options_sections['layout_section'] );
@@ -105,6 +142,12 @@ function anima_maybe_invalidate_style_manager_motion_cache() {
 		&& ( $page_transitions_option['setting_type'] ?? '' ) === 'option'
 		&& ( $page_transitions_option['setting_id'] ?? '' ) === 'sm_page_transitions_enable'
 		&& ( $page_transitions_option['label'] ?? '' ) === 'Enable Page Transitions'
+		&& ( $page_transition_style['type'] ?? '' ) === 'sm_radio'
+		&& ( $page_transition_style['setting_id'] ?? '' ) === 'sm_page_transition_style'
+		&& ( $logo_loading_style['type'] ?? '' ) === 'sm_radio'
+		&& ( $logo_loading_style['setting_id'] ?? '' ) === 'sm_logo_loading_style'
+		&& ( $transition_symbol['type'] ?? '' ) === 'text'
+		&& ( $transition_symbol['setting_id'] ?? '' ) === 'sm_transition_symbol'
 	);
 
 	if ( $has_motion_section && ! $has_layout_section && $has_expected_motion_copy ) {
@@ -113,4 +156,44 @@ function anima_maybe_invalidate_style_manager_motion_cache() {
 
 	update_option( 'pixelgrade_style_manager_customizer_config_timestamp', 0, true );
 	update_option( 'pixelgrade_style_manager_customizer_opt_name_timestamp', 0, true );
+}
+
+add_action( 'after_setup_theme', 'anima_migrate_loading_transition_style_option', 15 );
+function anima_migrate_loading_transition_style_option() {
+	$old_value = get_option( 'sm_loading_transition_style', null );
+	if ( null === $old_value ) {
+		return; // No old option, nothing to migrate.
+	}
+
+	// Only migrate once.
+	if ( false !== get_option( 'sm_page_transition_style', false ) ) {
+		return; // Already migrated.
+	}
+
+	if ( 'slide_wipe' === $old_value ) {
+		update_option( 'sm_page_transition_style', 'slide_wipe' );
+		update_option( 'sm_logo_loading_style', 'cycling_images' );
+	} else {
+		update_option( 'sm_page_transition_style', 'border_iris' );
+		update_option( 'sm_logo_loading_style', 'progress_bar' );
+	}
+
+	// Migrate symbol option name.
+	$old_symbol = get_option( 'sm_slide_wipe_symbol', '' );
+	if ( ! empty( $old_symbol ) ) {
+		update_option( 'sm_transition_symbol', $old_symbol );
+	}
+
+	// Force cache rebuild.
+	update_option( 'pixelgrade_style_manager_customizer_config_timestamp', 0, true );
+}
+
+/**
+ * Active callback for the Transition Symbol option.
+ * Only show when Logo Loading Style is set to Cycling Images.
+ *
+ * @return bool
+ */
+function anima_is_cycling_images_loading_style() {
+	return 'cycling_images' === get_option( 'sm_logo_loading_style', 'progress_bar' );
 }
