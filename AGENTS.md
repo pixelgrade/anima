@@ -23,8 +23,8 @@ Clone/bootstrap flow for a fresh machine:
 git clone git@github.com:pixelgrade/anima.git
 cd anima
 
-# 2. Point the repo at your private companion repo
-git config --local anima.privateRepo git@github.com:<you>/anima-private.git
+# 2. Point the repo at the shared private companion repo
+git config --local anima.privateRepo git@github.com:pixelgrade/anima-private.git
 
 # 3. Hydrate the private local overlays
 bin/bootstrap-private
@@ -38,7 +38,7 @@ What gets pulled from the private repo when present:
 
 If you prefer to keep an explicit local checkout of the private repo, use:
 ```bash
-git clone git@github.com:<you>/anima-private.git /path/to/anima-private
+git clone git@github.com:pixelgrade/anima-private.git /path/to/anima-private
 bin/bootstrap-private --source-dir /path/to/anima-private
 ```
 
