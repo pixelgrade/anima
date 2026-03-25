@@ -8,7 +8,11 @@ GitHub: `git@github.com:pixelgrade/anima.git`
 
 ## Private Local Files
 
-- Keep machine-specific notes in `AGENTS.local.md` or `.claude/napkin.md`.
+- Keep `AGENTS.md` as the canonical shared instruction file for both Codex and Claude.
+- Keep `CLAUDE.md` as a thin shim to `@AGENTS.md` so the shared instructions stay in one place.
+- Keep shared private agent instructions in `AGENTS.local.md`.
+- Keep vendor-neutral private research notes, plans, and issue writeups in `.ai/`.
+- Keep tool-specific distilled working memory in `.claude/napkin.md`.
 - Keep local env values in `.env.local`.
 - Do not commit those private overlays; commit only the `*.example` files.
 - Use `bin/bootstrap-private` to hydrate the private overlays after cloning the public repo.
@@ -28,6 +32,7 @@ bin/bootstrap-private
 
 What gets pulled from the private repo when present:
 - `AGENTS.local.md`
+- `.ai/`
 - `.claude/napkin.md`
 - `.env.local`
 
@@ -41,7 +46,7 @@ bin/bootstrap-private --source-dir /path/to/anima-private
 
 - **Node 22+ required** (`.nvmrc` = 22, `package.json` engines `>=22.0.0`). Enforced by `node-tasks/lock_node_version.js` on `npm install`.
 - **`npm run build` creates the ZIP** — it runs webpack, gulp styles, AND `gulp zip` in sequence. The build deletes `../build/` before creating it, so a failed build mid-way can leave the theme without a build folder.
-- **AGENTS.md and CLAUDE.md are excluded from the ZIP** via `.zipignore` — keep it that way.
+- **AGENTS.md, CLAUDE.md, `AGENTS.local.md`, `.ai/`, and `.private/` are excluded from the ZIP** via `.zipignore` — keep it that way.
 - **`style.css` is compiled output** — never edit it directly. Source is in `src/scss/`.
 - **Text domain `__theme_txtd`** is a placeholder replaced with `anima` during the build process. Use `__theme_txtd` in source PHP/JS/CSS files.
 
@@ -299,7 +304,7 @@ EOF
 
 ### 6. Publish to WUpdates
 
-- Keep raw WUpdates host, port, and key material out of git. Store those only in local/private files such as `AGENTS.local.md` or `.claude/napkin.md`. This repo assumes a local `wupdates` SSH alias is already configured on the release machine.
+- Keep raw WUpdates host, port, and key material out of git. Store those only in local/private files such as `AGENTS.local.md`, `.ai/`, or `.claude/napkin.md`. This repo assumes a local `wupdates` SSH alias is already configured on the release machine.
 - Product type: `wup_theme`
 - Product slug: `anima`
 - Release artifact: `../Anima-X-Y-Z.zip`
