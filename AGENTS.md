@@ -297,10 +297,44 @@ EOF
 )"
 ```
 
-### 6. Verify
+### 6. Publish to WUpdates
+
+- Keep raw WUpdates host, port, and key material out of git. Store those only in local/private files such as `AGENTS.local.md` or `.claude/napkin.md`. This repo assumes a local `wupdates` SSH alias is already configured on the release machine.
+- Product type: `wup_theme`
+- Product slug: `anima`
+- Release artifact: `../Anima-X-Y-Z.zip`
+- After publishing the GitHub release, publish the same zip in WUpdates:
+  1. `wp-admin` -> `Theme Versions` -> `Add New`
+  2. Set parent theme to `Anima`
+  3. Upload the versioned zip
+  4. Fill `Version Name` with the exact semantic version
+  5. Paste release notes into the version post body if the WUpdates changelog should be updated
+  6. Save/publish the version post, then edit the parent `Anima` product and switch `Current Version` to that new version post
+- SSH verification uses the live WUpdates WordPress install at `/home/wupdates/public_html`:
+  - Resolve the product ID by slug:
+    ```bash
+    ssh wupdates 'WP=/home/wupdates/public_html; CLI="php $WP/cli/wp-cli.phar --path=$WP"; PREFIX=$($CLI db prefix); $CLI db query "SELECT ID FROM ${PREFIX}posts WHERE post_type = '\''wup_theme'\'' AND post_name = '\''anima'\'' LIMIT 1;"'
+    ```
+  - Verify the selected version:
+    ```bash
+    ssh wupdates 'php /home/wupdates/public_html/cli/wp-cli.phar --path=/home/wupdates/public_html post meta get <PRODUCT_ID> current_version'
+    ssh wupdates 'php /home/wupdates/public_html/cli/wp-cli.phar --path=/home/wupdates/public_html post meta get <CURRENT_VERSION_ID> parent_product'
+    ssh wupdates 'php /home/wupdates/public_html/cli/wp-cli.phar --path=/home/wupdates/public_html post meta get <CURRENT_VERSION_ID> version'
+    ssh wupdates 'php /home/wupdates/public_html/cli/wp-cli.phar --path=/home/wupdates/public_html post meta get <CURRENT_VERSION_ID> zip_attachment_id'
+    ssh wupdates 'php /home/wupdates/public_html/cli/wp-cli.phar --path=/home/wupdates/public_html post meta get <ZIP_ATTACHMENT_ID> _wp_attached_file'
+    ```
+  - `parent_product` must match `<PRODUCT_ID>`, and the attached file must be the expected versioned zip under `wp-content/uploads/...`.
+- HTTP verification:
+  - In the WUpdates product edit screen, copy the `Current Version URL`.
+  - `curl -I '<CURRENT_VERSION_URL>'` should return a `302` to the expected versioned zip on `media.wupdates.com`.
+  - `curl -L -o /tmp/anima.zip '<CURRENT_VERSION_URL>'` can be used for a full download smoke test when needed.
+  - The generated `api_wupl_version` URL is HTTPS-only. The same path over plain HTTP returns `404`.
+
+### 7. Verify
 
 - Release appears at https://github.com/pixelgrade/anima/releases
 - ZIP is attached and downloadable
+- WUpdates `Current Version` points to the new version post
 - Issues auto-closed via `Fixes #N` in earlier commits
 - Milestone issues all closed → close the milestone if done
 
