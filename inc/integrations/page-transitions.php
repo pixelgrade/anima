@@ -70,10 +70,11 @@ add_action( 'wp_enqueue_scripts', 'anima_page_transitions_enqueue', 30 );
 function anima_page_transitions_get_excluded_urls() {
 	$excluded = [];
 
-	// WooCommerce transactional pages.
+	// WooCommerce transactional and single product pages.
 	if ( function_exists( 'wc_get_page_id' ) ) {
 		$cart_page_id     = wc_get_page_id( 'cart' );
 		$checkout_page_id = wc_get_page_id( 'checkout' );
+		$myaccount_page_id = wc_get_page_id( 'myaccount' );
 
 		if ( $cart_page_id > 0 ) {
 			$excluded[] = get_permalink( $cart_page_id );
@@ -81,6 +82,15 @@ function anima_page_transitions_get_excluded_urls() {
 		if ( $checkout_page_id > 0 ) {
 			$excluded[] = get_permalink( $checkout_page_id );
 		}
+		if ( $myaccount_page_id > 0 ) {
+			$excluded[] = get_permalink( $myaccount_page_id );
+		}
+
+		// Exclude single product pages — WooCommerce scripts and inline state
+		// don't reliably survive AJAX navigation.
+		$wc_permalinks = get_option( 'woocommerce_permalinks', [] );
+		$product_base  = ! empty( $wc_permalinks['product_base'] ) ? trim( $wc_permalinks['product_base'], '/' ) : 'product';
+		$excluded[]    = '/' . $product_base . '/';
 	}
 
 	/**

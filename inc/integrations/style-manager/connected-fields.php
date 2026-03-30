@@ -131,6 +131,38 @@ function anima_add_style_manager_connected_fields( $options ) {
 								],
 							],
 						],
+						'preset-1-7-5'      => [
+							'label'   => esc_html__( 'Preset 1.75', '__theme_txtd' ),
+							'options' => [],
+							'config'  => [
+								'sm_font_primary'   => [
+									'super_display_font',
+									'display_font',
+									'heading_1_font',
+									'heading_2_font',
+									'heading_3_font',
+									'heading_4_font',
+									'site_title_font',
+								],
+								'sm_font_secondary' => [
+									'heading_5_font',
+									'heading_6_font',
+									'navigation_font',
+									'buttons_font',
+									'meta_font',
+								],
+								'sm_font_body'      => [
+									'body_font',
+									'cite_font',
+									'input_font',
+								],
+								'sm_font_accent'    => [
+									'lead_font',
+									'quote_font',
+									'accent_font',
+								],
+							],
+						],
 						'preset-2'      => [
 							'label'   => esc_html__( 'Preset 2 (Default)', '__theme_txtd' ),
 							'options' => [],

@@ -214,6 +214,8 @@ Four registered menus: `primary`, `secondary`, `tertiary`, `search-suggestions`.
 
 Template overrides in `woocommerce/`, dedicated styles in `src/scss/woocommerce/`, and scripts in `src/js/woocommerce.js`.
 
+**Page Transitions & WooCommerce:** All WooCommerce pages that carry complex JS state are excluded from AJAX (Barba.js) navigation — cart, checkout, my account, and single product pages. The exclusion list lives in `anima_page_transitions_get_excluded_urls()` (`inc/integrations/page-transitions.php`). Single products are excluded by matching the `/product/` permalink base (auto-adapts to custom permalink structures). This is a deliberate safety measure; WooCommerce scripts and inline state don't reliably survive AJAX DOM swaps. Future work may re-enable AJAX for some of these pages once compatibility is validated.
+
 ## LT Full-Stack Smoke Test & Onboarding
 
 Full CLI setup + browser onboarding for LT theme sites (Rosa LT, Felt LT, Julia LT, Mies LT) is documented in the **`lt-test-site` skill** (`~/.claude/skills/lt-test-site/SKILL.md`, also at `~/.codex/skills/lt-test-site/SKILL.md`).
