@@ -11,6 +11,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Get the default constrained layout used for post content in the editor.
+ *
+ * @return array
+ */
+function anima_get_post_content_layout_defaults() {
+	return [
+		'inherit'     => true,
+		'contentSize' => 'var(--nb-content-width)',
+		'wideSize'    => 'var(--nb-container-width)',
+	];
+}
+
+/**
  * Remove core global style callbacks since Style Manager handles all styling.
  *
  * Core moved these callbacks across hooks in recent WP releases, so we remove
@@ -73,6 +86,23 @@ add_filter( 'block_editor_settings_all',
 
 		// Keep font management in Style Manager to avoid duplicate UI with Font Library.
 		$editor_settings['fontLibraryEnabled'] = false;
+
+		// WordPress 7 only exposes Wide/Full in the post editor when post content
+		// resolves to a constrained layout context. Seed that context explicitly
+		// for classic post editing while preserving any values already provided.
+		if ( isset( $block_editor_context->name ) && 'core/edit-post' === $block_editor_context->name ) {
+			if ( empty( $editor_settings['postContentAttributes'] ) || ! is_array( $editor_settings['postContentAttributes'] ) ) {
+				$editor_settings['postContentAttributes'] = [];
+			}
+
+			$post_content_layout = $editor_settings['postContentAttributes']['layout'] ?? [];
+			$post_content_layout = is_array( $post_content_layout ) ? $post_content_layout : [];
+
+			$editor_settings['postContentAttributes']['layout'] = array_merge(
+				anima_get_post_content_layout_defaults(),
+				$post_content_layout
+			);
+		}
 
 		return $editor_settings;
 	}, 10, 2 );

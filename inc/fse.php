@@ -13,6 +13,89 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once 'fse/block-patterns.php';
 
 /**
+ * Determine whether a post-content block is missing an explicit layout context.
+ *
+ * @param array $block Parsed block data.
+ * @return bool
+ */
+function anima_post_content_block_needs_layout_defaults( array $block ): bool {
+	if ( 'core/post-content' !== ( $block['blockName'] ?? null ) ) {
+		return false;
+	}
+
+	$layout = $block['attrs']['layout'] ?? null;
+
+	if ( ! is_array( $layout ) ) {
+		return true;
+	}
+
+	foreach ( [ 'type', 'inherit', 'contentSize', 'wideSize' ] as $key ) {
+		if ( array_key_exists( $key, $layout ) ) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+/**
+ * Add the theme's constrained post-content layout defaults to stale templates.
+ *
+ * Older customized templates may serialize a bare core/post-content block, which
+ * makes WP 7 treat post content as flow layout and hide Wide/Full controls.
+ *
+ * @param array $blocks Parsed block data.
+ * @return array
+ */
+function anima_normalize_post_content_layout_blocks( array $blocks ): array {
+	foreach ( $blocks as &$block ) {
+		if ( anima_post_content_block_needs_layout_defaults( $block ) ) {
+			$block['attrs']           = is_array( $block['attrs'] ?? null ) ? $block['attrs'] : [];
+			$existing_layout          = $block['attrs']['layout'] ?? [];
+			$existing_layout          = is_array( $existing_layout ) ? $existing_layout : [];
+			$block['attrs']['layout'] = array_merge( anima_get_post_content_layout_defaults(), $existing_layout );
+		}
+
+		if ( ! empty( $block['innerBlocks'] ) && is_array( $block['innerBlocks'] ) ) {
+			$block['innerBlocks'] = anima_normalize_post_content_layout_blocks( $block['innerBlocks'] );
+		}
+	}
+	unset( $block );
+
+	return $blocks;
+}
+
+/**
+ * Normalize retrieved block templates so stale custom templates inherit layout.
+ *
+ * @param WP_Block_Template[] $query_result  Array of found block templates.
+ * @param array               $query         Optional query arguments.
+ * @param string              $template_type wp_template or wp_template_part.
+ * @return WP_Block_Template[]
+ */
+function anima_normalize_block_templates_post_content_layout( $query_result, $query, $template_type ) {
+	if ( 'wp_template' !== $template_type ) {
+		return $query_result;
+	}
+
+	foreach ( $query_result as $template ) {
+		if ( 'anima' !== ( $template->theme ?? '' ) || empty( $template->content ) ) {
+			continue;
+		}
+
+		$blocks            = parse_blocks( $template->content );
+		$normalized_blocks = anima_normalize_post_content_layout_blocks( $blocks );
+
+		if ( $normalized_blocks !== $blocks ) {
+			$template->content = serialize_blocks( $normalized_blocks );
+		}
+	}
+
+	return $query_result;
+}
+add_filter( 'get_block_templates', 'anima_normalize_block_templates_post_content_layout', 9, 3 );
+
+/**
  * Filters the array of queried block templates array after they've been fetched.
  *
  * This way we add titles and/or descriptions about the templates we're providing that are not covered by core
