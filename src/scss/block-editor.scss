@@ -88,7 +88,7 @@ $assets-folder-path: '../../assets';
 
         .edit-post-visual-editor__post-title-wrapper {
             max-width: none;
-            margin-top: 0;
+            margin-top: 0 !important;
             background: white;
 
             :is(.editor-post-title__input, [data-rich-text-placeholder]) {
@@ -139,7 +139,7 @@ $assets-folder-path: '../../assets';
         padding: var(--theme-content-spacing) 0;
 
         .edit-post-visual-editor__post-title-wrapper {
-             margin-top: 0;
+             margin-top: 0 !important;
 
             .editor-post-title__input {
                 margin: 0;
@@ -222,5 +222,66 @@ $assets-folder-path: '../../assets';
     button,
     select {
         --font-size-modifier: 1;
+    }
+}
+
+// WordPress 7 renders the post title inside the editor iframe body instead of
+// only inside the outer admin shell. Mirror the admin-shell rules above so the
+// title keeps the same styling in both contexts.
+body.editor-styles-wrapper {
+    .editor-post-title.editor-post-title__input {
+        @include apply-font(heading-1);
+        --current-font-weight: 800;
+        --current-line-height: 1.2;
+    }
+
+    &:not(.post-type-post) {
+        .editor-visual-editor__post-title-wrapper,
+        .edit-post-visual-editor__post-title-wrapper {
+            max-width: none;
+            margin-top: 0 !important;
+            background: white;
+
+            :is(.editor-post-title__input, [data-rich-text-placeholder]) {
+                margin: 0;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 1;
+                letter-spacing: 0;
+                text-transform: none;
+                color: #1e1e1e;
+            }
+
+            .editor-post-title__input {
+                min-height: 48px;
+                padding: 0.75em 1em;
+                display: flex;
+                align-items: center;
+                grid-column: var(--block-full-start)/var(--block-full-end);
+            }
+
+            [data-rich-text-placeholder] {
+                font-size: revert;
+            }
+
+            &:not(.is-selected) .editor-post-title__input {
+                border-bottom: 1px solid #ddd;
+            }
+        }
+    }
+
+    &.post-type-post {
+        padding: var(--theme-content-spacing) 0;
+
+        .editor-visual-editor__post-title-wrapper,
+        .edit-post-visual-editor__post-title-wrapper {
+            margin-top: 0 !important;
+
+            .editor-post-title__input {
+                margin: 0;
+                grid-column: var(--block-content-start)/var(--block-content-end);
+            }
+        }
     }
 }
