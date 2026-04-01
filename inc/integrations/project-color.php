@@ -108,8 +108,10 @@ function anima_project_color_editor_assets() {
 	);
 
 	wp_localize_script( 'anima-project-color', 'animaProjectColor', [
-		'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-		'nonce'   => wp_create_nonce( 'anima_project_color' ),
+		'ajaxUrl'         => admin_url( 'admin-ajax.php' ),
+		'nonce'           => wp_create_nonce( 'anima_project_color' ),
+		'contextualId'    => 'contextual-post',
+		'contextualStyleId' => 'style-manager-contextual-preview-inline-css',
 	] );
 }
 add_action( 'enqueue_block_editor_assets', 'anima_project_color_editor_assets' );
@@ -188,6 +190,34 @@ function anima_ajax_get_project_color() {
 add_action( 'wp_ajax_anima_get_project_color', 'anima_ajax_get_project_color' );
 
 /**
+ * AJAX handler: preview the contextual runtime palette for an unsaved editor color.
+ */
+function anima_ajax_get_contextual_palette_preview() {
+	check_ajax_referer( 'anima_project_color', 'nonce' );
+
+	if ( ! current_user_can( 'edit_posts' ) ) {
+		wp_send_json_error( 'Unauthorized' );
+	}
+
+	if ( ! function_exists( 'sm_get_palette_runtime_preview_payload' ) ) {
+		wp_send_json_error( 'Style Manager runtime preview is unavailable.' );
+	}
+
+	$post_id = isset( $_POST['post_id'] ) ? absint( $_POST['post_id'] ) : 0;
+	$color   = isset( $_POST['color'] ) ? sanitize_hex_color( wp_unslash( $_POST['color'] ) ) : '';
+
+	$payload = sm_get_palette_runtime_preview_payload(
+		[
+			'post_id'          => $post_id,
+			'contextual_color' => $color,
+		]
+	);
+
+	wp_send_json_success( $payload );
+}
+add_action( 'wp_ajax_anima_get_contextual_palette_preview', 'anima_ajax_get_contextual_palette_preview' );
+
+/**
  * Get the project color for a post.
  *
  * Priority: manual color > cached auto color > lazy-generate from featured image.
@@ -226,6 +256,98 @@ function anima_get_project_color( $post_id = null ) {
 
 	return '';
 }
+
+/**
+ * Get the effective contextual color for a post.
+ *
+ * @param int|null $post_id Post ID.
+ * @return string
+ */
+function anima_get_contextual_post_color( $post_id = null ) {
+	return (string) anima_get_project_color( $post_id );
+}
+
+/**
+ * Resolve the post id that should receive a contextual runtime palette.
+ *
+ * @return int
+ */
+function anima_get_contextual_palette_post_id() {
+	if ( is_admin() ) {
+		if ( isset( $_GET['post'] ) ) {
+			return absint( $_GET['post'] );
+		}
+
+		if ( isset( $_POST['post_ID'] ) ) {
+			return absint( $_POST['post_ID'] );
+		}
+
+		if ( function_exists( 'anima_project_color_supports_current_editor_screen' ) && ! anima_project_color_supports_current_editor_screen() ) {
+			return 0;
+		}
+
+		$current_post = get_post();
+		return $current_post instanceof WP_Post ? (int) $current_post->ID : 0;
+	}
+
+	if ( is_singular() ) {
+		return (int) get_queried_object_id();
+	}
+
+	$current_post = get_post();
+	return $current_post instanceof WP_Post ? (int) $current_post->ID : 0;
+}
+
+/**
+ * Get the contextual palette label for a post.
+ *
+ * @param int $post_id Post ID.
+ * @return string
+ */
+function anima_get_contextual_palette_label( int $post_id ): string {
+	$post_type        = get_post_type( $post_id );
+	$post_type_object = $post_type ? get_post_type_object( $post_type ) : null;
+	$singular_name    = $post_type_object->labels->singular_name ?? __( 'Post', '__theme_txtd' );
+
+	return sprintf(
+		/* translators: %s: singular post type label. */
+		__( 'Current %s', '__theme_txtd' ),
+		$singular_name
+	);
+}
+
+/**
+ * Register a request-scoped contextual palette with Style Manager.
+ *
+ * @param array $palettes Existing runtime palettes.
+ * @return array
+ */
+function anima_add_contextual_runtime_palette( array $palettes, array $saved_palettes = [], array $context = [] ): array {
+	if ( ! function_exists( 'sm_build_contextual_palette_from_color' ) ) {
+		return $palettes;
+	}
+
+	$post_id = ! empty( $context['post_id'] ) ? absint( $context['post_id'] ) : anima_get_contextual_palette_post_id();
+
+	if ( empty( $post_id ) ) {
+		return $palettes;
+	}
+
+	$color = ! empty( $context['contextual_color'] ) ? sanitize_hex_color( $context['contextual_color'] ) : sanitize_hex_color( anima_get_contextual_post_color( $post_id ) );
+
+	if ( empty( $color ) ) {
+		return $palettes;
+	}
+
+	$palettes[] = sm_build_contextual_palette_from_color(
+		$color,
+		'contextual-post',
+		anima_get_contextual_palette_label( $post_id )
+	);
+
+	return $palettes;
+}
+add_filter( 'style_manager/runtime_palettes', 'anima_add_contextual_runtime_palette', 10, 3 );
 
 /**
  * Invalidate the auto-generated color when the featured image changes.

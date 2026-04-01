@@ -27,6 +27,8 @@
   var useSelect = wp.data.useSelect;
   var useDispatch = wp.data.useDispatch;
   var __ = wp.i18n.__;
+  var CONTEXTUAL_PALETTE_ID = animaProjectColor.contextualId || 'contextual-post';
+  var CONTEXTUAL_STYLE_ID = animaProjectColor.contextualStyleId || 'style-manager-contextual-preview-inline-css';
 
   // Post type label map for the panel title.
   var postTypeLabels = {
@@ -66,6 +68,98 @@
       return '';
     });
   }
+
+  /**
+   * Fetch the contextual palette preview for an unsaved editor color.
+   *
+   * @param {number} postId Current post ID.
+   * @param {string} color  Effective contextual color.
+   * @return {Promise<Object|null>} Preview payload or null on failure.
+   */
+  function fetchContextualPalettePreview(postId, color) {
+    var formData = new FormData();
+    formData.append('action', 'anima_get_contextual_palette_preview');
+    formData.append('nonce', animaProjectColor.nonce);
+    formData.append('post_id', postId);
+    formData.append('color', color || '');
+    return fetch(animaProjectColor.ajaxUrl, {
+      method: 'POST',
+      credentials: 'same-origin',
+      body: formData
+    }).then(function (response) {
+      return response.json();
+    }).then(function (result) {
+      if (result.success && result.data) {
+        return result.data;
+      }
+      return null;
+    }).catch(function () {
+      return null;
+    });
+  }
+  function getPreviewStyleDocuments() {
+    var docs = [document];
+    var iframe = document.querySelector('iframe[name="editor-canvas"]');
+    try {
+      if (iframe && iframe.contentDocument) {
+        docs.push(iframe.contentDocument);
+      }
+    } catch (e) {
+      // Ignore iframe access errors and keep the outer document only.
+    }
+    return docs;
+  }
+  function upsertContextualPreviewStyle(css) {
+    getPreviewStyleDocuments().forEach(function (doc) {
+      var container = doc.head || doc.body || doc.documentElement;
+      if (!container) {
+        return;
+      }
+      var styleTag = doc.getElementById(CONTEXTUAL_STYLE_ID);
+      if (!styleTag) {
+        styleTag = doc.createElement('style');
+        styleTag.id = CONTEXTUAL_STYLE_ID;
+        container.appendChild(styleTag);
+      }
+      styleTag.textContent = css || '';
+    });
+  }
+  function getPalettesWithoutContextual(palettes) {
+    return (palettes || []).filter(function (palette) {
+      return String(palette.id) !== CONTEXTUAL_PALETTE_ID;
+    });
+  }
+  function getCurrentNovablocksSettings() {
+    var storeSettings = wp.data && wp.data.select && wp.data.select('novablocks') && wp.data.select('novablocks').getSettings && wp.data.select('novablocks').getSettings();
+    return storeSettings || window.wp.novaBlocks && window.wp.novaBlocks.settings || {};
+  }
+  function updateNovablocksSettings(nextSettings) {
+    window.wp = window.wp || {};
+    window.wp.novaBlocks = window.wp.novaBlocks || {};
+    window.wp.novaBlocks.settings = nextSettings;
+    if (wp.data && wp.data.dispatch && wp.data.dispatch('novablocks') && wp.data.dispatch('novablocks').updateSettings) {
+      wp.data.dispatch('novablocks').updateSettings(nextSettings);
+    }
+  }
+  function applyPaletteRuntimePayload(payload) {
+    var nextPalettes = Array.isArray(payload && payload.palettes) ? payload.palettes : [];
+    var runtimeCss = payload && payload.runtimeCss || '';
+    var currentSettings = getCurrentNovablocksSettings();
+    var nextSettings = Object.assign({}, currentSettings, {
+      palettes: nextPalettes
+    });
+    window.styleManager = window.styleManager || {};
+    window.styleManager.colorsConfig = nextPalettes;
+    updateNovablocksSettings(nextSettings);
+    upsertContextualPreviewStyle(runtimeCss);
+  }
+  function clearContextualPalettePreview() {
+    var basePalettes = getPalettesWithoutContextual(getCurrentNovablocksSettings().palettes || window.styleManager && window.styleManager.colorsConfig || []);
+    applyPaletteRuntimePayload({
+      palettes: basePalettes,
+      runtimeCss: ''
+    });
+  }
   function ProjectColorPanel() {
     var postMeta = useSelect(function (select) {
       return select('core/editor').getEditedPostAttribute('meta') || {};
@@ -96,6 +190,8 @@
     var _useNotice = useState(null);
     var notice = _useNotice[0];
     var setNotice = _useNotice[1];
+    var previewRequestRef = useRef(0);
+    var previewTimeoutRef = useRef(null);
 
     // Track the previous featured image ID to detect changes.
     var prevFeaturedImageRef = useRef(featuredImageId);
@@ -186,6 +282,40 @@
         setIsSuggesting(false);
       });
     }, [featuredImageId]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(function () {
+      if (previewTimeoutRef.current) {
+        clearTimeout(previewTimeoutRef.current);
+        previewTimeoutRef.current = null;
+      }
+      previewRequestRef.current = previewRequestRef.current + 1;
+      var currentRequest = previewRequestRef.current;
+      if (!postId) {
+        return undefined;
+      }
+      if (!color) {
+        clearContextualPalettePreview();
+        return undefined;
+      }
+      previewTimeoutRef.current = setTimeout(function () {
+        fetchContextualPalettePreview(postId, color).then(function (payload) {
+          if (previewRequestRef.current !== currentRequest) {
+            return;
+          }
+          if (payload && Array.isArray(payload.palettes)) {
+            applyPaletteRuntimePayload(payload);
+            return;
+          }
+          clearContextualPalettePreview();
+        });
+      }, 150);
+      return function () {
+        if (previewTimeoutRef.current) {
+          clearTimeout(previewTimeoutRef.current);
+          previewTimeoutRef.current = null;
+        }
+      };
+    }, [color, postId]);
 
     // Dynamic label based on post type.
     var label = postTypeLabels[postType] || defaultLabel;

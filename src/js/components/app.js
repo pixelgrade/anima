@@ -4,6 +4,7 @@ import { debounce, getFirstBlock } from '../utils';
 
 import GlobalService from './globalService';
 import Hero from './hero';
+import heroInitFilter from './hero-init-filter';
 import CommentsArea from './commentsArea';
 import Navbar from './navbar';
 import SearchOverlay from './search-overlay';
@@ -62,11 +63,13 @@ export default class App {
   }
 
   initializeHero() {
-    const newHeroesSelector = '.nb-supernova--card-layout-stacked.nb-supernova--1-columns.nb-supernova--align-full';
-    const oldHeroesSelector = '.novablocks-hero';
+    const {
+      NEW_HERO_SELECTOR: newHeroesSelector,
+      OLD_HERO_SELECTOR: oldHeroesSelector,
+      shouldInitializeHero,
+    } = heroInitFilter;
     const heroesSelector = `${ newHeroesSelector }, ${ oldHeroesSelector }`;
-    const heroElements = document.querySelectorAll( heroesSelector );
-    const heroElementsArray = Array.from( heroElements );
+    const heroElementsArray = Array.from( document.querySelectorAll( heroesSelector ) ).filter( shouldInitializeHero );
 
     this.HeroCollection = heroElementsArray.map( element => new Hero( element ) );
     this.firstHero = heroElementsArray[ 0 ];

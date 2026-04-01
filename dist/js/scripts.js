@@ -1,7 +1,53 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-/******/ 	// The require scope
-/******/ 	var __webpack_require__ = {};
+/******/ 	var __webpack_modules__ = ({
+
+/***/ 771
+(module) {
+
+const NEW_HERO_SELECTOR = '.nb-supernova--card-layout-stacked.nb-supernova--1-columns.nb-supernova--align-full';
+const OLD_HERO_SELECTOR = '.novablocks-hero';
+function shouldInitializeHero(element) {
+  if (!element || typeof element.matches !== 'function') {
+    return false;
+  }
+  if (element.classList && element.classList.contains('nb-contextual-post-card')) {
+    return false;
+  }
+  return element.matches(NEW_HERO_SELECTOR) || element.matches(OLD_HERO_SELECTOR);
+}
+module.exports = {
+  NEW_HERO_SELECTOR,
+  OLD_HERO_SELECTOR,
+  shouldInitializeHero
+};
+
+/***/ }
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
 /******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
@@ -34,6 +80,9 @@
 /******/ 	})();
 /******/ 	
 /************************************************************************/
+// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
+(() => {
+"use strict";
 
 ;// external "jQuery"
 const external_jQuery_namespaceObject = jQuery;
@@ -719,6 +768,9 @@ class Hero {
     }, ['{self}']);
   }
 }
+// EXTERNAL MODULE: ./src/js/components/hero-init-filter.js
+var hero_init_filter = __webpack_require__(771);
+var hero_init_filter_default = /*#__PURE__*/__webpack_require__.n(hero_init_filter);
 ;// ./src/js/components/commentsArea.js
 
 class CommentsArea {
@@ -1179,6 +1231,7 @@ function destroy() {
 
 
 
+
 class App {
   constructor() {
     this.initializeHero();
@@ -1223,11 +1276,13 @@ class App {
     });
   }
   initializeHero() {
-    const newHeroesSelector = '.nb-supernova--card-layout-stacked.nb-supernova--1-columns.nb-supernova--align-full';
-    const oldHeroesSelector = '.novablocks-hero';
+    const {
+      NEW_HERO_SELECTOR: newHeroesSelector,
+      OLD_HERO_SELECTOR: oldHeroesSelector,
+      shouldInitializeHero
+    } = (hero_init_filter_default());
     const heroesSelector = `${newHeroesSelector}, ${oldHeroesSelector}`;
-    const heroElements = document.querySelectorAll(heroesSelector);
-    const heroElementsArray = Array.from(heroElements);
+    const heroElementsArray = Array.from(document.querySelectorAll(heroesSelector)).filter(shouldInitializeHero);
     this.HeroCollection = heroElementsArray.map(element => new Hero(element));
     this.firstHero = heroElementsArray[0];
   }
@@ -1257,5 +1312,7 @@ external_jQuery_default()(function () {
     $window.on('wf-active', scripts_initialize);
   }
 });
+})();
+
 /******/ })()
 ;

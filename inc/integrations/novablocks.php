@@ -39,6 +39,10 @@ if ( ! function_exists( 'anima_novablocks_setup' ) ) {
 				'name' => 'card',
 				'enabled' => true,
 			],
+			'contextual-post-card' => [
+				'name' => 'contextual-post-card',
+				'enabled' => true,
+			],
 			'google-map' => [
 				'name' => 'google-map',
 				'enabled' => true,
