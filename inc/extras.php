@@ -301,7 +301,7 @@ if ( ! function_exists( 'anima_parse_content_tags' ) ) {
 if ( ! function_exists( 'anima_dark_mode_support' ) ) {
 	function anima_dark_mode_support() {
 		if ( 'on' === pixelgrade_option( 'sm_dark_mode', 'off' ) ) {
-			add_theme_support( 'editor-styles' );
+			// editor-styles is now added unconditionally in anima_setup().
 			add_theme_support( 'dark-editor-style' );
 		}
 	}

@@ -84,6 +84,12 @@ if ( ! function_exists( 'anima_setup' ) ) {
 		add_theme_support( 'align-wide' );
 
 		/**
+		 * Enable editor styles so the Post Editor uses an iframe
+		 * (matching the Site Editor) for proper CSS isolation.
+		 */
+		add_theme_support( 'editor-styles' );
+
+		/**
 		 * Add theme support for responsive embeds
 		 */
 		add_theme_support( 'responsive-embeds' );
