@@ -1,6 +1,9 @@
 import $ from 'jquery';
 import App from '../app';
 import * as PileParallax from '../pile-parallax';
+const { syncDocumentTitle } = require( './document-title' );
+
+export { syncDocumentTitle };
 
 // Tracks script IDs that syncPageAssets() loaded for the first time.
 // reinitNovaBlocksScripts() skips these to avoid double-initialization
@@ -299,16 +302,6 @@ function isBlockInlineStyle( id ) {
  */
 function isBlockStylesheet( id ) {
   return id.startsWith( 'wp-block-' ) && id.endsWith( '-css' );
-}
-
-/**
- * Update document title from new page HTML.
- */
-export function syncDocumentTitle( html ) {
-  const match = html.match( /<title[^>]*>([\s\S]*?)<\/title>/i );
-  if ( match && match[ 1 ] ) {
-    document.title = match[ 1 ].trim();
-  }
 }
 
 /**
