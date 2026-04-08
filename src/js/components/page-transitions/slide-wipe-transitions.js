@@ -28,10 +28,11 @@ function performSlideWipeEnter( { next } ) {
   return new Promise( ( resolve ) => {
     requestAnimationFrame( () => {
       requestAnimationFrame( () => {
-        reinitComponents();
-        trackPageview();
+        reinitComponents().then( () => {
+          trackPageview();
 
-        SlideWipeLoader.hide().then( resolve );
+          SlideWipeLoader.hide().then( resolve );
+        } );
       } );
     } );
   } );

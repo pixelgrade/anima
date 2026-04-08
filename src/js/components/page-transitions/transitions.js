@@ -125,13 +125,14 @@ function performEnter( { next } ) {
   return new Promise( ( resolve ) => {
     requestAnimationFrame( () => {
       requestAnimationFrame( () => {
-        reinitComponents();
-        trackPageview();
+        reinitComponents().then( () => {
+          trackPageview();
 
-        const timeline = createBorderInTimeline();
-        timeline.play();
+          const timeline = createBorderInTimeline();
+          timeline.play();
 
-        timelinePromise( timeline ).then( resolve );
+          timelinePromise( timeline ).then( resolve );
+        } );
       } );
     } );
   } );

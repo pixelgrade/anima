@@ -615,51 +615,55 @@ export function reinitComponents() {
   // Fonts are already loaded (wf-active class persists), so Hero init runs immediately.
   new App();
 
-  // Re-initialize Nova Blocks frontend scripts.
-  // In FSE themes the header/footer are inside the Barba container and get swapped,
-  // so Nova Blocks' block JS (header sticky, color signal, etc.) must re-run.
-  reinitNovaBlocksScripts( () => {
-    // Nova Blocks scripts can mutate/rebuild collection card DOM after AJAX swap.
-    // Refresh pile parallax bindings after those scripts finish so we target
-    // the final nodes and not stale pre-mutation references.
-    PileParallax.initialize();
-    window.dispatchEvent( new Event( 'scroll' ) );
+  return new Promise( ( resolve ) => {
+    // Re-initialize Nova Blocks frontend scripts.
+    // In FSE themes the header/footer are inside the Barba container and get swapped,
+    // so Nova Blocks' block JS (header sticky, color signal, etc.) must re-run.
+    reinitNovaBlocksScripts( () => {
+      // Nova Blocks scripts can mutate/rebuild collection card DOM after AJAX swap.
+      // Refresh pile parallax bindings after those scripts finish so we target
+      // the final nodes and not stale pre-mutation references.
+      PileParallax.initialize();
+      window.dispatchEvent( new Event( 'scroll' ) );
+
+      // Reinitialize FacetWP if it was previously loaded.
+      // FacetWP renders facets client-side — after AJAX page swap, the new DOM
+      // has empty .facetwp-facet containers that need FWP to re-parse and render.
+      // Only call refresh() if FacetWP already completed its first init (FWP.loaded).
+      // On first navigation TO a page with facets, FacetWP's own script handles init.
+      if ( typeof FWP !== 'undefined' && FWP.loaded && typeof FWP.refresh === 'function' ) {
+        if ( typeof FWP_HTTP !== 'undefined' ) {
+          FWP_HTTP.uri = window.location.pathname;
+          FWP_HTTP.get = {};
+        }
+        FWP.refresh();
+      }
+
+      // Re-trigger WooCommerce cart fragments if available.
+      if ( typeof wc_cart_fragments_params !== 'undefined' ) {
+        $( document.body ).trigger( 'wc_fragment_refresh' );
+      }
+
+      // Fire completion events only after the frontend scripts rebuilt the new page.
+      $( document ).trigger( 'anima:page-transition-complete' );
+      window.dispatchEvent( new CustomEvent( 'anima:page-transition-complete' ) );
+
+      // Dispatch resize + scroll events for layout-dependent JS.
+      // Resize: recalculates layout (Hero, GlobalService).
+      // Scroll: triggers Hero.update() and bully's rAF loop to process new elements.
+      window.dispatchEvent( new Event( 'resize' ) );
+      window.dispatchEvent( new Event( 'scroll' ) );
+
+      // Delayed fallback pass: some third-party scripts mutate the new container
+      // asynchronously right after transition. Trigger one more recalculation.
+      setTimeout( () => {
+        window.dispatchEvent( new Event( 'resize' ) );
+        window.dispatchEvent( new Event( 'scroll' ) );
+      }, 250 );
+
+      resolve();
+    } );
   } );
-
-  // Reinitialize FacetWP if it was previously loaded.
-  // FacetWP renders facets client-side — after AJAX page swap, the new DOM
-  // has empty .facetwp-facet containers that need FWP to re-parse and render.
-  // Only call refresh() if FacetWP already completed its first init (FWP.loaded).
-  // On first navigation TO a page with facets, FacetWP's own script handles init.
-  if ( typeof FWP !== 'undefined' && FWP.loaded && typeof FWP.refresh === 'function' ) {
-    if ( typeof FWP_HTTP !== 'undefined' ) {
-      FWP_HTTP.uri = window.location.pathname;
-      FWP_HTTP.get = {};
-    }
-    FWP.refresh();
-  }
-
-  // Re-trigger WooCommerce cart fragments if available.
-  if ( typeof wc_cart_fragments_params !== 'undefined' ) {
-    $( document.body ).trigger( 'wc_fragment_refresh' );
-  }
-
-  // Fire a custom event that other scripts can hook into.
-  $( document ).trigger( 'anima:page-transition-complete' );
-  // Native event mirror for non-jQuery listeners.
-  window.dispatchEvent( new CustomEvent( 'anima:page-transition-complete' ) );
-
-  // Dispatch resize + scroll events for layout-dependent JS.
-  // Resize: recalculates layout (Hero, GlobalService).
-  // Scroll: triggers Hero.update() and bully's rAF loop to process new elements.
-  window.dispatchEvent( new Event( 'resize' ) );
-  window.dispatchEvent( new Event( 'scroll' ) );
-  // Delayed fallback pass: some third-party scripts mutate the new container
-  // asynchronously right after transition. Trigger one more recalculation.
-  setTimeout( () => {
-    window.dispatchEvent( new Event( 'resize' ) );
-    window.dispatchEvent( new Event( 'scroll' ) );
-  }, 250 );
 }
 
 /**
