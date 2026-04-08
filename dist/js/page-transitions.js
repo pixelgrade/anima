@@ -30,6 +30,59 @@ module.exports = {
   shouldInitializeHero
 };
 
+/***/ },
+
+/***/ 233
+(module) {
+
+function matchesPilePattern({
+  index,
+  columns = 1,
+  target3d = 'item',
+  rule3d = 'odd'
+}) {
+  const normalizedColumns = Math.max(1, parseInt(columns, 10) || 1);
+  if (target3d === 'column') {
+    const column = index % normalizedColumns + 1;
+    return rule3d === 'even' ? column % 2 === 0 : column % 2 === 1;
+  }
+  const position = index + 1;
+  return rule3d === 'even' ? position % 2 === 0 : position % 2 === 1;
+}
+function getPilePatternSettings({
+  className = '',
+  columns = 1
+} = {}) {
+  return {
+    has3d: className.includes('nb-supernova--pile-3d'),
+    target3d: className.includes('nb-supernova--pile-3d-target-column') ? 'column' : 'item',
+    rule3d: className.includes('nb-supernova--pile-3d-rule-even') ? 'even' : 'odd',
+    columns: Math.max(1, parseInt(columns, 10) || 1)
+  };
+}
+function shouldParallaxItem({
+  has3d = false,
+  index,
+  columns = 1,
+  target3d = 'item',
+  rule3d = 'odd'
+}) {
+  if (!has3d) {
+    return true;
+  }
+  return matchesPilePattern({
+    index,
+    columns,
+    target3d,
+    rule3d
+  });
+}
+module.exports = {
+  getPilePatternSettings,
+  matchesPilePattern,
+  shouldParallaxItem
+};
+
 /***/ }
 
 /******/ 	});
@@ -1002,14 +1055,18 @@ class SearchOverlay extends base_component {
  * Ported from Pile theme's ArchiveParallax.js.
  * Uses vanilla JS + requestAnimationFrame — no GSAP dependency.
  *
- * Two independent features:
- *  1. 3D Grid: applies `js-3d` class to alternating items (checkerboard or column
- *     pattern). Items with `js-3d` get extra horizontal padding via CSS, creating
- *     visual depth. When combined with parallax, they also travel 2× further.
- *  2. Parallax Scrolling: on scroll (RAF), maps scroll progress to translateY
- *     from +travel (pushed down) to -travel (pushed up).
+ * Two linked features:
+ *  1. 3D Grid: applies `js-3d` to the same item/column odd/even pattern used by
+ *     Nova Blocks so the frontend matches the editor and plugin CSS.
+ *  2. Parallax Scrolling: when 3D is enabled, only the selected 3D pattern gets
+ *     translated on scroll; otherwise the effect applies to every item.
  */
 
+const {
+  getPilePatternSettings,
+  matchesPilePattern,
+  shouldParallaxItem
+} = __webpack_require__(233);
 const PARALLAX_SELECTOR = '.nb-supernova--pile-parallax';
 const GRID_3D_SELECTOR = '.nb-supernova--pile-3d';
 const ITEM_SELECTOR = '.nb-collection__layout-item';
@@ -1066,22 +1123,25 @@ function addMissingPadding(layout, items, parallaxAmount, windowHeight) {
 
 /**
  * Apply 3D grid classes to items in a collection.
- * Purely visual: adds `js-3d` class for CSS padding + doubles parallax travel.
+ * Purely visual: adds `js-3d` class for CSS padding using Nova's selected pattern.
  */
 function apply3dClasses(el) {
-  const target3d = el.dataset.pile3dTarget || 'item';
-  const rule3d = el.dataset.pile3dTargetRule || 'odd';
-  const columns = parseInt(el.dataset.columns, 10) || 3;
+  const {
+    columns,
+    target3d,
+    rule3d
+  } = getPilePatternSettings({
+    className: el.className,
+    columns: parseInt(el.dataset.columns, 10) || 3
+  });
   const items = el.querySelectorAll(ITEM_SELECTOR);
   items.forEach((item, index) => {
-    const odd = rule3d === 'odd' ? 0 : 1;
-    let has3d;
-    if (target3d === 'column') {
-      has3d = !!((Math.floor(index / columns) + odd + index) % 2);
-    } else {
-      has3d = !!((Math.floor(index / columns) + odd + index % columns) % 2);
-    }
-    item.classList.toggle('js-3d', has3d);
+    item.classList.toggle('js-3d', matchesPilePattern({
+      index,
+      columns,
+      target3d,
+      rule3d
+    }));
   });
 }
 
@@ -1106,6 +1166,10 @@ function initialize() {
     const amount = parseFloat(el.dataset.pileParallaxAmount) || 0;
     const parallaxAmount = amount / 100;
     const layout = el.querySelector('.nb-collection__layout');
+    const pilePattern = getPilePatternSettings({
+      className: el.className,
+      columns: parseInt(el.dataset.columns, 10) || 3
+    });
     if (amount <= 0) {
       if (layout) {
         layout.style.paddingTop = '';
@@ -1113,7 +1177,6 @@ function initialize() {
       }
       return;
     }
-    const is3d = el.classList.contains('nb-supernova--pile-3d');
     const items = el.querySelectorAll(ITEM_SELECTOR);
     if (!items.length) {
       if (layout) {
@@ -1122,17 +1185,33 @@ function initialize() {
       }
       return;
     }
+    const animatedItems = Array.from(items).filter((item, index) => {
+      const shouldAnimate = shouldParallaxItem({
+        ...pilePattern,
+        index
+      });
+      if (!shouldAnimate) {
+        item.style.transform = '';
+      }
+      return shouldAnimate;
+    });
+    if (!animatedItems.length) {
+      if (layout) {
+        layout.style.paddingTop = '';
+        layout.style.paddingBottom = '';
+      }
+      return;
+    }
 
     // Match Pile: compute extra padding before measuring per-item scroll windows.
-    addMissingPadding(layout, items, parallaxAmount, windowHeight);
+    addMissingPadding(layout, animatedItems, parallaxAmount, windowHeight);
     const itemsData = [];
-    items.forEach(item => {
+    animatedItems.forEach(item => {
       // Reset transform before measuring positions.
       item.style.transform = '';
-      const has3d = item.classList.contains('js-3d');
       const height = item.offsetHeight;
       const initialTop = height * parallaxAmount / 2;
-      const travel = is3d && has3d ? initialTop * 2 : initialTop;
+      const travel = initialTop;
 
       // Cache the item's absolute top position for scroll-window calculation.
       const rect = item.getBoundingClientRect();
