@@ -47,7 +47,7 @@ export const slideWipePageTransition = {
     $( 'body' ).removeClass( 'nav-is-open' );
 
     return SlideWipeLoader.show().then( () => {
-      cleanupBeforeTransition();
+      cleanupBeforeTransition( current.container );
       $( current.container ).hide();
     } );
   },
@@ -80,7 +80,7 @@ export const slideWipeCardExpandTransition = {
     $( 'body' ).removeClass( 'nav-is-open' );
 
     return SlideWipeLoader.show().then( () => {
-      cleanupBeforeTransition();
+      cleanupBeforeTransition( current.container );
       $( current.container ).hide();
     } );
   },

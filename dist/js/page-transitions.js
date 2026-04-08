@@ -32,6 +32,29 @@ module.exports = {
 
 /***/ },
 
+/***/ 236
+(module) {
+
+function cleanupTransitionContainer(container) {
+  if (!container || typeof container.querySelectorAll !== 'function') {
+    return;
+  }
+  container.querySelectorAll('.js-reading-bar, .js-reading-progress').forEach(element => {
+    element.remove();
+  });
+  container.querySelectorAll('video').forEach(video => {
+    video.pause();
+    video.src = '';
+    video.load();
+    video.remove();
+  });
+}
+module.exports = {
+  cleanupTransitionContainer
+};
+
+/***/ },
+
 /***/ 628
 (module) {
 
@@ -1444,6 +1467,9 @@ class App {
 
 
 const {
+  cleanupTransitionContainer
+} = __webpack_require__(236);
+const {
   syncDocumentTitle
 } = __webpack_require__(628);
 
@@ -2151,23 +2177,14 @@ function reinitBullyScript() {
 /**
  * Cleanup heavy resources before page transition.
  */
-function cleanupBeforeTransition() {
+function cleanupBeforeTransition(container) {
   // Disconnect the header color observer from the current page.
   disconnectHeaderColorObserver();
-  const $container = external_jQuery_default()('[data-barba="container"]');
 
   // Remove reading bar nodes from the outgoing container before scripts re-run.
   // Nova Blocks queries `.js-reading-*` globally; leaving old nodes in the DOM
   // during AJAX swap can leak a stale progress bar into the next page header.
-  $container.find('.js-reading-bar, .js-reading-progress').remove();
-
-  // Pause and remove video elements.
-  $container.find('video').each(function () {
-    this.pause();
-    this.src = '';
-    this.load();
-    external_jQuery_default()(this).remove();
-  });
+  cleanupTransitionContainer(container);
 
   // Remove the bully navigation dots. The jquery.bully.js IIFE keeps
   // closure-scoped state (elements array, rAF loop) that can't be reset
@@ -2411,7 +2428,7 @@ const pageTransition = {
     external_jQuery_default()('body').removeClass('nav-is-open');
     return timelinePromise(timeline).then(() => {
       // Cleanup heavy resources from the old page.
-      cleanupBeforeTransition();
+      cleanupBeforeTransition(current.container);
 
       // Hide old container.
       external_jQuery_default()(current.container).hide();
@@ -2527,7 +2544,7 @@ const cardExpandTransition = {
     // Close mobile nav if open.
     external_jQuery_default()('body').removeClass('nav-is-open');
     return timelinePromise(timeline).then(() => {
-      cleanupBeforeTransition();
+      cleanupBeforeTransition(current.container);
       external_jQuery_default()(current.container).hide();
       external_jQuery_default()('body').removeClass('is-transitioning');
     });
@@ -2939,7 +2956,7 @@ const slideWipePageTransition = {
   }) {
     external_jQuery_default()('body').removeClass('nav-is-open');
     return show().then(() => {
-      cleanupBeforeTransition();
+      cleanupBeforeTransition(current.container);
       external_jQuery_default()(current.container).hide();
     });
   },
@@ -2976,7 +2993,7 @@ const slideWipeCardExpandTransition = {
   }) {
     external_jQuery_default()('body').removeClass('nav-is-open');
     return show().then(() => {
-      cleanupBeforeTransition();
+      cleanupBeforeTransition(current.container);
       external_jQuery_default()(current.container).hide();
     });
   },

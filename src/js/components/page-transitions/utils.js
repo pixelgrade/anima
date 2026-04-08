@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import App from '../app';
 import * as PileParallax from '../pile-parallax';
+const { cleanupTransitionContainer } = require( './cleanup' );
 const { syncDocumentTitle } = require( './document-title' );
 
 export { syncDocumentTitle };
@@ -770,24 +771,14 @@ function reinitBullyScript() {
 /**
  * Cleanup heavy resources before page transition.
  */
-export function cleanupBeforeTransition() {
+export function cleanupBeforeTransition( container ) {
   // Disconnect the header color observer from the current page.
   disconnectHeaderColorObserver();
-
-  const $container = $( '[data-barba="container"]' );
 
   // Remove reading bar nodes from the outgoing container before scripts re-run.
   // Nova Blocks queries `.js-reading-*` globally; leaving old nodes in the DOM
   // during AJAX swap can leak a stale progress bar into the next page header.
-  $container.find( '.js-reading-bar, .js-reading-progress' ).remove();
-
-  // Pause and remove video elements.
-  $container.find( 'video' ).each( function() {
-    this.pause();
-    this.src = '';
-    this.load();
-    $( this ).remove();
-  } );
+  cleanupTransitionContainer( container );
 
   // Remove the bully navigation dots. The jquery.bully.js IIFE keeps
   // closure-scoped state (elements array, rAF loop) that can't be reset

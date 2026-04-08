@@ -154,7 +154,7 @@ export const pageTransition = {
 
     return timelinePromise( timeline ).then( () => {
       // Cleanup heavy resources from the old page.
-      cleanupBeforeTransition();
+      cleanupBeforeTransition( current.container );
 
       // Hide old container.
       $( current.container ).hide();
@@ -267,7 +267,7 @@ export const cardExpandTransition = {
     $( 'body' ).removeClass( 'nav-is-open' );
 
     return timelinePromise( timeline ).then( () => {
-      cleanupBeforeTransition();
+      cleanupBeforeTransition( current.container );
       $( current.container ).hide();
       $( 'body' ).removeClass( 'is-transitioning' );
     } );
