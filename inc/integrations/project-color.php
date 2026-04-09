@@ -397,3 +397,212 @@ function anima_inject_project_color_on_card( $markup, $post, $attributes ) {
 	return $markup;
 }
 add_filter( 'novablocks/get_collection_card_markup', 'anima_inject_project_color_on_card', 10, 3 );
+
+/**
+ * Append CSS classes to the first matching class attribute in a markup fragment.
+ *
+ * @param string $markup        HTML fragment.
+ * @param string $class_pattern Regex that matches the target class attribute contents.
+ * @param array  $classes       Classes to append.
+ * @return string
+ */
+function anima_append_classes_to_markup_fragment( string $markup, string $class_pattern, array $classes ): string {
+	$result = preg_replace_callback(
+		$class_pattern,
+		static function( array $matches ) use ( $classes ) {
+			$existing_classes = preg_split( '/\s+/', trim( $matches[1] ) );
+			$existing_classes = array_values( array_filter( $existing_classes ) );
+
+			foreach ( $classes as $class_name ) {
+				if ( ! in_array( $class_name, $existing_classes, true ) ) {
+					$existing_classes[] = $class_name;
+				}
+			}
+
+			return 'class="' . esc_attr( implode( ' ', $existing_classes ) ) . '"';
+		},
+		$markup,
+		1
+	);
+
+	return is_string( $result ) ? $result : $markup;
+}
+
+/**
+ * Replace a CSS class with another one in the first matching markup fragment.
+ *
+ * @param string $markup        HTML fragment.
+ * @param string $class_pattern Regex that matches the target class attribute contents.
+ * @param string $existing      Existing class to replace.
+ * @param string $replacement   Replacement class.
+ * @return string
+ */
+function anima_replace_class_in_markup_fragment( string $markup, string $class_pattern, string $existing, string $replacement ): string {
+	$result = preg_replace_callback(
+		$class_pattern,
+		static function( array $matches ) use ( $existing, $replacement ) {
+			$existing_classes = preg_split( '/\s+/', trim( $matches[1] ) );
+			$existing_classes = array_values( array_filter( $existing_classes ) );
+			$updated_classes  = [];
+
+			foreach ( $existing_classes as $class_name ) {
+				$updated_classes[] = $existing === $class_name ? $replacement : $class_name;
+			}
+
+			return 'class="' . esc_attr( implode( ' ', $updated_classes ) ) . '"';
+		},
+		$markup,
+		1
+	);
+
+	return is_string( $result ) ? $result : $markup;
+}
+
+/**
+ * Apply the contextual post palette classes to the singular reading bar markup.
+ *
+ * @param string   $markup  Reading bar HTML fragment.
+ * @param int|null $post_id Post ID.
+ * @return string
+ */
+function anima_apply_contextual_palette_to_reading_bar_markup( string $markup, $post_id = null ): string {
+	$contextual_color = sanitize_hex_color( anima_get_contextual_post_color( $post_id ) );
+
+	if ( empty( $contextual_color ) || false === strpos( $markup, 'js-reading-bar' ) ) {
+		return $markup;
+	}
+
+	$contextual_classes = [
+		'sm-palette-contextual-post',
+		'sm-variation-1',
+		'sm-color-signal-0',
+	];
+
+	$markup = anima_append_classes_to_markup_fragment(
+		$markup,
+		'/class="([^"]*\bc-reading-bar\b[^"]*\bjs-reading-bar\b[^"]*)"/',
+		$contextual_classes
+	);
+
+	$markup = anima_append_classes_to_markup_fragment(
+		$markup,
+		'/class="([^"]*\bc-reading-bar__progress\b[^"]*\bjs-reading-progress\b[^"]*)"/',
+		$contextual_classes
+	);
+
+	$markup = anima_replace_class_in_markup_fragment(
+		$markup,
+		'/class="([^"]*\bc-reading-bar__layer\b[^"]*\bc-reading-bar__layer--next\b[^"]*)"/',
+		'sm-palette-1',
+		'sm-palette-contextual-post'
+	);
+
+	return $markup;
+}
+
+/**
+ * Scope the singular reading bar to the existing contextual post palette.
+ *
+ * @param string $block_content Rendered block markup.
+ * @return string
+ */
+function anima_apply_contextual_palette_to_header_reading_bar( string $block_content ): string {
+	if ( ! ( is_single() || is_singular( 'portfolio' ) ) ) {
+		return $block_content;
+	}
+
+	if ( false === strpos( $block_content, 'js-reading-bar' ) ) {
+		return $block_content;
+	}
+
+	return anima_apply_contextual_palette_to_reading_bar_markup( $block_content, get_queried_object_id() );
+}
+add_filter( 'render_block_novablocks/header', 'anima_apply_contextual_palette_to_header_reading_bar', 10, 1 );
+
+/**
+ * Resolve the current singular post ID during block rendering.
+ *
+ * `get_queried_object_id()` can be empty inside dynamic block render callbacks,
+ * even when the current post is available on the global post stack.
+ *
+ * @return int
+ */
+function anima_get_current_render_post_id(): int {
+	if ( isset( $GLOBALS['post'] ) && $GLOBALS['post'] instanceof WP_Post ) {
+		return (int) $GLOBALS['post']->ID;
+	}
+
+	$render_post_id = get_the_ID();
+
+	if ( ! empty( $render_post_id ) ) {
+		return (int) $render_post_id;
+	}
+
+	return (int) get_queried_object_id();
+}
+
+/**
+ * Inject the next entry transition color into the bottom post-navigation markup.
+ *
+ * @param string   $markup          Post navigation HTML fragment.
+ * @param int|null $current_post_id Current post ID.
+ * @return string
+ */
+function anima_add_next_entry_transition_color_to_post_navigation_markup( string $markup, $current_post_id = null ): string {
+	if ( empty( $current_post_id ) || false === strpos( $markup, 'post-navigation__link--next' ) ) {
+		return $markup;
+	}
+
+	$current_post = get_post( $current_post_id );
+
+	if ( ! $current_post instanceof WP_Post ) {
+		return $markup;
+	}
+
+	$previous_post = $GLOBALS['post'] ?? null;
+	$GLOBALS['post'] = $current_post;
+	setup_postdata( $current_post );
+
+	$next_post = get_next_post();
+
+	if ( $previous_post instanceof WP_Post ) {
+		$GLOBALS['post'] = $previous_post;
+		setup_postdata( $previous_post );
+	} else {
+		wp_reset_postdata();
+	}
+
+	if ( ! $next_post instanceof WP_Post ) {
+		return $markup;
+	}
+
+	$next_color = sanitize_hex_color( anima_get_project_color( $next_post->ID ) );
+
+	if ( empty( $next_color ) ) {
+		return $markup;
+	}
+
+	$result = preg_replace(
+		'/(<span class="[^"]*\bpost-navigation__post-title--next\b[^"]*">\s*<a\b)([^>]*)(>)/',
+		'$1$2 data-anima-transition-color="' . esc_attr( $next_color ) . '"$3',
+		$markup,
+		1
+	);
+
+	return is_string( $result ) ? $result : $markup;
+}
+
+/**
+ * Expose destination colors on the bottom post-navigation next link.
+ *
+ * @param string $block_content Rendered block markup.
+ * @return string
+ */
+function anima_apply_next_entry_transition_color_to_post_navigation( string $block_content ): string {
+	if ( is_admin() || false === strpos( $block_content, 'post-navigation__link--next' ) ) {
+		return $block_content;
+	}
+
+	return anima_add_next_entry_transition_color_to_post_navigation_markup( $block_content, anima_get_current_render_post_id() );
+}
+add_filter( 'render_block_novablocks/post-navigation', 'anima_apply_next_entry_transition_color_to_post_navigation', 10, 1 );

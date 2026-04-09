@@ -9,6 +9,7 @@ import {
   trackPageview,
 } from './utils';
 import { syncAdminBar } from './admin-bar';
+const { getTransitionColorFromTrigger } = require( './transition-color' );
 
 /**
  * Wraps a GSAP timeline in a Promise.
@@ -26,12 +27,13 @@ function timelinePromise( timeline ) {
  * Create the "border expanding inward" timeline for page leave.
  * Ported from Pile's borderOutTimeline().
  */
-function createBorderOutTimeline() {
+function createBorderOutTimeline( trigger = null ) {
   const $border = $( '.js-page-transition-border' );
   const windowWidth = window.innerWidth;
   const windowHeight = window.innerHeight;
   const borderX = windowWidth / 2;
   const borderY = windowHeight / 2;
+  const color = getTransitionColorFromTrigger( trigger );
 
   const timeline = gsap.timeline( { paused: true } );
 
@@ -41,7 +43,7 @@ function createBorderOutTimeline() {
     width: windowWidth,
     height: windowHeight,
     borderWidth: '0 0',
-    borderColor: 'var(--sm-current-accent-color)',
+    borderColor: color,
     display: 'block',
   } );
 
@@ -146,8 +148,8 @@ function performEnter( { next } ) {
 export const pageTransition = {
   name: 'page-transition',
 
-  leave( { current } ) {
-    const timeline = createBorderOutTimeline();
+  leave( { current, trigger } ) {
+    const timeline = createBorderOutTimeline( trigger );
     timeline.play();
 
     // Close mobile nav if open.
