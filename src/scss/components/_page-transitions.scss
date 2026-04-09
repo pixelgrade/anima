@@ -188,13 +188,28 @@
 .c-loader--preview {
   display: block;
   opacity: 1;
-  transition: opacity 0.18s ease-out;
 }
 
-.anima-motion-preview-root--hiding {
-  .c-page-transition-border--preview,
-  .c-loader--preview {
-    opacity: 0;
+.anima-motion-preview-root--settled {
+  .border-logo-background {
+    animation: none;
+    transform: translate3d(-50%, -50%, 0) scaleY(1);
+  }
+
+  .border-logo .logo {
+    animation: none;
+    opacity: 1;
+  }
+
+  .border-logo-fill {
+    animation: none;
+    transform: translate3d(0, 0, 0);
+    width: 50%;
+  }
+
+  .border-logo-fill:after {
+    animation: none;
+    display: none;
   }
 }
 

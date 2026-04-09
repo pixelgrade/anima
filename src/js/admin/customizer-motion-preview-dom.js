@@ -1,6 +1,5 @@
 const PREVIEW_ROOT_ID = 'anima-motion-preview-root';
-const PREVIEW_HIDE_DELAY = 2200;
-const PREVIEW_FADE_OUT_DELAY = 180;
+const PREVIEW_SETTLE_DELAY = 1200;
 
 function escapeHtml(value) {
   return String(value)
@@ -40,12 +39,12 @@ function getOverlayMarkup(state, config) {
 }
 
 function clearMotionPreviewTimer(previewWindow) {
-  if (!previewWindow || !previewWindow.__animaMotionPreviewHideTimer) {
+  if (!previewWindow || !previewWindow.__animaMotionPreviewSettleTimer) {
     return;
   }
 
-  previewWindow.clearTimeout(previewWindow.__animaMotionPreviewHideTimer);
-  previewWindow.__animaMotionPreviewHideTimer = null;
+  previewWindow.clearTimeout(previewWindow.__animaMotionPreviewSettleTimer);
+  previewWindow.__animaMotionPreviewSettleTimer = null;
 }
 
 function removeMotionPreview(previewDocument) {
@@ -61,26 +60,18 @@ function removeMotionPreview(previewDocument) {
   }
 }
 
-function hideMotionPreview(previewDocument) {
+function settleMotionPreview(previewDocument) {
   if (!previewDocument) {
     return;
   }
 
-  const previewWindow = previewDocument.defaultView;
   const existingRoot = previewDocument.getElementById(PREVIEW_ROOT_ID);
 
-  if (!previewWindow || !existingRoot) {
+  if (!existingRoot) {
     return;
   }
 
-  existingRoot.classList.add('anima-motion-preview-root--hiding');
-
-  previewWindow.setTimeout(() => {
-    const currentRoot = previewDocument.getElementById(PREVIEW_ROOT_ID);
-    if (currentRoot) {
-      currentRoot.remove();
-    }
-  }, PREVIEW_FADE_OUT_DELAY);
+  existingRoot.classList.add('anima-motion-preview-root--settled');
 }
 
 function renderMotionPreview(previewDocument, state, config = {}) {
@@ -103,9 +94,9 @@ function renderMotionPreview(previewDocument, state, config = {}) {
 
   previewDocument.body.appendChild(previewRoot);
 
-  previewWindow.__animaMotionPreviewHideTimer = previewWindow.setTimeout(
-    () => hideMotionPreview(previewDocument),
-    config.previewDuration || PREVIEW_HIDE_DELAY
+  previewWindow.__animaMotionPreviewSettleTimer = previewWindow.setTimeout(
+    () => settleMotionPreview(previewDocument),
+    config.previewSettleDelay || PREVIEW_SETTLE_DELAY
   );
 }
 

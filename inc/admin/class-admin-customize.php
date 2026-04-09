@@ -111,7 +111,7 @@ if ( ! class_exists( 'Anima_Admin_Customize', false ) ) :
 				[
 					'fallbackSymbol'  => anima_first_site_title_character(),
 					'progressBarMarkup' => anima_get_loading_content_markup( 'progress_bar' ),
-					'previewDuration' => 2200,
+					'previewSettleDelay' => 1200,
 				]
 			);
 		}
