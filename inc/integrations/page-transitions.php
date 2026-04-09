@@ -292,6 +292,19 @@ function anima_page_transitions_overlay_markup() {
 }
 
 /**
+ * Get the loading content markup for a given loader style.
+ *
+ * @param string $logo_style 'progress_bar' or 'cycling_images'
+ * @return string
+ */
+function anima_get_loading_content_markup( $logo_style ) {
+	ob_start();
+	anima_render_loading_content( $logo_style );
+
+	return (string) ob_get_clean();
+}
+
+/**
  * Render the loading content inside the overlay.
  *
  * @param string $logo_style 'progress_bar' or 'cycling_images'

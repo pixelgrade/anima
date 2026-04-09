@@ -100,6 +100,10 @@
     opacity: 0;
     animation: anima-fadeMeIn 0.3s 0.5s ease-in-out forwards;
 
+    a, img {
+      display: block;
+    }
+
     .has-page-transitions.is-loaded & {
       opacity: 0;
       transition: transform 0.3s 0.15s cubic-bezier(0.455, 0.030, 0.515, 0.955);
@@ -173,6 +177,24 @@
   // GSAP will then animate it out via SlideWipeLoader.hide().
   .has-page-transitions--slide_wipe:not(.is-loaded) & {
     transform: translateX(0);
+  }
+}
+
+.anima-motion-preview-root {
+  pointer-events: none;
+}
+
+.c-page-transition-border--preview,
+.c-loader--preview {
+  display: block;
+  opacity: 1;
+  transition: opacity 0.18s ease-out;
+}
+
+.anima-motion-preview-root--hiding {
+  .c-page-transition-border--preview,
+  .c-loader--preview {
+    opacity: 0;
   }
 }
 

@@ -104,6 +104,16 @@ if ( ! class_exists( 'Anima_Admin_Customize', false ) ) :
 				$theme->get( 'Version' ),
 				true
 			);
+
+			wp_localize_script(
+				'anima-customizer-motion-controls',
+				'animaCustomizerMotionPreview',
+				[
+					'fallbackSymbol'  => anima_first_site_title_character(),
+					'progressBarMarkup' => anima_get_loading_content_markup( 'progress_bar' ),
+					'previewDuration' => 2200,
+				]
+			);
 		}
 
 		/* ============================
