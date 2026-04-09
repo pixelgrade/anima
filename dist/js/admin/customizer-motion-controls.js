@@ -1,7 +1,7 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 526
+/***/ 530
 (module) {
 
 function getMotionControl(customizeApi, controlId) {
@@ -16,7 +16,7 @@ module.exports = {
 
 /***/ },
 
-/***/ 290
+/***/ 166
 (module) {
 
 function attachMotionControlsSync(customizeApi, syncDependentControls) {
@@ -33,7 +33,7 @@ module.exports = {
 
 /***/ },
 
-/***/ 143
+/***/ 763
 (module) {
 
 const MOTION_DEPENDENT_CONTROL_IDS = ['sm_page_transition_style', 'sm_logo_loading_style', 'sm_transition_symbol'];
@@ -80,13 +80,13 @@ module.exports = {
 const {
   MOTION_DEPENDENT_CONTROL_IDS,
   getMotionDependentControlsState
-} = __webpack_require__(143);
+} = __webpack_require__(763);
 const {
   attachMotionControlsSync
-} = __webpack_require__(290);
+} = __webpack_require__(166);
 const {
   getMotionControl
-} = __webpack_require__(526);
+} = __webpack_require__(530);
 (function () {
   if (typeof wp === 'undefined' || typeof wp.customize === 'undefined') {
     return;

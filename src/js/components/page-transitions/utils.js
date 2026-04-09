@@ -3,6 +3,7 @@ import App from '../app';
 import * as PileParallax from '../pile-parallax';
 const { cleanupTransitionContainer } = require( './cleanup' );
 const { syncDocumentTitle } = require( './document-title' );
+const { rebindAjaxReadingProgress } = require( './reading-bar' );
 
 export { syncDocumentTitle };
 
@@ -624,6 +625,7 @@ export function reinitComponents() {
       // Refresh pile parallax bindings after those scripts finish so we target
       // the final nodes and not stale pre-mutation references.
       PileParallax.initialize();
+      rebindAjaxReadingProgress();
       window.dispatchEvent( new Event( 'scroll' ) );
 
       // Reinitialize FacetWP if it was previously loaded.
