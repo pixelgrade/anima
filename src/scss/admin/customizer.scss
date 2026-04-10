@@ -96,13 +96,16 @@
 #sub-accordion-section-sm_motion_section {
   #customize-control-sm_motion_intro_control,
   #customize-control-sm_page_transitions_intro_control,
-  [id*="customize-control-sm_page_transitions_"] {
+  [id*="customize-control-sm_page_transitions_"],
+  #customize-control-sm_intro_animations_intro_control,
+  [id*="customize-control-sm_intro_animations_"] {
     border: 0 solid var(--customizer-border-color);
     background: var(--sm-color-palette-accent-color-1);
   }
 
   #customize-control-sm_motion_intro_control,
-  #customize-control-sm_page_transitions_intro_control {
+  #customize-control-sm_page_transitions_intro_control,
+  #customize-control-sm_intro_animations_intro_control {
     .customize-control-title {
       font-size: 18px;
       font-weight: 600;
@@ -121,7 +124,8 @@
     }
   }
 
-  [id*="customize-control-sm_page_transitions_"] {
+  [id*="customize-control-sm_page_transitions_"],
+  [id*="customize-control-sm_intro_animations_"] {
     border-top-width: 1px;
   }
 
@@ -135,9 +139,21 @@
     border-top-width: 0;
   }
 
+  #customize-control-sm_intro_animations_enable_control {
+    padding-top: 0;
+    padding-bottom: var(--customize-control-spacing-y);
+    border-bottom-width: 1px;
+  }
+
+  #customize-control-sm_intro_animations_intro_control + #customize-control-sm_intro_animations_enable_control {
+    border-top-width: 0;
+  }
+
   #customize-control-sm_page_transition_style_control,
   #customize-control-sm_logo_loading_style_control,
-  #customize-control-sm_transition_symbol_control {
+  #customize-control-sm_transition_symbol_control,
+  #customize-control-sm_intro_animations_style_control,
+  #customize-control-sm_intro_animations_speed_control {
     transition:
       opacity 0.18s ease-out,
       filter 0.18s ease-out;
@@ -146,6 +162,79 @@
   #customize-control-sm_transition_symbol_control {
     .customize-control-description {
       margin-top: calc(var(--customize-control-spacing-y) / 2);
+    }
+  }
+
+  #customize-control-sm_intro_animations_style_control {
+    .style-manager_radio_html {
+      display: block;
+      margin-top: 0;
+      margin-left: 0;
+    }
+
+    .style-manager_radio_html > * {
+      padding-top: 0;
+      padding-left: 0;
+    }
+
+    .style-manager_radio_html > * + * {
+      margin-top: 10px;
+    }
+
+    .style-manager_radio_html label > input + div {
+      justify-content: flex-start;
+      gap: 12px;
+      min-height: 52px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: var(--customizer-field-background-color);
+    }
+
+    .anima-motion-choice {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 12px;
+    }
+
+    .anima-motion-choice__icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 22px;
+      width: 22px;
+      height: 22px;
+      color: var(--sm-color-palette-neutral-color-9);
+    }
+
+    .anima-motion-choice__icon svg {
+      display: block;
+      width: 20px;
+      height: 20px;
+    }
+
+    .anima-motion-choice__label {
+      display: inline-flex;
+      align-items: center;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.3;
+      color: var(--sm-color-palette-neutral-text-color-1);
+    }
+
+    .style-manager_radio_html input:checked + div {
+      background-color: var(--customizer-field-background-color);
+      border-color: var(--customizer-field-focus-border-color);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.72);
+    }
+  }
+
+  #customize-control-sm_intro_animations_speed_control {
+    .customize-control-title {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 11px;
+      font-weight: 600;
     }
   }
 

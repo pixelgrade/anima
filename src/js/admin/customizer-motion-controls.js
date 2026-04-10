@@ -24,6 +24,10 @@ const {
   }
 
   const DISABLED_CLASS = 'anima-control-is-disabled';
+  const motionToggleSettings = {
+    sm_page_transitions_enable: false,
+    sm_intro_animations_enable: false,
+  };
   const motionPreviewSettings = {
     sm_page_transitions_enable: false,
     sm_page_transition_style: 'border_iris',
@@ -56,8 +60,12 @@ const {
     });
   }
 
-  function syncDependentControls(isEnabled) {
-    const controlState = getMotionDependentControlsState(!!isEnabled);
+  function syncDependentControls(settingId, value) {
+    if (settingId) {
+      motionToggleSettings[settingId] = value;
+    }
+
+    const controlState = getMotionDependentControlsState(motionToggleSettings);
 
     MOTION_DEPENDENT_CONTROL_IDS.forEach((controlId) => {
       setControlDisabledState(controlId, controlState[controlId]);

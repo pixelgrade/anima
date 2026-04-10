@@ -23,6 +23,231 @@ module.exports = {
 
 /***/ },
 
+/***/ 688
+(module, __unused_webpack_exports, __webpack_require__) {
+
+const {
+  createIntroAnimationsRuntime
+} = __webpack_require__(280);
+const runtime = createIntroAnimationsRuntime();
+module.exports = {
+  initialize(root) {
+    return runtime.initialize(root);
+  },
+  bind() {
+    return runtime.bind();
+  },
+  disconnect() {
+    return runtime.disconnect();
+  }
+};
+
+/***/ },
+
+/***/ 280
+(module, __unused_webpack_exports, __webpack_require__) {
+
+const {
+  collectRevealTargets
+} = __webpack_require__(687);
+function createIntroAnimationsRuntime({
+  window: win = typeof window !== 'undefined' ? window : null,
+  document: doc = typeof document !== 'undefined' ? document : null,
+  collectTargets = collectRevealTargets,
+  createObserver = callback => new win.IntersectionObserver(callback, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -10% 0px'
+  })
+} = {}) {
+  const consumedTargets = new WeakSet();
+  let observer = null;
+  let isBound = false;
+  function hasEnabledBodyClass() {
+    return !!doc && !!doc.body && !!doc.body.classList && doc.body.classList.contains('has-intro-animations');
+  }
+  function prefersReducedMotion() {
+    return !!win && typeof win.matchMedia === 'function' && win.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+  function isInViewport(target) {
+    if (!target) {
+      return false;
+    }
+    if (typeof target.isInViewport === 'boolean') {
+      return target.isInViewport;
+    }
+    if (!win || typeof target.getBoundingClientRect !== 'function') {
+      return false;
+    }
+    const rect = target.getBoundingClientRect();
+    const viewportHeight = win.innerHeight || doc?.documentElement?.clientHeight || 0;
+    const viewportWidth = win.innerWidth || doc?.documentElement?.clientWidth || 0;
+    return rect.bottom > 0 && rect.top < viewportHeight && rect.right > 0 && rect.left < viewportWidth;
+  }
+  function markTargetBase(target) {
+    if (target && target.classList) {
+      target.classList.add('anima-intro-target');
+    }
+  }
+  function revealTarget(target) {
+    if (!target || !target.classList) {
+      return;
+    }
+    markTargetBase(target);
+    target.classList.remove('anima-intro-target--pending');
+    target.classList.add('anima-intro-target--revealed');
+    consumedTargets.add(target);
+    if (observer && typeof observer.unobserve === 'function') {
+      observer.unobserve(target);
+    }
+  }
+  function stageTarget(target) {
+    if (!target || consumedTargets.has(target)) {
+      return false;
+    }
+    markTargetBase(target);
+    target.classList.remove('anima-intro-target--revealed');
+    if (prefersReducedMotion()) {
+      revealTarget(target);
+      return false;
+    }
+    target.classList.add('anima-intro-target--pending');
+    return true;
+  }
+  function disconnect() {
+    if (observer && typeof observer.disconnect === 'function') {
+      observer.disconnect();
+    }
+    observer = null;
+  }
+  function ensureObserver() {
+    if (observer || prefersReducedMotion() || !hasEnabledBodyClass() || typeof createObserver !== 'function') {
+      return observer;
+    }
+    observer = createObserver((entries = []) => {
+      entries.forEach(entry => {
+        if (!entry || !entry.isIntersecting) {
+          return;
+        }
+        revealTarget(entry.target);
+      });
+    });
+    return observer;
+  }
+  function scheduleReveal(targets) {
+    if (!targets.length) {
+      return;
+    }
+    const runReveal = () => {
+      targets.forEach(revealTarget);
+    };
+    if (win && typeof win.requestAnimationFrame === 'function') {
+      win.requestAnimationFrame(runReveal);
+      return;
+    }
+    runReveal();
+  }
+  function initialize(root = doc) {
+    if (!hasEnabledBodyClass() || !root || typeof collectTargets !== 'function') {
+      return [];
+    }
+    disconnect();
+    const immediateTargets = [];
+    const targets = collectTargets(root);
+    targets.forEach(target => {
+      if (!stageTarget(target)) {
+        return;
+      }
+      if (isInViewport(target)) {
+        immediateTargets.push(target);
+        return;
+      }
+      const activeObserver = ensureObserver();
+      if (activeObserver && typeof activeObserver.observe === 'function') {
+        activeObserver.observe(target);
+      }
+    });
+    scheduleReveal(immediateTargets);
+    return targets;
+  }
+  function bind() {
+    if (isBound || !win || typeof win.addEventListener !== 'function') {
+      return;
+    }
+    win.addEventListener('anima:page-transition-complete', () => {
+      initialize(doc);
+    });
+    isBound = true;
+  }
+  return {
+    initialize,
+    bind,
+    disconnect,
+    revealTarget,
+    stageTarget,
+    prefersReducedMotion,
+    isInViewport
+  };
+}
+module.exports = {
+  createIntroAnimationsRuntime
+};
+
+/***/ },
+
+/***/ 687
+(module) {
+
+const REVEAL_ROOT_SELECTORS = ['.wp-block-cover', '.wp-block-group', '.wp-block-columns', '.wp-block-media-text', '.wp-block-gallery', '.wp-block-image', '.wp-block-quote', '.wp-block-pullquote', '.wp-block-buttons', '.wp-block-button', '.wp-block-query .wp-block-post', '.nb-supernova-item'];
+const FALLBACK_TARGET_SELECTORS = ['.wp-block-heading', '.wp-block-paragraph', '.wp-block-list', '.wp-block-table', '.wp-block-separator', '.wp-block-file', '.wp-block-embed', '.wp-block-post-title', '.wp-block-post-featured-image', '.wp-block-post-excerpt'];
+const EXCLUDED_TARGET_SELECTORS = ['header', 'footer', '[data-barba]', '.js-page-transition-border', '.js-slide-wipe-loader', '.admin-bar', '[aria-hidden="true"]', '[inert]'];
+function isExcludedTarget(node) {
+  if (!node || typeof node.matches !== 'function' || typeof node.closest !== 'function') {
+    return false;
+  }
+  return EXCLUDED_TARGET_SELECTORS.some(selector => node.matches(selector) || node.closest(selector));
+}
+function hasTrackedRevealAncestor(node, trackedNodes = []) {
+  if (!node) {
+    return false;
+  }
+  return trackedNodes.some(trackedNode => {
+    return trackedNode !== node && typeof trackedNode.contains === 'function' && trackedNode.contains(node);
+  });
+}
+function addTargetsForSelectors(root, selectors, trackedNodes) {
+  selectors.forEach(selector => {
+    const nodes = Array.from(root.querySelectorAll(selector));
+    nodes.forEach(node => {
+      if (!node || node.isConnected === false) {
+        return;
+      }
+      if (trackedNodes.includes(node) || isExcludedTarget(node) || hasTrackedRevealAncestor(node, trackedNodes)) {
+        return;
+      }
+      trackedNodes.push(node);
+    });
+  });
+}
+function collectRevealTargets(root) {
+  if (!root || typeof root.querySelectorAll !== 'function') {
+    return [];
+  }
+  const trackedNodes = [];
+  addTargetsForSelectors(root, REVEAL_ROOT_SELECTORS, trackedNodes);
+  addTargetsForSelectors(root, FALLBACK_TARGET_SELECTORS, trackedNodes);
+  return trackedNodes;
+}
+module.exports = {
+  REVEAL_ROOT_SELECTORS,
+  FALLBACK_TARGET_SELECTORS,
+  EXCLUDED_TARGET_SELECTORS,
+  isExcludedTarget,
+  hasTrackedRevealAncestor,
+  collectRevealTargets
+};
+
+/***/ },
+
 /***/ 233
 (module) {
 
@@ -1301,7 +1526,11 @@ function destroy() {
   isBound = false;
   blocks = [];
 }
+// EXTERNAL MODULE: ./src/js/components/intro-animations/index.js
+var intro_animations = __webpack_require__(688);
+var intro_animations_default = /*#__PURE__*/__webpack_require__.n(intro_animations);
 ;// ./src/js/components/app.js
+
 
 
 
@@ -1319,6 +1548,7 @@ class App {
     this.initializeImages();
     this.initializeCommentsArea();
     this.initializeReservationForm();
+    this.initializeIntroAnimations();
     this.initializePileParallax();
   }
   initializeImages() {
@@ -1368,6 +1598,10 @@ class App {
   initializePileParallax() {
     initialize();
     bind();
+  }
+  initializeIntroAnimations() {
+    intro_animations_default().initialize();
+    intro_animations_default().bind();
   }
   initializeCommentsArea() {
     const $commentsArea = external_jQuery_default()('.comments-area');

@@ -81,6 +81,46 @@ function anima_add_motion_section_to_style_manager_config( $config ) {
 					'default'         => '',
 					'active_callback' => 'anima_is_cycling_images_loading_style',
 				],
+				'sm_separator_motion_2' => [
+					'type'         => 'html',
+					'setting_type' => 'option',
+					'setting_id'   => 'sm_separator_motion_2',
+					'html'         => '',
+				],
+				'sm_intro_animations_intro' => [
+					'type'         => 'html',
+					'setting_type' => 'option',
+					'setting_id'   => 'sm_intro_animations_intro',
+					'html'         => '<div class="customize-control-title">' . esc_html__( 'Animations', '__theme_txtd' ) . '</div>' .
+						'<span class="description customize-control-description">' . esc_html__( 'Select an animation style to animate site elements as they appear on the page.', '__theme_txtd' ) . '</span>',
+				],
+				'sm_intro_animations_enable' => [
+					'type'         => 'sm_toggle',
+					'setting_type' => 'option',
+					'setting_id'   => 'sm_intro_animations_enable',
+					'label'        => esc_html__( 'Enable Intro Animations', '__theme_txtd' ),
+					'default'      => false,
+				],
+				'sm_intro_animations_style' => [
+					'type'         => 'radio_html',
+					'setting_type' => 'option',
+					'setting_id'   => 'sm_intro_animations_style',
+					'label'        => esc_html__( 'Style', '__theme_txtd' ),
+					'default'      => 'fade',
+					'choices'      => anima_get_intro_animation_style_choices(),
+				],
+				'sm_intro_animations_speed' => [
+					'type'         => 'sm_radio',
+					'setting_type' => 'option',
+					'setting_id'   => 'sm_intro_animations_speed',
+					'label'        => esc_html__( 'Speed', '__theme_txtd' ),
+					'default'      => 'medium',
+					'choices'      => [
+						'slow'   => esc_html__( 'Slow', '__theme_txtd' ),
+						'medium' => esc_html__( 'Medium', '__theme_txtd' ),
+						'fast'   => esc_html__( 'Fast', '__theme_txtd' ),
+					],
+				],
 			],
 		]
 	);
@@ -90,7 +130,7 @@ function anima_add_motion_section_to_style_manager_config( $config ) {
 
 function anima_reorganize_motion_customizer_controls( $sm_panel_config, $sm_section_config ) {
 
-	if ( empty( $sm_section_config['options']['sm_motion_intro'] ) || empty( $sm_section_config['options']['sm_separator_motion_1'] ) || empty( $sm_section_config['options']['sm_page_transitions_intro'] ) || empty( $sm_section_config['options']['sm_page_transitions_enable'] ) || empty( $sm_section_config['options']['sm_page_transition_style'] ) || empty( $sm_section_config['options']['sm_logo_loading_style'] ) || empty( $sm_section_config['options']['sm_transition_symbol'] ) ) {
+	if ( empty( $sm_section_config['options']['sm_motion_intro'] ) || empty( $sm_section_config['options']['sm_separator_motion_1'] ) || empty( $sm_section_config['options']['sm_page_transitions_intro'] ) || empty( $sm_section_config['options']['sm_page_transitions_enable'] ) || empty( $sm_section_config['options']['sm_page_transition_style'] ) || empty( $sm_section_config['options']['sm_logo_loading_style'] ) || empty( $sm_section_config['options']['sm_transition_symbol'] ) || empty( $sm_section_config['options']['sm_separator_motion_2'] ) || empty( $sm_section_config['options']['sm_intro_animations_intro'] ) || empty( $sm_section_config['options']['sm_intro_animations_enable'] ) || empty( $sm_section_config['options']['sm_intro_animations_style'] ) || empty( $sm_section_config['options']['sm_intro_animations_speed'] ) ) {
 		return $sm_panel_config;
 	}
 
@@ -107,6 +147,11 @@ function anima_reorganize_motion_customizer_controls( $sm_panel_config, $sm_sect
 			'sm_page_transition_style' => $sm_section_config['options']['sm_page_transition_style'],
 			'sm_logo_loading_style' => $sm_section_config['options']['sm_logo_loading_style'],
 			'sm_transition_symbol' => $sm_section_config['options']['sm_transition_symbol'],
+			'sm_separator_motion_2' => $sm_section_config['options']['sm_separator_motion_2'],
+			'sm_intro_animations_intro' => $sm_section_config['options']['sm_intro_animations_intro'],
+			'sm_intro_animations_enable' => $sm_section_config['options']['sm_intro_animations_enable'],
+			'sm_intro_animations_style' => $sm_section_config['options']['sm_intro_animations_style'],
+			'sm_intro_animations_speed' => $sm_section_config['options']['sm_intro_animations_speed'],
 		],
 	];
 
@@ -129,6 +174,11 @@ function anima_maybe_invalidate_style_manager_motion_cache() {
 	$page_transition_style = $motion_section['options']['sm_page_transition_style'] ?? [];
 	$logo_loading_style = $motion_section['options']['sm_logo_loading_style'] ?? [];
 	$transition_symbol = $motion_section['options']['sm_transition_symbol'] ?? [];
+	$intro_separator = $motion_section['options']['sm_separator_motion_2'] ?? [];
+	$intro_animations_intro = $motion_section['options']['sm_intro_animations_intro'] ?? [];
+	$intro_animations_enable = $motion_section['options']['sm_intro_animations_enable'] ?? [];
+	$intro_animations_style = $motion_section['options']['sm_intro_animations_style'] ?? [];
+	$intro_animations_speed = $motion_section['options']['sm_intro_animations_speed'] ?? [];
 
 	$has_motion_section = isset( $style_manager_sections['sm_motion_section'] );
 	$has_layout_section = isset( $theme_options_sections['layout_section'] );
@@ -148,6 +198,17 @@ function anima_maybe_invalidate_style_manager_motion_cache() {
 		&& ( $logo_loading_style['setting_id'] ?? '' ) === 'sm_logo_loading_style'
 		&& ( $transition_symbol['type'] ?? '' ) === 'text'
 		&& ( $transition_symbol['setting_id'] ?? '' ) === 'sm_transition_symbol'
+		&& array_key_exists( 'html', $intro_separator )
+		&& false !== strpos( (string) ( $intro_animations_intro['html'] ?? '' ), 'Animations' )
+		&& false !== strpos( (string) ( $intro_animations_intro['html'] ?? '' ), 'Select an animation style to animate site elements as they appear on the page.' )
+		&& ( $intro_animations_enable['type'] ?? '' ) === 'sm_toggle'
+		&& ( $intro_animations_enable['setting_type'] ?? '' ) === 'option'
+		&& ( $intro_animations_enable['setting_id'] ?? '' ) === 'sm_intro_animations_enable'
+		&& ( $intro_animations_enable['label'] ?? '' ) === 'Enable Intro Animations'
+		&& ( $intro_animations_style['type'] ?? '' ) === 'radio_html'
+		&& ( $intro_animations_style['setting_id'] ?? '' ) === 'sm_intro_animations_style'
+		&& ( $intro_animations_speed['type'] ?? '' ) === 'sm_radio'
+		&& ( $intro_animations_speed['setting_id'] ?? '' ) === 'sm_intro_animations_speed'
 	);
 
 	if ( $has_motion_section && ! $has_layout_section && $has_expected_motion_copy ) {
@@ -196,4 +257,56 @@ function anima_migrate_loading_transition_style_option() {
  */
 function anima_is_cycling_images_loading_style() {
 	return 'cycling_images' === get_option( 'sm_logo_loading_style', 'progress_bar' );
+}
+
+/**
+ * Build the intro-animation style choices for the Motion panel.
+ *
+ * @return array
+ */
+function anima_get_intro_animation_style_choices() {
+	return [
+		'fade'  => anima_get_intro_animation_choice_markup( 'fade', esc_html__( 'Fade', '__theme_txtd' ) ),
+		'scale' => anima_get_intro_animation_choice_markup( 'scale', esc_html__( 'Scale', '__theme_txtd' ) ),
+		'slide' => anima_get_intro_animation_choice_markup( 'slide', esc_html__( 'Slide', '__theme_txtd' ) ),
+		'clip'  => anima_get_intro_animation_choice_markup( 'clip', esc_html__( 'Clip', '__theme_txtd' ) ),
+		'flex'  => anima_get_intro_animation_choice_markup( 'flex', esc_html__( 'Flex', '__theme_txtd' ) ),
+	];
+}
+
+/**
+ * Build a single intro-animation choice row with icon and label.
+ *
+ * @param string $slug  Animation style slug.
+ * @param string $label Animation style label.
+ *
+ * @return string
+ */
+function anima_get_intro_animation_choice_markup( $slug, $label ) {
+	return sprintf(
+		'<div class="anima-motion-choice anima-motion-choice--%1$s"><span class="anima-motion-choice__icon" aria-hidden="true">%2$s</span><span class="anima-motion-choice__label">%3$s</span></div>',
+		esc_attr( $slug ),
+		anima_get_intro_animation_choice_icon_markup( $slug ),
+		esc_html( $label )
+	);
+}
+
+/**
+ * Build inline SVG icon markup for an intro-animation style.
+ *
+ * @param string $slug Animation style slug.
+ *
+ * @return string
+ */
+function anima_get_intro_animation_choice_icon_markup( $slug ) {
+	$stroke = 'currentColor';
+	$icons  = [
+		'fade'  => '<svg viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M3.5 10h13" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round"/><path d="M6.5 6.25h7" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" opacity=".45"/><path d="M6.5 13.75h7" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" opacity=".75"/></svg>',
+		'scale' => '<svg viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M5 8V5h3" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 5h3v3" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 12v3h-3" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 15H5v-3" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+		'slide' => '<svg viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M10 4.5v11" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round"/><path d="m6.75 7.75 3.25-3.25 3.25 3.25" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.5 15.5h11" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" opacity=".5"/></svg>',
+		'clip'  => '<svg viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M5.25 5.25h9.5v9.5h-9.5z" fill="none" stroke="' . $stroke . '" stroke-width="1.75"/><path d="M5.25 14.75 14.75 5.25" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round"/><path d="M5.25 8.5h4.25V5.25" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg>',
+		'flex'  => '<svg viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M6 6.25c1.1-1.1 2.3-1.75 4-1.75 2.35 0 4 1.35 4.75 3.25" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round"/><path d="m12.5 6 2.25 1.75-2.75.5" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 13.75C12.9 14.85 11.7 15.5 10 15.5c-2.35 0-4-1.35-4.75-3.25" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round"/><path d="m7.5 14 0-2.25-2.25 1.25" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+	];
+
+	return $icons[ $slug ] ?? '';
 }

@@ -1,0 +1,115 @@
+body.has-intro-animations {
+  --anima-intro-duration: 0.5s;
+  --anima-intro-distance: 36px;
+  --anima-intro-scale-start: 0.96;
+  --anima-intro-easing: cubic-bezier(0.22, 1, 0.36, 1);
+  --anima-intro-clip-radius: 18px;
+}
+
+body.has-intro-animations--slow {
+  --anima-intro-duration: 0.7s;
+  --anima-intro-distance: 44px;
+}
+
+body.has-intro-animations--medium {
+  --anima-intro-duration: 0.5s;
+  --anima-intro-distance: 36px;
+}
+
+body.has-intro-animations--fast {
+  --anima-intro-duration: 0.34s;
+  --anima-intro-distance: 28px;
+}
+
+@mixin intro-animation-media-target {
+  &.wp-block-cover,
+  &.wp-block-image,
+  &.wp-block-gallery,
+  &.wp-block-media-text,
+  &.wp-block-post-featured-image,
+  &.nb-supernova-item {
+    @content;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .anima-intro-target {
+    transition:
+      opacity var(--anima-intro-duration) var(--anima-intro-easing),
+      transform var(--anima-intro-duration) var(--anima-intro-easing),
+      clip-path calc(var(--anima-intro-duration) * 1.05) var(--anima-intro-easing);
+    will-change: opacity, transform, clip-path;
+    backface-visibility: hidden;
+  }
+
+  .anima-intro-target--pending {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .anima-intro-target--revealed {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    clip-path: inset(0 0 0 0 round var(--anima-intro-clip-radius));
+  }
+
+  body.has-intro-animations--fade {
+    .anima-intro-target--pending {
+      transform: none;
+    }
+  }
+
+  body.has-intro-animations--scale {
+    .anima-intro-target--pending {
+      transform: scale(var(--anima-intro-scale-start));
+      transform-origin: 50% 50%;
+    }
+  }
+
+  body.has-intro-animations--slide {
+    .anima-intro-target--pending {
+      transform: translate3d(0, var(--anima-intro-distance), 0);
+    }
+  }
+
+  body.has-intro-animations--clip {
+    .anima-intro-target--pending {
+      transform: translate3d(0, calc(var(--anima-intro-distance) * 0.35), 0);
+    }
+
+    .anima-intro-target--pending {
+      @include intro-animation-media-target {
+        transform: none;
+        clip-path: inset(0 0 100% 0 round var(--anima-intro-clip-radius));
+      }
+    }
+  }
+
+  body.has-intro-animations--flex {
+    .anima-intro-target--pending {
+      transform: translate3d(0, calc(var(--anima-intro-distance) * 0.7), 0) scale(0.985);
+      transform-origin: 50% 50%;
+    }
+
+    .anima-intro-target--pending {
+      @include intro-animation-media-target {
+        transform: translate3d(0, calc(var(--anima-intro-distance) * 0.3), 0);
+        clip-path: inset(8% 0 0 0 round var(--anima-intro-clip-radius));
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anima-intro-target,
+  .anima-intro-target--pending,
+  .anima-intro-target--revealed {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
+    will-change: auto !important;
+  }
+}
