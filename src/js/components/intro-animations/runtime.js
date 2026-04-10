@@ -3,7 +3,13 @@ const {
 } = require('./targeting.js');
 
 const REVEAL_ZONE_TOP_RATIO = 0.82;
-const MAX_STAGGER_STEPS = 5;
+const DELAY_WINDOW_BY_STYLE = {
+  clip: 1000,
+  fade: 600,
+  flex: 1000,
+  scale: 600,
+  slide: 600,
+};
 
 function getRevealObserverOptions() {
   return {
@@ -30,20 +36,63 @@ function createIntroAnimationsRuntime({
     return !!win && typeof win.matchMedia === 'function' && win.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
 
-  function getStaggerStep() {
+  function getActiveAnimationStyle() {
     if (!doc || !doc.body || !doc.body.classList) {
-      return 70;
+      return 'fade';
     }
 
-    if (doc.body.classList.contains('has-intro-animations--slow')) {
-      return 90;
+    const styles = Object.keys(DELAY_WINDOW_BY_STYLE);
+    const activeStyle = styles.find((style) => doc.body.classList.contains(`has-intro-animations--${style}`));
+
+    return activeStyle || 'fade';
+  }
+
+  function parseDelayWindow(value) {
+    if (typeof value !== 'string') {
+      return null;
     }
 
-    if (doc.body.classList.contains('has-intro-animations--fast')) {
-      return 50;
+    const normalizedValue = value.trim();
+
+    if (!normalizedValue) {
+      return null;
     }
 
-    return 70;
+    if (normalizedValue.endsWith('ms')) {
+      const numericValue = Number.parseFloat(normalizedValue.slice(0, -2));
+
+      return Number.isNaN(numericValue) ? null : numericValue;
+    }
+
+    if (normalizedValue.endsWith('s')) {
+      const numericValue = Number.parseFloat(normalizedValue.slice(0, -1));
+
+      return Number.isNaN(numericValue) ? null : numericValue * 1000;
+    }
+
+    return null;
+  }
+
+  function getDelayWindowMs() {
+    if (win && typeof win.getComputedStyle === 'function' && doc && doc.body) {
+      const delayWindow = parseDelayWindow(win.getComputedStyle(doc.body).getPropertyValue('--anima-intro-delay-window'));
+
+      if (delayWindow !== null) {
+        return delayWindow;
+      }
+    }
+
+    return DELAY_WINDOW_BY_STYLE[getActiveAnimationStyle()] || DELAY_WINDOW_BY_STYLE.fade;
+  }
+
+  function formatDelay(delay) {
+    const roundedDelay = Math.round(delay * 1000) / 1000;
+
+    if (Number.isInteger(roundedDelay)) {
+      return `${roundedDelay}ms`;
+    }
+
+    return `${roundedDelay}ms`;
   }
 
   function isInViewport(target) {
@@ -73,23 +122,22 @@ function createIntroAnimationsRuntime({
     }
   }
 
-  function applyRevealDelay(target, index = 0) {
+  function applyRevealDelay(target, index = 0, totalTargets = 1) {
     if (!target || !target.style || typeof target.style.setProperty !== 'function') {
       return;
     }
 
-    const delay = Math.min(index, MAX_STAGGER_STEPS) * getStaggerStep();
+    const delay = totalTargets > 0 ? (getDelayWindowMs() / totalTargets) * index : 0;
 
-    target.style.setProperty('--anima-intro-delay', `${delay}ms`);
+    target.style.setProperty('--anima-intro-delay', formatDelay(delay));
   }
 
-  function revealTarget(target, index = 0) {
+  function revealTarget(target) {
     if (!target || !target.classList) {
       return;
     }
 
     markTargetBase(target);
-    applyRevealDelay(target, index);
     target.classList.remove('anima-intro-target--pending');
     target.classList.add('anima-intro-target--revealed');
     consumedTargets.add(target);
@@ -167,8 +215,8 @@ function createIntroAnimationsRuntime({
   function revealTargets(targets = []) {
     const sortedTargets = sortBatchTargets(targets);
 
-    sortedTargets.forEach((target, index) => {
-      revealTarget(target, index);
+    sortedTargets.forEach((target) => {
+      revealTarget(target);
     });
   }
 
@@ -197,12 +245,15 @@ function createIntroAnimationsRuntime({
     disconnect();
 
     const immediateTargets = [];
+    const stagedTargets = [];
     const targets = collectTargets(root);
 
     targets.forEach((target) => {
       if (!stageTarget(target)) {
         return;
       }
+
+      stagedTargets.push(target);
 
       if (isInViewport(target)) {
         immediateTargets.push(target);
@@ -214,6 +265,10 @@ function createIntroAnimationsRuntime({
       if (activeObserver && typeof activeObserver.observe === 'function') {
         activeObserver.observe(target);
       }
+    });
+
+    stagedTargets.forEach((target, index) => {
+      applyRevealDelay(target, index, stagedTargets.length);
     });
 
     scheduleReveal(immediateTargets);

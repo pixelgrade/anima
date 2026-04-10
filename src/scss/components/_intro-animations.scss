@@ -1,24 +1,99 @@
 body.has-intro-animations {
-  --anima-intro-duration: 0.62s;
+  --anima-intro-duration: 0.90s;
+  --anima-intro-delay-window: 0.6s;
   --anima-intro-distance: 42px;
   --anima-intro-scale-start: 0.96;
-  --anima-intro-easing: cubic-bezier(0.22, 1, 0.36, 1);
+  --anima-intro-easing: cubic-bezier(0.19, 1, 0.22, 1);
   --anima-intro-clip-radius: 18px;
 }
 
 body.has-intro-animations--slow {
-  --anima-intro-duration: 0.82s;
   --anima-intro-distance: 52px;
 }
 
 body.has-intro-animations--medium {
-  --anima-intro-duration: 0.62s;
   --anima-intro-distance: 42px;
 }
 
 body.has-intro-animations--fast {
-  --anima-intro-duration: 0.44s;
   --anima-intro-distance: 32px;
+}
+
+body.has-intro-animations--fade {
+  --anima-intro-easing: linear;
+  --anima-intro-delay-window: 0.6s;
+}
+
+body.has-intro-animations--scale,
+body.has-intro-animations--slide {
+  --anima-intro-easing: cubic-bezier(0.19, 1, 0.22, 1);
+  --anima-intro-delay-window: 0.6s;
+}
+
+body.has-intro-animations--clip,
+body.has-intro-animations--flex {
+  --anima-intro-easing: cubic-bezier(0.19, 1, 0.22, 1);
+  --anima-intro-delay-window: 1.0s;
+}
+
+body.has-intro-animations--fade.has-intro-animations--slow {
+  --anima-intro-duration: 1.50s;
+}
+
+body.has-intro-animations--fade.has-intro-animations--medium {
+  --anima-intro-duration: 0.90s;
+}
+
+body.has-intro-animations--fade.has-intro-animations--fast {
+  --anima-intro-duration: 0.40s;
+}
+
+body.has-intro-animations--scale.has-intro-animations--slow {
+  --anima-intro-duration: 1.20s;
+}
+
+body.has-intro-animations--scale.has-intro-animations--medium {
+  --anima-intro-duration: 0.65s;
+}
+
+body.has-intro-animations--scale.has-intro-animations--fast {
+  --anima-intro-duration: 0.45s;
+}
+
+body.has-intro-animations--slide.has-intro-animations--slow {
+  --anima-intro-duration: 0.80s;
+}
+
+body.has-intro-animations--slide.has-intro-animations--medium {
+  --anima-intro-duration: 0.60s;
+}
+
+body.has-intro-animations--slide.has-intro-animations--fast {
+  --anima-intro-duration: 0.45s;
+}
+
+body.has-intro-animations--clip.has-intro-animations--slow {
+  --anima-intro-duration: 0.80s;
+}
+
+body.has-intro-animations--clip.has-intro-animations--medium {
+  --anima-intro-duration: 0.65s;
+}
+
+body.has-intro-animations--clip.has-intro-animations--fast {
+  --anima-intro-duration: 0.50s;
+}
+
+body.has-intro-animations--flex.has-intro-animations--slow {
+  --anima-intro-duration: 0.80s;
+}
+
+body.has-intro-animations--flex.has-intro-animations--medium {
+  --anima-intro-duration: 0.65s;
+}
+
+body.has-intro-animations--flex.has-intro-animations--fast {
+  --anima-intro-duration: 0.50s;
 }
 
 @mixin intro-animation-media-target {

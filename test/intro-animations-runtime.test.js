@@ -300,7 +300,7 @@ test('isInViewport only accepts targets once they reach the deeper reveal zone',
   assert.equal(runtime.isInViewport(target), true);
 });
 
-test('initialize assigns staggered reveal delays to batched targets', () => {
+test('initialize distributes fade delay across the full batch window', () => {
   const first = createTarget('first', true);
   const second = createTarget('second', true);
   const third = createTarget('third', true);
@@ -332,8 +332,46 @@ test('initialize assigns staggered reveal delays to batched targets', () => {
   win.flushAnimationFrames();
 
   assert.equal(first.style.getPropertyValue('--anima-intro-delay'), '0ms');
-  assert.equal(second.style.getPropertyValue('--anima-intro-delay'), '70ms');
-  assert.equal(third.style.getPropertyValue('--anima-intro-delay'), '140ms');
+  assert.equal(second.style.getPropertyValue('--anima-intro-delay'), '200ms');
+  assert.equal(third.style.getPropertyValue('--anima-intro-delay'), '400ms');
+});
+
+test('initialize distributes clip delay across the longer batch window', () => {
+  const first = createTarget('first', true);
+  const second = createTarget('second', true);
+  const third = createTarget('third', true);
+  const fourth = createTarget('fourth', true);
+  const win = createWindowStub();
+  const runtime = createIntroAnimationsRuntime({
+    window: win,
+    document: {
+      body: {
+        classList: {
+          contains(className) {
+            return ['has-intro-animations', 'has-intro-animations--medium', 'has-intro-animations--clip'].includes(className);
+          },
+        },
+      },
+    },
+    collectTargets() {
+      return [first, second, third, fourth];
+    },
+    createObserver() {
+      return {
+        observe() {},
+        unobserve() {},
+        disconnect() {},
+      };
+    },
+  });
+
+  runtime.initialize();
+  win.flushAnimationFrames();
+
+  assert.equal(first.style.getPropertyValue('--anima-intro-delay'), '0ms');
+  assert.equal(second.style.getPropertyValue('--anima-intro-delay'), '250ms');
+  assert.equal(third.style.getPropertyValue('--anima-intro-delay'), '500ms');
+  assert.equal(fourth.style.getPropertyValue('--anima-intro-delay'), '750ms');
 });
 
 test('default observer watches the deeper reveal band instead of threshold ladders', () => {
