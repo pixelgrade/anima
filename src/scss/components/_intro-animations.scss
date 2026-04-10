@@ -150,7 +150,8 @@ body.has-intro-animations--flex.has-intro-animations--fast {
 
   body.has-intro-animations--clip {
     .anima-intro-target--pending {
-      transform: translate3d(0, calc(var(--anima-intro-distance) * 0.35), 0);
+      transform: translate3d(0, calc(var(--anima-intro-distance) * 0.2), 0);
+      clip-path: inset(0 100% 0 0 round var(--anima-intro-clip-radius));
     }
 
     .anima-intro-target--pending {
@@ -163,8 +164,9 @@ body.has-intro-animations--flex.has-intro-animations--fast {
 
   body.has-intro-animations--flex {
     .anima-intro-target--pending {
-      transform: translate3d(0, calc(var(--anima-intro-distance) * 0.7), 0) scale(0.985);
+      transform: translate3d(0, calc(var(--anima-intro-distance) * 0.55), 0) scale(0.965);
       transform-origin: 50% 50%;
+      clip-path: inset(14% 0 0 0 round var(--anima-intro-clip-radius));
     }
 
     .anima-intro-target--pending {

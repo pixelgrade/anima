@@ -40,3 +40,17 @@ test('intro animation scss defines effect-specific duration, delay, and easing p
     /body\.has-intro-animations--flex\.has-intro-animations--fast\s*\{[\s\S]*?--anima-intro-duration:\s*0\.50s;/,
   );
 });
+
+test('clip and flex define distinct non-media pending states', () => {
+  const filePath = path.join(__dirname, '..', 'src', 'scss', 'components', '_intro-animations.scss');
+  const scss = fs.readFileSync(filePath, 'utf8');
+
+  assert.match(
+    scss,
+    /body\.has-intro-animations--clip\s*\{[\s\S]*?\.anima-intro-target--pending\s*\{[\s\S]*?transform:\s*translate3d\(0,\s*calc\(var\(--anima-intro-distance\)\s*\*\s*0\.2\),\s*0\);[\s\S]*?clip-path:\s*inset\(0\s+100%\s+0\s+0\s+round\s+var\(--anima-intro-clip-radius\)\);/,
+  );
+  assert.match(
+    scss,
+    /body\.has-intro-animations--flex\s*\{[\s\S]*?\.anima-intro-target--pending\s*\{[\s\S]*?transform:\s*translate3d\(0,\s*calc\(var\(--anima-intro-distance\)\s*\*\s*0\.55\),\s*0\)\s*scale\(0\.965\);[\s\S]*?clip-path:\s*inset\(14%\s+0\s+0\s+0\s+round\s+var\(--anima-intro-clip-radius\)\);/,
+  );
+});
