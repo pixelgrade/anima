@@ -3,17 +3,20 @@ const {
 } = require('./targeting.js');
 
 const REVEAL_ZONE_TOP_RATIO = 0.82;
-const REVEAL_ZONE_BOTTOM_RATIO = 0.12;
 const MAX_STAGGER_STEPS = 5;
+
+function getRevealObserverOptions() {
+  return {
+    threshold: 0,
+    rootMargin: `0px 0px -${Math.round((1 - REVEAL_ZONE_TOP_RATIO) * 100)}% 0px`,
+  };
+}
 
 function createIntroAnimationsRuntime({
   window: win = typeof window !== 'undefined' ? window : null,
   document: doc = typeof document !== 'undefined' ? document : null,
   collectTargets = collectRevealTargets,
-  createObserver = (callback) => new win.IntersectionObserver(callback, {
-    threshold: [0, 0.15, 0.3, 0.45, 0.6],
-    rootMargin: '0px',
-  }),
+  createObserver = (callback) => new win.IntersectionObserver(callback, getRevealObserverOptions()),
 } = {}) {
   const consumedTargets = new WeakSet();
   let observer = null;
@@ -60,9 +63,8 @@ function createIntroAnimationsRuntime({
     const viewportHeight = win.innerHeight || doc?.documentElement?.clientHeight || 0;
     const viewportWidth = win.innerWidth || doc?.documentElement?.clientWidth || 0;
     const revealTop = viewportHeight * REVEAL_ZONE_TOP_RATIO;
-    const revealBottom = viewportHeight * REVEAL_ZONE_BOTTOM_RATIO;
 
-    return rect.bottom >= revealBottom && rect.top <= revealTop && rect.right > 0 && rect.left < viewportWidth;
+    return rect.bottom > 0 && rect.top <= revealTop && rect.right > 0 && rect.left < viewportWidth;
   }
 
   function markTargetBase(target) {
@@ -130,7 +132,7 @@ function createIntroAnimationsRuntime({
 
     observer = createObserver((entries = []) => {
       const readyTargets = entries
-        .filter((entry) => entry && entry.isIntersecting && isInViewport(entry.target))
+        .filter((entry) => entry && entry.isIntersecting)
         .map((entry) => entry.target);
 
       revealTargets(readyTargets);
@@ -239,9 +241,11 @@ function createIntroAnimationsRuntime({
     stageTarget,
     prefersReducedMotion,
     isInViewport,
+    getRevealObserverOptions,
   };
 }
 
 module.exports = {
   createIntroAnimationsRuntime,
+  getRevealObserverOptions,
 };

@@ -60,16 +60,18 @@ const {
   collectRevealTargets
 } = __webpack_require__(687);
 const REVEAL_ZONE_TOP_RATIO = 0.82;
-const REVEAL_ZONE_BOTTOM_RATIO = 0.12;
 const MAX_STAGGER_STEPS = 5;
+function getRevealObserverOptions() {
+  return {
+    threshold: 0,
+    rootMargin: `0px 0px -${Math.round((1 - REVEAL_ZONE_TOP_RATIO) * 100)}% 0px`
+  };
+}
 function createIntroAnimationsRuntime({
   window: win = typeof window !== 'undefined' ? window : null,
   document: doc = typeof document !== 'undefined' ? document : null,
   collectTargets = collectRevealTargets,
-  createObserver = callback => new win.IntersectionObserver(callback, {
-    threshold: [0, 0.15, 0.3, 0.45, 0.6],
-    rootMargin: '0px'
-  })
+  createObserver = callback => new win.IntersectionObserver(callback, getRevealObserverOptions())
 } = {}) {
   const consumedTargets = new WeakSet();
   let observer = null;
@@ -106,8 +108,7 @@ function createIntroAnimationsRuntime({
     const viewportHeight = win.innerHeight || doc?.documentElement?.clientHeight || 0;
     const viewportWidth = win.innerWidth || doc?.documentElement?.clientWidth || 0;
     const revealTop = viewportHeight * REVEAL_ZONE_TOP_RATIO;
-    const revealBottom = viewportHeight * REVEAL_ZONE_BOTTOM_RATIO;
-    return rect.bottom >= revealBottom && rect.top <= revealTop && rect.right > 0 && rect.left < viewportWidth;
+    return rect.bottom > 0 && rect.top <= revealTop && rect.right > 0 && rect.left < viewportWidth;
   }
   function markTargetBase(target) {
     if (target && target.classList) {
@@ -158,7 +159,7 @@ function createIntroAnimationsRuntime({
       return observer;
     }
     observer = createObserver((entries = []) => {
-      const readyTargets = entries.filter(entry => entry && entry.isIntersecting && isInViewport(entry.target)).map(entry => entry.target);
+      const readyTargets = entries.filter(entry => entry && entry.isIntersecting).map(entry => entry.target);
       revealTargets(readyTargets);
     });
     return observer;
@@ -236,21 +237,27 @@ function createIntroAnimationsRuntime({
     revealTargets,
     stageTarget,
     prefersReducedMotion,
-    isInViewport
+    isInViewport,
+    getRevealObserverOptions
   };
 }
 module.exports = {
-  createIntroAnimationsRuntime
+  createIntroAnimationsRuntime,
+  getRevealObserverOptions
 };
 
 /***/ },
 
 /***/ 687
-(module) {
+(module, __unused_webpack_exports, __webpack_require__) {
 
+const {
+  NEW_HERO_SELECTOR,
+  OLD_HERO_SELECTOR
+} = __webpack_require__(771);
 const REVEAL_ROOT_SELECTORS = ['.wp-block-cover', '.wp-block-group', '.wp-block-columns', '.wp-block-media-text', '.wp-block-gallery', '.wp-block-image', '.wp-block-quote', '.wp-block-pullquote', '.wp-block-buttons', '.wp-block-button', '.wp-block-query .wp-block-post', '.nb-supernova-item'];
 const FALLBACK_TARGET_SELECTORS = ['.wp-block-heading', '.wp-block-paragraph', '.wp-block-list', '.wp-block-table', '.wp-block-separator', '.wp-block-file', '.wp-block-embed', '.wp-block-post-title', '.wp-block-post-featured-image', '.wp-block-post-excerpt'];
-const EXCLUDED_TARGET_SELECTORS = ['header', 'footer', '.js-page-transition-border', '.js-slide-wipe-loader', '#wpadminbar', '[aria-hidden="true"]', '[inert]'];
+const EXCLUDED_TARGET_SELECTORS = ['header', 'footer', '.js-page-transition-border', '.js-slide-wipe-loader', NEW_HERO_SELECTOR, OLD_HERO_SELECTOR, '.nb-supernova-item--scrolling-effect-parallax', '#wpadminbar', '[aria-hidden="true"]', '[inert]'];
 function isExcludedTarget(node) {
   if (!node || typeof node.matches !== 'function' || typeof node.closest !== 'function') {
     return false;

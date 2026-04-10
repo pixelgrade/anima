@@ -260,7 +260,7 @@ test('bind registers a single page-transition listener and re-runs initialize on
   assert.equal(collectCalls, 1);
 });
 
-test('observer waits until a target reaches the deeper reveal zone', () => {
+test('isInViewport only accepts targets once they reach the deeper reveal zone', () => {
   const target = createTarget('late-card', null, {
     top: 860,
     bottom: 1100,
@@ -268,7 +268,6 @@ test('observer waits until a target reaches the deeper reveal zone', () => {
     right: 800,
   });
   const win = createWindowStub();
-  let observerCallback = null;
   const runtime = createIntroAnimationsRuntime({
     window: win,
     document: {
@@ -287,27 +286,9 @@ test('observer waits until a target reaches the deeper reveal zone', () => {
     collectTargets() {
       return [target];
     },
-    createObserver(callback) {
-      observerCallback = callback;
-
-      return {
-        observe() {},
-        unobserve() {},
-        disconnect() {},
-      };
-    },
   });
 
-  runtime.initialize();
-
-  observerCallback([
-    {
-      isIntersecting: true,
-      target,
-    },
-  ]);
-
-  assert.equal(target.classList.contains('anima-intro-target--revealed'), false);
+  assert.equal(runtime.isInViewport(target), false);
 
   target.getBoundingClientRect = () => ({
     top: 780,
@@ -316,14 +297,7 @@ test('observer waits until a target reaches the deeper reveal zone', () => {
     right: 800,
   });
 
-  observerCallback([
-    {
-      isIntersecting: true,
-      target,
-    },
-  ]);
-
-  assert.equal(target.classList.contains('anima-intro-target--revealed'), true);
+  assert.equal(runtime.isInViewport(target), true);
 });
 
 test('initialize assigns staggered reveal delays to batched targets', () => {
@@ -360,4 +334,45 @@ test('initialize assigns staggered reveal delays to batched targets', () => {
   assert.equal(first.style.getPropertyValue('--anima-intro-delay'), '0ms');
   assert.equal(second.style.getPropertyValue('--anima-intro-delay'), '70ms');
   assert.equal(third.style.getPropertyValue('--anima-intro-delay'), '140ms');
+});
+
+test('default observer watches the deeper reveal band instead of threshold ladders', () => {
+  const target = createTarget('band-target', false);
+  const win = createWindowStub();
+  let capturedOptions = null;
+  function IntersectionObserverStub(callback, options) {
+    capturedOptions = options;
+
+    return {
+      callback,
+      observe() {},
+      unobserve() {},
+      disconnect() {},
+    };
+  }
+  const runtime = createIntroAnimationsRuntime({
+    window: {
+      ...win,
+      IntersectionObserver: IntersectionObserverStub,
+    },
+    document: {
+      body: {
+        classList: {
+          contains(className) {
+            return className === 'has-intro-animations';
+          },
+        },
+      },
+    },
+    collectTargets() {
+      return [target];
+    },
+  });
+
+  runtime.initialize();
+
+  assert.deepEqual(capturedOptions, {
+    threshold: 0,
+    rootMargin: '0px 0px -18% 0px',
+  });
 });

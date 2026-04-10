@@ -145,3 +145,17 @@ test('collectRevealTargets does not exclude valid targets when body has the admi
 
   assert.deepEqual(targets.map((node) => node.name), ['group']);
 });
+
+test('collectRevealTargets skips parallax hero surfaces and their descendants', () => {
+  const heroWrapper = createNode('hero-wrapper', ['.nb-supernova--card-layout-stacked.nb-supernova--1-columns.nb-supernova--align-full']);
+  const heroSurface = createNode('hero-surface', ['.nb-supernova-item', '.nb-supernova-item--scrolling-effect-parallax'], heroWrapper);
+  const heroButton = createNode('hero-button', ['.wp-block-button'], heroSurface);
+  const root = createRoot({
+    '.nb-supernova-item': [heroSurface],
+    '.wp-block-button': [heroButton],
+  });
+
+  const targets = collectRevealTargets(root);
+
+  assert.deepEqual(targets, []);
+});

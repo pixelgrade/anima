@@ -1,3 +1,8 @@
+const {
+  NEW_HERO_SELECTOR,
+  OLD_HERO_SELECTOR,
+} = require('../hero-init-filter.js');
+
 const REVEAL_ROOT_SELECTORS = [
   '.wp-block-cover',
   '.wp-block-group',
@@ -31,6 +36,9 @@ const EXCLUDED_TARGET_SELECTORS = [
   'footer',
   '.js-page-transition-border',
   '.js-slide-wipe-loader',
+  NEW_HERO_SELECTOR,
+  OLD_HERO_SELECTOR,
+  '.nb-supernova-item--scrolling-effect-parallax',
   '#wpadminbar',
   '[aria-hidden="true"]',
   '[inert]',
