@@ -9,6 +9,7 @@ import CommentsArea from './commentsArea';
 import Navbar from './navbar';
 import SearchOverlay from './search-overlay';
 import * as PileParallax from './pile-parallax';
+import IntroAnimations from './intro-animations';
 
 export default class App {
 
@@ -21,6 +22,7 @@ export default class App {
     this.initializeImages();
     this.initializeCommentsArea();
     this.initializeReservationForm();
+    this.initializeIntroAnimations();
     this.initializePileParallax();
   }
 
@@ -78,6 +80,11 @@ export default class App {
   initializePileParallax() {
     PileParallax.initialize();
     PileParallax.bind();
+  }
+
+  initializeIntroAnimations() {
+    IntroAnimations.initialize();
+    IntroAnimations.bind();
   }
 
   initializeCommentsArea() {
