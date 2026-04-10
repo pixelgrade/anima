@@ -24,11 +24,33 @@ function createClassList(initialClasses = []) {
   };
 }
 
-function createTarget(name, isInViewport = false) {
+function createStyleStub() {
+  const properties = new Map();
+
+  return {
+    setProperty(name, value) {
+      properties.set(name, value);
+    },
+    getPropertyValue(name) {
+      return properties.get(name) || '';
+    },
+  };
+}
+
+function createTarget(name, isInViewport = undefined, rect = null) {
   return {
     name,
     isInViewport,
     classList: createClassList(),
+    style: createStyleStub(),
+    getBoundingClientRect() {
+      return rect || {
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+      };
+    },
   };
 }
 
@@ -39,6 +61,8 @@ function createWindowStub() {
   return {
     listeners,
     animationFrameQueue,
+    innerHeight: 1000,
+    innerWidth: 1200,
     addEventListener(type, listener) {
       if (!listeners.has(type)) {
         listeners.set(type, []);
@@ -147,6 +171,8 @@ test('initialize observes offscreen targets until they intersect', () => {
   assert.equal(target.classList.contains('anima-intro-target--pending'), true);
   assert.equal(target.classList.contains('anima-intro-target--revealed'), false);
 
+  target.isInViewport = true;
+
   observerCallback([
     {
       isIntersecting: true,
@@ -232,4 +258,106 @@ test('bind registers a single page-transition listener and re-runs initialize on
   win.dispatchEvent({type: 'anima:page-transition-complete'});
 
   assert.equal(collectCalls, 1);
+});
+
+test('observer waits until a target reaches the deeper reveal zone', () => {
+  const target = createTarget('late-card', null, {
+    top: 860,
+    bottom: 1100,
+    left: 0,
+    right: 800,
+  });
+  const win = createWindowStub();
+  let observerCallback = null;
+  const runtime = createIntroAnimationsRuntime({
+    window: win,
+    document: {
+      body: {
+        classList: {
+          contains(className) {
+            return className === 'has-intro-animations';
+          },
+        },
+      },
+      documentElement: {
+        clientHeight: 1000,
+        clientWidth: 1200,
+      },
+    },
+    collectTargets() {
+      return [target];
+    },
+    createObserver(callback) {
+      observerCallback = callback;
+
+      return {
+        observe() {},
+        unobserve() {},
+        disconnect() {},
+      };
+    },
+  });
+
+  runtime.initialize();
+
+  observerCallback([
+    {
+      isIntersecting: true,
+      target,
+    },
+  ]);
+
+  assert.equal(target.classList.contains('anima-intro-target--revealed'), false);
+
+  target.getBoundingClientRect = () => ({
+    top: 780,
+    bottom: 1020,
+    left: 0,
+    right: 800,
+  });
+
+  observerCallback([
+    {
+      isIntersecting: true,
+      target,
+    },
+  ]);
+
+  assert.equal(target.classList.contains('anima-intro-target--revealed'), true);
+});
+
+test('initialize assigns staggered reveal delays to batched targets', () => {
+  const first = createTarget('first', true);
+  const second = createTarget('second', true);
+  const third = createTarget('third', true);
+  const win = createWindowStub();
+  const runtime = createIntroAnimationsRuntime({
+    window: win,
+    document: {
+      body: {
+        classList: {
+          contains(className) {
+            return ['has-intro-animations', 'has-intro-animations--medium'].includes(className);
+          },
+        },
+      },
+    },
+    collectTargets() {
+      return [first, second, third];
+    },
+    createObserver() {
+      return {
+        observe() {},
+        unobserve() {},
+        disconnect() {},
+      };
+    },
+  });
+
+  runtime.initialize();
+  win.flushAnimationFrames();
+
+  assert.equal(first.style.getPropertyValue('--anima-intro-delay'), '0ms');
+  assert.equal(second.style.getPropertyValue('--anima-intro-delay'), '70ms');
+  assert.equal(third.style.getPropertyValue('--anima-intro-delay'), '140ms');
 });

@@ -1,24 +1,24 @@
 body.has-intro-animations {
-  --anima-intro-duration: 0.5s;
-  --anima-intro-distance: 36px;
+  --anima-intro-duration: 0.62s;
+  --anima-intro-distance: 42px;
   --anima-intro-scale-start: 0.96;
   --anima-intro-easing: cubic-bezier(0.22, 1, 0.36, 1);
   --anima-intro-clip-radius: 18px;
 }
 
 body.has-intro-animations--slow {
-  --anima-intro-duration: 0.7s;
-  --anima-intro-distance: 44px;
+  --anima-intro-duration: 0.82s;
+  --anima-intro-distance: 52px;
 }
 
 body.has-intro-animations--medium {
-  --anima-intro-duration: 0.5s;
-  --anima-intro-distance: 36px;
+  --anima-intro-duration: 0.62s;
+  --anima-intro-distance: 42px;
 }
 
 body.has-intro-animations--fast {
-  --anima-intro-duration: 0.34s;
-  --anima-intro-distance: 28px;
+  --anima-intro-duration: 0.44s;
+  --anima-intro-distance: 32px;
 }
 
 @mixin intro-animation-media-target {
@@ -35,9 +35,9 @@ body.has-intro-animations--fast {
 @media (prefers-reduced-motion: no-preference) {
   .anima-intro-target {
     transition:
-      opacity var(--anima-intro-duration) var(--anima-intro-easing),
-      transform var(--anima-intro-duration) var(--anima-intro-easing),
-      clip-path calc(var(--anima-intro-duration) * 1.05) var(--anima-intro-easing);
+      opacity var(--anima-intro-duration) var(--anima-intro-easing) var(--anima-intro-delay, 0ms),
+      transform var(--anima-intro-duration) var(--anima-intro-easing) var(--anima-intro-delay, 0ms),
+      clip-path calc(var(--anima-intro-duration) * 1.05) var(--anima-intro-easing) var(--anima-intro-delay, 0ms);
     will-change: opacity, transform, clip-path;
     backface-visibility: hidden;
   }

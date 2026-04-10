@@ -59,13 +59,16 @@ module.exports = {
 const {
   collectRevealTargets
 } = __webpack_require__(687);
+const REVEAL_ZONE_TOP_RATIO = 0.82;
+const REVEAL_ZONE_BOTTOM_RATIO = 0.12;
+const MAX_STAGGER_STEPS = 5;
 function createIntroAnimationsRuntime({
   window: win = typeof window !== 'undefined' ? window : null,
   document: doc = typeof document !== 'undefined' ? document : null,
   collectTargets = collectRevealTargets,
   createObserver = callback => new win.IntersectionObserver(callback, {
-    threshold: 0.15,
-    rootMargin: '0px 0px -10% 0px'
+    threshold: [0, 0.15, 0.3, 0.45, 0.6],
+    rootMargin: '0px'
   })
 } = {}) {
   const consumedTargets = new WeakSet();
@@ -76,6 +79,18 @@ function createIntroAnimationsRuntime({
   }
   function prefersReducedMotion() {
     return !!win && typeof win.matchMedia === 'function' && win.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+  function getStaggerStep() {
+    if (!doc || !doc.body || !doc.body.classList) {
+      return 70;
+    }
+    if (doc.body.classList.contains('has-intro-animations--slow')) {
+      return 90;
+    }
+    if (doc.body.classList.contains('has-intro-animations--fast')) {
+      return 50;
+    }
+    return 70;
   }
   function isInViewport(target) {
     if (!target) {
@@ -90,18 +105,28 @@ function createIntroAnimationsRuntime({
     const rect = target.getBoundingClientRect();
     const viewportHeight = win.innerHeight || doc?.documentElement?.clientHeight || 0;
     const viewportWidth = win.innerWidth || doc?.documentElement?.clientWidth || 0;
-    return rect.bottom > 0 && rect.top < viewportHeight && rect.right > 0 && rect.left < viewportWidth;
+    const revealTop = viewportHeight * REVEAL_ZONE_TOP_RATIO;
+    const revealBottom = viewportHeight * REVEAL_ZONE_BOTTOM_RATIO;
+    return rect.bottom >= revealBottom && rect.top <= revealTop && rect.right > 0 && rect.left < viewportWidth;
   }
   function markTargetBase(target) {
     if (target && target.classList) {
       target.classList.add('anima-intro-target');
     }
   }
-  function revealTarget(target) {
+  function applyRevealDelay(target, index = 0) {
+    if (!target || !target.style || typeof target.style.setProperty !== 'function') {
+      return;
+    }
+    const delay = Math.min(index, MAX_STAGGER_STEPS) * getStaggerStep();
+    target.style.setProperty('--anima-intro-delay', `${delay}ms`);
+  }
+  function revealTarget(target, index = 0) {
     if (!target || !target.classList) {
       return;
     }
     markTargetBase(target);
+    applyRevealDelay(target, index);
     target.classList.remove('anima-intro-target--pending');
     target.classList.add('anima-intro-target--revealed');
     consumedTargets.add(target);
@@ -133,21 +158,37 @@ function createIntroAnimationsRuntime({
       return observer;
     }
     observer = createObserver((entries = []) => {
-      entries.forEach(entry => {
-        if (!entry || !entry.isIntersecting) {
-          return;
-        }
-        revealTarget(entry.target);
-      });
+      const readyTargets = entries.filter(entry => entry && entry.isIntersecting && isInViewport(entry.target)).map(entry => entry.target);
+      revealTargets(readyTargets);
     });
     return observer;
+  }
+  function sortBatchTargets(targets = []) {
+    return [...targets].sort((firstTarget, secondTarget) => {
+      if (!firstTarget || !secondTarget || typeof firstTarget.getBoundingClientRect !== 'function' || typeof secondTarget.getBoundingClientRect !== 'function') {
+        return 0;
+      }
+      const firstRect = firstTarget.getBoundingClientRect();
+      const secondRect = secondTarget.getBoundingClientRect();
+      const verticalDelta = firstRect.top - secondRect.top;
+      if (Math.abs(verticalDelta) > 24) {
+        return verticalDelta;
+      }
+      return firstRect.left - secondRect.left;
+    });
+  }
+  function revealTargets(targets = []) {
+    const sortedTargets = sortBatchTargets(targets);
+    sortedTargets.forEach((target, index) => {
+      revealTarget(target, index);
+    });
   }
   function scheduleReveal(targets) {
     if (!targets.length) {
       return;
     }
     const runReveal = () => {
-      targets.forEach(revealTarget);
+      revealTargets(targets);
     };
     if (win && typeof win.requestAnimationFrame === 'function') {
       win.requestAnimationFrame(runReveal);
@@ -192,6 +233,7 @@ function createIntroAnimationsRuntime({
     bind,
     disconnect,
     revealTarget,
+    revealTargets,
     stageTarget,
     prefersReducedMotion,
     isInViewport
