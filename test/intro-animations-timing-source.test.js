@@ -54,3 +54,16 @@ test('clip and flex define distinct non-media pending states', () => {
     /body\.has-intro-animations--flex\s*\{[\s\S]*?\.anima-intro-target--pending\s*\{[\s\S]*?transform:\s*translate3d\(0,\s*calc\(var\(--anima-intro-distance\)\s*\*\s*0\.55\),\s*0\)\s*scale\(0\.965\);[\s\S]*?clip-path:\s*inset\(14%\s+0\s+0\s+0\s+round\s+var\(--anima-intro-clip-radius\)\);/,
   );
 });
+
+test('clip excludes supernova cards from the media-only pending path', () => {
+  const filePath = path.join(__dirname, '..', 'src', 'scss', 'components', '_intro-animations.scss');
+  const scss = fs.readFileSync(filePath, 'utf8');
+  const clipMixinMatch = scss.match(/@mixin intro-animation-clip-media-target\s*\{[\s\S]*?\n\}/);
+
+  assert.ok(clipMixinMatch);
+  assert.match(
+    clipMixinMatch[0],
+    /@mixin intro-animation-clip-media-target\s*\{[\s\S]*?&\.wp-block-cover,[\s\S]*?&\.wp-block-post-featured-image\s*\{/,
+  );
+  assert.equal(clipMixinMatch[0].includes('&.nb-supernova-item'), false);
+});

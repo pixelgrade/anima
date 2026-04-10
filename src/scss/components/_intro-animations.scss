@@ -96,7 +96,17 @@ body.has-intro-animations--flex.has-intro-animations--fast {
   --anima-intro-duration: 0.50s;
 }
 
-@mixin intro-animation-media-target {
+@mixin intro-animation-clip-media-target {
+  &.wp-block-cover,
+  &.wp-block-image,
+  &.wp-block-gallery,
+  &.wp-block-media-text,
+  &.wp-block-post-featured-image {
+    @content;
+  }
+}
+
+@mixin intro-animation-flex-media-target {
   &.wp-block-cover,
   &.wp-block-image,
   &.wp-block-gallery,
@@ -155,7 +165,7 @@ body.has-intro-animations--flex.has-intro-animations--fast {
     }
 
     .anima-intro-target--pending {
-      @include intro-animation-media-target {
+      @include intro-animation-clip-media-target {
         transform: none;
         clip-path: inset(0 0 100% 0 round var(--anima-intro-clip-radius));
       }
@@ -170,7 +180,7 @@ body.has-intro-animations--flex.has-intro-animations--fast {
     }
 
     .anima-intro-target--pending {
-      @include intro-animation-media-target {
+      @include intro-animation-flex-media-target {
         transform: translate3d(0, calc(var(--anima-intro-distance) * 0.3), 0);
         clip-path: inset(8% 0 0 0 round var(--anima-intro-clip-radius));
       }
