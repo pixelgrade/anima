@@ -121,3 +121,27 @@ test('collectRevealTargets collapses duplicate nested candidates to the outermos
 
   assert.deepEqual(targets.map((node) => node.name), ['columns']);
 });
+
+test('collectRevealTargets does not exclude valid targets inside Barba content containers', () => {
+  const barbaContainer = createNode('barba-container', ['[data-barba="container"]']);
+  const group = createNode('group', ['.wp-block-group'], barbaContainer);
+  const root = createRoot({
+    '.wp-block-group': [group],
+  });
+
+  const targets = collectRevealTargets(root);
+
+  assert.deepEqual(targets.map((node) => node.name), ['group']);
+});
+
+test('collectRevealTargets does not exclude valid targets when body has the admin-bar class', () => {
+  const body = createNode('body', ['body', '.admin-bar']);
+  const group = createNode('group', ['.wp-block-group'], body);
+  const root = createRoot({
+    '.wp-block-group': [group],
+  });
+
+  const targets = collectRevealTargets(root);
+
+  assert.deepEqual(targets.map((node) => node.name), ['group']);
+});

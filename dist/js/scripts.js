@@ -199,7 +199,7 @@ module.exports = {
 
 const REVEAL_ROOT_SELECTORS = ['.wp-block-cover', '.wp-block-group', '.wp-block-columns', '.wp-block-media-text', '.wp-block-gallery', '.wp-block-image', '.wp-block-quote', '.wp-block-pullquote', '.wp-block-buttons', '.wp-block-button', '.wp-block-query .wp-block-post', '.nb-supernova-item'];
 const FALLBACK_TARGET_SELECTORS = ['.wp-block-heading', '.wp-block-paragraph', '.wp-block-list', '.wp-block-table', '.wp-block-separator', '.wp-block-file', '.wp-block-embed', '.wp-block-post-title', '.wp-block-post-featured-image', '.wp-block-post-excerpt'];
-const EXCLUDED_TARGET_SELECTORS = ['header', 'footer', '[data-barba]', '.js-page-transition-border', '.js-slide-wipe-loader', '.admin-bar', '[aria-hidden="true"]', '[inert]'];
+const EXCLUDED_TARGET_SELECTORS = ['header', 'footer', '.js-page-transition-border', '.js-slide-wipe-loader', '#wpadminbar', '[aria-hidden="true"]', '[inert]'];
 function isExcludedTarget(node) {
   if (!node || typeof node.matches !== 'function' || typeof node.closest !== 'function') {
     return false;

@@ -29,10 +29,9 @@ const FALLBACK_TARGET_SELECTORS = [
 const EXCLUDED_TARGET_SELECTORS = [
   'header',
   'footer',
-  '[data-barba]',
   '.js-page-transition-border',
   '.js-slide-wipe-loader',
-  '.admin-bar',
+  '#wpadminbar',
   '[aria-hidden="true"]',
   '[inert]',
 ];
