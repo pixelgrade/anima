@@ -219,7 +219,9 @@ function createIntroAnimationsRuntime({
       revealTargets(targets);
     };
     if (win && typeof win.requestAnimationFrame === 'function') {
-      win.requestAnimationFrame(runReveal);
+      win.requestAnimationFrame(() => {
+        win.requestAnimationFrame(runReveal);
+      });
       return;
     }
     runReveal();

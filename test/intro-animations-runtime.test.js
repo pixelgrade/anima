@@ -89,7 +89,7 @@ function createWindowStub() {
   };
 }
 
-test('initialize stages in-viewport targets and reveals them on the next animation frame', () => {
+test('initialize stages in-viewport targets for one frame before revealing them', () => {
   const target = createTarget('hero', true);
   const win = createWindowStub();
   const observerEntries = [];
@@ -122,8 +122,17 @@ test('initialize stages in-viewport targets and reveals them on the next animati
 
   assert.equal(target.classList.contains('anima-intro-target--pending'), true);
   assert.equal(target.classList.contains('anima-intro-target--revealed'), false);
+  assert.equal(win.animationFrameQueue.length, 1);
 
-  win.flushAnimationFrames();
+  const firstFrame = win.animationFrameQueue.shift();
+  firstFrame();
+
+  assert.equal(target.classList.contains('anima-intro-target--pending'), true);
+  assert.equal(target.classList.contains('anima-intro-target--revealed'), false);
+  assert.equal(win.animationFrameQueue.length, 1);
+
+  const secondFrame = win.animationFrameQueue.shift();
+  secondFrame();
 
   assert.equal(target.classList.contains('anima-intro-target--pending'), false);
   assert.equal(target.classList.contains('anima-intro-target--revealed'), true);
