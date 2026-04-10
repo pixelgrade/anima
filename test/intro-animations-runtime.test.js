@@ -374,6 +374,94 @@ test('initialize distributes clip delay across the longer batch window', () => {
   assert.equal(fourth.style.getPropertyValue('--anima-intro-delay'), '750ms');
 });
 
+test('separate reveal batches get independent fade delay windows', () => {
+  const first = createTarget('first', true, {
+    top: 80,
+    bottom: 180,
+    left: 0,
+    right: 300,
+  });
+  const second = createTarget('second', true, {
+    top: 120,
+    bottom: 220,
+    left: 320,
+    right: 620,
+  });
+  const third = createTarget('third', false, {
+    top: 900,
+    bottom: 1100,
+    left: 0,
+    right: 300,
+  });
+  const fourth = createTarget('fourth', false, {
+    top: 920,
+    bottom: 1120,
+    left: 320,
+    right: 620,
+  });
+  const fifth = createTarget('fifth', false, {
+    top: 940,
+    bottom: 1140,
+    left: 640,
+    right: 940,
+  });
+  const win = createWindowStub();
+  let observerCallback = null;
+  const runtime = createIntroAnimationsRuntime({
+    window: win,
+    document: {
+      body: {
+        classList: {
+          contains(className) {
+            return ['has-intro-animations', 'has-intro-animations--medium', 'has-intro-animations--fade'].includes(className);
+          },
+        },
+      },
+      documentElement: {
+        clientHeight: 1000,
+        clientWidth: 1200,
+      },
+    },
+    collectTargets() {
+      return [first, second, third, fourth, fifth];
+    },
+    createObserver(callback) {
+      observerCallback = callback;
+
+      return {
+        observe() {},
+        unobserve() {},
+        disconnect() {},
+      };
+    },
+  });
+
+  runtime.initialize();
+  win.flushAnimationFrames();
+
+  assert.equal(first.style.getPropertyValue('--anima-intro-delay'), '0ms');
+  assert.equal(second.style.getPropertyValue('--anima-intro-delay'), '300ms');
+
+  observerCallback([
+    {
+      isIntersecting: true,
+      target: third,
+    },
+    {
+      isIntersecting: true,
+      target: fourth,
+    },
+    {
+      isIntersecting: true,
+      target: fifth,
+    },
+  ]);
+
+  assert.equal(third.style.getPropertyValue('--anima-intro-delay'), '0ms');
+  assert.equal(fourth.style.getPropertyValue('--anima-intro-delay'), '200ms');
+  assert.equal(fifth.style.getPropertyValue('--anima-intro-delay'), '400ms');
+});
+
 test('default observer watches the deeper reveal band instead of threshold ladders', () => {
   const target = createTarget('band-target', false);
   const win = createWindowStub();

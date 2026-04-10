@@ -215,7 +215,8 @@ function createIntroAnimationsRuntime({
   }
   function revealTargets(targets = []) {
     const sortedTargets = sortBatchTargets(targets);
-    sortedTargets.forEach(target => {
+    sortedTargets.forEach((target, index) => {
+      applyRevealDelay(target, index, sortedTargets.length);
       revealTarget(target);
     });
   }
@@ -238,13 +239,11 @@ function createIntroAnimationsRuntime({
     }
     disconnect();
     const immediateTargets = [];
-    const stagedTargets = [];
     const targets = collectTargets(root);
     targets.forEach(target => {
       if (!stageTarget(target)) {
         return;
       }
-      stagedTargets.push(target);
       if (isInViewport(target)) {
         immediateTargets.push(target);
         return;
@@ -253,9 +252,6 @@ function createIntroAnimationsRuntime({
       if (activeObserver && typeof activeObserver.observe === 'function') {
         activeObserver.observe(target);
       }
-    });
-    stagedTargets.forEach((target, index) => {
-      applyRevealDelay(target, index, stagedTargets.length);
     });
     scheduleReveal(immediateTargets);
     return targets;
