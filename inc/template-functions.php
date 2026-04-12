@@ -69,15 +69,6 @@ function anima_body_classes( array $classes ): array {
 		$classes[] = 'u-collection-hover-' . sanitize_html_class( $collection_hover_effect );
 	}
 
-
-	// Decorative Titles Style
-	$decorative_titles_style = get_option( 'sm_decorative_titles_style', 'underline' );
-
-	if ( ! empty( $decorative_titles_style ) ) {
-		$classes[] = 'u-decorative-titles-' . sanitize_html_class( $decorative_titles_style );
-	}
-
-
 	return $classes;
 }
 add_filter( 'body_class', 'anima_body_classes' );

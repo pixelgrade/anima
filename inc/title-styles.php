@@ -9,11 +9,106 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+add_filter( 'style_manager/filter_fields', 'anima_customize_post_title_styling_field', 50, 1 );
+add_action( 'after_setup_theme', 'anima_maybe_migrate_post_title_styling_option', 20 );
+add_action( 'after_setup_theme', 'anima_maybe_invalidate_post_title_styling_customizer_cache', 20 );
+
 /**
- * Check whether the Hive decorative title mode is active.
+ * Replace the decorative title style picker with an LT-facing post title toggle.
+ *
+ * @param array $config Style Manager config.
+ * @return array
+ */
+function anima_customize_post_title_styling_field( array $config ): array {
+	if ( empty( $config['sections']['style_manager_section']['options']['sm_decorative_titles_style'] ) || ! is_array( $config['sections']['style_manager_section']['options']['sm_decorative_titles_style'] ) ) {
+		return $config;
+	}
+
+	$config['sections']['style_manager_section']['options']['sm_decorative_titles_style'] = array_merge(
+		$config['sections']['style_manager_section']['options']['sm_decorative_titles_style'],
+		[
+			'type'         => 'sm_toggle',
+			'setting_type' => 'option',
+			'setting_id'   => 'sm_decorative_titles_style',
+			'label'        => esc_html__( 'Auto-style post titles', '__theme_txtd' ),
+			'desc'         => esc_html__( 'Apply Hive-inspired emphasis to post titles and supported collection card titles based on punctuation and letter case.', '__theme_txtd' ),
+			'default'      => false,
+			'choices'      => [],
+		]
+	);
+
+	return $config;
+}
+
+/**
+ * Normalize the shared cross-theme decorative titles option to the new LT toggle values.
+ */
+function anima_maybe_migrate_post_title_styling_option(): void {
+	$legacy_value = get_option( 'sm_decorative_titles_style', null );
+
+	if ( 'hive' === $legacy_value ) {
+		update_option( 'sm_decorative_titles_style', true );
+		return;
+	}
+
+	if ( in_array( $legacy_value, [ 'underline', 'blocky' ], true ) ) {
+		update_option( 'sm_decorative_titles_style', false );
+	}
+}
+
+/**
+ * Invalidate the cached Style Manager Customizer config if the LT field contract drifted.
+ */
+function anima_maybe_invalidate_post_title_styling_customizer_cache(): void {
+	$cached_config = get_option( 'pixelgrade_style_manager_customizer_config' );
+
+	if ( ! is_array( $cached_config ) ) {
+		return;
+	}
+
+	$field = $cached_config['panels']['style_manager_panel']['sections']['sm_tweak_board_section']['options']['sm_decorative_titles_style'] ?? [];
+
+	$has_expected_field = (
+		( $field['type'] ?? '' ) === 'sm_toggle'
+		&& ( $field['setting_type'] ?? '' ) === 'option'
+		&& ( $field['setting_id'] ?? '' ) === 'sm_decorative_titles_style'
+		&& ( $field['label'] ?? '' ) === esc_html__( 'Auto-style post titles', '__theme_txtd' )
+		&& ( $field['desc'] ?? '' ) === esc_html__( 'Apply Hive-inspired emphasis to post titles and supported collection card titles based on punctuation and letter case.', '__theme_txtd' )
+		&& array_key_exists( 'default', $field )
+		&& false === $field['default']
+	);
+
+	if ( $has_expected_field ) {
+		return;
+	}
+
+	update_option( 'pixelgrade_style_manager_customizer_config_timestamp', 0, true );
+	update_option( 'pixelgrade_style_manager_customizer_opt_name_timestamp', 0, true );
+}
+
+/**
+ * Check whether automatic post title styling is active.
  */
 function anima_is_hive_decorative_titles_style_active(): bool {
-	return 'hive' === get_option( 'sm_decorative_titles_style', 'underline' );
+	$value = get_option( 'sm_decorative_titles_style', false );
+
+	if ( is_bool( $value ) ) {
+		return $value;
+	}
+
+	if ( is_numeric( $value ) ) {
+		return (bool) $value;
+	}
+
+	if ( is_string( $value ) ) {
+		$normalized_value = strtolower( $value );
+
+		if ( in_array( $normalized_value, [ '1', 'true', 'yes', 'on', 'hive' ], true ) ) {
+			return true;
+		}
+	}
+
+	return false;
 }
 
 /**
