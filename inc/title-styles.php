@@ -24,14 +24,22 @@ function anima_customize_post_title_styling_field( array $config ): array {
 		return $config;
 	}
 
+	$config['sections']['style_manager_section']['options']['sm_decorative_titles_style_intro'] = [
+		'type'         => 'html',
+		'setting_type' => 'option',
+		'setting_id'   => 'sm_decorative_titles_style_intro',
+		'html'         => '<div class="customize-control-title">' . esc_html__( 'Auto-style Post Titles', '__theme_txtd' ) . '</div>' .
+			'<span class="description customize-control-description">' . esc_html__( 'Apply Hive-inspired emphasis to post titles and supported collection card titles based on punctuation and letter case.', '__theme_txtd' ) . '</span>',
+	];
+
 	$config['sections']['style_manager_section']['options']['sm_decorative_titles_style'] = array_merge(
 		$config['sections']['style_manager_section']['options']['sm_decorative_titles_style'],
 		[
 			'type'         => 'sm_toggle',
 			'setting_type' => 'option',
 			'setting_id'   => 'sm_decorative_titles_style',
-			'label'        => esc_html__( 'Auto-style post titles', '__theme_txtd' ),
-			'desc'         => esc_html__( 'Apply Hive-inspired emphasis to post titles and supported collection card titles based on punctuation and letter case.', '__theme_txtd' ),
+			'label'        => esc_html__( 'Enable Auto-style Post Titles', '__theme_txtd' ),
+			'desc'         => '',
 			'default'      => false,
 			'choices'      => [],
 		]
@@ -66,14 +74,19 @@ function anima_maybe_invalidate_post_title_styling_customizer_cache(): void {
 		return;
 	}
 
-	$field = $cached_config['panels']['style_manager_panel']['sections']['sm_tweak_board_section']['options']['sm_decorative_titles_style'] ?? [];
+	$options = $cached_config['panels']['style_manager_panel']['sections']['sm_tweak_board_section']['options'] ?? [];
+	$field = $options['sm_decorative_titles_style'] ?? [];
+	$intro = $options['sm_decorative_titles_style_intro'] ?? [];
 
 	$has_expected_field = (
-		( $field['type'] ?? '' ) === 'sm_toggle'
+		( $intro['type'] ?? '' ) === 'html'
+		&& false !== strpos( (string) ( $intro['html'] ?? '' ), 'Auto-style Post Titles' )
+		&& false !== strpos( (string) ( $intro['html'] ?? '' ), 'Apply Hive-inspired emphasis to post titles and supported collection card titles based on punctuation and letter case.' )
+		&& ( $field['type'] ?? '' ) === 'sm_toggle'
 		&& ( $field['setting_type'] ?? '' ) === 'option'
 		&& ( $field['setting_id'] ?? '' ) === 'sm_decorative_titles_style'
-		&& ( $field['label'] ?? '' ) === esc_html__( 'Auto-style post titles', '__theme_txtd' )
-		&& ( $field['desc'] ?? '' ) === esc_html__( 'Apply Hive-inspired emphasis to post titles and supported collection card titles based on punctuation and letter case.', '__theme_txtd' )
+		&& ( $field['label'] ?? '' ) === esc_html__( 'Enable Auto-style Post Titles', '__theme_txtd' )
+		&& empty( $field['desc'] )
 		&& array_key_exists( 'default', $field )
 		&& false === $field['default']
 	);

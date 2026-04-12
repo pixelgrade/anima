@@ -49,14 +49,14 @@ if ( 'sm_decorative_titles_style' !== ( $field['setting_id'] ?? '' ) ) {
 	anima_fail_hive_title_style_test( 'Expected the post title styling field to keep using the shared sm_decorative_titles_style option.' );
 }
 
-if ( 'Auto-style post titles' !== ( $field['label'] ?? '' ) ) {
+if ( 'Enable Auto-style Post Titles' !== ( $field['label'] ?? '' ) ) {
 	anima_restore_hive_title_style_option( $original_style );
 	anima_fail_hive_title_style_test( 'Expected the LT-facing post title styling label.' );
 }
 
-if ( 'Apply Hive-inspired emphasis to post titles and supported collection card titles based on punctuation and letter case.' !== ( $field['desc'] ?? '' ) ) {
+if ( '' !== ( $field['desc'] ?? '' ) ) {
 	anima_restore_hive_title_style_option( $original_style );
-	anima_fail_hive_title_style_test( 'Expected the LT-facing post title styling description.' );
+	anima_fail_hive_title_style_test( 'Expected the post title styling description to move into the dedicated intro control.' );
 }
 
 if ( false !== ( $field['default'] ?? null ) ) {
