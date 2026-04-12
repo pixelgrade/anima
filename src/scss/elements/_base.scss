@@ -139,3 +139,17 @@ em strong {
 }
 
 
+.u-decorative-titles-hive {
+  :is(.wp-block-post-title, .nb-card__title) {
+    :is(b, strong) {
+      font-weight: bold;
+      color: inherit;
+    }
+
+    :is(i, em) {
+      font-style: italic;
+      color: inherit;
+    }
+  }
+}
+

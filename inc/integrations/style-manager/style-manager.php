@@ -20,6 +20,7 @@ if ( defined( '\Pixelgrade\StyleManager\VERSION' ) ) {
 
 	// Add new options to the Style Manager config
 	add_filter( 'style_manager/filter_fields', 'anima_add_style_manager_options', 11, 1 );
+	add_filter( 'style_manager/filter_fields', 'anima_extend_decorative_titles_style_choices', 20, 1 );
 
 	add_filter( 'style_manager/filter_fields', 'anima_add_separators_section_to_style_manager_config', 30, 1 );
 }
@@ -30,6 +31,16 @@ function anima_add_style_manager_options( $config ) {
 
 	//start with a clean slate - no Style Manager default sections
 	$config['sections'] = [];
+
+	return $config;
+}
+
+function anima_extend_decorative_titles_style_choices( $config ) {
+	if ( empty( $config['sections']['style_manager_section']['options']['sm_decorative_titles_style']['choices'] ) || ! is_array( $config['sections']['style_manager_section']['options']['sm_decorative_titles_style']['choices'] ) ) {
+		return $config;
+	}
+
+	$config['sections']['style_manager_section']['options']['sm_decorative_titles_style']['choices']['hive'] = esc_html__( 'Hive', '__theme_txtd' );
 
 	return $config;
 }
@@ -78,4 +89,3 @@ function anima_add_separators_section_to_style_manager_config( $config ) {
 
 	return $config;
 }
-

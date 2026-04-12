@@ -489,6 +489,7 @@ require_once trailingslashit( get_template_directory() ) . 'inc/template-tags.ph
  * Functions which enhance the theme by hooking into WordPress.
  */
 require_once trailingslashit( get_template_directory() ) . 'inc/template-functions.php';
+require_once trailingslashit( get_template_directory() ) . 'inc/title-styles.php';
 require_once trailingslashit( get_template_directory() ) . 'inc/extras.php';
 require_once trailingslashit( get_template_directory() ) . 'inc/required-plugins.php';
 
