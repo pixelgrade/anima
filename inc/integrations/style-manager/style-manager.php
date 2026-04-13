@@ -16,6 +16,7 @@ if ( defined( '\Pixelgrade\StyleManager\VERSION' ) ) {
 	require_once __DIR__ . '/colors.php';
 	require_once __DIR__ . '/fonts.php';
 	require_once __DIR__ . '/motion.php';
+	require_once __DIR__ . '/tweak-board.php';
 	require_once __DIR__ . '/connected-fields.php';
 
 	// Add new options to the Style Manager config

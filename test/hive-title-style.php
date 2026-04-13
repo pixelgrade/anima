@@ -59,6 +59,21 @@ if ( '' !== ( $field['desc'] ?? '' ) ) {
 	anima_fail_hive_title_style_test( 'Expected the post title styling description to move into the dedicated intro control.' );
 }
 
+$panel_config = apply_filters(
+	'style_manager/sm_panel_config',
+	[
+		'sections' => [],
+	],
+	$config['sections']['style_manager_section']
+);
+
+$intro = $panel_config['sections']['sm_tweak_board_section']['options']['sm_decorative_titles_style_intro'] ?? null;
+
+if ( ! is_array( $intro ) || false === strpos( (string) ( $intro['html'] ?? '' ), 'Give post titles and supported collection card titles a more expressive typographic treatment, guided automatically by punctuation and letter case.' ) ) {
+	anima_restore_hive_title_style_option( $original_style );
+	anima_fail_hive_title_style_test( 'Expected the LT-facing post title styling intro copy to use the new typography-focused description.' );
+}
+
 if ( false !== ( $field['default'] ?? null ) ) {
 	anima_restore_hive_title_style_option( $original_style );
 	anima_fail_hive_title_style_test( 'Expected automatic post title styling to default to disabled.' );
