@@ -11,7 +11,7 @@ GitHub: `git@github.com:pixelgrade/anima.git`
 - Keep `AGENTS.md` as the canonical shared instruction file for both Codex and Claude.
 - Keep `CLAUDE.md` as a thin shim to `@AGENTS.md` so the shared instructions stay in one place.
 - Keep shared private agent instructions in `AGENTS.local.md`.
-- Keep vendor-neutral private research notes, plans, and issue writeups in `.ai/`.
+- Keep vendor-neutral private research notes, plans, issue writeups, and draft docs in `.ai/docs/`.
 - Keep tool-specific distilled working memory in `.claude/napkin.md`.
 - Keep local env values in `.env.local`.
 - Do not commit those private overlays; commit only the `*.example` files.
