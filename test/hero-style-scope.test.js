@@ -14,11 +14,11 @@ const heroStylePath = path.join(
   '_style.scss'
 );
 
-test( 'hero hidden-state styles exclude contextual post cards', () => {
+test( 'full-width hero sizing override excludes contextual post cards and full-width carousels', () => {
   const source = fs.readFileSync( heroStylePath, 'utf8' );
 
   assert.match(
     source,
-    /\.nb-supernova--card-layout-stacked\.nb-supernova--1-columns\.nb-supernova--align-full:not\(\.nb-contextual-post-card\) \.nb-supernova-item__inner-container/
+    /\.nb-supernova--card-layout-stacked\.nb-supernova--1-columns\.nb-supernova--align-full:not\(\.nb-contextual-post-card\):not\(\.nb-supernova--layout-carousel\)\s*\{/
   );
 } );
