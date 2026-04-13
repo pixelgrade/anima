@@ -15,6 +15,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	anima_fail_post_navigation_transition_color_test( 'This script must run through wp eval-file.' );
 }
 
+$original_toggle = get_option( 'sm_contextual_entry_colors', null );
+
+$restore_toggle = static function () use ( $original_toggle ) {
+	if ( null === $original_toggle ) {
+		delete_option( 'sm_contextual_entry_colors' );
+		return;
+	}
+
+	update_option( 'sm_contextual_entry_colors', $original_toggle );
+};
+
 $current_post_id = wp_insert_post(
 	[
 		'post_title'   => 'Current Navigation Test Post',
@@ -40,6 +51,7 @@ if ( is_wp_error( $current_post_id ) || empty( $current_post_id ) || is_wp_error
 }
 
 update_post_meta( $next_post_id, '_project_color', '#123456' );
+update_option( 'sm_contextual_entry_colors', 1 );
 
 $markup = <<<'HTML'
 <nav class="navigation post-navigation" aria-label="Post navigation">
@@ -70,6 +82,7 @@ $filtered_via_render_hook = anima_apply_next_entry_transition_color_to_post_navi
 
 if ( 1 !== preg_match( '/<a[^>]*data-anima-transition-color="#123456"[^>]*>Next Navigation Test Post<\/a>/', $filtered_via_render_hook ) ) {
 	wp_reset_postdata();
+	$restore_toggle();
 	wp_delete_post( $current_post_id, true );
 	wp_delete_post( $next_post_id, true );
 	anima_fail_post_navigation_transition_color_test( 'Expected the render hook entrypoint to use the current render post when the queried object is unavailable.' );
@@ -77,17 +90,31 @@ if ( 1 !== preg_match( '/<a[^>]*data-anima-transition-color="#123456"[^>]*>Next 
 
 wp_reset_postdata();
 
+update_option( 'sm_contextual_entry_colors', 0 );
+
+$disabled = anima_add_next_entry_transition_color_to_post_navigation_markup( $markup, $current_post_id );
+
+if ( $disabled !== $markup ) {
+	$restore_toggle();
+	wp_delete_post( $current_post_id, true );
+	wp_delete_post( $next_post_id, true );
+	anima_fail_post_navigation_transition_color_test( 'Expected the next-link markup to remain unchanged when contextual entry colors are disabled globally.' );
+}
+
 delete_post_meta( $next_post_id, '_project_color' );
 delete_post_meta( $next_post_id, '_project_color_auto' );
+update_option( 'sm_contextual_entry_colors', 1 );
 
 $unchanged = anima_add_next_entry_transition_color_to_post_navigation_markup( $markup, $current_post_id );
 
 if ( $unchanged !== $markup ) {
+	$restore_toggle();
 	wp_delete_post( $current_post_id, true );
 	wp_delete_post( $next_post_id, true );
 	anima_fail_post_navigation_transition_color_test( 'Expected markup without a next-entry color to remain unchanged.' );
 }
 
+$restore_toggle();
 wp_delete_post( $current_post_id, true );
 wp_delete_post( $next_post_id, true );
 

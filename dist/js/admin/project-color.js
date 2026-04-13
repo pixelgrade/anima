@@ -1,4 +1,65 @@
 /******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ 183
+(module) {
+
+function getProjectColorDescription(isEnabled, descriptions = {}) {
+  const enabledDescription = descriptions.enabled || 'Color used for supported reading and transition accents.';
+  const disabledDescription = descriptions.disabled || 'Contextual entry colors are disabled in Tweak Board. Saved colors will stay here until you enable the feature.';
+  return isEnabled ? enabledDescription : disabledDescription;
+}
+function shouldAutoSuggestProjectColor({
+  isEnabled,
+  manualColor,
+  autoColor,
+  featuredImageId
+} = {}) {
+  return Boolean(isEnabled && !manualColor && !autoColor && featuredImageId);
+}
+function shouldRefreshAutoProjectColor({
+  isEnabled,
+  manualColor,
+  featuredImageId,
+  previousFeaturedImageId
+} = {}) {
+  return Boolean(isEnabled && !manualColor && previousFeaturedImageId !== featuredImageId);
+}
+module.exports = {
+  getProjectColorDescription,
+  shouldAutoSuggestProjectColor,
+  shouldRefreshAutoProjectColor
+};
+
+/***/ }
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
 /**
  * Project Color — Block editor sidebar panel.
  *
@@ -9,6 +70,7 @@
  */
 
 (function () {
+  var projectColorState = __webpack_require__(183);
   var unsupportedPostTypes = {
     wp_template: true,
     wp_template_part: true,
@@ -29,6 +91,7 @@
   var __ = wp.i18n.__;
   var CONTEXTUAL_PALETTE_ID = animaProjectColor.contextualId || 'contextual-post';
   var CONTEXTUAL_STYLE_ID = animaProjectColor.contextualStyleId || 'style-manager-contextual-preview-inline-css';
+  var IS_CONTEXTUAL_ENTRY_COLORS_ENABLED = !!animaProjectColor.isEnabled;
 
   // Post type label map for the panel title.
   var postTypeLabels = {
@@ -242,35 +305,48 @@
         setIsSuggesting(false);
       });
     }
+    var panelDescription = projectColorState.getProjectColorDescription(IS_CONTEXTUAL_ENTRY_COLORS_ENABLED, {
+      enabled: __('Color used for supported reading and transition accents.', '__theme_txtd'),
+      disabled: __('Contextual entry colors are disabled in Tweak Board. Saved colors will stay here until you enable the feature.', '__theme_txtd')
+    });
 
-    // Auto-suggest on mount: if no manual color and a featured image exists,
-    // fetch and save as auto color (not manual).
+    // Auto-suggest on mount: if the feature is enabled, no manual color exists,
+    // and a featured image is available, fetch and save the auto color.
     useEffect(function () {
-      if (!manualColor && !autoColor && featuredImageId) {
-        setIsSuggesting(true);
-        fetchColorFromImage(featuredImageId, postId).then(function (result) {
-          if (result) {
-            setAutoColor(result);
-          }
-          setIsSuggesting(false);
-        });
+      if (!projectColorState.shouldAutoSuggestProjectColor({
+        isEnabled: IS_CONTEXTUAL_ENTRY_COLORS_ENABLED,
+        manualColor: manualColor,
+        autoColor: autoColor,
+        featuredImageId: featuredImageId
+      })) {
+        return;
       }
+      setIsSuggesting(true);
+      fetchColorFromImage(featuredImageId, postId).then(function (result) {
+        if (result) {
+          setAutoColor(result);
+        }
+        setIsSuggesting(false);
+      });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps -- run once on mount.
 
     // Re-suggest when featured image changes (after initial mount).
     useEffect(function () {
-      if (prevFeaturedImageRef.current === featuredImageId) {
+      var previousFeaturedImageId = prevFeaturedImageRef.current;
+      if (previousFeaturedImageId === featuredImageId) {
         return;
       }
       prevFeaturedImageRef.current = featuredImageId;
-      if (!featuredImageId) {
-        // Featured image removed — clear auto color.
-        setAutoColor('');
+      if (!projectColorState.shouldRefreshAutoProjectColor({
+        isEnabled: IS_CONTEXTUAL_ENTRY_COLORS_ENABLED,
+        manualColor: manualColor,
+        featuredImageId: featuredImageId,
+        previousFeaturedImageId: previousFeaturedImageId
+      })) {
         return;
       }
-
-      // Only auto-suggest if no manual color is set.
-      if (manualColor) {
+      if (!featuredImageId) {
+        setAutoColor('');
         return;
       }
       setIsSuggesting(true);
@@ -291,6 +367,10 @@
       previewRequestRef.current = previewRequestRef.current + 1;
       var currentRequest = previewRequestRef.current;
       if (!postId) {
+        return undefined;
+      }
+      if (!IS_CONTEXTUAL_ENTRY_COLORS_ENABLED) {
+        clearContextualPalettePreview();
         return undefined;
       }
       if (!color) {
@@ -341,7 +421,7 @@
         color: '#757575',
         fontSize: '12px'
       }
-    }, __('Color used for page transition animation. Leave empty to use the accent color.', '__theme_txtd')),
+    }, panelDescription),
     // Notice (success or error)
     notice ? el(Notice, {
       status: notice.type,

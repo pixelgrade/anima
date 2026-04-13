@@ -19,6 +19,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Determine whether contextual entry colors are enabled globally.
+ *
+ * @return bool
+ */
+function anima_contextual_entry_colors_enabled() {
+	return (bool) get_option( 'sm_contextual_entry_colors', true );
+}
+
+/**
  * Register the _project_color and _project_color_auto post meta for all public post types.
  */
 function anima_project_color_register_meta() {
@@ -108,10 +117,11 @@ function anima_project_color_editor_assets() {
 	);
 
 	wp_localize_script( 'anima-project-color', 'animaProjectColor', [
-		'ajaxUrl'         => admin_url( 'admin-ajax.php' ),
-		'nonce'           => wp_create_nonce( 'anima_project_color' ),
-		'contextualId'    => 'contextual-post',
+		'ajaxUrl'           => admin_url( 'admin-ajax.php' ),
+		'nonce'             => wp_create_nonce( 'anima_project_color' ),
+		'contextualId'      => 'contextual-post',
 		'contextualStyleId' => 'style-manager-contextual-preview-inline-css',
+		'isEnabled'         => anima_contextual_entry_colors_enabled(),
 	] );
 }
 add_action( 'enqueue_block_editor_assets', 'anima_project_color_editor_assets' );
@@ -323,6 +333,10 @@ function anima_get_contextual_palette_label( int $post_id ): string {
  * @return array
  */
 function anima_add_contextual_runtime_palette( array $palettes, array $saved_palettes = [], array $context = [] ): array {
+	if ( ! anima_contextual_entry_colors_enabled() ) {
+		return $palettes;
+	}
+
 	if ( ! function_exists( 'sm_build_contextual_palette_from_color' ) ) {
 		return $palettes;
 	}
@@ -379,6 +393,10 @@ add_action( 'deleted_post_meta', 'anima_invalidate_auto_color_on_thumbnail_chang
  * @return string Modified markup.
  */
 function anima_inject_project_color_on_card( $markup, $post, $attributes ) {
+	if ( ! anima_contextual_entry_colors_enabled() ) {
+		return $markup;
+	}
+
 	$color = anima_get_project_color( $post->ID );
 
 	if ( empty( $color ) ) {
@@ -466,6 +484,10 @@ function anima_replace_class_in_markup_fragment( string $markup, string $class_p
  * @return string
  */
 function anima_apply_contextual_palette_to_reading_bar_markup( string $markup, $post_id = null ): string {
+	if ( ! anima_contextual_entry_colors_enabled() ) {
+		return $markup;
+	}
+
 	$contextual_color = sanitize_hex_color( anima_get_contextual_post_color( $post_id ) );
 
 	if ( empty( $contextual_color ) || false === strpos( $markup, 'js-reading-bar' ) ) {
@@ -549,6 +571,10 @@ function anima_get_current_render_post_id(): int {
  * @return string
  */
 function anima_add_next_entry_transition_color_to_post_navigation_markup( string $markup, $current_post_id = null ): string {
+	if ( ! anima_contextual_entry_colors_enabled() ) {
+		return $markup;
+	}
+
 	if ( empty( $current_post_id ) || false === strpos( $markup, 'post-navigation__link--next' ) ) {
 		return $markup;
 	}

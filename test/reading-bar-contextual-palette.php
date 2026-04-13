@@ -15,6 +15,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	anima_fail_reading_bar_contextual_palette_test( 'This script must run through wp eval-file.' );
 }
 
+$original_toggle = get_option( 'sm_contextual_entry_colors', null );
+
+$restore_toggle = static function () use ( $original_toggle ) {
+	if ( null === $original_toggle ) {
+		delete_option( 'sm_contextual_entry_colors' );
+		return;
+	}
+
+	update_option( 'sm_contextual_entry_colors', $original_toggle );
+};
+
 $post_id = wp_insert_post(
 	[
 		'post_title'   => 'Reading Bar Contextual Palette Test',
@@ -29,6 +40,7 @@ if ( is_wp_error( $post_id ) || empty( $post_id ) ) {
 }
 
 update_post_meta( $post_id, '_project_color', '#123456' );
+update_option( 'sm_contextual_entry_colors', 1 );
 
 $markup = <<<'HTML'
 <div class="c-reading-bar  js-reading-bar">
@@ -59,19 +71,33 @@ if ( 1 !== preg_match( '/class="[^"]*\bc-reading-bar__layer--next\b[^"]*\bsm-col
 }
 
 if ( 1 !== preg_match( '/class="[^"]*\bc-reading-bar__progress\b[^"]*\bjs-reading-progress\b[^"]*\bsm-palette-contextual-post\b[^"]*\bsm-variation-1\b[^"]*\bsm-color-signal-0\b/', $filtered ) ) {
+	$restore_toggle();
 	wp_delete_post( $post_id, true );
 	anima_fail_reading_bar_contextual_palette_test( 'Expected the reading progress bar to use the contextual post palette.' );
 }
 
+update_option( 'sm_contextual_entry_colors', 0 );
+
+$disabled = anima_apply_contextual_palette_to_reading_bar_markup( $markup, $post_id );
+
+if ( $disabled !== $markup ) {
+	$restore_toggle();
+	wp_delete_post( $post_id, true );
+	anima_fail_reading_bar_contextual_palette_test( 'Expected the reading bar markup to remain unchanged when contextual entry colors are disabled globally.' );
+}
+
 delete_post_meta( $post_id, '_project_color' );
+update_option( 'sm_contextual_entry_colors', 1 );
 
 $unchanged = anima_apply_contextual_palette_to_reading_bar_markup( $markup, $post_id );
 
 if ( $unchanged !== $markup ) {
+	$restore_toggle();
 	wp_delete_post( $post_id, true );
 	anima_fail_reading_bar_contextual_palette_test( 'Expected markup without a contextual color to remain unchanged.' );
 }
 
+$restore_toggle();
 wp_delete_post( $post_id, true );
 
 echo "reading bar contextual palette contract ok\n";
