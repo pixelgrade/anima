@@ -149,7 +149,15 @@ least:
 ```
 
 The profile is not stored as persistent post meta in v1. It is derived at
-runtime from the post and cached in-memory during the request if needed.
+runtime from the post and must be cached in-memory for the duration of the
+request.
+
+Implementation requirements:
+
+- cache resolved profiles by post ID plus surface context such as `card` or
+  `single`
+- avoid reparsing the same post content multiple times in one request
+- only run format-specific extraction for supported formats that need it
 
 ## Trait Resolution Rules
 
@@ -171,6 +179,14 @@ If a featured image exists, bucket it into one of:
 Patch already validates this general model via `entry-card--portrait`,
 `entry-card--landscape`, `entry-card--text`, and related classes.
 
+Use Patch-compatible thresholds in v1 so Hive LT and Patch LT stay aligned:
+
+- `tall`: ratio `< 0.5625`
+- `portrait`: ratio `< 0.75`
+- `wide`: ratio `> 1.78`
+- `landscape`: ratio `> 1.34`
+- otherwise `square`
+
 ### Fallback behavior when no featured image exists
 
 Use lean, format-driven defaults:
@@ -185,14 +201,21 @@ Use lean, format-driven defaults:
 
 ### Format-specific content extraction
 
-Use existing WordPress helpers first and bespoke parsing only where necessary:
+Use existing WordPress helpers first, but keep extraction block-aware for modern
+content. Classic helpers alone are not enough for block posts.
 
-- `gallery`: prefer `get_post_gallery()`
-- `link`: prefer `get_url_in_content()`
-- `quote`: prefer an existing blockquote in rendered content; otherwise wrap
-  the relevant content in quote markup
+- `gallery`: prefer a Gallery block payload first, then `get_post_gallery()`
+- `link`: prefer a Link-like block or the first meaningful URL in block
+  content, then `get_url_in_content()`
+- `quote`: resolve in this order:
+  - first `core/quote` block
+  - then the first real `<blockquote>` in rendered content
+  - then the manual excerpt if present
+  - then the first paragraph only
+  - never the full post content
 - `image`: prefer featured image, then first inline image as fallback
-- `audio` / `video`: prefer existing embedded media extraction helpers
+- `audio` / `video`: prefer block-aware embedded media extraction helpers,
+  then legacy embed discovery if needed
 
 Avoid broad HTML scraping outside the supported formats.
 
@@ -272,6 +295,12 @@ Where `$render_data` can include:
 This keeps Nova generic and lets Anima inject expression-aware behavior without
 forking the block.
 
+Before implementation planning is finalized, validate the insertion point with a
+small Nova spike. The preferred hook position is inside
+`novablocks_get_collection_card_markup_from_post()` before the final call to
+`novablocks_get_collection_card_markup()`, so Anima can alter card inputs
+without rewriting finished HTML.
+
 ### Theme-side usage
 
 Anima should:
@@ -294,20 +323,19 @@ addition to template files.
 
 ### Recommended Anima integration
 
-Keep editable block templates as shells, then use a small PHP routing layer to
-choose the single variant automatically from the resolved profile.
+Keep one editable single template as the block-theme shell, then render a
+dynamic post expression shell inside it based on the resolved profile.
 
-Possible implementation options:
+V1 decision:
 
-- route to a matching custom template slug automatically
-- keep one single template and render a dynamic “post expression shell” block
-  inside it
-
-Preferred direction for v1:
-
-- keep the number of block templates small
-- use automatic routing to a few reusable variants
+- do not auto-swap template slugs at runtime
+- keep Site Editor expectations centered on one main single template
+- let the dynamic shell choose the `default`, `quote`, `visual`, or `media`
+  presentation internally
 - avoid a format-by-format explosion of templates
+
+This keeps the editing model predictable while still allowing automatic
+format-aware single rendering.
 
 ## Cross-LT Reuse
 
@@ -380,12 +408,13 @@ Then verify no regressions on another LT theme with the feature disabled.
 
 ## Rollout Order
 
-1. Add the Anima resolver and variant mapping
-2. Add narrow Nova pre-render hooks for post cards
-3. Wire Cards Collection / Posts Collection to expression profiles
-4. Add automatic single-variant routing
-5. Add Hive LT styling for the initial supported variants
-6. Verify that other LT themes remain unchanged unless they opt in
+1. Validate the Nova pre-render insertion point with a small spike
+2. Add the Anima resolver and variant mapping
+3. Add narrow Nova pre-render hooks for post cards
+4. Wire Cards Collection / Posts Collection to expression profiles
+5. Add the dynamic single post expression shell
+6. Add Hive LT styling for the initial supported variants
+7. Verify that other LT themes remain unchanged unless they opt in
 
 ## Recommendation
 
