@@ -403,11 +403,20 @@ function anima_inject_project_color_on_card( $markup, $post, $attributes ) {
 		return $markup;
 	}
 
-	// Inject inline style on the .nb-supernova-item div.
-	// The markup structure is: <div class="nb-collection__layout-item"><div class="nb-supernova-item ..." ...>
-	$markup = preg_replace(
-		'/(<div\s+class="[^"]*nb-supernova-item\b[^"]*")/',
-		'$1 style="--anima-project-color: ' . esc_attr( $color ) . '"',
+	// Inject inline style on the .nb-supernova-item div, merging with any
+	// existing style attribute so card-level Nova overrides survive.
+	$markup = preg_replace_callback(
+		'/(<div\s+class="[^"]*nb-supernova-item\b[^"]*")([^>]*?)(\sstyle="([^"]*)")?([^>]*>)/',
+		static function( array $matches ) use ( $color ) {
+			$prefix         = $matches[1];
+			$before_style   = $matches[2] ?? '';
+			$existing_style = trim( (string) ( $matches[4] ?? '' ) );
+			$suffix         = $matches[5] ?? '>';
+			$style_parts    = array_filter( array_map( 'trim', explode( ';', $existing_style ) ) );
+			$style_parts[]  = '--anima-project-color: ' . $color;
+
+			return $prefix . $before_style . ' style="' . esc_attr( implode( '; ', array_unique( $style_parts ) ) ) . '"' . $suffix;
+		},
 		$markup,
 		1
 	);
