@@ -14,7 +14,7 @@ const quoteStylePath = path.join(
   '_common.scss'
 );
 
-test('editorial quote style defines a dedicated pseudo-element treatment', () => {
+test('editorial quote style matches the classic Hive quote treatment', () => {
   const source = fs.readFileSync( quoteStylePath, 'utf8' );
 
   assert.match(
@@ -24,6 +24,26 @@ test('editorial quote style defines a dedicated pseudo-element treatment', () =>
 
   assert.match(
     source,
-    /&\.is-style-editorial:not\(\.is-style-plain\)[\s\S]*?&:before[\s\S]*?&:after/s,
+    /font-family:\s*"Playfair Display", serif;/,
+  );
+
+  assert.match(
+    source,
+    /font-size:\s*28px;/,
+  );
+
+  assert.match(
+    source,
+    /top:\s*-22px;[\s\S]*?color:\s*#ffeb00;[\s\S]*?font-size:\s*54px;/s,
+  );
+
+  assert.match(
+    source,
+    /box-shadow:\s*currentColor 5\.5em 0 0;/,
+  );
+
+  assert.match(
+    source,
+    /font-family:\s*"Noto Serif", serif;[\s\S]*?font-size:\s*16px;[\s\S]*?font-weight:\s*700;/s,
   );
 } );
