@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Load NovaBlocks integration for this theme
  */
 require_once trailingslashit( get_template_directory() ) . 'inc/integrations/novablocks.php';
+require_once trailingslashit( get_template_directory() ) . 'inc/integrations/post-expressions.php';
 
 /**
  * Load Style Manager integration for this theme.

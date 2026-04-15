@@ -40,6 +40,7 @@ if ( ! function_exists( 'anima_setup' ) ) {
 		 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
 		 */
 		add_theme_support( 'post-thumbnails' );
+		add_theme_support( 'post-formats', [ 'quote', 'image', 'gallery', 'link', 'audio', 'video' ] );
 
 		/**
 		 * Switch default core markup for search form, comment form, and comments
@@ -497,6 +498,7 @@ require_once trailingslashit( get_template_directory() ) . 'inc/required-plugins
  * Block editor related logic.
  */
 require_once trailingslashit( get_template_directory() ) . 'inc/block-editor.php';
+require_once trailingslashit( get_template_directory() ) . 'inc/post-expressions.php';
 
 /**
  * Full site editing logic.
