@@ -45,6 +45,65 @@ $enable-blockquote-block-styles:        true !default;
                 @extend %apply-font-properties;
             }
         }
+
+        &.is-style-editorial:not(.is-style-plain) {
+            position: relative;
+            border-left: none;
+            margin-bottom: 0;
+            padding-top: var(--theme-spacing-fluid-small);
+            padding-bottom: var(--theme-spacing-fluid-small);
+
+            @include blockquote-default-padding;
+
+            &, p {
+                @include apply-font(heading-3);
+                @extend %apply-font-properties;
+            }
+
+            &:before,
+            &:after {
+                position: absolute;
+                display: block;
+                font-family: var(--theme-heading-1-font-family);
+                font-size: clamp(2.5rem, 8vw, 5rem);
+                line-height: 1;
+                color: var(--sm-current-accent-color);
+                opacity: 0.9;
+                pointer-events: none;
+            }
+
+            &:before {
+                content: "“";
+                top: 0;
+                left: 0;
+                transform: translate(-0.1em, -0.15em);
+            }
+
+            &:after {
+                content: "”";
+                right: 0;
+                bottom: 0;
+                transform: translate(0.1em, 0.25em);
+            }
+
+            cite,
+            footer {
+                position: relative;
+                text-align: inherit; // reset
+                @extend %apply-font-properties;
+
+                &:before {
+                    content: "";
+                    display: block;
+                    width: 2.25rem;
+                    max-width: 40%;
+                    height: 2px;
+                    margin-bottom: var(--theme-spacing-fluid-smallest);
+                    background-color: currentColor;
+                    opacity: 0.45;
+                }
+            }
+        }
     }
 
     .wp-block-quote > cite:not(:first-child),
