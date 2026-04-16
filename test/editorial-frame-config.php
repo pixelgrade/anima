@@ -84,20 +84,34 @@ $panel_config = apply_filters(
 );
 
 $editorial_frame_section = $panel_config['sections']['sm_editorial_frame_section'] ?? null;
+$tweak_board_section     = $panel_config['sections']['sm_tweak_board_section'] ?? null;
 
-if ( ! is_array( $editorial_frame_section ) ) {
-	anima_fail_editorial_frame_config_test( 'Expected the Editorial Frame controls to move into a dedicated Style Manager section.' );
+if ( is_array( $editorial_frame_section ) ) {
+	anima_fail_editorial_frame_config_test( 'Expected the Editorial Frame controls to stop using a dedicated Style Manager section.' );
 }
 
-if ( 'Editorial Frame' !== ( $editorial_frame_section['title'] ?? null ) ) {
-	anima_fail_editorial_frame_config_test( 'Expected the dedicated Style Manager section to use the Editorial Frame title.' );
+if ( ! is_array( $tweak_board_section ) ) {
+	anima_fail_editorial_frame_config_test( 'Expected the Editorial Frame controls to move into the Tweak Board section.' );
 }
 
-$section_options = $editorial_frame_section['options'] ?? [];
+$section_options = $tweak_board_section['options'] ?? [];
 foreach ( $option_names as $option_name ) {
 	if ( empty( $section_options[ $option_name ] ) || ! is_array( $section_options[ $option_name ] ) ) {
-		anima_fail_editorial_frame_config_test( 'Expected the Editorial Frame section to expose ' . $option_name . '.' );
+		anima_fail_editorial_frame_config_test( 'Expected the Tweak Board section to expose ' . $option_name . '.' );
 	}
+}
+
+$option_order = array_keys( $section_options );
+$expected_tail = [
+	'sm_chrome_preset',
+	'sm_chrome_menu_visibility',
+	'sm_chrome_frame_visibility',
+	'sm_chrome_color_role',
+];
+$actual_tail = array_slice( $option_order, -1 * count( $expected_tail ) );
+
+if ( $expected_tail !== $actual_tail ) {
+	anima_fail_editorial_frame_config_test( 'Expected the Editorial Frame controls to be appended at the end of the Tweak Board section.' );
 }
 
 $temporary_menu_id = wp_create_nav_menu( 'Editorial Frame Test Menu' );

@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 add_filter( 'style_manager/filter_fields', 'anima_add_editorial_frame_section_to_style_manager_config', 62, 1 );
-add_filter( 'style_manager/sm_panel_config', 'anima_reorganize_editorial_frame_customizer_controls', 25, 2 );
+add_filter( 'style_manager/sm_panel_config', 'anima_reorganize_editorial_frame_customizer_controls', 30, 2 );
 add_action( 'after_setup_theme', 'anima_maybe_invalidate_style_manager_editorial_frame_cache', 20 );
 
 /**
@@ -81,7 +81,7 @@ function anima_add_editorial_frame_section_to_style_manager_config( $config ) {
 }
 
 /**
- * Move Editorial Frame controls into a dedicated Style Manager section.
+ * Append Editorial Frame controls to the Tweak Board section.
  *
  * @param array $sm_panel_config   Style Manager panel config.
  * @param array $sm_section_config Raw Style Manager section config.
@@ -101,18 +101,19 @@ function anima_reorganize_editorial_frame_customizer_controls( $sm_panel_config,
 		}
 	}
 
-	$sm_panel_config['sections']['sm_editorial_frame_section'] = [
-		'title'       => esc_html__( 'Editorial Frame', '__theme_txtd' ),
-		'description' => esc_html__( 'Apply a framed editorial chrome around the site and control the dedicated Chrome menu treatment.', '__theme_txtd' ),
-		'section_id'  => 'sm_editorial_frame_section',
-		'priority'    => 55,
-		'options'     => [
+	if ( empty( $sm_panel_config['sections']['sm_tweak_board_section']['options'] ) || ! is_array( $sm_panel_config['sections']['sm_tweak_board_section']['options'] ) ) {
+		return $sm_panel_config;
+	}
+
+	$sm_panel_config['sections']['sm_tweak_board_section']['options'] = array_merge(
+		$sm_panel_config['sections']['sm_tweak_board_section']['options'],
+		[
 			'sm_chrome_preset'           => $sm_section_config['options']['sm_chrome_preset'],
 			'sm_chrome_menu_visibility'  => $sm_section_config['options']['sm_chrome_menu_visibility'],
 			'sm_chrome_frame_visibility' => $sm_section_config['options']['sm_chrome_frame_visibility'],
 			'sm_chrome_color_role'       => $sm_section_config['options']['sm_chrome_color_role'],
-		],
-	];
+		]
+	);
 
 	return $sm_panel_config;
 }
@@ -128,18 +129,27 @@ function anima_maybe_invalidate_style_manager_editorial_frame_cache(): void {
 		return;
 	}
 
+	$tweak_board_section     = $cached_config['panels']['style_manager_panel']['sections']['sm_tweak_board_section'] ?? [];
 	$editorial_frame_section = $cached_config['panels']['style_manager_panel']['sections']['sm_editorial_frame_section'] ?? [];
-	$section_options         = $editorial_frame_section['options'] ?? [];
+	$section_options         = $tweak_board_section['options'] ?? [];
 	$preset_option           = $section_options['sm_chrome_preset'] ?? [];
 	$menu_option             = $section_options['sm_chrome_menu_visibility'] ?? [];
 	$frame_option            = $section_options['sm_chrome_frame_visibility'] ?? [];
 	$color_role_option       = $section_options['sm_chrome_color_role'] ?? [];
+	$option_order            = array_keys( $section_options );
+	$expected_tail           = [
+		'sm_chrome_preset',
+		'sm_chrome_menu_visibility',
+		'sm_chrome_frame_visibility',
+		'sm_chrome_color_role',
+	];
 	$has_expected_copy       = (
-		( $editorial_frame_section['title'] ?? '' ) === esc_html__( 'Editorial Frame', '__theme_txtd' )
+		empty( $editorial_frame_section )
 		&& ( $preset_option['setting_id'] ?? '' ) === 'sm_chrome_preset'
 		&& ( $menu_option['setting_id'] ?? '' ) === 'sm_chrome_menu_visibility'
 		&& ( $frame_option['setting_id'] ?? '' ) === 'sm_chrome_frame_visibility'
 		&& ( $color_role_option['setting_id'] ?? '' ) === 'sm_chrome_color_role'
+		&& $expected_tail === array_slice( $option_order, -1 * count( $expected_tail ) )
 	);
 
 	if ( $has_expected_copy ) {
