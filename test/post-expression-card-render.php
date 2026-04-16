@@ -162,11 +162,11 @@ $blueprint_filter = static function ( $template, $id, $template_type ) use ( $va
 	$block_template->theme          = get_stylesheet();
 	if ( get_stylesheet() . '//card-quote' === $id ) {
 		$block_template->slug    = 'card-quote';
-		$block_template->title   = 'Card Quote';
+		$block_template->title   = 'Post Format: Quote Card';
 		$block_template->content = $valid_blueprint_content;
 	} elseif ( get_stylesheet() . '//card-image' === $id ) {
 		$block_template->slug    = 'card-image';
-		$block_template->title   = 'Card Image';
+		$block_template->title   = 'Post Format: Image Card';
 		$block_template->content = $valid_image_blueprint_content;
 	} else {
 		return $template;
