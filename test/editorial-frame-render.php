@@ -130,6 +130,11 @@ foreach ( $expected_fragments as $fragment => $message ) {
 	}
 }
 
+if ( 3 !== substr_count( $output, 'c-editorial-frame__label' ) ) {
+	anima_restore_editorial_frame_render_state( $original_options, $original_locations, $temporary_menu_id );
+	anima_fail_editorial_frame_render_test( 'Expected every Chrome menu item title to render inside a dedicated label wrapper.' );
+}
+
 anima_restore_editorial_frame_render_state( $original_options, $original_locations, $temporary_menu_id );
 
 echo "editorial frame render contract ok\n";

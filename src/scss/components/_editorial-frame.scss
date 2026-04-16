@@ -9,6 +9,7 @@ body.has-editorial-frame {
   --editorial-frame-link-padding-left: 1.71429em;
   --editorial-frame-marker-width: 2.52632em;
   --editorial-frame-marker-height: 1.89474em;
+  --editorial-frame-marker-content-offset: calc((var(--editorial-frame-marker-width) - var(--editorial-frame-marker-height)) * 0.5);
   --editorial-frame-marker-font-size: 1.21429em;
   --editorial-frame-marker-mask-size: 1.125em;
   --editorial-frame-head-padding-y: 1.5em;
@@ -135,6 +136,7 @@ body.has-editorial-frame-menu #page {
 .c-editorial-frame__menu > li {
   display: block;
   position: relative;
+  min-height: var(--editorial-frame-link-line-height);
 }
 
 .c-editorial-frame__menu .sub-menu {
@@ -146,13 +148,15 @@ body.has-editorial-frame-menu #page {
 }
 
 .nav--toolbar a {
-  display: block;
+  display: inline-flex;
+  align-items: center;
   font-size: 0.8125em;
   line-height: 2.57143em;
-  margin-top: -1px;
   margin-right: 0.85714em;
   padding-left: 1.71429em;
-  position: relative;
+  padding-right: var(--editorial-frame-marker-content-offset);
+  position: absolute;
+  top: -1px;
   right: 100%;
   white-space: nowrap;
   border: 1px solid transparent;
@@ -184,14 +188,18 @@ body.has-editorial-frame-menu #page {
   position: absolute;
   top: 50%;
   right: calc(var(--editorial-frame-marker-width) * -1);
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
   width: var(--editorial-frame-marker-width);
   height: var(--editorial-frame-marker-height);
+  padding-left: var(--editorial-frame-marker-content-offset);
   color: var(--editorial-frame-surface);
   font-size: var(--editorial-frame-marker-font-size);
   font-weight: 700;
   letter-spacing: 0.04em;
-  line-height: var(--editorial-frame-marker-height);
+  line-height: 1;
   text-align: center;
   text-transform: uppercase;
   transform: translateY(-50%);
@@ -208,13 +216,20 @@ body.has-editorial-frame-menu #page {
   color: inherit;
 }
 
+.nav--toolbar .social-menu-item {
+  display: list-item;
+}
+
 .nav--toolbar .social-menu-item > a {
   font-size: var(--editorial-frame-link-font-size);
   line-height: var(--editorial-frame-link-line-height);
 }
 
 .nav--toolbar .social-menu-item > a::before {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
   width: var(--editorial-frame-marker-width);
   height: var(--editorial-frame-marker-height);
   line-height: var(--editorial-frame-marker-height);
@@ -222,6 +237,7 @@ body.has-editorial-frame-menu #page {
   position: absolute;
   top: 50%;
   right: calc(var(--editorial-frame-marker-width) * -1);
+  padding-left: var(--editorial-frame-marker-content-offset);
   text-align: center;
   pointer-events: auto;
   color: var(--editorial-frame-surface);
@@ -239,30 +255,31 @@ body.has-editorial-frame-menu #page {
   height: var(--editorial-frame-marker-height);
   line-height: 0;
   right: calc(var(--editorial-frame-marker-width) * -1);
-  background-position: 50% 50%;
+  background-position: calc(50% + (var(--editorial-frame-marker-content-offset) * 0.5)) 50%;
   background-repeat: no-repeat;
   background-size: var(--editorial-frame-marker-mask-size) var(--editorial-frame-marker-mask-size);
   background-color: var(--editorial-frame-surface);
 }
 
-.nav--toolbar .menu-item--search > a,
-.nav--toolbar .menu-item--dark-mode > a {
+.c-editorial-frame .nav--toolbar .menu-item--search > a,
+.c-editorial-frame .nav--toolbar .menu-item--dark-mode > a {
   padding-left: var(--editorial-frame-link-padding-left);
 }
 
-.nav--toolbar .menu-item--search > a::before,
-.nav--toolbar .menu-item--dark-mode > a::before {
+.c-editorial-frame .nav--toolbar .menu-item--search > a::before,
+.c-editorial-frame .nav--toolbar .menu-item--dark-mode > a::before {
   content: "";
   position: absolute;
   top: 50%;
-  right: calc(var(--editorial-frame-marker-width) * -1);
+  left: auto !important;
+  right: calc(var(--editorial-frame-marker-width) * -1) !important;
   display: block;
   font-size: var(--editorial-frame-marker-font-size);
   width: var(--editorial-frame-marker-width);
   height: var(--editorial-frame-marker-height);
   padding-left: 0;
   background-color: var(--editorial-frame-surface);
-  background-position: 50% 50%;
+  background-position: calc(50% + (var(--editorial-frame-marker-content-offset) * 0.5)) 50%;
   background-repeat: no-repeat;
   background-size: var(--editorial-frame-marker-mask-size) var(--editorial-frame-marker-mask-size);
   mask: no-repeat 50% 50%;
@@ -274,12 +291,14 @@ body.has-editorial-frame-menu #page {
   transform: translateY(-50%);
 }
 
-.nav--toolbar .menu-item--search > a::after,
-.nav--toolbar .menu-item--dark-mode > a::after {
-  display: none;
+.c-editorial-frame .nav--toolbar .menu-item--search > a::after,
+.c-editorial-frame .nav--toolbar .menu-item--dark-mode > a::after {
+  content: none !important;
+  display: none !important;
+  left: auto !important;
 }
 
-.is-dark .nav--toolbar .menu-item--dark-mode > a::before {
+.is-dark .c-editorial-frame .nav--toolbar .menu-item--dark-mode > a::before {
   transform: translateY(-50%) rotate(180deg);
 }
 

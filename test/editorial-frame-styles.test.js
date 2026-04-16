@@ -29,7 +29,8 @@ test('Editorial Frame styles expose the Hive-like rail strip treatment', () => {
   assert.match(css, /\.c-editorial-frame__rail(?::before|::before)\s*\{[^}]*width:\s*1px;/);
   assert.match(css, /\.c-editorial-frame__head\s*\{[^}]*padding-top:\s*1\.5em;[^}]*padding-bottom:\s*1\.5em;[^}]*min-height:\s*21em;/);
   assert.match(css, /\.c-editorial-frame\s*\{[^}]*z-index:\s*4000;/);
-  assert.match(css, /\.nav--toolbar a\s*\{[^}]*margin-right:\s*0\.85714em;[^}]*right:\s*100%;[^}]*border:\s*1px solid transparent;[^}]*color:\s*transparent;[^}]*pointer-events:\s*auto;[^}]*text-align:\s*left;/);
+  assert.match(css, /body\.has-editorial-frame\s*\{[^}]*--editorial-frame-marker-content-offset:\s*calc\(.*var\(--editorial-frame-marker-width\).*var\(--editorial-frame-marker-height\).*\);/);
+  assert.match(css, /\.nav--toolbar a\s*\{[^}]*margin-right:\s*0\.85714em;[^}]*padding-right:\s*var\(--editorial-frame-marker-content-offset\);[^}]*right:\s*100%;[^}]*border:\s*1px solid transparent;[^}]*color:\s*transparent;[^}]*pointer-events:\s*auto;[^}]*text-align:\s*left;/);
   assert.doesNotMatch(css, /\.nav--toolbar a\s*\{[^}]*min-width:/);
   assert.match(css, /\.nav--toolbar a(?::hover|:focus-visible)\s*\{[^}]*color:\s*inherit;[^}]*pointer-events:\s*auto;/);
 });
@@ -43,9 +44,10 @@ test('Editorial Frame styles expose the regular-link monogram treatment', () => 
 test('Editorial Frame styles keep social links on the icon slot', () => {
   const css = compileEditorialFrameCss();
 
-  assert.match(css, /\.nav--toolbar \.social-menu-item > a::before\s*\{[^}]*width:\s*var\(--editorial-frame-marker-width\);[^}]*height:\s*var\(--editorial-frame-marker-height\);[^}]*font-size:\s*var\(--editorial-frame-marker-font-size\);[^}]*right:\s*calc\(var\(--editorial-frame-marker-width\) \* -1\);/);
+  assert.match(css, /\.nav--toolbar \.social-menu-item\s*\{[^}]*display:\s*list-item;/);
+  assert.match(css, /\.nav--toolbar \.social-menu-item > a::before\s*\{[^}]*width:\s*var\(--editorial-frame-marker-width\);[^}]*height:\s*var\(--editorial-frame-marker-height\);[^}]*font-size:\s*var\(--editorial-frame-marker-font-size\);[^}]*right:\s*calc\(var\(--editorial-frame-marker-width\) \* -1\);[^}]*padding-left:\s*var\(--editorial-frame-marker-content-offset\);/);
   assert.match(css, /\.nav--toolbar \.social-menu-item > a::after\s*\{[^}]*display:\s*none;/);
-  assert.match(css, /\.nav--toolbar \.menu-item--search > a::before, \.nav--toolbar \.menu-item--dark-mode > a::before\s*\{[^}]*right:\s*calc\(var\(--editorial-frame-marker-width\) \* -1\);/);
+  assert.match(css, /\.c-editorial-frame \.nav--toolbar \.menu-item--search > a::before, \.c-editorial-frame \.nav--toolbar \.menu-item--dark-mode > a::before\s*\{[^}]*left:\s*auto\s*!important;[^}]*right:\s*calc\(var\(--editorial-frame-marker-width\) \* -1\)\s*!important;[^}]*background-position:\s*calc\(50% \+ var\(--editorial-frame-marker-content-offset\) \* 0\.5\) 50%;/);
 });
 
 test('Editorial Frame styles remove the chrome shell on mobile', () => {

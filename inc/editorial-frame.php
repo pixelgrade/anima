@@ -268,21 +268,23 @@ function anima_editorial_frame_nav_menu_item_title( string $title, WP_Post $item
 		return $title;
 	}
 
+	$label = '<span class="c-editorial-frame__label">' . $title . '</span>';
+
 	if ( 'regular' !== anima_editorial_frame_get_item_kind( $item ) ) {
-		return $title;
+		return $label;
 	}
 
 	if ( in_array( 'menu-item--monogram-off', (array) $item->classes, true ) ) {
-		return $title;
+		return $label;
 	}
 
 	$monogram = anima_get_editorial_frame_menu_item_monogram( $item );
 
 	if ( '' === $monogram ) {
-		return $title;
+		return $label;
 	}
 
-	return '<span class="menu-item-monogram" aria-hidden="true">' . esc_html( $monogram ) . '</span><span class="c-editorial-frame__label">' . $title . '</span>';
+	return '<span class="menu-item-monogram" aria-hidden="true">' . esc_html( $monogram ) . '</span>' . $label;
 }
 add_filter( 'nav_menu_item_title', 'anima_editorial_frame_nav_menu_item_title', 20, 4 );
 
