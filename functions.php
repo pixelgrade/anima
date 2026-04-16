@@ -59,8 +59,9 @@ if ( ! function_exists( 'anima_setup' ) ) {
 		register_nav_menus( [
 			'primary'            => esc_html__( 'Primary Menu', '__theme_txtd' ),
 			'secondary'          => esc_html__( 'Secondary Menu', '__theme_txtd' ),
-			'tertiary'          => esc_html__( 'Tertiary Menu', '__theme_txtd' ),
-			'search-suggestions' => esc_html__( 'Search Suggestions', '__theme_txtd' )
+			'tertiary'           => esc_html__( 'Tertiary Menu', '__theme_txtd' ),
+			'chrome'             => esc_html__( 'Chrome Menu', '__theme_txtd' ),
+			'search-suggestions' => esc_html__( 'Search Suggestions', '__theme_txtd' ),
 		] );
 
 		// Add theme support for selective refresh for widgets.
@@ -491,6 +492,7 @@ require_once trailingslashit( get_template_directory() ) . 'inc/template-tags.ph
  * Functions which enhance the theme by hooking into WordPress.
  */
 require_once trailingslashit( get_template_directory() ) . 'inc/template-functions.php';
+require_once trailingslashit( get_template_directory() ) . 'inc/editorial-frame.php';
 require_once trailingslashit( get_template_directory() ) . 'inc/title-styles.php';
 require_once trailingslashit( get_template_directory() ) . 'inc/extras.php';
 require_once trailingslashit( get_template_directory() ) . 'inc/required-plugins.php';

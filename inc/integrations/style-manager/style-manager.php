@@ -14,6 +14,7 @@ require_once __DIR__ . '/extras.php';
 if ( defined( '\Pixelgrade\StyleManager\VERSION' ) ) {
 
 	require_once __DIR__ . '/colors.php';
+	require_once __DIR__ . '/editorial-frame.php';
 	require_once __DIR__ . '/fonts.php';
 	require_once __DIR__ . '/motion.php';
 	require_once __DIR__ . '/tweak-board.php';
