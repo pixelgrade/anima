@@ -262,15 +262,19 @@ function anima_get_post_format_single_template_candidate( WP_Post $post ): strin
 		return '';
 	}
 
-	if ( 'quote' !== anima_normalize_post_expression_format( get_post_format( $post ) ) ) {
+	$post_format = anima_normalize_post_expression_format( get_post_format( $post ) );
+
+	if ( ! in_array( $post_format, [ 'quote', 'image' ], true ) ) {
 		return '';
 	}
 
-	if ( ! anima_has_block_template_slug( 'single-quote' ) ) {
+	$template_slug = 'single-' . $post_format;
+
+	if ( ! anima_has_block_template_slug( $template_slug ) ) {
 		return '';
 	}
 
-	return 'single-quote.php';
+	return $template_slug . '.php';
 }
 
 function anima_has_block_template_slug( string $slug, string $template_type = 'wp_template' ): bool {

@@ -59,6 +59,16 @@ $quote_post_id = $create_post(
 set_post_format( $quote_post_id, 'quote' );
 update_post_meta( $quote_post_id, '_wp_page_template', 'single-split-header' );
 
+$image_post_id = $create_post(
+	[
+		'post_title'   => 'Image Single Template Fixture',
+		'post_name'    => 'image-single-template-fixture',
+		'post_content' => '<!-- wp:paragraph --><p>Image body copy.</p><!-- /wp:paragraph -->',
+	]
+);
+set_post_format( $image_post_id, 'image' );
+update_post_meta( $image_post_id, '_wp_page_template', 'single-split-header' );
+
 $base_hierarchy = [
 	'single-split-header',
 	'single-post-quote-single-template-fixture.php',
@@ -66,22 +76,37 @@ $base_hierarchy = [
 	'single.php',
 ];
 
+$image_base_hierarchy = [
+	'single-split-header',
+	'single-post-image-single-template-fixture.php',
+	'single-post.php',
+	'single.php',
+];
+
 $template_filter = static function ( $template, $id, $template_type ) {
-	if ( 'wp_template' !== $template_type || get_stylesheet() . '//single-quote' !== $id ) {
+	if ( 'wp_template' !== $template_type ) {
 		return $template;
 	}
 
 	$block_template                 = new WP_Block_Template();
 	$block_template->id             = $id;
 	$block_template->theme          = get_stylesheet();
-	$block_template->slug           = 'single-quote';
 	$block_template->type           = 'wp_template';
 	$block_template->source         = 'custom';
 	$block_template->origin         = 'theme';
-	$block_template->title          = 'Single Quote';
 	$block_template->content        = '<!-- wp:post-content /-->';
 	$block_template->has_theme_file = false;
 	$block_template->is_custom      = true;
+
+	if ( get_stylesheet() . '//single-quote' === $id ) {
+		$block_template->slug  = 'single-quote';
+		$block_template->title = 'Single Quote';
+	} elseif ( get_stylesheet() . '//single-image' === $id ) {
+		$block_template->slug  = 'single-image';
+		$block_template->title = 'Single Image';
+	} else {
+		return $template;
+	}
 
 	return $block_template;
 };
@@ -96,6 +121,12 @@ $quote_hierarchy_without_template = anima_get_post_format_single_template_hierar
 
 if ( $base_hierarchy !== $quote_hierarchy_without_template ) {
 	anima_fail_post_expression_single_template_routing_test( 'Expected quote posts without a single-quote template to keep the default hierarchy.' );
+}
+
+$image_hierarchy_without_template = anima_get_post_format_single_template_hierarchy( $image_base_hierarchy, get_post( $image_post_id ) );
+
+if ( $image_base_hierarchy !== $image_hierarchy_without_template ) {
+	anima_fail_post_expression_single_template_routing_test( 'Expected image posts without a single-image template to keep the default hierarchy.' );
 }
 
 add_filter( 'pre_get_block_template', $template_filter, 10, 3 );
@@ -113,6 +144,20 @@ try {
 
 	if ( ! in_array( 'single-post-quote-single-template-fixture.php', $quote_hierarchy, true ) ) {
 		anima_fail_post_expression_single_template_routing_test( 'Expected quote routing to keep the remaining single-post hierarchy intact.' );
+	}
+
+	$image_hierarchy = anima_get_post_format_single_template_hierarchy( $image_base_hierarchy, get_post( $image_post_id ) );
+
+	if ( 'single-image.php' !== ( $image_hierarchy[0] ?? '' ) ) {
+		anima_fail_post_expression_single_template_routing_test( 'Expected image posts to prioritize the single-image template candidate.' );
+	}
+
+	if ( in_array( 'single-split-header', $image_hierarchy, true ) ) {
+		anima_fail_post_expression_single_template_routing_test( 'Expected image routing to ignore the manually assigned template candidate.' );
+	}
+
+	if ( ! in_array( 'single-post-image-single-template-fixture.php', $image_hierarchy, true ) ) {
+		anima_fail_post_expression_single_template_routing_test( 'Expected image routing to keep the remaining single-post hierarchy intact.' );
 	}
 } finally {
 	remove_filter( 'pre_get_block_template', $template_filter, 10 );

@@ -170,6 +170,22 @@ if ( '' !== ( $fallback_quote_profile['extracts']['quote_citation'] ?? '' ) ) {
 
 $portrait_profile = anima_get_post_expression_profile( $portrait_post_id, 'card' );
 
+if ( 'image' !== $portrait_profile['format'] ) {
+	anima_fail_post_expression_profile_test( 'Expected Image post format to resolve to image.' );
+}
+
+if ( 'image' !== $portrait_profile['traits']['media_mode'] ) {
+	anima_fail_post_expression_profile_test( 'Expected image posts to resolve image media mode.' );
+}
+
+if ( 'image' !== $portrait_profile['card_variant'] ) {
+	anima_fail_post_expression_profile_test( 'Expected image posts to resolve the image card variant.' );
+}
+
+if ( 'visual' !== $portrait_profile['single_variant'] ) {
+	anima_fail_post_expression_profile_test( 'Expected image posts to resolve the visual single variant.' );
+}
+
 if ( 'portrait' !== $portrait_profile['traits']['image_shape'] ) {
 	anima_fail_post_expression_profile_test( 'Expected portrait featured images to resolve the portrait bucket.' );
 }

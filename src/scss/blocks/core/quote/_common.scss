@@ -47,33 +47,18 @@ $enable-blockquote-block-styles:        true !default;
         }
 
         &.is-style-editorial:not(.is-style-plain) {
+            --theme-editorial-quote-ornament-inset: var(--theme-spacing-fluid-normal);
+            --theme-editorial-quote-ornament-gap: var(--theme-spacing-fluid-large);
+
             position: relative;
             border-left: none;
-            margin: 0;
-            margin-top: 3em;
-            margin-bottom: 3em;
-            padding-top: 2.25em;
-            padding-bottom: 0;
-            padding-left: 0;
-            padding-right: 0;
-            text-align: center;
-            color: white;
-            font-family: "Playfair Display", serif;
-            font-size: 28px;
-            line-height: 1.44;
-            font-weight: 400;
-            font-style: normal;
-            letter-spacing: normal;
-            text-transform: none;
+            color: inherit;
+            padding-top: calc(var(--theme-editorial-quote-ornament-inset) + var(--theme-editorial-quote-ornament-gap));
+            padding-bottom: var(--theme-spacing-fluid-large);
 
             &, p {
-                font-family: "Playfair Display", serif;
-                font-size: 28px;
-                line-height: 1.44;
-                font-weight: 400;
-                font-style: normal;
-                letter-spacing: normal;
-                text-transform: none;
+                @include apply-font(heading-3);
+                @extend %apply-font-properties;
             }
 
             &:before,
@@ -86,26 +71,25 @@ $enable-blockquote-block-styles:        true !default;
 
             &:before {
                 content: "“";
-                top: -22px;
+                top: calc(var(--theme-editorial-quote-ornament-inset) - (var(--current-font-size) * 0.7857142857));
                 left: 0;
                 left: 50%;
                 z-index: 2;
                 padding: 0 0.857em;
                 background: transparent;
-                color: #ffeb00;
-                font-family: "Playfair Display", serif;
-                font-size: 54px;
+                color: var(--sm-current-accent-color);
+                font-family: var(--current-font-family);
+                font-size: calc(var(--current-font-size) * 1.9285714286);
                 transform: translateX(-50%);
             }
 
             &:after {
                 content: "";
-                top: 0;
-                bottom: 0;
+                top: var(--theme-editorial-quote-ornament-inset);
                 left: 50%;
                 z-index: 1;
                 height: 1px;
-                color: #ffeb00;
+                color: var(--sm-current-accent-color);
                 background: currentColor;
                 box-shadow: currentColor 5.5em 0 0;
                 width: 3em;
@@ -122,20 +106,14 @@ $enable-blockquote-block-styles:        true !default;
             cite,
             footer {
                 display: block;
-                margin-top: 3em;
-                font-family: "Noto Serif", serif;
-                font-size: 16px;
-                line-height: 1.5;
-                font-weight: 700;
-                font-style: normal;
-                letter-spacing: normal;
-                text-transform: none;
-                text-align: center;
+                @include apply-font(heading-5);
+                @extend %apply-font-properties;
+                text-align: inherit; // reset
                 transform: none;
             }
 
             a:hover {
-                color: #ffeb00;
+                color: var(--sm-current-accent-color);
             }
         }
     }

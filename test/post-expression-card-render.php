@@ -124,8 +124,19 @@ $quote_post_id = $create_post(
 );
 set_post_format( $quote_post_id, 'quote' );
 
+$image_post_id = $create_post(
+	[
+		'post_title'   => 'Image Card Fixture',
+		'post_content' => '<!-- wp:paragraph --><p>Image body copy.</p><!-- /wp:paragraph -->',
+	]
+);
+set_post_format( $image_post_id, 'image' );
+
 $quote_attachment_id = $create_attachment( 'Quote Card Fixture', 1600, 900 );
 set_post_thumbnail( $quote_post_id, $quote_attachment_id );
+
+$image_attachment_id = $create_attachment( 'Image Card Fixture', 1600, 900 );
+set_post_thumbnail( $image_post_id, $image_attachment_id );
 
 $valid_blueprint_content =
 	'<!-- wp:novablocks/supernova {"contentType":"custom","colorSignal":3,"paletteVariation":11,"palette":1} -->' .
@@ -134,20 +145,36 @@ $valid_blueprint_content =
 	'<!-- /wp:novablocks/supernova-item -->' .
 	'<!-- /wp:novablocks/supernova -->';
 
-$blueprint_filter = static function ( $template, $id, $template_type ) use ( $valid_blueprint_content ) {
-	if ( 'wp_template_part' !== $template_type || get_stylesheet() . '//card-quote' !== $id ) {
+$valid_image_blueprint_content =
+	'<!-- wp:novablocks/supernova {"contentType":"custom","colorSignal":3,"paletteVariation":11,"palette":1} -->' .
+	'<!-- wp:novablocks/supernova-item {"contentType":"custom","cardLayout":"stacked","contentPosition":"bottom center","contentPadding":50,"overlayFilterStrength":50,"minHeightFallback":66,"thumbnailAspectRatioString":"landscape","imageResizing":"cover","colorSignal":3,"paletteVariation":11,"contentPaletteVariation":11} -->' .
+	'<!-- wp:heading {"level":3,"className":"is-style-default"} --><h3 class="wp-block-heading is-style-default">Blueprint image title</h3><!-- /wp:heading -->' .
+	'<!-- /wp:novablocks/supernova-item -->' .
+	'<!-- /wp:novablocks/supernova -->';
+
+$blueprint_filter = static function ( $template, $id, $template_type ) use ( $valid_blueprint_content, $valid_image_blueprint_content ) {
+	if ( 'wp_template_part' !== $template_type ) {
 		return $template;
 	}
 
 	$block_template                 = new WP_Block_Template();
 	$block_template->id             = $id;
 	$block_template->theme          = get_stylesheet();
-	$block_template->slug           = 'card-quote';
+	if ( get_stylesheet() . '//card-quote' === $id ) {
+		$block_template->slug    = 'card-quote';
+		$block_template->title   = 'Card Quote';
+		$block_template->content = $valid_blueprint_content;
+	} elseif ( get_stylesheet() . '//card-image' === $id ) {
+		$block_template->slug    = 'card-image';
+		$block_template->title   = 'Card Image';
+		$block_template->content = $valid_image_blueprint_content;
+	} else {
+		return $template;
+	}
+
 	$block_template->type           = 'wp_template_part';
 	$block_template->source         = 'custom';
 	$block_template->origin         = 'theme';
-	$block_template->title          = 'Card Quote';
-	$block_template->content        = $valid_blueprint_content;
 	$block_template->area           = WP_TEMPLATE_PART_AREA_UNCATEGORIZED;
 	$block_template->has_theme_file = false;
 	$block_template->is_custom      = true;
@@ -178,6 +205,28 @@ try {
 
 	if ( false !== strpos( $quote_markup, 'Blueprint quote copy.' ) ) {
 		anima_fail_post_expression_card_render_test( 'Expected the live quote text to replace the static blueprint copy.' );
+	}
+
+	$image_markup = novablocks_get_collection_card_markup_from_post( get_post( $image_post_id ), $attributes );
+
+	if ( false === strpos( $image_markup, 'format-image' ) ) {
+		anima_fail_post_expression_card_render_test( 'Expected image semantic class on card output.' );
+	}
+
+	if ( false === strpos( $image_markup, 'card-trait-landscape' ) ) {
+		anima_fail_post_expression_card_render_test( 'Expected landscape trait class on image card output.' );
+	}
+
+	if ( false === strpos( $image_markup, 'card-variant-image' ) ) {
+		anima_fail_post_expression_card_render_test( 'Expected image card variant class on card output.' );
+	}
+
+	if ( false === strpos( $image_markup, 'Image Card Fixture' ) ) {
+		anima_fail_post_expression_card_render_test( 'Expected the live image post title to reach the rendered card.' );
+	}
+
+	if ( false !== strpos( $image_markup, 'Blueprint image title' ) ) {
+		anima_fail_post_expression_card_render_test( 'Expected the live image post title to replace the static blueprint heading copy.' );
 	}
 } finally {
 	remove_filter( 'pre_get_block_template', $blueprint_filter, 10 );
