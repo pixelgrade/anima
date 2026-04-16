@@ -40,7 +40,8 @@ if ( ! function_exists( 'anima_setup' ) ) {
 		 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
 		 */
 		add_theme_support( 'post-thumbnails' );
-		add_theme_support( 'post-formats', [ 'quote', 'image', 'gallery', 'link', 'audio', 'video' ] );
+		// TODO: Re-enable gallery, link, audio, and video once LT ships their blueprint cards and single-template routing.
+		add_theme_support( 'post-formats', [ 'quote', 'image' ] );
 
 		/**
 		 * Switch default core markup for search form, comment form, and comments
