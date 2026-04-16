@@ -45,9 +45,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $option_names = [
+	'sm_editorial_frame_intro',
 	'sm_chrome_preset',
-	'sm_chrome_menu_visibility',
-	'sm_chrome_frame_visibility',
 	'sm_chrome_color_role',
 ];
 $original_options = [];
@@ -101,11 +100,20 @@ foreach ( $option_names as $option_name ) {
 	}
 }
 
+$editorial_frame_intro = $section_options['sm_editorial_frame_intro'] ?? [];
+
+if (
+	'html' !== ( $editorial_frame_intro['type'] ?? '' )
+	|| false === strpos( (string) ( $editorial_frame_intro['html'] ?? '' ), 'Editorial Frame' )
+	|| false === strpos( (string) ( $editorial_frame_intro['html'] ?? '' ), 'Frame the site with a graphic chrome and style a dedicated Chrome menu with search, social links, and expressive navigation.' )
+) {
+	anima_fail_editorial_frame_config_test( 'Expected the Tweak Board section to render the Editorial Frame title and description before the controls.' );
+}
+
 $option_order = array_keys( $section_options );
 $expected_tail = [
+	'sm_editorial_frame_intro',
 	'sm_chrome_preset',
-	'sm_chrome_menu_visibility',
-	'sm_chrome_frame_visibility',
 	'sm_chrome_color_role',
 ];
 $actual_tail = array_slice( $option_order, -1 * count( $expected_tail ) );
@@ -135,8 +143,6 @@ $menu_locations['chrome'] = (int) $temporary_menu_id;
 set_theme_mod( 'nav_menu_locations', $menu_locations );
 
 update_option( 'sm_chrome_preset', 'editorial-frame' );
-update_option( 'sm_chrome_menu_visibility', true );
-update_option( 'sm_chrome_frame_visibility', true );
 update_option( 'sm_chrome_color_role', 'strong-contrast' );
 
 $body_classes = apply_filters( 'body_class', [] );
@@ -152,6 +158,22 @@ foreach ( $expected_classes as $class_name ) {
 		anima_restore_editorial_frame_config_state( $original_options, $original_locations, $temporary_menu_id );
 		anima_fail_editorial_frame_config_test( 'Expected the body classes to include ' . $class_name . '.' );
 	}
+}
+
+$menu_locations = is_array( $menu_locations ) ? $menu_locations : [];
+unset( $menu_locations['chrome'] );
+set_theme_mod( 'nav_menu_locations', $menu_locations );
+
+$body_classes_without_menu = apply_filters( 'body_class', [] );
+
+if ( ! in_array( 'has-editorial-frame-frame', $body_classes_without_menu, true ) ) {
+	anima_restore_editorial_frame_config_state( $original_options, $original_locations, $temporary_menu_id );
+	anima_fail_editorial_frame_config_test( 'Expected the frame class to remain enabled when the Editorial Frame preset is active.' );
+}
+
+if ( in_array( 'has-editorial-frame-menu', $body_classes_without_menu, true ) ) {
+	anima_restore_editorial_frame_config_state( $original_options, $original_locations, $temporary_menu_id );
+	anima_fail_editorial_frame_config_test( 'Expected the chrome menu class to disappear when no Chrome menu is assigned.' );
 }
 
 anima_restore_editorial_frame_config_state( $original_options, $original_locations, $temporary_menu_id );

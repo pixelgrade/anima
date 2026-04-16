@@ -29,23 +29,12 @@ function anima_is_editorial_frame_enabled(): bool {
 }
 
 /**
- * Determine whether an Editorial Frame toggle option is enabled.
- *
- * @param string $option_name Option name.
- * @param bool   $default     Default boolean value.
- * @return bool
- */
-function anima_get_editorial_frame_toggle_option( string $option_name, bool $default ): bool {
-	return (bool) filter_var( get_option( $option_name, $default ), FILTER_VALIDATE_BOOLEAN );
-}
-
-/**
  * Determine whether the frame accents should render.
  *
  * @return bool
  */
 function anima_is_editorial_frame_frame_enabled(): bool {
-	return anima_is_editorial_frame_enabled() && anima_get_editorial_frame_toggle_option( 'sm_chrome_frame_visibility', true );
+	return anima_is_editorial_frame_enabled();
 }
 
 /**
@@ -64,7 +53,6 @@ function anima_editorial_frame_has_menu(): bool {
  */
 function anima_is_editorial_frame_menu_enabled(): bool {
 	return anima_is_editorial_frame_enabled()
-		&& anima_get_editorial_frame_toggle_option( 'sm_chrome_menu_visibility', true )
 		&& anima_editorial_frame_has_menu();
 }
 

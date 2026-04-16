@@ -46,8 +46,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $option_names = [
 	'sm_chrome_preset',
-	'sm_chrome_menu_visibility',
-	'sm_chrome_frame_visibility',
 	'sm_chrome_color_role',
 ];
 $original_options = [];
@@ -106,8 +104,6 @@ $menu_locations['chrome'] = (int) $temporary_menu_id;
 set_theme_mod( 'nav_menu_locations', $menu_locations );
 
 update_option( 'sm_chrome_preset', 'editorial-frame' );
-update_option( 'sm_chrome_menu_visibility', true );
-update_option( 'sm_chrome_frame_visibility', true );
 update_option( 'sm_chrome_color_role', 'strong-contrast' );
 
 ob_start();
@@ -122,6 +118,7 @@ $expected_fragments = [
 	'social-menu-item'                           => 'Expected social chrome links to keep the social icon class.',
 	'menu-item--search'                          => 'Expected Search extras to keep the existing search class.',
 	'c-editorial-frame__navigation'              => 'Expected the chrome menu navigation wrapper to render.',
+	'c-editorial-frame__label'                   => 'Expected ordinary chrome links to keep a dedicated label wrapper.',
 ];
 
 foreach ( $expected_fragments as $fragment => $message ) {

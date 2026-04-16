@@ -22,6 +22,16 @@ test('Editorial Frame styles expose the desktop frame shell selectors', () => {
   assert.match(css, /\.c-editorial-frame__left\s*\{/);
 });
 
+test('Editorial Frame styles expose the Hive-like rail strip treatment', () => {
+  const css = compileEditorialFrameCss();
+
+  assert.match(css, /\.c-editorial-frame__rail(?::before|::before)\s*\{[^}]*width:\s*1px;/);
+  assert.match(css, /\.c-editorial-frame__menu > li > a\s*\{[^}]*color:\s*transparent;/);
+  assert.match(css, /\.c-editorial-frame__menu > li > a(?::hover|:focus-visible)\s*\{[^}]*color:\s*var\(--editorial-frame-ink\);/);
+  assert.doesNotMatch(css, /\.c-editorial-frame__rail\s*\{[^}]*border-radius:/);
+  assert.doesNotMatch(css, /\.c-editorial-frame__rail\s*\{[^}]*box-shadow:/);
+});
+
 test('Editorial Frame styles expose the regular-link monogram treatment', () => {
   const css = compileEditorialFrameCss();
 

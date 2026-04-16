@@ -33,6 +33,13 @@ function anima_add_editorial_frame_section_to_style_manager_config( $config ) {
 		$config['sections']['style_manager_section'],
 		[
 			'options' => [
+				'sm_editorial_frame_intro' => [
+					'type'         => 'html',
+					'setting_type' => 'option',
+					'setting_id'   => 'sm_editorial_frame_intro',
+					'html'         => '<div class="customize-control-title">' . esc_html__( 'Editorial Frame', '__theme_txtd' ) . '</div>' .
+						'<span class="description customize-control-description">' . esc_html__( 'Frame the site with a graphic chrome and style a dedicated Chrome menu with search, social links, and expressive navigation.', '__theme_txtd' ) . '</span>',
+				],
 				'sm_chrome_preset' => [
 					'type'         => 'sm_radio',
 					'setting_type' => 'option',
@@ -43,22 +50,6 @@ function anima_add_editorial_frame_section_to_style_manager_config( $config ) {
 						'none'            => esc_html__( 'None', '__theme_txtd' ),
 						'editorial-frame' => esc_html__( 'Editorial Frame', '__theme_txtd' ),
 					],
-				],
-				'sm_chrome_menu_visibility' => [
-					'type'            => 'sm_toggle',
-					'setting_type'    => 'option',
-					'setting_id'      => 'sm_chrome_menu_visibility',
-					'label'           => esc_html__( 'Show Chrome Menu', '__theme_txtd' ),
-					'default'         => true,
-					'active_callback' => 'anima_is_editorial_frame_enabled',
-				],
-				'sm_chrome_frame_visibility' => [
-					'type'            => 'sm_toggle',
-					'setting_type'    => 'option',
-					'setting_id'      => 'sm_chrome_frame_visibility',
-					'label'           => esc_html__( 'Show Frame', '__theme_txtd' ),
-					'default'         => true,
-					'active_callback' => 'anima_is_editorial_frame_enabled',
 				],
 				'sm_chrome_color_role' => [
 					'type'            => 'sm_radio',
@@ -89,9 +80,8 @@ function anima_add_editorial_frame_section_to_style_manager_config( $config ) {
  */
 function anima_reorganize_editorial_frame_customizer_controls( $sm_panel_config, $sm_section_config ) {
 	$required_options = [
+		'sm_editorial_frame_intro',
 		'sm_chrome_preset',
-		'sm_chrome_menu_visibility',
-		'sm_chrome_frame_visibility',
 		'sm_chrome_color_role',
 	];
 
@@ -108,10 +98,9 @@ function anima_reorganize_editorial_frame_customizer_controls( $sm_panel_config,
 	$sm_panel_config['sections']['sm_tweak_board_section']['options'] = array_merge(
 		$sm_panel_config['sections']['sm_tweak_board_section']['options'],
 		[
-			'sm_chrome_preset'           => $sm_section_config['options']['sm_chrome_preset'],
-			'sm_chrome_menu_visibility'  => $sm_section_config['options']['sm_chrome_menu_visibility'],
-			'sm_chrome_frame_visibility' => $sm_section_config['options']['sm_chrome_frame_visibility'],
-			'sm_chrome_color_role'       => $sm_section_config['options']['sm_chrome_color_role'],
+			'sm_editorial_frame_intro' => $sm_section_config['options']['sm_editorial_frame_intro'],
+			'sm_chrome_preset'         => $sm_section_config['options']['sm_chrome_preset'],
+			'sm_chrome_color_role'     => $sm_section_config['options']['sm_chrome_color_role'],
 		]
 	);
 
@@ -132,22 +121,21 @@ function anima_maybe_invalidate_style_manager_editorial_frame_cache(): void {
 	$tweak_board_section     = $cached_config['panels']['style_manager_panel']['sections']['sm_tweak_board_section'] ?? [];
 	$editorial_frame_section = $cached_config['panels']['style_manager_panel']['sections']['sm_editorial_frame_section'] ?? [];
 	$section_options         = $tweak_board_section['options'] ?? [];
+	$intro_option            = $section_options['sm_editorial_frame_intro'] ?? [];
 	$preset_option           = $section_options['sm_chrome_preset'] ?? [];
-	$menu_option             = $section_options['sm_chrome_menu_visibility'] ?? [];
-	$frame_option            = $section_options['sm_chrome_frame_visibility'] ?? [];
 	$color_role_option       = $section_options['sm_chrome_color_role'] ?? [];
 	$option_order            = array_keys( $section_options );
 	$expected_tail           = [
+		'sm_editorial_frame_intro',
 		'sm_chrome_preset',
-		'sm_chrome_menu_visibility',
-		'sm_chrome_frame_visibility',
 		'sm_chrome_color_role',
 	];
 	$has_expected_copy       = (
 		empty( $editorial_frame_section )
+		&& ( $intro_option['type'] ?? '' ) === 'html'
+		&& false !== strpos( (string) ( $intro_option['html'] ?? '' ), 'Editorial Frame' )
+		&& false !== strpos( (string) ( $intro_option['html'] ?? '' ), 'Frame the site with a graphic chrome and style a dedicated Chrome menu with search, social links, and expressive navigation.' )
 		&& ( $preset_option['setting_id'] ?? '' ) === 'sm_chrome_preset'
-		&& ( $menu_option['setting_id'] ?? '' ) === 'sm_chrome_menu_visibility'
-		&& ( $frame_option['setting_id'] ?? '' ) === 'sm_chrome_frame_visibility'
 		&& ( $color_role_option['setting_id'] ?? '' ) === 'sm_chrome_color_role'
 		&& $expected_tail === array_slice( $option_order, -1 * count( $expected_tail ) )
 	);
