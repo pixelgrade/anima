@@ -5,12 +5,12 @@ body.has-editorial-frame {
   --editorial-frame-page-gutter: calc(var(--editorial-frame-rail-width) + var(--editorial-frame-top-size));
   --editorial-frame-link-font-size: 0.8125em;
   --editorial-frame-link-line-height: 2.57143em;
-  --editorial-frame-link-min-width: 8.57143em;
   --editorial-frame-link-margin-right: 0.85714em;
   --editorial-frame-link-padding-left: 1.71429em;
   --editorial-frame-marker-width: 2.52632em;
   --editorial-frame-marker-height: 1.89474em;
-  --editorial-frame-marker-icon-size: 1.25em;
+  --editorial-frame-marker-font-size: 1.21429em;
+  --editorial-frame-marker-mask-size: 1.125em;
   --editorial-frame-head-padding-y: 1.5em;
   --editorial-frame-head-min-height: 21em;
   --editorial-frame-surface: var(--sm-current-fg1-color);
@@ -43,7 +43,7 @@ body.has-editorial-frame-menu #page {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 100;
+  z-index: 4000;
   color: var(--editorial-frame-surface);
 }
 
@@ -149,18 +149,17 @@ body.has-editorial-frame-menu #page {
   display: block;
   font-size: 0.8125em;
   line-height: 2.57143em;
-  min-width: var(--editorial-frame-link-min-width);
   margin-top: -1px;
   margin-right: 0.85714em;
   padding-left: 1.71429em;
   position: relative;
   right: 100%;
   white-space: nowrap;
-  border: 1px solid var(--editorial-frame-divider-color);
+  border: 1px solid transparent;
   border-right-width: 0;
   color: transparent;
-  pointer-events: none;
-  text-align: right;
+  pointer-events: auto;
+  text-align: left;
   text-decoration: none;
   background: transparent;
   transition: color var(--theme-transition), border-color var(--theme-transition), background-color var(--theme-transition);
@@ -184,14 +183,14 @@ body.has-editorial-frame-menu #page {
 .menu-item--editorial-frame-link > a .menu-item-monogram {
   position: absolute;
   top: 50%;
-  left: 0;
+  right: calc(var(--editorial-frame-marker-width) * -1);
   display: inline-block;
   width: var(--editorial-frame-marker-width);
   height: var(--editorial-frame-marker-height);
   color: var(--editorial-frame-surface);
-  font-size: 0.95em;
+  font-size: var(--editorial-frame-marker-font-size);
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   line-height: var(--editorial-frame-marker-height);
   text-align: center;
   text-transform: uppercase;
@@ -219,10 +218,10 @@ body.has-editorial-frame-menu #page {
   width: var(--editorial-frame-marker-width);
   height: var(--editorial-frame-marker-height);
   line-height: var(--editorial-frame-marker-height);
-  font-size: 1.35714em;
+  font-size: var(--editorial-frame-marker-font-size);
   position: absolute;
   top: 50%;
-  left: 0;
+  right: calc(var(--editorial-frame-marker-width) * -1);
   text-align: center;
   pointer-events: auto;
   color: var(--editorial-frame-surface);
@@ -236,11 +235,13 @@ body.has-editorial-frame-menu #page {
 .nav--toolbar .social-menu-item > a[href*="x.com"]::before,
 .nav--toolbar .social-menu-item > a[href*="twitter.com"]::before {
   display: block;
-  width: var(--editorial-frame-marker-icon-size);
-  height: var(--editorial-frame-marker-icon-size);
+  width: var(--editorial-frame-marker-width);
+  height: var(--editorial-frame-marker-height);
   line-height: 0;
-  left: calc((var(--editorial-frame-marker-width) - var(--editorial-frame-marker-icon-size)) * 0.5);
-  padding-top: 0;
+  right: calc(var(--editorial-frame-marker-width) * -1);
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: var(--editorial-frame-marker-mask-size) var(--editorial-frame-marker-mask-size);
   background-color: var(--editorial-frame-surface);
 }
 
@@ -254,18 +255,22 @@ body.has-editorial-frame-menu #page {
   content: "";
   position: absolute;
   top: 50%;
-  left: calc((var(--editorial-frame-marker-width) - var(--menu-item-icon-width)) * 0.5);
+  right: calc(var(--editorial-frame-marker-width) * -1);
   display: block;
-  width: var(--menu-item-icon-width);
-  height: var(--menu-item-icon-width);
+  font-size: var(--editorial-frame-marker-font-size);
+  width: var(--editorial-frame-marker-width);
+  height: var(--editorial-frame-marker-height);
   padding-left: 0;
   background-color: var(--editorial-frame-surface);
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: var(--editorial-frame-marker-mask-size) var(--editorial-frame-marker-mask-size);
   mask: no-repeat 50% 50%;
   mask-image: var(--menu-item-icon-mask-image);
-  mask-size: contain;
+  mask-size: var(--editorial-frame-marker-mask-size) var(--editorial-frame-marker-mask-size);
   -webkit-mask: no-repeat 50% 50%;
   -webkit-mask-image: var(--menu-item-icon-mask-image);
-  -webkit-mask-size: contain;
+  -webkit-mask-size: var(--editorial-frame-marker-mask-size) var(--editorial-frame-marker-mask-size);
   transform: translateY(-50%);
 }
 
