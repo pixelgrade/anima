@@ -114,10 +114,12 @@ $expected_fragments = [
 	'c-editorial-frame__top'                     => 'Expected the top frame accent to render.',
 	'c-editorial-frame__left'                    => 'Expected the left frame accent to render.',
 	'c-editorial-frame__rail'                    => 'Expected the right rail container to render.',
+	'c-editorial-frame__head'                    => 'Expected the Hive-like toolbar head wrapper to render.',
 	'menu-item-monogram'                         => 'Expected ordinary chrome links to render a monogram marker.',
 	'social-menu-item'                           => 'Expected social chrome links to keep the social icon class.',
 	'menu-item--search'                          => 'Expected Search extras to keep the existing search class.',
 	'c-editorial-frame__navigation'              => 'Expected the chrome menu navigation wrapper to render.',
+	'nav--toolbar'                               => 'Expected the chrome menu to use the toolbar navigation class.',
 	'c-editorial-frame__label'                   => 'Expected ordinary chrome links to keep a dedicated label wrapper.',
 ];
 

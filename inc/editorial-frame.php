@@ -232,11 +232,16 @@ function anima_editorial_frame_nav_menu_css_class( array $classes, WP_Post $item
 		return $classes;
 	}
 
+	$classes = array_values( array_diff( $classes, [ 'icon-only' ] ) );
 	$classes[] = 'menu-item--editorial-frame';
 	$item_kind = anima_editorial_frame_get_item_kind( $item );
 
 	if ( 'social' === $item_kind ) {
 		$classes[] = 'social-menu-item';
+	}
+
+	if ( in_array( 'menu-item--search', $classes, true ) ) {
+		$classes[] = 'nav__item--search';
 	}
 
 	if ( 'regular' === $item_kind ) {
@@ -305,20 +310,22 @@ function anima_render_editorial_frame_shell(): void {
 		<?php endif; ?>
 
 		<?php if ( $has_menu ) : ?>
-			<aside class="c-editorial-frame__rail">
-				<?php
-				wp_nav_menu(
-					[
-						'theme_location'     => 'chrome',
-						'container'          => 'nav',
-						'container_class'    => 'c-editorial-frame__navigation',
-						'container_aria_label' => esc_attr__( 'Chrome Menu', '__theme_txtd' ),
-						'menu_class'         => 'menu c-editorial-frame__menu',
-						'fallback_cb'        => false,
-						'depth'              => 2,
-					]
-				);
-				?>
+			<aside class="c-editorial-frame__rail toolbar">
+				<div class="c-editorial-frame__head toolbar__head">
+					<?php
+					wp_nav_menu(
+						[
+							'theme_location'       => 'chrome',
+							'container'            => 'nav',
+							'container_class'      => 'c-editorial-frame__navigation toolbar-navigation',
+							'container_aria_label' => esc_attr__( 'Chrome Menu', '__theme_txtd' ),
+							'menu_class'           => 'menu c-editorial-frame__menu nav nav--toolbar',
+							'fallback_cb'          => false,
+							'depth'                => 2,
+						]
+					);
+					?>
+				</div>
 			</aside>
 		<?php endif; ?>
 	</div>
