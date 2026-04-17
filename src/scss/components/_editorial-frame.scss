@@ -298,6 +298,7 @@ body.has-editorial-frame-menu #page {
   -webkit-mask-position: calc(50% + (var(--editorial-frame-marker-padding-left) * 0.5)) 50%;
   -webkit-mask-size: var(--editorial-frame-marker-mask-size) var(--editorial-frame-marker-mask-size);
   transform: translateY(-50%);
+  transition: transform .25s $ease;
 }
 
 .c-editorial-frame .nav--toolbar .menu-item--search > a::after,
