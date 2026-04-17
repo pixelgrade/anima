@@ -32,9 +32,20 @@ if ( ! class_exists( 'Anima_Admin_Customize', false ) ) :
 		 * @param WP_Customize_Manager $wp_customize Theme Customizer object.
 		 */
 		public function customize_register( WP_Customize_Manager $wp_customize ) {
-			$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
-			$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
-			$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
+			// WP core registers these settings via WP_Customize_Manager::register_controls()
+			// before the `customize_register` hook fires, but only when the relevant theme
+			// supports are declared (e.g. `custom-header` for `header_textcolor`). Anima
+			// doesn't ship `add_theme_support('custom-header')`, so `header_textcolor` is
+			// absent and a blind `->transport = …` hits null. That was a warning on PHP 7
+			// and is a fatal on PHP 8+, which aborts the entire Customizer load and leaves
+			// it stuck on "Loading…". Guard each lookup so an unsupported setting is a
+			// no-op rather than a 500.
+			foreach ( [ 'blogname', 'blogdescription', 'header_textcolor' ] as $setting_id ) {
+				$setting = $wp_customize->get_setting( $setting_id );
+				if ( $setting instanceof \WP_Customize_Setting ) {
+					$setting->transport = 'postMessage';
+				}
+			}
 
 			if ( isset( $wp_customize->selective_refresh ) ) {
 				$wp_customize->selective_refresh->add_partial( 'blogname', [
