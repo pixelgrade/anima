@@ -7,8 +7,9 @@
     @include apply-font(site-title);
 }
 
-.nb-card__description {
-    // Card descriptions are a short reading voice, not body prose — map them
-    // to the small-body role so palettes can tune them independently of body.
-    @include apply-font(small-body);
-}
+// Note: .nb-card__description intentionally has no apply-font here.
+// Nova Blocks already scales description size via --font-size-modifier based
+// on collection layout (0.95 in 3/4-col grids, 0.84 in horizontal 3/4-col).
+// The small_body_font role (registered in fonts.php) is available for palette
+// pins and site-specific overrides, but is not wired to .nb-card__description
+// unconditionally to avoid regressing sites that prefer body-sized descriptions.
