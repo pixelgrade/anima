@@ -71,11 +71,11 @@
 .menu-item--dark-mode {
   --menu-item-icon-mask-image: url(#{ $icon-dark-mode-path });
 
-  .is-dark &:not(.no-icon) a:after {
+  .is-dark :is(&, #specific):not(.no-icon) a:after {
     transform: translateY(-50%) rotate(180deg);
   }
 
-  .is-dark &.icon-only a:after {
+  .is-dark :is(&, #specific).icon-only a:after {
     transform: translate(-50%, -50%) rotate(180deg);
   }
 }
