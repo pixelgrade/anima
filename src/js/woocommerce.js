@@ -1,3 +1,11 @@
+import $ from 'jquery';
+
+const {
+  CART_MENU_ITEM_SELECTOR,
+  SELECTIVE_REFRESH_CONTAINER_SELECTOR,
+  getCartMenuItemMarkup,
+} = require( './components/woocommerce-cart-menu.js' );
+
 (function ( $, document ) {
 
   // Handle Checkout Notifications
@@ -42,13 +50,13 @@
   $( function () {
 
     var $body = $( document.body ).not( '.woocommerce-cart' );
-    var $cartMenuItems = $( '.nb-navigation .menu > .menu-item--cart' );
+    var $cartMenuItems = $( CART_MENU_ITEM_SELECTOR );
 
     initializeCartMenuItems( $cartMenuItems );
 
     if ( !! window.wp?.customize?.selectiveRefresh ) {
       wp.customize.selectiveRefresh.bind( 'partial-content-rendered', function ( placement ) {
-        const $container = $( placement.container ).filter( '.nb-navigation .menu' );
+        const $container = $( placement.container ).filter( SELECTIVE_REFRESH_CONTAINER_SELECTOR );
         const $items = $container.children( '.menu-item--cart' );
         initializeCartMenuItems( $items );
       } );
@@ -60,11 +68,21 @@
 
         var $cartMenuItem = $( obj );
         var $cartMenuItemLink = $cartMenuItem.children( 'a' );
-        var cartMenuItemText = $cartMenuItemLink.text();
-        var $cartMenuItemCount = $( '<span class="menu-item__icon">0</span>' );
+        var isEditorialFrame = $cartMenuItem.hasClass( 'menu-item--editorial-frame' );
+        var cartMenuItemText = $cartMenuItemLink.children( '.c-editorial-frame__label, .menu-item__label' ).first().text().trim();
 
-        $cartMenuItemLink.html( `<span class="menu-item__label">${cartMenuItemText}</span>` );
-        $cartMenuItemCount.appendTo( $cartMenuItemLink );
+        if ( ! cartMenuItemText ) {
+          var $textOnlyLink = $cartMenuItemLink.clone();
+          $textOnlyLink.children( '.menu-item__icon' ).remove();
+          cartMenuItemText = $textOnlyLink.text().trim();
+        }
+
+        $cartMenuItemLink.html(
+          getCartMenuItemMarkup( {
+            label: cartMenuItemText,
+            editorialFrame: isEditorialFrame,
+          } )
+        );
 
         var fragmentKey = 'div.widget_shopping_cart_content';
         var $fragment = $( fragmentKey );

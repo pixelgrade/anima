@@ -14,6 +14,8 @@ body.has-editorial-frame {
   --editorial-frame-marker-width: 2.52632em;
   --editorial-frame-marker-height: 1.89474em;
   --editorial-frame-marker-font-size: 1.35714em;
+  --editorial-frame-marker-slot-width: calc(var(--editorial-frame-marker-font-size) * 2.52632);
+  --editorial-frame-marker-slot-height: calc(var(--editorial-frame-marker-font-size) * 1.89474);
   --editorial-frame-marker-padding-left: 0.63158em;
   --editorial-frame-marker-mask-size: 1em;
   --editorial-frame-head-padding-y: 24px;
@@ -302,6 +304,54 @@ body.has-editorial-frame-menu #page {
   content: none !important;
   display: none !important;
   left: auto !important;
+}
+
+.c-editorial-frame .nav--toolbar .menu-item--cart > a .menu-item__icon {
+  position: absolute;
+  top: 50%;
+  right: calc(var(--editorial-frame-marker-slot-width) * -1);
+  left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--editorial-frame-marker-slot-width);
+  height: var(--editorial-frame-marker-slot-height);
+  padding-left: 0;
+  color: var(--editorial-frame-surface);
+  font-size: var(--editorial-frame-link-font-size);
+  font-feature-settings: "lnum";
+  line-height: 1;
+  text-align: center;
+  transition: all .25s $ease;
+  transform: translateY(-50%) translateZ(0);
+  pointer-events: auto;
+}
+
+.c-editorial-frame .nav--toolbar .menu-item--cart > a .menu-item__icon:after {
+  content: "";
+  display: block;
+  width: var(--editorial-frame-marker-height);
+  height: var(--editorial-frame-marker-height);
+  border: .125em solid currentColor;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  transition: all .25s $ease;
+}
+
+.c-editorial-frame .nav--toolbar .menu-item--cart > a:hover .menu-item__icon,
+.c-editorial-frame .nav--toolbar .menu-item--cart > a:focus-visible .menu-item__icon {
+  color: inherit;
+}
+
+.c-editorial-frame .nav--toolbar .menu-item--cart > a:hover .menu-item__icon:after,
+.c-editorial-frame .nav--toolbar .menu-item--cart > a:focus-visible .menu-item__icon:after {
+  border-width: calc(var(--editorial-frame-marker-height) / 2);
+  border-color: currentColor;
 }
 
 .is-dark .c-editorial-frame .nav--toolbar .menu-item--dark-mode > a::before {

@@ -72,6 +72,30 @@ test('Editorial Frame styles keep social links on the icon slot', () => {
   assert.match(css, /\.c-editorial-frame \.nav--toolbar \.menu-item--search > a::before, \.c-editorial-frame \.nav--toolbar \.menu-item--dark-mode > a::before\s*\{[^}]*left:\s*auto\s*!important;[^}]*right:\s*calc\(var\(--editorial-frame-marker-width\) \* -1\)\s*!important;[^}]*box-sizing:\s*border-box;[^}]*padding-left:\s*var\(--editorial-frame-marker-padding-left\);[^}]*background-position:\s*calc\(50% \+ var\(--editorial-frame-marker-padding-left\) \* 0\.5\) 50%;[^}]*mask-position:\s*calc\(50% \+ var\(--editorial-frame-marker-padding-left\) \* 0\.5\) 50%;[^}]*-webkit-mask-position:\s*calc\(50% \+ var\(--editorial-frame-marker-padding-left\) \* 0\.5\) 50%;/);
 });
 
+test('Editorial Frame styles place cart counts on the chrome marker slot', () => {
+  const css = compileEditorialFrameCss();
+
+  assert.match(
+    css,
+    /body\.has-editorial-frame\s*\{[^}]*--editorial-frame-marker-slot-width:\s*calc\(var\(--editorial-frame-marker-font-size\) \* 2\.52632\);[^}]*--editorial-frame-marker-slot-height:\s*calc\(var\(--editorial-frame-marker-font-size\) \* 1\.89474\);/
+  );
+
+  assert.match(
+    css,
+    /\.c-editorial-frame \.nav--toolbar \.menu-item--cart > a \.menu-item__icon\s*\{[^}]*position:\s*absolute;[^}]*top:\s*50%;[^}]*right:\s*calc\(var\(--editorial-frame-marker-slot-width\) \* -1\);[^}]*display:\s*flex;[^}]*align-items:\s*center;[^}]*justify-content:\s*center;[^}]*box-sizing:\s*border-box;[^}]*width:\s*var\(--editorial-frame-marker-slot-width\);[^}]*height:\s*var\(--editorial-frame-marker-slot-height\);[^}]*padding-left:\s*0;[^}]*color:\s*var\(--editorial-frame-surface\);[^}]*font-feature-settings:\s*"lnum";[^}]*transition:\s*all 0\.25s[^;]*;[^}]*transform:\s*translateY\(-50%\) translateZ\(0\);/
+  );
+
+  assert.match(
+    css,
+    /\.c-editorial-frame \.nav--toolbar \.menu-item--cart > a \.menu-item__icon:after\s*\{[^}]*content:\s*"";[^}]*display:\s*block;[^}]*width:\s*var\(--editorial-frame-marker-height\);[^}]*height:\s*var\(--editorial-frame-marker-height\);[^}]*border:\s*0\.125em solid currentColor;[^}]*border-radius:\s*50%;[^}]*position:\s*absolute;[^}]*top:\s*50%;[^}]*left:\s*50%;[^}]*transform:\s*translate\(-50%, -50%\);[^}]*z-index:\s*-1;[^}]*transition:\s*all 0\.25s[^;]*;/
+  );
+
+  assert.match(
+    css,
+    /\.c-editorial-frame \.nav--toolbar \.menu-item--cart > a:hover \.menu-item__icon:after,\s*\.c-editorial-frame \.nav--toolbar \.menu-item--cart > a:focus-visible \.menu-item__icon:after\s*\{[^}]*border-width:\s*calc\(var\(--editorial-frame-marker-height\) \/ 2\);[^}]*border-color:\s*currentColor;/
+  );
+});
+
 test('Editorial Frame styles remove the chrome shell on mobile', () => {
   const css = compileEditorialFrameCss();
 
