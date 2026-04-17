@@ -17,6 +17,7 @@ body.has-editorial-frame {
   --editorial-frame-marker-slot-width: calc(var(--editorial-frame-marker-font-size) * 2.52632);
   --editorial-frame-marker-slot-height: calc(var(--editorial-frame-marker-font-size) * 1.89474);
   --editorial-frame-marker-padding-left: 0.63158em;
+  --editorial-frame-marker-offset-x: calc(var(--editorial-frame-marker-padding-left) * 0.5);
   --editorial-frame-marker-mask-size: 1em;
   --editorial-frame-head-padding-y: 24px;
   --editorial-frame-head-min-height: 336px;
@@ -324,7 +325,7 @@ body.has-editorial-frame-menu #page {
   line-height: 1;
   text-align: center;
   transition: all .25s $ease;
-  transform: translateY(-50%) translateZ(0);
+  transform: translate(var(--editorial-frame-marker-offset-x), -50%) translateZ(0);
   pointer-events: auto;
 }
 
@@ -345,13 +346,13 @@ body.has-editorial-frame-menu #page {
 
 .c-editorial-frame .nav--toolbar .menu-item--cart > a:hover .menu-item__icon,
 .c-editorial-frame .nav--toolbar .menu-item--cart > a:focus-visible .menu-item__icon {
-  color: inherit;
+  color: var(--sm-current-bg-color);
 }
 
 .c-editorial-frame .nav--toolbar .menu-item--cart > a:hover .menu-item__icon:after,
 .c-editorial-frame .nav--toolbar .menu-item--cart > a:focus-visible .menu-item__icon:after {
   border-width: calc(var(--editorial-frame-marker-height) / 2);
-  border-color: currentColor;
+  border-color: var(--sm-current-accent-color);
 }
 
 .is-dark .c-editorial-frame .nav--toolbar .menu-item--dark-mode > a::before {
