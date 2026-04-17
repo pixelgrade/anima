@@ -357,6 +357,7 @@ body.has-editorial-frame-menu #page {
 
 .is-dark .c-editorial-frame .nav--toolbar .menu-item--dark-mode > a::before {
   transform: translateY(-50%) rotate(180deg);
+  transform-origin: calc(50% + (var(--editorial-frame-marker-padding-left) * 0.5)) 50%;
 }
 
 @include above(lap) {
