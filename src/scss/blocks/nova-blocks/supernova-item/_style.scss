@@ -6,3 +6,9 @@
     // Set the font style for the hover drop cap letter
     @include apply-font(site-title);
 }
+
+.nb-card__description {
+    // Card descriptions are a short reading voice, not body prose — map them
+    // to the small-body role so palettes can tune them independently of body.
+    @include apply-font(small-body);
+}

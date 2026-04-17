@@ -139,6 +139,25 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					// We want all the font variants for this field since it is a rich content one.
 					// 'fields'            => wp_parse_args( [ 'font-weight' => [ 'loadAllVariants' => true ] ], $fields_config_medium ),
 				],
+				'small_body_font' => [
+					'type'              => 'font',
+					'label'             => esc_html__( 'Small Text', '__theme_txtd' ),
+					'desc'              => esc_html__( 'Smaller sibling of Body for card descriptions, short notes, inline asides, and fine-print paragraphs.', '__theme_txtd' ),
+					'selector'          => ':root',
+					'properties_prefix' => '--theme-small-body-',
+					'default'           => [
+						'font-family'     => 'System Sans-Serif Clear',
+						'font-size'       => 14,
+						'line-height'     => 1.5,
+						'font-weight'     => 400,
+						'text-transform'  => 'none',
+						'text-decoration' => 'none',
+						'letter-spacing'  => - 0.03,
+					],
+					// Same control set as Body so authors get full typography controls,
+					// including all font weight variants for a rich-content reading role.
+					'fields'            => wp_parse_args( [ 'font-weight' => [ 'loadAllVariants' => true ] ], $fields_config ),
+				],
 				'main_content_title_heading_fonts_section' => [
 					'type' => 'html',
 					'html' => '<span class="separator sub-section label">' . esc_html__( 'Heading Fonts', '__theme_txtd' ) . '</span>',

@@ -49,6 +49,18 @@ $theme-fonts: (
         letter-spacing: -0.02em,
         text-transform: none,
     ),
+    // Smaller sibling of body for descriptions, short notes, inline asides,
+    // and fine-print paragraphs where the reading voice belongs but body's
+    // size feels too heavy. Card descriptions are the first consumer.
+    small-body: (
+        font-family: $theme-sm-font-body,
+        font-size: 14,
+        font-style: normal,
+        line-height: 1.5,
+        font-weight: 400,
+        letter-spacing: -0.03em,
+        text-transform: none,
+    ),
     caption: (
         font-family: $theme-sm-font-body,
         font-size: 16,
