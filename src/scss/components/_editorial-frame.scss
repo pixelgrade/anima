@@ -18,7 +18,6 @@ body.has-editorial-frame {
   --editorial-frame-marker-slot-height: calc(var(--editorial-frame-marker-font-size) * 1.89474);
   --editorial-frame-marker-padding-left: 0.63158em;
   --editorial-frame-marker-offset-x: calc(var(--editorial-frame-marker-padding-left) * 0.5);
-  --editorial-frame-dark-mode-active-offset-x: calc(var(--editorial-frame-marker-offset-x) * 0.25);
   --editorial-frame-marker-mask-size: 1em;
   --editorial-frame-head-padding-y: 24px;
   --editorial-frame-head-min-height: 336px;
@@ -357,7 +356,7 @@ body.has-editorial-frame-menu #page {
 }
 
 .is-dark .c-editorial-frame .nav--toolbar .menu-item--dark-mode > a::before {
-  transform: translate(var(--editorial-frame-dark-mode-active-offset-x), -50%) rotate(180deg);
+  transform: translateY(-50%) rotate(180deg);
 }
 
 @include above(lap) {

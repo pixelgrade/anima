@@ -70,8 +70,8 @@ test('Editorial Frame styles keep social links on the icon slot', () => {
   assert.match(css, /\.nav--toolbar \.social-menu-item > a::before\s*\{[^}]*width:\s*var\(--editorial-frame-marker-width\);[^}]*height:\s*var\(--editorial-frame-marker-height\);[^}]*font-size:\s*var\(--editorial-frame-marker-font-size\);[^}]*right:\s*calc\(var\(--editorial-frame-marker-width\) \* -1\);[^}]*padding-left:\s*var\(--editorial-frame-marker-padding-left\);/);
   assert.match(css, /\.nav--toolbar \.social-menu-item > a::after\s*\{[^}]*display:\s*none;/);
   assert.match(css, /\.c-editorial-frame \.nav--toolbar \.menu-item--search > a::before, \.c-editorial-frame \.nav--toolbar \.menu-item--dark-mode > a::before\s*\{[^}]*left:\s*auto\s*!important;[^}]*right:\s*calc\(var\(--editorial-frame-marker-width\) \* -1\)\s*!important;[^}]*box-sizing:\s*border-box;[^}]*padding-left:\s*var\(--editorial-frame-marker-padding-left\);[^}]*background-position:\s*calc\(50% \+ var\(--editorial-frame-marker-padding-left\) \* 0\.5\) 50%;[^}]*mask-position:\s*calc\(50% \+ var\(--editorial-frame-marker-padding-left\) \* 0\.5\) 50%;[^}]*-webkit-mask-position:\s*calc\(50% \+ var\(--editorial-frame-marker-padding-left\) \* 0\.5\) 50%;/);
-  assert.match(css, /body\.has-editorial-frame\s*\{[^}]*--editorial-frame-dark-mode-active-offset-x:\s*calc\(var\(--editorial-frame-marker-offset-x\) \* 0\.25\);/);
-  assert.match(css, /\.is-dark \.c-editorial-frame \.nav--toolbar \.menu-item--dark-mode > a::before\s*\{[^}]*transform:\s*translate\(var\(--editorial-frame-dark-mode-active-offset-x\), -50%\) rotate\(180deg\);/);
+  assert.doesNotMatch(css, /--editorial-frame-dark-mode-active-offset-x/);
+  assert.match(css, /\.is-dark \.c-editorial-frame \.nav--toolbar \.menu-item--dark-mode > a::before\s*\{[^}]*transform:\s*translateY\(-50%\) rotate\(180deg\);/);
 });
 
 test('Editorial Frame styles place cart counts on the chrome marker slot', () => {
