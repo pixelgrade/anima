@@ -25,29 +25,51 @@ test('Editorial Frame styles expose the desktop frame shell selectors', () => {
 test('Editorial Frame styles expose the Hive-like rail strip treatment', () => {
   const css = compileEditorialFrameCss();
 
-  assert.match(css, /\.c-editorial-frame__rail\s*\{[^}]*padding-left:\s*0\.75em;[^}]*padding-right:\s*0\.75em;[^}]*width:\s*3\.75em;[^}]*top:\s*0\.75em;[^}]*right:\s*0;[^}]*bottom:\s*0;/);
+  assert.match(css, /body\.has-editorial-frame\s*\{[^}]*--editorial-frame-admin-bar-offset:\s*var\(--theme-sticky-distance,\s*0px\);[^}]*--editorial-frame-rail-gap:\s*12px;[^}]*--editorial-frame-rail-top-offset:\s*calc\(var\(--editorial-frame-admin-bar-offset,\s*0px\) \+ var\(--editorial-frame-rail-gap\)\);[^}]*--editorial-frame-sticky-top:\s*calc\(var\(--theme-sticky-distance,\s*0px\) \+ var\(--editorial-frame-top-size\)\);[^}]*--editorial-frame-rail-width:\s*60px;[^}]*--editorial-frame-link-font-size:\s*13px;/);
+  assert.match(css, /body\.single-post\.has-editorial-frame\s*\{[^}]*--editorial-frame-rail-top-offset:\s*calc\(var\(--editorial-frame-admin-bar-offset,\s*0px\) \+ var\(--editorial-frame-top-size\) \+ var\(--theme-sticky-header-height,\s*0px\) \+ var\(--editorial-frame-rail-gap\)\);/);
+  assert.match(css, /\.c-editorial-frame__rail\s*\{[^}]*padding-left:\s*12px;[^}]*padding-right:\s*12px;[^}]*width:\s*var\(--editorial-frame-rail-width\);[^}]*top:\s*var\(--editorial-frame-rail-top-offset\);[^}]*right:\s*0;[^}]*bottom:\s*0;/);
+  assert.doesNotMatch(css, /\.admin-bar \.c-editorial-frame__rail\s*\{[^}]*margin-top:/);
   assert.match(css, /\.c-editorial-frame__rail(?::before|::before)\s*\{[^}]*width:\s*1px;/);
-  assert.match(css, /\.c-editorial-frame__head\s*\{[^}]*padding-top:\s*1\.5em;[^}]*padding-bottom:\s*1\.5em;[^}]*min-height:\s*21em;/);
+  assert.match(css, /\.c-editorial-frame__head\s*\{[^}]*padding-top:\s*var\(--editorial-frame-head-padding-y\);[^}]*padding-bottom:\s*var\(--editorial-frame-head-padding-y\);[^}]*min-height:\s*var\(--editorial-frame-head-min-height\);/);
   assert.match(css, /\.c-editorial-frame\s*\{[^}]*z-index:\s*4000;/);
-  assert.match(css, /body\.has-editorial-frame\s*\{[^}]*--editorial-frame-marker-content-offset:\s*calc\(.*var\(--editorial-frame-marker-width\).*var\(--editorial-frame-marker-height\).*\);/);
-  assert.match(css, /\.nav--toolbar a\s*\{[^}]*margin-right:\s*0\.85714em;[^}]*padding-right:\s*var\(--editorial-frame-marker-content-offset\);[^}]*right:\s*100%;[^}]*border:\s*1px solid transparent;[^}]*color:\s*transparent;[^}]*pointer-events:\s*auto;[^}]*text-align:\s*left;/);
+  assert.match(css, /\.nav--toolbar a\s*\{[^}]*font-size:\s*var\(--editorial-frame-link-font-size\);[^}]*line-height:\s*var\(--editorial-frame-link-line-height\);[^}]*margin-right:\s*var\(--editorial-frame-link-margin-right\);[^}]*padding-left:\s*var\(--editorial-frame-link-padding-left\);[^}]*right:\s*100%;[^}]*border:\s*1px solid transparent;[^}]*color:\s*transparent;[^}]*pointer-events:\s*auto;[^}]*text-align:\s*left;/);
+  assert.match(css, /\.c-editorial-frame \.nav--toolbar > li > a\s*\{[^}]*padding-left:\s*var\(--editorial-frame-link-padding-left\);/);
+  assert.match(css, /\.c-editorial-frame :is\(:is\(\.menu-item--search,\s*\.menu-item--dark-mode\):not\(\.no-icon\),\s*#specific\) a\s*\{[^}]*padding-left:\s*var\(--editorial-frame-link-padding-left\);/);
   assert.doesNotMatch(css, /\.nav--toolbar a\s*\{[^}]*min-width:/);
-  assert.match(css, /\.nav--toolbar a(?::hover|:focus-visible)\s*\{[^}]*color:\s*inherit;[^}]*pointer-events:\s*auto;/);
+  assert.match(css, /\.nav--toolbar a(?::hover|:focus-visible)\s*\{[^}]*color:\s*inherit;[^}]*pointer-events:\s*auto;[^}]*border-color:\s*var\(--editorial-frame-divider-color\);/);
+});
+
+test('Editorial Frame styles let hover labels use the navigation typography role', () => {
+  const css = compileEditorialFrameCss();
+
+  assert.match(
+    css,
+    /\.c-editorial-frame__label\s*\{[^}]*--current-font-family:\s*var\(--theme-navigation-font-family\);[^}]*--current-font-weight:\s*var\(--theme-navigation-font-weight\);[^}]*--current-font-style:\s*var\(--theme-navigation-font-style\);[^}]*--current-letter-spacing:\s*var\(--theme-navigation-letter-spacing\);[^}]*--current-text-transform:\s*var\(--theme-navigation-text-transform\);[^}]*font-size:\s*inherit;[^}]*line-height:\s*inherit;/
+  );
+});
+
+test('Editorial Frame styles keep sticky headers below the top frame accent', () => {
+  const css = compileEditorialFrameCss();
+
+  assert.match(
+    css,
+    /body\.has-editorial-frame-frame \.nb-header--secondary,\s*body\.has-editorial-frame-frame \.nb-header--main\.nb-header--sticky\s*\{[^}]*top:\s*var\(--editorial-frame-sticky-top\)\s*!important;/
+  );
 });
 
 test('Editorial Frame styles expose the regular-link monogram treatment', () => {
   const css = compileEditorialFrameCss();
 
-  assert.match(css, /\.menu-item--editorial-frame-link > a \.menu-item-monogram\s*\{/);
+  assert.match(css, /\.menu-item--editorial-frame-link > a \.menu-item-monogram\s*\{[^}]*width:\s*var\(--editorial-frame-marker-width\);[^}]*height:\s*var\(--editorial-frame-marker-height\);[^}]*padding-left:\s*var\(--editorial-frame-marker-padding-left\);/);
 });
 
 test('Editorial Frame styles keep social links on the icon slot', () => {
   const css = compileEditorialFrameCss();
 
   assert.match(css, /\.nav--toolbar \.social-menu-item\s*\{[^}]*display:\s*list-item;/);
-  assert.match(css, /\.nav--toolbar \.social-menu-item > a::before\s*\{[^}]*width:\s*var\(--editorial-frame-marker-width\);[^}]*height:\s*var\(--editorial-frame-marker-height\);[^}]*font-size:\s*var\(--editorial-frame-marker-font-size\);[^}]*right:\s*calc\(var\(--editorial-frame-marker-width\) \* -1\);[^}]*padding-left:\s*var\(--editorial-frame-marker-content-offset\);/);
+  assert.match(css, /\.nav--toolbar \.social-menu-item > a::before\s*\{[^}]*width:\s*var\(--editorial-frame-marker-width\);[^}]*height:\s*var\(--editorial-frame-marker-height\);[^}]*font-size:\s*var\(--editorial-frame-marker-font-size\);[^}]*right:\s*calc\(var\(--editorial-frame-marker-width\) \* -1\);[^}]*padding-left:\s*var\(--editorial-frame-marker-padding-left\);/);
   assert.match(css, /\.nav--toolbar \.social-menu-item > a::after\s*\{[^}]*display:\s*none;/);
-  assert.match(css, /\.c-editorial-frame \.nav--toolbar \.menu-item--search > a::before, \.c-editorial-frame \.nav--toolbar \.menu-item--dark-mode > a::before\s*\{[^}]*left:\s*auto\s*!important;[^}]*right:\s*calc\(var\(--editorial-frame-marker-width\) \* -1\)\s*!important;[^}]*background-position:\s*calc\(50% \+ var\(--editorial-frame-marker-content-offset\) \* 0\.5\) 50%;/);
+  assert.match(css, /\.c-editorial-frame \.nav--toolbar \.menu-item--search > a::before, \.c-editorial-frame \.nav--toolbar \.menu-item--dark-mode > a::before\s*\{[^}]*left:\s*auto\s*!important;[^}]*right:\s*calc\(var\(--editorial-frame-marker-width\) \* -1\)\s*!important;[^}]*box-sizing:\s*border-box;[^}]*padding-left:\s*var\(--editorial-frame-marker-padding-left\);[^}]*background-position:\s*calc\(50% \+ var\(--editorial-frame-marker-padding-left\) \* 0\.5\) 50%;[^}]*mask-position:\s*calc\(50% \+ var\(--editorial-frame-marker-padding-left\) \* 0\.5\) 50%;[^}]*-webkit-mask-position:\s*calc\(50% \+ var\(--editorial-frame-marker-padding-left\) \* 0\.5\) 50%;/);
 });
 
 test('Editorial Frame styles remove the chrome shell on mobile', () => {

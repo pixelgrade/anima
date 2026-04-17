@@ -1,22 +1,30 @@
 body.has-editorial-frame {
-  --editorial-frame-top-size: 0.75em;
-  --editorial-frame-left-size: 3em;
-  --editorial-frame-rail-width: 3.75em;
+  --editorial-frame-top-size: 12px;
+  --editorial-frame-left-size: 48px;
+  --editorial-frame-admin-bar-offset: var(--theme-sticky-distance, 0px);
+  --editorial-frame-rail-gap: 12px;
+  --editorial-frame-rail-top-offset: calc(var(--editorial-frame-admin-bar-offset, 0px) + var(--editorial-frame-rail-gap));
+  --editorial-frame-sticky-top: calc(var(--theme-sticky-distance, 0px) + var(--editorial-frame-top-size));
+  --editorial-frame-rail-width: 60px;
   --editorial-frame-page-gutter: calc(var(--editorial-frame-rail-width) + var(--editorial-frame-top-size));
-  --editorial-frame-link-font-size: 0.8125em;
+  --editorial-frame-link-font-size: 13px;
   --editorial-frame-link-line-height: 2.57143em;
   --editorial-frame-link-margin-right: 0.85714em;
-  --editorial-frame-link-padding-left: 1.71429em;
+  --editorial-frame-link-padding-left: 0.85714em;
   --editorial-frame-marker-width: 2.52632em;
   --editorial-frame-marker-height: 1.89474em;
-  --editorial-frame-marker-content-offset: calc((var(--editorial-frame-marker-width) - var(--editorial-frame-marker-height)) * 0.5);
-  --editorial-frame-marker-font-size: 1.21429em;
-  --editorial-frame-marker-mask-size: 1.125em;
-  --editorial-frame-head-padding-y: 1.5em;
-  --editorial-frame-head-min-height: 21em;
+  --editorial-frame-marker-font-size: 1.35714em;
+  --editorial-frame-marker-padding-left: 0.63158em;
+  --editorial-frame-marker-mask-size: 1em;
+  --editorial-frame-head-padding-y: 24px;
+  --editorial-frame-head-min-height: 336px;
   --editorial-frame-surface: var(--sm-current-fg1-color);
   --editorial-frame-ink: var(--sm-current-bg-color);
   --editorial-frame-divider-color: color-mix(in srgb, var(--editorial-frame-surface) 20%, transparent);
+}
+
+body.single-post.has-editorial-frame {
+  --editorial-frame-rail-top-offset: calc(var(--editorial-frame-admin-bar-offset, 0px) + var(--editorial-frame-top-size) + var(--theme-sticky-header-height, 0px) + var(--editorial-frame-rail-gap));
 }
 
 body.has-editorial-frame-tone-quiet-contrast {
@@ -79,27 +87,17 @@ body.has-editorial-frame-menu #page {
 }
 
 .c-editorial-frame__rail {
-  padding-left: 0.75em;
-  padding-right: 0.75em;
-  width: 3.75em;
+  padding-left: 12px;
+  padding-right: 12px;
+  width: var(--editorial-frame-rail-width);
   position: fixed;
-  top: 0.75em;
+  top: var(--editorial-frame-rail-top-offset);
   right: 0;
   bottom: 0;
   display: block;
   margin-top: -1px;
   color: var(--editorial-frame-surface);
   pointer-events: auto;
-}
-
-.admin-bar .c-editorial-frame__rail {
-  margin-top: 32px;
-}
-
-@media screen and (max-width: 782px) {
-  .admin-bar .c-editorial-frame__rail {
-    margin-top: 46px;
-  }
 }
 
 .c-editorial-frame__rail::before {
@@ -114,9 +112,9 @@ body.has-editorial-frame-menu #page {
 }
 
 .c-editorial-frame__head {
-  padding-top: 1.5em;
-  padding-bottom: 1.5em;
-  min-height: 21em;
+  padding-top: var(--editorial-frame-head-padding-y);
+  padding-bottom: var(--editorial-frame-head-padding-y);
+  min-height: var(--editorial-frame-head-min-height);
 }
 
 .c-editorial-frame__navigation {
@@ -148,13 +146,11 @@ body.has-editorial-frame-menu #page {
 }
 
 .nav--toolbar a {
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.8125em;
-  line-height: 2.57143em;
-  margin-right: 0.85714em;
-  padding-left: 1.71429em;
-  padding-right: var(--editorial-frame-marker-content-offset);
+  display: block;
+  font-size: var(--editorial-frame-link-font-size);
+  line-height: var(--editorial-frame-link-line-height);
+  margin-right: var(--editorial-frame-link-margin-right);
+  padding-left: var(--editorial-frame-link-padding-left);
   position: absolute;
   top: -1px;
   right: 100%;
@@ -169,18 +165,26 @@ body.has-editorial-frame-menu #page {
   transition: color var(--theme-transition), border-color var(--theme-transition), background-color var(--theme-transition);
 }
 
+.c-editorial-frame .nav--toolbar > li > a {
+  padding-left: var(--editorial-frame-link-padding-left);
+}
+
+.c-editorial-frame :is(:is(.menu-item--search, .menu-item--dark-mode):not(.no-icon), #specific) a {
+  padding-left: var(--editorial-frame-link-padding-left);
+}
+
 .nav--toolbar a:hover {
   color: inherit;
   pointer-events: auto;
   background-color: var(--editorial-frame-ink);
-  border-color: currentColor;
+  border-color: var(--editorial-frame-divider-color);
 }
 
 .nav--toolbar a:focus-visible {
   color: inherit;
   pointer-events: auto;
   background-color: var(--editorial-frame-ink);
-  border-color: currentColor;
+  border-color: var(--editorial-frame-divider-color);
   outline: none;
 }
 
@@ -194,7 +198,7 @@ body.has-editorial-frame-menu #page {
   box-sizing: border-box;
   width: var(--editorial-frame-marker-width);
   height: var(--editorial-frame-marker-height);
-  padding-left: var(--editorial-frame-marker-content-offset);
+  padding-left: var(--editorial-frame-marker-padding-left);
   color: var(--editorial-frame-surface);
   font-size: var(--editorial-frame-marker-font-size);
   font-weight: 700;
@@ -212,8 +216,12 @@ body.has-editorial-frame-menu #page {
 }
 
 .c-editorial-frame__label {
+  @include apply-font(navigation);
+
   display: inline-block;
   color: inherit;
+  font-size: inherit;
+  line-height: inherit;
 }
 
 .nav--toolbar .social-menu-item {
@@ -237,7 +245,7 @@ body.has-editorial-frame-menu #page {
   position: absolute;
   top: 50%;
   right: calc(var(--editorial-frame-marker-width) * -1);
-  padding-left: var(--editorial-frame-marker-content-offset);
+  padding-left: var(--editorial-frame-marker-padding-left);
   text-align: center;
   pointer-events: auto;
   color: var(--editorial-frame-surface);
@@ -255,15 +263,10 @@ body.has-editorial-frame-menu #page {
   height: var(--editorial-frame-marker-height);
   line-height: 0;
   right: calc(var(--editorial-frame-marker-width) * -1);
-  background-position: calc(50% + (var(--editorial-frame-marker-content-offset) * 0.5)) 50%;
+  background-position: calc(50% + (var(--editorial-frame-marker-padding-left) * 0.5)) 50%;
   background-repeat: no-repeat;
   background-size: var(--editorial-frame-marker-mask-size) var(--editorial-frame-marker-mask-size);
   background-color: var(--editorial-frame-surface);
-}
-
-.c-editorial-frame .nav--toolbar .menu-item--search > a,
-.c-editorial-frame .nav--toolbar .menu-item--dark-mode > a {
-  padding-left: var(--editorial-frame-link-padding-left);
 }
 
 .c-editorial-frame .nav--toolbar .menu-item--search > a::before,
@@ -274,19 +277,22 @@ body.has-editorial-frame-menu #page {
   left: auto !important;
   right: calc(var(--editorial-frame-marker-width) * -1) !important;
   display: block;
+  box-sizing: border-box;
   font-size: var(--editorial-frame-marker-font-size);
   width: var(--editorial-frame-marker-width);
   height: var(--editorial-frame-marker-height);
-  padding-left: 0;
+  padding-left: var(--editorial-frame-marker-padding-left);
   background-color: var(--editorial-frame-surface);
-  background-position: calc(50% + (var(--editorial-frame-marker-content-offset) * 0.5)) 50%;
+  background-position: calc(50% + (var(--editorial-frame-marker-padding-left) * 0.5)) 50%;
   background-repeat: no-repeat;
   background-size: var(--editorial-frame-marker-mask-size) var(--editorial-frame-marker-mask-size);
   mask: no-repeat 50% 50%;
   mask-image: var(--menu-item-icon-mask-image);
+  mask-position: calc(50% + (var(--editorial-frame-marker-padding-left) * 0.5)) 50%;
   mask-size: var(--editorial-frame-marker-mask-size) var(--editorial-frame-marker-mask-size);
   -webkit-mask: no-repeat 50% 50%;
   -webkit-mask-image: var(--menu-item-icon-mask-image);
+  -webkit-mask-position: calc(50% + (var(--editorial-frame-marker-padding-left) * 0.5)) 50%;
   -webkit-mask-size: var(--editorial-frame-marker-mask-size) var(--editorial-frame-marker-mask-size);
   transform: translateY(-50%);
 }
@@ -300,6 +306,13 @@ body.has-editorial-frame-menu #page {
 
 .is-dark .c-editorial-frame .nav--toolbar .menu-item--dark-mode > a::before {
   transform: translateY(-50%) rotate(180deg);
+}
+
+@include above(lap) {
+  body.has-editorial-frame-frame .nb-header--secondary,
+  body.has-editorial-frame-frame .nb-header--main.nb-header--sticky {
+    top: var(--editorial-frame-sticky-top) !important;
+  }
 }
 
 @include below(lap) {
