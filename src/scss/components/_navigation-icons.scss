@@ -12,35 +12,39 @@
 
   &:not(.no-icon) {
 
+    // Padding and ::before offset use the #specific trick to beat other
+    // navigation rules without reaching for !important.
     :is(&, #specific) a {
       padding-left: calc(var(--menu-item-icon-width) + var(--theme-spacing-smallest));
-
-      &:after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 0;
-
-        display: block;
-        width: var(--menu-item-icon-width);
-        height: var(--menu-item-icon-width);
-
-        background-color: currentColor;
-
-        mask: no-repeat 50% 50%;
-        mask-image: var(--menu-item-icon-mask-image);
-        mask-size: contain;
-        -webkit-mask: no-repeat 50% 50%;
-        -webkit-mask-image: var(--menu-item-icon-mask-image);
-        -webkit-mask-size: contain;
-
-        transition: all .25s $ease;
-        transform: translateY(-50%);
-      }
 
       :is(&, #specific):before {
         left: calc(var(--menu-item-icon-width) + var(--theme-spacing-smallest))
       }
+    }
+
+    // The icon lives on ::after at normal specificity so state overrides
+    // (dark mode rotation, .icon-only centering) can win cleanly.
+    a:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+
+      display: block;
+      width: var(--menu-item-icon-width);
+      height: var(--menu-item-icon-width);
+
+      background-color: currentColor;
+
+      mask: no-repeat 50% 50%;
+      mask-image: var(--menu-item-icon-mask-image);
+      mask-size: contain;
+      -webkit-mask: no-repeat 50% 50%;
+      -webkit-mask-image: var(--menu-item-icon-mask-image);
+      -webkit-mask-size: contain;
+
+      transition: all .25s $ease;
+      transform: translateY(-50%);
     }
   }
 
