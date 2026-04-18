@@ -45,6 +45,77 @@ $enable-blockquote-block-styles:        true !default;
                 @extend %apply-font-properties;
             }
         }
+
+        &.is-style-editorial:not(.is-style-plain) {
+            --theme-editorial-quote-ornament-inset: var(--theme-spacing-fluid-normal);
+            --theme-editorial-quote-ornament-gap: var(--theme-spacing-fluid-large);
+
+            position: relative;
+            border-left: none;
+            color: inherit;
+            padding-top: calc(var(--theme-editorial-quote-ornament-inset) + var(--theme-editorial-quote-ornament-gap));
+            padding-bottom: var(--theme-spacing-fluid-large);
+
+            &, p {
+                @include apply-font(heading-3);
+                @extend %apply-font-properties;
+            }
+
+            &:before,
+            &:after {
+                position: absolute;
+                display: block;
+                line-height: 1;
+                pointer-events: none;
+            }
+
+            &:before {
+                content: "“";
+                top: calc(var(--theme-editorial-quote-ornament-inset) - (var(--current-font-size) * 0.7857142857));
+                left: 0;
+                left: 50%;
+                z-index: 2;
+                padding: 0 0.857em;
+                background: transparent;
+                color: var(--sm-current-accent-color);
+                font-family: var(--current-font-family);
+                font-size: calc(var(--current-font-size) * 1.9285714286);
+                transform: translateX(-50%);
+            }
+
+            &:after {
+                content: "";
+                top: var(--theme-editorial-quote-ornament-inset);
+                left: 50%;
+                z-index: 1;
+                height: 1px;
+                color: var(--sm-current-accent-color);
+                background: currentColor;
+                box-shadow: currentColor 5.5em 0 0;
+                width: 3em;
+                margin-left: -2.75em;
+                transform: translateX(-50%);
+                border: 0;
+            }
+
+            p {
+                margin-bottom: 0;
+                transform: none;
+            }
+
+            cite,
+            footer {
+                display: block;
+                @include apply-font(heading-5);
+                @extend %apply-font-properties;
+                text-align: inherit; // reset
+                transform: none;
+            }
+
+            a:hover {
+                color: var(--sm-current-accent-color);
+            }
+        }
     }
 
     .wp-block-quote > cite:not(:first-child),

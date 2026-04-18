@@ -1,4 +1,67 @@
 /******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ 410
+(module) {
+
+const CART_MENU_ITEM_SELECTOR = '.nb-navigation .menu > .menu-item--cart, .c-editorial-frame .nav--toolbar > .menu-item--cart';
+const SELECTIVE_REFRESH_CONTAINER_SELECTOR = '.nb-navigation .menu, .c-editorial-frame .nav--toolbar';
+function getCartMenuItemMarkup({
+  label = '',
+  editorialFrame = false,
+  count = '0'
+} = {}) {
+  const labelClass = editorialFrame ? 'c-editorial-frame__label' : 'menu-item__label';
+  return `<span class="${labelClass}">${label}</span><span class="menu-item__icon">${count}</span>`;
+}
+module.exports = {
+  CART_MENU_ITEM_SELECTOR,
+  SELECTIVE_REFRESH_CONTAINER_SELECTOR,
+  getCartMenuItemMarkup
+};
+
+/***/ }
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
+(() => {
+"use strict";
+
+;// external "jQuery"
+const external_jQuery_namespaceObject = jQuery;
+;// ./src/js/woocommerce.js
+
+const {
+  CART_MENU_ITEM_SELECTOR,
+  SELECTIVE_REFRESH_CONTAINER_SELECTOR,
+  getCartMenuItemMarkup
+} = __webpack_require__(410);
 (function ($, document) {
   // Handle Checkout Notifications
   $(document.body).on('checkout_error', function () {
@@ -33,11 +96,11 @@
   });
   $(function () {
     var $body = $(document.body).not('.woocommerce-cart');
-    var $cartMenuItems = $('.nb-navigation .menu > .menu-item--cart');
+    var $cartMenuItems = $(CART_MENU_ITEM_SELECTOR);
     initializeCartMenuItems($cartMenuItems);
     if (!!window.wp?.customize?.selectiveRefresh) {
       wp.customize.selectiveRefresh.bind('partial-content-rendered', function (placement) {
-        const $container = $(placement.container).filter('.nb-navigation .menu');
+        const $container = $(placement.container).filter(SELECTIVE_REFRESH_CONTAINER_SELECTOR);
         const $items = $container.children('.menu-item--cart');
         initializeCartMenuItems($items);
       });
@@ -46,10 +109,17 @@
       $cartMenuItems.each(function (i, obj) {
         var $cartMenuItem = $(obj);
         var $cartMenuItemLink = $cartMenuItem.children('a');
-        var cartMenuItemText = $cartMenuItemLink.text();
-        var $cartMenuItemCount = $('<span class="menu-item__icon">0</span>');
-        $cartMenuItemLink.html(`<span class="menu-item__label">${cartMenuItemText}</span>`);
-        $cartMenuItemCount.appendTo($cartMenuItemLink);
+        var isEditorialFrame = $cartMenuItem.hasClass('menu-item--editorial-frame');
+        var cartMenuItemText = $cartMenuItemLink.children('.c-editorial-frame__label, .menu-item__label').first().text().trim();
+        if (!cartMenuItemText) {
+          var $textOnlyLink = $cartMenuItemLink.clone();
+          $textOnlyLink.children('.menu-item__icon').remove();
+          cartMenuItemText = $textOnlyLink.text().trim();
+        }
+        $cartMenuItemLink.html(getCartMenuItemMarkup({
+          label: cartMenuItemText,
+          editorialFrame: isEditorialFrame
+        }));
         var fragmentKey = 'div.widget_shopping_cart_content';
         var $fragment = $(fragmentKey);
         if ($fragment.length) {
@@ -216,5 +286,7 @@
     }
   });
 })(jQuery, document);
+})();
+
 /******/ })()
 ;

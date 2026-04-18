@@ -195,6 +195,99 @@ function anima_add_block_templates_details( $query_result, $query, $template_typ
 add_filter( 'get_block_templates', 'anima_add_block_templates_details', 10, 3 );
 
 /**
+ * Adjust the single template hierarchy for supported post formats.
+ *
+ * Quote posts can route to a dedicated single-quote template when it exists.
+ * The post format wins over a manually assigned template, but the normal
+ * single-post hierarchy remains intact after that.
+ *
+ * @param string[] $templates Template candidates.
+ * @return string[]
+ */
+function anima_filter_single_template_hierarchy_for_post_formats( array $templates ): array {
+	if ( ! is_singular( 'post' ) ) {
+		return $templates;
+	}
+
+	$post = get_queried_object();
+
+	if ( ! $post instanceof WP_Post ) {
+		return $templates;
+	}
+
+	return anima_get_post_format_single_template_hierarchy( $templates, $post );
+}
+add_filter( 'single_template_hierarchy', 'anima_filter_single_template_hierarchy_for_post_formats', 10, 1 );
+
+/**
+ * Build the single template hierarchy for post-format-aware singles.
+ *
+ * @param string[] $templates Template candidates.
+ * @param WP_Post  $post      Current post object.
+ * @return string[]
+ */
+function anima_get_post_format_single_template_hierarchy( array $templates, WP_Post $post ): array {
+	$template_candidate = anima_get_post_format_single_template_candidate( $post );
+
+	if ( '' === $template_candidate ) {
+		return $templates;
+	}
+
+	$manual_template = get_page_template_slug( $post );
+
+	if ( ! empty( $manual_template ) ) {
+		$templates = array_values(
+			array_filter(
+				$templates,
+				static function ( string $template ) use ( $manual_template ): bool {
+					return $template !== $manual_template;
+				}
+			)
+		);
+	}
+
+	array_unshift( $templates, $template_candidate );
+
+	return array_values( array_unique( $templates ) );
+}
+
+/**
+ * Resolve the dedicated single template candidate for supported post formats.
+ *
+ * @param WP_Post $post Current post object.
+ * @return string
+ */
+function anima_get_post_format_single_template_candidate( WP_Post $post ): string {
+	if ( 'post' !== $post->post_type ) {
+		return '';
+	}
+
+	$post_format = anima_normalize_post_expression_format( get_post_format( $post ) );
+
+	if ( ! in_array( $post_format, [ 'quote', 'image' ], true ) ) {
+		return '';
+	}
+
+	$template_slug = 'single-' . $post_format;
+
+	if ( ! anima_has_block_template_slug( $template_slug ) ) {
+		return '';
+	}
+
+	return $template_slug . '.php';
+}
+
+function anima_has_block_template_slug( string $slug, string $template_type = 'wp_template' ): bool {
+	if ( ! function_exists( 'get_block_template' ) ) {
+		return false;
+	}
+
+	$template = get_block_template( get_stylesheet() . '//' . $slug, $template_type );
+
+	return $template instanceof WP_Block_Template;
+}
+
+/**
  * Get our custom template canvas file path, depending on the type of template being queried.
  *
  * Since with FSE we have little room in terms of hooks, we need to make do to bring back some of our hooks.
