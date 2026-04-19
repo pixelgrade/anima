@@ -87,23 +87,85 @@ function anima_get_editorial_frame_palette(): string {
 }
 
 /**
- * Get the active Chrome palette variation (1-12).
+ * Get the raw Chrome variation option value — either a 1-12 grade string or
+ * the special `accent` keyword that resolves at render time to whichever
+ * grade holds the selected palette's brand colour.
  *
- * The chrome picks a specific palette grade directly instead of going
- * through the Low / Medium / High signal alias — that way every grade,
- * including the brand / accent ones the legacy signal trio skipped, is
- * reachable.
+ * @return string
+ */
+function anima_get_editorial_frame_variation_choice(): string {
+	$saved = sanitize_text_field( (string) get_option( 'sm_chrome_variation', '11' ) );
+
+	if ( 'accent' === $saved ) {
+		return 'accent';
+	}
+
+	$variation = (int) $saved;
+	if ( $variation < 1 || $variation > 12 ) {
+		return '11';
+	}
+
+	return (string) $variation;
+}
+
+/**
+ * Get the effective Chrome palette variation (1-12) after resolving the
+ * `accent` shortcut against the selected palette's sourceIndex.
+ *
+ * Uses the same shift logic as Nova Blocks' getSourceIndexFromPaletteId so
+ * the chrome follows the site's Palette Basis Offset when that's in play.
  *
  * @return int
  */
 function anima_get_editorial_frame_variation(): int {
-	$variation = (int) get_option( 'sm_chrome_variation', 11 );
+	$choice = anima_get_editorial_frame_variation_choice();
 
-	if ( $variation < 1 || $variation > 12 ) {
+	if ( 'accent' !== $choice ) {
+		return (int) $choice;
+	}
+
+	return anima_resolve_editorial_frame_accent_variation(
+		anima_get_editorial_frame_palette()
+	);
+}
+
+/**
+ * Resolve the 1-12 variation index that corresponds to the brand colour of
+ * the given palette, accounting for the site-level Palette Basis Offset.
+ *
+ * Falls back to 11 when the palette can't be located or Style Manager
+ * hasn't loaded — the same default we use when a plain grade is out of
+ * range.
+ *
+ * @param string $palette_id Style Manager palette ID.
+ * @return int
+ */
+function anima_resolve_editorial_frame_accent_variation( string $palette_id ): int {
+	if ( ! function_exists( 'sm_get_saved_palettes' ) ) {
 		return 11;
 	}
 
-	return $variation;
+	$site_variation = (int) get_option( 'sm_site_color_variation', 1 );
+	if ( $site_variation < 1 ) {
+		$site_variation = 1;
+	}
+
+	foreach ( sm_get_saved_palettes() as $palette ) {
+		if ( ! is_object( $palette ) || ! isset( $palette->id ) ) {
+			continue;
+		}
+
+		if ( (string) $palette->id !== $palette_id ) {
+			continue;
+		}
+
+		$source_index = isset( $palette->sourceIndex ) ? (int) $palette->sourceIndex : 3;
+		$shifted      = ( ( $source_index - $site_variation + 1 + 12 ) % 12 );
+
+		return $shifted + 1;
+	}
+
+	return 11;
 }
 
 /**
@@ -418,16 +480,52 @@ function anima_editorial_frame_render_preview_bridge(): void {
 			wrapper.classList.add( prefix + nextValue );
 		}
 
+		function resolveAccentVariation( paletteId ) {
+			var sm      = window.styleManager || {};
+			var configs = Array.isArray( sm.colorsConfig ) ? sm.colorsConfig : [];
+			var siteVar = parseInt( sm.siteColorVariation, 10 );
+			if ( ! siteVar || siteVar < 1 ) {
+				siteVar = 1;
+			}
+
+			for ( var i = 0; i < configs.length; i++ ) {
+				var palette = configs[ i ];
+				if ( ! palette || String( palette.id ) !== String( paletteId ) ) {
+					continue;
+				}
+				var sourceIndex = parseInt( palette.sourceIndex, 10 );
+				if ( isNaN( sourceIndex ) ) {
+					sourceIndex = 3;
+				}
+				return ( ( sourceIndex - siteVar + 1 + 12 ) % 12 ) + 1;
+			}
+
+			return 11;
+		}
+
+		function applyEditorialFrameState() {
+			var paletteId   = wp.customize( 'sm_chrome_palette' )();
+			var variation   = wp.customize( 'sm_chrome_variation' )();
+
+			if ( 'accent' === variation ) {
+				variation = resolveAccentVariation( paletteId );
+			} else {
+				variation = parseInt( variation, 10 );
+				if ( ! variation || variation < 1 || variation > 12 ) {
+					variation = 11;
+				}
+			}
+
+			replaceClassWithPrefix( 'sm-palette-', paletteId );
+			replaceClassWithPrefix( 'sm-variation-', String( variation ) );
+		}
+
 		wp.customize( 'sm_chrome_palette', function ( setting ) {
-			setting.bind( function ( value ) {
-				replaceClassWithPrefix( 'sm-palette-', value );
-			} );
+			setting.bind( applyEditorialFrameState );
 		} );
 
 		wp.customize( 'sm_chrome_variation', function ( setting ) {
-			setting.bind( function ( value ) {
-				replaceClassWithPrefix( 'sm-variation-', value );
-			} );
+			setting.bind( applyEditorialFrameState );
 		} );
 	}() );
 	</script>

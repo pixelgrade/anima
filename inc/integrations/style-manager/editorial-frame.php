@@ -59,16 +59,17 @@ function anima_get_editorial_frame_default_palette(): string {
 }
 
 /**
- * Get the Chrome grade choices — all 12 palette variations as numeric keys.
- *
- * Exposes every grade the Style Manager palette defines so the chrome can
- * reach the brand / accent zone that the legacy Low / Medium / High signal
- * trio (variations 3 / 8 / 11) skipped over.
+ * Get the Chrome grade choices — the 12 palette variations as numeric keys,
+ * preceded by an "Accent" shortcut that auto-resolves to whichever grade holds
+ * the selected palette's brand colour (the palette's `sourceIndex`).
  *
  * @return array<string,string>
  */
 function anima_get_editorial_frame_variation_choices(): array {
-	$choices = [];
+	$choices = [
+		'accent' => esc_html__( 'Accent (palette brand colour)', '__theme_txtd' ),
+	];
+
 	for ( $i = 1; $i <= 12; $i++ ) {
 		$choices[ (string) $i ] = sprintf(
 			/* translators: %d: palette grade index (1-12). */
@@ -218,6 +219,7 @@ function anima_maybe_invalidate_style_manager_editorial_frame_cache(): void {
 		&& ( $preset_option['setting_id'] ?? '' ) === 'sm_chrome_preset'
 		&& ( $palette_option['setting_id'] ?? '' ) === 'sm_chrome_palette'
 		&& ( $signal_option['setting_id'] ?? '' ) === 'sm_chrome_variation'
+		&& isset( $signal_option['choices']['accent'] )
 		&& $expected_tail === array_slice( $option_order, -1 * count( $expected_tail ) )
 	);
 
