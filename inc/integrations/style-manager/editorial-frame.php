@@ -144,7 +144,7 @@ function anima_add_editorial_frame_section_to_style_manager_config( $config ) {
 					'setting_type'    => 'option',
 					'setting_id'      => 'sm_chrome_variation',
 					'label'           => esc_html__( 'Chrome Color Grade', '__theme_txtd' ),
-					'desc'            => esc_html__( 'Pick a grade from the chrome palette. Lower grades match the page surface; middle grades expose the brand colour; higher grades invert to strong contrast.', '__theme_txtd' ),
+					'desc'            => esc_html__( 'Pick a color grade from the selected color palette.', '__theme_txtd' ),
 					'default'         => '11',
 					'choices'         => anima_get_editorial_frame_variation_choices(),
 					'live'            => true,
@@ -231,6 +231,7 @@ function anima_maybe_invalidate_style_manager_editorial_frame_cache(): void {
 		&& ( $signal_option['setting_id'] ?? '' ) === 'sm_chrome_variation'
 		&& ( $signal_option['type'] ?? '' ) === 'select'
 		&& isset( $signal_option['choices']['accent'] )
+		&& 'Pick a color grade from the selected color palette.' === ( $signal_option['desc'] ?? '' )
 		&& $expected_tail === array_slice( $option_order, -1 * count( $expected_tail ) )
 	);
 

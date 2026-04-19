@@ -409,6 +409,10 @@ function anima_render_editorial_frame_shell(): void {
 		'sm-palette-' . sanitize_html_class( anima_get_editorial_frame_palette() ),
 		'sm-variation-' . anima_get_editorial_frame_variation(),
 	];
+
+	if ( 'accent' === anima_get_editorial_frame_variation_choice() ) {
+		$shell_classes[] = 'has-chrome-accent';
+	}
 	?>
 	<div class="<?php echo esc_attr( implode( ' ', $shell_classes ) ); ?>">
 		<?php if ( $has_frame ) : ?>
@@ -504,13 +508,15 @@ function anima_editorial_frame_render_preview_bridge(): void {
 		}
 
 		function applyEditorialFrameState() {
-			var paletteId   = wp.customize( 'sm_chrome_palette' )();
-			var variation   = wp.customize( 'sm_chrome_variation' )();
+			var paletteId     = wp.customize( 'sm_chrome_palette' )();
+			var variationRaw  = wp.customize( 'sm_chrome_variation' )();
+			var isAccent      = 'accent' === variationRaw;
+			var variation;
 
-			if ( 'accent' === variation ) {
+			if ( isAccent ) {
 				variation = resolveAccentVariation( paletteId );
 			} else {
-				variation = parseInt( variation, 10 );
+				variation = parseInt( variationRaw, 10 );
 				if ( ! variation || variation < 1 || variation > 12 ) {
 					variation = 11;
 				}
@@ -518,6 +524,7 @@ function anima_editorial_frame_render_preview_bridge(): void {
 
 			replaceClassWithPrefix( 'sm-palette-', paletteId );
 			replaceClassWithPrefix( 'sm-variation-', String( variation ) );
+			wrapper.classList.toggle( 'has-chrome-accent', isAccent );
 		}
 
 		wp.customize( 'sm_chrome_palette', function ( setting ) {

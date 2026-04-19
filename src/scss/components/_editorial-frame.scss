@@ -40,12 +40,15 @@ body.has-editorial-frame-menu #page {
   // Surface/ink are defined here (not on body) so they resolve inside the
   // palette- and variation-scoped context provided by the sm-palette-* /
   // sm-variation-* classes that ship on this same element. That lets the
-  // Chrome Palette + Chrome Color Signal controls drive the frame tones
+  // Chrome Palette + Chrome Color Grade controls drive the frame tones
   // through the normal --sm-current-*-color cascade.
   //
   // Surface = the variation's background color (what a signalled block
-  // would paint as its own background) so a higher signal translates into
-  // a more prominent chrome against the page.
+  // would paint as its own background) so a higher grade translates into
+  // a more prominent chrome against a light page. Dark mode flips this
+  // below — in a dark palette all variations collapse to a near-black
+  // bg and chrome painted with that would blend into the page, so it
+  // inherits the contrasting fg1 role instead.
   --editorial-frame-surface: var(--sm-current-bg-color);
   --editorial-frame-ink: var(--sm-current-fg1-color);
   --editorial-frame-divider-color: color-mix(in srgb, var(--editorial-frame-surface) 20%, transparent);
@@ -63,6 +66,26 @@ body.has-editorial-frame-menu #page {
   // the page content shows through; !important is necessary to beat the
   // SM inline rule without chasing specificity hacks.
   background: transparent !important;
+}
+
+// Dark-mode flip for numeric grades. In a dark palette all 12 variations
+// collapse toward the same near-black bg, so using --sm-current-bg-color
+// here would paint the chrome the same color as the page. Swap surface to
+// fg1 (the contrasting role) so the chrome keeps visible weight — same
+// adaptivity the old single-role chrome had before the grade picker.
+html.is-dark .c-editorial-frame {
+  --editorial-frame-surface: var(--sm-current-fg1-color);
+  --editorial-frame-ink: var(--sm-current-bg-color);
+}
+
+// Accent in dark mode uses accent-color instead of fg1 so the brand tone
+// survives the dark-mode flip. In light mode Accent resolves to the
+// variation where bg IS the brand color, so the default rule (surface =
+// --sm-current-bg-color) already paints the chrome in brand — no light-
+// mode override needed here.
+html.is-dark .c-editorial-frame.has-chrome-accent {
+  --editorial-frame-surface: var(--sm-current-accent-color);
+  --editorial-frame-ink: var(--sm-current-bg-color);
 }
 
 .c-editorial-frame__top,
