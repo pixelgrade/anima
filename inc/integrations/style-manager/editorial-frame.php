@@ -15,7 +15,10 @@ add_filter( 'style_manager/sm_panel_config', 'anima_reorganize_editorial_frame_c
 add_action( 'after_setup_theme', 'anima_maybe_invalidate_style_manager_editorial_frame_cache', 20 );
 
 /**
- * Get the Chrome palette choices — the currently saved Style Manager palettes.
+ * Get the Chrome palette choices — the currently saved Style Manager palettes,
+ * excluding the functional ones (Info / Error / Warning / Success). Functional
+ * palettes are identified by IDs starting with `_`, same convention Nova
+ * Blocks' PalettePicker uses via isFunctionalPalette().
  *
  * Keys are palette IDs as strings (what gets saved on the option). Labels come
  * from each palette's label, falling back to the ID so the control stays usable
@@ -34,7 +37,13 @@ function anima_get_editorial_frame_palette_choices(): array {
 			continue;
 		}
 
-		$id    = (string) $palette->id;
+		$id = (string) $palette->id;
+
+		// Skip functional palettes — chrome is a brand surface, not a status cue.
+		if ( '_' === substr( $id, 0, 1 ) ) {
+			continue;
+		}
+
 		$label = ! empty( $palette->label ) ? (string) $palette->label : $id;
 
 		$choices[ $id ] = $label;
@@ -131,7 +140,7 @@ function anima_add_editorial_frame_section_to_style_manager_config( $config ) {
 					'active_callback' => 'anima_is_editorial_frame_enabled',
 				],
 				'sm_chrome_variation' => [
-					'type'            => 'radio',
+					'type'            => 'select',
 					'setting_type'    => 'option',
 					'setting_id'      => 'sm_chrome_variation',
 					'label'           => esc_html__( 'Chrome Color Grade', '__theme_txtd' ),
@@ -218,7 +227,9 @@ function anima_maybe_invalidate_style_manager_editorial_frame_cache(): void {
 		&& false !== strpos( (string) ( $intro_option['html'] ?? '' ), 'Frame the site with a graphic chrome and style a dedicated Chrome menu with search, social links, and expressive navigation.' )
 		&& ( $preset_option['setting_id'] ?? '' ) === 'sm_chrome_preset'
 		&& ( $palette_option['setting_id'] ?? '' ) === 'sm_chrome_palette'
+		&& ! array_key_exists( '_error', (array) ( $palette_option['choices'] ?? [] ) )
 		&& ( $signal_option['setting_id'] ?? '' ) === 'sm_chrome_variation'
+		&& ( $signal_option['type'] ?? '' ) === 'select'
 		&& isset( $signal_option['choices']['accent'] )
 		&& $expected_tail === array_slice( $option_order, -1 * count( $expected_tail ) )
 	);
