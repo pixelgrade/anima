@@ -21,25 +21,10 @@ body.has-editorial-frame {
   --editorial-frame-marker-mask-size: 1em;
   --editorial-frame-head-padding-y: 24px;
   --editorial-frame-head-min-height: 336px;
-  --editorial-frame-surface: var(--sm-current-fg1-color);
-  --editorial-frame-ink: var(--sm-current-bg-color);
-  --editorial-frame-divider-color: color-mix(in srgb, var(--editorial-frame-surface) 20%, transparent);
 }
 
 body.single-post.has-editorial-frame {
   --editorial-frame-rail-top-offset: calc(var(--editorial-frame-admin-bar-offset, 0px) + var(--editorial-frame-top-size) + var(--theme-sticky-header-height, 0px) + var(--editorial-frame-rail-gap));
-}
-
-body.has-editorial-frame-tone-quiet-contrast {
-  --editorial-frame-surface: var(--sm-current-fg2-color);
-  --editorial-frame-ink: var(--sm-current-bg-color);
-  --editorial-frame-divider-color: color-mix(in srgb, var(--editorial-frame-surface) 20%, transparent);
-}
-
-body.has-editorial-frame-tone-accent {
-  --editorial-frame-surface: var(--sm-current-accent-color);
-  --editorial-frame-ink: var(--sm-current-bg-color);
-  --editorial-frame-divider-color: color-mix(in srgb, var(--editorial-frame-surface) 20%, transparent);
 }
 
 body.has-editorial-frame-frame #page {
@@ -52,11 +37,32 @@ body.has-editorial-frame-menu #page {
 }
 
 .c-editorial-frame {
+  // Surface/ink are defined here (not on body) so they resolve inside the
+  // palette- and variation-scoped context provided by the sm-palette-* /
+  // sm-variation-* classes that ship on this same element. That lets the
+  // Chrome Palette + Chrome Color Signal controls drive the frame tones
+  // through the normal --sm-current-*-color cascade.
+  //
+  // Surface = the variation's background color (what a signalled block
+  // would paint as its own background) so a higher signal translates into
+  // a more prominent chrome against the page.
+  --editorial-frame-surface: var(--sm-current-bg-color);
+  --editorial-frame-ink: var(--sm-current-fg1-color);
+  --editorial-frame-divider-color: color-mix(in srgb, var(--editorial-frame-surface) 20%, transparent);
+
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 4000;
   color: var(--editorial-frame-surface);
+  // Style Manager's block-level rule paints sm-variation-* elements with
+  // the current variation bg (inline <style>, same specificity as this
+  // single-class rule, and it wins on declaration order). This wrapper is
+  // a full-viewport positioning shell with no visible surface of its own —
+  // only its __top / __left / __rail children render. Suppress the bg so
+  // the page content shows through; !important is necessary to beat the
+  // SM inline rule without chasing specificity hacks.
+  background: transparent !important;
 }
 
 .c-editorial-frame__top,

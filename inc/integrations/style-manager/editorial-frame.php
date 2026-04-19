@@ -15,6 +15,50 @@ add_filter( 'style_manager/sm_panel_config', 'anima_reorganize_editorial_frame_c
 add_action( 'after_setup_theme', 'anima_maybe_invalidate_style_manager_editorial_frame_cache', 20 );
 
 /**
+ * Get the Chrome palette choices — the currently saved Style Manager palettes.
+ *
+ * Keys are palette IDs as strings (what gets saved on the option). Labels come
+ * from each palette's label, falling back to the ID so the control stays usable
+ * even when labels are missing.
+ *
+ * @return array<string,string>
+ */
+function anima_get_editorial_frame_palette_choices(): array {
+	if ( ! function_exists( 'sm_get_saved_palettes' ) ) {
+		return [];
+	}
+
+	$choices = [];
+	foreach ( sm_get_saved_palettes() as $palette ) {
+		if ( ! is_object( $palette ) || empty( $palette->id ) ) {
+			continue;
+		}
+
+		$id    = (string) $palette->id;
+		$label = ! empty( $palette->label ) ? (string) $palette->label : $id;
+
+		$choices[ $id ] = $label;
+	}
+
+	return $choices;
+}
+
+/**
+ * Get the default Chrome palette — the site's primary palette.
+ *
+ * @return string
+ */
+function anima_get_editorial_frame_default_palette(): string {
+	$choices = anima_get_editorial_frame_palette_choices();
+
+	if ( empty( $choices ) ) {
+		return '1';
+	}
+
+	return (string) array_key_first( $choices );
+}
+
+/**
  * Add Editorial Frame options to the shared Style Manager section.
  *
  * @param array $config Style Manager config.
@@ -28,6 +72,9 @@ function anima_add_editorial_frame_section_to_style_manager_config( $config ) {
 	if ( empty( $config['sections']['style_manager_section'] ) ) {
 		$config['sections']['style_manager_section'] = [];
 	}
+
+	$palette_choices = anima_get_editorial_frame_palette_choices();
+	$palette_default = anima_get_editorial_frame_default_palette();
 
 	$config['sections']['style_manager_section'] = \Pixelgrade\StyleManager\Utils\ArrayHelpers::array_merge_recursive_distinct(
 		$config['sections']['style_manager_section'],
@@ -51,16 +98,25 @@ function anima_add_editorial_frame_section_to_style_manager_config( $config ) {
 						'editorial-frame' => esc_html__( 'Editorial Frame', '__theme_txtd' ),
 					],
 				],
-				'sm_chrome_color_role' => [
+				'sm_chrome_palette' => [
 					'type'            => 'sm_radio',
 					'setting_type'    => 'option',
-					'setting_id'      => 'sm_chrome_color_role',
-					'label'           => esc_html__( 'Chrome Tone', '__theme_txtd' ),
-					'default'         => 'strong-contrast',
+					'setting_id'      => 'sm_chrome_palette',
+					'label'           => esc_html__( 'Chrome Palette', '__theme_txtd' ),
+					'default'         => $palette_default,
+					'choices'         => $palette_choices,
+					'active_callback' => 'anima_is_editorial_frame_enabled',
+				],
+				'sm_chrome_signal' => [
+					'type'            => 'sm_radio',
+					'setting_type'    => 'option',
+					'setting_id'      => 'sm_chrome_signal',
+					'label'           => esc_html__( 'Chrome Color Signal', '__theme_txtd' ),
+					'default'         => 'high',
 					'choices'         => [
-						'strong-contrast' => esc_html__( 'Strong Contrast', '__theme_txtd' ),
-						'quiet-contrast'  => esc_html__( 'Quiet Contrast', '__theme_txtd' ),
-						'accent'          => esc_html__( 'Accent', '__theme_txtd' ),
+						'low'    => esc_html__( 'Low', '__theme_txtd' ),
+						'medium' => esc_html__( 'Medium', '__theme_txtd' ),
+						'high'   => esc_html__( 'High', '__theme_txtd' ),
 					],
 					'active_callback' => 'anima_is_editorial_frame_enabled',
 				],
@@ -82,7 +138,8 @@ function anima_reorganize_editorial_frame_customizer_controls( $sm_panel_config,
 	$required_options = [
 		'sm_editorial_frame_intro',
 		'sm_chrome_preset',
-		'sm_chrome_color_role',
+		'sm_chrome_palette',
+		'sm_chrome_signal',
 	];
 
 	foreach ( $required_options as $option_id ) {
@@ -100,7 +157,8 @@ function anima_reorganize_editorial_frame_customizer_controls( $sm_panel_config,
 		[
 			'sm_editorial_frame_intro' => $sm_section_config['options']['sm_editorial_frame_intro'],
 			'sm_chrome_preset'         => $sm_section_config['options']['sm_chrome_preset'],
-			'sm_chrome_color_role'     => $sm_section_config['options']['sm_chrome_color_role'],
+			'sm_chrome_palette'        => $sm_section_config['options']['sm_chrome_palette'],
+			'sm_chrome_signal'         => $sm_section_config['options']['sm_chrome_signal'],
 		]
 	);
 
@@ -123,12 +181,14 @@ function anima_maybe_invalidate_style_manager_editorial_frame_cache(): void {
 	$section_options         = $tweak_board_section['options'] ?? [];
 	$intro_option            = $section_options['sm_editorial_frame_intro'] ?? [];
 	$preset_option           = $section_options['sm_chrome_preset'] ?? [];
-	$color_role_option       = $section_options['sm_chrome_color_role'] ?? [];
+	$palette_option          = $section_options['sm_chrome_palette'] ?? [];
+	$signal_option           = $section_options['sm_chrome_signal'] ?? [];
 	$option_order            = array_keys( $section_options );
 	$expected_tail           = [
 		'sm_editorial_frame_intro',
 		'sm_chrome_preset',
-		'sm_chrome_color_role',
+		'sm_chrome_palette',
+		'sm_chrome_signal',
 	];
 	$has_expected_copy       = (
 		empty( $editorial_frame_section )
@@ -136,7 +196,8 @@ function anima_maybe_invalidate_style_manager_editorial_frame_cache(): void {
 		&& false !== strpos( (string) ( $intro_option['html'] ?? '' ), 'Editorial Frame' )
 		&& false !== strpos( (string) ( $intro_option['html'] ?? '' ), 'Frame the site with a graphic chrome and style a dedicated Chrome menu with search, social links, and expressive navigation.' )
 		&& ( $preset_option['setting_id'] ?? '' ) === 'sm_chrome_preset'
-		&& ( $color_role_option['setting_id'] ?? '' ) === 'sm_chrome_color_role'
+		&& ( $palette_option['setting_id'] ?? '' ) === 'sm_chrome_palette'
+		&& ( $signal_option['setting_id'] ?? '' ) === 'sm_chrome_signal'
 		&& $expected_tail === array_slice( $option_order, -1 * count( $expected_tail ) )
 	);
 

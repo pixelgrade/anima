@@ -57,22 +57,92 @@ function anima_is_editorial_frame_menu_enabled(): bool {
 }
 
 /**
- * Get the active Editorial Frame tone slug.
+ * Get the Chrome palette ID — the Style Manager palette the chrome should
+ * scope itself to. Defaults to the site's primary (first) palette when the
+ * option hasn't been set or the saved palette no longer exists.
  *
  * @return string
  */
-function anima_get_editorial_frame_color_role(): string {
-	$tone = sanitize_key( (string) get_option( 'sm_chrome_color_role', 'strong-contrast' ) );
+function anima_get_editorial_frame_palette(): string {
+	$saved = sanitize_text_field( (string) get_option( 'sm_chrome_palette', '' ) );
 
-	if ( empty( $tone ) ) {
-		return 'strong-contrast';
+	if ( function_exists( 'sm_get_saved_palettes' ) ) {
+		$valid_ids = [];
+		foreach ( sm_get_saved_palettes() as $palette ) {
+			if ( is_object( $palette ) && ! empty( $palette->id ) ) {
+				$valid_ids[] = (string) $palette->id;
+			}
+		}
+
+		if ( $saved !== '' && in_array( $saved, $valid_ids, true ) ) {
+			return $saved;
+		}
+
+		if ( ! empty( $valid_ids ) ) {
+			return $valid_ids[0];
+		}
 	}
 
-	return $tone;
+	return $saved !== '' ? $saved : '1';
 }
 
 /**
- * Expose Editorial Frame state through body classes.
+ * Get the active Chrome color signal slug.
+ *
+ * @return string
+ */
+function anima_get_editorial_frame_signal(): string {
+	$signal = sanitize_key( (string) get_option( 'sm_chrome_signal', 'high' ) );
+
+	if ( ! in_array( $signal, [ 'low', 'medium', 'high' ], true ) ) {
+		return 'high';
+	}
+
+	return $signal;
+}
+
+/**
+ * Map the Chrome color signal slug to its Style Manager palette variation
+ * (1-12) using the same default signals array Nova Blocks blocks use
+ * (`[1, 3, 8, 11]`).
+ *
+ * @return int
+ */
+function anima_get_editorial_frame_signal_variation(): int {
+	switch ( anima_get_editorial_frame_signal() ) {
+		case 'low':
+			return 3;
+		case 'medium':
+			return 8;
+		case 'high':
+		default:
+			return 11;
+	}
+}
+
+/**
+ * Map the Chrome color signal slug to its 0-3 index (Nova Blocks color
+ * signal class suffix).
+ *
+ * @return int
+ */
+function anima_get_editorial_frame_signal_index(): int {
+	switch ( anima_get_editorial_frame_signal() ) {
+		case 'low':
+			return 1;
+		case 'medium':
+			return 2;
+		case 'high':
+		default:
+			return 3;
+	}
+}
+
+/**
+ * Expose Editorial Frame state through body classes. Chrome palette and
+ * variation classes are scoped to the frame wrapper (not the body) so they
+ * don't leak into the main content; the body only carries the presence
+ * flags the rest of the theme keys off.
  *
  * @param string[] $classes Existing body classes.
  * @return string[]
@@ -83,7 +153,6 @@ function anima_editorial_frame_body_class( array $classes ): array {
 	}
 
 	$classes[] = 'has-editorial-frame';
-	$classes[] = 'has-editorial-frame-tone-' . sanitize_html_class( anima_get_editorial_frame_color_role() );
 
 	if ( anima_is_editorial_frame_menu_enabled() ) {
 		$classes[] = 'has-editorial-frame-menu';
@@ -304,8 +373,15 @@ function anima_render_editorial_frame_shell(): void {
 	if ( ! $has_menu && ! $has_frame ) {
 		return;
 	}
+
+	$shell_classes = [
+		'c-editorial-frame',
+		'sm-palette-' . sanitize_html_class( anima_get_editorial_frame_palette() ),
+		'sm-variation-' . anima_get_editorial_frame_signal_variation(),
+		'sm-color-signal-' . anima_get_editorial_frame_signal_index(),
+	];
 	?>
-	<div class="c-editorial-frame">
+	<div class="<?php echo esc_attr( implode( ' ', $shell_classes ) ); ?>">
 		<?php if ( $has_frame ) : ?>
 			<span class="c-editorial-frame__top" aria-hidden="true"></span>
 			<span class="c-editorial-frame__left" aria-hidden="true"></span>
