@@ -87,55 +87,23 @@ function anima_get_editorial_frame_palette(): string {
 }
 
 /**
- * Get the active Chrome color signal slug.
+ * Get the active Chrome palette variation (1-12).
  *
- * @return string
- */
-function anima_get_editorial_frame_signal(): string {
-	$signal = sanitize_key( (string) get_option( 'sm_chrome_signal', 'high' ) );
-
-	if ( ! in_array( $signal, [ 'low', 'medium', 'high' ], true ) ) {
-		return 'high';
-	}
-
-	return $signal;
-}
-
-/**
- * Map the Chrome color signal slug to its Style Manager palette variation
- * (1-12) using the same default signals array Nova Blocks blocks use
- * (`[1, 3, 8, 11]`).
+ * The chrome picks a specific palette grade directly instead of going
+ * through the Low / Medium / High signal alias — that way every grade,
+ * including the brand / accent ones the legacy signal trio skipped, is
+ * reachable.
  *
  * @return int
  */
-function anima_get_editorial_frame_signal_variation(): int {
-	switch ( anima_get_editorial_frame_signal() ) {
-		case 'low':
-			return 3;
-		case 'medium':
-			return 8;
-		case 'high':
-		default:
-			return 11;
-	}
-}
+function anima_get_editorial_frame_variation(): int {
+	$variation = (int) get_option( 'sm_chrome_variation', 11 );
 
-/**
- * Map the Chrome color signal slug to its 0-3 index (Nova Blocks color
- * signal class suffix).
- *
- * @return int
- */
-function anima_get_editorial_frame_signal_index(): int {
-	switch ( anima_get_editorial_frame_signal() ) {
-		case 'low':
-			return 1;
-		case 'medium':
-			return 2;
-		case 'high':
-		default:
-			return 3;
+	if ( $variation < 1 || $variation > 12 ) {
+		return 11;
 	}
+
+	return $variation;
 }
 
 /**
@@ -377,8 +345,7 @@ function anima_render_editorial_frame_shell(): void {
 	$shell_classes = [
 		'c-editorial-frame',
 		'sm-palette-' . sanitize_html_class( anima_get_editorial_frame_palette() ),
-		'sm-variation-' . anima_get_editorial_frame_signal_variation(),
-		'sm-color-signal-' . anima_get_editorial_frame_signal_index(),
+		'sm-variation-' . anima_get_editorial_frame_variation(),
 	];
 	?>
 	<div class="<?php echo esc_attr( implode( ' ', $shell_classes ) ); ?>">
@@ -410,3 +377,60 @@ function anima_render_editorial_frame_shell(): void {
 	<?php
 }
 add_action( 'anima/template_html:before', 'anima_render_editorial_frame_shell', 100 );
+
+/**
+ * Emit a tiny Customizer-preview bridge that swaps the palette and variation
+ * classes on the Editorial Frame wrapper without reloading the page. The
+ * settings marked `live => true` in the Style Manager config push through
+ * postMessage; this script just translates those messages to class swaps.
+ *
+ * @return void
+ */
+function anima_editorial_frame_render_preview_bridge(): void {
+	if ( ! is_customize_preview() ) {
+		return;
+	}
+
+	if ( ! anima_is_editorial_frame_enabled() ) {
+		return;
+	}
+	?>
+	<script id="anima-editorial-frame-preview">
+	( function () {
+		if ( typeof wp === 'undefined' || ! wp.customize ) {
+			return;
+		}
+
+		var wrapper = document.querySelector( '.c-editorial-frame' );
+		if ( ! wrapper ) {
+			return;
+		}
+
+		function replaceClassWithPrefix( prefix, nextValue ) {
+			if ( ! nextValue ) {
+				return;
+			}
+			Array.prototype.slice.call( wrapper.classList ).forEach( function ( className ) {
+				if ( className.indexOf( prefix ) === 0 ) {
+					wrapper.classList.remove( className );
+				}
+			} );
+			wrapper.classList.add( prefix + nextValue );
+		}
+
+		wp.customize( 'sm_chrome_palette', function ( setting ) {
+			setting.bind( function ( value ) {
+				replaceClassWithPrefix( 'sm-palette-', value );
+			} );
+		} );
+
+		wp.customize( 'sm_chrome_variation', function ( setting ) {
+			setting.bind( function ( value ) {
+				replaceClassWithPrefix( 'sm-variation-', value );
+			} );
+		} );
+	}() );
+	</script>
+	<?php
+}
+add_action( 'wp_footer', 'anima_editorial_frame_render_preview_bridge', 50 );

@@ -255,30 +255,6 @@
   }
 }
 
-// Editorial Frame: lay the Chrome Palette and Chrome Color Signal radios
-// out vertically so each option has room for a longer label and we can add
-// more levels without cramming them onto a single pill row.
-#customize-control-sm_chrome_palette_control .sm-radio-group,
-#customize-control-sm_chrome_signal_control .sm-radio-group {
-  flex-direction: column;
-  height: auto;
-  border-radius: 12px;
-
-  > * {
-    flex: 1 1 auto;
-  }
-
-  label {
-    justify-content: flex-start;
-    padding: 10px 14px;
-    text-align: left;
-
-    &:nth-of-type(2) {
-      border-width: 1px 0;
-    }
-  }
-}
-
 #sub-accordion-section-sm_tweak_board_section {
   #customize-control-sm_decorative_titles_style_intro_control,
   #customize-control-sm_decorative_titles_style_control,

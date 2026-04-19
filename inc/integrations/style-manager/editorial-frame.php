@@ -59,6 +59,27 @@ function anima_get_editorial_frame_default_palette(): string {
 }
 
 /**
+ * Get the Chrome grade choices — all 12 palette variations as numeric keys.
+ *
+ * Exposes every grade the Style Manager palette defines so the chrome can
+ * reach the brand / accent zone that the legacy Low / Medium / High signal
+ * trio (variations 3 / 8 / 11) skipped over.
+ *
+ * @return array<string,string>
+ */
+function anima_get_editorial_frame_variation_choices(): array {
+	$choices = [];
+	for ( $i = 1; $i <= 12; $i++ ) {
+		$choices[ (string) $i ] = sprintf(
+			/* translators: %d: palette grade index (1-12). */
+			esc_html__( 'Grade %d', '__theme_txtd' ),
+			$i
+		);
+	}
+	return $choices;
+}
+
+/**
  * Add Editorial Frame options to the shared Style Manager section.
  *
  * @param array $config Style Manager config.
@@ -99,25 +120,24 @@ function anima_add_editorial_frame_section_to_style_manager_config( $config ) {
 					],
 				],
 				'sm_chrome_palette' => [
-					'type'            => 'sm_radio',
+					'type'            => 'radio',
 					'setting_type'    => 'option',
 					'setting_id'      => 'sm_chrome_palette',
 					'label'           => esc_html__( 'Chrome Palette', '__theme_txtd' ),
 					'default'         => $palette_default,
 					'choices'         => $palette_choices,
+					'live'            => true,
 					'active_callback' => 'anima_is_editorial_frame_enabled',
 				],
-				'sm_chrome_signal' => [
-					'type'            => 'sm_radio',
+				'sm_chrome_variation' => [
+					'type'            => 'radio',
 					'setting_type'    => 'option',
-					'setting_id'      => 'sm_chrome_signal',
-					'label'           => esc_html__( 'Chrome Color Signal', '__theme_txtd' ),
-					'default'         => 'high',
-					'choices'         => [
-						'low'    => esc_html__( 'Low', '__theme_txtd' ),
-						'medium' => esc_html__( 'Medium', '__theme_txtd' ),
-						'high'   => esc_html__( 'High', '__theme_txtd' ),
-					],
+					'setting_id'      => 'sm_chrome_variation',
+					'label'           => esc_html__( 'Chrome Color Grade', '__theme_txtd' ),
+					'desc'            => esc_html__( 'Pick a grade from the chrome palette. Lower grades match the page surface; middle grades expose the brand colour; higher grades invert to strong contrast.', '__theme_txtd' ),
+					'default'         => '11',
+					'choices'         => anima_get_editorial_frame_variation_choices(),
+					'live'            => true,
 					'active_callback' => 'anima_is_editorial_frame_enabled',
 				],
 			],
@@ -139,7 +159,7 @@ function anima_reorganize_editorial_frame_customizer_controls( $sm_panel_config,
 		'sm_editorial_frame_intro',
 		'sm_chrome_preset',
 		'sm_chrome_palette',
-		'sm_chrome_signal',
+		'sm_chrome_variation',
 	];
 
 	foreach ( $required_options as $option_id ) {
@@ -158,7 +178,7 @@ function anima_reorganize_editorial_frame_customizer_controls( $sm_panel_config,
 			'sm_editorial_frame_intro' => $sm_section_config['options']['sm_editorial_frame_intro'],
 			'sm_chrome_preset'         => $sm_section_config['options']['sm_chrome_preset'],
 			'sm_chrome_palette'        => $sm_section_config['options']['sm_chrome_palette'],
-			'sm_chrome_signal'         => $sm_section_config['options']['sm_chrome_signal'],
+			'sm_chrome_variation'         => $sm_section_config['options']['sm_chrome_variation'],
 		]
 	);
 
@@ -182,13 +202,13 @@ function anima_maybe_invalidate_style_manager_editorial_frame_cache(): void {
 	$intro_option            = $section_options['sm_editorial_frame_intro'] ?? [];
 	$preset_option           = $section_options['sm_chrome_preset'] ?? [];
 	$palette_option          = $section_options['sm_chrome_palette'] ?? [];
-	$signal_option           = $section_options['sm_chrome_signal'] ?? [];
+	$signal_option           = $section_options['sm_chrome_variation'] ?? [];
 	$option_order            = array_keys( $section_options );
 	$expected_tail           = [
 		'sm_editorial_frame_intro',
 		'sm_chrome_preset',
 		'sm_chrome_palette',
-		'sm_chrome_signal',
+		'sm_chrome_variation',
 	];
 	$has_expected_copy       = (
 		empty( $editorial_frame_section )
@@ -197,7 +217,7 @@ function anima_maybe_invalidate_style_manager_editorial_frame_cache(): void {
 		&& false !== strpos( (string) ( $intro_option['html'] ?? '' ), 'Frame the site with a graphic chrome and style a dedicated Chrome menu with search, social links, and expressive navigation.' )
 		&& ( $preset_option['setting_id'] ?? '' ) === 'sm_chrome_preset'
 		&& ( $palette_option['setting_id'] ?? '' ) === 'sm_chrome_palette'
-		&& ( $signal_option['setting_id'] ?? '' ) === 'sm_chrome_signal'
+		&& ( $signal_option['setting_id'] ?? '' ) === 'sm_chrome_variation'
 		&& $expected_tail === array_slice( $option_order, -1 * count( $expected_tail ) )
 	);
 
