@@ -55,6 +55,16 @@ test('clip and flex define distinct non-media pending states', () => {
   );
 });
 
+test('revealed intro targets do not keep a clipping mask', () => {
+  const filePath = path.join(__dirname, '..', 'src', 'scss', 'components', '_intro-animations.scss');
+  const scss = fs.readFileSync(filePath, 'utf8');
+
+  assert.match(
+    scss,
+    /\.anima-intro-target--revealed\s*\{[\s\S]*?transform:\s*none;[\s\S]*?clip-path:\s*none;/,
+  );
+});
+
 test('clip excludes supernova cards from the media-only pending path', () => {
   const filePath = path.join(__dirname, '..', 'src', 'scss', 'components', '_intro-animations.scss');
   const scss = fs.readFileSync(filePath, 'utf8');
