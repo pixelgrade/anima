@@ -91,8 +91,8 @@ function anima_add_motion_section_to_style_manager_config( $config ) {
 					'type'         => 'html',
 					'setting_type' => 'option',
 					'setting_id'   => 'sm_intro_animations_intro',
-					'html'         => '<div class="customize-control-title">' . esc_html__( 'Animations', '__theme_txtd' ) . '</div>' .
-						'<span class="description customize-control-description">' . esc_html__( 'Select an animation style to animate site elements as they appear on the page.', '__theme_txtd' ) . '</span>',
+					'html'         => '<div class="customize-control-title">' . esc_html__( 'Intro Animations', '__theme_txtd' ) . '</div>' .
+						'<span class="description customize-control-description">' . esc_html__( 'Select an intro animation to animate site elements as they appear on the page.', '__theme_txtd' ) . '</span>',
 				],
 				'sm_intro_animations_enable' => [
 					'type'         => 'sm_toggle',
@@ -199,8 +199,8 @@ function anima_maybe_invalidate_style_manager_motion_cache() {
 		&& ( $transition_symbol['type'] ?? '' ) === 'text'
 		&& ( $transition_symbol['setting_id'] ?? '' ) === 'sm_transition_symbol'
 		&& array_key_exists( 'html', $intro_separator )
-		&& false !== strpos( (string) ( $intro_animations_intro['html'] ?? '' ), 'Animations' )
-		&& false !== strpos( (string) ( $intro_animations_intro['html'] ?? '' ), 'Select an animation style to animate site elements as they appear on the page.' )
+		&& false !== strpos( (string) ( $intro_animations_intro['html'] ?? '' ), 'Intro Animations' )
+		&& false !== strpos( (string) ( $intro_animations_intro['html'] ?? '' ), 'Select an intro animation to animate site elements as they appear on the page.' )
 		&& ( $intro_animations_enable['type'] ?? '' ) === 'sm_toggle'
 		&& ( $intro_animations_enable['setting_type'] ?? '' ) === 'option'
 		&& ( $intro_animations_enable['setting_id'] ?? '' ) === 'sm_intro_animations_enable'
