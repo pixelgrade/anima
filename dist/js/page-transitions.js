@@ -63,8 +63,27 @@ const REVEAL_ZONE_TOP_RATIO = 0.82;
 const DELAY_WINDOW_BY_STYLE = {
   fade: 600,
   scale: 600,
-  slide: 600
+  slide: 600,
+  // Kinetic needs a longer window: the title's per-word cascade can take
+  // ~500ms+ on a multi-line heading, and the rest of the batch should still
+  // feel like one continuous reveal.
+  kinetic: 1000
 };
+
+// Selectors that identify a "title" role target (heading blocks, post titles).
+// Used by the role classifier below. Anything else gets role 'other'.
+const TITLE_ROLE_SELECTORS = ['h1', 'h2', 'h3', '.wp-block-heading', '.wp-block-post-title'];
+function classifyTargetRole(node) {
+  if (!node || typeof node.matches !== 'function') {
+    return 'other';
+  }
+  for (const selector of TITLE_ROLE_SELECTORS) {
+    if (node.matches(selector)) {
+      return 'title';
+    }
+  }
+  return 'other';
+}
 function getRevealObserverOptions() {
   return {
     threshold: 0,
@@ -149,6 +168,94 @@ function createIntroAnimationsRuntime({
       target.classList.add('anima-intro-target');
     }
   }
+
+  // Split a heading into per-line <span class="line"> containers whose
+  // children are <span class="word"> with --word-index (per-line) and
+  // --line-index (global). Mirrors the splitting.js behavior used on
+  // louisansa.com — line wrapping is detected from the browser's own
+  // layout, so each visual line gets its own overflow:hidden clip and
+  // the CSS cascade drives delays with no per-element JS work.
+  //
+  // Safeguards:
+  //  - Skip if the element already has split children (re-entrancy / SPA).
+  //  - Skip if the heading contains inline markup (<em>, <strong>, links).
+  //    Naive splitting would flatten those — fall back silently and the
+  //    element will still be revealed via the (title-container) default.
+  function splitHeadingForCurtain(el) {
+    if (!el || typeof el.querySelector !== 'function') {
+      return;
+    }
+    if (el.querySelector('.line')) {
+      return; // already split
+    }
+    if (!doc || typeof doc.createElement !== 'function' || typeof doc.createTextNode !== 'function') {
+      return;
+    }
+
+    // Only handle pure-text headings. Inline markup would need a richer walker.
+    if (typeof el.childElementCount === 'number' && el.childElementCount > 0) {
+      return;
+    }
+    const text = typeof el.textContent === 'string' ? el.textContent.trim() : '';
+    if (!text) {
+      return;
+    }
+    const words = text.split(/\s+/).filter(Boolean);
+    if (words.length === 0) {
+      return;
+    }
+    const wordSpans = words.map(word => {
+      const span = doc.createElement('span');
+      span.className = 'word';
+      span.textContent = word;
+      return span;
+    });
+
+    // Pass 1: flat layout so the browser decides where lines wrap.
+    el.textContent = '';
+    wordSpans.forEach((span, index) => {
+      el.appendChild(span);
+      if (index < wordSpans.length - 1) {
+        el.appendChild(doc.createTextNode(' '));
+      }
+    });
+
+    // Force a layout read, then group words by their offsetTop.
+    if (typeof el.getBoundingClientRect === 'function') {
+      el.getBoundingClientRect();
+    }
+    const wordsByTop = new Map();
+    wordSpans.forEach(span => {
+      const top = typeof span.offsetTop === 'number' ? span.offsetTop : 0;
+      if (!wordsByTop.has(top)) {
+        wordsByTop.set(top, []);
+      }
+      wordsByTop.get(top).push(span);
+    });
+
+    // Pass 2: rewrap each visual line in its own <span class="line">.
+    const lineTops = [...wordsByTop.keys()].sort((a, b) => a - b);
+    el.textContent = '';
+    lineTops.forEach((top, lineIndex) => {
+      const lineSpan = doc.createElement('span');
+      lineSpan.className = 'line';
+      if (lineSpan.style && typeof lineSpan.style.setProperty === 'function') {
+        lineSpan.style.setProperty('--line-index', String(lineIndex));
+      }
+      const lineWords = wordsByTop.get(top);
+      lineWords.forEach((wordSpan, wordIndex) => {
+        if (wordSpan.style && typeof wordSpan.style.setProperty === 'function') {
+          wordSpan.style.setProperty('--word-index', String(wordIndex));
+          wordSpan.style.setProperty('--line-index', String(lineIndex));
+        }
+        lineSpan.appendChild(wordSpan);
+        if (wordIndex < lineWords.length - 1) {
+          lineSpan.appendChild(doc.createTextNode(' '));
+        }
+      });
+      el.appendChild(lineSpan);
+    });
+  }
   function applyRevealDelay(target, index = 0, totalTargets = 1) {
     if (!target || !target.style || typeof target.style.setProperty !== 'function') {
       return;
@@ -174,11 +281,27 @@ function createIntroAnimationsRuntime({
     }
     markTargetBase(target);
     target.classList.remove('anima-intro-target--revealed');
+
+    // Tag the target with its role (title / other). Per-role CSS uses this
+    // class to apply style-specific treatment — notably Kinetic, which
+    // reveals non-title targets with a slide and titles with a word curtain.
+    const role = classifyTargetRole(target);
+    if (target.classList && typeof target.classList.add === 'function') {
+      target.classList.add('anima-intro-target--role-' + role);
+    }
     if (prefersReducedMotion()) {
       revealTarget(target);
       return false;
     }
     target.classList.add('anima-intro-target--pending');
+
+    // Kinetic style only: split title-role headings into words so the CSS
+    // per-word cascade has something to reveal. Runs on every stageTarget
+    // call, which means it re-applies correctly after Barba page transitions
+    // (initialize() re-fires on 'anima:page-transition-complete').
+    if (role === 'title' && getActiveAnimationStyle() === 'kinetic') {
+      splitHeadingForCurtain(target);
+    }
     return true;
   }
   function disconnect() {
@@ -274,12 +397,18 @@ function createIntroAnimationsRuntime({
     stageTarget,
     prefersReducedMotion,
     isInViewport,
-    getRevealObserverOptions
+    getRevealObserverOptions,
+    // Exposed for tests and for external consumers who want to pre-split
+    // server-rendered headings (e.g. a future critical-path enhancement).
+    splitHeadingForCurtain
   };
 }
 module.exports = {
   createIntroAnimationsRuntime,
-  getRevealObserverOptions
+  getRevealObserverOptions,
+  classifyTargetRole,
+  TITLE_ROLE_SELECTORS,
+  DELAY_WINDOW_BY_STYLE
 };
 
 /***/ },

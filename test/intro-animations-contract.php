@@ -96,6 +96,22 @@ if ( in_array( 'clip', $supported_styles, true ) || in_array( 'flex', $supported
 	anima_fail_intro_animations_contract_test( 'Expected retired styles to be absent from the supported styles list.' );
 }
 
+if ( ! in_array( 'kinetic', $supported_styles, true ) ) {
+	anima_fail_intro_animations_contract_test( 'Expected "kinetic" to be present in the supported styles list.' );
+}
+
+update_option( 'sm_intro_animations_style', 'kinetic' );
+
+if ( 'kinetic' !== anima_get_intro_animation_style() ) {
+	anima_fail_intro_animations_contract_test( 'Expected "kinetic" to be accepted by the style sanitizer.' );
+}
+
+$kinetic_classes = anima_intro_animations_body_class( [] );
+
+if ( ! in_array( 'has-intro-animations--kinetic', $kinetic_classes, true ) ) {
+	anima_fail_intro_animations_contract_test( 'Expected enabled kinetic style to add the normalized body class.' );
+}
+
 if ( null === $original_enable ) {
 	delete_option( 'sm_intro_animations_enable' );
 } else {
