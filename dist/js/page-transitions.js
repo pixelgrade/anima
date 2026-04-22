@@ -192,9 +192,7 @@ const {
 } = __webpack_require__(687);
 const REVEAL_ZONE_TOP_RATIO = 0.82;
 const DELAY_WINDOW_BY_STYLE = {
-  clip: 1000,
   fade: 600,
-  flex: 1000,
   scale: 600,
   slide: 600
 };

@@ -4,7 +4,6 @@ body.has-intro-animations {
   --anima-intro-distance: 42px;
   --anima-intro-scale-start: 0.96;
   --anima-intro-easing: cubic-bezier(0.19, 1, 0.22, 1);
-  --anima-intro-clip-radius: 18px;
 }
 
 body.has-intro-animations--slow {
@@ -28,12 +27,6 @@ body.has-intro-animations--scale,
 body.has-intro-animations--slide {
   --anima-intro-easing: cubic-bezier(0.19, 1, 0.22, 1);
   --anima-intro-delay-window: 0.6s;
-}
-
-body.has-intro-animations--clip,
-body.has-intro-animations--flex {
-  --anima-intro-easing: cubic-bezier(0.19, 1, 0.22, 1);
-  --anima-intro-delay-window: 1.0s;
 }
 
 body.has-intro-animations--fade.has-intro-animations--slow {
@@ -72,58 +65,12 @@ body.has-intro-animations--slide.has-intro-animations--fast {
   --anima-intro-duration: 0.45s;
 }
 
-body.has-intro-animations--clip.has-intro-animations--slow {
-  --anima-intro-duration: 0.80s;
-}
-
-body.has-intro-animations--clip.has-intro-animations--medium {
-  --anima-intro-duration: 0.65s;
-}
-
-body.has-intro-animations--clip.has-intro-animations--fast {
-  --anima-intro-duration: 0.50s;
-}
-
-body.has-intro-animations--flex.has-intro-animations--slow {
-  --anima-intro-duration: 0.80s;
-}
-
-body.has-intro-animations--flex.has-intro-animations--medium {
-  --anima-intro-duration: 0.65s;
-}
-
-body.has-intro-animations--flex.has-intro-animations--fast {
-  --anima-intro-duration: 0.50s;
-}
-
-@mixin intro-animation-clip-media-target {
-  &.wp-block-cover,
-  &.wp-block-image,
-  &.wp-block-gallery,
-  &.wp-block-media-text,
-  &.wp-block-post-featured-image {
-    @content;
-  }
-}
-
-@mixin intro-animation-flex-media-target {
-  &.wp-block-cover,
-  &.wp-block-image,
-  &.wp-block-gallery,
-  &.wp-block-media-text,
-  &.wp-block-post-featured-image,
-  &.nb-supernova-item {
-    @content;
-  }
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .anima-intro-target {
     transition:
       opacity var(--anima-intro-duration) var(--anima-intro-easing) var(--anima-intro-delay, 0ms),
-      transform var(--anima-intro-duration) var(--anima-intro-easing) var(--anima-intro-delay, 0ms),
-      clip-path calc(var(--anima-intro-duration) * 1.05) var(--anima-intro-easing) var(--anima-intro-delay, 0ms);
-    will-change: opacity, transform, clip-path;
+      transform var(--anima-intro-duration) var(--anima-intro-easing) var(--anima-intro-delay, 0ms);
+    will-change: opacity, transform;
     backface-visibility: hidden;
   }
 
@@ -136,7 +83,6 @@ body.has-intro-animations--flex.has-intro-animations--fast {
     opacity: 1;
     visibility: visible;
     transform: none;
-    clip-path: none;
   }
 
   body.has-intro-animations--fade {
@@ -157,35 +103,6 @@ body.has-intro-animations--flex.has-intro-animations--fast {
       transform: translate3d(0, var(--anima-intro-distance), 0);
     }
   }
-
-  body.has-intro-animations--clip {
-    .anima-intro-target--pending {
-      transform: translate3d(0, calc(var(--anima-intro-distance) * 0.2), 0);
-      clip-path: inset(0 100% 0 0 round var(--anima-intro-clip-radius));
-    }
-
-    .anima-intro-target--pending {
-      @include intro-animation-clip-media-target {
-        transform: none;
-        clip-path: inset(0 0 100% 0 round var(--anima-intro-clip-radius));
-      }
-    }
-  }
-
-  body.has-intro-animations--flex {
-    .anima-intro-target--pending {
-      transform: translate3d(0, calc(var(--anima-intro-distance) * 0.55), 0) scale(0.965);
-      transform-origin: 50% 50%;
-      clip-path: inset(14% 0 0 0 round var(--anima-intro-clip-radius));
-    }
-
-    .anima-intro-target--pending {
-      @include intro-animation-flex-media-target {
-        transform: translate3d(0, calc(var(--anima-intro-distance) * 0.3), 0);
-        clip-path: inset(8% 0 0 0 round var(--anima-intro-clip-radius));
-      }
-    }
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -195,7 +112,6 @@ body.has-intro-animations--flex.has-intro-animations--fast {
     opacity: 1 !important;
     visibility: visible !important;
     transform: none !important;
-    clip-path: none !important;
     transition: none !important;
     will-change: auto !important;
   }

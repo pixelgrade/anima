@@ -269,8 +269,6 @@ function anima_get_intro_animation_style_choices() {
 		'fade'  => anima_get_intro_animation_choice_markup( 'fade', esc_html__( 'Fade', '__theme_txtd' ) ),
 		'scale' => anima_get_intro_animation_choice_markup( 'scale', esc_html__( 'Scale', '__theme_txtd' ) ),
 		'slide' => anima_get_intro_animation_choice_markup( 'slide', esc_html__( 'Slide', '__theme_txtd' ) ),
-		'clip'  => anima_get_intro_animation_choice_markup( 'clip', esc_html__( 'Clip', '__theme_txtd' ) ),
-		'flex'  => anima_get_intro_animation_choice_markup( 'flex', esc_html__( 'Flex', '__theme_txtd' ) ),
 	];
 }
 
@@ -304,8 +302,6 @@ function anima_get_intro_animation_choice_icon_markup( $slug ) {
 		'fade'  => '<svg viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M3.5 10h13" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round"/><path d="M6.5 6.25h7" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" opacity=".45"/><path d="M6.5 13.75h7" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" opacity=".75"/></svg>',
 		'scale' => '<svg viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M5 8V5h3" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 5h3v3" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 12v3h-3" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 15H5v-3" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>',
 		'slide' => '<svg viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M10 4.5v11" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round"/><path d="m6.75 7.75 3.25-3.25 3.25 3.25" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.5 15.5h11" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" opacity=".5"/></svg>',
-		'clip'  => '<svg viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M5.25 5.25h9.5v9.5h-9.5z" fill="none" stroke="' . $stroke . '" stroke-width="1.75"/><path d="M5.25 14.75 14.75 5.25" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round"/><path d="M5.25 8.5h4.25V5.25" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg>',
-		'flex'  => '<svg viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M6 6.25c1.1-1.1 2.3-1.75 4-1.75 2.35 0 4 1.35 4.75 3.25" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round"/><path d="m12.5 6 2.25 1.75-2.75.5" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 13.75C12.9 14.85 11.7 15.5 10 15.5c-2.35 0-4-1.35-4.75-3.25" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round"/><path d="m7.5 14 0-2.25-2.25 1.25" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>',
 	];
 
 	return $icons[ $slug ] ?? '';

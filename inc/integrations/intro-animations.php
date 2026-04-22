@@ -27,10 +27,18 @@ function anima_intro_animations_enabled() {
 /**
  * Get the normalized intro-animation style.
  *
+ * Retired style slugs (e.g. `clip`, `flex` from pre-2.0.17 installs) fall
+ * back to `fade` so sites that had them selected keep animating after upgrade
+ * instead of silently rendering nothing.
+ *
  * @return string
  */
 function anima_get_intro_animation_style() {
 	$style = get_option( 'sm_intro_animations_style', 'fade' );
+
+	if ( in_array( $style, [ 'clip', 'flex' ], true ) ) {
+		return 'fade';
+	}
 
 	if ( ! in_array( $style, anima_get_intro_animation_supported_styles(), true ) ) {
 		return 'fade';
@@ -64,8 +72,6 @@ function anima_get_intro_animation_supported_styles() {
 		'fade',
 		'scale',
 		'slide',
-		'clip',
-		'flex',
 	];
 }
 

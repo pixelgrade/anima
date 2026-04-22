@@ -27,53 +27,25 @@ test('intro animation scss defines effect-specific duration, delay, and easing p
     scss,
     /body\.has-intro-animations--slide\.has-intro-animations--fast\s*\{[\s\S]*?--anima-intro-duration:\s*0\.45s;/,
   );
-  assert.match(
-    scss,
-    /body\.has-intro-animations--clip,\s*body\.has-intro-animations--flex\s*\{[\s\S]*?--anima-intro-easing:\s*cubic-bezier\(0\.19,\s*1,\s*0\.22,\s*1\);[\s\S]*?--anima-intro-delay-window:\s*1\.0s;/,
-  );
-  assert.match(
-    scss,
-    /body\.has-intro-animations--clip\.has-intro-animations--medium\s*\{[\s\S]*?--anima-intro-duration:\s*0\.65s;/,
-  );
-  assert.match(
-    scss,
-    /body\.has-intro-animations--flex\.has-intro-animations--fast\s*\{[\s\S]*?--anima-intro-duration:\s*0\.50s;/,
-  );
 });
 
-test('clip and flex define distinct non-media pending states', () => {
+test('revealed intro targets reset the pending transform', () => {
   const filePath = path.join(__dirname, '..', 'src', 'scss', 'components', '_intro-animations.scss');
   const scss = fs.readFileSync(filePath, 'utf8');
 
   assert.match(
     scss,
-    /body\.has-intro-animations--clip\s*\{[\s\S]*?\.anima-intro-target--pending\s*\{[\s\S]*?transform:\s*translate3d\(0,\s*calc\(var\(--anima-intro-distance\)\s*\*\s*0\.2\),\s*0\);[\s\S]*?clip-path:\s*inset\(0\s+100%\s+0\s+0\s+round\s+var\(--anima-intro-clip-radius\)\);/,
-  );
-  assert.match(
-    scss,
-    /body\.has-intro-animations--flex\s*\{[\s\S]*?\.anima-intro-target--pending\s*\{[\s\S]*?transform:\s*translate3d\(0,\s*calc\(var\(--anima-intro-distance\)\s*\*\s*0\.55\),\s*0\)\s*scale\(0\.965\);[\s\S]*?clip-path:\s*inset\(14%\s+0\s+0\s+0\s+round\s+var\(--anima-intro-clip-radius\)\);/,
+    /\.anima-intro-target--revealed\s*\{[\s\S]*?transform:\s*none;/,
   );
 });
 
-test('revealed intro targets do not keep a clipping mask', () => {
+test('retired clip and flex intro styles are no longer defined in scss', () => {
   const filePath = path.join(__dirname, '..', 'src', 'scss', 'components', '_intro-animations.scss');
   const scss = fs.readFileSync(filePath, 'utf8');
 
-  assert.match(
-    scss,
-    /\.anima-intro-target--revealed\s*\{[\s\S]*?transform:\s*none;[\s\S]*?clip-path:\s*none;/,
-  );
-});
-
-test('clip excludes supernova cards from the media-only pending path', () => {
-  const filePath = path.join(__dirname, '..', 'src', 'scss', 'components', '_intro-animations.scss');
-  const scss = fs.readFileSync(filePath, 'utf8');
-  const clipMixinMatch = scss.match(/@mixin intro-animation-clip-media-target\s*\{[\s\S]*?\n\}/);
-
-  assert.ok(clipMixinMatch);
-  assert.match(
-    clipMixinMatch[0],
-    /@mixin intro-animation-clip-media-target\s*\{[\s\S]*?&\.wp-block-cover,[\s\S]*?&\.wp-block-post-featured-image\s*\{/,
-  );
-  assert.equal(clipMixinMatch[0].includes('&.nb-supernova-item'), false);
+  assert.equal(scss.includes('has-intro-animations--clip'), false);
+  assert.equal(scss.includes('has-intro-animations--flex'), false);
+  assert.equal(scss.includes('--anima-intro-clip-radius'), false);
+  assert.equal(scss.includes('intro-animation-clip-media-target'), false);
+  assert.equal(scss.includes('intro-animation-flex-media-target'), false);
 });

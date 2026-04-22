@@ -78,6 +78,24 @@ if ( 'medium' !== anima_get_intro_animation_speed() ) {
 	anima_fail_intro_animations_contract_test( 'Expected invalid speed values to normalize to medium.' );
 }
 
+update_option( 'sm_intro_animations_style', 'clip' );
+
+if ( 'fade' !== anima_get_intro_animation_style() ) {
+	anima_fail_intro_animations_contract_test( 'Expected retired "clip" style to migrate to fade.' );
+}
+
+update_option( 'sm_intro_animations_style', 'flex' );
+
+if ( 'fade' !== anima_get_intro_animation_style() ) {
+	anima_fail_intro_animations_contract_test( 'Expected retired "flex" style to migrate to fade.' );
+}
+
+$supported_styles = anima_get_intro_animation_supported_styles();
+
+if ( in_array( 'clip', $supported_styles, true ) || in_array( 'flex', $supported_styles, true ) ) {
+	anima_fail_intro_animations_contract_test( 'Expected retired styles to be absent from the supported styles list.' );
+}
+
 if ( null === $original_enable ) {
 	delete_option( 'sm_intro_animations_enable' );
 } else {
