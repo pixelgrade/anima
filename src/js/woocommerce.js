@@ -68,8 +68,8 @@ const {
 
         var $cartMenuItem = $( obj );
         var $cartMenuItemLink = $cartMenuItem.children( 'a' );
-        var isEditorialFrame = $cartMenuItem.hasClass( 'menu-item--editorial-frame' );
-        var cartMenuItemText = $cartMenuItemLink.children( '.c-editorial-frame__label, .menu-item__label' ).first().text().trim();
+        var isSiteFrame = $cartMenuItem.hasClass( 'menu-item--site-frame' );
+        var cartMenuItemText = $cartMenuItemLink.children( '.c-site-frame__label, .menu-item__label' ).first().text().trim();
 
         if ( ! cartMenuItemText ) {
           var $textOnlyLink = $cartMenuItemLink.clone();
@@ -80,7 +80,7 @@ const {
         $cartMenuItemLink.html(
           getCartMenuItemMarkup( {
             label: cartMenuItemText,
-            editorialFrame: isEditorialFrame,
+            siteFrame: isSiteFrame,
           } )
         );
 

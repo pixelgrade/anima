@@ -1,11 +1,11 @@
 const {
-  createEditorialFrameRuntime,
+  createSiteFrameRuntime,
 } = require('./runtime.js');
 
-class EditorialFrame {
+class SiteFrame {
   constructor({
     window: win = typeof window !== 'undefined' ? window : null,
-    runtime = createEditorialFrameRuntime(),
+    runtime = createSiteFrameRuntime(),
   } = {}) {
     this.window = win;
     this.runtime = runtime;
@@ -23,4 +23,4 @@ class EditorialFrame {
   }
 }
 
-module.exports = EditorialFrame;
+module.exports = SiteFrame;

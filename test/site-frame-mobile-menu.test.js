@@ -2,9 +2,9 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 
 const {
-  syncEditorialFrameMobileMenu,
-  EDITORIAL_FRAME_CLONE_ATTR,
-} = require('../src/js/components/editorial-frame/runtime.js');
+  syncSiteFrameMobileMenu,
+  SITE_FRAME_CLONE_ATTR,
+} = require('../src/js/components/site-frame/runtime.js');
 
 function createClassList(initialClasses = []) {
   const classSet = new Set(initialClasses);
@@ -66,11 +66,11 @@ function createMenuList(labels) {
   return list;
 }
 
-test('syncEditorialFrameMobileMenu appends chrome items once at the bottom of the mobile menu', () => {
+test('syncSiteFrameMobileMenu appends Site Frame items once at the bottom of the mobile menu', () => {
   const sourceList = createMenuList(['Read', 'Instagram', 'Search']);
   const targetList = createMenuList(['Home', 'Work']);
 
-  const appendedCount = syncEditorialFrameMobileMenu({
+  const appendedCount = syncSiteFrameMobileMenu({
     enabled: true,
     belowLap: true,
     sourceList,
@@ -83,10 +83,10 @@ test('syncEditorialFrameMobileMenu appends chrome items once at the bottom of th
     ['Home', 'Work', 'Read', 'Instagram', 'Search']
   );
 
-  const cloneFlags = targetList.children.slice(-3).map((item) => item.dataset[EDITORIAL_FRAME_CLONE_ATTR]);
+  const cloneFlags = targetList.children.slice(-3).map((item) => item.dataset[SITE_FRAME_CLONE_ATTR]);
   assert.deepEqual(cloneFlags, ['true', 'true', 'true']);
 
-  syncEditorialFrameMobileMenu({
+  syncSiteFrameMobileMenu({
     enabled: true,
     belowLap: true,
     sourceList,
@@ -99,11 +99,11 @@ test('syncEditorialFrameMobileMenu appends chrome items once at the bottom of th
   );
 });
 
-test('syncEditorialFrameMobileMenu removes prior chrome clones when leaving the mobile layout', () => {
+test('syncSiteFrameMobileMenu removes prior Site Frame clones when leaving the mobile layout', () => {
   const sourceList = createMenuList(['Read']);
   const targetList = createMenuList(['Home']);
 
-  syncEditorialFrameMobileMenu({
+  syncSiteFrameMobileMenu({
     enabled: true,
     belowLap: true,
     sourceList,
@@ -112,7 +112,7 @@ test('syncEditorialFrameMobileMenu removes prior chrome clones when leaving the 
 
   assert.equal(targetList.children.length, 2);
 
-  const removedCount = syncEditorialFrameMobileMenu({
+  const removedCount = syncSiteFrameMobileMenu({
     enabled: true,
     belowLap: false,
     sourceList,

@@ -4,14 +4,14 @@
 /***/ 410
 (module) {
 
-const CART_MENU_ITEM_SELECTOR = '.nb-navigation .menu > .menu-item--cart, .c-editorial-frame .nav--toolbar > .menu-item--cart';
-const SELECTIVE_REFRESH_CONTAINER_SELECTOR = '.nb-navigation .menu, .c-editorial-frame .nav--toolbar';
+const CART_MENU_ITEM_SELECTOR = '.nb-navigation .menu > .menu-item--cart, .c-site-frame .nav--toolbar > .menu-item--cart';
+const SELECTIVE_REFRESH_CONTAINER_SELECTOR = '.nb-navigation .menu, .c-site-frame .nav--toolbar';
 function getCartMenuItemMarkup({
   label = '',
-  editorialFrame = false,
+  siteFrame = false,
   count = '0'
 } = {}) {
-  const labelClass = editorialFrame ? 'c-editorial-frame__label' : 'menu-item__label';
+  const labelClass = siteFrame ? 'c-site-frame__label' : 'menu-item__label';
   return `<span class="${labelClass}">${label}</span><span class="menu-item__icon">${count}</span>`;
 }
 module.exports = {
@@ -109,8 +109,8 @@ const {
       $cartMenuItems.each(function (i, obj) {
         var $cartMenuItem = $(obj);
         var $cartMenuItemLink = $cartMenuItem.children('a');
-        var isEditorialFrame = $cartMenuItem.hasClass('menu-item--editorial-frame');
-        var cartMenuItemText = $cartMenuItemLink.children('.c-editorial-frame__label, .menu-item__label').first().text().trim();
+        var isSiteFrame = $cartMenuItem.hasClass('menu-item--site-frame');
+        var cartMenuItemText = $cartMenuItemLink.children('.c-site-frame__label, .menu-item__label').first().text().trim();
         if (!cartMenuItemText) {
           var $textOnlyLink = $cartMenuItemLink.clone();
           $textOnlyLink.children('.menu-item__icon').remove();
@@ -118,7 +118,7 @@ const {
         }
         $cartMenuItemLink.html(getCartMenuItemMarkup({
           label: cartMenuItemText,
-          editorialFrame: isEditorialFrame
+          siteFrame: isSiteFrame
         }));
         var fragmentKey = 'div.widget_shopping_cart_content';
         var $fragment = $(fragmentKey);

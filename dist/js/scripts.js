@@ -1,137 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 807
-(module, __unused_webpack_exports, __webpack_require__) {
-
-const {
-  createEditorialFrameRuntime
-} = __webpack_require__(535);
-class EditorialFrame {
-  constructor({
-    window: win = typeof window !== 'undefined' ? window : null,
-    runtime = createEditorialFrameRuntime()
-  } = {}) {
-    this.window = win;
-    this.runtime = runtime;
-    this.onResize = this.onResize.bind(this);
-    this.runtime.sync();
-    if (this.window && typeof this.window.addEventListener === 'function') {
-      this.window.addEventListener('resize', this.onResize);
-    }
-  }
-  onResize() {
-    this.runtime.sync();
-  }
-}
-module.exports = EditorialFrame;
-
-/***/ },
-
-/***/ 535
-(module) {
-
-const EDITORIAL_FRAME_CLONE_ATTR = 'editorialFrameClone';
-function getChildElements(node) {
-  if (!node || !node.children) {
-    return [];
-  }
-  return Array.from(node.children);
-}
-function removeEditorialFrameMobileMenuClones(targetList) {
-  if (!targetList) {
-    return 0;
-  }
-  let removedCount = 0;
-  getChildElements(targetList).forEach(item => {
-    if (item?.dataset?.[EDITORIAL_FRAME_CLONE_ATTR] !== 'true') {
-      return;
-    }
-    if (typeof item.remove === 'function') {
-      item.remove();
-      removedCount += 1;
-    }
-  });
-  return removedCount;
-}
-function appendEditorialFrameMobileMenuItems(sourceList, targetList) {
-  if (!sourceList || !targetList) {
-    return 0;
-  }
-  removeEditorialFrameMobileMenuClones(targetList);
-  let appendedCount = 0;
-  getChildElements(sourceList).forEach(item => {
-    if (!item || typeof item.cloneNode !== 'function') {
-      return;
-    }
-    const clone = item.cloneNode(true);
-    if (!clone.dataset) {
-      clone.dataset = {};
-    }
-    clone.dataset[EDITORIAL_FRAME_CLONE_ATTR] = 'true';
-    if (clone.classList && typeof clone.classList.add === 'function') {
-      clone.classList.add('menu-item--editorial-frame-clone');
-    }
-    if (typeof targetList.appendChild === 'function') {
-      targetList.appendChild(clone);
-      appendedCount += 1;
-    }
-  });
-  return appendedCount;
-}
-function syncEditorialFrameMobileMenu({
-  enabled = false,
-  belowLap = false,
-  sourceList = null,
-  targetList = null
-} = {}) {
-  if (!enabled || !belowLap || !sourceList || !targetList) {
-    removeEditorialFrameMobileMenuClones(targetList);
-    return 0;
-  }
-  return appendEditorialFrameMobileMenuItems(sourceList, targetList);
-}
-function createEditorialFrameRuntime({
-  window: win = typeof window !== 'undefined' ? window : null,
-  document: doc = typeof document !== 'undefined' ? document : null,
-  sourceSelector = '.c-editorial-frame__menu',
-  targetSelector = '.nb-header .nb-navigation--primary .menu',
-  isBelowLap = () => !!win && typeof win.matchMedia === 'function' && win.matchMedia('not screen and (min-width: 1024px)').matches
-} = {}) {
-  function hasEnabledBodyClass() {
-    return !!doc && !!doc.body && !!doc.body.classList && doc.body.classList.contains('has-editorial-frame-menu');
-  }
-  function getSourceList() {
-    return doc && typeof doc.querySelector === 'function' ? doc.querySelector(sourceSelector) : null;
-  }
-  function getTargetList() {
-    return doc && typeof doc.querySelector === 'function' ? doc.querySelector(targetSelector) : null;
-  }
-  function sync() {
-    return syncEditorialFrameMobileMenu({
-      enabled: hasEnabledBodyClass(),
-      belowLap: isBelowLap(),
-      sourceList: getSourceList(),
-      targetList: getTargetList()
-    });
-  }
-  return {
-    sync,
-    removeClones() {
-      return removeEditorialFrameMobileMenuClones(getTargetList());
-    }
-  };
-}
-module.exports = {
-  EDITORIAL_FRAME_CLONE_ATTR,
-  appendEditorialFrameMobileMenuItems,
-  createEditorialFrameRuntime,
-  removeEditorialFrameMobileMenuClones,
-  syncEditorialFrameMobileMenu
-};
-
-/***/ },
-
 /***/ 771
 (module) {
 
@@ -513,6 +382,137 @@ module.exports = {
   getPilePatternSettings,
   matchesPilePattern,
   shouldParallaxItem
+};
+
+/***/ },
+
+/***/ 33
+(module, __unused_webpack_exports, __webpack_require__) {
+
+const {
+  createSiteFrameRuntime
+} = __webpack_require__(869);
+class SiteFrame {
+  constructor({
+    window: win = typeof window !== 'undefined' ? window : null,
+    runtime = createSiteFrameRuntime()
+  } = {}) {
+    this.window = win;
+    this.runtime = runtime;
+    this.onResize = this.onResize.bind(this);
+    this.runtime.sync();
+    if (this.window && typeof this.window.addEventListener === 'function') {
+      this.window.addEventListener('resize', this.onResize);
+    }
+  }
+  onResize() {
+    this.runtime.sync();
+  }
+}
+module.exports = SiteFrame;
+
+/***/ },
+
+/***/ 869
+(module) {
+
+const SITE_FRAME_CLONE_ATTR = 'siteFrameClone';
+function getChildElements(node) {
+  if (!node || !node.children) {
+    return [];
+  }
+  return Array.from(node.children);
+}
+function removeSiteFrameMobileMenuClones(targetList) {
+  if (!targetList) {
+    return 0;
+  }
+  let removedCount = 0;
+  getChildElements(targetList).forEach(item => {
+    if (item?.dataset?.[SITE_FRAME_CLONE_ATTR] !== 'true') {
+      return;
+    }
+    if (typeof item.remove === 'function') {
+      item.remove();
+      removedCount += 1;
+    }
+  });
+  return removedCount;
+}
+function appendSiteFrameMobileMenuItems(sourceList, targetList) {
+  if (!sourceList || !targetList) {
+    return 0;
+  }
+  removeSiteFrameMobileMenuClones(targetList);
+  let appendedCount = 0;
+  getChildElements(sourceList).forEach(item => {
+    if (!item || typeof item.cloneNode !== 'function') {
+      return;
+    }
+    const clone = item.cloneNode(true);
+    if (!clone.dataset) {
+      clone.dataset = {};
+    }
+    clone.dataset[SITE_FRAME_CLONE_ATTR] = 'true';
+    if (clone.classList && typeof clone.classList.add === 'function') {
+      clone.classList.add('menu-item--site-frame-clone');
+    }
+    if (typeof targetList.appendChild === 'function') {
+      targetList.appendChild(clone);
+      appendedCount += 1;
+    }
+  });
+  return appendedCount;
+}
+function syncSiteFrameMobileMenu({
+  enabled = false,
+  belowLap = false,
+  sourceList = null,
+  targetList = null
+} = {}) {
+  if (!enabled || !belowLap || !sourceList || !targetList) {
+    removeSiteFrameMobileMenuClones(targetList);
+    return 0;
+  }
+  return appendSiteFrameMobileMenuItems(sourceList, targetList);
+}
+function createSiteFrameRuntime({
+  window: win = typeof window !== 'undefined' ? window : null,
+  document: doc = typeof document !== 'undefined' ? document : null,
+  sourceSelector = '.c-site-frame__menu',
+  targetSelector = '.nb-header .nb-navigation--primary .menu',
+  isBelowLap = () => !!win && typeof win.matchMedia === 'function' && win.matchMedia('not screen and (min-width: 1024px)').matches
+} = {}) {
+  function hasEnabledBodyClass() {
+    return !!doc && !!doc.body && !!doc.body.classList && doc.body.classList.contains('has-site-frame-menu');
+  }
+  function getSourceList() {
+    return doc && typeof doc.querySelector === 'function' ? doc.querySelector(sourceSelector) : null;
+  }
+  function getTargetList() {
+    return doc && typeof doc.querySelector === 'function' ? doc.querySelector(targetSelector) : null;
+  }
+  function sync() {
+    return syncSiteFrameMobileMenu({
+      enabled: hasEnabledBodyClass(),
+      belowLap: isBelowLap(),
+      sourceList: getSourceList(),
+      targetList: getTargetList()
+    });
+  }
+  return {
+    sync,
+    removeClones() {
+      return removeSiteFrameMobileMenuClones(getTargetList());
+    }
+  };
+}
+module.exports = {
+  SITE_FRAME_CLONE_ATTR,
+  appendSiteFrameMobileMenuItems,
+  createSiteFrameRuntime,
+  removeSiteFrameMobileMenuClones,
+  syncSiteFrameMobileMenu
 };
 
 /***/ }
@@ -1477,9 +1477,9 @@ class SearchOverlay extends base_component {
   }
 }
 /* harmony default export */ const search_overlay = (SearchOverlay);
-// EXTERNAL MODULE: ./src/js/components/editorial-frame/index.js
-var editorial_frame = __webpack_require__(807);
-var editorial_frame_default = /*#__PURE__*/__webpack_require__.n(editorial_frame);
+// EXTERNAL MODULE: ./src/js/components/site-frame/index.js
+var site_frame = __webpack_require__(33);
+var site_frame_default = /*#__PURE__*/__webpack_require__.n(site_frame);
 ;// ./src/js/components/pile-parallax/index.js
 /**
  * Pile Parallax — differential parallax scrolling for Nova Blocks collection grids.
@@ -1765,7 +1765,7 @@ class App {
     this.initializeHero();
     this.navbar = new Navbar();
     this.searchOverlay = new search_overlay();
-    this.editorialFrame = new (editorial_frame_default())();
+    this.siteFrame = new (site_frame_default())();
     this.initializeImages();
     this.initializeCommentsArea();
     this.initializeReservationForm();

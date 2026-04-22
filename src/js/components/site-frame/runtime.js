@@ -1,4 +1,4 @@
-const EDITORIAL_FRAME_CLONE_ATTR = 'editorialFrameClone';
+const SITE_FRAME_CLONE_ATTR = 'siteFrameClone';
 
 function getChildElements(node) {
   if (!node || !node.children) {
@@ -8,7 +8,7 @@ function getChildElements(node) {
   return Array.from(node.children);
 }
 
-function removeEditorialFrameMobileMenuClones(targetList) {
+function removeSiteFrameMobileMenuClones(targetList) {
   if (!targetList) {
     return 0;
   }
@@ -16,7 +16,7 @@ function removeEditorialFrameMobileMenuClones(targetList) {
   let removedCount = 0;
 
   getChildElements(targetList).forEach((item) => {
-    if (item?.dataset?.[EDITORIAL_FRAME_CLONE_ATTR] !== 'true') {
+    if (item?.dataset?.[SITE_FRAME_CLONE_ATTR] !== 'true') {
       return;
     }
 
@@ -29,12 +29,12 @@ function removeEditorialFrameMobileMenuClones(targetList) {
   return removedCount;
 }
 
-function appendEditorialFrameMobileMenuItems(sourceList, targetList) {
+function appendSiteFrameMobileMenuItems(sourceList, targetList) {
   if (!sourceList || !targetList) {
     return 0;
   }
 
-  removeEditorialFrameMobileMenuClones(targetList);
+  removeSiteFrameMobileMenuClones(targetList);
 
   let appendedCount = 0;
 
@@ -49,10 +49,10 @@ function appendEditorialFrameMobileMenuItems(sourceList, targetList) {
       clone.dataset = {};
     }
 
-    clone.dataset[EDITORIAL_FRAME_CLONE_ATTR] = 'true';
+    clone.dataset[SITE_FRAME_CLONE_ATTR] = 'true';
 
     if (clone.classList && typeof clone.classList.add === 'function') {
-      clone.classList.add('menu-item--editorial-frame-clone');
+      clone.classList.add('menu-item--site-frame-clone');
     }
 
     if (typeof targetList.appendChild === 'function') {
@@ -64,29 +64,29 @@ function appendEditorialFrameMobileMenuItems(sourceList, targetList) {
   return appendedCount;
 }
 
-function syncEditorialFrameMobileMenu({
+function syncSiteFrameMobileMenu({
   enabled = false,
   belowLap = false,
   sourceList = null,
   targetList = null,
 } = {}) {
   if (!enabled || !belowLap || !sourceList || !targetList) {
-    removeEditorialFrameMobileMenuClones(targetList);
+    removeSiteFrameMobileMenuClones(targetList);
     return 0;
   }
 
-  return appendEditorialFrameMobileMenuItems(sourceList, targetList);
+  return appendSiteFrameMobileMenuItems(sourceList, targetList);
 }
 
-function createEditorialFrameRuntime({
+function createSiteFrameRuntime({
   window: win = typeof window !== 'undefined' ? window : null,
   document: doc = typeof document !== 'undefined' ? document : null,
-  sourceSelector = '.c-editorial-frame__menu',
+  sourceSelector = '.c-site-frame__menu',
   targetSelector = '.nb-header .nb-navigation--primary .menu',
   isBelowLap = () => !!win && typeof win.matchMedia === 'function' && win.matchMedia('not screen and (min-width: 1024px)').matches,
 } = {}) {
   function hasEnabledBodyClass() {
-    return !!doc && !!doc.body && !!doc.body.classList && doc.body.classList.contains('has-editorial-frame-menu');
+    return !!doc && !!doc.body && !!doc.body.classList && doc.body.classList.contains('has-site-frame-menu');
   }
 
   function getSourceList() {
@@ -98,7 +98,7 @@ function createEditorialFrameRuntime({
   }
 
   function sync() {
-    return syncEditorialFrameMobileMenu({
+    return syncSiteFrameMobileMenu({
       enabled: hasEnabledBodyClass(),
       belowLap: isBelowLap(),
       sourceList: getSourceList(),
@@ -109,15 +109,15 @@ function createEditorialFrameRuntime({
   return {
     sync,
     removeClones() {
-      return removeEditorialFrameMobileMenuClones(getTargetList());
+      return removeSiteFrameMobileMenuClones(getTargetList());
     },
   };
 }
 
 module.exports = {
-  EDITORIAL_FRAME_CLONE_ATTR,
-  appendEditorialFrameMobileMenuItems,
-  createEditorialFrameRuntime,
-  removeEditorialFrameMobileMenuClones,
-  syncEditorialFrameMobileMenu,
+  SITE_FRAME_CLONE_ATTR,
+  appendSiteFrameMobileMenuItems,
+  createSiteFrameRuntime,
+  removeSiteFrameMobileMenuClones,
+  syncSiteFrameMobileMenu,
 };

@@ -8,7 +8,7 @@ import heroInitFilter from './hero-init-filter';
 import CommentsArea from './commentsArea';
 import Navbar from './navbar';
 import SearchOverlay from './search-overlay';
-import EditorialFrame from './editorial-frame';
+import SiteFrame from './site-frame';
 import * as PileParallax from './pile-parallax';
 import IntroAnimations from './intro-animations';
 
@@ -19,7 +19,7 @@ export default class App {
 
     this.navbar = new Navbar();
     this.searchOverlay = new SearchOverlay();
-    this.editorialFrame = new EditorialFrame();
+    this.siteFrame = new SiteFrame();
 
     this.initializeImages();
     this.initializeCommentsArea();

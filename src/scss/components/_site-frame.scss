@@ -1,0 +1,413 @@
+body.has-site-frame {
+  --site-frame-top-size: 12px;
+  --site-frame-left-size: 48px;
+  --site-frame-admin-bar-offset: var(--theme-sticky-distance, 0px);
+  --site-frame-rail-gap: 12px;
+  --site-frame-rail-top-offset: calc(var(--site-frame-admin-bar-offset, 0px) + var(--site-frame-rail-gap));
+  --site-frame-sticky-top: calc(var(--theme-sticky-distance, 0px) + var(--site-frame-top-size));
+  --site-frame-rail-width: 60px;
+  --site-frame-page-gutter: calc(var(--site-frame-rail-width) + var(--site-frame-top-size));
+  --site-frame-link-font-size: 13px;
+  --site-frame-link-line-height: 2.57143em;
+  --site-frame-link-margin-right: 0.85714em;
+  --site-frame-link-padding-left: 0.85714em;
+  --site-frame-marker-width: 2.52632em;
+  --site-frame-marker-height: 1.89474em;
+  --site-frame-marker-font-size: 1.35714em;
+  --site-frame-marker-slot-width: calc(var(--site-frame-marker-font-size) * 2.52632);
+  --site-frame-marker-slot-height: calc(var(--site-frame-marker-font-size) * 1.89474);
+  --site-frame-marker-padding-left: 0.63158em;
+  --site-frame-marker-offset-x: calc(var(--site-frame-marker-padding-left) * 0.5);
+  --site-frame-marker-mask-size: 1em;
+  --site-frame-head-padding-y: 24px;
+  --site-frame-head-min-height: 336px;
+}
+
+body.single-post.has-site-frame {
+  --site-frame-rail-top-offset: calc(var(--site-frame-admin-bar-offset, 0px) + var(--site-frame-top-size) + var(--theme-sticky-header-height, 0px) + var(--site-frame-rail-gap));
+}
+
+body.has-site-frame-frame #page {
+  padding-top: var(--site-frame-top-size);
+  padding-left: var(--site-frame-left-size);
+}
+
+body.has-site-frame-menu #page {
+  padding-right: var(--site-frame-page-gutter);
+}
+
+.c-site-frame {
+  // Surface/ink are defined here (not on body) so they resolve inside the
+  // palette- and variation-scoped context provided by the sm-palette-* /
+  // sm-variation-* classes that ship on this same element. That lets the
+  // Palette + Color Grade controls drive the frame tones
+  // through the normal --sm-current-*-color cascade.
+  //
+  // Surface = the variation's background color (what a signalled block
+  // would paint as its own background) so a higher grade translates into
+  // a more prominent site frame against a light page. Dark mode flips this
+  // below — in a dark palette all variations collapse to a near-black
+  // bg and site frame painted with that would blend into the page, so it
+  // inherits the contrasting fg1 role instead.
+  --site-frame-surface: var(--sm-current-bg-color);
+  --site-frame-ink: var(--sm-current-fg1-color);
+  --site-frame-divider-color: color-mix(in srgb, var(--site-frame-surface) 20%, transparent);
+
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4000;
+  color: var(--site-frame-surface);
+  // Style Manager's block-level rule paints sm-variation-* elements with
+  // the current variation bg (inline <style>, same specificity as this
+  // single-class rule, and it wins on declaration order). This wrapper is
+  // a full-viewport positioning shell with no visible surface of its own —
+  // only its __top / __left / __rail children render. Suppress the bg so
+  // the page content shows through; !important is necessary to beat the
+  // SM inline rule without chasing specificity hacks.
+  background: transparent !important;
+}
+
+// Dark-mode flip for numeric grades. In a dark palette all 12 variations
+// collapse toward the same near-black bg, so using --sm-current-bg-color
+// here would paint the site frame the same color as the page. Swap surface to
+// fg1 (the contrasting role) so the site frame keeps visible weight — same
+// adaptivity the old single-role site frame had before the grade picker.
+html.is-dark .c-site-frame {
+  --site-frame-surface: var(--sm-current-fg1-color);
+  --site-frame-ink: var(--sm-current-bg-color);
+}
+
+// Accent in dark mode uses accent-color instead of fg1 so the brand tone
+// survives the dark-mode flip. In light mode Accent resolves to the
+// variation where bg IS the brand color, so the default rule (surface =
+// --sm-current-bg-color) already paints the site frame in brand — no light-
+// mode override needed here.
+html.is-dark .c-site-frame.has-site-frame-accent {
+  --site-frame-surface: var(--sm-current-accent-color);
+  --site-frame-ink: var(--sm-current-bg-color);
+}
+
+.c-site-frame__top,
+.c-site-frame__left {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--site-frame-surface);
+}
+
+.c-site-frame__top {
+  width: 100%;
+  height: var(--site-frame-top-size);
+}
+
+.c-site-frame__left {
+  width: var(--site-frame-left-size);
+  height: 100%;
+}
+
+.admin-bar .c-site-frame__top {
+  top: 32px;
+  height: 3em;
+  margin-top: -2.25em;
+}
+
+@media screen and (max-width: 782px) {
+  .admin-bar .c-site-frame__top {
+    top: 46px;
+  }
+}
+
+.c-site-frame__rail {
+  padding-left: 12px;
+  padding-right: 12px;
+  width: var(--site-frame-rail-width);
+  position: fixed;
+  top: var(--site-frame-rail-top-offset);
+  right: 0;
+  bottom: 0;
+  display: block;
+  margin-top: -1px;
+  color: var(--site-frame-surface);
+  pointer-events: auto;
+}
+
+.c-site-frame__rail::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: currentColor;
+  opacity: 0.2;
+}
+
+.c-site-frame__head {
+  padding-top: var(--site-frame-head-padding-y);
+  padding-bottom: var(--site-frame-head-padding-y);
+  min-height: var(--site-frame-head-min-height);
+}
+
+.c-site-frame__navigation {
+  @include apply-font(navigation);
+
+  position: relative;
+  overflow: visible;
+}
+
+.c-site-frame__menu,
+.c-site-frame__menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.c-site-frame__menu > li {
+  display: block;
+  position: relative;
+  min-height: var(--site-frame-link-line-height);
+}
+
+.c-site-frame__menu .sub-menu {
+  display: none;
+}
+
+.nav--toolbar {
+  word-wrap: normal;
+}
+
+.nav--toolbar a {
+  display: block;
+  font-size: var(--site-frame-link-font-size);
+  line-height: var(--site-frame-link-line-height);
+  margin-right: var(--site-frame-link-margin-right);
+  padding-left: var(--site-frame-link-padding-left);
+  position: absolute;
+  top: -1px;
+  right: 100%;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-right-width: 0;
+  color: transparent;
+  pointer-events: auto;
+  text-align: left;
+  text-decoration: none;
+  background: transparent;
+  transition: color var(--theme-transition), border-color var(--theme-transition), background-color var(--theme-transition);
+}
+
+.c-site-frame .nav--toolbar > li > a {
+  padding-left: var(--site-frame-link-padding-left);
+}
+
+.c-site-frame :is(:is(.menu-item--search, .menu-item--dark-mode):not(.no-icon), #specific) a {
+  padding-left: var(--site-frame-link-padding-left);
+}
+
+.nav--toolbar a:hover {
+  color: inherit;
+  pointer-events: auto;
+  background-color: var(--site-frame-ink);
+  border-color: var(--site-frame-divider-color);
+}
+
+.nav--toolbar a:focus-visible {
+  color: inherit;
+  pointer-events: auto;
+  background-color: var(--site-frame-ink);
+  border-color: var(--site-frame-divider-color);
+  outline: none;
+}
+
+.menu-item--site-frame-link > a .menu-item-monogram {
+  position: absolute;
+  top: 50%;
+  right: calc(var(--site-frame-marker-width) * -1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--site-frame-marker-width);
+  height: var(--site-frame-marker-height);
+  padding-left: var(--site-frame-marker-padding-left);
+  color: var(--site-frame-surface);
+  font-size: var(--site-frame-marker-font-size);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  transform: translateY(-50%);
+  pointer-events: auto;
+}
+
+.menu-item--site-frame-link > a:hover .menu-item-monogram,
+.menu-item--site-frame-link > a:focus-visible .menu-item-monogram {
+  color: inherit;
+}
+
+.c-site-frame__label {
+  @include apply-font(navigation);
+
+  display: inline-block;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.nav--toolbar .social-menu-item {
+  display: list-item;
+}
+
+.nav--toolbar .social-menu-item > a {
+  font-size: var(--site-frame-link-font-size);
+  line-height: var(--site-frame-link-line-height);
+}
+
+.nav--toolbar .social-menu-item > a::before {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--site-frame-marker-width);
+  height: var(--site-frame-marker-height);
+  line-height: var(--site-frame-marker-height);
+  font-size: var(--site-frame-marker-font-size);
+  position: absolute;
+  top: 50%;
+  right: calc(var(--site-frame-marker-width) * -1);
+  padding-left: var(--site-frame-marker-padding-left);
+  text-align: center;
+  pointer-events: auto;
+  color: var(--site-frame-surface);
+  transform: translateY(-50%);
+}
+
+.nav--toolbar .social-menu-item > a::after {
+  display: none;
+}
+
+.nav--toolbar .social-menu-item > a[href*="x.com"]::before,
+.nav--toolbar .social-menu-item > a[href*="twitter.com"]::before {
+  display: block;
+  width: var(--site-frame-marker-width);
+  height: var(--site-frame-marker-height);
+  line-height: 0;
+  right: calc(var(--site-frame-marker-width) * -1);
+  background-position: calc(50% + (var(--site-frame-marker-padding-left) * 0.5)) 50%;
+  background-repeat: no-repeat;
+  background-size: var(--site-frame-marker-mask-size) var(--site-frame-marker-mask-size);
+  background-color: var(--site-frame-surface);
+}
+
+.c-site-frame .nav--toolbar .menu-item--search > a::before,
+.c-site-frame .nav--toolbar .menu-item--dark-mode > a::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: auto !important;
+  right: calc(var(--site-frame-marker-width) * -1) !important;
+  display: block;
+  box-sizing: border-box;
+  font-size: var(--site-frame-marker-font-size);
+  width: var(--site-frame-marker-width);
+  height: var(--site-frame-marker-height);
+  padding-left: var(--site-frame-marker-padding-left);
+  background-color: var(--site-frame-surface);
+  background-position: calc(50% + (var(--site-frame-marker-padding-left) * 0.5)) 50%;
+  background-repeat: no-repeat;
+  background-size: var(--site-frame-marker-mask-size) var(--site-frame-marker-mask-size);
+  mask: no-repeat 50% 50%;
+  mask-image: var(--menu-item-icon-mask-image);
+  mask-position: calc(50% + (var(--site-frame-marker-padding-left) * 0.5)) 50%;
+  mask-size: var(--site-frame-marker-mask-size) var(--site-frame-marker-mask-size);
+  -webkit-mask: no-repeat 50% 50%;
+  -webkit-mask-image: var(--menu-item-icon-mask-image);
+  -webkit-mask-position: calc(50% + (var(--site-frame-marker-padding-left) * 0.5)) 50%;
+  -webkit-mask-size: var(--site-frame-marker-mask-size) var(--site-frame-marker-mask-size);
+  transform: translateY(-50%);
+  transform-origin: calc(50% + (var(--site-frame-marker-padding-left) * 0.5)) 50%;
+  transition: transform .25s $ease;
+}
+
+.c-site-frame .nav--toolbar .menu-item--search > a::after,
+.c-site-frame .nav--toolbar .menu-item--dark-mode > a::after {
+  content: none !important;
+  display: none !important;
+  left: auto !important;
+}
+
+.c-site-frame .nav--toolbar .menu-item--cart > a .menu-item__icon {
+  position: absolute;
+  top: 50%;
+  right: calc(var(--site-frame-marker-slot-width) * -1);
+  left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--site-frame-marker-slot-width);
+  height: var(--site-frame-marker-slot-height);
+  padding-left: 0;
+  color: var(--site-frame-surface);
+  font-size: var(--site-frame-link-font-size);
+  font-feature-settings: "lnum";
+  line-height: 1;
+  text-align: center;
+  transition: all .25s $ease;
+  transform: translate(var(--site-frame-marker-offset-x), -50%) translateZ(0);
+  pointer-events: auto;
+}
+
+.c-site-frame .nav--toolbar .menu-item--cart > a .menu-item__icon:after {
+  content: "";
+  display: block;
+  width: var(--site-frame-marker-height);
+  height: var(--site-frame-marker-height);
+  border: .125em solid currentColor;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  transition: all .25s $ease;
+}
+
+.c-site-frame .nav--toolbar .menu-item--cart > a:hover .menu-item__icon,
+.c-site-frame .nav--toolbar .menu-item--cart > a:focus-visible .menu-item__icon {
+  color: var(--sm-current-bg-color);
+}
+
+.c-site-frame .nav--toolbar .menu-item--cart > a:hover .menu-item__icon:after,
+.c-site-frame .nav--toolbar .menu-item--cart > a:focus-visible .menu-item__icon:after {
+  border-width: calc(var(--site-frame-marker-height) / 2);
+  border-color: var(--sm-current-accent-color);
+}
+
+.is-dark .c-site-frame .nav--toolbar .menu-item--dark-mode > a::before {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+@include above(lap) {
+  body.has-site-frame-frame .nb-header--secondary,
+  body.has-site-frame-frame .nb-header--main.nb-header--sticky {
+    top: var(--site-frame-sticky-top) !important;
+  }
+}
+
+@include below(lap) {
+  body.has-site-frame-menu #page {
+    padding-right: 0;
+  }
+
+  body.has-site-frame-frame #page {
+    padding-top: 0;
+    padding-left: 0;
+  }
+
+  .c-site-frame {
+    display: none;
+  }
+}
