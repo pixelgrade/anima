@@ -124,7 +124,12 @@ const KINETIC_EXCLUDED_ZONES = [
   '.js-page-transition-border',
   '.js-slide-wipe-loader',
   'header',
-  '.nb-supernova-item--scrolling-effect-parallax',
+  // Intentionally NOT excluding .nb-supernova-item--scrolling-effect-parallax:
+  // the parallax container keeps its own scroll motion, but the title inside
+  // it (e.g., a single-project hero h1.wp-block-post-title) still benefits
+  // from the Kinetic word-curtain. The container itself isn't a primary
+  // intro target anyway (the base EXCLUDED_TARGET_SELECTORS list keeps the
+  // container static), so there's no conflicting outer animation.
 ].join(',');
 
 function collectKineticTitleTargets(root, primaryTargets = []) {

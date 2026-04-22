@@ -521,7 +521,14 @@ function collectRevealTargets(root) {
 //     Only admin bar, site <header> chrome, hidden/inert nodes, and the
 //     page-transition loader UI are excluded.
 const KINETIC_TITLE_SELECTORS = ['h1', 'h2', 'h3', '.wp-block-heading', '.wp-block-post-title', '.nb-collection__title', '.nb-card__title'].join(',');
-const KINETIC_EXCLUDED_ZONES = ['#wpadminbar', '[aria-hidden="true"]', '[inert]', '.js-page-transition-border', '.js-slide-wipe-loader', 'header', '.nb-supernova-item--scrolling-effect-parallax'].join(',');
+const KINETIC_EXCLUDED_ZONES = ['#wpadminbar', '[aria-hidden="true"]', '[inert]', '.js-page-transition-border', '.js-slide-wipe-loader', 'header'
+// Intentionally NOT excluding .nb-supernova-item--scrolling-effect-parallax:
+// the parallax container keeps its own scroll motion, but the title inside
+// it (e.g., a single-project hero h1.wp-block-post-title) still benefits
+// from the Kinetic word-curtain. The container itself isn't a primary
+// intro target anyway (the base EXCLUDED_TARGET_SELECTORS list keeps the
+// container static), so there's no conflicting outer animation.
+].join(',');
 function collectKineticTitleTargets(root, primaryTargets = []) {
   if (!root || typeof root.querySelectorAll !== 'function') {
     return [];
