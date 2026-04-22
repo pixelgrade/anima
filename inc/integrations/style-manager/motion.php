@@ -266,9 +266,10 @@ function anima_is_cycling_images_loading_style() {
  */
 function anima_get_intro_animation_style_choices() {
 	return [
-		'fade'  => anima_get_intro_animation_choice_markup( 'fade', esc_html__( 'Fade', '__theme_txtd' ) ),
-		'scale' => anima_get_intro_animation_choice_markup( 'scale', esc_html__( 'Scale', '__theme_txtd' ) ),
-		'slide' => anima_get_intro_animation_choice_markup( 'slide', esc_html__( 'Slide', '__theme_txtd' ) ),
+		'fade'    => anima_get_intro_animation_choice_markup( 'fade', esc_html__( 'Fade', '__theme_txtd' ) ),
+		'scale'   => anima_get_intro_animation_choice_markup( 'scale', esc_html__( 'Scale', '__theme_txtd' ) ),
+		'slide'   => anima_get_intro_animation_choice_markup( 'slide', esc_html__( 'Slide', '__theme_txtd' ) ),
+		'kinetic' => anima_get_intro_animation_choice_markup( 'kinetic', esc_html__( 'Kinetic', '__theme_txtd' ) ),
 	];
 }
 
@@ -302,6 +303,9 @@ function anima_get_intro_animation_choice_icon_markup( $slug ) {
 		'fade'  => '<svg viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M3.5 10h13" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round"/><path d="M6.5 6.25h7" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" opacity=".45"/><path d="M6.5 13.75h7" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" opacity=".75"/></svg>',
 		'scale' => '<svg viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M5 8V5h3" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 5h3v3" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 12v3h-3" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 15H5v-3" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>',
 		'slide' => '<svg viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M10 4.5v11" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round"/><path d="m6.75 7.75 3.25-3.25 3.25 3.25" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.5 15.5h11" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" opacity=".5"/></svg>',
+		// Kinetic: stylized typographic uppercase "A" lifting above a horizontal motion line
+		// — communicates "title lifts + content slides."
+		'kinetic' => '<svg viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M5 10.5 8 4.5h4l3 6" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 8.5h7" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" opacity=".55"/><path d="M4.5 15.5h11" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" opacity=".5"/><path d="m12.5 13.75 3-1.75-3-1.75" fill="none" stroke="' . $stroke . '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/></svg>',
 	];
 
 	return $icons[ $slug ] ?? '';

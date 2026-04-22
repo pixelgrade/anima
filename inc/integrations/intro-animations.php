@@ -72,6 +72,7 @@ function anima_get_intro_animation_supported_styles() {
 		'fade',
 		'scale',
 		'slide',
+		'kinetic',
 	];
 }
 

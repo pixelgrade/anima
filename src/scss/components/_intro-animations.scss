@@ -29,6 +29,16 @@ body.has-intro-animations--slide {
   --anima-intro-delay-window: 0.6s;
 }
 
+// Kinetic: non-title targets slide in; titles use a per-word curtain rise.
+// The word/line cascade is driven entirely by CSS calc() — the runtime only
+// has to inject .line/.word spans with --line-index and --word-index.
+body.has-intro-animations--kinetic {
+  --anima-intro-easing: cubic-bezier(0.19, 1, 0.22, 1);
+  --anima-intro-delay-window: 1.0s; // longer window so the word cascade has room
+  --anima-intro-word-stagger: 55ms;
+  --anima-intro-line-stagger: 140ms;
+}
+
 body.has-intro-animations--fade.has-intro-animations--slow {
   --anima-intro-duration: 1.50s;
 }
@@ -63,6 +73,24 @@ body.has-intro-animations--slide.has-intro-animations--medium {
 
 body.has-intro-animations--slide.has-intro-animations--fast {
   --anima-intro-duration: 0.45s;
+}
+
+body.has-intro-animations--kinetic.has-intro-animations--slow {
+  --anima-intro-duration: 0.80s;
+  --anima-intro-word-stagger: 70ms;
+  --anima-intro-line-stagger: 160ms;
+}
+
+body.has-intro-animations--kinetic.has-intro-animations--medium {
+  --anima-intro-duration: 0.65s;
+  --anima-intro-word-stagger: 55ms;
+  --anima-intro-line-stagger: 140ms;
+}
+
+body.has-intro-animations--kinetic.has-intro-animations--fast {
+  --anima-intro-duration: 0.50s;
+  --anima-intro-word-stagger: 40ms;
+  --anima-intro-line-stagger: 110ms;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -103,12 +131,60 @@ body.has-intro-animations--slide.has-intro-animations--fast {
       transform: translate3d(0, var(--anima-intro-distance), 0);
     }
   }
+
+  // Kinetic, non-title targets: slide motion (same as --slide).
+  body.has-intro-animations--kinetic {
+    .anima-intro-target--pending {
+      transform: translate3d(0, var(--anima-intro-distance), 0);
+    }
+
+    // Title role: the container stays visible; the reveal lives on per-word
+    // spans injected by the runtime. Override the default --pending hide.
+    .anima-intro-target--role-title.anima-intro-target--pending {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
+    .anima-intro-target--role-title.anima-intro-target--revealed {
+      transform: none;
+    }
+    .anima-intro-target--role-title {
+      // Words handle opacity/transform via their own transitions,
+      // so the container itself doesn't need the default transition.
+      transition: none;
+
+      .line {
+        display: block;
+        overflow: hidden; // masks the pre-state translateY(100%)
+      }
+      .word {
+        display: inline-block;
+        white-space: pre;
+        opacity: 0;
+        transform: translateY(100%) scaleY(2);
+        transform-origin: center top;
+        transition:
+          transform var(--anima-intro-duration) var(--anima-intro-easing),
+          opacity var(--anima-intro-duration) var(--anima-intro-easing);
+        transition-delay: calc(
+          var(--line-index, 0) * var(--anima-intro-line-stagger, 140ms) +
+          var(--word-index, 0) * var(--anima-intro-word-stagger, 55ms)
+        );
+        will-change: transform, opacity;
+      }
+    }
+    .anima-intro-target--role-title.anima-intro-target--revealed .word {
+      opacity: 1;
+      transform: translateY(0) scaleY(1);
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .anima-intro-target,
   .anima-intro-target--pending,
-  .anima-intro-target--revealed {
+  .anima-intro-target--revealed,
+  .anima-intro-target .word {
     opacity: 1 !important;
     visibility: visible !important;
     transform: none !important;
