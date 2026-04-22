@@ -207,6 +207,8 @@ function anima_maybe_invalidate_style_manager_motion_cache() {
 		&& ( $intro_animations_enable['label'] ?? '' ) === 'Enable Intro Animations'
 		&& ( $intro_animations_style['type'] ?? '' ) === 'radio_html'
 		&& ( $intro_animations_style['setting_id'] ?? '' ) === 'sm_intro_animations_style'
+		&& is_array( $intro_animations_style['choices'] ?? null )
+		&& array_key_exists( 'kinetic', $intro_animations_style['choices'] )
 		&& ( $intro_animations_speed['type'] ?? '' ) === 'sm_radio'
 		&& ( $intro_animations_speed['setting_id'] ?? '' ) === 'sm_intro_animations_speed'
 	);

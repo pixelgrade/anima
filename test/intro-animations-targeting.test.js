@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 
 const {
   collectRevealTargets,
+  collectNestedTitlesWithinTargets,
 } = require('../src/js/components/intro-animations/targeting.js');
 
 function createClassList(initialClasses = []) {
@@ -158,4 +159,77 @@ test('collectRevealTargets skips parallax hero surfaces and their descendants', 
   const targets = collectRevealTargets(root);
 
   assert.deepEqual(targets, []);
+});
+
+// ---------- collectNestedTitlesWithinTargets (Kinetic-only extension) ----------
+
+function createContainerWithNestedTitles(name, nestedTitles) {
+  return {
+    name,
+    querySelectorAll() {
+      return nestedTitles.map((title) => ({
+        ...title,
+        isConnected: true,
+        matches() { return false; },
+        closest() { return null; },
+      }));
+    },
+  };
+}
+
+test('collectNestedTitlesWithinTargets returns empty when there are no existing targets', () => {
+  assert.deepEqual(collectNestedTitlesWithinTargets([]), []);
+  assert.deepEqual(collectNestedTitlesWithinTargets(null), []);
+  assert.deepEqual(collectNestedTitlesWithinTargets(undefined), []);
+});
+
+test('collectNestedTitlesWithinTargets finds headings nested inside reveal roots', () => {
+  const cardTitle = {name: 'card-title-1'};
+  const card = createContainerWithNestedTitles('card-1', [cardTitle]);
+
+  const nested = collectNestedTitlesWithinTargets([card]);
+
+  assert.deepEqual(nested.map((n) => n.name), ['card-title-1']);
+});
+
+test('collectNestedTitlesWithinTargets deduplicates titles shared across containers', () => {
+  const sharedTitle = {name: 'shared', isConnected: true, matches() { return false; }, closest() { return null; }};
+  const container1 = { name: 'c1', querySelectorAll: () => [sharedTitle] };
+  const container2 = { name: 'c2', querySelectorAll: () => [sharedTitle] };
+
+  const nested = collectNestedTitlesWithinTargets([container1, container2]);
+
+  assert.equal(nested.length, 1, 'same title collected twice should appear once');
+  assert.equal(nested[0].name, 'shared');
+});
+
+test('collectNestedTitlesWithinTargets skips titles that are themselves in the existing target set', () => {
+  const selfReferentialTitle = {name: 'h2-as-target'};
+  const container = {
+    name: 'group',
+    querySelectorAll: () => [selfReferentialTitle],
+  };
+
+  // h2 is both a top-level target AND (erroneously) queried as nested.
+  const nested = collectNestedTitlesWithinTargets([container, selfReferentialTitle]);
+
+  assert.deepEqual(nested, [],
+    'should not return a node that was already in the existing target list');
+});
+
+test('collectNestedTitlesWithinTargets filters disconnected nodes', () => {
+  const disconnectedTitle = {
+    name: 'stale',
+    isConnected: false,
+    matches() { return false; },
+    closest() { return null; },
+  };
+  const container = {
+    name: 'group',
+    querySelectorAll: () => [disconnectedTitle],
+  };
+
+  const nested = collectNestedTitlesWithinTargets([container]);
+
+  assert.deepEqual(nested, []);
 });

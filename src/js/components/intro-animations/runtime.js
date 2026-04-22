@@ -1,5 +1,6 @@
 const {
   collectRevealTargets,
+  collectNestedTitlesWithinTargets,
 } = require('./targeting.js');
 
 const REVEAL_ZONE_TOP_RATIO = 0.82;
@@ -48,6 +49,7 @@ function createIntroAnimationsRuntime({
   window: win = typeof window !== 'undefined' ? window : null,
   document: doc = typeof document !== 'undefined' ? document : null,
   collectTargets = collectRevealTargets,
+  collectNestedTitles = collectNestedTitlesWithinTargets,
   createObserver = (callback) => new win.IntersectionObserver(callback, getRevealObserverOptions()),
 } = {}) {
   const consumedTargets = new WeakSet();
@@ -148,6 +150,41 @@ function createIntroAnimationsRuntime({
     }
   }
 
+  // Pick the DOM node that actually holds the text to split. Handles the
+  // three common heading shapes:
+  //   <h2>Title</h2>                      — split inside the heading
+  //   <h2><a>Title</a></h2>               — split inside the anchor (card titles)
+  //   <h2>Mixed <em>inline</em> stuff</h2> — skip (returns null)
+  function pickSplitRoot(el) {
+    if (!el || typeof el.childElementCount !== 'number') {
+      return null;
+    }
+
+    const outerText = typeof el.textContent === 'string' ? el.textContent.trim() : '';
+
+    if (!outerText) {
+      return null;
+    }
+
+    if (el.childElementCount === 0) {
+      return el;
+    }
+
+    // Single wrapper child (e.g., an anchor) whose text covers the entire
+    // heading. This is the common pattern for post-card titles and block
+    // theme headings that link to the post.
+    if (el.childElementCount === 1) {
+      const only = el.firstElementChild;
+      const innerText = only && typeof only.textContent === 'string' ? only.textContent.trim() : '';
+
+      if (only && innerText === outerText) {
+        return only;
+      }
+    }
+
+    return null;
+  }
+
   // Split a heading into per-line <span class="line"> containers whose
   // children are <span class="word"> with --word-index (per-line) and
   // --line-index (global). Mirrors the splitting.js behavior used on
@@ -157,9 +194,9 @@ function createIntroAnimationsRuntime({
   //
   // Safeguards:
   //  - Skip if the element already has split children (re-entrancy / SPA).
-  //  - Skip if the heading contains inline markup (<em>, <strong>, links).
-  //    Naive splitting would flatten those — fall back silently and the
-  //    element will still be revealed via the (title-container) default.
+  //  - Skip if the heading contains mixed inline markup we can't handle
+  //    safely (pickSplitRoot returns null). Single-anchor wrappers around
+  //    the full title text ARE handled — we split inside the anchor.
   function splitHeadingForCurtain(el) {
     if (!el || typeof el.querySelector !== 'function') {
       return;
@@ -173,12 +210,13 @@ function createIntroAnimationsRuntime({
       return;
     }
 
-    // Only handle pure-text headings. Inline markup would need a richer walker.
-    if (typeof el.childElementCount === 'number' && el.childElementCount > 0) {
+    const splitRoot = pickSplitRoot(el);
+
+    if (!splitRoot) {
       return;
     }
 
-    const text = typeof el.textContent === 'string' ? el.textContent.trim() : '';
+    const text = typeof splitRoot.textContent === 'string' ? splitRoot.textContent.trim() : '';
 
     if (!text) {
       return;
@@ -198,17 +236,17 @@ function createIntroAnimationsRuntime({
     });
 
     // Pass 1: flat layout so the browser decides where lines wrap.
-    el.textContent = '';
+    splitRoot.textContent = '';
     wordSpans.forEach((span, index) => {
-      el.appendChild(span);
+      splitRoot.appendChild(span);
       if (index < wordSpans.length - 1) {
-        el.appendChild(doc.createTextNode(' '));
+        splitRoot.appendChild(doc.createTextNode(' '));
       }
     });
 
     // Force a layout read, then group words by their offsetTop.
-    if (typeof el.getBoundingClientRect === 'function') {
-      el.getBoundingClientRect();
+    if (typeof splitRoot.getBoundingClientRect === 'function') {
+      splitRoot.getBoundingClientRect();
     }
 
     const wordsByTop = new Map();
@@ -222,7 +260,7 @@ function createIntroAnimationsRuntime({
 
     // Pass 2: rewrap each visual line in its own <span class="line">.
     const lineTops = [...wordsByTop.keys()].sort((a, b) => a - b);
-    el.textContent = '';
+    splitRoot.textContent = '';
     lineTops.forEach((top, lineIndex) => {
       const lineSpan = doc.createElement('span');
       lineSpan.className = 'line';
@@ -240,7 +278,7 @@ function createIntroAnimationsRuntime({
           lineSpan.appendChild(doc.createTextNode(' '));
         }
       });
-      el.appendChild(lineSpan);
+      splitRoot.appendChild(lineSpan);
     });
   }
 
@@ -386,7 +424,20 @@ function createIntroAnimationsRuntime({
     disconnect();
 
     const immediateTargets = [];
-    const targets = collectTargets(root);
+    const primaryTargets = collectTargets(root);
+    let targets = primaryTargets;
+
+    // Kinetic extension: also animate title-role headings that live INSIDE
+    // the tracked reveal roots. The outer container still slides (role-other),
+    // and its inner heading gets the word-curtain (role-title). Outside
+    // Kinetic this is a no-op so fade/slide/scale keep the simpler
+    // outer-only reveal semantics.
+    if (getActiveAnimationStyle() === 'kinetic' && typeof collectNestedTitles === 'function') {
+      const nested = collectNestedTitles(primaryTargets);
+      if (nested && nested.length) {
+        targets = primaryTargets.concat(nested);
+      }
+    }
 
     targets.forEach((target) => {
       if (!stageTarget(target)) {

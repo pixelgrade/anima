@@ -403,10 +403,16 @@ test('splitHeadingForCurtain is idempotent (skip if already split)', () => {
     'second call should not multiply words');
 });
 
-test('splitHeadingForCurtain skips headings with inline markup', () => {
-  // Simulate a heading with child elements (e.g., <em>). We fake childElementCount > 0.
-  const target = createDomTarget({tagName: 'H2', matchesSelectors: ['h2'], text: 'The quiet art'});
-  target.children.push({className: 'em-stub'}); // non-empty children → skip
+test('splitHeadingForCurtain skips headings with mixed inline markup', () => {
+  // Heading with a child whose text doesn't fully cover the heading text.
+  // Simulates <h2>Mixed <em>inline</em> stuff</h2>.
+  const target = createDomTarget({tagName: 'H2', matchesSelectors: ['h2'], text: 'Mixed inline stuff'});
+  target.children.push({
+    tagName: 'EM',
+    className: 'em-stub',
+    textContent: 'inline',  // != outer text 'Mixed inline stuff'
+  });
+  target.firstElementChild = target.children[0];
 
   const runtime = createIntroAnimationsRuntime({
     window: createWindowStub(),
@@ -418,10 +424,98 @@ test('splitHeadingForCurtain skips headings with inline markup', () => {
   runtime.splitHeadingForCurtain(target);
 
   assert.equal(target.querySelectorAll('.word').length, 0,
-    'headings with inline markup should not be split');
+    'headings with mixed inline markup should not be split');
+});
+
+test('splitHeadingForCurtain splits INSIDE a single wrapping anchor (card-title pattern)', () => {
+  // Card title pattern: <h3><a>Card title text</a></h3>.
+  // The anchor's textContent matches the heading's textContent exactly,
+  // so the splitter should split inside the anchor.
+  const anchorText = 'Card title';
+  const anchor = createDomTarget({tagName: 'A', matchesSelectors: [], text: anchorText});
+  // Make the anchor queryable like a real element
+  anchor.getBoundingClientRect = () => ({top: 0, bottom: 0, left: 0, right: 0});
+
+  const heading = createDomTarget({tagName: 'H3', matchesSelectors: ['h3'], text: anchorText});
+  heading.children.push(anchor);
+  heading.childNodes.push(anchor);
+  heading.firstElementChild = anchor;
+  // Override childElementCount since createDomTarget derives it from children.length
+  // (which is correct here because we just pushed one).
+
+  const runtime = createIntroAnimationsRuntime({
+    window: createWindowStub(),
+    document: createDocStub({kinetic: true}),
+    collectTargets: () => [heading],
+    createObserver() { return {observe() {}, unobserve() {}, disconnect() {}}; },
+  });
+
+  runtime.splitHeadingForCurtain(heading);
+
+  // The .line/.word spans should live inside the anchor, not directly in the heading.
+  const wordsAnywhere = heading.querySelectorAll('.word');
+  const wordsInAnchor = anchor.querySelectorAll('.word');
+
+  assert.ok(wordsInAnchor.length >= 1, 'should create word spans inside the anchor');
+  assert.equal(wordsInAnchor.length, wordsAnywhere.length,
+    'every word span should be inside the anchor, not the heading');
 });
 
 // ---------- Re-init after page transition ----------
+
+// ---------- Nested title collection (Kinetic extension) ----------
+
+test('Kinetic appends nested titles found inside reveal-root containers', () => {
+  const cardContainer = createDomTarget({tagName: 'ARTICLE', matchesSelectors: ['.wp-block-post']});
+  const cardTitle = createDomTarget({tagName: 'H1', matchesSelectors: ['h1', '.wp-block-heading'], text: 'Card title'});
+  const win = createWindowStub();
+
+  const runtime = createIntroAnimationsRuntime({
+    window: win,
+    document: createDocStub({kinetic: true}),
+    collectTargets: () => [cardContainer],
+    collectNestedTitles: (primary) => {
+      // Simulate the extension handing back the heading inside the card.
+      return primary.includes(cardContainer) ? [cardTitle] : [];
+    },
+    createObserver() { return {observe() {}, unobserve() {}, disconnect() {}}; },
+  });
+
+  runtime.initialize();
+
+  // Both targets should be staged.
+  assert.equal(cardContainer.classList.contains('anima-intro-target--pending'), true);
+  assert.equal(cardContainer.classList.contains('anima-intro-target--role-other'), true,
+    'container is role-other (it is not a heading itself)');
+
+  assert.equal(cardTitle.classList.contains('anima-intro-target--pending'), true);
+  assert.equal(cardTitle.classList.contains('anima-intro-target--role-title'), true,
+    'nested heading is role-title');
+});
+
+test('Non-Kinetic styles DO NOT collect nested titles', () => {
+  const cardContainer = createDomTarget({tagName: 'ARTICLE', matchesSelectors: ['.wp-block-post']});
+  const cardTitle = createDomTarget({tagName: 'H1', matchesSelectors: ['h1'], text: 'Card title'});
+
+  let nestedCallCount = 0;
+  const runtime = createIntroAnimationsRuntime({
+    window: createWindowStub(),
+    document: createDocStub({kinetic: false}),
+    collectTargets: () => [cardContainer],
+    collectNestedTitles: () => {
+      nestedCallCount += 1;
+      return [cardTitle];
+    },
+    createObserver() { return {observe() {}, unobserve() {}, disconnect() {}}; },
+  });
+
+  runtime.initialize();
+
+  assert.equal(nestedCallCount, 0,
+    'collectNestedTitles should not be invoked outside Kinetic');
+  assert.equal(cardTitle.classList.contains('anima-intro-target--role-title'), false,
+    'inner title should not be staged when style is not kinetic');
+});
 
 test('page-transition re-init applies Kinetic splitter to fresh title targets', () => {
   const firstHeading = createDomTarget({tagName: 'H2', matchesSelectors: ['h2'], text: 'First page title'});
