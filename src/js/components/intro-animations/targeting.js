@@ -93,54 +93,71 @@ function collectRevealTargets(root) {
   return trackedNodes;
 }
 
-// Kinetic-only extension: find heading-role nodes nested INSIDE already-tracked
-// reveal-root targets. Used by the runtime when the active animation style is
-// 'kinetic' so card titles get the word-curtain treatment while the card
-// containers themselves still slide in as a whole. For fade/slide/scale this
-// helper is never called — those styles keep the original outer-only behavior.
-const NESTED_TITLE_SELECTORS = [
+// Kinetic-only extension: find heading-role nodes anywhere on the page so they
+// can receive the word-curtain treatment, regardless of whether they live
+// inside a tracked reveal-root container. Used by the runtime when the active
+// animation style is 'kinetic'. For fade/slide/scale this helper is never
+// called — those styles keep the original outer-only reveal semantics.
+//
+// Deliberately broader than `collectRevealTargets`:
+//   - Selector list includes Nova Blocks' custom title classes
+//     (.nb-collection__title, .nb-card__title) which aren't picked up by
+//     Anima's standard fallback list.
+//   - Excluded-zone list is SMALLER than the default one: we WANT footer
+//     headings to animate under Kinetic (they're typographic moments too).
+//     Only admin bar, site <header> chrome, hidden/inert nodes, and the
+//     page-transition loader UI are excluded.
+const KINETIC_TITLE_SELECTORS = [
   'h1',
   'h2',
   'h3',
   '.wp-block-heading',
   '.wp-block-post-title',
+  '.nb-collection__title',
+  '.nb-card__title',
 ].join(',');
 
-function collectNestedTitlesWithinTargets(existingTargets) {
-  if (!Array.isArray(existingTargets) || existingTargets.length === 0) {
+const KINETIC_EXCLUDED_ZONES = [
+  '#wpadminbar',
+  '[aria-hidden="true"]',
+  '[inert]',
+  '.js-page-transition-border',
+  '.js-slide-wipe-loader',
+  'header',
+  '.nb-supernova-item--scrolling-effect-parallax',
+].join(',');
+
+function collectKineticTitleTargets(root, primaryTargets = []) {
+  if (!root || typeof root.querySelectorAll !== 'function') {
     return [];
   }
 
-  const existingSet = new Set(existingTargets);
+  const primarySet = new Set(primaryTargets);
   const results = [];
   const seen = new Set();
 
-  existingTargets.forEach((container) => {
-    if (!container || typeof container.querySelectorAll !== 'function') {
+  const candidates = Array.from(root.querySelectorAll(KINETIC_TITLE_SELECTORS));
+
+  candidates.forEach((node) => {
+    if (!node || node.isConnected === false) {
       return;
     }
 
-    const candidates = Array.from(container.querySelectorAll(NESTED_TITLE_SELECTORS));
+    // Already handled by the primary-target pipeline (or collected here earlier
+    // in the loop) — skip to avoid double-staging.
+    if (primarySet.has(node) || seen.has(node)) {
+      return;
+    }
 
-    candidates.forEach((node) => {
-      if (!node || node.isConnected === false) {
-        return;
-      }
+    // Kinetic-specific exclusion zones. Intentionally more lenient than
+    // EXCLUDED_TARGET_SELECTORS — footer is NOT listed, because users want
+    // Kinetic to animate footer headings too.
+    if (typeof node.closest === 'function' && node.closest(KINETIC_EXCLUDED_ZONES)) {
+      return;
+    }
 
-      // Skip the container itself if it happens to match (e.g., a heading
-      // that was also a top-level target), and skip any node we've already
-      // collected.
-      if (existingSet.has(node) || seen.has(node)) {
-        return;
-      }
-
-      if (isExcludedTarget(node)) {
-        return;
-      }
-
-      seen.add(node);
-      results.push(node);
-    });
+    seen.add(node);
+    results.push(node);
   });
 
   return results;
@@ -150,9 +167,10 @@ module.exports = {
   REVEAL_ROOT_SELECTORS,
   FALLBACK_TARGET_SELECTORS,
   EXCLUDED_TARGET_SELECTORS,
-  NESTED_TITLE_SELECTORS,
+  KINETIC_TITLE_SELECTORS,
+  KINETIC_EXCLUDED_ZONES,
   isExcludedTarget,
   hasTrackedRevealAncestor,
   collectRevealTargets,
-  collectNestedTitlesWithinTargets,
+  collectKineticTitleTargets,
 };

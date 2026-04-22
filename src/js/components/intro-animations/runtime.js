@@ -1,6 +1,6 @@
 const {
   collectRevealTargets,
-  collectNestedTitlesWithinTargets,
+  collectKineticTitleTargets,
 } = require('./targeting.js');
 
 const REVEAL_ZONE_TOP_RATIO = 0.82;
@@ -49,7 +49,7 @@ function createIntroAnimationsRuntime({
   window: win = typeof window !== 'undefined' ? window : null,
   document: doc = typeof document !== 'undefined' ? document : null,
   collectTargets = collectRevealTargets,
-  collectNestedTitles = collectNestedTitlesWithinTargets,
+  collectKineticTitles = collectKineticTitleTargets,
   createObserver = (callback) => new win.IntersectionObserver(callback, getRevealObserverOptions()),
 } = {}) {
   const consumedTargets = new WeakSet();
@@ -427,15 +427,16 @@ function createIntroAnimationsRuntime({
     const primaryTargets = collectTargets(root);
     let targets = primaryTargets;
 
-    // Kinetic extension: also animate title-role headings that live INSIDE
-    // the tracked reveal roots. The outer container still slides (role-other),
-    // and its inner heading gets the word-curtain (role-title). Outside
-    // Kinetic this is a no-op so fade/slide/scale keep the simpler
-    // outer-only reveal semantics.
-    if (getActiveAnimationStyle() === 'kinetic' && typeof collectNestedTitles === 'function') {
-      const nested = collectNestedTitles(primaryTargets);
-      if (nested && nested.length) {
-        targets = primaryTargets.concat(nested);
+    // Kinetic extension: also animate title-role headings anywhere on the
+    // page (card titles inside reveal roots, collection headings outside
+    // them, footer headings, etc.). The outer reveal-root containers still
+    // slide (role-other), and any title found via this broader collector
+    // gets the word-curtain (role-title). Outside Kinetic this is a no-op
+    // so fade/slide/scale keep the original outer-only reveal semantics.
+    if (getActiveAnimationStyle() === 'kinetic' && typeof collectKineticTitles === 'function') {
+      const extraTitles = collectKineticTitles(root, primaryTargets);
+      if (extraTitles && extraTitles.length) {
+        targets = primaryTargets.concat(extraTitles);
       }
     }
 

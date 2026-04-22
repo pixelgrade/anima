@@ -474,9 +474,9 @@ test('Kinetic appends nested titles found inside reveal-root containers', () => 
     window: win,
     document: createDocStub({kinetic: true}),
     collectTargets: () => [cardContainer],
-    collectNestedTitles: (primary) => {
+    collectKineticTitles: (root, primary) => {
       // Simulate the extension handing back the heading inside the card.
-      return primary.includes(cardContainer) ? [cardTitle] : [];
+      return primary && primary.includes(cardContainer) ? [cardTitle] : [];
     },
     createObserver() { return {observe() {}, unobserve() {}, disconnect() {}}; },
   });
@@ -502,7 +502,7 @@ test('Non-Kinetic styles DO NOT collect nested titles', () => {
     window: createWindowStub(),
     document: createDocStub({kinetic: false}),
     collectTargets: () => [cardContainer],
-    collectNestedTitles: () => {
+    collectKineticTitles: () => {
       nestedCallCount += 1;
       return [cardTitle];
     },

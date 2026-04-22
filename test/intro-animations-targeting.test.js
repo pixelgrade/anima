@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 
 const {
   collectRevealTargets,
-  collectNestedTitlesWithinTargets,
+  collectKineticTitleTargets,
 } = require('../src/js/components/intro-animations/targeting.js');
 
 function createClassList(initialClasses = []) {
@@ -161,75 +161,82 @@ test('collectRevealTargets skips parallax hero surfaces and their descendants', 
   assert.deepEqual(targets, []);
 });
 
-// ---------- collectNestedTitlesWithinTargets (Kinetic-only extension) ----------
+// ---------- collectKineticTitleTargets (Kinetic-only extension) ----------
 
-function createContainerWithNestedTitles(name, nestedTitles) {
+function createKineticTitle(name, closestExcluded = false) {
   return {
     name,
-    querySelectorAll() {
-      return nestedTitles.map((title) => ({
-        ...title,
-        isConnected: true,
-        matches() { return false; },
-        closest() { return null; },
-      }));
+    isConnected: true,
+    matches() { return false; },
+    closest(selector) {
+      // The caller passes the KINETIC_EXCLUDED_ZONES selector list; return
+      // a truthy value only when this title is explicitly flagged as inside
+      // an excluded zone.
+      return closestExcluded ? { marker: selector } : null;
     },
   };
 }
 
-test('collectNestedTitlesWithinTargets returns empty when there are no existing targets', () => {
-  assert.deepEqual(collectNestedTitlesWithinTargets([]), []);
-  assert.deepEqual(collectNestedTitlesWithinTargets(null), []);
-  assert.deepEqual(collectNestedTitlesWithinTargets(undefined), []);
-});
-
-test('collectNestedTitlesWithinTargets finds headings nested inside reveal roots', () => {
-  const cardTitle = {name: 'card-title-1'};
-  const card = createContainerWithNestedTitles('card-1', [cardTitle]);
-
-  const nested = collectNestedTitlesWithinTargets([card]);
-
-  assert.deepEqual(nested.map((n) => n.name), ['card-title-1']);
-});
-
-test('collectNestedTitlesWithinTargets deduplicates titles shared across containers', () => {
-  const sharedTitle = {name: 'shared', isConnected: true, matches() { return false; }, closest() { return null; }};
-  const container1 = { name: 'c1', querySelectorAll: () => [sharedTitle] };
-  const container2 = { name: 'c2', querySelectorAll: () => [sharedTitle] };
-
-  const nested = collectNestedTitlesWithinTargets([container1, container2]);
-
-  assert.equal(nested.length, 1, 'same title collected twice should appear once');
-  assert.equal(nested[0].name, 'shared');
-});
-
-test('collectNestedTitlesWithinTargets skips titles that are themselves in the existing target set', () => {
-  const selfReferentialTitle = {name: 'h2-as-target'};
-  const container = {
-    name: 'group',
-    querySelectorAll: () => [selfReferentialTitle],
+function createRootFromTitles(titles) {
+  return {
+    querySelectorAll() { return titles; },
   };
+}
 
-  // h2 is both a top-level target AND (erroneously) queried as nested.
-  const nested = collectNestedTitlesWithinTargets([container, selfReferentialTitle]);
-
-  assert.deepEqual(nested, [],
-    'should not return a node that was already in the existing target list');
+test('collectKineticTitleTargets returns empty for invalid root', () => {
+  assert.deepEqual(collectKineticTitleTargets(null), []);
+  assert.deepEqual(collectKineticTitleTargets({}), []);
 });
 
-test('collectNestedTitlesWithinTargets filters disconnected nodes', () => {
-  const disconnectedTitle = {
-    name: 'stale',
-    isConnected: false,
-    matches() { return false; },
-    closest() { return null; },
-  };
-  const container = {
-    name: 'group',
-    querySelectorAll: () => [disconnectedTitle],
-  };
+test('collectKineticTitleTargets finds all candidate headings in the document', () => {
+  const cardTitle = createKineticTitle('card-title');
+  const collectionTitle = createKineticTitle('collection-title');
+  const footerTitle = createKineticTitle('footer-title');
+  const root = createRootFromTitles([cardTitle, collectionTitle, footerTitle]);
 
-  const nested = collectNestedTitlesWithinTargets([container]);
+  const targets = collectKineticTitleTargets(root);
 
-  assert.deepEqual(nested, []);
+  assert.deepEqual(targets.map((t) => t.name), ['card-title', 'collection-title', 'footer-title']);
+});
+
+test('collectKineticTitleTargets skips titles already in the primary target set', () => {
+  const primaryHeading = createKineticTitle('primary-h2');
+  const otherTitle = createKineticTitle('collection-title');
+  const root = createRootFromTitles([primaryHeading, otherTitle]);
+
+  const targets = collectKineticTitleTargets(root, [primaryHeading]);
+
+  assert.deepEqual(targets.map((t) => t.name), ['collection-title'],
+    'primary target should not be re-collected as a Kinetic title');
+});
+
+test('collectKineticTitleTargets skips titles inside excluded zones (admin bar, header, etc.)', () => {
+  const excluded = createKineticTitle('header-title', /* closestExcluded */ true);
+  const allowed = createKineticTitle('content-title', /* closestExcluded */ false);
+  const root = createRootFromTitles([excluded, allowed]);
+
+  const targets = collectKineticTitleTargets(root);
+
+  assert.deepEqual(targets.map((t) => t.name), ['content-title']);
+});
+
+test('collectKineticTitleTargets filters disconnected nodes', () => {
+  const stale = createKineticTitle('stale');
+  stale.isConnected = false;
+  const alive = createKineticTitle('alive');
+  const root = createRootFromTitles([stale, alive]);
+
+  const targets = collectKineticTitleTargets(root);
+
+  assert.deepEqual(targets.map((t) => t.name), ['alive']);
+});
+
+test('collectKineticTitleTargets deduplicates the same candidate appearing twice', () => {
+  const shared = createKineticTitle('shared');
+  const root = createRootFromTitles([shared, shared]);
+
+  const targets = collectKineticTitleTargets(root);
+
+  assert.equal(targets.length, 1);
+  assert.equal(targets[0].name, 'shared');
 });
