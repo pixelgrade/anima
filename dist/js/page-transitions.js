@@ -813,7 +813,36 @@ function createIntroAnimationsRuntime({
       revealTarget(target);
       return false;
     }
+
+    // Suppress the transition while we apply the pre-state. Without this,
+    // the element would interpolate from its natural style (opacity 1,
+    // no transform) toward the --pending values over the transition
+    // duration. rAF×2 (the usual "wait for a paint" trick) only gives us
+    // ~33ms of that transition — nowhere near enough to settle — so when
+    // revealTarget later flips to --revealed the reveal transition starts
+    // from ~95% opacity with almost no visible distance to animate.
+    //
+    // With --staging applied, the pre-state snaps in instantly. We force
+    // a reflow so the snapped style is committed, then remove --staging
+    // on the next frame. revealTarget is wrapped in its own rAF×2 inside
+    // handleReveal so it fires AFTER this unstaging — transitions then
+    // animate the full --pending → --revealed distance.
+    target.classList.add('anima-intro-target--staging');
     target.classList.add('anima-intro-target--pending');
+
+    // Force a synchronous reflow so the browser commits the pre-state
+    // paint before we drop the transition suppression.
+    // eslint-disable-next-line no-unused-expressions
+    target.offsetWidth;
+    if (win && typeof win.requestAnimationFrame === 'function') {
+      win.requestAnimationFrame(() => {
+        if (target && target.classList) {
+          target.classList.remove('anima-intro-target--staging');
+        }
+      });
+    } else {
+      target.classList.remove('anima-intro-target--staging');
+    }
 
     // Kinetic style only: split title-role headings into words so the CSS
     // per-word cascade has something to reveal. Runs on every stageTarget

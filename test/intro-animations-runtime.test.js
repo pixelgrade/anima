@@ -89,7 +89,7 @@ function createWindowStub() {
   };
 }
 
-test('initialize stages in-viewport targets for one frame before revealing them', () => {
+test('initialize stages in-viewport targets with the unstage + rAF×2 handoff before revealing', () => {
   const target = createTarget('hero', true);
   const win = createWindowStub();
   const observerEntries = [];
@@ -120,19 +120,28 @@ test('initialize stages in-viewport targets for one frame before revealing them'
 
   runtime.initialize();
 
+  // stageTarget applies both --pending and --staging so the pre-state
+  // snaps in without transitioning from the natural style. One rAF is
+  // queued to drop --staging on the next frame; handleReveal queues
+  // another rAF (which schedules a third) to flip to --revealed.
+  assert.equal(target.classList.contains('anima-intro-target--pending'), true);
+  assert.equal(target.classList.contains('anima-intro-target--staging'), true);
+  assert.equal(target.classList.contains('anima-intro-target--revealed'), false);
+  assert.equal(win.animationFrameQueue.length, 2,
+    'one rAF for unstaging + one outer rAF from handleReveal');
+
+  // Frame 1: unstage runs; handleReveal's outer rAF schedules its inner rAF.
+  win.animationFrameQueue.shift()(); // rAF for --staging removal
+  win.animationFrameQueue.shift()(); // handleReveal outer rAF → schedules inner
+
+  assert.equal(target.classList.contains('anima-intro-target--staging'), false);
   assert.equal(target.classList.contains('anima-intro-target--pending'), true);
   assert.equal(target.classList.contains('anima-intro-target--revealed'), false);
-  assert.equal(win.animationFrameQueue.length, 1);
+  assert.equal(win.animationFrameQueue.length, 1,
+    'handleReveal\'s inner rAF is now queued');
 
-  const firstFrame = win.animationFrameQueue.shift();
-  firstFrame();
-
-  assert.equal(target.classList.contains('anima-intro-target--pending'), true);
-  assert.equal(target.classList.contains('anima-intro-target--revealed'), false);
-  assert.equal(win.animationFrameQueue.length, 1);
-
-  const secondFrame = win.animationFrameQueue.shift();
-  secondFrame();
+  // Frame 2: revealTarget flips the classes.
+  win.animationFrameQueue.shift()();
 
   assert.equal(target.classList.contains('anima-intro-target--pending'), false);
   assert.equal(target.classList.contains('anima-intro-target--revealed'), true);

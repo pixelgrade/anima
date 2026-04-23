@@ -109,6 +109,16 @@ body.has-intro-animations--kinetic.has-intro-animations--fast {
     backface-visibility: hidden;
   }
 
+  // Applied briefly by the runtime during stageTarget() so the element
+  // snaps to the --pending pre-state instantly instead of transitioning
+  // toward it from its natural style. The class is dropped on the next
+  // animation frame, after the pre-state has been painted, so the
+  // subsequent flip to --revealed triggers a clean, full-duration
+  // transition instead of starting part-way through.
+  .anima-intro-target--staging {
+    transition: none !important;
+  }
+
   .anima-intro-target--pending {
     opacity: 0;
     visibility: hidden;
@@ -211,6 +221,7 @@ body.has-intro-animations--kinetic.has-intro-animations--fast {
   .anima-intro-target,
   .anima-intro-target--pending,
   .anima-intro-target--revealed,
+  .anima-intro-target--staging,
   .anima-intro-target .word,
   .anima-intro-target .char {
     opacity: 1 !important;
