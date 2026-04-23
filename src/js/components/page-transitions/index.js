@@ -93,6 +93,15 @@ export function init() {
     },
   } );
 
+  // Signal to the intro-animations choreographer that a transition has
+  // started. Its page-transition-gate integration closes the gate here
+  // so reveals on the incoming page queue behind the loader instead of
+  // playing while the overlay is still dismissing.
+  barba.hooks.before( () => {
+    $( document ).trigger( 'anima:page-transition-start' );
+    window.dispatchEvent( new CustomEvent( 'anima:page-transition-start' ) );
+  } );
+
   barba.hooks.after( () => {
     $body.addClass( 'is-loaded' );
   } );

@@ -32,13 +32,251 @@ module.exports = {
 
 /***/ },
 
+/***/ 945
+(module) {
+
+/**
+ * Reveal Choreographer
+ *
+ * Coordinates when intro-animation reveals are allowed to fire. Producers
+ * (the IntersectionObserver / slide-change flows) request a reveal and list
+ * the "gates" it depends on. Integrations (page transitions, Slick carousels,
+ * etc.) close and open those gates in response to blocking animations.
+ *
+ * Semantics:
+ *  - A gate is OPEN by default. Only integrations close it.
+ *  - While any gate a request depends on is closed, the request queues and
+ *    its target stays in its pre-reveal state.
+ *  - openGate(name, { settle }) keeps the gate logically closed for `settle`
+ *    ms after the blocking animation ends, then flushes queued reveals.
+ *    closeGate(name) called during a pending settle cancels that settle.
+ *  - Every request has a timeout safety net (default 3s). If a gate it
+ *    depends on never opens, the reveal force-fires so the user never sees
+ *    permanently-hidden content.
+ *  - When prefersReducedMotion() returns true, requests bypass gates
+ *    entirely and fire immediately.
+ *
+ * The module is pure: no DOM queries, no CSS knowledge. The actual reveal
+ * (adding a class, running a keyframe, whatever) is the caller's onReveal
+ * callback.
+ */
+function createRevealChoreographer({
+  window: win = typeof window !== 'undefined' ? window : null,
+  prefersReducedMotion = () => false,
+  onReveal = () => {},
+  defaultTimeout = 3000
+} = {}) {
+  const closedGates = new Set();
+  // Request queue, keyed by the element so a repeat requestReveal() for the
+  // same target cancels the previous one instead of stacking up.
+  const queue = new Map();
+  // Pending "settle" timers keyed by gate name. If the gate is re-closed
+  // before settle elapses, we cancel the timer and stay closed.
+  const pendingOpens = new Map();
+  function setTimer(fn, ms) {
+    if (win && typeof win.setTimeout === 'function') {
+      return win.setTimeout(fn, ms);
+    }
+    return null;
+  }
+  function clearTimer(handle) {
+    if (handle == null) return;
+    if (win && typeof win.clearTimeout === 'function') {
+      win.clearTimeout(handle);
+    }
+  }
+  function isRequestReady(req) {
+    for (const gate of req.waitFor) {
+      if (closedGates.has(gate)) return false;
+    }
+    return true;
+  }
+  function cleanupRequest(req) {
+    clearTimer(req.timeoutHandle);
+    queue.delete(req.el);
+  }
+  function fireReveal(req) {
+    cleanupRequest(req);
+    // Caller-provided reveal. Try/catch so a throw in one reveal doesn't
+    // leave the queue in an inconsistent state.
+    try {
+      onReveal(req.el);
+    } catch (_) {
+      /* no-op */
+    }
+  }
+  function flushReadyRequests() {
+    // Collect first so we're not mutating queue during iteration.
+    const ready = [];
+    for (const req of queue.values()) {
+      if (isRequestReady(req)) ready.push(req);
+    }
+    ready.forEach(fireReveal);
+  }
+  return {
+    /**
+     * Ask for an element to be revealed.
+     *
+     * @param {Element} el The target.
+     * @param {{ waitFor?: string[], timeout?: number }} [opts]
+     *   waitFor: gate names to wait on. Empty = fire immediately.
+     *   timeout: force-reveal after this many ms (default 3000).
+     */
+    requestReveal(el, opts = {}) {
+      if (!el) return;
+
+      // Reduced-motion short-circuit: fire now, skip the whole machinery.
+      if (typeof prefersReducedMotion === 'function' && prefersReducedMotion()) {
+        try {
+          onReveal(el);
+        } catch (_) {/* no-op */}
+        return;
+      }
+      const waitFor = Array.isArray(opts.waitFor) ? opts.waitFor.slice() : [];
+      const timeout = typeof opts.timeout === 'number' ? opts.timeout : defaultTimeout;
+
+      // Cancel any previous request for the same element.
+      const previous = queue.get(el);
+      if (previous) cleanupRequest(previous);
+      const req = {
+        el,
+        waitFor,
+        timeoutHandle: null
+      };
+      if (waitFor.length === 0 || isRequestReady(req)) {
+        try {
+          onReveal(el);
+        } catch (_) {/* no-op */}
+        return;
+      }
+
+      // Queue it and arm the timeout safety net.
+      queue.set(el, req);
+      if (timeout > 0) {
+        req.timeoutHandle = setTimer(() => {
+          fireReveal(req);
+        }, timeout);
+      }
+    },
+    /**
+     * Mark a gate as closed. Cancels any pending settle timer for this gate.
+     */
+    closeGate(name) {
+      closedGates.add(name);
+      if (pendingOpens.has(name)) {
+        clearTimer(pendingOpens.get(name));
+        pendingOpens.delete(name);
+      }
+    },
+    /**
+     * Mark a gate as open. With settle > 0, the gate stays logically closed
+     * for `settle` ms first — requests queued during that window flush when
+     * the timer fires. Useful for letting a blocking animation finish its
+     * last frame of motion before the next one starts.
+     */
+    openGate(name, opts = {}) {
+      const settle = typeof opts.settle === 'number' ? opts.settle : 0;
+      const actuallyOpen = () => {
+        closedGates.delete(name);
+        pendingOpens.delete(name);
+        flushReadyRequests();
+      };
+      if (settle <= 0) {
+        actuallyOpen();
+        return;
+      }
+
+      // Cancel any previous pending open so a later openGate with a
+      // different settle resets the timer.
+      if (pendingOpens.has(name)) {
+        clearTimer(pendingOpens.get(name));
+      }
+      const handle = setTimer(actuallyOpen, settle);
+      pendingOpens.set(name, handle);
+    },
+    /** True iff the gate is not currently in the closed set. */
+    isGateOpen(name) {
+      return !closedGates.has(name);
+    },
+    /**
+     * For instrumentation/tests only — returns the current number of
+     * queued (not-yet-fired) requests.
+     */
+    queuedCount() {
+      return queue.size;
+    },
+    /**
+     * Tear down: cancel every pending timer and flush state.
+     * Used before re-initializing (e.g., on Barba re-init).
+     */
+    disconnect() {
+      for (const req of queue.values()) {
+        clearTimer(req.timeoutHandle);
+      }
+      queue.clear();
+      for (const handle of pendingOpens.values()) {
+        clearTimer(handle);
+      }
+      pendingOpens.clear();
+      closedGates.clear();
+    }
+  };
+}
+module.exports = {
+  createRevealChoreographer
+};
+
+/***/ },
+
 /***/ 688
 (module, __unused_webpack_exports, __webpack_require__) {
 
 const {
   createIntroAnimationsRuntime
 } = __webpack_require__(280);
-const runtime = createIntroAnimationsRuntime();
+const {
+  attachPageTransitionGate,
+  PAGE_TRANSITION_GATE
+} = __webpack_require__(155);
+const {
+  attachSlickGate,
+  getSlickGateName
+} = __webpack_require__(376);
+
+// Compose the runtime with the production gate resolver.
+// - Every target waits on the global page-transition gate. On first page
+//   load the gate is open (never closed) so this is a no-op. During a
+//   Barba soft-nav the integration closes it during the transition and
+//   opens it with settle after, giving the loader a clean exit.
+// - Targets inside a Slick carousel also wait on that carousel's
+//   slick:{id} gate, so the word-curtain cascade only starts after the
+//   slide transform finishes.
+function resolveGates(target) {
+  const gates = [PAGE_TRANSITION_GATE];
+  const slickGate = getSlickGateName(target);
+  if (slickGate) gates.push(slickGate);
+  return gates;
+}
+const runtime = createIntroAnimationsRuntime({
+  resolveGates
+});
+
+// Integrations attach their listeners BEFORE runtime.bind() so that on a
+// 'anima:page-transition-complete' dispatch the gate's openGate (with
+// settle) runs before runtime.initialize() — queued requests from
+// initialize then actually wait the settle window before firing.
+if (typeof window !== 'undefined') {
+  attachPageTransitionGate({
+    window,
+    choreographer: runtime.choreographer
+  });
+  attachSlickGate({
+    window,
+    document,
+    jQuery: window.jQuery || window.$,
+    choreographer: runtime.choreographer
+  });
+}
 module.exports = {
   initialize(root) {
     return runtime.initialize(root);
@@ -53,6 +291,182 @@ module.exports = {
 
 /***/ },
 
+/***/ 155
+(module) {
+
+/**
+ * Page-transition integration for the reveal choreographer.
+ *
+ * Listens for Anima's window-level page-transition events and opens/closes
+ * the 'page-transition' gate accordingly. When a soft navigation is in
+ * flight, new reveals requested by the runtime queue behind this gate so
+ * they don't animate against the loader/overlay. When the transition ends
+ * we open the gate with a small settle delay, giving the overlay a beat to
+ * clear before the cascade starts.
+ *
+ * Events relied upon:
+ *  - 'anima:page-transition-start'    — dispatched in page-transitions/index.js
+ *                                        via barba.hooks.before().
+ *  - 'anima:page-transition-complete' — existing event dispatched after the
+ *                                        loader is dismissed.
+ *
+ * On first page load neither event has fired, so the gate stays open and
+ * reveals behave exactly as before.
+ */
+const PAGE_TRANSITION_GATE = 'page-transition';
+const DEFAULT_SETTLE_MS = 200;
+function attachPageTransitionGate({
+  window: win = typeof window !== 'undefined' ? window : null,
+  choreographer,
+  settleMs = DEFAULT_SETTLE_MS
+} = {}) {
+  if (!win || typeof win.addEventListener !== 'function' || !choreographer) {
+    return () => {};
+  }
+  const onStart = () => {
+    choreographer.closeGate(PAGE_TRANSITION_GATE);
+  };
+  const onComplete = () => {
+    choreographer.openGate(PAGE_TRANSITION_GATE, {
+      settle: settleMs
+    });
+  };
+  win.addEventListener('anima:page-transition-start', onStart);
+  win.addEventListener('anima:page-transition-complete', onComplete);
+  return function detach() {
+    if (typeof win.removeEventListener === 'function') {
+      win.removeEventListener('anima:page-transition-start', onStart);
+      win.removeEventListener('anima:page-transition-complete', onComplete);
+    }
+  };
+}
+module.exports = {
+  attachPageTransitionGate,
+  PAGE_TRANSITION_GATE
+};
+
+/***/ },
+
+/***/ 376
+(module) {
+
+/**
+ * Slick carousel integration for the reveal choreographer.
+ *
+ * For every .slick-initialized carousel, closes a per-carousel gate
+ * ('slick:{id}') during the slide-change transition and opens it (with a
+ * settle delay) once the transition ends. Reveals inside slides use the
+ * carousel's gate name so their cascade waits for the slide transform to
+ * finish before playing.
+ *
+ * Uses jQuery because Slick itself is jQuery-based; Slick dispatches its
+ * transition events as jQuery events on the carousel element.
+ *
+ * Carousel identification: uses `data-slick-gate-id` if present, falls
+ * back to a stable sequential id assigned by this integration. This id is
+ * what runtime.js uses to derive the waitFor gate name for titles inside
+ * a given slide (`getSlickGateName(slideElement)`).
+ */
+const SLICK_GATE_PREFIX = 'slick:';
+const DEFAULT_SETTLE_MS = 100;
+const GATE_ID_ATTRIBUTE = 'data-slick-gate-id';
+let nextAutoId = 1;
+
+/**
+ * Resolve the gate name for a carousel element. If the carousel hasn't been
+ * tagged yet, assigns a fresh id. Safe to call multiple times.
+ */
+function assignCarouselGateName(carouselEl) {
+  if (!carouselEl || !carouselEl.getAttribute) return null;
+  let id = carouselEl.getAttribute(GATE_ID_ATTRIBUTE);
+  if (!id) {
+    id = String(nextAutoId++);
+    carouselEl.setAttribute(GATE_ID_ATTRIBUTE, id);
+  }
+  return SLICK_GATE_PREFIX + id;
+}
+
+/**
+ * Given any element, find the gate name of the carousel it lives inside
+ * (if any). Returns null for elements outside a carousel.
+ */
+function getSlickGateName(el) {
+  if (!el || typeof el.closest !== 'function') return null;
+  const carousel = el.closest('.slick-initialized.slick-slider');
+  if (!carousel) return null;
+  return assignCarouselGateName(carousel);
+}
+
+/**
+ * Wire one carousel's beforeChange/afterChange into the choreographer.
+ */
+function attachToCarousel($carousel, choreographer, settleMs) {
+  if (!$carousel || !$carousel.length || $carousel.data('anima-slick-gate-bound')) return;
+  const gateName = assignCarouselGateName($carousel[0]);
+  if (!gateName) return;
+  $carousel.on('beforeChange', () => {
+    choreographer.closeGate(gateName);
+  });
+  $carousel.on('afterChange', () => {
+    choreographer.openGate(gateName, {
+      settle: settleMs
+    });
+  });
+  $carousel.data('anima-slick-gate-bound', true);
+}
+
+/**
+ * Attach the Slick integration. Scans for already-initialized carousels
+ * immediately, and re-scans whenever a page transition swaps in new
+ * content (so carousels on soft-navigated pages get wired too).
+ */
+function attachSlickGate({
+  window: win = typeof window !== 'undefined' ? window : null,
+  document: doc = typeof document !== 'undefined' ? document : null,
+  jQuery = win ? win.jQuery || win.$ : null,
+  choreographer,
+  settleMs = DEFAULT_SETTLE_MS
+} = {}) {
+  if (!choreographer || !jQuery) {
+    return () => {};
+  }
+  const $ = jQuery;
+  function scan() {
+    if (!doc || typeof doc.querySelectorAll !== 'function') return;
+    $(doc).find('.slick-initialized.slick-slider').each(function () {
+      attachToCarousel($(this), choreographer, settleMs);
+    });
+  }
+  scan();
+  const onPageTransitionComplete = () => {
+    // Slick often (re-)initializes after a Barba content swap. Give it one
+    // frame to settle, then scan for newly-initialized carousels.
+    if (win && typeof win.requestAnimationFrame === 'function') {
+      win.requestAnimationFrame(() => {
+        win.requestAnimationFrame(scan);
+      });
+    } else {
+      scan();
+    }
+  };
+  if (win && typeof win.addEventListener === 'function') {
+    win.addEventListener('anima:page-transition-complete', onPageTransitionComplete);
+  }
+  return function detach() {
+    if (win && typeof win.removeEventListener === 'function') {
+      win.removeEventListener('anima:page-transition-complete', onPageTransitionComplete);
+    }
+  };
+}
+module.exports = {
+  attachSlickGate,
+  getSlickGateName,
+  assignCarouselGateName,
+  SLICK_GATE_PREFIX
+};
+
+/***/ },
+
 /***/ 280
 (module, __unused_webpack_exports, __webpack_require__) {
 
@@ -60,6 +474,9 @@ const {
   collectRevealTargets,
   collectKineticTitleTargets
 } = __webpack_require__(687);
+const {
+  createRevealChoreographer
+} = __webpack_require__(945);
 const REVEAL_ZONE_TOP_RATIO = 0.82;
 const DELAY_WINDOW_BY_STYLE = {
   fade: 600,
@@ -96,7 +513,16 @@ function createIntroAnimationsRuntime({
   document: doc = typeof document !== 'undefined' ? document : null,
   collectTargets = collectRevealTargets,
   collectKineticTitles = collectKineticTitleTargets,
-  createObserver = callback => new win.IntersectionObserver(callback, getRevealObserverOptions())
+  createObserver = callback => new win.IntersectionObserver(callback, getRevealObserverOptions()),
+  // Injectable so tests can supply a synchronous stub. Factory receives the
+  // runtime's handleReveal as its onReveal; integrations can close/open
+  // gates on the returned choreographer (exposed via runtime.choreographer).
+  createChoreographer = createRevealChoreographer,
+  // Given a staged target, return the list of gate names its reveal must
+  // wait on. Default: no gates (reveal fires immediately; backward-compat
+  // for tests). The shipping runtime wires this up in index.js so titles
+  // inside Slick slides or the post-transition page wait appropriately.
+  resolveGates = () => []
 } = {}) {
   const consumedTargets = new WeakSet();
   let observer = null;
@@ -405,8 +831,14 @@ function createIntroAnimationsRuntime({
     if (slideChangeObserver && typeof slideChangeObserver.disconnect === 'function') {
       slideChangeObserver.disconnect();
     }
+    if (choreographer && typeof choreographer.disconnect === 'function') {
+      choreographer.disconnect();
+    }
     observer = null;
     slideChangeObserver = null;
+    // Leave choreographer reference intact — the factory-returned API
+    // still exposes it for integrations and for re-use after re-initialize.
+    // Its internal state has been reset by disconnect().
   }
 
   // Re-run the Kinetic word/char cascade on a title that has already been
@@ -483,7 +915,12 @@ function createIntroAnimationsRuntime({
           return;
         }
         const titles = slide.querySelectorAll('.anima-intro-target--role-title');
-        titles.forEach(replayKineticTitle);
+        // Route through the choreographer: for an already-revealed title,
+        // the slick:{id} gate (closed during this transition by the slick
+        // integration) holds the request until the slide settles, then
+        // onReveal routes to replayKineticTitle. For a not-yet-revealed
+        // title, it routes to the first-reveal path.
+        titles.forEach(requestTargetReveal);
       });
     });
     obs.observe(doc.body, {
@@ -518,20 +955,21 @@ function createIntroAnimationsRuntime({
       return firstRect.left - secondRect.left;
     });
   }
-  function revealTargets(targets = []) {
-    const sortedTargets = sortBatchTargets(targets);
-    sortedTargets.forEach((target, index) => {
-      applyRevealDelay(target, index, sortedTargets.length);
-      revealTarget(target);
-    });
-  }
-  function scheduleReveal(targets) {
-    if (!targets.length) {
+
+  // The choreographer's onReveal callback. Branches on whether the target
+  // is already in the --revealed state:
+  //   - Already revealed (e.g., Slick slide becoming active again) → run
+  //     the replay pattern (snap to pre-state with transitions disabled,
+  //     reflow, re-enable, trigger).
+  //   - Pending → wrap in a rAF×2 so the browser has painted the pre-state
+  //     before we flip to --revealed; otherwise CSS transitions won't fire.
+  function handleReveal(target) {
+    if (!target || !target.classList) return;
+    if (target.classList.contains('anima-intro-target--revealed')) {
+      replayKineticTitle(target);
       return;
     }
-    const runReveal = () => {
-      revealTargets(targets);
-    };
+    const runReveal = () => revealTarget(target);
     if (win && typeof win.requestAnimationFrame === 'function') {
       win.requestAnimationFrame(() => {
         win.requestAnimationFrame(runReveal);
@@ -539,6 +977,44 @@ function createIntroAnimationsRuntime({
       return;
     }
     runReveal();
+  }
+
+  // Lazily-created choreographer. Factory signature lets tests substitute
+  // a synchronous stub; default is the real one.
+  let choreographer = null;
+  function getChoreographer() {
+    if (!choreographer) {
+      choreographer = createChoreographer({
+        window: win,
+        prefersReducedMotion,
+        onReveal: handleReveal
+      });
+    }
+    return choreographer;
+  }
+  function requestTargetReveal(target) {
+    if (!target) return;
+    const gates = typeof resolveGates === 'function' ? resolveGates(target) : [];
+    getChoreographer().requestReveal(target, {
+      waitFor: gates
+    });
+  }
+  function revealTargets(targets = []) {
+    const sortedTargets = sortBatchTargets(targets);
+    sortedTargets.forEach((target, index) => {
+      applyRevealDelay(target, index, sortedTargets.length);
+      requestTargetReveal(target);
+    });
+  }
+  function scheduleReveal(targets) {
+    if (!targets.length) {
+      return;
+    }
+
+    // Route through the choreographer so any active gates hold these
+    // reveals until ready. The choreographer fires onReveal (handleReveal),
+    // which applies the rAF×2 pre-paint dance — no need for us to rAF first.
+    revealTargets(targets);
   }
   function initialize(root = doc) {
     if (!hasEnabledBodyClass() || !root || typeof collectTargets !== 'function') {
@@ -605,7 +1081,13 @@ function createIntroAnimationsRuntime({
     // Exposed for tests and for external consumers who want to pre-split
     // server-rendered headings (e.g. a future critical-path enhancement).
     splitHeadingForCurtain,
-    replayKineticTitle
+    replayKineticTitle,
+    // Integrations (page-transition-gate, slick-gate) attach to this.
+    // Getter so lazy creation still works: callers don't have to know
+    // about the creation timing.
+    get choreographer() {
+      return getChoreographer();
+    }
   };
 }
 module.exports = {
@@ -4168,6 +4650,15 @@ function page_transitions_init() {
       window.location.href = url;
       return false;
     }
+  });
+
+  // Signal to the intro-animations choreographer that a transition has
+  // started. Its page-transition-gate integration closes the gate here
+  // so reveals on the incoming page queue behind the loader instead of
+  // playing while the overlay is still dismissing.
+  barba_umd_default().hooks.before(() => {
+    external_jQuery_default()(document).trigger('anima:page-transition-start');
+    window.dispatchEvent(new CustomEvent('anima:page-transition-start'));
   });
   barba_umd_default().hooks.after(() => {
     $body.addClass('is-loaded');

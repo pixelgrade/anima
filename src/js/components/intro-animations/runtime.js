@@ -2,6 +2,7 @@ const {
   collectRevealTargets,
   collectKineticTitleTargets,
 } = require('./targeting.js');
+const { createRevealChoreographer } = require('./choreographer.js');
 
 const REVEAL_ZONE_TOP_RATIO = 0.82;
 const DELAY_WINDOW_BY_STYLE = {
@@ -51,6 +52,15 @@ function createIntroAnimationsRuntime({
   collectTargets = collectRevealTargets,
   collectKineticTitles = collectKineticTitleTargets,
   createObserver = (callback) => new win.IntersectionObserver(callback, getRevealObserverOptions()),
+  // Injectable so tests can supply a synchronous stub. Factory receives the
+  // runtime's handleReveal as its onReveal; integrations can close/open
+  // gates on the returned choreographer (exposed via runtime.choreographer).
+  createChoreographer = createRevealChoreographer,
+  // Given a staged target, return the list of gate names its reveal must
+  // wait on. Default: no gates (reveal fires immediately; backward-compat
+  // for tests). The shipping runtime wires this up in index.js so titles
+  // inside Slick slides or the post-transition page wait appropriately.
+  resolveGates = () => [],
 } = {}) {
   const consumedTargets = new WeakSet();
   let observer = null;
@@ -414,9 +424,15 @@ function createIntroAnimationsRuntime({
     if (slideChangeObserver && typeof slideChangeObserver.disconnect === 'function') {
       slideChangeObserver.disconnect();
     }
+    if (choreographer && typeof choreographer.disconnect === 'function') {
+      choreographer.disconnect();
+    }
 
     observer = null;
     slideChangeObserver = null;
+    // Leave choreographer reference intact — the factory-returned API
+    // still exposes it for integrations and for re-use after re-initialize.
+    // Its internal state has been reset by disconnect().
   }
 
   // Re-run the Kinetic word/char cascade on a title that has already been
@@ -502,7 +518,12 @@ function createIntroAnimationsRuntime({
         }
 
         const titles = slide.querySelectorAll('.anima-intro-target--role-title');
-        titles.forEach(replayKineticTitle);
+        // Route through the choreographer: for an already-revealed title,
+        // the slick:{id} gate (closed during this transition by the slick
+        // integration) holds the request until the slide settles, then
+        // onReveal routes to replayKineticTitle. For a not-yet-revealed
+        // title, it routes to the first-reveal path.
+        titles.forEach(requestTargetReveal);
       });
     });
 
@@ -555,24 +576,22 @@ function createIntroAnimationsRuntime({
     });
   }
 
-  function revealTargets(targets = []) {
-    const sortedTargets = sortBatchTargets(targets);
+  // The choreographer's onReveal callback. Branches on whether the target
+  // is already in the --revealed state:
+  //   - Already revealed (e.g., Slick slide becoming active again) → run
+  //     the replay pattern (snap to pre-state with transitions disabled,
+  //     reflow, re-enable, trigger).
+  //   - Pending → wrap in a rAF×2 so the browser has painted the pre-state
+  //     before we flip to --revealed; otherwise CSS transitions won't fire.
+  function handleReveal(target) {
+    if (!target || !target.classList) return;
 
-    sortedTargets.forEach((target, index) => {
-      applyRevealDelay(target, index, sortedTargets.length);
-      revealTarget(target);
-    });
-  }
-
-  function scheduleReveal(targets) {
-    if (!targets.length) {
+    if (target.classList.contains('anima-intro-target--revealed')) {
+      replayKineticTitle(target);
       return;
     }
 
-    const runReveal = () => {
-      revealTargets(targets);
-    };
-
+    const runReveal = () => revealTarget(target);
     if (win && typeof win.requestAnimationFrame === 'function') {
       win.requestAnimationFrame(() => {
         win.requestAnimationFrame(runReveal);
@@ -581,6 +600,46 @@ function createIntroAnimationsRuntime({
     }
 
     runReveal();
+  }
+
+  // Lazily-created choreographer. Factory signature lets tests substitute
+  // a synchronous stub; default is the real one.
+  let choreographer = null;
+  function getChoreographer() {
+    if (!choreographer) {
+      choreographer = createChoreographer({
+        window: win,
+        prefersReducedMotion,
+        onReveal: handleReveal,
+      });
+    }
+    return choreographer;
+  }
+
+  function requestTargetReveal(target) {
+    if (!target) return;
+    const gates = typeof resolveGates === 'function' ? resolveGates(target) : [];
+    getChoreographer().requestReveal(target, { waitFor: gates });
+  }
+
+  function revealTargets(targets = []) {
+    const sortedTargets = sortBatchTargets(targets);
+
+    sortedTargets.forEach((target, index) => {
+      applyRevealDelay(target, index, sortedTargets.length);
+      requestTargetReveal(target);
+    });
+  }
+
+  function scheduleReveal(targets) {
+    if (!targets.length) {
+      return;
+    }
+
+    // Route through the choreographer so any active gates hold these
+    // reveals until ready. The choreographer fires onReveal (handleReveal),
+    // which applies the rAF×2 pre-paint dance — no need for us to rAF first.
+    revealTargets(targets);
   }
 
   function initialize(root = doc) {
@@ -660,6 +719,10 @@ function createIntroAnimationsRuntime({
     // server-rendered headings (e.g. a future critical-path enhancement).
     splitHeadingForCurtain,
     replayKineticTitle,
+    // Integrations (page-transition-gate, slick-gate) attach to this.
+    // Getter so lazy creation still works: callers don't have to know
+    // about the creation timing.
+    get choreographer() { return getChoreographer(); },
   };
 }
 

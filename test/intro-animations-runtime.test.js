@@ -189,6 +189,11 @@ test('initialize observes offscreen targets until they intersect', () => {
     },
   ]);
 
+  // handleReveal wraps the class-flip in rAF×2 so the browser paints the
+  // pre-state before the transition fires. Flush those frames in-test.
+  win.flushAnimationFrames();
+  win.flushAnimationFrames();
+
   assert.equal(unobservedTarget, target);
   assert.equal(target.classList.contains('anima-intro-target--revealed'), true);
 });
