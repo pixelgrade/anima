@@ -306,6 +306,19 @@ function anima_webfonts_fallback() {
 add_action( 'wp_enqueue_scripts', 'anima_webfonts_fallback', 10 );
 
 function anima_print_scripts() {
+	// The `beforeunload` handler below fades the body out to opacity 0 by
+	// re-adding the `.is-loading` class on every navigation. With Page
+	// Transitions ENABLED this only kicks in on hard refreshes and external
+	// links — Barba intercepts normal link clicks, so beforeunload doesn't
+	// fire. With Page Transitions DISABLED every link click fades the page
+	// out, which reads as an implicit page transition the user didn't opt
+	// into. Gate the handler on the PT toggle: keep the FOUT-preventing
+	// fade-in on DOMContentLoaded unconditionally (universally useful),
+	// skip the fade-out when PT is off so navigation feels crisp.
+	$page_transitions_enabled = function_exists( 'anima_page_transitions_enabled' )
+		? anima_page_transitions_enabled()
+		: (bool) get_option( 'sm_page_transitions_enable', false );
+
 	ob_start(); ?>
 
 	<script>
@@ -313,6 +326,7 @@ function anima_print_scripts() {
 			document.body.classList.remove( "is-loading" );
 			document.body.classList.add( "has-loaded" );
 		} );
+<?php if ( $page_transitions_enabled ) : ?>
 
 		function animaIsUndefined( target ) {
 			return typeof target === "undefined" || target === null;
@@ -339,6 +353,7 @@ function anima_print_scripts() {
 			    document.body.classList.add( "is-loading" );
             }
 		} );
+<?php endif; ?>
 
 		// Fix Safari bfcache: page stays invisible on back/swipe-back navigation.
 		// Safari's Back-Forward Cache restores the DOM state (with "is-loading" class
