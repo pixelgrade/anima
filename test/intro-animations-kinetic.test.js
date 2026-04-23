@@ -546,6 +546,55 @@ test('Non-Kinetic styles DO NOT collect nested titles', () => {
     'inner title should not be staged when style is not kinetic');
 });
 
+// ---------- replayKineticTitle ----------
+
+test('replayKineticTitle is a no-op when the title was never revealed', () => {
+  const target = createDomTarget({tagName: 'H2', matchesSelectors: ['h2'], text: 'Fresh title'});
+  // target has no --revealed class
+  const runtime = createIntroAnimationsRuntime({
+    window: createWindowStub(),
+    document: createDocStub({kinetic: true}),
+    collectTargets: () => [target],
+    createObserver() { return {observe() {}, unobserve() {}, disconnect() {}}; },
+  });
+
+  runtime.replayKineticTitle(target);
+
+  assert.equal(target.classList.contains('anima-intro-target--replaying'), false,
+    'replay should leave pending titles alone');
+});
+
+test('replayKineticTitle snaps to pre-state then schedules a fresh reveal via rAF', () => {
+  const target = createDomTarget({tagName: 'H2', matchesSelectors: ['h2'], text: 'Card title'});
+  target.classList.add('anima-intro-target--revealed');
+  const win = createWindowStub();
+
+  const runtime = createIntroAnimationsRuntime({
+    window: win,
+    document: createDocStub({kinetic: true}),
+    collectTargets: () => [target],
+    createObserver() { return {observe() {}, unobserve() {}, disconnect() {}}; },
+  });
+
+  runtime.replayKineticTitle(target);
+
+  // After the call, --revealed should be gone (snapped back to pre-state),
+  // --replaying is briefly added and removed within the same tick before
+  // the rAF callback schedules the re-reveal.
+  assert.equal(target.classList.contains('anima-intro-target--revealed'), false,
+    '--revealed should be removed to snap the words back to pre-state');
+  assert.equal(target.classList.contains('anima-intro-target--replaying'), false,
+    '--replaying is added then removed synchronously to disable transitions during the snap');
+  assert.equal(win.animationFrameQueue.length, 1, 'first rAF scheduled');
+
+  win.animationFrameQueue.shift()();
+  assert.equal(win.animationFrameQueue.length, 1, 'second rAF scheduled');
+
+  win.animationFrameQueue.shift()();
+  assert.equal(target.classList.contains('anima-intro-target--revealed'), true,
+    'second rAF should re-add --revealed to trigger the forward cascade');
+});
+
 test('page-transition re-init applies Kinetic splitter to fresh title targets', () => {
   const firstHeading = createDomTarget({tagName: 'H2', matchesSelectors: ['h2'], text: 'First page title'});
   const secondHeading = createDomTarget({tagName: 'H2', matchesSelectors: ['h2'], text: 'Second page title'});

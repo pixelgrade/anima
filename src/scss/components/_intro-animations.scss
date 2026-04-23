@@ -194,6 +194,16 @@ body.has-intro-animations--kinetic.has-intro-animations--fast {
       opacity: 1;
       transform: translateY(0) scaleY(1);
     }
+
+    // Carousel replay: when the runtime re-stages a title (e.g., after a
+    // Slick slide change), it temporarily adds --replaying to snap the
+    // words/chars back to pre-state without animating them backwards.
+    // Next frame the class is removed and --revealed is re-added, giving
+    // the cascade a fresh forward run on the newly visible slide.
+    .anima-intro-target--role-title.anima-intro-target--replaying .word,
+    .anima-intro-target--role-title.anima-intro-target--replaying .char {
+      transition: none !important;
+    }
   }
 }
 

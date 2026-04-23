@@ -132,6 +132,29 @@ const KINETIC_EXCLUDED_ZONES = [
   // container static), so there's no conflicting outer animation.
 ].join(',');
 
+function isInsideKineticExclusionZone(node) {
+  if (!node || typeof node.closest !== 'function') {
+    return false;
+  }
+
+  const hit = node.closest(KINETIC_EXCLUDED_ZONES);
+
+  if (!hit) {
+    return false;
+  }
+
+  // Slick carousels toggle aria-hidden="true" on inactive slides as part of
+  // their rotation — but the slide content IS visible when the slide is
+  // active. If the nearest exclusion-zone ancestor is a .slick-slide, let
+  // the title through; the carousel replay observer will re-run its reveal
+  // each time the slide becomes active.
+  if (hit.classList && hit.classList.contains('slick-slide')) {
+    return false;
+  }
+
+  return true;
+}
+
 function collectKineticTitleTargets(root, primaryTargets = []) {
   if (!root || typeof root.querySelectorAll !== 'function') {
     return [];
@@ -156,8 +179,10 @@ function collectKineticTitleTargets(root, primaryTargets = []) {
 
     // Kinetic-specific exclusion zones. Intentionally more lenient than
     // EXCLUDED_TARGET_SELECTORS — footer is NOT listed, because users want
-    // Kinetic to animate footer headings too.
-    if (typeof node.closest === 'function' && node.closest(KINETIC_EXCLUDED_ZONES)) {
+    // Kinetic to animate footer headings too. The aria-hidden check is
+    // further narrowed in isInsideKineticExclusionZone so slick-slide
+    // rotation doesn't hide every inactive slide's title permanently.
+    if (isInsideKineticExclusionZone(node)) {
       return;
     }
 

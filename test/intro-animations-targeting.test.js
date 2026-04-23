@@ -220,6 +220,48 @@ test('collectKineticTitleTargets skips titles inside excluded zones (admin bar, 
   assert.deepEqual(targets.map((t) => t.name), ['content-title']);
 });
 
+test('collectKineticTitleTargets allows titles inside aria-hidden .slick-slide (carousel inactive state)', () => {
+  // Slick toggles aria-hidden="true" on inactive slides. Classify those
+  // titles so they can replay when the slide becomes active.
+  const slickSlideAncestor = {
+    classList: {
+      contains(name) { return name === 'slick-slide'; },
+    },
+  };
+  const slickTitle = {
+    name: 'slick-inactive-title',
+    isConnected: true,
+    matches() { return false; },
+    closest() { return slickSlideAncestor; }, // any exclusion query returns the slick-slide
+  };
+  const root = createRootFromTitles([slickTitle]);
+
+  const targets = collectKineticTitleTargets(root);
+
+  assert.deepEqual(targets.map((t) => t.name), ['slick-inactive-title'],
+    'title inside an inactive slick-slide (aria-hidden) should still be collected');
+});
+
+test('collectKineticTitleTargets excludes aria-hidden zones that are NOT slick-slides (modals, menus)', () => {
+  const modalAncestor = {
+    classList: {
+      contains() { return false; }, // not a slick-slide
+    },
+  };
+  const modalTitle = {
+    name: 'modal-title',
+    isConnected: true,
+    matches() { return false; },
+    closest() { return modalAncestor; },
+  };
+  const root = createRootFromTitles([modalTitle]);
+
+  const targets = collectKineticTitleTargets(root);
+
+  assert.deepEqual(targets, [],
+    'aria-hidden inside a non-slick ancestor (e.g., a modal) should still be excluded');
+});
+
 test('collectKineticTitleTargets filters disconnected nodes', () => {
   const stale = createKineticTitle('stale');
   stale.isConnected = false;

@@ -54,6 +54,7 @@ function createIntroAnimationsRuntime({
 } = {}) {
   const consumedTargets = new WeakSet();
   let observer = null;
+  let slideChangeObserver = null;
   let isBound = false;
 
   function hasEnabledBodyClass() {
@@ -410,8 +411,109 @@ function createIntroAnimationsRuntime({
     if (observer && typeof observer.disconnect === 'function') {
       observer.disconnect();
     }
+    if (slideChangeObserver && typeof slideChangeObserver.disconnect === 'function') {
+      slideChangeObserver.disconnect();
+    }
 
     observer = null;
+    slideChangeObserver = null;
+  }
+
+  // Re-run the Kinetic word/char cascade on a title that has already been
+  // revealed. Used when a carousel slide comes into view a second time
+  // (Slick doesn't mutate the DOM on slide change, so IntersectionObserver
+  // never re-fires). The sequence:
+  //   1. Add --replaying (disables word/char transitions)
+  //   2. Remove --revealed → words/chars snap to pre-state with no animation
+  //   3. Force a reflow so the snap is committed
+  //   4. Remove --replaying (re-enables transitions)
+  //   5. Next frame pair, re-add --revealed → cascade runs forward
+  function replayKineticTitle(el) {
+    if (!el || !el.classList) {
+      return;
+    }
+
+    // If the title was never revealed in the first place, let the normal
+    // IntersectionObserver flow handle it instead — no replay needed.
+    if (!el.classList.contains('anima-intro-target--revealed')) {
+      return;
+    }
+
+    el.classList.add('anima-intro-target--replaying');
+    el.classList.remove('anima-intro-target--revealed');
+
+    // Force reflow so the pre-state snap is committed before we re-enable
+    // transitions and trigger the forward cascade.
+    if (typeof el.getBoundingClientRect === 'function') {
+      el.getBoundingClientRect();
+    }
+
+    el.classList.remove('anima-intro-target--replaying');
+
+    if (win && typeof win.requestAnimationFrame === 'function') {
+      win.requestAnimationFrame(() => {
+        win.requestAnimationFrame(() => {
+          el.classList.add('anima-intro-target--revealed');
+        });
+      });
+    } else {
+      el.classList.add('anima-intro-target--revealed');
+    }
+  }
+
+  // Watch the document for Slick carousels changing slides. When a slide
+  // gains the `slick-active` class (i.e., it's newly in the carousel's
+  // visible set), replay any Kinetic titles inside it. The observer is
+  // body-wide so it works regardless of Slick-init order relative to the
+  // runtime, and it handles dynamic carousels (e.g., those initialized
+  // after a page transition).
+  function observeSlickSlideChanges() {
+    if (!win || typeof win.MutationObserver !== 'function') {
+      return null;
+    }
+    if (!doc || !doc.body) {
+      return null;
+    }
+    if (getActiveAnimationStyle() !== 'kinetic') {
+      return null;
+    }
+
+    const obs = new win.MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') {
+          return;
+        }
+
+        const slide = mutation.target;
+        if (!slide || !slide.classList || !slide.classList.contains('slick-slide')) {
+          return;
+        }
+
+        const oldClass = mutation.oldValue || '';
+        const wasActive = oldClass.split(/\s+/).indexOf('slick-active') !== -1;
+        const isActive = slide.classList.contains('slick-active');
+
+        if (wasActive || !isActive) {
+          return; // not a freshly-activated slide
+        }
+
+        if (typeof slide.querySelectorAll !== 'function') {
+          return;
+        }
+
+        const titles = slide.querySelectorAll('.anima-intro-target--role-title');
+        titles.forEach(replayKineticTitle);
+      });
+    });
+
+    obs.observe(doc.body, {
+      attributes: true,
+      attributeFilter: ['class'],
+      attributeOldValue: true,
+      subtree: true,
+    });
+
+    return obs;
   }
 
   function ensureObserver() {
@@ -503,6 +605,12 @@ function createIntroAnimationsRuntime({
       if (extraTitles && extraTitles.length) {
         targets = primaryTargets.concat(extraTitles);
       }
+
+      // Also start watching for Slick slide changes so Kinetic titles
+      // inside a carousel re-play their word-curtain each time a slide
+      // becomes newly active (IntersectionObserver doesn't re-fire
+      // because Slick uses CSS transform, not DOM mutation).
+      slideChangeObserver = observeSlickSlideChanges();
     }
 
     targets.forEach((target) => {
@@ -551,6 +659,7 @@ function createIntroAnimationsRuntime({
     // Exposed for tests and for external consumers who want to pre-split
     // server-rendered headings (e.g. a future critical-path enhancement).
     splitHeadingForCurtain,
+    replayKineticTitle,
   };
 }
 
