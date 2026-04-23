@@ -122,6 +122,7 @@ function createDomTarget({tagName = 'H2', matchesSelectors = [], text = ''} = {}
           if (!node) return;
           for (const child of node.children || []) {
             if (sel === '.word' && child.className === 'word') results.push(child);
+            if (sel === '.char' && child.className === 'char') results.push(child);
             if (sel === '.line' && child.className === 'line') results.push(child);
             visit(child);
           }
@@ -176,6 +177,7 @@ function createDomTarget({tagName = 'H2', matchesSelectors = [], text = ''} = {}
         if (!node) return;
         for (const child of node.children || []) {
           if (sel === '.word' && child.className === 'word') results.push(child);
+            if (sel === '.char' && child.className === 'char') results.push(child);
           if (sel === '.line' && child.className === 'line') results.push(child);
           visit(child);
         }
@@ -241,6 +243,7 @@ function createDocStub({kinetic = false, matchesReducedMotion = false} = {}) {
           const results = [];
           for (const c of this.children) {
             if (sel === '.word' && c.className === 'word') results.push(c);
+            if (sel === '.char' && c.className === 'char') results.push(c);
             if (sel === '.line' && c.className === 'line') results.push(c);
           }
           return results;
@@ -425,6 +428,32 @@ test('splitHeadingForCurtain skips headings with mixed inline markup', () => {
 
   assert.equal(target.querySelectorAll('.word').length, 0,
     'headings with mixed inline markup should not be split');
+});
+
+test('splitHeadingForCurtain splits a single-word heading into characters', () => {
+  const target = createDomTarget({tagName: 'H3', matchesSelectors: ['h3'], text: 'Newsletter'});
+
+  const runtime = createIntroAnimationsRuntime({
+    window: createWindowStub(),
+    document: createDocStub({kinetic: true}),
+    collectTargets: () => [target],
+    createObserver() { return {observe() {}, unobserve() {}, disconnect() {}}; },
+  });
+
+  runtime.splitHeadingForCurtain(target);
+
+  const words = target.querySelectorAll('.word');
+  const chars = target.querySelectorAll('.char');
+
+  assert.equal(words.length, 0, 'single-word headings should not produce .word spans');
+  assert.equal(chars.length, 'Newsletter'.length, 'should produce one .char span per character');
+
+  // Verify per-char index and line index wiring on first and last char.
+  const first = chars[0];
+  const last = chars[chars.length - 1];
+  assert.equal(first.style.getPropertyValue('--char-index'), '0');
+  assert.equal(first.style.getPropertyValue('--line-index'), '0');
+  assert.equal(last.style.getPropertyValue('--char-index'), String('Newsletter'.length - 1));
 });
 
 test('splitHeadingForCurtain splits INSIDE a single wrapping anchor (card-title pattern)', () => {

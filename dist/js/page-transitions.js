@@ -201,6 +201,60 @@ function createIntroAnimationsRuntime({
     return null;
   }
 
+  // Char-split helper used for single-word titles (a word-level cascade on a
+  // one-word heading renders as a single pop, which loses the drama). Each
+  // character becomes a <span class="char"> with --char-index (per-line) and
+  // --line-index (global). Line wrapping is measured via offsetTop so very
+  // long single "words" that wrap still get per-line clip-masks.
+  function splitTextIntoChars(splitRoot, word) {
+    const chars = Array.from(word); // Unicode-aware iteration
+
+    if (chars.length === 0) {
+      return;
+    }
+    const charSpans = chars.map(ch => {
+      const span = doc.createElement('span');
+      span.className = 'char';
+      span.textContent = ch;
+      return span;
+    });
+
+    // Pass 1: flat layout so the browser decides where the word wraps.
+    splitRoot.textContent = '';
+    charSpans.forEach(span => splitRoot.appendChild(span));
+    if (typeof splitRoot.getBoundingClientRect === 'function') {
+      splitRoot.getBoundingClientRect();
+    }
+    const charsByTop = new Map();
+    charSpans.forEach(span => {
+      const top = typeof span.offsetTop === 'number' ? span.offsetTop : 0;
+      if (!charsByTop.has(top)) {
+        charsByTop.set(top, []);
+      }
+      charsByTop.get(top).push(span);
+    });
+
+    // Pass 2: rewrap each visual line in its own <span class="line">.
+    const lineTops = [...charsByTop.keys()].sort((a, b) => a - b);
+    splitRoot.textContent = '';
+    lineTops.forEach((top, lineIndex) => {
+      const lineSpan = doc.createElement('span');
+      lineSpan.className = 'line';
+      if (lineSpan.style && typeof lineSpan.style.setProperty === 'function') {
+        lineSpan.style.setProperty('--line-index', String(lineIndex));
+      }
+      const lineChars = charsByTop.get(top);
+      lineChars.forEach((charSpan, charIndex) => {
+        if (charSpan.style && typeof charSpan.style.setProperty === 'function') {
+          charSpan.style.setProperty('--char-index', String(charIndex));
+          charSpan.style.setProperty('--line-index', String(lineIndex));
+        }
+        lineSpan.appendChild(charSpan);
+      });
+      splitRoot.appendChild(lineSpan);
+    });
+  }
+
   // Split a heading into per-line <span class="line"> containers whose
   // children are <span class="word"> with --word-index (per-line) and
   // --line-index (global). Mirrors the splitting.js behavior used on
@@ -233,6 +287,14 @@ function createIntroAnimationsRuntime({
     }
     const words = text.split(/\s+/).filter(Boolean);
     if (words.length === 0) {
+      return;
+    }
+
+    // Single-word titles: split into characters instead of words so the
+    // cascade shows a rising letter sequence. Otherwise a one-word heading
+    // like "Newsletter" would render as a single block pop with no stagger.
+    if (words.length === 1) {
+      splitTextIntoChars(splitRoot, words[0]);
       return;
     }
     const wordSpans = words.map(word => {

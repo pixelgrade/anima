@@ -29,14 +29,18 @@ body.has-intro-animations--slide {
   --anima-intro-delay-window: 0.6s;
 }
 
-// Kinetic: non-title targets slide in; titles use a per-word curtain rise.
-// The word/line cascade is driven entirely by CSS calc() — the runtime only
-// has to inject .line/.word spans with --line-index and --word-index.
+// Kinetic: non-title targets slide in; titles use a per-word curtain rise,
+// or a per-char curtain rise when the title is a single word (so even a
+// "Newsletter" heading gets a cascaded reveal instead of a single pop).
+// The cascade is driven entirely by CSS calc() — the runtime only has to
+// inject .line/.word (or .line/.char) spans with --line-index and either
+// --word-index or --char-index.
 body.has-intro-animations--kinetic {
   --anima-intro-easing: cubic-bezier(0.19, 1, 0.22, 1);
-  --anima-intro-delay-window: 1.0s; // longer window so the word cascade has room
+  --anima-intro-delay-window: 1.0s; // longer window so the cascade has room
   --anima-intro-word-stagger: 55ms;
   --anima-intro-line-stagger: 140ms;
+  --anima-intro-char-stagger: 30ms; // chars cascade faster than words
 }
 
 body.has-intro-animations--fade.has-intro-animations--slow {
@@ -79,18 +83,21 @@ body.has-intro-animations--kinetic.has-intro-animations--slow {
   --anima-intro-duration: 0.80s;
   --anima-intro-word-stagger: 70ms;
   --anima-intro-line-stagger: 160ms;
+  --anima-intro-char-stagger: 38ms;
 }
 
 body.has-intro-animations--kinetic.has-intro-animations--medium {
   --anima-intro-duration: 0.65s;
   --anima-intro-word-stagger: 55ms;
   --anima-intro-line-stagger: 140ms;
+  --anima-intro-char-stagger: 30ms;
 }
 
 body.has-intro-animations--kinetic.has-intro-animations--fast {
   --anima-intro-duration: 0.50s;
   --anima-intro-word-stagger: 40ms;
   --anima-intro-line-stagger: 110ms;
+  --anima-intro-char-stagger: 22ms;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -157,7 +164,8 @@ body.has-intro-animations--kinetic.has-intro-animations--fast {
         display: block;
         overflow: hidden; // masks the pre-state translateY(100%)
       }
-      .word {
+      .word,
+      .char {
         display: inline-block;
         white-space: pre;
         opacity: 0;
@@ -166,14 +174,23 @@ body.has-intro-animations--kinetic.has-intro-animations--fast {
         transition:
           transform var(--anima-intro-duration) var(--anima-intro-easing),
           opacity var(--anima-intro-duration) var(--anima-intro-easing);
+        will-change: transform, opacity;
+      }
+      .word {
         transition-delay: calc(
           var(--line-index, 0) * var(--anima-intro-line-stagger, 140ms) +
           var(--word-index, 0) * var(--anima-intro-word-stagger, 55ms)
         );
-        will-change: transform, opacity;
+      }
+      .char {
+        transition-delay: calc(
+          var(--line-index, 0) * var(--anima-intro-line-stagger, 140ms) +
+          var(--char-index, 0) * var(--anima-intro-char-stagger, 30ms)
+        );
       }
     }
-    .anima-intro-target--role-title.anima-intro-target--revealed .word {
+    .anima-intro-target--role-title.anima-intro-target--revealed .word,
+    .anima-intro-target--role-title.anima-intro-target--revealed .char {
       opacity: 1;
       transform: translateY(0) scaleY(1);
     }
@@ -184,7 +201,8 @@ body.has-intro-animations--kinetic.has-intro-animations--fast {
   .anima-intro-target,
   .anima-intro-target--pending,
   .anima-intro-target--revealed,
-  .anima-intro-target .word {
+  .anima-intro-target .word,
+  .anima-intro-target .char {
     opacity: 1 !important;
     visibility: visible !important;
     transform: none !important;
