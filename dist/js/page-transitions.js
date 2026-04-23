@@ -602,6 +602,7 @@ function createIntroAnimationsRuntime({
   // three common heading shapes:
   //   <h2>Title</h2>                      — split inside the heading
   //   <h2><a>Title</a></h2>               — split inside the anchor (card titles)
+  //   <h2><a><b>Rich</b> Title</a></h2>   — skip to preserve inline markup
   //   <h2>Mixed <em>inline</em> stuff</h2> — skip (returns null)
   function pickSplitRoot(el) {
     if (!el || typeof el.childElementCount !== 'number') {
@@ -621,7 +622,7 @@ function createIntroAnimationsRuntime({
     if (el.childElementCount === 1) {
       const only = el.firstElementChild;
       const innerText = only && typeof only.textContent === 'string' ? only.textContent.trim() : '';
-      if (only && innerText === outerText) {
+      if (only && innerText === outerText && only.childElementCount === 0) {
         return only;
       }
     }
@@ -692,8 +693,8 @@ function createIntroAnimationsRuntime({
   // Safeguards:
   //  - Skip if the element already has split children (re-entrancy / SPA).
   //  - Skip if the heading contains mixed inline markup we can't handle
-  //    safely (pickSplitRoot returns null). Single-anchor wrappers around
-  //    the full title text ARE handled — we split inside the anchor.
+  //    safely (pickSplitRoot returns null). Text-only single-anchor wrappers
+  //    around the full title text ARE handled — we split inside the anchor.
   function splitHeadingForCurtain(el) {
     if (!el || typeof el.querySelector !== 'function') {
       return;

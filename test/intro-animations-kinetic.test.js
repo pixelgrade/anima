@@ -490,6 +490,38 @@ test('splitHeadingForCurtain splits INSIDE a single wrapping anchor (card-title 
     'every word span should be inside the anchor, not the heading');
 });
 
+test('splitHeadingForCurtain preserves inline markup inside a single wrapping anchor', () => {
+  // Rich card title pattern: <h3><a><b>The List:</b> Pascal</a></h3>.
+  // Splitting this by assigning textContent would flatten the <b> markup and
+  // remove the title weight/style authored by the block content.
+  const anchorText = 'The List: Pascal';
+  const anchor = createDomTarget({tagName: 'A', matchesSelectors: [], text: anchorText});
+  const bold = createDomTarget({tagName: 'B', matchesSelectors: [], text: 'The List:'});
+  anchor.children.push(bold);
+  anchor.childNodes.push(bold);
+  anchor.firstElementChild = bold;
+  bold.parentNode = anchor;
+
+  const heading = createDomTarget({tagName: 'H3', matchesSelectors: ['h3'], text: anchorText});
+  heading.children.push(anchor);
+  heading.childNodes.push(anchor);
+  heading.firstElementChild = anchor;
+
+  const runtime = createIntroAnimationsRuntime({
+    window: createWindowStub(),
+    document: createDocStub({kinetic: true}),
+    collectTargets: () => [heading],
+    createObserver() { return {observe() {}, unobserve() {}, disconnect() {}}; },
+  });
+
+  runtime.splitHeadingForCurtain(heading);
+
+  assert.equal(anchor.querySelectorAll('.word').length, 0,
+    'rich inline linked titles should not be split into plain word spans');
+  assert.equal(anchor.children[0], bold,
+    'the original inline markup should be preserved');
+});
+
 // ---------- Re-init after page transition ----------
 
 // ---------- Nested title collection (Kinetic extension) ----------
