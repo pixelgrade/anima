@@ -3,6 +3,7 @@ const {
   collectKineticTitleTargets,
 } = require('./targeting.js');
 const { createRevealChoreographer } = require('./choreographer.js');
+const { isInsideSingleItemSlickCarousel } = require('./integrations/slick-gate.js');
 
 const REVEAL_ZONE_TOP_RATIO = 0.82;
 const DELAY_WINDOW_BY_STYLE = {
@@ -544,6 +545,18 @@ function createIntroAnimationsRuntime({
         }
 
         if (typeof slide.querySelectorAll !== 'function') {
+          return;
+        }
+
+        // Only replay the title cascade when the slide belongs to a
+        // SINGLE-item carousel (fade hero, full-width slide-wipe). On
+        // multi-item carousels — variableWidth galleries, centerMode,
+        // slidesToShow > 1 — a slide becoming "active" is just a
+        // gallery scroll, nothing is taking over the viewport, and
+        // replaying the newly-focused title's word-curtain reads as a
+        // glitch. The slick-gate integration tags each carousel as
+        // 'single' or 'multi' during attach; we trust that tag here.
+        if (!isInsideSingleItemSlickCarousel(slide)) {
           return;
         }
 

@@ -9,6 +9,9 @@ const {
   attachSlickGate,
   getSlickGateName,
   assignCarouselGateName,
+  isInsideSingleItemSlickCarousel,
+  classifySlickCarousel,
+  KIND_ATTRIBUTE,
 } = require('../src/js/components/intro-animations/integrations/slick-gate.js');
 
 // Fake window that records addEventListener + dispatches synchronously.
@@ -155,6 +158,17 @@ function createFakejQuery(carouselList) {
         n.dataStore[key] = value;
         return this;
       },
+      // Stubs Slick's jQuery plugin interface. The carousel node is expected
+      // to carry a _slickOptions object when Slick-initialized behavior is
+      // needed in the test.
+      slick(methodName) {
+        if (nodes.length === 0) return null;
+        const n = nodes[0];
+        if (methodName === 'getSlick') {
+          return n._slickOptions ? { options: n._slickOptions } : null;
+        }
+        return null;
+      },
     };
   }
 
@@ -166,13 +180,19 @@ function createFakejQuery(carouselList) {
   };
 }
 
-function createCarousel() {
+function createCarousel(slickOptions = { slidesToShow: 1, fade: true }) {
   const attrs = {};
   return {
-    getAttribute: (k) => attrs[k] || null,
+    getAttribute: (k) => (k in attrs ? attrs[k] : null),
     setAttribute: (k, v) => { attrs[k] = v; },
     events: {},
     dataStore: {},
+    _slickOptions: slickOptions,
+    // closest() for isInsideSingleItemSlickCarousel tests — returns self
+    // when asked for the carousel selector.
+    closest(sel) {
+      return sel.indexOf('slick-slider') !== -1 ? this : null;
+    },
   };
 }
 
@@ -246,4 +266,191 @@ test('attachSlickGate rescans after anima:page-transition-complete', () => {
     (newCarousel.events.beforeChange || []).length > 0,
     'newly-delivered carousel should have gate listeners attached'
   );
+});
+
+// ---------- classifySlickCarousel ----------
+
+test('classifySlickCarousel: fade → single', () => {
+  const carousel = createCarousel({ fade: true, slidesToShow: 1 });
+  const $ = createFakejQuery([carousel]);
+  assert.equal(classifySlickCarousel(carousel, $), 'single');
+});
+
+test('classifySlickCarousel: variableWidth → multi', () => {
+  const carousel = createCarousel({ variableWidth: true, slidesToShow: 1 });
+  const $ = createFakejQuery([carousel]);
+  assert.equal(classifySlickCarousel(carousel, $), 'multi');
+});
+
+test('classifySlickCarousel: centerMode → multi', () => {
+  const carousel = createCarousel({ centerMode: true, slidesToShow: 1 });
+  const $ = createFakejQuery([carousel]);
+  assert.equal(classifySlickCarousel(carousel, $), 'multi');
+});
+
+test('classifySlickCarousel: slidesToShow > 1 → multi', () => {
+  const carousel = createCarousel({ slidesToShow: 3 });
+  const $ = createFakejQuery([carousel]);
+  assert.equal(classifySlickCarousel(carousel, $), 'multi');
+});
+
+test('classifySlickCarousel: plain single slide (slidesToShow=1, no fancy flags) → single', () => {
+  const carousel = createCarousel({ slidesToShow: 1 });
+  const $ = createFakejQuery([carousel]);
+  assert.equal(classifySlickCarousel(carousel, $), 'single');
+});
+
+test('classifySlickCarousel: no Slick instance → multi (safe default, no replay)', () => {
+  const carousel = createCarousel();
+  delete carousel._slickOptions; // no Slick API available
+  const $ = createFakejQuery([carousel]);
+  assert.equal(classifySlickCarousel(carousel, $), 'multi');
+});
+
+// ---------- attachToCarousel behavior per kind ----------
+
+test('attachSlickGate wires gate listeners for SINGLE-item carousels (fade hero)', () => {
+  const win = createFakeWindow();
+  const carousel = createCarousel({ fade: true, slidesToShow: 1 });
+  const carouselList = [carousel];
+  const $ = createFakejQuery(carouselList);
+  const ch = createRecordingChoreographer();
+
+  attachSlickGate({
+    window: win,
+    document: { querySelectorAll: () => [carousel] },
+    jQuery: $,
+    choreographer: ch,
+    settleMs: 150,
+  });
+
+  assert.equal(carousel.getAttribute(KIND_ATTRIBUTE), 'single');
+  assert.ok((carousel.events.beforeChange || []).length > 0,
+    'single carousel gets beforeChange listener');
+  assert.ok((carousel.events.afterChange || []).length > 0,
+    'single carousel gets afterChange listener');
+});
+
+test('attachSlickGate does NOT wire gate listeners for MULTI-item carousels', () => {
+  const win = createFakeWindow();
+  const carousel = createCarousel({ variableWidth: true, slidesToShow: 1 });
+  const carouselList = [carousel];
+  const $ = createFakejQuery(carouselList);
+  const ch = createRecordingChoreographer();
+
+  attachSlickGate({
+    window: win,
+    document: { querySelectorAll: () => [carousel] },
+    jQuery: $,
+    choreographer: ch,
+  });
+
+  assert.equal(carousel.getAttribute(KIND_ATTRIBUTE), 'multi',
+    'kind attribute should be tagged for downstream consumers');
+  assert.equal((carousel.events.beforeChange || []).length, 0,
+    'multi carousel must NOT get beforeChange listener (it would gate reveals that should never gate)');
+  assert.equal((carousel.events.afterChange || []).length, 0);
+});
+
+// ---------- isInsideSingleItemSlickCarousel ----------
+
+test('isInsideSingleItemSlickCarousel returns true only for nodes inside a single-tagged carousel', () => {
+  const singleCarousel = createCarousel();
+  singleCarousel.setAttribute(KIND_ATTRIBUTE, 'single');
+  const multiCarousel = createCarousel();
+  multiCarousel.setAttribute(KIND_ATTRIBUTE, 'multi');
+
+  const inSingle = {
+    closest(sel) { return sel.indexOf('slick-slider') !== -1 ? singleCarousel : null; },
+  };
+  const inMulti = {
+    closest(sel) { return sel.indexOf('slick-slider') !== -1 ? multiCarousel : null; },
+  };
+  const outside = { closest() { return null; } };
+
+  assert.equal(isInsideSingleItemSlickCarousel(inSingle), true);
+  assert.equal(isInsideSingleItemSlickCarousel(inMulti), false);
+  assert.equal(isInsideSingleItemSlickCarousel(outside), false);
+  assert.equal(isInsideSingleItemSlickCarousel(null), false);
+});
+
+// ---------- getSlickGateName honors kind ----------
+
+test('getSlickGateName returns null for nodes inside a multi-item carousel', () => {
+  const carousel = createCarousel();
+  carousel.setAttribute(KIND_ATTRIBUTE, 'multi');
+  const descendant = {
+    closest(sel) { return sel.indexOf('slick-slider') !== -1 ? carousel : null; },
+  };
+  assert.equal(getSlickGateName(descendant), null,
+    'multi carousels do not have a gate — their reveals must not wait on a slick:{id} gate');
+});
+
+test('getSlickGateName returns a slick:{id} name for nodes inside a single-item carousel', () => {
+  const carousel = createCarousel();
+  carousel.setAttribute(KIND_ATTRIBUTE, 'single');
+  const descendant = {
+    closest(sel) { return sel.indexOf('slick-slider') !== -1 ? carousel : null; },
+  };
+  const name = getSlickGateName(descendant);
+  assert.ok(typeof name === 'string' && name.startsWith('slick:'),
+    'single carousels emit a slick:{id} gate name');
+});
+
+// ---------- init-race MutationObserver ----------
+
+test('attachSlickGate wires carousels that become .slick-initialized AFTER attach', () => {
+  // Simulates the common race: attachSlickGate runs before Slick initializes.
+  // When Slick later adds .slick-initialized to a carousel, our MutationObserver
+  // should catch the class change and wire the gate.
+
+  const events = [];
+  let mutationCallback = null;
+
+  const fakeWindow = {
+    addEventListener() {},
+    removeEventListener() {},
+    requestAnimationFrame(fn) { fn(); return 1; },
+    MutationObserver: class {
+      constructor(cb) { mutationCallback = cb; }
+      observe() {}
+      disconnect() {}
+    },
+  };
+
+  const carousel = createCarousel({ fade: true, slidesToShow: 1 });
+  // At attach time, the carousel is NOT yet slick-initialized — scan finds nothing.
+  const carouselList = [];
+  const $ = createFakejQuery(carouselList);
+  const ch = createRecordingChoreographer();
+
+  attachSlickGate({
+    window: fakeWindow,
+    document: { body: {}, querySelectorAll: () => carouselList },
+    jQuery: $,
+    choreographer: ch,
+  });
+
+  // No gate yet.
+  assert.equal((carousel.events.beforeChange || []).length, 0);
+
+  // Now Slick finishes init: our MutationObserver sees the class change.
+  carouselList.push(carousel);
+  // Make the carousel appear as a slick-initialized slick-slider for the observer.
+  carousel.classList = {
+    contains(cls) {
+      return cls === 'slick-initialized' || cls === 'slick-slider';
+    },
+  };
+
+  // Fire the mutation: class was changed on our carousel.
+  mutationCallback([{
+    type: 'attributes',
+    attributeName: 'class',
+    target: carousel,
+  }]);
+
+  // Gate should now be wired.
+  assert.ok((carousel.events.beforeChange || []).length > 0,
+    'late-initialized carousel should have gate listeners attached via the MutationObserver');
 });
