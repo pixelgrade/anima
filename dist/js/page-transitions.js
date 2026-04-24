@@ -3229,6 +3229,10 @@ const {
 // (which causes duplicate elements and toggled handlers canceling each other).
 let freshlyLoadedScriptIds = new Set();
 const INLINE_SYNC_KEY_ATTR = 'data-anima-inline-sync-key';
+function notifyPageTransitionComplete() {
+  external_jQuery_default()(document).trigger('anima:page-transition-complete');
+  window.dispatchEvent(new CustomEvent('anima:page-transition-complete'));
+}
 
 /**
  * Sync body classes from the new page's HTML response.
@@ -3806,10 +3810,6 @@ function reinitComponents() {
         external_jQuery_default()(document.body).trigger('wc_fragment_refresh');
       }
 
-      // Fire completion events only after the frontend scripts rebuilt the new page.
-      external_jQuery_default()(document).trigger('anima:page-transition-complete');
-      window.dispatchEvent(new CustomEvent('anima:page-transition-complete'));
-
       // Dispatch resize + scroll events for layout-dependent JS.
       // Resize: recalculates layout (Hero, GlobalService).
       // Scroll: triggers Hero.update() and bully's rAF loop to process new elements.
@@ -4049,7 +4049,11 @@ const {
  */
 function timelinePromise(timeline) {
   return new Promise(resolve => {
+    const existingOnComplete = timeline.eventCallback('onComplete');
     timeline.eventCallback('onComplete', () => {
+      if (typeof existingOnComplete === 'function') {
+        existingOnComplete.call(timeline);
+      }
       resolve(true);
     });
   });
@@ -4113,7 +4117,10 @@ function createBorderInTimeline() {
     }
   });
   timeline.to($border[0], {
-    borderWidth: 0,
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
     duration: 0.6,
     ease: 'quart.inOut'
   });
@@ -4161,8 +4168,12 @@ function performEnter({
         reinitComponents().then(() => {
           trackPageview();
           const timeline = createBorderInTimeline();
+          const timelineDone = timelinePromise(timeline);
           timeline.play();
-          timelinePromise(timeline).then(resolve);
+          timelineDone.then(() => {
+            notifyPageTransitionComplete();
+            resolve();
+          });
         });
       });
     });
@@ -4699,7 +4710,10 @@ function performSlideWipeEnter({
       requestAnimationFrame(() => {
         reinitComponents().then(() => {
           trackPageview();
-          hide().then(resolve);
+          hide().then(() => {
+            notifyPageTransitionComplete();
+            resolve();
+          });
         });
       });
     });

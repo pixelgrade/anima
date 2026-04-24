@@ -13,6 +13,11 @@ export { syncDocumentTitle };
 let freshlyLoadedScriptIds = new Set();
 const INLINE_SYNC_KEY_ATTR = 'data-anima-inline-sync-key';
 
+export function notifyPageTransitionComplete() {
+  $( document ).trigger( 'anima:page-transition-complete' );
+  window.dispatchEvent( new CustomEvent( 'anima:page-transition-complete' ) );
+}
+
 /**
  * Sync body classes from the new page's HTML response.
  * Uses the same NOTBODY trick as Pile to parse <body> attributes from raw HTML.
@@ -645,10 +650,6 @@ export function reinitComponents() {
       if ( typeof wc_cart_fragments_params !== 'undefined' ) {
         $( document.body ).trigger( 'wc_fragment_refresh' );
       }
-
-      // Fire completion events only after the frontend scripts rebuilt the new page.
-      $( document ).trigger( 'anima:page-transition-complete' );
-      window.dispatchEvent( new CustomEvent( 'anima:page-transition-complete' ) );
 
       // Dispatch resize + scroll events for layout-dependent JS.
       // Resize: recalculates layout (Hero, GlobalService).

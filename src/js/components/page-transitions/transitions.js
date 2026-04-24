@@ -6,6 +6,7 @@ import {
   syncHeaderColorSignal,
   reinitComponents,
   cleanupBeforeTransition,
+  notifyPageTransitionComplete,
   trackPageview,
 } from './utils';
 import { syncAdminBar } from './admin-bar';
@@ -17,7 +18,13 @@ const { getTransitionColorFromTrigger } = require( './transition-color' );
  */
 function timelinePromise( timeline ) {
   return new Promise( ( resolve ) => {
+    const existingOnComplete = timeline.eventCallback( 'onComplete' );
+
     timeline.eventCallback( 'onComplete', () => {
+      if ( typeof existingOnComplete === 'function' ) {
+        existingOnComplete.call( timeline );
+      }
+
       resolve( true );
     } );
   } );
@@ -83,7 +90,10 @@ function createBorderInTimeline() {
   } );
 
   timeline.to( $border[ 0 ], {
-    borderWidth: 0,
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
     duration: 0.6,
     ease: 'quart.inOut',
   } );
@@ -131,9 +141,14 @@ function performEnter( { next } ) {
           trackPageview();
 
           const timeline = createBorderInTimeline();
+          const timelineDone = timelinePromise( timeline );
+
           timeline.play();
 
-          timelinePromise( timeline ).then( resolve );
+          timelineDone.then( () => {
+            notifyPageTransitionComplete();
+            resolve();
+          } );
         } );
       } );
     } );

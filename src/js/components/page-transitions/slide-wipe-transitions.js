@@ -7,6 +7,7 @@ import {
   syncHeaderColorSignal,
   reinitComponents,
   cleanupBeforeTransition,
+  notifyPageTransitionComplete,
   trackPageview,
 } from './utils';
 import { syncAdminBar } from './admin-bar';
@@ -31,7 +32,10 @@ function performSlideWipeEnter( { next } ) {
         reinitComponents().then( () => {
           trackPageview();
 
-          SlideWipeLoader.hide().then( resolve );
+          SlideWipeLoader.hide().then( () => {
+            notifyPageTransitionComplete();
+            resolve();
+          } );
         } );
       } );
     } );
