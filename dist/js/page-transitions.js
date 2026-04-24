@@ -3174,6 +3174,16 @@ class App {
     });
   }
   initializeHero() {
+    // When the Intro Animations feature is active, OUR reveal system owns the
+    // hero's intro/outro. Letting the legacy Hero GSAP timeline run alongside
+    // it would tween inline opacity/transform on the same elements we manage
+    // via --pending / --revealed, which out-specifies our CSS and leaves
+    // slide content stuck in the timeline's outro state.
+    if (document.body && document.body.classList && document.body.classList.contains('has-intro-animations')) {
+      this.HeroCollection = [];
+      this.firstHero = null;
+      return;
+    }
     const {
       NEW_HERO_SELECTOR: newHeroesSelector,
       OLD_HERO_SELECTOR: oldHeroesSelector,

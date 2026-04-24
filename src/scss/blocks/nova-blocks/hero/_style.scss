@@ -8,24 +8,33 @@
 .novablocks-hero__inner-container,
 .nb-supernova--card-layout-stacked.nb-supernova--1-columns.nb-supernova--align-full:not(.nb-contextual-post-card) .nb-supernova-item__inner-container {
 
-    > .c-headline {
+    // Pre-hide rules exist to support the legacy Hero GSAP timeline (hero.js),
+    // which tweens opacity from 0 → 1 as its intro. When intro-animations is
+    // active, that legacy timeline is disabled and OUR system owns visibility
+    // via the --pending / --revealed classes — keeping these pre-hide rules
+    // on would out-specify those classes and leave the title + description
+    // permanently invisible.
+    body:not(.has-intro-animations) & {
 
-        .c-headline__primary,
-        .c-headline__secondary {
+        > .c-headline {
+
+            .c-headline__primary,
+            .c-headline__secondary {
+                opacity: 0;
+            }
+        }
+
+        > .c-headline + .c-headline {
+
+            .c-headline__primary,
+            .c-headline__secondary {
+                opacity: 1;
+            }
+        }
+
+        > :not(.c-headline):not(.nb-scroll-indicator) {
             opacity: 0;
         }
-    }
-
-    > .c-headline + .c-headline {
-
-        .c-headline__primary,
-        .c-headline__secondary {
-            opacity: 1;
-        }
-    }
-
-    > :not(.c-headline):not(.nb-scroll-indicator) {
-        opacity: 0;
     }
 
     .c-separator__symbol {
