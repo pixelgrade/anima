@@ -590,6 +590,7 @@ const DELAY_WINDOW_BY_STYLE = {
   // feel like one continuous reveal.
   kinetic: 1000
 };
+const KINETIC_SLIDE_CONTENT_DELAY_WINDOW = 600;
 
 // Selectors that identify a "title" role target (heading blocks, post titles).
 // Used by the role classifier below. Anything else gets role 'other'.
@@ -895,11 +896,11 @@ function createIntroAnimationsRuntime({
       splitRoot.appendChild(lineSpan);
     });
   }
-  function applyRevealDelay(target, index = 0, totalTargets = 1) {
+  function applyRevealDelay(target, index = 0, totalTargets = 1, delayWindowMs = getDelayWindowMs()) {
     if (!target || !target.style || typeof target.style.setProperty !== 'function') {
       return;
     }
-    const delay = totalTargets > 0 ? getDelayWindowMs() / totalTargets * index : 0;
+    const delay = totalTargets > 0 ? delayWindowMs / totalTargets * index : 0;
     target.style.setProperty('--anima-intro-delay', formatDelay(delay));
   }
   function revealTarget(target) {
@@ -1169,7 +1170,9 @@ function createIntroAnimationsRuntime({
             stageTarget(el);
           }
         });
-        revealTargets(slideContent);
+        revealTargets(slideContent, {
+          delayWindow: KINETIC_SLIDE_CONTENT_DELAY_WINDOW
+        });
       });
     });
     obs.observe(doc.body, {
@@ -1212,7 +1215,7 @@ function createIntroAnimationsRuntime({
     }
     const activeSlides = [...root.querySelectorAll(ACTIVE_SLICK_SLIDE_SELECTOR)].filter(slide => isInsideSingleItemSlickCarousel(slide));
     const slideTargets = activeSlides.flatMap(slide => collectSlideContentTargets(slide));
-    return appendUniqueTargets(existingTargets, slideTargets).filter(target => existingTargets.indexOf(target) === -1);
+    return appendUniqueTargets(existingTargets, slideTargets);
   }
   function ensureObserver() {
     if (observer || prefersReducedMotion() || !hasEnabledBodyClass() || typeof createObserver !== 'function') {
@@ -1286,14 +1289,15 @@ function createIntroAnimationsRuntime({
     }
     getChoreographer().requestReveal(target, options);
   }
-  function revealTargets(targets = []) {
+  function revealTargets(targets = [], options = {}) {
     const sortedTargets = sortBatchTargets(targets);
+    const delayWindowMs = typeof options.delayWindow === 'number' ? options.delayWindow : getDelayWindowMs();
     sortedTargets.forEach((target, index) => {
-      applyRevealDelay(target, index, sortedTargets.length);
+      applyRevealDelay(target, index, sortedTargets.length, delayWindowMs);
       requestTargetReveal(target);
     });
   }
-  function scheduleReveal(targets) {
+  function scheduleReveal(targets, options = {}) {
     if (!targets.length) {
       return;
     }
@@ -1301,7 +1305,7 @@ function createIntroAnimationsRuntime({
     // Route through the choreographer so any active gates hold these
     // reveals until ready. The choreographer fires onReveal (handleReveal),
     // which applies the rAF×2 pre-paint dance — no need for us to rAF first.
-    revealTargets(targets);
+    revealTargets(targets, options);
   }
   function initialize(root = doc) {
     if (!hasEnabledBodyClass() || !root || typeof collectTargets !== 'function') {
@@ -1309,8 +1313,10 @@ function createIntroAnimationsRuntime({
     }
     disconnect();
     const immediateTargets = [];
+    const immediateSlideTargets = [];
     const primaryTargets = collectTargets(root);
     let targets = primaryTargets;
+    let initialActiveSlideContent = [];
 
     // Kinetic extension: also animate title-role headings anywhere on the
     // page (card titles inside reveal roots, collection headings outside
@@ -1323,9 +1329,9 @@ function createIntroAnimationsRuntime({
       if (extraTitles && extraTitles.length) {
         targets = primaryTargets.concat(extraTitles);
       }
-      const activeSlideContent = collectInitialActiveSlideContentTargets(root, targets);
-      if (activeSlideContent.length) {
-        targets = targets.concat(activeSlideContent);
+      initialActiveSlideContent = collectInitialActiveSlideContentTargets(root, targets);
+      if (initialActiveSlideContent.length) {
+        targets = appendUniqueTargets(targets, initialActiveSlideContent);
       }
 
       // Also start watching for Slick slide changes so Kinetic titles
@@ -1339,7 +1345,11 @@ function createIntroAnimationsRuntime({
         return;
       }
       if (isInViewport(target)) {
-        immediateTargets.push(target);
+        if (initialActiveSlideContent.indexOf(target) !== -1) {
+          immediateSlideTargets.push(target);
+        } else {
+          immediateTargets.push(target);
+        }
         return;
       }
       const activeObserver = ensureObserver();
@@ -1348,6 +1358,9 @@ function createIntroAnimationsRuntime({
       }
     });
     scheduleReveal(immediateTargets);
+    scheduleReveal(immediateSlideTargets, {
+      delayWindow: KINETIC_SLIDE_CONTENT_DELAY_WINDOW
+    });
     return targets;
   }
   function bind() {
@@ -1388,7 +1401,8 @@ module.exports = {
   getRevealObserverOptions,
   classifyTargetRole,
   TITLE_ROLE_SELECTORS,
-  DELAY_WINDOW_BY_STYLE
+  DELAY_WINDOW_BY_STYLE,
+  KINETIC_SLIDE_CONTENT_DELAY_WINDOW
 };
 
 /***/ },

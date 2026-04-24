@@ -600,6 +600,12 @@ test('Kinetic initial load stages all content inside the active single-slide her
     'the active slide description should use the normal Kinetic content reveal');
   assert.equal(buttons.classList.contains('anima-intro-target--pending'), true,
     'the active slide CTA should be staged on initial load');
+  assert.equal(title.style.getPropertyValue('--anima-intro-delay'), '0ms',
+    'the slide title should start the slide-content batch');
+  assert.equal(description.style.getPropertyValue('--anima-intro-delay'), '200ms',
+    'the description should use the tighter slide-content delay window');
+  assert.equal(buttons.style.getPropertyValue('--anima-intro-delay'), '400ms',
+    'the CTA should stay in the same tighter slide-content batch');
 });
 
 test('Non-Kinetic styles DO NOT collect nested titles', () => {
