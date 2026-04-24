@@ -26,6 +26,37 @@ const TITLE_ROLE_SELECTORS = [
   '.wp-block-post-title',
 ];
 
+// Animatable content found inside a Slick slide. Used by the slide-change
+// observer to pre-hide and re-stagger the WHOLE slide on every change, not
+// just the title. Includes:
+//   - Anything already tagged as a tracked intro target.
+//   - Headings (covers Kinetic titles inside the slide).
+//   - Body text / excerpts / paragraphs.
+//   - Card meta (date, author, categories).
+//   - CTAs / button groups.
+// Anima's parallax hero (.nb-supernova-item--scrolling-effect-parallax) is
+// excluded from default reveal targeting, so its description/meta/buttons
+// are NOT picked up by collectRevealTargets — this list catches them so
+// they participate in the slide-change cascade.
+const SLIDE_CONTENT_SELECTORS = [
+  '.anima-intro-target',
+  'h1',
+  'h2',
+  'h3',
+  '.wp-block-heading',
+  '.wp-block-post-title',
+  '.nb-card__title',
+  '.nb-collection__title',
+  '.wp-block-paragraph',
+  '.wp-block-post-excerpt',
+  '.nb-card__description',
+  '.nb-card__meta',
+  '.wp-block-post-date',
+  '.wp-block-post-author',
+  '.wp-block-buttons',
+  '.nb-supernova-item__cta',
+].join(',');
+
 function classifyTargetRole(node) {
   if (!node || typeof node.matches !== 'function') {
     return 'other';
@@ -466,28 +497,56 @@ function createIntroAnimationsRuntime({
     // Its internal state has been reset by disconnect().
   }
 
-  // Snap an already-revealed title back to its pre-state *without* a
-  // visible transition. Used ahead of a Slick slide change so the Slick
-  // fade/slide plays over an empty title area — the choreographer's
-  // gated re-reveal then fires the word-curtain on the settled slide.
+  // Snap an already-revealed intro target back to its pre-state *without*
+  // a visible transition. Used ahead of a Slick slide change so the slide
+  // transition plays over a fully pre-hidden slide — title invisible,
+  // description invisible, buttons invisible, etc. — and the gated
+  // re-reveal then plays the staggered cascade on the settled slide.
   //
-  // Sequence (all synchronous):
-  //   1. Add --replaying (disables word/char transitions).
-  //   2. Remove --revealed (words snap to pre-state with no animation).
-  //   3. Force reflow so the snap is committed.
-  //   4. Remove --replaying (transitions re-enabled for the later reveal).
-  function snapTitleToPreState(el) {
+  // Two strategies depending on role:
+  //
+  // Title role (Kinetic word-curtain): the container is always opaque
+  // under Kinetic — it's the inner .word/.char spans that hide. Use
+  // --replaying to suppress THEIR transitions during the snap; the
+  // container itself doesn't transition.
+  //
+  // Other role (slide-up + fade-in): hide the container itself by
+  // putting it back at --pending. Use --staging to suppress its
+  // opacity/transform transition during the snap so it doesn't visibly
+  // animate backward to the pre-state.
+  function snapTargetToPreState(el) {
     if (!el || !el.classList) return;
     if (!el.classList.contains('anima-intro-target--revealed')) return;
 
-    el.classList.add('anima-intro-target--replaying');
+    if (el.classList.contains('anima-intro-target--role-title')) {
+      el.classList.add('anima-intro-target--replaying');
+      el.classList.remove('anima-intro-target--revealed');
+
+      if (typeof el.getBoundingClientRect === 'function') {
+        el.getBoundingClientRect();
+      }
+
+      el.classList.remove('anima-intro-target--replaying');
+      return;
+    }
+
+    // Non-title: snap the container itself back to --pending with
+    // transitions suppressed.
+    el.classList.add('anima-intro-target--staging');
+    el.classList.add('anima-intro-target--pending');
     el.classList.remove('anima-intro-target--revealed');
 
     if (typeof el.getBoundingClientRect === 'function') {
       el.getBoundingClientRect();
     }
 
-    el.classList.remove('anima-intro-target--replaying');
+    el.classList.remove('anima-intro-target--staging');
+  }
+
+  // Backward-compat alias kept for anything that imports the old name.
+  // Internally delegates to snapTargetToPreState which handles both roles.
+  function snapTitleToPreState(el) {
+    snapTargetToPreState(el);
   }
 
   // Re-run the Kinetic word/char cascade on a title that has already been
@@ -572,35 +631,72 @@ function createIntroAnimationsRuntime({
           return;
         }
 
-        // Only replay the title cascade when the slide belongs to a
-        // SINGLE-item carousel (fade hero, full-width slide-wipe). On
-        // multi-item carousels — variableWidth galleries, centerMode,
-        // slidesToShow > 1 — a slide becoming "active" is just a
-        // gallery scroll, nothing is taking over the viewport, and
-        // replaying the newly-focused title's word-curtain reads as a
-        // glitch. The slick-gate integration tags each carousel as
-        // 'single' or 'multi' during attach; we trust that tag here.
+        // Only replay when the slide belongs to a SINGLE-item carousel
+        // (fade hero, full-width slide-wipe). On multi-item carousels —
+        // variableWidth galleries, centerMode, slidesToShow > 1 — a
+        // slide becoming "active" is just a gallery scroll and replay
+        // reads as a glitch. The slick-gate integration tags each
+        // carousel as 'single' or 'multi' during attach.
         if (!isInsideSingleItemSlickCarousel(slide)) {
           return;
         }
 
-        const titles = slide.querySelectorAll('.anima-intro-target--role-title');
-        titles.forEach((title) => {
-          // Pre-hide synchronously at slick-active time. Without this the
-          // title sits visible (revealed from initial page load) through
-          // Slick's fade, then the gate-opened replay later snaps it away
-          // and re-animates — that "visible → snap invisible → cascade in"
-          // sequence reads as a glitch.
-          //
-          // By snapping to pre-state NOW (before Slick actually paints the
-          // fade), the crossfade plays over an empty title area. The
-          // choreographer's gate (closed at beforeChange) holds the reveal
-          // request until the slide settles; when it opens, handleReveal
-          // routes to the first-reveal path and the word-curtain plays on
-          // the already-in-place slide.
-          snapTitleToPreState(title);
-          requestTargetReveal(title);
+        if (typeof slide.querySelectorAll !== 'function') {
+          return;
+        }
+
+        // Snap EVERY animatable piece of content inside the slide —
+        // title, description, meta, buttons, etc. — to its pre-state
+        // synchronously, then queue staggered reveals through the gate.
+        //
+        // Two populations matter here:
+        //   (a) Elements that were already intro targets (most commonly
+        //       the title, since Anima collects only headings as primary
+        //       targets in a hero slide). For these we snap back to
+        //       pre-state via snapTargetToPreState.
+        //   (b) Other in-slide content that should participate in the
+        //       slide-change cascade — description, meta, buttons —
+        //       which Anima's default targeting doesn't pick up because
+        //       the hero's `.nb-supernova-item--scrolling-effect-parallax`
+        //       container is in the EXCLUDED zone. For these we stage
+        //       them on the fly, which adds the .anima-intro-target +
+        //       --pending + --staging classes and pre-hides them.
+        //
+        // Either way, by the end of this loop every element in the slide
+        // is at its pre-state and ready to be re-revealed. revealTargets
+        // applies a FRESH stagger across this slide's target count
+        // (instead of the page-wide count) and queues each through the
+        // choreographer. When the slick:{id} gate opens (afterChange +
+        // 100ms settle), the whole cascade plays on the settled slide.
+        // Dedupe: if both a parent and a child match (e.g., a tracked
+        // .nb-supernova-item containing an h1 and a .nb-card__description),
+        // keep only the parent — staging the parent already pre-hides
+        // everything inside it, and staggering child + parent separately
+        // produces a doubled fade/slide.
+        const candidates = [...slide.querySelectorAll(SLIDE_CONTENT_SELECTORS)];
+        const slideContent = candidates.filter((node) => {
+          return !candidates.some((other) => {
+            return other !== node && typeof other.contains === 'function' && other.contains(node);
+          });
         });
+        if (slideContent.length === 0) return;
+
+        slideContent.forEach((el) => {
+          if (!el || !el.classList) return;
+
+          if (el.classList.contains('anima-intro-target--revealed')) {
+            snapTargetToPreState(el);
+            return;
+          }
+
+          if (!el.classList.contains('anima-intro-target')) {
+            // Not yet a tracked intro target — stage it now (which
+            // pre-hides it via --pending under --staging).
+            stageTarget(el);
+          }
+        });
+
+        revealTargets(slideContent);
       });
     });
 
@@ -797,6 +893,7 @@ function createIntroAnimationsRuntime({
     splitHeadingForCurtain,
     replayKineticTitle,
     snapTitleToPreState,
+    snapTargetToPreState,
     // Integrations (page-transition-gate, slick-gate) attach to this.
     // Getter so lazy creation still works: callers don't have to know
     // about the creation timing.

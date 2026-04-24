@@ -608,6 +608,37 @@ test('snapTitleToPreState pre-hides a revealed title synchronously without sched
     'snapTitleToPreState must not schedule any reveal — that is the gate flow\'s job');
 });
 
+test('snapTargetToPreState on a non-title (role-other) target snaps the container back to --pending with --staging suppression', () => {
+  const target = createDomTarget({tagName: 'P', matchesSelectors: [], text: 'Hero description'});
+  // Simulate an already-revealed non-title target (pre-Slick-change state).
+  target.classList.add('anima-intro-target');
+  target.classList.add('anima-intro-target--role-other');
+  target.classList.add('anima-intro-target--revealed');
+
+  const win = createWindowStub();
+  const runtime = createIntroAnimationsRuntime({
+    window: win,
+    document: createDocStub({kinetic: true}),
+    collectTargets: () => [target],
+    createObserver() { return {observe() {}, unobserve() {}, disconnect() {}}; },
+  });
+
+  runtime.snapTargetToPreState(target);
+
+  // After snap: container is back at --pending with --revealed gone, and
+  // --staging has been added then removed within the same tick (so the
+  // snap happened with transitions suppressed and is now ready for a
+  // future reveal flip to transition normally).
+  assert.equal(target.classList.contains('anima-intro-target--revealed'), false,
+    '--revealed should be gone — the container is at pre-state again');
+  assert.equal(target.classList.contains('anima-intro-target--pending'), true,
+    'non-title targets snap to --pending so the container itself is hidden');
+  assert.equal(target.classList.contains('anima-intro-target--staging'), false,
+    '--staging is added then removed synchronously to suppress the snap transition');
+  assert.equal(win.animationFrameQueue.length, 0,
+    'snapTargetToPreState must not schedule any reveal — that is the gate flow\'s job');
+});
+
 test('snapTitleToPreState is a no-op on a title that was never revealed', () => {
   const target = createDomTarget({tagName: 'H2', matchesSelectors: ['h2'], text: 'Pending title'});
   // target has NEVER been revealed
