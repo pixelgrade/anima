@@ -554,6 +554,54 @@ test('Kinetic appends nested titles found inside reveal-root containers', () => 
     'nested heading is role-title');
 });
 
+test('Kinetic initial load stages all content inside the active single-slide hero', () => {
+  const carousel = {
+    getAttribute(name) {
+      return name === 'data-slick-carousel-kind' ? 'single' : null;
+    },
+  };
+  const title = createDomTarget({tagName: 'H1', matchesSelectors: ['h1', '.wp-block-heading'], text: 'First slide title'});
+  const description = createDomTarget({tagName: 'P', matchesSelectors: ['.wp-block-paragraph'], text: 'First slide description'});
+  const buttons = createDomTarget({tagName: 'DIV', matchesSelectors: ['.wp-block-buttons'], text: 'Explore'});
+  const slide = {
+    querySelectorAll(selector) {
+      return selector.includes('.wp-block-paragraph') ? [title, description, buttons] : [];
+    },
+    closest(selector) {
+      return selector === '.slick-initialized.slick-slider' ? carousel : null;
+    },
+  };
+  [title, description, buttons].forEach((node) => {
+    node.isInViewport = true;
+    node.contains = (other) => other === node;
+    node.closest = (selector) => selector === '.slick-initialized.slick-slider' ? carousel : null;
+  });
+
+  const doc = createDocStub({kinetic: true});
+  doc.querySelectorAll = (selector) => {
+    return selector.includes('.slick-slide') && selector.includes('slick-active') ? [slide] : [];
+  };
+
+  const runtime = createIntroAnimationsRuntime({
+    window: createWindowStub(),
+    document: doc,
+    collectTargets: () => [],
+    collectKineticTitles: () => [title],
+    createObserver() { return {observe() {}, unobserve() {}, disconnect() {}}; },
+  });
+
+  runtime.initialize();
+
+  assert.equal(title.classList.contains('anima-intro-target--role-title'), true,
+    'the active slide title still gets Kinetic title treatment');
+  assert.equal(description.classList.contains('anima-intro-target--pending'), true,
+    'the active slide description should be staged on initial load');
+  assert.equal(description.classList.contains('anima-intro-target--role-other'), true,
+    'the active slide description should use the normal Kinetic content reveal');
+  assert.equal(buttons.classList.contains('anima-intro-target--pending'), true,
+    'the active slide CTA should be staged on initial load');
+});
+
 test('Non-Kinetic styles DO NOT collect nested titles', () => {
   const cardContainer = createDomTarget({tagName: 'ARTICLE', matchesSelectors: ['.wp-block-post']});
   const cardTitle = createDomTarget({tagName: 'H1', matchesSelectors: ['h1'], text: 'Card title'});

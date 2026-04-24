@@ -608,6 +608,7 @@ const TITLE_ROLE_SELECTORS = ['h1', 'h2', 'h3', '.wp-block-heading', '.wp-block-
 // are NOT picked up by collectRevealTargets — this list catches them so
 // they participate in the slide-change cascade.
 const SLIDE_CONTENT_SELECTORS = ['.anima-intro-target', 'h1', 'h2', 'h3', '.wp-block-heading', '.wp-block-post-title', '.nb-card__title', '.nb-collection__title', '.wp-block-paragraph', '.wp-block-post-excerpt', '.nb-card__description', '.nb-card__meta', '.wp-block-post-date', '.wp-block-post-author', '.wp-block-buttons', '.nb-supernova-item__cta'].join(',');
+const ACTIVE_SLICK_SLIDE_SELECTOR = '.slick-slide.slick-active';
 function classifyTargetRole(node) {
   if (!node || typeof node.matches !== 'function') {
     return 'other';
@@ -1154,12 +1155,7 @@ function createIntroAnimationsRuntime({
         // keep only the parent — staging the parent already pre-hides
         // everything inside it, and staggering child + parent separately
         // produces a doubled fade/slide.
-        const candidates = [...slide.querySelectorAll(SLIDE_CONTENT_SELECTORS)];
-        const slideContent = candidates.filter(node => {
-          return !candidates.some(other => {
-            return other !== node && typeof other.contains === 'function' && other.contains(node);
-          });
-        });
+        const slideContent = collectSlideContentTargets(slide);
         if (slideContent.length === 0) return;
         slideContent.forEach(el => {
           if (!el || !el.classList) return;
@@ -1183,6 +1179,40 @@ function createIntroAnimationsRuntime({
       subtree: true
     });
     return obs;
+  }
+  function collectSlideContentTargets(slide) {
+    if (!slide || typeof slide.querySelectorAll !== 'function') {
+      return [];
+    }
+    const candidates = [...slide.querySelectorAll(SLIDE_CONTENT_SELECTORS)];
+    return candidates.filter(node => {
+      return !candidates.some(other => {
+        return other !== node && typeof other.contains === 'function' && other.contains(node);
+      });
+    });
+  }
+  function appendUniqueTargets(targets, additions) {
+    const results = targets.slice();
+    additions.forEach(node => {
+      if (!node || results.indexOf(node) !== -1) {
+        return;
+      }
+      if (results.some(existing => {
+        return existing !== node && existing && typeof existing.contains === 'function' && existing.contains(node);
+      })) {
+        return;
+      }
+      results.push(node);
+    });
+    return results;
+  }
+  function collectInitialActiveSlideContentTargets(root, existingTargets = []) {
+    if (!root || typeof root.querySelectorAll !== 'function') {
+      return [];
+    }
+    const activeSlides = [...root.querySelectorAll(ACTIVE_SLICK_SLIDE_SELECTOR)].filter(slide => isInsideSingleItemSlickCarousel(slide));
+    const slideTargets = activeSlides.flatMap(slide => collectSlideContentTargets(slide));
+    return appendUniqueTargets(existingTargets, slideTargets).filter(target => existingTargets.indexOf(target) === -1);
   }
   function ensureObserver() {
     if (observer || prefersReducedMotion() || !hasEnabledBodyClass() || typeof createObserver !== 'function') {
@@ -1292,6 +1322,10 @@ function createIntroAnimationsRuntime({
       const extraTitles = collectKineticTitles(root, primaryTargets);
       if (extraTitles && extraTitles.length) {
         targets = primaryTargets.concat(extraTitles);
+      }
+      const activeSlideContent = collectInitialActiveSlideContentTargets(root, targets);
+      if (activeSlideContent.length) {
+        targets = targets.concat(activeSlideContent);
       }
 
       // Also start watching for Slick slide changes so Kinetic titles
