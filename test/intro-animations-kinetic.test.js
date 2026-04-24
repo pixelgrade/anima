@@ -578,6 +578,53 @@ test('Non-Kinetic styles DO NOT collect nested titles', () => {
     'inner title should not be staged when style is not kinetic');
 });
 
+// ---------- snapTitleToPreState ----------
+
+test('snapTitleToPreState pre-hides a revealed title synchronously without scheduling any re-reveal', () => {
+  const target = createDomTarget({tagName: 'H2', matchesSelectors: ['h2'], text: 'Hero title'});
+  target.classList.add('anima-intro-target--revealed');
+  const win = createWindowStub();
+
+  const runtime = createIntroAnimationsRuntime({
+    window: win,
+    document: createDocStub({kinetic: true}),
+    collectTargets: () => [target],
+    createObserver() { return {observe() {}, unobserve() {}, disconnect() {}}; },
+  });
+
+  runtime.snapTitleToPreState(target);
+
+  // After the snap: --revealed gone, --replaying gone (added then removed
+  // within the same tick to suppress the transition during the snap).
+  assert.equal(target.classList.contains('anima-intro-target--revealed'), false,
+    '--revealed must be removed so the element is back at the pre-state');
+  assert.equal(target.classList.contains('anima-intro-target--replaying'), false,
+    '--replaying is added then removed synchronously to suppress the snap transition');
+
+  // Critically: NO rAFs scheduled. The re-reveal happens later via the
+  // choreographer's gate flow (onReveal → handleReveal → first-reveal path),
+  // not by this function.
+  assert.equal(win.animationFrameQueue.length, 0,
+    'snapTitleToPreState must not schedule any reveal — that is the gate flow\'s job');
+});
+
+test('snapTitleToPreState is a no-op on a title that was never revealed', () => {
+  const target = createDomTarget({tagName: 'H2', matchesSelectors: ['h2'], text: 'Pending title'});
+  // target has NEVER been revealed
+
+  const runtime = createIntroAnimationsRuntime({
+    window: createWindowStub(),
+    document: createDocStub({kinetic: true}),
+    collectTargets: () => [target],
+    createObserver() { return {observe() {}, unobserve() {}, disconnect() {}}; },
+  });
+
+  runtime.snapTitleToPreState(target);
+
+  assert.equal(target.classList.contains('anima-intro-target--replaying'), false,
+    'nothing to do for a not-yet-revealed title');
+});
+
 // ---------- replayKineticTitle ----------
 
 test('replayKineticTitle is a no-op when the title was never revealed', () => {

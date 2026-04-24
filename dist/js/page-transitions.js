@@ -974,6 +974,27 @@ function createIntroAnimationsRuntime({
     // Its internal state has been reset by disconnect().
   }
 
+  // Snap an already-revealed title back to its pre-state *without* a
+  // visible transition. Used ahead of a Slick slide change so the Slick
+  // fade/slide plays over an empty title area — the choreographer's
+  // gated re-reveal then fires the word-curtain on the settled slide.
+  //
+  // Sequence (all synchronous):
+  //   1. Add --replaying (disables word/char transitions).
+  //   2. Remove --revealed (words snap to pre-state with no animation).
+  //   3. Force reflow so the snap is committed.
+  //   4. Remove --replaying (transitions re-enabled for the later reveal).
+  function snapTitleToPreState(el) {
+    if (!el || !el.classList) return;
+    if (!el.classList.contains('anima-intro-target--revealed')) return;
+    el.classList.add('anima-intro-target--replaying');
+    el.classList.remove('anima-intro-target--revealed');
+    if (typeof el.getBoundingClientRect === 'function') {
+      el.getBoundingClientRect();
+    }
+    el.classList.remove('anima-intro-target--replaying');
+  }
+
   // Re-run the Kinetic word/char cascade on a title that has already been
   // revealed. Used when a carousel slide comes into view a second time
   // (Slick doesn't mutate the DOM on slide change, so IntersectionObserver
@@ -1060,12 +1081,22 @@ function createIntroAnimationsRuntime({
           return;
         }
         const titles = slide.querySelectorAll('.anima-intro-target--role-title');
-        // Route through the choreographer: for an already-revealed title,
-        // the slick:{id} gate (closed during this transition by the slick
-        // integration) holds the request until the slide settles, then
-        // onReveal routes to replayKineticTitle. For a not-yet-revealed
-        // title, it routes to the first-reveal path.
-        titles.forEach(requestTargetReveal);
+        titles.forEach(title => {
+          // Pre-hide synchronously at slick-active time. Without this the
+          // title sits visible (revealed from initial page load) through
+          // Slick's fade, then the gate-opened replay later snaps it away
+          // and re-animates — that "visible → snap invisible → cascade in"
+          // sequence reads as a glitch.
+          //
+          // By snapping to pre-state NOW (before Slick actually paints the
+          // fade), the crossfade plays over an empty title area. The
+          // choreographer's gate (closed at beforeChange) holds the reveal
+          // request until the slide settles; when it opens, handleReveal
+          // routes to the first-reveal path and the word-curtain plays on
+          // the already-in-place slide.
+          snapTitleToPreState(title);
+          requestTargetReveal(title);
+        });
       });
     });
     obs.observe(doc.body, {
@@ -1227,6 +1258,7 @@ function createIntroAnimationsRuntime({
     // server-rendered headings (e.g. a future critical-path enhancement).
     splitHeadingForCurtain,
     replayKineticTitle,
+    snapTitleToPreState,
     // Integrations (page-transition-gate, slick-gate) attach to this.
     // Getter so lazy creation still works: callers don't have to know
     // about the creation timing.
