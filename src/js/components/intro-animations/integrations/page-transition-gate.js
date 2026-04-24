@@ -22,11 +22,22 @@ const DEFAULT_SETTLE_MS = 200;
 
 function attachPageTransitionGate({
   window: win = typeof window !== 'undefined' ? window : null,
+  document: doc = win && win.document ? win.document : null,
   choreographer,
   settleMs = DEFAULT_SETTLE_MS,
 } = {}) {
   if (!win || typeof win.addEventListener !== 'function' || !choreographer) {
     return () => {};
+  }
+
+  if (
+    doc &&
+    doc.body &&
+    doc.body.classList &&
+    doc.body.classList.contains('is-loading') &&
+    doc.body.classList.contains('has-page-transitions')
+  ) {
+    choreographer.closeGate(PAGE_TRANSITION_GATE);
   }
 
   const onStart = () => {

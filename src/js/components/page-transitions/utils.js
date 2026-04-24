@@ -18,6 +18,11 @@ export function notifyPageTransitionComplete() {
   window.dispatchEvent( new CustomEvent( 'anima:page-transition-complete' ) );
 }
 
+export function notifyPageTransitionStart() {
+  $( document ).trigger( 'anima:page-transition-start' );
+  window.dispatchEvent( new CustomEvent( 'anima:page-transition-start' ) );
+}
+
 /**
  * Sync body classes from the new page's HTML response.
  * Uses the same NOTBODY trick as Pile to parse <body> attributes from raw HTML.

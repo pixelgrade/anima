@@ -60,3 +60,28 @@ test( 'slide wipe announces page-transition completion after the loader hide pro
     'Slide Wipe should notify completion after its loader has hidden'
   );
 } );
+
+test( 'initial page-transition loader announces start and completion around first-load overlay', () => {
+  const index = readSource( 'src/js/components/page-transitions/index.js' );
+
+  assert.match(
+    index,
+    /notifyPageTransitionStart\(\);/,
+    'initial page load should close the intro-animation page-transition gate while the loader covers the page'
+  );
+  assert.match(
+    index,
+    /waitForLoadAndHide\(\)\.then\( notifyPageTransitionComplete \)/,
+    'Slide Wipe + Cycling Images should announce completion after the first-load loader hides'
+  );
+  assert.match(
+    index,
+    /SlideWipeLoader\.hide\(\)\.then\( notifyPageTransitionComplete \)/,
+    'Slide Wipe + Progress Bar should announce completion after the first-load loader hides'
+  );
+  assert.match(
+    index,
+    /collapseBorderIrisInitialLoader\( \$border \)\.then\( notifyPageTransitionComplete \)/,
+    'Border Iris first-load loaders should announce completion after the border collapses'
+  );
+} );

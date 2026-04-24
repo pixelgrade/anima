@@ -4,6 +4,7 @@ import { pageTransition, cardExpandTransition } from './transitions';
 import { slideWipePageTransition, slideWipeCardExpandTransition } from './slide-wipe-transitions';
 import { playBorderIrisLoadingAnimation, playProgressBarComplete } from './loading-animation';
 import * as SlideWipeLoader from './slide-wipe-loader';
+import { notifyPageTransitionComplete, notifyPageTransitionStart } from './utils';
 
 // Ignored URL patterns — file extensions, admin, anchors.
 const IGNORED_PATTERNS = [
@@ -13,6 +14,29 @@ const IGNORED_PATTERNS = [
   '#',
   '&add-to-cart=', '?add-to-cart=', '?remove_item',
 ];
+
+function collapseBorderIrisInitialLoader( $border ) {
+  const windowWidth = window.innerWidth;
+  const windowHeight = window.innerHeight;
+
+  return new Promise( ( resolve ) => {
+    gsap.fromTo( $border[ 0 ], {
+      borderTopWidth: windowHeight / 2,
+      borderBottomWidth: windowHeight / 2,
+      borderLeftWidth: windowWidth / 2,
+      borderRightWidth: windowWidth / 2,
+    }, {
+      background: 'none',
+      borderTopWidth: 0,
+      borderBottomWidth: 0,
+      borderLeftWidth: 0,
+      borderRightWidth: 0,
+      duration: 0.6,
+      ease: 'quart.inOut',
+      onComplete: resolve,
+    } );
+  } );
+}
 
 /**
  * Initialize page transitions.
@@ -98,8 +122,7 @@ export function init() {
   // so reveals on the incoming page queue behind the loader instead of
   // playing while the overlay is still dismissing.
   barba.hooks.before( () => {
-    $( document ).trigger( 'anima:page-transition-start' );
-    window.dispatchEvent( new CustomEvent( 'anima:page-transition-start' ) );
+    notifyPageTransitionStart();
   } );
 
   barba.hooks.after( () => {
@@ -120,15 +143,17 @@ export function init() {
     $body.addClass( 'is-loaded' );
   }
 
+  notifyPageTransitionStart();
+
   // Dispatch initial load animation based on the 2x2 matrix.
   if ( isSlideWipe && isCyclingImages ) {
     // Slide Wipe + Cycling Images: wait for load, then slide out.
-    SlideWipeLoader.waitForLoadAndHide();
+    SlideWipeLoader.waitForLoadAndHide().then( notifyPageTransitionComplete );
   } else if ( isSlideWipe && ! isCyclingImages ) {
     // Slide Wipe + Progress Bar: wait for load, complete progress bar, then slide out.
     SlideWipeLoader.waitForLoadThen( () => {
       playProgressBarComplete().then( () => {
-        SlideWipeLoader.hide();
+        SlideWipeLoader.hide().then( notifyPageTransitionComplete );
       } );
     }, PROGRESS_BAR_MIN_TIME );
   } else if ( ! isSlideWipe && isCyclingImages ) {
@@ -136,21 +161,12 @@ export function init() {
     SlideWipeLoader.waitForLoadThen( () => {
       SlideWipeLoader.stopCyclingImages();
       const $border = $( '.js-page-transition-border' );
-      const windowWidth = window.innerWidth;
-      const windowHeight = window.innerHeight;
 
       // Hide the cycling images content.
       $border.find( '.c-loader__logo' ).css( 'opacity', 0 );
 
       // Collapse the border overlay.
-      gsap.fromTo( $border[ 0 ], {
-        borderWidth: windowHeight / 2 + 'px ' + windowWidth / 2 + 'px',
-      }, {
-        background: 'none',
-        borderWidth: 0,
-        duration: 0.6,
-        ease: 'quart.inOut',
-      } );
+      collapseBorderIrisInitialLoader( $border ).then( notifyPageTransitionComplete );
     } );
   } else {
     // Border Iris + Progress Bar: wait for load, then play the opening curtain.
@@ -159,20 +175,11 @@ export function init() {
     // instantly hide the logo before the fill bar finishes.
     SlideWipeLoader.waitForLoadThen( () => {
       playProgressBarComplete().then( () => {
-        $body.addClass( 'is-loaded' );
-        // Now collapse the border.
-        const $border = $( '.js-page-transition-border' );
-        const windowWidth = window.innerWidth;
-        const windowHeight = window.innerHeight;
-        gsap.fromTo( $border[ 0 ], {
-          borderWidth: windowHeight / 2 + 'px ' + windowWidth / 2 + 'px',
-        }, {
-          background: 'none',
-          borderWidth: 0,
-          duration: 0.6,
-          ease: 'quart.inOut',
-        } );
-      } );
-    }, PROGRESS_BAR_MIN_TIME );
-  }
+            $body.addClass( 'is-loaded' );
+            // Now collapse the border.
+            const $border = $( '.js-page-transition-border' );
+            collapseBorderIrisInitialLoader( $border ).then( notifyPageTransitionComplete );
+          } );
+        }, PROGRESS_BAR_MIN_TIME );
+      }
 }

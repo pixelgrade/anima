@@ -6,6 +6,7 @@ const { createRevealChoreographer } = require('./choreographer.js');
 const { isInsideSingleItemSlickCarousel } = require('./integrations/slick-gate.js');
 
 const REVEAL_ZONE_TOP_RATIO = 0.82;
+const PAGE_TRANSITION_REVEAL_TIMEOUT = 8000;
 const DELAY_WINDOW_BY_STYLE = {
   fade: 600,
   scale: 600,
@@ -487,14 +488,16 @@ function createIntroAnimationsRuntime({
       slideChangeObserver.disconnect();
     }
     if (choreographer && typeof choreographer.disconnect === 'function') {
-      choreographer.disconnect();
+      choreographer.disconnect({ preserveGates: true });
     }
 
     observer = null;
     slideChangeObserver = null;
     // Leave choreographer reference intact — the factory-returned API
     // still exposes it for integrations and for re-use after re-initialize.
-    // Its internal state has been reset by disconnect().
+    // Its queued requests have been reset by disconnect(); integration gate
+    // state is preserved so page-transition/Slick blockers still apply
+    // during this fresh scan.
   }
 
   // Snap an already-revealed intro target back to its pre-state *without*
@@ -792,7 +795,13 @@ function createIntroAnimationsRuntime({
   function requestTargetReveal(target) {
     if (!target) return;
     const gates = typeof resolveGates === 'function' ? resolveGates(target) : [];
-    getChoreographer().requestReveal(target, { waitFor: gates });
+    const options = { waitFor: gates };
+
+    if (gates.indexOf('page-transition') !== -1) {
+      options.timeout = PAGE_TRANSITION_REVEAL_TIMEOUT;
+    }
+
+    getChoreographer().requestReveal(target, options);
   }
 
   function revealTargets(targets = []) {

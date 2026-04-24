@@ -179,16 +179,18 @@ function createRevealChoreographer({
      * Tear down: cancel every pending timer and flush state.
      * Used before re-initializing (e.g., on Barba re-init).
      */
-    disconnect() {
+    disconnect({ preserveGates = false } = {}) {
       for (const req of queue.values()) {
         clearTimer(req.timeoutHandle);
       }
       queue.clear();
-      for (const handle of pendingOpens.values()) {
-        clearTimer(handle);
+      if (!preserveGates) {
+        for (const handle of pendingOpens.values()) {
+          clearTimer(handle);
+        }
+        pendingOpens.clear();
+        closedGates.clear();
       }
-      pendingOpens.clear();
-      closedGates.clear();
     },
   };
 }

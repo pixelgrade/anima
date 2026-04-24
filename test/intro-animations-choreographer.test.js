@@ -270,6 +270,51 @@ test('disconnect clears all queued requests and cancels every timer', () => {
   assert.equal(timers.pendingCount(), 0, 'every timer should be cleared');
 });
 
+test('disconnect can preserve closed gates while clearing old queued requests', () => {
+  const fired = [];
+  const timers = createTimerWindow();
+  const ch = createRevealChoreographer({
+    window: timers,
+    onReveal: (el) => fired.push(el.id),
+  });
+
+  ch.closeGate('page-transition');
+  ch.requestReveal({ id: 'old' }, { waitFor: ['page-transition'], timeout: 1000 });
+
+  ch.disconnect({ preserveGates: true });
+
+  assert.equal(ch.isGateOpen('page-transition'), false);
+  assert.equal(ch.queuedCount(), 0);
+
+  ch.requestReveal({ id: 'fresh' }, { waitFor: ['page-transition'], timeout: 0 });
+  assert.deepEqual(fired, []);
+  assert.equal(ch.queuedCount(), 1);
+
+  ch.openGate('page-transition');
+  assert.deepEqual(fired, ['fresh']);
+});
+
+test('disconnect preserves pending gate opens when preserving gates', () => {
+  const fired = [];
+  const timers = createTimerWindow();
+  const ch = createRevealChoreographer({
+    window: timers,
+    onReveal: (el) => fired.push(el.id),
+  });
+
+  ch.closeGate('page-transition');
+  ch.openGate('page-transition', { settle: 200 });
+  ch.disconnect({ preserveGates: true });
+  ch.requestReveal({ id: 'fresh' }, { waitFor: ['page-transition'], timeout: 0 });
+
+  timers.advanceBy(199);
+  assert.deepEqual(fired, []);
+
+  timers.advanceBy(1);
+  assert.deepEqual(fired, ['fresh']);
+  assert.equal(ch.isGateOpen('page-transition'), true);
+});
+
 // -------- isGateOpen introspection --------
 
 test('isGateOpen reflects current state', () => {

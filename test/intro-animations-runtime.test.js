@@ -207,6 +207,44 @@ test('initialize observes offscreen targets until they intersect', () => {
   assert.equal(target.classList.contains('anima-intro-target--revealed'), true);
 });
 
+test('page-transition gated reveals use a timeout longer than the first-load loader', () => {
+  const target = createTarget('hero', true);
+  const requests = [];
+  const runtime = createIntroAnimationsRuntime({
+    window: createWindowStub(),
+    document: {
+      body: {
+        classList: {
+          contains(className) {
+            return className === 'has-intro-animations';
+          },
+        },
+      },
+    },
+    collectTargets() {
+      return [target];
+    },
+    resolveGates() {
+      return ['page-transition'];
+    },
+    createChoreographer() {
+      return {
+        requestReveal(el, opts) { requests.push({ el, opts }); },
+        disconnect() {},
+      };
+    },
+  });
+
+  runtime.initialize();
+
+  assert.equal(requests.length, 1);
+  assert.equal(requests[0].el, target);
+  assert.ok(
+    requests[0].opts.timeout >= 8000,
+    'page-transition gated reveals must not force-fire before the initial progress-bar loader clears'
+  );
+});
+
 test('initialize skips targets already consumed in the same page view', () => {
   const target = createTarget('repeat-card', true);
   const win = createWindowStub();

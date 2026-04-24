@@ -75,6 +75,24 @@ test('attachPageTransitionGate opens the gate with settle on anima:page-transiti
   assert.equal(ch.openedCalls[0].opts.settle, 200);
 });
 
+test('attachPageTransitionGate closes the gate during the initial page-transition loader', () => {
+  const win = createFakeWindow();
+  const ch = createRecordingChoreographer();
+  const doc = {
+    body: {
+      classList: {
+        contains(name) {
+          return name === 'is-loading' || name === 'has-page-transitions';
+        },
+      },
+    },
+  };
+
+  attachPageTransitionGate({ window: win, document: doc, choreographer: ch });
+
+  assert.deepEqual(ch.closedCalls, [PAGE_TRANSITION_GATE]);
+});
+
 test('attachPageTransitionGate returns a detach function that removes listeners', () => {
   const win = createFakeWindow();
   const ch = createRecordingChoreographer();

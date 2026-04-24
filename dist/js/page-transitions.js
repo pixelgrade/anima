@@ -209,16 +209,20 @@ function createRevealChoreographer({
      * Tear down: cancel every pending timer and flush state.
      * Used before re-initializing (e.g., on Barba re-init).
      */
-    disconnect() {
+    disconnect({
+      preserveGates = false
+    } = {}) {
       for (const req of queue.values()) {
         clearTimer(req.timeoutHandle);
       }
       queue.clear();
-      for (const handle of pendingOpens.values()) {
-        clearTimer(handle);
+      if (!preserveGates) {
+        for (const handle of pendingOpens.values()) {
+          clearTimer(handle);
+        }
+        pendingOpens.clear();
+        closedGates.clear();
       }
-      pendingOpens.clear();
-      closedGates.clear();
     }
   };
 }
@@ -317,11 +321,15 @@ const PAGE_TRANSITION_GATE = 'page-transition';
 const DEFAULT_SETTLE_MS = 200;
 function attachPageTransitionGate({
   window: win = typeof window !== 'undefined' ? window : null,
+  document: doc = win && win.document ? win.document : null,
   choreographer,
   settleMs = DEFAULT_SETTLE_MS
 } = {}) {
   if (!win || typeof win.addEventListener !== 'function' || !choreographer) {
     return () => {};
+  }
+  if (doc && doc.body && doc.body.classList && doc.body.classList.contains('is-loading') && doc.body.classList.contains('has-page-transitions')) {
+    choreographer.closeGate(PAGE_TRANSITION_GATE);
   }
   const onStart = () => {
     choreographer.closeGate(PAGE_TRANSITION_GATE);
@@ -581,6 +589,7 @@ const {
   isInsideSingleItemSlickCarousel
 } = __webpack_require__(376);
 const REVEAL_ZONE_TOP_RATIO = 0.82;
+const PAGE_TRANSITION_REVEAL_TIMEOUT = 8000;
 const DELAY_WINDOW_BY_STYLE = {
   fade: 600,
   scale: 600,
@@ -979,13 +988,17 @@ function createIntroAnimationsRuntime({
       slideChangeObserver.disconnect();
     }
     if (choreographer && typeof choreographer.disconnect === 'function') {
-      choreographer.disconnect();
+      choreographer.disconnect({
+        preserveGates: true
+      });
     }
     observer = null;
     slideChangeObserver = null;
     // Leave choreographer reference intact — the factory-returned API
     // still exposes it for integrations and for re-use after re-initialize.
-    // Its internal state has been reset by disconnect().
+    // Its queued requests have been reset by disconnect(); integration gate
+    // state is preserved so page-transition/Slick blockers still apply
+    // during this fresh scan.
   }
 
   // Snap an already-revealed intro target back to its pre-state *without*
@@ -1244,9 +1257,13 @@ function createIntroAnimationsRuntime({
   function requestTargetReveal(target) {
     if (!target) return;
     const gates = typeof resolveGates === 'function' ? resolveGates(target) : [];
-    getChoreographer().requestReveal(target, {
+    const options = {
       waitFor: gates
-    });
+    };
+    if (gates.indexOf('page-transition') !== -1) {
+      options.timeout = PAGE_TRANSITION_REVEAL_TIMEOUT;
+    }
+    getChoreographer().requestReveal(target, options);
   }
   function revealTargets(targets = []) {
     const sortedTargets = sortBatchTargets(targets);
@@ -3233,6 +3250,10 @@ function notifyPageTransitionComplete() {
   external_jQuery_default()(document).trigger('anima:page-transition-complete');
   window.dispatchEvent(new CustomEvent('anima:page-transition-complete'));
 }
+function notifyPageTransitionStart() {
+  external_jQuery_default()(document).trigger('anima:page-transition-start');
+  window.dispatchEvent(new CustomEvent('anima:page-transition-start'));
+}
 
 /**
  * Sync body classes from the new page's HTML response.
@@ -4854,8 +4875,30 @@ function playBorderIrisLoadingAnimation() {
 
 
 
+
 // Ignored URL patterns — file extensions, admin, anchors.
 const IGNORED_PATTERNS = ['.pdf', '.doc', '.eps', '.png', '.jpg', '.jpeg', '.zip', 'wp-admin', 'wp-login', 'wp-', 'feed', '#', '&add-to-cart=', '?add-to-cart=', '?remove_item'];
+function collapseBorderIrisInitialLoader($border) {
+  const windowWidth = window.innerWidth;
+  const windowHeight = window.innerHeight;
+  return new Promise(resolve => {
+    gsap.fromTo($border[0], {
+      borderTopWidth: windowHeight / 2,
+      borderBottomWidth: windowHeight / 2,
+      borderLeftWidth: windowWidth / 2,
+      borderRightWidth: windowWidth / 2
+    }, {
+      background: 'none',
+      borderTopWidth: 0,
+      borderBottomWidth: 0,
+      borderLeftWidth: 0,
+      borderRightWidth: 0,
+      duration: 0.6,
+      ease: 'quart.inOut',
+      onComplete: resolve
+    });
+  });
+}
 
 /**
  * Initialize page transitions.
@@ -4932,8 +4975,7 @@ function page_transitions_init() {
   // so reveals on the incoming page queue behind the loader instead of
   // playing while the overlay is still dismissing.
   barba_umd_default().hooks.before(() => {
-    external_jQuery_default()(document).trigger('anima:page-transition-start');
-    window.dispatchEvent(new CustomEvent('anima:page-transition-start'));
+    notifyPageTransitionStart();
   });
   barba_umd_default().hooks.after(() => {
     $body.addClass('is-loaded');
@@ -4952,16 +4994,17 @@ function page_transitions_init() {
   if (!deferIsLoaded) {
     $body.addClass('is-loaded');
   }
+  notifyPageTransitionStart();
 
   // Dispatch initial load animation based on the 2x2 matrix.
   if (isSlideWipe && isCyclingImages) {
     // Slide Wipe + Cycling Images: wait for load, then slide out.
-    waitForLoadAndHide();
+    waitForLoadAndHide().then(notifyPageTransitionComplete);
   } else if (isSlideWipe && !isCyclingImages) {
     // Slide Wipe + Progress Bar: wait for load, complete progress bar, then slide out.
     waitForLoadThen(() => {
       playProgressBarComplete().then(() => {
-        hide();
+        hide().then(notifyPageTransitionComplete);
       });
     }, PROGRESS_BAR_MIN_TIME);
   } else if (!isSlideWipe && isCyclingImages) {
@@ -4969,21 +5012,12 @@ function page_transitions_init() {
     waitForLoadThen(() => {
       stopCyclingImages();
       const $border = external_jQuery_default()('.js-page-transition-border');
-      const windowWidth = window.innerWidth;
-      const windowHeight = window.innerHeight;
 
       // Hide the cycling images content.
       $border.find('.c-loader__logo').css('opacity', 0);
 
       // Collapse the border overlay.
-      gsap.fromTo($border[0], {
-        borderWidth: windowHeight / 2 + 'px ' + windowWidth / 2 + 'px'
-      }, {
-        background: 'none',
-        borderWidth: 0,
-        duration: 0.6,
-        ease: 'quart.inOut'
-      });
+      collapseBorderIrisInitialLoader($border).then(notifyPageTransitionComplete);
     });
   } else {
     // Border Iris + Progress Bar: wait for load, then play the opening curtain.
@@ -4995,16 +5029,7 @@ function page_transitions_init() {
         $body.addClass('is-loaded');
         // Now collapse the border.
         const $border = external_jQuery_default()('.js-page-transition-border');
-        const windowWidth = window.innerWidth;
-        const windowHeight = window.innerHeight;
-        gsap.fromTo($border[0], {
-          borderWidth: windowHeight / 2 + 'px ' + windowWidth / 2 + 'px'
-        }, {
-          background: 'none',
-          borderWidth: 0,
-          duration: 0.6,
-          ease: 'quart.inOut'
-        });
+        collapseBorderIrisInitialLoader($border).then(notifyPageTransitionComplete);
       });
     }, PROGRESS_BAR_MIN_TIME);
   }
