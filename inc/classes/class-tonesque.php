@@ -55,6 +55,14 @@ class Tonesque {
 				return false;
 		}
 
+		// Bail if the image could not be loaded. On PHP 8.x the imagecreatefrom*()
+		// functions return false (instead of a GD object) for missing, broken, or
+		// unreadable images, and passing that to imagesy() in grab_color() throws a
+		// fatal TypeError under PHP 8's stricter typing.
+		if ( false === $img ) {
+			return false;
+		}
+
 		// Finds dominant color
 		$color = self::grab_color( $img, $points );
 		// Passes value to Color class
