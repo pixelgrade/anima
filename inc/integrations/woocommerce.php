@@ -24,7 +24,7 @@ function anima_woocommerce_setup() {
 
 		// Load the integration logic.
 		add_action( 'wp_enqueue_scripts', 'anima_woocommerce_scripts', 10 );
-		add_action( 'enqueue_block_editor_assets', 'anima_enqueue_woocommerce_block_editor_assets', 10 );
+		add_action( 'enqueue_block_assets', 'anima_enqueue_woocommerce_block_editor_assets', 30 );
 
         // We do this late so we can give all others room to play.
 		add_action( 'wp_loaded', 'anima_woocommerce_setup_hooks' );
@@ -60,6 +60,10 @@ function anima_woocommerce_scripts() {
 }
 
 function anima_enqueue_woocommerce_block_editor_assets() {
+	if ( ! anima_is_block_editor_screen() ) {
+		return;
+	}
+
 	$theme  = wp_get_theme( get_template() );
 
 	wp_enqueue_style( 'anima-woocommerce-block-styles', get_template_directory_uri() . '/dist/css/woocommerce/block-editor.css', [], $theme->get( 'Version' ) );

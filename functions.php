@@ -203,8 +203,6 @@ function anima_enqueue_theme_block_editor_assets() {
 	$theme  = wp_get_theme( get_template() );
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-	wp_enqueue_style( 'anima-block-editor-styles' );
-
 	wp_enqueue_script(
 		'anima-editor-js',
 		trailingslashit( get_template_directory_uri() ) . 'dist/js/editor' . $suffix . '.js',

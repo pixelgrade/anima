@@ -108,12 +108,18 @@ add_filter( 'block_editor_settings_all',
 	}, 10, 2 );
 
 /**
- * Enqueue theme editor styles into the block editor via the stable enqueue action.
+ * Enqueue theme editor styles through the hook WordPress uses for editor iframe assets.
  *
- * This replaces the previous __unstableResolvedAssets injection which is removed in WP 7.0.
- * Styles enqueued here are automatically loaded inside the editor iframe.
+ * WordPress 7 warns when canvas styles are added through enqueue_block_editor_assets
+ * and then copied into the iframe as legacy compatibility styles.
+ *
+ * @return void
  */
-add_action( 'enqueue_block_editor_assets', function () {
+function anima_enqueue_iframed_block_editor_styles() {
+	if ( ! is_admin() ) {
+		return;
+	}
+
 	$style_handles = [
 		'pixelgrade_style_manager-sm-colors-custom-properties',
 		'anima-block-editor-styles',
@@ -124,7 +130,8 @@ add_action( 'enqueue_block_editor_assets', function () {
 	foreach ( $style_handles as $handle ) {
 		wp_enqueue_style( $handle );
 	}
-} );
+}
+add_action( 'enqueue_block_assets', 'anima_enqueue_iframed_block_editor_styles', 20 );
 
 /**
  * Determine whether the current admin screen is the Site Editor.
@@ -139,6 +146,29 @@ function anima_is_site_editor_screen() {
 	$screen = get_current_screen();
 
 	return (bool) $screen && in_array( $screen->id, [ 'site-editor', 'site-editor-v2' ], true );
+}
+
+/**
+ * Determine whether the current admin screen is a block editor canvas.
+ *
+ * @return bool
+ */
+function anima_is_block_editor_screen() {
+	if ( ! is_admin() || ! function_exists( 'get_current_screen' ) ) {
+		return false;
+	}
+
+	$screen = get_current_screen();
+
+	if ( ! $screen ) {
+		return false;
+	}
+
+	if ( method_exists( $screen, 'is_block_editor' ) && $screen->is_block_editor() ) {
+		return true;
+	}
+
+	return in_array( $screen->id, [ 'site-editor', 'site-editor-v2' ], true );
 }
 
 /**
