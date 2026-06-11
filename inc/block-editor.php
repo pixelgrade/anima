@@ -11,6 +11,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Whether the Style Manager plugin is active.
+ *
+ * The theme delegates its entire design system (global styles, palettes, font
+ * sizes) to Style Manager and therefore disables the corresponding core
+ * features. When Style Manager is NOT active — e.g. the bare WordPress.org
+ * build previewed without plugins — those core features must stay enabled so
+ * the theme.json design tokens still render.
+ *
+ * @return bool
+ */
+function anima_style_manager_is_active() {
+	return class_exists( 'Pixelgrade\StyleManager\Plugin' )
+		|| class_exists( 'PixCustomifyPlugin' )
+		|| function_exists( '\Pixelgrade\StyleManager\plugin' );
+}
+
+/**
  * Get the default constrained layout used for post content in the editor.
  *
  * @return array
@@ -32,6 +49,12 @@ function anima_get_post_content_layout_defaults() {
  * @see https://github.com/WordPress/gutenberg/issues/38299#issuecomment-1025520487
  */
 add_action( 'after_setup_theme', function () {
+	// Without Style Manager the theme has no other source of global styles, so
+	// let WordPress emit them from theme.json (palette, font sizes, base styles).
+	if ( ! anima_style_manager_is_active() ) {
+		return;
+	}
+
 	$global_styles_callbacks = [
 		'wp_enqueue_global_styles',
 		'wp_enqueue_global_styles_css_custom_properties',
@@ -72,20 +95,25 @@ add_filter( 'block_editor_settings_all',
 	 */
 	function ( $editor_settings, $block_editor_context ) {
 
-		// Remove default style presets.
-		if ( ! empty( $editor_settings['styles'] ) ) {
-			foreach ( $editor_settings['styles'] as $key => $value ) {
-				if ( isset( $value['__unstableType'] ) && $value['__unstableType'] === 'presets' ) {
-					unset( $editor_settings['styles'][ $key ] );
-					continue;
+		// Only strip the core design UI when Style Manager owns the design
+		// system. In the bare WordPress.org build these stay so the editor
+		// exposes the theme.json palette, font sizes, and Font Library.
+		if ( anima_style_manager_is_active() ) {
+			// Remove default style presets.
+			if ( ! empty( $editor_settings['styles'] ) ) {
+				foreach ( $editor_settings['styles'] as $key => $value ) {
+					if ( isset( $value['__unstableType'] ) && $value['__unstableType'] === 'presets' ) {
+						unset( $editor_settings['styles'][ $key ] );
+						continue;
+					}
 				}
+
+				$editor_settings['styles'] = array_values( $editor_settings['styles'] );
 			}
 
-			$editor_settings['styles'] = array_values( $editor_settings['styles'] );
+			// Keep font management in Style Manager to avoid duplicate UI with Font Library.
+			$editor_settings['fontLibraryEnabled'] = false;
 		}
-
-		// Keep font management in Style Manager to avoid duplicate UI with Font Library.
-		$editor_settings['fontLibraryEnabled'] = false;
 
 		// WordPress 7 only exposes Wide/Full in the post editor when post content
 		// resolves to a constrained layout context. Seed that context explicitly

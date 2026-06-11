@@ -105,21 +105,108 @@ function wporgFixThemeHeader() {
 gulp.task( 'build:wporg:theme-header', wporgFixThemeHeader );
 
 // -----------------------------------------------------------------------------
-// Give core's constrained layout real content widths in the bare build.
+// Relax theme.json for the bare (no Style Manager) build.
 //
-// theme.json points contentSize/wideSize at the Nova Blocks runtime variables
-// (--nb-content-width / --nb-container-width). When Nova Blocks is active those
-// resolve as usual; when it is not (e.g. the wp-themes.com preview), an
-// undefined variable collapses constrained layout to full width. Add a pixel
-// fallback so core blocks stay readable either way.
+// The commercial theme.json locks every design setting (no palette, no font
+// sizes, no spacing, no base styles) because Style Manager supplies all of it
+// at runtime. Without that plugin the theme is unstyled and gives the user no
+// design controls — which the WordPress.org review treats as crippling core.
+//
+// This transform deep-mutates the built theme.json in place: it keeps
+// templateParts / customTemplates / per-block settings intact, but enables
+// appearanceTools, ships a default palette, font sizes/families, a spacing
+// scale, base styles, and content widths with a pixel fallback (so constrained
+// layout works whether or not Nova Blocks resolves --nb-* variables). When the
+// Style Manager + Nova Blocks plugins ARE active, they layer their generated
+// CSS on top, so this only governs the bare experience.
 // -----------------------------------------------------------------------------
-function wporgThemeJsonWidths() {
-	return gulp.src( '../build/' + slug + '/theme.json' )
-	           .pipe( plugins.replace( '"contentSize": "var(--nb-content-width)"', '"contentSize": "var(--nb-content-width, 650px)"' ) )
-	           .pipe( plugins.replace( '"wideSize": "var(--nb-container-width)"', '"wideSize": "var(--nb-container-width, 1100px)"' ) )
-	           .pipe( gulp.dest( '../build/' + slug ) );
+function wporgRelaxThemeJson(done) {
+	const file = '../build/' + slug + '/theme.json';
+	const json = JSON.parse( fs.readFileSync( file, 'utf8' ) );
+	json.settings = json.settings || {};
+	const s = json.settings;
+
+	s.appearanceTools = true;
+	s.useRootPaddingAwareAlignments = true;
+
+	s.layout = Object.assign( {}, s.layout, {
+		contentSize: 'var(--nb-content-width, 650px)',
+		wideSize: 'var(--nb-container-width, 1100px)',
+	} );
+
+	s.color = {
+		background: true,
+		custom: true,
+		customDuotone: false,
+		customGradient: false,
+		defaultGradients: false,
+		defaultPalette: false,
+		link: true,
+		text: true,
+		palette: [
+			{ slug: 'base',      color: '#ffffff', name: 'Base' },
+			{ slug: 'contrast',  color: '#15110e', name: 'Contrast' },
+			{ slug: 'primary',   color: '#9a6a4f', name: 'Primary' },
+			{ slug: 'secondary', color: '#6f6a63', name: 'Secondary' },
+			{ slug: 'tertiary',  color: '#f3efe9', name: 'Tertiary' },
+		],
+	};
+
+	s.typography = Object.assign( {}, s.typography, {
+		customFontSize: true,
+		fontStyle: true,
+		fontWeight: true,
+		lineHeight: true,
+		letterSpacing: true,
+		textDecoration: true,
+		textTransform: true,
+		dropCap: false,
+		fluid: true,
+		fontFamilies: [
+			{ slug: 'body', name: 'Body', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif' },
+			{ slug: 'heading', name: 'Heading', fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' },
+		],
+		fontSizes: [
+			{ slug: 'small', name: 'Small', size: '0.9rem' },
+			{ slug: 'medium', name: 'Medium', size: '1.125rem' },
+			{ slug: 'large', name: 'Large', size: '1.5rem', fluid: { min: '1.3rem', max: '1.5rem' } },
+			{ slug: 'x-large', name: 'Extra Large', size: '2.25rem', fluid: { min: '1.8rem', max: '2.25rem' } },
+			{ slug: 'xx-large', name: 'Huge', size: '3rem', fluid: { min: '2.2rem', max: '3rem' } },
+		],
+	} );
+
+	s.spacing = Object.assign( {}, s.spacing, {
+		blockGap: true,
+		margin: true,
+		padding: true,
+		units: [ 'px', 'em', 'rem', 'vh', 'vw', '%' ],
+		spacingScale: { operator: '*', increment: 1.5, steps: 7, mediumStep: 1.5, unit: 'rem' },
+	} );
+
+	json.styles = {
+		spacing: {
+			blockGap: '1.2rem',
+			padding: { top: '0', bottom: '0', left: 'clamp(1.2rem, 5vw, 2.5rem)', right: 'clamp(1.2rem, 5vw, 2.5rem)' },
+		},
+		color: { background: 'var(--wp--preset--color--base)', text: 'var(--wp--preset--color--contrast)' },
+		typography: { fontFamily: 'var(--wp--preset--font-family--body)', fontSize: 'var(--wp--preset--font-size--medium)', lineHeight: '1.7' },
+		elements: {
+			heading: { typography: { fontFamily: 'var(--wp--preset--font-family--heading)', fontWeight: '600', lineHeight: '1.2' } },
+			h1: { typography: { fontSize: 'var(--wp--preset--font-size--xx-large)' } },
+			h2: { typography: { fontSize: 'var(--wp--preset--font-size--x-large)' } },
+			h3: { typography: { fontSize: 'var(--wp--preset--font-size--large)' } },
+			link: { color: { text: 'var(--wp--preset--color--primary)' }, ':hover': { typography: { textDecoration: 'underline' } } },
+			button: {
+				color: { background: 'var(--wp--preset--color--primary)', text: 'var(--wp--preset--color--base)' },
+				spacing: { padding: { top: '0.7rem', bottom: '0.7rem', left: '1.4rem', right: '1.4rem' } },
+			},
+		},
+	};
+
+	fs.writeFileSync( file, JSON.stringify( json, null, '\t' ) + '\n' );
+	return done();
 }
-gulp.task( 'build:wporg:theme-json-widths', wporgThemeJsonWidths );
+gulp.task( 'build:wporg:relax-theme-json', wporgRelaxThemeJson );
 
 function wporgRenamePot(done) {
 	const oldPot = '../build/' + slug + '/languages/anima.pot'
@@ -134,7 +221,7 @@ gulp.task( 'build:wporg:rename-pot', wporgRenamePot );
 gulp.task( 'build:wporg:fix-wporg', gulp.series(
 	'build:wporg:txtdomain',
 	'build:wporg:theme-header',
-	'build:wporg:theme-json-widths',
+	'build:wporg:relax-theme-json',
 	'build:wporg:rename-pot'
 ) );
 
