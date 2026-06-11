@@ -885,8 +885,8 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 				$field_value = $item->$name;
 			} ?>
 
-            <p class="field-<?php echo $name ?> description description-wide">
-                <label for="<?php echo $field_id ?>">
+            <p class="field-<?php echo esc_attr( $name ); ?> description description-wide">
+                <label for="<?php echo esc_attr( $field_id ); ?>">
 					<?php echo esc_html( $field_label ); ?><br />
                     <input type="text" id="<?php echo esc_attr( $field_id ); ?>" name="<?php echo esc_attr( $field_name ); ?>" class="<?php echo esc_attr( $field_classes ); ?>" value="<?php echo esc_attr( $field_value ); ?>" placeholder="<?php echo esc_attr( $field_placeholder ); ?>" />
 	                <span class="description"><?php echo wp_kses( $field_description, wp_kses_allowed_html() ); ?></span>
@@ -950,10 +950,10 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 			$field_description = __( 'A badge is <strong>a short text indicator</strong> used to inform visitors that something\'s special about this menu item.', '__theme_txtd' );
 			?>
 
-            <p class="field-<?php echo $name ?> description description-thin">
-	            <label for="<?php echo $field_id; ?>">
+            <p class="field-<?php echo esc_attr( $name ); ?> description description-thin">
+	            <label for="<?php echo esc_attr( $field_id ); ?>">
 					<?php echo esc_html( $field_label ); ?><br />
-                    <input type="text" id="<?php echo esc_attr( $field_id ); ?>" name="<?php echo esc_attr( $field_name ); ?>" class="<?php echo esc_attr( $field_classes ); ?>" value="{{ data.<?php echo $name; ?> }}" placeholder="<?php echo esc_attr( $field_placeholder ); ?>" />
+                    <input type="text" id="<?php echo esc_attr( $field_id ); ?>" name="<?php echo esc_attr( $field_name ); ?>" class="<?php echo esc_attr( $field_classes ); ?>" value="{{ data.<?php echo esc_attr( $name ); ?> }}" placeholder="<?php echo esc_attr( $field_placeholder ); ?>" />
 		            <span class="description"><?php echo wp_kses( $field_description, wp_kses_allowed_html() ); ?></span>
 	            </label>
             </p>
