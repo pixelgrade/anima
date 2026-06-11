@@ -52,38 +52,6 @@ function anima_maybe_force_wf_active( $output ) {
 add_filter( 'language_attributes', 'anima_maybe_force_wf_active' );
 
 /**
- * Enqueue the Style Manager token fallback in the bare WordPress.org build.
- *
- * The compiled theme CSS consumes `--sm-current-*` color tokens that Style
- * Manager emits at runtime. Without the plugin they are undefined, so the
- * wp.org build ships a generated fallback (dist/css/sm-token-fallback.css,
- * produced from SM's own default palette by `gulp build:wporg:token-fallback`).
- * Enqueue it only when Style Manager is absent and the file is present (it is
- * generated only into the wp.org build, never the commercial one).
- *
- * @return void
- */
-function anima_enqueue_sm_token_fallback() {
-	if ( anima_style_manager_is_active() ) {
-		return;
-	}
-
-	$relative = '/dist/css/sm-token-fallback.css';
-	if ( ! file_exists( get_template_directory() . $relative ) ) {
-		return;
-	}
-
-	$theme = wp_get_theme( get_template() );
-	wp_enqueue_style(
-		'anima-sm-token-fallback',
-		trailingslashit( get_template_directory_uri() ) . 'dist/css/sm-token-fallback.css',
-		[ 'anima-custom-properties' ],
-		$theme->get( 'Version' )
-	);
-}
-add_action( 'wp_enqueue_scripts', 'anima_enqueue_sm_token_fallback', 5 );
-
-/**
  * Get the default constrained layout used for post content in the editor.
  *
  * @return array

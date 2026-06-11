@@ -1,23 +1,14 @@
-const gulp = require('gulp'),
-	fs = require('fs')
+const fs = require('fs')
 
 // -----------------------------------------------------------------------------
-// Style Manager token fallback for the bare (no-plugin) WordPress.org build.
+// Style Manager default-palette reader for the WordPress.org build.
 //
-// The compiled theme CSS consumes a small set of Style Manager runtime tokens
-// (`--sm-current-*` colors + a few layout tokens). Style Manager emits them at
-// runtime from the active palette; without the plugin they are undefined and
-// buttons/accents/separators/Nova bridges render uncolored.
-//
-// This generator reproduces those tokens from Style Manager's OWN canonical
-// default palette so the bare demo's colors come straight from SM's defaults —
-// not a hand-picked parallel set (which would drift). When Style Manager IS
-// active, its runtime output overrides these, so the file is enqueued only when
-// the plugin is absent (see anima_enqueue_sm_token_fallback() in
-// inc/block-editor.php).
+// The wp.org build's theme.json palette (and, through the css mapping in
+// relax-theme-json, the `--sm-current-*` runtime tokens the compiled theme CSS
+// consumes) is seeded from Style Manager's OWN canonical default palette — not a
+// hand-picked parallel set (which would drift). When Style Manager IS active its
+// runtime output takes over; this only governs the bare default look.
 // -----------------------------------------------------------------------------
-
-const slug = process.env.WPORG_SLUG || 'anima-lt'
 
 /**
  * Read Style Manager's default palette colors (light, variation 1).
@@ -61,37 +52,10 @@ function readSmDefaultColors() {
 	}
 }
 
-function tokenFallbackCss() {
-	const c = readSmDefaultColors()
-	return `/* Auto-generated for the WordPress.org build from Style Manager's default palette. Do not edit by hand. Source: ${c.source}. */
-:root {
-	--sm-current-bg-color: ${c.bg};
-	--sm-current-accent-color: ${c.accent};
-	--sm-current-accent2-color: var(--sm-current-accent-color);
-	--sm-current-accent3-color: var(--sm-current-accent2-color);
-	--sm-current-fg1-color: ${c.fg1};
-	--sm-current-fg2-color: ${c.fg2};
-	--sm-site-container-width: 67;
-	--sm-content-inset: 288;
-	--sm-spacing-level: 1;
-
-	/* The theme's button CSS fills from --sm-button-background-color (the one
-	   button token Style Manager normally supplies). Define it so buttons get
-	   the brand fill with their built-in light text. */
-	--sm-button-background-color: var(--sm-current-accent-color);
-}
-`
-}
-
-function writeTokenFallback( done ) {
-	const dir = '../build/' + slug + '/dist/css'
-	const colors = readSmDefaultColors()
-	fs.mkdirSync( dir, { recursive: true } )
-	fs.writeFileSync( dir + '/sm-token-fallback.css', tokenFallbackCss() )
-	console.log( '[build:wporg:token-fallback] wrote sm-token-fallback.css from SM ' + colors.source + ' defaults (accent ' + colors.accent + ')' )
-	return done()
-}
-writeTokenFallback.description = 'Generate the bare-build Style Manager token fallback CSS from SM defaults'
-gulp.task( 'build:wporg:token-fallback', writeTokenFallback )
+// NOTE: the SM runtime tokens (`--sm-current-*`, `--sm-button-background-color`,
+// layout) are now mapped to the active palette in theme.json `styles.css` by the
+// relax-theme-json transform (see build-wporg.js), so they follow the default
+// palette OR any style variation. This module only supplies the default palette
+// colors that seed that theme.json palette.
 
 module.exports = { readSmDefaultColors }

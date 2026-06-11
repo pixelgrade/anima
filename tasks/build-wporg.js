@@ -201,9 +201,27 @@ function wporgRelaxThemeJson(done) {
 			h3: { typography: { fontSize: 'var(--wp--preset--font-size--large)' } },
 			link: { color: { text: 'var(--wp--preset--color--primary)' }, ':hover': { typography: { textDecoration: 'underline' } } },
 			// Buttons are styled by the theme's own CSS via the --theme-button-*
-			// tokens (filled by the token fallback); don't override them here or
-			// the at-rest text color is forced and the ghost button disappears.
+			// tokens (fed by --sm-button-background-color in the css mapping below);
+			// don't set elements.button.color here or the ghost button disappears.
 		},
+		// Map the Style Manager runtime tokens the compiled theme CSS consumes to
+		// the ACTIVE palette's preset variables. This drives buttons/accents/
+		// separators/Nova bridges from whichever palette is live — the default
+		// palette or any style variation (wporg/styles/*.json) — so a variation is
+		// just a palette swap and recolors the whole theme bare. Supersedes the
+		// separate sm-token-fallback.css.
+		css: ':root{'
+			+ '--sm-current-bg-color:var(--wp--preset--color--base);'
+			+ '--sm-current-accent-color:var(--wp--preset--color--primary);'
+			+ '--sm-current-accent2-color:var(--sm-current-accent-color);'
+			+ '--sm-current-accent3-color:var(--sm-current-accent2-color);'
+			+ '--sm-current-fg1-color:var(--wp--preset--color--contrast);'
+			+ '--sm-current-fg2-color:var(--wp--preset--color--secondary);'
+			+ '--sm-button-background-color:var(--wp--preset--color--primary);'
+			+ '--sm-site-container-width:67;'
+			+ '--sm-content-inset:288;'
+			+ '--sm-spacing-level:1;'
+			+ '}',
 	};
 
 	fs.writeFileSync( file, JSON.stringify( json, null, '\t' ) + '\n' );
