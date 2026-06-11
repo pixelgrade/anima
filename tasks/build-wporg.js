@@ -166,9 +166,19 @@ function wporgRelaxThemeJson(done) {
 		textTransform: true,
 		dropCap: false,
 		fluid: true,
+		// Default pairing borrowed from Style Manager's "Julia" font palette:
+		// Lora (serif headings) + Montserrat (sans body). Bundled OFL fonts.
 		fontFamilies: [
-			{ slug: 'body', name: 'Body', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif' },
-			{ slug: 'heading', name: 'Heading', fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' },
+			{
+				slug: 'heading', name: 'Heading',
+				fontFamily: '"Lora", Georgia, Cambria, "Times New Roman", Times, serif',
+				fontFace: [ { fontFamily: 'Lora', fontStyle: 'normal', fontWeight: '400 700', fontDisplay: 'swap', src: [ 'file:./assets/fonts/lora.woff2' ] } ],
+			},
+			{
+				slug: 'body', name: 'Body',
+				fontFamily: '"Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
+				fontFace: [ { fontFamily: 'Montserrat', fontStyle: 'normal', fontWeight: '400 700', fontDisplay: 'swap', src: [ 'file:./assets/fonts/montserrat.woff2' ] } ],
+			},
 		],
 		fontSizes: [
 			{ slug: 'small', name: 'Small', size: '0.9rem' },
@@ -186,6 +196,10 @@ function wporgRelaxThemeJson(done) {
 		units: [ 'px', 'em', 'rem', 'vh', 'vw', '%' ],
 		spacingScale: { operator: '*', increment: 1.5, steps: 7, mediumStep: 1.5, unit: 'rem' },
 	} );
+
+	// $theme-fonts roles that read as display/headings (serif) vs body/UI (sans).
+	const headingRoles = [ 'super-display', 'display', 'heading-1', 'heading-2', 'heading-3', 'heading-4', 'site-title' ];
+	const bodyRoles = [ 'body', 'lead', 'small-body', 'caption', 'heading-5', 'heading-6', 'navigation', 'meta', 'button', 'input', 'accent' ];
 
 	json.styles = {
 		spacing: {
@@ -221,6 +235,14 @@ function wporgRelaxThemeJson(done) {
 			+ '--sm-site-container-width:67;'
 			+ '--sm-content-inset:288;'
 			+ '--sm-spacing-level:1;'
+			+ '}'
+			// Point the theme's per-role font-family tokens at the active heading/
+			// body families so the compiled typography (apply-font) uses the bundled
+			// fonts — and follows a style variation that swaps the families. Higher
+			// specificity (:root:root) to win over the compiled defaults.
+			+ ':root:root{'
+			+ headingRoles.map( r => '--theme-' + r + '-font-family:var(--wp--preset--font-family--heading);' ).join( '' )
+			+ bodyRoles.map( r => '--theme-' + r + '-font-family:var(--wp--preset--font-family--body);' ).join( '' )
 			+ '}',
 	};
 
