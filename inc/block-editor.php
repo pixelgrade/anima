@@ -28,6 +28,30 @@ function anima_style_manager_is_active() {
 }
 
 /**
+ * Reveal content when no web font loader will mark fonts as active.
+ *
+ * To prevent a flash of unstyled text, the theme hides text until the web font
+ * loader adds the `wf-active` class to <html>
+ * (`html:not(.wf-active) … { opacity: 0 }`, plus `pointer-events: none`). Both
+ * Style Manager and the commercial CDN webfont fallback add that class. The
+ * bare WordPress.org build uses the system font stack and ships neither, so
+ * without this the page would stay blank forever. When no font loader is
+ * present, add `wf-active` to <html> server-side — there are no remote fonts to
+ * wait for, so there is nothing to flash.
+ *
+ * @param string $output The language attributes string for the <html> tag.
+ * @return string
+ */
+function anima_maybe_force_wf_active( $output ) {
+	if ( anima_style_manager_is_active() || function_exists( 'anima_webfonts_fallback' ) ) {
+		return $output;
+	}
+
+	return trim( $output . ' class="wf-active"' );
+}
+add_filter( 'language_attributes', 'anima_maybe_force_wf_active' );
+
+/**
  * Get the default constrained layout used for post content in the editor.
  *
  * @return array
