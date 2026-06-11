@@ -130,9 +130,12 @@ function wporgRelaxThemeJson(done) {
 	s.appearanceTools = true;
 	s.useRootPaddingAwareAlignments = true;
 
+	// Bare-build layout fallbacks approximate the Felt LT demo's proportions
+	// (content ≈ 816px, container ≈ 1290–1490px depending on viewport). When Nova
+	// Blocks is active, its --nb-* widths (driven by Style Manager) take over.
 	s.layout = Object.assign( {}, s.layout, {
-		contentSize: 'var(--nb-content-width, 650px)',
-		wideSize: 'var(--nb-container-width, 1100px)',
+		contentSize: 'var(--nb-content-width, 820px)',
+		wideSize: 'var(--nb-container-width, 1290px)',
 	} );
 
 	// Derive the editor palette from Style Manager's own default palette so the
