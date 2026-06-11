@@ -247,7 +247,12 @@ function anima_get_style_manager_customizer_url( $focus_type = 'panel', $focus_t
  * second styling UI.
  */
 function anima_enqueue_site_editor_style_manager_assets() {
-	if ( ! anima_is_site_editor_screen() ) {
+	// The Customizer / Style Manager handoff only makes sense when Style Manager
+	// is active. In the bare WordPress.org build it would point users to a
+	// Customizer flow that does not exist and hide the native Site Editor Styles
+	// screen (where the theme.json style variations live), so let that screen
+	// work normally instead.
+	if ( ! anima_style_manager_is_active() || ! anima_is_site_editor_screen() ) {
 		return;
 	}
 
