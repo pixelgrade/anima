@@ -16,6 +16,7 @@ gulp.task( 'zip:wporg', gulp.series(
 	'build:translate',
 	'build:wporg:folder',
 	'build:wporg:overlay',
+	'build:wporg:token-fallback',
 	'build:fix:dir-permissions',
 	'build:fix:file-permissions',
 	'build:fix:line-endings',

@@ -1,7 +1,8 @@
 const gulp = require('gulp'),
 	plugins = require('gulp-load-plugins')(),
 	fs = require('fs'),
-	del = require('del')
+	del = require('del'),
+	{ readSmDefaultColors } = require('./build-wporg-tokens')
 
 // -----------------------------------------------------------------------------
 // WordPress.org build variant.
@@ -134,6 +135,9 @@ function wporgRelaxThemeJson(done) {
 		wideSize: 'var(--nb-container-width, 1100px)',
 	} );
 
+	// Derive the editor palette from Style Manager's own default palette so the
+	// block-editor color picker matches the runtime tokens the compiled CSS uses.
+	const smc = readSmDefaultColors();
 	s.color = {
 		background: true,
 		custom: true,
@@ -144,11 +148,11 @@ function wporgRelaxThemeJson(done) {
 		link: true,
 		text: true,
 		palette: [
-			{ slug: 'base',      color: '#ffffff', name: 'Base' },
-			{ slug: 'contrast',  color: '#15110e', name: 'Contrast' },
-			{ slug: 'primary',   color: '#9a6a4f', name: 'Primary' },
-			{ slug: 'secondary', color: '#6f6a63', name: 'Secondary' },
-			{ slug: 'tertiary',  color: '#f3efe9', name: 'Tertiary' },
+			{ slug: 'base',      color: smc.bg,       name: 'Base' },
+			{ slug: 'contrast',  color: smc.fg1,      name: 'Contrast' },
+			{ slug: 'primary',   color: smc.accent,   name: 'Primary' },
+			{ slug: 'secondary', color: smc.fg2,      name: 'Secondary' },
+			{ slug: 'tertiary',  color: smc.tertiary, name: 'Tertiary' },
 		],
 	};
 
