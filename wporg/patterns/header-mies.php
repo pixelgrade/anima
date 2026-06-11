@@ -1,3 +1,13 @@
+<?php
+/**
+ * Title: Header, minimal wordmark (uppercase menu)
+ * Slug: anima-lt/header-mies
+ * Categories: header
+ * Block Types: core/template-part/header
+ * Description: A minimal, architectural header — a wordmark/logo on the left and an uppercase, letter-spaced menu on the right, in the spirit of Mies LT.
+ * Inserter: true
+ */
+?>
 <!-- wp:group {"tagName":"div","style":{"spacing":{"padding":{"top":"1.8rem","bottom":"1.8rem"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group" style="padding-top:1.8rem;padding-bottom:1.8rem">
 	<!-- wp:group {"layout":{"type":"flex","justifyContent":"space-between","flexWrap":"wrap","verticalAlignment":"center"}} -->
