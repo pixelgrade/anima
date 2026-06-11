@@ -52,3 +52,11 @@ Source: https://github.com/omgovich/colord
 Font Awesome icons (subset), Copyright Dave Gandy
 License: SIL OFL 1.1 (fonts), MIT (code)
 Source: https://fontawesome.com/
+
+Bundled fonts (assets/fonts/), Lora / Montserrat / Cormorant / Quattrocento Sans
+License: SIL Open Font License 1.1
+Source: https://fonts.google.com/ (see assets/fonts/LICENSE.md)
+
+Hero image (assets/images/hero-craft.jpg), "Crafts Hobby" by Quino Al
+License: CC0 1.0 (Public Domain)
+Source: https://stocksnap.io/photo/crafts-hobby-UO4VC2M9HP
