@@ -110,13 +110,19 @@
     if (!container) {
       return;
     }
-    container.classList.add(DISABLED_CLASS);
+
+    // When keepNativeStyles is set (the bare WordPress.org build), append the
+    // note above the native Styles controls instead of replacing them, so the
+    // style variations stay reachable.
+    if (!config.keepNativeStyles) {
+      container.classList.add(DISABLED_CLASS);
+    }
     if (!container.querySelector('.' + NOTICE_CLASS)) {
       container.prepend(buildNotice());
     }
   }
   function clearNotice() {
-    document.querySelectorAll('.edit-site-styles.' + DISABLED_CLASS).forEach(function (container) {
+    document.querySelectorAll('.edit-site-styles').forEach(function (container) {
       container.classList.remove(DISABLED_CLASS);
       var notice = container.querySelector('.' + NOTICE_CLASS);
       if (notice) {

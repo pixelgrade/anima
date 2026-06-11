@@ -247,12 +247,7 @@ function anima_get_style_manager_customizer_url( $focus_type = 'panel', $focus_t
  * second styling UI.
  */
 function anima_enqueue_site_editor_style_manager_assets() {
-	// The Customizer / Style Manager handoff only makes sense when Style Manager
-	// is active. In the bare WordPress.org build it would point users to a
-	// Customizer flow that does not exist and hide the native Site Editor Styles
-	// screen (where the theme.json style variations live), so let that screen
-	// work normally instead.
-	if ( ! anima_style_manager_is_active() || ! anima_is_site_editor_screen() ) {
+	if ( ! anima_is_site_editor_screen() ) {
 		return;
 	}
 
@@ -267,27 +262,54 @@ function anima_enqueue_site_editor_style_manager_assets() {
 		true
 	);
 
+	if ( anima_style_manager_is_active() ) {
+		// Style Manager is the single source of truth: hand the Styles screen
+		// off to the Customizer-managed flow.
+		wp_localize_script( 'anima-site-editor-style-manager', 'animaSiteEditorStyleManager', [
+			'customizerUrl'      => anima_get_style_manager_customizer_url(),
+			'eyebrow'            => esc_html__( 'Pixelgrade LT', '__theme_txtd' ),
+			'title'              => esc_html__( 'Use the Customizer for your design system', '__theme_txtd' ),
+			'description'        => esc_html__( 'We know that each website needs to have an unique voice in tune with your charisma. That\'s why we created a smart options system to easily make handy color changes, spacing adjustments and balancing fonts, each step bringing you closer to a striking result.', '__theme_txtd' ),
+			'buttonLabel'        => esc_html__( 'Open the Customizer', '__theme_txtd' ),
+			'resourcesEyebrow'   => esc_html__( 'Learn more', '__theme_txtd' ),
+			'resources'          => [
+				[
+					'title'       => esc_html__( 'The Color System', '__theme_txtd' ),
+					'description' => esc_html__( 'Set the overall mood of your site with a palette that feels calm, bold, playful, or anywhere in between.', '__theme_txtd' ),
+					'buttonLabel' => esc_html__( 'Set Up Colors', '__theme_txtd' ),
+					'url'         => anima_get_style_manager_customizer_url( 'section', 'sm_color_palettes_section' ),
+				],
+				[
+					'title'       => esc_html__( 'Managing Typography', '__theme_txtd' ),
+					'description' => esc_html__( 'Choose a small set of fonts that work well together so headings, interface text, and longer reads stay balanced.', '__theme_txtd' ),
+					'buttonLabel' => esc_html__( 'Change Fonts', '__theme_txtd' ),
+					'url'         => anima_get_style_manager_customizer_url( 'section', 'sm_font_palettes_section' ),
+				],
+			],
+		] );
+
+		return;
+	}
+
+	// Bare build (no Style Manager): keep the native Styles screen fully usable
+	// and add a gentle, non-blocking note encouraging the free Style Manager
+	// plugin for the advanced color/font system. `keepNativeStyles` tells the
+	// script to append the note above the controls instead of replacing them.
+	$install_url = current_user_can( 'install_plugins' )
+		? add_query_arg(
+			[ 'tab' => 'search', 'type' => 'term', 's' => rawurlencode( 'Style Manager Pixelgrade' ) ],
+			self_admin_url( 'plugin-install.php' )
+		)
+		: 'https://wordpress.org/plugins/style-manager/';
+
 	wp_localize_script( 'anima-site-editor-style-manager', 'animaSiteEditorStyleManager', [
-		'customizerUrl'      => anima_get_style_manager_customizer_url(),
-		'eyebrow'            => esc_html__( 'Pixelgrade LT', '__theme_txtd' ),
-		'title'              => esc_html__( 'Use the Customizer for your design system', '__theme_txtd' ),
-		'description'        => esc_html__( 'We know that each website needs to have an unique voice in tune with your charisma. That\'s why we created a smart options system to easily make handy color changes, spacing adjustments and balancing fonts, each step bringing you closer to a striking result.', '__theme_txtd' ),
-		'buttonLabel'        => esc_html__( 'Open the Customizer', '__theme_txtd' ),
-		'resourcesEyebrow'   => esc_html__( 'Learn more', '__theme_txtd' ),
-		'resources'          => [
-			[
-				'title'       => esc_html__( 'The Color System', '__theme_txtd' ),
-				'description' => esc_html__( 'Set the overall mood of your site with a palette that feels calm, bold, playful, or anywhere in between.', '__theme_txtd' ),
-				'buttonLabel' => esc_html__( 'Set Up Colors', '__theme_txtd' ),
-				'url'         => anima_get_style_manager_customizer_url( 'section', 'sm_color_palettes_section' ),
-			],
-			[
-				'title'       => esc_html__( 'Managing Typography', '__theme_txtd' ),
-				'description' => esc_html__( 'Choose a small set of fonts that work well together so headings, interface text, and longer reads stay balanced.', '__theme_txtd' ),
-				'buttonLabel' => esc_html__( 'Change Fonts', '__theme_txtd' ),
-				'url'         => anima_get_style_manager_customizer_url( 'section', 'sm_font_palettes_section' ),
-			],
-		],
+		'keepNativeStyles' => true,
+		'customizerUrl'    => esc_url( $install_url ),
+		'eyebrow'          => esc_html__( 'Pixelgrade LT', '__theme_txtd' ),
+		'title'            => esc_html__( 'Unlock advanced design settings', '__theme_txtd' ),
+		'description'      => esc_html__( 'Anima works beautifully on its own. Install the free Style Manager plugin to unlock the full design system — smart color palettes, balanced font pairings, and fine-grained spacing — without leaving WordPress.', '__theme_txtd' ),
+		'buttonLabel'      => esc_html__( 'Install Style Manager', '__theme_txtd' ),
+		'resources'        => [],
 	] );
 }
 add_action( 'enqueue_block_editor_assets', 'anima_enqueue_site_editor_style_manager_assets', 20 );
