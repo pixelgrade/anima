@@ -104,6 +104,23 @@ function wporgFixThemeHeader() {
 }
 gulp.task( 'build:wporg:theme-header', wporgFixThemeHeader );
 
+// -----------------------------------------------------------------------------
+// Give core's constrained layout real content widths in the bare build.
+//
+// theme.json points contentSize/wideSize at the Nova Blocks runtime variables
+// (--nb-content-width / --nb-container-width). When Nova Blocks is active those
+// resolve as usual; when it is not (e.g. the wp-themes.com preview), an
+// undefined variable collapses constrained layout to full width. Add a pixel
+// fallback so core blocks stay readable either way.
+// -----------------------------------------------------------------------------
+function wporgThemeJsonWidths() {
+	return gulp.src( '../build/' + slug + '/theme.json' )
+	           .pipe( plugins.replace( '"contentSize": "var(--nb-content-width)"', '"contentSize": "var(--nb-content-width, 650px)"' ) )
+	           .pipe( plugins.replace( '"wideSize": "var(--nb-container-width)"', '"wideSize": "var(--nb-container-width, 1100px)"' ) )
+	           .pipe( gulp.dest( '../build/' + slug ) );
+}
+gulp.task( 'build:wporg:theme-json-widths', wporgThemeJsonWidths );
+
 function wporgRenamePot(done) {
 	const oldPot = '../build/' + slug + '/languages/anima.pot'
 	const newPot = '../build/' + slug + '/languages/' + slug + '.pot'
@@ -117,6 +134,7 @@ gulp.task( 'build:wporg:rename-pot', wporgRenamePot );
 gulp.task( 'build:wporg:fix-wporg', gulp.series(
 	'build:wporg:txtdomain',
 	'build:wporg:theme-header',
+	'build:wporg:theme-json-widths',
 	'build:wporg:rename-pot'
 ) );
 

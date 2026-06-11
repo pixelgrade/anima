@@ -19,3 +19,25 @@ inc/admin/pixcare-notice
 # The wp.org overlay source folder itself (its contents are copied into the
 # build root by the build:wporg:overlay task).
 wporg
+
+# Nova Blocks-based templates that belong to plugin-registered post types the
+# bare theme does not register (portfolio, gallery, testimonial, WooCommerce
+# product) plus the Nova-only split-header single. The universal templates
+# (index/home/single/page/archive/search/404) are replaced with core-only
+# versions from the wporg/ overlay; these CPT/Nova templates are dropped so the
+# wp.org build ships no markup referencing unavailable blocks or post types.
+templates/archive-gallery.html
+templates/archive-portfolio.html
+templates/archive-testimonial.html
+templates/archive-product.html
+templates/single-gallery.html
+templates/single-portfolio.html
+templates/single-testimonial.html
+templates/single-product.html
+templates/single-split-header.html
+templates/taxonomy-gallery_tag.html
+templates/taxonomy-gallery_type.html
+templates/taxonomy-portfolio_tag.html
+templates/taxonomy-portfolio_type.html
+templates/taxonomy-product_cat.html
+templates/taxonomy-product_tag.html
