@@ -24,10 +24,15 @@ function anima_admin_setup() {
 
 	/**
 	 * Load and initialize Pixelgrade Care notice logic.
+	 *
+	 * The notice ships only with the commercial distribution; the
+	 * WordPress.org build strips it, hence the file_exists() guard.
 	 */
-	if ( ! class_exists( 'PixelgradeCare_Install_Notice' ) ) {
+	if ( ! class_exists( 'PixelgradeCare_Install_Notice' ) && file_exists( __DIR__ . '/pixcare-notice/class-notice.php' ) ) {
 		require_once 'pixcare-notice/class-notice.php'; // phpcs:ignore
 	}
-	PixelgradeCare_Install_Notice::init();
+	if ( class_exists( 'PixelgradeCare_Install_Notice' ) ) {
+		PixelgradeCare_Install_Notice::init();
+	}
 }
 add_action( 'after_setup_theme', 'anima_admin_setup', 99 );

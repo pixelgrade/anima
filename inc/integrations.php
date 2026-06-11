@@ -29,12 +29,6 @@ if ( class_exists( 'Pixelgrade\StyleManager\Plugin' ) ) {
 require_once trailingslashit( get_template_directory() ) . 'inc/integrations/jetpack.php';
 
 /**
- * Load Pixelgrade Care compatibility file.
- * http://pixelgrade.com/
- */
-require_once trailingslashit( get_template_directory() ) . 'inc/integrations/pixelgrade-care.php';
-
-/**
  * Load WooCommerce integration for this theme
  * This has to be loaded before inc/admin/admin.php
  */
