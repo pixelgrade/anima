@@ -7,8 +7,8 @@
  * Inserter: true
  */
 ?>
-<!-- wp:group {"tagName":"section","style":{"spacing":{"padding":{"top":"4rem","bottom":"4rem"}}},"layout":{"type":"constrained"}} -->
-<section class="wp-block-group" style="padding-top:4rem;padding-bottom:4rem">
+<!-- wp:group {"tagName":"section","align":"wide","style":{"spacing":{"padding":{"top":"4rem","bottom":"4rem"}}}} -->
+<section class="wp-block-group alignwide" style="padding-top:4rem;padding-bottom:4rem">
 	<!-- wp:columns {"verticalAlignment":"top"} -->
 	<div class="wp-block-columns are-vertically-aligned-top">
 		<!-- wp:column {"verticalAlignment":"top","width":"40%"} -->

@@ -235,8 +235,11 @@ function wporgRelaxThemeJson(done) {
 			+ '--sm-current-fg1-color:var(--wp--preset--color--contrast);'
 			+ '--sm-current-fg2-color:var(--wp--preset--color--secondary);'
 			+ '--sm-button-background-color:var(--wp--preset--color--primary);'
-			+ '--sm-site-container-width:67;'
-			+ '--sm-content-inset:288;'
+			// Leave --sm-site-container-width / --sm-content-inset to the theme's
+			// own Nova-common fallbacks (67 / 288), which drive --nb-content-width /
+			// --nb-container-width. Those land near Felt's proportions (~1410px wide,
+			// ~720px content); Felt's literal "80" isn't portable because the width
+			// is em-based and our fluid font scale differs.
 			+ '--sm-spacing-level:1;'
 			+ '}'
 			// Point the theme's per-role font-family tokens at the active heading/
