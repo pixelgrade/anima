@@ -56,15 +56,25 @@ function anima_register_block_patterns() {
 	 */
 	$block_patterns = apply_filters( 'anima/block_patterns', $block_patterns );
 
+	// Whether the Nova Blocks library is available. Some theme patterns are built
+	// from novablocks/* blocks and must not be registered without it (e.g. the
+	// bare WordPress.org build) — they would render as broken/invalid content.
+	$nova_blocks_active = WP_Block_Type_Registry::get_instance()->is_registered( 'novablocks/header' );
+
 	foreach ( $block_patterns as $block_pattern ) {
 		if ( empty( $block_pattern['slug'] ) || empty( $block_pattern['path'] ) || ! file_exists( $block_pattern['path'] ) ) {
 			continue;
 		}
 
-		register_block_pattern(
-			'anima/' . $block_pattern['slug'],
-			require $block_pattern['path']
-		);
+		$pattern = require $block_pattern['path'];
+
+		if ( ! $nova_blocks_active
+			&& ! empty( $pattern['content'] )
+			&& false !== strpos( $pattern['content'], 'wp:novablocks/' ) ) {
+			continue;
+		}
+
+		register_block_pattern( 'anima/' . $block_pattern['slug'], $pattern );
 	}
 }
 add_action( 'init', 'anima_register_block_patterns', 12 );
