@@ -17,20 +17,31 @@
 
     var style = document.createElement( 'style' );
     style.id = STYLE_ID;
+    // Styled to the WordPress/Gutenberg design system (4px spacing grid, admin
+    // theme + gray component color tokens). We can't rely on the components-card
+    // / components-button base styles being present on this screen, so the
+    // notice and button chrome are defined explicitly.
     style.textContent =
+      // Replace mode (Style Manager active): hide the native controls, pad the panel.
       '.edit-site-styles.' + DISABLED_CLASS + ' > :not(.' + NOTICE_CLASS + '){display:none!important;}' +
-      '.edit-site-styles.' + DISABLED_CLASS + '{padding:24px;}' +
-      '.' + NOTICE_CLASS + '{display:grid;gap:16px;}' +
-      '.' + NOTICE_CLASS + '__intro .components-card__body{display:grid;gap:16px;}' +
-      '.' + NOTICE_CLASS + '__eyebrow,.' + NOTICE_CLASS + '__resources-eyebrow{margin:0;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;}' +
-      '.' + NOTICE_CLASS + '__title,.' + NOTICE_CLASS + '__resource-title{margin:0;}' +
-      '.' + NOTICE_CLASS + '__description,.' + NOTICE_CLASS + '__resource-description{margin:0;}' +
-      '.' + NOTICE_CLASS + '__actions{display:grid;gap:12px;}' +
+      '.edit-site-styles.' + DISABLED_CLASS + '{padding:16px;}' +
+      // Append mode (bare): give the note its own padding + a separator from the controls.
+      '.edit-site-styles:not(.' + DISABLED_CLASS + ') > .' + NOTICE_CLASS + '{padding:16px;margin:0 0 8px;border-bottom:1px solid var(--wp-components-color-gray-200,#e0e0e0);}' +
+      '.' + NOTICE_CLASS + '{display:grid;gap:16px;box-sizing:border-box;}' +
+      '.' + NOTICE_CLASS + '__intro,.' + NOTICE_CLASS + '__resource{padding:16px;background:var(--wp-components-color-gray-100,#f0f0f0);border-radius:4px;box-shadow:none;border:0;}' +
+      '.' + NOTICE_CLASS + '__intro .components-card__body,.' + NOTICE_CLASS + '__resource .components-card__body{padding:0;display:grid;gap:8px;align-content:start;}' +
+      '.' + NOTICE_CLASS + '__eyebrow,.' + NOTICE_CLASS + '__resources-eyebrow{margin:0;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--wp-components-color-foreground-secondary,#757575);}' +
+      '.' + NOTICE_CLASS + '__title,.' + NOTICE_CLASS + '__resource-title{margin:0;font-size:14px;font-weight:600;line-height:1.4;}' +
+      '.' + NOTICE_CLASS + '__description,.' + NOTICE_CLASS + '__resource-description{margin:0;font-size:13px;line-height:1.5;color:var(--wp-components-color-foreground-secondary,#757575);}' +
+      '.' + NOTICE_CLASS + '__actions{display:grid;gap:8px;margin-top:4px;}' +
       '.' + NOTICE_CLASS + '__resources-section{display:grid;gap:12px;}' +
-      '.' + NOTICE_CLASS + '__resources{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));}' +
-      '.' + NOTICE_CLASS + '__resource .components-card__body{display:grid;gap:12px;align-content:start;}' +
-      '.' + NOTICE_CLASS + ' .components-button{width:100%;box-sizing:border-box;justify-content:center;}' +
-      '@media (max-width: 781px){.edit-site-styles.' + DISABLED_CLASS + '{padding:16px;}}';
+      '.' + NOTICE_CLASS + '__resources{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));}' +
+      // Buttons: explicit Gutenberg primary/secondary chrome (height 36, radius 2).
+      '.' + NOTICE_CLASS + ' .components-button{display:inline-flex;align-items:center;justify-content:center;width:100%;box-sizing:border-box;min-height:36px;padding:6px 12px;border-radius:2px;font-size:13px;font-weight:500;text-decoration:none;}' +
+      '.' + NOTICE_CLASS + ' .components-button.is-primary{background:var(--wp-admin-theme-color,#3858e9);color:#fff;}' +
+      '.' + NOTICE_CLASS + ' .components-button.is-primary:hover{background:var(--wp-admin-theme-color-darker-10,#2145e6);color:#fff;}' +
+      '.' + NOTICE_CLASS + ' .components-button.is-secondary{border:1px solid var(--wp-admin-theme-color,#3858e9);color:var(--wp-admin-theme-color,#3858e9);}' +
+      '@media (max-width: 781px){.edit-site-styles.' + DISABLED_CLASS + '{padding:12px;}}';
 
     document.head.appendChild( style );
   }
