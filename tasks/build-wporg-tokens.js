@@ -74,6 +74,11 @@ function tokenFallbackCss() {
 	--sm-site-container-width: 67;
 	--sm-content-inset: 288;
 	--sm-spacing-level: 1;
+
+	/* The theme's button CSS fills from --sm-button-background-color (the one
+	   button token Style Manager normally supplies). Define it so buttons get
+	   the brand fill with their built-in light text. */
+	--sm-button-background-color: var(--sm-current-accent-color);
 }
 `
 }

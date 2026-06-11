@@ -200,10 +200,9 @@ function wporgRelaxThemeJson(done) {
 			h2: { typography: { fontSize: 'var(--wp--preset--font-size--x-large)' } },
 			h3: { typography: { fontSize: 'var(--wp--preset--font-size--large)' } },
 			link: { color: { text: 'var(--wp--preset--color--primary)' }, ':hover': { typography: { textDecoration: 'underline' } } },
-			button: {
-				color: { background: 'var(--wp--preset--color--primary)', text: 'var(--wp--preset--color--base)' },
-				spacing: { padding: { top: '0.7rem', bottom: '0.7rem', left: '1.4rem', right: '1.4rem' } },
-			},
+			// Buttons are styled by the theme's own CSS via the --theme-button-*
+			// tokens (filled by the token fallback); don't override them here or
+			// the at-rest text color is forced and the ghost button disappears.
 		},
 	};
 
