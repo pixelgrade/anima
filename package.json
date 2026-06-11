@@ -18,6 +18,7 @@
     "scripts": "webpack --mode=production --node-env=production",
     "styles": "gulp compile:styles",
     "build": "webpack --mode=production --node-env=production && gulp compile:styles && gulp zip",
+    "build:wporg": "webpack --mode=production --node-env=production && gulp compile:styles && gulp zip:wporg",
     "preinstall": "cd ./node-tasks/ && npm install && node ./lock_node_version.js"
   },
   "dependencies": {

@@ -1,0 +1,21 @@
+# Additional files stripped from the WordPress.org build, on top of .zipignore.
+#
+# Everything listed here is commercial-distribution-only logic. The theme must
+# keep working without these files: functions.php and inc/admin/admin.php load
+# them through file_exists() guards.
+
+# The commercial distribution loader and the code it pulls in.
+inc/distribution.php
+inc/distribution
+
+# WUpdates / TGMPA required-plugins onboarding.
+inc/required-plugins.php
+inc/required-plugins
+
+# Pixelgrade Care installer, activation redirect, and install notice.
+inc/integrations/pixelgrade-care.php
+inc/admin/pixcare-notice
+
+# The wp.org overlay source folder itself (its contents are copied into the
+# build root by the build:wporg:overlay task).
+wporg
