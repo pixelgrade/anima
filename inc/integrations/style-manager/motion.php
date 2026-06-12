@@ -47,7 +47,7 @@ function anima_add_motion_section_to_style_manager_config( $config ) {
 					'type'         => 'sm_toggle',
 					'setting_type' => 'option',
 					'setting_id'   => 'sm_page_transitions_enable',
-					'label'        => esc_html__( 'Enable Page Transitions', '__theme_txtd' ),
+					'label'        => esc_html__( 'Enabled', '__theme_txtd' ),
 					'default'      => false,
 				],
 				'sm_page_transition_style' => [
@@ -92,13 +92,13 @@ function anima_add_motion_section_to_style_manager_config( $config ) {
 					'setting_type' => 'option',
 					'setting_id'   => 'sm_intro_animations_intro',
 					'html'         => '<div class="customize-control-title">' . esc_html__( 'Intro Animations', '__theme_txtd' ) . '</div>' .
-						'<span class="description customize-control-description">' . esc_html__( 'Select an intro animation to animate site elements as they appear on the page.', '__theme_txtd' ) . '</span>',
+						'<span class="description customize-control-description">' . esc_html__( 'Animate site elements as they appear on the page.', '__theme_txtd' ) . '</span>',
 				],
 				'sm_intro_animations_enable' => [
 					'type'         => 'sm_toggle',
 					'setting_type' => 'option',
 					'setting_id'   => 'sm_intro_animations_enable',
-					'label'        => esc_html__( 'Enable Intro Animations', '__theme_txtd' ),
+					'label'        => esc_html__( 'Enabled', '__theme_txtd' ),
 					'default'      => false,
 				],
 				'sm_intro_animations_style' => [
@@ -191,7 +191,7 @@ function anima_maybe_invalidate_style_manager_motion_cache() {
 		&& ( $page_transitions_option['type'] ?? '' ) === 'sm_toggle'
 		&& ( $page_transitions_option['setting_type'] ?? '' ) === 'option'
 		&& ( $page_transitions_option['setting_id'] ?? '' ) === 'sm_page_transitions_enable'
-		&& ( $page_transitions_option['label'] ?? '' ) === 'Enable Page Transitions'
+		&& ( $page_transitions_option['label'] ?? '' ) === esc_html__( 'Enabled', '__theme_txtd' )
 		&& ( $page_transition_style['type'] ?? '' ) === 'sm_radio'
 		&& ( $page_transition_style['setting_id'] ?? '' ) === 'sm_page_transition_style'
 		&& ( $logo_loading_style['type'] ?? '' ) === 'sm_radio'
@@ -200,11 +200,11 @@ function anima_maybe_invalidate_style_manager_motion_cache() {
 		&& ( $transition_symbol['setting_id'] ?? '' ) === 'sm_transition_symbol'
 		&& array_key_exists( 'html', $intro_separator )
 		&& false !== strpos( (string) ( $intro_animations_intro['html'] ?? '' ), 'Intro Animations' )
-		&& false !== strpos( (string) ( $intro_animations_intro['html'] ?? '' ), 'Select an intro animation to animate site elements as they appear on the page.' )
+		&& false !== strpos( (string) ( $intro_animations_intro['html'] ?? '' ), 'Animate site elements as they appear on the page.' )
 		&& ( $intro_animations_enable['type'] ?? '' ) === 'sm_toggle'
 		&& ( $intro_animations_enable['setting_type'] ?? '' ) === 'option'
 		&& ( $intro_animations_enable['setting_id'] ?? '' ) === 'sm_intro_animations_enable'
-		&& ( $intro_animations_enable['label'] ?? '' ) === 'Enable Intro Animations'
+		&& ( $intro_animations_enable['label'] ?? '' ) === esc_html__( 'Enabled', '__theme_txtd' )
 		&& ( $intro_animations_style['type'] ?? '' ) === 'radio_html'
 		&& ( $intro_animations_style['setting_id'] ?? '' ) === 'sm_intro_animations_style'
 		&& is_array( $intro_animations_style['choices'] ?? null )

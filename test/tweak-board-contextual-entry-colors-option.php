@@ -35,7 +35,7 @@ if ( true !== ( $option['default'] ?? null ) ) {
 	anima_fail_tweak_board_contextual_entry_colors_option_test( 'Expected the contextual entry colors option to default to enabled.' );
 }
 
-if ( 'Enable Custom Post Type Colors' !== ( $option['label'] ?? null ) ) {
+if ( 'Enabled' !== ( $option['label'] ?? null ) ) {
 	anima_fail_tweak_board_contextual_entry_colors_option_test( 'Expected the contextual entry colors option to use the agreed toggle label.' );
 }
 
@@ -53,10 +53,10 @@ if ( ! is_array( $tweak_board_section ) ) {
 	anima_fail_tweak_board_contextual_entry_colors_option_test( 'Expected the contextual entry colors option to be moved into the Tweak Board section.' );
 }
 
-$expected_description = 'Control the opt-in visual treatments that give your site a bolder voice and keep future expressive tweaks together.';
+$expected_description = 'Opt-in visual treatments that give your site a bolder, more expressive voice.';
 
 if ( $expected_description !== ( $tweak_board_section['description'] ?? null ) ) {
-	anima_fail_tweak_board_contextual_entry_colors_option_test( 'Expected the Tweak Board intro copy to reflect expressive treatments and future tweaks.' );
+	anima_fail_tweak_board_contextual_entry_colors_option_test( 'Expected the Tweak Board intro copy to avoid roadmap phrasing.' );
 }
 
 $tweak_board_options = $tweak_board_section['options'] ?? [];
@@ -67,6 +67,8 @@ if ( ! is_array( $tweak_board_options ) ) {
 
 $post_titles_intro = $tweak_board_options['sm_decorative_titles_style_intro'] ?? null;
 $post_titles_toggle = $tweak_board_options['sm_decorative_titles_style'] ?? null;
+$collection_title_position = $tweak_board_options['sm_collection_title_position'] ?? null;
+$collection_hover_effect = $tweak_board_options['sm_collection_hover_effect'] ?? null;
 $contextual_intro = $tweak_board_options['sm_contextual_entry_colors_intro'] ?? null;
 $contextual_toggle = $tweak_board_options['sm_contextual_entry_colors'] ?? null;
 
@@ -74,11 +76,11 @@ if ( ! is_array( $post_titles_intro ) || 'html' !== ( $post_titles_intro['type']
 	anima_fail_tweak_board_contextual_entry_colors_option_test( 'Expected the Tweak Board to expose an intro control for auto-style post titles.' );
 }
 
-if ( false === strpos( (string) ( $post_titles_intro['html'] ?? '' ), 'Auto-style Post Titles' ) || false === strpos( (string) ( $post_titles_intro['html'] ?? '' ), 'Give post titles and supported collection card titles a more expressive typographic treatment, guided automatically by punctuation and letter case.' ) ) {
+if ( false === strpos( (string) ( $post_titles_intro['html'] ?? '' ), 'Auto-style Post Titles' ) || false === strpos( (string) ( $post_titles_intro['html'] ?? '' ), 'Automatically gives post titles and supported collection card titles a more expressive typographic treatment, guided by punctuation and letter case.' ) ) {
 	anima_fail_tweak_board_contextual_entry_colors_option_test( 'Expected the auto-style post titles intro control to carry the agreed title and description.' );
 }
 
-if ( ! is_array( $post_titles_toggle ) || 'Enable Auto-style Post Titles' !== ( $post_titles_toggle['label'] ?? null ) ) {
+if ( ! is_array( $post_titles_toggle ) || 'Enabled' !== ( $post_titles_toggle['label'] ?? null ) ) {
 	anima_fail_tweak_board_contextual_entry_colors_option_test( 'Expected the post title styling toggle to use the enable-style label under its intro control.' );
 }
 
@@ -86,15 +88,31 @@ if ( ! empty( $post_titles_toggle['desc'] ) ) {
 	anima_fail_tweak_board_contextual_entry_colors_option_test( 'Expected the post title styling toggle description to move into the intro control.' );
 }
 
+if ( ! is_array( $collection_title_position ) || 'Collection title position' !== ( $collection_title_position['label'] ?? null ) ) {
+	anima_fail_tweak_board_contextual_entry_colors_option_test( 'Expected the collection title position control to use singular copy.' );
+}
+
+if ( '"Sideways" rotates collection titles along the left edge for an editorial look.' !== wp_specialchars_decode( (string) ( $collection_title_position['desc'] ?? '' ), ENT_QUOTES ) ) {
+	anima_fail_tweak_board_contextual_entry_colors_option_test( 'Expected the collection title position description to explain the outcome tersely.' );
+}
+
+if ( ! is_array( $collection_hover_effect ) || 'Collection hover effect' !== ( $collection_hover_effect['label'] ?? null ) ) {
+	anima_fail_tweak_board_contextual_entry_colors_option_test( 'Expected the collection hover effect control to use singular copy.' );
+}
+
+if ( "The effect shown when hovering a collection card's media." !== wp_specialchars_decode( (string) ( $collection_hover_effect['desc'] ?? '' ), ENT_QUOTES ) ) {
+	anima_fail_tweak_board_contextual_entry_colors_option_test( 'Expected the collection hover effect description to be concise and grammatically correct.' );
+}
+
 if ( ! is_array( $contextual_intro ) || 'html' !== ( $contextual_intro['type'] ?? null ) ) {
 	anima_fail_tweak_board_contextual_entry_colors_option_test( 'Expected the Tweak Board to expose an intro control for contextual entry colors.' );
 }
 
-if ( false === strpos( (string) ( $contextual_intro['html'] ?? '' ), 'Custom Post Type Colors' ) || false === strpos( (string) ( $contextual_intro['html'] ?? '' ), 'Add a custom color setting to each post type item and make it available through the Color Signal control.' ) ) {
+if ( false === strpos( (string) ( $contextual_intro['html'] ?? '' ), 'Custom Post Type Colors' ) || false === strpos( (string) ( $contextual_intro['html'] ?? '' ), 'Add a custom color setting to each post type item and use it anywhere the color options appear.' ) ) {
 	anima_fail_tweak_board_contextual_entry_colors_option_test( 'Expected the contextual entry colors intro control to carry the agreed title and description.' );
 }
 
-if ( ! is_array( $contextual_toggle ) || 'Enable Custom Post Type Colors' !== ( $contextual_toggle['label'] ?? null ) ) {
+if ( ! is_array( $contextual_toggle ) || 'Enabled' !== ( $contextual_toggle['label'] ?? null ) ) {
 	anima_fail_tweak_board_contextual_entry_colors_option_test( 'Expected the contextual entry colors toggle to use the enable-style label under its intro control.' );
 }
 

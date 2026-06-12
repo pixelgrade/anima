@@ -49,7 +49,7 @@ if ( 'sm_decorative_titles_style' !== ( $field['setting_id'] ?? '' ) ) {
 	anima_fail_hive_title_style_test( 'Expected the post title styling field to keep using the shared sm_decorative_titles_style option.' );
 }
 
-if ( 'Enable Auto-style Post Titles' !== ( $field['label'] ?? '' ) ) {
+if ( 'Enabled' !== ( $field['label'] ?? '' ) ) {
 	anima_restore_hive_title_style_option( $original_style );
 	anima_fail_hive_title_style_test( 'Expected the LT-facing post title styling label.' );
 }
@@ -69,7 +69,7 @@ $panel_config = apply_filters(
 
 $intro = $panel_config['sections']['sm_tweak_board_section']['options']['sm_decorative_titles_style_intro'] ?? null;
 
-if ( ! is_array( $intro ) || false === strpos( (string) ( $intro['html'] ?? '' ), 'Give post titles and supported collection card titles a more expressive typographic treatment, guided automatically by punctuation and letter case.' ) ) {
+if ( ! is_array( $intro ) || false === strpos( (string) ( $intro['html'] ?? '' ), 'Automatically gives post titles and supported collection card titles a more expressive typographic treatment, guided by punctuation and letter case.' ) ) {
 	anima_restore_hive_title_style_option( $original_style );
 	anima_fail_hive_title_style_test( 'Expected the LT-facing post title styling intro copy to use the new typography-focused description.' );
 }

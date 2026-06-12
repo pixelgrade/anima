@@ -34,13 +34,13 @@ function anima_add_tweak_board_section_to_style_manager_config( $config ) {
 					'setting_type' => 'option',
 					'setting_id'   => 'sm_contextual_entry_colors_intro',
 					'html'         => '<div class="customize-control-title">' . esc_html__( 'Custom Post Type Colors', '__theme_txtd' ) . '</div>' .
-						'<span class="description customize-control-description">' . esc_html__( 'Add a custom color setting to each post type item and make it available through the Color Signal control.', '__theme_txtd' ) . '</span>',
+						'<span class="description customize-control-description">' . esc_html__( 'Add a custom color setting to each post type item and use it anywhere the color options appear.', '__theme_txtd' ) . '</span>',
 				],
 				'sm_contextual_entry_colors' => [
 					'type'         => 'sm_toggle',
 					'setting_type' => 'option',
 					'setting_id'   => 'sm_contextual_entry_colors',
-					'label'        => esc_html__( 'Enable Custom Post Type Colors', '__theme_txtd' ),
+					'label'        => esc_html__( 'Enabled', '__theme_txtd' ),
 					'desc'         => '',
 					'default'      => true,
 				],
@@ -64,7 +64,7 @@ function anima_reorganize_tweak_board_customizer_controls( $sm_panel_config, $sm
 		return $sm_panel_config;
 	}
 
-	$sm_panel_config['sections']['sm_tweak_board_section']['description'] = esc_html__( 'Control the opt-in visual treatments that give your site a bolder voice and keep future expressive tweaks together.', '__theme_txtd' );
+	$sm_panel_config['sections']['sm_tweak_board_section']['description'] = esc_html__( 'Opt-in visual treatments that give your site a bolder, more expressive voice.', '__theme_txtd' );
 
 	$existing_options = $sm_panel_config['sections']['sm_tweak_board_section']['options'] ?? [];
 	$ordered_option_ids = [
@@ -83,6 +83,17 @@ function anima_reorganize_tweak_board_customizer_controls( $sm_panel_config, $sm
 			'sm_contextual_entry_colors' => $sm_section_config['options']['sm_contextual_entry_colors'],
 		]
 	);
+
+	if ( isset( $available_options['sm_collection_title_position'] ) ) {
+		$available_options['sm_collection_title_position']['label'] = esc_html__( 'Collection title position', '__theme_txtd' );
+		$available_options['sm_collection_title_position']['desc']  = esc_html__( '"Sideways" rotates collection titles along the left edge for an editorial look.', '__theme_txtd' );
+	}
+
+	if ( isset( $available_options['sm_collection_hover_effect'] ) ) {
+		$available_options['sm_collection_hover_effect']['label'] = esc_html__( 'Collection hover effect', '__theme_txtd' );
+		$available_options['sm_collection_hover_effect']['desc']  = esc_html__( "The effect shown when hovering a collection card's media.", '__theme_txtd' );
+	}
+
 	$tweak_board_options = [];
 
 	foreach ( $ordered_option_ids as $option_id ) {
@@ -115,11 +126,14 @@ function anima_maybe_invalidate_style_manager_tweak_board_cache() {
 
 	$tweak_board_section = $cached_config['panels']['style_manager_panel']['sections']['sm_tweak_board_section'] ?? [];
 	$tweak_board_options = $tweak_board_section['options'] ?? [];
+	$collection_title_position = $tweak_board_options['sm_collection_title_position'] ?? [];
+	$collection_hover_effect = $tweak_board_options['sm_collection_hover_effect'] ?? [];
 	$contextual_entry_colors_intro = $tweak_board_options['sm_contextual_entry_colors_intro'] ?? [];
 	$contextual_entry_colors = $tweak_board_options['sm_contextual_entry_colors'] ?? [];
-	$expected_description = esc_html__( 'Control the opt-in visual treatments that give your site a bolder voice and keep future expressive tweaks together.', '__theme_txtd' );
+	$expected_description = esc_html__( 'Opt-in visual treatments that give your site a bolder, more expressive voice.', '__theme_txtd' );
 	$ordered_option_ids = array_keys( $tweak_board_options );
 	$expected_sequence = [
+		'sm_collection_title_position',
 		'sm_collection_hover_effect',
 		'sm_decorative_titles_style_intro',
 		'sm_decorative_titles_style',
@@ -143,13 +157,17 @@ function anima_maybe_invalidate_style_manager_tweak_board_cache() {
 	$has_expected_tweak_board_copy = (
 		( $tweak_board_section['title'] ?? '' ) === esc_html__( 'Tweak Board', '__theme_txtd' )
 		&& ( $tweak_board_section['description'] ?? '' ) === $expected_description
+		&& ( $collection_title_position['label'] ?? '' ) === esc_html__( 'Collection title position', '__theme_txtd' )
+		&& ( $collection_title_position['desc'] ?? '' ) === esc_html__( '"Sideways" rotates collection titles along the left edge for an editorial look.', '__theme_txtd' )
+		&& ( $collection_hover_effect['label'] ?? '' ) === esc_html__( 'Collection hover effect', '__theme_txtd' )
+		&& ( $collection_hover_effect['desc'] ?? '' ) === esc_html__( "The effect shown when hovering a collection card's media.", '__theme_txtd' )
 		&& ( $contextual_entry_colors_intro['type'] ?? '' ) === 'html'
 		&& false !== strpos( (string) ( $contextual_entry_colors_intro['html'] ?? '' ), 'Custom Post Type Colors' )
-		&& false !== strpos( (string) ( $contextual_entry_colors_intro['html'] ?? '' ), 'Add a custom color setting to each post type item and make it available through the Color Signal control.' )
+		&& false !== strpos( (string) ( $contextual_entry_colors_intro['html'] ?? '' ), 'Add a custom color setting to each post type item and use it anywhere the color options appear.' )
 		&& ( $contextual_entry_colors['type'] ?? '' ) === 'sm_toggle'
 		&& ( $contextual_entry_colors['setting_type'] ?? '' ) === 'option'
 		&& ( $contextual_entry_colors['setting_id'] ?? '' ) === 'sm_contextual_entry_colors'
-		&& ( $contextual_entry_colors['label'] ?? '' ) === esc_html__( 'Enable Custom Post Type Colors', '__theme_txtd' )
+		&& ( $contextual_entry_colors['label'] ?? '' ) === esc_html__( 'Enabled', '__theme_txtd' )
 		&& empty( $contextual_entry_colors['desc'] )
 		&& $has_expected_option_order
 	);
