@@ -19,8 +19,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return bool
  */
 function anima_page_transitions_enabled() {
-	// Disabled in Customizer preview — full reloads needed for Customizer to track changes.
-	if ( is_customize_preview() ) {
+	/*
+	 * Disabled in Customizer previews by default — Barba's AJAX navigation
+	 * conflicts with the Customizer's reload-based preview tracking. Previews
+	 * that delegate navigation to the transitions engine (Style Manager's
+	 * Site Editor live preview) opt back in through this filter.
+	 */
+	if ( is_customize_preview() && ! apply_filters( 'anima/page_transitions_in_customize_preview', false ) ) {
 		return false;
 	}
 
