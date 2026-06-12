@@ -138,9 +138,9 @@ function wporgRelaxThemeJson(done) {
 		wideSize: 'var(--nb-container-width, 1290px)',
 	} );
 
-	// Derive the editor palette from Style Manager's own default palette so the
-	// block-editor color picker matches the runtime tokens the compiled CSS uses.
-	const smc = readSmDefaultColors();
+	// Default palette borrowed from Style Manager's "Morning Glory" colour palette
+	// (periwinkle/indigo flower + dark garden green on a soft cool light grey).
+	// When Style Manager is active, its runtime palette overrides these.
 	s.color = {
 		background: true,
 		custom: true,
@@ -151,11 +151,11 @@ function wporgRelaxThemeJson(done) {
 		link: true,
 		text: true,
 		palette: [
-			{ slug: 'base',      color: smc.bg,       name: 'Base' },
-			{ slug: 'contrast',  color: smc.fg1,      name: 'Contrast' },
-			{ slug: 'primary',   color: smc.accent,   name: 'Primary' },
-			{ slug: 'secondary', color: smc.fg2,      name: 'Secondary' },
-			{ slug: 'tertiary',  color: smc.tertiary, name: 'Tertiary' },
+			{ slug: 'base',      color: '#eef0ea', name: 'Base' },
+			{ slug: 'contrast',  color: '#2b3e20', name: 'Contrast' },
+			{ slug: 'primary',   color: '#5663d5', name: 'Primary' },
+			{ slug: 'secondary', color: '#262c52', name: 'Secondary' },
+			{ slug: 'tertiary',  color: '#dcdfd3', name: 'Tertiary' },
 		],
 	};
 
@@ -169,26 +169,29 @@ function wporgRelaxThemeJson(done) {
 		textTransform: true,
 		dropCap: false,
 		fluid: true,
-		// Default pairing borrowed from Style Manager's "Julia" font palette:
-		// Lora (serif headings) + Montserrat (sans body). Bundled OFL fonts.
+		// Default pairing borrowed from Style Manager's "Atlas" font palette:
+		// Space Grotesk (geometric grotesk) for headings and body. Bundled OFL font.
+		// The body slug reuses the same family, so the @font-face is declared once.
 		fontFamilies: [
 			{
 				slug: 'heading', name: 'Heading',
-				fontFamily: '"Lora", Georgia, Cambria, "Times New Roman", Times, serif',
-				fontFace: [ { fontFamily: 'Lora', fontStyle: 'normal', fontWeight: '400 700', fontDisplay: 'swap', src: [ 'file:./assets/fonts/lora.woff2' ] } ],
+				fontFamily: '"Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
+				fontFace: [ { fontFamily: 'Space Grotesk', fontStyle: 'normal', fontWeight: '300 700', fontDisplay: 'swap', src: [ 'file:./assets/fonts/space-grotesk.woff2' ] } ],
 			},
 			{
 				slug: 'body', name: 'Body',
-				fontFamily: '"Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
-				fontFace: [ { fontFamily: 'Montserrat', fontStyle: 'normal', fontWeight: '400 700', fontDisplay: 'swap', src: [ 'file:./assets/fonts/montserrat.woff2' ] } ],
+				fontFamily: '"Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
 			},
 		],
+		// "Smaller" font sizing (one notch below normal, ~0.9375x): preset sizes
+		// scaled down to match, paired with --font-size-base below for the
+		// theme's role-based type.
 		fontSizes: [
-			{ slug: 'small', name: 'Small', size: '0.9rem' },
-			{ slug: 'medium', name: 'Medium', size: '1.125rem' },
-			{ slug: 'large', name: 'Large', size: '1.5rem', fluid: { min: '1.3rem', max: '1.5rem' } },
-			{ slug: 'x-large', name: 'Extra Large', size: '2.25rem', fluid: { min: '1.8rem', max: '2.25rem' } },
-			{ slug: 'xx-large', name: 'Huge', size: '3rem', fluid: { min: '2.2rem', max: '3rem' } },
+			{ slug: 'small', name: 'Small', size: '0.84rem' },
+			{ slug: 'medium', name: 'Medium', size: '1.05rem' },
+			{ slug: 'large', name: 'Large', size: '1.4rem', fluid: { min: '1.22rem', max: '1.4rem' } },
+			{ slug: 'x-large', name: 'Extra Large', size: '2.1rem', fluid: { min: '1.69rem', max: '2.1rem' } },
+			{ slug: 'xx-large', name: 'Huge', size: '2.8rem', fluid: { min: '2.06rem', max: '2.8rem' } },
 		],
 	} );
 
@@ -249,6 +252,9 @@ function wporgRelaxThemeJson(done) {
 			+ ':root:root{'
 			+ headingRoles.map( r => '--theme-' + r + '-font-family:var(--wp--preset--font-family--heading);' ).join( '' )
 			+ bodyRoles.map( r => '--theme-' + r + '-font-family:var(--wp--preset--font-family--body);' ).join( '' )
+			// "Smaller" font sizing: scale the theme's whole role-based type system
+			// down one notch (the compiled CSS defaults --font-size-base to 1).
+			+ '--font-size-base:0.9375;'
 			+ '}',
 	};
 
