@@ -12,10 +12,14 @@ A versatile block theme by Pixelgrade, the universal base of the Pixelgrade LT s
 
 == Description ==
 
-Anima LT is a full site editing block theme crafted by Pixelgrade. It is the
-foundation of the Pixelgrade LT family of site solutions (Rosa LT, Felt LT,
-Julia LT, Mies LT) and is designed to pair beautifully with the Nova Blocks
-block library, while remaining fully usable on its own with core blocks.
+Anima LT is a design-system foundation for the block editor — a considered base
+of colour, typography, and spacing, with several palettes and curated Google
+font pairings, rather than a library of pre-built layouts. It is the universal
+base of the Pixelgrade LT site solutions (Rosa LT, Felt LT, Julia LT, Mies LT).
+
+Anima is complete and usable on its own with core blocks. Add the free Nova
+Blocks and Style Manager plugins for the full design system — generated colour
+palettes, richer layouts, and ready-made starter sites.
 
 == Frequently Asked Questions ==
 
@@ -56,7 +60,3 @@ Source: https://fontawesome.com/
 Bundled fonts (assets/fonts/), Lora / Montserrat / Cormorant / Quattrocento Sans
 License: SIL Open Font License 1.1
 Source: https://fonts.google.com/ (see assets/fonts/LICENSE.md)
-
-Hero image (assets/images/hero-craft.jpg), "Crafts Hobby" by Quino Al
-License: CC0 1.0 (Public Domain)
-Source: https://stocksnap.io/photo/crafts-hobby-UO4VC2M9HP
