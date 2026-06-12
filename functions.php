@@ -170,32 +170,30 @@ function anima_register_assets() {
 	wp_style_add_data( 'anima-theme', 'rtl', 'replace' );
 	wp_style_add_data( 'anima-theme-components', 'rtl', 'replace' );
 
-	// Use the public CDN for better performance
-	// (high likelihood the file is already cached in the browser from other sites).
-	wp_register_script( 'gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js', [], null, true );
-	// Add the SRI (Subresource Integrity) hash data.
-	// Generated with https://www.srihash.org/
-	wp_script_add_data( 'gsap', 'integrity', 'sha384-lI86CGWNchoT9leGBpVR41iGrRTRbHRDsPI4Zo/atPOIodjl8YyDaVefcpgkCg4u');
-	wp_script_add_data( 'gsap', 'crossorigin', 'anonymous');
-
-	// Use our private CDN since GSAP premium plugins can't be distributed in the bundle.
-	wp_register_script( 'gsap-split-text', '//pxgcdn.com/js/gsap/3.9.1/SplitText.min.js', [], null, true );
-	// Add the SRI (Subresource Integrity) hash data.
-	// Generated with https://www.srihash.org/
-	wp_script_add_data( 'gsap-split-text', 'integrity', 'sha384-KoviLFAFGG+n+c3BxM58Gr/poK7WAtzed6kU8Kzr2fvjp3Q8gttOWY+XvpTjShW3');
-	wp_script_add_data( 'gsap-split-text', 'crossorigin', 'anonymous');
-
-	// Snap.svg — required for Slide Wipe transition's SVG pattern fills.
-	wp_register_script( 'snapsvg', 'https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg-min.js', [], '0.5.1', true );
-
-	wp_register_script( 'anima-app', trailingslashit( get_template_directory_uri() ) . 'dist/js/scripts' . $suffix . '.js', [ 'jquery', 'gsap', 'gsap-split-text', 'hoverIntent', 'imagesloaded' ], $theme->get( 'Version' ), true );
-
-	$page_transitions_deps = [ 'jquery', 'gsap', 'anima-app' ];
-	$logo_loading_style = get_option( 'sm_logo_loading_style', 'progress_bar' );
-	if ( 'cycling_images' === $logo_loading_style ) {
-		$page_transitions_deps[] = 'snapsvg';
+	// GSAP, SplitText, and Snap.svg are CDN-loaded and not GPL-redistributable,
+	// so only the commercial distribution registers them
+	// (inc/distribution/remote-scripts.php, init/5). The bare WordPress.org
+	// build runs without them and the frontend bundle degrades gracefully.
+	$app_deps = [ 'jquery', 'hoverIntent', 'imagesloaded' ];
+	if ( wp_script_is( 'gsap', 'registered' ) ) {
+		array_unshift( $app_deps, 'gsap' );
 	}
-	wp_register_script( 'anima-page-transitions', trailingslashit( get_template_directory_uri() ) . 'dist/js/page-transitions' . $suffix . '.js', $page_transitions_deps, $theme->get( 'Version' ), true );
+	if ( wp_script_is( 'gsap-split-text', 'registered' ) ) {
+		$app_deps[] = 'gsap-split-text';
+	}
+
+	wp_register_script( 'anima-app', trailingslashit( get_template_directory_uri() ) . 'dist/js/scripts' . $suffix . '.js', $app_deps, $theme->get( 'Version' ), true );
+
+	// Page transitions are built on GSAP, so the script only exists where the
+	// commercial distribution provides it.
+	if ( wp_script_is( 'gsap', 'registered' ) ) {
+		$page_transitions_deps = [ 'jquery', 'gsap', 'anima-app' ];
+		$logo_loading_style = get_option( 'sm_logo_loading_style', 'progress_bar' );
+		if ( 'cycling_images' === $logo_loading_style && wp_script_is( 'snapsvg', 'registered' ) ) {
+			$page_transitions_deps[] = 'snapsvg';
+		}
+		wp_register_script( 'anima-page-transitions', trailingslashit( get_template_directory_uri() ) . 'dist/js/page-transitions' . $suffix . '.js', $page_transitions_deps, $theme->get( 'Version' ), true );
+	}
 }
 add_action( 'init', 'anima_register_assets', 10 );
 

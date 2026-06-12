@@ -78,6 +78,14 @@ export default class App {
       return;
     }
 
+    // The Hero timeline is built on GSAP + SplitText, which only the
+    // commercial distribution loads; without them heroes render static.
+    if ( typeof window.gsap === 'undefined' || typeof window.SplitText === 'undefined' ) {
+      this.HeroCollection = [];
+      this.firstHero = null;
+      return;
+    }
+
     const {
       NEW_HERO_SELECTOR: newHeroesSelector,
       OLD_HERO_SELECTOR: oldHeroesSelector,

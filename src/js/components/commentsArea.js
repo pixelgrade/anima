@@ -25,8 +25,10 @@ export default class CommentsArea {
     const isChecked = this.$checkbox.prop( 'checked' );
     const newHeight = isChecked ? this.$content.outerHeight() : 0;
 
-    if ( instant ) {
-      $contentWrap.css( 'height', newHeight );
+    // Without GSAP (the WordPress.org build doesn't load it) the toggle
+    // falls back to switching states instantly.
+    if ( instant || typeof window.gsap === 'undefined' ) {
+      $contentWrap.css( 'height', isChecked ? '' : newHeight );
     } else {
       gsap.to( $contentWrap, {
         duration: 0.4,

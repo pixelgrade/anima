@@ -2496,8 +2496,11 @@ class CommentsArea {
     const $contentWrap = this.$contentWrap;
     const isChecked = this.$checkbox.prop('checked');
     const newHeight = isChecked ? this.$content.outerHeight() : 0;
-    if (instant) {
-      $contentWrap.css('height', newHeight);
+
+    // Without GSAP (the WordPress.org build doesn't load it) the toggle
+    // falls back to switching states instantly.
+    if (instant || typeof window.gsap === 'undefined') {
+      $contentWrap.css('height', isChecked ? '' : newHeight);
     } else {
       gsap.to($contentWrap, {
         duration: 0.4,
@@ -3022,6 +3025,14 @@ class App {
     // via --pending / --revealed, which out-specifies our CSS and leaves
     // slide content stuck in the timeline's outro state.
     if (document.body && document.body.classList && document.body.classList.contains('has-intro-animations')) {
+      this.HeroCollection = [];
+      this.firstHero = null;
+      return;
+    }
+
+    // The Hero timeline is built on GSAP + SplitText, which only the
+    // commercial distribution loads; without them heroes render static.
+    if (typeof window.gsap === 'undefined' || typeof window.SplitText === 'undefined') {
       this.HeroCollection = [];
       this.firstHero = null;
       return;

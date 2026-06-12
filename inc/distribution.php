@@ -32,6 +32,12 @@ require_once trailingslashit( get_template_directory() ) . 'inc/distribution/wup
 require_once trailingslashit( get_template_directory() ) . 'inc/distribution/webfonts-fallback.php';
 
 /**
+ * Remote vendor scripts (GSAP, SplitText, Snap.svg) — CDN-loaded and not
+ * GPL-redistributable, so they exist only in the commercial distribution.
+ */
+require_once trailingslashit( get_template_directory() ) . 'inc/distribution/remote-scripts.php';
+
+/**
  * Required plugins onboarding (TGM Plugin Activation).
  */
 require_once trailingslashit( get_template_directory() ) . 'inc/required-plugins.php';
