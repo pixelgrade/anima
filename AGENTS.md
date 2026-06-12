@@ -113,6 +113,39 @@ unzip -l ../Anima-X-Y-Z.zip | grep -E "AGENTS.md|CLAUDE.md|/src/|node_modules|we
 unzip -p ../Anima-X-Y-Z.zip anima/style.css | head -15
 ```
 
+### wp.org build variant:
+
+```bash
+npm run build:wporg   # or: WPORG_SLUG=<slug> npx gulp zip:wporg
+```
+
+Outputs `../anima-lt-X-Y-Z.zip` (default slug `anima-lt`; `anima` is taken on
+wp.org by an unrelated theme). Differences from the commercial build, all
+confined to `tasks/build-wporg.js` + `.zipignore-wporg` + the `wporg/` overlay:
+
+- Strips the commercial distribution layer (`inc/distribution.php`,
+  `inc/distribution/`, TGMPA, Pixelgrade Care) per `.zipignore-wporg`.
+- Copies the `wporg/` overlay into the build root — overlay files overwrite
+  same-named originals (readme.txt, screenshot.jpg, core-only templates/parts,
+  patterns, style variations).
+- Swaps `__theme_txtd` to the slug, rewrites `Theme Name:`/`Description:`,
+  drops the `Pixelgrade Plugin Supports:` and `Update URI:` headers, and
+  relaxes theme.json (palette, fonts, sizes, base styles) for the bare build.
+
+**Rules that keep the bare build submittable:**
+
+- Remote/CDN or non-GPL assets (GSAP, SplitText, Snap.svg, pxgcdn webfonts)
+  may only be registered inside `inc/distribution/` — never in `functions.php`
+  or `inc/`. Treat their script handles as optional everywhere else
+  (`wp_script_is( $handle, 'registered' )`).
+- Style-Manager-only behavior (including `update_option( 'sm_*' )` calls and
+  editor UI) must be gated on `anima_style_manager_is_active()` or on the
+  distribution being present (`function_exists( 'anima_webfonts_fallback' )`).
+- Verify with Theme Check before submission: the headless runner lives on the
+  bare Studio test site —
+  `studio wp eval-file wp-content/run-theme-check.php --path=~/Studio/anima-lt`.
+  It must report PASS (no REQUIRED items).
+
 ## Project Structure
 
 ```
