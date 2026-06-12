@@ -104,6 +104,9 @@ function wporgFixThemeHeader() {
 
 	return gulp.src( ['../build/' + slug + '/style.css', '../build/' + slug + '/style-rtl.css'], { allowEmpty: true } )
 	           .pipe( plugins.replace( /^Theme Name:.*$/m, 'Theme Name: ' + displayName ) )
+	           // The commercial Theme URI points at the plugin-stack demo; the
+	           // directory variant gets the bare demo running this exact build.
+	           .pipe( plugins.replace( /^Theme URI:.*$/m, 'Theme URI: https://starter.pixelgrade.com/anima/' ) )
 	           .pipe( plugins.replace( /^Description:.*$/m, 'Description: ' + description ) )
 	           .pipe( plugins.replace( /^Pixelgrade Plugin Supports:.*[\r\n]*/m, '' ) )
 	           // The Update URI header firewalls commercial installs from the
