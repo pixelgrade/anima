@@ -14,7 +14,7 @@
 		<!-- wp:group {"layout":{"type":"flex","justifyContent":"space-between","flexWrap":"wrap","verticalAlignment":"center"}} -->
 		<div class="wp-block-group">
 			<!-- wp:heading {"level":2,"fontSize":"x-large"} -->
-			<h2 class="wp-block-heading has-x-large-font-size">The system underneath</h2>
+			<h2 class="wp-block-heading has-x-large-font-size"><?php esc_html_e( 'The system underneath', '__theme_txtd' ); ?></h2>
 			<!-- /wp:heading -->
 
 			<!-- wp:group {"style":{"spacing":{"padding":{"top":"0.15rem","right":"0.6rem","bottom":"0.15rem","left":"0.6rem"}},"border":{"width":"1px","color":"#0000002e","radius":"4px"}},"layout":{"type":"flex"}} -->
@@ -28,7 +28,7 @@
 		<!-- /wp:group -->
 
 		<!-- wp:paragraph {"textColor":"secondary","fontSize":"small"} -->
-		<p class="has-secondary-color has-text-color has-small-font-size">Switch the palette once and the whole site follows — these are the Morning Glory defaults.</p>
+		<p class="has-secondary-color has-text-color has-small-font-size"><?php esc_html_e( 'Switch the palette once and the whole site follows — these are the Morning Glory defaults.', '__theme_txtd' ); ?></p>
 		<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:group -->
@@ -45,10 +45,10 @@
 			</div>
 			<!-- /wp:group -->
 			<!-- wp:paragraph {"align":"center","fontSize":"small","style":{"typography":{"fontWeight":"700"}}} -->
-			<p class="has-text-align-center has-small-font-size" style="font-weight:700">Base</p>
+			<p class="has-text-align-center has-small-font-size" style="font-weight:700"><?php esc_html_e( 'Base', '__theme_txtd' ); ?></p>
 			<!-- /wp:paragraph -->
 			<!-- wp:paragraph {"align":"center","textColor":"secondary","fontSize":"small"} -->
-			<p class="has-text-align-center has-secondary-color has-text-color has-small-font-size">Background</p>
+			<p class="has-text-align-center has-secondary-color has-text-color has-small-font-size"><?php esc_html_e( 'Background', '__theme_txtd' ); ?></p>
 			<!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:column -->
@@ -63,10 +63,10 @@
 			</div>
 			<!-- /wp:group -->
 			<!-- wp:paragraph {"align":"center","fontSize":"small","style":{"typography":{"fontWeight":"700"}}} -->
-			<p class="has-text-align-center has-small-font-size" style="font-weight:700">Primary</p>
+			<p class="has-text-align-center has-small-font-size" style="font-weight:700"><?php esc_html_e( 'Primary', '__theme_txtd' ); ?></p>
 			<!-- /wp:paragraph -->
 			<!-- wp:paragraph {"align":"center","textColor":"secondary","fontSize":"small"} -->
-			<p class="has-text-align-center has-secondary-color has-text-color has-small-font-size">Links &amp; buttons</p>
+			<p class="has-text-align-center has-secondary-color has-text-color has-small-font-size"><?php esc_html_e( 'Links & buttons', '__theme_txtd' ); ?></p>
 			<!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:column -->
@@ -81,10 +81,10 @@
 			</div>
 			<!-- /wp:group -->
 			<!-- wp:paragraph {"align":"center","fontSize":"small","style":{"typography":{"fontWeight":"700"}}} -->
-			<p class="has-text-align-center has-small-font-size" style="font-weight:700">Secondary</p>
+			<p class="has-text-align-center has-small-font-size" style="font-weight:700"><?php esc_html_e( 'Secondary', '__theme_txtd' ); ?></p>
 			<!-- /wp:paragraph -->
 			<!-- wp:paragraph {"align":"center","textColor":"secondary","fontSize":"small"} -->
-			<p class="has-text-align-center has-secondary-color has-text-color has-small-font-size">Headings</p>
+			<p class="has-text-align-center has-secondary-color has-text-color has-small-font-size"><?php esc_html_e( 'Headings', '__theme_txtd' ); ?></p>
 			<!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:column -->
@@ -99,10 +99,10 @@
 			</div>
 			<!-- /wp:group -->
 			<!-- wp:paragraph {"align":"center","fontSize":"small","style":{"typography":{"fontWeight":"700"}}} -->
-			<p class="has-text-align-center has-small-font-size" style="font-weight:700">Tertiary</p>
+			<p class="has-text-align-center has-small-font-size" style="font-weight:700"><?php esc_html_e( 'Tertiary', '__theme_txtd' ); ?></p>
 			<!-- /wp:paragraph -->
 			<!-- wp:paragraph {"align":"center","textColor":"secondary","fontSize":"small"} -->
-			<p class="has-text-align-center has-secondary-color has-text-color has-small-font-size">Panels &amp; cards</p>
+			<p class="has-text-align-center has-secondary-color has-text-color has-small-font-size"><?php esc_html_e( 'Panels & cards', '__theme_txtd' ); ?></p>
 			<!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:column -->
@@ -117,10 +117,10 @@
 			</div>
 			<!-- /wp:group -->
 			<!-- wp:paragraph {"align":"center","fontSize":"small","style":{"typography":{"fontWeight":"700"}}} -->
-			<p class="has-text-align-center has-small-font-size" style="font-weight:700">Contrast</p>
+			<p class="has-text-align-center has-small-font-size" style="font-weight:700"><?php esc_html_e( 'Contrast', '__theme_txtd' ); ?></p>
 			<!-- /wp:paragraph -->
 			<!-- wp:paragraph {"align":"center","textColor":"secondary","fontSize":"small"} -->
-			<p class="has-text-align-center has-secondary-color has-text-color has-small-font-size">Body text</p>
+			<p class="has-text-align-center has-secondary-color has-text-color has-small-font-size"><?php esc_html_e( 'Body text', '__theme_txtd' ); ?></p>
 			<!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:column -->
@@ -134,28 +134,28 @@
 			<!-- wp:group {"style":{"spacing":{"padding":{"top":"1.8rem","right":"1.8rem","bottom":"1.8rem","left":"1.8rem"},"blockGap":"1.1rem"},"border":{"width":"1px","color":"#0000001a","radius":"8px"}}} -->
 			<div class="wp-block-group has-border-color" style="border-color:#0000001a;border-width:1px;border-radius:8px;padding-top:1.8rem;padding-right:1.8rem;padding-bottom:1.8rem;padding-left:1.8rem">
 				<!-- wp:paragraph {"style":{"typography":{"textTransform":"uppercase","letterSpacing":"0.18em"}},"textColor":"primary","fontSize":"small"} -->
-				<p class="has-primary-color has-text-color has-small-font-size" style="text-transform:uppercase;letter-spacing:0.18em">Type · Space Grotesk</p>
+				<p class="has-primary-color has-text-color has-small-font-size" style="text-transform:uppercase;letter-spacing:0.18em"><?php esc_html_e( 'Type · Space Grotesk', '__theme_txtd' ); ?></p>
 				<!-- /wp:paragraph -->
 
 				<!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap"},"style":{"spacing":{"blockGap":"1.25rem"}}} -->
 				<div class="wp-block-group">
 					<!-- wp:paragraph {"style":{"typography":{"fontWeight":"300"}},"fontSize":"large"} -->
-					<p class="has-large-font-size" style="font-weight:300">Light</p>
+					<p class="has-large-font-size" style="font-weight:300"><?php esc_html_e( 'Light', '__theme_txtd' ); ?></p>
 					<!-- /wp:paragraph -->
 					<!-- wp:paragraph {"style":{"typography":{"fontWeight":"400"}},"fontSize":"large"} -->
-					<p class="has-large-font-size" style="font-weight:400">Regular</p>
+					<p class="has-large-font-size" style="font-weight:400"><?php esc_html_e( 'Regular', '__theme_txtd' ); ?></p>
 					<!-- /wp:paragraph -->
 					<!-- wp:paragraph {"style":{"typography":{"fontWeight":"500"}},"fontSize":"large"} -->
-					<p class="has-large-font-size" style="font-weight:500">Medium</p>
+					<p class="has-large-font-size" style="font-weight:500"><?php esc_html_e( 'Medium', '__theme_txtd' ); ?></p>
 					<!-- /wp:paragraph -->
 					<!-- wp:paragraph {"style":{"typography":{"fontWeight":"700"}},"fontSize":"large"} -->
-					<p class="has-large-font-size" style="font-weight:700">Bold</p>
+					<p class="has-large-font-size" style="font-weight:700"><?php esc_html_e( 'Bold', '__theme_txtd' ); ?></p>
 					<!-- /wp:paragraph -->
 				</div>
 				<!-- /wp:group -->
 
 				<!-- wp:paragraph {"textColor":"secondary","fontSize":"small"} -->
-				<p class="has-secondary-color has-text-color has-small-font-size">Body is set at 1.05rem with a calm 1.7 line-height, so long reads stay easy.</p>
+				<p class="has-secondary-color has-text-color has-small-font-size"><?php esc_html_e( 'Body is set at 1.05rem with a calm 1.7 line-height, so long reads stay easy.', '__theme_txtd' ); ?></p>
 				<!-- /wp:paragraph -->
 			</div>
 			<!-- /wp:group -->
@@ -167,7 +167,7 @@
 			<!-- wp:group {"style":{"spacing":{"padding":{"top":"1.8rem","right":"1.8rem","bottom":"1.8rem","left":"1.8rem"},"blockGap":"1.1rem"},"border":{"width":"1px","color":"#0000001a","radius":"8px"}}} -->
 			<div class="wp-block-group has-border-color" style="border-color:#0000001a;border-width:1px;border-radius:8px;padding-top:1.8rem;padding-right:1.8rem;padding-bottom:1.8rem;padding-left:1.8rem">
 				<!-- wp:paragraph {"style":{"typography":{"textTransform":"uppercase","letterSpacing":"0.18em"}},"textColor":"primary","fontSize":"small"} -->
-				<p class="has-primary-color has-text-color has-small-font-size" style="text-transform:uppercase;letter-spacing:0.18em">Spacing · 1.5×</p>
+				<p class="has-primary-color has-text-color has-small-font-size" style="text-transform:uppercase;letter-spacing:0.18em"><?php esc_html_e( 'Spacing · 1.5×', '__theme_txtd' ); ?></p>
 				<!-- /wp:paragraph -->
 
 				<!-- wp:columns {"verticalAlignment":"bottom","style":{"spacing":{"blockGap":{"left":"0.75rem"}}}} -->
@@ -230,7 +230,7 @@
 				<!-- /wp:columns -->
 
 				<!-- wp:paragraph {"textColor":"secondary","fontSize":"small"} -->
-				<p class="has-secondary-color has-text-color has-small-font-size">Each step is 1.5× the last — it drives block gap, section rhythm, and padding.</p>
+				<p class="has-secondary-color has-text-color has-small-font-size"><?php esc_html_e( 'Each step is 1.5× the last — it drives block gap, section rhythm, and padding.', '__theme_txtd' ); ?></p>
 				<!-- /wp:paragraph -->
 			</div>
 			<!-- /wp:group -->
@@ -242,23 +242,23 @@
 			<!-- wp:group {"style":{"spacing":{"padding":{"top":"1.8rem","right":"1.8rem","bottom":"1.8rem","left":"1.8rem"},"blockGap":"1.1rem"},"border":{"width":"1px","color":"#0000001a","radius":"8px"}}} -->
 			<div class="wp-block-group has-border-color" style="border-color:#0000001a;border-width:1px;border-radius:8px;padding-top:1.8rem;padding-right:1.8rem;padding-bottom:1.8rem;padding-left:1.8rem">
 				<!-- wp:paragraph {"style":{"typography":{"textTransform":"uppercase","letterSpacing":"0.18em"}},"textColor":"primary","fontSize":"small"} -->
-				<p class="has-primary-color has-text-color has-small-font-size" style="text-transform:uppercase;letter-spacing:0.18em">Components</p>
+				<p class="has-primary-color has-text-color has-small-font-size" style="text-transform:uppercase;letter-spacing:0.18em"><?php esc_html_e( 'Components', '__theme_txtd' ); ?></p>
 				<!-- /wp:paragraph -->
 
 				<!-- wp:buttons -->
 				<div class="wp-block-buttons">
 					<!-- wp:button -->
-					<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#">A real button</a></div>
+					<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#"><?php esc_html_e( 'A real button', '__theme_txtd' ); ?></a></div>
 					<!-- /wp:button -->
 				</div>
 				<!-- /wp:buttons -->
 
 				<!-- wp:paragraph {"fontSize":"small"} -->
-				<p class="has-small-font-size"><a href="#">A real link</a></p>
+				<p class="has-small-font-size"><a href="#"><?php esc_html_e( 'A real link', '__theme_txtd' ); ?></a></p>
 				<!-- /wp:paragraph -->
 
 				<!-- wp:paragraph {"textColor":"secondary","fontSize":"small"} -->
-				<p class="has-secondary-color has-text-color has-small-font-size">Both inherit the Primary role — palettes recolour them for free.</p>
+				<p class="has-secondary-color has-text-color has-small-font-size"><?php esc_html_e( 'Both inherit the Primary role — palettes recolour them for free.', '__theme_txtd' ); ?></p>
 				<!-- /wp:paragraph -->
 			</div>
 			<!-- /wp:group -->

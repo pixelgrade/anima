@@ -12,7 +12,7 @@
 	<!-- wp:group {"align":"wide","layout":{"type":"flex","justifyContent":"space-between","flexWrap":"wrap","verticalAlignment":"center"}} -->
 	<div class="wp-block-group alignwide">
 		<!-- wp:heading {"level":2,"fontSize":"x-large"} -->
-		<h2 class="wp-block-heading has-x-large-font-size">From the journal</h2>
+		<h2 class="wp-block-heading has-x-large-font-size"><?php esc_html_e( 'From the journal', '__theme_txtd' ); ?></h2>
 		<!-- /wp:heading -->
 
 		<!-- wp:group {"style":{"spacing":{"padding":{"top":"0.15rem","right":"0.6rem","bottom":"0.15rem","left":"0.6rem"}},"border":{"width":"1px","color":"#0000002e","radius":"4px"}},"layout":{"type":"flex"}} -->

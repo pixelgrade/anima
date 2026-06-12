@@ -14,11 +14,11 @@
 		<!-- wp:group {"align":"wide","style":{"spacing":{"blockGap":"1.2rem"}}} -->
 		<div class="wp-block-group alignwide">
 			<!-- wp:paragraph {"textColor":"tertiary","style":{"typography":{"textTransform":"uppercase","letterSpacing":"0.22em"}},"fontSize":"small"} -->
-			<p class="has-tertiary-color has-text-color has-small-font-size" style="text-transform:uppercase;letter-spacing:0.22em">A block theme by Pixelgrade</p>
+			<p class="has-tertiary-color has-text-color has-small-font-size" style="text-transform:uppercase;letter-spacing:0.22em"><?php esc_html_e( 'A block theme by Pixelgrade', '__theme_txtd' ); ?></p>
 			<!-- /wp:paragraph -->
 
 			<!-- wp:heading {"level":1,"textColor":"base","style":{"typography":{"fontSize":"clamp(2.8rem, 6vw, 5.5rem)"}}} -->
-			<h1 class="wp-block-heading has-base-color has-text-color" style="font-size:clamp(2.8rem, 6vw, 5.5rem)">A considered foundation.</h1>
+			<h1 class="wp-block-heading has-base-color has-text-color" style="font-size:clamp(2.8rem, 6vw, 5.5rem)"><?php esc_html_e( 'A considered foundation.', '__theme_txtd' ); ?></h1>
 			<!-- /wp:heading -->
 		</div>
 		<!-- /wp:group -->
@@ -28,7 +28,7 @@
 			<!-- wp:column {"verticalAlignment":"bottom","width":"62%"} -->
 			<div class="wp-block-column is-vertically-aligned-bottom" style="flex-basis:62%">
 				<!-- wp:paragraph {"textColor":"base","fontSize":"large"} -->
-				<p class="has-base-color has-text-color has-large-font-size">Impeccable colour, type, and rhythm from your very first post — and nothing you don’t need. Everything on this page is a core WordPress block.</p>
+				<p class="has-base-color has-text-color has-large-font-size"><?php esc_html_e( 'Impeccable colour, type, and rhythm from your very first post — and nothing you don’t need. Everything on this page is a core WordPress block.', '__theme_txtd' ); ?></p>
 				<!-- /wp:paragraph -->
 			</div>
 			<!-- /wp:column -->
