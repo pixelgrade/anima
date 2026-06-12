@@ -24,7 +24,7 @@ if ( ! function_exists( 'pixelgrade_option' ) ) {
 	 * @return mixed
 	 */
 	function pixelgrade_option( string $option_id, $default = null, bool $force_given_default = false ) {
-		if ( function_exists( '\Pixelgrade\StyleManager\get_option_details_all()' ) ) {
+		if ( function_exists( '\Pixelgrade\StyleManager\get_option_details_all' ) ) {
 			// Style Manager is present so we should get the value via it
 			// We need to account for the case where a option has an 'active_callback' defined in it's config
 			$options_config = \Pixelgrade\StyleManager\get_option_details_all();
