@@ -1,3 +1,11 @@
 // Status: 
 // - [ ] Editor: Check the alignments in Editor and why break-align classes are not present
 // - [ ] Add support to transform it to Hero
+
+// WordPress 7 dropped the explicit z-index on the cover inner container and
+// relies on paint order, which leaves the overlay span covering the content
+// in our stack. Restore the pre-7.0 stacking so solid-colour covers stay readable.
+.wp-block-cover .wp-block-cover__inner-container {
+  position: relative;
+  z-index: 1;
+}
