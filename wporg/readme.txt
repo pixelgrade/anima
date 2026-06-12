@@ -21,6 +21,10 @@ Anima is complete and usable on its own with core blocks. Add the free Nova
 Blocks plugin for richer layouts and ready-made sections that pick up exactly
 where the theme leaves off.
 
+The theme is developed in public. The human-readable sources for the compiled
+CSS (SCSS) and the build tooling live in the theme's repository:
+https://github.com/pixelgrade/anima
+
 == Frequently Asked Questions ==
 
 = Does this theme require any plugins? =
