@@ -64,6 +64,6 @@ Font Awesome icons (subset), Copyright Dave Gandy
 License: SIL OFL 1.1 (fonts), MIT (code)
 Source: https://fontawesome.com/
 
-Bundled fonts (assets/fonts/), Space Grotesk / Cormorant / Quattrocento Sans
+Bundled fonts (assets/fonts/), Space Grotesk / Cormorant / Quattrocento Sans / Lora / Montserrat
 License: SIL Open Font License 1.1
 Source: https://fonts.google.com/ (see assets/fonts/LICENSE.md)

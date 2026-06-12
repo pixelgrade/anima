@@ -9,6 +9,8 @@ Each is the `latin` subset, self-hosted (no remote requests).
 | Space Grotesk | Default (headings + body) | https://fonts.google.com/specimen/Space+Grotesk — © Florian Karsten, OFL 1.1 |
 | Cormorant | "Plum" variation (headings) | https://fonts.google.com/specimen/Cormorant — © Catharsis Fonts, OFL 1.1 |
 | Quattrocento Sans | "Plum" variation (body) | https://fonts.google.com/specimen/Quattrocento+Sans — © Pablo Impallari, OFL 1.1 |
+| Lora | "Lora & Montserrat" variation (headings) | https://fonts.google.com/specimen/Lora — © Cyreal, OFL 1.1 |
+| Montserrat | "Lora & Montserrat" variation (body) | https://fonts.google.com/specimen/Montserrat — © Julieta Ulanovsky and contributors, OFL 1.1 |
 
 The full SIL Open Font License text is available at
 https://openfontlicense.org/. These files may be redistributed under the OFL.
