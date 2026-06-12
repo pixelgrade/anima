@@ -1,3 +1,13 @@
+<?php
+/**
+ * Title: Footer, sitemap colophon with grade ramp
+ * Slug: anima-lt/footer-sitemap
+ * Categories: footer
+ * Block Types: core/template-part/footer
+ * Description: A three-column footer — brand with tagline and a design-system colophon line, two link columns — closed by the WordPress credit and a grade ramp of the Primary colour at the very bottom of the page.
+ * Inserter: true
+ */
+?>
 <!-- wp:group {"style":{"spacing":{"padding":{"top":"3.5rem","bottom":"1.5rem"},"blockGap":"2rem"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group" style="padding-top:3.5rem;padding-bottom:1.5rem">
 	<!-- wp:columns {"align":"wide","style":{"spacing":{"blockGap":{"left":"2rem"}}}} -->

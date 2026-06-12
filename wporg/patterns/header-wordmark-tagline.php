@@ -1,3 +1,13 @@
+<?php
+/**
+ * Title: Header, wordmark & tagline with grade ramp
+ * Slug: anima-lt/header-wordmark-tagline
+ * Categories: header
+ * Block Types: core/template-part/header
+ * Description: A grade ramp of the Primary colour along the very top of the page, then the wordmark with the site tagline beneath it on the left and a title-case menu on the right.
+ * Inserter: true
+ */
+?>
 <!-- wp:group {"style":{"spacing":{"blockGap":"0","padding":{"top":"0","right":"0","bottom":"0","left":"0"}}},"backgroundColor":"primary","layout":{"type":"flex","flexWrap":"nowrap"}} -->
 <div class="wp-block-group has-primary-background-color has-background" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0">
 	<!-- wp:group {"style":{"color":{"background":"#ffffffAB"},"spacing":{"padding":{"top":"0.375rem","right":"0","bottom":"0.375rem","left":"0"}},"layout":{"selfStretch":"fill","flexSize":null}}} -->
