@@ -251,6 +251,15 @@ function anima_enqueue_site_editor_style_manager_assets() {
 		return;
 	}
 
+	// Without Style Manager, only the commercial distribution adds its note
+	// to the Styles screen. The WordPress.org build keeps the native Styles
+	// screen completely untouched: Style Manager is not currently available
+	// in the plugin directory, and injecting promotional UI into core editor
+	// screens is not allowed by the theme directory rules.
+	if ( ! anima_style_manager_is_active() && ! function_exists( 'anima_webfonts_fallback' ) ) {
+		return;
+	}
+
 	$theme  = wp_get_theme( get_template() );
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 

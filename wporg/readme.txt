@@ -18,8 +18,8 @@ font pairings, rather than a library of pre-built layouts. It is the universal
 base of the Pixelgrade LT site solutions (Rosa LT, Felt LT, Julia LT, Mies LT).
 
 Anima is complete and usable on its own with core blocks. Add the free Nova
-Blocks and Style Manager plugins for the full design system — generated colour
-palettes, richer layouts, and ready-made starter sites.
+Blocks plugin for richer layouts and ready-made sections that pick up exactly
+where the theme leaves off.
 
 == Frequently Asked Questions ==
 
