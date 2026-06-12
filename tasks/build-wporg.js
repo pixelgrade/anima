@@ -98,8 +98,13 @@ function wporgTextdomainReplace() {
 gulp.task( 'build:wporg:txtdomain', wporgTextdomainReplace );
 
 function wporgFixThemeHeader() {
+	// The directory shows style.css Description, so the wp.org variant gets
+	// the bare-build positioning instead of the commercial marketing line.
+	const description = displayName + ' is a design-system foundation for the block editor — considered colour, typography, and spacing for writing-first sites, built entirely from core blocks. It is the universal base of the Pixelgrade LT site solutions.';
+
 	return gulp.src( ['../build/' + slug + '/style.css', '../build/' + slug + '/style-rtl.css'], { allowEmpty: true } )
 	           .pipe( plugins.replace( /^Theme Name:.*$/m, 'Theme Name: ' + displayName ) )
+	           .pipe( plugins.replace( /^Description:.*$/m, 'Description: ' + description ) )
 	           .pipe( plugins.replace( /^Pixelgrade Plugin Supports:.*[\r\n]*/m, '' ) )
 	           // The Update URI header firewalls commercial installs from the
 	           // unrelated "anima" theme on wordpress.org; a directory theme
