@@ -101,6 +101,10 @@ function wporgFixThemeHeader() {
 	return gulp.src( ['../build/' + slug + '/style.css', '../build/' + slug + '/style-rtl.css'], { allowEmpty: true } )
 	           .pipe( plugins.replace( /^Theme Name:.*$/m, 'Theme Name: ' + displayName ) )
 	           .pipe( plugins.replace( /^Pixelgrade Plugin Supports:.*[\r\n]*/m, '' ) )
+	           // The Update URI header firewalls commercial installs from the
+	           // unrelated "anima" theme on wordpress.org; a directory theme
+	           // must NOT carry it, or it won't receive wp.org updates.
+	           .pipe( plugins.replace( /^Update URI:.*[\r\n]*/m, '' ) )
 	           .pipe( gulp.dest( '../build/' + slug ) );
 }
 gulp.task( 'build:wporg:theme-header', wporgFixThemeHeader );
