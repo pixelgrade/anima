@@ -373,6 +373,7 @@ require_once trailingslashit( get_template_directory() ) . 'inc/extras.php';
  * Block editor related logic.
  */
 require_once trailingslashit( get_template_directory() ) . 'inc/block-editor.php';
+require_once trailingslashit( get_template_directory() ) . 'inc/block-styles.php';
 require_once trailingslashit( get_template_directory() ) . 'inc/post-expressions.php';
 
 /**
