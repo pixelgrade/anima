@@ -143,6 +143,32 @@ H2 rides normal Nova Blocks releases. H3 is a design+build project — worth
 a prototype early (a CSS-only `@view-transition` spike costs a day and
 answers the choreography-fidelity question before any commitment).
 
+### H3 spike verdict (2026-06-12, branch `feature/view-transitions-spike`)
+
+Built and proven live (`?anima-vt=1`): cross-document View Transitions run
+on this stack — pageswap/pagereveal fire with live `viewTransition`
+objects, the CSS wipe executes between documents, and the destination
+page's scripts (sliders, Woo, everything) work natively. Parity against
+the current engine's full detail set, per the 1:1 acceptance bar:
+
+| Current detail (slide_wipe) | View Transitions | 1:1? |
+|---|---|---|
+| Two-layer masked parallax wipe, quint.inOut, 1s per phase | replicable via named layers + exact cubic-bezier | ≈ (very close, snapshot-rasterized) |
+| Cover phase **holds while the page loads**, minimum 900 ms, longer on slow loads | impossible — no script runs between documents; animation durations are fixed | ✗ |
+| **Cycling-images / progress loader animating during the wait** | impossible — snapshots are static between documents | ✗ |
+| Exit overlay awaited before unload (GSAP promise) | mechanism differs (fixed-duration VT, not awaitable script) | ✗ |
+| Card-expand shared-element morph | VT's native strength — arguably better | ✓ |
+| Scripts / forms / WooCommerce / analytics / history | native — better by construction | ✓ |
+| Firefox | no cross-document VT → plain instant navigation | ✗ |
+
+**Verdict: not 1:1.** The held-loader semantics (dynamic duration, animated
+content during slow loads) are fundamental impossibilities in cross-document
+View Transitions — they require script between documents, which is exactly
+what VT removes. Per the acceptance bar, **View Transitions is not currently
+an option** as a drop-in engine replacement. The spike stays on its branch
+as the ready foundation for the day the loader semantics are allowed to be
+redesigned (or the platform grows cross-document progress hooks).
+
 ## 6. Out of scope here, related
 
 - The SM Site Editor Live Site preview runs transitions via the
