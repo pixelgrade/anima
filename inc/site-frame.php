@@ -16,6 +16,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return void
  */
 function anima_migrate_site_frame_beta_settings(): void {
+	// The Site Frame settings belong to the Style Manager integration; a
+	// bare install has nothing to migrate and must not touch sm_* options.
+	if ( ! anima_style_manager_is_active() ) {
+		return;
+	}
+
 	$style = get_option( 'sm_chrome_preset', false );
 	if ( false !== $style && false === get_option( 'sm_site_frame_style', false ) ) {
 		update_option( 'sm_site_frame_style', 'editorial-frame' === $style ? 'editorial' : $style );

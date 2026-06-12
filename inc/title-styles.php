@@ -52,6 +52,12 @@ function anima_customize_post_title_styling_field( array $config ): array {
  * Normalize the shared cross-theme decorative titles option to the new LT toggle values.
  */
 function anima_maybe_migrate_post_title_styling_option(): void {
+	// The decorative-titles toggle is a Style Manager Customizer option; a
+	// bare install has nothing to migrate and must not touch sm_* options.
+	if ( ! anima_style_manager_is_active() ) {
+		return;
+	}
+
 	$legacy_value = get_option( 'sm_decorative_titles_style', null );
 
 	if ( 'hive' === $legacy_value ) {
@@ -68,6 +74,11 @@ function anima_maybe_migrate_post_title_styling_option(): void {
  * Invalidate the cached Style Manager Customizer config if the LT field contract drifted.
  */
 function anima_maybe_invalidate_post_title_styling_customizer_cache(): void {
+	// The cached Customizer config only exists where Style Manager runs.
+	if ( ! anima_style_manager_is_active() ) {
+		return;
+	}
+
 	$cached_config = get_option( 'pixelgrade_style_manager_customizer_config' );
 
 	if ( ! is_array( $cached_config ) ) {
