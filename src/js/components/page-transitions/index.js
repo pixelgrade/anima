@@ -85,6 +85,11 @@ export function init() {
   barba.init( {
     prefetchIgnore: true,
 
+    // Barba's default XHR timeout is 2s — slow responses (uncached pages,
+    // changeset previews, modest hosting) would hard-fall-back to a full
+    // navigation through requestError. Give real-world responses room.
+    timeout: 10000,
+
     prevent: ( { el, href } ) => {
       if ( el.target && el.target === '_blank' ) {
         return true;

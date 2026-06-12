@@ -9,6 +9,7 @@ import {
   cleanupBeforeTransition,
   notifyPageTransitionComplete,
   trackPageview,
+  notifyAfterSwap,
 } from './utils';
 import { syncAdminBar } from './admin-bar';
 
@@ -26,10 +27,13 @@ function performSlideWipeEnter( { next } ) {
   syncAdminBar( html );
   syncHeaderColorSignal( html, next.container );
 
+  // The incoming container is live — announce it (anima:after-swap).
+  notifyAfterSwap( next.container );
+
   return new Promise( ( resolve ) => {
     requestAnimationFrame( () => {
       requestAnimationFrame( () => {
-        reinitComponents().then( () => {
+        reinitComponents( next.container ).then( () => {
           trackPageview();
 
           SlideWipeLoader.hide().then( () => {

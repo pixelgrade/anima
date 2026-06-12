@@ -3285,7 +3285,101 @@ class App {
     }
   }
 }
-;// ./src/js/components/page-transitions/utils.js
+;// ./src/js/components/page-transitions/registry.js
+/**
+ * Public re-init registry for AJAX page transitions.
+ *
+ * Inversion of control for the "special triggers" problem: instead of the
+ * transitions system hardcoding every component that needs cleanup/re-init
+ * around a container swap, components register themselves:
+ *
+ *   window.anima.pageTransitions.register( {
+ *     id: 'my-component',
+ *     // Called with the OUTGOING container, before it is replaced.
+ *     cleanup( container ) {},
+ *     // Called with the INCOMING container, after it is live and the
+ *     // theme/block frontend scripts have re-executed against it.
+ *     reinit( container ) {},
+ *   } );
+ *
+ * DOM events mirror the lifecycle for code that prefers listening
+ * (`event.detail.container` carries the relevant container):
+ *
+ *   anima:page-transition-start     navigation started (existing event)
+ *   anima:before-swap               outgoing container about to be replaced
+ *   anima:after-swap                incoming container is live in the DOM
+ *   anima:page-transition-complete  overlay dismissed, page interactive (existing event)
+ *
+ * Entries run in registration order. A throwing handler is isolated — it
+ * never breaks the navigation or the other handlers.
+ */
+
+const entries = new Map();
+function register(entry) {
+  if (!entry || typeof entry.id !== 'string' || !entry.id) {
+    return;
+  }
+  entries.set(entry.id, entry);
+}
+function unregister(id) {
+  entries.delete(id);
+}
+function runPhase(phase, container) {
+  entries.forEach(entry => {
+    if (typeof entry[phase] !== 'function') {
+      return;
+    }
+    try {
+      entry[phase](container);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(`[anima] page-transitions ${phase} handler "${entry.id}" failed:`, error);
+    }
+  });
+}
+function dispatchLifecycleEvent(name, container) {
+  window.dispatchEvent(new CustomEvent(name, {
+    detail: {
+      container
+    }
+  }));
+  if (window.jQuery) {
+    window.jQuery(document).trigger(name, [container]);
+  }
+}
+
+/**
+ * Run every registered cleanup against the outgoing container and announce
+ * the swap. Called by the transitions system right before Barba replaces
+ * the container.
+ */
+function runCleanup(container) {
+  runPhase('cleanup', container);
+  dispatchLifecycleEvent('anima:before-swap', container);
+}
+
+/**
+ * Announce that the incoming container is live in the DOM (before component
+ * re-initialization). Called by the transitions system right after the swap.
+ */
+function notifyAfterSwap(container) {
+  dispatchLifecycleEvent('anima:after-swap', container);
+}
+
+/**
+ * Run every registered reinit against the incoming container. Called by the
+ * transitions system after the theme/block frontend scripts have re-executed.
+ */
+function runReinit(container) {
+  runPhase('reinit', container);
+}
+
+// The public API surface third parties integrate against.
+window.anima = window.anima || {};
+window.anima.pageTransitions = window.anima.pageTransitions || {};
+window.anima.pageTransitions.register = register;
+window.anima.pageTransitions.unregister = unregister;
+;// ./src/js/components/page-transitions/default-integrations.js
 
 
 
@@ -3293,12 +3387,83 @@ const {
   cleanupTransitionContainer
 } = __webpack_require__(236);
 const {
-  syncDocumentTitle
-} = __webpack_require__(628);
-const {
   rebindAjaxReadingProgress
 } = __webpack_require__(564);
 
+/**
+ * The theme's own transition integrations, registered through the same
+ * public registry third parties use (window.anima.pageTransitions.register).
+ *
+ * Order matters and mirrors the previous hardcoded sequence: parallax and
+ * the reading bar rebind first (they target the post-mutation DOM), then
+ * plugin refreshes.
+ */
+function registerDefaultIntegrations() {
+  // Nova Blocks scripts can mutate/rebuild collection card DOM after the
+  // swap — refresh parallax bindings after they finish so we target the
+  // final nodes and not stale pre-mutation references.
+  register({
+    id: 'anima/pile-parallax',
+    reinit() {
+      initialize();
+    }
+  });
+  register({
+    id: 'anima/reading-bar',
+    // Remove reading bar nodes from the outgoing container before scripts
+    // re-run. Nova Blocks queries `.js-reading-*` globally; leaving old
+    // nodes in the DOM during the swap can leak a stale progress bar into
+    // the next page header. (Also pauses/releases outgoing videos.)
+    cleanup(container) {
+      cleanupTransitionContainer(container);
+    },
+    reinit() {
+      rebindAjaxReadingProgress();
+      window.dispatchEvent(new Event('scroll'));
+    }
+  });
+
+  // FacetWP renders facets client-side — after the swap, the new DOM has
+  // empty .facetwp-facet containers that need FWP to re-parse and render.
+  // Only refresh if FacetWP already completed its first init (FWP.loaded);
+  // on first navigation TO a page with facets, its own script handles init.
+  register({
+    id: 'facetwp',
+    reinit() {
+      if (typeof FWP !== 'undefined' && FWP.loaded && typeof FWP.refresh === 'function') {
+        if (typeof FWP_HTTP !== 'undefined') {
+          FWP_HTTP.uri = window.location.pathname;
+          FWP_HTTP.get = {};
+        }
+        FWP.refresh();
+      }
+    }
+  });
+
+  // Re-trigger WooCommerce cart fragments so header carts stay correct.
+  register({
+    id: 'woocommerce/cart-fragments',
+    reinit() {
+      if (typeof wc_cart_fragments_params !== 'undefined') {
+        external_jQuery_default()(document.body).trigger('wc_fragment_refresh');
+      }
+    }
+  });
+}
+;// ./src/js/components/page-transitions/utils.js
+
+
+
+
+const {
+  syncDocumentTitle
+} = __webpack_require__(628);
+
+
+
+// The built-in integrations register through the same public registry any
+// third party would use (see registry.js).
+registerDefaultIntegrations();
 
 // Tracks script IDs that syncPageAssets() loaded for the first time.
 // reinitNovaBlocksScripts() skips these to avoid double-initialization
@@ -3856,7 +4021,7 @@ function disconnectHeaderColorObserver() {
  * Hero.js handles its own intro timeline and scroll-driven animations —
  * the page transitions system must NOT animate hero elements directly.
  */
-function reinitComponents() {
+function reinitComponents(container) {
   // Create fresh App instance — this reinits Hero, CommentsArea, images, etc.
   // Fonts are already loaded (wf-active class persists), so Hero init runs immediately.
   new App();
@@ -3865,30 +4030,11 @@ function reinitComponents() {
     // In FSE themes the header/footer are inside the Barba container and get swapped,
     // so Nova Blocks' block JS (header sticky, color signal, etc.) must re-run.
     reinitNovaBlocksScripts(() => {
-      // Nova Blocks scripts can mutate/rebuild collection card DOM after AJAX swap.
-      // Refresh pile parallax bindings after those scripts finish so we target
-      // the final nodes and not stale pre-mutation references.
-      initialize();
-      rebindAjaxReadingProgress();
-      window.dispatchEvent(new Event('scroll'));
-
-      // Reinitialize FacetWP if it was previously loaded.
-      // FacetWP renders facets client-side — after AJAX page swap, the new DOM
-      // has empty .facetwp-facet containers that need FWP to re-parse and render.
-      // Only call refresh() if FacetWP already completed its first init (FWP.loaded).
-      // On first navigation TO a page with facets, FacetWP's own script handles init.
-      if (typeof FWP !== 'undefined' && FWP.loaded && typeof FWP.refresh === 'function') {
-        if (typeof FWP_HTTP !== 'undefined') {
-          FWP_HTTP.uri = window.location.pathname;
-          FWP_HTTP.get = {};
-        }
-        FWP.refresh();
-      }
-
-      // Re-trigger WooCommerce cart fragments if available.
-      if (typeof wc_cart_fragments_params !== 'undefined') {
-        external_jQuery_default()(document.body).trigger('wc_fragment_refresh');
-      }
+      // Run every registered re-init against the new container — built-in
+      // integrations (pile parallax, reading bar, FacetWP, WooCommerce
+      // fragments) and anything third parties registered. Runs after the
+      // Nova Blocks scripts so handlers target final, post-mutation DOM.
+      runReinit(container);
 
       // Dispatch resize + scroll events for layout-dependent JS.
       // Resize: recalculates layout (Hero, GlobalService).
@@ -4014,16 +4160,17 @@ function cleanupBeforeTransition(container) {
   // Disconnect the header color observer from the current page.
   disconnectHeaderColorObserver();
 
-  // Remove reading bar nodes from the outgoing container before scripts re-run.
-  // Nova Blocks queries `.js-reading-*` globally; leaving old nodes in the DOM
-  // during AJAX swap can leak a stale progress bar into the next page header.
-  cleanupTransitionContainer(container);
-
   // Remove the bully navigation dots. The jquery.bully.js IIFE keeps
   // closure-scoped state (elements array, rAF loop) that can't be reset
   // externally. Removing the DOM element and re-executing the vendor
   // script in reinitNovaBlocksScripts() creates a fresh instance.
+  // (Stays internal: its re-init is interleaved with the Nova Blocks
+  // script re-execution above, not a standalone registry step.)
   external_jQuery_default()('.c-bully').remove();
+
+  // Run every registered cleanup against the outgoing container and
+  // announce the swap (anima:before-swap).
+  runCleanup(container);
 }
 
 /**
@@ -4237,6 +4384,9 @@ function performEnter({
   // Pass the new container to scope DOM queries and avoid finding the old header.
   syncHeaderColorSignal(html, next.container);
 
+  // The incoming container is live — announce it (anima:after-swap).
+  notifyAfterSwap(next.container);
+
   // Defer component reinitialization until after the browser has reflowed the
   // new DOM. Nova Blocks color signal scripts read computed styles (padding,
   // background-color) and Hero.js calls getBoundingClientRect() — both return
@@ -4245,7 +4395,7 @@ function performEnter({
   return new Promise(resolve => {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        reinitComponents().then(() => {
+        reinitComponents(next.container).then(() => {
           trackPageview();
           const timeline = createBorderInTimeline();
           const timelineDone = timelinePromise(timeline);
@@ -4785,10 +4935,13 @@ function performSlideWipeEnter({
   syncDocumentTitle(html);
   syncAdminBar(html);
   syncHeaderColorSignal(html, next.container);
+
+  // The incoming container is live — announce it (anima:after-swap).
+  notifyAfterSwap(next.container);
   return new Promise(resolve => {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        reinitComponents().then(() => {
+        reinitComponents(next.container).then(() => {
           trackPageview();
           hide().then(() => {
             notifyPageTransitionComplete();
@@ -5000,6 +5153,10 @@ function page_transitions_init() {
   const transitions = isSlideWipe ? [slideWipeCardExpandTransition, slideWipePageTransition] : [cardExpandTransition, pageTransition];
   barba_umd_default().init({
     prefetchIgnore: true,
+    // Barba's default XHR timeout is 2s — slow responses (uncached pages,
+    // changeset previews, modest hosting) would hard-fall-back to a full
+    // navigation through requestError. Give real-world responses room.
+    timeout: 10000,
     prevent: ({
       el,
       href

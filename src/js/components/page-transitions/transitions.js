@@ -6,6 +6,7 @@ import {
   syncHeaderColorSignal,
   reinitComponents,
   cleanupBeforeTransition,
+  notifyAfterSwap,
   notifyPageTransitionComplete,
   trackPageview,
 } from './utils';
@@ -129,6 +130,9 @@ function performEnter( { next } ) {
   // Pass the new container to scope DOM queries and avoid finding the old header.
   syncHeaderColorSignal( html, next.container );
 
+  // The incoming container is live — announce it (anima:after-swap).
+  notifyAfterSwap( next.container );
+
   // Defer component reinitialization until after the browser has reflowed the
   // new DOM. Nova Blocks color signal scripts read computed styles (padding,
   // background-color) and Hero.js calls getBoundingClientRect() — both return
@@ -137,7 +141,7 @@ function performEnter( { next } ) {
   return new Promise( ( resolve ) => {
     requestAnimationFrame( () => {
       requestAnimationFrame( () => {
-        reinitComponents().then( () => {
+        reinitComponents( next.container ).then( () => {
           trackPageview();
 
           const timeline = createBorderInTimeline();

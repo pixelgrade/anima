@@ -1,11 +1,15 @@
 import $ from 'jquery';
 import App from '../app';
-import * as PileParallax from '../pile-parallax';
-const { cleanupTransitionContainer } = require( './cleanup' );
+import { runCleanup, runReinit, notifyAfterSwap } from './registry';
+import { registerDefaultIntegrations } from './default-integrations';
 const { syncDocumentTitle } = require( './document-title' );
-const { rebindAjaxReadingProgress } = require( './reading-bar' );
 
 export { syncDocumentTitle };
+export { notifyAfterSwap };
+
+// The built-in integrations register through the same public registry any
+// third party would use (see registry.js).
+registerDefaultIntegrations();
 
 // Tracks script IDs that syncPageAssets() loaded for the first time.
 // reinitNovaBlocksScripts() skips these to avoid double-initialization
@@ -621,7 +625,7 @@ function disconnectHeaderColorObserver() {
  * Hero.js handles its own intro timeline and scroll-driven animations —
  * the page transitions system must NOT animate hero elements directly.
  */
-export function reinitComponents() {
+export function reinitComponents( container ) {
   // Create fresh App instance — this reinits Hero, CommentsArea, images, etc.
   // Fonts are already loaded (wf-active class persists), so Hero init runs immediately.
   new App();
@@ -631,30 +635,11 @@ export function reinitComponents() {
     // In FSE themes the header/footer are inside the Barba container and get swapped,
     // so Nova Blocks' block JS (header sticky, color signal, etc.) must re-run.
     reinitNovaBlocksScripts( () => {
-      // Nova Blocks scripts can mutate/rebuild collection card DOM after AJAX swap.
-      // Refresh pile parallax bindings after those scripts finish so we target
-      // the final nodes and not stale pre-mutation references.
-      PileParallax.initialize();
-      rebindAjaxReadingProgress();
-      window.dispatchEvent( new Event( 'scroll' ) );
-
-      // Reinitialize FacetWP if it was previously loaded.
-      // FacetWP renders facets client-side — after AJAX page swap, the new DOM
-      // has empty .facetwp-facet containers that need FWP to re-parse and render.
-      // Only call refresh() if FacetWP already completed its first init (FWP.loaded).
-      // On first navigation TO a page with facets, FacetWP's own script handles init.
-      if ( typeof FWP !== 'undefined' && FWP.loaded && typeof FWP.refresh === 'function' ) {
-        if ( typeof FWP_HTTP !== 'undefined' ) {
-          FWP_HTTP.uri = window.location.pathname;
-          FWP_HTTP.get = {};
-        }
-        FWP.refresh();
-      }
-
-      // Re-trigger WooCommerce cart fragments if available.
-      if ( typeof wc_cart_fragments_params !== 'undefined' ) {
-        $( document.body ).trigger( 'wc_fragment_refresh' );
-      }
+      // Run every registered re-init against the new container — built-in
+      // integrations (pile parallax, reading bar, FacetWP, WooCommerce
+      // fragments) and anything third parties registered. Runs after the
+      // Nova Blocks scripts so handlers target final, post-mutation DOM.
+      runReinit( container );
 
       // Dispatch resize + scroll events for layout-dependent JS.
       // Resize: recalculates layout (Hero, GlobalService).
@@ -787,16 +772,17 @@ export function cleanupBeforeTransition( container ) {
   // Disconnect the header color observer from the current page.
   disconnectHeaderColorObserver();
 
-  // Remove reading bar nodes from the outgoing container before scripts re-run.
-  // Nova Blocks queries `.js-reading-*` globally; leaving old nodes in the DOM
-  // during AJAX swap can leak a stale progress bar into the next page header.
-  cleanupTransitionContainer( container );
-
   // Remove the bully navigation dots. The jquery.bully.js IIFE keeps
   // closure-scoped state (elements array, rAF loop) that can't be reset
   // externally. Removing the DOM element and re-executing the vendor
   // script in reinitNovaBlocksScripts() creates a fresh instance.
+  // (Stays internal: its re-init is interleaved with the Nova Blocks
+  // script re-execution above, not a standalone registry step.)
   $( '.c-bully' ).remove();
+
+  // Run every registered cleanup against the outgoing container and
+  // announce the swap (anima:before-swap).
+  runCleanup( container );
 }
 
 /**
