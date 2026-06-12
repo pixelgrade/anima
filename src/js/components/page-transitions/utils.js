@@ -644,14 +644,19 @@ export function reinitComponents( container ) {
       // Dispatch resize + scroll events for layout-dependent JS.
       // Resize: recalculates layout (Hero, GlobalService).
       // Scroll: triggers Hero.update() and bully's rAF loop to process new elements.
+      // Scroll fires AT the Document with bubbles:true — that is how real page
+      // scrolls behave (CSSOM View), so window listeners receive it with
+      // target === document. A window-dispatched synthetic makes
+      // target === window, which breaks listeners calling e.target.contains()
+      // and never reaches document-level scroll listeners at all.
       window.dispatchEvent( new Event( 'resize' ) );
-      window.dispatchEvent( new Event( 'scroll' ) );
+      document.dispatchEvent( new Event( 'scroll', { bubbles: true } ) );
 
       // Delayed fallback pass: some third-party scripts mutate the new container
       // asynchronously right after transition. Trigger one more recalculation.
       setTimeout( () => {
         window.dispatchEvent( new Event( 'resize' ) );
-        window.dispatchEvent( new Event( 'scroll' ) );
+        document.dispatchEvent( new Event( 'scroll', { bubbles: true } ) );
       }, 250 );
 
       resolve();
@@ -701,7 +706,7 @@ function reinitNovaBlocksScripts( onComplete = () => {} ) {
       } );
 
       window.dispatchEvent( new Event( 'resize' ) );
-      window.dispatchEvent( new Event( 'scroll' ) );
+      document.dispatchEvent( new Event( 'scroll', { bubbles: true } ) );
       onComplete();
     } );
   };

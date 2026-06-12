@@ -36,7 +36,7 @@ export function registerDefaultIntegrations() {
     },
     reinit() {
       rebindAjaxReadingProgress();
-      window.dispatchEvent( new Event( 'scroll' ) );
+      document.dispatchEvent( new Event( 'scroll', { bubbles: true } ) );
     },
   } );
 
