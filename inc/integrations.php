@@ -38,6 +38,7 @@ require_once trailingslashit( get_template_directory() ) . 'inc/integrations/woo
  * Load Page Transitions integration for this theme.
  */
 require_once trailingslashit( get_template_directory() ) . 'inc/integrations/page-transitions.php';
+require_once trailingslashit( get_template_directory() ) . 'inc/integrations/view-transitions-spike.php';
 
 /**
  * Load Intro Animations integration for this theme.
