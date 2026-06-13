@@ -116,66 +116,26 @@ function anima_reorganize_tweak_board_customizer_controls( $sm_panel_config, $sm
 }
 
 /**
- * Invalidate the cached Style Manager Customizer config when the Tweak Board additions drift.
+ * Invalidate the cached Style Manager Customizer config once when this theme's
+ * Tweak Board additions change, tracked by the version token below.
+ *
+ * The previous implementation compared the cached config against hard-coded
+ * label/description strings; once any of that copy changed (e.g. the rename to
+ * "Contextual Colors") the comparison never matched again and the cache was
+ * re-invalidated on every request, rebuilding the whole config on each load.
+ * A version token invalidates the cache exactly once per change instead.
  */
 function anima_maybe_invalidate_style_manager_tweak_board_cache() {
-	$cached_config = get_option( 'pixelgrade_style_manager_customizer_config' );
-	if ( ! is_array( $cached_config ) ) {
-		return;
-	}
+	// Bump this token whenever the Tweak Board controls, copy, or order added in
+	// this file change, so the cached Style Manager config is rebuilt once to
+	// pick up the new definition.
+	$config_version = '2026-06-13-contextual-colors';
 
-	$tweak_board_section = $cached_config['panels']['style_manager_panel']['sections']['sm_tweak_board_section'] ?? [];
-	$tweak_board_options = $tweak_board_section['options'] ?? [];
-	$collection_title_position = $tweak_board_options['sm_collection_title_position'] ?? [];
-	$collection_hover_effect = $tweak_board_options['sm_collection_hover_effect'] ?? [];
-	$contextual_entry_colors_intro = $tweak_board_options['sm_contextual_entry_colors_intro'] ?? [];
-	$contextual_entry_colors = $tweak_board_options['sm_contextual_entry_colors'] ?? [];
-	$expected_description = esc_html__( 'Opt-in visual treatments that give your site a bolder, more expressive voice.', '__theme_txtd' );
-	$ordered_option_ids = array_keys( $tweak_board_options );
-	$expected_sequence = [
-		'sm_collection_title_position',
-		'sm_collection_hover_effect',
-		'sm_decorative_titles_style_intro',
-		'sm_decorative_titles_style',
-		'sm_contextual_entry_colors_intro',
-		'sm_contextual_entry_colors',
-	];
-	$last_position = -1;
-	$has_expected_option_order = true;
-
-	foreach ( $expected_sequence as $option_id ) {
-		$position = array_search( $option_id, $ordered_option_ids, true );
-
-		if ( false === $position || $position <= $last_position ) {
-			$has_expected_option_order = false;
-			break;
-		}
-
-		$last_position = $position;
-	}
-
-	$has_expected_tweak_board_copy = (
-		( $tweak_board_section['title'] ?? '' ) === esc_html__( 'Tweak Board', '__theme_txtd' )
-		&& ( $tweak_board_section['description'] ?? '' ) === $expected_description
-		&& ( $collection_title_position['label'] ?? '' ) === esc_html__( 'Collection title position', '__theme_txtd' )
-		&& ( $collection_title_position['desc'] ?? '' ) === esc_html__( '"Sideways" rotates collection titles along the left edge for an editorial look.', '__theme_txtd' )
-		&& ( $collection_hover_effect['label'] ?? '' ) === esc_html__( 'Collection hover effect', '__theme_txtd' )
-		&& ( $collection_hover_effect['desc'] ?? '' ) === esc_html__( "The effect shown when hovering a collection card's media.", '__theme_txtd' )
-		&& ( $contextual_entry_colors_intro['type'] ?? '' ) === 'html'
-		&& false !== strpos( (string) ( $contextual_entry_colors_intro['html'] ?? '' ), 'Custom Post Type Colors' )
-		&& false !== strpos( (string) ( $contextual_entry_colors_intro['html'] ?? '' ), 'Add a custom color setting to each post type item and use it anywhere the color options appear.' )
-		&& ( $contextual_entry_colors['type'] ?? '' ) === 'sm_toggle'
-		&& ( $contextual_entry_colors['setting_type'] ?? '' ) === 'option'
-		&& ( $contextual_entry_colors['setting_id'] ?? '' ) === 'sm_contextual_entry_colors'
-		&& ( $contextual_entry_colors['label'] ?? '' ) === esc_html__( 'Enabled', '__theme_txtd' )
-		&& empty( $contextual_entry_colors['desc'] )
-		&& $has_expected_option_order
-	);
-
-	if ( $has_expected_tweak_board_copy ) {
+	if ( get_option( 'anima_tweak_board_config_version' ) === $config_version ) {
 		return;
 	}
 
 	update_option( 'pixelgrade_style_manager_customizer_config_timestamp', 0, true );
 	update_option( 'pixelgrade_style_manager_customizer_opt_name_timestamp', 0, true );
+	update_option( 'anima_tweak_board_config_version', $config_version, true );
 }
