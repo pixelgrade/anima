@@ -145,7 +145,7 @@ function anima_add_site_frame_section_to_style_manager_config( $config ) {
 					'setting_id'      => 'sm_site_frame_variation',
 					'label'           => esc_html__( 'Color Grade', '__theme_txtd' ),
 					'desc'            => esc_html__( 'Pick a color grade from the selected color palette.', '__theme_txtd' ),
-					'default'         => '11',
+					'default'         => 'accent',
 					'choices'         => anima_get_site_frame_variation_choices(),
 					'live'            => true,
 					'active_callback' => 'anima_is_site_frame_enabled',
@@ -182,15 +182,38 @@ function anima_reorganize_site_frame_customizer_controls( $sm_panel_config, $sm_
 		return $sm_panel_config;
 	}
 
-	$sm_panel_config['sections']['sm_tweak_board_section']['options'] = array_merge(
-		$sm_panel_config['sections']['sm_tweak_board_section']['options'],
-		[
-			'sm_site_frame_intro'     => $sm_section_config['options']['sm_site_frame_intro'],
-			'sm_site_frame_style'     => $sm_section_config['options']['sm_site_frame_style'],
-			'sm_site_frame_palette'   => $sm_section_config['options']['sm_site_frame_palette'],
-			'sm_site_frame_variation' => $sm_section_config['options']['sm_site_frame_variation'],
-		]
-	);
+	$site_frame_options = [
+		'sm_site_frame_intro'     => $sm_section_config['options']['sm_site_frame_intro'],
+		'sm_site_frame_style'     => $sm_section_config['options']['sm_site_frame_style'],
+		'sm_site_frame_palette'   => $sm_section_config['options']['sm_site_frame_palette'],
+		'sm_site_frame_variation' => $sm_section_config['options']['sm_site_frame_variation'],
+	];
+
+	// Insert the Site Frame controls right before the Fancy Titles group, so the
+	// Site Frame group — the one carrying the Preview affordance — sits directly
+	// under Collections. Anchor on the Fancy Titles intro (its first element) so
+	// the intro and its toggle stay together. Falls back to the toggle, then to
+	// appending, if the intro is absent.
+	$existing  = $sm_panel_config['sections']['sm_tweak_board_section']['options'];
+	$anchor    = isset( $existing['sm_decorative_titles_style_intro'] )
+		? 'sm_decorative_titles_style_intro'
+		: 'sm_decorative_titles_style';
+	$reordered = [];
+	$inserted  = false;
+
+	foreach ( $existing as $option_id => $option_config ) {
+		if ( ! $inserted && $anchor === $option_id ) {
+			$reordered = array_merge( $reordered, $site_frame_options );
+			$inserted  = true;
+		}
+		$reordered[ $option_id ] = $option_config;
+	}
+
+	if ( ! $inserted ) {
+		$reordered = array_merge( $reordered, $site_frame_options );
+	}
+
+	$sm_panel_config['sections']['sm_tweak_board_section']['options'] = $reordered;
 
 	return $sm_panel_config;
 }
