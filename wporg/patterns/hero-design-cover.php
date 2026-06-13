@@ -7,9 +7,10 @@
  * Inserter: true
  */
 ?>
-<!-- wp:cover {"overlayColor":"contrast","dimRatio":100,"minHeight":78,"minHeightUnit":"vh","contentPosition":"bottom center","align":"full","style":{"spacing":{"padding":{"top":"5rem","right":"0","bottom":"0","left":"0"},"blockGap":"1.6rem"}},"layout":{"type":"constrained"}} -->
+<!-- wp:cover {"url":"<?php echo esc_url( get_theme_file_uri( 'assets/images/cover-foundation.jpg' ) ); ?>","dimRatio":60,"overlayColor":"contrast","minHeight":78,"minHeightUnit":"vh","contentPosition":"bottom center","align":"full","style":{"spacing":{"padding":{"top":"5rem","right":"0","bottom":"0","left":"0"},"blockGap":"1.6rem"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-cover alignfull has-custom-content-position is-position-bottom-center" style="padding-top:5rem;padding-right:0;padding-bottom:0;padding-left:0;min-height:78vh">
-	<span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-100 has-background-dim"></span>
+	<span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-60 has-background-dim"></span>
+	<img class="wp-block-cover__image-background" alt="" src="<?php echo esc_url( get_theme_file_uri( 'assets/images/cover-foundation.jpg' ) ); ?>" data-object-fit="cover"/>
 	<div class="wp-block-cover__inner-container">
 		<!-- wp:group {"align":"wide","style":{"spacing":{"blockGap":"1.2rem"}}} -->
 		<div class="wp-block-group alignwide">

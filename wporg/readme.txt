@@ -67,3 +67,6 @@ Source: https://fontawesome.com/
 Bundled fonts (assets/fonts/), Space Grotesk / Cormorant / Quattrocento Sans / Lora / Montserrat
 License: SIL Open Font License 1.1
 Source: https://fonts.google.com/ (see assets/fonts/LICENSE.md)
+
+Cover image (assets/images/cover-foundation.jpg), original abstract artwork by Pixelgrade
+License: GPLv2 or later (same as this theme)
