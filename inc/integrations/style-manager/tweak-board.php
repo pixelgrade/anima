@@ -33,8 +33,8 @@ function anima_add_tweak_board_section_to_style_manager_config( $config ) {
 					'type'         => 'html',
 					'setting_type' => 'option',
 					'setting_id'   => 'sm_contextual_entry_colors_intro',
-					'html'         => '<div class="customize-control-title">' . esc_html__( 'Custom Post Type Colors', '__theme_txtd' ) . '</div>' .
-						'<span class="description customize-control-description">' . esc_html__( 'Add a custom color setting to each post type item and use it anywhere the color options appear.', '__theme_txtd' ) . '</span>',
+					'html'         => '<div class="customize-control-title">' . esc_html__( 'Contextual Colors', '__theme_txtd' ) . '</div>' .
+						'<span class="description customize-control-description">' . esc_html__( 'Give each post, page, project or product its own colour — picked by hand or pulled from its cover image — for the accents that belong to it.', '__theme_txtd' ) . '</span>',
 				],
 				'sm_contextual_entry_colors' => [
 					'type'         => 'sm_toggle',
