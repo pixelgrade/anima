@@ -60,6 +60,31 @@ function anima_register_block_styles() {
 	);
 
 	register_block_style(
+		'core/categories',
+		[
+			'name'         => 'filter-row',
+			'label'        => __( 'Filter row', '__theme_txtd' ),
+			// A horizontal collection switcher for archive headers — the list
+			// sheds its bullets and reads as quiet uppercase links.
+			'inline_style' => '
+				.wp-block-categories.is-style-filter-row {
+					list-style: none;
+					margin: 0;
+					padding: 0;
+					display: flex;
+					flex-wrap: wrap;
+					gap: 0.4rem 1.4rem;
+					text-transform: uppercase;
+					letter-spacing: 0.08em;
+				}
+				.wp-block-categories.is-style-filter-row li {
+					margin: 0;
+				}
+			',
+		]
+	);
+
+	register_block_style(
 		'core/separator',
 		[
 			'name'         => 'grade-ramp',
