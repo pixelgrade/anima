@@ -15,6 +15,7 @@ gulp.task( 'zip', gulp.series( 'build:translate', 'build:folder', 'build:fix', '
 gulp.task( 'zip:wporg', gulp.series(
 	'build:translate',
 	'build:wporg:folder',
+	'build:wporg:copy-novablocks-template-variants',
 	'build:wporg:overlay',
 	'build:fix:dir-permissions',
 	'build:fix:file-permissions',

@@ -86,6 +86,37 @@ copyWporgOverlay.description = 'Copy the wporg/ overlay files into the wp.org bu
 gulp.task( 'build:wporg:overlay', copyWporgOverlay );
 
 // -----------------------------------------------------------------------------
+// Preserve the premium Nova Blocks templates in a non-registered location before
+// the wporg/ overlay replaces templates/ and parts/ with plugin-free defaults.
+// WordPress auto-registers only files under templates/ and parts/.
+// -----------------------------------------------------------------------------
+const novablocksTemplateVariantFiles = [
+	'templates/page.html',
+	'templates/single.html',
+	'templates/home.html',
+	'templates/index.html',
+	'templates/archive.html',
+	'templates/search.html',
+	'parts/header.html',
+	'parts/footer.html',
+]
+const novablocksTemplateVariantBaseDir = 'wporg-template-variants/novablocks'
+const novablocksTemplateVariantDirs = {
+	templates: 'wporg-template-variants/novablocks/templates',
+	parts: 'wporg-template-variants/novablocks/parts',
+}
+
+function copyWporgNovablocksTemplateVariants() {
+	return gulp.src( novablocksTemplateVariantFiles, { base: '.', allowEmpty: false } )
+	           .pipe( plugins.rename( function(path) {
+		           path.dirname = novablocksTemplateVariantDirs[ path.dirname ] || ( novablocksTemplateVariantBaseDir + '/' + path.dirname )
+	           } ) )
+	           .pipe( gulp.dest( '../build/' + slug + '/' ) );
+}
+copyWporgNovablocksTemplateVariants.description = 'Copy Nova Blocks template variants into the wp.org build folder';
+gulp.task( 'build:wporg:copy-novablocks-template-variants', copyWporgNovablocksTemplateVariants );
+
+// -----------------------------------------------------------------------------
 // Replace the text domain placeholder with the wp.org slug and adjust the
 // theme header (a different theme name is mandatory: "anima" is taken on
 // WordPress.org by an unrelated theme).

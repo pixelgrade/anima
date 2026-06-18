@@ -382,6 +382,17 @@ require_once trailingslashit( get_template_directory() ) . 'inc/post-expressions
 require_once trailingslashit( get_template_directory() ) . 'inc/fse.php';
 
 /**
+ * WordPress.org-only template variants.
+ *
+ * This file is supplied by the wporg/ overlay and is absent from the
+ * commercial theme, so premium Anima keeps using its normal templates.
+ */
+$anima_wporg_template_variants_file = trailingslashit( get_template_directory() ) . 'inc/wporg-template-variants.php';
+if ( file_exists( $anima_wporg_template_variants_file ) ) {
+	require_once $anima_wporg_template_variants_file;
+}
+
+/**
  * Admin Dashboard logic.
  */
 require_once trailingslashit( get_template_directory() ) . 'inc/admin/admin.php'; // phpcs:ignore
