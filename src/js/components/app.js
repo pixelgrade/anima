@@ -86,6 +86,10 @@ export default class App {
       return;
     }
 
+    if ( document.body && document.body.classList && ! document.body.classList.contains( 'has-hero-animations' ) ) {
+      document.body.classList.add( 'has-hero-animations' );
+    }
+
     const {
       NEW_HERO_SELECTOR: newHeroesSelector,
       OLD_HERO_SELECTOR: oldHeroesSelector,

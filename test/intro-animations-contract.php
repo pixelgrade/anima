@@ -29,6 +29,9 @@ $original_enable = get_option( 'sm_intro_animations_enable', null );
 $original_style  = get_option( 'sm_intro_animations_style', null );
 $original_speed  = get_option( 'sm_intro_animations_speed', null );
 
+wp_deregister_script( 'gsap' );
+wp_deregister_script( 'gsap-split-text' );
+
 delete_option( 'sm_intro_animations_enable' );
 delete_option( 'sm_intro_animations_style' );
 delete_option( 'sm_intro_animations_speed' );
@@ -46,6 +49,19 @@ if ( '' !== anima_get_intro_animations_critical_css() ) {
 update_option( 'sm_intro_animations_enable', 1 );
 update_option( 'sm_intro_animations_style', 'scale' );
 update_option( 'sm_intro_animations_speed', 'fast' );
+
+$missing_assets_classes = anima_intro_animations_body_class( [] );
+
+if ( in_array( 'has-intro-animations', $missing_assets_classes, true ) ) {
+	anima_fail_intro_animations_contract_test( 'Expected enabled intro animations to stay inactive when GSAP/SplitText are not registered.' );
+}
+
+if ( '' !== anima_get_intro_animations_critical_css() ) {
+	anima_fail_intro_animations_contract_test( 'Expected missing GSAP/SplitText to suppress critical intro-animation CSS.' );
+}
+
+wp_register_script( 'gsap', false, [], null, true );
+wp_register_script( 'gsap-split-text', false, [ 'gsap' ], null, true );
 
 $enabled_classes = anima_intro_animations_body_class( [] );
 
@@ -110,6 +126,23 @@ $kinetic_classes = anima_intro_animations_body_class( [] );
 
 if ( ! in_array( 'has-intro-animations--kinetic', $kinetic_classes, true ) ) {
 	anima_fail_intro_animations_contract_test( 'Expected enabled kinetic style to add the normalized body class.' );
+}
+
+update_option( 'sm_intro_animations_enable', 0 );
+
+$legacy_hero_classes = anima_intro_animations_body_class( [] );
+
+if ( ! in_array( 'has-hero-animations', $legacy_hero_classes, true ) ) {
+	anima_fail_intro_animations_contract_test( 'Expected legacy hero animations to be marked active when GSAP/SplitText are registered and intro animations are disabled.' );
+}
+
+wp_deregister_script( 'gsap' );
+wp_deregister_script( 'gsap-split-text' );
+
+$static_hero_classes = anima_intro_animations_body_class( [] );
+
+if ( in_array( 'has-hero-animations', $static_hero_classes, true ) ) {
+	anima_fail_intro_animations_contract_test( 'Expected legacy hero animations to stay inactive when GSAP/SplitText are missing.' );
 }
 
 if ( null === $original_enable ) {

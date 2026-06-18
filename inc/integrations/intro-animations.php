@@ -25,6 +25,33 @@ function anima_intro_animations_enabled() {
 }
 
 /**
+ * Check if the commercial animation libraries are available.
+ *
+ * @return bool
+ */
+function anima_intro_animations_assets_available() {
+	return wp_script_is( 'gsap', 'registered' ) && wp_script_is( 'gsap-split-text', 'registered' );
+}
+
+/**
+ * Check if intro animations can run on this request.
+ *
+ * @return bool
+ */
+function anima_intro_animations_active() {
+	return anima_intro_animations_enabled() && anima_intro_animations_assets_available();
+}
+
+/**
+ * Check if the legacy hero GSAP timeline can run on this request.
+ *
+ * @return bool
+ */
+function anima_hero_animations_active() {
+	return ! anima_intro_animations_active() && anima_intro_animations_assets_available();
+}
+
+/**
  * Get the normalized intro-animation style.
  *
  * Retired style slugs (e.g. `clip`, `flex` from pre-2.0.17 installs) fall
@@ -97,7 +124,11 @@ function anima_get_intro_animation_supported_speeds() {
  * @return array
  */
 function anima_intro_animations_body_class( $classes ) {
-	if ( ! anima_intro_animations_enabled() ) {
+	if ( ! anima_intro_animations_active() ) {
+		if ( anima_hero_animations_active() ) {
+			$classes[] = 'has-hero-animations';
+		}
+
 		return $classes;
 	}
 
@@ -114,7 +145,7 @@ function anima_intro_animations_body_class( $classes ) {
  * @return string
  */
 function anima_get_intro_animations_critical_css() {
-	if ( ! anima_intro_animations_enabled() ) {
+	if ( ! anima_intro_animations_active() ) {
 		return '';
 	}
 
