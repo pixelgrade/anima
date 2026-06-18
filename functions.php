@@ -115,6 +115,17 @@ if ( ! function_exists( 'anima_setup' ) ) {
 		 * This support is automatically added by wp_enable_block_templates() but we add it also to be more upfront.
 		 */
 		add_theme_support( 'block-templates' );
+
+		/**
+		 * Declare support for the `portfolio` custom post type.
+		 *
+		 * Anima ships FSE templates for portfolio (single-portfolio, archive-portfolio,
+		 * taxonomy-portfolio_type) and Nova Blocks renders portfolio content, but nothing in the
+		 * free stack registers the post type once Pixelgrade Care is gone. Pixelgrade Assistant
+		 * registers `portfolio` + `portfolio_type` / `portfolio_tag` only when the active theme
+		 * declares this support, so portfolio starter content imports and renders for free users.
+		 */
+		add_theme_support( 'portfolio' );
 	}
 }
 add_action( 'after_setup_theme', 'anima_setup', 10 );
