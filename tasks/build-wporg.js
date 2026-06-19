@@ -246,10 +246,6 @@ function wporgRelaxThemeJson(done) {
 		spacingScale: { operator: '*', increment: 1.5, steps: 7, mediumStep: 1.5, unit: 'rem' },
 	} );
 
-	// $theme-fonts roles that read as display/headings (serif) vs body/UI (sans).
-	const headingRoles = [ 'super-display', 'display', 'heading-1', 'heading-2', 'heading-3', 'heading-4', 'site-title' ];
-	const bodyRoles = [ 'body', 'lead', 'small-body', 'caption', 'heading-5', 'heading-6', 'navigation', 'meta', 'button', 'input', 'accent' ];
-
 	json.styles = {
 		spacing: {
 			blockGap: '1.2rem',
@@ -264,41 +260,17 @@ function wporgRelaxThemeJson(done) {
 			h3: { typography: { fontSize: 'var(--wp--preset--font-size--large)' } },
 			link: { color: { text: 'var(--wp--preset--color--primary)' }, ':hover': { typography: { textDecoration: 'underline' } } },
 			// Buttons are styled by the theme's own CSS via the --theme-button-*
-			// tokens (fed by --sm-button-background-color in the css mapping below);
-			// don't set elements.button.color here or the ghost button disappears.
+			// tokens (fed by the runtime SM-inactive fallback when Style Manager
+			// is absent); don't set elements.button.color here or the ghost button
+			// disappears.
 		},
-		// Map the Style Manager runtime tokens the compiled theme CSS consumes to
-		// the ACTIVE palette's preset variables. This drives buttons/accents/
-		// separators/Nova bridges from whichever palette is live — the default
-		// palette or any style variation (wporg/styles/*.json) — so a variation is
-		// just a palette swap and recolors the whole theme bare. Supersedes the
-		// separate sm-token-fallback.css.
-		css: ':root{'
-			+ '--sm-current-bg-color:var(--wp--preset--color--base);'
-			+ '--sm-current-accent-color:var(--wp--preset--color--primary);'
-			+ '--sm-current-accent2-color:var(--sm-current-accent-color);'
-			+ '--sm-current-accent3-color:var(--sm-current-accent2-color);'
-			+ '--sm-current-fg1-color:var(--wp--preset--color--contrast);'
-			+ '--sm-current-fg2-color:var(--wp--preset--color--secondary);'
-			+ '--sm-button-background-color:var(--wp--preset--color--primary);'
-			// Leave --sm-site-container-width / --sm-content-inset to the theme's
-			// own Nova-common fallbacks (67 / 288), which drive --nb-content-width /
-			// --nb-container-width. Those land near Felt's proportions (~1410px wide,
-			// ~720px content); Felt's literal "80" isn't portable because the width
-			// is em-based and our fluid font scale differs.
-			+ '--sm-spacing-level:1;'
-			+ '}'
-			// Point the theme's per-role font-family tokens at the active heading/
-			// body families so the compiled typography (apply-font) uses the bundled
-			// fonts — and follows a style variation that swaps the families. Higher
-			// specificity (:root:root) to win over the compiled defaults.
-			+ ':root:root{'
-			+ headingRoles.map( r => '--theme-' + r + '-font-family:var(--wp--preset--font-family--heading);' ).join( '' )
-			+ bodyRoles.map( r => '--theme-' + r + '-font-family:var(--wp--preset--font-family--body);' ).join( '' )
-			// "Smaller" font sizing: scale the theme's whole role-based type system
-			// down one notch (the compiled CSS defaults --font-size-base to 1).
-			+ '--font-size-base:0.9375;'
-			+ '}',
+		// Keep only pure theme defaults here. Style Manager-owned design tokens
+		// are emitted at runtime from inc/block-editor.php only when Style
+		// Manager is inactive, so active plugin output can own the live palette,
+		// typography and spacing system.
+		// "Smaller" font sizing: scale the theme's whole role-based type system
+		// down one notch (the compiled CSS defaults --font-size-base to 1).
+		css: ':root:root{--font-size-base:0.9375;}',
 	};
 
 	fs.writeFileSync( file, JSON.stringify( json, null, '\t' ) + '\n' );

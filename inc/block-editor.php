@@ -28,6 +28,96 @@ function anima_style_manager_is_active() {
 }
 
 /**
+ * Get the wp.org fallback CSS for Style Manager-owned design tokens.
+ *
+ * The WordPress.org build uses theme.json presets as the plugin-free design
+ * source, but only while Style Manager is absent. When Style Manager is active
+ * it emits these tokens at runtime and must remain the sole owner.
+ *
+ * @return string
+ */
+function anima_get_sm_inactive_design_token_fallback_css() {
+	$root_declarations = [
+		'--sm-current-bg-color'          => 'var(--wp--preset--color--base)',
+		'--sm-current-accent-color'      => 'var(--wp--preset--color--primary)',
+		'--sm-current-accent2-color'     => 'var(--sm-current-accent-color)',
+		'--sm-current-accent3-color'     => 'var(--sm-current-accent2-color)',
+		'--sm-current-fg1-color'         => 'var(--wp--preset--color--contrast)',
+		'--sm-current-fg2-color'         => 'var(--wp--preset--color--secondary)',
+		'--sm-button-background-color'   => 'var(--wp--preset--color--primary)',
+		'--sm-spacing-level'             => '1',
+	];
+
+	$heading_roles = [
+		'super-display',
+		'display',
+		'heading-1',
+		'heading-2',
+		'heading-3',
+		'heading-4',
+		'site-title',
+	];
+
+	$body_roles = [
+		'body',
+		'lead',
+		'small-body',
+		'caption',
+		'heading-5',
+		'heading-6',
+		'navigation',
+		'meta',
+		'button',
+		'input',
+		'accent',
+	];
+
+	$css = ':root{';
+
+	foreach ( $root_declarations as $property => $value ) {
+		$css .= $property . ':' . $value . ';';
+	}
+
+	$css .= '}';
+	$css .= ':root:root{';
+
+	foreach ( $heading_roles as $role ) {
+		$css .= '--theme-' . $role . '-font-family:var(--wp--preset--font-family--heading);';
+	}
+
+	foreach ( $body_roles as $role ) {
+		$css .= '--theme-' . $role . '-font-family:var(--wp--preset--font-family--body);';
+	}
+
+	$css .= '}';
+
+	return $css;
+}
+
+/**
+ * Enqueue plugin-free fallbacks for Style Manager-owned design tokens.
+ *
+ * @return void
+ */
+function anima_enqueue_sm_inactive_design_token_fallback() {
+	static $enqueued = false;
+
+	if ( $enqueued || anima_style_manager_is_active() ) {
+		return;
+	}
+
+	$enqueued = true;
+	$theme    = wp_get_theme( get_template() );
+	$handle   = 'anima-sm-inactive-design-token-fallback';
+
+	wp_register_style( $handle, false, [], $theme->get( 'Version' ) );
+	wp_enqueue_style( $handle );
+	wp_add_inline_style( $handle, anima_get_sm_inactive_design_token_fallback_css() );
+}
+add_action( 'wp_enqueue_scripts', 'anima_enqueue_sm_inactive_design_token_fallback', 21 );
+add_action( 'enqueue_block_assets', 'anima_enqueue_sm_inactive_design_token_fallback', 21 );
+
+/**
  * Reveal content when no web font loader will mark fonts as active.
  *
  * To prevent a flash of unstyled text, the theme hides text until the web font
