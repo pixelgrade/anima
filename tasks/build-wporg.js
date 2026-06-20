@@ -119,6 +119,72 @@ function copyWporgNovablocksTemplateVariants() {
 copyWporgNovablocksTemplateVariants.description = 'Copy Nova Blocks template variants into the wp.org build folder';
 gulp.task( 'build:wporg:copy-novablocks-template-variants', copyWporgNovablocksTemplateVariants );
 
+function wporgStripUnsupportedExternalImageReferences(done) {
+	const variantRoot = '../build/' + slug + '/' + novablocksTemplateVariantBaseDir;
+	const unsupportedDomains = [
+		'unsplash.com',
+	];
+
+	if ( ! fs.existsSync( variantRoot ) ) {
+		return done();
+	}
+
+	const stripFromFile = (file) => {
+		const content = fs.readFileSync( file, 'utf8' );
+		const stripped = content.replace( /<!-- wp:([^\s]+) (\{.*?\}) \/-->/g, (match, blockName, attrsJson) => {
+			let attrs;
+
+			try {
+				attrs = JSON.parse( attrsJson );
+			} catch (error) {
+				return match;
+			}
+
+			if ( ! Array.isArray( attrs.images ) ) {
+				return match;
+			}
+
+			const hasUnsupportedDomain = attrs.images.some( image => {
+				const imageJson = JSON.stringify( image );
+
+				return unsupportedDomains.some( domain => imageJson.includes( domain ) );
+			} );
+
+			if ( ! hasUnsupportedDomain ) {
+				return match;
+			}
+
+			attrs.images = [];
+
+			return '<!-- wp:' + blockName + ' ' + JSON.stringify( attrs ) + ' /-->';
+		} );
+
+		if ( content !== stripped ) {
+			fs.writeFileSync( file, stripped );
+		}
+	};
+
+	const walk = (dir) => {
+		fs.readdirSync( dir, { withFileTypes: true } ).forEach( entry => {
+			const path = dir + '/' + entry.name;
+
+			if ( entry.isDirectory() ) {
+				walk( path );
+				return;
+			}
+
+			if ( path.endsWith( '.html' ) ) {
+				stripFromFile( path );
+			}
+		} );
+	};
+
+	walk( variantRoot );
+	return done();
+}
+wporgStripUnsupportedExternalImageReferences.description = 'Strip unsupported remote image metadata from wp.org-only template variants';
+gulp.task( 'build:wporg:strip-unsupported-external-images', wporgStripUnsupportedExternalImageReferences );
+
 // -----------------------------------------------------------------------------
 // Replace the text domain placeholder with the wp.org slug and adjust the
 // theme header (a different theme name is mandatory: "anima" is taken on
@@ -326,6 +392,7 @@ function wporgRenamePot(done) {
 gulp.task( 'build:wporg:rename-pot', wporgRenamePot );
 
 gulp.task( 'build:wporg:fix-wporg', gulp.series(
+	'build:wporg:strip-unsupported-external-images',
 	gulp.parallel(
 		'build:wporg:compile-expanded-root-styles',
 		'build:wporg:compile-expanded-dist-styles'
