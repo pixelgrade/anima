@@ -185,6 +185,43 @@ function wporgStripUnsupportedExternalImageReferences(done) {
 wporgStripUnsupportedExternalImageReferences.description = 'Strip unsupported remote image metadata from wp.org-only template variants';
 gulp.task( 'build:wporg:strip-unsupported-external-images', wporgStripUnsupportedExternalImageReferences );
 
+function wporgStripExternalTemplateVariantLinks(done) {
+	const variantRoot = '../build/' + slug + '/' + novablocksTemplateVariantBaseDir;
+
+	if ( ! fs.existsSync( variantRoot ) ) {
+		return done();
+	}
+
+	const stripFromFile = (file) => {
+		const content = fs.readFileSync( file, 'utf8' );
+		const stripped = content.replace( /href=(["'])https?:\/\/[^"']+\1/g, 'href=$1#$1' );
+
+		if ( content !== stripped ) {
+			fs.writeFileSync( file, stripped );
+		}
+	};
+
+	const walk = (dir) => {
+		fs.readdirSync( dir, { withFileTypes: true } ).forEach( entry => {
+			const path = dir + '/' + entry.name;
+
+			if ( entry.isDirectory() ) {
+				walk( path );
+				return;
+			}
+
+			if ( path.endsWith( '.html' ) ) {
+				stripFromFile( path );
+			}
+		} );
+	};
+
+	walk( variantRoot );
+	return done();
+}
+wporgStripExternalTemplateVariantLinks.description = 'Strip front-facing external links from wp.org-only template variants';
+gulp.task( 'build:wporg:strip-template-variant-external-links', wporgStripExternalTemplateVariantLinks );
+
 // -----------------------------------------------------------------------------
 // Replace the text domain placeholder with the wp.org slug and adjust the
 // theme header (a different theme name is mandatory: "anima" is taken on
@@ -393,6 +430,7 @@ gulp.task( 'build:wporg:rename-pot', wporgRenamePot );
 
 gulp.task( 'build:wporg:fix-wporg', gulp.series(
 	'build:wporg:strip-unsupported-external-images',
+	'build:wporg:strip-template-variant-external-links',
 	gulp.parallel(
 		'build:wporg:compile-expanded-root-styles',
 		'build:wporg:compile-expanded-dist-styles'
