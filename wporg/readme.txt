@@ -3,7 +3,7 @@ Contributors: pixelgrade
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.0.21
+Stable tag: 2.0.22
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, portfolio, one-column, custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, block-patterns, full-site-editing, rtl-language-support
@@ -37,6 +37,10 @@ with the Nova Blocks plugin (available on WordPress.org) for additional
 blocks and layout options when that plugin is active.
 
 == Changelog ==
+
+= 2.0.22 =
+
+* Resubmitted the wp.org review package with a fresh version after the previous candidate was reserved in WordPress.org SVN.
 
 = 2.0.21 =
 * Remove external sample links and remote preview references from the WordPress.org package.
