@@ -23,8 +23,8 @@ foreach ( $files as $file ) {
 
 	$contents = file_get_contents( $path );
 
-	if ( ! preg_match( '/^Version:\s*2\.0\.17\s*$/m', $contents ) ) {
-		fwrite( STDERR, sprintf( "%s must declare Version: 2.0.17\n", $file ) );
+	if ( ! preg_match( '/^Version:\s*2\.0\.21\s*$/m', $contents ) ) {
+		fwrite( STDERR, sprintf( "%s must declare Version: 2.0.21\n", $file ) );
 		exit( 1 );
 	}
 
