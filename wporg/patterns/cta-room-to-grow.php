@@ -3,7 +3,7 @@
  * Title: Room to grow (call to action)
  * Slug: anima-lt/cta-room-to-grow
  * Categories: call-to-action
- * Description: A closing call-to-action panel on the Tertiary colour — heading, a short paragraph, a button to the free Nova Blocks plugin, and a quiet supporting line.
+ * Description: A closing call-to-action panel on the Tertiary colour — heading, a short paragraph, a button, and a quiet supporting line.
  * Inserter: true
  */
 ?>
@@ -16,13 +16,13 @@
 		<!-- /wp:heading -->
 
 		<!-- wp:paragraph {"align":"center"} -->
-		<p class="has-text-align-center"><?php esc_html_e( 'Anima is complete on its own. When you’re ready for richer layouts and ready-made sections, the free Nova Blocks plugin picks up exactly where the theme leaves off.', '__theme_txtd' ); ?></p>
+		<p class="has-text-align-center"><?php esc_html_e( 'Anima gives you a complete core-block foundation for pages, posts, headers, and footers. Start with the included patterns, then tune colours, type, and spacing in the Site Editor.', '__theme_txtd' ); ?></p>
 		<!-- /wp:paragraph -->
 
 		<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
 		<div class="wp-block-buttons">
 			<!-- wp:button -->
-			<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://wordpress.org/plugins/nova-blocks/"><?php esc_html_e( 'Get Nova Blocks', '__theme_txtd' ); ?></a></div>
+			<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#"><?php esc_html_e( 'Explore patterns', '__theme_txtd' ); ?></a></div>
 			<!-- /wp:button -->
 		</div>
 		<!-- /wp:buttons -->

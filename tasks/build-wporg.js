@@ -1,5 +1,8 @@
 const gulp = require('gulp'),
 	plugins = require('gulp-load-plugins')(),
+	sass = require('gulp-sass')(require('sass')),
+	rtlcss = require('gulp-rtlcss'),
+	rename = require('gulp-rename'),
 	fs = require('fs'),
 	del = require('del'),
 	{ readSmDefaultColors } = require('./build-wporg-tokens')
@@ -121,6 +124,40 @@ gulp.task( 'build:wporg:copy-novablocks-template-variants', copyWporgNovablocksT
 // theme header (a different theme name is mandatory: "anima" is taken on
 // WordPress.org by an unrelated theme).
 // -----------------------------------------------------------------------------
+const stylesRoot = './src/scss/';
+const rootStyles = [ stylesRoot + 'style.scss' ];
+const notRootStyles = rootStyles.map( path => '!' + path );
+notRootStyles.unshift( stylesRoot + '**/*.scss' );
+
+function wporgStylesBase( src, dest ) {
+	return gulp.src( src )
+	           .pipe( sass.sync( { outputStyle: 'expanded' } ).on( 'error', sass.logError ) )
+	           .pipe( gulp.dest( dest ) );
+}
+
+function wporgCompileExpandedRootStyles() {
+	return wporgStylesBase( rootStyles, '../build/' + slug + '/' );
+}
+gulp.task( 'build:wporg:compile-expanded-root-styles', wporgCompileExpandedRootStyles );
+
+function wporgCompileExpandedDistStyles() {
+	return wporgStylesBase( notRootStyles, '../build/' + slug + '/dist/css/' );
+}
+gulp.task( 'build:wporg:compile-expanded-dist-styles', wporgCompileExpandedDistStyles );
+
+async function wporgRemoveCopiedRtlStyles() {
+	return del( [ '../build/' + slug + '/style-rtl.css', '../build/' + slug + '/dist/css/**/*-rtl.css' ], { force: true } );
+}
+gulp.task( 'build:wporg:remove-copied-rtl-styles', wporgRemoveCopiedRtlStyles );
+
+function wporgExpandedStylesRTL() {
+	return gulp.src( [ '../build/' + slug + '/style.css', '../build/' + slug + '/dist/css/**/*.css', '!../build/' + slug + '/dist/css/**/*-rtl.css' ], { base: '../build/' + slug + '/' } )
+	           .pipe( rtlcss() )
+	           .pipe( rename( function( path ) { path.basename += '-rtl' } ) )
+	           .pipe( gulp.dest( '../build/' + slug + '/' ) );
+}
+gulp.task( 'build:wporg:expanded-styles-rtl', wporgExpandedStylesRTL );
+
 function wporgTextdomainReplace() {
 	return gulp.src( ['../build/' + slug + '/**/*.php', '../build/' + slug + '/**/*.js', '../build/' + slug + '/**/*.css', '../build/' + slug + '/**/*.pot', '../build/' + slug + '/**/*.txt'] )
 	           .pipe( plugins.replace( /__theme_txtd/g, slug ) )
@@ -135,9 +172,9 @@ function wporgFixThemeHeader() {
 
 	return gulp.src( ['../build/' + slug + '/style.css', '../build/' + slug + '/style-rtl.css'], { allowEmpty: true } )
 	           .pipe( plugins.replace( /^Theme Name:.*$/m, 'Theme Name: ' + displayName ) )
-	           // The commercial Theme URI points at the plugin-stack demo; the
-	           // directory variant gets the bare demo running this exact build.
-	           .pipe( plugins.replace( /^Theme URI:.*$/m, 'Theme URI: https://starter.pixelgrade.com/anima/' ) )
+	           // Theme URI is optional and must point to a page about the exact
+	           // wp.org-hosted theme, not a starter/demo page.
+	           .pipe( plugins.replace( /^Theme URI:.*[\r\n]*/m, '' ) )
 	           .pipe( plugins.replace( /^Description:.*$/m, 'Description: ' + description ) )
 	           .pipe( plugins.replace( /^Pixelgrade Plugin Supports:.*[\r\n]*/m, '' ) )
 	           // The Update URI header firewalls commercial installs from the
@@ -289,6 +326,12 @@ function wporgRenamePot(done) {
 gulp.task( 'build:wporg:rename-pot', wporgRenamePot );
 
 gulp.task( 'build:wporg:fix-wporg', gulp.series(
+	gulp.parallel(
+		'build:wporg:compile-expanded-root-styles',
+		'build:wporg:compile-expanded-dist-styles'
+	),
+	'build:wporg:remove-copied-rtl-styles',
+	'build:wporg:expanded-styles-rtl',
 	'build:wporg:txtdomain',
 	'build:wporg:theme-header',
 	'build:wporg:relax-theme-json',

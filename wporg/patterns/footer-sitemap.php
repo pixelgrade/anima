@@ -72,10 +72,12 @@
 	<div class="wp-block-group alignwide" style="border-top-color:#0000002e;border-top-width:1px;padding-top:1.2rem">
 		<!-- wp:paragraph {"fontSize":"small"} -->
 		<p class="has-small-font-size"><?php
-		printf(
-			/* translators: %s: WordPress, linking to wordpress.org. */
-			esc_html__( 'Proudly powered by %s.', '__theme_txtd' ),
-			'<a href="' . esc_url( __( 'https://wordpress.org', '__theme_txtd' ) ) . '">WordPress</a>'
+		echo wp_kses_post(
+			sprintf(
+				/* translators: %s: WordPress, linking to wordpress.org. */
+				__( 'Proudly powered by %s.', '__theme_txtd' ),
+				'<a href="' . esc_url( __( 'https://wordpress.org', '__theme_txtd' ) ) . '">' . esc_html__( 'WordPress', '__theme_txtd' ) . '</a>'
+			)
 		);
 		?></p>
 		<!-- /wp:paragraph -->
@@ -83,7 +85,7 @@
 		<!-- wp:group {"style":{"spacing":{"padding":{"top":"0.15rem","right":"0.6rem","bottom":"0.15rem","left":"0.6rem"}},"border":{"width":"1px","color":"#0000002e","radius":"4px"}},"layout":{"type":"flex"}} -->
 		<div class="wp-block-group has-border-color" style="border-color:#0000002e;border-width:1px;border-radius:4px;padding-top:0.15rem;padding-right:0.6rem;padding-bottom:0.15rem;padding-left:0.6rem">
 			<!-- wp:paragraph {"textColor":"secondary","style":{"typography":{"textTransform":"uppercase","letterSpacing":"0.08em"}},"fontSize":"small"} -->
-			<p class="has-secondary-color has-text-color has-small-font-size" style="text-transform:uppercase;letter-spacing:0.08em">core/template-part</p>
+			<p class="has-secondary-color has-text-color has-small-font-size" style="text-transform:uppercase;letter-spacing:0.08em"><?php esc_html_e( 'core/template-part', '__theme_txtd' ); ?></p>
 			<!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:group -->
