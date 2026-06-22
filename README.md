@@ -4,6 +4,8 @@
 
 ## Available Themes
 
+The free WordPress.org distribution of this base theme is [Anima LT](https://wordpress.org/themes/anima-lt/).
+
 Pixelgrade `LT` themes, based on the Anima universal theme, will follow the `[Theme name]` + `LT`  naming convention.
 
 Here is the current list of Pixelgrade LT themes:
@@ -33,7 +35,7 @@ A manually curated list that include all the valuable people that have contribut
 
 ## Local Environment Setup Pointers
 
-You need to be careful since we **require** certain **node versions (v14) and PHP versions (v7.4).**
+You need to be careful since we **require** certain **Node versions (v22+) and PHP versions (v7.4).**
 
 For ease of development, it is best to use `nvm` (https://github.com/nvm-sh/nvm) for node version management and automatic node version switching on shell navigation. For the `zsh` shell the easiest way is to use [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) with the `nvm` [plugin](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/nvm) activated.
 

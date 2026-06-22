@@ -8,7 +8,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, portfolio, one-column, custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, block-patterns, full-site-editing, rtl-language-support
 
-A versatile block theme by Pixelgrade, the universal base of the Pixelgrade LT site solutions.
+A design-system foundation for the block editor, and the universal base of the Pixelgrade LT site solutions.
 
 == Description ==
 
@@ -17,12 +17,17 @@ of colour, typography, and spacing, with several palettes and curated Google
 font pairings, rather than a library of pre-built layouts. It is the universal
 base of the Pixelgrade LT site solutions (Rosa LT, Felt LT, Julia LT, Mies LT).
 
-Anima is complete and usable on its own with core blocks. Add the free Nova
-Blocks plugin for richer layouts and ready-made sections that pick up exactly
-where the theme leaves off.
+Anima is complete and usable on its own with core blocks. Add the free Style
+Manager and Nova Blocks plugins for the full Pixelgrade design-system workflow:
+Style Manager coordinates colors, typography, and spacing, while Nova Blocks
+adds richer layouts and ready-made sections that pick up exactly where the
+theme leaves off.
 
 See it live: https://starter.pixelgrade.com/anima/ — a public demo running
 only the theme and core blocks, no plugins.
+
+Install it from the WordPress.org theme directory:
+https://wordpress.org/themes/anima-lt/
 
 The theme is developed in public. The human-readable sources for the compiled
 CSS (SCSS) and the build tooling live in the theme's repository:
@@ -33,20 +38,21 @@ https://github.com/pixelgrade/anima
 = Does this theme require any plugins? =
 
 No. Anima LT works with the core block editor out of the box. It integrates
-with the Nova Blocks plugin (available on WordPress.org) for additional
-blocks and layout options when that plugin is active.
+with the Style Manager and Nova Blocks plugins (both available on WordPress.org)
+for additional design-system controls, blocks, and layout options when those
+plugins are active.
 
 == Changelog ==
 
 = 2.0.22 =
 
-* Resubmitted the wp.org review package with a fresh version after the previous candidate was reserved in WordPress.org SVN.
+* First approved WordPress.org directory release.
 
 = 2.0.21 =
 * Remove external sample links and remote preview references from the WordPress.org package.
 
 = 2.0.17 =
-* Initial release on WordPress.org.
+* Initial WordPress.org review package.
 
 == Copyright ==
 

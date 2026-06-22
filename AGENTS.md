@@ -5,6 +5,7 @@
 Anima is a WordPress block theme (FSE) by Pixelgrade. It serves as the universal base for Pixelgrade LT themes (Rosa LT, Felt LT, Julia LT, Mies LT). Heavily integrated with **Style Manager** (color/font system) and **Nova Blocks** (block library).
 
 GitHub: `git@github.com:pixelgrade/anima.git`
+WordPress.org: https://wordpress.org/themes/anima-lt/ (`anima-lt`, public Anima LT build)
 
 ## Private Local Files
 
@@ -132,6 +133,11 @@ confined to `tasks/build-wporg.js` + `.zipignore-wporg` + the `wporg/` overlay:
   drops the `Pixelgrade Plugin Supports:` and `Update URI:` headers, and
   relaxes theme.json (palette, fonts, sizes, base styles) for the bare build.
 
+Anima LT is approved and live on WordPress.org. Treat `npm run build:wporg` as
+the update package builder for the public directory theme, not only as a review
+candidate builder. Keep `wporg/readme.txt` `Stable tag` and changelog aligned
+with the version being uploaded.
+
 **Rules that keep the bare build submittable:**
 
 - Remote/CDN or non-GPL assets (GSAP, SplitText, Snap.svg, pxgcdn webfonts)
@@ -141,8 +147,8 @@ confined to `tasks/build-wporg.js` + `.zipignore-wporg` + the `wporg/` overlay:
 - Style-Manager-only behavior (including `update_option( 'sm_*' )` calls and
   editor UI) must be gated on `anima_style_manager_is_active()` or on the
   distribution being present (`function_exists( 'anima_webfonts_fallback' )`).
-- Verify with Theme Check before submission: the headless runner lives on the
-  bare Studio test site —
+- Verify with Theme Check before uploading a new WordPress.org version: the
+  headless runner lives on the bare Studio test site —
   `studio wp eval-file wp-content/run-theme-check.php --path=~/Studio/anima-lt`.
   It must report PASS (no REQUIRED items).
 
