@@ -414,11 +414,12 @@ require_once trailingslashit( get_template_directory() ) . 'inc/admin/admin.php'
 require_once trailingslashit( get_template_directory() ) . '/inc/integrations.php';
 
 /**
- * Commercial distribution logic (WUpdates self-updates, required-plugins
- * onboarding, Pixelgrade Care installer, CDN webfonts fallback).
+ * Commercial distribution logic (WUpdates self-updates, CDN webfonts fallback,
+ * remote vendor scripts).
  *
  * This file is stripped from the WordPress.org build, so it is loaded only
- * when present.
+ * when present. Plugin onboarding is not here: the Pixelgrade Assistant install
+ * notice ships in both builds (inc/admin/assistant-notice/).
  */
 if ( file_exists( trailingslashit( get_template_directory() ) . 'inc/distribution.php' ) ) {
 	require_once trailingslashit( get_template_directory() ) . 'inc/distribution.php';

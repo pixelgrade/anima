@@ -17,6 +17,14 @@ require_once trailingslashit( get_template_directory() ) . 'inc/integrations/nov
 require_once trailingslashit( get_template_directory() ) . 'inc/integrations/post-expressions.php';
 
 /**
+ * Load Pixelgrade Assistant integration (theme support + onboarding glue).
+ *
+ * Ships in both the commercial and the WordPress.org build; inert when the
+ * Assistant plugin is absent.
+ */
+require_once trailingslashit( get_template_directory() ) . 'inc/integrations/pixelgrade-assistant.php';
+
+/**
  * Load Style Manager integration for this theme.
  */
 if ( class_exists( 'Pixelgrade\StyleManager\Plugin' ) ) {

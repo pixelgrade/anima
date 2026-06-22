@@ -4,17 +4,17 @@
 # keep working without these files: functions.php and inc/admin/admin.php load
 # them through file_exists() guards.
 
-# The commercial distribution loader and the code it pulls in.
+# The commercial distribution loader and the code it pulls in (WUpdates
+# self-updates, CDN webfonts fallback, remote vendor scripts).
 inc/distribution.php
 inc/distribution
 
-# WUpdates / TGMPA required-plugins onboarding.
-inc/required-plugins.php
-inc/required-plugins
-
-# Pixelgrade Care installer, activation redirect, and install notice.
-inc/integrations/pixelgrade-care.php
-inc/admin/pixcare-notice
+# NOTE: The Pixelgrade Assistant install notice (inc/admin/assistant-notice/)
+# and its theme-support integration (inc/integrations/pixelgrade-assistant.php)
+# are intentionally NOT stripped — they ship in the WordPress.org build too. The
+# plugin install/activate is driven entirely by WordPress core (wp.updates) and
+# targets the wp.org-hosted `pixelgrade-assistant` slug, so they are bare-build
+# safe and Theme-Check clean.
 
 # The wp.org overlay source folder itself (its contents are copied into the
 # build root by the build:wporg:overlay task).

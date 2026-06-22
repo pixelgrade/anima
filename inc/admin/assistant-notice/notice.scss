@@ -26,14 +26,14 @@ $gray-light: #CCCCCC;
   }
 }
 
-.pixcare-notice__container {
+.pixassist-notice__container {
 
   *, :before, :after {
     box-sizing: border-box;
   }
 }
 
-.pixcare-notice__container[class] {
+.pixassist-notice__container[class] {
   display: block;
   position: relative;
   margin-top: 100px;
@@ -162,24 +162,24 @@ $gray-light: #CCCCCC;
   }
 }
 
-$pixcare-notice-spacing: 30px;
-$pixcare-notice-mobile-spacing: 20px;
+$pixassist-notice-spacing: 30px;
+$pixassist-notice-mobile-spacing: 20px;
 
-.pixcare-notice__wrap {
+.pixassist-notice__wrap {
   padding-top: 1px;
-  padding-bottom: $pixcare-notice-mobile-spacing;
+  padding-bottom: $pixassist-notice-mobile-spacing;
 
   > * {
-    margin-top: $pixcare-notice-mobile-spacing;
-    margin-left: $pixcare-notice-mobile-spacing;
+    margin-top: $pixassist-notice-mobile-spacing;
+    margin-left: $pixassist-notice-mobile-spacing;
   }
 
   @media only screen and (min-width: 600px) {
-    padding-bottom: $pixcare-notice-spacing;
+    padding-bottom: $pixassist-notice-spacing;
 
     > * {
-      margin-top: $pixcare-notice-spacing;
-      margin-left: $pixcare-notice-spacing;
+      margin-top: $pixassist-notice-spacing;
+      margin-left: $pixassist-notice-spacing;
     }
   }
 
@@ -189,7 +189,7 @@ $pixcare-notice-mobile-spacing: 20px;
   }
 }
 
-.pixcare-notice__media {
+.pixassist-notice__media {
   flex: 0 1 50%;
   align-self: stretch;
   background-color: #F2F4F5;
@@ -202,7 +202,7 @@ $pixcare-notice-mobile-spacing: 20px;
   }
 }
 
-.pixcare-notice__screenshot {
+.pixassist-notice__screenshot {
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -215,7 +215,7 @@ $pixcare-notice-mobile-spacing: 20px;
   padding: 40px 40px 0;
 }
 
-.pixcare-notice__body {
+.pixassist-notice__body {
   flex: 0 1 50%;
 
   @media only screen and (min-width: 1300px) {
@@ -249,7 +249,7 @@ $pixcare-notice-mobile-spacing: 20px;
   }
 }
 
-.pixcare-notice-button {
+.pixassist-notice-button {
   background-color: $purple;
   color: #FFFFFF;
 
@@ -330,7 +330,7 @@ $pixcare-notice-mobile-spacing: 20px;
   display: none;
 }
 
-.pixcare-notice-button__overlay {
+.pixassist-notice-button__overlay {
   display: block;
   position: absolute;
   top: 0;
@@ -342,11 +342,11 @@ $pixcare-notice-mobile-spacing: 20px;
   padding: inherit;
   overflow: hidden;
 
-  &, .pixcare-notice-button__text {
+  &, .pixassist-notice-button__text {
     transition: transform 15s cubic-bezier(0.230, 1.000, 0.320, 1.000);
   }
 
-  .pixcare-notice-button__text {
+  .pixassist-notice-button__text {
     display: block;
     color: #FFFFFF;
     transform: translateX(100%) translate3d(70px,0,0);
@@ -355,10 +355,10 @@ $pixcare-notice-mobile-spacing: 20px;
 
 .state--plugin-installing {
 
-  .pixcare-notice-button__overlay {
+  .pixassist-notice-button__overlay {
     transform: translateX(-40%);
 
-    .pixcare-notice-button__text {
+    .pixassist-notice-button__text {
       transform: translateX(40%) translate3d(28px,0,0);
     }
   }
@@ -366,14 +366,14 @@ $pixcare-notice-mobile-spacing: 20px;
 
 .state--plugin-activating {
 
-  .pixcare-notice-button__overlay {
+  .pixassist-notice-button__overlay {
     transform: translateX(-10%);
 
-    .pixcare-notice-button__text {
+    .pixassist-notice-button__text {
       transform: translateX(10%) translate3d(7px,0,0);
     }
 
-    &, .pixcare-notice-button__text {
+    &, .pixassist-notice-button__text {
       transition: transform 10s cubic-bezier(0.230, 1.000, 0.320, 1.000);
     }
   }
@@ -381,14 +381,14 @@ $pixcare-notice-mobile-spacing: 20px;
 
 .state--plugin-redirecting {
 
-  .pixcare-notice-button__overlay {
+  .pixassist-notice-button__overlay {
     transform: translateX(0);
 
-    .pixcare-notice-button__text {
+    .pixassist-notice-button__text {
       transform: translate3d(0,0,0);
     }
 
-    &, .pixcare-notice-button__text {
+    &, .pixassist-notice-button__text {
       transition: transform 5s cubic-bezier(0.230, 1.000, 0.320, 1.000);
     }
   }
@@ -396,14 +396,14 @@ $pixcare-notice-mobile-spacing: 20px;
 
 .state--plugin-redirecting {
 
-  .pixcare-notice-button__overlay {
+  .pixassist-notice-button__overlay {
     transform: translateX(0);
 
-    .pixcare-notice-button__text {
+    .pixassist-notice-button__text {
       transform: translate3d(0,0,0);
     }
 
-    &, .pixcare-notice-button__text {
+    &, .pixassist-notice-button__text {
       transition: transform 5s cubic-bezier(0.230, 1.000, 0.320, 1.000);
     }
   }
@@ -415,15 +415,15 @@ $pixcare-notice-mobile-spacing: 20px;
     animation: shake 0.8s .1s cubic-bezier(.36,.07,.19,.97) both;
   }
 
-  .pixcare-notice-button__overlay {
+  .pixassist-notice-button__overlay {
     transform: translateX(0);
     background: #E3004A;
 
-    .pixcare-notice-button__text {
+    .pixassist-notice-button__text {
       transform: translate3d(0,0,0);
     }
 
-    &, .pixcare-notice-button__text {
+    &, .pixassist-notice-button__text {
       transition: transform .3s cubic-bezier(0.230, 1.000, 0.320, 1.000);
     }
   }

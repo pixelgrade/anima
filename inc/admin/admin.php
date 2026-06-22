@@ -23,16 +23,18 @@ function anima_admin_setup() {
 	require_once 'class-admin-nav-menus.php'; // phpcs:ignore
 
 	/**
-	 * Load and initialize Pixelgrade Care notice logic.
+	 * Load and initialize the Pixelgrade Assistant install notice.
 	 *
-	 * The notice ships only with the commercial distribution; the
-	 * WordPress.org build strips it, hence the file_exists() guard.
+	 * The notice recommends the free, WordPress.org-hosted Pixelgrade Assistant
+	 * plugin and ships in BOTH the commercial and the WordPress.org build (the
+	 * plugin install/activate is driven by WordPress core, so no commercial
+	 * distribution layer is required).
 	 */
-	if ( ! class_exists( 'PixelgradeCare_Install_Notice' ) && file_exists( __DIR__ . '/pixcare-notice/class-notice.php' ) ) {
-		require_once 'pixcare-notice/class-notice.php'; // phpcs:ignore
+	if ( ! class_exists( 'Pixelgrade_Assistant_Install_Notice' ) && file_exists( __DIR__ . '/assistant-notice/class-notice.php' ) ) {
+		require_once 'assistant-notice/class-notice.php'; // phpcs:ignore
 	}
-	if ( class_exists( 'PixelgradeCare_Install_Notice' ) ) {
-		PixelgradeCare_Install_Notice::init();
+	if ( class_exists( 'Pixelgrade_Assistant_Install_Notice' ) ) {
+		Pixelgrade_Assistant_Install_Notice::init();
 	}
 }
 add_action( 'after_setup_theme', 'anima_admin_setup', 99 );

@@ -1,15 +1,43 @@
 <?php
 /**
- * Pixelgrade Care install/activate notice class.
+ * Pixelgrade Assistant install/activate notice class.
  *
- * @version 1.0.0
+ * Recommends the free, WordPress.org-hosted Pixelgrade Assistant plugin after
+ * theme activation. The notice is dismissible and never redirects on its own;
+ * the actual plugin install/activate is driven entirely by WordPress core
+ * (`wp.updates`), so the same notice works in both the commercial and the
+ * WordPress.org build.
+ *
+ * @version 2.0.0
+ *
+ * @package Anima
  */
 
-class PixelgradeCare_Install_Notice {
+// If this file is called directly, abort.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+class Pixelgrade_Assistant_Install_Notice {
+
+	/**
+	 * The WordPress.org slug of the recommended plugin.
+	 *
+	 * @var string
+	 */
+	const PLUGIN_SLUG = 'pixelgrade-assistant';
+
+	/**
+	 * The plugin main file, relative to the plugins directory.
+	 *
+	 * @var string
+	 */
+	const PLUGIN_FILE = 'pixelgrade-assistant/pixelgrade-assistant.php';
 
 	/**
 	 * The only instance.
-	 * @var     PixelgradeCare_Install_Notice
+	 *
+	 * @var     Pixelgrade_Assistant_Install_Notice
 	 * @access  protected
 	 */
 	protected static $_instance = null;
@@ -26,15 +54,15 @@ class PixelgradeCare_Install_Notice {
 			add_action( 'admin_enqueue_scripts', [ $this, 'outputJS' ] );
 		}
 
-		add_action( 'wp_ajax_pixcare_install_dismiss_admin_notice', [ $this, 'dismiss_notice' ] );
+		add_action( 'wp_ajax_pixassist_install_dismiss_admin_notice', [ $this, 'dismiss_notice' ] );
 		add_action( 'switch_theme', [ $this, 'cleanup' ] );
 	}
 
 	public function shouldShow(): bool {
 		global $pagenow;
 
-		// If Pixelgrade Care is already installed and activated, nothing to do.
-		if ( class_exists( 'PixelgradeCare' ) ) {
+		// If Pixelgrade Assistant is already installed and activated, nothing to do.
+		if ( $this->is_plugin_active() ) {
 			return false;
 		}
 
@@ -43,36 +71,61 @@ class PixelgradeCare_Install_Notice {
 			return false;
 		}
 
-		// We also don't want to show it when viewing the TGMPA results or tables.
-		if ( ! empty( $_GET['tgmpa-nonce'] ) ) {
-			return false;
-		}
-
-		$dismissed = get_theme_mod( 'pixcare_install_notice_dismissed', false );
+		$dismissed = get_theme_mod( 'pixassist_install_notice_dismissed', false );
 		// Earlier than 7 days, we will not show again.
 		if ( ! empty( $dismissed ) && ( time() - absint( $dismissed ) < DAY_IN_SECONDS * 7 ) ) {
 			return false;
 		}
 
-		if ( current_user_can('manage_options') ) {
+		// Only users who can install/activate plugins should see the call to action.
+		if ( current_user_can( 'install_plugins' ) || current_user_can( 'activate_plugins' ) ) {
 			return true;
 		}
 
 		return false;
 	}
 
+	/**
+	 * Whether the Pixelgrade Assistant plugin is active.
+	 */
+	protected function is_plugin_active(): bool {
+		return class_exists( 'PixelgradeAssistant' ) || function_exists( 'PixelgradeAssistant' );
+	}
+
+	/**
+	 * Whether the Pixelgrade Assistant plugin is installed (regardless of active state).
+	 */
+	protected function is_plugin_installed(): bool {
+		return file_exists( WP_PLUGIN_DIR . '/' . self::PLUGIN_FILE );
+	}
+
+	/**
+	 * Determine the current plugin status: 'missing', 'installed' or 'active'.
+	 */
+	protected function get_plugin_status(): string {
+		if ( $this->is_plugin_active() ) {
+			return 'active';
+		}
+
+		if ( $this->is_plugin_installed() ) {
+			return 'installed';
+		}
+
+		return 'missing';
+	}
+
 	public function outputMarkup() {
-		$button_text = __( 'Install the Pixelgrade Care&reg; plugin', '__theme_txtd' );
-		// Pixelgrade Care plugin installed, but not activated.
-		if ( ! class_exists( 'PixelgradeCare' ) && file_exists( WP_PLUGIN_DIR . '/pixelgrade-care/pixelgrade-care.php' ) ) {
-			$button_text = __( 'Activate the Pixelgrade Care&reg; plugin', '__theme_txtd' );
-		} elseif ( class_exists( 'PixelgradeCare' ) ) {
-			// The plugin is actually active.
-			$button_text = __( 'Start the Pixelgrade Care&reg; setup', '__theme_txtd' );
+		$status = $this->get_plugin_status();
+
+		$button_text = __( 'Install the Pixelgrade Assistant plugin', '__theme_txtd' );
+		if ( $status === 'installed' ) {
+			$button_text = __( 'Activate the Pixelgrade Assistant plugin', '__theme_txtd' );
+		} elseif ( $status === 'active' ) {
+			$button_text = __( 'Start the Pixelgrade Assistant setup', '__theme_txtd' );
 		}
 
 		?>
-		<div class="pixcare-notice__container notice is-dismissible" >
+		<div class="pixassist-notice__container notice is-dismissible" >
 
 			<ul class="pxg-wizard">
 				<li class="pxg-wizard__step pxg-wizard__step--done">
@@ -80,7 +133,7 @@ class PixelgradeCare_Install_Notice {
 					<span class="pxg-wizard__progress"><b></b></span>
 				</li>
 				<li class="pxg-wizard__step pxg-wizard__step--current">
-					<span class="pxg-wizard__label"><?php esc_html_e( 'Pixelgrade Care&reg;', '__theme_txtd' ); ?></span>
+					<span class="pxg-wizard__label"><?php esc_html_e( 'Pixelgrade Assistant', '__theme_txtd' ); ?></span>
 					<span class="pxg-wizard__progress"><b></b></span>
 				</li>
 				<li class="pxg-wizard__step">
@@ -92,14 +145,14 @@ class PixelgradeCare_Install_Notice {
 					<span class="pxg-wizard__progress"><b></b></span>
 				</li>
 			</ul>
-			<form class="pixcare-notice-form"
-			      action="<?php echo esc_url( admin_url( 'admin-ajax.php?action=pixcare_install_dismiss_admin_notice' ) ); ?>"
+			<form class="pixassist-notice-form"
+			      action="<?php echo esc_url( admin_url( 'admin-ajax.php?action=pixassist_install_dismiss_admin_notice' ) ); ?>"
 			      method="post">
-				<noscript><input type="hidden" name="pixcare-notice-no-js" value="1"/></noscript>
+				<noscript><input type="hidden" name="pixassist-notice-no-js" value="1"/></noscript>
 
-				<div class="pixcare-notice__wrap">
-					<div class="pixcare-notice__media">
-                        <div class="pixcare-notice__screenshot">
+				<div class="pixassist-notice__wrap">
+					<div class="pixassist-notice__media">
+                        <div class="pixassist-notice__screenshot">
                             <?php
                             $theme = wp_get_theme();
                             $parent = $theme->parent();
@@ -112,7 +165,7 @@ class PixelgradeCare_Install_Notice {
                             <?php } ?>
                         </div>
 					</div>
-					<div class="pixcare-notice__body">
+					<div class="pixassist-notice__body">
 						<h1><?php
 							/* translators: %s: the theme name. */
 							echo wp_kses( sprintf( __( 'Thanks for installing %s, you\'re awesome!<br>Let\'s make an experience out of it.', '__theme_txtd' ),  $theme->get( 'Name' ) ), wp_kses_allowed_html('post') ); ?></h1>
@@ -129,10 +182,10 @@ class PixelgradeCare_Install_Notice {
 							</li>
 						</ul>
 						<div class="message js-plugin-message"></div>
-						<button class="pixcare-notice-button js-handle-pixcare">
-                            <span class="pixcare-notice-button__text"><?php echo esc_html( $button_text ); ?></span>
-                            <span class="pixcare-notice-button__overlay">
-                                <span class="pixcare-notice-button__text"><?php echo esc_html( $button_text); ?></span>
+						<button type="button" class="pixassist-notice-button js-handle-pixassist">
+                            <span class="pixassist-notice-button__text"><?php echo esc_html( $button_text ); ?></span>
+                            <span class="pixassist-notice-button__overlay">
+                                <span class="pixassist-notice-button__text"><?php echo esc_html( $button_text); ?></span>
                             </span>
                         </button>
 
@@ -141,79 +194,54 @@ class PixelgradeCare_Install_Notice {
 						</noscript>
 					</div>
 				</div>
-				<?php wp_nonce_field( 'pixcare_install_dismiss_admin_notice', 'nonce-pixcare_install-dismiss' ); ?>
+				<?php wp_nonce_field( 'pixassist_install_dismiss_admin_notice', 'nonce-pixassist_install-dismiss' ); ?>
 			</form>
 		</div>
 	<?php
 	}
 
 	public function outputCSS() {
-		wp_register_style( 'pixcare_notice_css', $this->get_parent_theme_file_uri( $this->get_theme_relative_path( __DIR__ ) . 'notice.css' ), false );
-		wp_enqueue_style( 'pixcare_notice_css' );
+		wp_register_style( 'pixassist_notice_css', $this->get_parent_theme_file_uri( $this->get_theme_relative_path( __DIR__ ) . 'notice.css' ), false );
+		wp_enqueue_style( 'pixassist_notice_css' );
 	}
 
 	public function outputJS() {
-		wp_register_script( 'pixcare_notice_js', $this->get_parent_theme_file_uri( $this->get_theme_relative_path( __DIR__ ) . 'notice.js' ), [ 'jquery' ] );
-		wp_enqueue_script( 'pixcare_notice_js' );
+		// The WordPress core plugin install/activate machinery. `updates` brings
+		// wp.updates.installPlugin()/activatePlugin(); `plugin-install` provides
+		// the install thickbox helpers and shared nonces. Both are GPL core
+		// scripts, so the same flow works in the bare WordPress.org build too.
+		wp_enqueue_script( 'updates' );
+		wp_enqueue_script( 'plugin-install' );
 
-		$install_url = wp_nonce_url(
-			add_query_arg(
-				[
-					'plugin'        => urlencode( 'pixelgrade-care' ),
-					'tgmpa-install' => 'install-plugin',
-				],
-				admin_url( 'themes.php?page=install-required-plugins' )
-			),
-			'tgmpa-install',
-			'tgmpa-nonce'
+		wp_register_script(
+			'pixassist_notice_js',
+			$this->get_parent_theme_file_uri( $this->get_theme_relative_path( __DIR__ ) . 'notice.js' ),
+			[ 'jquery', 'wp-util', 'wp-a11y', 'updates', 'plugin-install' ],
+			null,
+			true
 		);
-		// &amp; is not something that wp.ajax can actually handle
-		$install_url = str_replace( 'amp;', '', $install_url );
+		wp_enqueue_script( 'pixassist_notice_js' );
 
-		$activate_url = wp_nonce_url(
-			add_query_arg(
-				[
-					'plugin'        => urlencode( 'pixelgrade-care' ),
-					'tgmpa-activate' => 'activate-plugin',
-				],
-				admin_url( 'themes.php?page=install-required-plugins' )
-			),
-			'tgmpa-activate',
-			'tgmpa-nonce'
-		);
-		// &amp; is not something that wp.ajax can actually handle
-		$activate_url = str_replace( 'amp;', '', $activate_url );
-
-		$plugin_status = 'missing';
-		// Pixelgrade Care plugin installed, but not activated.
-		if ( class_exists( 'PixelgradeCare' ) ) {
-			$plugin_status = 'active';
-		} elseif ( file_exists( WP_PLUGIN_DIR . '/pixelgrade-care/pixelgrade-care.php' ) ) {
-			$plugin_status = 'installed';
-		}
-
-		wp_localize_script( 'pixcare_notice_js', 'pixcareNotice', [
-			'ajaxurl' => esc_url( admin_url( 'admin-ajax.php' ) ),
-			'installUrl' => esc_url_raw( $install_url ),
-			'activateUrl' => esc_url_raw( $activate_url ),
-			'themesPluginsUrl' => esc_url( admin_url( 'themes.php?page=install-required-plugins' ) ),
+		wp_localize_script( 'pixassist_notice_js', 'pixassistNotice', [
+			'slug'   => self::PLUGIN_SLUG,
+			'plugin' => self::PLUGIN_FILE,
+			// Core's activate-plugin AJAX handler requires the plugin display name.
+			'name'   => 'Pixelgrade Assistant',
 			// Since we are displaying a notice with the details, we want to skip the welcome screen of the wizard.
-			'pixcareSetupUrl' => esc_url( admin_url( 'admin.php?page=pixelgrade_care-setup-wizard&skip-welcome=true' ) ),
-			'status' => $plugin_status,
+			'setupUrl' => esc_url( admin_url( 'themes.php?page=pixelgrade_assistant-setup-wizard&skip-welcome=true' ) ),
+			'status' => $this->get_plugin_status(),
 			'i18n' => [
-				'btnInstall' => esc_html__( 'Install the Pixelgrade Care&reg; plugin', '__theme_txtd' ),
-				'btnInstalling' => esc_html__( 'Installing Pixelgrade Care&reg;...', '__theme_txtd' ),
-				'btnActivate' => esc_html__( 'Activate the Pixelgrade Care&reg; plugin', '__theme_txtd' ),
-				'btnActivating' => esc_html__( 'Activating Pixelgrade Care&reg;...', '__theme_txtd' ),
-				'btnOpenSetup' => esc_html__( 'Start the Pixelgrade Care&reg; setup', '__theme_txtd' ),
-				'btnOpeningSetup' => esc_html__( 'Opening the Pixelgrade Care&reg; setup...', '__theme_txtd' ),
-				'btnRedirectingToSetup' => esc_html__( 'Opening the Pixelgrade Care&reg; setup...', '__theme_txtd' ),
-				'btnError' => esc_html__( 'Please refresh the page 🙏 and try again...', '__theme_txtd' ),
+				'btnInstall'            => esc_html__( 'Install the Pixelgrade Assistant plugin', '__theme_txtd' ),
+				'btnInstalling'         => esc_html__( 'Installing Pixelgrade Assistant...', '__theme_txtd' ),
+				'btnActivate'           => esc_html__( 'Activate the Pixelgrade Assistant plugin', '__theme_txtd' ),
+				'btnActivating'         => esc_html__( 'Activating Pixelgrade Assistant...', '__theme_txtd' ),
+				'btnOpenSetup'          => esc_html__( 'Start the Pixelgrade Assistant setup', '__theme_txtd' ),
+				'btnOpeningSetup'       => esc_html__( 'Opening the Pixelgrade Assistant setup...', '__theme_txtd' ),
+				'btnError'              => esc_html__( 'Please refresh the page 🙏 and try again...', '__theme_txtd' ),
 				'installedSuccessfully' => esc_html__( 'Plugin installed successfully.', '__theme_txtd' ),
 				'activatedSuccessfully' => esc_html__( 'Plugin activated successfully.', '__theme_txtd' ),
-				'redirectingToSetup' => esc_html__( 'Opening the Pixelgrade Care&reg; setup in a couple of seconds.', '__theme_txtd' ),
-				'folderAlreadyExists' => esc_html__( 'Plugin destination folder already exists.', '__theme_txtd' ),
-				'error' => esc_html__( 'We are truly sorry 😢 Something went wrong and we couldn\'t make sense of it and continue with the plugin setup.', '__theme_txtd' ),
+				'redirectingToSetup'    => esc_html__( 'Opening the Pixelgrade Assistant setup in a couple of seconds.', '__theme_txtd' ),
+				'error'                 => esc_html__( 'We are truly sorry 😢 Something went wrong and we couldn\'t make sense of it and continue with the plugin setup.', '__theme_txtd' ),
 			],
 		] );
 	}
@@ -223,13 +251,18 @@ class PixelgradeCare_Install_Notice {
 	 */
 	public function dismiss_notice() {
 		// Check nonce.
-		check_ajax_referer( 'pixcare_install_dismiss_admin_notice', 'nonce_dismiss' );
+		check_ajax_referer( 'pixassist_install_dismiss_admin_notice', 'nonce_dismiss' );
+
+		// Only allow users who would actually see the notice to dismiss it.
+		if ( ! current_user_can( 'install_plugins' ) && ! current_user_can( 'activate_plugins' ) ) {
+			wp_die( -1, 403 );
+		}
 
 		// Remember the dismissal (time).
-		set_theme_mod( 'pixcare_install_notice_dismissed', time());
+		set_theme_mod( 'pixassist_install_notice_dismissed', time() );
 
 		// Redirect if this is not an ajax request.
-		if ( isset( $_POST['pixcare-notice-no-js'] ) ) {
+		if ( isset( $_POST['pixassist-notice-no-js'] ) ) {
 
 			// Go back to where we came from.
 			wp_safe_redirect( wp_get_referer() );
@@ -241,7 +274,7 @@ class PixelgradeCare_Install_Notice {
 
 	public function cleanup() {
 		// If the theme is about to be deactivated, we want to clear the notice dismissal so next time it is active, it will show.
-		set_theme_mod( 'pixcare_install_notice_dismissed', false );
+		set_theme_mod( 'pixassist_install_notice_dismissed', false );
 	}
 
 	/**
@@ -296,20 +329,20 @@ class PixelgradeCare_Install_Notice {
 		}
 	}
 
-	public static function init(): ?PixelgradeCare_Install_Notice {
+	public static function init(): ?Pixelgrade_Assistant_Install_Notice {
 		return self::instance();
 	}
 
 	/**
-	 * Main PixelgradeCare_Install_Notice Instance
+	 * Main Pixelgrade_Assistant_Install_Notice Instance
 	 *
-	 * Ensures only one instance of PixelgradeCare_Install_Notice is loaded or can be loaded.
+	 * Ensures only one instance of Pixelgrade_Assistant_Install_Notice is loaded or can be loaded.
 	 *
 	 * @static
 	 *
-	 * @return PixelgradeCare_Install_Notice Main PixelgradeCare_Install_Notice instance
+	 * @return Pixelgrade_Assistant_Install_Notice Main Pixelgrade_Assistant_Install_Notice instance
 	 */
-	public static function instance(): ?PixelgradeCare_Install_Notice {
+	public static function instance(): ?Pixelgrade_Assistant_Install_Notice {
 		if ( is_null( self::$_instance ) ) {
 			self::$_instance = new self();
 		}
