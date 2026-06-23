@@ -119,6 +119,32 @@ if ( ! function_exists( 'anima_alter_logo_markup' ) ) {
 }
 add_filter( 'novablocks/logo_markup', 'anima_alter_logo_markup' );
 
+if ( ! function_exists( 'anima_core_site_logo_inverted_markup' ) ) {
+	/**
+	 * Give core/site-logo the same default/inverted treatment as the Nova logo
+	 * when a dedicated transparent logo is set, so it swaps to the inverted image
+	 * over transparent/dark headers. Reuses the existing .c-logo__default /
+	 * .c-logo__inverted swap CSS (src/scss/components/_logo.scss).
+	 *
+	 * When no transparent logo is set we leave core/site-logo untouched — Nova's
+	 * header CSS already filters the single logo to white in dark contexts.
+	 *
+	 * @param string $block_content Rendered core/site-logo HTML.
+	 * @return string
+	 */
+	function anima_core_site_logo_inverted_markup( $block_content ) {
+		if ( '' === trim( (string) $block_content ) || ! anima_has_custom_logo_transparent() ) {
+			return $block_content;
+		}
+
+		return '<div class="c-logo c-logo--site-logo">'
+			. '<div class="c-logo__default">' . $block_content . '</div>'
+			. '<div class="c-logo__inverted">' . anima_get_custom_logo_transparent() . '</div>'
+			. '</div>';
+	}
+}
+add_filter( 'render_block_core/site-logo', 'anima_core_site_logo_inverted_markup', 10, 1 );
+
 if ( ! function_exists( 'anima_has_custom_logo_transparent' ) ) {
 	/**
 	 * Determines whether the site has a custom transparent logo.
