@@ -77,7 +77,12 @@ function anima_register_block_patterns() {
 		register_block_pattern( 'anima/' . $block_pattern['slug'], $pattern );
 	}
 }
-add_action( 'init', 'anima_register_block_patterns', 12 );
+// Priority 21 so this runs AFTER Nova Blocks registers its block types
+// (novablocks_register_block_types is on init:20). The novablocks-based header
+// patterns are gated on `novablocks/header` being registered; running earlier
+// (e.g. init:12) made that check always fail, silently skipping every header
+// pattern and leaving fresh sites with an empty header template part.
+add_action( 'init', 'anima_register_block_patterns', 21 );
 
 /**
  * Keep WooCommerce patterns confined to the WooCommerce category tab.
