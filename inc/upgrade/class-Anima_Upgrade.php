@@ -161,6 +161,10 @@ class Anima_Upgrade {
 	 */
 	public function get_version_saved() {
 
+		// IMPORTANT: $this->theme_slug is the INTENTIONALLY PINNED 'anima' literal passed in
+		// from inc/extras.php, NOT get_stylesheet(). The resulting `anima_theme_version` option
+		// key must stay stable across the wp.org rename (slug 'anima-lt') so existing installs
+		// keep reading the same saved version. Do NOT align this to get_stylesheet().
 		return get_option( $this->theme_slug . '_theme_version', false );
 	}
 
@@ -170,6 +174,9 @@ class Anima_Upgrade {
 	 * @return  void
 	 */
 	public function save_version_number() {
+		// IMPORTANT: $this->theme_slug is the INTENTIONALLY PINNED 'anima' literal (see
+		// get_version_saved() above). The `anima_theme_version` option key must stay stable
+		// across the wp.org rename (slug 'anima-lt'). Do NOT align this to get_stylesheet().
 		update_option( $this->theme_slug . '_theme_version', $this->theme_version, false );
 	}
 

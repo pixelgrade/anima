@@ -79,7 +79,7 @@ function anima_normalize_block_templates_post_content_layout( $query_result, $qu
 	}
 
 	foreach ( $query_result as $template ) {
-		if ( 'anima' !== ( $template->theme ?? '' ) || empty( $template->content ) ) {
+		if ( get_stylesheet() !== ( $template->theme ?? '' ) || empty( $template->content ) ) {
 			continue;
 		}
 
@@ -115,8 +115,8 @@ add_filter( 'get_block_templates', 'anima_normalize_block_templates_post_content
 function anima_add_block_templates_details( $query_result, $query, $template_type ) {
 	if ( 'wp_template' === $template_type ) {
 		foreach ( $query_result as $template ) {
-			// Leave it alone if it is not from Anima or it already has a description.
-			if ( 'anima' !== $template->theme || ! empty( $template->description ) ) {
+			// Leave it alone if it is not from this theme or it already has a description.
+			if ( get_stylesheet() !== ( $template->theme ?? '' ) || ! empty( $template->description ) ) {
 				continue;
 			}
 

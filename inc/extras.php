@@ -382,6 +382,13 @@ function anima_init_upgrades_logic() {
 
 	// Make sure the upgrade class is initialized.
 	// The slug will be hard-coded to avoid loss of data due to modifications by the user.
+	//
+	// IMPORTANT: This 'anima' literal is INTENTIONALLY PINNED and must NOT be aligned to
+	// get_stylesheet(). It seeds the persistent `anima_theme_version` option key (see
+	// Anima_Upgrade::get_version_saved()/save_version_number() in
+	// inc/upgrade/class-Anima_Upgrade.php). It must stay stable across the wp.org rename
+	// (slug 'anima-lt') so existing installs keep reading/writing the same option and do not
+	// lose their saved upgrade state. Do NOT swap this for get_stylesheet().
 	Anima_Upgrade::instance( 'anima', $current_theme->get( 'Version' ), $current_theme->get( 'Name' ) );
 }
 
