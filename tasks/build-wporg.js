@@ -89,6 +89,51 @@ copyWporgOverlay.description = 'Copy the wporg/ overlay files into the wp.org bu
 gulp.task( 'build:wporg:overlay', copyWporgOverlay );
 
 // -----------------------------------------------------------------------------
+// Keep the wp.org readme headers in lockstep with style.css (the single source
+// of truth). Without this, Stable tag / Tested up to / Requires-* are a manual
+// two-file edit that drifts, and a Stable tag that disagrees with the zip
+// version fails the wp.org review checks. This rewrites the headers on the build
+// output, so the shipped zip is always correct regardless of the source readme.
+// `npm run check:version` guards the committed source against the same drift.
+// -----------------------------------------------------------------------------
+function wporgReadHeader( contents, label ) {
+	const escaped = label.replace( /[.*+?^${}()|[\]\\]/g, '\\$&' );
+	const match = contents.match( new RegExp( '^[\\s\\*]*' + escaped + ':\\s*(.+)$', 'mi' ) );
+	return match ? match[1].trim() : null;
+}
+
+function wporgSetReadmeHeader( contents, label, value ) {
+	const escaped = label.replace( /[.*+?^${}()|[\]\\]/g, '\\$&' );
+	return contents.replace( new RegExp( '^(' + escaped + ':[ \\t]*).+$', 'mi' ), '$1' + value );
+}
+
+function syncWporgReadmeHeaders( done ) {
+	const style      = fs.readFileSync( './style.css', 'utf8' );
+	const readmePath = '../build/' + slug + '/readme.txt';
+	let   readme     = fs.readFileSync( readmePath, 'utf8' );
+
+	// [ readme header  <-  style.css header ]
+	const fields = [
+		[ 'Stable tag', 'Version' ],
+		[ 'Tested up to', 'Tested up to' ],
+		[ 'Requires at least', 'Requires at least' ],
+		[ 'Requires PHP', 'Requires PHP' ],
+	];
+
+	for ( const [ readmeLabel, styleLabel ] of fields ) {
+		const value = wporgReadHeader( style, styleLabel );
+		if ( value ) {
+			readme = wporgSetReadmeHeader( readme, readmeLabel, value );
+		}
+	}
+
+	fs.writeFileSync( readmePath, readme );
+	return done();
+}
+syncWporgReadmeHeaders.description = 'Sync the wp.org readme headers (Stable tag, Tested up to, Requires-*) from style.css';
+gulp.task( 'build:wporg:sync-readme-headers', syncWporgReadmeHeaders );
+
+// -----------------------------------------------------------------------------
 // Preserve the premium Nova Blocks templates in a non-registered location before
 // the wporg/ overlay replaces templates/ and parts/ with plugin-free defaults.
 // WordPress auto-registers only files under templates/ and parts/.
@@ -440,7 +485,8 @@ gulp.task( 'build:wporg:fix-wporg', gulp.series(
 	'build:wporg:txtdomain',
 	'build:wporg:theme-header',
 	'build:wporg:relax-theme-json',
-	'build:wporg:rename-pot'
+	'build:wporg:rename-pot',
+	'build:wporg:sync-readme-headers'
 ) );
 
 // -----------------------------------------------------------------------------
