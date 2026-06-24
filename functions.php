@@ -64,6 +64,14 @@ if ( ! function_exists( 'anima_setup' ) ) {
 			'search-suggestions' => esc_html__( 'Search Suggestions', '__theme_txtd' ),
 		] );
 
+		/**
+		 * Opt in to editing the header navigation as blocks (core/navigation)
+		 * instead of the legacy Customizer menus. Nova Blocks projects the block
+		 * menu back to a classic menu assigned to these locations, so the
+		 * wp_nav_menu() frontend stays identical.
+		 */
+		add_theme_support( 'novablocks-block-navigation' );
+
 		// Add theme support for selective refresh for widgets.
 		add_theme_support( 'customize-selective-refresh-widgets' );
 
