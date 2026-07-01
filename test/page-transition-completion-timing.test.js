@@ -11,7 +11,7 @@ function readSource( relativePath ) {
 
 test( 'component reinitialization does not announce page-transition completion before the overlay exits', () => {
   const utils = readSource( 'src/js/components/page-transitions/utils.js' );
-  const reinitBody = utils.match( /export function reinitComponents\(\) \{[\s\S]*?\n\}/ );
+  const reinitBody = utils.match( /export function reinitComponents\([^)]*\) \{[\s\S]*?\n\}/ );
 
   assert.ok( reinitBody, 'expected to find reinitComponents()' );
   assert.equal(
