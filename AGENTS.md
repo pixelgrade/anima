@@ -50,6 +50,25 @@ How later private-overlay changes are handled:
 - If you bootstrap with `--link`, later changes inside the private repo show up through the symlink without recopies.
 - If you introduce a brand-new private path outside those managed targets, update `bin/bootstrap-private`, `.gitignore`, and `.zipignore` before expecting it to sync.
 
+## Cross-Stack Strategy Decisions
+
+When Anima LT work changes or settles product, business, positioning, monetization, Pixelgrade.com, Pixelgrade LT vs Pixelgrade Plus, starter strategy, or cross-repo LT stack architecture, save the durable decision in the central strategy folder:
+
+`/Users/georgeolaru/Developer/pixelsite/master-strategy/`
+
+Before making or changing those decisions, read:
+- `/Users/georgeolaru/Developer/pixelsite/master-strategy/README.md`
+- `/Users/georgeolaru/Developer/pixelsite/master-strategy/decisions/README.md`
+- `/Users/georgeolaru/Developer/pixelsite/master-strategy/pixelgrade-lt-stack-strategy.md`
+- `/Users/georgeolaru/Developer/pixelsite/master-strategy/source-index.md`
+
+For any meaningful cross-stack strategy decision:
+- Create a dated note in `/Users/georgeolaru/Developer/pixelsite/master-strategy/decisions/YYYY-MM-DD-short-title.md` using the template in `decisions/README.md`.
+- Update `source-index.md` when the decision depends on a new source document, repo note, issue, or public reference.
+- Update `pixelgrade-lt-stack-strategy.md` only when the decision changes the central strategy.
+
+Keep implementation details, tests, and repo-specific plans in the repo where the work happens. Keep cross-stack product direction, positioning, monetization, and Pixelgrade.com strategy in `pixelsite/master-strategy`.
+
 ## Critical Warnings
 
 - **Node 22+ required** (`.nvmrc` = 22, `package.json` engines `>=22.0.0`). Enforced by `node-tasks/lock_node_version.js` on `npm install`.
