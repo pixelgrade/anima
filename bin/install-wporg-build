@@ -1,0 +1,287 @@
+#!/usr/bin/env node
+'use strict';
+
+const childProcess = require('node:child_process');
+const fs = require('node:fs');
+const path = require('node:path');
+
+const DEFAULT_SLUG = 'anima-lt';
+const REQUIRED_THEME_NAME = 'Anima LT';
+const REQUIRED_TEXT_DOMAIN = 'anima-lt';
+
+function readHeader(contents, label) {
+	const escaped = label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	const match = contents.match(new RegExp('^[\\s\\*]*' + escaped + ':\\s*(.+)$', 'mi'));
+
+	return match ? match[1].trim() : null;
+}
+
+function readStyleHeader(stylePath) {
+	if (!fs.existsSync(stylePath)) {
+		throw new Error('Missing style.css at ' + stylePath);
+	}
+
+	const contents = fs.readFileSync(stylePath, 'utf8');
+
+	return {
+		themeName: readHeader(contents, 'Theme Name'),
+		textDomain: readHeader(contents, 'Text Domain'),
+		version: readHeader(contents, 'Version'),
+	};
+}
+
+function readSourceVersion(root) {
+	const header = readStyleHeader(path.join(root, 'style.css'));
+
+	if (!header.version) {
+		throw new Error('Source style.css must declare a Version header.');
+	}
+
+	return header.version;
+}
+
+function requiredNodeMajor(root) {
+	const packagePath = path.join(root, 'package.json');
+	const packageJson = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
+	const required = packageJson.engines && packageJson.engines.node;
+	const match = String(required || '').match(/>=\s*(\d+)/);
+
+	if (!match) {
+		throw new Error('package.json must declare engines.node with a >= major version.');
+	}
+
+	return Number(match[1]);
+}
+
+function assertNodeVersion(root, nodeVersion = process.versions.node) {
+	const requiredMajor = requiredNodeMajor(root);
+	const runningMajor = Number(String(nodeVersion).replace(/^v/, '').split('.')[0]);
+
+	if (!Number.isFinite(runningMajor) || runningMajor < requiredMajor) {
+		throw new Error(
+			'Node ' + requiredMajor + '+ is required. Current Node version is ' + process.version + '.'
+		);
+	}
+}
+
+function resolvePaths(root, slug = DEFAULT_SLUG) {
+	const sourceDir = path.resolve(root);
+	const parentDir = path.dirname(sourceDir);
+	const targetDir = path.resolve(parentDir, slug);
+
+	if (slug !== DEFAULT_SLUG) {
+		throw new Error('This installer only supports the expected wp.org slug "' + DEFAULT_SLUG + '".');
+	}
+
+	if (path.basename(sourceDir) !== 'anima') {
+		throw new Error('The source theme folder must be named "anima"; got "' + path.basename(sourceDir) + '".');
+	}
+
+	if (path.basename(targetDir) !== DEFAULT_SLUG || path.dirname(targetDir) !== parentDir) {
+		throw new Error('The target folder must resolve to the expected sibling ../' + DEFAULT_SLUG + '.');
+	}
+
+	if (sourceDir === targetDir) {
+		throw new Error('Source and target folders must not be the same path.');
+	}
+
+	return { sourceDir, parentDir, targetDir };
+}
+
+function zipPathForVersion(parentDir, version, slug = DEFAULT_SLUG) {
+	return path.join(parentDir, slug + '-' + version.replace(/\./g, '-') + '.zip');
+}
+
+function assertExpectedTarget(targetDir, parentDir, slug = DEFAULT_SLUG) {
+	const resolvedTarget = path.resolve(targetDir);
+	const expectedTarget = path.resolve(parentDir, slug);
+
+	if (resolvedTarget !== expectedTarget) {
+		throw new Error('Refusing to replace unexpected target path: ' + resolvedTarget);
+	}
+
+	if (!fs.existsSync(targetDir)) {
+		return;
+	}
+
+	const targetStat = fs.lstatSync(targetDir);
+
+	if (targetStat.isSymbolicLink()) {
+		throw new Error('Refusing to replace symlink target: ' + targetDir);
+	}
+
+	if (!targetStat.isDirectory()) {
+		throw new Error('Refusing to replace non-directory target: ' + targetDir);
+	}
+}
+
+function assertWporgMetadata(stylePath, version) {
+	const header = readStyleHeader(stylePath);
+
+	if (header.themeName !== REQUIRED_THEME_NAME) {
+		throw new Error(
+			stylePath + ': Theme Name must be "' + REQUIRED_THEME_NAME + '"; got "' + (header.themeName || '') + '".'
+		);
+	}
+
+	if (header.textDomain !== REQUIRED_TEXT_DOMAIN) {
+		throw new Error(
+			stylePath + ': Text Domain must be "' + REQUIRED_TEXT_DOMAIN + '"; got "' + (header.textDomain || '') + '".'
+		);
+	}
+
+	if (header.version !== version) {
+		throw new Error(
+			stylePath + ': Version must be "' + version + '"; got "' + (header.version || '') + '".'
+		);
+	}
+
+	return header;
+}
+
+function runWporgBuild({ root, slug = DEFAULT_SLUG } = {}) {
+	const result = childProcess.spawnSync('npm', ['run', 'build:wporg'], {
+		cwd: root,
+		env: Object.assign({}, process.env, { WPORG_SLUG: slug }),
+		stdio: 'inherit',
+	});
+
+	if (result.error) {
+		throw result.error;
+	}
+
+	if (result.status !== 0) {
+		throw new Error('npm run build:wporg failed with exit code ' + result.status + '.');
+	}
+}
+
+function extractZip(zipPath, stagingDir) {
+	const result = childProcess.spawnSync('unzip', ['-q', zipPath, '-d', stagingDir], {
+		encoding: 'utf8',
+		stdio: ['ignore', 'pipe', 'pipe'],
+	});
+
+	if (result.error) {
+		throw result.error;
+	}
+
+	if (result.status !== 0) {
+		throw new Error(
+			'unzip failed with exit code ' + result.status + ': ' + (result.stderr || '').trim()
+		);
+	}
+}
+
+function installWporgBuild({ root = process.cwd(), slug = DEFAULT_SLUG, build = runWporgBuild, log = console.log } = {}) {
+	const { sourceDir, parentDir, targetDir } = resolvePaths(root, slug);
+
+	assertNodeVersion(sourceDir);
+
+	build({ root: sourceDir, slug });
+
+	const version = readSourceVersion(sourceDir);
+	const zipPath = zipPathForVersion(parentDir, version, slug);
+
+	if (!fs.existsSync(zipPath)) {
+		throw new Error('Expected wp.org build zip is missing: ' + zipPath);
+	}
+
+	assertExpectedTarget(targetDir, parentDir, slug);
+
+	const stagingDir = fs.mkdtempSync(path.join(parentDir, '.' + slug + '-install-'));
+
+	try {
+		extractZip(zipPath, stagingDir);
+
+		const stagedRoot = path.join(stagingDir, slug);
+		const stagedStyle = path.join(stagedRoot, 'style.css');
+
+		if (!fs.existsSync(stagedRoot) || !fs.lstatSync(stagedRoot).isDirectory()) {
+			throw new Error('Zip did not extract the expected root folder: ' + stagedRoot);
+		}
+
+		assertWporgMetadata(stagedStyle, version);
+
+		fs.rmSync(targetDir, { recursive: true, force: true });
+		fs.renameSync(stagedRoot, targetDir);
+
+		const installedStyle = path.join(targetDir, 'style.css');
+		const header = assertWporgMetadata(installedStyle, version);
+
+		log('Installed ' + path.basename(zipPath) + ' into ' + targetDir);
+		log('Verified Theme Name, Text Domain, and Version in ' + installedStyle);
+
+		return { sourceDir, targetDir, zipPath, version, header };
+	} finally {
+		fs.rmSync(stagingDir, { recursive: true, force: true });
+	}
+}
+
+function verifyInstalledWporgBuild({ root = process.cwd(), slug = DEFAULT_SLUG, log = console.log } = {}) {
+	const { sourceDir, parentDir, targetDir } = resolvePaths(root, slug);
+
+	assertNodeVersion(sourceDir);
+
+	const version = readSourceVersion(sourceDir);
+	const stylePath = path.join(targetDir, 'style.css');
+	const header = assertWporgMetadata(stylePath, version);
+	const zipPath = zipPathForVersion(parentDir, version, slug);
+
+	log('Verified installed wp.org theme at ' + targetDir);
+	log('Expected zip path for this source version: ' + zipPath);
+
+	return { sourceDir, targetDir, zipPath, version, header };
+}
+
+function usage() {
+	return [
+		'Usage:',
+		'  node bin/install-wporg-build',
+		'  node bin/install-wporg-build --verify-only',
+		'',
+		'Builds the wp.org Anima LT zip from the anima source theme and installs it',
+		'into the expected sibling ../anima-lt folder.',
+	].join('\n');
+}
+
+function main(argv = process.argv.slice(2)) {
+	const allowed = new Set(['--help', '-h', '--verify-only']);
+	const unknown = argv.filter(arg => !allowed.has(arg));
+
+	if (unknown.length > 0) {
+		throw new Error('Unknown argument(s): ' + unknown.join(', ') + '\n\n' + usage());
+	}
+
+	if (argv.includes('--help') || argv.includes('-h')) {
+		console.log(usage());
+		return;
+	}
+
+	if (argv.includes('--verify-only')) {
+		verifyInstalledWporgBuild();
+		return;
+	}
+
+	installWporgBuild();
+}
+
+if (require.main === module) {
+	try {
+		main();
+	} catch (error) {
+		console.error('Error: ' + error.message);
+		process.exit(1);
+	}
+}
+
+module.exports = {
+	installWporgBuild,
+	verifyInstalledWporgBuild,
+	readHeader,
+	readStyleHeader,
+	readSourceVersion,
+	resolvePaths,
+	zipPathForVersion,
+	assertWporgMetadata,
+	assertNodeVersion,
+};

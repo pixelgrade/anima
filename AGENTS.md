@@ -157,6 +157,30 @@ the update package builder for the public directory theme, not only as a review
 candidate builder. Keep `wporg/readme.txt` `Stable tag` and changelog aligned
 with the version being uploaded.
 
+### Local Anima LT testing install:
+
+Local development source stays in `themes/anima`. The sibling
+`themes/anima-lt` folder is generated from the source theme plus the wp.org
+overlay, and Studio targets sync `themes/anima-lt` through `wp-code-mirror`.
+Do not edit `themes/anima-lt` directly; direct edits drift from the generated
+artifact and can be lost on the next build.
+
+After any source change that needs local/public-test verification, run:
+
+```bash
+export NVM_DIR="/Users/georgeolaru/.nvm" && source "/Users/georgeolaru/.nvm/nvm.sh" && nvm use 22
+cd "/Users/georgeolaru/Local Sites/style-manager/app/public/wp-content/themes/anima"
+npm run build:wporg:install
+```
+
+This command runs `npm run build:wporg`, finds the matching
+`../anima-lt-X-Y-Z.zip`, replaces only the expected sibling `../anima-lt`
+folder from that zip, and verifies that `../anima-lt/style.css` declares
+`Theme Name: Anima LT`, `Text Domain: anima-lt`, and the source version. Then
+`wp-code-mirror` can sync `themes/anima-lt` to Studio sites. To verify an
+already-installed sibling without rebuilding, run
+`node bin/install-wporg-build --verify-only`.
+
 **Rules that keep the bare build submittable:**
 
 - Remote/CDN or non-GPL assets (GSAP, SplitText, Snap.svg, pxgcdn webfonts)
