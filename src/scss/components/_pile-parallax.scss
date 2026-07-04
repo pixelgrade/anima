@@ -22,6 +22,12 @@
     // grid columns shrink to fit the container.
     min-width: 0;
   }
+
+  // Parametric grids re-nest each layout item inside an .nb-grid__area,
+  // which clips overflow — release it so the drift stays visible.
+  .nb-grid__area {
+    overflow: visible;
+  }
 }
 
 // ==========================================================================

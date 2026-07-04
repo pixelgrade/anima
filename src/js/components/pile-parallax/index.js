@@ -9,6 +9,10 @@
  *     Nova Blocks so the frontend matches the editor and plugin CSS.
  *  2. Parallax Scrolling: when 3D is enabled, only the selected 3D pattern gets
  *     translated on scroll; otherwise the effect applies to every item.
+ *
+ * Parametric collections rebuild their DOM (initial layout and every resize),
+ * re-nesting the layout items and orphaning our cached references — they
+ * announce each rebuild via `nb:parametric-layout`, and we re-measure.
  */
 
 const {
@@ -20,12 +24,14 @@ const {
 const PARALLAX_SELECTOR = '.nb-supernova--pile-parallax';
 const GRID_3D_SELECTOR = '.nb-supernova--pile-3d';
 const ITEM_SELECTOR = '.nb-collection__layout-item';
+const PARAMETRIC_LAYOUT_EVENT = 'nb:parametric-layout';
 
 let blocks = [];
 let ticking = false;
 let positiveOffsetFactor = 1;
 let isBound = false;
 let onResizeHandler = null;
+let onParametricLayoutHandler = null;
 let onPageTransitionCompleteHandler = null;
 
 function getDocumentHeight() {
@@ -262,6 +268,12 @@ export function bind() {
   onResizeHandler = () => {
     initialize();
   };
+  // Parametric grids rebuild after our resize pass (debounced) — re-measure
+  // against the fresh DOM whenever one announces a finished layout.
+  onParametricLayoutHandler = () => {
+    initialize();
+    onScroll();
+  };
   onPageTransitionCompleteHandler = () => {
     initialize();
     onScroll();
@@ -269,6 +281,7 @@ export function bind() {
 
   window.addEventListener( 'scroll', onScroll, { passive: true } );
   window.addEventListener( 'resize', onResizeHandler );
+  window.addEventListener( PARAMETRIC_LAYOUT_EVENT, onParametricLayoutHandler );
   window.addEventListener( 'anima:page-transition-complete', onPageTransitionCompleteHandler );
   isBound = true;
 }
@@ -281,10 +294,14 @@ export function destroy() {
   if ( onResizeHandler ) {
     window.removeEventListener( 'resize', onResizeHandler );
   }
+  if ( onParametricLayoutHandler ) {
+    window.removeEventListener( PARAMETRIC_LAYOUT_EVENT, onParametricLayoutHandler );
+  }
   if ( onPageTransitionCompleteHandler ) {
     window.removeEventListener( 'anima:page-transition-complete', onPageTransitionCompleteHandler );
   }
   onResizeHandler = null;
+  onParametricLayoutHandler = null;
   onPageTransitionCompleteHandler = null;
   isBound = false;
   blocks = [];
