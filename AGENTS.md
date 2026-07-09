@@ -181,6 +181,39 @@ folder from that zip, and verifies that `../anima-lt/style.css` declares
 already-installed sibling without rebuilding, run
 `node bin/install-wporg-build --verify-only`.
 
+### Fresh Studio release smoke test (required):
+
+Every theme release or update package must be tested on a brand-new WordPress
+Studio site before it is published or called verified. This is separate from
+Theme Check, existing Studio sites, `wp-code-mirror`, and the sibling
+`themes/anima-lt` install. Run it for every generated release artifact that will
+ship, including `../Anima-X-Y-Z.zip` and `../anima-lt-X-Y-Z.zip` when both are
+part of the release.
+
+The smoke test must install the generated ZIP archive itself. Prefer
+`studio wp theme install /absolute/path/to/<zip> --activate`; if Studio's
+sandbox cannot read the host ZIP, move/copy the ZIP inside the fresh site or use
+the wp-admin theme upload flow. Direct extraction into `wp-content/themes/` is a
+last-resort fallback and does not count as archive-install coverage unless the
+installer path was separately exercised.
+
+```bash
+SMOKE_PATH="$HOME/Studio/anima-release-smoke-X-Y-Z-$(date +%Y%m%d-%H%M%S)"
+studio site create --name "Anima X.Y.Z Smoke" --path "$SMOKE_PATH"
+studio wp --path="$SMOKE_PATH" theme install "/absolute/path/to/Anima-X-Y-Z.zip" --activate
+studio wp --path="$SMOKE_PATH" user update 1 --user_pass=admin
+
+# Browser smoke: frontend, admin dashboard, Site Editor, and archive/single pages.
+# Check browser console/network and PHP logs for new fatal errors.
+
+studio site stop --path="$SMOKE_PATH"
+studio site delete --path="$SMOKE_PATH" --files
+```
+
+Do not mark release/update verification complete until the final report states
+the fresh site path/name, ZIP installed, smoke coverage, and deletion result. If
+deletion fails, report the leftover path and cleanup blocker.
+
 **Rules that keep the bare build submittable:**
 
 - Remote/CDN or non-GPL assets (GSAP, SplitText, Snap.svg, pxgcdn webfonts)
@@ -366,6 +399,11 @@ unzip -p ../Anima-X-Y-Z.zip anima/style.css | head -8   # confirm version
 unzip -l ../Anima-X-Y-Z.zip | grep -E "AGENTS.md|CLAUDE.md|/src/|node_modules"  # must be empty
 ```
 
+Before committing, tagging, creating a GitHub release, uploading to WUpdates, or
+submitting a WordPress.org update, run the mandatory fresh Studio release smoke
+test above against the generated ZIP. If the release includes both commercial
+and wp.org artifacts, smoke each ZIP that will ship.
+
 ### 4. Commit, tag, and push
 
 ```bash
@@ -431,6 +469,8 @@ EOF
 - Release appears at https://github.com/pixelgrade/anima/releases
 - ZIP is attached and downloadable
 - WUpdates `Current Version` points to the new version post
+- Fresh Studio release smoke passed with the shipped ZIP archive installed on a
+  brand-new site, and the temporary Studio site was deleted with files
 - Issues auto-closed via `Fixes #N` in earlier commits
 - Milestone issues all closed → close the milestone if done
 
