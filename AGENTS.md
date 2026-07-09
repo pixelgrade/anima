@@ -157,6 +157,14 @@ the update package builder for the public directory theme, not only as a review
 candidate builder. Keep `wporg/readme.txt` `Stable tag` and changelog aligned
 with the version being uploaded.
 
+WordPress.org theme uploads must be performed while logged in as the theme
+author account, `pixelgrade`. If the upload screen reports that `anima-lt` is
+owned by a different author, the browser is authenticated as the wrong account.
+Two-factor approval can return to the upload form; reselect the ZIP before
+submitting again. WordPress.org repackages accepted downloads, so do not treat a
+ZIP checksum mismatch as failure by itself. Download the official ZIP and compare
+the extracted `anima-lt/` tree with the local build instead.
+
 ### Local Anima LT testing install:
 
 Local development source stays in `themes/anima`. The sibling
@@ -227,6 +235,10 @@ deletion fails, report the leftover path and cleanup blocker.
   headless runner lives on the bare Studio test site —
   `studio wp eval-file wp-content/run-theme-check.php --path=~/Studio/anima-lt`.
   It must report PASS (no REQUIRED items).
+  Before relying on this path, verify that the Studio site and runner file still
+  exist. If the local runner has drifted, record the gap and use the WordPress.org
+  scanner plus the fresh Studio archive smoke as the release gate until the local
+  runner is restored.
 
 ## Project Structure
 
@@ -431,7 +443,36 @@ EOF
 )"
 ```
 
-### 6. Publish to WUpdates
+### 6. Publish Anima LT to WordPress.org
+
+When the public build is part of the release, upload the verified
+`../anima-lt-X-Y-Z.zip` through `https://wordpress.org/themes/upload/` while
+logged in as `pixelgrade`.
+
+After upload, record:
+
+- The Trac ticket URL, e.g. `https://themes.trac.wordpress.org/ticket/<ID>`.
+- The SVN version directory and revision:
+  ```bash
+  svn info https://themes.svn.wordpress.org/anima-lt/X.Y.Z
+  svn log https://themes.svn.wordpress.org/anima-lt --limit 1
+  ```
+- The official download URL:
+  ```bash
+  curl -I https://downloads.wordpress.org/theme/anima-lt.X.Y.Z.zip
+  ```
+- An extracted-content diff between the official WordPress.org download and the
+  local `../anima-lt-X-Y-Z.zip`. WordPress.org may repackage the archive, so ZIP
+  checksums can differ even when the shipped files match.
+
+The public theme listing and `api.wordpress.org/themes/info` can lag behind SVN
+and the direct download URL. Treat that as propagation lag only after SVN,
+Trac, direct download, and extracted-content comparison are all verified.
+Trac may also block non-browser requests with anti-abuse checks; in that case,
+verify Trac in the browser and rely on SVN plus the direct download for scripted
+evidence.
+
+### 7. Publish to WUpdates
 
 - Keep raw WUpdates host, port, and key material out of git. Store those only in local/private files such as `AGENTS.local.md`, `.ai/`, or `.claude/napkin.md`. This repo assumes a local `wupdates` SSH alias is already configured on the release machine.
 - Product type: `wup_theme`
@@ -464,11 +505,14 @@ EOF
   - `curl -L -o /tmp/anima.zip '<CURRENT_VERSION_URL>'` can be used for a full download smoke test when needed.
   - The generated `api_wupl_version` URL is HTTPS-only. The same path over plain HTTP returns `404`.
 
-### 7. Verify
+### 8. Verify
 
 - Release appears at https://github.com/pixelgrade/anima/releases
 - ZIP is attached and downloadable
 - WUpdates `Current Version` points to the new version post
+- If Anima LT was submitted to WordPress.org, Trac, SVN, the direct download URL,
+  and extracted-content diff are verified; public API/listing propagation status
+  is recorded separately
 - Fresh Studio release smoke passed with the shipped ZIP archive installed on a
   brand-new site, and the temporary Studio site was deleted with files
 - Issues auto-closed via `Fixes #N` in earlier commits
