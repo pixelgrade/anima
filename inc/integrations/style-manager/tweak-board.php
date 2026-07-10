@@ -44,6 +44,14 @@ function anima_add_tweak_board_section_to_style_manager_config( $config ) {
 					'desc'         => '',
 					'default'      => true,
 				],
+				'sm_collection_collage_grid' => [
+					'type'         => 'sm_toggle',
+					'setting_type' => 'option',
+					'setting_id'   => 'sm_collection_collage_grid',
+					'label'        => esc_html__( 'Collage grid collections', '__theme_txtd' ),
+					'desc'         => esc_html__( 'A patchwork treatment for Masonry collections with Original aspect ratio: side-by-side portrait cards, media overlapping between columns, and a staggered reveal.', '__theme_txtd' ),
+					'default'      => false,
+				],
 			],
 		]
 	);
@@ -70,6 +78,7 @@ function anima_reorganize_tweak_board_customizer_controls( $sm_panel_config, $sm
 	$ordered_option_ids = [
 		'sm_collection_title_position',
 		'sm_collection_hover_effect',
+		'sm_collection_collage_grid',
 		'sm_decorative_titles_style_intro',
 		'sm_decorative_titles_style',
 		'sm_contextual_entry_colors_intro',
@@ -83,6 +92,10 @@ function anima_reorganize_tweak_board_customizer_controls( $sm_panel_config, $sm
 			'sm_contextual_entry_colors' => $sm_section_config['options']['sm_contextual_entry_colors'],
 		]
 	);
+
+	if ( isset( $sm_section_config['options']['sm_collection_collage_grid'] ) ) {
+		$available_options['sm_collection_collage_grid'] = $sm_section_config['options']['sm_collection_collage_grid'];
+	}
 
 	if ( isset( $available_options['sm_collection_title_position'] ) ) {
 		$available_options['sm_collection_title_position']['label'] = esc_html__( 'Collection title position', '__theme_txtd' );
@@ -129,7 +142,7 @@ function anima_maybe_invalidate_style_manager_tweak_board_cache() {
 	// Bump this token whenever the Tweak Board controls, copy, or order added in
 	// this file change, so the cached Style Manager config is rebuilt once to
 	// pick up the new definition.
-	$config_version = '2026-06-13-contextual-colors';
+	$config_version = '2026-07-10-collage-grid';
 
 	if ( get_option( 'anima_tweak_board_config_version' ) === $config_version ) {
 		return;

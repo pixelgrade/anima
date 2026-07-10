@@ -205,3 +205,125 @@ if ( ! function_exists( 'anima_alter_novablocks_map_settings' ) ) {
 		return $settings;
 	}
 }
+
+/**
+ * Collage header brick: when the Collage Grid treatment is on, render the
+ * site branding + primary menu as the FIRST brick inside the main collage
+ * collection on blog-like views — the masonry engine packs it like a card
+ * (the Patch-style header-in-grid).
+ */
+add_filter( 'novablocks/collection_leading_items_markup', 'anima_collection_header_brick_markup', 10, 2 );
+
+function anima_collection_header_brick_markup( $markup, array $attributes ) {
+	static $rendered = false;
+
+	if ( $rendered || ! is_string( $markup ) ) {
+		return $markup;
+	}
+
+	if ( ! get_option( 'sm_collection_collage_grid', false ) ) {
+		return $markup;
+	}
+
+	if ( ( $attributes['layoutStyle'] ?? '' ) !== 'masonry'
+		|| ( $attributes['thumbnailAspectRatioString'] ?? '' ) !== 'original' ) {
+		return $markup;
+	}
+
+	if ( ! ( is_home() || is_front_page() || is_archive() || is_search() ) || is_singular() ) {
+		return $markup;
+	}
+
+	$rendered = true;
+
+	$branding = get_custom_logo();
+
+	if ( empty( $branding ) ) {
+		$branding = '<a class="c-header-brick__title" href="' . esc_url( home_url( '/' ) ) . '" rel="home">'
+			. esc_html( get_bloginfo( 'name' ) )
+			. '</a>';
+	}
+
+	$menu = '';
+
+	if ( has_nav_menu( 'primary' ) ) {
+		$menu = wp_nav_menu(
+			[
+				'theme_location'       => 'primary',
+				'container'            => 'nav',
+				'container_class'      => 'c-header-brick__navigation',
+				'container_aria_label' => esc_attr__( 'Primary Menu', '__theme_txtd' ),
+				'menu_class'           => 'c-header-brick__menu',
+				'fallback_cb'          => false,
+				'depth'                => 1,
+				'echo'                 => false,
+			]
+		);
+	}
+
+	return $markup
+		. '<div class="nb-collection__layout-item nb-collection__layout-item--header-brick">'
+		. '<div class="c-header-brick">'
+		. '<div class="c-header-brick__branding">' . $branding . '</div>'
+		. $menu
+		. '</div>'
+		. '</div>';
+}
+
+/**
+ * Expose the Style Manager palette SOURCE color as a CSS variable. The
+ * generated accent is contrast-corrected (a saturated source like #ffeb00
+ * becomes darker for text safety); brand moments that want the RAW color
+ * (category chips, sticky ribbons, menu highlights) read this variable.
+ */
+add_action( 'wp_head', 'anima_output_brand_source_color_css_var', 5 );
+
+function anima_output_brand_source_color_css_var(): void {
+	$advanced_palettes_setting = pixelgrade_option( 'sm_advanced_palette_output' );
+
+	if ( empty( $advanced_palettes_setting ) ) {
+		return;
+	}
+
+	$palettes = json_decode( $advanced_palettes_setting, true );
+	$source   = $palettes[0]['source'][0] ?? '';
+
+	if ( empty( $source ) || ! preg_match( '/^#[0-9a-fA-F]{3,8}$/', $source ) ) {
+		return;
+	}
+
+	echo '<style id="anima-brand-source-color">:root { --anima-brand-source-color: ' . esc_html( $source ) . '; }</style>' . "\n";
+}
+
+/**
+ * Archive title brick: on archive/search views the page title becomes the
+ * second grid brick, right after the header brick (Patch's page-header card).
+ */
+add_filter( 'novablocks/collection_leading_items_markup', 'anima_collection_archive_title_brick_markup', 20, 2 );
+
+function anima_collection_archive_title_brick_markup( $markup, array $attributes ) {
+	static $rendered = false;
+
+	if ( $rendered || ! is_string( $markup ) || '' === $markup ) {
+		// Only ever render alongside the header brick (same gates passed).
+		return $markup;
+	}
+
+	if ( ! ( is_archive() || is_search() ) ) {
+		return $markup;
+	}
+
+	$rendered = true;
+
+	if ( is_search() ) {
+		/* translators: %s: search query. */
+		$title = sprintf( esc_html__( 'Search: %s', '__theme_txtd' ), get_search_query() );
+	} else {
+		$title = get_the_archive_title();
+	}
+
+	return $markup
+		. '<div class="nb-collection__layout-item nb-collection__layout-item--archive-title-brick">'
+		. '<div class="c-archive-title-brick"><h1 class="c-archive-title-brick__title">' . wp_kses_post( $title ) . '</h1></div>'
+		. '</div>';
+}

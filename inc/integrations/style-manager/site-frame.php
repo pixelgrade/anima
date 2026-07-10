@@ -127,6 +127,7 @@ function anima_add_site_frame_section_to_style_manager_config( $config ) {
 					'choices'      => [
 						'none'      => esc_html__( 'None', '__theme_txtd' ),
 						'editorial' => esc_html__( 'Editorial', '__theme_txtd' ),
+						'border'    => esc_html__( 'Border', '__theme_txtd' ),
 					],
 				],
 				'sm_site_frame_palette' => [

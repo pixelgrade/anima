@@ -1,0 +1,425 @@
+// Collection Collage Grid
+//
+// Inspired by the Patch theme's "algorithmic" masonry collage: equal-width
+// masonry bricks whose media deliberately bleeds into neighboring columns,
+// with per-column layering, mirrored side-by-side cards for portrait media,
+// a ragged top edge, and a staggered card reveal.
+//
+// Activation (two gates, both required):
+//   1. Body class `u-collection-collage` — Style Manager Tweak Board toggle
+//      `sm_collection_collage_grid` (off by default, per-starter opt-in).
+//   2. Collection classes `.nb-supernova--layout-masonry.nb-supernova--aspect-ratio-original`
+//      — Masonry composition with Original items aspect ratio.
+//
+// Building blocks provided by Nova Blocks:
+//   - Card expression classes: `nb-card--media-{tall|portrait|square|landscape|wide}`,
+//     `nb-card--no-media`, `nb-card--title-{short|medium|long}`.
+//   - Masonry column classes on layout items:
+//     `nb-collection__layout-item--col-{i}` / `--col-even` / `--col-odd`
+//     (editor mirror: `nb-collection__layout-column--col-*`).
+//   - `nb:masonry-layout` relayout events (engine re-measures on size changes).
+
+$collage-scope: '.u-collection-collage .nb-supernova--layout-masonry.nb-supernova--aspect-ratio-original';
+$collage-editor-scope: '.editor-styles-wrapper .nb-supernova--layout-masonry.nb-supernova--aspect-ratio-original';
+$collage-gutter: var(--nb-grid-spacing, 24px);
+
+// ==========================================================================
+// GRID CANVAS — breathing room so media bleeds land in padding, not on the
+// viewport edge / site frame (Patch: 24px sides, 60px on large screens).
+// ==========================================================================
+#{$collage-scope} {
+  box-sizing: border-box;
+  // Full-bleed regardless of ancestor width constraints (query/group/content
+  // column) so the collage always spans the viewport, Patch-style.
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: clamp(24px, 4vw, 60px);
+  padding-right: clamp(24px, 4vw, 60px);
+}
+
+// The border site frame shrinks the viewport-wide bleed by the frame size
+// (both gate classes live on body, hence the compound selector).
+.has-site-frame-border.u-collection-collage .nb-supernova--layout-masonry.nb-supernova--aspect-ratio-original {
+  width: calc(100vw - 2 * var(--site-frame-border-size, 0px));
+  margin-left: calc(50% - 50vw + var(--site-frame-border-size, 0px));
+  margin-right: calc(50% - 50vw + var(--site-frame-border-size, 0px));
+}
+
+// ==========================================================================
+// SIDE-BY-SIDE CARDS for portrait/tall media (the signature Patch move)
+// ==========================================================================
+// Default: image LEFT (hanging one gutter out of the card), text beside it.
+// Even columns (0-based: 1st, 3rd, ...) mirror: image RIGHT, text right-aligned.
+#{$collage-scope} {
+
+  .nb-supernova-item.nb-card--media-portrait,
+  .nb-supernova-item.nb-card--media-tall {
+    display: grid !important;
+    grid-template-columns: minmax(0, 55%) minmax(0, 1fr);
+    column-gap: $collage-gutter;
+    align-items: start;
+
+    .nb-supernova-item__media-wrapper {
+      grid-column: 1;
+      grid-row: 1;
+      margin-left: calc(-1 * #{$collage-gutter});
+    }
+
+    .nb-supernova-item__content {
+      grid-column: 2;
+      grid-row: 1;
+    }
+  }
+
+  .nb-supernova-item.nb-card--media-tall {
+    grid-template-columns: minmax(0, 45%) minmax(0, 1fr);
+  }
+
+  // Mirrored variant on even columns: image right, text right-aligned.
+  .nb-collection__layout-item--col-even {
+
+    .nb-supernova-item.nb-card--media-portrait,
+    .nb-supernova-item.nb-card--media-tall {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 55%);
+
+      .nb-supernova-item__media-wrapper {
+        grid-column: 2;
+        margin-left: 0;
+        margin-right: calc(-1 * #{$collage-gutter});
+      }
+
+      .nb-supernova-item__content {
+        grid-column: 1;
+        text-align: right;
+      }
+    }
+
+    .nb-supernova-item.nb-card--media-tall {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 45%);
+    }
+  }
+
+  // Wide media bleeds into the next column.
+  .nb-supernova-item.nb-card--media-wide {
+    .nb-supernova-item__media-wrapper {
+      margin-right: calc(-2 * #{$collage-gutter});
+    }
+  }
+
+  // Soft shadow only on media that bleeds over neighboring cards, echoing
+  // Patch's overlap shadows without its synthetic shadow rectangles.
+  .nb-supernova-item.nb-card--media-portrait,
+  .nb-supernova-item.nb-card--media-tall,
+  .nb-supernova-item.nb-card--media-wide {
+    .nb-supernova-item__media {
+      filter: drop-shadow(0 0 25px rgba(0, 0, 0, 0.35));
+    }
+  }
+}
+
+// ==========================================================================
+// PER-COLUMN LAYERING — leftmost column stacks on top
+// ==========================================================================
+#{$collage-scope} {
+  @for $i from 0 through 5 {
+    .nb-collection__layout-item--col-#{$i} {
+      z-index: #{30 - $i};
+    }
+  }
+}
+
+// ==========================================================================
+// RAGGED TOP EDGE — first and third bricks pushed down
+// ==========================================================================
+// Padding (not margin) so the masonry engine's height measurement includes it.
+@include above(lap) {
+  #{$collage-scope} {
+    .nb-collection__layout-item:nth-child(1) {
+      padding-top: 50px;
+    }
+
+    .nb-collection__layout-item:nth-child(3) {
+      padding-top: 50px;
+    }
+  }
+}
+
+// ==========================================================================
+// TEXT CARDS — title on a solid dark block
+// ==========================================================================
+#{$collage-scope} {
+
+  .nb-supernova-item.nb-card--no-media {
+
+    .nb-card__title {
+      display: inline-block;
+      padding: 20px;
+      background-color: var(--sm-current-fg1-color, #161a03);
+      color: var(--sm-current-bg-color, #fff);
+
+      a {
+        color: inherit;
+      }
+    }
+
+    // Shorter titles get bigger type (Patch's inverse type scale).
+    &.nb-card--title-short .nb-card__title {
+      font-size: 1.6em;
+    }
+
+    &.nb-card--title-medium .nb-card__title {
+      font-size: 1.35em;
+    }
+  }
+}
+
+// ==========================================================================
+// HEADER BRICK — site branding + primary menu packed as the first brick
+// (rendered by anima_collection_header_brick_markup when Collage Grid is on)
+// ==========================================================================
+#{$collage-scope} {
+
+  .nb-collection__layout-item--header-brick {
+    z-index: 40;
+
+    .c-header-brick {
+      padding-top: 1.5em;
+      padding-bottom: 1em;
+    }
+
+    .c-header-brick__branding {
+      margin-bottom: 1.75em;
+
+      .c-header-brick__title {
+        font-family: var(--theme-site-title-font-family, inherit);
+        font-size: clamp(28px, 2.6vw, 40px);
+        font-weight: 700;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        line-height: 1.2;
+        text-decoration: none;
+        color: var(--sm-current-fg1-color, currentColor);
+      }
+
+      .custom-logo {
+        max-width: 220px;
+        height: auto;
+      }
+    }
+
+    .c-header-brick__menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      columns: 2;
+      column-gap: #{$collage-gutter};
+
+      li {
+        break-inside: avoid;
+      }
+
+      a {
+        display: inline-block;
+        font-family: var(--theme-navigation-font-family, inherit);
+        font-size: 15px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        line-height: 2.2;
+        text-decoration: none;
+        color: var(--sm-current-fg1-color, currentColor);
+
+        &:hover {
+          box-shadow: inset 0 -0.4em 0 var(--anima-brand-source-color, var(--sm-current-accent-color, #ffeb00));
+        }
+      }
+
+      .current-menu-item > a,
+      .current_page_item > a {
+        box-shadow: inset 0 -0.4em 0 var(--anima-brand-source-color, var(--sm-current-accent-color, #ffeb00));
+      }
+    }
+  }
+}
+
+// ==========================================================================
+// ARCHIVE TITLE BRICK — the page title packed as a grid brick on archives
+// ==========================================================================
+#{$collage-scope} {
+
+  .nb-collection__layout-item--archive-title-brick {
+    z-index: 39;
+
+    .c-archive-title-brick {
+      padding: 1em 0;
+    }
+
+    .c-archive-title-brick__title {
+      margin: 0;
+      font-size: clamp(26px, 2.4vw, 36px);
+      line-height: 1.25;
+
+      // The taxonomy name prefix WP adds ("Category:") reads quieter.
+      &::first-line {
+        letter-spacing: 0.04em;
+      }
+    }
+  }
+}
+
+// ==========================================================================
+// STICKY BOOKMARK RIBBON — accent bookmark on the media's top-right corner
+// ==========================================================================
+#{$collage-scope} {
+
+  // Hosted on the aspect-ratio element so it never collides with the hover
+  // reveal's ::before/::after on the media wrapper.
+  .nb-supernova-item.is-sticky-post .nb-supernova-item__media-aspect-ratio::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 20px;
+    width: 16px;
+    height: 26px;
+    background-color: var(--anima-brand-source-color, var(--sm-current-accent-color, #ffeb00));
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 8px), 0 100%);
+    z-index: 30;
+    pointer-events: none;
+  }
+}
+
+// ==========================================================================
+// QUOTE SLAB TYPE — quotes speak in the accent voice (Oswald uppercase)
+// ==========================================================================
+#{$collage-scope} {
+
+  .nb-supernova-item.format-quote {
+
+    blockquote {
+      font-family: var(--theme-accent-font-family, inherit);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+
+      p {
+        font-size: 1.4em;
+        line-height: 1.4;
+      }
+
+      cite {
+        display: block;
+        margin-top: 1em;
+        font-size: 0.75em;
+        font-style: normal;
+        letter-spacing: 0.1em;
+        opacity: 0.85;
+      }
+    }
+  }
+}
+
+// ==========================================================================
+// STAGGERED REVEAL — cards cascade in once the masonry has laid out
+// ==========================================================================
+// Only animates when the engine adds `nb-collection__layout--masonry-ready`,
+// so no-JS visitors always see the cards.
+@media (prefers-reduced-motion: no-preference) {
+
+  #{$collage-scope} {
+
+    // `.is-revealed` is stamped by the Load More runtime on already-visible
+    // cards so appended batches animate without replaying the whole grid.
+    .nb-collection__layout--masonry-ready .nb-collection__layout-item:not(.is-revealed) {
+      animation: anima-collage-reveal 0.3s ease-in-out backwards;
+    }
+
+    @for $i from 1 through 12 {
+      .nb-collection__layout--masonry-ready .nb-collection__layout-item:nth-child(#{$i}):not(.is-revealed) {
+        animation-delay: #{($i - 1) * 0.1}s;
+      }
+    }
+  }
+}
+
+@keyframes anima-collage-reveal {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+// ==========================================================================
+// EDITOR — approximate the collage inside the block editor
+// ==========================================================================
+// The editor's masonry preview stacks cards inside column wrappers
+// (`.nb-collection__layout-column--col-*`); mirror the side-by-side and
+// text-card treatments so authors see the collage character while editing.
+#{$collage-editor-scope} {
+  // Mirror the frontend's full-bleed so the editor canvas shows the real
+  // column count instead of a single content-width column.
+  box-sizing: border-box;
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: clamp(24px, 4vw, 60px);
+  padding-right: clamp(24px, 4vw, 60px);
+
+  .nb-supernova-item.nb-card--media-portrait,
+  .nb-supernova-item.nb-card--media-tall {
+    display: grid !important;
+    grid-template-columns: minmax(0, 55%) minmax(0, 1fr);
+    column-gap: $collage-gutter;
+    align-items: start;
+
+    .nb-supernova-item__media-wrapper {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .nb-supernova-item__content {
+      grid-column: 2;
+      grid-row: 1;
+    }
+  }
+
+  .nb-supernova-item.nb-card--media-tall {
+    grid-template-columns: minmax(0, 45%) minmax(0, 1fr);
+  }
+
+  .nb-collection__layout-column--col-even {
+
+    .nb-supernova-item.nb-card--media-portrait,
+    .nb-supernova-item.nb-card--media-tall {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 55%);
+
+      .nb-supernova-item__media-wrapper {
+        grid-column: 2;
+      }
+
+      .nb-supernova-item__content {
+        grid-column: 1;
+        text-align: right;
+      }
+    }
+
+    .nb-supernova-item.nb-card--media-tall {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 45%);
+    }
+  }
+
+  .nb-supernova-item.nb-card--no-media .nb-card__title {
+    display: inline-block;
+    padding: 20px;
+    background-color: var(--sm-current-fg1-color, #161a03);
+    color: var(--sm-current-bg-color, #fff);
+
+    a {
+      color: inherit;
+    }
+  }
+}

@@ -69,6 +69,12 @@ function anima_body_classes( array $classes ): array {
 		$classes[] = 'u-collection-hover-' . sanitize_html_class( $collection_hover_effect );
 	}
 
+	// Collage Grid (Patch-style masonry treatment for Cards Collections
+	// using Masonry composition + Original aspect ratio).
+	if ( get_option( 'sm_collection_collage_grid', false ) ) {
+		$classes[] = 'u-collection-collage';
+	}
+
 	return $classes;
 }
 add_filter( 'body_class', 'anima_body_classes' );

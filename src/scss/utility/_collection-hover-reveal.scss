@@ -1,0 +1,143 @@
+// Collection Hover Effect: Meta Reveal
+//
+// Inspired by the Patch theme's card hover ritual: the card sinks slightly,
+// the media drains to grayscale behind a centered "Read More" cue, and the
+// hidden meta row slides out from behind the card's top edge.
+//
+// Activation: Nova Blocks' Card Hover Effect attribute (`cardHoverEffect:
+// reveal`) — class `nb-supernova--card-hover-reveal` on the collection.
+// Works best with the meta elements ordered before Media (Content Details →
+// Structure), which renders them in `.nb-supernova-item__content--before-media`.
+
+$reveal-scope: '.nb-supernova--card-hover-reveal';
+$reveal-duration: 0.3s;
+$reveal-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94); // easeOutQuad
+
+@media (hover: hover) {
+
+  #{$reveal-scope} .nb-supernova-item {
+    transition: transform $reveal-duration $reveal-easing;
+
+    &:hover {
+      transform: translateY(15px);
+    }
+  }
+
+  // --- MEDIA: grayscale + dark veil + centered "Read More" ---
+  #{$reveal-scope} .nb-supernova-item .nb-supernova-item__media-wrapper {
+    position: relative;
+
+    img,
+    video {
+      transition: filter $reveal-duration ease-in-out, opacity $reveal-duration ease-in-out;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      opacity: 0;
+      z-index: 15;
+      pointer-events: none;
+      transition: opacity $reveal-duration ease-in-out;
+    }
+
+    &::after {
+      content: 'Read More';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-family: var(--sm-font-accent, var(--theme-heading-1-font-family, inherit));
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      opacity: 0;
+      z-index: 16;
+      pointer-events: none;
+      transition: opacity $reveal-duration ease-in-out;
+    }
+  }
+
+  #{$reveal-scope} .nb-supernova-item:hover .nb-supernova-item__media-wrapper {
+
+    img,
+    video {
+      filter: grayscale(1);
+    }
+
+    &::before,
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  // --- META ROW: hidden behind the card, slides up from the top edge ---
+  #{$reveal-scope} .nb-supernova-item .nb-supernova-item__content--before-media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    z-index: -1;
+    transform: translateY(0);
+    transition: transform $reveal-duration $reveal-easing, opacity $reveal-duration $reveal-easing;
+    pointer-events: none;
+  }
+
+  #{$reveal-scope} .nb-supernova-item:hover .nb-supernova-item__content--before-media {
+    opacity: 1;
+    transform: translateY(calc(-100% - 4px));
+    pointer-events: auto;
+  }
+
+  // The sunken card needs a positioning context for the meta row.
+  #{$reveal-scope} .nb-supernova-item {
+    position: relative;
+  }
+}
+
+// --- META ROW LOOK: accent category chip + quiet byline (all pointer modes) ---
+#{$reveal-scope} .nb-supernova-item .nb-supernova-item__content--before-media {
+
+  .nb-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.85em;
+    margin: 0;
+  }
+
+  // The primary meta (category) renders as the accent chip.
+  .nb-card__meta-combined > span:first-child,
+  .nb-card__meta--primary {
+    display: inline-block;
+    padding: 5px 13px;
+    background-color: var(--anima-brand-source-color, var(--sm-current-accent-color, #ffeb00));
+    color: var(--sm-current-fg1-color, #161a03);
+    font-size: 13px;
+    line-height: 1.6;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+
+  // The byline reads quietly beside the chip; drop the decorative separator.
+  .nb-card__meta-separator {
+    display: none;
+  }
+}
+
+// Touch devices: no hover ritual — the meta row is simply visible in place.
+@media (hover: none) {
+
+  #{$reveal-scope} .nb-supernova-item .nb-supernova-item__content--before-media {
+    position: static;
+    opacity: 1;
+  }
+}

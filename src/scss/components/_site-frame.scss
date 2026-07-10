@@ -118,6 +118,72 @@ html.is-dark .c-site-frame.has-site-frame-accent {
   }
 }
 
+// --------------------------------------------------------------------------
+// BORDER STYLE — a symmetric picture-frame border around the whole viewport
+// (the classic Patch/Border-theme look). Four fixed bars in the frame
+// surface color; the page gets matching padding on all sides. The frame
+// thins out on small screens where it would eat too much canvas.
+// --------------------------------------------------------------------------
+body.has-site-frame-border {
+  --site-frame-border-size: 18px;
+}
+
+body.has-site-frame-border #page {
+  padding: var(--site-frame-border-size);
+  padding-bottom: 0;
+}
+
+.has-site-frame-border .c-site-frame__top,
+.has-site-frame-border .c-site-frame__left,
+.has-site-frame-border .c-site-frame__right,
+.has-site-frame-border .c-site-frame__bottom {
+  position: fixed;
+  background-color: var(--site-frame-surface);
+  z-index: 90;
+}
+
+.has-site-frame-border .c-site-frame__top {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--site-frame-border-size);
+}
+
+.has-site-frame-border .c-site-frame__bottom {
+  top: auto;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--site-frame-border-size);
+}
+
+.has-site-frame-border .c-site-frame__left {
+  top: 0;
+  left: 0;
+  width: var(--site-frame-border-size);
+  height: 100%;
+}
+
+.has-site-frame-border .c-site-frame__right {
+  top: 0;
+  left: auto;
+  right: 0;
+  width: var(--site-frame-border-size);
+  height: 100%;
+}
+
+.admin-bar.has-site-frame-border .c-site-frame__top {
+  top: var(--theme-sticky-distance, 32px);
+  height: var(--site-frame-border-size);
+  margin-top: 0;
+}
+
+@media (max-width: 1023px) {
+  body.has-site-frame-border {
+    --site-frame-border-size: 8px;
+  }
+}
+
 .c-site-frame__rail {
   padding-left: 12px;
   padding-right: 12px;

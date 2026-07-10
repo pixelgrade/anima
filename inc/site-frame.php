@@ -70,7 +70,17 @@ function anima_get_site_frame_style(): string {
  * @return bool
  */
 function anima_is_site_frame_enabled(): bool {
-	return 'editorial' === anima_get_site_frame_style();
+	return in_array( anima_get_site_frame_style(), [ 'editorial', 'border' ], true );
+}
+
+/**
+ * Determine whether the Border Site Frame style is active — a symmetric
+ * picture-frame border around the viewport (the Patch/Border-theme look).
+ *
+ * @return bool
+ */
+function anima_is_site_frame_border_style(): bool {
+	return 'border' === anima_get_site_frame_style();
 }
 
 /**
@@ -98,6 +108,7 @@ function anima_site_frame_has_menu(): bool {
  */
 function anima_is_site_frame_menu_enabled(): bool {
 	return anima_is_site_frame_enabled()
+		&& ! anima_is_site_frame_border_style()
 		&& anima_site_frame_has_menu();
 }
 
@@ -235,6 +246,10 @@ function anima_site_frame_body_class( array $classes ): array {
 
 	if ( anima_is_site_frame_frame_enabled() ) {
 		$classes[] = 'has-site-frame-frame';
+	}
+
+	if ( anima_is_site_frame_border_style() ) {
+		$classes[] = 'has-site-frame-border';
 	}
 
 	return $classes;
@@ -460,7 +475,12 @@ function anima_render_site_frame_shell(): void {
 	}
 	?>
 	<div class="<?php echo esc_attr( implode( ' ', $shell_classes ) ); ?>">
-		<?php if ( $has_frame ) : ?>
+		<?php if ( anima_is_site_frame_border_style() ) : ?>
+			<span class="c-site-frame__top" aria-hidden="true"></span>
+			<span class="c-site-frame__left" aria-hidden="true"></span>
+			<span class="c-site-frame__right" aria-hidden="true"></span>
+			<span class="c-site-frame__bottom" aria-hidden="true"></span>
+		<?php elseif ( $has_frame ) : ?>
 			<span class="c-site-frame__top" aria-hidden="true"></span>
 			<span class="c-site-frame__left" aria-hidden="true"></span>
 		<?php endif; ?>
