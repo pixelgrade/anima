@@ -37,10 +37,11 @@ $g: var(--collage-g, 24px);
   box-sizing: border-box;
   // Full-bleed regardless of ancestor width constraints; Patch adds one
   // extra transparent gutter on the grid's left (border-left: 1g).
-  width: 100vw;
+  // Full-bleed, but capped at Patch's 1850px grid ceiling and centered.
+  width: min(100vw, 1850px);
   max-width: none;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  margin-left: calc(50% - min(50vw, 925px));
+  margin-right: calc(50% - min(50vw, 925px));
   padding-left: calc(clamp(24px, 4vw, 60px) + #{$g});
   padding-right: clamp(24px, 4vw, 60px);
 
@@ -53,9 +54,9 @@ $g: var(--collage-g, 24px);
   // gutter bleed and the hover meta reveal.
   .nb-collection__layout-item[class] {
     overflow: visible;
-    // Vertical rhythm (Patch: 30px = 1.25g bottom margin per brick) — as
+    // Vertical rhythm (Patch: fixed 30px bottom margin per brick) — as
     // padding so the masonry engine's height measurement includes it.
-    padding-bottom: calc(#{$g} * 1.25);
+    padding-bottom: 30px;
   }
 
   .nb-supernova-item__content[class] {
@@ -66,9 +67,9 @@ $g: var(--collage-g, 24px);
 // The border site frame shrinks the viewport-wide bleed by the frame size
 // (both gate classes live on body, hence the compound selector).
 .has-site-frame-border.u-collection-collage .nb-supernova--layout-masonry.nb-supernova--aspect-ratio-original {
-  width: calc(100vw - 2 * var(--site-frame-border-size, 0px));
-  margin-left: calc(50% - 50vw + var(--site-frame-border-size, 0px));
-  margin-right: calc(50% - 50vw + var(--site-frame-border-size, 0px));
+  width: min(calc(100vw - 2 * var(--site-frame-border-size, 0px)), 1850px);
+  margin-left: calc(50% - min(calc(50vw - var(--site-frame-border-size, 0px)), 925px));
+  margin-right: calc(50% - min(calc(50vw - var(--site-frame-border-size, 0px)), 925px));
 }
 
 // ==========================================================================
@@ -110,7 +111,13 @@ $g: var(--collage-g, 24px);
   // body-face byline beside the 13px chip, and 26px titles.
   .nb-card__title {
     font-size: 26px;
+    font-weight: 400;
     line-height: 1.3;
+    color: var(--sm-current-fg1-color, #161a03);
+
+    a {
+      color: inherit;
+    }
   }
 
   // Never upscale media past its natural size (the collage look depends on
@@ -189,7 +196,7 @@ $g: var(--collage-g, 24px);
     // the side and below (for the wrap-under).
     .nb-supernova-item__media-wrapper {
       float: left;
-      width: 50%;
+      width: 55%;
       margin-left: calc(-2 * #{$g});
       margin-right: 12px;
       margin-bottom: 12px;
@@ -219,7 +226,7 @@ $g: var(--collage-g, 24px);
   }
 
   .nb-supernova-item.nb-card--media-tall .nb-supernova-item__media-wrapper {
-    width: 41%;
+    width: 45%;
   }
 
   // Mirrored variant on even columns: image floats right (its right edge
@@ -299,17 +306,17 @@ $g: var(--collage-g, 24px);
       }
     }
 
-    // Shorter titles get bigger type (Patch's inverse scale: 42/36/30).
+    // Shorter titles get bigger type (measured on the demo: 36/30/26).
     &.nb-card--title-short .nb-card__title {
-      font-size: 42px;
-    }
-
-    &.nb-card--title-medium .nb-card__title {
       font-size: 36px;
     }
 
-    &.nb-card--title-long .nb-card__title {
+    &.nb-card--title-medium .nb-card__title {
       font-size: 30px;
+    }
+
+    &.nb-card--title-long .nb-card__title {
+      font-size: 26px;
     }
   }
 }
@@ -326,22 +333,26 @@ $g: var(--collage-g, 24px);
     }
 
     blockquote {
-      font-family: var(--theme-accent-font-family, inherit);
+      // The heading family var reliably resolves to Oswald (the accent var
+      // is not emitted on the frontend).
+      font-family: var(--theme-heading-1-font-family, inherit);
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.02em;
 
       p {
-        font-size: 1.4em;
+        font-size: 24px;
         line-height: 1.4;
       }
 
       cite {
         display: block;
         margin-top: 1em;
-        font-size: 0.75em;
+        font-size: 15px;
         font-style: normal;
-        letter-spacing: 0.1em;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
         opacity: 0.85;
       }
     }
@@ -358,7 +369,7 @@ $g: var(--collage-g, 24px);
     z-index: 40;
 
     .c-header-brick {
-      padding-top: 1.5em;
+      padding-top: 0;
       padding-bottom: 1em;
       margin-left: #{$g};
       margin-right: calc(4 * #{$g});
@@ -379,8 +390,27 @@ $g: var(--collage-g, 24px);
       }
 
       .custom-logo {
-        max-width: 220px;
+        max-width: 243px;
         height: auto;
+      }
+    }
+
+    // Social icons row (a nav menu named "Social"), mirroring Patch's
+    // header: small dark icons, 24px above the row.
+    .c-header-brick__social {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 24px 0 0;
+      padding: 0;
+
+      a {
+        display: inline-flex;
+        color: var(--sm-current-fg1-color, currentColor);
+
+        &:hover {
+          color: var(--anima-brand-source-color, var(--sm-current-accent-color, #ffeb00));
+        }
       }
     }
 
@@ -398,10 +428,11 @@ $g: var(--collage-g, 24px);
       a {
         display: inline-block;
         font-family: var(--theme-navigation-font-family, inherit);
-        font-size: 15px;
+        font-size: clamp(18px, 1.4vw, 24px);
+        font-weight: 300;
         letter-spacing: 0.06em;
         text-transform: uppercase;
-        line-height: 2.2;
+        line-height: 1.55;
         text-decoration: none;
         color: var(--sm-current-fg1-color, currentColor);
 
@@ -506,10 +537,11 @@ $g: var(--collage-g, 24px);
   // Mirror the frontend's full-bleed so the editor canvas shows the real
   // column count instead of a single content-width column.
   box-sizing: border-box;
-  width: 100vw;
+  // Full-bleed, but capped at Patch's 1850px grid ceiling and centered.
+  width: min(100vw, 1850px);
   max-width: none;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  margin-left: calc(50% - min(50vw, 925px));
+  margin-right: calc(50% - min(50vw, 925px));
   padding-left: calc(clamp(24px, 4vw, 60px) + #{$g});
   padding-right: clamp(24px, 4vw, 60px);
 
@@ -532,7 +564,7 @@ $g: var(--collage-g, 24px);
 
     .nb-supernova-item__media-wrapper {
       float: left;
-      width: 50%;
+      width: 55%;
       margin-right: 12px;
       margin-bottom: 12px;
     }
@@ -545,7 +577,7 @@ $g: var(--collage-g, 24px);
   }
 
   .nb-supernova-item.nb-card--media-tall .nb-supernova-item__media-wrapper {
-    width: 41%;
+    width: 45%;
   }
 
   .nb-collection__layout-column--col-even {

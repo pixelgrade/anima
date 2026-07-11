@@ -120,15 +120,19 @@ $reveal-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94); // easeOutQuad
     margin: 0;
   }
 
-  // The primary meta (category) renders as the accent chip.
+  // The primary meta (category) renders as the accent chip — measured on
+  // the demo: the chip text is the BODY face at 11px/500, not Oswald.
   .nb-card__meta-combined > span:first-child,
   .nb-card__meta--primary {
     display: inline-block;
     padding: 5px 13px;
     background-color: var(--anima-brand-source-color, var(--sm-current-accent-color, #ffeb00));
     color: var(--sm-current-fg1-color, #161a03);
-    font-size: 13px;
-    line-height: 1.6;
+    font-family: var(--theme-body-font-family, inherit);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    line-height: 1.8;
 
     a {
       color: inherit;
