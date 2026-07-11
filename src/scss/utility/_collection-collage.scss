@@ -91,6 +91,40 @@ $g: var(--collage-g, 24px);
     margin-left: calc(2 * #{$g});
   }
 
+  // Breathing room between the media and the content below it (Patch keeps
+  // roughly one gutter of air before the title). Side-by-side portrait/tall
+  // cards reset this — their media and text sit in one grid row.
+  .nb-supernova-item__media-wrapper {
+    margin-bottom: #{$g};
+  }
+
+  .nb-supernova-item.nb-card--media-portrait .nb-supernova-item__media-wrapper,
+  .nb-supernova-item.nb-card--media-tall .nb-supernova-item__media-wrapper {
+    margin-bottom: 0;
+  }
+
+  // Patch's card type scale: quiet 14px excerpts (16px when short), an 11px
+  // body-face byline beside the 13px chip, and 26px titles.
+  .nb-card__title {
+    font-size: 26px;
+    line-height: 1.3;
+  }
+
+  .nb-card__description {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .nb-supernova-item.nb-card--description-short .nb-card__description {
+    font-size: 16px;
+  }
+
+  .nb-card__meta-combined > span:not(:first-child) {
+    font-family: var(--theme-body-font-family, inherit);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+
   // LANDSCAPE media: flush with the card → bleeds 1g into the left gutter,
   // ends 2g short of the item's right edge. (No rule needed — card box.)
 
@@ -134,6 +168,7 @@ $g: var(--collage-g, 24px);
   .nb-supernova-item.nb-card--media-tall {
     display: grid !important;
     grid-template-columns: minmax(0, 55%) minmax(0, 1fr);
+    column-gap: #{$g};
     align-items: start;
     margin-left: #{$g};
     margin-right: 0;
@@ -157,6 +192,16 @@ $g: var(--collage-g, 24px);
     .nb-card__description {
       margin-left: 0;
     }
+
+    // Patch's inverse type scale for side-by-side cards.
+    &.nb-card--title-short .nb-card__title {
+      font-size: 36px;
+      font-weight: 700;
+    }
+
+    &.nb-card--title-medium .nb-card__title {
+      font-size: 30px;
+    }
   }
 
   .nb-supernova-item.nb-card--media-tall {
@@ -169,6 +214,7 @@ $g: var(--collage-g, 24px);
     .nb-supernova-item.nb-card--media-portrait,
     .nb-supernova-item.nb-card--media-tall {
       grid-template-columns: minmax(0, 1fr) minmax(0, 55%);
+      column-gap: #{$g};
       margin-left: calc(-1 * #{$g});
       margin-right: calc(2 * #{$g});
 
@@ -240,13 +286,17 @@ $g: var(--collage-g, 24px);
       }
     }
 
-    // Shorter titles get bigger type (Patch's inverse type scale).
+    // Shorter titles get bigger type (Patch's inverse scale: 42/36/30).
     &.nb-card--title-short .nb-card__title {
-      font-size: 1.6em;
+      font-size: 42px;
     }
 
     &.nb-card--title-medium .nb-card__title {
-      font-size: 1.35em;
+      font-size: 36px;
+    }
+
+    &.nb-card--title-long .nb-card__title {
+      font-size: 30px;
     }
   }
 }
@@ -306,11 +356,11 @@ $g: var(--collage-g, 24px);
 
       .c-header-brick__title {
         font-family: var(--theme-site-title-font-family, inherit);
-        font-size: clamp(28px, 2.6vw, 40px);
+        font-size: clamp(24px, 1.8vw, 34px);
         font-weight: 700;
-        letter-spacing: 0.28em;
+        letter-spacing: 0.18em;
         text-transform: uppercase;
-        line-height: 1.2;
+        line-height: 1.25;
         text-decoration: none;
         color: var(--sm-current-fg1-color, currentColor);
       }
@@ -465,6 +515,7 @@ $g: var(--collage-g, 24px);
   .nb-supernova-item.nb-card--media-tall {
     display: grid !important;
     grid-template-columns: minmax(0, 55%) minmax(0, 1fr);
+    column-gap: #{$g};
     align-items: start;
     margin-left: #{$g};
     margin-right: 0;
