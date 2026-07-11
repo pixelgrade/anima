@@ -91,16 +91,19 @@ $g: var(--collage-g, 24px);
     margin-left: calc(2 * #{$g});
   }
 
-  // Breathing room between the media and the content below it (Patch keeps
-  // roughly one gutter of air before the title). Side-by-side portrait/tall
-  // cards reset this — their media and text sit in one grid row.
+  // Measured Patch spacing: 10px of air between the media and the title
+  // below it, 8px between title and excerpt (the boxes, not the baselines).
   .nb-supernova-item__media-wrapper {
-    margin-bottom: #{$g};
+    margin-bottom: 10px;
   }
 
-  .nb-supernova-item.nb-card--media-portrait .nb-supernova-item__media-wrapper,
-  .nb-supernova-item.nb-card--media-tall .nb-supernova-item__media-wrapper {
-    margin-bottom: 0;
+  .nb-card__title {
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+
+  .nb-card__description {
+    margin-top: 0;
   }
 
   // Patch's card type scale: quiet 14px excerpts (16px when short), an 11px
@@ -108,6 +111,13 @@ $g: var(--collage-g, 24px);
   .nb-card__title {
     font-size: 26px;
     line-height: 1.3;
+  }
+
+  // Never upscale media past its natural size (the collage look depends on
+  // the varied natural widths, like the original's masonry image sizes).
+  .nb-supernova-item__media[class] {
+    width: auto;
+    max-width: 100%;
   }
 
   .nb-card__description {
@@ -164,24 +174,28 @@ $g: var(--collage-g, 24px);
 // edge; text right-aligned with 1g leading padding.
 #{$collage-scope} {
 
+  // Patch uses FLOATS here — the text wraps beside the image and continues
+  // BELOW it at full card width. The card must leave flex for floats to
+  // work; the content wrapper must not become a BFC (overflow is already
+  // visible in this scope).
   .nb-supernova-item.nb-card--media-portrait,
   .nb-supernova-item.nb-card--media-tall {
-    display: grid !important;
-    grid-template-columns: minmax(0, 55%) minmax(0, 1fr);
-    column-gap: #{$g};
-    align-items: start;
+    display: block !important;
     margin-left: #{$g};
     margin-right: 0;
 
+    // Measured on the demo: portrait media runs ~50% of the card, tall
+    // ~41%, hanging 2g out on the left, with 12px of air to the text on
+    // the side and below (for the wrap-under).
     .nb-supernova-item__media-wrapper {
-      grid-column: 1;
-      grid-row: 1;
+      float: left;
+      width: 50%;
       margin-left: calc(-2 * #{$g});
+      margin-right: 12px;
+      margin-bottom: 12px;
     }
 
     .nb-supernova-item__content {
-      grid-column: 2;
-      grid-row: 1;
       padding-right: calc(0.5 * #{$g});
     }
 
@@ -204,39 +218,38 @@ $g: var(--collage-g, 24px);
     }
   }
 
-  .nb-supernova-item.nb-card--media-tall {
-    grid-template-columns: minmax(0, 45%) minmax(0, 1fr);
+  .nb-supernova-item.nb-card--media-tall .nb-supernova-item__media-wrapper {
+    width: 41%;
   }
 
-  // Mirrored variant on even columns: image right, text right-aligned.
+  // Mirrored variant on even columns: image floats right (its right edge
+  // landing exactly on the item edge), text right-aligned.
   .nb-collection__layout-item--col-even {
 
     .nb-supernova-item.nb-card--media-portrait,
     .nb-supernova-item.nb-card--media-tall {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 55%);
-      column-gap: #{$g};
       margin-left: calc(-1 * #{$g});
       margin-right: calc(2 * #{$g});
 
       .nb-supernova-item__media-wrapper {
-        grid-column: 2;
-        margin-left: 0;
-        // The image's right edge lands exactly on the item edge
-        // (2g past the card's right edge).
+        float: right;
+        margin-left: 12px;
         margin-right: calc(-2 * #{$g});
       }
 
       .nb-supernova-item__content {
-        grid-column: 1;
         text-align: right;
         padding-left: #{$g};
         padding-right: 0;
       }
     }
+  }
 
-    .nb-supernova-item.nb-card--media-tall {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 45%);
-    }
+  // Floated media renders with its natural edge alignment; images inside
+  // fill the float's width.
+  .nb-supernova-item.nb-card--media-portrait .nb-supernova-item__media,
+  .nb-supernova-item.nb-card--media-tall .nb-supernova-item__media {
+    width: 100%;
   }
 }
 
@@ -513,22 +526,15 @@ $g: var(--collage-g, 24px);
 
   .nb-supernova-item.nb-card--media-portrait,
   .nb-supernova-item.nb-card--media-tall {
-    display: grid !important;
-    grid-template-columns: minmax(0, 55%) minmax(0, 1fr);
-    column-gap: #{$g};
-    align-items: start;
+    display: block !important;
     margin-left: #{$g};
     margin-right: 0;
 
     .nb-supernova-item__media-wrapper {
-      grid-column: 1;
-      grid-row: 1;
-    }
-
-    .nb-supernova-item__content {
-      grid-column: 2;
-      grid-row: 1;
-      padding-right: calc(0.5 * #{$g});
+      float: left;
+      width: 50%;
+      margin-right: 12px;
+      margin-bottom: 12px;
     }
 
     .nb-card__meta,
@@ -538,34 +544,29 @@ $g: var(--collage-g, 24px);
     }
   }
 
-  .nb-supernova-item.nb-card--media-tall {
-    grid-template-columns: minmax(0, 45%) minmax(0, 1fr);
+  .nb-supernova-item.nb-card--media-tall .nb-supernova-item__media-wrapper {
+    width: 41%;
   }
 
   .nb-collection__layout-column--col-even {
 
     .nb-supernova-item.nb-card--media-portrait,
     .nb-supernova-item.nb-card--media-tall {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 55%);
       margin-left: calc(-1 * #{$g});
       margin-right: calc(2 * #{$g});
 
       .nb-supernova-item__media-wrapper {
-        grid-column: 2;
+        float: right;
+        margin-left: 12px;
+        margin-right: 0;
       }
 
       .nb-supernova-item__content {
-        grid-column: 1;
         text-align: right;
-        padding-left: #{$g};
-        padding-right: 0;
       }
     }
-
-    .nb-supernova-item.nb-card--media-tall {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 45%);
-    }
   }
+
 
   .nb-supernova-item.nb-card--no-media .nb-card__title {
     display: block;
