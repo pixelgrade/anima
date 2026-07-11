@@ -23,9 +23,18 @@ $reveal-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94); // easeOutQuad
     }
   }
 
+  // Positioning context for the veil/Read More pseudos: must outrank the
+  // Original-ratio utility's later-loaded
+  // `body:not(.editor-styles-wrapper) … .nb-supernova-item__media-wrapper[class][class]
+  // { position: static }` (0,6,1) so they anchor to the IMAGE, not the card
+  // — hence the mirrored scope + extra [class]. Kept as its own rule so the
+  // nested pseudo rules below stay at beatable specificity for :hover.
+  body:not(.editor-styles-wrapper) #{$reveal-scope} .nb-supernova-item .nb-supernova-item__media-wrapper[class][class][class] {
+    position: relative;
+  }
+
   // --- MEDIA: grayscale + dark veil + centered "Read More" ---
   #{$reveal-scope} .nb-supernova-item .nb-supernova-item__media-wrapper {
-    position: relative;
 
     img,
     video {

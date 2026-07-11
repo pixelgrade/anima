@@ -1,42 +1,66 @@
 // Collection Collage Grid
 //
-// Inspired by the Patch theme's "algorithmic" masonry collage: equal-width
-// masonry bricks whose media deliberately bleeds into neighboring columns,
-// with per-column layering, mirrored side-by-side cards for portrait media,
-// a ragged top edge, and a staggered card reveal.
+// A faithful port of the Patch theme's masonry collage: equal-width bricks
+// with NO grid gap — all spacing lives in per-element offsets measured in
+// gutter units (the `cards-spacing` algebra from Patch's _card.scss, verified
+// empirically against demos.pixelgrade.com/patch — see the plugin repo's
+// .ai/patch-lt/demo-element-alignment.md inventory).
+//
+// The core rhythm: every TEXT element (meta, title, excerpt) sits on a +1g
+// line inside the column; images break outward from it (landscape −1g into
+// the left gutter, wide out to the item edge, square ON the line, portrait
+// floats hanging −1g, mirrored on even columns).
 //
 // Activation (two gates, both required):
 //   1. Body class `u-collection-collage` — Style Manager Tweak Board toggle
 //      `sm_collection_collage_grid` (off by default, per-starter opt-in).
-//   2. Collection classes `.nb-supernova--layout-masonry.nb-supernova--aspect-ratio-original`
-//      — Masonry composition with Original items aspect ratio.
+//   2. Collection classes `.nb-supernova--layout-masonry.nb-supernova--aspect-ratio-original`.
 //
-// Building blocks provided by Nova Blocks:
-//   - Card expression classes: `nb-card--media-{tall|portrait|square|landscape|wide}`,
-//     `nb-card--no-media`, `nb-card--title-{short|medium|long}`.
-//   - Masonry column classes on layout items:
-//     `nb-collection__layout-item--col-{i}` / `--col-even` / `--col-odd`
-//     (editor mirror: `nb-collection__layout-column--col-*`).
-//   - `nb:masonry-layout` relayout events (engine re-measures on size changes).
+// The collection should run with gridGap 0 and columnsFitMinWidth ≈ 420 so
+// the item pitch matches Patch's 420px columns.
+//
+// Building blocks provided by Nova Blocks: card expression classes
+// (nb-card--media-*, nb-card--no-media), masonry column parity classes
+// (--col-even/--col-odd), the leading-items filter (header brick), and the
+// nb:masonry-layout relayout events.
 
 $collage-scope: '.u-collection-collage .nb-supernova--layout-masonry.nb-supernova--aspect-ratio-original';
 $collage-editor-scope: '.editor-styles-wrapper .nb-supernova--layout-masonry.nb-supernova--aspect-ratio-original';
-$collage-gutter: var(--nb-grid-spacing, 24px);
+$g: var(--collage-g, 24px);
 
 // ==========================================================================
-// GRID CANVAS — breathing room so media bleeds land in padding, not on the
-// viewport edge / site frame (Patch: 24px sides, 60px on large screens).
+// GRID CANVAS — gutter variable, full-bleed, side padding, overflow
 // ==========================================================================
 #{$collage-scope} {
+  --collage-g: 24px;
+
   box-sizing: border-box;
-  // Full-bleed regardless of ancestor width constraints (query/group/content
-  // column) so the collage always spans the viewport, Patch-style.
+  // Full-bleed regardless of ancestor width constraints; Patch adds one
+  // extra transparent gutter on the grid's left (border-left: 1g).
   width: 100vw;
   max-width: none;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  padding-left: clamp(24px, 4vw, 60px);
+  padding-left: calc(clamp(24px, 4vw, 60px) + #{$g});
   padding-right: clamp(24px, 4vw, 60px);
+
+  @media (min-width: 1450px) {
+    --collage-g: 30px;
+  }
+
+  // The whole collage concept depends on elements stepping outside their
+  // brick — the plugin's overflow:hidden on items/content would clip every
+  // gutter bleed and the hover meta reveal.
+  .nb-collection__layout-item[class] {
+    overflow: visible;
+    // Vertical rhythm (Patch: 30px = 1.25g bottom margin per brick) — as
+    // padding so the masonry engine's height measurement includes it.
+    padding-bottom: calc(#{$g} * 1.25);
+  }
+
+  .nb-supernova-item__content[class] {
+    overflow: visible;
+  }
 }
 
 // The border site frame shrinks the viewport-wide bleed by the frame size
@@ -48,28 +72,90 @@ $collage-gutter: var(--nb-grid-spacing, 24px);
 }
 
 // ==========================================================================
+// THE OFFSET ALGEBRA — card boxes and the +1g text rhythm line
+// ==========================================================================
+#{$collage-scope} {
+
+  // GENERAL: the card bleeds 1g into the previous column and leaves 2g of
+  // air on its right. Item-relative: card spans −1g … −2g.
+  .nb-supernova-item {
+    margin-left: calc(-1 * #{$g});
+    margin-right: calc(2 * #{$g});
+  }
+
+  // Text rhythm: meta rows, titles and excerpts indent 2g from the card's
+  // left edge → +1g relative to the grid item.
+  .nb-card__meta,
+  .nb-card__title,
+  .nb-card__description {
+    margin-left: calc(2 * #{$g});
+  }
+
+  // LANDSCAPE media: flush with the card → bleeds 1g into the left gutter,
+  // ends 2g short of the item's right edge. (No rule needed — card box.)
+
+  // WIDE media: bleeds on BOTH sides — 1g left (card edge) and out to the
+  // item's right edge.
+  .nb-supernova-item.nb-card--media-wide .nb-supernova-item__media-wrapper {
+    margin-right: calc(-2 * #{$g});
+  }
+
+  // SQUARE: a narrower card (3g of right air) whose media sits ON the text
+  // rhythm line — no bleed at all.
+  .nb-supernova-item.nb-card--media-square {
+    margin-right: calc(3 * #{$g});
+
+    .nb-supernova-item__media-wrapper {
+      margin-left: calc(2 * #{$g});
+    }
+  }
+
+  // Soft shadow only on media that bleeds over neighboring columns, echoing
+  // Patch's overlap shadows without its synthetic shadow rectangles.
+  .nb-supernova-item.nb-card--media-portrait,
+  .nb-supernova-item.nb-card--media-tall,
+  .nb-supernova-item.nb-card--media-wide {
+    .nb-supernova-item__media {
+      filter: drop-shadow(0 0 25px rgba(0, 0, 0, 0.35));
+    }
+  }
+}
+
+// ==========================================================================
 // SIDE-BY-SIDE CARDS for portrait/tall media (the signature Patch move)
 // ==========================================================================
-// Default: image LEFT (hanging one gutter out of the card), text beside it.
-// Even columns (0-based: 1st, 3rd, ...) mirror: image RIGHT, text right-aligned.
+// Default (odd columns): card sits +1g … 0; the image hangs 2g out of the
+// card (−1g item-relative) at 55%/45% width; text at the card edge (+1g).
+// Even columns mirror: card −1g … 2g; image's right edge lands on the item
+// edge; text right-aligned with 1g leading padding.
 #{$collage-scope} {
 
   .nb-supernova-item.nb-card--media-portrait,
   .nb-supernova-item.nb-card--media-tall {
     display: grid !important;
     grid-template-columns: minmax(0, 55%) minmax(0, 1fr);
-    column-gap: $collage-gutter;
     align-items: start;
+    margin-left: #{$g};
+    margin-right: 0;
 
     .nb-supernova-item__media-wrapper {
       grid-column: 1;
       grid-row: 1;
-      margin-left: calc(-1 * #{$collage-gutter});
+      margin-left: calc(-2 * #{$g});
     }
 
     .nb-supernova-item__content {
       grid-column: 2;
       grid-row: 1;
+      padding-right: calc(0.5 * #{$g});
+    }
+
+    // Portrait/tall text sits at the card edge (the card already starts
+    // on the rhythm line) — undo the general 2g indents.
+    .nb-card__meta,
+    .nb-card__title,
+    .nb-card__description {
+      margin-left: 0;
     }
   }
 
@@ -83,38 +169,27 @@ $collage-gutter: var(--nb-grid-spacing, 24px);
     .nb-supernova-item.nb-card--media-portrait,
     .nb-supernova-item.nb-card--media-tall {
       grid-template-columns: minmax(0, 1fr) minmax(0, 55%);
+      margin-left: calc(-1 * #{$g});
+      margin-right: calc(2 * #{$g});
 
       .nb-supernova-item__media-wrapper {
         grid-column: 2;
         margin-left: 0;
-        margin-right: calc(-1 * #{$collage-gutter});
+        // The image's right edge lands exactly on the item edge
+        // (2g past the card's right edge).
+        margin-right: calc(-2 * #{$g});
       }
 
       .nb-supernova-item__content {
         grid-column: 1;
         text-align: right;
+        padding-left: #{$g};
+        padding-right: 0;
       }
     }
 
     .nb-supernova-item.nb-card--media-tall {
       grid-template-columns: minmax(0, 1fr) minmax(0, 45%);
-    }
-  }
-
-  // Wide media bleeds into the next column.
-  .nb-supernova-item.nb-card--media-wide {
-    .nb-supernova-item__media-wrapper {
-      margin-right: calc(-2 * #{$collage-gutter});
-    }
-  }
-
-  // Soft shadow only on media that bleeds over neighboring cards, echoing
-  // Patch's overlap shadows without its synthetic shadow rectangles.
-  .nb-supernova-item.nb-card--media-portrait,
-  .nb-supernova-item.nb-card--media-tall,
-  .nb-supernova-item.nb-card--media-wide {
-    .nb-supernova-item__media {
-      filter: drop-shadow(0 0 25px rgba(0, 0, 0, 0.35));
     }
   }
 }
@@ -147,15 +222,16 @@ $collage-gutter: var(--nb-grid-spacing, 24px);
 }
 
 // ==========================================================================
-// TEXT CARDS — title on a solid dark block
+// TEXT CARDS — the title slab spans the full card, its text on the rhythm
 // ==========================================================================
 #{$collage-scope} {
 
   .nb-supernova-item.nb-card--no-media {
 
     .nb-card__title {
-      display: inline-block;
-      padding: 20px;
+      display: block;
+      margin-left: 0;
+      padding: 20px 20px 20px calc(2 * #{$g});
       background-color: var(--sm-current-fg1-color, #161a03);
       color: var(--sm-current-bg-color, #fff);
 
@@ -176,7 +252,41 @@ $collage-gutter: var(--nb-grid-spacing, 24px);
 }
 
 // ==========================================================================
-// HEADER BRICK — site branding + primary menu packed as the first brick
+// QUOTE SLABS — full-card slab, content on the rhythm, accent voice
+// ==========================================================================
+#{$collage-scope} {
+
+  .nb-supernova-item.format-quote {
+
+    .nb-supernova-item__content .nb-supernova-item__inner-container {
+      padding-left: calc(2 * #{$g});
+    }
+
+    blockquote {
+      font-family: var(--theme-accent-font-family, inherit);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+
+      p {
+        font-size: 1.4em;
+        line-height: 1.4;
+      }
+
+      cite {
+        display: block;
+        margin-top: 1em;
+        font-size: 0.75em;
+        font-style: normal;
+        letter-spacing: 0.1em;
+        opacity: 0.85;
+      }
+    }
+  }
+}
+
+// ==========================================================================
+// HEADER BRICK — branding + menu on the rhythm line, 4g of right air
 // (rendered by anima_collection_header_brick_markup when Collage Grid is on)
 // ==========================================================================
 #{$collage-scope} {
@@ -187,6 +297,8 @@ $collage-gutter: var(--nb-grid-spacing, 24px);
     .c-header-brick {
       padding-top: 1.5em;
       padding-bottom: 1em;
+      margin-left: #{$g};
+      margin-right: calc(4 * #{$g});
     }
 
     .c-header-brick__branding {
@@ -214,7 +326,7 @@ $collage-gutter: var(--nb-grid-spacing, 24px);
       margin: 0;
       padding: 0;
       columns: 2;
-      column-gap: #{$collage-gutter};
+      column-gap: #{$g};
 
       li {
         break-inside: avoid;
@@ -244,7 +356,7 @@ $collage-gutter: var(--nb-grid-spacing, 24px);
 }
 
 // ==========================================================================
-// ARCHIVE TITLE BRICK — the page title packed as a grid brick on archives
+// ARCHIVE TITLE BRICK — the page title on the rhythm line
 // ==========================================================================
 #{$collage-scope} {
 
@@ -253,17 +365,13 @@ $collage-gutter: var(--nb-grid-spacing, 24px);
 
     .c-archive-title-brick {
       padding: 1em 0;
+      margin-left: #{$g};
     }
 
     .c-archive-title-brick__title {
       margin: 0;
       font-size: clamp(26px, 2.4vw, 36px);
       line-height: 1.25;
-
-      // The taxonomy name prefix WP adds ("Category:") reads quieter.
-      &::first-line {
-        letter-spacing: 0.04em;
-      }
     }
   }
 }
@@ -290,46 +398,16 @@ $collage-gutter: var(--nb-grid-spacing, 24px);
 }
 
 // ==========================================================================
-// QUOTE SLAB TYPE — quotes speak in the accent voice (Oswald uppercase)
-// ==========================================================================
-#{$collage-scope} {
-
-  .nb-supernova-item.format-quote {
-
-    blockquote {
-      font-family: var(--theme-accent-font-family, inherit);
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-
-      p {
-        font-size: 1.4em;
-        line-height: 1.4;
-      }
-
-      cite {
-        display: block;
-        margin-top: 1em;
-        font-size: 0.75em;
-        font-style: normal;
-        letter-spacing: 0.1em;
-        opacity: 0.85;
-      }
-    }
-  }
-}
-
-// ==========================================================================
 // STAGGERED REVEAL — cards cascade in once the masonry has laid out
 // ==========================================================================
 // Only animates when the engine adds `nb-collection__layout--masonry-ready`,
-// so no-JS visitors always see the cards.
+// so no-JS visitors always see the cards. `.is-revealed` is stamped by the
+// Load More runtime on already-visible cards so appended batches animate
+// without replaying the whole grid.
 @media (prefers-reduced-motion: no-preference) {
 
   #{$collage-scope} {
 
-    // `.is-revealed` is stamped by the Load More runtime on already-visible
-    // cards so appended batches animate without replaying the whole grid.
     .nb-collection__layout--masonry-ready .nb-collection__layout-item:not(.is-revealed) {
       animation: anima-collage-reveal 0.3s ease-in-out backwards;
     }
@@ -356,9 +434,12 @@ $collage-gutter: var(--nb-grid-spacing, 24px);
 // EDITOR — approximate the collage inside the block editor
 // ==========================================================================
 // The editor's masonry preview stacks cards inside column wrappers
-// (`.nb-collection__layout-column--col-*`); mirror the side-by-side and
-// text-card treatments so authors see the collage character while editing.
+// (`.nb-collection__layout-column--col-*`); mirror the rhythm, the
+// side-by-side treatments, and the slabs so authors see the collage
+// character while editing.
 #{$collage-editor-scope} {
+  --collage-g: 24px;
+
   // Mirror the frontend's full-bleed so the editor canvas shows the real
   // column count instead of a single content-width column.
   box-sizing: border-box;
@@ -366,15 +447,27 @@ $collage-gutter: var(--nb-grid-spacing, 24px);
   max-width: none;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  padding-left: clamp(24px, 4vw, 60px);
+  padding-left: calc(clamp(24px, 4vw, 60px) + #{$g});
   padding-right: clamp(24px, 4vw, 60px);
+
+  .nb-supernova-item {
+    margin-left: calc(-1 * #{$g});
+    margin-right: calc(2 * #{$g});
+  }
+
+  .nb-card__meta,
+  .nb-card__title,
+  .nb-card__description {
+    margin-left: calc(2 * #{$g});
+  }
 
   .nb-supernova-item.nb-card--media-portrait,
   .nb-supernova-item.nb-card--media-tall {
     display: grid !important;
     grid-template-columns: minmax(0, 55%) minmax(0, 1fr);
-    column-gap: $collage-gutter;
     align-items: start;
+    margin-left: #{$g};
+    margin-right: 0;
 
     .nb-supernova-item__media-wrapper {
       grid-column: 1;
@@ -384,6 +477,13 @@ $collage-gutter: var(--nb-grid-spacing, 24px);
     .nb-supernova-item__content {
       grid-column: 2;
       grid-row: 1;
+      padding-right: calc(0.5 * #{$g});
+    }
+
+    .nb-card__meta,
+    .nb-card__title,
+    .nb-card__description {
+      margin-left: 0;
     }
   }
 
@@ -396,6 +496,8 @@ $collage-gutter: var(--nb-grid-spacing, 24px);
     .nb-supernova-item.nb-card--media-portrait,
     .nb-supernova-item.nb-card--media-tall {
       grid-template-columns: minmax(0, 1fr) minmax(0, 55%);
+      margin-left: calc(-1 * #{$g});
+      margin-right: calc(2 * #{$g});
 
       .nb-supernova-item__media-wrapper {
         grid-column: 2;
@@ -404,6 +506,8 @@ $collage-gutter: var(--nb-grid-spacing, 24px);
       .nb-supernova-item__content {
         grid-column: 1;
         text-align: right;
+        padding-left: #{$g};
+        padding-right: 0;
       }
     }
 
@@ -413,8 +517,9 @@ $collage-gutter: var(--nb-grid-spacing, 24px);
   }
 
   .nb-supernova-item.nb-card--no-media .nb-card__title {
-    display: inline-block;
-    padding: 20px;
+    display: block;
+    margin-left: 0;
+    padding: 20px 20px 20px calc(2 * #{$g});
     background-color: var(--sm-current-fg1-color, #161a03);
     color: var(--sm-current-bg-color, #fff);
 
