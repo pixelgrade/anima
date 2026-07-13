@@ -11,6 +11,7 @@ import SearchOverlay from './search-overlay';
 import SiteFrame from './site-frame';
 import * as PileParallax from './pile-parallax';
 import IntroAnimations from './intro-animations';
+import CollectionHeaderIntegration from './collection-header-integration';
 
 export default class App {
 
@@ -26,6 +27,7 @@ export default class App {
     this.initializeReservationForm();
     this.initializeIntroAnimations();
     this.initializePileParallax();
+    this.collectionHeaderIntegration = new CollectionHeaderIntegration();
   }
 
   initializeImages() {

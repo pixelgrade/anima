@@ -10,16 +10,26 @@
 // Structure), which renders them in `.nb-supernova-item__content--before-media`.
 
 $reveal-scope: '.nb-supernova--card-hover-reveal';
-$reveal-duration: 0.3s;
-$reveal-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94); // easeOutQuad
+$accent-label-scope: '.nb-supernova--card-metadata-style-accent-label';
+$reveal-duration: var(--reveal-duration);
+$reveal-easing: var(--reveal-easing);
+
+#{$reveal-scope} {
+  --reveal-duration: var(--theme-transition-duration-fast);
+  --reveal-easing: #{$easeOutQuad};
+}
 
 @media (hover: hover) {
 
   #{$reveal-scope} .nb-supernova-item {
+    --anima-card-hover-y: 0px;
+
+    transform: translateY(var(--anima-card-hover-y));
     transition: transform $reveal-duration $reveal-easing;
 
-    &:hover {
-      transform: translateY(15px);
+    &:hover,
+    &:focus-within {
+      --anima-card-hover-y: calc(var(--theme-spacing-smallest) * 1.875);
     }
   }
 
@@ -38,41 +48,42 @@ $reveal-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94); // easeOutQuad
 
     img,
     video {
-      transition: filter $reveal-duration ease-in-out, opacity $reveal-duration ease-in-out;
+      transition: filter $reveal-duration #{$easeInOut}, opacity $reveal-duration #{$easeInOut};
     }
 
     &::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.35);
+      background: color-mix(in srgb, var(--sm-current-fg1-color) 35%, transparent);
       opacity: 0;
       z-index: 15;
       pointer-events: none;
-      transition: opacity $reveal-duration ease-in-out;
+      transition: opacity $reveal-duration #{$easeInOut};
     }
 
-    &::after {
-      content: 'Read More';
+    .nb-card__read-more {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: #fff;
-      font-family: var(--sm-font-accent, var(--theme-heading-1-font-family, inherit));
-      font-size: 26px;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      @include apply-font(button);
+      @include apply-font-properties;
+      --current-letter-spacing: calc(var(--theme-button-letter-spacing) * 0.5);
+
+      color: var(--sm-current-bg-color);
+      font-size: calc(var(--theme-button-font-size) * 1.857143 * 1px);
       white-space: nowrap;
       opacity: 0;
       z-index: 16;
       pointer-events: none;
-      transition: opacity $reveal-duration ease-in-out;
+      transition: opacity $reveal-duration #{$easeInOut};
     }
   }
 
-  #{$reveal-scope} .nb-supernova-item:hover .nb-supernova-item__media-wrapper {
+  #{$reveal-scope} .nb-supernova-item:hover .nb-supernova-item__media-wrapper,
+  #{$reveal-scope} .nb-supernova-item:focus-within .nb-supernova-item__media-wrapper,
+  #{$reveal-scope} .nb-supernova-item .nb-supernova-item__media-wrapper:focus-visible {
 
     img,
     video {
@@ -80,13 +91,16 @@ $reveal-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94); // easeOutQuad
     }
 
     &::before,
-    &::after {
+    .nb-card__read-more {
       opacity: 1;
     }
   }
 
   // --- META ROW: hidden behind the card, slides up from the top edge ---
   #{$reveal-scope} .nb-supernova-item .nb-supernova-item__content--before-media {
+    display: block;
+    height: auto;
+    min-height: 0;
     position: absolute;
     top: 0;
     left: 0;
@@ -98,9 +112,26 @@ $reveal-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94); // easeOutQuad
     pointer-events: none;
   }
 
-  #{$reveal-scope} .nb-supernova-item:hover .nb-supernova-item__content--before-media {
+  // Original-ratio stacked cards stretch every content layer from top to
+  // bottom. Let the reveal metadata keep its intrinsic one-row height.
+  body:not(.editor-styles-wrapper) #{$reveal-scope}.nb-supernova--aspect-ratio-original .nb-supernova-item--layout-stacked .nb-supernova-item__content--before-media[class] {
+    bottom: auto;
+
+    .nb-supernova-item__inner-container[class][class][class] {
+      height: auto;
+      padding: 0;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+  }
+
+  #{$reveal-scope} .nb-supernova-item:hover .nb-supernova-item__content--before-media,
+  #{$reveal-scope} .nb-supernova-item:focus-within .nb-supernova-item__content--before-media {
     opacity: 1;
-    transform: translateY(calc(-100% - 4px));
+    z-index: 1;
+    transform: translateY(calc(-100% - var(--theme-spacing-smallest) * 0.5));
     pointer-events: auto;
   }
 
@@ -110,8 +141,8 @@ $reveal-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94); // easeOutQuad
   }
 }
 
-// --- META ROW LOOK: accent category chip + quiet byline (all pointer modes) ---
-#{$reveal-scope} .nb-supernova-item .nb-supernova-item__content--before-media {
+// --- ACCENT LABEL: site default or collection override, independent of hover ---
+#{$accent-label-scope} {
 
   .nb-card__meta {
     display: flex;
@@ -125,14 +156,15 @@ $reveal-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94); // easeOutQuad
   .nb-card__meta-combined > span:first-child,
   .nb-card__meta--primary {
     display: inline-block;
-    padding: 5px 13px;
-    background-color: var(--anima-brand-source-color, var(--sm-current-accent-color, #ffeb00));
-    color: var(--sm-current-fg1-color, #161a03);
-    font-family: var(--theme-body-font-family, inherit);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    line-height: 1.8;
+    padding: calc(var(--theme-spacing-smallest) * 0.75) calc(var(--theme-spacing-smallest) * 1.75);
+    background-color: var(--sm-current-accent-color);
+    color: var(--sm-current-fg1-color);
+    font-family: var(--theme-body-font-family);
+    font-size: calc(var(--theme-small-body-font-size) * 0.785714 * 1px);
+    font-weight: var(--theme-meta-font-weight);
+    letter-spacing: calc(var(--theme-meta-letter-spacing) * 0);
+    line-height: calc(var(--theme-meta-line-height) * 0.978916);
+    text-transform: var(--theme-meta-text-transform);
 
     a {
       color: inherit;
@@ -140,9 +172,31 @@ $reveal-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94); // easeOutQuad
     }
   }
 
+  .nb-card__meta--secondary {
+    font-family: var(--theme-body-font-family);
+    font-size: calc(var(--theme-small-body-font-size) * 0.785714 * 1px);
+    font-weight: min(var(--theme-meta-font-weight), calc(var(--theme-body-font-weight) + 100));
+    line-height: calc(var(--theme-small-body-line-height) * 1.083333);
+    letter-spacing: var(--theme-body-letter-spacing);
+    text-transform: var(--theme-body-text-transform);
+  }
+
   // The byline reads quietly beside the chip; drop the decorative separator.
   .nb-card__meta-separator {
     display: none;
+  }
+}
+
+// Quote blueprints carry a dark color signal for the quote surface itself.
+// The metadata reveals outside that surface, so reconnect it to the page's
+// foreground role instead of inheriting white-on-dark card text.
+#{$reveal-scope} .nb-post-format-card-blueprint--quote .nb-supernova-item__content--before-media {
+  color: var(--sm-fg1-color-1);
+
+  .nb-card__meta,
+  .nb-card__meta a,
+  .nb-card__meta--primary {
+    color: inherit;
   }
 }
 

@@ -223,7 +223,7 @@ function anima_enqueue_theme_block_editor_assets() {
 	wp_enqueue_script(
 		'anima-editor-js',
 		trailingslashit( get_template_directory_uri() ) . 'dist/js/editor' . $suffix . '.js',
-		[ 'wp-hooks' ],
+		[ 'wp-hooks', 'wp-dom-ready' ],
 		$theme->get( 'Version' ),
 		true
 	);

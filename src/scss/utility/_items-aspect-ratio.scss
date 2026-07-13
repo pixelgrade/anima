@@ -74,6 +74,15 @@
       aspect-ratio: auto !important;
     }
 
+    // Kill the padding-top ratio spacer, like the frontend-only block below
+    // does. Without this the spacer AND the naturally flowing image stack up
+    // (spacer + image = almost double height), leaving big white bands on
+    // every card in the canvas. Non-stacked cards only: the editor's
+    // stacked-card grid still relies on its ratio box.
+    .nb-supernova-item:not(.nb-supernova-item--layout-stacked) .nb-supernova-item__media-aspect-ratio::before {
+      content: none;
+    }
+
     // Undo absolute positioning in the blob-mix chain so image height flows up.
     .nb-supernova-item__media-aspect-ratio[class] {
       min-height: auto;
