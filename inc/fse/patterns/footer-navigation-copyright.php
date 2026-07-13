@@ -7,7 +7,7 @@ return [
 	'categories' => [ 'footer' ],
 	'blockTypes' => [ 'core/template-part/footer' ],
 	'content'    => '<!-- wp:separator {"className":"is-style-blank"} -->
-					<div class="wp-block-separator alignnone is-style-blank" style="--nb-emphasis-top-spacing:0;--nb-emphasis-bottom-spacing:0;--nb-block-top-spacing:1;--nb-block-bottom-spacing:0;--nb-block-zindex:0;--nb-card-content-area-width:50%;--nb-card-content-padding-multiplier:0;--nb-card-media-padding-top:100%;--nb-card-media-object-fit:cover;--nb-card-media-padding-multiplier:0;--nb-card-layout-gap-modifier:0;--nb-minimum-container-height:0vh;--nb-spacing-modifier:1">
+					<div class="wp-block-separator break-align-left break-align-right is-style-blank sm-palette-1 sm-variation-12 sm-color-signal-3 alignnone" style="--nb-emphasis-top-spacing:0;--nb-emphasis-bottom-spacing:0;--nb-block-top-spacing:1;--nb-block-bottom-spacing:0;--nb-block-zindex:0;--nb-card-content-area-width:50%;--nb-card-media-container-height:50;--nb-card-content-padding-multiplier:0;--nb-card-media-padding-top:100%;--nb-card-media-object-fit:cover;--nb-card-media-padding-multiplier:0;--nb-card-layout-gap-modifier:0;--nb-minimum-container-height:0vh;--nb-spacing-modifier:1;--nb-spacing-multiplier-override:1;--nb-emphasis-area:100" data-palette="1" data-palette-variation="12" data-color-signal="3">
 							<div class="c-separator">
 									<div class="c-separator__arrow c-separator__arrow--left"></div>
 									<div class="c-separator__line c-separator__line--left"></div>
