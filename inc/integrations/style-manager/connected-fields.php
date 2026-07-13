@@ -53,6 +53,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 					'default' => 'System Sans-Serif Clear',
 					'connected_fields' => [
 						'body_font',
+						'small_body_font',
 						'lead_font',
 						'cite_font', // !!! Add font-control option
 						'input_font'
@@ -91,6 +92,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 								'sm_font_body'      => [
 									'navigation_font',
 									'body_font',
+									'small_body_font',
 									'cite_font',
 									'input_font',
 								],
@@ -124,6 +126,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 								],
 								'sm_font_body'      => [
 									'body_font',
+									'small_body_font',
 									'cite_font',
 								],
 								'sm_font_accent'    => [
@@ -153,6 +156,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 								],
 								'sm_font_body'      => [
 									'body_font',
+									'small_body_font',
 									'cite_font',
 									'input_font',
 								],
@@ -186,6 +190,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 								],
 								'sm_font_body'      => [
 									'body_font',
+									'small_body_font',
 									'lead_font',
 									'cite_font',
 									'input_font',
@@ -218,6 +223,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 								],
 								'sm_font_body'      => [
 									'body_font',
+									'small_body_font',
 									'lead_font',
 									'cite_font',
 									'input_font',
@@ -250,6 +256,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 									'meta_font',
 									'navigation_font',
 									'body_font',
+									'small_body_font',
 									'lead_font',
 									'cite_font',
 									'input_font',
@@ -280,6 +287,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 									'meta_font',
 									'navigation_font',
 									'body_font',
+									'small_body_font',
 									'lead_font',
 									'cite_font',
 									'input_font',
@@ -310,6 +318,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 									'meta_font',
 									'navigation_font',
 									'body_font',
+									'small_body_font',
 									'lead_font',
 									'cite_font',
 									'input_font',

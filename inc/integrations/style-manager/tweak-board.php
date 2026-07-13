@@ -7,7 +7,32 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 add_filter( 'style_manager/filter_fields', 'anima_add_tweak_board_section_to_style_manager_config', 65, 1 );
 add_filter( 'style_manager/sm_panel_config', 'anima_reorganize_tweak_board_customizer_controls', 25, 2 );
+add_filter( 'novablocks/card_metadata_style_default', 'anima_filter_card_metadata_style_default', 10, 2 );
 add_action( 'after_setup_theme', 'anima_maybe_invalidate_style_manager_tweak_board_cache', 20 );
+
+/**
+ * Retrieves the site-wide card metadata presentation style.
+ *
+ * @return string Valid card metadata style slug.
+ */
+function anima_get_card_metadata_style(): string {
+	$style = sanitize_key( (string) get_option( 'sm_card_metadata_style', 'plain' ) );
+
+	return in_array( $style, [ 'plain', 'accent-label' ], true ) ? $style : 'plain';
+}
+
+/**
+ * Supplies Anima's site-wide card metadata style to Nova collections.
+ *
+ * @param string $default_style Nova's default style.
+ * @param array  $attributes    Collection attributes.
+ * @return string Anima's configured style.
+ */
+function anima_filter_card_metadata_style_default( string $default_style, array $attributes ): string {
+	unset( $default_style, $attributes );
+
+	return anima_get_card_metadata_style();
+}
 
 /**
  * Add theme-specific Tweak Board controls to the shared Style Manager section config.
@@ -29,6 +54,18 @@ function anima_add_tweak_board_section_to_style_manager_config( $config ) {
 		$config['sections']['style_manager_section'],
 		[
 			'options' => [
+				'sm_card_metadata_style' => [
+					'type'         => 'sm_radio',
+					'setting_type' => 'option',
+					'setting_id'   => 'sm_card_metadata_style',
+					'label'        => esc_html__( 'Card metadata style', '__theme_txtd' ),
+					'desc'         => esc_html__( 'Choose the default presentation for metadata in Cards Collections. Individual collections can override it.', '__theme_txtd' ),
+					'default'      => 'plain',
+					'choices'      => [
+						'plain'        => esc_html__( 'Plain', '__theme_txtd' ),
+						'accent-label' => esc_html__( 'Accent Label', '__theme_txtd' ),
+					],
+				],
 				'sm_contextual_entry_colors_intro' => [
 					'type'         => 'html',
 					'setting_type' => 'option',
@@ -43,14 +80,6 @@ function anima_add_tweak_board_section_to_style_manager_config( $config ) {
 					'label'        => esc_html__( 'Enabled', '__theme_txtd' ),
 					'desc'         => '',
 					'default'      => true,
-				],
-				'sm_collection_collage_grid' => [
-					'type'         => 'sm_toggle',
-					'setting_type' => 'option',
-					'setting_id'   => 'sm_collection_collage_grid',
-					'label'        => esc_html__( 'Collage grid collections', '__theme_txtd' ),
-					'desc'         => esc_html__( 'A patchwork treatment for Masonry collections with Original aspect ratio: side-by-side portrait cards, media overlapping between columns, and a staggered reveal.', '__theme_txtd' ),
-					'default'      => false,
 				],
 			],
 		]
@@ -68,7 +97,7 @@ function anima_add_tweak_board_section_to_style_manager_config( $config ) {
  */
 function anima_reorganize_tweak_board_customizer_controls( $sm_panel_config, $sm_section_config ) {
 
-	if ( empty( $sm_panel_config['sections']['sm_tweak_board_section'] ) || empty( $sm_section_config['options']['sm_decorative_titles_style_intro'] ) || empty( $sm_section_config['options']['sm_contextual_entry_colors_intro'] ) || empty( $sm_section_config['options']['sm_contextual_entry_colors'] ) ) {
+	if ( empty( $sm_panel_config['sections']['sm_tweak_board_section'] ) || empty( $sm_section_config['options']['sm_decorative_titles_style_intro'] ) || empty( $sm_section_config['options']['sm_card_metadata_style'] ) || empty( $sm_section_config['options']['sm_contextual_entry_colors_intro'] ) || empty( $sm_section_config['options']['sm_contextual_entry_colors'] ) ) {
 		return $sm_panel_config;
 	}
 
@@ -78,7 +107,7 @@ function anima_reorganize_tweak_board_customizer_controls( $sm_panel_config, $sm
 	$ordered_option_ids = [
 		'sm_collection_title_position',
 		'sm_collection_hover_effect',
-		'sm_collection_collage_grid',
+		'sm_card_metadata_style',
 		'sm_decorative_titles_style_intro',
 		'sm_decorative_titles_style',
 		'sm_contextual_entry_colors_intro',
@@ -87,15 +116,12 @@ function anima_reorganize_tweak_board_customizer_controls( $sm_panel_config, $sm
 	$available_options = array_merge(
 		$existing_options,
 		[
+			'sm_card_metadata_style' => $sm_section_config['options']['sm_card_metadata_style'],
 			'sm_decorative_titles_style_intro' => $sm_section_config['options']['sm_decorative_titles_style_intro'],
 			'sm_contextual_entry_colors_intro' => $sm_section_config['options']['sm_contextual_entry_colors_intro'],
 			'sm_contextual_entry_colors' => $sm_section_config['options']['sm_contextual_entry_colors'],
 		]
 	);
-
-	if ( isset( $sm_section_config['options']['sm_collection_collage_grid'] ) ) {
-		$available_options['sm_collection_collage_grid'] = $sm_section_config['options']['sm_collection_collage_grid'];
-	}
 
 	if ( isset( $available_options['sm_collection_title_position'] ) ) {
 		$available_options['sm_collection_title_position']['label'] = esc_html__( 'Collection title position', '__theme_txtd' );
@@ -142,7 +168,7 @@ function anima_maybe_invalidate_style_manager_tweak_board_cache() {
 	// Bump this token whenever the Tweak Board controls, copy, or order added in
 	// this file change, so the cached Style Manager config is rebuilt once to
 	// pick up the new definition.
-	$config_version = '2026-07-10-collage-grid';
+	$config_version = '2026-07-12-card-metadata-style';
 
 	if ( get_option( 'anima_tweak_board_config_version' ) === $config_version ) {
 		return;
