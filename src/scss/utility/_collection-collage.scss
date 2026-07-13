@@ -72,7 +72,7 @@ $g: var(--collage-g, var(--nb-grid-spacing));
 // weight, tracking, transform, and line-height. The regular title weight sits
 // halfway between the palette heading and body voices; strong and light tiers
 // remain relative to that resolved value instead of assuming 300/400/700 exist.
-@mixin collage-card-type-system($editor: false) {
+@mixin collage-card-type-system {
   --collage-title-weight: clamp(400, calc((var(--theme-heading-2-font-weight) + var(--theme-body-font-weight)) / 2 + 100), 700);
   --collage-title-strong-weight: min(900, var(--collage-title-weight) + 300);
   --collage-title-light-weight: min(var(--collage-title-weight), var(--theme-body-font-weight));
@@ -172,8 +172,73 @@ $g: var(--collage-g, var(--nb-grid-spacing));
   @include collage-card-type-system;
 }
 
+// Gutenberg's editor typography rules carry an extra wrapper selector. Repeat
+// only the token-driven type system at matching specificity; layout and
+// placement remain shared with the frontend's flat masonry DOM.
 #{$collage-editor-scope} {
-  @include collage-card-type-system(true);
+  // Style Manager restores this multiplier to 1 on the frontend, while the
+  // wp.org editor baseline remains 0.9375. Match the frontend inside this
+  // measured Collage without changing unrelated editor content or the Header.
+  --font-size-base: 1;
+
+  @include collage-card-type-system;
+
+  // The higher-specificity editor copy above would otherwise make these raw
+  // authored sizes win. Feed them back through Anima's fluid type equation,
+  // exactly as the lower-specificity frontend copy is resolved.
+  .nb-card__title {
+    font-size: var(--current-font-size);
+  }
+
+  .nb-supernova-item.format-quote blockquote {
+    p,
+    cite {
+      font-size: var(--current-font-size);
+    }
+  }
+
+  // Quote previews are generated, read-only cards. Let their after-media copy
+  // participate in the frame's grid sizing, so a long quote grows the signal
+  // surface instead of escaping past it.
+  // Match Nova's phantom-ID specificity used by its editor safety layout.
+  :is(.nb-post-format-card-blueprint--quote, #specific) .nb-supernova-item__frame {
+    overflow: visible;
+
+    > .nb-supernova-item__content--after-media[class] {
+      position: relative !important;
+      inset: auto;
+      min-height: var(--nb-block-content-min-height) !important;
+    }
+  }
+
+  @media (hover: hover) {
+    &.nb-supernova--card-hover-reveal {
+      // PostCard combines metadata and after-media copy when there is no
+      // rendered media. Keep that editor-only DOM from adding a row the
+      // frontend's split before-media layer positions outside card flow.
+      .nb-supernova-item__content:not(.nb-supernova-item__content--before-media):not(.nb-supernova-item__content--after-media) .nb-card__meta {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        opacity: 0;
+        z-index: -1;
+        transform: translateY(0);
+        pointer-events: none;
+        transition: transform var(--reveal-duration) var(--reveal-easing), opacity var(--reveal-duration) var(--reveal-easing);
+      }
+
+      .nb-supernova-item:hover,
+      .nb-supernova-item:focus-within {
+        .nb-supernova-item__content:not(.nb-supernova-item__content--before-media):not(.nb-supernova-item__content--after-media) .nb-card__meta {
+          opacity: 1;
+          z-index: 1;
+          transform: translateY(calc(-100% - var(--theme-spacing-smallest) * 0.5));
+          pointer-events: auto;
+        }
+      }
+    }
+  }
 }
 
 // The collage grid must span the whole content band. Unlock the query
@@ -473,6 +538,30 @@ $g: var(--collage-g, var(--nb-grid-spacing));
 // ==========================================================================
 // QUOTE SLABS — full-card slab, content on the rhythm, accent voice
 // ==========================================================================
+// Original-ratio cards normally size from their media and absolutely cover
+// that surface with content. Quote blueprints can need more room than their
+// landscape media at narrow widths, so keep the media-led minimum while
+// allowing the intrinsic quote height to grow the shared grid track.
+body:not(.editor-styles-wrapper) #{$collage-scope}.nb-supernova--aspect-ratio-original {
+	.nb-post-format-card-blueprint--quote .nb-supernova-item__content--after-media[class] {
+		position: relative;
+		inset: auto;
+	}
+
+	.nb-post-format-card-blueprint--quote .nb-supernova-item__media-wrapper {
+		margin-bottom: 0;
+	}
+
+	.nb-post-format-card-blueprint--quote :is(.nb-supernova-item__media-aspect-ratio, .nb-supernova-item__media-doppler, .novablocks-doppler__wrapper, .blob-mix, .blob-mix__media, .blob-mix__mask) {
+		height: 100% !important;
+	}
+
+	.nb-post-format-card-blueprint--quote .nb-supernova-item__media[class][class] {
+		height: 100% !important;
+		object-fit: var(--nb-card-media-object-fit, cover);
+	}
+}
+
 #{$collage-scope} {
 
   // A format blueprint adds a structural Supernova wrapper around the real
@@ -553,102 +642,6 @@ $g: var(--collage-g, var(--nb-grid-spacing));
 
   to {
     opacity: 1;
-  }
-}
-
-// ==========================================================================
-// EDITOR — approximate the collage inside the block editor
-// ==========================================================================
-// The editor's masonry preview stacks cards inside column wrappers
-// (`.nb-collection__layout-column--col-*`); mirror the rhythm, the
-// side-by-side treatments, and the slabs so authors see the collage
-// character while editing.
-#{$collage-editor-scope} {
-  --collage-g: calc(
-    var(--nb-spacing) *
-    var(--nb-grid-spacing-modifier) *
-    var(--nb-grid-spacing-multiplier, 1) *
-    .02
-  );
-
-  // Mirror the frontend's full-bleed so the editor canvas shows the real
-  // column count instead of a single content-width column.
-  box-sizing: border-box;
-  // Mirror the frontend Site Container cap and center it in the editor canvas.
-  width: min(100%, var(--nb-container-width), 1850px);
-  max-width: none;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: calc(var(--collage-side-inset) + 3 * #{$g});
-  padding-right: var(--collage-side-inset);
-
-  .nb-supernova-item {
-    margin-left: calc(-1 * #{$g});
-    margin-right: calc(2 * #{$g});
-  }
-
-  .nb-card__meta,
-  .nb-card__title,
-  .nb-card__description {
-    margin-left: calc(2 * #{$g});
-  }
-
-  .nb-supernova-item.nb-card--media-portrait,
-  .nb-supernova-item.nb-card--media-tall {
-    display: block !important;
-    margin-left: #{$g};
-    margin-right: 0;
-
-    .nb-supernova-item__media-wrapper {
-      float: left;
-      width: 55%;
-      margin-right: calc(var(--theme-spacing-smallest) * 1.5);
-      margin-bottom: calc(var(--theme-spacing-smallest) * 1.5);
-    }
-
-    .nb-card__meta,
-    .nb-card__title,
-    .nb-card__description {
-      margin-left: 0;
-    }
-  }
-
-  .nb-supernova-item.nb-card--media-tall .nb-supernova-item__media-wrapper {
-    width: 45%;
-  }
-
-  .nb-collection__layout-column--col-even {
-
-    .nb-supernova-item.nb-card--media-portrait,
-    .nb-supernova-item.nb-card--media-tall {
-      margin-left: calc(-1 * #{$g});
-      margin-right: calc(2 * #{$g});
-
-      .nb-supernova-item__media-wrapper {
-        float: right;
-        margin-left: calc(var(--theme-spacing-smallest) * 1.5);
-        margin-right: calc(-2 * #{$g});
-      }
-
-      .nb-supernova-item__content {
-        text-align: right;
-        padding-left: #{$g};
-        padding-right: 0;
-      }
-    }
-  }
-
-
-  .nb-supernova-item.nb-card--no-media.format-standard .nb-card__title {
-    display: block;
-    margin-left: 0;
-    padding: calc(var(--theme-spacing-smallest) * 2.5) calc(var(--theme-spacing-smallest) * 2.5) calc(var(--theme-spacing-smallest) * 2.5) calc(2 * #{$g});
-    background-color: var(--sm-current-fg1-color);
-    color: var(--sm-current-bg-color);
-
-    a {
-      color: inherit;
-    }
   }
 }
 

@@ -11,6 +11,7 @@
 
 $reveal-scope: '.nb-supernova--card-hover-reveal';
 $accent-label-scope: '.nb-supernova--card-metadata-style-accent-label';
+$accent-label-collage-scope: '#{$accent-label-scope}.nb-supernova--layout-recipe-anima-collage.nb-supernova--layout-masonry';
 $reveal-duration: var(--reveal-duration);
 $reveal-easing: var(--reveal-easing);
 
@@ -184,6 +185,30 @@ $reveal-easing: var(--reveal-easing);
   // The byline reads quietly beside the chip; drop the decorative separator.
   .nb-card__meta-separator {
     display: none;
+  }
+}
+
+// Collage rows keep each semantic metadata group intact. When the category and
+// byline no longer fit side by side, the byline moves as a unit; at very narrow
+// widths it may wrap internally, but the linked date remains indivisible.
+#{$accent-label-collage-scope} {
+  .nb-card__meta {
+    flex-wrap: wrap;
+  }
+
+  .nb-card__meta-combined > span:first-child,
+  .nb-card__meta--primary {
+    flex: 0 0 auto;
+  }
+
+  .nb-card__meta--secondary {
+    flex: 0 0 max-content;
+    max-width: 100%;
+  }
+
+  .nb-card__meta-link--date {
+    display: inline-block;
+    white-space: nowrap;
   }
 }
 

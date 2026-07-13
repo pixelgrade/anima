@@ -110,6 +110,10 @@
   margin-right: 0 !important;
   margin-left: 0 !important;
 
+  // Style Manager restores this multiplier on the frontend. The editor's
+  // wp.org fallback is intentionally smaller, so normalize only this Header
+  // preview before measuring it as a masonry participant.
+  --font-size-base: 1;
   --header-background-opacity: 0;
 
   &[class][class] {
@@ -167,11 +171,34 @@
     text-transform: var(--theme-navigation-text-transform);
   }
 
+  // Core Navigation is the editor projection of the classic menu rendered on
+  // the frontend. Preserve Anima's hover-line margin in that projection so
+  // wrapped rows consume the same vertical rhythm.
+  .nb-navigation--primary .wp-block-navigation__container > .wp-block-navigation-item > .wp-block-navigation-item__content {
+    --nb-navigation-item-bottom-margin: .5em;
+
+    padding-bottom: max(0px, calc(var(--nb-navigation-item-padding-y) - var(--nb-navigation-item-bottom-margin)));
+    margin-bottom: var(--nb-navigation-item-bottom-margin);
+  }
+
   .nb-header-row--tertiary {
     margin-top: var(--theme-spacing-small);
   }
 
   .nb-navigation--tertiary :is(ul.menu, .menu > ul, .wp-block-navigation__container) {
     gap: calc(var(--theme-spacing-smallest) * 2.5);
+  }
+
+  // Gutenberg cannot project social hrefs while editing the Navigation block,
+  // so it shows labels instead of Anima's frontend icon glyphs. Keep those
+  // labels editable while sizing their row from the same icon tokens.
+  .nb-navigation--tertiary .wp-block-navigation__container > .wp-block-navigation-item > .wp-block-navigation-item__content {
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: calc(var(--icons-size-multiplier) * var(--current-font-size));
+
+    > .wp-block-navigation-item__label {
+      line-height: inherit;
+    }
   }
 }

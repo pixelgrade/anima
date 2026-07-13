@@ -70,3 +70,23 @@ test('Patch Header styling is desktop-only and consumes Anima design tokens', ()
   assert.doesNotMatch(source, /display:\s*block/, 'row stacking/left alignment is a Header Row attribute (contentAlignment)');
   assert.doesNotMatch(source, /justify-content:\s*flex-start/, 'left alignment is a Header Row attribute (contentAlignment)');
 } );
+
+test('Patch Header projects classic menu density into the Site Editor', () => {
+  const source = fs.readFileSync(stylePath, 'utf8');
+
+  assert.match(
+    source,
+    /\.editor-styles-wrapper\s+\.is-style-anima-patch-header\s*\{[\s\S]*?--font-size-base:\s*1;/,
+    'the editor Header resolves the same Style Manager type base as the frontend'
+  );
+  assert.match(
+    source,
+    /\.nb-navigation--primary[\s\S]*?\.wp-block-navigation__container\s*>\s*\.wp-block-navigation-item\s*>\s*\.wp-block-navigation-item__content\s*\{[\s\S]*?--nb-navigation-item-bottom-margin:\s*\.5em;[\s\S]*?padding-bottom:\s*max\(0px,\s*calc\(var\(--nb-navigation-item-padding-y\)\s*-\s*var\(--nb-navigation-item-bottom-margin\)\)\);[\s\S]*?margin-bottom:\s*var\(--nb-navigation-item-bottom-margin\);/,
+    'primary links keep the classic Anima hover-line breathing room'
+  );
+  assert.match(
+    source,
+    /\.nb-navigation--tertiary[\s\S]*?\.wp-block-navigation__container\s*>\s*\.wp-block-navigation-item\s*>\s*\.wp-block-navigation-item__content\s*\{[\s\S]*?padding-top:\s*0;[\s\S]*?padding-bottom:\s*0;[\s\S]*?line-height:\s*calc\(var\(--icons-size-multiplier\)\s*\*\s*var\(--current-font-size\)\);[\s\S]*?>\s*\.wp-block-navigation-item__label\s*\{[^}]*line-height:\s*inherit;/,
+    'tertiary labels occupy the same rhythm as frontend social icons'
+  );
+} );

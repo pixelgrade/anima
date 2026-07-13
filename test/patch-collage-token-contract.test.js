@@ -14,8 +14,12 @@ function compileUtilityCss() {
   return css.replace(/\s+/g, ' ');
 }
 
-test('Patch collage title tiers derive from the heading palette in frontend and editor', () => {
+test('Patch collage title tiers derive from the heading palette with editor cascade specificity', () => {
   const css = compileUtilityCss();
+  const source = fs.readFileSync(
+    path.join(__dirname, '..', 'src', 'scss', 'utility', '_collection-collage.scss'),
+    'utf8'
+  );
 
   assert.match(
     css,
@@ -41,10 +45,6 @@ test('Patch excerpts and meta use connected body and meta palette roles', () => 
     path.join(__dirname, '..', 'src', 'scss', 'utility', '_collection-hover-reveal.scss'),
     'utf8'
   );
-  const editorSource = collageSource.slice(
-    collageSource.indexOf('// EDITOR'),
-    collageSource.indexOf('// MOBILE')
-  );
 
   assert.match(css, /\.nb-card__description[^}]*\{[^}]*--current-font-family: var\(--theme-small-body-font-family\);/);
   assert.match(css, /\.nb-card__description[^}]*\{[^}]*--font-size: var\(--theme-small-body-font-size\);/);
@@ -56,10 +56,8 @@ test('Patch excerpts and meta use connected body and meta palette roles', () => 
   assert.match(revealSource, /\$accent-label-scope: '\.nb-supernova--card-metadata-style-accent-label';/);
   assert.match(revealSource, /#\{\$accent-label-scope\}\s*\{[\s\S]*?\.nb-card__meta--secondary\s*\{[^}]*font-family: var\(--theme-body-font-family\);[^}]*font-size: calc\(var\(--theme-small-body-font-size\) \* 0\.785714 \* 1px\);/);
   assert.match(css, /\.nb-supernova--card-metadata-style-accent-label \.nb-card__meta--secondary[^}]*\{[^}]*font-size: calc\(var\(--theme-small-body-font-size\) \* 0\.785714 \* 1px\);/);
-  assert.match(css, /\.editor-styles-wrapper [^{]*\.nb-supernova-item\.nb-card--no-media\.format-standard/);
-  assert.match(css, /\.editor-styles-wrapper [^{]*\.nb-supernova-item\.format-quote blockquote/);
-  assert.match(editorSource, /\.nb-supernova-item\.nb-card--no-media\.format-standard \.nb-card__title\s*\{[\s\S]*?background-color: var\(--sm-current-fg1-color\);/);
-  assert.doesNotMatch(editorSource, /\.nb-supernova-item\.nb-card--no-media \.nb-card__title/);
+  assert.match(collageSource, /\.nb-supernova-item\.nb-card--no-media\.format-standard\s*\{[\s\S]*?\.nb-card__title\s*\{[\s\S]*?background-color: var\(--sm-current-fg1-color\);/);
+  assert.doesNotMatch(collageSource, /\.nb-supernova-item\.nb-card--no-media \.nb-card__title/);
 });
 
 test('Accent Label presentation is independent from Meta Reveal interaction', () => {
@@ -153,6 +151,20 @@ test('Patch collage is block-local and has no generated Header brick styling', (
   assert.match(source, /\.anima-collection-canvas\.is-anima-collage-header-flow #\{\$collage-scope\} \.nb-collection__layout-item--external \+ \.nb-collection__layout-item[^{]*\{[^}]*margin-top: 0;/s);
 });
 
+test('Patch collage uses the shared flat masonry contract in the editor', () => {
+  const source = fs.readFileSync(
+    path.join(__dirname, '..', 'src', 'scss', 'utility', '_collection-collage.scss'),
+    'utf8'
+  );
+
+  assert.match(source, /\$collage-editor-scope:/);
+  assert.match(source, /#\{\$collage-editor-scope\}\s*\{[\s\S]*?--font-size-base: 1;[\s\S]*?@include collage-card-type-system;[\s\S]*?\.nb-card__title\s*\{[^}]*font-size: var\(--current-font-size\);[\s\S]*?\.nb-supernova-item\.format-quote blockquote\s*\{[\s\S]*?p,[\s\S]*?cite\s*\{[^}]*font-size: var\(--current-font-size\);/);
+  assert.doesNotMatch(source, /nb-collection__layout-column/);
+  assert.doesNotMatch(source, /approximate the collage inside the block editor/i);
+  assert.match(source, /\.nb-collection__layout-item--col-even\s*\{/);
+  assert.match(source, /&\.nb-supernova--card-hover-reveal[\s\S]*?\.nb-supernova-item__content:not\(\.nb-supernova-item__content--before-media\):not\(\.nb-supernova-item__content--after-media\) \.nb-card__meta\s*\{[^}]*position: absolute;[^}]*opacity: 0;/);
+});
+
 test('Patch portrait and tall cards let after-media copy wrap around floated media', () => {
   const css = compileUtilityCss();
 
@@ -206,12 +218,16 @@ test('Patch collage keeps masonry tracks touching while Items Gap drives the ove
   );
   assert.match(
     source,
-    /\.nb-collection__layout-column--col-even\s*\{[\s\S]*?\.nb-supernova-item__media-wrapper\s*\{[^}]*margin-right:\s*calc\(-2 \* #\{\$g\}\);/
+    /\.nb-collection__layout-item--col-even\s*\{[\s\S]*?\.nb-supernova-item__media-wrapper\s*\{[^}]*margin-right:\s*calc\(-2 \* #\{\$g\}\);/
   );
 });
 
 test('Patch quote blueprints do not expose their outer signal surface behind the offset card', () => {
   const css = compileUtilityCss();
+  const source = fs.readFileSync(
+    path.join(__dirname, '..', 'src', 'scss', 'utility', '_collection-collage.scss'),
+    'utf8'
+  );
 
   assert.match(
     css,
@@ -220,5 +236,61 @@ test('Patch quote blueprints do not expose their outer signal surface behind the
   assert.match(
     css,
     /\.nb-supernova--layout-recipe-anima-collage\.nb-supernova--layout-masonry [^{]*\.nb-post-format-card-blueprint::before[^}]*\{[^}]*background: none;/
+  );
+  assert.match(
+    source,
+    /#\{\$collage-editor-scope\}[\s\S]*?:is\(\.nb-post-format-card-blueprint--quote, #specific\) \.nb-supernova-item__frame\s*\{[^}]*overflow: visible;/
+  );
+});
+
+test('Patch quote blueprints let intrinsic quote content grow the frontend and editor surface', () => {
+  const source = fs.readFileSync(
+    path.join(__dirname, '..', 'src', 'scss', 'utility', '_collection-collage.scss'),
+    'utf8'
+  );
+
+  assert.match(
+    source,
+    /body:not\(\.editor-styles-wrapper\) #\{\$collage-scope\}\.nb-supernova--aspect-ratio-original[\s\S]*?\.nb-post-format-card-blueprint--quote \.nb-supernova-item__content--after-media\[class\]\s*\{[^}]*position: relative;[^}]*inset: auto;/
+  );
+  assert.match(
+    source,
+    /body:not\(\.editor-styles-wrapper\) #\{\$collage-scope\}\.nb-supernova--aspect-ratio-original[\s\S]*?\.nb-post-format-card-blueprint--quote \.nb-supernova-item__media-wrapper\s*\{[^}]*margin-bottom: 0;/
+  );
+  assert.match(
+    source,
+    /:is\(\.nb-supernova-item__media-aspect-ratio, \.nb-supernova-item__media-doppler, \.novablocks-doppler__wrapper, \.blob-mix, \.blob-mix__media, \.blob-mix__mask\)\s*\{[^}]*height: 100% !important;/
+  );
+  assert.match(
+    source,
+    /\.nb-supernova-item__media\[class\]\[class\]\s*\{[^}]*height: 100% !important;[^}]*object-fit: var\(--nb-card-media-object-fit, cover\);/
+  );
+  assert.match(
+    source,
+    /#\{\$collage-editor-scope\}[\s\S]*?:is\(\.nb-post-format-card-blueprint--quote, #specific\) \.nb-supernova-item__frame[\s\S]*?> \.nb-supernova-item__content--after-media\[class\]\s*\{[^}]*position: relative !important;[^}]*inset: auto;[^}]*min-height: var\(--nb-block-content-min-height\) !important;/
+  );
+});
+
+test('Patch Accent Label metadata wraps at semantic group boundaries', () => {
+  const source = fs.readFileSync(
+    path.join(__dirname, '..', 'src', 'scss', 'utility', '_collection-hover-reveal.scss'),
+    'utf8'
+  );
+
+  assert.match(
+    source,
+    /#\{\$accent-label-collage-scope\}\s*\{[\s\S]*?\.nb-card__meta\s*\{[^}]*flex-wrap: wrap;/
+  );
+  assert.match(
+    source,
+    /\.nb-card__meta--primary\s*\{[^}]*flex: 0 0 auto;/
+  );
+  assert.match(
+    source,
+    /\.nb-card__meta--secondary\s*\{[^}]*flex: 0 0 max-content;[^}]*max-width: 100%;/
+  );
+  assert.match(
+    source,
+    /\.nb-card__meta-link--date\s*\{[^}]*display: inline-block;[^}]*white-space: nowrap;/
   );
 });
