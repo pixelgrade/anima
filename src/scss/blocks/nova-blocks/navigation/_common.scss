@@ -5,7 +5,9 @@
     .menu > ul {
 
         a {
-            padding: 0.75em 0;
+            // Nova owns the link density mechanic; the Header Row block's
+            // Navigation Link Vertical Spacing setting feeds this variable.
+            padding: var(--nb-navigation-item-padding-y, 0.75em) 0;
         }
     }
 }

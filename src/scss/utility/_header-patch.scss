@@ -1,0 +1,177 @@
+// Patch's signature Header is a desktop composition layered over Nova's
+// standard Header blocks. Below `lap`, Nova remains the sole mobile layout
+// owner and generates the same compact bar and menu overlay as every preset.
+@include above(lap) {
+
+  .is-style-anima-patch-header {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+    box-sizing: border-box;
+    min-width: 0;
+    width: 100% !important;
+    max-width: none !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+
+    --header-background-opacity: 0;
+
+    // Nova's editor compatibility rule (`.nb-header:not(.nb-header--ready)`)
+    // re-raises the background opacity inside the canvas with (0,2,0)
+    // specificity; out-specify it so editor and frontend stay transparent.
+    &[class][class] {
+      --header-background-opacity: 0;
+    }
+
+    .nb-header__inner-container {
+      box-sizing: border-box;
+      width: 100%;
+      padding-top: calc(var(--theme-spacing-normal) * 1.5625) !important;
+      padding-right: calc(var(--theme-spacing-normal) * 3);
+      padding-bottom: var(--theme-spacing-normal);
+      padding-left: var(--theme-spacing-normal);
+    }
+
+    // Structure (stacked rows, left alignment, the two-column primary menu,
+    // link density) is expressed by the Header Row block attributes in the
+    // Patch Header pattern (contentAlignment, navigationColumns,
+    // navigationLinkVerticalSpacing). This skin only keeps what is genuinely
+    // Patch/theme-owned: the in-flow positioning, the asymmetric content
+    // inset, vertical rhythm between rows, and the typographic voice.
+
+    .nb-header-row {
+      padding-right: 0;
+      padding-left: 0;
+    }
+
+    .nb-header-row--logo {
+      margin-bottom: var(--theme-spacing-normal);
+    }
+
+    // Nova's Logo block deliberately keeps the text site title as a fallback.
+    // Once a custom logo is present, Patch displays only the wordmark.
+    .c-logo + .site-info {
+      display: none;
+    }
+
+    // Patch treats its wordmark as part of the navigation voice. The Style
+    // Manager size tokens are unitless, so every resolved size adds its unit
+    // here instead of silently falling back to Anima's generic Header rules.
+    .site-title a {
+      font-family: var(--theme-navigation-font-family);
+      font-size: clamp(
+        calc(var(--theme-navigation-font-size) * 2.142857 * 1px),
+        1.8vw,
+        calc(var(--theme-site-title-font-size) * 1.416667 * 1px)
+      );
+      font-weight: min(var(--theme-navigation-font-weight), 700);
+      line-height: 1.25;
+      letter-spacing: calc(var(--theme-navigation-letter-spacing) * 3.6);
+      text-transform: var(--theme-navigation-text-transform);
+    }
+
+    .nb-navigation--primary :is(ul.menu, .menu > ul, .wp-block-navigation__container) a {
+      font-family: var(--theme-navigation-font-family);
+      font-size: clamp(
+        calc(var(--theme-navigation-font-size) * 1.607143 * 1px),
+        1.4vw,
+        calc(var(--theme-navigation-font-size) * 2.142857 * 1px)
+      );
+      font-weight: min(var(--theme-navigation-font-weight), 400);
+      line-height: calc(var(--theme-navigation-line-height) * 0.96875);
+      letter-spacing: calc(var(--theme-navigation-letter-spacing) * 1.2);
+      text-transform: var(--theme-navigation-text-transform);
+    }
+
+    .nb-header-row--tertiary {
+      margin-top: var(--theme-spacing-small);
+    }
+
+    .nb-navigation--tertiary :is(ul.menu, .menu > ul, .wp-block-navigation__container) {
+      gap: calc(var(--theme-spacing-smallest) * 2.5);
+    }
+  }
+}
+
+// The Site Editor canvas can be narrower than `lap` while its frontend
+// counterpart is still a desktop viewport. Nova deliberately keeps the
+// desktop Header composition in that iframe; mirror the Patch skin there so
+// the preview does not collapse to an unstyled hybrid.
+.editor-styles-wrapper .is-style-anima-patch-header {
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  left: auto !important;
+  box-sizing: border-box;
+  min-width: 0;
+  width: 100% !important;
+  max-width: none !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+
+  --header-background-opacity: 0;
+
+  &[class][class] {
+    --header-background-opacity: 0;
+  }
+
+  .nb-header__inner-container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 100%;
+    padding-top: calc(var(--theme-spacing-normal) * 1.5625) !important;
+    padding-right: calc(var(--theme-spacing-normal) * 3);
+    padding-bottom: var(--theme-spacing-normal);
+    padding-left: var(--theme-spacing-normal);
+  }
+
+  .nb-header-row {
+    order: 0;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .nb-header-row--logo {
+    margin-bottom: var(--theme-spacing-normal);
+  }
+
+  .c-logo + .site-info {
+    display: none;
+  }
+
+  .site-title a {
+    font-family: var(--theme-navigation-font-family);
+    font-size: clamp(
+      calc(var(--theme-navigation-font-size) * 2.142857 * 1px),
+      1.8vw,
+      calc(var(--theme-site-title-font-size) * 1.416667 * 1px)
+    );
+    font-weight: min(var(--theme-navigation-font-weight), 700);
+    line-height: 1.25;
+    letter-spacing: calc(var(--theme-navigation-letter-spacing) * 3.6);
+    text-transform: var(--theme-navigation-text-transform);
+  }
+
+  .nb-navigation--primary :is(ul.menu, .menu > ul, .wp-block-navigation__container) a {
+    font-family: var(--theme-navigation-font-family);
+    font-size: clamp(
+      calc(var(--theme-navigation-font-size) * 1.607143 * 1px),
+      1.4vw,
+      calc(var(--theme-navigation-font-size) * 2.142857 * 1px)
+    );
+    font-weight: min(var(--theme-navigation-font-weight), 400);
+    line-height: calc(var(--theme-navigation-line-height) * 0.96875);
+    letter-spacing: calc(var(--theme-navigation-letter-spacing) * 1.2);
+    text-transform: var(--theme-navigation-text-transform);
+  }
+
+  .nb-header-row--tertiary {
+    margin-top: var(--theme-spacing-small);
+  }
+
+  .nb-navigation--tertiary :is(ul.menu, .menu > ul, .wp-block-navigation__container) {
+    gap: calc(var(--theme-spacing-smallest) * 2.5);
+  }
+}
