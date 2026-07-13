@@ -2,8 +2,9 @@
 // Items with .js-3d get extra horizontal padding to create visual separation
 // in the checkerboard pattern, mimicking the Pile theme's 3D grid look.
 //
-// The transform is applied to .nb-collection__layout-item (the grid cell)
-// because .nb-supernova-item inside it is clipped by overflow: hidden.
+// Nova owns the layout item's transform for Masonry/Parametric placement.
+// Parallax is therefore composed on the card layer through a CSS variable,
+// alongside the independent card-hover offset.
 
 .nb-supernova--pile-parallax {
 
@@ -13,7 +14,6 @@
   }
 
   .nb-collection__layout-item {
-    will-change: transform;
     overflow: visible;
     // CSS Grid sizes columns from the item's min content width when
     // overflow is visible (min-width:auto). NB normally has overflow:hidden
@@ -21,6 +21,11 @@
     // overflow:visible for parallax, set min-width:0 explicitly so the
     // grid columns shrink to fit the container.
     min-width: 0;
+  }
+
+  .nb-collection__layout-item > .nb-supernova-item {
+    will-change: transform;
+    transform: translateY(calc(var(--anima-pile-parallax-y, 0px) + var(--anima-card-hover-y, 0px)));
   }
 
   // Parametric grids re-nest each layout item inside an .nb-grid__area,

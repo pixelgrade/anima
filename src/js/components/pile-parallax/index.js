@@ -24,6 +24,7 @@ const {
 const PARALLAX_SELECTOR = '.nb-supernova--pile-parallax';
 const GRID_3D_SELECTOR = '.nb-supernova--pile-3d';
 const ITEM_SELECTOR = '.nb-collection__layout-item';
+const EXTERNAL_ITEM_SELECTOR = '.nb-collection__layout-item--external';
 const PARAMETRIC_LAYOUT_EVENT = 'nb:parametric-layout';
 
 let blocks = [];
@@ -64,7 +65,7 @@ function addMissingPadding( layout, items, parallaxAmount, windowHeight ) {
   const contentBottom = getDocumentHeight();
 
   items.forEach( ( item ) => {
-    item.style.transform = '';
+    item.style.removeProperty( '--anima-pile-parallax-y' );
 
     const rect = item.getBoundingClientRect();
     const itemTop = rect.top + window.scrollY;
@@ -109,7 +110,8 @@ function apply3dClasses( el ) {
   items.forEach( ( item, index ) => {
     item.classList.toggle(
       'js-3d',
-      matchesPilePattern( { index, columns, target3d, rule3d } )
+      ! item.matches( EXTERNAL_ITEM_SELECTOR ) &&
+        matchesPilePattern( { index, columns, target3d, rule3d } )
     );
   } );
 }
@@ -149,6 +151,8 @@ export function initialize() {
       return;
     }
 
+    // Keep DOM indexes aligned with Nova's nth-child 3D pattern, but never
+    // animate external layout participants such as the Header proxy.
     const items = el.querySelectorAll( ITEM_SELECTOR );
 
     if ( ! items.length ) {
@@ -160,13 +164,18 @@ export function initialize() {
     }
 
     const animatedItems = Array.from( items ).filter( ( item, index ) => {
+      if ( item.matches( EXTERNAL_ITEM_SELECTOR ) ) {
+        item.style.removeProperty( '--anima-pile-parallax-y' );
+        return false;
+      }
+
       const shouldAnimate = shouldParallaxItem( {
         ...pilePattern,
         index,
       } );
 
       if ( ! shouldAnimate ) {
-        item.style.transform = '';
+        item.style.removeProperty( '--anima-pile-parallax-y' );
       }
 
       return shouldAnimate;
@@ -186,8 +195,9 @@ export function initialize() {
     const itemsData = [];
 
     animatedItems.forEach( ( item ) => {
-      // Reset transform before measuring positions.
-      item.style.transform = '';
+      // Reset only the parallax layer before measuring positions. Nova owns
+      // the layout item's inline transform for Masonry/Parametric placement.
+      item.style.removeProperty( '--anima-pile-parallax-y' );
 
       const height = item.offsetHeight;
       const initialTop = height * parallaxAmount / 2;
@@ -239,7 +249,7 @@ function update() {
 
       const rawOffset = travel - ( progress * travel * 2 );
       const y = rawOffset > 0 ? rawOffset * positiveOffsetFactor : rawOffset;
-      el.style.transform = `translateY(${ y.toFixed( 1 ) }px)`;
+      el.style.setProperty( '--anima-pile-parallax-y', `${ y.toFixed( 1 ) }px` );
     } );
   } );
 }
