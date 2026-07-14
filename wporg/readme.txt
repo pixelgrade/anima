@@ -44,6 +44,14 @@ plugins are active.
 
 == Changelog ==
 
+= 2.0.43 =
+
+* Add the Anima Collage recipe with Patch-inspired masonry rhythm, expressive card treatments, integrated header behavior, and matching editor previews.
+* Add a Patch header pattern and connect its dense card typography to Style Manager.
+* Fix Quote card hover framing and restore category/byline metadata reveal in Collage collections.
+* Preserve WordPress global styles and bundled font defaults when Style Manager is active.
+* Keep the Anima LT header, footer, and hero aligned to the wide layout grid.
+
 = 2.0.24 =
 
 * Improve block-based header compatibility with Nova Blocks navigation editing and fresh-site header pattern registration.

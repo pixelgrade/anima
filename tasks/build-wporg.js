@@ -267,6 +267,48 @@ function wporgStripExternalTemplateVariantLinks(done) {
 wporgStripExternalTemplateVariantLinks.description = 'Strip front-facing external links from wp.org-only template variants';
 gulp.task( 'build:wporg:strip-template-variant-external-links', wporgStripExternalTemplateVariantLinks );
 
+function stripSourceMapReferences(contents) {
+	return contents
+		.replace( /^[\t ]*\/\/[#@][\t ]*sourceMappingURL=.*(?:\r?\n|$)/gm, '' )
+		.replace( /^[\t ]*\/\*[#@][\t ]*sourceMappingURL=.*?\*\/[\t ]*(?:\r?\n|$)/gm, '' );
+}
+
+function wporgStripSourceMapReferences(done) {
+	const buildRoot = '../build/' + slug;
+
+	const stripFromFile = (file) => {
+		const content = fs.readFileSync( file, 'utf8' );
+		const stripped = stripSourceMapReferences( content );
+
+		if ( content !== stripped ) {
+			fs.writeFileSync( file, stripped );
+		}
+	};
+
+	const walk = (dir) => {
+		fs.readdirSync( dir, { withFileTypes: true } ).forEach( entry => {
+			const path = dir + '/' + entry.name;
+
+			if ( entry.isDirectory() ) {
+				walk( path );
+				return;
+			}
+
+			if ( /\.(?:css|js)$/.test( path ) ) {
+				stripFromFile( path );
+			}
+		} );
+	};
+
+	if ( fs.existsSync( buildRoot ) ) {
+		walk( buildRoot );
+	}
+
+	return done();
+}
+wporgStripSourceMapReferences.description = 'Strip orphaned source-map references from wp.org assets';
+gulp.task( 'build:wporg:strip-source-map-references', wporgStripSourceMapReferences );
+
 // -----------------------------------------------------------------------------
 // Replace the text domain placeholder with the wp.org slug and adjust the
 // theme header (a different theme name is mandatory: "anima" is taken on
@@ -482,6 +524,7 @@ gulp.task( 'build:wporg:fix-wporg', gulp.series(
 	),
 	'build:wporg:remove-copied-rtl-styles',
 	'build:wporg:expanded-styles-rtl',
+	'build:wporg:strip-source-map-references',
 	'build:wporg:txtdomain',
 	'build:wporg:theme-header',
 	'build:wporg:relax-theme-json',
@@ -506,3 +549,7 @@ function makeZipWporg() {
 }
 makeZipWporg.description = 'Create the wp.org theme archive and delete the build folder';
 gulp.task( 'build:wporg:zip', makeZipWporg );
+
+module.exports = {
+	stripSourceMapReferences,
+};

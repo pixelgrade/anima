@@ -108,7 +108,7 @@ if ( ! is_array( $contextual_intro ) || 'html' !== ( $contextual_intro['type'] ?
 	anima_fail_tweak_board_contextual_entry_colors_option_test( 'Expected the Tweak Board to expose an intro control for contextual entry colors.' );
 }
 
-if ( false === strpos( (string) ( $contextual_intro['html'] ?? '' ), 'Custom Post Type Colors' ) || false === strpos( (string) ( $contextual_intro['html'] ?? '' ), 'Add a custom color setting to each post type item and use it anywhere the color options appear.' ) ) {
+if ( false === strpos( (string) ( $contextual_intro['html'] ?? '' ), 'Contextual Colors' ) || false === strpos( (string) ( $contextual_intro['html'] ?? '' ), 'Give each post, page, project or product its own colour — picked by hand or pulled from its cover image — for the accents that belong to it.' ) ) {
 	anima_fail_tweak_board_contextual_entry_colors_option_test( 'Expected the contextual entry colors intro control to carry the agreed title and description.' );
 }
 
@@ -123,6 +123,11 @@ if ( ! empty( $contextual_toggle['desc'] ) ) {
 $option_order = array_keys( $tweak_board_options );
 $expected_sequence = [
 	'sm_collection_hover_effect',
+	'sm_card_metadata_style',
+	'sm_site_frame_intro',
+	'sm_site_frame_style',
+	'sm_site_frame_palette',
+	'sm_site_frame_variation',
 	'sm_decorative_titles_style_intro',
 	'sm_decorative_titles_style',
 	'sm_contextual_entry_colors_intro',

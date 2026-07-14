@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $integration_file = dirname( __DIR__ ) . '/inc/integrations/intro-animations.php';
 
-if ( file_exists( $integration_file ) ) {
+if ( ! function_exists( 'anima_intro_animations_enabled' ) && file_exists( $integration_file ) ) {
 	require_once $integration_file;
 }
 

@@ -111,17 +111,25 @@ if (
 	anima_fail_site_frame_config_test( 'Expected the Tweak Board section to render the Site Frame title and description before the controls.' );
 }
 
-$option_order = array_keys( $section_options );
-$expected_tail = [
+$option_order        = array_keys( $section_options );
+$expected_site_frame = [
 	'sm_site_frame_intro',
 	'sm_site_frame_style',
 	'sm_site_frame_palette',
 	'sm_site_frame_variation',
 ];
-$actual_tail = array_slice( $option_order, -1 * count( $expected_tail ) );
+$site_frame_position = array_search( 'sm_site_frame_intro', $option_order, true );
+$fancy_title_position = array_search( 'sm_decorative_titles_style_intro', $option_order, true );
+$actual_site_frame = false === $site_frame_position
+	? []
+	: array_slice( $option_order, $site_frame_position, count( $expected_site_frame ) );
 
-if ( $expected_tail !== $actual_tail ) {
-	anima_fail_site_frame_config_test( 'Expected the Site Frame controls to be appended at the end of the Tweak Board section.' );
+if (
+	$expected_site_frame !== $actual_site_frame
+	|| false === $fancy_title_position
+	|| $site_frame_position + count( $expected_site_frame ) !== $fancy_title_position
+) {
+	anima_fail_site_frame_config_test( 'Expected the Site Frame controls to stay grouped immediately before Fancy Titles.' );
 }
 
 $temporary_menu_id = wp_create_nav_menu( 'Site Frame Test Menu' );

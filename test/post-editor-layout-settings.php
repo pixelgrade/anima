@@ -53,7 +53,7 @@ $layout = $post_content_attributes['layout'] ?? null;
 anima_assert_expected_post_content_layout( $layout, 'postContentAttributes.layout' );
 
 $stale_template           = new WP_Block_Template();
-$stale_template->theme    = 'anima';
+$stale_template->theme    = get_stylesheet();
 $stale_template->slug     = 'single';
 $stale_template->type     = 'wp_template';
 $stale_template->source   = 'custom';
