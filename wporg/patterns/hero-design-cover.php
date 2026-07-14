@@ -12,7 +12,7 @@
 	<span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim-40 has-background-dim"></span>
 	<img class="wp-block-cover__image-background" alt="" src="<?php echo esc_url( get_theme_file_uri( 'assets/images/cover-foundation.jpg' ) ); ?>" data-object-fit="cover"/>
 	<div class="wp-block-cover__inner-container">
-		<!-- wp:group {"align":"wide","style":{"spacing":{"blockGap":"1.2rem"}}} -->
+		<!-- wp:group {"align":"wide","style":{"spacing":{"blockGap":"1.2rem"}},"layout":{"type":"constrained","justifyContent":"left"}} -->
 		<div class="wp-block-group alignwide">
 			<!-- wp:paragraph {"textColor":"tertiary","style":{"typography":{"textTransform":"uppercase","letterSpacing":"0.22em"}},"fontSize":"small"} -->
 			<p class="has-tertiary-color has-text-color has-small-font-size" style="text-transform:uppercase;letter-spacing:0.22em"><?php esc_html_e( 'A block theme by Pixelgrade', '__theme_txtd' ); ?></p>
