@@ -239,9 +239,9 @@ function anima_register_collection_layout_recipes( $recipes ): array {
 
 	$recipes[] = [
 		'id'           => 'anima-collage',
-		'label'        => __( 'Anima Collage', '__theme_txtd' ),
+		'label'        => __( 'Collage', '__theme_txtd' ),
 		'baseLayout'   => 'masonry',
-		'thumbnail'    => 'masonry',
+		'thumbnail'    => 'collage',
 		'defaults'     => [
 			'columns'                    => 4,
 			'columnsFitMinWidth'         => 350,

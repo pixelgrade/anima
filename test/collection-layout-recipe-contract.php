@@ -35,9 +35,9 @@ if ( $foreign !== ( $recipes[0] ?? null ) ) {
 }
 
 if ( 'anima-collage' !== ( $recipe['id'] ?? '' )
-	|| 'Anima Collage' !== ( $recipe['label'] ?? '' )
+	|| 'Collage' !== ( $recipe['label'] ?? '' )
 	|| 'masonry' !== ( $recipe['baseLayout'] ?? '' )
-	|| 'masonry' !== ( $recipe['thumbnail'] ?? '' ) ) {
+	|| 'collage' !== ( $recipe['thumbnail'] ?? '' ) ) {
 	throw new RuntimeException( 'Expected the stable Anima Collage Masonry recipe.' );
 }
 
