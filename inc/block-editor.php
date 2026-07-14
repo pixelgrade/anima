@@ -13,11 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Whether the Style Manager plugin is active.
  *
- * The theme delegates its entire design system (global styles, palettes, font
- * sizes) to Style Manager and therefore disables the corresponding core
- * features. When Style Manager is NOT active — e.g. the bare WordPress.org
- * build previewed without plugins — those core features must stay enabled so
- * the theme.json design tokens still render.
+ * The theme delegates its semantic design tokens and controls to Style Manager.
+ * WordPress global styles still need to render in both modes because block
+ * markup relies on their structural and preset classes.
  *
  * @return bool
  */
@@ -153,48 +151,6 @@ function anima_get_post_content_layout_defaults() {
 		'wideSize'    => 'var(--nb-container-width)',
 	];
 }
-
-/**
- * Remove core global style callbacks since Style Manager handles all styling.
- *
- * Core moved these callbacks across hooks in recent WP releases, so we remove
- * all known combinations to keep behavior consistent on WP 6.x and 7.x.
- *
- * @see https://github.com/WordPress/gutenberg/issues/38299#issuecomment-1025520487
- */
-add_action( 'after_setup_theme', function () {
-	// Without Style Manager the theme has no other source of global styles, so
-	// let WordPress emit them from theme.json (palette, font sizes, base styles).
-	if ( ! anima_style_manager_is_active() ) {
-		return;
-	}
-
-	$global_styles_callbacks = [
-		'wp_enqueue_global_styles',
-		'wp_enqueue_global_styles_css_custom_properties',
-	];
-
-	$global_styles_hooks = [
-		'wp_enqueue_scripts',
-		'enqueue_block_assets',
-		'admin_enqueue_scripts',
-		'wp_footer',
-	];
-
-	$priorities = [ 1, 10 ];
-
-	foreach ( $global_styles_callbacks as $callback ) {
-		if ( ! function_exists( $callback ) ) {
-			continue;
-		}
-
-		foreach ( $global_styles_hooks as $hook ) {
-			foreach ( $priorities as $priority ) {
-				remove_action( $hook, $callback, $priority );
-			}
-		}
-	}
-} );
 
 /**
  * Modify the block editor settings to remove default style presets.

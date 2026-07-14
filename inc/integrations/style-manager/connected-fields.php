@@ -8,6 +8,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_filter( 'style_manager/filter_fields', 'anima_add_style_manager_connected_fields', 12, 1 );
 
 function anima_add_style_manager_connected_fields( $options ) {
+	$default_font_family = function_exists( 'anima_get_style_manager_default_font_family' )
+		? anima_get_style_manager_default_font_family()
+		: 'System Sans-Serif Clear';
 
 	// If the theme hasn't declared support for style manager, bail.
 	if ( ! current_theme_supports( 'customizer_style_manager' ) ) {
@@ -27,7 +30,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 					'default' => 'system',
 				],
 				'sm_font_primary'    => [
-					'default' => 'System Sans-Serif Clear',
+					'default' => $default_font_family,
 					'connected_fields' => [
 						'super_display_font',
 						'display_font',
@@ -40,7 +43,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 					],
 				],
 				'sm_font_secondary'  => [
-					'default' => 'System Sans-Serif Clear',
+					'default' => $default_font_family,
 					'connected_fields' => [
 						'heading_5_font',
 						'heading_6_font',
@@ -50,7 +53,7 @@ function anima_add_style_manager_connected_fields( $options ) {
 					],
 				],
 				'sm_font_body'       => [
-					'default' => 'System Sans-Serif Clear',
+					'default' => $default_font_family,
 					'connected_fields' => [
 						'body_font',
 						'small_body_font',

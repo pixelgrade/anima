@@ -5,10 +5,91 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Get the unsaved Style Manager font-family default for this distribution.
+ *
+ * Anima LT bundles Space Grotesk and registers its font face through theme.json.
+ * The commercial distribution keeps the cloud-backed system font default.
+ *
+ * @return string
+ */
+function anima_get_style_manager_default_font_family() {
+	if ( 'anima-lt' === get_template() ) {
+		return 'Space Grotesk';
+	}
+
+	return 'System Sans-Serif Clear';
+}
+
+/**
+ * Expose the bundled Anima LT family to Style Manager's font controls.
+ *
+ * The font face itself belongs to theme.json, so no additional stylesheet
+ * source is registered here.
+ *
+ * @param array $fonts Registered theme fonts.
+ * @return array
+ */
+function anima_add_wporg_style_manager_theme_fonts( $fonts ) {
+	if ( 'Space Grotesk' !== anima_get_style_manager_default_font_family() ) {
+		return $fonts;
+	}
+
+	if ( ! isset( $fonts['Space Grotesk'] ) ) {
+		$fonts['Space Grotesk'] = [
+			'family'         => 'Space Grotesk',
+			'family_display' => 'Space Grotesk',
+			'category'       => 'sans-serif',
+			'variants'       => [ '300', '400', '500', '600', '700' ],
+			'subsets'        => [ 'latin' ],
+			'fallback_stack' => '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
+		];
+	}
+
+	return $fonts;
+}
+add_filter( 'style_manager/theme_fonts', 'anima_add_wporg_style_manager_theme_fonts' );
+
+/**
+ * Refresh Style Manager's derived field caches once for the Anima LT default.
+ *
+ * Saved font values live outside these caches and remain untouched. Deleting
+ * the derived data instead of only expiring it also lets the next anonymous
+ * frontend request rebuild immediately.
+ *
+ * @return void
+ */
+function anima_maybe_refresh_wporg_style_manager_font_default_cache() {
+	if ( 'Space Grotesk' !== anima_get_style_manager_default_font_family() ) {
+		return;
+	}
+
+	$config_version = '2026-07-14-space-grotesk-default';
+	$version_option = 'anima_style_manager_font_defaults_config_version';
+
+	if ( get_option( $version_option ) === $config_version ) {
+		return;
+	}
+
+	$cache_options = [
+		'pixelgrade_style_manager_customizer_config',
+		'pixelgrade_style_manager_options_minimal_details',
+		'pixelgrade_style_manager_options_extra_details',
+	];
+
+	foreach ( $cache_options as $cache_option ) {
+		delete_option( $cache_option );
+	}
+
+	update_option( $version_option, $config_version, true );
+}
+add_action( 'after_setup_theme', 'anima_maybe_refresh_wporg_style_manager_font_default_cache', 20 );
+
 // Add fonts section and options to the Style Manager config
 add_filter( 'style_manager/filter_fields', 'anima_add_fonts_section_to_style_manager_config', 60, 1 );
 
 function anima_add_fonts_section_to_style_manager_config( $config ) {
+	$default_font_family = anima_get_style_manager_default_font_family();
 
 	$font_size_config = [
 		'min'  => 12,
@@ -109,7 +190,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-body-',
 					'default'           => [
-						'font-family'     => 'System Sans-Serif Clear',
+						'font-family'     => $default_font_family,
 						'font-size'       => 16,
 						'line-height'     => 1.6,
 						'font-weight'     => '500',
@@ -127,7 +208,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-lead-',
 					'default'           => [
-						'font-family'     => 'System Sans-Serif Clear',
+						'font-family'     => $default_font_family,
 						'font-size'       => 21,
 						'line-height'     => 1.6,
 						'font-weight'     => 500,
@@ -146,7 +227,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-small-body-',
 					'default'           => [
-						'font-family'     => 'System Sans-Serif Clear',
+						'font-family'     => $default_font_family,
 						'font-size'       => 14,
 						'line-height'     => 1.5,
 						'font-weight'     => 400,
@@ -169,7 +250,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-super-display-',
 					'default'           => [
-						'font-family'     => 'System Sans-Serif Clear',
+						'font-family'     => $default_font_family,
 						'font-size'       => 165,
 						'line-height'     => 1.0,
 						'font-weight'     => 700,
@@ -186,7 +267,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-display-',
 					'default'           => [
-						'font-family'     => 'System Sans-Serif Clear',
+						'font-family'     => $default_font_family,
 						'font-size'       => 115,
 						'line-height'     => 1.03,
 						'font-weight'     => 700,
@@ -203,7 +284,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-heading-1-',
 					'default'           => [
-						'font-family'     => 'System Sans-Serif Clear',
+						'font-family'     => $default_font_family,
 						'font-size'       => 66,
 						'line-height'     => 1.1,
 						'font-weight'     => 700,
@@ -220,7 +301,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-heading-2-',
 					'default'           => [
-						'font-family'     => 'System Sans-Serif Clear',
+						'font-family'     => $default_font_family,
 						'font-size'       => 40,
 						'line-height'     => 1.2,
 						'font-weight'     => 700,
@@ -237,7 +318,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-heading-3-',
 					'default'           => [
-						'font-family'     => 'System Sans-Serif Clear',
+						'font-family'     => $default_font_family,
 						'font-size'       => 32,
 						'line-height'     => 1.2,
 						'font-weight'     => 700,
@@ -254,7 +335,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-heading-4-',
 					'default'           => [
-						'font-family'     => 'System Sans-Serif Clear',
+						'font-family'     => $default_font_family,
 						'font-size'       => 24,
 						'line-height'     => 1.2,
 						'font-weight'     => 700,
@@ -271,7 +352,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-heading-5-',
 					'default'           => [
-						'font-family'     => 'System Sans-Serif Clear',
+						'font-family'     => $default_font_family,
 						'font-size'       => 18,
 						'line-height'     => 1.5,
 						'font-weight'     => 700,
@@ -288,7 +369,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-heading-6-',
 					'default'           => [
-						'font-family'     => 'System Sans-Serif Clear',
+						'font-family'     => $default_font_family,
 						'font-size'       => 16,
 						'line-height'     => 1.5,
 						'font-weight'     => 500,
@@ -340,7 +421,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-site-title-',
 					'default'           => [
-						'font-family'     => 'System Sans-Serif Clear',
+						'font-family'     => $default_font_family,
 						'font-size'       => 32,
 						'line-height'     => 1.2,
 						'font-weight'     => 700,
@@ -365,7 +446,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-navigation-',
 					'default'           => [
-						'font-family'     => 'System Sans-Serif Clear',
+						'font-family'     => $default_font_family,
 						'font-size'       => 17,
 						'line-height'     => 1.5,
 						'font-weight'     => 500,
@@ -382,7 +463,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-button-',
 					'default'           => [
-						'font-family'     => 'System Sans-Serif Clear',
+						'font-family'     => $default_font_family,
 						'font-size'       => 17,
 						'line-height'     => 1.2,
 						'font-weight'     => 500,
@@ -399,7 +480,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-input-',
 					'default'           => [
-						'font-family'     => 'System Sans-Serif Clear',
+						'font-family'     => $default_font_family,
 						'font-size'       => 16.5,
 						'line-height'     => 1.2,
 						'font-weight'     => 500,
@@ -416,7 +497,7 @@ function anima_add_fonts_section_to_style_manager_config( $config ) {
 					'selector'          => ':root',
 					'properties_prefix' => '--theme-meta-',
 					'default'           => [
-						'font-family'     => 'System Sans-Serif Clear',
+						'font-family'     => $default_font_family,
 						'font-size'       => 16,
 						'line-height'     => 1.5,
 						'font-weight'     => 500,
