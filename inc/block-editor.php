@@ -26,6 +26,79 @@ function anima_style_manager_is_active() {
 }
 
 /**
+ * Neutralize the wp.org build's root-padding-aware alignments on Style Manager sites.
+ *
+ * `tasks/build-wporg.js` (since eb7648d2) sets
+ * `settings.useRootPaddingAwareAlignments: true` and a clamp() `styles.spacing.padding`
+ * so the bare WordPress.org preview (no plugins) gets sane full-bleed edge spacing
+ * from theme.json alone. Commit c16e2824 legitimately stopped dequeuing
+ * `wp_enqueue_global_styles` when Style Manager is active (WP 7 block markup needs
+ * global styles' structural/preset classes — see #561/#562), but that had the side
+ * effect of also making those root-padding values live on Style-Manager-powered
+ * sites. WordPress's `.has-global-padding` + `.alignfull` negative-margin system
+ * then collides with Nova Blocks' `nb-content-layout-grid`: grid children have an
+ * explicit width of 100%, so the negative margin can shift them left but cannot
+ * stretch them to cover the right edge, leaving an uncovered strip equal to 2x the
+ * root padding. Edge spacing on Style Manager sites is already owned by Nova's
+ * `--nb-wrapper-sides-spacings` system, so two edge-spacing systems fighting over
+ * the same element is the actual disease.
+ *
+ * This restores the pre-c16e2824 geometry on Style-Manager sites while leaving
+ * global styles enqueued (keeping the #561/#562 fix intact), and leaves the bare
+ * wp.org preview (Style Manager inactive) untouched.
+ *
+ * Both `useRootPaddingAwareAlignments` and `styles.spacing.padding` must be
+ * overwritten together — `WP_Theme_JSON_Data::update_with()` can only merge or
+ * overwrite values, it can never unset a key the underlying theme.json already
+ * declares:
+ * - Flipping `useRootPaddingAwareAlignments` to false alone is not enough: with
+ *   it false, WordPress applies the root padding directly (uninverted) to the
+ *   body instead of inverting it via alignfull negative margins, which would
+ *   inset full-bleed layouts by that padding amount.
+ * - Zeroing the padding alone is not enough either: with
+ *   `useRootPaddingAwareAlignments` left true, WordPress still stamps
+ *   `has-global-padding` semantics/classes onto rendered layout wrappers.
+ * Overwriting both together removes the root-padding system entirely, matching
+ * the geometry that existed before c16e2824 reintroduced global styles.
+ *
+ * Nova Blocks also filters `wp_theme_json_data_theme` (to toggle availability
+ * booleans under `settings.blocks.*`). That is a different subtree of the
+ * theme.json data and the two filters do not need to run in any particular
+ * order relative to each other.
+ *
+ * @param mixed $theme_json The incoming WP_Theme_JSON_Data-like object (or
+ *                           whatever core happens to pass to this filter).
+ * @return mixed
+ */
+function anima_neutralize_root_padding_for_style_manager( $theme_json ) {
+	if ( ! anima_style_manager_is_active() ) {
+		return $theme_json;
+	}
+
+	if ( ! is_object( $theme_json ) || ! method_exists( $theme_json, 'update_with' ) ) {
+		return $theme_json;
+	}
+
+	return $theme_json->update_with( [
+		'version'  => 3,
+		'settings' => [
+			'useRootPaddingAwareAlignments' => false,
+		],
+		'styles'   => [
+			'spacing' => [
+				'padding' => [
+					'top'    => '0',
+					'right'  => '0',
+					'bottom' => '0',
+					'left'   => '0',
+				],
+			],
+		],
+	] );
+}
+add_filter( 'wp_theme_json_data_theme', 'anima_neutralize_root_padding_for_style_manager' );
+
+/**
  * Get the wp.org fallback CSS for Style Manager-owned design tokens.
  *
  * The WordPress.org build uses theme.json presets as the plugin-free design
