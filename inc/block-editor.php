@@ -26,7 +26,7 @@ function anima_style_manager_is_active() {
 }
 
 /**
- * Neutralize the wp.org build's root-padding-aware alignments on Style Manager sites.
+ * Neutralize the wp.org build's root design (root padding + root colors) on Style Manager sites.
  *
  * `tasks/build-wporg.js` (since eb7648d2) sets
  * `settings.useRootPaddingAwareAlignments: true` and a clamp() `styles.spacing.padding`
@@ -43,9 +43,27 @@ function anima_style_manager_is_active() {
  * `--nb-wrapper-sides-spacings` system, so two edge-spacing systems fighting over
  * the same element is the actual disease.
  *
- * This restores the pre-c16e2824 geometry on Style-Manager sites while leaving
- * global styles enqueued (keeping the #561/#562 fix intact), and leaves the bare
- * wp.org preview (Style Manager inactive) untouched.
+ * The same c16e2824 root cause has a second symptom: the wp.org build's
+ * theme.json also sets `styles.color.background: var(--wp--preset--color--base)`
+ * (#eef0ea) and `styles.color.text: var(--wp--preset--color--contrast)`. With
+ * global styles enqueued, that static body background paints ON TOP of Style
+ * Manager's dark-aware html-level tokens: in dark mode the section foregrounds
+ * flip via `--sm-current-*` but the body stays cream (measured body background
+ * rgb(238,240,234) in BOTH modes → white text on cream, illegible). Instead of
+ * fighting core's body rule, this filter rewrites it into a Style Manager token
+ * CONSUMER: `--sm-current-bg-color` / `--sm-current-fg1-color` are defined at
+ * the html level by Style Manager's generated output (including the
+ * `html.is-dark` remap), so the body rule becomes dark-aware and paints
+ * identically to the pre-c16e2824 output. `settings.color.palette` (the preset
+ * definitions) is deliberately left alone — the bare wp.org preview needs it,
+ * and no content on the audited sites uses preset background classes. Watch
+ * item: if content ever starts using `has-*-background-color` preset classes on
+ * Style Manager sites, those presets are NOT dark-aware and will need the same
+ * token-consumer treatment.
+ *
+ * This restores the pre-c16e2824 geometry and painting on Style-Manager sites
+ * while leaving global styles enqueued (keeping the #561/#562 fix intact), and
+ * leaves the bare wp.org preview (Style Manager inactive) untouched.
  *
  * Both `useRootPaddingAwareAlignments` and `styles.spacing.padding` must be
  * overwritten together — `WP_Theme_JSON_Data::update_with()` can only merge or
@@ -70,7 +88,7 @@ function anima_style_manager_is_active() {
  *                           whatever core happens to pass to this filter).
  * @return mixed
  */
-function anima_neutralize_root_padding_for_style_manager( $theme_json ) {
+function anima_neutralize_wporg_root_design_for_style_manager( $theme_json ) {
 	if ( ! anima_style_manager_is_active() ) {
 		return $theme_json;
 	}
@@ -93,10 +111,14 @@ function anima_neutralize_root_padding_for_style_manager( $theme_json ) {
 					'left'   => '0',
 				],
 			],
+			'color'   => [
+				'background' => 'var(--sm-current-bg-color)',
+				'text'       => 'var(--sm-current-fg1-color)',
+			],
 		],
 	] );
 }
-add_filter( 'wp_theme_json_data_theme', 'anima_neutralize_root_padding_for_style_manager' );
+add_filter( 'wp_theme_json_data_theme', 'anima_neutralize_wporg_root_design_for_style_manager' );
 
 /**
  * Get the wp.org fallback CSS for Style Manager-owned design tokens.

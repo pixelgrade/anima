@@ -1,10 +1,10 @@
 <?php
 /**
- * Contract test for neutralizing the wp.org root-padding-aware alignments
- * on Style Manager sites.
+ * Contract test for neutralizing the wp.org root design (root padding +
+ * root colors) on Style Manager sites.
  *
  * Run from the theme root:
- * php test/style-manager-root-padding-contract.php
+ * php test/style-manager-root-design-contract.php
  */
 
 function anima_fail_root_padding_contract_test( string $message ): void {
@@ -74,9 +74,9 @@ require_once dirname( __DIR__ ) . '/inc/block-editor.php';
 
 $callbacks = $GLOBALS['anima_root_padding_contract_filters']['wp_theme_json_data_theme'] ?? [];
 
-if ( ! in_array( 'anima_neutralize_root_padding_for_style_manager', $callbacks, true ) ) {
+if ( ! in_array( 'anima_neutralize_wporg_root_design_for_style_manager', $callbacks, true ) ) {
 	anima_fail_root_padding_contract_test(
-		'anima_neutralize_root_padding_for_style_manager must be registered on wp_theme_json_data_theme.'
+		'anima_neutralize_wporg_root_design_for_style_manager must be registered on wp_theme_json_data_theme.'
 	);
 }
 
@@ -87,7 +87,7 @@ if ( ! in_array( 'anima_neutralize_root_padding_for_style_manager', $callbacks, 
 eval( 'namespace Pixelgrade\\StyleManager; class Plugin {}' );
 
 $fake   = new Anima_Test_Fake_Theme_Json_Data();
-$result = anima_neutralize_root_padding_for_style_manager( $fake );
+$result = anima_neutralize_wporg_root_design_for_style_manager( $fake );
 
 if ( ! $fake->update_with_called ) {
 	anima_fail_root_padding_contract_test(
@@ -129,6 +129,12 @@ if ( isset( $payload['settings']['blocks'] ) ) {
 	);
 }
 
+if ( isset( $payload['settings']['color'] ) ) {
+	anima_fail_root_padding_contract_test(
+		'Style Manager active: the payload must not touch settings.color.* (preset definitions stay for the bare wp.org preview).'
+	);
+}
+
 $padding = $payload['styles']['spacing']['padding'] ?? null;
 $expected_padding = [
 	'top'    => '0',
@@ -150,10 +156,23 @@ if ( $spacing_keys !== [ 'padding' ] ) {
 	);
 }
 
-$styles_keys = array_keys( $payload['styles'] );
-if ( $styles_keys !== [ 'spacing' ] ) {
+$color          = $payload['styles']['color'] ?? null;
+$expected_color = [
+	'background' => 'var(--sm-current-bg-color)',
+	'text'       => 'var(--sm-current-fg1-color)',
+];
+
+if ( $color !== $expected_color ) {
 	anima_fail_root_padding_contract_test(
-		'Style Manager active: styles must contain ONLY spacing, got: ' . implode( ', ', $styles_keys )
+		'Style Manager active: styles.color must route background/text through the Style Manager tokens, got: ' . var_export( $color, true )
+	);
+}
+
+$styles_keys = array_keys( $payload['styles'] );
+sort( $styles_keys );
+if ( $styles_keys !== [ 'color', 'spacing' ] ) {
+	anima_fail_root_padding_contract_test(
+		'Style Manager active: styles must contain ONLY spacing and color, got: ' . implode( ', ', $styles_keys )
 	);
 }
 
@@ -185,7 +204,7 @@ class Fake {
 require_once __DIR__ . '/inc/block-editor.php';
 
 $fake = new Fake();
-$result = anima_neutralize_root_padding_for_style_manager( $fake );
+$result = anima_neutralize_wporg_root_design_for_style_manager( $fake );
 
 if ( $fake->update_with_called ) {
 	fwrite( STDERR, "Style Manager inactive: update_with() must never be called.\n" );
@@ -236,7 +255,7 @@ $non_object_inputs = [
 ];
 
 foreach ( $non_object_inputs as $input ) {
-	$result = anima_neutralize_root_padding_for_style_manager( $input );
+	$result = anima_neutralize_wporg_root_design_for_style_manager( $input );
 
 	if ( $result !== $input ) {
 		anima_fail_root_padding_contract_test(
@@ -245,4 +264,4 @@ foreach ( $non_object_inputs as $input ) {
 	}
 }
 
-echo "Style Manager root-padding neutralization contract OK\n";
+echo "Style Manager root-design neutralization contract OK\n";
