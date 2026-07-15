@@ -3,7 +3,7 @@ Contributors: pixelgrade
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.0.43
+Stable tag: 2.0.44
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, portfolio, one-column, custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, block-patterns, full-site-editing, rtl-language-support
@@ -43,6 +43,10 @@ for additional design-system controls, blocks, and layout options when those
 plugins are active.
 
 == Changelog ==
+
+= 2.0.44 =
+
+* Fix an uncovered strip on the right side of full-width layouts and incomplete dark-mode backgrounds on Style Manager sites, by neutralizing the wp.org root padding and routing the root colors through Style Manager tokens.
 
 = 2.0.43 =
 
