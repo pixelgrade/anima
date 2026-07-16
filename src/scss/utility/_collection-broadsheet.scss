@@ -1,0 +1,450 @@
+// Collection Broadsheet Grid
+//
+// A newspaper front page over Nova's CLASSIC grid engine: content signals
+// assign each post an editorial role, in CSS only. The sibling of the Collage
+// recipe — where Collage asks "what geometry does this content want?",
+// Broadsheet asks "what job does this content do?".
+//
+// Role rules (all derived from Nova's card expression classes + Anima's
+// post-expression classes — never per-card configuration):
+// - first (non-leading) item     → LEAD STORY: spans 2 tracks, display
+//                                  headline, excerpt set in two text columns
+//                                  with a drop cap
+// - nb-card--media-wide          → FEATURE: spans 2 tracks, panorama crop
+// - nb-card--no-media            → BRIEF: compact tinted note card
+// - format-quote                 → PULL-QUOTE: thick top rule, accent quote
+//                                  mark, display italic
+// - nb-card--media-portrait/tall → media floats beside the text (the Collage
+//                                  move, quoted inside the broadsheet)
+// - nb-card--title-*             → INVERTED ladder vs Collage: short titles
+//                                  shout, long titles behave like decks
+// - nb-card--fresh               → accent recency dot on the dateline
+// - is-sticky-post               → accent bar above the headline
+//
+// Building blocks provided by Nova Blocks: the classic engine's pure-CSS grid
+// (`repeat(var(--nb-collection-columns), 1fr)`, no JS placement, collapses to
+// one column below the tablet breakpoint), card expression classes incl. the
+// collection-anchored nb-card--fresh, and the `--nb-card-media-padding-top`
+// media-crop variable. Spans and column rules live behind above(tablet)
+// because the engine's mobile collapse flips the grid to a single column.
+
+$broadsheet-scope: '.nb-supernova--layout-recipe-anima-broadsheet.nb-supernova--layout-classic';
+$broadsheet-editor-scope: '.editor-styles-wrapper .nb-supernova--layout-recipe-anima-broadsheet.nb-supernova--layout-classic';
+
+$broadsheet-item: '.nb-collection__layout-item';
+// The first REAL card: leading items (measured proxies etc.) don't take the
+// lead role, and if one ever sits first the lead treatment simply lapses.
+$broadsheet-lead: '#{$broadsheet-item}:nth-child(1 of #{$broadsheet-item}:not(#{$broadsheet-item}--leading))';
+
+// Palette-aware hairlines and tints — derived from the current color signal
+// tokens so every palette variation (incl. dark) keeps its contrast ratio.
+$broadsheet-rule: color-mix(in srgb, var(--sm-current-fg1-color) 25%, var(--sm-current-bg-color));
+$broadsheet-tint: color-mix(in srgb, var(--sm-current-fg1-color) 5%, var(--sm-current-bg-color));
+
+// Column-rule x-positions per track count. Equal 1fr tracks put each rule at
+// most a quarter-gap off the true gap center — invisible inside the gutter —
+// which spares us runtime track math.
+$broadsheet-rule-positions: (
+  2: (50%,),
+  3: (33.3333%, 66.6667%),
+  4: (25%, 50%, 75%),
+  5: (20%, 40%, 60%, 80%),
+  6: (16.6667%, 33.3333%, 50%, 66.6667%, 83.3333%),
+);
+
+// ==========================================================================
+// TYPE SYSTEM — the broadsheet voice over the palette's own faces
+// ==========================================================================
+// Sizes are ratios over Anima's Heading 2 / small-body roles, so every Style
+// Manager palette brings its own faces, weights and tracking. The ladder is
+// deliberately INVERTED from Collage: short titles get display treatment,
+// long titles step down toward the body voice (they read as decks).
+@mixin broadsheet-card-type-system {
+  --broadsheet-title-weight: min(800, calc(var(--theme-heading-2-font-weight) + 100));
+  --broadsheet-title-light-weight: var(--theme-body-font-weight);
+
+  .nb-card__title {
+    @include apply-font(heading-2);
+    // SM font-size tokens are unitless; supplying the unit here also avoids
+    // Anima's global fluid-size transform distorting the compact card ladder.
+    --font-size: calc(var(--theme-heading-2-font-size) * 0.88);
+    --current-line-height: calc(var(--theme-heading-2-line-height) * 0.95);
+
+    font-size: calc(var(--font-size) * 1px);
+    color: var(--sm-current-fg1-color);
+    margin-top: 0;
+    margin-bottom: calc(var(--theme-spacing-smallest) * 0.75);
+
+    a {
+      color: inherit;
+    }
+  }
+
+  .nb-supernova-item.nb-card--title-short .nb-card__title {
+    --font-size: calc(var(--theme-heading-2-font-size) * 1.25);
+    --current-font-weight: var(--broadsheet-title-weight);
+    --current-letter-spacing: calc(var(--theme-heading-2-letter-spacing) * 0.75);
+  }
+
+  .nb-supernova-item.nb-card--title-long .nb-card__title {
+    --font-size: calc(var(--theme-heading-2-font-size) * 0.72);
+    --current-font-weight: var(--broadsheet-title-light-weight);
+    --current-line-height: calc(var(--theme-heading-2-line-height) * 1.05);
+  }
+
+  // The lead headline is the loudest voice on the page; a long lead title
+  // steps down without surrendering the display weight.
+  #{$broadsheet-lead} .nb-supernova-item .nb-card__title {
+    --font-size: calc(var(--theme-heading-2-font-size) * 1.9);
+    --current-font-weight: var(--broadsheet-title-weight);
+    --current-line-height: calc(var(--theme-heading-2-line-height) * 0.88);
+    --current-letter-spacing: calc(var(--theme-heading-2-letter-spacing) * 0.5);
+  }
+
+  #{$broadsheet-lead} .nb-supernova-item.nb-card--title-long .nb-card__title {
+    --font-size: calc(var(--theme-heading-2-font-size) * 1.4);
+  }
+
+  .nb-supernova-item.nb-card--media-wide:not(.format-quote) .nb-card__title {
+    --font-size: calc(var(--theme-heading-2-font-size) * 1.4);
+    --current-font-weight: var(--broadsheet-title-weight);
+  }
+
+  .nb-card__description {
+    @include apply-font(small-body);
+    font-size: calc(var(--theme-small-body-font-size) * 1px);
+    line-height: var(--theme-small-body-line-height);
+    margin-top: 0;
+  }
+
+  // Datelines: quiet small caps in the secondary voice.
+  .nb-card__meta {
+    font-size: calc(var(--theme-small-body-font-size) * 0.78px);
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--sm-current-fg2-color);
+  }
+
+  // Pull-quote voice: the palette's display face in italic.
+  .nb-supernova-item.format-quote blockquote {
+    p {
+      @include apply-font(heading-2);
+      --font-size: calc(var(--theme-heading-2-font-size) * 1.1);
+      --current-line-height: calc(var(--theme-heading-2-line-height) * 1.05);
+      @include apply-font-properties;
+      font-size: calc(var(--font-size) * 1px);
+      font-style: italic;
+    }
+
+    cite {
+      display: block;
+      margin-top: 1em;
+      font-size: calc(var(--theme-small-body-font-size) * 0.78px);
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--sm-current-fg2-color);
+      opacity: 0.85;
+    }
+  }
+}
+
+#{$broadsheet-scope} {
+  @include broadsheet-card-type-system;
+}
+
+// Gutenberg's editor typography rules carry an extra wrapper selector. Repeat
+// the token-driven type system at matching specificity; layout rules below are
+// shared because frontend and editor render the same flat classic grid.
+#{$broadsheet-editor-scope} {
+  // Style Manager restores this multiplier to 1 on the frontend, while the
+  // wp.org editor baseline remains 0.9375. Match the frontend inside the
+  // Broadsheet without touching unrelated editor content.
+  --font-size-base: 1;
+
+  @include broadsheet-card-type-system;
+
+  // Feed the raw authored sizes back through Anima's fluid type equation,
+  // exactly as the lower-specificity frontend copy resolves them.
+  .nb-card__title {
+    font-size: var(--current-font-size);
+  }
+
+  .nb-supernova-item.format-quote blockquote p {
+    font-size: var(--current-font-size);
+  }
+}
+
+// ==========================================================================
+// MASTHEAD RULE — the double hairline that starts the front page
+// ==========================================================================
+#{$broadsheet-scope} .nb-collection__body {
+  border-top: 3px double var(--sm-current-fg1-color);
+  padding-top: calc(var(--theme-spacing-smallest) * 2.5);
+}
+
+// Nova reserves the adjacent Header's height on the collection (inline
+// padding) for the overlay-header pattern. Inside the collection canvas the
+// Patch-style header sits in NORMAL flow, so the reservation would double the
+// space — same neutralization Collage applies in its header-bound mode.
+.anima-collection-canvas #{$broadsheet-scope} {
+  padding-top: calc(var(--theme-spacing-normal) * 1.25) !important;
+}
+
+// ==========================================================================
+// GRID — dense editorial packing + column rules (desktop only: the engine
+// collapses to a single column below the tablet breakpoint)
+// ==========================================================================
+@include above(tablet) {
+  #{$broadsheet-scope} {
+    .nb-collection__layout[class] {
+      // Backfill around the spanning lead/features so the page reads as a
+      // packed front page. Visual order may diverge from DOM order; reading
+      // and tab order stay chronological — a deliberate front-page trade.
+      grid-auto-flow: row dense;
+      // Broadsheet tracks need room for datelines and decks: cap the band
+      // between tablet and lap at two columns (the authored count returns
+      // above lap); the spanning lead/feature go full-width here.
+      --nb-collection-columns: 2;
+      background-image: unquote('linear-gradient(to right, transparent calc(50% - 0.5px), #{$broadsheet-rule} calc(50% - 0.5px), #{$broadsheet-rule} calc(50% + 0.5px), transparent calc(50% + 0.5px))');
+    }
+
+    // LEAD STORY — the first real card owns two tracks.
+    #{$broadsheet-lead} {
+      grid-column: span 2;
+
+      .nb-supernova-item .nb-card__description {
+        column-count: 2;
+        column-gap: var(--nb-grid-spacing);
+      }
+    }
+
+    // FEATURE — wide media earns two tracks and a panorama crop.
+    #{$broadsheet-item}:has(.nb-supernova-item.nb-card--media-wide):not(#{$broadsheet-lead}) {
+      grid-column: span 2;
+    }
+  }
+}
+
+@include above(lap) {
+  #{$broadsheet-scope} {
+    .nb-collection__layout[class] {
+      --nb-collection-columns: var(--nb-collection-columns-count);
+    }
+
+    @each $columns, $positions in $broadsheet-rule-positions {
+      &.nb-supernova--#{$columns}-columns .nb-collection__layout[class] {
+        $stops: '';
+
+        @each $position in $positions {
+          $rule: 'linear-gradient(to right, transparent calc(#{$position} - 0.5px), #{$broadsheet-rule} calc(#{$position} - 0.5px), #{$broadsheet-rule} calc(#{$position} + 0.5px), transparent calc(#{$position} + 0.5px))';
+          $stops: if($stops == '', $rule, $stops + ', ' + $rule);
+        }
+
+        background-image: unquote($stops);
+      }
+    }
+  }
+}
+
+// ==========================================================================
+// ROW ALIGNMENT — a front page aligns row TOPS
+// ==========================================================================
+// Anima's Original-ratio collections stagger cards on a vertical center line
+// (the Pile look, _items-aspect-ratio.scss); inside a Broadsheet the top
+// edges of a row are the typographic baseline, in every aspect mode.
+#{$broadsheet-scope} .nb-collection__layout[class] {
+  align-items: start;
+}
+
+// ==========================================================================
+// MEDIA CROPS — the classified ratio picks the newspaper crop
+// ==========================================================================
+// Rides Nova's media padding-top mechanism, so editor and frontend agree.
+#{$broadsheet-scope} {
+
+  .nb-supernova-item__media-wrapper {
+    margin-bottom: calc(var(--theme-spacing-smallest) * 1.25);
+  }
+
+  .nb-supernova-item.nb-card--media-landscape {
+    --nb-card-media-padding-top: 66.6667%;
+  }
+
+  .nb-supernova-item.nb-card--media-square {
+    --nb-card-media-padding-top: 100%;
+  }
+
+  .nb-supernova-item.nb-card--media-wide {
+    --nb-card-media-padding-top: 47%;
+  }
+
+  #{$broadsheet-lead} .nb-supernova-item {
+    --nb-card-media-padding-top: 56.25%;
+  }
+}
+
+// ==========================================================================
+// SIDE-BY-SIDE CARDS — portrait/tall media floats beside its text
+// ==========================================================================
+#{$broadsheet-scope} {
+
+  .nb-supernova-item.nb-card--media-portrait,
+  .nb-supernova-item.nb-card--media-tall {
+    // The generic supernova card is flex (with !important); floats need
+    // normal block flow so the copy can wrap under the image.
+    display: block !important;
+
+    .nb-supernova-item__media-wrapper {
+      float: left;
+      width: 44%;
+      margin-right: calc(var(--theme-spacing-smallest) * 1.5);
+      margin-bottom: calc(var(--theme-spacing-smallest) * 0.75);
+    }
+
+    // Nova's content wrapper is flex, which would form an independent box
+    // beside the float; block flow lets line boxes continue below the image.
+    .nb-supernova-item__content,
+    .nb-supernova-item__content--after-media {
+      display: block;
+    }
+  }
+
+  .nb-supernova-item.nb-card--media-portrait {
+    --nb-card-media-padding-top: 125%;
+  }
+
+  .nb-supernova-item.nb-card--media-tall {
+    --nb-card-media-padding-top: 145%;
+
+    .nb-supernova-item__media-wrapper {
+      width: 38%;
+    }
+  }
+}
+
+@include below(mobile) {
+  #{$broadsheet-scope} {
+    .nb-supernova-item.nb-card--media-portrait .nb-supernova-item__media-wrapper,
+    .nb-supernova-item.nb-card--media-tall .nb-supernova-item__media-wrapper {
+      width: 40%;
+    }
+  }
+}
+
+// ==========================================================================
+// BRIEFS — media-less posts become compact tinted note cards
+// ==========================================================================
+#{$broadsheet-scope} {
+
+  .nb-supernova-item.nb-card--no-media:not(.format-quote) {
+    background: $broadsheet-tint;
+    padding: calc(var(--theme-spacing-smallest) * 2);
+    height: 100%;
+
+    .nb-card__description {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+}
+
+// ==========================================================================
+// PULL-QUOTES — quote posts become typographic interludes
+// ==========================================================================
+#{$broadsheet-scope} {
+
+  // A thick ink rule tops the boxed quote, newspaper-style. The rule reads
+  // the PAGE's fg token (outside the card's own palette scope).
+  .nb-post-format-card-blueprint--quote {
+    border-top: 4px solid var(--sm-current-fg1-color);
+  }
+
+  // The blueprint's cover layer sizes from media; Broadsheet quotes carry no
+  // media, so return the quote copy to normal flow — the intrinsic text
+  // height grows the card. Without this, Original-ratio collections collapse
+  // the card to its borders while the white copy overflows invisibly (the
+  // same trap Collage documented for its Original-ratio quote blueprints).
+  .nb-post-format-card-blueprint--quote {
+    .nb-supernova-item__frame {
+      overflow: visible;
+    }
+
+    .nb-supernova-item__content[class][class],
+    .nb-supernova-item__content--after-media[class][class] {
+      position: relative !important;
+      inset: auto !important;
+    }
+  }
+
+  .nb-supernova-item.format-quote {
+    // The card's own palette variation IS the slab: the bg/fg tokens resolve
+    // INSIDE the card scope (sm-dark variation → dark surface, light copy),
+    // so the slab stays palette-aware without depending on media painting.
+    background-color: var(--sm-current-bg-color);
+    padding: calc(var(--theme-spacing-smallest) * 1.5) calc(var(--theme-spacing-smallest) * 2.5) calc(var(--theme-spacing-smallest) * 2);
+
+    // The quote carries the words; its featured image stays out of the paper.
+    .nb-supernova-item__media-wrapper {
+      display: none;
+    }
+
+    // The blueprint stacks the card's meta layer over the quote surface;
+    // a pull-quote's attribution belongs to its cite line, not a byline.
+    .nb-card__meta {
+      display: none;
+    }
+
+    blockquote::before {
+      content: '\201C';
+      display: block;
+      font-family: var(--theme-heading-2-font-family);
+      font-weight: 700;
+      font-size: calc(var(--theme-heading-2-font-size) * 2.2px);
+      line-height: 0.55;
+      color: var(--sm-current-accent-color);
+      margin-bottom: calc(var(--theme-spacing-smallest) * 0.5);
+    }
+  }
+}
+
+// ==========================================================================
+// SIGNALS — pinned bar
+// ==========================================================================
+// (The nb-card--fresh recency class stays available from Nova but gets no
+// presentation here — the dateline dot read as noise. George, 2026-07-16.)
+#{$broadsheet-scope} {
+
+  // Sticky posts carry a short accent bar above the headline.
+  .nb-supernova-item.is-sticky-post .nb-card__title::before {
+    content: '';
+    display: block;
+    width: 2.2em;
+    height: 0.16em;
+    background: var(--sm-current-accent-color);
+    margin-bottom: 0.4em;
+  }
+}
+
+// ==========================================================================
+// STORY RHYTHM — clamp the standard columns so rows stay newspaper-tight
+// ==========================================================================
+#{$broadsheet-scope} {
+
+  // Standard single-track stories clamp their excerpt; the lead and features
+  // run their full excerpt (they own the drop caps instead).
+  .nb-supernova-item:not(.nb-card--no-media):not(.format-quote):not(.nb-card--media-wide) .nb-card__description {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  #{$broadsheet-lead} .nb-supernova-item .nb-card__description {
+    display: block;
+    -webkit-line-clamp: none;
+    overflow: visible;
+  }
+}

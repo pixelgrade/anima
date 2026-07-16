@@ -227,7 +227,8 @@ function anima_add_card_metadata_style_editor_setting( $settings ): array {
 }
 
 /**
- * Register the Collage recipe with Nova's authoritative recipe registry.
+ * Register the Collage and Broadsheet recipes with Nova's authoritative
+ * recipe registry.
  *
  * @param array $recipes Recipes supplied by Nova and other integrations.
  * @return array
@@ -260,6 +261,35 @@ function anima_register_collection_layout_recipes( $recipes ): array {
 			'headerIntegration' => true,
 			'linkedPostMetadata' => true,
 			'readMoreAffordance' => true,
+		],
+	];
+
+	// Broadsheet: a newspaper front page over the classic grid engine. Content
+	// signals assign editorial roles in CSS only (lead/feature/brief/pull-quote
+	// from the card-expression classes); pile3d stays off because the recipe
+	// uses dense grid flow, which breaks the 3D effect's nth-child column
+	// targeting; the site-header grid proxy is masonry-only, so no
+	// headerIntegration; fitColumns is a masonry-only control.
+	$recipes[] = [
+		'id'           => 'anima-broadsheet',
+		'label'        => __( 'Broadsheet (Beta)', '__theme_txtd' ),
+		'baseLayout'   => 'classic',
+		'thumbnail'    => 'broadsheet',
+		'defaults'     => [
+			'columns'             => 4,
+			'gridGap'             => 30,
+			'verticalGapModifier' => 1.5,
+		],
+		'capabilities' => [
+			'itemsGap'           => true,
+			'fitColumns'         => false,
+			'aspectRatio'        => true,
+			'hover'              => true,
+			'scrolling'          => true,
+			'pile3d'             => false,
+			'headerIntegration'  => false,
+			'linkedPostMetadata' => true,
+			'readMoreAffordance' => false,
 		],
 	];
 
