@@ -34,15 +34,20 @@ test( 'Gallery geometry follows the playground shelf and crop contract', () => {
   assert.match( css, /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic [^{]*\.nb-collection__layout[^}]*\{[^}]*gap: 26px !important;/ );
   assert.match( css, /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic [^{]*\.nb-supernova-item__media[^}]*\{[^}]*object-fit: cover;/ );
   assert.match( source, /flex:\s*0 0 var\(--nb-lattice-caption-height\)/ );
-  assert.match( source, /@include above\(lap\)\s*\{[\s\S]*?#\{\$lattice-scope\}\.nb-header-neighbour\s*\{[^}]*padding-top:\s*calc\(var\(--theme-spacing-normal\) \* 1\.25\)\s*!important;/ );
+  assert.doesNotMatch( source, /#\{\$lattice-scope\}\.nb-header-neighbour/ );
+  assert.doesNotMatch( source, /padding-top:[^;]*!important/ );
   assert.doesNotMatch( source, /object-position\s*:/ );
 } );
 
-test( 'Gallery captions and internal plates use semantic Anima tokens', () => {
+test( 'Gallery captions and internal plates use compact heading-2 role ratios', () => {
   const css = compileUtilityCss();
   const source = fs.readFileSync( latticePath, 'utf8' );
 
-  assert.match( css, /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic [^{]*\.nb-card__title[^}]*\{[^}]*--current-font-family: var\(--theme-heading-4-font-family\);/ );
+  assert.match( css, /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic [^{]*\.nb-card__title[^}]*\{[^}]*--current-font-family: var\(--theme-heading-2-font-family\);[^}]*--font-size: calc\(var\(--theme-heading-2-font-size\) \* 0\.324\);/ );
+  assert.match( source, /\.nb-supernova-item\.is-sticky-post \.nb-card__title\s*\{[^}]*--font-size:\s*calc\(var\(--theme-heading-2-font-size\) \* 0\.44\);[^}]*white-space:\s*normal;/ );
+  assert.match( source, /\.nb-supernova-item\.nb-card--no-media,[\s\S]*?\.nb-card__title\s*\{[^}]*--font-size:\s*calc\(var\(--theme-heading-2-font-size\) \* 0\.389\);/ );
+  assert.match( source, /blockquote\s*\{[\s\S]*?p\s*\{[^}]*@include apply-font\(heading-2\);[^}]*--font-size:\s*calc\(var\(--theme-heading-2-font-size\) \* 0\.453\);/ );
+  assert.doesNotMatch( source, /heading-4/ );
   assert.match( css, /\.nb-card__meta[^}]*\{[^}]*font-size: calc\(var\(--theme-small-body-font-size\) \* 0\.68px\);[^}]*text-transform: uppercase;/ );
   assert.match( source, /\.nb-card__meta\s*\{[\s\S]*?\n\s+:is\(\.nb-card__meta--primary, \.nb-card__meta-link\)\s*\{[^}]*font: inherit;[^}]*text-transform: inherit;[^}]*text-decoration: none;/ );
   assert.match( source, /var\(--sm-current-fg1-color\)/ );
@@ -51,8 +56,7 @@ test( 'Gallery captions and internal plates use semantic Anima tokens', () => {
   assert.match( source, /color-mix\(in srgb, var\(--sm-current-fg1-color\) 5%, var\(--sm-current-bg-color\)\)/ );
   assert.match( css, /\.nb-supernova-item\.format-quote/ );
   assert.match( css, /\.nb-supernova-item\.nb-card--no-media/ );
-  assert.match( source, /\.nb-supernova-item\.is-sticky-post \.nb-card__title\s*\{[^}]*white-space:\s*nowrap;/ );
-  assert.doesNotMatch( source, /\.nb-supernova-item\.is-sticky-post \.nb-card__title\s*\{[^}]*white-space:\s*normal;/ );
+  assert.match( source, /@media \(max-width: 599px\)[\s\S]*?\.nb-supernova-item\.is-sticky-post \.nb-card__title\s*\{[^}]*--font-size:\s*calc\(var\(--theme-heading-2-font-size\) \* 0\.324\);[^}]*white-space:\s*normal;/ );
   assert.doesNotMatch( source, /#[0-9a-f]{3,8}\b|font-family:\s*["']/i );
 } );
 

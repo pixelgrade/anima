@@ -9,16 +9,6 @@ $lattice-editor-scope: '.editor-styles-wrapper .nb-supernova--layout-recipe-anim
 $lattice-plate: color-mix(in srgb, var(--sm-current-fg1-color) 5%, var(--sm-current-bg-color));
 $lattice-rule: color-mix(in srgb, var(--sm-current-fg1-color) 12%, var(--sm-current-bg-color));
 
-// Above the mobile header breakpoint Anima keeps its Header in normal flow, so
-// replace Nova's duplicate inline reservation with the gallery's own breathing
-// room. Smaller viewports retain Nova's measured overlay-header reservation.
-// Both marker classes are block-local; other collections keep normal spacing.
-@include above(lap) {
-  #{$lattice-scope}.nb-header-neighbour {
-    padding-top: calc(var(--theme-spacing-normal) * 1.25) !important;
-  }
-}
-
 @mixin lattice-gallery-skin {
   --nb-lattice-caption-height: 50px;
 
@@ -122,10 +112,10 @@ $lattice-rule: color-mix(in srgb, var(--sm-current-fg1-color) 12%, var(--sm-curr
   }
 
   .nb-card__title {
-    @include apply-font(heading-4);
-    --font-size: calc(var(--theme-heading-4-font-size) * 0.48);
+    @include apply-font(heading-2);
+    --font-size: calc(var(--theme-heading-2-font-size) * 0.324);
     --current-line-height: 1.25;
-    --current-font-weight: min(600, var(--theme-heading-4-font-weight));
+    --current-font-weight: min(600, var(--theme-heading-2-font-weight));
 
     margin: 0;
     color: var(--sm-current-fg1-color);
@@ -175,9 +165,9 @@ $lattice-rule: color-mix(in srgb, var(--sm-current-fg1-color) 12%, var(--sm-curr
   }
 
   .nb-supernova-item.is-sticky-post .nb-card__title {
-    --font-size: calc(var(--theme-heading-4-font-size) * 0.65);
+    --font-size: calc(var(--theme-heading-2-font-size) * 0.44);
 
-    white-space: nowrap;
+    white-space: normal;
   }
 
   .nb-supernova-item.nb-card--no-media,
@@ -199,7 +189,7 @@ $lattice-rule: color-mix(in srgb, var(--sm-current-fg1-color) 12%, var(--sm-curr
     }
 
     .nb-card__title {
-      --font-size: calc(var(--theme-heading-4-font-size) * 0.58);
+      --font-size: calc(var(--theme-heading-2-font-size) * 0.389);
 
       line-height: 1.22;
       white-space: normal;
@@ -224,8 +214,8 @@ $lattice-rule: color-mix(in srgb, var(--sm-current-fg1-color) 12%, var(--sm-curr
       border: 0;
 
       p {
-        @include apply-font(heading-4);
-        --font-size: calc(var(--theme-heading-4-font-size) * 0.68);
+        @include apply-font(heading-2);
+        --font-size: calc(var(--theme-heading-2-font-size) * 0.453);
         --current-line-height: 1.36;
         --current-font-style: italic;
 
@@ -272,9 +262,9 @@ $lattice-rule: color-mix(in srgb, var(--sm-current-fg1-color) 12%, var(--sm-curr
 
   @media (max-width: 599px) {
     .nb-supernova-item.is-sticky-post .nb-card__title {
-      --font-size: calc(var(--theme-heading-4-font-size) * 0.48);
+      --font-size: calc(var(--theme-heading-2-font-size) * 0.324);
 
-      white-space: nowrap;
+      white-space: normal;
     }
   }
 }
