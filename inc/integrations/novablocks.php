@@ -326,7 +326,6 @@ function anima_register_collection_layout_recipes( $recipes ): array {
 			'itemsGap'           => false,
 			'verticalGap'        => false,
 			'aspectRatio'        => false,
-			'hoverEffect'        => false,
 			'fitColumns'         => false,
 			'scrolling'          => true,
 			'pile3d'             => false,

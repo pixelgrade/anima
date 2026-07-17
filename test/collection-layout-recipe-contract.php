@@ -100,7 +100,7 @@ if ( [ 'min' => 2, 'max' => 6 ] !== ( $lattice_capabilities['columnsRange'] ?? n
 	throw new RuntimeException( 'Lattice must expose the supported two-to-six desktop column range.' );
 }
 
-foreach ( [ 'itemsGap', 'verticalGap', 'aspectRatio', 'hoverEffect' ] as $fixed_capability ) {
+foreach ( [ 'itemsGap', 'verticalGap', 'aspectRatio' ] as $fixed_capability ) {
 	if ( false !== ( $lattice_capabilities[ $fixed_capability ] ?? null ) ) {
 		throw new RuntimeException( 'Lattice must hide seam-breaking control: ' . $fixed_capability );
 	}

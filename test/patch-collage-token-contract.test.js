@@ -129,7 +129,11 @@ test('Meta Reveal keeps stacked details in-frame and only opens non-stacked over
   );
   assert.match(
     source,
-    /&\.nb-supernova-item--layout-stacked\s*\{[\s\S]*?#\{\$leading-boundary\}\s*\{[^}]*transform: translateY\(var\(--theme-spacing-smallest\)\);[\s\S]*?#\{\$trailing-boundary\}\s*\{[^}]*transform: translateY\(calc\(var\(--theme-spacing-smallest\) \* -1\)\);/
+    /&\.nb-supernova-item--layout-stacked\s*\{[\s\S]*?#\{\$leading-boundary\}\s*\{[^}]*position: static;[^}]*inset: auto;[^}]*transform: translateY\(var\(--theme-spacing-smallest\)\);[\s\S]*?#\{\$trailing-boundary\}\s*\{[^}]*position: static;[^}]*inset: auto;[^}]*transform: translateY\(calc\(var\(--theme-spacing-smallest\) \* -1\)\);/
+  );
+  assert.match(
+    source,
+    /&\.nb-supernova-item--layout-stacked:is\(:has\(#\{\$leading-boundary\}\), :has\(#\{\$trailing-boundary\}\)\)[\s\S]*?> \.nb-supernova-item__frame:has[^}]*\{[^}]*grid-template-rows: auto minmax\(0, 1fr\) auto;[^}]*min-height: var\(--nb-block-content-min-height\);[\s\S]*?> \.nb-supernova-item__media-wrapper\s*\{[^}]*grid-area: 1 \/ 1 \/ 4 \/ 2 !important;[\s\S]*?> \.nb-supernova-item__content--before-media\s*\{[^}]*position: static !important;[^}]*grid-area: 1 \/ 1 \/ 2 \/ 2 !important;[^}]*min-height: 0 !important;[^}]*overflow: hidden !important;[\s\S]*?> \.nb-supernova-item__content--after-media\s*\{[^}]*position: static !important;[^}]*grid-area: 3 \/ 1 \/ 4 \/ 2 !important;[^}]*min-height: 0 !important;[^}]*overflow: hidden !important;/
   );
   assert.match(
     source,

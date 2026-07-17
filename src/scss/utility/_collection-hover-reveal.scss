@@ -163,16 +163,53 @@ $trailing-boundary: '> .nb-supernova-item__content:last-child:not(:first-child) 
     }
 
     // Stacked cards reveal inward, within the clipped frame, while the card
-    // itself stays anchored. The short offset reads as a reveal without
-    // moving content beyond the frame edge.
+    // itself stays anchored. Keep boundary details in normal flow so their
+    // reserved space prevents the revealed detail from covering the title.
     &.nb-supernova-item--layout-stacked {
 
       #{$leading-boundary} {
+        position: static;
+        inset: auto;
         transform: translateY(var(--theme-spacing-smallest));
       }
 
       #{$trailing-boundary} {
+        position: static;
+        inset: auto;
         transform: translateY(calc(var(--theme-spacing-smallest) * -1));
+      }
+    }
+
+    // When Media sits between content items, Nova normally overlays the two
+    // full-height content wrappers in one grid cell. Give those wrappers their
+    // own edge rows while Media spans the complete frame; each wrapper is then
+    // confined to its row, so boundary Meta cannot paint over Title even when
+    // the editor's media ratio constrains the card height.
+    &.nb-supernova-item--layout-stacked:is(:has(#{$leading-boundary}), :has(#{$trailing-boundary})) {
+
+      > .nb-supernova-item__frame:has(> .nb-supernova-item__content--before-media):has(> .nb-supernova-item__content--after-media) {
+        grid-template-rows: auto minmax(0, 1fr) auto;
+        min-height: var(--nb-block-content-min-height);
+
+        > .nb-supernova-item__media-wrapper {
+          grid-area: 1 / 1 / 4 / 2 !important;
+        }
+
+        > .nb-supernova-item__content--before-media {
+          position: static !important;
+          grid-area: 1 / 1 / 2 / 2 !important;
+          min-height: 0 !important;
+          overflow: hidden !important;
+          z-index: 20;
+        }
+
+        > .nb-supernova-item__content--after-media {
+          position: static !important;
+          grid-area: 3 / 1 / 4 / 2 !important;
+          min-height: 0 !important;
+          overflow: hidden !important;
+          z-index: 20;
+        }
       }
     }
 
