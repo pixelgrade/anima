@@ -64,8 +64,107 @@ test('Accent Label presentation is independent from Meta Reveal interaction', ()
   const css = compileUtilityCss();
 
   assert.match(css, /\.nb-supernova--card-metadata-style-accent-label [^{]*\.nb-card__meta\s*\{/);
-  assert.match(css, /\.nb-supernova--card-hover-reveal [^{]*\.nb-supernova-item__content--before-media\s*\{[^}]*position: absolute;/);
+  assert.match(
+    css,
+    /\.nb-supernova--card-hover-reveal [^{]*> :is\(\.nb-card__meta, \.nb-card__meta-combined, \.nb-card__buttons\):nth-child\(1 of [^{]+\)\s*\{[^}]*position: absolute;/
+  );
   assert.doesNotMatch(css, /\.nb-supernova--card-hover-reveal [^{]*\.nb-card__meta--primary[^}]*background-color:/);
+});
+
+test('Meta Reveal only hides metadata or buttons at visible card boundaries', () => {
+  const css = compileUtilityCss();
+  const revealRules = Array.from(css.matchAll(/([^{}]+)\{([^{}]+)\}/g))
+    .map(([, selector, declarations]) => ({ selector: selector.trim(), declarations }))
+    .filter(({ selector }) => selector.includes('.nb-supernova--card-hover-reveal'));
+  const hiddenBoundaryRules = revealRules.filter(({ selector, declarations }) =>
+    selector.includes(':is(.nb-card__meta, .nb-card__meta-combined, .nb-card__buttons)') &&
+    declarations.includes('position: absolute;') &&
+    declarations.includes('opacity: 0;') &&
+    declarations.includes('pointer-events: none;')
+  );
+
+  assert.equal(hiddenBoundaryRules.length, 2);
+  for (const { selector } of hiddenBoundaryRules) {
+    assert.match(
+      selector,
+      /> :is\(\.nb-card__meta, \.nb-card__meta-combined, \.nb-card__buttons\):nth-(?:last-)?child/
+    );
+  }
+
+  const leadingRule = hiddenBoundaryRules.find(({ selector }) =>
+    selector.includes('.nb-supernova-item__content:first-child')
+  );
+  const trailingRule = hiddenBoundaryRules.find(({ selector }) =>
+    selector.includes('.nb-supernova-item__content:last-child')
+  );
+
+  assert.ok(leadingRule);
+  assert.match(leadingRule.declarations, /top: 0;/);
+  assert.ok(trailingRule);
+  assert.match(trailingRule.declarations, /bottom: 0;/);
+
+  assert.doesNotMatch(
+    css,
+    /\.nb-supernova--card-hover-reveal [^{]*\.nb-supernova-item__content--before-media\s*\{[^}]*opacity: 0;/
+  );
+  assert.doesNotMatch(
+    css,
+    /\.nb-supernova--card-hover-reveal [^{]*\.nb-supernova-item__content--before-media\s*\{[^}]*position: absolute;/
+  );
+});
+
+test('Meta Reveal keeps stacked details in-frame and only opens non-stacked overflow', () => {
+  const source = fs.readFileSync(
+    path.join(__dirname, '..', 'src', 'scss', 'utility', '_collection-hover-reveal.scss'),
+    'utf8'
+  );
+
+  assert.match(
+    source,
+    /#\{\$outward-reveal-scope\} \.nb-collection__layout-item:has\(> \.nb-supernova-item:not\(\.nb-supernova-item--layout-stacked\)\)\s*\{[^}]*overflow: visible;[^}]*min-width: 0;/s
+  );
+  assert.match(
+    source,
+    /#\{\$outward-reveal-scope\} \.nb-supernova-item:not\(\.nb-supernova-item--layout-stacked\)\s*\{[\s\S]*?> \.nb-supernova-item__content,[\s\S]*?> \.nb-supernova-item__frame > \.nb-supernova-item__content\s*\{[^}]*overflow: visible;/
+  );
+  assert.match(
+    source,
+    /&\.nb-supernova-item--layout-stacked\s*\{[\s\S]*?#\{\$leading-boundary\}\s*\{[^}]*transform: translateY\(var\(--theme-spacing-smallest\)\);[\s\S]*?#\{\$trailing-boundary\}\s*\{[^}]*transform: translateY\(calc\(var\(--theme-spacing-smallest\) \* -1\)\);/
+  );
+  assert.match(
+    source,
+    /&\.nb-supernova-item--layout-stacked:is\(:hover, :focus-within\)\s*\{[\s\S]*?transform: translateY\(0\);/
+  );
+  assert.doesNotMatch(
+    source,
+    /nb-supernova-item--layout-stacked[^{}]*\.nb-supernova-item__frame\s*\{[^}]*overflow: visible;/s
+  );
+});
+
+test('Meta Reveal uses an in-frame reveal for clipped collection compositions', () => {
+  const source = fs.readFileSync(
+    path.join(__dirname, '..', 'src', 'scss', 'utility', '_collection-hover-reveal.scss'),
+    'utf8'
+  );
+
+  assert.match(
+    source,
+    /\$outward-reveal-scope: '#\{\$reveal-scope\}:not\(\.nb-supernova--layout-carousel\):not\(\.nb-supernova--layout-parametric\)';/
+  );
+  assert.match(
+    source,
+    /\$in-frame-collection-scope: '#\{\$reveal-scope\}:is\(\.nb-supernova--layout-carousel, \.nb-supernova--layout-parametric\)';/
+  );
+  assert.match(
+    source,
+    /#\{\$in-frame-collection-scope\} \.nb-supernova-item:not\(\.nb-supernova-item--layout-stacked\)\s*\{[\s\S]*?#\{\$leading-boundary\}\s*\{[^}]*transform: translateY\(var\(--theme-spacing-smallest\)\);[\s\S]*?#\{\$trailing-boundary\}\s*\{[^}]*transform: translateY\(calc\(var\(--theme-spacing-smallest\) \* -1\)\);/
+  );
+  assert.match(
+    source,
+    /#\{\$in-frame-collection-scope\} \.nb-supernova-item:not\(\.nb-supernova-item--layout-stacked\):is\(:hover, :focus-within\)\s*\{[\s\S]*?transform: translateY\(0\);/
+  );
+  assert.doesNotMatch(source, /\.slick-list\s*\{[^}]*overflow: visible;/s);
+  assert.doesNotMatch(source, /\.nb-grid__area\s*\{[^}]*overflow: visible;/s);
 });
 
 test('Patch hover typography, colors, spacing, and motion consume theme tokens', () => {
@@ -101,33 +200,36 @@ test('Patch hover typography, colors, spacing, and motion consume theme tokens',
   assert.match(css, /is-sticky-post[^}]*::after[^}]*\{[^}]*background-color: var\(--sm-current-accent-color\);/);
 });
 
-test('Patch hover reveal keeps linked metadata visible for keyboard focus', () => {
+test('Patch hover reveal exposes boundary details for keyboard focus', () => {
   const css = compileUtilityCss();
+  const focusRevealRules = Array.from(css.matchAll(/([^{}]+)\{([^{}]+)\}/g))
+    .map(([, selector, declarations]) => ({ selector: selector.trim(), declarations }))
+    .filter(({ selector, declarations }) =>
+      selector.includes('.nb-supernova--card-hover-reveal') &&
+      selector.includes(':focus-within') &&
+      selector.includes(':is(.nb-card__meta, .nb-card__meta-combined, .nb-card__buttons)') &&
+      declarations.includes('opacity: 1;') &&
+      declarations.includes('pointer-events: auto;')
+    );
 
-  assert.match(
-    css,
-    /\.nb-supernova--card-hover-reveal \.nb-supernova-item \.nb-supernova-item__content--before-media\s*\{[^}]*display: block;[^}]*height: auto;[^}]*min-height: 0;/
+  assert.equal(focusRevealRules.length, 4);
+  assert.ok(focusRevealRules.some(({ declarations }) => declarations.includes('translateY(calc(-100%')));
+  assert.ok(focusRevealRules.some(({ declarations }) => declarations.includes('translateY(calc(100%')));
+  const stackedFocusRules = focusRevealRules.filter(({ selector, declarations }) =>
+      selector.includes('.nb-supernova-item.nb-supernova-item--layout-stacked:is') &&
+      declarations.includes('transform: translateY(0);')
   );
-  assert.match(
-    css,
-    /body:not\(\.editor-styles-wrapper\) \.nb-supernova--card-hover-reveal\.nb-supernova--aspect-ratio-original \.nb-supernova-item--layout-stacked \.nb-supernova-item__content--before-media\[class\]\s*\{[^}]*bottom: auto;/
+  assert.equal(stackedFocusRules.length, 1);
+  assert.match(stackedFocusRules[0].selector, /:nth-child\(1 of/);
+  assert.match(stackedFocusRules[0].selector, /:nth-last-child\(1 of/);
+  const constrainedFocusRules = focusRevealRules.filter(({ selector, declarations }) =>
+      selector.includes(':is(.nb-supernova--layout-carousel, .nb-supernova--layout-parametric)') &&
+      declarations.includes('transform: translateY(0);')
   );
-  assert.match(
-    css,
-    /body:not\(\.editor-styles-wrapper\) \.nb-supernova--card-hover-reveal\.nb-supernova--aspect-ratio-original \.nb-supernova-item--layout-stacked \.nb-supernova-item__content--before-media\[class\] \.nb-supernova-item__inner-container\[class\]\[class\]\[class\]\s*\{[^}]*height: auto;[^}]*padding: 0;[^}]*padding-top: 0 !important;[^}]*padding-bottom: 0 !important;[^}]*align-items: flex-start;[^}]*justify-content: flex-start;/
-  );
-  assert.match(
-    css,
-    /\.nb-supernova--card-hover-reveal \.nb-post-format-card-blueprint--quote \.nb-supernova-item__content--before-media\s*\{[^}]*color: var\(--sm-fg1-color-1\);/
-  );
-  assert.match(
-    css,
-    /\.nb-supernova--card-hover-reveal \.nb-supernova-item:focus-within \{[^}]*--anima-card-hover-y: calc\(var\(--theme-spacing-smallest\) \* 1\.875\);/
-  );
-  assert.match(
-    css,
-    /\.nb-supernova--card-hover-reveal \.nb-supernova-item:focus-within \.nb-supernova-item__content--before-media \{[^}]*opacity: 1;[^}]*z-index: 1;[^}]*pointer-events: auto;/
-  );
+  assert.equal(constrainedFocusRules.length, 1);
+  assert.match(constrainedFocusRules[0].selector, /:nth-child\(1 of/);
+  assert.match(constrainedFocusRules[0].selector, /:nth-last-child\(1 of/);
+  assert.match(css, /\.nb-supernova--card-hover-reveal \.nb-post-format-card-blueprint--quote \.nb-card__meta\s*\{[^}]*color: var\(--sm-fg1-color-1\);/);
   assert.match(
     css,
     /\.nb-supernova--card-hover-reveal \.nb-supernova-item:focus-within \.nb-supernova-item__media-wrapper/
@@ -162,7 +264,7 @@ test('Patch collage uses the shared flat masonry contract in the editor', () => 
   assert.doesNotMatch(source, /nb-collection__layout-column/);
   assert.doesNotMatch(source, /approximate the collage inside the block editor/i);
   assert.match(source, /\.nb-collection__layout-item--col-even\s*\{/);
-  assert.match(source, /&\.nb-supernova--card-hover-reveal[\s\S]*?\.nb-supernova-item__content:not\(\.nb-supernova-item__content--before-media\):not\(\.nb-supernova-item__content--after-media\) \.nb-card__meta\s*\{[^}]*position: absolute;[^}]*opacity: 0;/);
+  assert.doesNotMatch(source, /\.nb-supernova-item__content:not\(\.nb-supernova-item__content--before-media\):not\(\.nb-supernova-item__content--after-media\) \.nb-card__meta/);
 });
 
 test('Patch portrait and tall cards let after-media copy wrap around floated media', () => {

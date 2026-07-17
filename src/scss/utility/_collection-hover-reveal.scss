@@ -2,18 +2,24 @@
 //
 // Inspired by the Patch theme's card hover ritual: the card sinks slightly,
 // the media drains to grayscale behind a centered "Read More" cue, and the
-// hidden meta row slides out from behind the card's top edge.
+// boundary metadata or buttons slide out from behind the card edge.
 //
 // Activation: Nova Blocks' Card Hover Effect attribute (`cardHoverEffect:
 // reveal`) — class `nb-supernova--card-hover-reveal` on the collection.
-// Works best with the meta elements ordered before Media (Content Details →
-// Structure), which renders them in `.nb-supernova-item__content--before-media`.
+// Content Details → Structure decides the card order. Only metadata or buttons
+// at the first/last visible boundary participate in the reveal.
 
 $reveal-scope: '.nb-supernova--card-hover-reveal';
+$outward-reveal-scope: '#{$reveal-scope}:not(.nb-supernova--layout-carousel):not(.nb-supernova--layout-parametric)';
+$in-frame-collection-scope: '#{$reveal-scope}:is(.nb-supernova--layout-carousel, .nb-supernova--layout-parametric)';
 $accent-label-scope: '.nb-supernova--card-metadata-style-accent-label';
 $accent-label-collage-scope: '#{$accent-label-scope}.nb-supernova--layout-recipe-anima-collage.nb-supernova--layout-masonry';
 $reveal-duration: var(--reveal-duration);
 $reveal-easing: var(--reveal-easing);
+$revealable-item: ':is(.nb-card__meta, .nb-card__meta-combined, .nb-card__buttons)';
+$card-item: ':is(.nb-card__meta, .nb-card__meta-combined, .nb-card__title, .nb-card__subtitle, .nb-card__description, .nb-card__buttons)';
+$leading-boundary: '> .nb-supernova-item__content:first-child > .nb-supernova-item__inner-container > #{$revealable-item}:nth-child(1 of #{$card-item}), > .nb-supernova-item__frame > .nb-supernova-item__content:first-child > .nb-supernova-item__inner-container > #{$revealable-item}:nth-child(1 of #{$card-item})';
+$trailing-boundary: '> .nb-supernova-item__content:last-child:not(:first-child) > .nb-supernova-item__inner-container > #{$revealable-item}:nth-last-child(1 of #{$card-item}), > .nb-supernova-item__content:only-child > .nb-supernova-item__inner-container > #{$revealable-item}:nth-last-child(1 of #{$card-item}):not(:nth-child(1 of #{$card-item})), > .nb-supernova-item__frame > .nb-supernova-item__content:last-child:not(:first-child) > .nb-supernova-item__inner-container > #{$revealable-item}:nth-last-child(1 of #{$card-item}), > .nb-supernova-item__frame > .nb-supernova-item__content:only-child > .nb-supernova-item__inner-container > #{$revealable-item}:nth-last-child(1 of #{$card-item}):not(:nth-child(1 of #{$card-item}))';
 
 #{$reveal-scope} {
   --reveal-duration: var(--theme-transition-duration-fast);
@@ -25,12 +31,40 @@ $reveal-easing: var(--reveal-easing);
   #{$reveal-scope} .nb-supernova-item {
     --anima-card-hover-y: 0px;
 
+    position: relative;
     transform: translateY(var(--anima-card-hover-y));
     transition: transform $reveal-duration $reveal-easing;
+  }
 
-    &:hover,
-    &:focus-within {
-      --anima-card-hover-y: calc(var(--theme-spacing-smallest) * 1.875);
+  // Movement creates room only for an actual outward boundary reveal. A
+  // leading item sinks the card; a trailing item lifts it; cards with both
+  // stay centered while the two details move in opposite directions.
+  #{$outward-reveal-scope} .nb-supernova-item:not(.nb-supernova-item--layout-stacked):is(:hover, :focus-within):has(#{$leading-boundary}) {
+    --anima-card-hover-y: calc(var(--theme-spacing-smallest) * 1.875);
+  }
+
+  #{$outward-reveal-scope} .nb-supernova-item:not(.nb-supernova-item--layout-stacked):is(:hover, :focus-within):has(#{$trailing-boundary}) {
+    --anima-card-hover-y: calc(var(--theme-spacing-smallest) * -1.875);
+  }
+
+  #{$outward-reveal-scope} .nb-supernova-item:not(.nb-supernova-item--layout-stacked):is(:hover, :focus-within):has(#{$leading-boundary}):has(#{$trailing-boundary}) {
+    --anima-card-hover-y: 0px;
+  }
+
+  // Boundary details leave the regular card box only in non-stacked layouts.
+  // Nova clips collection items and content by default, so open those two
+  // layers inside this explicit effect scope. Keep the stacked frame's
+  // overflow guard intact: it prevents an editor grid auto-sizing explosion.
+  #{$outward-reveal-scope} .nb-collection__layout-item:has(> .nb-supernova-item:not(.nb-supernova-item--layout-stacked)) {
+    overflow: visible;
+    min-width: 0;
+  }
+
+  #{$outward-reveal-scope} .nb-supernova-item:not(.nb-supernova-item--layout-stacked) {
+
+    > .nb-supernova-item__content,
+    > .nb-supernova-item__frame > .nb-supernova-item__content {
+      overflow: visible;
     }
   }
 
@@ -97,49 +131,104 @@ $reveal-easing: var(--reveal-easing);
     }
   }
 
-  // --- META ROW: hidden behind the card, slides up from the top edge ---
-  #{$reveal-scope} .nb-supernova-item .nb-supernova-item__content--before-media {
-    display: block;
-    height: auto;
-    min-height: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    opacity: 0;
-    z-index: -1;
-    transform: translateY(0);
-    transition: transform $reveal-duration $reveal-easing, opacity $reveal-duration $reveal-easing;
-    pointer-events: none;
-  }
+  // --- BOUNDARY DETAILS ---
+  // Only metadata and buttons can reveal, and only when they are the first or
+  // last visible item in the card. Keeping the positioning on the semantic
+  // item (rather than its content wrapper) prevents a reordered Title or
+  // Description from disappearing with it.
+  #{$reveal-scope} .nb-supernova-item {
 
-  // Original-ratio stacked cards stretch every content layer from top to
-  // bottom. Let the reveal metadata keep its intrinsic one-row height.
-  body:not(.editor-styles-wrapper) #{$reveal-scope}.nb-supernova--aspect-ratio-original .nb-supernova-item--layout-stacked .nb-supernova-item__content--before-media[class] {
-    bottom: auto;
+    #{$leading-boundary} {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      z-index: -1;
+      transform: translateY(0);
+      transition: transform $reveal-duration $reveal-easing, opacity $reveal-duration $reveal-easing;
+      pointer-events: none;
+    }
 
-    .nb-supernova-item__inner-container[class][class][class] {
-      height: auto;
-      padding: 0;
-      padding-top: 0 !important;
-      padding-bottom: 0 !important;
-      align-items: flex-start;
-      justify-content: flex-start;
+    #{$trailing-boundary} {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      z-index: -1;
+      transform: translateY(0);
+      transition: transform $reveal-duration $reveal-easing, opacity $reveal-duration $reveal-easing;
+      pointer-events: none;
+    }
+
+    // Stacked cards reveal inward, within the clipped frame, while the card
+    // itself stays anchored. The short offset reads as a reveal without
+    // moving content beyond the frame edge.
+    &.nb-supernova-item--layout-stacked {
+
+      #{$leading-boundary} {
+        transform: translateY(var(--theme-spacing-smallest));
+      }
+
+      #{$trailing-boundary} {
+        transform: translateY(calc(var(--theme-spacing-smallest) * -1));
+      }
+    }
+
+    &.nb-supernova-item--layout-stacked:is(:hover, :focus-within) {
+
+      #{$leading-boundary},
+      #{$trailing-boundary} {
+        opacity: 1;
+        z-index: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
     }
   }
 
-  #{$reveal-scope} .nb-supernova-item:hover .nb-supernova-item__content--before-media,
-  #{$reveal-scope} .nb-supernova-item:focus-within .nb-supernova-item__content--before-media {
-    opacity: 1;
-    z-index: 1;
-    transform: translateY(calc(-100% - var(--theme-spacing-smallest) * 0.5));
-    pointer-events: auto;
+  #{$outward-reveal-scope} .nb-supernova-item:not(.nb-supernova-item--layout-stacked):is(:hover, :focus-within) {
+
+    #{$leading-boundary} {
+      opacity: 1;
+      z-index: 1;
+      transform: translateY(calc(-100% - var(--theme-spacing-smallest) * 0.5));
+      pointer-events: auto;
+    }
+
+    #{$trailing-boundary} {
+      opacity: 1;
+      z-index: 1;
+      transform: translateY(calc(100% + var(--theme-spacing-smallest) * 0.5));
+      pointer-events: auto;
+    }
   }
 
-  // The sunken card needs a positioning context for the meta row.
-  #{$reveal-scope} .nb-supernova-item {
-    position: relative;
+  // Parametric areas and Carousel viewports intentionally clip their cards.
+  // Reveal inside those bounds rather than weakening the composition contract.
+  #{$in-frame-collection-scope} .nb-supernova-item:not(.nb-supernova-item--layout-stacked) {
+
+    #{$leading-boundary} {
+      transform: translateY(var(--theme-spacing-smallest));
+    }
+
+    #{$trailing-boundary} {
+      transform: translateY(calc(var(--theme-spacing-smallest) * -1));
+    }
   }
+
+  #{$in-frame-collection-scope} .nb-supernova-item:not(.nb-supernova-item--layout-stacked):is(:hover, :focus-within) {
+
+    #{$leading-boundary},
+    #{$trailing-boundary} {
+      opacity: 1;
+      z-index: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+  }
+
 }
 
 // --- ACCENT LABEL: site default or collection override, independent of hover ---
@@ -215,21 +304,12 @@ $reveal-easing: var(--reveal-easing);
 // Quote blueprints carry a dark color signal for the quote surface itself.
 // The metadata reveals outside that surface, so reconnect it to the page's
 // foreground role instead of inheriting white-on-dark card text.
-#{$reveal-scope} .nb-post-format-card-blueprint--quote .nb-supernova-item__content--before-media {
+#{$reveal-scope} .nb-post-format-card-blueprint--quote .nb-card__meta {
   color: var(--sm-fg1-color-1);
 
-  .nb-card__meta,
-  .nb-card__meta a,
+  &,
+  a,
   .nb-card__meta--primary {
     color: inherit;
-  }
-}
-
-// Touch devices: no hover ritual — the meta row is simply visible in place.
-@media (hover: none) {
-
-  #{$reveal-scope} .nb-supernova-item .nb-supernova-item__content--before-media {
-    position: static;
-    opacity: 1;
   }
 }

@@ -40,7 +40,11 @@ test('Pile parallax and card hover compose on the card layer', () => {
   assert.match(hoverSource, /--anima-card-hover-y:\s*0px;/);
   assert.match(
     hoverSource,
-    /&:focus-within\s*\{[^}]*--anima-card-hover-y:\s*calc\(var\(--theme-spacing-smallest\) \* 1\.875\);/s
+    /#\{\$outward-reveal-scope\} \.nb-supernova-item:not\(\.nb-supernova-item--layout-stacked\):is\(:hover, :focus-within\):has\(#\{\$leading-boundary\}\)\s*\{[^}]*--anima-card-hover-y:\s*calc\(var\(--theme-spacing-smallest\) \* 1\.875\);/s
+  );
+  assert.match(
+    hoverSource,
+    /#\{\$outward-reveal-scope\} \.nb-supernova-item:not\(\.nb-supernova-item--layout-stacked\):is\(:hover, :focus-within\):has\(#\{\$trailing-boundary\}\)\s*\{[^}]*--anima-card-hover-y:\s*calc\(var\(--theme-spacing-smallest\) \* -1\.875\);/s
   );
 });
 

@@ -211,34 +211,6 @@ $g: var(--collage-g, var(--nb-grid-spacing));
     }
   }
 
-  @media (hover: hover) {
-    &.nb-supernova--card-hover-reveal {
-      // PostCard combines metadata and after-media copy when there is no
-      // rendered media. Keep that editor-only DOM from adding a row the
-      // frontend's split before-media layer positions outside card flow.
-      .nb-supernova-item__content:not(.nb-supernova-item__content--before-media):not(.nb-supernova-item__content--after-media) .nb-card__meta {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        opacity: 0;
-        z-index: -1;
-        transform: translateY(0);
-        pointer-events: none;
-        transition: transform var(--reveal-duration) var(--reveal-easing), opacity var(--reveal-duration) var(--reveal-easing);
-      }
-
-      .nb-supernova-item:hover,
-      .nb-supernova-item:focus-within {
-        .nb-supernova-item__content:not(.nb-supernova-item__content--before-media):not(.nb-supernova-item__content--after-media) .nb-card__meta {
-          opacity: 1;
-          z-index: 1;
-          transform: translateY(calc(-100% - var(--theme-spacing-smallest) * 0.5));
-          pointer-events: auto;
-        }
-      }
-    }
-  }
 }
 
 // The collage grid must span the whole content band. Unlock the query
