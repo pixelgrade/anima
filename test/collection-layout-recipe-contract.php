@@ -83,6 +83,7 @@ foreach ( [
 	'showMeta'                   => true,
 	'primaryMetadata'            => 'date',
 	'secondaryMetadata'          => 'none',
+	'cardMetadataStyle'          => 'plain',
 	'cardHoverEffect'            => 'none',
 ] as $attribute => $expected ) {
 	if ( $expected !== ( $lattice_defaults[ $attribute ] ?? null ) ) {

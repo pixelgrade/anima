@@ -9,6 +9,16 @@ $lattice-editor-scope: '.editor-styles-wrapper .nb-supernova--layout-recipe-anim
 $lattice-plate: color-mix(in srgb, var(--sm-current-fg1-color) 5%, var(--sm-current-bg-color));
 $lattice-rule: color-mix(in srgb, var(--sm-current-fg1-color) 12%, var(--sm-current-bg-color));
 
+// Above the mobile header breakpoint Anima keeps its Header in normal flow, so
+// replace Nova's duplicate inline reservation with the gallery's own breathing
+// room. Smaller viewports retain Nova's measured overlay-header reservation.
+// Both marker classes are block-local; other collections keep normal spacing.
+@include above(lap) {
+  #{$lattice-scope}.nb-header-neighbour {
+    padding-top: calc(var(--theme-spacing-normal) * 1.25) !important;
+  }
+}
+
 @mixin lattice-gallery-skin {
   --nb-lattice-caption-height: 50px;
 
@@ -139,6 +149,14 @@ $lattice-rule: color-mix(in srgb, var(--sm-current-fg1-color) 12%, var(--sm-curr
     line-height: 1.2;
     letter-spacing: 0.09em;
     text-transform: uppercase;
+
+    :is(.nb-card__meta--primary, .nb-card__meta-link) {
+      font: inherit;
+      color: inherit;
+      letter-spacing: inherit;
+      text-transform: inherit;
+      text-decoration: none;
+    }
   }
 
   :is(.nb-card__subtitle, .nb-card__description, .nb-card__buttons, .nb-card__footer) {
@@ -159,7 +177,7 @@ $lattice-rule: color-mix(in srgb, var(--sm-current-fg1-color) 12%, var(--sm-curr
   .nb-supernova-item.is-sticky-post .nb-card__title {
     --font-size: calc(var(--theme-heading-4-font-size) * 0.65);
 
-    white-space: normal;
+    white-space: nowrap;
   }
 
   .nb-supernova-item.nb-card--no-media,

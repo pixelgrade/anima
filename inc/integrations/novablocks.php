@@ -227,8 +227,8 @@ function anima_add_card_metadata_style_editor_setting( $settings ): array {
 }
 
 /**
- * Register the Collage and Broadsheet recipes with Nova's authoritative
- * recipe registry.
+ * Register the Collage, Broadsheet, and Lattice recipes with Nova's
+ * authoritative recipe registry.
  *
  * @param array $recipes Recipes supplied by Nova and other integrations.
  * @return array
@@ -317,6 +317,7 @@ function anima_register_collection_layout_recipes( $recipes ): array {
 			'showMeta'                   => true,
 			'primaryMetadata'            => 'date',
 			'secondaryMetadata'          => 'none',
+			'cardMetadataStyle'          => 'plain',
 			'elementOrder'               => [ 'media', 'title', 'meta-primary' ],
 			'cardHoverEffect'            => 'none',
 		],
