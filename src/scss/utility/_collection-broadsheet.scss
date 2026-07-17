@@ -55,22 +55,18 @@ $broadsheet-rule-positions: (
 // ==========================================================================
 // TYPE SYSTEM — the broadsheet voice over the palette's own faces
 // ==========================================================================
-// Sizes are ratios over Anima's Heading 2 / small-body roles, so every Style
-// Manager palette brings its own faces, weights and tracking. The ladder is
-// deliberately INVERTED from Collage: short titles get display treatment,
-// long titles step down toward the body voice (they read as decks).
+// Nova's Card Title Heading + Card Title Font Size controls own the base role.
+// Broadsheet adds only the editorial hierarchy over that resolved title: the
+// ladder is deliberately INVERTED from Collage, with short titles shouting and
+// long titles stepping down toward the body voice (they read as decks).
 @mixin broadsheet-card-type-system {
-  --broadsheet-title-weight: min(800, calc(var(--theme-heading-2-font-weight) + 100));
-  --broadsheet-title-light-weight: var(--theme-body-font-weight);
+  .nb-card__title[class] {
+    --anima-card-title-expression-scale: 1;
+    --broadsheet-title-weight: min(800, calc(var(--current-font-weight) + 100));
+    --broadsheet-title-light-weight: min(var(--current-font-weight), var(--theme-body-font-weight));
 
-  .nb-card__title {
-    @include apply-font(heading-2);
-    // SM font-size tokens are unitless; supplying the unit here also avoids
-    // Anima's global fluid-size transform distorting the compact card ladder.
-    --font-size: calc(var(--theme-heading-2-font-size) * 0.88);
-    --current-line-height: calc(var(--theme-heading-2-line-height) * 0.95);
-
-    font-size: calc(var(--font-size) * 1px);
+    font-size: calc(var(--current-font-size) * var(--anima-card-title-expression-scale));
+    line-height: calc(var(--current-line-height) * 0.95);
     color: var(--sm-current-fg1-color);
     margin-top: 0;
     margin-bottom: calc(var(--theme-spacing-smallest) * 0.75);
@@ -81,33 +77,37 @@ $broadsheet-rule-positions: (
   }
 
   .nb-supernova-item.nb-card--title-short .nb-card__title {
-    --font-size: calc(var(--theme-heading-2-font-size) * 1.25);
-    --current-font-weight: var(--broadsheet-title-weight);
-    --current-letter-spacing: calc(var(--theme-heading-2-letter-spacing) * 0.75);
+    --anima-card-title-expression-scale: 1.420455;
+
+    font-weight: var(--broadsheet-title-weight);
+    letter-spacing: calc(var(--current-letter-spacing) * 0.75);
   }
 
   .nb-supernova-item.nb-card--title-long .nb-card__title {
-    --font-size: calc(var(--theme-heading-2-font-size) * 0.72);
-    --current-font-weight: var(--broadsheet-title-light-weight);
-    --current-line-height: calc(var(--theme-heading-2-line-height) * 1.05);
+    --anima-card-title-expression-scale: 0.818182;
+
+    font-weight: var(--broadsheet-title-light-weight);
+    line-height: calc(var(--current-line-height) * 1.05);
   }
 
   // The lead headline is the loudest voice on the page; a long lead title
   // steps down without surrendering the display weight.
   #{$broadsheet-lead} .nb-supernova-item .nb-card__title {
-    --font-size: calc(var(--theme-heading-2-font-size) * 1.9);
-    --current-font-weight: var(--broadsheet-title-weight);
-    --current-line-height: calc(var(--theme-heading-2-line-height) * 0.88);
-    --current-letter-spacing: calc(var(--theme-heading-2-letter-spacing) * 0.5);
+    --anima-card-title-expression-scale: 2.159091;
+
+    font-weight: var(--broadsheet-title-weight);
+    line-height: calc(var(--current-line-height) * 0.88);
+    letter-spacing: calc(var(--current-letter-spacing) * 0.5);
   }
 
   #{$broadsheet-lead} .nb-supernova-item.nb-card--title-long .nb-card__title {
-    --font-size: calc(var(--theme-heading-2-font-size) * 1.4);
+    --anima-card-title-expression-scale: 1.590909;
   }
 
   .nb-supernova-item.nb-card--media-wide:not(.format-quote) .nb-card__title {
-    --font-size: calc(var(--theme-heading-2-font-size) * 1.4);
-    --current-font-weight: var(--broadsheet-title-weight);
+    --anima-card-title-expression-scale: 1.590909;
+
+    font-weight: var(--broadsheet-title-weight);
   }
 
   .nb-card__description {
@@ -163,12 +163,6 @@ $broadsheet-rule-positions: (
   --font-size-base: 1;
 
   @include broadsheet-card-type-system;
-
-  // Feed the raw authored sizes back through Anima's fluid type equation,
-  // exactly as the lower-specificity frontend copy resolves them.
-  .nb-card__title {
-    font-size: var(--current-font-size);
-  }
 
   .nb-supernova-item.format-quote blockquote p {
     font-size: var(--current-font-size);

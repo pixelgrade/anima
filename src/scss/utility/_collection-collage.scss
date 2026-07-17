@@ -66,28 +66,22 @@ $g: var(--collage-g, var(--nb-grid-spacing));
   margin-top: 0;
 }
 
-// Patch's title sizes are ratios over Anima's Heading 2 role. This preserves
-// the exact 26 / 36 / 30 / 42px Patch ladder when the Patch palette is active,
-// while letting every other Style Manager palette bring its own faces, scale,
-// weight, tracking, transform, and line-height. The regular title weight sits
-// halfway between the palette heading and body voices; strong and light tiers
-// remain relative to that resolved value instead of assuming 300/400/700 exist.
+// Nova's Card Title Heading + Card Title Font Size controls own the base type
+// role. Collage keeps Patch's expressive hierarchy as relative multipliers over
+// that resolved size, so local authoring and Style Manager's global scale both
+// remain live. Weight, tracking, and leading stay relative to the selected
+// heading voice instead of assuming Heading 2 or fixed font metrics.
 @mixin collage-card-type-system {
-  --collage-title-weight: clamp(400, calc((var(--theme-heading-2-font-weight) + var(--theme-body-font-weight)) / 2 + 100), 700);
-  --collage-title-strong-weight: min(900, var(--collage-title-weight) + 300);
-  --collage-title-light-weight: min(var(--collage-title-weight), var(--theme-body-font-weight));
+  .nb-card__title[class] {
+    --anima-card-title-expression-scale: 1;
+    --collage-title-weight: clamp(400, calc((var(--current-font-weight) + var(--theme-body-font-weight)) / 2 + 100), 700);
+    --collage-title-strong-weight: min(900, var(--collage-title-weight) + 300);
+    --collage-title-light-weight: min(var(--collage-title-weight), var(--theme-body-font-weight));
 
-  .nb-card__title {
-    @include apply-font(heading-2);
-    // SM font-size tokens are unitless. Supplying the unit here also avoids
-    // Anima's global fluid-size transform, which would distort Patch's
-    // deliberately compact card ladder above the typography breakpoint.
-    --font-size: calc(var(--theme-heading-2-font-size) * 1.07);
-    --current-font-weight: var(--collage-title-weight);
-    --current-line-height: calc(var(--theme-heading-2-line-height) * 0.973154);
-    --current-letter-spacing: calc(var(--theme-heading-2-letter-spacing) * 0.666667);
-
-    font-size: calc(var(--font-size) * 1px);
+    font-size: calc(var(--current-font-size) * var(--anima-card-title-expression-scale));
+    font-weight: var(--collage-title-weight);
+    line-height: calc(var(--current-line-height) * 0.973154);
+    letter-spacing: calc(var(--current-letter-spacing) * 0.666667);
     color: var(--sm-current-fg1-color);
 
     a {
@@ -96,25 +90,27 @@ $g: var(--collage-g, var(--nb-grid-spacing));
   }
 
   .nb-supernova-item.nb-card--title-long .nb-card__title {
-    --current-font-weight: var(--collage-title-light-weight);
+    font-weight: var(--collage-title-light-weight);
   }
 
   .nb-supernova-item.nb-card--media-portrait,
   .nb-supernova-item.nb-card--media-tall {
     .nb-card__title {
-      --current-font-weight: var(--collage-title-strong-weight);
-      --current-letter-spacing: calc(var(--theme-heading-2-letter-spacing) * 0.5);
+      font-weight: var(--collage-title-strong-weight);
+      letter-spacing: calc(var(--current-letter-spacing) * 0.5);
     }
 
     &.nb-card--title-short .nb-card__title {
-      --font-size: calc(var(--theme-heading-2-font-size) * 1.481481);
-      --current-line-height: calc(var(--theme-heading-2-line-height) * 0.838926);
-      --current-letter-spacing: 0em;
+      --anima-card-title-expression-scale: 1.384562;
+
+      line-height: calc(var(--current-line-height) * 0.838926);
+      letter-spacing: 0em;
     }
 
     &.nb-card--title-medium .nb-card__title {
-      --font-size: calc(var(--theme-heading-2-font-size) * 1.234568);
-      --current-line-height: calc(var(--theme-heading-2-line-height) * 0.892617);
+      --anima-card-title-expression-scale: 1.153802;
+
+      line-height: calc(var(--current-line-height) * 0.892617);
     }
   }
 
@@ -131,19 +127,19 @@ $g: var(--collage-g, var(--nb-grid-spacing));
 
   .nb-supernova-item.nb-card--no-media.format-standard {
     .nb-card__title {
-      --current-font-weight: var(--collage-title-weight);
+      font-weight: var(--collage-title-weight);
     }
 
     &.nb-card--title-short .nb-card__title {
-      --font-size: calc(var(--theme-heading-2-font-size) * 1.728395);
+      --anima-card-title-expression-scale: 1.615322;
     }
 
     &.nb-card--title-medium .nb-card__title {
-      --font-size: calc(var(--theme-heading-2-font-size) * 1.481481);
+      --anima-card-title-expression-scale: 1.384562;
     }
 
     &.nb-card--title-long .nb-card__title {
-      --font-size: calc(var(--theme-heading-2-font-size) * 1.234568);
+      --anima-card-title-expression-scale: 1.153802;
     }
   }
 
@@ -182,13 +178,6 @@ $g: var(--collage-g, var(--nb-grid-spacing));
   --font-size-base: 1;
 
   @include collage-card-type-system;
-
-  // The higher-specificity editor copy above would otherwise make these raw
-  // authored sizes win. Feed them back through Anima's fluid type equation,
-  // exactly as the lower-specificity frontend copy is resolved.
-  .nb-card__title {
-    font-size: var(--current-font-size);
-  }
 
   .nb-supernova-item.format-quote blockquote {
     p,

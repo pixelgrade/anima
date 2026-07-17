@@ -14,7 +14,7 @@ function compileUtilityCss() {
   return css.replace(/\s+/g, ' ');
 }
 
-test('Patch collage title tiers derive from the heading palette with editor cascade specificity', () => {
+test('Patch collage title tiers scale the authored card title controls with editor cascade specificity', () => {
   const css = compileUtilityCss();
   const source = fs.readFileSync(
     path.join(__dirname, '..', 'src', 'scss', 'utility', '_collection-collage.scss'),
@@ -23,13 +23,13 @@ test('Patch collage title tiers derive from the heading palette with editor casc
 
   assert.match(
     css,
-    /\.nb-supernova--layout-recipe-anima-collage\.nb-supernova--layout-masonry [^{]*\.nb-card__title[^}]*\{[^}]*--current-font-family: var\(--theme-heading-2-font-family\);[^}]*--font-size: calc\(var\(--theme-heading-2-font-size\) \* 1\.07\);[^}]*font-size: calc\(var\(--font-size\) \* 1px\);/
+    /\.nb-supernova--layout-recipe-anima-collage\.nb-supernova--layout-masonry [^{]*\.nb-card__title\[class\][^}]*\{[^}]*--anima-card-title-expression-scale: 1;[^}]*font-size: calc\(var\(--current-font-size\) \* var\(--anima-card-title-expression-scale\)\);/
   );
   assert.match(
     css,
-    /\.editor-styles-wrapper [^{]*\.nb-card__title[^}]*\{[^}]*--current-font-family: var\(--theme-heading-2-font-family\);[^}]*--font-size: calc\(var\(--theme-heading-2-font-size\) \* 1\.07\);[^}]*font-size: calc\(var\(--font-size\) \* 1px\);/
+    /\.editor-styles-wrapper [^{]*\.nb-card__title\[class\][^}]*\{[^}]*--anima-card-title-expression-scale: 1;[^}]*font-size: calc\(var\(--current-font-size\) \* var\(--anima-card-title-expression-scale\)\);/
   );
-  assert.match(css, /--collage-title-weight: clamp\(400, calc\(\(var\(--theme-heading-2-font-weight\) \+ var\(--theme-body-font-weight\)\) \/ 2 \+ 100\), 700\);/);
+  assert.match(css, /--collage-title-weight: clamp\(400, calc\(\(var\(--current-font-weight\) \+ var\(--theme-body-font-weight\)\) \/ 2 \+ 100\), 700\);/);
   assert.match(css, /--collage-title-strong-weight: min\(900, var\(--collage-title-weight\) \+ 300\);/);
   assert.match(css, /--collage-title-light-weight: min\(var\(--collage-title-weight\), var\(--theme-body-font-weight\)\);/);
   assert.doesNotMatch(css, /\.nb-card__title[^}]*\{[^}]*font-size: 26px;/);
@@ -260,7 +260,8 @@ test('Patch collage uses the shared flat masonry contract in the editor', () => 
   );
 
   assert.match(source, /\$collage-editor-scope:/);
-  assert.match(source, /#\{\$collage-editor-scope\}\s*\{[\s\S]*?--font-size-base: 1;[\s\S]*?@include collage-card-type-system;[\s\S]*?\.nb-card__title\s*\{[^}]*font-size: var\(--current-font-size\);[\s\S]*?\.nb-supernova-item\.format-quote blockquote\s*\{[\s\S]*?p,[\s\S]*?cite\s*\{[^}]*font-size: var\(--current-font-size\);/);
+  assert.match(source, /#\{\$collage-editor-scope\}\s*\{[\s\S]*?--font-size-base: 1;[\s\S]*?@include collage-card-type-system;[\s\S]*?\.nb-supernova-item\.format-quote blockquote\s*\{[\s\S]*?p,[\s\S]*?cite\s*\{[^}]*font-size: var\(--current-font-size\);/);
+  assert.doesNotMatch(source, /#\{\$collage-editor-scope\}[\s\S]*?\.nb-card__title\s*\{[^}]*font-size: var\(--current-font-size\);/);
   assert.doesNotMatch(source, /nb-collection__layout-column/);
   assert.doesNotMatch(source, /approximate the collage inside the block editor/i);
   assert.match(source, /\.nb-collection__layout-item--col-even\s*\{/);
