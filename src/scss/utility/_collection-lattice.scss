@@ -8,6 +8,9 @@ $lattice-scope: '.nb-supernova--layout-recipe-anima-lattice.nb-supernova--layout
 $lattice-editor-scope: '.editor-styles-wrapper .nb-supernova--layout-recipe-anima-lattice.nb-supernova--layout-classic';
 $lattice-plate: color-mix(in srgb, var(--sm-current-fg1-color) 5%, var(--sm-current-bg-color));
 $lattice-rule: color-mix(in srgb, var(--sm-current-fg1-color) 12%, var(--sm-current-bg-color));
+$lattice-revealable-item: ':is(.nb-card__meta, .nb-card__meta-combined, .nb-card__buttons)';
+$lattice-card-item: ':is(.nb-card__meta, .nb-card__meta-combined, .nb-card__title, .nb-card__subtitle, .nb-card__description, .nb-card__buttons)';
+$lattice-isolated-reveal-item: '#{$lattice-revealable-item}:nth-child(1 of #{$lattice-card-item}):nth-last-child(1 of #{$lattice-card-item})';
 
 // Nova reads this custom property to calculate the shared row geometry. A
 // typed length makes token-based calc()/max() values serialize as resolved
@@ -31,7 +34,7 @@ $lattice-rule: color-mix(in srgb, var(--sm-current-fg1-color) 12%, var(--sm-curr
 
 @mixin lattice-gallery-skin {
   --nb-lattice-caption-height: 50px;
-  --nb-lattice-caption-title-factor: 1;
+  --nb-lattice-caption-title-factor: 3.4;
 
   // Card Title Heading and Card Title Font Size jointly resolve the semantic
   // role in utility/_font-size.scss. Mirror that map on the collection root so
@@ -107,10 +110,11 @@ $lattice-rule: color-mix(in srgb, var(--sm-current-fg1-color) 12%, var(--sm-curr
     @include lattice-caption-height(heading-6);
   }
 
-  // The feature title may use two lines. Raise every shelf by the same amount
-  // so its larger content-derived title never breaks the shared image seam.
+  // The feature title may use two larger lines while narrow modules may need
+  // four regular lines. Raise every shelf by the same amount so neither case
+  // breaks the shared image seam.
   &:has(.nb-supernova-item.is-sticky-post) {
-    --nb-lattice-caption-title-factor: 2.71605;
+    --nb-lattice-caption-title-factor: 3.4;
   }
 
   color: var(--sm-current-fg1-color);
@@ -212,6 +216,60 @@ $lattice-rule: color-mix(in srgb, var(--sm-current-fg1-color) 12%, var(--sm-curr
     }
   }
 
+  // A Lattice row budgets one shared caption shelf, not one shelf on either
+  // side of Media. When Title and an isolated reveal detail are split between
+  // wrappers, keep Title in that measured shelf and pin the detail to the
+  // adjacent media edge. This preserves the image seam while keeping reordered
+  // Title + Meta groups in normal flow together.
+  &.nb-supernova--card-hover-reveal {
+    .nb-supernova-item:not(.nb-card--no-media):not(.format-quote):has(> .nb-supernova-item__content--after-media > .nb-supernova-item__inner-container > .nb-card__title) {
+      > .nb-supernova-item__content--before-media:has(> .nb-supernova-item__inner-container > #{$lattice-isolated-reveal-item}) {
+        position: absolute !important;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 20;
+        flex: none;
+        width: 100%;
+        height: auto !important;
+        min-height: 0 !important;
+        padding: 9px 0 0 !important;
+        overflow: visible;
+      }
+    }
+
+    .nb-supernova-item:not(.nb-card--no-media):not(.format-quote):has(> .nb-supernova-item__content--before-media > .nb-supernova-item__inner-container > .nb-card__title) {
+      > .nb-supernova-item__content--after-media:has(> .nb-supernova-item__inner-container > #{$lattice-isolated-reveal-item}) {
+        position: absolute !important;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 20;
+        flex: none;
+        width: 100%;
+        height: auto !important;
+        min-height: 0 !important;
+        padding: 0 0 9px !important;
+        overflow: visible;
+      }
+    }
+
+    :is(.nb-supernova-item__content--before-media, .nb-supernova-item__content--after-media):has(> .nb-supernova-item__inner-container > #{$lattice-isolated-reveal-item}) {
+      > .nb-supernova-item__inner-container {
+        height: auto !important;
+      }
+
+      #{$lattice-isolated-reveal-item} {
+        align-self: flex-start;
+        width: max-content;
+        max-width: 100%;
+        margin: 0;
+        padding: calc(var(--theme-spacing-smallest) * 0.5) var(--theme-spacing-smallest);
+        background: color-mix(in srgb, var(--sm-current-bg-color) 92%, transparent);
+      }
+    }
+  }
+
   .nb-card__title[class] {
     --anima-card-title-expression-scale: 1;
 
@@ -220,9 +278,9 @@ $lattice-rule: color-mix(in srgb, var(--sm-current-fg1-color) 12%, var(--sm-curr
     font-size: calc(var(--current-font-size) * var(--anima-card-title-expression-scale));
     font-weight: min(600, var(--current-font-weight));
     line-height: 1.25;
-    white-space: nowrap;
+    white-space: normal;
+    overflow-wrap: anywhere;
     overflow: hidden;
-    text-overflow: ellipsis;
 
     a,
     .nb-supernova-item__link {
@@ -300,6 +358,31 @@ $lattice-rule: color-mix(in srgb, var(--sm-current-fg1-color) 12%, var(--sm-curr
     padding: 0;
     border: 0;
     background: transparent;
+  }
+
+  .nb-post-format-card-blueprint--quote {
+    &::before {
+      background: none;
+    }
+
+    > .nb-supernova-item.format-quote {
+      display: flex !important;
+      height: 100%;
+    }
+
+    .nb-supernova-item__frame {
+      height: 100%;
+      min-height: 0 !important;
+      overflow: hidden;
+    }
+
+    blockquote {
+      &::before,
+      &::after {
+        content: none;
+        display: none;
+      }
+    }
   }
 
   .nb-supernova-item.format-quote {

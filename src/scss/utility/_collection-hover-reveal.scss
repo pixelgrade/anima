@@ -225,9 +225,10 @@ $trailing-boundary: '> .nb-supernova-item__content:last-child:not(:first-child) 
     }
   }
 
-  // Lattice already reserves a fixed caption shelf for title plus metadata.
-  // Keep its boundary detail in normal flow so the shelf's overflow guard
-  // cannot clip the revealed text at the card edge.
+  // Lattice positions an isolated split-wrapper detail at the media edge and
+  // keeps same-wrapper details in its measured caption shelf. In both cases,
+  // the semantic item stays in its wrapper's flow so only the wrapper decides
+  // whether it participates in shelf geometry.
   #{$reveal-scope}.nb-supernova--layout-recipe-anima-lattice .nb-supernova-item:not(.nb-supernova-item--layout-stacked) {
 
     #{$leading-boundary},

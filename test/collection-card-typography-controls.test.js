@@ -85,7 +85,7 @@ test( 'Lattice resolves one token-driven caption shelf height from the selected 
 
   assert.match( source, /h3\.has-normal-font-size[\s\S]*?\{\s*@include lattice-caption-height\(heading-3\);/ );
   assert.match( source, /h2\.has-normal-font-size[\s\S]*?\{\s*@include lattice-caption-height\(heading-2\);/ );
-  assert.match( source, /&:has\(\.nb-supernova-item\.is-sticky-post\)[^{]*\{[^}]*--nb-lattice-caption-title-factor:\s*2\.71605;/ );
+  assert.match( source, /&:has\(\.nb-supernova-item\.is-sticky-post\)[^{]*\{[^}]*--nb-lattice-caption-title-factor:\s*3\.4;/ );
   assert.match( css, /@property --nb-lattice-caption-height\s*\{[^}]*syntax: "<length>";[^}]*inherits: true;[^}]*initial-value: 50px;/ );
   assert.match( css, /--nb-lattice-caption-height: max\(\s*50px, calc\(\s*var\(--theme-heading-3-font-size\)[^}]*var\(--theme-small-body-font-size\)/ );
 } );

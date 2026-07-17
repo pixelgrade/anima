@@ -32,6 +32,8 @@ test( 'Gallery geometry follows the playground shelf and crop contract', () => {
   const source = fs.readFileSync( latticePath, 'utf8' );
 
   assert.match( css, /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic[^}]*\{[^}]*--nb-lattice-caption-height: 50px;/ );
+  assert.match( css, /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic[^}]*\{[^}]*--nb-lattice-caption-title-factor: 3\.4;/ );
+  assert.match( source, /&:has\(\.nb-supernova-item\.is-sticky-post\)\s*\{[^}]*--nb-lattice-caption-title-factor:\s*3\.4;/ );
   assert.match( css, /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic [^{]*\.nb-collection__layout[^}]*\{[^}]*gap: 26px !important;/ );
   assert.match( css, /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic [^{]*\.nb-supernova-item__media[^}]*\{[^}]*object-fit: cover;/ );
   assert.match( source, /flex:\s*0 0 var\(--nb-lattice-caption-height\)/ );
@@ -45,6 +47,8 @@ test( 'Gallery captions preserve authored card typography while internal plates 
   const source = fs.readFileSync( latticePath, 'utf8' );
 
   assert.match( css, /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic [^{]*\.nb-card__title\[class\][^}]*\{[^}]*--anima-card-title-expression-scale: 1;[^}]*font-size: calc\(var\(--current-font-size\) \* var\(--anima-card-title-expression-scale\)\);/ );
+  assert.match( css, /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic [^{]*\.nb-card__title\[class\][^}]*\{[^}]*white-space: normal;[^}]*overflow-wrap: anywhere;/ );
+  assert.doesNotMatch( source, /\.nb-card__title\[class\][\s\S]*?white-space:\s*nowrap;/ );
   assert.match( source, /\.nb-supernova-item\.is-sticky-post \.nb-card__title\s*\{[^}]*--anima-card-title-expression-scale:\s*1\.358025;[^}]*white-space:\s*normal;/ );
   assert.match( source, /\.nb-supernova-item\.nb-card--no-media,[\s\S]*?\.nb-card__title\s*\{[^}]*--anima-card-title-expression-scale:\s*1\.200617;/ );
   assert.match( source, /blockquote\s*\{[\s\S]*?p\s*\{[^}]*@include apply-font\(heading-2\);[^}]*--font-size:\s*calc\(var\(--theme-heading-2-font-size\) \* 0\.453\);/ );
@@ -69,7 +73,7 @@ test( 'Gallery keeps focus visible and supplies quiet touch/mobile behavior', ()
   assert.match( css, /@media not screen and \(min-width: 768px\)/ );
 } );
 
-test( 'Gallery keeps Meta Reveal inside its bounded caption shelf', () => {
+test( 'Gallery keeps Meta Reveal inside its bounded Lattice wrapper', () => {
   const hoverRevealSource = fs.readFileSync( hoverRevealPath, 'utf8' );
   const latticeSource = fs.readFileSync( latticePath, 'utf8' );
 
@@ -91,6 +95,55 @@ test( 'Gallery keeps Meta Reveal inside its bounded caption shelf', () => {
   assert.match(
     hoverRevealSource,
     /#\{\$reveal-scope\}\.nb-supernova--layout-recipe-anima-lattice[\s\S]*?#\{\$leading-boundary\},\s*#\{\$trailing-boundary\}[\s\S]*?position:\s*static;[\s\S]*?inset:\s*auto;/,
-    'Lattice boundary details must stay in normal flow inside the clipped shelf',
+    'Lattice boundary details must stay in wrapper flow while the wrapper owns shelf or media-edge geometry',
+  );
+} );
+
+test( 'Gallery overlays only isolated split reveal details at the media edge', () => {
+  const css = compileUtilityCss();
+  const source = fs.readFileSync( latticePath, 'utf8' );
+
+  assert.match(
+    source,
+    /\$lattice-isolated-reveal-item:\s*'#\{\$lattice-revealable-item\}:nth-child\(1 of #\{\$lattice-card-item\}\):nth-last-child\(1 of #\{\$lattice-card-item\}\)'/,
+    'The structural exception must require one isolated semantic reveal item',
+  );
+  assert.match(
+    css,
+    /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic\.nb-supernova--card-hover-reveal [^{]*\.nb-supernova-item:not\(\.nb-card--no-media\):not\(\.format-quote\):has\(> \.nb-supernova-item__content--after-media > \.nb-supernova-item__inner-container > \.nb-card__title\) > \.nb-supernova-item__content--before-media:has\([^}]*\{[^}]*position: absolute !important;[^}]*top: 0;[^}]*height: auto !important;/,
+    'A leading isolated detail must overlay the top media edge instead of consuming a second shelf',
+  );
+  assert.match(
+    css,
+    /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic\.nb-supernova--card-hover-reveal [^{]*\.nb-supernova-item:not\(\.nb-card--no-media\):not\(\.format-quote\):has\(> \.nb-supernova-item__content--before-media > \.nb-supernova-item__inner-container > \.nb-card__title\) > \.nb-supernova-item__content--after-media:has\([^}]*\{[^}]*position: absolute !important;[^}]*bottom: 0;[^}]*height: auto !important;/,
+    'A trailing isolated detail must overlay the bottom media edge instead of consuming a second shelf',
+  );
+  assert.match(
+    source,
+    /background:\s*color-mix\(in srgb, var\(--sm-current-bg-color\) 92%, transparent\)/,
+    'The revealed edge label must remain readable through the current palette',
+  );
+} );
+
+test( 'Gallery contains Quote blueprints and removes the colliding editorial ornament', () => {
+  const css = compileUtilityCss();
+  const source = fs.readFileSync( latticePath, 'utf8' );
+
+  assert.match(
+    source,
+    /\.nb-post-format-card-blueprint--quote\s*\{[\s\S]*?&::before\s*\{[^}]*background:\s*none;/,
+    'The structural blueprint surface must not paint behind the Lattice quote plate',
+  );
+  assert.match(
+    css,
+    /\.nb-post-format-card-blueprint--quote > \.nb-supernova-item\.format-quote[^}]*\{[^}]*display: flex !important;[^}]*height: 100%;/,
+  );
+  assert.match(
+    css,
+    /\.nb-post-format-card-blueprint--quote [^{]*\.nb-supernova-item__frame[^}]*\{[^}]*height: 100%;[^}]*min-height: 0 !important;[^}]*overflow: hidden;/,
+  );
+  assert.match(
+    css,
+    /\.nb-post-format-card-blueprint--quote [^{]*blockquote::before[^,]*,[^{]*\.nb-post-format-card-blueprint--quote [^{]*blockquote::after[^}]*\{[^}]*content: none;[^}]*display: none;/,
   );
 } );
