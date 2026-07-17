@@ -153,11 +153,11 @@ test('Meta Reveal uses an in-frame reveal for clipped collection compositions', 
 
   assert.match(
     source,
-    /\$outward-reveal-scope: '#\{\$reveal-scope\}:not\(\.nb-supernova--layout-carousel\):not\(\.nb-supernova--layout-parametric\)';/
+    /\$outward-reveal-scope: '#\{\$reveal-scope\}:not\(\.nb-supernova--layout-carousel\):not\(\.nb-supernova--layout-parametric\):not\(\.nb-supernova--layout-recipe-anima-lattice\)';/
   );
   assert.match(
     source,
-    /\$in-frame-collection-scope: '#\{\$reveal-scope\}:is\(\.nb-supernova--layout-carousel, \.nb-supernova--layout-parametric\)';/
+    /\$in-frame-collection-scope: '#\{\$reveal-scope\}:is\(\.nb-supernova--layout-carousel, \.nb-supernova--layout-parametric, \.nb-supernova--layout-recipe-anima-lattice\)';/
   );
   assert.match(
     source,
@@ -227,7 +227,7 @@ test('Patch hover reveal exposes boundary details for keyboard focus', () => {
   assert.match(stackedFocusRules[0].selector, /:nth-child\(1 of/);
   assert.match(stackedFocusRules[0].selector, /:nth-last-child\(1 of/);
   const constrainedFocusRules = focusRevealRules.filter(({ selector, declarations }) =>
-      selector.includes(':is(.nb-supernova--layout-carousel, .nb-supernova--layout-parametric)') &&
+      selector.includes(':is(.nb-supernova--layout-carousel, .nb-supernova--layout-parametric, .nb-supernova--layout-recipe-anima-lattice)') &&
       declarations.includes('transform: translateY(0);')
   );
   assert.equal(constrainedFocusRules.length, 1);

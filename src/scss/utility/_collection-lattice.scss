@@ -343,7 +343,7 @@ $lattice-rule: color-mix(in srgb, var(--sm-current-fg1-color) 12%, var(--sm-curr
   }
 
   @media (hover: hover) {
-    .nb-supernova-item:hover :is(
+    &:not(.nb-supernova--card-hover-reveal) .nb-supernova-item:hover :is(
       .nb-supernova-item__media,
       .nb-card__media-image,
       .novablocks-media-composition__image,

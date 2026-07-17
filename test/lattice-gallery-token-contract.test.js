@@ -6,6 +6,7 @@ const sass = require( 'sass' );
 
 const themeRoot = path.join( __dirname, '..' );
 const latticePath = path.join( themeRoot, 'src', 'scss', 'utility', '_collection-lattice.scss' );
+const hoverRevealPath = path.join( themeRoot, 'src', 'scss', 'utility', '_collection-hover-reveal.scss' );
 
 function compileUtilityCss() {
   const { css } = sass.compile( path.join( themeRoot, 'src', 'scss', 'utility.scss' ), {
@@ -66,4 +67,30 @@ test( 'Gallery keeps focus visible and supplies quiet touch/mobile behavior', ()
   assert.match( css, /@media \(hover: hover\)/ );
   assert.match( css, /@media \(max-width: 599px\)/ );
   assert.match( css, /@media not screen and \(min-width: 768px\)/ );
+} );
+
+test( 'Gallery keeps Meta Reveal inside its bounded caption shelf', () => {
+  const hoverRevealSource = fs.readFileSync( hoverRevealPath, 'utf8' );
+  const latticeSource = fs.readFileSync( latticePath, 'utf8' );
+
+  assert.match(
+    hoverRevealSource,
+    /\$outward-reveal-scope:[^\n]*:not\(\.nb-supernova--layout-recipe-anima-lattice\)/,
+    'Lattice cards must not use the outward reveal that moves the whole card',
+  );
+  assert.match(
+    hoverRevealSource,
+    /\$in-frame-collection-scope:[^\n]*\.nb-supernova--layout-recipe-anima-lattice/,
+    'Lattice metadata must reveal inside the clipped caption shelf',
+  );
+  assert.match(
+    latticeSource,
+    /&:not\(\.nb-supernova--card-hover-reveal\)\s+\.nb-supernova-item:hover/,
+    'The default Lattice image hover must yield to the Meta Reveal media treatment',
+  );
+  assert.match(
+    hoverRevealSource,
+    /#\{\$reveal-scope\}\.nb-supernova--layout-recipe-anima-lattice[\s\S]*?#\{\$leading-boundary\},\s*#\{\$trailing-boundary\}[\s\S]*?position:\s*static;[\s\S]*?inset:\s*auto;/,
+    'Lattice boundary details must stay in normal flow inside the clipped shelf',
+  );
 } );

@@ -10,8 +10,8 @@
 // at the first/last visible boundary participate in the reveal.
 
 $reveal-scope: '.nb-supernova--card-hover-reveal';
-$outward-reveal-scope: '#{$reveal-scope}:not(.nb-supernova--layout-carousel):not(.nb-supernova--layout-parametric)';
-$in-frame-collection-scope: '#{$reveal-scope}:is(.nb-supernova--layout-carousel, .nb-supernova--layout-parametric)';
+$outward-reveal-scope: '#{$reveal-scope}:not(.nb-supernova--layout-carousel):not(.nb-supernova--layout-parametric):not(.nb-supernova--layout-recipe-anima-lattice)';
+$in-frame-collection-scope: '#{$reveal-scope}:is(.nb-supernova--layout-carousel, .nb-supernova--layout-parametric, .nb-supernova--layout-recipe-anima-lattice)';
 $accent-label-scope: '.nb-supernova--card-metadata-style-accent-label';
 $accent-label-collage-scope: '#{$accent-label-scope}.nb-supernova--layout-recipe-anima-collage.nb-supernova--layout-masonry';
 $reveal-duration: var(--reveal-duration);
@@ -225,6 +225,18 @@ $trailing-boundary: '> .nb-supernova-item__content:last-child:not(:first-child) 
     }
   }
 
+  // Lattice already reserves a fixed caption shelf for title plus metadata.
+  // Keep its boundary detail in normal flow so the shelf's overflow guard
+  // cannot clip the revealed text at the card edge.
+  #{$reveal-scope}.nb-supernova--layout-recipe-anima-lattice .nb-supernova-item:not(.nb-supernova-item--layout-stacked) {
+
+    #{$leading-boundary},
+    #{$trailing-boundary} {
+      position: static;
+      inset: auto;
+    }
+  }
+
   #{$outward-reveal-scope} .nb-supernova-item:not(.nb-supernova-item--layout-stacked):is(:hover, :focus-within) {
 
     #{$leading-boundary} {
@@ -242,8 +254,9 @@ $trailing-boundary: '> .nb-supernova-item__content:last-child:not(:first-child) 
     }
   }
 
-  // Parametric areas and Carousel viewports intentionally clip their cards.
-  // Reveal inside those bounds rather than weakening the composition contract.
+  // Parametric areas, Carousel viewports, and Lattice caption shelves
+  // intentionally clip their cards. Reveal inside those bounds rather than
+  // weakening the composition contract.
   #{$in-frame-collection-scope} .nb-supernova-item:not(.nb-supernova-item--layout-stacked) {
 
     #{$leading-boundary} {
