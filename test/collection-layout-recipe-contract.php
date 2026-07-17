@@ -58,6 +58,57 @@ foreach ( [ 'itemsGap', 'fitColumns', 'aspectRatio', 'hover', 'scrolling', 'pile
 	}
 }
 
+$lattice = $recipes[3] ?? [];
+if ( 'anima-lattice' !== ( $lattice['id'] ?? '' )
+	|| 'Lattice' !== ( $lattice['label'] ?? '' )
+	|| 'classic' !== ( $lattice['baseLayout'] ?? '' )
+	|| 'lattice' !== ( $lattice['layoutStrategy'] ?? '' )
+	|| 'lattice' !== ( $lattice['thumbnail'] ?? '' ) ) {
+	throw new RuntimeException( 'Expected the stable Anima Lattice recipe over Classic.' );
+}
+
+$lattice_defaults = $lattice['defaults'] ?? [];
+foreach ( [
+	'columns'                    => 5,
+	'gridGap'                    => 26,
+	'verticalGapModifier'        => 1,
+	'thumbnailAspectRatioString' => 'portrait',
+	'imageResizing'              => 'cropped',
+	'cardLayout'                 => 'vertical',
+	'showMedia'                  => true,
+	'showTitle'                  => true,
+	'showSubtitle'               => false,
+	'showDescription'            => false,
+	'showButtons'                => false,
+	'showMeta'                   => true,
+	'primaryMetadata'            => 'date',
+	'secondaryMetadata'          => 'none',
+	'cardHoverEffect'            => 'none',
+] as $attribute => $expected ) {
+	if ( $expected !== ( $lattice_defaults[ $attribute ] ?? null ) ) {
+		throw new RuntimeException( 'Unexpected Lattice default: ' . $attribute );
+	}
+}
+
+if ( [ 'media', 'title', 'meta-primary' ] !== ( $lattice_defaults['elementOrder'] ?? null ) ) {
+	throw new RuntimeException( 'Lattice captions must keep title and date in the fixed post-media shelf.' );
+}
+
+$lattice_capabilities = $lattice['capabilities'] ?? [];
+if ( [ 'min' => 2, 'max' => 6 ] !== ( $lattice_capabilities['columnsRange'] ?? null ) ) {
+	throw new RuntimeException( 'Lattice must expose the supported two-to-six desktop column range.' );
+}
+
+foreach ( [ 'itemsGap', 'verticalGap', 'aspectRatio', 'hoverEffect' ] as $fixed_capability ) {
+	if ( false !== ( $lattice_capabilities[ $fixed_capability ] ?? null ) ) {
+		throw new RuntimeException( 'Lattice must hide seam-breaking control: ' . $fixed_capability );
+	}
+}
+
+if ( array_key_exists( 'gateId', $lattice ) || array_key_exists( 'entitlement', $lattice ) ) {
+	throw new RuntimeException( 'Anima Lattice must be part of free Anima LT.' );
+}
+
 if ( array_key_exists( 'gateId', $recipe ) || array_key_exists( 'entitlement', $recipe ) ) {
 	throw new RuntimeException( 'Anima Collage must be part of free Anima LT.' );
 }

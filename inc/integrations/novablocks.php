@@ -293,5 +293,47 @@ function anima_register_collection_layout_recipes( $recipes ): array {
 		],
 	];
 
+	// Lattice: the quiet Gallery voice from the composition playground. Nova's
+	// generic Lattice strategy owns placement; Anima supplies selection defaults
+	// and a block-local skin over the Classic collection content model.
+	$recipes[] = [
+		'id'             => 'anima-lattice',
+		'label'          => __( 'Lattice', '__theme_txtd' ),
+		'baseLayout'     => 'classic',
+		'layoutStrategy' => 'lattice',
+		'thumbnail'      => 'lattice',
+		'defaults'       => [
+			'columns'                    => 5,
+			'gridGap'                    => 26,
+			'verticalGapModifier'        => 1,
+			'thumbnailAspectRatioString' => 'portrait',
+			'imageResizing'              => 'cropped',
+			'cardLayout'                 => 'vertical',
+			'showMedia'                  => true,
+			'showTitle'                  => true,
+			'showSubtitle'               => false,
+			'showDescription'            => false,
+			'showButtons'                => false,
+			'showMeta'                   => true,
+			'primaryMetadata'            => 'date',
+			'secondaryMetadata'          => 'none',
+			'elementOrder'               => [ 'media', 'title', 'meta-primary' ],
+			'cardHoverEffect'            => 'none',
+		],
+		'capabilities' => [
+			'columnsRange'       => [ 'min' => 2, 'max' => 6 ],
+			'itemsGap'           => false,
+			'verticalGap'        => false,
+			'aspectRatio'        => false,
+			'hoverEffect'        => false,
+			'fitColumns'         => false,
+			'scrolling'          => true,
+			'pile3d'             => false,
+			'headerIntegration'  => false,
+			'linkedPostMetadata' => true,
+			'readMoreAffordance' => false,
+		],
+	];
+
 	return $recipes;
 }
