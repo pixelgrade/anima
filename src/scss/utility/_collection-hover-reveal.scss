@@ -18,8 +18,8 @@ $reveal-duration: var(--reveal-duration);
 $reveal-easing: var(--reveal-easing);
 $revealable-item: ':is(.nb-card__meta, .nb-card__meta-combined, .nb-card__buttons)';
 $card-item: ':is(.nb-card__meta, .nb-card__meta-combined, .nb-card__title, .nb-card__subtitle, .nb-card__description, .nb-card__buttons)';
-$leading-boundary: '> .nb-supernova-item__content:first-child > .nb-supernova-item__inner-container > #{$revealable-item}:nth-child(1 of #{$card-item}), > .nb-supernova-item__frame > .nb-supernova-item__content:first-child > .nb-supernova-item__inner-container > #{$revealable-item}:nth-child(1 of #{$card-item})';
-$trailing-boundary: '> .nb-supernova-item__content:last-child:not(:first-child) > .nb-supernova-item__inner-container > #{$revealable-item}:nth-last-child(1 of #{$card-item}), > .nb-supernova-item__content:only-child > .nb-supernova-item__inner-container > #{$revealable-item}:nth-last-child(1 of #{$card-item}):not(:nth-child(1 of #{$card-item})), > .nb-supernova-item__frame > .nb-supernova-item__content:last-child:not(:first-child) > .nb-supernova-item__inner-container > #{$revealable-item}:nth-last-child(1 of #{$card-item}), > .nb-supernova-item__frame > .nb-supernova-item__content:only-child > .nb-supernova-item__inner-container > #{$revealable-item}:nth-last-child(1 of #{$card-item}):not(:nth-child(1 of #{$card-item}))';
+$leading-boundary: '> .nb-supernova-item__content--leading-boundary > .nb-supernova-item__inner-container > #{$revealable-item}:nth-child(1 of #{$card-item}), > .nb-supernova-item__frame > .nb-supernova-item__content--leading-boundary > .nb-supernova-item__inner-container > #{$revealable-item}:nth-child(1 of #{$card-item})';
+$trailing-boundary: '> .nb-supernova-item__content--trailing-boundary > .nb-supernova-item__inner-container > #{$revealable-item}:nth-last-child(1 of #{$card-item}), > .nb-supernova-item__frame > .nb-supernova-item__content--trailing-boundary > .nb-supernova-item__inner-container > #{$revealable-item}:nth-last-child(1 of #{$card-item})';
 
 #{$reveal-scope} {
   --reveal-duration: var(--theme-transition-duration-fast);
@@ -185,9 +185,9 @@ $trailing-boundary: '> .nb-supernova-item__content:last-child:not(:first-child) 
     // own edge rows while Media spans the complete frame; each wrapper is then
     // confined to its row, so boundary Meta cannot paint over Title even when
     // the editor's media ratio constrains the card height.
-    &.nb-supernova-item--layout-stacked:is(:has(#{$leading-boundary}), :has(#{$trailing-boundary})) {
+    &.nb-supernova-item--layout-stacked.nb-supernova-item--split-content {
 
-      > .nb-supernova-item__frame:has(> .nb-supernova-item__content--before-media):has(> .nb-supernova-item__content--after-media) {
+      > .nb-supernova-item__frame {
         grid-template-rows: auto minmax(0, 1fr) auto;
         min-height: var(--nb-block-content-min-height);
 

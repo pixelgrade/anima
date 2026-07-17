@@ -8,9 +8,6 @@ $lattice-scope: '.nb-supernova--layout-recipe-anima-lattice.nb-supernova--layout
 $lattice-editor-scope: '.editor-styles-wrapper .nb-supernova--layout-recipe-anima-lattice.nb-supernova--layout-classic';
 $lattice-plate: color-mix(in srgb, var(--sm-current-fg1-color) 5%, var(--sm-current-bg-color));
 $lattice-rule: color-mix(in srgb, var(--sm-current-fg1-color) 12%, var(--sm-current-bg-color));
-$lattice-revealable-item: ':is(.nb-card__meta, .nb-card__meta-combined, .nb-card__buttons)';
-$lattice-card-item: ':is(.nb-card__meta, .nb-card__meta-combined, .nb-card__title, .nb-card__subtitle, .nb-card__description, .nb-card__buttons)';
-$lattice-isolated-reveal-item: '#{$lattice-revealable-item}:nth-child(1 of #{$lattice-card-item}):nth-last-child(1 of #{$lattice-card-item})';
 
 @mixin lattice-isolated-edge-wrapper( $edge ) {
   position: absolute !important;
@@ -241,8 +238,7 @@ $lattice-isolated-reveal-item: '#{$lattice-revealable-item}:nth-child(1 of #{$la
     }
 
     .nb-supernova-item:not(.nb-card--no-media):not(.format-quote) {
-      > .nb-supernova-item__inner-container,
-      .nb-supernova-item__content {
+      > .nb-supernova-item__content--contains-title {
         flex: 0 0 var(--nb-lattice-caption-height);
         width: 100%;
         height: var(--nb-lattice-caption-height);
@@ -251,69 +247,59 @@ $lattice-isolated-reveal-item: '#{$lattice-revealable-item}:nth-child(1 of #{$la
         overflow: hidden;
       }
 
-      .nb-supernova-item__content > .nb-supernova-item__inner-container {
+      > .nb-supernova-item__content--contains-title > .nb-supernova-item__inner-container {
         height: 100%;
         padding: 0 !important;
       }
     }
   }
 
-  // A Lattice row budgets one shared caption shelf, not one shelf on either
-  // side of Media. This is structural in both None and Meta Reveal states:
-  // Title owns the measured shelf and an isolated detail pins to the adjacent
-  // media edge. Vertical Reverse swaps those physical edges while preserving
-  // the authored semantic order.
+  // Nova explicitly marks the title-bearing caption and any isolated details.
+  // A Lattice row therefore budgets one shared caption shelf without querying
+  // descendants or guessing from incidental wrapper positions.
   &.nb-supernova--card-layout-vertical {
-    .nb-supernova-item:not(.nb-card--no-media):not(.format-quote):has(> .nb-supernova-item__content--after-media > .nb-supernova-item__inner-container > .nb-card__title) {
-      > .nb-supernova-item__content--before-media:has(> .nb-supernova-item__inner-container > #{$lattice-isolated-reveal-item}) {
+    .nb-supernova-item:not(.nb-card--no-media):not(.format-quote) {
+      > .nb-supernova-item__content--details-only.nb-supernova-item__content--before-media {
         @include lattice-isolated-edge-wrapper(top);
       }
-    }
 
-    .nb-supernova-item:not(.nb-card--no-media):not(.format-quote):has(> .nb-supernova-item__content--before-media > .nb-supernova-item__inner-container > .nb-card__title) {
-      > .nb-supernova-item__content--after-media:has(> .nb-supernova-item__inner-container > #{$lattice-isolated-reveal-item}) {
+      > .nb-supernova-item__content--details-only.nb-supernova-item__content--after-media {
         @include lattice-isolated-edge-wrapper(bottom);
       }
     }
   }
 
   &.nb-supernova--card-layout-vertical-reverse {
-    .nb-supernova-item:not(.nb-card--no-media):not(.format-quote):has(> .nb-supernova-item__content--after-media > .nb-supernova-item__inner-container > .nb-card__title) {
-      > .nb-supernova-item__content--before-media:has(> .nb-supernova-item__inner-container > #{$lattice-isolated-reveal-item}) {
+    .nb-supernova-item:not(.nb-card--no-media):not(.format-quote) {
+      > .nb-supernova-item__content--details-only.nb-supernova-item__content--before-media {
         @include lattice-isolated-edge-wrapper(bottom);
       }
-    }
 
-    .nb-supernova-item:not(.nb-card--no-media):not(.format-quote):has(> .nb-supernova-item__content--before-media > .nb-supernova-item__inner-container > .nb-card__title) {
-      > .nb-supernova-item__content--after-media:has(> .nb-supernova-item__inner-container > #{$lattice-isolated-reveal-item}) {
+      > .nb-supernova-item__content--details-only.nb-supernova-item__content--after-media {
         @include lattice-isolated-edge-wrapper(top);
       }
     }
   }
 
   &.nb-supernova--card-layout-horizontal {
-    .nb-supernova-item:not(.nb-card--no-media):not(.format-quote):has(> .nb-supernova-item__content--after-media > .nb-supernova-item__inner-container > .nb-card__title) {
-      > .nb-supernova-item__content--before-media:has(> .nb-supernova-item__inner-container > #{$lattice-isolated-reveal-item}) {
+    .nb-supernova-item:not(.nb-card--no-media):not(.format-quote) {
+      > .nb-supernova-item__content--details-only.nb-supernova-item__content--before-media {
         @include lattice-isolated-inline-edge-wrapper(left);
       }
-    }
 
-    .nb-supernova-item:not(.nb-card--no-media):not(.format-quote):has(> .nb-supernova-item__content--before-media > .nb-supernova-item__inner-container > .nb-card__title) {
-      > .nb-supernova-item__content--after-media:has(> .nb-supernova-item__inner-container > #{$lattice-isolated-reveal-item}) {
+      > .nb-supernova-item__content--details-only.nb-supernova-item__content--after-media {
         @include lattice-isolated-inline-edge-wrapper(right);
       }
     }
   }
 
   &.nb-supernova--card-layout-horizontal-reverse {
-    .nb-supernova-item:not(.nb-card--no-media):not(.format-quote):has(> .nb-supernova-item__content--after-media > .nb-supernova-item__inner-container > .nb-card__title) {
-      > .nb-supernova-item__content--before-media:has(> .nb-supernova-item__inner-container > #{$lattice-isolated-reveal-item}) {
+    .nb-supernova-item:not(.nb-card--no-media):not(.format-quote) {
+      > .nb-supernova-item__content--details-only.nb-supernova-item__content--before-media {
         @include lattice-isolated-inline-edge-wrapper(right);
       }
-    }
 
-    .nb-supernova-item:not(.nb-card--no-media):not(.format-quote):has(> .nb-supernova-item__content--before-media > .nb-supernova-item__inner-container > .nb-card__title) {
-      > .nb-supernova-item__content--after-media:has(> .nb-supernova-item__inner-container > #{$lattice-isolated-reveal-item}) {
+      > .nb-supernova-item__content--details-only.nb-supernova-item__content--after-media {
         @include lattice-isolated-inline-edge-wrapper(left);
       }
     }
@@ -325,7 +311,10 @@ $lattice-isolated-reveal-item: '#{$lattice-revealable-item}:nth-child(1 of #{$la
     .nb-supernova--card-layout-horizontal,
     .nb-supernova--card-layout-horizontal-reverse
   ) {
-    :is(.nb-supernova-item__content--before-media, .nb-supernova-item__content--after-media):has(> .nb-supernova-item__inner-container > #{$lattice-isolated-reveal-item}) {
+    :is(
+      .nb-supernova-item__content--details-only.nb-supernova-item__content--before-media,
+      .nb-supernova-item__content--details-only.nb-supernova-item__content--after-media
+    ) {
       > .nb-supernova-item__inner-container {
         height: auto !important;
       }
@@ -336,7 +325,7 @@ $lattice-isolated-reveal-item: '#{$lattice-revealable-item}:nth-child(1 of #{$la
   // need distinct semantic edges. Give Meta and Title their own rows while
   // Media spans the complete plate in both None and Meta Reveal states.
   &.nb-supernova--card-layout-stacked {
-    .nb-supernova-item > .nb-supernova-item__frame:has(> .nb-supernova-item__content--before-media):has(> .nb-supernova-item__content--after-media) {
+    .nb-supernova-item--split-content > .nb-supernova-item__frame {
       display: grid;
       grid-template-rows: auto minmax(0, 1fr) auto;
 
@@ -377,6 +366,8 @@ $lattice-isolated-reveal-item: '#{$lattice-revealable-item}:nth-child(1 of #{$la
     a,
     .nb-supernova-item__link {
       color: inherit;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
   }
 

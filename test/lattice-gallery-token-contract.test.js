@@ -48,6 +48,7 @@ test( 'Gallery captions preserve authored card typography while internal plates 
 
   assert.match( css, /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic [^{]*\.nb-card__title\[class\][^}]*\{[^}]*--anima-card-title-expression-scale: 1;[^}]*font-size: calc\(var\(--current-font-size\) \* var\(--anima-card-title-expression-scale\)\);/ );
   assert.match( css, /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic [^{]*\.nb-card__title\[class\][^}]*\{[^}]*white-space: normal;[^}]*overflow-wrap: anywhere;/ );
+  assert.match( css, /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic [^{]*\.nb-card__title\[class\] [^{]*\.nb-supernova-item__link[^}]*\{[^}]*overflow-wrap: anywhere;/ );
   assert.doesNotMatch( source, /\.nb-card__title\[class\][\s\S]*?white-space:\s*nowrap;/ );
   assert.match( source, /\.nb-supernova-item\.is-sticky-post \.nb-card__title\s*\{[^}]*--anima-card-title-expression-scale:\s*1\.358025;[^}]*white-space:\s*normal;/ );
   assert.match( source, /\.nb-supernova-item\.nb-card--no-media,[\s\S]*?\.nb-card__title\s*\{[^}]*--anima-card-title-expression-scale:\s*1\.200617;/ );
@@ -107,17 +108,18 @@ test( 'Gallery overlays only isolated split reveal details at the media edge', (
   const isolatedOverlayRules = rules.filter( ( { selector, declarations } ) =>
     selector.includes( '.nb-supernova--layout-recipe-anima-lattice' ) &&
     selector.includes( '.nb-supernova--card-layout-vertical' ) &&
+    selector.includes( '.nb-supernova-item__content--details-only' ) &&
     selector.includes( '.nb-supernova-item__content--' ) &&
-    selector.includes( ':nth-last-child(1 of :is(.nb-card__meta, .nb-card__meta-combined, .nb-card__title' ) &&
     declarations.includes( 'position: absolute !important;' ) &&
     declarations.includes( 'height: auto !important;' )
   );
 
   assert.match(
     source,
-    /\$lattice-isolated-reveal-item:\s*'#\{\$lattice-revealable-item\}:nth-child\(1 of #\{\$lattice-card-item\}\):nth-last-child\(1 of #\{\$lattice-card-item\}\)'/,
-    'The structural exception must require one isolated semantic reveal item',
+    /\.nb-supernova-item__content--details-only\.nb-supernova-item__content--before-media/,
+    'The structural exception must use Nova\'s explicit leading details region',
   );
+  assert.match( source, /\.nb-supernova-item__content--details-only\.nb-supernova-item__content--after-media/ );
   assert.equal( isolatedOverlayRules.length, 4, 'Vertical and reverse Lattice need both media-edge directions' );
   assert.ok(
     isolatedOverlayRules.every( ( { selector } ) => ! selector.includes( '.nb-supernova--card-hover-reveal' ) ),
@@ -144,7 +146,7 @@ test( 'Gallery overlays only isolated split reveal details at the media edge', (
   );
   assert.doesNotMatch(
     source,
-    /#\{\$lattice-isolated-reveal-item\}\s*\{[^}]*\b(?:align-self|width|max-width|margin|padding|background)\s*:/,
+    /__content--details-only[^\{]*\{[^}]*\b(?:background|font-family|font-size|letter-spacing|text-transform)\s*:/s,
     'Lattice must position the wrapper without inventing a separate Meta presentation',
   );
 } );
@@ -156,15 +158,15 @@ test( 'Gallery contains split Horizontal and Stacked structures without extra co
   const horizontalOverlayRules = rules.filter( ( { selector, declarations } ) =>
     selector.includes( '.nb-supernova--layout-recipe-anima-lattice' ) &&
     selector.includes( '.nb-supernova--card-layout-horizontal' ) &&
+    selector.includes( '.nb-supernova-item__content--details-only' ) &&
     selector.includes( '.nb-supernova-item__content--' ) &&
-    selector.includes( ':nth-last-child(1 of :is(.nb-card__meta, .nb-card__meta-combined, .nb-card__title' ) &&
     declarations.includes( 'position: absolute !important;' ) &&
     declarations.includes( 'width: auto !important;' )
   );
   const stackedFrameRule = rules.find( ( { selector, declarations } ) =>
     selector.includes( '.nb-supernova--layout-recipe-anima-lattice' ) &&
     selector.includes( '.nb-supernova--card-layout-stacked' ) &&
-    selector.includes( '.nb-supernova-item__frame:has' ) &&
+    selector.includes( '.nb-supernova-item--split-content > .nb-supernova-item__frame' ) &&
     declarations.includes( 'grid-template-rows: auto minmax(0, 1fr) auto;' )
   );
 

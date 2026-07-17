@@ -92,10 +92,10 @@ test('Meta Reveal only hides metadata or buttons at visible card boundaries', ()
   }
 
   const leadingRule = hiddenBoundaryRules.find(({ selector }) =>
-    selector.includes('.nb-supernova-item__content:first-child')
+    selector.includes('.nb-supernova-item__content--leading-boundary')
   );
   const trailingRule = hiddenBoundaryRules.find(({ selector }) =>
-    selector.includes('.nb-supernova-item__content:last-child')
+    selector.includes('.nb-supernova-item__content--trailing-boundary')
   );
 
   assert.ok(leadingRule);
@@ -133,7 +133,7 @@ test('Meta Reveal keeps stacked details in-frame and only opens non-stacked over
   );
   assert.match(
     source,
-    /&\.nb-supernova-item--layout-stacked:is\(:has\(#\{\$leading-boundary\}\), :has\(#\{\$trailing-boundary\}\)\)[\s\S]*?> \.nb-supernova-item__frame:has[^}]*\{[^}]*grid-template-rows: auto minmax\(0, 1fr\) auto;[^}]*min-height: var\(--nb-block-content-min-height\);[\s\S]*?> \.nb-supernova-item__media-wrapper\s*\{[^}]*grid-area: 1 \/ 1 \/ 4 \/ 2 !important;[\s\S]*?> \.nb-supernova-item__content--before-media\s*\{[^}]*position: static !important;[^}]*grid-area: 1 \/ 1 \/ 2 \/ 2 !important;[^}]*min-height: 0 !important;[^}]*overflow: hidden !important;[\s\S]*?> \.nb-supernova-item__content--after-media\s*\{[^}]*position: static !important;[^}]*grid-area: 3 \/ 1 \/ 4 \/ 2 !important;[^}]*min-height: 0 !important;[^}]*overflow: hidden !important;/
+    /&\.nb-supernova-item--layout-stacked\.nb-supernova-item--split-content\s*\{[\s\S]*?> \.nb-supernova-item__frame\s*\{[^}]*grid-template-rows: auto minmax\(0, 1fr\) auto;[^}]*min-height: var\(--nb-block-content-min-height\);[\s\S]*?> \.nb-supernova-item__media-wrapper\s*\{[^}]*grid-area: 1 \/ 1 \/ 4 \/ 2 !important;[\s\S]*?> \.nb-supernova-item__content--before-media\s*\{[^}]*position: static !important;[^}]*grid-area: 1 \/ 1 \/ 2 \/ 2 !important;[^}]*min-height: 0 !important;[^}]*overflow: hidden !important;[\s\S]*?> \.nb-supernova-item__content--after-media\s*\{[^}]*position: static !important;[^}]*grid-area: 3 \/ 1 \/ 4 \/ 2 !important;[^}]*min-height: 0 !important;[^}]*overflow: hidden !important;/
   );
   assert.match(
     source,
