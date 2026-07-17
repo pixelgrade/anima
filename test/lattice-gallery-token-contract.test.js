@@ -102,26 +102,114 @@ test( 'Gallery keeps Meta Reveal inside its bounded Lattice wrapper', () => {
 test( 'Gallery overlays only isolated split reveal details at the media edge', () => {
   const css = compileUtilityCss();
   const source = fs.readFileSync( latticePath, 'utf8' );
+  const rules = Array.from( css.matchAll( /([^{}]+)\{([^{}]+)\}/g ) )
+    .map( ( [ , selector, declarations ] ) => ( { selector: selector.trim(), declarations } ) );
+  const isolatedOverlayRules = rules.filter( ( { selector, declarations } ) =>
+    selector.includes( '.nb-supernova--layout-recipe-anima-lattice' ) &&
+    selector.includes( '.nb-supernova--card-layout-vertical' ) &&
+    selector.includes( '.nb-supernova-item__content--' ) &&
+    selector.includes( ':nth-last-child(1 of :is(.nb-card__meta, .nb-card__meta-combined, .nb-card__title' ) &&
+    declarations.includes( 'position: absolute !important;' ) &&
+    declarations.includes( 'height: auto !important;' )
+  );
 
   assert.match(
     source,
     /\$lattice-isolated-reveal-item:\s*'#\{\$lattice-revealable-item\}:nth-child\(1 of #\{\$lattice-card-item\}\):nth-last-child\(1 of #\{\$lattice-card-item\}\)'/,
     'The structural exception must require one isolated semantic reveal item',
   );
-  assert.match(
-    css,
-    /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic\.nb-supernova--card-hover-reveal [^{]*\.nb-supernova-item:not\(\.nb-card--no-media\):not\(\.format-quote\):has\(> \.nb-supernova-item__content--after-media > \.nb-supernova-item__inner-container > \.nb-card__title\) > \.nb-supernova-item__content--before-media:has\([^}]*\{[^}]*position: absolute !important;[^}]*top: 0;[^}]*height: auto !important;/,
-    'A leading isolated detail must overlay the top media edge instead of consuming a second shelf',
+  assert.equal( isolatedOverlayRules.length, 4, 'Vertical and reverse Lattice need both media-edge directions' );
+  assert.ok(
+    isolatedOverlayRules.every( ( { selector } ) => ! selector.includes( '.nb-supernova--card-hover-reveal' ) ),
+    'One-shelf geometry must not depend on whether Meta Reveal is active',
   );
-  assert.match(
-    css,
-    /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic\.nb-supernova--card-hover-reveal [^{]*\.nb-supernova-item:not\(\.nb-card--no-media\):not\(\.format-quote\):has\(> \.nb-supernova-item__content--before-media > \.nb-supernova-item__inner-container > \.nb-card__title\) > \.nb-supernova-item__content--after-media:has\([^}]*\{[^}]*position: absolute !important;[^}]*bottom: 0;[^}]*height: auto !important;/,
-    'A trailing isolated detail must overlay the bottom media edge instead of consuming a second shelf',
+  assert.ok(
+    isolatedOverlayRules.some( ( { selector, declarations } ) =>
+      selector.includes( '.nb-supernova--card-layout-vertical' ) &&
+      ! selector.includes( '.nb-supernova--card-layout-vertical-reverse' ) &&
+      declarations.includes( 'top: 0;' )
+    ),
+    'A leading isolated detail must overlay the top media edge in Vertical cards',
   );
-  assert.match(
+  assert.ok(
+    isolatedOverlayRules.some( ( { selector, declarations } ) =>
+      selector.includes( '.nb-supernova--card-layout-vertical-reverse' ) &&
+      declarations.includes( 'bottom: 0;' )
+    ),
+    'Vertical Reverse must move the same leading detail to the reversed media edge',
+  );
+  assert.ok(
+    isolatedOverlayRules.every( ( { declarations } ) => ! declarations.includes( 'padding:' ) ),
+    'Media-edge geometry must not add Lattice-only Meta spacing',
+  );
+  assert.doesNotMatch(
     source,
-    /background:\s*color-mix\(in srgb, var\(--sm-current-bg-color\) 92%, transparent\)/,
-    'The revealed edge label must remain readable through the current palette',
+    /#\{\$lattice-isolated-reveal-item\}\s*\{[^}]*\b(?:align-self|width|max-width|margin|padding|background)\s*:/,
+    'Lattice must position the wrapper without inventing a separate Meta presentation',
+  );
+} );
+
+test( 'Gallery contains split Horizontal and Stacked structures without extra content columns', () => {
+  const css = compileUtilityCss();
+  const rules = Array.from( css.matchAll( /([^{}]+)\{([^{}]+)\}/g ) )
+    .map( ( [ , selector, declarations ] ) => ( { selector: selector.trim(), declarations } ) );
+  const horizontalOverlayRules = rules.filter( ( { selector, declarations } ) =>
+    selector.includes( '.nb-supernova--layout-recipe-anima-lattice' ) &&
+    selector.includes( '.nb-supernova--card-layout-horizontal' ) &&
+    selector.includes( '.nb-supernova-item__content--' ) &&
+    selector.includes( ':nth-last-child(1 of :is(.nb-card__meta, .nb-card__meta-combined, .nb-card__title' ) &&
+    declarations.includes( 'position: absolute !important;' ) &&
+    declarations.includes( 'width: auto !important;' )
+  );
+  const stackedFrameRule = rules.find( ( { selector, declarations } ) =>
+    selector.includes( '.nb-supernova--layout-recipe-anima-lattice' ) &&
+    selector.includes( '.nb-supernova--card-layout-stacked' ) &&
+    selector.includes( '.nb-supernova-item__frame:has' ) &&
+    declarations.includes( 'grid-template-rows: auto minmax(0, 1fr) auto;' )
+  );
+
+  assert.equal( horizontalOverlayRules.length, 4, 'Horizontal and reverse need both isolated edge directions' );
+  assert.ok( horizontalOverlayRules.every( ( { selector } ) => ! selector.includes( '.nb-supernova--card-hover-reveal' ) ) );
+  assert.ok(
+    horizontalOverlayRules.some( ( { selector, declarations } ) =>
+      selector.includes( '.nb-supernova--card-layout-horizontal' ) &&
+      ! selector.includes( '.nb-supernova--card-layout-horizontal-reverse' ) &&
+      declarations.includes( 'left: 0;' )
+    ),
+  );
+  assert.ok(
+    horizontalOverlayRules.some( ( { selector, declarations } ) =>
+      selector.includes( '.nb-supernova--card-layout-horizontal-reverse' ) &&
+      declarations.includes( 'right: 0;' )
+    ),
+  );
+  assert.ok( stackedFrameRule, 'Split Stacked cards need independent top and bottom content rows' );
+  assert.ok( ! stackedFrameRule.selector.includes( '.nb-supernova--card-hover-reveal' ) );
+} );
+
+test( 'Gallery leaves Elements Stacking anatomy to Nova outside its vertical shelf modes', () => {
+  const css = compileUtilityCss();
+  const rules = Array.from( css.matchAll( /([^{}]+)\{([^{}]+)\}/g ) )
+    .map( ( [ , selector, declarations ] ) => ( { selector: selector.trim(), declarations } ) )
+    .filter( ( { selector } ) => selector.includes( '.nb-supernova--layout-recipe-anima-lattice' ) );
+  const genericColumnRules = rules.filter( ( { selector, declarations } ) =>
+    selector.includes( '.nb-supernova-item' ) &&
+    ! selector.includes( '.nb-supernova-item__content' ) &&
+    ! selector.includes( '.nb-supernova--card-layout-' ) &&
+    declarations.includes( 'flex-direction: column;' )
+  );
+  const shelfRules = rules.filter( ( { declarations } ) =>
+    declarations.includes( 'flex: 0 0 var(--nb-lattice-caption-height);' )
+  );
+
+  assert.equal( genericColumnRules.length, 0, 'Lattice must not mask Nova cardLayout classes' );
+  assert.ok( shelfRules.length > 0, 'Vertical Lattice still needs its fixed caption shelf' );
+  assert.ok(
+    shelfRules.every( ( { selector } ) =>
+      selector.includes( '.nb-supernova--card-layout-vertical' ) ||
+      selector.includes( '.nb-supernova--card-layout-vertical-reverse' )
+    ),
+    'Fixed shelf geometry must not leak into Horizontal or Stacked cards',
   );
 } );
 
