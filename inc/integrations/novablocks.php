@@ -320,10 +320,15 @@ function anima_register_collection_layout_recipes( $recipes ): array {
 			'cardMetadataStyle'          => 'plain',
 			'elementOrder'               => [ 'media', 'title', 'meta-primary' ],
 			'cardHoverEffect'            => 'none',
+			'latticeModuleShape'         => 'portrait',
+			'latticePackingWindow'       => 3,
+			'latticeStickyFeatureSize'   => 2,
+			'latticeTallMediaSpan'       => 2,
+			'latticePanoramaSpan'        => 3,
 		],
 		'capabilities' => [
 			'columnsRange'       => [ 'min' => 2, 'max' => 6 ],
-			'itemsGap'           => false,
+			'itemsGap'           => true,
 			'verticalGap'        => false,
 			'aspectRatio'        => false,
 			'fitColumns'         => false,
@@ -332,6 +337,63 @@ function anima_register_collection_layout_recipes( $recipes ): array {
 			'headerIntegration'  => false,
 			'linkedPostMetadata' => true,
 			'readMoreAffordance' => false,
+		],
+		'fineTune'     => [
+			[
+				'label'    => __( 'Lattice Anatomy', '__theme_txtd' ),
+				'controls' => [
+					[
+						'attribute' => 'latticeModuleShape',
+						'type'      => 'radio',
+						'label'     => __( 'Module Shape', '__theme_txtd' ),
+						'help'      => __( 'Set the shared media module while keeping every shelf seam aligned.', '__theme_txtd' ),
+						'options'   => [
+							[ 'label' => __( 'Portrait 3:4', '__theme_txtd' ), 'value' => 'portrait' ],
+							[ 'label' => __( 'Square 1:1', '__theme_txtd' ), 'value' => 'square' ],
+							[ 'label' => __( 'Landscape 5:4', '__theme_txtd' ), 'value' => 'landscape' ],
+						],
+					],
+					[
+						'attribute' => 'latticePackingWindow',
+						'type'      => 'range',
+						'label'     => __( 'Packing Flexibility', '__theme_txtd' ),
+						'help'      => __( 'Choose how many upcoming cards may move forward to fill the next top-left gap.', '__theme_txtd' ),
+						'min'       => 0,
+						'max'       => 6,
+						'step'      => 1,
+					],
+					[
+						'attribute' => 'latticeStickyFeatureSize',
+						'type'      => 'radio',
+						'label'     => __( 'Sticky Feature Size', '__theme_txtd' ),
+						'help'      => __( 'Let the sticky post read as a regular module or a feature plate.', '__theme_txtd' ),
+						'options'   => [
+							[ 'label' => __( 'Regular 1×1', '__theme_txtd' ), 'value' => 1 ],
+							[ 'label' => __( 'Feature 2×2', '__theme_txtd' ), 'value' => 2 ],
+						],
+					],
+					[
+						'attribute' => 'latticeTallMediaSpan',
+						'type'      => 'radio',
+						'label'     => __( 'Tall Media Span', '__theme_txtd' ),
+						'help'      => __( 'Choose whether tall media occupies one or two shared shelf rows.', '__theme_txtd' ),
+						'options'   => [
+							[ 'label' => __( 'One row', '__theme_txtd' ), 'value' => 1 ],
+							[ 'label' => __( 'Two rows', '__theme_txtd' ), 'value' => 2 ],
+						],
+					],
+					[
+						'attribute' => 'latticePanoramaSpan',
+						'type'      => 'radio',
+						'label'     => __( 'Panorama Span', '__theme_txtd' ),
+						'help'      => __( 'Choose how many shared columns panoramic media prefers.', '__theme_txtd' ),
+						'options'   => [
+							[ 'label' => __( 'Two columns', '__theme_txtd' ), 'value' => 2 ],
+							[ 'label' => __( 'Three columns', '__theme_txtd' ), 'value' => 3 ],
+						],
+					],
+				],
+			],
 		],
 	];
 
