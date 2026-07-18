@@ -21,6 +21,19 @@ body.has-site-frame {
   --site-frame-marker-mask-size: 1em;
   --site-frame-head-padding-y: 24px;
   --site-frame-head-min-height: 336px;
+  // Horizontal space the frame claims from viewport-anchored elements.
+  // #page reserves room through padding, but absolutely/fixed positioned
+  // headers resolve against the viewport, not #page — they read these.
+  --site-frame-inset-left: 0px;
+  --site-frame-inset-right: 0px;
+}
+
+body.has-site-frame-frame {
+  --site-frame-inset-left: var(--site-frame-left-size);
+}
+
+body.has-site-frame-menu {
+  --site-frame-inset-right: var(--site-frame-page-gutter);
 }
 
 body.single-post.has-site-frame {
@@ -126,6 +139,11 @@ html.is-dark .c-site-frame.has-site-frame-accent {
 // --------------------------------------------------------------------------
 body.has-site-frame-border {
   --site-frame-border-size: 18px;
+  --site-frame-inset-left: var(--site-frame-border-size);
+  --site-frame-inset-right: var(--site-frame-border-size);
+  // The border bar is thicker than the editorial top bar; keep the sticky
+  // header offset (--site-frame-sticky-top) in step with the visible bar.
+  --site-frame-top-size: var(--site-frame-border-size);
 }
 
 body.has-site-frame-border #page {
@@ -457,6 +475,18 @@ body.has-site-frame-border #page {
 }
 
 @include above(lap) {
+  // Nova Blocks headers are viewport-anchored on desktop: the main header is
+  // absolutely positioned (left: 0 / width: 100%) and the sticky/secondary
+  // header is fixed, so #page's frame padding never reaches them and they
+  // slide under the left bar and across the rail gutter. Pin them to the
+  // same box #page's padding carves out.
+  body.has-site-frame .nb-header--main,
+  body.has-site-frame .nb-header--secondary {
+    width: auto;
+    left: var(--site-frame-inset-left);
+    right: var(--site-frame-inset-right);
+  }
+
   body.has-site-frame-frame .nb-header--secondary,
   body.has-site-frame-frame .nb-header--main.nb-header--sticky {
     top: var(--site-frame-sticky-top) !important;

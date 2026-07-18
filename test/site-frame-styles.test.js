@@ -57,6 +57,22 @@ test('Site Frame styles keep sticky headers below the top frame accent', () => {
   );
 });
 
+test('Site Frame styles keep viewport-anchored headers inside the frame', () => {
+  const css = compileSiteFrameCss();
+
+  // The frame reserves space with #page padding, but Nova Blocks headers are
+  // viewport-anchored (absolute main header, fixed sticky/secondary header),
+  // so they need explicit insets or they slide under the frame bars.
+  assert.match(css, /body\.has-site-frame\s*\{[^}]*--site-frame-inset-left:\s*0px;[^}]*--site-frame-inset-right:\s*0px;/);
+  assert.match(css, /body\.has-site-frame-frame\s*\{[^}]*--site-frame-inset-left:\s*var\(--site-frame-left-size\);/);
+  assert.match(css, /body\.has-site-frame-menu\s*\{[^}]*--site-frame-inset-right:\s*var\(--site-frame-page-gutter\);/);
+  assert.match(css, /body\.has-site-frame-border\s*\{[^}]*--site-frame-inset-left:\s*var\(--site-frame-border-size\);[^}]*--site-frame-inset-right:\s*var\(--site-frame-border-size\);[^}]*--site-frame-top-size:\s*var\(--site-frame-border-size\);/);
+  assert.match(
+    css,
+    /@media only screen and \(min-width: 1024px\)\s*\{[^{]*body\.has-site-frame \.nb-header--main,\s*body\.has-site-frame \.nb-header--secondary\s*\{[^}]*width:\s*auto;[^}]*left:\s*var\(--site-frame-inset-left\);[^}]*right:\s*var\(--site-frame-inset-right\);/
+  );
+});
+
 test('Site Frame styles expose the regular-link monogram treatment', () => {
   const css = compileSiteFrameCss();
 
