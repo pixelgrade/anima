@@ -32,11 +32,19 @@ test( 'Gallery geometry follows the playground shelf and crop contract', () => {
   const source = fs.readFileSync( latticePath, 'utf8' );
 
   assert.match( css, /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic[^}]*\{[^}]*--nb-lattice-caption-height: 50px;/ );
-  assert.match( css, /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic[^}]*\{[^}]*--nb-lattice-caption-title-factor: 3\.4;/ );
-  assert.match( source, /&:has\(\.nb-supernova-item\.is-sticky-post\)\s*\{[^}]*--nb-lattice-caption-title-factor:\s*3\.4;/ );
+  assert.doesNotMatch(
+    source,
+    /lattice-caption-title-factor|@mixin lattice-caption-height/,
+    'The 50px playground shelf must grow from Nova\'s intrinsic shared measurement, not a conservative font-role estimate',
+  );
   assert.match( css, /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic [^{]*\.nb-collection__layout[^}]*\{[^}]*gap: 26px !important;/ );
   assert.match( css, /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic [^{]*\.nb-supernova-item__media[^}]*\{[^}]*object-fit: cover;/ );
   assert.match( source, /flex:\s*0 0 var\(--nb-lattice-caption-height\)/ );
+  assert.match(
+    source,
+    /&:is\(\.nb-supernova--card-layout-vertical, \.nb-supernova--card-layout-vertical-reverse\)[\s\S]*?\.nb-supernova-item:not\(\.nb-supernova-item--layout-stacked\)\s*\{[^}]*display:\s*flex;[^}]*gap:\s*0;/,
+    'The caption shelf must meet its media module without Nova\'s ordinary card stacking gap',
+  );
   assert.doesNotMatch( source, /#\{\$lattice-scope\}\.nb-header-neighbour/ );
   assert.doesNotMatch( source, /padding-top:[^;]*!important/ );
   assert.doesNotMatch( source, /object-position\s*:/ );

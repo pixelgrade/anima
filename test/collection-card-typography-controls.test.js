@@ -72,20 +72,14 @@ test( 'composition hierarchy remains relative to the authored card-title baselin
   assert.match( lattice, /@media \(max-width: 599px\)[\s\S]*?is-sticky-post \.nb-card__title[^{]*\{[^}]*--anima-card-title-expression-scale:\s*1;/ );
 } );
 
-test( 'Lattice resolves one token-driven caption shelf height from the selected title role', () => {
+test( 'Lattice grows the playground shelf from the authored title region instead of estimating a font role', () => {
   const css = compileUtilityCss();
   const source = fs.readFileSync( recipeFiles.lattice, 'utf8' );
 
   assert.match( source, /@property --nb-lattice-caption-height\s*\{[^}]*syntax:\s*['"]<length>['"];[^}]*inherits:\s*true;[^}]*initial-value:\s*50px;/s );
-  assert.match( source, /@mixin lattice-caption-height\(\s*\$role\s*\)[\s\S]*?--nb-lattice-caption-height:\s*max\([\s\S]*?var\(--theme-#\{\$role\}-font-size\)[\s\S]*?var\(--theme-small-body-font-size\)/ );
-
-  [ 'smallest', 'smaller', 'normal', 'regular', 'larger', 'largest' ].forEach( size => {
-    assert.match( source, new RegExp( `h[1-5]\\.has-${ size }-font-size` ) );
-  } );
-
-  assert.match( source, /h3\.has-normal-font-size[\s\S]*?\{\s*@include lattice-caption-height\(heading-3\);/ );
-  assert.match( source, /h2\.has-normal-font-size[\s\S]*?\{\s*@include lattice-caption-height\(heading-2\);/ );
-  assert.match( source, /&:has\(\.nb-supernova-item\.is-sticky-post\)[^{]*\{[^}]*--nb-lattice-caption-title-factor:\s*3\.4;/ );
+  assert.match( source, /@mixin lattice-gallery-skin\s*\{[^}]*--nb-lattice-caption-height:\s*50px;/s );
+  assert.match( source, /> \.nb-supernova-item__content--contains-title\s*\{[^}]*height:\s*var\(--nb-lattice-caption-height\);/s );
+  assert.doesNotMatch( source, /lattice-caption-title-factor|@mixin lattice-caption-height|--nb-lattice-caption-height:\s*max\(/ );
   assert.match( css, /@property --nb-lattice-caption-height\s*\{[^}]*syntax: "<length>";[^}]*inherits: true;[^}]*initial-value: 50px;/ );
-  assert.match( css, /--nb-lattice-caption-height: max\(\s*50px, calc\(\s*var\(--theme-heading-3-font-size\)[^}]*var\(--theme-small-body-font-size\)/ );
+  assert.match( css, /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic[^}]*\{[^}]*--nb-lattice-caption-height: 50px;/ );
 } );

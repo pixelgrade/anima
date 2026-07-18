@@ -44,110 +44,17 @@ $lattice-rule: color-mix(in srgb, var(--sm-current-fg1-color) 12%, var(--sm-curr
   }
 }
 
-// Nova reads this custom property to calculate the shared row geometry. A
-// typed length makes token-based calc()/max() values serialize as resolved
-// pixels through getComputedStyle(), just like the original literal 50px.
+// Nova reads this custom property to calculate the shared row geometry. The
+// playground's 50px shelf is the minimum; Nova measures the actual rendered
+// title region and raises one shared shelf when authored typography wraps.
 @property --nb-lattice-caption-height {
   syntax: '<length>';
   inherits: true;
   initial-value: 50px;
 }
 
-@mixin lattice-caption-height( $role ) {
-  --nb-lattice-caption-height: max(
-    50px,
-    calc(
-      var(--theme-#{$role}-font-size) * var(--nb-lattice-caption-title-factor) * 1.25px +
-      var(--theme-small-body-font-size) * 0.816px +
-      12px
-    )
-  );
-}
-
 @mixin lattice-gallery-skin {
   --nb-lattice-caption-height: 50px;
-  --nb-lattice-caption-title-factor: 3.4;
-
-  // Card Title Heading and Card Title Font Size jointly resolve the semantic
-  // role in utility/_font-size.scss. Mirror that map on the collection root so
-  // every card keeps one measured shelf height, even though CSS variables only
-  // inherit downward from the title itself.
-  &:has(.nb-card__title:is(
-    h1.has-largest-font-size
-  )) {
-    @include lattice-caption-height(super-display);
-  }
-
-  &:has(.nb-card__title:is(
-    h1.has-larger-font-size,
-    h2.has-largest-font-size
-  )) {
-    @include lattice-caption-height(display);
-  }
-
-  &:has(.nb-card__title:is(
-    h1.has-normal-font-size,
-    h1.has-regular-font-size,
-    h2.has-larger-font-size,
-    h3.has-largest-font-size
-  )) {
-    @include lattice-caption-height(heading-1);
-  }
-
-  &:has(.nb-card__title:is(
-    h1.has-smaller-font-size,
-    h2.has-normal-font-size,
-    h2.has-regular-font-size,
-    h3.has-larger-font-size,
-    h4.has-largest-font-size
-  )) {
-    @include lattice-caption-height(heading-2);
-  }
-
-  &:has(.nb-card__title:is(
-    h1.has-smallest-font-size,
-    h2.has-smaller-font-size,
-    h3.has-normal-font-size,
-    h3.has-regular-font-size,
-    h4.has-larger-font-size,
-    h5.has-largest-font-size
-  )) {
-    @include lattice-caption-height(heading-3);
-  }
-
-  &:has(.nb-card__title:is(
-    h2.has-smallest-font-size,
-    h3.has-smaller-font-size,
-    h4.has-normal-font-size,
-    h4.has-regular-font-size,
-    h5.has-larger-font-size
-  )) {
-    @include lattice-caption-height(heading-4);
-  }
-
-  &:has(.nb-card__title:is(
-    h3.has-smallest-font-size,
-    h4.has-smaller-font-size,
-    h5.has-normal-font-size,
-    h5.has-regular-font-size
-  )) {
-    @include lattice-caption-height(heading-5);
-  }
-
-  &:has(.nb-card__title:is(
-    h4.has-smallest-font-size,
-    h5.has-smaller-font-size,
-    h5.has-smallest-font-size
-  )) {
-    @include lattice-caption-height(heading-6);
-  }
-
-  // The feature title may use two larger lines while narrow modules may need
-  // four regular lines. Raise every shelf by the same amount so neither case
-  // breaks the shared image seam.
-  &:has(.nb-supernova-item.is-sticky-post) {
-    --nb-lattice-caption-title-factor: 3.4;
-  }
 
   color: var(--sm-current-fg1-color);
   background: var(--sm-current-bg-color);
@@ -231,6 +138,10 @@ $lattice-rule: color-mix(in srgb, var(--sm-current-fg1-color) 12%, var(--sm-curr
   &:is(.nb-supernova--card-layout-vertical, .nb-supernova--card-layout-vertical-reverse) {
     .nb-supernova-item:not(.nb-supernova-item--layout-stacked) {
       display: flex;
+      // The row engine already budgets Media + one caption shelf. Nova's
+      // ordinary card gap would shrink the 3:4 media module and detach the
+      // caption visually; the shelf owns its own 9px content inset.
+      gap: 0;
     }
 
     .nb-supernova-item__media-wrapper {
@@ -527,10 +438,6 @@ $lattice-rule: color-mix(in srgb, var(--sm-current-fg1-color) 12%, var(--sm-curr
   }
 
   @media (max-width: 599px) {
-    &:has(.nb-supernova-item.is-sticky-post) {
-      --nb-lattice-caption-title-factor: 2;
-    }
-
     .nb-supernova-item.is-sticky-post .nb-card__title {
       --anima-card-title-expression-scale: 1;
 
