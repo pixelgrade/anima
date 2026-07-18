@@ -90,6 +90,10 @@ foreach ( [
 	'latticeStickyFeatureSize'   => 2,
 	'latticeTallMediaSpan'       => 2,
 	'latticePanoramaSpan'        => 3,
+	'latticeLandscapeSpan'       => 2,
+	'latticePortraitSpan'        => 1,
+	'latticeTextPlateSpan'       => 1,
+	'latticeQuoteSpan'           => 2,
 ] as $attribute => $expected ) {
 	if ( $expected !== ( $lattice_defaults[ $attribute ] ?? null ) ) {
 		throw new RuntimeException( 'Unexpected Lattice default: ' . $attribute );
@@ -121,21 +125,20 @@ $fine_tune_attributes = array_column( $fine_tune_controls, 'attribute' );
 if ( 'Lattice Anatomy' !== ( $fine_tune[0]['label'] ?? null )
 	|| [
 		'latticeModuleShape',
-		'latticePackingWindow',
-		'latticeStickyFeatureSize',
-		'latticeTallMediaSpan',
-		'latticePanoramaSpan',
+		'latticeLandscapeSpan',
+		'latticePortraitSpan',
+		'latticeTextPlateSpan',
+		'latticeQuoteSpan',
 	] !== $fine_tune_attributes ) {
 	throw new RuntimeException( 'Lattice must declare its five Fine-tune controls in stable order.' );
 }
 
 if ( [ 'portrait', 'square', 'landscape' ] !== array_column( $fine_tune_controls[0]['options'] ?? [], 'value' )
-	|| 0 !== ( $fine_tune_controls[1]['min'] ?? null )
-	|| 6 !== ( $fine_tune_controls[1]['max'] ?? null )
+	|| [ 1, 2 ] !== array_column( $fine_tune_controls[1]['options'] ?? [], 'value' )
 	|| [ 1, 2 ] !== array_column( $fine_tune_controls[2]['options'] ?? [], 'value' )
 	|| [ 1, 2 ] !== array_column( $fine_tune_controls[3]['options'] ?? [], 'value' )
-	|| [ 2, 3 ] !== array_column( $fine_tune_controls[4]['options'] ?? [], 'value' ) ) {
-	throw new RuntimeException( 'Lattice Fine-tune ranges must preserve the approved engine contract.' );
+	|| [ 1, 2 ] !== array_column( $fine_tune_controls[4]['options'] ?? [], 'value' ) ) {
+	throw new RuntimeException( 'Lattice Fine-tune controls must use the approved one-or-two module choices.' );
 }
 
 if ( array_key_exists( 'gateId', $lattice ) || array_key_exists( 'entitlement', $lattice ) ) {
