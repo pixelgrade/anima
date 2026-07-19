@@ -49,6 +49,7 @@ plugins are active.
 * Add Lattice and Broadsheet collection compositions with responsive editorial layouts and matching editor previews.
 * Keep collection titles, metadata, quotes, and Meta Reveal content within their semantic card regions across Classic, Masonry, Stacked, Collage, and Lattice compositions.
 * Keep viewport-anchored headers inside the Site Frame and let Lattice honor the authored Items Gap control.
+* Keep the commercial footer clean on first Site Editor load by using current WordPress and Nova Blocks serialization.
 
 = 2.0.44 =
 
