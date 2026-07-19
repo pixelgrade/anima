@@ -3,7 +3,7 @@ Contributors: pixelgrade
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.0.44
+Stable tag: 2.0.45
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, portfolio, one-column, custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, block-patterns, full-site-editing, rtl-language-support
@@ -43,6 +43,12 @@ for additional design-system controls, blocks, and layout options when those
 plugins are active.
 
 == Changelog ==
+
+= 2.0.45 =
+
+* Add Lattice and Broadsheet collection compositions with responsive editorial layouts and matching editor previews.
+* Keep collection titles, metadata, quotes, and Meta Reveal content within their semantic card regions across Classic, Masonry, Stacked, Collage, and Lattice compositions.
+* Keep viewport-anchored headers inside the Site Frame and let Lattice honor the authored Items Gap control.
 
 = 2.0.44 =
 
