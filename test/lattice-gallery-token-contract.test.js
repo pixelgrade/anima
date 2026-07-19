@@ -37,7 +37,8 @@ test( 'Gallery geometry follows the playground shelf and crop contract', () => {
     /lattice-caption-title-factor|@mixin lattice-caption-height/,
     'The 50px playground shelf must grow from Nova\'s intrinsic shared measurement, not a conservative font-role estimate',
   );
-  assert.match( css, /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic [^{]*\.nb-collection__layout[^}]*\{[^}]*gap: 26px !important;/ );
+  assert.match( css, /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic [^{]*\.nb-collection__layout[^}]*\{[^}]*gap: var\(--nb-grid-spacing\) !important;/ );
+  assert.doesNotMatch( source, /gap:\s*26px\s*!important/ );
   assert.match( css, /\.nb-supernova--layout-recipe-anima-lattice\.nb-supernova--layout-classic [^{]*\.nb-supernova-item__media[^}]*\{[^}]*object-fit: cover;/ );
   assert.match( source, /flex:\s*0 0 var\(--nb-lattice-caption-height\)/ );
   assert.match(
