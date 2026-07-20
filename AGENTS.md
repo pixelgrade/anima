@@ -374,6 +374,21 @@ git push origin main
 
 ## Release Process
 
+### 0. Refresh the central release cockpit
+
+Before release planning, open
+`/Users/georgeolaru/Developer/pixelgrade-release-ops`, pull `main`, and refresh
+the Anima LT row in `README.md` from current source and public-channel evidence.
+Repeat the refresh after publication and push the cockpit change before calling
+the release complete.
+
+The central cockpit's `.github/workflows/status-watch.yml` workflow is only a
+durable notification signal: it periodically compares Anima's `main` version
+with GitHub and WordPress.org, then creates or refreshes a cockpit issue when
+they drift. It does not edit the cockpit snapshot, publish a release, or replace
+the start/end refresh gate. Keeping this watcher in the private cockpit avoids
+placing a reusable cross-repo credential in Anima's public repository.
+
 ### 1. Create a milestone (if needed)
 
 ```bash
@@ -507,6 +522,8 @@ evidence.
 
 ### 8. Verify
 
+- The central release cockpit Anima LT row reflects the final source, GitHub,
+  WordPress.org, and WUpdates state, and the refreshed snapshot is pushed
 - Release appears at https://github.com/pixelgrade/anima/releases
 - ZIP is attached and downloadable
 - WUpdates `Current Version` points to the new version post
