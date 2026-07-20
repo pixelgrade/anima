@@ -16,10 +16,6 @@
 const fs   = require( 'fs' );
 const path = require( 'path' );
 
-const root   = path.resolve( __dirname, '..' );
-const style  = fs.readFileSync( path.join( root, 'style.css' ), 'utf8' );
-const readme = fs.readFileSync( path.join( root, 'wporg', 'readme.txt' ), 'utf8' );
-
 function header( contents, label ) {
 	const escaped = label.replace( /[.*+?^${}()|[\]\\]/g, '\\$&' );
 	const match   = contents.match( new RegExp( '^[\\s\\*]*' + escaped + ':\\s*(.+)$', 'mi' ) );
@@ -33,27 +29,38 @@ const fields = [
 	[ 'Requires at least', 'Requires at least' ],
 	[ 'Requires PHP', 'Requires PHP' ],
 ];
+function checkVersionSync() {
+	const root   = path.resolve( __dirname, '..' );
+	const style  = fs.readFileSync( path.join( root, 'style.css' ), 'utf8' );
+	const readme = fs.readFileSync( path.join( root, 'wporg', 'readme.txt' ), 'utf8' );
+	const mismatches = [];
 
-const mismatches = [];
+	for ( const [ readmeLabel, styleLabel ] of fields ) {
+		const styleValue  = header( style, styleLabel );
+		const readmeValue = header( readme, readmeLabel );
 
-for ( const [ readmeLabel, styleLabel ] of fields ) {
-	const styleValue  = header( style, styleLabel );
-	const readmeValue = header( readme, readmeLabel );
-
-	if ( styleValue !== readmeValue ) {
-		mismatches.push(
-			'  ' + readmeLabel + ': readme.txt has "' + readmeValue +
-			'" but style.css ' + styleLabel + ' is "' + styleValue + '"'
-		);
+		if ( styleValue !== readmeValue ) {
+			mismatches.push(
+				'  ' + readmeLabel + ': readme.txt has "' + readmeValue +
+				'" but style.css ' + styleLabel + ' is "' + styleValue + '"'
+			);
+		}
 	}
+
+	if ( mismatches.length > 0 ) {
+		console.error( '✗ wporg/readme.txt headers are out of sync with style.css:' );
+		console.error( mismatches.join( '\n' ) );
+		console.error( '\nstyle.css is the source of truth. Update wporg/readme.txt to match' );
+		console.error( '(the wp.org build syncs the shipped readme automatically).' );
+		return false;
+	}
+
+	console.log( '✓ wporg/readme.txt headers match style.css (Stable tag, Tested up to, Requires at least, Requires PHP).' );
+	return true;
 }
 
-if ( mismatches.length > 0 ) {
-	console.error( '✗ wporg/readme.txt headers are out of sync with style.css:' );
-	console.error( mismatches.join( '\n' ) );
-	console.error( '\nstyle.css is the source of truth. Update wporg/readme.txt to match' );
-	console.error( '(the wp.org build syncs the shipped readme automatically).' );
-	process.exit( 1 );
+if ( require.main === module && ! checkVersionSync() ) {
+	process.exitCode = 1;
 }
 
-console.log( '✓ wporg/readme.txt headers match style.css (Stable tag, Tested up to, Requires at least, Requires PHP).' );
+module.exports = { checkVersionSync };
