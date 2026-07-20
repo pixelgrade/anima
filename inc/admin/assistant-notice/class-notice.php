@@ -127,12 +127,15 @@ class Pixelgrade_Assistant_Install_Notice {
 		?>
 		<div class="pixassist-notice__container notice is-dismissible" >
 
-			<ul class="pxg-wizard">
+			<ul class="pxg-wizard" aria-label="<?php esc_attr_e( 'Site setup progress', '__theme_txtd' ); ?>">
 				<li class="pxg-wizard__step pxg-wizard__step--done">
-					<span class="pxg-wizard__label"><?php esc_html_e( 'Theme', '__theme_txtd' ); ?></span>
+					<span class="pxg-wizard__label">
+						<span class="screen-reader-text"><?php esc_html_e( 'Completed:', '__theme_txtd' ); ?></span>
+						<?php esc_html_e( 'Theme', '__theme_txtd' ); ?>
+					</span>
 					<span class="pxg-wizard__progress"><b></b></span>
 				</li>
-				<li class="pxg-wizard__step pxg-wizard__step--current">
+				<li class="pxg-wizard__step pxg-wizard__step--current" aria-current="step">
 					<span class="pxg-wizard__label"><?php esc_html_e( 'Pixelgrade Assistant', '__theme_txtd' ); ?></span>
 					<span class="pxg-wizard__progress"><b></b></span>
 				</li>
@@ -161,31 +164,31 @@ class Pixelgrade_Assistant_Install_Notice {
                             }
                             $screenshot = $theme->get_screenshot();
                             if ( $screenshot ) { ?>
-                                <img src="<?php echo esc_url( $screenshot ); ?>" alt="Theme screenshot">
+								<img src="<?php echo esc_url( $screenshot ); ?>" alt="">
                             <?php } ?>
                         </div>
 					</div>
 					<div class="pixassist-notice__body">
 						<h1><?php
 							/* translators: %s: the theme name. */
-							echo wp_kses( sprintf( __( 'Thanks for installing %s, you\'re awesome!<br>Let\'s make an experience out of it.', '__theme_txtd' ),  $theme->get( 'Name' ) ), wp_kses_allowed_html('post') ); ?></h1>
-						<p><?php echo wp_kses( __('We\'ve prepared a special onboarding setup that helps you get started and configure your upcoming website in style. Let\'s make it shine!', '__theme_txtd' ), wp_kses_allowed_html('post') ); ?></p>
+							echo wp_kses( sprintf( __( 'Thanks for choosing %s — you’re off to a lovely start.<br>Let’s make your whole site feel considered.', '__theme_txtd' ), $theme->get( 'Name' ) ), wp_kses_allowed_html( 'post' ) ); ?></h1>
+						<p><?php echo wp_kses( __( 'Install the free Pixelgrade Assistant to bring your Pixelgrade LT setup together in one calm place. No account required.', '__theme_txtd' ), wp_kses_allowed_html( 'post' ) ); ?></p>
 						<ul>
 							<li>
-								<i></i><span><?php echo wp_kses( __('<strong>Recommended plugins</strong> to boost your site.', '__theme_txtd' ), wp_kses_allowed_html() ); ?></span>
+								<i></i><span><?php echo wp_kses( __( '<strong>A coherent design system</strong> to keep every detail playing nicely together.', '__theme_txtd' ), wp_kses_allowed_html() ); ?></span>
 							</li>
 							<li>
-								<i></i><span><?php echo wp_kses( __('<strong>Starter Content</strong> to make your site look like the demo.', '__theme_txtd' ), wp_kses_allowed_html() ); ?></span>
+								<i></i><span><?php echo wp_kses( __( '<strong>Polished Starter Sites</strong> to adapt, remix, and make unmistakably yours.', '__theme_txtd' ), wp_kses_allowed_html() ); ?></span>
 							</li>
 							<li>
-								<i></i><span><?php echo wp_kses( __('<strong>Premium Support</strong> to assist you all the way.', '__theme_txtd' ), wp_kses_allowed_html() ); ?></span>
+								<i></i><span><?php echo wp_kses( __( '<strong>Guided setup and helpful checks</strong> whenever you need a nudge.', '__theme_txtd' ), wp_kses_allowed_html() ); ?></span>
 							</li>
 						</ul>
 						<div class="message js-plugin-message"></div>
 						<button type="button" class="pixassist-notice-button js-handle-pixassist">
                             <span class="pixassist-notice-button__text"><?php echo esc_html( $button_text ); ?></span>
-                            <span class="pixassist-notice-button__overlay">
-                                <span class="pixassist-notice-button__text"><?php echo esc_html( $button_text); ?></span>
+							<span class="pixassist-notice-button__overlay" aria-hidden="true">
+                                <span class="pixassist-notice-button__text"><?php echo esc_html( $button_text ); ?></span>
                             </span>
                         </button>
 
