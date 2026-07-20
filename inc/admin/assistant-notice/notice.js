@@ -15,6 +15,8 @@
     var $button = $noticeContainer.find('.js-handle-pixassist')
     var $text = $noticeContainer.find('.pixassist-notice-button__text')
     var $status = $noticeContainer.find('.js-plugin-message')
+    var updatesIdlePollDelay = 100
+    var updatesIdleMaxAttempts = 300
 
     if (!$button.length) {
       return
@@ -61,54 +63,66 @@
       $button.prop('disabled', true)
     }
 
-    function activatePlugin () {
+    function runWhenUpdatesIdle (callback, remainingAttempts) {
+      var updates = window.wp && wp.updates
+      var hasQueuedUpdates = updates && updates.queue && updates.queue.length
+
+      if (!updates || (!updates.ajaxLocked && !hasQueuedUpdates)) {
+        callback()
+        return
+      }
+
+      if (remainingAttempts <= 0) {
+        fail()
+        return
+      }
+
+      setTimeout(function () {
+        runWhenUpdatesIdle(callback, remainingAttempts - 1)
+      }, updatesIdlePollDelay)
+    }
+
+    function whenUpdatesIdle (callback) {
+      runWhenUpdatesIdle(callback, updatesIdleMaxAttempts)
+    }
+
+    function activatePlugin (activateUrl) {
       setLabel(i18n.btnActivating)
       setButtonState('state--plugin-activating')
       $button.prop('disabled', true)
 
-      // wp.updates.activatePlugin landed in WP 5.5+. Prefer it; fall back to the
-      // core ajax endpoint with the shared updates nonce otherwise.
-      if (window.wp && wp.updates && typeof wp.updates.activatePlugin === 'function') {
-        wp.updates.activatePlugin({
-          // Core's activate-plugin AJAX handler requires name + slug + plugin.
-          name: data.name,
-          plugin: data.plugin,
-          slug: data.slug,
-          success: function (response) {
-            // "Plugin is already active" is reported as success by core.
-            goToSetup()
-          },
-          error: function (response) {
-            // Already-active plugins surface as an error in some flows; treat as success.
-            if (response && response.errorMessage && /already active/i.test(response.errorMessage)) {
+      whenUpdatesIdle(function () {
+        // AJAX activation landed in WordPress 6.5. Use the nonce-protected
+        // plugins.php activation URL on older supported WordPress versions.
+        if (window.wp && wp.updates && typeof wp.updates.activatePlugin === 'function') {
+          wp.updates.activatePlugin({
+            // Core's activate-plugin AJAX handler requires name + slug + plugin.
+            name: data.name,
+            plugin: data.plugin,
+            slug: data.slug,
+            success: function () {
+              // "Plugin is already active" is reported as success by core.
               goToSetup()
-              return
+            },
+            error: function (response) {
+              // Already-active plugins surface as an error in some flows; treat as success.
+              if (response && response.errorMessage && /already active/i.test(response.errorMessage)) {
+                goToSetup()
+                return
+              }
+              fail()
             }
-            fail()
-          }
-        })
-        return
-      }
+          })
+          return
+        }
 
-      ajaxActivateFallback()
-    }
+        if (activateUrl) {
+          window.location.href = activateUrl
+          return
+        }
 
-    function ajaxActivateFallback () {
-      $.post(window.ajaxurl, {
-        action: 'activate-plugin',
-        name: data.name,
-        slug: data.slug,
-        plugin: data.plugin,
-        _ajax_nonce: (wp.updates && wp.updates.ajaxNonce) ? wp.updates.ajaxNonce : ''
+        fail()
       })
-        .done(function (response) {
-          if (response && response.success) {
-            goToSetup()
-          } else {
-            fail()
-          }
-        })
-        .fail(fail)
     }
 
     $button.on('click', function () {
@@ -120,7 +134,7 @@
       }
 
       if (status === 'installed') {
-        activatePlugin()
+        activatePlugin(data.activateUrl)
         return
       }
 
@@ -134,23 +148,38 @@
       setButtonState('state--plugin-installing')
       $button.prop('disabled', true)
 
-      // Make sure core surfaces install failures through our error callback
-      // rather than the default credentials modal whenever possible.
-      wp.updates.installPlugin({
-        slug: data.slug,
-        success: function () {
-          speak(i18n.installedSuccessfully)
-          activatePlugin()
-        },
-        error: function (response) {
-          // "Destination folder already exists" means the plugin files are
-          // there; we can move straight to activation.
-          if (response && response.errorCode === 'folder_exists') {
-            activatePlugin()
-            return
+      whenUpdatesIdle(function () {
+        var shouldActivate = false
+        var activateUrl = data.activateUrl
+
+        // Keep the outcome callbacks focused on the install result. Activation
+        // must wait for core's ajaxAlways callback to release the updates lock;
+        // otherwise core queues and silently drops the activate-plugin job.
+        var installRequest = wp.updates.installPlugin({
+          slug: data.slug,
+          success: function (response) {
+            speak(i18n.installedSuccessfully)
+            shouldActivate = true
+            activateUrl = (response && response.activateUrl) || activateUrl
+          },
+          error: function (response) {
+            // "Destination folder already exists" means the plugin files are
+            // there; we can move straight to activation.
+            if (response && response.errorCode === 'folder_exists') {
+              shouldActivate = true
+              return
+            }
+            fail()
           }
-          fail()
-        }
+        })
+
+        // wp.updates.ajax() registers its queue handler before returning this
+        // promise. activatePlugin() then waits if that handler starts another job.
+        installRequest.always(function () {
+          if (shouldActivate) {
+            activatePlugin(activateUrl)
+          }
+        })
       })
     })
 

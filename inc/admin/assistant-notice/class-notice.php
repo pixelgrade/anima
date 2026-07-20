@@ -206,6 +206,11 @@ class Pixelgrade_Assistant_Install_Notice {
 	}
 
 	public function outputJS() {
+		$activate_url = wp_nonce_url(
+			self_admin_url( 'plugins.php?action=activate&plugin=' . urlencode( self::PLUGIN_FILE ) ),
+			'activate-plugin_' . self::PLUGIN_FILE
+		);
+
 		// The WordPress core plugin install/activate machinery. `updates` brings
 		// wp.updates.installPlugin()/activatePlugin(); `plugin-install` provides
 		// the install thickbox helpers and shared nonces. Both are GPL core
@@ -225,6 +230,7 @@ class Pixelgrade_Assistant_Install_Notice {
 		wp_localize_script( 'pixassist_notice_js', 'pixassistNotice', [
 			'slug'   => self::PLUGIN_SLUG,
 			'plugin' => self::PLUGIN_FILE,
+			'activateUrl' => esc_url_raw( $activate_url ),
 			// Core's activate-plugin AJAX handler requires the plugin display name.
 			'name'   => 'Pixelgrade Assistant',
 			// Since we are displaying a notice with the details, we want to skip the welcome screen of the wizard.
