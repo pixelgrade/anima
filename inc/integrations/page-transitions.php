@@ -14,6 +14,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Check if the optional page-transition runtime is available.
+ *
+ * @return bool
+ */
+function anima_page_transitions_assets_available() {
+	return wp_script_is( 'anima-page-transitions', 'registered' );
+}
+
+/**
  * Check if page transitions are enabled.
  *
  * @return bool
@@ -26,6 +35,11 @@ function anima_page_transitions_enabled() {
 	 * Site Editor live preview) opt back in through this filter.
 	 */
 	if ( is_customize_preview() && ! apply_filters( 'anima/page_transitions_in_customize_preview', false ) ) {
+		return false;
+	}
+
+	// Keep saved starter intent dormant until the optional motion runtime exists.
+	if ( ! anima_page_transitions_assets_available() ) {
 		return false;
 	}
 
