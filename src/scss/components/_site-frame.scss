@@ -379,10 +379,15 @@ body.has-site-frame-border #page {
   height: var(--site-frame-marker-height);
   line-height: 0;
   right: calc(var(--site-frame-marker-width) * -1);
-  background-position: calc(50% + (var(--site-frame-marker-padding-left) * 0.5)) 50%;
-  background-repeat: no-repeat;
-  background-size: var(--site-frame-marker-mask-size) var(--site-frame-marker-mask-size);
   background-color: var(--site-frame-surface);
+  // The X glyph is painted by masking the background color with the icon SVG
+  // (see social-links.scss), so the marker sizing must land on the mask —
+  // otherwise the inherited `mask-size: contain` blows the icon up to the
+  // full marker box.
+  mask-position: calc(50% + (var(--site-frame-marker-padding-left) * 0.5)) 50%;
+  mask-size: var(--site-frame-marker-mask-size) var(--site-frame-marker-mask-size);
+  -webkit-mask-position: calc(50% + (var(--site-frame-marker-padding-left) * 0.5)) 50%;
+  -webkit-mask-size: var(--site-frame-marker-mask-size) var(--site-frame-marker-mask-size);
 }
 
 .c-site-frame .nav--toolbar .menu-item--search > a::before,
