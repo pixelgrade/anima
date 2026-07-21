@@ -42,21 +42,25 @@
 :is(h1, h2, h3, h4, h5, h6) :is(strong, em) > :is(em, strong)
     { 
         @include apply-font(accent);
-        --font-size-modifier: 1.3636;
         font-style: var(--current-font-style);
         font-weight: var(--current-font-weight);
         line-height: 0.9;
         white-space: nowrap;
         vertical-align: middle;
-
-        h1.c-headline.has-larger-font-size & {
-            --font-size-modifier: .87;
-            line-height: 1.1;
-        }
     }
+
+.c-headline__secondary {
+    --font-size-modifier: 1.3636;
+
+    h1.c-headline.has-larger-font-size & {
+        --font-size-modifier: .87;
+        line-height: 1.1;
+    }
+}
 
 :is(h1, h2, h3, h4, h5, h6)  {
     em {
+        --font-size-modifier: 1;
         color: var(--sm-current-accent-color);
         line-height: 0;
     }

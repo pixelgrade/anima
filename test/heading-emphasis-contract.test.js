@@ -39,7 +39,6 @@ test( 'heading emphasis consumes the configured accent font voice', () => {
   assert.match( accentRule.declarations, /--current-font-weight: var\(--theme-accent-font-weight\);/ );
   assert.match( accentRule.declarations, /--current-font-style: var\(--theme-accent-font-style\);/ );
   assert.match( accentRule.declarations, /--current-letter-spacing: var\(--theme-accent-letter-spacing\);/ );
-  assert.match( accentRule.declarations, /--font-size-modifier: 1\.3636;/ );
   assert.match( accentRule.declarations, /font-style: var\(--current-font-style\);/ );
   assert.match( accentRule.declarations, /font-weight: var\(--current-font-weight\);/ );
   assert.doesNotMatch( accentRule.declarations, /font-style: normal;|font-weight: 400;/ );
@@ -51,6 +50,35 @@ test( 'heading emphasis consumes the configured accent font voice', () => {
     headingEmRules.some( ( rule ) => /color: var\(--sm-current-accent-color\);/.test( rule.declarations ) ),
     'Heading emphasis must consume the current contextual accent color',
   );
+} );
+
+test( 'only the Headline kicker keeps accent-font size compensation', () => {
+  const css = compileScss( 'theme/components.scss' );
+  const rules = getRules( css );
+  const kickerRule = rules.find( ( rule ) =>
+    rule.selector === '.c-headline__secondary' &&
+    rule.declarations.includes( '--font-size-modifier: 1.3636;' )
+  );
+  const largeHeroKickerRule = rules.find( ( rule ) =>
+    rule.selector === 'h1.c-headline.has-larger-font-size .c-headline__secondary'
+  );
+  const headingEmRule = rules.find( ( rule ) =>
+    rule.selector === ':is(h1, h2, h3, h4, h5, h6) em' &&
+    rule.declarations.includes( '--font-size-modifier: 1;' )
+  );
+
+  assert.ok( kickerRule, 'The secondary Headline must retain its 1.3636 optical compensation' );
+  assert.ok( largeHeroKickerRule, 'The large h1 Headline kicker override must remain scoped to the secondary line' );
+  assert.match( largeHeroKickerRule.declarations, /--font-size-modifier: \.87;/ );
+  assert.ok( headingEmRule, 'Heading emphasis must stay at the heading font size' );
+
+  const coupledCompensation = rules.some( ( rule ) =>
+    rule.selector.includes( '.c-headline__secondary' ) &&
+    rule.selector.includes( ':is(h1, h2, h3, h4, h5, h6) em' ) &&
+    rule.declarations.includes( '--font-size-modifier: 1.3636;' )
+  );
+
+  assert.equal( coupledCompensation, false, 'Kicker compensation must not leak into heading emphasis' );
 } );
 
 test( 'highlight gradient endpoints follow each Style Manager palette variation', () => {
