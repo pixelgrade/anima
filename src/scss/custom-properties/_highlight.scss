@@ -1,0 +1,5 @@
+html,
+[class*="sm-variation-"]:where(:not(.sm-color-signal-0)) {
+    --highlight-text-color-start: var(--sm-current-accent-color, var(--wp--preset--color--primary, currentColor));
+    --highlight-text-color-end: var(--sm-current-accent2-color, var(--highlight-text-color-start));
+}

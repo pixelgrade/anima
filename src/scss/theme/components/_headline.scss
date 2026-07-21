@@ -39,12 +39,12 @@
 // Styling for Headline block and italics inside headings
 .c-headline__secondary,
 :is(h1, h2, h3, h4, h5, h6) em,
-:is(h1, h2, h3, h4, h5, h6) :is(strong, em) :is(em, strong) 
+:is(h1, h2, h3, h4, h5, h6) :is(strong, em) > :is(em, strong)
     { 
         @include apply-font(accent);
         --font-size-modifier: 1.3636;
-        font-style: normal;
-        font-weight: 400;
+        font-style: var(--current-font-style);
+        font-weight: var(--current-font-weight);
         line-height: 0.9;
         white-space: nowrap;
         vertical-align: middle;
@@ -57,12 +57,26 @@
 
 :is(h1, h2, h3, h4, h5, h6)  {
     em {
+        color: var(--sm-current-accent-color);
         line-height: 0;
     }
 
     // Target the double emphasis (em and strong)
-    :is(strong, em) :is(em, strong) {
+    :is(strong, em) > :is(em, strong) {
         --font-size-modifier: 1;
         vertical-align: revert;
+    }
+
+    &:not(.wp-block-post-title, .nb-card__title) {
+
+        :is(strong, em) > :is(em, strong) {
+            color: var(--highlight-text-color-start);
+            background-color: var(--highlight-text-color-start) !important;
+            background-image: linear-gradient(90deg, var(--highlight-text-color-start), var(--highlight-text-color-end));
+            filter: brightness(100%) saturate(150%) contrast(1);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     }
 }

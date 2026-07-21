@@ -1,11 +1,11 @@
-em,
+em:not(:is(h1, h2, h3, h4, h5, h6, .c-headline__primary) em),
 i,
 q,
 dfn {
   font-style: italic;
 }
 
-em {
+em:not(:is(h1, h2, h3, h4, h5, h6, .c-headline__primary) em) {
   --current-font-style: italic;
 }
 
@@ -71,8 +71,8 @@ mark {
 // ------ #ACCENTUATE CONTROL
 // Inline text highlighting using both methods of 
 // emphasis: bold and italic altogether.
-strong em,
-em strong {
+strong > em:not(:is(h1, h2, h3, h4, h5, h6, .c-headline__primary) em),
+em > strong:not(:is(h1, h2, h3, h4, h5, h6, .c-headline__primary) strong) {
   @include apply-font(heading-4);
   --font-size: revert; 
 
