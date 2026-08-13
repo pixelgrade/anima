@@ -274,6 +274,10 @@ function anima_enqueue_assets() {
 add_action( 'wp_enqueue_scripts', 'anima_enqueue_assets', 20 );
 
 function anima_print_scripts() {
+	if ( is_admin() ) {
+		return;
+	}
+
 	// The `beforeunload` handler below fades the body out to opacity 0 by
 	// re-adding the `.is-loading` class on every navigation. With Page
 	// Transitions ENABLED this only kicks in on hard refreshes and external
