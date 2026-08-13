@@ -8,7 +8,7 @@ return [
 	'title'    => __( '404 content (theme)', '__theme_txtd' ),
 	'inserter' => false,
 	'content'  => '<!-- wp:heading {"textAlign":"center","level":1,"align":"wide","className":"has-larger-font-size","fontSize":"larger"} -->
-<h1 class="alignwide has-text-align-center has-larger-font-size" id="looks-like-you-ve-stumbled-into-nowhere">' . esc_html__( 'Looks like you\'ve stumbled into nowhere.', '__theme_txtd' ) . '</h1>
+<h1 class="wp-block-heading alignwide has-text-align-center has-larger-font-size" id="looks-like-you-ve-stumbled-into-nowhere">' . esc_html__( 'Looks like you\'ve stumbled into nowhere.', '__theme_txtd' ) . '</h1>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center"} -->
