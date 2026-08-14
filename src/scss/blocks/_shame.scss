@@ -32,8 +32,9 @@
         color: var(--sm-current-fg1-color);
         --font-size-modifier: 0.85;
 
-        &:hover {
-          background-color: var(--sm-current-accent-color);
+        &:is(:hover, :focus) {
+          background-color: var(--sm-current-fg1-color);
+          color: var(--sm-current-bg-color);
         }
       }
 
