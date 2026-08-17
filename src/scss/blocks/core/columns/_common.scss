@@ -10,8 +10,17 @@ $enable-columns-block-styles: true !default;
         --wp--style--block-gap: var(--theme-spacing-fluid-normal);
     }
 
-    .wp-block-columns[class] {
+    // Declare the gap itself at zero specificity so that a per-block Block Spacing
+    // value can win. WordPress serialises an authored `style.spacing.blockGap` as a
+    // generated container rule — `.wp-container-{id} { gap: … }`, specificity (0,1,0) —
+    // which an `[class]` bump here would silently outrank, leaving the editor control
+    // writing a value that never applies. The helper classes below only assign the
+    // custom property, so their specificity plays no part in this particular cascade.
+    :where(.wp-block-columns) {
         gap: var(--wp--style--block-gap);
+    }
+
+    .wp-block-columns[class] {
 
         // Helper Classes Collection
         // Generate classes to adjust the the Columns block-gap 
