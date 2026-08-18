@@ -116,12 +116,12 @@ function anima_woocommerce_setup_hooks() {
 
 	// Move sale flash outside the product link to match editor block markup
 	remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10 );
-	add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_show_product_loop_sale_flash', 5 );
+	add_action( 'woocommerce_after_shop_loop_item', 'anima_loop_sale_flash', 5 );
 
 	// Add wrapper for product price in loops and move it after sale flash
 	remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
 	add_action( 'woocommerce_after_shop_loop_item', 'anima_price_wrapper_start', 5 );
-	add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_price', 5 );
+	add_action( 'woocommerce_after_shop_loop_item', 'anima_loop_price', 5 );
 	add_action( 'woocommerce_after_shop_loop_item', 'anima_price_wrapper_end', 5 );
 
 	// Replace Add To Cart button inside loops with ajax add to cart
@@ -210,7 +210,28 @@ function anima_woocommerce_loop_start( string $markup ): string {
     // We only want to filter product classes when we are in a loop (not when rendering single products).
 	add_filter( 'woocommerce_post_class', 'anima_woocommerce_product_class', 10, 2 );
 
+	$GLOBALS['anima_woocommerce_classic_loop'] = true;
+
 	return '<div class="wc-block-grid alignwide has-' . esc_attr( wc_get_loop_prop( 'columns' ) ) . '-columns"><ul class="wc-block-grid__products">';
+}
+
+/**
+ * Whether the classic WooCommerce product loop is currently rendering.
+ *
+ * WooCommerce's blockified product templates replay the classic loop hooks
+ * through their compatibility layer, but they never run
+ * `woocommerce_product_loop_start`. Anima's loop markup only makes sense wrapped
+ * around the classic loop output — replayed into block markup it produces empty
+ * wrappers and duplicated titles, prices and buttons. The theme's own product
+ * templates keep WooCommerce on the classic loop (they carry a
+ * `woocommerce/legacy-template` block, which switches the compatibility layer
+ * off), so this is a safety net for sites whose product templates were replaced
+ * in the Site Editor, or for a future WooCommerce that drops the classic path.
+ *
+ * @return bool
+ */
+function anima_woocommerce_in_classic_loop(): bool {
+	return ! empty( $GLOBALS['anima_woocommerce_classic_loop'] );
 }
 
 /**
@@ -223,6 +244,8 @@ function anima_woocommerce_loop_start( string $markup ): string {
 function anima_woocommerce_loop_end( string $markup ): string {
 	// Remove filter added in loop start.
 	remove_filter( 'woocommerce_post_class', 'anima_woocommerce_product_class', 10 );
+
+	$GLOBALS['anima_woocommerce_classic_loop'] = false;
 
 	return '</ul><!-- .wc-block-grid__products --></div><!-- .wc-block-grid -->';
 }
@@ -289,18 +312,62 @@ function anima_add_end_main_content() {
 }
 
 function anima_new_product_title_markup() {
+	if ( ! anima_woocommerce_in_classic_loop() ) {
+		return;
+	}
+
 	echo '<h2 class="wc-block-grid__product-title">' . esc_html( get_the_title() ) . '</h2>';
 }
 
 function anima_price_wrapper_start() {
+	if ( ! anima_woocommerce_in_classic_loop() ) {
+		return;
+	}
+
 	echo '<div class="wc-block-grid__product-price price">';
 }
 
 function anima_price_wrapper_end() {
+	if ( ! anima_woocommerce_in_classic_loop() ) {
+		return;
+	}
+
 	echo '</div><!-- .wc-block-grid__product-price.price -->';
 }
 
+/**
+ * Render the loop price, relocated by Anima after the sale flash.
+ *
+ * Wraps the WooCommerce template function so the relocation only applies to the
+ * classic loop. See anima_woocommerce_in_classic_loop().
+ */
+function anima_loop_price() {
+	if ( ! anima_woocommerce_in_classic_loop() ) {
+		return;
+	}
+
+	woocommerce_template_loop_price();
+}
+
+/**
+ * Render the loop sale flash, relocated by Anima outside the product link.
+ *
+ * Wraps the WooCommerce template function so the relocation only applies to the
+ * classic loop. See anima_woocommerce_in_classic_loop().
+ */
+function anima_loop_sale_flash() {
+	if ( ! anima_woocommerce_in_classic_loop() ) {
+		return;
+	}
+
+	woocommerce_show_product_loop_sale_flash();
+}
+
 function anima_append_add_to_cart_button()  {
+
+	if ( ! anima_woocommerce_in_classic_loop() ) {
+		return;
+	}
 
 	if ( 'product' !== get_post_type() ) {
 		return;
@@ -478,6 +545,10 @@ function anima_product_catalog_image_aspect_ratio() {
 }
 
 function anima_loop_product_link_open() {
+	if ( ! anima_woocommerce_in_classic_loop() ) {
+		return;
+	}
+
 	global $product;
 
 	$link = apply_filters( 'woocommerce_loop_product_link', get_the_permalink(), $product );
@@ -486,14 +557,26 @@ function anima_loop_product_link_open() {
 }
 
 function anima_loop_product_link_close() {
+	if ( ! anima_woocommerce_in_classic_loop() ) {
+		return;
+	}
+
 	echo '</a><!-- .wc-block-grid__product-link -->';
 }
 
 function anima_loop_product_thumbnail_wrapper_open() {
+	if ( ! anima_woocommerce_in_classic_loop() ) {
+		return;
+	}
+
     echo '<div class="wc-block-grid__product-image">';
 }
 
 function anima_loop_product_thumbnail_wrapper_close() {
+	if ( ! anima_woocommerce_in_classic_loop() ) {
+		return;
+	}
+
     echo '</div><!-- .wc-block-grid__product-image -->';
 }
 
