@@ -190,7 +190,7 @@ function anima_woocommerce_setup_hooks() {
 	add_action('woocommerce_after_quantity_input_field', 'anima_woocommerce_quantity_input_after');
 
     // Add label before stock
-	add_filter( 'woocommerce_get_availability', 'anima_add_label_to_availability_display' );
+	add_filter( 'woocommerce_get_availability', 'anima_add_label_to_availability_display', 10, 2 );
 }
 
 function anima_woocommerce_product_class( $classes, $product ) {
@@ -524,17 +524,33 @@ function anima_woocommerce_quantity_label() {
 }
 
 /**
+ * Prefix the single product stock display with a "Stock" label.
+ *
+ * `woocommerce_get_availability` runs in more contexts than the classic single
+ * product template. WooCommerce hydrates the Store API on `template_redirect`
+ * for every single product request, long before the loop starts — and at that
+ * point the `$product` global is still the product slug string, because
+ * WordPress promotes the `product` query var to a global and WooCommerce only
+ * replaces it on `the_post`. Take the product from the filter argument, type
+ * check it, and only decorate the classic markup.
+ *
  * @param array $availability
+ * @param mixed $product The product the availability belongs to.
  *
  * @return array
  */
-function anima_add_label_to_availability_display( array $availability ): array {
-    global $product;
+function anima_add_label_to_availability_display( array $availability, $product = null ): array {
 
-	if( is_product() && $product-> get_manage_stock() ){
-		$label = '<span>' . esc_html__( 'Stock', '__theme_txtd' ) . '</span>';
-		$availability['availability'] = $label . '<span>' .$availability['availability'] . '</span>';
+	if ( ! is_product() || ! did_action( 'woocommerce_before_single_product' ) ) {
+		return $availability;
 	}
+
+	if ( ! $product instanceof WC_Product || ! $product->get_manage_stock() ) {
+		return $availability;
+	}
+
+	$label                        = '<span>' . esc_html__( 'Stock', '__theme_txtd' ) . '</span>';
+	$availability['availability'] = $label . '<span>' . $availability['availability'] . '</span>';
 
 	return $availability;
 }
