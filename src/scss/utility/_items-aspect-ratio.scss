@@ -19,6 +19,19 @@
   }
 }
 
+// The forced ratio sizes the card ITEM, but NB's stacked frame normally takes
+// its height from the in-flow content. A treatment that absolutizes the
+// content (collection-hover-pile) removes the frame's only height source, so
+// every fixed-ratio stacked card collapses to a bare background slab (media
+// and content chains are absolute inside a 0-height frame). Make the frame
+// fill the ratio-sized item on the frontend. Editor excluded: its stacked
+// cards run on NB's own grid frame, which manages frame height itself.
+body:not(.editor-styles-wrapper) .nb-supernova:not(.nb-supernova--1-columns):not(.nb-supernova--aspect-ratio-original) {
+  .nb-supernova-item--layout-stacked .nb-supernova-item__frame {
+    height: 100%;
+  }
+}
+
 // ==========================================================================
 // EDITOR — fix broken aspect-ratio on media wrapper for ALL modes
 // ==========================================================================
