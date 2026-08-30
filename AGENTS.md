@@ -239,6 +239,11 @@ deletion fails, report the leftover path and cleanup blocker.
   exist. If the local runner has drifted, record the gap and use the WordPress.org
   scanner plus the fresh Studio archive smoke as the release gate until the local
   runner is restored.
+  Gap recorded 2026-08-30: `~/Studio/anima-lt` and `run-theme-check.php` no longer
+  exist on this machine; the 2.0.49 update shipped gated on the WordPress.org
+  upload scanner (Pass, INFO-only) with themetracbot auto-approval
+  (https://themes.trac.wordpress.org/ticket/288624). Rebuild the local runner
+  before a release that changes PHP or templates.
 
 ## Project Structure
 
