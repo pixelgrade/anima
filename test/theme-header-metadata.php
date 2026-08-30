@@ -24,7 +24,7 @@ foreach ( $files as $file ) {
 	$contents = file_get_contents( $path );
 
 	if ( ! preg_match( '/^Version:\s*2\.0\.48\s*$/m', $contents ) ) {
-		fwrite( STDERR, sprintf( "%s must declare Version: 2.0.48\n", $file ) );
+		fwrite( STDERR, sprintf( "%s must declare Version: 2.0.49\n", $file ) );
 		exit( 1 );
 	}
 
