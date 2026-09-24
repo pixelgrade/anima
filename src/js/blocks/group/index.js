@@ -1,37 +1,44 @@
-// Explains the Bottom action bar where it is chosen: next to the block style
-// picker, a note says when visitors see it, or warns that it only works in
-// the Footer template part.
+// Bottom action bar in the editor: the style is only offered for a Group in
+// the Footer template part, and a note on the selected bar says when visitors
+// see it (or warns, for a bar left outside the Footer, that it only works
+// there).
 
 const {
   hasBottomActionBarStyle,
   isInFooterTemplatePart,
+  shouldOfferBottomActionBarStyle,
+  createStyleOfferSync,
 } = require( './bottom-action-bar-context.js' );
+
+const STYLE_NAME = 'bottom-action-bar';
 
 const { createElement: el, Fragment } = wp.element;
 const { __ } = wp.i18n;
 
+const selectIsInFooterTemplatePart = ( select, clientId ) => {
+  const blockEditor = select( 'core/block-editor' );
+  const core = select( 'core' );
+  const editor = select( 'core/editor' );
+  const stylesheet = core.getCurrentTheme?.()?.stylesheet;
+
+  return isInFooterTemplatePart( {
+    parentBlocks: blockEditor.getBlockParents( clientId ).map( id => blockEditor.getBlock( id ) ),
+    getTemplatePartArea: ( { area, slug, theme } ) => {
+      if ( area ) {
+        return area;
+      }
+
+      const record = slug && core.getEditedEntityRecord( 'postType', 'wp_template_part', `${ theme || stylesheet }//${ slug }` );
+
+      return record?.area;
+    },
+    editedPostType: editor?.getCurrentPostType?.(),
+    editedArea: editor?.getEditedPostAttribute?.( 'area' ),
+  } );
+};
+
 const useIsInFooterTemplatePart = ( clientId ) => {
-  return wp.data.useSelect( ( select ) => {
-    const blockEditor = select( 'core/block-editor' );
-    const core = select( 'core' );
-    const editor = select( 'core/editor' );
-    const stylesheet = core.getCurrentTheme?.()?.stylesheet;
-
-    return isInFooterTemplatePart( {
-      parentBlocks: blockEditor.getBlockParents( clientId ).map( id => blockEditor.getBlock( id ) ),
-      getTemplatePartArea: ( { area, slug, theme } ) => {
-        if ( area ) {
-          return area;
-        }
-
-        const record = slug && core.getEditedEntityRecord( 'postType', 'wp_template_part', `${ theme || stylesheet }//${ slug }` );
-
-        return record?.area;
-      },
-      editedPostType: editor?.getCurrentPostType?.(),
-      editedArea: editor?.getEditedPostAttribute?.( 'area' ),
-    } );
-  }, [ clientId ] );
+  return wp.data.useSelect( ( select ) => selectIsInFooterTemplatePart( select, clientId ), [ clientId ] );
 };
 
 const BottomActionBarNotice = ( { clientId } ) => {
@@ -63,3 +70,33 @@ const withBottomActionBarNotice = wp.compose.createHigherOrderComponent( ( Block
 }, 'withAnimaBottomActionBarNotice' );
 
 wp.hooks.addFilter( 'editor.BlockEdit', 'anima/bottom-action-bar-notice', withBottomActionBarNotice );
+
+// Offer the style only while a Group in the Footer template part is selected.
+wp.domReady( () => {
+  const style = wp.data.select( 'core/blocks' ).getBlockStyles( 'core/group' ).find( ( { name } ) => name === STYLE_NAME );
+
+  if ( ! style ) {
+    return;
+  }
+
+  const sync = createStyleOfferSync( {
+    offered: true,
+    register: () => wp.blocks.registerBlockStyle( 'core/group', style ),
+    unregister: () => wp.blocks.unregisterBlockStyle( 'core/group', STYLE_NAME ),
+  } );
+
+  const update = () => {
+    const select = wp.data.select;
+    const clientId = select( 'core/block-editor' ).getSelectedBlockClientId();
+    const blockName = clientId && select( 'core/block-editor' ).getBlockName( clientId );
+
+    sync( shouldOfferBottomActionBarStyle( {
+      blockName,
+      inFooter: blockName === 'core/group' && selectIsInFooterTemplatePart( select, clientId ),
+    } ) );
+  };
+
+  // Unscoped: the Footer area of a template part can arrive later from core-data.
+  update();
+  wp.data.subscribe( update );
+} );

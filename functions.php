@@ -223,7 +223,7 @@ function anima_enqueue_theme_block_editor_assets() {
 	wp_enqueue_script(
 		'anima-editor-js',
 		trailingslashit( get_template_directory_uri() ) . 'dist/js/editor' . $suffix . '.js',
-		[ 'wp-hooks', 'wp-dom-ready', 'wp-element', 'wp-i18n', 'wp-data', 'wp-compose', 'wp-block-editor', 'wp-components', 'wp-core-data', 'wp-editor' ],
+		[ 'wp-hooks', 'wp-dom-ready', 'wp-blocks', 'wp-element', 'wp-i18n', 'wp-data', 'wp-compose', 'wp-block-editor', 'wp-components', 'wp-core-data', 'wp-editor' ],
 		$theme->get( 'Version' ),
 		true
 	);

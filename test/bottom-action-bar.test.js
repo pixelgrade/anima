@@ -14,6 +14,8 @@ const {
 const {
   hasBottomActionBarStyle,
   isInFooterTemplatePart,
+  shouldOfferBottomActionBarStyle,
+  createStyleOfferSync,
 } = require( '../src/js/blocks/group/bottom-action-bar-context.js' );
 
 const scssRoot = path.join( __dirname, '..', 'src', 'scss' );
@@ -196,6 +198,30 @@ test( 'editing the Footer template part itself counts as the Footer', () => {
   assert.equal( isInFooterTemplatePart( { parentBlocks: [], getTemplatePartArea, editedPostType: 'wp_template_part', editedArea: 'footer' } ), true );
   assert.equal( isInFooterTemplatePart( { parentBlocks: [], getTemplatePartArea, editedPostType: 'wp_template_part', editedArea: 'header' } ), false );
   assert.equal( isInFooterTemplatePart( { parentBlocks: [], getTemplatePartArea, editedPostType: 'page', editedArea: undefined } ), false );
+} );
+
+test( 'the style is offered only for a Group inside the Footer template part', () => {
+  assert.equal( shouldOfferBottomActionBarStyle( { blockName: 'core/group', inFooter: true } ), true );
+  assert.equal( shouldOfferBottomActionBarStyle( { blockName: 'core/group', inFooter: false } ), false );
+  assert.equal( shouldOfferBottomActionBarStyle( { blockName: 'core/paragraph', inFooter: true } ), false );
+  assert.equal( shouldOfferBottomActionBarStyle( { blockName: undefined, inFooter: false } ), false );
+} );
+
+test( 'the style registration follows the selection without churn', () => {
+  const calls = [];
+  const sync = createStyleOfferSync( {
+    offered: true,
+    register: () => calls.push( 'register' ),
+    unregister: () => calls.push( 'unregister' ),
+  } );
+
+  sync( false ); // A Group in page content (or nothing) is selected.
+  sync( false ); // Store updates while the selection stays put.
+  sync( true ); // A Group in the Footer part is selected.
+  sync( true );
+  sync( false );
+
+  assert.deepEqual( calls, [ 'unregister', 'register', 'unregister' ] );
 } );
 
 // ---------------------------------------------------------------------------

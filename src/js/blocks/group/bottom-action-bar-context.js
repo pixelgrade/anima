@@ -22,8 +22,36 @@ const isInFooterTemplatePart = ( { parentBlocks = [], getTemplatePartArea, edite
   return editedPostType === 'wp_template_part' && editedArea === FOOTER_AREA;
 };
 
+// The style is only offered in the picker for a Group inside the Footer
+// template part. Block styles are registered per block type, so the editor
+// registers it while such a Group is selected and unregisters it otherwise;
+// this keeps that switch idempotent (no churn on every store change).
+const shouldOfferBottomActionBarStyle = ( { blockName, inFooter } ) => {
+  return blockName === 'core/group' && !! inFooter;
+};
+
+const createStyleOfferSync = ( { offered, register, unregister } ) => {
+  let current = offered;
+
+  return ( shouldOffer ) => {
+    if ( shouldOffer === current ) {
+      return;
+    }
+
+    current = shouldOffer;
+
+    if ( shouldOffer ) {
+      register();
+    } else {
+      unregister();
+    }
+  };
+};
+
 module.exports = {
   STYLE_CLASS,
   hasBottomActionBarStyle,
   isInFooterTemplatePart,
+  shouldOfferBottomActionBarStyle,
+  createStyleOfferSync,
 };

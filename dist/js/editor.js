@@ -54,10 +54,41 @@ const isInFooterTemplatePart = ({
   // Editing the Footer template part itself: its blocks have no template-part parent.
   return editedPostType === 'wp_template_part' && editedArea === FOOTER_AREA;
 };
+
+// The style is only offered in the picker for a Group inside the Footer
+// template part. Block styles are registered per block type, so the editor
+// registers it while such a Group is selected and unregisters it otherwise;
+// this keeps that switch idempotent (no churn on every store change).
+const shouldOfferBottomActionBarStyle = ({
+  blockName,
+  inFooter
+}) => {
+  return blockName === 'core/group' && !!inFooter;
+};
+const createStyleOfferSync = ({
+  offered,
+  register,
+  unregister
+}) => {
+  let current = offered;
+  return shouldOffer => {
+    if (shouldOffer === current) {
+      return;
+    }
+    current = shouldOffer;
+    if (shouldOffer) {
+      register();
+    } else {
+      unregister();
+    }
+  };
+};
 module.exports = {
   STYLE_CLASS,
   hasBottomActionBarStyle,
-  isInFooterTemplatePart
+  isInFooterTemplatePart,
+  shouldOfferBottomActionBarStyle,
+  createStyleOfferSync
 };
 
 /***/ },
@@ -65,14 +96,18 @@ module.exports = {
 /***/ 152
 (__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
-// Explains the Bottom action bar where it is chosen: next to the block style
-// picker, a note says when visitors see it, or warns that it only works in
-// the Footer template part.
+// Bottom action bar in the editor: the style is only offered for a Group in
+// the Footer template part, and a note on the selected bar says when visitors
+// see it (or warns, for a bar left outside the Footer, that it only works
+// there).
 
 const {
   hasBottomActionBarStyle,
-  isInFooterTemplatePart
+  isInFooterTemplatePart,
+  shouldOfferBottomActionBarStyle,
+  createStyleOfferSync
 } = __webpack_require__(353);
+const STYLE_NAME = 'bottom-action-bar';
 const {
   createElement: el,
   Fragment
@@ -80,29 +115,30 @@ const {
 const {
   __
 } = wp.i18n;
+const selectIsInFooterTemplatePart = (select, clientId) => {
+  const blockEditor = select('core/block-editor');
+  const core = select('core');
+  const editor = select('core/editor');
+  const stylesheet = core.getCurrentTheme?.()?.stylesheet;
+  return isInFooterTemplatePart({
+    parentBlocks: blockEditor.getBlockParents(clientId).map(id => blockEditor.getBlock(id)),
+    getTemplatePartArea: ({
+      area,
+      slug,
+      theme
+    }) => {
+      if (area) {
+        return area;
+      }
+      const record = slug && core.getEditedEntityRecord('postType', 'wp_template_part', `${theme || stylesheet}//${slug}`);
+      return record?.area;
+    },
+    editedPostType: editor?.getCurrentPostType?.(),
+    editedArea: editor?.getEditedPostAttribute?.('area')
+  });
+};
 const useIsInFooterTemplatePart = clientId => {
-  return wp.data.useSelect(select => {
-    const blockEditor = select('core/block-editor');
-    const core = select('core');
-    const editor = select('core/editor');
-    const stylesheet = core.getCurrentTheme?.()?.stylesheet;
-    return isInFooterTemplatePart({
-      parentBlocks: blockEditor.getBlockParents(clientId).map(id => blockEditor.getBlock(id)),
-      getTemplatePartArea: ({
-        area,
-        slug,
-        theme
-      }) => {
-        if (area) {
-          return area;
-        }
-        const record = slug && core.getEditedEntityRecord('postType', 'wp_template_part', `${theme || stylesheet}//${slug}`);
-        return record?.area;
-      },
-      editedPostType: editor?.getCurrentPostType?.(),
-      editedArea: editor?.getEditedPostAttribute?.('area')
-    });
-  }, [clientId]);
+  return wp.data.useSelect(select => selectIsInFooterTemplatePart(select, clientId), [clientId]);
 };
 const BottomActionBarNotice = ({
   clientId
@@ -131,6 +167,34 @@ const withBottomActionBarNotice = wp.compose.createHigherOrderComponent(BlockEdi
   }));
 }, 'withAnimaBottomActionBarNotice');
 wp.hooks.addFilter('editor.BlockEdit', 'anima/bottom-action-bar-notice', withBottomActionBarNotice);
+
+// Offer the style only while a Group in the Footer template part is selected.
+wp.domReady(() => {
+  const style = wp.data.select('core/blocks').getBlockStyles('core/group').find(({
+    name
+  }) => name === STYLE_NAME);
+  if (!style) {
+    return;
+  }
+  const sync = createStyleOfferSync({
+    offered: true,
+    register: () => wp.blocks.registerBlockStyle('core/group', style),
+    unregister: () => wp.blocks.unregisterBlockStyle('core/group', STYLE_NAME)
+  });
+  const update = () => {
+    const select = wp.data.select;
+    const clientId = select('core/block-editor').getSelectedBlockClientId();
+    const blockName = clientId && select('core/block-editor').getBlockName(clientId);
+    sync(shouldOfferBottomActionBarStyle({
+      blockName,
+      inFooter: blockName === 'core/group' && selectIsInFooterTemplatePart(select, clientId)
+    }));
+  };
+
+  // Unscoped: the Footer area of a template part can arrive later from core-data.
+  update();
+  wp.data.subscribe(update);
+});
 
 /***/ },
 
