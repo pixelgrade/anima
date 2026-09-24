@@ -85,6 +85,12 @@ $social-links-selector: '';
     }
 }
 
+// A call-to-action button keeps its label even when it links to a phone
+// number or an email address; only plain menu links collapse to an icon.
+.nb-navigation .is-cta-button > a {
+    --is-social: 0;
+}
+
 .social-menu-item {
     
     display: flex;

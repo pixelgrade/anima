@@ -73,27 +73,51 @@
     }
 }
 
+// Button colors of a navigation CTA, shared by the menu item and
+// the Nova Blocks mobile header bar copy (which sits outside `.nb-navigation`).
+@mixin navigation-cta-button-props {
+    --theme-button-text-color: var(--sm-current-bg-color);
+    --theme-button-background-color: var(--sm-current-fg1-color);
+    --theme-button-border-color: var(--sm-current-fg1-color);
+
+    --theme-button-hover-text-color: var(--sm-current-fg1-color);
+    --theme-button-hover-background-color: transparent;
+    --theme-button-hover-border-color: var(--sm-current-fg1-color);
+}
+
+@mixin navigation-cta-button-link {
+    // Apply button properties
+    @include button-box;
+    @include button-background;
+    @include button-color;
+    @include apply-font(button);
+    @include button-fill;
+
+    transition: var(--theme-button-transition);
+
+    // Overwrite default button colors
+    --current-button-background-color: var(--theme-button-background-color);
+    --current-button-border-color: var(--theme-button-border-color);
+    --current-button-text-color: var(--theme-button-text-color);
+    --current-button-transition: var(--theme-button-transition);
+
+    margin-bottom: 0;
+
+    &:hover {
+        // Overwrite default button hover colors
+        --current-button-background-color: var(--theme-button-hover-background-color);
+        --current-button-border-color: var(--theme-button-hover-border-color);
+        --current-button-text-color: var(--theme-button-hover-text-color);
+        --current-button-transition: var(--theme-button-hover-transition);
+    }
+}
+
 @mixin navigation-item-is-cta-button {
     display: flex;
     align-items: center;
 
     > a {
-        // Apply button properties
-        @include button-box;
-        @include button-background;
-        @include button-color;
-        @include apply-font(button);
-        @include button-fill;
-
-        transition: var(--theme-button-transition);
-
-        // Overwrite default button colors
-        --current-button-background-color: var(--theme-button-background-color);
-        --current-button-border-color: var(--theme-button-border-color);
-        --current-button-text-color: var(--theme-button-text-color);
-        --current-button-transition: var(--theme-button-transition);
-
-        margin-bottom: 0;
+        @include navigation-cta-button-link;
 
         @include below(lap) {
             width: 100%;
@@ -101,13 +125,16 @@
 
             text-align: center;
         }
+    }
+}
 
-        &:hover {
-            // Overwrite default button hover colors
-            --current-button-background-color: var(--theme-button-hover-background-color);
-            --current-button-border-color: var(--theme-button-hover-border-color);
-            --current-button-text-color: var(--theme-button-hover-text-color);
-            --current-button-transition: var(--theme-button-hover-transition);
-        }
+// The CTA copy that Nova Blocks shows in the mobile header bar: same button,
+// compact box. Nova owns its placement, tap target and truncation.
+@mixin navigation-mobile-bar-cta-button {
+    @include navigation-cta-button-props;
+    --theme-button-padding: .5em 1em;
+
+    > a {
+        @include navigation-cta-button-link;
     }
 }
