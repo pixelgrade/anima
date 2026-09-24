@@ -47,3 +47,20 @@ a {
     }
 
 }
+
+/* Long links in article text (#604) */
+// A visible URL is one unbreakable word: at phone widths it ran past the
+// paragraph and widened the whole page. Let article links break anywhere,
+// but only inside Post Content text, so navigation, buttons and card links
+// keep their intrinsic sizing (`anywhere` also lowers min-content width).
+.wp-block-post-content :is(p, li, dd, dt, th, td, figcaption, blockquote, cite, address) a:not(.wp-block-navigation-item__content, .wp-block-button__link) {
+    overflow-wrap: anywhere;
+}
+
+// Auto excerpts repeat an article's opening words, so a reference URL can
+// also appear as plain text in the post lead and in collection cards. Break
+// such over-long words only when they cannot fit; `break-word` leaves
+// min-content sizing (card and grid tracks) untouched.
+:is(.wp-block-post-excerpt__excerpt, .nb-card__description) {
+    overflow-wrap: break-word;
+}
