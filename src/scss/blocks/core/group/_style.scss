@@ -1,0 +1,54 @@
+/*------------------------------------*\
+  #GROUP — BOTTOM ACTION BAR (frontend)
+\*------------------------------------*/
+
+$anima-bottom-action-bar-selector: '.wp-block-group.is-style-bottom-action-bar';
+
+// Fallback reservation before (or without) the frontend script measuring the
+// bar: one row of 44px targets plus the bar's vertical padding.
+$anima-bottom-action-bar-fallback-height: calc(44px + 1.5rem + 1px + env(safe-area-inset-bottom, 0px));
+
+@include below(lap) {
+
+    #{$anima-bottom-action-bar-selector} {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+
+        width: auto;
+        max-width: none;
+        margin: 0 !important;
+        // The home-indicator inset rides on a transparent border, painted
+        // with the bar's background: a Color Signal's boxed padding (Nova
+        // Blocks) owns the padding and would otherwise drop it.
+        border-bottom: env(safe-area-inset-bottom, 0px) solid transparent;
+
+        transition: transform .3s ease, visibility 0s linear 0s;
+    }
+
+    // Reserve the bar's height at the end of the page so it never covers the
+    // footer or the last content, and keep focused elements scrolled clear.
+    body:has(#{$anima-bottom-action-bar-selector}) {
+        padding-bottom: var(--anima-bottom-action-bar-height, #{$anima-bottom-action-bar-fallback-height});
+    }
+
+    html:has(#{$anima-bottom-action-bar-selector}) {
+        scroll-padding-bottom: var(--anima-bottom-action-bar-height, #{$anima-bottom-action-bar-fallback-height});
+    }
+
+    // Step aside while the Nova Blocks mobile menu drawer is open.
+    body:has(#nova-menu-toggle:checked) #{$anima-bottom-action-bar-selector} {
+        visibility: hidden;
+        transform: translateY(100%);
+        transition: transform .3s ease, visibility 0s linear .3s;
+    }
+}
+
+@include above(lap) {
+
+    #{$anima-bottom-action-bar-selector} {
+        display: none;
+    }
+}

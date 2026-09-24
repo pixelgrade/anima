@@ -1,0 +1,55 @@
+/*------------------------------------*\
+  #GROUP — BOTTOM ACTION BAR (shared look)
+\*------------------------------------*/
+
+// A Group with the "Bottom action bar" style: a row of equal-width call /
+// email buttons. Colours come from the current Style Manager palette, so a
+// Color Signal on the Group recolours it; the buttons keep the theme's
+// button styles. The frontend pins it to the bottom of the viewport on
+// phones (style.scss); the editor shows it in flow with the same look.
+.wp-block-group.is-style-bottom-action-bar {
+    --anima-bottom-action-bar-gap: .5rem;
+
+    padding: .75rem var(--theme-wrapper-sides-spacing, 1rem);
+
+    color: var(--sm-current-fg1-color, currentColor);
+    background-color: var(--sm-current-bg-color, var(--wp--preset--color--base, #fff));
+    border-top: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+
+    > .wp-block-buttons {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        gap: var(--anima-bottom-action-bar-gap);
+
+        flex: 1 1 auto;
+        width: 100%;
+        max-width: none;
+        margin: 0;
+    }
+
+    .wp-block-button {
+        display: flex;
+        flex: 1 1 0;
+        min-width: 0;
+        margin: 0;
+    }
+
+    // Labels wrap rather than truncate: a clipped "Call the d…" is useless,
+    // and the page-end reservation follows the bar's real height.
+    .wp-block-button__link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 100%;
+        min-height: 44px;
+        padding-right: .5em;
+        padding-left: .5em;
+
+        line-height: 1.2;
+        text-align: center;
+        white-space: normal;
+        hyphens: auto;
+    }
+}

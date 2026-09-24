@@ -1,0 +1,11 @@
+/*------------------------------------*\
+  #GROUP — BOTTOM ACTION BAR (editor)
+\*------------------------------------*/
+
+// The editor keeps the bar in flow, where it is placed (usually the end of
+// the Footer template part), at every canvas width: pinning it would cover
+// the canvas, and hiding it above phones would make it uneditable.
+.editor-styles-wrapper .wp-block-group.is-style-bottom-action-bar {
+    position: relative;
+    display: block;
+}

@@ -60,6 +60,18 @@ function anima_register_block_styles() {
 	);
 
 	register_block_style(
+		'core/group',
+		[
+			'name'  => 'bottom-action-bar',
+			'label' => __( 'Bottom action bar', '__theme_txtd' ),
+			// Pinned to the bottom of the viewport on phones, hidden on wider
+			// screens, shown in flow in the editor. The styles live in the
+			// block bundles (src/scss/blocks/core/group/) because they need
+			// breakpoints and separate editor/frontend behaviour.
+		]
+	);
+
+	register_block_style(
 		'core/categories',
 		[
 			'name'         => 'filter-row',

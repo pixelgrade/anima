@@ -12,6 +12,7 @@ import SiteFrame from './site-frame';
 import * as PileParallax from './pile-parallax';
 import IntroAnimations from './intro-animations';
 import CollectionHeaderIntegration from './collection-header-integration';
+import bottomActionBar from './bottom-action-bar';
 
 export default class App {
 
@@ -28,6 +29,18 @@ export default class App {
     this.initializeIntroAnimations();
     this.initializePileParallax();
     this.collectionHeaderIntegration = new CollectionHeaderIntegration();
+    this.initializeBottomActionBar();
+  }
+
+  // Page transitions build a new App per navigation; keep one bar observer
+  // for the document and just rescan for the incoming page's bar.
+  initializeBottomActionBar() {
+    if ( ! App.bottomActionBar ) {
+      App.bottomActionBar = new bottomActionBar.BottomActionBar();
+      GlobalService.registerObserverCallback( () => App.bottomActionBar.scan() );
+    }
+
+    App.bottomActionBar.scan();
   }
 
   initializeImages() {
