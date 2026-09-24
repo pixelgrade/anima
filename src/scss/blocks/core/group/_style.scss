@@ -2,7 +2,10 @@
   #GROUP — BOTTOM ACTION BAR (frontend)
 \*------------------------------------*/
 
-$anima-bottom-action-bar-selector: '.wp-block-group.is-style-bottom-action-bar';
+// Only a bar inside the Footer template part is pinned; PHP marks that
+// wrapper (anima_mark_footer_bottom_action_bar). Elsewhere the style is a
+// plain row of buttons with the shared look.
+$anima-bottom-action-bar-selector: '.has-bottom-action-bar .wp-block-group.is-style-bottom-action-bar';
 
 // Fallback reservation before (or without) the frontend script measuring the
 // bar: one row of 44px targets plus the bar's vertical padding.
@@ -26,6 +29,11 @@ $anima-bottom-action-bar-fallback-height: calc(44px + 1.5rem + 1px + env(safe-ar
         border-bottom: env(safe-area-inset-bottom, 0px) solid transparent;
 
         transition: transform .3s ease, visibility 0s linear 0s;
+    }
+
+    // One bar per page: the frontend script marks any bar after the first.
+    #{$anima-bottom-action-bar-selector}.is-bottom-action-bar-extra {
+        display: none;
     }
 
     // Reserve the bar's height at the end of the page so it never covers the

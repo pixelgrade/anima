@@ -63,11 +63,12 @@ function anima_register_block_styles() {
 		'core/group',
 		[
 			'name'  => 'bottom-action-bar',
-			'label' => __( 'Bottom action bar', '__theme_txtd' ),
-			// Pinned to the bottom of the viewport on phones, hidden on wider
-			// screens, shown in flow in the editor. The styles live in the
-			// block bundles (src/scss/blocks/core/group/) because they need
-			// breakpoints and separate editor/frontend behaviour.
+			'label' => __( 'Bottom action bar (mobile)', '__theme_txtd' ),
+			// Inside the Footer template part: pinned to the bottom of the
+			// viewport below `lap` (with the mobile menu), hidden on wider
+			// screens. Anywhere else it is a plain row of buttons. The styles
+			// live in the block bundles (src/scss/blocks/core/group/) because
+			// they need breakpoints and separate editor/frontend behaviour.
 		]
 	);
 
@@ -127,3 +128,43 @@ function anima_register_block_styles() {
 	);
 }
 add_action( 'init', 'anima_register_block_styles' );
+
+/**
+ * Mark the Footer template part that holds a Bottom action bar.
+ *
+ * The bar is only pinned inside the Footer area: one place, one bar per page,
+ * and no transformed content ancestors that would break `position: fixed`.
+ * The wrapper tag can be changed per template, so the area is resolved from
+ * the template part itself rather than from its tag.
+ *
+ * @param string $block_content The rendered template part.
+ * @param array  $block         The parsed block.
+ *
+ * @return string
+ */
+function anima_mark_footer_bottom_action_bar( $block_content, $block ) {
+	if ( '' === $block_content || false === strpos( $block_content, 'is-style-bottom-action-bar' ) ) {
+		return $block_content;
+	}
+
+	$area = $block['attrs']['area'] ?? '';
+
+	if ( '' === $area && ! empty( $block['attrs']['slug'] ) ) {
+		$theme         = $block['attrs']['theme'] ?? get_stylesheet();
+		$template_part = get_block_template( $theme . '//' . $block['attrs']['slug'], 'wp_template_part' );
+		$area          = $template_part->area ?? '';
+	}
+
+	if ( WP_TEMPLATE_PART_AREA_FOOTER !== $area ) {
+		return $block_content;
+	}
+
+	$processor = new WP_HTML_Tag_Processor( $block_content );
+
+	if ( $processor->next_tag() ) {
+		$processor->add_class( 'has-bottom-action-bar' );
+	}
+
+	return $processor->get_updated_html();
+}
+add_filter( 'render_block_core/template-part', 'anima_mark_footer_bottom_action_bar', 10, 2 );

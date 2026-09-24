@@ -82,4 +82,36 @@ if ( false === strpos( $rendered, '<section aria-label=' ) ) {
 	anima_fail_bottom_action_bar_contract( 'Expected the rendered bar to be a named <section>.' );
 }
 
+if ( false === stripos( $style['label'], 'mobile' ) ) {
+	anima_fail_bottom_action_bar_contract( 'Expected the block style label to say the bar is for mobile.' );
+}
+
+if ( [ 'wp_template', 'wp_template_part' ] !== ( $pattern['postTypes'] ?? null ) ) {
+	anima_fail_bottom_action_bar_contract( 'Expected the pattern to be offered only where templates and template parts are edited.' );
+}
+
+// Only the Footer template part is marked, so only a Footer bar is pinned.
+$bar_markup  = '<footer class="wp-block-template-part"><section class="wp-block-group is-style-bottom-action-bar"></section></footer>';
+$plain_part  = '<footer class="wp-block-template-part"><p>Footer</p></footer>';
+$is_marked   = static function ( $html ) {
+	$processor = new WP_HTML_Tag_Processor( $html );
+	return $processor->next_tag() && $processor->has_class( 'has-bottom-action-bar' );
+};
+
+if ( ! $is_marked( apply_filters( 'render_block_core/template-part', $bar_markup, [ 'blockName' => 'core/template-part', 'attrs' => [ 'area' => 'footer' ] ] ) ) ) {
+	anima_fail_bottom_action_bar_contract( 'Expected a Footer-area part with a bar to be marked.' );
+}
+
+if ( ! $is_marked( apply_filters( 'render_block_core/template-part', $bar_markup, [ 'blockName' => 'core/template-part', 'attrs' => [ 'slug' => 'footer' ] ] ) ) ) {
+	anima_fail_bottom_action_bar_contract( 'Expected the Footer area to be resolved from the template part slug.' );
+}
+
+if ( $is_marked( apply_filters( 'render_block_core/template-part', $bar_markup, [ 'blockName' => 'core/template-part', 'attrs' => [ 'slug' => 'header' ] ] ) ) ) {
+	anima_fail_bottom_action_bar_contract( 'A bar in the Header part must not be marked.' );
+}
+
+if ( $plain_part !== apply_filters( 'render_block_core/template-part', $plain_part, [ 'blockName' => 'core/template-part', 'attrs' => [ 'slug' => 'footer' ] ] ) ) {
+	anima_fail_bottom_action_bar_contract( 'A Footer part without a bar must render unchanged.' );
+}
+
 echo 'bottom-action-bar-contract: ok' . ( $nova_active ? ' (Nova Blocks active)' : ' (core only)' ) . PHP_EOL;

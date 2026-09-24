@@ -25,6 +25,115 @@ wp.domReady(() => {
 
 /***/ },
 
+/***/ 353
+(module) {
+
+// Where a Group with the Bottom action bar style sits decides what it does:
+// inside the Footer template part it is pinned on phones; anywhere else it
+// is a plain row of buttons. Kept free of WordPress globals for node tests.
+
+const STYLE_CLASS = 'is-style-bottom-action-bar';
+const FOOTER_AREA = 'footer';
+const hasBottomActionBarStyle = className => {
+  return String(className || '').split(/\s+/).includes(STYLE_CLASS);
+};
+
+// `parentBlocks` runs from the root down to the closest parent, as
+// `getBlockParents()` returns them.
+const isInFooterTemplatePart = ({
+  parentBlocks = [],
+  getTemplatePartArea,
+  editedPostType,
+  editedArea
+}) => {
+  const templatePart = [...parentBlocks].reverse().find(block => block && block.name === 'core/template-part');
+  if (templatePart) {
+    return getTemplatePartArea(templatePart.attributes || {}) === FOOTER_AREA;
+  }
+
+  // Editing the Footer template part itself: its blocks have no template-part parent.
+  return editedPostType === 'wp_template_part' && editedArea === FOOTER_AREA;
+};
+module.exports = {
+  STYLE_CLASS,
+  hasBottomActionBarStyle,
+  isInFooterTemplatePart
+};
+
+/***/ },
+
+/***/ 152
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+
+// Explains the Bottom action bar where it is chosen: next to the block style
+// picker, a note says when visitors see it, or warns that it only works in
+// the Footer template part.
+
+const {
+  hasBottomActionBarStyle,
+  isInFooterTemplatePart
+} = __webpack_require__(353);
+const {
+  createElement: el,
+  Fragment
+} = wp.element;
+const {
+  __
+} = wp.i18n;
+const useIsInFooterTemplatePart = clientId => {
+  return wp.data.useSelect(select => {
+    const blockEditor = select('core/block-editor');
+    const core = select('core');
+    const editor = select('core/editor');
+    const stylesheet = core.getCurrentTheme?.()?.stylesheet;
+    return isInFooterTemplatePart({
+      parentBlocks: blockEditor.getBlockParents(clientId).map(id => blockEditor.getBlock(id)),
+      getTemplatePartArea: ({
+        area,
+        slug,
+        theme
+      }) => {
+        if (area) {
+          return area;
+        }
+        const record = slug && core.getEditedEntityRecord('postType', 'wp_template_part', `${theme || stylesheet}//${slug}`);
+        return record?.area;
+      },
+      editedPostType: editor?.getCurrentPostType?.(),
+      editedArea: editor?.getEditedPostAttribute?.('area')
+    });
+  }, [clientId]);
+};
+const BottomActionBarNotice = ({
+  clientId
+}) => {
+  const inFooter = useIsInFooterTemplatePart(clientId);
+  const {
+    InspectorControls
+  } = wp.blockEditor;
+  const {
+    Notice
+  } = wp.components;
+  const message = inFooter ? __('Visitors see this bar pinned to the bottom of the screen below 1024px, together with the mobile menu. It is hidden on wider screens. Only the first bar in the footer is shown.', '__theme_txtd') : __('The bottom action bar only works in the Footer template part. Here it shows as a regular row of buttons.', '__theme_txtd');
+  return el(InspectorControls, null, el('div', {
+    className: 'anima-bottom-action-bar-notice'
+  }, el(Notice, {
+    status: inFooter ? 'info' : 'warning',
+    isDismissible: false
+  }, message)));
+};
+const withBottomActionBarNotice = wp.compose.createHigherOrderComponent(BlockEdit => props => {
+  if (props.name !== 'core/group' || !props.isSelected || !hasBottomActionBarStyle(props.attributes.className)) {
+    return el(BlockEdit, props);
+  }
+  return el(Fragment, null, el(BlockEdit, props), el(BottomActionBarNotice, {
+    clientId: props.clientId
+  }));
+}, 'withAnimaBottomActionBarNotice');
+wp.hooks.addFilter('editor.BlockEdit', 'anima/bottom-action-bar-notice', withBottomActionBarNotice);
+
+/***/ },
+
 /***/ 185
 () {
 
@@ -485,14 +594,17 @@ module.exports = {
 "use strict";
 /* harmony import */ var _blocks_button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(864);
 /* harmony import */ var _blocks_button__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_blocks_button__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _blocks_menu_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(185);
-/* harmony import */ var _blocks_menu_item__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_blocks_menu_item__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _blocks_paragraph__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(430);
-/* harmony import */ var _blocks_paragraph__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_blocks_paragraph__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _blocks_separator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(375);
-/* harmony import */ var _blocks_separator__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_blocks_separator__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _editor_collection_header_integration__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(566);
-/* harmony import */ var _editor_collection_header_integration__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_editor_collection_header_integration__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _blocks_group__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(152);
+/* harmony import */ var _blocks_group__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_blocks_group__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _blocks_menu_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(185);
+/* harmony import */ var _blocks_menu_item__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_blocks_menu_item__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _blocks_paragraph__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(430);
+/* harmony import */ var _blocks_paragraph__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_blocks_paragraph__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _blocks_separator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(375);
+/* harmony import */ var _blocks_separator__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_blocks_separator__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _editor_collection_header_integration__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(566);
+/* harmony import */ var _editor_collection_header_integration__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_editor_collection_header_integration__WEBPACK_IMPORTED_MODULE_5__);
+
 
 
 

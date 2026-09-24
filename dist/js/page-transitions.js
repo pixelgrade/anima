@@ -14,14 +14,16 @@
 (module) {
 
 // Bottom action bar: a Group with the `is-style-bottom-action-bar` block
-// style, pinned to the bottom of the viewport on phones by CSS. This keeps
+// style inside the Footer template part (marked `has-bottom-action-bar` by
+// PHP), pinned to the bottom of the viewport on phones by CSS. This keeps
 // the page's end reservation (`--anima-bottom-action-bar-height`, consumed by
 // the stylesheet) equal to the bar's real height, which changes with the
 // label length, the palette's type scale and the safe-area inset. Without
 // this script the stylesheet reserves a one-row fallback height.
 
-const SELECTOR = '.wp-block-group.is-style-bottom-action-bar';
+const SELECTOR = '.has-bottom-action-bar .wp-block-group.is-style-bottom-action-bar';
 const HEIGHT_PROPERTY = '--anima-bottom-action-bar-height';
+const EXTRA_CLASS = 'is-bottom-action-bar-extra';
 
 // Only a bar that is actually pinned (phones) takes space from the page.
 const getReservedHeight = (bars, getStyle) => {
@@ -53,6 +55,10 @@ class BottomActionBar {
         box: 'border-box'
       }));
     }
+
+    // Stacked bars would overlap at the same spot and hide focusable
+    // buttons behind each other: only the first one on the page is shown.
+    bars.forEach((bar, index) => bar.classList.toggle(EXTRA_CLASS, index > 0));
     this.bars = bars;
     this.update();
   }
@@ -68,6 +74,7 @@ class BottomActionBar {
 module.exports = {
   SELECTOR,
   HEIGHT_PROPERTY,
+  EXTRA_CLASS,
   getReservedHeight,
   BottomActionBar
 };

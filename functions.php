@@ -223,10 +223,11 @@ function anima_enqueue_theme_block_editor_assets() {
 	wp_enqueue_script(
 		'anima-editor-js',
 		trailingslashit( get_template_directory_uri() ) . 'dist/js/editor' . $suffix . '.js',
-		[ 'wp-hooks', 'wp-dom-ready' ],
+		[ 'wp-hooks', 'wp-dom-ready', 'wp-element', 'wp-i18n', 'wp-data', 'wp-compose', 'wp-block-editor', 'wp-components', 'wp-core-data', 'wp-editor' ],
 		$theme->get( 'Version' ),
 		true
 	);
+	wp_set_script_translations( 'anima-editor-js', '__theme_txtd', get_template_directory() . '/languages' );
 }
 add_action( 'enqueue_block_editor_assets', 'anima_enqueue_theme_block_editor_assets', 10 );
 

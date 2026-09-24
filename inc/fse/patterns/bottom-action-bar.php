@@ -1,8 +1,8 @@
 <?php
 /**
  * Bottom action bar: call / email buttons pinned to the bottom of the
- * viewport on phones. Insert it at the end of the Footer template part so it
- * appears on every page.
+ * viewport below `lap`, alongside the mobile menu. It only pins inside the
+ * Footer template part, so it appears on every page.
  *
  * Nova Blocks augments the saved markup of every Group, so the pattern ships
  * the serialization that validates in the active runtime.
@@ -33,8 +33,10 @@ if ( WP_Block_Type_Registry::get_instance()->is_registered( 'novablocks/header' 
 
 return [
 	'title'       => __( 'Bottom action bar (call / email)', '__theme_txtd' ),
-	'description' => __( 'Call and email buttons that stay pinned to the bottom of the screen on phones. Add it at the end of the Footer template part.', '__theme_txtd' ),
+	'description' => __( 'Call and email buttons pinned to the bottom of the screen on phones and tablets, where the site shows its mobile menu. Hidden on wider screens. Add it to the Footer template part.', '__theme_txtd' ),
 	'categories'  => [ 'footer', 'call-to-action' ],
+	// Only offered where the Footer template part is edited.
+	'postTypes'   => [ 'wp_template', 'wp_template_part' ],
 	'keywords'    => [ 'phone', 'call', 'email', 'contact', 'sticky', 'mobile' ],
 	'content'     => '<!-- wp:group ' . $group_attributes . ' -->
 <section aria-label="' . esc_attr( $label ) . '" class="' . $group_class . '"' . $group_extra . '><!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center","flexWrap":"nowrap"}} -->
