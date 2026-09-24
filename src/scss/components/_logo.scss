@@ -40,11 +40,18 @@ html:not(.is-dark) .sm-light {
   --theme-logo-default-opacity: 1;
   --theme-logo-inverted-opacity: 0;
   --theme-logo-inverted-filter: grayscale(1) brightness(0);
+  // Reset the dark whitening, so a light row inside a dark area (e.g. a light
+  // Header Row in a dark Header) shows the logo in its own colours.
+  --theme-logo-default-filter: none;
 }
 
 .sm-dark,
 html.is-dark {
   --theme-logo-default-opacity: 0;
   --theme-logo-inverted-opacity: 1;
-  --theme-logo-default-filter: grayscale(1) brightness(10);
+  // A single logo turns white on dark, whatever its colour: brightness(0)
+  // flattens it to black, invert(1) makes that white, alpha is kept. The
+  // old grayscale(1) brightness(10) multiplied channels, so black (0 × 10)
+  // and near-black logos stayed dark and disappeared (#606).
+  --theme-logo-default-filter: brightness(0) invert(1);
 }
