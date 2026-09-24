@@ -145,6 +145,20 @@ const novablocksTemplateVariantFiles = [
 	'templates/index.html',
 	'templates/archive.html',
 	'templates/search.html',
+	// Stripped from templates/ by .zipignore-wporg (plugin-registered post
+	// types and the split-header single); the wp.org loader adds them back
+	// when Nova Blocks and their post type / taxonomy are present (#602).
+	'templates/archive-portfolio.html',
+	'templates/single-portfolio.html',
+	'templates/taxonomy-portfolio_type.html',
+	'templates/taxonomy-portfolio_tag.html',
+	'templates/archive-gallery.html',
+	'templates/single-gallery.html',
+	'templates/taxonomy-gallery_type.html',
+	'templates/taxonomy-gallery_tag.html',
+	'templates/archive-testimonial.html',
+	'templates/single-testimonial.html',
+	'templates/single-split-header.html',
 	'parts/header.html',
 	'parts/footer.html',
 ]
@@ -168,6 +182,8 @@ function wporgStripUnsupportedExternalImageReferences(done) {
 	const variantRoot = '../build/' + slug + '/' + novablocksTemplateVariantBaseDir;
 	const unsupportedDomains = [
 		'unsplash.com',
+		// Demo images baked into the split-header single (#602 ships it as a variant).
+		'trial.pixelgrade.com',
 	];
 
 	if ( ! fs.existsSync( variantRoot ) ) {
@@ -176,7 +192,8 @@ function wporgStripUnsupportedExternalImageReferences(done) {
 
 	const stripFromFile = (file) => {
 		const content = fs.readFileSync( file, 'utf8' );
-		const stripped = content.replace( /<!-- wp:([^\s]+) (\{.*?\}) \/-->/g, (match, blockName, attrsJson) => {
+		// Both self-closing blocks and blocks with inner content (`-->`).
+		const stripped = content.replace( /<!-- wp:([^\s]+) (\{.*?\}) (\/)?-->/g, (match, blockName, attrsJson, selfClosing) => {
 			let attrs;
 
 			try {
@@ -201,7 +218,7 @@ function wporgStripUnsupportedExternalImageReferences(done) {
 
 			attrs.images = [];
 
-			return '<!-- wp:' + blockName + ' ' + JSON.stringify( attrs ) + ' /-->';
+			return '<!-- wp:' + blockName + ' ' + JSON.stringify( attrs ) + ( selfClosing ? ' /-->' : ' -->' );
 		} );
 
 		if ( content !== stripped ) {
