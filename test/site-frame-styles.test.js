@@ -128,11 +128,13 @@ test('Site Frame styles place cart counts on the site-frame marker slot', () => 
   );
 });
 
-test('Site Frame styles remove the site-frame shell on mobile', () => {
+test('Site Frame styles remove the Editorial shell on mobile but keep the Border frame (#608)', () => {
   const css = compileSiteFrameCss();
 
   assert.match(
     css,
-    /@media not screen and \(min-width: 1024px\)\s*\{[^}]*body\.has-site-frame-menu #page\s*\{[^}]*padding-right:\s*0;[^}]*\}[^}]*body\.has-site-frame-frame #page\s*\{[^}]*padding-top:\s*0;[^}]*padding-left:\s*0;[^}]*\}[^}]*\.c-site-frame\s*\{[^}]*display:\s*none;[^}]*\}/
+    /@media not screen and \(min-width: 1024px\)\s*\{[^}]*body\.has-site-frame-menu #page\s*\{[^}]*padding-right:\s*0;[^}]*\}[^}]*body\.has-site-frame-frame:not\(\.has-site-frame-border\) #page\s*\{[^}]*padding-top:\s*0;[^}]*padding-left:\s*0;[^}]*\}[^}]*body:not\(\.has-site-frame-border\) \.c-site-frame\s*\{[^}]*display:\s*none;[^}]*\}/
   );
+  // Layout behaviour (symmetric padding, header insets) is covered in
+  // headless Chrome by site-frame-border-small-screens.test.js.
 });

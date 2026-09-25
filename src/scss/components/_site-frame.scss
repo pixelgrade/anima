@@ -489,16 +489,39 @@ body.has-site-frame-border #page {
 }
 
 @include below(lap) {
+  // The Editorial rail and top/left accents drop out on small screens. The
+  // Border style keeps its (thinner) frame on all four sides, so its #page
+  // padding and shell stay; resetting only top/left here used to leave a
+  // lopsided right strip and no frame (#608).
   body.has-site-frame-menu #page {
     padding-right: 0;
   }
 
-  body.has-site-frame-frame #page {
+  body.has-site-frame-frame:not(.has-site-frame-border) #page {
     padding-top: 0;
     padding-left: 0;
   }
 
-  .c-site-frame {
+  body:not(.has-site-frame-border) .c-site-frame {
     display: none;
+  }
+
+  // Nova's mobile header bar and menu toggle are positioned against the
+  // viewport (absolute at their measured offset, fixed once sticky), so the
+  // #page padding never reaches them. Pin them inside the Border frame, the
+  // same way the desktop headers are pinned in the above(lap) block.
+  body.has-site-frame-border .nb-header--mobile {
+    width: auto;
+    left: var(--site-frame-inset-left);
+    right: var(--site-frame-inset-right);
+  }
+
+  body.has-site-frame-border .c-menu-toggle {
+    left: var(--site-frame-inset-left);
+  }
+
+  body.has-site-frame-border .nb-header--mobile.nb-header--sticky,
+  body.has-site-frame-border .c-menu-toggle.nb-header--sticky {
+    top: var(--site-frame-sticky-top) !important;
   }
 }
