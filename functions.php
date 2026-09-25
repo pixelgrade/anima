@@ -393,6 +393,7 @@ require_once trailingslashit( get_template_directory() ) . 'inc/social-icons.php
 require_once trailingslashit( get_template_directory() ) . 'inc/site-frame.php';
 require_once trailingslashit( get_template_directory() ) . 'inc/title-styles.php';
 require_once trailingslashit( get_template_directory() ) . 'inc/extras.php';
+require_once trailingslashit( get_template_directory() ) . 'inc/classic-captions.php';
 
 /**
  * Block editor related logic.

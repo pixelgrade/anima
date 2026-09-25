@@ -9,3 +9,13 @@ img {
     transition: var(--theme-transition);
     transition-property: opacity;
 }
+
+/* Classic captions (#611) */
+// `[caption width="N"]` renders an inline `width: Npx`. Cap the figure at its
+// container so imported posts fit tablets and phones; narrower captions keep
+// their authored width, and the image scales inside with its ratio (above).
+// In Nova's layout grid a fixed width still widens the tracks, so
+// inc/classic-captions.php also makes the inline width `min(100%, Npx)`.
+.wp-caption {
+    max-width: 100%;
+}
