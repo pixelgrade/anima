@@ -18,6 +18,20 @@ a {
 }
 
 
+/* Links inside a block with its own font size (#595) */
+// WordPress sizes a block with a preset class (`.has-small-font-size`) or an
+// inline `font-size`, outside Anima's role variables. The universal rule then
+// recomputes a nested link from the inherited role, so a link in a Small
+// paragraph rendered at the body size. Links directly inside such a block
+// take the block's size and line height. Component links that set their own
+// role on the anchor (tag chips, latest-posts titles) sit in role-sized
+// containers and keep that role; `:where()` keeps this at element weight.
+// The style matches skip custom properties such as `--font-size`.
+:where([class*="has-"][class*="-font-size"], [style^="font-size"], [style*=";font-size"], [style*="; font-size"]) > a {
+    font-size: inherit;
+    line-height: inherit;
+}
+
 /* Headings links */
 :is(h1, h2, h3, h4, h5, h6) a {
     color: var(--theme-links-color);
