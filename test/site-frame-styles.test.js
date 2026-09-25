@@ -79,12 +79,12 @@ test('Site Frame styles expose the regular-link monogram treatment', () => {
   assert.match(css, /\.menu-item--site-frame-link > a \.menu-item-monogram\s*\{[^}]*width:\s*var\(--site-frame-marker-width\);[^}]*height:\s*var\(--site-frame-marker-height\);[^}]*padding-left:\s*var\(--site-frame-marker-padding-left\);/);
 });
 
-test('Site Frame styles size the X close glyph through its mask', () => {
+test('Site Frame styles size mask icons (X and the #614 brands) through their mask', () => {
   const css = compileSiteFrameCss();
 
   assert.match(
     css,
-    /\.nav--toolbar \.social-menu-item > a\[href\*="x\.com"\]::before,\s*\.nav--toolbar \.social-menu-item > a\[href\*="twitter\.com"\]::before\s*\{[^}]*mask-position:\s*calc\(50% \+ var\(--site-frame-marker-padding-left\) \* 0\.5\) 50%;[^}]*mask-size:\s*var\(--site-frame-marker-mask-size\) var\(--site-frame-marker-mask-size\);[^}]*-webkit-mask-position:\s*calc\(50% \+ var\(--site-frame-marker-padding-left\) \* 0\.5\) 50%;[^}]*-webkit-mask-size:\s*var\(--site-frame-marker-mask-size\) var\(--site-frame-marker-mask-size\);/
+    /\.nav--toolbar \.social-menu-item > a::before\s*\{[^}]*mask-position:\s*calc\(50% \+ var\(--site-frame-marker-padding-left\) \* 0\.5\) 50%;[^}]*mask-size:\s*var\(--site-frame-marker-mask-size\) var\(--site-frame-marker-mask-size\);[^}]*-webkit-mask-position:\s*calc\(50% \+ var\(--site-frame-marker-padding-left\) \* 0\.5\) 50%;[^}]*-webkit-mask-size:\s*var\(--site-frame-marker-mask-size\) var\(--site-frame-marker-mask-size\);/
   );
 });
 

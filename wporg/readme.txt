@@ -127,6 +127,10 @@ Font Awesome icons (subset), Copyright Dave Gandy
 License: SIL OFL 1.1 (fonts), MIT (code)
 Source: https://fontawesome.com/
 
+Font Awesome Free brand icons (assets/images/social/), Copyright Fonticons, Inc.
+License: CC BY 4.0 (attribution kept in each SVG)
+Source: https://fontawesome.com/
+
 Bundled fonts (assets/fonts/), Space Grotesk / Cormorant / Quattrocento Sans / Lora / Montserrat
 License: SIL Open Font License 1.1
 Source: https://fonts.google.com/ (see assets/fonts/LICENSE.md)

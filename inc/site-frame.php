@@ -269,59 +269,14 @@ function anima_is_site_frame_menu_args( $args ): bool {
 /**
  * Determine whether a menu item URL should receive social styling.
  *
+ * Reads the shared registry (inc/social-icons.json) that also builds the
+ * Social Menu stylesheet.
+ *
  * @param string $url Menu item URL.
  * @return bool
  */
 function anima_site_frame_is_social_url( string $url ): bool {
-	$social_fragments = [
-		'facebook',
-		'instagram',
-		'youtube',
-		'pinterest',
-		'dropbox',
-		'flickr',
-		'tumblr',
-		'apple',
-		'dribbble',
-		'skype',
-		'foursquare',
-		'vk',
-		'reddit',
-		'stumbleupon',
-		'delicious',
-		'digg',
-		'behance',
-		'spotify',
-		'deviantart',
-		'soundcloud',
-		'codepen',
-		'slideshare',
-		'twitch',
-		'yelp',
-		'medium',
-		'tripadvisor',
-		'pocket.com',
-		'500px',
-		'amazon',
-		'vimeo',
-		'snapchat',
-		'bandcamp',
-		'etsy',
-		'meetup',
-		'tel:',
-		'mailto:',
-		'feed',
-		'twitter.com',
-		'x.com',
-	];
-
-	foreach ( $social_fragments as $fragment ) {
-		if ( false !== stripos( $url, $fragment ) ) {
-			return true;
-		}
-	}
-
-	return false;
+	return '' !== anima_get_social_icon_slug_for_url( $url );
 }
 
 /**
@@ -342,7 +297,7 @@ function anima_site_frame_get_item_kind( WP_Post $item ): string {
 		return 'extra';
 	}
 
-	if ( in_array( 'social-menu-item', $classes, true ) || anima_site_frame_is_social_url( (string) $item->url ) ) {
+	if ( in_array( 'social-menu-item', $classes, true ) || '' !== anima_get_menu_item_social_icon( $item ) ) {
 		return 'social';
 	}
 

@@ -16,63 +16,43 @@ $fontsPath: '../../assets/fonts/custom-fontawesome';
     font-display: block;
 }
 
-$social-links-urls: (
-    "facebook": "\f09a",
-    "instagram": "\f16d",
-    "youtube": "\f167",
-    "pinterest": "\f0d2",
-    "dropbox": "\f16b",
-    "flickr": "\f16e",
-    "tumblr": "\f173",
-    "apple": "\f179",
-    "dribbble": "\f17d",
-    "skype": "\f17e",
-    "foursquare": "\f180",
-    "vk": "\f189",
-    "reddit": "\f1a1",
-    "stumbleupon": "\f1a4",
-    "delicious": "\f1a5",
-    "digg": "\f1a6",
-    "behance": "\f1b4",
-    "spotify": "\f1bc",
-    "deviantart": "\f1bd",
-    "soundcloud": "\f1be",
-    "codepen": "\f1cb",
-    "slideshare": "\f1e7",
-    "twitch": "\f1e8",
-    "yelp": "\f1e9",
-    "medium": "\f23a",
-    "tripadvisor": "\f262",
-    "pocket.com": "\f265",
-    "500px": "\f26e",
-    "amazon": "\f270",
-    "vimeo": "\f27d",
-    "snapchat": "\f2ab",
-    "bandcamp": "\f2d5",
-    "etsy": "\f2d7",
-    "meetup": "\f2e0",
-    "tel:": "\f095",
-    "mailto:": "\f0e0",
-    "feed": "\f09e",
-);
+@import "setup/social-icons";
 
-$social-links-x-urls: (
-    "twitter.com",
-    "x.com",
-);
-$social-links-x-size-multiplier: 0.86;
+// Every icon comes from the shared registry in inc/social-icons.json (#614),
+// which the Site Frame detector (inc/social-icons.php) reads too.
+//
+// A link is detected by URL fragment (case-insensitive) or forced with the
+// `menu-item--icon-{slug}` class on its menu item. Detection only sets custom
+// properties on the link; one pseudo element rule paints them. That keeps the
+// class opt-in a plain override of the same properties, and lets contexts such
+// as the Site Frame rail restyle the icon box without per-brand rules.
+$social-icons-mask-size: calc( var(--icons-size-multiplier) * var(--social-icon-scale, 1) * var(--current-font-size) );
 
-$social-links-selector: '';
-@each $url, $content in $social-links-urls {
-    @if ($social-links-selector == '') {
-        $social-links-selector: '[href*="#{$url}"]';
-    } @else {
-        $social-links-selector: $social-links-selector + ', [href*="#{$url}"]';
+@function social-icons-href-selectors( $prefix: '' ) {
+    $selectors: ();
+    @each $slug, $icon in $social-icons {
+        @each $fragment in map-get( $icon, "match" ) {
+            $selectors: append( $selectors, '#{$prefix}[href*="#{$fragment}" i]', comma );
+        }
     }
+    @return $selectors;
 }
 
-@each $url in $social-links-x-urls {
-    $social-links-selector: $social-links-selector + ', [href*="#{$url}"]';
+@mixin social-icon-properties( $icon ) {
+    @if map-has-key( $icon, "glyph" ) {
+        --social-icon-glyph: #{inspect( map-get( $icon, "glyph" ) )};
+        --social-icon-mask: none;
+        --social-icon-fill: transparent;
+        --social-icon-display: inline;
+        --social-icon-size: auto;
+    } @else {
+        --social-icon-glyph: "";
+        --social-icon-mask: url(#{ '#{$images-folder-path}/#{map-get( $icon, "mask" )}' });
+        --social-icon-fill: currentColor;
+        --social-icon-display: inline-block;
+        --social-icon-scale: #{map-get( $icon, "scale" )};
+        --social-icon-size: #{$social-icons-mask-size};
+    }
 }
 
 :root {
@@ -80,8 +60,14 @@ $social-links-selector: '';
 }
 
 .nb-navigation {
-    #{$social-links-selector} {
+    #{social-icons-href-selectors()} {
         --is-social: 1;
+    }
+
+    @each $slug, $icon in $social-icons {
+        .menu-item--icon-#{$slug} > a {
+            --is-social: 1;
+        }
     }
 }
 
@@ -118,28 +104,25 @@ $social-links-selector: '';
             /* Better Font Rendering =========== */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+
+            content: var(--social-icon-glyph);
+            display: var(--social-icon-display, inline);
+            width: var(--social-icon-size, auto);
+            height: var(--social-icon-size, auto);
+            background-color: var(--social-icon-fill, transparent);
+            mask: no-repeat 50% 50%;
+            mask-image: var(--social-icon-mask, none);
+            mask-size: contain;
+            -webkit-mask: no-repeat 50% 50%;
+            -webkit-mask-image: var(--social-icon-mask, none);
+            -webkit-mask-size: contain;
         }
 
-        @each $url, $content in $social-links-urls {
-            &[href*="#{$url}"]:before {
-                content: $content;
-            }
-        }
-
-        @each $url in $social-links-x-urls {
-            &[href*="#{$url}"]:before {
-                content: '';
-                display: inline-block;
-                width: calc( var(--icons-size-multiplier) * #{$social-links-x-size-multiplier} * var(--current-font-size) );
-                height: calc( var(--icons-size-multiplier) * #{$social-links-x-size-multiplier} * var(--current-font-size) );
-                vertical-align: middle;
-                background-color: currentColor;
-                mask: no-repeat 50% 50%;
-                mask-image: url(#{ $icon-x-path });
-                mask-size: contain;
-                -webkit-mask: no-repeat 50% 50%;
-                -webkit-mask-image: url(#{ $icon-x-path });
-                -webkit-mask-size: contain;
+        // The glyph is decoration: keep it out of the accessible name, which
+        // stays the menu item label.
+        @supports (content: "x" / "") {
+            &:before {
+                content: var(--social-icon-glyph) / "";
             }
         }
     }
@@ -150,5 +133,22 @@ $social-links-selector: '';
         &:not(:last-child) {
             margin-bottom: var(--theme-spacing-smallest);
         }
+    }
+}
+
+// URL detection, in registry order: a later entry wins a double match.
+@each $slug, $icon in $social-icons {
+    @each $fragment in map-get( $icon, "match" ) {
+        .social-menu-item > a[href*="#{$fragment}" i] {
+            @include social-icon-properties( $icon );
+        }
+    }
+}
+
+// The icon class wins over URL detection: `li` adds the specificity, and the
+// rules come last.
+@each $slug, $icon in $social-icons {
+    li.social-menu-item.menu-item--icon-#{$slug} > a {
+        @include social-icon-properties( $icon );
     }
 }

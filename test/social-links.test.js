@@ -15,15 +15,13 @@ function compileSocialLinksCss() {
 test('social links styles recognize X URLs without regressing existing brands', () => {
   const css = compileSocialLinksCss();
 
-  assert.match(css, /\.nb-navigation [^{}]*\[href\*="twitter\.com"\][^{}]*\{[^}]*--is-social: 1;[^}]*\}/);
-  assert.match(css, /\.nb-navigation [^{}]*\[href\*="x\.com"\][^{}]*\{[^}]*--is-social: 1;[^}]*\}/);
+  assert.match(css, /\.nb-navigation [^{}]*\[href\*="twitter\.com" i\][^{}]*\{[^}]*--is-social: 1;[^}]*\}/);
+  assert.match(css, /\.nb-navigation [^{}]*\[href\*="\/\/x\.com" i\][^{}]*\{[^}]*--is-social: 1;[^}]*\}/);
 
-  assert.match(css, /\.social-menu-item > a\[href\*="twitter\.com"\]:before/);
-  assert.match(css, /\.social-menu-item > a\[href\*="x\.com"\]:before/);
-  assert.match(css, /mask-image:\s*url\([^)]*icon-x\.svg\)/);
-  assert.match(css, /width:\s*calc\(var\(--icons-size-multiplier\)\s*\*\s*0\.86\s*\*\s*var\(--current-font-size\)\)/);
-  assert.match(css, /height:\s*calc\(var\(--icons-size-multiplier\)\s*\*\s*0\.86\s*\*\s*var\(--current-font-size\)\)/);
+  assert.match(css, /\.social-menu-item > a\[href\*="twitter\.com" i\] \{[^}]*--social-icon-mask: url\([^)]*icon-x\.svg\)/);
+  assert.match(css, /\.social-menu-item > a\[href\*="\/\/x\.com" i\] \{[^}]*--social-icon-mask: url\([^)]*icon-x\.svg\)/);
+  assert.match(css, /--social-icon-scale: 0\.86;[^}]*--social-icon-size: calc\(var\(--icons-size-multiplier\) \* var\(--social-icon-scale, 1\) \* var\(--current-font-size\)\)/);
 
-  assert.match(css, /\.social-menu-item > a\[href\*=facebook\]:before/);
-  assert.match(css, /\.social-menu-item > a\[href\*=instagram\]:before/);
+  assert.match(css, /\.social-menu-item > a\[href\*=facebook i\] \{[^}]*--social-icon-glyph: "\\f09a"/);
+  assert.match(css, /\.social-menu-item > a\[href\*=instagram i\] \{[^}]*--social-icon-glyph: "\\f16d"/);
 });

@@ -3,7 +3,8 @@ const gulp = require('gulp'),
   sourcemaps = require('gulp-sourcemaps'),
   rtlcss = require('gulp-rtlcss'),
   rename = require('gulp-rename'),
-  cached = require('gulp-cached')
+  cached = require('gulp-cached'),
+  { writeSocialIconsScss } = require('./lib/social-icons-scss')
 
 function stylesBase (src, dest, cb) {
   return gulp.src(src)
@@ -38,10 +39,18 @@ function stylesRTL (cb) {
 stylesRTL.description = 'Generate style-rtl.css file based on style.css'
 
 function watch (cb) {
-  gulp.watch(['./src/scss/**/*.scss'], compile)
+  gulp.watch(['./src/scss/**/*.scss', './inc/social-icons.json'], compile)
 }
 
-const compile = gulp.series(gulp.parallel(compileRootStyles, compileNotRootStyles), stylesRTL)
+function buildSocialIcons (cb) {
+  writeSocialIconsScss()
+  cb()
+}
 
+buildSocialIcons.description = 'Generate src/scss/setup/_social-icons.scss from inc/social-icons.json'
+
+const compile = gulp.series(buildSocialIcons, gulp.parallel(compileRootStyles, compileNotRootStyles), stylesRTL)
+
+gulp.task('build:social-icons', buildSocialIcons)
 gulp.task('compile:styles', compile)
 gulp.task('watch:styles', gulp.series(compile, watch))
