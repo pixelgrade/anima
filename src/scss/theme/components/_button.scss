@@ -19,7 +19,12 @@
         --theme-button-background-color: var(--sm-current-bg-color);
         --theme-button-border-color: var(--sm-current-bg-color);
 
-        --theme-button-hover-text-color: var(--sm-current-bg-color);
+        // The hover text shows where no fill is painted (a primary's fill
+        // scales away on hover/focus; a secondary is unfilled at rest), so it
+        // reads against the ground, not this variation's surface: take the
+        // ground's text role captured on the Buttons wrapper (nova-blocks#625).
+        // Without a wrapper, keep the old mapping.
+        --theme-button-hover-text-color: var(--theme-button-ground-text-color, var(--sm-current-bg-color));
         --theme-button-hover-background-color: transparent;
         --theme-button-hover-border-color: var(--sm-current-bg-color);
 
@@ -27,7 +32,7 @@
           --theme-button-text-color: var(--sm-current-bg-color);
           --theme-button-background-color: var(--sm-current-accent-color);
           --theme-button-border-color: var(--sm-current-accent-color);
-          --theme-button-hover-text-color: var(--sm-current-accent-color);
+          --theme-button-hover-text-color: var(--theme-button-ground-text-color, var(--sm-current-accent-color));
           --theme-button-hover-background-color: transparent;
           --theme-button-hover-border-color: var(--sm-current-accent-color);
         }
