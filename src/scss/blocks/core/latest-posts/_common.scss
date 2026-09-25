@@ -45,11 +45,14 @@ $latest-posts--title-selector: '.wp-block-latest-posts__post-title' !default;
     }
 
     
+    // Secondary, but still text: the context's text role keeps 4.5:1 on any
+    // ground where opacity did not (4.28:1 on white); the smaller size
+    // carries the hierarchy (#612).
     .wp-block-latest-posts__post-author[class],
     .wp-block-latest-posts__post-date[class] {
         @extend %apply-font-properties;
         --font-size-modifier: 0.85;
-        opacity: 0.6;
+        color: var(--sm-current-fg1-color);
     }
     
     .wp-block-latest-posts__post-excerpt[class] {

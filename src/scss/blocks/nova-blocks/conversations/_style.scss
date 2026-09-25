@@ -11,7 +11,9 @@
   --comments-grid-gap: 10px;
   --component-accent-color: var(--sm-current-accent-color);
   --nb-conversations-width: 48em;
-  --field-description-color: var(--sm-current-fg2-color);
+  // Hints read at 4.5:1: fg1 is the contrast-picked text role, fg2 is only
+  // held to the large-text minimum (pixelgrade/nova-blocks#649).
+  --field-description-color: var(--sm-current-fg1-color);
   --conversations-bg-color: var(--sm-current-bg-color);
   --conversations-reply-bg-color: var(--sm-current-bg-color);
   --comment-author-color: var(--sm-current-accent-color);
@@ -308,11 +310,10 @@
   padding-right: .25em;
 }
 
+// Secondary through size, not opacity (pixelgrade/nova-blocks#649).
 .novablocks-conversations__comments-count {
   --font-size-modifier:0.65;
-  color: var(--field-description-color);
-
-  opacity: .5
+  color: var(--sm-current-fg1-color);
 }
 
 .novablocks-conversations__notification-text[class] span {
@@ -353,15 +354,13 @@
   }
 }
 
+// The composer stand-in is a button label, not a placeholder: it takes the
+// context's text role in light and dark (pixelgrade/nova-blocks#649).
 .fake-input-button {
   @include field;
 
   @include specific(1) {
-    color: rgba( 0, 0, 0, 0.5 );
-  }
-
-  .is-dark & {
-    color: rgba( 255, 255, 255, 0.5 );
+    color: var(--sm-current-fg1-color);
   }
 }
 

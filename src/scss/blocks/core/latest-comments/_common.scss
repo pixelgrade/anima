@@ -23,8 +23,10 @@ $enable-latest-comments-block-styles:   true !default;
 		}
 	}
 
+	// The date reads at 4.5:1 through the context's text role, not opacity (#612).
 	.wp-block-latest-comments__comment-date {
 		--font-size-modifier: 0.8;	
+		color: var(--sm-current-fg1-color);
 	}
 
 	.wp-block-latest-comments__comment-excerpt p,
@@ -37,14 +39,9 @@ $enable-latest-comments-block-styles:   true !default;
 	}
 
 	.wp-block-latest-comments__comment-meta {
-	    > * {
-			opacity: 0.6;
-	    }
-
 		.wp-block-latest-comments__comment-author {
 			font-weight: bold;
 			color: var(--sm-current-accent-color);
-			opacity: 1;
 		}
 
 		.wp-block-latest-comments__comment-link {
@@ -53,7 +50,6 @@ $enable-latest-comments-block-styles:   true !default;
 
 		a {
 			text-decoration: none;
-			opacity: 1;
 		}
 	}
 }
