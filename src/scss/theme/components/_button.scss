@@ -1,4 +1,12 @@
 // ------ #BUTTONS BLOCK
+
+// A custom property resolves its var() where it is declared: the wrapper sits
+// in the ground's Color Signal context, so buttons inherit the ground's text
+// role even after their own variation classes re-scope --sm-current-*.
+.wp-block-buttons {
+    --theme-button-ground-text-color: var(--sm-current-fg1-color);
+}
+
 .wp-block-button[class] {
     display: flex;
     background: none;
@@ -61,13 +69,17 @@
             flex-shrink: 1;
         }
 
+        // A text button paints no fill, so its own variation (Nova card
+        // buttons always carry one) describes a surface that isn't there.
+        // Ink it with the text role of the ground it sits on, captured on the
+        // Buttons wrapper below (#609). Without a wrapper, keep the old mapping.
         &:where([class*="sm-variation"]) .wp-block-button__link {
-            --theme-button-text-color: var(--sm-current-bg-color);
-            --theme-button-hover-text-color: var(--sm-current-bg-color);
+            --theme-button-text-color: var(--theme-button-ground-text-color, var(--sm-current-bg-color));
+            --theme-button-hover-text-color: var(--theme-button-ground-text-color, var(--sm-current-bg-color));
 
             html.is-dark & {
-                --theme-button-text-color: var(--sm-current-accent-color);
-                --theme-button-hover-text-color: var(--sm-current-accent-color);
+                --theme-button-text-color: var(--theme-button-ground-text-color, var(--sm-current-accent-color));
+                --theme-button-hover-text-color: var(--theme-button-ground-text-color, var(--sm-current-accent-color));
             }
         }
     }
