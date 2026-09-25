@@ -1,4 +1,11 @@
 import GlobalService from './globalService';
+import heroMotion from './hero-motion';
+
+const {
+  HERO_RESTING_SCROLL_PROGRESS,
+  getHeroTimelineProgress,
+  settleHeroTimelineForReducedMotion,
+} = heroMotion;
 
 export default class Hero {
 
@@ -41,12 +48,9 @@ export default class Hero {
     this.pauseTimelineOnScroll();
 
     if ( this.reduceMotion ) {
-      const middleTime = this.labels.middle;
-      const endTime = this.labels.end;
-      const minTlProgress = middleTime / endTime;
-
       this.paused = true;
-      this.timeline.progress( minTlProgress );
+      settleHeroTimelineForReducedMotion( this.timeline );
+      this.revertTitle();
     } else {
       this.timeline.play();
     }
@@ -80,12 +84,10 @@ export default class Hero {
 
     this.progress = (scrollY - this.start) / (this.end - this.start);
 
+    // Reduced motion pins the scroll progress to the finished intro; the outro
+    // never plays.
     if ( this.reduceMotion ) {
-      const middleTime = this.timeline.labels.middle;
-      const endTime = this.timeline.labels.end;
-      const minTlProgress = middleTime / endTime;
-
-      this.progress = minTlProgress;
+      this.progress = HERO_RESTING_SCROLL_PROGRESS;
     }
 
     this.updateTimelineOnScroll();
@@ -98,12 +100,7 @@ export default class Hero {
     }
 
     const currentProgress = this.timeline.progress();
-    const middleTime = this.timeline.labels.middle;
-    const endTime = this.timeline.labels.end;
-    const minTlProgress = middleTime / endTime;
-
-    let newTlProgress = (this.progress - 0.5) * 2 * (1 - minTlProgress) + minTlProgress;
-    newTlProgress = Math.min( Math.max( minTlProgress, newTlProgress ), 1 );
+    const newTlProgress = getHeroTimelineProgress( this.timeline, this.progress );
 
     if ( currentProgress === newTlProgress ) {
       return;
