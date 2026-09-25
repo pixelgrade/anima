@@ -35,6 +35,7 @@ function anima_get_default_post_expression_profile( string $surface ): array {
 		'surface'        => $surface,
 		'extracts'       => [
 			'quote'          => '',
+			'quote_html'     => '',
 			'quote_citation' => '',
 			'link'           => '',
 		],
@@ -123,6 +124,7 @@ function anima_get_post_expression_extracts( WP_Post $post, string $format = '' 
 
 	$extracts = [
 		'quote'          => '',
+		'quote_html'     => '',
 		'quote_citation' => '',
 		'link'           => '',
 	];
@@ -214,6 +216,7 @@ function anima_get_post_expression_quote_extract( WP_Post $post, array $blocks )
 		if ( '' !== $parts['quote'] ) {
 			return [
 				'quote'          => $parts['quote'],
+				'quote_html'     => $parts['quote_html'],
 				'quote_citation' => $parts['citation'],
 			];
 		}
@@ -224,19 +227,26 @@ function anima_get_post_expression_quote_extract( WP_Post $post, array $blocks )
 	if ( '' !== $blockquote_parts['quote'] ) {
 		return [
 			'quote'          => $blockquote_parts['quote'],
+			'quote_html'     => $blockquote_parts['quote_html'],
 			'quote_citation' => $blockquote_parts['citation'],
 		];
 	}
 
 	if ( has_excerpt( $post ) ) {
+		$excerpt = trim( wp_strip_all_tags( get_the_excerpt( $post ) ) );
+
 		return [
-			'quote'          => trim( wp_strip_all_tags( get_the_excerpt( $post ) ) ),
+			'quote'          => $excerpt,
+			'quote_html'     => esc_html( $excerpt ),
 			'quote_citation' => '',
 		];
 	}
 
+	$paragraph = anima_get_first_paragraph_text( $post->post_content, $blocks );
+
 	return [
-		'quote'          => anima_get_first_paragraph_text( $post->post_content, $blocks ),
+		'quote'          => $paragraph,
+		'quote_html'     => esc_html( $paragraph ),
 		'quote_citation' => '',
 	];
 }
@@ -296,8 +306,9 @@ function anima_find_first_url_in_blocks( array $blocks ): string {
 function anima_extract_first_blockquote_parts( string $content ): array {
 	if ( ! preg_match( '/<blockquote\b[^>]*>(.*?)<\/blockquote>/is', $content, $matches ) ) {
 		return [
-			'quote'    => '',
-			'citation' => '',
+			'quote'      => '',
+			'quote_html' => '',
+			'citation'   => '',
 		];
 	}
 
@@ -311,9 +322,42 @@ function anima_extract_first_blockquote_parts( string $content ): array {
 	$quote_markup = preg_replace( '/<cite\b[^>]*>.*?<\/cite>/is', '', $quote_markup );
 
 	return [
-		'quote'    => trim( wp_strip_all_tags( $quote_markup ) ),
-		'citation' => $citation,
+		'quote'      => trim( wp_strip_all_tags( $quote_markup ) ),
+		'quote_html' => anima_get_inline_quote_html( $quote_markup ),
+		'citation'   => $citation,
 	];
+}
+
+/**
+ * A quote's inline formatting (links, emphasis, code…) for cards that render
+ * it (nova-blocks#652). Paragraph breaks become line breaks; block tags,
+ * scripts and attributes other than a link's href/title are dropped.
+ *
+ * @param string $quote_markup Blockquote inner markup without the citation.
+ * @return string Safe inline HTML.
+ */
+function anima_get_inline_quote_html( string $quote_markup ): string {
+	$quote_markup = preg_replace( '/<(script|style)\b[^>]*>.*?<\/\1>/is', '', $quote_markup );
+	$quote_markup = preg_replace( '/<\/p>\s*<p\b[^>]*>/i', '<br>', $quote_markup );
+
+	$inline = wp_kses(
+		$quote_markup,
+		[
+			'a'      => [ 'href' => true, 'title' => true ],
+			'strong' => [],
+			'b'      => [],
+			'em'     => [],
+			'i'      => [],
+			'code'   => [],
+			'mark'   => [],
+			'sub'    => [],
+			'sup'    => [],
+			's'      => [],
+			'br'     => [],
+		]
+	);
+
+	return trim( preg_replace( '/^(\s*<br\s*\/?>)+|(<br\s*\/?>\s*)+$/i', '', trim( $inline ) ) );
 }
 
 function anima_get_first_paragraph_text( string $content, array $blocks = [] ): string {

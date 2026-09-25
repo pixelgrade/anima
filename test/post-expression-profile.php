@@ -110,6 +110,14 @@ $quote_post_id = $create_post(
 );
 set_post_format( $quote_post_id, 'quote' );
 
+$formatted_quote_post_id = $create_post(
+	[
+		'post_title'   => 'Formatted Quote',
+		'post_content' => '<!-- wp:quote --><blockquote class="wp-block-quote"><!-- wp:paragraph --><p>Read <a href="https://example.test/essay">the <em>whole</em> essay</a>, <strong>twice</strong>.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>Then write.<script>alert(1)</script></p><!-- /wp:paragraph --><cite>An editor</cite></blockquote><!-- /wp:quote -->',
+	]
+);
+set_post_format( $formatted_quote_post_id, 'quote' );
+
 $fallback_quote_post_id = $create_post(
 	[
 		'post_title'   => 'Quote Fallback Fixture',
@@ -156,6 +164,30 @@ if ( 'It is a purely lyrical process.' !== ( $quote_profile['extracts']['quote']
 
 if ( 'Paul Graham' !== ( $quote_profile['extracts']['quote_citation'] ?? '' ) ) {
 	anima_fail_post_expression_profile_test( 'Expected quote extraction to keep the cite text.' );
+}
+
+$formatted_quote_profile = anima_get_post_expression_profile( $formatted_quote_post_id, 'card' );
+$formatted_quote_html    = (string) ( $formatted_quote_profile['extracts']['quote_html'] ?? '' );
+
+// nova-blocks#652: the plain quote stays plain; quote_html keeps inline formatting only.
+if ( 'Read the whole essay, twice.Then write.' !== preg_replace( '/\s+/', ' ', $formatted_quote_profile['extracts']['quote'] ?? '' ) && 'Read the whole essay, twice. Then write.' !== preg_replace( '/\s+/', ' ', $formatted_quote_profile['extracts']['quote'] ?? '' ) ) {
+	anima_fail_post_expression_profile_test( 'Expected the plain quote extract to stay tag-free.' );
+}
+
+foreach ( [ '<a href="https://example.test/essay">', '<em>whole</em>', '<strong>twice</strong>', '<br' ] as $needle ) {
+	if ( false === strpos( $formatted_quote_html, $needle ) ) {
+		anima_fail_post_expression_profile_test( 'Expected quote_html to keep inline formatting: ' . $needle . ' in ' . $formatted_quote_html );
+	}
+}
+
+foreach ( [ '<p', '<script', 'alert(1)', '<cite', 'An editor' ] as $needle ) {
+	if ( false !== strpos( $formatted_quote_html, $needle ) ) {
+		anima_fail_post_expression_profile_test( 'Expected quote_html to drop block tags, scripts and the citation: ' . $needle . ' in ' . $formatted_quote_html );
+	}
+}
+
+if ( 'It is a purely lyrical process.' !== ( $quote_profile['extracts']['quote_html'] ?? '' ) ) {
+	anima_fail_post_expression_profile_test( 'Expected an unformatted quote to have the same text as quote_html.' );
 }
 
 $fallback_quote_profile = anima_get_post_expression_profile( $fallback_quote_post_id, 'card' );

@@ -38,7 +38,31 @@ function anima_register_block_styles() {
 				.wp-block-quote.is-style-editorial cite {
 					font-size: 0.65em;
 					font-family: var(--wp--preset--font-family--body, inherit);
-					color: var(--wp--preset--color--contrast, var(--sm-current-fg1-color, currentColor));
+					color: var(--sm-current-fg1-color, var(--wp--preset--color--contrast, currentColor));
+				}
+			',
+		]
+	);
+
+	// Editorial (reading): the Editorial ornament over a reading-size quote,
+	// e.g. for quote cards in narrow tracks (nova-blocks#652). The type roles
+	// come from the block bundles; this is the wp.org / no-bundle baseline.
+	register_block_style(
+		'core/quote',
+		[
+			'name'         => 'editorial-reading',
+			'label'        => __( 'Editorial (reading)', '__theme_txtd' ),
+			'inline_style' => '
+				.wp-block-quote.is-style-editorial-reading {
+					border: none;
+					padding-left: 0;
+					text-align: center;
+					font-family: var(--wp--preset--font-family--body, inherit);
+				}
+				.wp-block-quote.is-style-editorial-reading cite {
+					font-size: 0.8em;
+					font-family: var(--wp--preset--font-family--body, inherit);
+					color: var(--sm-current-fg1-color, var(--wp--preset--color--contrast, currentColor));
 				}
 			',
 		]
