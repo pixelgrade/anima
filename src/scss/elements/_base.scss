@@ -16,6 +16,50 @@ b {
 
 
 
+// ------ #INLINE TYPOGRAPHY HAND-OFF (#618)
+// WordPress 7.1 writes Typography → Letter case and Appearance → Italic as an
+// inline style on the block element. The universal rule (setup/mixins/_font,
+// applied by `* { … }` in style.scss) recomputes every descendant from the
+// inherited role tokens, so an inner element without its own inline style —
+// the `<a>` in a linked Heading, the `<time>` in a Post Date — ignores the
+// block's inline choice and falls back to the role. Handing the inline value
+// to the token lets it cascade normally, the same way `em` hands off its own
+// `--current-font-style` above. `[style]` is doubled to outrank compound role
+// selectors (`:is(h2,.h2)`, `.wp-block-post-date`) regardless of load order;
+// both spellings cover the style engine's own output and any inline style
+// serialized with a space after the colon.
+[style][style*="text-transform:uppercase"],
+[style][style*="text-transform: uppercase"] {
+  --current-text-transform: uppercase;
+}
+
+[style][style*="text-transform:lowercase"],
+[style][style*="text-transform: lowercase"] {
+  --current-text-transform: lowercase;
+}
+
+[style][style*="text-transform:capitalize"],
+[style][style*="text-transform: capitalize"] {
+  --current-text-transform: capitalize;
+}
+
+[style][style*="text-transform:none"],
+[style][style*="text-transform: none"] {
+  --current-text-transform: none;
+}
+
+[style][style*="font-style:italic"],
+[style][style*="font-style: italic"] {
+  --current-font-style: italic;
+}
+
+[style][style*="font-style:normal"],
+[style][style*="font-style: normal"] {
+  --current-font-style: normal;
+}
+
+
+
 // ------ #HIGHLIGHT CONTROL
 // Ignore the custom text and background color options and
 // hard-code a gradient for consistency
