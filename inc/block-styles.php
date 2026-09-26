@@ -121,6 +121,28 @@ function anima_register_block_styles() {
 		]
 	);
 
+	// Link rows (#605): linked content rows opt into the tap-target token.
+	// Rows are spaced 44px apart, so each link's 44px touch area fits its
+	// row without overlapping the next one (on a list, and on a Navigation
+	// block's submenu rows). The styles live in the block bundles
+	// (src/scss/blocks/core/list/, src/scss/blocks/core/navigation/) because
+	// they share the token and the coarse-pointer hit area with menus.
+	register_block_style(
+		'core/list',
+		[
+			'name'  => 'link-rows',
+			'label' => __( 'Link rows', '__theme_txtd' ),
+		]
+	);
+
+	register_block_style(
+		'core/navigation',
+		[
+			'name'  => 'link-rows',
+			'label' => __( 'Link rows', '__theme_txtd' ),
+		]
+	);
+
 	register_block_style(
 		'core/separator',
 		[

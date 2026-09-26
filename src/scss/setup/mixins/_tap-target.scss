@@ -1,0 +1,77 @@
+// Touch targets (#605).
+//
+// On coarse pointers, navigation and menu links reach the tap-target token
+// (`--theme-tap-target-size`, 44px) without moving anything: the hit area
+// grows, the text and the rows stay where they are. It is built in, not a
+// setting. Inline links in running text are exempt (WCAG 2.5.8), so nothing
+// here targets `p a` or other prose links.
+//
+// Two mechanisms, one token:
+// - `tap-target-area`: an absolutely positioned pseudo element, at least the
+//   token on each axis and centred on the target. It needs no knowledge of
+//   the target's own padding, so it suits core-owned markup (Navigation,
+//   Social Links, the overlay toggles). It needs a free pseudo element.
+// - `tap-target-padding`: extra padding with an equal negative margin, for
+//   links whose pseudo elements are already taken (Nova's classic menus use
+//   ::before for the hover underline and ::after for the dropdown arrow).
+
+$tap-target-size: var(--theme-tap-target-size, 44px);
+
+@mixin coarse-pointer {
+    @media (pointer: coarse) {
+        @content;
+    }
+}
+
+// `$pseudo`: the free pseudo element to use.
+// `$position`: the positioning the target needs to contain the pseudo
+// element; pass `false` for targets that are already positioned.
+// `$anchor`: `centre` grows the area evenly around the target; `top-end`
+// grows it down and inwards only, for targets pinned to a viewport corner
+// (an even growth would be cut off by the screen edge).
+@mixin tap-target-area( $pseudo: after, $position: relative, $anchor: centre ) {
+    @include coarse-pointer {
+        @if $position {
+            position: $position;
+        }
+
+        &::#{$pseudo} {
+            content: "";
+            position: absolute;
+
+            @if $anchor == top-end {
+                top: 0;
+                inset-inline-end: 0;
+                width: max(100%, #{$tap-target-size});
+                height: max(100%, #{$tap-target-size});
+            } @else {
+                // Percentages resolve against the target's own box: top/bottom
+                // against its height, left/right against its width. A target
+                // already larger than the token keeps its own box (0 inset).
+                inset: #{unquote( "min(0px, (100% - #{$tap-target-size}) / 2)" )};
+            }
+        }
+    }
+}
+
+// `$padding-top`/`$padding-bottom`/`$margin-bottom`: the link's own values,
+// restated so the extension is added to them in one declaration each.
+// `$gap`: the space between neighbouring targets in the row; each side takes
+// half of it, so neighbours meet at the midpoint and never overlap.
+// The extensions are rounded to whole pixels: the padding and the negative
+// margin are separate values, and a fractional extension could round to
+// different layout units in each, moving the box by 1/64px.
+// `1lh` and `round()` must both be supported; otherwise the whole block is
+// skipped, because an invalid extension would reset the padding at
+// computed-value time and move the layout.
+@mixin tap-target-padding( $padding-top, $padding-bottom, $margin-bottom: 0px, $gap: 0px ) {
+    @include coarse-pointer {
+        @supports (height: 1lh) and (width: round(up, 1px, 1px)) {
+            --tap-target-extend-block: round(up, max(0px, (#{$tap-target-size} - 1lh - #{$padding-top} - #{$padding-bottom}) / 2), 1px);
+            --tap-target-extend-inline: round(down, #{$gap} / 2, 1px);
+
+            padding: calc(#{$padding-top} + var(--tap-target-extend-block)) var(--tap-target-extend-inline) calc(#{$padding-bottom} + var(--tap-target-extend-block));
+            margin: calc(-1 * var(--tap-target-extend-block)) calc(-1 * var(--tap-target-extend-inline)) calc(#{$margin-bottom} - var(--tap-target-extend-block));
+        }
+    }
+}

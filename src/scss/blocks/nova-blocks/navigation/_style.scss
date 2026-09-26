@@ -80,6 +80,23 @@
                 margin-bottom: var(--nb-navigation-item-bottom-margin);
             }
 
+            // Touch targets (#605): on coarse pointers the row links grow to
+            // the tap-target token without moving. The pseudo elements are
+            // taken (hover underline, dropdown arrow), so the hit area grows
+            // through padding with an equal negative margin; sideways each
+            // link takes half the item gap, so neighbours meet midway. The
+            // CTA button is left alone: extra padding would enlarge its fill.
+            // Stacked rows (dropdowns, the mobile menu) are sized by Nova's
+            // link spacing, 46px and up by default.
+            > li:not(.is-cta-button) > a {
+                @include tap-target-padding(
+                    var(--nb-navigation-item-padding-y),
+                    calc(var(--nb-navigation-item-padding-y) - var(--nb-navigation-item-bottom-margin)),
+                    var(--nb-navigation-item-bottom-margin),
+                    var(--nb-navigation-item-spacing, 0px)
+                );
+            }
+
             li:hover {
 
                 > a {

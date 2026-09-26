@@ -41,4 +41,34 @@
     gap: var(--wp--style--block-gap);
   }
 
+
+
+  /*------------------------------------*\
+    #TOUCH TARGETS (#605)
+  \*------------------------------------*/
+  // On coarse pointers every link, submenu toggle and overlay toggle gets a
+  // hit area of at least the tap-target token, centred on it; the layout
+  // does not change. The close button is already absolutely positioned in
+  // the overlay's top corner, so its area grows down and inwards.
+  .wp-block-navigation-item__content,
+  .wp-block-navigation__responsive-container-open {
+    @include tap-target-area;
+  }
+
+  .wp-block-navigation__responsive-container-close {
+    @include tap-target-area( $position: false, $anchor: top-end );
+  }
+
+  // Link rows (opt-in block style): stacked submenu rows have no room to
+  // grow into, so the style gives each row the token's pitch.
+  &.is-style-link-rows .has-child .wp-block-navigation__submenu-container .wp-block-navigation-item__content {
+    padding-top: .5em;
+    padding-bottom: .5em;
+
+    @supports (height: 1lh) {
+      padding-top: max(.5em, (#{$tap-target-size} - 1lh) / 2);
+      padding-bottom: max(.5em, (#{$tap-target-size} - 1lh) / 2);
+    }
+  }
+
 }

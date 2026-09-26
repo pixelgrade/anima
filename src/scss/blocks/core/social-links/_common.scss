@@ -27,6 +27,12 @@ $enable-social-links-block-styles: true !default;
         }
     }
 
+    // Touch targets (#605): social icons are standalone targets in headers
+    // and footers, so they get the same coarse-pointer hit area as menus.
+    .wp-block-social-links .wp-social-link a {
+        @include tap-target-area;
+    }
+
     .wp-social-link {
         &, :is(a, button, svg) {
             font-size: inherit !important;

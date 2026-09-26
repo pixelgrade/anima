@@ -1,0 +1,30 @@
+// Link rows (#605): an opt-in list style for linked content rows (services,
+// locations, contact rows). Rows are spaced to the tap-target token's pitch
+// on every pointer, so the layout is the same with a mouse and a finger; on
+// coarse pointers each link's hit area is centred on its line and at least
+// the token tall and wide, so neighbouring rows meet without overlapping.
+// The spacing is a bottom margin rather than padding, so markers, dividers
+// and the rest of the list's design stay aligned with the text.
+.wp-block-list.is-style-link-rows {
+
+    > li:not(:last-child) {
+        margin-bottom: .6em;
+
+        @supports (height: 1lh) {
+            margin-bottom: max(0px, #{$tap-target-size} - 1lh);
+        }
+    }
+
+    a {
+        @include tap-target-area;
+
+        // Nova paints list markers with an absolutely positioned `li::after`
+        // that would sit over the row link's area; rows never overlap, so
+        // the link's area can safely win.
+        @include coarse-pointer {
+            &::after {
+                z-index: 1;
+            }
+        }
+    }
+}
