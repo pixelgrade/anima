@@ -16,7 +16,7 @@ b {
 
 
 
-// ------ #INLINE TYPOGRAPHY HAND-OFF (#618)
+// ------ #INLINE TYPOGRAPHY HAND-OFF (#618, #623)
 // WordPress 7.1 writes Typography → Letter case and Appearance → Italic as an
 // inline style on the block element. The universal rule (setup/mixins/_font,
 // applied by `* { … }` in style.scss) recomputes every descendant from the
@@ -28,23 +28,35 @@ b {
 // selectors (`:is(h2,.h2)`, `.wp-block-post-date`) regardless of load order;
 // both spellings cover the style engine's own output and any inline style
 // serialized with a space after the colon.
-[style][style*="text-transform:uppercase"],
-[style][style*="text-transform: uppercase"] {
+//
+// A heading that ALSO carries a font-size class (`h2.has-largest-font-size`)
+// is reassigned to a whole different role by utility/font-size.scss, which
+// is nested under `[class][class] { … }` there purely to outrank WordPress's
+// own `!important` font-size rule. That wrapper's side effect is to also
+// re-set `--current-text-transform` (part of the same @include apply-font()
+// call) at (0,3,1) — one class-bucket above this hand-off's doubled (0,2,0).
+// The heading's own rendered text still looks right (its inline `style`
+// attribute wins on the `text-transform` property directly, unconditionally),
+// which is why only the link — reading the token, not the property — showed
+// the bug (#623). The text-transform hand-off is quadrupled, not doubled, so
+// it keeps outranking that (0,3,1) ceiling regardless of load order.
+[style][style][style][style*="text-transform:uppercase"],
+[style][style][style][style*="text-transform: uppercase"] {
   --current-text-transform: uppercase;
 }
 
-[style][style*="text-transform:lowercase"],
-[style][style*="text-transform: lowercase"] {
+[style][style][style][style*="text-transform:lowercase"],
+[style][style][style][style*="text-transform: lowercase"] {
   --current-text-transform: lowercase;
 }
 
-[style][style*="text-transform:capitalize"],
-[style][style*="text-transform: capitalize"] {
+[style][style][style][style*="text-transform:capitalize"],
+[style][style][style][style*="text-transform: capitalize"] {
   --current-text-transform: capitalize;
 }
 
-[style][style*="text-transform:none"],
-[style][style*="text-transform: none"] {
+[style][style][style][style*="text-transform:none"],
+[style][style][style][style*="text-transform: none"] {
   --current-text-transform: none;
 }
 

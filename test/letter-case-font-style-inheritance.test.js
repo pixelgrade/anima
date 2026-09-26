@@ -41,7 +41,8 @@ const handOffRules = ( root, prop ) => {
   const found = [];
   root.walkRules( rule => {
     const props = Object.fromEntries( rule.nodes.filter( n => n.type === 'decl' ).map( d => [ d.prop, d.value ] ) );
-    if ( props[ `--current-${ prop }` ] && /\[style\]\[style\*=/.test( rule.selector ) ) {
+    // text-transform is quadrupled ([style] x4, #623); font-style stays doubled ([style] x2, #618).
+    if ( props[ `--current-${ prop }` ] && /\[style\]+\[style\*=/.test( rule.selector ) ) {
       found.push( { selector: norm( rule.selector ), value: props[ `--current-${ prop }` ] } );
     }
   } );
@@ -54,7 +55,9 @@ for ( const [ entry, scope ] of [ [ 'style.scss', '' ], [ 'block-editor.scss', '
     const rules = handOffRules( root, 'text-transform' );
     assert.equal( rules.length, TEXT_TRANSFORM_VALUES.length, JSON.stringify( rules ) );
     for ( const value of TEXT_TRANSFORM_VALUES ) {
-      const expected = norm( `${ scope }[style][style*="text-transform:${ value }"], ${ scope }[style][style*="text-transform: ${ value }"]` );
+      // Quadrupled (#623), not doubled: it must outrank utility/font-size.scss's
+      // `[class][class] h2.has-largest-font-size` role reassignment (0,3,1).
+      const expected = norm( `${ scope }[style][style][style][style*="text-transform:${ value }"], ${ scope }[style][style][style][style*="text-transform: ${ value }"]` );
       const rule = rules.find( r => r.value === value );
       assert.ok( rule, `no hand-off rule for ${ value }` );
       assert.equal( rule.selector, expected );
@@ -104,6 +107,16 @@ const FIXTURE = `
   <!-- Unaffected: heading without inline style keeps the plain role -->
   <h2 id="h2-plain" class="wp-block-heading"><a href="#">Section title</a></h2>
 
+  <!-- Repro 3 (#623): a heading with Letter case AND a font-size class. The
+       class re-routes the heading to a whole different role (utility/font-size.scss),
+       which is nested under [class][class] { ... } there only to outrank a
+       !important font-size rule from WordPress -- but that wrapper also
+       boosts the role's own --current-text-transform above the (undoubled)
+       #618 hand-off. The heading's own text still renders right either way
+       (its style attribute wins on the text-transform property directly),
+       which is why only the link -- reading the token, not the property -- showed it. -->
+  <div class="wp-block-post-content"><h2 id="h2-upper-sized" class="wp-block-heading has-largest-font-size" style="text-transform:uppercase"><a href="#">Section title</a></h2></div>
+
   <!-- Repro 2: Post Date, role font-style is normal, block sets Italic inline -->
   <div id="post-date" class="wp-block-post-date" style="font-style:italic"><time datetime="2026-09-21">September 21, 2026</time></div>
 
@@ -138,6 +151,7 @@ const render = css => {
     h2Lower: pick( 'h2-lower', 'a' ),
     h2Capitalize: pick( 'h2-capitalize', 'a' ),
     h2Plain: pick( 'h2-plain', 'a' ),
+    h2UpperSized: pick( 'h2-upper-sized', 'a' ),
     postDate: pick( 'post-date', 'time' ),
     postDateExplicitNormal: pick( 'post-date-explicit-normal', 'time' ),
     chip: pick( 'chip', 'a' ),
@@ -195,4 +209,44 @@ test( 'headless Chrome: inline Letter case / Italic reach inline children; compo
 
   // Unaffected: a component with its own role and no inline style is untouched by the fix.
   assert.deepEqual( withFix.chip, withoutFix.chip, 'tag chip (own role, no inline style) must be unchanged' );
+} );
+
+// ---------------------------------------------------------------------------
+// #623: Letter case must reach a link inside a heading that ALSO carries a
+// font-size class. That class re-routes the heading to a different role via
+// utility/font-size.scss, whose rules are nested under `[class][class] { … }`
+// (specificity (0,3,1) for a compound like `h2.has-largest-font-size`) purely
+// to outrank a `!important` font-size rule from WordPress. That wrapper also
+// boosts the role's own --current-text-transform above the #618 hand-off's
+// doubled `[style][style*=…]` (0,2,0) -- so the fix quadruples it instead.
+// `anima-utility` (utility.scss) is a real dependency of `anima-style` on the
+// frontend (functions.php), loaded before it, so it must be compiled in here
+// to reproduce and verify this -- the other test above does not include it.
+// ---------------------------------------------------------------------------
+
+test( 'headless Chrome: Letter case reaches a link inside a heading that also has a font-size class (#623)', { skip: ! CHROME && 'Chrome not installed' }, () => {
+  const properties = compileCss( 'custom-properties.scss' );
+  const utility = compileCss( 'utility.scss' );
+  const style = compileCss( 'style.scss' );
+  const blocks = compileCss( path.join( 'blocks', 'common.scss' ) );
+
+  // Simulate the pre-#623 hand-off exactly as #618 shipped it (doubled, not
+  // quadrupled `[style]`) to prove the extra doubling is what's necessary:
+  // without it, utility/font-size.scss's boosted role reassignment still wins.
+  const doubledStyle = style.replace( /\[style\]\[style\]\[style\]\[style\*=/g, '[style][style*=' );
+  assert.notEqual( doubledStyle, style, 'expected to find the quadrupled #623 hand-off selectors to revert' );
+
+  const withFix = render( properties + utility + style + blocks );
+  const preFix = render( properties + utility + doubledStyle + blocks );
+
+  // The bug: with only the doubled (#618) hand-off, the link in a sized
+  // heading ignores the heading's inline Uppercase.
+  assert.notEqual( preFix.h2UpperSized.inner.textTransform, preFix.h2UpperSized.own.textTransform, 'bug repro: link in a sized heading ignores Uppercase with only the doubled (#618) hand-off' );
+  assert.equal( preFix.h2UpperSized.own.textTransform, 'uppercase', 'the heading\'s own inline style still wins on its own text-transform property either way' );
+  assert.equal( preFix.h2UpperSized.inner.textTransform, 'none', 'the link falls back to the reassigned role (display), losing the case' );
+
+  // The fix: the link matches the heading in every direction.
+  assert.equal( withFix.h2UpperSized.own.textTransform, 'uppercase' );
+  assert.equal( withFix.h2UpperSized.inner.textTransform, 'uppercase' );
+  assert.deepEqual( withFix.h2UpperSized.inner, withFix.h2UpperSized.own, 'sized heading link should match the heading' );
 } );

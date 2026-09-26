@@ -51,7 +51,7 @@ plugins are active.
 * Add an Editorial quote style for reading-size quotes.
 * Stop disabling the WordPress Font Library, so fonts you install there can be used with Style Manager.
 * Headings you write in post content keep the case you typed; the palette's letter case still applies to template headings.
-* Core "Letter case" and "Italic" now reach links and emphasis inside the block.
+* Core "Letter case" and "Italic" now reach links and emphasis inside the block, including a link inside a heading that also has its own font size.
 * Links inside a block with its own font size take that size.
 * Latest Posts titles follow the block's font size control.
 * Meta, dates, captions and credits use the quiet-text color instead of reduced opacity, so they stay readable (4.5:1 contrast).
