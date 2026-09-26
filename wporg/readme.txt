@@ -3,7 +3,7 @@ Contributors: pixelgrade
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.0.49
+Stable tag: 2.0.50
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, portfolio, one-column, custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, block-patterns, full-site-editing, rtl-language-support
@@ -43,6 +43,29 @@ for additional design-system controls, blocks, and layout options when those
 plugins are active.
 
 == Changelog ==
+
+= 2.0.50 =
+
+* Add a bottom action bar for phones (call or email buttons), available as a Group style in the Footer.
+* Add TikTok and other current platforms to the social icons, share one icon list between the Social Menu and the Site Frame, and let internal links opt in to an icon.
+* Add an Editorial quote style for reading-size quotes.
+* Stop disabling the WordPress Font Library, so fonts you install there can be used with Style Manager.
+* Headings you write in post content keep the case you typed; the palette's letter case still applies to template headings.
+* Core "Letter case" and "Italic" now reach links and emphasis inside the block.
+* Links inside a block with its own font size take that size.
+* Latest Posts titles follow the block's font size control.
+* Meta, dates, captions and credits use the quiet-text color instead of reduced opacity, so they stay readable (4.5:1 contrast).
+* Text-style buttons and card "Read More" links keep readable contrast, including on hover and keyboard focus.
+* Give navigation links a 44px tap area on touch screens.
+* Keep small type roles at their own size on phones instead of growing them.
+* Wrap long URLs in article text so phones no longer scroll sideways.
+* Keep classic captions inside their column on tablets and phones.
+* Keep quote-format cards' links and emphasis when the quote is the first paragraph of a classic post.
+* Show the Border Site Frame on small screens instead of a stray right strip.
+* Whiten single logos of any color on dark backgrounds, including pure black, and reset them on light rows.
+* The separator line follows the Nova Blocks rule weight.
+* Keep hero card content visible when reduced motion is on.
+* Restore the portfolio, gallery, testimonial and split-header templates in the WordPress.org build.
 
 = 2.0.49 =
 
