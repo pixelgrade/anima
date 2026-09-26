@@ -20,9 +20,29 @@ $latest-posts--title-selector: '.wp-block-latest-posts__post-title' !default;
             }
         }
 
+        // The list item is where the block's own font-size control lands —
+        // a `has-*-font-size` preset class or a literal custom value on the
+        // `ul` — as a real CSS property outside the role/custom-property
+        // system. Inherit it in real CSS so the title (and anything else
+        // that doesn't declare its own size) tracks it (#617).
+        li {
+            font-size: inherit;
+        }
+
         #{$latest-posts--title-selector} {
-            @include apply-font(heading-4);
-            --font-size-modifier: 0.9;
+            // "List title": one step above body in family/weight/letter-
+            // spacing/case, sized by the block's own control (or the
+            // inherited context) instead of a fixed heading-4 role (#617).
+            // heading-6 also keeps it ranked below a sidebar's widget
+            // heading, which is typically heading-5.
+            --current-font-family: var(--theme-heading-6-font-family);
+            --current-font-weight: var(--theme-heading-6-font-weight);
+            --current-font-style: var(--theme-heading-6-font-style);
+            --current-line-height: var(--theme-heading-6-line-height);
+            --current-letter-spacing: var(--theme-heading-6-letter-spacing);
+            --current-text-transform: var(--theme-heading-6-text-transform);
+            --current-color: var(--theme-heading-6-color);
+            font-size: inherit;
         }
     }
 
