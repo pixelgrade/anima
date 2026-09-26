@@ -3,7 +3,6 @@ import {
   syncBodyClasses,
   syncPageAssets,
   syncDocumentTitle,
-  syncHeaderColorSignal,
   reinitComponents,
   cleanupBeforeTransition,
   notifyAfterSwap,
@@ -123,12 +122,6 @@ function performEnter( { next } ) {
 
   // Sync admin bar from raw HTML (full #wpadminbar replacement).
   syncAdminBar( html );
-
-  // Save the header's correct color signal classes from the server HTML.
-  // The Nova Blocks header script will re-execute and fail to detect colors
-  // in FSE templates (it queries `.site-main .hentry` which doesn't exist).
-  // Pass the new container to scope DOM queries and avoid finding the old header.
-  syncHeaderColorSignal( html, next.container );
 
   // The incoming container is live — announce it (anima:after-swap).
   notifyAfterSwap( next.container );

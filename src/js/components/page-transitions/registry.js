@@ -28,7 +28,7 @@
 
 const entries = new Map();
 
-export function register( entry ) {
+function register( entry ) {
   if ( ! entry || typeof entry.id !== 'string' || ! entry.id ) {
     return;
   }
@@ -36,7 +36,7 @@ export function register( entry ) {
   entries.set( entry.id, entry );
 }
 
-export function unregister( id ) {
+function unregister( id ) {
   entries.delete( id );
 }
 
@@ -56,6 +56,10 @@ function runPhase( phase, container ) {
 }
 
 function dispatchLifecycleEvent( name, container ) {
+  if ( typeof window === 'undefined' ) {
+    return;
+  }
+
   window.dispatchEvent( new CustomEvent( name, { detail: { container } } ) );
 
   if ( window.jQuery ) {
@@ -68,7 +72,7 @@ function dispatchLifecycleEvent( name, container ) {
  * the swap. Called by the transitions system right before Barba replaces
  * the container.
  */
-export function runCleanup( container ) {
+function runCleanup( container ) {
   runPhase( 'cleanup', container );
   dispatchLifecycleEvent( 'anima:before-swap', container );
 }
@@ -77,7 +81,7 @@ export function runCleanup( container ) {
  * Announce that the incoming container is live in the DOM (before component
  * re-initialization). Called by the transitions system right after the swap.
  */
-export function notifyAfterSwap( container ) {
+function notifyAfterSwap( container ) {
   dispatchLifecycleEvent( 'anima:after-swap', container );
 }
 
@@ -85,12 +89,24 @@ export function notifyAfterSwap( container ) {
  * Run every registered reinit against the incoming container. Called by the
  * transitions system after the theme/block frontend scripts have re-executed.
  */
-export function runReinit( container ) {
+function runReinit( container ) {
   runPhase( 'reinit', container );
 }
 
 // The public API surface third parties integrate against.
-window.anima = window.anima || {};
-window.anima.pageTransitions = window.anima.pageTransitions || {};
-window.anima.pageTransitions.register = register;
-window.anima.pageTransitions.unregister = unregister;
+if ( typeof window !== 'undefined' ) {
+  window.anima = window.anima || {};
+  window.anima.pageTransitions = window.anima.pageTransitions || {};
+  window.anima.pageTransitions.register = register;
+  window.anima.pageTransitions.unregister = unregister;
+}
+
+// CommonJS so the node:test suite can drive the lifecycle directly; webpack
+// interops it for the ES `import { … } from './registry'` call sites.
+module.exports = {
+  register,
+  unregister,
+  runCleanup,
+  notifyAfterSwap,
+  runReinit,
+};

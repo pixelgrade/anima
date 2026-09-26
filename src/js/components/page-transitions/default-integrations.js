@@ -4,6 +4,7 @@ import * as PileParallax from '../pile-parallax';
 import { register } from './registry';
 
 const { cleanupTransitionContainer } = require( './cleanup' );
+const { createHeaderColorSignal } = require( './header-color-signal' );
 const { rebindAjaxReadingProgress } = require( './reading-bar' );
 
 /**
@@ -15,6 +16,11 @@ const { rebindAjaxReadingProgress } = require( './reading-bar' );
  * plugin refreshes.
  */
 export function registerDefaultIntegrations() {
+  // Header color signal guard: torn down with the outgoing page, installed on
+  // the incoming header once the Nova Blocks header script has re-executed
+  // (see header-color-signal.js for why it must not run earlier).
+  register( createHeaderColorSignal() );
+
   // Nova Blocks scripts can mutate/rebuild collection card DOM after the
   // swap — refresh parallax bindings after they finish so we target the
   // final nodes and not stale pre-mutation references.

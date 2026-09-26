@@ -4,7 +4,6 @@ import {
   syncBodyClasses,
   syncPageAssets,
   syncDocumentTitle,
-  syncHeaderColorSignal,
   reinitComponents,
   cleanupBeforeTransition,
   notifyPageTransitionComplete,
@@ -25,7 +24,6 @@ function performSlideWipeEnter( { next } ) {
   syncBodyClasses( html );
   syncDocumentTitle( html );
   syncAdminBar( html );
-  syncHeaderColorSignal( html, next.container );
 
   // The incoming container is live — announce it (anima:after-swap).
   notifyAfterSwap( next.container );
