@@ -262,7 +262,12 @@ add_filter( 'block_editor_settings_all',
 
 		// Only strip the core design UI when Style Manager owns the design
 		// system. In the bare WordPress.org build these stay so the editor
-		// exposes the theme.json palette, font sizes, and Font Library.
+		// exposes the theme.json palette and font sizes.
+		//
+		// The Font Library stays enabled in both modes: fonts installed there
+		// are a Style Manager font source (pixelgrade/style-manager#57), and
+		// Style Manager keeps block-level font family pickers out of the way,
+		// so it remains the one place fonts are chosen.
 		if ( anima_style_manager_is_active() ) {
 			// Remove default style presets.
 			if ( ! empty( $editor_settings['styles'] ) ) {
@@ -275,9 +280,6 @@ add_filter( 'block_editor_settings_all',
 
 				$editor_settings['styles'] = array_values( $editor_settings['styles'] );
 			}
-
-			// Keep font management in Style Manager to avoid duplicate UI with Font Library.
-			$editor_settings['fontLibraryEnabled'] = false;
 		}
 
 		// WordPress 7 only exposes Wide/Full in the post editor when post content
@@ -365,6 +367,41 @@ function anima_is_block_editor_screen() {
 }
 
 /**
+ * Get the WordPress Font Library screen URL (Appearance > Fonts).
+ *
+ * WordPress 7.0 added the standalone Fonts screen; older versions only reach
+ * the Font Library from the Site Editor's Styles > Typography panel.
+ *
+ * @return string Empty when this WordPress has no standalone Fonts screen.
+ */
+function anima_get_font_library_url() {
+	if ( ! defined( 'ABSPATH' ) || ! file_exists( ABSPATH . 'wp-admin/font-library.php' ) ) {
+		return '';
+	}
+
+	return admin_url( 'font-library.php' );
+}
+
+/**
+ * The Styles handoff card that points to the Font Library.
+ *
+ * @return array|null Null when this WordPress has no standalone Fonts screen.
+ */
+function anima_get_font_library_resource() {
+	$url = anima_get_font_library_url();
+	if ( '' === $url ) {
+		return null;
+	}
+
+	return [
+		'title'       => esc_html__( 'Your Own Fonts', '__theme_txtd' ),
+		'description' => esc_html__( 'Install Google Fonts or upload your own in the Font Library. They show up in the Style Manager font fields under Font Library.', '__theme_txtd' ),
+		'buttonLabel' => esc_html__( 'Manage Fonts', '__theme_txtd' ),
+		'url'         => esc_url_raw( $url ),
+	];
+}
+
+/**
  * Get a Customizer link focused on a specific panel or section.
  *
  * @param string $focus_type   Whether to focus a panel or section.
@@ -422,7 +459,7 @@ function anima_enqueue_site_editor_style_manager_assets() {
 			'description'        => esc_html__( 'We know that each website needs to have an unique voice in tune with your charisma. That\'s why we created a smart options system to easily make handy color changes, spacing adjustments and balancing fonts, each step bringing you closer to a striking result.', '__theme_txtd' ),
 			'buttonLabel'        => esc_html__( 'Open the Customizer', '__theme_txtd' ),
 			'resourcesEyebrow'   => esc_html__( 'Learn more', '__theme_txtd' ),
-			'resources'          => [
+			'resources'          => array_values( array_filter( [
 				[
 					'title'       => esc_html__( 'The Color System', '__theme_txtd' ),
 					'description' => esc_html__( 'Set the overall mood of your site with a palette that feels calm, bold, playful, or anywhere in between.', '__theme_txtd' ),
@@ -435,7 +472,8 @@ function anima_enqueue_site_editor_style_manager_assets() {
 					'buttonLabel' => esc_html__( 'Change Fonts', '__theme_txtd' ),
 					'url'         => anima_get_style_manager_customizer_url( 'section', 'sm_font_palettes_section' ),
 				],
-			],
+				anima_get_font_library_resource(),
+			] ) ),
 		] );
 
 		return;
