@@ -9,11 +9,13 @@
     }
 }
 
-:root {
-    --separator-line-thickness: 3px;
-}
-
 .c-separator {
+    // The line thickness follows Nova's per-block rule weight (pixelgrade/anima#610).
+    // It is declared here, inside the .wp-block-separator that carries
+    // --nb-separator-rule-weight, so it resolves per block; a :root declaration
+    // would resolve once against the root and ignore the block. Untouched
+    // separators emit no weight and keep the historical 3px.
+    --separator-line-thickness: var(--nb-separator-rule-weight, 3px);
     --separator-arrow-width: calc(var(--separator-line-thickness) * 2);
 
     display: flex;
