@@ -23,10 +23,11 @@ $enable-latest-comments-block-styles:   true !default;
 		}
 	}
 
-	// The date reads at 4.5:1 through the context's text role, not opacity (#612).
+	// The date reads at 4.5:1 through the quiet-text role, not opacity (#612), falling
+	// back to fg1 on a site whose Style Manager predates the role (style-manager#216).
 	.wp-block-latest-comments__comment-date {
-		--font-size-modifier: 0.8;	
-		color: var(--sm-current-fg1-color);
+		--font-size-modifier: 0.8;
+		color: var(--sm-current-fg-muted-color, var(--sm-current-fg1-color));
 	}
 
 	.wp-block-latest-comments__comment-excerpt p,

@@ -62,7 +62,8 @@ test( 'blocks/common.scss: the list item and the title inherit real font-size', 
 
   // Meta stays on its own independent role (untouched by this fix).
   const author = rule( root, '.wp-block-latest-posts__post-author[class], .wp-block-latest-posts__post-date[class]' );
-  assert.deepEqual( author[ 0 ], { '--font-size-modifier': '0.85', color: 'var(--sm-current-fg1-color)' } );
+  // Its colour is the quiet-text role (style-manager#216), falling back to fg1.
+  assert.deepEqual( author[ 0 ], { '--font-size-modifier': '0.85', color: 'var(--sm-current-fg-muted-color, var(--sm-current-fg1-color))' } );
 } );
 
 // ---------------------------------------------------------------------------

@@ -4,9 +4,12 @@
   width: 100%; // Push the text block to align left when there is little content
   text-align: left;
 
-  // Credits inherit the caption's ink; opacity dimmed them below 4.5:1 (#612).
+  // Credits take the quiet-text role, falling back to the caption's inherited ink on a
+  // site whose Style Manager predates the role; opacity dimmed them below 4.5:1 (#612,
+  // style-manager#216).
   .credits {
       margin: 0;
+      color: var(--sm-current-fg-muted-color, currentColor);
   }
 
   &:last-child {
