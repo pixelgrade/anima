@@ -39,3 +39,23 @@
 }
 
 
+// Heading case per context (#616)
+// A heading role's `text-transform` (e.g. an uppercase heading-2) is meant
+// for template and section headings, not for headings an author writes
+// inside a post or page's own content. Post Content is the author-content
+// boundary: anything inside it renders the case as written, while every
+// role property besides case (size, weight, family, letter-spacing) stays
+// the role's. Template/section headings — site title, widget headings, Nova
+// collection titles, page-builder rows — sit outside Post Content and keep
+// the palette's case.
+.wp-block-post-content :is(
+  h1, .h1,
+  h2, .h2,
+  h3, .h3,
+  h4, .h4,
+  h5, .h5,
+  h6, .h6
+) {
+  --current-text-transform: none;
+}
+
