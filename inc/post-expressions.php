@@ -242,11 +242,12 @@ function anima_get_post_expression_quote_extract( WP_Post $post, array $blocks )
 		];
 	}
 
-	$paragraph = anima_get_first_paragraph_text( $post->post_content, $blocks );
+	$paragraph      = anima_get_first_paragraph_text( $post->post_content, $blocks );
+	$paragraph_html = anima_get_first_paragraph_html( $post->post_content, $blocks );
 
 	return [
 		'quote'          => $paragraph,
-		'quote_html'     => esc_html( $paragraph ),
+		'quote_html'     => '' !== $paragraph_html ? anima_get_inline_quote_html( $paragraph_html ) : esc_html( $paragraph ),
 		'quote_citation' => '',
 	];
 }
@@ -360,18 +361,40 @@ function anima_get_inline_quote_html( string $quote_markup ): string {
 	return trim( preg_replace( '/^(\s*<br\s*\/?>)+|(<br\s*\/?>\s*)+$/i', '', trim( $inline ) ) );
 }
 
-function anima_get_first_paragraph_text( string $content, array $blocks = [] ): string {
+/**
+ * A classic post's first paragraph rarely arrives as a `<blockquote>` or a
+ * `core/quote` block; it is a plain paragraph. Its inline markup (links,
+ * `strong`/`em`…) is kept here the same way `anima_extract_first_blockquote_parts()`
+ * keeps a blockquote's, so `anima_get_post_expression_quote_extract()` can
+ * hand a real `quote_html` to the card instead of stripping it to plain text
+ * first (#615).
+ *
+ * @param string $content Post content (classic or block markup).
+ * @param array  $blocks   Parsed blocks, when available.
+ * @return string The first paragraph's inner markup, or '' if none is found.
+ */
+function anima_get_first_paragraph_html( string $content, array $blocks = [] ): string {
 	if ( ! empty( $blocks ) ) {
 		$paragraph_block = anima_find_first_block_by_name( $blocks, 'core/paragraph' );
 
 		if ( ! empty( $paragraph_block['innerHTML'] ) ) {
-			return trim( wp_strip_all_tags( $paragraph_block['innerHTML'] ) );
+			$inner_html = (string) $paragraph_block['innerHTML'];
+
+			if ( preg_match( '/<p\b[^>]*>(.*?)<\/p>/is', $inner_html, $matches ) ) {
+				return trim( $matches[1] );
+			}
+
+			return trim( $inner_html );
 		}
 	}
 
 	if ( preg_match( '/<p\b[^>]*>(.*?)<\/p>/is', $content, $matches ) ) {
-		return trim( wp_strip_all_tags( $matches[1] ) );
+		return trim( $matches[1] );
 	}
 
 	return '';
+}
+
+function anima_get_first_paragraph_text( string $content, array $blocks = [] ): string {
+	return trim( wp_strip_all_tags( anima_get_first_paragraph_html( $content, $blocks ) ) );
 }
