@@ -10,6 +10,7 @@
     // fluid typography settings
     --theme-font-size-breakpoint: #{strip-unit($theme-font-size-breakpoint)};
     --theme-font-size-minimum-value: #{strip-unit($theme-minimum-font-size)};
+    --theme-font-size-floor-value: #{strip-unit($theme-font-size-floor-value)};
     --theme-font-size-minimum-value-breakpoint: #{strip-unit($theme-font-size-minimum-value-breakpoint)};
 
     --theme-font-size-slope-adjust: #{$theme-font-size-slope-adjust};
@@ -47,7 +48,12 @@
 
     // solving a first degree equation: y = ax + b
     --y1: var(--font-size);
-    --y0-new: calc( var(--y1) - ( var(--y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) );
+    // the phone anchor: never above the role's own size (#613), and never
+    // below the floor value either, so tiny roles still get a usable size on
+    // phones instead of shrinking further (#622). Roles of floor-value and up
+    // are unaffected: --y0 already equals --y1 for them, so this max() is a
+    // no-op. The value at --x1 (1440) is unchanged by construction either way.
+    --y0-new: max( var(--theme-font-size-floor-value), calc( var(--y1) - ( var(--y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) ) );
 
     // calculate the slope and the remainder for the equation
     --a: calc( ( var(--y1) - var(--y0-new) ) / ( var(--x1) - var(--x0) ) );

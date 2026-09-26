@@ -57,7 +57,7 @@ plugins are active.
 * Meta, dates, captions and credits use the quiet-text color instead of reduced opacity, so they stay readable (4.5:1 contrast).
 * Text-style buttons and card "Read More" links keep readable contrast, including on hover and keyboard focus.
 * Give navigation links a 44px tap area on touch screens.
-* Keep small type roles at their own size on phones instead of growing them.
+* Keep small type roles at their own size on phones instead of growing them, with a 12px floor so the very smallest roles stay readable.
 * Wrap long URLs in article text so phones no longer scroll sideways.
 * Keep classic captions inside their column on tablets and phones.
 * Keep quote-format cards' links and emphasis when the quote is the first paragraph of a classic post.

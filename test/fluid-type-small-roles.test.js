@@ -39,6 +39,16 @@ test( 'the fluid anchor never exceeds the role\'s own declared size', () => {
 } );
 
 // ---------------------------------------------------------------------------
+// #622: tiny roles (under the floor value) still keep a usable phone anchor.
+// ---------------------------------------------------------------------------
+
+test( 'the phone anchor never drops below the floor value (#622)', () => {
+  assert.deepEqual( universalDecl( '--y0-new' ), [
+    'max( var(--theme-font-size-floor-value), calc( var(--y1) - ( var(--y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) ) )',
+  ] );
+} );
+
+// ---------------------------------------------------------------------------
 // Real layout: computed font sizes in headless Chrome at phone to desktop widths.
 // Each width is an iframe, so `vw` and the desktop media query use that width.
 // ---------------------------------------------------------------------------
@@ -51,12 +61,24 @@ const CHROME = [
 ].find( bin => bin && fs.existsSync( bin ) );
 
 const WIDTHS = [ 320, 390, 768, 1024, 1440 ];
-const ROLES = { meta: 14, label: 12, body: 18, h1: 48, floor: 16 };
+const ROLES = { meta: 14, label: 12, body: 18, h1: 48, floor: 16, tiny: 9.5 };
 
 // The pre-#613 formula (anchor = 16 for every role), below the 1440 breakpoint.
 const legacySize = ( size, width ) => {
   const y0 = size - ( size - 16 ) * 0.6;
   return y0 + ( size - y0 ) * ( width - 320 ) / ( 1440 - 320 );
+};
+
+// The #622 formula: the phone anchor (--y0-new) is floored at 12, everything
+// else about the curve is unchanged. For size >= 12 this reduces exactly to
+// the #613 behaviour (floor is a no-op), so this same function also covers
+// the "unchanged" roles below.
+const floorSize = ( size, width ) => {
+  const y0 = Math.min( 16, size );
+  const y0New = Math.max( 12, size - ( size - y0 ) * 0.6 );
+  const a = ( size - y0New ) / ( 1440 - 320 );
+  const b = y0New - a * 320;
+  return a * width + b;
 };
 
 const measure = () => {
@@ -111,5 +133,24 @@ test( 'headless Chrome: small roles hold their size, larger roles follow the unc
       const expected = legacySize( ROLES[ id ], width );
       assert.ok( Math.abs( at[ id ] - expected ) < 0.02, `${ id } at ${ width }: ${ at[ id ] } vs legacy ${ expected.toFixed( 2 ) }` );
     }
+
+    // #622: a role under the floor value (9.5px) never drops below 12px on
+    // phones. It never goes above it either (the anchor is capped, not
+    // boosted past 12), and it tapers back down to its own 9.5px by 1440 --
+    // unchanged there "by construction", same as every other role.
+    assert.ok( Math.abs( at.tiny - floorSize( ROLES.tiny, width ) ) < 0.02, `tiny at ${ width }: ${ at.tiny } vs expected ${ floorSize( ROLES.tiny, width ).toFixed( 2 ) }` );
+    assert.ok( at.tiny <= 12 + 0.02, `tiny at ${ width } must not exceed the 12px floor: ${ at.tiny }` );
+
+    // 12, 14, 16 and 18px roles (label, meta, floor, body) are byte-for-byte
+    // unchanged by #622: floorSize() reduces to legacySize()/its own value
+    // for every size >= the 12px floor, so re-check them through floorSize.
+    for ( const [ id, size ] of [ [ 'label', 12 ], [ 'meta', 14 ], [ 'floor', 16 ], [ 'body', 18 ] ] ) {
+      assert.ok( Math.abs( at[ id ] - floorSize( size, width ) ) < 0.02, `${ id } (${ size }px) at ${ width } must stay unchanged by #622: ${ at[ id ] }` );
+    }
   }
+
+  // The 320 phone anchor for a sub-floor role is exactly the 12px floor.
+  assert.ok( Math.abs( sizes[ 320 ].tiny - 12 ) < 0.02, `tiny at 320 should be the 12px floor, got ${ sizes[ 320 ].tiny }` );
+  // 390 tapers only slightly off the floor -- still "about 12px" (#622's acceptance check).
+  assert.ok( sizes[ 390 ].tiny >= 11.5 && sizes[ 390 ].tiny <= 12 + 0.02, `tiny at 390 should be about 12px, got ${ sizes[ 390 ].tiny }` );
 } );
