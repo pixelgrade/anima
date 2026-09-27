@@ -10,6 +10,11 @@
 ) {
   @include apply-font-properties;
   color: var(--current-color);
+  // Even out line lengths so a short emphasised phrase usually stays on one
+  // line, without an explicit `nowrap` that could overflow on phones (#624).
+  // No other Anima or Nova rule sets `text-wrap` on headings today, so this
+  // is the single shared place to own it.
+  text-wrap: balance;
 }
 
 :is(h1, .h1) {
