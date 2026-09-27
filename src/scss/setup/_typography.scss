@@ -19,6 +19,11 @@ $theme-minimum-font-size: 16px;
 // Roles under 16px never grow toward it on phones (#613), but they also never
 // go below this floor (#622): the phone anchor is min(16, max(12, size)).
 $theme-font-size-floor-value: 12px;
+// #626: the RENDERED size (after --font-size-modifier / --font-size-base)
+// must hold this floor flat through every phone width up to this breakpoint,
+// then fade linearly to 0 by $theme-font-size-breakpoint (1440), so desktop
+// stays untouched. 480px covers phones and small phablets in landscape.
+$theme-font-size-floor-breakpoint: 480px;
 $theme-font-size-breakpoint: 1440px;
 $theme-font-size-breakpoint-em: math.div(1rem * $theme-font-size-breakpoint, $theme-body-font-size);
 $theme-font-size-minimum-value-breakpoint: 320px;

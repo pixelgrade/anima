@@ -11,6 +11,7 @@
     --theme-font-size-breakpoint: #{strip-unit($theme-font-size-breakpoint)};
     --theme-font-size-minimum-value: #{strip-unit($theme-minimum-font-size)};
     --theme-font-size-floor-value: #{strip-unit($theme-font-size-floor-value)};
+    --theme-font-size-floor-breakpoint: #{strip-unit($theme-font-size-floor-breakpoint)};
     --theme-font-size-minimum-value-breakpoint: #{strip-unit($theme-font-size-minimum-value-breakpoint)};
 
     --theme-font-size-slope-adjust: #{$theme-font-size-slope-adjust};
@@ -53,6 +54,9 @@
     // phones instead of shrinking further (#622). Roles of floor-value and up
     // are unaffected: --y0 already equals --y1 for them, so this max() is a
     // no-op. The value at --x1 (1440) is unchanged by construction either way.
+    // This floor is intentionally UN-multiplied (#626 does not touch it): it
+    // only shapes the curve below, --current-font-size is where the actual
+    // reader-visible floor is enforced, after every multiplier is applied.
     --y0-new: max( var(--theme-font-size-floor-value), calc( var(--y1) - ( var(--y1) - var(--y0) ) * var(--theme-font-size-slope-adjust) ) );
 
     // calculate the slope and the remainder for the equation
@@ -62,5 +66,29 @@
     // x2 - viewport width at a given time
     // y2 - font size value we need to find out
     --y2: calc( var(--a) * 100vw + var(--b) * 1px );
-    --current-font-size: calc( var(--font-size-modifier) * var(--font-size-base) * ( var(--y2) + var(--theme-addon) ) );
+
+    // #626: the RENDERED size -- what --font-size-modifier and
+    // --font-size-base actually put on screen -- must hold the floor value
+    // FLAT through every phone width up to --theme-font-size-floor-breakpoint
+    // (480px), then fade linearly to 0 by --theme-font-size-breakpoint
+    // (1440px). A multiplier below 1 (e.g. Pile LT's 0.9375 card meta) can
+    // otherwise pull an already-floored role back under the floor once
+    // applied here; a context at 1 renders this max() a no-op whenever the
+    // curve above is already at/above the floor.
+    //
+    // clamp() keeps the wedge at exactly --theme-font-size-floor-value for
+    // any width at/under the floor breakpoint (the ratio there is >= 1, so
+    // it's clamped down to the floor value, never above it), ramps it
+    // linearly down to 0 between the floor breakpoint and 1440, and holds it
+    // at 0 from 1440 up -- so desktop is untouched by construction, same as
+    // --y0-new above, without a second, separate decay curve.
+    --theme-font-size-floor-fade: clamp(
+        0px,
+        calc( ( var(--theme-font-size-breakpoint) * 1px - 100vw ) * var(--theme-font-size-floor-value) / ( var(--theme-font-size-breakpoint) - var(--theme-font-size-floor-breakpoint) ) ),
+        var(--theme-font-size-floor-value) * 1px
+    );
+    --current-font-size: max(
+        calc( var(--font-size-modifier) * var(--font-size-base) * ( var(--y2) + var(--theme-addon) ) ),
+        var(--theme-font-size-floor-fade)
+    );
 }
