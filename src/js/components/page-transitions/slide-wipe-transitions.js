@@ -9,6 +9,7 @@ import {
   notifyPageTransitionComplete,
   trackPageview,
   notifyAfterSwap,
+  releaseOutgoingContainers,
 } from './utils';
 import { syncAdminBar } from './admin-bar';
 
@@ -24,6 +25,10 @@ function performSlideWipeEnter( { next } ) {
   syncBodyClasses( html );
   syncDocumentTitle( html );
   syncAdminBar( html );
+
+  // Barba removes the outgoing container only after enter; drop it now so
+  // the incoming page re-initializes against its own DOM, like a hard load.
+  releaseOutgoingContainers( next.container );
 
   // The incoming container is live — announce it (anima:after-swap).
   notifyAfterSwap( next.container );

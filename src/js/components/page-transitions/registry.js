@@ -7,6 +7,10 @@
  *
  *   window.anima.pageTransitions.register( {
  *     id: 'my-component',
+ *     // Optional. Lower runs first; entries with the same priority run in
+ *     // registration order. The theme's own integrations use the default 10,
+ *     // so a plugin whose DOM they build on (Nova Blocks) registers below it.
+ *     priority: 10,
  *     // Called with the OUTGOING container, before it is replaced.
  *     cleanup( container ) {},
  *     // Called with the INCOMING container, after it is live and the
@@ -22,26 +26,46 @@
  *   anima:after-swap                incoming container is live in the DOM
  *   anima:page-transition-complete  overlay dismissed, page interactive (existing event)
  *
- * Entries run in registration order. A throwing handler is isolated — it
- * never breaks the navigation or the other handlers.
+ * Entries run by priority, then in registration order. A throwing handler is
+ * isolated — it never breaks the navigation or the other handlers.
  */
 
+const DEFAULT_PRIORITY = 10;
+
 const entries = new Map();
+let registrations = 0;
 
 function register( entry ) {
   if ( ! entry || typeof entry.id !== 'string' || ! entry.id ) {
     return;
   }
 
-  entries.set( entry.id, entry );
+  const existing = entries.get( entry.id );
+
+  entries.set( entry.id, {
+    entry,
+    priority: Number.isFinite( entry.priority ) ? entry.priority : DEFAULT_PRIORITY,
+    // Re-registering an id keeps its place.
+    order: existing ? existing.order : registrations++,
+  } );
 }
 
 function unregister( id ) {
   entries.delete( id );
 }
 
+function has( id ) {
+  return entries.has( id );
+}
+
+function orderedEntries() {
+  return Array.from( entries.values() )
+    .sort( ( a, b ) => ( a.priority - b.priority ) || ( a.order - b.order ) )
+    .map( ( { entry } ) => entry );
+}
+
 function runPhase( phase, container ) {
-  entries.forEach( ( entry ) => {
+  orderedEntries().forEach( ( entry ) => {
     if ( typeof entry[ phase ] !== 'function' ) {
       return;
     }
@@ -99,6 +123,7 @@ if ( typeof window !== 'undefined' ) {
   window.anima.pageTransitions = window.anima.pageTransitions || {};
   window.anima.pageTransitions.register = register;
   window.anima.pageTransitions.unregister = unregister;
+  window.anima.pageTransitions.has = has;
 }
 
 // CommonJS so the node:test suite can drive the lifecycle directly; webpack
@@ -106,6 +131,7 @@ if ( typeof window !== 'undefined' ) {
 module.exports = {
   register,
   unregister,
+  has,
   runCleanup,
   notifyAfterSwap,
   runReinit,

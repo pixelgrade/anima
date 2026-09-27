@@ -32,8 +32,12 @@
  * Replica of: nova-blocks/packages/block-library/src/blocks/header/frontend/
  * components/index.js (getAdjacentElement, findProperElement,
  * findColorsElement) and header/utils.js (getColorSetClasses).
- * Scheduled for removal once Nova Blocks' header exposes `refresh(container)`
- * (anima#530, H2 upstream step).
+ *
+ * Nova Blocks now exposes `window.novablocks.header.refresh( container )`
+ * (nova-blocks#661): its header re-measures and re-applies the colors for
+ * the incoming page itself. When it is available the guard is reduced to
+ * that call — no replica, no observer. The replica stays only as the
+ * fallback for older Nova Blocks versions.
  */
 
 const ID = 'anima/header-color-signal';
@@ -237,6 +241,13 @@ function createHeaderColorSignal( { getWindow = () => window } = {} ) {
     destroy();
 
     const win = getWindow();
+    const refreshHeader = win && win.novablocks && win.novablocks.header && win.novablocks.header.refresh;
+
+    if ( typeof refreshHeader === 'function' ) {
+      refreshHeader( container );
+      return;
+    }
+
     const header = findHeader( container, win );
 
     // Solid headers never take the neighbour's colors (Nova Blocks'

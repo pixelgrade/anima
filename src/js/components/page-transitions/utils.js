@@ -3,9 +3,11 @@ import App from '../app';
 import { runCleanup, runReinit, notifyAfterSwap } from './registry';
 import { registerDefaultIntegrations } from './default-integrations';
 const { syncDocumentTitle } = require( './document-title' );
+const { isNovaFrontendManaged, releaseOutgoingContainers } = require( './nova-lifecycle' );
 
 export { syncDocumentTitle };
 export { notifyAfterSwap };
+export { releaseOutgoingContainers };
 
 // The built-in integrations register through the same public registry any
 // third party would use (see registry.js).
@@ -383,7 +385,19 @@ export function reinitComponents( container ) {
  * initial positions with correct DOM measurements.
  */
 function reinitNovaBlocksScripts( onComplete = () => {} ) {
-  // Re-execute the bully vendor script first so it creates a fresh IIFE
+  // Nova Blocks manages its own lifecycle through the registry
+  // (`novablocks/frontend`): its reinit runs first in runReinit(), so the
+  // scripts must not be re-executed. Bully pops its own bullets there too.
+  if ( isNovaFrontendManaged() ) {
+    requestAnimationFrame( () => {
+      window.dispatchEvent( new Event( 'resize' ) );
+      document.dispatchEvent( new Event( 'scroll', { bubbles: true } ) );
+      onComplete();
+    } );
+    return;
+  }
+
+  // Legacy Nova Blocks: re-execute the bully vendor script first so it creates a fresh IIFE
   // with an empty elements array and a new .c-bully DOM element.
   // The old instance's rAF loop will harmlessly reference the removed DOM.
   reinitBullyScript();
@@ -482,8 +496,11 @@ export function cleanupBeforeTransition( container ) {
   // externally. Removing the DOM element and re-executing the vendor
   // script in reinitNovaBlocksScripts() creates a fresh instance.
   // (Stays internal: its re-init is interleaved with the Nova Blocks
-  // script re-execution above, not a standalone registry step.)
-  $( '.c-bully' ).remove();
+  // script re-execution above, not a standalone registry step.) Nova Blocks
+  // versions that manage their own lifecycle destroy bully themselves.
+  if ( ! isNovaFrontendManaged() ) {
+    $( '.c-bully' ).remove();
+  }
 
   // Run every registered cleanup against the outgoing container (this also
   // tears down the header color signal guard) and announce the swap
