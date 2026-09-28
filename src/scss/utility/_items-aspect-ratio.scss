@@ -131,6 +131,9 @@ body:not(.editor-styles-wrapper) .nb-supernova:not(.nb-supernova--1-columns):not
   }
 }
 
+// The collection's own card: the Supernova item directly inside a layout item.
+$original-own-card: ':where(.nb-collection__layout-item) > .nb-supernova-item';
+
 // ==========================================================================
 // FRONTEND ONLY — Original aspect ratio
 // ==========================================================================
@@ -194,7 +197,11 @@ body:not(.editor-styles-wrapper) .nb-supernova--aspect-ratio-original {
   }
 
   // 6. Content overlay — full card height, spread vertically.
-  .nb-supernova-item--layout-stacked {
+  // Only on the collection's OWN cards: a Supernova nested inside a grid card
+  // (Nova's post-format blueprints, e.g. a stacked `card-quote` part) sizes
+  // from its content, so overlaying it on the image would clip it (#629).
+  // `:where()` keeps the specificity these rules always had.
+  #{$original-own-card}--layout-stacked {
     position: relative;
 
     .nb-supernova-item__content[class] {
@@ -218,8 +225,8 @@ body:not(.editor-styles-wrapper) .nb-supernova--aspect-ratio-original {
     }
   }
 
-  // 7. Remove the stacked card's min-height.
-  .nb-supernova-item.nb-supernova-item--layout-stacked[class] {
+  // 7. Remove the stacked card's min-height (own cards only, see 6).
+  #{$original-own-card}.nb-supernova-item--layout-stacked[class] {
     min-height: 0;
   }
 }
