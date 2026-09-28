@@ -134,6 +134,13 @@ body:not(.editor-styles-wrapper) .nb-supernova:not(.nb-supernova--1-columns):not
 // The collection's own card: the Supernova item directly inside a layout item.
 $original-own-card: ':where(.nb-collection__layout-item) > .nb-supernova-item';
 
+// A stacked card NESTED in a grid card (Nova's post-format blueprints, e.g. a
+// stacked `card-quote` part). It sizes from its content and its media is the
+// card background, so the natural-height media rules below must skip it and
+// leave Nova's covering media alone (#629). Zero specificity via `:where()`.
+$original-nested-stacked-card: '.nb-collection__layout-item > .nb-supernova > .nb-supernova-item--layout-stacked';
+$original-natural-media: ':where(:not(#{$original-nested-stacked-card} *))';
+
 // ==========================================================================
 // FRONTEND ONLY — Original aspect ratio
 // ==========================================================================
@@ -151,19 +158,21 @@ body:not(.editor-styles-wrapper) .nb-supernova--aspect-ratio-original {
     align-items: center;
   }
 
+  // 1-5 keep a nested stacked card's media covering it (see above).
+
   // 1. Kill the padding-top pseudo-element that forces the ratio.
-  .nb-supernova-item__media-aspect-ratio::before {
+  .nb-supernova-item__media-aspect-ratio#{$original-natural-media}::before {
     content: none;
   }
 
   // 2. Let the aspect-ratio container grow with its content.
-  .nb-supernova-item__media-aspect-ratio[class] {
+  .nb-supernova-item__media-aspect-ratio#{$original-natural-media}[class] {
     min-height: auto;
     height: auto;
   }
 
   // 3. Make media wrapper flow naturally instead of covering the card.
-  .nb-supernova-item .nb-supernova-item__media-wrapper[class][class] {
+  .nb-supernova-item .nb-supernova-item__media-wrapper#{$original-natural-media}[class][class] {
     position: static;
     height: auto;
     top: auto;
@@ -173,23 +182,23 @@ body:not(.editor-styles-wrapper) .nb-supernova--aspect-ratio-original {
   }
 
   // 4. Undo absolute positioning in the doppler/blob-mix chain.
-  .novablocks-doppler__wrapper[class][class] {
+  .novablocks-doppler__wrapper#{$original-natural-media}[class][class] {
     position: static;
     height: auto;
   }
 
-  .blob-mix__mask[class][class] {
+  .blob-mix__mask#{$original-natural-media}[class][class] {
     overflow: visible;
     height: auto;
   }
 
-  .blob-mix__media[class][class] {
+  .blob-mix__media#{$original-natural-media}[class][class] {
     position: relative;
     height: auto;
   }
 
   // 5. Images at natural dimensions.
-  .nb-supernova-item__media[class][class] {
+  .nb-supernova-item__media#{$original-natural-media}[class][class] {
     position: static;
     width: 100%;
     height: auto;
