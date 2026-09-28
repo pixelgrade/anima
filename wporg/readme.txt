@@ -3,7 +3,7 @@ Contributors: pixelgrade
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.0.50
+Stable tag: 2.0.51
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, portfolio, one-column, custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, block-patterns, full-site-editing, rtl-language-support
@@ -43,6 +43,12 @@ for additional design-system controls, blocks, and layout options when those
 plugins are active.
 
 == Changelog ==
+
+= 2.0.51 =
+
+* Balance heading line lengths, so a short italic phrase in a heading usually stays on one line.
+* Small text such as meta, dates and captions renders at 12px or more on phones up to 480px wide.
+* Page transitions work with the Nova Blocks 2.7.1 script lifecycle: the header keeps the same colors as a fresh page load, the mobile header bar no longer disappears after navigating, and pages no longer do more work with every navigation.
 
 = 2.0.50 =
 
