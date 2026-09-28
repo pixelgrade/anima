@@ -8,9 +8,12 @@
   }
 }
 
-.post-navigation__post-title {
-  @include apply-font(heading-3);
-  --font-size-modifier: 0.85;
+// Neighbour titles take the heading-5 role at every width (#625).
+// `.post-navigation` + `[class]` outrank Nova Blocks' own phone rule
+// (`.post-navigation .post-navigation__post-title { --font-size: 19 }`),
+// so the role reaches small screens too.
+.post-navigation .post-navigation__post-title[class] {
+  @include apply-font(heading-5);
 }
 
 .post-navigation__link-label {

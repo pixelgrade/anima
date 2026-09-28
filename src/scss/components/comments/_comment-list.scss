@@ -44,11 +44,12 @@
     }
 }
 
+// Meta labels only. The "Logged in as … Log out?" links sit inside a
+// sentence, so they keep the paragraph's role and full opacity (#625).
 .comment__metadata,
 .comment-reply-title,
 .edit-link,
-.reply,
-.logged-in-as {
+.reply {
     a {
         @include apply-font(heading-6);
         opacity: .6;
