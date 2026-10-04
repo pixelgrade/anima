@@ -400,14 +400,18 @@ if ( ! function_exists( 'anima_add_primary_menu_item_description' ) ) {
 	 * Add menu item description
 	 *
 	 * @param string   $item_output The menu item's starting HTML output.
-	 * @param WP_Post  $item        Menu item data object.
+	 * @param object   $item        Menu item data object (not always WP_Post).
 	 * @param int      $depth       Depth of menu item. Used for padding.
 	 * @param stdClass $args        An object of wp_nav_menu() arguments.
 	 *
 	 * @return string Nav menu item start element.
 	 */
 
-	function anima_add_primary_menu_item_description( string $item_output, WP_Post $item, int $depth, stdClass $args ): string {
+	function anima_add_primary_menu_item_description( string $item_output, $item, int $depth, stdClass $args ): string {
+
+		if ( ! ( $item instanceof WP_Post ) ) {
+			return $item_output;
+		}
 
 		if ( ( 'primary' == $args->theme_location || 'secondary' == $args->theme_location ) && $depth && $item->description ) {
 			$item_output = str_replace( '</a>', '<span class="menu-description">' . wp_kses_post( $item->description ) . '</span></a>', $item_output );

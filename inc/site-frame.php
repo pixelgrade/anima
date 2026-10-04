@@ -334,15 +334,16 @@ function anima_get_site_frame_menu_item_monogram( WP_Post $item ): string {
  * Add Site Frame-specific menu item classes.
  *
  * @param string[] $classes Existing menu item classes.
- * @param WP_Post  $item    Menu item.
+ * @param object   $item    Menu item (plugins may supply a non-WP_Post object).
  * @param stdClass $args    Nav menu args.
  * @param int      $depth   Menu depth.
  * @return string[]
  */
-function anima_site_frame_nav_menu_css_class( array $classes, WP_Post $item, $args, int $depth ): array {
+function anima_site_frame_nav_menu_css_class( array $classes, $item, $args, int $depth ): array {
 	unset( $depth );
 
-	if ( ! anima_is_site_frame_menu_args( $args ) ) {
+	// Synthetic items (e.g. WPML language switchers) keep their own presentation.
+	if ( ! anima_is_site_frame_menu_args( $args ) || ! ( $item instanceof WP_Post ) ) {
 		return $classes;
 	}
 
@@ -370,15 +371,16 @@ add_filter( 'nav_menu_css_class', 'anima_site_frame_nav_menu_css_class', 20, 4 )
  * Prepend a decorative monogram to regular Site Frame menu items.
  *
  * @param string  $title Menu item title HTML.
- * @param WP_Post $item  Menu item.
+ * @param object  $item  Menu item (plugins may supply a non-WP_Post object).
  * @param mixed   $args  Nav menu args.
  * @param int     $depth Menu depth.
  * @return string
  */
-function anima_site_frame_nav_menu_item_title( string $title, WP_Post $item, $args, int $depth ): string {
+function anima_site_frame_nav_menu_item_title( string $title, $item, $args, int $depth ): string {
 	unset( $depth );
 
-	if ( ! anima_is_site_frame_menu_args( $args ) ) {
+	// Do not decorate plugin-owned items or pass them to the WP_Post helpers.
+	if ( ! anima_is_site_frame_menu_args( $args ) || ! ( $item instanceof WP_Post ) ) {
 		return $title;
 	}
 
