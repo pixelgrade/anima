@@ -965,11 +965,15 @@ if ( ! class_exists( 'Anima_Admin_Nav_Menus', false ) ) :
 		 * Appends the menu item badge to the menu item title (frontend).
 		 *
 		 * @param string  $title The menu item's title.
-		 * @param WP_Post $item  The current menu item.
+		 * @param object  $item  The current menu item (not always WP_Post).
 		 *
 		 * @return string
 		 */
-		public function output_badge_menu_item( string $title, WP_Post $item ): string {
+		public function output_badge_menu_item( string $title, $item ): string {
+			if ( ! ( $item instanceof WP_Post ) ) {
+				return $title;
+			}
+
 			if ( ! empty( $item->badge ) ) {
 				if ( empty( $title ) ) {
 					$title = '';
