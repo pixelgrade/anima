@@ -35,6 +35,9 @@ $assets-folder-path: '../../assets';
         @import "elements/iframe";
         @import "elements/pre";
         @import "elements/dropcap";
+        // Content tables only: plugin calendars and other editor UI own their layout.
+        // :where() preserves the original selector specificity for content tables.
+        $content-table-selector: ':where(.wp-block-table, .wp-block-freeform) table';
         @import "elements/tables";
         @import "elements/styles";
 
