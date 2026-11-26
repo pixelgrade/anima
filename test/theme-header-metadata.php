@@ -37,8 +37,8 @@ foreach ( $files as $file ) {
 		exit( 1 );
 	}
 
-	if ( ! preg_match( '/^Tested up to:\s*7\.1\s*$/m', $contents ) ) {
-		fwrite( STDERR, sprintf( "%s must declare Tested up to: 7.1\n", $file ) );
+	if ( ! preg_match( '/^Tested up to:\s*7\.2\s*$/m', $contents ) ) {
+		fwrite( STDERR, sprintf( "%s must declare Tested up to: 7.2\n", $file ) );
 		exit( 1 );
 	}
 

@@ -29,13 +29,13 @@ class SearchOverlay extends BaseComponent {
   openSearchOverlay ( e ) {
     e.preventDefault();
     $( 'body' ).toggleClass( SEARCH_OVERLAY_OPEN_CLASS );
-    $( '.c-search-overlay__form .search-field' ).focus();
+    $( '.c-search-overlay__form .search-field' ).trigger( 'focus' );
   }
 
   closeSearchOverlayOnEsc ( e ) {
     if ( e.keyCode === ESC_KEY_CODE ) {
       $( 'body' ).removeClass( SEARCH_OVERLAY_OPEN_CLASS );
-      $( '.c-search-overlay__form .search-field' ).blur();
+      $( '.c-search-overlay__form .search-field' ).trigger( 'blur' );
     }
   }
 

@@ -3085,12 +3085,12 @@ class SearchOverlay extends base_component {
   openSearchOverlay(e) {
     e.preventDefault();
     external_jQuery_default()('body').toggleClass(SEARCH_OVERLAY_OPEN_CLASS);
-    external_jQuery_default()('.c-search-overlay__form .search-field').focus();
+    external_jQuery_default()('.c-search-overlay__form .search-field').trigger('focus');
   }
   closeSearchOverlayOnEsc(e) {
     if (e.keyCode === ESC_KEY_CODE) {
       external_jQuery_default()('body').removeClass(SEARCH_OVERLAY_OPEN_CLASS);
-      external_jQuery_default()('.c-search-overlay__form .search-field').blur();
+      external_jQuery_default()('.c-search-overlay__form .search-field').trigger('blur');
     }
   }
   closeSearchOverlay(e) {
